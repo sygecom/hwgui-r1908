@@ -109,11 +109,22 @@ METHOD CalcMinMax() CLASS HGraph
 
    RETURN Nil
 
-METHOD Paint( lpdis ) CLASS HGraph
-   LOCAL drawInfo := GetDrawItemInfo( lpdis )
-   LOCAL hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
-   LOCAL i, j, nLen
-   LOCAL px1, px2, py1, py2, nWidth
+METHOD Paint(lpdis) CLASS HGraph
+
+   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL hDC := drawInfo[3]
+   LOCAL x1 := drawInfo[4]
+   LOCAL y1 := drawInfo[5]
+   LOCAL x2 := drawInfo[6]
+   LOCAL y2 := drawInfo[7]
+   LOCAL i
+   LOCAL j
+   LOCAL nLen
+   LOCAL px1
+   LOCAL px2
+   LOCAL py1
+   LOCAL py2
+   LOCAL nWidth
 
    i := Round(( x2 - x1 ) / 10, 0)
    x1 += i

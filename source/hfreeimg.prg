@@ -180,9 +180,14 @@ METHOD ReplaceImage(Image, cType)
 
    RETURN Nil
 
-METHOD Paint( lpdis ) CLASS HSayFImage
-   LOCAL drawInfo := GetDrawItemInfo( lpdis )
-   LOCAL hDC := drawInfo[3] // , x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
+METHOD Paint(lpdis) CLASS HSayFImage
+
+   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL hDC := drawInfo[3]
+   //LOCAL x1 := drawInfo[4]
+   //LOCAL y1 := drawInfo[5]
+   //LOCAL x2 := drawInfo[6]
+   //LOCAL y2 := drawInfo[7]
 
    IF ::oImage != Nil
       IF ::nZoom == Nil

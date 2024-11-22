@@ -405,9 +405,9 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint( lpDis ) CLASS hCheckComboBox
+METHOD Paint(lpDis) CLASS hCheckComboBox
 
-   LOCAL drawInfo := GetDrawItemInfo( lpDis )
+   LOCAL drawInfo := GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
    LOCAL rcBitmap := {drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]}
    LOCAL rcText := {drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]}

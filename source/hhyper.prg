@@ -342,27 +342,28 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
 
    RETURN NIL
 
-METHOD PAint( lpDis ) CLASS HStaticLink
-   LOCAL drawInfo := GetDrawItemInfo( lpDis )
+METHOD Paint(lpDis) CLASS HStaticLink
+
+   LOCAL drawInfo := GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
-   LOCAL strtext    := ::Title
-//   LOCAL nOldBkMode
+   LOCAL strtext := ::Title
+   //LOCAL nOldBkMode
    LOCAL dwFlags
-//   LOCAL clrOldText
+   //LOCAL clrOldText
    LOCAL rcClient
-//   LOCAL POLDFONT
-//   LOCAL DWSTYLE
+   //LOCAL POLDFONT
+   //LOCAL DWSTYLE
    LOCAL bHasTitle
-   LOCAL aBmpSize    := IIF( !Empty(::hbitmap), GetBitmapSize(::hbitmap),{0,0} )
-   LOCAL itemRect    := copyrect( { drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7] } )
-   LOCAL captionRect := { drawInfo[4]  , drawInfo[5], drawInfo[6] , drawInfo[7]  }
+   LOCAL aBmpSize := IIF(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
+   LOCAL itemRect := copyrect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
+   LOCAL captionRect := {drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]}
    LOCAL bmpRect
-   
+
    IF ::state == LBL_INIT
       ::State := LBL_NORMAL
    ENDIF
    rcClient   := CopyRect( { drawInfo[4] , drawInfo[5], drawInfo[6], drawInfo[7] } )
-   
+
    IF hb_IsNumeric(::hbitmap)
       bHasTitle := hb_IsChar(strtext) .and. !Empty(strtext)
       itemRect[4] := aBmpSize[2] + 1

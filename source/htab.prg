@@ -1216,9 +1216,9 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint( lpdis ) CLASS HPaintTab
+METHOD Paint(lpdis) CLASS HPaintTab
 
-   LOCAL drawInfo := GetDrawItemInfo( lpdis )
+   LOCAL drawInfo := GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]
    LOCAL x1 := drawInfo[4]
    LOCAL y1 := drawInfo[5]
@@ -1228,7 +1228,7 @@ METHOD Paint( lpdis ) CLASS HPaintTab
    LOCAL client_rect
    LOCAL nPage
    LOCAL oPage
-   
+
    IF Len(::oParent:Pages) == 0
       RETURN 0
    ENDIF
