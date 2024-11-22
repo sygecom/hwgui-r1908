@@ -1664,7 +1664,8 @@ HB_FUNC(DRAWTHEICON)
     Array2Rect(hb_param(5, HB_IT_ARRAY), &rpTitle);
   }
 
-  DrawTheIcon(hwg_par_HWND(1), hwg_par_HDC(2), hwg_par_BOOL(3), &rpItem, &rpTitle, hwg_par_BOOL(6), hwg_par_BOOL(7), hIcon, hBitmap, hwg_par_int(10));
+  DrawTheIcon(hwg_par_HWND(1), hwg_par_HDC(2), hwg_par_BOOL(3), &rpItem, &rpTitle, hwg_par_BOOL(6), hwg_par_BOOL(7),
+              hIcon, hBitmap, hwg_par_int(10));
   hb_storvni(rpItem.left, 4, 1);
   hb_storvni(rpItem.top, 4, 2);
   hb_storvni(rpItem.right, 4, 3);
@@ -1745,7 +1746,8 @@ HB_FUNC(HB_DRAWTHEMETEXT)
     Array2Rect(hb_param(8, HB_IT_ARRAY), &pRect);
   }
   MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, output, mlen);
-  hb_DrawThemeText(hwg_par_HTHEME(1), hwg_par_HDC(2), hwg_par_int(3), hwg_par_int(4), output, mlen - 1, hwg_par_DWORD(6), hwg_par_DWORD(7), &pRect);
+  hb_DrawThemeText(hwg_par_HTHEME(1), hwg_par_HDC(2), hwg_par_int(3), hwg_par_int(4), output, mlen - 1,
+                   hwg_par_DWORD(6), hwg_par_DWORD(7), &pRect);
   hb_xfree(output);
 }
 
