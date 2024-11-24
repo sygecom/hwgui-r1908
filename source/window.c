@@ -685,7 +685,7 @@ HB_FUNC(RESETWINDOWPOS)
    s_MainWndProc alteradas na HWGUI. Agora as funcoes em hWindow.prg
    retornam 0 para indicar que deve ser usado o processamento default.
 */
-static LRESULT CALLBACK s_MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK s_MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT res;
   PHB_ITEM pObject = (PHB_ITEM)GetWindowLongPtr(hWnd, GWLP_USERDATA);
@@ -700,14 +700,14 @@ static LRESULT CALLBACK s_MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LP
 
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
-    hwg_vmPushUINT(message);
+    hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     if (res == -1)
     {
-      return DefWindowProc(hWnd, message, wParam, lParam);
+      return DefWindowProc(hWnd, uMsg, wParam, lParam);
     }
     else
     {
@@ -716,11 +716,11 @@ static LRESULT CALLBACK s_MainWndProc(HWND hWnd, UINT message, WPARAM wParam, LP
   }
   else
   {
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return DefWindowProc(hWnd, uMsg, wParam, lParam);
   }
 }
 
-static LRESULT CALLBACK s_FrameWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK s_FrameWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT res;
   PHB_ITEM pObject = (PHB_ITEM)GetWindowLongPtr(hWnd, GWLP_USERDATA);
@@ -734,14 +734,14 @@ static LRESULT CALLBACK s_FrameWndProc(HWND hWnd, UINT message, WPARAM wParam, L
   {
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
-    hwg_vmPushUINT(message);
+    hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     if (res == -1)
     {
-      return DefFrameProc(hWnd, aWindows[1], message, wParam, lParam);
+      return DefFrameProc(hWnd, aWindows[1], uMsg, wParam, lParam);
     }
     else
     {
@@ -750,16 +750,16 @@ static LRESULT CALLBACK s_FrameWndProc(HWND hWnd, UINT message, WPARAM wParam, L
   }
   else
   {
-    return DefFrameProc(hWnd, aWindows[1], message, wParam, lParam);
+    return DefFrameProc(hWnd, aWindows[1], uMsg, wParam, lParam);
   }
 }
 
-static LRESULT CALLBACK s_MDIChildWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK s_MDIChildWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT res;
   PHB_ITEM pObject;
 
-  if (message == WM_NCCREATE)
+  if (uMsg == WM_NCCREATE)
   {
     LPMDICREATESTRUCT cs = (LPMDICREATESTRUCT)(((LPCREATESTRUCT)lParam)->lpCreateParams);
     PHB_ITEM *pObj = (PHB_ITEM *)(cs->lParam);
@@ -787,14 +787,14 @@ static LRESULT CALLBACK s_MDIChildWndProc(HWND hWnd, UINT message, WPARAM wParam
   {
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
-    hwg_vmPushUINT(message);
+    hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     if (res == -1)
     {
-      return DefMDIChildProc(hWnd, message, wParam, lParam);
+      return DefMDIChildProc(hWnd, uMsg, wParam, lParam);
     }
     else
     {
@@ -803,7 +803,7 @@ static LRESULT CALLBACK s_MDIChildWndProc(HWND hWnd, UINT message, WPARAM wParam
   }
   else
   {
-    return DefMDIChildProc(hWnd, message, wParam, lParam);
+    return DefMDIChildProc(hWnd, uMsg, wParam, lParam);
   }
 }
 

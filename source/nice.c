@@ -129,7 +129,7 @@ void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int n
   s_pGradientfill(hdc, Vert, 2, &Rect, 1, nmode); // GRADIENT_FILL_RECT_H );
 }
 
-LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT res;
   PHB_DYNS pSymTest;
@@ -138,7 +138,7 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
     hb_vmPushSymbol(hb_dynsymSymbol(pSymTest));
     hb_vmPushNil();       /* places NIL at self */
     hwg_vmPushHWND(hWnd); /* pushes parameters on to the hvm stack */
-    hwg_vmPushUINT(message);
+    hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
     hb_vmDo(4);        /* where iArgCount is the number of pushed parameters */
@@ -149,12 +149,12 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
     }
     else
     {
-      return (DefWindowProc(hWnd, message, wParam, lParam));
+      return (DefWindowProc(hWnd, uMsg, wParam, lParam));
     }
   }
   else
   {
-    return (DefWindowProc(hWnd, message, wParam, lParam));
+    return (DefWindowProc(hWnd, uMsg, wParam, lParam));
   }
 }
 

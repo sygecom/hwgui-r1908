@@ -44,7 +44,7 @@ HB_FUNC(HWG_INITEDITPROC)
   wpOrigEditProc = (WNDPROC)(LONG_PTR)SetWindowLongPtr(hwg_par_HWND(1), GWLP_WNDPROC, (LONG_PTR)EditSubclassProc);
 }
 
-LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT res;
   PHB_ITEM pObject = (PHB_ITEM)GetWindowLongPtr(hWnd, GWLP_USERDATA);
@@ -58,14 +58,14 @@ LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
   {
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
-    hwg_vmPushUINT(message);
+    hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     if (res == -1)
     {
-      return CallWindowProc(wpOrigEditProc, hWnd, message, wParam, lParam);
+      return CallWindowProc(wpOrigEditProc, hWnd, uMsg, wParam, lParam);
     }
     else
     {
@@ -74,7 +74,7 @@ LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
   }
   else
   {
-    return CallWindowProc(wpOrigEditProc, hWnd, message, wParam, lParam);
+    return CallWindowProc(wpOrigEditProc, hWnd, uMsg, wParam, lParam);
   }
 }
 
