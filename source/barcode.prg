@@ -740,7 +740,7 @@ METHOD InitSub5() CLASS BarCode
 
    FOR n := 1 TO 5
       nCar := Val(SubStr(k, n, 1))
-      IF SubStr( control, n, 1 ) = "o"
+      IF SubStr(control, n, 1) = "o"
          cBarras += SubStr(izda2, nCar * 7 + 1, 7)
       ELSE
          cBarras += SubStr(izda1, nCar * 7 + 1, 7)

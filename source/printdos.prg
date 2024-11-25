@@ -133,7 +133,7 @@ METHOD New( oPorta ) CLASS PrintDos
                ::oPorta := "Error.txt"
             ELSE
                oPtrName := AllTrim( oPtrName )
-               IF SubStr( oPtrName, 1, 3 ) == "LPT"
+               IF SubStr(oPtrName, 1, 3) == "LPT"
                   oPtrName := Left( oPtrName, Len(oPtrName) - 1 )
                ENDIF
                ::oPorta := oPtrName
@@ -545,7 +545,7 @@ FUNCTION regenfile(o, new)
       nChr12 := At( Chr(12), stroka )
 
       IF nChr12 > 0
-         stroka := SubStr( stroka, 1, nChr12 - 1 )
+         stroka := SubStr(stroka, 1, nChr12 - 1)
       ENDIF
       o1:say( nLine, 0, stroka )
       nLine ++

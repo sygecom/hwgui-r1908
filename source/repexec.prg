@@ -54,7 +54,7 @@ FUNCTION OpenReport( fname, repName )
          IF nMode == 0
             IF Left( stroka, 1 ) == "#"
                IF Upper(SubStr(stroka, 2, 6)) == "REPORT"
-                  stroka := LTrim( SubStr( stroka, 9 ) )
+                  stroka := LTrim( SubStr(stroka, 9) )
                   IF Upper(stroka) == Upper(repName)
                      nMode := 1
                      aPaintRep := { 0, 0, 0, 0, 0, {}, fname, repName, .F., 0, Nil }

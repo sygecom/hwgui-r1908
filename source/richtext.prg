@@ -580,7 +580,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
 
    FOR i := 1 TO Len(cString)
 
-      cChar := SubStr( cString, i, 1 )
+      cChar := SubStr(cString, i, 1)
       nChar := Asc(cChar)
 
       IF nChar < 128
@@ -1090,7 +1090,7 @@ METHOD Appearance(cAppear) CLASS RichText
    LOCAL cWrite := ""
 // Special case (see .CH file) -- first remove leading slash ...ugh.
    IF !Empty(cAppear)
-      cWrite := ::TextCode(SubStr( cAppear, 2 ))
+      cWrite := ::TextCode(SubStr(cAppear, 2))
       ::cLastApar := cAppear
    ENDIF
 
@@ -2588,7 +2588,7 @@ RETURN NIL
 */
 
 FUNCTION cFileExt( cFile )
-   RETURN SubStr( cFile, At( '.', cFile ) + 1 )
+   RETURN SubStr(cFile, At( '.', cFile ) + 1)
 
    #ifndef __XHARBOUR__
    FUNCTION CStr( xExp )

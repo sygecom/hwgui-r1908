@@ -665,7 +665,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
             ENDDO
             IF oParent != Nil .AND. !Empty(oParent:KeyList)
                cKeyb := GetKeyboardState()
-               nCtrl := IIf( Asc(SubStr( cKeyb, VK_CONTROL + 1, 1 )) >= 128, FCONTROL, IIf( Asc(SubStr( cKeyb, VK_SHIFT + 1, 1 )) >= 128, FSHIFT, 0 ) )
+               nCtrl := IIf( Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf( Asc(SubStr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0 ) )
                IF ( nPos := AScan( oParent:KeyList, { | a | a[1] == nCtrl.AND.a[2] == wParam } ) ) > 0
                   Eval( oParent:KeyList[nPos, 3], Self )
                ENDIF
@@ -1358,8 +1358,8 @@ STATIC FUNCTION InitColumn( oBrw, oColumn, n )
    oColumn:width := 0
    IF oColumn:dec == Nil
       IF oColumn:Type == "N" .and. At( '.', Str( Eval( oColumn:block,, oBrw, n ) ) ) != 0
-         oColumn:dec := Len(SubStr( Str( Eval( oColumn:block,, oBrw, n ) ), ;
-                                     At( '.', Str( Eval( oColumn:block,, oBrw, n ) ) ) + 1 ))
+         oColumn:dec := Len(SubStr(Str( Eval( oColumn:block,, oBrw, n ) ), ;
+                                     At( '.', Str( Eval( oColumn:block,, oBrw, n ) ) ) + 1))
       ELSE
          oColumn:dec := 0
       ENDIF

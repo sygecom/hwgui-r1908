@@ -136,7 +136,7 @@ FUNCTION VColor(cColor)
    LOCAL i, res := 0, n := 1, iValue
    cColor := Trim( cColor )
    FOR i := 1 TO Len(cColor)
-      iValue := Asc(SubStr( cColor, Len(cColor) - i + 1, 1 ))
+      iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
       IF iValue < 58 .and. iValue > 47
          iValue -= 48
       ELSEIF iValue >= 65 .and. iValue <= 70
@@ -379,7 +379,7 @@ FUNCTION HdSerial( cDrive )
    LOCAL n       :=  HDGETSERIAL( cDrive )
    LOCAL cHex    :=  HB_NUMTOHEX( n )
    LOCAL cResult
-   cResult := SubStr( cHex, 1, 4 ) + '-' + SubStr( cHex, 5, 4 )
+   cResult := SubStr(cHex, 1, 4) + '-' + SubStr(cHex, 5, 4)
 
    RETURN cResult
 
@@ -434,13 +434,13 @@ FUNCTION SelectMultipleFiles( cDescr, cTip, cIniDir, cTitle )
       nAt := At( Chr(0), cFile )
       IF nAt != 0
          /* skip path which is already in cPath variable */
-         cFile := SubStr( cFile, nAt + 1 )
+         cFile := SubStr(cFile, nAt + 1)
          /* decode files */
          DO WHILE !(cFile == "")
             nAt := At( Chr(0), cFile )
             IF nAt != 0
                AAdd(aFiles, cPath + hb_osPathSeparator() + Left( cFile, nAt - 1 ))
-               cFile := SubStr( cFile, nAt + 1 )
+               cFile := SubStr(cFile, nAt + 1)
             ELSE
                AAdd(aFiles, cPath + hb_osPathSeparator() + cFile)
                EXIT

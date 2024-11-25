@@ -1022,7 +1022,7 @@ METHOD Populate() CLASS HComboBox
    IF xRowSource != Nil .AND. ( i := At( "->", xRowSource ) ) > 0
        cAlias := AlLTRIM( LEFT( xRowSource, i - 1 ) )
        IF Select( cAlias ) = 0 .AND. ( i := At( "(", cAlias ) ) > 0
-          cAlias := LTRIM( SUBSTR( cAlias, i + 1 ) )
+          cAlias := LTRIM( SubStr(cAlias, i + 1) )
        ENDIF
       value := STRTRAN( xRowSource, calias + "->", , , 1, 1 )
       cAlias := IIF( VALTYPE(xRowSource) == "U", Nil, cAlias )

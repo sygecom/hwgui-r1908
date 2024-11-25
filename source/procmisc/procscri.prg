@@ -56,8 +56,8 @@ LOCAL aFormCode, aFormName
             ENDIF
          ELSEIF rejim == -1 .AND. LEFT( stroka, 1 ) == "@"
             i := AT( " ", stroka )
-            Aadd(aFormCode, SUBSTR( stroka, 2, i-2 ))
-            Aadd(aFormName, SUBSTR( stroka, i+1 ))
+            Aadd(aFormCode, SubStr(stroka, 2, i - 2))
+            Aadd(aFormName, SubStr(stroka, i + 1))
          ELSEIF rejim == -1 .AND. LEFT( stroka, 9 ) == "#ENDBLOCK"
 #ifdef __WINDOWS__
             i := WCHOICE(aFormName)
@@ -172,7 +172,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                IF !lDebug .AND. Len(rezArray[2]) == 0
                   lDebug := .T.
                   Aadd(rezArray, {})
-                  IF SUBSTR( stroka,7,3 ) == "GER"
+                  IF SubStr(stroka, 7, 3) == "GER"
                      AADD(rezArray[2], stroka)
                      AADD(tmpArray, "")
                      Aadd(rezArray[3], Str( numlin,4 ) + ":" + cLine)
@@ -198,11 +198,11 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL( rezArray[2] )) ) == "C" ;
                     .OR. i == "A"
                IF Left( scom,2 ) == "LO"
-                  AADD(rezArray[2], " "+ALLTRIM( SUBSTR( stroka, 7 ) ))
+                  AADD(rezArray[2], " "+ALLTRIM( SubStr(stroka, 7) ))
                ELSEIF Left( scom,2 ) == "PR"
-                  AADD(rezArray[2], " "+ALLTRIM( SUBSTR( stroka, 9 ) ))
+                  AADD(rezArray[2], " "+ALLTRIM( SubStr(stroka, 9) ))
                ELSE
-                  AADD(rezArray[2], "/"+ALLTRIM( SUBSTR( stroka, 12 ) ))
+                  AADD(rezArray[2], "/"+ALLTRIM( SubStr(stroka, 12) ))
                ENDIF
                AADD(tmpArray, "")
             ELSE
@@ -231,7 +231,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                nLastError := 3
                RETURN .F.
             ENDIF
-            AADD(tmpArray, SUBSTR( stroka, 5 ))
+            AADD(tmpArray, SubStr(stroka, 5))
             AADD(rezArray[2], .F.)
          CASE scom == "ELSE"
             IF !Fou_If( rezArray, tmpArray, .T. )
@@ -248,7 +248,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          CASE scom == "RETURN"
             bOldError := ERRORBLOCK( { | e | MacroError(1,e,stroka) } )
             BEGIN SEQUENCE
-               AADD(rezArray[2], &( "{||EndScript("+Ltrim( Substr( stroka,7 ) )+")}" ))
+               AADD(rezArray[2], &( "{||EndScript("+Ltrim( SubStr(stroka, 7) )+")}" ))
             RECOVER
                IF scrSource != Nil .AND. hb_IsChar(scrSource)
                   WndOut()
@@ -260,7 +260,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             ERRORBLOCK( bOldError )
             AADD(tmpArray, "")
          CASE scom == "FUNCTION"
-            stroka := Ltrim( Substr( stroka,poz1+1 ) )
+            stroka := Ltrim( SubStr(stroka, poz1 + 1) )
             poz1 := At( "(",stroka )
             scom := UPPER(LEFT(stroka, IIF(poz1 != 0, poz1 - 1, 999)))
             AADD(rezArray[2], Iif( lDebug,{ scom,{},{} },{ scom,{} } ))
@@ -348,7 +348,7 @@ LOCAL i, j, bOldError
       IF UPPER(LEFT(tmpArray[i], 2)) == "IF"
          bOldError := ERRORBLOCK( { | e | MacroError(1,e,tmpArray[i]) } )
          BEGIN SEQUENCE
-            rezArray[2, i] := &( "{||IIF(" + ALLTRIM( SUBSTR( tmpArray[i], 4 ) ) + ;
+            rezArray[2, i] := &( "{||IIF(" + ALLTRIM( SubStr(tmpArray[i], 4) ) + ;
                  ",.T.,iscr:=" + LTRIM( STR( j, 5 ) ) + ")}" )
          RECOVER
             ERRORBLOCK( bOldError )
@@ -384,7 +384,7 @@ LOCAL bOldError
          UPPER(LEFT(tmpArray[i], 5)) = "WHILE")
          bOldError := ERRORBLOCK( { | e | MacroError(1,e,tmpArray[i] ) } )
          BEGIN SEQUENCE
-            rezArray[i] = &( "{||IIF(" + ALLTRIM( SUBSTR( tmpArray[i], ;
+            rezArray[i] = &( "{||IIF(" + ALLTRIM( SubStr(tmpArray[i], ;
                  IIF(UPPER(LEFT(tmpArray[i], 1)) == "D", 10, 7))) + ;
                  ",.T.,iscr:=" + LTRIM( STR( j + 1, 5 ) ) + ")}" )
          RECOVER
@@ -425,7 +425,7 @@ PRIVATE iscr := 1, bOldError
                SetDebugger()
             ENDIF
          ELSE
-            stroka := Substr( aScript[2, iscr],2 )
+            stroka := SubStr(aScript[2, iscr], 2)
             lParam := ( Left( aScript[2, iscr],1 ) == "/" )
             bOldError := ERRORBLOCK( { | e | MacroError(2,e) } )
             BEGIN SEQUENCE

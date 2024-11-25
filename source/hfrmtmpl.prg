@@ -480,9 +480,9 @@ FUNCTION ParseMethod(cMethod)
       Aadd(arr, RTrim( Left( cMethod,nPos1-1 ) ))
       DO WHILE .T.
          IF ( nPos2 := hb_At( Chr(10), cMethod, nPos1 + 1 ) ) == 0
-            cLine := AllTrim( SubStr( cMethod, nPos1 + 1 ) )
+            cLine := AllTrim( SubStr(cMethod, nPos1 + 1) )
          ELSE
-            cLine := AllTrim( SubStr( cMethod, nPos1 + 1, nPos2 - nPos1 - 1 ) )
+            cLine := AllTrim( SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1) )
          ENDIF
          IF !Empty(cLine)
             AAdd(arr, cLine)
@@ -518,8 +518,8 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    ENDIF
    IF Lower( Left( cMethod ,11 ) ) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
-      DO WHILE Substr( cMethod, --nPos, 1 ) <= ' '; ENDDO
-      cParam := Alltrim( Substr( Left( cMethod,nPos ), 12 ) )
+      DO WHILE Substr(cMethod, --nPos, 1) <= ' '; ENDDO
+      cParam := Alltrim( Substr(Left( cMethod,nPos ), 12) )
    ENDIF
    IF oForm:lDebug
       arr := {}
@@ -527,7 +527,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       arr := ParseMethod(cMethod)
    ENDIF
    IF Len(arr) == 1
-      cCode := Iif( Lower( Left(arr[1],6) ) == "return", Ltrim( Substr( arr[1],8 ) ), arr[1] )
+      cCode := Iif( Lower( Left(arr[1],6) ) == "return", Ltrim( SubStr(arr[1], 8) ), arr[1] )
       bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
       BEGIN SEQUENCE
          bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
@@ -536,7 +536,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       Return bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
-         cCode := Iif( Lower( Left(arr[2],6) ) == "return", Ltrim( Substr( arr[2],8 ) ), arr[2] )
+         cCode := Iif( Lower( Left(arr[2],6) ) == "return", Ltrim( SubStr(arr[2], 8) ), arr[2] )
          cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
          bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
          BEGIN SEQUENCE
@@ -673,13 +673,13 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       DO WHILE .T.
          IF ( j := hb_At( ",", stroka, i ) ) != 0 .OR. ( j := hb_At( ")", stroka, i ) ) != 0
             IF j - i > 0
-               varname := SubStr( stroka, i, j - i )
+               varname := SubStr(stroka, i, j - i)
                __mvPrivate(varname)
-               IF SubStr( varname, 2 ) == "InitValue"
+               IF SubStr(varname, 2) == "InitValue"
                   cInitName  := varname
                   xInitValue := IIf( Left( varname, 1 ) == "n", 1, IIf( Left( varname, 1 ) == "c", "", .F. ) )
                ENDIF
-               stroka := Left( stroka, i - 1 ) + "m->" + SubStr( stroka, i )
+               stroka := Left( stroka, i - 1 ) + "m->" + SubStr(stroka, i)
                i := j + 4
             ELSE
                i := j + 1
@@ -933,7 +933,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
                   variable ( cInitValue, nInitValue, ... ) */
                   __mvPut( cInitName, __mvGet( xProperty ) )
                ENDIF
-            ELSEIF SubStr( cPName, 2 ) == "initvalue"
+            ELSEIF SubStr(cPName, 2) == "initvalue"
                xInitValue := xProperty
             ENDIF
          ENDIF
@@ -991,7 +991,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             cAliasdbf := Alias()
             temp = StrTran( Upper(fBlock), Alias() + "->", "" )
        //- verificar se tem mais de um campo
-            temp = SubStr( temp, 1, IIf( At( '+', temp ) > 0, At( '+', temp ) - 1, Len(temp) ) )
+            temp = SubStr(temp, 1, IIf( At( '+', temp ) > 0, At( '+', temp ) - 1, Len(temp) ))
             j := {}
             AEval( &cAliasdbf->( ( DBStruct() ) ), { | aField | AAdd(j, aField[1]) } )
             IF m->nLength = Nil
@@ -1009,7 +1009,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             fBlock := IIf( cValType = "B", &fBlock, { || &fBlock } )
          ENDIF
          IF !Empty(cPicture) .AND. At( ".9", cPicture ) > 0 .AND. nDec = 0
-            m->nDec := Len(SubStr( cPicture, At( ".9", cPicture ) + 1 ))
+            m->nDec := Len(SubStr(cPicture, At( ".9", cPicture ) + 1))
          ENDIF
          stroka   := cOName + ":" + stroka
       ENDIF
@@ -1153,9 +1153,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
       IF Len(stroka) > 2
          DO WHILE pos2 > 0
-            DO WHILE SubStr( stroka, pos1, 1 ) <= ' ' ; pos1 ++ ; ENDDO
+            DO WHILE SubStr(stroka, pos1, 1) <= ' ' ; pos1 ++ ; ENDDO
             pos2 := hb_At( ',', stroka, pos1 )
-            AAdd(arr, Trim( SubStr( stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 ) ) ))
+            AAdd(arr, Trim( SubStr(stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 )) ))
             pos1 := pos2 + 1
          ENDDO
       ENDIF
@@ -1185,9 +1185,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       IF hb_IsChar(xProp)
          c := Left( xProp, 1 )
          IF c == "["
-            xProp := SubStr( xProp, 2, Len(xProp) - 2 )
+            xProp := SubStr(xProp, 2, Len(xProp) - 2)
          ELSEIF c == "."
-            xProp := ( SubStr( xProp, 2, 1 ) == "T" )
+            xProp := ( SubStr(xProp, 2, 1) == "T" )
          ELSEIF c == "{"
             xProp := hfrm_Str2Arr( xProp )
          ELSE
@@ -1545,12 +1545,12 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
                nFirst := i := 1
                ny := y
                DO WHILE ( i := hb_At( ";", cText, i ) ) > 0
-                  ::oPrinter:Say( SubStr( cText, nFirst, i - nFirst ), x, ny, x2, ny + dy, nJustify, oItem:obj )
+                  ::oPrinter:Say( SubStr(cText, nFirst, i - nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj )
                   i ++
                   nFirst := i
                   ny += dy
                ENDDO
-               ::oPrinter:Say( SubStr( cText, nFirst, Len(cText) - nFirst + 1 ), x, ny, x2, ny + dy, nJustify, oItem:obj )
+               ::oPrinter:Say( SubStr(cText, nFirst, Len(cText) - nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj )
             ELSE
                ::oPrinter:Say( cText, x, y, x2, y2, nJustify, oItem:obj )
             ENDIF
