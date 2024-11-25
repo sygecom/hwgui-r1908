@@ -19,7 +19,7 @@
 // English Say Money
 FUNCTION SayDollar(nDollar)
 
- LOCAL cDollar := RIGHT( LTRIM( STR(nDollar,15) ),11)
+ LOCAL cDollar := Right(LTRIM( STR(nDollar,15) ), 11)
  LOCAL nAA := 1
  LOCAL nPJ := LEN(cDollar)
  LOCAL xSay := '', xLang2, xLang1, xMuch, xNum, xteen
@@ -216,7 +216,7 @@ FUNCTION SayRupiah(nAngka)
     kalimat +=  kata
   NEXT
 
-   char:="0"+RIGHT( STR(nAngka,18,2) ,2)
+   char:="0"+Right(STR(nAngka,18,2), 2)
 
    kalimat+=IF(char != "000"," koma "+tigades(char,1)+"sen","")
 

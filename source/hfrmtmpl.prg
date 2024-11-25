@@ -494,10 +494,10 @@ FUNCTION ParseMethod(cMethod)
          ENDIF
       ENDDO
    ENDIF
-   IF Right( arr[1], 1 ) < " "
+   IF Right(arr[1], 1) < " "
       arr[1] := Left(arr[1], Len(arr[1]) - 1)
    ENDIF
-   IF Len(arr) > 1 .AND. Right( arr[2], 1 ) < " "
+   IF Len(arr) > 1 .AND. Right(arr[2], 1) < " "
       arr[2] := Left(arr[2], Len(arr[2]) - 1)
    ENDIF
 

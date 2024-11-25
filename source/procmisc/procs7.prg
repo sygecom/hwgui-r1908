@@ -37,7 +37,7 @@ LOCAL stro := "", rez, oldpoz, poz1
    ENDIF
    poz ++
    poz1 := Len(stro)
-   IF poz1 > 2 .AND. Right( stro, 1 ) $ Chr(13) + Chr(10)
+   IF poz1 > 2 .AND. Right(stro, 1) $ Chr(13) + Chr(10)
       IF SubStr(stro, poz1 - 1, 1) $ Chr(13) + Chr(10)
          poz1 --
       ENDIF
@@ -52,7 +52,7 @@ LOCAL varName, iPosEnd, iPos3
       RETURN ""
    ELSE
       IF ( iPosEnd := Find_Z( stroka ) ) == 0
-         iPosEnd := Iif( Right( stroka, 1 ) = ';', Len(stroka), Len(stroka) + 1 )
+         iPosEnd := Iif( Right(stroka, 1) = ';', Len(stroka), Len(stroka) + 1 )
       ENDIF
       ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ':' )
       varName  := Rtrim( Ltrim( Left(stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1) ) )

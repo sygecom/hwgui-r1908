@@ -150,7 +150,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          EXIT
       ENDIF
       numlin ++
-      IF Right( cLine,1 ) == ';'
+      IF Right(cLine, 1) == ';'
          strfull += Left(cLine, Len(cLine) - 1)
          LOOP
       ELSE
@@ -160,7 +160,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          strfull := ""
       ENDIF
       stroka := RTRIM( LTRIM( cLine ) )
-      IF RIGHT( stroka, 1 ) == CHR(26)
+      IF Right(stroka, 1) == CHR(26)
          stroka := Left(stroka, Len(stroka) - 1)
       ENDIF
       IF !Empty(stroka) .AND. Left(stroka, 2) != "//"
