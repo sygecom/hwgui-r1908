@@ -430,7 +430,7 @@ FUNCTION SelectMultipleFiles( cDescr, cTip, cIniDir, cTitle )
 
    nAt := At( Chr(0) + Chr(0), cFile )
    IF nAt != 0
-      cFile := Left( cFile, nAt - 1 )
+      cFile := Left(cFile, nAt - 1)
       nAt := At( Chr(0), cFile )
       IF nAt != 0
          /* skip path which is already in cPath variable */
@@ -439,7 +439,7 @@ FUNCTION SelectMultipleFiles( cDescr, cTip, cIniDir, cTitle )
          DO WHILE !(cFile == "")
             nAt := At( Chr(0), cFile )
             IF nAt != 0
-               AAdd(aFiles, cPath + hb_osPathSeparator() + Left( cFile, nAt - 1 ))
+               AAdd(aFiles, cPath + hb_osPathSeparator() + Left(cFile, nAt - 1))
                cFile := SubStr(cFile, nAt + 1)
             ELSE
                AAdd(aFiles, cPath + hb_osPathSeparator() + cFile)

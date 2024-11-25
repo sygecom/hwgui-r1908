@@ -134,7 +134,7 @@ METHOD New( oPorta ) CLASS PrintDos
             ELSE
                oPtrName := AllTrim( oPtrName )
                IF SubStr(oPtrName, 1, 3) == "LPT"
-                  oPtrName := Left( oPtrName, Len(oPtrName) - 1 )
+                  oPtrName := Left(oPtrName, Len(oPtrName) - 1)
                ENDIF
                ::oPorta := oPtrName
             ENDIF
@@ -344,7 +344,7 @@ METHOD PrinterFile(fname) CLASS PrintDos
             EXIT
          ENDIF
 
-         IF FWrite(::gText, Left( strbuf, nRead )) < nRead
+         IF FWrite(::gText, Left(strbuf, nRead)) < nRead
             ::ErrosAnt := FError()
             FClose(han)
             RETURN .F.
@@ -406,7 +406,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
             oCol := oCol + ( osize + 2 )   //Added by  Por Fernando Athayde
          ENDIF
 
-         IF Left( stroka, 1 ) == Chr(12)
+         IF Left(stroka, 1) == Chr(12)
             oPrinter:EndPage()
             oPrinter:StartPage()
             oCol := 0  //Added by  Por Fernando Athayde
@@ -448,7 +448,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
          ELSE
             oText[oPage] += stroka + Chr(13) + Chr(10)
          ENDIF
-         IF Left( stroka, 1 ) == Chr(12)
+         IF Left(stroka, 1) == Chr(12)
             AAdd(oText, "")
             ++ oPage
          ENDIF

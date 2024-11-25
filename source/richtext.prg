@@ -364,7 +364,7 @@ METHOD PageSetup(nLeft, nRight, nTop, nBottom, nWidth, nHeight, nTabWidth, lLand
 // codes.  But we'll put them here anyway for now...
 
    IF !Empty(cVertAlign)
-      ::TextCode("vertal" + Lower( Left( cVertAlign, 1 ) ))
+      ::TextCode("vertal" + Lower( Left(cVertAlign, 1) ))
    ENDIF
 
 // Set the initial font size
@@ -735,7 +735,7 @@ FUNCTION FormatCode(cCode)
 *
 *********************************************************************
    cCode := AllTrim( cCode )
-   IF !( Left( cCode, 1 ) == "\" )
+   IF !( Left(cCode, 1) == "\" )
       cCode := "\" + cCode
    ENDIF
 
@@ -801,7 +801,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
       AFill( aColPct, 0 )
    ENDIF
 
-   ::cTblHAlign := Lower( Left( cTblHAlign, 1 ) )
+   ::cTblHAlign := Lower( Left(cTblHAlign, 1) )
    ::nTblFntNum := nTblFntNum
    ::nTblFntSize := nTblFntSize
    ::cCellAppear := cCellAppear
@@ -1029,7 +1029,7 @@ METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
    ::NumCode("pghsxn", nHeight)
 
    IF !Empty(cVertAlign)
-      ::TextCode("vertal" + Lower( Left( cVertAlign, 1 ) ))
+      ::TextCode("vertal" + Lower( Left(cVertAlign, 1) ))
    ENDIF
 
 // Formato de numero de pagina
@@ -1115,7 +1115,7 @@ METHOD HAlignment( cAlign ) CLASS RichText
 *
 *********************************************************************
    IF !Empty(cAlign)
-      ::TextCode("q" + Lower( Left( cAlign, 1 ) ))
+      ::TextCode("q" + Lower( Left(cAlign, 1) ))
    ENDIF
 
    RETURN NIL
@@ -2021,7 +2021,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
       AFill( aColPct, 0 )
    ENDIF
 
-   ::cTblHAlign := Lower( Left( cTblHAlign, 1 ) )
+   ::cTblHAlign := Lower( Left(cTblHAlign, 1) )
    ::nTblFntNum := nTblFntNum
    ::nTblFntSize := nTblFntSize
    ::cCellAppear := cCellAppear

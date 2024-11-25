@@ -48,11 +48,11 @@ FUNCTION OpenReport( fname, repName )
          IF Len(stroka) = 0
             EXIT
          ENDIF
-         IF Left( stroka, 1 ) == ";"
+         IF Left(stroka, 1) == ";"
             LOOP
          ENDIF
          IF nMode == 0
-            IF Left( stroka, 1 ) == "#"
+            IF Left(stroka, 1) == "#"
                IF Upper(SubStr(stroka, 2, 6)) == "REPORT"
                   stroka := LTrim( SubStr(stroka, 9) )
                   IF Upper(stroka) == Upper(repName)
@@ -62,7 +62,7 @@ FUNCTION OpenReport( fname, repName )
                ENDIF
             ENDIF
          ELSEIF nMode == 1
-            IF Left( stroka, 1 ) == "#"
+            IF Left(stroka, 1) == "#"
                IF Upper(SubStr(stroka, 2, 6)) == "ENDREP"
                   EXIT
                ELSEIF Upper(SubStr(stroka, 2, 6)) == "SCRIPT"
@@ -137,7 +137,7 @@ FUNCTION OpenReport( fname, repName )
          ENDIF
       ENDIF
    ELSEIF nMode == 2
-      IF Left( stroka, 1 ) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
+      IF Left(stroka, 1) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
          nMode := 1
       ELSE
          IF aItem != Nil

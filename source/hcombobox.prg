@@ -1020,7 +1020,7 @@ METHOD Populate() CLASS HComboBox
    ENDIF
    xRowSource := iif( hb_IsArray( ::xRowSource[1] ), ::xRowSource[1, 1], ::xRowSource[1] )
    IF xRowSource != Nil .AND. ( i := At( "->", xRowSource ) ) > 0
-       cAlias := AlLTRIM( LEFT( xRowSource, i - 1 ) )
+       cAlias := AlLTRIM( Left(xRowSource, i - 1) )
        IF Select( cAlias ) = 0 .AND. ( i := At( "(", cAlias ) ) > 0
           cAlias := LTRIM( SubStr(cAlias, i + 1) )
        ENDIF

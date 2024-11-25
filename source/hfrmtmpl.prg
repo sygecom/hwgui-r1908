@@ -175,7 +175,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
    IF cId != Nil .AND. ( o := HFormTmpl():Find(cId) ) != Nil
       RETURN o
    ENDIF
-   IF Left( fname, 5 ) == "<?xml"
+   IF Left(fname, 5) == "<?xml"
       oDoc := HXMLDoc():ReadString( fname )
    ELSE
       oDoc := HXMLDoc():Read(fname)
@@ -277,7 +277,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
          IF nMode == Nil
             lMdi := At( "mdimain", Lower( xProperty ) ) > 0
             lMdiChild := At( "mdichild", Lower( xProperty ) ) > 0
-            nMode := IF( Left( xProperty, 3 ) == "dlg", 2, 1 )
+            nMode := IF( Left(xProperty, 3) == "dlg", 2, 1 )
          ENDIF
       ELSEIF ::aProp[i, 1] == "variables"
          FOR j := 1 TO Len(xProperty)
@@ -477,7 +477,7 @@ FUNCTION ParseMethod(cMethod)
    IF ( nPos1 := At( Chr(10),cMethod ) ) == 0
       Aadd(arr, RTrim( cMethod ))
    ELSE
-      Aadd(arr, RTrim( Left( cMethod,nPos1-1 ) ))
+      Aadd(arr, RTrim( Left(cMethod, nPos1 - 1) ))
       DO WHILE .T.
          IF ( nPos2 := hb_At( Chr(10), cMethod, nPos1 + 1 ) ) == 0
             cLine := AllTrim( SubStr(cMethod, nPos1 + 1) )
@@ -495,10 +495,10 @@ FUNCTION ParseMethod(cMethod)
       ENDDO
    ENDIF
    IF Right( arr[1], 1 ) < " "
-      arr[1] := Left( arr[1], Len(arr[1]) - 1 )
+      arr[1] := Left(arr[1], Len(arr[1]) - 1)
    ENDIF
    IF Len(arr) > 1 .AND. Right( arr[2], 1 ) < " "
-      arr[2] := Left( arr[2], Len(arr[2]) - 1 )
+      arr[2] := Left(arr[2], Len(arr[2]) - 1)
    ENDIF
 
    RETURN arr
@@ -509,17 +509,17 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    IF cMethod = Nil .OR. Empty(cMethod)
       Return Nil
    ENDIF
-   IF oCtrl != Nil .AND. Left( oCtrl:oParent:Classname(),2 ) == "HC"
+   IF oCtrl != Nil .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
       // writelog( oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname() )
       nContainer := oForm:nContainer
    ENDIF
    IF Asc(cMethod) <= 32
       cMethod := Ltrim( cMethod )
    ENDIF
-   IF Lower( Left( cMethod ,11 ) ) == "parameters " .AND. ;
+   IF Lower( Left(cMethod, 11) ) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
       DO WHILE Substr(cMethod, --nPos, 1) <= ' '; ENDDO
-      cParam := Alltrim( Substr(Left( cMethod,nPos ), 12) )
+      cParam := Alltrim( Substr(Left(cMethod, nPos), 12) )
    ENDIF
    IF oForm:lDebug
       arr := {}
@@ -677,9 +677,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
                __mvPrivate(varname)
                IF SubStr(varname, 2) == "InitValue"
                   cInitName  := varname
-                  xInitValue := IIf( Left( varname, 1 ) == "n", 1, IIf( Left( varname, 1 ) == "c", "", .F. ) )
+                  xInitValue := IIf( Left(varname, 1) == "n", 1, IIf( Left(varname, 1) == "c", "", .F. ) )
                ENDIF
-               stroka := Left( stroka, i - 1 ) + "m->" + SubStr(stroka, i)
+               stroka := Left(stroka, i - 1) + "m->" + SubStr(stroka, i)
                i := j + 4
             ELSE
                i := j + 1
@@ -854,11 +854,11 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 /*
       ELSEIF cPName == "filedbf"
          IF !Empty(xProperty)
-            cAliasdbf := Left( CutPath( xProperty ), At( ".", CutPath( xProperty ) ) - 1 )
-            IF Select( Left( CutPath( xProperty ), At( ".", CutPath( xProperty ) ) - 1 ) ) = 0
-               USE ( xProperty ) NEW SHARED Alias ( Left( CutPath( xProperty ), At( ".", CutPath( xProperty ) ) - 1 ) )  //ftmp
+            cAliasdbf := Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 )
+            IF Select( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) ) = 0
+               USE ( xProperty ) NEW SHARED Alias ( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) )  //ftmp
             ENDIF
-            Select ( Left( CutPath( xProperty ), At( ".", CutPath( xProperty ) ) - 1 ) )
+            Select ( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) )
          ENDIF
 */
       ELSEIF cPName == "columnscount"
@@ -1038,7 +1038,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             IF !Empty(cKey)
                &( oCtrl:Alias ) ->( DBSetOrder( cKey ) )
                cKey := ( oCtrl:Alias ) ->( ordkey( cKey ) )
-               cKey := IIf( At( '+', cKey ) > 0, Left( cKey, At( '+', cKey ) - 1 ), cKey )
+               cKey := IIf( At( '+', cKey ) > 0, Left(cKey, At( '+', cKey ) - 1), cKey )
             ENDIF
             cRelexpr := IIf( !Empty(cRelexpr), cRelexpr, cKey )
             IF !Empty(cRelexpr + cLink)
@@ -1183,7 +1183,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       LOCAL c
 
       IF hb_IsChar(xProp)
-         c := Left( xProp, 1 )
+         c := Left(xProp, 1)
          IF c == "["
             xProp := SubStr(xProp, 2, Len(xProp) - 2)
          ELSEIF c == "."
@@ -1249,7 +1249,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
       RETURN o
    ENDIF
 
-   IF Left( fname, 5 ) == "<?xml"
+   IF Left(fname, 5) == "<?xml"
       oDoc := HXMLDoc():ReadString( fname )
    ELSE
       oDoc := HXMLDoc():Read(fname)

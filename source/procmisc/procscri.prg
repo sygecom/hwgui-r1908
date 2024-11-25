@@ -39,14 +39,14 @@ LOCAL aFormCode, aFormName
          stroka := RDSTR( han,@strbuf,@poz,STR_BUFLEN )
          IF Len(stroka) = 0
             EXIT
-         ELSEIF rejim == 0 .AND. Left( stroka,1 ) == "#"
+         ELSEIF rejim == 0 .AND. Left(stroka, 1) == "#"
             IF Upper(LEFT(stroka, 7)) == "#SCRIPT"
                scom := Upper(Ltrim(Substr(stroka, 9)))
                IF scom == scrkod
                   aScr := RdScript( han, @strbuf, @poz,,fname+","+scrkod )
                   EXIT
                ENDIF
-            ELSEIF LEFT( stroka, 6 ) == "#BLOCK"
+            ELSEIF Left(stroka, 6) == "#BLOCK"
                scom := Upper(Ltrim(Substr(stroka, 8)))
                IF scom == scrkod
                   rejim     := - 1
@@ -54,11 +54,11 @@ LOCAL aFormCode, aFormName
                   aFormName := {}
                ENDIF
             ENDIF
-         ELSEIF rejim == -1 .AND. LEFT( stroka, 1 ) == "@"
+         ELSEIF rejim == -1 .AND. Left(stroka, 1) == "@"
             i := AT( " ", stroka )
             Aadd(aFormCode, SubStr(stroka, 2, i - 2))
             Aadd(aFormName, SubStr(stroka, i + 1))
-         ELSEIF rejim == -1 .AND. LEFT( stroka, 9 ) == "#ENDBLOCK"
+         ELSEIF rejim == -1 .AND. Left(stroka, 9) == "#ENDBLOCK"
 #ifdef __WINDOWS__
             i := WCHOICE(aFormName)
 #else
@@ -151,7 +151,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
       ENDIF
       numlin ++
       IF Right( cLine,1 ) == ';'
-         strfull += Left( cLine,Len(cLine)-1 )
+         strfull += Left(cLine, Len(cLine) - 1)
          LOOP
       ELSE
          IF !Empty(strfull)
@@ -161,11 +161,11 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
       ENDIF
       stroka := RTRIM( LTRIM( cLine ) )
       IF RIGHT( stroka, 1 ) == CHR(26)
-         stroka := LEFT( stroka, Len(stroka) - 1 )
+         stroka := Left(stroka, Len(stroka) - 1)
       ENDIF
-      IF !Empty(stroka) .AND. LEFT( stroka, 2 ) != "//"
+      IF !Empty(stroka) .AND. Left(stroka, 2) != "//"
 
-         IF Left( stroka,1 ) == "#"
+         IF Left(stroka, 1) == "#"
             IF UPPER(Left(stroka, 7)) == "#ENDSCR"
                Return .T.
             ELSEIF UPPER(Left(stroka, 6)) == "#DEBUG"
@@ -197,9 +197,9 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
             IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL( rezArray[2] )) ) == "C" ;
                     .OR. i == "A"
-               IF Left( scom,2 ) == "LO"
+               IF Left(scom, 2) == "LO"
                   AADD(rezArray[2], " "+ALLTRIM( SubStr(stroka, 7) ))
-               ELSEIF Left( scom,2 ) == "PR"
+               ELSEIF Left(scom, 2) == "PR"
                   AADD(rezArray[2], " "+ALLTRIM( SubStr(stroka, 9) ))
                ELSE
                   AADD(rezArray[2], "/"+ALLTRIM( SubStr(stroka, 12) ))
@@ -268,7 +268,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             IF !CompileScr( pp, han, @strbuf, @poz, rezArray[2,Len(rezArray[2])] )
                RETURN .F.
             ENDIF
-         CASE scom == "#ENDSCRIPT" .OR. Left( scom,7 ) == "ENDFUNC"
+         CASE scom == "#ENDSCRIPT" .OR. Left(scom, 7) == "ENDFUNC"
             RETURN .T.
          OTHERWISE
             bOldError := ERRORBLOCK( { | e | MacroError(1,e,stroka) } )
@@ -373,11 +373,11 @@ LOCAL bOldError
 
    j := Len(rezArray)
    FOR i := j TO 1 STEP - 1
-      IF !Empty(tmpArray[i]) .AND. LEFT( tmpArray[i], 4 ) == "EXIT"
+      IF !Empty(tmpArray[i]) .AND. Left(tmpArray[i], 4) == "EXIT"
          rezArray[i] = &( "{||iscr:=" + LTRIM( STR( j + 1, 5 ) ) + "}" )
          tmpArray[i] = ""
       ENDIF
-      IF !Empty(tmpArray[i]) .AND. LEFT( tmpArray[i], 4 ) == "LOOP"
+      IF !Empty(tmpArray[i]) .AND. Left(tmpArray[i], 4) == "LOOP"
          iloop := i
       ENDIF
       IF !Empty(tmpArray[i]) .AND. (UPPER(LEFT(tmpArray[i], 8)) = "DO WHILE" .OR. ;
@@ -419,14 +419,14 @@ PRIVATE iscr := 1, bOldError
    lDebug := ( Len(aScript) >= 3 )
    DO WHILE !hb_IsBlock(aScript[2, iscr])
       IF hb_IsChar(aScript[2, iscr])
-         IF Left( aScript[2, iscr],1 ) == "#"
+         IF Left(aScript[2, iscr], 1) == "#"
             IF !lDebugger
                lSetDebugger := .T.
                SetDebugger()
             ENDIF
          ELSE
             stroka := SubStr(aScript[2, iscr], 2)
-            lParam := ( Left( aScript[2, iscr],1 ) == "/" )
+            lParam := ( Left(aScript[2, iscr], 1) == "/" )
             bOldError := ERRORBLOCK( { | e | MacroError(2,e) } )
             BEGIN SEQUENCE
             j := 1
@@ -528,7 +528,7 @@ FUNCTION CompileErr( nLine )
 RETURN nLastError
 
 FUNCTION Codeblock( string )
-   IF Left( string,2 ) == "{|"
+   IF Left(string, 2) == "{|"
       Return &( string )
    ENDIF
 RETURN &("{||"+string+"}")

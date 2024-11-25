@@ -54,8 +54,8 @@ LOCAL varName, iPosEnd, iPos3
       IF ( iPosEnd := Find_Z( stroka ) ) == 0
          iPosEnd := Iif( Right( stroka, 1 ) = ';', Len(stroka), Len(stroka) + 1 )
       ENDIF
-      ipos3    := Find_Z( Left( stroka, iPosEnd - 1 ), ':' )
-      varName  := Rtrim( Ltrim( Left( stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1 ) ) )
+      ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ':' )
+      varName  := Rtrim( Ltrim( Left(stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1) ) )
       varValue := Iif( iPos3 != 0, Ltrim( SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2) ), Nil )
       stroka   := SubStr(stroka, iPosEnd + 1)
    ENDIF
@@ -112,8 +112,8 @@ FUNCTION FilePath( fname )
 
 LOCAL i
 RETURN Iif( ( i := Rat( '\', fname ) ) = 0, ;
-            Iif( ( i := Rat( '/', fname ) ) = 0, "", Left( fname, i ) ), ;
-            Left( fname, i ) )
+            Iif( ( i := Rat( '/', fname ) ) = 0, "", Left(fname, i) ), ;
+            Left(fname, i) )
 
 FUNCTION CutPath( fname )
 
