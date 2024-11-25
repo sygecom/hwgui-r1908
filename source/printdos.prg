@@ -134,7 +134,7 @@ METHOD New( oPorta ) CLASS PrintDos
             ELSE
                oPtrName := AllTrim( oPtrName )
                IF SubStr( oPtrName, 1, 3 ) == "LPT"
-                  oPtrName := Left( oPtrName, Len( oPtrName ) - 1 )
+                  oPtrName := Left( oPtrName, Len(oPtrName) - 1 )
                ENDIF
                ::oPorta := oPtrName
             ENDIF
@@ -193,10 +193,10 @@ METHOD gWrite(oText) CLASS PrintDos
    //tracelog(otext)
    IF ::oAns2Oem
       ::oText += HB_ANSITOOEM( oText )
-      ::nPcol += Len( HB_ANSITOOEM( oText ) )
+      ::nPcol += Len(HB_ANSITOOEM( oText ))
    ELSE
       ::oText += oText
-      ::nPcol += Len( oText )
+      ::nPcol += Len(oText)
    ENDIF
    //tracelog(otext)
 
@@ -395,7 +395,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR( han, @strbuf, @poz, 2052 )
-         IF Len( stroka ) = 0
+         IF Len(stroka) = 0
             EXIT
          ENDIF
          IF osize < 0
@@ -440,7 +440,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR( han, @strbuf, @poz, 2052 )
-         IF Len( stroka ) = 0
+         IF Len(stroka) = 0
             EXIT
          ENDIF
          IF ::oAns2Oem
@@ -502,7 +502,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
 STATIC FUNCTION PrintDosPrint( oText, oPrt )
    LOCAL i
    LOCAL nText := FCreate(oPrt)
-   FOR i := 1 TO Len( oText )
+   FOR i := 1 TO Len(oText)
       FWrite(nText, oText[i])
    NEXT
    FClose(nText)
@@ -539,7 +539,7 @@ FUNCTION regenfile(o, new)
    LOCAL nChr12
    LOCAL i
 
-   FOR i := 1 TO Len( aText )
+   FOR i := 1 TO Len(aText)
 
       stroka := aText[i]
       nChr12 := At( Chr(12), stroka )

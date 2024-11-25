@@ -109,7 +109,7 @@ METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hreba
        RETURN Nil
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
-   FOR i = 1 TO LEN( ::aBands )
+   FOR i = 1 TO LEN(::aBands)
       ::aBands[i, 4] := IIF( ::aBands[i, 4] = Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4] )
       ::aBands[i, 6] := IIF( ::aBands[i, 6] = Nil, dwStyle, ::aBands[i, 6] )
       IF !Empty(::aBands[i, 1])

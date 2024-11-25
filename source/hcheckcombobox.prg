@@ -279,8 +279,8 @@ METHOD INIT() CLASS hCheckComboBox
    //HWG_INITCOMBOPROC(::handle)
    IF !::lInit
       ::Super:Init()
-      IF Len( ::acheck ) > 0
-         FOR i := 1 TO Len( ::acheck )
+      IF Len(::acheck) > 0
+         FOR i := 1 TO Len(::acheck)
             ::Setcheck( ::acheck[i], .T. )
          NEXT
       ENDIF
@@ -295,8 +295,8 @@ METHOD Requery() CLASS hCheckComboBox
    LOCAL i
 
    ::super:Requery()
-   IF Len( ::acheck ) > 0
-      FOR i := 1 TO Len( ::acheck )
+   IF Len(::acheck) > 0
+      FOR i := 1 TO Len(::acheck)
          ::Setcheck( ::acheck[i], .T. )
       NEXT
    ENDIF
@@ -373,7 +373,7 @@ METHOD RecalcText() CLASS hCheckComboBox
       strSeparator := GetLocaleInfo()
 
       // If none found, the the ''
-      IF Len( strSeparator ) == 0
+      IF Len(strSeparator) == 0
          strSeparator := ''
       ENDIF
 
@@ -523,7 +523,7 @@ METHOD OnGetText( wParam, lParam ) CLASS hCheckComboBox
    // Copy the 'fake' window text
    copydata(lParam, ::m_strText, wParam)
 
-RETURN Iif( Empty(::m_strText), 0, Len( ::m_strText ) )
+RETURN Iif( Empty(::m_strText), 0, Len(::m_strText) )
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -534,7 +534,7 @@ METHOD OnGetTextLength( WPARAM, LPARAM ) CLASS hCheckComboBox
 
    ::RecalcText()
 
-RETURN Iif( Empty(::m_strText), 0, Len( ::m_strText ) )
+RETURN Iif( Empty(::m_strText), 0, Len(::m_strText) )
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -543,7 +543,7 @@ METHOD GetAllCheck() CLASS hCheckComboBox
    LOCAL aCheck := {}
    LOCAL n
 
-   FOR n := 1 TO Len( ::aItems )
+   FOR n := 1 TO Len(::aItems)
       Aadd(aCheck, ::GetCheck( n ))
    NEXT
 

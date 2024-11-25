@@ -289,7 +289,7 @@ METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nS
       ::TextCode(cTopFile)
 
       // Generate a font table, and write it to the header
-      ::nFontNum := Len( aFontData )
+      ::nFontNum := Len(aFontData)
       ::OpenGroup()
       ::TextCode("fonttbl")
       FOR i := 1 TO ::nFontNum
@@ -456,7 +456,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
       ELSEIF AScan( cTypeBorder, "CHARACTER" ) != 0
          ::ParaBorder( "CHARACTER", cBordStyle )
       ELSE
-         FOR i = 1 TO Len( cTypeBorder )
+         FOR i = 1 TO Len(cTypeBorder)
             ::ParaBorder( cTypeBorder[i], cBordStyle )
          NEXT i
       ENDIF
@@ -578,7 +578,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
 
 //cString := " " + cString
 
-   FOR i := 1 TO Len( cString )
+   FOR i := 1 TO Len(cString)
 
       cChar := SubStr( cString, i, 1 )
       nChar := Asc(cChar)
@@ -792,7 +792,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ENDIF
 
    // Turn independent column widths into "right boundary" info...
-   FOR i := 2 TO Len( aTableCWid )
+   FOR i := 2 TO Len(aTableCWid)
       aTableCWid[i] += aTableCWid[i - 1]
    NEXT
 
@@ -898,7 +898,7 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
          ::LogicCode("trkeep", ::lTblNoSplit)
 
          // Set the default border & width info for each header cell
-         FOR i := 1 TO Len( ::aTableCWid )
+         FOR i := 1 TO Len(::aTableCWid)
             ::NumCode("clshdng", ::nTblHdPct, .F.)
             IF ::nTblHdColor > 0
                ::NumCode("clcbpat", ::nTblHdColor, .F.)
@@ -937,7 +937,7 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
          ::LogicCode("trkeep", ::lTblNoSplit)
 
          // Set the default shading, border & width info for each body cell
-         FOR i := 1 TO Len( ::aTableCWid )
+         FOR i := 1 TO Len(::aTableCWid)
             ::NumCode("clshdng", ::aColPct[i], .F.)
             ::Borders( "cl", ::cCellBorder )
             ::NumCode("cellx", ::aTableCWid[i])
@@ -1324,7 +1324,7 @@ FUNCTION IntlTranslate()
 
    AFill( aTranslate, "" )
 
-   FOR i := 1 TO Len( aHighTable )
+   FOR i := 1 TO Len(aHighTable)
       aTranslate[i] := aHighTable[i]
    NEXT
 
@@ -1851,7 +1851,7 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
          IF AScan( cTypeBorder, "ALL" ) != 0
             cEstilo += ::ParaBorder( "ALL", cBordStyle )
          ELSE
-            FOR i = 1 TO Len( cTypeBorder )
+            FOR i = 1 TO Len(cTypeBorder)
                cEstilo += ::ParaBorder( cTypeBorder[i], cBordStyle )
             NEXT i
          ENDIF
@@ -1918,7 +1918,7 @@ METHOD ParaStyle(nStyle) CLASS RichText
       RETURN NIL
    ENDIF
    IF ::nStlAct != nStyle
-      IF nStyle <= Len( ::ParStyles[nStyle] )
+      IF nStyle <= Len(::ParStyles[nStyle])
          ::Numcode("par\pard\s", nStyle, .F.)
          FWrite(::hFile, ::ParStyles[nStyle])
          ::nStlAct := nStyle
@@ -1942,7 +1942,7 @@ METHOD CharStyle(nStyle) CLASS RichText
    ENDIF
 
    IF ::nCharAct != nStyle
-      IF nStyle <= Len( ::CharStyles[nStyle] )
+      IF nStyle <= Len(::CharStyles[nStyle])
          ::Numcode("\cs", nStyle, .F.)
          FWrite(::hFile, ::CharStyles[nStyle])
          ::nCharAct := nStyle
@@ -2012,7 +2012,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ENDIF
 
    // Turn independent column widths into "right boundary" info...
-   FOR i := 2 TO Len( aTableCWid )
+   FOR i := 2 TO Len(aTableCWid)
       aTableCWid[i] += aTableCWid[i - 1]
    NEXT
 
@@ -2058,7 +2058,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
    FOR j = 1 TO ::nTblHdRows
       ::TableDef( .T., j )
-      FOR i = 1 TO Len( ::aTableCWid )
+      FOR i = 1 TO Len(::aTableCWid)
          ::TableCell( aHeadTit[j][i],,,,,,,, .T., .T. )
       NEXT i
    NEXT j
@@ -2101,10 +2101,10 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
    ::LogicCode("trkeep", ::lTblNoSplit)
 
    // Set the default shading, border & width info for each body cell
-   FOR i := 1 TO Len( ::aTableCWid )
+   FOR i := 1 TO Len(::aTableCWid)
       IF lHeader
          IF !Empty(::TblCJoin)
-            FOR j = 1 TO Len( ::TblCJoin[nRowHead] )
+            FOR j = 1 TO Len(::TblCJoin[nRowHead])
                pos := AScan( ::TblCJoin[nRowHead][j], i )
                IF pos == 1
                   ::TextCode("clvertalt")
@@ -2618,7 +2618,7 @@ FUNCTION cFileExt( cFile )
          RETURN xExp
 
       CASE cType == 'A'
-         RETURN "{ Array of " +  LTrim( Str( Len( xExp ) ) ) + " Items }"
+         RETURN "{ Array of " +  LTrim( Str( Len(xExp) ) ) + " Items }"
 
       CASE cType == 'B'
          RETURN '{|| Block }'
@@ -2634,7 +2634,7 @@ FUNCTION cFileExt( cFile )
 #endif
 
       CASE cType == 'H'
-         RETURN "{ Hash of " +  LTrim( Str( Len( xExp ) ) ) + " Items }"
+         RETURN "{ Hash of " +  LTrim( Str( Len(xExp) ) ) + " Items }"
 
       OTHERWISE
          RETURN "Type: " + cType

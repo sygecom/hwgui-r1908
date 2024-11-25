@@ -86,7 +86,7 @@ METHOD CalcMinMax() CLASS HGraph
       ::ymax := ::ymaxSet
    ENDIF
    FOR i := 1 TO ::nGraphs
-      nLen := Len( ::aValues[i] )
+      nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 1 TO nLen
             ::xmax := Max( ::xmax, ::aValues[i, j, 1] )
@@ -158,7 +158,7 @@ METHOD Paint(lpdis) CLASS HGraph
 
    SelectObject(hDC, ::oPen:handle)
    FOR i := 1 TO ::nGraphs
-      nLen := Len( ::aValues[i] )
+      nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 2 TO nLen
             px1 := Round(x1 + ( ::aValues[i, j - 1, 1] - ::xmin ) / ::scaleX, 0)

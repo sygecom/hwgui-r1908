@@ -80,7 +80,7 @@ METHOD END() CLASS HTimer
    ENDIF
    IF ( i := AScan( ::aTimers, { | o | o:id == ::id } ) ) > 0
       ADel( ::aTimers, i )
-      ASize(::aTimers, Len( ::aTimers ) - 1)
+      ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF
 
    RETURN Nil
@@ -109,7 +109,7 @@ FUNCTION TimerProc(hWnd, idTimer, Time)
    EXIT PROCEDURE CleanTimers
    LOCAL oTimer, i
 
-   FOR i := 1 TO Len( HTimer():aTimers )
+   FOR i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]
       KillTimer( oTimer:oParent:handle, oTimer:id )
    NEXT

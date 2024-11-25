@@ -24,7 +24,7 @@ FUNCTION InitObjects( oWnd )
    LOCAL LoadArray := HObject():aObjects
    
    IF !Empty(LoadArray)
-      FOR i := 1 TO Len( LoadArray )
+      FOR i := 1 TO Len(LoadArray)
          IF !Empty(oWnd:handle)
             IF __ObjHasMsg( LoadArray[i],"INIT")
                LoadArray[i]:Init( oWnd )
@@ -34,7 +34,7 @@ FUNCTION InitObjects( oWnd )
       NEXT   
    ENDIF
    IF pArray != Nil
-      FOR i := 1 TO Len( pArray )
+      FOR i := 1 TO Len(pArray)
          IF __ObjHasMsg( pArray[i], "INIT" )
             pArray[i]:Init( oWnd )
          ENDIF
@@ -49,7 +49,7 @@ FUNCTION InitControls( oWnd, lNoActivate )
    lNoActivate := IIf( lNoActivate == Nil, .F., lNoActivate )
 
    IF pArray != Nil
-      FOR i := 1 TO Len( pArray )
+      FOR i := 1 TO Len(pArray)
          // writelog( "InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight) )
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
 //         IF Empty(pArray[i]:handle ) .AND. !lNoActivate
@@ -135,8 +135,8 @@ FUNCTION ReadStatus( oWnd, nPart )
 FUNCTION VColor(cColor)
    LOCAL i, res := 0, n := 1, iValue
    cColor := Trim( cColor )
-   FOR i := 1 TO Len( cColor )
-      iValue := Asc(SubStr( cColor, Len( cColor ) - i + 1, 1 ))
+   FOR i := 1 TO Len(cColor)
+      iValue := Asc(SubStr( cColor, Len(cColor) - i + 1, 1 ))
       IF iValue < 58 .and. iValue > 47
          iValue -= 48
       ELSEIF iValue >= 65 .and. iValue <= 70
@@ -244,14 +244,14 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       ENDIF
       nLen := dbFieldInfo( 3, nField )
    ELSE
-      aLen := Len( arr )
+      aLen := Len(arr)
       IF hb_IsArray(arr[1])
          FOR i := 1 TO aLen
-            nLen := Max( nLen, Len( arr[i, 1] ) )
+            nLen := Max( nLen, Len(arr[i, 1]) )
          NEXT
       ELSE
          FOR i := 1 TO aLen
-            nLen := Max( nLen, Len( arr[i] ) )
+            nLen := Max( nLen, Len(arr[i]) )
          NEXT
       ENDIF
    ENDIF

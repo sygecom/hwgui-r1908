@@ -283,7 +283,7 @@ METHOD INIT() CLASS HComboBox
             ENDIF
          ENDIF
          SendMessage(::handle, CB_RESETCONTENT, 0, 0)
-         FOR i := 1 TO Len( ::aItems )
+         FOR i := 1 TO Len(::aItems)
             ComboAddString( ::handle, ::aItems[i] )
             numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
             IF numofchars > LongComboWidth
@@ -565,12 +565,12 @@ METHOD Requery() CLASS HComboBox
    ::Populate()
 
    /*
-   FOR i := 1 TO Len( ::aItems )
+   FOR i := 1 TO Len(::aItems)
       ComboAddString( ::handle, ::aItems[i] )
    NEXT
    */
    //::Refresh()
-   IF Empty(::Value) .AND. LEN( ::aItems ) > 0 .AND. ::bSetGet = Nil .AND. !::lEdit
+   IF Empty(::Value) .AND. Len(::aItems) > 0 .AND. ::bSetGet = Nil .AND. !::lEdit
       ::SetItem( 1 )
    ENDIF
 
@@ -608,7 +608,7 @@ METHOD Refresh() CLASS HComboBox
    /*
    SendMessage(::handle, CB_RESETCONTENT, 0, 0)
 
-   FOR i := 1 TO Len( ::aItems )
+   FOR i := 1 TO Len(::aItems)
       ComboAddString( ::handle, ::aItems[i] )
    NEXT
  */
@@ -707,7 +707,7 @@ METHOD GetValue() CLASS HComboBox
         ELSEIF nPos > 0
          ::value := ::aItems[nPos]
       ENDIF
-      //nPos := IIF( LEN( ::value ) > 0, AScan( ::aItems, ::Value ), 0 )
+      //nPos := IIF( Len(::value) > 0, AScan( ::aItems, ::Value ), 0 )
       ::cDisplayValue := ::Value
       ::value := Iif( nPos > 0, ::aItems[nPos], IIF( ::lEdit, "", ::value ) )
    ELSE
@@ -753,7 +753,7 @@ METHOD GetValueBound(xItem) CLASS HComboBox
       RETURN IIF( nPos > 0, ::aItems[nPos], xItem )
    ENDIF
    //::ValueBound := IIF( ::lText, "", 0 )
-   IF nPos > 0 .AND. nPos <=  LEN( ::aItemsBound ) // LEN( ::aItems ) = LEN( ::aItemsBound )
+   IF nPos > 0 .AND. nPos <=  Len(::aItemsBound) // Len(::aItems) = Len(::aItemsBound)
       ::ValueBound := ::aItemsBound[nPos]
    ENDIF
 
@@ -786,10 +786,10 @@ METHOD DeleteItem( xIndex ) CLASS HComboBox
    ENDIF
    IF SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= LEN(ocombo:aitems)
       Adel( ::Aitems, nIndex )
-      Asize(::Aitems, Len( ::aitems ) - 1)
-      IF LEN( ::AitemsBound ) > 0
+      Asize(::Aitems, Len(::aitems) - 1)
+      IF Len(::AitemsBound) > 0
          ADEL( ::AitemsBound, nIndex )
-         ASIZE(::AitemsBound, Len( ::aitemsBound ) - 1)
+         ASIZE(::AitemsBound, Len(::aitemsBound) - 1)
       ENDIF
       RETURN .T.
    ENDIF
@@ -803,7 +803,7 @@ METHOD AddItem( cItem, cItemBound, nPos ) CLASS HComboBox
    LOCAL nCount
 
    nCount := SendMessage(::handle, CB_GETCOUNT, 0, 0) + 1
-   IF LEN( ::Aitems ) == LEN( ::AitemsBound ) .AND. cItemBound != NIL
+   IF Len(::Aitems) == Len(::AitemsBound) .AND. cItemBound != NIL
       IF nCount = 1
          ::RowSource({{cItem, cItemBound}})
          ::Aitems := {}
@@ -991,7 +991,7 @@ METHOD RowSource(xSource) CLASS HComboBox
 
    IF xSource != Nil
       IF hb_IsArray(xSource)
-        IF LEN( xSource ) > 0 .AND. !hb_IsArray( xSource[1] ) .AND. LEN( xSource ) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
+        IF Len(xSource) > 0 .AND. !hb_IsArray( xSource[1] ) .AND. Len(xSource) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
            ::xrowsource := {xSource[1], IIF(LEN(xSource) > 1, xSource[2], Nil)}
         ENDIF
       ELSE
@@ -1028,7 +1028,7 @@ METHOD Populate() CLASS HComboBox
       cAlias := IIF( VALTYPE(xRowSource) == "U", Nil, cAlias )
       cValueBound := IIF( ::xrowsource[2]  != Nil  .AND. cAlias != Nil, STRTRAN( ::xrowsource[2], calias + "->" ), Nil )
    ELSE
-      cValueBound := IIF( hb_IsArray(::aItems[1]) .AND. LEN(  ::aItems[1] ) > 1, ::aItems[1, 2], NIL )
+      cValueBound := IIF( hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL )
    ENDIF
    ::columnBound := IIF( cValueBound = Nil, 1, 2 )
    IF ::value == Nil
@@ -1064,9 +1064,9 @@ METHOD Populate() CLASS HComboBox
           ( cAlias ) ->( DBGOTO( nRecno ) )
        ENDIF
     ELSE
-       FOR i := 1 TO Len( ::aItems )
+       FOR i := 1 TO Len(::aItems)
           IF ::columnBound > 1
-             IF hb_IsArray(::aItems[i]) .AND. LEN(  ::aItems[i] ) > 1
+             IF hb_IsArray(::aItems[i]) .AND. Len(::aItems[i]) > 1
                 AADD(::AitemsBound, ::aItems[i, 2 ])
              ELSE
                 AADD(::AitemsBound, Nil)

@@ -37,7 +37,7 @@ LOCAL aFormCode, aFormName
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR( han,@strbuf,@poz,STR_BUFLEN )
-         IF LEN( stroka ) = 0
+         IF Len(stroka) = 0
             EXIT
          ELSEIF rejim == 0 .AND. Left( stroka,1 ) == "#"
             IF Upper(LEFT(stroka, 7)) == "#SCRIPT"
@@ -142,11 +142,11 @@ RETURN rezArray
 
 STATIC FUNCTION COMPILESCR( pp, han, strbuf, poz, rezArray, scrSource )
 LOCAL scom, poz1, stroka, strfull := "", bOldError, i, tmpArray := {}
-Local cLine, lDebug := ( Len( rezArray ) >= 3 )
+Local cLine, lDebug := ( Len(rezArray) >= 3 )
 
    DO WHILE .T.
       cLine := RDSTR( han, @strbuf, @poz, STR_BUFLEN )
-      IF LEN( cLine ) = 0
+      IF Len(cLine) = 0
          EXIT
       ENDIF
       numlin ++
@@ -161,7 +161,7 @@ Local cLine, lDebug := ( Len( rezArray ) >= 3 )
       ENDIF
       stroka := RTRIM( LTRIM( cLine ) )
       IF RIGHT( stroka, 1 ) == CHR(26)
-         stroka := LEFT( stroka, LEN( stroka ) - 1 )
+         stroka := LEFT( stroka, Len(stroka) - 1 )
       ENDIF
       IF !Empty(stroka) .AND. LEFT( stroka, 2 ) != "//"
 
@@ -169,7 +169,7 @@ Local cLine, lDebug := ( Len( rezArray ) >= 3 )
             IF UPPER(Left(stroka, 7)) == "#ENDSCR"
                Return .T.
             ELSEIF UPPER(Left(stroka, 6)) == "#DEBUG"
-               IF !lDebug .AND. Len( rezArray[2] ) == 0
+               IF !lDebug .AND. Len(rezArray[2]) == 0
                   lDebug := .T.
                   Aadd(rezArray, {})
                   IF SUBSTR( stroka,7,3 ) == "GER"
@@ -195,7 +195,7 @@ Local cLine, lDebug := ( Len( rezArray ) >= 3 )
          scom := UPPER(SUBSTR(stroka, 1, IIF(poz1 != 0, poz1 - 1, 999)))
          DO CASE
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
-            IF LEN( rezArray[2] ) == 0 .OR. ( i := VALTYPE(ATAIL( rezArray[2] )) ) == "C" ;
+            IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL( rezArray[2] )) ) == "C" ;
                     .OR. i == "A"
                IF Left( scom,2 ) == "LO"
                   AADD(rezArray[2], " "+ALLTRIM( SUBSTR( stroka, 7 ) ))
@@ -285,7 +285,7 @@ Local cLine, lDebug := ( Len( rezArray ) >= 3 )
             ERRORBLOCK( bOldError )
             AADD(tmpArray, "")
          ENDCASE
-         IF lDebug .AND. Len( rezArray[3] ) < Len( rezArray[2] )
+         IF lDebug .AND. Len(rezArray[3]) < Len(rezArray[2])
             Aadd(rezArray[3], Str( numlin,4 ) + ":" + cLine)
          ENDIF
       ENDIF
@@ -339,11 +339,11 @@ LOCAL i, j, bOldError
    IF prju
       AADD(tmpArray, "JUMP")
       AADD(rezArray[2], .F.)
-      IF Len( rezArray ) >= 3
+      IF Len(rezArray) >= 3
          Aadd(rezArray[3], Str( numlin,4 ) + ":JUMP")
       ENDIF
    ENDIF
-   j := LEN( rezArray[2] )
+   j := Len(rezArray[2])
    FOR i := j TO 1 STEP - 1
       IF UPPER(LEFT(tmpArray[i], 2)) == "IF"
          bOldError := ERRORBLOCK( { | e | MacroError(1,e,tmpArray[i]) } )
@@ -371,7 +371,7 @@ LOCAL i, j, iloop := 0
 //LOCAL iPos (variable not used)
 LOCAL bOldError
 
-   j := LEN( rezArray )
+   j := Len(rezArray)
    FOR i := j TO 1 STEP - 1
       IF !Empty(tmpArray[i]) .AND. LEFT( tmpArray[i], 4 ) == "EXIT"
          rezArray[i] = &( "{||iscr:=" + LTRIM( STR( j + 1, 5 ) ) + "}" )
@@ -413,10 +413,10 @@ PRIVATE iscr := 1, bOldError
    IF Type("aScriptt") != "A"
       Private aScriptt := aScript
    ENDIF
-   IF aScript == Nil .OR. ( arlen := Len( aScript[2] ) ) == 0
+   IF aScript == Nil .OR. ( arlen := Len(aScript[2]) ) == 0
       Return .T.
    ENDIF
-   lDebug := ( Len( aScript ) >= 3 )
+   lDebug := ( Len(aScript) >= 3 )
    DO WHILE !hb_IsBlock(aScript[2, iscr])
       IF hb_IsChar(aScript[2, iscr])
          IF Left( aScript[2, iscr],1 ) == "#"
@@ -605,10 +605,10 @@ LOCAL GetList := {}
    y2   := y1 + y__size
    x2   := x1 + x__size
    oldc := SETCOLOR("N/W")
-   IF LEN( sout ) + IIF( spict = "@D", 8, LEN( spict ) ) > x__size - 3
+   IF Len(sout) + IIF( spict = "@D", 8, Len(spict) ) > x__size - 3
       SCROLL( y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1 )
    ELSE
-      x1 += LEN( sout ) + 1
+      x1 += Len(sout) + 1
    ENDIF
    @ y2 - 1, x1 + 2 GET varget PICTURE spict
    READ

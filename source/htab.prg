@@ -88,7 +88,7 @@ RETURN NIL
 
 METHOD SetTabText( cText ) CLASS HPage
 
-   IF Len( ::aItemPos ) == 0
+   IF Len(::aItemPos) == 0
       RETURN NIL
    ENDIF
 
@@ -97,7 +97,7 @@ METHOD SetTabText( cText ) CLASS HPage
    InvalidateRect(::oParent:handle, 0, ::aItemPos[1], ::aItemPos[2], ::aItemPos[1] + ::aItemPos[3], ::aItemPos[2] + ::aItemPos[4])
    InvalidateRect(::oParent:handle, 0)
    /*
-   FOR i := 1 TO Len( ::oParent:Pages )
+   FOR i := 1 TO Len(::oParent:Pages)
       ::oParent:Pages[i]:aItemPos := TabItemPos( ::oParent:handle, i - 1 )
    NEXT
    */
@@ -212,7 +212,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
 
    IF aImages != NIL
       ::aImages := {}
-      FOR i := 1 TO Len( aImages )
+      FOR i := 1 TO Len(aImages)
          //AAdd(::aImages, Upper(aImages[i]))
          aImages[i] := IIf(lResour, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
          AAdd(::aImages, aImages[i])
@@ -220,7 +220,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
       ::aBmpSize := GetBitmapSize(aImages[1])
       ::himl := CreateImageList( aImages, ::aBmpSize[1], ::aBmpSize[2], 12, nBC )
       ::Image1 := 0
-      IF Len( aImages ) > 1
+      IF Len(aImages) > 1
          ::Image2 := 1
       ENDIF
    ENDIF
@@ -273,7 +273,7 @@ METHOD Init() CLASS HTab
       SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
       IF Hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
          ::TabHeightSize := 25 - ( ::oFont:Height + 12 )
-         x := ::nWidth / Len( ::aPages ) - 2
+         x := ::nWidth / Len(::aPages) - 2
       ELSEIF ::TabHeightSize != NIL
       ELSEIF ::oFont != NIL
          ::TabHeightSize := 25 - ( ::oFont:Height + 12 )
@@ -287,7 +287,7 @@ METHOD Init() CLASS HTab
       AddToolTip(::GetParentForm():handle, ::handle, "")
       ::Super:Init()
 
-      IF Len( ::aPages ) > 0
+      IF Len(::aPages) > 0
          //::Pages[1]:aItemPos := TabItemPos( ::handle, 0 )
          /*
          IF ASCAN( ::Pages, {|p|p:brush != NIL} ) > 0
@@ -300,7 +300,7 @@ METHOD Init() CLASS HTab
          */
          ::SetPaintSizePos(IIF(ASCAN(::Pages, {|p|p:brush != NIL}) > 0, -1, 1))
          ::nActive := 0
-         FOR i := 1 TO Len( ::aPages )
+         FOR i := 1 TO Len(::aPages)
             ::Pages[i]:aItemPos := TabItemPos( ::handle, i - 1 )
             ::HidePage(i)
             ::nActive := IIF(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
@@ -362,7 +362,7 @@ RETURN NIL
 
 METHOD SetTab(n) CLASS HTab
 
-   IF n > 0 .AND. n <= LEN( ::aPages )
+   IF n > 0 .AND. n <= Len(::aPages)
       IF ::Pages[n]:Enabled
          ::changePage(n)
          SendMessage(::handle, TCM_SETCURFOCUS, n - 1, 0)
@@ -378,7 +378,7 @@ METHOD StartPage(cname, oDlg, lEnabled, tColor, bColor, cTooltip) CLASS HTab
    ::oTemp := ::oDefaultParent
    ::oDefaultParent := Self
 
-   IF Len( ::aTabs ) > 0 .AND. Len( ::aPages ) == 0
+   IF Len(::aTabs) > 0 .AND. Len(::aPages) == 0
       ::aTabs := {}
    ENDIF
    AAdd(::aTabs, cname)
@@ -387,8 +387,8 @@ METHOD StartPage(cname, oDlg, lEnabled, tColor, bColor, cTooltip) CLASS HTab
    ELSE
       AAdd(::aPages, {Len(::aControls), 0})
    ENDIF
-   ::AddPage(HPage():New(cname, Len( ::aPages ), lEnabled, tColor, bcolor, cTooltip), cName)
-   ::nActive := Len( ::aPages )
+   ::AddPage(HPage():New(cname, Len(::aPages), lEnabled, tColor, bcolor, cTooltip), cName)
+   ::nActive := Len(::aPages)
    ::Pages[::nActive]:aItemPos := {0, 0, 0, 0} //TabItemPos( ::handle, ::nActive - 1 )
 
 RETURN NIL
@@ -398,7 +398,7 @@ RETURN NIL
 METHOD AddPage(oPage, cCaption) CLASS HTab
 
    AAdd(::Pages, oPage)
-   InitPage(Self, oPage, cCaption, Len( ::Pages ))
+   InitPage(Self, oPage, cCaption, Len(::Pages))
 
 RETURN oPage
 
@@ -424,7 +424,7 @@ METHOD EndPage() CLASS HTab
    LOCAL cPage := "Page" + ALLTRIM( STR( ::nActive ) )
 
    IF !::lResourceTab
-      ::aPages[::nActive, 2] := Len( ::aControls ) - ::aPages[::nActive, 1]
+      ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
       IF ::handle != NIL .AND. !Empty(::handle)
          AddTab(::handle, ::nActive, ::aTabs[::nActive])
       ENDIF
@@ -527,7 +527,7 @@ METHOD HidePage(nPage) CLASS HTab
             AADD(::aControlsHide, ::aControls[i]:id)
          ELSEIF k > 0 .AND. !::aControls[i]:lHide
             ADEL( ::aControlsHide, k )
-            ASIZE(::aControlsHide, Len( ::aControlsHide ) - 1)
+            ASIZE(::aControlsHide, Len(::aControlsHide) - 1)
          ENDIF
          ::aControls[i]:Hide()
       NEXT
@@ -554,7 +554,7 @@ METHOD ShowPage(nPage) CLASS HTab
       ENDIF
       FOR i := nFirst TO nEnd
          //IF ASCAN( ::aControlsHide, ::aControls[i]:id ) == 0 .OR. ::aControls[i]:lHide == .F.
-         IF !::aControls[i]:lHide .OR. ( LEN( ::aControlsHide ) == 0 .OR. ASCAN( ::aControlsHide, ::aControls[i]:id ) == 0 )
+         IF !::aControls[i]:lHide .OR. ( Len(::aControlsHide) == 0 .OR. ASCAN( ::aControlsHide, ::aControls[i]:id ) == 0 )
             ::aControls[i]:Show( SW_SHOWNA )
          ENDIF
       NEXT
@@ -572,7 +572,7 @@ METHOD ShowPage(nPage) CLASS HTab
    ELSE
       ::aPages[nPage, 1]:show()
 
-      FOR i := 1  TO Len( ::aPages[nPage, 1]:aControls )
+      FOR i := 1  TO Len(::aPages[nPage, 1]:aControls)
          IF ( __ObjHasMsg( ::aPages[nPage, 1]:aControls[i], "BSETGET" ) .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL ) .OR. Hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
             SetFocus( ::aPages[nPage, 1]:aControls[i]:handle )
             EXIT
@@ -651,11 +651,11 @@ METHOD GetActivePage(nFirst, nEnd) CLASS HTab
             nEnd := ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
          ELSE
             nFirst := 1
-            nEnd := Len( ::aControls )
+            nEnd := Len(::aControls)
          ENDIF
       ELSE
          nFirst := 1
-         nEnd := Len( ::aPages[::nActive, 1]:aControls )
+         nEnd := Len(::aPages[::nActive, 1]:aControls)
       ENDIF
    ENDIF
 
@@ -674,13 +674,13 @@ METHOD DeletePage(nPage) CLASS HTab
 
       ADel( ::aPages, nPage )
       ADel( ::Pages, nPage )
-      ASize(::aPages, Len( ::aPages ) - 1)
-      ASize(::Pages, Len( ::Pages ) - 1)
+      ASize(::aPages, Len(::aPages) - 1)
+      ASize(::Pages, Len(::Pages) - 1)
 
       IF nPage > 1
          ::nActive := nPage - 1
          ::SetTab(::nActive)
-      ELSEIF Len( ::aPages ) > 0
+      ELSEIF Len(::aPages) > 0
          ::nActive := 1
          ::SetTab(1)
       ENDIF
@@ -1077,7 +1077,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
       pt[1] := LOWORD(nPageEnable)
       pt[2] := HIWORD(nPageEnable)
    ENDIF
-   FOR i := 1 TO Len( ::Pages )
+   FOR i := 1 TO Len(::Pages)
       IF !::pages[i]:enabled .OR. i == PtrtoUlong(nPageEnable)
          //client_rect := ::Pages[i]:aItemPos
          client_rect := TabItemPos( ::handle, i - 1 )
@@ -1104,7 +1104,7 @@ METHOD ShowToolTips( lParam ) CLASS HTab
    pt[1] := LOWORD(lParam)
    pt[2] := HIWORD(lParam)
 
-   FOR i := 1 TO Len( ::Pages )
+   FOR i := 1 TO Len(::Pages)
        client_rect := ::Pages[i]:aItemPos
        IF ( PtInRect( client_rect, pt ) )
              ::SetToolTip(IIF(::Pages[i]:Tooltip == NIL, "", ::Pages[i]:Tooltip))
@@ -1160,7 +1160,7 @@ FUNCTION FindTabAccelerator( oPage, nKey )
    LOCAL cKey
 
   cKey := Upper(Chr(nKey))
-  FOR i := 1 TO Len( oPage:aPages )
+  FOR i := 1 TO Len(oPage:aPages)
      IF ( pos := At( "&", oPage:Pages[i]:caption ) ) > 0 .AND. cKey == Upper(SubStr(oPage:Pages[i]:caption, ++pos, 1))
         IF oPage:pages[i]:Enabled
             SendMessage(oPage:handle, TCM_SETCURFOCUS, i - 1, 0)
@@ -1248,7 +1248,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
    ENDIF
 
    ::hDC := GetDC(::oParent:handle)
-   FOR i := 1 TO Len( ::oParent:Pages )
+   FOR i := 1 TO Len(::oParent:Pages)
       oPage := ::oParent:Pages[i]
       client_rect := TabItemPos( ::oParent:handle,i - 1 )
       oPage:aItemPos := client_rect
