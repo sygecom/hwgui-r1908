@@ -19,6 +19,8 @@ HWGUI r1908 para testes com Harbour e xHarbour 32-bit/64-bit
 | xHarbour  | Clang64          | ?        | ? | ...   |
 | xHarbour  | BCC 7.3 32-bit   | estável  | ? | ...   |
 | xHarbour  | BCC 7.3 64-bit   | estável  | ? | ...   |
+| xHarbour  | BCC 7.7 32-bit   | ?        | ? | ...   |
+| xHarbour  | BCC 7.7 64-bit   | instável | ? | ...   |
 | Harbour++ | MinGW32          | estável  | ? | ...   |
 | Harbour++ | MinGW64          | estável  | ? | requer flag -fpermissive |
 | Harbour++ | MSVC32           | estável  | ? | ... |
@@ -34,6 +36,13 @@ A estabilidade se refere ao resultado obtido com os programas da pasta 'tests'.
 
 Problemas na compilação ou na utilização podem ser informados na seção
 'Issues'. O assunto será revisado o mais breve possível.
+
+## Problemas conhecidos
+
+xHarbour com BCC64 7.7  
+Esta combinação apresenta instabilidade no acesso à estrutura DRAWITEMSTRUCT, utilizada na mensagem
+WM_DRAWITEM. Embora funcione corretamente com outros compiladores, não funciona quando se trata desta
+versão específica do BCC64. A solução, por enquanto, seria evitar esta combinação.
 
 # Notas
 
