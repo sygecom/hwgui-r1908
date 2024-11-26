@@ -67,7 +67,7 @@ METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
    IF Empty(::handle := FI_LoadFromMem( cImage, cType ))
       RETURN Nil
    ENDIF
-   ::name := LTrim( Str(::handle) )
+   ::name := LTrim(Str(::handle))
    ::nWidth  := FI_GetWidth(::handle)
    ::nHeight := FI_GetHeight(::handle)
    AAdd(::aImages, Self)
@@ -77,7 +77,7 @@ METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
 METHOD FromBitmap(oBitmap) CLASS HFreeImage
 
    ::handle := FI_Bmp2FI( oBitmap:handle )
-   ::name := LTrim( Str( oBitmap:handle ) )
+   ::name := LTrim(Str( oBitmap:handle ))
    ::nWidth  := FI_GetWidth(::handle)
    ::nHeight := FI_GetHeight(::handle)
    AAdd(::aImages, Self)

@@ -25,7 +25,7 @@ LOCAL stro := "", rez, oldpoz, poz1
          poz  := At( Chr(10), strbuf )
          stro += SubStr(strbuf, 1, poz)
       ELSE
-         stro += Rtrim( SubStr(strbuf, oldpoz) )
+         stro += RTrim(SubStr(strbuf, oldpoz))
          poz  := oldpoz + Len(stro)
          IF Len(stro) == 0
             RETURN ""
@@ -55,8 +55,8 @@ LOCAL varName, iPosEnd, iPos3
          iPosEnd := Iif( Right(stroka, 1) = ';', Len(stroka), Len(stroka) + 1 )
       ENDIF
       ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ':' )
-      varName  := Rtrim( Ltrim( Left(stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1) ) )
-      varValue := Iif( iPos3 != 0, Ltrim( SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2) ), Nil )
+      varName  := RTrim(LTrim(Left(stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1)))
+      varValue := Iif( iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), Nil )
       stroka   := SubStr(stroka, iPosEnd + 1)
    ENDIF
 RETURN varName
@@ -137,10 +137,10 @@ LOCAL i, oldPos
       oldPos := nPos
       IF ( i := At( cSep, SubStr(stroka, nPos) ) ) == 0
          nPos := 99999
-         RETURN Ltrim( Rtrim( SubStr(stroka, oldPos) ) )
+         RETURN LTrim(RTrim(SubStr(stroka, oldPos)))
       ELSE
          nPos += i
-         RETURN Ltrim( Rtrim( SubStr(stroka, oldPos, i - 1) ) )
+         RETURN LTrim(RTrim(SubStr(stroka, oldPos, i - 1)))
       ENDIF
    ENDIF
 RETURN ""

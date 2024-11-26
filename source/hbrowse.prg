@@ -1350,7 +1350,7 @@ METHOD InsColumn( oColumn, nPos ) CLASS HBrowse
 
 STATIC FUNCTION InitColumn( oBrw, oColumn, n )
    LOCAL xres, ctype
-   LOCAL cname := "Column" + LTRIM( STR( Len(oBrw:aColumns) ) )
+   LOCAL cname := "Column" + LTrim(STR( Len(oBrw:aColumns) ))
 
    IF oColumn:Type == Nil
       oColumn:Type := ValType(Eval( oColumn:block,, oBrw, n ))
@@ -3665,7 +3665,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
             IF hb_IsNumeric(::varbuf)
                nChoic := ::varbuf
             ELSE
-               ::varbuf := AllTrim( ::varbuf )
+               ::varbuf := AllTrim(::varbuf)
                nChoic := AScan( oColumn:aList, ::varbuf )
             ENDIF
 

@@ -589,7 +589,7 @@ METHOD Refresh() CLASS HComboBox
       ENDIF
       IF ::columnBound = 1
          IF ::lText
-         //vari := IIF( ::bSetGetField != Nil  .AND. hb_IsChar(vari), TRIM( vari ), vari )
+         //vari := IIF( ::bSetGetField != Nil  .AND. hb_IsChar(vari), Trim(vari), vari )
             ::value := Iif( vari==Nil .OR. !hb_IsChar(vari), "", vari )
                //SendMessage(::handle, CB_SETEDITSEL, 0, LEN(::value))
          ELSE
@@ -1020,9 +1020,9 @@ METHOD Populate() CLASS HComboBox
    ENDIF
    xRowSource := iif( hb_IsArray( ::xRowSource[1] ), ::xRowSource[1, 1], ::xRowSource[1] )
    IF xRowSource != Nil .AND. ( i := At( "->", xRowSource ) ) > 0
-       cAlias := AlLTRIM( Left(xRowSource, i - 1) )
+       cAlias := AllTrim(Left(xRowSource, i - 1))
        IF Select( cAlias ) = 0 .AND. ( i := At( "(", cAlias ) ) > 0
-          cAlias := LTRIM( SubStr(cAlias, i + 1) )
+          cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
       value := STRTRAN( xRowSource, calias + "->", , , 1, 1 )
       cAlias := IIF( VALTYPE(xRowSource) == "U", Nil, cAlias )

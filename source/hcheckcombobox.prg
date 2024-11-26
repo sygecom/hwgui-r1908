@@ -377,7 +377,7 @@ METHOD RecalcText() CLASS hCheckComboBox
          strSeparator := ''
       ENDIF
 
-      strSeparator := Rtrim( strSeparator )
+      strSeparator := RTrim(strSeparator)
 
       strSeparator += ' '
 

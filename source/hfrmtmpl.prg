@@ -475,14 +475,14 @@ FUNCTION ParseMethod(cMethod)
    LOCAL arr := {}, nPos1, nPos2, cLine
 
    IF ( nPos1 := At( Chr(10),cMethod ) ) == 0
-      Aadd(arr, RTrim( cMethod ))
+      Aadd(arr, RTrim(cMethod))
    ELSE
-      Aadd(arr, RTrim( Left(cMethod, nPos1 - 1) ))
+      Aadd(arr, RTrim(Left(cMethod, nPos1 - 1)))
       DO WHILE .T.
          IF ( nPos2 := hb_At( Chr(10), cMethod, nPos1 + 1 ) ) == 0
-            cLine := AllTrim( SubStr(cMethod, nPos1 + 1) )
+            cLine := AllTrim(SubStr(cMethod, nPos1 + 1))
          ELSE
-            cLine := AllTrim( SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1) )
+            cLine := AllTrim(SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1))
          ENDIF
          IF !Empty(cLine)
             AAdd(arr, cLine)
@@ -514,12 +514,12 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       nContainer := oForm:nContainer
    ENDIF
    IF Asc(cMethod) <= 32
-      cMethod := Ltrim( cMethod )
+      cMethod := LTrim(cMethod)
    ENDIF
    IF Lower( Left(cMethod, 11) ) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
       DO WHILE Substr(cMethod, --nPos, 1) <= ' '; ENDDO
-      cParam := Alltrim( Substr(Left(cMethod, nPos), 12) )
+      cParam := Alltrim(Substr(Left(cMethod, nPos), 12))
    ENDIF
    IF oForm:lDebug
       arr := {}
@@ -527,7 +527,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       arr := ParseMethod(cMethod)
    ENDIF
    IF Len(arr) == 1
-      cCode := Iif( Lower( Left(arr[1],6) ) == "return", Ltrim( SubStr(arr[1], 8) ), arr[1] )
+      cCode := Iif( Lower( Left(arr[1],6) ) == "return", LTrim(SubStr(arr[1], 8)), arr[1] )
       bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
       BEGIN SEQUENCE
          bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
@@ -536,7 +536,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       Return bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
-         cCode := Iif( Lower( Left(arr[2],6) ) == "return", Ltrim( SubStr(arr[2], 8) ), arr[2] )
+         cCode := Iif( Lower( Left(arr[2],6) ) == "return", LTrim(SubStr(arr[2], 8)), arr[2] )
          cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
          bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
          BEGIN SEQUENCE
@@ -807,7 +807,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
          nStyle += Val( xProperty )
          // NANDO
       ELSEIF cPName == "bitmap" .AND. oCtrlTmpl:cClass == "buttonex"
-         hbmp := HBitmap():addfile(Trim( xProperty ))
+         hbmp := HBitmap():addfile(Trim(xProperty))
          hbmp := hbmp:handle
       ELSEIF cPName == "icon" .AND. oCtrlTmpl:cClass == "buttonex"
          hIco := HIcon():addfile(xProperty, NIL)
@@ -846,11 +846,11 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       ELSEIF cPName == "aarray"
          caArray := IIf( xProperty != Nil .AND. !Empty(xProperty), &( xProperty ) , {} )
       ELSEIF cPName == "childorder"
-         cKey := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim( xProperty ), "" )
+         cKey := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim(xProperty), "" )
       ELSEIF cPName == "relationalexpr"
-         cRelexpr := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim( xProperty ), "" )
+         cRelexpr := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim(xProperty), "" )
       ELSEIF cPName == "linkmaster"
-         cLink := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim( xProperty ), "" )
+         cLink := IIf( xProperty != Nil .AND. !Empty(xProperty), Trim(xProperty), "" )
 /*
       ELSEIF cPName == "filedbf"
          IF !Empty(xProperty)
@@ -1100,19 +1100,19 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       LOCAL aAttr := {}
 
       AAdd(aAttr, { "name", oFont:name })
-      AAdd(aAttr, { "width", LTrim( Str( oFont:width, 5 ) ) })
-      AAdd(aAttr, { "height", LTrim( Str( oFont:height, 5 ) ) })
+      AAdd(aAttr, { "width", LTrim(Str( oFont:width, 5 )) })
+      AAdd(aAttr, { "height", LTrim(Str( oFont:height, 5 )) })
       IF oFont:weight != 0
-         AAdd(aAttr, { "weight", LTrim( Str( oFont:weight, 5 ) ) })
+         AAdd(aAttr, { "weight", LTrim(Str( oFont:weight, 5 )) })
       ENDIF
       IF oFont:charset != 0
-         AAdd(aAttr, { "charset", LTrim( Str( oFont:charset, 5 ) ) })
+         AAdd(aAttr, { "charset", LTrim(Str( oFont:charset, 5 )) })
       ENDIF
       IF oFont:Italic != 0
-         AAdd(aAttr, { "italic", LTrim( Str( oFont:Italic, 5 ) ) })
+         AAdd(aAttr, { "italic", LTrim(Str( oFont:Italic, 5 )) })
       ENDIF
       IF oFont:Underline != 0
-         AAdd(aAttr, { "underline", LTrim( Str( oFont:Underline, 5 ) ) })
+         AAdd(aAttr, { "underline", LTrim(Str( oFont:Underline, 5 )) })
       ENDIF
 
       RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
@@ -1155,7 +1155,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
          DO WHILE pos2 > 0
             DO WHILE SubStr(stroka, pos1, 1) <= ' ' ; pos1 ++ ; ENDDO
             pos2 := hb_At( ',', stroka, pos1 )
-            AAdd(arr, Trim( SubStr(stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 )) ))
+            AAdd(arr, Trim(SubStr(stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 ))))
             pos1 := pos2 + 1
          ENDDO
       ENDIF
@@ -1173,7 +1173,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
          IF cType == "C"
             stroka += arr[i]
          ELSEIF cType == "N"
-            stroka += LTrim( Str( arr[i] ) )
+            stroka += LTrim(Str( arr[i] ))
          ENDIF
       NEXT
 

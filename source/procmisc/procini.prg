@@ -109,8 +109,8 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
             poz1 := AT( "=", stroka )
             IF poz1 != 0
                lTruncAr := IIF( SubStr(stroka, poz1 - 1, 1) == '+', .F., .T. )
-               vname    := RTRIM( SubStr(stroka, 1, IIF( lTruncAr, poz1 - 1, poz1 - 2 )) )
-               stroka   := ALLTRIM( SubStr(stroka, poz1 + 1) )
+               vname    := RTrim(SubStr(stroka, 1, IIF( lTruncAr, poz1 - 1, poz1 - 2 )))
+               stroka   := AllTrim(SubStr(stroka, poz1 + 1))
                IF lWinIni
                   AADD(prm1[Len(prm1), 2], { UPPER(vname), stroka })
                ELSE
@@ -162,7 +162,7 @@ RETURN kolstr
 STATIC FUNCTION RDZNACH( ps )
 
 LOCAL poz, znc
-   ps := ALLTRIM( ps )
+   ps := AllTrim(ps)
    IF ASC(ps) = 34
       poz := AT( CHR(34), SubStr(ps, 2) )
       IF poz != 0
@@ -189,11 +189,11 @@ LOCAL len1, strv, newname
          ELSE
             //i ++ (value not used)
             poz1 := FIND_Z( stroka )
-            strv := LTRIM( SubStr(stroka, 1, IIF( poz1 = 0, 9999, poz1 - 1 )) )
+            strv := LTrim(SubStr(stroka, 1, IIF( poz1 = 0, 9999, poz1 - 1 )))
             IF ASC(strv) = 123 .AND. SubStr(strv, 2, 1) != "|"              // {
                AADD(&vname, {})
                len1    := Len(&vname)
-               newname := vname + "[" + LTRIM( STR( len1, 3 ) ) + "]"
+               newname := vname + "[" + LTrim(STR( len1, 3 )) + "]"
                RDARR( newname, strv )
             ELSE
                AADD(&vname, RDZNACH( strv ))

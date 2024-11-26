@@ -134,7 +134,7 @@ FUNCTION ReadStatus( oWnd, nPart )
 
 FUNCTION VColor(cColor)
    LOCAL i, res := 0, n := 1, iValue
-   cColor := Trim( cColor )
+   cColor := Trim(cColor)
    FOR i := 1 TO Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
       IF iValue < 58 .and. iValue > 47
@@ -153,7 +153,7 @@ FUNCTION VColor(cColor)
 
 FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
    LOCAL oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-   LOCAL cRes := IIf( cResIni != Nil, Trim( cResIni ), "" )
+   LOCAL cRes := IIf( cResIni != Nil, Trim(cResIni), "" )
    /*
    IF !Empty(cRes)
       Keyb_Event( VK_END )
@@ -179,7 +179,7 @@ FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
 
    oFont:Release()
    IF oModDlg:lResult
-      RETURN Trim( cRes )
+      RETURN Trim(cRes)
    ELSE
       cRes := ""
    ENDIF

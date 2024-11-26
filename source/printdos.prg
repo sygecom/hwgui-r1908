@@ -132,7 +132,7 @@ METHOD New( oPorta ) CLASS PrintDos
                MsgInfo( "Error, file to:ERROR.TXT" )
                ::oPorta := "Error.txt"
             ELSE
-               oPtrName := AllTrim( oPtrName )
+               oPtrName := AllTrim(oPtrName)
                IF SubStr(oPtrName, 1, 3) == "LPT"
                   oPtrName := Left(oPtrName, Len(oPtrName) - 1)
                ENDIF

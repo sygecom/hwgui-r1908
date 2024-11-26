@@ -252,7 +252,7 @@ METHOD Valid() CLASS HUpDown
 
    /*
    ::title := GetEditText( ::oParent:handle, ::oEditUpDown:id )
-   ::nValue := Val( Ltrim( ::title ) )
+   ::nValue := Val( LTrim(::title) )
    IF hb_IsBlock(::bSetGet)
       Eval( ::bSetGet, ::nValue )
    ENDIF
@@ -303,7 +303,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
         Return 0
    ENDIF
 
-   vari := Val( LTrim( ::UnTransform( ::title ) ) )
+   vari := Val( LTrim(::UnTransform( ::title )) )
 
    IF ( vari <= ::oUpDown:nLower .AND. iDelta < 0 ) .OR. ;
        ( vari >= ::oUpDown:nUpper .AND. iDelta > 0 ) .OR. ::oUpDown:Increment = 0
@@ -513,7 +513,7 @@ STATIC FUNCTION __Valid(oCtrl)
    ENDIF
    nSkip := IIf( GetKeyState(VK_SHIFT) < 0 , - 1, 1 )
    oCtrl:title := GetEditText( oCtrl:oParent:handle, oCtrl:id )
-   oCtrl:value := Val( LTrim( oCtrl:title ) )
+   oCtrl:value := Val( LTrim(oCtrl:title) )
    IF oCtrl:bSetGet != Nil
       Eval( oCtrl:bSetGet, oCtrl:value )
    ENDIF

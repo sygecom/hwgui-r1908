@@ -111,9 +111,9 @@ METHOD EndGroup(nSelected) CLASS HRadioGroup
          ELSE
             ::oGroupCurrent:aButtons[nLen]:bInit :=                     ;
                                                       &( "{|o|CheckRadioButton(o:oParent:handle," +           ;
-                                                                                LTrim( Str( ::oGroupCurrent:aButtons[1]:id ) ) + "," +    ;
-                                                                                LTrim( Str( ::oGroupCurrent:aButtons[nLen]:id ) ) + "," + ;
-                                                                                LTrim( Str( ::oGroupCurrent:aButtons[nSelected]:id ) ) + ")}" )
+                                                                                LTrim(Str( ::oGroupCurrent:aButtons[1]:id )) + "," +    ;
+                                                                                LTrim(Str( ::oGroupCurrent:aButtons[nLen]:id )) + "," + ;
+                                                                                LTrim(Str( ::oGroupCurrent:aButtons[nSelected]:id )) + ")}" )
          ENDIF
       ENDIF
       IF Empty(::oParent)

@@ -19,7 +19,7 @@
 // English Say Money
 FUNCTION SayDollar(nDollar)
 
- LOCAL cDollar := Right(LTRIM( STR(nDollar,15) ), 11)
+ LOCAL cDollar := Right(LTrim(STR(nDollar,15)), 11)
  LOCAL nAA := 1
  LOCAL nPJ := LEN(cDollar)
  LOCAL xSay := '', xLang2, xLang1, xMuch, xNum, xteen

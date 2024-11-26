@@ -573,7 +573,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
    DEFAULT lCodesOK TO .F.
 
    IF ::lTrimSpaces
-      cString := RTrim( cString )
+      cString := RTrim(cString)
    ENDIF
 
 //cString := " " + cString
@@ -618,9 +618,9 @@ METHOD Write(xData, lCodesOK) CLASS RichText
             IF nChar == 141
                LOOP
             ELSE
-               cWrite += "\plain\f" + AllTrim( Str( ::nFontAct - 1 ) ) + ;
-                         "\fs" + AllTrim( Str( ::nFontSize * 2 ) ) + ;
-                         "\cf" + AllTrim( Str( ::nFontColor ) ) + AllTrim( ::cLastApar ) + "\'" + Lower( NewBase(nChar, 16) )
+               cWrite += "\plain\f" + AllTrim(Str( ::nFontAct - 1 )) + ;
+                         "\fs" + AllTrim(Str( ::nFontSize * 2 )) + ;
+                         "\cf" + AllTrim(Str( ::nFontColor )) + AllTrim(::cLastApar) + "\'" + Lower( NewBase(nChar, 16) )
             ENDIF
          ELSE
             cWrite += ::aTranslate[Asc(cChar) - 127]
@@ -676,7 +676,7 @@ METHOD NumCode(cCode, nValue, lScale) CLASS RichText
       IF lScale
          nValue := Int( nValue * ::nScale )
       ENDIF
-      cWrite += AllTrim( Str( nValue ) ) //+ " "
+      cWrite += AllTrim(Str( nValue )) //+ " "
 
       FWrite(::hFile, cWrite)
 
@@ -734,7 +734,7 @@ FUNCTION FormatCode(cCode)
 * 01/12/97   TRM         Creation
 *
 *********************************************************************
-   cCode := AllTrim( cCode )
+   cCode := AllTrim(cCode)
    IF !( Left(cCode, 1) == "\" )
       cCode := "\" + cCode
    ENDIF
@@ -1362,7 +1362,7 @@ FUNCTION NewBase(nDec, nBase)
       ENDIF
 
       IF nRemain < 10
-         cRemain := AllTrim( Str( nRemain, 2, 0 ) )
+         cRemain := AllTrim(Str( nRemain, 2, 0 ))
       ELSE
          cRemain := Chr(nRemain + 55)
       ENDIF
@@ -1767,7 +1767,7 @@ METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign
 
       FWrite(::hFile, " INCLUDEPICTURE ")
       cName := StrTran( cName, "\", "\\\\" )
-      FWrite(::hFile, " " + AllTrim( cName ) + " \\*MERGEFORMAT ")
+      FWrite(::hFile, " " + AllTrim(cName) + " \\*MERGEFORMAT ")
 
       ::CloseGroup()
 
@@ -2618,7 +2618,7 @@ FUNCTION cFileExt( cFile )
          RETURN xExp
 
       CASE cType == 'A'
-         RETURN "{ Array of " +  LTrim( Str( Len(xExp) ) ) + " Items }"
+         RETURN "{ Array of " +  LTrim(Str( Len(xExp) )) + " Items }"
 
       CASE cType == 'B'
          RETURN '{|| Block }'
@@ -2634,7 +2634,7 @@ FUNCTION cFileExt( cFile )
 #endif
 
       CASE cType == 'H'
-         RETURN "{ Hash of " +  LTrim( Str( Len(xExp) ) ) + " Items }"
+         RETURN "{ Hash of " +  LTrim(Str( Len(xExp) )) + " Items }"
 
       OTHERWISE
          RETURN "Type: " + cType
