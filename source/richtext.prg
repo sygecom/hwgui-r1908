@@ -364,7 +364,7 @@ METHOD PageSetup(nLeft, nRight, nTop, nBottom, nWidth, nHeight, nTabWidth, lLand
 // codes.  But we'll put them here anyway for now...
 
    IF !Empty(cVertAlign)
-      ::TextCode("vertal" + Lower( Left(cVertAlign, 1) ))
+      ::TextCode("vertal" + Lower(Left(cVertAlign, 1)))
    ENDIF
 
 // Set the initial font size
@@ -620,7 +620,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
             ELSE
                cWrite += "\plain\f" + AllTrim(Str( ::nFontAct - 1 )) + ;
                          "\fs" + AllTrim(Str( ::nFontSize * 2 )) + ;
-                         "\cf" + AllTrim(Str( ::nFontColor )) + AllTrim(::cLastApar) + "\'" + Lower( NewBase(nChar, 16) )
+                         "\cf" + AllTrim(Str( ::nFontColor )) + AllTrim(::cLastApar) + "\'" + Lower(NewBase(nChar, 16))
             ENDIF
          ELSE
             cWrite += ::aTranslate[Asc(cChar) - 127]
@@ -801,7 +801,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
       AFill( aColPct, 0 )
    ENDIF
 
-   ::cTblHAlign := Lower( Left(cTblHAlign, 1) )
+   ::cTblHAlign := Lower(Left(cTblHAlign, 1))
    ::nTblFntNum := nTblFntNum
    ::nTblFntSize := nTblFntSize
    ::cCellAppear := cCellAppear
@@ -1029,7 +1029,7 @@ METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
    ::NumCode("pghsxn", nHeight)
 
    IF !Empty(cVertAlign)
-      ::TextCode("vertal" + Lower( Left(cVertAlign, 1) ))
+      ::TextCode("vertal" + Lower(Left(cVertAlign, 1)))
    ENDIF
 
 // Formato de numero de pagina
@@ -1115,7 +1115,7 @@ METHOD HAlignment( cAlign ) CLASS RichText
 *
 *********************************************************************
    IF !Empty(cAlign)
-      ::TextCode("q" + Lower( Left(cAlign, 1) ))
+      ::TextCode("q" + Lower(Left(cAlign, 1)))
    ENDIF
 
    RETURN NIL
@@ -1383,7 +1383,7 @@ METHOD BegBookMark( texto ) CLASS RichText
 // Iniciar grupo
 
    ::OpenGroup()
-   ::TextCode("*\bkmkstart " + Lower( ::cLastBook ))
+   ::TextCode("*\bkmkstart " + Lower(::cLastBook))
    ::CloseGroup()
 
    RETURN NIL
@@ -1392,7 +1392,7 @@ METHOD EndBookMark() CLASS RichText
 
 
    ::OpenGroup()
-   ::TextCode("*\bkmkend " + Lower( ::cLastBook ))
+   ::TextCode("*\bkmkend " + Lower(::cLastBook))
    ::CloseGroup()
 
    RETURN NIL
@@ -2021,7 +2021,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
       AFill( aColPct, 0 )
    ENDIF
 
-   ::cTblHAlign := Lower( Left(cTblHAlign, 1) )
+   ::cTblHAlign := Lower(Left(cTblHAlign, 1))
    ::nTblFntNum := nTblFntNum
    ::nTblFntSize := nTblFntSize
    ::cCellAppear := cCellAppear

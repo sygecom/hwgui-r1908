@@ -204,7 +204,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF !Empty(o:aItems)
-                  AAdd(aProp, { Lower( o:GetAttribute("name") ), o:aItems[1] })
+                  AAdd(aProp, { Lower(o:GetAttribute("name")), o:aItems[1] })
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
                      ::lDebug := .T.
                      SetDebugInfo( .T. )
@@ -275,8 +275,8 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
          lModal := xProperty
       ELSEIF ::aProp[i, 1] == "formtype"
          IF nMode == Nil
-            lMdi := At( "mdimain", Lower( xProperty ) ) > 0
-            lMdiChild := At( "mdichild", Lower( xProperty ) ) > 0
+            lMdi := At( "mdimain", Lower(xProperty) ) > 0
+            lMdiChild := At( "mdichild", Lower(xProperty) ) > 0
             nMode := IF( Left(xProperty, 3) == "dlg", 2, 1 )
          ENDIF
       ELSEIF ::aProp[i, 1] == "variables"
@@ -325,9 +325,9 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
             nstyle += WS_CLIPCHILDREN
          ENDIF
       ELSEIF ::aProp[i, 1] == "fromstyle"
-         IF Lower( xProperty ) == "popup"
+         IF Lower(xProperty) == "popup"
             nstyle += WS_POPUP + WS_CAPTION
-         ELSEIF Lower( xProperty ) == "child"
+         ELSEIF Lower(xProperty) == "child"
             nstyle += WS_CHILD
          ENDIF
 
@@ -516,7 +516,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    IF Asc(cMethod) <= 32
       cMethod := LTrim(cMethod)
    ENDIF
-   IF Lower( Left(cMethod, 11) ) == "parameters " .AND. ;
+   IF Lower(Left(cMethod, 11)) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
       DO WHILE Substr(cMethod, --nPos, 1) <= ' '; ENDDO
       cParam := Alltrim(Substr(Left(cMethod, nPos), 12))
@@ -527,7 +527,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       arr := ParseMethod(cMethod)
    ENDIF
    IF Len(arr) == 1
-      cCode := Iif( Lower( Left(arr[1],6) ) == "return", LTrim(SubStr(arr[1], 8)), arr[1] )
+      cCode := Iif( Lower(Left(arr[1],6)) == "return", LTrim(SubStr(arr[1], 8)), arr[1] )
       bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
       BEGIN SEQUENCE
          bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
@@ -536,7 +536,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       Return bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
-         cCode := Iif( Lower( Left(arr[2],6) ) == "return", LTrim(SubStr(arr[2], 8)), arr[2] )
+         cCode := Iif( Lower(Left(arr[2],6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2] )
          cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
          bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
          BEGIN SEQUENCE
@@ -597,7 +597,7 @@ STATIC FUNCTION ReadCtrl( pp, oCtrlDesc, oContainer, oForm )
          FOR j := 1 TO Len(aItems[i]:aItems)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
-               IF ( cName := Lower( o:GetAttribute("name") ) ) == "varname"
+               IF ( cName := Lower(o:GetAttribute("name")) ) == "varname"
                   AAdd(oForm:aVars, hfrm_GetProperty( o:aItems[1] ))
                ELSEIF cName == "name"
                   AAdd(oForm:aNames, hfrm_GetProperty( o:aItems[1] ))
@@ -655,7 +655,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
    #endif
    PUBLIC coName
    IF nCtrl == 0
-      IF Lower( oCtrlTmpl:cClass ) == "pagesheet"
+      IF Lower(oCtrlTmpl:cClass) == "pagesheet"
          tmp_nSheet ++
          oParent:StartPage(Tabs[tmp_nSheet])
          FOR i := 1 TO Len(oCtrlTmpl:aControls)
@@ -887,9 +887,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       ELSEIF cPName == "heading"
          cHeader := IIf( xProperty != Nil , xProperty , "" )
       ELSEIF cPName == "fieldname"
-         fBlock  := Lower( IIf( xProperty != Nil .AND. !Empty(xProperty), xProperty , FieldName(i) ) )
+         fBlock  := Lower(IIf( xProperty != Nil .AND. !Empty(xProperty), xProperty , FieldName(i) ))
       ELSEIF cPName == "fieldexpr"
-         fBlock  := Lower( IIf( xProperty != Nil .AND. !Empty(xProperty), xProperty , fBlock ) )
+         fBlock  := Lower(IIf( xProperty != Nil .AND. !Empty(xProperty), xProperty , fBlock ))
          // IF !(cAlias == cTmpAlias) .AND. cTmpAlias $ cCampo
          //    cCampo := STRTRAN(cCampo,cTmpAlias,cAlias)
          //   ENDIF
@@ -952,7 +952,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       ENDIF
       //
       IF oCtrlTmpl:cClass == "combobox"
-         IF ( AScan( oCtrlTmpl:aProp, { | a | Lower( a[1] ) == "nmaxlines" } ) ) > 0
+         IF ( AScan( oCtrlTmpl:aProp, { | a | Lower(a[1]) == "nmaxlines" } ) ) > 0
           //-  nHeight := nHeight * nMaxLines
          ELSE
           //-  nHeight := nHeight * 4
@@ -1278,7 +1278,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF !Empty(o:aItems)
-                  AAdd(aProp, { Lower( o:GetAttribute("name") ), hfrm_GetProperty( o:aItems[1] ) })
+                  AAdd(aProp, { Lower(o:GetAttribute("name")), hfrm_GetProperty( o:aItems[1] ) })
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
                      ::lDebug := .T.
                      SetDebugInfo( .T. )
@@ -1324,15 +1324,15 @@ METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
 
    FOR i := 1 TO Len(::aProp)
       IF ::aProp[i, 1] == "paper size"
-         IF Lower( ::aProp[i, 2] ) == "a4"
+         IF Lower(::aProp[i, 2]) == "a4"
             nPWidth  := 210
             nPHeight := 297
-         ELSEIF Lower( ::aProp[i, 2] ) == "a3"
+         ELSEIF Lower(::aProp[i, 2]) == "a3"
             nPWidth  := 297
             nPHeight := 420
          ENDIF
       ELSEIF ::aProp[i, 1] == "orientation"
-         IF Lower( ::aProp[i, 2] ) != "portrait"
+         IF Lower(::aProp[i, 2]) != "portrait"
             xTemp    := nPWidth
             nPWidth  := nPHeight
             nPHeight := xTemp
@@ -1630,7 +1630,7 @@ STATIC FUNCTION ReadRepItem( oCtrlDesc, oContainer )
          FOR j := 1 TO Len(aItems[i]:aItems)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
-               AAdd(aProp, { Lower( o:GetAttribute("name") ), IIf( Empty(o:aItems), "", hfrm_GetProperty( o:aItems[1] ) ) })
+               AAdd(aProp, { Lower(o:GetAttribute("name")), IIf( Empty(o:aItems), "", hfrm_GetProperty( o:aItems[1] ) ) })
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
