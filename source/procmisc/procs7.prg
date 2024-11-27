@@ -52,9 +52,9 @@ LOCAL varName, iPosEnd, iPos3
       RETURN ""
    ELSE
       IF ( iPosEnd := Find_Z( stroka ) ) == 0
-         iPosEnd := IIf(Right(stroka, 1) = ';', Len(stroka), Len(stroka) + 1)
+         iPosEnd := IIf(Right(stroka, 1) = ";", Len(stroka), Len(stroka) + 1)
       ENDIF
-      ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ':' )
+      ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ":" )
       varName  := RTrim(LTrim(Left(stroka, IIf(ipos3 = 0, iPosEnd, iPos3) - 1)))
       varValue := IIf(iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), Nil)
       stroka   := SubStr(stroka, iPosEnd + 1)
@@ -101,25 +101,25 @@ FUNCTION Fchoice()
 FUNCTION CutExten( fname )
 
 LOCAL i
-RETURN IIf(( i := Rat( '.', fname ) ) = 0, fname, SubStr(fname, 1, i - 1))
+RETURN IIf(( i := Rat( ".", fname ) ) = 0, fname, SubStr(fname, 1, i - 1))
 
 FUNCTION FilExten( fname )
 
 LOCAL i
-RETURN IIf(( i := Rat( '.', fname ) ) = 0, "", SubStr(fname, i + 1))
+RETURN IIf(( i := Rat( ".", fname ) ) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION FilePath( fname )
 
 LOCAL i
-RETURN IIf(( i := Rat( '\', fname ) ) = 0, ;
-            IIf(( i := Rat( '/', fname ) ) = 0, "", Left(fname, i)), ;
+RETURN IIf(( i := Rat( "\", fname ) ) = 0, ;
+            IIf(( i := Rat( "/", fname ) ) = 0, "", Left(fname, i)), ;
             Left(fname, i))
 
 FUNCTION CutPath( fname )
 
 LOCAL i
-RETURN IIf(( i := Rat( '\', fname ) ) = 0, ;
-            IIf(( i := Rat( '/', fname ) ) = 0, fname, SubStr(fname, i + 1)), ;
+RETURN IIf(( i := Rat( "\", fname ) ) = 0, ;
+            IIf(( i := Rat( "/", fname ) ) = 0, fname, SubStr(fname, i + 1)), ;
             SubStr(fname, i + 1))
 
 FUNCTION NextItem( stroka, lFirst, cSep )

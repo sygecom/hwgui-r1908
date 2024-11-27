@@ -2588,7 +2588,7 @@ RETURN NIL
 */
 
 FUNCTION cFileExt( cFile )
-   RETURN SubStr(cFile, At( '.', cFile ) + 1)
+   RETURN SubStr(cFile, At( ".", cFile ) + 1)
 
    #ifndef __XHARBOUR__
    FUNCTION CStr( xExp )
@@ -2596,44 +2596,44 @@ FUNCTION cFileExt( cFile )
       LOCAL cType
 
       IF xExp == NIL
-         RETURN 'NIL'
+         RETURN "NIL"
       ENDIF
 
       cType := ValType(xExp)
 
       DO CASE
-      CASE cType == 'C'
+      CASE cType == "C"
          RETURN xExp
 
-      CASE cType == 'D'
+      CASE cType == "D"
          RETURN DToC(xExp)
 
-      CASE cType == 'L'
-         RETURN IIf(xExp, '.T.', '.F.')
+      CASE cType == "L"
+         RETURN IIf(xExp, ".T.", ".F.")
 
-      CASE cType == 'N'
+      CASE cType == "N"
          RETURN Str( xExp )
 
-      CASE cType == 'M'
+      CASE cType == "M"
          RETURN xExp
 
-      CASE cType == 'A'
+      CASE cType == "A"
          RETURN "{ Array of " +  LTrim(Str( Len(xExp) )) + " Items }"
 
-      CASE cType == 'B'
-         RETURN '{|| Block }'
+      CASE cType == "B"
+         RETURN "{|| Block }"
 
-      CASE cType == 'O'
+      CASE cType == "O"
          RETURN "{ " + xExp:ClassName() + " Object }"
 
-      CASE cType == 'P'
+      CASE cType == "P"
 #if defined(__XHARBOUR__)
          RETURN NumToHex( xExp )
 #else
          RETURN hb_NumToHex( xExp )
 #endif
 
-      CASE cType == 'H'
+      CASE cType == "H"
          RETURN "{ Hash of " +  LTrim(Str( Len(xExp) )) + " Items }"
 
       OTHERWISE

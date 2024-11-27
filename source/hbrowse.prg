@@ -1357,9 +1357,9 @@ STATIC FUNCTION InitColumn( oBrw, oColumn, n )
    ENDIF
    oColumn:width := 0
    IF oColumn:dec == Nil
-      IF oColumn:Type == "N" .and. At( '.', Str( Eval( oColumn:block,, oBrw, n ) ) ) != 0
+      IF oColumn:Type == "N" .and. At( ".", Str( Eval( oColumn:block,, oBrw, n ) ) ) != 0
          oColumn:dec := Len(SubStr(Str( Eval( oColumn:block,, oBrw, n ) ), ;
-                                     At( '.', Str( Eval( oColumn:block,, oBrw, n ) ) ) + 1))
+                                     At( ".", Str( Eval( oColumn:block,, oBrw, n ) ) ) + 1))
       ELSE
          oColumn:dec := 0
       ENDIF
@@ -2175,19 +2175,19 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
                oPenHdr := HPen():Add(BS_SOLID, 1, 0)
             ENDIF
             SelectObject(hDC, oPenHdr:handle)
-            cStr := oColumn:cGrid + ';'
+            cStr := oColumn:cGrid + ";"
             FOR nLine := 1 TO ::nHeadRows
-               cNWSE := hb_tokenGet( @cStr, nLine, ';' )
-               IF At( 'S', cNWSE ) != 0
+               cNWSE := hb_tokenGet( @cStr, nLine, ";" )
+               IF At( "S", cNWSE ) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ), x + xSize - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
-               IF At( 'N', cNWSE ) != 0
+               IF At( "N", cNWSE ) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ), x + xSize - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ))
                ENDIF
-               IF At( 'E', cNWSE ) != 0
+               IF At( "E", cNWSE ) != 0
                   DrawLine(hDC, x + xSize - 2, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) + 1, x + xSize - 2, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
-               IF At( 'W', cNWSE ) != 0
+               IF At( "W", cNWSE ) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) + 1, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
             NEXT
@@ -2217,10 +2217,10 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
          nMe := IIf(::ShowSortMark .AND. oColumn:SortMark > 0, IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE  ==  DT_LEFT, 18, 0), 0)
          nMd := IIf(::ShowSortMark .AND. oColumn:SortMark > 0, IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE  !=  DT_LEFT, 17, 0), ;
                                                                IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE =  DT_RIGHT, 1, 0))
-         cStr := oColumn:heading + ';'
+         cStr := oColumn:heading + ";"
          FOR nLine := 1 TO ::nHeadRows
             aTxtSize := IIf(nLine = 1, TxtRect( cStr, Self ), aTxtSize)
-            DrawText( hDC, hb_tokenGet( @cStr, nLine, ';' ), ;
+            DrawText( hDC, hb_tokenGet( @cStr, nLine, ";" ), ;
                       x + ::aMargin[4] + 1 + nMe, ;
                       ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) +  ::aMargin[1] + 1, ;
                       x + xSize - ( 2 + ::aMargin[2] + nMd ), ;
@@ -2458,7 +2458,7 @@ METHOD FooterOut( hDC ) CLASS HBrowse
          xSize := Max( ::x2 - x, xSize )
       ENDIF
      IF !oColumn:lHide
-        cStr := oColumn:footing + ';'
+        cStr := oColumn:footing + ";"
         aColorFoot := Nil
         IF oColumn:bColorFoot != Nil
            aColorFoot := Eval( oColumn:bColorFoot, Self )
@@ -2509,7 +2509,7 @@ METHOD FooterOut( hDC ) CLASS HBrowse
         nY := ::y2 - nPixelFooterHeight
 
         FOR nLine := 1 TO ::nFootRows
-            DrawText( hDC, hb_tokenGet( @cStr, nLine, ';' ), ;
+            DrawText( hDC, hb_tokenGet( @cStr, nLine, ";" ), ;
                    x + ::aMargin[4], ;
                    nY + ( nLine - 1 ) * ( ::nFootHeight + 1 ) + 1 + ::aMargin[1], ;
                    x + xSize - ( 1 + ::aMargin[2] ), ;
@@ -3306,7 +3306,7 @@ ELSEIF nLine == 0
       //::aColumns[fif]:bHeadClick != NIL
       ::aColumns[fif]:lHeadClick := .T.
       InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
-     // MSGINFO('C')
+     // MSGINFO("C")
       IF ::aColumns[fif]:bHeadClick != NIL
          ::isMouseOver := .F.
          ::oParent:lSuspendMsgsHandling := .T.
@@ -3703,7 +3703,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                IF oColumn:bClick != NIL
                   IF Type != "D"
                      @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16,::height - 0 ;
-                        TEXT '...'  FONT HFont():Add('MS Sans Serif', 0, -10, 400, , ,) ;
+                        TEXT "..."  FONT HFont():Add("MS Sans Serif", 0, -10, 400, , ,) ;
                         COORDINATES 0, 1, 0, 0      ;
                         ON CLICK {| oColumn, oBtn | HB_SYMBOL_UNUSED(oColumn), ::onClickColumn( .T., oGet, oBtn ) }
                         oBtn:themed :=  ::hTheme != Nil
@@ -4335,7 +4335,7 @@ STATIC FUNCTION HdrToken( cStr, nMaxLen, nCount )
    LOCAL nL, nPos := 0
 
    nMaxLen := nCount := 0
-   cStr += ';'
+   cStr += ";"
 #ifdef __XHARBOUR__
    DO WHILE ( nL := Len(__StrTkPtr( @cStr, @nPos, ";" )) ) != 0
 #else

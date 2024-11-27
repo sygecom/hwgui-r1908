@@ -379,7 +379,7 @@ FUNCTION HdSerial( cDrive )
    LOCAL n       :=  HDGETSERIAL( cDrive )
    LOCAL cHex    :=  HB_NUMTOHEX( n )
    LOCAL cResult
-   cResult := SubStr(cHex, 1, 4) + '-' + SubStr(cHex, 5, 4)
+   cResult := SubStr(cHex, 1, 4) + "-" + SubStr(cHex, 5, 4)
 
    RETURN cResult
 

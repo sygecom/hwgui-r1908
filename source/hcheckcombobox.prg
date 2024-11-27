@@ -374,12 +374,12 @@ METHOD RecalcText() CLASS hCheckComboBox
 
       // If none found, the the ''
       IF Len(strSeparator) == 0
-         strSeparator := ''
+         strSeparator := ""
       ENDIF
 
       strSeparator := RTrim(strSeparator)
 
-      strSeparator += ' '
+      strSeparator += " "
 
       FOR i := 1 TO ncount
 
@@ -470,7 +470,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
 
    ExtTextOut( dc, 0, 0, rcText[1], rcText[2], rcText[3], rcText[4] )
 
-   DrawText( dc, ' ' + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS )
+   DrawText( dc, " " + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS )
 
    IF ( ( hwg_Bitand(drawInfo[9], ODS_FOCUS + ODS_SELECTED) ) == ( ODS_FOCUS + ODS_SELECTED ) )
       DrawFocusRect( dc, rcText )

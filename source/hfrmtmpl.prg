@@ -518,7 +518,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    ENDIF
    IF Lower(Left(cMethod, 11)) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
-      DO WHILE Substr(cMethod, --nPos, 1) <= ' '; ENDDO
+      DO WHILE Substr(cMethod, --nPos, 1) <= " "; ENDDO
       cParam := Alltrim(Substr(Left(cMethod, nPos), 12))
    ENDIF
    IF oForm:lDebug
@@ -948,7 +948,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
       // NANDO
       IF oCtrlTmpl:cClass == "updown"
-         bSetGet := IIf(bSetGet == Nil, '1', bSetGet)
+         bSetGet := IIf(bSetGet == Nil, "1", bSetGet)
       ENDIF
       //
       IF oCtrlTmpl:cClass == "combobox"
@@ -991,7 +991,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             cAliasdbf := Alias()
             temp = StrTran( Upper(fBlock), Alias() + "->", "" )
        //- verificar se tem mais de um campo
-            temp = SubStr(temp, 1, IIf(At( '+', temp ) > 0, At( '+', temp ) - 1, Len(temp)))
+            temp = SubStr(temp, 1, IIf(At( "+", temp ) > 0, At( "+", temp ) - 1, Len(temp)))
             j := {}
             AEval( &cAliasdbf->( ( DBStruct() ) ), { | aField | AAdd(j, aField[1]) } )
             IF m->nLength = Nil
@@ -1038,7 +1038,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             IF !Empty(cKey)
                &( oCtrl:Alias ) ->( DBSetOrder( cKey ) )
                cKey := ( oCtrl:Alias ) ->( ordkey( cKey ) )
-               cKey := IIf(At( '+', cKey ) > 0, Left(cKey, At( '+', cKey ) - 1), cKey)
+               cKey := IIf(At( "+", cKey ) > 0, Left(cKey, At( "+", cKey ) - 1), cKey)
             ENDIF
             cRelexpr := IIf(!Empty(cRelexpr), cRelexpr, cKey)
             IF !Empty(cRelexpr + cLink)
@@ -1064,7 +1064,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             ENDIF
          ELSE
             oCtrl:aArray := caArray  //IIf(TYPE("caArray")="C",&(caArray),caArray)
-            oCtrl:AddColumn( HColumn():New( , { | v, o | IIf(v != Nil, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent]) }, 'C', 100, 0 ) )
+            oCtrl:AddColumn( HColumn():New( , { | v, o | IIf(v != Nil, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent]) }, "C", 100, 0 ) )
          ENDIF
       ENDIF
       IF cVarName != Nil
@@ -1153,9 +1153,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
       IF Len(stroka) > 2
          DO WHILE pos2 > 0
-            DO WHILE SubStr(stroka, pos1, 1) <= ' ' ; pos1 ++ ; ENDDO
-            pos2 := hb_At( ',', stroka, pos1 )
-            AAdd(arr, Trim(SubStr(stroka, pos1, IIf(pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1))))
+            DO WHILE SubStr(stroka, pos1, 1) <= " " ; pos1 ++ ; ENDDO
+            pos2 := hb_At( ",", stroka, pos1 )
+            AAdd(arr, Trim(SubStr(stroka, pos1, IIf(pos2 > 0, pos2 - pos1, hb_At( "}", stroka, pos1 ) - pos1))))
             pos1 := pos2 + 1
          ENDDO
       ENDIF
