@@ -14,7 +14,7 @@ HWGUI r1908 para testes com Harbour e xHarbour 32-bit/64-bit
 | xHarbour  | MinGW32          | ?        | ? | ...   |
 | xHarbour  | MinGW64          | ?        | ? | ...   |
 | xHarbour  | MSVC32           | estável  | ? | ...   |
-| xHarbour  | MSVC64           | ?        | ? | ...   |
+| xHarbour  | MSVC64           | estável  | ? | ...   |
 | xHarbour  | Clang32          | estável  | ? | ...   |
 | xHarbour  | Clang64          | estável  | ? | ...   |
 | xHarbour  | BCC 7.3 32-bit   | estável  | ? | ...   |
