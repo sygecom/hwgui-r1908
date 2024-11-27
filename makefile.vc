@@ -9,7 +9,8 @@ INC_DIR = include
 OBJ_DIR = obj
 LIB_DIR = lib
 SRC_DIR = source
-CFLAGS = /W3 /nologo /DHWG_USE_POINTER_ITEM
+CFLAGS = /W3 /nologo
+# /DHWG_USE_POINTER_ITEM
 
 HWGUI_OBJ_DIR      = $(OBJ_DIR)
 PROCMISC_OBJ_DIR   = $(OBJ_DIR)
