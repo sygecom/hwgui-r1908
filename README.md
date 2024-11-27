@@ -20,7 +20,7 @@ HWGUI r1908 para testes com Harbour e xHarbour 32-bit/64-bit
 | xHarbour  | BCC 7.3 32-bit   | estável  | ? | ...   |
 | xHarbour  | BCC 7.3 64-bit   | estável  | ? | ...   |
 | xHarbour  | BCC 7.7 32-bit   | ?        | ? | ...   |
-| xHarbour  | BCC 7.7 64-bit   | instável | ? | ...   |
+| xHarbour  | BCC 7.7 64-bit   | estável  | ? | ...   |
 | Harbour++ | MinGW32          | estável  | ? | ...   |
 | Harbour++ | MinGW64          | estável  | ? | requer flag -fpermissive |
 | Harbour++ | MSVC32           | estável  | ? | ... |
@@ -39,10 +39,17 @@ Problemas na compilação ou na utilização podem ser informados na seção
 
 ## Problemas conhecidos
 
-xHarbour com BCC64 7.7  
+xHarbour com BCC64 7.7 [RESOLVIDO]  
 Esta combinação apresenta instabilidade no acesso à estrutura DRAWITEMSTRUCT, utilizada na mensagem
 WM_DRAWITEM. Embora funcione corretamente com outros compiladores, não funciona quando se trata desta
 versão específica do BCC64. A solução, por enquanto, seria evitar esta combinação.
+
+xHarbour com MSVC 2022 32-bit/64-bit  
+Foi necessário o uso de /FORCE para gerar o executável, por causa da duplicidade abaixo:  
+```
+rtl.lib(math.obj) : warning LNK4006: _matherr já definido no LIBCMT.lib(matherr.obj); segunda definição ignorada
+```
+Mas os testes funcionaram corretamente e de forma estável.
 
 # Notas
 
