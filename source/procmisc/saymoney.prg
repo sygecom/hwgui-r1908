@@ -207,18 +207,18 @@ RETURN (xSay)
 
 FUNCTION SayRupiah(nAngka)
 
- LOCAL n, kata, kalimat:=IF(nAngka<0,"Minus ","")
+ LOCAL n, kata, kalimat:=IIf(nAngka<0,"Minus ","")
  LOCAL char := strtran(str(ABS(INT(nAngka)),15)," ","0")
 
   FOR n:=1 to 5
     kalimat +=  tigades(subs(char,n*3-2,3),n)
-    kata    :=  iif(subs(char,n*3-2,3)=="000","",PECAHAN[n])
+    kata    :=  IIf(subs(char,n*3-2,3)=="000","",PECAHAN[n])
     kalimat +=  kata
   NEXT
 
    char:="0"+Right(STR(nAngka,18,2), 2)
 
-   kalimat+=IF(char != "000"," koma "+tigades(char,1)+"sen","")
+   kalimat+=IIf(char != "000"," koma "+tigades(char,1)+"sen","")
 
  RETURN (kalimat)
 
@@ -256,6 +256,6 @@ STATIC FUNCTION tigades( mvc, n)    // created: 28 mei 1993
                     "DELAPAN","SEMBILAN" }
 
 STATIC FUNCTION  bil(x)
- RETURN    iif( x != "0", bil_asli[val(x)]+" ","")
+ RETURN    IIf(x != "0", bil_asli[val(x)]+" ","")
 
 // eof SayRupiah

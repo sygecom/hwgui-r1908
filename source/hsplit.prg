@@ -47,10 +47,10 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
 
    ::title   := ""
    
-   ::aLeft   := IIf( aLeft == Nil, {}, aLeft )
-   ::aRight  := IIf( aRight == Nil, {}, aRight )
+   ::aLeft   := IIf(aLeft == Nil, {}, aLeft)
+   ::aRight  := IIf(aRight == Nil, {}, aRight)
    ::lVertical := ( ::nHeight > ::nWidth )
-   ::lScrolling := Iif( lScrolling == Nil, .F., lScrolling )
+   ::lScrolling := Iif(lScrolling == Nil, .F., lScrolling)
    IF ( lTransp != NIL .AND. lTransp )
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
@@ -84,7 +84,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == Nil
-         ::hCursor := LoadCursor( IIf( ::lVertical, IDC_SIZEWE, IDC_SIZENS ) )
+         ::hCursor := LoadCursor( IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS) )
       ENDIF
       Hwg_SetCursor( ::hCursor )
       IF ::lCaptured
@@ -125,10 +125,10 @@ METHOD Paint() CLASS HSplitter
    hDC := BeginPaint( ::handle, pps )
    aCoors := GetClientRect(::handle)
 
-   x1 := aCoors[1] //+ IIf( ::lVertical, 1, 2 )
-   y1 := aCoors[2] //+ IIf( ::lVertical, 2, 1 )
-   x2 := aCoors[3] //- IIf( ::lVertical, 0, 3 )
-   y2 := aCoors[4] //- IIf( ::lVertical, 3, 0 )
+   x1 := aCoors[1] //+ IIf(::lVertical, 1, 2)
+   y1 := aCoors[2] //+ IIf(::lVertical, 2, 1)
+   x2 := aCoors[3] //- IIf(::lVertical, 0, 3)
+   y2 := aCoors[4] //- IIf(::lVertical, 3, 0)
 
    SetBkMode(hDC, ::backStyle)
    IF hb_IsBlock(::bPaint)
@@ -137,13 +137,13 @@ METHOD Paint() CLASS HSplitter
       IF ::lCaptured
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
          SelectObject(hDC, oBrushFill:handle)
-         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, Iif( ::lVertical,BF_RECT,BF_TOP ) + BF_MIDDLE)
+         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP) + BF_MIDDLE)
          FillRect( hDC, x1, y1, x2, y2, oBrushFill:handle )
       ELSEIF ::BackStyle = OPAQUE
-         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf( ::lVertical, BF_LEFT, BF_TOP ))
+         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
       ENDIF
    ELSEIF !::lMoved .AND. ::BackStyle = OPAQUE
-      DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, Iif( ::lVertical,BF_RECT,BF_TOP )) //+ BF_MIDDLE)
+      DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP)) //+ BF_MIDDLE)
    ENDIF
    EndPaint( ::handle, pps )
 
@@ -174,7 +174,7 @@ METHOD Drag( lParam ) CLASS HSplitter
 METHOD DragAll( lScroll ) CLASS HSplitter
    LOCAL i, oCtrl, xDiff := 0, yDiff := 0
 
-   lScroll := IIF(  Len(::aLeft) = 0 .OR. Len(::aRight) = 0, .F., lScroll )
+   lScroll := IIf(Len(::aLeft) = 0 .OR. Len(::aRight) = 0, .F., lScroll)
 
    FOR i := 1 TO Len(::aRight)
       oCtrl := ::aRight[i]

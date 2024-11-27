@@ -74,7 +74,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
                bValid, acheck, nDisplay, nhItem, ncWidth ) CLASS hCheckComboBox
 
-   ::acheck := Iif( acheck == Nil, {}, acheck )
+   ::acheck := IIf(acheck == Nil, {}, acheck)
    IF hb_IsNumeric(nStyle)
       nStyle := hwg_multibitor( nStyle, CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS )
    ELSE
@@ -139,7 +139,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
       ENDIF
       IF ( ::GetParentForm( Self ) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm( Self ) :lModal )
          IF wParam = VK_TAB
-            GetSkip(::oParent, ::handle,, Iif( IsCtrlShift( .F., .T. ), -1, 1) )
+            GetSkip(::oParent, ::handle,, IIf(IsCtrlShift( .F., .T. ), -1, 1) )
             RETURN 0
          ELSEIF wParam == VK_RETURN
             GetSkip(::oParent, ::handle, , 1)
@@ -334,7 +334,7 @@ METHOD GetCheck( nIndex ) CLASS hCheckComboBox
 
    LOCAL l := COMBOBOXGETITEMDATA(::handle, nIndex - 1)
 
-RETURN IF( l == 1, .T., .F. )
+RETURN IIf(l == 1, .T., .F.)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -523,7 +523,7 @@ METHOD OnGetText( wParam, lParam ) CLASS hCheckComboBox
    // Copy the 'fake' window text
    copydata(lParam, ::m_strText, wParam)
 
-RETURN Iif( Empty(::m_strText), 0, Len(::m_strText) )
+RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -534,7 +534,7 @@ METHOD OnGetTextLength( WPARAM, LPARAM ) CLASS hCheckComboBox
 
    ::RecalcText()
 
-RETURN Iif( Empty(::m_strText), 0, Len(::m_strText) )
+RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
 //-------------------------------------------------------------------------------------------------------------------//
 

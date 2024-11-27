@@ -59,8 +59,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
 
    DEFAULT  lvert  TO .F.
    ::lvert := lvert
-   nStyle   := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
-                          WS_VISIBLE + WS_CHILD + IF( lvert, PGS_VERT, PGS_HORZ ) )
+   nStyle   := Hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), ;
+                          WS_VISIBLE + WS_CHILD + IIf(lvert, PGS_VERT, PGS_HORZ) )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
    HWG_InitCommonControlsEx()
@@ -92,7 +92,7 @@ METHOD Activate() CLASS HPager
    IF !Empty(::oParent:handle)
 
       ::handle := CREATEPAGER( ::oParent:handle, ::id, ;
-                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, IF( ::lVert, PGS_VERT, PGS_HORZ ) )
+                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, IIf(::lVert, PGS_VERT, PGS_HORZ) )
 
       ::Init()
    ENDIF

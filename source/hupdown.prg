@@ -51,7 +51,7 @@ CLASS HUpDown INHERIT HControl
    METHOD SetValue(nValue)
    METHOD Value(Value) SETGET
    METHOD Refresh()
-   METHOD SetColor(tColor, bColor, lRedraw) INLINE ::super:SetColor(tColor, bColor, lRedraw ), IIF( ::oEditUpDown != Nil, ;
+   METHOD SetColor(tColor, bColor, lRedraw) INLINE ::super:SetColor(tColor, bColor, lRedraw ), IIf(::oEditUpDown != Nil, ;
                                              ::oEditUpDown:SetColor(tColor, bColor, lRedraw),)
    METHOD DisableBackColor(DisableBColor) SETGET
    METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown) )
@@ -62,9 +62,9 @@ CLASS HUpDown INHERIT HControl
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + GetClientRect( ::hwndUpDown )[3] - 1
-                              ::Super:Move(x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint) ,;
+                              ::Super:Move(x1, y1 , IIf(width != Nil, width, ::nWidth), height, nRepaint) ,;
                               SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
-                              IIF( ::lHide, ::Hide(), ::Show() )
+                              IIf(::lHide, ::Hide(), ::Show())
 
 ENDCLASS
 
@@ -75,14 +75,14 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    HB_SYMBOL_UNUSED(bOther)
 
-   nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP + IIf( lNoBorder == Nil.OR. !lNoBorder, WS_BORDER, 0 ) )
+   nStyle := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == Nil.OR. !lNoBorder, WS_BORDER, 0) )
 
    IF !hb_IsNumeric(vari)
       vari := 0
       Eval( bSetGet,vari )
    ENDIF
    IF bSetGet = Nil
-      bSetGet := {| v | IIF( v == Nil, ::nValue, ::nValue := v ) }
+      bSetGet := {| v | IIf(v == Nil, ::nValue, ::nValue := v) }
    ENDIF
 
    ::nValue := Vari
@@ -94,7 +94,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    ::idUpDown := ::id //::NewId()
 
-   ::Increment := IIF( nIncr = Nil, 1, nIncr )
+   ::Increment := IIf(nIncr = Nil, 1, nIncr)
    ::styleUpDown := UDS_ALIGNRIGHT  + UDS_ARROWKEYS + UDS_NOTHOUSANDS //+ UDS_SETBUDDYINT //+ UDS_HORZ
    IF nLower != Nil
       ::nLower := nLower
@@ -107,7 +107,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ::nUpDownWidth := nUpDWidth
    ENDIF
    ::nMaxLength :=  nMaxLength //= Nil, 4, nMaxLength )
-   ::cPicture := IIF( cPicture = Nil, Replicate("9", 4), cPicture )
+   ::cPicture := IIf(cPicture = Nil, Replicate("9", 4), cPicture)
    ::lNoBorder := lNoBorder
    ::bkeydown := bkeydown
    ::bchange  := bchange
@@ -198,8 +198,8 @@ METHOD DisableBackColor(DisableBColor) CLASS HUpDown
 
 METHOD SetRange(nLower, nUpper) CLASS HUpDown
    
-   ::nLower := IIF( nLower != Nil, nLower, ::nLower )
-   ::nUpper := IIF( nUpper != Nil, nUpper, ::nUpper )
+   ::nLower := IIf(nLower != Nil, nLower, ::nLower)
+   ::nUpper := IIf(nUpper != Nil, nUpper, ::nUpper)
    SETRANGEUPDOWN( ::nLower, ::nUpper )
 
    RETURN Nil
@@ -259,7 +259,7 @@ METHOD Valid() CLASS HUpDown
    */
    res :=  ::nValue <= ::nUpper .and. ::nValue >= ::nLower
    IF !res
-      ::nValue := IIF( ::nValue > ::nUpper, Min( ::nValue, ::nUpper ), Max( ::nValue, ::nLower ) )
+      ::nValue := IIf(::nValue > ::nUpper, Min( ::nValue, ::nUpper ), Max( ::nValue, ::nLower ))
       ::SetValue(::nValue)
       ::oEditUpDown:Refresh()
       SendMessage(::oEditUpDown:handle, EM_SETSEL, 0, -1)
@@ -295,7 +295,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
    Local iDelta := GETNOTIFYDELTAPOS( lParam , 2 )
    Local vari, res
 
-   //iDelta := IIF( iDelta < 0, 1, - 1) // IIF( ::oParent:oParent = Nil , - 1 , 1 )
+   //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent = Nil , - 1 , 1)
 
      IF ::oUpDown = Nil .OR. Hwg_BitAnd(GetWindowLong( ::handle, GWL_STYLE ), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
@@ -311,7 +311,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
        RETURN 0
    ENDIF
    vari :=  vari + ( ::oUpDown:Increment * idelta )
-   ::Title := Transform( vari , ::cPicFunc + IIf( Empty(::cPicFunc), "", " " ) + ::cPicMask )
+   ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
    SetDlgItemText( ::oParent:handle, ::id, ::title )
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
@@ -338,7 +338,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
 
    vari := ::Value
    IF ::bSetGet != Nil  .AND. ::title != Nil
-      ::Title := Transform( vari , ::cPicFunc + IIf( Empty(::cPicFunc), "", " " ) + ::cPicMask )
+      ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
    ENDIF
    SetDlgItemText( ::oParent:handle, ::id, ::title )
 
@@ -374,7 +374,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
             nUpDWidth, nLower, nUpper ) CLASS HUpDown
 
-   nStyle   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP + WS_BORDER + ES_RIGHT )
+   nStyle   := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
 
@@ -449,7 +449,7 @@ METHOD OnEvent( msg, wParam, lParam ) CLASS HUpDown
    ENDIF
    IF msg == WM_CHAR
       IF wParam = VK_TAB
-          GetSkip(::oParent, ::handle, , iif( IsCtrlShift(.F., .T.), -1, 1))
+          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
           RETURN 0
       ELSEIF wParam == VK_RETURN
           GetSkip(::oParent, ::handle, , 1)
@@ -511,7 +511,7 @@ STATIC FUNCTION __Valid(oCtrl)
    IF !CheckFocus( oCtrl, .T. )  .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
-   nSkip := IIf( GetKeyState(VK_SHIFT) < 0 , - 1, 1 )
+   nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)
    oCtrl:title := GetEditText( oCtrl:oParent:handle, oCtrl:id )
    oCtrl:value := Val( LTrim(oCtrl:title) )
    IF oCtrl:bSetGet != Nil
@@ -522,8 +522,8 @@ STATIC FUNCTION __Valid(oCtrl)
    oDlg := ParentGetDialog( oCtrl )
    IF oCtrl:bLostFocus != Nil
       res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl )
-      res := IIf( res, oCtrl:value <= oCtrl:nUpper .and. ;
-                  oCtrl:value >= oCtrl:nLower , res )
+      res := IIf(res, oCtrl:value <= oCtrl:nUpper .and. ;
+                  oCtrl:value >= oCtrl:nLower , res)
       IF !res
          SetFocus( oCtrl:handle )
          IF oDlg != Nil

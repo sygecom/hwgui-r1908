@@ -43,7 +43,7 @@ METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
               bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
-              IIf( tcolor == Nil, Vcolor("FFFFFF"), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
+              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
 
    ::aValues := aValues
    ::nType   := 1
@@ -58,7 +58,7 @@ METHOD Redefine(oWndParent, nId, aValues, oFont, ;
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
               bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
-              IIf( tcolor == Nil, Vcolor("FFFFFF"), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
+              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
 
    ::aValues := aValues
 

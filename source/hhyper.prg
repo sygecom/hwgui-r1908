@@ -81,8 +81,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    LOCAL oPrevFont
    
    nStyle := Hwg_BitOR( nStyle, SS_NOTIFY + SS_RIGHT  )
-   ::lAllUnderline := IIF( Empty(cLink), .F., ::lAllUnderline )
-   ::title := IIF(cCaption != Nil,cCaption ,"HWGUI HomePage")
+   ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
+   ::title := IIf(cCaption != Nil,cCaption ,"HWGUI HomePage")
    ::hbitmap := hbitmap
 
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
@@ -97,7 +97,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    ::m_sVisitedColor := vColor
 
    ::state := LBL_INIT
-   ::title := IIf( cCaption == Nil, "", cCaption )
+   ::title := IIf(cCaption == Nil, "", cCaption)
 
    // Test The Font the underline must be 1
    IF ::oFont == NIL
@@ -105,7 +105,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
          ::oFont := HFONT():Add(::oParent:oFont:name, ::oParent:oFont:width, ::oParent:oFont:height, ;
                                  ::oParent:oFont:weight, ::oParent:oFont:charset, ::oParent:oFont:italic, 1, ::oParent:oFont:StrikeOut)
       ELSE
-         ::oFont := HFONT():Add("Arial", 0, - 12, , , , IIF( ::lAllUnderline, 1, ),)
+         ::oFont := HFONT():Add("Arial", 0, - 12, , , , IIf(::lAllUnderline, 1, ),)
       ENDIF
    ELSE
       IF ::oFont:Underline  == 0 .AND. ::lAllUnderline
@@ -354,7 +354,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    //LOCAL POLDFONT
    //LOCAL DWSTYLE
    LOCAL bHasTitle
-   LOCAL aBmpSize := IIF(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
+   LOCAL aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
    LOCAL itemRect := copyrect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
    LOCAL captionRect := {drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]}
    LOCAL bmpRect
@@ -374,11 +374,11 @@ METHOD Paint(lpDis) CLASS HStaticLink
       ELSE
          DrawBitmap(dc, ::hbitmap, , bmpRect[1], bmpRect[2])
       ENDIF
-      rcclient[1] +=  IIF( ::iStyle = ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1 )
+      rcclient[1] +=  IIf(::iStyle = ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
    ENDIF
    SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
-       SetBkColor(DC, IIF( ::bColor = NIL, GetSysColor(COLOR_3DFACE), ::bcolor ))
+       SetBkColor(DC, IIf(::bColor = NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
        FillRect( dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4] ) //, ::brush:handle )
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
@@ -423,12 +423,12 @@ METHOD Resize(x, y) CLASS HStaticLink
       RETURN Nil
    ENDIF
 
-   x := iif( x == Nil, 0, x - ::nWidth + 1 )
-   aBmpSize := IIF( !Empty(::hbitmap), GetBitmapSize(::hbitmap), { 0,0 } )
-   aBmpSize[1] += IIF( aBmpSize[1] > 0, 6, 0 )
+   x := IIf(x == Nil, 0, x - ::nWidth + 1)
+   aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), { 0,0 })
+   aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
    aTxtSize := TxtRect( ::Title, Self )
-   aTxtSize[2] += IIF( ::lAllUnderline, 0, 3 )
+   aTxtSize[2] += IIf(::lAllUnderline, 0, 3)
    IF aTxtSize[1] + 1  <  ::nWidth - aBmpSize[1] //tava 20
       ::nHeight := aTxtSize[2] + 2
    ELSE

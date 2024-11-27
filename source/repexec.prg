@@ -99,7 +99,7 @@ FUNCTION OpenReport( fname, repName )
                   EXIT
                ENDIF
             ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
-               AAdd(aPaintRep[FORM_ITEMS], { IIf( itemName == "HLINE", 2, IIf( itemName == "VLINE", 3, 4 ) ), ;
+               AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName == "HLINE", 2, IIf(itemName == "VLINE", 3, 4)), ;
                                                 "", Val( NextItem( stroka ) ), ;
                                                 Val( NextItem( stroka ) ), Val( NextItem( stroka ) ), ;
                                                 Val( NextItem( stroka ) ), 0, NextItem( stroka ), 0, 0, 0, Nil, 0 })
@@ -180,7 +180,7 @@ FUNCTION RecalcForm( aPaintRep, nFormWidth )
    RETURN Nil
 
 FUNCTION PrintReport( printerName, oPrn, lPreview )
-   LOCAL oPrinter := IIf( oPrn != Nil, oPrn, HPrinter():New( printerName ) )
+   LOCAL oPrinter := IIf(oPrn != Nil, oPrn, HPrinter():New( printerName ))
    LOCAL aPrnCoors, prnXCoef, prnYCoef
    LOCAL iItem, aItem, nLineStartY := 0, nLineHeight := 0, nPHStart := 0
    LOCAL iPH := 0, iSL := 0, iEL := 0, iPF := 0, iEPF := 0, iDF := 0
@@ -293,7 +293,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
                   aItem[ITEM_STATE] := 1
                   FOR i := 1 TO iPH - 1
                      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                        PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+                        PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
                      ENDIF
                   NEXT
                ENDIF
@@ -302,7 +302,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
                   // IF iPH == 0
                   FOR i := 1 TO iSL - 1
                      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                        PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+                        PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
                      ENDIF
                   NEXT
                   // ENDIF
@@ -327,7 +327,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
             ELSEIF aItem[ITEM_CAPTION] == "EL"
                FOR i := iSL + 1 TO iEL - 1
                   IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                     PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+                     PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
                   ENDIF
                NEXT
                IF !ScriptExecute(aItem)
@@ -354,7 +354,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
                            oPrinter:EndPage()
                            oPrinter:StartPage()
                         #endif
-                        nYadd := 10 - IIf( nPHStart > 0, nPHStart, nLineStartY )
+                        nYadd := 10 - IIf(nPHStart > 0, nPHStart, nLineStartY)
                         lAddMode := .T.
                         IF iPH == 0
                            iItem := iSL
@@ -373,7 +373,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
             ELSEIF aItem[ITEM_CAPTION] == "EPF"
                FOR i := iPF + 1 TO iEPF - 1
                   IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                     PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+                     PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
                   ENDIF
                NEXT
                IF !lLastCycle
@@ -384,7 +384,7 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
                      oPrinter:EndPage()
                      oPrinter:StartPage()
                   #endif
-                  nYadd := 10 - IIf( nPHStart > 0, nPHStart, nLineStartY )
+                  nYadd := 10 - IIf(nPHStart > 0, nPHStart, nLineStartY)
                   lAddMode := .T.
                   IF iPH == 0
                      iItem := iSL
@@ -412,14 +412,14 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
                ENDIF
             ENDIF
             IF aItem[ITEM_TYPE] != TYPE_BITMAP
-               PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+               PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
             ENDIF
          ENDIF
          iItem ++
       ENDDO
-      FOR i := IIf( iSL == 0, 1, IIf( iDF > 0, iDF + 1, IIf( iPF > 0, iEPF + 1, iEL + 1 ) ) ) TO Len(aPaintRep[FORM_ITEMS])
+      FOR i := IIf(iSL == 0, 1, IIf(iDF > 0, iDF + 1, IIf(iPF > 0, iEPF + 1, iEL + 1))) TO Len(aPaintRep[FORM_ITEMS])
          IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-            PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf( lAddMode, nYadd, 0 ), .T. )
+            PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T. )
          ENDIF
       NEXT
       IF lFinish
@@ -456,7 +456,7 @@ FUNCTION PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc
 
    x2 := x1 + aItem[ITEM_WIDTH] - 1
    y2 := y1 + aItem[ITEM_HEIGHT] - 1
-   // writelog( Str(aItem[ITEM_TYPE])+": "+Iif(aItem[ITEM_TYPE]==TYPE_TEXT,aItem[ITEM_CAPTION],"")+str(x1)+str(y1)+str(x2)+str(y2) )
+   // writelog( Str(aItem[ITEM_TYPE])+": "+IIf(aItem[ITEM_TYPE]==TYPE_TEXT,aItem[ITEM_CAPTION],"")+str(x1)+str(y1)+str(x2)+str(y2) )
    x1 := Round(x1 * prnXCoef, 0)
    y1 := Round(y1 * prnYCoef, 0)
    x2 := Round(x2 * prnXCoef, 0)
@@ -464,18 +464,18 @@ FUNCTION PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc
    // writelog( "PrintItem-2: "+str(x1)+str(y1)+str(x2)+str(y2))
 
    #ifdef __DEBUG__
-      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+Iif(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+Iif(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
+      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
    #else
-      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+Iif(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+Iif(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
+      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          IF aItem[ITEM_VAR] > 0
-            stroka := IIf( lCalc, &( aItem[ITEM_CAPTION] ), "" )
+            stroka := IIf(lCalc, &( aItem[ITEM_CAPTION] ), "")
          ELSE
             stroka := aItem[ITEM_CAPTION]
          ENDIF
          IF !Empty(aItem[ITEM_CAPTION])
             oPrinter:Say( stroka, x1, y1, x2, y2, ;
-                          IIf( aItem[ITEM_ALIGN] == 0, DT_LEFT, IIf( aItem[ITEM_ALIGN] == 1, DT_RIGHT, DT_CENTER ) ), ;
+                          IIf(aItem[ITEM_ALIGN] == 0, DT_LEFT, IIf(aItem[ITEM_ALIGN] == 1, DT_RIGHT, DT_CENTER)), ;
                           aItem[ITEM_STATE] )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE

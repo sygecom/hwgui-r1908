@@ -120,7 +120,7 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
    ::Title    := cTitle
    ::bAction  := bAction
    ::bClick   := bClick
-   ::lChecked := IIF( lChecked = Nil, .F., lChecked )
+   ::lChecked := IIf(lChecked = Nil, .F., lChecked)
 
    IF aImages == Nil
       IF oTree:Image1 != Nil
@@ -134,7 +134,7 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
          cImage := Upper(aImages[i])
          IF ( h := AScan( oTree:aImages, cImage ) ) == 0
             AAdd(oTree:aImages, cImage)
-            aImages[i] := IIf( oTree:Type, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]) )
+            aImages[i] := IIf(oTree:Type, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
             Imagelist_Add(oTree:himl, aImages[i])
             h := Len(oTree:aImages)
          ENDIF
@@ -150,9 +150,9 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
       im2 := im1
    ENDIF
 
-   nPos := IIf( oPrev == Nil, 2, 0 )
+   nPos := IIf(oPrev == Nil, 2, 0)
    IF oPrev == Nil .AND. oNext != Nil
-      op := IIf( oNext:oParent == Nil, oNext:oTree, oNext:oParent )
+      op := IIf(oNext:oParent == Nil, oNext:oTree, oNext:oParent)
       FOR i := 1 TO Len(op:aItems)
          IF op:aItems[i]:handle == oNext:handle
             EXIT
@@ -166,10 +166,10 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
       ENDIF
    ENDIF
    ::handle := TreeAddNode(Self, oTree:handle,               ;
-                            IIf( oParent == Nil, Nil, oParent:handle ), ;
-                            IIf( oPrev == Nil, Nil, oPrev:handle ), nPos, cTitle, im1, im2)
+                            IIf(oParent == Nil, Nil, oParent:handle), ;
+                            IIf(oPrev == Nil, Nil, oPrev:handle), nPos, cTitle, im1, im2)
 
-   aItems := IIf( oParent == Nil, oTree:aItems, oParent:aItems )
+   aItems := IIf(oParent == Nil, oTree:aItems, oParent:aItems)
    IF nPos == 2
       AAdd(aItems, Self)
    ELSEIF nPos == 1
@@ -210,7 +210,7 @@ METHOD Delete(lInternal) CLASS HTreeNode
    tree_ReleaseNode(::oTree:handle, ::handle)
    SendMessage(::oTree:handle, TVM_DELETEITEM, 0, ::handle)
    IF lInternal == Nil
-      aItems := IIf( ::oParent == Nil, ::oTree:aItems, ::oParent:aItems )
+      aItems := IIf(::oParent == Nil, ::oTree:aItems, ::oParent:aItems)
       j := AScan( aItems, { | o | o:handle == h } )
       ADel( aItems, j )
       ASize(aItems, Len(aItems) - 1)
@@ -236,7 +236,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
    LOCAL state
 
    IF lChecked != NIL
-      TreeSetItem( ::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIF( lChecked, 2, 1 ) )
+      TreeSetItem( ::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1) )
       ::lChecked := lChecked
    ELSE
       state =  SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
@@ -247,7 +247,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
 METHOD GetLevel( h ) CLASS HTreeNode
    LOCAL iLevel := 1
    
-   LOCAL oNode := IIF( Empty(h), Self, h )
+   LOCAL oNode := IIf(Empty(h), Self, h)
    DO WHILE ( oNode:oParent ) != Nil 
        oNode := oNode:oParent
        iLevel ++
@@ -279,7 +279,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages)
    METHOD FindChild(h)
    METHOD FindChildPos( oNode, h )
-   METHOD GetSelected() INLINE IIF( hb_IsObject(::oItem := TreeGetSelected(::handle)), ::oItem, Nil )
+   METHOD GetSelected() INLINE IIf(hb_IsObject(::oItem := TreeGetSelected(::handle)), ::oItem, Nil)
    METHOD EditLabel( oNode ) BLOCK { | Self, o | SendMessage(::handle, TVM_EDITLABEL, 0, o:handle) }
    METHOD Expand(oNode, lAllNode)   //BLOCK { | Self, o | SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
    METHOD Select( oNode ) BLOCK { | Self, o | SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle) }
@@ -291,8 +291,8 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD ItemHeight( nHeight ) SETGET
    METHOD SearchString( cText, iNivel, oNode, inodo )
    METHOD Selecteds( oItem, aSels )
-   METHOD Top() INLINE IIF( !Empty(::aItems), ( ::Select( ::aItems[1] ), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_TOP), NIL) ), )
-   METHOD Bottom() INLINE IIF( !Empty(::aItems), ( ::Select( ::aItems[Len(::aItems)] ), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_BOTTOM), NIL) ),)
+   METHOD Top() INLINE IIf(!Empty(::aItems), ( ::Select( ::aItems[1] ), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_TOP), NIL) ), )
+   METHOD Bottom() INLINE IIf(!Empty(::aItems), ( ::Select( ::aItems[Len(::aItems)] ), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_BOTTOM), NIL) ),)
 
 ENDCLASS
 
@@ -301,15 +301,15 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
    LOCAL i, aBmpSize
 
 
-   lEditLabels := IIf( lEditLabels == Nil, .F., lEditLabels )
-   lCheckBox   := IIf( lCheckBox == Nil, .F., lCheckBox )
-   lDragDrop   := IIf( lDragDrop == Nil, .F., lDragDrop )
+   lEditLabels := IIf(lEditLabels == Nil, .F., lEditLabels)
+   lCheckBox   := IIf(lCheckBox == Nil, .F., lCheckBox)
+   lDragDrop   := IIf(lDragDrop == Nil, .F., lDragDrop)
 
-   nStyle   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP  + TVS_FULLROWSELECT + TVS_TRACKSELECT+; //TVS_HASLINES +  ;
+   nStyle   := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP  + TVS_FULLROWSELECT + TVS_TRACKSELECT+; //TVS_HASLINES +  ;
                             TVS_LINESATROOT + TVS_HASBUTTONS  + TVS_SHOWSELALWAYS + ;
-                          IIf( lEditLabels == Nil.OR. !lEditLabels, 0, TVS_EDITLABELS ) +;
-                          IIf( lCheckBox == Nil.OR. !lCheckBox, 0, TVS_CHECKBOXES ) +;
-                          IIF( !lDragDrop, TVS_DISABLEDRAGDROP, 0 ) )
+                          IIf(lEditLabels == Nil.OR. !lEditLabels, 0, TVS_EDITLABELS) +;
+                          IIf(lCheckBox == Nil.OR. !lCheckBox, 0, TVS_CHECKBOXES) +;
+                          IIf(!lDragDrop, TVS_DISABLEDRAGDROP, 0) )
 
    ::sTyle := nStyle
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
@@ -320,7 +320,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
    ::lDragDrop   :=  lDragDrop
 
    ::title   := ""
-   ::Type    := IIf( lResour == Nil, .F., lResour )
+   ::Type    := IIf(lResour == Nil, .F., lResour)
    ::bAction := bAction
    ::bRClick := bRClick
    ::bDblClick := bDblClick
@@ -333,7 +333,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
       ::aImages := {}
       FOR i := 1 TO Len(aImages)
          AAdd(::aImages, Upper(aImages[i]))
-         aImages[i] := IIf( lResour != NIL.and.lResour, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]) )
+         aImages[i] := IIf(lResour != NIL.and.lResour, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
       NEXT
       aBmpSize := GetBitmapSize(aImages[1])
       ::himl := CreateImageList( aImages, aBmpSize[1], aBmpSize[2], 12, nBC )
@@ -402,7 +402,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HTree
 
       IF hb_IsBlock(::bDrag)
          nEval :=  Eval( ::bDrag, Self, ::hitemDrag, ::hitemDrop )
-         nEval := IIF( hb_IsLogical(nEval), nEval, .T. )
+         nEval := IIf(hb_IsLogical(nEval), nEval, .T.)
          IF !nEval
             RETURN 0
          ENDIF
@@ -478,7 +478,7 @@ METHOD FindChild(h) CLASS HTree
    RETURN Nil
 
 METHOD FindChildPos( oNode, h ) CLASS HTree
-   LOCAL aItems := IIF( oNode = Nil, ::aItems, oNode:aItems )
+   LOCAL aItems := IIf(oNode = Nil, ::aItems, oNode:aItems)
    LOCAL  i, alen := Len(aItems)
 
    FOR i := 1 TO alen
@@ -491,11 +491,11 @@ METHOD FindChildPos( oNode, h ) CLASS HTree
    RETURN 0
 
 METHOD SearchString( cText, iNivel, oNode, inodo ) CLASS HTree
-   LOCAL aItems := IIF( oNode = Nil, ::aItems, oNode:aItems )
+   LOCAL aItems := IIf(oNode = Nil, ::aItems, oNode:aItems)
    Local  i , alen := Len(aItems)
    LOCAL oNodeRet
    
-   iNodo := IIF( inodo = Nil, 0, iNodo )
+   iNodo := IIf(inodo = Nil, 0, iNodo)
    FOR i := 1 TO aLen
       IF !Empty(aItems[i]:aItems) .AND. ;
          ( oNodeRet := ::SearchString( cText, iNivel, aItems[i], iNodo ) ) != Nil 
@@ -579,9 +579,9 @@ METHOD Notify( lParam ) CLASS HTree
       oItem := Tree_GetNotify( lParam, TREE_GETNOTIFY_PARAM )
       IF hb_IsObject(oItem)
          IF ::bExpand != Nil
-            RETURN IIf( Eval( oItem:oTree:bExpand, oItem, ;
+            RETURN IIf(Eval( oItem:oTree:bExpand, oItem, ;
                               CheckBit( Tree_GetNotify( lParam, TREE_GETNOTIFY_ACTION ), TVE_EXPAND ) ), ;
-                        0, 1 )
+                        0, 1)
          ENDIF
       ENDIF
 
@@ -607,7 +607,7 @@ METHOD Notify( lParam ) CLASS HTree
             lEval := Eval( ::bCheck, !::oItem:checked, ::oItem, Self )
          ENDIF
          IF lEval == Nil .OR. !Empty(lEval)
-            MarkCheckTree(::oItem, IIF( ::oItem:checked, 1, 2 ))
+            MarkCheckTree(::oItem, IIf(::oItem:checked, 1, 2))
             RETURN 0   
          ENDIF
          RETURN 1   
@@ -637,7 +637,7 @@ METHOD Notify( lParam ) CLASS HTree
          lEval := Eval( ::bCheck, !::oItem:checked, ::oItem, Self )
       ENDIF
       IF lEval == Nil .OR. !Empty(lEval)
-         MarkCheckTree(::oItem, IIF( ::oItem:checked, 1, 2 ))
+         MarkCheckTree(::oItem, IIf(::oItem:checked, 1, 2))
       ELSE
          RETURN 1
       ENDIF
@@ -651,9 +651,9 @@ METHOD Notify( lParam ) CLASS HTree
 
 METHOD Selecteds( oItem, aSels ) CLASS HTree
    LOCAL i, iLen
-   LOCAL aSelecteds := IIF( aSels = Nil, {}, aSels )
+   LOCAL aSelecteds := IIf(aSels = Nil, {}, aSels)
    
-   oItem := IIF( oItem = Nil, Self, oItem )
+   oItem := IIf(oItem = Nil, Self, oItem)
    iLen :=  Len(oItem:aitems)
    
    FOR i := 1 TO iLen

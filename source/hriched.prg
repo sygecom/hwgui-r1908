@@ -59,15 +59,15 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
             tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder ) CLASS HRichEdit
 
-   nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER )
-                        IIf( lNoBorder = Nil.OR. !lNoBorder, WS_BORDER, 0 ) )
+   nStyle := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER )
+                        IIf(lNoBorder = Nil.OR. !lNoBorder, WS_BORDER, 0) )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-              bSize, bPaint, ctooltip, tcolor, IIf( bcolor == Nil, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor ) )
+              bSize, bPaint, ctooltip, tcolor, IIf(bcolor == Nil, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor) )
 
    ::title   := vari
    ::bOther  := bOther
    ::bChange := bChange
-   ::lAllowTabs := IIF( Empty(lAllowTabs), ::lAllowTabs, lAllowTabs )
+   ::lAllowTabs := IIf(Empty(lAllowTabs), ::lAllowTabs, lAllowTabs)
    ::lReadOnly := Hwg_BitAnd(nStyle, ES_READONLY) != 0
 
    hwg_InitRichEdit()
@@ -153,13 +153,13 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRichEdit
    IF msg == WM_KEYUP
      IF wParam = VK_TAB .AND. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
          IF IsCtrlShift(.T.,.F.)
-            GetSkip(::oParent, ::handle, , iif( IsCtrlShift(.F., .T.), -1, 1))
+            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYDOWN
       IF wParam = VK_TAB .AND. ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
-         GetSkip(::oParent, ::handle, , iif( IsCtrlShift(.F., .T.), -1, 1))
+         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam = VK_TAB .AND. ::GetParentForm( Self ):Type >= WND_DLG_RESOURCE
          RE_INSERTTEXT( ::handle, CHR(VK_TAB) )
@@ -177,7 +177,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRichEdit
          nDelta -= 65535
       ENDIF
       SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
-      //SendMessage(::handle, EM_SCROLL, Iif(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      //SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
    ELSEIF msg == WM_DESTROY
       ::END()
    ENDIF
@@ -199,7 +199,7 @@ METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 METHOD ReadOnly( lreadOnly )
 
    IF lreadOnly != Nil
-      IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIF(lReadOnly, 1, 0), 0))
+      IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
           ::lReadOnly := lReadOnly
       ENDIF
    ENDIF

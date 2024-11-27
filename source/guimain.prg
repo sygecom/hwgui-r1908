@@ -46,7 +46,7 @@ FUNCTION InitObjects( oWnd )
 FUNCTION InitControls( oWnd, lNoActivate )
    LOCAL i, pArray := oWnd:aControls, lInit
 
-   lNoActivate := IIf( lNoActivate == Nil, .F., lNoActivate )
+   lNoActivate := IIf(lNoActivate == Nil, .F., lNoActivate)
 
    IF pArray != Nil
       FOR i := 1 TO Len(pArray)
@@ -61,7 +61,7 @@ FUNCTION InitControls( oWnd, lNoActivate )
             pArray[i]:lInit := .T.
          ENDIF
 //           IF Empty(pArray[i]:handle)// <= 0
-         IF IF( hb_IsPointer(pArray[i]:handle), ptrtoulong( pArray[i]:handle ), pArray[i]:handle ) <= 0 // TODO: verificar
+         IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong( pArray[i]:handle ), pArray[i]:handle) <= 0 // TODO: verificar
             pArray[i]:handle := GetDlgItem( oWnd:handle, pArray[i]:id )
 
             // writelog( "InitControl2"+str(pArray[i]:handle)+"/"+pArray[i]:classname )
@@ -153,16 +153,16 @@ FUNCTION VColor(cColor)
 
 FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
    LOCAL oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-   LOCAL cRes := IIf( cResIni != Nil, Trim(cResIni), "" )
+   LOCAL cRes := IIf(cResIni != Nil, Trim(cResIni), "")
    /*
    IF !Empty(cRes)
       Keyb_Event( VK_END )
    ENDIF
    */
-   nStyle := IIf( nStyle == Nil, 0, nStyle )
-   x := IIf( x == Nil, 210, x )
-   y := IIf( y == Nil, 10, y )
-   nDlgStyle := IIf( nDlgStyle == Nil, 0, nDlgStyle )
+   nStyle := IIf(nStyle == Nil, 0, nStyle)
+   x := IIf(x == Nil, 210, x)
+   y := IIf(y == Nil, 10, y)
+   nDlgStyle := IIf(nDlgStyle == Nil, 0, nDlgStyle)
 
    INIT DIALOG oModDlg TITLE cTitle At x, y SIZE 300, 140 ;
         FONT oFont CLIPPER ;
@@ -175,7 +175,7 @@ FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
    oModDlg:aControls[4]:Anchor := 9
    
-   ACTIVATE DIALOG oModDlg ON ACTIVATE { || IIF( !Empty(cRes), KEYB_EVENT( VK_END ), .T. ) }
+   ACTIVATE DIALOG oModDlg ON ACTIVATE { || IIf(!Empty(cRes), KEYB_EVENT( VK_END ), .T.) }
 
    oFont:Release()
    IF oModDlg:lResult
@@ -291,7 +291,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    oBrw:oFont  := oFont
    oBrw:bSize  := { | o, x, y | MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY) }
    oBrw:bEnter := { | o | nChoice := o:nCurrent, EndDialog( o:oParent:handle ) }
-   oBrw:bKeyDown := {|o,key|HB_SYMBOL_UNUSED(o),Iif(key==27,(EndDialog(oDlg:handle),.F.),.T.)}
+   oBrw:bKeyDown := {|o,key|HB_SYMBOL_UNUSED(o),IIf(key==27,(EndDialog(oDlg:handle),.F.),.T.)}
 
    oBrw:lDispHead := .F.
    IF clrT != Nil
@@ -308,7 +308,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    ENDIF
 
    IF cOk != Nil
-      x1 := Int( width / 2 ) - IIf( cCancel != Nil, 90, 40 )
+      x1 := Int( width / 2 ) - IIf(cCancel != Nil, 90, 40)
       @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK { || nChoice := oBrw:nCurrent, EndDialog( oDlg:handle ) }
       IF cCancel != Nil
          @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK { || nChoice := 0, EndDialog( oDlg:handle ) }
@@ -327,12 +327,12 @@ FUNCTION ShowProgress( nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, heigh
    STATIC oDlg, hPBar, iCou, nLimit
 
    IF nStep == 0
-      nLimit := IIf( nRange != Nil, Int( nRange / maxPos ), 1 )
+      nLimit := IIf(nRange != Nil, Int( nRange / maxPos ), 1)
       iCou := 0
-      x1 := IIf( x1 == Nil, 0, x1 )
-      y1 := IIf( x1 == Nil, 0, y1 )
-      width := IIf( width == Nil, 220, width )
-      height := IIf( height == Nil, 55, height )
+      x1 := IIf(x1 == Nil, 0, x1)
+      y1 := IIf(x1 == Nil, 0, y1)
+      width := IIf(width == Nil, 220, width)
+      height := IIf(height == Nil, 55, height)
       IF x1 == 0
          nStyle += DS_CENTER
       ENDIF
@@ -468,7 +468,7 @@ FUNCTION TxtRect( cTxt, oWin, oFont )
    LOCAL ASize
    LOCAL hFont
 
-   oFont := IIF( oFont != Nil, oFont, oWin:oFont )
+   oFont := IIf(oFont != Nil, oFont, oWin:oFont)
 
    hDC       := GetDC(oWin:handle)
    IF oFont == Nil .AND. oWin:oParent != Nil

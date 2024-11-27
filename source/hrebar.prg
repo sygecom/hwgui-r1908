@@ -49,7 +49,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    HB_SYMBOL_UNUSED(cCaption)
 
    DEFAULT  lvert  TO .F.
-   nStyle   := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
+   nStyle   := Hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), ;
                           WS_VISIBLE + WS_CHILD )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
@@ -110,10 +110,10 @@ METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hreba
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
    FOR i = 1 TO LEN(::aBands)
-      ::aBands[i, 4] := IIF( ::aBands[i, 4] = Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4] )
-      ::aBands[i, 6] := IIF( ::aBands[i, 6] = Nil, dwStyle, ::aBands[i, 6] )
+      ::aBands[i, 4] := IIf(::aBands[i, 4] = Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4])
+      ::aBands[i, 6] := IIf(::aBands[i, 6] = Nil, dwStyle, ::aBands[i, 6])
       IF !Empty(::aBands[i, 1])
-         ::aBands[i, 1] := IIF( hb_IsChar(::aBands[i, 1]), &( ::aBands[i, 1] ), ::aBands[i, 1] )
+         ::aBands[i, 1] := IIf(hb_IsChar(::aBands[i, 1]), &( ::aBands[i, 1] ), ::aBands[i, 1])
          IF ( ::aBands[i, 5] != Nil )
             ADDBARBITMAP(::handle, ::aBands[i, 1]:handle, ::aBands[i, 2], ::aBands[i, 5], ::aBands[i, 6])
          ELSE

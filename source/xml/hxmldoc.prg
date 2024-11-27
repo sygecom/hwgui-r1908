@@ -43,7 +43,7 @@ METHOD New( cTitle, type, aAttr, cValue ) CLASS HXMLNode
    IF aAttr != Nil
       ::aAttr := aAttr
    ENDIF
-   ::type := Iif( type != Nil , type, HBXML_TYPE_TAG )
+   ::type := IIf(type != Nil , type, HBXML_TYPE_TAG)
    IF cValue != Nil
       ::Add(cValue)
    ENDIF
@@ -57,7 +57,7 @@ Return xItem
 METHOD GetAttribute(cName) CLASS HXMLNode
 Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
 
-Return Iif( i==0, Nil, ::aAttr[i,2] )
+Return IIf(i==0, Nil, ::aAttr[i,2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
 Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
@@ -150,7 +150,7 @@ Local i, s := Space(level*2)+'<', lNewLine
    m->hxml_newline := .T.
    IF handle >= 0
       IF ::type == HBXML_TYPE_TAG
-         FWrite(handle, Iif(lNewLine, Space(level * 2), "") + '</' + ::title + '>' + Chr(10))
+         FWrite(handle, IIf(lNewLine, Space(level * 2), "") + '</' + ::title + '>' + Chr(10))
       ELSEIF ::type == HBXML_TYPE_CDATA
          FWrite(handle, ']]>' + Chr(10))
       ELSEIF ::type == HBXML_TYPE_COMMENT
@@ -158,7 +158,7 @@ Local i, s := Space(level*2)+'<', lNewLine
       ENDIF
    ELSE
       IF ::type == HBXML_TYPE_TAG
-         s += Iif(lNewLine,Space(level*2),"") + '</' + ::title + '>' + Chr(10 )
+         s += IIf(lNewLine,Space(level*2),"") + '</' + ::title + '>' + Chr(10 )
       ELSEIF ::type == HBXML_TYPE_CDATA
          s += ']]>' + Chr(10)
       ELSEIF ::type == HBXML_TYPE_COMMENT
@@ -228,7 +228,7 @@ Local han
    ELSE
       Return Nil
    ENDIF
-Return Iif( ::nLastErr == 0, Self, Nil )
+Return IIf(::nLastErr == 0, Self, Nil)
 
 METHOD Save(fname, lNoHeader) CLASS HXMLDoc
 Local handle := -2

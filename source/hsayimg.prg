@@ -27,7 +27,7 @@ CLASS VAR winclass   INIT "STATIC"
                bSize, ctooltip, bClick, bDblClick )
    METHOD Redefine(oWndParent, nId, bInit, bSize, ctooltip)
    METHOD Activate()
-   METHOD END() INLINE ( ::Super:END(), IIf( ::oImage != Nil, ::oImage:Release(), ::oImage := Nil ), ::oImage := Nil )
+   METHOD END() INLINE ( ::Super:END(), IIf(::oImage != Nil, ::oImage:Release(), ::oImage := Nil), ::oImage := Nil )
    METHOD onClick()
    METHOD onDblClick()
 
@@ -36,9 +36,9 @@ ENDCLASS
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
             bSize, ctooltip, bClick, bDblClick ) CLASS HSayImage
 
-   nStyle := Hwg_BitOr( nStyle, IIF( hb_IsBlock(bClick) .OR. hb_IsBlock(bDblClick), SS_NOTIFY , 0 ) )
+   nStyle := Hwg_BitOr( nStyle, IIf(hb_IsBlock(bClick) .OR. hb_IsBlock(bDblClick), SS_NOTIFY , 0) )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop,               ;
-              IIf( nWidth != Nil, nWidth, 0 ), IIf( nHeight != Nil, nHeight, 0 ),, ;
+              IIf(nWidth != Nil, nWidth, 0), IIf(nHeight != Nil, nHeight, 0),, ;
               bInit, bSize,, ctooltip )
 
    ::title   := ""
@@ -107,11 +107,11 @@ ENDCLASS
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
             bSize, ctooltip, bClick, bDblClick, lTransp, nStretch, nStyle ) CLASS HSayBmp
 
-   nStyle := IIF( nStyle = Nil, 0, nStyle )
+   nStyle := IIf(nStyle = Nil, 0, nStyle)
    ::Super:New( oWndParent, nId, SS_OWNERDRAW + nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip, bClick, bDblClick )
 
    ::bPaint := { | o, lpdis | o:Paint( lpdis ) }
-   ::nStretch := IIf( nStretch = Nil, 0, nStretch )
+   ::nStretch := IIf(nStretch = Nil, 0, nStretch)
    IF lTransp != Nil .AND. lTransp
       ::BackStyle := TRANSPARENT
       ::extStyle +=  WS_EX_TRANSPARENT
@@ -121,10 +121,10 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       IF lRes == Nil
          lRes := .F.
       ENDIF
-      ::oImage := IIf( lRes .OR. hb_IsNumeric(Image),     ;
+      ::oImage := IIf(lRes .OR. hb_IsNumeric(Image),     ;
                        HBitmap():AddResource(Image), ;
-                       IIf( hb_IsChar(Image),     ;
-                            HBitmap():AddFile(Image), Image ) )
+                       IIf(hb_IsChar(Image),     ;
+                            HBitmap():AddFile(Image), Image))
       IF nWidth == Nil .OR. nHeight == Nil
          ::nWidth  := ::oImage:nWidth
          ::nHeight := ::oImage:nHeight
@@ -147,10 +147,10 @@ METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp) 
    IF lRes == Nil
       lRes := .F.
    ENDIF
-   ::oImage := IIf( lRes .OR. hb_IsNumeric(xImage),     ;
+   ::oImage := IIf(lRes .OR. hb_IsNumeric(xImage),     ;
                     HBitmap():AddResource(xImage), ;
-                    IIf( hb_IsChar(xImage),     ;
-                         HBitmap():AddFile(xImage), xImage ) )
+                    IIf(hb_IsChar(xImage),     ;
+                         HBitmap():AddFile(xImage), xImage))
    RETURN Self
 
 METHOD Init() CLASS HSayBmp
@@ -208,10 +208,10 @@ METHOD ReplaceBitmap(Image, lRes) CLASS HSayBmp
    IF lRes == Nil
       lRes := .F.
    ENDIF
-   ::oImage := IIf( lRes .OR. hb_IsNumeric(Image),     ;
+   ::oImage := IIf(lRes .OR. hb_IsNumeric(Image),     ;
                     HBitmap():AddResource(Image), ;
-                    IIf( hb_IsChar(Image),     ;
-                         HBitmap():AddFile(Image), Image ) )
+                    IIf(hb_IsChar(Image),     ;
+                         HBitmap():AddFile(Image), Image))
 
    RETURN Nil
 
@@ -240,10 +240,10 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       lOEM := .F.
    ENDIF
    IF ::oImage == NIL
-      ::oImage := IIf( lRes .OR. hb_IsNumeric(Image),  ;
+      ::oImage := IIf(lRes .OR. hb_IsNumeric(Image),  ;
                        HIcon():AddResource(Image, , , , lOEM), ;
-                       IIf( hb_IsChar(Image), ;
-                            HIcon():AddFile(Image), Image ) )
+                       IIf(hb_IsChar(Image), ;
+                            HIcon():AddFile(Image), Image))
    ENDIF
    ::Activate()
 
@@ -257,10 +257,10 @@ METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip) CLASS HSa
       lRes := .F.
    ENDIF
    IF ::oImage == NIL
-      ::oImage := IIf( lRes .OR. hb_IsNumeric(xImage), ;
+      ::oImage := IIf(lRes .OR. hb_IsNumeric(xImage), ;
                        HIcon():AddResource(xImage), ;
-                       IIf( hb_IsChar(xImage), ;
-                            HIcon():AddFile(xImage), xImage ) )
+                       IIf(hb_IsChar(xImage), ;
+                            HIcon():AddFile(xImage), xImage))
    ENDIF
    RETURN Self
 

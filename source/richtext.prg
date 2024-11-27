@@ -112,10 +112,10 @@ CLASS RichText
       cPgNumPos, lPgNumTop)
 
    METHOD BeginHeader() INLINE ::OpenGroup(), ;
-   IIf( !::lFacing, ::TextCode("header \pard"), ::TextCode("headerr \pard") )
+   IIf(!::lFacing, ::TextCode("header \pard"), ::TextCode("headerr \pard"))
    METHOD EndHeader() INLINE ::TextCode("par"), ::CloseGroup()
    METHOD BeginFooter() INLINE ::OpenGroup(), ;
-   IIf( !::lFacing, ::TextCode("footer \pard"), ::TextCode("footerr \pard") )
+   IIf(!::lFacing, ::TextCode("footer \pard"), ::TextCode("footerr \pard"))
    METHOD EndFooter() INLINE ::TextCode("par"), ::CloseGroup()
 
    METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
@@ -417,7 +417,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    lChar TO .F., ;
    nStyle TO 0
 
-   nShdPct := IIf( nShdPct < 1, nShdPct * 10000, nShdPct * 100 )
+   nShdPct := IIf(nShdPct < 1, nShdPct * 10000, nShdPct * 100)
 
    ::LogicCode("pagebb", lBreak)
 
@@ -472,7 +472,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    ENDIF
 
    IF nShdPct > 0
-      ::NumCode(IIf( !lChar, "shading", "chshdng" ), nShdPct, .F.)
+      ::NumCode(IIf(!lChar, "shading", "chshdng"), nShdPct, .F.)
       IF !Empty(cShadPat)
          ::TextCode("bg" + ::ShadeCode(cShadPat))
       ENDIF
@@ -813,16 +813,16 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::cRowBorder := ::BorderCode(cRowBorder)
    ::cCellBorder := ::BorderCode(cCellBorder)
    ::aColPct := AClone(aColPct)
-   ::nCellPct := IIf( nCellPct < 1, nCellPct * 10000, nCellPct * 100 )
+   ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval( ::aColPct, { || ::aColPct[i] := IIf( ::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100 ), i ++ } )
+   AEval( ::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++ } )
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
    ::nTblHdHgt := nTblHdHgt
-   ::nTblHdPct := IIf( nTblHdPct < 1, nTblHdPct * 10000, nTblHdPct * 100 )
+   ::nTblHdPct := IIf(nTblHdPct < 1, nTblHdPct * 10000, nTblHdPct * 100)
    ::nTblHdFont := nTblHdFont
    ::nTblHdFSize := nTblHdFSize
    ::nTblHdColor := nTblHdColor
@@ -1145,7 +1145,7 @@ METHOD LineSpacing( nSpace, lSpExact ) CLASS RichText
 
    ::NumCode("sl", nSpace, lSpExact)
    IF !Empty(nSpace)
-      ::NumCode("slmult", IIf( lSpExact, 0, 1 ), .F.)
+      ::NumCode("slmult", IIf(lSpExact, 0, 1), .F.)
    ENDIF
 
 
@@ -1528,7 +1528,7 @@ METHOD FootNote(cTexto, cChar, nFontNumber, ;
    lAuto TO .F., ;
    lEnd TO .F.
 
-   cChar := IIf( lAuto, "", cChar )
+   cChar := IIf(lAuto, "", cChar)
    ::OpenGroup()
    ::OpenGroup()
    IF lUpper
@@ -1826,7 +1826,7 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
    lAdd TO .F., ;
    LUpdate TO .F.
 
-   nShdPct := IIf( nShdPct < 1, nShdPct * 10000, nShdPct * 100 )
+   nShdPct := IIf(nShdPct < 1, nShdPct * 10000, nShdPct * 100)
 
    ::OpenGroup()
 
@@ -2033,16 +2033,16 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::cRowBorder := ::BorderCode(cRowBorder)
    ::cCellBorder := ::BorderCode(cCellBorder)
    ::aColPct := AClone(aColPct)
-   ::nCellPct := IIf( nCellPct < 1, nCellPct * 10000, nCellPct * 100 )
+   ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval( ::aColPct, { || ::aColPct[i] := IIf( ::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100 ), i ++ } )
+   AEval( ::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++ } )
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
    ::nTblHdHgt := nTblHdHgt
-   ::nTblHdPct := IIf( nTblHdPct < 1, nTblHdPct * 10000, nTblHdPct * 100 )
+   ::nTblHdPct := IIf(nTblHdPct < 1, nTblHdPct * 10000, nTblHdPct * 100)
    ::nTblHdFont := nTblHdFont
    ::nTblHdFSize := nTblHdFSize
    ::nTblHdColor := nTblHdColor
@@ -2179,11 +2179,11 @@ METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
       ::Appearance(::cHeadAppear)
       ::HAlignment( ::cHeadHAlign )
    ELSE
-      ::NewFont( IIf( nFontNumber == - 1, ::nTblFntNum, nFontNumber ) )
-      ::SetFontSize(IIf( nFontSize == - 1, ::nTblFntSize, nFontSize ))
+      ::NewFont( IIf(nFontNumber == - 1, ::nTblFntNum, nFontNumber) )
+      ::SetFontSize(IIf(nFontSize == - 1, ::nTblFntSize, nFontSize))
       ::SetFontColor(nFontColor)
-      ::Appearance(IIf( cAppear == NIL, ::cCellAppear, cAppear ))
-      ::HAlignment( IIf( cHorzAlign == NIL, ::cCellHAlign, cHorzAlign ) )
+      ::Appearance(IIf(cAppear == NIL, ::cCellAppear, cAppear))
+      ::HAlignment( IIf(cHorzAlign == NIL, ::cCellHAlign, cHorzAlign) )
       ::LineSpacing( nSpace, lSpExact )
    ENDIF
 
@@ -2609,7 +2609,7 @@ FUNCTION cFileExt( cFile )
          RETURN DToC(xExp)
 
       CASE cType == 'L'
-         RETURN IIf( xExp, '.T.', '.F.' )
+         RETURN IIf(xExp, '.T.', '.F.')
 
       CASE cType == 'N'
          RETURN Str( xExp )

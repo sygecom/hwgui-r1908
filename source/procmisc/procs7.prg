@@ -52,11 +52,11 @@ LOCAL varName, iPosEnd, iPos3
       RETURN ""
    ELSE
       IF ( iPosEnd := Find_Z( stroka ) ) == 0
-         iPosEnd := Iif( Right(stroka, 1) = ';', Len(stroka), Len(stroka) + 1 )
+         iPosEnd := IIf(Right(stroka, 1) = ';', Len(stroka), Len(stroka) + 1)
       ENDIF
       ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ':' )
-      varName  := RTrim(LTrim(Left(stroka, Iif( ipos3 = 0, iPosEnd, iPos3 ) - 1)))
-      varValue := Iif( iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), Nil )
+      varName  := RTrim(LTrim(Left(stroka, IIf(ipos3 = 0, iPosEnd, iPos3) - 1)))
+      varValue := IIf(iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), Nil)
       stroka   := SubStr(stroka, iPosEnd + 1)
    ENDIF
 RETURN varName
@@ -65,7 +65,7 @@ FUNCTION FIND_Z( stroka, symb )
 
 LOCAL poz, poz1 := 1, i, j, ms1 := "(){}[]'" + '"', ms2 := { 0, 0, 0, 0, 0, 0, 0, 0 }
 
-   symb := Iif( symb = Nil, ",", symb )
+   symb := IIf(symb = Nil, ",", symb)
    DO WHILE .T.
       poz := At( symb, SubStr(stroka, poz1) )
       IF poz = 0
@@ -101,26 +101,26 @@ FUNCTION Fchoice()
 FUNCTION CutExten( fname )
 
 LOCAL i
-RETURN Iif( ( i := Rat( '.', fname ) ) = 0, fname, SubStr(fname, 1, i - 1) )
+RETURN IIf(( i := Rat( '.', fname ) ) = 0, fname, SubStr(fname, 1, i - 1))
 
 FUNCTION FilExten( fname )
 
 LOCAL i
-RETURN Iif( ( i := Rat( '.', fname ) ) = 0, "", SubStr(fname, i + 1) )
+RETURN IIf(( i := Rat( '.', fname ) ) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION FilePath( fname )
 
 LOCAL i
-RETURN Iif( ( i := Rat( '\', fname ) ) = 0, ;
-            Iif( ( i := Rat( '/', fname ) ) = 0, "", Left(fname, i) ), ;
-            Left(fname, i) )
+RETURN IIf(( i := Rat( '\', fname ) ) = 0, ;
+            IIf(( i := Rat( '/', fname ) ) = 0, "", Left(fname, i)), ;
+            Left(fname, i))
 
 FUNCTION CutPath( fname )
 
 LOCAL i
-RETURN Iif( ( i := Rat( '\', fname ) ) = 0, ;
-            Iif( ( i := Rat( '/', fname ) ) = 0, fname, SubStr(fname, i + 1) ), ;
-            SubStr(fname, i + 1) )
+RETURN IIf(( i := Rat( '\', fname ) ) = 0, ;
+            IIf(( i := Rat( '/', fname ) ) = 0, fname, SubStr(fname, i + 1)), ;
+            SubStr(fname, i + 1))
 
 FUNCTION NextItem( stroka, lFirst, cSep )
 

@@ -42,15 +42,15 @@ ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical ) CLASS HProgressBar
 
-   ::Style := IIF( lvertical != Nil .AND. lVertical, PBS_VERTICAL, 0 )
-    ::Style += IIF( nAnimation != Nil .AND. nAnimation > 0, PBS_MARQUEE, 0 )
+   ::Style := IIf(lvertical != Nil .AND. lVertical, PBS_VERTICAL, 0)
+    ::Style += IIf(nAnimation != Nil .AND. nAnimation > 0, PBS_MARQUEE, 0)
     ::nAnimation := nAnimation
 
    ::Super:New( oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight,, bInit, bSize, bPaint, ctooltip )
 
-   ::maxPos  := Iif( maxPos != Nil .AND. maxPos != 0, maxPos, 20 )
+   ::maxPos  := IIf(maxPos != Nil .AND. maxPos != 0, maxPos, 20)
    ::lNewBox := .F.
-   ::nRange := Iif( nRange != Nil .AND. nRange != 0, nRange, 100 )
+   ::nRange := IIf(nRange != Nil .AND. nRange != 0, nRange, 100)
    ::nLimit := Int( ::nRange/::maxPos )
 
    ::Activate()
@@ -61,26 +61,26 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
 
    // ::classname:= "HPROGRESSBAR"
    ::style   := WS_CHILD + WS_VISIBLE
-   nWidth := IIf( nWidth == Nil, 220, nWidth )
-   nHeight := IIf( nHeight == Nil, 55, nHeight )
-   nLeft   := IIf( nLeft == Nil, 0, nLeft )
-   nTop    := IIf( nTop == Nil, 0, nTop )
-   //nWidth  := IIf( nWidth == Nil, 220, nWidth )
-  // nHeight := IIf( nHeight == Nil, 55, nHeight )
+   nWidth := IIf(nWidth == Nil, 220, nWidth)
+   nHeight := IIf(nHeight == Nil, 55, nHeight)
+   nLeft   := IIf(nLeft == Nil, 0, nLeft)
+   nTop    := IIf(nTop == Nil, 0, nTop)
+   //nWidth  := IIf(nWidth == Nil, 220, nWidth)
+  // nHeight := IIf(nHeight == Nil, 55, nHeight)
    ::nLeft := 20
    ::nTop  := 25
    ::nWidth  := nWidth - 40
-   ::maxPos  := IIf( maxPos == Nil, 20, maxPos )
+   ::maxPos  := IIf(maxPos == Nil, 20, maxPos)
    ::lNewBox := .T.
-   ::nRange := Iif( nRange != Nil .AND. nRange != 0, nRange, 100 )
-   ::nLimit := IIf( nRange != Nil, Int( ::nRange / ::maxPos ), 1 )
+   ::nRange := IIf(nRange != Nil .AND. nRange != 0, nRange, 100)
+   ::nLimit := IIf(nRange != Nil, Int( ::nRange / ::maxPos ), 1)
     ::lPercent := lPercent
-   
+
    INIT DIALOG ::oParent TITLE cTitle       ;
         At nLeft, nTop SIZE nWidth, nHeight   ;
-        STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + IIf( nTop == 0, DS_CENTER, 0 ) + DS_SYSMODAL + MB_USERICON
+        STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + IIf(nTop == 0, DS_CENTER, 0) + DS_SYSMODAL + MB_USERICON
 
-   @ ::nLeft, nTop + 5 SAY ::LabelBox CAPTION IIF( Empty(lPercent), "", "%" )  SIZE ::nWidth, 19 ;
+   @ ::nLeft, nTop + 5 SAY ::LabelBox CAPTION IIf(Empty(lPercent), "", "%")  SIZE ::nWidth, 19 ;
        STYLE SS_CENTER
 
    IF bExit != Nil
@@ -100,7 +100,7 @@ METHOD Activate() CLASS HProgressBar
 
    IF !Empty(::oParent:handle)
       ::handle := CreateProgressBar( ::oParent:handle, ::maxPos, ::style, ;
-                                     ::nLeft, ::nTop, ::nWidth, IIF( ::nHeight = 0, Nil, ::nHeight ) )
+                                     ::nLeft, ::nTop, ::nWidth, IIf(::nHeight = 0, Nil, ::nHeight) )
       ::Init()
    ENDIF
    RETURN Nil
@@ -166,7 +166,7 @@ METHOD SetAnimation( nAnimation ) CLASS HProgressBar
        ENDIF
        ::nAnimation := nAnimation
    ENDIF
-   RETURN IIF( ::nAnimation != Nil, ::nAnimation, 0 )
+   RETURN IIf(::nAnimation != Nil, ::nAnimation, 0)
 
 METHOD Close()
 
