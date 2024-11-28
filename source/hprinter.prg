@@ -54,8 +54,8 @@ CLASS HPrinter INHERIT HObject
    METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn )
 
    METHOD SetMode(nOrientation)
-   METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline, nCharSet )
-   METHOD SetFont( oFont ) INLINE SelectObject(::hDC, oFont:handle)
+   METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharSet)
+   METHOD SetFont(oFont) INLINE SelectObject(::hDC, oFont:handle)
    METHOD SetTextColor(nColor) INLINE SetTextColor(::hDC, nColor)
    METHOD SetTBkColor(nColor) INLINE SetBKColor(::hDC, nColor)
    METHOD SetBkmode(lmode) INLINE SetBkmode(::hDC, IIf(lmode, 1, 0))
@@ -174,7 +174,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
 
    RETURN .F.
 
-METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline, nCharset ) CLASS HPrinter
+METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
    LOCAL oFont
 
    IF ::lmm .AND. nHeight != Nil
@@ -241,9 +241,9 @@ METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor ) CLASS H
    ENDIF
 
    IF ::lmm
-      DrawText( ::hDC, cString, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2, IIf(nOpt == Nil, DT_LEFT, nOpt) )
+      DrawText(::hDC, cString, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2, IIf(nOpt == Nil, DT_LEFT, nOpt))
    ELSE
-      DrawText( ::hDC, cString, x1, y1, x2, y2, IIf(nOpt == Nil, DT_LEFT, nOpt) )
+      DrawText(::hDC, cString, x1, y1, x2, y2, IIf(nOpt == Nil, DT_LEFT, nOpt))
    ENDIF
 
    IF oFont != Nil
@@ -282,7 +282,7 @@ METHOD GetTextWidth( cString, oFont ) CLASS HPrinter
       SelectObject(::hDC, hFont)
    ENDIF
 
-   RETURN IIf(::lmm, Int( arr[1] / ::nHRes ), arr[1])
+   RETURN IIf(::lmm, Int(arr[1] / ::nHRes), arr[1])
 
 METHOD StartDoc(lPreview, cMetaName) CLASS HPrinter
 
@@ -708,7 +708,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    STATIC BrushLine := NIL
    STATIC BrushBackground := NIL
 
-   rect := GetClientRect( oWnd:handle )
+   rect := GetClientRect(oWnd:handle)
 
    // WriteLog(stR(rect[1])+ stR(rect[2])+ stR(rect[3])+ stR(rect[4]) )
    // offscreen canvas must be THE WHOLE CANVAS !
@@ -718,8 +718,8 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    ENDIF
 
    pps := DefinePaintStru()
-   hDC := BeginPaint( oWnd:handle, pps )
-   aArray = GetPPSRect( pps )
+   hDC := BeginPaint(oWnd:handle, pps)
+   aArray = GetPPSRect(pps)
    // tracelog( "PPS"+str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]) )
 
    IF ( aArray[1] == 0 .AND. aArray[2] == 0 )  // IF WHOLE AREA
@@ -740,31 +740,31 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
          IF ::NeedsRedraw
             // Draw the canvas background (gray)
-            FillRect( ::memDC:m_hDC, rect[1], rect[2], rect[3], rect[4], BrushBackground )
-            FillRect( ::memDC:m_hDC, rect[1], rect[2], rect[1], rect[4], BrushBorder )
-            FillRect( ::memDC:m_hDC, rect[1], rect[2], rect[3], rect[2], BrushBorder )
+            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[4], BrushBackground)
+            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[1], rect[4], BrushBorder)
+            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[2], BrushBorder)
             // Draw the PAPER background (white)
-            FillRect( ::memDC:m_hDC, ::x1 - 1, ::y1 - 1, ::x2 + 1, ::y2 + 1, BrushLine )
-            FillRect( ::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2, BrushWhite )
+            FillRect(::memDC:m_hDC, ::x1 - 1, ::y1 - 1, ::x2 + 1, ::y2 + 1, BrushLine)
+            FillRect(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2, BrushWhite)
             // Draw the actual printer data
             PlayEnhMetafile(::memDC:m_hDC, ::aMeta[::nCurrPage], ::x1, ::y1, ::x2, ::y2)
             // Draw
             // Rectangle(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2)
 
-            FillRect( ::memDC:m_hDC, ::x2, ::y1 + 2, ::x2 + 1, ::y2 + 2, BrushBlack )
-            FillRect( ::memDC:m_hDC, ::x2 + 1, ::y1 + 1, ::x2 + 2, ::y2 + 2, BrushShadow )
-            FillRect( ::memDC:m_hDC, ::x2 + 1, ::y1 + 2, ::x2 + 2, ::y2 + 2, BrushLine )
-            FillRect( ::memDC:m_hDC, ::x2 + 2, ::y1 + 2, ::x2 + 3, ::y2 + 2, BrushShadow )
+            FillRect(::memDC:m_hDC, ::x2, ::y1 + 2, ::x2 + 1, ::y2 + 2, BrushBlack)
+            FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 1, ::x2 + 2, ::y2 + 2, BrushShadow)
+            FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 2, ::x2 + 2, ::y2 + 2, BrushLine)
+            FillRect(::memDC:m_hDC, ::x2 + 2, ::y1 + 2, ::x2 + 3, ::y2 + 2, BrushShadow)
 
 
-            FillRect( ::memDC:m_hDC, ::x1 + 2, ::y2, ::x2, ::y2 + 2, BrushBlack )
-            FillRect( ::memDC:m_hDC, ::x1 + 2, ::y2 + 1, ::x2 + 1, ::y2 + 2, BrushLine )
-            FillRect( ::memDC:m_hDC, ::x1 + 2, ::y2 + 2, ::x2 + 2, ::y2 + 3, BrushShadow )
+            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2, ::x2, ::y2 + 2, BrushBlack)
+            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 1, ::x2 + 1, ::y2 + 2, BrushLine)
+            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 2, ::x2 + 2, ::y2 + 3, BrushShadow)
             ::NeedsRedraw := .F.
          ENDIF
          // tracelog("bitblt")
          lRefreshVideo := .F.
-         BitBlt( hDC, rect[1], rect[2], rect[3], rect[4], ::memDC:m_hDC, 0, 0, SRCCOPY )
+         BitBlt(hDC, rect[1], rect[2], rect[3], rect[4], ::memDC:m_hDC, 0, 0, SRCCOPY)
       ELSE   // window fully uncovered... force a repaint
          lRefreshVideo := .T.
       ENDIF
@@ -780,7 +780,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
       DrawLine(hDC, ::x1, ::y1, ::x2, ::y2)
    #endif
 
-   EndPaint( oWnd:handle, pps )
+   EndPaint(oWnd:handle, pps)
 
    RETURN Nil
 

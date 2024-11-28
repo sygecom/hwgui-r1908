@@ -70,7 +70,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor )
    METHOD Activate()
-   METHOD Paint( lpDis )
+   METHOD Paint(lpDis)
 
 ENDCLASS
 
@@ -78,7 +78,7 @@ ENDCLASS
 //---------------------------------------------------------------------------
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor ) CLASS HRect_Line
 
-   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop,,,,, bSize, { | o, lp | o:Paint( lp ) } )
+   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop,,,,, bSize, { | o, lp | o:Paint(lp) } )
 
 
    //::title := ""
@@ -179,7 +179,7 @@ CLASS VAR winclass   INIT "STATIC"
                lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )
 
    METHOD Activate()
-   METHOD Paint( lpDis )
+   METHOD Paint(lpDis)
    METHOD SetColor(tcolor, bcolor, lRedraw)
    METHOD Curvature(nCurvature)
    //METHOD Refresh() INLINE SendMessage(::handle, WM_PAINT, 0, 0), RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
@@ -192,7 +192,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor
 
    HB_SYMBOL_UNUSED(ncStyle)
 
-   ::bPaint   := { | o, p | o:paint( p ) }
+   ::bPaint   := { | o, p | o:paint(p) }
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, ,;
               bInit, bSize, ::bPaint, , tcolor, bColor ) //= Nil
 
@@ -248,7 +248,7 @@ METHOD Curvature(nCurvature) CLASS HDrawShape
    RETURN Nil
 
 //---------------------------------------------------------------------------
-METHOD Paint( lpdis ) CLASS HDrawShape
+METHOD Paint(lpdis) CLASS HDrawShape
    LOCAL drawInfo := GetDrawItemInfo( lpdis )
    LOCAL hDC := drawInfo[3], oldbkMode
    LOCAL  x1 := drawInfo[4], y1 := drawInfo[5]
@@ -280,14 +280,14 @@ METHOD Paint( lpdis ) CLASS HDrawShape
          IF ::Brush != Nil
             SelectObject(hDC, ::Brush:handle)
          ENDIF
-         //RoundRect( hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
+         //RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
       ENDIF
       IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle = OPAQUE
          SelectObject(hDC, ::BrushFill:handle)
       ELSE
          SelectObject(hDC, GetStockObject(NULL_BRUSH))
       ENDIF
-      RoundRect( hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
+      RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
    SetBKMode(hDC, oldbkMode)
    RETURN Nil
@@ -296,7 +296,7 @@ METHOD Paint( lpdis ) CLASS HDrawShape
 
 
 //-----------------------------------------------------------------
-FUNCTION Rect( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST )
+FUNCTION Rect(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST)
 
    IF lPress = NIL
       lPress := .F.
@@ -328,8 +328,8 @@ CLASS HContainer INHERIT HControl
    METHOD Activate()
    METHOD Init()
    METHOD Create() INLINE ::lCreate := .T.
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Paint( lpDis )
+   METHOD onEvent(msg, wParam, lParam)
+   METHOD Paint(lpDis)
    METHOD Visible(lVisibled) SETGET
 
 ENDCLASS
@@ -338,7 +338,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSiz
             lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)
 
     ::lTABSTOP :=  nStyle = WS_TABSTOP
-    ::bPaint   := { | o, p | o:paint( p ) }
+    ::bPaint   := { | o, p | o:paint(p) }
     nStyle := SS_OWNERDRAW + IIf(nStyle = WS_TABSTOP, WS_TABSTOP , 0) + Hwg_Bitand(nStyle, SS_NOTIFY)
     ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, , ;
               bInit, bSize, ::bPaint,, tcolor, bColor )
@@ -400,7 +400,7 @@ METHOD Init() CLASS HContainer
    RETURN  NIL
 
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HContainer
+METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    Local nEval
 
    IF hb_IsBlock(::bOther)
@@ -428,7 +428,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HContainer
       ELSEIF msg = WM_SYSKEYUP
       ENDIF
    ENDIF
-   RETURN ::Super:onEvent( msg, wParam, lParam )
+   RETURN ::Super:onEvent(msg, wParam, lParam)
 
 METHOD Visible(lVisibled) CLASS HContainer
 
@@ -444,7 +444,7 @@ METHOD Visible(lVisibled) CLASS HContainer
 
 
 //---------------------------------------------------------------------------
-METHOD Paint( lpdis ) CLASS HContainer
+METHOD Paint(lpdis) CLASS HContainer
    Local drawInfo, hDC
    Local x1, y1, x2, y2
 
@@ -477,10 +477,10 @@ METHOD Paint( lpdis ) CLASS HContainer
       ENDIF
       IF ::backStyle != TRANSPARENT
          IF ::Brush != Nil
-            FillRect( hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle )
+            FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle)
          ENDIF
       ELSE
-         FillRect( hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5) )
+         FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5))
       ENDIF
       //SetBkMode(hDC, 0)
    ENDIF

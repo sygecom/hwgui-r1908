@@ -82,9 +82,9 @@ Return .T.
 METHOD Save(handle, level) CLASS HXMLNode
 Local i, s := Space(level*2)+"<", lNewLine
 
-   IF !__mvExist( "HXML_NEWLINE" )
+   IF !__mvExist("HXML_NEWLINE")
       __mvPrivate("HXML_NEWLINE")
-      __mvPut( "HXML_NEWLINE", .T. )
+      __mvPut("HXML_NEWLINE", .T.)
    ENDIF
    lNewLine := m->hxml_newline
    IF ::type == HBXML_TYPE_COMMENT

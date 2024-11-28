@@ -135,7 +135,7 @@ CLASS HSayFImage INHERIT HSayImage
                bSize, ctooltip, cType )
    METHOD Redefine(oWndParent, nId, Image, bInit, bSize, ctooltip)
    METHOD ReplaceImage(Image, cType)
-   METHOD Paint( lpdis )
+   METHOD Paint(lpdis)
 
 ENDCLASS
 
@@ -153,7 +153,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip )
    // ::classname:= "HSAYFIMAGE"
 
-   ::bPaint  := { | o, lpdis | o:Paint( lpdis ) }
+   ::bPaint  := { | o, lpdis | o:Paint(lpdis) }
 
    ::Activate()
 
@@ -166,7 +166,7 @@ METHOD Redefine(oWndParent, nId, Image, bInit, bSize, ctooltip) CLASS HSayFImage
    ::Super:Redefine(oWndParent, nId, bInit, bSize, ctooltip)
    // ::classname:= "HSAYFIMAGE"
 
-   ::bPaint  := { | o, lpdis | o:Paint( lpdis ) }
+   ::bPaint  := { | o, lpdis | o:Paint(lpdis) }
 
    RETURN Self
 

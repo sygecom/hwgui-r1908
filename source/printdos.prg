@@ -385,7 +385,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
       RETURN .F.
    ENDIF
 // end of added code
-   oFont := oPrinter:AddFont( "Courier New", osize )
+   oFont := oPrinter:AddFont("Courier New", osize)
 
    oPrinter:StartDoc(oPreview)
    oPrinter:StartPage()
@@ -489,9 +489,9 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
 //   @ 88,19 EDITBOX oEdit ID 1001 SIZE 548,465 STYLE WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE ;
 //        COLOR oColor1 BACKCOLOR oColor2 FONT oFont //Blue to Black  //Added by  por Fernando Athayde
 //       COLOR 16711680 BACKCOLOR 16777215  //Black to Write
-   @ 6, 30 BUTTON "<<"    ON CLICK { || nPage := PrintDosAnt( nPage, oText ) } SIZE 69, 32  STYLE IIf(nPage = 1, WS_DISABLED, 0)
-   @ 6, 80 BUTTON ">>"    ON CLICK { || nPage := PrintDosNext( oPage, nPage, oText ) } SIZE 69, 32 STYLE IIf(nPage = 1, WS_DISABLED, 0)
-   @ 6, 130 BUTTON "Imprimir" ON CLICK { || PrintDosPrint( oText, oPrt ) } SIZE 69, 32
+   @ 6, 30 BUTTON "<<"    ON CLICK { || nPage := PrintDosAnt(nPage, oText) } SIZE 69, 32  STYLE IIf(nPage = 1, WS_DISABLED, 0)
+   @ 6, 80 BUTTON ">>"    ON CLICK { || nPage := PrintDosNext(oPage, nPage, oText) } SIZE 69, 32 STYLE IIf(nPage = 1, WS_DISABLED, 0)
+   @ 6, 130 BUTTON "Imprimir" ON CLICK { || PrintDosPrint(oText, oPrt) } SIZE 69, 32
 //   @ 6,180 BUTTON "Grafico" on Click {||EndDialog(),oDos2:TxttoGraphic(fName,2,.T.),oDos2:end()} SIZE 69,32
    @ 6, 230 BUTTON "Fechar" ON CLICK { || EndDialog() } SIZE 69, 32
 
@@ -499,7 +499,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
 
    RETURN .T.
 
-STATIC FUNCTION PrintDosPrint( oText, oPrt )
+STATIC FUNCTION PrintDosPrint(oText, oPrt)
    LOCAL i
    LOCAL nText := FCreate(oPrt)
    FOR i := 1 TO Len(oText)
@@ -509,30 +509,30 @@ STATIC FUNCTION PrintDosPrint( oText, oPrt )
    RETURN Nil
 
 
-STATIC FUNCTION PrintDosAnt( nPage, oText )
+STATIC FUNCTION PrintDosAnt(nPage, oText)
    LOCAL oDlg := GetModalhandle()
    nPage := -- nPage
    IF nPage < 1
       nPage := 1
    ENDIF
    IF nPage = 1  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
-      SetDlgItemText( oDlg, 1001, SUBS(oText[nPage], 2) )  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
+      SetDlgItemText(oDlg, 1001, SUBS(oText[nPage], 2))  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
    ELSE
-      SetDlgItemText( oDlg, 1001, oText[nPage] )
+      SetDlgItemText(oDlg, 1001, oText[nPage])
    ENDIF
    RETURN nPage
 
-STATIC FUNCTION PrintDosNext( oPage, nPage, oText )
+STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
    LOCAL oDlg := GetModalhandle()
    nPage := ++ nPage
    IF nPage > oPage
       nPage := oPage
    ENDIF
-   SetDlgItemText( oDlg, 1001, oText[nPage] )
+   SetDlgItemText(oDlg, 1001, oText[nPage])
    RETURN nPage
 
 FUNCTION regenfile(o, new)
-   LOCAL aText := AFillText( o )
+   LOCAL aText := AFillText(o)
    LOCAL stroka
    LOCAL o1 := printdos():new( new )
    LOCAL nLine := 0
@@ -542,7 +542,7 @@ FUNCTION regenfile(o, new)
    FOR i := 1 TO Len(aText)
 
       stroka := aText[i]
-      nChr12 := At( Chr(12), stroka )
+      nChr12 := At(Chr(12), stroka)
 
       IF nChr12 > 0
          stroka := SubStr(stroka, 1, nChr12 - 1)
@@ -562,7 +562,7 @@ FUNCTION regenfile(o, new)
 #PRAGMA BEGINDUMP
 /*
    txtfile.c
-   AFILLTEXT( cFile ) -> aArray
+   AFILLTEXT(cFile) -> aArray
    NTXTLINE(cFile)  -> nLines
 */
 

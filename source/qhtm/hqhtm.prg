@@ -95,7 +95,7 @@ METHOD Init CLASS HQhtm
    IF !::lInit
       ::Super:Init()
       IF !Empty(::cText)
-         SetWindowText( ::handle,::cText )
+         SetWindowText(::handle, ::cText)
       ELSEIF !Empty(::filename)
          QHTM_LoadFile(::handle, ::filename)
       ELSEIF !Empty(::resname)
@@ -169,9 +169,9 @@ METHOD Init() CLASS HQhtmButton
 
    ::Super:Init()
    IF ::oFont == Nil .AND. ::oParent:oFont == Nil
-      SetCtrlFont( ::oParent:handle, ::id, GetStockObject(SYSTEM_FONT) )
+      SetCtrlFont(::oParent:handle, ::id, GetStockObject(SYSTEM_FONT))
    ENDIF
-   SetWindowText( ::handle,::cHtml )
+   SetWindowText(::handle, ::cHtml)
    QHTM_SetHtmlButton(::handle)
 
 Return Nil

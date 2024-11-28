@@ -35,7 +35,7 @@ CLASS VAR winclass   INIT "msctls_trackbar32"
                bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
                lVertical, TickStyle, TickMarks )
    METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
    METHOD SetValue(nValue)
    METHOD GetValue()
@@ -84,7 +84,7 @@ METHOD Activate() CLASS HTrackBar
    ENDIF
    RETURN NIL
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
+METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
    LOCAL aCoors
 
    IF msg == WM_PAINT
@@ -101,8 +101,8 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
    ELSEIF msg == WM_ERASEBKGND
       IF ::brush != NIL
          aCoors := GetClientRect(::handle)
-         FillRect( wParam, aCoors[1], aCoors[2], aCoors[3] + 1, ;
-                   aCoors[4] + 1, ::brush:handle )
+         FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, ;
+                  aCoors[4] + 1, ::brush:handle)
          RETURN 1
       ENDIF
 
@@ -116,7 +116,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
       ENDIF
 
     ELSEIF msg = WM_KEYDOWN
-       IF ProcKeyList( Self, wParam )
+       IF ProcKeyList(Self, wParam)
           RETURN 0
       ENDIF
 

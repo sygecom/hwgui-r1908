@@ -32,7 +32,7 @@ FUNCTION SetPaintRep(ar)
    aPaintRep := ar
    RETURN Nil
 
-FUNCTION OpenReport( fname, repName )
+FUNCTION OpenReport(fname, repName)
    LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
    LOCAL han
    LOCAL itemName, aItem, res := .T.
@@ -157,7 +157,7 @@ IF Empty(aPaintRep[FORM_ITEMS])
    MsgStop(repName + " not found or empty!")
    res := .F.
 ELSE
-   aPaintRep[FORM_ITEMS] := ASort( aPaintRep[FORM_ITEMS],,, { | z, y | z[ITEM_Y1] < y[ITEM_Y1] .OR.( z[ITEM_Y1] == y[ITEM_Y1] .AND.z[ITEM_X1] < y[ITEM_X1] ) .OR.( z[ITEM_Y1] == y[ITEM_Y1] .AND.z[ITEM_X1] == y[ITEM_X1] .AND.( z[ITEM_WIDTH] < y[ITEM_WIDTH] .OR.z[ITEM_HEIGHT] < y[ITEM_HEIGHT] ) ) } )
+   aPaintRep[FORM_ITEMS] := ASort(aPaintRep[FORM_ITEMS], , , { | z, y | z[ITEM_Y1] < y[ITEM_Y1] .OR. (z[ITEM_Y1] == y[ITEM_Y1] .AND. z[ITEM_X1] < y[ITEM_X1]) .OR. (z[ITEM_Y1] == y[ITEM_Y1] .AND. z[ITEM_X1] == y[ITEM_X1] .AND. (z[ITEM_WIDTH] < y[ITEM_WIDTH] .OR. z[ITEM_HEIGHT] < y[ITEM_HEIGHT]))})
 ENDIF
 RETURN res
 
@@ -179,7 +179,7 @@ FUNCTION RecalcForm( aPaintRep, nFormWidth )
    ENDIF
    RETURN Nil
 
-FUNCTION PrintReport( printerName, oPrn, lPreview )
+FUNCTION PrintReport(printerName, oPrn, lPreview)
    LOCAL oPrinter := IIf(oPrn != Nil, oPrn, HPrinter():New( printerName ))
    LOCAL aPrnCoors, prnXCoef, prnYCoef
    LOCAL iItem, aItem, nLineStartY := 0, nLineHeight := 0, nPHStart := 0
@@ -498,13 +498,13 @@ STATIC FUNCTION ScriptExecute(aItem)
    LOCAL nError, nLineEr
    IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
       IF hb_IsChar(aItem[ITEM_SCRIPT])
-         IF ( aItem[ITEM_SCRIPT] := RdScript( , aItem[ITEM_SCRIPT] ) ) == Nil
+         IF ( aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT]) ) == Nil
             nError := CompileErr( @nLineEr )
             MsgStop("Script error (" + LTrim(Str( nError )) + "), line " + LTrim(Str( nLineEr )))
             RETURN .F.
          ENDIF
       ENDIF
-      DoScript( aItem[ITEM_SCRIPT] )
+      DoScript(aItem[ITEM_SCRIPT])
       RETURN .T.
    ENDIF
    RETURN .T.

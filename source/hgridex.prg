@@ -70,7 +70,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd(::aColumns, { cHeader, nWidth, nJusHead, nBit })
    METHOD Refresh()
    METHOD RefreshLine() INLINE Listview_update(::handle, Listview_getfirstitem(::handle))
-   METHOD SetItemCount( nItem ) INLINE Listview_setitemcount( ::handle, nItem )
+   METHOD SetItemCount(nItem) INLINE Listview_setitemcount(::handle, nItem)
    METHOD Row() INLINE Listview_getfirstitem(::handle)
    METHOD AddRow( a, bUpdate )
    METHOD Notify( lParam )
@@ -158,11 +158,11 @@ METHOD Init() CLASS HGridEx
 
 
          IF nmax == 4
-            ::hIm := CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK )
+            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
          ELSEIF nmax == 8
-            ::hIm := CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK )
+            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
          ELSEIF nmax == 24
-            ::hIm := CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK )
+            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
          ENDIF
 
          FOR nPos := 1 TO Len(aButton)
@@ -177,11 +177,11 @@ METHOD Init() CLASS HGridEx
 
          NEXT
 
-         Listview_setimagelist( ::handle, ::him )
+         Listview_setimagelist(::handle, ::him)
 
       ENDIF
 
-      Listview_Init( ::handle, ::ItemCount, ::lNoLines )
+      Listview_Init(::handle, ::ItemCount, ::lNoLines)
 
       FOR i := 1 TO Len(::aColumns)
          Listview_addcolumnEX( ::handle, i, ::aColumns[i, 1], ::aColumns[i , 2], ::aColumns[i, 3], IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4]  , - 1) )
@@ -256,7 +256,7 @@ METHOD Notify( lParam ) CLASS HGRIDEX
 
    IF nCode == NM_CUSTOMDRAW .and. GETNOTIFYCODEFROM( lParam ) == ::handle
       Res := PROCESSCUSTU( ::handle, lParam, ::aColors )
-      Hwg_SetDlgResult( oParent:handle, Res )
+      Hwg_SetDlgResult(oParent:handle, Res)
       RETURN Res
    ENDIF
 
@@ -276,7 +276,7 @@ METHOD Notify( lParam ) CLASS HGRIDEX
       IF Empty(::hsort)
          ::hSort := LISTVIEWSORTINFONEW( lParam, NIL )
       ENDIF
-      LISTVIEWSORT( ::handle, lParam, ::hSort )
+      LISTVIEWSORT(::handle, lParam, ::hSort)
       RETURN  0
    ENDIF
    IF nCode == NM_SETFOCUS
@@ -289,7 +289,7 @@ METHOD Notify( lParam ) CLASS HGRIDEX
 
    Res := ListViewNotify( Self, lParam )
    IF hb_IsNumeric(Res)
-      Hwg_SetDlgResult( oParent:handle, Res )
+      Hwg_SetDlgResult(oParent:handle, Res)
       //RETURN 1
    ENDIF
    RETURN Res

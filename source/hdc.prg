@@ -28,13 +28,13 @@ METHOD NEW( nWnd ) CLASS HPAINTDC
    ::Super:new()
    ::m_ps   := DefinePaintStru()
    ::m_hWnd := nWnd
-   ::Attach( BeginPaint( ::m_hWnd, ::m_ps ) )
+   ::Attach( BeginPaint(::m_hWnd, ::m_ps) )
 
    RETURN Self
 
 METHOD END () CLASS HPAINTDC
 
-   EndPaint( ::m_hWnd, ::m_ps )
+   EndPaint(::m_hWnd, ::m_ps)
    ::m_hDC       := NIL
    ::m_hAttribDC := NIL
 
@@ -50,27 +50,27 @@ CLASS HDC
    METHOD ATTACH( hDc )
    METHOD MOVETO( x1, y1 )
    METHOD LINETO( x1, y1 )
-   METHOD fillsolidrect( lpRect, clr )
-   METHOD fillrect( lpRect, clr )
+   METHOD fillsolidrect(lpRect, clr)
+   METHOD fillrect(lpRect, clr)
    METHOD SelectClipRgn( pRgn )
    METHOD SetTextcolor(xColor)
    METHOD SetBkMode(xMode)
    METHOD SetBkColor(clr) INLINE    SetBkColor(::m_hDC, clr)
    METHOD SelectObject(xMode)
-   METHOD DrawText( strText, Rect, dwFlags )
+   METHOD DrawText(strText, Rect, dwFlags)
    METHOD CreateCompatibleDc(x)
-   METHOD patblt( a, s, d, f, g ) INLINE patblt( ::m_hDc, a, s, d, f, g )
+   METHOD patblt(a, s, d, f, g) INLINE patblt(::m_hDc, a, s, d, f, g)
    METHOD Savedc()
    METHOD RestoreDC(nSavedDC)
    METHOD SetMapMode(nMapMode)
    METHOD SetWindowOrg( x, y )
-   METHOD SetWindowExt( x, y )
+   METHOD SetWindowExt(x, y)
    METHOD SetViewportOrg( x, y )
-   METHOD SetViewportExt( x, y )
+   METHOD SetViewportExt(x, y)
    METHOD SetArcDirection( nArcDirection )
    METHOD GetTextMetric() INLINE GetTextMetric(::m_hDC)
    METHOD SetROP2( nDrawMode )
-   METHOD BitBlt( x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop ) INLINE    BitBlt( ::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop )
+   METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE    BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
 
    METHOD PIE(arect, apt1, apt2)
    METHOD DeleteDc()
@@ -127,10 +127,10 @@ METHOD SelectClipRgn( pRgn ) CLASS HDC
 
    RETURN nRetVal
 
-METHOD fillsolidrect( lpRect, clr ) CLASS HDC
+METHOD fillsolidrect(lpRect, clr) CLASS HDC
 
    SetBkColor(::m_hDC, clr)
-   ExtTextOut( ::m_hDC, 0, 0, lpRect[1], lpRect[2], lpRect[3], lpRect[4], NIL )
+   ExtTextOut(::m_hDC, 0, 0, lpRect[1], lpRect[2], lpRect[3], lpRect[4], NIL)
 
    RETURN NIL
 
@@ -146,15 +146,15 @@ METHOD SelectObject(xMode) CLASS HDC
 
    RETURN SelectObject(::m_hDc, xMode)
 
-METHOD DrawText( strText, Rect, dwFlags ) CLASS HDC
+METHOD DrawText(strText, Rect, dwFlags) CLASS HDC
 
-   DrawText( ::m_hDC, strText, Rect[1], Rect[2], Rect[3], Rect[4], dwFlags )
+   DrawText(::m_hDC, strText, Rect[1], Rect[2], Rect[3], Rect[4], dwFlags)
 
    RETURN NIL
 
-METHOD fillrect( lpRect, clr ) CLASS HDC
+METHOD fillrect(lpRect, clr) CLASS HDC
 
-   FillRect( ::m_hDC, lpRect[1], lpRect[2], lpRect[3], lpRect[4], clr )
+   FillRect(::m_hDC, lpRect[1], lpRect[2], lpRect[3], lpRect[4], clr)
 
    RETURN NIL
 
@@ -214,7 +214,7 @@ METHOD SetWindowOrg( x, y ) CLASS HDC
    RETURN point
 
 
-METHOD SetWindowExt( x, y ) CLASS HDC
+METHOD SetWindowExt(x, y) CLASS HDC
 
 
    LOCAL point
@@ -242,7 +242,7 @@ METHOD SetViewportOrg( x, y ) CLASS HDC
    RETURN point
 
 
-METHOD SetViewportExt( x, y ) CLASS HDC
+METHOD SetViewportExt(x, y) CLASS HDC
 
    LOCAL point
 

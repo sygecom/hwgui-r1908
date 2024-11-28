@@ -58,7 +58,7 @@ CLASS VAR winclass INIT "STATIC"
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
                     bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor)
    METHOD INIT()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD GoToLinkUrl( csLink )
    METHOD GetLinkText()
    METHOD SetLinkUrl( csUrl )
@@ -68,9 +68,9 @@ CLASS VAR winclass INIT "STATIC"
    METHOD SetFireChild(lFlag) INLINE ::m_bFireChild := lFlag
    METHOD OnClicked()
    METHOD OnSetCursor( pWnd, nHitTest, message )
-   METHOD SetLinkText( csLinkText )
+   METHOD SetLinkText(csLinkText)
    METHOD SetLinkColor(sLinkColor)
-   METHOD PAint( lpDis ) 
+   METHOD PAint(lpDis)
    METHOD OnMouseMove(nFlags, lParam)
    METHOD Resize(x, y)
 
@@ -181,14 +181,14 @@ METHOD INIT() CLASS HStaticLink
       ::Resize()
       ::Super:init()
       IF ::Title != NIL
-         SETWINDOWTEXT( ::handle, ::title )
+         SETWINDOWTEXT(::handle, ::title)
       ENDIF
 
    ENDIF
 
    RETURN NIL
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HStaticLink
+METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 
    IF msg == WM_PAINT
       //::PAint()
@@ -202,7 +202,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HStaticLink
       //      ::state := LBL_MOUSEOVER
             TRACKMOUSEVENT(::handle)
           ELSE
-            TRACKMOUSEVENT( ::handle, TME_HOVER + TME_LEAVE  )
+            TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
          ENDIF
         */
    ELSEIF ( msg = WM_MOUSELEAVE .OR. msg = WM_NCMOUSELEAVE )
@@ -292,10 +292,10 @@ METHOD OnSetCursor( pWnd, nHitTest, message ) CLASS HStaticLink
 
    RETURN .T.
 
-METHOD SetLinkText( csLinkText ) CLASS HStaticLink
+METHOD SetLinkText(csLinkText) CLASS HStaticLink
 
    ::Title := csLinkText
-   ::SetText( csLinkText )
+   ::SetText(csLinkText)
 
    RETURN NIL
 
@@ -316,11 +316,11 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
    IF ::state != LBL_INIT
       xPos := LOWORD(lParam)
       yPos := HIWORD(lParam)
-      IF (  !PtInRect( { 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos } ) ) .AND. ::state != LBL_MOUSEOVER
+      IF (  !PtInRect({ 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos }) ) .AND. ::state != LBL_MOUSEOVER
           res := .T.
       ELSE
         hwg_SetCursor( ::m_hHyperCursor )
-        IF ( !PtInRect( { 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos } ) )
+        IF ( !PtInRect({ 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos }) )
            //ReleaseCapture()
            res := .T.
         ENDIF
@@ -362,12 +362,12 @@ METHOD Paint(lpDis) CLASS HStaticLink
    IF ::state == LBL_INIT
       ::State := LBL_NORMAL
    ENDIF
-   rcClient   := CopyRect( { drawInfo[4] , drawInfo[5], drawInfo[6], drawInfo[7] } )
+   rcClient   := CopyRect({ drawInfo[4] , drawInfo[5], drawInfo[6], drawInfo[7] })
 
    IF hb_IsNumeric(::hbitmap)
       bHasTitle := hb_IsChar(strtext) .and. !Empty(strtext)
       itemRect[4] := aBmpSize[2] + 1
-      bmpRect := PrepareImageRect( ::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle )
+      bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]
       IF ::backstyle = TRANSPARENT
          DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
@@ -379,7 +379,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
        SetBkColor(DC, IIf(::bColor = NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
-       FillRect( dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4] ) //, ::brush:handle )
+       FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
    //dwstyle    := ::style
@@ -400,13 +400,13 @@ METHOD Paint(lpDis) CLASS HStaticLink
       SetTextColor(DC, ::m_sHoverColor)
    ENDIF
 
-   //::dc:DrawText( strtext, rcClient, dwFlags )
+   //::dc:DrawText(strtext, rcClient, dwFlags)
    IF ::state = LBL_MOUSEOVER .AND. !::lAllUnderline
       SelectObject(DC, ::oFontUnder:handle)
-      DrawText( dc, strText, rcClient, dwFlags )
+      DrawText(dc, strText, rcClient, dwFlags)
       SelectObject(DC, ::oFont:handle)
    ELSE
-      DrawText( dc, strText, rcClient, dwFlags )
+      DrawText(dc, strText, rcClient, dwFlags)
    ENDIF
 
   // ::dc:END()
@@ -427,7 +427,7 @@ METHOD Resize(x, y) CLASS HStaticLink
    aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), { 0,0 })
    aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
-   aTxtSize := TxtRect( ::Title, Self )
+   aTxtSize := TxtRect(::Title, Self)
    aTxtSize[2] += IIf(::lAllUnderline, 0, 3)
    IF aTxtSize[1] + 1  <  ::nWidth - aBmpSize[1] //tava 20
       ::nHeight := aTxtSize[2] + 2

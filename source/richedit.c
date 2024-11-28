@@ -62,8 +62,8 @@ HB_FUNC(CREATERICHEDIT)
 }
 
 /*
- * re_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
-           lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected )
+ * re_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
+           lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected)
  */
 HB_FUNC(RE_SETCHARFORMAT)
 {
@@ -217,7 +217,7 @@ HB_FUNC(RE_SETCHARFORMAT)
 }
 
 /*
- * re_SetDefault( hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset )
+ * re_SetDefault(hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset)
  */
 HB_FUNC(RE_SETDEFAULT)
 {
@@ -328,7 +328,7 @@ HB_FUNC(RE_INSERTTEXT)
 }
 
 /*
- * re_FindText( hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp )
+ * re_FindText(hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp)
  */
 HB_FUNC(RE_FINDTEXT)
 {

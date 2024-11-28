@@ -323,18 +323,18 @@ CLASS HBrowse INHERIT HControl
    METHOD Rebuild()
    METHOD Activate()
    METHOD Init()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Redefine(lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus)
    METHOD FindBrowse(nId)
    METHOD AddColumn( oColumn )
    METHOD InsColumn( oColumn, nPos )
    METHOD DelColumn( nPos )
-   METHOD Paint( lLostFocus )
-   METHOD LineOut( nRow, nCol, hDC, lSelected, lClear )
+   METHOD Paint(lLostFocus)
+   METHOD LineOut(nRow, nCol, hDC, lSelected, lClear)
    METHOD Select()
-   METHOD HeaderOut( hDC )
-   METHOD SeparatorOut( hDC, nRowsFill )
-   METHOD FooterOut( hDC )
+   METHOD HeaderOut(hDC)
+   METHOD SeparatorOut(hDC, nRowsFill)
+   METHOD FooterOut(hDC)
    METHOD SetColumn( nCol )
    METHOD DoHScroll( wParam )
    METHOD DoVScroll( wParam )
@@ -350,7 +350,7 @@ CLASS HBrowse INHERIT HControl
    METHOD ButtonDbl( lParam )
    METHOD MouseMove(wParam, lParam)
    METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
-   METHOD Edit( wParam, lParam )
+   METHOD Edit(wParam, lParam)
    METHOD Append() INLINE ( ::Bottom( .F. ), ::LineDown() )
    METHOD onClick() 
    METHOD RefreshLine()
@@ -358,14 +358,14 @@ CLASS HBrowse INHERIT HControl
    METHOD ShowSizes()
    METHOD END()
    METHOD SetMargin( nTop, nRight, nBottom, nLeft )
-   METHOD SetRowHeight( nPixels )
+   METHOD SetRowHeight(nPixels)
    METHOD FldStr( oBrw, numf )
    METHOD Filter( lFilter ) SETGET
    //
    METHOD WhenColumn( value, oGet )
    METHOD ValidColumn( value, oGet, oBtn )
    METHOD onClickColumn( value, oGet, oBtn )
-   METHOD EditEvent( oCtrl, msg, wParam, lParam )
+   METHOD EditEvent(oCtrl, msg, wParam, lParam)
    METHOD ButtonRDown( lParam )
    METHOD ShowMark( lShowMark ) SETGET
    METHOD DeleteMark( lDeleteMark ) SETGET
@@ -494,7 +494,7 @@ METHOD SetMargin( nTop, nRight, nBottom, nLeft ) CLASS HBrowse
 /***
 *
 */
-METHOD SetRowHeight( nPixels ) CLASS HBrowse
+METHOD SetRowHeight(nPixels) CLASS HBrowse
    LOCAL nOldPixels
 
    nOldPixels := ::forceHeight
@@ -517,7 +517,7 @@ METHOD SetRowHeight( nPixels ) CLASS HBrowse
 
 //----------------------------------------------------//
 #if 0 // old code for reference
-METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
+METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
    LOCAL oParent, cKeyb, nCtrl, nPos, lBEof
    LOCAL nRecStart, nRecStop, nRet, nShiftAltCtrl
 
@@ -603,9 +603,9 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
          ::DoVScroll( wParam )
 
       ELSEIF msg == WM_CHAR
-         IF !CheckBit( lParam, 32 ) //.AND. hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift( .F., .T. ), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift( .T., .F. ), 2, nShiftAltCtrl)
+         IF !CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
+             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
                 IF Empty(nRet := Eval( ::bKeyDown, Self, wParam, nShiftAltCtrl, msg )) .and. nRet != Nil
@@ -616,7 +616,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
                 RETURN - 1
              ENDIF
              IF ::lAutoEdit .OR. ::aColumns[::SetColumn()]:lEditable
-                ::Edit( wParam, lParam )
+                ::Edit(wParam, lParam)
              ENDIF
          ENDIF
 
@@ -632,9 +632,9 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
          RETURN DLGC_WANTALLKEYS
 
       ELSEIF msg == WM_COMMAND
-         // ::Super:onEvent( WM_COMMAND )
+         // ::Super:onEvent(WM_COMMAND)
          IF ::GetParentForm( self ):Type < WND_DLG_RESOURCE
-            ::GetParentForm( self ):onEvent( msg, wparam, lparam )
+            ::GetParentForm( self ):onEvent(msg, wparam, lparam)
          ELSE
             DlgCommand(Self, wParam, lParam)
          ENDIF
@@ -654,7 +654,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
             ENDIF
             /*
             ELSE
-               ::DoHScroll( IIf(IsCtrlShift( .F., .T. ), SB_LINELEFT, SB_LINERIGHT) )
+               ::DoHScroll( IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT) )
             ENDIF
             */
          ENDIF
@@ -676,11 +676,11 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
 
       ELSEIF msg == WM_KEYDOWN .AND. !::oParent:lSuspendMsgsHandling
          //::isMouseOver := .F.
-         IF ( ( CheckBit( lParam, 25 ) .AND. wParam != 111 ) .OR.  ( wParam > 111 .AND. wParam < 124 ) .OR.;
+         IF ( ( CheckBit(lParam, 25) .AND. wParam != 111 ) .OR.  ( wParam > 111 .AND. wParam < 124 ) .OR.;
                wParam = VK_TAB .OR. wParam = VK_RETURN )   .AND.;
                hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift( .F., .T. ), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift( .T., .F. ), 2, nShiftAltCtrl)
+             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF Empty(nRet := Eval( ::bKeyDown, Self, wParam, nShiftAltCtrl, msg )) .AND. nRet != Nil
                 RETURN 0
@@ -699,7 +699,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
                IIf(IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSE
-               ::DoHScroll( IIf(IsCtrlShift( .F., .T. ), SB_LINELEFT, SB_LINERIGHT) )
+               ::DoHScroll( IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT) )
             ENDIF
          ELSEIF wParam == VK_DOWN //40        // Down
             IF ::lShiftPress .AND. ::aSelected != Nil
@@ -745,13 +745,13 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
             ::DoHScroll( SB_LINELEFT )
          ELSEIF wParam == VK_HOME //36    // Home
             IF !::lCtrlPress .AND. ( ::lAutoEdit .OR. ::aColumns[::SetColumn()]:lEditable )
-               ::Edit( wParam )
+               ::Edit(wParam)
             ELSE
                ::DoHScroll( SB_LEFT )
             ENDIF
          ELSEIF wParam == VK_END //35    // End
             IF !::lCtrlPress .AND. ( ::lAutoEdit .OR. ::aColumns[::SetColumn()]:lEditable )
-               ::Edit( wParam )
+               ::Edit(wParam)
             ELSE
                ::DoHScroll( SB_RIGHT )
             ENDIF
@@ -807,7 +807,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
             ENDIF
 
          ELSEIF wParam == VK_RETURN    // Enter
-            ::Edit( VK_RETURN )
+            ::Edit(VK_RETURN)
 
          ELSEIF wParam == VK_ESCAPE .AND. ::lESC
             IF ::GetParentForm():Type < WND_DLG_RESOURCE
@@ -820,7 +820,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
          ELSEIF wParam == VK_SHIFT   //16
             ::lShiftPress := .T.
          //ELSEIF ::lAutoEdit .AND. ( wParam >= 48 .and. wParam <= 90 .or. wParam >= 96 .and. wParam <= 111 )
-         //   ::Edit( wParam, lParam )
+         //   ::Edit(wParam, lParam)
          ENDIF
          RETURN 1
 
@@ -847,7 +847,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
                ::allMouseOver := .T.
                TRACKMOUSEVENT(::handle)
             ELSE
-               TRACKMOUSEVENT( ::handle, TME_HOVER + TME_LEAVE )
+               TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
             ENDIF
          ENDIF
       ELSEIF msg =  WM_MOUSEHOVER
@@ -1357,9 +1357,9 @@ STATIC FUNCTION InitColumn( oBrw, oColumn, n )
    ENDIF
    oColumn:width := 0
    IF oColumn:dec == Nil
-      IF oColumn:Type == "N" .and. At( ".", Str( Eval( oColumn:block,, oBrw, n ) ) ) != 0
+      IF oColumn:Type == "N" .and. At(".", Str( Eval( oColumn:block,, oBrw, n ) )) != 0
          oColumn:dec := Len(SubStr(Str( Eval( oColumn:block,, oBrw, n ) ), ;
-                                     At( ".", Str( Eval( oColumn:block,, oBrw, n ) ) ) + 1))
+                                     At(".", Str( Eval( oColumn:block,, oBrw, n ) )) + 1))
       ELSE
          oColumn:dec := 0
       ENDIF
@@ -1510,7 +1510,7 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
    IF ::Type == BRW_DATABASE
       ::Filter( ::lFilter )
       /*
-      IF !Empty(::Alias) .AND. SELECT( ::Alias ) > 0
+      IF !Empty(::Alias) .AND. SELECT(::Alias) > 0
          SELECT ( ::Alias )
       ENDIF
       ::Alias   := Alias()
@@ -1532,7 +1532,7 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
             ::bEof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
          ENDIF
-         ::bRcou     := { | o | ( ::Alias ) ->( FltRecCount( o ) ) }
+         ::bRcou     := { | o | ( ::Alias ) ->( FltRecCount(o) ) }
          ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo( o ) ) }
          ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo( o, n ) ) }
       ELSE
@@ -1584,7 +1584,7 @@ METHOD FILTER( lFilter ) CLASS HBrowse
       IF Empty(::Alias)
         ::Alias   := Alias()
       ENDIF
-      IF !Empty(::Alias) .AND. SELECT( ::Alias ) > 0
+      IF !Empty(::Alias) .AND. SELECT(::Alias) > 0
          SELECT ( ::Alias )
       ENDIF
       IF Empty(::ALias)
@@ -1606,7 +1606,7 @@ METHOD FILTER( lFilter ) CLASS HBrowse
             ::bEof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
          ENDIF
-         //::bRcou     := { | o | ( ::Alias ) ->( FltRecCount( o ) ) }
+         //::bRcou     := { | o | ( ::Alias ) ->( FltRecCount(o) ) }
          ::bRcou     := { || ( ::Alias ) ->( RecCount() ) }
          ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo( o ) ) }
          ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo( o, n ) ) }
@@ -1655,8 +1655,8 @@ METHOD Rebuild() CLASS HBrowse
       IF oColumn:lEditable
          ::lEditable := .T.
       ENDIF
-      //FontSize := TxtRect(  "a", Self, oColumn:oFont )[1]
-      FontSize := IIf(oColumn:type $ "DN", TxtRect( "9", Self, oColumn:oFont )[1], TxtRect( "N", Self, oColumn:oFont )[1])
+      //FontSize := TxtRect("a", Self, oColumn:oFont)[1]
+      FontSize := IIf(oColumn:type $ "DN", TxtRect("9", Self, oColumn:oFont)[1], TxtRect("N", Self, oColumn:oFont)[1])
       IF oColumn:aBitmaps != Nil
          IF oColumn:heading != NIL
             /*
@@ -1752,20 +1752,20 @@ METHOD AutoFit() CLASS HBrowse
    RETURN .T.
 
 //----------------------------------------------------//
-METHOD Paint( lLostFocus ) CLASS HBrowse
+METHOD Paint(lLostFocus) CLASS HBrowse
    LOCAL aCoors, aMetr, cursor_row, tmp, nRows, nRowsFill
    LOCAL pps, hDC
    LOCAL oldfont, aMetrHead, nRecFilter
 
    IF !::active .OR. Empty(::aColumns) .OR. ::lHeadClick  //.OR. ::isMouseOver //.AND. ::internal[1] = WM_MOUSEMOVE )
       pps := DefinePaintStru()
-      hDC := BeginPaint( ::handle, pps )
+      hDC := BeginPaint(::handle, pps)
       IF ::lHeadClick   .OR. ::isMouseOver
           ::oParent:lSuspendMsgsHandling := .T.
-          ::HeaderOut( hDC )
+          ::HeaderOut(hDC)
           ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
-      EndPaint( ::handle, pps )
+      EndPaint(::handle, pps)
       ::isMouseOver := .F.
 
       RETURN Nil
@@ -1815,7 +1815,7 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
 // Open Paint procedure
 
    pps := DefinePaintStru()
-   hDC := BeginPaint( ::handle, pps )
+   hDC := BeginPaint(::handle, pps)
 
    IF ::ofont != Nil
       SelectObject(hDC, ::ofont:handle)
@@ -1856,8 +1856,8 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
    ::y2 := aCoors[4] // - IIf(::nFootRows > 0, ::nFootHeight*::nFootRows, 0)
    //--::xAdjRight := ::x2
    IF ::lRepaintBackground
-      //FillRect( hDC, ::x1 - ::nDeleteMark, ::y1, ::x2, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle )
-      FillRect( hDC, ::x1 - ::nDeleteMark, ::y1, ::xAdjRight, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle )
+      //FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::x2, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle)
+      FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::xAdjRight, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle)
       ::lRepaintBackground := .F.
    ENDIF
 
@@ -1870,10 +1870,10 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
 
 // Calculate number of columns visible
 
-   ::nColumns := FLDCOUNT( Self, ::x1 + 2, ::x2 - 2, ::nLeftCol )
+   ::nColumns := FLDCOUNT(Self, ::x1 + 2, ::x2 - 2, ::nLeftCol)
 
 // Calculate number of rows the canvas can host
-   ::rowCount := Int( ( ::y2 - ::y1 - ( ::nFootRows * ::nFootHeight ) ) / ( ::height + 1 ) )
+   ::rowCount := Int(( ::y2 - ::y1 - ( ::nFootRows * ::nFootHeight ) ) / ( ::height + 1 ))
 
 // nRows: if number of data rows are less than video rows available....
    nRows := Min( ::nRecords, ::rowCount )
@@ -1884,9 +1884,9 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
       ENDIF
       ::oParent:lSuspendMsgsHandling := .T.
       IF ::aSelected != Nil .AND. AScan( ::aSelected, { | x | x = Eval( ::bRecno, Self ) } ) > 0
-         ::LineOut( ::internal[2], 0, hDC, !::lResizing )
+         ::LineOut(::internal[2], 0, hDC, !::lResizing)
       ELSE
-         ::LineOut( ::internal[2], 0, hDC, .F. )
+         ::LineOut(::internal[2], 0, hDC, .F.)
       ENDIF
       IF ::rowPos != ::internal[2] .AND. !::lAppMode
          Eval( ::bSkip, Self, ::rowPos - ::internal[2] )
@@ -1903,13 +1903,13 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
          //IF cursor_row > nRows .OR. ( Eval( ::bEof, Self ) .AND. !::lAppMode )
          //   EXIT
          //ENDIF
-         ::LineOut( cursor_row, 0, hDC, .F. )
+         ::LineOut(cursor_row, 0, hDC, .F.)
          cursor_row ++
          Eval( ::bSkip, Self, 1 )
        ENDDO
        */
        ::xAdjRight := ::x2
-       ::HeaderOut( hDC )
+       ::HeaderOut(hDC)
        //Eval( ::bGoTo, Self, tmp )
 
     ELSE
@@ -1992,9 +1992,9 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
 
          // decide how to print the video row
          IF ::aSelected != Nil .AND. AScan( ::aSelected, { | x | x = Eval( ::bRecno, Self ) } ) > 0
-            ::LineOut( cursor_row, 0, hDC, !::lResizing )
+            ::LineOut(cursor_row, 0, hDC, !::lResizing)
          ELSE
-            ::LineOut( cursor_row, 0, hDC, .F. )
+            ::LineOut(cursor_row, 0, hDC, .F.)
          ENDIF
          cursor_row ++
          Eval( ::bSkip, Self, 1 )
@@ -2012,33 +2012,33 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
 
       DO WHILE cursor_row <= ::rowCount .AND. ( ::nRecords > nRows .AND. !Eval( ::bEof, Self ) )
          //IF ::aSelected != Nil .AND. AScan( ::aSelected, { | x | x = Eval( ::bRecno, Self ) } ) > 0
-         //   ::LineOut( cursor_row, 0, hDC, .T., .T. )
+         //   ::LineOut(cursor_row, 0, hDC, .T., .T.)
          //ELSE
-            ::LineOut( cursor_row, 0, hDC, .F., .T. )
+            ::LineOut(cursor_row, 0, hDC, .F., .T.)
          //ENDIF
          cursor_row ++
       ENDDO
-      IF ::lDispSep .AND. !Checkbit( ::internal[1], 1 ) .AND. nRowsFill <= ::rowCurrCount
-         ::SeparatorOut( hDC, ::rowCurrCount )
+      IF ::lDispSep .AND. !Checkbit(::internal[1], 1) .AND. nRowsFill <= ::rowCurrCount
+         ::SeparatorOut(hDC, ::rowCurrCount)
       ENDIF
       nRowsFill := cursor_row - 1
       // fill the remaining canvas area with background color if needed
       nRows := cursor_row - 1
       IF nRows < ::rowCount .or. ( nRows * ( ::height - 1 ) + ::nHeadHeight + ::nFootHeight ) < ::nHeight
-       //  FillRect( hDC, ::x1, ::y1 + ( ::height + 1 ) * nRows + 1, ::x2, ::y2, ::brush:handle )
+       //  FillRect(hDC, ::x1, ::y1 + ( ::height + 1 ) * nRows + 1, ::x2, ::y2, ::brush:handle)
       ENDIF
       Eval( ::bGoTo, Self, tmp )
    ENDIF
    IF ::lAppMode
-      ::LineOut( nRows + 1, 0, hDC, .F., .T. )
+      ::LineOut(nRows + 1, 0, hDC, .F., .T.)
    ENDIF
 
-   //::LineOut( ::rowPos, IIf(::lEditable, ::colpos, 0 ), hDC, .T.)
+   //::LineOut(::rowPos, IIf(::lEditable, ::colpos, 0), hDC, .T.)
 
    // Highlights the selected ROW
    // we can have a modality with CELL selection only or ROW selection
    IF !::lHeadClick  .AND. ( !::lEditable .OR. ( ::lEditable .AND. ::Highlight ) ) // .AND.!::lResizing
-      ::LineOut( ::rowPos, 0, hDC, !::lResizing )
+      ::LineOut(::rowPos, 0, hDC, !::lResizing)
    ENDIF
    // Highligths the selected cell
    // FP: Reenabled the lEditable check as it's not possible
@@ -2046,30 +2046,30 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
    //     Actually: if lEditable is FALSE we can only have LINE selection
 //   if ::lEditable
    IF lLostFocus == NIL .AND. !::lHeadClick  .AND. ( ::lEditable .OR. ::Highlight )  //.AND. !::lResizing
-      ::LineOut( ::rowPos, ::colpos, hDC, !::lResizing )
+      ::LineOut(::rowPos, ::colpos, hDC, !::lResizing)
    ENDIF
 //   endif
 
    // if bit-1 refresh header and footer
    ::oParent:lSuspendMsgsHandling := .F.
 
-   IF Checkbit( ::internal[1], 1 ) .OR. ::lAppMode
+   IF Checkbit(::internal[1], 1) .OR. ::lAppMode
       //IF ::lDispSep
-         ::SeparatorOut( hDC, nRowsFill  )
+         ::SeparatorOut(hDC, nRowsFill)
       //ENDIF
       IF ::nHeadRows > 0
-         ::HeaderOut( hDC )
+         ::HeaderOut(hDC)
       ENDIF
       IF ::nFootRows > 0
-         ::FooterOut( hDC )
+         ::FooterOut(hDC)
       ENDIF
    ENDIF
    IF ::lAppMode  .AND. ::nRecords != 0 .AND. ::rowPos = ::rowCount
-       ::LineOut( ::rowPos, 0, hDC, .T., .T. )
+       ::LineOut(::rowPos, 0, hDC, .T., .T.)
    ENDIF
 
    // End paint block
-   EndPaint( ::handle, pps )
+   EndPaint(::handle, pps)
 
    ::internal[1] := 15
    ::internal[2] := ::rowPos
@@ -2104,7 +2104,7 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
 
 //----------------------------------------------------//
 // TODO: hb_tokenGet() can create problems.... can't have separator as first char
-METHOD HeaderOut( hDC ) CLASS HBrowse
+METHOD HeaderOut(hDC) CLASS HBrowse
    LOCAL x, oldc, fif, xSize, lFixed := .F., xSizeMax
    LOCAL oPen, oldBkColor
    LOCAL oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
@@ -2177,17 +2177,17 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
             SelectObject(hDC, oPenHdr:handle)
             cStr := oColumn:cGrid + ";"
             FOR nLine := 1 TO ::nHeadRows
-               cNWSE := hb_tokenGet( @cStr, nLine, ";" )
-               IF At( "S", cNWSE ) != 0
+               cNWSE := hb_tokenGet(@cStr, nLine, ";")
+               IF At("S", cNWSE) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ), x + xSize - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
-               IF At( "N", cNWSE ) != 0
+               IF At("N", cNWSE) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ), x + xSize - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ))
                ENDIF
-               IF At( "E", cNWSE ) != 0
+               IF At("E", cNWSE) != 0
                   DrawLine(hDC, x + xSize - 2, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) + 1, x + xSize - 2, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
-               IF At( "W", cNWSE ) != 0
+               IF At("W", cNWSE) != 0
                   DrawLine(hDC, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) + 1, x - 1, ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ))
                ENDIF
             NEXT
@@ -2202,7 +2202,7 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
             axPosMouseOver  := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,{x, x + xsize },axPosMouseOver)
          ELSE
             state := IIf(::hTheme != Nil, PBS_PRESSED, 6)
-            InflateRect( @aItemRect, - 1, - 1 )
+            InflateRect(@aItemRect, -1, -1)
          ENDIF
          IF ::hTheme != Nil
              hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, Nil)
@@ -2219,13 +2219,13 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
                                                                IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE =  DT_RIGHT, 1, 0))
          cStr := oColumn:heading + ";"
          FOR nLine := 1 TO ::nHeadRows
-            aTxtSize := IIf(nLine = 1, TxtRect( cStr, Self ), aTxtSize)
-            DrawText( hDC, hb_tokenGet( @cStr, nLine, ";" ), ;
+            aTxtSize := IIf(nLine = 1, TxtRect(cStr, Self), aTxtSize)
+            DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                       x + ::aMargin[4] + 1 + nMe, ;
                       ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine + 1 ) +  ::aMargin[1] + 1, ;
                       x + xSize - ( 2 + ::aMargin[2] + nMd ), ;
                       ::y1 - ( ::nHeadHeight ) * ( ::nHeadRows - nLine ) - 1, ;
-                      oColumn:nJusHead + IIf(oColumn:lSpandHead, DT_NOCLIP, 0) + DT_END_ELLIPSIS, @captionRect )
+                      oColumn:nJusHead + IIf(oColumn:lSpandHead, DT_NOCLIP, 0) + DT_END_ELLIPSIS, @captionRect)
          NEXT      // Nando DT_VCENTER+DT_SINGLELINE
          IF ::ShowSortMark .AND. oColumn:SortMark > 0
             oBmpSort  :=  IIf(oColumn:SortMark = 1, HBitmap():AddStandard(OBM_UPARROWD), HBitmap():AddStandard(OBM_DNARROWD))
@@ -2312,7 +2312,7 @@ METHOD HeaderOut( hDC ) CLASS HBrowse
    RETURN Nil
 
 //----------------------------------------------------//
-METHOD SeparatorOut( hDC, nRowsFill ) CLASS HBrowse
+METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
    LOCAL i, x, fif, xSize, lFixed := .F., xSizeMax
    LOCAL bColor
    LOCAL oColumn, oPen, oPenLight, oPenFree
@@ -2341,7 +2341,7 @@ METHOD SeparatorOut( hDC, nRowsFill ) CLASS HBrowse
 
    x := ::x1 //- IIf(::lShowMark .AND. !::lDeleteMark, 1, 0)
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
-   FillRect( hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + ( ::height + 1 ) * nRowsfill + 1, ::x2, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle )
+   FillRect(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + ( ::height + 1 ) * nRowsfill + 1, ::x2, ::y2 - ( ::nFootHeight * ::nFootRows ), ::brush:handle)
    // SEPARATOR HORIZONT
    FOR i := 1 TO nRowsFill
       DrawLine(hDC, ::x1 - ::nDeleteMark, ::y1 + ( ::height + 1 ) * i, IIf(::lAdjRight, ::x2, ::x2), ::y1 + ( ::height + 1 ) * i)
@@ -2433,7 +2433,7 @@ METHOD SeparatorOut( hDC, nRowsFill ) CLASS HBrowse
    RETURN Nil
 
 //----------------------------------------------------//
-METHOD FooterOut( hDC ) CLASS HBrowse
+METHOD FooterOut(hDC) CLASS HBrowse
    LOCAL x, fif, xSize, oPen, nLine, cStr
    LOCAL oColumn, aColorFoot, oldBkColor, oldTColor, oBrush
    LOCAL nPixelFooterHeight, nY, lFixed := .F.
@@ -2500,8 +2500,8 @@ METHOD FooterOut( hDC ) CLASS HBrowse
         ENDIF
 
         IF oBrush != Nil
-           FillRect( hDC, x, ::y2 - nPixelFooterHeight + 1, ;
-                x + xSize - 1, ::y2, oBrush:handle )
+           FillRect(hDC, x, ::y2 - nPixelFooterHeight + 1, ;
+                x + xSize - 1, ::y2, oBrush:handle)
         ELSE
            oldBkColor := SetBkColor(hDC, GetSysColor(COLOR_3DFACE))
         ENDIF
@@ -2509,12 +2509,12 @@ METHOD FooterOut( hDC ) CLASS HBrowse
         nY := ::y2 - nPixelFooterHeight
 
         FOR nLine := 1 TO ::nFootRows
-            DrawText( hDC, hb_tokenGet( @cStr, nLine, ";" ), ;
+            DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                    x + ::aMargin[4], ;
                    nY + ( nLine - 1 ) * ( ::nFootHeight + 1 ) + 1 + ::aMargin[1], ;
                    x + xSize - ( 1 + ::aMargin[2] ), ;
                    nY + ( nLine ) * ( ::nFootHeight + 1 ), ;
-                   oColumn:nJusFoot + IIf(oColumn:lSpandFoot, DT_NOCLIP, 0) )
+                   oColumn:nJusFoot + IIf(oColumn:lSpandFoot, DT_NOCLIP, 0))
         NEXT   // nando DT_VCENTER + DT_SINGLELINE
 
         IF aColorFoot != Nil
@@ -2567,7 +2567,7 @@ METHOD FooterOut( hDC ) CLASS HBrowse
    RETURN Nil
 
 //-------------- -Row--  --Col-- ------------------------------//
-METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
+METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
    LOCAL x, nColumn, sviv, xSize, lFixed := .F., xSizeMax
    LOCAL j, ob, bw, bh, y1, hBReal, oPen
    LOCAL oldBkColor, oldTColor, oldBk1Color, oldT1Color
@@ -2591,8 +2591,8 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
       ::nPaintCol  := IIf(::freeze > 0, 1, ::nLeftCol)
       ::nPaintRow  := nRow
       IF ::lDeleteMark
-         FillRect( hDC, ::x1 - ::nDeleteMark - 0, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
-                        ::x1 - 1, ::y1 + ( ::height + 1 ) * ::nPaintRow, IIf(Deleted(), GetStockObject(7), GetStockObject(0))) //::brush:handle ))
+         FillRect(hDC, ::x1 - ::nDeleteMark - 0, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
+                        ::x1 - 1, ::y1 + ( ::height + 1 ) * ::nPaintRow, IIf(Deleted(), GetStockObject(7), GetStockObject(0))) //::brush:handle))
       ENDIF
       IF ::lShowMark
          IF ::hTheme != Nil
@@ -2621,10 +2621,10 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                    oPen := HPen():Add(0, 1, ::bcolorSel)
                    SelectObject(hDC, GetStockObject(NULL_BRUSH))
                    SelectObject(hDC, oPen:handle)
-                   RoundRect( hDC, ::x1, ;
+                   RoundRect(hDC, ::x1, ;
                                  ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
                                  ::xAdjRight - 2,;  //::x2 - 1, ;
-                                 ::y1 + ( ::height + 1 ) * ::nPaintRow, 0, 0 )
+                                 ::y1 + ( ::height + 1 ) * ::nPaintRow, 0, 0)
                    DeleteObject(oPen)
                    IF ( ( ::Highlight .OR. !::lEditable ) .AND. nCol = 0 )  .OR. ( ::HighlightStyle = 3 .AND. !SelfFocus(::handle) )
                       RETURN NIL
@@ -2675,13 +2675,13 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                           ::aColumns[::nPaintCol]:brush:handle, oLineBrush:handle)
              ENDIF
              // Fill background color of a cell
-             FillRect( hDC, x, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
-                      x + xSize - IIf(::lSep3d, 2, 1), ::y1 + ( ::height + 1 ) * ::nPaintRow, hBReal )
+             FillRect(hDC, x, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
+                      x + xSize - IIf(::lSep3d, 2, 1), ::y1 + ( ::height + 1 ) * ::nPaintRow, hBReal)
              IF xSize != xSizeMax
                 // !adjright
                 hBReal := HBrush():Add(16448764):handle
-                FillRect( hDC, x + xsize, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
-                       x + xSizeMax - IIf(::lSep3d, 2, 1), ::y1 + ( ::height + 1 ) * ::nPaintRow, hBReal ) //::brush:handle )
+                FillRect(hDC, x + xsize, ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, ;
+                       x + xSizeMax - IIf(::lSep3d, 2, 1), ::y1 + ( ::height + 1 ) * ::nPaintRow, hBReal) //::brush:handle)
              ENDIF
              IF !lClear
                IF ::aColumns[::nPaintCol]:aBitmaps != Nil .AND. !Empty(::aColumns[::nPaintCol]:aBitmaps)
@@ -2691,11 +2691,11 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                         IF ob:nHeight > ::height
                            y1 := 0
                            bh := ::height
-                           bw := Int( ob:nWidth * ( ob:nHeight / ::height ) )
-                           DrawBitmap(hDC, ob:handle,, x + ( Int( ::aColumns[::nPaintCol]:width - ob:nWidth ) / 2 ), y1 + ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1, bw, bh)
+                           bw := Int(ob:nWidth * ( ob:nHeight / ::height ))
+                           DrawBitmap(hDC, ob:handle,, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, bw, bh)
                         ELSE
-                           y1 := Int( ( ::height - ob:nHeight ) / 2 )
-                           DrawTransparentBitmap(hDC, ob:handle, x + ( Int( ::aColumns[::nPaintCol]:width - ob:nWidth ) / 2 ), y1 + ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1)
+                           y1 := Int((::height - ob:nHeight) / 2)
+                           DrawTransparentBitmap(hDC, ob:handle, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1)
                         ENDIF
                         EXIT
                      ENDIF
@@ -2744,12 +2744,12 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                   IF ::aColumns[::nPaintCol]:Hint
                       AADD(::aColumns[::nPaintCol]:aHints, sViv)
                   ENDIF
-                  DrawText( hDC, sviv, ;
+                  DrawText(hDC, sviv, ;
                             x + ::aMargin[4] + 1, ;
                             ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1 + ::aMargin[1], ;
                             x + xSize - ( 2 + ::aMargin[2] ), ;
                             ::y1 + ( ::height + 1 ) * ::nPaintRow - ( 1 + ::aMargin[3] ), ;
-                            ::aColumns[::nPaintCol]:nJusLin + DT_NOPREFIX )
+                            ::aColumns[::nPaintCol]:nJusLin + DT_NOPREFIX)
 
 // Clipping rectangle
                   #if 0
@@ -2798,8 +2798,8 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
          xSize := Max( ::x2 - x, xSizeMax )
 
          xSize := Max( ::x2 - x, xSize )
-         FillRect( hDC, x, 0, ;
-                   x + xSize - IIf(::lSep3d, 2, 1), ::y2, oLineBrush )
+         FillRect(hDC, x, 0, ;
+                   x + xSize - IIf(::lSep3d, 2, 1), ::y2, oLineBrush)
 
       ENDIF
 */
@@ -2848,7 +2848,7 @@ METHOD SetColumn( nCol ) CLASS HBrowse
 
 
 //----------------------------------------------------//
-STATIC FUNCTION LINERIGHT( oBrw )
+STATIC FUNCTION LINERIGHT(oBrw)
    LOCAL i
    LOCAL lEditable := oBrw:lEditable .OR. oBrw:Highlight
    
@@ -2870,7 +2870,7 @@ STATIC FUNCTION LINERIGHT( oBrw )
 
 //----------------------------------------------------//
 // Move the visible browse one step to the left
-STATIC FUNCTION LINELEFT( oBrw )
+STATIC FUNCTION LINELEFT(oBrw)
    LOCAL lEditable := oBrw:lEditable .OR. oBrw:Highlight
 
    IF lEditable .OR. oBrw:lAutoEdit
@@ -2934,24 +2934,24 @@ METHOD DoHScroll( wParam ) CLASS HBrowse
    ENDIF
 
    IF nScrollCode == SB_LINELEFT .OR. nScrollCode == SB_PAGELEFT
-      LineLeft( Self )
+      LineLeft(Self)
 
    ELSEIF nScrollCode == SB_LINERIGHT .OR. nScrollCode == SB_PAGERIGHT
-      LineRight( Self )
+      LineRight(Self)
 
    ELSEIF nScrollCode == SB_LEFT
       nLeftCol := colpos := 0
       DO WHILE nLeftCol != ::nLeftCol .OR. colpos != ::colpos
          nLeftCol := ::nLeftCol
          colpos := ::colpos
-         LineLeft( Self )
+         LineLeft(Self)
       ENDDO
    ELSEIF nScrollCode == SB_RIGHT
       nLeftCol := colpos := 0
       DO WHILE nLeftCol != ::nLeftCol .OR. colpos != ::colpos
          nLeftCol := ::nLeftCol
          colpos := ::colpos
-         LineRight( Self )
+         LineRight(Self)
       ENDDO
    ELSEIF nScrollCode == SB_THUMBTRACK .OR. nScrollCode == SB_THUMBPOSITION
       ::SetFocus()
@@ -2961,10 +2961,10 @@ METHOD DoHScroll( wParam ) CLASS HBrowse
          ::SetColumn( HIWORD(wParam) )
       ELSE
          IF HIWORD(wParam) > ( ::colpos + ::nLeftCol - 1 )
-            LineRight( Self )
+            LineRight(Self)
          ENDIF
          IF HIWORD(wParam) < ( ::colpos + ::nLeftCol - 1 )
-            LineLeft( Self )
+            LineLeft(Self)
          ENDIF
       ENDIF
    ENDIF
@@ -3045,7 +3045,7 @@ METHOD LINEDOWN( lMouse ) CLASS HBrowse
       ::nLeftCol  := ::freeze + 1
    ENDIF
    IF !::lAppMode  .OR. ::nLeftCol == 1
-      ::internal[1] := SetBit( ::internal[1], 1, 0 )
+      ::internal[1] := SetBit(::internal[1], 1, 0)
    ENDIF
 
    IF hb_IsBlock(::bScrollPos)
@@ -3085,7 +3085,7 @@ METHOD LINEUP() CLASS HBrowse
       ELSEIF ::nRecords > 1
          VScrollPos(Self, 0, .F.)
       ENDIF
-      ::internal[1] := SetBit( ::internal[1], 1, 0 )
+      ::internal[1] := SetBit(::internal[1], 1, 0)
    ENDIF
   // ::SetFocus() ??
    RETURN Nil
@@ -3165,7 +3165,7 @@ METHOD BOTTOM( lPaint ) CLASS HBrowse
       //::SetFocus()
    ELSE
       //InvalidateRect(::handle, 0)
-      ::internal[1] := SetBit( ::internal[1], 1, 0 )
+      ::internal[1] := SetBit(::internal[1], 1, 0)
    ENDIF
    RETURN Nil
 
@@ -3178,7 +3178,7 @@ METHOD TOP() CLASS HBrowse
 
    //InvalidateRect(::handle, 0)
    ::Refresh( ::nFootRows > 0 )
-   ::internal[1] := SetBit( ::internal[1], 1, 0 )
+   ::internal[1] := SetBit(::internal[1], 1, 0)
    ::SetFocus()
 
    RETURN Nil
@@ -3194,9 +3194,9 @@ METHOD ButtonDown( lParam, lReturnRowCol ) CLASS HBrowse
 
    // Calculate the line you clicked on, keeping track of header
    IF ( ::lDispHead )
-      nLine := Int( ( HIWORD(lParam) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 )
+      nLine := Int((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
    ELSE
-      nLine := Int( HIWORD(lParam) / ( ::height + 1 ) + 1 )
+      nLine := Int(HIWORD(lParam) / (::height + 1) + 1)
    ENDIF
 
    STEP := nLine - ::rowPos
@@ -3399,9 +3399,9 @@ METHOD ButtonRDown( lParam ) CLASS HBrowse
 
    // Calculate the line you clicked on, keeping track of header
    IF ( ::lDispHead )
-      nLine := Int( ( HIWORD(lParam) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 )
+      nLine := Int((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
    ELSE
-      nLine := Int( HIWORD(lParam) / ( ::height + 1 ) + 1 )
+      nLine := Int(HIWORD(lParam) / (::height + 1) + 1)
    ENDIF
    xm := LOWORD(lParam)
 
@@ -3451,8 +3451,8 @@ METHOD ButtonRDown( lParam ) CLASS HBrowse
    RETURN Nil
 
 METHOD ButtonDbl( lParam ) CLASS HBrowse
-   LOCAL nLine := Int( IIf(::lDispHead, ( ( HIWORD(lParam) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 ), ;
-                                              HIWORD(lParam) / ( ::height + 1 ) + 1) )
+   LOCAL nLine := Int(IIf(::lDispHead, ( ( HIWORD(lParam) - ( ::nHeadHeight * ::nHeadRows ) ) / ( ::height + 1 ) + 1 ), ;
+                                              HIWORD(lParam) / ( ::height + 1 ) + 1))
 
    IF nLine > 0 .and. nLine <= ::rowCurrCount
       ::ButtonDown( lParam )
@@ -3564,7 +3564,7 @@ METHOD onClick() CLASS HBrowse
     RETURN lRes
 
 //----------------------------------------------------//
-METHOD Edit( wParam, lParam ) CLASS HBrowse
+METHOD Edit(wParam, lParam) CLASS HBrowse
    LOCAL fipos, x1, y1, fif, nWidth, lReadExit, rowPos
    LOCAL oModDlg, oColumn, aCoors, nChoic, bInit, oGet, Type
    LOCAL oComboFont, oCombo, oBtn
@@ -3636,7 +3636,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
          x1 := aCoors[1]
          y1 := aCoors[2] + 1
 
-         lReadExit := SET( _SET_EXIT, .T. )
+         lReadExit := SET(_SET_EXIT, .T.)
 
          ::lNoValid := .T.
          IF Type != "L"
@@ -3653,7 +3653,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                  At x1, y1 - IIf(oColumn:aList == Nil, 1, 0) ;
                  SIZE nWidth - 1, ::height + IIf(oColumn:aList == Nil, 1, 0) ;
                  ON INIT bInit ;
-                 ON OTHER MESSAGES { | o, m, w, l | ::EditEvent( o, m, w, l ) }
+                 ON OTHER MESSAGES { | o, m, w, l | ::EditEvent(o, m, w, l) }
          ELSE
             INIT DIALOG oModDlg title "memo edit" At 0, 0 SIZE 400, 300 ON INIT { | o | o:center() }
          ENDIF
@@ -3680,15 +3680,15 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                DISPLAYCOUNT  IIf(Len(oColumn:aList) > ::rowCount, ::rowCount - 1, Len(oColumn:aList)) ;
                VALID {| oColumn, oGet | ::ValidColumn( oColumn, oGet )};
                WHEN {| oColumn, oGet | ::WhenColumn( oColumn, oGet )}
-            //oCombo:bSelect := { || KEYB_EVENT( VK_RETURN ) }
+            //oCombo:bSelect := { || KEYB_EVENT(VK_RETURN) }
 
-            oModDlg:AddEvent( 0, IDOK, { || oModDlg:lResult := .T., oModDlg:close() } )
+            oModDlg:AddEvent(0, IDOK, { || oModDlg:lResult := .T., oModDlg:close() })
 
          ELSE
             IF Type == "L"
                oModDlg:lResult := .T.
             ELSEIF Type != "M"
-               nHGet := Max( ( ::height - ( TxtRect( "N", self ) )[2] ) / 2, 0 )
+               nHGet := Max( ( ::height - ( TxtRect("N", self) )[2] ) / 2, 0 )
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
@@ -3699,7 +3699,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
                   WHEN { | oColumn, oGet | ::WhenColumn( oColumn, oGet, oBtn ) }
                   //VALID oColumn:bValid           ;
                   //WHEN oColumn:bWhen
-                 //oModDlg:AddEvent( 0, IDOK, { || oModDlg:lResult := .T., oModDlg:close() } )
+                 //oModDlg:AddEvent(0, IDOK, { || oModDlg:lResult := .T., oModDlg:close() })
                IF oColumn:bClick != NIL
                   IF Type != "D"
                      @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16,::height - 0 ;
@@ -3820,7 +3820,7 @@ METHOD Edit( wParam, lParam ) CLASS HBrowse
             ENDIF
          ENDIF
          ::SetFocus()
-         SET( _SET_EXIT, lReadExit )
+         SET(_SET_EXIT, lReadExit)
 
          IF ::nSetRefresh > 0
             ::oTimer:Interval := ::nSetRefresh
@@ -3875,7 +3875,7 @@ METHOD EditLogical( wParam, lParam ) CLASS HBrowse
       ENDIF
    RETURN .T.
 
-METHOD EditEvent( oCtrl, msg, wParam, lParam )
+METHOD EditEvent(oCtrl, msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(lParam)
 
@@ -4045,7 +4045,7 @@ METHOD Refresh( lFull, lLineUp ) CLASS HBrowse
       //RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
    ELSE
       InvalidateRect(::handle, 0)
-      ::internal[1] := SetBit( ::internal[1], 1, 0 )
+      ::internal[1] := SetBit(::internal[1], 1, 0)
       IF ::nCurrent < ::rowCount .AND. ::rowPos <= ::nCurrent .AND. Empty(lLineUp)
          ::rowPos := ::nCurrent
       ENDIF
@@ -4161,7 +4161,7 @@ METHOD FldStr( oBrw, numf ) CLASS HBrowse
    RETURN cRes
 
 //----------------------------------------------------//
-STATIC FUNCTION FLDCOUNT( oBrw, xstrt, xend, fld1 )
+STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
    LOCAL klf := 0, i := IIf(oBrw:freeze > 0, 1, fld1)
 
    DO WHILE .T.
@@ -4181,7 +4181,7 @@ STATIC FUNCTION FLDCOUNT( oBrw, xstrt, xend, fld1 )
 
 
 //----------------------------------------------------//
-FUNCTION CREATEARLIST( oBrw, arr )
+FUNCTION CREATEARLIST(oBrw, arr)
    LOCAL i
    oBrw:Type  := BRW_ARRAY
    oBrw:aArray := arr
@@ -4215,7 +4215,7 @@ PROCEDURE ARSKIP(oBrw, nSkip)
    RETURN
 
 //----------------------------------------------------//
-FUNCTION CreateList( oBrw, lEditable )
+FUNCTION CreateList(oBrw, lEditable)
    LOCAL i
    LOCAL nArea := Select()
    LOCAL kolf := FCount()
@@ -4299,7 +4299,7 @@ Local nBWidth := oBrw:nWidth // :width is _not_ browse width
 
    IF nType == SB_THUMBPOSITION
 
-      nColPixel := Int( ( nPos * nBWidth ) / ( ( maxPos - minPos ) + 1 ) )
+      nColPixel := Int((nPos * nBWidth) / ((maxPos - minPos) + 1))
       i := oBrw:nLeftCol - 1
 
       do while nColPixel > nSize .AND. i < Len(oBrw:aColumns)
@@ -4466,7 +4466,7 @@ STATIC FUNCTION FltEOF( oBrw )
    RETURN lRet
 
    /*  no used
-STATIC FUNCTION FltRecCount( oBrw )
+STATIC FUNCTION FltRecCount(oBrw)
    LOCAL nRecord, nCount := 0
    nRecord := FltRecNo( oBrw )
    FltGoTop(oBrw)

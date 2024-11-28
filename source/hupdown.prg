@@ -61,7 +61,7 @@ CLASS HUpDown INHERIT HControl
    METHOD Disable() INLINE ( ::Super:Disable(), EnableWindow(::hwndUpDown, .F.) )
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
-   METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + GetClientRect( ::hwndUpDown )[3] - 1
+   METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + GetClientRect(::hwndUpDown)[3] - 1
                               ::Super:Move(x1, y1 , IIf(width != Nil, width, ::nWidth), height, nRepaint) ,;
                               SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
                               IIf(::lHide, ::Hide(), ::Show())
@@ -163,7 +163,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    IF !::lCreate
        ::Activate()
        AddToolTip(::GetParentForm():handle, ::oEditUpDown:handle, ::tooltip)
-       ::oEditUpDown:SetFont( ::oFont )
+       ::oEditUpDown:SetFont(::oFont)
        ::oEditUpDown:DisableBrush := ::DisableBrush  
        SETWINDOWPOS(::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE)
        DESTROYWINDOW(::handle)
@@ -251,7 +251,7 @@ METHOD Valid() CLASS HUpDown
    LOCAL res
 
    /*
-   ::title := GetEditText( ::oParent:handle, ::oEditUpDown:id )
+   ::title := GetEditText(::oParent:handle, ::oEditUpDown:id)
    ::nValue := Val( LTrim(::title) )
    IF hb_IsBlock(::bSetGet)
       Eval( ::bSetGet, ::nValue )
@@ -284,7 +284,7 @@ METHOD Init() CLASS HEditUpDown
 
    IF !::lInit
       IF ::bChange != Nil
-         ::oParent:AddEvent( EN_CHANGE, self,{|| ::onChange()},,"onChange")
+         ::oParent:AddEvent(EN_CHANGE, self,{|| ::onChange()},,"onChange")
       ENDIF
    ENDIF
    RETURN Nil
@@ -312,7 +312,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
    ENDIF
    vari :=  vari + ( ::oUpDown:Increment * idelta )
    ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
-   SetDlgItemText( ::oParent:handle, ::id, ::title )
+   SetDlgItemText(::oParent:handle, ::id, ::title)
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
    ::SetFocus()
@@ -340,7 +340,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
    IF ::bSetGet != Nil  .AND. ::title != Nil
       ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
    ENDIF
-   SetDlgItemText( ::oParent:handle, ::id, ::title )
+   SetDlgItemText(::oParent:handle, ::id, ::title)
 
    RETURN Nil
 
@@ -405,17 +405,17 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       ::bLostFocus := bLfocus
       ::bValid := bLfocus
       ::lnoValid := bGfocus != Nil
-      ::oParent:AddEvent( EN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus" )
-      ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl( id )) },, "onLostFocus" )
+      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus")
+      ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl( id )) },, "onLostFocus")
    ELSE
       IF bGfocus != Nil
          ::lnoValid := .T.
-         ::oParent:AddEvent( EN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus" )
-         //::oParent:AddEvent( EN_SETFOCUS,self,bGfocus,,"onGotFocus"  )
+         ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus")
+         //::oParent:AddEvent(EN_SETFOCUS,self,bGfocus,,"onGotFocus")
       ENDIF
       IF bLfocus != Nil
-         // ::oParent:AddEvent( EN_KILLFOCUS,self,bLfocus,,"onLostFocus"  )
-         ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl( id )) },, "onLostFocus" )
+         // ::oParent:AddEvent(EN_KILLFOCUS,self,bLfocus,,"onLostFocus")
+         ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl( id )) },, "onLostFocus")
       ENDIF
    ENDIF
 
@@ -423,8 +423,8 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
 
 METHOD Activate CLASS HUpDown
    IF !Empty(::oParent:handle)
-      ::handle := CreateEdit( ::oParent:handle, ::id, ;
-                              ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
+      ::handle := CreateEdit(::oParent:handle, ::id, ;
+                             ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF
    RETURN Nil
@@ -440,7 +440,7 @@ METHOD Init() CLASS HUpDown
    ENDIF
    RETURN Nil
 
-METHOD OnEvent( msg, wParam, lParam ) CLASS HUpDown
+METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
 
    IF hb_IsBlock(::bOther)
       IF Eval( ::bOther,Self,msg,wParam,lParam ) != -1
@@ -458,7 +458,7 @@ METHOD OnEvent( msg, wParam, lParam ) CLASS HUpDown
 
     ELSEIF msg = WM_KEYDOWN
 
-        ProcKeyList( Self, wParam )
+        ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_VSCROLL
     ENDIF
@@ -512,7 +512,7 @@ STATIC FUNCTION __Valid(oCtrl)
       RETURN .T.
    ENDIF
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)
-   oCtrl:title := GetEditText( oCtrl:oParent:handle, oCtrl:id )
+   oCtrl:title := GetEditText(oCtrl:oParent:handle, oCtrl:id)
    oCtrl:value := Val( LTrim(oCtrl:title) )
    IF oCtrl:bSetGet != Nil
       Eval( oCtrl:bSetGet, oCtrl:value )

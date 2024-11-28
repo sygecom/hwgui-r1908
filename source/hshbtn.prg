@@ -47,7 +47,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
               cTooltip, lEnabled )
 
    ::hShade := shade_New( 0, 0, nWidth, nHeight, lFlat )
-   shade_Set( ::hShade, shadeID, palette, granularity, highlight, coloring, shcolor )
+   shade_Set(::hShade, shadeID, palette, granularity, highlight, coloring, shcolor)
    RETURN Self
 
 METHOD Paint() CLASS HShadeButton
@@ -55,7 +55,7 @@ METHOD Paint() CLASS HShadeButton
    LOCAL nState
 
    pps := DefinePaintStru()
-   hDC := BeginPaint( ::handle, pps )
+   hDC := BeginPaint(::handle, pps)
 
    IF ::state == OBTN_INIT
       ::state := OBTN_NORMAL
@@ -73,7 +73,7 @@ METHOD Paint() CLASS HShadeButton
 
    ::DrawItems(hDC)
 
-   EndPaint( ::handle, pps )
+   EndPaint(::handle, pps)
    RETURN Nil
 
 METHOD END() CLASS HShadeButton

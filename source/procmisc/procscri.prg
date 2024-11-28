@@ -27,7 +27,7 @@ STATIC y__size := 0, x__size := 0
 
 REQUEST __PP_STDRULES
 
-FUNCTION OpenScript( fname, scrkod )
+FUNCTION OpenScript(fname, scrkod)
 LOCAL han, stroka, scom, aScr, rejim := 0, i
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
@@ -43,7 +43,7 @@ LOCAL aFormCode, aFormName
             IF Upper(LEFT(stroka, 7)) == "#SCRIPT"
                scom := Upper(Ltrim(Substr(stroka, 9)))
                IF scom == scrkod
-                  aScr := RdScript( han, @strbuf, @poz,,fname+","+scrkod )
+                  aScr := RdScript(han, @strbuf, @poz,,fname+","+scrkod)
                   EXIT
                ENDIF
             ELSEIF Left(stroka, 6) == "#BLOCK"
@@ -55,7 +55,7 @@ LOCAL aFormCode, aFormName
                ENDIF
             ENDIF
          ELSEIF rejim == -1 .AND. Left(stroka, 1) == "@"
-            i := AT( " ", stroka )
+            i := AT(" ", stroka)
             Aadd(aFormCode, SubStr(stroka, 2, i - 2))
             Aadd(aFormName, SubStr(stroka, i + 1))
          ELSEIF rejim == -1 .AND. Left(stroka, 9) == "#ENDBLOCK"
@@ -77,13 +77,13 @@ LOCAL aFormCode, aFormName
 #ifdef __WINDOWS__
       MsgStop(fname + " can't be opened ")
 #else
-      ALERT( fname + " can't be opened " )
+      ALERT(fname + " can't be opened ")
 #endif
       RETURN Nil
    ENDIF
 RETURN aScr
 
-FUNCTION RdScript( scrSource, strbuf, poz, lppNoInit, cTitle )
+FUNCTION RdScript(scrSource, strbuf, poz, lppNoInit, cTitle)
 STATIC s_pp
 LOCAL han
 LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
@@ -113,8 +113,8 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
          s_pp := __pp_init()
       ENDIF
       IF hb_IsChar(scrSource)
-         WndOut( "Compiling ..." )
-         WndOut( "" )
+         WndOut("Compiling ...")
+         WndOut("")
       ENDIF
       numlin := 0
       IF !CompileScr( s_pp, han, @strbuf, @poz, rezArray, scrSource )
@@ -131,7 +131,7 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
 #ifdef __WINDOWS__
       MsgStop("Can't open " + scrSource)
 #else
-      WndOut( "Can't open " + scrSource )
+      WndOut("Can't open " + scrSource)
       WAIT ""
       WndOut()
 #endif
@@ -191,7 +191,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
 #endif
          ENDIF
 
-         poz1 := AT( " ", stroka )
+         poz1 := AT(" ", stroka)
          scom := UPPER(SUBSTR(stroka, 1, IIf(poz1 != 0, poz1 - 1, 999)))
          DO CASE
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
@@ -261,7 +261,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             AADD(tmpArray, "")
          CASE scom == "FUNCTION"
             stroka := LTrim(SubStr(stroka, poz1 + 1))
-            poz1 := At( "(",stroka )
+            poz1 := At("(", stroka)
             scom := UPPER(LEFT(stroka, IIf(poz1 != 0, poz1 - 1, 999)))
             AADD(rezArray[2], IIf(lDebug,{ scom,{},{} },{ scom,{} }))
             AADD(tmpArray, "")
@@ -318,16 +318,16 @@ Local n, cTitle
    ENDIF
 #else
    IF nm == 1
-      ALERT( "Error in;" + AllTrim(stroka) )
+      ALERT("Error in;" + AllTrim(stroka))
    ELSEIF nm == 2
-      Alert( "Script variables error" )
+      Alert("Script variables error")
    ELSEIF nm == 3
       stroka += ";" + ErrorMessage(e)
       n := 2
       DO WHILE !Empty(ProcName(n))
         stroka += ";Called from " + ProcName(n) + "(" + AllTrim(Str( ProcLine(n++) )) + ")"
       ENDDO
-      Alert( "Script execution error:;"+stroka )
+      Alert("Script execution error:;" + stroka)
    ENDIF
 #endif
    BREAK
@@ -404,7 +404,7 @@ LOCAL bOldError
    NEXT
 RETURN .F.
 
-FUNCTION DoScript( aScript, aParams )
+FUNCTION DoScript(aScript, aParams)
 LOCAL arlen, stroka, varName, varValue, lDebug, lParam, j, RetValue, lSetDebugger := .F.
 MEMVAR iscr, bOldError, aScriptt
 PRIVATE iscr := 1, bOldError
@@ -510,7 +510,7 @@ MEMVAR aScriptt
    cProc := Upper(cProc)
    DO WHILE i <= Len(aScript[2]) .AND. hb_IsArray(aScript[2, i])
       IF aScript[2,i,1] == cProc
-         DoScript( aScript[2,i],aParams )
+         DoScript(aScript[2, i], aParams)
          EXIT
       ENDIF
       i ++
@@ -518,7 +518,7 @@ MEMVAR aScriptt
 
 RETURN scr_RetValue
 
-FUNCTION EndScript( xRetValue )
+FUNCTION EndScript(xRetValue)
    scr_RetValue := xRetValue
    iscr := -99
 RETURN Nil
@@ -556,7 +556,7 @@ RETURN Nil
 
 #else
 
-FUNCTION WndOut( sout, noscroll, prnew )
+FUNCTION WndOut(sout, noscroll, prnew)
 LOCAL y1, x1, y2, x2, oldc, ly__size := (y__size != 0)
 STATIC w__buf
    IF sout == Nil .AND. !ly__size
@@ -569,8 +569,8 @@ STATIC w__buf
    ELSEIF prnew == Nil
       prnew := .F.
    ENDIF
-   y1 := 13 - INT( y__size / 2 )
-   x1 := 41 - INT( x__size / 2 )
+   y1 := 13 - INT(y__size / 2)
+   x1 := 41 - INT(x__size / 2)
    y2 := y1 + y__size
    x2 := x1 + x__size
    IF sout == Nil
@@ -595,13 +595,13 @@ RETURN Nil
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION WndGet( sout, varget, spict )
+FUNCTION WndGet(sout, varget, spict)
 
 LOCAL y1, x1, y2, x2, oldc
 LOCAL GetList := {}
-   WndOut( sout )
-   y1   := 13 - INT( y__size / 2 )
-   x1   := 41 - INT( x__size / 2 )
+   WndOut(sout)
+   y1   := 13 - INT(y__size / 2)
+   x1   := 41 - INT(x__size / 2)
    y2   := y1 + y__size
    x2   := x1 + x__size
    oldc := SETCOLOR("N/W")
@@ -625,6 +625,6 @@ FUNCTION WndOpen( ysize, xsize )
 
    y__size := ysize
    x__size := xsize
-   WndOut( "",, .T. )
+   WndOut("",, .T.)
 RETURN Nil
 #endif

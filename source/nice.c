@@ -234,7 +234,7 @@ HB_FUNC(GRADIENT)
   {
     s_pGradientfill = (GRADIENTFILL)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "GradientFill");
   }
-  // void Gradient( HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode )
+  // void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode)
 
   Gradient(hwg_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
            (hb_pcount() > 5 && !HB_ISNIL(6)) ? hb_parni(6) : 16777215,

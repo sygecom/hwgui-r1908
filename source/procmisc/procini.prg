@@ -106,7 +106,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                SET EXACT OFF
             ENDIF
          ELSEIF ( prblo .OR. lWinIni ) .AND. Left(stroka, 1) != ";"
-            poz1 := AT( "=", stroka )
+            poz1 := AT("=", stroka)
             IF poz1 != 0
                lTruncAr := IIF(SubStr(stroka, poz1 - 1, 1) == "+", .F., .T.)
                vname    := RTrim(SubStr(stroka, 1, IIf(lTruncAr, poz1 - 1, poz1 - 2)))
@@ -164,7 +164,7 @@ STATIC FUNCTION RDZNACH( ps )
 LOCAL poz, znc
    ps := AllTrim(ps)
    IF ASC(ps) = 34
-      poz := AT( CHR(34), SubStr(ps, 2) )
+      poz := AT(CHR(34), SubStr(ps, 2))
       IF poz != 0
          znc := SubStr(ps, 2, poz - 1)
       ENDIF

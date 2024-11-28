@@ -14,7 +14,7 @@
 #include "hxml.ch"
 
 #ifdef __XHARBOUR__
-   #xtranslate HB_AT( < x, ... > ) => At( < x > )
+   #xtranslate HB_AT(< x, ... >) => At(< x >)
 #endif
 
 #define  CONTROL_FIRST_ID   34000
@@ -275,8 +275,8 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
          lModal := xProperty
       ELSEIF ::aProp[i, 1] == "formtype"
          IF nMode == Nil
-            lMdi := At( "mdimain", Lower(xProperty) ) > 0
-            lMdiChild := At( "mdichild", Lower(xProperty) ) > 0
+            lMdi := At("mdimain", Lower(xProperty)) > 0
+            lMdiChild := At("mdichild", Lower(xProperty)) > 0
             nMode := IIf(Left(xProperty, 3) == "dlg", 2, 1)
          ENDIF
       ELSEIF ::aProp[i, 1] == "variables"
@@ -474,12 +474,12 @@ STATIC FUNCTION ReadTree(pp, oForm, aParent, oDesc)
 FUNCTION ParseMethod(cMethod)
    LOCAL arr := {}, nPos1, nPos2, cLine
 
-   IF ( nPos1 := At( Chr(10),cMethod ) ) == 0
+   IF ( nPos1 := At(Chr(10), cMethod) ) == 0
       Aadd(arr, RTrim(cMethod))
    ELSE
       Aadd(arr, RTrim(Left(cMethod, nPos1 - 1)))
       DO WHILE .T.
-         IF ( nPos2 := hb_At( Chr(10), cMethod, nPos1 + 1 ) ) == 0
+         IF ( nPos2 := hb_At(Chr(10), cMethod, nPos1 + 1) ) == 0
             cLine := AllTrim(SubStr(cMethod, nPos1 + 1))
          ELSE
             cLine := AllTrim(SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1))
@@ -517,7 +517,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       cMethod := LTrim(cMethod)
    ENDIF
    IF Lower(Left(cMethod, 11)) == "parameters " .AND. ;
-         ( nPos := At( Chr(10),cMethod ) ) != 0
+         ( nPos := At(Chr(10), cMethod) ) != 0
       DO WHILE Substr(cMethod, --nPos, 1) <= " "; ENDDO
       cParam := Alltrim(Substr(Left(cMethod, nPos), 12))
    ENDIF
@@ -549,7 +549,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
                "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
                "F("+Ltrim(Str(oCtrl:nId))+")")
          arrExe := Array(2)
-         arrExe[2] := RdScript( ,cMethod,1,.T.,cName )
+         arrExe[2] := RdScript(, cMethod, 1, .T., cName)
          cCode :=  "{|" + cParam + ;
             "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+IIf(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
             IIf(oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2],{", ;
@@ -565,7 +565,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
          "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
          "F("+Ltrim(Str(oCtrl:nId))+")")
    arrExe := Array(2)
-   arrExe[2] := RdScript( ,cMethod,,.T.,cName )
+   arrExe[2] := RdScript(, cMethod, , .T., cName)
    cCode := "{|" + IIf(Empty(cParam),"",cParam) + ;
       "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+IIf(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
       IIf(oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2]" + ;
@@ -668,10 +668,10 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
    /* Declaring of variables, which are in the appropriate 'New()' function */
    stroka := aCtrls[nCtrl]
-   IF ( i := At( "New(", stroka ) ) != 0
+   IF ( i := At("New(", stroka) ) != 0
       i += 4
       DO WHILE .T.
-         IF ( j := hb_At( ",", stroka, i ) ) != 0 .OR. ( j := hb_At( ")", stroka, i ) ) != 0
+         IF ( j := hb_At(",", stroka, i) ) != 0 .OR. ( j := hb_At(")", stroka, i) ) != 0
             IF j - i > 0
                varname := SubStr(stroka, i, j - i)
                __mvPrivate(varname)
@@ -854,11 +854,11 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 /*
       ELSEIF cPName == "filedbf"
          IF !Empty(xProperty)
-            cAliasdbf := Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 )
-            IF Select( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) ) = 0
-               USE ( xProperty ) NEW SHARED Alias ( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) )  //ftmp
+            cAliasdbf := Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)
+            IF Select(Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) = 0
+               USE (xProperty) NEW SHARED Alias (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) //ftmp
             ENDIF
-            Select ( Left(CutPath( xProperty ), At( ".", CutPath( xProperty )) - 1 ) )
+            Select (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1))
          ENDIF
 */
       ELSEIF cPName == "columnscount"
@@ -919,19 +919,19 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
          ENDIF
          /* Assigning the value of the property to the variable with
          the same name as the property */
-         __mvPut( cPName, xProperty )
+         __mvPut(cPName, xProperty)
 
          IF cPName == "varname" .AND. !Empty(xProperty)
             cVarName := xProperty
             bSetGet := &( "{|v|IIf(v==Nil," + xProperty + "," + xProperty + ":=v)}" )
-            IF __mvGet( xProperty ) == Nil
+            IF __mvGet(xProperty) == Nil
                /* If the variable with 'varname' name isn't initialized
                while onFormInit procedure, we assign her the init value */
-                  __mvPut( xProperty, xInitValue )
+                  __mvPut(xProperty, xInitValue)
                ELSEIF cInitName != Nil
                /* If it is initialized, we assign her value to the 'init'
                   variable ( cInitValue, nInitValue, ... ) */
-                  __mvPut( cInitName, __mvGet( xProperty ) )
+                  __mvPut(cInitName, __mvGet(xProperty))
                ENDIF
             ELSEIF SubStr(cPName, 2) == "initvalue"
                xInitValue := xProperty
@@ -940,9 +940,9 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       NEXT
       FOR i := 1 TO Len(oCtrlTmpl:aMethods)
          IF ( cType := ValType(oCtrlTmpl:aMethods[i, 2]) ) == "B"
-            __mvPut( oCtrlTmpl:aMethods[i, 1], oCtrlTmpl:aMethods[i, 2] )
+            __mvPut(oCtrlTmpl:aMethods[i, 1], oCtrlTmpl:aMethods[i, 2])
          ELSEIF cType == "A"
-            __mvPut( oCtrlTmpl:aMethods[i, 1], oCtrlTmpl:aMethods[i, 2, 1] )
+            __mvPut(oCtrlTmpl:aMethods[i, 1], oCtrlTmpl:aMethods[i, 2, 1])
          ENDIF
       NEXT
 
@@ -991,7 +991,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             cAliasdbf := Alias()
             temp = StrTran( Upper(fBlock), Alias() + "->", "" )
        //- verificar se tem mais de um campo
-            temp = SubStr(temp, 1, IIf(At( "+", temp ) > 0, At( "+", temp ) - 1, Len(temp)))
+            temp = SubStr(temp, 1, IIf(At("+", temp) > 0, At("+", temp) - 1, Len(temp)))
             j := {}
             AEval( &cAliasdbf->( ( DBStruct() ) ), { | aField | AAdd(j, aField[1]) } )
             IF m->nLength = Nil
@@ -1008,8 +1008,8 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             fBlock := IIf(fBlock = Nil, ".T.", fBlock)
             fBlock := IIf(cValType = "B", &fBlock, { || &fBlock })
          ENDIF
-         IF !Empty(cPicture) .AND. At( ".9", cPicture ) > 0 .AND. nDec = 0
-            m->nDec := Len(SubStr(cPicture, At( ".9", cPicture ) + 1))
+         IF !Empty(cPicture) .AND. At(".9", cPicture) > 0 .AND. nDec = 0
+            m->nDec := Len(SubStr(cPicture, At(".9", cPicture) + 1))
          ENDIF
          stroka   := cOName + ":" + stroka
       ENDIF
@@ -1038,7 +1038,7 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
             IF !Empty(cKey)
                &( oCtrl:Alias ) ->( DBSetOrder( cKey ) )
                cKey := ( oCtrl:Alias ) ->( ordkey( cKey ) )
-               cKey := IIf(At( "+", cKey ) > 0, Left(cKey, At( "+", cKey ) - 1), cKey)
+               cKey := IIf(At("+", cKey) > 0, Left(cKey, At("+", cKey) - 1), cKey)
             ENDIF
             cRelexpr := IIf(!Empty(cRelexpr), cRelexpr, cKey)
             IF !Empty(cRelexpr + cLink)
@@ -1072,13 +1072,13 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       ENDIF
       IF Type("m->name") == "C"
          // writelog( oCtrlTmpl:cClass+" "+name )
-         __mvPut( name, oCtrl )
+         __mvPut(name, oCtrl)
          name := Nil
       ENDIF
       IF !Empty(oCtrlTmpl:aControls)
          IF oCtrlTmpl:cClass == "page"
             __mvPrivate("tmp_nSheet")
-            __mvPut( "tmp_nSheet", 0 )
+            __mvPut("tmp_nSheet", 0)
          ENDIF
          FOR i := 1 TO Len(oCtrlTmpl:aControls)
             CreateCtrl( IIf(oCtrlTmpl:cClass == "group".OR.oCtrlTmpl:cClass == "radiogroup", oParent, oCtrl), oCtrlTmpl:aControls[i], oForm )
@@ -1154,8 +1154,8 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       IF Len(stroka) > 2
          DO WHILE pos2 > 0
             DO WHILE SubStr(stroka, pos1, 1) <= " " ; pos1 ++ ; ENDDO
-            pos2 := hb_At( ",", stroka, pos1 )
-            AAdd(arr, Trim(SubStr(stroka, pos1, IIf(pos2 > 0, pos2 - pos1, hb_At( "}", stroka, pos1 ) - pos1))))
+            pos2 := hb_At(",", stroka, pos1)
+            AAdd(arr, Trim(SubStr(stroka, pos1, IIf(pos2 > 0, pos2 - pos1, hb_At("}", stroka, pos1) - pos1))))
             pos1 := pos2 + 1
          ENDDO
       ENDIF
@@ -1232,7 +1232,7 @@ CLASS VAR maxId    INIT 0
    DATA oPrinter
 
    METHOD Read(fname, cId)
-   METHOD Print( printer, lPreview, p1, p2, p3 )
+   METHOD Print(printer, lPreview, p1, p2, p3)
    METHOD PrintItem( oItem )
    METHOD ReleaseObj( aControls )
    METHOD Find(cId)
@@ -1309,7 +1309,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
    SetDebugInfo( .F. )
    RETURN Self
 
-METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
+METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
    LOCAL oPrinter := IIf(printer != Nil, IIf(hb_IsObject(printer), printer, HPrinter():New( printer, .T. )), HPrinter():New(, .T. ))
    LOCAL i, j, aMethod, xProperty, oFont, xTemp, nPWidth, nPHeight, nOrientation := 1
 
@@ -1352,7 +1352,7 @@ METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
    ::nKoefX := oPrinter:nWidth / nPWidth
    ::nKoefY := oPrinter:nHeight / nPHeight
    IF ( aMethod := aGetSecond(::aMethods, "onrepinit") ) != Nil
-      DoScript( aMethod, { p1, p2, p3 } )
+      DoScript(aMethod, { p1, p2, p3 })
    ENDIF
    IF xProperty != Nil
       oFont := hrep_FontFromxml( oPrinter, xProperty, aGetSecond(::aProp, "fonth") * ::nKoefY )
@@ -1367,7 +1367,7 @@ METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
 
       oPrinter:StartPage()
       IF oFont != Nil
-         oPrinter:SetFont( oFont )
+         oPrinter:SetFont(oFont)
       ENDIF
       ::nTOffset := ::nAOffSet := ::ny := 0
       // Writelog( "Print-1 "+ str(oPrinter:nPage) )
@@ -1383,7 +1383,7 @@ METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
    oPrinter:EndDoc()
    ::ReleaseObj( ::aControls )
    IF ( aMethod := aGetSecond(::aMethods, "onrepexit") ) != Nil
-      DoScript( aMethod )
+      DoScript(aMethod)
    ENDIF
    IF lPreview != Nil .AND. lPreview
       oPrinter:Preview()
@@ -1413,12 +1413,12 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
          PRIVATE lSkipItem := .T.
       ENDIF
    ENDIF
-   IF !__mvExist( "LSKIPITEM" ) .OR. !lSkipItem
+   IF !__mvExist("LSKIPITEM") .OR. !lSkipItem
       IF ( aMethod := aGetSecond(oItem:aMethods, "onbegin") ) != Nil
-         DoScript( aMethod )
+         DoScript(aMethod)
       ENDIF
       IF ( aMethod := aGetSecond(oItem:aMethods, "condition") ) != Nil
-         lRes := DoScript( aMethod )
+         lRes := DoScript(aMethod)
          IF !lRes .AND. oItem:cClass == "area"
             ::nAOffSet += Val( aGetSecond(oItem:aProp, "geometry")[4] ) * ::nKoefY
          ENDIF
@@ -1447,7 +1447,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
                FOR i := 1 TO Len(oItem:aControls)
                   IF !::lNextPage .OR. oItem:aControls[i]:lMark
                      oItem:aControls[i]:lMark := ::lNextPage := .F.
-                     IF __mvExist( "LSKIPITEM" )
+                     IF __mvExist("LSKIPITEM")
                         lSkipItem := .F.
                      ENDIF
                      ::PrintItem( oItem:aControls[i] )
@@ -1461,7 +1461,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
                ELSE
                   ::nTOffset := ::ny - y
                   IF ( aMethod := aGetSecond(oItem:aMethods, "onnextline") ) != Nil
-                     DoScript( aMethod )
+                     DoScript(aMethod)
                   ENDIF
                ENDIF
             ENDDO
@@ -1512,7 +1512,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
       ENDIF
       IF oItem:cClass == "label"
          IF ( aMethod := aGetSecond(oItem:aMethods, "expression") ) != Nil
-            cText := DoScript( aMethod )
+            cText := DoScript(aMethod)
          ELSE
             cText := aGetSecond(oItem:aProp, "caption")
          ENDIF
@@ -1537,14 +1537,14 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
             IF ( xProperty := aGetSecond(oItem:aProp, "multiline") ) != Nil ;
                  .AND. xProperty
                nLines := i := 1
-               DO WHILE ( i := hb_At( ";", cText, i ) ) > 0
+               DO WHILE ( i := hb_At(";", cText, i) ) > 0
                   i ++
                   nLines ++
                ENDDO
                dy := ( y2 - y ) / nLines
                nFirst := i := 1
                ny := y
-               DO WHILE ( i := hb_At( ";", cText, i ) ) > 0
+               DO WHILE ( i := hb_At(";", cText, i) ) > 0
                   ::oPrinter:Say( SubStr(cText, nFirst, i - nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj )
                   i ++
                   nFirst := i
@@ -1574,7 +1574,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
    ENDIF
 
    IF ( aMethod := aGetSecond(oItem:aMethods, "onend") ) != Nil
-      DoScript( aMethod )
+      DoScript(aMethod)
    ENDIF
 
    RETURN Nil
@@ -1664,6 +1664,6 @@ STATIC FUNCTION hrep_FontFromXML( oPrinter, oXmlNode, height )
    ita    := IIf(ita != Nil, Val( ita ), 0)
    under  := IIf(under != Nil, Val( under ), 0)
 
-   RETURN oPrinter:AddFont( oXmlNode:GetAttribute("name"), ;
-                            height, ( weight > 400 ), ( ita > 0 ), ( under > 0 ), charset )
+   RETURN oPrinter:AddFont(oXmlNode:GetAttribute("name"), ;
+                            height, ( weight > 400 ), ( ita > 0 ), ( under > 0 ), charset)
 

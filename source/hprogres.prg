@@ -32,7 +32,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD Activate()
    METHOD Increment() INLINE UpdateProgressBar(::handle)
    METHOD STEP(cTitle)
-   METHOD SET( cTitle, nPos )
+   METHOD SET(cTitle, nPos)
    METHOD SetLabel( cCaption )
    METHOD SetAnimation( nAnimation ) SETGET
    METHOD Close()
@@ -51,7 +51,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit
    ::maxPos  := IIf(maxPos != Nil .AND. maxPos != 0, maxPos, 20)
    ::lNewBox := .F.
    ::nRange := IIf(nRange != Nil .AND. nRange != 0, nRange, 100)
-   ::nLimit := Int( ::nRange/::maxPos )
+   ::nLimit := Int(::nRange/::maxPos)
 
    ::Activate()
 
@@ -73,7 +73,7 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
    ::maxPos  := IIf(maxPos == Nil, 20, maxPos)
    ::lNewBox := .T.
    ::nRange := IIf(nRange != Nil .AND. nRange != 0, nRange, 100)
-   ::nLimit := IIf(nRange != Nil, Int( ::nRange / ::maxPos ), 1)
+   ::nLimit := IIf(nRange != Nil, Int(::nRange / ::maxPos), 1)
     ::lPercent := lPercent
 
    INIT DIALOG ::oParent TITLE cTitle       ;
@@ -122,7 +122,7 @@ METHOD STEP(cTitle)
    IF ::nCount == ::nLimit
       ::nCount := 0
       UpdateProgressBar(::handle)
-      ::SET( cTitle )
+      ::SET(cTitle)
       IF !Empty(::lPercent)
          ::nPercent += ::maxPos  //::nLimit
          ::setLabel( LTrim(STR( ::nPercent, 3 )) + " %" )
@@ -132,10 +132,10 @@ METHOD STEP(cTitle)
 
    RETURN .F.
 
-METHOD SET( cTitle, nPos ) CLASS HProgressBar
+METHOD SET(cTitle, nPos) CLASS HProgressBar
 
    IF cTitle != Nil
-      SetWindowText( ::oParent:handle, cTitle )
+      SetWindowText(::oParent:handle, cTitle)
    ENDIF
    IF nPos != Nil
       SetProgressBar( ::handle, nPos )

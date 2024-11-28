@@ -246,7 +246,7 @@ METHOD MDown() CLASS HNICEButton
 METHOD PAINT() CLASS HNICEButton
 
    LOCAL ps        := DefinePaintStru()
-   LOCAL hDC       := BeginPaint( ::handle, ps )
+   LOCAL hDC       := BeginPaint(::handle, ps)
    LOCAL Rct
    LOCAL Size
    LOCAL T
@@ -276,18 +276,18 @@ METHOD PAINT() CLASS HNICEButton
 
    Size := GetTextSize(hDC, T)
 
-   Draw_Gradient( hDC, x, y, w, h, ::r, ::g, ::b )
+   Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
    SetBkMode(hDC, TRANSPARENT)
 
    IF ( ::State == OBTN_MOUSOVER )
       SetTextColor(hDC, VCOLOR("FF0000"))
-      TextOut( hDC, XCtr - ( Size[1] / 2 ) + 1, YCtr - ( Size[2] / 2 ) + 1, T )
+      TextOut(hDC, XCtr - ( Size[1] / 2 ) + 1, YCtr - ( Size[2] / 2 ) + 1, T)
    ELSE
       SetTextColor(hDC, VCOLOR("0000FF"))
-      TextOut( hDC, XCtr - Size[1] / 2, YCtr - Size[2] / 2, T )
+      TextOut(hDC, XCtr - Size[1] / 2, YCtr - Size[2] / 2, T)
    ENDIF
 
-   EndPaint( ::handle, ps )
+   EndPaint(::handle, ps)
 
    RETURN Self
 

@@ -31,7 +31,7 @@ CLASS VAR winclass INIT "STATIC"
    METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
                bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling )
    METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
    METHOD Paint()
    METHOD Drag( lParam )
@@ -78,7 +78,7 @@ METHOD Init() CLASS HSplitter
 
    RETURN Nil
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
+METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    HB_SYMBOL_UNUSED(wParam)
 
@@ -122,7 +122,7 @@ METHOD Paint() CLASS HSplitter
 
 
    pps := DefinePaintStru()
-   hDC := BeginPaint( ::handle, pps )
+   hDC := BeginPaint(::handle, pps)
    aCoors := GetClientRect(::handle)
 
    x1 := aCoors[1] //+ IIf(::lVertical, 1, 2)
@@ -138,14 +138,14 @@ METHOD Paint() CLASS HSplitter
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
          SelectObject(hDC, oBrushFill:handle)
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP) + BF_MIDDLE)
-         FillRect( hDC, x1, y1, x2, y2, oBrushFill:handle )
+         FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
       ELSEIF ::BackStyle = OPAQUE
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
       ENDIF
    ELSEIF !::lMoved .AND. ::BackStyle = OPAQUE
       DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP)) //+ BF_MIDDLE)
    ENDIF
-   EndPaint( ::handle, pps )
+   EndPaint(::handle, pps)
 
    RETURN Nil
 

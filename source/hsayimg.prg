@@ -44,10 +44,10 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
    ::title   := ""
 
    ::bClick := bClick
-   ::oParent:AddEvent( STN_CLICKED, Self, { || ::onClick() } )
+   ::oParent:AddEvent(STN_CLICKED, Self, { || ::onClick() })
 
    ::bDblClick := bDblClick
-   ::oParent:AddEvent( STN_DBLCLK, Self, { || ::onDblClick() } )
+   ::oParent:AddEvent(STN_DBLCLK, Self, { || ::onDblClick() })
 
    RETURN Self
 
@@ -97,7 +97,7 @@ CLASS HSayBmp INHERIT HSayImage
                bSize, ctooltip, bClick, bDblClick, lTransp, nStretch, nStyle )
    METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp)
    METHOD Init()
-   METHOD Paint( lpdis )
+   METHOD Paint(lpdis)
    METHOD ReplaceBitmap(Image, lRes)
    //METHOD REFRESH() INLINE ::HIDE(), SendMessage(::handle, WM_PAINT, 0, 0), ::SHOW()
    METHOD Refresh() INLINE RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW)
@@ -110,7 +110,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
    nStyle := IIf(nStyle = Nil, 0, nStyle)
    ::Super:New( oWndParent, nId, SS_OWNERDRAW + nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip, bClick, bDblClick )
 
-   ::bPaint := { | o, lpdis | o:Paint( lpdis ) }
+   ::bPaint := { | o, lpdis | o:Paint(lpdis) }
    ::nStretch := IIf(nStretch = Nil, 0, nStretch)
    IF lTransp != Nil .AND. lTransp
       ::BackStyle := TRANSPARENT
@@ -139,7 +139,7 @@ METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp) 
 
 
    ::Super:Redefine(oWndParent, nId, bInit, bSize, ctooltip)
-   ::bPaint := { | o, lpdis | o:Paint( lpdis ) }
+   ::bPaint := { | o, lpdis | o:Paint(lpdis) }
    IF lTransp != Nil .AND. lTransp
       ::BackStyle := TRANSPARENT
       ::extStyle +=  WS_EX_TRANSPARENT

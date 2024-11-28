@@ -143,10 +143,10 @@ CLASS RichText
    // Methods for formatting data
 
    METHOD Appearance(cAppear)
-   METHOD HAlignment( cAlign )
+   METHOD HAlignment(cAlign)
    METHOD LineSpacing( nSpace, lSpExact )
    METHOD Borders(cEntity, cBorder)
-   METHOD NewFont( nFontNumber )
+   METHOD NewFont(nFontNumber)
    METHOD SetFontSize(nFontSize)
    METHOD SetFontColor(nFontColor)
    METHOD NewLine() INLINE FWrite(::hFile, CRLF), ::TextCode("par")
@@ -198,8 +198,8 @@ CLASS RichText
    // Information
    METHOD InfoDoc(cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
                    cCategor, cKeyWords, cComment)
-   METHOD DocFormat( nTab, nLineStart, lBackup, nDefLang, nDocType, ;
-                     cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, cProtect, lFacing, nGutter )
+   METHOD DocFormat(nTab, nLineStart, lBackup, nDefLang, nDocType, ;
+                    cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, cProtect, lFacing, nGutter)
    // Lots of other cool stuff
 
    // New Methods for table managament
@@ -208,7 +208,7 @@ CLASS RichText
    METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
                      nSpace, lSpExact, nFontColor, ;
                      lDefault, lHeader, lPage, lDate )
-   METHOD CellFormat( cCellBorder, aCellPct )
+   METHOD CellFormat(cCellBorder, aCellPct)
    METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                        cCellAppear, cCellHAlign, nTblRows, ;
                        nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
@@ -294,7 +294,7 @@ METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nS
       ::TextCode("fonttbl")
       FOR i := 1 TO ::nFontNum
          ::OpenGroup()
-         ::NewFont( i )
+         ::NewFont(i)
          ::NumCode("charset", aFontChar[i], .F.)
          ::TextCode(aFontFam[i])
          ::Write(aFontData[i] + ";")
@@ -431,11 +431,11 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
       ::ParaStyle(nStyle)
    ENDIF
 
-   ::NewFont( nFontNumber )
+   ::NewFont(nFontNumber)
    ::SetFontSize(nFontSize)
    ::SetFontColor(nFontColor)
    ::Appearance(cAppear)
-   ::HAlignment( cHorzAlign )
+   ::HAlignment(cHorzAlign)
 
    IF hb_IsArray(aTabPos)
       AEval( aTabPos, { | x | ::NumCode("tx", x) } )
@@ -674,7 +674,7 @@ METHOD NumCode(cCode, nValue, lScale) CLASS RichText
 
       DEFAULT lScale TO .T.
       IF lScale
-         nValue := Int( nValue * ::nScale )
+         nValue := Int(nValue * ::nScale)
       ENDIF
       cWrite += AllTrim(Str( nValue )) //+ " "
 
@@ -908,13 +908,13 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
          NEXT
 
          // Identify the header-specific font
-         ::NewFont( ::nTblHdFont )
+         ::NewFont(::nTblHdFont)
          ::SetFontSize(::nTblHdFSize)
          IF ::nTblHdFColor > 0
             ::SetFontColor(::nTblHdFColor)
          ENDIF
          ::Appearance(::cHeadAppear)
-         ::HAlignment( ::cHeadHAlign )
+         ::HAlignment(::cHeadHAlign)
 
          ::TextCode("intbl")
 
@@ -944,11 +944,11 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
          NEXT
 
          // Write the body formatting codes
-         ::NewFont( ::nTblFntNum )
+         ::NewFont(::nTblFntNum)
          ::SetFontSize(::nTblFntSize)
 *      ::SetFontColor(nFontColor)
          ::Appearance(::cCellAppear)
-         ::HAlignment( ::cCellHAlign )
+         ::HAlignment(::cCellHAlign)
 
          ::TextCode("intbl")
 
@@ -971,11 +971,11 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
    ::OpenGroup()
 
    ::LogicCode("pard", lDefault)
-   ::NewFont( nFontNumber )
+   ::NewFont(nFontNumber)
    ::SetFontSize(nFontSize)
    ::SetFontColor(nFontColor)
    ::Appearance(cAppear)
-   ::HAlignment( cHorzAlign )
+   ::HAlignment(cHorzAlign)
    ::LineSpacing( nSpace, lSpExact )
 
    // Now write the text
@@ -1046,7 +1046,7 @@ METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
 
 
 
-METHOD NewFont( nFontNumber ) CLASS RichText
+METHOD NewFont(nFontNumber) CLASS RichText
 *********************************************************************
 * Description:  Change the current font.
 *               Converts app-level font number into RTF font number.
@@ -1103,7 +1103,7 @@ METHOD Appearance(cAppear) CLASS RichText
 
 
 
-METHOD HAlignment( cAlign ) CLASS RichText
+METHOD HAlignment(cAlign) CLASS RichText
 *********************************************************************
 * Description:  Change the horizontal alignment
 * Arguments:
@@ -1352,7 +1352,7 @@ FUNCTION NewBase(nDec, nBase)
 
    DO WHILE lContinue
 
-      nDividend := Int( nDec / nBase )
+      nDividend := Int(nDec / nBase)
       nRemain := nDec % nBase
 
       IF nDividend >= 1
@@ -1551,7 +1551,7 @@ METHOD FootNote(cTexto, cChar, nFontNumber, ;
       ::TextCode("ftnalt")
    ENDIF
 
-   ::NewFont( nFontNumber )
+   ::NewFont(nFontNumber)
    ::SetFontSize(nFontSize)
    ::SetFontColor(nFontColor)
    ::Appearance(cAppear)
@@ -2171,19 +2171,19 @@ METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
    ::TextCode("intbl")
 
    IF lHeader
-      ::NewFont( ::nTblHdFont )
+      ::NewFont(::nTblHdFont)
       ::SetFontSize(::nTblHdFSize)
       IF ::nTblHdFColor > 0
          ::SetFontColor(::nTblHdFColor)
       ENDIF
       ::Appearance(::cHeadAppear)
-      ::HAlignment( ::cHeadHAlign )
+      ::HAlignment(::cHeadHAlign)
    ELSE
-      ::NewFont( IIf(nFontNumber == - 1, ::nTblFntNum, nFontNumber) )
+      ::NewFont(IIf(nFontNumber == - 1, ::nTblFntNum, nFontNumber))
       ::SetFontSize(IIf(nFontSize == - 1, ::nTblFntSize, nFontSize))
       ::SetFontColor(nFontColor)
       ::Appearance(IIf(cAppear == NIL, ::cCellAppear, cAppear))
-      ::HAlignment( IIf(cHorzAlign == NIL, ::cCellHAlign, cHorzAlign) )
+      ::HAlignment(IIf(cHorzAlign == NIL, ::cCellHAlign, cHorzAlign))
       ::LineSpacing( nSpace, lSpExact )
    ENDIF
 
@@ -2206,7 +2206,7 @@ METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
    RETURN NIL
 **********************  END OF TableCell()  ***********************
 
-METHOD CellFormat( cCellBorder, aCellPct ) CLASS RichText
+METHOD CellFormat(cCellBorder, aCellPct) CLASS RichText
 *********************************************************************
 * Description:  Changes the format of one row.
 *               Now we can change the celborders and shading for
@@ -2230,9 +2230,9 @@ METHOD CellFormat( cCellBorder, aCellPct ) CLASS RichText
    RETURN NIL
 **********************  END OF CellFormat()  ***********************
 
-METHOD DocFormat( nTab, nLineStart, lBackup, nDefLang, nDocType, ;
-                  cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, ;
-                  cProtect, lFacing, nGutter ) CLASS RichText
+METHOD DocFormat(nTab, nLineStart, lBackup, nDefLang, nDocType, ;
+                 cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, ;
+                 cProtect, lFacing, nGutter) CLASS RichText
 
    DEFAULT nTab TO 0.5, ;
    nLineStart TO 1, ;
@@ -2587,8 +2587,8 @@ RETURN NIL
 
 */
 
-FUNCTION cFileExt( cFile )
-   RETURN SubStr(cFile, At( ".", cFile ) + 1)
+FUNCTION cFileExt(cFile)
+   RETURN SubStr(cFile, At(".", cFile) + 1)
 
    #ifndef __XHARBOUR__
    FUNCTION CStr( xExp )

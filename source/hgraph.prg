@@ -33,7 +33,7 @@ CLASS VAR winclass   INIT "STATIC"
                     bSize, ctooltip, tcolor, bcolor)
    METHOD Init()
    METHOD CalcMinMax()
-   METHOD Paint( lpDis )
+   METHOD Paint(lpDis)
    METHOD Rebuild(aValues, nType)
 
 ENDCLASS
@@ -42,7 +42,7 @@ METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
             bSize, ctooltip, tcolor, bcolor ) CLASS HGraph
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
-              bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
+              bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
               IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
 
    ::aValues := aValues
@@ -57,7 +57,7 @@ METHOD Redefine(oWndParent, nId, aValues, oFont, ;
                  bSize, ctooltip, tcolor, bcolor) CLASS HGraph
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
-              bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
+              bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
               IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
 
    ::aValues := aValues
@@ -145,7 +145,7 @@ METHOD Paint(lpdis) CLASS HGraph
       ::oPen := HPen():Add(PS_SOLID, 2, ::tcolor)
    ENDIF
 
-   FillRect( hDC, drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7], ::brush:handle )
+   FillRect(hDC, drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7], ::brush:handle)
    IF ::nType != 3
       SelectObject(hDC, ::oPenCoor:handle)
       Drawline(hDC, x1 + ( 0 - ::xmin ) / ::scaleX, drawInfo[5] + 3, x1 + ( 0 - ::xmin ) / ::scaleX, drawInfo[7] - 3)
@@ -177,7 +177,7 @@ METHOD Paint(lpdis) CLASS HGraph
          FOR j := 1 TO nLen
             px1 := Round(x1 + nWidth * ( j * 2 - 1 ), 0)
             py1 := Round(y2 - ( ::aValues[i, j, 2] - ::ymin ) / ::scaleY, 0)
-            FillRect( hDC, px1, y2 - 2, px1 + nWidth, py1, ::tbrush:handle )
+            FillRect(hDC, px1, y2 - 2, px1 + nWidth, py1, ::tbrush:handle)
          NEXT
       ELSEIF ::nType == 3
          IF ::tbrush == Nil

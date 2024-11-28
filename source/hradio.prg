@@ -208,7 +208,7 @@ CLASS VAR winclass   INIT "BUTTON"
    METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp)
    METHOD GetValue() INLINE ( SendMessage(::handle, BM_GETCHECK, 0, 0) == 1 )
   // METHOD Notify( lParam )
-   METHOD onevent( msg, wParam, lParam )
+   METHOD onevent(msg, wParam, lParam)
    METHOD onGotFocus()
    METHOD onClick()
    METHOD Valid(nKey)
@@ -249,19 +249,19 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    ENDIF
    ::bGetFocus  := bGFocus
    IF bGFocus != Nil
-      ::oParent:AddEvent( BN_SETFOCUS, self, { | o, id | ::When( o:FindControl( id ) ) },, "onGotFocus" )
-      //::oParent:AddEvent( BN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus" )
+      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When( o:FindControl( id ) ) },, "onGotFocus")
+      //::oParent:AddEvent(BN_SETFOCUS, Self, { | o, id | __When( o:FindControl( id ) ) },, "onGotFocus")
       ::lnoValid := .T.
    ENDIF
 
-   ::oParent:AddEvent( BN_KILLFOCUS, Self, { || CheckFocus(Self, .T.) } )
+   ::oParent:AddEvent(BN_KILLFOCUS, Self, { || CheckFocus(Self, .T.) })
 
    IF ::oGroup != Nil
       AAdd(::oGroup:aButtons, Self)
       // IF ::oGroup:bSetGet != Nil
       ::bLostFocus := bClick
-      //- ::oParent:AddEvent( BN_CLICKED, self, { | o, id | ::Valid(o:FindControl( id )) },, "onClick" )
-      ::oParent:AddEvent( BN_CLICKED, self, { |  | ::onClick() },,"onClick" )
+      //- ::oParent:AddEvent(BN_CLICKED, self, { | o, id | ::Valid(o:FindControl( id )) },, "onClick")
+      ::oParent:AddEvent(BN_CLICKED, self, { |  | ::onClick() },,"onClick")
       // ENDIF
    ENDIF
 
@@ -308,28 +308,28 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
    ::oParent:AddControl( Self )
 
    IF bClick != Nil .AND. ( ::oGroup == Nil .OR. ::oGroup:bSetGet == Nil )
-      //::oParent:AddEvent( 0,self,bClick,,"onClick" )
+      //::oParent:AddEvent(0,self,bClick,,"onClick")
       ::bLostFocus := bClick
-      //::oParent:AddEvent( 0,self,{|o,id|__Valid(o:FindControl(id))},,"onClick" )
+      //::oParent:AddEvent(0,self,{|o,id|__Valid(o:FindControl(id))},,"onClick")
    ENDIF
    ::bGetFocus  := bGFocus
    IF bGFocus != Nil
-      ::oParent:AddEvent( BN_SETFOCUS, self, { | o, id | ::When( o:FindControl( id ) ) },, "onGotFocus" )
+      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When( o:FindControl( id ) ) },, "onGotFocus")
       ::lnoValid := .T.
    ENDIF
-   //::oParent:AddEvent( BN_KILLFOCUS, Self, { || ::Notify( WM_KEYDOWN ) } )
-   ::oParent:AddEvent( BN_KILLFOCUS, Self, { || CheckFocus(Self, .T.) } )
+   //::oParent:AddEvent(BN_KILLFOCUS, Self, { || ::Notify( WM_KEYDOWN ) })
+   ::oParent:AddEvent(BN_KILLFOCUS, Self, { || CheckFocus(Self, .T.) })
    IF ::oGroup != Nil
       AAdd(::oGroup:aButtons, Self)
       // IF ::oGroup:bSetGet != Nil
       ::bLostFocus := bClick
-      //::oParent:AddEvent( BN_CLICKED, self, { | o, id | ::Valid(o:FindControl( id )) },, "onClick" )
-      ::oParent:AddEvent( BN_CLICKED, self, { |  | ::onClick() },,"onClick" )
+      //::oParent:AddEvent(BN_CLICKED, self, { | o, id | ::Valid(o:FindControl( id )) },, "onClick")
+      ::oParent:AddEvent(BN_CLICKED, self, { |  | ::onClick() },,"onClick")
       // ENDIF
    ENDIF
    RETURN Self
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
+METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
     LOCAL oCtrl
      
    IF hb_IsBlock(::bOther)
@@ -352,7 +352,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
       ENDIF 
       RETURN DLGC_WANTMESSAGE
    ELSEIF msg = WM_KEYDOWN
-      //IF ProcKeyList( Self, wParam )
+      //IF ProcKeyList(Self, wParam)
       IF wParam = VK_LEFT .OR. wParam = VK_UP
          GetSkip(::oparent, ::handle, , -1)
          RETURN 0
@@ -368,7 +368,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
          RETURN 0
       ENDIF
    ELSEIF msg == WM_KEYUP
-      ProcKeyList( Self, wParam )   // working in MDICHILD AND DIALOG
+      ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
       IF ( wParam == VK_RETURN ) 
          RETURN 0
       ENDIF  

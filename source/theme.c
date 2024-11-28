@@ -1331,7 +1331,7 @@ bIsDisabled, iStyle);
           if(output)
           {
             MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, sTitle, nTextLen + 1, output, mlen);
-                        hb_DrawThemeText( hTheme, dc, BP_PUSHBUTTON, PBS_NORMAL,
+                        hb_DrawThemeText(hTheme, dc, BP_PUSHBUTTON, PBS_NORMAL,
                     output, wcslen(output),
                     DT_CENTER | DT_VCENTER | DT_SINGLELINE,
                     0, &captionRect);
@@ -1677,7 +1677,7 @@ HB_FUNC(DRAWTHEICON)
 }
 
 /*
-//PrepareImageRect( ::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle )
+//PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
 */
 
 /*

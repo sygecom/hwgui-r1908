@@ -80,7 +80,7 @@ Local nFirst, i
       oBrwScript:aArray := aScript[3]
 #ifdef __LINUX__
       oBrwScript:rowCount := 5
-      oBrwScript:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0 ) )      
+      oBrwScript:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0 ) )
 #else
       oBrwScript:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0 ) )
       oBrwScript:aColumns[1]:aBitmaps := { { {|n|n==1},oBmpCurr },{ {|n|n==2},oBmpPoint } }
@@ -121,7 +121,7 @@ Local nFirst, i
          ENDIF
       ENDIF
       aScriptCurr := aScript
-      SetWindowText( oDlgDebug:handle, "Script Debugger - " + aScript[1] )
+      SetWindowText(oDlgDebug:handle, "Script Debugger - " + aScript[1])
    ENDIF
 
    oBrwScript:aArray := aScript[3]
@@ -207,7 +207,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 #ifdef __LINUX__
    IF !Empty(xRes := oEditExpr:GetText())
 #else
-   IF !Empty(xRes := GetEditText( oEditExpr:oParent:handle, oEditExpr:id ))
+   IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
       bOldError := ERRORBLOCK( { | e | MacroError(e) } )
       BEGIN SEQUENCE
@@ -231,7 +231,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
       ENDIF
       oBrwData:Refresh()
    ELSE
-      oEditRes:SetText( "Error..." )
+      oEditRes:SetText("Error...")
    ENDIF
 Return .T.
 
@@ -272,7 +272,7 @@ Local xRes, bOldError, lRes := .T., cType
 #ifdef __LINUX__
    IF !Empty(xRes := oEditExpr:GetText())
 #else
-   IF !Empty(xRes := GetEditText( oEditExpr:oParent:handle, oEditExpr:id ))
+   IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
       bOldError := ERRORBLOCK( { | e | MacroError(e) } )
       BEGIN SEQUENCE
@@ -285,16 +285,16 @@ Local xRes, bOldError, lRes := .T., cType
 
    IF lRes
       IF ( cType := Valtype(xRes) ) == "N"
-         oEditRes:SetText( Ltrim(Str(xRes)) )
+         oEditRes:SetText(Ltrim(Str(xRes)))
       ELSEIF cType == "D"
-         oEditRes:SetText( Dtoc(xRes) )
+         oEditRes:SetText(Dtoc(xRes))
       ELSEIF cType == "L"
-         oEditRes:SetText( Iif(xRes,".T.",".F.") )
+         oEditRes:SetText(Iif(xRes, ".T.", ".F."))
       ELSE
-         oEditRes:SetText( xRes )
+         oEditRes:SetText(xRes)
       ENDIF
    ELSE
-      oEditRes:SetText( "Error..." )
+      oEditRes:SetText("Error...")
    ENDIF
    
 Return .T.

@@ -27,7 +27,7 @@ FUNCTION InitObjects(oWnd)
       FOR i := 1 TO Len(LoadArray)
          IF !Empty(oWnd:handle)
             IF __ObjHasMsg( LoadArray[i],"INIT")
-               LoadArray[i]:Init( oWnd )
+               LoadArray[i]:Init(oWnd)
                LoadArray[i]:lInit := .T.
             ENDIF
          ENDIF
@@ -36,7 +36,7 @@ FUNCTION InitObjects(oWnd)
    IF pArray != Nil
       FOR i := 1 TO Len(pArray)
          IF __ObjHasMsg( pArray[i], "INIT" )
-            pArray[i]:Init( oWnd )
+            pArray[i]:Init(oWnd)
          ENDIF
       NEXT
    ENDIF
@@ -79,8 +79,8 @@ FUNCTION InitControls(oWnd, lNoActivate)
 
    RETURN .T.
 
-FUNCTION FindParent( hCtrl, nLevel )
-   LOCAL i, oParent, hParent := GetParent( hCtrl )
+FUNCTION FindParent(hCtrl, nLevel)
+   LOCAL i, oParent, hParent := GetParent(hCtrl)
    IF !Empty(hParent)
       IF ( i := AScan( HDialog():aModalDialogs, { | o | o:handle == hParent } ) ) != 0
          RETURN HDialog():aModalDialogs[i]
@@ -94,7 +94,7 @@ FUNCTION FindParent( hCtrl, nLevel )
       nLevel := 0
    ENDIF
    IF nLevel < 2
-      IF ( oParent := FindParent( hParent, nLevel + 1 ) ) != Nil
+      IF ( oParent := FindParent(hParent, nLevel + 1) ) != Nil
          RETURN oParent:FindControl(, hParent )
       ENDIF
    ENDIF
@@ -102,7 +102,7 @@ FUNCTION FindParent( hCtrl, nLevel )
 
 FUNCTION FindSelf( hCtrl )
    LOCAL oParent
-   oParent := FindParent( hCtrl )
+   oParent := FindParent(hCtrl)
    IF oParent == Nil
       oParent := GetAncestor( hCtrl, GA_PARENT )
    ENDIF
@@ -151,12 +151,12 @@ FUNCTION VColor(cColor)
    NEXT
    RETURN res
 
-FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
+FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    LOCAL oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
    LOCAL cRes := IIf(cResIni != Nil, Trim(cResIni), "")
    /*
    IF !Empty(cRes)
-      Keyb_Event( VK_END )
+      Keyb_Event(VK_END)
    ENDIF
    */
    nStyle := IIf(nStyle == Nil, 0, nStyle)
@@ -175,7 +175,7 @@ FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
    oModDlg:aControls[4]:Anchor := 9
    
-   ACTIVATE DIALOG oModDlg ON ACTIVATE { || IIf(!Empty(cRes), KEYB_EVENT( VK_END ), .T.) }
+   ACTIVATE DIALOG oModDlg ON ACTIVATE { || IIf(!Empty(cRes), KEYB_EVENT(VK_END), .T.) }
 
    oFont:Release()
    IF oModDlg:lResult
@@ -260,7 +260,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    SelectObject(hDC, oFont:handle)
    aMetr := GetTextMetric(hDC)
    aArea := GetDeviceArea(hDC)
-   aRect := GetWindowRect( GetActiveWindow() )
+   aRect := GetWindowRect(GetActiveWindow())
    ReleaseDC(GetActiveWindow(), hDC)
    height := ( aMetr[1] + 1 ) * aLen + 4 + addY + 8
    IF height > aArea[2] - aRect[2] - nTop - 60
@@ -285,7 +285,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       ENDIF
    ELSE
       @ 0, 0 Browse oBrw DATABASE
-      oBrw:AddColumn( HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), ( o:Alias ) ->( FieldGet( nField ) ) }, "C", nLen ) )
+      oBrw:AddColumn( HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), ( o:Alias ) ->( FieldGet(nField) ) }, "C", nLen ) )
    ENDIF
 
    oBrw:oFont  := oFont
@@ -308,7 +308,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    ENDIF
 
    IF cOk != Nil
-      x1 := Int( width / 2 ) - IIf(cCancel != Nil, 90, 40)
+      x1 := Int(width / 2) - IIf(cCancel != Nil, 90, 40)
       @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK { || nChoice := oBrw:nCurrent, EndDialog( oDlg:handle ) }
       IF cCancel != Nil
          @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK { || nChoice := 0, EndDialog( oDlg:handle ) }
@@ -327,7 +327,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
    STATIC oDlg, hPBar, iCou, nLimit
 
    IF nStep == 0
-      nLimit := IIf(nRange != Nil, Int( nRange / maxPos ), 1)
+      nLimit := IIf(nRange != Nil, Int(nRange / maxPos), 1)
       iCou := 0
       x1 := IIf(x1 == Nil, 0, x1)
       y1 := IIf(x1 == Nil, 0, y1)
@@ -355,7 +355,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
    ELSEIF nStep == 2
       UpdateProgressBar( hPBar )
    ELSEIF nStep == 3
-      SetWindowText( oDlg:handle, cTitle )
+      SetWindowText(oDlg:handle, cTitle)
       IF maxPos != Nil
          SetProgressBar( hPBar, maxPos )
       ENDIF
@@ -428,16 +428,16 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
 
    cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, Nil, @nIndex)
 
-   nAt := At( Chr(0) + Chr(0), cFile )
+   nAt := At(Chr(0) + Chr(0), cFile)
    IF nAt != 0
       cFile := Left(cFile, nAt - 1)
-      nAt := At( Chr(0), cFile )
+      nAt := At(Chr(0), cFile)
       IF nAt != 0
          /* skip path which is already in cPath variable */
          cFile := SubStr(cFile, nAt + 1)
          /* decode files */
          DO WHILE !(cFile == "")
-            nAt := At( Chr(0), cFile )
+            nAt := At(Chr(0), cFile)
             IF nAt != 0
                AAdd(aFiles, cPath + hb_osPathSeparator() + Left(cFile, nAt - 1))
                cFile := SubStr(cFile, nAt + 1)
@@ -462,7 +462,7 @@ FUNCTION HWG_Version( oTip )
    ENDIF
    RETURN oVersion
 
-FUNCTION TxtRect( cTxt, oWin, oFont )
+FUNCTION TxtRect(cTxt, oWin, oFont)
 
    LOCAL hDC
    LOCAL ASize
