@@ -78,8 +78,8 @@ METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeig
 
    // Notificacoes de Ganho e perda de foco
    //::oParent:AddEvent(IPN_FIELDCHANGED,self,::bKillFocus, .T.,"onChange")
-   ::oParent:AddEvent(EN_SETFOCUS , Self, { | o, id | __GetFocus(o:FindControl( id )) },, "onGotFocus")
-   ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __KillFocus(o:FindControl( id )) },, "onLostFocus")
+   ::oParent:AddEvent(EN_SETFOCUS , Self, { | o, id | __GetFocus(o:FindControl(id)) },, "onGotFocus")
+   ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __KillFocus(o:FindControl(id)) },, "onLostFocus")
 
 
    RETURN Self
@@ -136,7 +136,7 @@ STATIC FUNCTION __GetFocus(oCtrl)
    IF hb_IsBlock(oCtrl:bGetFocus)
       oCtrl:oparent:lSuspendMsgsHandling := .T.
       oCtrl:lnoValid := .T.
-      xRet := Eval( oCtrl:bGetFocus, oCtrl )
+      xRet := Eval(oCtrl:bGetFocus, oCtrl)
       oCtrl:oparent:lSuspendMsgsHandling := .F.
       oCtrl:lnoValid := xRet
    ENDIF
@@ -153,7 +153,7 @@ STATIC FUNCTION __KillFocus(oCtrl)
 
    IF hb_IsBlock(oCtrl:bKillFocus)
       oCtrl:oparent:lSuspendMsgsHandling := .T.
-      xRet := Eval( oCtrl:bKillFocus, oCtrl )
+      xRet := Eval(oCtrl:bKillFocus, oCtrl)
       oCtrl:oparent:lSuspendMsgsHandling := .F.
    ENDIF
 

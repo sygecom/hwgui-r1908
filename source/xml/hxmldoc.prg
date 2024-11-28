@@ -74,7 +74,7 @@ METHOD DelAttribute(cName) CLASS HXMLNode
 Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
 
    IF i != 0
-      Adel( ::aAttr, i )
+      Adel(::aAttr, i)
       Asize(::aAttr, Len(::aAttr) - 1)
    ENDIF
 Return .T.
@@ -180,7 +180,7 @@ Local i
          EXIT
       ELSE
          nStart := i
-         IF block == Nil .OR. Eval( block,::aItems[i] )
+         IF block == Nil .OR. Eval(block,::aItems[i])
             Return ::aItems[i]
          ELSE
             nStart ++

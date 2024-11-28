@@ -145,7 +145,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          ::lChanged := .T.
       ENDIF
    ELSEIF hb_IsBlock(::bOther)
-      nret := Eval( ::bOther, Self, msg, wParam, lParam )
+      nret := Eval(::bOther, Self, msg, wParam, lParam)
       IF !hb_IsNumeric(nret) .OR. nret > - 1
          RETURN nret
       ENDIF
@@ -222,7 +222,7 @@ METHOD onChange() CLASS HRichEdit
 
    IF hb_IsBlock(::bChange)
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bChange, ::gettext(), Self  )
+      Eval(::bChange, ::gettext(), Self)
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
    RETURN Nil
@@ -241,7 +241,7 @@ METHOD When() CLASS HRichEdit
    ENDIF
    ::title := ::GetText()
    ::oparent:lSuspendMsgsHandling := .T.
-   Eval( ::bGetFocus, ::title, Self ) // TODO: hb_IsBlock ?
+   Eval(::bGetFocus, ::title, Self) // TODO: hb_IsBlock ?
    ::oparent:lSuspendMsgsHandling := .F.
  RETURN .T.
 
@@ -253,7 +253,7 @@ METHOD Valid() CLASS HRichEdit
    ENDIF
    ::title := ::GetText()
    ::oparent:lSuspendMsgsHandling := .T.
-   Eval( ::bLostFocus, ::title, Self )
+   Eval(::bLostFocus, ::title, Self)
    ::oparent:lSuspendMsgsHandling := .F.
 
   RETURN .T.
@@ -303,7 +303,7 @@ Local oEdit
          oEdit:lChanged := .T.
       ENDIF
    ELSEIF oEdit:bOther != Nil
-      Return Eval( oEdit:bOther, oEdit, msg, wParam, lParam )
+      Return Eval(oEdit:bOther, oEdit, msg, wParam, lParam)
    ENDIF
 Return -1
 */

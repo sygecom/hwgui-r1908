@@ -374,9 +374,9 @@ FUNCTION EndWindow()
    ENDIF
    RETURN Nil
 
-FUNCTION HdSerial( cDrive )
+FUNCTION HdSerial(cDrive)
 
-   LOCAL n       :=  HDGETSERIAL( cDrive )
+   LOCAL n       :=  HDGETSERIAL(cDrive)
    LOCAL cHex    :=  HB_NUMTOHEX( n )
    LOCAL cResult
    cResult := SubStr(cHex, 1, 4) + "-" + SubStr(cHex, 5, 4)
@@ -399,7 +399,7 @@ FUNCTION SetHelpFileName ( cNewName )
 
 FUNCTION RefreshAllGets(oDlg)
 
-   AEval( oDlg:GetList, { | o | o:Refresh() } )
+   AEval(oDlg:GetList, { | o | o:Refresh() })
    RETURN Nil
 
 /*
@@ -423,7 +423,7 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
     * from MSDN:  The first character of this buffer must be NULL
     *             if initialization is not necessary
     */
-   cFile := repl( chr(0), 32000 )
+   cFile := repl(chr(0), 32000)
    aFiles := {}
 
    cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, Nil, @nIndex)

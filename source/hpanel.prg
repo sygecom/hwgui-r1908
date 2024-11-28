@@ -96,8 +96,8 @@ METHOD Activate() CLASS HPanel
    LOCAL handle := ::oParent:handle
 
    IF !Empty(handle)
-      ::handle := CreatePanel( handle, ::id, ;
-                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := CreatePanel(handle, ::id, ;
+                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::ResizeOffSet(0)
       /*
       IF __ObjHasMsg( ::oParent, "AOFFSET" ) .AND. ::oParent:type == WND_MDI
@@ -183,7 +183,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       RETURN 0
    ENDIF
    IF hb_IsBlock(::bOther)
-      IF !hb_IsNumeric(nRet := Eval( ::bOther,Self,msg,wParam,lParam ))
+      IF !hb_IsNumeric(nRet := Eval(::bOther, Self, msg, wParam, lParam))
          nRet := IIf(hb_IsLogical(nRet) .AND. !nRet, 0, -1)
       ENDIF
       IF nRet >= 0
@@ -217,7 +217,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
                  RETURN 0
              ENDIF
          ENDIF
-         onTrackScroll( Self,msg,wParam,lParam )
+         onTrackScroll(Self, msg, wParam, lParam)
       ENDIF
       Return ::Super:onEvent(msg, wParam, lParam)
    ENDIF
@@ -229,7 +229,7 @@ METHOD Paint() CLASS HPanel
 LOCAL pps, hDC, aCoors, oPenLight, oPenGray
 
    IF hb_IsBlock(::bPaint)
-      Eval( ::bPaint, Self )
+      Eval(::bPaint, Self)
       RETURN Nil
    ENDIF
 
@@ -291,7 +291,7 @@ METHOD Release() CLASS HPanel
    ::nHeight := 0
    ::nWidth := 0
    ::Super:Release()
-   //  ::oParent:DelControl( Self )
+   //  ::oParent:DelControl(Self)
 
 RETURN Nil
 

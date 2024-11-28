@@ -195,7 +195,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          scom := UPPER(SUBSTR(stroka, 1, IIf(poz1 != 0, poz1 - 1, 999)))
          DO CASE
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
-            IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL( rezArray[2] )) ) == "C" ;
+            IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL(rezArray[2])) ) == "C" ;
                     .OR. i == "A"
                IF Left(scom, 2) == "LO"
                   AADD(rezArray[2], " "+AllTrim(SubStr(stroka, 7)))
@@ -467,7 +467,7 @@ PRIVATE iscr := 1, bOldError
                ENDDO
             ENDIF
 #endif
-            EVAL( aScript[2, iscr] )
+            EVAL(aScript[2, iscr])
             iscr ++
          ENDDO
 #ifdef __WINDOWS__
@@ -478,7 +478,7 @@ PRIVATE iscr := 1, bOldError
 #endif
       ELSE
          DO WHILE iscr > 0 .AND. iscr <= arlen
-            EVAL( aScript[2, iscr] )
+            EVAL(aScript[2, iscr])
             iscr ++
          ENDDO
       ENDIF
@@ -582,7 +582,7 @@ STATIC w__buf
          w__buf := SAVESCREEN( y1, x1, y2, x2 )
          @ y1, x1, y2, x2 BOX "ÚÄ¿³ÙÄÀ³ "
       ELSEIF noscroll = Nil
-         SCROLL( y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1 )
+         SCROLL(y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1)
       ENDIF
       @ y2 - 1, x1 + 2 SAY sout
       SETCOLOR(oldc)
@@ -606,7 +606,7 @@ LOCAL GetList := {}
    x2   := x1 + x__size
    oldc := SETCOLOR("N/W")
    IF Len(sout) + IIf(spict = "@D", 8, Len(spict)) > x__size - 3
-      SCROLL( y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1 )
+      SCROLL(y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1)
    ELSE
       x1 += Len(sout) + 1
    ENDIF

@@ -112,7 +112,7 @@ METHOD Notify( lParam ) CLASS HPager
    IF nCode == PGN_CALCSIZE
       PAGERONPAGERCALCSIZE(lParam, ::hTool)
    ELSEIF nCode == PGN_SCROLL
-      PAGERONPAGERSCROLL( lParam )
+      PAGERONPAGERSCROLL(lParam)
    ENDIF
 
    RETURN 0

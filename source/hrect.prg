@@ -356,7 +356,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSiz
    ::Activate()
    IF hb_IsBlock(::bLoad)
      // SET ENVIRONMENT
-       Eval( ::bLoad,Self )
+       Eval(::bLoad, Self)
    ENDIF
    ::oPen := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
 
@@ -404,7 +404,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    Local nEval
 
    IF hb_IsBlock(::bOther)
-      IF ( nEval := Eval( ::bOther,Self,msg,wParam,lParam ) ) != Nil .AND. nEval != -1
+      IF ( nEval := Eval(::bOther, Self, msg, wParam, lParam) ) != Nil .AND. nEval != -1
          RETURN 0
       ENDIF
    ENDIF

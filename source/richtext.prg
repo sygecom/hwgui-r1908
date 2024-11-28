@@ -136,8 +136,8 @@ CLASS RichText
    METHOD BeginRow() INLINE ::TextCode("trowd"), ::nCurrRow += 1
    METHOD EndRow() INLINE ::TextCode("row")
 
-   METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
-                     nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault )
+   METHOD WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+                     nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault)
 
 
    // Methods for formatting data
@@ -205,9 +205,9 @@ CLASS RichText
    // New Methods for table managament
    METHOD EndTable() INLINE ::CloseGroup()
    METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct )
-   METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+   METHOD TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
                      nSpace, lSpExact, nFontColor, ;
-                     lDefault, lHeader, lPage, lDate )
+                     lDefault, lHeader, lPage, lDate)
    METHOD CellFormat(cCellBorder, aCellPct)
    METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                        cCellAppear, cCellHAlign, nTblRows, ;
@@ -257,11 +257,11 @@ METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nS
 
    IF aFontFam == NIL
       aFontFam := Array( aFontData )
-      AFill( aFontFam, "fnil" )
+      AFill(aFontFam, "fnil")
    ENDIF
    IF aFontChar == NIL
       aFontChar := Array( aFontData )
-      AFill( aFontChar, 0 )
+      AFill(aFontChar, 0)
    ENDIF
 
    IF hb_IsArray(aHigh)
@@ -438,7 +438,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    ::HAlignment(cHorzAlign)
 
    IF hb_IsArray(aTabPos)
-      AEval( aTabPos, { | x | ::NumCode("tx", x) } )
+      AEval(aTabPos, { | x | ::NumCode("tx", x) })
    ENDIF
 
    ::NumCode("li", nIndent)
@@ -786,7 +786,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    nTblHdFColor  TO  0
 
    IF aTableCWid[1] == NIL
-      AFill( aTableCWid, 6.5 / nTblColumns )
+      AFill(aTableCWid, 6.5 / nTblColumns)
    ELSEIF hb_IsArray(aTableCWid[1])
       aTableCWid := AClone(aTableCWid[1])
    ENDIF
@@ -798,7 +798,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
    IF aColPct == NIL
       aColPct   := Array( nTblColumns )
-      AFill( aColPct, 0 )
+      AFill(aColPct, 0)
    ENDIF
 
    ::cTblHAlign := Lower(Left(cTblHAlign, 1))
@@ -816,8 +816,8 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval( ::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++ } )
+   AEval(::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++ })
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
@@ -846,8 +846,8 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
 
 
-METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
-                  nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault ) CLASS RichText
+METHOD WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+                  nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault) CLASS RichText
 *********************************************************************
 * Description:  Write a formatted cell of data to the current row
 *               of the current table.  Also takes care of the logic
@@ -1322,7 +1322,7 @@ FUNCTION IntlTranslate()
            "\'f3", "\'fa", "\'f1", "\'d1", "\'aa", "\'ba", "\'bf" ;
          }
 
-   AFill( aTranslate, "" )
+   AFill(aTranslate, "")
 
    FOR i := 1 TO Len(aHighTable)
       aTranslate[i] := aHighTable[i]
@@ -2006,7 +2006,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    aTblCJoin TO {}
 
    IF aTableCWid[1] == NIL
-      AFill( aTableCWid, 6.5 / nTblColumns )
+      AFill(aTableCWid, 6.5 / nTblColumns)
    ELSEIF hb_IsArray(aTableCWid[1])
       aTableCWid := AClone(aTableCWid[1])
    ENDIF
@@ -2018,7 +2018,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
    IF aColPct == NIL
       aColPct   := Array( nTblColumns )
-      AFill( aColPct, 0 )
+      AFill(aColPct, 0)
    ENDIF
 
    ::cTblHAlign := Lower(Left(cTblHAlign, 1))
@@ -2036,8 +2036,8 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval( ::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++ } )
+   AEval(::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++ })
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
@@ -2059,7 +2059,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    FOR j = 1 TO ::nTblHdRows
       ::TableDef( .T., j )
       FOR i = 1 TO Len(::aTableCWid)
-         ::TableCell( aHeadTit[j][i],,,,,,,, .T., .T. )
+         ::TableCell(aHeadTit[j][i],,,,,,,, .T., .T.)
       NEXT i
    NEXT j
 
@@ -2136,9 +2136,9 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
    RETURN NIL
 **********************  END OF TableDef()  ***********************
 
-METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+METHOD TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
                   nSpace, lSpExact, nFontColor, ;
-                  lDefault, lHeader, lPage, lDate ) CLASS RichText
+                  lDefault, lHeader, lPage, lDate) CLASS RichText
 *********************************************************************
 * Description:  Writes the cell data and format on the output file.
 *

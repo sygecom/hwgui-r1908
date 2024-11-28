@@ -35,7 +35,7 @@ CLASS VAR winclass INIT "STATIC"
    METHOD Init()
    METHOD Paint()
    METHOD Drag( lParam )
-   METHOD DragAll( lScroll )
+   METHOD DragAll(lScroll)
 
 ENDCLASS
 
@@ -90,7 +90,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
       IF ::lCaptured
          ::Drag( lParam )
          IF ::lScrolling
-            ::DragAll( .T. )
+            ::DragAll(.T.)
          ENDIF
       ENDIF
    ELSEIF msg == WM_PAINT
@@ -106,9 +106,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
       ReleaseCapture()
       ::lCaptured := .F.
       ::lMoved := .F.
-      ::DragAll( .F. )
+      ::DragAll(.F.)
       IF hb_IsBlock(::bEndDrag)
-       //  Eval( ::bEndDrag, Self )
+       //  Eval(::bEndDrag, Self)
       ENDIF
    ELSEIF msg == WM_DESTROY
       ::END()
@@ -132,7 +132,7 @@ METHOD Paint() CLASS HSplitter
 
    SetBkMode(hDC, ::backStyle)
    IF hb_IsBlock(::bPaint)
-      Eval( ::bPaint, Self )
+      Eval(::bPaint, Self)
    ELSEIF !::lScrolling
       IF ::lCaptured
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
@@ -171,7 +171,7 @@ METHOD Drag( lParam ) CLASS HSplitter
 
    RETURN Nil
 
-METHOD DragAll( lScroll ) CLASS HSplitter
+METHOD DragAll(lScroll) CLASS HSplitter
    LOCAL i, oCtrl, xDiff := 0, yDiff := 0
 
    lScroll := IIf(Len(::aLeft) = 0 .OR. Len(::aRight) = 0, .F., lScroll)
@@ -215,7 +215,7 @@ METHOD DragAll( lScroll ) CLASS HSplitter
       InvalidateRect(::oParent:handle, 0, ::nLeft, ::nTop - ::nHeight - yDiff - 1, ::nLeft + ::nWidth, ::nTop + ::nHeight + yDiff + 1)
    ENDIF
    IF hb_IsBlock(::bEndDrag)
-      Eval( ::bEndDrag,Self )
+      Eval(::bEndDrag, Self)
    ENDIF
 
    RETURN Nil

@@ -195,7 +195,7 @@ Local i
          Aadd(aBreakPoints[2], oBrwScript:nCurrent)
       ENDIF
    ELSE
-      Adel( aBreakPoints[2], i )
+      Adel(aBreakPoints[2], i)
       aBreakPoints[2,Len(aBreakPoints[2])] := 0
    ENDIF
    oBrwScript:Refresh()
@@ -240,7 +240,7 @@ Local xRes, bOldError, lRes := .T., cType
 
    bOldError := ERRORBLOCK( { | e | MacroError(e) } )
    BEGIN SEQUENCE
-      xRes := Eval( aWatches[n,2] )
+      xRes := Eval(aWatches[n,2])
    RECOVER
       lRes := .F.
    END SEQUENCE

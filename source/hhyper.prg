@@ -59,9 +59,9 @@ CLASS VAR winclass INIT "STATIC"
                     bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor)
    METHOD INIT()
    METHOD onEvent(msg, wParam, lParam)
-   METHOD GoToLinkUrl( csLink )
+   METHOD GoToLinkUrl(csLink)
    METHOD GetLinkText()
-   METHOD SetLinkUrl( csUrl )
+   METHOD SetLinkUrl(csUrl)
    METHOD GetLinkUrl()
    METHOD SetVisitedColor(sVisitedColor)
    METHOD SetHoverColor(cHoverColor)
@@ -220,7 +220,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 
    RETURN - 1
 
-METHOD GoToLinkUrl( csLink ) CLASS HStaticLink
+METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
    LOCAL hInstance := SHELLEXECUTE(csLink, "open", NIL, NIL, 2)
    //ShellExecute(NULL              , _T("open")                             , csLink.operator LPCTSTR(), NULL                                 , NULL                                   , 2);
@@ -239,7 +239,7 @@ METHOD GetLinkText() CLASS HStaticLink
 
    RETURN ::Title
 
-METHOD SetLinkUrl( csUrl ) CLASS HStaticLink
+METHOD SetLinkUrl(csUrl) CLASS HStaticLink
 
    ::m_csUrl := csUrl
 
@@ -271,7 +271,7 @@ METHOD OnClicked() CLASS HStaticLink
          nCtrlID := ::id
          ::SendMessage(::oparent:handle, _HYPERLINK_EVENT, nCtrlID, 0)
       ELSE
-         ::GoToLinkUrl( ::m_csUrl )
+         ::GoToLinkUrl(::m_csUrl)
       ENDIF
       ::m_bVisited := .T.
    ENDIF

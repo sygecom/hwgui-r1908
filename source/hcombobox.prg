@@ -352,7 +352,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
    LOCAL oCtrl
 
    IF hb_IsBlock(::bOther)
-      IF Eval( ::bOther, Self, msg, wParam, lParam ) != - 1
+      IF Eval(::bOther, Self, msg, wParam, lParam) != - 1
          RETURN 0
       ENDIF
    ENDIF
@@ -370,7 +370,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), - 1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN .AND. ;
-            !ProcOkCancel( Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE ) .AND.;
+            !ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND.;
                        ( ::GetParentForm():Type < WND_DLG_RESOURCE.OR.;
                    !::GetParentForm():lModal )
             GetSkip(::oParent, ::handle, , 1)
@@ -380,7 +380,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          IF wParam = VK_RETURN
             RETURN DLGC_WANTMESSAGE
          ELSEIF wParam = VK_ESCAPE  .AND. ;
-                  ( oCtrl := ::GetParentForm:FindControl( IDCANCEL ) ) != Nil .AND. !oCtrl:IsEnabled()
+                  ( oCtrl := ::GetParentForm:FindControl(IDCANCEL) ) != Nil .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
          ENDIF
            RETURN  DLGC_WANTCHARS + DLGC_WANTARROWS
@@ -410,7 +410,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          IF (GETKEYSTATE(VK_RETURN) < 0 .OR. GETKEYSTATE(VK_ESCAPE) < 0) .AND. ;
             (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
             !::GetParentForm(Self):lModal)
-            ProcOkCancel( Self, IIf(GETKEYSTATE(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE) )
+            ProcOkCancel(Self, IIf(GETKEYSTATE(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
          ENDIF
            IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent = Nil
@@ -583,7 +583,7 @@ METHOD Refresh() CLASS HComboBox
    LOCAL vari
 
    IF hb_IsBlock(::bSetGet)
-      vari := Eval( ::bSetGet,, Self )
+      vari := Eval(::bSetGet,, Self)
       IF ::columnBound = 2
           vari := ::GetValueBound(vari)
       ENDIF
@@ -598,9 +598,9 @@ METHOD Refresh() CLASS HComboBox
       ENDIF
       /*
       IF ::columnBound = 1
-         Eval( ::bSetGet, ::value, Self )
+         Eval(::bSetGet, ::value, Self)
       ELSE
-         Eval( ::bSetGet, ::valuebound, Self )
+         Eval(::bSetGet, ::valuebound, Self)
       ENDIF
       */
    ENDIF
@@ -646,7 +646,7 @@ METHOD SetItem( nPos ) CLASS HComboBox
          ::ValueBound := ::GetValueBound()
       ELSE
          ::value := ""
-         ::valueBound := IIf(::bSetGet != Nil, Eval( ::bSetGet,, Self ), ::valueBound)
+         ::valueBound := IIf(::bSetGet != Nil, Eval(::bSetGet,, Self), ::valueBound)
       ENDIF
    ELSE
       ::value := nPos
@@ -657,16 +657,16 @@ METHOD SetItem( nPos ) CLASS HComboBox
 
    IF hb_IsBlock(::bSetGet)
       IF ::columnBound = 1
-         Eval( ::bSetGet, ::value, Self )
+         Eval(::bSetGet, ::value, Self)
       ELSE
-         Eval( ::bSetGet, ::valuebound, Self )
+         Eval(::bSetGet, ::valuebound, Self)
       ENDIF
    ENDIF
 
    /*
    IF hb_IsBlock(::bChangeSel)
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bChangeSel, nPos, Self )
+      Eval(::bChangeSel, nPos, Self)
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
    */
@@ -716,9 +716,9 @@ METHOD GetValue() CLASS HComboBox
    ::ValueBound := IIf(nPos > 0, ::GetValueBound(), ::ValueBound) // IIf(::lText, "", 0))
    IF hb_IsBlock(::bSetGet)
       IF ::columnBound = 1
-         Eval( ::bSetGet, ::value, Self )
+         Eval(::bSetGet, ::value, Self)
       ELSE
-         Eval( ::bSetGet, ::ValueBound, Self )
+         Eval(::bSetGet, ::ValueBound, Self)
       ENDIF
    ENDIF
 
@@ -785,10 +785,10 @@ METHOD DeleteItem( xIndex ) CLASS HComboBox
        nIndex := xIndex
    ENDIF
    IF SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= LEN(ocombo:aitems)
-      Adel( ::Aitems, nIndex )
+      Adel(::Aitems, nIndex)
       Asize(::Aitems, Len(::aitems) - 1)
       IF Len(::AitemsBound) > 0
-         ADEL( ::AitemsBound, nIndex )
+         ADEL(::AitemsBound, nIndex)
          ASIZE(::AitemsBound, Len(::aitemsBound) - 1)
       ENDIF
       RETURN .T.
@@ -864,7 +864,7 @@ METHOD onSelect() CLASS HComboBox
 
    IF hb_IsBlock(::bSelect)
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bSelect, ::value, Self )
+      Eval(::bSelect, ::value, Self)
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
@@ -886,7 +886,7 @@ METHOD onChange(lForce) CLASS HComboBox
    IF hb_IsBlock(::bChangeSel)
       //::SetItem( SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1 )
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bChangeSel, ::Value, Self )
+      Eval(::bChangeSel, ::Value, Self)
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
@@ -915,15 +915,15 @@ METHOD When() CLASS HComboBox
       ::oParent:lSuspendMsgsHandling := .T.
       ::lnoValid := .T.
       IF hb_IsBlock(::bSetGet)
-         res := Eval( ::bGetFocus, Eval( ::bSetGet,, Self ), Self )
+         res := Eval(::bGetFocus, Eval(::bSetGet,, Self), Self)
       ELSE
-         res := Eval( ::bGetFocus, ::value, Self )
+         res := Eval(::bGetFocus, ::value, Self)
       ENDIF
       ::oParent:lSuspendMsgsHandling := .F.
       ::lnoValid := !res
       IF hb_IsLogical(res) .AND. !res
          oParent := ParentGetDialog( Self )
-         IF Self == ATail( oParent:GetList )
+         IF Self == ATail(oParent:GetList)
             nSkip := - 1
          ELSEIF Self == oParent:getList[1]
             nSkip := 1
@@ -957,7 +957,7 @@ METHOD Valid() CLASS HComboBox
       ::GetValue()
       IF hb_IsBlock(::bLostFocus)
          ::oparent:lSuspendMsgsHandling := .T.
-         res := Eval( ::bLostFocus, ::value, Self )
+         res := Eval(::bLostFocus, ::value, Self)
          IF hb_IsLogical(res) .AND. !res
             ::SetFocus(.T.)
             IF oDlg != Nil

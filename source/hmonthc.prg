@@ -125,7 +125,7 @@ METHOD onChange() CLASS HMonthCalendar
    IF hb_IsBlock(::bChange) .AND. !::oparent:lSuspendMsgsHandling
       SendMessage(::handle, WM_LBUTTONDOWN, 0, MAKELPARAM(1, 1))
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bChange, ::value, Self )
+      Eval(::bChange, ::value, Self)
       ::oparent:lSuspendMsgsHandling := .F.
     ENDIF
 
@@ -135,7 +135,7 @@ METHOD onSelect() CLASS HMonthCalendar
 
    IF hb_IsBlock(::bSelect) .AND. !::oparent:lSuspendMsgsHandling
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval( ::bSelect, ::value, Self )
+      Eval(::bSelect, ::value, Self)
       ::oparent:lSuspendMsgsHandling := .F.
     ENDIF
 

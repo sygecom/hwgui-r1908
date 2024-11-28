@@ -60,7 +60,7 @@ CLASS HCheckComboBox INHERIT HComboBox
 
    METHOD GetCheck( nIndex )
 
-   METHOD SelectAll( bCheck )
+   METHOD SelectAll(bCheck)
    METHOD MeasureItem( l )
 
    METHOD onEvent(msg, wParam, lParam)
@@ -338,7 +338,7 @@ RETURN IIf(l == 1, .T., .F.)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SelectAll( bCheck ) CLASS hCheckComboBox
+METHOD SelectAll(bCheck) CLASS hCheckComboBox
 
    LOCAL nCount
    LOCAL i
@@ -451,7 +451,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       ENDIF
 
       // Draw the checkmark using DrawFrameControl
-      DrawFrameControl( dc, rcBitmap, DFC_BUTTON, nstate )
+      DrawFrameControl(dc, rcBitmap, DFC_BUTTON, nstate)
    ENDIF
 
    IF ( hwg_Bitand(drawInfo[9], ODS_SELECTED) != 0 )

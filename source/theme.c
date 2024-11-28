@@ -1200,7 +1200,7 @@ HB_FUNC(ENDTHEMELIB)
 
 HB_FUNC(ONNOTIFYCUSTOMDRAW)
 {
-  // HWND hWnd = ( HWND ) hb_parnl( 1 ) ;
+  // HWND hWnd = ( HWND ) hb_parnl(1) ;
   LPARAM lParam = hwg_par_LPARAM(1);
   // PHB_ITEM pColor = hb_param( 3, HB_IT_ARRAY );
   hb_retnl((LONG)OnNotifyCustomDraw(lParam));

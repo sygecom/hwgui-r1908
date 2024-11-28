@@ -225,7 +225,7 @@ METHOD MUp() CLASS HNICEButton
          SetNiceBtnSelected(Nil)
       ENDIF
       IF hb_IsBlock(::bClick)
-         Eval( ::bClick, ::oParent, ::id )
+         Eval(::bClick, ::oParent, ::id)
       ENDIF
    ENDIF
 

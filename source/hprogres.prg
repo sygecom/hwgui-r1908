@@ -33,7 +33,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD Increment() INLINE UpdateProgressBar(::handle)
    METHOD STEP(cTitle)
    METHOD SET(cTitle, nPos)
-   METHOD SetLabel( cCaption )
+   METHOD SetLabel(cCaption)
    METHOD SetAnimation( nAnimation ) SETGET
    METHOD Close()
    METHOD End() INLINE DestroyWindow(::handle)
@@ -92,7 +92,7 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
    ::id := ::NewId()
    ::nHeight := 0
    ::Activate()
-   ::oParent:AddControl( Self )
+   ::oParent:AddControl(Self)
 
    RETURN Self
 
@@ -125,7 +125,7 @@ METHOD STEP(cTitle)
       ::SET(cTitle)
       IF !Empty(::lPercent)
          ::nPercent += ::maxPos  //::nLimit
-         ::setLabel( LTrim(STR( ::nPercent, 3 )) + " %" )
+         ::setLabel(LTrim(STR( ::nPercent, 3 )) + " %")
       ENDIF
       RETURN .T.
    ENDIF
@@ -143,7 +143,7 @@ METHOD SET(cTitle, nPos) CLASS HProgressBar
 
    RETURN Nil
 
-METHOD SetLabel( cCaption ) CLASS HProgressBar
+METHOD SetLabel(cCaption) CLASS HProgressBar
 
    IF cCaption != Nil .AND. ::lNewBox
       ::LabelBox:SetValue(cCaption)

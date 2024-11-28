@@ -119,7 +119,7 @@ HB_FUNC(HWG__ADDMENUITEM)
 
   mii.cbSize = sizeof( MENUITEMINFO );
   mii.fMask = MIIM_TYPE | MIIM_STATE | MIIM_ID;
-  mii.fState = ( HB_ISNIL(6) || hb_parl( 6 ) )? 0:MFS_DISABLED;
+  mii.fState = ( HB_ISNIL(6) || hb_parl(6) )? 0:MFS_DISABLED;
   mii.wID = hb_parni( 5 );
   if (HB_ISCHAR(2))
   {

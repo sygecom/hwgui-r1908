@@ -56,7 +56,7 @@ METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS
       ::oMci:lOpen()
       ::oMci:SetWindow(Self)
    ELSE
-      ::oparent:AddControl( Self )
+      ::oparent:AddControl(Self)
    ENDIF
 
    RETURN Self
@@ -72,7 +72,7 @@ METHOD ReDefine(nId, cFileName, oDlg, bWhen, bValid) CLASS TVideo
    ::oWnd     = oDlg
    ::oMci     = TMci():New( "avivideo", cFileName )
 
-   oDlg:AddControl( Self )
+   oDlg:AddControl(Self)
 
    RETURN Self
 

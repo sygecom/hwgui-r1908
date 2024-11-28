@@ -670,7 +670,7 @@ HB_FUNC(HWG_BRINGWINDOWTOTOP)
 
 // HB_FUNC(HWG_SETACTIVEWINDOW)
 //{
-//    hb_retnl( SetActiveWindow( (HWND) HB_PARHANDLE(1) ) );
+//    hb_retnl(SetActiveWindow( (HWND) HB_PARHANDLE(1) ));
 // }
 
 HB_FUNC(RESETWINDOWPOS)

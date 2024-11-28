@@ -53,7 +53,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
       ::resname := resname
    ENDIF
 
-   ::oParent:AddControl( Self )
+   ::oParent:AddControl(Self)
    ::Activate()
 
 Return Self
@@ -85,7 +85,7 @@ METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, r
       ::resname := resname
    ENDIF
 
-   ::oParent:AddControl( Self )
+   ::oParent:AddControl(Self)
    QHTM_INIT()
 
 Return Self
@@ -109,7 +109,7 @@ Return Nil
 METHOD Notify( lParam ) CLASS HQhtm
 Local cLink := QHTM_GetNotify( lParam )
 
-   IF ::bLink == Nil .OR. !Eval( ::bLink,Self,cLink )
+   IF ::bLink == Nil .OR. !Eval(::bLink, Self, cLink)
       IF "tp://" $ clink
          Return 0
       ELSE
@@ -128,7 +128,7 @@ Local oCtrl := FindSelf( hCtrl )
 
    IF oCtrl != Nil
       IF oCtrl:bSubmit != Nil
-         Eval( oCtrl:bSubmit,oCtrl,cMethod,cAction,cName,aFields )
+         Eval(oCtrl:bSubmit, oCtrl, cMethod, cAction, cName, aFields)
       ENDIF
    ENDIF
 

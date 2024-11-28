@@ -89,7 +89,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    IF msg == WM_PAINT
       IF hb_IsBlock(::bPaint)
-         Eval( ::bPaint, Self )
+         Eval(::bPaint, Self)
          RETURN 0
       ENDIF
 
@@ -121,7 +121,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
       ENDIF
 
    ELSEIF hb_IsBlock(::bOther)
-      RETURN Eval( ::bOther, Self, msg, wParam, lParam )
+      RETURN Eval(::bOther, Self, msg, wParam, lParam)
 
    ENDIF
 

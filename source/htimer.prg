@@ -30,7 +30,7 @@ CLASS VAR aTimers   INIT {}
    ASSIGN Name(cName) INLINE IIf(!Empty(cName) .AND. hb_IsChar(cName) .AND. !(":" $ cName) .AND. !("[" $ cName),;
          ( ::xName := cName, __objAddData(::oParent, cName), ::oParent: & ( cName ) := Self), Nil)
    ACCESS Interval INLINE ::value
-   ASSIGN Interval( x ) INLINE ::value := x, ;
+   ASSIGN Interval(x) INLINE ::value := x, ;
                                            SetTimer( ::oParent:handle, ::id, ::value )
 
    METHOD New( oParent, nId, value, bAction )
@@ -79,7 +79,7 @@ METHOD END() CLASS HTimer
       KillTimer( ::oParent:handle, ::id )
    ENDIF
    IF ( i := AScan( ::aTimers, { | o | o:id == ::id } ) ) > 0
-      ADel( ::aTimers, i )
+      ADel(::aTimers, i)
       ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF
 
@@ -99,7 +99,7 @@ FUNCTION TimerProc(hWnd, idTimer, Time)
 
    IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != Nil .AND.;
       hb_IsBlock(HTimer():aTimers[i]:bAction)
-      Eval( HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time )
+      Eval(HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time)
    ENDIF
 
    RETURN Nil

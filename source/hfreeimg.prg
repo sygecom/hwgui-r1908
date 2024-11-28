@@ -102,7 +102,7 @@ METHOD Release() CLASS HFreeImage
                IF ::hBitmap != Nil
                   DeleteObject(::hBitmap)
                ENDIF
-               ADel( ::aImages, hB_enumIndex() )
+               ADel(::aImages, hB_enumIndex())
                ASize(::aImages, nlen - 1)
                EXIT
             ENDIF
@@ -114,7 +114,7 @@ METHOD Release() CLASS HFreeImage
                IF ::hBitmap != Nil
                   DeleteObject(::hBitmap)
                ENDIF
-               ADel( ::aImages, i )
+               ADel(::aImages, i)
                ASize(::aImages, nlen - 1)
                EXIT
             ENDIF

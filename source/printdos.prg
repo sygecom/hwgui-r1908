@@ -364,7 +364,7 @@ METHOD PrinterFile(fname) CLASS PrintDos
 FUNCTION wProw( oPrinter )
    RETURN oPrinter:nProw
 
-FUNCTION wPCol( oPrinter )
+FUNCTION wPCol(oPrinter)
    RETURN oPrinter:nPcol
 
 FUNCTION wSetPrc(x, y, oPrinter)
