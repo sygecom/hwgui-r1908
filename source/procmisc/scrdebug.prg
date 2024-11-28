@@ -67,9 +67,9 @@ Local nFirst, i
           ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(y),o:Move(,,x)}
 
       oBrwData:aArray := aWatches
-      oBrwData:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,1]},"C",30,0 ) )
-      oBrwData:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,3]},"C",1,0 ) )
-      oBrwData:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,4]},"C",60,0 ) )
+      oBrwData:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,1]},"C",30,0 ))
+      oBrwData:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,3]},"C",1,0 ))
+      oBrwData:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),o:aArray[o:nCurrent,4]},"C",60,0 ))
       @ 0,4 BROWSE oBrwScript ARRAY SIZE 500,236    ;
           FONT oScrFont STYLE WS_BORDER+WS_VSCROLL+WS_HSCROLL ;
           ON SIZE {|o,x,y|o:Move(,,x,y-oSplit:nTop-oSplit:nHeight-64)}
@@ -80,13 +80,13 @@ Local nFirst, i
       oBrwScript:aArray := aScript[3]
 #ifdef __LINUX__
       oBrwScript:rowCount := 5
-      oBrwScript:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0 ) )
+      oBrwScript:AddColumn(HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0 ))
 #else
-      oBrwScript:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0 ) )
+      oBrwScript:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0 ))
       oBrwScript:aColumns[1]:aBitmaps := { { {|n|n==1},oBmpCurr },{ {|n|n==2},oBmpPoint } }
 #endif
-      oBrwScript:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Left(o:aArray[o:nCurrent],4)},"C",4,0 ) )
-      oBrwScript:AddColumn( HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Substr(o:aArray[o:nCurrent],6)},"C",80,0 ) )
+      oBrwScript:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Left(o:aArray[o:nCurrent],4)},"C",4,0 ))
+      oBrwScript:AddColumn(HColumn():New( "",{|v,o|HB_SYMBOL_UNUSED(v),Substr(o:aArray[o:nCurrent],6)},"C",80,0 ))
 
       oBrwScript:bEnter:= {||AddBreakPoint()}
 
@@ -110,11 +110,11 @@ Local nFirst, i
 
    IF aScriptCurr[4] != aScript[4]
       IF !Empty(aBreakPoints)
-         IF ( i := Ascan( aBreaks, {|a|a[1]==aBreakPoints[1]} ) ) == 0
+         IF ( i := Ascan(aBreaks, {|a|a[1]==aBreakPoints[1]}) ) == 0
             HB_SYMBOL_UNUSED(i)
             Aadd(aBreaks, aBreakPoints)
          ENDIF
-         IF ( i := Ascan( aBreaks, {|a|a[1]==aScript[4]} ) ) == 0
+         IF ( i := Ascan(aBreaks, {|a|a[1]==aScript[4]}) ) == 0
             aBreakPoints := Nil
          ELSE
             aBreakPoints := aBreaks[i]
@@ -184,7 +184,7 @@ Local i
    IF aBreakPoints == Nil
       aBreakPoints := { aScriptCurr[4], {} }
    ENDIF
-   IF ( i := Ascan( aBreakPoints[2],oBrwScript:nCurrent ) ) == 0
+   IF ( i := Ascan(aBreakPoints[2],oBrwScript:nCurrent) ) == 0
       FOR i := 1 TO Len(aBreakPoints[2])
          IF aBreakPoints[2,i] == 0
             aBreakPoints[2,i] := oBrwScript:nCurrent
@@ -219,7 +219,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
    ENDIF
 
    IF lRes
-      IF Ascan( aWatches, {|s|s[1] == xRes} ) == 0
+      IF Ascan(aWatches, {|s|s[1] == xRes}) == 0
          Aadd(aWatches, { xRes,bCodeblock, Nil, Nil })
          CalcWatch( Len(aWatches) )
       ENDIF

@@ -401,7 +401,7 @@ HB_FUNC(DRAWMENUBAR)
 }
 
 /*
- *  GetMenuCaption( hWnd | oWnd, nMenuId )
+ *  GetMenuCaption(hWnd | oWnd, nMenuId)
  */
 
 /*
@@ -458,7 +458,7 @@ HB_FUNC(GETMENUCAPTION)
 }
 
 /*
- *  SetMenuCaption( hWnd | oWnd, nMenuId, cCaption )
+ *  SetMenuCaption(hWnd | oWnd, nMenuId, cCaption)
  */
 
 /*

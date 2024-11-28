@@ -34,7 +34,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD STEP(cTitle)
    METHOD SET(cTitle, nPos)
    METHOD SetLabel(cCaption)
-   METHOD SetAnimation( nAnimation ) SETGET
+   METHOD SetAnimation(nAnimation) SETGET
    METHOD Close()
    METHOD End() INLINE DestroyWindow(::handle)
 
@@ -151,7 +151,7 @@ METHOD SetLabel(cCaption) CLASS HProgressBar
 
    RETURN Nil
 
-METHOD SetAnimation( nAnimation ) CLASS HProgressBar
+METHOD SetAnimation(nAnimation) CLASS HProgressBar
 
    IF nAnimation != Nil
        IF nAnimation <= 0

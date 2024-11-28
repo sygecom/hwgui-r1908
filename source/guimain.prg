@@ -82,7 +82,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 FUNCTION FindParent(hCtrl, nLevel)
    LOCAL i, oParent, hParent := GetParent(hCtrl)
    IF !Empty(hParent)
-      IF ( i := AScan( HDialog():aModalDialogs, { | o | o:handle == hParent } ) ) != 0
+      IF ( i := AScan(HDialog():aModalDialogs, { | o | o:handle == hParent }) ) != 0
          RETURN HDialog():aModalDialogs[i]
       ELSEIF ( oParent := HDialog():FindDialog( hParent ) ) != Nil
          RETURN oParent
@@ -114,7 +114,7 @@ FUNCTION FindSelf( hCtrl )
 FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
-   IF ( i := AScan( aControls, { | o | o:ClassName() == "HSTATUS" } ) ) > 0
+   IF ( i := AScan(aControls, { | o | o:ClassName() == "HSTATUS" }) ) > 0
       WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
       IF lRedraw != Nil .AND. lRedraw
          RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -125,7 +125,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
 FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
-   IF ( i := AScan( aControls, { | o | o:ClassName() == "HSTATUS" } ) ) > 0
+   IF ( i := AScan(aControls, { | o | o:ClassName() == "HSTATUS" }) ) > 0
       ntxtLen := SendMessage(aControls[i]:handle, SB_GETTEXTLENGTH, nPart - 1, 0)
       cText := Replicate(Chr(0), ntxtLen)
       SendMessage(aControls[i]:handle, SB_GETTEXT, nPart - 1, @cText)
@@ -186,11 +186,11 @@ FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
 
    RETURN cRes
 
-FUNCTION WAITRUN( cRun )
+FUNCTION WAITRUN(cRun)
 //#ifdef __XHARBOUR__
 Local hIn, hOut, nRet, hProc
    // "Launching process", cProc
-   hProc := hb_processOpen( cRun, @hIn, @hOut, @hOut )
+   hProc := hb_processOpen(cRun, @hIn, @hOut, @hOut)
 
    // "Reading output"
    // "Waiting for process termination"
@@ -202,7 +202,7 @@ Local hIn, hOut, nRet, hProc
 
    Return nRet
 //#else
-//  __Run( cRun )
+//  __Run(cRun)
 //   Return 0
 //#endif
 
@@ -279,13 +279,13 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
       IF hb_IsArray(arr[1])
-         oBrw:AddColumn( HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1] }, "C", nLen ) )
+         oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1] }, "C", nLen ))
       ELSE
-         oBrw:AddColumn( HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent] }, "C", nLen ) )
+         oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent] }, "C", nLen ))
       ENDIF
    ELSE
       @ 0, 0 Browse oBrw DATABASE
-      oBrw:AddColumn( HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), ( o:Alias ) ->( FieldGet(nField) ) }, "C", nLen ) )
+      oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), ( o:Alias ) ->( FieldGet(nField) ) }, "C", nLen ))
    ENDIF
 
    oBrw:oFont  := oFont
@@ -387,7 +387,7 @@ FUNCTION Hwg_GetIni( cSection, cEntry, cDefault, cFile )
    RETURN GetPrivateProfileString( cSection, cEntry, cDefault, cFile )
 
 FUNCTION Hwg_WriteIni( cSection, cEntry, cValue, cFile )
-   RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+   RETURN (WritePrivateProfileString( cSection, cEntry, cValue, cFile ))
 
 FUNCTION SetHelpFileName ( cNewName )
    STATIC cName := ""
@@ -453,7 +453,7 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
    ENDIF
    RETURN aFiles
 
-FUNCTION HWG_Version( oTip )
+FUNCTION HWG_Version(oTip)
    LOCAL oVersion
    IF oTip == 1
       oVersion := "HwGUI " + HWG_VERSION + " " + Version()

@@ -132,7 +132,7 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
    ELSE
       FOR i := 1 TO Len(aImages)
          cImage := Upper(aImages[i])
-         IF ( h := AScan( oTree:aImages, cImage ) ) == 0
+         IF ( h := AScan(oTree:aImages, cImage) ) == 0
             AAdd(oTree:aImages, cImage)
             aImages[i] := IIf(oTree:Type, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
             Imagelist_Add(oTree:himl, aImages[i])
@@ -179,7 +179,7 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
    ELSE
       AAdd(aItems, Nil)
       h := oPrev:handle
-      IF ( i := AScan( aItems, { | o | o:handle == h } ) ) == 0
+      IF ( i := AScan(aItems, { | o | o:handle == h }) ) == 0
          aItems[Len(aItems)] := Self
       ELSE
          AIns(aItems, i + 1)
@@ -211,7 +211,7 @@ METHOD Delete(lInternal) CLASS HTreeNode
    SendMessage(::oTree:handle, TVM_DELETEITEM, 0, ::handle)
    IF lInternal == Nil
       aItems := IIf(::oParent == Nil, ::oTree:aItems, ::oParent:aItems)
-      j := AScan( aItems, { | o | o:handle == h } )
+      j := AScan(aItems, { | o | o:handle == h })
       ADel(aItems, j)
       ASize(aItems, Len(aItems) - 1)
    ENDIF
@@ -530,7 +530,7 @@ METHOD ItemHeight(nHeight) CLASS HTree
 
 METHOD Notify( lParam ) CLASS HTree
    LOCAL nCode := GetNotifyCode(lParam), oItem, cText, nAct, nHitem, leval
-   LOCAL nkeyDown := GetNotifyKeydown( lParam )
+   LOCAL nkeyDown := GetNotifyKeydown(lParam)
     
    IF ncode = NM_SETCURSOR .AND. ::lDragging
       ::hitemDrop := tree_Hittest(::handle,,, @nAct)

@@ -77,7 +77,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    IF bGfocus != Nil
       //::oParent:AddEvent(EN_SETFOCUS, Self, bGfocus,, "onGotFocus")
       ::bGetFocus := bGfocus
-      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o | ::When( o ) }, , "onGotFocus")
+      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o | ::When(o) }, , "onGotFocus")
    ENDIF
    IF bLfocus != Nil
       //::oParent:AddEvent(EN_KILLFOCUS, Self, bLfocus,, "onLostFocus")

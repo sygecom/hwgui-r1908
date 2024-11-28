@@ -70,7 +70,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
       USE (fname) NEW
       han := IIf(NetErr(), -1, 0)
    ELSE
-      han    := FOPEN( fname, FO_READ + FO_SHARED )
+      han    := FOPEN(fname, FO_READ + FO_SHARED)
    ENDIF
    IF han != - 1
       strfull := ""

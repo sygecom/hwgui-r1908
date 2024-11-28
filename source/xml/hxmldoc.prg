@@ -55,12 +55,12 @@ METHOD Add(xItem) CLASS HXMLNode
 Return xItem
 
 METHOD GetAttribute(cName) CLASS HXMLNode
-Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
+Local i := Ascan(::aAttr, {|a|a[1]==cName})
 
 Return IIf(i==0, Nil, ::aAttr[i,2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
-Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
+Local i := Ascan(::aAttr,{|a|a[1]==cName})
 
    IF i == 0
       Aadd(::aAttr, { cName,cValue })
@@ -71,7 +71,7 @@ Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
 Return .T.
 
 METHOD DelAttribute(cName) CLASS HXMLNode
-Local i := Ascan( ::aAttr,{|a|a[1]==cName} )
+Local i := Ascan(::aAttr,{|a|a[1]==cName})
 
    IF i != 0
       Adel(::aAttr, i)
@@ -175,7 +175,7 @@ Local i
       nStart := 1
    ENDIF
    DO WHILE .T.
-      i := Ascan( ::aItems,{|a|!hb_IsChar(a).AND.a:title==cTitle},nStart )
+      i := Ascan(::aItems,{|a|!hb_IsChar(a).AND.a:title==cTitle},nStart)
       IF i == 0
          EXIT
       ELSE
@@ -218,7 +218,7 @@ METHOD Read(fname, buffer) CLASS HXMLDoc
 Local han
 
    IF fname != Nil
-      han := FOpen( fname, FO_READ )
+      han := FOpen(fname, FO_READ)
       IF han != -1
          ::nLastErr := hbxml_GetDoc(Self, han)
          FClose(han)

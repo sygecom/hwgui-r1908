@@ -104,10 +104,10 @@ METHOD EndGroup(nSelected) CLASS HRadioGroup
                         nSelected, ::oGroupCurrent:nValue)
       IF nSelected != 0 .AND. nSelected <= nLen
          IF ::oGroupCurrent:aButtons[nLen]:handle > 0
-            CheckRadioButton( ::oGroupCurrent:aButtons[nLen]:oParent:handle, ;
-                              ::oGroupCurrent:aButtons[1]:id,    ;
-                              ::oGroupCurrent:aButtons[nLen]:id, ;
-                              ::oGroupCurrent:aButtons[nSelected]:id )
+            CheckRadioButton(::oGroupCurrent:aButtons[nLen]:oParent:handle, ;
+                             ::oGroupCurrent:aButtons[1]:id,    ;
+                             ::oGroupCurrent:aButtons[nLen]:id, ;
+                             ::oGroupCurrent:aButtons[nSelected]:id)
          ELSE
             ::oGroupCurrent:aButtons[nLen]:bInit :=                     ;
                                                       &( "{|o|CheckRadioButton(o:oParent:handle," +           ;
@@ -141,19 +141,19 @@ METHOD SetValue(nValue) CLASS HRadioGroup
    LOCAL nLen
 
    IF ( nLen := Len(::aButtons) ) > 0 .AND. nValue > 0 .AND. nValue <= nLen
-      CheckRadioButton( ::aButtons[nLen]:oParent:handle, ;
-                        ::aButtons[1]:id,    ;
-                        ::aButtons[nLen]:id, ;
-                        ::aButtons[nValue]:id )
+      CheckRadioButton(::aButtons[nLen]:oParent:handle, ;
+                       ::aButtons[1]:id,    ;
+                       ::aButtons[nLen]:id, ;
+                       ::aButtons[nValue]:id)
       ::nValue := nValue
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, ::nValue)
       ENDIF
    ELSEIF nLen > 0
-      CheckRadioButton( ::aButtons[nlen]:oParent:handle, ;
+      CheckRadioButton(::aButtons[nlen]:oParent:handle, ;
             ::aButtons[1]:id,    ;
             ::aButtons[nLen]:id, ;
-            0 )
+            0)
    ENDIF
    RETURN Nil
    
@@ -249,8 +249,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    ENDIF
    ::bGetFocus  := bGFocus
    IF bGFocus != Nil
-      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When( o:FindControl(id) ) },, "onGotFocus")
-      //::oParent:AddEvent(BN_SETFOCUS, Self, { | o, id | __When( o:FindControl(id) ) },, "onGotFocus")
+      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When(o:FindControl(id)) },, "onGotFocus")
+      //::oParent:AddEvent(BN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
       ::lnoValid := .T.
    ENDIF
 
@@ -269,8 +269,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
 
 METHOD Activate() CLASS HRadioButton
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton( ::oParent:handle, ::id, ;
-                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
+      ::handle := CreateButton(::oParent:handle, ::id, ;
+                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF
    RETURN Nil
@@ -314,7 +314,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
    ENDIF
    ::bGetFocus  := bGFocus
    IF bGFocus != Nil
-      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When( o:FindControl(id) ) },, "onGotFocus")
+      ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When(o:FindControl(id)) },, "onGotFocus")
       ::lnoValid := .T.
    ENDIF
    //::oParent:AddEvent(BN_KILLFOCUS, Self, { || ::Notify( WM_KEYDOWN ) })
@@ -450,9 +450,9 @@ METHOD Valid(nKey) CLASS HRadioButton
       RETURN .T.
    ELSE
       ::oParent:lSuspendMsgsHandling := .T.
-       iValue := Ascan( ::oGroup:aButtons, {| o | o:id == ::id } )
+       iValue := Ascan(::oGroup:aButtons, {| o | o:id == ::id })
       IF nEnter = VK_RETURN //< 0
-         //-iValue := Ascan( ::oGroup:aButtons,{ | o | o:id == ::id } )
+         //-iValue := Ascan(::oGroup:aButtons,{ | o | o:id == ::id })
          IF !::GetValue()
             ::oGroup:nValue  := iValue
              ::oGroup:SetValue(::oGroup:nValue)      
@@ -460,7 +460,7 @@ METHOD Valid(nKey) CLASS HRadioButton
          ENDIF
       ELSEIF nEnter = 0 .AND. !GetKeyState(VK_RETURN) < 0
          IF !::GetValue()
-             ::oGroup:nValue := Ascan( ::oGroup:aButtons, {| o | o:id == ::id } )
+             ::oGroup:nValue := Ascan(::oGroup:aButtons, {| o | o:id == ::id })
              ::oGroup:SetValue(::oGroup:nValue)
          ENDIF 
       ENDIF

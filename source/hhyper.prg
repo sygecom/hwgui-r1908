@@ -434,9 +434,9 @@ METHOD Resize(x, y) CLASS HStaticLink
    ELSE
       ::nHeight := aTxtSize[2] * 2 + 1
    ENDIF
-   ::nWidthOver  := MIN( aTxtSize[1] + 1 + aBmpSize[1], ::nWidth )
-   ::nHeight := MAX( ::nHeight, aTxtSize[2] )
-   ::nHeight := MAX( ::nHeight, aBmpSize[2] + 4 )
+   ::nWidthOver  := MIN(aTxtSize[1] + 1 + aBmpSize[1], ::nWidth)
+   ::nHeight := MAX(::nHeight, aTxtSize[2])
+   ::nHeight := MAX(::nHeight, aBmpSize[2] + 4)
 
    IF nHeight != ::nHeight
       ::Move(, , , ::nHeight, 0)

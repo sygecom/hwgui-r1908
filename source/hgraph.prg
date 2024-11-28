@@ -89,15 +89,15 @@ METHOD CalcMinMax() CLASS HGraph
       nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 1 TO nLen
-            ::xmax := Max( ::xmax, ::aValues[i, j, 1] )
-            ::xmin := Min( ::xmin, ::aValues[i, j, 1] )
-            ::ymax := Max( ::ymax, ::aValues[i, j, 2] )
-            ::ymin := Min( ::ymin, ::aValues[i, j, 2] )
+            ::xmax := Max(::xmax, ::aValues[i, j, 1])
+            ::xmin := Min(::xmin, ::aValues[i, j, 1])
+            ::ymax := Max(::ymax, ::aValues[i, j, 2])
+            ::ymin := Min(::ymin, ::aValues[i, j, 2])
          NEXT
       ELSEIF ::nType == 2
          FOR j := 1 TO nLen
-            ::ymax := Max( ::ymax, ::aValues[i, j, 2]   )
-            ::ymin := Min( ::ymin, ::aValues[i, j, 2]   )
+            ::ymax := Max(::ymax, ::aValues[i, j, 2])
+            ::ymin := Min(::ymin, ::aValues[i, j, 2])
          NEXT
          ::xmax := nLen
       ELSEIF ::nType == 3

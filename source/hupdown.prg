@@ -200,7 +200,7 @@ METHOD SetRange(nLower, nUpper) CLASS HUpDown
    
    ::nLower := IIf(nLower != Nil, nLower, ::nLower)
    ::nUpper := IIf(nUpper != Nil, nUpper, ::nUpper)
-   SETRANGEUPDOWN( ::nLower, ::nUpper )
+   SETRANGEUPDOWN(::nLower, ::nUpper)
 
    RETURN Nil
 
@@ -220,7 +220,7 @@ METHOD SetValue(nValue) CLASS HUpDown
    ENDIF
    ::nValue := nValue
    ::title := Str( ::nValue )
-   SetUpDown( ::hwndUpDown, ::nValue )
+   SetUpDown(::hwndUpDown, ::nValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::nValue, Self)
    ENDIF
@@ -233,11 +233,11 @@ METHOD Refresh() CLASS HUpDown
       ::nValue := Eval(::bSetGet, , Self)
       IF Str(::nValue) != ::title
          //::title := Str( ::nValue )
-         //SetUpDown( ::hwndUpDown, ::nValue )
+         //SetUpDown(::hwndUpDown, ::nValue)
          ::SetValue(::nValue)
       ENDIF
    ELSE
-      SetUpDown( ::hwndUpDown, Val(::title) )
+      SetUpDown(::hwndUpDown, Val(::title))
    ENDIF
    ::oEditUpDown:Title :=  ::Title
    ::oEditUpDown:Refresh()
@@ -259,7 +259,7 @@ METHOD Valid() CLASS HUpDown
    */
    res :=  ::nValue <= ::nUpper .and. ::nValue >= ::nLower
    IF !res
-      ::nValue := IIf(::nValue > ::nUpper, Min( ::nValue, ::nUpper ), Max( ::nValue, ::nLower ))
+      ::nValue := IIf(::nValue > ::nUpper, Min(::nValue, ::nUpper), Max(::nValue, ::nLower))
       ::SetValue(::nValue)
       ::oEditUpDown:Refresh()
       SendMessage(::oEditUpDown:handle, EM_SETSEL, 0, -1)
@@ -405,12 +405,12 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       ::bLostFocus := bLfocus
       ::bValid := bLfocus
       ::lnoValid := bGfocus != Nil
-      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When( o:FindControl(id) ) },, "onGotFocus")
+      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
       ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl(id)) },, "onLostFocus")
    ELSE
       IF bGfocus != Nil
          ::lnoValid := .T.
-         ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When( o:FindControl(id) ) },, "onGotFocus")
+         ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
          //::oParent:AddEvent(EN_SETFOCUS,self,bGfocus,,"onGotFocus")
       ENDIF
       IF bLfocus != Nil
@@ -471,15 +471,15 @@ METHOD Refresh() CLASS HUpDown
       ::value := Eval(::bSetGet)
       IF Str( ::value ) != ::title
          ::title := Str( ::value )
-         SetUpDown( ::hwndUpDown, ::value )
+         SetUpDown(::hwndUpDown, ::value)
       ENDIF
    ELSE
-      SetUpDown( ::hwndUpDown, Val(::title) )
+      SetUpDown(::hwndUpDown, Val(::title))
    ENDIF
 
    RETURN Nil
 
-STATIC FUNCTION __When( oCtrl )
+STATIC FUNCTION __When(oCtrl)
    LOCAL res := .T., oParent, nSkip
 
    IF !CheckFocus(oCtrl, .F.)

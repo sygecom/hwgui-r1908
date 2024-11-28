@@ -103,8 +103,8 @@ CLASS RichText
    METHOD OpenGroup() INLINE FWrite(::hFile, "{")
    METHOD CloseGroup() INLINE FWrite(::hFile, "}")
 
-   METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
-                      nWidth, nHeight, cVertAlign, lDefault )
+   METHOD NewSection(lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
+                     nWidth, nHeight, cVertAlign, lDefault)
 
 
    // Higher-level page setup methods
@@ -451,9 +451,9 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    ::LogicCode("keep", lNoWidow)
 
    IF cTypeBorder != NIL // Hay bordes de parrafo
-      IF AScan( cTypeBorder, "ALL" ) != 0
+      IF AScan(cTypeBorder, "ALL") != 0
          ::ParaBorder( "ALL", cBordStyle )
-      ELSEIF AScan( cTypeBorder, "CHARACTER" ) != 0
+      ELSEIF AScan(cTypeBorder, "CHARACTER") != 0
          ::ParaBorder( "CHARACTER", cBordStyle )
       ELSE
          FOR i = 1 TO Len(cTypeBorder)
@@ -589,7 +589,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
 
             // Process special RTF symbols
             IF !lCodesOK
-               IF AScan( aCodes, cChar ) > 0
+               IF AScan(aCodes, cChar) > 0
                   cChar := "\" + cChar
                ENDIF
             ENDIF
@@ -997,8 +997,8 @@ METHOD WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
 
 
 
-METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
-                   nWidth, nHeight, cVertAlign, lDefault ) CLASS RichText
+METHOD NewSection(lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
+                  nWidth, nHeight, cVertAlign, lDefault) CLASS RichText
 *********************************************************************
 * Description:  Open a new section, with optional new formatting
 *               properties.
@@ -1249,7 +1249,7 @@ METHOD BorderCode(cBorderID) CLASS RichText
 
    cBorderID := Upper(RTrim(cBorderID))
 
-   n := AScan( aBorder, { | x | x[1] == cBorderID } )
+   n := AScan(aBorder, { | x | x[1] == cBorderID })
 
    IF n > 0
       cBorderCode := aBorder[n][2]
@@ -1283,7 +1283,7 @@ METHOD ShadeCode(cShadeID) CLASS RichText
 
    cShadeID := Upper(RTrim(cShadeID))
 
-   n := AScan( aShade, { | x | x[1] == cShadeID } )
+   n := AScan(aShade, { | x | x[1] == cShadeID })
 
    IF n > 0
       cShadeCode := aShade[n][2]
@@ -1379,7 +1379,7 @@ METHOD BegBookMark( texto ) CLASS RichText
 
    DEFAULT texto TO "marca"
 
-   ::cLastBook := StrTran( texto, " ", "_" )
+   ::cLastBook := StrTran(texto, " ", "_")
 // Iniciar grupo
 
    ::OpenGroup()
@@ -1766,7 +1766,7 @@ METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign
       ::TextCode("fldinst")
 
       FWrite(::hFile, " INCLUDEPICTURE ")
-      cName := StrTran( cName, "\", "\\\\" )
+      cName := StrTran(cName, "\", "\\\\")
       FWrite(::hFile, " " + AllTrim(cName) + " \\*MERGEFORMAT ")
 
       ::CloseGroup()
@@ -1848,7 +1848,7 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
    ENDIF
    IF lParrafo
       IF cTypeBorder != NIL // Hay bordes de parrafo
-         IF AScan( cTypeBorder, "ALL" ) != 0
+         IF AScan(cTypeBorder, "ALL") != 0
             cEstilo += ::ParaBorder( "ALL", cBordStyle )
          ELSE
             FOR i = 1 TO Len(cTypeBorder)
@@ -2105,7 +2105,7 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
       IF lHeader
          IF !Empty(::TblCJoin)
             FOR j = 1 TO Len(::TblCJoin[nRowHead])
-               pos := AScan( ::TblCJoin[nRowHead][j], i )
+               pos := AScan(::TblCJoin[nRowHead][j], i)
                IF pos == 1
                   ::TextCode("clvertalt")
                   ::TextCode("clmgf")

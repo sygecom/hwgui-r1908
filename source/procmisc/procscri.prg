@@ -33,7 +33,7 @@ LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
 
    scrkod := IIf(scrkod==Nil, "000", Upper(scrkod))
-   han := FOPEN( fname, FO_READ + FO_SHARED )
+   han := FOPEN(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR( han,@strbuf,@poz,STR_BUFLEN )
@@ -104,7 +104,7 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
    ELSEIF hb_IsChar(scrSource)
       strbuf := SPACE(STR_BUFLEN)
       poz    := STR_BUFLEN+1
-      han    := FOPEN( scrSource, FO_READ + FO_SHARED )
+      han    := FOPEN(scrSource, FO_READ + FO_SHARED)
    ELSE
       han := scrSource
    ENDIF
@@ -574,12 +574,12 @@ STATIC w__buf
    y2 := y1 + y__size
    x2 := x1 + x__size
    IF sout == Nil
-      RESTSCREEN( y1, x1, y2, x2, w__buf )
+      RESTSCREEN(y1, x1, y2, x2, w__buf)
       y__size := 0
    ELSE
       oldc := SETCOLOR("N/W")
       IF prnew
-         w__buf := SAVESCREEN( y1, x1, y2, x2 )
+         w__buf := SAVESCREEN(y1, x1, y2, x2)
          @ y1, x1, y2, x2 BOX "谀砍倌莱 "
       ELSEIF noscroll = Nil
          SCROLL(y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1)
@@ -621,7 +621,7 @@ RETURN IIf(LASTKEY() = 27, Nil, varget)
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION WndOpen( ysize, xsize )
+FUNCTION WndOpen(ysize, xsize)
 
    y__size := ysize
    x__size := xsize

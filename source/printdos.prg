@@ -332,7 +332,7 @@ METHOD PrinterFile(fname) CLASS PrintDos
       RETURN .F.
    ENDIF
 
-   han := FOpen( fname, FO_READWRITE + FO_EXCLUSIVE )
+   han := FOpen(fname, FO_READWRITE + FO_EXCLUSIVE)
 
    IF han != - 1
 
@@ -374,7 +374,7 @@ FUNCTION wSetPrc(x, y, oPrinter)
 METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
    LOCAL strbuf := Space(2052), poz := 2052, stroka
-   LOCAL han := FOpen( fName, FO_READ + FO_SHARED )
+   LOCAL han := FOpen(fName, FO_READ + FO_SHARED)
    LOCAL oCol := 0 //Added by  Por Fernando Athayde
    LOCAL oPrinter
    LOCAL oFont
@@ -429,7 +429,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 METHOD Preview( fName, cTitle ) CLASS PrintDos
    LOCAL oedit1
    LOCAL strbuf := Space(2052), poz := 2052, stroka
-   LOCAL han := FOpen( fName, FO_READ + FO_SHARED )
+   LOCAL han := FOpen(fName, FO_READ + FO_SHARED)
    LOCAL oPage := 1, nPage := 1
    LOCAL oFont := HFont():Add("Courier New", 0, - 13)
    LOCAL oText := { "" }
@@ -630,7 +630,7 @@ HB_FUNC(AFILLTEXT)
      hb_reta(0);
      return;
    }
-   inFile = fopen( pSrc, "r" );
+   inFile = fopen(pSrc, "r");
 
    if (!inFile )
    {

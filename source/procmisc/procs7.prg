@@ -98,12 +98,12 @@ FUNCTION Fchoice()
 
 #endif
 
-FUNCTION CutExten( fname )
+FUNCTION CutExten(fname)
 
 LOCAL i
 RETURN IIf(( i := Rat(".", fname) ) = 0, fname, SubStr(fname, 1, i - 1))
 
-FUNCTION FilExten( fname )
+FUNCTION FilExten(fname)
 
 LOCAL i
 RETURN IIf(( i := Rat(".", fname) ) = 0, "", SubStr(fname, i + 1))

@@ -52,7 +52,7 @@ CLASS HDC
    METHOD LINETO( x1, y1 )
    METHOD fillsolidrect(lpRect, clr)
    METHOD fillrect(lpRect, clr)
-   METHOD SelectClipRgn( pRgn )
+   METHOD SelectClipRgn(pRgn)
    METHOD SetTextcolor(xColor)
    METHOD SetBkMode(xMode)
    METHOD SetBkColor(clr) INLINE    SetBkColor(::m_hDC, clr)
@@ -67,7 +67,7 @@ CLASS HDC
    METHOD SetWindowExt(x, y)
    METHOD SetViewportOrg( x, y )
    METHOD SetViewportExt(x, y)
-   METHOD SetArcDirection( nArcDirection )
+   METHOD SetArcDirection(nArcDirection)
    METHOD GetTextMetric() INLINE GetTextMetric(::m_hDC)
    METHOD SetROP2( nDrawMode )
    METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE    BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
@@ -113,16 +113,16 @@ METHOD SetAttribDC(hDC) CLASS HDC
    ::m_hAttribDC := hDC
    RETURN NIL
 
-METHOD SelectClipRgn( pRgn ) CLASS HDC
+METHOD SelectClipRgn(pRgn) CLASS HDC
 
    LOCAL nRetVal := - 1
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      nRetVal := SelectClipRgn( ::m_hDC, pRgn )
+      nRetVal := SelectClipRgn(::m_hDC, pRgn)
    ENDIF
 
    IF !Empty(::m_hAttribDC)
-      nRetVal := SelectClipRgn( ::m_hAttribDC, pRgn )
+      nRetVal := SelectClipRgn(::m_hAttribDC, pRgn)
    ENDIF
 
    RETURN nRetVal
@@ -255,15 +255,15 @@ METHOD SetViewportExt(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetArcDirection( nArcDirection )
+METHOD SetArcDirection(nArcDirection)
 
 
    LOCAL nResult := 0
    IF ( ::m_hDC != ::m_hAttribDC )
-      nResult = SetArcDirection( ::m_hDC, nArcDirection )
+      nResult = SetArcDirection(::m_hDC, nArcDirection)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nResult = SetArcDirection( ::m_hAttribDC, nArcDirection )
+      nResult = SetArcDirection(::m_hAttribDC, nArcDirection)
    ENDIF
    RETURN nResult
 

@@ -84,7 +84,7 @@ HB_FUNC(SELECTFOLDER)
 }
 
 /*
- *  ShellNotifyIcon( lAdd, hWnd, hIcon, cTooltip )
+ *  ShellNotifyIcon(lAdd, hWnd, hIcon, cTooltip)
  */
 
 HB_FUNC(SHELLNOTIFYICON)
@@ -112,7 +112,7 @@ HB_FUNC(SHELLNOTIFYICON)
 }
 
 /*
- *  ShellModifyIcon( hWnd, hIcon, cTooltip )
+ *  ShellModifyIcon(hWnd, hIcon, cTooltip)
  */
 
 HB_FUNC(SHELLMODIFYICON)

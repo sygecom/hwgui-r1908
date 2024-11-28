@@ -70,7 +70,7 @@ METHOD SendStr( cMciStr ) CLASS TMci
 //----------------------------------------------------------------------------//
 METHOD lOpen() CLASS TMci
    LOCAL nId
-   ::nError := nMciOpen( ::cType, ::cFileName, @nId )
+   ::nError := nMciOpen(::cType, ::cFileName, @nId)
    ::nId := nId
    RETURN ::nError == 0
 

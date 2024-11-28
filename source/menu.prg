@@ -40,7 +40,7 @@ METHOD Show( oWnd, xPos, yPos, lWnd ) CLASS HMenu
       ENDIF
       Hwg_trackmenu( ::handle, xPos, yPos, oWnd:handle )
    ELSE
-      aCoor := ClientToScreen( oWnd:handle, xPos, yPos )
+      aCoor := ClientToScreen(oWnd:handle, xPos, yPos)
       Hwg_trackmenu( ::handle, aCoor[1], aCoor[2], oWnd:handle )
    ENDIF
 
@@ -242,7 +242,7 @@ FUNCTION Hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
       aMenu := ATail(aMenu)[1]
    NEXT
    IF !Empty(cItem)
-      cItem := StrTran( cItem, "\t", Chr(9) )
+      cItem := StrTran(cItem, "\t", Chr(9))
    ENDIF
    nId := IIf(nId == Nil .AND. cItem != Nil, ++ _Id, nId)
    AAdd(aMenu, { bItem, cItem, nId, nFlag })

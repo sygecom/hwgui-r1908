@@ -301,9 +301,9 @@ METHOD INIT() CLASS HComboBox
                SendMessage(::handle, CB_SETEDITSEL, -1, 0)
             ELSE
                #ifdef __XHARBOUR__
-               ComboSetString( ::handle, AScan( ::aItems, ::value, , , .T.  ) )
+               ComboSetString( ::handle, AScan(::aItems, ::value, , , .T.) )
                #else
-               ComboSetString( ::handle, hb_AScan( ::aItems, ::value, , , .T.  ) )
+               ComboSetString( ::handle, hb_AScan(::aItems, ::value, , , .T.) )
                #endif
             ENDIF
             //SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
@@ -618,9 +618,9 @@ METHOD Refresh() CLASS HComboBox
          SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__
-      ComboSetString( ::handle, AScan( ::aItems, ::value, , , .T.  ) )
+      ComboSetString( ::handle, AScan(::aItems, ::value, , , .T.) )
       #else
-      ComboSetString( ::handle, hb_AScan( ::aItems, ::value, , , .T.  ) )
+      ComboSetString( ::handle, hb_AScan(::aItems, ::value, , , .T.) )
       #endif
    ELSE
       ComboSetString( ::handle, ::value )
@@ -636,7 +636,7 @@ METHOD SetItem(nPos) CLASS HComboBox
 
    /*
  IF hb_IsChar(nPos) .AND. ::lText
-    nPos := AScan( ::aItems, nPos )
+    nPos := AScan(::aItems, nPos)
       ComboSetString( ::handle, nPos  )
    ENDIF
    */
@@ -681,13 +681,13 @@ METHOD SetValue(xItem) CLASS HComboBox
 
    IF ::lText .AND. hb_IsChar(xItem)
       IF ::columnBound = 2
-         nPos := AScan( ::aItemsBound, xItem )
+         nPos := AScan(::aItemsBound, xItem)
       ELSE
-         nPos := AScan( ::aItems, xItem )
+         nPos := AScan(::aItems, xItem)
       ENDIF
       ComboSetString( ::handle, nPos )
    ELSE
-      nPos := IIf(::columnBound = 2, AScan( ::aItemsBound, xItem ), xItem)
+      nPos := IIf(::columnBound = 2, AScan(::aItemsBound, xItem), xItem)
    ENDIF
    ::setItem(nPos)
 
@@ -707,7 +707,7 @@ METHOD GetValue() CLASS HComboBox
         ELSEIF nPos > 0
          ::value := ::aItems[nPos]
       ENDIF
-      //nPos := IIf(Len(::value) > 0, AScan( ::aItems, ::Value ), 0)
+      //nPos := IIf(Len(::value) > 0, AScan(::aItems, ::Value), 0)
       ::cDisplayValue := ::Value
       ::value := IIf(nPos > 0, ::aItems[nPos], IIf(::lEdit, "", ::value))
    ELSE
@@ -735,19 +735,19 @@ METHOD GetValueBound(xItem) CLASS HComboBox
    ENDIF
    IF xItem = Nil
       IF ::lText
-          //nPos := IIf(::Value = Nil,0, AScan( ::aItems, ::Value ))
+          //nPos := IIf(::Value = Nil,0, AScan(::aItems, ::Value))
           #ifdef __XHARBOUR__
-          nPos := IIf(::Value = Nil, 0, AScan( ::aItems, ::value, , , .T.  ))
+          nPos := IIf(::Value = Nil, 0, AScan(::aItems, ::value, , , .T.))
           #else
-          nPos := IIf(::Value = Nil, 0, hb_AScan( ::aItems, ::value, , , .T.  ))
+          nPos := IIf(::Value = Nil, 0, hb_AScan(::aItems, ::value, , , .T.))
           #endif
       ENDIF
    ELSE
-      //nPos := AScan( ::aItemsBound, xItem )
+      //nPos := AScan(::aItemsBound, xItem)
       #ifdef __XHARBOUR__
-      nPos := AScan( ::aItemsBound, xItem, , , .T. )
+      nPos := AScan(::aItemsBound, xItem, , , .T.)
       #else
-      nPos := hb_AScan( ::aItemsBound, xItem, , , .T. )
+      nPos := hb_AScan(::aItemsBound, xItem, , , .T.)
       #endif
       ::setItem(nPos)
       RETURN IIf(nPos > 0, ::aItems[nPos], xItem)
@@ -1024,9 +1024,9 @@ METHOD Populate() CLASS HComboBox
        IF Select(cAlias) = 0 .AND. ( i := At("(", cAlias) ) > 0
           cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
-      value := STRTRAN( xRowSource, calias + "->", , , 1, 1 )
+      value := STRTRAN(xRowSource, calias + "->", , , 1, 1)
       cAlias := IIf(VALTYPE(xRowSource) == "U", Nil, cAlias)
-      cValueBound := IIf(::xrowsource[2]  != Nil  .AND. cAlias != Nil, STRTRAN( ::xrowsource[2], calias + "->" ), Nil)
+      cValueBound := IIf(::xrowsource[2]  != Nil  .AND. cAlias != Nil, STRTRAN(::xrowsource[2], calias + "->"), Nil)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
    ENDIF

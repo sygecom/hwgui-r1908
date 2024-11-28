@@ -41,7 +41,7 @@ FUNCTION OpenReport(fname, repName)
    IF aPaintRep != Nil .AND. fname == aPaintRep[FORM_FILENAME] .AND. repName == aPaintRep[FORM_REPNAME]
       RETURN res
    ENDIF
-   han := FOpen( fname, FO_READ + FO_SHARED )
+   han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR( han, @strbuf, @poz, 512 )

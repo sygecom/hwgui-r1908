@@ -30,7 +30,7 @@ CLASS HPage INHERIT HObject
 
    DATA xCaption HIDDEN
    ACCESS Caption INLINE ::xCaption
-   ASSIGN Caption( xC ) INLINE ::xCaption := xC, ::SetTabText(::xCaption)
+   ASSIGN Caption(xC) INLINE ::xCaption := xC, ::SetTabText(::xCaption)
    DATA lEnabled INIT .T. // HIDDEN
    DATA PageOrder INIT 1
    DATA oParent
@@ -124,7 +124,7 @@ METHOD Enabled(lEnabled) CLASS HPage
             ::oParent:setTab(nActive)
          ENDIF
       ENDIF
-      IF Ascan( ::oParent:Pages, {|p|p:lEnabled} ) == 0
+      IF Ascan(::oParent:Pages, {|p|p:lEnabled}) == 0
          ::oParent:Disable()
          SendMessage(::oParent:handle, TCM_SETCURSEL, -1, 0)
       ENDIF
@@ -290,9 +290,9 @@ METHOD Init() CLASS HTab
       IF Len(::aPages) > 0
          //::Pages[1]:aItemPos := TabItemPos(::handle, 0)
          /*
-         IF ASCAN( ::Pages, {|p|p:brush != NIL} ) > 0
+         IF ASCAN(::Pages, {|p|p:brush != NIL}) > 0
             ::SetPaintSizePos(-1)
-         ELSEIF ASCAN( ::Pages, {|p|p:tcolor != NIL} ) > 0
+         ELSEIF ASCAN(::Pages, {|p|p:tcolor != NIL}) > 0
             ::SetPaintSizePos(1)
          ELSE
             ::oPaint:nHeight := ::TabHeightSize
@@ -523,7 +523,7 @@ METHOD HidePage(nPage) CLASS HTab
       nFirst := ::aPages[nPage, 1] + 1
       nEnd := ::aPages[nPage, 1] + ::aPages[nPage, 2]
       FOR i := nFirst TO nEnd
-         IF ( k:= ASCAN( ::aControlsHide, ::aControls[i]:id  ) ) == 0 .AND. ::aControls[i]:lHide
+         IF ( k:= ASCAN(::aControlsHide, ::aControls[i]:id) ) == 0 .AND. ::aControls[i]:lHide
             AADD(::aControlsHide, ::aControls[i]:id)
          ELSEIF k > 0 .AND. !::aControls[i]:lHide
             ADEL(::aControlsHide, k)
@@ -549,12 +549,12 @@ METHOD ShowPage(nPage) CLASS HTab
       nFirst := ::aPages[nPage, 1] + 1
       nEnd := ::aPages[nPage, 1] + ::aPages[nPage, 2]
       IF ::oPaint:nHeight > 1 .AND. ::Pages[nPage]:brush != NIL .AND. ;
-         ASCAN( ::aControls, {|o|o:winclass = ::winclass}, nFirst, nEnd - nFirst + 1 ) > 0
+         ASCAN(::aControls, {|o|o:winclass = ::winclass}, nFirst, nEnd - nFirst + 1) > 0
          ::SetPaintSizePos(-2)
       ENDIF
       FOR i := nFirst TO nEnd
-         //IF ASCAN( ::aControlsHide, ::aControls[i]:id ) == 0 .OR. ::aControls[i]:lHide == .F.
-         IF !::aControls[i]:lHide .OR. ( Len(::aControlsHide) == 0 .OR. ASCAN( ::aControlsHide, ::aControls[i]:id ) == 0 )
+         //IF ASCAN(::aControlsHide, ::aControls[i]:id) == 0 .OR. ::aControls[i]:lHide == .F.
+         IF !::aControls[i]:lHide .OR. ( Len(::aControlsHide) == 0 .OR. ASCAN(::aControlsHide, ::aControls[i]:id) == 0 )
             ::aControls[i]:Show( SW_SHOWNA )
          ENDIF
       NEXT
@@ -693,7 +693,7 @@ RETURN ::nActive
 METHOD Notify( lParam ) CLASS HTab
    
    LOCAL nCode := GetNotifyCode(lParam)
-   LOCAL nkeyDown := GetNotifyKeydown( lParam )
+   LOCAL nkeyDown := GetNotifyKeydown(lParam)
    LOCAL nPage := SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
 
    IF Hwg_BitAnd(::Style, TCS_BUTTONS) != 0
@@ -1068,7 +1068,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    LOCAL pt := {,}
 
    DEFAULT nPageEnable := 0
-   IF !isWindowVisible(::handle) .OR. ( Ascan( ::Pages, {|p|!p:lEnabled} ) == 0 .AND. nPageEnable == NIL )
+   IF !isWindowVisible(::handle) .OR. ( Ascan(::Pages, {|p|!p:lEnabled}) == 0 .AND. nPageEnable == NIL )
       RETURN - 1
    ENDIF
    nPageEnable := IIF(nPageEnable == NIL, 0, nPageEnable)
@@ -1098,7 +1098,7 @@ METHOD ShowToolTips(lParam) CLASS HTab
    LOCAL pt := {,}
    LOCAL client_rect
 
-   IF Ascan( ::Pages, {|p|p:ToolTip != NIL} ) == 0
+   IF Ascan(::Pages, {|p|p:ToolTip != NIL}) == 0
        RETURN NIL
    ENDIF
    pt[1] := LOWORD(lParam)
