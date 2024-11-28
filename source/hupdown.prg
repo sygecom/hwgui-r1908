@@ -165,7 +165,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
        AddToolTip(::GetParentForm():handle, ::oEditUpDown:handle, ::tooltip)
        ::oEditUpDown:SetFont( ::oFont )
        ::oEditUpDown:DisableBrush := ::DisableBrush  
-       SETWINDOWPOS( ::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE )
+       SETWINDOWPOS(::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE)
        DESTROYWINDOW(::handle)
    ELSEIF ::getParentForm():Type < WND_DLG_RESOURCE .AND. ::oParent:ClassName = "HTAB" //!Empty(::oParent:oParent)
       // MDICHILD WITH TAB
@@ -291,8 +291,8 @@ METHOD Init() CLASS HEditUpDown
 
 METHOD Notify( lParam ) CLASS HeditUpDown
    Local nCode := GetNotifyCode(lParam)
-   Local iPos := GETNOTIFYDELTAPOS( lParam, 1 )
-   Local iDelta := GETNOTIFYDELTAPOS( lParam , 2 )
+   Local iPos := GETNOTIFYDELTAPOS(lParam, 1)
+   Local iDelta := GETNOTIFYDELTAPOS(lParam, 2)
    Local vari, res
 
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent = Nil , - 1 , 1)
@@ -482,7 +482,7 @@ METHOD Refresh() CLASS HUpDown
 STATIC FUNCTION __When( oCtrl )
    LOCAL res := .T., oParent, nSkip
 
-   IF !CheckFocus( oCtrl, .F. )
+   IF !CheckFocus(oCtrl, .F.)
       RETURN .T.
    ENDIF
    IF oCtrl:bGetFocus != Nil
@@ -508,7 +508,7 @@ STATIC FUNCTION __Valid(oCtrl)
    LOCAL res := .T., hctrl , nSkip, oDlg
    LOCAL ltab :=  GETKEYSTATE(VK_TAB) < 0
 
-   IF !CheckFocus( oCtrl, .T. )  .OR. oCtrl:lnoValid
+   IF !CheckFocus(oCtrl, .T.)  .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)
@@ -525,7 +525,7 @@ STATIC FUNCTION __Valid(oCtrl)
       res := IIf(res, oCtrl:value <= oCtrl:nUpper .and. ;
                   oCtrl:value >= oCtrl:nLower , res)
       IF !res
-         SetFocus( oCtrl:handle )
+         SetFocus(oCtrl:handle)
          IF oDlg != Nil
             oDlg:nLastKey := 0
          ENDIF

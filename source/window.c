@@ -278,7 +278,7 @@ HB_FUNC(HWG_INITCHILDWINDOW)
     wndclass.lpszMenuName = lpMenu;
     wndclass.lpszClassName = lpAppName;
 
-    // UnregisterClass( lpAppName, (HINSTANCE)hInstance );
+    // UnregisterClass(lpAppName, (HINSTANCE)hInstance);
     if (!RegisterClass(&wndclass))
     {
       fRegistered = FALSE;

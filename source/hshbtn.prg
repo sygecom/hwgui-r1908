@@ -71,7 +71,7 @@ METHOD Paint() CLASS HShadeButton
 
    shade_Draw( ::hShade, hDC, nState )
 
-   ::DrawItems( hDC )
+   ::DrawItems(hDC)
 
    EndPaint( ::handle, pps )
    RETURN Nil

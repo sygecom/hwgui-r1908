@@ -225,7 +225,7 @@ FUNCTION SayRupiah(nAngka)
 
 
 //
-STATIC FUNCTION tigades( mvc, n)    // created: 28 mei 1993
+STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
  LOCAL say := "", x1 := left(mvc,1), x2:=subs(mvc,2,1), x3:=right(mvc,1)
 
  IF n == 4 .and. mvc == "001"

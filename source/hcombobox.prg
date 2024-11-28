@@ -311,7 +311,7 @@ METHOD INIT() CLASS HComboBox
          ELSE
             ComboSetString( ::handle, ::value )
          ENDIF
-         avgwidth := GetFontDialogUnits( ::oParent:handle ) + 0.75   //,::oParent:oFont:handle)
+         avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75   //,::oParent:oFont:handle)
          NewLongComboWidth := ( LongComboWidth - 2 ) * avgwidth
          SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
@@ -810,7 +810,7 @@ METHOD AddItem( cItem, cItemBound, nPos ) CLASS HComboBox
       ENDIF
       IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
          aSize(::AitemsBound, nCount + 1)
-         aIns( ::AitemsBound, nPos, cItemBound )
+         aIns(::AitemsBound, nPos, cItemBound)
       ELSE
          AADD(::AitemsBound, cItemBound)
       ENDIF
@@ -818,7 +818,7 @@ METHOD AddItem( cItem, cItemBound, nPos ) CLASS HComboBox
    ENDIF
    IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
        aSize(::Aitems, nCount + 1)
-       aIns( ::Aitems, nPos, cItem )
+       aIns(::Aitems, nPos, cItem)
     ELSE
        AADD(::Aitems, cItem)
     ENDIF
@@ -900,7 +900,7 @@ METHOD When() CLASS HComboBox
    LOCAL oParent
    LOCAL nSkip
 
-   IF !CheckFocus( Self, .F. )
+   IF !CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
 
@@ -928,7 +928,7 @@ METHOD When() CLASS HComboBox
          ELSEIF Self == oParent:getList[1]
             nSkip := 1
          ENDIF
-         WhenSetFocus( Self, nSkip )
+         WhenSetFocus(Self, nSkip)
       ENDIF
    ENDIF
 
@@ -944,7 +944,7 @@ METHOD Valid() CLASS HComboBox
    LOCAL hCtrl := getfocus()
    LOCAL ltab := GETKEYSTATE(VK_TAB) < 0
 
-   IF ::lNoValid .OR. !CheckFocus( Self, .T. )
+   IF ::lNoValid .OR. !CheckFocus(Self, .T.)
       RETURN .T.
    ENDIF
 
@@ -959,7 +959,7 @@ METHOD Valid() CLASS HComboBox
          ::oparent:lSuspendMsgsHandling := .T.
          res := Eval( ::bLostFocus, ::value, Self )
          IF hb_IsLogical(res) .AND. !res
-            ::SetFocus( .T. )
+            ::SetFocus(.T.)
             IF oDlg != Nil
                oDlg:nLastKey := 0
             ENDIF
@@ -971,7 +971,7 @@ METHOD Valid() CLASS HComboBox
       IF oDlg != Nil
          oDlg:nLastKey := 0
       ENDIF
-      IF lTab .AND. SelfFocus( hCtrl ) .AND. !SelfFocus( ::oParent:handle, oDlg:handle )
+      IF lTab .AND. SelfFocus(hCtrl) .AND. !SelfFocus(::oParent:handle, oDlg:handle)
         // IF ::oParent:CLASSNAME = "HTAB"
             ::oParent:SETFOCUS()
             Getskip(::oparent, ::handle, , nSkip)

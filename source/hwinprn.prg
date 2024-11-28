@@ -48,7 +48,7 @@ CLASS HWinPrn INHERIT HObject
 
 
    METHOD New( cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies )
-   METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
+   METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
    METHOD SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
    METHOD StartDoc(lPreview, cMetaName)
    METHOD NextPage()
@@ -76,7 +76,7 @@ METHOD New( cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies ) CLASS
 
 Return Self
 
-METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
+METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
 
    IF lElite != Nil; ::lElite := lElite;  ENDIF
    IF lCond != Nil; ::lCond := lCond;  ENDIF
@@ -97,7 +97,7 @@ Local cFont := "Lucida Console"
 Local aKoef := { 1, 1.22, 1.71, 2 }
 Local nMode := 0, oFont, nWidth, nPWidth
 
-   ::InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
+   ::InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 
    IF ::lPageStart
 
@@ -310,7 +310,7 @@ Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
    FOR i := 1 TO sLen
       IF Left(aCodes[i,1],1) == c .AND. At( aCodes[i,1],Left(cLine,3 ) ) == 1
-         ::InitValues( aCodes[i,2], aCodes[i,3], aCodes[i,4], aCodes[i,5], aCodes[i,6], aCodes[i,7]  )
+         ::InitValues(aCodes[i,2], aCodes[i,3], aCodes[i,4], aCodes[i,5], aCodes[i,6], aCodes[i,7])
          Return Len(aCodes[i,1])
       ENDIF
    NEXT

@@ -35,10 +35,10 @@ CLASS hrebar INHERIT HControl
 
    METHOD Activate()
    METHOD INIT()
-   METHOD ADDBARColor(pBar, clrFore, clrBack, pszText, dwStyle ) INLINE ADDBARCOLORS( ::handle, pBar, clrFore, clrBack, pszText, dwStyle)
+   METHOD ADDBARColor(pBar, clrFore, clrBack, pszText, dwStyle ) INLINE ADDBARCOLORS(::handle, pBar, clrFore, clrBack, pszText, dwStyle)
    METHOD ADDBARBITMAP(pBar, pszText, pbmp, dwStyle ) INLINE ADDBARBITMAP(::handle, pBar, pszText, pbmp, dwStyle)
-   METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
-   METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+   METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle)
+   METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle)
 
 ENDCLASS
 
@@ -99,7 +99,7 @@ METHOD INIT() CLASS hrebar
    RETURN Nil
 
 
-METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hrebar
+METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) CLASS hrebar
    LOCAL i
 
    IF pBar != Nil
@@ -117,7 +117,7 @@ METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hreba
          IF ( ::aBands[i, 5] != Nil )
             ADDBARBITMAP(::handle, ::aBands[i, 1]:handle, ::aBands[i, 2], ::aBands[i, 5], ::aBands[i, 6])
          ELSE
-           ADDBARCOLORS( ::handle, ::aBands[i, 1]:handle, ::aBands[i, 3], ::aBands[i, 4], ::aBands[i, 2], ::aBands[i, 6]  )
+           ADDBARCOLORS(::handle, ::aBands[i, 1]:handle, ::aBands[i, 3], ::aBands[i, 4], ::aBands[i, 2], ::aBands[i, 6])
          ENDIF
       ENDIF
    NEXT

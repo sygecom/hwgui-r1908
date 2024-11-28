@@ -362,7 +362,7 @@ HB_FUNC(PTS2PIX)
   }
 }
 
-/* Functions Contributed  By Luiz Rafael Culik Guimaraes( culikr@uol.com.br) */
+/* Functions Contributed  By Luiz Rafael Culik Guimaraes (culikr@uol.com.br) */
 
 HB_FUNC(GETWINDOWSDIR)
 {

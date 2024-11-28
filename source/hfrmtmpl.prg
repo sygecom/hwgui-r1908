@@ -220,11 +220,11 @@ METHOD Read(fname, cId) CLASS HFormTmpl
                cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                        "( <params,...> ) => callfunc('"  + ;
                                                       Upper(::aFuncs[2, j, 1]) + "',\{ <params> \}, oDlg:oParent:aFuncs )"
-               __pp_process( pp, cPre )
+               __pp_process(pp, cPre)
                cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                        "() => callfunc('"  + ;
                                         Upper(::aFuncs[2, j, 1]) + "',, oDlg:oParent:aFuncs )"
-               __pp_process( pp, cPre )
+               __pp_process(pp, cPre)
             NEXT
          ENDIF
       ELSEIF aItems[i]:title == "part"
@@ -418,7 +418,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
    NEXT
 
    IF ::lDebug .AND. ( i := HWindow():GetMain() ) != Nil
-      SetFocus( i:handle )
+      SetFocus(i:handle)
    ENDIF
    ::oDlg:Activate(lModal)
 
@@ -530,14 +530,14 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       cCode := IIf(Lower(Left(arr[1],6)) == "return", LTrim(SubStr(arr[1], 8)), arr[1])
       bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
       BEGIN SEQUENCE
-         bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
+         bRes := &( "{||" + __pp_process(pp, cCode) + "}" )
       END SEQUENCE
       ERRORBLOCK( bOldError )
       Return bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
          cCode := IIf(Lower(Left(arr[2],6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2])
-         cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
+         cCode := "{|" + cParam + "|" + __pp_process(pp, cCode) + "}"
          bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
          BEGIN SEQUENCE
             bRes := &cCode
@@ -1294,11 +1294,11 @@ METHOD Read(fname, cId) CLASS HRepTmpl
                cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                        "( <params,...> ) => callfunc('"  + ;
                                                       Upper(::aFuncs[2, j, 1]) + "',\{ <params> \}, oReport:aFuncs )"
-               __pp_process( pp, cPre )
+               __pp_process(pp, cPre)
                cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                        "() => callfunc('"  + ;
                                         Upper(::aFuncs[2, j, 1]) + "',, oReport:aFuncs )"
-               __pp_process( pp, cPre )
+               __pp_process(pp, cPre)
             NEXT
          ENDIF
       ELSEIF aItems[i]:title == "part"

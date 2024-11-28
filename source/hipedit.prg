@@ -78,8 +78,8 @@ METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeig
 
    // Notificacoes de Ganho e perda de foco
    //::oParent:AddEvent( IPN_FIELDCHANGED,self,::bKillFocus, .T.,"onChange" )
-   ::oParent:AddEvent( EN_SETFOCUS , Self, { | o, id | __GetFocus( o:FindControl( id ) ) },, "onGotFocus" )
-   ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o, id | __KillFocus( o:FindControl( id ) ) },, "onLostFocus" )
+   ::oParent:AddEvent( EN_SETFOCUS , Self, { | o, id | __GetFocus(o:FindControl( id )) },, "onGotFocus" )
+   ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o, id | __KillFocus(o:FindControl( id )) },, "onLostFocus" )
 
 
    RETURN Self
@@ -103,7 +103,7 @@ METHOD Init() CLASS HIPedit
    RETURN Nil
 
 METHOD SetValue(aValue) CLASS HIPedit
-   SETIPADDRESS( ::handle , aValue[1], aValue[2], aValue[3], aValue[4] )
+   SETIPADDRESS(::handle , aValue[1], aValue[2], aValue[3], aValue[4])
    ::aValue := aValue
    RETURN Nil
 
@@ -126,10 +126,10 @@ METHOD END() CLASS HIPedit
    RETURN Nil
 
 
-STATIC FUNCTION __GetFocus( oCtrl )
+STATIC FUNCTION __GetFocus(oCtrl)
    LOCAL xRet
 
-   IF !CheckFocus( oCtrl, .F. )
+   IF !CheckFocus(oCtrl, .F.)
       RETURN .T.
    ENDIF
 
@@ -144,10 +144,10 @@ STATIC FUNCTION __GetFocus( oCtrl )
    RETURN xRet
 
 
-STATIC FUNCTION __KillFocus( oCtrl )
+STATIC FUNCTION __KillFocus(oCtrl)
    LOCAL xRet
 
-   IF !CheckFocus( oCtrl, .T. ) .or. oCtrl:lNoValid
+   IF !CheckFocus(oCtrl, .T.) .or. oCtrl:lNoValid
       RETURN .T.
    ENDIF
 

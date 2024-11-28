@@ -51,7 +51,7 @@ CLASS PrintDos
 
    METHOD Say( oPRow, oPCol, oTexto, oPicture )
 
-   METHOD SetCols( nPRow, nPCol )
+   METHOD SetCols(nPRow, nPCol)
 
    METHOD gWrite(oText)
 
@@ -119,7 +119,7 @@ METHOD New( oPorta ) CLASS PrintDos
       ELSEIF oPorta == "SELECT"
 
          #ifdef __XHARBOUR__
-            oPtrSetup := PrintSetupDos( @::nStartPage, @::nEndPage, @::nCopy )
+            oPtrSetup := PrintSetupDos(@::nStartPage, @::nEndPage, @::nCopy)
          #else
             oPtrSetup := PrintSetupDos()
          #endif
@@ -282,13 +282,13 @@ METHOD Say( oProw, oPcol, oTexto, oPicture ) CLASS PrintDos
       ENDIF
    ENDIF
    //tracelog([antes     ::SetCols(oProw, oPcol)])
-   ::SetCols( oProw, oPcol )
+   ::SetCols(oProw, oPcol)
    //tracelog([depois de ::SetCols(oProw, oPcol) e  antes         ::gWrite(oTexto))])
    ::gWrite(oTexto)
 
    RETURN Nil
 
-METHOD SetCols( nProw, nPcol ) CLASS PrintDos
+METHOD SetCols(nProw, nPcol) CLASS PrintDos
 
    IF ::nProw > nProw
       ::Eject()
@@ -459,7 +459,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
       RETURN .F.
    ENDIF
 
-   oEdit := SUBS( oText[nPage], 2 )  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
+   oEdit := SUBS(oText[nPage], 2)  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
 
    IF !Empty(::colorpreview)
       oColor1 := ::colorpreview[1]
@@ -516,7 +516,7 @@ STATIC FUNCTION PrintDosAnt( nPage, oText )
       nPage := 1
    ENDIF
    IF nPage = 1  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
-      SetDlgItemText( oDlg, 1001, SUBS( oText[nPage], 2 ) )  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
+      SetDlgItemText( oDlg, 1001, SUBS(oText[nPage], 2) )  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
    ELSE
       SetDlgItemText( oDlg, 1001, oText[nPage] )
    ENDIF

@@ -94,7 +94,7 @@ FUNCTION Hwg_AddMenuItem( aMenu, cItem, nMenuId, lSubMenu, bItem, nPos )
       RETURN ATail( aMenu[1] )
    ELSE
       AAdd(aMenu[1], Nil)
-      AIns( aMenu[1], nPos )
+      AIns(aMenu[1], nPos)
       IF lSubMenu
          aMenu[1, nPos] := { {}, cItem, nMenuId, 0, hSubMenu }
       ELSE
@@ -162,7 +162,7 @@ FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
                               aMenu[1, nPos, 3], aMenu[1, nPos, 4], .F. )
             oBmp := Hwg_SearchPosBitmap(aMenu[1, nPos, 3])
             IF oBmp[1]
-               SetMenuItemBitmaps( hMenu, aMenu[1, nPos, 3], oBmp[2], "" )
+               SetMenuItemBitmaps(hMenu, aMenu[1, nPos, 3], oBmp[2], "")
             ENDIF
 
          ENDIF
@@ -190,8 +190,8 @@ FUNCTION Hwg_BeginMenu( oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp )
       _oMenu    := Nil
       _nLevel   := 0
       _Id       := IIf(nId == Nil, MENU_FIRST_ID, nId)
-      s_nWidthBmp  := IIf(nWidthBmp = Nil .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS( SM_CXMENUCHECK ), nWidthBmp)
-      s_nHeightBmp := IIf(nHeightBmp = Nil .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS( SM_CYMENUCHECK ), nHeightBmp)
+      s_nWidthBmp  := IIf(nWidthBmp = Nil .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS(SM_CXMENUCHECK), nWidthBmp)
+      s_nHeightBmp := IIf(nHeightBmp = Nil .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS(SM_CYMENUCHECK), nHeightBmp)
       s_nbkColor   := nbkColor 
    ELSE
       nId   := IIf(nId == Nil, ++ _Id, nId)
@@ -276,12 +276,12 @@ FUNCTION Hwg_DefineAccelItem( nId, bItem, accFlag, accKey )
    RETURN .T.
 
 
-FUNCTION Hwg_SetMenuItemBitmaps( aMenu, nId, abmp1, abmp2 )
+FUNCTION Hwg_SetMenuItemBitmaps(aMenu, nId, abmp1, abmp2)
    LOCAL aSubMenu := Hwg_FindMenuItem( aMenu, nId )
    LOCAL oMenu
 
    oMenu := IIf(aSubMenu == Nil, 0, aSubMenu[5])
-   SetMenuItemBitmaps( oMenu, nId, abmp1, abmp2 )
+   SetMenuItemBitmaps(oMenu, nId, abmp1, abmp2)
    RETURN Nil
 
 FUNCTION Hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )

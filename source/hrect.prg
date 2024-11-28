@@ -395,7 +395,7 @@ METHOD Init() CLASS HContainer
       ::nHolder := 1
       SetWindowObject(::handle, Self)
       Hwg_InitStaticProc(::handle)
-      //SetWindowPos( ::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
+      //SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
    ENDIF
    RETURN  NIL
 

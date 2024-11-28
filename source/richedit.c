@@ -269,7 +269,7 @@ HB_FUNC(RE_SETDEFAULT)
 }
 
 /*
- * re_CharFromPos( hEdit, xPos, yPos ) --> nPos
+ * re_CharFromPos(hEdit, xPos, yPos) --> nPos
  */
 HB_FUNC(RE_CHARFROMPOS)
 {

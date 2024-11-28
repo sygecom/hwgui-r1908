@@ -371,7 +371,7 @@ CLASS HBrowse INHERIT HControl
    METHOD DeleteMark( lDeleteMark ) SETGET
 //   METHOD BrwScrollVPos()
    // new
-   METHOD ShowColToolTips( lParam )
+   METHOD ShowColToolTips(lParam)
     METHOD SetRefresh( nSeconds ) SETGET
    METHOD When()
    METHOD Valid()
@@ -459,7 +459,7 @@ METHOD Init() CLASS HBrowse
       SetWindowObject(::handle, Self)
       ::Super:Init()
       ::InitBrw(, .T. )
-      //VScrollPos( Self, 0, .F. )
+      //VScrollPos(Self, 0, .F.)
       IF ::GetParentForm():Type < WND_DLG_RESOURCE
          ::GetParentForm():lDisableCtrlTab := .T.
       ENDIF
@@ -851,7 +851,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBrowse
             ENDIF
          ENDIF
       ELSEIF msg =  WM_MOUSEHOVER
-         ::ShowColToolTips( lParam )
+         ::ShowColToolTips(lParam)
 
       ELSEIF ( msg = WM_MOUSELEAVE .OR. msg = WM_NCMOUSELEAVE ) //.AND.!::oParent:lSuspendMsgsHandling
          IF ::allMouseOver
@@ -1341,7 +1341,7 @@ METHOD AddColumn( oColumn ) CLASS HBrowse
 METHOD InsColumn( oColumn, nPos ) CLASS HBrowse
 
    AAdd(::aColumns, Nil)
-   AIns( ::aColumns, nPos )
+   AIns(::aColumns, nPos)
    ::aColumns[nPos] := oColumn
    ::lChanged := .T.
    InitColumn( Self, oColumn, nPos )
@@ -1439,7 +1439,7 @@ METHOD DeleteMark( lDeleteMark ) CLASS HBrowse
    ENDIF
    RETURN ::lDeleteMark
 
-METHOD ShowColToolTips( lParam ) CLASS HBrowse
+METHOD ShowColToolTips(lParam) CLASS HBrowse
    LOCAL pt, cTip := ""
 
    IF Ascan( ::aColumns, {| c | c:Hint != .F. .AND. c:Tooltip != Nil } ) = 0
@@ -1555,7 +1555,7 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
       ::bRcou   := { | o | Len(o:aArray) }
       ::bRecnoLog := ::bRecno  := { | o | o:nCurrent }
       ::bGoTo   := { | o, n | o:nCurrent := n }
-      ::bScrollPos := { | o, n, lEof, nPos | VScrollPos( o, n, lEof, nPos ) }
+      ::bScrollPos := { | o, n, lEof, nPos | VScrollPos(o, n, lEof, nPos) }
    ENDIF
 
    IF lInit
@@ -2096,7 +2096,7 @@ METHOD Paint( lLostFocus ) CLASS HBrowse
        IF hb_IsBlock(::bScrollPos) // array
          Eval( ::bScrollPos, Self, 1, .F. )
       ELSE
-         VScrollPos( Self, 0, .F. )
+         VScrollPos(Self, 0, .F.)
       ENDIF
    ENDIF
 
@@ -2916,7 +2916,7 @@ METHOD DoVScroll( wParam ) CLASS HBrowse
          ENDIF
          Eval( ::bSkip, Self, 1 )
          Eval( ::bSkip, Self, - 1 )
-         VScrollPos( Self, 0, .F. )
+         VScrollPos(Self, 0, .F.)
          ::refresh()
       ENDIF
    ENDIF
@@ -2957,7 +2957,7 @@ METHOD DoHScroll( wParam ) CLASS HBrowse
       ::SetFocus()
       IF ::lEditable
          SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
-         SetScrollPos( ::handle, SB_HORZ, HIWORD(wParam) )
+         SetScrollPos(::handle, SB_HORZ, HIWORD(wParam))
          ::SetColumn( HIWORD(wParam) )
       ELSE
          IF HIWORD(wParam) > ( ::colpos + ::nLeftCol - 1 )
@@ -2973,7 +2973,7 @@ METHOD DoHScroll( wParam ) CLASS HBrowse
       IF HWG_BITAND(::style, WS_HSCROLL) != 0
          SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
          nPos :=  ::colpos + ::nLeftCol - 1
-         SetScrollPos( ::handle, SB_HORZ, nPos )
+         SetScrollPos(::handle, SB_HORZ, nPos)
       ENDIF
       // TODO: here I force a full repaint and HSCROLL appears...
       //       but we should do more checks....
@@ -3051,7 +3051,7 @@ METHOD LINEDOWN( lMouse ) CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval( ::bScrollPos, Self, 1, .F. )
    ELSEIF ::nRecords > 1
-      VScrollPos( Self, 0, .F. )
+      VScrollPos(Self, 0, .F.)
    ENDIF
 
   // ::SetFocus()  ??
@@ -3083,7 +3083,7 @@ METHOD LINEUP() CLASS HBrowse
       IF hb_IsBlock(::bScrollPos)
          Eval( ::bScrollPos, Self, - 1, .F. )
       ELSEIF ::nRecords > 1
-         VScrollPos( Self, 0, .F. )
+         VScrollPos(Self, 0, .F.)
       ENDIF
       ::internal[1] := SetBit( ::internal[1], 1, 0 )
    ENDIF
@@ -3110,7 +3110,7 @@ METHOD PAGEUP() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval( ::bScrollPos, Self, - STEP, lBof )
    ELSEIF ::nRecords > 1
-      VScrollPos( Self, 0, .F. )
+      VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh( ::nFootRows > 0 )
@@ -3138,7 +3138,7 @@ METHOD PAGEDOWN() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval( ::bScrollPos, Self, STEP, .F. )
    ELSE
-      VScrollPos( Self, 0, .F. )
+      VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh( ::nFootRows > 0 )
@@ -3158,7 +3158,7 @@ METHOD BOTTOM( lPaint ) CLASS HBrowse
       Eval( ::bGoBot, Self )
    ENDIF
 
-   VScrollPos( Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.) )
+   VScrollPos(Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.))
 
    IF lPaint == Nil .OR. lPaint
       ::Refresh( ::nFootRows > 0 )
@@ -3174,7 +3174,7 @@ METHOD TOP() CLASS HBrowse
 
    ::rowPos := 1
    Eval( ::bGoTop, Self )
-   VScrollPos( Self, 0, .F. )
+   VScrollPos(Self, 0, .F.)
 
    //InvalidateRect(::handle, 0)
    ::Refresh( ::nFootRows > 0 )
@@ -3253,7 +3253,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF hb_IsBlock(::bScrollPos)
          Eval( ::bScrollPos, Self, STEP, .F. )
       ELSEIF ::nRecords > 1
-         VScrollPos( Self, 0, .F. )
+         VScrollPos(Self, 0, .F.)
       ENDIF
       res := .T.
 
@@ -3263,7 +3263,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
          IF hb_IsBlock(::bScrollPos)
             Eval( ::bScrollPos, Self, STEP, .F. )
          ELSEIF ::nRecords > 1
-            VScrollPos( Self, 0, .F. )
+            VScrollPos(Self, 0, .F.)
          ENDIF
          res := .T.
       ELSEIF nRec > 0
@@ -3276,7 +3276,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF ::colpos != fif - ::nLeftCol + 1 + ::freeze
          // Colpos should not go beyond last column or I get bound errors on ::Edit()
          ::colpos := Min( ::nColumns + 1, fif - ::nLeftCol + 1 + ::freeze )
-         VScrollPos( Self, 0, .F. )
+         VScrollPos(Self, 0, .F.)
          res := .T.
       ENDIF
    ENDIF
@@ -3337,7 +3337,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       DO WHILE x < xDrag
          IF !::aColumns[i]:lHide
             x += ::aColumns[i]:width
-            IF Abs( x - xDrag ) < 10 .AND. ::aColumns[i]:Resizable
+            IF Abs(x - xDrag) < 10 .AND. ::aColumns[i]:Resizable
                x1 := x - ::aColumns[i]:width
                EXIT
             ENDIF
@@ -3495,7 +3495,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
             IF !::aColumns[i]:lhide
                x += ::aColumns[i]:width
                ::xPosMouseOver := xPos
-               IF Abs( x - xPos ) < 8
+               IF Abs(x - xPos) < 8
                   IF PtrtouLong( oCursor ) != PtrtouLong( ColSizeCursor )
                      oCursor := ColSizeCursor
                   ENDIF
@@ -3925,7 +3925,7 @@ METHOD ValidColumn( value,oGet, oBtn ) CLASS HBROWSE
    Local res := .T.
    Local oColumn := ::aColumns[::fipos]
 
-   IF !CheckFocus( oGet, .T. ) //.OR. oGet:lNoValid
+   IF !CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
       RETURN .T.
    ENDIF
    IF oBtn != Nil .AND. GetFocus() = oBtn:handle
@@ -3983,7 +3983,7 @@ METHOD When() CLASS HBrowse
       res := IIf(hb_IsLogical(res), res, .T.)
       ::lnoValid := !res
       IF !res
-         WhenSetFocus( Self, nSkip )
+         WhenSetFocus(Self, nSkip)
       ENDIF
       ::oParent:lSuspendMsgsHandling := .F.
    ENDIF
@@ -3992,7 +3992,7 @@ METHOD When() CLASS HBrowse
 METHOD Valid() CLASS HBrowse
    LOCAL res
 
-    //IF ::bLostFocus != Nil .AND. ( !CheckFocus( Self, .T. ) .OR.::lNoValid  )
+    //IF ::bLostFocus != Nil .AND. ( !CheckFocus(Self, .T.) .OR.::lNoValid  )
    IF !CheckFocus(self, .T. ) .OR. ::lNoValid
       RETURN .T.
    ENDIF
@@ -4004,7 +4004,7 @@ METHOD Valid() CLASS HBrowse
       res := Eval( ::bLostFocus, ::ColPos, Self )
       res := IIf(hb_IsLogical(res), res, .T.)
       IF hb_IsLogical(res) .AND. !res
-         ::setfocus( .T. )
+         ::setfocus(.T.)
          ::oParent:lSuspendMsgsHandling := .F.
          RETURN .F.
       ENDIF
@@ -4030,7 +4030,7 @@ METHOD Refresh( lFull, lLineUp ) CLASS HBrowse
       IF ::lFilter
          ::nLastRecordFilter := 0
          ::nFirstRecordFilter := 0
-         //SetScrollPos( ::handle, SB_VERT, 0 )
+         //SetScrollPos(::handle, SB_VERT, 0)
          //::RowPos := 0
          /*
          ( ::Alias ) ->( FltGoTop(Self) ) // sk
@@ -4236,7 +4236,7 @@ FUNCTION CreateList( oBrw, lEditable )
 
    RETURN Nil
 
-FUNCTION VScrollPos( oBrw, nType, lEof, nPos )
+FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
    LOCAL minPos, maxPos, oldRecno, newRecno, nrecno
 
    IF oBrw:lNoVScroll
@@ -4250,7 +4250,7 @@ FUNCTION VScrollPos( oBrw, nType, lEof, nPos )
          ENDIF
          nPos := IIf(oBrw:nRecords > 1, Round(( ( maxPos - minPos + 1 ) / ( oBrw:nRecords - 1 ) ) * ;
                                                 ( Eval( oBrw:bRecnoLog, oBrw ) - 1 ), 0), minPos)
-         SetScrollPos( oBrw:handle, SB_VERT, nPos )
+         SetScrollPos(oBrw:handle, SB_VERT, nPos)
       ELSEIF !Empty(oBrw:Alias)
          nrecno := ( oBrw:Alias ) ->( RecNo() )
          Eval( oBrw:bGotop, oBrw )
@@ -4261,9 +4261,9 @@ FUNCTION VScrollPos( oBrw, nType, lEof, nPos )
             SetScrollRange(oBrw:handle, SB_VERT, minPos, maxPos)
          ENDIF
          ( oBrw:Alias ) ->( DBGoTo( nrecno ) )
-         SetScrollPos( oBrw:handle, SB_VERT, IIf(( oBrw:Alias ) ->( IndexOrd() ) = 0, ( oBrw:Alias ) ->( RecNo() ), ( oBrw:Alias ) ->( ordkeyno() ) ))
+         SetScrollPos(oBrw:handle, SB_VERT, IIf(( oBrw:Alias ) ->( IndexOrd() ) = 0, ( oBrw:Alias ) ->( RecNo() ), ( oBrw:Alias ) ->( ordkeyno() )))
 
-//         SetScrollPos( oBrw:handle, SB_VERT, oBrw:BrwScrollVPos() )
+//         SetScrollPos(oBrw:handle, SB_VERT, oBrw:BrwScrollVPos())
       ENDIF
    ELSE
       oldRecno := Eval( oBrw:bRecnoLog, oBrw )
@@ -4274,7 +4274,7 @@ FUNCTION VScrollPos( oBrw, nType, lEof, nPos )
          newRecno := oBrw:nRecords
       ENDIF
       IF nType == SB_THUMBPOSITION
-         SetScrollPos( oBrw:handle, SB_VERT, nPos )
+         SetScrollPos(oBrw:handle, SB_VERT, nPos)
       ENDIF
       IF newRecno != oldRecno
          Eval( oBrw:bSkip, oBrw, newRecno - oldRecno )
@@ -4291,7 +4291,7 @@ FUNCTION VScrollPos( oBrw, nType, lEof, nPos )
    RETURN Nil
 
 /*
-Function HScrollPos( oBrw, nType, lEof, nPos )
+Function HScrollPos(oBrw, nType, lEof, nPos)
 Local minPos, maxPos, i, nSize := 0, nColPixel
 Local nBWidth := oBrw:nWidth // :width is _not_ browse width
 
@@ -4310,7 +4310,7 @@ Local nBWidth := oBrw:nWidth // :width is _not_ browse width
       oBrw:colpos := Max( i, oBrw:nLeftCol ) - oBrw:nLeftCol + 1
    ENDIF
 
-   SetScrollPos( oBrw:handle, SB_HORZ, nPos )
+   SetScrollPos(oBrw:handle, SB_HORZ, nPos)
 
 RETURN Nil
 */

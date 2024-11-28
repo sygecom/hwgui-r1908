@@ -236,7 +236,7 @@ METHOD onLostFocus() CLASS HRichEdit
 
 METHOD When() CLASS HRichEdit
 
-    IF !CheckFocus( Self, .F. )
+    IF !CheckFocus(Self, .F.)
        RETURN .T.
    ENDIF
    ::title := ::GetText()
@@ -248,7 +248,7 @@ METHOD When() CLASS HRichEdit
 
 METHOD Valid() CLASS HRichEdit
 
-   IF hb_IsBlock(::bLostFocus) .AND. !CheckFocus( Self, .T. )
+   IF hb_IsBlock(::bLostFocus) .AND. !CheckFocus(Self, .T.)
        RETURN .T.
    ENDIF
    ::title := ::GetText()

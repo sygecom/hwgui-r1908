@@ -145,7 +145,7 @@ CLASS RichText
    METHOD Appearance(cAppear)
    METHOD HAlignment( cAlign )
    METHOD LineSpacing( nSpace, lSpExact )
-   METHOD Borders( cEntity, cBorder )
+   METHOD Borders(cEntity, cBorder)
    METHOD NewFont( nFontNumber )
    METHOD SetFontSize(nFontSize)
    METHOD SetFontColor(nFontColor)
@@ -892,7 +892,7 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
 
          ::TextCode("trgaph108\trleft-108")
          ::TextCode("trq" + ::cTblHAlign)
-         ::Borders( "tr", ::cRowBorder )
+         ::Borders("tr", ::cRowBorder)
          ::NumCode("trrh", ::nTblHdHgt)
          ::TextCode("trhdr")
          ::LogicCode("trkeep", ::lTblNoSplit)
@@ -903,7 +903,7 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
             IF ::nTblHdColor > 0
                ::NumCode("clcbpat", ::nTblHdColor, .F.)
             ENDIF
-            ::Borders( "cl", ::cCellBorder )
+            ::Borders("cl", ::cCellBorder)
             ::NumCode("cellx", ::aTableCWid[i])
          NEXT
 
@@ -932,14 +932,14 @@ METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
          ::BeginRow()
          ::TextCode("trgaph108\trleft-108")
          ::TextCode("trq" + ::cTblHAlign)
-         ::Borders( "tr", ::cRowBorder )
+         ::Borders("tr", ::cRowBorder)
          ::NumCode("trrh", ::nTblRHgt)
          ::LogicCode("trkeep", ::lTblNoSplit)
 
          // Set the default shading, border & width info for each body cell
          FOR i := 1 TO Len(::aTableCWid)
             ::NumCode("clshdng", ::aColPct[i], .F.)
-            ::Borders( "cl", ::cCellBorder )
+            ::Borders("cl", ::cCellBorder)
             ::NumCode("cellx", ::aTableCWid[i])
          NEXT
 
@@ -1159,7 +1159,7 @@ METHOD LineSpacing( nSpace, lSpExact ) CLASS RichText
 
 
 
-METHOD Borders( cEntity, cBorder ) CLASS RichText
+METHOD Borders(cEntity, cBorder) CLASS RichText
 *********************************************************************
 * Description:  Apply borders to rows or cells.  Currently limited to
 *               one type of border per rectangle.
@@ -2095,7 +2095,7 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
 
    ::TextCode("trowd\trgaph108\trleft-108")
    ::TextCode("trq" + ::cTblHAlign)
-   ::Borders( "tr", ::cRowBorder )
+   ::Borders("tr", ::cRowBorder)
    ::NumCode("trrh", ::nTblRHgt)
    ::LogicCode("trhdr", lHeader)
    ::LogicCode("trkeep", ::lTblNoSplit)
@@ -2121,7 +2121,7 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
       ELSE
          ::TextCode("clvertalt")
       ENDIF
-      ::Borders( "cl", cCellBorder )
+      ::Borders("cl", cCellBorder)
       IF lHeader
          ::NumCode("clshdng", ::nTblHdPct, .F.)
          IF ::nTblHdColor > 0

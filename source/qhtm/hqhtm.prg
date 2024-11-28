@@ -99,7 +99,7 @@ METHOD Init CLASS HQhtm
       ELSEIF !Empty(::filename)
          QHTM_LoadFile(::handle, ::filename)
       ELSEIF !Empty(::resname)
-         QHTM_LoadRes( ::handle,::resname )
+         QHTM_LoadRes(::handle, ::resname)
       ENDIF
       QHTM_FormCallBack(::handle)
    ENDIF

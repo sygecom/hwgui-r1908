@@ -216,7 +216,7 @@ METHOD Refresh() CLASS HGridEx
 
    iLast := iFirst + ListView_GetCountPerPage(::handle)
 
-   ListView_RedrawItems( ::handle , iFirst, iLast )
+   ListView_RedrawItems(::handle , iFirst, iLast)
    RETURN Nil
 
 

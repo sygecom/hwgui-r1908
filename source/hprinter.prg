@@ -546,8 +546,8 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
 
    HB_SYMBOL_UNUSED(lParam)
 
-   nPosVert := getscrollpos( oCanvas:handle, SB_VERT )
-   nPosHorz := getscrollpos( oCanvas:handle, SB_HORZ )
+   nPosVert := getscrollpos(oCanvas:handle, SB_VERT)
+   nPosHorz := getscrollpos(oCanvas:handle, SB_HORZ)
 
    IF msg = WM_VSCROLL
       setscrollrange(oCanvas:handle, SB_VERT, 1, 20)
@@ -575,7 +575,7 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
             nPosVert = 1
          ENDIF
       ENDIF
-      setscrollpos( oCanvas:handle, SB_VERT, nPosVert )
+      setscrollpos(oCanvas:handle, SB_VERT, nPosVert)
       ::NeedsRedraw := .T.
    ENDIF
 
@@ -605,7 +605,7 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
             nPosHorz = 1
          ENDIF
       ENDIF
-      setscrollpos( oCanvas:handle, SB_HORZ, nPosHorz )
+      setscrollpos(oCanvas:handle, SB_HORZ, nPosHorz)
       ::NeedsRedraw := .T.
    ENDIF
 
@@ -620,7 +620,7 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
             nPosVert := 1
          ENDIF
       ENDIF
-      SetScrollPos( oCanvas:handle, SB_VERT, nPosVert )
+      SetScrollPos(oCanvas:handle, SB_VERT, nPosVert)
       ::NeedsRedraw := .T.
    ENDIF
 
@@ -671,7 +671,7 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
          ::yOffset := Round(( ( nPos - 1 ) / 18) * ( nHeight - y + 10 ), 0 )
       ENDIF
    ELSE
-      setscrollpos( oCanvas:handle, SB_VERT, 0 )
+      setscrollpos(oCanvas:handle, SB_VERT, 0)
    ENDIF
 
    IF nWidth > x
@@ -681,7 +681,7 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
          ::xOffset := Round(nPos * ( nWidth - x + 10 ), 0)
       ENDIF
    ELSE
-      setscrollpos( oCanvas:handle, SB_HORZ, 0 )
+      setscrollpos(oCanvas:handle, SB_HORZ, 0)
    ENDIF
 
    ::x1 := IIf(nWidth < x, Round(( x - nWidth ) / 2, 0), 10) - ::xOffset

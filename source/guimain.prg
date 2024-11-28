@@ -19,7 +19,7 @@
 
 //STATIC _winwait (variable not used)
 
-FUNCTION InitObjects( oWnd )
+FUNCTION InitObjects(oWnd)
    LOCAL i, pArray := oWnd:aObjects 
    LOCAL LoadArray := HObject():aObjects
    
@@ -43,7 +43,7 @@ FUNCTION InitObjects( oWnd )
    HObject():aObjects := {}
    RETURN .T.
 
-FUNCTION InitControls( oWnd, lNoActivate )
+FUNCTION InitControls(oWnd, lNoActivate)
    LOCAL i, pArray := oWnd:aControls, lInit
 
    lNoActivate := IIf(lNoActivate == Nil, .F., lNoActivate)
@@ -67,7 +67,7 @@ FUNCTION InitControls( oWnd, lNoActivate )
             // writelog( "InitControl2"+str(pArray[i]:handle)+"/"+pArray[i]:classname )
          ENDIF
          IF !Empty(pArray[i]:aControls)
-            InitControls( pArray[i] )
+            InitControls(pArray[i])
          ENDIF
          pArray[i]:Init()
           // nando required to classes that inherit the class of patterns hwgui
@@ -111,7 +111,7 @@ FUNCTION FindSelf( hCtrl )
    ENDIF
    RETURN Nil
 
-FUNCTION WriteStatus( oWnd, nPart, cText, lRedraw )
+FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
    IF ( i := AScan( aControls, { | o | o:ClassName() == "HSTATUS" } ) ) > 0
@@ -122,7 +122,7 @@ FUNCTION WriteStatus( oWnd, nPart, cText, lRedraw )
    ENDIF
    RETURN Nil
 
-FUNCTION ReadStatus( oWnd, nPart )
+FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
    IF ( i := AScan( aControls, { | o | o:ClassName() == "HSTATUS" } ) ) > 0
@@ -239,7 +239,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    IF hb_IsChar(arr)
       lArray := .F.
       aLen := RecCount()
-      IF ( nField := FieldPos( arr ) ) == 0
+      IF ( nField := FieldPos(arr) ) == 0
          RETURN 0
       ENDIF
       nLen := dbFieldInfo( 3, nField )
@@ -273,7 +273,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
         SIZE width, height       ;
         STYLE nStyle            ;
         FONT oFont              ;
-        ON INIT { | o | ResetWindowPos( o:handle ), o:nInitFocus := oBrw }
+        ON INIT { | o | ResetWindowPos(o:handle), o:nInitFocus := oBrw }
        //ON INIT {|o|ResetWindowPos(o:handle),oBrw:setfocus()}
    IF lArray
       @ 0, 0 Browse oBrw Array
@@ -322,7 +322,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    RETURN nChoice
 
-FUNCTION ShowProgress( nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height )
+FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height)
    LOCAL nStyle := WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX
    STATIC oDlg, hPBar, iCou, nLimit
 
@@ -397,7 +397,7 @@ FUNCTION SetHelpFileName ( cNewName )
    ENDIF
    RETURN cOldName
 
-FUNCTION RefreshAllGets( oDlg )
+FUNCTION RefreshAllGets(oDlg)
 
    AEval( oDlg:GetList, { | o | o:Refresh() } )
    RETURN Nil
@@ -411,7 +411,7 @@ cInitDir: Initial directory
 
 */
 
-FUNCTION SelectMultipleFiles( cDescr, cTip, cIniDir, cTitle )
+FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
 
    LOCAL aFiles, cPath, cFile, cFilter, nAt
    LOCAL hWnd := 0

@@ -191,9 +191,9 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HPanel
       ENDIF
    ENDIF
    IF msg = WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
-       ( SELFFOCUS( GetParent( ::GetParentForm():nInitFocus ), ::handle  ) .OR. ;
-         SELFFOCUS( GetParent( ::GetParentForm():nInitFocus ), GetParent(::handle) ) )
-      GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(SelfFocus( ::GetParentForm():nInitFocus, ::handle ), 1, 0))
+       ( SELFFOCUS(GetParent( ::GetParentForm():nInitFocus ), ::handle) .OR. ;
+         SELFFOCUS(GetParent( ::GetParentForm():nInitFocus ), GetParent(::handle)) )
+      GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
    ELSEIF msg = WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. Hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .

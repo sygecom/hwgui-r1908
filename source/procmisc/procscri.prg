@@ -181,13 +181,13 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                LOOP
 #ifdef __HARBOUR__
             ELSE
-               __pp_process( pp, stroka )
+               __pp_process(pp, stroka)
                LOOP
 #endif
             ENDIF
 #ifdef __HARBOUR__
          ELSE
-            stroka := __pp_process( pp, stroka )
+            stroka := __pp_process(pp, stroka)
 #endif
          ENDIF
 
