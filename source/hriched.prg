@@ -126,17 +126,17 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    IF msg = WM_SETFOCUS .AND. ::lSetFocus //.AND. ISWINDOWVISIBLE(::handle)
       ::lSetFocus := .F.
       PostMessage(::handle, EM_SETSEL, 0, 0)
-   ELSEIF msg = WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
-        ::lctrltab := ::GetParentForm( Self ):lDisableCtrlTab
-        ::GetParentForm( Self ):lDisableCtrlTab := ::lAllowTabs
-   ELSEIF msg = WM_KILLFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
-        ::GetParentForm( Self ):lDisableCtrlTab := ::lctrltab
+   ELSEIF msg = WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+        ::lctrltab := ::GetParentForm(Self):lDisableCtrlTab
+        ::GetParentForm(Self):lDisableCtrlTab := ::lAllowTabs
+   ELSEIF msg = WM_KILLFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+        ::GetParentForm(Self):lDisableCtrlTab := ::lctrltab
    ENDIF
    IF msg == WM_KEYDOWN .AND. ( wParam = VK_DELETE .OR. wParam = VK_BACK )  //46Del
       ::lChanged := .T.
    ENDIF
    IF msg == WM_CHAR
-      IF wParam = VK_TAB .AND. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
+      IF wParam = VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
          IF ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
             RETURN 0
          ENDIF
@@ -151,7 +151,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       ENDIF
    ENDIF
    IF msg == WM_KEYUP
-     IF wParam = VK_TAB .AND. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
+     IF wParam = VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
          IF IsCtrlShift(.T.,.F.)
             GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
@@ -161,7 +161,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       IF wParam = VK_TAB .AND. ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
-      ELSEIF wParam = VK_TAB .AND. ::GetParentForm( Self ):Type >= WND_DLG_RESOURCE
+      ELSEIF wParam = VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
          RE_INSERTTEXT(::handle, CHR(VK_TAB))
           RETURN 0
       ENDIF

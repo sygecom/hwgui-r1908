@@ -303,7 +303,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
         Return 0
    ENDIF
 
-   vari := Val(LTrim(::UnTransform( ::title )))
+   vari := Val(LTrim(::UnTransform(::title)))
 
    IF ( vari <= ::oUpDown:nLower .AND. iDelta < 0 ) .OR. ;
        ( vari >= ::oUpDown:nUpper .AND. iDelta > 0 ) .OR. ::oUpDown:Increment = 0
@@ -311,7 +311,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
        RETURN 0
    ENDIF
    vari :=  vari + ( ::oUpDown:Increment * idelta )
-   ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
+   ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    SetDlgItemText(::oParent:handle, ::id, ::title)
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
@@ -338,7 +338,7 @@ METHOD Notify( lParam ) CLASS HeditUpDown
 
    vari := ::Value
    IF ::bSetGet != Nil  .AND. ::title != Nil
-      ::Title := Transform( vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
+      ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    ENDIF
    SetDlgItemText(::oParent:handle, ::id, ::title)
 

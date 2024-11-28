@@ -342,7 +342,7 @@ CLASS HBrowse INHERIT HControl
    METHOD LineUp()
    METHOD PageUp()
    METHOD PageDown()
-   METHOD Bottom( lPaint )
+   METHOD Bottom(lPaint)
    METHOD Top()
    METHOD Home() INLINE ::DoHScroll(SB_LEFT)
    METHOD ButtonDown( lParam, lReturnRowCol )
@@ -351,7 +351,7 @@ CLASS HBrowse INHERIT HControl
    METHOD MouseMove(wParam, lParam)
    METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos)
    METHOD Edit(wParam, lParam)
-   METHOD Append() INLINE ( ::Bottom( .F. ), ::LineDown() )
+   METHOD Append() INLINE ( ::Bottom(.F.), ::LineDown() )
    METHOD onClick() 
    METHOD RefreshLine()
    METHOD Refresh( lFull, lLineUp )
@@ -590,7 +590,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             Eval(::bLostFocus, Self)
          ENDIF
 
-         IF ::GetParentForm( self ):Type < WND_DLG_RESOURCE
+         IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
              SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
          ENDIF
          */
@@ -633,8 +633,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
       ELSEIF msg == WM_COMMAND
          // ::Super:onEvent(WM_COMMAND)
-         IF ::GetParentForm( self ):Type < WND_DLG_RESOURCE
-            ::GetParentForm( self ):onEvent(msg, wparam, lparam)
+         IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
+            ::GetParentForm(self):onEvent(msg, wparam, lparam)
          ELSE
             DlgCommand(Self, wParam, lParam)
          ENDIF
@@ -1366,7 +1366,7 @@ STATIC FUNCTION InitColumn( oBrw, oColumn, n )
    ENDIF
    IF oColumn:length == Nil
       IF oColumn:picture != Nil .AND. !Empty(oBrw:aArray)
-         oColumn:length := Len(Transform( Eval(oColumn:block,, oBrw, n), oColumn:picture ))
+         oColumn:length := Len(Transform(Eval(oColumn:block,, oBrw, n), oColumn:picture))
       ELSE
          oColumn:length := 10
          IF !Empty(oBrw:aArray)
@@ -1481,7 +1481,7 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
    IF Empty(lInit)
       ::x1 := ::y1 := ::x2 := ::y2  := ::xAdjRight := 0
       ::height := ::width := 0
-      ::nyHeight := IIf(::GetParentForm( self ):Type < WND_DLG_RESOURCE, 1, 0)
+      ::nyHeight := IIf(::GetParentForm(self):Type < WND_DLG_RESOURCE, 1, 0)
       ::lDeleteMark := .F.
       ::lShowMark := .T.
       IF nType != Nil
@@ -1521,14 +1521,14 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
          ::nLastRecordFilter  := ::nFirstRecordFilter := 0
          IF ::lDescend
             ::bSkip     := { | o, n | ( ::Alias ) ->( FltSkip(o, n, .T.) ) }
-            ::bGoTop    := { | o | ( ::Alias ) ->( FltGoBottom( o ) ) }
+            ::bGoTop    := { | o | ( ::Alias ) ->( FltGoBottom(o) ) }
             ::bGoBot    := { | o | ( ::Alias ) ->( FltGoTop(o) ) }
             ::bEof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
          ELSE
             ::bSkip     := { | o, n | ( ::Alias ) ->( FltSkip(o, n, .F.) ) }
             ::bGoTop    := { | o | ( ::Alias ) ->( FltGoTop(o) ) }
-            ::bGoBot    := { | o | ( ::Alias ) ->( FltGoBottom( o ) ) }
+            ::bGoBot    := { | o | ( ::Alias ) ->( FltGoBottom(o) ) }
             ::bEof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
          ENDIF
@@ -1595,14 +1595,14 @@ METHOD FILTER( lFilter ) CLASS HBrowse
          ::rowCurrCount := 0
          IF ::lDescend
             ::bSkip     := { | o, n | ( ::Alias ) ->( FltSkip(o, n, .T.) ) }
-            ::bGoTop    := { | o | ( ::Alias ) ->( FltGoBottom( o ) ) }
+            ::bGoTop    := { | o | ( ::Alias ) ->( FltGoBottom(o) ) }
             ::bGoBot    := { | o | ( ::Alias ) ->( FltGoTop(o) ) }
             ::bEof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
          ELSE
             ::bSkip     := { | o, n | ( ::Alias ) ->( FltSkip(o, n, .F.) ) }
             ::bGoTop    := { | o | ( ::Alias ) ->( FltGoTop(o) ) }
-            ::bGoBot    := { | o | ( ::Alias ) ->( FltGoBottom( o ) ) }
+            ::bGoBot    := { | o | ( ::Alias ) ->( FltGoBottom(o) ) }
             ::bEof      := { | o | ( ::Alias ) ->( FltEOF( o ) ) }
             ::bBof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
          ENDIF
@@ -3147,7 +3147,7 @@ METHOD PAGEDOWN() CLASS HBrowse
    RETURN Nil
 
 //----------------------------------------------------//
-METHOD BOTTOM( lPaint ) CLASS HBrowse
+METHOD BOTTOM(lPaint) CLASS HBrowse
 
    IF ::Type == BRW_ARRAY
       ::nCurrent := ::nRecords
@@ -4098,14 +4098,14 @@ METHOD FldStr( oBrw, numf ) CLASS HBrowse
       IF pict != NIL
          IF oBrw:Type == BRW_DATABASE
             IF oBrw:aRelation
-               cRes := ( oBrw:aColAlias[numf] ) ->( Transform( Eval(oBrw:aColumns[numf]:block,, oBrw, numf), pict ) )
+               cRes := ( oBrw:aColAlias[numf] ) ->( Transform(Eval(oBrw:aColumns[numf]:block,, oBrw, numf), pict) )
             ELSE
-               cRes := ( oBrw:Alias ) ->( Transform( Eval(oBrw:aColumns[numf]:block,, oBrw, numf), pict ) )
+               cRes := ( oBrw:Alias ) ->( Transform(Eval(oBrw:aColumns[numf]:block,, oBrw, numf), pict) )
             ENDIF
          ELSE
             oBrw:nCurrent := IIf(oBrw:nCurrent = 0, 1, oBrw:nCurrent)
             vartmp :=  Eval(oBrw:aColumns[numf]:block,, oBrw, numf)
-            cRes := IIf(vartmp != Nil, Transform( vartmp, pict ), Space(oBrw:aColumns[numf]:length))
+            cRes := IIf(vartmp != Nil, Transform(vartmp, pict), Space(oBrw:aColumns[numf]:length))
          ENDIF
       ELSE
          IF oBrw:Type == BRW_DATABASE
@@ -4371,7 +4371,7 @@ STATIC FUNCTION FltSkip(oBrw, nLines, lDesc)
             IF lDesc
                FltGoTop(oBrw)
             ELSE
-               FltGoBottom( oBrw )
+               FltGoBottom(oBrw)
             ENDIF
          ELSE
             //SKIP IIf(lDesc, + 1, - 1)
@@ -4406,7 +4406,7 @@ STATIC FUNCTION FltGoTop(oBrw)
    ENDIF
    RETURN NIL
 
-STATIC FUNCTION FltGoBottom( oBrw )
+STATIC FUNCTION FltGoBottom(oBrw)
    IF oBrw:nLastRecordFilter == 0
       Eval(oBrw:bLast)
       IF Empty(oBrw:RelationalExpr)
@@ -4453,11 +4453,11 @@ STATIC FUNCTION FltEOF( oBrw )
    ELSE
       nRecord := FltRecNo( oBrw )
       xValue := ( oBrw:Alias )->( OrdKeyNo() )
-      FltGoBottom( oBrw )
+      FltGoBottom(oBrw)
       xLastValue := ( oBrw:Alias )->( OrdKeyNo() )
       IF xValue > xLastValue
          lRet := .T.
-         FltGoBottom( oBrw )
+         FltGoBottom(oBrw)
          ( oBrw:Alias )->( DBSkip() )
       ELSE
          FltGoTo( oBrw, nRecord )
@@ -4521,7 +4521,7 @@ STATIC FUNCTION LenVal(xVal, cType, cPict)
    CASE "C"
    CASE "D"
       IF !Empty(cPict)
-         nLen := Len(Transform( xVal, cPict ))
+         nLen := Len(Transform(xVal, cPict))
          EXIT
       ENDIF
 

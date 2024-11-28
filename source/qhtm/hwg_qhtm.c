@@ -82,7 +82,7 @@ HB_FUNC(QHTM_END)
 }
 
 /*
-   CreateQHTM( hParentWindow, nID, nStyle, x1, y1, nWidth, nHeight )
+   CreateQHTM(hParentWindow, nID, nStyle, x1, y1, nWidth, nHeight)
 */
 HB_FUNC(CREATEQHTM)
 {

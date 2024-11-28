@@ -525,7 +525,7 @@ METHOD ChangePage(oSayPage, n, nPage) CLASS hPrinter
       ELSEIF n == - 1 .AND. ::nCurrPage > 1
          ::nCurrPage --
       ENDIF
-      oSayPage:SetItem( ::nCurrPage )
+      oSayPage:SetItem(::nCurrPage)
    ELSE
       ::nCurrPage := nPage
    ENDIF

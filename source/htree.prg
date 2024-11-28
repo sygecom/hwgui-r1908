@@ -106,7 +106,7 @@ CLASS HTreeNode INHERIT HObject
    METHOD Delete(lInternal)
    METHOD FindChild(h)
    METHOD GetText() INLINE TreeGetNodeText(::oTree:handle, ::handle)
-   METHOD SetText(cText) INLINE TreeSetItem( ::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText ), ::title := cText
+   METHOD SetText(cText) INLINE TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText), ::title := cText
    METHOD Checked(lChecked)  SETGET
    METHOD GetLevel(h)
 
@@ -236,7 +236,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
    LOCAL state
 
    IF lChecked != NIL
-      TreeSetItem( ::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1) )
+      TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1))
       ::lChecked := lChecked
    ELSE
       state =  SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
@@ -569,7 +569,7 @@ METHOD Notify( lParam ) CLASS HTree
          IF hb_IsObject(oItem)
             IF !(cText == oItem:GetText())  .AND. ;
                ( oItem:oTree:bItemChange == Nil .OR. Eval(oItem:oTree:bItemChange, oItem, cText) )
-               TreeSetItem( oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText )
+               TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
             ENDIF
          ENDIF
       ENDIF
@@ -691,13 +691,13 @@ STATIC PROCEDURE MarkCheckTree(oItem, state)
    LOCAL i, iLen := Len(oItem:aitems), oParent
 
    FOR i := 1 TO iLen
-      TreeSetItem( oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state )
+      TreeSetItem(oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state)
       MarkCheckTree(oItem:aItems[i], state)
    NEXT
    IF state = 1
       oParent = oItem:oParent
       DO WHILE oParent != Nil
-         TreeSetItem( oItem:oTree:handle, oParent:handle, TREE_SETITEM_CHECK, state )
+         TreeSetItem(oItem:oTree:handle, oParent:handle, TREE_SETITEM_CHECK, state)
          oParent := oParent:oParent
       ENDDO
    ENDIF

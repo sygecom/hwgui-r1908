@@ -60,8 +60,8 @@ Return Self
 
 METHOD Activate CLASS HQhtm
    IF ::oParent:handle != 0
-      ::handle := CreateQHTM( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := CreateQHTM(::oParent:handle, ::id, ;
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ELSE
       QHTM_INIT()

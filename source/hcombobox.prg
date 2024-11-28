@@ -57,11 +57,11 @@ CLASS HComboBox INHERIT HControl
    METHOD onEvent(msg, wParam, lParam)
    METHOD Requery()
    METHOD Refresh()
-   METHOD Setitem( nPos )
+   METHOD Setitem(nPos)
    METHOD SetValue(xItem)
    METHOD GetValue()
-   METHOD AddItem( cItem, cItemBound, nPos )
-   METHOD DeleteItem( xIndex )
+   METHOD AddItem(cItem, cItemBound, nPos)
+   METHOD DeleteItem(xIndex)
    METHOD Valid()
    METHOD When()
    METHOD onSelect()
@@ -363,9 +363,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
       ::ldropshow := IIf(wParam = 1, .T., ::ldropshow)
    ENDIF
 
-   IF ::bSetGet != Nil .OR. ::GetParentForm( Self ):Type < WND_DLG_RESOURCE
-      IF msg == WM_CHAR .AND. ( ::GetParentForm( Self ):Type < WND_DLG_RESOURCE .OR. ;
-          !::GetParentForm( Self ) :lModal )
+   IF ::bSetGet != Nil .OR. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+      IF msg == WM_CHAR .AND. ( ::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
+          !::GetParentForm(Self) :lModal )
          IF wParam = VK_TAB
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), - 1, 1))
             RETURN 0
@@ -393,7 +393,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          ELSEIF wparam =  VK_LEFT //.AND. !::lEdit
                GetSkip(::oParent, ::handle, , -1)
                RETURN 0
-         ELSEIF wParam = VK_ESCAPE .AND.  ::GetParentForm( Self ):Type < WND_DLG_RESOURCE //.OR.;
+         ELSEIF wParam = VK_ESCAPE .AND.  ::GetParentForm(Self):Type < WND_DLG_RESOURCE //.OR.;
             RETURN 0
          ENDIF
 
@@ -425,7 +425,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             GetSkip(::oParent, ::handle, , -1)
             RETURN 0
          ENDIF
-          IF ( ::GetParentForm( Self ):Type < WND_DLG_RESOURCE.OR. !::GetParentForm( Self ):lModal )
+          IF ( ::GetParentForm(Self):Type < WND_DLG_RESOURCE.OR. !::GetParentForm(Self):lModal )
              RETURN 1
           ENDIF
       ENDIF
@@ -571,7 +571,7 @@ METHOD Requery() CLASS HComboBox
    */
    //::Refresh()
    IF Empty(::Value) .AND. Len(::aItems) > 0 .AND. ::bSetGet = Nil .AND. !::lEdit
-      ::SetItem( 1 )
+      ::SetItem(1)
    ENDIF
 
 RETURN Nil
@@ -632,7 +632,7 @@ RETURN Nil
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetItem( nPos ) CLASS HComboBox
+METHOD SetItem(nPos) CLASS HComboBox
 
    /*
  IF hb_IsChar(nPos) .AND. ::lText
@@ -689,7 +689,7 @@ METHOD SetValue(xItem) CLASS HComboBox
    ELSE
       nPos := IIf(::columnBound = 2, AScan( ::aItemsBound, xItem ), xItem)
    ENDIF
-   ::setItem( nPos )
+   ::setItem(nPos)
 
 RETURN Nil
 
@@ -749,7 +749,7 @@ METHOD GetValueBound(xItem) CLASS HComboBox
       #else
       nPos := hb_AScan( ::aItemsBound, xItem, , , .T. )
       #endif
-      ::setItem( nPos )
+      ::setItem(nPos)
       RETURN IIf(nPos > 0, ::aItems[nPos], xItem)
    ENDIF
    //::ValueBound := IIf(::lText, "", 0)
@@ -775,7 +775,7 @@ RETURN IIf(!::lEdit, GetEditText(::oParent:handle, ::id), ::cDisplayValue)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DeleteItem( xIndex ) CLASS HComboBox
+METHOD DeleteItem(xIndex) CLASS HComboBox
 
    LOCAL nIndex
 
@@ -798,7 +798,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddItem( cItem, cItemBound, nPos ) CLASS HComboBox
+METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
 
    LOCAL nCount
 
@@ -878,13 +878,13 @@ METHOD onChange(lForce) CLASS HComboBox
       RETURN Nil
    ENDIF
    IF !isWindowVisible(::handle)
-      ::SetItem( ::Value )
+      ::SetItem(::Value)
       RETURN Nil
    ENDIF
 
-   ::SetItem( SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1 )
+   ::SetItem(SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
    IF hb_IsBlock(::bChangeSel)
-      //::SetItem( SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1 )
+      //::SetItem(SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
       ::oparent:lSuspendMsgsHandling := .T.
       Eval(::bChangeSel, ::Value, Self)
       ::oparent:lSuspendMsgsHandling := .F.

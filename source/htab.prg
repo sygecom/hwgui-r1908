@@ -869,7 +869,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
        IF GetFocus() == ::handle
           InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
        ENDIF
-       IF ::GetParentForm( self ):Type < WND_DLG_RESOURCE
+       IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
           RETURN ( ::oParent:onEvent(msg, wparam, lparam) )
        ELSE
           RETURN ( ::super:onevent(msg, wparam, lparam ) )

@@ -254,7 +254,7 @@ METHOD Notify( lParam ) CLASS HGRIDEX
    LOCAL nCode := GetNotifyCode(lParam)
    LOCAL Res, iSelect, oParent := ::GetParentForm()
 
-   IF nCode == NM_CUSTOMDRAW .and. GETNOTIFYCODEFROM( lParam ) == ::handle
+   IF nCode == NM_CUSTOMDRAW .and. GETNOTIFYCODEFROM(lParam) == ::handle
       Res := PROCESSCUSTU( ::handle, lParam, ::aColors )
       Hwg_SetDlgResult(oParent:handle, Res)
       RETURN Res

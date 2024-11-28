@@ -42,7 +42,7 @@ HB_FUNC(HWG__CREATEPOPUPMENU)
 }
 
 /*
- *  AddMenuItem( hMenu,cCaption,nPos,fByPosition,nId,fState,lSubMenu ) --> lResult
+ *  AddMenuItem(hMenu,cCaption,nPos,fByPosition,nId,fState,lSubMenu) --> lResult
  */
 
 /*

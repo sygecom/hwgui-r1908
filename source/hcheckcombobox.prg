@@ -61,7 +61,7 @@ CLASS HCheckComboBox INHERIT HComboBox
    METHOD GetCheck( nIndex )
 
    METHOD SelectAll(bCheck)
-   METHOD MeasureItem( l )
+   METHOD MeasureItem(l)
 
    METHOD onEvent(msg, wParam, lParam)
    METHOD GetAllCheck()
@@ -119,7 +119,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       RETURN -1
 
    ELSEIF msg == WM_MEASUREITEM
-      ::MeasureItem( lParam )
+      ::MeasureItem(lParam)
       RETURN 0
    ELSEIF msg == WM_GETTEXT
       RETURN ::OnGetText(wParam, lParam)
@@ -137,7 +137,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          ::SetCheck( nIndex, !::GetCheck( nIndex ) )
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
-      IF ( ::GetParentForm( Self ) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm( Self ) :lModal )
+      IF ( ::GetParentForm(Self) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self) :lModal )
          IF wParam = VK_TAB
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), -1, 1) )
             RETURN 0
@@ -480,7 +480,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MeasureItem( l ) CLASS hCheckComboBox
+METHOD MeasureItem(l) CLASS hCheckComboBox
 
    LOCAL dc := HCLIENTDC():new(::handle)
    LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO( l )

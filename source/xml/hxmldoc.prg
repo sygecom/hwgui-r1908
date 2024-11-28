@@ -127,7 +127,7 @@ Local i, s := Space(level*2)+"<", lNewLine
            IF ::type == HBXML_TYPE_CDATA .OR. ::type == HBXML_TYPE_COMMENT
               FWrite(handle, ::aItems[i])
            ELSE
-              FWrite(handle, HBXML_Transform( ::aItems[i] ))
+              FWrite(handle, HBXML_Transform(::aItems[i]))
            ENDIF
            IF lNewLine
               FWrite(handle, Chr(10))
@@ -136,7 +136,7 @@ Local i, s := Space(level*2)+"<", lNewLine
            IF ::type == HBXML_TYPE_CDATA .OR. ::type == HBXML_TYPE_COMMENT
               s += ::aItems[i]
            ELSE
-              s += HBXML_Transform( ::aItems[i] )
+              s += HBXML_Transform(::aItems[i])
            ENDIF
            IF lNewLine
               s += Chr(10)

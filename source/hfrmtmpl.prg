@@ -1233,7 +1233,7 @@ CLASS VAR maxId    INIT 0
 
    METHOD Read(fname, cId)
    METHOD Print(printer, lPreview, p1, p2, p3)
-   METHOD PrintItem( oItem )
+   METHOD PrintItem(oItem)
    METHOD ReleaseObj( aControls )
    METHOD Find(cId)
    METHOD Close()
@@ -1302,7 +1302,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             NEXT
          ENDIF
       ELSEIF aItems[i]:title == "part"
-         ReadRepItem( aItems[i], Self )
+         ReadRepItem(aItems[i], Self)
       ENDIF
    NEXT
    pp := NIL
@@ -1372,7 +1372,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
       ::nTOffset := ::nAOffSet := ::ny := 0
       // Writelog( "Print-1 "+ str(oPrinter:nPage) )
       FOR i := 1 TO Len(::aControls)
-         ::PrintItem( ::aControls[i] )
+         ::PrintItem(::aControls[i])
       NEXT
       oPrinter:EndPage()
       IF ::lFinish
@@ -1392,7 +1392,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
 
    RETURN Nil
 
-METHOD PrintItem( oItem ) CLASS HRepTmpl
+METHOD PrintItem(oItem) CLASS HRepTmpl
    LOCAL aMethod, lRes := .T., i, nPenType, nPenWidth
    LOCAL x, y, x2, y2, cText, nJustify, xProperty, nLines, dy, nFirst, ny
 
@@ -1450,7 +1450,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
                      IF __mvExist("LSKIPITEM")
                         lSkipItem := .F.
                      ENDIF
-                     ::PrintItem( oItem:aControls[i] )
+                     ::PrintItem(oItem:aControls[i])
                      IF ::lNextPage
                         RETURN Nil
                      ENDIF
@@ -1473,7 +1473,7 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
             ENDIF
          ELSE
             FOR i := 1 TO Len(oItem:aControls)
-               ::PrintItem( oItem:aControls[i] )
+               ::PrintItem(oItem:aControls[i])
             NEXT
          ENDIF
          lRes := .F.
@@ -1617,7 +1617,7 @@ METHOD Close() CLASS HRepTmpl
    ENDIF
    RETURN Nil
 
-STATIC FUNCTION ReadRepItem( oCtrlDesc, oContainer )
+STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
    LOCAL oCtrl := HRepItem():New( oContainer )
    LOCAL i, j, o, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems, xProperty, cName
 
@@ -1636,7 +1636,7 @@ STATIC FUNCTION ReadRepItem( oCtrlDesc, oContainer )
       ELSEIF aItems[i]:title == "method"
          Aadd(aMethods, { cName := Lower(aItems[i]:GetAttribute("name")),RdScript(,aItems[i]:aItems[1]:aItems[1],,.T.,cName) })
       ELSEIF aItems[i]:title == "part"
-         ReadRepItem( aItems[i], IIf(oCtrl:cClass == "area", oCtrl, oContainer) )
+         ReadRepItem(aItems[i], IIf(oCtrl:cClass == "area", oCtrl, oContainer))
       ENDIF
    NEXT
    IF oCtrl:cClass $ "box.vline.hline" .OR. ( oCtrl:cClass == "label" .AND. ;

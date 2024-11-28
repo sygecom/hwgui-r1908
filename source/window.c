@@ -1113,7 +1113,7 @@ HB_FUNC(EXITPROCESS)
 HB_FUNC(HWG_DECREASEHOLDERS)
 {
   /*
-     PHB_ITEM pObject = hb_param( 1, HB_IT_OBJECT );
+     PHB_ITEM pObject = hb_param(1, HB_IT_OBJECT);
      #ifndef  UIHOLDERS
      if( pObject->item.asArray.value->ulHolders )
         pObject->item.asArray.value->ulHolders--;
