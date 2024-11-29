@@ -138,7 +138,7 @@ HB_FUNC(HWG__ADDMENUITEM)
 */
 
 /*
- *  CreateSubMenu( hMenu, nMenuId ) --> hSubMenu
+ *  CreateSubMenu(hMenu, nMenuId) --> hSubMenu
  */
 
 /*
@@ -164,7 +164,7 @@ HB_FUNC(HWG__CREATESUBMENU)
 }
 
 /*
- *  SetMenu( hWnd, hMenu ) --> lResult
+ *  SetMenu(hWnd, hMenu) --> lResult
  */
 
 /*

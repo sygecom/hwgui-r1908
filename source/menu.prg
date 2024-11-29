@@ -38,10 +38,10 @@ METHOD Show( oWnd, xPos, yPos, lWnd ) CLASS HMenu
          xPos  := aCoor[1]
          yPos  := aCoor[2]
       ENDIF
-      Hwg_trackmenu( ::handle, xPos, yPos, oWnd:handle )
+      Hwg_trackmenu(::handle, xPos, yPos, oWnd:handle)
    ELSE
       aCoor := ClientToScreen(oWnd:handle, xPos, yPos)
-      Hwg_trackmenu( ::handle, aCoor[1], aCoor[2], oWnd:handle )
+      Hwg_trackmenu(::handle, aCoor[1], aCoor[2], oWnd:handle)
    ENDIF
 
    RETURN Nil
@@ -55,10 +55,10 @@ FUNCTION Hwg_CreateMenu
 
    RETURN { {},,, hMenu }
 
-FUNCTION Hwg_SetMenu( oWnd, aMenu )
+FUNCTION Hwg_SetMenu(oWnd, aMenu)
 
    IF !Empty(oWnd:handle)
-      IF hwg__SetMenu( oWnd:handle, aMenu[5] )
+      IF hwg__SetMenu(oWnd:handle, aMenu[5])
          oWnd:menu := aMenu
       ELSE
          RETURN .F.
@@ -126,7 +126,7 @@ FUNCTION Hwg_GetSubMenuHandle(aMenu, nId)
 
    RETURN IIf(aSubMenu == Nil, 0, aSubMenu[5])
 
-FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
+FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
    LOCAL hMenu, nPos, aMenu, oBmp
 
    IF nPosParent == Nil
@@ -153,7 +153,7 @@ FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
       IF hb_IsArray(aMenu[1, nPos, 1])
-         BuildMenu( aMenu,,, nPos )
+         BuildMenu(aMenu,,, nPos)
       ELSE
          IF aMenu[1, nPos, 1] == Nil .OR. aMenu[1, nPos, 2] != Nil
             /* This code just for sure menu runtime hfrmtmpl.prg is enable */
@@ -170,7 +170,7 @@ FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
       nPos ++
    ENDDO
    IF hWnd != Nil .AND. oWnd != Nil
-      Hwg_SetMenu( oWnd, aMenu )
+      Hwg_SetMenu(oWnd, aMenu)
       IF s_nbkColor != Nil
          Hwg_SetMenuInfo(oWnd:handle, s_nbkColor)
       ENDIF
@@ -180,7 +180,7 @@ FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
    ENDIF
    RETURN Nil
 
-FUNCTION Hwg_BeginMenu( oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp )
+FUNCTION Hwg_BeginMenu(oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp)
    LOCAL aMenu, i
    IF oWnd != Nil
       _aMenuDef := {}
@@ -217,8 +217,8 @@ FUNCTION Hwg_EndMenu()
    IF _nLevel > 0
       _nLevel --
    ELSE
-      BuildMenu( AClone(_aMenuDef), IIf(_oWnd != Nil, _oWnd:handle, Nil), ;
-                 _oWnd,, IIf(_oWnd != Nil, .F., .T.) )
+      BuildMenu(AClone(_aMenuDef), IIf(_oWnd != Nil, _oWnd:handle, Nil), ;
+                 _oWnd,, IIf(_oWnd != Nil, .F., .T.))
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
          _oWnd:hAccel := CreateAcceleratorTable(_aAccel)
       ENDIF
@@ -284,7 +284,7 @@ FUNCTION Hwg_SetMenuItemBitmaps(aMenu, nId, abmp1, abmp2)
    SetMenuItemBitmaps(oMenu, nId, abmp1, abmp2)
    RETURN Nil
 
-FUNCTION Hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
+FUNCTION Hwg_InsertBitmapMenu(aMenu, nId, lBitmap, oResource)
    LOCAL aSubMenu := Hwg_FindMenuItem(aMenu, nId)
    LOCAL oMenu, oBmp
 
@@ -295,7 +295,7 @@ FUNCTION Hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
       oBmp := HBitmap():AddResource(lBitmap)
    ENDIF
    oMenu := IIf(aSubMenu == Nil, 0, aSubMenu[5])
-   HWG__InsertBitmapMenu( oMenu, nId, oBmp:handle )
+   HWG__InsertBitmapMenu(oMenu, nId, oBmp:handle)
    RETURN Nil
 
 FUNCTION Hwg_SearchPosBitmap(nPos_Id)
@@ -323,6 +323,6 @@ FUNCTION DeleteMenuItem(oWnd, nId)
       ADel(aSubMenu[1], nPos)
       ASize(aSubMenu[1], Len(aSubMenu[1]) - 1)
 
-      hwg_DeleteMenu( GetMenuHandle(oWnd:handle), nId )
+      hwg_DeleteMenu(GetMenuHandle(oWnd:handle), nId)
    ENDIF
    RETURN Nil

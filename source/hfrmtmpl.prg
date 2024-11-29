@@ -909,7 +909,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          ccaption := xProperty
          // FiM NANDO
       ELSEIF cPName == "atree"
-         BuildMenu( xProperty, oForm:oDlg:handle, oForm:oDlg )
+         BuildMenu(xProperty, oForm:oDlg:handle, oForm:oDlg)
       ELSE
          IF cPName == "tooltip"
             cPName := "c" + cPName
