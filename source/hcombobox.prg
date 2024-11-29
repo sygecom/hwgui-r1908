@@ -1033,35 +1033,35 @@ METHOD Populate() CLASS HComboBox
    ::columnBound := IIf(cValueBound = Nil, 1, 2)
    IF ::value == Nil
       IF ::lText
-         ::value := IIf(cAlias = Nil, ::aItems[1], ( cAlias )-> ( &( value ) ))
+         ::value := IIf(cAlias = Nil, ::aItems[1], (cAlias)->(&(value)))
        ELSE
          ::value := 1
        ENDIF
    ELSEIF ::lText .AND. !::lEdit .AND. EMPTY ( ::value )
-      ::value := IIf(cAlias = Nil, ::aItems[1], ( cAlias )-> ( &( value ) ))
+      ::value := IIf(cAlias = Nil, ::aItems[1], (cAlias)->(&(value)))
    ENDIF
    SendMessage(::handle, CB_RESETCONTENT, 0, 0)
    ::AitemsBound := {}
    IF cAlias != Nil .AND. SELECT(cAlias) > 0
       ::aItems := {}
-      nRecno := ( cAlias ) ->( Recno() )
-      ( cAlias ) ->( DBGOTOP() )
+      nRecno := (cAlias)->(Recno())
+      (cAlias)->(DBGOTOP())
        i := 1
-       DO WHILE !( cAlias ) ->( EOF() )
-         AADD(::Aitems,( cAlias ) -> ( &( value ) ))
+       DO WHILE !(cAlias)->(EOF())
+         AADD(::Aitems, (cAlias)->(&(value)))
          IF !Empty(cvaluebound)
-            AADD(::AitemsBound,( cAlias ) -> ( &( cValueBound ) ))
+            AADD(::AitemsBound, (cAlias)->(&(cValueBound)))
          ENDIF
          ComboAddString( ::handle, ::aItems[i] )
          numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
          IF numofchars > LongComboWidth
              LongComboWidth := numofchars
          ENDIF
-         ( cAlias ) ->( DBSKIP() )
+         (cAlias)->(DBSKIP())
          i ++
        ENDDO
        IF nRecno > 0
-          ( cAlias ) ->( DBGOTO(nRecno) )
+          (cAlias)->(DBGOTO(nRecno))
        ENDIF
     ELSE
        FOR i := 1 TO Len(::aItems)

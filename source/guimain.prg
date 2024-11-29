@@ -285,7 +285,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       ENDIF
    ELSE
       @ 0, 0 Browse oBrw DATABASE
-      oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), ( o:Alias ) ->( FieldGet(nField) ) }, "C", nLen ))
+      oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), (o:Alias)->(FieldGet(nField)) }, "C", nLen ))
    ENDIF
 
    oBrw:oFont  := oFont

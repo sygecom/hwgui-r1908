@@ -993,7 +993,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
        //- verificar se tem mais de um campo
             temp = SubStr(temp, 1, IIf(At("+", temp) > 0, At("+", temp) - 1, Len(temp)))
             j := {}
-            AEval(&cAliasdbf->( ( DBStruct() ) ), { | aField | AAdd(j, aField[1]) })
+            AEval(&cAliasdbf->((DBStruct())), { | aField | AAdd(j, aField[1]) })
             IF m->nLength = Nil
                // m->nLength := &cTmpAlias->(fieldlen(ascan(j,temp)))
                // m->nLength := IIf(m->nLength = 0 ,IIf(type("&cCampo") = "C",LEN(&cCampo),10),m->nLength)
@@ -1036,14 +1036,14 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             // CRIAR AS RELA€OES E O LINK
             oCtrl:Alias := cAliasdbf
             IF !Empty(cKey)
-               &( oCtrl:Alias ) ->( DBSetOrder(cKey) )
-               cKey := ( oCtrl:Alias ) ->( ordkey(cKey) )
+               &(oCtrl:Alias)->(DBSetOrder(cKey))
+               cKey := (oCtrl:Alias)->(ordkey(cKey))
                cKey := IIf(At("+", cKey) > 0, Left(cKey, At("+", cKey) - 1), cKey)
             ENDIF
             cRelexpr := IIf(!Empty(cRelexpr), cRelexpr, cKey)
             IF !Empty(cRelexpr + cLink)
-               &cLink->( DBSetRelation(oCtrl:Alias, { || &cRelexpr }, cRelexpr) )
-               &( oCtrl:Alias ) ->( DBSetFilter(&("{|| " + cRelexpr + " = " + cLink + "->(" + cRelexpr + ")}"), "&crelexpr = &clink->(&crelexpr) "))
+               &cLink->(DBSetRelation(oCtrl:Alias, { || &cRelexpr }, cRelexpr))
+               &(oCtrl:Alias)->(DBSetFilter(&("{|| " + cRelexpr + " = " + cLink + "->(" + cRelexpr + ")}"), "&crelexpr = &clink->(&crelexpr) "))
             ENDIF
             // fim dos relacionamentos
             IF Empty(oCtrlTmpl:aControls)
