@@ -1533,8 +1533,8 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
             ::bBof      := { | o | ( ::Alias ) ->( FltBOF( o ) ) }
          ENDIF
          ::bRcou     := { | o | ( ::Alias ) ->( FltRecCount(o) ) }
-         ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo( o ) ) }
-         ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo( o, n ) ) }
+         ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo(o) ) }
+         ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo(o, n) ) }
       ELSE
          ::bSkip     :=  { | o, n | HB_SYMBOL_UNUSED(o), ( ::Alias ) ->( DBSkip(n) ) }
          ::bGoTop    :=  { || ( ::Alias ) ->( DBGoTop() ) }
@@ -1543,7 +1543,7 @@ METHOD InitBrw( nType, lInit ) CLASS HBrowse
          ::bBof      :=  { || ( ::Alias ) ->( Bof() ) }
          ::bRcou     :=  { || ( ::Alias ) ->( RecCount() ) }
          ::bRecnoLog := ::bRecno  := { || ( ::Alias ) ->( RecNo() ) }
-         ::bGoTo     := { | a, n | HB_SYMBOL_UNUSED(a), ( ::Alias ) ->( DBGoTo( n ) ) }
+         ::bGoTo     := { | a, n | HB_SYMBOL_UNUSED(a), ( ::Alias ) ->( DBGoTo(n) ) }
       ENDIF
       */
    ELSEIF ::Type == BRW_ARRAY
@@ -1608,8 +1608,8 @@ METHOD FILTER( lFilter ) CLASS HBrowse
          ENDIF
          //::bRcou     := { | o | ( ::Alias ) ->( FltRecCount(o) ) }
          ::bRcou     := { || ( ::Alias ) ->( RecCount() ) }
-         ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo( o ) ) }
-         ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo( o, n ) ) }
+         ::bRecnoLog := ::bRecno := { | o | ( ::Alias ) ->( FltRecNo(o) ) }
+         ::bGoTo     := { | o, n | ( ::Alias ) ->( FltGoTo(o, n) ) }
       ELSE
          ::bSkip     :=  { | o, n | HB_SYMBOL_UNUSED(o), ( ::Alias ) ->( DBSkip(n) ) }
          ::bGoTop    :=  { || ( ::Alias ) ->( DBGoTop() ) }
@@ -1618,7 +1618,7 @@ METHOD FILTER( lFilter ) CLASS HBrowse
          ::bBof      :=  { || ( ::Alias ) ->( Bof() ) }
          ::bRcou     :=  { || ( ::Alias ) ->( RecCount() ) }
          ::bRecnoLog := ::bRecno  := { || ( ::Alias ) ->( RecNo() ) }
-         ::bGoTo     := { | a, n | HB_SYMBOL_UNUSED(a), ( ::Alias ) ->( DBGoTo( n ) ) }
+         ::bGoTo     := { | a, n | HB_SYMBOL_UNUSED(a), ( ::Alias ) ->( DBGoTo(n) ) }
       ENDIF
       ::lFilter := lFilter
    ENDIF
@@ -1712,7 +1712,7 @@ METHOD Rebuild() CLASS HBrowse
       ENDIF
    NEXT
    IF HWG_BITAND(::style, WS_HSCROLL) != 0
-       SetScrollInfo( ::handle, SB_HORZ, 1, 0, 1, Len(::aColumns) )
+       SetScrollInfo(::handle, SB_HORZ, 1, 0, 1, Len(::aColumns))
    ENDIF
 
    ::lChanged := .F.
@@ -2910,9 +2910,9 @@ METHOD DoVScroll(wParam) CLASS HBrowse
          Eval(::bScrollPos, Self, nScrollCode, .F., HIWORD(wParam))
       ELSE
          IF ( ::Alias ) -> ( IndexOrd() ) == 0              // sk
-            ( ::Alias ) -> ( DBGoTo( HIWORD(wParam) ) )   // sk
+            ( ::Alias ) -> ( DBGoTo(HIWORD(wParam)) )   // sk
          ELSE
-            ( ::Alias ) ->( OrdKeyGoTo( HIWORD(wParam) ) ) // sk
+            ( ::Alias ) ->( OrdKeyGoTo(HIWORD(wParam)) ) // sk
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
@@ -4074,11 +4074,11 @@ METHOD BrwScrollVPos() CLASS HBrowse
          maxPos := IIf(nIndexOrd = 0, ( ::Alias ) ->( RecNo() ), IIf(Empty(::RelationalExpr), ::nRecCount, ( ::Alias ) ->( ordkeyno() )))
          Eval(::bGotop, Self)
          minPos := IIf(nIndexOrd = 0, ( ::Alias ) ->( RecNo() ), ( ::Alias ) ->( ordkeyno() ))
-         ( ::Alias ) ->( DBGoTo( nrecno ) )
+         ( ::Alias ) ->( DBGoTo(nrecno) )
          IF minPos != maxPos
             SetScrollRange(::handle, SB_VERT, minPos, maxPos)
          ENDIF
-          // ( ::Alias ) ->( DBGoTo( nrecno ) )
+          // ( ::Alias ) ->( DBGoTo(nrecno) )
       ENDIF
    ELSE
       ::nRecCount := ( ::Alias ) -> ( Reccount() )
@@ -4226,9 +4226,9 @@ FUNCTION CreateList(oBrw, lEditable)
    FOR i := 1 TO kolf
       oBrw:AddColumn(HColumn():New(FieldName(i),                      ;
                                    FieldWBlock( FieldName(i), nArea ), ;
-                                   dbFieldInfo( DBS_TYPE, i ),         ;
-                                   IIf(dbFieldInfo( DBS_TYPE, i ) == "D".AND.__SetCentury(), 10, dbFieldInfo( DBS_LEN, i )), ;
-                                   dbFieldInfo( DBS_DEC, i ),          ;
+                                   dbFieldInfo(DBS_TYPE, i),         ;
+                                   IIf(dbFieldInfo(DBS_TYPE, i) == "D".AND.__SetCentury(), 10, dbFieldInfo(DBS_LEN, i)), ;
+                                   dbFieldInfo(DBS_DEC, i),          ;
                                    lEditable))
    NEXT
 
@@ -4260,7 +4260,7 @@ FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
          IF minPos != maxPos
             SetScrollRange(oBrw:handle, SB_VERT, minPos, maxPos)
          ENDIF
-         ( oBrw:Alias ) ->( DBGoTo( nrecno ) )
+         ( oBrw:Alias ) ->( DBGoTo(nrecno) )
          SetScrollPos(oBrw:handle, SB_VERT, IIf(( oBrw:Alias ) ->( IndexOrd() ) = 0, ( oBrw:Alias ) ->( RecNo() ), ( oBrw:Alias ) ->( ordkeyno() )))
 
 //         SetScrollPos(oBrw:handle, SB_VERT, oBrw:BrwScrollVPos())
@@ -4323,7 +4323,7 @@ METHOD ShowSizes() CLASS HBrowse
 
    AEval(::aColumns, ;
           { | v, e | HB_SYMBOL_UNUSED(v), cText += ::aColumns[e]:heading + ": " + Str( Round(::aColumns[e]:width / 8, 0) - 2  ) + Chr(10) + Chr(13) })
-   MsgInfo( cText )
+   MsgInfo(cText)
    RETURN NIL
 
 FUNCTION ColumnArBlock()
@@ -4397,12 +4397,12 @@ STATIC FUNCTION FltGoTop(oBrw)
               ( oBrw:Alias )->( DBSkip() )
             ENDDO
          ENDIF
-         oBrw:nFirstRecordFilter := FltRecNo( oBrw )
+         oBrw:nFirstRecordFilter := FltRecNo(oBrw)
       ELSE
          oBrw:nFirstRecordFilter := 0
       ENDIF
    ELSE
-      FltGoTo( oBrw, oBrw:nFirstRecordFilter )
+      FltGoTo(oBrw, oBrw:nFirstRecordFilter)
    ENDIF
    RETURN NIL
 
@@ -4419,9 +4419,9 @@ STATIC FUNCTION FltGoBottom(oBrw)
             ENDDO
          ENDIF
       ENDIF
-      oBrw:nLastRecordFilter := FltRecNo( oBrw )
+      oBrw:nLastRecordFilter := FltRecNo(oBrw)
    ELSE
-      FltGoTo( oBrw, oBrw:nLastRecordFilter )
+      FltGoTo(oBrw, oBrw:nLastRecordFilter)
    ENDIF
    RETURN NIL
 
@@ -4431,7 +4431,7 @@ STATIC FUNCTION FltBOF( oBrw )
    IF ( oBrw:Alias )->( Bof() )
       lRet := .T.
    ELSE
-      nRecord := FltRecNo( oBrw )
+      nRecord := FltRecNo(oBrw)
       xValue := ( oBrw:Alias )->( OrdKeyNo() ) //&(cKey)
       FltGoTop(oBrw)
       xFirstValue := ( oBrw:Alias )->( OrdKeyNo() ) //&(cKey)
@@ -4440,7 +4440,7 @@ STATIC FUNCTION FltBOF( oBrw )
          lRet := .T.
          FltGoTop(oBrw)
       ELSE
-         FltGoTo( oBrw, nRecord )
+         FltGoTo(oBrw, nRecord)
       ENDIF
    ENDIF
    RETURN lRet
@@ -4451,7 +4451,7 @@ STATIC FUNCTION FltEOF( oBrw )
    IF ( oBrw:Alias )->( Eof() )
       lRet := .T.
    ELSE
-      nRecord := FltRecNo( oBrw )
+      nRecord := FltRecNo(oBrw)
       xValue := ( oBrw:Alias )->( OrdKeyNo() )
       FltGoBottom(oBrw)
       xLastValue := ( oBrw:Alias )->( OrdKeyNo() )
@@ -4460,7 +4460,7 @@ STATIC FUNCTION FltEOF( oBrw )
          FltGoBottom(oBrw)
          ( oBrw:Alias )->( DBSkip() )
       ELSE
-         FltGoTo( oBrw, nRecord )
+         FltGoTo(oBrw, nRecord)
       ENDIF
    ENDIF
    RETURN lRet
@@ -4468,7 +4468,7 @@ STATIC FUNCTION FltEOF( oBrw )
    /*  no used
 STATIC FUNCTION FltRecCount(oBrw)
    LOCAL nRecord, nCount := 0
-   nRecord := FltRecNo( oBrw )
+   nRecord := FltRecNo(oBrw)
    FltGoTop(oBrw)
    oBrw:aRecnoFilter := {}
    DO WHILE !( oBrw:Alias )->( Eof() ) .AND. Eval(oBrw:bWhile, oBrw)
@@ -4480,15 +4480,15 @@ STATIC FUNCTION FltRecCount(oBrw)
       ENDIF
       ( oBrw:Alias )->( DBSkip() )
    ENDDO
-   FltGoTo( oBrw, nRecord )
+   FltGoTo(oBrw, nRecord)
    RETURN nCount
   */
   
-STATIC FUNCTION FltGoTo( oBrw, nRecord )
+STATIC FUNCTION FltGoTo(oBrw, nRecord)
    HB_SYMBOL_UNUSED(oBrw)
-   RETURN ( oBrw:Alias )->( DBGoTo( nRecord ) )
+   RETURN ( oBrw:Alias )->( DBGoTo(nRecord) )
 
-STATIC FUNCTION FltRecNo( oBrw )
+STATIC FUNCTION FltRecNo(oBrw)
    HB_SYMBOL_UNUSED(oBrw)
    RETURN ( oBrw:Alias )->( RecNo() )
 

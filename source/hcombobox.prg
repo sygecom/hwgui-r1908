@@ -1061,7 +1061,7 @@ METHOD Populate() CLASS HComboBox
          i ++
        ENDDO
        IF nRecno > 0
-          ( cAlias ) ->( DBGOTO( nRecno ) )
+          ( cAlias ) ->( DBGOTO(nRecno) )
        ENDIF
     ELSE
        FOR i := 1 TO Len(::aItems)

@@ -207,7 +207,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
                   AAdd(aProp, { Lower(o:GetAttribute("name")), o:aItems[1] })
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
                      ::lDebug := .T.
-                     SetDebugInfo( .T. )
+                     SetDebugInfo(.T.)
                   ENDIF
                ENDIF
             ENDIF
@@ -234,7 +234,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
       ENDIF
    NEXT
    pp := NIL
-   SetDebugInfo( .F. )
+   SetDebugInfo(.F.)
    RETURN Self
 
 METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
@@ -249,7 +249,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
    MEMVAR oDlg
    PRIVATE oDlg
 
-   SetDebugInfo( ::lDebug )
+   SetDebugInfo(::lDebug)
    SetDebugger( ::lDebug )
    nstyle := DS_ABSALIGN + WS_VISIBLE + WS_SYSMENU + WS_SIZEBOX
 
@@ -1281,7 +1281,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
                   AAdd(aProp, { Lower(o:GetAttribute("name")), hfrm_GetProperty( o:aItems[1] ) })
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
                      ::lDebug := .T.
-                     SetDebugInfo( .T. )
+                     SetDebugInfo(.T.)
                   ENDIF
                ENDIF
             ENDIF
@@ -1306,7 +1306,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
       ENDIF
    NEXT
    pp := NIL
-   SetDebugInfo( .F. )
+   SetDebugInfo(.F.)
    RETURN Self
 
 METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
@@ -1319,7 +1319,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
    IF oPrinter == Nil
       RETURN Nil
    ENDIF
-   SetDebugInfo( ::lDebug )
+   SetDebugInfo(::lDebug)
    SetDebugger( ::lDebug )
 
    FOR i := 1 TO Len(::aProp)

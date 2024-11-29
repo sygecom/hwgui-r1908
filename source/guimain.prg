@@ -242,7 +242,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       IF ( nField := FieldPos(arr) ) == 0
          RETURN 0
       ENDIF
-      nLen := dbFieldInfo( 3, nField )
+      nLen := dbFieldInfo(3, nField)
    ELSE
       aLen := Len(arr)
       IF hb_IsArray(arr[1])

@@ -172,7 +172,7 @@ FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
    IF hWnd != Nil .AND. oWnd != Nil
       Hwg_SetMenu( oWnd, aMenu )
       IF s_nbkColor != Nil
-         Hwg_SetMenuInfo( oWnd:handle, s_nbkColor )
+         Hwg_SetMenuInfo(oWnd:handle, s_nbkColor)
       ENDIF
    ELSEIF _oMenu != Nil
       _oMenu:handle := aMenu[5]

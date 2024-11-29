@@ -504,7 +504,7 @@ HB_FUNC(KEYB_EVENT)
   }
 }
 
-/* SetScrollInfo( hWnd, nType, nRedraw, nPos, nPage, nmax )
+/* SetScrollInfo(hWnd, nType, nRedraw, nPos, nPage, nmax)
  */
 HB_FUNC(SETSCROLLINFO)
 {

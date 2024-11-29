@@ -69,8 +69,8 @@ CLASS PrintDos
 
    METHOD UnBold()     //Added by  por Fernando Athayde
 
-   METHOD Comando( oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
-                oComm8, oComm9, oComm10 )
+   METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
+                oComm8, oComm9, oComm10)
 
    METHOD SetPrc(x, y)
 
@@ -111,7 +111,7 @@ METHOD New( oPorta ) CLASS PrintDos
       IF oPorta == "DEFAULT"
          oPtrName := PrintPortName()
          IF oPtrName == Nil
-            MsgInfo( "Error, file to:ERROR.TXT" )
+            MsgInfo("Error, file to:ERROR.TXT")
             ::oPorta := "Error.txt"
          ELSE
             ::oPorta := oPtrName
@@ -124,12 +124,12 @@ METHOD New( oPorta ) CLASS PrintDos
             oPtrSetup := PrintSetupDos()
          #endif
          IF oPtrSetup == Nil
-            MsgInfo( "Error, file to:ERROR.TXT" )
+            MsgInfo("Error, file to:ERROR.TXT")
             ::oPorta := "Error.txt"
          ELSE
             oPtrName := PrintPortName()
             IF oPtrName == Nil
-               MsgInfo( "Error, file to:ERROR.TXT" )
+               MsgInfo("Error, file to:ERROR.TXT")
                ::oPorta := "Error.txt"
             ELSE
                oPtrName := AllTrim(oPtrName)
@@ -161,8 +161,8 @@ METHOD New( oPorta ) CLASS PrintDos
    RETURN Self
 
 
-METHOD Comando( oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
-                oComm8, oComm9, oComm10 ) CLASS PrintDos
+METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
+                oComm8, oComm9, oComm10) CLASS PrintDos
 
    LOCAL oStr //:= oComm1 (value not used)
 
@@ -223,19 +223,19 @@ METHOD Eject() CLASS PrintDos
 
 METHOD Compress() CLASS PrintDos
 
-   ::Comando( ::cCompr )
+   ::Comando(::cCompr)
 
    RETURN Nil
 
 METHOD Double() CLASS PrintDos
 
-   ::Comando( ::cDouble )
+   ::Comando(::cDouble)
 
    RETURN Nil
 
 METHOD DesCompress() CLASS PrintDos
 
-   ::Comando( ::cNormal )
+   ::Comando(::cNormal)
 
    RETURN Nil
 
@@ -243,13 +243,13 @@ METHOD DesCompress() CLASS PrintDos
 
 METHOD Bold() CLASS PrintDos
 
-   ::Comando( ::cBold )
+   ::Comando(::cBold)
 
    RETURN Nil
 
 METHOD UnBold() CLASS PrintDos
 
-   ::Comando( ::cUnBold )
+   ::Comando(::cUnBold)
 
    RETURN Nil
 

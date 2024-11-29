@@ -483,7 +483,7 @@ RETURN Self
 METHOD MeasureItem(l) CLASS hCheckComboBox
 
    LOCAL dc := HCLIENTDC():new(::handle)
-   LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO( l )
+   LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO(l)
    LOCAL metrics
    LOCAL pFont
 
@@ -559,7 +559,7 @@ FUNCTION hwg_multibitor( ... )
 
    FOR EACH nItem IN aArgumentList
       IF !hb_IsNumeric(nItem)
-         msginfo( "hwg_multibitor parameter not numeric set to zero", "Possible error" )
+         msginfo("hwg_multibitor parameter not numeric set to zero", "Possible error")
          nItem := 0
       ENDIF
       result := hwg_bitor( result, nItem )

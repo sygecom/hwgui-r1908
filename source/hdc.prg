@@ -48,8 +48,8 @@ CLASS HDC
    METHOD NEW()
    METHOD SetAttribDC(hDC)
    METHOD ATTACH( hDc )
-   METHOD MOVETO( x1, y1 )
-   METHOD LINETO( x1, y1 )
+   METHOD MOVETO(x1, y1)
+   METHOD LINETO(x1, y1)
    METHOD fillsolidrect(lpRect, clr)
    METHOD fillrect(lpRect, clr)
    METHOD SelectClipRgn(pRgn)
@@ -83,12 +83,12 @@ METHOD NEW() CLASS HDC
 
    RETURN Self
 
-METHOD MOVETO( x1, y1 ) CLASS HDC
-   MoveTo( ::m_hDC, x1, y1 )
+METHOD MOVETO(x1, y1) CLASS HDC
+   MoveTo(::m_hDC, x1, y1)
    RETURN Self
 
-METHOD LINETO( x1, y1 ) CLASS HDC
-   LineTo( ::m_hDC, x1, y1 )
+METHOD LINETO(x1, y1) CLASS HDC
+   LineTo(::m_hDC, x1, y1)
    RETURN Self
 
 METHOD Attach( hDC ) CLASS HDC

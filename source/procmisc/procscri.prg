@@ -213,7 +213,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             AADD(tmpArray, stroka)
             AADD(rezArray[2], .F.)
          CASE scom == "ENDDO"
-            IF !Fou_Do( rezArray[2], tmpArray )
+            IF !Fou_Do(rezArray[2], tmpArray)
                nLastError := 2
                RETURN .F.
             ENDIF
@@ -312,7 +312,7 @@ Local n, cTitle
       cTitle := "Script execution error"
    ENDIF
    stroka += Chr(13)+Chr(10) + Chr(13)+Chr(10) + "Continue ?"
-   IF !msgYesNo( stroka, cTitle )
+   IF !msgYesNo(stroka, cTitle)
       EndWindow()
       QUIT
    ENDIF
@@ -366,7 +366,7 @@ LOCAL i, j, bOldError
    NEXT
 RETURN .F.
 
-STATIC FUNCTION Fou_Do( rezArray, tmpArray )
+STATIC FUNCTION Fou_Do(rezArray, tmpArray)
 LOCAL i, j, iloop := 0
 //LOCAL iPos (variable not used)
 LOCAL bOldError
@@ -533,7 +533,7 @@ FUNCTION Codeblock( string )
    ENDIF
 RETURN &("{||"+string+"}")
 
-FUNCTION SetDebugInfo( lDebug )
+FUNCTION SetDebugInfo(lDebug)
 
    lDebugInfo := IIf(lDebug==Nil, .T., lDebug)
 RETURN .T.
