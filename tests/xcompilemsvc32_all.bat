@@ -33,3 +33,4 @@ call xcompilemsvc32 tab3
 call xcompilemsvc32 tab4
 call xcompilemsvc32 timer
 call xcompilemsvc32 timer2
+call xcompilemsvc32 trackbar

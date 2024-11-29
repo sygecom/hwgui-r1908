@@ -33,3 +33,4 @@ call xcompilemingw32 tab3
 call xcompilemingw32 tab4
 call xcompilemingw32 timer
 call xcompilemingw32 timer2
+call xcompilemingw32 trackbar

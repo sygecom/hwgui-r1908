@@ -33,3 +33,4 @@ call xcompileclang64 tab3
 call xcompileclang64 tab4
 call xcompileclang64 timer
 call xcompileclang64 timer2
+call xcompileclang64 trackbar

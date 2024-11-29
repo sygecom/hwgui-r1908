@@ -33,3 +33,4 @@ call xcompile tab3
 call xcompile tab4
 call xcompile timer
 call xcompile timer2
+call xcompile trackbar

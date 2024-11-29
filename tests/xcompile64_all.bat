@@ -33,3 +33,4 @@ call xcompile64 tab3
 call xcompile64 tab4
 call xcompile64 timer
 call xcompile64 timer2
+call xcompile64 trackbar
