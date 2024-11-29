@@ -11,7 +11,9 @@ PROCMISC_DIR = source\procmisc
 HBXML_DIR    = source\xml
 HWGQHTM_DIR  = source\qhtm
 
-CFLAGS = -Wall -mno-cygwin -O3 -march=pentium -DHWG_USE_POINTER_ITEM
+CFLAGS = -Wall -O3 -march=pentium
+# -mno-cygwin
+# -DHWG_USE_POINTER_ITEM
 
 all: \
    $(LIB_DIR)/libhwgui.a \
@@ -103,7 +105,6 @@ $(LIB_DIR)/libhwgui.a : \
    $(OBJ_DIR)/nice.o \
    $(OBJ_DIR)/pager.o \
    $(OBJ_DIR)/printdos.o \
-   $(OBJ_DIR)/prnalone.o \
    $(OBJ_DIR)/repexec.o \
    $(OBJ_DIR)/resource.o \
    $(OBJ_DIR)/richedit.o \
