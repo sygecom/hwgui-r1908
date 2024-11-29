@@ -164,7 +164,7 @@ Return .T.
 Static Function dlgDebugClose()
 
    oDlgDebug := Nil
-   SetDebugger( .F. )
+   SetDebugger(.F.)
    SetDebugRun()
    aBreakPoints := aScriptCurr := Nil
    aBreaks  := {}
@@ -299,7 +299,7 @@ Local xRes, bOldError, lRes := .T., cType
    
 Return .T.
 
-STATIC FUNCTION MacroError( e )
+STATIC FUNCTION MacroError(e)
    HB_SYMBOL_UNUSED(e)
    BREAK
 RETURN .T. // Warning W0028  Unreachable code

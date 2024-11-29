@@ -76,9 +76,9 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
 
    ::acheck := IIf(acheck == Nil, {}, acheck)
    IF hb_IsNumeric(nStyle)
-      nStyle := hwg_multibitor( nStyle, CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS )
+      nStyle := hwg_multibitor(nStyle, CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS)
    ELSE
-      nStyle := hwg_multibitor( CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS )
+      nStyle := hwg_multibitor(CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS)
    ENDIF
 
    bPaint := {|o, p|o:paint(p)}
@@ -447,7 +447,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       nstate := DFCS_BUTTONCHECK
 
       IF ( ncheck > 1 )
-         nstate := hwg_bitor( nstate, DFCS_CHECKED )
+         nstate := hwg_bitor(nstate, DFCS_CHECKED)
       ENDIF
 
       // Draw the checkmark using DrawFrameControl
@@ -551,7 +551,7 @@ RETURN aCheck
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION hwg_multibitor( ... )
+FUNCTION hwg_multibitor(...)
 
    LOCAL aArgumentList := HB_AParams()
    LOCAL nItem
@@ -562,7 +562,7 @@ FUNCTION hwg_multibitor( ... )
          msginfo("hwg_multibitor parameter not numeric set to zero", "Possible error")
          nItem := 0
       ENDIF
-      result := hwg_bitor( result, nItem )
+      result := hwg_bitor(result, nItem)
    NEXT
 
 RETURN result

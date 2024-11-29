@@ -250,7 +250,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
    PRIVATE oDlg
 
    SetDebugInfo(::lDebug)
-   SetDebugger( ::lDebug )
+   SetDebugger(::lDebug)
    nstyle := DS_ABSALIGN + WS_VISIBLE + WS_SYSMENU + WS_SIZEBOX
 
    FOR i := 1 TO Len(::aProp)
@@ -577,7 +577,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
 
    RETURN arrExe
 
-STATIC PROCEDURE CompileErr( e, stroka )
+STATIC PROCEDURE CompileErr(e, stroka)
 
    MsgStop(ErrorMessage(e) + Chr(10) + Chr(13) + "in" + Chr(10) + Chr(13) + AllTrim(stroka), "Script compiling error")
    BREAK( NIL )
@@ -1036,14 +1036,14 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             // CRIAR AS RELA€OES E O LINK
             oCtrl:Alias := cAliasdbf
             IF !Empty(cKey)
-               &( oCtrl:Alias ) ->( DBSetOrder( cKey ) )
+               &( oCtrl:Alias ) ->( DBSetOrder(cKey) )
                cKey := ( oCtrl:Alias ) ->( ordkey( cKey ) )
                cKey := IIf(At("+", cKey) > 0, Left(cKey, At("+", cKey) - 1), cKey)
             ENDIF
             cRelexpr := IIf(!Empty(cRelexpr), cRelexpr, cKey)
             IF !Empty(cRelexpr + cLink)
                &cLink->( DBSetRelation(oCtrl:Alias, { || &cRelexpr }, cRelexpr) )
-               &( oCtrl:Alias ) ->( DBSetFilter( &( "{|| " + cRelexpr + " = " + cLink + "->(" + cRelexpr + ")}" ), "&crelexpr = &clink->(&crelexpr) " ) )
+               &( oCtrl:Alias ) ->( DBSetFilter(&("{|| " + cRelexpr + " = " + cLink + "->(" + cRelexpr + ")}"), "&crelexpr = &clink->(&crelexpr) "))
             ENDIF
             // fim dos relacionamentos
             IF Empty(oCtrlTmpl:aControls)
@@ -1100,19 +1100,19 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       LOCAL aAttr := {}
 
       AAdd(aAttr, { "name", oFont:name })
-      AAdd(aAttr, { "width", LTrim(Str( oFont:width, 5 )) })
-      AAdd(aAttr, { "height", LTrim(Str( oFont:height, 5 )) })
+      AAdd(aAttr, { "width", LTrim(Str(oFont:width, 5)) })
+      AAdd(aAttr, { "height", LTrim(Str(oFont:height, 5)) })
       IF oFont:weight != 0
-         AAdd(aAttr, { "weight", LTrim(Str( oFont:weight, 5 )) })
+         AAdd(aAttr, { "weight", LTrim(Str(oFont:weight, 5)) })
       ENDIF
       IF oFont:charset != 0
-         AAdd(aAttr, { "charset", LTrim(Str( oFont:charset, 5 )) })
+         AAdd(aAttr, { "charset", LTrim(Str(oFont:charset, 5)) })
       ENDIF
       IF oFont:Italic != 0
-         AAdd(aAttr, { "italic", LTrim(Str( oFont:Italic, 5 )) })
+         AAdd(aAttr, { "italic", LTrim(Str(oFont:Italic, 5)) })
       ENDIF
       IF oFont:Underline != 0
-         AAdd(aAttr, { "underline", LTrim(Str( oFont:Underline, 5 )) })
+         AAdd(aAttr, { "underline", LTrim(Str(oFont:Underline, 5)) })
       ENDIF
 
       RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
@@ -1148,7 +1148,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                           width, height, weight, charset, ;
                           ita, under)
 
-   FUNCTION hfrm_Str2Arr( stroka )
+   FUNCTION hfrm_Str2Arr(stroka)
       LOCAL arr := {}, pos1 := 2, pos2 := 1
 
       IF Len(stroka) > 2
@@ -1162,7 +1162,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN arr
 
-   FUNCTION hfrm_Arr2Str( arr )
+   FUNCTION hfrm_Arr2Str(arr)
       LOCAL stroka := "{", i, cType
 
       FOR i := 1 TO Len(arr)
@@ -1173,7 +1173,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          IF cType == "C"
             stroka += arr[i]
          ELSEIF cType == "N"
-            stroka += LTrim(Str( arr[i] ))
+            stroka += LTrim(Str(arr[i]))
          ENDIF
       NEXT
 
@@ -1189,7 +1189,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          ELSEIF c == "."
             xProp := ( SubStr(xProp, 2, 1) == "T" )
          ELSEIF c == "{"
-            xProp := hfrm_Str2Arr( xProp )
+            xProp := hfrm_Str2Arr(xProp)
          ELSE
             xProp := Val(xProp)
          ENDIF
@@ -1320,7 +1320,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
       RETURN Nil
    ENDIF
    SetDebugInfo(::lDebug)
-   SetDebugger( ::lDebug )
+   SetDebugger(::lDebug)
 
    FOR i := 1 TO Len(::aProp)
       IF ::aProp[i, 1] == "paper size"

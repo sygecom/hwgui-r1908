@@ -44,7 +44,7 @@ FUNCTION OpenReport(fname, repName)
    han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR( han, @strbuf, @poz, 512 )
+         stroka := RDSTR(han, @strbuf, @poz, 512)
          IF Len(stroka) = 0
             EXIT
          ENDIF
@@ -215,11 +215,11 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
 
    IF hb_IsChar(aPaintRep[FORM_VARS])
       DO WHILE .T.
-         stroka := RDSTR( , aPaintRep[FORM_VARS], @poz )
+         stroka := RDSTR(, aPaintRep[FORM_VARS], @poz)
          IF Len(stroka) = 0
             EXIT
          ENDIF
-         DO WHILE !Empty(varName := getNextVar( @stroka, @varValue ))
+         DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
             PRIVATE &varName
             IF varValue != Nil
                &varName := &varValue
@@ -499,8 +499,8 @@ STATIC FUNCTION ScriptExecute(aItem)
    IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
       IF hb_IsChar(aItem[ITEM_SCRIPT])
          IF ( aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT]) ) == Nil
-            nError := CompileErr( @nLineEr )
-            MsgStop("Script error (" + LTrim(Str( nError )) + "), line " + LTrim(Str( nLineEr )))
+            nError := CompileErr(@nLineEr)
+            MsgStop("Script error (" + LTrim(Str(nError)) + "), line " + LTrim(Str(nLineEr)))
             RETURN .F.
          ENDIF
       ENDIF

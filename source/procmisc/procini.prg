@@ -76,7 +76,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
       strfull := ""
       DO WHILE .T.
          kolstr ++
-         stroka := IIf(iniDbf, RDSTRDBF(), RDSTR( han,@strbuf,@poz,STR_BUFLEN ))
+         stroka := IIf(iniDbf, RDSTRDBF(), RDSTR(han, @strbuf, @poz, STR_BUFLEN))
          IF Len(stroka) = 0
             EXIT
          ENDIF
@@ -141,7 +141,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                   CASE stroka = "off" .OR. stroka = "OFF" .OR. stroka = "Off" .OR. Empty(stroka)
                      &vname := .F.
                   CASE ASC(stroka) = 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
-                     RDARR( vname, stroka )
+                     RDARR(vname, stroka)
                   OTHERWISE
                      &vname := RDZNACH( stroka )
                   ENDCASE
@@ -173,7 +173,7 @@ LOCAL poz, znc
    ENDIF
 RETURN znc
 
-STATIC FUNCTION RDARR( vname, stroka )
+STATIC FUNCTION RDARR(vname, stroka)
 
 LOCAL poz1
 //LOCAL i := 0 (variable/value not used)
@@ -193,8 +193,8 @@ LOCAL len1, strv, newname
             IF ASC(strv) = 123 .AND. SubStr(strv, 2, 1) != "|"              // {
                AADD(&vname, {})
                len1    := Len(&vname)
-               newname := vname + "[" + LTrim(STR( len1, 3 )) + "]"
-               RDARR( newname, strv )
+               newname := vname + "[" + LTrim(STR(len1, 3)) + "]"
+               RDARR(newname, strv)
             ELSE
                AADD(&vname, RDZNACH( strv ))
             ENDIF

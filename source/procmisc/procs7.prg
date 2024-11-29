@@ -8,7 +8,7 @@
  *         www - http://kresin.belgorod.su
 */
 
-FUNCTION RDSTR( han, strbuf, poz, buflen )
+FUNCTION RDSTR(han, strbuf, poz, buflen)
 LOCAL stro := "", rez, oldpoz, poz1
 
    oldpoz := poz
@@ -45,7 +45,7 @@ LOCAL stro := "", rez, oldpoz, poz1
    ENDIF
 RETURN stro
 
-FUNCTION getNextVar( stroka, varValue )
+FUNCTION getNextVar(stroka, varValue)
 
 LOCAL varName, iPosEnd, iPos3
    IF Empty(stroka)

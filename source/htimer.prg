@@ -31,7 +31,7 @@ CLASS VAR aTimers   INIT {}
          ( ::xName := cName, __objAddData(::oParent, cName), ::oParent: & ( cName ) := Self), Nil)
    ACCESS Interval INLINE ::value
    ASSIGN Interval(x) INLINE ::value := x, ;
-                                           SetTimer( ::oParent:handle, ::id, ::value )
+                                           SetTimer(::oParent:handle, ::id, ::value)
 
    METHOD New( oParent, nId, value, bAction )
    METHOD Init()
@@ -55,7 +55,7 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
    ::bAction := bAction
    /*
     if ::value > 0
-      SetTimer( oParent:handle, ::id, ::value )
+      SetTimer(oParent:handle, ::id, ::value)
    endif
    */
    ::Init()
@@ -67,7 +67,7 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
 METHOD Init() CLASS HTimer
    IF !::lInit
       IF ::value > 0
-         SetTimer( ::oParent:handle, ::id, ::value )
+         SetTimer(::oParent:handle, ::id, ::value)
       ENDIF
    ENDIF
    RETURN  NIL
@@ -76,7 +76,7 @@ METHOD END() CLASS HTimer
    LOCAL i
 
    IF ::oParent != Nil
-      KillTimer( ::oParent:handle, ::id )
+      KillTimer(::oParent:handle, ::id)
    ENDIF
    IF ( i := AScan(::aTimers, { | o | o:id == ::id }) ) > 0
       ADel(::aTimers, i)
@@ -111,7 +111,7 @@ FUNCTION TimerProc(hWnd, idTimer, Time)
 
    FOR i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]
-      KillTimer( oTimer:oParent:handle, oTimer:id )
+      KillTimer(oTimer:oParent:handle, oTimer:id)
    NEXT
 
    RETURN

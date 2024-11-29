@@ -49,8 +49,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    HB_SYMBOL_UNUSED(cCaption)
 
    DEFAULT  lvert  TO .F.
-   nStyle   := Hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), ;
-                          WS_VISIBLE + WS_CHILD )
+   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
+                          WS_VISIBLE + WS_CHILD)
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
    ::Title := ""
@@ -82,8 +82,8 @@ METHOD Activate() CLASS hrebar
 
    IF !Empty(::oParent:handle)
 
-      ::handle := CREATEREBAR( ::oParent:handle, ::id, ;
-                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := CREATEREBAR(::oParent:handle, ::id, ;
+                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       ::Init()
    ENDIF

@@ -99,8 +99,8 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
 METHOD Activate() CLASS HProgressBar
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateProgressBar( ::oParent:handle, ::maxPos, ::style, ;
-                                     ::nLeft, ::nTop, ::nWidth, IIf(::nHeight = 0, Nil, ::nHeight) )
+      ::handle := CreateProgressBar(::oParent:handle, ::maxPos, ::style, ;
+                                     ::nLeft, ::nTop, ::nWidth, IIf(::nHeight = 0, Nil, ::nHeight))
       ::Init()
    ENDIF
    RETURN Nil
@@ -125,7 +125,7 @@ METHOD STEP(cTitle)
       ::SET(cTitle)
       IF !Empty(::lPercent)
          ::nPercent += ::maxPos  //::nLimit
-         ::setLabel(LTrim(STR( ::nPercent, 3 )) + " %")
+         ::setLabel(LTrim(STR(::nPercent, 3)) + " %")
       ENDIF
       RETURN .T.
    ENDIF
@@ -138,7 +138,7 @@ METHOD SET(cTitle, nPos) CLASS HProgressBar
       SetWindowText(::oParent:handle, cTitle)
    ENDIF
    IF nPos != Nil
-      SetProgressBar( ::handle, nPos )
+      SetProgressBar(::handle, nPos)
    ENDIF
 
    RETURN Nil

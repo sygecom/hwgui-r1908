@@ -45,7 +45,7 @@ static int(CALLBACK BrowseCallbackProc)(HWND hwnd, UINT uMsg, LPARAM lParam, LPA
 }
 
 /*
- *  SelectFolder( cTitle )
+ *  SelectFolder(cTitle)
  */
 
 HB_FUNC(SELECTFOLDER)

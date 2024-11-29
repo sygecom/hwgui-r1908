@@ -27,7 +27,7 @@ CLASS VAR aImages   INIT {}
    DATA nCounter   INIT 1
 
    METHOD AddFile(name)
-   METHOD AddFromVar( cImage, cType )
+   METHOD AddFromVar(cImage, cType)
    METHOD FromBitmap(oBitmap)
    METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight )
    METHOD Release()
@@ -62,7 +62,7 @@ METHOD AddFile(name) CLASS HFreeImage
 
    RETURN Self
 
-METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
+METHOD AddFromVar(cImage, cType) CLASS HFreeImage
 
    IF Empty(::handle := FI_LoadFromMem(cImage, cType))
       RETURN Nil
@@ -77,7 +77,7 @@ METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
 METHOD FromBitmap(oBitmap) CLASS HFreeImage
 
    ::handle := FI_Bmp2FI( oBitmap:handle )
-   ::name := LTrim(Str( oBitmap:handle ))
+   ::name := LTrim(Str(oBitmap:handle))
    ::nWidth  := FI_GetWidth(::handle)
    ::nHeight := FI_GetHeight(::handle)
    AAdd(::aImages, Self)
@@ -144,7 +144,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
 
    IF Image != Nil
       ::oImage := IIf(hb_IsChar(Image), ;
-                      IIf(cType != Nil, HFreeImage():AddFromVar( Image, cType ), HFreeImage():AddFile(Image)), Image)
+                      IIf(cType != Nil, HFreeImage():AddFromVar(Image, cType), HFreeImage():AddFile(Image)), Image)
       IF nWidth == Nil
          nWidth  := ::oImage:nWidth
          nHeight := ::oImage:nHeight
@@ -176,7 +176,7 @@ METHOD ReplaceImage(Image, cType)
       ::oImage:Release()
    ENDIF
    ::oImage := IIf(hb_IsChar(Image), ;
-                   IIf(cType != Nil, HFreeImage():AddFromVar( Image, cType ), HFreeImage():AddFile(Image)), Image)
+                   IIf(cType != Nil, HFreeImage():AddFromVar(Image, cType), HFreeImage():AddFile(Image)), Image)
 
    RETURN Nil
 

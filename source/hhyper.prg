@@ -28,7 +28,7 @@ CLASS HStaticLink FROM HSTATIC
    DATA state
    DATA m_bFireChild INIT .F.
 
-   DATA m_hHyperCursor INIT LoadCursor( 32649 )
+   DATA m_hHyperCursor INIT LoadCursor(32649)
 
    DATA m_bMouseOver INIT .F.
    DATA m_bVisited INIT .F.
@@ -67,7 +67,7 @@ CLASS VAR winclass INIT "STATIC"
    METHOD SetHoverColor(cHoverColor)
    METHOD SetFireChild(lFlag) INLINE ::m_bFireChild := lFlag
    METHOD OnClicked()
-   METHOD OnSetCursor( pWnd, nHitTest, message )
+   METHOD OnSetCursor(pWnd, nHitTest, message)
    METHOD SetLinkText(csLinkText)
    METHOD SetLinkColor(sLinkColor)
    METHOD PAint(lpDis)
@@ -80,7 +80,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
             bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick ) CLASS HStaticLink
    LOCAL oPrevFont
    
-   nStyle := Hwg_BitOR( nStyle, SS_NOTIFY + SS_RIGHT  )
+   nStyle := Hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
    ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
    ::title := IIf(cCaption != Nil,cCaption ,"HWGUI HomePage")
    ::hbitmap := hbitmap
@@ -194,7 +194,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
       //::PAint()
       
    ELSEIF msg == WM_MOUSEMOVE
-      hwg_SetCursor( ::m_hHyperCursor )
+      hwg_SetCursor(::m_hHyperCursor)
      ::OnMouseMove(wParam, lParam)
         /*
          IF ::state != LBL_MOUSEOVER
@@ -209,10 +209,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
         ::state := LBL_NORMAL
    ELSEIF msg =  WM_MOUSEHOVER
    ELSEIF msg == WM_SETCURSOR
-      ::OnSetCursor( msg, wParam, lParam )
+      ::OnSetCursor(msg, wParam, lParam)
 
    ELSEIF msg == WM_LBUTTONDOWN
-      hwg_SetCursor( ::m_hHyperCursor )
+      hwg_SetCursor(::m_hHyperCursor)
       ::OnClicked()
    ELSEIF msg == WM_SIZE
 
@@ -282,13 +282,13 @@ METHOD OnClicked() CLASS HStaticLink
 
    RETURN NIL
 
-METHOD OnSetCursor( pWnd, nHitTest, message ) CLASS HStaticLink
+METHOD OnSetCursor(pWnd, nHitTest, message) CLASS HStaticLink
 
    HB_SYMBOL_UNUSED(pWnd)
    HB_SYMBOL_UNUSED(nHitTest)
    HB_SYMBOL_UNUSED(message)
 
-   hwg_SetCursor( ::m_hHyperCursor )
+   hwg_SetCursor(::m_hHyperCursor)
 
    RETURN .T.
 
@@ -319,7 +319,7 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
       IF (  !PtInRect({ 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos }) ) .AND. ::state != LBL_MOUSEOVER
           res := .T.
       ELSE
-        hwg_SetCursor( ::m_hHyperCursor )
+        hwg_SetCursor(::m_hHyperCursor)
         IF ( !PtInRect({ 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos }) )
            //ReleaseCapture()
            res := .T.

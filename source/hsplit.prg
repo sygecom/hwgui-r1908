@@ -84,9 +84,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == Nil
-         ::hCursor := LoadCursor( IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS) )
+         ::hCursor := LoadCursor(IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS))
       ENDIF
-      Hwg_SetCursor( ::hCursor )
+      Hwg_SetCursor(::hCursor)
       IF ::lCaptured
          ::Drag( lParam )
          IF ::lScrolling
@@ -98,7 +98,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
    ELSEIF msg == WM_ERASEBKGND
 
    ELSEIF msg == WM_LBUTTONDOWN
-      Hwg_SetCursor( ::hCursor )
+      Hwg_SetCursor(::hCursor)
       SetCapture(::handle)
       ::lCaptured := .T.
       InvalidateRect(::handle, 1)

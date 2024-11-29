@@ -406,7 +406,7 @@ RETURN oPage
 
 STATIC FUNCTION InitPage(oTab, oPage, cCaption, n)
 
-   LOCAL cname := "Page" + AllTrim(Str( n ))
+   LOCAL cname := "Page" + AllTrim(Str(n))
 
    oPage:oParent := oTab
    __objAddData(oPage:oParent, cname)
@@ -421,7 +421,7 @@ METHOD EndPage() CLASS HTab
    
    LOCAL i
    LOCAL cName
-   LOCAL cPage := "Page" + AllTrim(STR( ::nActive ))
+   LOCAL cPage := "Page" + AllTrim(STR(::nActive))
 
    IF !::lResourceTab
       ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
@@ -1143,7 +1143,7 @@ STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
          ENDIF
        NEXT
      ELSE
-      nPageAcel := FindTabAccelerator( oCtrl, nKeyDown )
+      nPageAcel := FindTabAccelerator(oCtrl, nKeyDown)
       IF nPageAcel == 0
          MsgBeep()
       ENDIF
@@ -1153,7 +1153,7 @@ RETURN nPage
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION FindTabAccelerator( oPage, nKey )
+FUNCTION FindTabAccelerator(oPage, nKey)
   
    LOCAL i
    LOCAL pos

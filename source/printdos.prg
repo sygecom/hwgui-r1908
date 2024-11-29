@@ -271,7 +271,7 @@ METHOD Say( oProw, oPcol, oTexto, oPicture ) CLASS PrintDos
       IF !Empty(oPicture) .or. oPicture != Nil
          oTexto := Transform(oTexto, oPicture)
       ELSE
-         oTexto := Str( oTexto )
+         oTexto := Str(oTexto)
       ENDIF
 
    ELSEIF hb_IsDate(oTexto)
@@ -394,7 +394,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR( han, @strbuf, @poz, 2052 )
+         stroka := RDSTR(han, @strbuf, @poz, 2052)
          IF Len(stroka) = 0
             EXIT
          ENDIF
@@ -439,7 +439,7 @@ METHOD Preview( fName, cTitle ) CLASS PrintDos
 
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR( han, @strbuf, @poz, 2052 )
+         stroka := RDSTR(han, @strbuf, @poz, 2052)
          IF Len(stroka) = 0
             EXIT
          ENDIF

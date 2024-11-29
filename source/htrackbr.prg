@@ -54,10 +54,10 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       TickMarks := 0
    ENDIF
    IF bPaint != NIL
-      TickStyle := Hwg_BitOr( TickStyle, TBS_AUTOTICKS )
+      TickStyle := Hwg_BitOr(TickStyle, TBS_AUTOTICKS)
    ENDIF
-   nStyle   := Hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), ;
-                          WS_CHILD + WS_VISIBLE + WS_TABSTOP )
+   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
+                          WS_CHILD + WS_VISIBLE + WS_TABSTOP)
    nStyle   += IIf(lVertical != NIL .AND. lVertical, TBS_VERT, 0)
    nStyle   += TickStyle + TickMarks
 
@@ -95,7 +95,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    ELSEIF msg == WM_MOUSEMOVE
       IF ::hCursor != NIL
-         Hwg_SetCursor( ::hCursor )
+         Hwg_SetCursor(::hCursor)
       ENDIF
 
    ELSEIF msg == WM_ERASEBKGND

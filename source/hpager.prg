@@ -41,7 +41,7 @@ CLASS HPager INHERIT HControl
    METHOD PAGERFORWARDMOUSE(b) INLINE PAGERFORWARDMOUSE(::handle, b)
    METHOD PAGERSETBKCOLOR(b) INLINE PAGERSETBKCOLOR(::handle, b)
    METHOD PAGERGETBKCOLOR() INLINE PAGERGETBKCOLOR(::handle)
-   METHOD PAGERSETBORDER(  b ) INLINE PAGERSETBORDER( ::handle, b )
+   METHOD PAGERSETBORDER(b) INLINE PAGERSETBORDER(::handle, b)
    METHOD PAGERGETBORDER() INLINE PAGERGETBORDER(::handle)
    METHOD PAGERSETPOS(b) INLINE PAGERSETPOS(::handle, b)
    METHOD PAGERGETPOS() INLINE PAGERGETPOS(::handle)
@@ -59,8 +59,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
 
    DEFAULT  lvert  TO .F.
    ::lvert := lvert
-   nStyle   := Hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), ;
-                          WS_VISIBLE + WS_CHILD + IIf(lvert, PGS_VERT, PGS_HORZ) )
+   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
+                          WS_VISIBLE + WS_CHILD + IIf(lvert, PGS_VERT, PGS_HORZ))
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
    HWG_InitCommonControlsEx()
@@ -91,8 +91,8 @@ METHOD Activate() CLASS HPager
 
    IF !Empty(::oParent:handle)
 
-      ::handle := CREATEPAGER( ::oParent:handle, ::id, ;
-                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, IIf(::lVert, PGS_VERT, PGS_HORZ) )
+      ::handle := CREATEPAGER(::oParent:handle, ::id, ;
+                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, IIf(::lVert, PGS_VERT, PGS_HORZ))
 
       ::Init()
    ENDIF

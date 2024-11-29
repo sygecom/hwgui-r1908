@@ -104,7 +104,7 @@ FUNCTION FindSelf( hCtrl )
    LOCAL oParent
    oParent := FindParent(hCtrl)
    IF oParent == Nil
-      oParent := GetAncestor( hCtrl, GA_PARENT )
+      oParent := GetAncestor(hCtrl, GA_PARENT)
    ENDIF
    IF oParent != Nil  .AND. !hb_IsNumeric(oParent)
       RETURN oParent:FindControl(, hCtrl )
@@ -338,26 +338,26 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
       ENDIF
       IF oWnd != Nil
          oDlg := Nil
-         hPBar := CreateProgressBar( oWnd:handle, maxPos, 20, 25, width - 40, 20 )
+         hPBar := CreateProgressBar(oWnd:handle, maxPos, 20, 25, width - 40, 20)
       ELSE
          INIT DIALOG oDlg TITLE cTitle   ;
               At x1, y1 SIZE width, height ;
               STYLE nStyle               ;
-              ON INIT { | o | hPBar := CreateProgressBar( o:handle, maxPos, 20, 25, width - 40, 20 ) }
+              ON INIT { | o | hPBar := CreateProgressBar(o:handle, maxPos, 20, 25, width - 40, 20) }
          ACTIVATE DIALOG oDlg NOMODAL
       ENDIF
    ELSEIF nStep == 1
       iCou ++
       IF iCou == nLimit
          iCou := 0
-         UpdateProgressBar( hPBar )
+         UpdateProgressBar(hPBar)
       ENDIF
    ELSEIF nStep == 2
-      UpdateProgressBar( hPBar )
+      UpdateProgressBar(hPBar)
    ELSEIF nStep == 3
       SetWindowText(oDlg:handle, cTitle)
       IF maxPos != Nil
-         SetProgressBar( hPBar, maxPos )
+         SetProgressBar(hPBar, maxPos)
       ENDIF
    ELSE
       DestroyWindow(hPBar)

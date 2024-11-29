@@ -72,7 +72,7 @@ CLASS HComboBox INHERIT HControl
    METHOD RowSource(xSource) SETGET
    METHOD DisplayValue(cValue) SETGET
    METHOD onDropDown() INLINE ::ldropshow := .T.
-   METHOD SetCueBanner( cText, lShowFoco )
+   METHOD SetCueBanner(cText, lShowFoco)
    METHOD MaxLength( nMaxLength ) SETGET
 
 ENDCLASS
@@ -83,7 +83,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength) CLASS HComboBox
 
    IF !Empty(nDisplay) .AND. nDisplay > 0
-      nStyle := Hwg_BitOr( nStyle, CBS_NOINTEGRALHEIGHT  + WS_VSCROLL )
+      nStyle := Hwg_BitOr(nStyle, CBS_NOINTEGRALHEIGHT  + WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
       nDisplay := 6
@@ -96,7 +96,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       lEdit := .F.
    ENDIF
 
-   nStyle := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP )
+   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
       bcolor)
 
@@ -199,7 +199,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
 
    //::nHeightBox := INT(22 * 0.75) //   Meets A 22'S EDITBOX
    IF !Empty(nDisplay) .AND. nDisplay > 0
-      ::Style := Hwg_BitOr( ::Style, CBS_NOINTEGRALHEIGHT )                     //+ WS_VSCROLL )
+      ::Style := Hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT)                     //+ WS_VSCROLL )
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
       nDisplay := 6
@@ -414,13 +414,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          ENDIF
            IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent = Nil
-             //  GetSkip(::oParent, GetAncestor( ::handle, GA_PARENT ), , 1)
+             //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
            ELSEIF GETKEYSTATE(VK_UP) < 0 .AND.  GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent = Nil
-             //  GetSkip(::oParent, GetAncestor( ::handle, GA_PARENT ), , 1)
+             //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , -1)
             RETURN 0
@@ -832,7 +832,7 @@ RETURN nCount
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetCueBanner( cText, lShowFoco ) CLASS HComboBox
+METHOD SetCueBanner(cText, lShowFoco) CLASS HComboBox
 
    LOCAL lRet := .F.
 

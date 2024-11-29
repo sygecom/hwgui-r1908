@@ -159,7 +159,7 @@ CLASS RichText
 
    METHOD BorderCode(cBorderID)
    METHOD ShadeCode(cShadeID)
-   METHOD ParaBorder( cBorder, cType )
+   METHOD ParaBorder(cBorder, cType)
    METHOD BegBookMark( texto )
    METHOD EndBookMark()
 
@@ -452,12 +452,12 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
 
    IF cTypeBorder != NIL // Hay bordes de parrafo
       IF AScan(cTypeBorder, "ALL") != 0
-         ::ParaBorder( "ALL", cBordStyle )
+         ::ParaBorder("ALL", cBordStyle)
       ELSEIF AScan(cTypeBorder, "CHARACTER") != 0
-         ::ParaBorder( "CHARACTER", cBordStyle )
+         ::ParaBorder("CHARACTER", cBordStyle)
       ELSE
          FOR i = 1 TO Len(cTypeBorder)
-            ::ParaBorder( cTypeBorder[i], cBordStyle )
+            ::ParaBorder(cTypeBorder[i], cBordStyle)
          NEXT i
       ENDIF
    ENDIF
@@ -567,7 +567,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
 *********************************************************************
    LOCAL cWrite := ""
    LOCAL i, cChar, nChar
-   LOCAL cString := cStr( xData ) //cValToChar( xData )
+   LOCAL cString := cStr(xData) //cValToChar(xData)
    LOCAL aCodes := { "\", "{", "}" }
 
    DEFAULT lCodesOK TO .F.
@@ -618,9 +618,9 @@ METHOD Write(xData, lCodesOK) CLASS RichText
             IF nChar == 141
                LOOP
             ELSE
-               cWrite += "\plain\f" + AllTrim(Str( ::nFontAct - 1 )) + ;
-                         "\fs" + AllTrim(Str( ::nFontSize * 2 )) + ;
-                         "\cf" + AllTrim(Str( ::nFontColor )) + AllTrim(::cLastApar) + "\'" + Lower(NewBase(nChar, 16))
+               cWrite += "\plain\f" + AllTrim(Str(::nFontAct - 1)) + ;
+                         "\fs" + AllTrim(Str(::nFontSize * 2)) + ;
+                         "\cf" + AllTrim(Str(::nFontColor)) + AllTrim(::cLastApar) + "\'" + Lower(NewBase(nChar, 16))
             ENDIF
          ELSE
             cWrite += ::aTranslate[Asc(cChar) - 127]
@@ -676,7 +676,7 @@ METHOD NumCode(cCode, nValue, lScale) CLASS RichText
       IF lScale
          nValue := Int(nValue * ::nScale)
       ENDIF
-      cWrite += AllTrim(Str( nValue )) //+ " "
+      cWrite += AllTrim(Str(nValue)) //+ " "
 
       FWrite(::hFile, cWrite)
 
@@ -1183,7 +1183,7 @@ METHOD Borders(cEntity, cBorder) CLASS RichText
 ************************  END OF Borders()  *************************
 
 
-METHOD ParaBorder( cBorder, cType ) CLASS RichText
+METHOD ParaBorder(cBorder, cType) CLASS RichText
 *********************************************************************
 * Description:  Apply borders to paragraphs.  Currently limited to
 *               one type of border per rectangle.
@@ -1362,7 +1362,7 @@ FUNCTION NewBase(nDec, nBase)
       ENDIF
 
       IF nRemain < 10
-         cRemain := AllTrim(Str( nRemain, 2, 0 ))
+         cRemain := AllTrim(Str(nRemain, 2, 0))
       ELSE
          cRemain := Chr(nRemain + 55)
       ENDIF
@@ -1714,7 +1714,7 @@ METHOD SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, ;
 
    ::TextCode("par\li0\ql")
 
-   ::ParaBorder( "ALL", "SINGLE" )
+   ::ParaBorder("ALL", "SINGLE")
 
    RETURN NIL
 
@@ -1849,10 +1849,10 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
    IF lParrafo
       IF cTypeBorder != NIL // Hay bordes de parrafo
          IF AScan(cTypeBorder, "ALL") != 0
-            cEstilo += ::ParaBorder( "ALL", cBordStyle )
+            cEstilo += ::ParaBorder("ALL", cBordStyle)
          ELSE
             FOR i = 1 TO Len(cTypeBorder)
-               cEstilo += ::ParaBorder( cTypeBorder[i], cBordStyle )
+               cEstilo += ::ParaBorder(cTypeBorder[i], cBordStyle)
             NEXT i
          ENDIF
       ENDIF
@@ -2591,7 +2591,7 @@ FUNCTION cFileExt(cFile)
    RETURN SubStr(cFile, At(".", cFile) + 1)
 
    #ifndef __XHARBOUR__
-   FUNCTION CStr( xExp )
+   FUNCTION CStr(xExp)
 
       LOCAL cType
 
@@ -2612,13 +2612,13 @@ FUNCTION cFileExt(cFile)
          RETURN IIf(xExp, ".T.", ".F.")
 
       CASE cType == "N"
-         RETURN Str( xExp )
+         RETURN Str(xExp)
 
       CASE cType == "M"
          RETURN xExp
 
       CASE cType == "A"
-         RETURN "{ Array of " +  LTrim(Str( Len(xExp) )) + " Items }"
+         RETURN "{ Array of " +  LTrim(Str(Len(xExp))) + " Items }"
 
       CASE cType == "B"
          RETURN "{|| Block }"
@@ -2634,7 +2634,7 @@ FUNCTION cFileExt(cFile)
 #endif
 
       CASE cType == "H"
-         RETURN "{ Hash of " +  LTrim(Str( Len(xExp) )) + " Items }"
+         RETURN "{ Hash of " +  LTrim(Str(Len(xExp))) + " Items }"
 
       OTHERWISE
          RETURN "Type: " + cType

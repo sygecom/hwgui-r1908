@@ -38,7 +38,7 @@ CLASS TMci
    ::oWnd := oWnd, ;
    ::nError := nMciWindow(::nId, oWnd:handle)
 
-   METHOD SendStr( cMciStr )
+   METHOD SendStr(cMciStr)
 
 ENDCLASS
 
@@ -58,7 +58,7 @@ METHOD New( cDevice, cFileName ) CLASS TMci
 
 //----------------------------------------------------------------------------//
 
-METHOD SendStr( cMciStr ) CLASS TMci
+METHOD SendStr(cMciStr) CLASS TMci
 
    LOCAL cBuffer := ::cBuffer
 

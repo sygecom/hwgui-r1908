@@ -115,10 +115,10 @@ METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, 
          ::cPrinterName := cPrinterName
      ELSEIF Empty(cPrinter)
          cPrinterName := HWG_GETDEFAULTPRINTER()
-         ::hDCPrn := Hwg_OpenPrinter( cPrinterName )
+         ::hDCPrn := Hwg_OpenPrinter(cPrinterName)
          ::cPrinterName := cPrinterName
       ELSE
-         ::hDCPrn := Hwg_OpenPrinter( cPrinter )
+         ::hDCPrn := Hwg_OpenPrinter(cPrinter)
          ::cPrinterName := cPrinter
       ENDIF
    ENDIF
@@ -193,7 +193,7 @@ METHOD END() CLASS HPrinter
       ::hDCPrn := NIL
    ENDIF
    IF !Empty(::hPrinter)
-      ClosePrinter( ::hPrinter )
+      ClosePrinter(::hPrinter)
    ENDIF
    ::ReleaseMeta()
    RETURN Nil
@@ -311,7 +311,7 @@ METHOD StartPage() CLASS HPrinter
    LOCAL fname
 
    IF ::lPreview
-      fname := IIf(::cMetaName != Nil, ::cMetaName + LTrim(Str( Len(::aMeta) + 1 )) + ".emf", Nil)
+      fname := IIf(::cMetaName != Nil, ::cMetaName + LTrim(Str(Len(::aMeta) + 1)) + ".emf", Nil)
       AAdd(::aMeta, CreateMetaFile(::hDCPrn, fname))
       ::hDC := ATail(::aMeta)
    ELSE
@@ -354,7 +354,7 @@ METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser ) CLASS HPrinter
    LOCAL lTransp := ( aBitmaps != Nil .AND. Len(aBitmaps) > 9 .AND. aBitmaps[10] != Nil .AND. aBitmaps[10] )
 
    FOR i := 1 TO nLastPage
-      AAdd(aPage, Str( i, 4 ) + ":" + Str( nLastPage, 4 ))
+      AAdd(aPage, Str(i, 4) + ":" + Str(nLastPage, 4))
    NEXT
 
    IF cTitle == Nil
@@ -367,9 +367,9 @@ METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser ) CLASS HPrinter
 
    INIT DIALOG oDlg TITLE cTitle                  ;
         At 40, 10 SIZE GetDesktopWidth(), GetDesktopHeight()                        ;
-        STYLE hwg_multibitor( WS_POPUP, WS_VISIBLE, WS_CAPTION, WS_SYSMENU, WS_SIZEBOX, WS_MAXIMIZEBOX, WS_CLIPCHILDREN ) ;
+        STYLE hwg_multibitor(WS_POPUP, WS_VISIBLE, WS_CAPTION, WS_SYSMENU, WS_SIZEBOX, WS_MAXIMIZEBOX, WS_CLIPCHILDREN) ;
         ICON HIcon():AddResource("ICON_PRW");     
-        ON INIT { | o | o:Maximize(), ::ResizePreviewDlg( oCanvas, 1 ), SetTimerPrinter( oCanvas, @oTimer ) } ;
+        ON INIT { | o | o:Maximize(), ::ResizePreviewDlg( oCanvas, 1 ), SetTimerPrinter(oCanvas, @oTimer) } ;
         ON EXIT { || oCanvas:brush := NIL, .T. }
 
 
@@ -503,7 +503,7 @@ METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser ) CLASS HPrinter
 
    RETURN Nil
 
-STATIC FUNCTION SetTimerPrinter( oDlg, oTimer )
+STATIC FUNCTION SetTimerPrinter(oDlg, oTimer)
    SET TIMER oTimer OF oDlg VALUE 500 ACTION { || TimerFunc(oDlg) }
    RETURN Nil
 

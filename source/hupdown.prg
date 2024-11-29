@@ -75,7 +75,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    HB_SYMBOL_UNUSED(bOther)
 
-   nStyle := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == Nil.OR. !lNoBorder, WS_BORDER, 0) )
+   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == Nil.OR. !lNoBorder, WS_BORDER, 0))
 
    IF !hb_IsNumeric(vari)
       vari := 0
@@ -86,7 +86,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ENDIF
 
    ::nValue := Vari
-   ::title := Str( vari )
+   ::title := Str(vari)
    ::bSetGet := bSetGet
    ::bColorOld := bColor
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
@@ -219,7 +219,7 @@ METHOD SetValue(nValue) CLASS HUpDown
        nValue := ::nValue
    ENDIF
    ::nValue := nValue
-   ::title := Str( ::nValue )
+   ::title := Str(::nValue)
    SetUpDown(::hwndUpDown, ::nValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::nValue, Self)
@@ -232,7 +232,7 @@ METHOD Refresh() CLASS HUpDown
    IF hb_IsBlock(::bSetGet) //.AND. ::nValue != Nil
       ::nValue := Eval(::bSetGet, , Self)
       IF Str(::nValue) != ::title
-         //::title := Str( ::nValue )
+         //::title := Str(::nValue)
          //SetUpDown(::hwndUpDown, ::nValue)
          ::SetValue(::nValue)
       ENDIF
@@ -374,7 +374,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
             nUpDWidth, nLower, nUpper ) CLASS HUpDown
 
-   nStyle   := Hwg_BitOr( IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT )
+   nStyle   := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT)
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor )
 
@@ -383,7 +383,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       vari := 0
       Eval(bSetGet, vari)
    ENDIF
-   ::title := Str( vari )
+   ::title := Str(vari)
    ::bSetGet := bSetGet
 
    ::styleUpDown := UDS_SETBUDDYINT + UDS_ALIGNRIGHT
@@ -469,8 +469,8 @@ METHOD Refresh() CLASS HUpDown
 
    IF hb_IsBlock(::bSetGet)
       ::value := Eval(::bSetGet)
-      IF Str( ::value ) != ::title
-         ::title := Str( ::value )
+      IF Str(::value) != ::title
+         ::title := Str(::value)
          SetUpDown(::hwndUpDown, ::value)
       ENDIF
    ELSE
