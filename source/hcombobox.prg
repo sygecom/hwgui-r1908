@@ -991,7 +991,7 @@ METHOD RowSource(xSource) CLASS HComboBox
 
    IF xSource != Nil
       IF hb_IsArray(xSource)
-        IF Len(xSource) > 0 .AND. !hb_IsArray( xSource[1] ) .AND. Len(xSource) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
+        IF Len(xSource) > 0 .AND. !hb_IsArray(xSource[1]) .AND. Len(xSource) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
            ::xrowsource := {xSource[1], IIf(LEN(xSource) > 1, xSource[2], Nil)}
         ENDIF
       ELSE
@@ -1018,7 +1018,7 @@ METHOD Populate() CLASS HComboBox
    IF Empty(::aItems)
       RETURN Nil
    ENDIF
-   xRowSource := IIf(hb_IsArray( ::xRowSource[1] ), ::xRowSource[1, 1], ::xRowSource[1])
+   xRowSource := IIf(hb_IsArray(::xRowSource[1]), ::xRowSource[1, 1], ::xRowSource[1])
    IF xRowSource != Nil .AND. ( i := At("->", xRowSource) ) > 0
        cAlias := AllTrim(Left(xRowSource, i - 1))
        IF Select(cAlias) = 0 .AND. ( i := At("(", cAlias) ) > 0

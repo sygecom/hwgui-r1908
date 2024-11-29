@@ -206,10 +206,10 @@ METHOD SetWindowOrg( x, y ) CLASS HDC
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      SetWindowOrgEx( ::m_hDC, x, y, @point )
+      SetWindowOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetWindowOrgEx( ::m_hAttribDC, x, y, @point )
+      SetWindowOrgEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -220,10 +220,10 @@ METHOD SetWindowExt(x, y) CLASS HDC
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      SetWindowExtEx( ::m_hDC, x, y, @point )
+      SetWindowExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetWindowExtEx( ::m_hAttribDC, x, y, @point )
+      SetWindowExtEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -234,10 +234,10 @@ METHOD SetViewportOrg( x, y ) CLASS HDC
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      SetViewportOrgEx( ::m_hDC, x, y, @point )
+      SetViewportOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetViewportOrgEx( ::m_hAttribDC, x, y, @point )
+      SetViewportOrgEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -247,10 +247,10 @@ METHOD SetViewportExt(x, y) CLASS HDC
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      SetViewportExtEx( ::m_hDC, x, y, @point )
+      SetViewportExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetViewportExtEx( ::m_hAttribDC, x, y, @point )
+      SetViewportExtEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 

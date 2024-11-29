@@ -49,7 +49,7 @@ CLASS PrintDos
 
    METHOD New(oPorta) CONSTRUCTOR
 
-   METHOD Say( oPRow, oPCol, oTexto, oPicture )
+   METHOD Say(oPRow, oPCol, oTexto, oPicture)
 
    METHOD SetCols(nPRow, nPCol)
 
@@ -264,7 +264,7 @@ METHOD NewLine() CLASS PrintDos
    ::nPcol := 0
    RETURN Nil
 
-METHOD Say( oProw, oPcol, oTexto, oPicture ) CLASS PrintDos
+METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    // tracelog(oProw, oPcol, oTexto, oPicture)
    IF hb_IsNumeric(oTexto)
 
@@ -399,10 +399,10 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
             EXIT
          ENDIF
          IF osize < 0
-            oPrinter:Say( stroka, 0, oCol, 2400, oCol + ( - osize + 2 ),, oFont )  //Added by  Por Fernando Athayde
+            oPrinter:Say(stroka, 0, oCol, 2400, oCol + ( - osize + 2 ),, oFont)  //Added by  Por Fernando Athayde
             oCol := oCol + ( - osize + 2 )   //Added by  Por Fernando Athayde
          ELSE
-            oPrinter:Say( stroka, 0, oCol, 2400, oCol + ( osize + 2 ),, oFont )  //Added by  Por Fernando Athayde
+            oPrinter:Say(stroka, 0, oCol, 2400, oCol + ( osize + 2 ),, oFont)  //Added by  Por Fernando Athayde
             oCol := oCol + ( osize + 2 )   //Added by  Por Fernando Athayde
          ENDIF
 
@@ -547,7 +547,7 @@ FUNCTION regenfile(o, new)
       IF nChr12 > 0
          stroka := SubStr(stroka, 1, nChr12 - 1)
       ENDIF
-      o1:say( nLine, 0, stroka )
+      o1:say(nLine, 0, stroka)
       nLine ++
 
       IF nChr12 > 0

@@ -274,7 +274,7 @@ CLASS HEditUpDown INHERIT HEdit
     //DATA Value
 
     METHOD INIT()
-    METHOD Notify( lParam )
+    METHOD Notify(lParam)
     METHOD Refresh()
     METHOD Move()  VIRTUAL
 
@@ -289,7 +289,7 @@ METHOD Init() CLASS HEditUpDown
    ENDIF
    RETURN Nil
 
-METHOD Notify( lParam ) CLASS HeditUpDown
+METHOD Notify(lParam) CLASS HeditUpDown
    Local nCode := GetNotifyCode(lParam)
    Local iPos := GETNOTIFYDELTAPOS(lParam, 1)
    Local iDelta := GETNOTIFYDELTAPOS(lParam, 2)

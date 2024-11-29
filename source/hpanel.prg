@@ -280,9 +280,9 @@ METHOD Release() CLASS HPanel
             ::oParent:aOffset[3] -= ::nWidth
          ENDIF
       ENDIF
-      ::oParent:aOffset[1] := MAX( ::oParent:aOffset[1] , 0 )
-      ::oParent:aOffset[2] := MAX( ::oParent:aOffset[2] , 0 )
-      ::oParent:aOffset[3] := MAX( ::oParent:aOffset[3] , 0 )
+      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1] , 0)
+      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2] , 0)
+      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3] , 0)
       SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
       ::nHeight := 0
       ::nWidth := 0
@@ -410,9 +410,9 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
          ENDIF
          lRes := .T.
       ENDIF
-      ::oParent:aOffset[1] := MAX( ::oParent:aOffset[1] , 0 )
-      ::oParent:aOffset[2] := MAX( ::oParent:aOffset[2] , 0 )
-      ::oParent:aOffset[3] := MAX( ::oParent:aOffset[3] , 0 )
+      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1] , 0)
+      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2] , 0)
+      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3] , 0)
       IF lRes
          SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
       ENDIF

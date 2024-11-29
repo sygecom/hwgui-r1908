@@ -28,8 +28,8 @@ CLASS TMci
 
    METHOD lOpen()
 
-   METHOD Play( nFrom, nTo, hWnd ) INLINE ;
-   ::nError := nMciPlay( ::nId, nFrom, nTo, hWnd )
+   METHOD Play(nFrom, nTo, hWnd) INLINE ;
+   ::nError := nMciPlay(::nId, nFrom, nTo, hWnd)
 
    METHOD cGetError()
 

@@ -207,7 +207,7 @@ CLASS VAR winclass   INIT "BUTTON"
    METHOD Init()
    METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp)
    METHOD GetValue() INLINE ( SendMessage(::handle, BM_GETCHECK, 0, 0) == 1 )
-  // METHOD Notify( lParam )
+  // METHOD Notify(lParam)
    METHOD onevent(msg, wParam, lParam)
    METHOD onGotFocus()
    METHOD onClick()
@@ -317,7 +317,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
       ::oParent:AddEvent(BN_SETFOCUS, self, { | o, id | ::When(o:FindControl(id)) },, "onGotFocus")
       ::lnoValid := .T.
    ENDIF
-   //::oParent:AddEvent(BN_KILLFOCUS, Self, { || ::Notify( WM_KEYDOWN ) })
+   //::oParent:AddEvent(BN_KILLFOCUS, Self, { || ::Notify(WM_KEYDOWN) })
    ::oParent:AddEvent(BN_KILLFOCUS, Self, { || CheckFocus(Self, .T.) })
    IF ::oGroup != Nil
       AAdd(::oGroup:aButtons, Self)
@@ -377,7 +377,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
 
    RETURN -1
 /*
-METHOD Notify( lParam ) CLASS HRadioButton
+METHOD Notify(lParam) CLASS HRadioButton
    LOCAL ndown := getkeystate(VK_RIGHT) + getkeystate(VK_DOWN) + GetKeyState(VK_TAB)
    LOCAL nSkip := 0
 

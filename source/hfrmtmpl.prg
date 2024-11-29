@@ -205,7 +205,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
             IF o:title == "property"
                IF !Empty(o:aItems)
                   AAdd(aProp, { Lower(o:GetAttribute("name")), o:aItems[1] })
-                  IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
+                  IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty(Atail(aProp)[2])
                      ::lDebug := .T.
                      SetDebugInfo(.T.)
                   ENDIF
@@ -254,7 +254,7 @@ METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
    nstyle := DS_ABSALIGN + WS_VISIBLE + WS_SYSMENU + WS_SIZEBOX
 
    FOR i := 1 TO Len(::aProp)
-      xProperty := hfrm_GetProperty( ::aProp[i, 2] )
+      xProperty := hfrm_GetProperty(::aProp[i, 2])
 
       IF ::aProp[i, 1] == "geometry"
          nLeft   := Val(xProperty[1])
@@ -598,9 +598,9 @@ STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF ( cName := Lower(o:GetAttribute("name")) ) == "varname"
-                  AAdd(oForm:aVars, hfrm_GetProperty( o:aItems[1] ))
+                  AAdd(oForm:aVars, hfrm_GetProperty(o:aItems[1]))
                ELSEIF cName == "name"
-                  AAdd(oForm:aNames, hfrm_GetProperty( o:aItems[1] ))
+                  AAdd(oForm:aNames, hfrm_GetProperty(o:aItems[1]))
                ENDIF
                IF cName == "atree"
                   AAdd(aProp, { cName, ReadTree(pp, oForm, , o) })
@@ -733,7 +733,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
    shcolor := 0
 
    FOR i := 1 TO Len(oCtrlTmpl:aProp)
-      xProperty := hfrm_GetProperty( oCtrlTmpl:aProp[i, 2] )
+      xProperty := hfrm_GetProperty(oCtrlTmpl:aProp[i, 2])
       cPName := oCtrlTmpl:aProp[i, 1]
       //msginfo(cpname)
       IF cPName == "geometry"
@@ -1037,7 +1037,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             oCtrl:Alias := cAliasdbf
             IF !Empty(cKey)
                &( oCtrl:Alias ) ->( DBSetOrder(cKey) )
-               cKey := ( oCtrl:Alias ) ->( ordkey( cKey ) )
+               cKey := ( oCtrl:Alias ) ->( ordkey(cKey) )
                cKey := IIf(At("+", cKey) > 0, Left(cKey, At("+", cKey) - 1), cKey)
             ENDIF
             cRelexpr := IIf(!Empty(cRelexpr), cRelexpr, cKey)
@@ -1179,7 +1179,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN stroka + "}"
 
-   FUNCTION hfrm_GetProperty( xProp )
+   FUNCTION hfrm_GetProperty(xProp)
       LOCAL c
 
       IF hb_IsChar(xProp)
@@ -1278,8 +1278,8 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF !Empty(o:aItems)
-                  AAdd(aProp, { Lower(o:GetAttribute("name")), hfrm_GetProperty( o:aItems[1] ) })
-                  IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty( Atail(aProp)[2] )
+                  AAdd(aProp, { Lower(o:GetAttribute("name")), hfrm_GetProperty(o:aItems[1]) })
+                  IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty(Atail(aProp)[2])
                      ::lDebug := .T.
                      SetDebugInfo(.T.)
                   ENDIF
@@ -1519,7 +1519,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
          IF hb_IsChar(cText)
             IF ( xProperty := aGetSecond(oItem:aProp, "border") ) != Nil ;
                  .AND. xProperty
-               ::oPrinter:Box( x, y, x2, y2 )
+               ::oPrinter:Box(x, y, x2, y2)
                x += 0.5
                y += 0.5
             ENDIF
@@ -1545,20 +1545,20 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                nFirst := i := 1
                ny := y
                DO WHILE ( i := hb_At(";", cText, i) ) > 0
-                  ::oPrinter:Say( SubStr(cText, nFirst, i - nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj )
+                  ::oPrinter:Say(SubStr(cText, nFirst, i - nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj)
                   i ++
                   nFirst := i
                   ny += dy
                ENDDO
-               ::oPrinter:Say( SubStr(cText, nFirst, Len(cText) - nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj )
+               ::oPrinter:Say(SubStr(cText, nFirst, Len(cText) - nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj)
             ELSE
-               ::oPrinter:Say( cText, x, y, x2, y2, nJustify, oItem:obj )
+               ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
             SetTransparentMode(::oPrinter:hDC, .F.)
             // Writelog( str(x)+" "+str(y)+" "+str(x2)+" "+str(y2)+" "+str(::nAOffSet)+" "+str(::nTOffSet)+" Say: "+cText)
          ENDIF
       ELSEIF oItem:cClass == "box"
-         ::oPrinter:Box( x, y, x2, y2, oItem:oPen )
+         ::oPrinter:Box(x, y, x2, y2, oItem:oPen)
          // writelog( "Draw "+str(x)+" "+str(x+width-1) )
       ELSEIF oItem:cClass == "vline"
          ::oPrinter:Line(x, y, x, y2, oItem:oPen)
@@ -1570,7 +1570,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
          ENDIF
          ::oPrinter:Bitmap(x, y, x2, y2,, oItem:obj)
       ENDIF
-      ::ny := Max( ::ny, y2 + ::nAOffSet )
+      ::ny := Max(::ny, y2 + ::nAOffSet)
    ENDIF
 
    IF ( aMethod := aGetSecond(oItem:aMethods, "onend") ) != Nil
@@ -1630,7 +1630,7 @@ STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
          FOR j := 1 TO Len(aItems[i]:aItems)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
-               AAdd(aProp, { Lower(o:GetAttribute("name")), IIf(Empty(o:aItems), "", hfrm_GetProperty( o:aItems[1] )) })
+               AAdd(aProp, { Lower(o:GetAttribute("name")), IIf(Empty(o:aItems), "", hfrm_GetProperty(o:aItems[1])) })
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"

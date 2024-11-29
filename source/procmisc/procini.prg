@@ -179,7 +179,7 @@ LOCAL poz1
 //LOCAL i := 0 (variable/value not used)
 //LOCAL lenm (variable not used)
 LOCAL len1, strv, newname
-   poz1 := FIND_Z( SubStr(stroka, 2), "}" )
+   poz1 := FIND_Z(SubStr(stroka, 2), "}")
    IF poz1 != 0
       stroka := SubStr(stroka, 2, poz1 - 1)
       //lenm   := Len(&vname) (value not used)
@@ -188,7 +188,7 @@ LOCAL len1, strv, newname
             EXIT
          ELSE
             //i ++ (value not used)
-            poz1 := FIND_Z( stroka )
+            poz1 := FIND_Z(stroka)
             strv := LTrim(SubStr(stroka, 1, IIf(poz1 = 0, 9999, poz1 - 1)))
             IF ASC(strv) = 123 .AND. SubStr(strv, 2, 1) != "|"              // {
                AADD(&vname, {})

@@ -73,7 +73,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD SetItemCount(nItem) INLINE Listview_setitemcount(::handle, nItem)
    METHOD Row() INLINE Listview_getfirstitem(::handle)
    METHOD AddRow(a, bUpdate)
-   METHOD Notify( lParam )
+   METHOD Notify(lParam)
 
    METHOD DELETEROW() INLINE IIf(::bFlag , ( SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F. ), .T.)
    METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := {}, SendMessage(::handle, LVM_DELETEALLITEMS, 0, 0)
@@ -153,7 +153,7 @@ METHOD Init() CLASS HGridEx
          nmax := aBmpSize[3]
          FOR n := 2 TO Len(aButton)
             aBmpSize := GetBitmapSize(aButton[n])
-            nmax := Max( nmax, aBmpSize[3] )
+            nmax := Max(nmax, aBmpSize[3])
          NEXT
 
 
@@ -184,7 +184,7 @@ METHOD Init() CLASS HGridEx
       Listview_Init(::handle, ::ItemCount, ::lNoLines)
 
       FOR i := 1 TO Len(::aColumns)
-         Listview_addcolumnEX( ::handle, i, ::aColumns[i, 1], ::aColumns[i , 2], ::aColumns[i, 3], IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4]  , - 1) )
+         Listview_addcolumnEX(::handle, i, ::aColumns[i, 1], ::aColumns[i , 2], ::aColumns[i, 3], IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4], - 1))
 
       NEXT
       IF Len(::aRow) > 0
@@ -192,7 +192,7 @@ METHOD Init() CLASS HGridEx
             aTemp := ::aRow[n]
             aTemp1 := ::aRowBitMap[n]
             FOR n1 := 1 TO Len(aTemp)
-               LISTVIEW_INSERTITEMEX( ::handle, n, n1, aTemp[n1], aTemp1[n1] )
+               LISTVIEW_INSERTITEMEX(::handle, n, n1, aTemp[n1], aTemp1[n1])
             NEXT
          NEXT
 
@@ -250,7 +250,7 @@ METHOD AddRow(a, bupdate) CLASS HGRIDEX
 
    RETURN NIL
 
-METHOD Notify( lParam ) CLASS HGRIDEX
+METHOD Notify(lParam) CLASS HGRIDEX
    LOCAL nCode := GetNotifyCode(lParam)
    LOCAL Res, iSelect, oParent := ::GetParentForm()
 
@@ -287,7 +287,7 @@ METHOD Notify( lParam ) CLASS HGRIDEX
    IF nCode == LVN_KEYDOWN
    ENDIF
 
-   Res := ListViewNotify( Self, lParam )
+   Res := ListViewNotify(Self, lParam)
    IF hb_IsNumeric(Res)
       Hwg_SetDlgResult(oParent:handle, Res)
       //RETURN 1
@@ -319,7 +319,7 @@ METHOD UpdateData() CLASS hGridex
 
    FOR n1 := 1 TO Len(aTemp)
 
-      LISTVIEW_INSERTITEMEX( ::handle, n, n1, aTemp[n1], atemp1[n1] )
+      LISTVIEW_INSERTITEMEX(::handle, n, n1, aTemp[n1], atemp1[n1])
    NEXT
 
    RETURN .T.

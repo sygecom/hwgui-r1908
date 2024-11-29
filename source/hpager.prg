@@ -35,7 +35,7 @@ CLASS HPager INHERIT HControl
    METHOD Activate()
    METHOD INIT()
 
-   METHOD Notify( lParam )
+   METHOD Notify(lParam)
    METHOD PAGERSETCHILD(b) INLINE ::hTool := b, PAGERSETCHILD(::handle, b)
    METHOD PAGERRECALCSIZE() INLINE PAGERRECALCSIZE(::handle)
    METHOD PAGERFORWARDMOUSE(b) INLINE PAGERFORWARDMOUSE(::handle, b)
@@ -105,7 +105,7 @@ METHOD INIT() CLASS HPager
    ENDIF
    RETURN Nil
 
-METHOD Notify( lParam ) CLASS HPager
+METHOD Notify(lParam) CLASS HPager
 
    LOCAL nCode :=  GetNotifyCode(lParam)
 

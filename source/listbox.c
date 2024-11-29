@@ -31,7 +31,7 @@ HB_FUNC(LISTBOXSETSTRING)
 }
 
 /*
-   CreateListbox( hParentWIndow, nListboxID, nStyle, x, y, nWidth, nHeight)
+   CreateListbox(hParentWIndow, nListboxID, nStyle, x, y, nWidth, nHeight)
 */
 HB_FUNC(CREATELISTBOX)
 {

@@ -180,8 +180,8 @@ CLASS RichText
    // Shaded text
    // Frames
    // Text Boxes
-   METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
-                      lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd )
+   METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
+                      lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd)
    METHOD EndTextBox()
    METHOD SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos)
 
@@ -256,11 +256,11 @@ METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nSc
    ::lTrimSpaces := .F.
 
    IF aFontFam == NIL
-      aFontFam := Array( aFontData )
+      aFontFam := Array(aFontData)
       AFill(aFontFam, "fnil")
    ENDIF
    IF aFontChar == NIL
-      aFontChar := Array( aFontData )
+      aFontChar := Array(aFontData)
       AFill(aFontChar, 0)
    ENDIF
 
@@ -772,7 +772,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    nTblRows TO 1, ;
    nTblColumns TO 1, ;
    nTblRHgt TO NIL, ;
-   aTableCWid  TO  Array( nTblColumns ), ; // see below
+   aTableCWid  TO  Array(nTblColumns), ; // see below
    cRowBorder  TO  "NONE", ;
    cCellBorder  TO  "SINGLE", ;
    lTblNoSplit  TO  .F., ;
@@ -797,7 +797,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    NEXT
 
    IF aColPct == NIL
-      aColPct   := Array( nTblColumns )
+      aColPct   := Array(nTblColumns)
       AFill(aColPct, 0)
    ENDIF
 
@@ -1579,8 +1579,8 @@ METHOD FootNote(cTexto, cChar, nFontNumber, ;
 
    RETURN NIL
 
-METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
-                   lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd ) CLASS RichText
+METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
+                   lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd) CLASS RichText
 
    DEFAULT cTexto TO "", ;
    aOffset TO { 0, 0 }, ;
@@ -1990,7 +1990,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    nTblRows  TO  1, ;
    nTblColumns TO  1, ;
    nTblRHgt  TO  NIL, ;
-   aTableCWid  TO  Array( nTblColumns ), ; // see below
+   aTableCWid  TO  Array(nTblColumns), ; // see below
    cRowBorder  TO  "NONE", ;
    cCellBorder  TO  "SINGLE", ;
    lTblNoSplit  TO  .F., ;
@@ -2017,7 +2017,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    NEXT
 
    IF aColPct == NIL
-      aColPct   := Array( nTblColumns )
+      aColPct   := Array(nTblColumns)
       AFill(aColPct, 0)
    ENDIF
 
@@ -2628,9 +2628,9 @@ FUNCTION cFileExt(cFile)
 
       CASE cType == "P"
 #if defined(__XHARBOUR__)
-         RETURN NumToHex( xExp )
+         RETURN NumToHex(xExp)
 #else
-         RETURN hb_NumToHex( xExp )
+         RETURN hb_NumToHex(xExp)
 #endif
 
       CASE cType == "H"

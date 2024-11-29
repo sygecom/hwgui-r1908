@@ -284,7 +284,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD Expand(oNode, lAllNode)   //BLOCK { | Self, o | SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
    METHOD Select(oNode) BLOCK { | Self, o | SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle) }
    METHOD Clean()
-   METHOD Notify( lParam )
+   METHOD Notify(lParam)
    METHOD END() INLINE ( ::Super:END(), ReleaseTree(::aItems) )
    METHOD isExpand(oNodo) INLINE !CheckBit(oNodo, TVE_EXPAND)
    METHOD onEvent(msg, wParam, lParam)
@@ -528,7 +528,7 @@ METHOD ItemHeight(nHeight) CLASS HTree
    ENDIF
    RETURN  nHeight
 
-METHOD Notify( lParam ) CLASS HTree
+METHOD Notify(lParam) CLASS HTree
    LOCAL nCode := GetNotifyCode(lParam), oItem, cText, nAct, nHitem, leval
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
     
@@ -542,8 +542,8 @@ METHOD Notify( lParam ) CLASS HTree
    IF nCode == TVN_SELCHANGING  //.AND. ::oitem != Nil // .OR. NCODE = -500
 
    ELSEIF nCode == TVN_SELCHANGED //.OR. nCode == TVN_ITEMCHANGEDW
-      ::oItemOld := Tree_GetNotify( lParam, TREE_GETNOTIFY_OLDPARAM )
-      oItem := Tree_GetNotify( lParam, TREE_GETNOTIFY_PARAM )
+      ::oItemOld := Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
+      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          oItem:oTree:oSelected := oItem
          IF oItem != Nil .AND. !oItem:oTree:lEmpty
@@ -564,8 +564,8 @@ METHOD Notify( lParam ) CLASS HTree
       // Return 1
 
    ELSEIF nCode == TVN_ENDLABELEDIT  .or. nCode == TVN_ENDLABELEDITW
-      IF !Empty(cText := Tree_GetNotify( lParam, TREE_GETNOTIFY_EDIT ))
-         oItem := Tree_GetNotify( lParam, TREE_GETNOTIFY_EDITPARAM )
+      IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
+         oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
          IF hb_IsObject(oItem)
             IF !(cText == oItem:GetText())  .AND. ;
                ( oItem:oTree:bItemChange == Nil .OR. Eval(oItem:oTree:bItemChange, oItem, cText) )
@@ -576,17 +576,17 @@ METHOD Notify( lParam ) CLASS HTree
       ::oParent:aEvents := s_aEvents
       
    ELSEIF nCode == TVN_ITEMEXPANDING .or. nCode == TVN_ITEMEXPANDINGW
-      oItem := Tree_GetNotify( lParam, TREE_GETNOTIFY_PARAM )
+      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          IF ::bExpand != Nil
             RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
-                              CheckBit(Tree_GetNotify( lParam, TREE_GETNOTIFY_ACTION ), TVE_EXPAND)), ;
+                              CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
                         0, 1)
          ENDIF
       ENDIF
 
    ELSEIF nCode = TVN_BEGINDRAG .AND. ::lDragDrop
-      ::hitemDrag := Tree_GetNotify( lParam, TREE_GETNOTIFY_PARAM )
+      ::hitemDrag := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       ::lDragging := .T.
 
    ELSEIF nCode = TVN_KEYDOWN
@@ -595,7 +595,7 @@ METHOD Notify( lParam ) CLASS HTree
       ENDIF
 
     ELSEIF nCode = NM_CLICK  //.AND. ::oitem != Nil // .AND. !::lEditLabels
-       nHitem :=  Tree_GetNotify( lParam, 1 )
+       nHitem :=  Tree_GetNotify(lParam, 1)
        //nHitem :=  GETNOTIFYcode(lParam)
        oItem  := tree_Hittest(::handle,,, @nAct)
        IF nAct = TVHT_ONITEMSTATEICON

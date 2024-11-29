@@ -285,8 +285,8 @@ METHOD PrintText(cText) CLASS HWinPrn
    IF ::lChanged
       ::SetMode()
    ENDIF
-   ::oPrinter:Say( IIf(::cpFrom!=::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
-            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined )
+   ::oPrinter:Say(IIf(::cpFrom!=::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
+            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
    ::x += ( ::nCharW * Len(cText) )
 
 Return Nil

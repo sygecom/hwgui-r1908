@@ -29,7 +29,7 @@ CLASS TVideo FROM hControl
 
    METHOD Initiate()
 
-   METHOD Play( nFrom, nTo ) INLINE  ::oMci:Play( nFrom, nTo, ::oparent:handle )
+   METHOD Play(nFrom, nTo) INLINE  ::oMci:Play(nFrom, nTo, ::oparent:handle)
 
 ENDCLASS
 

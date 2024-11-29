@@ -361,8 +361,8 @@ HB_FUNC(CREATEENHMETAFILE)
 
   GetClientRect(hWnd, &rc);
   // sprintf( cres,"%d %d %d %d %d %d %d %d",iWidthMM, iHeightMM, iWidthPels,
-  // iHeightPels,rc.left,rc.top,rc.right,rc.bottom ); MessageBox( GetActiveWindow(), cres, "", MB_OK |
-  // MB_ICONINFORMATION );
+  // iHeightPels,rc.left,rc.top,rc.right,rc.bottom ); MessageBox(GetActiveWindow(), cres, "", MB_OK |
+  // MB_ICONINFORMATION);
 
   /*
    * Convert client coordinates to .01-mm units.

@@ -474,16 +474,16 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
             stroka := aItem[ITEM_CAPTION]
          ENDIF
          IF !Empty(aItem[ITEM_CAPTION])
-            oPrinter:Say( stroka, x1, y1, x2, y2, ;
+            oPrinter:Say(stroka, x1, y1, x2, y2, ;
                           IIf(aItem[ITEM_ALIGN] == 0, DT_LEFT, IIf(aItem[ITEM_ALIGN] == 1, DT_RIGHT, DT_CENTER)), ;
-                          aItem[ITEM_STATE] )
+                          aItem[ITEM_STATE])
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
          oPrinter:Line(x1, Round((y1 + y2) / 2, 0), x2, Round((y1 + y2) / 2, 0), aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_VLINE
          oPrinter:Line(Round((x1 + x2) / 2, 0), y1, Round((x1 + x2) / 2, 0), y2, aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_BOX
-         oPrinter:Box( x1, y1, x2, y2, aItem[ITEM_PEN] )
+         oPrinter:Box(x1, y1, x2, y2, aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          hBitmap := OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
          // writelog( "hBitmap: "+str(hBitmap) )

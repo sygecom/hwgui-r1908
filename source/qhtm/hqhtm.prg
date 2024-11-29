@@ -25,7 +25,7 @@ CLASS HQhtm INHERIT HControl
    METHOD Activate()
    METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, resname)
    METHOD Init()
-   METHOD Notify( lParam )
+   METHOD Notify(lParam)
 
 ENDCLASS
 
@@ -106,8 +106,8 @@ METHOD Init CLASS HQhtm
 
 Return Nil
 
-METHOD Notify( lParam ) CLASS HQhtm
-Local cLink := QHTM_GetNotify( lParam )
+METHOD Notify(lParam) CLASS HQhtm
+Local cLink := QHTM_GetNotify(lParam)
 
    IF ::bLink == Nil .OR. !Eval(::bLink, Self, cLink)
       IF "tp://" $ clink

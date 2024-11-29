@@ -51,17 +51,17 @@ LOCAL varName, iPosEnd, iPos3
    IF Empty(stroka)
       RETURN ""
    ELSE
-      IF ( iPosEnd := Find_Z( stroka ) ) == 0
+      IF ( iPosEnd := Find_Z(stroka) ) == 0
          iPosEnd := IIf(Right(stroka, 1) = ";", Len(stroka), Len(stroka) + 1)
       ENDIF
-      ipos3    := Find_Z( Left(stroka, iPosEnd - 1), ":" )
+      ipos3    := Find_Z(Left(stroka, iPosEnd - 1), ":")
       varName  := RTrim(LTrim(Left(stroka, IIf(ipos3 = 0, iPosEnd, iPos3) - 1)))
       varValue := IIf(iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), Nil)
       stroka   := SubStr(stroka, iPosEnd + 1)
    ENDIF
 RETURN varName
 
-FUNCTION FIND_Z( stroka, symb )
+FUNCTION FIND_Z(stroka, symb)
 
 LOCAL poz, poz1 := 1, i, j, ms1 := "(){}[]'" + '"', ms2 := { 0, 0, 0, 0, 0, 0, 0, 0 }
 

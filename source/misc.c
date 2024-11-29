@@ -335,7 +335,7 @@ HB_FUNC(ACTIVATEKEYBOARDLAYOUT)
 }
 
 /*
- * Pts2Pix( nPoints [,hDC] ) --> nPixels
+ * Pts2Pix(nPoints [,hDC]) --> nPixels
  * Conversion from points to pixels, provided by Vic McClung.
  */
 

@@ -247,11 +247,11 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       aLen := Len(arr)
       IF hb_IsArray(arr[1])
          FOR i := 1 TO aLen
-            nLen := Max( nLen, Len(arr[i, 1]) )
+            nLen := Max(nLen, Len(arr[i, 1]))
          NEXT
       ELSE
          FOR i := 1 TO aLen
-            nLen := Max( nLen, Len(arr[i]) )
+            nLen := Max(nLen, Len(arr[i]))
          NEXT
       ENDIF
    ENDIF
@@ -266,7 +266,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    IF height > aArea[2] - aRect[2] - nTop - 60
       height := aArea[2] - aRect[2] - nTop - 60
    ENDIF
-   width := Max( aMetr[2] * 2 * nLen + addX, minWidth )
+   width := Max(aMetr[2] * 2 * nLen + addX, minWidth)
 
    INIT DIALOG oDlg TITLE cTitle ;
         At nLeft, nTop           ;
@@ -377,7 +377,7 @@ FUNCTION EndWindow()
 FUNCTION HdSerial(cDrive)
 
    LOCAL n       :=  HDGETSERIAL(cDrive)
-   LOCAL cHex    :=  HB_NUMTOHEX( n )
+   LOCAL cHex    :=  HB_NUMTOHEX(n)
    LOCAL cResult
    cResult := SubStr(cHex, 1, 4) + "-" + SubStr(cHex, 5, 4)
 

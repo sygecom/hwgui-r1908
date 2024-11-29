@@ -68,9 +68,9 @@ CLASS HPrinter INHERIT HObject
    METHOD PrintMeta(nPage)
    METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser)
    METHOD END()
-   METHOD Box( x1, y1, x2, y2, oPen, oBrush )
+   METHOD Box(x1, y1, x2, y2, oPen, oBrush)
    METHOD Line(x1, y1, x2, y2, oPen)
-   METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor )
+   METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor)
    METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap)
    METHOD GetTextWidth( cString, oFont )
    METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) HIDDEN
@@ -198,7 +198,7 @@ METHOD END() CLASS HPrinter
    ::ReleaseMeta()
    RETURN Nil
 
-METHOD Box( x1, y1, x2, y2, oPen, oBrush ) CLASS HPrinter
+METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
 
    IF oPen != Nil
       SelectObject(::hDC, oPen:handle)
@@ -207,9 +207,9 @@ METHOD Box( x1, y1, x2, y2, oPen, oBrush ) CLASS HPrinter
       SelectObject(::hDC, oBrush:handle)
    ENDIF
    IF ::lmm
-      Box( ::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2 )
+      Box(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
    ELSE
-      Box( ::hDC, x1, y1, x2, y2 )
+      Box(::hDC, x1, y1, x2, y2)
    ENDIF
 
    RETURN Nil
@@ -227,7 +227,7 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
    RETURN Nil
 
-METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor ) CLASS HPrinter
+METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPrinter
    LOCAL hFont, nOldTC, nOldBC
 
    IF oFont != Nil

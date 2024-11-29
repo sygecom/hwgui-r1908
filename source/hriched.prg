@@ -47,7 +47,7 @@ CLASS HRichEdit INHERIT HControl
    METHOD Valid()
    METHOD UpdatePos()
    METHOD onChange()
-   METHOD ReadOnly( lreadOnly ) SETGET
+   METHOD ReadOnly(lreadOnly) SETGET
    METHOD SetColor(tColor, bColor, lRedraw)
    METHOD SaveFile(cFile)
    METHOD OpenFile(cFile)
@@ -196,7 +196,7 @@ METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 
    RETURN NIL
 
-METHOD ReadOnly( lreadOnly )
+METHOD ReadOnly(lreadOnly)
 
    IF lreadOnly != Nil
       IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))

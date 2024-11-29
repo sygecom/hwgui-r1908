@@ -167,7 +167,7 @@ CLASS HTab INHERIT HControl
    METHOD HidePage(nPage)
    METHOD ShowPage(nPage)
    METHOD GetActivePage(nFirst, nEnd)
-   METHOD Notify( lParam )
+   METHOD Notify(lParam)
    METHOD OnEvent(msg, wParam, lParam)
    METHOD Refresh( lAll )
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
@@ -690,7 +690,7 @@ RETURN ::nActive
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Notify( lParam ) CLASS HTab
+METHOD Notify(lParam) CLASS HTab
    
    LOCAL nCode := GetNotifyCode(lParam)
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
@@ -1313,7 +1313,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     IF oPage:oParent:himl != NIL
         BmpSize := ( ( aItemPos[3] - aItemPos[1] ) - ( oPage:oParent:aBmpSize[1] + aTxtSize[1] ) ) / 2
         BmpSize += oPage:oParent:aBmpSize[1]
-        BmpSize := MAX( BmpSize, oPage:oParent:aBmpSize[1] )
+        BmpSize := MAX(BmpSize, oPage:oParent:aBmpSize[1])
     ENDIF
     aItemPos[3] := IIF(size > oPage:oParent:nWidth .AND. aItemPos[1] + BmpSize + aTxtSize[1] > oPage:oParent:nWidth - 44, oPage:oParent:nWidth - 44, aItemPos[3])
     aItemRect := {aItemPos[1] + IIF(oPage:PageOrder == nActive + 1, 1, 0), aItemPos[2], aItemPos[3] - IIF(oPage:PageOrder == Len(oPage:oParent:Pages), 2, IIF(oPage:PageOrder == nActive - 1, 1, 0)), aItemPos[4] - 1}
