@@ -206,7 +206,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
    ENDIF
    //::nHeight := ( ::nHeight + 16.250 ) *  nDisplay
    ::lResource := .T.
-   ::Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip )
+   ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip)
 
    ::nDisplay := nDisplay
 
@@ -357,7 +357,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
       ENDIF
    ENDIF
    IF msg = WM_MOUSEWHEEL .AND. ::oParent:nScrollBars != -1 .AND. ::oParent:bScroll = Nil
-      ::super:ScrollHV( ::oParent, msg, wParam, lParam )
+      ::super:ScrollHV(::oParent, msg, wParam, lParam)
       RETURN 0
    ELSEIF msg = CB_SHOWDROPDOWN
       ::ldropshow := IIf(wParam = 1, .T., ::ldropshow)

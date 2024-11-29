@@ -25,7 +25,7 @@ CLASS HRadioGroup INHERIT HControl //HObject
    DATA bClick
 
 
-   METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle )
+   METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle)
    METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
               cCaption, oFont, bInit, bSize,tcolor, bColor,bClick,;
               bGFocus,lTransp )
@@ -43,7 +43,7 @@ CLASS HRadioGroup INHERIT HControl //HObject
 
 ENDCLASS
 
-METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
+METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle) CLASS HRadioGroup
 
    ::oGroupCurrent := Self
    ::aButtons := {}
@@ -51,7 +51,7 @@ METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
 
    ::lEnabled :=  !Hwg_BitAnd(nStyle, WS_DISABLED) > 0
 
-   ::Super:New( ::oParent, ,, ,,,,, bInit)
+   ::Super:New(::oParent, ,, ,,,,, bInit)
 
    ::bInit := bInit
    ::bClick := bClick
@@ -76,9 +76,9 @@ METHOD NewRg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeig
    ::aButtons := {}
    ::lEnabled :=  !Hwg_BitAnd(nStyle, WS_DISABLED) > 0
 
-   ::Super:New( ::oParent,,,nLeft, nTop, nWidth, nHeight, oFont, bInit )
-   ::oHGroup := HGroup():New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
-                              oFont, bInit, bSize, , tcolor, bColor, lTransp, Self )
+   ::Super:New(::oParent,,,nLeft, nTop, nWidth, nHeight, oFont, bInit)
+   ::oHGroup := HGroup():New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
+                              oFont, bInit, bSize, , tcolor, bColor, lTransp, Self)
                               
    ::lInit := .T.
    ::bInit := bInit
@@ -201,8 +201,8 @@ CLASS VAR winclass   INIT "BUTTON"
    DATA  oGroup
    DATA lWhen  INIT .F.
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-               bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp )
+   METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+               bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp)
    METHOD Activate()
    METHOD Init()
    METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp)
@@ -217,8 +217,8 @@ CLASS VAR winclass   INIT "BUTTON"
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-            bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp ) CLASS HRadioButton
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+            bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp) CLASS HRadioButton
 
    ::oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 
@@ -230,8 +230,8 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
                         BS_NOTIFY + ;  // WS_CHILD + WS_VISIBLE
                        IIf(::oGroup != Nil .AND. Empty(::oGroup:aButtons), WS_GROUP , 0))
 
-   ::Super:New( oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;
-              oFont, bInit, bSize, bPaint,ctooltip, tcolor, bColor )
+   ::Super:New(oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;
+              oFont, bInit, bSize, bPaint,ctooltip, tcolor, bColor)
 
    ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
 

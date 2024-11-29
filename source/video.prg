@@ -22,8 +22,8 @@ CLASS TVideo FROM hControl
    DATA   oMci
    DATA   cAviFile
 
-   METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, ;
-               bWhen, bValid, lNoBorder , nid ) CONSTRUCTOR
+   METHOD New(nRow, nCol, nWidth, nHeight, cFileName, oWnd, ;
+               bWhen, bValid, lNoBorder , nid) CONSTRUCTOR
 
    METHOD ReDefine(nId, cFileName, oDlg, bWhen, bValid) CONSTRUCTOR
 
@@ -35,7 +35,7 @@ ENDCLASS
 
 //----------------------------------------------------------------------------//
 
-METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS TVideo
+METHOD New(nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid) CLASS TVideo
 
    DEFAULT nWidth TO 200, nHeight TO 200, cFileName TO "", ;
    lNoBorder TO .F.
@@ -49,7 +49,7 @@ METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS
    ::oParent   := IIf(oWnd == Nil, ::oDefaultParent, oWnd)
    ::id        := IIf(nid == Nil, ::NewId(), nid)
    ::cAviFile  := cFileName
-   ::oMci      := TMci():New( "avivideo", cFileName )
+   ::oMci      := TMci():New("avivideo", cFileName)
    ::Initiate()
 
    IF !Empty(::oparent:handle)
@@ -70,7 +70,7 @@ METHOD ReDefine(nId, cFileName, oDlg, bWhen, bValid) CLASS TVideo
    ::bWhen    = bWhen
    ::bValid   = bValid
    ::oWnd     = oDlg
-   ::oMci     = TMci():New( "avivideo", cFileName )
+   ::oMci     = TMci():New("avivideo", cFileName)
 
    oDlg:AddControl(Self)
 

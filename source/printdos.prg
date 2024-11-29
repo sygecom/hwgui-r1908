@@ -47,7 +47,7 @@ CLASS PrintDos
    DATA nEndPage init 0
    DATA nCopy init 1
 
-   METHOD New( oPorta ) CONSTRUCTOR
+   METHOD New(oPorta) CONSTRUCTOR
 
    METHOD Say( oPRow, oPCol, oTexto, oPicture )
 
@@ -78,13 +78,13 @@ CLASS PrintDos
 
    METHOD TxttoGraphic(fName, osize, oPreview)
 
-   METHOD Preview( fname, cTitle )
+   METHOD Preview(fname, cTitle)
 
    METHOD END()
 
 ENDCLASS
 
-METHOD New( oPorta ) CLASS PrintDos
+METHOD New(oPorta) CLASS PrintDos
    LOCAL oDouble  := { oMATRIXDOUBLE, oINKJETDOUBLE, oLASER10CPI }
    LOCAL oNormal  := { oMATRIXNORMAL, oINKJETNORMAL, oLASER12CPI }
    LOCAL oCompress := { oMATRIXCOMPRESS, oINKJETCOMPRESS, oLASER18CPI }
@@ -361,7 +361,7 @@ METHOD PrinterFile(fname) CLASS PrintDos
 
    RETURN .T.
 
-FUNCTION wProw( oPrinter )
+FUNCTION wProw(oPrinter)
    RETURN oPrinter:nProw
 
 FUNCTION wPCol(oPrinter)
@@ -426,7 +426,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
    RETURN .T.
 
-METHOD Preview( fName, cTitle ) CLASS PrintDos
+METHOD Preview(fName, cTitle) CLASS PrintDos
    LOCAL oedit1
    LOCAL strbuf := Space(2052), poz := 2052, stroka
    LOCAL han := FOpen(fName, FO_READ + FO_SHARED)
@@ -534,7 +534,7 @@ STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
 FUNCTION regenfile(o, new)
    LOCAL aText := AFillText(o)
    LOCAL stroka
-   LOCAL o1 := printdos():new( new )
+   LOCAL o1 := printdos():new(new)
    LOCAL nLine := 0
    LOCAL nChr12
    LOCAL i
@@ -639,7 +639,7 @@ HB_FUNC(AFILLTEXT)
    }
 
    string = (char*) hb_xgrab(LINE_MAX + 1);
-   hb_arrayNew( pArray, 0 );
+   hb_arrayNew(pArray, 0);
 
    while ( file_read ( inFile, string ) )
    {

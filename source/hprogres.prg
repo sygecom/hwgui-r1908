@@ -26,7 +26,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
     DATA  nPercent INIT 0
     DATA  lPercent INIT .F.
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical )
+   METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical)
    METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent )
    METHOD Init()
    METHOD Activate()
@@ -40,13 +40,13 @@ CLASS VAR winclass   INIT "msctls_progress32"
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical ) CLASS HProgressBar
+METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical) CLASS HProgressBar
 
    ::Style := IIf(lvertical != Nil .AND. lVertical, PBS_VERTICAL, 0)
     ::Style += IIf(nAnimation != Nil .AND. nAnimation > 0, PBS_MARQUEE, 0)
     ::nAnimation := nAnimation
 
-   ::Super:New( oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight,, bInit, bSize, bPaint, ctooltip )
+   ::Super:New(oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight,, bInit, bSize, bPaint, ctooltip)
 
    ::maxPos  := IIf(maxPos != Nil .AND. maxPos != 0, maxPos, 20)
    ::lNewBox := .F.

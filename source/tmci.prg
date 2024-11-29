@@ -24,7 +24,7 @@ CLASS TMci
    DATA   oWnd
    DATA   cBuffer
 
-   METHOD New( cDevice, cFileName )  CONSTRUCTOR
+   METHOD New(cDevice, cFileName)  CONSTRUCTOR
 
    METHOD lOpen()
 
@@ -44,7 +44,7 @@ ENDCLASS
 
 //----------------------------------------------------------------------------//
 
-METHOD New( cDevice, cFileName ) CLASS TMci
+METHOD New(cDevice, cFileName) CLASS TMci
 
    DEFAULT cDevice TO ""
 

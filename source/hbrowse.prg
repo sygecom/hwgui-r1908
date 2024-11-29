@@ -100,7 +100,7 @@ CLASS HColumn INHERIT HObject
    DATA aHints INIT {}
    DATA Hint INIT .F.
 
-   METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bColor, bClick )
+   METHOD New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bColor, bClick)
    METHOD Visible(lVisible) SETGET
    METHOD Hide()
    METHOD Show()
@@ -111,7 +111,7 @@ CLASS HColumn INHERIT HObject
 ENDCLASS
 
 //----------------------------------------------------//
-METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bcolor, bClick ) CLASS HColumn
+METHOD New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bcolor, bClick) CLASS HColumn
 
    ::heading   := IIf(cHeading == NIL, "", cHeading)
    ::block     := block
@@ -315,11 +315,11 @@ CLASS HBrowse INHERIT HControl
                                   // 2 nopersit highlighting //for current row and current cell
                                   // 3 nopersist when grid is not the current active control.
 
-   METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
-               bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;
-               lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect,;
-               lDescend, bWhile, bFirst, bLast, bFor, bOther,tcolor, bcolor, brclick, bChgRowCol, ctooltip )
-   METHOD InitBrw( nType, lInit )
+   METHOD New(lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
+              bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;
+              lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect,;
+              lDescend, bWhile, bFirst, bLast, bFor, bOther,tcolor, bcolor, brclick, bChgRowCol, ctooltip)
+   METHOD InitBrw(nType, lInit)
    METHOD Rebuild()
    METHOD Activate()
    METHOD Init()
@@ -383,10 +383,10 @@ CLASS HBrowse INHERIT HControl
 ENDCLASS
 
 //----------------------------------------------------//
-METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-            bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
-            lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect, ;
-            lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, bRclick, bChgRowCol, ctooltip ) CLASS HBrowse
+METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
+           bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
+           lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect, ;
+           lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, bRclick, bChgRowCol, ctooltip) CLASS HBrowse
 
    lNoVScroll := IIf(lNoVScroll = Nil, .F., lNoVScroll)
    nStyle   := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ;
@@ -394,8 +394,8 @@ METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont,
                           IIf(!lNoVScroll, WS_VSCROLL, 0))
    nStyle   -= IIf(Hwg_BitAND(nStyle, WS_VSCROLL) > 0 .AND. lNoVScroll, WS_VSCROLL, 0)
 
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == Nil, 0, nWidth), ;
-              IIf(nHeight == Nil, 0, nHeight), oFont, bInit, bSize, bPaint, ctooltip, tColor, bColor )
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == Nil, 0, nWidth), ;
+              IIf(nHeight == Nil, 0, nHeight), oFont, bInit, bSize, bPaint, ctooltip, tColor, bColor)
 
    ::lNoVScroll := lNoVScroll
    ::Type    := lType
@@ -1307,7 +1307,7 @@ RETURN -1
 //----------------------------------------------------//
 METHOD Redefine(lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus) CLASS HBrowse
 
-   ::Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint )
+   ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint)
 
    ::Type    := lType
    IF oFont == Nil
@@ -1474,7 +1474,7 @@ METHOD SetRefresh( nSeconds ) CLASS HBrowse
    RETURN ::nSetRefresh
 
 //----------------------------------------------------//
-METHOD InitBrw( nType, lInit ) CLASS HBrowse
+METHOD InitBrw(nType, lInit) CLASS HBrowse
    Local cAlias := Alias()
 
    DEFAULT lInit to .F.

@@ -51,7 +51,7 @@ CLASS HPrinter INHERIT HObject
 
 
 
-   METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn )
+   METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn)
 
    METHOD SetMode(nOrientation)
    METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharSet)
@@ -66,7 +66,7 @@ CLASS HPrinter INHERIT HObject
    METHOD ReleaseMeta()
    METHOD PlayMeta(oWnd)
    METHOD PrintMeta(nPage)
-   METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser  )
+   METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser)
    METHOD END()
    METHOD Box( x1, y1, x2, y2, oPen, oBrush )
    METHOD Line(x1, y1, x2, y2, oPen)
@@ -77,7 +77,7 @@ CLASS HPrinter INHERIT HObject
    METHOD ChangePage(oSayPage, n, nPage) HIDDEN
 ENDCLASS
 
-METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn ) CLASS HPrinter
+METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn) CLASS HPrinter
 
    LOCAL aPrnCoors, cPrinterName
 
@@ -348,7 +348,7 @@ METHOD ReleaseMeta() CLASS HPrinter
 
    RETURN Nil
 
-METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser ) CLASS HPrinter
+METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser) CLASS HPrinter
    LOCAL oDlg, oToolBar, oSayPage, oBtn, oCanvas, oTimer, i, nLastPage := Len(::aMeta), aPage := {}
    LOCAL oFont := HFont():Add("Times New Roman", 0, -13, 700)
    LOCAL lTransp := ( aBitmaps != Nil .AND. Len(aBitmaps) > 9 .AND. aBitmaps[10] != Nil .AND. aBitmaps[10] )

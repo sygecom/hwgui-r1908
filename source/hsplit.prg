@@ -28,8 +28,8 @@ CLASS VAR winclass INIT "STATIC"
    DATA bEndDrag
    DATA lScrolling
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-               bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling )
+   METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+               bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
@@ -39,11 +39,11 @@ CLASS VAR winclass INIT "STATIC"
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-            bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling ) CLASS HSplitter
+METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+            bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling) CLASS HSplitter
                                                          //+  WS_CLIPCHILDREN
-   ::Super:New( oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW , nLeft, nTop, nWidth, nHeight,,, ;
-              bSize, bDraw,, color, bcolor )
+   ::Super:New(oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW , nLeft, nTop, nWidth, nHeight,,, ;
+              bSize, bDraw,, color, bcolor)
 
    ::title   := ""
    

@@ -46,9 +46,9 @@ CLASS HCheckComboBox INHERIT HComboBox
    METHOD onGetText(wParam, lParam)
    METHOD OnGetTextLength( wParam, lParam )
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
    aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
-   tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth )
+   tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth)
    METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
                     bChange, ctooltip, bGFocus, acheck)
    METHOD INIT()
@@ -70,9 +70,9 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
+METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
-               bValid, acheck, nDisplay, nhItem, ncWidth ) CLASS hCheckComboBox
+               bValid, acheck, nDisplay, nhItem, ncWidth) CLASS hCheckComboBox
 
    ::acheck := IIf(acheck == Nil, {}, acheck)
    IF hb_IsNumeric(nStyle)
@@ -83,8 +83,8 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
 
    bPaint := {|o, p|o:paint(p)}
 
-   ::Super:New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
-                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid,, nDisplay, nhItem, ncWidth )
+   ::Super:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
+                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid,, nDisplay, nhItem, ncWidth)
 
 RETURN Self
 

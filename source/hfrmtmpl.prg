@@ -60,8 +60,8 @@ STATIC aCtrls := { ;
        "HStatus():New(oPrnt,nId,nStyle,oFont,aParts,onInit,onSize)", ;
        ".F.", ;
        "HAnimation():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,Filename,AutoPlay,Center,Transparent)", ;
-       "HProgressBar():New( oPrnt,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip )", ;
-       "HshadeButton():New( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,lFlat,caption,color,font,xt,yt,bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,cTooltip,lEnabled,shadeID,palette,granularity,highlight,coloring,shcolor)", ;
+       "HProgressBar():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip)", ;
+       "HshadeButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,lFlat,caption,color,font,xt,yt,bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,cTooltip,lEnabled,shadeID,palette,granularity,highlight,coloring,shcolor)", ;
        "HListBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip)", ;
        "HGridEx():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,onKeyDown,onPosChg,onDispInfo,nItemCout,lNoLines,TextColor,BackColor,lNoHeader,aBit,Items)" , ;
        "HTimer():New(oPrnt,nId,nInterval, onAction)" , ;
@@ -120,7 +120,7 @@ CLASS HCtrlTmpl
    DATA aControls INIT {}
    DATA aProp, aMethods
 
-   METHOD New( oParent ) INLINE ( ::oParent := oParent, AAdd(oParent:aControls, Self), Self )
+   METHOD New(oParent) INLINE ( ::oParent := oParent, AAdd(oParent:aControls, Self), Self )
    METHOD F( nId )
 ENDCLASS
 
@@ -158,9 +158,9 @@ CLASS VAR maxId    INIT 0
    DATA cargo
 
    METHOD Read(fname, cId)
-   METHOD Show( nMode, p1, p2, p3 )
-   METHOD ShowMain(params) INLINE ::Show( 1, params )
-   METHOD ShowModal(params) INLINE ::Show( 2, params )
+   METHOD Show(nMode, p1, p2, p3)
+   METHOD ShowMain(params) INLINE ::Show(1, params)
+   METHOD ShowModal(params) INLINE ::Show(2, params)
    METHOD Close()
    METHOD F( id, n )
    METHOD Find(cId)
@@ -237,7 +237,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
    SetDebugInfo(.F.)
    RETURN Self
 
-METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
+METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
    LOCAL i, j, cType
    LOCAL nLeft, nTop, nWidth, nHeight, cTitle, oFont, lClipper := .F., lExitOnEnter := .F.
    LOCAL xProperty, block, bFormExit, nstyle
@@ -583,7 +583,7 @@ STATIC PROCEDURE CompileErr(e, stroka)
    BREAK( NIL )
 
 STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
-   LOCAL oCtrl := HCtrlTmpl():New( oContainer )
+   LOCAL oCtrl := HCtrlTmpl():New(oContainer)
    LOCAL i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
 
    oCtrl:nId      := oForm:nCtrlId
@@ -1059,12 +1059,12 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                   m->nDec := j[i, 4]
                   m->cPicture := Nil
                   lEdit := .T.
-                  oCtrl:AddColumn(HColumn():New( cHeader, fBlock, cValType, nLength, nDec, lEdit ))
+                  oCtrl:AddColumn(HColumn():New(cHeader, fBlock, cValType, nLength, nDec, lEdit))
                NEXT
             ENDIF
          ELSE
             oCtrl:aArray := caArray  //IIf(TYPE("caArray")="C",&(caArray),caArray)
-            oCtrl:AddColumn(HColumn():New( , { | v, o | IIf(v != Nil, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent]) }, "C", 100, 0 ))
+            oCtrl:AddColumn(HColumn():New(, { | v, o | IIf(v != Nil, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent]) }, "C", 100, 0))
          ENDIF
       ENDIF
       IF cVarName != Nil
@@ -1090,9 +1090,9 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN Nil
 
-   FUNCTION RadioNew( oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet )
-      LOCAL oCtrl := HGroup():New( oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor )
-      HRadioGroup():New( nInitValue, bSetGet )
+   FUNCTION RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet)
+      LOCAL oCtrl := HGroup():New(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor)
+      HRadioGroup():New(nInitValue, bSetGet)
       RETURN oCtrl
 
 
@@ -1115,7 +1115,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          AAdd(aAttr, { "underline", LTrim(Str(oFont:Underline, 5)) })
       ENDIF
 
-      RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
+      RETURN HXMLNode():New("font", HBXML_TYPE_SINGLE, aAttr)
 
    FUNCTION hfrm_FontFromXML(oXmlNode)
       LOCAL width  := oXmlNode:GetAttribute("width")
@@ -1210,7 +1210,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       DATA y2
       DATA lMark INIT .F.
 
-      METHOD New( oParent ) INLINE ( ::oParent := oParent, AAdd(oParent:aControls, Self), Self )
+      METHOD New(oParent) INLINE ( ::oParent := oParent, AAdd(oParent:aControls, Self), Self )
    ENDCLASS
 
 CLASS HRepTmpl
@@ -1310,7 +1310,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
    RETURN Self
 
 METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
-   LOCAL oPrinter := IIf(printer != Nil, IIf(hb_IsObject(printer), printer, HPrinter():New( printer, .T. )), HPrinter():New(, .T. ))
+   LOCAL oPrinter := IIf(printer != Nil, IIf(hb_IsObject(printer), printer, HPrinter():New(printer, .T.)), HPrinter():New(, .T. ))
    LOCAL i, j, aMethod, xProperty, oFont, xTemp, nPWidth, nPHeight, nOrientation := 1
 
    MEMVAR oReport
@@ -1618,7 +1618,7 @@ METHOD Close() CLASS HRepTmpl
    RETURN Nil
 
 STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
-   LOCAL oCtrl := HRepItem():New( oContainer )
+   LOCAL oCtrl := HRepItem():New(oContainer)
    LOCAL i, j, o, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems, xProperty, cName
 
    oCtrl:cClass   := oCtrlDesc:GetAttribute("class")

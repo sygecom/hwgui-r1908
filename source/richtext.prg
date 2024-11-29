@@ -88,7 +88,7 @@ CLASS RichText
 
    DATA oPrinter
    // Methods for opening & closing output file, and setting defaults
-   METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CONSTRUCTOR
+   METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh) CONSTRUCTOR
    METHOD END() INLINE ::TextCode("par\pard"), ::CloseGroup(), FClose(::hFile)
 
 
@@ -223,7 +223,7 @@ CLASS RichText
 ENDCLASS
 
 
-METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CLASS RichText
+METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh) CLASS RichText
 *********************************************************************
 * Description:  Initialize a new RTF object, and create an associated
 *               file, with a valid RTF header.
@@ -2542,8 +2542,8 @@ lHecho:=.F.
           SETWNDEX(hDCOut,0,0)
       SetWindowExtEx(hDCOut,nWidth,nHeight);
 
-      DibDraw( hDCOut, hDib, hPal, 0, 0,;
-               nWidth, nHeight, nRaster )
+      DibDraw(hDCOut, hDib, hPal, 0, 0,;
+               nWidth, nHeight, nRaster)
 
       GlobalFree(hDib)
 

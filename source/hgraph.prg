@@ -26,8 +26,8 @@ CLASS VAR winclass   INIT "STATIC"
    DATA oPen, oPenCoor
    DATA xmax, ymax, xmin, ymin PROTECTED
 
-   METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-               bSize, ctooltip, tcolor, bcolor )
+   METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+               bSize, ctooltip, tcolor, bcolor)
    METHOD Activate()
    METHOD Redefine(oWndParent, nId, aValues, oFont, ;
                     bSize, ctooltip, tcolor, bcolor)
@@ -38,12 +38,12 @@ CLASS VAR winclass   INIT "STATIC"
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-            bSize, ctooltip, tcolor, bcolor ) CLASS HGraph
+METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+            bSize, ctooltip, tcolor, bcolor) CLASS HGraph
 
-   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
+   ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
               bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
-              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
+              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor))
 
    ::aValues := aValues
    ::nType   := 1
@@ -56,9 +56,9 @@ METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 METHOD Redefine(oWndParent, nId, aValues, oFont, ;
                  bSize, ctooltip, tcolor, bcolor) CLASS HGraph
 
-   ::Super:New( oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
+   ::Super:New(oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
               bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
-              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor) )
+              IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor))
 
    ::aValues := aValues
 

@@ -33,7 +33,7 @@ CLASS VAR aTimers   INIT {}
    ASSIGN Interval(x) INLINE ::value := x, ;
                                            SetTimer(::oParent:handle, ::id, ::value)
 
-   METHOD New( oParent, nId, value, bAction )
+   METHOD New(oParent, nId, value, bAction)
    METHOD Init()
    METHOD onAction()
    METHOD END()
@@ -41,7 +41,7 @@ CLASS VAR aTimers   INIT {}
 ENDCLASS
 
 
-METHOD New( oParent, nId, value, bAction ) CLASS HTimer
+METHOD New(oParent, nId, value, bAction) CLASS HTimer
 
    ::oParent := IIf(oParent==Nil, HWindow():GetMain():oDefaultParent, oParent)
    IF nId == NIL

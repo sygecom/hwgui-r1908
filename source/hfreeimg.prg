@@ -29,7 +29,7 @@ CLASS VAR aImages   INIT {}
    METHOD AddFile(name)
    METHOD AddFromVar(cImage, cType)
    METHOD FromBitmap(oBitmap)
-   METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight )
+   METHOD Draw(hDC, nLeft, nTop, nWidth, nHeight)
    METHOD Release()
 
 ENDCLASS
@@ -84,9 +84,9 @@ METHOD FromBitmap(oBitmap) CLASS HFreeImage
 
    RETURN Self
 
-METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight ) CLASS HFreeImage
+METHOD Draw(hDC, nLeft, nTop, nWidth, nHeight) CLASS HFreeImage
 
-   FI_Draw( ::handle, hDC, ::nWidth, ::nHeight, nLeft, nTop, nWidth, nHeight )
+   FI_Draw(::handle, hDC, ::nWidth, ::nHeight, nLeft, nTop, nWidth, nHeight)
    // DrawBitmap(hDC, ::hBitmap,, nLeft, nTop, ::nWidth, ::nHeight)
    RETURN Nil
 
@@ -131,16 +131,16 @@ CLASS HSayFImage INHERIT HSayImage
    DATA nOffsetH  INIT 0
    DATA nZoom
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
-               bSize, ctooltip, cType )
+   METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
+               bSize, ctooltip, cType)
    METHOD Redefine(oWndParent, nId, Image, bInit, bSize, ctooltip)
    METHOD ReplaceImage(Image, cType)
    METHOD Paint(lpdis)
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
-            bSize, ctooltip, cType ) CLASS HSayFImage
+METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
+            bSize, ctooltip, cType) CLASS HSayFImage
 
    IF Image != Nil
       ::oImage := IIf(hb_IsChar(Image), ;
@@ -150,7 +150,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
          nHeight := ::oImage:nHeight
       ENDIF
    ENDIF
-   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip )
+   ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip)
    // ::classname:= "HSAYFIMAGE"
 
    ::bPaint  := { | o, lpdis | o:Paint(lpdis) }
@@ -191,9 +191,9 @@ METHOD Paint(lpdis) CLASS HSayFImage
 
    IF ::oImage != Nil
       IF ::nZoom == Nil
-         ::oImage:Draw( hDC, ::nOffsetH, ::nOffsetV, ::nWidth, ::nHeight )
+         ::oImage:Draw(hDC, ::nOffsetH, ::nOffsetV, ::nWidth, ::nHeight)
       ELSE
-         ::oImage:Draw( hDC, ::nOffsetH, ::nOffsetV, ::oImage:nWidth * ::nZoom, ::oImage:nHeight * ::nZoom )
+         ::oImage:Draw(hDC, ::nOffsetH, ::nOffsetV, ::oImage:nWidth * ::nZoom, ::oImage:nHeight * ::nZoom)
       ENDIF
    ENDIF
 

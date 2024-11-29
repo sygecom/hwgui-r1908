@@ -25,10 +25,10 @@ CLASS HMenu INHERIT HObject
    DATA aMenu
    METHOD New() INLINE Self
    METHOD END() INLINE Hwg_DestroyMenu(::handle)
-   METHOD Show( oWnd, xPos, yPos, lWnd )
+   METHOD Show(oWnd, xPos, yPos, lWnd)
 ENDCLASS
 
-METHOD Show( oWnd, xPos, yPos, lWnd ) CLASS HMenu
+METHOD Show(oWnd, xPos, yPos, lWnd) CLASS HMenu
    LOCAL aCoor
 
    oWnd:oPopup := Self

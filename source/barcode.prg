@@ -49,10 +49,10 @@ Type < nBCodeType >              ;
 [ VERTICAL <lVert>           ] ;
 [ TRANSPARENT <lTransparent> ] ;
 => ;
-< oBC > := Barcode():New( [ <hDC> ], < cText >, < nTop >, < nLeft >, ;
-                          [ <nWidth>       ], [ <nHeight>   ], [ <nBCodeType> ], ;
-                          [ <nColText>     ], [ <nColPane>  ], [ !<lVert>     ], ;
-                          [ <lTransparent> ], [ <nPinWidth> ] )
+< oBC > := Barcode():New([ <hDC> ], < cText >, < nTop >, < nLeft >, ;
+                         [ <nWidth>       ], [ <nHeight>   ], [ <nBCodeType> ], ;
+                         [ <nColText>     ], [ <nColPane>  ], [ !<lVert>     ], ;
+                         [ <lTransparent> ], [ <nPinWidth> ])
 
 //------------------------------------------------------------------------------
 #xcommand SHOWBARCODE < oBC > => < oBC > :ShowBarcode()

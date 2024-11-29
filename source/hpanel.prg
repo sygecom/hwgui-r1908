@@ -23,8 +23,8 @@ CLASS HPanel INHERIT HControl
    DATA lBorder INIT .F.
    DATA nRePaint  INIT  - 1
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               bInit, bSize, bPaint, bcolor )
+   METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+               bInit, bSize, bPaint, bcolor)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
@@ -39,13 +39,13 @@ CLASS HPanel INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               bInit, bSize, bPaint, bcolor ) CLASS HPanel
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+               bInit, bSize, bPaint, bcolor) CLASS HPanel
 LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == Nil, 0, nWidth), ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == Nil, 0, nWidth), ;
               IIf(nHeight == Nil, 0, nHeight), oParent:oFont, bInit, ;
-              bSize, bPaint,,, bcolor )
+              bSize, bPaint,,, bcolor)
 
    ::lBorder  := IIf(Hwg_Bitand(nStyle, WS_BORDER) + Hwg_Bitand(nStyle, WS_DLGFRAME) > 0, .T., .F.)
    ::bPaint   := bPaint
@@ -80,9 +80,9 @@ RETURN Self
 METHOD Redefine(oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor) CLASS HPanel
 LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 
-   ::Super:New( oWndParent, nId, 0, 0, 0, IIf(nWidth == Nil, 0, nWidth), ;
+   ::Super:New(oWndParent, nId, 0, 0, 0, IIf(nWidth == Nil, 0, nWidth), ;
               IIf(nHeight != Nil, nHeight, 0), oParent:oFont, bInit, ;
-              bSize, bPaint,,, bcolor )
+              bSize, bPaint,,, bcolor)
 
 
    ::bPaint   := bPaint
@@ -212,7 +212,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
          IF ::nScrollBars != -1 .AND. ::bScroll = Nil
-             ::ScrollHV( Self, msg, wParam, lParam )
+             ::ScrollHV(Self, msg, wParam, lParam)
              IF msg == WM_MOUSEWHEEL
                  RETURN 0
              ENDIF

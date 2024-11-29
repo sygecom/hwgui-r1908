@@ -180,7 +180,7 @@ FUNCTION RecalcForm(aPaintRep, nFormWidth)
    RETURN Nil
 
 FUNCTION PrintReport(printerName, oPrn, lPreview)
-   LOCAL oPrinter := IIf(oPrn != Nil, oPrn, HPrinter():New( printerName ))
+   LOCAL oPrinter := IIf(oPrn != Nil, oPrn, HPrinter():New(printerName))
    LOCAL aPrnCoors, prnXCoef, prnYCoef
    LOCAL iItem, aItem, nLineStartY := 0, nLineHeight := 0, nPHStart := 0
    LOCAL iPH := 0, iSL := 0, iEL := 0, iPF := 0, iEPF := 0, iDF := 0

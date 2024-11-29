@@ -76,7 +76,7 @@ HB_FUNC(HWG_DOEVENTS)
 }
 
 /*  Creates main application window
-    InitMainWindow( szAppName, cTitle, cMenu, hIcon, nBkColor, nStyle, nLeft, nTop, nWidth, nHeight )
+    InitMainWindow(szAppName, cTitle, cMenu, hIcon, nBkColor, nStyle, nLeft, nTop, nWidth, nHeight)
 */
 
 HB_FUNC(HWG_INITMAINWINDOW)
@@ -194,7 +194,7 @@ void ProcessMdiMessage(HWND hJanBase, HWND hJanClient, MSG msg, HACCEL hAcceler)
 }
 
 /*
- *  HWG_ACTIVATEMAINWINDOW( lShow, hAccel, lMaximize, lMinimize )
+ *  HWG_ACTIVATEMAINWINDOW(lShow, hAccel, lMaximize, lMinimize)
  */
 HB_FUNC(HWG_ACTIVATEMAINWINDOW)
 {
@@ -309,14 +309,14 @@ HB_FUNC(HWG_INITCHILDWINDOW)
 
 HB_FUNC(HWG_ACTIVATECHILDWINDOW)
 {
-  // ShowWindow( (HWND) HB_PARHANDLE(2), hb_parl(1) ? SW_SHOWNORMAL : SW_HIDE );
+  // ShowWindow((HWND) HB_PARHANDLE(2), hb_parl(1) ? SW_SHOWNORMAL : SW_HIDE);
   ShowWindow(hwg_par_HWND(2), (HB_ISLOG(3) && hb_parl(3))
                                   ? SW_SHOWMAXIMIZED
                                   : ((HB_ISLOG(4) && hb_parl(4)) ? SW_SHOWMINIMIZED : SW_SHOWNORMAL));
 }
 
 /*  Creates frame MDI and client window
-    InitMainWindow( cTitle, cMenu, cBitmap, hIcon, nBkColor, nStyle, nLeft, nTop, nWidth, nHeight )
+    InitMainWindow(cTitle, cMenu, cBitmap, hIcon, nBkColor, nStyle, nLeft, nTop, nWidth, nHeight)
 */
 HB_FUNC(HWG_INITMDIWINDOW)
 {
@@ -438,7 +438,7 @@ HB_FUNC(HWG_ACTIVATEMDIWINDOW)
 }
 
 /*  Creates child MDI window
-    CreateMdiChildWindow( aChildWindow )
+    CreateMdiChildWindow(aChildWindow)
     aChildWindow = { cWindowTitle, Nil, aActions, Nil,
                     nStatusWindowID, bStatusWrite }
     aActions = { { nMenuItemID, bAction }, ... }
@@ -578,7 +578,7 @@ HB_FUNC(ENABLEWINDOW)
   HWND hWnd = hwg_par_HWND(1);
   BOOL lEnable = hb_parl(2);
 
-  // ShowWindow( hWnd, (lEnable)? SW_SHOWNORMAL:SW_HIDE );
+  // ShowWindow(hWnd, (lEnable)? SW_SHOWNORMAL:SW_HIDE);
   EnableWindow(hWnd,   // handle to window
                lEnable // flag for enabling or disabling input
   );
@@ -670,7 +670,7 @@ HB_FUNC(HWG_BRINGWINDOWTOTOP)
 
 // HB_FUNC(HWG_SETACTIVEWINDOW)
 //{
-//    hb_retnl(SetActiveWindow( (HWND) HB_PARHANDLE(1) ));
+//    hb_retnl(SetActiveWindow((HWND) HB_PARHANDLE(1)));
 // }
 
 HB_FUNC(RESETWINDOWPOS)

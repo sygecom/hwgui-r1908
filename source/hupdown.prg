@@ -40,10 +40,10 @@ CLASS HUpDown INHERIT HControl
 
    DATA lCreate    INIT .F. HIDDEN //
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
               oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
                      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
-              bKeyDown, bChange, bOther, bClickUp ,bClickDown )
+              bKeyDown, bChange, bOther, bClickUp ,bClickDown)
 
    METHOD Activate()
    METHOD Init()
@@ -68,10 +68,10 @@ CLASS HUpDown INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
             oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
                  nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
-            bKeyDown, bChange, bOther, bClickUp ,bClickDown ) CLASS HUpDown
+            bKeyDown, bChange, bOther, bClickUp ,bClickDown) CLASS HUpDown
 
    HB_SYMBOL_UNUSED(bOther)
 
@@ -89,8 +89,8 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ::title := Str(vari)
    ::bSetGet := bSetGet
    ::bColorOld := bColor
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint,ctooltip,tcolor,bcolor )
+   ::Super:New(oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
+                  bSize,bPaint,ctooltip,tcolor,bcolor)
 
    ::idUpDown := ::id //::NewId()
 
@@ -133,7 +133,7 @@ METHOD Activate() CLASS HUpDown
 
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
-      ::oEditUpDown := HEditUpDown():New( ::oParent, ::id , val(::title) , ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+      ::oEditUpDown := HEditUpDown():New(::oParent, ::id , val(::title) , ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
            ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture,;
            ::lNoBorder, ::nMaxLength, , ::bKeyDown, ::bChange, ::bOther , ::controlsource)
       ::oEditUpDown:Name := "oEditUpDown"
@@ -359,8 +359,8 @@ CLASS VAR winclass   INIT "EDIT"
    DATA nUpDownWidth INIT 12
    DATA lChanged    INIT .F.
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, nUpDWidth, nLower, nUpper )
+   METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+               oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, nUpDWidth, nLower, nUpper)
    METHOD Activate()
    METHOD Init()
    METHOD OnEvent(msg,wParam,lParam)
@@ -370,13 +370,13 @@ CLASS VAR winclass   INIT "EDIT"
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
-            nUpDWidth, nLower, nUpper ) CLASS HUpDown
+            nUpDWidth, nLower, nUpper) CLASS HUpDown
 
    nStyle   := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT)
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-              bSize, bPaint, ctooltip, tcolor, bcolor )
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+              bSize, bPaint, ctooltip, tcolor, bcolor)
 
    ::idUpDown := ::NewId()
    IF !hb_IsNumeric(vari)

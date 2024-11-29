@@ -15,7 +15,7 @@ CLASS HPAINTDC FROM HDC
 
    DATA m_ps
 
-   METHOD NEW( nWnd )
+   METHOD NEW(nWnd)
    METHOD END ()
 
    HIDDEN:
@@ -23,7 +23,7 @@ CLASS HPAINTDC FROM HDC
 
 ENDCLASS
 
-METHOD NEW( nWnd ) CLASS HPAINTDC
+METHOD NEW(nWnd) CLASS HPAINTDC
 
    ::Super:new()
    ::m_ps   := DefinePaintStru()
@@ -288,7 +288,7 @@ METHOD SetROP2( nDrawMode )
 
 CLASS HCLIENTDC FROM HDC
 
-   METHOD NEW( nWnd )
+   METHOD NEW(nWnd)
    METHOD END ()
 
    HIDDEN:
@@ -296,7 +296,7 @@ CLASS HCLIENTDC FROM HDC
 
 ENDCLASS
 
-METHOD NEW( nWnd ) CLASS HCLIENTDC
+METHOD NEW(nWnd) CLASS HCLIENTDC
 
    ::Super:new()
    ::m_hWnd := nWnd
