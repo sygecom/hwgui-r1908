@@ -337,7 +337,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    LOCAL vari
 
    vari := ::Value
-   IF ::bSetGet != Nil  .AND. ::title != Nil
+   IF ::bSetGet != Nil .AND. ::title != Nil
       ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    ENDIF
    SetDlgItemText(::oParent:handle, ::id, ::title)
@@ -508,7 +508,7 @@ STATIC FUNCTION __Valid(oCtrl)
    LOCAL res := .T., hctrl , nSkip, oDlg
    LOCAL ltab :=  GETKEYSTATE(VK_TAB) < 0
 
-   IF !CheckFocus(oCtrl, .T.)  .OR. oCtrl:lnoValid
+   IF !CheckFocus(oCtrl, .T.) .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)

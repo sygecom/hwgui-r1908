@@ -34,9 +34,9 @@ METHOD New(oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
                   bInit,bSize,bLink,bSubmit,fname,resname) CLASS HQhtm
 
    // ::classname:= "HQHTM"
-   ::oParent := IIf(oWndParent==Nil, ::oDefaultParent, oWndParent)
-   ::id      := IIf(nId==Nil,::NewId(), nId)
-   ::style   := Hwg_BitOr(IIf(nStyle==Nil,0,nStyle), WS_CHILD+WS_VISIBLE)
+   ::oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
+   ::id      := IIf(nId == Nil,::NewId(), nId)
+   ::style   := Hwg_BitOr(IIf(nStyle == Nil,0,nStyle), WS_CHILD+WS_VISIBLE)
    ::nLeft   := nLeft
    ::nTop    := nTop
    ::nWidth  := nWidth
@@ -70,7 +70,7 @@ Return Nil
 
 METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
    // ::classname:= "HQHTM"
-   ::oParent := IIf(oWndParent==Nil, ::oDefaultParent, oWndParent)
+   ::oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
    ::id      := nId
    ::style   := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
    ::bInit   := bInit

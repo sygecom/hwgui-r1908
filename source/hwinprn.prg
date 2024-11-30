@@ -67,7 +67,7 @@ ENDCLASS
 
 METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies) CLASS HWinPrn
 
-   ::oPrinter := HPrinter():New(IIf(cPrinter==Nil,"",cPrinter),.F., nFormType, nBin, lLandScape, nCopies)
+   ::oPrinter := HPrinter():New(IIf(cPrinter == Nil,"",cPrinter),.F., nFormType, nBin, lLandScape, nCopies)
    IF ::oPrinter == Nil
       Return Nil
    ENDIF

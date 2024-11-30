@@ -356,7 +356,7 @@ METHOD Resize() CLASS HPanel
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
    
-   IF !isWindowVisible(::handle) .OR.  ( ::nHeight == nHeight .AND. ::nWidth == nWidth )
+   IF !isWindowVisible(::handle) .OR. ( ::nHeight == nHeight .AND. ::nWidth == nWidth )
       Return Nil
    ENDIF
 

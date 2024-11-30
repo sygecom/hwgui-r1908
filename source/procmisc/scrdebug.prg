@@ -80,9 +80,9 @@ Local nFirst, i
       oBrwScript:aArray := aScript[3]
 #ifdef __LINUX__
       oBrwScript:rowCount := 5
-      oBrwScript:AddColumn(HColumn():New("",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0))
+      oBrwScript:AddColumn(HColumn():New("",{|v,o|Iif(o:nCurrent==i_scr,">",Iif(aBreakPoints != Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,"*"," "))},"C",1,0))
 #else
-      oBrwScript:AddColumn(HColumn():New("",{|v,o|HB_SYMBOL_UNUSED(v),Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0))
+      oBrwScript:AddColumn(HColumn():New("",{|v,o|HB_SYMBOL_UNUSED(v),Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints != Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0))
       oBrwScript:aColumns[1]:aBitmaps := { { {|n|n==1},oBmpCurr },{ {|n|n==2},oBmpPoint } }
 #endif
       oBrwScript:AddColumn(HColumn():New("",{|v,o|HB_SYMBOL_UNUSED(v),Left(o:aArray[o:nCurrent],4)},"C",4,0))
@@ -129,7 +129,7 @@ Local nFirst, i
       nDebugMode := 0
       oBrwScript:Top()
    ELSE
-      IF aBreakPoints!=Nil .AND. Ascan(aBreakPoints[2],i_scr) != 0
+      IF aBreakPoints != Nil .AND. Ascan(aBreakPoints[2],i_scr) != 0
          nDebugMode := 0
       ENDIF
       IF nDebugMode < 2

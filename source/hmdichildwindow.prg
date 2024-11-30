@@ -567,7 +567,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    IF ISWINDOWVISIBLE(oWnd:handle)
       oCtrl := oWnd:FindControl(iParLow)
    ENDIF
-   IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling  .AND. ;
+   IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       IF PtrtouLong(GetParent(GetFocus())) == PtrtouLong(oWnd:handle)
          oWnd:nFocus := GetFocus()

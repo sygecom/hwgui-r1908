@@ -552,7 +552,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
          arrExe[2] := RdScript(, cMethod, 1, .T., cName)
          cCode :=  "{|" + cParam + ;
             "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+IIf(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
-            IIf(oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2],{", ;
+            IIf(oCtrl == Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2],{", ;
                    cCode1+":aMethods["+ ;
                    Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2],{") + ;
                    cParam + "})" + "}"
@@ -568,7 +568,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    arrExe[2] := RdScript(, cMethod, , .T., cName)
    cCode := "{|" + IIf(Empty(cParam),"",cParam) + ;
       "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+IIf(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
-      IIf(oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2]" + ;
+      IIf(oCtrl == Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2]" + ;
              IIf(Empty(cParam),"",",{"+cParam+"}") + ")", ;
              cCode1+":aMethods["+   ;
              Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2]" + ;
@@ -1435,8 +1435,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
       IF oItem:cClass == "area"
          oItem:y2 := y2
          // writelog( "Area: "+cText+" "+IIf(::lNextPage, "T", "F") )
-         IF ( xProperty := aGetSecond(oItem:aProp, "varoffset") ) == Nil ;
-              .OR. !xProperty
+         IF ( xProperty := aGetSecond(oItem:aProp, "varoffset") ) == Nil .OR. !xProperty
             ::nTOffset := ::nAOffSet := 0
          ENDIF
          IF cText == "Table"
@@ -1517,8 +1516,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
             cText := aGetSecond(oItem:aProp, "caption")
          ENDIF
          IF hb_IsChar(cText)
-            IF ( xProperty := aGetSecond(oItem:aProp, "border") ) != Nil ;
-                 .AND. xProperty
+            IF ( xProperty := aGetSecond(oItem:aProp, "border") ) != Nil .AND. xProperty
                ::oPrinter:Box(x, y, x2, y2)
                x += 0.5
                y += 0.5
@@ -1534,8 +1532,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                ENDIF
             ENDIF
             SetTransparentMode(::oPrinter:hDC, .T.)
-            IF ( xProperty := aGetSecond(oItem:aProp, "multiline") ) != Nil ;
-                 .AND. xProperty
+            IF ( xProperty := aGetSecond(oItem:aProp, "multiline") ) != Nil .AND. xProperty
                nLines := i := 1
                DO WHILE ( i := hb_At(";", cText, i) ) > 0
                   i ++

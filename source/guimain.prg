@@ -106,7 +106,7 @@ FUNCTION FindSelf( hCtrl )
    IF oParent == Nil
       oParent := GetAncestor(hCtrl, GA_PARENT)
    ENDIF
-   IF oParent != Nil  .AND. !hb_IsNumeric(oParent)
+   IF oParent != Nil .AND. !hb_IsNumeric(oParent)
       RETURN oParent:FindControl(, hCtrl )
    ENDIF
    RETURN Nil

@@ -239,7 +239,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
       TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1))
       ::lChecked := lChecked
    ELSE
-      state =  SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
+      state := SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
       ::lChecked := int(state / 4092) == 2
    ENDIF
    RETURN ::lChecked
@@ -563,11 +563,11 @@ METHOD Notify(lParam) CLASS HTree
 
       // Return 1
 
-   ELSEIF nCode == TVN_ENDLABELEDIT  .or. nCode == TVN_ENDLABELEDITW
+   ELSEIF nCode == TVN_ENDLABELEDIT .OR. nCode == TVN_ENDLABELEDITW
       IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
          oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
          IF hb_IsObject(oItem)
-            IF !(cText == oItem:GetText())  .AND. ;
+            IF !(cText == oItem:GetText()) .AND. ;
                ( oItem:oTree:bItemChange == Nil .OR. Eval(oItem:oTree:bItemChange, oItem, cText) )
                TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
             ENDIF

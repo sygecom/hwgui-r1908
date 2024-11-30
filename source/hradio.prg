@@ -337,10 +337,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
          RETURN 0
       ENDIF
    ENDIF
-   IF msg == WM_GETDLGCODE //.AND.  !Empty(wParam)
+   IF msg == WM_GETDLGCODE //.AND. !Empty(wParam)
        IF wParam == VK_RETURN .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
          RETURN 0
-      ELSEIF wParam == VK_ESCAPE  .AND. ;
+      ELSEIF wParam == VK_ESCAPE .AND. ;
                   ( oCtrl := ::GetParentForm:FindControl(IDCANCEL) ) != Nil .AND. !oCtrl:IsEnabled() 
          RETURN DLGC_WANTMESSAGE  
        ELSEIF ( wParam != VK_TAB .AND. GETDLGMESSAGE(lParam) == WM_CHAR ) .OR. GETDLGMESSAGE(lParam) == WM_SYSCHAR .OR. ;

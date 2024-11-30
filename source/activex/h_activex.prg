@@ -53,7 +53,7 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    LOCAL i,a,h,n
    LOCAL oError, bErrorBlock
 
-   nStyle   := WS_CHILD + WS_VISIBLE + WS_CLIPCHILDREN
+   nStyle := WS_CHILD + WS_VISIBLE + WS_CLIPCHILDREN
    nExStyle := 0
    cClsName := "AtlAxWin"
 
@@ -65,7 +65,7 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
 
    ::Init()
 
-   ::hObj   := AtlAxGetDisp(::handle)
+   ::hObj := AtlAxGetDisp(::handle)
 
    bErrorBlock := ErrorBlock({|x|break(x)})
    #ifdef __XHARBOUR__

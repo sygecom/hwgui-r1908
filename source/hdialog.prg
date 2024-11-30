@@ -131,7 +131,7 @@ METHOD NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSiz
    ::lClipper   := IIf(lClipper == NIL, .F., lClipper)
    ::lExitOnEnter := IIf(lExitOnEnter == NIL, .T., !lExitOnEnter) 
    ::lExitOnEsc  := IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
-   ::lClosable   := Iif(lnoClosable==NIL, .T., !lnoClosable)
+   ::lClosable   := Iif(lnoClosable == NIL, .T., !lnoClosable)
 
    IF nHelpId != NIL
       ::HelpId := nHelpId

@@ -379,7 +379,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
       ELSEIF msg == WM_GETDLGCODE
          IF wParam == VK_RETURN
             RETURN DLGC_WANTMESSAGE
-         ELSEIF wParam == VK_ESCAPE  .AND. ;
+         ELSEIF wParam == VK_ESCAPE .AND. ;
                   ( oCtrl := ::GetParentForm:FindControl(IDCANCEL) ) != Nil .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
          ENDIF
@@ -387,23 +387,23 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
       ELSEIF msg == WM_KEYDOWN
          //ProcKeyList(Self, wParam)
-         IF wparam =  VK_RIGHT .OR. wParam == VK_RETURN //.AND. !::lEdit
+         IF wparam == VK_RIGHT .OR. wParam == VK_RETURN //.AND. !::lEdit
              GetSkip(::oParent, ::handle, , 1)
              RETURN 0
-         ELSEIF wparam =  VK_LEFT //.AND. !::lEdit
+         ELSEIF wparam == VK_LEFT //.AND. !::lEdit
                GetSkip(::oParent, ::handle, , -1)
                RETURN 0
-         ELSEIF wParam == VK_ESCAPE .AND.  ::GetParentForm(Self):Type < WND_DLG_RESOURCE //.OR.;
+         ELSEIF wParam == VK_ESCAPE .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE //.OR.;
             RETURN 0
          ENDIF
 
       ELSEIF msg == WM_KEYUP
          ProcKeyList(Self, wParam)        //working in MDICHILD AND DIALOG
-      ELSEIF msg =  WM_COMMAND  .AND. ::lEdit  .AND. !::ldropshow
+      ELSEIF msg == WM_COMMAND .AND. ::lEdit .AND. !::ldropshow
          IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. HiWord(wParam) == 1
             RETURN 0
         ENDIF
-      ELSEIF msg == CB_GETDROPPEDSTATE  .AND. !::ldropshow
+      ELSEIF msg == CB_GETDROPPEDSTATE .AND. !::ldropshow
            IF GETKEYSTATE(VK_RETURN) < 0
             ::GetValue()
           ENDIF
@@ -418,7 +418,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             ENDIF
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
-           ELSEIF GETKEYSTATE(VK_UP) < 0 .AND.  GetKeyState(VK_SHIFT) > 0
+           ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == Nil
              //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
@@ -589,11 +589,11 @@ METHOD Refresh() CLASS HComboBox
       ENDIF
       IF ::columnBound == 1
          IF ::lText
-         //vari := IIf(::bSetGetField != Nil  .AND. hb_IsChar(vari), Trim(vari), vari)
-            ::value := IIf(vari==Nil .OR. !hb_IsChar(vari), "", vari)
+         //vari := IIf(::bSetGetField != Nil .AND. hb_IsChar(vari), Trim(vari), vari)
+            ::value := IIf(vari == Nil .OR. !hb_IsChar(vari), "", vari)
                //SendMessage(::handle, CB_SETEDITSEL, 0, LEN(::value))
          ELSE
-            ::value := IIf(vari==Nil .OR. !hb_IsNumeric(vari), 1, vari)
+            ::value := IIf(vari == Nil .OR. !hb_IsNumeric(vari), 1, vari)
          ENDIF
       ENDIF
       /*
@@ -1026,7 +1026,7 @@ METHOD Populate() CLASS HComboBox
        ENDIF
       value := STRTRAN(xRowSource, calias + "->", , , 1, 1)
       cAlias := IIf(VALTYPE(xRowSource) == "U", Nil, cAlias)
-      cValueBound := IIf(::xrowsource[2]  != Nil  .AND. cAlias != Nil, STRTRAN(::xrowsource[2], calias + "->"), Nil)
+      cValueBound := IIf(::xrowsource[2]  != Nil .AND. cAlias != Nil, STRTRAN(::xrowsource[2], calias + "->"), Nil)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
    ENDIF

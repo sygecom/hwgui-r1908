@@ -34,7 +34,7 @@ LOCAL han, stroka, scom, aScr, rejim := 0, i
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
 
-   scrkod := IIf(scrkod==Nil, "000", Upper(scrkod))
+   scrkod := IIf(scrkod == Nil, "000", Upper(scrkod))
    han := FOPEN(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
@@ -197,8 +197,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          scom := UPPER(SUBSTR(stroka, 1, IIf(poz1 != 0, poz1 - 1, 999)))
          DO CASE
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
-            IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL(rezArray[2])) ) == "C" ;
-                    .OR. i == "A"
+            IF Len(rezArray[2]) == 0 .OR. ( i := VALTYPE(ATAIL(rezArray[2])) ) == "C" .OR. i == "A"
                IF Left(scom, 2) == "LO"
                   AADD(rezArray[2], " "+AllTrim(SubStr(stroka, 7)))
                ELSEIF Left(scom, 2) == "PR"
@@ -537,12 +536,12 @@ RETURN &("{||"+string+"}")
 
 FUNCTION SetDebugInfo(lDebug)
 
-   lDebugInfo := IIf(lDebug==Nil, .T., lDebug)
+   lDebugInfo := IIf(lDebug == Nil, .T., lDebug)
 RETURN .T.
 
 FUNCTION SetDebugger(lDebug)
 
-   lDebugger := IIf(lDebug==Nil, .T., lDebug)
+   lDebugger := IIf(lDebug == Nil, .T., lDebug)
 RETURN .T.
 
 FUNCTION SetDebugRun()

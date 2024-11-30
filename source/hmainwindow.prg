@@ -536,7 +536,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    ENDIF
    iParHigh := HIWORD(wParam)
    iParLow := LOWORD(wParam)
-   IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling  .AND. ;
+   IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF hb_IsArray(oWnd:menu) .AND. (aMenu := Hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
