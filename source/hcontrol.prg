@@ -383,7 +383,7 @@ METHOD ControlSource(cControlSource) CLASS HControl
       ::xControlSource := cControlSource
       temp := SUBSTR(cControlSource, AT("->", cControlSource) + 2)
       ::bSetGetField := IIF("->" $ cControlSource, FieldWBlock(temp, SELECT(SUBSTR(cControlSource, 1, ;
-         AT("->", cControlSource) - 1))),FieldBlock(cControlSource))
+         AT("->", cControlSource) - 1))), FieldBlock(cControlSource))
    ENDIF
 
 RETURN ::xControlSource
@@ -424,12 +424,12 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
    nAnchor := ::anchor
    x9 := ::nLeft
    y9 := ::nTop
-   w9 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self,"hwndUpDown", GetClientRect(::hwndUpDown)[3], 0)
+   w9 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown", GetClientRect(::hwndUpDown)[3], 0)
    h9 := ::nHeight
 
    x1 := ::nLeft
    y1 := ::nTop
-   w1 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self,"hwndUpDown"), GetClientRect(::hwndUpDown)[3], 0)
+   w1 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown"), GetClientRect(::hwndUpDown)[3], 0)
    h1 := ::nHeight
    //- calculo relativo
    IF x > 0
@@ -534,7 +534,7 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
          //::Move(x1, y1, w1, h1, HWG_BITAND(::Style, WS_CLIPSIBLINGS + WS_CLIPCHILDREN) == 0)
 
          IF ((x1 != x9 .OR. y1 != y9) .AND. (hb_IsBlock(::bPaint) .OR. x9 + w9 > ::oParent:nWidth)) .OR. ;
-            (::backstyle == TRANSPARENT .AND. (::Title != NIL .AND. !Empty(::Title))) .OR. __ObjHasMsg(Self,"oImage")
+            (::backstyle == TRANSPARENT .AND. (::Title != NIL .AND. !Empty(::Title))) .OR. __ObjHasMsg(Self, "oImage")
             IF __ObjHasMsg(Self, "oImage") .OR. ::backstyle == TRANSPARENT //.OR. w9 != w1
                InvalidateRect(::oParent:handle, 1, MAX(x1 - 1, 0), MAX(y1 - 1, 0), x1 + w1 + 1, y1 + h1 + 1)
             ELSE

@@ -47,7 +47,7 @@ CLASS HOwnButton INHERIT HControl
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, bPaint, bClick, lflat, cText, ;
       color, oFont, xt, yt, widtht, heightt, bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, cTooltip, lEnabled, ;
-      lCheck, bColor,bGfocus, bLfocus, themed)
+      lCheck, bColor, bGfocus, bLfocus, themed)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
@@ -76,7 +76,7 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, bPaint, bClick, lflat, cText, color, ;
    oFont, xt, yt, widtht, heightt, bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, cTooltip, lEnabled, lCheck, ;
-   bColor,bGfocus, bLfocus, themed) CLASS HOwnButton
+   bColor, bGfocus, bLfocus, themed) CLASS HOwnButton
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, cTooltip)
 
@@ -625,7 +625,7 @@ METHOD onGetFocus() CLASS HOwnButton
       ::oparent:lSuspendMsgsHandling := .T.
       res := Eval(::bGetFocus, ::title, Self)
       IF res != NIL .AND. Empty(res)
-         WhenSetFocus(Self,nSkip)
+         WhenSetFocus(Self, nSkip)
       ENDIF
    ENDIF
    ::oparent:lSuspendMsgsHandling := .F.

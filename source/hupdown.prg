@@ -40,10 +40,10 @@ CLASS HUpDown INHERIT HControl
 
    DATA lCreate    INIT .F. HIDDEN //
 
-   METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-              oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
-                     nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
-              bKeyDown, bChange, bOther, bClickUp ,bClickDown)
+   METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+              oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
+              nUpDWidth, nLower, nUpper, nIncr, cPicture, lNoBorder, nMaxLength, ;
+              bKeyDown, bChange, bOther, bClickUp, bClickDown)
 
    METHOD Activate()
    METHOD Init()
@@ -68,10 +68,10 @@ CLASS HUpDown INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-            oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
-                 nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
-            bKeyDown, bChange, bOther, bClickUp ,bClickDown) CLASS HUpDown
+METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+           oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
+           nUpDWidth, nLower, nUpper, nIncr, cPicture, lNoBorder, nMaxLength, ;
+           bKeyDown, bChange, bOther, bClickUp, bClickDown) CLASS HUpDown
 
    HB_SYMBOL_UNUSED(bOther)
 
@@ -89,8 +89,8 @@ METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ::title := Str(vari)
    ::bSetGet := bSetGet
    ::bColorOld := bColor
-   ::Super:New(oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint,ctooltip,tcolor,bcolor)
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+               bSize, bPaint, ctooltip, tcolor, bcolor)
 
    ::idUpDown := ::id //::NewId()
 
@@ -176,7 +176,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    ::handle := ::oEditUpDown:handle
    ::hwndUpDown := CreateUpDownControl(::oParent:handle, ::idUpDown, ;
                                      ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, -2147483647, 2147483647, Val(::title))
-                                    // ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nLower, ::nUpper,Val(::title))
+                                    // ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nLower, ::nUpper, Val(::title))
    ::oEditUpDown:oUpDown := Self
    ::oEditUpDown:lInit := .T.
    IF ::nHolder == 0
@@ -284,7 +284,7 @@ METHOD Init() CLASS HEditUpDown
 
    IF !::lInit
       IF ::bChange != Nil
-         ::oParent:AddEvent(EN_CHANGE, self,{|| ::onChange()},,"onChange")
+         ::oParent:AddEvent(EN_CHANGE, self, {||::onChange()}, , "onChange")
       ENDIF
    ENDIF
    RETURN Nil
@@ -363,7 +363,7 @@ CLASS VAR winclass   INIT "EDIT"
                oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, nUpDWidth, nLower, nUpper)
    METHOD Activate()
    METHOD Init()
-   METHOD OnEvent(msg,wParam,lParam)
+   METHOD OnEvent(msg, wParam, lParam)
    METHOD Refresh()
    METHOD Hide() INLINE ( ::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown) )
    METHOD Show() INLINE ( ::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown) )
@@ -411,10 +411,10 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       IF bGfocus != Nil
          ::lnoValid := .T.
          ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
-         //::oParent:AddEvent(EN_SETFOCUS,self,bGfocus,,"onGotFocus")
+         //::oParent:AddEvent(EN_SETFOCUS, self, bGfocus, , "onGotFocus")
       ENDIF
       IF bLfocus != Nil
-         // ::oParent:AddEvent(EN_KILLFOCUS,self,bLfocus,,"onLostFocus")
+         // ::oParent:AddEvent(EN_KILLFOCUS, self, bLfocus, , "onLostFocus")
          ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl(id)) },, "onLostFocus")
       ENDIF
    ENDIF
@@ -443,7 +443,7 @@ METHOD Init() CLASS HUpDown
 METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
 
    IF hb_IsBlock(::bOther)
-      IF Eval(::bOther,Self,msg,wParam,lParam) != -1
+      IF Eval(::bOther, Self, msg, wParam, lParam) != -1
          RETURN 0
       ENDIF
    ENDIF

@@ -50,14 +50,14 @@ ENDCLASS
 
 METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    LOCAL nStyle, nExStyle, cClsName, hSink
-   LOCAL i,a,h,n
+   LOCAL i, a, h, n
    LOCAL oError, bErrorBlock
 
    nStyle := WS_CHILD + WS_VISIBLE + WS_CLIPCHILDREN
    nExStyle := 0
    cClsName := "AtlAxWin"
 
-   ::Super:New(oWnd, , nStyle, nLeft, nTop, nWidth, nHeight)   // ,,,,bSize)
+   ::Super:New(oWnd, , nStyle, nLeft, nTop, nWidth, nHeight)   // ,,,, bSize)
    ::title := cProgId
 
    ::handle := CreateActivex(nExStyle, cClsName, cProgId, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;

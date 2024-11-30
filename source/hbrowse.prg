@@ -52,7 +52,7 @@ STATIC oCursor     := 0
 STATIC oPen64
 STATIC xDrag
 STATIC xDragMove := 0
-STATIC axPosMouseOver := {0,0}
+STATIC axPosMouseOver := {0, 0}
 STATIC xToolTip
 
 //----------------------------------------------------//
@@ -315,10 +315,10 @@ CLASS HBrowse INHERIT HControl
                                   // 2 nopersit highlighting //for current row and current cell
                                   // 3 nopersist when grid is not the current active control.
 
-   METHOD New(lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
-              bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;
-              lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect,;
-              lDescend, bWhile, bFirst, bLast, bFor, bOther,tcolor, bcolor, brclick, bChgRowCol, ctooltip)
+   METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
+              bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
+              lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect, ;
+              lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, brclick, bChgRowCol, ctooltip)
    METHOD InitBrw(nType, lInit)
    METHOD Rebuild()
    METHOD Activate()
@@ -533,7 +533,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       ENDIF
       //
       IF hb_IsBlock(::bOther)
-         IF !hb_IsNumeric(nRet := Eval(::bOther,Self,msg,wParam,lParam))
+         IF !hb_IsNumeric(nRet := Eval(::bOther, Self, msg, wParam, lParam))
             nRet := IIf(hb_IsLogical(nRet) .AND. !nRet, 0, -1)
          ENDIF
          IF nRet >= 0
@@ -594,7 +594,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
              SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
          ENDIF
          */
-         ::internal[1] := 15 //force redraw header,footer and separator
+         ::internal[1] := 15 //force redraw header, footer and separator
 
       ELSEIF msg == WM_HSCROLL
          ::DoHScroll(wParam)
@@ -647,9 +647,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::lShiftPress := .F.
          ENDIF
          IF wParam == VK_TAB .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-            IF IsCtrlShift(.T.,.F.)
-               getskip(::oParent,::handle,, ;
-               IIf(IsCtrlShift(.F., .T.), -1, 1))
+            IF IsCtrlShift(.T., .F.)
+               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ENDIF
             /*
@@ -695,8 +694,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
          IF wParam == VK_TAB
             IF ::lCtrlPress
-               getskip(::oParent,::handle,, ;
-               IIf(IsCtrlShift(.F., .T.), -1, 1))
+               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSE
                ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
@@ -2199,7 +2197,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          IF !oColumn:lHeadClick
             state := IIf(::hTheme != Nil, IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,;
                                                 PBS_HOT, PBS_NORMAL), PBS_NORMAL)
-            axPosMouseOver  := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,{x, x + xsize },axPosMouseOver)
+            axPosMouseOver  := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,{x, x + xsize }, axPosMouseOver)
          ELSE
             state := IIf(::hTheme != Nil, PBS_PRESSED, 6)
             InflateRect(@aItemRect, -1, -1)
@@ -3222,10 +3220,10 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
    aColumns[Len(aColumns), 1] += xSize
 
    DO WHILE fif <= Len(::aColumns)
-      IF ( !( fif < ( ::nLeftCol + ::nColumns ) .AND. x1 + aColumns[fif,1] < xm ) )
+      IF ( !( fif < ( ::nLeftCol + ::nColumns ) .AND. x1 + aColumns[fif, 1] < xm ) )
          EXIT
       ENDIF
-      x1 += aColumns[fif,1]
+      x1 += aColumns[fif, 1]
       fif := IIf(fif == ::freeze, ::nLeftCol, fif + 1)
    ENDDO
    IF fif > Len(aColumns)
@@ -3422,10 +3420,10 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
    x1  := ::x1
    aColumns[Len(aColumns), 1] += xSize
    DO WHILE fif <= Len(aColumns)
-      IF ( !( fif < ( ::nLeftCol + ::nColumns ) .AND. x1 + aColumns[fif,1] < xm ) )
+      IF ( !( fif < ( ::nLeftCol + ::nColumns ) .AND. x1 + aColumns[fif, 1] < xm ) )
          EXIT
       ENDIF
-      x1 += aColumns[fif,1]
+      x1 += aColumns[fif, 1]
       fif := IIf(fif == ::freeze, ::nLeftCol, fif + 1)
    ENDDO
    IF fif > Len(aColumns)
@@ -3702,13 +3700,13 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                  //oModDlg:AddEvent(0, IDOK, { || oModDlg:lResult := .T., oModDlg:close() })
                IF oColumn:bClick != NIL
                   IF Type != "D"
-                     @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16,::height - 0 ;
+                     @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16, ::height - 0 ;
                         TEXT "..."  FONT HFont():Add("MS Sans Serif", 0, -10, 400, , ,) ;
                         COORDINATES 0, 1, 0, 0      ;
                         ON CLICK {| oColumn, oBtn | HB_SYMBOL_UNUSED(oColumn), ::onClickColumn(.T., oGet, oBtn) }
                         oBtn:themed :=  ::hTheme != Nil
                   ELSE
-                     @ nWidth - 16, 0 DATEPICKER oBtn SIZE 16,::height-1  ;
+                     @ nWidth - 16, 0 DATEPICKER oBtn SIZE 16, ::height - 1  ;
                         ON CHANGE {| value, oBtn |  ::onClickColumn(value, oGet, oBtn) }
                   ENDIF
                ENDIF

@@ -137,13 +137,13 @@ METHOD Paint() CLASS HSplitter
       IF ::lCaptured
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
          SelectObject(hDC, oBrushFill:handle)
-         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP) + BF_MIDDLE)
+         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP) + BF_MIDDLE)
          FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
       ELSEIF ::BackStyle == OPAQUE
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
       ENDIF
    ELSEIF !::lMoved .AND. ::BackStyle == OPAQUE
-      DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP)) //+ BF_MIDDLE)
+      DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP)) //+ BF_MIDDLE)
    ENDIF
    EndPaint(::handle, pps)
 
@@ -187,7 +187,7 @@ METHOD DragAll(lScroll) CLASS HSplitter
          //oCtrl:nTop += nDiff
          //oCtrl:nHeight -= nDiff
       ENDIF
-      oCtrl:Move(oCtrl:nLeft + xDiff, oCtrl:nTop + yDiff, oCtrl:nWidth - xDiff ,oCtrl:nHeight - yDiff, !lScroll)
+      oCtrl:Move(oCtrl:nLeft + xDiff, oCtrl:nTop + yDiff, oCtrl:nWidth - xDiff, oCtrl:nHeight - yDiff, !lScroll)
       //IF oCtrl:winclass == "STATIC"
       InvalidateRect(oCtrl:handle, 1)
       //ENDIF

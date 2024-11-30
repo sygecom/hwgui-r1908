@@ -1014,11 +1014,10 @@ METHOD GetApplyKey(cKey) CLASS HEdit
       ::DeleteChar(.F.)
    ENDIF
    ::title := GetEditText(::oParent:handle, ::id)
-   IF ::cType == "N" .AND. cKey $ ".," .AND. ;
-      (nPos := At(".", ::cPicMask)) != 0
+   IF ::cType == "N" .AND. cKey $ ".," .AND. (nPos := At(".", ::cPicMask)) != 0
       IF ::lFirst
          // vari := 0
-         vari := StrTran(Trim(::title)," ",IIF("E" $ ::cPicFunc, ",", "."))
+         vari := StrTran(Trim(::title), " ", IIF("E" $ ::cPicFunc, ",", "."))
          vari := Val(vari)
       ELSE
          vari := Trim(::title)
@@ -1034,7 +1033,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
             ::title := "."
          ELSE
             // nando -                               remove the .
-            vari := strtran(vari," ", IIF("E" $ ::cPicFunc, ",", " "))
+            vari := strtran(vari, " ", IIF("E" $ ::cPicFunc, ",", " "))
          ENDIF
          vari := Val(vari)
          lSignal := IIF(lSignal .AND. vari != 0, .F., lSignal)
@@ -1652,7 +1651,7 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
    ENDIF
    IF nSkip != 0 .AND. SelfFocus(hctrl, nextHandle) .AND. oCtrl != NIL
      // necessario para executa um codigo do lostfcosu
-      IF __ObjHasMsg(oCtrl,"BLOSTFOCUS") .AND. oCtrl:blostfocus != NIL
+      IF __ObjHasMsg(oCtrl, "BLOSTFOCUS") .AND. oCtrl:blostfocus != NIL
          SendMessage(nexthandle, WM_KILLFOCUS, 0, 0)
       ENDIF
    ENDIF
@@ -1773,7 +1772,7 @@ RETURN nextHandle
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-STATIC FUNCTION NextFocusContainer(oParent,hCtrl,nSkip)
+STATIC FUNCTION NextFocusContainer(oParent, hCtrl, nSkip)
    
    LOCAL nextHandle := NIL
    LOCAL i

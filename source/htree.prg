@@ -377,7 +377,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
    Local nEval, hitemNew, htiParent, htiPrev, htiNext
 
    IF hb_IsBlock(::bOther)
-      IF ( nEval := Eval(::bOther,Self,msg,wParam,lParam)) != Nil .AND. nEval != - 1
+      IF ( nEval := Eval(::bOther, Self, msg, wParam, lParam)) != Nil .AND. nEval != - 1
          RETURN 0
       ENDIF
    ENDIF
@@ -433,7 +433,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
       // fazr a arotina para copias os nodos filhos ao arrastar
       IF !IsCtrlShift(.T.)
          IF ::hitemDrop:oParent != Nil
-            hitemNew := ::hitemDrop:oParent:AddNode(::hitemDrag:GetText(), htiPrev ,htiNext, ::hitemDrag:bAction,, ::hitemDrag:lchecked, ::hitemDrag:bClick) //, ::hitemDrop:aImages)
+            hitemNew := ::hitemDrop:oParent:AddNode(::hitemDrag:GetText(), htiPrev, htiNext, ::hitemDrag:bAction,, ::hitemDrag:lchecked, ::hitemDrag:bClick) //, ::hitemDrop:aImages)
          ELSE
             hitemNew := ::AddNode(::hitemDrag:GetText(), htiPrev, htiNext, ::hitemDrag:bAction, , ::hitemDrag:lchecked, ::hitemDrag:bClick) //, ::hitemDrop:aImages)
          ENDIF

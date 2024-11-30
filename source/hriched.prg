@@ -137,7 +137,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
    IF msg == WM_CHAR
       IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
+         IF ( IsCtrlShift(.T., .F.) .OR. !::lAllowTabs )
             RETURN 0
          ENDIF
       ENDIF
@@ -152,13 +152,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
    IF msg == WM_KEYUP
      IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF IsCtrlShift(.T.,.F.)
+         IF IsCtrlShift(.T., .F.)
             GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYDOWN
-      IF wParam == VK_TAB .AND. ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
+      IF wParam == VK_TAB .AND. ( IsCtrlShift(.T., .F.) .OR. !::lAllowTabs )
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
@@ -294,7 +294,7 @@ METHOD Print() CLASS HRichEdit
 /*
 Function DefRichProc(hEdit, msg, wParam, lParam)
 Local oEdit
-   // writelog( "RichProc: " + Str(hEdit,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   // writelog( "RichProc: " + Str(hEdit, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
    oEdit := FindSelf( hEdit )
    IF msg == WM_CHAR
       oEdit:lChanged := .T.

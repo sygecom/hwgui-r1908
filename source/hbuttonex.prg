@@ -346,7 +346,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
         ENDIF
      ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIF(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
               wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
-        IF __ObjHasMsg(::oParent:aControls[nID],"BCLICK") .AND. ;
+        IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
            hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3
            SendMessage(::oParent:handle, WM_COMMAND, makewparam(::oParent:aControls[nID]:id, BN_CLICKED), ::oParent:aControls[nID]:handle)
         ENDIF
@@ -544,7 +544,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ENDIF
       ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIF(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
               wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
-         IF __ObjHasMsg(::oParent:aControls[nID],"BCLICK") .AND. ;
+         IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
             hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3
             SendMessage(::oParent:handle, WM_COMMAND, makewparam(::oParent:aControls[nID]:id, BN_CLICKED), ::oParent:aControls[nID]:handle)
          ENDIF
@@ -562,7 +562,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
             ENDIF
          ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIF(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
                  wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
-            IF __ObjHasMsg(::oParent:aControls[nID],"BCLICK") .AND. ;
+            IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
                hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3
                SendMessage(::oParent:handle, WM_COMMAND, makewparam(::oParent:aControls[nID]:id, BN_CLICKED), ::oParent:aControls[nID]:handle)
             ENDIF

@@ -563,7 +563,7 @@ METHOD ShowPage(nPage) CLASS HTab
       ENDIF
    /*
    FOR i := nFirst TO nEnd
-      IF (__ObjHasMsg( ::aControls[i],"BSETGET" ) .AND. ::aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aControls[i]:style, WS_TABSTOP) != 0
+      IF (__ObjHasMsg(::aControls[i], "BSETGET") .AND. ::aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aControls[i]:style, WS_TABSTOP) != 0
          SetFocus(::aControls[i]:handle)
          Exit
       ENDIF
@@ -865,7 +865,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
           GetSkip(::oParent, ::handle, , -1)
           RETURN 0
        ENDIF
-   ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(,GETFOCUS()):classname = "HUPDO"
+   ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(, GETFOCUS()):classname = "HUPDO"
        IF GetFocus() == ::handle
           InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
        ENDIF
@@ -1003,7 +1003,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    CASE WM_HSCROLL
    CASE WM_VSCROLL
-      //.AND. ::FINDCONTROL(,GETFOCUS()):classname = "HUPDO"
+      //.AND. ::FINDCONTROL(, GETFOCUS()):classname = "HUPDO"
       IF GetFocus() == ::handle
           InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
       ENDIF
@@ -1209,7 +1209,7 @@ RETURN Self
 METHOD Activate() CLASS HPaintTab
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth,::nHeight)
+      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
    ENDIF
 
 RETURN NIL

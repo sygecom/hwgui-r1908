@@ -82,7 +82,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    
    nStyle := Hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
    ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
-   ::title := IIf(cCaption != Nil,cCaption ,"HWGUI HomePage")
+   ::title := IIf(cCaption != Nil, cCaption, "HWGUI HomePage")
    ::hbitmap := hbitmap
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
@@ -424,7 +424,7 @@ METHOD Resize(x, y) CLASS HStaticLink
    ENDIF
 
    x := IIf(x == Nil, 0, x - ::nWidth + 1)
-   aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), { 0,0 })
+   aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
    aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
    aTxtSize := TxtRect(::Title, Self)

@@ -228,7 +228,7 @@ METHOD CREATETOOL() CLASS hToolBar
       ::nwSize := MAX(16, (::nHeight - 16))
    ENDIF
    IF ::nwSize != NIL
-      SendMessage(::handle, TB_SETBITMAPSIZE,0, MAKELONG(::nwSize, ::nhSize))
+      SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nwSize, ::nhSize))
    ENDIF
 
    FOR n := 1 TO Len(::aItem)

@@ -57,15 +57,15 @@ Return xItem
 METHOD GetAttribute(cName) CLASS HXMLNode
 Local i := Ascan(::aAttr, {|a|a[1]==cName})
 
-Return IIf(i==0, Nil, ::aAttr[i,2])
+Return IIf(i==0, Nil, ::aAttr[i, 2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
 Local i := Ascan(::aAttr,{|a|a[1]==cName})
 
    IF i == 0
-      Aadd(::aAttr, { cName,cValue })
+      Aadd(::aAttr, { cName, cValue })
    ELSE
-      ::aAttr[i,2] := cValue
+      ::aAttr[i, 2] := cValue
    ENDIF
 
 Return .T.
@@ -98,7 +98,7 @@ Local i, s := Space(level*2)+"<", lNewLine
    ENDIF
    IF ::type == HBXML_TYPE_TAG .OR. ::type == HBXML_TYPE_SINGLE
       FOR i := 1 TO Len(::aAttr)
-         s += " " + ::aAttr[i,1] + '="' + HBXML_Transform(::aAttr[i,2]) + '"'
+         s += " " + ::aAttr[i, 1] + '="' + HBXML_Transform(::aAttr[i, 2]) + '"'
       NEXT
    ENDIF
    IF ::type == HBXML_TYPE_PI
@@ -158,7 +158,7 @@ Local i, s := Space(level*2)+"<", lNewLine
       ENDIF
    ELSE
       IF ::type == HBXML_TYPE_TAG
-         s += IIf(lNewLine,Space(level*2),"") + "</" + ::title + ">" + Chr(10 )
+         s += IIf(lNewLine, Space(level * 2), "") + "</" + ::title + ">" + Chr(10)
       ELSEIF ::type == HBXML_TYPE_CDATA
          s += "]]>" + Chr(10)
       ELSEIF ::type == HBXML_TYPE_COMMENT
@@ -175,12 +175,12 @@ Local i
       nStart := 1
    ENDIF
    DO WHILE .T.
-      i := Ascan(::aItems,{|a|!hb_IsChar(a).AND.a:title==cTitle},nStart)
+      i := Ascan(::aItems, {|a|!hb_IsChar(a) .AND. a:title == cTitle}, nStart)
       IF i == 0
          EXIT
       ELSE
          nStart := i
-         IF block == Nil .OR. Eval(block,::aItems[i])
+         IF block == Nil .OR. Eval(block, ::aItems[i])
             Return ::aItems[i]
          ELSE
             nStart ++
@@ -208,8 +208,8 @@ ENDCLASS
 METHOD New(encoding) CLASS HXMLDoc
 
    IF encoding != Nil
-      Aadd(::aAttr, { "version","1.0" })
-      Aadd(::aAttr, { "encoding",encoding })
+      Aadd(::aAttr, { "version", "1.0" })
+      Aadd(::aAttr, { "encoding", encoding })
    ENDIF
 
 Return Self

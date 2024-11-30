@@ -160,7 +160,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBord
    nStyle := IIf(nStyle == NIL, 3, nStyle)  // FLAT
    lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)  // FLAT
 
-   return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize,,, nStyle, lnoBorder,,,,, bInit) //,bClick, bDblClick)
+   return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize,,, nStyle, lnoBorder,,,,, bInit) //, bClick, bDblClick)
 
 
 //---------------------------------------------------------------------------
@@ -461,11 +461,11 @@ METHOD Paint(lpdis) CLASS HContainer
       SetBkMode(hDC, ::backStyle)
       IF !::lnoBorder
          IF ::ncStyle == 0      // RAISED
-           DrawEdge(hDC, x1, y1, x2, y2,BDR_RAISED,BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM)  // raised  forte      8
+           DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM)  // raised  forte      8
          ELSEIF ::ncStyle == 1  // sunken
-           DrawEdge(hDC, x1, y1, x2, y2,BDR_SUNKEN,BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // sunken mais forte
+           DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKEN, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // sunken mais forte
          ELSEIF ::ncStyle == 2  // FRAME
-           DrawEdge(hDC, x1, y1, x2, y2,BDR_RAISED+BDR_RAISEDOUTER,BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // FRAME
+           DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED+BDR_RAISEDOUTER, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // FRAME
          ELSE                   // FLAT
            DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKENINNER, BF_TOP)
            DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISEDOUTER, BF_BOTTOM)

@@ -518,7 +518,7 @@ RETURN .T.
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD ScrollHV(oForm, msg,wParam,lParam) CLASS HCustomWindow
+METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
 
    LOCAL nDelta
    LOCAL nSBCode
@@ -1314,7 +1314,7 @@ FUNCTION FindAccelerator(oCtrl, lParam)
       IF LEN(oCtrl:aControls[i]:aControls) > 0
          RETURN FindAccelerator(oCtrl:aControls[i], lParam)
       ENDIF
-      IF __ObjHasMsg(oCtrl:aControls[i],"TITLE") .AND. hb_IsChar(oCtrl:aControls[i]:title) .AND. ;
+      IF __ObjHasMsg(oCtrl:aControls[i], "TITLE") .AND. hb_IsChar(oCtrl:aControls[i]:title) .AND. ;
          !oCtrl:aControls[i]:lHide .AND. IsWindowEnabled(oCtrl:aControls[i]:handle)
          IF (pos := At("&", oCtrl:aControls[i]:title)) > 0 .AND. ;
             Upper(Chr(lParam)) == Upper(SubStr(oCtrl:aControls[i]:title, ++pos, 1))

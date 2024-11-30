@@ -19,7 +19,7 @@
 // English Say Money
 FUNCTION SayDollar(nDollar)
 
- LOCAL cDollar := Right(LTrim(STR(nDollar,15)), 11)
+ LOCAL cDollar := Right(LTrim(STR(nDollar, 15)), 11)
  LOCAL nAA := 1
  LOCAL nPJ := LEN(cDollar)
  LOCAL xSay := "", xLang2, xLang1, xMuch, xNum, xteen
@@ -32,7 +32,7 @@ FUNCTION SayDollar(nDollar)
     xLang2 := ""
     xLang1 := ""
     xMuch := "ONE"
-    xNum := LEFT(cDollar,1)
+    xNum := LEFT(cDollar, 1)
 
     IF nPJ=6.AND.xNum="0".OR.nPJ=5.AND.xNum="0".AND.nCheck1=1
         nCheck1 := 1
@@ -203,30 +203,30 @@ RETURN (xSay)
 
 // Indonesian Say Money
 
-#define  PECAHAN {"TRILIUN ","MILYAR ","JUTA ","RIBU ","RUPIAH"}
+#define  PECAHAN {"TRILIUN ", "MILYAR ", "JUTA ", "RIBU ", "RUPIAH"}
 
 FUNCTION SayRupiah(nAngka)
 
- LOCAL n, kata, kalimat:=IIf(nAngka<0,"Minus ","")
- LOCAL char := strtran(str(ABS(INT(nAngka)),15)," ","0")
+   LOCAL n, kata, kalimat := IIf(nAngka < 0, "Minus ", "")
+   LOCAL char := strtran(str(ABS(INT(nAngka)), 15), " ", "0")
 
-  FOR n:=1 to 5
-    kalimat +=  tigades(subs(char,n*3-2,3),n)
-    kata    :=  IIf(subs(char,n*3-2,3)=="000","",PECAHAN[n])
-    kalimat +=  kata
-  NEXT
+   FOR n := 1 TO 5
+      kalimat += tigades(subs(char, n * 3 - 2, 3), n)
+      kata := IIf(subs(char, n * 3 - 2, 3) == "000", "", PECAHAN[n])
+      kalimat += kata
+   NEXT
 
-   char:="0"+Right(STR(nAngka,18,2), 2)
+   char := "0" + Right(STR(nAngka, 18, 2), 2)
 
-   kalimat+=IIf(char != "000"," koma "+tigades(char,1)+"sen","")
+   kalimat += IIf(char != "000", " koma " + tigades(char, 1) + "sen", "")
 
- RETURN (kalimat)
+RETURN (kalimat)
 
 
 
 //
 STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
- LOCAL say := "", x1 := left(mvc,1), x2:=subs(mvc,2,1), x3:=right(mvc,1)
+ LOCAL say := "", x1 := left(mvc, 1), x2:=subs(mvc, 2, 1), x3:=right(mvc, 1)
 
  IF n == 4 .and. mvc == "001"
     RETURN "se"
@@ -252,10 +252,9 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
  RETURN (say)
 
 
-#define  bil_asli { "SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH",;
-                    "DELAPAN","SEMBILAN" }
+#define  bil_asli { "SATU", "DUA", "TIGA", "EMPAT", "LIMA", "ENAM", "TUJUH", "DELAPAN", "SEMBILAN" }
 
-STATIC FUNCTION  bil(x)
- RETURN    IIf(x != "0", bil_asli[val(x)]+" ","")
+STATIC FUNCTION bil(x)
+RETURN IIf(x != "0", bil_asli[val(x)] + " ", "")
 
 // eof SayRupiah

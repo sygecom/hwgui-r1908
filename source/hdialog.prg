@@ -512,7 +512,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    // oDlg:handle := hDlg
    // writelog(str(oDlg:handle) + " " + oDlg:title)
    //  .if uMsg == WM_INITDIALOG
-   //-EnableThemeDialogTexture(odlg:handle,6)  //,ETDT_ENABLETAB)
+   //-EnableThemeDialogTexture(odlg:handle, 6)  //, ETDT_ENABLETAB)
 
    IF hb_IsArray(oDlg:menu)
       hwg__SetMenu(oDlg:handle, oDlg:menu[5])

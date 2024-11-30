@@ -78,7 +78,7 @@ FUNCTION main
 
    @ 20, 113 EDITBOX oEdit2 CAPTION "Example"  SIZE 24, 130
 
-   //@5,5 BARCODE oBC VAR  "000000000001" TYPE EAN13
+   //@ 5, 5 BARCODE oBC VAR "000000000001" TYPE EAN13
    //SHOWBARCODE oBC
 
    nTop := 15
@@ -627,7 +627,7 @@ METHOD InitUPC(nLen) CLASS BarCode
    LOCAL Izda, Dcha, k
    LOCAL cCode := ::cText
 
-   // valid values for nLen are 11,7
+   // valid values for nLen are 11, 7
    k := Left(AllTrim(cCode) + "000000000000", nLen) // padding with "0"
    // calculo del digito de control
    // suma de impares

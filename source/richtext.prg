@@ -192,9 +192,9 @@ CLASS RichText
                  aColores, nWidth, nPatron, lSombra, aSombra)
    METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign, ;
                  cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos)
-//    METHOD RtfJpg(cName,aSize,nPercent)
-   //  METHOD Wmf2Rtf(cName,aSize,nPercent)
-   // METHOD Bmp2Wmf(cName,aSize,nPercent)
+//    METHOD RtfJpg(cName, aSize, nPercent)
+   //  METHOD Wmf2Rtf(cName, aSize, nPercent)
+   // METHOD Bmp2Wmf(cName, aSize, nPercent)
    // Information
    METHOD InfoDoc(cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
                    cCategor, cKeyWords, cComment)
@@ -2334,11 +2334,11 @@ METHOD CurrDate(cFormat) CLASS RichText
 
    RETURN NIL
 
-/*METHOD RtfJpg(cName,aSize,nPercent) CLASS RichText
-local aInches[2],in,nWidth,nHeight,i
-LOCAL cMenInter,n_bloque,nBytes,lHecho
-local codigo,scale,PictWidth,PictHeight
-LOCAL ScreenResY,ScreenResX
+/*METHOD RtfJpg(cName, aSize, nPercent) CLASS RichText
+local aInches[2], in, nWidth, nHeight, i
+LOCAL cMenInter, n_bloque, nBytes, lHecho
+local codigo, scale, PictWidth, PictHeight
+LOCAL ScreenResY, ScreenResX
 
 DEFAULT  aSize:={}
 DEFAULT  nPercent=1
@@ -2349,37 +2349,37 @@ lHecho:=.F.
 
 IF LoadPicture(cName,@nWidth,@nHeight,@ScreenResX,@ScreenResY) //NViewLib32( AllTrim(cName ))
 
-        aInches[1]:= ROUND(((nWidth/ScreenResX)*::nScale)+0.5,0)
-        aInches[2]:= ROUND(((nHeight/ScreenResY)*::nScale)+0.5,0)
+        aInches[1]:= ROUND(((nWidth/ScreenResX)*::nScale)+0.5, 0)
+        aInches[2]:= ROUND(((nHeight/ScreenResY)*::nScale)+0.5, 0)
 
 // Dimensiones de la imagen en twips
 
    IF Empty(aSize)
-                PictWidth:=ROUND(aInches[1]+0.5,0)*nPercent
-                PictHeight:=ROUND(aInches[2]+0.5,0)*nPercent
+                PictWidth:=ROUND(aInches[1]+0.5, 0)*nPercent
+                PictHeight:=ROUND(aInches[2]+0.5, 0)*nPercent
         ELSE
-                PictWidth:=ROUND((aSize[1]*::nScale)+0.5,0)
-                PictHeight:=ROUND((aSize[2]*::nScale)+0.5,0)
+                PictWidth:=ROUND((aSize[1]*::nScale)+0.5, 0)
+                PictHeight:=ROUND((aSize[2]*::nScale)+0.5, 0)
         ENDIF
 
    in:=fopen(cName)
 
    ::OpenGroup()
    ::TextCode("pict\jpegblip")
-   scale=ROUND((PictWidth*100/aInches[1])+0.5,0)
-   ::NumCode("picw",nWidth,.F.)
-   ::NumCode("picwgoal",aInches[1],.F.)
-          ::NumCode("picscalex",scale,.F.)
-   scale=ROUND((PictHeight*100/aInches[2])+0.5,0)
-   ::NumCode("pich",nHeight,.F.)
-   ::NumCode("pichgoal",aInches[2],.F.)
-   ::NumCode("picscaley",scale,.F.)
+   scale=ROUND((PictWidth*100/aInches[1])+0.5, 0)
+   ::NumCode("picw", nWidth, .F.)
+   ::NumCode("picwgoal", aInches[1], .F.)
+          ::NumCode("picscalex", scale, .F.)
+   scale=ROUND((PictHeight*100/aInches[2])+0.5, 0)
+   ::NumCode("pich", nHeight, .F.)
+   ::NumCode("pichgoal", aInches[2], .F.)
+   ::NumCode("picscaley", scale, .F.)
 
    do while !lHecho
-           nBytes:=fread(in,@cMenInter,n_bloque)
+           nBytes:=fread(in, @cMenInter, n_bloque)
            IF nBytes > 0
-              codigo:=PADL(L_DTOHEX(ASC(cMenInter)),2,"0")
-         FWRITE(::hfile,codigo)
+              codigo:=PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+         FWRITE(::hfile, codigo)
            else
                    lHecho:= .T.
            endif
@@ -2391,10 +2391,10 @@ ENDIF
 
 RETURN NIL
 
-METHOD Wmf2Rtf(cName,aSize,nPercent) CLASS RichText
-local in,cMenInter,n_bloque,nBytes,lHecho,i
-local codigo,cBRead,scale,PictWidth,PictHeight
-LOCAL ancho,alto,bmHeight,bmWidth,x,aInfo[5]
+METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
+local in, cMenInter, n_bloque, nBytes, lHecho, i
+local codigo, cBRead, scale, PictWidth, PictHeight
+LOCAL ancho, alto, bmHeight, bmWidth, x, aInfo[5]
 
 DEFAULT  aSize to {}
 DEFAULT nPercent to 1
@@ -2404,7 +2404,7 @@ cMenInter:=space(n_bloque)
 lHecho:=.F.
 cBRead:=0
 
-cBRead:=GETBMETAFILE(cName,aInfo)
+cBRead:=GETBMETAFILE(cName, aInfo)
 
 IF cBRead > 0
 
@@ -2416,32 +2416,32 @@ IF cBRead > 0
                 ancho := (aSize[1]*aInfo[5])
         ENDIF
 
-   bmHeight := ROUND((alto*1440/2540)+0.5,0)
-   bmWidth := ROUND((ancho*1440/2540)+0.5,0)
+   bmHeight := ROUND((alto*1440/2540)+0.5, 0)
+   bmWidth := ROUND((ancho*1440/2540)+0.5, 0)
 
-   PictHeight := ROUND((alto*1440/::oPrinter:nLogPixelY())+0.5,0)
-   PictWidth := ROUND((ancho*1440/::oPrinter:nLogPixelX())+0.5,0)
+   PictHeight := ROUND((alto*1440/::oPrinter:nLogPixelY())+0.5, 0)
+   PictWidth := ROUND((ancho*1440/::oPrinter:nLogPixelX())+0.5, 0)
 
    in := fopen(cName)
         ::OpenGroup()
         ::TextCode("\pict\wmetafile8")
-   x := ROUND((bmWidth*2540/1440)+0.5,0)
-        ::NumCode("picw",x,.F.)
-        ::NumCode("picwgoal",bmWidth,.F.)
-   scale := ROUND((PictWidth*100/bmWidth)+0.5,0)
-        ::NumCode("picscalex",scale,.F.)
-   x := ROUND((bmHeight*2540/1440)+0.5,0)
-        ::NumCode("pich",x,.F.)
-        ::NumCode("pichgoal",bmHeight,.F.)
-   scale := ROUND((PictHeight*100/bmHeight)+0.5,0)
-        ::NumCode("picscaley",scale,.F.)
+   x := ROUND((bmWidth*2540/1440)+0.5, 0)
+        ::NumCode("picw", x, .F.)
+        ::NumCode("picwgoal", bmWidth, .F.)
+   scale := ROUND((PictWidth*100/bmWidth)+0.5, 0)
+        ::NumCode("picscalex", scale, .F.)
+   x := ROUND((bmHeight*2540/1440)+0.5, 0)
+        ::NumCode("pich", x, .F.)
+        ::NumCode("pichgoal", bmHeight, .F.)
+   scale := ROUND((PictHeight*100/bmHeight)+0.5, 0)
+        ::NumCode("picscaley", scale, .F.)
    ::OpenGroup()
-   fseek(in,cBRead,0)
+   fseek(in, cBRead, 0)
    do while !lHecho
-           nBytes := fread(in,@cMenInter,n_bloque)
+           nBytes := fread(in, @cMenInter, n_bloque)
            IF nBytes > 0
-              codigo := PADL(L_DTOHEX(ASC(cMenInter)),2,"0")
-         FWRITE(::hFile,codigo)
+              codigo := PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+         FWRITE(::hFile, codigo)
            else
                    lHecho := .T.
            endif
@@ -2457,9 +2457,9 @@ RETURN NIL
 * Funtion to load a picture using nviewlib.
 *
 /*
-FUNCTION LoadPicture(cName,nWidth,nHeight,ScreenResX,ScreenResy)
-LOCAL hDll,uResult,cFarProc
-LOCAL oWnd,hWnd,hdc
+FUNCTION LoadPicture(cName, nWidth, nHeight, ScreenResX, ScreenResy)
+LOCAL hDll, uResult, cFarProc
+LOCAL oWnd, hWnd, hdc
 
 hDLL := LoadLib32("nviewlib.dll")
 
@@ -2468,31 +2468,31 @@ IF Abs(hDll) <= 32
         RETURN .F.
 ENDIF
 
-cFarProc:=GetProc32(hDll,"NViewLibLoad",.T.,LONG,STRING,LONG)
-uResult=CallDll32(cFarProc,cName,0)
+cFarProc := GetProc32(hDll, "NViewLibLoad", .T., LONG, STRING, LONG)
+uResult := CallDll32(cFarProc, cName, 0)
 
-cFarProc:=GetProc32(hDll,"GetWidth",.T.,_INT)
-nWidth=CallDll32(cFarProc)
-cFarProc:=GetProc32(hDll,"GetHeight",.T.,_INT)
-nHeight=CallDll32(cFarProc)
+cFarProc := GetProc32(hDll, "GetWidth", .T., _INT)
+nWidth := CallDll32(cFarProc)
+cFarProc := GetProc32(hDll, "GetHeight", .T., _INT)
+nHeight := CallDll32(cFarProc)
 
 FreeLib32(hDll)
 
 oWnd:=GetWndDefault()
 hWnd:=oWnd:hWnd
 hdc:=GetDc(hWnd)
-ScreenResX:=GETDEVICEC(hdc,88)
-ScreenResY:=GETDEVICEC(hdc,90)
+ScreenResX:=GETDEVICEC(hdc, 88)
+ScreenResY:=GETDEVICEC(hdc, 90)
 
 RETURN .T.
 
-METHOD Bmp2Wmf(cName,aSize,nPercent) CLASS RichText
-LOCAL cMenInter,n_bloque,nBytes,lHecho
-local codigo,PictWidth,PictHeight
-LOCAL hDCOut,hDib,hPal,nRaster
-LOCAL cDir,temp,scalex,in,x,scaley
-LOCAL nWidth,nHeight
-LOCAL ResX,ResY
+METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
+LOCAL cMenInter, n_bloque, nBytes, lHecho
+local codigo, PictWidth, PictHeight
+LOCAL hDCOut, hDib, hPal, nRaster
+LOCAL cDir, temp, scalex, in, x, scaley
+LOCAL nWidth, nHeight
+LOCAL ResX, ResY
 LOCAL aInches[2]
 
 DEFAULT  aSize:={}
@@ -2504,7 +2504,7 @@ lHecho:=.F.
 
    cDir   := GetEnv("TEMP")
 
-   temp:=cDir+"\tmp"+padl(ALLTRIM(STR(::nFile,4,0)),4,"0")+".wmf"
+   temp:=cDir+"\tmp"+padl(ALLTRIM(STR(::nFile, 4, 0)), 4, "0")+".wmf"
 
    hDCOut := CreateMetaFile(temp)
 
@@ -2529,18 +2529,18 @@ lHecho:=.F.
                         scalex:=INT(nPercent*100)
                         scaley:=INT(nPercent*100)
                 ELSE
-                        scalex:=ROUND(((aSize[1]*100)/aInches[1])+0.5,0)
-                        scaley:=ROUND(((aSize[2]*100)/aInches[2])+0.5,0)
+                        scalex:=ROUND(((aSize[1]*100)/aInches[1])+0.5, 0)
+                        scaley:=ROUND(((aSize[2]*100)/aInches[2])+0.5, 0)
                         aInches[1]:=aSize[1]
                         aInches[2]:=aSize[2]
                 ENDIF
 
-      aInches[1]:=ROUND(aInches[1]*1440,0)
-                aInches[2]:=ROUND(aInches[2]*1440,0)
+      aInches[1]:=ROUND(aInches[1]*1440, 0)
+                aInches[2]:=ROUND(aInches[2]*1440, 0)
 
     // initialize the metafile
-          SETWNDEX(hDCOut,0,0)
-      SetWindowExtEx(hDCOut,nWidth,nHeight);
+          SETWNDEX(hDCOut, 0, 0)
+      SetWindowExtEx(hDCOut, nWidth, nHeight);
 
       DibDraw(hDCOut, hDib, hPal, 0, 0,;
                nWidth, nHeight, nRaster)
@@ -2556,20 +2556,20 @@ lHecho:=.F.
       in:=fopen(temp)
            ::OpenGroup()
            ::TextCode("\pict\wmetafile8")
-           x:=ROUND(((aInches[1]*2540)/1440)+0.5,0)
-           ::NumCode("picw",x,.F.)
-           ::NumCode("picwgoal",aInches[1],.F.)
-           ::NumCode("picscalex",scalex,.F.)
-           x:=ROUND(((aInches[2]*2540)/1440)+0.5,0)
-           ::NumCode("pich",x,.F.)
-           ::NumCode("pichgoal",aInches[2],.F.)
-           ::NumCode("picscaley",scaley,.F.)
+           x:=ROUND(((aInches[1]*2540)/1440)+0.5, 0)
+           ::NumCode("picw", x, .F.)
+           ::NumCode("picwgoal", aInches[1], .F.)
+           ::NumCode("picscalex", scalex, .F.)
+           x:=ROUND(((aInches[2]*2540)/1440)+0.5, 0)
+           ::NumCode("pich", x, .F.)
+           ::NumCode("pichgoal", aInches[2], .F.)
+           ::NumCode("picscaley", scaley, .F.)
       ::OpenGroup()
       do while !lHecho
-              nBytes:=fread(in,@cMenInter,n_bloque)
+              nBytes:=fread(in, @cMenInter, n_bloque)
               IF nBytes > 0
-                 codigo:=PADL(L_DTOHEX(ASC(cMenInter)),2,"0")
-            FWRITE(::hFile,codigo)
+                 codigo:=PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+            FWRITE(::hFile, codigo)
               else
                       lHecho:= .T.
               endif

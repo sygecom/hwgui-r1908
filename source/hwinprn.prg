@@ -67,7 +67,7 @@ ENDCLASS
 
 METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies) CLASS HWinPrn
 
-   ::oPrinter := HPrinter():New(IIf(cPrinter == Nil,"",cPrinter),.F., nFormType, nBin, lLandScape, nCopies)
+   ::oPrinter := HPrinter():New(IIf(cPrinter == Nil, "", cPrinter), .F., nFormType, nBin, lLandScape, nCopies)
    IF ::oPrinter == Nil
       Return Nil
    ENDIF
@@ -214,7 +214,7 @@ Local i, i0, j, slen, c
       DO WHILE i <= slen
          IF ( c := SubStr(cLine, i, 1) ) < " "
             IF i0 != 0
-               ::PrintText(Substr(cLine,i0,i-i0 ))
+               ::PrintText(Substr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
@@ -240,29 +240,29 @@ Local i, i0, j, slen, c
                   ::oPrinter:Line(::x + (::nCharW / 2), ::y + (::nLineHeight / 2), ::x + ::nCharW, ::y + (::nLineHeight / 2))
                   ::oPrinter:Line(::x + (::nCharW / 2), ::y + (::nLineHeight / 2), ::x + (::nCharW / 2), ::y+::nLineHeight + ::nLined)
                ELSEIF j < 13    // ¿»·¸
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
                ELSEIF j < 17    // ÀÈÓÔ
-                  ::oPrinter:Line(::x+(::nCharW/2),::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
                ELSEIF j < 21    // Ù¼½¾
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
                ELSEIF j < 25    // ÂËÑÒ
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
                ELSEIF j < 29    // ÁÊÏÐ
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
                ELSEIF j < 33    // ÃÌÆÇ
-                  ::oPrinter:Line(::x+(::nCharW/2),::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
                ELSEIF j < 37    // ´¹µ¶
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
                ELSE    // ÅÎ×Ø
-                  ::oPrinter:Line(::x,::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2),::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
                ENDIF
                ::x += ::nCharW
             ENDIF
@@ -293,25 +293,25 @@ Return Nil
 
 METHOD PutCode(cLine) CLASS HWinPrn
 Static aCodes := {   ;
-   { Chr(27)+"@",.F.,.F.,6,.F.,.F.,.F. },  ;     /* Reset */
-   { Chr(27)+"M",.T.,,,,, },  ;     /* Elite */
-   { Chr(15),,.T.,,,, },      ;     /* Cond */
-   { Chr(18),,.F.,,,, },      ;     /* Cancel Cond */
-   { Chr(27)+"0",,,8,,, },    ;     /* 8 lines per inch */
-   { Chr(27)+"2",,,6,,, },    ;     /* 6 lines per inch ( standard ) */
-   { Chr(27)+"-1",,,,,,.T. }, ;     /* underline */
-   { Chr(27)+"-0",,,,,,.F. }, ;     /* cancel underline */
-   { Chr(27)+"4",,,,,.T., },  ;     /* italic */
-   { Chr(27)+"5",,,,,.F., },  ;     /* cancel italic */
-   { Chr(27)+"G",,,,,.T., },  ;     /* bold */
-   { Chr(27)+"H",,,,.F.,, }   ;     /* cancel bold */
+   { Chr(27)+"@", .F., .F., 6, .F., .F., .F. },  ;     /* Reset */
+   { Chr(27)+"M", .T.,,,,, },  ;     /* Elite */
+   { Chr(15),, .T.,,,, },      ;     /* Cond */
+   { Chr(18),, .F.,,,, },      ;     /* Cancel Cond */
+   { Chr(27)+"0",,, 8,,, },    ;     /* 8 lines per inch */
+   { Chr(27)+"2",,, 6,,, },    ;     /* 6 lines per inch ( standard ) */
+   { Chr(27)+"-1",,,,,, .T. }, ;     /* underline */
+   { Chr(27)+"-0",,,,,, .F. }, ;     /* cancel underline */
+   { Chr(27)+"4",,,,, .T., },  ;     /* italic */
+   { Chr(27)+"5",,,,, .F., },  ;     /* cancel italic */
+   { Chr(27)+"G",,,,, .T., },  ;     /* bold */
+   { Chr(27)+"H",,,, .F.,, }   ;     /* cancel bold */
  }
 Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
    FOR i := 1 TO sLen
-      IF Left(aCodes[i,1],1) == c .AND. At(aCodes[i, 1], Left(cLine, 3)) == 1
-         ::InitValues(aCodes[i,2], aCodes[i,3], aCodes[i,4], aCodes[i,5], aCodes[i,6], aCodes[i,7])
-         Return Len(aCodes[i,1])
+      IF Left(aCodes[i, 1], 1) == c .AND. At(aCodes[i, 1], Left(cLine, 3)) == 1
+         ::InitValues(aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7])
+         Return Len(aCodes[i, 1])
       ENDIF
    NEXT
 
@@ -326,7 +326,7 @@ METHOD EndDoc() CLASS HWinPrn
    IF ::lDocStart
       ::oPrinter:EndDoc()
       ::lDocStart := .F.
-      IF __ObjHasMsg( ::oPrinter,"PREVIEW" ) .AND. ::oPrinter:lPreview
+      IF __ObjHasMsg(::oPrinter, "PREVIEW") .AND. ::oPrinter:lPreview
          ::oPrinter:Preview()
       ENDIF
    ENDIF

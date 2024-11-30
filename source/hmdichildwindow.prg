@@ -19,7 +19,7 @@ CLASS HMDIChildWindow INHERIT HWindow
 
 #if 0 // old code for reference (to be deleted)
 CLASS VAR aMessages INIT { ;
-                           { WM_CREATE, WM_COMMAND,WM_ERASEBKGND,WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
+                           { WM_CREATE, WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
                              WM_SYSCOMMAND, WM_ENTERIDLE, WM_MDIACTIVATE, WM_DESTROY }, ;
                            { ;
                              { | o, w, l | HB_SYMBOL_UNUSED(w), onMdiCreate(o, l) },        ;
@@ -467,7 +467,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       IF oWnd:lMaximized
          // restore
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle ,HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
+            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
          ENDIF
          MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
          MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
@@ -475,7 +475,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       ELSE
           // maximized
           IF oWnd:lSizeBox
-             HWG_SETWINDOWSTYLE(oWnd:handle ,HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
+             HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
           ENDIF
          MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
       ENDIF
@@ -573,7 +573,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
          oWnd:nFocus := GetFocus()
       ENDIF
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-   ELSEIF __ObjHasMsg(oWnd ,"OPOPUP") .AND. oWnd:oPopup != NIL .AND. ;
+   ELSEIF __ObjHasMsg(oWnd, "OPOPUP") .AND. oWnd:oPopup != NIL .AND. ;
       (aMenu := Hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iItem)) != NIL .AND. aMenu[1, iItem, 1] != NIL
       Eval(aMenu[1, iItem, 1], wParam)
    ELSEIF iParHigh == 1 // acelerator
@@ -611,7 +611,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-STATIC FUNCTION onMdiActivate(oWnd,wParam, lParam)
+STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
 
    LOCAL lScreen := oWnd:Screen != NIL
    LOCAL aWndMain

@@ -254,13 +254,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
    ELSEIF msg == WM_SETFOCUS .AND. nFocus > 0
       SETFOCUS(nFocus)
    ENDIF
-   IF (i := Ascan(::aMessages[1],msg)) != 0 .AND. ;
+   IF (i := Ascan(::aMessages[1], msg)) != 0 .AND. ;
        (!::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE)
-      Return Eval(::aMessages[2,i], Self, wParam, lParam)
+      Return Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
          IF ::nScrollBars != -1
-             ::ScrollHV(Self,msg,wParam,lParam)
+             ::ScrollHV(Self, msg, wParam, lParam)
          ENDIF
          onTrackScroll(Self, msg, wParam, lParam)
       ENDIF
@@ -659,7 +659,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       IF oWnd:lMaximized
          // restore
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle ,HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
+            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
          ENDIF
          MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
          MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
@@ -667,7 +667,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       ELSE
          // maximized
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle ,HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
+            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
          ENDIF
          MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
       ENDIF

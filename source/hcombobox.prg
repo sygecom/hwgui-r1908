@@ -162,8 +162,8 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       //::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|__InteractiveChange(o:FindControl(id))}, , "interactiveChange")
       ::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|::InteractiveChange(o:FindControl(id))}, , "interactiveChange")
    ENDIF
-   ::oParent:AddEvent(CBN_SELENDOK, Self, {|o, id|::onSelect(o:FindControl(id))},,"onSelect")
-   ::oParent:AddEvent(CBN_DROPDOWN, Self, {|o, id|::onDropDown(o:FindControl(id))},,"ondropdown")
+   ::oParent:AddEvent(CBN_SELENDOK, Self, {|o, id|::onSelect(o:FindControl(id))}, , "onSelect")
+   ::oParent:AddEvent(CBN_DROPDOWN, Self, {|o, id|::onDropDown(o:FindControl(id))}, , "ondropdown")
    ::oParent:AddEvent(CBN_CLOSEUP, Self, {||::ldropshow := .F.}, ,)
 
 RETURN Self
@@ -183,7 +183,7 @@ RETURN Nil
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, bGFocus, ;
-   bLFocus, bIChange, nDisplay, nMaxLength,ledit, ltext) CLASS HComboBox
+   bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext) CLASS HComboBox
 
    HB_SYMBOL_UNUSED(bLFocus)
    //HB_SYMBOL_UNUSED(bIChange)
@@ -311,7 +311,7 @@ METHOD INIT() CLASS HComboBox
          ELSE
             ComboSetString( ::handle, ::value )
          ENDIF
-         avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75   //,::oParent:oFont:handle)
+         avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
          NewLongComboWidth := ( LongComboWidth - 2 ) * avgwidth
          SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
@@ -735,7 +735,7 @@ METHOD GetValueBound(xItem) CLASS HComboBox
    ENDIF
    IF xItem == Nil
       IF ::lText
-          //nPos := IIf(::Value == Nil,0, AScan(::aItems, ::Value))
+          //nPos := IIf(::Value == Nil, 0, AScan(::aItems, ::Value))
           #ifdef __XHARBOUR__
           nPos := IIf(::Value == Nil, 0, AScan(::aItems, ::value, , , .T.))
           #else

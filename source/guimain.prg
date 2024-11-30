@@ -26,7 +26,7 @@ FUNCTION InitObjects(oWnd)
    IF !Empty(LoadArray)
       FOR i := 1 TO Len(LoadArray)
          IF !Empty(oWnd:handle)
-            IF __ObjHasMsg( LoadArray[i],"INIT")
+            IF __ObjHasMsg( LoadArray[i], "INIT")
                LoadArray[i]:Init(oWnd)
                LoadArray[i]:lInit := .T.
             ENDIF
@@ -274,7 +274,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
         STYLE nStyle            ;
         FONT oFont              ;
         ON INIT { | o | ResetWindowPos(o:handle), o:nInitFocus := oBrw }
-       //ON INIT {|o|ResetWindowPos(o:handle),oBrw:setfocus()}
+       //ON INIT {|o|ResetWindowPos(o:handle), oBrw:setfocus()}
    IF lArray
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
@@ -291,7 +291,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    oBrw:oFont  := oFont
    oBrw:bSize  := { | o, x, y | MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY) }
    oBrw:bEnter := { | o | nChoice := o:nCurrent, EndDialog( o:oParent:handle ) }
-   oBrw:bKeyDown := {|o,key|HB_SYMBOL_UNUSED(o),IIf(key==27,(EndDialog(oDlg:handle),.F.),.T.)}
+   oBrw:bKeyDown := {|o, key|HB_SYMBOL_UNUSED(o), IIf(key == 27, (EndDialog(oDlg:handle), .F.), .T.)}
 
    oBrw:lDispHead := .F.
    IF clrT != Nil

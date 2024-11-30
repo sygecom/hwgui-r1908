@@ -158,7 +158,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
             ENDIF
             RETURN 1
          ELSE
-            FillRect(wParam, 0,0, ::nWidth, ::nHeight, COLOR_3DFACE + 1)
+            FillRect(wParam, 0, 0, ::nWidth, ::nHeight, COLOR_3DFACE + 1)
             RETURN 1
          ENDIF
          */
@@ -304,7 +304,7 @@ METHOD Hide() CLASS HPanel
    ::nrePaint := 0
    lres := ::ResizeOffSet(3)
    /*
-   IF __ObjHasMsg( ::oParent,"AOFFSET" ) .AND. ::oParent:type == WND_MDI
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
       IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] -= ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -332,7 +332,7 @@ METHOD Show() CLASS HPanel
    ::nrePaint := - 1
    lRes := ::ResizeOffSet(2)
    /*
-   IF __ObjHasMsg( ::oParent,"AOFFSET" ) .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
       IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] += ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -364,7 +364,7 @@ METHOD Resize() CLASS HPanel
       RETURN Nil
    ENDIF
    /*
-   IF __ObjHasMsg( ::oParent,"AOFFSET" ) .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
       IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 )  //.AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] += ( nHeight  - ::nHeight )
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -398,7 +398,7 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
    nHinc := IIf(nMode == 1, nHinc, IIf(nMode == 2, ::nHeight, nHeight))
    DEFAULT nMode := 0
 
-   IF __ObjHasMsg( ::oParent,"AOFFSET" ) .AND. ::oParent:type == WND_MDI
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
       IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) //.AND. ::oParent:aOffset[2] > 0 //::nWidth = ::oParent:nWidth )
          ::oParent:aOffset[2] += IIf(nMode != 3, nHinc, - nHinc)
          lRes := .T.

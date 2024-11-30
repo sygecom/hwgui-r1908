@@ -237,7 +237,7 @@ METHOD SetValue(xValue) CLASS HDatePicker
    ::tValue := GetTimePicker(::handle)
    ::title := IIF(::lShowTime, ::tValue, ::dValue)
    IF hb_IsBlock(::bSetGet)
-      Eval(::bSetGet, IIF(::lShowTime, ::tValue,::dValue), Self)
+      Eval(::bSetGet, IIF(::lShowTime, ::tValue, ::dValue), Self)
    ENDIF
 
 RETURN NIL
@@ -326,7 +326,7 @@ METHOD Valid() CLASS HDatePicker
    ENDIF
    ::dValue := GetDatePicker(::handle)
    IF hb_IsBlock(::bSetGet)
-      Eval(::bSetGet, IIF(::lShowTime, ::tValue,::dValue), Self)
+      Eval(::bSetGet, IIF(::lShowTime, ::tValue, ::dValue), Self)
    ENDIF
    IF hb_IsBlock(::bLostFocus)
       ::oparent:lSuspendMsgsHandling := .T.

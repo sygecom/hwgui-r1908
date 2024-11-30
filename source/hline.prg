@@ -87,10 +87,10 @@ METHOD Paint(lpdis) CLASS HLine
 
    IF Empty(::LineSlant)
       IF ::lVert
-         // DrawEdge(hDC,x1,y1,x1+2,y2,EDGE_SUNKEN,BF_RIGHT)
+         // DrawEdge(hDC, x1, y1, x1 + 2, y2, EDGE_SUNKEN, BF_RIGHT)
          DrawLine(hDC, x1 + 1, y1, x1 + 1, y2)
       ELSE
-         // DrawEdge(hDC,x1,y1,x2,y1+2,EDGE_SUNKEN,BF_RIGHT)
+         // DrawEdge(hDC, x1, y1, x2, y1 + 2, EDGE_SUNKEN, BF_RIGHT)
          DrawLine(hDC, x1, y1 + 1, x2, y1 + 1)
       ENDIF
       SelectObject(hDC, ::oPenGray:handle)

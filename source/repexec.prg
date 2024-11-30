@@ -286,7 +286,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
       iItem := 1
       DO WHILE iItem <= Len(aPaintRep[FORM_ITEMS])
          aItem := aPaintRep[FORM_ITEMS, iItem]
-         // WriteLog( Str(iItem,3)+": "+Str(aItem[ITEM_TYPE]) )
+         // WriteLog( Str(iItem, 3)+": "+Str(aItem[ITEM_TYPE]) )
          IF aItem[ITEM_TYPE] == TYPE_MARKER
             IF aItem[ITEM_CAPTION] == "PH"
                IF aItem[ITEM_STATE] == 0
@@ -456,7 +456,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
 
    x2 := x1 + aItem[ITEM_WIDTH] - 1
    y2 := y1 + aItem[ITEM_HEIGHT] - 1
-   // writelog( Str(aItem[ITEM_TYPE])+": "+IIf(aItem[ITEM_TYPE]==TYPE_TEXT,aItem[ITEM_CAPTION],"")+str(x1)+str(y1)+str(x2)+str(y2) )
+   // writelog( Str(aItem[ITEM_TYPE])+": "+IIf(aItem[ITEM_TYPE]==TYPE_TEXT, aItem[ITEM_CAPTION], "")+str(x1)+str(y1)+str(x2)+str(y2) )
    x1 := Round(x1 * prnXCoef, 0)
    y1 := Round(y1 * prnYCoef, 0)
    x2 := Round(x2 * prnXCoef, 0)
@@ -464,9 +464,9 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
    // writelog( "PrintItem-2: "+str(x1)+str(y1)+str(x2)+str(y2))
 
    #ifdef __DEBUG__
-      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
+      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &( aItem[ITEM_CAPTION] ) + ")", ""), "") )
    #else
-      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
+      // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &( aItem[ITEM_CAPTION] ) + ")", ""), "") )
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          IF aItem[ITEM_VAR] > 0
             stroka := IIf(lCalc, &( aItem[ITEM_CAPTION] ), "")
@@ -489,7 +489,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          // writelog( "hBitmap: "+str(hBitmap) )
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
          DeleteObject(hBitmap)
-         // DrawBitmap(hDC, aItem[ITEM_BITMAP],SRCAND, x1, y1, x2-x1+1, y2-y1+1)
+         // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
       ENDIF
    #endif
    RETURN Nil
