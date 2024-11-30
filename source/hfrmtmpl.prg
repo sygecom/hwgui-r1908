@@ -506,7 +506,7 @@ FUNCTION ParseMethod(cMethod)
 STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    LOCAL arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes, cParam, nPos
 
-   IF cMethod = Nil .OR. Empty(cMethod)
+   IF cMethod == Nil .OR. Empty(cMethod)
       Return Nil
    ENDIF
    IF oCtrl != Nil .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
@@ -855,7 +855,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       ELSEIF cPName == "filedbf"
          IF !Empty(xProperty)
             cAliasdbf := Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)
-            IF Select(Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) = 0
+            IF Select(Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) == 0
                USE (xProperty) NEW SHARED Alias (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) //ftmp
             ENDIF
             Select (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1))
@@ -987,28 +987,28 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       // criacao
       IF oCtrlTmpl:cClass == "column"
          cValType := Type("&fblock")
-         IF &( cOName ):Type = BRW_DATABASE .AND. !Empty(Alias())
+         IF &(cOName):Type == BRW_DATABASE .AND. !Empty(Alias())
             cAliasdbf := Alias()
-            temp = StrTran(Upper(fBlock), Alias() + "->", "")
+            temp := StrTran(Upper(fBlock), Alias() + "->", "")
        //- verificar se tem mais de um campo
-            temp = SubStr(temp, 1, IIf(At("+", temp) > 0, At("+", temp) - 1, Len(temp)))
+            temp := SubStr(temp, 1, IIf(At("+", temp) > 0, At("+", temp) - 1, Len(temp)))
             j := {}
             AEval(&cAliasdbf->((DBStruct())), { | aField | AAdd(j, aField[1]) })
-            IF m->nLength = Nil
+            IF m->nLength == Nil
                // m->nLength := &cTmpAlias->(fieldlen(ascan(j,temp)))
-               // m->nLength := IIf(m->nLength = 0 ,IIf(type("&cCampo") = "C",LEN(&cCampo),10),m->nLength)
+               // m->nLength := IIf(m->nLength == 0 ,IIf(type("&cCampo") = "C",LEN(&cCampo),10),m->nLength)
                m->nLength := &cAliasdbf->( fieldlen(AScan(j, temp)) )
-               m->nLength := IIf(m->nLength = 0 , IIf(Type("&fblock") = "C", Len(&fBlock), 10), m->nLength)
+               m->nLength := IIf(m->nLength == 0 , IIf(Type("&fblock") = "C", Len(&fBlock), 10), m->nLength)
             ENDIF
             m->nDec := &cAliasdbf->(FIELDDEC(AScan(j, temp)))
             cHeader  := IIf(cHeader == Nil .OR. Empty(cHeader) , temp, cHeader)
             fBlock   := { || &fBlock }
-         ELSE  //IF brwtype = 1
-            m->nLength := IIf(m->nLength = Nil , 10, m->nLength)
-            fBlock := IIf(fBlock = Nil, ".T.", fBlock)
+         ELSE  //IF brwtype == 1
+            m->nLength := IIf(m->nLength == Nil , 10, m->nLength)
+            fBlock := IIf(fBlock == Nil, ".T.", fBlock)
             fBlock := IIf(cValType = "B", &fBlock, { || &fBlock })
          ENDIF
-         IF !Empty(cPicture) .AND. At(".9", cPicture) > 0 .AND. nDec = 0
+         IF !Empty(cPicture) .AND. At(".9", cPicture) > 0 .AND. nDec == 0
             m->nDec := Len(SubStr(cPicture, At(".9", cPicture) + 1))
          ENDIF
          stroka   := cOName + ":" + stroka
@@ -1032,7 +1032,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       ///
          oCtrl:nColumns := nColumns
          oCtrl:Type := brwType
-         IF brwType = BRW_DATABASE          //oCtrl:type = 1
+         IF brwType == BRW_DATABASE          //oCtrl:type = 1
             // CRIAR AS RELA€OES E O LINK
             oCtrl:Alias := cAliasdbf
             IF !Empty(cKey)
@@ -1050,7 +1050,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                Select ( oCtrl:Alias )
                j := ( DBStruct() )
                //AEVAL(aStruct, {|aField| QOUT(aField[DBS_NAME])})
-               FOR i := 1 TO IIf(oCtrl:nColumns = 0, FCount(), oCtrl:nColumns)
+               FOR i := 1 TO IIf(oCtrl:nColumns == 0, FCount(), oCtrl:nColumns)
                   //"AddColumn(HColumn():New(cHeader,Fblock,cValType,nLength,nDec,lEdit,nJusHead, nJusLine, cPicture,bValid, bWhen, Items, bClrBlck, bHeadClick ))",;  //oBrw:AddColumn
                   m->cHeader := FieldName(i)
                   m->fBlock := FieldBlock( FieldName(i) )

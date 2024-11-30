@@ -138,7 +138,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF ( ::GetParentForm(Self) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self) :lModal )
-         IF wParam = VK_TAB
+         IF wParam == VK_TAB
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), -1, 1) )
             RETURN 0
          ELSEIF wParam == VK_RETURN
@@ -147,7 +147,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          ENDIF
       ENDIF
       RETURN 0
-   ELSEIF msg = WM_KEYDOWN
+   ELSEIF msg == WM_KEYDOWN
       ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_LBUTTONDOWN
@@ -155,8 +155,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       rcClient := GetClientRect(::handle)
 
       pt := {, }
-      pt[1] = LOWORD(lParam)
-      pt[2] = HIWORD(lParam)
+      pt[1] := LOWORD(lParam)
+      pt[2] := HIWORD(lParam)
 
       IF ( PtInRect(rcClient, pt) )
 
@@ -240,8 +240,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
    CASE WM_LBUTTONDOWN
       rcClient := GetClientRect(::handle)
       pt := {,}
-      pt[1] = LOWORD(lParam)
-      pt[2] = HIWORD(lParam)
+      pt[1] := LOWORD(lParam)
+      pt[2] := HIWORD(lParam)
       IF PtInRect(rcClient, pt)
          nItemHeight := SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
          nTopIndex := SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
@@ -383,7 +383,7 @@ METHOD RecalcText() CLASS hCheckComboBox
 
       FOR i := 1 TO ncount
 
-         IF ( COMBOBOXGETITEMDATA(::handle, i) ) = 1
+         IF ( COMBOBOXGETITEMDATA(::handle, i) ) == 1
 
             COMBOBOXGETLBTEXT(::handle, i, @stritem)
 

@@ -32,7 +32,7 @@ FUNCTION SayDollar(nDollar)
     xLang2 := ""
     xLang1 := ""
     xMuch := "ONE"
-    xNum = LEFT(cDollar,1)
+    xNum := LEFT(cDollar,1)
 
     IF nPJ=6.AND.xNum="0".OR.nPJ=5.AND.xNum="0".AND.nCheck1=1
         nCheck1 := 1
@@ -53,7 +53,7 @@ FUNCTION SayDollar(nDollar)
         DO CASE
             CASE nPJ=8.OR.nPJ=5.OR.nPJ=2
                 xLang2 = "TY "
-                nAA = 2
+                nAA := 2
             CASE nPJ=7
                 IF xMuch ="ONE"
                     xLang2  := " MILLION "
@@ -61,7 +61,7 @@ FUNCTION SayDollar(nDollar)
                     xLang2  := " MILLIONS "
                 ENDIF
             CASE nPJ=6.OR.nPJ=3.OR.nPJ=9
-                nCheck2 = 0
+                nCheck2 := 0
                 IF xMuch ="ONE"
                     xLang2  := " HUNDRED "
                 ELSE
@@ -83,17 +83,17 @@ FUNCTION SayDollar(nDollar)
     DO CASE
         CASE xNum="1"
             IF nPJ=7.OR.nPJ=1.OR.nPJ=10
-                nCheck1 = 0
+                nCheck1 := 0
                 xLang1 = "ONE"
             ELSE
                 xLang1 = "ONE"
             ENDIF
             IF nPJ=8.OR.nPJ=5.OR.nPJ=2.OR.nPJ=11
-                nTest = 1
+                nTest := 1
             ENDIF
             IF nCheck2=1
                 xLang1 = "ONE"
-                nCheck2 = 0
+                nCheck2 := 0
             ENDIF
             IF nPJ=4.AND.mm=1
                 xLang1 = "ONE"
@@ -127,15 +127,15 @@ FUNCTION SayDollar(nDollar)
         CASE xNum="9"
             xLang1 = "NINE"
     ENDCASE
-    cDollar = RIGHT(cDollar,(nPJ-1))
-    xMuch = xLang1
+    cDollar := RIGHT(cDollar,(nPJ-1))
+    xMuch := xLang1
 
     IF xNum != "0".OR.xNum="0".AND.nPJ=7.OR.xNum="0".AND.nPJ=4
-        nAA = 1
+        nAA := 1
         DO CASE
             CASE nPJ=8.OR.nPJ=5.OR.nPJ=2
                 xLang2 = "TY "
-                nAA = 2
+                nAA := 2
             CASE nPJ=7
                 IF xMuch="ONE"
                     xLang2 = " MILLION "
@@ -143,13 +143,13 @@ FUNCTION SayDollar(nDollar)
                     xLang2 = " MILLIONS "
                 ENDIF
             CASE nPJ=6.OR.nPJ=3
-                nCheck2 = 0
+                nCheck2 := 0
                 IF xMuch="ONE"
                     xLang2 = " HUNDRED "
                 ELSE
                     xLang2 = " HUNDREDS "
                 ENDIF
-                nTest = 0
+                nTest := 0
             CASE nPJ=4
                 IF nCheck1=0.OR.xNum != "0"
                     IF xMuch="ONE"
@@ -161,7 +161,7 @@ FUNCTION SayDollar(nDollar)
         ENDCASE
     ENDIF
     IF nTest=0
-        xSay = xSay+xLang1+xLang2
+        xSay := xSay+xLang1+xLang2
     ENDIF
 
     IF nPJ=1.OR.nPJ=4.OR.nPJ=7
@@ -186,15 +186,15 @@ FUNCTION SayDollar(nDollar)
                 IF xNum="5"
                     xteen = "FIFTEEN "
                 ENDIF
-                xSay = xSay+xteen+xLang2
+                xSay := xSay+xteen+xLang2
             ELSE
                 xteen = "TEEN "
-                xSay = xSay+xLang1+xteen+xLang2
+                xSay := xSay+xLang1+xteen+xLang2
             ENDIF
         ENDIF
-        nTest = 0
+        nTest := 0
     ENDIF
-    nPJ = LEN(cDollar)
+    nPJ := LEN(cDollar)
 ENDDO
 
 RETURN (xSay)

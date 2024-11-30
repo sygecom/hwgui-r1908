@@ -107,12 +107,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
       ::END()
 
    ELSEIF msg == WM_CHAR
-      IF wParam = VK_TAB
+      IF wParam == VK_TAB
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ENDIF
 
-   ELSEIF msg = WM_KEYDOWN
+   ELSEIF msg == WM_KEYDOWN
       IF ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF

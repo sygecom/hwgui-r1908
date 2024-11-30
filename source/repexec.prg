@@ -45,7 +45,7 @@ FUNCTION OpenReport(fname, repName)
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR(han, @strbuf, @poz, 512)
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
          IF Left(stroka, 1) == ";"
@@ -216,7 +216,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    IF hb_IsChar(aPaintRep[FORM_VARS])
       DO WHILE .T.
          stroka := RDSTR(, aPaintRep[FORM_VARS], @poz)
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
          DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))

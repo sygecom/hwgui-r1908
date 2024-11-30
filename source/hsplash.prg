@@ -36,10 +36,10 @@ METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CLASS HSplash
       bitmap  := HBitmap():AddResource(cFile, , , nWidth, nHeight)
    ENDIF
 
-   aWidth := IIf(nWidth = Nil, bitmap:nWidth, nWidth)
-   aHeigth := IIf(nHeight = Nil, bitmap:nHeight, nHeight)
+   aWidth := IIf(nWidth == Nil, bitmap:nWidth, nWidth)
+   aHeigth := IIf(nHeight == Nil, bitmap:nHeight, nHeight)
 
-   IF nWidth = Nil .OR. nHeight = Nil
+   IF nWidth == Nil .OR. nHeight == Nil
       INIT DIALOG ::oDlg TITLE "" ;
         At 0, 0 SIZE aWidth, aHeigth  STYLE WS_POPUP + DS_CENTER + WS_VISIBLE + WS_DLGFRAME ;
         BACKGROUND bitmap bitmap ON INIT { || ::CountSeconds(oTime, ::oDlg) }

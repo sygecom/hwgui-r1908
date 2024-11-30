@@ -149,7 +149,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    ELSEIF msg == WM_NCPAINT
      //- RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE + RDW_INTERNALPAINT)
    ELSEIF msg == WM_ERASEBKGND
-      IF ::backstyle = OPAQUE
+      IF ::backstyle == OPAQUE
          RETURN ::nrePaint
          /*
          IF ::brush != Nil
@@ -190,28 +190,28 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          RETURN -1
       ENDIF
    ENDIF
-   IF msg = WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
+   IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
        ( SELFFOCUS(GetParent(::GetParentForm():nInitFocus), ::handle) .OR. ;
          SELFFOCUS(GetParent(::GetParentForm():nInitFocus), GetParent(::handle)) )
       GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
-   ELSEIF msg = WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. Hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
+   ELSEIF msg == WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. Hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
       Getskip(::oParent, ::handle, , ::nGetSkip)
 /*
-   ELSEIF msg = WM_KEYUP
-       IF wParam = VK_DOWN
+   ELSEIF msg == WM_KEYUP
+       IF wParam == VK_DOWN
           getskip(::oparent, ::handle, , 1)
-       ELSEIF wParam = VK_UP
+       ELSEIF wParam == VK_UP
           getskip(::oparent, ::handle, , -1)
-       ELSEIF wParam = VK_TAB
+       ELSEIF wParam == VK_TAB
           GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
        ENDIF
        RETURN 0
 */
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
-         IF ::nScrollBars != -1 .AND. ::bScroll = Nil
+         IF ::nScrollBars != -1 .AND. ::bScroll == Nil
              ::ScrollHV(Self, msg, wParam, lParam)
              IF msg == WM_MOUSEWHEEL
                  RETURN 0
@@ -238,7 +238,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
    aCoors := GetClientRect(::handle)
 
    SetBkMode(hDC, ::backStyle)
-   IF ::backstyle = OPAQUE .AND. ::nrePaint = -1
+   IF ::backstyle == OPAQUE .AND. ::nrePaint = -1
       aCoors := GetClientRect(::handle)
       IF ::brush != Nil
          IF !hb_IsNumeric(::brush)
@@ -356,7 +356,7 @@ METHOD Resize() CLASS HPanel
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
    
-   IF !isWindowVisible(::handle) .OR.  ( ::nHeight = nHeight .AND. ::nWidth = nWidth )
+   IF !isWindowVisible(::handle) .OR.  ( ::nHeight == nHeight .AND. ::nWidth == nWidth )
       Return Nil
    ENDIF
 
@@ -394,8 +394,8 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
    LOCAL nHinc :=  nHeight - ::nHeight
    LOCAL lres := .F.
 
-   nWinc := IIf(nMode = 1, nWinc, IIf(nMode = 2, ::nWidth, nWidth))
-   nHinc := IIf(nMode = 1, nHinc, IIf(nMode = 2, ::nHeight, nHeight))
+   nWinc := IIf(nMode == 1, nWinc, IIf(nMode == 2, ::nWidth, nWidth))
+   nHinc := IIf(nMode == 1, nHinc, IIf(nMode == 2, ::nHeight, nHeight))
    DEFAULT nMode := 0
 
    IF __ObjHasMsg( ::oParent,"AOFFSET" ) .AND. ::oParent:type == WND_MDI

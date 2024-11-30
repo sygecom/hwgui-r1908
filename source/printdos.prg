@@ -340,7 +340,7 @@ METHOD PrinterFile(fname) CLASS PrintDos
 
          nRead := FRead(han, @strbuf, PF_BUFFERS)
 
-         IF nRead = 0
+         IF nRead == 0
             EXIT
          ENDIF
 
@@ -395,7 +395,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR(han, @strbuf, @poz, 2052)
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
          IF osize < 0
@@ -440,7 +440,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR(han, @strbuf, @poz, 2052)
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
          IF ::oAns2Oem
@@ -489,8 +489,8 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
 //   @ 88,19 EDITBOX oEdit ID 1001 SIZE 548,465 STYLE WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE ;
 //        COLOR oColor1 BACKCOLOR oColor2 FONT oFont //Blue to Black  //Added by  por Fernando Athayde
 //       COLOR 16711680 BACKCOLOR 16777215  //Black to Write
-   @ 6, 30 BUTTON "<<"    ON CLICK { || nPage := PrintDosAnt(nPage, oText) } SIZE 69, 32  STYLE IIf(nPage = 1, WS_DISABLED, 0)
-   @ 6, 80 BUTTON ">>"    ON CLICK { || nPage := PrintDosNext(oPage, nPage, oText) } SIZE 69, 32 STYLE IIf(nPage = 1, WS_DISABLED, 0)
+   @ 6, 30 BUTTON "<<"    ON CLICK { || nPage := PrintDosAnt(nPage, oText) } SIZE 69, 32  STYLE IIf(nPage == 1, WS_DISABLED, 0)
+   @ 6, 80 BUTTON ">>"    ON CLICK { || nPage := PrintDosNext(oPage, nPage, oText) } SIZE 69, 32 STYLE IIf(nPage == 1, WS_DISABLED, 0)
    @ 6, 130 BUTTON "Imprimir" ON CLICK { || PrintDosPrint(oText, oPrt) } SIZE 69, 32
 //   @ 6,180 BUTTON "Grafico" on Click {||EndDialog(),oDos2:TxttoGraphic(fName,2,.T.),oDos2:end()} SIZE 69,32
    @ 6, 230 BUTTON "Fechar" ON CLICK { || EndDialog() } SIZE 69, 32
@@ -515,7 +515,7 @@ STATIC FUNCTION PrintDosAnt(nPage, oText)
    IF nPage < 1
       nPage := 1
    ENDIF
-   IF nPage = 1  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
+   IF nPage == 1  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
       SetDlgItemText(oDlg, 1001, SUBS(oText[nPage], 2))  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
    ELSE
       SetDlgItemText(oDlg, 1001, oText[nPage])

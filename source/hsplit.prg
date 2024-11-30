@@ -139,10 +139,10 @@ METHOD Paint() CLASS HSplitter
          SelectObject(hDC, oBrushFill:handle)
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP) + BF_MIDDLE)
          FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
-      ELSEIF ::BackStyle = OPAQUE
+      ELSEIF ::BackStyle == OPAQUE
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
       ENDIF
-   ELSEIF !::lMoved .AND. ::BackStyle = OPAQUE
+   ELSEIF !::lMoved .AND. ::BackStyle == OPAQUE
       DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical,BF_RECT,BF_TOP)) //+ BF_MIDDLE)
    ENDIF
    EndPaint(::handle, pps)
@@ -174,7 +174,7 @@ METHOD Drag( lParam ) CLASS HSplitter
 METHOD DragAll(lScroll) CLASS HSplitter
    LOCAL i, oCtrl, xDiff := 0, yDiff := 0
 
-   lScroll := IIf(Len(::aLeft) = 0 .OR. Len(::aRight) = 0, .F., lScroll)
+   lScroll := IIf(Len(::aLeft) == 0 .OR. Len(::aRight) == 0, .F., lScroll)
 
    FOR i := 1 TO Len(::aRight)
       oCtrl := ::aRight[i]

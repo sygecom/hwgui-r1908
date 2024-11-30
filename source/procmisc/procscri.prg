@@ -39,7 +39,7 @@ LOCAL aFormCode, aFormName
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR(han, @strbuf, @poz, STR_BUFLEN)
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ELSEIF rejim == 0 .AND. Left(stroka, 1) == "#"
             IF Upper(LEFT(stroka, 7)) == "#SCRIPT"
@@ -148,7 +148,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
 
    DO WHILE .T.
       cLine := RDSTR(han, @strbuf, @poz, STR_BUFLEN)
-      IF Len(cLine) = 0
+      IF Len(cLine) == 0
          EXIT
       ENDIF
       numlin ++
@@ -438,7 +438,7 @@ PRIVATE iscr := 1, bOldError
                   &varName := &varValue
                ENDIF
                IF lParam .AND. aParams != Nil .AND. Len(aParams) >= j
-                  &varname = aParams[j]
+                  &varname := aParams[j]
                ENDIF
                j ++
             ENDDO
@@ -583,7 +583,7 @@ STATIC w__buf
       IF prnew
          w__buf := SAVESCREEN(y1, x1, y2, x2)
          @ y1, x1, y2, x2 BOX "谀砍倌莱 "
-      ELSEIF noscroll = Nil
+      ELSEIF noscroll == Nil
          SCROLL(y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1)
       ENDIF
       @ y2 - 1, x1 + 2 SAY sout
@@ -615,7 +615,7 @@ LOCAL GetList := {}
    @ y2 - 1, x1 + 2 GET varget PICTURE spict
    READ
    SETCOLOR(oldc)
-RETURN IIf(LASTKEY() = 27, Nil, varget)
+RETURN IIf(LASTKEY() == 27, Nil, varget)
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+

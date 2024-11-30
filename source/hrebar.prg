@@ -109,9 +109,9 @@ METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) CLASS hrebar
        RETURN Nil
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
-   FOR i = 1 TO LEN(::aBands)
-      ::aBands[i, 4] := IIf(::aBands[i, 4] = Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4])
-      ::aBands[i, 6] := IIf(::aBands[i, 6] = Nil, dwStyle, ::aBands[i, 6])
+   FOR i := 1 TO LEN(::aBands)
+      ::aBands[i, 4] := IIf(::aBands[i, 4] == Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4])
+      ::aBands[i, 6] := IIf(::aBands[i, 6] == Nil, dwStyle, ::aBands[i, 6])
       IF !Empty(::aBands[i, 1])
          ::aBands[i, 1] := IIf(hb_IsChar(::aBands[i, 1]), &( ::aBands[i, 1] ), ::aBands[i, 1])
          IF ( ::aBands[i, 5] != Nil )

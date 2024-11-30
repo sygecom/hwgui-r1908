@@ -65,12 +65,12 @@ METHOD New(nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid) CLASS T
 
 METHOD ReDefine(nId, cFileName, oDlg, bWhen, bValid) CLASS TVideo
 
-   ::nId      = nId
-   ::cAviFile = cFileName
-   ::bWhen    = bWhen
-   ::bValid   = bValid
-   ::oWnd     = oDlg
-   ::oMci     = TMci():New("avivideo", cFileName)
+   ::nId      := nId
+   ::cAviFile := cFileName
+   ::bWhen    := bWhen
+   ::bValid   := bValid
+   ::oWnd     := oDlg
+   ::oMci     := TMci():New("avivideo", cFileName)
 
    oDlg:AddControl(Self)
 

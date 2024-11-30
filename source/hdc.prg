@@ -260,10 +260,10 @@ METHOD SetArcDirection(nArcDirection)
 
    LOCAL nResult := 0
    IF ( ::m_hDC != ::m_hAttribDC )
-      nResult = SetArcDirection(::m_hDC, nArcDirection)
+      nResult := SetArcDirection(::m_hDC, nArcDirection)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nResult = SetArcDirection(::m_hAttribDC, nArcDirection)
+      nResult := SetArcDirection(::m_hAttribDC, nArcDirection)
    ENDIF
    RETURN nResult
 

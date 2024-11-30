@@ -32,7 +32,7 @@ ENDCLASS
 METHOD New(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle) CLASS HRect
    LOCAL nCor1, nCor2
 
-   IF nStyle = NIL
+   IF nStyle == NIL
       nStyle := 3
    ENDIF
    IF lPress
@@ -44,19 +44,19 @@ METHOD New(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle) CLASS HRect
    ENDIF
 
    DO CASE
-   CASE nStyle = 1
-      ::oLine1 = HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
-      ::oLine3 = HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
+   CASE nStyle == 1
+      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
+      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
 
-   CASE nStyle = 2
-      ::oLine2 = HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
-      ::oLine4 = HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
+   CASE nStyle == 2
+      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
+      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
 
    OTHERWISE
-      ::oLine1 = HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
-      ::oLine2 = HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
-      ::oLine3 = HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
-      ::oLine4 = HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
+      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
+      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
+      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
+      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
    ENDCASE
 
    RETURN Self
@@ -138,9 +138,9 @@ ENDCLASS
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
             nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle) CLASS HShape
 
-   nBorder := IIf(nBorder = Nil, 1, nBorder)
-   nbStyle := IIf(nbStyle = Nil, PS_SOLID, nbStyle)
-   nfStyle := IIf(nfStyle = Nil, BS_TRANSPARENT , nfStyle)
+   nBorder := IIf(nBorder == Nil, 1, nBorder)
+   nbStyle := IIf(nbStyle == Nil, PS_SOLID, nbStyle)
+   nfStyle := IIf(nfStyle == Nil, BS_TRANSPARENT , nfStyle)
    nCurvature := nCurvature
 
    return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bcolor,,, ;
@@ -157,8 +157,8 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit) CLASS HLContainer
 
-   nStyle := IIf(nStyle = NIL, 3, nStyle)  // FLAT
-   lnoBorder := IIf(lnoBorder = NIL, .F., lnoBorder)  // FLAT
+   nStyle := IIf(nStyle == NIL, 3, nStyle)  // FLAT
+   lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)  // FLAT
 
    return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize,,, nStyle, lnoBorder,,,,, bInit) //,bClick, bDblClick)
 
@@ -198,7 +198,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
 
    //::title := ""
     // OPAQUE DEFAULT
-   ::backStyle := IIf(nbackStyle = Nil, OPAQUE, nbackStyle)
+   ::backStyle := IIf(nbackStyle == Nil, OPAQUE, nbackStyle)
 
    ::lnoBorder := lnoBorder
    ::nBorder := nBorder
@@ -276,13 +276,13 @@ METHOD Paint(lpdis) CLASS HDrawShape
       ENDIF
       */
    ELSE
-      IF ::backStyle = OPAQUE
+      IF ::backStyle == OPAQUE
          IF ::Brush != Nil
             SelectObject(hDC, ::Brush:handle)
          ENDIF
          //RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
       ENDIF
-      IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle = OPAQUE
+      IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle == OPAQUE
          SelectObject(hDC, ::BrushFill:handle)
       ELSE
          SelectObject(hDC, GetStockObject(NULL_BRUSH))
@@ -298,7 +298,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
 //-----------------------------------------------------------------
 FUNCTION Rect(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST)
 
-   IF lPress = NIL
+   IF lPress == NIL
       lPress := .F.
    ENDIF
 
@@ -337,17 +337,17 @@ ENDCLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
             lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)
 
-    ::lTABSTOP :=  nStyle = WS_TABSTOP
+    ::lTABSTOP :=  nStyle == WS_TABSTOP
     ::bPaint   := { | o, p | o:paint(p) }
-    nStyle := SS_OWNERDRAW + IIf(nStyle = WS_TABSTOP, WS_TABSTOP , 0) + Hwg_Bitand(nStyle, SS_NOTIFY)
+    nStyle := SS_OWNERDRAW + IIf(nStyle == WS_TABSTOP, WS_TABSTOP , 0) + Hwg_Bitand(nStyle, SS_NOTIFY)
     ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, , ;
               bInit, bSize, ::bPaint,, tcolor, bColor)
 
    //::title := ""
-   ::ncStyle := IIf(ncStyle = NIL .AND. nStyle < WS_TABSTOP, 3, ncStyle)
-   ::lnoBorder := IIf(lnoBorder = NIL, .F., lnoBorder)
+   ::ncStyle := IIf(ncStyle == NIL .AND. nStyle < WS_TABSTOP, 3, ncStyle)
+   ::lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)
 
-   ::backStyle := IIf(nbackStyle = Nil, OPAQUE, nbackStyle) // OPAQUE DEFAULT
+   ::backStyle := IIf(nbackStyle == Nil, OPAQUE, nbackStyle) // OPAQUE DEFAULT
    ::bLoad := bLoad
    ::bRefresh := bRefresh
    ::bOther := bOther
@@ -417,15 +417,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
       IF msg == WM_SETFOCUS
          GetSkip(::oparent, ::handle, , ::nGetSkip)
       ELSEIF msg == WM_KEYUP
-         IF wParam = VK_DOWN
+         IF wParam == VK_DOWN
             GetSkip(::oparent, ::handle, , 1)
-         ELSEIF wParam = VK_UP
+         ELSEIF wParam == VK_UP
             GetSkip(::oparent, ::handle, , -1)
-         ELSEIF wParam = VK_TAB
+         ELSEIF wParam == VK_TAB
             GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          ENDIF
          RETURN 0
-      ELSEIF msg = WM_SYSKEYUP
+      ELSEIF msg == WM_SYSKEYUP
       ENDIF
    ENDIF
    RETURN ::Super:onEvent(msg, wParam, lParam)

@@ -107,11 +107,11 @@ ENDCLASS
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
             bSize, ctooltip, bClick, bDblClick, lTransp, nStretch, nStyle) CLASS HSayBmp
 
-   nStyle := IIf(nStyle = Nil, 0, nStyle)
+   nStyle := IIf(nStyle == Nil, 0, nStyle)
    ::Super:New(oWndParent, nId, SS_OWNERDRAW + nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctooltip, bClick, bDblClick)
 
    ::bPaint := { | o, lpdis | o:Paint(lpdis) }
-   ::nStretch := IIf(nStretch = Nil, 0, nStretch)
+   ::nStretch := IIf(nStretch == Nil, 0, nStretch)
    IF lTransp != Nil .AND. lTransp
       ::BackStyle := TRANSPARENT
       ::extStyle +=  WS_EX_TRANSPARENT
@@ -128,7 +128,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       IF nWidth == Nil .OR. nHeight == Nil
          ::nWidth  := ::oImage:nWidth
          ::nHeight := ::oImage:nHeight
-         ::nStretch = 2
+         ::nStretch := 2
       ENDIF
    ENDIF
    ::Activate()
@@ -169,11 +169,11 @@ METHOD Paint(lpdis) CLASS HSayBmp
 
    IF ::oImage != Nil .AND. !Empty(::oImage:handle)
       IF ::nZoom == Nil
-         IF ::BackStyle = TRANSPARENT
-            IF ::nStretch = 1  // isometric
+         IF ::BackStyle == TRANSPARENT
+            IF ::nStretch == 1  // isometric
                DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
                                      drawInfo[5] + ::nOffsetV,,) // ::nWidth+1, ::nHeight+1)
-            ELSEIF ::nStretch = 2  // CLIP
+            ELSEIF ::nStretch == 2  // CLIP
                DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
                                      drawInfo[5] + ::nOffsetV,, ::nWidth + 1, ::nHeight + 1 )
             ELSE // stretch (DEFAULT)
@@ -181,10 +181,10 @@ METHOD Paint(lpdis) CLASS HSayBmp
                                      drawInfo[5] + ::nOffsetV,, drawInfo[6] - drawInfo[4] + 1, drawInfo[7] - drawInfo[5] + 1)
             ENDIF
          ELSE
-            IF ::nStretch = 1  // isometric
+            IF ::nStretch == 1  // isometric
                DrawBitmap(drawInfo[3], ::oImage:handle,, drawInfo[4] + ::nOffsetH, ;
                           drawInfo[5] + ::nOffsetV) //, ::nWidth+1, ::nHeight+1)
-            ELSEIF ::nStretch = 2  // CLIP
+            ELSEIF ::nStretch == 2  // CLIP
                DrawBitmap(drawInfo[3], ::oImage:handle,, drawInfo[4] + ::nOffsetH, ;
                           drawInfo[5] + ::nOffsetV, ::nWidth + 1, ::nHeight + 1)
             ELSE // stretch (DEFAULT)

@@ -456,7 +456,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
       ELSEIF AScan(cTypeBorder, "CHARACTER") != 0
          ::ParaBorder("CHARACTER", cBordStyle)
       ELSE
-         FOR i = 1 TO Len(cTypeBorder)
+         FOR i := 1 TO Len(cTypeBorder)
             ::ParaBorder(cTypeBorder[i], cBordStyle)
          NEXT i
       ENDIF
@@ -1851,7 +1851,7 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
          IF AScan(cTypeBorder, "ALL") != 0
             cEstilo += ::ParaBorder("ALL", cBordStyle)
          ELSE
-            FOR i = 1 TO Len(cTypeBorder)
+            FOR i := 1 TO Len(cTypeBorder)
                cEstilo += ::ParaBorder(cTypeBorder[i], cBordStyle)
             NEXT i
          ENDIF
@@ -2056,9 +2056,9 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
    ::OpenGroup()
 
-   FOR j = 1 TO ::nTblHdRows
+   FOR j := 1 TO ::nTblHdRows
       ::TableDef( .T., j )
-      FOR i = 1 TO Len(::aTableCWid)
+      FOR i := 1 TO Len(::aTableCWid)
          ::TableCell(aHeadTit[j][i],,,,,,,, .T., .T.)
       NEXT i
    NEXT j
@@ -2104,7 +2104,7 @@ METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
    FOR i := 1 TO Len(::aTableCWid)
       IF lHeader
          IF !Empty(::TblCJoin)
-            FOR j = 1 TO Len(::TblCJoin[nRowHead])
+            FOR j := 1 TO Len(::TblCJoin[nRowHead])
                pos := AScan(::TblCJoin[nRowHead][j], i)
                IF pos == 1
                   ::TextCode("clvertalt")
@@ -2409,41 +2409,41 @@ cBRead:=GETBMETAFILE(cName,aInfo)
 IF cBRead > 0
 
         IF Empty(aSize)
-      alto=(aInfo[3]-aInfo[1])*nPercent  // Unidades
-      ancho=(aInfo[4]-aInfo[2])*nPercent
+      alto := (aInfo[3]-aInfo[1])*nPercent  // Unidades
+      ancho := (aInfo[4]-aInfo[2])*nPercent
         ELSE
-                alto:=(aSize[2]*aInfo[5])
-                ancho:=(aSize[1]*aInfo[5])
+                alto := (aSize[2]*aInfo[5])
+                ancho := (aSize[1]*aInfo[5])
         ENDIF
 
-   bmHeight=ROUND((alto*1440/2540)+0.5,0)
-   bmWidth=ROUND((ancho*1440/2540)+0.5,0)
+   bmHeight := ROUND((alto*1440/2540)+0.5,0)
+   bmWidth := ROUND((ancho*1440/2540)+0.5,0)
 
-   PictHeight=ROUND((alto*1440/::oPrinter:nLogPixelY())+0.5,0)
-   PictWidth=ROUND((ancho*1440/::oPrinter:nLogPixelX())+0.5,0)
+   PictHeight := ROUND((alto*1440/::oPrinter:nLogPixelY())+0.5,0)
+   PictWidth := ROUND((ancho*1440/::oPrinter:nLogPixelX())+0.5,0)
 
-   in:=fopen(cName)
+   in := fopen(cName)
         ::OpenGroup()
         ::TextCode("\pict\wmetafile8")
-   x = ROUND((bmWidth*2540/1440)+0.5,0)
+   x := ROUND((bmWidth*2540/1440)+0.5,0)
         ::NumCode("picw",x,.F.)
         ::NumCode("picwgoal",bmWidth,.F.)
-   scale=ROUND((PictWidth*100/bmWidth)+0.5,0)
+   scale := ROUND((PictWidth*100/bmWidth)+0.5,0)
         ::NumCode("picscalex",scale,.F.)
-   x = ROUND((bmHeight*2540/1440)+0.5,0)
+   x := ROUND((bmHeight*2540/1440)+0.5,0)
         ::NumCode("pich",x,.F.)
         ::NumCode("pichgoal",bmHeight,.F.)
-   scale=ROUND((PictHeight*100/bmHeight)+0.5,0)
+   scale := ROUND((PictHeight*100/bmHeight)+0.5,0)
         ::NumCode("picscaley",scale,.F.)
    ::OpenGroup()
    fseek(in,cBRead,0)
    do while !lHecho
-           nBytes:=fread(in,@cMenInter,n_bloque)
+           nBytes := fread(in,@cMenInter,n_bloque)
            IF nBytes > 0
-              codigo:=PADL(L_DTOHEX(ASC(cMenInter)),2,"0")
+              codigo := PADL(L_DTOHEX(ASC(cMenInter)),2,"0")
          FWRITE(::hFile,codigo)
            else
-                   lHecho:= .T.
+                   lHecho := .T.
            endif
    ENDDO
         ::CloseGroup()

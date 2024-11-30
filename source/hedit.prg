@@ -245,13 +245,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ::lcopy := .F.
             COPYSTRINGTOCLIPBOARD(::UnTransform(GETCLIPBOARDTEXT()))
             RETURN -1
-         ELSEIF msg = WM_PASTE .AND. !::lNoPaste
+         ELSEIF msg == WM_PASTE .AND. !::lNoPaste
               ::lFirst := IIF(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
             cClipboardText := GETCLIPBOARDTEXT()
             IF !Empty(cClipboardText)
                nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
                SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
-               FOR nPos = 1 to Len(cClipboardText)
+               FOR nPos := 1 to Len(cClipboardText)
                   ::GetApplyKey(SUBSTR(cClipboardText, nPos, 1))
                NEXT
                nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
@@ -466,7 +466,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
    ELSE
 
      // multiline
-        IF msg = WM_SETFOCUS
+        IF msg == WM_SETFOCUS
          //nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
          PostMessage(::handle, EM_SETSEL, 0, 0)
       ELSEIF msg == WM_MOUSEWHEEL
@@ -531,11 +531,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
       ENDIF
       */
    ELSEIF msg == WM_GETDLGCODE
-      IF wParam = VK_ESCAPE .AND. ;          // DIALOG MODAL
+      IF wParam == VK_ESCAPE .AND. ;          // DIALOG MODAL
               (oParent := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oParent:IsEnabled()
          RETURN DLGC_WANTMESSAGE
       ENDIF
-      IF !::lMultiLine .OR. wParam = VK_ESCAPE
+      IF !::lMultiLine .OR. wParam == VK_ESCAPE
          IF ::bSetGet != NIL
              RETURN DLGC_WANTARROWS + DLGC_WANTTAB + DLGC_WANTCHARS
          ENDIF
@@ -1116,7 +1116,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
             ENDIF
          ELSEIF !SET(_SET_CONFIRM)
              IF (::cType != "D" .AND. !"@"$::cPicFunc .AND. Empty(::cPicMask) .AND. !Empty(::nMaxLength) .AND. nLen >= ::nMaxLength-1) .OR. ;
-                    (!Empty(::nMaxLength) .AND. nPos = ::nMaxLength) .OR. nPos = Len(::cPicMask)
+                    (!Empty(::nMaxLength) .AND. nPos = ::nMaxLength) .OR. nPos == Len(::cPicMask)
                  GetSkip(::oParent, ::handle, , 1)
              ENDIF
          ENDIF
@@ -1398,7 +1398,7 @@ METHOD Untransform(cBuffer) CLASS HEdit
       IF "D" $ ::cPicFunc
          FOR nFor := ::FirstEditable() TO ::LastEditable()
             IF !::IsEditable(nFor)
-               cBuffer = Left(cBuffer, nFor - 1) + Chr(1) + SubStr(cBuffer, nFor + 1)
+               cBuffer := Left(cBuffer, nFor - 1) + Chr(1) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
       ELSE
@@ -1420,7 +1420,7 @@ METHOD Untransform(cBuffer) CLASS HEdit
 
          FOR nFor := ::FirstEditable() TO ::LastEditable()
             IF !::IsEditable(nFor) .AND. SubStr(cBuffer, nFor, 1) != "."
-               cBuffer = Left(cBuffer, nFor - 1) + Chr(1) + SubStr(cBuffer, nFor + 1)
+               cBuffer := Left(cBuffer, nFor - 1) + Chr(1) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
       ENDIF
@@ -1640,9 +1640,9 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
             PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ELSE
-         IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) = PtrtouLong(getFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
+         IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) == PtrtouLong(getFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
             SetFocus(nextHandle)
-         ELSEIF PtrtouLong(oParent:handle) = PtrtouLong(getFocus())
+         ELSEIF PtrtouLong(oParent:handle) == PtrtouLong(getFocus())
             PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ELSE
             PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
@@ -1746,7 +1746,7 @@ STATIC FUNCTION NextFocus(oParent, hCtrl, nSkip)
    ENDIF
    lHradio := i > 0 .AND. oParent:acontrols[i]:CLASSNAME = "HRADIOB"
       // TABs DO resource
-   //IF oParent:Type = WND_DLG_RESOURCE
+   //IF oParent:Type == WND_DLG_RESOURCE
       nextHandle := GetNextDlgTabItem(nWindow, hctrl,(nSkip < 0))
    //ELSE
       IF lHradio .OR. lGroup
@@ -1791,7 +1791,7 @@ STATIC FUNCTION NextFocusContainer(oParent,hCtrl,nSkip)
    i := AScan(oparent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(hCtrl)})
     lHradio := i > 0 .AND. oParent:acontrols[i]:CLASSNAME = "HRADIOB"
       // TABs DO resource
-   IF oParent:Type = WND_DLG_RESOURCE
+   IF oParent:Type == WND_DLG_RESOURCE
       nexthandle := GetNextDlgGroupItem(oParent:handle, hctrl,(nSkip < 0))
    ELSE
       IF lHradio .OR. lGroup

@@ -48,11 +48,11 @@ METHOD New(cDevice, cFileName) CLASS TMci
 
    DEFAULT cDevice TO ""
 
-   ::nError    = 0
-   ::nId       = 0
-   ::cType     = cDevice
-   ::cFileName = cFileName
-   ::cBuffer   = Space(BUF_SIZE)
+   ::nError    := 0
+   ::nId       := 0
+   ::cType     := cDevice
+   ::cFileName := cFileName
+   ::cBuffer   := Space(BUF_SIZE)
 
    RETURN Self
 
@@ -63,7 +63,7 @@ METHOD SendStr(cMciStr) CLASS TMci
    LOCAL cBuffer := ::cBuffer
 
    MciSendString( cMciStr, @cBuffer, ::oWnd:hWnd )
-   ::cBuffer = cBuffer
+   ::cBuffer := cBuffer
 
    RETURN NIL
 

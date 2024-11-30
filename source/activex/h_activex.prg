@@ -58,9 +58,9 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    cClsName := "AtlAxWin"
 
    ::Super:New(oWnd, , nStyle, nLeft, nTop, nWidth, nHeight)   // ,,,,bSize)
-   ::title = cProgId
+   ::title := cProgId
 
-   ::handle = CreateActivex(nExStyle, cClsName, cProgId, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+   ::handle := CreateActivex(nExStyle, cClsName, cProgId, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
       ::oParent:handle, ::Id)
 
    ::Init()

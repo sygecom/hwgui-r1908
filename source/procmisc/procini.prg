@@ -77,7 +77,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
       DO WHILE .T.
          kolstr ++
          stroka := IIf(iniDbf, RDSTRDBF(), RDSTR(han, @strbuf, @poz, STR_BUFLEN))
-         IF Len(stroka) = 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
          IF Right(stroka, 2) == "&&"
@@ -100,7 +100,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
             ELSE
                prblo := .F.
                SET EXACT ON
-               IF stroka = prm1 .OR. stroka = prm2 .OR. stroka = prm3 .OR. stroka = prm4
+               IF stroka == prm1 .OR. stroka == prm2 .OR. stroka == prm3 .OR. stroka == prm4
                   prblo := .T.
                ENDIF
                SET EXACT OFF
@@ -115,15 +115,15 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                   AADD(prm1[Len(prm1), 2], { UPPER(vname), stroka })
                ELSE
                   IF TYPE(vname) = "U"
-                     IF ASC(stroka) = 123                 // {
-                        IF ASC(vname) = 35                // #
+                     IF ASC(stroka) == 123                 // {
+                        IF ASC(vname) == 35                // #
                            vname := SubStr(vname, 2)
                            PRIVATE &vname := {}
                         ELSE
                            PUBLIC &vname := {}
                         ENDIF
                      ELSE
-                        IF ASC(vname) = 35                // #
+                        IF ASC(vname) == 35                // #
                            vname := SubStr(vname, 2)
                            PRIVATE &vname
                         ELSE
@@ -131,7 +131,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                         ENDIF
                      ENDIF
                   ELSE
-                     IF lTruncAr .AND. ASC(stroka) = 123 .AND. Len(&vname) > 0
+                     IF lTruncAr .AND. ASC(stroka) == 123 .AND. Len(&vname) > 0
                         ASIZE(&vname, 0)
                      ENDIF
                   ENDIF
@@ -140,7 +140,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                      &vname := .T.
                   CASE stroka = "off" .OR. stroka = "OFF" .OR. stroka = "Off" .OR. Empty(stroka)
                      &vname := .F.
-                  CASE ASC(stroka) = 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
+                  CASE ASC(stroka) == 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
                      RDARR(vname, stroka)
                   OTHERWISE
                      &vname := RDZNACH( stroka )
@@ -163,7 +163,7 @@ STATIC FUNCTION RDZNACH( ps )
 
 LOCAL poz, znc
    ps := AllTrim(ps)
-   IF ASC(ps) = 34
+   IF ASC(ps) == 34
       poz := AT(CHR(34), SubStr(ps, 2))
       IF poz != 0
          znc := SubStr(ps, 2, poz - 1)
@@ -189,8 +189,8 @@ LOCAL len1, strv, newname
          ELSE
             //i ++ (value not used)
             poz1 := FIND_Z(stroka)
-            strv := LTrim(SubStr(stroka, 1, IIf(poz1 = 0, 9999, poz1 - 1)))
-            IF ASC(strv) = 123 .AND. SubStr(strv, 2, 1) != "|"              // {
+            strv := LTrim(SubStr(stroka, 1, IIf(poz1 == 0, 9999, poz1 - 1)))
+            IF ASC(strv) == 123 .AND. SubStr(strv, 2, 1) != "|"              // {
                AADD(&vname, {})
                len1    := Len(&vname)
                newname := vname + "[" + LTrim(STR(len1, 3)) + "]"

@@ -120,7 +120,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
    ::Title    := cTitle
    ::bAction  := bAction
    ::bClick   := bClick
-   ::lChecked := IIf(lChecked = Nil, .F., lChecked)
+   ::lChecked := IIf(lChecked == Nil, .F., lChecked)
 
    IF aImages == Nil
       IF oTree:Image1 != Nil
@@ -240,7 +240,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
       ::lChecked := lChecked
    ELSE
       state =  SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
-      ::lChecked := int(state / 4092) = 2
+      ::lChecked := int(state / 4092) == 2
    ENDIF
    RETURN ::lChecked
 
@@ -381,15 +381,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
          RETURN 0
       ENDIF
    ENDIF
-   IF msg = WM_ERASEBKGND
+   IF msg == WM_ERASEBKGND
       RETURN 0
-   ELSEIF msg = WM_CHAR
-      IF wParam = 27
+   ELSEIF msg == WM_CHAR
+      IF wParam == 27
          Return DLGC_WANTMESSAGE
       ENDIF
       RETURN 0
 
-   ELSEIF msg = WM_KEYUP
+   ELSEIF msg == WM_KEYUP
       IF ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
@@ -419,7 +419,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
             ENDIF
          ENDDO
          IF !IsCtrlShift(.T.)
-            IF ( ::hitemDrag:oParent = Nil .OR. ::hitemDrop:oParent = Nil ) .OR. ;
+            IF ( ::hitemDrag:oParent == Nil .OR. ::hitemDrop:oParent == Nil ) .OR. ;
                ( ::hitemDrag:oParent:handle == ::hitemDrop:oParent:handle )
                IF ::FindChildPos(::hitemDrop:oParent, ::hitemDrag:handle) > ::FindChildPos(::hitemDrop:oParent, ::hitemDrop:handle)
                   htiNext := ::hitemDrop //htiParent
@@ -452,7 +452,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
          Eval(::bDrop, Self, hitemNew, ::hitemDrop)
       ENDIF
 
-   ELSEIF ::lEditLabels .AND. ( ( msg = WM_LBUTTONDBLCLK .AND. ::bDblClick = Nil ) .OR. msg = WM_CHAR )
+   ELSEIF ::lEditLabels .AND. ( ( msg == WM_LBUTTONDBLCLK .AND. ::bDblClick == Nil ) .OR. msg == WM_CHAR )
       ::EditLabel(::oSelected)
       RETURN 0
    ENDIF
@@ -478,7 +478,7 @@ METHOD FindChild(h) CLASS HTree
    RETURN Nil
 
 METHOD FindChildPos(oNode, h) CLASS HTree
-   LOCAL aItems := IIf(oNode = Nil, ::aItems, oNode:aItems)
+   LOCAL aItems := IIf(oNode == Nil, ::aItems, oNode:aItems)
    LOCAL  i, alen := Len(aItems)
 
    FOR i := 1 TO alen
@@ -491,17 +491,17 @@ METHOD FindChildPos(oNode, h) CLASS HTree
    RETURN 0
 
 METHOD SearchString( cText, iNivel, oNode, inodo ) CLASS HTree
-   LOCAL aItems := IIf(oNode = Nil, ::aItems, oNode:aItems)
+   LOCAL aItems := IIf(oNode == Nil, ::aItems, oNode:aItems)
    Local  i , alen := Len(aItems)
    LOCAL oNodeRet
    
-   iNodo := IIf(inodo = Nil, 0, iNodo)
+   iNodo := IIf(inodo == Nil, 0, iNodo)
    FOR i := 1 TO aLen
       IF !Empty(aItems[i]:aItems) .AND. ;
          ( oNodeRet := ::SearchString( cText, iNivel, aItems[i], iNodo ) ) != Nil 
          RETURN oNodeRet
       ENDIF
-      IF aItems[i]:Title = cText .AND. ( iNivel == Nil .OR. aItems[i]:GetLevel() = iNivel )
+      IF aItems[i]:Title = cText .AND. ( iNivel == Nil .OR. aItems[i]:GetLevel() == iNivel )
          iNodo ++ 
          RETURN aItems[i]
       ELSE
@@ -532,7 +532,7 @@ METHOD Notify(lParam) CLASS HTree
    LOCAL nCode := GetNotifyCode(lParam), oItem, cText, nAct, nHitem, leval
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
     
-   IF ncode = NM_SETCURSOR .AND. ::lDragging
+   IF ncode == NM_SETCURSOR .AND. ::lDragging
       ::hitemDrop := tree_Hittest(::handle,,, @nAct)
       IF ::hitemDrop != Nil
          SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
@@ -585,20 +585,20 @@ METHOD Notify(lParam) CLASS HTree
          ENDIF
       ENDIF
 
-   ELSEIF nCode = TVN_BEGINDRAG .AND. ::lDragDrop
+   ELSEIF nCode == TVN_BEGINDRAG .AND. ::lDragDrop
       ::hitemDrag := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       ::lDragging := .T.
 
-   ELSEIF nCode = TVN_KEYDOWN
+   ELSEIF nCode == TVN_KEYDOWN
       IF ::oItem:oTree:bKeyDown != Nil
          Eval(::oItem:oTree:bKeyDown, ::oItem, nKeyDown, Self)
       ENDIF
 
-    ELSEIF nCode = NM_CLICK  //.AND. ::oitem != Nil // .AND. !::lEditLabels
+    ELSEIF nCode == NM_CLICK  //.AND. ::oitem != Nil // .AND. !::lEditLabels
        nHitem :=  Tree_GetNotify(lParam, 1)
        //nHitem :=  GETNOTIFYcode(lParam)
        oItem  := tree_Hittest(::handle,,, @nAct)
-       IF nAct = TVHT_ONITEMSTATEICON
+       IF nAct == TVHT_ONITEMSTATEICON
           IF ::oItem == Nil .OR. oItem:handle != ::oitem:handle
             ::Select(oItem)
             ::oItem := oItem
@@ -651,9 +651,9 @@ METHOD Notify(lParam) CLASS HTree
 
 METHOD Selecteds(oItem, aSels) CLASS HTree
    LOCAL i, iLen
-   LOCAL aSelecteds := IIf(aSels = Nil, {}, aSels)
+   LOCAL aSelecteds := IIf(aSels == Nil, {}, aSels)
    
-   oItem := IIf(oItem = Nil, Self, oItem)
+   oItem := IIf(oItem == Nil, Self, oItem)
    iLen :=  Len(oItem:aitems)
    
    FOR i := 1 TO iLen
@@ -694,8 +694,8 @@ STATIC PROCEDURE MarkCheckTree(oItem, state)
       TreeSetItem(oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state)
       MarkCheckTree(oItem:aItems[i], state)
    NEXT
-   IF state = 1
-      oParent = oItem:oParent
+   IF state == 1
+      oParent := oItem:oParent
       DO WHILE oParent != Nil
          TreeSetItem(oItem:oTree:handle, oParent:handle, TREE_SETITEM_CHECK, state)
          oParent := oParent:oParent

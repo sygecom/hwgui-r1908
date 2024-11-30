@@ -100,7 +100,7 @@ METHOD Activate() CLASS HProgressBar
 
    IF !Empty(::oParent:handle)
       ::handle := CreateProgressBar(::oParent:handle, ::maxPos, ::style, ;
-                                     ::nLeft, ::nTop, ::nWidth, IIf(::nHeight = 0, Nil, ::nHeight))
+                                     ::nLeft, ::nTop, ::nWidth, IIf(::nHeight == 0, Nil, ::nHeight))
       ::Init()
    ENDIF
    RETURN Nil
@@ -159,7 +159,7 @@ METHOD SetAnimation(nAnimation) CLASS HProgressBar
           MODIFYSTYLE(::handle, PBS_MARQUEE, 0)
           SendMessage(::handle, PBM_SETPOS, 0, 0)
        ELSE
-          IF Hwg_BitAND(::Style, PBS_MARQUEE) = 0
+          IF Hwg_BitAND(::Style, PBS_MARQUEE) == 0
              MODIFYSTYLE(::handle, PBS_MARQUEE, PBS_MARQUEE)
          ENDIF
          SendMessage(::handle, PBM_SETMARQUEE, 1, nAnimation)

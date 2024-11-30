@@ -244,7 +244,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 METHOD SetValue(lValue) CLASS HCheckButton
 
    SendMessage(::handle, BM_SETCHECK, IIF(Empty(lValue), 0, 1), 0)
-   ::lValue := IIF(lValue = NIL .OR. !hb_IsLogical(lValue), .F., lValue)
+   ::lValue := IIF(lValue == NIL .OR. !hb_IsLogical(lValue), .F., lValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, lValue, Self)
    ENDIF

@@ -108,7 +108,7 @@ METHOD SetFontStyle(lBold, nCharSet, lItalic, lUnder, lStrike, nHeight) CLASS HF
    LOCAL StrikeOut
 
    IF lBold != NIL
-      weight = IIF(lBold, FW_BOLD, FW_REGULAR)
+      weight := IIF(lBold, FW_BOLD, FW_REGULAR)
    ELSE
       weight := ::weight
    ENDIF

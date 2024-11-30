@@ -81,7 +81,7 @@ METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       vari := 0
       Eval(bSetGet, vari)
    ENDIF
-   IF bSetGet = Nil
+   IF bSetGet == Nil
       bSetGet := {| v | IIf(v == Nil, ::nValue, ::nValue := v) }
    ENDIF
 
@@ -94,7 +94,7 @@ METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    ::idUpDown := ::id //::NewId()
 
-   ::Increment := IIf(nIncr = Nil, 1, nIncr)
+   ::Increment := IIf(nIncr == Nil, 1, nIncr)
    ::styleUpDown := UDS_ALIGNRIGHT  + UDS_ARROWKEYS + UDS_NOTHOUSANDS //+ UDS_SETBUDDYINT //+ UDS_HORZ
    IF nLower != Nil
       ::nLower := nLower
@@ -107,7 +107,7 @@ METHOD New(oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ::nUpDownWidth := nUpDWidth
    ENDIF
    ::nMaxLength :=  nMaxLength //= Nil, 4, nMaxLength )
-   ::cPicture := IIf(cPicture = Nil, Replicate("9", 4), cPicture)
+   ::cPicture := IIf(cPicture == Nil, Replicate("9", 4), cPicture)
    ::lNoBorder := lNoBorder
    ::bkeydown := bkeydown
    ::bchange  := bchange
@@ -179,7 +179,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
                                     // ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nLower, ::nUpper,Val(::title))
    ::oEditUpDown:oUpDown := Self
    ::oEditUpDown:lInit := .T.
-   IF ::nHolder = 0
+   IF ::nHolder == 0
       ::nHolder := 1
       SetWindowObject(::handle, ::oEditUpDown)
       Hwg_InitEditProc(::handle)
@@ -295,9 +295,9 @@ METHOD Notify(lParam) CLASS HeditUpDown
    Local iDelta := GETNOTIFYDELTAPOS(lParam, 2)
    Local vari, res
 
-   //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent = Nil , - 1 , 1)
+   //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == Nil , - 1 , 1)
 
-     IF ::oUpDown = Nil .OR. Hwg_BitAnd(GetWindowLong( ::handle, GWL_STYLE ), ES_READONLY) != 0 .OR. ;
+     IF ::oUpDown == Nil .OR. Hwg_BitAnd(GetWindowLong( ::handle, GWL_STYLE ), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
        ( ::oUpDown:bGetFocus != Nil .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown) )
         Return 0
@@ -306,7 +306,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    vari := Val(LTrim(::UnTransform(::title)))
 
    IF ( vari <= ::oUpDown:nLower .AND. iDelta < 0 ) .OR. ;
-       ( vari >= ::oUpDown:nUpper .AND. iDelta > 0 ) .OR. ::oUpDown:Increment = 0
+       ( vari >= ::oUpDown:nUpper .AND. iDelta > 0 ) .OR. ::oUpDown:Increment == 0
        ::SetFocus()
        RETURN 0
    ENDIF
@@ -316,7 +316,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
    ::SetFocus()
-   IF nCode = UDN_DELTAPOS .AND. ( ::oUpDown:bClickUp != Nil .OR. ::oUpDown:bClickDown != Nil )
+   IF nCode == UDN_DELTAPOS .AND. ( ::oUpDown:bClickUp != Nil .OR. ::oUpDown:bClickDown != Nil )
       ::oparent:lSuspendMsgsHandling := .T.
       IF iDelta < 0 .AND. ::oUpDown:bClickDown  != Nil
          res := Eval(::oUpDown:bClickDown, ::oUpDown, ::oUpDown:nValue, iDelta, ipos)
@@ -328,7 +328,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
          RETURN 0
       ENDIF
    ENDIF
-   IF nCode = UDN_FIRST
+   IF nCode == UDN_FIRST
 
    ENDIF
    RETURN 0
@@ -448,7 +448,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
       ENDIF
    ENDIF
    IF msg == WM_CHAR
-      IF wParam = VK_TAB
+      IF wParam == VK_TAB
           GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
           RETURN 0
       ELSEIF wParam == VK_RETURN
@@ -456,7 +456,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
           RETURN 0
         ENDIF
 
-    ELSEIF msg = WM_KEYDOWN
+    ELSEIF msg == WM_KEYDOWN
 
         ProcKeyList(Self, wParam)
 
@@ -531,7 +531,7 @@ STATIC FUNCTION __Valid(oCtrl)
          ENDIF
       ENDIF
    ENDIF
-   IF ltab .AND. hctrl = getfocus() .AND. res
+   IF ltab .AND. hctrl == getfocus() .AND. res
       IF oCtrl:oParent:CLASSNAME = "HTAB"
          getskip(oCtrl:oparent, oCtrl:handle, , nSkip)
       ENDIF

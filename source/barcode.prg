@@ -201,41 +201,41 @@ METHOD ShowBarcode() CLASS BarCode
    LOCAL cCode, cCode2
 
    DO CASE
-   CASE ::nBCodeType = 1
+   CASE ::nBCodeType == 1
       cCode := ::InitCode39(.F.)
-   CASE ::nBCodeType = 2
+   CASE ::nBCodeType == 2
       cCode := ::InitCode39(.T.)
-   CASE ::nBCodeType = 3
+   CASE ::nBCodeType == 3
       cCode := ::InitCode128("")
-   CASE ::nBCodeType = 4
+   CASE ::nBCodeType == 4
       cCode := ::InitCode128("A")
-   CASE ::nBCodeType = 5
+   CASE ::nBCodeType == 5
       cCode := ::InitCode128("B")
-   CASE ::nBCodeType = 6
+   CASE ::nBCodeType == 6
       cCode := ::InitCode128("C")
-   CASE ::nBCodeType = 7
+   CASE ::nBCodeType == 7
       cCode  := ::InitUPC(7)
       cCode2 := ::InitE13BL(8)
-   CASE ::nBCodeType = 8
+   CASE ::nBCodeType == 8
       cCode := ::InitEAN13()
-   CASE ::nBCodeType = 9
+   CASE ::nBCodeType == 9
       cCode  := ::InitUPC(11)
       cCode2 := ::InitE13BL(12)
-   CASE ::nBCodeType = 10
+   CASE ::nBCodeType == 10
       cCode  := ::InitCodabar()
-   CASE ::nBCodeType = 11
+   CASE ::nBCodeType == 11
       cCode  := ::InitSub5()
-   CASE ::nBCodeType = 12
+   CASE ::nBCodeType == 12
       cCode  := ::InitIndustrial25(.F.)
-   CASE ::nBCodeType = 13
+   CASE ::nBCodeType == 13
       cCode  := ::InitIndustrial25(.T.)
-   CASE ::nBCodeType = 14
+   CASE ::nBCodeType == 14
       cCode  := ::InitInterleave25(.F.)
-   CASE ::nBCodeType = 15
+   CASE ::nBCodeType == 15
       cCode  := ::InitInterleave25(.T.)
-   CASE ::nBCodeType = 16
+   CASE ::nBCodeType == 16
       cCode  := ::InitMatrix25(.F.)
-   CASE ::nBCodeType = 17
+   CASE ::nBCodeType == 17
       cCode  := ::InitMatrix25(.T.)
    OTHERWISE
       cCode := ::InitCode39(.T.)
@@ -243,7 +243,7 @@ METHOD ShowBarcode() CLASS BarCode
 
    ::CreateBarcode(cCode)
 
-   IF ::nBCodeType = 7 .OR. ::nBCodeType = 9
+   IF ::nBCodeType == 7 .OR. ::nBCodeType == 9
       ::CreateBarcode(cCode2)
    ENDIF
 
@@ -501,7 +501,7 @@ METHOD InitCode128(cMode) CLASS BarCode
       cCar := SubStr(cCode, n, 1)
 
       IF lCodeC
-         IF Len(cCode) = n                        // ultimo caracter
+         IF Len(cCode) == n                        // ultimo caracter
             cTemp += aCode[101]                 // SHIFT Code B
             nCar := Asc(cCar) - 31
          ELSE
@@ -819,7 +819,7 @@ METHOD InitInterleave25(lMode) CLASS BarCode
    DEFAULT lMode := .F.
 
    nLen   := Len(cCode)
-   IF (nLen % 2 = 1 .AND. !lMode)
+   IF (nLen % 2 == 1 .AND. !lMode)
       nLen ++
       cCode += "0"
    ENDIF

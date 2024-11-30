@@ -261,7 +261,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    ENDIF
 
    IF nCode == NM_CLICK
-      iSelect = SendMessage(::handle, LVM_GETNEXTITEM, -1, LVNI_FOCUSED)
+      iSelect := SendMessage(::handle, LVM_GETNEXTITEM, -1, LVNI_FOCUSED)
 
       IF ( iSelect == - 1 )
          RETURN 0

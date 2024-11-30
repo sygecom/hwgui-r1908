@@ -75,8 +75,8 @@ METHOD Init() CLASS HGroup
 
    IF !::lInit
       ::Super:Init()
-      //-IF ::backStyle = TRANSPARENT .OR. ::bColor != NIL
-      IF ::oBrush != NIL .OR. ::backStyle = TRANSPARENT
+      //-IF ::backStyle == TRANSPARENT .OR. ::bColor != NIL
+      IF ::oBrush != NIL .OR. ::backStyle == TRANSPARENT
          nbs := HWG_GETWINDOWSTYLE(::handle)
          nbs := modstyle(nbs, BS_TYPEMASK, BS_OWNERDRAW + WS_DISABLED)
          HWG_SETWINDOWSTYLE(::handle, nbs)
@@ -92,9 +92,9 @@ METHOD Init() CLASS HGroup
          IF ::oBrush != NIL
             /*
             nbs := AScan(::oparent:acontrols, {|o|o:handle == ::handle})
-            FOR i = LEN(::oparent:acontrols) TO 1 STEP -1
+            FOR i := LEN(::oparent:acontrols) TO 1 STEP -1
                IF nbs != i .AND.;
-                   PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS = 0
+                   PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS == 0
                    SetWindowPos(::oparent:acontrols[i]:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_FRAMECHANGED)
                ENDIF
             NEXT

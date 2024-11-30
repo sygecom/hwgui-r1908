@@ -171,7 +171,7 @@ METHOD INIT() CLASS HStaticLink
    IF !::lInit
 
       /*
-      IF ::GetParentForm():Type <= WND_MDICHILD .OR. ::TYPE = NIL
+      IF ::GetParentForm():Type <= WND_MDICHILD .OR. ::TYPE == NIL
          ::nHolder := 1
          SetWindowObject(::handle, Self)
        //  Hwg_InitWinCtrl(::handle)
@@ -205,9 +205,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
             TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
          ENDIF
         */
-   ELSEIF ( msg = WM_MOUSELEAVE .OR. msg = WM_NCMOUSELEAVE )
+   ELSEIF ( msg == WM_MOUSELEAVE .OR. msg == WM_NCMOUSELEAVE )
         ::state := LBL_NORMAL
-   ELSEIF msg =  WM_MOUSEHOVER
+   ELSEIF msg == WM_MOUSEHOVER
    ELSEIF msg == WM_SETCURSOR
       ::OnSetCursor(msg, wParam, lParam)
 
@@ -369,16 +369,16 @@ METHOD Paint(lpDis) CLASS HStaticLink
       itemRect[4] := aBmpSize[2] + 1
       bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]
-      IF ::backstyle = TRANSPARENT
+      IF ::backstyle == TRANSPARENT
          DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ELSE
          DrawBitmap(dc, ::hbitmap, , bmpRect[1], bmpRect[2])
       ENDIF
-      rcclient[1] +=  IIf(::iStyle = ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
+      rcclient[1] +=  IIf(::iStyle == ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
    ENDIF
    SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
-       SetBkColor(DC, IIf(::bColor = NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
+       SetBkColor(DC, IIf(::bColor == NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
        FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
@@ -401,7 +401,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    ENDIF
 
    //::dc:DrawText(strtext, rcClient, dwFlags)
-   IF ::state = LBL_MOUSEOVER .AND. !::lAllUnderline
+   IF ::state == LBL_MOUSEOVER .AND. !::lAllUnderline
       SelectObject(DC, ::oFontUnder:handle)
       DrawText(dc, strText, rcClient, dwFlags)
       SelectObject(DC, ::oFont:handle)
@@ -419,7 +419,7 @@ METHOD Resize(x, y) CLASS HStaticLink
    LOCAL aBmpSize, aTxtSize
    LOCAL nHeight := ::nHeight
    
-   IF x != Nil .AND. x + y = 0
+   IF x != Nil .AND. x + y == 0
       RETURN Nil
    ENDIF
 

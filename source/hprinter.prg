@@ -102,11 +102,11 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
    IF lmm != Nil
       ::lmm := lmm
    ENDIF
-   IF hDCPrn = Nil
-      hDCPrn = 0
+   IF hDCPrn == Nil
+      hDCPrn := 0
    ENDIF
    IF hDCPrn != 0
-      ::hDCPrn = hDCPrn
+      ::hDCPrn := hDCPrn
       ::cPrinterName := cPrinter
    ELSE
 
@@ -549,60 +549,60 @@ METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) CLASS hPrinter
    nPosVert := getscrollpos(oCanvas:handle, SB_VERT)
    nPosHorz := getscrollpos(oCanvas:handle, SB_HORZ)
 
-   IF msg = WM_VSCROLL
+   IF msg == WM_VSCROLL
       setscrollrange(oCanvas:handle, SB_VERT, 1, 20)
       wmsg := LOWORD(wParam)
-      IF wmsg = SB_THUMBPOSITION .OR. wmsg = SB_THUMBTRACK
+      IF wmsg == SB_THUMBPOSITION .OR. wmsg == SB_THUMBTRACK
          nPosVert := HIWORD(wParam)
-      ELSEIF wmsg = SB_LINEUP
+      ELSEIF wmsg == SB_LINEUP
          nPosVert := nPosVert - 1
          IF nPosVert < 1
             nPosVert := 1
          ENDIF
-      ELSEIF wmsg = SB_LINEDOWN
+      ELSEIF wmsg == SB_LINEDOWN
          nPosVert := nPosVert + 1
          IF nPosVert > 20
-            nPosVert = 20
+            nPosVert := 20
          ENDIF
-      ELSEIF wmsg = SB_PAGEDOWN
+      ELSEIF wmsg == SB_PAGEDOWN
          nPosVert := nPosVert + 4
          IF nPosVert > 20
-            nPosVert = 20
+            nPosVert := 20
          ENDIF
-      ELSEIF wmsg = SB_PAGEUP
+      ELSEIF wmsg == SB_PAGEUP
          nPosVert := nPosVert - 4
          IF nPosVert < 1
-            nPosVert = 1
+            nPosVert := 1
          ENDIF
       ENDIF
       setscrollpos(oCanvas:handle, SB_VERT, nPosVert)
       ::NeedsRedraw := .T.
    ENDIF
 
-   IF msg = WM_HSCROLL
+   IF msg == WM_HSCROLL
       setscrollrange(oCanvas:handle, SB_HORZ, 1, 20)
       wmsg := LOWORD(wParam)
-      IF wmsg = SB_THUMBPOSITION .OR. wmsg = SB_THUMBTRACK
+      IF wmsg == SB_THUMBPOSITION .OR. wmsg == SB_THUMBTRACK
          nPosHorz := HIWORD(wParam)
-      ELSEIF wmsg = SB_LINEUP
+      ELSEIF wmsg == SB_LINEUP
          nPosHorz := nPosHorz - 1
          IF nPosHorz < 1
-            nPosHorz = 1
+            nPosHorz := 1
          ENDIF
-      ELSEIF wmsg = SB_LINEDOWN
+      ELSEIF wmsg == SB_LINEDOWN
          nPosHorz := nPosHorz + 1
          IF nPosHorz > 20
-            nPosHorz = 20
+            nPosHorz := 20
          ENDIF
-      ELSEIF wmsg = SB_PAGEDOWN
+      ELSEIF wmsg == SB_PAGEDOWN
          nPosHorz := nPosHorz + 4
          IF nPosHorz > 20
-            nPosHorz = 20
+            nPosHorz := 20
          ENDIF
-      ELSEIF wmsg = SB_PAGEUP
+      ELSEIF wmsg == SB_PAGEUP
          nPosHorz := nPosHorz - 4
          IF nPosHorz < 1
-            nPosHorz = 1
+            nPosHorz := 1
          ENDIF
       ENDIF
       setscrollpos(oCanvas:handle, SB_HORZ, nPosHorz)
@@ -719,7 +719,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    pps := DefinePaintStru()
    hDC := BeginPaint(oWnd:handle, pps)
-   aArray = GetPPSRect(pps)
+   aArray := GetPPSRect(pps)
    // tracelog( "PPS"+str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]) )
 
    IF ( aArray[1] == 0 .AND. aArray[2] == 0 )  // IF WHOLE AREA

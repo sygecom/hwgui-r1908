@@ -60,7 +60,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder) CLASS HRichEdit
 
    nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER )
-                        IIf(lNoBorder = Nil.OR. !lNoBorder, WS_BORDER, 0))
+                        IIf(lNoBorder == Nil .OR. !lNoBorder, WS_BORDER, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, IIf(bcolor == Nil, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
 
@@ -113,30 +113,30 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    LOCAL nDelta, nret
 
    //HWG_writelog( "rich" + str(msg) + str(wParam) + str(lParam) + chr(13) )
-   IF msg = WM_KEYUP .OR. msg == WM_LBUTTONDOWN .OR. msg == WM_LBUTTONUP // msg = WM_NOTIFY .OR.
+   IF msg == WM_KEYUP .OR. msg == WM_LBUTTONDOWN .OR. msg == WM_LBUTTONUP // msg == WM_NOTIFY .OR.
       ::updatePos()
    ELSEIF msg == WM_MOUSEACTIVATE  .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
       ::SetFocus()
    ENDIF
-   IF msg = EM_GETSEL .OR. msg = EM_LINEFROMCHAR .OR. msg = EM_LINEINDEX .OR. ;
-       msg = EM_GETLINECOUNT .OR. msg = EM_SETSEL .OR. msg = EM_SETCHARFORMAT .OR. ;
-       msg = EM_HIDESELECTION .OR. msg = WM_GETTEXTLENGTH .OR. msg = EM_GETFIRSTVISIBLELINE
+   IF msg == EM_GETSEL .OR. msg == EM_LINEFROMCHAR .OR. msg == EM_LINEINDEX .OR. ;
+       msg == EM_GETLINECOUNT .OR. msg == EM_SETSEL .OR. msg == EM_SETCHARFORMAT .OR. ;
+       msg == EM_HIDESELECTION .OR. msg == WM_GETTEXTLENGTH .OR. msg == EM_GETFIRSTVISIBLELINE
       Return - 1
    ENDIF
-   IF msg = WM_SETFOCUS .AND. ::lSetFocus //.AND. ISWINDOWVISIBLE(::handle)
+   IF msg == WM_SETFOCUS .AND. ::lSetFocus //.AND. ISWINDOWVISIBLE(::handle)
       ::lSetFocus := .F.
       PostMessage(::handle, EM_SETSEL, 0, 0)
-   ELSEIF msg = WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+   ELSEIF msg == WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
         ::lctrltab := ::GetParentForm(Self):lDisableCtrlTab
         ::GetParentForm(Self):lDisableCtrlTab := ::lAllowTabs
-   ELSEIF msg = WM_KILLFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+   ELSEIF msg == WM_KILLFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
         ::GetParentForm(Self):lDisableCtrlTab := ::lctrltab
    ENDIF
-   IF msg == WM_KEYDOWN .AND. ( wParam = VK_DELETE .OR. wParam = VK_BACK )  //46Del
+   IF msg == WM_KEYDOWN .AND. ( wParam == VK_DELETE .OR. wParam == VK_BACK )  //46Del
       ::lChanged := .T.
    ENDIF
    IF msg == WM_CHAR
-      IF wParam = VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+      IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
          IF ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
             RETURN 0
          ENDIF
@@ -151,17 +151,17 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       ENDIF
    ENDIF
    IF msg == WM_KEYUP
-     IF wParam = VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+     IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
          IF IsCtrlShift(.T.,.F.)
             GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYDOWN
-      IF wParam = VK_TAB .AND. ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
+      IF wParam == VK_TAB .AND. ( IsCtrlShift(.T.,.F.) .OR. !::lAllowTabs )
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
-      ELSEIF wParam = VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
+      ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
          RE_INSERTTEXT(::handle, CHR(VK_TAB))
           RETURN 0
       ENDIF
@@ -278,7 +278,7 @@ METHOD OpenFile(cFile) CLASS HRichEdit
 
 METHOD Print() CLASS HRichEdit
 
-   IF ::hDCPrinter = Nil
+   IF ::hDCPrinter == Nil
     //  ::hDCPrinter := PrintSetup()
    ENDIF
    IF HWG_STARTDOC(::hDCPrinter) != 0
