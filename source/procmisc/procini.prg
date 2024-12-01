@@ -1,12 +1,12 @@
-/*
- * $Id: procini.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * Common procedures
- * Ini files reading
- *
- * Author: Alexander S.Kresin <alex@belacy.belgorod.su>
- *         www - http://www.geocities.com/alkresin/
-*/
+//
+// $Id: procini.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// Common procedures
+// Ini files reading
+//
+// Author: Alexander S.Kresin <alex@belacy.belgorod.su>
+//         www - http://www.geocities.com/alkresin/
+//
 
 /*
  Function Rdini scans file line by line, creates variables ( if they doesn't

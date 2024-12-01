@@ -1,12 +1,12 @@
-/*
- * $Id: barcode.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * Create Barcode for HWGUI application
- *
- * see example at utils\designer\samples\barcode.xml
- *
- * Copyright 2006 Richard Roesnadi <roesnadi8@yahoo.co.id>
-*/
+//
+// $Id: barcode.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// Create Barcode for HWGUI application
+//
+// see example at utils\designer\samples\barcode.xml
+//
+// Copyright 2006 Richard Roesnadi <roesnadi8@yahoo.co.id>
+//
 
 #include "hbclass.ch"
 #include "guilib.ch"

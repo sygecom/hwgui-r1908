@@ -1,12 +1,12 @@
-/*
- * $Id: htree.prg 1895 2012-09-12 11:56:05Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTree class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: htree.prg 1895 2012-09-12 11:56:05Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HTree class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

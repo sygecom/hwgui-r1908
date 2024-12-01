@@ -1,20 +1,17 @@
-/*
- * $Id: saymoney.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Main prg level functions
- *
- * Copyright 2008 Richard Roesnadi <roesnadi8@yahoo.co.id>
- * www - http://richard-software.com
+//
+// $Id: saymoney.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Main prg level functions
+//
+// Copyright 2008 Richard Roesnadi <roesnadi8@yahoo.co.id>
+// www - http://richard-software.com
+//
 
-*/
-
-/*
- *
- * English   :  SayDollar(nDollar) -> Say in Dollar
- * Indonesia :  SayRupiah(nRupiah) -> Say in Rupiah
-*/
-
+//
+// English   :  SayDollar(nDollar) -> Say in Dollar
+// Indonesia :  SayRupiah(nRupiah) -> Say in Rupiah
+//
 
 // English Say Money
 FUNCTION SayDollar(nDollar)

@@ -1,12 +1,12 @@
-/*
- *$Id: hcwindow.prg 1868 2012-08-27 17:33:11Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HObject class
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hcwindow.prg 1868 2012-08-27 17:33:11Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HObject class
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

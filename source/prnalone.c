@@ -1,10 +1,9 @@
-/*
- *
- * C level print functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- */
+//
+// C level print functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #define OEMRESOURCE
 

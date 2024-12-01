@@ -1,12 +1,12 @@
-/*
- * $Id: drawwidg.prg 1740 2011-09-23 12:06:53Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Fonts handling
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// $Id: drawwidg.prg 1740 2011-09-23 12:06:53Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Fonts handling
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include "hbclass.ch"
 #include "windows.ch"

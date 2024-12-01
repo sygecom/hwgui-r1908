@@ -1,12 +1,12 @@
-/*
- * $Id: hcheck.prg 1859 2012-07-16 17:19:49Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCheckButton class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hcheck.prg 1859 2012-07-16 17:19:49Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HCheckButton class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

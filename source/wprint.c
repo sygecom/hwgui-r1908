@@ -1,12 +1,12 @@
-/*
- * $Id: wprint.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level print functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
+//
+// $Id: wprint.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level print functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #define OEMRESOURCE
 

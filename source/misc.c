@@ -1,12 +1,12 @@
-/*
- * $Id: misc.c 1846 2012-07-02 16:52:31Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Miscellaneous functions
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- */
+//
+// $Id: misc.c 1846 2012-07-02 16:52:31Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Miscellaneous functions
+//
+// Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #define OEMRESOURCE
 #include "hwingui.h"

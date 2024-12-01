@@ -1,12 +1,12 @@
-/*
- * $Id: hmonthc.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HMonthCalendar class
- *
- * Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
- * www - http://geocities.yahoo.com.br/marcosgambeta/
-*/
+//
+// $Id: hmonthc.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HMonthCalendar class
+//
+// Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
+// www - http://geocities.yahoo.com.br/marcosgambeta/
+//
 
 //--------------------------------------------------------------------------//
 

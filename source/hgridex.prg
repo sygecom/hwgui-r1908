@@ -1,14 +1,13 @@
- /*
- * $Id: hgridex.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
- * Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
-*/
-
+//
+// $Id: hgridex.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
+// Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
+//
 
 #include "windows.ch"
 #include "guilib.ch"

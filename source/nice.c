@@ -1,12 +1,11 @@
-/*
- * $Id: nice.c 1846 2012-07-02 16:52:31Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- *
- *
- * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
- */
+//
+// $Id: nice.c 1846 2012-07-02 16:52:31Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+//
+// Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "hwingui.h"
 #include <commctrl.h>

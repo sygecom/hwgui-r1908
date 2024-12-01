@@ -1,13 +1,13 @@
-/*
- * $Id: blowfish.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Encryption/Decryption functions, using BlowFish algorithm,
- * originally designed by Bruce Schneier.
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- */
+//
+// $Id: blowfish.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Encryption/Decryption functions, using BlowFish algorithm,
+// originally designed by Bruce Schneier.
+//
+// Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #define MAXKEYBYTES 56 /* 448 bits */
 #define N 16

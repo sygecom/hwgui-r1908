@@ -1,12 +1,12 @@
-/*
- * $Id: hpager.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- *
- *
- * Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
-*/
+//
+// $Id: hpager.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+//
+//
+// Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "windows.ch"
 #include "inkey.ch"

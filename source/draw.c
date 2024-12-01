@@ -1,12 +1,12 @@
-/*
- * $Id: draw.c 1846 2012-07-02 16:52:31Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level painting functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
+//
+// $Id: draw.c 1846 2012-07-02 16:52:31Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level painting functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #define OEMRESOURCE
 #ifdef __DMC__

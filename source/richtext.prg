@@ -1,6 +1,7 @@
-/*
- * $Id: richtext.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- */
+//
+// $Id: richtext.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+
 /*
 旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴커
 �        Class: RichText                                                   �

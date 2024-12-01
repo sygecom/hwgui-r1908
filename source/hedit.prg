@@ -1,12 +1,12 @@
-/*
- *$Id: hedit.prg 1906 2012-09-25 22:23:08Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HEdit class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hedit.prg 1906 2012-09-25 22:23:08Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HEdit class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 STATIC s_lColorinFocus := .F.
 STATIC s_lFixedColor := .T.

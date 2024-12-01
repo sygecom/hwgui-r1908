@@ -1,12 +1,12 @@
-/*
- * $Id: hrect.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level class HRect (Panel)
- *
- * Copyright 2004 Ricardo de Moura Marques <ricardo.m.marques@caixa.gov.br>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hrect.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level class HRect (Panel)
+//
+// Copyright 2004 Ricardo de Moura Marques <ricardo.m.marques@caixa.gov.br>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

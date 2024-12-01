@@ -1,12 +1,12 @@
-/*
- * $Id: hqhtm.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-
- * HWGUI - Harbour Win32 GUI library source code:
- * HQhtm class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hqhtm.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HQhtm class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "hwgui.ch"
 #include "hbclass.ch"

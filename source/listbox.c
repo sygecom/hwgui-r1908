@@ -1,14 +1,14 @@
-/*
- * $Id: listbox.c 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HList class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Listbox class and accompanying code added Feb 22nd, 2004 by
- * Vic McClung
- */
+//
+// $Id: listbox.c 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HList class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Listbox class and accompanying code added Feb 22nd, 2004 by
+// Vic McClung
+//
 
 #include "hwingui.h"
 #if defined(__MINGW32__) || defined(__MINGW64__) || defined(__WATCOMC__)

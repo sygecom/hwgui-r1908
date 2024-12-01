@@ -1,12 +1,11 @@
- /*
- * $Id: hgrid.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
-*/
+//
+// $Id: hgrid.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
 
 /*
 TODO: 1) In line edit

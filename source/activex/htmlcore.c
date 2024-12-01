@@ -1,13 +1,13 @@
-/*
- * $Id: htmlcore.c 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * ActiveX container
- *
- * Original author - Jeff Glatt
- * Modifyed for using with HwGUI by Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
+//
+// $Id: htmlcore.c 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// ActiveX container
+//
+// Original author - Jeff Glatt
+// Modifyed for using with HwGUI by Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 /*
  * Dll.c -- A dynamic link library to display a web page in your own window.

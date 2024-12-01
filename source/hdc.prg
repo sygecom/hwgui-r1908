@@ -1,12 +1,12 @@
-/*
- * $Id: hdc.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HPAINTDC and HDC Classes
- *
- * Copyright 2005 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
-*/
+//
+// $Id: hdc.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HPAINTDC and HDC Classes
+//
+// Copyright 2005 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "hbclass.ch"
 #include "hwgui.ch"

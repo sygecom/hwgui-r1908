@@ -1,13 +1,12 @@
-/*
- * $Id: tmci.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Windows errorsys replacement
- *
- * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
-*/
-
+//
+// $Id: tmci.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Windows errorsys replacement
+//
+// Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "hbclass.ch"
 #include "windows.ch"

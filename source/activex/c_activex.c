@@ -1,6 +1,7 @@
-/*
- * $Id: c_activex.c 1615 2011-02-18 13:53:35Z mlacecilia $
- */
+//
+// $Id: c_activex.c 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+
 /*
  * ooHG source code:
  * ActiveX control

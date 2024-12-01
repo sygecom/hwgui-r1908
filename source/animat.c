@@ -1,10 +1,10 @@
-/*
- * HWGUI - Harbour Win32 GUI library source code:
- * C functions for HAnimation class
- *
- * Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
- * www - http://geocities.yahoo.com.br/marcosgambeta/
- */
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C functions for HAnimation class
+//
+// Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
+// www - http://geocities.yahoo.com.br/marcosgambeta/
+//
 
 #include "hwingui.h"
 #include <commctrl.h>

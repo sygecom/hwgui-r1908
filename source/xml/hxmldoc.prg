@@ -1,12 +1,12 @@
-/*
- * $Id: hxmldoc.prg 1844 2012-06-06 11:11:24Z alkresin $
- *
- * Harbour XML Library
- * HXmlDoc class
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hxmldoc.prg 1844 2012-06-06 11:11:24Z alkresin $
+//
+// Harbour XML Library
+// HXmlDoc class
+//
+// Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "hbclass.ch"
 #include "fileio.ch"

@@ -1,12 +1,12 @@
-/*
- *$Id: htab.prg 1893 2012-09-10 19:15:47Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTab class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: htab.prg 1893 2012-09-10 19:15:47Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HTab class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

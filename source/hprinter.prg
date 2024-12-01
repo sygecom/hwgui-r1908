@@ -1,12 +1,12 @@
-/*
- * $Id: hprinter.prg 1758 2011-10-06 16:43:30Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HPrinter class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hprinter.prg 1758 2011-10-06 16:43:30Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HPrinter class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

@@ -1,12 +1,12 @@
-/*
- * $Id: htool.prg 1901 2012-09-19 23:12:50Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HToolButton class
- *
- * Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
-*/
+//
+// $Id: htool.prg 1901 2012-09-19 23:12:50Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HToolButton class
+//
+// Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "windows.ch"
 #include "inkey.ch"

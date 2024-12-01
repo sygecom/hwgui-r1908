@@ -1,12 +1,12 @@
-/*
- * $Id: hsayimg.prg 1899 2012-09-19 12:35:34Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HSayImage class
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hsayimg.prg 1899 2012-09-19 12:35:34Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HSayImage class
+//
+// Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

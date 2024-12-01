@@ -1,12 +1,12 @@
-/*
- * $Id: hdatepic.prg 1889 2012-09-09 22:28:07Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HDatePicker class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hdatepic.prg 1889 2012-09-09 22:28:07Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HDatePicker class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

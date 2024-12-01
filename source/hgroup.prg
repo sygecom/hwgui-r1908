@@ -1,12 +1,12 @@
-/*
- * $Id: hcontrol.prg 1902 2012-09-20 11:51:37Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGroup class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hcontrol.prg 1902 2012-09-20 11:51:37Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGroup class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

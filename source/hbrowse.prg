@@ -1,12 +1,12 @@
-/*
- * $Id: hbrowse.prg 1885 2012-09-05 19:34:25Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HBrowse class - browse databases and arrays
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hbrowse.prg 1885 2012-09-05 19:34:25Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HBrowse class - browse databases and arrays
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 // Modificaciones y Agregados. 27.07.2002, WHT.de la Argentina ///////////////
 // 1) En el metodo HColumn se agregaron las DATA: "nJusHead" y "nJustLin",  //

@@ -1,12 +1,12 @@
-/*
- * $Id: htimer.prg 1866 2012-08-27 16:23:17Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTimer class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// $Id: htimer.prg 1866 2012-08-27 16:23:17Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HTimer class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

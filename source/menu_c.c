@@ -1,12 +1,12 @@
-/*
- * $Id: menu_c.c 1819 2011-12-26 11:17:03Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level menu functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
+//
+// $Id: menu_c.c 1819 2011-12-26 11:17:03Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level menu functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #define OEMRESOURCE
 

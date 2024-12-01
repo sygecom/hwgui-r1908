@@ -1,13 +1,12 @@
-/*
- * $Id: hcontrol.prg 1902 2012-09-20 11:51:37Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HButtonEx class
- *
- * Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
- * www - http://sites.uol.com.br/culikr/
-
-*/
+//
+// $Id: hcontrol.prg 1902 2012-09-20 11:51:37Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HButtonEx class
+//
+// Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
+// www - http://sites.uol.com.br/culikr/
+//
 
 #translate :hBitmap       => :m_csbitmaps\[1\]
 //#translate :dwWidth       => :m_csbitmaps\[2\] // not used

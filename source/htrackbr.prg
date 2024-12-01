@@ -1,12 +1,12 @@
-/*
- * $Id: htrackbr.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTrackBar class
- *
- * Copyright 2004 Marcos Antonio Gambeta <marcosgambeta AT outlook DOT com>
- * www - http://github.com/marcosgambeta/
-*/
+//
+// $Id: htrackbr.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HTrackBar class
+//
+// Copyright 2004 Marcos Antonio Gambeta <marcosgambeta AT outlook DOT com>
+// www - http://github.com/marcosgambeta/
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

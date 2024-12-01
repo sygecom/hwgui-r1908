@@ -1,12 +1,12 @@
-/*
- * $Id: printdos.prg 1625 2011-08-05 13:14:50Z druzus $
- *
- * CLASS PrintDos
- *
- * Copyright (c) Sandro Freire <sandrorrfreire@yahoo.com.br>
- * for HwGUI By Alexander Kresin
- *
- */
+//
+// $Id: printdos.prg 1625 2011-08-05 13:14:50Z druzus $
+//
+// CLASS PrintDos
+//
+// Copyright (c) Sandro Freire <sandrorrfreire@yahoo.com.br>
+// for HwGUI By Alexander Kresin
+//
+
 #include "hbclass.ch"
 #include "windows.ch"
 #include "guilib.ch"

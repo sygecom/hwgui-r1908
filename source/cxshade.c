@@ -1,15 +1,15 @@
-/*
- * $Id: cxshade.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level functions for special drawing effects
- *
- * Based on an article of Davide Pizzolato "CxShadeButton",
- * published on http://www.codeproject.com
- *
- * Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
+//
+// $Id: cxshade.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level functions for special drawing effects
+//
+// Based on an article of Davide Pizzolato "CxShadeButton",
+// published on http://www.codeproject.com
+//
+// Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "hwingui.h"
 #include <hbapiitm.h>

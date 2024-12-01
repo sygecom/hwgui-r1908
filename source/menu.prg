@@ -1,12 +1,12 @@
-/*
- * $Id: menu.prg 1810 2011-12-25 20:22:41Z LFBASSO $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Prg level menu functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: menu.prg 1810 2011-12-25 20:22:41Z LFBASSO $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// Prg level menu functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

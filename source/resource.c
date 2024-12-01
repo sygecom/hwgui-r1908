@@ -1,13 +1,12 @@
-/*
- * $Id: resource.c 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level resource functions
- *
- * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
-
-*/
+//
+// $Id: resource.c 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level resource functions
+//
+// Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "hwingui.h"
 #if defined(__MINGW32__) || defined(__MINGW64__) || defined(__WATCOMC__)

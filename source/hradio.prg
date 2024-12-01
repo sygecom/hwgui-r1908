@@ -1,12 +1,12 @@
-/*
- * $Id: hradio.prg 1868 2012-08-27 17:33:11Z lfbasso $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HRadioButton class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hradio.prg 1868 2012-08-27 17:33:11Z lfbasso $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HRadioButton class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

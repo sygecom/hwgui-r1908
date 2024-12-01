@@ -1,12 +1,12 @@
-/*
- * $Id: hfrmtmpl.prg 1772 2011-10-13 07:59:40Z omm $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HFormTmpl Class
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hfrmtmpl.prg 1772 2011-10-13 07:59:40Z omm $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HFormTmpl Class
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

@@ -1,11 +1,11 @@
-/*
- * $Id: hwg_qhtm.c 1615 2011-02-18 13:53:35Z mlacecilia $
-
- * QHTM wrappers for Harbour/HwGUI
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su/
-*/
+//
+// $Id: hwg_qhtm.c 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// QHTM wrappers for Harbour/HwGUI
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su/
+//
 
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wcast-function-type"
