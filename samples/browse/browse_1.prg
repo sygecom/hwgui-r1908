@@ -20,7 +20,7 @@ Function Main
                 MENU OF oMain
                         MENUITEM "&Exit"   ACTION oMain:Close()
                         MENUITEM "&Browse" ACTION BrowseTest()
-                        MENUITEM "&Count"  ACTION MsgInfo(str(nCount))
+                        MENUITEM "&Count"  ACTION hwg_MsgInfo(str(nCount))
                 ENDMENU
 
         ACTIVATE WINDOW oMain
@@ -86,20 +86,20 @@ Function BrowseTest()
 Return Nil
 
 Static Function BrowseWhen()
-        MsgExclamation("When Event")
+        hwg_MsgExclamation("When Event")
 Return .T.
 
 Static Function BrowseValid()
-        MsgExclamation("Valid Event"+STR(TENTA))
+        hwg_MsgExclamation("Valid Event"+STR(TENTA))
         ++TENTA
 Return .T.
 
 Static Function BrowseMove()
-        MsgInfo("Going to record " + ltrim(str(recno())))
+        hwg_MsgInfo("Going to record " + ltrim(str(recno())))
 return Nil
         
 Static Function BrowseUpdate( oBrow, colpos)
-        MsgExclamation("Column " + ltrim(str(colpos)) + " Changed")
+        hwg_MsgExclamation("Column " + ltrim(str(colpos)) + " Changed")
         
         if colpos == 2
                 oBrow:Append()

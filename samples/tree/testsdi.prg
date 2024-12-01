@@ -19,10 +19,10 @@ Local oTree, oSplit, oTab
 
    MENU OF oMainWindow 
       MENU TITLE "&File"
-         MENUITEM "&New" ACTION msginfo("New")
-         MENUITEM "&Open" ACTION msginfo("Open")
+         MENUITEM "&New" ACTION hwg_MsgInfo("New")
+         MENUITEM "&Open" ACTION hwg_MsgInfo("Open")
          SEPARATOR
-         MENUITEM "&Font" ACTION msginfo("font")
+         MENUITEM "&Font" ACTION hwg_MsgInfo("font")
          SEPARATOR
          MENUITEM "&Exit" ACTION EndWindow()
       ENDMENU
@@ -38,9 +38,9 @@ Local oTree, oSplit, oTab
 
    @ 214,35 TAB oTab ITEMS {} SIZE 206, 280 ;
         ON SIZE {|o,x,y|o:Move(,,x-oSplit:nLeft-oSplit:nWidth-10,y-20)} ;
-        ON CHANGE { |o| msginfo( str( len( o:aPages ) ) ) }
+        ON CHANGE { |o| hwg_MsgInfo( str( len( o:aPages ) ) ) }
 
-   @ 414,10 BUTTON "X" SIZE 24, 24 ON CLICK {|| msginfo( "Delete " + str(oTab:GetActivePage()) ), oTab:DeletePage( oTab:GetActivePage() ) } ;
+   @ 414,10 BUTTON "X" SIZE 24, 24 ON CLICK {|| hwg_MsgInfo( "Delete " + str(oTab:GetActivePage()) ), oTab:DeletePage( oTab:GetActivePage() ) } ;
         ON SIZE {|o,x,y| o:Move( oTab:nLeft+oTab:nWidth-26 )} ;
  
    @ 210,10 SPLITTER oSplit SIZE 4,260 ;

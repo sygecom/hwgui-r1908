@@ -357,7 +357,7 @@ Static Function OnKey( o, k, aItems )
         else
             MyDelete()
         endif
-    elseif k == VK_DELETE .and. MsgYesNo("Delete this record ?", "Warning")                   
+    elseif k == VK_DELETE .and. hwg_MsgYesNo("Delete this record ?", "Warning")                   
         MyDelete()
     endif        
 return nil    

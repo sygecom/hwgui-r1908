@@ -36,7 +36,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=Hwg_ChooseColor(nColor,.F.), ;
-                     MsgInfo(Iif(nColor!=Nil,str(nColor),"--"),"Color value"))
+                     hwg_MsgInfo(Iif(nColor!=Nil,str(nColor),"--"),"Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION EndWindow()
@@ -70,8 +70,8 @@ Private nColor, oBmp2
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION OpenAbout()
          MENUITEM "&Window2Bitmap" ACTION About2()
-         MENUITEM "&Version HwGUI and Compilator" ACTION MsgInfo(HwG_Version(1))
-         MENUITEM "&Version HwGUI" ACTION MsgInfo(HwG_Version())
+         MENUITEM "&Version HwGUI and Compilator" ACTION hwg_MsgInfo(HwG_Version(1))
+         MENUITEM "&Version HwGUI" ACTION hwg_MsgInfo(HwG_Version())
       ENDMENU
       MENU TITLE "&Windows"
          MENUITEM "&Tile"  ;
@@ -124,7 +124,7 @@ Local e5 := 10320.54
         PICTURE "@e 999,999,999.99"     ;
         SIZE 260, 25
 
-   @ 20,190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( MsgInfo( e1 + chr(10) + chr(13) + ;
+   @ 20,190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo( e1 + chr(10) + chr(13) + ;
                Dtoc(e2) + chr(10) + chr(13) + ;
                Str(e3) + chr(10) + chr(13) +  ;
                e4 + chr(10) + chr(13) +       ;
@@ -147,7 +147,7 @@ Local oCmd1, oCmd2, oCmd3
    AT 210,10  SIZE 350,350                    ;
    FONT oFont                                 ;
    STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW        ;
-   ON EXIT {||MsgYesNo("Really exit ?")}
+   ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20,10 SAY cText SIZE 260, 22
    @ 20,35 EDITBOX oEdit CAPTION ""    ;
@@ -225,7 +225,7 @@ Local oSay
    ON EXIT {||oBmp2 := HBitmap():AddWindow(oBrw),.T.} ;
    FONT oFontDlg
 
-   oModDlg:bActivate := {||MsgInfo("!!")}
+   oModDlg:bActivate := {||hwg_MsgInfo("!!")}
       
 
    // @ 20,30 BITMAP "image\OPEN.BMP"
@@ -335,7 +335,7 @@ Local nId
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF
-      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| MsgInfo("Column number "+Str(n))}})
+      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_MsgInfo("Column number "+Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
@@ -355,7 +355,7 @@ Local han := fcreate( "LPT1",0 )
      fwrite( han, "---------------------------"+Chr(10)+Chr(13)+Chr(12) )
      fclose( han )
   else
-     MsgStop("Can't open printer port!")
+     hwg_MsgStop("Can't open printer port!")
   endif
 return nil
 
@@ -410,7 +410,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
    INIT DIALOG oModDlg TITLE cTitle           ;
    AT 210,10  SIZE 300,300                    ;
    FONT oFont                                 ;
-   ON EXIT {||MsgYesNo("Really exit ?")}
+   ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20,10 SAY cText SIZE 260, 22
    @ 20,35 EDITBOX oEdit CAPTION ""    ;
@@ -483,7 +483,7 @@ Local oGet3, oGet4, oVar3:="3", oVar4:="4", oGet5, oVar5 := "5"
 INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200
 
 @ 10, 10 TAB oTab ITEMS {} SIZE 180, 180 ;
-   ON LOSTFOCUS {||MsgInfo("Lost Focus")};
+   ON LOSTFOCUS {||hwg_MsgInfo("Lost Focus")};
    ON INIT  {||SetFocus(oDlg:getlist[1]:handle)}
 
 BEGIN PAGE "Page 01" of oTab

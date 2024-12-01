@@ -15,7 +15,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
      COLOR COLOR_3DLIGHT+1                       ;
      AT 200,0 SIZE 420,300                       ;
      FONT oFont                                  ;
-     ON EXIT {||MsgYesNo("Really want to quit ?")}
+     ON EXIT {||hwg_MsgYesNo("Really want to quit ?")}
 
    @ 20,10 RICHEDIT oEdit TEXT "Hello, world !"  SIZE 200,30
 
@@ -50,29 +50,29 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
       MENU TITLE "File"
          MENUITEM "Ps" ACTION Ps1(oMainWindow)
          SEPARATOR
-         MENUITEM "YYYYY" ACTION MsgGet( "Example","Input anything")
+         MENUITEM "YYYYY" ACTION hwg_MsgGet( "Example","Input anything")
       ENDMENU
       MENU TITLE "Help"
-         MENUITEM "About" ACTION MsgInfo("About")
-         MENUITEM "Info" ACTION MsgTemp("")
+         MENUITEM "About" ACTION hwg_MsgInfo("About")
+         MENUITEM "Info" ACTION hwg_MsgTemp("")
       ENDMENU
       MENU TITLE "Third"
          MENUITEM "Wchoice" ACTION Wchoice( acho,"Select",,,,,15132390,,VColor( "008000" ) )
-         MENUITEM "SelectFolder" ACTION MsgInfo( SelectFolder("!!!") )
+         MENUITEM "SelectFolder" ACTION hwg_MsgInfo( SelectFolder("!!!") )
          MENU TITLE "Submenu"
-            MENUITEM "ShellExecute" ACTION (ShellExecute("d:\temp\podst.doc"),MsgInfo(str(oMainWindow:handle)))
-            MENUITEM "S2" ACTION MsgStop("S2")
+            MENUITEM "ShellExecute" ACTION (ShellExecute("d:\temp\podst.doc"),hwg_MsgInfo(str(oMainWindow:handle)))
+            MENUITEM "S2" ACTION hwg_MsgStop("S2")
          ENDMENU
       ENDMENU
    ENDMENU
 
 /*   
    aMenu := { ;
-     { { { {||MsgInfo("Xxxx")},"XXXXX",130 }, ;
+     { { { {||hwg_MsgInfo("Xxxx")},"XXXXX",130 }, ;
          { ,,131 }, ;
-         { {||MsgInfo("Yyyy")},"YYYYY",132 } ;
+         { {||hwg_MsgInfo("Yyyy")},"YYYYY",132 } ;
        },"File",120 }, ;
-     { {||MsgInfo("Help")},"Help",121 } ;
+     { {||hwg_MsgInfo("Help")},"Help",121 } ;
    }
    BuildMenu( aMenu,hWnd,aMainWindow )
 */

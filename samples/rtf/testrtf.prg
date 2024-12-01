@@ -43,7 +43,7 @@ LOCAL j, aMarca, lFormato := .F.
    IF Empty( cOutFile )
       Return Nil
    ENDIF
-   IF File( cOutFile ) .AND. !MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
+   IF File( cOutFile ) .AND. !hwg_MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
       Return Nil
    ENDIF
 
@@ -179,7 +179,7 @@ LOCAL j, aMarca, lFormato := .F.
 
    CLOSE RTF oRtf
 
-   MsgInfo( cOutFile + " is created !" )
+   hwg_MsgInfo( cOutFile + " is created !" )
 
 RETURN NIL
 

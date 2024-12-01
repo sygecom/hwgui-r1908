@@ -57,15 +57,15 @@ Function Test()
 Return Nil
 
 Function OnKey( o, k )
-//    msginfo(str(k))
+//    hwg_MsgInfo(str(k))
 return nil    
 
 Function OnPosChange( o, row )
-//    msginfo( str(row) )
+//    hwg_MsgInfo( str(row) )
 return nil    
 
 Function OnClick( o )
-//    msginfo( 'click' )
+//    hwg_MsgInfo( 'click' )
 return nil    
 
 Function OnDispInfo( o, x, y )

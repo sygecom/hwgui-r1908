@@ -79,7 +79,7 @@ return nil
 
 Function TestDosClass(oTest)
 
-If MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
 
    oPrint:=Printdos():New(oTest)   //oTest=Nil LPT1  
    
@@ -114,7 +114,7 @@ Return Nil
 Function TestDosClipper(oTest)
 Local oPrinter
 
-If MsgYesNo("Printing style clipper to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing style clipper to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
 
@@ -166,7 +166,7 @@ RETURN
 
 Function TestPrinterFile(oTest)
 
-If MsgYesNo("Printing File "+oTest)
+If hwg_MsgYesNo("Printing File "+oTest)
 
    oPrint:=Printdos():New()   //oTest=Nil LPT1  
    oPrint:PrinterFile(oTest)
@@ -259,7 +259,7 @@ Return Nil
 Function DeskJet(oTest)
 Local oPrinter
 
-If MsgYesNo("Printing InkJet/DeskJet "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing InkJet/DeskJet "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
    oPrinter:oPrintStyle:=3

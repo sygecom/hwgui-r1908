@@ -103,6 +103,6 @@ Static Function BrowseKey( oBr, key )
    IF key == 112 //.and. lHelp == .T.      && f1
       //D_HELP()
    ELSE
-     MsgInfo(Str(key))
+     hwg_MsgInfo(Str(key))
    ENDIF
 Return .T.

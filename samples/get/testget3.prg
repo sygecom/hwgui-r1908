@@ -32,7 +32,7 @@ Local amenu
    FONT oFont // on init  {||CreateBar(oModDlg,@otool)}
 
 Create menubar aMenu
-MENUBARITEM  amenu CAPTION "teste" ON 904 ACTION {||MsgYesNo("Really want to quit ?")}
+MENUBARITEM  amenu CAPTION "teste" ON 904 ACTION {||hwg_MsgYesNo("Really want to quit ?")}
 MENUBARITEM  amenu CAPTION "teste1" ON 905 ACTION {||.t.}
 MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.t.}
 
@@ -97,7 +97,7 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.t.}
    oFont:Release()
 
    IF oModDlg:lResult
-      MsgInfo( e1 + chr(10) + chr(13) +                               ;
+      hwg_MsgInfo( e1 + chr(10) + chr(13) +                               ;
                "Check1 - " + Iif(c1,"On","Off") + chr(10) + chr(13) + ;
                "Check2 - " + Iif(c2,"On","Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1,1) + chr(10) + chr(13) +            ;

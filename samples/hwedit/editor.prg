@@ -348,7 +348,7 @@ FUNCTION Texto()
  /*
  for f = 1 to len(linhas)
     for g := 0 to linhas[f]
-             msginfo(re_GetTextRange(oEdit&i,g,1))
+             hwg_MsgInfo(re_GetTextRange(oEdit&i,g,1))
     next f
 
    //re_SetCharFormat( oEdit&i:handle,6,olinha[f,2],255,,,.T.)
@@ -407,7 +407,7 @@ function fecha_texto()
 *******************************
 Local h := HMainWIndow():GetMdiActive():handle
     if alterado
-        msgyesno('Deseja Salvar o arquivo')
+        hwg_MsgYesNo('Deseja Salvar o arquivo')
     endif
     SendMessage( h,WM_CLOSE,0,0 )
 retu (.t.)
@@ -447,7 +447,7 @@ Local oParent, nPos
      //
      if nvirtCode = 27
          if oEdit:lChanged
-           msgyesno('Deseja Salvar o arquivo')
+           hwg_MsgYesNo('Deseja Salvar o arquivo')
          endif
          h := HMainWIndow():GetMdiActive():handle
          SendMessage( h,WM_CLOSE,0,0 )
@@ -466,8 +466,8 @@ Local oParent, nPos
              pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
              pos1 := Loword(pos)
              //
-             //msginfo(str(pos1))
-             //msginfo(str(len(texto)))
+             //hwg_MsgInfo(str(pos1))
+             //hwg_MsgInfo(str(len(texto)))
              if sintaxe(texto)
 
                 re_SetCharFormat( aControls[hWnd]:Handle,{{,,,,,,},{(pos1-len(texto)),len(texto),255,,,.T.}})
@@ -495,12 +495,12 @@ next f
 CheckMenuItem( ,rd_ID, !IsCheckedMenuItem( ,rd_ID ) )
  ID_indioma:=rd_id
  save all like ID_* to config.dat
-msginfo(reiniciar)
+hwg_MsgInfo(reiniciar)
 return (.t.)
 ***********************
 function aguarde()
 ***********************
-msginfo(desenvolvimento)
+hwg_MsgInfo(desenvolvimento)
 retu .t.
 ****************************
 function Pesquisa()
@@ -549,7 +549,7 @@ IF Ole2TxtError() != "S_OK"
 ENDIF
 
 IF Ole2TxtError() != "S_OK"
-    MsgInfo( "ERRO! IExplorer nao Localizado" )
+    hwg_MsgInfo( "ERRO! IExplorer nao Localizado" )
     RETURN
 ENDIF
 
@@ -638,7 +638,7 @@ local cfile :="temp"
 
    endif
  else
-   msginfo('Nada para salvar')
+   hwg_MsgInfo('Nada para salvar')
  endif
 Return Nil
 *********************
@@ -675,7 +675,7 @@ Local hWnd, oWindow, aControls, i
      SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
      save all like ID_* to config.dat
  else
-   msginfo('Abra um documento Primeiro')
+   hwg_MsgInfo('Abra um documento Primeiro')
  endif
  SetFocus(aControls[hWnd]:Handle )
 retu .t.
@@ -691,7 +691,7 @@ Local hWnd, oWindow, aControls, i
      re_SetDefault( aControls[hWnd]:Handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
      save all like ID_* to config.dat
  else
-   msginfo('Abra um documento Primeiro')
+   hwg_MsgInfo('Abra um documento Primeiro')
  endif
  SetFocus(aControls[hWnd]:Handle )
 retu .t.
@@ -701,7 +701,7 @@ function sintaxe(comando)
 *************************
 local comand:=upper(alltrim(comando))
 local ret := .T.
-  //msginfo(comand)
+  //hwg_MsgInfo(comand)
 if comand =='FOR'
    ret:=.t.
 elseif comand =='NEXT'

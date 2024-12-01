@@ -11,8 +11,8 @@ Local oMainWindow
       MENUITEM "&Exit" ACTION oMainWindow:Close()
       MENUITEM "&More" ACTION DlgGet()
       MENUITEM "Shell ABout" ACTION ShellAbout("Rodrigo Moreno", "Test")
-      MENUITEM "Exclamation" ACTION MsgExclamation("Are You Sure ?", "Warning")
-      MENUITEM "Retry Cancel" ACTION MsgretryCancel("Are You Sure ?", "Retry")
+      MENUITEM "Exclamation" ACTION hwg_MsgExclamation("Are You Sure ?", "Warning")
+      MENUITEM "Retry Cancel" ACTION hwg_MsgRetryCancel("Are You Sure ?", "Retry")
       MENUITEM "Calc" ACTION ShellExecute("calc")
    ENDMENU
 
@@ -56,18 +56,18 @@ Local upd := 12, d1 := Date()+1
    @  70,240 BUTTON "Cancel" ID IDCANCEL  SIZE 50, 32
    @ 130,240 BUTTON "Enable/Disable" SIZE 100, 32 ON CLICK {|| IIF( oGet:IsEnabled(), oGet:Disable(), oGet:Enable() )}
    @ 240,240 BUTTON "SetFocus" SIZE 70, 32 ON CLICK {|| oGet:Setfocus() }
-   @ 320,240 BUTTON "Enabled ?" SIZE 70, 32 ON CLICK {|| IIF( oGet:IsEnabled(), MsgInfo("Yes"), MsgStop("No")) }
+   @ 320,240 BUTTON "Enabled ?" SIZE 70, 32 ON CLICK {|| IIF( oGet:IsEnabled(), hwg_MsgInfo("Yes"), hwg_MsgStop("No")) }
    @ 400,240 BUTTON "Close" SIZE 50,32 ON CLICK {|| oModDlg:Close() }
 
-   @  10,280 BUTTON "WinDir" SIZE 100,32 ON CLICK {|| MsgInfo(Getwindowsdir()) }
-   @ 120,280 BUTTON "SystemDir" SIZE 100,32 ON CLICK {|| MsgInfo(Getsystemdir()) }
-   @ 230,280 BUTTON "TempDir" SIZE 100,32 ON CLICK {|| MsgInfo(Gettempdir()) }
+   @  10,280 BUTTON "WinDir" SIZE 100,32 ON CLICK {|| hwg_MsgInfo(Getwindowsdir()) }
+   @ 120,280 BUTTON "SystemDir" SIZE 100,32 ON CLICK {|| hwg_MsgInfo(Getsystemdir()) }
+   @ 230,280 BUTTON "TempDir" SIZE 100,32 ON CLICK {|| hwg_MsgInfo(Gettempdir()) }
    
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
    IF oModDlg:lResult
-      MsgInfo( e1 + chr(10) + chr(13) +                               ;
+      hwg_MsgInfo( e1 + chr(10) + chr(13) +                               ;
                "Check1 - " + Iif(c1,"On","Off") + chr(10) + chr(13) + ;
                "Check2 - " + Iif(c2,"On","Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1,1) + chr(10) + chr(13) +            ;

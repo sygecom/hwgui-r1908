@@ -60,12 +60,12 @@ wnome   := "Nome"
      STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU  ;
      AT 210,10  SIZE 300,300                    ;
      FONT oFont                                 ;
-     ON EXIT {||MsgYesNo("Really exit ?")}
+     ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20,35 GET ocodigo VAR wcodigo PICTURE "@!" SIZE 100,22 ;
      NOBORDER STYLE ES_AUTOHSCROLL ;
-     WHEN {|| msginfo("WHEN codigo"), .T.  } ;
-     VALID {|| msginfo("VALID codigo"), .F.  }
+     WHEN {|| hwg_MsgInfo("WHEN codigo"), .T.  } ;
+     VALID {|| hwg_MsgInfo("VALID codigo"), .F.  }
 
    ACTIVATE DIALOG oModDlg
 
