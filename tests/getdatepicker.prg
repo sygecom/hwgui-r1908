@@ -21,8 +21,8 @@ PROCEDURE Main()
 
    ACTIVATE DIALOG oDialog
    
-   MsgInfo(dtoc(dDate1), "Info")
-   MsgInfo(dtoc(dDate2), "Info")
-   MsgInfo(dtoc(dDate3), "Info")
+   hwg_MsgInfo(dtoc(dDate1), "Info")
+   hwg_MsgInfo(dtoc(dDate2), "Info")
+   hwg_MsgInfo(dtoc(dDate3), "Info")
 
 RETURN

@@ -21,8 +21,8 @@ PROCEDURE Main()
 
    ACTIVATE DIALOG oDialog
 
-   MsgInfo(str(oCB1:value), "Info")
-   MsgInfo(str(oCB2:value), "Info")
-   MsgInfo(str(oCB3:value), "Info")
+   hwg_MsgInfo(str(oCB1:value), "Info")
+   hwg_MsgInfo(str(oCB2:value), "Info")
+   hwg_MsgInfo(str(oCB3:value), "Info")
 
 RETURN

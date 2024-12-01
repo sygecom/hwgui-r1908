@@ -11,7 +11,7 @@ PROCEDURE Main()
 
    INIT DIALOG oDialog TITLE "Test" SIZE 640, 480 ;
       FONT HFont():Add("Courier New", 0, -13) ;
-      ON EXIT {||MsgYesNo("Confirm exit ?")}
+      ON EXIT {||hwg_MsgYesNo("Confirm exit ?")}
 
    @ 160, 40 CHECKBOX oCheckBox1 CAPTION "CheckBox1" SIZE 300, 26
 

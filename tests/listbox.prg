@@ -14,6 +14,6 @@ FUNCTION Main()
 
    ACTIVATE DIALOG oDialog
    
-   MsgInfo(AllTrim(Str(oList:value)), "Info")
+   hwg_MsgInfo(AllTrim(Str(oList:value)), "Info")
 
 RETURN NIL
