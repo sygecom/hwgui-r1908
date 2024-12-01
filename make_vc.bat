@@ -3,7 +3,9 @@ if "%1" == "clean" goto CLEAN
 if "%1" == "CLEAN" goto CLEAN
 
 if not exist lib md lib
+if not exist lib\vc md lib\vc
 if not exist obj md obj
+if not exist obj\vc md obj\vc
 
 :BUILD
 
@@ -20,10 +22,10 @@ if not exist obj md obj
    goto EXIT
 
 :CLEAN
-   del lib\*.lib
-   del lib\*.bak
-   del obj\*.obj
-   del obj\*.c
+   del lib\vc\*.lib
+   del lib\vc\*.bak
+   del obj\vc\*.obj
+   del obj\vc\*.c
    del make_vc.log
 
    goto EXIT

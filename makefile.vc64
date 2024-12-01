@@ -1,13 +1,13 @@
-# $Id: makefile.vc 1615 2011-02-18 13:53:35Z mlacecilia $
-# makefile for Visual C++ 32 bits
+# $Id: makefile.vc64 1615 2011-02-18 13:53:35Z mlacecilia $
+# makefile for Visual C++ 64 bits
 # Building of hwgui.lib - Harbour Win32 GUI library
 
 !IFNDEF HRB_DIR
 HRB_DIR = $(HB_PATH)
 !ENDIF
 INC_DIR = include
-OBJ_DIR = obj\vc
-LIB_DIR = lib\vc
+OBJ_DIR = obj\vc64
+LIB_DIR = lib\vc64
 SRC_DIR = source
 CFLAGS = /W3 /nologo
 # /DHWG_USE_POINTER_ITEM
