@@ -42,7 +42,7 @@ METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
             bSize, ctooltip, tcolor, bcolor) CLASS HGraph
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
-              bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
+              bSize, {|o, lpdis|o:Paint(lpdis)}, ctooltip, ;
               IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor))
 
    ::aValues := aValues
@@ -57,7 +57,7 @@ METHOD Redefine(oWndParent, nId, aValues, oFont, ;
                  bSize, ctooltip, tcolor, bcolor) CLASS HGraph
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
-              bSize, { | o, lpdis | o:Paint(lpdis) }, ctooltip, ;
+              bSize, {|o, lpdis|o:Paint(lpdis)}, ctooltip, ;
               IIf(tcolor == Nil, Vcolor("FFFFFF"), tcolor), IIf(bcolor == Nil, 0, bcolor))
 
    ::aValues := aValues

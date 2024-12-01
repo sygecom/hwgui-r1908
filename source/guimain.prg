@@ -82,7 +82,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 FUNCTION FindParent(hCtrl, nLevel)
    LOCAL i, oParent, hParent := GetParent(hCtrl)
    IF !Empty(hParent)
-      IF ( i := AScan(HDialog():aModalDialogs, { | o | o:handle == hParent }) ) != 0
+      IF ( i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent}) ) != 0
          RETURN HDialog():aModalDialogs[i]
       ELSEIF ( oParent := HDialog():FindDialog( hParent ) ) != Nil
          RETURN oParent
@@ -114,7 +114,7 @@ FUNCTION FindSelf( hCtrl )
 FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
-   IF ( i := AScan(aControls, { | o | o:ClassName() == "HSTATUS" }) ) > 0
+   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
       WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
       IF lRedraw != Nil .AND. lRedraw
          RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -125,7 +125,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
 FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
-   IF ( i := AScan(aControls, { | o | o:ClassName() == "HSTATUS" }) ) > 0
+   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
       ntxtLen := SendMessage(aControls[i]:handle, SB_GETTEXTLENGTH, nPart - 1, 0)
       cText := Replicate(Chr(0), ntxtLen)
       SendMessage(aControls[i]:handle, SB_GETTEXT, nPart - 1, @cText)
@@ -175,7 +175,7 @@ FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
    oModDlg:aControls[4]:Anchor := 9
    
-   ACTIVATE DIALOG oModDlg ON ACTIVATE { || IIf(!Empty(cRes), KEYB_EVENT(VK_END), .T.) }
+   ACTIVATE DIALOG oModDlg ON ACTIVATE {||IIf(!Empty(cRes), KEYB_EVENT(VK_END), .T.)}
 
    oFont:Release()
    IF oModDlg:lResult
@@ -273,24 +273,24 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
         SIZE width, height       ;
         STYLE nStyle            ;
         FONT oFont              ;
-        ON INIT { | o | ResetWindowPos(o:handle), o:nInitFocus := oBrw }
+        ON INIT {|o|ResetWindowPos(o:handle), o:nInitFocus := oBrw}
        //ON INIT {|o|ResetWindowPos(o:handle), oBrw:setfocus()}
    IF lArray
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
       IF hb_IsArray(arr[1])
-         oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1] }, "C", nLen ))
+         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1]}, "C", nLen ))
       ELSE
-         oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent] }, "C", nLen ))
+         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}, "C", nLen ))
       ENDIF
    ELSE
       @ 0, 0 Browse oBrw DATABASE
-      oBrw:AddColumn(HColumn():New(, { | value, o | HB_SYMBOL_UNUSED(value), (o:Alias)->(FieldGet(nField)) }, "C", nLen ))
+      oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), (o:Alias)->(FieldGet(nField))}, "C", nLen ))
    ENDIF
 
    oBrw:oFont  := oFont
-   oBrw:bSize  := { | o, x, y | MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY) }
-   oBrw:bEnter := { | o | nChoice := o:nCurrent, EndDialog( o:oParent:handle ) }
+   oBrw:bSize  := {|o, x, y|MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY)}
+   oBrw:bEnter := {|o|nChoice := o:nCurrent, EndDialog( o:oParent:handle )}
    oBrw:bKeyDown := {|o, key|HB_SYMBOL_UNUSED(o), IIf(key == 27, (EndDialog(oDlg:handle), .F.), .T.)}
 
    oBrw:lDispHead := .F.
@@ -309,9 +309,9 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    IF cOk != Nil
       x1 := Int(width / 2) - IIf(cCancel != Nil, 90, 40)
-      @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK { || nChoice := oBrw:nCurrent, EndDialog( oDlg:handle ) }
+      @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK {||nChoice := oBrw:nCurrent, EndDialog( oDlg:handle )}
       IF cCancel != Nil
-         @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK { || nChoice := 0, EndDialog( oDlg:handle ) }
+         @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK {||nChoice := 0, EndDialog( oDlg:handle )}
       ENDIF
    ENDIF
 
@@ -343,7 +343,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
          INIT DIALOG oDlg TITLE cTitle   ;
               At x1, y1 SIZE width, height ;
               STYLE nStyle               ;
-              ON INIT { | o | hPBar := CreateProgressBar(o:handle, maxPos, 20, 25, width - 40, 20) }
+              ON INIT {|o|hPBar := CreateProgressBar(o:handle, maxPos, 20, 25, width - 40, 20)}
          ACTIVATE DIALOG oDlg NOMODAL
       ENDIF
    ELSEIF nStep == 1
@@ -399,7 +399,7 @@ FUNCTION SetHelpFileName ( cNewName )
 
 FUNCTION RefreshAllGets(oDlg)
 
-   AEval(oDlg:GetList, { | o | o:Refresh() })
+   AEval(oDlg:GetList, {|o|o:Refresh()})
    RETURN Nil
 
 /*

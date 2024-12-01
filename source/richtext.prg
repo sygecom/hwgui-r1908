@@ -439,7 +439,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    ::HAlignment(cHorzAlign)
 
    IF hb_IsArray(aTabPos)
-      AEval(aTabPos, { | x | ::NumCode("tx", x) })
+      AEval(aTabPos, {|x|::NumCode("tx", x)})
    ENDIF
 
    ::NumCode("li", nIndent)
@@ -817,8 +817,8 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval(::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++ })
+   AEval(::aColPct, {||::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++})
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
@@ -1250,7 +1250,7 @@ METHOD BorderCode(cBorderID) CLASS RichText
 
    cBorderID := Upper(RTrim(cBorderID))
 
-   n := AScan(aBorder, { | x | x[1] == cBorderID })
+   n := AScan(aBorder, {|x|x[1] == cBorderID})
 
    IF n > 0
       cBorderCode := aBorder[n][2]
@@ -1284,7 +1284,7 @@ METHOD ShadeCode(cShadeID) CLASS RichText
 
    cShadeID := Upper(RTrim(cShadeID))
 
-   n := AScan(aShade, { | x | x[1] == cShadeID })
+   n := AScan(aShade, {|x|x[1] == cShadeID})
 
    IF n > 0
       cShadeCode := aShade[n][2]
@@ -2037,8 +2037,8 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::nCellPct := IIf(nCellPct < 1, nCellPct * 10000, nCellPct * 100)
 // Porcentajes para cada celda
    i := 1
-   AEval(::aColPct, { || ::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++ })
+   AEval(::aColPct, {||::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
+                                                 ::aColPct[i] * 100), i ++})
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows

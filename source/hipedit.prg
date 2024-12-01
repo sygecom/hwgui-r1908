@@ -78,8 +78,8 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
 
    // Notificacoes de Ganho e perda de foco
    //::oParent:AddEvent(IPN_FIELDCHANGED, self, ::bKillFocus, .T., "onChange")
-   ::oParent:AddEvent(EN_SETFOCUS , Self, { | o, id | __GetFocus(o:FindControl(id)) },, "onGotFocus")
-   ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __KillFocus(o:FindControl(id)) },, "onLostFocus")
+   ::oParent:AddEvent(EN_SETFOCUS , Self, {|o, id|__GetFocus(o:FindControl(id))},, "onGotFocus")
+   ::oParent:AddEvent(EN_KILLFOCUS, Self, {|o, id|__KillFocus(o:FindControl(id))},, "onLostFocus")
 
 
    RETURN Self

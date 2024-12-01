@@ -94,8 +94,8 @@ METHOD Init() CLASS HMonthCalendar
       IF !Empty(::value)
          SetMonthCalendarDate(::handle, ::value)
       ENDIF
-      ::oParent:AddEvent(MCN_SELECT, Self, { || ::onSelect() }, .T., "onSelect")
-      ::oParent:AddEvent(MCN_SELCHANGE, Self, { || ::onChange() }, .T., "onChange")
+      ::oParent:AddEvent(MCN_SELECT, Self, {||::onSelect()}, .T., "onSelect")
+      ::oParent:AddEvent(MCN_SELCHANGE, Self, {||::onChange()}, .T., "onChange")
 
    ENDIF
 

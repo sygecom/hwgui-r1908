@@ -405,17 +405,17 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       ::bLostFocus := bLfocus
       ::bValid := bLfocus
       ::lnoValid := bGfocus != Nil
-      ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
-      ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl(id)) },, "onLostFocus")
+      ::oParent:AddEvent(EN_SETFOCUS, Self, {|o, id|__When(o:FindControl(id))},, "onGotFocus")
+      ::oParent:AddEvent(EN_KILLFOCUS, Self, {|o, id|__Valid(o:FindControl(id))},, "onLostFocus")
    ELSE
       IF bGfocus != Nil
          ::lnoValid := .T.
-         ::oParent:AddEvent(EN_SETFOCUS, Self, { | o, id | __When(o:FindControl(id)) },, "onGotFocus")
+         ::oParent:AddEvent(EN_SETFOCUS, Self, {|o, id|__When(o:FindControl(id))},, "onGotFocus")
          //::oParent:AddEvent(EN_SETFOCUS, self, bGfocus, , "onGotFocus")
       ENDIF
       IF bLfocus != Nil
          // ::oParent:AddEvent(EN_KILLFOCUS, self, bLfocus, , "onLostFocus")
-         ::oParent:AddEvent(EN_KILLFOCUS, Self, { | o, id | __Valid(o:FindControl(id)) },, "onLostFocus")
+         ::oParent:AddEvent(EN_KILLFOCUS, Self, {|o, id|__Valid(o:FindControl(id))},, "onLostFocus")
       ENDIF
    ENDIF
 

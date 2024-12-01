@@ -123,10 +123,10 @@ METHOD Init() CLASS HPanel
 
    IF !::lInit
       IF ::bSize == Nil
-         ::bSize := { | o, x, y | o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), ;
-                                         IIf(::nTop > 0, y - ::nHeight, 0), ;
-                                         IIf(::nWidth == 0 .OR. ::lResizeX, x, ::nWidth), ;
-                                         IIf(::nHeight == 0 .OR. ::lResizeY, y, ::nHeight)) }
+         ::bSize := {|o, x, y|o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), ;
+                                     IIf(::nTop > 0, y - ::nHeight, 0), ;
+                                     IIf(::nWidth == 0 .OR. ::lResizeX, x, ::nWidth), ;
+                                     IIf(::nHeight == 0 .OR. ::lResizeY, y, ::nHeight))}
       ENDIF
 
       ::Super:Init()

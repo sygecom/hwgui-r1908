@@ -22,16 +22,16 @@ CLASS VAR aMessages INIT { ;
                            { WM_CREATE, WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
                              WM_SYSCOMMAND, WM_ENTERIDLE, WM_MDIACTIVATE, WM_DESTROY }, ;
                            { ;
-                             { | o, w, l | HB_SYMBOL_UNUSED(w), onMdiCreate(o, l) },        ;
-                             { | o, w | onMdiCommand(o, w) },         ;
-                             { | o, w | onEraseBk(o, w) },            ;
-                             { | o | onMove(o) },                   ;
-                             { | o, w, l | onSize(o, w, l) },           ;
-                             { | o, w | onMdiNcActivate(o, w) },      ;
-                             { | o, w, l | onSysCommand(o, w, l) },         ;
-                             { | o, w, l | onEnterIdle(o, w, l) },      ;
-                             { | o, w, l | onMdiActivate(o, w, l) },     ;
-                             { | o | onDestroy(o) }                 ;
+                             {|o, w, l|HB_SYMBOL_UNUSED(w), onMdiCreate(o, l)},        ;
+                             {|o, w|onMdiCommand(o, w)},         ;
+                             {|o, w|onEraseBk(o, w)},            ;
+                             {|o|onMove(o)},                   ;
+                             {|o, w, l|onSize(o, w, l)},           ;
+                             {|o, w|onMdiNcActivate(o, w)},      ;
+                             {|o, w, l|onSysCommand(o, w, l)},         ;
+                             {|o, w, l|onEnterIdle(o, w, l)},      ;
+                             {|o, w, l|onMdiActivate(o, w, l)},     ;
+                             {|o|onDestroy(o)}                 ;
                            } ;
                          }
 #endif

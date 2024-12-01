@@ -247,7 +247,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                RETURN .F.
             ENDIF
          CASE scom == "RETURN"
-            bOldError := ERRORBLOCK( { | e | MacroError(1, e, stroka) } )
+            bOldError := ERRORBLOCK( {|e|MacroError(1, e, stroka)} )
             BEGIN SEQUENCE
                AADD(rezArray[2], &( "{||EndScript("+LTrim(SubStr(stroka, 7))+")}" ))
             RECOVER
@@ -272,7 +272,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          CASE scom == "#ENDSCRIPT" .OR. Left(scom, 7) == "ENDFUNC"
             RETURN .T.
          OTHERWISE
-            bOldError := ERRORBLOCK( { | e | MacroError(1, e, stroka) } )
+            bOldError := ERRORBLOCK( {|e|MacroError(1, e, stroka)} )
             BEGIN SEQUENCE
                AADD(rezArray[2], &( "{||" + AllTrim(stroka) + "}" ))
             RECOVER
@@ -347,7 +347,7 @@ LOCAL i, j, bOldError
    j := Len(rezArray[2])
    FOR i := j TO 1 STEP - 1
       IF UPPER(LEFT(tmpArray[i], 2)) == "IF"
-         bOldError := ERRORBLOCK( { | e | MacroError(1, e, tmpArray[i]) } )
+         bOldError := ERRORBLOCK( {|e|MacroError(1, e, tmpArray[i])} )
          BEGIN SEQUENCE
             rezArray[2, i] := &( "{||IIF(" + AllTrim(SubStr(tmpArray[i], 4)) + ;
                  ",.T.,iscr:=" + LTrim(STR(j, 5)) + ")}" )
@@ -383,7 +383,7 @@ LOCAL bOldError
       ENDIF
       IF !Empty(tmpArray[i]) .AND. (UPPER(LEFT(tmpArray[i], 8)) = "DO WHILE" .OR. ;
          UPPER(LEFT(tmpArray[i], 5)) = "WHILE")
-         bOldError := ERRORBLOCK( { | e | MacroError(1, e, tmpArray[i] ) } )
+         bOldError := ERRORBLOCK( {|e|MacroError(1, e, tmpArray[i])} )
          BEGIN SEQUENCE
             rezArray[i] = &( "{||IIF(" + AllTrim(SubStr(tmpArray[i], ;
                  IIf(UPPER(LEFT(tmpArray[i], 1)) == "D", 10, 7))) + ;
@@ -428,7 +428,7 @@ PRIVATE iscr := 1, bOldError
          ELSE
             stroka := SubStr(aScript[2, iscr], 2)
             lParam := ( Left(aScript[2, iscr], 1) == "/" )
-            bOldError := ERRORBLOCK( { | e | MacroError(2, e) } )
+            bOldError := ERRORBLOCK( {|e|MacroError(2, e)} )
             BEGIN SEQUENCE
             j := 1
             DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
