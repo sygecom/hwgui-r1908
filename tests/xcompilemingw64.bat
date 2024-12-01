@@ -23,7 +23,7 @@ gcc -c -I..\include -I%HB_INC_DIR% %1.c
 
 rem o -> exe
 
-gcc -o %1.exe %1.o %HB_PATH%\obj\gc64\mainwin.o -L..\lib -L%HB_LIB_DIR% -L%MINGW_PATH%\x86_64-w64-mingw32\lib -Wl,--start-group %HWG_LIBS% %HB_LIBS% %SYS_LIBS%  -Wl,--end-group -mwindows
+gcc -o %1.exe %1.o %HB_PATH%\obj\gc64\mainwin.o -L..\lib\gcc64 -L%HB_LIB_DIR% -L%MINGW_PATH%\x86_64-w64-mingw32\lib -Wl,--start-group %HWG_LIBS% %HB_LIBS% %SYS_LIBS%  -Wl,--end-group -mwindows
 
 rem exclusão dos arquivo temporários
 

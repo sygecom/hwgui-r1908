@@ -2,6 +2,11 @@
 if "%1" == "clean" goto CLEAN
 if "%1" == "CLEAN" goto CLEAN
 
+if not exist lib md lib
+if not exist lib\gcc md lib\gcc
+if not exist obj md obj
+if not exist obj\gcc md obj\gcc
+
 :BUILD
 
    rem set path=c:\softools\mingw\bin
@@ -17,10 +22,10 @@ if "%1" == "CLEAN" goto CLEAN
    goto EXIT
 
 :CLEAN
-   del lib\*.a
-   del lib\*.bak
-   del obj\*.o
-   del obj\*.c
+   del lib\gcc\*.a
+   del lib\gcc\*.bak
+   del obj\gcc\*.o
+   del obj\gcc\*.c
 
    goto EXIT
 
