@@ -1,6 +1,6 @@
-rem Batch to compile tests using xHarbour and Clang.
+rem Batch to compile tests using xHarbour and Clang 32-bit.
 rem How to use:
-rem xcompileclang filename <ENTER>
+rem xcompileclang32 filename <ENTER>
 rem Require HB_PATH pointing to xHarbour dir and CLANG_PATH pointing to Clang dir.
 
 del %1.exe
@@ -23,7 +23,7 @@ clang -c -I..\include -I%HB_INC_DIR% %1.c
 
 rem o -> exe
 
-clang -o %1.exe %1.o %HB_PATH%\obj\clngw32\mainwin.o -L..\lib -L%HB_LIB_DIR% -L%CLANG_PATH%\i686-w64-mingw32\lib -Wl,--start-group %HWG_LIBS% %HB_LIBS% %SYS_LIBS%  -Wl,--end-group -mwindows
+clang -o %1.exe %1.o %HB_PATH%\obj\clngw32\mainwin.o -L..\lib\cl -L%HB_LIB_DIR% -L%CLANG_PATH%\i686-w64-mingw32\lib -Wl,--start-group %HWG_LIBS% %HB_LIBS% %SYS_LIBS%  -Wl,--end-group -mwindows
 
 rem exclusão dos arquivo temporários
 
