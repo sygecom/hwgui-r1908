@@ -239,7 +239,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
             yPos := HiWord(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
             aCoors := ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF (!PtInRect(aCoors, {xPos, yPos}))
-               MSGBEEP()
+               hwg_MsgBeep()
                FOR i := 1 TO 6
                   FlashWindow(oMdi:handle, 1)
                   Sleep(60)
@@ -295,7 +295,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
             yPos := HiWord(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
             aCoors := ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF !PtInRect(aCoors, {xPos, yPos})
-               MSGBEEP()
+               hwg_MsgBeep()
                FOR i := 1 TO 6
                   FlashWindow(oMdi:handle, 1)
                   Sleep(60)
@@ -695,7 +695,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
    ELSEIF wParam == SC_HOTKEY
    //ELSEIF wParam == SC_MOUSEMENU //0xF090
    ELSEIF wParam == SC_MENU .AND. (oWnd:type == WND_MDICHILD .OR. !Empty(oWnd := oWnd:GetMdiActive())) .AND. oWnd:lModal
-      MSGBEEP()
+      hwg_MsgBeep()
       RETURN 0
    ENDIF
 

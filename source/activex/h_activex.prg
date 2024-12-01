@@ -73,13 +73,13 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
       TRY
          ::oOle := ToleAuto():New(::hObj)
       CATCH oError
-         MsgInfo(oError:Description)
+         hwg_MsgInfo(oError:Description)
       END
    #else
       BEGIN SEQUENCE
          ::oOle := ToleAuto():New(::hObj)
       RECOVER USING oError
-         MsgInfo(oError:Description)
+         hwg_MsgInfo(oError:Description)
       END
    #endif
    ErrorBlock(bErrorBlock)

@@ -77,7 +77,7 @@ LOCAL aFormCode, aFormName
       FCLOSE(han)
    ELSE
 #ifdef __WINDOWS__
-      MsgStop(fname + " can't be opened ")
+      hwg_MsgStop(fname + " can't be opened ")
 #else
       ALERT(fname + " can't be opened ")
 #endif
@@ -131,7 +131,7 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
       ENDIF
    ELSE
 #ifdef __WINDOWS__
-      MsgStop("Can't open " + scrSource)
+      hwg_MsgStop("Can't open " + scrSource)
 #else
       WndOut("Can't open " + scrSource)
       WAIT ""
@@ -313,7 +313,7 @@ Local n, cTitle
       cTitle := "Script execution error"
    ENDIF
    stroka += Chr(13)+Chr(10) + Chr(13)+Chr(10) + "Continue ?"
-   IF !msgYesNo(stroka, cTitle)
+   IF !hwg_MsgYesNo(stroka, cTitle)
       EndWindow()
       QUIT
    ENDIF
