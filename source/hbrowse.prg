@@ -516,7 +516,7 @@ METHOD SetRowHeight(nPixels) CLASS HBrowse
 
 
 //----------------------------------------------------//
-#if 0 // old code for reference
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
    LOCAL oParent, cKeyb, nCtrl, nPos, lBEof
    LOCAL nRecStart, nRecStop, nRet, nShiftAltCtrl
@@ -2886,6 +2886,8 @@ STATIC FUNCTION LINELEFT(oBrw)
    RETURN Nil
 
 //----------------------------------------------------//
+
+#if 0 // old code for reference (to be deleted)
 METHOD DoVScroll(wParam) CLASS HBrowse
    LOCAL nScrollCode := LOWORD(wParam)
 
@@ -2919,9 +2921,54 @@ METHOD DoVScroll(wParam) CLASS HBrowse
       ENDIF
    ENDIF
    RETURN 0
+#else
+METHOD DoVScroll(wParam) CLASS HBrowse
 
+   LOCAL nScrollCode := LOWORD(wParam)
+
+   SWITCH nScrollCode
+   CASE SB_LINEDOWN
+      ::LINEDOWN(.T.)
+      EXIT
+   CASE SB_LINEUP
+      ::LINEUP()
+      EXIT
+   CASE SB_BOTTOM
+      ::BOTTOM()
+      EXIT
+   CASE SB_TOP
+      ::TOP()
+      EXIT
+   CASE SB_PAGEDOWN
+      ::PAGEDOWN()
+      EXIT
+   CASE SB_PAGEUP
+      ::PAGEUP()
+      EXIT
+   CASE SB_THUMBPOSITION
+   CASE SB_THUMBTRACK
+      ::SetFocus()
+      IF hb_IsBlock(::bScrollPos)
+         Eval(::bScrollPos, Self, nScrollCode, .F., HIWORD(wParam))
+      ELSE
+         IF (::Alias)->(IndexOrd()) == 0            // sk
+            (::Alias)->(DBGoTo(HIWORD(wParam)))     // sk
+         ELSE
+            (::Alias)->(OrdKeyGoTo(HIWORD(wParam))) // sk
+         ENDIF
+         Eval(::bSkip, Self, 1)
+         Eval(::bSkip, Self, -1)
+         VScrollPos(Self, 0, .F.)
+         ::refresh()
+      ENDIF
+   ENDSWITCH
+
+   RETURN 0
+#endif
 
 //----------------------------------------------------//
+
+#if 0 // old code for reference (to be deleted)
 METHOD DoHScroll(wParam) CLASS HBrowse
    LOCAL nScrollCode := LOWORD(wParam)
    LOCAL nPos
@@ -2988,6 +3035,83 @@ METHOD DoHScroll(wParam) CLASS HBrowse
    ::SetFocus()
 
    RETURN Nil
+#else
+METHOD DoHScroll(wParam) CLASS HBrowse
+
+   LOCAL nScrollCode := LOWORD(wParam)
+   LOCAL nPos
+   LOCAL oldLeft := ::nLeftCol
+   LOCAL nLeftCol
+   LOCAL colpos
+   LOCAL oldPos := ::colpos
+
+   IF !::ChangeRowCol(2)
+      RETURN .F.
+   ENDIF
+
+   SWITCH nScrollCode
+   CASE SB_LINELEFT
+   CASE SB_PAGELEFT
+      LineLeft(Self)
+      EXIT
+   CASE SB_LINERIGHT
+   CASE SB_PAGERIGHT
+      LineRight(Self)
+      EXIT
+   CASE SB_LEFT
+      nLeftCol := colpos := 0
+      DO WHILE nLeftCol != ::nLeftCol .OR. colpos != ::colpos
+         nLeftCol := ::nLeftCol
+         colpos := ::colpos
+         LineLeft(Self)
+      ENDDO
+      EXIT
+   CASE SB_RIGHT
+      nLeftCol := colpos := 0
+      DO WHILE nLeftCol != ::nLeftCol .OR. colpos != ::colpos
+         nLeftCol := ::nLeftCol
+         colpos := ::colpos
+         LineRight(Self)
+      ENDDO
+      EXIT
+   CASE SB_THUMBTRACK
+   CASE SB_THUMBPOSITION
+      ::SetFocus()
+      IF ::lEditable
+         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         SetScrollPos(::handle, SB_HORZ, HIWORD(wParam))
+         ::SetColumn(HIWORD(wParam))
+      ELSE
+         IF HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
+            LineRight(Self)
+         ENDIF
+         IF HIWORD(wParam) < (::colpos + ::nLeftCol - 1)
+            LineLeft(Self)
+         ENDIF
+      ENDIF
+   ENDSWITCH
+
+   IF ::nLeftCol != oldLeft .OR. ::colpos != oldPos
+      IF HWG_BITAND(::style, WS_HSCROLL) != 0
+         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         nPos := ::colpos + ::nLeftCol - 1
+         SetScrollPos(::handle, SB_HORZ, nPos)
+      ENDIF
+      // TODO: here I force a full repaint and HSCROLL appears...
+      //       but we should do more checks....
+      // IF ::nLeftCol == oldLeft
+      //   ::RefreshLine()
+      //ELSE
+      IF ::nLeftCol != ::nVisibleColLeft
+         RedrawWindow(::handle, RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
+      ELSE
+         ::RefreshLine()
+      ENDIF
+   ENDIF
+   ::SetFocus()
+
+RETURN Nil
+#endif
 
 //----------------------------------------------------//
 METHOD LINEDOWN(lMouse) CLASS HBrowse
