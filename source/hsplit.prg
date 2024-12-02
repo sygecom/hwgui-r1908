@@ -49,9 +49,9 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    
    ::aLeft   := IIf(aLeft == Nil, {}, aLeft)
    ::aRight  := IIf(aRight == Nil, {}, aRight)
-   ::lVertical := ( ::nHeight > ::nWidth )
+   ::lVertical := (::nHeight > ::nWidth)
    ::lScrolling := Iif(lScrolling == Nil, .F., lScrolling)
-   IF ( lTransp != NIL .AND. lTransp )
+   IF (lTransp != NIL .AND. lTransp)
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
    ENDIF
@@ -195,10 +195,10 @@ METHOD DragAll(lScroll) CLASS HSplitter
    FOR i := 1 TO Len(::aLeft)
       oCtrl := ::aLeft[i]
       IF ::lVertical
-         xDiff := ::nLeft - ( oCtrl:nLeft + oCtrl:nWidth )
+         xDiff := ::nLeft - (oCtrl:nLeft + oCtrl:nWidth)
          //oCtrl:nWidth += nDiff
       ELSE
-         yDiff := ::nTop - ( oCtrl:nTop + oCtrl:nHeight )
+         yDiff := ::nTop - (oCtrl:nTop + oCtrl:nHeight)
         // oCtrl:nHeight += nDiff
       ENDIF
       oCtrl:Move(oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth + xDiff, oCtrl:nHeight + yDiff , !lScroll)

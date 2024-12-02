@@ -274,7 +274,7 @@ METHOD CreateBarcode(cCode) CLASS BarCode
 
    ENDIF
 
-   hPen      := Rich_CreatePen(, , ::nColText )
+   hPen      := Rich_CreatePen(, , ::nColText)
    hOldPen   := Rich_SelectObject(::hDC, hPen)
    hBrush    := Rich_CreateSolidBrush(::nColText)
    hOldBrush := Rich_SelectObject(::hDC, hBrush)

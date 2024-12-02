@@ -28,7 +28,7 @@ CLASS VAR aTimers   INIT {}
    DATA   xName          HIDDEN
    ACCESS Name INLINE ::xName
    ASSIGN Name(cName) INLINE IIf(!Empty(cName) .AND. hb_IsChar(cName) .AND. !(":" $ cName) .AND. !("[" $ cName),;
-         ( ::xName := cName, __objAddData(::oParent, cName), ::oParent: & ( cName ) := Self), Nil)
+         (::xName := cName, __objAddData(::oParent, cName), ::oParent: &(cName) := Self), Nil)
    ACCESS Interval INLINE ::value
    ASSIGN Interval(x) INLINE ::value := x, ;
                                            SetTimer(::oParent:handle, ::id, ::value)
@@ -78,7 +78,7 @@ METHOD END() CLASS HTimer
    IF ::oParent != Nil
       KillTimer(::oParent:handle, ::id)
    ENDIF
-   IF ( i := AScan(::aTimers, {|o|o:id == ::id}) ) > 0
+   IF (i := AScan(::aTimers, {|o|o:id == ::id})) > 0
       ADel(::aTimers, i)
       ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF

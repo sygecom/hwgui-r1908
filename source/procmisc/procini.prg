@@ -53,16 +53,16 @@
 #include "fileio.ch"
 #define STR_BUFLEN  1024
 
-FUNCTION RDINI( fname, prm1, prm2, prm3, prm4 )
+FUNCTION RDINI(fname, prm1, prm2, prm3, prm4)
 
 LOCAL han, stroka, strfull, kolstr
 //LOCAL rez (variable not used)
 LOCAL poz1, vname
 //LOCAL i (variable not used)
 LOCAL prblo, lTruncAr
-LOCAL lWinIni  := ( hb_IsArray(prm1) )
+LOCAL lWinIni  := (hb_IsArray(prm1))
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
-LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
+LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
 
    kolstr := 0
    prblo  := .T.
@@ -105,7 +105,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                ENDIF
                SET EXACT OFF
             ENDIF
-         ELSEIF ( prblo .OR. lWinIni ) .AND. Left(stroka, 1) != ";"
+         ELSEIF (prblo .OR. lWinIni) .AND. Left(stroka, 1) != ";"
             poz1 := At("=", stroka)
             IF poz1 != 0
                lTruncAr := IIf(SubStr(stroka, poz1 - 1, 1) == "+", .F., .T.)
@@ -210,6 +210,6 @@ FIELD INICOND, INITEXT
    IF Eof()
       Return ""
    ENDIF
-   stroka := IIf(Empty(INICOND) .OR. &( INICOND ), Trim(INITEXT), "")
+   stroka := IIf(Empty(INICOND) .OR. &(INICOND), Trim(INITEXT), "")
    SKIP
 RETURN stroka

@@ -117,7 +117,7 @@ METHOD SelectClipRgn(pRgn) CLASS HDC
 
    LOCAL nRetVal := - 1
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       nRetVal := SelectClipRgn(::m_hDC, pRgn)
    ENDIF
 
@@ -165,10 +165,10 @@ METHOD CreateCompatibleDc(x) CLASS HDC
 METHOD SAVEDC() CLASS HDC
    LOCAL nRetVal := 0
 
-   IF ( !Empty(::m_hAttribDC) )
+   IF (!Empty(::m_hAttribDC))
       nRetVal := SaveDC(::m_hAttribDC)
    ENDIF
-   IF ( ::m_hDC != ::m_hAttribDC .and. SaveDC(::m_hDC) != 0 )
+   IF (::m_hDC != ::m_hAttribDC .and. SaveDC(::m_hDC) != 0)
       nRetVal := - 1   // -1 is the only valid restore value for complex DCs
    ENDIF
    RETURN nRetVal
@@ -178,11 +178,11 @@ METHOD RestoreDC(nSavedDC) CLASS HDC
    // if two distinct DCs, nSavedDC can only be -1
 
    LOCAL bRetVal := .T.
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       bRetVal := RestoreDC(::m_hDC, nSavedDC)
    ENDIF
-   IF ( !Empty(::m_hAttribDC) )
-      bRetVal := ( bRetVal .and. RestoreDC(::m_hAttribDC, nSavedDC) )
+   IF (!Empty(::m_hAttribDC))
+      bRetVal := (bRetVal .and. RestoreDC(::m_hAttribDC, nSavedDC))
    ENDIF
    RETURN bRetVal
 
@@ -190,7 +190,7 @@ METHOD SetMapMode(nMapMode) CLASS HDC
 
    LOCAL nRetVal := 0
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       nRetVal := ::SetMapMode(::m_hDC, nMapMode)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -205,7 +205,7 @@ METHOD SetWindowOrg(x, y) CLASS HDC
 
    LOCAL point
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       SetWindowOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -219,7 +219,7 @@ METHOD SetWindowExt(x, y) CLASS HDC
 
    LOCAL point
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       SetWindowExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -233,7 +233,7 @@ METHOD SetViewportOrg(x, y) CLASS HDC
 
    LOCAL point
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       SetViewportOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -246,7 +246,7 @@ METHOD SetViewportExt(x, y) CLASS HDC
 
    LOCAL point
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       SetViewportExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -259,7 +259,7 @@ METHOD SetArcDirection(nArcDirection)
 
 
    LOCAL nResult := 0
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       nResult := SetArcDirection(::m_hDC, nArcDirection)
    ENDIF
    IF !Empty(::m_hAttribDC)
@@ -276,7 +276,7 @@ METHOD SetROP2(nDrawMode)
 
    LOCAL nRetVal := 0
 
-   IF ( ::m_hDC != ::m_hAttribDC )
+   IF (::m_hDC != ::m_hAttribDC)
       nRetVal := SetROP2(::m_hDC, nDrawMode)
    ENDIF
    IF !Empty(::m_hAttribDC)

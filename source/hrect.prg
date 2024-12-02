@@ -404,7 +404,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    Local nEval
 
    IF hb_IsBlock(::bOther)
-      IF ( nEval := Eval(::bOther, Self, msg, wParam, lParam) ) != Nil .AND. nEval != -1
+      IF (nEval := Eval(::bOther, Self, msg, wParam, lParam)) != Nil .AND. nEval != -1
          RETURN 0
       ENDIF
    ENDIF

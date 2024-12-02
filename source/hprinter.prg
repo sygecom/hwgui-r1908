@@ -23,7 +23,7 @@ CLASS HPrinter INHERIT HObject
    DATA lPreview
    DATA cMetaName
    DATA nWidth, nHeight, nPWidth, nPHeight
-   DATA nHRes, nVRes                     // Resolution ( pixels/mm )
+   DATA nHRes, nVRes                     // Resolution (pixels/mm)
    DATA nPage
 
    DATA lmm  INIT .F.
@@ -127,7 +127,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       RETURN Nil
    ELSE
       if lProprierties
-         if !Hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth )
+         if !Hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth)
            Return NIL
          endif
       endif
@@ -181,8 +181,8 @@ METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS H
       nHeight *= ::nVRes
    ENDIF
    oFont := HFont():Add(fontName,, nHeight,          ;
-                         IIf(lBold != Nil.AND.lBold, 700, 400), nCharset, ;
-                         IIf(lItalic != Nil.AND.lItalic, 255, 0), IIf(lUnderline != Nil.AND.lUnderline, 1, 0))
+                         IIf(lBold != Nil .AND. lBold, 700, 400), nCharset, ;
+                         IIf(lItalic != Nil .AND. lItalic, 255, 0), IIf(lUnderline != Nil .AND. lUnderline, 1, 0))
 
    RETURN oFont
 
@@ -264,7 +264,7 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
 METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
 
    IF ::lmm
-      DrawBitmap(::hDC, hBitmap, IIf(nOpt == Nil, SRCAND, nOpt), ::nHRes * x1, ::nVRes * y1, ::nHRes * ( x2 - x1 + 1 ), ::nVRes * ( y2 - y1 + 1 ))
+      DrawBitmap(::hDC, hBitmap, IIf(nOpt == Nil, SRCAND, nOpt), ::nHRes * x1, ::nVRes * y1, ::nHRes * (x2 - x1 + 1), ::nVRes * (y2 - y1 + 1))
    ELSE
       DrawBitmap(::hDC, hBitmap, IIf(nOpt == Nil, SRCAND, nOpt), x1, y1, x2 - x1 + 1, y2 - y1 + 1)
    ENDIF
@@ -351,7 +351,7 @@ METHOD ReleaseMeta() CLASS HPrinter
 METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser) CLASS HPrinter
    LOCAL oDlg, oToolBar, oSayPage, oBtn, oCanvas, oTimer, i, nLastPage := Len(::aMeta), aPage := {}
    LOCAL oFont := HFont():Add("Times New Roman", 0, -13, 700)
-   LOCAL lTransp := ( aBitmaps != Nil .AND. Len(aBitmaps) > 9 .AND. aBitmaps[10] != Nil .AND. aBitmaps[10] )
+   LOCAL lTransp := (aBitmaps != Nil .AND. Len(aBitmaps) > 9 .AND. aBitmaps[10] != Nil .AND. aBitmaps[10])
 
    FOR i := 1 TO nLastPage
       AAdd(aPage, Str(i, 4) + ":" + Str(nLastPage, 4))
@@ -668,7 +668,7 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
    IF nHeight > y
       nPos := nPosVert
       IF nPos > 0
-         ::yOffset := Round(( ( nPos - 1 ) / 18) * ( nHeight - y + 10 ), 0 )
+         ::yOffset := Round(((nPos - 1) / 18) * (nHeight - y + 10), 0)
       ENDIF
    ELSE
       setscrollpos(oCanvas:handle, SB_VERT, 0)
@@ -677,16 +677,16 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
    IF nWidth > x
       nPos := nPosHorz
       IF nPos > 0
-         nPos := ( nPos - 1 ) / 18
-         ::xOffset := Round(nPos * ( nWidth - x + 10 ), 0)
+         nPos := (nPos - 1) / 18
+         ::xOffset := Round(nPos * (nWidth - x + 10), 0)
       ENDIF
    ELSE
       setscrollpos(oCanvas:handle, SB_HORZ, 0)
    ENDIF
 
-   ::x1 := IIf(nWidth < x, Round(( x - nWidth ) / 2, 0), 10) - ::xOffset
+   ::x1 := IIf(nWidth < x, Round((x - nWidth) / 2, 0), 10) - ::xOffset
    ::x2 := ::x1 + nWidth - 1
-   ::y1 := IIf(nHeight < y, Round(( y - nHeight) / 2, 0 ), 10) - ::yOffset
+   ::y1 := IIf(nHeight < y, Round((y - nHeight) / 2, 0), 10) - ::yOffset
    ::y2 := ::y1 + nHeight - 1
 
    IF nZoom != Nil .OR. msg != Nil
@@ -710,7 +710,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    rect := GetClientRect(oWnd:handle)
 
-   // WriteLog(stR(rect[1])+ stR(rect[2])+ stR(rect[3])+ stR(rect[4]) )
+   // WriteLog(stR(rect[1])+ stR(rect[2])+ stR(rect[3])+ stR(rect[4]))
    // offscreen canvas must be THE WHOLE CANVAS !
 
    IF ::xOffset == Nil
@@ -722,8 +722,8 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    aArray := GetPPSRect(pps)
    // tracelog("PPS"+str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]))
 
-   IF ( aArray[1] == 0 .AND. aArray[2] == 0 )  // IF WHOLE AREA
-      IF ( ::NeedsRedraw .OR. lRefreshVideo )
+   IF (aArray[1] == 0 .AND. aArray[2] == 0)  // IF WHOLE AREA
+      IF (::NeedsRedraw .OR. lRefreshVideo)
          IF ValType(::memDC) == "U"
             ::memDC := hDC():New()
             ::memDC:CreateCompatibleDC(hDC)
@@ -769,8 +769,8 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
          lRefreshVideo := .T.
       ENDIF
    ELSE
-      // tracelog("no refresh video" )
-      lRefreshVideo := .T.   // request a repaint
+      // tracelog("no refresh video")
+      lRefreshVideo := .T. // request a repaint
    ENDIF
 
 

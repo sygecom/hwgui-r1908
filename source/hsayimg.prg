@@ -27,7 +27,7 @@ CLASS VAR winclass   INIT "STATIC"
                bSize, ctooltip, bClick, bDblClick)
    METHOD Redefine(oWndParent, nId, bInit, bSize, ctooltip)
    METHOD Activate()
-   METHOD END() INLINE ( ::Super:END(), IIf(::oImage != Nil, ::oImage:Release(), ::oImage := Nil), ::oImage := Nil )
+   METHOD END() INLINE (::Super:END(), IIf(::oImage != Nil, ::oImage:Release(), ::oImage := Nil), ::oImage := Nil)
    METHOD onClick()
    METHOD onDblClick()
 
@@ -175,7 +175,7 @@ METHOD Paint(lpdis) CLASS HSayBmp
                                      drawInfo[5] + ::nOffsetV,,) // ::nWidth+1, ::nHeight+1)
             ELSEIF ::nStretch == 2  // CLIP
                DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
-                                     drawInfo[5] + ::nOffsetV,, ::nWidth + 1, ::nHeight + 1 )
+                                     drawInfo[5] + ::nOffsetV,, ::nWidth + 1, ::nHeight + 1)
             ELSE // stretch (DEFAULT)
                DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
                                      drawInfo[5] + ::nOffsetV,, drawInfo[6] - drawInfo[4] + 1, drawInfo[7] - drawInfo[5] + 1)

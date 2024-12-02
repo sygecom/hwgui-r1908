@@ -29,7 +29,7 @@ STATIC aMessModalDlg := { ;
        {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}},        ;
        {WM_PSPNOTIFY, {|o, w, l|onPspNotify(o, w, l)}},      ;
        {WM_HELP, {|o, w, l|onHelp(o, w, l)}},                ;
-       {WM_CTLCOLORDLG, {| o, w, l | onDlgColor(o, w, l) }}       ;
+       {WM_CTLCOLORDLG, {|o, w, l|onDlgColor(o, w, l)}}      ;
      }
 #endif
 
@@ -66,7 +66,7 @@ CLASS HDialog INHERIT HCustomWindow
    DATA lUpdated INIT .F.     // TRUE, if any GET is changed
    DATA lClipper INIT .F.     // Set it to TRUE for moving between GETs with ENTER key
    DATA GetList INIT {}      // The array of GET items in the dialog
-   DATA KeyList INIT {}      // The array of keys ( as Clipper's SET KEY )
+   DATA KeyList INIT {}      // The array of keys (as Clipper's SET KEY)
    DATA lExitOnEnter INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
    // Added by Sandro Freire
    DATA lExitOnEsc INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
@@ -476,7 +476,7 @@ METHOD FindDialog(hWndTitle, lAll) CLASS HDialog
    IF cType != "C"
       i := AScan(::aDialogs, {|o|SelfFocus(o:handle, hWndTitle)})
       IF i == 0 .AND. (lAll != NIL .AND. lAll)
-          i := AScan(::aModalDialogs, {| o | SelfFocus(o:handle, hWndTitle) })
+          i := AScan(::aModalDialogs, {|o|SelfFocus(o:handle, hWndTitle)})
           RETURN IIf(i == 0, NIL, ::aModalDialogs[i])
       ENDIF
    ELSE

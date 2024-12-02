@@ -54,13 +54,13 @@ Local nFirst, i
 
       MENU OF oDlgDebug
          MENUITEM "E&xit" ACTION oDlgDebug:Close()
-         MENUITEM "&Step" ACTION ( nDebugMode := 0, SetDebugRun() )
+         MENUITEM "&Step" ACTION (nDebugMode := 0, SetDebugRun())
          MENU TITLE "&Animate"
             MENUITEM "&0.5 seconds" ACTION (nAnimaTime := 0.5, nDebugMode := 1, SetDebugRun())
             MENUITEM "&1 seconds" ACTION (nAnimaTime := 1, nDebugMode := 1, SetDebugRun())
             MENUITEM "&3 seconds" ACTION (nAnimaTime := 3, nDebugMode := 1, SetDebugRun())
          ENDMENU
-         MENUITEM "&Run" ACTION ( nDebugMode := 2, SetDebugRun() )
+         MENUITEM "&Run" ACTION (nDebugMode := 2, SetDebugRun())
       ENDMENU
 
       @ 0, 0 BROWSE oBrwData ARRAY SIZE 500, 0 STYLE WS_BORDER + WS_VSCROLL ;
@@ -110,11 +110,11 @@ Local nFirst, i
 
    IF aScriptCurr[4] != aScript[4]
       IF !Empty(aBreakPoints)
-         IF ( i := Ascan(aBreaks, {|a|a[1]==aBreakPoints[1]}) ) == 0
+         IF (i := Ascan(aBreaks, {|a|a[1]==aBreakPoints[1]})) == 0
             HB_SYMBOL_UNUSED(i)
             Aadd(aBreaks, aBreakPoints)
          ENDIF
-         IF ( i := Ascan(aBreaks, {|a|a[1]==aScript[4]}) ) == 0
+         IF (i := Ascan(aBreaks, {|a|a[1]==aScript[4]})) == 0
             aBreakPoints := Nil
          ELSE
             aBreakPoints := aBreaks[i]
@@ -125,7 +125,7 @@ Local nFirst, i
    ENDIF
 
    oBrwScript:aArray := aScript[3]
-   IF ( i_scr := iscr ) == 0
+   IF (i_scr := iscr) == 0
       nDebugMode := 0
       oBrwScript:Top()
    ELSE
@@ -184,7 +184,7 @@ Local i
    IF aBreakPoints == Nil
       aBreakPoints := { aScriptCurr[4], {} }
    ENDIF
-   IF ( i := Ascan(aBreakPoints[2], oBrwScript:nCurrent) ) == 0
+   IF (i := Ascan(aBreakPoints[2], oBrwScript:nCurrent)) == 0
       FOR i := 1 TO Len(aBreakPoints[2])
          IF aBreakPoints[2, i] == 0
             aBreakPoints[2, i] := oBrwScript:nCurrent
@@ -211,7 +211,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 #endif
       bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE
-         bCodeblock := &( "{||" + xRes + "}" )
+         bCodeblock := &("{||" + xRes + "}")
       RECOVER
          lRes := .F.
       END SEQUENCE
@@ -247,7 +247,7 @@ Local xRes, bOldError, lRes := .T., cType
    ErrorBlock(bOldError)
 
    IF lRes
-      IF ( cType := Valtype(xRes) ) == "N"
+      IF (cType := Valtype(xRes)) == "N"
          aWatches[n, 4] := Ltrim(Str(xRes))
       ELSEIF cType == "D"
          aWatches[n, 4] := Dtoc(xRes)
@@ -284,7 +284,7 @@ Local xRes, bOldError, lRes := .T., cType
    ENDIF
 
    IF lRes
-      IF ( cType := Valtype(xRes) ) == "N"
+      IF (cType := Valtype(xRes)) == "N"
          oEditRes:SetText(Ltrim(Str(xRes)))
       ELSEIF cType == "D"
          oEditRes:SetText(Dtoc(xRes))

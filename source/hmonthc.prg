@@ -49,10 +49,10 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
             lWeekNumbers, bSelect) CLASS HMonthCalendar
 
-   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), 0) //WS_TABSTOP )
-   nStyle   += IIf(lNoToday == Nil.OR. !lNoToday, 0, MCS_NOTODAY)
-   nStyle   += IIf(lNoTodayCircle == Nil.OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
-   nStyle   += IIf(lWeekNumbers == Nil.OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
+   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), 0) //WS_TABSTOP)
+   nStyle   += IIf(lNoToday == Nil .OR. !lNoToday, 0, MCS_NOTODAY)
+   nStyle   += IIf(lNoTodayCircle == Nil .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
+   nStyle   += IIf(lWeekNumbers == Nil .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               ,, cTooltip)
 
@@ -78,8 +78,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 METHOD Activate() CLASS HMonthCalendar
 
    IF !Empty(::oParent:handle)
-      ::handle := InitMonthCalendar ( ::oParent:handle, ::id, ::style, ;
-                                      ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := InitMonthCalendar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 

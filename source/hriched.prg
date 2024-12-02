@@ -59,7 +59,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
             tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder) CLASS HRichEdit
 
-   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER )
+   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER)
                         IIf(lNoBorder == Nil .OR. !lNoBorder, WS_BORDER, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, IIf(bcolor == Nil, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
@@ -104,7 +104,7 @@ METHOD Init() CLASS HRichEdit
       ::SetColor(::tColor, ::bColor)
       IF ::bChange != Nil
          SendMessage(::handle, EM_SETEVENTMASK, 0, ENM_SELCHANGE + ENM_CHANGE)
-         ::oParent:AddEvent(EN_CHANGE, ::id, {| | ::onChange()})
+         ::oParent:AddEvent(EN_CHANGE, ::id, {||::onChange()})
       ENDIF
    ENDIF
    RETURN Nil
@@ -132,12 +132,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ELSEIF msg == WM_KILLFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
         ::GetParentForm(Self):lDisableCtrlTab := ::lctrltab
    ENDIF
-   IF msg == WM_KEYDOWN .AND. ( wParam == VK_DELETE .OR. wParam == VK_BACK )  //46Del
+   IF msg == WM_KEYDOWN .AND. (wParam == VK_DELETE .OR. wParam == VK_BACK)  //46Del
       ::lChanged := .T.
    ENDIF
    IF msg == WM_CHAR
       IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF ( IsCtrlShift(.T., .F.) .OR. !::lAllowTabs )
+         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
             RETURN 0
          ENDIF
       ENDIF
@@ -158,7 +158,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYDOWN
-      IF wParam == VK_TAB .AND. ( IsCtrlShift(.T., .F.) .OR. !::lAllowTabs )
+      IF wParam == VK_TAB .AND. (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
@@ -187,7 +187,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
 METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 
    IF tcolor != NIL
-      re_SetDefault(::handle, tColor) //, ID_FONT ,, ) // cor e fonte padrao
+      re_SetDefault(::handle, tColor) //, ID_FONT ,,) // cor e fonte padrao
    ENDIF
    IF bColor != NIL
       SendMessage(::handle, EM_SETBKGNDCOLOR, 0, bColor) // cor de fundo

@@ -74,7 +74,7 @@ FUNCTION OpenReport(fname, repName)
                   ENDIF
                ENDIF
             ELSE
-               IF ( itemName := NextItem(stroka, .T.) ) == "FORM"
+               IF (itemName := NextItem(stroka, .T.)) == "FORM"
                   aPaintRep[FORM_WIDTH] := Val(NextItem(stroka))
                   aPaintRep[FORM_HEIGHT] := Val(NextItem(stroka))
                   nFormWidth := Val(NextItem(stroka))
@@ -165,16 +165,16 @@ FUNCTION RecalcForm(aPaintRep, nFormWidth)
    LOCAL hDC, aMetr, aItem, i
    hDC := GetDC(GetActiveWindow())
    aMetr := GetDeviceArea(hDC)
-   aPaintRep[FORM_XKOEF] := ( aMetr[1] - XINDENT ) / aPaintRep[FORM_WIDTH]
+   aPaintRep[FORM_XKOEF] := (aMetr[1] - XINDENT) / aPaintRep[FORM_WIDTH]
    ReleaseDC(GetActiveWindow(), hDC)
 
    IF nFormWidth != aMetr[1] - XINDENT
       FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
          aItem := aPaintRep[FORM_ITEMS, i]
-         aItem[ITEM_X1] := Round(aItem[ITEM_X1] * ( aMetr[1] - XINDENT ) / nFormWidth, 0)
-         aItem[ITEM_Y1] := Round(aItem[ITEM_Y1] * ( aMetr[1] - XINDENT ) / nFormWidth, 0)
-         aItem[ITEM_WIDTH] := Round(aItem[ITEM_WIDTH] * ( aMetr[1] - XINDENT ) / nFormWidth, 0)
-         aItem[ITEM_HEIGHT] := Round(aItem[ITEM_HEIGHT] * ( aMetr[1] - XINDENT ) / nFormWidth, 0)
+         aItem[ITEM_X1] := Round(aItem[ITEM_X1] * (aMetr[1] - XINDENT) / nFormWidth, 0)
+         aItem[ITEM_Y1] := Round(aItem[ITEM_Y1] * (aMetr[1] - XINDENT) / nFormWidth, 0)
+         aItem[ITEM_WIDTH] := Round(aItem[ITEM_WIDTH] * (aMetr[1] - XINDENT) / nFormWidth, 0)
+         aItem[ITEM_HEIGHT] := Round(aItem[ITEM_HEIGHT] * (aMetr[1] - XINDENT) / nFormWidth, 0)
       NEXT
    ENDIF
    RETURN Nil
@@ -196,8 +196,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    ENDIF
 
    aPrnCoors := GetDeviceArea(oPrinter:hDCPrn)
-   prnXCoef := ( aPrnCoors[1] / aPaintRep[FORM_WIDTH] ) / aPaintRep[FORM_XKOEF]
-   prnYCoef := ( aPrnCoors[2] / aPaintRep[FORM_HEIGHT] ) / aPaintRep[FORM_XKOEF]
+   prnXCoef := (aPrnCoors[1] / aPaintRep[FORM_WIDTH]) / aPaintRep[FORM_XKOEF]
+   prnYCoef := (aPrnCoors[2] / aPaintRep[FORM_HEIGHT]) / aPaintRep[FORM_XKOEF]
    // writelog(oPrinter:cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+" / "+str(aPaintRep[FORM_WIDTH])+" "+str(aPaintRep[FORM_HEIGHT])+str(aPaintRep[FORM_XKOEF])+" / "+str(prnXCoef)+str(prnYCoef))
 
    IF Type("oFontStandard") = "U"
@@ -464,12 +464,12 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
    // writelog("PrintItem-2: "+str(x1)+str(y1)+str(x2)+str(y2))
 
    #ifdef __DEBUG__
-      // Writelog(Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &( aItem[ITEM_CAPTION] ) + ")", ""), ""))
+      // Writelog(Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
    #else
-      // Writelog(Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &( aItem[ITEM_CAPTION] ) + ")", ""), ""))
+      // Writelog(Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION]+IIf(aItem[ITEM_VAR]>0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          IF aItem[ITEM_VAR] > 0
-            stroka := IIf(lCalc, &( aItem[ITEM_CAPTION] ), "")
+            stroka := IIf(lCalc, &(aItem[ITEM_CAPTION]), "")
          ELSE
             stroka := aItem[ITEM_CAPTION]
          ENDIF
@@ -498,7 +498,7 @@ STATIC FUNCTION ScriptExecute(aItem)
    LOCAL nError, nLineEr
    IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
       IF hb_IsChar(aItem[ITEM_SCRIPT])
-         IF ( aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT]) ) == Nil
+         IF (aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT])) == Nil
             nError := CompileErr(@nLineEr)
             hwg_MsgStop("Script error (" + LTrim(Str(nError)) + "), line " + LTrim(Str(nLineEr)))
             RETURN .F.

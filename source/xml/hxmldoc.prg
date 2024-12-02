@@ -109,8 +109,8 @@ Local i, s := Space(level*2)+"<", lNewLine
       m->hxml_newline := .T.
    ELSEIF ::type == HBXML_TYPE_TAG
       s += ">"
-      IF Empty(::aItems) .OR. ( Len(::aItems) == 1 .AND. ;
-            hb_IsChar(::aItems[1]) .AND. Len(::aItems[1]) + Len(s) < 80 )
+      IF Empty(::aItems) .OR. (Len(::aItems) == 1 .AND. ;
+            hb_IsChar(::aItems[1]) .AND. Len(::aItems[1]) + Len(s) < 80)
          lNewLine := m->hxml_newline := .F.
       ELSE
          s += Chr(10)
@@ -239,10 +239,10 @@ Local cEncod, i, s
    ENDIF
    IF handle != -1
       IF lNoHeader == Nil .OR. !lNoHeader
-         IF ( cEncod := ::GetAttribute("encoding") ) == Nil
+         IF (cEncod := ::GetAttribute("encoding")) == Nil
             cEncod := "UTF-8"
          ENDIF
-         s := '<?xml version="1.0" encoding="'+cEncod+'"?>'+Chr(10 )
+         s := '<?xml version="1.0" encoding="'+cEncod+'"?>'+Chr(10)
          IF fname != Nil
             FWrite(handle, s)
          ENDIF

@@ -89,7 +89,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ENDIF
    nHeight := IIf(Empty(nHeight), 24, nHeight)
    ::nHeightBox := Int(nHeight * 0.75)                    //   Meets A 22'S EDITBOX
-   nHeight := nHeight + ( IIf(Empty(nhItem), 16.250, ( nhItem += 0.10 )) * nDisplay )
+   nHeight := nHeight + (IIf(Empty(nhItem), 16.250, (nhItem += 0.10)) * nDisplay)
 
    IF lEdit == Nil
       lEdit := .F.
@@ -198,12 +198,12 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
 
    //::nHeightBox := INT(22 * 0.75) //   Meets A 22'S EDITBOX
    IF !Empty(nDisplay) .AND. nDisplay > 0
-      ::Style := Hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT)                     //+ WS_VSCROLL )
+      ::Style := Hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT) //+ WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
       nDisplay := 6
    ENDIF
-   //::nHeight := ( ::nHeight + 16.250 ) *  nDisplay
+   //::nHeight := (::nHeight + 16.250) * nDisplay
    ::lResource := .T.
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip)
 
@@ -311,7 +311,7 @@ METHOD INIT() CLASS HComboBox
             ComboSetString(::handle, ::value)
          ENDIF
          avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
-         NewLongComboWidth := ( LongComboWidth - 2 ) * avgwidth
+         NewLongComboWidth := (LongComboWidth - 2) * avgwidth
          SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
       ::Super:Init()
@@ -327,7 +327,7 @@ METHOD INIT() CLASS HComboBox
          IF !Empty(::ncWidth)
             SendMessage(::handle, CB_SETDROPPEDWIDTH, ::ncWidth, 0)
          ENDIF
-         ::nHeight := Int(nHeightBox / 0.75 + ( ::nhItem * ::nDisplay )) + 3
+         ::nHeight := Int(nHeightBox / 0.75 + (::nhItem * ::nDisplay)) + 3
       ENDIF
    ENDIF
    IF !::lResource
@@ -363,15 +363,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
    ENDIF
 
    IF ::bSetGet != Nil .OR. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-      IF msg == WM_CHAR .AND. ( ::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
-          !::GetParentForm(Self) :lModal )
+      IF msg == WM_CHAR .AND. (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
+          !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), - 1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN .AND. ;
             !ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND.;
-                       ( ::GetParentForm():Type < WND_DLG_RESOURCE.OR.;
-                   !::GetParentForm():lModal )
+                       (::GetParentForm():Type < WND_DLG_RESOURCE .OR. ;
+                   !::GetParentForm():lModal)
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
          ENDIF
@@ -379,7 +379,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          IF wParam == VK_RETURN
             RETURN DLGC_WANTMESSAGE
          ELSEIF wParam == VK_ESCAPE .AND. ;
-                  ( oCtrl := ::GetParentForm:FindControl(IDCANCEL) ) != Nil .AND. !oCtrl:IsEnabled()
+                  (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != Nil .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
          ENDIF
            RETURN  DLGC_WANTCHARS + DLGC_WANTARROWS
@@ -424,7 +424,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             GetSkip(::oParent, ::handle, , -1)
             RETURN 0
          ENDIF
-          IF ( ::GetParentForm(Self):Type < WND_DLG_RESOURCE.OR. !::GetParentForm(Self):lModal )
+          IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE.OR. !::GetParentForm(Self):lModal)
              RETURN 1
           ENDIF
       ENDIF
@@ -623,7 +623,7 @@ METHOD Refresh() CLASS HComboBox
       #endif
    ELSE
       ComboSetString(::handle, ::value)
-      //-::SetItem(::value )
+      //-::SetItem(::value)
    ENDIF
    ::valueBound := ::GetValueBound()
 
@@ -700,7 +700,7 @@ METHOD GetValue() CLASS HComboBox
 
    //::value := IIf(::lText, ::aItems[nPos], nPos)
    IF ::lText
-       IF ( ::lEdit .OR. !hb_IsChar(::Value) ) .AND. nPos <= 1
+       IF (::lEdit .OR. !hb_IsChar(::Value)) .AND. nPos <= 1
            ::Value := GetEditText(::oParent:handle, ::id)
            nPos := SendMessage(::handle, CB_FINDSTRINGEXACT, -1, ::value) + 1
         ELSEIF nPos > 0
@@ -822,9 +822,9 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
        AAdd(::Aitems, cItem)
     ENDIF
     IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
-       ComboInsertString(::handle, nPos - 1, cItem)  //::aItems[i] )
+       ComboInsertString(::handle, nPos - 1, cItem) //::aItems[i])
     ELSE
-       ComboAddString(::handle, cItem)  //::aItems[i] )
+       ComboAddString(::handle, cItem) //::aItems[i])
     ENDIF
 
 RETURN nCount
@@ -909,7 +909,7 @@ METHOD When() CLASS HComboBox
       //  SetWindowText(::handle, ::value)
       //  SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
    ENDIF
-   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. ( GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0 ), - 1, 1)
+   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
    IF hb_IsBlock(::bGetFocus)
       ::oParent:lSuspendMsgsHandling := .T.
       ::lnoValid := .T.
@@ -949,7 +949,7 @@ METHOD Valid() CLASS HComboBox
 
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
 
-   IF ( oDlg := ParentGetDialog(Self) ) == Nil .OR. oDlg:nLastKey != VK_ESCAPE
+   IF (oDlg := ParentGetDialog(Self)) == Nil .OR. oDlg:nLastKey != VK_ESCAPE
       // end by sauli
       // IF lESC // "if" by Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
       // By Luiz Henrique dos Santos (luizhsantos@gmail.com.br) 03/06/2006
@@ -1018,9 +1018,9 @@ METHOD Populate() CLASS HComboBox
       RETURN Nil
    ENDIF
    xRowSource := IIf(hb_IsArray(::xRowSource[1]), ::xRowSource[1, 1], ::xRowSource[1])
-   IF xRowSource != Nil .AND. ( i := At("->", xRowSource) ) > 0
+   IF xRowSource != Nil .AND. (i := At("->", xRowSource)) > 0
        cAlias := AllTrim(Left(xRowSource, i - 1))
-       IF Select(cAlias) == 0 .AND. ( i := At("(", cAlias) ) > 0
+       IF Select(cAlias) == 0 .AND. (i := At("(", cAlias)) > 0
           cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
       value := StrTran(xRowSource, calias + "->", , , 1, 1)

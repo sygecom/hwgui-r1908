@@ -12,10 +12,10 @@
 #include "hbclass.ch"
 #include "guilib.ch"
 
-#define UDN_FIRST               ( -721 )        // updown
-#define UDN_DELTAPOS            ( UDN_FIRST - 1 )
-#define UDM_SETBUDDY            ( WM_USER + 105 )
-#define UDM_GETBUDDY            ( WM_USER + 106 )
+#define UDN_FIRST               (-721)        // updown
+#define UDN_DELTAPOS            (UDN_FIRST - 1)
+#define UDM_SETBUDDY            (WM_USER + 105)
+#define UDM_GETBUDDY            (WM_USER + 106)
 
 CLASS HUpDown INHERIT HControl
 
@@ -51,14 +51,14 @@ CLASS HUpDown INHERIT HControl
    METHOD SetValue(nValue)
    METHOD Value(Value) SETGET
    METHOD Refresh()
-   METHOD SetColor(tColor, bColor, lRedraw) INLINE ::super:SetColor(tColor, bColor, lRedraw ), IIf(::oEditUpDown != Nil, ;
+   METHOD SetColor(tColor, bColor, lRedraw) INLINE ::super:SetColor(tColor, bColor, lRedraw), IIf(::oEditUpDown != Nil, ;
                                              ::oEditUpDown:SetColor(tColor, bColor, lRedraw),)
    METHOD DisableBackColor(DisableBColor) SETGET
-   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown) )
-   METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown) )
-   METHOD Enable() INLINE ( ::Super:Enable(), EnableWindow(::hwndUpDown, .T.), InvalidateRect(::hwndUpDown, 0) )
+   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown))
+   METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown))
+   METHOD Enable() INLINE (::Super:Enable(), EnableWindow(::hwndUpDown, .T.), InvalidateRect(::hwndUpDown, 0))
                           //InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight))
-   METHOD Disable() INLINE ( ::Super:Disable(), EnableWindow(::hwndUpDown, .F.) )
+   METHOD Disable() INLINE (::Super:Disable(), EnableWindow(::hwndUpDown, .F.))
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + GetClientRect(::hwndUpDown)[3] - 1
@@ -75,14 +75,14 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
    HB_SYMBOL_UNUSED(bOther)
 
-   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == Nil.OR. !lNoBorder, WS_BORDER, 0))
+   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == Nil .OR. !lNoBorder, WS_BORDER, 0))
 
    IF !hb_IsNumeric(vari)
       vari := 0
       Eval(bSetGet, vari)
    ENDIF
    IF bSetGet == Nil
-      bSetGet := {| v | IIf(v == Nil, ::nValue, ::nValue := v) }
+      bSetGet := {|v|IIf(v == Nil, ::nValue, ::nValue := v)}
    ENDIF
 
    ::nValue := Vari
@@ -106,7 +106,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    IF nUpDWidth != Nil
       ::nUpDownWidth := nUpDWidth
    ENDIF
-   ::nMaxLength :=  nMaxLength //= Nil, 4, nMaxLength )
+   ::nMaxLength :=  nMaxLength //= Nil, 4, nMaxLength)
    ::cPicture := IIf(cPicture == Nil, Replicate("9", 4), cPicture)
    ::lNoBorder := lNoBorder
    ::bkeydown := bkeydown
@@ -299,24 +299,24 @@ METHOD Notify(lParam) CLASS HeditUpDown
 
      IF ::oUpDown == Nil .OR. Hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
-       ( ::oUpDown:bGetFocus != Nil .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown) )
+       (::oUpDown:bGetFocus != Nil .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown))
         Return 0
    ENDIF
 
    vari := Val(LTrim(::UnTransform(::title)))
 
-   IF ( vari <= ::oUpDown:nLower .AND. iDelta < 0 ) .OR. ;
-       ( vari >= ::oUpDown:nUpper .AND. iDelta > 0 ) .OR. ::oUpDown:Increment == 0
+   IF (vari <= ::oUpDown:nLower .AND. iDelta < 0) .OR. ;
+       (vari >= ::oUpDown:nUpper .AND. iDelta > 0) .OR. ::oUpDown:Increment == 0
        ::SetFocus()
        RETURN 0
    ENDIF
-   vari :=  vari + ( ::oUpDown:Increment * idelta )
+   vari :=  vari + (::oUpDown:Increment * idelta)
    ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    SetDlgItemText(::oParent:handle, ::id, ::title)
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
    ::SetFocus()
-   IF nCode == UDN_DELTAPOS .AND. ( ::oUpDown:bClickUp != Nil .OR. ::oUpDown:bClickDown != Nil )
+   IF nCode == UDN_DELTAPOS .AND. (::oUpDown:bClickUp != Nil .OR. ::oUpDown:bClickDown != Nil)
       ::oparent:lSuspendMsgsHandling := .T.
       IF iDelta < 0 .AND. ::oUpDown:bClickDown  != Nil
          res := Eval(::oUpDown:bClickDown, ::oUpDown, ::oUpDown:nValue, iDelta, ipos)
@@ -365,8 +365,8 @@ CLASS VAR winclass   INIT "EDIT"
    METHOD Init()
    METHOD OnEvent(msg, wParam, lParam)
    METHOD Refresh()
-   METHOD Hide() INLINE ( ::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown) )
-   METHOD Show() INLINE ( ::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown) )
+   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown))
+   METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown))
 
 ENDCLASS
 
@@ -537,7 +537,7 @@ STATIC FUNCTION __Valid(oCtrl)
       ENDIF
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .F.
-   IF Empty(GetFocus() ) //= 0
+   IF Empty(GetFocus()) //= 0
       GetSkip(octrl:oParent, octrl:handle, , octrl:nGetSkip)
    ENDIF
 

@@ -399,11 +399,11 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
             EXIT
          ENDIF
          IF osize < 0
-            oPrinter:Say(stroka, 0, oCol, 2400, oCol + ( - osize + 2 ),, oFont)  //Added by  Por Fernando Athayde
-            oCol := oCol + ( - osize + 2 )   //Added by  Por Fernando Athayde
+            oPrinter:Say(stroka, 0, oCol, 2400, oCol + (-osize + 2),, oFont)  //Added by  Por Fernando Athayde
+            oCol := oCol + (-osize + 2)   //Added by  Por Fernando Athayde
          ELSE
-            oPrinter:Say(stroka, 0, oCol, 2400, oCol + ( osize + 2 ),, oFont)  //Added by  Por Fernando Athayde
-            oCol := oCol + ( osize + 2 )   //Added by  Por Fernando Athayde
+            oPrinter:Say(stroka, 0, oCol, 2400, oCol + (osize + 2),, oFont)  //Added by  Por Fernando Athayde
+            oCol := oCol + (osize + 2)   //Added by  Por Fernando Athayde
          ENDIF
 
          IF Left(stroka, 1) == Chr(12)
@@ -579,7 +579,7 @@ FUNCTION regenfile(o, new)
 // #define LINE_MAX 16384
 #define LINE_MAX    0x20000
 //----------------------------------------------------------------------------//
-static HB_BOOL file_read ( FILE *stream, char *string )
+static HB_BOOL file_read(FILE *stream, char *string)
 {
    int ch, cnbr = 0;
 
@@ -632,7 +632,7 @@ HB_FUNC(AFILLTEXT)
    }
    inFile = fopen(pSrc, "r");
 
-   if (!inFile )
+   if (!inFile)
    {
      hb_reta(0);
      return;
@@ -641,7 +641,7 @@ HB_FUNC(AFILLTEXT)
    string = (char*) hb_xgrab(LINE_MAX + 1);
    hb_arrayNew(pArray, 0);
 
-   while ( file_read ( inFile, string ) )
+   while (file_read(inFile, string))
    {
       hb_arrayAddForward(pArray, hb_itemPutC(pTemp, string));
    }

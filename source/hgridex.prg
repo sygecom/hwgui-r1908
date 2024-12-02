@@ -74,7 +74,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD AddRow(a, bUpdate)
    METHOD Notify(lParam)
 
-   METHOD DELETEROW() INLINE IIf(::bFlag , ( SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F. ), .T.)
+   METHOD DELETEROW() INLINE IIf(::bFlag , (SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F.), .T.)
    METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := {}, SendMessage(::handle, LVM_DELETEALLITEMS, 0, 0)
    METHOD SELECTALL() INLINE ListViewSelectAll(::handle)
    METHOD SELECTLAST() INLINE ListViewSelectLastItem(::handle)
@@ -125,7 +125,7 @@ METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, 
 METHOD Activate() CLASS HGridEx
    IF !Empty(::oParent:handle)
       ::Style :=  ::Style - WS_BORDER
-      ::handle := ListView_Create ( ::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ::lNoScroll )
+      ::handle := ListView_Create (::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ::lNoScroll)
       ::Init()
    ENDIF
    RETURN Nil
@@ -262,7 +262,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    IF nCode == NM_CLICK
       iSelect := SendMessage(::handle, LVM_GETNEXTITEM, -1, LVNI_FOCUSED)
 
-      IF ( iSelect == - 1 )
+      IF (iSelect == -1)
          RETURN 0
       ENDIF
 

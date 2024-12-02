@@ -104,7 +104,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
          ::oFont := HFONT():Add(::oParent:oFont:name, ::oParent:oFont:width, ::oParent:oFont:height, ;
                                  ::oParent:oFont:weight, ::oParent:oFont:charset, ::oParent:oFont:italic, 1, ::oParent:oFont:StrikeOut)
       ELSE
-         ::oFont := HFONT():Add("Arial", 0, - 12, , , , IIf(::lAllUnderline, 1, ),)
+         ::oFont := HFONT():Add("Arial", 0, - 12, , , , IIf(::lAllUnderline, 1,),)
       ENDIF
    ELSE
       IF ::oFont:Underline  == 0 .AND. ::lAllUnderline
@@ -204,7 +204,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
             TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
          ENDIF
         */
-   ELSEIF ( msg == WM_MOUSELEAVE .OR. msg == WM_NCMOUSELEAVE )
+   ELSEIF (msg == WM_MOUSELEAVE .OR. msg == WM_NCMOUSELEAVE)
         ::state := LBL_NORMAL
    ELSEIF msg == WM_MOUSEHOVER
    ELSEIF msg == WM_SETCURSOR
@@ -232,7 +232,7 @@ METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
 METHOD GetLinkText() CLASS HStaticLink
 
-   IF ( Empty(::Title) )
+   IF (Empty(::Title))
       RETURN ""
    ENDIF
 
@@ -266,7 +266,7 @@ METHOD OnClicked() CLASS HStaticLink
       ::state := LBL_NORMAL
 
    ELSEIF !Empty(::m_csUrl)
-      IF ( ::m_bFireChild )
+      IF (::m_bFireChild)
          nCtrlID := ::id
          ::SendMessage(::oparent:handle, _HYPERLINK_EVENT, nCtrlID, 0)
       ELSE
@@ -315,22 +315,22 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
    IF ::state != LBL_INIT
       xPos := LOWORD(lParam)
       yPos := HIWORD(lParam)
-      IF (  !PtInRect({ 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos }) ) .AND. ::state != LBL_MOUSEOVER
+      IF (!PtInRect({ 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos })) .AND. ::state != LBL_MOUSEOVER
           res := .T.
       ELSE
         hwg_SetCursor(::m_hHyperCursor)
-        IF ( !PtInRect({ 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos }) )
+        IF (!PtInRect({ 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos }))
            //ReleaseCapture()
            res := .T.
         ENDIF
       ENDIF
-      IF ( res .AND. !::m_bVisited ) .or. ( res .AND. ::m_bVisited )
+      IF (res .AND. !::m_bVisited) .or. (res .AND. ::m_bVisited)
          ::state := LBL_NORMAL
          InvalidateRect(::handle, 0)
          RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ENDIF
-      IF ( ::state == LBL_NORMAL .AND. !res ) .or. ;
-         ( ::state == LBL_NORMAL .AND. !res .and. ::m_bVisited )
+      IF (::state == LBL_NORMAL .AND. !res) .or. ;
+         (::state == LBL_NORMAL .AND. !res .and. ::m_bVisited)
          ::state := LBL_MOUSEOVER
          InvalidateRect(::handle, 0)
          RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -382,7 +382,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
    //dwstyle    := ::style
-   dwFlags  += ( DT_VCENTER + DT_END_ELLIPSIS )
+   dwFlags  += (DT_VCENTER + DT_END_ELLIPSIS)
    
    //::dc:SelectObject(::oFont:handle)
    SelectObject(dc, ::oFont:handle)

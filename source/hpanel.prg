@@ -30,7 +30,7 @@ CLASS HPanel INHERIT HControl
    METHOD Init()
    METHOD Redefine(oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor)
    METHOD Paint()
-   METHOD BackColor(bcolor) INLINE ::SetColor(, bcolor, .T. )
+   METHOD BackColor(bcolor) INLINE ::SetColor(, bcolor, .T.)
    METHOD Hide()
    METHOD Show()
    METHOD Release()
@@ -49,8 +49,8 @@ LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 
    ::lBorder  := IIf(Hwg_Bitand(nStyle, WS_BORDER) + Hwg_Bitand(nStyle, WS_DLGFRAME) > 0, .T., .F.)
    ::bPaint   := bPaint
-   ::lResizeX := ( ::nWidth == 0 )
-   ::lResizeY := ( ::nHeight == 0 )
+   ::lResizeX := (::nWidth == 0)
+   ::lResizeY := (::nHeight == 0)
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:Type == WND_MDI
       IF ::nWidth > ::nHeight .OR. ::nWidth == 0
@@ -86,8 +86,8 @@ LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 
 
    ::bPaint   := bPaint
-   ::lResizeX := ( ::nWidth == 0 )
-   ::lResizeY := ( ::nHeight == 0 )
+   ::lResizeX := (::nWidth == 0)
+   ::lResizeY := (::nHeight == 0)
    hwg_RegPanel()
 
 RETURN Self
@@ -191,8 +191,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       ENDIF
    ENDIF
    IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
-       ( SELFFOCUS(GetParent(::GetParentForm():nInitFocus), ::handle) .OR. ;
-         SELFFOCUS(GetParent(::GetParentForm():nInitFocus), GetParent(::handle)) )
+       (SELFFOCUS(GetParent(::GetParentForm():nInitFocus), ::handle) .OR. ;
+         SELFFOCUS(GetParent(::GetParentForm():nInitFocus), GetParent(::handle)))
       GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
@@ -271,7 +271,7 @@ METHOD Release() CLASS HPanel
    ::ResizeOffSet(3)
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
-      IF (::nWidth > ::nHeight .OR. ::nWidth == 0 ).AND. ::oParent:aOffset[2] > 0
+      IF (::nWidth > ::nHeight .OR. ::nWidth == 0) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] -= ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
          IF ::nLeft == 0
@@ -305,7 +305,7 @@ METHOD Hide() CLASS HPanel
    lres := ::ResizeOffSet(3)
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
-      IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) .AND. ::oParent:aOffset[2] > 0
+      IF (::nWidth > ::nHeight .OR. ::nWidth == 0) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] -= ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
          IF ::nLeft == 0
@@ -333,7 +333,7 @@ METHOD Show() CLASS HPanel
    lRes := ::ResizeOffSet(2)
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
-      IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) .AND. ::oParent:aOffset[2] > 0
+      IF (::nWidth > ::nHeight .OR. ::nWidth == 0) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] += ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
          IF ::nLeft == 0
@@ -356,7 +356,7 @@ METHOD Resize() CLASS HPanel
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
    
-   IF !isWindowVisible(::handle) .OR. ( ::nHeight == nHeight .AND. ::nWidth == nWidth )
+   IF !isWindowVisible(::handle) .OR. (::nHeight == nHeight .AND. ::nWidth == nWidth)
       Return Nil
    ENDIF
 
@@ -365,13 +365,13 @@ METHOD Resize() CLASS HPanel
    ENDIF
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
-      IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 )  //.AND. ::oParent:aOffset[2] > 0
-         ::oParent:aOffset[2] += ( nHeight  - ::nHeight )
+      IF (::nWidth > ::nHeight .OR. ::nWidth == 0) //.AND. ::oParent:aOffset[2] > 0
+         ::oParent:aOffset[2] += (nHeight - ::nHeight)
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
          IF ::nLeft == 0
-            ::oParent:aOffset[1] += ( nWidth - ::nWidth )
+            ::oParent:aOffset[1] += (nWidth - ::nWidth)
          ELSE
-            ::oParent:aOffset[3] += ( nWidth - ::nWidth )
+            ::oParent:aOffset[3] += (nWidth - ::nWidth)
          ENDIF
       ENDIF
       SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
@@ -399,7 +399,7 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
    DEFAULT nMode := 0
 
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
-      IF ( ::nWidth > ::nHeight .OR. ::nWidth == 0 ) //.AND. ::oParent:aOffset[2] > 0 //::nWidth = ::oParent:nWidth )
+      IF (::nWidth > ::nHeight .OR. ::nWidth == 0) //.AND. ::oParent:aOffset[2] > 0 //::nWidth = ::oParent:nWidth)
          ::oParent:aOffset[2] += IIf(nMode != 3, nHinc, - nHinc)
          lRes := .T.
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0

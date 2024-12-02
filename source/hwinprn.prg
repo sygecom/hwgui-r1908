@@ -116,7 +116,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
          ::oPrinter:SetFont(oFont)
          nWidth := ::oPrinter:GetTextWidth(Replicate("A", 80)) / ::oPrinter:nHRes
          IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
-            ::nStdHeight := ::nStdHeight * ( nPWidth / nWidth )
+            ::nStdHeight := ::nStdHeight * (nPWidth / nWidth)
          ENDIF
          oFont:Release()
       ENDIF
@@ -128,8 +128,8 @@ Local nMode := 0, oFont, nWidth, nPWidth
          nMode += 2
       ENDIF
 
-      ::nLineHeight := ( ::nStdHeight / aKoef[nMode+1] ) * ::oPrinter:nVRes
-      ::nLined := ( 25.4 * ::oPrinter:nVRes ) / ::nLineInch - ::nLineHeight
+      ::nLineHeight := (::nStdHeight / aKoef[nMode+1]) * ::oPrinter:nVRes
+      ::nLined := (25.4 * ::oPrinter:nVRes) / ::nLineInch - ::nLineHeight
 
 #ifdef __PLATFORM__Linux__
       IF ::lBold
@@ -197,7 +197,7 @@ Local i, i0, j, slen, c
       ::StartDoc()
    ENDIF
 
-   IF ::y + 2 * ( ::nLineHeight + ::nLined ) > ::oPrinter:nHeight
+   IF ::y + 2 * (::nLineHeight + ::nLined) > ::oPrinter:nHeight
       ::NextPage()
    ENDIF
    ::x := ::nLeft * ::oPrinter:nHRes
@@ -212,14 +212,14 @@ Local i, i0, j, slen, c
       i := 1
       i0 := 0
       DO WHILE i <= slen
-         IF ( c := SubStr(cLine, i, 1) ) < " "
+         IF (c := SubStr(cLine, i, 1)) < " "
             IF i0 != 0
                ::PrintText(Substr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
-         ELSEIF ( j := At(c, cPseudoChar) ) != 0
+         ELSEIF (j := At(c, cPseudoChar)) != 0
             IF i0 != 0
                ::PrintText(Substr(cLine, i0, i - i0))
                i0 := 0
@@ -287,7 +287,7 @@ METHOD PrintText(cText) CLASS HWinPrn
    ENDIF
    ::oPrinter:Say(IIf(::cpFrom!=::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
             ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
-   ::x += ( ::nCharW * Len(cText) )
+   ::x += (::nCharW * Len(cText))
 
 Return Nil
 
@@ -298,7 +298,7 @@ Static aCodes := {   ;
    { Chr(15),, .T.,,,, },      ;     /* Cond */
    { Chr(18),, .F.,,,, },      ;     /* Cancel Cond */
    { Chr(27)+"0",,, 8,,, },    ;     /* 8 lines per inch */
-   { Chr(27)+"2",,, 6,,, },    ;     /* 6 lines per inch ( standard ) */
+   { Chr(27)+"2",,, 6,,, },    ;     /* 6 lines per inch (standard) */
    { Chr(27)+"-1",,,,,, .T. }, ;     /* underline */
    { Chr(27)+"-0",,,,,, .F. }, ;     /* cancel underline */
    { Chr(27)+"4",,,,, .T., },  ;     /* italic */

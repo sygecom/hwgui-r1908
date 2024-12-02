@@ -129,7 +129,7 @@ FUNCTION NICEBUTTPROC(hBtn, msg, wParam, lParam)
    LOCAL oBtn
    IF msg != WM_CREATE
       IF AScan({ WM_MOUSEMOVE, WM_PAINT, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_LBUTTONDBLCLK, WM_DESTROY, WM_MOVING, WM_SIZE }, msg) > 0
-         IF ( oBtn := FindSelf(hBtn) ) == Nil
+         IF (oBtn := FindSelf(hBtn)) == Nil
             RETURN .F.
          ENDIF
 
@@ -262,8 +262,8 @@ METHOD PAINT() CLASS HNICEButton
    y    := Rct[2]
    w    := Rct[3] - Rct[1]
    h    := Rct[4] - Rct[2]
-   XCtr := ( Rct[1] + Rct[3] ) / 2
-   YCtr := ( Rct[2] + Rct[4] ) / 2
+   XCtr := (Rct[1] + Rct[3]) / 2
+   YCtr := (Rct[2] + Rct[4]) / 2
    T    := GetWindowText(::handle)
    // **********************************
    //         Draw our control
@@ -278,9 +278,9 @@ METHOD PAINT() CLASS HNICEButton
    Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
    SetBkMode(hDC, TRANSPARENT)
 
-   IF ( ::State == OBTN_MOUSOVER )
+   IF (::State == OBTN_MOUSOVER)
       SetTextColor(hDC, VCOLOR("FF0000"))
-      TextOut(hDC, XCtr - ( Size[1] / 2 ) + 1, YCtr - ( Size[2] / 2 ) + 1, T)
+      TextOut(hDC, XCtr - (Size[1] / 2) + 1, YCtr - (Size[2] / 2) + 1, T)
    ELSE
       SetTextColor(hDC, VCOLOR("0000FF"))
       TextOut(hDC, XCtr - Size[1] / 2, YCtr - Size[2] / 2, T)

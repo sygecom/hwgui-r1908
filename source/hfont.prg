@@ -96,7 +96,7 @@ METHOD Select(oFont, nCharSet) CLASS HFont
       RETURN NIL
    ENDIF
 
-RETURN ::Add(af[2], af[3], af[4], af[5], IIf(Empty(nCharSet), af[6], nCharSet ), af[7], af[8], af[9], af[1])
+RETURN ::Add(af[2], af[3], af[4], af[5], IIf(Empty(nCharSet), af[6], nCharSet), af[7], af[8], af[9], af[1])
 
 //-------------------------------------------------------------------------------------------------------------------//
 

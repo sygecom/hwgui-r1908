@@ -126,16 +126,16 @@ METHOD Paint(lpdis) CLASS HGraph
    LOCAL py2
    LOCAL nWidth
 
-   i := Round(( x2 - x1 ) / 10, 0)
+   i := Round((x2 - x1) / 10, 0)
    x1 += i
    x2 -= i
-   i := Round(( y2 - y1 ) / 10, 0)
+   i := Round((y2 - y1) / 10, 0)
    y1 += i
    y2 -= i
 
    IF ::nType < 3
-      ::scaleX := ( ::xmax - ::xmin ) / ( x2 - x1 )
-      ::scaleY := ( ::ymax - ::ymin ) / ( y2 - y1 )
+      ::scaleX := (::xmax - ::xmin) / (x2 - x1)
+      ::scaleY := (::ymax - ::ymin) / (y2 - y1)
    ENDIF
 
    IF ::oPenCoor == Nil
@@ -148,8 +148,8 @@ METHOD Paint(lpdis) CLASS HGraph
    FillRect(hDC, drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7], ::brush:handle)
    IF ::nType != 3
       SelectObject(hDC, ::oPenCoor:handle)
-      Drawline(hDC, x1 + ( 0 - ::xmin ) / ::scaleX, drawInfo[5] + 3, x1 + ( 0 - ::xmin ) / ::scaleX, drawInfo[7] - 3)
-      Drawline(hDC, drawInfo[4] + 3, y2 - ( 0 - ::ymin ) / ::scaleY, drawInfo[6] - 3, y2 - ( 0 - ::ymin ) / ::scaleY)
+      Drawline(hDC, x1 + (0 - ::xmin) / ::scaleX, drawInfo[5] + 3, x1 + (0 - ::xmin) / ::scaleX, drawInfo[7] - 3)
+      Drawline(hDC, drawInfo[4] + 3, y2 - (0 - ::ymin) / ::scaleY, drawInfo[6] - 3, y2 - (0 - ::ymin) / ::scaleY)
    ENDIF
 
    IF ::ymax == ::ymin .AND. ::ymax == 0
@@ -161,10 +161,10 @@ METHOD Paint(lpdis) CLASS HGraph
       nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 2 TO nLen
-            px1 := Round(x1 + ( ::aValues[i, j - 1, 1] - ::xmin ) / ::scaleX, 0)
-            py1 := Round(y2 - ( ::aValues[i, j - 1, 2] - ::ymin ) / ::scaleY, 0)
-            px2 := Round(x1 + ( ::aValues[i, j, 1] - ::xmin ) / ::scaleX, 0)
-            py2 := Round(y2 - ( ::aValues[i, j, 2] - ::ymin ) / ::scaleY, 0)
+            px1 := Round(x1 + (::aValues[i, j - 1, 1] - ::xmin) / ::scaleX, 0)
+            py1 := Round(y2 - (::aValues[i, j - 1, 2] - ::ymin) / ::scaleY, 0)
+            px2 := Round(x1 + (::aValues[i, j, 1] - ::xmin) / ::scaleX, 0)
+            py2 := Round(y2 - (::aValues[i, j, 2] - ::ymin) / ::scaleY, 0)
             IF px2 != px1 .OR. py2 != py1
                Drawline(hDC, px1, py1, px2, py2)
             ENDIF
@@ -173,10 +173,10 @@ METHOD Paint(lpdis) CLASS HGraph
          IF ::tbrush == Nil
             ::tbrush := HBrush():Add(::tcolor)
          ENDIF
-         nWidth := Round(( x2 - x1 ) / ( nLen * 2 + 1 ), 0)
+         nWidth := Round((x2 - x1) / (nLen * 2 + 1), 0)
          FOR j := 1 TO nLen
-            px1 := Round(x1 + nWidth * ( j * 2 - 1 ), 0)
-            py1 := Round(y2 - ( ::aValues[i, j, 2] - ::ymin ) / ::scaleY, 0)
+            px1 := Round(x1 + nWidth * (j * 2 - 1), 0)
+            py1 := Round(y2 - (::aValues[i, j, 2] - ::ymin) / ::scaleY, 0)
             FillRect(hDC, px1, y2 - 2, px1 + nWidth, py1, ::tbrush:handle)
          NEXT
       ELSEIF ::nType == 3
@@ -185,7 +185,7 @@ METHOD Paint(lpdis) CLASS HGraph
          ENDIF
          SelectObject(hDC, ::oPenCoor:handle)
          SelectObject(hDC, ::tbrush:handle)
-         pie(hDC, x1 + 10, y1 + 10, x2 - 10, y2 - 10, x1, Round(y1 + ( y2 - y1 ) / 2, 0), Round(x1 + ( x2 - x1 ) / 2, 0), y1)
+         pie(hDC, x1 + 10, y1 + 10, x2 - 10, y2 - 10, x1, Round(y1 + (y2 - y1) / 2, 0), Round(x1 + (x2 - x1) / 2, 0), y1)
       ENDIF
    NEXT
 

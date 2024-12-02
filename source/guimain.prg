@@ -52,7 +52,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
       FOR i := 1 TO Len(pArray)
          // writelog("InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight))
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
-//         IF Empty(pArray[i]:handle ) .AND. !lNoActivate
+//         IF Empty(pArray[i]:handle) .AND. !lNoActivate
             lInit := pArray[i]:lInit
             pArray[i]:lInit := .T.
             pArray[i]:Activate()
@@ -82,11 +82,11 @@ FUNCTION InitControls(oWnd, lNoActivate)
 FUNCTION FindParent(hCtrl, nLevel)
    LOCAL i, oParent, hParent := GetParent(hCtrl)
    IF !Empty(hParent)
-      IF ( i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent}) ) != 0
+      IF (i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent})) != 0
          RETURN HDialog():aModalDialogs[i]
-      ELSEIF ( oParent := HDialog():FindDialog(hParent) ) != Nil
+      ELSEIF (oParent := HDialog():FindDialog(hParent)) != Nil
          RETURN oParent
-      ELSEIF ( oParent := HWindow():FindWindow(hParent) ) != Nil
+      ELSEIF (oParent := HWindow():FindWindow(hParent)) != Nil
          RETURN oParent
       ENDIF
    ENDIF
@@ -94,8 +94,8 @@ FUNCTION FindParent(hCtrl, nLevel)
       nLevel := 0
    ENDIF
    IF nLevel < 2
-      IF ( oParent := FindParent(hParent, nLevel + 1) ) != Nil
-         RETURN oParent:FindControl(, hParent )
+      IF (oParent := FindParent(hParent, nLevel + 1)) != Nil
+         RETURN oParent:FindControl(, hParent)
       ENDIF
    ENDIF
    RETURN Nil
@@ -107,14 +107,14 @@ FUNCTION FindSelf(hCtrl)
       oParent := GetAncestor(hCtrl, GA_PARENT)
    ENDIF
    IF oParent != Nil .AND. !hb_IsNumeric(oParent)
-      RETURN oParent:FindControl(, hCtrl )
+      RETURN oParent:FindControl(, hCtrl)
    ENDIF
    RETURN Nil
 
 FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
-   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
+   IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
       WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
       IF lRedraw != Nil .AND. lRedraw
          RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -125,7 +125,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
 FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
-   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
+   IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
       ntxtLen := SendMessage(aControls[i]:handle, SB_GETTEXTLENGTH, nPart - 1, 0)
       cText := Replicate(Chr(0), ntxtLen)
       SendMessage(aControls[i]:handle, SB_GETTEXT, nPart - 1, @cText)
@@ -239,7 +239,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    IF hb_IsChar(arr)
       lArray := .F.
       aLen := RecCount()
-      IF ( nField := FieldPos(arr) ) == 0
+      IF (nField := FieldPos(arr)) == 0
          RETURN 0
       ENDIF
       nLen := dbFieldInfo(3, nField)
@@ -262,7 +262,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    aArea := GetDeviceArea(hDC)
    aRect := GetWindowRect(GetActiveWindow())
    ReleaseDC(GetActiveWindow(), hDC)
-   height := ( aMetr[1] + 1 ) * aLen + 4 + addY + 8
+   height := (aMetr[1] + 1) * aLen + 4 + addY + 8
    IF height > aArea[2] - aRect[2] - nTop - 60
       height := aArea[2] - aRect[2] - nTop - 60
    ENDIF
@@ -279,13 +279,13 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
       IF hb_IsArray(arr[1])
-         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1]}, "C", nLen ))
+         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent, 1]}, "C", nLen))
       ELSE
-         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}, "C", nLen ))
+         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}, "C", nLen))
       ENDIF
    ELSE
       @ 0, 0 Browse oBrw DATABASE
-      oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), (o:Alias)->(FieldGet(nField))}, "C", nLen ))
+      oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), (o:Alias)->(FieldGet(nField))}, "C", nLen))
    ENDIF
 
    oBrw:oFont  := oFont
@@ -389,7 +389,7 @@ FUNCTION Hwg_GetIni(cSection, cEntry, cDefault, cFile)
 FUNCTION Hwg_WriteIni(cSection, cEntry, cValue, cFile)
    RETURN WritePrivateProfileString(cSection, cEntry, cValue, cFile)
 
-FUNCTION SetHelpFileName ( cNewName )
+FUNCTION SetHelpFileName(cNewName)
    STATIC cName := ""
    LOCAL cOldName := cName
    IF cNewName != Nil

@@ -129,7 +129,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       RETURN ::OnGetTextLength(wParam, lParam)
 
    ELSEIF msg == WM_CHAR
-      IF ( wParam == VK_SPACE )
+      IF (wParam == VK_SPACE)
 
          nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
@@ -137,9 +137,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          ::SetCheck(nIndex, !::GetCheck(nIndex))
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
-      IF ( ::GetParentForm(Self) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self) :lModal )
+      IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
-            GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), -1, 1) )
+            GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN
             GetSkip(::oParent, ::handle, , 1)
@@ -158,16 +158,16 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       pt[1] := LOWORD(lParam)
       pt[2] := HIWORD(lParam)
 
-      IF ( PtInRect(rcClient, pt) )
+      IF (PtInRect(rcClient, pt))
 
          nItemHeight := SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
          nTopIndex := SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
 
          // Compute which index to check/uncheck
-         nIndex := ( nTopIndex + pt[2] / nItemHeight ) + 1
+         nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
 
-         //IF ( PtInRect(rcItem, pt) )
+         //IF (PtInRect(rcItem, pt))
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
             InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
@@ -317,7 +317,7 @@ METHOD SetCheck(nIndex, bFlag) CLASS hCheckComboBox
 
    LOCAL nResult := COMBOBOXSETITEMDATA(::handle, nIndex - 1, bFlag)
 
-   IF ( nResult < 0 )
+   IF (nResult < 0)
       RETURN nResult
    ENDIF
 
@@ -363,7 +363,7 @@ METHOD RecalcText() CLASS hCheckComboBox
    LOCAL i
    LOCAL stritem
 
-   IF ( !::m_bTextUpdated )
+   IF (!::m_bTextUpdated)
 
       // Get the list count
       ncount := SendMessage(::handle, CB_GETCOUNT, 0, 0)
@@ -383,7 +383,7 @@ METHOD RecalcText() CLASS hCheckComboBox
 
       FOR i := 1 TO ncount
 
-         IF ( COMBOBOXGETITEMDATA(::handle, i) ) == 1
+         IF (COMBOBOXGETITEMDATA(::handle, i)) == 1
 
             COMBOBOXGETLBTEXT(::handle, i, @stritem)
 
@@ -416,7 +416,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
    LOCAL metrics
    LOCAL nstate
 
-   IF ( drawInfo[1] < 0 )
+   IF (drawInfo[1] < 0)
 
       ::RecalcText()
 
@@ -427,7 +427,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
    ELSE
       COMBOBOXGETLBTEXT(::handle, drawInfo[1], @strtext)
 
-      ncheck := 1 + ( COMBOBOXGETITEMDATA(::handle, drawInfo[1]) )
+      ncheck := 1 + (COMBOBOXGETITEMDATA(::handle, drawInfo[1]))
 
       metrics := GETTEXTMETRIC(dc)
 
@@ -440,13 +440,13 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       ::nWidthCheck := rcBitmap[3]
    ENDIF
 
-   IF ( ncheck > 0 )
+   IF (ncheck > 0)
       SetBkColor(dc, GetSysColor(COLOR_WINDOW))
       SetTextColor(dc, GetSysColor(COLOR_WINDOWTEXT))
 
       nstate := DFCS_BUTTONCHECK
 
-      IF ( ncheck > 1 )
+      IF (ncheck > 1)
          nstate := hwg_bitor(nstate, DFCS_CHECKED)
       ENDIF
 
@@ -454,7 +454,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       DrawFrameControl(dc, rcBitmap, DFC_BUTTON, nstate)
    ENDIF
 
-   IF ( hwg_Bitand(drawInfo[9], ODS_SELECTED) != 0 )
+   IF (hwg_Bitand(drawInfo[9], ODS_SELECTED) != 0)
       SetBkColor(dc, GetSysColor(COLOR_HIGHLIGHT))
       SetTextColor(dc, GetSysColor(COLOR_HIGHLIGHTTEXT))
 
@@ -472,7 +472,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
 
    DrawText(dc, " " + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS)
 
-   IF ( ( hwg_Bitand(drawInfo[9], ODS_FOCUS + ODS_SELECTED) ) == ( ODS_FOCUS + ODS_SELECTED ) )
+   IF ((hwg_Bitand(drawInfo[9], ODS_FOCUS + ODS_SELECTED)) == (ODS_FOCUS + ODS_SELECTED))
       DrawFocusRect(dc, rcText)
    ENDIF
 
@@ -499,7 +499,7 @@ METHOD MeasureItem(l) CLASS hCheckComboBox
 
       lpMeasureItemStruct[5] += 2
 
-      IF ( !::m_bItemHeightSet )
+      IF (!::m_bItemHeightSet)
          ::m_bItemHeightSet := .T.
          SendMessage(::handle, CB_SETITEMHEIGHT, - 1, MAKELONG(lpMeasureItemStruct[5], 0))
       ENDIF
@@ -516,7 +516,7 @@ METHOD OnGetText(wParam, lParam) CLASS hCheckComboBox
 
    ::RecalcText()
 
-   IF ( lParam == 0 )
+   IF (lParam == 0)
       RETURN 0
    ENDIF
 

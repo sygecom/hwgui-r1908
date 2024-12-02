@@ -94,7 +94,7 @@ CLASS RichText
 
 
    // Core methods for writing control codes & data to the output file
-   METHOD TextCode(cCode) //INLINE FWRITE(::hFile, FormatCode(cCode) )
+   METHOD TextCode(cCode) //INLINE FWRITE(::hFile, FormatCode(cCode))
    METHOD NumCode(cCode, nValue, lScale)
    METHOD LogicCode(cCode, lTest)
    METHOD Write(xData, lCodesOK)
@@ -270,7 +270,7 @@ METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nSc
    ENDIF
 
 // If no extension specified in file name, use ".RTF"
-   IF !( "." $ ::cFileName )
+   IF !("." $ ::cFileName)
       ::cFileName += ".RTF"
    ENDIF
 
@@ -736,7 +736,7 @@ FUNCTION FormatCode(cCode)
 *
 *********************************************************************
    cCode := AllTrim(cCode)
-   IF !( Left(cCode, 1) == "\" )
+   IF !(Left(cCode, 1) == "\")
       cCode := "\" + cCode
    ENDIF
 
@@ -1663,7 +1663,7 @@ METHOD SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, ;
       RETURN NIL
    ENDIF
 
-   ancho := Round(( 1.25 * ASize[1] * ::nScale) + 0.5, 0 )
+   ancho := Round((1.25 * ASize[1] * ::nScale) + 0.5, 0)
    ::TextCode("absh0")
    ::NumCode("absw", ancho, .F.)
 
@@ -2226,7 +2226,7 @@ METHOD CellFormat(cCellBorder, aCellPct) CLASS RichText
    DEFAULT cCellBorder TO ::cCellBorder, ;
    aCellPct TO AClone(::aColPct)
 
-   ::TableDef(,, cCellBorder, aCellPct )
+   ::TableDef(,, cCellBorder, aCellPct)
 
    RETURN NIL
 **********************  END OF CellFormat()  ***********************
@@ -2348,7 +2348,7 @@ n_bloque:=1
 cMenInter:=space(n_bloque)
 lHecho:=.F.
 
-IF LoadPicture(cName,@nWidth,@nHeight,@ScreenResX,@ScreenResY) //NViewLib32( AllTrim(cName ))
+IF LoadPicture(cName,@nWidth,@nHeight,@ScreenResX,@ScreenResY) //NViewLib32(AllTrim(cName))
 
         aInches[1]:= ROUND(((nWidth/ScreenResX)*::nScale)+0.5, 0)
         aInches[2]:= ROUND(((nHeight/ScreenResY)*::nScale)+0.5, 0)

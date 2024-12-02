@@ -112,7 +112,7 @@ FUNCTION Hwg_FindMenuItem(aMenu, nId, nPos)
       IF aMenu[1, nPos, 3] == nId
          RETURN aMenu
       ELSEIF Len(aMenu[1, nPos]) > 4
-         IF ( aSubMenu := Hwg_FindMenuItem(aMenu[1, nPos] , nId, @nPos1) ) != Nil
+         IF (aSubMenu := Hwg_FindMenuItem(aMenu[1, nPos] , nId, @nPos1)) != Nil
             nPos := nPos1
             RETURN aSubMenu
          ENDIF
@@ -141,7 +141,7 @@ FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
       nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1, nPosParent]
       /* This code just for sure menu runtime hfrmtmpl.prg is enable */
-      IIf(hb_IsLogical(aMenu[4]), aMenu[4] := .F., )
+      IIf(hb_IsLogical(aMenu[4]), aMenu[4] := .F.,)
       hMenu := hwg__AddMenuItem(hMenu, aMenu[2], nPos + 1, .T., aMenu[3], aMenu[4], .T.)
       IF Len(aMenu) < 5
          AAdd(aMenu, hMenu)
@@ -157,7 +157,7 @@ FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
       ELSE
          IF aMenu[1, nPos, 1] == Nil .OR. aMenu[1, nPos, 2] != Nil
             /* This code just for sure menu runtime hfrmtmpl.prg is enable */
-            IIf(hb_IsLogical(aMenu[1, nPos, 4]), aMenu[1, nPos, 4] := .F., )
+            IIf(hb_IsLogical(aMenu[1, nPos, 4]), aMenu[1, nPos, 4] := .F.,)
             hwg__AddMenuItem(hMenu, aMenu[1, nPos, 2], nPos, .T., ;
                               aMenu[1, nPos, 3], aMenu[1, nPos, 4], .F.)
             oBmp := Hwg_SearchPosBitmap(aMenu[1, nPos, 3])
@@ -319,7 +319,7 @@ FUNCTION Hwg_SearchPosBitmap(nPos_Id)
 FUNCTION DeleteMenuItem(oWnd, nId)
    LOCAL aSubMenu, nPos
 
-   IF ( aSubMenu := Hwg_FindMenuItem(oWnd:menu, nId, @nPos) ) != Nil
+   IF (aSubMenu := Hwg_FindMenuItem(oWnd:menu, nId, @nPos)) != Nil
       ADel(aSubMenu[1], nPos)
       ASize(aSubMenu[1], Len(aSubMenu[1]) - 1)
 

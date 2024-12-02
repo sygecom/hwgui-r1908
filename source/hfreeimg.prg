@@ -76,7 +76,7 @@ METHOD AddFromVar(cImage, cType) CLASS HFreeImage
 
 METHOD FromBitmap(oBitmap) CLASS HFreeImage
 
-   ::handle := FI_Bmp2FI( oBitmap:handle )
+   ::handle := FI_Bmp2FI(oBitmap:handle)
    ::name := LTrim(Str(oBitmap:handle))
    ::nWidth  := FI_GetWidth(::handle)
    ::nHeight := FI_GetHeight(::handle)
