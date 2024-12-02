@@ -194,7 +194,7 @@ FUNCTION SayDollar(nDollar)
     nPJ := LEN(cDollar)
 ENDDO
 
-RETURN (xSay)
+RETURN xSay
 // eof SayDollar
 
 
@@ -217,7 +217,7 @@ FUNCTION SayRupiah(nAngka)
 
    kalimat += IIf(char != "000", " koma " + tigades(char, 1) + "sen", "")
 
-RETURN (kalimat)
+RETURN kalimat
 
 
 
@@ -246,7 +246,7 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
        ELSE;     say += bil(x2)+"PULUH "+bil(x3)
        ENDIF
 
- RETURN (say)
+ RETURN say
 
 
 #define  bil_asli { "SATU", "DUA", "TIGA", "EMPAT", "LIMA", "ENAM", "TUJUH", "DELAPAN", "SEMBILAN" }

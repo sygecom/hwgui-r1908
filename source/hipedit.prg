@@ -110,12 +110,12 @@ METHOD SetValue(aValue) CLASS HIPedit
 
 METHOD GetValue() CLASS HIPedit
    ::aValue := GETIPADDRESS(::handle)
-   RETURN ( ::aValue )
+   RETURN ::aValue
 
 METHOD Clear() CLASS HIPedit
    CLEARIPADDRESS(::handle)
    ::aValue := { 0, 0, 0, 0 }
-   RETURN ( ::aValue )
+   RETURN ::aValue
 
 
 METHOD END() CLASS HIPedit

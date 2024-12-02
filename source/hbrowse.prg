@@ -512,7 +512,7 @@ METHOD SetRowHeight(nPixels) CLASS HBrowse
       ENDIF
    ENDIF
 
-   RETURN (nOldPixels)
+   RETURN nOldPixels
 
 
 //----------------------------------------------------//

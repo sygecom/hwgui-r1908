@@ -445,7 +445,7 @@ LRESULT APIENTRY RichSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
     res = hwg_par_LRESULT(-1);
     if (res == -1)
     {
-      return (CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam));
+      return CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam);
     }
     else
     {
@@ -454,7 +454,7 @@ LRESULT APIENTRY RichSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
   }
   else
   {
-    return (CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam));
+    return CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam);
   }
 }
 

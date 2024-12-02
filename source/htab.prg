@@ -870,9 +870,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
           InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
        ENDIF
        IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
-          RETURN ( ::oParent:onEvent(msg, wparam, lparam) )
+          RETURN ::oParent:onEvent(msg, wparam, lparam)
        ELSE
-          RETURN ( ::super:onevent(msg, wparam, lparam ) )
+          RETURN ::super:onevent(msg, wparam, lparam )
        ENDIF
    ELSEIF msg == WM_GETDLGCODE
       IF wparam == VK_RETURN .OR. wParam == VK_ESCAPE .AND. ;

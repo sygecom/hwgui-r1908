@@ -118,7 +118,7 @@ METHOD GetValue() CLASS HMonthCalendar
 
    ::value := GetMonthCalendarDate(::handle)
 
-   RETURN ( ::value )
+   RETURN ::value
 
 METHOD onChange() CLASS HMonthCalendar
 

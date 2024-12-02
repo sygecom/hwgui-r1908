@@ -59,7 +59,7 @@
 #if defined(__DMC__)
 __inline long PtrToLong(const void *p)
 {
-  return ((long)p);
+  return (long)p;
 }
 #endif
 

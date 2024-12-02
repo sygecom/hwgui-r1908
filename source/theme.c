@@ -1147,7 +1147,7 @@ static int image_left(int cx, const RECT *Rect, DWORD style)
     x = Rect->left + ((Rect->right - Rect->left) - cx) / 2;
   }
 
-  return (x);
+  return x;
 }
 
 // calcultate the top position of the image so it is drawn on top, bottom or vertically centred (the default)
@@ -1174,7 +1174,7 @@ static int image_top(int cy, const RECT *Rect, DWORD style)
     y = Rect->top + ((Rect->bottom - Rect->top) - cy) / 2;
   }
 
-  return (y);
+  return y;
 }
 
 HB_FUNC(INITTHEMELIB)
@@ -1213,7 +1213,7 @@ LRESULT OnButtonDraw(LPARAM  lParam)
       LPDRAWITEMSTRUCT lpDIS = (LPDRAWITEMSTRUCT) lParam;
 
 //            if(lpDIS->CtlID != IDC_OWNERDRAW_BTN)
-//                return (0);
+//                return 0;
 
       HDC dc = lpDIS->hDC;
             HTHEME hTheme = hb_OpenThemeData (m_hWnd, L"BUTTON");
@@ -1367,7 +1367,7 @@ bIsDisabled, iStyle);
         InflateRect(&focusRect, -3, -3);
         DrawFocusRect(dc, &focusRect);
         } // if
-      return (TRUE);
+      return TRUE;
       }
   */
 

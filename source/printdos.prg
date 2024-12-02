@@ -605,7 +605,7 @@ static HB_BOOL file_read ( FILE *stream, char *string )
       if (cnbr >= LINE_MAX)
       {
         string[LINE_MAX] = '\0';
-        return (HB_TRUE);
+        return HB_TRUE;
       }
    }
 }
