@@ -157,7 +157,7 @@ RETURN NIL
 
 METHOD FindWindow(hWndTitle) CLASS HWindow
 
-   LOCAL cType := VALTYPE(hWndTitle)
+   LOCAL cType := ValType(hWndTitle)
    LOCAL i
 
    IF cType != "C"

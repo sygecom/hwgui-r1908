@@ -2379,7 +2379,7 @@ IF LoadPicture(cName,@nWidth,@nHeight,@ScreenResX,@ScreenResY) //NViewLib32( All
    do while !lHecho
            nBytes:=fread(in, @cMenInter, n_bloque)
            IF nBytes > 0
-              codigo:=PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+              codigo:=PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
          FWRITE(::hfile, codigo)
            else
                    lHecho:= .T.
@@ -2441,7 +2441,7 @@ IF cBRead > 0
    do while !lHecho
            nBytes := fread(in, @cMenInter, n_bloque)
            IF nBytes > 0
-              codigo := PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+              codigo := PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
          FWRITE(::hFile, codigo)
            else
                    lHecho := .T.
@@ -2505,7 +2505,7 @@ lHecho:=.F.
 
    cDir   := GetEnv("TEMP")
 
-   temp:=cDir+"\tmp"+padl(ALLTRIM(STR(::nFile, 4, 0)), 4, "0")+".wmf"
+   temp:=cDir+"\tmp"+padl(AllTrim(Str(::nFile, 4, 0)), 4, "0")+".wmf"
 
    hDCOut := CreateMetaFile(temp)
 
@@ -2569,7 +2569,7 @@ lHecho:=.F.
       do while !lHecho
               nBytes:=fread(in, @cMenInter, n_bloque)
               IF nBytes > 0
-                 codigo:=PADL(L_DTOHEX(ASC(cMenInter)), 2, "0")
+                 codigo:=PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
             FWRITE(::hFile, codigo)
               else
                       lHecho:= .T.

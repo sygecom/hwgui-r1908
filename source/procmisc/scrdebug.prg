@@ -209,13 +209,13 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 #else
    IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
-      bOldError := ERRORBLOCK( {|e|MacroError(e)} )
+      bOldError := ErrorBlock( {|e|MacroError(e)} )
       BEGIN SEQUENCE
          bCodeblock := &( "{||" + xRes + "}" )
       RECOVER
          lRes := .F.
       END SEQUENCE
-      ERRORBLOCK( bOldError )
+      ErrorBlock( bOldError )
    ENDIF
 
    IF lRes
@@ -238,13 +238,13 @@ Return .T.
 Static Function CalcWatch( n )
 Local xRes, bOldError, lRes := .T., cType
 
-   bOldError := ERRORBLOCK( {|e|MacroError(e)} )
+   bOldError := ErrorBlock( {|e|MacroError(e)} )
    BEGIN SEQUENCE
       xRes := Eval(aWatches[n, 2])
    RECOVER
       lRes := .F.
    END SEQUENCE
-   ERRORBLOCK( bOldError )
+   ErrorBlock( bOldError )
 
    IF lRes
       IF ( cType := Valtype(xRes) ) == "N"
@@ -274,13 +274,13 @@ Local xRes, bOldError, lRes := .T., cType
 #else
    IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
-      bOldError := ERRORBLOCK( {|e|MacroError(e)} )
+      bOldError := ErrorBlock( {|e|MacroError(e)} )
       BEGIN SEQUENCE
          xRes := &xRes
       RECOVER
          lRes := .F.
       END SEQUENCE
-      ERRORBLOCK( bOldError )
+      ErrorBlock( bOldError )
    ENDIF
 
    IF lRes

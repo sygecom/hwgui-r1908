@@ -115,7 +115,7 @@ METHOD New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPi
 
    ::heading   := IIf(cHeading == NIL, "", cHeading)
    ::block     := block
-   ::Type      := IIf(Type != Nil, UPPER(Type), Type)
+   ::Type      := IIf(Type != Nil, Upper(Type), Type)
    ::length    := length
    ::dec       := dec
    ::lEditable := IIf(lEditable != Nil, lEditable, ::lEditable)
@@ -1348,7 +1348,7 @@ METHOD InsColumn(oColumn, nPos) CLASS HBrowse
 
 STATIC FUNCTION InitColumn(oBrw, oColumn, n)
    LOCAL xres, ctype
-   LOCAL cname := "Column" + LTrim(STR(Len(oBrw:aColumns)))
+   LOCAL cname := "Column" + LTrim(Str(Len(oBrw:aColumns)))
 
    IF oColumn:Type == Nil
       oColumn:Type := ValType(Eval(oColumn:block,, oBrw, n))
@@ -2740,7 +2740,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                      lColumnFont := .F.
                   ENDIF
                   IF ::aColumns[::nPaintCol]:Hint
-                      AADD(::aColumns[::nPaintCol]:aHints, sViv)
+                      AAdd(::aColumns[::nPaintCol]:aHints, sViv)
                   ENDIF
                   DrawText(hDC, sviv, ;
                             x + ::aMargin[4] + 1, ;
@@ -2774,7 +2774,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
             IF nCol > 0 .AND. lSelected .AND. nCol == nColumn
                nCol ++
             ENDIF
-            IF nColumn == LEN(::aColumns) .AND. !lFixed
+            IF nColumn == Len(::aColumns) .AND. !lFixed
                nColumn := hb_RAscan(::aColumns, {| c | c:lhide = .F. }) - 1
                ::nPaintCol := nColumn
                x -= ::aColumns[::nPaintCol + 1]:width
@@ -4597,7 +4597,7 @@ STATIC FUNCTION FltRecCount(oBrw)
       IF Eval(oBrw:bFor, oBrw)
          nCount ++
          IF oBrw:lFilter
-            AADD(oBrw:aRecnoFilter, (oBrw:Alias)->(recno()))
+            AAdd(oBrw:aRecnoFilter, (oBrw:Alias)->(recno()))
          ENDIF
       ENDIF
       (oBrw:Alias)->(DBSkip())

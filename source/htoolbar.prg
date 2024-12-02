@@ -464,17 +464,17 @@ METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nI
 
    IF nId == NIL .OR. Empty(nId)
       //IDTOOLBAR
-      nId := VAL(RIGHT(STR(::id, 6), 1)) * IDMAXBUTTONTOOLBAR
-      nId := nId + ::id + IDTOOLBAR + LEN(::aButtons) + LEN(::aSeparators) + 1
+      nId := VAL(Right(Str(::id, 6), 1)) * IDMAXBUTTONTOOLBAR
+      nId := nId + ::id + IDTOOLBAR + Len(::aButtons) + Len(::aSeparators) + 1
    ENDIF
 
    IF bStyle != BTNS_SEP //1
-      DEFAULT cName TO "oToolButton" + LTRIM(STR(LEN(::aButtons) + 1))
+      DEFAULT cName TO "oToolButton" + LTrim(Str(Len(::aButtons) + 1))
       AAdd(::aButtons, {Alltrim(cName), nid})
    ELSE
-      bstate := IIf(!(::lVertical .AND. LEN(::aButtons) == 0), bState, 8) //TBSTATE_HIDE
+      bstate := IIf(!(::lVertical .AND. Len(::aButtons) == 0), bState, 8) //TBSTATE_HIDE
       DEFAULT nBitIp TO 0
-      DEFAULT cName TO "oSeparator" + LTRIM(STR(LEN(::aSeparators) + 1))
+      DEFAULT cName TO "oSeparator" + LTrim(Str(Len(::aSeparators) + 1))
       AAdd(::aSeparators,{cName, nid})
       //bStyle := TBSTYLE_SEP //TBSTYLE_FLAT
    ENDIF

@@ -418,15 +418,15 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
 
    oCtrl := IIf(oCtrl == NIL, Self, oCtrl)
    lAll := IIf(lAll == NIL, .F., lAll)
-   nLen := LEN(oCtrl:aControls)
+   nLen := Len(oCtrl:aControls)
 
    IF IsWindowVisible(::handle) .OR. nLen > 0
       FOR i := 1 TO nLen
          oCtrlTmp := oCtrl:aControls[i]
          lRefresh := !Empty(__ObjHasMethod(oCtrlTmp, "REFRESH"))
-         IF ((oCtrlTmp:handle != hCtrl .OR. LEN(oCtrlTmp:aControls) == 0) .OR. lAll) .AND. ;
+         IF ((oCtrlTmp:handle != hCtrl .OR. Len(oCtrlTmp:aControls) == 0) .OR. lAll) .AND. ;
             (!oCtrlTmp:lHide .OR. __ObjHasMsg(oCtrlTmp, "BSETGET"))
-            IF LEN(oCtrlTmp:aControls) > 0
+            IF Len(oCtrlTmp:aControls) > 0
                ::Refresh(lAll, oCtrlTmp)
             ELSEIF !Empty(lRefresh) .AND. (lAll .OR. ASCAN(::GetList, {|o|o:handle == oCtrlTmp:handle}) > 0)
                oCtrlTmp:Refresh()
@@ -947,11 +947,11 @@ METHOD SetAll(cProperty, Value, aControls, cClass) CLASS HCustomWindow
    //LOCAL oCtrl
 
    aControls := IIf(Empty(aControls), ::aControls, aControls)
-   nLen := IIf(hb_IsChar(aControls), Len(::&aControls), LEN(aControls))
+   nLen := IIf(hb_IsChar(aControls), Len(::&aControls), Len(aControls))
    FOR i := 1 TO nLen
       IF hb_IsChar(aControls)
          ::&aControls[i]:&cProperty := Value
-      ELSEIF cClass == NIL .OR. UPPER(cClass) == aControls[i]:ClassName
+      ELSEIF cClass == NIL .OR. Upper(cClass) == aControls[i]:ClassName
          IF Value == NIL
             __mvPrivate("oCtrl")
             &("oCtrl") := aControls[i]
@@ -1302,7 +1302,7 @@ FUNCTION FindAccelerator(oCtrl, lParam)
    LOCAL i
    LOCAL pos
 
-   nlen := LEN(oCtrl:aControls)
+   nlen := Len(oCtrl:aControls)
    FOR i := 1 TO nLen
       IF oCtrl:aControls[i]:classname = "HTAB"
          IF (pos := FindTabAccelerator(oCtrl:aControls[i], lParam)) > 0 .AND. ;
@@ -1311,7 +1311,7 @@ FUNCTION FindAccelerator(oCtrl, lParam)
             RETURN oCtrl:aControls[i]
          ENDIF
       ENDIF
-      IF LEN(oCtrl:aControls[i]:aControls) > 0
+      IF Len(oCtrl:aControls[i]:aControls) > 0
          RETURN FindAccelerator(oCtrl:aControls[i], lParam)
       ENDIF
       IF __ObjHasMsg(oCtrl:aControls[i], "TITLE") .AND. hb_IsChar(oCtrl:aControls[i]:title) .AND. ;

@@ -381,9 +381,9 @@ METHOD ControlSource(cControlSource) CLASS HControl
 
    IF cControlSource != NIL .AND. !Empty(cControlSource) .AND. __objHasData(Self, "BSETGETFIELD")
       ::xControlSource := cControlSource
-      temp := SUBSTR(cControlSource, AT("->", cControlSource) + 2)
-      ::bSetGetField := IIf("->" $ cControlSource, FieldWBlock(temp, SELECT(SUBSTR(cControlSource, 1, ;
-         AT("->", cControlSource) - 1))), FieldBlock(cControlSource))
+      temp := SubStr(cControlSource, At("->", cControlSource) + 2)
+      ::bSetGetField := IIf("->" $ cControlSource, FieldWBlock(temp, SELECT(SubStr(cControlSource, 1, ;
+         At("->", cControlSource) - 1))), FieldBlock(cControlSource))
    ENDIF
 
 RETURN ::xControlSource
@@ -541,7 +541,7 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
                RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
             ENDIF
          ELSE
-             IF LEN(::aControls) == 0 .AND. ::Title != NIL
+             IF Len(::aControls) == 0 .AND. ::Title != NIL
                InvalidateRect(::handle, 0)
              ENDIF
              IF w1 > w9

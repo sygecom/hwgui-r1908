@@ -590,7 +590,7 @@ METHOD Refresh() CLASS HComboBox
          IF ::lText
          //vari := IIf(::bSetGetField != Nil .AND. hb_IsChar(vari), Trim(vari), vari)
             ::value := IIf(vari == Nil .OR. !hb_IsChar(vari), "", vari)
-               //SendMessage(::handle, CB_SETEDITSEL, 0, LEN(::value))
+               //SendMessage(::handle, CB_SETEDITSEL, 0, Len(::value))
          ELSE
             ::value := IIf(vari == Nil .OR. !hb_IsNumeric(vari), 1, vari)
          ENDIF
@@ -783,12 +783,12 @@ METHOD DeleteItem(xIndex) CLASS HComboBox
    ELSE
        nIndex := xIndex
    ENDIF
-   IF SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= LEN(ocombo:aitems)
-      Adel(::Aitems, nIndex)
-      Asize(::Aitems, Len(::aitems) - 1)
+   IF SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= Len(ocombo:aitems)
+      ADel(::Aitems, nIndex)
+      ASize(::Aitems, Len(::aitems) - 1)
       IF Len(::AitemsBound) > 0
-         ADEL(::AitemsBound, nIndex)
-         ASIZE(::AitemsBound, Len(::aitemsBound) - 1)
+         ADel(::AitemsBound, nIndex)
+         ASize(::AitemsBound, Len(::aitemsBound) - 1)
       ENDIF
       RETURN .T.
    ENDIF
@@ -811,7 +811,7 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
          aSize(::AitemsBound, nCount + 1)
          aIns(::AitemsBound, nPos, cItemBound)
       ELSE
-         AADD(::AitemsBound, cItemBound)
+         AAdd(::AitemsBound, cItemBound)
       ENDIF
       ::columnBound := 2
    ENDIF
@@ -819,7 +819,7 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
        aSize(::Aitems, nCount + 1)
        aIns(::Aitems, nPos, cItem)
     ELSE
-       AADD(::Aitems, cItem)
+       AAdd(::Aitems, cItem)
     ENDIF
     IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
        ComboInsertString( ::handle, nPos - 1, cItem )  //::aItems[i] )
@@ -991,7 +991,7 @@ METHOD RowSource(xSource) CLASS HComboBox
    IF xSource != Nil
       IF hb_IsArray(xSource)
         IF Len(xSource) > 0 .AND. !hb_IsArray(xSource[1]) .AND. Len(xSource) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
-           ::xrowsource := {xSource[1], IIf(LEN(xSource) > 1, xSource[2], Nil)}
+           ::xrowsource := {xSource[1], IIf(Len(xSource) > 1, xSource[2], Nil)}
         ENDIF
       ELSE
          ::xrowsource := {xSource, Nil}
@@ -1024,7 +1024,7 @@ METHOD Populate() CLASS HComboBox
           cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
       value := StrTran(xRowSource, calias + "->", , , 1, 1)
-      cAlias := IIf(VALTYPE(xRowSource) == "U", Nil, cAlias)
+      cAlias := IIf(ValType(xRowSource) == "U", Nil, cAlias)
       cValueBound := IIf(::xrowsource[2]  != Nil .AND. cAlias != Nil, StrTran(::xrowsource[2], calias + "->"), Nil)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
@@ -1047,9 +1047,9 @@ METHOD Populate() CLASS HComboBox
       (cAlias)->(DBGOTOP())
        i := 1
        DO WHILE !(cAlias)->(EOF())
-         AADD(::Aitems, (cAlias)->(&(value)))
+         AAdd(::Aitems, (cAlias)->(&(value)))
          IF !Empty(cvaluebound)
-            AADD(::AitemsBound, (cAlias)->(&(cValueBound)))
+            AAdd(::AitemsBound, (cAlias)->(&(cValueBound)))
          ENDIF
          ComboAddString( ::handle, ::aItems[i] )
          numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
@@ -1066,9 +1066,9 @@ METHOD Populate() CLASS HComboBox
        FOR i := 1 TO Len(::aItems)
           IF ::columnBound > 1
              IF hb_IsArray(::aItems[i]) .AND. Len(::aItems[i]) > 1
-                AADD(::AitemsBound, ::aItems[i, 2 ])
+                AAdd(::AitemsBound, ::aItems[i, 2 ])
              ELSE
-                AADD(::AitemsBound, Nil)
+                AAdd(::AitemsBound, Nil)
              ENDIF
              ::aItems[i] := ::aItems[i, 1]
              ComboAddString( ::handle, ::aItems[i] )

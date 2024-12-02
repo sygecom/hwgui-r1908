@@ -162,7 +162,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
-         RE_INSERTTEXT(::handle, CHR(VK_TAB))
+         RE_INSERTTEXT(::handle, Chr(VK_TAB))
           RETURN 0
       ENDIF
       IF wParam == VK_ESCAPE .AND. ::GetParentForm():handle != ::oParent:handle

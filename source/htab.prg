@@ -421,7 +421,7 @@ METHOD EndPage() CLASS HTab
    
    LOCAL i
    LOCAL cName
-   LOCAL cPage := "Page" + AllTrim(STR(::nActive))
+   LOCAL cPage := "Page" + AllTrim(Str(::nActive))
 
    IF !::lResourceTab
       ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
@@ -523,11 +523,11 @@ METHOD HidePage(nPage) CLASS HTab
       nFirst := ::aPages[nPage, 1] + 1
       nEnd := ::aPages[nPage, 1] + ::aPages[nPage, 2]
       FOR i := nFirst TO nEnd
-         IF ( k:= ASCAN(::aControlsHide, ::aControls[i]:id) ) == 0 .AND. ::aControls[i]:lHide
-            AADD(::aControlsHide, ::aControls[i]:id)
+         IF ( k:= AScan(::aControlsHide, ::aControls[i]:id) ) == 0 .AND. ::aControls[i]:lHide
+            AAdd(::aControlsHide, ::aControls[i]:id)
          ELSEIF k > 0 .AND. !::aControls[i]:lHide
-            ADEL(::aControlsHide, k)
-            ASIZE(::aControlsHide, Len(::aControlsHide) - 1)
+            ADel(::aControlsHide, k)
+            ASize(::aControlsHide, Len(::aControlsHide) - 1)
          ENDIF
          ::aControls[i]:Hide()
       NEXT

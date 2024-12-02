@@ -302,9 +302,9 @@ METHOD CreateBarcode(cCode) CLASS BarCode
    NEXT
 
    /*
-   FOR i := 1 TO LEN(cCode)
+   FOR i := 1 TO Len(cCode)
 
-      IF SUBSTR(cCode, i, 1) = "1"
+      IF SubStr(cCode, i, 1) = "1"
          IF ::lHorizontal = .T.
             Rectangle(::hDC, nX, nY, nX + ::nHeight, (nY += ::nPinWidth))
          ELSE

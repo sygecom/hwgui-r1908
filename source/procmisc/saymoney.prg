@@ -16,9 +16,9 @@
 // English Say Money
 FUNCTION SayDollar(nDollar)
 
- LOCAL cDollar := Right(LTrim(STR(nDollar, 15)), 11)
+ LOCAL cDollar := Right(LTrim(Str(nDollar, 15)), 11)
  LOCAL nAA := 1
- LOCAL nPJ := LEN(cDollar)
+ LOCAL nPJ := Len(cDollar)
  LOCAL xSay := "", xLang2, xLang1, xMuch, xNum, xteen
  LOCAL mm := 0
  LOCAL nTest := 0
@@ -29,7 +29,7 @@ FUNCTION SayDollar(nDollar)
     xLang2 := ""
     xLang1 := ""
     xMuch := "ONE"
-    xNum := LEFT(cDollar, 1)
+    xNum := Left(cDollar, 1)
 
     IF nPJ=6.AND.xNum="0".OR.nPJ=5.AND.xNum="0".AND.nCheck1=1
         nCheck1 := 1
@@ -124,7 +124,7 @@ FUNCTION SayDollar(nDollar)
         CASE xNum="9"
             xLang1 = "NINE"
     ENDCASE
-    cDollar := RIGHT(cDollar,(nPJ-1))
+    cDollar := Right(cDollar,(nPJ-1))
     xMuch := xLang1
 
     IF xNum != "0".OR.xNum="0".AND.nPJ=7.OR.xNum="0".AND.nPJ=4
@@ -191,7 +191,7 @@ FUNCTION SayDollar(nDollar)
         ENDIF
         nTest := 0
     ENDIF
-    nPJ := LEN(cDollar)
+    nPJ := Len(cDollar)
 ENDDO
 
 RETURN xSay
@@ -213,7 +213,7 @@ FUNCTION SayRupiah(nAngka)
       kalimat += kata
    NEXT
 
-   char := "0" + Right(STR(nAngka, 18, 2), 2)
+   char := "0" + Right(Str(nAngka, 18, 2), 2)
 
    kalimat += IIf(char != "000", " koma " + tigades(char, 1) + "sen", "")
 

@@ -102,13 +102,13 @@ METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) CLASS hrebar
    LOCAL i
 
    IF pBar != Nil
-      AADD(::aBands, { pBar, pszText, clrFore, clrBack, pbmp, dwStyle })
+      AAdd(::aBands, { pBar, pszText, clrFore, clrBack, pbmp, dwStyle })
    ENDIF
    IF !::lInit
        RETURN Nil
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
-   FOR i := 1 TO LEN(::aBands)
+   FOR i := 1 TO Len(::aBands)
       ::aBands[i, 4] := IIf(::aBands[i, 4] == Nil, GetSysColor(COLOR_3DFACE), ::aBands[i, 4])
       ::aBands[i, 6] := IIf(::aBands[i, 6] == Nil, dwStyle, ::aBands[i, 6])
       IF !Empty(::aBands[i, 1])

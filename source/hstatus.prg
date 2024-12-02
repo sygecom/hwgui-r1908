@@ -210,7 +210,7 @@ METHOD Resize(xIncrSize) CLASS HStatus
    LOCAL i
 
    IF !Empty(::aParts)
-      FOR i := 1 TO LEN(::aParts)
+      FOR i := 1 TO Len(::aParts)
          ::aParts[i] := ROUND(::aParts[i] * xIncrSize, 0)
       NEXT
       hwg_InitStatus(::oParent:handle, ::handle, Len(::aParts), ::aParts)

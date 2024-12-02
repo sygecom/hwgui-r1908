@@ -92,7 +92,7 @@ METHOD Init() CLASS HGroup
          IF ::oBrush != NIL
             /*
             nbs := AScan(::oparent:acontrols, {|o|o:handle == ::handle})
-            FOR i := LEN(::oparent:acontrols) TO 1 STEP -1
+            FOR i := Len(::oparent:acontrols) TO 1 STEP -1
                IF nbs != i .AND.;
                    PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS == 0
                    SetWindowPos(::oparent:acontrols[i]:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_FRAMECHANGED)

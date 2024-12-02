@@ -266,7 +266,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       ENDIF
       //AgE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
       ENDIF
    ELSEIF msg == WM_CLOSE
@@ -342,7 +342,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       ENDIF
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -350,33 +350,33 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_SYSCOMMAND
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onSysCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
    CASE WM_SIZE
       //AGE SOMENTE NO DIALOG
-      //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+      //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
       RETURN onSize(Self, wParam, lParam)
 
    CASE WM_INITDIALOG
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN InitModalDlg(Self, wParam, lParam)
       ENDIF
       EXIT
 
    CASE WM_ERASEBKGND
       //AGE SOMENTE NO DIALOG
-      //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+      //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
       RETURN onEraseBk(Self, wParam)
 
    CASE WM_DESTROY
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onDestroy(Self)
       ENDIF
       EXIT
@@ -384,7 +384,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_ENTERIDLE
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onEnterIdle(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -392,7 +392,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_ACTIVATE
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onActivate(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -400,7 +400,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_PSPNOTIFY
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onPspNotify(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -408,7 +408,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_HELP
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onHelp(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -416,7 +416,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_CTLCOLORDLG
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(str(msg) + str(wParam) + str(lParam) + CHR(13))
+         //writelog(str(msg) + str(wParam) + str(lParam) + Chr(13))
          RETURN onDlgColor(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -470,7 +470,7 @@ RETURN NIL
 
 METHOD FindDialog(hWndTitle, lAll) CLASS HDialog
    
-   LOCAL cType := VALTYPE(hWndTitle)
+   LOCAL cType := ValType(hWndTitle)
    LOCAL i
 
    IF cType != "C"

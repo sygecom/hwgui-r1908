@@ -316,7 +316,7 @@ RETURN Self
 
 METHOD DeleteItem(nPos) CLASS HListBox
 
-   IF SendMessage(::handle, LB_DELETESTRING, nPos - 1, 0) >= 0 //<= LEN(ocombo:aitems)
+   IF SendMessage(::handle, LB_DELETESTRING, nPos - 1, 0) >= 0 //<= Len(ocombo:aitems)
       ADel(::Aitems, nPos)
       ASize(::Aitems, Len(::aitems) - 1)
       ::value := Min(Len(::aitems), ::value)

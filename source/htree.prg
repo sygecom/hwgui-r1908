@@ -658,7 +658,7 @@ METHOD Selecteds(oItem, aSels) CLASS HTree
    
    FOR i := 1 TO iLen
       IF oItem:aItems[i]:checked
-         AADD(aSelecteds, oItem:aItems[i])
+         AAdd(aSelecteds, oItem:aItems[i])
       ENDIF   
       ::Selecteds(oItem:aItems[i], aSelecteds)
    NEXT

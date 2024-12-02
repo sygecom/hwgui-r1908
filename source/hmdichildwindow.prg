@@ -631,8 +631,8 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
          oWnd:Restore()
       ENDIF
       IF oWndDeact != NIL .AND. oWndDeact:lModal
-         AADD(oWndDeact:aChilds, lParam)
-         AADD(oWnd:aChilds, wParam)
+         AAdd(oWndDeact:aChilds, lParam)
+         AAdd(oWnd:aChilds, wParam)
          oWnd:lModal := .T.
       ELSEIF oWndDeact != NIL .AND. !oWndDeact:lModal
          oWnd:hActive := wParam

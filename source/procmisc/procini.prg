@@ -94,9 +94,9 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
          ENDIF
          //
          IF Left(stroka, 1) = "["
-            stroka := UPPER(SUBSTR(stroka, 2, AT("]", stroka) - 2))
+            stroka := Upper(SubStr(stroka, 2, At("]", stroka) - 2))
             IF lWinIni
-               AADD(prm1, { UPPER(stroka), {} })
+               AAdd(prm1, { Upper(stroka), {} })
             ELSE
                prblo := .F.
                SET EXACT ON
@@ -106,24 +106,24 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                SET EXACT OFF
             ENDIF
          ELSEIF ( prblo .OR. lWinIni ) .AND. Left(stroka, 1) != ";"
-            poz1 := AT("=", stroka)
+            poz1 := At("=", stroka)
             IF poz1 != 0
                lTruncAr := IIf(SubStr(stroka, poz1 - 1, 1) == "+", .F., .T.)
                vname    := RTrim(SubStr(stroka, 1, IIf(lTruncAr, poz1 - 1, poz1 - 2)))
                stroka   := AllTrim(SubStr(stroka, poz1 + 1))
                IF lWinIni
-                  AADD(prm1[Len(prm1), 2], { UPPER(vname), stroka })
+                  AAdd(prm1[Len(prm1), 2], { Upper(vname), stroka })
                ELSE
-                  IF TYPE(vname) = "U"
-                     IF ASC(stroka) == 123                 // {
-                        IF ASC(vname) == 35                // #
+                  IF Type(vname) = "U"
+                     IF Asc(stroka) == 123                 // {
+                        IF Asc(vname) == 35                // #
                            vname := SubStr(vname, 2)
                            PRIVATE &vname := {}
                         ELSE
                            PUBLIC &vname := {}
                         ENDIF
                      ELSE
-                        IF ASC(vname) == 35                // #
+                        IF Asc(vname) == 35                // #
                            vname := SubStr(vname, 2)
                            PRIVATE &vname
                         ELSE
@@ -131,8 +131,8 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                         ENDIF
                      ENDIF
                   ELSE
-                     IF lTruncAr .AND. ASC(stroka) == 123 .AND. Len(&vname) > 0
-                        ASIZE(&vname, 0)
+                     IF lTruncAr .AND. Asc(stroka) == 123 .AND. Len(&vname) > 0
+                        ASize(&vname, 0)
                      ENDIF
                   ENDIF
                   DO CASE
@@ -140,7 +140,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                      &vname := .T.
                   CASE stroka = "off" .OR. stroka = "OFF" .OR. stroka = "Off" .OR. Empty(stroka)
                      &vname := .F.
-                  CASE ASC(stroka) == 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
+                  CASE Asc(stroka) == 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
                      RDARR(vname, stroka)
                   OTHERWISE
                      &vname := RDZNACH( stroka )
@@ -163,8 +163,8 @@ STATIC FUNCTION RDZNACH( ps )
 
 LOCAL poz, znc
    ps := AllTrim(ps)
-   IF ASC(ps) == 34
-      poz := AT(CHR(34), SubStr(ps, 2))
+   IF Asc(ps) == 34
+      poz := At(Chr(34), SubStr(ps, 2))
       IF poz != 0
          znc := SubStr(ps, 2, poz - 1)
       ENDIF
@@ -190,13 +190,13 @@ LOCAL len1, strv, newname
             //i ++ (value not used)
             poz1 := FIND_Z(stroka)
             strv := LTrim(SubStr(stroka, 1, IIf(poz1 == 0, 9999, poz1 - 1)))
-            IF ASC(strv) == 123 .AND. SubStr(strv, 2, 1) != "|"              // {
-               AADD(&vname, {})
+            IF Asc(strv) == 123 .AND. SubStr(strv, 2, 1) != "|"              // {
+               AAdd(&vname, {})
                len1    := Len(&vname)
-               newname := vname + "[" + LTrim(STR(len1, 3)) + "]"
+               newname := vname + "[" + LTrim(Str(len1, 3)) + "]"
                RDARR(newname, strv)
             ELSE
-               AADD(&vname, RDZNACH( strv ))
+               AAdd(&vname, RDZNACH( strv ))
             ENDIF
             stroka := SubStr(stroka, poz1 + 1)
          ENDIF

@@ -528,21 +528,21 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    ENDIF
    IF Len(arr) == 1
       cCode := IIf(Lower(Left(arr[1], 6)) == "return", LTrim(SubStr(arr[1], 8)), arr[1])
-      bOldError := ERRORBLOCK( {|e|CompileErr(e, cCode)} )
+      bOldError := ErrorBlock( {|e|CompileErr(e, cCode)} )
       BEGIN SEQUENCE
          bRes := &( "{||" + __pp_process(pp, cCode) + "}" )
       END SEQUENCE
-      ERRORBLOCK( bOldError )
+      ErrorBlock( bOldError )
       Return bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
          cCode := IIf(Lower(Left(arr[2], 6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2])
          cCode := "{|" + cParam + "|" + __pp_process(pp, cCode) + "}"
-         bOldError := ERRORBLOCK( {|e|CompileErr(e, cCode)} )
+         bOldError := ErrorBlock( {|e|CompileErr(e, cCode)} )
          BEGIN SEQUENCE
             bRes := &cCode
          END SEQUENCE
-         ERRORBLOCK( bOldError )
+         ErrorBlock( bOldError )
          Return bRes
       ELSE
          cCode1 := IIf(nContainer==0, ;
@@ -996,7 +996,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             AEval(&cAliasdbf->((DBStruct())), {|aField|AAdd(j, aField[1])})
             IF m->nLength == Nil
                // m->nLength := &cTmpAlias->(fieldlen(ascan(j, temp)))
-               // m->nLength := IIf(m->nLength == 0, IIf(type("&cCampo") = "C", LEN(&cCampo), 10), m->nLength)
+               // m->nLength := IIf(m->nLength == 0, IIf(type("&cCampo") = "C", Len(&cCampo), 10), m->nLength)
                m->nLength := &cAliasdbf->( fieldlen(AScan(j, temp)) )
                m->nLength := IIf(m->nLength == 0 , IIf(Type("&fblock") = "C", Len(&fBlock), 10), m->nLength)
             ENDIF
@@ -1054,7 +1054,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                   //"AddColumn(HColumn():New(cHeader, Fblock, cValType, nLength, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))",; //oBrw:AddColumn
                   m->cHeader := FieldName(i)
                   m->fBlock := FieldBlock( FieldName(i) )
-                  m->cValType := j[i, 2]  //TYPE("FieldName(i)")
+                  m->cValType := j[i, 2]  //Type("FieldName(i)")
                   m->nLength := j[i, 3] //len(&(FieldName(i)))
                   m->nDec := j[i, 4]
                   m->cPicture := Nil
@@ -1063,7 +1063,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                NEXT
             ENDIF
          ELSE
-            oCtrl:aArray := caArray  //IIf(TYPE("caArray")="C",&(caArray), caArray)
+            oCtrl:aArray := caArray  //IIf(Type("caArray")="C",&(caArray), caArray)
             oCtrl:AddColumn(HColumn():New(, {|v, o|IIf(v != Nil, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent])}, "C", 100, 0))
          ENDIF
       ENDIF
