@@ -108,7 +108,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, 
    IF lCheck != NIL
       ::lCheck := lCheck
    ENDIF
-   ::themed := IIF(themed == NIL, .F., themed)
+   ::themed := IIf(themed == NIL, .F., themed)
    IF bmp != NIL
       IF hb_IsObject(bmp)
          ::oBitmap := bmp
@@ -385,7 +385,7 @@ METHOD Paint() CLASS HOwnButton
          IF ::WindowsManifest
             ::hTheme := hb_OpenThemeData(::handle, "BUTTON")
          ENDIF
-         ::hTheme := IIF(Empty(::hTheme), NIL, ::hTheme)
+         ::hTheme := IIf(Empty(::hTheme), NIL, ::hTheme)
       ENDIF
       IF Empty(::hTheme)
          ::Themed := .F.
@@ -395,7 +395,7 @@ METHOD Paint() CLASS HOwnButton
       IF !::lEnabled
          state := PBS_DISABLED
       ELSE
-         state := IIF(::state == OBTN_PRESSED, PBS_PRESSED, PBS_NORMAL)
+         state := IIf(::state == OBTN_PRESSED, PBS_PRESSED, PBS_NORMAL)
       ENDIF
       IF ::lCheck
          state := OBTN_PRESSED
@@ -570,8 +570,8 @@ METHOD MUp() CLASS HOwnButton
 
    //IF ::state == OBTN_PRESSED
    IF !::lPress
-      //::state := OBTN_NORMAL // IIF(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
-      ::state := IIF(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
+      //::state := OBTN_NORMAL // IIf(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
+      ::state := IIf(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
    ENDIF
    IF ::lCheck
       IF ::lPress

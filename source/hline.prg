@@ -38,8 +38,8 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, n
 
    ::title := ""
    ::lVert := IIf(lVert == NIL, .F., lVert)
-   ::LineSlant := IIF(Empty(cSlant) .OR. !(cSlant $ "/\"), "", cSlant)
-   ::nBorder := IIF(Empty(nBorder), 1, nBorder)
+   ::LineSlant := IIf(Empty(cSlant) .OR. !(cSlant $ "/\"), "", cSlant)
+   ::nBorder := IIf(Empty(nBorder), 1, nBorder)
 
    IF Empty(::LineSlant)
       IF ::lVert

@@ -52,7 +52,7 @@ METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick
    ::Super:New(oWndParent, nId, nStyle, 0, 0, 0, 0, oFont, bInit, bSize, bPaint)
 
    //::nHeight := nHeight
-   ::nStatusHeight := IIF(nHeight == NIL, ::nStatusHeight, nHeight)
+   ::nStatusHeight := IIf(nHeight == NIL, ::nStatusHeight, nHeight)
    ::aParts := aParts
    ::bDblClick := bDblClick
    ::bRClick := bRClick

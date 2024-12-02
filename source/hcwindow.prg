@@ -104,7 +104,7 @@ CLASS HCustomWindow INHERIT HObject
    METHOD FindControl(nId, nHandle)
    METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle))
    //METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle))
-   METHOD Show(nShow) INLINE (::lHide := .F., IIF(nShow == NIL, ShowWindow(::handle), ShowWindow(::handle, nShow)))
+   METHOD Show(nShow) INLINE (::lHide := .F., IIf(nShow == NIL, ShowWindow(::handle), ShowWindow(::handle, nShow)))
    METHOD Move(x1, y1, width, height, nRePaint)
    METHOD onEvent(msg, wParam, lParam)
    METHOD END()
@@ -209,16 +209,16 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    LOCAL nHx := 0
    LOCAL nWx := 0
 
-   x1 := IIF(x1 == NIL, ::nLeft, x1)
-   y1 := IIF(y1 == NIL, ::nTop, y1)
-   width := IIF(width == NIL, ::nWidth, width)
-   height := IIF(height == NIL, ::nHeight, height)
+   x1 := IIf(x1 == NIL, ::nLeft, x1)
+   y1 := IIf(y1 == NIL, ::nTop, y1)
+   width := IIf(width == NIL, ::nWidth, width)
+   height := IIf(height == NIL, ::nHeight, height)
    IF Hwg_BitAnd(::style, WS_CHILD) == 0
       rect := GetwindowRect(::handle)
       nHx := rect[4] - rect[2]  - GetclientRect(::handle)[4] - ;
-         IIF(Hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
+         IIf(Hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
       nWx := rect[3] - rect[1]  - GetclientRect(::handle)[3] - ;
-         IIF(Hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
+         IIf(Hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
    ENDIF
 
    IF nRePaint == NIL
@@ -250,8 +250,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
    LOCAL i
 
-   //Writelog("== " + ::Classname() + Str(msg) + IIF(wParam != NIL, Str(wParam), "NIL") + ;
-   //   IIF(lParam != NIL, Str(lParam), "NIL"))
+   //Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
+   //   IIf(lParam != NIL, Str(lParam), "NIL"))
 
    IF msg == WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR. ;
@@ -278,8 +278,8 @@ RETURN -1
 #else
 METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
-   // Writelog("== " + ::Classname() + Str(msg) + IIF(wParam != NIL, Str(wParam), "NIL") + ;
-   //    IIF(lParam != NIL, Str(lParam), "NIL"))
+   // Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
+   //    IIf(lParam != NIL, Str(lParam), "NIL"))
 
    SWITCH msg
 
@@ -361,13 +361,13 @@ RETURN NIL
 
 METHOD GetParentForm(oCtrl) CLASS HCustomWindow
 
-   LOCAL oForm := IIF(Empty(oCtrl), Self, oCtrl)
+   LOCAL oForm := IIf(Empty(oCtrl), Self, oCtrl)
 
    DO WHILE (oForm:oParent) != NIL .AND. !__ObjHasMsg(oForm, "GETLIST")
       oForm := oForm:oParent
    ENDDO
 
-RETURN IIF(hb_IsObject(oForm), oForm, ::oParent)
+RETURN IIf(hb_IsObject(oForm), oForm, ::oParent)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -416,8 +416,8 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
    LOCAL oCtrlTmp
    LOCAL lRefresh
 
-   oCtrl := IIF(oCtrl == NIL, Self, oCtrl)
-   lAll := IIF(lAll == NIL, .F., lAll)
+   oCtrl := IIf(oCtrl == NIL, Self, oCtrl)
+   lAll := IIf(lAll == NIL, .F., lAll)
    nLen := LEN(oCtrl:aControls)
 
    IF IsWindowVisible(::handle) .OR. nLen > 0
@@ -529,8 +529,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
 
    nSBCode := loword(wParam)
    IF msg == WM_MOUSEWHEEL
-      nSBCode := IIF(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
-      nSBCode := IIF(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
+      nSBCode := IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
+      nSBCode := IIf(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
    ENDIF
    IF (msg == WM_VSCROLL) .OR. msg == WM_MOUSEWHEEL
      // Handle vertical scrollbar messages
@@ -658,8 +658,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
    nSBCode := loword(wParam)
 
    IF msg == WM_MOUSEWHEEL
-      nSBCode := IIF(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
-      nSBCode := IIF(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
+      nSBCode := IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
+      nSBCode := IIf(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
    ENDIF
 
    SWITCH msg
@@ -777,7 +777,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
    LOCAL nPos
 
    tempRect := GetClientRect(::handle)
-   aMenu := IIF(__objHasData(Self, "MENU"), ::menu, NIL)
+   aMenu := IIf(__objHasData(Self, "MENU"), ::menu, NIL)
    // Calculate how many scrolling increments for the client area
    IF ::Type == WND_MDICHILD //.AND. ::aRectSave != NIL
       nwMax := Max(::ncurWidth, tempRect[3]) //::maxWidth
@@ -789,7 +789,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
       nhMax := Max(::ncurHeight, ::Rect[4])
       ::nHorzInc := INT((nwMax - tempRect[3]) / HORZ_PTS + HORZ_PTS)
       ::nVertInc := INT((nhMax - tempRect[4]) / VERT_PTS + VERT_PTS - ;
-         IIF(amenu != NIL, GetSystemMetrics(SM_CYMENU), 0)) // MENU
+         IIf(amenu != NIL, GetSystemMetrics(SM_CYMENU), 0)) // MENU
    ENDIF
     // Set the vertical and horizontal scrolling info
    IF ::nScrollBars == 0 .OR. ::nScrollBars == 2
@@ -946,8 +946,8 @@ METHOD SetAll(cProperty, Value, aControls, cClass) CLASS HCustomWindow
    LOCAL i
    //LOCAL oCtrl
 
-   aControls := IIF(Empty(aControls), ::aControls, aControls)
-   nLen := IIF(hb_IsChar(aControls), Len(::&aControls), LEN(aControls))
+   aControls := IIf(Empty(aControls), ::aControls, aControls)
+   nLen := IIf(hb_IsChar(aControls), Len(::&aControls), LEN(aControls))
    FOR i := 1 TO nLen
       IF hb_IsChar(aControls)
          ::&aControls[i]:&cProperty := Value
@@ -1223,9 +1223,9 @@ FUNCTION ProcKeyList(oCtrl, wParam, oMain)
       RETURN .F.
    ENDIF
    IF wParam != VK_SHIFT .AND. wParam != VK_CONTROL .AND. wParam != VK_MENU
-      oParent := IIF(oMain != NIL, oMain, ParentGetDialog(oCtrl))
+      oParent := IIf(oMain != NIL, oMain, ParentGetDialog(oCtrl))
       IF oParent != NIL .AND. !Empty(oParent:KeyList)
-         nctrl := IIf(IsCtrlShift(.T., .F.), FCONTROL, iif(IsCtrlShift(.F., .T.), FSHIFT, 0))
+         nctrl := IIf(IsCtrlShift(.T., .F.), FCONTROL, IIf(IsCtrlShift(.F., .T.), FSHIFT, 0))
          IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam})) > 0
             Eval(oParent:KeyList[nPos, 3], oCtrl)
             RETURN .T.
@@ -1244,7 +1244,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
 
    LOCAL oWin := oCtrl:GetParentForm()
    LOCAL lEscape
-   LOCAL iParHigh := IIF(nKey == VK_RETURN, IDOK, IDCANCEL)
+   LOCAL iParHigh := IIf(nKey == VK_RETURN, IDOK, IDCANCEL)
    LOCAL oCtrlFocu := oCtrl
 
    lForce := !Empty(lForce)

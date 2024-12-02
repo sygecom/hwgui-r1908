@@ -1023,9 +1023,9 @@ METHOD Populate() CLASS HComboBox
        IF Select(cAlias) == 0 .AND. ( i := At("(", cAlias) ) > 0
           cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
-      value := STRTRAN(xRowSource, calias + "->", , , 1, 1)
+      value := StrTran(xRowSource, calias + "->", , , 1, 1)
       cAlias := IIf(VALTYPE(xRowSource) == "U", Nil, cAlias)
-      cValueBound := IIf(::xrowsource[2]  != Nil .AND. cAlias != Nil, STRTRAN(::xrowsource[2], calias + "->"), Nil)
+      cValueBound := IIf(::xrowsource[2]  != Nil .AND. cAlias != Nil, StrTran(::xrowsource[2], calias + "->"), Nil)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
    ENDIF
@@ -1036,7 +1036,7 @@ METHOD Populate() CLASS HComboBox
        ELSE
          ::value := 1
        ENDIF
-   ELSEIF ::lText .AND. !::lEdit .AND. EMPTY ( ::value )
+   ELSEIF ::lText .AND. !::lEdit .AND. Empty(::value)
       ::value := IIf(cAlias == Nil, ::aItems[1], (cAlias)->(&(value)))
    ENDIF
    SendMessage(::handle, CB_RESETCONTENT, 0, 0)

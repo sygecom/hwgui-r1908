@@ -296,7 +296,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
          SetWindowPos(ownd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
             SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE)
       ENDIF
-      //-wParam += IIF(IsWindowEnabled(oWnd:Screen:handle), 0, 1)
+      //-wParam += IIf(IsWindowEnabled(oWnd:Screen:handle), 0, 1)
    ENDIF
    IF wParam == SC_CLOSE
       IF Len(HWindow():aWindows) > 2 .AND. ;
@@ -372,7 +372,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
          Eval(oWnd:bMdiMenu, oWnd:GetMdiActive(), wParam)
       ENDIF
       */
-      RETURN IIF(!Empty(oWnd:Screen), -1, 0)
+      RETURN IIf(!Empty(oWnd:Screen), -1, 0)
       // end added
    ENDIF
 
@@ -386,7 +386,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
    LOCAL oWndArea
 
    IF oWnd:oBmp != NIL .AND. oWnd:type != WND_MDI
-      oWndArea := IIF(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
+      oWndArea := IIf(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
       IF oWnd:lBmpCenter
          CenterBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle, , oWnd:nBmpClr)
       ELSE

@@ -891,7 +891,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       ELSEIF cPName == "fieldexpr"
          fBlock  := Lower(IIf(xProperty != Nil .AND. !Empty(xProperty), xProperty , fBlock))
          // IF !(cAlias == cTmpAlias) .AND. cTmpAlias $ cCampo
-         //    cCampo := STRTRAN(cCampo, cTmpAlias, cAlias)
+         //    cCampo := StrTran(cCampo, cTmpAlias, cAlias)
          //   ENDIF
       ELSEIF cPName == "length"
          nLength :=   xProperty  //IIf(xProperty != Nil, xProperty, 10)

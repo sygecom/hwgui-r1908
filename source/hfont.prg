@@ -96,7 +96,7 @@ METHOD Select(oFont, nCharSet) CLASS HFont
       RETURN NIL
    ENDIF
 
-RETURN ::Add(af[2], af[3], af[4], af[5], IIF(Empty(nCharSet), af[6], nCharSet ), af[7], af[8], af[9], af[1])
+RETURN ::Add(af[2], af[3], af[4], af[5], IIf(Empty(nCharSet), af[6], nCharSet ), af[7], af[8], af[9], af[1])
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -108,15 +108,15 @@ METHOD SetFontStyle(lBold, nCharSet, lItalic, lUnder, lStrike, nHeight) CLASS HF
    LOCAL StrikeOut
 
    IF lBold != NIL
-      weight := IIF(lBold, FW_BOLD, FW_REGULAR)
+      weight := IIf(lBold, FW_BOLD, FW_REGULAR)
    ELSE
       weight := ::weight
    ENDIF
-   Italic := IIF(lItalic == NIL, ::Italic, IIF(lItalic, 1, 0))
-   Underline := IIF(lUnder == NIL, ::Underline, IIF(lUnder, 1, 0))
-   StrikeOut := IIF(lStrike == NIL, ::StrikeOut, IIF(lStrike, 1, 0))
-   nheight := IIF(nheight == NIL, ::height, nheight)
-   nCharSet := IIF(nCharSet == NIL, ::CharSet, nCharSet)
+   Italic := IIf(lItalic == NIL, ::Italic, IIf(lItalic, 1, 0))
+   Underline := IIf(lUnder == NIL, ::Underline, IIf(lUnder, 1, 0))
+   StrikeOut := IIf(lStrike == NIL, ::StrikeOut, IIf(lStrike, 1, 0))
+   nheight := IIf(nheight == NIL, ::height, nheight)
+   nCharSet := IIf(nCharSet == NIL, ::CharSet, nCharSet)
 
 RETURN ::Add(::name, ::width, nheight, weight, nCharSet, Italic, Underline, StrikeOut) // ::handle)
 

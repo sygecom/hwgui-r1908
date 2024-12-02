@@ -108,7 +108,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
          ELSEIF ( prblo .OR. lWinIni ) .AND. Left(stroka, 1) != ";"
             poz1 := AT("=", stroka)
             IF poz1 != 0
-               lTruncAr := IIF(SubStr(stroka, poz1 - 1, 1) == "+", .F., .T.)
+               lTruncAr := IIf(SubStr(stroka, poz1 - 1, 1) == "+", .F., .T.)
                vname    := RTrim(SubStr(stroka, 1, IIf(lTruncAr, poz1 - 1, poz1 - 2)))
                stroka   := AllTrim(SubStr(stroka, poz1 + 1))
                IF lWinIni

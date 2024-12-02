@@ -54,7 +54,7 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD DelItem(oWnd)
    METHOD FindWindow(hWndTitle)
    METHOD GetMain()
-   METHOD GetMdiMain() INLINE IIF(::GetMain() != NIL, ::aWindows[1], NIL)
+   METHOD GetMdiMain() INLINE IIf(::GetMain() != NIL, ::aWindows[1], NIL)
    METHOD Center() INLINE Hwg_CenterWindow(::handle, ::Type)
    METHOD Restore() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
    METHOD Maximize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
@@ -97,8 +97,8 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit,
    ::bOther := bOther
    ::bCloseQuery := bCloseQuery
    ::bRefresh := bRefresh
-   ::lChild := IIF(Empty(lChild), ::lChild, lChild)
-   ::lClipper := IIF(Empty(lClipper), ::lClipper, lClipper)
+   ::lChild := IIf(Empty(lChild), ::lChild, lChild)
+   ::lClipper := IIf(Empty(lClipper), ::lClipper, lClipper)
    ::lClosable := Iif(Empty(lnoClosable), .T., !lnoClosable)
 
    //IF clr != NIL

@@ -56,7 +56,7 @@ CLASS VAR aMessages INIT { ;
    METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate)
    METHOD onEvent(msg, wParam, lParam)
    METHOD InitTray(oNotifyIcon, bNotify, oNotifyMenu, cTooltip)
-   METHOD GetMdiActive() INLINE ::FindWindow(IIF(::GetMain() != NIL, ;
+   METHOD GetMdiActive() INLINE ::FindWindow(IIf(::GetMain() != NIL, ;
       SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) , NIL))
 
 ENDCLASS
@@ -73,7 +73,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    IF lType == WND_MDI
 
       //::nMenuPos := nPos
-      ::nMenuPos := IIF(nPos == NIL, -1, nPos)     //don't show menu
+      ::nMenuPos := IIf(nPos == NIL, -1, nPos)     //don't show menu
       ::bMdiMenu := bMdiMenu
       ::Style := nStyle
       ::tColor := clr
@@ -495,7 +495,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
          SetWindowPos(ownd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
             SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE)
       ENDIF
-      //-wParam += IIF(IsWindowEnabled(oWnd:Screen:handle), 0, 1)
+      //-wParam += IIf(IsWindowEnabled(oWnd:Screen:handle), 0, 1)
    ENDIF
    IF wParam == SC_CLOSE
       IF Len(HWindow():aWindows) > 2 .AND. ;
@@ -570,7 +570,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
          Eval(oWnd:bMdiMenu, oWnd:GetMdiActive(), wParam)
       ENDIF
       */
-      RETURN IIF(!Empty(oWnd:Screen), -1, 0)
+      RETURN IIf(!Empty(oWnd:Screen), -1, 0)
       // end added
    ENDIF
 
@@ -584,7 +584,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
    LOCAL oWndArea
 
    IF oWnd:oBmp != NIL .AND. oWnd:type != WND_MDI
-      oWndArea := IIF(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
+      oWndArea := IIf(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
       IF oWnd:lBmpCenter
          CenterBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle, , oWnd:nBmpClr)
       ELSE

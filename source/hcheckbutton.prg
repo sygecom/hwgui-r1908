@@ -60,7 +60,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ::title := cCaption
    ::lValue := IIf(vari == NIL .OR. !hb_IsLogical(vari), .F., vari)
    ::bSetGet := bSetGet
-   ::backStyle := IIF(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
+   ::backStyle := IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
 
    ::Activate()
 
@@ -143,7 +143,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
    IF msg == WM_KEYDOWN
       //IF ProcKeyList(Self, wParam)
       IF wParam == VK_TAB
-         GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_LEFT .OR. wParam == VK_UP
          GetSkip(::oparent, ::handle, , -1)
@@ -194,7 +194,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
       //IF ProcKeyList(Self, wParam)
       SWITCH wParam
       CASE VK_TAB
-         GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       CASE VK_LEFT
       CASE VK_UP
@@ -243,8 +243,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 
 METHOD SetValue(lValue) CLASS HCheckButton
 
-   SendMessage(::handle, BM_SETCHECK, IIF(Empty(lValue), 0, 1), 0)
-   ::lValue := IIF(lValue == NIL .OR. !hb_IsLogical(lValue), .F., lValue)
+   SendMessage(::handle, BM_SETCHECK, IIf(Empty(lValue), 0, 1), 0)
+   ::lValue := IIf(lValue == NIL .OR. !hb_IsLogical(lValue), .F., lValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, lValue, Self)
    ENDIF
@@ -273,7 +273,7 @@ METHOD Refresh() CLASS HCheckButton
       IF var == NIL .OR. !hb_IsLogical(var)
         var := SendMessage(::handle, BM_GETCHECK, 0, 0) == 1
       ENDIF
-      ::lValue := Iif(var == NIL .OR. !hb_IsLogical(var), .F., var)
+      ::lValue := IIf(var == NIL .OR. !hb_IsLogical(var), .F., var)
    ENDIF
    SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
 

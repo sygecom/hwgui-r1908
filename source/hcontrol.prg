@@ -42,12 +42,12 @@ CLASS HControl INHERIT HCustomWindow
    METHOD AddName(cName) HIDDEN
    //METHOD SetColor(tcolor, bColor, lRepaint)
    METHOD NewId()
-   METHOD Show(nShow) INLINE ::Super:Show(nShow), IIF(::oParent:lGetSkipLostFocus, ;
-      PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, IIF(::oParent:FindControl(, GetFocus()) != NIL, ;
+   METHOD Show(nShow) INLINE ::Super:Show(nShow), IIf(::oParent:lGetSkipLostFocus, ;
+      PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, IIf(::oParent:FindControl(, GetFocus()) != NIL, ;
       0, ::handle), 1), .T.)
    METHOD Hide() INLINE (::oParent:lGetSkipLostFocus := .F., ::Super:Hide())
    //METHOD Disable() INLINE EnableWindow(::handle, .F.)
-   METHOD Disable() INLINE (IIF(SELFFOCUS(::handle), SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0),), ;
+   METHOD Disable() INLINE (IIf(SELFFOCUS(::handle), SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0),), ;
       EnableWindow(::handle, .F.))
    METHOD Enable()
    METHOD IsEnabled() INLINE IsWindowEnabled(::handle)
@@ -76,10 +76,10 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id := IIf(nId == NIL, ::NewId(), nId)
    ::style := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_VISIBLE + WS_CHILD)
-   ::nLeft := IIF(nLeft == NIL, 0, nLeft)
-   ::nTop := IIF(nTop == NIL, 0, nTop)
-   ::nWidth := IIF(nWidth == NIL, 0, nWidth)
-   ::nHeight := IIF(nHeight == NIL, 0, nHeight)
+   ::nLeft := IIf(nLeft == NIL, 0, nLeft)
+   ::nTop := IIf(nTop == NIL, 0, nTop)
+   ::nWidth := IIf(nWidth == NIL, 0, nWidth)
+   ::nHeight := IIf(nHeight == NIL, 0, nHeight)
    ::oFont := oFont
    ::bInit := bInit
    ::bSize := bSize
@@ -285,8 +285,8 @@ METHOD FontBold(lTrue) CLASS HControl
       IF oFont == NIL .AND. lTrue == NIL
           RETURN .T.
       ENDIF
-      ::oFont := IIF(oFont != NIL, HFont():Add(oFont:name, oFont:Width, , , , ,), ;
-         HFont():Add("", 0, , IIF(!Empty(lTrue), FW_BOLD, FW_REGULAR), , ,))
+      ::oFont := IIf(oFont != NIL, HFont():Add(oFont:name, oFont:Width, , , , ,), ;
+         HFont():Add("", 0, , IIf(!Empty(lTrue), FW_BOLD, FW_REGULAR), , ,))
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(lTrue)
@@ -311,8 +311,8 @@ METHOD FontItalic(lTrue) CLASS HControl
       IF oFont == NIL .AND. lTrue == NIL
           RETURN .F.
       ENDIF
-      ::oFont := IIF(oFont != NIL, HFont():Add(oFont:name, oFont:width, , , , IIF(lTrue, 1, 0)), ;
-         HFont():Add("", 0, , , , IIF(lTrue, 1, 0)))
+      ::oFont := IIf(oFont != NIL, HFont():Add(oFont:name, oFont:width, , , , IIf(lTrue, 1, 0)), ;
+         HFont():Add("", 0, , , , IIf(lTrue, 1, 0)))
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , lTrue)
@@ -337,8 +337,8 @@ METHOD FontUnderline(lTrue) CLASS HControl
       IF oFont == NIL .AND. lTrue == NIL
          RETURN .F.
       ENDIF
-      ::oFont := IIF(oFont != NIL, HFont():Add(oFont:name, oFont:width, , , , , IIF(lTrue, 1, 0)), ;
-         HFont():Add("", 0, , , , , IIF(lTrue, 1, 0)))
+      ::oFont := IIf(oFont != NIL, HFont():Add(oFont:name, oFont:width, , , , , IIf(lTrue, 1, 0)), ;
+         HFont():Add("", 0, , , , , IIf(lTrue, 1, 0)))
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , , lTrue)
@@ -382,7 +382,7 @@ METHOD ControlSource(cControlSource) CLASS HControl
    IF cControlSource != NIL .AND. !Empty(cControlSource) .AND. __objHasData(Self, "BSETGETFIELD")
       ::xControlSource := cControlSource
       temp := SUBSTR(cControlSource, AT("->", cControlSource) + 2)
-      ::bSetGetField := IIF("->" $ cControlSource, FieldWBlock(temp, SELECT(SUBSTR(cControlSource, 1, ;
+      ::bSetGetField := IIf("->" $ cControlSource, FieldWBlock(temp, SELECT(SUBSTR(cControlSource, 1, ;
          AT("->", cControlSource) - 1))), FieldBlock(cControlSource))
    ENDIF
 
@@ -418,18 +418,18 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
    LOCAL y9
    LOCAL w9
    LOCAL h9
-   LOCAL nCxv := IIF(HWG_BITAND(::style, WS_VSCROLL) != 0, GetSystemMetrics(SM_CXVSCROLL) + 1, 3)
-   LOCAL nCyh := IIF(HWG_BITAND(::style, WS_HSCROLL) != 0, GetSystemMetrics(SM_CYHSCROLL) + 1, 3)
+   LOCAL nCxv := IIf(HWG_BITAND(::style, WS_VSCROLL) != 0, GetSystemMetrics(SM_CXVSCROLL) + 1, 3)
+   LOCAL nCyh := IIf(HWG_BITAND(::style, WS_HSCROLL) != 0, GetSystemMetrics(SM_CYHSCROLL) + 1, 3)
 
    nAnchor := ::anchor
    x9 := ::nLeft
    y9 := ::nTop
-   w9 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown", GetClientRect(::hwndUpDown)[3], 0)
+   w9 := ::nWidth  //- IIf(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown", GetClientRect(::hwndUpDown)[3], 0)
    h9 := ::nHeight
 
    x1 := ::nLeft
    y1 := ::nTop
-   w1 := ::nWidth  //- IIF(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown"), GetClientRect(::hwndUpDown)[3], 0)
+   w1 := ::nWidth  //- IIf(::winclass = "EDIT" .AND. __ObjHasMsg(Self, "hwndUpDown"), GetClientRect(::hwndUpDown)[3], 0)
    h1 := ::nHeight
    //- calculo relativo
    IF x > 0

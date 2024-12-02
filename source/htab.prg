@@ -56,7 +56,7 @@ ENDCLASS
 METHOD New(cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip) CLASS HPage
 
    cCaption := IIf(cCaption == NIL, "New Page", cCaption)
-   ::lEnabled := IIF(lEnabled != NIL, lEnabled, .T.)
+   ::lEnabled := IIf(lEnabled != NIL, lEnabled, .T.)
    ::Pageorder := nPage
    ::Tooltip := cTooltip
    ::SetColor(tColor, bColor)
@@ -80,7 +80,7 @@ METHOD SetColor(tcolor, bColor) CLASS HPage
    IF ::oParent == NIL .OR. ( bColor == NIL .AND. tcolor == NIL )
       RETURN NIL
    ENDIF
-   ::oParent:SetPaintSizePos(IIF(bColor == NIL, 1, -1))
+   ::oParent:SetPaintSizePos(IIf(bColor == NIL, 1, -1))
 
 RETURN NIL
 
@@ -269,7 +269,7 @@ METHOD Init() CLASS HTab
    LOCAL x := 0
 
    IF !::lInit
-      InitTabControl(::handle, ::aTabs, IIF(::himl != NIL, ::himl, 0))
+      InitTabControl(::handle, ::aTabs, IIf(::himl != NIL, ::himl, 0))
       SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
       IF Hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
          ::TabHeightSize := 25 - ( ::oFont:Height + 12 )
@@ -298,12 +298,12 @@ METHOD Init() CLASS HTab
             ::oPaint:nHeight := ::TabHeightSize
          ENDIF
          */
-         ::SetPaintSizePos(IIF(ASCAN(::Pages, {|p|p:brush != NIL}) > 0, -1, 1))
+         ::SetPaintSizePos(IIf(ASCAN(::Pages, {|p|p:brush != NIL}) > 0, -1, 1))
          ::nActive := 0
          FOR i := 1 TO Len(::aPages)
             ::Pages[i]:aItemPos := TabItemPos(::handle, i - 1)
             ::HidePage(i)
-            ::nActive := IIF(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
+            ::nActive := IIf(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
          NEXT
          SendMessage(::handle, TCM_SETCURFOCUS, ::nActive - 1, 0)
          IF ::nActive == 0
@@ -595,7 +595,7 @@ METHOD Refresh( lAll ) CLASS HTab
 
    IF ::nActive != 0
       IF !::lResourceTab
-         lAll := IIF(lAll == NIL, .F., lAll)
+         lAll := IIf(lAll == NIL, .F., lAll)
          nFirst := ::aPages[::nActive, 1] + 1
          nEnd := ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
          FOR i := nFirst TO nEnd
@@ -626,7 +626,7 @@ METHOD RedrawControls() CLASS HTab
          ::oParent:lSuspendMsgsHandling := .T.
          FOR i := ::aPages[::nActive, 1] + 1 TO ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
             IF isWindowVisible(::aControls[i]:handle) //.AND. ::aControls[i]:bPaint == NIL
-               RedrawWindow(::aControls[i]:handle, IIF(::classname != ::aControls[i]:classname, ;
+               RedrawWindow(::aControls[i]:handle, IIf(::classname != ::aControls[i]:classname, ;
                   RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE +RDW_NOINTERNALPAINT, RDW_NOERASE +RDW_INVALIDATE))
                /*
                IF ::aControls[i]:winclass = "EDIT" .AND. __ObjHasMsg( ::aControls[i], "hUpDown" )
@@ -826,7 +826,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    ELSEIF msg == WM_PRINT
       //-AEVAL(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})
       //- ::SetPaintSizePos(-1)
-      ::SetPaintSizePos(IIF(::nPaintHeight > 1, -1, 1))
+      ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
          ::ShowPage(::nActive)
          IF SendMessage(::handle, TCM_GETROWCOUNT, 0, 0) > 1
@@ -837,7 +837,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    ELSEIF msg == WM_SIZE
       AEVAL(::Pages, {|p, i|p:aItemPos := TabItemPos(::handle, i - 1)})
       ::oPaint:nHeight := ::nPaintHeight
-      ::oPaint:Anchor := IIF(::nPaintHeight > 1, 15, 0)
+      ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
          PostMessage(::handle, WM_PRINT, GETDC(::handle), PRF_CHECKVISIBLE)
       ENDIF
@@ -1071,8 +1071,8 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    IF !isWindowVisible(::handle) .OR. ( Ascan(::Pages, {|p|!p:lEnabled}) == 0 .AND. nPageEnable == NIL )
       RETURN - 1
    ENDIF
-   nPageEnable := IIF(nPageEnable == NIL, 0, nPageEnable)
-   nEvent := IIF(nEvent == NIL, 0, nEvent)
+   nPageEnable := IIf(nPageEnable == NIL, 0, nPageEnable)
+   nEvent := IIf(nEvent == NIL, 0, nEvent)
    IF PtrtoUlong( nPageEnable ) > 128
       pt[1] := LOWORD(nPageEnable)
       pt[2] := HIWORD(nPageEnable)
@@ -1107,7 +1107,7 @@ METHOD ShowToolTips(lParam) CLASS HTab
    FOR i := 1 TO Len(::Pages)
        client_rect := ::Pages[i]:aItemPos
        IF ( PtInRect(client_rect, pt) )
-             ::SetToolTip(IIF(::Pages[i]:Tooltip == NIL, "", ::Pages[i]:Tooltip))
+             ::SetToolTip(IIf(::Pages[i]:Tooltip == NIL, "", ::Pages[i]:Tooltip))
           EXIT
        ENDIF
    NEXT
@@ -1125,8 +1125,8 @@ STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
    LOCAL nPageAcel
 
    IF nKeyDown == VK_LEFT .OR. nKeyDown == VK_RIGHT  // 37,39
-     nEnd := IIF(nKeyDown == VK_LEFT, 1, Len(oCtrl:aPages))
-     nSkip := IIF(nKeyDown == VK_LEFT, -1, 1)
+     nEnd := IIf(nKeyDown == VK_LEFT, 1, Len(oCtrl:aPages))
+     nSkip := IIf(nKeyDown == VK_LEFT, -1, 1)
      nStart := nPage + nSkip
      FOR i := nStart TO nEnd STEP nSkip
          IF oCtrl:pages[i]:enabled
@@ -1234,7 +1234,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
    ENDIF
 
    nPage := SendMessage(::oParent:handle, TCM_GETCURFOCUS, 0, 0) + 1
-   oPage := IIF(nPage > 0, ::oParent:Pages[nPage], ::oParent:Pages[1])
+   oPage := IIf(nPage > 0, ::oParent:Pages[nPage], ::oParent:Pages[1])
 
    ::disablebrush := oPage:brush
    IF oPage:brush != NIL
@@ -1261,9 +1261,9 @@ METHOD Paint(lpdis) CLASS HPaintTab
                DrawFocusRect(::hDC, client_rect)
             endif
          ELSE
-            FillRect(::hDC, client_rect[1] + IIF(i == nPage + 1, 2, 1), ;
+            FillRect(::hDC, client_rect[1] + IIf(i == nPage + 1, 2, 1), ;
                              client_rect[2] + 1, ;
-                             client_rect[3] - IIF(i == nPage - 1, 3, 2) - IIF(i == Len(::oParent:Pages), 1, 0), ;
+                             client_rect[3] - IIf(i == nPage - 1, 3, 2) - IIf(i == Len(::oParent:Pages), 1, 0), ;
                              client_rect[4] - 1, oPage:brush:handle)
          ENDIF
       ENDIF
@@ -1286,25 +1286,25 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     LOCAL nActive := oPage:oParent:GetActivePage()
     LOCAL hTheme
 
-    //nStyle := SS_CENTER + IIF(Hwg_BitAnd(oPage:oParent:Style, TCS_FIXEDWIDTH) != 0, ;
+    //nStyle := SS_CENTER + IIf(Hwg_BitAnd(oPage:oParent:Style, TCS_FIXEDWIDTH) != 0, ;
     //                          SS_RIGHTJUST, DT_VCENTER + DT_SINGLELINE)
     AEVAL(oPage:oParent:Pages, {|p|size += p:aItemPos[3] - p:aItemPos[1]})
     nStyle := SS_CENTER + DT_VCENTER + DT_SINGLELINE + DT_END_ELLIPSIS
 
-    ::hDC := IIF(::hDC == NIL, GetDC(::oParent:handle), ::hDC)
+    ::hDC := IIf(::hDC == NIL, GetDC(::oParent:handle), ::hDC)
     IF ( ISTHEMEDLOAD() )
        hTheme := NIL
        IF ::WindowsManifest
            hTheme := hb_OpenThemeData(::oParent:handle, "TAB")
        ENDIF
-       hTheme := IIF(Empty(hTheme), NIL, hTheme)
+       hTheme := IIf(Empty(hTheme), NIL, hTheme)
     ENDIF
     SetBkMode(::hDC, TRANSPARENT)
     IF oPage:oParent:oFont != NIL
        SelectObject(::hDC, oPage:oParent:oFont:handle)
     ENDIF
     IF oPage:lEnabled
-       SetTextColor(::hDC, IIF(Empty(oPage:tColor), GetSysColor(COLOR_WINDOWTEXT), oPage:tColor))
+       SetTextColor(::hDC, IIf(Empty(oPage:tColor), GetSysColor(COLOR_WINDOWTEXT), oPage:tColor))
     ELSE
          //SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
          SetTextColor(::hDC, GetSysColor(COLOR_BTNHIGHLIGHT))
@@ -1315,14 +1315,14 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
         BmpSize += oPage:oParent:aBmpSize[1]
         BmpSize := MAX(BmpSize, oPage:oParent:aBmpSize[1])
     ENDIF
-    aItemPos[3] := IIF(size > oPage:oParent:nWidth .AND. aItemPos[1] + BmpSize + aTxtSize[1] > oPage:oParent:nWidth - 44, oPage:oParent:nWidth - 44, aItemPos[3])
-    aItemRect := {aItemPos[1] + IIF(oPage:PageOrder == nActive + 1, 1, 0), aItemPos[2], aItemPos[3] - IIF(oPage:PageOrder == Len(oPage:oParent:Pages), 2, IIF(oPage:PageOrder == nActive - 1, 1, 0)), aItemPos[4] - 1}
+    aItemPos[3] := IIf(size > oPage:oParent:nWidth .AND. aItemPos[1] + BmpSize + aTxtSize[1] > oPage:oParent:nWidth - 44, oPage:oParent:nWidth - 44, aItemPos[3])
+    aItemRect := {aItemPos[1] + IIf(oPage:PageOrder == nActive + 1, 1, 0), aItemPos[2], aItemPos[3] - IIf(oPage:PageOrder == Len(oPage:oParent:Pages), 2, IIf(oPage:PageOrder == nActive - 1, 1, 0)), aItemPos[4] - 1}
     IF Hwg_BitAnd(oPage:oParent:Style, TCS_BOTTOM) == 0
        IF hTheme != NIL .AND. oPage:brush == NIL
           hb_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
           FillRect(::hDC, aItemPos[1] + BmpSize + 3, aItemPos[2] + 4, aItemPos[3] - 3, aItemPos[4] - 5, ;
-                   IIF(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)))
+                   IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
           DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] - 1, aItemPos[3], aItemPos[4] - 1, nstyle)
@@ -1337,7 +1337,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        IF hTheme != NIL .AND. oPage:brush == NIL
           hb_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
-          FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIF(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)) ) // oPage:oParent:brush:handle ))
+          FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)) ) // oPage:oParent:brush:handle ))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
           DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2] + 2, aItemPos[3], aItemPos[4] + 2, nstyle)

@@ -58,9 +58,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    //   IF nStyle == NIL
    //      nStyle := SS_NOTIFY
    //   ELSE
-   nStyles := IIF(Hwg_BitAND(nStyle, WS_BORDER) != 0, WS_BORDER, 0)
-   nStyles += IIF(Hwg_BitAND(nStyle, WS_DLGFRAME) != 0, WS_DLGFRAME, 0)
-   nStyles += IIF(Hwg_BitAND(nStyle, WS_DISABLED) != 0, WS_DISABLED, 0)
+   nStyles := IIf(Hwg_BitAND(nStyle, WS_BORDER) != 0, WS_BORDER, 0)
+   nStyles += IIf(Hwg_BitAND(nStyle, WS_DLGFRAME) != 0, WS_DLGFRAME, 0)
+   nStyles += IIf(Hwg_BitAND(nStyle, WS_DISABLED) != 0, WS_DISABLED, 0)
    nStyle  := Hwg_BitOr(nStyle, SS_NOTIFY) - nStyles
    //    ENDIF
    // ENDIF
@@ -288,7 +288,7 @@ METHOD Paint(lpDis) CLASS HStatic
    // Set transparent background
    SetBkMode(dc, ::backstyle)
    IF ::BackStyle == OPAQUE
-      brBackground := IIF(!Empty(::brush), ::brush, ::hBrushDefault)
+      brBackground := IIf(!Empty(::brush), ::brush, ::hBrushDefault)
       FillRect(dc, client_rect[1], client_rect[2], client_rect[3], client_rect[4], brBackground:handle)
    ENDIF
 

@@ -143,7 +143,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       cPicture := IIf(cPicture == NIL .AND. ::nMaxLength != NIL, Replicate("9", ::nMaxLength), cPicture)
    ENDIF
    IF ::cType == "D" .AND. bSetGet != NIL
-      ::nMaxLength := LEN(DTOC(vari)) //IIF(SET(_SET_CENTURY), 10, 8)
+      ::nMaxLength := LEN(DTOC(vari)) //IIf(SET(_SET_CENTURY), 10, 8)
    ENDIF
    //IF !Empty(cPicture) .OR. cPicture == NIL .AND. nMaxLength != NIL .OR. !Empty(nMaxLength)
    //   ::nMaxLength := nMaxLength
@@ -158,13 +158,13 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    IF Empty(::nMaxLength) .AND. ::cType == "C" .AND. Empty(cPicture) .AND. Hwg_BitAnd(nStyle, ES_AUTOHSCROLL) == 0
        nWidth := (TxtRect(" ", Self))[1]
        ::nMaxLength := INT((::nWidth - nWidth) / nWidth) - 1
-       ::nMaxLength := IIF(::nMaxLength < 10, 10, ::nMaxLength)
+       ::nMaxLength := IIf(::nMaxLength < 10, 10, ::nMaxLength)
    ENDIF
 
    IF ::bSetGet != NIL
       ::bGetFocus := bGfocus
       ::bLostFocus := bLfocus
-      ::lnoValid := IIF(bGfocus != NIL, .T., .F.)
+      ::lnoValid := IIf(bGfocus != NIL, .T., .F.)
       ::oParent:AddEvent(EN_SETFOCUS, Self, {||::When()},, "onGotFocus")
       ::oParent:AddEvent(EN_KILLFOCUS, Self, {||::Valid()},, "onLostFocus")
       ::bValid := {||::Valid()}
@@ -246,7 +246,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             COPYSTRINGTOCLIPBOARD(::UnTransform(GETCLIPBOARDTEXT()))
             RETURN -1
          ELSEIF msg == WM_PASTE .AND. !::lNoPaste
-              ::lFirst := IIF(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
+              ::lFirst := IIf(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
             cClipboardText := GETCLIPBOARDTEXT()
             IF !Empty(cClipboardText)
                nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
@@ -261,9 +261,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             RETURN 0
          ELSEIF msg == WM_CHAR
             IF !CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)
-               nShiftAltCtrl := IIF(IsCtrlShift(.F., .T.), 1, 0)
-               nShiftAltCtrl += IIF(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
-               nShiftAltCtrl += IIF(Checkbit(lParam, 28), 4, nShiftAltCtrl)
+               nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
+               nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+               nShiftAltCtrl += IIf(Checkbit(lParam, 28), 4, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .T.
                lRes := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .F.
@@ -315,7 +315,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                IF !s_lFixedColor
                   ::SetColor(::tcolorOld, ::bColorOld)
                   ::bColor := ::bColorOld
-                  ::brush := IIF(::bColorOld == NIL, NIL, ::brush)
+                  ::brush := IIf(::bColorOld == NIL, NIL, ::brush)
                   SendMessage(::handle, WM_MOUSEMOVE, 0, MAKELPARAM(1, 1))
                ENDIF
                ::lFocu := .F.
@@ -328,9 +328,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             //IF (CheckBit(lParam, 25) .OR. wParam > 111) .AND. hb_IsBlock(::bKeyDown)
             IF ((CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124)) .AND. ;
                hb_IsBlock(::bKeyDown)
-               nShiftAltCtrl := IIF(IsCtrlShift(.F., .T.), 1, 0)
-               nShiftAltCtrl += IIF(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
-               nShiftAltCtrl += IIF(wParam > 111, 4, nShiftAltCtrl)
+               nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
+               nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+               nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .T.
                lRes := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .F.
@@ -398,9 +398,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                RETURN 0
             ENDIF
             IF "K" $ ::cPicFunc .AND. ::lFocu .AND. !Empty(::Title)
-                //- ::value := IIF(::cType == "D", CTOD(""), IIF(::cType == "N", 0, ""))
+                //- ::value := IIf(::cType == "D", CTOD(""), IIf(::cType == "N", 0, ""))
                 //- SendMessage(::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1)
-                ::Title := IIF(::cType == "D", CTOD(""), IIF(::cType == "N", 0, ""))
+                ::Title := IIf(::cType == "D", CTOD(""), IIf(::cType == "N", 0, ""))
             ENDIF
          ELSEIF msg == WM_LBUTTONDOWN
             IF GetFocus() != ::handle
@@ -438,14 +438,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
       IF s_lColorinFocus
          IF msg == WM_SETFOCUS
 //            ::bColorOld := ::bcolor
-            ::nSelStart := IIF(Empty(::title), 0, ::nSelStart)
+            ::nSelStart := IIf(Empty(::title), 0, ::nSelStart)
             ::SetColor(s_tColorSelect, s_bColorSelect)
             SendMessage(::handle, EM_SETSEL, ::selStart, ::selStart) // era -1
             //-::SetColor(s_tcolorselect, s_bcolorselect, .T.)
          ELSEIF msg == WM_KILLFOCUS .AND. !s_lPersistColorSelect
             ::SetColor(::tcolorOld, ::bColorOld, .T.)
             ::bColor := ::bColorOld
-            ::brush := IIF(::bColorOld == NIL, NIL, ::brush)
+            ::brush := IIf(::bColorOld == NIL, NIL, ::brush)
             SendMessage(::handle, WM_MOUSEMOVE, 0, MAKELPARAM(1, 1))
          ENDIF
       ENDIF
@@ -572,7 +572,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bGf
    IF bSetGet != NIL
       ::bGetFocus := bGfocus
       ::bLostFocus := bLfocus
-      ::lnoValid := IIF(bGfocus != NIL, .T., .F.)
+      ::lnoValid := IIf(bGfocus != NIL, .T., .F.)
       ::oParent:AddEvent(EN_SETFOCUS, Self, {||::When()},, "onGotFocus")
       ::oParent:AddEvent(EN_KILLFOCUS, Self, {||::Valid()},, "onLostFocus")
       ::bValid := {||::Valid()}
@@ -621,7 +621,7 @@ METHOD Refresh() CLASS HEdit
    IF hb_IsBlock(::bSetGet)
       vari := Eval(::bSetGet, , Self)
       IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
-         vari := IIF(vari == NIL, "", Vari)
+         vari := IIf(vari == NIL, "", Vari)
          vari := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
       ELSE
          vari := IIf(::cType == "D", DToC(vari), IIf(::cType == "N", Str(vari), ;
@@ -714,7 +714,7 @@ METHOD ParsePict(cPicture, vari) CLASS HEdit
 
    IF Empty(::cPicMask)
       IF ::cType == "D"
-         ::cPicFunc := "@D" + IIF("K" $ ::cPicFunc, "K", "")
+         ::cPicFunc := "@D" + IIf("K" $ ::cPicFunc, "K", "")
          ::cPicMask := StrTran(DToC(CToD(Space(8))), " ", "9")
       ELSEIF ::cType == "N"
          vari := Str(vari)
@@ -762,7 +762,7 @@ METHOD IsEditable(nPos, lDel) CLASS HEdit
    IF ::cType == "C"
       RETURN cChar $ "!ANX9#"
    ELSEIF ::cType == "N"       // nando add
-      RETURN cChar $ "9#$*Z" + IIF(!Empty(lDel), IIF("E" $ ::cPicFunc, ",", ""), "")
+      RETURN cChar $ "9#$*Z" + IIf(!Empty(lDel), IIf("E" $ ::cPicFunc, ",", ""), "")
    ELSEIF ::cType == "D"
       RETURN cChar == "9"
    ELSEIF ::cType == "L"
@@ -861,7 +861,7 @@ METHOD DeleteChar(lBack) CLASS HEdit
       lBack := .T.
    ELSE
       IF lBack .AND. !::IsEditable(nPosStart + 1, .T.) //.AND. ::cType != "N"
-          nPosStart -= IIF(::cType != "N", 1, 0)
+          nPosStart -= IIf(::cType != "N", 1, 0)
           IF nPosStart < 0
              SendMessage(::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1)
              RETURN NIL
@@ -878,7 +878,7 @@ METHOD DeleteChar(lBack) CLASS HEdit
          ENDIF
       ELSE
          IF Empty(SendMessage(::handle, EM_GETPASSWORDCHAR, 0, 0))
-            cBuf := PadR(Left(::title, nPosStart) + SubStr(::title, nPosEnd), nGetLen, IIF(::lPicComplex, , CHR(0)))
+            cBuf := PadR(Left(::title, nPosStart) + SubStr(::title, nPosEnd), nGetLen, IIf(::lPicComplex, , CHR(0)))
          ELSE
             cBuf := Left(::title, nPosStart) + SubStr(::title, nPosEnd)
          ENDIF
@@ -1017,11 +1017,11 @@ METHOD GetApplyKey(cKey) CLASS HEdit
    IF ::cType == "N" .AND. cKey $ ".," .AND. (nPos := At(".", ::cPicMask)) != 0
       IF ::lFirst
          // vari := 0
-         vari := StrTran(Trim(::title), " ", IIF("E" $ ::cPicFunc, ",", "."))
+         vari := StrTran(Trim(::title), " ", IIf("E" $ ::cPicFunc, ",", "."))
          vari := Val(vari)
       ELSE
          vari := Trim(::title)
-         lSignal := IIF(LEFT(vari, 1) = "-", .T., .F.)
+         lSignal := IIf(LEFT(vari, 1) = "-", .T., .F.)
          FOR i := 2 TO Len(vari)
             IF !IsDigit(SubStr(vari, i, 1))
                vari := Left(vari, i - 1) + SubStr(vari, i + 1)
@@ -1033,15 +1033,15 @@ METHOD GetApplyKey(cKey) CLASS HEdit
             ::title := "."
          ELSE
             // nando -                               remove the .
-            vari := strtran(vari, " ", IIF("E" $ ::cPicFunc, ",", " "))
+            vari := StrTran(vari, " ", IIf("E" $ ::cPicFunc, ",", " "))
          ENDIF
          vari := Val(vari)
-         lSignal := IIF(lSignal .AND. vari != 0, .F., lSignal)
+         lSignal := IIf(lSignal .AND. vari != 0, .F., lSignal)
       ENDIF
       //IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
       IF (!Empty(::cPicFunc) .OR. !Empty(::cPicMask)) .AND. (!(cKey $ ",.") .OR. RIGHT(TRIM(::title), 1) = ".")
          //-::title := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
-         ::title := Transform(vari, STRTRAN(::cPicFunc, "Z", "") + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
+         ::title := Transform(vari, StrTran(::cPicFunc, "Z", "") + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
          IF lSignal
            ::title := "-" + substr(::title, 2)
          ENDIF
@@ -1130,7 +1130,7 @@ RETURN 0
 METHOD ReadOnly(lreadOnly)
 
    IF lreadOnly != NIL
-      IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIF(lReadOnly, 1, 0), 0))
+      IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
           ::lReadOnly := lReadOnly
       ENDIF
    ENDIF
@@ -1191,7 +1191,7 @@ METHOD SetCueBanner(cText, lShowFoco) CLASS HEdit
    LOCAL lRet := .F.
 
    IF !::lMultiLine
-      lRet := SendMessage(::handle, EM_SETCUEBANNER, IIF(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
+      lRet := SendMessage(::handle, EM_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
    ENDIF
 
 RETURN lRet
@@ -1220,7 +1220,7 @@ METHOD When() CLASS HEdit
         vari := ::title
       ENDIF
       ::oParent:lSuspendMsgsHandling := .T.
-      res := Eval(::bGetFocus, vari, IIF(::oUpDown == NIL, Self, ::oUpDown))
+      res := Eval(::bGetFocus, vari, IIf(::oUpDown == NIL, Self, ::oUpDown))
       res := IIf(hb_IsLogical(res), res, .T.)
       ::lnoValid := !res
       ::oParent:lSuspendMsgsHandling := .F.
@@ -1288,8 +1288,8 @@ METHOD Valid() CLASS HEdit
                ::oUpDown:nValue := vari
             ENDIF
             IF hb_IsBlock(::bLostFocus)
-               res := Eval(::bLostFocus, vari, IIF(::oUpDown == NIL, Self, ::oUpDown))
-               res := IIF(hb_IsLogical(res), res, .T.)
+               res := Eval(::bLostFocus, vari, IIf(::oUpDown == NIL, Self, ::oUpDown))
+               res := IIf(hb_IsLogical(res), res, .T.)
             ENDIF
             IF res .AND. ::oUpDown != NIL // updown control
                //::oUpDown:nValue := vari
@@ -1319,7 +1319,7 @@ METHOD Valid() CLASS HEdit
         ::oparent:lSuspendMsgsHandling := .T.
         IF hb_IsBlock(::bLostFocus)
            res := Eval(::bLostFocus, vari, Self)
-           res := IIF(hb_IsLogical(res), res, .T.)
+           res := IIf(hb_IsLogical(res), res, .T.)
         ENDIF
         IF res .AND. ::oUpDown != NIL // updown control
            res := ::oUpDown:Valid()
@@ -1606,7 +1606,7 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
    LOCAL i
    LOCAL nextHandle
    LOCAL oCtrl
-   LOCAL oForm := IIF((oForm := oParent:GetParentForm()) == NIL, oParent, oForm)
+   LOCAL oForm := IIf((oForm := oParent:GetParentForm()) == NIL, oParent, oForm)
 
    DEFAULT nSkip := 1
    IF oParent == NIL .OR. (lClipper != NIL .AND. lClipper .AND. !oForm:lClipper)
@@ -1616,8 +1616,8 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
    oCtrl := IIf(i > 0, oParent:acontrols[i], oParent)
 
    IF nSkip != 0
-      nextHandle := IIF(oParent:className == "HTAB", NextFocusTab(oParent, hCtrl, nSkip), ;
-                 IIF(oParent:className == oForm:ClassName, NextFocus(oParent, hCtrl, nSkip),;
+      nextHandle := IIf(oParent:className == "HTAB", NextFocusTab(oParent, hCtrl, nSkip), ;
+                 IIf(oParent:className == oForm:ClassName, NextFocus(oParent, hCtrl, nSkip),;
                       NextFocuscontainer(oParent, hCtrl, nSkip)))
    //nextHandle := IIf(oParent:className == "HTAB", NextFocusTab(oParent, hCtrl, nSkip), ;
    //                   NextFocus(oParent, hCtrl, nSkip))
@@ -1631,7 +1631,7 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
    ENDIF
    IF !Empty(nextHandle)
       //i := AScan(oparent:acontrols, {|o|o:handle == nextHandle})
-      //oCtrl := IIF(i > 0, oparent:acontrols[i], oParent)
+      //oCtrl := IIf(i > 0, oparent:acontrols[i], oParent)
       IF oForm:classname == oParent:classname .OR. oParent:className != "HTAB"
          IF oParent:Type == NIL .OR. oParent:Type < WND_DLG_RESOURCE
              SetFocus(nextHandle)
@@ -1683,7 +1683,7 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
             k := AScan(oParent:acontrols, {|o|o:handle == nextHandle})
             IF LEN(oParent:aControls[k]:aControls) > 0 .AND. hCtrl != nextHandle .AND. oParent:aControls[k]:classname != "HTAB"
                nextHandle := NextFocusContainer(oParent:aControls[k], oParent:aControls[k]:handle, nSkip)
-               RETURN IIF(!Empty(nextHandle), nextHandle, NextFocusTab(oParent, oParent:aControls[k]:handle, nSkip))
+               RETURN IIf(!Empty(nextHandle), nextHandle, NextFocusTab(oParent, oParent:aControls[k]:handle, nSkip))
             ENDIF
          ENDIF
       ELSE
@@ -1700,13 +1700,13 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
              nextHandle := GetNextDlgTabItem (GetActiveWindow(), hCtrl, (nSkip < 0))
          ENDIF
          IF AScan(oParent:oParent:acontrols, {|o|o:handle == hCtrl}) == 0
-             RETURN IIF(nSkip > 0, NextFocus(oParent:oParent, oParent:handle, nSkip), oParent:handle)
+             RETURN IIf(nSkip > 0, NextFocus(oParent:oParent, oParent:handle, nSkip), oParent:handle)
              /*
              nexthandle := oParent:handle
              i := AScan(oParent:oparent:acontrols, {|o|o:handle == oParent:handle}) + nSkip
              IF i > 0 .AND. i <= LEN(oParent:oParent:acontrols)
                  i := ASCAN(oParent:oParent:acontrols, {|o| Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 }, i)
-                 nexthandle := oParent:oParent:acontrols[IIF(i == 0, ASCAN(oParent:oParent:acontrols, ;
+                 nexthandle := oParent:oParent:acontrols[IIf(i == 0, ASCAN(oParent:oParent:acontrols, ;
                           {|o| Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 }, i), i)]:handle
                   ENDIF
                   */
@@ -1732,8 +1732,8 @@ STATIC FUNCTION NextFocus(oParent, hCtrl, nSkip)
    LOCAL lHradio
    LOCAL lnoTabStop := .T.
 
-   oParent := IIF(oParent:Type == NIL, oParent:GetParentForm(), oParent)
-   nWindow := IIF(oParent:Type <= WND_DLG_RESOURCE, oParent:handle, GetActiveWindow())
+   oParent := IIf(oParent:Type == NIL, oParent:GetParentForm(), oParent)
+   nWindow := IIf(oParent:Type <= WND_DLG_RESOURCE, oParent:handle, GetActiveWindow())
 
    i := AScan(oparent:acontrols, {|o|SelfFocus(o:handle, hCtrl)})
    IF i > 0 .AND. Len(oParent:acontrols[i]:aControls) > 0 .AND. ;
@@ -1782,7 +1782,7 @@ STATIC FUNCTION NextFocusContainer(oParent, hCtrl, nSkip)
    LOCAL lHradio
    LOCAL lnoTabStop := .F.
 
-   AEVAL(oparent:acontrols,{|o| IIF(Hwg_BitAND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.) })
+   AEVAL(oparent:acontrols,{|o| IIf(Hwg_BitAND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.) })
    IF !lnoTabStop .OR. Empty(hCtrl)
       RETURN NIL //nexthandle
    ENDIF
@@ -1806,7 +1806,7 @@ STATIC FUNCTION NextFocusContainer(oParent, hCtrl, nSkip)
       ENDIF
       i2 := AScan(oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(nextHandle)})
       IF ((i2 < i .AND. nSkip > 0) .OR. (i2 > i .AND. nSkip < 0)) .OR. hCtrl == nextHandle
-          RETURN IIF(oParent:oParent:className == "HTAB", NextFocusTab(oParent:oParent, nWindow, nSkip), ;
+          RETURN IIf(oParent:oParent:className == "HTAB", NextFocusTab(oParent:oParent, nWindow, nSkip), ;
                        NextFocus(oParent:oparent, hCtrl, nSkip))
       ENDIF
       i := i2
@@ -1842,7 +1842,7 @@ FUNCTION SetColorinFocus(lDef, tcolor, bcolor, lFixed, lPersist)
    s_lFixedColor := IIf(lFixed != NIL, !lFixed, s_lFixedColor)
    s_tcolorselect := IIf(tcolor != NIL, tcolor, s_tcolorselect)
    s_bcolorselect := IIf(bcolor != NIL, bcolor, s_bcolorselect)
-   s_lPersistColorSelect := IIF(lPersist != NIL, lPersist, s_lPersistColorSelect)
+   s_lPersistColorSelect := IIf(lPersist != NIL, lPersist, s_lPersistColorSelect)
 
 RETURN .T.
 
@@ -1859,7 +1859,7 @@ FUNCTION SetDisableBackColor(lDef, bcolor)
       RETURN .F.
    ENDIF
    IF Empty(bColor)
-      s_bDisablecolor := IIF(Empty(s_bDisablecolor), GetSysColor(COLOR_BTNHIGHLIGHT), s_bDisablecolor)
+      s_bDisablecolor := IIf(Empty(s_bDisablecolor), GetSysColor(COLOR_BTNHIGHLIGHT), s_bDisablecolor)
    ELSE
       s_bDisablecolor := bColor
    ENDIF

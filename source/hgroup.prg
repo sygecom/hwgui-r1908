@@ -47,9 +47,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint,, tcolor, bColor)
 
-   ::oBrush := IIF(bColor != NIL, ::brush, NIL)
-   ::lTransparent := IIF(lTransp != NIL, lTransp, .F.)
-   ::backStyle := IIF((lTransp != NIL .AND. lTransp) .OR. ::bColor != NIL, TRANSPARENT, OPAQUE)
+   ::oBrush := IIf(bColor != NIL, ::brush, NIL)
+   ::lTransparent := IIf(lTransp != NIL, lTransp, .F.)
+   ::backStyle := IIf((lTransp != NIL .AND. lTransp) .OR. ::bColor != NIL, TRANSPARENT, OPAQUE)
 
    ::Activate()
    //::setcolor(tcolor, bcolor)
@@ -126,7 +126,7 @@ METHOD PAINT(lpdis) CLASS HGroup
 
    // determine text length
    szText := ::Title
-   aSize := TxtRect(IIF(Empty(szText), "A", szText), Self)
+   aSize := TxtRect(IIf(Empty(szText), "A", szText), Self)
    // distance from window top to group rect
    iUpDist := (aSize[2] / 2)
    dwStyle := ::Style //HWG_GETWINDOWSTYLE(::handle) //GetStyle();

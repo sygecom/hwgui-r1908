@@ -155,14 +155,14 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
    LOCAL hParent
 
    ::lOnActivated := .T.
-   ::bOnActivate := IIF(bOnActivate != NIL, bOnActivate, ::bOnActivate)
+   ::bOnActivate := IIf(bOnActivate != NIL, bOnActivate, ::bOnActivate)
    CreateGetList(Self)
    hParent := IIf(hb_IsObject(::oParent) .AND. ;
                    __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
                    .AND. !Empty(::oParent:handle) , ::oParent:handle, ;
                    IIf((oWnd := HWindow():GetMain()) != NIL, oWnd:handle, GetActiveWindow()))
 
-   ::WindowState := IIF(hb_IsNumeric(nShow), nShow, SW_SHOWNORMAL)
+   ::WindowState := IIf(hb_IsNumeric(nShow), nShow, SW_SHOWNORMAL)
 
    IF ::Type == WND_DLG_RESOURCE
       IF lNoModal == NIL .OR. !lNoModal
@@ -477,13 +477,13 @@ METHOD FindDialog(hWndTitle, lAll) CLASS HDialog
       i := AScan(::aDialogs, {|o|SelfFocus(o:handle, hWndTitle)})
       IF i == 0 .AND. (lAll != NIL .AND. lAll)
           i := AScan(::aModalDialogs, {| o | SelfFocus(o:handle, hWndTitle) })
-          RETURN Iif(i == 0, NIL, ::aModalDialogs[i])
+          RETURN IIf(i == 0, NIL, ::aModalDialogs[i])
       ENDIF
    ELSE
       i := AScan(::aDialogs, {|o|hb_IsChar(o:Title) .AND. o:Title == hWndTitle})
       IF i == 0 .AND. (lAll != NIL .AND. lAll)
          i := AScan(::aModalDialogs, {|o|hb_IsChar(o:Title) .AND. o:Title == hWndTitle})
-         RETURN Iif(i == 0, NIL, ::aModalDialogs[i])
+         RETURN IIf(i == 0, NIL, ::aModalDialogs[i])
       ENDIF
    ENDIF
 
@@ -550,7 +550,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    ENDIF
    oDlg:lSuspendMsgsHandling := .F.
 
-   oDlg:nInitFocus := IIF(hb_IsObject(oDlg:nInitFocus), oDlg:nInitFocus:handle, oDlg:nInitFocus)
+   oDlg:nInitFocus := IIf(hb_IsObject(oDlg:nInitFocus), oDlg:nInitFocus:handle, oDlg:nInitFocus)
    IF !Empty(oDlg:nInitFocus)
       IF PtrtouLong(oDlg:FindControl(, oDlg:nInitFocus):oParent:handle) == PtrtouLong(oDlg:handle)
          SETFOCUS(oDlg:nInitFocus)
@@ -921,7 +921,7 @@ FUNCTION onHelp(oDlg, wParam, lParam)
 
    IF !Empty(SetHelpFileName())
       IF "chm" $ Lower(CutPath(SetHelpFileName()))
-         cDir := IIF(Empty(FilePath(SetHelpFileName())), Curdir(), FilePath(SetHelpFileName()))
+         cDir := IIf(Empty(FilePath(SetHelpFileName())), Curdir(), FilePath(SetHelpFileName()))
       ENDIF
       IF !Empty(lParam)
          oCtrl := oDlg:FindControl(NIL, GetHelpData(lParam))
@@ -930,10 +930,10 @@ FUNCTION onHelp(oDlg, wParam, lParam)
          nHelpId := oCtrl:HelpId
          IF Empty(nHelpId)
             oParent := oCtrl:oParent
-            nHelpId := IIF(Empty(oParent:HelpId), oDlg:HelpId, oParent:HelpId)
+            nHelpId := IIf(Empty(oParent:HelpId), oDlg:HelpId, oParent:HelpId)
          ENDIF
          IF "chm" $ Lower(CutPath(SetHelpFileName()))
-            nHelpId := IIF(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
+            nHelpId := IIf(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
             ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
          ELSE
             WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
@@ -941,7 +941,7 @@ FUNCTION onHelp(oDlg, wParam, lParam)
       ELSEIF cDir != NIL
          ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()), cDir)
       ELSE
-         WinHelp(oDlg:handle, SetHelpFileName(), iif(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
+         WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
       ENDIF
    ENDIF
 

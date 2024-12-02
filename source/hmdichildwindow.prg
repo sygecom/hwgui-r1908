@@ -70,7 +70,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::lChild := ::lModal .OR. ::lChild .OR. ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ;
       ::maxHeight > -1
    ::lSizeBox := Hwg_BitAnd(::style, WS_SIZEBOX) != 0
-   ::WindowState := IIF(lMinimized, SW_SHOWMINIMIZED, IIF(lMaximized, SW_SHOWMAXIMIZED, IIF(lShow, SW_SHOWNORMAL, 0)))
+   ::WindowState := IIf(lMinimized, SW_SHOWMINIMIZED, IIf(lMaximized, SW_SHOWMAXIMIZED, IIf(lShow, SW_SHOWNORMAL, 0)))
 
    CreateGetList(Self)
    // Hwg_CreateMdiChildWindow(Self)
@@ -90,8 +90,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ::Style -= DS_3DLOOK
       l3d := .T.
    ENDIF
-   ::Style := Hwg_BitOr(::Style, WS_VISIBLE) - IIF(!lshow, WS_VISIBLE, 0) + ;
-      IIF(lMaximized .AND. !::lChild .AND. !::lModal, WS_MAXIMIZE, 0)
+   ::Style := Hwg_BitOr(::Style, WS_VISIBLE) - IIf(!lshow, WS_VISIBLE, 0) + ;
+      IIf(lMaximized .AND. !::lChild .AND. !::lModal, WS_MAXIMIZE, 0)
    ::handle := Hwg_CreateMdiChildWindow(Self)
    IF hb_IsNumeric(::TITLE) .AND. ::title == -1 // screen
       RETURN .T.
@@ -179,10 +179,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    IF msg == WM_GETMINMAXINFO //= &H24
       IF ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ::maxHeight > -1
          MINMAXWINDOW(::handle, lParam, ;
-         IIF(::minWidth > -1, ::minWidth, NIL), ;
-         IIF(::minHeight > -1, ::minHeight, NIL), ;
-         IIF(::maxWidth > -1, ::maxWidth, NIL), ;
-         IIF(::maxHeight > -1, ::maxHeight, NIL))
+         IIf(::minWidth > -1, ::minWidth, NIL), ;
+         IIf(::minHeight > -1, ::minHeight, NIL), ;
+         IIf(::maxWidth > -1, ::maxWidth, NIL), ;
+         IIf(::maxHeight > -1, ::maxHeight, NIL))
          RETURN 0
       ENDIF
    ELSEIF msg == WM_MOVING .AND. ::lMaximized
@@ -230,10 +230,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    CASE WM_GETMINMAXINFO //= &H24
       IF ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ::maxHeight > -1
          MINMAXWINDOW(::handle, lParam, ;
-         IIF(::minWidth > -1, ::minWidth, NIL), ;
-         IIF(::minHeight > -1, ::minHeight, NIL), ;
-         IIF(::maxWidth > -1, ::maxWidth, NIL), ;
-         IIF(::maxHeight > -1, ::maxHeight, NIL))
+         IIf(::minWidth > -1, ::minWidth, NIL), ;
+         IIf(::minHeight > -1, ::minHeight, NIL), ;
+         IIf(::maxWidth > -1, ::maxWidth, NIL), ;
+         IIf(::maxHeight > -1, ::maxHeight, NIL))
          RETURN 0
       ENDIF
       EXIT
@@ -393,7 +393,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
    LOCAL oWndArea
 
    IF oWnd:oBmp != NIL .AND. oWnd:type != WND_MDI
-       oWndArea := IIF(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
+       oWndArea := IIf(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
        IF oWnd:lBmpCenter
           CenterBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle, , oWnd:nBmpClr)
        ELSE
@@ -540,7 +540,7 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
       ENDIF
    ENDIF
    //draw rect focus
-   oWnd:nInitFocus := IIF(hb_IsObject(oWnd:nInitFocus), oWnd:nInitFocus:handle, oWnd:nInitFocus)
+   oWnd:nInitFocus := IIf(hb_IsObject(oWnd:nInitFocus), oWnd:nInitFocus:handle, oWnd:nInitFocus)
    SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
    IF oWnd:WindowState > 0
@@ -653,7 +653,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEVAL(aWndMain, {|w|IIF(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
+         AEVAL(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
             EnableWindow(w:handle, .T.),)})
       ENDIF
    ELSEIF SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
@@ -662,7 +662,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEVAL(aWndMain, {|w|IIF(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
+         AEVAL(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
             EnableWindow(w:handle, .F.),)})
          AEVAL(oWnd:aChilds,{|wH|EnableWindow(wH, .T.)})
      ENDIF

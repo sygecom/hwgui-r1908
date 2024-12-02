@@ -3707,7 +3707,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
             FOR fif := 1 TO Len(::aColumns)
                 ::aArray[1, fif] := ;
                    IIf(::aColumns[fif]:Type == "D", CToD(Space(8)), ;
-                   IIf(::aColumns[fif]:Type == "N", 0, IIF( ::aColumns[fif]:Type == "L", .F., "" )))
+                   IIf(::aColumns[fif]:Type == "N", 0, IIf(::aColumns[fif]:Type == "L", .F., "")))
             NEXT
            ::lAppMode := .F.
            ::Refresh( ::nFootRows > 0 )
