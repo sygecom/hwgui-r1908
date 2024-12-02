@@ -119,12 +119,12 @@ CLASS RichText
    IIf(!::lFacing, ::TextCode("footer \pard"), ::TextCode("footerr \pard"))
    METHOD EndFooter() INLINE ::TextCode("par"), ::CloseGroup()
 
-   METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
-                     cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
-                     lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
-                     lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
-                     nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
-                     nStyle, lChar )
+   METHOD Paragraph(cText, nFontNumber, nFontSize, cAppear, ;
+                    cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
+                    lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
+                    lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
+                    nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
+                    nStyle, lChar)
 
 
    // Table Management
@@ -145,7 +145,7 @@ CLASS RichText
 
    METHOD Appearance(cAppear)
    METHOD HAlignment(cAlign)
-   METHOD LineSpacing( nSpace, lSpExact )
+   METHOD LineSpacing(nSpace, lSpExact)
    METHOD Borders(cEntity, cBorder)
    METHOD NewFont(nFontNumber)
    METHOD SetFontSize(nFontSize)
@@ -161,7 +161,7 @@ CLASS RichText
    METHOD BorderCode(cBorderID)
    METHOD ShadeCode(cShadeID)
    METHOD ParaBorder(cBorder, cType)
-   METHOD BegBookMark( texto )
+   METHOD BegBookMark(texto)
    METHOD EndBookMark()
 
    // Someday maybe we'll handle:
@@ -205,7 +205,7 @@ CLASS RichText
 
    // New Methods for table managament
    METHOD EndTable() INLINE ::CloseGroup()
-   METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct )
+   METHOD TableDef(lHeader, nRowHead, cCellBorder, aColPct)
    METHOD TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
                      nSpace, lSpExact, nFontColor, ;
                      lDefault, lHeader, lPage, lDate)
@@ -382,12 +382,12 @@ METHOD PageSetup(nLeft, nRight, nTop, nBottom, nWidth, nHeight, nTabWidth, lLand
 
 
 
-METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
-                  cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
-                  lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
-                  lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
-                  nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
-                  nStyle, lChar ) CLASS RichText
+METHOD Paragraph(cText, nFontNumber, nFontSize, cAppear, ;
+                 cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
+                 lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
+                 lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
+                 nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
+                 nStyle, lChar) CLASS RichText
 *********************************************************************
 * Description:  Write a new, formatted paragraph to the output file.
 * Arguments:
@@ -445,7 +445,7 @@ METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
    ::NumCode("li", nIndent)
    ::NumCode("fi", nFIndent)
    ::NumCode("ri", nRIndent)
-   ::LineSpacing( nSpace, lSpExact )
+   ::LineSpacing(nSpace, lSpExact)
 
    ::NumCode("sb", nBefore)
    ::NumCode("sa", nAfter)
@@ -977,7 +977,7 @@ METHOD WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
    ::SetFontColor(nFontColor)
    ::Appearance(cAppear)
    ::HAlignment(cHorzAlign)
-   ::LineSpacing( nSpace, lSpExact )
+   ::LineSpacing(nSpace, lSpExact)
 
    // Now write the text
    ::Write(cText)
@@ -1129,7 +1129,7 @@ METHOD HAlignment(cAlign) CLASS RichText
 
 
 
-METHOD LineSpacing( nSpace, lSpExact ) CLASS RichText
+METHOD LineSpacing(nSpace, lSpExact) CLASS RichText
 *********************************************************************
 * Description:  Change the line spacing (spacing can either be "exact"
 *               or "multiple" (of single spacing).  If exact, the units
@@ -1376,7 +1376,7 @@ FUNCTION NewBase(nDec, nBase)
 ************************  END OF NewBase()  *************************
 
 
-METHOD BegBookMark( texto ) CLASS RichText
+METHOD BegBookMark(texto) CLASS RichText
 
    DEFAULT texto TO "marca"
 
@@ -1613,8 +1613,8 @@ METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
    ::OpenGroup()
    ::TextCode("dptxbxtext \s0\ql")
    IF !Empty(cTexto)
-      ::Paragraph( cTexto, nFontNumber, nFontSize, cAppear, ;
-                   ,, nIndent,,,,,,,,,,,, .F., .T. , nFontColor )
+      ::Paragraph(cTexto, nFontNumber, nFontSize, cAppear, ;
+                  ,, nIndent,,,,,,,,,,,, .F., .T. , nFontColor)
    ENDIF
 
    IF lEnd
@@ -1781,11 +1781,11 @@ METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign
 
       DO CASE
       CASE cExt == "BMP"
-         ::Bmp2Wmf( cName, ASize, nPercent )
+         ::Bmp2Wmf(cName, ASize, nPercent)
       CASE cExt == "WMF"
-         ::Wmf2Rtf( cName, ASize, nPercent )
+         ::Wmf2Rtf(cName, ASize, nPercent)
       OTHERWISE
-         ::RtfJpg( cName, ASize, nPercent )
+         ::RtfJpg(cName, ASize, nPercent)
       ENDCASE
    ENDIF
 
@@ -2058,7 +2058,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
    ::OpenGroup()
 
    FOR j := 1 TO ::nTblHdRows
-      ::TableDef( .T., j )
+      ::TableDef(.T., j)
       FOR i := 1 TO Len(::aTableCWid)
          ::TableCell(aHeadTit[j][i],,,,,,,, .T., .T.)
       NEXT i
@@ -2071,7 +2071,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 
 
 
-METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct ) CLASS RichText
+METHOD TableDef(lHeader, nRowHead, cCellBorder, aColPct) CLASS RichText
 
 *********************************************************************
 * Description:  Writes the row defaults on the output file.
@@ -2185,7 +2185,7 @@ METHOD TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
       ::SetFontColor(nFontColor)
       ::Appearance(IIf(cAppear == NIL, ::cCellAppear, cAppear))
       ::HAlignment(IIf(cHorzAlign == NIL, ::cCellHAlign, cHorzAlign))
-      ::LineSpacing( nSpace, lSpExact )
+      ::LineSpacing(nSpace, lSpExact)
    ENDIF
 
    ::Write(cText)

@@ -61,7 +61,7 @@ METHOD SendStr(cMciStr) CLASS TMci
 
    LOCAL cBuffer := ::cBuffer
 
-   MciSendString( cMciStr, @cBuffer, ::oWnd:hWnd )
+   MciSendString(cMciStr, @cBuffer, ::oWnd:hWnd)
    ::cBuffer := cBuffer
 
    RETURN NIL
@@ -75,5 +75,5 @@ METHOD lOpen() CLASS TMci
 
 METHOD cGetError() CLASS Tmci
    LOCAL cError
-   mciGetErrorString( ::nError, @cError )
+   mciGetErrorString(::nError, @cError)
    RETURN    cError

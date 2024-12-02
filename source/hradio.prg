@@ -26,9 +26,9 @@ CLASS HRadioGroup INHERIT HControl //HObject
 
 
    METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle)
-   METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
+   METHOD Newrg(oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
               cCaption, oFont, bInit, bSize, tcolor, bColor, bClick,;
-              bGFocus, lTransp )
+              bGFocus, lTransp)
    METHOD EndGroup(nSelected)
    METHOD SetValue(nValue)
    METHOD GetValue() INLINE ::nValue
@@ -68,9 +68,9 @@ METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle) CLASS HRadioGroup
 
    RETURN Self
 
-METHOD NewRg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
-              cCaption, oFont, bInit, bSize, tcolor, bColor, bClick,;
-              bGFocus, lTransp ) CLASS HRadioGroup
+METHOD NewRg(oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
+             cCaption, oFont, bInit, bSize, tcolor, bColor, bClick,;
+             bGFocus, lTransp) CLASS HRadioGroup
 
    ::oGroupCurrent := Self
    ::aButtons := {}
@@ -385,7 +385,7 @@ METHOD Notify(lParam) CLASS HRadioButton
       RETURN 0
    ENDIF
 
-   IF PTRTOULONG( lParam ) == WM_KEYDOWN
+   IF PTRTOULONG(lParam) == WM_KEYDOWN
       IF GetKeyState(VK_RETURN) < 0 //.AND. ::oGroup:value < Len(::oGroup:aButtons)
          ::oParent:lSuspendMsgsHandling := .T.
          __VALID(Self)

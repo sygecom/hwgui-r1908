@@ -172,7 +172,7 @@ METHOD Close()
 
    DestroyWindow(::handle)
    IF ::lNewBox
-      EndDialog( ::oParent:handle )
+      EndDialog(::oParent:handle)
    ENDIF
 
    RETURN Nil

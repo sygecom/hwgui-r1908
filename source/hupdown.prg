@@ -297,7 +297,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
 
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == Nil , - 1 , 1)
 
-     IF ::oUpDown == Nil .OR. Hwg_BitAnd(GetWindowLong( ::handle, GWL_STYLE ), ES_READONLY) != 0 .OR. ;
+     IF ::oUpDown == Nil .OR. Hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
        ( ::oUpDown:bGetFocus != Nil .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown) )
         Return 0
@@ -493,7 +493,7 @@ STATIC FUNCTION __When(oCtrl)
       oCtrl:oParent:lSuspendMsgsHandling := .F.
       oCtrl:lnoValid := !res
       IF !res
-         oParent := ParentGetDialog( oCtrl )
+         oParent := ParentGetDialog(oCtrl)
          IF oCtrl == ATail(oParent:GetList)
             nSkip := - 1
          ELSEIF oCtrl == oParent:getList[1]
@@ -519,7 +519,7 @@ STATIC FUNCTION __Valid(oCtrl)
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .T.
    hctrl := getfocus()
-   oDlg := ParentGetDialog( oCtrl )
+   oDlg := ParentGetDialog(oCtrl)
    IF oCtrl:bLostFocus != Nil
       res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)
       res := IIf(res, oCtrl:value <= oCtrl:nUpper .and. ;

@@ -114,7 +114,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
          oFont := ::oPrinter:AddFont(cFont, ::nStdHeight * ::oPrinter:nVRes)
 #endif
          ::oPrinter:SetFont(oFont)
-         nWidth := ::oPrinter:GetTextWidth( Replicate("A", 80) ) / ::oPrinter:nHRes
+         nWidth := ::oPrinter:GetTextWidth(Replicate("A", 80)) / ::oPrinter:nHRes
          IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
             ::nStdHeight := ::nStdHeight * ( nPWidth / nWidth )
          ENDIF
@@ -152,7 +152,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
       ::oFont := oFont
 
       ::oPrinter:SetFont(::oFont)
-      ::nCharW := ::oPrinter:GetTextWidth( "ABCDEFGHIJ" ) / 10
+      ::nCharW := ::oPrinter:GetTextWidth("ABCDEFGHIJ") / 10
       ::lChanged := .F.
 
    ENDIF

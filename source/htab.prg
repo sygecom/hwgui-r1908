@@ -169,7 +169,7 @@ CLASS HTab INHERIT HControl
    METHOD GetActivePage(nFirst, nEnd)
    METHOD Notify(lParam)
    METHOD OnEvent(msg, wParam, lParam)
-   METHOD Refresh( lAll )
+   METHOD Refresh(lAll)
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
    METHOD ShowDisablePage(nPageEnable, nEvent)
    METHOD DisablePage(nPage) INLINE ::Pages[nPage]:disable()
@@ -451,7 +451,7 @@ METHOD EndPage() CLASS HTab
    ELSE
       IF ::handle != NIL .AND. !Empty(::handle)
 
-         AddTabDialog( ::handle, ::nActive, ::aTabs[::nActive], ::aPages[::nactive, 1]:handle )
+         AddTabDialog(::handle, ::nActive, ::aTabs[::nActive], ::aPages[::nactive, 1]:handle)
       ENDIF
       IF ::nActive > 1 .AND. ::handle != NIL .AND. !Empty(::handle)
          ::HidePage(::nActive)
@@ -573,7 +573,7 @@ METHOD ShowPage(nPage) CLASS HTab
       ::aPages[nPage, 1]:show()
 
       FOR i := 1  TO Len(::aPages[nPage, 1]:aControls)
-         IF ( __ObjHasMsg( ::aPages[nPage, 1]:aControls[i], "BSETGET" ) .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL ) .OR. Hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
+         IF ( __ObjHasMsg(::aPages[nPage, 1]:aControls[i], "BSETGET") .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL ) .OR. Hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
             SetFocus(::aPages[nPage, 1]:aControls[i]:handle)
             EXIT
          ENDIF
@@ -585,7 +585,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh( lAll ) CLASS HTab
+METHOD Refresh(lAll) CLASS HTab
    
    LOCAL i
    LOCAL nFirst
@@ -600,7 +600,7 @@ METHOD Refresh( lAll ) CLASS HTab
          nEnd := ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
          FOR i := nFirst TO nEnd
             lRefresh := !Empty(__ObjHasMethod(::aControls[i], "REFRESH")) .AND. ;
-                  ( __ObjHasMsg( ::aControls[i], "BSETGET" ) .OR. lAll ) .AND. ::aControls[i]:handle != hCtrl
+                  ( __ObjHasMsg(::aControls[i], "BSETGET") .OR. lAll ) .AND. ::aControls[i]:handle != hCtrl
                 IF !Empty(lRefresh)
                ::aControls[i]:Refresh()
                IF hb_IsBlock(::aControls[i]:bRefresh)
@@ -629,7 +629,7 @@ METHOD RedrawControls() CLASS HTab
                RedrawWindow(::aControls[i]:handle, IIf(::classname != ::aControls[i]:classname, ;
                   RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE +RDW_NOINTERNALPAINT, RDW_NOERASE +RDW_INVALIDATE))
                /*
-               IF ::aControls[i]:winclass = "EDIT" .AND. __ObjHasMsg( ::aControls[i], "hUpDown" )
+               IF ::aControls[i]:winclass = "EDIT" .AND. __ObjHasMsg(::aControls[i], "hUpDown")
                   InvalidateRect(::aControls[i]:hUpDown, 0)
                ENDIF
                 */
@@ -898,7 +898,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
    IF !( ( msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling )
-      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. PtrtouLong( GetParent(::GetParentForm():nInitFocus) ) == PtrtouLong(::handle)
+      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. PtrtouLong(GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
           GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
           ::GetParentForm():nInitFocus := 0
       ENDIF
@@ -1073,7 +1073,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    ENDIF
    nPageEnable := IIf(nPageEnable == NIL, 0, nPageEnable)
    nEvent := IIf(nEvent == NIL, 0, nEvent)
-   IF PtrtoUlong( nPageEnable ) > 128
+   IF PtrtoUlong(nPageEnable) > 128
       pt[1] := LOWORD(nPageEnable)
       pt[2] := HIWORD(nPageEnable)
    ENDIF

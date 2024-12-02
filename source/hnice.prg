@@ -129,7 +129,7 @@ FUNCTION NICEBUTTPROC(hBtn, msg, wParam, lParam)
    LOCAL oBtn
    IF msg != WM_CREATE
       IF AScan({ WM_MOUSEMOVE, WM_PAINT, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_LBUTTONDBLCLK, WM_DESTROY, WM_MOVING, WM_SIZE }, msg) > 0
-         IF ( oBtn := FindSelf( hBtn ) ) == Nil
+         IF ( oBtn := FindSelf(hBtn) ) == Nil
             RETURN .F.
          ENDIF
 

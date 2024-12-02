@@ -72,7 +72,7 @@ CLASS HComboBox INHERIT HControl
    METHOD DisplayValue(cValue) SETGET
    METHOD onDropDown() INLINE ::ldropshow := .T.
    METHOD SetCueBanner(cText, lShowFoco)
-   METHOD MaxLength( nMaxLength ) SETGET
+   METHOD MaxLength(nMaxLength) SETGET
 
 ENDCLASS
 
@@ -283,7 +283,7 @@ METHOD INIT() CLASS HComboBox
          ENDIF
          SendMessage(::handle, CB_RESETCONTENT, 0, 0)
          FOR i := 1 TO Len(::aItems)
-            ComboAddString( ::handle, ::aItems[i] )
+            ComboAddString(::handle, ::aItems[i])
             numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
             IF numofchars > LongComboWidth
                LongComboWidth := numofchars
@@ -300,15 +300,15 @@ METHOD INIT() CLASS HComboBox
                SendMessage(::handle, CB_SETEDITSEL, -1, 0)
             ELSE
                #ifdef __XHARBOUR__
-               ComboSetString( ::handle, AScan(::aItems, ::value, , , .T.) )
+               ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
                #else
-               ComboSetString( ::handle, hb_AScan(::aItems, ::value, , , .T.) )
+               ComboSetString(::handle, hb_AScan(::aItems, ::value, , , .T.))
                #endif
             ENDIF
             //SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
             SetWindowText(::handle, ::value)
          ELSE
-            ComboSetString( ::handle, ::value )
+            ComboSetString(::handle, ::value)
          ENDIF
          avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
          NewLongComboWidth := ( LongComboWidth - 2 ) * avgwidth
@@ -547,7 +547,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MaxLength( nMaxLength ) CLASS HComboBox
+METHOD MaxLength(nMaxLength) CLASS HComboBox
 
    IF nMaxLength != Nil .AND. ::lEdit
        SendMessage(::handle, CB_LIMITTEXT, nMaxLength, 0)
@@ -565,7 +565,7 @@ METHOD Requery() CLASS HComboBox
 
    /*
    FOR i := 1 TO Len(::aItems)
-      ComboAddString( ::handle, ::aItems[i] )
+      ComboAddString(::handle, ::aItems[i])
    NEXT
    */
    //::Refresh()
@@ -608,7 +608,7 @@ METHOD Refresh() CLASS HComboBox
    SendMessage(::handle, CB_RESETCONTENT, 0, 0)
 
    FOR i := 1 TO Len(::aItems)
-      ComboAddString( ::handle, ::aItems[i] )
+      ComboAddString(::handle, ::aItems[i])
    NEXT
  */
    IF ::lText
@@ -617,12 +617,12 @@ METHOD Refresh() CLASS HComboBox
          SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__
-      ComboSetString( ::handle, AScan(::aItems, ::value, , , .T.) )
+      ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
       #else
-      ComboSetString( ::handle, hb_AScan(::aItems, ::value, , , .T.) )
+      ComboSetString(::handle, hb_AScan(::aItems, ::value, , , .T.))
       #endif
    ELSE
-      ComboSetString( ::handle, ::value )
+      ComboSetString(::handle, ::value)
       //-::SetItem(::value )
    ENDIF
    ::valueBound := ::GetValueBound()
@@ -636,7 +636,7 @@ METHOD SetItem(nPos) CLASS HComboBox
    /*
  IF hb_IsChar(nPos) .AND. ::lText
     nPos := AScan(::aItems, nPos)
-      ComboSetString( ::handle, nPos  )
+      ComboSetString(::handle, nPos)
    ENDIF
    */
    IF ::lText
@@ -652,7 +652,7 @@ METHOD SetItem(nPos) CLASS HComboBox
       ::ValueBound := ::GetValueBound()
    ENDIF
 
-   ComboSetString( ::handle, nPos )
+   ComboSetString(::handle, nPos)
 
    IF hb_IsBlock(::bSetGet)
       IF ::columnBound == 1
@@ -684,7 +684,7 @@ METHOD SetValue(xItem) CLASS HComboBox
       ELSE
          nPos := AScan(::aItems, xItem)
       ENDIF
-      ComboSetString( ::handle, nPos )
+      ComboSetString(::handle, nPos)
    ELSE
       nPos := IIf(::columnBound == 2, AScan(::aItemsBound, xItem), xItem)
    ENDIF
@@ -822,9 +822,9 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
        AAdd(::Aitems, cItem)
     ENDIF
     IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
-       ComboInsertString( ::handle, nPos - 1, cItem )  //::aItems[i] )
+       ComboInsertString(::handle, nPos - 1, cItem)  //::aItems[i] )
     ELSE
-       ComboAddString( ::handle, cItem)  //::aItems[i] )
+       ComboAddString(::handle, cItem)  //::aItems[i] )
     ENDIF
 
 RETURN nCount
@@ -921,7 +921,7 @@ METHOD When() CLASS HComboBox
       ::oParent:lSuspendMsgsHandling := .F.
       ::lnoValid := !res
       IF hb_IsLogical(res) .AND. !res
-         oParent := ParentGetDialog( Self )
+         oParent := ParentGetDialog(Self)
          IF Self == ATail(oParent:GetList)
             nSkip := - 1
          ELSEIF Self == oParent:getList[1]
@@ -949,7 +949,7 @@ METHOD Valid() CLASS HComboBox
 
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
 
-   IF ( oDlg := ParentGetDialog( Self ) ) == Nil .OR. oDlg:nLastKey != VK_ESCAPE
+   IF ( oDlg := ParentGetDialog(Self) ) == Nil .OR. oDlg:nLastKey != VK_ESCAPE
       // end by sauli
       // IF lESC // "if" by Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
       // By Luiz Henrique dos Santos (luizhsantos@gmail.com.br) 03/06/2006
@@ -1051,7 +1051,7 @@ METHOD Populate() CLASS HComboBox
          IF !Empty(cvaluebound)
             AAdd(::AitemsBound, (cAlias)->(&(cValueBound)))
          ENDIF
-         ComboAddString( ::handle, ::aItems[i] )
+         ComboAddString(::handle, ::aItems[i])
          numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
          IF numofchars > LongComboWidth
              LongComboWidth := numofchars
@@ -1071,9 +1071,9 @@ METHOD Populate() CLASS HComboBox
                 AAdd(::AitemsBound, Nil)
              ENDIF
              ::aItems[i] := ::aItems[i, 1]
-             ComboAddString( ::handle, ::aItems[i] )
+             ComboAddString(::handle, ::aItems[i])
           ELSE
-             ComboAddString( ::handle, ::aItems[i] )
+             ComboAddString(::handle, ::aItems[i])
           ENDIF
           numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
           if numofchars > LongComboWidth

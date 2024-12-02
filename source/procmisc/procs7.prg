@@ -107,14 +107,14 @@ FUNCTION FilExten(fname)
 LOCAL i
 RETURN IIf(( i := Rat(".", fname) ) == 0, "", SubStr(fname, i + 1))
 
-FUNCTION FilePath( fname )
+FUNCTION FilePath(fname)
 
 LOCAL i
 RETURN IIf(( i := Rat("\", fname) ) == 0, ;
             IIf(( i := Rat("/", fname) ) == 0, "", Left(fname, i)), ;
             Left(fname, i))
 
-FUNCTION CutPath( fname )
+FUNCTION CutPath(fname)
 
 LOCAL i
 RETURN IIf(( i := Rat("\", fname) ) == 0, ;

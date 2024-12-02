@@ -28,7 +28,7 @@ METHOD NEW(nWnd) CLASS HPAINTDC
    ::Super:new()
    ::m_ps   := DefinePaintStru()
    ::m_hWnd := nWnd
-   ::Attach( BeginPaint(::m_hWnd, ::m_ps) )
+   ::Attach(BeginPaint(::m_hWnd, ::m_ps))
 
    RETURN Self
 
@@ -47,7 +47,7 @@ CLASS HDC
 
    METHOD NEW()
    METHOD SetAttribDC(hDC)
-   METHOD ATTACH( hDc )
+   METHOD ATTACH(hDc)
    METHOD MOVETO(x1, y1)
    METHOD LINETO(x1, y1)
    METHOD fillsolidrect(lpRect, clr)
@@ -63,13 +63,13 @@ CLASS HDC
    METHOD Savedc()
    METHOD RestoreDC(nSavedDC)
    METHOD SetMapMode(nMapMode)
-   METHOD SetWindowOrg( x, y )
+   METHOD SetWindowOrg(x, y)
    METHOD SetWindowExt(x, y)
-   METHOD SetViewportOrg( x, y )
+   METHOD SetViewportOrg(x, y)
    METHOD SetViewportExt(x, y)
    METHOD SetArcDirection(nArcDirection)
    METHOD GetTextMetric() INLINE GetTextMetric(::m_hDC)
-   METHOD SetROP2( nDrawMode )
+   METHOD SetROP2(nDrawMode)
    METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE    BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
 
    METHOD PIE(arect, apt1, apt2)
@@ -91,7 +91,7 @@ METHOD LINETO(x1, y1) CLASS HDC
    LineTo(::m_hDC, x1, y1)
    RETURN Self
 
-METHOD Attach( hDC ) CLASS HDC
+METHOD Attach(hDC) CLASS HDC
 
    IF Empty(hDC)
       RETURN .F.
@@ -160,7 +160,7 @@ METHOD fillrect(lpRect, clr) CLASS HDC
 
 
 METHOD CreateCompatibleDc(x) CLASS HDC
-   RETURN ::Attach( CreateCompatibleDC(x) )
+   RETURN ::Attach(CreateCompatibleDC(x))
 
 METHOD SAVEDC() CLASS HDC
    LOCAL nRetVal := 0
@@ -200,7 +200,7 @@ METHOD SetMapMode(nMapMode) CLASS HDC
 
 
 
-METHOD SetWindowOrg( x, y ) CLASS HDC
+METHOD SetWindowOrg(x, y) CLASS HDC
 
 
    LOCAL point
@@ -228,7 +228,7 @@ METHOD SetWindowExt(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetViewportOrg( x, y ) CLASS HDC
+METHOD SetViewportOrg(x, y) CLASS HDC
 
 
    LOCAL point
@@ -271,16 +271,16 @@ METHOD SetArcDirection(nArcDirection)
 METHOD PIE(arect, apt1, apt2)
    RETURN PIE(::m_hdc, arect[1], arect[2], arect[3], arect[4], apt1[1], apt1[2], apt2[1], apt2[2])
 
-METHOD SetROP2( nDrawMode )
+METHOD SetROP2(nDrawMode)
 
 
    LOCAL nRetVal := 0
 
    IF ( ::m_hDC != ::m_hAttribDC )
-      nRetVal := SetROP2( ::m_hDC, nDrawMode )
+      nRetVal := SetROP2(::m_hDC, nDrawMode)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nRetVal := SetROP2( ::m_hAttribDC, nDrawMode )
+      nRetVal := SetROP2(::m_hAttribDC, nDrawMode)
    ENDIF
    RETURN nRetVal
 
@@ -300,7 +300,7 @@ METHOD NEW(nWnd) CLASS HCLIENTDC
 
    ::Super:new()
    ::m_hWnd := nWnd
-   ::Attach( GetDc(::m_hWnd) )
+   ::Attach(GetDc(::m_hWnd))
 
    RETURN Self
 

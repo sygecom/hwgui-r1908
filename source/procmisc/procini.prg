@@ -143,7 +143,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
                   CASE Asc(stroka) == 123 .AND. SubStr(stroka, 2, 1) != "|"  // {
                      RDARR(vname, stroka)
                   OTHERWISE
-                     &vname := RDZNACH( stroka )
+                     &vname := RDZNACH(stroka)
                   ENDCASE
                ENDIF
             ENDIF
@@ -159,7 +159,7 @@ LOCAL iniDbf := ( Upper(FilExten(fname)) == "DBF" )
    ENDIF
 RETURN kolstr
 
-STATIC FUNCTION RDZNACH( ps )
+STATIC FUNCTION RDZNACH(ps)
 
 LOCAL poz, znc
    ps := AllTrim(ps)
@@ -196,7 +196,7 @@ LOCAL len1, strv, newname
                newname := vname + "[" + LTrim(Str(len1, 3)) + "]"
                RDARR(newname, strv)
             ELSE
-               AAdd(&vname, RDZNACH( strv ))
+               AAdd(&vname, RDZNACH(strv))
             ENDIF
             stroka := SubStr(stroka, poz1 + 1)
          ENDIF

@@ -124,7 +124,7 @@ Local cLink := QHTM_GetNotify(lParam)
 Return 0
 
 Function QhtmFormProc(hCtrl, cMethod, cAction, cName, aFields)
-Local oCtrl := FindSelf( hCtrl )
+Local oCtrl := FindSelf(hCtrl)
 
    IF oCtrl != Nil
       IF oCtrl:bSubmit != Nil

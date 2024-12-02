@@ -200,7 +200,7 @@ CLASS HXMLDoc INHERIT HXMLNode
 
    METHOD New(encoding)
    METHOD Read(fname, buffer)
-   METHOD ReadString( buffer ) INLINE ::Read(, buffer)
+   METHOD ReadString(buffer) INLINE ::Read(, buffer)
    METHOD Save(fname, lNoHeader)
    METHOD Save2String() INLINE ::Save()
 ENDCLASS

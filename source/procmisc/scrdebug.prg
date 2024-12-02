@@ -24,7 +24,7 @@ STATIC aWatches := {}
 STATIC aScriptCurr
 STATIC nScriptSch := 0
 
-Function hwg_scrDebug( aScript, iscr )
+Function hwg_scrDebug(aScript, iscr)
 Local nFirst, i
 
    IF Len(aScript) < 3
@@ -134,7 +134,7 @@ Local nFirst, i
       ENDIF
       IF nDebugMode < 2
          FOR i := 1 TO Len(aWatches)
-            CalcWatch( i )
+            CalcWatch(i)
          NEXT
          IF !Empty(aWatches)
             oBrwData:Refresh()
@@ -209,19 +209,19 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 #else
    IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
-      bOldError := ErrorBlock( {|e|MacroError(e)} )
+      bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE
          bCodeblock := &( "{||" + xRes + "}" )
       RECOVER
          lRes := .F.
       END SEQUENCE
-      ErrorBlock( bOldError )
+      ErrorBlock(bOldError)
    ENDIF
 
    IF lRes
       IF Ascan(aWatches, {|s|s[1] == xRes}) == 0
          Aadd(aWatches, { xRes, bCodeblock, Nil, Nil })
-         CalcWatch( Len(aWatches) )
+         CalcWatch(Len(aWatches))
       ENDIF
       IF oBrwData:nHeight < 20
          oSplit:Move(, 56)
@@ -235,16 +235,16 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
    ENDIF
 Return .T.
 
-Static Function CalcWatch( n )
+Static Function CalcWatch(n)
 Local xRes, bOldError, lRes := .T., cType
 
-   bOldError := ErrorBlock( {|e|MacroError(e)} )
+   bOldError := ErrorBlock({|e|MacroError(e)})
    BEGIN SEQUENCE
       xRes := Eval(aWatches[n, 2])
    RECOVER
       lRes := .F.
    END SEQUENCE
-   ErrorBlock( bOldError )
+   ErrorBlock(bOldError)
 
    IF lRes
       IF ( cType := Valtype(xRes) ) == "N"
@@ -274,13 +274,13 @@ Local xRes, bOldError, lRes := .T., cType
 #else
    IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
-      bOldError := ErrorBlock( {|e|MacroError(e)} )
+      bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE
          xRes := &xRes
       RECOVER
          lRes := .F.
       END SEQUENCE
-      ErrorBlock( bOldError )
+      ErrorBlock(bOldError)
    ENDIF
 
    IF lRes

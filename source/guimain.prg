@@ -26,7 +26,7 @@ FUNCTION InitObjects(oWnd)
    IF !Empty(LoadArray)
       FOR i := 1 TO Len(LoadArray)
          IF !Empty(oWnd:handle)
-            IF __ObjHasMsg( LoadArray[i], "INIT")
+            IF __ObjHasMsg(LoadArray[i], "INIT")
                LoadArray[i]:Init(oWnd)
                LoadArray[i]:lInit := .T.
             ENDIF
@@ -35,7 +35,7 @@ FUNCTION InitObjects(oWnd)
    ENDIF
    IF pArray != Nil
       FOR i := 1 TO Len(pArray)
-         IF __ObjHasMsg( pArray[i], "INIT" )
+         IF __ObjHasMsg(pArray[i], "INIT")
             pArray[i]:Init(oWnd)
          ENDIF
       NEXT
@@ -50,7 +50,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 
    IF pArray != Nil
       FOR i := 1 TO Len(pArray)
-         // writelog( "InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight) )
+         // writelog("InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight))
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
 //         IF Empty(pArray[i]:handle ) .AND. !lNoActivate
             lInit := pArray[i]:lInit
@@ -61,10 +61,10 @@ FUNCTION InitControls(oWnd, lNoActivate)
             pArray[i]:lInit := .T.
          ENDIF
 //           IF Empty(pArray[i]:handle)// <= 0
-         IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong( pArray[i]:handle ), pArray[i]:handle) <= 0 // TODO: verificar
+         IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong(pArray[i]:handle), pArray[i]:handle) <= 0 // TODO: verificar
             pArray[i]:handle := GetDlgItem(oWnd:handle, pArray[i]:id)
 
-            // writelog( "InitControl2"+str(pArray[i]:handle)+"/"+pArray[i]:classname )
+            // writelog("InitControl2"+str(pArray[i]:handle)+"/"+pArray[i]:classname)
          ENDIF
          IF !Empty(pArray[i]:aControls)
             InitControls(pArray[i])
@@ -84,7 +84,7 @@ FUNCTION FindParent(hCtrl, nLevel)
    IF !Empty(hParent)
       IF ( i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent}) ) != 0
          RETURN HDialog():aModalDialogs[i]
-      ELSEIF ( oParent := HDialog():FindDialog( hParent ) ) != Nil
+      ELSEIF ( oParent := HDialog():FindDialog(hParent) ) != Nil
          RETURN oParent
       ELSEIF ( oParent := HWindow():FindWindow(hParent) ) != Nil
          RETURN oParent
@@ -100,7 +100,7 @@ FUNCTION FindParent(hCtrl, nLevel)
    ENDIF
    RETURN Nil
 
-FUNCTION FindSelf( hCtrl )
+FUNCTION FindSelf(hCtrl)
    LOCAL oParent
    oParent := FindParent(hCtrl)
    IF oParent == Nil
@@ -290,7 +290,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    oBrw:oFont  := oFont
    oBrw:bSize  := {|o, x, y|MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY)}
-   oBrw:bEnter := {|o|nChoice := o:nCurrent, EndDialog( o:oParent:handle )}
+   oBrw:bEnter := {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
    oBrw:bKeyDown := {|o, key|HB_SYMBOL_UNUSED(o), IIf(key == 27, (EndDialog(oDlg:handle), .F.), .T.)}
 
    oBrw:lDispHead := .F.
@@ -309,9 +309,9 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    IF cOk != Nil
       x1 := Int(width / 2) - IIf(cCancel != Nil, 90, 40)
-      @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK {||nChoice := oBrw:nCurrent, EndDialog( oDlg:handle )}
+      @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK {||nChoice := oBrw:nCurrent, EndDialog(oDlg:handle)}
       IF cCancel != Nil
-         @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK {||nChoice := 0, EndDialog( oDlg:handle )}
+         @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK {||nChoice := 0, EndDialog(oDlg:handle)}
       ENDIF
    ENDIF
 
@@ -362,7 +362,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
    ELSE
       DestroyWindow(hPBar)
       IF oDlg != Nil
-         EndDialog( oDlg:handle )
+         EndDialog(oDlg:handle)
       ENDIF
    ENDIF
 
@@ -383,11 +383,11 @@ FUNCTION HdSerial(cDrive)
 
    RETURN cResult
 
-FUNCTION Hwg_GetIni( cSection, cEntry, cDefault, cFile )
-   RETURN GetPrivateProfileString( cSection, cEntry, cDefault, cFile )
+FUNCTION Hwg_GetIni(cSection, cEntry, cDefault, cFile)
+   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile)
 
-FUNCTION Hwg_WriteIni( cSection, cEntry, cValue, cFile )
-   RETURN WritePrivateProfileString( cSection, cEntry, cValue, cFile )
+FUNCTION Hwg_WriteIni(cSection, cEntry, cValue, cFile)
+   RETURN WritePrivateProfileString(cSection, cEntry, cValue, cFile)
 
 FUNCTION SetHelpFileName ( cNewName )
    STATIC cName := ""

@@ -203,7 +203,7 @@ METHOD gWrite(oText) CLASS PrintDos
    RETURN Nil
 
 METHOD Eject() CLASS PrintDos
-//tracelog( ::gText, ::oText )
+//tracelog(::gText, ::oText)
 
    FWrite(::gText, ::oText)
 
@@ -218,7 +218,7 @@ METHOD Eject() CLASS PrintDos
    ::oText := ""
    ::nProw := 0
    ::nPcol := 0
-   //tracelog( ::gText, ::oText )
+   //tracelog(::gText, ::oText)
    RETURN Nil
 
 METHOD Compress() CLASS PrintDos
@@ -646,7 +646,7 @@ HB_FUNC(AFILLTEXT)
       hb_arrayAddForward(pArray, hb_itemPutC(pTemp, string));
    }
 
-   hb_itemReturnRelease( pArray );
+   hb_itemReturnRelease(pArray);
    hb_itemRelease(pTemp);
    hb_xfree(string);
    fclose(inFile);

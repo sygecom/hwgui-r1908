@@ -52,7 +52,7 @@ LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
    ::lResizeX := ( ::nWidth == 0 )
    ::lResizeY := ( ::nHeight == 0 )
    /*
-   IF __ObjHasMsg( ::oParent, "AOFFSET" ) .AND. ::oParent:Type == WND_MDI
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:Type == WND_MDI
       IF ::nWidth > ::nHeight .OR. ::nWidth == 0
          ::oParent:aOffset[2] := ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -100,7 +100,7 @@ METHOD Activate() CLASS HPanel
                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::ResizeOffSet(0)
       /*
-      IF __ObjHasMsg( ::oParent, "AOFFSET" ) .AND. ::oParent:type == WND_MDI
+      IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
          aCoors := GetWindowRect(::handle)
          nWidth := aCoors[3] - aCoors[1]
          nHeight:= aCoors[4] - aCoors[2]
@@ -270,7 +270,7 @@ METHOD Release() CLASS HPanel
    InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ::ResizeOffSet(3)
    /*
-   IF __ObjHasMsg( ::oParent, "AOFFSET" ) .AND. ::oParent:type == WND_MDI
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
       IF (::nWidth > ::nHeight .OR. ::nWidth == 0 ).AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] -= ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0

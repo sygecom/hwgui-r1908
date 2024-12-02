@@ -228,26 +228,26 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
             AAdd(tmpArray, stroka)
             AAdd(rezArray[2], .F.)
          CASE scom == "ELSEIF"
-            IF !Fou_If( rezArray, tmpArray, .T. )
+            IF !Fou_If(rezArray, tmpArray, .T.)
                nLastError := 3
                RETURN .F.
             ENDIF
             AAdd(tmpArray, SubStr(stroka, 5))
             AAdd(rezArray[2], .F.)
          CASE scom == "ELSE"
-            IF !Fou_If( rezArray, tmpArray, .T. )
+            IF !Fou_If(rezArray, tmpArray, .T.)
                nLastError := 1
                RETURN .F.
             ENDIF
             AAdd(tmpArray, "IF .T.")
             AAdd(rezArray[2], .F.)
          CASE scom == "ENDIF"
-            IF !Fou_If( rezArray, tmpArray, .F. )
+            IF !Fou_If(rezArray, tmpArray, .F.)
                nLastError := 1
                RETURN .F.
             ENDIF
          CASE scom == "RETURN"
-            bOldError := ErrorBlock( {|e|MacroError(1, e, stroka)} )
+            bOldError := ErrorBlock({|e|MacroError(1, e, stroka)})
             BEGIN SEQUENCE
                AAdd(rezArray[2], &( "{||EndScript("+LTrim(SubStr(stroka, 7))+")}" ))
             RECOVER
@@ -255,10 +255,10 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                   WndOut()
                   FCLOSE(han)
                ENDIF
-               ErrorBlock( bOldError )
+               ErrorBlock(bOldError)
                RETURN .F.
             END SEQUENCE
-            ErrorBlock( bOldError )
+            ErrorBlock(bOldError)
             AAdd(tmpArray, "")
          CASE scom == "FUNCTION"
             stroka := LTrim(SubStr(stroka, poz1 + 1))
@@ -272,7 +272,7 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
          CASE scom == "#ENDSCRIPT" .OR. Left(scom, 7) == "ENDFUNC"
             RETURN .T.
          OTHERWISE
-            bOldError := ErrorBlock( {|e|MacroError(1, e, stroka)} )
+            bOldError := ErrorBlock({|e|MacroError(1, e, stroka)})
             BEGIN SEQUENCE
                AAdd(rezArray[2], &( "{||" + AllTrim(stroka) + "}" ))
             RECOVER
@@ -280,10 +280,10 @@ Local cLine, lDebug := ( Len(rezArray) >= 3 )
                   WndOut()
                   FCLOSE(han)
                ENDIF
-               ErrorBlock( bOldError )
+               ErrorBlock(bOldError)
                RETURN .F.
             END SEQUENCE
-            ErrorBlock( bOldError )
+            ErrorBlock(bOldError)
             AAdd(tmpArray, "")
          ENDCASE
          IF lDebug .AND. Len(rezArray[3]) < Len(rezArray[2])
@@ -334,7 +334,7 @@ Local n, cTitle
    BREAK
 RETURN .T. // Warning W0028  Unreachable code
 
-STATIC FUNCTION Fou_If( rezArray, tmpArray, prju )
+STATIC FUNCTION Fou_If(rezArray, tmpArray, prju)
 LOCAL i, j, bOldError
 
    IF prju
@@ -347,15 +347,15 @@ LOCAL i, j, bOldError
    j := Len(rezArray[2])
    FOR i := j TO 1 STEP - 1
       IF Upper(Left(tmpArray[i], 2)) == "IF"
-         bOldError := ErrorBlock( {|e|MacroError(1, e, tmpArray[i])} )
+         bOldError := ErrorBlock({|e|MacroError(1, e, tmpArray[i])})
          BEGIN SEQUENCE
             rezArray[2, i] := &( "{||IIF(" + AllTrim(SubStr(tmpArray[i], 4)) + ;
                  ",.T.,iscr:=" + LTrim(Str(j, 5)) + ")}" )
          RECOVER
-            ErrorBlock( bOldError )
+            ErrorBlock(bOldError)
             RETURN .F.
          END SEQUENCE
-         ErrorBlock( bOldError )
+         ErrorBlock(bOldError)
          tmpArray[i] := ""
          i --
          IF i > 0 .AND. tmpArray[i] == "JUMP"
@@ -383,16 +383,16 @@ LOCAL bOldError
       ENDIF
       IF !Empty(tmpArray[i]) .AND. (Upper(Left(tmpArray[i], 8)) = "DO WHILE" .OR. ;
          Upper(Left(tmpArray[i], 5)) = "WHILE")
-         bOldError := ErrorBlock( {|e|MacroError(1, e, tmpArray[i])} )
+         bOldError := ErrorBlock({|e|MacroError(1, e, tmpArray[i])})
          BEGIN SEQUENCE
             rezArray[i] = &( "{||IIF(" + AllTrim(SubStr(tmpArray[i], ;
                  IIf(Upper(Left(tmpArray[i], 1)) == "D", 10, 7))) + ;
                  ",.T.,iscr:=" + LTrim(Str(j + 1, 5)) + ")}" )
          RECOVER
-            ErrorBlock( bOldError )
+            ErrorBlock(bOldError)
             RETURN .F.
          END SEQUENCE
-         ErrorBlock( bOldError )
+         ErrorBlock(bOldError)
          tmpArray[i] = ""
          AAdd(rezArray, &( "{||iscr:=" + LTrim(Str(i - 1, 5)) + "}" ))
          AAdd(tmpArray, "")
@@ -428,7 +428,7 @@ PRIVATE iscr := 1, bOldError
          ELSE
             stroka := SubStr(aScript[2, iscr], 2)
             lParam := ( Left(aScript[2, iscr], 1) == "/" )
-            bOldError := ErrorBlock( {|e|MacroError(2, e)} )
+            bOldError := ErrorBlock({|e|MacroError(2, e)})
             BEGIN SEQUENCE
             j := 1
             DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
@@ -443,10 +443,10 @@ PRIVATE iscr := 1, bOldError
             ENDDO
             RECOVER
                WndOut()
-               ErrorBlock( bOldError )
+               ErrorBlock(bOldError)
                Return .F.
             END SEQUENCE
-            ErrorBlock( bOldError )
+            ErrorBlock(bOldError)
          ENDIF
       ENDIF
       iscr ++
@@ -462,7 +462,7 @@ PRIVATE iscr := 1, bOldError
 #ifdef __WINDOWS__
             IF lDebugger
                lDebugRun := .F.
-               hwg_scrDebug( aScript, iscr )
+               hwg_scrDebug(aScript, iscr)
                DO WHILE !lDebugRun
                   hwg_ProcessMessage()
                ENDDO
@@ -485,7 +485,7 @@ PRIVATE iscr := 1, bOldError
       ENDIF
    RECOVER
       WndOut()
-      ErrorBlock( bOldError )
+      ErrorBlock(bOldError)
 #ifdef __WINDOWS__
       IF lDebug .AND. lDebugger
          hwg_scrDebug(aScript, 0)
@@ -493,7 +493,7 @@ PRIVATE iscr := 1, bOldError
 #endif
       Return .F.
    END SEQUENCE
-   ErrorBlock( bOldError )
+   ErrorBlock(bOldError)
    WndOut()
 
    RetValue := scr_RetValue
@@ -528,7 +528,7 @@ FUNCTION CompileErr(nLine)
    nLine := numlin
 RETURN nLastError
 
-FUNCTION Codeblock( string )
+FUNCTION Codeblock(string)
    IF Left(string, 2) == "{|"
       Return &( string )
    ENDIF

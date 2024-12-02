@@ -44,7 +44,7 @@ CLASS HCheckComboBox INHERIT HComboBox
    DATA nWidthCheck INIT 0
    DATA m_strText INIT ""
    METHOD onGetText(wParam, lParam)
-   METHOD OnGetTextLength( wParam, lParam )
+   METHOD OnGetTextLength(wParam, lParam)
 
    METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
    aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
@@ -55,10 +55,10 @@ CLASS HCheckComboBox INHERIT HComboBox
    METHOD Requery()
    METHOD Refresh()
    METHOD Paint(lpDis)
-   METHOD SetCheck( nIndex, bFlag )
+   METHOD SetCheck(nIndex, bFlag)
    METHOD RecalcText()
 
-   METHOD GetCheck( nIndex )
+   METHOD GetCheck(nIndex)
 
    METHOD SelectAll(bCheck)
    METHOD MeasureItem(l)
@@ -126,7 +126,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
    ELSEIF msg == WM_GETTEXTLENGTH
 
-      RETURN ::OnGetTextLength( wParam, lParam )
+      RETURN ::OnGetTextLength(wParam, lParam)
 
    ELSEIF msg == WM_CHAR
       IF ( wParam == VK_SPACE )
@@ -134,7 +134,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
          InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
-         ::SetCheck( nIndex, !::GetCheck( nIndex ) )
+         ::SetCheck(nIndex, !::GetCheck(nIndex))
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF ( ::GetParentForm(Self) :Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self) :lModal )
@@ -172,7 +172,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
             // Invalidate this window
             InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
             nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
-            ::SetCheck( nIndex, !::GetCheck( nIndex ) )
+            ::SetCheck(nIndex, !::GetCheck(nIndex))
 
             // Notify that selection has changed
 
@@ -281,7 +281,7 @@ METHOD INIT() CLASS hCheckComboBox
       ::Super:Init()
       IF Len(::acheck) > 0
          FOR i := 1 TO Len(::acheck)
-            ::Setcheck( ::acheck[i], .T. )
+            ::Setcheck(::acheck[i], .T.)
          NEXT
       ENDIF
    ENDIF
@@ -297,7 +297,7 @@ METHOD Requery() CLASS hCheckComboBox
    ::super:Requery()
    IF Len(::acheck) > 0
       FOR i := 1 TO Len(::acheck)
-         ::Setcheck( ::acheck[i], .T. )
+         ::Setcheck(::acheck[i], .T.)
       NEXT
    ENDIF
 
@@ -313,7 +313,7 @@ RETURN Nil
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetCheck( nIndex, bFlag ) CLASS hCheckComboBox
+METHOD SetCheck(nIndex, bFlag) CLASS hCheckComboBox
 
    LOCAL nResult := COMBOBOXSETITEMDATA(::handle, nIndex - 1, bFlag)
 
@@ -330,7 +330,7 @@ RETURN nResult
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetCheck( nIndex ) CLASS hCheckComboBox
+METHOD GetCheck(nIndex) CLASS hCheckComboBox
 
    LOCAL l := COMBOBOXGETITEMDATA(::handle, nIndex - 1)
 
@@ -348,7 +348,7 @@ METHOD SelectAll(bCheck) CLASS hCheckComboBox
    nCount := SendMessage(::handle, CB_GETCOUNT, 0, 0)
 
    FOR i := 1 TO nCount
-      ::SetCheck( i, bCheck )
+      ::SetCheck(i, bCheck)
    NEXT
 
 RETURN NIL
@@ -527,7 +527,7 @@ RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD OnGetTextLength( WPARAM, LPARAM ) CLASS hCheckComboBox
+METHOD OnGetTextLength(WPARAM, LPARAM) CLASS hCheckComboBox
 
    HB_SYMBOL_UNUSED(WPARAM)
    HB_SYMBOL_UNUSED(LPARAM)
@@ -544,7 +544,7 @@ METHOD GetAllCheck() CLASS hCheckComboBox
    LOCAL n
 
    FOR n := 1 TO Len(::aItems)
-      Aadd(aCheck, ::GetCheck( n ))
+      Aadd(aCheck, ::GetCheck(n))
    NEXT
 
 RETURN aCheck
