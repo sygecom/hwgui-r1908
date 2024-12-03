@@ -110,7 +110,7 @@ METHOD New(oPorta) CLASS PrintDos
    ELSE
       IF oPorta == "DEFAULT"
          oPtrName := PrintPortName()
-         IF oPtrName == Nil
+         IF oPtrName == NIL
             hwg_MsgInfo("Error, file to:ERROR.TXT")
             ::oPorta := "Error.txt"
          ELSE
@@ -123,12 +123,12 @@ METHOD New(oPorta) CLASS PrintDos
          #else
             oPtrSetup := PrintSetupDos()
          #endif
-         IF oPtrSetup == Nil
+         IF oPtrSetup == NIL
             hwg_MsgInfo("Error, file to:ERROR.TXT")
             ::oPorta := "Error.txt"
          ELSE
             oPtrName := PrintPortName()
-            IF oPtrName == Nil
+            IF oPtrName == NIL
                hwg_MsgInfo("Error, file to:ERROR.TXT")
                ::oPorta := "Error.txt"
             ELSE
@@ -185,7 +185,7 @@ METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
       ::oText += oStr
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 
 METHOD gWrite(oText) CLASS PrintDos
@@ -200,7 +200,7 @@ METHOD gWrite(oText) CLASS PrintDos
    ENDIF
    //tracelog(otext)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Eject() CLASS PrintDos
 //tracelog(::gText, ::oText)
@@ -219,25 +219,25 @@ METHOD Eject() CLASS PrintDos
    ::nProw := 0
    ::nPcol := 0
    //tracelog(::gText, ::oText)
-   RETURN Nil
+   RETURN NIL
 
 METHOD Compress() CLASS PrintDos
 
    ::Comando(::cCompr)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Double() CLASS PrintDos
 
    ::Comando(::cDouble)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD DesCompress() CLASS PrintDos
 
    ::Comando(::cNormal)
 
-   RETURN Nil
+   RETURN NIL
 
 /* *** Contribution Fernando Athayde *** */
 
@@ -245,13 +245,13 @@ METHOD Bold() CLASS PrintDos
 
    ::Comando(::cBold)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD UnBold() CLASS PrintDos
 
    ::Comando(::cUnBold)
 
-   RETURN Nil
+   RETURN NIL
 
 
 METHOD NewLine() CLASS PrintDos
@@ -262,13 +262,13 @@ METHOD NewLine() CLASS PrintDos
       ::oText += Chr(13) + Chr(10)
    ENDIF
    ::nPcol := 0
-   RETURN Nil
+   RETURN NIL
 
 METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    // tracelog(oProw, oPcol, oTexto, oPicture)
    IF hb_IsNumeric(oTexto)
 
-      IF !Empty(oPicture) .or. oPicture != Nil
+      IF !Empty(oPicture) .or. oPicture != NIL
          oTexto := Transform(oTexto, oPicture)
       ELSE
          oTexto := Str(oTexto)
@@ -277,7 +277,7 @@ METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    ELSEIF hb_IsDate(oTexto)
       oTexto := DToC(oTexto)
    ELSE
-      IF !Empty(oPicture) .or. oPicture != Nil
+      IF !Empty(oPicture) .or. oPicture != NIL
          oTexto := Transform(oTexto, oPicture)
       ENDIF
    ENDIF
@@ -286,7 +286,7 @@ METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    //tracelog([depois de ::SetCols(oProw, oPcol) e  antes         ::gWrite(oTexto))])
    ::gWrite(oTexto)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetCols(nProw, nPcol) CLASS PrintDos
 
@@ -309,19 +309,19 @@ METHOD SetCols(nProw, nPcol) CLASS PrintDos
       ::gWrite(Space(nPcol - ::nPcol))
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetPrc(x, y) CLASS PrintDos
    ::nProw := x
    ::nPCol := y
-   RETURN Nil
+   RETURN NIL
 
 METHOD END() CLASS PrintDos
 
    FWrite(::gText, ::oText)
    FClose(::gText)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD PrinterFile(fname) CLASS PrintDos
    LOCAL strbuf := Space(PF_BUFFERS)
@@ -369,7 +369,7 @@ FUNCTION wPCol(oPrinter)
 
 FUNCTION wSetPrc(x, y, oPrinter)
    oPrinter:SetPrc(x, y)
-   RETURN Nil
+   RETURN NIL
 
 METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
@@ -469,7 +469,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
       oColor2 := 0
    ENDIF
 
-   IIf(cTitle == Nil, cTitle := "Print Preview", cTitle := cTitle)
+   IIf(cTitle == NIL, cTitle := "Print Preview", cTitle := cTitle)
 
    INIT DIALOG oDlg TITLE cTitle ;
         At 0, 0 SIZE GETDESKTOPWIDTH(), GETDESKTOPHEIGHT() on init {||SendMessage(oedit1:handle, WM_VSCROLL, SB_TOP, 0)}
@@ -506,7 +506,7 @@ STATIC FUNCTION PrintDosPrint(oText, oPrt)
       FWrite(nText, oText[i])
    NEXT
    FClose(nText)
-   RETURN Nil
+   RETURN NIL
 
 
 STATIC FUNCTION PrintDosAnt(nPage, oText)
@@ -557,7 +557,7 @@ FUNCTION regenfile(o, new)
 
    NEXT
 
-   RETURN Nil
+   RETURN NIL
 
 #PRAGMA BEGINDUMP
 /*

@@ -16,7 +16,7 @@
 
 // #define __DEBUG__
 
-STATIC aPaintRep := Nil
+STATIC aPaintRep := NIL
 
 REQUEST DBUseArea
 REQUEST RecNo
@@ -26,11 +26,11 @@ REQUEST DBCloseArea
 
 FUNCTION ClonePaintRep(ar)
    aPaintRep := AClone(ar)
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION SetPaintRep(ar)
    aPaintRep := ar
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION OpenReport(fname, repName)
    LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
@@ -38,7 +38,7 @@ FUNCTION OpenReport(fname, repName)
    LOCAL itemName, aItem, res := .T.
    LOCAL nFormWidth
 
-   IF aPaintRep != Nil .AND. fname == aPaintRep[FORM_FILENAME] .AND. repName == aPaintRep[FORM_REPNAME]
+   IF aPaintRep != NIL .AND. fname == aPaintRep[FORM_FILENAME] .AND. repName == aPaintRep[FORM_REPNAME]
       RETURN res
    ENDIF
    han := FOpen(fname, FO_READ + FO_SHARED)
@@ -57,7 +57,7 @@ FUNCTION OpenReport(fname, repName)
                   stroka := LTrim(SubStr(stroka, 9))
                   IF Upper(stroka) == Upper(repName)
                      nMode := 1
-                     aPaintRep := { 0, 0, 0, 0, 0, {}, fname, repName, .F., 0, Nil }
+                     aPaintRep := { 0, 0, 0, 0, 0, {}, fname, repName, .F., 0, NIL }
                   ENDIF
                ENDIF
             ENDIF
@@ -67,7 +67,7 @@ FUNCTION OpenReport(fname, repName)
                   EXIT
                ELSEIF Upper(SubStr(stroka, 2, 6)) == "SCRIPT"
                   nMode := 2
-                  IF aItem != Nil
+                  IF aItem != NIL
                      aItem[ITEM_SCRIPT] := ""
                   ELSE
                      aPaintRep[FORM_VARS] := ""
@@ -83,17 +83,17 @@ FUNCTION OpenReport(fname, repName)
                   AAdd(aPaintRep[FORM_ITEMS], { 1, NextItem(stroka), Val(NextItem(stroka)), ;
                                                    Val(NextItem(stroka)), Val(NextItem(stroka)), ;
                                                    Val(NextItem(stroka)), Val(NextItem(stroka)), 0, NextItem(stroka), ;
-                                                   Val(NextItem(stroka)), 0, Nil, 0 })
+                                                   Val(NextItem(stroka)), 0, NIL, 0 })
                   aItem := ATail(aPaintRep[FORM_ITEMS])
                   aItem[ITEM_FONT] := HFont():Add(NextItem(aItem[ITEM_FONT], .T., ","), ;
                                                      Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
                                                      Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
                                                      Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
                                                      Val(NextItem(aItem[ITEM_FONT],, ",")))
-                  IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-                  aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-                  aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-                  aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+                  IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+                  aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+                  aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+                  aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                   hwg_MsgStop("Error: " + stroka)
                   res := .F.
                   EXIT
@@ -102,14 +102,14 @@ FUNCTION OpenReport(fname, repName)
                AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName == "HLINE", 2, IIf(itemName == "VLINE", 3, 4)), ;
                                                 "", Val(NextItem(stroka)), ;
                                                 Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                                Val(NextItem(stroka)), 0, NextItem(stroka), 0, 0, 0, Nil, 0 })
+                                                Val(NextItem(stroka)), 0, NextItem(stroka), 0, 0, 0, NIL, 0 })
                aItem := ATail(aPaintRep[FORM_ITEMS])
                aItem[ITEM_PEN] := HPen():Add(Val(NextItem(aItem[ITEM_PEN], .T., ",")), ;
                                                 Val(NextItem(aItem[ITEM_PEN],, ",")), Val(NextItem(aItem[ITEM_PEN],, ",")))
-               IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-               aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-               aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-               aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+               IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+               aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+               aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+               aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                hwg_MsgStop("Error: " + stroka)
                res := .F.
                EXIT
@@ -118,12 +118,12 @@ FUNCTION OpenReport(fname, repName)
             AAdd(aPaintRep[FORM_ITEMS], { 5, NextItem(stroka), ;
                                              Val(NextItem(stroka)), ;
                                              Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                             Val(NextItem(stroka)), 0, 0, 0, 0, 0, Nil, 0 })
+                                             Val(NextItem(stroka)), 0, 0, 0, 0, 0, NIL, 0 })
             aItem := ATail(aPaintRep[FORM_ITEMS])
-            IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-               aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-               aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-               aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+            IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+               aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+               aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+               aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                hwg_MsgStop("Error: " + stroka)
                res := .F.
                EXIT
@@ -132,7 +132,7 @@ FUNCTION OpenReport(fname, repName)
             AAdd(aPaintRep[FORM_ITEMS], { 6, NextItem(stroka), Val(NextItem(stroka)), ;
                                              Val(NextItem(stroka)), Val(NextItem(stroka)), ;
                                              Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                             0, 0, 0, 0, Nil, 0 })
+                                             0, 0, 0, 0, NIL, 0 })
             aItem := ATail(aPaintRep[FORM_ITEMS])
          ENDIF
       ENDIF
@@ -140,7 +140,7 @@ FUNCTION OpenReport(fname, repName)
       IF Left(stroka, 1) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
          nMode := 1
       ELSE
-         IF aItem != Nil
+         IF aItem != NIL
             aItem[ITEM_SCRIPT] += stroka + Chr(13) + Chr(10)
          ELSE
             aPaintRep[FORM_VARS] += stroka + Chr(13) + Chr(10)
@@ -177,10 +177,10 @@ FUNCTION RecalcForm(aPaintRep, nFormWidth)
          aItem[ITEM_HEIGHT] := Round(aItem[ITEM_HEIGHT] * (aMetr[1] - XINDENT) / nFormWidth, 0)
       NEXT
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION PrintReport(printerName, oPrn, lPreview)
-   LOCAL oPrinter := IIf(oPrn != Nil, oPrn, HPrinter():New(printerName))
+   LOCAL oPrinter := IIf(oPrn != NIL, oPrn, HPrinter():New(printerName))
    LOCAL aPrnCoors, prnXCoef, prnYCoef
    LOCAL iItem, aItem, nLineStartY := 0, nLineHeight := 0, nPHStart := 0
    LOCAL iPH := 0, iSL := 0, iEL := 0, iPF := 0, iEPF := 0, iDF := 0
@@ -191,7 +191,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    MEMVAR lFirst, lFinish, lLastCycle, oFontStandard
    PRIVATE lFirst := .T., lFinish := .T., lLastCycle := .F.
 
-   IF oPrinter:hDCPrn == Nil .OR. oPrinter:hDCPrn == 0
+   IF oPrinter:hDCPrn == NIL .OR. oPrinter:hDCPrn == 0
       RETURN .F.
    ENDIF
 
@@ -221,7 +221,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
          ENDIF
          DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
             PRIVATE &varName
-            IF varValue != Nil
+            IF varValue != NIL
                &varName := &varValue
             ENDIF
          ENDDO
@@ -433,7 +433,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    #else
       oPrinter:EndPage()
       oPrinter:EndDoc()
-      IF lPreview != Nil .AND. lPreview
+      IF lPreview != NIL .AND. lPreview
          oPrinter:Preview()
       ENDIF
    #endif
@@ -442,7 +442,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_TEXT
          aPaintRep[FORM_ITEMS, i, ITEM_STATE]:Release()
-         aPaintRep[FORM_ITEMS, i, ITEM_STATE] := Nil
+         aPaintRep[FORM_ITEMS, i, ITEM_STATE] := NIL
       ENDIF
    NEXT
 
@@ -492,13 +492,13 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
       ENDIF
    #endif
-   RETURN Nil
+   RETURN NIL
 
 STATIC FUNCTION ScriptExecute(aItem)
    LOCAL nError, nLineEr
-   IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
+   IF aItem[ITEM_SCRIPT] != NIL .AND. !Empty(aItem[ITEM_SCRIPT])
       IF hb_IsChar(aItem[ITEM_SCRIPT])
-         IF (aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT])) == Nil
+         IF (aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT])) == NIL
             nError := CompileErr(@nLineEr)
             hwg_MsgStop("Script error (" + LTrim(Str(nError)) + "), line " + LTrim(Str(nLineEr)))
             RETURN .F.

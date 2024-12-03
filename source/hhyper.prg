@@ -81,7 +81,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    
    nStyle := Hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
    ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
-   ::title := IIf(cCaption != Nil, cCaption, "HWGUI HomePage")
+   ::title := IIf(cCaption != NIL, cCaption, "HWGUI HomePage")
    ::hbitmap := hbitmap
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
@@ -96,7 +96,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::m_sVisitedColor := vColor
 
    ::state := LBL_INIT
-   ::title := IIf(cCaption == Nil, "", cCaption)
+   ::title := IIf(cCaption == NIL, "", cCaption)
 
    // Test The Font the underline must be 1
    IF ::oFont == NIL
@@ -418,11 +418,11 @@ METHOD Resize(x, y) CLASS HStaticLink
    LOCAL aBmpSize, aTxtSize
    LOCAL nHeight := ::nHeight
    
-   IF x != Nil .AND. x + y == 0
-      RETURN Nil
+   IF x != NIL .AND. x + y == 0
+      RETURN NIL
    ENDIF
 
-   x := IIf(x == Nil, 0, x - ::nWidth + 1)
+   x := IIf(x == NIL, 0, x - ::nWidth + 1)
    aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
    aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
@@ -442,4 +442,4 @@ METHOD Resize(x, y) CLASS HStaticLink
       InvalidateRect(::handle, 0)
    ENDIF
 
-   RETURN Nil
+   RETURN NIL

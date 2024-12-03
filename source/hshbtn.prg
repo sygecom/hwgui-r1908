@@ -74,10 +74,10 @@ METHOD Paint() CLASS HShadeButton
    ::DrawItems(hDC)
 
    EndPaint(::handle, pps)
-   RETURN Nil
+   RETURN NIL
 
 METHOD END() CLASS HShadeButton
 
    ::Super:END()
    shade_Release(::hShade)
-   RETURN Nil
+   RETURN NIL

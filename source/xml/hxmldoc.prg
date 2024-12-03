@@ -37,14 +37,14 @@ ENDCLASS
 
 METHOD New(cTitle, type, aAttr, cValue) CLASS HXMLNode
 
-   IF cTitle != Nil
+   IF cTitle != NIL
       ::title := cTitle
    ENDIF
-   IF aAttr != Nil
+   IF aAttr != NIL
       ::aAttr := aAttr
    ENDIF
-   ::type := IIf(type != Nil , type, HBXML_TYPE_TAG)
-   IF cValue != Nil
+   ::type := IIf(type != NIL , type, HBXML_TYPE_TAG)
+   IF cValue != NIL
       ::Add(cValue)
    ENDIF
 Return Self
@@ -57,7 +57,7 @@ Return xItem
 METHOD GetAttribute(cName) CLASS HXMLNode
 Local i := Ascan(::aAttr, {|a|a[1]==cName})
 
-Return IIf(i==0, Nil, ::aAttr[i, 2])
+Return IIf(i==0, NIL, ::aAttr[i, 2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
 Local i := Ascan(::aAttr,{|a|a[1]==cName})
@@ -171,7 +171,7 @@ Return ""
 METHOD Find(cTitle, nStart, block) CLASS HXMLNode
 Local i
 
-   IF nStart == Nil
+   IF nStart == NIL
       nStart := 1
    ENDIF
    DO WHILE .T.
@@ -180,7 +180,7 @@ Local i
          EXIT
       ELSE
          nStart := i
-         IF block == Nil .OR. Eval(block, ::aItems[i])
+         IF block == NIL .OR. Eval(block, ::aItems[i])
             Return ::aItems[i]
          ELSE
             nStart ++
@@ -188,7 +188,7 @@ Local i
       ENDIF
    ENDDO
 
-Return Nil
+Return NIL
 
 
 /*
@@ -207,7 +207,7 @@ ENDCLASS
 
 METHOD New(encoding) CLASS HXMLDoc
 
-   IF encoding != Nil
+   IF encoding != NIL
       Aadd(::aAttr, { "version", "1.0" })
       Aadd(::aAttr, { "encoding", encoding })
    ENDIF
@@ -217,33 +217,33 @@ Return Self
 METHOD Read(fname, buffer) CLASS HXMLDoc
 Local han
 
-   IF fname != Nil
+   IF fname != NIL
       han := FOpen(fname, FO_READ)
       IF han != -1
          ::nLastErr := hbxml_GetDoc(Self, han)
          FClose(han)
       ENDIF
-   ELSEIF buffer != Nil
+   ELSEIF buffer != NIL
       ::nLastErr := hbxml_GetDoc(Self, buffer)
    ELSE
-      Return Nil
+      Return NIL
    ENDIF
-Return IIf(::nLastErr == 0, Self, Nil)
+Return IIf(::nLastErr == 0, Self, NIL)
 
 METHOD Save(fname, lNoHeader) CLASS HXMLDoc
 Local handle := -2
 Local cEncod, i, s
 
-   IF fname != Nil
+   IF fname != NIL
       handle := FCreate(fname)
    ENDIF
    IF handle != -1
-      IF lNoHeader == Nil .OR. !lNoHeader
-         IF (cEncod := ::GetAttribute("encoding")) == Nil
+      IF lNoHeader == NIL .OR. !lNoHeader
+         IF (cEncod := ::GetAttribute("encoding")) == NIL
             cEncod := "UTF-8"
          ENDIF
          s := '<?xml version="1.0" encoding="'+cEncod+'"?>'+Chr(10)
-         IF fname != Nil
+         IF fname != NIL
             FWrite(handle, s)
          ENDIF
       ELSE
@@ -252,7 +252,7 @@ Local cEncod, i, s
       FOR i := 1 TO Len(::aItems)
          s += ::aItems[i]:Save(handle, 0)
       NEXT
-      IF fname != Nil
+      IF fname != NIL
          FClose(handle)
       ELSE
          Return s

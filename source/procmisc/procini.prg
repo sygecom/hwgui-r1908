@@ -202,7 +202,7 @@ LOCAL len1, strv, newname
          ENDIF
       ENDDO
    ENDIF
-RETURN Nil
+RETURN NIL
 
 STATIC FUNCTION RDSTRDBF
 LOCAL stroka

@@ -74,7 +74,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
                bValid, acheck, nDisplay, nhItem, ncWidth) CLASS hCheckComboBox
 
-   ::acheck := IIf(acheck == Nil, {}, acheck)
+   ::acheck := IIf(acheck == NIL, {}, acheck)
    IF hb_IsNumeric(nStyle)
       nStyle := hwg_multibitor(nStyle, CBS_DROPDOWNLIST, CBS_OWNERDRAWVARIABLE, CBS_HASSTRINGS)
    ELSE
@@ -286,7 +286,7 @@ METHOD INIT() CLASS hCheckComboBox
       ENDIF
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -301,7 +301,7 @@ METHOD Requery() CLASS hCheckComboBox
       NEXT
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -309,7 +309,7 @@ METHOD Refresh() CLASS hCheckComboBox
 
    ::Super:refresh()
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 

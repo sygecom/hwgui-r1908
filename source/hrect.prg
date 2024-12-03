@@ -82,12 +82,12 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor) CLASS HR
 
 
    //::title := ""
-   ::lVert := IIf(lVert == Nil, .F., lVert)
+   ::lVert := IIf(lVert == NIL, .F., lVert)
    IF ::lVert
       ::nWidth  := 10
-      ::nHeight := IIf(nLength == Nil, 20, nLength)
+      ::nHeight := IIf(nLength == NIL, 20, nLength)
    ELSE
-      ::nWidth  := IIf(nLength == Nil, 20, nLength)
+      ::nWidth  := IIf(nLength == NIL, 20, nLength)
       ::nHeight := 10
    ENDIF
    ::oPen := HPen():Add(BS_SOLID, 1, GetSysColor(nColor))
@@ -103,7 +103,7 @@ METHOD Activate() CLASS HRect_Line
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 //---------------------------------------------------------------------------
 METHOD Paint(lpdis) CLASS HRect_Line
@@ -123,7 +123,7 @@ METHOD Paint(lpdis) CLASS HRect_Line
       DrawLine(hDC, x1, y1, x2, y1)
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 
 //Contribution   Luis Fernando Basso
@@ -138,9 +138,9 @@ ENDCLASS
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
             nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle) CLASS HShape
 
-   nBorder := IIf(nBorder == Nil, 1, nBorder)
-   nbStyle := IIf(nbStyle == Nil, PS_SOLID, nbStyle)
-   nfStyle := IIf(nfStyle == Nil, BS_TRANSPARENT , nfStyle)
+   nBorder := IIf(nBorder == NIL, 1, nBorder)
+   nbStyle := IIf(nbStyle == NIL, PS_SOLID, nbStyle)
+   nfStyle := IIf(nfStyle == NIL, BS_TRANSPARENT , nfStyle)
    nCurvature := nCurvature
 
    return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bcolor,,, ;
@@ -194,11 +194,11 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
 
    ::bPaint   := {|o, p|o:paint(p)}
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, ,;
-              bInit, bSize, ::bPaint, , tcolor, bColor) //= Nil
+              bInit, bSize, ::bPaint, , tcolor, bColor) //= NIL
 
    //::title := ""
     // OPAQUE DEFAULT
-   ::backStyle := IIf(nbackStyle == Nil, OPAQUE, nbackStyle)
+   ::backStyle := IIf(nbackStyle == NIL, OPAQUE, nbackStyle)
 
    ::lnoBorder := lnoBorder
    ::nBorder := nBorder
@@ -209,7 +209,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
 
    ::Activate()
 
-   IF ::ncStyle == Nil
+   IF ::ncStyle == NIL
       ::oPen := HPen():Add(::nbStyle, ::nBorder, ::tColor)
    //ELSE  // CONTAINER
    //    ::oPen := HPen():Add(PS_SOLID, 5, GetSysColor(COLOR_3DHILIGHT))
@@ -225,7 +225,7 @@ METHOD Activate() CLASS HDrawShape
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 
 METHOD SetColor(tcolor, bColor, lRedraw) CLASS HDrawShape
@@ -235,7 +235,7 @@ METHOD SetColor(tcolor, bColor, lRedraw) CLASS HDrawShape
    IF !Empty(lRedraw)
       RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 
 METHOD Curvature(nCurvature) CLASS HDrawShape
@@ -245,7 +245,7 @@ METHOD Curvature(nCurvature) CLASS HDrawShape
       RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_ERASENOW, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 //---------------------------------------------------------------------------
 METHOD Paint(lpdis) CLASS HDrawShape
@@ -256,7 +256,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
 
    oldbkMode := SetBKMode(hdc, ::backStyle)
    SelectObject(hDC, ::oPen:handle)
-   IF ::ncStyle != Nil
+   IF ::ncStyle != NIL
       /*
       IF ::lnoBorder = .F.
          IF ::ncStyle == 0      // RAISED
@@ -277,7 +277,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
       */
    ELSE
       IF ::backStyle == OPAQUE
-         IF ::Brush != Nil
+         IF ::Brush != NIL
             SelectObject(hDC, ::Brush:handle)
          ENDIF
          //RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
@@ -290,7 +290,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
       RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
    SetBKMode(hDC, oldbkMode)
-   RETURN Nil
+   RETURN NIL
 
 // END NEW CLASSE
 
@@ -347,7 +347,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
    ::ncStyle := IIf(ncStyle == NIL .AND. nStyle < WS_TABSTOP, 3, ncStyle)
    ::lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)
 
-   ::backStyle := IIf(nbackStyle == Nil, OPAQUE, nbackStyle) // OPAQUE DEFAULT
+   ::backStyle := IIf(nbackStyle == NIL, OPAQUE, nbackStyle) // OPAQUE DEFAULT
    ::bLoad := bLoad
    ::bRefresh := bRefresh
    ::bOther := bOther
@@ -385,7 +385,7 @@ METHOD Activate() CLASS HContainer
       ::Create()
       ::lCreate := .T.
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 METHOD Init() CLASS HContainer
 
@@ -404,7 +404,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    Local nEval
 
    IF hb_IsBlock(::bOther)
-      IF (nEval := Eval(::bOther, Self, msg, wParam, lParam)) != Nil .AND. nEval != -1
+      IF (nEval := Eval(::bOther, Self, msg, wParam, lParam)) != NIL .AND. nEval != -1
          RETURN 0
       ENDIF
    ENDIF
@@ -432,7 +432,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
 
 METHOD Visible(lVisibled) CLASS HContainer
 
-    IF lVisibled != Nil
+    IF lVisibled != NIL
       IF lVisibled
         ::Show()
       ELSE
@@ -457,7 +457,7 @@ METHOD Paint(lpdis) CLASS HContainer
 
    SelectObject(hDC, ::oPen:handle)
 
-   IF ::ncStyle != Nil
+   IF ::ncStyle != NIL
       SetBkMode(hDC, ::backStyle)
       IF !::lnoBorder
          IF ::ncStyle == 0      // RAISED
@@ -476,7 +476,7 @@ METHOD Paint(lpdis) CLASS HContainer
          DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
       ENDIF
       IF ::backStyle != TRANSPARENT
-         IF ::Brush != Nil
+         IF ::Brush != NIL
             FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle)
          ENDIF
       ELSE

@@ -34,9 +34,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, ;
                   bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
 
    // ::classname:= "HQHTM"
-   ::oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
-   ::id      := IIf(nId == Nil, ::NewId(), nId)
-   ::style   := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_CHILD+WS_VISIBLE)
+   ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+   ::id      := IIf(nId == NIL, ::NewId(), nId)
+   ::style   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE)
    ::nLeft   := nLeft
    ::nTop    := nTop
    ::nWidth  := nWidth
@@ -45,11 +45,11 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, ;
    ::bSize   := bSize
    ::bLink   := bLink
    ::bSubmit := bSubmit
-   IF caption != Nil
+   IF caption != NIL
       ::cText := caption
-   ELSEIF fname != Nil
+   ELSEIF fname != NIL
       ::filename := fname
-   ELSEIF resname != Nil
+   ELSEIF resname != NIL
       ::resname := resname
    ENDIF
 
@@ -66,22 +66,22 @@ METHOD Activate CLASS HQhtm
    ELSE
       QHTM_INIT()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
    // ::classname:= "HQHTM"
-   ::oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
+   ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := nId
    ::style   := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
    ::bInit   := bInit
    ::bSize   := bSize
    ::bLink   := bLink
    ::bSubmit := bSubmit
-   IF caption != Nil
+   IF caption != NIL
       ::cText := caption
-   ELSEIF fname != Nil
+   ELSEIF fname != NIL
       ::filename := fname
-   ELSEIF resname != Nil
+   ELSEIF resname != NIL
       ::resname := resname
    ENDIF
 
@@ -104,12 +104,12 @@ METHOD Init CLASS HQhtm
       QHTM_FormCallBack(::handle)
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Notify(lParam) CLASS HQhtm
 Local cLink := QHTM_GetNotify(lParam)
 
-   IF ::bLink == Nil .OR. !Eval(::bLink, Self, cLink)
+   IF ::bLink == NIL .OR. !Eval(::bLink, Self, cLink)
       IF "tp://" $ clink
          Return 0
       ELSE
@@ -126,8 +126,8 @@ Return 0
 Function QhtmFormProc(hCtrl, cMethod, cAction, cName, aFields)
 Local oCtrl := FindSelf(hCtrl)
 
-   IF oCtrl != Nil
-      IF oCtrl:bSubmit != Nil
+   IF oCtrl != NIL
+      IF oCtrl:bSubmit != NIL
          Eval(oCtrl:bSubmit, oCtrl, cMethod, cAction, cName, aFields)
       ENDIF
    ENDIF
@@ -168,13 +168,13 @@ Return Self
 METHOD Init() CLASS HQhtmButton
 
    ::Super:Init()
-   IF ::oFont == Nil .AND. ::oParent:oFont == Nil
+   IF ::oFont == NIL .AND. ::oParent:oFont == NIL
       SetCtrlFont(::oParent:handle, ::id, GetStockObject(SYSTEM_FONT))
    ENDIF
    SetWindowText(::handle, ::cHtml)
    QHTM_SetHtmlButton(::handle)
 
-Return Nil
+Return NIL
 
 EXIT PROCEDURE FreeQHTM
    QHTM_End()

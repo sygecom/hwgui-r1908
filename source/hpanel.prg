@@ -41,10 +41,10 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                bInit, bSize, bPaint, bcolor) CLASS HPanel
-LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
+LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
-   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == Nil, 0, nWidth), ;
-              IIf(nHeight == Nil, 0, nHeight), oParent:oFont, bInit, ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
+              IIf(nHeight == NIL, 0, nHeight), oParent:oFont, bInit, ;
               bSize, bPaint,,, bcolor)
 
    ::lBorder  := IIf(Hwg_Bitand(nStyle, WS_BORDER) + Hwg_Bitand(nStyle, WS_DLGFRAME) > 0, .T., .F.)
@@ -78,10 +78,10 @@ LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
 RETURN Self
 
 METHOD Redefine(oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor) CLASS HPanel
-LOCAL oParent := IIf(oWndParent == Nil, ::oDefaultParent, oWndParent)
+LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
-   ::Super:New(oWndParent, nId, 0, 0, 0, IIf(nWidth == Nil, 0, nWidth), ;
-              IIf(nHeight != Nil, nHeight, 0), oParent:oFont, bInit, ;
+   ::Super:New(oWndParent, nId, 0, 0, 0, IIf(nWidth == NIL, 0, nWidth), ;
+              IIf(nHeight != NIL, nHeight, 0), oParent:oFont, bInit, ;
               bSize, bPaint,,, bcolor)
 
 
@@ -117,12 +117,12 @@ METHOD Activate() CLASS HPanel
       */
       ::Init()
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 METHOD Init() CLASS HPanel
 
    IF !::lInit
-      IF ::bSize == Nil
+      IF ::bSize == NIL
          ::bSize := {|o, x, y|o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), ;
                                      IIf(::nTop > 0, y - ::nHeight, 0), ;
                                      IIf(::nWidth == 0 .OR. ::lResizeX, x, ::nWidth), ;
@@ -138,7 +138,7 @@ METHOD Init() CLASS HPanel
       
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    LOCAL nret
@@ -152,7 +152,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       IF ::backstyle == OPAQUE
          RETURN ::nrePaint
          /*
-         IF ::brush != Nil
+         IF ::brush != NIL
             IF !hb_IsNumeric(::brush)
                FillRect(wParam, 0, 0, ::nWidth, ::nHeight, ::brush:handle)
             ENDIF
@@ -167,7 +167,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          RETURN GetStockObject(NULL_BRUSH)
       ENDIF
    ELSEIF msg == WM_SIZE
-      IF ::oEmbedded != Nil
+      IF ::oEmbedded != NIL
          ::oEmbedded:Resize(Loword(lParam), Hiword(lParam))
       ENDIF
 
@@ -176,7 +176,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       RETURN ::Super:onEvent(WM_SIZE, wParam, lParam)
 
    ELSEIF msg == WM_DESTROY
-      IF ::oEmbedded != Nil
+      IF ::oEmbedded != NIL
          ::oEmbedded:END()
       ENDIF
       ::Super:onEvent(WM_DESTROY)
@@ -211,7 +211,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
 */
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
-         IF ::nScrollBars != -1 .AND. ::bScroll == Nil
+         IF ::nScrollBars != -1 .AND. ::bScroll == NIL
              ::ScrollHV(Self, msg, wParam, lParam)
              IF msg == WM_MOUSEWHEEL
                  RETURN 0
@@ -230,7 +230,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
 
    IF hb_IsBlock(::bPaint)
       Eval(::bPaint, Self)
-      RETURN Nil
+      RETURN NIL
    ENDIF
 
    pps    := DefinePaintStru()
@@ -240,7 +240,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
    SetBkMode(hDC, ::backStyle)
    IF ::backstyle == OPAQUE .AND. ::nrePaint = -1
       aCoors := GetClientRect(::handle)
-      IF ::brush != Nil
+      IF ::brush != NIL
          IF !hb_IsNumeric(::brush)
             FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], ::brush:handle)
          ENDIF
@@ -263,7 +263,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
       ENDIF
    ENDIF
    EndPaint(::handle, pps)
-   RETURN Nil
+   RETURN NIL
 
 METHOD Release() CLASS HPanel
 
@@ -293,13 +293,13 @@ METHOD Release() CLASS HPanel
    ::Super:Release()
    //  ::oParent:DelControl(Self)
 
-RETURN Nil
+RETURN NIL
 
 METHOD Hide() CLASS HPanel
    LOCAL lRes
    
    IF ::lHide
-      Return Nil
+      Return NIL
    ENDIF
    ::nrePaint := 0
    lres := ::ResizeOffSet(3)
@@ -321,13 +321,13 @@ METHOD Hide() CLASS HPanel
        //SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
        InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop + 1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
     ENDIF
-    RETURN Nil
+    RETURN NIL
 
 METHOD Show() CLASS HPanel
    LOCAL lRes
    
    IF !::lHide
-      Return Nil
+      Return NIL
    ENDIF
    ::nrePaint := - 1
    lRes := ::ResizeOffSet(2)
@@ -349,7 +349,7 @@ METHOD Show() CLASS HPanel
        //SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
        InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop+1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 METHOD Resize() CLASS HPanel
    LOCAL aCoors := GetWindowRect(::handle)
@@ -357,11 +357,11 @@ METHOD Resize() CLASS HPanel
    Local nWidth  := aCoors[3] - aCoors[1]
    
    IF !isWindowVisible(::handle) .OR. (::nHeight == nHeight .AND. ::nWidth == nWidth)
-      Return Nil
+      Return NIL
    ENDIF
 
    IF !::ResizeOffSet(1)
-      RETURN Nil
+      RETURN NIL
    ENDIF
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
@@ -376,14 +376,14 @@ METHOD Resize() CLASS HPanel
       ENDIF
       SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
    ELSE
-      RETURN Nil
+      RETURN NIL
    ENDIF
    */
    ::nWidth  := aCoors[3] - aCoors[1]
    ::nHeight := aCoors[4] - aCoors[2]
    //RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
  
-   RETURN Nil
+   RETURN NIL
 
 /* nMode => nMode = 0 INIT  / nMode = 1 RESIZE  / nMode = 2 SHOW  / nMode = 3 HIDE */
 METHOD ResizeOffSet(nMode) CLASS HPanel

@@ -47,10 +47,10 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
 
    ::title   := ""
    
-   ::aLeft   := IIf(aLeft == Nil, {}, aLeft)
-   ::aRight  := IIf(aRight == Nil, {}, aRight)
+   ::aLeft   := IIf(aLeft == NIL, {}, aLeft)
+   ::aRight  := IIf(aRight == NIL, {}, aRight)
    ::lVertical := (::nHeight > ::nWidth)
-   ::lScrolling := Iif(lScrolling == Nil, .F., lScrolling)
+   ::lScrolling := Iif(lScrolling == NIL, .F., lScrolling)
    IF (lTransp != NIL .AND. lTransp)
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
@@ -65,7 +65,7 @@ METHOD Activate() CLASS HSplitter
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
       ::Init()
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 METHOD Init() CLASS HSplitter
 
@@ -76,14 +76,14 @@ METHOD Init() CLASS HSplitter
       Hwg_InitWinCtrl(::handle)
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    HB_SYMBOL_UNUSED(wParam)
 
    IF msg == WM_MOUSEMOVE
-      IF ::hCursor == Nil
+      IF ::hCursor == NIL
          ::hCursor := LoadCursor(IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS))
       ENDIF
       Hwg_SetCursor(::hCursor)
@@ -147,7 +147,7 @@ METHOD Paint() CLASS HSplitter
    ENDIF
    EndPaint(::handle, pps)
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Drag(lParam) CLASS HSplitter
    LOCAL xPos := LOWORD(lParam), yPos := HIWORD(lParam)
@@ -169,7 +169,7 @@ METHOD Drag(lParam) CLASS HSplitter
    InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nleft + ::nWidth , ::nTop + ::nHeight)
    ::lMoved := .T.
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD DragAll(lScroll) CLASS HSplitter
    LOCAL i, oCtrl, xDiff := 0, yDiff := 0
@@ -218,5 +218,5 @@ METHOD DragAll(lScroll) CLASS HSplitter
       Eval(::bEndDrag, Self)
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 

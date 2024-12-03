@@ -49,10 +49,10 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
             lWeekNumbers, bSelect) CLASS HMonthCalendar
 
-   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), 0) //WS_TABSTOP)
-   nStyle   += IIf(lNoToday == Nil .OR. !lNoToday, 0, MCS_NOTODAY)
-   nStyle   += IIf(lNoTodayCircle == Nil .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
-   nStyle   += IIf(lWeekNumbers == Nil .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
+   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), 0) //WS_TABSTOP)
+   nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
+   nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
+   nStyle   += IIf(lWeekNumbers == NIL .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               ,, cTooltip)
 
@@ -64,7 +64,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    HWG_InitCommonControlsEx()
 
    /*
-   IF bChange != Nil
+   IF bChange != NIL
       ::oParent:AddEvent(MCN_SELECT, Self, bChange, .T., "onChange")
       ::oParent:AddEvent(MCN_SELCHANGE, Self, bChange, .T., "onChange")
    ENDIF
@@ -82,7 +82,7 @@ METHOD Activate() CLASS HMonthCalendar
       ::Init()
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -98,7 +98,7 @@ METHOD Init() CLASS HMonthCalendar
 
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -109,7 +109,7 @@ METHOD SetValue(dValue) CLASS HMonthCalendar
       ::value := dValue
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -138,7 +138,7 @@ METHOD onSelect() CLASS HMonthCalendar
       ::oparent:lSuspendMsgsHandling := .F.
     ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 //--------------------------------------------------------------------------//
 

@@ -42,7 +42,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bGetFocus, bKillFocus) CLASS HIPedit
 
-   nStyle   := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), WS_TABSTOP)
+   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont)
 
    ::title   := ""
@@ -57,7 +57,7 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
    ::Activate()
 
 
-   //IF bSetGet != Nil
+   //IF bSetGet != NIL
       /*
       ::bGetFocus := bGFocus
       ::bLostFocus := bLFocus
@@ -66,11 +66,11 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
       ::oParent:AddEvent(IPN_FIELDCHANGED, self, {|o, id|__Valid(o:FindControl(id))}, .T., "onChange")
       */
    //ELSE
-   IF bGetFocus != Nil
+   IF bGetFocus != NIL
       ::lnoValid := .T.
         // ::oParent:AddEvent(EN_SETFOCUS, self, ::bGetfocus, .T., "onGotFocus")
    ENDIF
-   IF bKillFocus != Nil
+   IF bKillFocus != NIL
         // ::oParent:AddEvent(EN_KILLFOCUS, self, ::bKillfocus, .T., "onLostFocus")
       ::oParent:AddEvent(IPN_FIELDCHANGED, Self, ::bKillFocus, .T., "onChange")
    ENDIF
@@ -89,7 +89,7 @@ METHOD Activate() CLASS HIPedit
       ::handle := InitIPAddress(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 METHOD Init() CLASS HIPedit
 
@@ -99,12 +99,12 @@ METHOD Init() CLASS HIPedit
       ::lInit := .T.
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetValue(aValue) CLASS HIPedit
    SETIPADDRESS(::handle , aValue[1], aValue[2], aValue[3], aValue[4])
    ::aValue := aValue
-   RETURN Nil
+   RETURN NIL
 
 
 METHOD GetValue() CLASS HIPedit
@@ -122,7 +122,7 @@ METHOD END() CLASS HIPedit
    // Nothing to do here, yet!
    ::Super:END()
 
-   RETURN Nil
+   RETURN NIL
 
 
 STATIC FUNCTION __GetFocus(oCtrl)

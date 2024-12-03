@@ -34,7 +34,7 @@ LOCAL han, stroka, scom, aScr, rejim := 0, i
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
 
-   scrkod := IIf(scrkod == Nil, "000", Upper(scrkod))
+   scrkod := IIf(scrkod == NIL, "000", Upper(scrkod))
    han := FOPEN(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
@@ -68,7 +68,7 @@ LOCAL aFormCode, aFormName
 #endif
             IF i == 0
                FCLOSE(han)
-               RETURN Nil
+               RETURN NIL
             ENDIF
             rejim  := 0
             scrkod := aFormCode[i]
@@ -81,7 +81,7 @@ LOCAL aFormCode, aFormName
 #else
       ALERT(fname + " can't be opened ")
 #endif
-      RETURN Nil
+      RETURN NIL
    ENDIF
 RETURN aScr
 
@@ -90,18 +90,18 @@ STATIC s_pp
 LOCAL han
 LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
 
-   IF lppNoInit == Nil
+   IF lppNoInit == NIL
       lppNoInit := .F.
    ENDIF
-   IF poz == Nil
+   IF poz == NIL
       poz := 1
    ENDIF
-   IF cTitle != Nil
+   IF cTitle != NIL
       rezArray[1] := cTitle
    ENDIF
    nLastError := 0
-   IF scrSource == Nil
-      han := Nil
+   IF scrSource == NIL
+      han := NIL
       poz := 0
    ELSEIF hb_IsChar(scrSource)
       strbuf := SPACE(STR_BUFLEN)
@@ -110,7 +110,7 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
    ELSE
       han := scrSource
    ENDIF
-   IF han == Nil .OR. han != - 1
+   IF han == NIL .OR. han != - 1
       IF !lppNoInit .or. s_pp == NIL
          s_pp := __pp_init()
       ENDIF
@@ -120,9 +120,9 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
       ENDIF
       numlin := 0
       IF !CompileScr(s_pp, han, @strbuf, @poz, rezArray, scrSource)
-         rezArray := Nil
+         rezArray := NIL
       ENDIF
-      IF scrSource != Nil .AND. hb_IsChar(scrSource)
+      IF scrSource != NIL .AND. hb_IsChar(scrSource)
          WndOut()
          FCLOSE(han)
       ENDIF
@@ -138,7 +138,7 @@ LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
       WndOut()
 #endif
       nLastError := -1
-      RETURN Nil
+      RETURN NIL
    ENDIF
 RETURN rezArray
 
@@ -251,7 +251,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
             BEGIN SEQUENCE
                AAdd(rezArray[2], &("{||EndScript("+LTrim(SubStr(stroka, 7))+")}"))
             RECOVER
-               IF scrSource != Nil .AND. hb_IsChar(scrSource)
+               IF scrSource != NIL .AND. hb_IsChar(scrSource)
                   WndOut()
                   FCLOSE(han)
                ENDIF
@@ -276,7 +276,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
             BEGIN SEQUENCE
                AAdd(rezArray[2], &("{||" + AllTrim(stroka) + "}"))
             RECOVER
-               IF scrSource != Nil .AND. hb_IsChar(scrSource)
+               IF scrSource != NIL .AND. hb_IsChar(scrSource)
                   WndOut()
                   FCLOSE(han)
                ENDIF
@@ -410,11 +410,11 @@ LOCAL arlen, stroka, varName, varValue, lDebug, lParam, j, RetValue, lSetDebugge
 MEMVAR iscr, bOldError, aScriptt
 PRIVATE iscr := 1, bOldError
 
-   scr_RetValue := Nil
+   scr_RetValue := NIL
    IF Type("aScriptt") != "A"
       Private aScriptt := aScript
    ENDIF
-   IF aScript == Nil .OR. (arlen := Len(aScript[2])) == 0
+   IF aScript == NIL .OR. (arlen := Len(aScript[2])) == 0
       Return .T.
    ENDIF
    lDebug := (Len(aScript) >= 3)
@@ -433,10 +433,10 @@ PRIVATE iscr := 1, bOldError
             j := 1
             DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
                PRIVATE &varName
-               IF varvalue != Nil
+               IF varvalue != NIL
                   &varName := &varValue
                ENDIF
-               IF lParam .AND. aParams != Nil .AND. Len(aParams) >= j
+               IF lParam .AND. aParams != NIL .AND. Len(aParams) >= j
                   &varname := aParams[j]
                ENDIF
                j ++
@@ -497,17 +497,17 @@ PRIVATE iscr := 1, bOldError
    WndOut()
 
    RetValue := scr_RetValue
-/*   scr_RetValue := Nil */
+/*   scr_RetValue := NIL */
 RETURN RetValue
 
 FUNCTION CallFunc(cProc, aParams, aScript)
 Local i := 1
 MEMVAR aScriptt
 
-   IF aScript == Nil
+   IF aScript == NIL
       aScript := aScriptt
    ENDIF
-   scr_RetValue := Nil
+   scr_RetValue := NIL
    cProc := Upper(cProc)
    DO WHILE i <= Len(aScript[2]) .AND. hb_IsArray(aScript[2, i])
       IF aScript[2, i, 1] == cProc
@@ -522,7 +522,7 @@ RETURN scr_RetValue
 FUNCTION EndScript(xRetValue)
    scr_RetValue := xRetValue
    iscr := -99
-RETURN Nil
+RETURN NIL
 
 FUNCTION CompileErr(nLine)
    nLine := numlin
@@ -536,12 +536,12 @@ RETURN &("{||"+string+"}")
 
 FUNCTION SetDebugInfo(lDebug)
 
-   lDebugInfo := IIf(lDebug == Nil, .T., lDebug)
+   lDebugInfo := IIf(lDebug == NIL, .T., lDebug)
 RETURN .T.
 
 FUNCTION SetDebugger(lDebug)
 
-   lDebugger := IIf(lDebug == Nil, .T., lDebug)
+   lDebugger := IIf(lDebug == NIL, .T., lDebug)
 RETURN .T.
 
 FUNCTION SetDebugRun()
@@ -553,28 +553,28 @@ RETURN .T.
 #ifdef __WINDOWS__
 
 STATIC FUNCTION WndOut()
-RETURN Nil
+RETURN NIL
 
 #else
 
 FUNCTION WndOut(sout, noscroll, prnew)
 LOCAL y1, x1, y2, x2, oldc, ly__size := (y__size != 0)
 STATIC w__buf
-   IF sout == Nil .AND. !ly__size
-      Return Nil
+   IF sout == NIL .AND. !ly__size
+      Return NIL
    ENDIF
    IF y__size == 0
       y__size := 5
       x__size := 30
       prnew   := .T.
-   ELSEIF prnew == Nil
+   ELSEIF prnew == NIL
       prnew := .F.
    ENDIF
    y1 := 13 - INT(y__size / 2)
    x1 := 41 - INT(x__size / 2)
    y2 := y1 + y__size
    x2 := x1 + x__size
-   IF sout == Nil
+   IF sout == NIL
       RESTSCREEN(y1, x1, y2, x2, w__buf)
       y__size := 0
    ELSE
@@ -582,13 +582,13 @@ STATIC w__buf
       IF prnew
          w__buf := SAVESCREEN(y1, x1, y2, x2)
          @ y1, x1, y2, x2 BOX "谀砍倌莱 "
-      ELSEIF noscroll == Nil
+      ELSEIF noscroll == NIL
          SCROLL(y1 + 1, x1 + 1, y2 - 1, x2 - 1, 1)
       ENDIF
       @ y2 - 1, x1 + 2 SAY sout
       SETCOLOR(oldc)
    ENDIF
-RETURN Nil
+RETURN NIL
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
@@ -614,7 +614,7 @@ LOCAL GetList := {}
    @ y2 - 1, x1 + 2 GET varget PICTURE spict
    READ
    SETCOLOR(oldc)
-RETURN IIf(LASTKEY() == 27, Nil, varget)
+RETURN IIf(LASTKEY() == 27, NIL, varget)
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
@@ -627,5 +627,5 @@ FUNCTION WndOpen(ysize, xsize)
    y__size := ysize
    x__size := xsize
    WndOut("",, .T.)
-RETURN Nil
+RETURN NIL
 #endif

@@ -44,7 +44,7 @@ CLASS HComboBox INHERIT HControl
    DATA nHeightBox
    DATA lResource INIT .F.
    DATA ldropshow INIT .F.
-   DATA nMaxLength     INIT Nil
+   DATA nMaxLength     INIT NIL
 
    METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, bInit, bSize, ;
       bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, ;
@@ -91,15 +91,15 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ::nHeightBox := Int(nHeight * 0.75)                    //   Meets A 22'S EDITBOX
    nHeight := nHeight + (IIf(Empty(nhItem), 16.250, (nhItem += 0.10)) * nDisplay)
 
-   IF lEdit == Nil
+   IF lEdit == NIL
       lEdit := .F.
    ENDIF
 
-   nStyle := Hwg_BitOr(IIf(nStyle == Nil, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
+   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
       bcolor)
 
-   IF lText == Nil
+   IF lText == NIL
       lText := .F.
    ENDIF
 
@@ -112,18 +112,18 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
    IF lEdit
       ::lText := .T.
-      IF nMaxLength != Nil
+      IF nMaxLength != NIL
          ::MaxLength := nMaxLength
       ENDIF
    ENDIF
 
    IF ::lText
-      ::value := IIf(vari == Nil .OR. !hb_IsChar(vari), "", vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
    ELSE
-      ::value := IIf(vari == Nil .OR. !hb_IsNumeric(vari), 1, vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
    ENDIF
 
-   aItems := IIf(aItems == Nil, {}, aClone(aItems))
+   aItems := IIf(aItems == NIL, {}, aClone(aItems))
    ::RowSource(aItems)
    ::aItemsBound := {}
    ::bSetGet := bSetGet
@@ -134,8 +134,8 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ::bGetFocus := bGFocus
    ::bLostFocus := bLFocus
 
-   IF bSetGet != Nil
-      IF bGFocus != Nil
+   IF bSetGet != NIL
+      IF bGFocus != NIL
          ::lnoValid := .T.
          ::oParent:AddEvent(CBN_SETFOCUS, self, {|o, id|::When(o:FindControl(id))},, "onGotFocus")
       ENDIF
@@ -144,7 +144,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       //::oParent:AddEvent(CBN_KILLFOCUS, Self, {|o, id|__Valid(o:FindControl(id))}, .F., "onLostFocus")
       //---------------------------------------------------------------------------
    ELSE
-      IF bGFocus != Nil
+      IF bGFocus != NIL
          ::lnoValid := .T.
          ::oParent:AddEvent(CBN_SETFOCUS, self, {|o, id|::When(o:FindControl(id))},, "onGotFocus")
          //::oParent:AddEvent(CBN_SETFOCUS, Self, {|o, id|__When(o:FindControl(id))},, "onGotGocus")
@@ -152,11 +152,11 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       ::oParent:AddEvent(CBN_KILLFOCUS, Self, {|o, id|::Valid(o:FindControl(id))}, .F., "onLostFocus")
       //::oParent:AddEvent(CBN_KILLFOCUS, Self, {|o, id|__Valid(o:FindControl(id))},, "onLostFocus")
    ENDIF
-   IF bChange != Nil .OR. bSetGet != Nil
+   IF bChange != NIL .OR. bSetGet != NIL
       ::oParent:AddEvent(CBN_SELCHANGE, Self, {|o, id|::onChange(o:FindControl(id))},, "onChange")
    ENDIF
 
-   IF bIChange != Nil .AND. ::lEdit
+   IF bIChange != NIL .AND. ::lEdit
       ::bchangeInt := bIChange
       //::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|__InteractiveChange(o:FindControl(id))}, , "interactiveChange")
       ::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|::InteractiveChange(o:FindControl(id))}, , "interactiveChange")
@@ -177,7 +177,7 @@ METHOD Activate() CLASS HComboBox
       ::nHeight := INT(::nHeightBox / 0.75)
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -186,10 +186,10 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
 
    HB_SYMBOL_UNUSED(bLFocus)
    //HB_SYMBOL_UNUSED(bIChange)
-   IF lEdit == Nil
+   IF lEdit == NIL
       lEdit := .F.
    ENDIF
-   IF lText == Nil
+   IF lText == NIL
       lText := .F.
    ENDIF
 
@@ -210,20 +210,20 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
    ::nDisplay := nDisplay
 
    IF ::lText
-      ::value := IIf(vari == Nil .OR. !hb_IsChar(vari), "", vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
    ELSE
-      ::value := IIf(vari == Nil .OR. !hb_IsNumeric(vari), 1, vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
    ENDIF
-   IF nMaxLength != Nil
+   IF nMaxLength != NIL
        ::MaxLength := nMaxLength
    ENDIF
 
-   aItems := IIf(aItems == Nil, {}, aClone(aItems))
+   aItems := IIf(aItems == NIL, {}, aClone(aItems))
    ::RowSource(aItems)
    ::aItemsBound := {}
    ::bSetGet := bSetGet
 
-   IF bSetGet != Nil
+   IF bSetGet != NIL
       ::bChangeSel := bChange
       ::bGetFocus := bGFocus
       ::oParent:AddEvent(CBN_SETFOCUS, self, {|o, id|::When(o:FindControl(id))},, "onGotFocus")
@@ -235,16 +235,16 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
          ::oParent:AddEvent(CBN_SELCHANGE, Self, {|o, id|::Valid(o:FindControl(id))},, "onChange")
        //  ::oParent:AddEvent(CBN_SELCHANGE, Self, {|o, id|__Valid(o:FindControl(id))},, "onChange")
       ENDIF
-   ELSEIF bChange != Nil .AND. ::lEdit
+   ELSEIF bChange != NIL .AND. ::lEdit
       ::bChangeSel := bChange
       ::oParent:AddEvent(CBN_SELCHANGE, Self, {|o, id|::onChange(o:FindControl(id))},, "onChange")
     //::oParent:AddEvent(CBN_SELCHANGE, Self, bChange,, "onChange")
    ENDIF
 
-   IF bGFocus != Nil .AND. bSetGet == Nil
+   IF bGFocus != NIL .AND. bSetGet == NIL
       ::oParent:AddEvent(CBN_SETFOCUS, self, {|o, id|::When(o:FindControl(id))},, "onGotFocus")
    ENDIF
-   IF bIChange != Nil .AND. ::lEdit
+   IF bIChange != NIL .AND. ::lEdit
       ::bchangeInt := bIChange
       //::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|__InteractiveChange(o:FindControl(id))}, , "interactiveChange")
       ::oParent:AddEvent(CBN_EDITUPDATE, Self, {|o, id|::InteractiveChange(o:FindControl(id))}, , "interactiveChange")
@@ -272,9 +272,9 @@ METHOD INIT() CLASS HComboBox
       ::nHolder := 1
       SetWindowObject(::handle, Self)
       HWG_INITCOMBOPROC(::handle)
-      IF ::aItems != Nil .AND. !Empty(::aItems)
+      IF ::aItems != NIL .AND. !Empty(::aItems)
          /*
-         IF ::value == Nil
+         IF ::value == NIL
             IF ::lText
                ::value := ::aItems[1]
             ELSE
@@ -341,7 +341,7 @@ METHOD INIT() CLASS HComboBox
       SendMessage(::handle, WM_SETREDRAW, 1, 0)
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -355,14 +355,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          RETURN 0
       ENDIF
    ENDIF
-   IF msg == WM_MOUSEWHEEL .AND. ::oParent:nScrollBars != -1 .AND. ::oParent:bScroll == Nil
+   IF msg == WM_MOUSEWHEEL .AND. ::oParent:nScrollBars != -1 .AND. ::oParent:bScroll == NIL
       ::super:ScrollHV(::oParent, msg, wParam, lParam)
       RETURN 0
    ELSEIF msg == CB_SHOWDROPDOWN
       ::ldropshow := IIf(wParam == 1, .T., ::ldropshow)
    ENDIF
 
-   IF ::bSetGet != Nil .OR. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+   IF ::bSetGet != NIL .OR. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
       IF msg == WM_CHAR .AND. (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
           !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
@@ -379,7 +379,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          IF wParam == VK_RETURN
             RETURN DLGC_WANTMESSAGE
          ELSEIF wParam == VK_ESCAPE .AND. ;
-                  (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != Nil .AND. !oCtrl:IsEnabled()
+                  (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
          ENDIF
            RETURN  DLGC_WANTCHARS + DLGC_WANTARROWS
@@ -412,13 +412,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             ProcOkCancel(Self, IIf(GETKEYSTATE(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
          ENDIF
            IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
-            IF ::oParent:oParent == Nil
+            IF ::oParent:oParent == NIL
              //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
            ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
-            IF ::oParent:oParent == Nil
+            IF ::oParent:oParent == NIL
              //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , -1)
@@ -549,7 +549,7 @@ RETURN -1
 
 METHOD MaxLength(nMaxLength) CLASS HComboBox
 
-   IF nMaxLength != Nil .AND. ::lEdit
+   IF nMaxLength != NIL .AND. ::lEdit
        SendMessage(::handle, CB_LIMITTEXT, nMaxLength, 0)
        ::nMaxLength := nMaxLength
    ENDIF
@@ -569,11 +569,11 @@ METHOD Requery() CLASS HComboBox
    NEXT
    */
    //::Refresh()
-   IF Empty(::Value) .AND. Len(::aItems) > 0 .AND. ::bSetGet == Nil .AND. !::lEdit
+   IF Empty(::Value) .AND. Len(::aItems) > 0 .AND. ::bSetGet == NIL .AND. !::lEdit
       ::SetItem(1)
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -588,11 +588,11 @@ METHOD Refresh() CLASS HComboBox
       ENDIF
       IF ::columnBound == 1
          IF ::lText
-         //vari := IIf(::bSetGetField != Nil .AND. hb_IsChar(vari), Trim(vari), vari)
-            ::value := IIf(vari == Nil .OR. !hb_IsChar(vari), "", vari)
+         //vari := IIf(::bSetGetField != NIL .AND. hb_IsChar(vari), Trim(vari), vari)
+            ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
                //SendMessage(::handle, CB_SETEDITSEL, 0, Len(::value))
          ELSE
-            ::value := IIf(vari == Nil .OR. !hb_IsNumeric(vari), 1, vari)
+            ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
          ENDIF
       ENDIF
       /*
@@ -627,7 +627,7 @@ METHOD Refresh() CLASS HComboBox
    ENDIF
    ::valueBound := ::GetValueBound()
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -645,7 +645,7 @@ METHOD SetItem(nPos) CLASS HComboBox
          ::ValueBound := ::GetValueBound()
       ELSE
          ::value := ""
-         ::valueBound := IIf(::bSetGet != Nil, Eval(::bSetGet,, Self), ::valueBound)
+         ::valueBound := IIf(::bSetGet != NIL, Eval(::bSetGet,, Self), ::valueBound)
       ENDIF
    ELSE
       ::value := nPos
@@ -670,7 +670,7 @@ METHOD SetItem(nPos) CLASS HComboBox
    ENDIF
    */
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -690,7 +690,7 @@ METHOD SetValue(xItem) CLASS HComboBox
    ENDIF
    ::setItem(nPos)
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -730,15 +730,15 @@ METHOD GetValueBound(xItem) CLASS HComboBox
    LOCAL nPos := SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1
 
    IF ::columnBound == 1
-      RETURN Nil
+      RETURN NIL
    ENDIF
-   IF xItem == Nil
+   IF xItem == NIL
       IF ::lText
-          //nPos := IIf(::Value == Nil, 0, AScan(::aItems, ::Value))
+          //nPos := IIf(::Value == NIL, 0, AScan(::aItems, ::Value))
           #ifdef __XHARBOUR__
-          nPos := IIf(::Value == Nil, 0, AScan(::aItems, ::value, , , .T.))
+          nPos := IIf(::Value == NIL, 0, AScan(::aItems, ::value, , , .T.))
           #else
-          nPos := IIf(::Value == Nil, 0, hb_AScan(::aItems, ::value, , , .T.))
+          nPos := IIf(::Value == NIL, 0, hb_AScan(::aItems, ::value, , , .T.))
           #endif
       ENDIF
    ELSE
@@ -762,7 +762,7 @@ RETURN ::ValueBound
 
 METHOD DisplayValue(cValue) CLASS HComboBox
 
-   IF cValue != Nil
+   IF cValue != NIL
        IF ::lEdit .AND. hb_IsChar(cValue)
          SetDlgItemText(::oParent:handle, ::id, cValue)
          ::cDisplayValue := cValue
@@ -807,7 +807,7 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
          ::RowSource({{cItem, cItemBound}})
          ::Aitems := {}
       ENDIF
-      IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
+      IF nPos != NIL .AND. nPos > 0 .AND. nPos < nCount
          aSize(::AitemsBound, nCount + 1)
          aIns(::AitemsBound, nPos, cItemBound)
       ELSE
@@ -815,13 +815,13 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
       ENDIF
       ::columnBound := 2
    ENDIF
-   IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
+   IF nPos != NIL .AND. nPos > 0 .AND. nPos < nCount
        aSize(::Aitems, nCount + 1)
        aIns(::Aitems, nPos, cItem)
     ELSE
        AAdd(::Aitems, cItem)
     ENDIF
-    IF nPos != Nil .AND. nPos > 0 .AND. nPos < nCount
+    IF nPos != NIL .AND. nPos > 0 .AND. nPos < nCount
        ComboInsertString(::handle, nPos - 1, cItem) //::aItems[i])
     ELSE
        ComboAddString(::handle, cItem) //::aItems[i])
@@ -855,7 +855,7 @@ METHOD InteractiveChange() CLASS HComboBox
    ::oparent:lSuspendMsgsHandling := .F.
    SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -874,11 +874,11 @@ RETURN .T.
 METHOD onChange(lForce) CLASS HComboBox
 
    IF !SelfFocus(::handle) .AND. Empty(lForce)
-      RETURN Nil
+      RETURN NIL
    ENDIF
    IF !isWindowVisible(::handle)
       ::SetItem(::Value)
-      RETURN Nil
+      RETURN NIL
    ENDIF
 
    ::SetItem(SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
@@ -889,7 +889,7 @@ METHOD onChange(lForce) CLASS HComboBox
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
-RETURN Nil
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -949,7 +949,7 @@ METHOD Valid() CLASS HComboBox
 
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
 
-   IF (oDlg := ParentGetDialog(Self)) == Nil .OR. oDlg:nLastKey != VK_ESCAPE
+   IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != VK_ESCAPE
       // end by sauli
       // IF lESC // "if" by Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
       // By Luiz Henrique dos Santos (luizhsantos@gmail.com.br) 03/06/2006
@@ -959,7 +959,7 @@ METHOD Valid() CLASS HComboBox
          res := Eval(::bLostFocus, ::value, Self)
          IF hb_IsLogical(res) .AND. !res
             ::SetFocus(.T.)
-            IF oDlg != Nil
+            IF oDlg != NIL
                oDlg:nLastKey := 0
             ENDIF
             ::oparent:lSuspendMsgsHandling := .F.
@@ -967,7 +967,7 @@ METHOD Valid() CLASS HComboBox
          ENDIF
 
       ENDIF
-      IF oDlg != Nil
+      IF oDlg != NIL
          oDlg:nLastKey := 0
       ENDIF
       IF lTab .AND. SelfFocus(hCtrl) .AND. !SelfFocus(::oParent:handle, oDlg:handle)
@@ -988,13 +988,13 @@ RETURN .T.
 
 METHOD RowSource(xSource) CLASS HComboBox
 
-   IF xSource != Nil
+   IF xSource != NIL
       IF hb_IsArray(xSource)
         IF Len(xSource) > 0 .AND. !hb_IsArray(xSource[1]) .AND. Len(xSource) <= 2 .AND. "->" $ xSource[1] // COLUMNS MAX = 2
-           ::xrowsource := {xSource[1], IIf(Len(xSource) > 1, xSource[2], Nil)}
+           ::xrowsource := {xSource[1], IIf(Len(xSource) > 1, xSource[2], NIL)}
         ENDIF
       ELSE
-         ::xrowsource := {xSource, Nil}
+         ::xrowsource := {xSource, NIL}
       ENDIF
       ::aItems := xSource
    ENDIF
@@ -1015,33 +1015,33 @@ METHOD Populate() CLASS HComboBox
    LOCAL xRowSource
 
    IF Empty(::aItems)
-      RETURN Nil
+      RETURN NIL
    ENDIF
    xRowSource := IIf(hb_IsArray(::xRowSource[1]), ::xRowSource[1, 1], ::xRowSource[1])
-   IF xRowSource != Nil .AND. (i := At("->", xRowSource)) > 0
+   IF xRowSource != NIL .AND. (i := At("->", xRowSource)) > 0
        cAlias := AllTrim(Left(xRowSource, i - 1))
        IF Select(cAlias) == 0 .AND. (i := At("(", cAlias)) > 0
           cAlias := LTrim(SubStr(cAlias, i + 1))
        ENDIF
       value := StrTran(xRowSource, calias + "->", , , 1, 1)
-      cAlias := IIf(ValType(xRowSource) == "U", Nil, cAlias)
-      cValueBound := IIf(::xrowsource[2]  != Nil .AND. cAlias != Nil, StrTran(::xrowsource[2], calias + "->"), Nil)
+      cAlias := IIf(ValType(xRowSource) == "U", NIL, cAlias)
+      cValueBound := IIf(::xrowsource[2]  != NIL .AND. cAlias != NIL, StrTran(::xrowsource[2], calias + "->"), NIL)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
    ENDIF
-   ::columnBound := IIf(cValueBound == Nil, 1, 2)
-   IF ::value == Nil
+   ::columnBound := IIf(cValueBound == NIL, 1, 2)
+   IF ::value == NIL
       IF ::lText
-         ::value := IIf(cAlias == Nil, ::aItems[1], (cAlias)->(&(value)))
+         ::value := IIf(cAlias == NIL, ::aItems[1], (cAlias)->(&(value)))
        ELSE
          ::value := 1
        ENDIF
    ELSEIF ::lText .AND. !::lEdit .AND. Empty(::value)
-      ::value := IIf(cAlias == Nil, ::aItems[1], (cAlias)->(&(value)))
+      ::value := IIf(cAlias == NIL, ::aItems[1], (cAlias)->(&(value)))
    ENDIF
    SendMessage(::handle, CB_RESETCONTENT, 0, 0)
    ::AitemsBound := {}
-   IF cAlias != Nil .AND. SELECT(cAlias) > 0
+   IF cAlias != NIL .AND. SELECT(cAlias) > 0
       ::aItems := {}
       nRecno := (cAlias)->(Recno())
       (cAlias)->(DBGOTOP())
@@ -1068,7 +1068,7 @@ METHOD Populate() CLASS HComboBox
              IF hb_IsArray(::aItems[i]) .AND. Len(::aItems[i]) > 1
                 AAdd(::AitemsBound, ::aItems[i, 2 ])
              ELSE
-                AAdd(::AitemsBound, Nil)
+                AAdd(::AitemsBound, NIL)
              ENDIF
              ::aItems[i] := ::aItems[i, 1]
              ComboAddString(::handle, ::aItems[i])

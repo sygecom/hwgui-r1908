@@ -33,7 +33,7 @@ FUNCTION InitObjects(oWnd)
          ENDIF
       NEXT   
    ENDIF
-   IF pArray != Nil
+   IF pArray != NIL
       FOR i := 1 TO Len(pArray)
          IF __ObjHasMsg(pArray[i], "INIT")
             pArray[i]:Init(oWnd)
@@ -46,9 +46,9 @@ FUNCTION InitObjects(oWnd)
 FUNCTION InitControls(oWnd, lNoActivate)
    LOCAL i, pArray := oWnd:aControls, lInit
 
-   lNoActivate := IIf(lNoActivate == Nil, .F., lNoActivate)
+   lNoActivate := IIf(lNoActivate == NIL, .F., lNoActivate)
 
-   IF pArray != Nil
+   IF pArray != NIL
       FOR i := 1 TO Len(pArray)
          // writelog("InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight))
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
@@ -84,43 +84,43 @@ FUNCTION FindParent(hCtrl, nLevel)
    IF !Empty(hParent)
       IF (i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent})) != 0
          RETURN HDialog():aModalDialogs[i]
-      ELSEIF (oParent := HDialog():FindDialog(hParent)) != Nil
+      ELSEIF (oParent := HDialog():FindDialog(hParent)) != NIL
          RETURN oParent
-      ELSEIF (oParent := HWindow():FindWindow(hParent)) != Nil
+      ELSEIF (oParent := HWindow():FindWindow(hParent)) != NIL
          RETURN oParent
       ENDIF
    ENDIF
-   IF nLevel == Nil
+   IF nLevel == NIL
       nLevel := 0
    ENDIF
    IF nLevel < 2
-      IF (oParent := FindParent(hParent, nLevel + 1)) != Nil
+      IF (oParent := FindParent(hParent, nLevel + 1)) != NIL
          RETURN oParent:FindControl(, hParent)
       ENDIF
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION FindSelf(hCtrl)
    LOCAL oParent
    oParent := FindParent(hCtrl)
-   IF oParent == Nil
+   IF oParent == NIL
       oParent := GetAncestor(hCtrl, GA_PARENT)
    ENDIF
-   IF oParent != Nil .AND. !hb_IsNumeric(oParent)
+   IF oParent != NIL .AND. !hb_IsNumeric(oParent)
       RETURN oParent:FindControl(, hCtrl)
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
       WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
-      IF lRedraw != Nil .AND. lRedraw
+      IF lRedraw != NIL .AND. lRedraw
          RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
@@ -153,16 +153,16 @@ FUNCTION VColor(cColor)
 
 FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    LOCAL oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-   LOCAL cRes := IIf(cResIni != Nil, Trim(cResIni), "")
+   LOCAL cRes := IIf(cResIni != NIL, Trim(cResIni), "")
    /*
    IF !Empty(cRes)
       Keyb_Event(VK_END)
    ENDIF
    */
-   nStyle := IIf(nStyle == Nil, 0, nStyle)
-   x := IIf(x == Nil, 210, x)
-   y := IIf(y == Nil, 10, y)
-   nDlgStyle := IIf(nDlgStyle == Nil, 0, nDlgStyle)
+   nStyle := IIf(nStyle == NIL, 0, nStyle)
+   x := IIf(x == NIL, 210, x)
+   y := IIf(y == NIL, 10, y)
+   nDlgStyle := IIf(nDlgStyle == NIL, 0, nDlgStyle)
 
    INIT DIALOG oModDlg TITLE cTitle At x, y SIZE 300, 140 ;
         FONT oFont CLIPPER ;
@@ -212,25 +212,25 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    LOCAL hDC, aMetr, width, height, aArea, aRect
    LOCAL nStyle := WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX
 
-   IF cTitle == Nil
+   IF cTitle == NIL
       cTitle := ""
    ENDIF
-   IF nLeft == Nil .AND. nTop == Nil
+   IF nLeft == NIL .AND. nTop == NIL
       nStyle += DS_CENTER
    ENDIF
-   IF nLeft == Nil
+   IF nLeft == NIL
       nLeft := 0
    ENDIF
-   IF nTop == Nil
+   IF nTop == NIL
       nTop := 0
    ENDIF
-   IF oFont == Nil
+   IF oFont == NIL
       oFont := HFont():Add("MS Sans Serif", 0, -13)
       lNewFont := .T.
    ENDIF
-   IF cOk != Nil
+   IF cOk != NIL
       minWidth += 120
-      IF cCancel != Nil
+      IF cCancel != NIL
          minWidth += 100
       ENDIF
       addY += 30
@@ -294,23 +294,23 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    oBrw:bKeyDown := {|o, key|HB_SYMBOL_UNUSED(o), IIf(key == 27, (EndDialog(oDlg:handle), .F.), .T.)}
 
    oBrw:lDispHead := .F.
-   IF clrT != Nil
+   IF clrT != NIL
       oBrw:tcolor := clrT
    ENDIF
-   IF clrB != Nil
+   IF clrB != NIL
       oBrw:bcolor := clrB
    ENDIF
-   IF clrTSel != Nil
+   IF clrTSel != NIL
       oBrw:tcolorSel := clrTSel
    ENDIF
-   IF clrBSel != Nil
+   IF clrBSel != NIL
       oBrw:bcolorSel := clrBSel
    ENDIF
 
-   IF cOk != Nil
-      x1 := Int(width / 2) - IIf(cCancel != Nil, 90, 40)
+   IF cOk != NIL
+      x1 := Int(width / 2) - IIf(cCancel != NIL, 90, 40)
       @ x1, height - 36 BUTTON cOk SIZE 80, 30 ON CLICK {||nChoice := oBrw:nCurrent, EndDialog(oDlg:handle)}
-      IF cCancel != Nil
+      IF cCancel != NIL
          @ x1 + 100, height - 36 BUTTON cCancel SIZE 80, 30 ON CLICK {||nChoice := 0, EndDialog(oDlg:handle)}
       ENDIF
    ENDIF
@@ -327,17 +327,17 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
    STATIC oDlg, hPBar, iCou, nLimit
 
    IF nStep == 0
-      nLimit := IIf(nRange != Nil, Int(nRange / maxPos), 1)
+      nLimit := IIf(nRange != NIL, Int(nRange / maxPos), 1)
       iCou := 0
-      x1 := IIf(x1 == Nil, 0, x1)
-      y1 := IIf(x1 == Nil, 0, y1)
-      width := IIf(width == Nil, 220, width)
-      height := IIf(height == Nil, 55, height)
+      x1 := IIf(x1 == NIL, 0, x1)
+      y1 := IIf(x1 == NIL, 0, y1)
+      width := IIf(width == NIL, 220, width)
+      height := IIf(height == NIL, 55, height)
       IF x1 == 0
          nStyle += DS_CENTER
       ENDIF
-      IF oWnd != Nil
-         oDlg := Nil
+      IF oWnd != NIL
+         oDlg := NIL
          hPBar := CreateProgressBar(oWnd:handle, maxPos, 20, 25, width - 40, 20)
       ELSE
          INIT DIALOG oDlg TITLE cTitle   ;
@@ -356,23 +356,23 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
       UpdateProgressBar(hPBar)
    ELSEIF nStep == 3
       SetWindowText(oDlg:handle, cTitle)
-      IF maxPos != Nil
+      IF maxPos != NIL
          SetProgressBar(hPBar, maxPos)
       ENDIF
    ELSE
       DestroyWindow(hPBar)
-      IF oDlg != Nil
+      IF oDlg != NIL
          EndDialog(oDlg:handle)
       ENDIF
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION EndWindow()
-   IF HWindow():GetMain() != Nil
+   IF HWindow():GetMain() != NIL
       SendMessage(HWindow():aWindows[1]:handle, WM_SYSCOMMAND, SC_CLOSE, 0)
    ENDIF
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION HdSerial(cDrive)
 
@@ -392,7 +392,7 @@ FUNCTION Hwg_WriteIni(cSection, cEntry, cValue, cFile)
 FUNCTION SetHelpFileName(cNewName)
    STATIC cName := ""
    LOCAL cOldName := cName
-   IF cNewName != Nil
+   IF cNewName != NIL
       cName := cNewName
    ENDIF
    RETURN cOldName
@@ -400,7 +400,7 @@ FUNCTION SetHelpFileName(cNewName)
 FUNCTION RefreshAllGets(oDlg)
 
    AEval(oDlg:GetList, {|o|o:Refresh()})
-   RETURN Nil
+   RETURN NIL
 
 /*
 
@@ -426,7 +426,7 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
    cFile := repl(chr(0), 32000)
    aFiles := {}
 
-   cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, Nil, @nIndex)
+   cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, NIL, @nIndex)
 
    nAt := At(Chr(0) + Chr(0), cFile)
    IF nAt != 0
@@ -468,17 +468,17 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
    LOCAL ASize
    LOCAL hFont
 
-   oFont := IIf(oFont != Nil, oFont, oWin:oFont)
+   oFont := IIf(oFont != NIL, oFont, oWin:oFont)
 
    hDC       := GetDC(oWin:handle)
-   IF oFont == Nil .AND. oWin:oParent != Nil
+   IF oFont == NIL .AND. oWin:oParent != NIL
       oFont := oWin:oParent:oFont
    ENDIF
-   IF oFont != Nil
+   IF oFont != NIL
       hFont := SelectObject(hDC, oFont:handle)
    ENDIF
    ASize     := GetTextSize(hDC, cTxt)
-   IF oFont != Nil
+   IF oFont != NIL
       SelectObject(hDC, hFont)
    ENDIF
    ReleaseDC(oWin:handle, hDC)
