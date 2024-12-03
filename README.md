@@ -58,3 +58,7 @@ ser encontrado nos link's abaixo:
 
 https://sourceforge.net/projects/hwgui/  
 https://sourceforge.net/p/hwgui/code/1908/tree/  
+
+Alterações (commits) com a descrição "Formatação" modificam o código-fonte, mas sem alterar o comportamento da
+HWGUI. O objetivo destas alterações é a padronização do código-fonte, de forma que não há a necessidade real de
+atualizar e recompilar.
