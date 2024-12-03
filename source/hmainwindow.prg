@@ -25,8 +25,20 @@ CLASS HMainWindow INHERIT HWindow
 
 #if 0 // old code for reference (to be deleted)
 CLASS VAR aMessages INIT { ;
-                           { WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_SYSCOMMAND, ;
-                             WM_NOTIFYICON, WM_ENTERIDLE, WM_CLOSE, WM_DESTROY, WM_ENDSESSION, WM_ACTIVATE, WM_HELP }, ;
+                           { ;
+                             WM_COMMAND, ;
+                             WM_ERASEBKGND, ;
+                             WM_MOVE, ;
+                             WM_SIZE, ;
+                             WM_SYSCOMMAND, ;
+                             WM_NOTIFYICON, ;
+                             WM_ENTERIDLE, ;
+                             WM_CLOSE, ;
+                             WM_DESTROY, ;
+                             WM_ENDSESSION, ;
+                             WM_ACTIVATE, ;
+                             WM_HELP ;
+                           }, ;
                            { ;
                              {|o, w, l|onCommand(o, w, l)},        ;
                              {|o, w|onEraseBk(o, w)},              ;

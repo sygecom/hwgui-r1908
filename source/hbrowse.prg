@@ -274,7 +274,7 @@ CLASS HBrowse INHERIT HControl
    DATA nLastRecordFilter INIT 0       // Save the last record of filter.
    DATA nFirstRecordFilter INIT 0      // Save the first record of filter.
    DATA nPaintRow, nPaintCol                   // Row/Col being painted
-   DATA aMargin INIT { 0, 0, 0, 0 } PROTECTED  // Margin TOP-RIGHT-BOTTOM-LEFT
+   DATA aMargin INIT {0, 0, 0, 0} PROTECTED  // Margin TOP-RIGHT-BOTTOM-LEFT
    DATA lRepaintBackground INIT .F. HIDDEN    // Set to true performs a canvas fill before painting rows
 
    DATA lHeadClick  INIT  .F.    // .T. while a HEADER column is CLICKED
@@ -487,7 +487,7 @@ METHOD SetMargin(nTop, nRight, nBottom, nLeft) CLASS HBrowse
       nLeft := nRight
    ENDIF
 
-   ::aMargin := { nTop, nRight, nBottom, nLeft }
+   ::aMargin := {nTop, nRight, nBottom, nLeft}
 
    RETURN aOldMargin
 
@@ -1489,9 +1489,9 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
          ::rowPos  := ::nCurrent  := ::colpos := 1
          ::nLeftCol := 1
          ::freeze  := 0
-         ::internal  := { 15, 1, 0, 0 }
+         ::internal  := {15, 1, 0, 0}
          ::aArray     := NIL
-         ::aMargin := { 1, 1, 0, 1 }
+         ::aMargin := {1, 1, 0, 1}
          IF Empty(ColSizeCursor)
             ColSizeCursor := LoadCursor(IDC_SIZEWE)
             arrowCursor := LoadCursor(IDC_ARROW)
@@ -2262,8 +2262,8 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       xSize := ::nShowMark + ::nDeleteMark
       IF ::hTheme != NIL
          hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 1, ;
-               { ::x1 - xSize - 1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, ;
-               ::x1 + 1, ::y1 + 1 }, NIL)
+               {::x1 - xSize - 1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, ;
+               ::x1 + 1, ::y1 + 1}, NIL)
       ELSE
          SelectObject(hDC, oPen64:handle)
          Rectangle(hDC, ::x1 - xSize -1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
@@ -2479,7 +2479,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
 
         IF ::lDispSep
            IF ::hTheme != NIL
-              aItemRect := {  x, ::y2 - nPixelFooterHeight, x + xsize, ::y2 + 1 }
+              aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize, ::y2 + 1}
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               SetBkMode(hDC, 1)
            ELSE
@@ -2488,7 +2488,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
            ENDIF
         ELSE
            IF ::hTheme != NIL
-              aItemRect := {  x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1 }
+              aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1}
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               SetBkMode(hDC, 1)
            ELSE
@@ -2550,7 +2550,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
       SelectObject(hDC, oPen64:handle)
       xSize := nMl
       IF ::hTheme != NIL
-         aItemRect := {  ::x1 - xSize, nY, ::x1 - 1, ::y2 + 1 }
+         aItemRect := {::x1 - xSize, nY, ::x1 - 1, ::y2 + 1}
          hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
       ELSE
         DrawButton(hDC, ::x1 - xSize, nY, ;
@@ -2594,10 +2594,10 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       IF ::lShowMark
          IF ::hTheme != NIL
              hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, IIf(lSelected, PBS_VERTICAL, PBS_VERTICAL), ;
-                      { ::x1 - ::nShowMark - ::nDeleteMark - 1,;
-                        ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
-                        ::x1 - ::nDeleteMark, ;
-                        ::y1 + (::height + 1) * ::nPaintRow + 1 }, NIL)
+                      {::x1 - ::nShowMark - ::nDeleteMark - 1,;
+                       ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
+                       ::x1 - ::nDeleteMark, ;
+                       ::y1 + (::height + 1) * ::nPaintRow + 1}, NIL)
           ELSE
              DrawButton(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 0,;
                          ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
@@ -2702,9 +2702,9 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                   // new nando
                   IF ::aColumns[::nPaintCol]:type = "L"
                      ncheck := IIf(sviv = "T", 1, 0) + 1
-                     rcBitmap := { x + ::aMargin[4] + 1, ;
+                     rcBitmap := {x + ::aMargin[4] + 1, ;
                                ::y1 + (::height + 1) * (::nPaintRow - 1) + 1 + ::aMargin[1], ;
-                               0, 0 }
+                               0, 0}
                      nCheckHeight := (::y1 + (::height + 1) * ::nPaintRow) - (::y1 + (::height + 1) * (::nPaintRow - 1)) - ::aMargin[1] - ::aMargin[3] - 1
                      nCheckHeight := IIf(nCheckHeight > 16, 16, nCheckHeight)
                      IF Hwg_BitAND(::aColumns[::nPaintCol]:nJusLin, DT_CENTER) != 0
@@ -3333,7 +3333,7 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
          xSize := Max(::x2 - x1, xSize)
       ENDIF
       IF !::aColumns[nCols]:lHide
-         Aadd(aColumns, { xSize, ncols })
+         Aadd(aColumns, {xSize, ncols})
          x1 += xSize
          xSize := 0
       ENDIF
@@ -3358,7 +3358,7 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
    //nando
    fif := aColumns[fif, 2]
    IF lReturnRowCol != NIL .AND. lReturnRowCol
-       RETURN { IIf(nLine <= ::rowCurrCount, nLine, - 1), fif }
+       RETURN {IIf(nLine <= ::rowCurrCount, nLine, - 1), fif}
    ENDIF
 
 IF nLine > 0 .AND. nLine <= ::rowCurrCount
@@ -3534,7 +3534,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
          xSize := Max(::x2 - x1, xSize)
       ENDIF
       IF !::aColumns[nCols]:lhide
-         Aadd(aColumns, { xSize, ncols })
+         Aadd(aColumns, {xSize, ncols})
          x1 += xSize
          xSize := 0
       ENDIF

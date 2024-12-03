@@ -244,7 +244,7 @@ METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nSc
    // usar el documento.
    DEFAULT ;
    cFileName TO "REPORT.RTF", ;
-   aFontData TO { "Courier New" }, ;
+   aFontData TO {"Courier New"}, ;
    nFontSize TO 12, ;
    nScale    TO INCH_TO_TWIP, ;
    nFontColor TO 0
@@ -569,7 +569,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
    LOCAL cWrite := ""
    LOCAL i, cChar, nChar
    LOCAL cString := cStr(xData) //cValToChar(xData)
-   LOCAL aCodes := { "\", "{", "}" }
+   LOCAL aCodes := {"\", "{", "}"}
 
    DEFAULT lCodesOK TO .F.
 
@@ -1172,7 +1172,7 @@ METHOD Borders(cEntity, cBorder) CLASS RichText
 * 01/19/97   TRM         Creation
 *
 *********************************************************************
-   LOCAL i, aBorder := { "t", "b", "l", "r" }
+   LOCAL i, aBorder := {"t", "b", "l", "r"}
 
    IF hb_IsChar(cBorder)
       FOR i := 1 TO 4
@@ -1238,14 +1238,14 @@ METHOD BorderCode(cBorderID) CLASS RichText
    LOCAL cBorderCode := "", n
    LOCAL aBorder := ;
          { ;
-           { "NONE",        NIL   }, ;
-           { "SINGLE",      "s"   }, ;
-           { "DOUBLETHICK", "th"  }, ;
-           { "SHADOW",      "sh"  }, ;
-           { "DOUBLE",      "db"  }, ;
-           { "DOTTED",      "dot" }, ;
-           { "DASHED",      "dash" }, ;
-           { "HAIRLINE",    "hair" }  ;
+           {"NONE",        NIL   }, ;
+           {"SINGLE",      "s"   }, ;
+           {"DOUBLETHICK", "th"  }, ;
+           {"SHADOW",      "sh"  }, ;
+           {"DOUBLE",      "db"  }, ;
+           {"DOTTED",      "dot" }, ;
+           {"DASHED",      "dash"}, ;
+           {"HAIRLINE",    "hair"}  ;
          }
 
    cBorderID := Upper(RTrim(cBorderID))
@@ -1274,12 +1274,12 @@ METHOD ShadeCode(cShadeID) CLASS RichText
    LOCAL cShadeCode := "", n
    LOCAL aShade := ;
          { ;
-           { "NONE",         ""        }, ;
-           { "HORIZ",        "horiz"   }, ;
-           { "VERT",         "vert"    }, ;
-           { "CROSS",        "cross"   }, ;
-           { "FORDIAG",      "fdiag"   }, ;
-           { "BACKDIAG",     "bdiag"      } ;
+           {"NONE",     ""     }, ;
+           {"HORIZ",    "horiz"}, ;
+           {"VERT",     "vert" }, ;
+           {"CROSS",    "cross"}, ;
+           {"FORDIAG",  "fdiag"}, ;
+           {"BACKDIAG", "bdiag"} ;
          }
 
    cShadeID := Upper(RTrim(cShadeID))
@@ -1405,11 +1405,11 @@ METHOD Linea(aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
    nxoffset TO 0, ;
    nyoffset TO 0, ;
    nWidth TO  0.01, ;
-   aColores TO { 0, 0, 0 }, ;
-   ASize TO { 2.0, 0 }, ;
+   aColores TO {0, 0, 0}, ;
+   ASize TO {2.0, 0}, ;
    nPatron TO 1, ;
    lSombra TO .F., ;
-   aSombra TO { 0, 0 }
+   aSombra TO {0, 0}
 
    ::OpenGroup()
    ::TextCode("do\dobxmargin\dobypara\dpline")
@@ -1584,16 +1584,16 @@ METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
                    lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd) CLASS RichText
 
    DEFAULT cTexto TO "", ;
-   aOffset TO { 0, 0 }, ;
-   ASize TO { 2.0, 1.0 }, ;
+   aOffset TO {0, 0}, ;
+   ASize TO {2.0, 1.0}, ;
    cTipo TO "SOLIDA", ;
-   aColores TO { 0, 0, 0 }, ;
+   aColores TO {0, 0, 0}, ;
    nWidth TO 20, ;
    nPatron TO 1, ;
    lEnd TO .F., ;
    lRounded TO .F., ;
    lSombra TO .F., ;
-   aSombra TO { 0, 0 }
+   aSombra TO {0, 0}
 
    ::aOfftBox := aOffset
    ::aSztBox := ASize

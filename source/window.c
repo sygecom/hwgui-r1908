@@ -439,9 +439,8 @@ HB_FUNC(HWG_ACTIVATEMDIWINDOW)
 
 /*  Creates child MDI window
     CreateMdiChildWindow(aChildWindow)
-    aChildWindow = { cWindowTitle, Nil, aActions, Nil,
-                    nStatusWindowID, bStatusWrite }
-    aActions = { { nMenuItemID, bAction }, ... }
+    aChildWindow = {cWindowTitle, Nil, aActions, Nil, nStatusWindowID, bStatusWrite}
+    aActions = {{nMenuItemID, bAction}, ...}
 */
 
 HB_FUNC(HWG_CREATEMDICHILDWINDOW)

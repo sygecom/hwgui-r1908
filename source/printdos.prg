@@ -85,11 +85,11 @@ CLASS PrintDos
 ENDCLASS
 
 METHOD New(oPorta) CLASS PrintDos
-   LOCAL oDouble  := { oMATRIXDOUBLE, oINKJETDOUBLE, oLASER10CPI }
-   LOCAL oNormal  := { oMATRIXNORMAL, oINKJETNORMAL, oLASER12CPI }
-   LOCAL oCompress := { oMATRIXCOMPRESS, oINKJETCOMPRESS, oLASER18CPI }
-   LOCAL oBold    := { oMATRIXBOLD, oINKJETBOLD, oLASERBOLD  }       //Added by  por Fernando Athayde
-   LOCAL oUnBold  := { oMATRIXUNBOLD, oINKJETUNBOLD, oLASERUNBOLD }       //Added by  por Fernando Athayde
+   LOCAL oDouble  := {oMATRIXDOUBLE, oINKJETDOUBLE, oLASER10CPI}
+   LOCAL oNormal  := {oMATRIXNORMAL, oINKJETNORMAL, oLASER12CPI}
+   LOCAL oCompress := {oMATRIXCOMPRESS, oINKJETCOMPRESS, oLASER18CPI}
+   LOCAL oBold    := {oMATRIXBOLD, oINKJETBOLD, oLASERBOLD}       //Added by  por Fernando Athayde
+   LOCAL oUnBold  := {oMATRIXUNBOLD, oINKJETUNBOLD, oLASERUNBOLD}       //Added by  por Fernando Athayde
    LOCAL oPtrSetup, oPtrName
 
    ::cCompr   := oCompress[::oPrintStyle]
@@ -432,7 +432,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
    LOCAL han := FOpen(fName, FO_READ + FO_SHARED)
    LOCAL oPage := 1, nPage := 1
    LOCAL oFont := HFont():Add("Courier New", 0, - 13)
-   LOCAL oText := { "" }
+   LOCAL oText := {""}
    LOCAL oDlg, oColor1, oColor2
    LOCAL oEdit
    LOCAL oPrt := IIf(Empty(::oPorta) .or. ::oPorta == "PREVIEW", "LPT1", ::oPorta)

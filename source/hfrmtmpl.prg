@@ -22,56 +22,57 @@
 // nando
 STATIC coName
 //
-STATIC aClass := { "label", "button", "buttonex", "toolbutton", "checkbox",                   ;
-       "radiobutton", "editbox", "group", "radiogroup",  ;
-       "bitmap", "icon", "richedit", "datepicker", "updown", ;
-       "combobox", "line", "toolbar", "panel", "ownerbutton",     ;
-       "browse", "column", "monthcalendar", "trackbar", "page",      ;
-       "tree", "status", "menu", "animation" ,             ;
-       "progressbar", "shadebutton", "listbox", "gridex",  ;
-       "timer", "link"                                   ;
-     }
+STATIC aClass := { ;
+   "label", "button", "buttonex", "toolbutton", "checkbox", ;
+   "radiobutton", "editbox", "group", "radiogroup", ;
+   "bitmap", "icon", "richedit", "datepicker", "updown", ;
+   "combobox", "line", "toolbar", "panel", "ownerbutton", ;
+   "browse", "column", "monthcalendar", "trackbar", "page", ;
+   "tree", "status", "menu", "animation", ;
+   "progressbar", "shadebutton", "listbox", "gridex", ;
+   "timer", "link" ;
+   }
 STATIC aCtrls := { ;
-       "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
-       "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
-       "HButtonex():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,hbmp,nBStyle,hIco )",  ;
-       "AddButton(nBitIp,nId,nState,nStyle,cCaption,onClick,ctooltip,amenu)",  ;
-       "HCheckButton():New(oPrnt,nId,lInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,bwhen)", ;
-       "HRadioButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
-       "HEdit():New(oPrnt,nId,cInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,cPicture,lNoBorder,nMaxLength,lPassword)", ;
-       "HGroup():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor)", ;
-       "RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
-       "HSayBmp():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Bitmap,lResource,onInit,onSize,ctooltip)", ;
-       "HSayIcon():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Icon,lResource,onInit,onSize,ctooltip)", ;
-       "HRichEdit():New(oPrnt,nId,cInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor)", ;
-       "HDatePicker():New(oPrnt,nId,dInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onGetFocus,onLostFocus,onChange,ctooltip,TextColor,BackColor)", ;
-       "HUpDown():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,nUpDWidth,nLower,nUpper)", ;
-       "HComboBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip,lEdit,lText,bWhen,TextColor,BackColor)", ;
-       "HLine():New(oPrnt,nId,lVertical,nLeft,nTop,nLength,onSize)", ;
-       "HToolBar():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,,,,,,,Items)", ;
-       "HPanel():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,lDocked)", ;
-       "HOwnButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,flat,caption,TextColor,oFont,TextLeft,TextTop,widtht,heightt,BtnBitmap,lResource,BmpLeft,BmpTop,widthb,heightb,lTr,trColor,cTooltip)", ;
-       "Hbrowse():New(BrwType,oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,lAppend,lAutoedit,onUpdate,onKeyDown,onPosChange,lMultiSelect)", ;
-       "AddColumn(HColumn():New(cHeader,Fblock,cValType,nLength,nDec,lEdit,nJusHead, nJusLine, cPicture,bValid, bWhen, Items, ClrBlck, HeadClick ))", ;  //oBrw:AddColumn
-       "HMonthCalendar():New(oPrnt,nId,dInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onChange,cTooltip,lNoToday,lNoTodayCircle,lWeekNumbers)", ;
-       "HTrackBar():New(oPrnt,nId,nInitValue,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,bPaint,cTooltip,onChange,onDrag,nLow,nHigh,lVertical,TickStyle,TickMarks)", ;
-       "HTab():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,Tabs,onChange,aImages,lResource)", ;
-       "HTree():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,TextColor,BackColor,aImages,lResource,lEditLabels,onTreeClick)", ;
-       "HStatus():New(oPrnt,nId,nStyle,oFont,aParts,onInit,onSize)", ;
-       ".F.", ;
-       "HAnimation():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,Filename,AutoPlay,Center,Transparent)", ;
-       "HProgressBar():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip)", ;
-       "HshadeButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,lFlat,caption,color,font,xt,yt,bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,cTooltip,lEnabled,shadeID,palette,granularity,highlight,coloring,shcolor)", ;
-       "HListBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip)", ;
-       "HGridEx():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,onKeyDown,onPosChg,onDispInfo,nItemCout,lNoLines,TextColor,BackColor,lNoHeader,aBit,Items)" , ;
-       "HTimer():New(oPrnt,nId,nInterval, onAction)" , ;
-       "HStaticLink():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,cTooltip,TextColor,BackColor,lTransp,Link,VisitedColor,LinkColor,HoverColor)" ;
-     }
+   "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
+   "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
+   "HButtonex():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,hbmp,nBStyle,hIco )",  ;
+   "AddButton(nBitIp,nId,nState,nStyle,cCaption,onClick,ctooltip,amenu)",  ;
+   "HCheckButton():New(oPrnt,nId,lInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,bwhen)", ;
+   "HRadioButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
+   "HEdit():New(oPrnt,nId,cInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,cPicture,lNoBorder,nMaxLength,lPassword)", ;
+   "HGroup():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor)", ;
+   "RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
+   "HSayBmp():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Bitmap,lResource,onInit,onSize,ctooltip)", ;
+   "HSayIcon():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Icon,lResource,onInit,onSize,ctooltip)", ;
+   "HRichEdit():New(oPrnt,nId,cInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor)", ;
+   "HDatePicker():New(oPrnt,nId,dInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onGetFocus,onLostFocus,onChange,ctooltip,TextColor,BackColor)", ;
+   "HUpDown():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,nUpDWidth,nLower,nUpper)", ;
+   "HComboBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip,lEdit,lText,bWhen,TextColor,BackColor)", ;
+   "HLine():New(oPrnt,nId,lVertical,nLeft,nTop,nLength,onSize)", ;
+   "HToolBar():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,,,,,,,Items)", ;
+   "HPanel():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,lDocked)", ;
+   "HOwnButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,flat,caption,TextColor,oFont,TextLeft,TextTop,widtht,heightt,BtnBitmap,lResource,BmpLeft,BmpTop,widthb,heightb,lTr,trColor,cTooltip)", ;
+   "Hbrowse():New(BrwType,oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,lAppend,lAutoedit,onUpdate,onKeyDown,onPosChange,lMultiSelect)", ;
+   "AddColumn(HColumn():New(cHeader,Fblock,cValType,nLength,nDec,lEdit,nJusHead, nJusLine, cPicture,bValid, bWhen, Items, ClrBlck, HeadClick ))", ;  //oBrw:AddColumn
+   "HMonthCalendar():New(oPrnt,nId,dInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onChange,cTooltip,lNoToday,lNoTodayCircle,lWeekNumbers)", ;
+   "HTrackBar():New(oPrnt,nId,nInitValue,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,bPaint,cTooltip,onChange,onDrag,nLow,nHigh,lVertical,TickStyle,TickMarks)", ;
+   "HTab():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,Tabs,onChange,aImages,lResource)", ;
+   "HTree():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,TextColor,BackColor,aImages,lResource,lEditLabels,onTreeClick)", ;
+   "HStatus():New(oPrnt,nId,nStyle,oFont,aParts,onInit,onSize)", ;
+   ".F.", ;
+   "HAnimation():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,Filename,AutoPlay,Center,Transparent)", ;
+   "HProgressBar():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip)", ;
+   "HshadeButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,lFlat,caption,color,font,xt,yt,bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,cTooltip,lEnabled,shadeID,palette,granularity,highlight,coloring,shcolor)", ;
+   "HListBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip)", ;
+   "HGridEx():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,onKeyDown,onPosChg,onDispInfo,nItemCout,lNoLines,TextColor,BackColor,lNoHeader,aBit,Items)" , ;
+   "HTimer():New(oPrnt,nId,nInterval, onAction)" , ;
+   "HStaticLink():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,cTooltip,TextColor,BackColor,lTransp,Link,VisitedColor,LinkColor,HoverColor)" ;
+   }
 
-STATIC aPenType  := { "SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT" }
-STATIC aJustify  := { "Left", "Center", "Right" }
-STATIC aShadeID := { "SHS_METAL", "SHS_SOFTBUMP", "SHS_NOISE", "SHS_HARDBUMP", "SHS_HSHADE", "SHS_VSHADE", "SHS_DIAGSHADE", "SHS_HBUMP" }
-STATIC aPalette := { "PAL_DEFAULT", "PAL_METAL" }
+STATIC aPenType := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
+STATIC aJustify := {"Left", "Center", "Right"}
+STATIC aShadeID := {"SHS_METAL", "SHS_SOFTBUMP", "SHS_NOISE", "SHS_HARDBUMP", "SHS_HSHADE", "SHS_VSHADE", "SHS_DIAGSHADE", "SHS_HBUMP"}
+STATIC aPalette := {"PAL_DEFAULT", "PAL_METAL"}
 
 REQUEST HSTATIC
 REQUEST HBUTTON
@@ -204,7 +205,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF !Empty(o:aItems)
-                  AAdd(aProp, { Lower(o:GetAttribute("name")), o:aItems[1] })
+                  AAdd(aProp, {Lower(o:GetAttribute("name")), o:aItems[1]})
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty(Atail(aProp)[2])
                      ::lDebug := .T.
                      SetDebugInfo(.T.)
@@ -213,7 +214,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, { cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], Self,, cName) })
+         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], Self,, cName)})
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2, 2]
             FOR j := 1 TO Len(::aFuncs[2])
@@ -459,8 +460,7 @@ STATIC FUNCTION ReadTree(pp, oForm, aParent, oDesc)
       IF oNode:Type == HBXML_TYPE_CDATA
          aParent[1] := CompileMethod(pp, oNode:aItems[1], oForm)
       ELSE
-         AAdd(aTree, { NIL, oNode:GetAttribute("name"), ;
-                        Val(oNode:GetAttribute("id")), .T. })
+         AAdd(aTree, {NIL, oNode:GetAttribute("name"), Val(oNode:GetAttribute("id")), .T.})
          IF !Empty(oNode:aItems)
             IF (subarr := ReadTree(pp, oForm, ATail(aTree), oNode)) != NIL
                aTree[Len(aTree), 1] := subarr
@@ -602,14 +602,14 @@ STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
                   AAdd(oForm:aNames, hfrm_GetProperty(o:aItems[1]))
                ENDIF
                IF cName == "atree"
-                  AAdd(aProp, { cName, ReadTree(pp, oForm, , o) })
+                  AAdd(aProp, {cName, ReadTree(pp, oForm, , o)})
                ELSE
-                  AAdd(aProp, { cName, IIf(Empty(o:aItems), "", o:aItems[1]) })
+                  AAdd(aProp, {cName, IIf(Empty(o:aItems), "", o:aItems[1])})
                ENDIF
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, { cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], oForm, oCtrl, cName) })
+         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], oForm, oCtrl, cName)})
       ELSEIF aItems[i]:title == "part"
          ReadCtrl(pp, aItems[i], oCtrl, oForm)
       ENDIF
@@ -1098,20 +1098,20 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
    FUNCTION Font2XML(oFont)
       LOCAL aAttr := {}
 
-      AAdd(aAttr, { "name", oFont:name })
-      AAdd(aAttr, { "width", LTrim(Str(oFont:width, 5)) })
-      AAdd(aAttr, { "height", LTrim(Str(oFont:height, 5)) })
+      AAdd(aAttr, {"name", oFont:name})
+      AAdd(aAttr, {"width", LTrim(Str(oFont:width, 5))})
+      AAdd(aAttr, {"height", LTrim(Str(oFont:height, 5))})
       IF oFont:weight != 0
-         AAdd(aAttr, { "weight", LTrim(Str(oFont:weight, 5)) })
+         AAdd(aAttr, {"weight", LTrim(Str(oFont:weight, 5))})
       ENDIF
       IF oFont:charset != 0
-         AAdd(aAttr, { "charset", LTrim(Str(oFont:charset, 5)) })
+         AAdd(aAttr, {"charset", LTrim(Str(oFont:charset, 5))})
       ENDIF
       IF oFont:Italic != 0
-         AAdd(aAttr, { "italic", LTrim(Str(oFont:Italic, 5)) })
+         AAdd(aAttr, {"italic", LTrim(Str(oFont:Italic, 5))})
       ENDIF
       IF oFont:Underline != 0
-         AAdd(aAttr, { "underline", LTrim(Str(oFont:Underline, 5)) })
+         AAdd(aAttr, {"underline", LTrim(Str(oFont:Underline, 5))})
       ENDIF
 
       RETURN HXMLNode():New("font", HBXML_TYPE_SINGLE, aAttr)
@@ -1277,7 +1277,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             o := aItems[i]:aItems[j]
             IF o:title == "property"
                IF !Empty(o:aItems)
-                  AAdd(aProp, { Lower(o:GetAttribute("name")), hfrm_GetProperty(o:aItems[1]) })
+                  AAdd(aProp, {Lower(o:GetAttribute("name")), hfrm_GetProperty(o:aItems[1])})
                   IF Atail(aProp)[1] == "ldebug" .AND. hfrm_GetProperty(Atail(aProp)[2])
                      ::lDebug := .T.
                      SetDebugInfo(.T.)
@@ -1286,7 +1286,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, { cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName) })
+         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2]
             FOR j := 1 TO Len(::aFuncs[2])
@@ -1351,7 +1351,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
    ::nKoefX := oPrinter:nWidth / nPWidth
    ::nKoefY := oPrinter:nHeight / nPHeight
    IF (aMethod := aGetSecond(::aMethods, "onrepinit")) != NIL
-      DoScript(aMethod, { p1, p2, p3 })
+      DoScript(aMethod, {p1, p2, p3})
    ENDIF
    IF xProperty != NIL
       oFont := hrep_FontFromxml(oPrinter, xProperty, aGetSecond(::aProp, "fonth") * ::nKoefY)
@@ -1626,11 +1626,11 @@ STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
          FOR j := 1 TO Len(aItems[i]:aItems)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
-               AAdd(aProp, { Lower(o:GetAttribute("name")), IIf(Empty(o:aItems), "", hfrm_GetProperty(o:aItems[1])) })
+               AAdd(aProp, {Lower(o:GetAttribute("name")), IIf(Empty(o:aItems), "", hfrm_GetProperty(o:aItems[1]))})
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, { cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName) })
+         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
       ELSEIF aItems[i]:title == "part"
          ReadRepItem(aItems[i], IIf(oCtrl:cClass == "area", oCtrl, oContainer))
       ENDIF

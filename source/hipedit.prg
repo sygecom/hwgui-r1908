@@ -48,7 +48,7 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
    ::title   := ""
 
    ::bSetGet := bSetGet
-   DEFAULT aValue := { 0, 0, 0, 0 }
+   DEFAULT aValue := {0, 0, 0, 0}
    ::aValue  := aValue
    ::bGetFocus  := bGetFocus
    ::bKillFocus := bKillFocus
@@ -113,7 +113,7 @@ METHOD GetValue() CLASS HIPedit
 
 METHOD Clear() CLASS HIPedit
    CLEARIPADDRESS(::handle)
-   ::aValue := { 0, 0, 0, 0 }
+   ::aValue := {0, 0, 0, 0}
    RETURN ::aValue
 
 

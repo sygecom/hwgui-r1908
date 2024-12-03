@@ -88,7 +88,7 @@ RETURN aScr
 FUNCTION RdScript(scrSource, strbuf, poz, lppNoInit, cTitle)
 STATIC s_pp
 LOCAL han
-LOCAL rezArray := IIf(lDebugInfo, { "", {}, {} }, { "", {} })
+LOCAL rezArray := IIf(lDebugInfo, {"", {}, {}}, {"", {}})
 
    IF lppNoInit == NIL
       lppNoInit := .F.
@@ -264,7 +264,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
             stroka := LTrim(SubStr(stroka, poz1 + 1))
             poz1 := At("(", stroka)
             scom := Upper(Left(stroka, IIf(poz1 != 0, poz1 - 1, 999)))
-            AAdd(rezArray[2], IIf(lDebug,{ scom,{},{} },{ scom,{} }))
+            AAdd(rezArray[2], IIf(lDebug, {scom, {}, {}}, {scom, {}}))
             AAdd(tmpArray, "")
             IF !CompileScr(pp, han, @strbuf, @poz, rezArray[2, Len(rezArray[2])])
                RETURN .F.

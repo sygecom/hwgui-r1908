@@ -94,7 +94,7 @@ Local cFont := "Monospace "
 #else
 Local cFont := "Lucida Console"
 #endif
-Local aKoef := { 1, 1.22, 1.71, 2 }
+Local aKoef := {1, 1.22, 1.71, 2}
 Local nMode := 0, oFont, nWidth, nPWidth
 
    ::InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
@@ -292,19 +292,19 @@ METHOD PrintText(cText) CLASS HWinPrn
 RETURN NIL
 
 METHOD PutCode(cLine) CLASS HWinPrn
-Static aCodes := {   ;
-   { Chr(27)+"@", .F., .F., 6, .F., .F., .F. },  ;     /* Reset */
-   { Chr(27)+"M", .T.,,,,, },  ;     /* Elite */
-   { Chr(15),, .T.,,,, },      ;     /* Cond */
-   { Chr(18),, .F.,,,, },      ;     /* Cancel Cond */
-   { Chr(27)+"0",,, 8,,, },    ;     /* 8 lines per inch */
-   { Chr(27)+"2",,, 6,,, },    ;     /* 6 lines per inch (standard) */
-   { Chr(27)+"-1",,,,,, .T. }, ;     /* underline */
-   { Chr(27)+"-0",,,,,, .F. }, ;     /* cancel underline */
-   { Chr(27)+"4",,,,, .T., },  ;     /* italic */
-   { Chr(27)+"5",,,,, .F., },  ;     /* cancel italic */
-   { Chr(27)+"G",,,,, .T., },  ;     /* bold */
-   { Chr(27)+"H",,,, .F.,, }   ;     /* cancel bold */
+Static aCodes := { ;
+   {Chr(27)+"@", .F., .F., 6, .F., .F., .F.},  ;     /* Reset */
+   {Chr(27)+"M", .T.,,,,,},  ;     /* Elite */
+   {Chr(15),, .T.,,,,},      ;     /* Cond */
+   {Chr(18),, .F.,,,,},      ;     /* Cancel Cond */
+   {Chr(27)+"0",,, 8,,,},    ;     /* 8 lines per inch */
+   {Chr(27)+"2",,, 6,,,},    ;     /* 6 lines per inch (standard) */
+   {Chr(27)+"-1",,,,,, .T.}, ;     /* underline */
+   {Chr(27)+"-0",,,,,, .F.}, ;     /* cancel underline */
+   {Chr(27)+"4",,,,, .T.,},  ;     /* italic */
+   {Chr(27)+"5",,,,, .F.,},  ;     /* cancel italic */
+   {Chr(27)+"G",,,,, .T.,},  ;     /* bold */
+   {Chr(27)+"H",,,, .F.,,}   ;     /* cancel bold */
  }
 Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 

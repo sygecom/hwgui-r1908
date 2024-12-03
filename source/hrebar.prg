@@ -102,10 +102,10 @@ METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) CLASS hrebar
    LOCAL i
 
    IF pBar != NIL
-      AAdd(::aBands, { pBar, pszText, clrFore, clrBack, pbmp, dwStyle })
+      AAdd(::aBands, {pBar, pszText, clrFore, clrBack, pbmp, dwStyle})
    ENDIF
    IF !::lInit
-       RETURN NIL
+      RETURN NIL
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
    FOR i := 1 TO Len(::aBands)

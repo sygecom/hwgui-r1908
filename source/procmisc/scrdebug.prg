@@ -182,7 +182,7 @@ Static Function AddBreakPoint
 Local i
 
    IF aBreakPoints == NIL
-      aBreakPoints := { aScriptCurr[4], {} }
+      aBreakPoints := {aScriptCurr[4], {}}
    ENDIF
    IF (i := Ascan(aBreakPoints[2], oBrwScript:nCurrent)) == 0
       FOR i := 1 TO Len(aBreakPoints[2])
@@ -220,7 +220,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 
    IF lRes
       IF Ascan(aWatches, {|s|s[1] == xRes}) == 0
-         Aadd(aWatches, { xRes, bCodeblock, NIL, NIL })
+         Aadd(aWatches, {xRes, bCodeblock, NIL, NIL})
          CalcWatch(Len(aWatches))
       ENDIF
       IF oBrwData:nHeight < 20

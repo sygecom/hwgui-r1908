@@ -96,7 +96,7 @@ LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
          IF Left(stroka, 1) = "["
             stroka := Upper(SubStr(stroka, 2, At("]", stroka) - 2))
             IF lWinIni
-               AAdd(prm1, { Upper(stroka), {} })
+               AAdd(prm1, {Upper(stroka), {}})
             ELSE
                prblo := .F.
                SET EXACT ON
@@ -112,7 +112,7 @@ LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
                vname    := RTrim(SubStr(stroka, 1, IIf(lTruncAr, poz1 - 1, poz1 - 2)))
                stroka   := AllTrim(SubStr(stroka, poz1 + 1))
                IF lWinIni
-                  AAdd(prm1[Len(prm1), 2], { Upper(vname), stroka })
+                  AAdd(prm1[Len(prm1), 2], {Upper(vname), stroka})
                ELSE
                   IF Type(vname) = "U"
                      IF Asc(stroka) == 123                 // {

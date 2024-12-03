@@ -19,18 +19,18 @@
 STATIC aSheet := NIL
 #if 0 // old code for reference (to be deleted)
 STATIC aMessModalDlg := { ;
-       {WM_COMMAND, {|o, w, l|DlgCommand(o, w, l)}},         ;
-       {WM_SYSCOMMAND, {|o, w, l|onSysCommand(o, w, l)}},    ;
-       {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
-       {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
-       {WM_ERASEBKGND, {|o, w|onEraseBk(o, w)}},             ;
-       {WM_DESTROY, {|o|onDestroy(o)}},                      ;
-       {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
-       {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}},        ;
-       {WM_PSPNOTIFY, {|o, w, l|onPspNotify(o, w, l)}},      ;
-       {WM_HELP, {|o, w, l|onHelp(o, w, l)}},                ;
-       {WM_CTLCOLORDLG, {|o, w, l|onDlgColor(o, w, l)}}      ;
-     }
+   {WM_COMMAND, {|o, w, l|DlgCommand(o, w, l)}},         ;
+   {WM_SYSCOMMAND, {|o, w, l|onSysCommand(o, w, l)}},    ;
+   {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
+   {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
+   {WM_ERASEBKGND, {|o, w|onEraseBk(o, w)}},             ;
+   {WM_DESTROY, {|o|onDestroy(o)}},                      ;
+   {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
+   {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}},        ;
+   {WM_PSPNOTIFY, {|o, w, l|onPspNotify(o, w, l)}},      ;
+   {WM_HELP, {|o, w, l|onHelp(o, w, l)}},                ;
+   {WM_CTLCOLORDLG, {|o, w, l|onDlgColor(o, w, l)}}      ;
+   }
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------//

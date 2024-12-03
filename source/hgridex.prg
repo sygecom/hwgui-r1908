@@ -66,7 +66,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
 
    METHOD Activate()
    METHOD Init()
-   METHOD AddColumn(cHeader, nWidth, nJusHead, nBit) INLINE AAdd(::aColumns, { cHeader, nWidth, nJusHead, nBit })
+   METHOD AddColumn(cHeader, nWidth, nJusHead, nBit) INLINE AAdd(::aColumns, {cHeader, nWidth, nJusHead, nBit})
    METHOD Refresh()
    METHOD RefreshLine() INLINE Listview_update(::handle, Listview_getfirstitem(::handle))
    METHOD SetItemCount(nItem) INLINE Listview_setitemcount(::handle, nItem)

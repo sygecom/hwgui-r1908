@@ -62,7 +62,12 @@ RETURN varName
 
 FUNCTION FIND_Z(stroka, symb)
 
-LOCAL poz, poz1 := 1, i, j, ms1 := "(){}[]'" + '"', ms2 := { 0, 0, 0, 0, 0, 0, 0, 0 }
+   LOCAL poz
+   LOCAL poz1 := 1
+   LOCAL i
+   LOCAL j
+   LOCAL ms1 := "(){}[]'" + '"'
+   LOCAL ms2 := {0, 0, 0, 0, 0, 0, 0, 0}
 
    symb := IIf(symb == NIL, ",", symb)
    DO WHILE .T.
@@ -129,7 +134,7 @@ LOCAL i, oldPos
    IF (lFirst != NIL .AND. lFirst) .OR. nPos == NIL
       nPos := 1
    ENDIF
-   IF cSep == NIL 
+   IF cSep == NIL
       cSep := ";"
    ENDIF
    IF nPos != 99999

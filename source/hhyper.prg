@@ -315,11 +315,11 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
    IF ::state != LBL_INIT
       xPos := LOWORD(lParam)
       yPos := HIWORD(lParam)
-      IF (!PtInRect({ 0, 0, ::nWidthOver , ::nHeight }, { xPos, yPos })) .AND. ::state != LBL_MOUSEOVER
+      IF (!PtInRect({0, 0, ::nWidthOver, ::nHeight}, {xPos, yPos})) .AND. ::state != LBL_MOUSEOVER
           res := .T.
       ELSE
         hwg_SetCursor(::m_hHyperCursor)
-        IF (!PtInRect({ 4, 4, ::nWidthover - 6, ::nHeight - 6 }, { xPos, yPos }))
+        IF (!PtInRect({4, 4, ::nWidthover - 6, ::nHeight - 6}, {xPos, yPos}))
            //ReleaseCapture()
            res := .T.
         ENDIF
@@ -361,10 +361,10 @@ METHOD Paint(lpDis) CLASS HStaticLink
    IF ::state == LBL_INIT
       ::State := LBL_NORMAL
    ENDIF
-   rcClient   := CopyRect({ drawInfo[4] , drawInfo[5], drawInfo[6], drawInfo[7] })
+   rcClient := CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
 
    IF hb_IsNumeric(::hbitmap)
-      bHasTitle := hb_IsChar(strtext) .and. !Empty(strtext)
+      bHasTitle := hb_IsChar(strtext) .AND. !Empty(strtext)
       itemRect[4] := aBmpSize[2] + 1
       bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]

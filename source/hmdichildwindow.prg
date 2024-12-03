@@ -19,8 +19,18 @@ CLASS HMDIChildWindow INHERIT HWindow
 
 #if 0 // old code for reference (to be deleted)
 CLASS VAR aMessages INIT { ;
-                           { WM_CREATE, WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
-                             WM_SYSCOMMAND, WM_ENTERIDLE, WM_MDIACTIVATE, WM_DESTROY }, ;
+                           { ;
+                             WM_CREATE, ;
+                             WM_COMMAND, ;
+                             WM_ERASEBKGND, ;
+                             WM_MOVE, ;
+                             WM_SIZE, ;
+                             WM_NCACTIVATE, ;
+                             WM_SYSCOMMAND, ;
+                             WM_ENTERIDLE, ;
+                             WM_MDIACTIVATE, ;
+                             WM_DESTROY ;
+                           }, ;
                            { ;
                              {|o, w, l|HB_SYMBOL_UNUSED(w), onMdiCreate(o, l)},        ;
                              {|o, w|onMdiCommand(o, w)},         ;
