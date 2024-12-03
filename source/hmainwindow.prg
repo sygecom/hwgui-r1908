@@ -178,7 +178,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
          ::Center()
       ENDIF
 
-      IF (bActivate  != NIL)
+      IF (bActivate != NIL)
          Eval(bActivate, Self)
       ENDIF
       AddToolTip(::handle, ::handle, "")

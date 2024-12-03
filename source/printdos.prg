@@ -168,14 +168,14 @@ METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
 
    oStr := Chr(Val(oComm1))
 
-   IF oComm2  != NIL ;  oStr += Chr(Val(oComm2)) ;   ENDIF
-   IF oComm3  != NIL ;  oStr += Chr(Val(oComm3)) ;   ENDIF
-   IF oComm4  != NIL ;  oStr += Chr(Val(oComm4)) ;   ENDIF
-   IF oComm5  != NIL ;  oStr += Chr(Val(oComm5)) ;   ENDIF
-   IF oComm6  != NIL ;  oStr += Chr(Val(oComm6)) ;   ENDIF
-   IF oComm7  != NIL ;  oStr += Chr(Val(oComm7)) ;   ENDIF
-   IF oComm8  != NIL ;  oStr += Chr(Val(oComm8)) ;   ENDIF
-   IF oComm9  != NIL ;  oStr += Chr(Val(oComm9)) ;   ENDIF
+   IF oComm2 != NIL ;  oStr += Chr(Val(oComm2)) ;   ENDIF
+   IF oComm3 != NIL ;  oStr += Chr(Val(oComm3)) ;   ENDIF
+   IF oComm4 != NIL ;  oStr += Chr(Val(oComm4)) ;   ENDIF
+   IF oComm5 != NIL ;  oStr += Chr(Val(oComm5)) ;   ENDIF
+   IF oComm6 != NIL ;  oStr += Chr(Val(oComm6)) ;   ENDIF
+   IF oComm7 != NIL ;  oStr += Chr(Val(oComm7)) ;   ENDIF
+   IF oComm8 != NIL ;  oStr += Chr(Val(oComm8)) ;   ENDIF
+   IF oComm9 != NIL ;  oStr += Chr(Val(oComm9)) ;   ENDIF
    IF oComm10 != NIL ;  oStr += Chr(Val(oComm10)) ;   ENDIF
 
 

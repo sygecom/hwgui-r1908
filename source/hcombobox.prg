@@ -1025,7 +1025,7 @@ METHOD Populate() CLASS HComboBox
        ENDIF
       value := StrTran(xRowSource, calias + "->", , , 1, 1)
       cAlias := IIf(ValType(xRowSource) == "U", NIL, cAlias)
-      cValueBound := IIf(::xrowsource[2]  != NIL .AND. cAlias != NIL, StrTran(::xrowsource[2], calias + "->"), NIL)
+      cValueBound := IIf(::xrowsource[2] != NIL .AND. cAlias != NIL, StrTran(::xrowsource[2], calias + "->"), NIL)
    ELSE
       cValueBound := IIf(hb_IsArray(::aItems[1]) .AND. Len(::aItems[1]) > 1, ::aItems[1, 2], NIL)
    ENDIF

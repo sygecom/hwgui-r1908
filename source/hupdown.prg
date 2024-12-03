@@ -318,9 +318,9 @@ METHOD Notify(lParam) CLASS HeditUpDown
    ::SetFocus()
    IF nCode == UDN_DELTAPOS .AND. (::oUpDown:bClickUp != NIL .OR. ::oUpDown:bClickDown != NIL)
       ::oparent:lSuspendMsgsHandling := .T.
-      IF iDelta < 0 .AND. ::oUpDown:bClickDown  != NIL
+      IF iDelta < 0 .AND. ::oUpDown:bClickDown != NIL
          res := Eval(::oUpDown:bClickDown, ::oUpDown, ::oUpDown:nValue, iDelta, ipos)
-      ELSEIF iDelta > 0 .AND. ::oUpDown:bClickUp  != NIL
+      ELSEIF iDelta > 0 .AND. ::oUpDown:bClickUp != NIL
          res := Eval(::oUpDown:bClickUp, ::oUpDown, ::oUpDown:nValue, iDelta, ipos)
       ENDIF
       ::oparent:lSuspendMsgsHandling := .F.
