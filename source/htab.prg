@@ -504,7 +504,7 @@ METHOD onChange() CLASS HTab
 
    IF hb_IsBlock(::bChange2)
       ::oparent:lSuspendMsgsHandling := .T.
-      Eval(::bChange2, ::nActive, Self)
+      Eval(::bChange2, Self, ::nActive)
       ::oparent:lSuspendMsgsHandling := .F. //lSuspendMsgsHandling
    ENDIF
 
