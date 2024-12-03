@@ -69,12 +69,12 @@ METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies) CLASS H
 
    ::oPrinter := HPrinter():New(IIf(cPrinter == NIL, "", cPrinter), .F., nFormType, nBin, lLandScape, nCopies)
    IF ::oPrinter == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
    ::cpFrom := cpFrom
    ::cpTo   := cpTo
 
-Return Self
+RETURN Self
 
 METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
 
@@ -86,7 +86,7 @@ METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPr
    IF lUnder != NIL; ::lUnder := lUnder;  ENDIF
    ::lChanged := .T.
 
-Return NIL
+RETURN NIL
 
 METHOD SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
 #ifdef __PLATFORM__Linux__
@@ -157,7 +157,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
 
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD StartDoc(lPreview, cMetaName) CLASS HWinPrn
 
@@ -165,12 +165,12 @@ METHOD StartDoc(lPreview, cMetaName) CLASS HWinPrn
    ::oPrinter:StartDoc(lPreview, cMetaName)
    ::NextPage()
 
-Return NIL
+RETURN NIL
 
 METHOD NextPage() CLASS HWinPrn
 
    IF !::lDocStart
-      Return NIL
+      RETURN NIL
    ENDIF
    IF ::lPageStart
       ::oPrinter:EndPage()
@@ -188,7 +188,7 @@ METHOD NextPage() CLASS HWinPrn
    ::y := ::nTop * ::oPrinter:nVRes - ::nLineHeight - ::nLined
    ::lFirstLine := .T.
 
-Return NIL
+RETURN NIL
 
 METHOD PrintLine(cLine, lNewLine) CLASS HWinPrn
 Local i, i0, j, slen, c
@@ -278,7 +278,7 @@ Local i, i0, j, slen, c
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD PrintText(cText) CLASS HWinPrn
 
@@ -289,7 +289,7 @@ METHOD PrintText(cText) CLASS HWinPrn
             ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
    ::x += (::nCharW * Len(cText))
 
-Return NIL
+RETURN NIL
 
 METHOD PutCode(cLine) CLASS HWinPrn
 Static aCodes := {   ;
@@ -311,11 +311,11 @@ Local i, sLen := Len(aCodes), c := Left(cLine, 1)
    FOR i := 1 TO sLen
       IF Left(aCodes[i, 1], 1) == c .AND. At(aCodes[i, 1], Left(cLine, 3)) == 1
          ::InitValues(aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7])
-         Return Len(aCodes[i, 1])
+         RETURN Len(aCodes[i, 1])
       ENDIF
    NEXT
 
-Return 1
+RETURN 1
 
 METHOD EndDoc() CLASS HWinPrn
 
@@ -331,12 +331,12 @@ METHOD EndDoc() CLASS HWinPrn
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD End() CLASS HWinPrn
 
    ::EndDoc()
    ::oFont:Release()
    ::oPrinter:End()
-Return NIL
+RETURN NIL
 

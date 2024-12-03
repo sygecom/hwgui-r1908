@@ -56,7 +56,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, ;
    ::oParent:AddControl(Self)
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HQhtm
    IF ::oParent:handle != 0
@@ -66,7 +66,7 @@ METHOD Activate CLASS HQhtm
    ELSE
       QHTM_INIT()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
    // ::classname:= "HQHTM"
@@ -88,7 +88,7 @@ METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, r
    ::oParent:AddControl(Self)
    QHTM_INIT()
 
-Return Self
+RETURN Self
 
 METHOD Init CLASS HQhtm
 
@@ -104,14 +104,14 @@ METHOD Init CLASS HQhtm
       QHTM_FormCallBack(::handle)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Notify(lParam) CLASS HQhtm
 Local cLink := QHTM_GetNotify(lParam)
 
    IF ::bLink == NIL .OR. !Eval(::bLink, Self, cLink)
       IF "tp://" $ clink
-         Return 0
+         RETURN 0
       ELSE
          IF File(cLink)
             QHTM_LoadFile(::handle, cLink)
@@ -121,7 +121,7 @@ Local cLink := QHTM_GetNotify(lParam)
       ENDIF
    ENDIF
    QHTM_SetReturnValue(lParam, .F.)
-Return 0
+RETURN 0
 
 Function QhtmFormProc(hCtrl, cMethod, cAction, cName, aFields)
 Local oCtrl := FindSelf(hCtrl)
@@ -132,7 +132,7 @@ Local oCtrl := FindSelf(hCtrl)
       ENDIF
    ENDIF
 
-Return 0
+RETURN 0
 
 // CLASS hQHTMButton
 
@@ -155,7 +155,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
                   bInit, bSize, , bClick, ctooltip)
    // ::classname:= "HQHTMBUTTON"
 
-Return Self
+RETURN Self
 
 METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bClick, ctooltip) CLASS HQhtmButton
 
@@ -163,7 +163,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bClick, ctooltip
    ::Super:Redefine(oWndParent, nId, , bInit, bSize, , bClick, ctooltip)
    // ::classname:= "HQHTMBUTTON"
 
-Return Self
+RETURN Self
 
 METHOD Init() CLASS HQhtmButton
 
@@ -174,8 +174,8 @@ METHOD Init() CLASS HQhtmButton
    SetWindowText(::handle, ::cHtml)
    QHTM_SetHtmlButton(::handle)
 
-Return NIL
+RETURN NIL
 
 EXIT PROCEDURE FreeQHTM
    QHTM_End()
-Return
+RETURN

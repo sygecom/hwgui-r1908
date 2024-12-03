@@ -94,7 +94,7 @@ METHOD Release() CLASS HActiveX
 *-----------------------------------------------------------------------------*
    SHUTDOWNCONNECTIONPOINT(::hSink)
    ReleaseDispatch(::hObj)
-Return ::Super:Release()
+RETURN ::Super:Release()
 
 *-----------------------------------------------------------------------------* 
 METHOD __Error(...) CLASS HActiveX 

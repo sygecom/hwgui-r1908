@@ -28,7 +28,7 @@ Function hwg_scrDebug(aScript, iscr)
 Local nFirst, i
 
    IF Len(aScript) < 3
-      Return .F.
+      RETURN .F.
    ELSEIF Len(aScript) == 3
       Aadd(aScript, NIL)
    ENDIF
@@ -159,7 +159,7 @@ Local nFirst, i
       ENDIF
    ENDIF
 
-Return .T.
+RETURN .T.
 
 Static Function dlgDebugClose()
 
@@ -176,7 +176,7 @@ Static Function dlgDebugClose()
    oBmpPoint:Release()
 #endif
 
-Return .T.
+RETURN .T.
 
 Static Function AddBreakPoint
 Local i
@@ -199,7 +199,7 @@ Local i
       aBreakPoints[2, Len(aBreakPoints[2])] := 0
    ENDIF
    oBrwScript:Refresh()
-Return .T.
+RETURN .T.
 
 Static Function AddWatch()
 Local xRes, bCodeblock, bOldError, lRes := .T.
@@ -233,7 +233,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
    ELSE
       oEditRes:SetText("Error...")
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function CalcWatch(n)
 Local xRes, bOldError, lRes := .T., cType
@@ -264,7 +264,7 @@ Local xRes, bOldError, lRes := .T., cType
       aWatches[n, 3] := "U"
    ENDIF
    
-Return .T.
+RETURN .T.
 
 Static Function Calculate()
 Local xRes, bOldError, lRes := .T., cType
@@ -297,7 +297,7 @@ Local xRes, bOldError, lRes := .T., cType
       oEditRes:SetText("Error...")
    ENDIF
    
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION MacroError(e)
    HB_SYMBOL_UNUSED(e)
@@ -306,4 +306,4 @@ RETURN .T. // Warning W0028  Unreachable code
 
 Function scrBreakPoint()
    nDebugMode := 0
-Return .T.
+RETURN .T.

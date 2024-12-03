@@ -250,7 +250,7 @@ METHOD Requery() CLASS HListBox
    ListboxSetString(::handle, ::value)
    ::refresh()
 
-Return NIL
+RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 

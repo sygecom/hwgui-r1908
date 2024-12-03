@@ -100,7 +100,7 @@ METHOD Attach(hDC) CLASS HDC
    ::m_hDC := hDC
 
    ::SetAttribDC(::m_hDC)
-   return.T.
+   RETURN .T.
 
 METHOD deletedc() CLASS HDC
    DeleteDc(::m_hDC)

@@ -312,7 +312,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
                oChild:lSuspendMsgsHandling := .F.
                i := IIf(hb_IsLogical(i), i, .T.)
                IF !i
-                  Return 0
+                  RETURN 0
                ENDIF
             ENDIF
          ENDIF

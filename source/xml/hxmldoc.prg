@@ -47,17 +47,17 @@ METHOD New(cTitle, type, aAttr, cValue) CLASS HXMLNode
    IF cValue != NIL
       ::Add(cValue)
    ENDIF
-Return Self
+RETURN Self
 
 METHOD Add(xItem) CLASS HXMLNode
 
    Aadd(::aItems, xItem)
-Return xItem
+RETURN xItem
 
 METHOD GetAttribute(cName) CLASS HXMLNode
 Local i := Ascan(::aAttr, {|a|a[1]==cName})
 
-Return IIf(i==0, NIL, ::aAttr[i, 2])
+RETURN IIf(i==0, NIL, ::aAttr[i, 2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
 Local i := Ascan(::aAttr,{|a|a[1]==cName})
@@ -68,7 +68,7 @@ Local i := Ascan(::aAttr,{|a|a[1]==cName})
       ::aAttr[i, 2] := cValue
    ENDIF
 
-Return .T.
+RETURN .T.
 
 METHOD DelAttribute(cName) CLASS HXMLNode
 Local i := Ascan(::aAttr,{|a|a[1]==cName})
@@ -77,7 +77,7 @@ Local i := Ascan(::aAttr,{|a|a[1]==cName})
       Adel(::aAttr, i)
       Asize(::aAttr, Len(::aAttr) - 1)
    ENDIF
-Return .T.
+RETURN .T.
 
 METHOD Save(handle, level) CLASS HXMLNode
 Local i, s := Space(level*2)+"<", lNewLine
@@ -164,9 +164,9 @@ Local i, s := Space(level*2)+"<", lNewLine
       ELSEIF ::type == HBXML_TYPE_COMMENT
          s += "-->" + Chr(10)
       ENDIF
-      Return s
+      RETURN s
    ENDIF
-Return ""
+RETURN ""
 
 METHOD Find(cTitle, nStart, block) CLASS HXMLNode
 Local i
@@ -181,14 +181,14 @@ Local i
       ELSE
          nStart := i
          IF block == NIL .OR. Eval(block, ::aItems[i])
-            Return ::aItems[i]
+            RETURN ::aItems[i]
          ELSE
             nStart ++
          ENDIF
       ENDIF
    ENDDO
 
-Return NIL
+RETURN NIL
 
 
 /*
@@ -212,7 +212,7 @@ METHOD New(encoding) CLASS HXMLDoc
       Aadd(::aAttr, { "encoding", encoding })
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Read(fname, buffer) CLASS HXMLDoc
 Local han
@@ -226,9 +226,9 @@ Local han
    ELSEIF buffer != NIL
       ::nLastErr := hbxml_GetDoc(Self, buffer)
    ELSE
-      Return NIL
+      RETURN NIL
    ENDIF
-Return IIf(::nLastErr == 0, Self, NIL)
+RETURN IIf(::nLastErr == 0, Self, NIL)
 
 METHOD Save(fname, lNoHeader) CLASS HXMLDoc
 Local handle := -2
@@ -255,7 +255,7 @@ Local cEncod, i, s
       IF fname != NIL
          FClose(handle)
       ELSE
-         Return s
+         RETURN s
       ENDIF
    ENDIF
-Return .T.
+RETURN .T.

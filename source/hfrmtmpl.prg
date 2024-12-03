@@ -507,7 +507,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    LOCAL arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes, cParam, nPos
 
    IF cMethod == NIL .OR. Empty(cMethod)
-      Return NIL
+      RETURN NIL
    ENDIF
    IF oCtrl != NIL .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
       // writelog(oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname())
@@ -532,7 +532,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
          bRes := &("{||" + __pp_process(pp, cCode) + "}")
       END SEQUENCE
       ErrorBlock(bOldError)
-      Return bRes
+      RETURN bRes
    ELSEIF !Empty(arr) .AND. !Empty(cParam)
       IF Len(arr) == 2
          cCode := IIf(Lower(Left(arr[2], 6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2])
@@ -542,7 +542,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
             bRes := &cCode
          END SEQUENCE
          ErrorBlock(bOldError)
-         Return bRes
+         RETURN bRes
       ELSE
          cCode1 := IIf(nContainer==0, ;
                "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
@@ -556,7 +556,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
                    Ltrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2],{") + ;
                    cParam + "})" + "}"
          arrExe[1] := &cCode
-         Return arrExe
+         RETURN arrExe
       ENDIF
    ENDIF
 

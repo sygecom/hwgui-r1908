@@ -41,14 +41,14 @@ METHOD New(oParent) CLASS HHtml
 
    IF !hwgax_OleInitialize()
       hwg_MsgStop("Can't open OLE!", "HHtml():New()")
-      Return NIL
+      RETURN NIL
    ENDIF
 
    ::oParent := oParent
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HHtml
 
@@ -58,19 +58,19 @@ METHOD Activate CLASS HHtml
          hwg_MsgStop("Can't embed IE object!", "HHtml():New()")
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Resize(width, height) CLASS HHtml
 
    // writelog(str(width) + " " + str(height) + " / " + str(::oParent:nwidth) + " " + str(::oParent:nheight))
    hwgax_ResizeBrowser(::oParent:handle, width, height)
-Return NIL
+RETURN NIL
 
 METHOD End() CLASS HHtml
 
    hwgax_UnEmbedBrowserObject(::oParent:handle)
-Return NIL
+RETURN NIL
 
 EXIT PROCEDURE EXITOLE
    hwgax_OleUninitialize()
-Return
+RETURN

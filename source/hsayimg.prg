@@ -161,7 +161,7 @@ METHOD Init() CLASS HSayBmp
          SendMessage(::handle, STM_SETIMAGE, IMAGE_BITMAP, ::oImage:handle)
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Paint(lpdis) CLASS HSayBmp
 

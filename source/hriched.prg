@@ -121,7 +121,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    IF msg == EM_GETSEL .OR. msg == EM_LINEFROMCHAR .OR. msg == EM_LINEINDEX .OR. ;
        msg == EM_GETLINECOUNT .OR. msg == EM_SETSEL .OR. msg == EM_SETCHARFORMAT .OR. ;
        msg == EM_HIDESELECTION .OR. msg == WM_GETTEXTLENGTH .OR. msg == EM_GETFIRSTVISIBLELINE
-      Return - 1
+      RETURN - 1
    ENDIF
    IF msg == WM_SETFOCUS .AND. ::lSetFocus //.AND. ISWINDOWVISIBLE(::handle)
       ::lSetFocus := .F.
@@ -303,7 +303,7 @@ Local oEdit
          oEdit:lChanged := .T.
       ENDIF
    ELSEIF oEdit:bOther != NIL
-      Return Eval(oEdit:bOther, oEdit, msg, wParam, lParam)
+      RETURN Eval(oEdit:bOther, oEdit, msg, wParam, lParam)
    ENDIF
-Return -1
+RETURN -1
 */

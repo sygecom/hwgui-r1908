@@ -208,7 +208,7 @@ STATIC FUNCTION RDSTRDBF
 LOCAL stroka
 FIELD INICOND, INITEXT
    IF Eof()
-      Return ""
+      RETURN ""
    ENDIF
    stroka := IIf(Empty(INICOND) .OR. &(INICOND), Trim(INITEXT), "")
    SKIP

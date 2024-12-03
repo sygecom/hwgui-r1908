@@ -385,7 +385,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
       RETURN 0
    ELSEIF msg == WM_CHAR
       IF wParam == 27
-         Return DLGC_WANTMESSAGE
+         RETURN DLGC_WANTMESSAGE
       ENDIF
       RETURN 0
 
@@ -409,7 +409,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
       ENDIF
       IF ::hitemDrop != NIL
          IF ::hitemDrag:handle == ::hitemDrop:handle
-                Return 0
+                RETURN 0
          ENDIF
          htiParent := ::hitemDrop //:oParent
          DO WHILE (htiParent:oParent) != NIL
@@ -561,7 +561,7 @@ METHOD Notify(lParam) CLASS HTree
       ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
       ::oParent:AddEvent(0, IDCANCEL, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
 
-      // Return 1
+      // RETURN 1
 
    ELSEIF nCode == TVN_ENDLABELEDIT .OR. nCode == TVN_ENDLABELEDITW
       IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))

@@ -283,7 +283,7 @@ METHOD Init() CLASS HRadioButton
       ::Enabled :=  ::oGroup:lEnabled .AND. ::Enabled 
       ::Super:Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp) CLASS HRadioButton
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)

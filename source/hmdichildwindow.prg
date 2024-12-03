@@ -223,7 +223,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
    nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
    //IF msg == WM_NCLBUTTONDBLCLK .AND. ::lChild
-   //   Return 0
+   //   RETURN 0
 
    SWITCH msg
 

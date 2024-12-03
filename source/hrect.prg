@@ -143,7 +143,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
    nfStyle := IIf(nfStyle == NIL, BS_TRANSPARENT , nfStyle)
    nCurvature := nCurvature
 
-   return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bcolor,,, ;
+   RETURN HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bcolor,,, ;
                              nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle)
 
 //---------------------------------------------------------------------------
@@ -160,7 +160,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBord
    nStyle := IIf(nStyle == NIL, 3, nStyle)  // FLAT
    lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)  // FLAT
 
-   return HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize,,, nStyle, lnoBorder,,,,, bInit) //, bClick, bDblClick)
+   RETURN HDrawShape():New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize,,, nStyle, lnoBorder,,,,, bInit) //, bClick, bDblClick)
 
 
 //---------------------------------------------------------------------------
@@ -360,7 +360,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
    ENDIF
    ::oPen := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
 
-  Return Self
+  RETURN Self
 
 //---------------------------------------------------------------------------
 METHOD Activate() CLASS HContainer
@@ -485,7 +485,7 @@ METHOD Paint(lpdis) CLASS HContainer
       //SetBkMode(hDC, 0)
    ENDIF
 
-   Return 1
+   RETURN 1
 
 // END NEW CLASSE
 

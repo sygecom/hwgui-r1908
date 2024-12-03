@@ -169,7 +169,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
 
          IF Left(stroka, 1) == "#"
             IF Upper(Left(stroka, 7)) == "#ENDSCR"
-               Return .T.
+               RETURN .T.
             ELSEIF Upper(Left(stroka, 6)) == "#DEBUG"
                IF !lDebug .AND. Len(rezArray[2]) == 0
                   lDebug := .T.
@@ -415,7 +415,7 @@ PRIVATE iscr := 1, bOldError
       Private aScriptt := aScript
    ENDIF
    IF aScript == NIL .OR. (arlen := Len(aScript[2])) == 0
-      Return .T.
+      RETURN .T.
    ENDIF
    lDebug := (Len(aScript) >= 3)
    DO WHILE !hb_IsBlock(aScript[2, iscr])
@@ -444,7 +444,7 @@ PRIVATE iscr := 1, bOldError
             RECOVER
                WndOut()
                ErrorBlock(bOldError)
-               Return .F.
+               RETURN .F.
             END SEQUENCE
             ErrorBlock(bOldError)
          ENDIF
@@ -491,7 +491,7 @@ PRIVATE iscr := 1, bOldError
          hwg_scrDebug(aScript, 0)
       ENDIF
 #endif
-      Return .F.
+      RETURN .F.
    END SEQUENCE
    ErrorBlock(bOldError)
    WndOut()
@@ -530,7 +530,7 @@ RETURN nLastError
 
 FUNCTION Codeblock(string)
    IF Left(string, 2) == "{|"
-      Return &(string)
+      RETURN &(string)
    ENDIF
 RETURN &("{||"+string+"}")
 
@@ -561,7 +561,7 @@ FUNCTION WndOut(sout, noscroll, prnew)
 LOCAL y1, x1, y2, x2, oldc, ly__size := (y__size != 0)
 STATIC w__buf
    IF sout == NIL .AND. !ly__size
-      Return NIL
+      RETURN NIL
    ENDIF
    IF y__size == 0
       y__size := 5

@@ -707,7 +707,7 @@ METHOD Notify(lParam) CLASS HTab
          SendMessage(::handle, TCM_SETCURSEL, SendMessage(::handle, TCM_GETCURFOCUS, 0, 0), 0)
       ENDIF
       ::nPrevPage := nPage
-      Return 0
+      RETURN 0
    ENDIF
 
    DO CASE
@@ -819,9 +819,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       RETURN - 1
    ELSEIF msg == WM_ERASEBKGND
       ::ShowDisablePage()
-      Return - 1
+      RETURN - 1
    ELSEIF msg == WM_PRINTCLIENT .OR. msg == WM_NCHITTEST .OR. msg == WM_UPDATEUISTATE
-      Return -1  // painted objects without METHOD PAINT
+      RETURN -1  // painted objects without METHOD PAINT
 
    ELSEIF msg == WM_PRINT
       //-AEVAL(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})

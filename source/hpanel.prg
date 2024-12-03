@@ -219,7 +219,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          ENDIF
          onTrackScroll(Self, msg, wParam, lParam)
       ENDIF
-      Return ::Super:onEvent(msg, wParam, lParam)
+      RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
 
    RETURN - 1
@@ -299,7 +299,7 @@ METHOD Hide() CLASS HPanel
    LOCAL lRes
    
    IF ::lHide
-      Return NIL
+      RETURN NIL
    ENDIF
    ::nrePaint := 0
    lres := ::ResizeOffSet(3)
@@ -327,7 +327,7 @@ METHOD Show() CLASS HPanel
    LOCAL lRes
    
    IF !::lHide
-      Return NIL
+      RETURN NIL
    ENDIF
    ::nrePaint := - 1
    lRes := ::ResizeOffSet(2)
@@ -357,7 +357,7 @@ METHOD Resize() CLASS HPanel
    Local nWidth  := aCoors[3] - aCoors[1]
    
    IF !isWindowVisible(::handle) .OR. (::nHeight == nHeight .AND. ::nWidth == nWidth)
-      Return NIL
+      RETURN NIL
    ENDIF
 
    IF !::ResizeOffSet(1)

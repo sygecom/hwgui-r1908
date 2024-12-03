@@ -200,10 +200,10 @@ Local hIn, hOut, nRet, hProc
    FClose(hIn)
    FClose(hOut)
 
-   Return nRet
+   RETURN nRet
 //#else
 //  __Run(cRun)
-//   Return 0
+//   RETURN 0
 //#endif
 
 FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, cOk, cCancel)

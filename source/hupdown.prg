@@ -127,7 +127,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       ENDIF
    ENDIF
 
-  Return Self
+  RETURN Self
 
 METHOD Activate() CLASS HUpDown
 
@@ -151,7 +151,7 @@ METHOD Init() CLASS HUpDown
       ::DisableBackColor := ::DisablebColor
       ::Refresh()
    ENDIF
-   Return NIL
+   RETURN NIL
 
 
 METHOD CREATEUPDOWN() CLASS Hupdown
@@ -266,7 +266,7 @@ METHOD Valid() CLASS HUpDown
       ::SetFocus()
       RETURN res
    ENDIF
-   Return res
+   RETURN res
 
 *-----------------------------------------------------------------
 CLASS HEditUpDown INHERIT HEdit
@@ -300,7 +300,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
      IF ::oUpDown == NIL .OR. Hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
        (::oUpDown:bGetFocus != NIL .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown))
-        Return 0
+        RETURN 0
    ENDIF
 
    vari := Val(LTrim(::UnTransform(::title)))

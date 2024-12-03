@@ -4001,11 +4001,11 @@ METHOD EditEvent(oCtrl, msg, wParam, lParam)
    HB_SYMBOL_UNUSED(lParam)
 
    IF (msg == WM_KEYDOWN .AND. (wParam == VK_RETURN .OR. wParam == VK_TAB))
-      Return -1
+      RETURN -1
    ELSEIF (msg == WM_KEYDOWN .AND. wParam == VK_ESCAPE)
       oCtrl:oParent:lResult := .F.
       oCtrl:oParent:Close()
-      Return 0
+      RETURN 0
    ENDIF
    RETURN -1
 
