@@ -528,6 +528,7 @@ METHOD ItemHeight(nHeight) CLASS HTree
    ENDIF
    RETURN  nHeight
 
+#if 0 // old code for reference (to be deleted)
 METHOD Notify(lParam) CLASS HTree
    LOCAL nCode := GetNotifyCode(lParam), oItem, cText, nAct, nHitem, leval
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
@@ -538,7 +539,7 @@ METHOD Notify(lParam) CLASS HTree
          SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
       ENDIF
    ENDIF
-   
+
    IF nCode == TVN_SELCHANGING  //.AND. ::oitem != NIL // .OR. NCODE = -500
 
    ELSEIF nCode == TVN_SELCHANGED //.OR. nCode == TVN_ITEMCHANGEDW
@@ -555,7 +556,7 @@ METHOD Notify(lParam) CLASS HTree
             SendMessage(::handle, TVM_SETITEM, , oitem:handle)
          ENDIF
       ENDIF
-   
+
    ELSEIF nCode == TVN_BEGINLABELEDIT .or. nCode == TVN_BEGINLABELEDITW
       s_aEvents := aClone(::oParent:aEvents)
       ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
@@ -574,7 +575,7 @@ METHOD Notify(lParam) CLASS HTree
          ENDIF
       ENDIF
       ::oParent:aEvents := s_aEvents
-      
+
    ELSEIF nCode == TVN_ITEMEXPANDING .or. nCode == TVN_ITEMEXPANDINGW
       oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
@@ -608,9 +609,9 @@ METHOD Notify(lParam) CLASS HTree
          ENDIF
          IF lEval == NIL .OR. !Empty(lEval)
             MarkCheckTree(::oItem, IIf(::oItem:checked, 1, 2))
-            RETURN 0   
+            RETURN 0
          ENDIF
-         RETURN 1   
+         RETURN 1
       ELSEIF !::lEditLabels .AND. Empty(nHitem)
          IF !::oItem:oTree:lEmpty
             IF ::oItem:bClick != NIL
@@ -618,7 +619,7 @@ METHOD Notify(lParam) CLASS HTree
             ENDIF
          ENDIF
       ENDIF
-   
+
    ELSEIF nCode == NM_DBLCLK
       IF hb_IsBlock(::bDblClick)
          oItem  := tree_Hittest(::handle,,, @nAct)
@@ -629,7 +630,7 @@ METHOD Notify(lParam) CLASS HTree
          oItem  := tree_Hittest(::handle,,, @nAct)
          Eval(::bRClick, oItem, Self, nAct)
       ENDIF
-      
+
       /* working only windows 7
    ELSEIF nCode == - 24 .and. ::oitem != NIL
       //nhitem := tree_Hittest(::handle,,, @nAct)
@@ -648,18 +649,153 @@ METHOD Notify(lParam) CLASS HTree
       ::oItem := oItem
    ENDIF
    RETURN 0
+#else
+METHOD Notify(lParam) CLASS HTree
+
+   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL oItem
+   LOCAL cText
+   LOCAL nAct
+   LOCAL nHitem
+   LOCAL leval
+   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+
+   SWITCH nCode
+
+   CASE NM_SETCURSOR
+      IF ::lDragging
+         ::hitemDrop := tree_Hittest(::handle,,, @nAct)
+         IF ::hitemDrop != NIL
+            SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE TVN_SELCHANGING
+      EXIT
+
+   CASE TVN_SELCHANGED
+      ::oItemOld := Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
+      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      IF hb_IsObject(oItem)
+         oItem:oTree:oSelected := oItem
+         IF oItem != NIL .AND. !oItem:oTree:lEmpty
+            IF oItem:bAction != NIL
+               Eval(oItem:bAction, oItem, Self)
+            ELSEIF oItem:oTree:bAction != NIL
+               Eval(oItem:oTree:bAction, oItem, Self)
+            ENDIF
+            SendMessage(::handle, TVM_SETITEM, , oitem:handle)
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE TVN_BEGINLABELEDIT
+   CASE TVN_BEGINLABELEDITW
+      s_aEvents := aClone(::oParent:aEvents)
+      ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
+      ::oParent:AddEvent(0, IDCANCEL, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
+      // RETURN 1
+      EXIT
+
+   CASE TVN_ENDLABELEDIT
+   CASE TVN_ENDLABELEDITW
+      IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
+         oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
+         IF hb_IsObject(oItem)
+            IF !(cText == oItem:GetText()) .AND. ;
+               (oItem:oTree:bItemChange == NIL .OR. Eval(oItem:oTree:bItemChange, oItem, cText))
+               TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
+            ENDIF
+         ENDIF
+      ENDIF
+      ::oParent:aEvents := s_aEvents
+      EXIT
+
+   CASE TVN_ITEMEXPANDING
+   CASE TVN_ITEMEXPANDINGW
+      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      IF hb_IsObject(oItem)
+         IF ::bExpand != NIL
+            RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
+                            CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
+                       0, 1)
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE TVN_BEGINDRAG
+      IF ::lDragDrop
+         ::hitemDrag := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+         ::lDragging := .T.
+      ENDIF
+      EXIT
+
+   CASE TVN_KEYDOWN
+      IF ::oItem:oTree:bKeyDown != NIL
+         Eval(::oItem:oTree:bKeyDown, ::oItem, nKeyDown, Self)
+      ENDIF
+      EXIT
+
+   CASE NM_CLICK
+      nHitem :=  Tree_GetNotify(lParam, 1)
+      //nHitem :=  GETNOTIFYcode(lParam)
+      oItem  := tree_Hittest(::handle,,, @nAct)
+      IF nAct == TVHT_ONITEMSTATEICON
+         IF ::oItem == NIL .OR. oItem:handle != ::oitem:handle
+            ::Select(oItem)
+            ::oItem := oItem
+         ENDIF
+         IF hb_IsBlock(::bCheck)
+            lEval := Eval(::bCheck, !::oItem:checked, ::oItem, Self)
+         ENDIF
+         IF lEval == NIL .OR. !Empty(lEval)
+            MarkCheckTree(::oItem, IIf(::oItem:checked, 1, 2))
+            RETURN 0
+         ENDIF
+         RETURN 1
+      ELSEIF !::lEditLabels .AND. Empty(nHitem)
+         IF !::oItem:oTree:lEmpty
+            IF ::oItem:bClick != NIL
+               Eval(::oItem:bClick, ::oItem, Self)
+            ENDIF
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE NM_DBLCLK
+      IF hb_IsBlock(::bDblClick)
+         oItem := tree_Hittest(::handle,,, @nAct)
+         Eval(::bDblClick, oItem, Self, nAct)
+      ENDIF
+      EXIT
+
+   CASE NM_RCLICK
+      IF hb_IsBlock(::bRClick)
+         oItem := tree_Hittest(::handle,,, @nAct)
+         Eval(::bRClick, oItem, Self, nAct)
+      ENDIF
+
+   ENDSWITCH
+
+   IF hb_IsObject(oItem)
+      ::oItem := oItem
+   ENDIF
+
+RETURN 0
+#endif
 
 METHOD Selecteds(oItem, aSels) CLASS HTree
    LOCAL i, iLen
    LOCAL aSelecteds := IIf(aSels == NIL, {}, aSels)
-   
+
    oItem := IIf(oItem == NIL, Self, oItem)
    iLen :=  Len(oItem:aitems)
-   
+
    FOR i := 1 TO iLen
       IF oItem:aItems[i]:checked
          AAdd(aSelecteds, oItem:aItems[i])
-      ENDIF   
+      ENDIF
       ::Selecteds(oItem:aItems[i], aSelecteds)
    NEXT
    RETURN aSelecteds
