@@ -146,7 +146,7 @@ STATIC FUNCTION __GetFocus(oCtrl)
 STATIC FUNCTION __KillFocus(oCtrl)
    LOCAL xRet
 
-   IF !CheckFocus(oCtrl, .T.) .or. oCtrl:lNoValid
+   IF !CheckFocus(oCtrl, .T.) .OR. oCtrl:lNoValid
       RETURN .T.
    ENDIF
 

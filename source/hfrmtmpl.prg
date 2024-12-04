@@ -758,7 +758,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          ENDIF
       ELSEIF cPName == "justify"
          nStyle += IIf(xProperty == "Center", SS_CENTER, IIf(xProperty == "Right", SS_RIGHT, 0))
-      ELSEIF cPName == "multiline" .or. cPName == "wordwrap"
+      ELSEIF cPName == "multiline" .OR. cPName == "wordwrap"
          IF xProperty
             nStyle += ES_MULTILINE
          ENDIF

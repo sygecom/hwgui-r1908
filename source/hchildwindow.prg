@@ -129,7 +129,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
    ELSEIF (i := AScan(HMainWindow():aMessages[1], msg)) != 0
       RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
-      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
+      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .OR. msg == WM_MOUSEWHEEL
          onTrackScroll(Self, msg, wParam, lParam)
       ELSEIF msg == WM_NOTIFY .AND. !::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(wParam)) != NIL .AND. oCtrl:className != "HTAB"

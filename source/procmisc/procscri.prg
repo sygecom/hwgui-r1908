@@ -111,7 +111,7 @@ LOCAL rezArray := IIf(lDebugInfo, {"", {}, {}}, {"", {}})
       han := scrSource
    ENDIF
    IF han == NIL .OR. han != - 1
-      IF !lppNoInit .or. s_pp == NIL
+      IF !lppNoInit .OR. s_pp == NIL
          s_pp := __pp_init()
       ENDIF
       IF hb_IsChar(scrSource)

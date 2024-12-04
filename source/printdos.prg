@@ -144,7 +144,7 @@ METHOD New(oPorta) CLASS PrintDos
       ENDIF
    ENDIF
 
-   IF oPorta == "GRAPHIC" .or. oPorta == "PREVIEW"
+   IF oPorta == "GRAPHIC" .OR. oPorta == "PREVIEW"
       ::gText := ""
    ELSE
       // tracelog([::gText:=fCreate(::oPorta)])
@@ -268,7 +268,7 @@ METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    // tracelog(oProw, oPcol, oTexto, oPicture)
    IF hb_IsNumeric(oTexto)
 
-      IF !Empty(oPicture) .or. oPicture != NIL
+      IF !Empty(oPicture) .OR. oPicture != NIL
          oTexto := Transform(oTexto, oPicture)
       ELSE
          oTexto := Str(oTexto)
@@ -277,7 +277,7 @@ METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
    ELSEIF hb_IsDate(oTexto)
       oTexto := DToC(oTexto)
    ELSE
-      IF !Empty(oPicture) .or. oPicture != NIL
+      IF !Empty(oPicture) .OR. oPicture != NIL
          oTexto := Transform(oTexto, oPicture)
       ENDIF
    ENDIF
@@ -435,7 +435,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
    LOCAL oText := {""}
    LOCAL oDlg, oColor1, oColor2
    LOCAL oEdit
-   LOCAL oPrt := IIf(Empty(::oPorta) .or. ::oPorta == "PREVIEW", "LPT1", ::oPorta)
+   LOCAL oPrt := IIf(Empty(::oPorta) .OR. ::oPorta == "PREVIEW", "LPT1", ::oPorta)
 
    IF han != - 1
       DO WHILE .T.

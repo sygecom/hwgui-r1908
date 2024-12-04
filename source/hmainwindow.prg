@@ -270,7 +270,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
        (!::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE)
       RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
-      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
+      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .OR. msg == WM_MOUSEWHEEL
          IF ::nScrollBars != -1
              ::ScrollHV(Self, msg, wParam, lParam)
          ENDIF

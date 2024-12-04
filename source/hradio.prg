@@ -423,7 +423,7 @@ METHOD When() CLASS HRadioButton
    IF !CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
-   nSkip := IIf(GetKeyState(VK_UP) < 0 .or. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
+   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
    ::lwhen := GetKeyState(VK_UP)  + GetKeyState(VK_DOWN) + GetKeyState(VK_RETURN) + GetKeyState(VK_TAB) < 0
    IF hb_IsBlock(::bGetFocus)
       ::lnoValid := .T.

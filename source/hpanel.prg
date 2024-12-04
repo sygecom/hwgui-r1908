@@ -210,7 +210,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
        RETURN 0
 */
    ELSE
-      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .or. msg == WM_MOUSEWHEEL
+      IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .OR. msg == WM_MOUSEWHEEL
          IF ::nScrollBars != -1 .AND. ::bScroll == NIL
              ::ScrollHV(Self, msg, wParam, lParam)
              IF msg == WM_MOUSEWHEEL

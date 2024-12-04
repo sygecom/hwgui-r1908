@@ -817,7 +817,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::lCtrlPress := .T.
          ELSEIF wParam == VK_SHIFT   //16
             ::lShiftPress := .T.
-         //ELSEIF ::lAutoEdit .AND. (wParam >= 48 .AND. wParam <= 90 .or. wParam >= 96 .AND. wParam <= 111)
+         //ELSEIF ::lAutoEdit .AND. (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111)
          //   ::Edit(wParam, lParam)
          ENDIF
          RETURN 1
@@ -2022,7 +2022,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
       nRowsFill := cursor_row - 1
       // fill the remaining canvas area with background color if needed
       nRows := cursor_row - 1
-      IF nRows < ::rowCount .or. (nRows * (::height - 1) + ::nHeadHeight + ::nFootHeight) < ::nHeight
+      IF nRows < ::rowCount .OR. (nRows * (::height - 1) + ::nHeadHeight + ::nFootHeight) < ::nHeight
        //  FillRect(hDC, ::x1, ::y1 + (::height + 1) * nRows + 1, ::x2, ::y2, ::brush:handle)
       ENDIF
       Eval(::bGoTo, Self, tmp)

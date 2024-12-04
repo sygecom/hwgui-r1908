@@ -246,7 +246,7 @@ FUNCTION Hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
    ENDIF
    nId := IIf(nId == NIL .AND. cItem != NIL, ++ _Id, nId)
    AAdd(aMenu, {bItem, cItem, nId, nFlag})
-   IF lBitmap != NIL .or. !Empty(lBitmap)
+   IF lBitmap != NIL .OR. !Empty(lBitmap)
       IF lResource == NIL
          lResource := .F.
       ENDIF
@@ -289,7 +289,7 @@ FUNCTION Hwg_InsertBitmapMenu(aMenu, nId, lBitmap, oResource)
    LOCAL oMenu, oBmp
 
    //Serge(seohic) sugest
-   IF oResource == NIL .or. !oResource
+   IF oResource == NIL .OR. !oResource
       oBmp := HBitmap():AddFile(lBitmap)
    ELSE
       oBmp := HBitmap():AddResource(lBitmap)

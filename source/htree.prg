@@ -600,7 +600,7 @@ METHOD Notify(lParam) CLASS HTree
          ENDIF
       ENDIF
 
-   ELSEIF nCode == TVN_BEGINLABELEDIT .or. nCode == TVN_BEGINLABELEDITW
+   ELSEIF nCode == TVN_BEGINLABELEDIT .OR. nCode == TVN_BEGINLABELEDITW
       s_aEvents := aClone(::oParent:aEvents)
       ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
       ::oParent:AddEvent(0, IDCANCEL, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
@@ -619,7 +619,7 @@ METHOD Notify(lParam) CLASS HTree
       ENDIF
       ::oParent:aEvents := s_aEvents
 
-   ELSEIF nCode == TVN_ITEMEXPANDING .or. nCode == TVN_ITEMEXPANDINGW
+   ELSEIF nCode == TVN_ITEMEXPANDING .OR. nCode == TVN_ITEMEXPANDINGW
       oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          IF ::bExpand != NIL

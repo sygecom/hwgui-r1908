@@ -324,12 +324,12 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
            res := .T.
         ENDIF
       ENDIF
-      IF (res .AND. !::m_bVisited) .or. (res .AND. ::m_bVisited)
+      IF (res .AND. !::m_bVisited) .OR. (res .AND. ::m_bVisited)
          ::state := LBL_NORMAL
          InvalidateRect(::handle, 0)
          RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ENDIF
-      IF (::state == LBL_NORMAL .AND. !res) .or. ;
+      IF (::state == LBL_NORMAL .AND. !res) .OR. ;
          (::state == LBL_NORMAL .AND. !res .AND. ::m_bVisited)
          ::state := LBL_MOUSEOVER
          InvalidateRect(::handle, 0)
