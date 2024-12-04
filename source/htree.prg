@@ -113,7 +113,15 @@ CLASS HTreeNode INHERIT HObject
 ENDCLASS
 
 METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick) CLASS HTreeNode
-   LOCAL aItems, i, h, im1, im2, cImage, op, nPos
+
+   LOCAL aItems
+   LOCAL i
+   LOCAL h
+   LOCAL im1
+   LOCAL im2
+   LOCAL cImage
+   LOCAL op
+   LOCAL nPos
 
    ::oTree    := oTree
    ::oParent  := oParent
@@ -192,13 +200,18 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
    RETURN Self
 
 METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages) CLASS HTreeNode
+   
    LOCAL oParent := Self
    LOCAL oNode := HTreeNode():New(::oTree, oParent, oPrev, oNext, cTitle, bAction, aImages)
 
    RETURN oNode
 
 METHOD Delete(lInternal) CLASS HTreeNode
-   LOCAL h := ::handle, j, alen, aItems
+   
+   LOCAL h := ::handle
+   LOCAL j
+   LOCAL alen
+   LOCAL aItems
 
    IF !Empty(::aItems)
       alen := Len(::aItems)
@@ -220,7 +233,12 @@ METHOD Delete(lInternal) CLASS HTreeNode
    RETURN NIL
 
 METHOD FindChild(h) CLASS HTreeNode
-   LOCAL aItems := ::aItems, i, alen := Len(aItems), oNode
+   
+   LOCAL aItems := ::aItems
+   LOCAL i
+   LOCAL alen := Len(aItems)
+   LOCAL oNode
+
    FOR i := 1 TO alen
       IF aItems[i]:handle == h
          RETURN aItems[i]
@@ -233,6 +251,7 @@ METHOD FindChild(h) CLASS HTreeNode
    RETURN NIL
 
 METHOD Checked(lChecked) CLASS HTreeNode
+   
    LOCAL state
 
    IF lChecked != NIL
@@ -245,10 +264,11 @@ METHOD Checked(lChecked) CLASS HTreeNode
    RETURN ::lChecked
 
 METHOD GetLevel(h) CLASS HTreeNode
-   LOCAL iLevel := 1
    
+   LOCAL iLevel := 1
    LOCAL oNode := IIf(Empty(h), Self, h)
-   DO WHILE (oNode:oParent) != NIL 
+
+   DO WHILE (oNode:oParent) != NIL
        oNode := oNode:oParent
        iLevel ++
    ENDDO
@@ -298,8 +318,9 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
             aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lcheckbox, bCheck, lDragDrop, bDrag, bDrop, bOther) CLASS HTree
-   LOCAL i, aBmpSize
-
+   
+   LOCAL i
+   LOCAL aBmpSize
 
    lEditLabels := IIf(lEditLabels == NIL, .F., lEditLabels)
    lCheckBox   := IIf(lCheckBox == NIL, .F., lCheckBox)
@@ -374,7 +395,12 @@ METHOD Activate() CLASS HTree
 
 
 METHOD onEvent(msg, wParam, lParam) CLASS HTree
-   Local nEval, hitemNew, htiParent, htiPrev, htiNext
+   
+   LOCAL nEval
+   LOCAL hitemNew
+   LOCAL htiParent
+   LOCAL htiPrev
+   LOCAL htiNext
 
    IF hb_IsBlock(::bOther)
       IF (nEval := Eval(::bOther, Self, msg, wParam, lParam)) != NIL .AND. nEval != -1
@@ -460,12 +486,19 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
 
 
 METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages) CLASS HTree
+   
    LOCAL oNode := HTreeNode():New(Self, NIL, oPrev, oNext, cTitle, bAction, aImages)
+
    ::lEmpty := .F.
    RETURN oNode
 
 METHOD FindChild(h) CLASS HTree
-   LOCAL aItems := ::aItems, i, alen := Len(aItems), oNode
+   
+   LOCAL aItems := ::aItems
+   LOCAL i
+   LOCAL alen := Len(aItems)
+   LOCAL oNode
+
    FOR i := 1 TO alen
       IF aItems[i]:handle == h
          RETURN aItems[i]
@@ -478,8 +511,10 @@ METHOD FindChild(h) CLASS HTree
    RETURN NIL
 
 METHOD FindChildPos(oNode, h) CLASS HTree
+   
    LOCAL aItems := IIf(oNode == NIL, ::aItems, oNode:aItems)
-   LOCAL  i, alen := Len(aItems)
+   LOCAL i
+   LOCAL alen := Len(aItems)
 
    FOR i := 1 TO alen
       IF aItems[i]:handle == h
@@ -491,8 +526,10 @@ METHOD FindChildPos(oNode, h) CLASS HTree
    RETURN 0
 
 METHOD SearchString(cText, iNivel, oNode, inodo) CLASS HTree
+   
    LOCAL aItems := IIf(oNode == NIL, ::aItems, oNode:aItems)
-   Local  i , alen := Len(aItems)
+   Local i
+   LOCAL alen := Len(aItems)
    LOCAL oNodeRet
    
    iNodo := IIf(inodo == NIL, 0, iNodo)
@@ -530,7 +567,13 @@ METHOD ItemHeight(nHeight) CLASS HTree
 
 #if 0 // old code for reference (to be deleted)
 METHOD Notify(lParam) CLASS HTree
-   LOCAL nCode := GetNotifyCode(lParam), oItem, cText, nAct, nHitem, leval
+   
+   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL oItem
+   LOCAL cText
+   LOCAL nAct
+   LOCAL nHitem
+   LOCAL leval
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
     
    IF ncode == NM_SETCURSOR .AND. ::lDragging
@@ -786,7 +829,9 @@ RETURN 0
 #endif
 
 METHOD Selecteds(oItem, aSels) CLASS HTree
-   LOCAL i, iLen
+   
+   LOCAL i
+   LOCAL iLen
    LOCAL aSelecteds := IIf(aSels == NIL, {}, aSels)
 
    oItem := IIf(oItem == NIL, Self, oItem)
@@ -801,7 +846,9 @@ METHOD Selecteds(oItem, aSels) CLASS HTree
    RETURN aSelecteds
 
 METHOD Expand(oNode, lAllNode) CLASS HTree
-   LOCAL i, iLen := Len(oNode:aitems)
+   
+   LOCAL i
+   LOCAL iLen := Len(oNode:aitems)
    
    SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, oNode:handle)
    FOR i := 1 TO iLen
@@ -813,7 +860,9 @@ METHOD Expand(oNode, lAllNode) CLASS HTree
    RETURN NIL
 
 STATIC PROCEDURE ReleaseTree(aItems)
-   LOCAL i, iLen := Len(aItems)
+   
+   LOCAL i
+   LOCAL iLen := Len(aItems)
 
    FOR i := 1 TO iLen
       tree_ReleaseNode(aItems[i]:oTree:handle, aItems[i]:handle)
@@ -824,7 +873,10 @@ STATIC PROCEDURE ReleaseTree(aItems)
    RETURN
 
 STATIC PROCEDURE MarkCheckTree(oItem, state)
-   LOCAL i, iLen := Len(oItem:aitems), oParent
+   
+   LOCAL i
+   LOCAL iLen := Len(oItem:aitems)
+   LOCAL oParent
 
    FOR i := 1 TO iLen
       TreeSetItem(oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state)
@@ -841,7 +893,10 @@ STATIC PROCEDURE MarkCheckTree(oItem, state)
 
 
 STATIC PROCEDURE DragDropTree(oDrag, oItem, oDrop)
-   LOCAL i, iLen := Len(oDrag:aitems), hitemNew
+   
+   LOCAL i
+   LOCAL iLen := Len(oDrag:aitems)
+   LOCAL hitemNew
 
    FOR i := 1 TO iLen
       hitemNew := oItem:AddNode(oDrag:aItems[i]:GetText(), , , oDrag:aItems[i]:bAction, , oDrag:aItems[i]:lchecked, oDrag:aItems[i]:bClick) //, ::hitemDrop:aImages)
