@@ -109,6 +109,7 @@ METHOD Init() CLASS HRichEdit
    ENDIF
    RETURN NIL
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    LOCAL nDelta, nret
 
@@ -183,6 +184,124 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
 
    RETURN - 1
+#else
+METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
+
+   LOCAL nDelta
+   LOCAL nret
+
+   SWITCH msg
+
+   CASE WM_KEYDOWN
+      SWITCH wParam
+      CASE VK_DELETE
+      CASE VK_BACK
+         ::lChanged := .T.
+         EXIT
+      CASE VK_TAB
+         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            RETURN 0
+         ELSEIF ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
+            RE_INSERTTEXT(::handle, Chr(VK_TAB))
+            RETURN 0
+         ENDIF
+         EXIT
+      CASE VK_ESCAPE
+         IF ::GetParentForm():handle != ::oParent:handle
+            //IF GetParent(::oParent:handle) != NIL
+               //SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
+            //ENDIF
+            RETURN 0
+         ENDIF
+      ENDSWITCH
+      EXIT
+
+   CASE WM_KEYUP
+      ::updatePos()
+      IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+         IF IsCtrlShift(.T., .F.)
+            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            RETURN 0
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE WM_LBUTTONDOWN
+      ::updatePos()
+      EXIT
+
+   CASE WM_LBUTTONUP
+      ::updatePos()
+      EXIT
+
+   CASE WM_MOUSEACTIVATE
+      IF ::GetParentForm():Type < WND_DLG_RESOURCE
+         ::SetFocus()
+      ENDIF
+      EXIT
+
+   CASE EM_GETSEL
+   CASE EM_LINEFROMCHAR
+   CASE EM_LINEINDEX
+   CASE EM_GETLINECOUNT
+   CASE EM_SETSEL
+   CASE EM_SETCHARFORMAT
+   CASE EM_HIDESELECTION
+   CASE WM_GETTEXTLENGTH
+   CASE EM_GETFIRSTVISIBLELINE
+      RETURN -1
+
+   CASE WM_SETFOCUS
+      IF ::lSetFocus // .AND. ISWINDOWVISIBLE(::handle)
+         ::lSetFocus := .F.
+         PostMessage(::handle, EM_SETSEL, 0, 0)
+      ELSEIF ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+         ::lctrltab := ::GetParentForm(Self):lDisableCtrlTab
+         ::GetParentForm(Self):lDisableCtrlTab := ::lAllowTabs
+      ENDIF
+      EXIT
+
+   CASE WM_KILLFOCUS
+      IF ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+         ::GetParentForm(Self):lDisableCtrlTab := ::lctrltab
+      ENDIF
+      EXIT
+
+   CASE WM_CHAR
+      IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
+         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+            RETURN 0
+         ENDIF
+      ENDIF
+      IF !IsCtrlShift(.T., .F.)
+         ::lChanged := .T.
+      ENDIF
+      EXIT
+
+   CASE WM_MOUSEWHEEL
+      nDelta := HIWORD(wParam)
+      IF nDelta > 32768
+         nDelta -= 65535
+      ENDIF
+      SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      //SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      EXIT
+
+   CASE WM_DESTROY
+      ::END()
+
+   ENDSWITCH
+
+   IF hb_IsBlock(::bOther)
+      nret := Eval(::bOther, Self, msg, wParam, lParam)
+      IF !hb_IsNumeric(nret) .OR. nret > -1
+         RETURN nret
+      ENDIF
+   ENDIF
+
+RETURN -1
+#endif
 
 METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 
