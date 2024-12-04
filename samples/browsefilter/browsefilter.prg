@@ -1,4 +1,4 @@
-/* 
+/*
    Copyright (c) Luiz Henrique lh.santos at ibest.com.br
 */
 #include "hwgui.ch"
@@ -12,7 +12,7 @@ FUNCTION Main()
   
   INIT WINDOW frmTesteBrowse MAIN TITLE "Teste HBrowse com filtro" ;
     COLOR COLOR_3DLIGHT+1 ;
-  	AT 0,0 ;
+  	AT 0, 0 ;
   	SIZE GetDesktopWidth(), GetDesktopHeight() - 28 ;
   	FONT HFont():Add("MS Sans Serif", 0, -12)
   	
@@ -26,8 +26,8 @@ FUNCTION Main()
   
   DBSELECTAREA("MESAS")
   
-  @ 010,061 BROWSE DATABASE brwMesas ;
-            SIZE 353,283 ;
+  @ 010, 061 BROWSE DATABASE brwMesas ;
+            SIZE 353, 283 ;
             STYLE WS_VSCROLL + WS_HSCROLL ;
   	        ON POSCHANGE {|| EVAL(brwItens:bFirst), brwItens:Refresh()} ;
   	        FOR { || EMPTY(fechado) }
@@ -71,8 +71,8 @@ FUNCTION Main()
   
   DBSELECTAREA("ITENS")
   
-  @ 375,061 BROWSE DATABASE brwItens ;
-    SIZE 415,283 ;
+  @ 375, 061 BROWSE DATABASE brwItens ;
+    SIZE 415, 283 ;
   	STYLE WS_VSCROLL + WS_HSCROLL ;
   	FIRST {|| DBSEEK(mesas->mesa)} ;
   	WHILE {|| mesa == mesas->mesa} ;

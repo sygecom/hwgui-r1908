@@ -22,7 +22,7 @@ Function Main
 Local oMainWnd, oPanel
 Private oPdf
 
-   INIT WINDOW oMainWnd TITLE "Pdf example" AT 200,0 SIZE 500,400
+   INIT WINDOW oMainWnd TITLE "Pdf example" AT 200, 0 SIZE 500, 400
 
    MENU OF oMainWnd
       MENU TITLE "File"
@@ -30,7 +30,7 @@ Private oPdf
       ENDMENU
    ENDMENU
 
-   @ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
+   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
 
    opdf := ViewPdf( oPanel, "SAMPLE.PDF", 0, 0, 500, 366 )
 

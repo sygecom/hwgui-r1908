@@ -56,7 +56,7 @@
 //  The delimiter
 #define DELIM   "$"                 // keyword delimiter
 
-#xtranslate UPPERLOWER(<exp>) => (UPPER(SUBSTR(<exp>,1,1))+LOWER(SUBSTR(<exp>,2)))
+#xtranslate UPPERLOWER(<exp>) => (UPPER(SUBSTR(<exp>, 1, 1))+LOWER(SUBSTR(<exp>, 2)))
 #define D_NORMAL  1
 #define D_ARG     2
 #define D_SYNTAX  3
@@ -82,8 +82,8 @@
 #define pMEMO      "M"
 #define pNUMERIC   "N"
 #define pOBJECT    "O"
-#define pTRUE .t.
-#define pFALSE .f.
+#define pTRUE .T.
+#define pFALSE .F.
 #define pCRLF HB_OSNEWLINE()
 
 #xtranslate DOSFILENAME(<c>) => substr( <c>, rat("\",<c>)+1 )

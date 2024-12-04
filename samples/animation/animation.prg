@@ -11,7 +11,7 @@ PROCEDURE Main ()
         AT 0, 0 ;
         SIZE 300, 430
 
-   @ 0,0 PANEL oPanel
+   @ 0, 0 PANEL oPanel
 
    SET RESOURCES TO "shell32"
 
@@ -25,7 +25,7 @@ PROCEDURE Main ()
 
    @ 33, 145 SAY  "Autoplay from internal resource" of oPanel SIZE 250, 20 TRANSPARENT
 
-   oCtrl := HAnimation():New( oPanel, , , 130, 180, 30, 30, "processando.avi", .f., .t., .t. )
+   oCtrl := HAnimation():New(oPanel, , , 130, 180, 30, 30, "processando.avi", .F., .T., .T.)
 
    @ 93, 230 BUTTON oBut1 CAPTION " Play " of oPanel SIZE 110, 30 ;
       ON CLICK { || oBut3:enable(), oBut1:disable(), oCtrl:play() }

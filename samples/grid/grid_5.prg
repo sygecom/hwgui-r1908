@@ -40,7 +40,7 @@ Static oMain, oForm, oBrowse
 
 Function Main()
         INIT WINDOW oMain MAIN TITLE "Grid Edition Sample" ;
-             AT 0,0 ;
+             AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
 
                 MENU OF oMain
@@ -89,7 +89,7 @@ Function Test()
         AT 0, 0 SIZE 700, 425 ;
         STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 
-        @ 10,10 GRID oGrid OF oForm SIZE 680,375;
+        @ 10, 10 GRID oGrid OF oForm SIZE 680, 375;
                 ITEMCOUNT LastRec() ;
                 ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key, aItems) } ;
                 ON CLICK {|oCtrl| OnClick(oCtrl, aItems) } ;
@@ -101,11 +101,11 @@ Function Test()
         ADD COLUMN TO GRID oGrid HEADER "Date"   WIDTH 100
         ADD COLUMN TO GRID oGrid HEADER "Memo"   WIDTH 200        
                                  
-        @  10, 395 BUTTON 'Insert' SIZE 75,25 ON CLICK {|| OnKey( oGrid, VK_INSERT, aItems ) }                            
-        @  90, 395 BUTTON 'Change' SIZE 75,25 ON CLICK {|| OnClick( oGrid, aItems ) }                            
-        @ 170, 395 BUTTON 'Delete' SIZE 75,25 ON CLICK {|| OnKey( oGrid, VK_DELETE, aItems ) }                            
+        @  10, 395 BUTTON 'Insert' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_INSERT, aItems ) }
+        @  90, 395 BUTTON 'Change' SIZE 75, 25 ON CLICK {|| OnClick( oGrid, aItems ) }
+        @ 170, 395 BUTTON 'Delete' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_DELETE, aItems ) }
 
-        @ 620, 395 BUTTON 'Close' SIZE 75,25 ON CLICK {|| oForm:close() }                            
+        @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:close() }                            
 
     ACTIVATE DIALOG oForm                
 
@@ -275,8 +275,8 @@ Function GridEdit(cAlias, aFields, lAppend, bChange)
 
         Next
     
-        @ oForm:nWidth - 160, oForm:nHeight - 30 BUTTON "Ok"     ID IDOK SIZE 75,25 
-        @ oForm:nWidth -  80, oForm:nHeight - 30 BUTTON "Cancel" ID IDCANCEL SIZE 75,25 ON CLICK {|| oForm:Close() }
+        @ oForm:nWidth - 160, oForm:nHeight - 30 BUTTON "Ok"     ID IDOK SIZE 75, 25
+        @ oForm:nWidth -  80, oForm:nHeight - 30 BUTTON "Cancel" ID IDCANCEL SIZE 75, 25 ON CLICK {|| oForm:Close() }
         
         oForm:bActivate := {|| SetFocus(aFields[1, GET_OBJECT]:handle)}
         
@@ -357,7 +357,7 @@ Static Function OnKey( o, k, aItems )
         else
             MyDelete()
         endif
-    elseif k == VK_DELETE .and. hwg_MsgYesNo("Delete this record ?", "Warning")                   
+    elseif k == VK_DELETE .and. hwg_MsgYesNo("Delete this record ?", "Warning")
         MyDelete()
     endif        
 return nil    

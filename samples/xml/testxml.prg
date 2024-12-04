@@ -20,8 +20,8 @@ Private oMainWindow, oFont
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
    INIT WINDOW oMainWindow MAIN TITLE "XML Sample"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
-     AT 200,0 SIZE 600,300                       ;
+     COLOR COLOR_3DLIGHT + 1                       ;
+     AT 200, 0 SIZE 600, 300                       ;
      ON EXIT {||SaveOptions()}                   ;
      FONT oFont
 
@@ -34,7 +34,7 @@ Private oMainWindow, oFont
             FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
                oXmlNode := oXmlDoc:aItems[1]:aItems[i]
                fname := oXmlNode:GetAttribute("name")
-               Hwg_DefineMenuItem( fname, 1020+i, &( "{||NewItem("+LTrim(Str(i,2))+")}" ) )
+               Hwg_DefineMenuItem( fname, 1020+i, &( "{||NewItem("+LTrim(Str(i, 2))+")}" ) )
             NEXT
             SEPARATOR
          ENDIF
@@ -72,18 +72,18 @@ Local cName, cInfo
    ENDIF
 
    INIT DIALOG oDlg TITLE Iif( nItem==0,"New item","Change item" )  ;
-   AT 210,10  SIZE 300,150  FONT oFont
+   AT 210, 10  SIZE 300, 150  FONT oFont
 
-   @ 20,20 SAY "Name:" SIZE 60, 22
-   @ 80,20 GET cName SIZE 150, 26
+   @ 20, 20 SAY "Name:" SIZE 60, 22
+   @ 80, 20 GET cName SIZE 150, 26
 
-   @ 240,20  BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew:=HFont():Select(oItemFont)}
+   @ 240, 20  BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew:=HFont():Select(oItemFont)}
 
-   @ 20,50 SAY "Info:" SIZE 60, 22
-   @ 80,50 GET cInfo SIZE 150, 26
+   @ 20, 50 SAY "Info:" SIZE 60, 22
+   @ 80, 50 GET cInfo SIZE 150, 26
 
-   @ 20,110  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
-   @ 180,110 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
+   @ 20, 110  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
+   @ 180, 110 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    ACTIVATE DIALOG oDlg
 
@@ -95,10 +95,10 @@ Local cName, cInfo
          oXMLNode:Add( Font2XML( Iif( oFontNew!=Nil,oFontNew,oFont ) ) )
          lIniChanged := .T.
 
-         aMenu := oMainWindow:menu[1,1]
-         nId := aMenu[1][Len(aMenu[1])-2,3]+1
+         aMenu := oMainWindow:menu[1, 1]
+         nId := aMenu[1][Len(aMenu[1])-2, 3]+1
          Hwg_AddMenuItem( aMenu, cName, nId, .F., ;
-              &( "{||NewItem("+LTrim(Str(nId-1020,2))+")}" ), Len(aMenu[1])-1 )
+              &( "{||NewItem("+LTrim(Str(nId-1020, 2))+")}" ), Len(aMenu[1])-1 )
 
       ELSE
          IF oXmlNode:GetAttribute( "name" ) != cName
@@ -159,19 +159,19 @@ Function Font2XML( oFont )
 Local aAttr := {}
 
    Aadd( aAttr, { "name",oFont:name } )
-   Aadd( aAttr, { "width",Ltrim(Str(oFont:width,5)) } )
-   Aadd( aAttr, { "height",Ltrim(Str(oFont:height,5)) } )
+   Aadd( aAttr, { "width",Ltrim(Str(oFont:width, 5)) } )
+   Aadd( aAttr, { "height",Ltrim(Str(oFont:height, 5)) } )
    IF oFont:weight != 0
-      Aadd( aAttr, { "weight",Ltrim(Str(oFont:weight,5)) } )
+      Aadd( aAttr, { "weight",Ltrim(Str(oFont:weight, 5)) } )
    ENDIF
    IF oFont:charset != 0
-      Aadd( aAttr, { "charset",Ltrim(Str(oFont:charset,5)) } )
+      Aadd( aAttr, { "charset",Ltrim(Str(oFont:charset, 5)) } )
    ENDIF
    IF oFont:Italic != 0
-      Aadd( aAttr, { "italic",Ltrim(Str(oFont:Italic,5)) } )
+      Aadd( aAttr, { "italic",Ltrim(Str(oFont:Italic, 5)) } )
    ENDIF
    IF oFont:Underline != 0
-      Aadd( aAttr, { "underline",Ltrim(Str(oFont:Underline,5)) } )
+      Aadd( aAttr, { "underline",Ltrim(Str(oFont:Underline, 5)) } )
    ENDIF
 
 Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )

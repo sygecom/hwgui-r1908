@@ -14,7 +14,7 @@ Static oMain, oForm, oFont, oBar
 Function Main ()
 
    INIT WINDOW oMain MAIN TITLE "ComboBox Sample" ;
-      AT 0,0 ;
+      AT 0, 0 ;
       SIZE GetDesktopWidth(), GetDesktopHeight() - 28
 
       MENU OF oMain
@@ -48,12 +48,12 @@ Function Test ()
       @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here";
          ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }  
 
-      @ 20,110 COMBOBOX oCombo4 ITEMS aItems SIZE 100, 23
-      @ 20,140 COMBOBOX oCombo5 ITEMS aItems SIZE 100, 23 TEXT
-      @ 20,170 COMBOBOX oCombo6 ITEMS aItems SIZE 100, 23 EDIT;
+      @ 20, 110 COMBOBOX oCombo4 ITEMS aItems SIZE 100, 23
+      @ 20, 140 COMBOBOX oCombo5 ITEMS aItems SIZE 100, 23 TEXT
+      @ 20, 170 COMBOBOX oCombo6 ITEMS aItems SIZE 100, 23 EDIT;
          ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }  
 
-      @ 20,200 GET cEdit SIZE 150, 23
+      @ 20, 200 GET cEdit SIZE 150, 23
 
       @ 300, 395 BUTTON "Add"    SIZE 75, 25 ON CLICK {|| oCombo1:AddItem(cEdit), oCombo1:refresh() }
 
@@ -86,7 +86,7 @@ Function BoundTest ()
       @ 20, 80 GET COMBOBOX oCombo3 VAR xCombo ITEMS aItems SIZE 100, 23 EDIT TOOLTIP "Type any thing here";
           ON INTERACTIVECHANGE {|value,This| oCombo3_onInteractiveChange( value,This ) }  
 
-      // @ 20,200 GET cEdit SIZE 150, 23
+      // @ 20, 200 GET cEdit SIZE 150, 23
 //      @ 300, 395 BUTTON "Add"    SIZE 75, 25 ON CLICK {|| oCombo1:AddItem(cEdit), oCombo1:refresh() }
 //      @ 380, 395 BUTTON "Test"    SIZE 75, 25 ON CLICK {|| xCombo := "Temp", oCombo3:refresh(), nCombo := 2, oCombo1:refresh(), oCombo2:SetItem(3), oCombo4:SetItem(3), oCombo5:value := "Third", oCombo5:refresh(), oCombo6:SetItem(2) }
       @ 380, 395 BUTTON "Combo 1" SIZE 75, 25 ON CLICK {|| hwg_MsgInfo(oCombo1:GetValueBound()+"-"+str(nCombo), "Value of combo 1") }
@@ -105,6 +105,6 @@ Static Function oCombo3_onInteractiveChange( value,This )
    n := Ascan( This:aitems, {| a | a = cTexto } )
    IF !EMPTY( cTexto ) .AND. (GETKEYSTATE( VK_DELETE ) + GETKEYSTATE( VK_BACK )) >= 0 .AND. n > 0
       This:SETVALUE( TRIM( This:aitems[ n ] ) )
-      KEYB_EVENT( VK_END,.T.,.T. )
+      KEYB_EVENT(VK_END, .T., .T.)
    ENDIF
    RETURN Nil

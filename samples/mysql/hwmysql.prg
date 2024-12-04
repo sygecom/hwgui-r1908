@@ -38,57 +38,57 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
    INIT WINDOW oMainWindow MAIN ICON oIcon COLOR COLOR_3DLIGHT ;
        TITLE "Harbour mySQL client"                            ;
-       AT 20,20 SIZE 500,500
+       AT 20, 20 SIZE 500, 500
 
-   ADD STATUS TO oMainWindow PARTS 0,0,0
-   @ 0,380 EDITBOX oEdit CAPTION ""      ;
-       SIZE 476,95                       ;
+   ADD STATUS TO oMainWindow PARTS 0, 0, 0
+   @ 0, 380 EDITBOX oEdit CAPTION ""      ;
+       SIZE 476, 95                       ;
        ON SIZE {|o,x,y|ResizeEditQ(x,y)} ;
        STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
 
-   @ 0,0 PANEL oPanel SIZE 0,44
+   @ 0, 0 PANEL oPanel SIZE 0, 44
 
-   @ 2,3 OWNERBUTTON OF oPanel ID 108 ON CLICK {||Connect()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Connect" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_NETWORK" FROM RESOURCE COORDINATES 0,4,0,0
-   @ 82,3 OWNERBUTTON OF oPanel ID 109 ON CLICK {||Databases()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Database" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_OPNPRJ" FROM RESOURCE COORDINATES 0,4,0,0
-   @ 162,3 OWNERBUTTON OF oPanel ID 110 ON CLICK {||Tables()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Tables" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_TABLE" FROM RESOURCE COORDINATES 0,4,0,0
-   @ 242,3 OWNERBUTTON OF oPanel ID 111 ON CLICK {||Execute()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Execute" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_BROWSE" FROM RESOURCE COORDINATES 0,4,0,0
-   @ 322,3 OWNERBUTTON OF oPanel ID 112 ON CLICK {||About()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "About" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0,4,0,0
-   @ 402,3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Exit" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0,4,0,0
+   @ 2, 3 OWNERBUTTON OF oPanel ID 108 ON CLICK {||Connect()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "Connect" FONT oFont COORDINATES 0, 20, 0, 0;
+        BITMAP "BMP_NETWORK" FROM RESOURCE COORDINATES 0, 4, 0, 0
+   @ 82, 3 OWNERBUTTON OF oPanel ID 109 ON CLICK {||Databases()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "Database" FONT oFont COORDINATES 0, 20, 0, 0;
+        BITMAP "BMP_OPNPRJ" FROM RESOURCE COORDINATES 0, 4, 0, 0
+   @ 162, 3 OWNERBUTTON OF oPanel ID 110 ON CLICK {||Tables()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "Tables" FONT oFont COORDINATES 0, 20, 0, 0;
+        BITMAP "BMP_TABLE" FROM RESOURCE COORDINATES 0, 4, 0, 0
+   @ 242, 3 OWNERBUTTON OF oPanel ID 111 ON CLICK {||Execute()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "Execute" FONT oFont COORDINATES 0, 20, 0, 0;
+        BITMAP "BMP_BROWSE" FROM RESOURCE COORDINATES 0, 4, 0, 0
+   @ 322, 3 OWNERBUTTON OF oPanel ID 112 ON CLICK {||About()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "About" FONT oFont COORDINATES 0, 20, 0, 0 ;
+        BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0, 4, 0, 0
+   @ 402, 3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
+        SIZE 80, 40 FLAT ;
+        TEXT "Exit" FONT oFont COORDINATES 0, 20, 0, 0 ; 
+        BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0, 4, 0, 0
 
-   @ 0,0 PANEL oPanelE OF oMainWindow SIZE 0,24 ON SIZE {||.T.}
+   @ 0, 0 PANEL oPanelE OF oMainWindow SIZE 0, 24 ON SIZE {||.T.}
 
-   @ 0,2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText( Memoread( SelectFile( "Script files( *.scr )", "*.scr", mypath )))} ;
-        SIZE 20,22 FLAT ;
+   @ 0, 2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText( Memoread( SelectFile( "Script files( *.scr )", "*.scr", mypath )))} ;
+        SIZE 20, 22 FLAT ;
         BITMAP "BMP_OPEN" FROM RESOURCE TOOLTIP "Load script"
-   @ 0,24 OWNERBUTTON OF oPanelE ID 115 ON CLICK {||SaveScript()} ;
-        SIZE 20,22 FLAT ;
+   @ 0, 24 OWNERBUTTON OF oPanelE ID 115 ON CLICK {||SaveScript()} ;
+        SIZE 20, 22 FLAT ;
         BITMAP "BMP_SAVE" FROM RESOURCE TOOLTIP "Save script"
-   @ 0,46 OWNERBUTTON OF oPanelE ID 116 ON CLICK {||BrowHistory()} ;
-        SIZE 20,22 FLAT ;
+   @ 0, 46 OWNERBUTTON OF oPanelE ID 116 ON CLICK {||BrowHistory()} ;
+        SIZE 20, 22 FLAT ;
         BITMAP "BMP_HIST" FROM RESOURCE TOOLTIP "Show history"
-   @ 0,68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),SetFocus(oEdit:handle)} ;
-        SIZE 20,22 FLAT ;
+   @ 0, 68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),SetFocus(oEdit:handle)} ;
+        SIZE 20, 22 FLAT ;
         BITMAP "BMP_CLEAR" FROM RESOURCE TOOLTIP "Clear"
 
-   @ 0,0 BROWSE oBrw ARRAY OF oMainWindow SIZE 500,376 ;
+   @ 0, 0 BROWSE oBrw ARRAY OF oMainWindow SIZE 500, 376 ;
            ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
    oBrw:active := .F.
 
@@ -98,7 +98,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    ENDIF
    ReadHistory( "qhistory.txt" )
 
-   WriteStatus( Hwindow():GetMain(),1,"Not Connected" )
+   WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
    SetFocus( oEdit:handle )
    // HideWindow( oBrw:handle )
    SetCtrlFont( oEdit:oParent:handle, oEdit:id, oBrwFont:handle )
@@ -140,14 +140,14 @@ Local aBases, nChoic
       ENDIF
    ENDIF
    aBases := sqlListDB( connHandle )
-   nChoic := WChoice( aBases,"DataBases",0,50 )
+   nChoic := WChoice(aBases, "DataBases", 0, 50)
    IF nChoic != 0
       cDatabase := aBases[ nChoic ]
       IF sqlSelectD( connHandle, cDatabase ) != 0
          hwg_MsgStop( "Can't connect to "+cDataBase )
          cDatabase := ""
       ELSE
-         WriteStatus( Hwindow():GetMain(),2,"DataBase: " + cDataBase )
+         WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
       ENDIF
    ENDIF
 
@@ -169,7 +169,7 @@ Local cTable
       Return .F.
    ENDIF
 
-   nChoic := WChoice( aTables,cDataBase+"  tables",50,50 )
+   nChoic := WChoice( aTables,cDataBase+"  tables", 50, 50 )
    IF nChoic != 0
       cTable := aTables[ nChoic ]
       execSQL( "SHOW COLUMNS FROM " + cTable )
@@ -230,13 +230,13 @@ Local hDlg := getmodalhandle()
       cDatabase := ""
    ENDIF
    IF connHandle == 0
-      WriteStatus( Hwindow():GetMain(),1,"Not Connected" )
-      WriteStatus( Hwindow():GetMain(),2,"" )
+      WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
+      WriteStatus(Hwindow():GetMain(), 2, "")
       SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
    ELSE
-      WriteStatus( Hwindow():GetMain(),1,"Connected to " + cServer )
+      WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
       IF !Empty( cDataBase )
-         WriteStatus( Hwindow():GetMain(),2,"DataBase: " + cDataBase )
+         WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
       ENDIF
       EndDialog( hDlg )
       SetFocus( oEdit:handle )
@@ -264,7 +264,7 @@ Local arScr, nError, nLineEr
    IF Empty( cQuery )
       Return .F.
    ENDIF
-   IF Left( cQuery,2 ) == "//"
+   IF Left( cQuery, 2 ) == "//"
       IF ( arScr := RdScript( ,cQuery ) ) <> Nil
          DoScript( arScr )
       ELSE
@@ -296,7 +296,7 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
             IF Asc( Ltrim( stroka ) ) > 32
                Aadd( aQueries, Nil )
                Ains( aQueries, i )
-               aQueries[ i ] := { Padr( stroka,76 ), lFirst }
+               aQueries[ i ] := { Padr( stroka, 76 ), lFirst }
                lFirst := .F.
                i ++
             ENDIF
@@ -314,7 +314,7 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
             WriteStatus( Hwindow():GetMain(), 3, Str( sqlAffRows( connHandle ) ) + " rows updated." )
          ELSE
-            @ 20,2 SAY "Operation failed:" + sqlGetErr( connHandle )
+            @ 20, 2 SAY "Operation failed:" + sqlGetErr( connHandle )
             hwg_MsgInfo( "Operation failed: " + "( " + sqlGetErr( connHandle ) + " )" )
             WriteStatus( Hwindow():GetMain(), 3, sqlGetErr( connHandle ) )
             res := -1
@@ -326,7 +326,7 @@ Return res == 0
 Function sqlBrowse( queHandle )
 Local aQueRows, i, j, vartmp, af := {}
    nNumRows := sqlNRows( queHandle )
-   WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows,5 ) + " rows" )
+   WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows, 5 ) + " rows" )
    IF nNumRows == 0
       Return Nil
    ENDIF
@@ -339,29 +339,29 @@ Local aQueRows, i, j, vartmp, af := {}
       aQueRows[ i ] := sqlFetchR( queHandle )
       IF i == 1
          FOR j := 1 TO nNumFields
-            Aadd( af,{ Valtype(aQueRows[ i,j ]),0,0 } )
+            AAdd(af, {Valtype(aQueRows[i, j]), 0, 0})
          NEXT
       ENDIF
       FOR j := 1 TO nNumFields
-         IF af[ j,1 ] == "C"
-            af[ j,2 ] := Max( af[ j,2 ], Len( aQueRows[ i,j ] ) )
-         ELSEIF af[ j,1 ] == "N"
-            vartmp := STR( aQueRows[ i,j ] )
-            af[ j,2 ] := Max( af[ j,2 ], Len( vartmp ) )
-            af[ j,3 ] := Max( af[ j,3 ], IIF( '.' $ vartmp,af[ j,2 ] - AT( '.',vartmp ),0 ) )
-         ELSEIF af[ j,1 ] == "D"
-            af[ j,2 ] := 8
-         ELSEIF af[ j,1 ] == "L"
-            af[ j,2 ] := 1
+         IF af[ j, 1 ] == "C"
+            af[ j, 2 ] := Max( af[ j, 2 ], Len( aQueRows[ i, j ] ) )
+         ELSEIF af[ j, 1 ] == "N"
+            vartmp := STR( aQueRows[ i, j ] )
+            af[ j, 2 ] := Max( af[ j, 2 ], Len( vartmp ) )
+            af[ j, 3 ] := Max( af[ j, 3 ], IIF('.' $ vartmp,af[j, 2] - AT('.', vartmp), 0) )
+         ELSEIF af[ j, 1 ] == "D"
+            af[ j, 2 ] := 8
+         ELSEIF af[ j, 1 ] == "L"
+            af[ j, 2 ] := 1
          ENDIF
       NEXT
    NEXT
    CreateArList( oBrw, aQueRows )
    FOR i := 1 TO nNumFields
       oBrw:aColumns[i]:heading := SqlFetchF(queHandle)[1]
-      oBrw:aColumns[i]:type   := af[i,1]
-      oBrw:aColumns[i]:length := af[i,2]
-      oBrw:aColumns[i]:dec    := af[i,3]
+      oBrw:aColumns[i]:type   := af[i, 1]
+      oBrw:aColumns[i]:length := af[i, 2]
+      oBrw:aColumns[i]:dec    := af[i, 3]
    NEXT
    oBrw:bcolorSel := VColor( "800080" )
    oBrw:ofont      := oBrwFont
@@ -376,9 +376,7 @@ Function BrowHistory()
    oBrw:active := .T.
    oBrw:InitBrw()
    oBrw:aArray := aQueries
-   oBrw:AddColumn( HColumn():New( "History of queries", ;
-            {|value,o|o:aArray[o:nCurrent,1] },             ;
-            "C",76,0  ) )
+   oBrw:AddColumn(HColumn():New("History of queries", {|value, o|o:aArray[o:nCurrent, 1]}, "C", 76, 0))
 
    oBrw:bcolorSel := VColor( "800080" )
    oBrw:ofont := oBrwFont
@@ -389,10 +387,10 @@ Return Nil
 Static Function GetFromHistory()
 Local cQuery := "", i := oBrw:nCurrent
 
-   IF !Empty( oBrw:aArray[ i,1 ] )
-      DO WHILE !oBrw:aArray[ i,2 ]; i--; ENDDO
-      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[ i,1 ] )
-         cQuery += Rtrim( oBrw:aArray[ i,1 ] ) + Chr( 13 ) + Chr( 10 )
+   IF !Empty( oBrw:aArray[ i, 1 ] )
+      DO WHILE !oBrw:aArray[ i, 2 ]; i--; ENDDO
+      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[ i, 1 ] )
+         cQuery += Rtrim( oBrw:aArray[ i, 1 ] ) + Chr( 13 ) + Chr( 10 )
          i++
       ENDDO
       oEdit:SetText( cQuery )
@@ -408,7 +406,7 @@ LOCAL strbuf := Space(512), poz := 513
    han := FOPEN( fname, FO_READ + FO_SHARED )
    IF han <> - 1
       DO WHILE .T.
-         stroka := RDSTR( han,@strbuf,@poz,512 )
+         stroka := RDSTR( han,@strbuf,@poz, 512 )
          IF LEN( stroka ) == 0
             EXIT
          ENDIF
@@ -416,11 +414,11 @@ LOCAL strbuf := Space(512), poz := 513
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0
-               Aadd( aQueries, { Space( 76 ),.F. } )
+               Aadd( aQueries, { Space( 76 ), .F. } )
                lFirst := .T.
             ENDIF
             lEmpty := .F.
-            Aadd( aQueries, { Padr( stroka,76 ), lFirst } )
+            Aadd( aQueries, { Padr( stroka, 76 ), lFirst } )
             IF lFirst
                nHistCurr ++
             ENDIF
@@ -437,9 +435,9 @@ Local han, i, lEmpty := .T.
       han := FCREATE( fname )
       IF han <> - 1
          FOR i := 1 TO Len( aQueries )
-            IF !Empty( aQueries[ i,1 ] ) .OR. !lEmpty
-               FWRITE( han, Trim( aQueries[ i,1 ] ) + Chr(13) + Chr(10) )
-               lEmpty := Empty( aQueries[ i,1 ] )
+            IF !Empty( aQueries[ i, 1 ] ) .OR. !lEmpty
+               FWRITE( han, Trim( aQueries[ i, 1 ] ) + Chr(13) + Chr(10) )
+               lEmpty := Empty( aQueries[ i, 1 ] )
             ENDIF
          NEXT
          FCLOSE( han )

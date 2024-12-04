@@ -30,22 +30,22 @@ return (NIL)
 
 function CreateChild(lClip)
    Local oChild
-   Local cTitle := "Child Window #" + Str(len(aChilds)+1,2,0)
+   Local cTitle := "Child Window #" + Str(len(aChilds) + 1, 2, 0)
    Local oIcon := HIcon():AddFile("..\image\PIM.ICO")
    Local oBmp  := HBitMap():AddFile("..\image\logo.bmp")
    Local cMenu := ""
    Local bExit := { | oSelf | hwg_MsgInfo( "Bye!" , "Destroy message from " + oSelf:title )  }
 
-   DEFAULT lClip := .f.
+   DEFAULT lClip := .F.
 
 
    /*
-   oChild := HWindow():New( WND_CHILD , oIcon,Vcolor("0000FF"),NIL,10,10,200,100,cTitle,cMenu,NIL,NIL, ;
-                          NIL,bExit,NIL,NIL,NIL,NIL,NIL, "Child_" + Alltrim(Str(len(aChilds))) , oBmp )
+   oChild := HWindow():New(WND_CHILD, oIcon, Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
+                           NIL, bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), oBmp)
    */
    
-   oChild := HChildWindow():New( oIcon,Vcolor("0000FF"),NIL,10,10,200,100,cTitle,cMenu,NIL,NIL, ;
-                          bExit,NIL,NIL,NIL,NIL,NIL, "Child_" + Alltrim(Str(len(aChilds))) , NIL )
+   oChild := HChildWindow():New(oIcon,Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
+                          bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), NIL)
    
    // Test if we could create the window object 
    If ISOBJECT(oChild)
@@ -54,7 +54,7 @@ function CreateChild(lClip)
        hwg_MsgStop("Erro ao tentar criar objeto HWindow!")
    Endif
 
-   oChild:Activate(.t.)
+   oChild:Activate(.T.)
 
 return (NIL)
 

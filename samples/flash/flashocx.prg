@@ -21,7 +21,7 @@ Local oMainWnd, oPanel
 Local mypath := curdrive()+":\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
 Private oFlash
 
-   INIT WINDOW oMainWnd TITLE "FlashPlayer example" AT 200,0 SIZE 500,400
+   INIT WINDOW oMainWnd TITLE "FlashPlayer example" AT 200, 0 SIZE 500, 400
 
    MENU OF oMainWnd
       MENU TITLE "File"
@@ -29,7 +29,7 @@ Private oFlash
       ENDMENU
    ENDMENU
 
-   @ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y)}
+   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y)}
 
    oFlash := FlashPlayer( oPanel, mypath+"mma.swf", 0, 0, 500, 366 )
 

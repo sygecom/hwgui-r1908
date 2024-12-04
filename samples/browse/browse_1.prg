@@ -14,7 +14,7 @@ Function Main
         CreateDB()
         
         INIT WINDOW oMain MAIN TITLE "Browse Example - Database" ;
-             AT 0,0 ;
+             AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
 
                 MENU OF oMain
@@ -29,7 +29,7 @@ Return Nil
 Function BrowseTest()
         Local oForm, oFont
 
-        SetToolTipBalloon(.t.)
+        SetToolTipBalloon(.T.)
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
              
@@ -38,7 +38,7 @@ Function BrowseTest()
              AT 0, 0 SIZE 700, 425 ;
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
                             
-                @  5, 5 BROWSE oBrowse DATABASE OF oForm SIZE 690,375 STYLE WS_VSCROLL + WS_HSCROLL ;
+                @  5, 5 BROWSE oBrowse DATABASE OF oForm SIZE 690, 375 STYLE WS_VSCROLL + WS_HSCROLL ;
                         AUTOEDIT ;
                         APPEND ;
                         ON KEYDOWN {|o,key| BrowseKey(o, key) } ;

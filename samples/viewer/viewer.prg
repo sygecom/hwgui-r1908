@@ -34,7 +34,7 @@ Private nVert, nHorz
 
    INIT WINDOW oMainWindow MAIN TITLE "Viewer"  ;
      COLOR COLOR_3DLIGHT+1                      ;
-     AT 200,0 SIZE 400,150                      ;
+     AT 200, 0 SIZE 400, 150                      ;
      FONT oFont                                 ;
      ON OTHER MESSAGES {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
      //      ON PAINT {|o|PaintWindow(o)}               ;
@@ -48,33 +48,33 @@ Private nVert, nHorz
       ENDMENU
       MENU TITLE "&View"
          MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
-         MENUITEM "Zoom &out" ACTION Zoom( oMainWindow,1 )
-         MENUITEM "Ori&ginal size" ACTION Zoom( oMainWindow,0 )
+         MENUITEM "Zoom &out" ACTION Zoom( oMainWindow, 1 )
+         MENUITEM "Ori&ginal size" ACTION Zoom(oMainWindow, 0)
       ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION hwg_MsgInfo("About")
       ENDMENU
    ENDMENU
 
-   @ 0,0 PANEL oToolBar SIZE oMainWindow:nWidth,28 ;
-      ON SIZE {|o,x,y|MoveWindow(o:handle,0,0,x,o:nHeight)}
+   @ 0, 0 PANEL oToolBar SIZE oMainWindow:nWidth, 28 ;
+      ON SIZE {|o, x, y|MoveWindow(o:handle, 0, 0, x, o:nHeight)}
 
 
 
-   @ 2,2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
-        SIZE 24,24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
+   @ 2, 2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
+        SIZE 24, 24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
         TOOLTIP "Open file"
-   @ 26,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,1 )} ;
-        SIZE 24,24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
+   @ 26, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow, 1 )} ;
+        SIZE 24, 24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
         TOOLTIP "Zoom out"
-   @ 50,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,-1)} ;
-        SIZE 24,24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
+   @ 50, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow, -1)} ;
+        SIZE 24, 24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
         TOOLTIP "Zoom in"
-   @ 74,2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
-        SIZE 24,24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
+   @ 74, 2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
+        SIZE 24, 24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
         TOOLTIP "Info"
 
-   @ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
+   @ 106, 3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60, 22 STYLE WS_BORDER ;
         FONT oFont BACKCOLOR 12507070
 
 #ifdef __FREEIMAGE__
@@ -117,7 +117,7 @@ Local stepV
    IF nScrollCode == SB_LINEDOWN
       IF nStepV < SCROLLVRANGE
          nStepV ++
-         stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
+         stepV := Round( ( Round( oImage:nHeight * nKoef, 0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -125,7 +125,7 @@ Local stepV
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepV > 0
          nStepV --
-         stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
+         stepV := Round( ( Round( oImage:nHeight * nKoef, 0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -133,7 +133,7 @@ Local stepV
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepV
          nStepV := nNewPos
-         stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
+         stepV := Round( ( Round( oImage:nHeight * nKoef, 0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -148,7 +148,7 @@ Local stepH
    IF nScrollCode == SB_LINEDOWN
       IF nStepH < SCROLLHRANGE
          nStepH ++
-         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ),0 ) / SCROLLVRANGE, 0 )
+         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ), 0 ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -156,7 +156,7 @@ Local stepH
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepH > 0
          nStepH --
-         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ),0 ) / SCROLLVRANGE, 0 )
+         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ), 0 ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -164,7 +164,7 @@ Local stepH
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepH
          nStepH := nNewPos
-         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ),0 ) / SCROLLVRANGE, 0 )
+         stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ), 0 ) / SCROLLVRANGE, 0 )
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
          RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -216,8 +216,8 @@ Local aCoors
       nVert := ( oWnd:nHeight - aCoors[4] )
       nHorz := ( oWnd:nWidth-aCoors[3] )
       DO WHILE .T.
-         oWnd:nWidth := Round( oImage:nWidth * nKoef,0 ) + nHorz
-         oWnd:nHeight := Round( oImage:nHeight * nKoef,0 ) + oToolBar:nHeight + nVert
+         oWnd:nWidth := Round( oImage:nWidth * nKoef, 0 ) + nHorz
+         oWnd:nHeight := Round( oImage:nHeight * nKoef, 0 ) + oToolBar:nHeight + nVert
 
          IF ( oWnd:nWidth <= aScreen[3] .AND. oWnd:nHeight <= aScreen[4] ) .OR. nKoef < 0.15
             IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
@@ -242,7 +242,7 @@ Local aCoors
       oSayMain:nZoom := nKoef
       InvalidateRect( oSayMain:handle, 0 )
       oSayMain:Move( ,,oWnd:nWidth-nHorz,oWnd:nHeight-nVert-oToolBar:nHeight )
-      oSayScale:SetValue( Str(nKoef*100,4)+" %" )
+      oSayScale:SetValue( Str(nKoef*100, 4)+" %" )
    ENDIF
 
 Return Nil
@@ -267,8 +267,8 @@ Local stepV, stepH
    ENDIF
 
    lScrollV := lScrollH := .F.
-   oWnd:nWidth := Round( oImage:nWidth * nKoef,0 ) + nHorz
-   oWnd:nHeight := Round( oImage:nHeight * nKoef,0 ) + oToolBar:nHeight + nVert
+   oWnd:nWidth := Round( oImage:nWidth * nKoef, 0 ) + nHorz
+   oWnd:nHeight := Round( oImage:nHeight * nKoef, 0 ) + oToolBar:nHeight + nVert
    // writelog( "1->"+str(oWnd:nWidth)+str(aScreen[3])+" - "+str(oWnd:nHeight)+str(aScreen[4]) )
    IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
       oWnd:nLeft := 0
@@ -294,12 +294,12 @@ Local stepV, stepH
    ENDIF
 
    oSayMain:nZoom := nKoef
-   oSayScale:SetValue( Str(nKoef*100,4)+" %" )
+   oSayScale:SetValue( Str(nKoef*100, 4)+" %" )
    InvalidateRect( oWnd:handle, 0 )
    // writelog( "Window: "+str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight) )
    MoveWindow( oWnd:handle,oWnd:nLeft,oWnd:nTop,oWnd:nWidth,oWnd:nHeight )
-   stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
-   stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ),0 ) / SCROLLVRANGE, 0 )
+   stepV := Round( ( Round( oImage:nHeight * nKoef, 0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
+   stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ), 0 ) / SCROLLVRANGE, 0 )
    oSayMain:nOffsetV := - nStepV * stepV
    oSayMain:nOffsetH := - nStepH * stepH
    oSayMain:Move( ,,oWnd:nWidth-nHorz,oWnd:nHeight-nVert-oToolBar:nHeight )
@@ -317,19 +317,19 @@ Local nOffsV, nOffsH
       Return -1
    ENDIF
 
-   stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
-   stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ),0 ) / SCROLLVRANGE, 0 )
+   stepV := Round( ( Round( oImage:nHeight * nKoef, 0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
+   stepH := Round( Round( oImage:nWidth * nKoef - ( oWnd:nWidth-nHorz ), 0 ) / SCROLLVRANGE, 0 )
    nOffsV := nStepV * stepV
    nOffsH := nStepH * stepH
 
    pps := DefinePaintStru()
    hDC := BeginPaint( oWnd:handle, pps )
 
-   // writelog( "Paint: "+str(Round( oImage:nWidth * nKoef,0 )) + str(Round( oImage:nHeight * nKoef,0 )) )
+   // writelog( "Paint: "+str(Round( oImage:nWidth * nKoef, 0 )) + str(Round( oImage:nHeight * nKoef, 0 )) )
 #ifdef __FREEIMAGE__
-   oImage:Draw( hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef,0 ), Round( oImage:nHeight * nKoef,0 ) )
+   oImage:Draw( hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef, 0 ), Round( oImage:nHeight * nKoef, 0 ) )
 #else
-   DrawBitmap( hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef,0 ), Round( oImage:nHeight * nKoef,0 ) )
+   DrawBitmap( hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef, 0 ), Round( oImage:nHeight * nKoef, 0 ) )
 #endif
 
    IF lScrollV

@@ -13,7 +13,7 @@ Local oMainWindow
 Private var1 := 10320.54
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
-     AT 200,0 SIZE 400,150
+     AT 200, 0 SIZE 400, 150
 
    MENU OF oMainWindow
       MENUITEM "&Exit" ACTION EndWindow()
@@ -27,7 +27,7 @@ Private var1 := 10320.54
 Return Nil
 
 Function DlgGet(lColor)
-Local oModDlg, oFont := HFont():Add( "MS Sans Serif",0,-13 ), oTimer
+Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oTimer
 Local e1 := "Dialog from prg"
 Local e2 := Date()
 Local e3 := 10320.54
@@ -39,7 +39,7 @@ Local e7 := "Password"
 Private oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
-   AT 210,10  SIZE 300,320                  ;
+   AT 210, 10  SIZE 300, 320                  ;
    FONT oFont ;
    ON INIT {|| SetTimer(oModDlg,@oTimer)}
 
@@ -51,39 +51,39 @@ Private oSayT
       SetColorinFocus( lColor )
    EndIf
    
-   @ 20,10 SAY "Input something:" SIZE 260, 22
+   @ 20, 10 SAY "Input something:" SIZE 260, 22
 
-   @ 20,35 GET e1                       ;
+   @ 20, 35 GET e1                       ;
         PICTURE "XXXXXXXXXXXXXXX"       ;
         SIZE 260, 26
 
-   @ 20,65 GET e6                       ;
+   @ 20, 65 GET e6                       ;
         MAXLENGTH 15                    ;
         SIZE 260, 26
 
-   @ 20,95 GET e2  SIZE 260, 26
+   @ 20, 95 GET e2  SIZE 260, 26
 
-   @ 20,125 GET e3  SIZE 260, 26
+   @ 20, 125 GET e3  SIZE 260, 26
 
-   @ 20,155 GET e4                      ;
+   @ 20, 155 GET e4                      ;
         PICTURE "@R 99.999.999/9999-99" ;
         SIZE 260, 26
 
-   @ 20,185 GET e5                      ;
+   @ 20, 185 GET e5                      ;
         PICTURE "@e 999,999,999.9999"     ;
         SIZE 260, 26
 
-   @ 20,215 GET e7                      ;
+   @ 20, 215 GET e7                      ;
         PASSWORD                        ;
         SIZE 260, 26
 
-   @  20,250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
-   @ 180,250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
+   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
+   @ 180, 250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
-   @ 100,295 SAY oSayT CAPTION "" SIZE 100,22 STYLE WS_BORDER + SS_CENTER ;
+   @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;
       COLOR 10485760 BACKCOLOR 12507070
 
-   ReadExit( .T. )
+   ReadExit(.T.)
    ACTIVATE DIALOG oModDlg
 
    oTimer:End()
@@ -116,13 +116,13 @@ Function TestBallon
 
    Local oWnd
 
-   SetToolTipBalloon(.t.)
+   SetToolTipBalloon(.T.)
 
 
    INIT DIALOG oWnd CLIPPER TITLE "Dialog text Balon" ;
-      AT 100,100 SIZE 140,100
+      AT 100, 100 SIZE 140, 100
 
-   @ 20,20 BUTTON "Button 1" ON CLICK {||hwg_MsgInfo("Button 1")} SIZE 100,40 ;
+   @ 20, 20 BUTTON "Button 1" ON CLICK {||hwg_MsgInfo("Button 1")} SIZE 100, 40 ;
        TOOLTIP "ToolTip do Button 1"
 
    ACTIVATE DIALOG oWnd

@@ -22,7 +22,7 @@ Static oMain, oForm, oFont, oGrid
 Function Main()
 
         INIT WINDOW oMain MAIN TITLE "Grid Sample" ;
-             AT 0,0 ;
+             AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
 
                 MENU OF oMain
@@ -42,11 +42,11 @@ Local aStru
 use test new
 aStru := dbstruct()
 for n :=1 to len(astru)
-   aadd(aHead,aStru[n,1])
+   aadd(aHead,aStru[n, 1])
 next
 go Top
 while !eof()
- aadd(aItems,{first,last,city,str(salary,10,2)})
+ aadd(aItems,{first,last,city,str(salary, 10, 2)})
  skip
 enddo
 
@@ -58,7 +58,7 @@ enddo
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 //             on init {||SetGrid(oForm,oGrid,aItems)}
                 
-             @ 10,10 GRIDEX oGrid OF oForm ID 800 SIZE 680,375 ;
+             @ 10, 10 GRIDEX oGrid OF oForm ID 800 SIZE 680, 375 ;
                      ITEMCOUNT 10000 ;                     
                      ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
                      ON POSCHANGE {|oCtrl, nRow| OnPoschange(oCtrl, nRow) } ;
@@ -74,14 +74,14 @@ enddo
              ADD COLUMN TO GRID oGrid HEADER aHead[4] WIDTH 150  bitmap 4
 
              for n:=1 to len(aItems)
-                ADDROWEX TO GRID  oGrid header aItems[n,1] bitmap 0 color rgb(255,12,123) backcolor rgb(192,0,255) ,header aItems[n,2]  ,header aItems[n,3] bitmap 3  ,header aItems[n,1] bitmap 1 color rgb(123,122,123)  backcolor rgb(192,0,255)
+                ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color rgb(255, 12, 123) backcolor rgb(192, 0, 255),header aItems[n, 2]  ,header aItems[n, 3] bitmap 3  ,header aItems[n, 1] bitmap 1 color rgb(123, 122, 123)  backcolor rgb(192, 0, 255)
              next
 
-             @ 0, 395 button "LVS_REPORT" size 95,25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_REPORT)}
-             @ 100, 395 button "LVS_ICON" size 95,25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_ICON)}
-             @ 200, 395 button "LVS_SMALLICON" size 95,25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_SMALLICON)}
-             @ 300, 395 button "LVS_LIST" size 95,25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_LIST)}
-             @ 700, 395 BUTTON 'Close' SIZE 95,25 ON CLICK {|| oForm:Close() }                            
+             @ 0, 395 button "LVS_REPORT" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_REPORT)}
+             @ 100, 395 button "LVS_ICON" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_ICON)}
+             @ 200, 395 button "LVS_SMALLICON" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_SMALLICON)}
+             @ 300, 395 button "LVS_LIST" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_LIST)}
+             @ 700, 395 BUTTON 'Close' SIZE 95, 25 ON CLICK {|| oForm:Close() }
              
         ACTIVATE DIALOG oForm 
                 

@@ -22,10 +22,10 @@ Local oWinPrn, i
 
 #ifdef __PLATFORM__Linux__
    oWinPrn := HWinPrn():New( ,"RU866","RUKOI8" )
-   oWinPrn:StartDoc( .T.,"/apps/a2.ps" )
+   oWinPrn:StartDoc(.T., "/apps/a2.ps")
 #else
    oWinPrn := HWinPrn():New( ,"RU866","RU1251" )
-   oWinPrn:StartDoc( .T. )
+   oWinPrn:StartDoc(.T.)
 #endif
 
    oWinPrn:PrintLine( oWinPrn:oFont:name + " " + Str(oWinPrn:oFont:height) + " " + Str(oWinPrn:nCharW) + " " + Str(oWinPrn:nLineHeight) )
@@ -48,27 +48,27 @@ Local oWinPrn, i
    oWinPrn:PrintLine()
    oWinPrn:PrintLine()
 
-   oWinPrn:SetMode( .T. )
+   oWinPrn:SetMode(.T.)
    oWinPrn:PrintLine( "A12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
    oWinPrn:PrintLine( "A123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
    oWinPrn:PrintLine()
    oWinPrn:PrintLine()
 
-   oWinPrn:SetMode( .F.,.T. )
+   oWinPrn:SetMode(.F., .T.)
    oWinPrn:PrintLine( "A12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
    oWinPrn:PrintLine( "A123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
    oWinPrn:PrintLine()
    oWinPrn:PrintLine()
 
-   oWinPrn:SetMode( .T.,.T. )
+   oWinPrn:SetMode(.T., .T.)
    oWinPrn:PrintLine( "A12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
    oWinPrn:PrintLine( "A123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
 
-   oWinPrn:SetMode( .F.,.F. )
+   oWinPrn:SetMode(.F., .F.)
    oWinPrn:NextPage()
    oWinPrn:PrintLine( oWinPrn:oFont:name + " " + Str(oWinPrn:oFont:height) + " " + Str(oWinPrn:nCharW) + " " + Str(oWinPrn:nLineHeight) )
    FOR i := 1 TO 80
-      oWinPrn:PrintLine( Padl( i,3 ) + " --------" )
+      oWinPrn:PrintLine( Padl( i, 3 ) + " --------" )
    NEXT
 
    oWinPrn:End()

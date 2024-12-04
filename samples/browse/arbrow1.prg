@@ -17,11 +17,11 @@ LOCAL oWinMain
     SET(_SET_EPOCH, 1950)
 
     INIT WINDOW oWinMain MAIN  ;
-       TITLE "Teste" AT 0, 0 SIZE 600,400;
-       FONT HFont():Add( 'Arial',0,-13,400,,,) ;
+       TITLE "Teste" AT 0, 0 SIZE 600, 400;
+       FONT HFont():Add('Arial', 0, -13, 400, , ,) ;
        STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER 
 
-    @ 10 ,10 BROWSE oBrw ARRAY SIZE 180, 325 ;
+    @ 10, 10 BROWSE oBrw ARRAY SIZE 180, 325 ;
 	   AUTOEDIT  NO VSCROLL
 
     CreateArList( oBrw, { { "1","a" }, { "2","b" }, { "3","c" }, { "4","d" } } )
@@ -47,7 +47,7 @@ LOCAL oWinMain
     oBrw:sepColor  := GetSysColor( COLOR_BTNSHADOW )
     oBrw:colpos  := 2
 
-    readexit(.T.) 
+    readexit(.T.)
     oWinMain:Activate()
 
 RETURN(NIL)
