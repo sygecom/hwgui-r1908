@@ -675,7 +675,7 @@ METHOD Notify(lParam) CLASS HTree
       ENDIF
 
       /* working only windows 7
-   ELSEIF nCode == - 24 .and. ::oitem != NIL
+   ELSEIF nCode == - 24 .AND. ::oitem != NIL
       //nhitem := tree_Hittest(::handle,,, @nAct)
       IF hb_IsBlock(::bCheck)
          lEval := Eval(::bCheck, !::oItem:checked, ::oItem, Self)

@@ -608,7 +608,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
              nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
-                IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .and. nRet != NIL
+                IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
                    RETURN 0
                 ENDIF
              ENDIF
@@ -704,7 +704,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
                Eval(::bskip, Self, 1)
                lBEof := Eval(::beof, Self)
                Eval(::bskip, Self, -1)
-               IF !(lBEof .and. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
+               IF !(lBEof .AND. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
                   ::Select()
                   IF lBEof
                      ::refreshline()
@@ -719,7 +719,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
                Eval(::bskip, Self, 1)
                lBEof := Eval(::beof, Self)
                Eval(::bskip, Self, -1)
-               IF !(lBEof .and. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
+               IF !(lBEof .AND. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
                   ::LINEUP()
                ENDIF
             ELSE
@@ -731,7 +731,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
                IF !(lBEof := Eval(::bBof, Self))
                   Eval(::bskip, Self, 1)
                ENDIF
-               IF !(lBEof .and. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
+               IF !(lBEof .AND. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
                   ::Select()
                   ::refresh(.F.)
                ENDIF
@@ -769,7 +769,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
                Eval(::bskip, Self, 1)
                lBEof := Eval(::beof, Self)
                Eval(::bskip, Self, -1)
-               IF !(lBEof .and. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
+               IF !(lBEof .AND. AScan(::aSelected, Eval(::bRecno, Self)) > 0)
                   ::Select()
                ENDIF
                DO WHILE Eval(::bRecno, Self) != nRecStart
@@ -817,7 +817,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::lCtrlPress := .T.
          ELSEIF wParam == VK_SHIFT   //16
             ::lShiftPress := .T.
-         //ELSEIF ::lAutoEdit .AND. (wParam >= 48 .and. wParam <= 90 .or. wParam >= 96 .and. wParam <= 111)
+         //ELSEIF ::lAutoEdit .AND. (wParam >= 48 .AND. wParam <= 90 .or. wParam >= 96 .AND. wParam <= 111)
          //   ::Edit(wParam, lParam)
          ENDIF
          RETURN 1
@@ -1355,7 +1355,7 @@ STATIC FUNCTION InitColumn(oBrw, oColumn, n)
    ENDIF
    oColumn:width := 0
    IF oColumn:dec == NIL
-      IF oColumn:Type == "N" .and. At(".", Str(Eval(oColumn:block,, oBrw, n))) != 0
+      IF oColumn:Type == "N" .AND. At(".", Str(Eval(oColumn:block,, oBrw, n))) != 0
          oColumn:dec := Len(SubStr(Str(Eval(oColumn:block,, oBrw, n)), ;
                                      At(".", Str(Eval(oColumn:block,, oBrw, n))) + 1))
       ELSE
@@ -2146,7 +2146,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          toldc := SetTextColor(hDC, oColumn:headColor)
       ENDIF
       xSize := oColumn:width
-      IF ::lAdjRight .and. fif == Len(::aColumns)
+      IF ::lAdjRight .AND. fif == Len(::aColumns)
          xSize := Max(::x2 - x, xSize)
       ENDIF
       xSizeMax := xSize
@@ -2346,7 +2346,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      //IF (::lAdjRight .and. fif == Len(::aColumns)) .OR. lFixed
+      //IF (::lAdjRight .AND. fif == Len(::aColumns)) .OR. lFixed
       IF (fif == Len(::aColumns)) .OR. lFixed
          xSizeMax := Max(::x2 - x, xSize) - 1
          xSize := IIf(::lAdjRight, xSizeMax, xSize)
@@ -2451,7 +2451,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      IF ::lAdjRight .and. fif == Len(::aColumns) .OR. lFixed
+      IF ::lAdjRight .AND. fif == Len(::aColumns) .OR. lFixed
          xSize := Max(::x2 - x, xSize)
       ENDIF
      IF !oColumn:lHide
@@ -2783,7 +2783,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
          x += xSize
          ::nPaintCol := IIf(::nPaintCol == ::freeze, ::nLeftCol, ::nPaintCol + 1)
          nColumn ++
-         IF !::lAdjRight .and. ::nPaintCol > Len(::aColumns)
+         IF !::lAdjRight .AND. ::nPaintCol > Len(::aColumns)
             EXIT
          ENDIF
       ENDDO
@@ -2791,7 +2791,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
 // Fill the browse canvas from x+::width to ::x2-2
 // when all columns width less than canvas width (lAdjRight == .F.)
 /*
-      IF !::lAdjRight .and. ::nPaintCol == Len(::aColumns) + 1
+      IF !::lAdjRight .AND. ::nPaintCol == Len(::aColumns) + 1
          xSize := Max(::x2 - x, xSizeMax)
 
          xSize := Max(::x2 - x, xSize)
@@ -3530,7 +3530,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
    DO WHILE nCols <= Len(::aColumns)
       xSize := ::aColumns[ncols]:width
-      IF (::lAdjRight .and. nCols == Len(::aColumns))
+      IF (::lAdjRight .AND. nCols == Len(::aColumns))
          xSize := Max(::x2 - x1, xSize)
       ENDIF
       IF !::aColumns[nCols]:lhide
@@ -3562,7 +3562,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
          Eval(::bRClick, Self, nLine, fif)
       ENDIF
    ELSEIF nLine == 0
-      IF ::lDispHead .and. ;
+      IF ::lDispHead .AND. ;
          nLine >=  - ::nHeadRows .AND. fif <= Len(::aColumns)
          IF ::aColumns[fif]:bHeadRClick != NIL
             Eval(::aColumns[fif]:bHeadRClick, Self, nLine, fif)
@@ -3575,7 +3575,7 @@ METHOD ButtonDbl(lParam) CLASS HBrowse
    LOCAL nLine := Int(IIf(::lDispHead, ((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1), ;
                                               HIWORD(lParam) / (::height + 1) + 1))
 
-   IF nLine > 0 .and. nLine <= ::rowCurrCount
+   IF nLine > 0 .AND. nLine <= ::rowCurrCount
       ::ButtonDown(lParam)
       ::Edit()
    ENDIF

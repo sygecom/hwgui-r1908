@@ -159,7 +159,7 @@ METHOD FindControl(nId, nHandle) CLASS HCustomWindow
    LOCAL oCtrl
 
    DO WHILE i > 0
-      IF Len(::aControls[i]:aControls) > 0 .and. ;
+      IF Len(::aControls[i]:aControls) > 0 .AND. ;
          (oCtrl := ::aControls[i]:FindControl(nId, nHandle)) != NIL
          RETURN oCtrl
       ENDIF
@@ -1259,7 +1259,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
 
    lForce := !Empty(lForce)
    lEscape := nKey == VK_ESCAPE .AND. (oCtrl := oWin:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
-   IF ((oWin:Type >= WND_DLG_RESOURCE .AND. oWin:lModal) .AND. !lForce .and. !lEscape) .OR. ;
+   IF ((oWin:Type >= WND_DLG_RESOURCE .AND. oWin:lModal) .AND. !lForce .AND. !lEscape) .OR. ;
       (nKey != VK_RETURN .AND. nKey != VK_ESCAPE)
       RETURN .F.
    ENDIF
@@ -1287,7 +1287,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
          IF oCtrl != NIL .AND. __ObjHasMsg(oCtrl, "OGROUP") .AND. oCtrl:oGroup:oHGroup != NIL
             oCtrl := oCtrl:oGroup:oHGroup
          ENDIF
-         IF oCtrl != NIL .and. GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
+         IF oCtrl != NIL .AND. GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
             IF AScan(oWin:GetList, {|o|o:handle == oCtrl:handle}) > 1
                RETURN .T.
             ENDIF

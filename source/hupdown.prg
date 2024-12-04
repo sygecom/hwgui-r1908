@@ -257,7 +257,7 @@ METHOD Valid() CLASS HUpDown
       Eval(::bSetGet, ::nValue)
    ENDIF
    */
-   res :=  ::nValue <= ::nUpper .and. ::nValue >= ::nLower
+   res :=  ::nValue <= ::nUpper .AND. ::nValue >= ::nLower
    IF !res
       ::nValue := IIf(::nValue > ::nUpper, Min(::nValue, ::nUpper), Max(::nValue, ::nLower))
       ::SetValue(::nValue)
@@ -522,7 +522,7 @@ STATIC FUNCTION __Valid(oCtrl)
    oDlg := ParentGetDialog(oCtrl)
    IF oCtrl:bLostFocus != NIL
       res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)
-      res := IIf(res, oCtrl:value <= oCtrl:nUpper .and. ;
+      res := IIf(res, oCtrl:value <= oCtrl:nUpper .AND. ;
                   oCtrl:value >= oCtrl:nLower , res)
       IF !res
          SetFocus(oCtrl:handle)

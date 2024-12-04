@@ -744,7 +744,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
                 oCtrl := oCtrl:oGroup:oHGroup
                 hCtrl := oCtrl:handle
             ENDIF
-            IF hb_IsObject(oCtrl) .and. GetSkip(oCtrl:oParent, hCtrl, , -1)
+            IF hb_IsObject(oCtrl) .AND. GetSkip(oCtrl:oParent, hCtrl, , -1)
                IF AScan(oDlg:GetList, {|o|o:handle == hCtrl}) > 1
                   RETURN 1
                ENDIF

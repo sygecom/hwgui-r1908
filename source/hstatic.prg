@@ -190,7 +190,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
       ENDIF
       RETURN 0
    ELSEIF msg == WM_SYSKEYUP
-      IF (pos := At("&", ::title)) > 0 .and. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
+      IF (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
          getskip(::oparent, ::handle, , 1)
          RETURN  0
       ENDIF

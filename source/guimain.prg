@@ -137,11 +137,11 @@ FUNCTION VColor(cColor)
    cColor := Trim(cColor)
    FOR i := 1 TO Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
-      IF iValue < 58 .and. iValue > 47
+      IF iValue < 58 .AND. iValue > 47
          iValue -= 48
-      ELSEIF iValue >= 65 .and. iValue <= 70
+      ELSEIF iValue >= 65 .AND. iValue <= 70
          iValue -= 55
-      ELSEIF iValue >= 97 .and. iValue <= 102
+      ELSEIF iValue >= 97 .AND. iValue <= 102
          iValue -= 87
       ELSE
          RETURN 0

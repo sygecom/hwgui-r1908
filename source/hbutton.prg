@@ -261,7 +261,7 @@ METHOD Notify(lParam) CLASS HButton
             SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
          ENDIF
          IF getkeystate(VK_LEFT) + getkeystate(VK_UP) < 0 .OR. ;
-            (GetKeyState(VK_TAB) < 0 .and. GetKeyState(VK_SHIFT) < 0)
+            (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0)
             nSkip := -1
          ELSEIF ndown < 0
             nSkip := 1
@@ -303,7 +303,7 @@ METHOD onGetFocus() CLASS HButton
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
-      nSkip := IIf(GetKeyState(VK_UP) < 0 .or. (GetKeyState(VK_TAB) < 0 .and. GetKeyState(VK_SHIFT) < 0), -1, 1)
+      nSkip := IIf(GetKeyState(VK_UP) < 0 .or. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
       ::oParent:lSuspendMsgsHandling := .T.
       res := Eval(::bGetFocus, ::title, Self)
       ::oParent:lSuspendMsgsHandling := .F.

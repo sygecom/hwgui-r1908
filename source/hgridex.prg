@@ -253,7 +253,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    LOCAL nCode := GetNotifyCode(lParam)
    LOCAL Res, iSelect, oParent := ::GetParentForm()
 
-   IF nCode == NM_CUSTOMDRAW .and. GETNOTIFYCODEFROM(lParam) == ::handle
+   IF nCode == NM_CUSTOMDRAW .AND. GETNOTIFYCODEFROM(lParam) == ::handle
       Res := PROCESSCUSTU(::handle, lParam, ::aColors)
       Hwg_SetDlgResult(oParent:handle, Res)
       RETURN Res
@@ -271,7 +271,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
       RETURN 1
    ENDIF
 
-   IF nCode == LVN_COLUMNCLICK //.and. GETNOTIFYCODEFROM(lParam) == ::handle
+   IF nCode == LVN_COLUMNCLICK //.AND. GETNOTIFYCODEFROM(lParam) == ::handle
       IF Empty(::hsort)
          ::hSort := LISTVIEWSORTINFONEW(lParam, NIL)
       ENDIF
