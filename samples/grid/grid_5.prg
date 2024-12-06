@@ -282,7 +282,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
         @ oForm:nWidth - 160, oForm:nHeight - 30 BUTTON "Ok"     ID IDOK SIZE 75, 25
         @ oForm:nWidth -  80, oForm:nHeight - 30 BUTTON "Cancel" ID IDCANCEL SIZE 75, 25 ON CLICK {|| oForm:Close() }
         
-        oForm:bActivate := {|| SetFocus(aFields[1, GET_OBJECT]:handle)}
+        oForm:bActivate := {|| hwg_SetFocus(aFields[1, GET_OBJECT]:handle)}
         
     ACTIVATE DIALOG oForm                
     

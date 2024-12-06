@@ -255,7 +255,7 @@ FUNCTION novo(tipo)
  WriteStatus( HMainWIndow():GetMdiActive(), 1,'Lin:      0')
  WriteStatus(  HMainWIndow():GetMdiActive(), 2,'Col:      0')
  SendMessage( oEdit&i:Handle, WM_ENABLE, 1, 0 )
- SetFocus( oEdit&i:Handle )
+ hwg_SetFocus( oEdit&i:Handle )
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
  re_SetDefault( oEdit&i:handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
 RETURN (.T.)
@@ -335,14 +335,14 @@ FUNCTION Texto()
       //
       ADD STATUS TO o&I ID IDC_STATUS PARTS 50, 50, 400, 12, 90, 95, 90
       //
-      SetFocus( GetDlgItem( oEdit&i, ID_TEXTO ) )
+      hwg_SetFocus( GetDlgItem( oEdit&i, ID_TEXTO ) )
    auto++
  o&I:ACTIVATE()
  WriteStatus( o&I, 3,vText)
  WriteStatus( o&I, 1,'Lin:      0')
  WriteStatus( o&I, 2,'Col:      0')
  SendMessage( oEdit&i:Handle, WM_ENABLE, 1, 0 )
- SetFocus(oEdit&i:Handle )
+ hwg_SetFocus(oEdit&i:Handle )
  // colocando cores nas funcoes
  re_SetDefault( oEdit&i:handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
  /*
@@ -354,7 +354,7 @@ FUNCTION Texto()
    //re_SetCharFormat(oEdit&i:handle, 6, olinha[f, 2], 255, , , .T.)
  next f
  */
- SetFocus( oEdit&i:Handle )
+ hwg_SetFocus( oEdit&i:Handle )
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
 RETURN
 *******************
@@ -461,7 +461,7 @@ Local oParent, nPos
             aControls := oWindow
             
             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
-            SetFocus(aControls[hWnd]:Handle )
+            hwg_SetFocus(aControls[hWnd]:Handle )
              //
              pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
              pos1 := Loword(pos)
@@ -476,7 +476,7 @@ Local oParent, nPos
              endif
             //
             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
-            SetFocus(aControls[hWnd]:Handle )
+            hwg_SetFocus(aControls[hWnd]:Handle )
          endif
          texto:=''
      else
@@ -522,12 +522,12 @@ Local hWnd, oWindow, aControls, i
          IF oWindow != Nil
              aControls := oWindow
              SendMessage( aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             SetFocus( aControls[hWnd]:Handle )
+             hwg_SetFocus( aControls[hWnd]:Handle )
              //
              SendMessage(aControls[hWnd]:Handle, 176, 2, alltrim(get01))
              //
              SendMessage( aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             SetFocus( aControls[hWnd]:Handle )
+             hwg_SetFocus( aControls[hWnd]:Handle )
          endif
      endif
  endif
@@ -580,13 +580,13 @@ Local hWnd, oWindow, aControls, i
              pos_y := val(get01)
              aControls := oWindow
              SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             SetFocus(aControls[hWnd]:Handle )
+             hwg_SetFocus(aControls[hWnd]:Handle )
              //
              SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
              Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
              //
              SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             SetFocus(aControls[hWnd]:Handle )
+             hwg_SetFocus(aControls[hWnd]:Handle )
              //
          ENDIF
      endif
@@ -602,7 +602,7 @@ Local hWnd, oWindow, aControls, i
  IF oWindow != Nil
     aControls := oWindow
     SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-    SetFocus(aControls[hWnd]:Handle )
+    hwg_SetFocus(aControls[hWnd]:Handle )
     SendMessage(aControls[hWnd]:handle, EM_SETSEL, 0, 0)
     SendMessage(aControls[hWnd]:handle, EM_SETSEL, 100000, 0)
  ENDIF
@@ -653,13 +653,13 @@ Local hWnd, oWindow, aControls, i
          pos_y := funcoes[linha]                                         
          aControls := oWindow
          SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-         SetFocus(aControls[hWnd]:Handle )
+         hwg_SetFocus(aControls[hWnd]:Handle )
          //
          SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
          Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
          //
          SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
-         SetFocus(aControls[hWnd]:Handle)
+         hwg_SetFocus(aControls[hWnd]:Handle)
          //
       ENDIF
   endif
@@ -678,7 +678,7 @@ Local hWnd, oWindow, aControls, i
  else
    hwg_MsgInfo('Abra um documento Primeiro')
  endif
- SetFocus(aControls[hWnd]:Handle )
+ hwg_SetFocus(aControls[hWnd]:Handle )
 retu .T.
 *************************
 FUNCTION cor_Fonte()
@@ -694,7 +694,7 @@ Local hWnd, oWindow, aControls, i
  else
    hwg_MsgInfo('Abra um documento Primeiro')
  endif
- SetFocus(aControls[hWnd]:Handle )
+ hwg_SetFocus(aControls[hWnd]:Handle )
 retu .T.
 
 *************************

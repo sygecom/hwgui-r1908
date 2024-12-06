@@ -499,7 +499,7 @@ INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200
 
 @ 10, 10 TAB oTab ITEMS {} SIZE 180, 180 ;
    ON LOSTFOCUS {||hwg_MsgInfo("Lost Focus")};
-   ON INIT  {||SetFocus(oDlg:getlist[1]:handle)}
+   ON INIT  {||hwg_SetFocus(oDlg:getlist[1]:handle)}
 
 BEGIN PAGE "Page 01" of oTab
 

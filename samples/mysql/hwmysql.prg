@@ -85,7 +85,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    @ 0, 46 OWNERBUTTON OF oPanelE ID 116 ON CLICK {||BrowHistory()} ;
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_HIST" FROM RESOURCE TOOLTIP "Show history"
-   @ 0, 68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),SetFocus(oEdit:handle)} ;
+   @ 0, 68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),hwg_SetFocus(oEdit:handle)} ;
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_CLEAR" FROM RESOURCE TOOLTIP "Clear"
 
@@ -100,7 +100,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    ReadHistory( "qhistory.txt" )
 
    WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
-   SetFocus( oEdit:handle )
+   hwg_SetFocus( oEdit:handle )
    // HideWindow( oBrw:handle )
    SetCtrlFont( oEdit:oParent:handle, oEdit:id, oBrwFont:handle )
 
@@ -201,11 +201,11 @@ Local hDlg := getmodalhandle()
    SetDlgItemText( hDlg, IDC_EDIT2, cUser )
    SetDlgItemText( hDlg, IDC_EDIT4, cDataDef )
    IF Empty( cServer )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
    ELSEIF Empty( cUser )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
    ELSE
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
    ENDIF
 Return .F.
 
@@ -240,14 +240,14 @@ Local hDlg := getmodalhandle()
    IF connHandle == 0
       WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
       WriteStatus(Hwindow():GetMain(), 2, "")
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
    ELSE
       WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
       IF !Empty( cDataBase )
          WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
       ENDIF
       EndDialog( hDlg )
-      SetFocus( oEdit:handle )
+      hwg_SetFocus( oEdit:handle )
    ENDIF
 Return
 
@@ -409,7 +409,7 @@ Local cQuery := "", i := oBrw:nCurrent
          i++
       ENDDO
       oEdit:SetText( cQuery )
-      SetFocus( oEdit:handle )
+      hwg_SetFocus( oEdit:handle )
    ENDIF
 Return Nil
 

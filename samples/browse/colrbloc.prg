@@ -227,7 +227,7 @@ ELSEIF cType == "Array"
 END
 oBrw:Refresh()
 
-SETFOCUS(oBrw:handle)
+hwg_SetFocus(oBrw:handle)
 
 RETURN(.T.)
 
