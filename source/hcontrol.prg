@@ -207,7 +207,7 @@ METHOD SetFocus(lValid) CLASS HControl
    ELSE
       ::oParent:lSuspendMsgsHandling := !Empty(lValid)
       IF ::GetParentForm():Type < WND_DLG_RESOURCE
-         SetFocus(::handle)
+         hwg_SetFocus(::handle)
       ELSE
          SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
       ENDIF

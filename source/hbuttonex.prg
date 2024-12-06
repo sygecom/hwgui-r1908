@@ -383,7 +383,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ENDIF
       ENDIF
       IF !::bMouseOverButton
-         SETFOCUS(0)
+         hwg_SetFocus(0)
          ::SETFOCUS()
          RETURN 0
       ENDIF
@@ -595,7 +595,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ENDIF
       ENDIF
       IF !::bMouseOverButton
-         SETFOCUS(0)
+         hwg_SetFocus(0)
          ::SETFOCUS()
          RETURN 0
       ENDIF

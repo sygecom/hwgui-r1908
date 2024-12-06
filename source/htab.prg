@@ -564,7 +564,7 @@ METHOD ShowPage(nPage) CLASS HTab
    /*
    FOR i := nFirst TO nEnd
       IF (__ObjHasMsg(::aControls[i], "BSETGET") .AND. ::aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aControls[i]:style, WS_TABSTOP) != 0
-         SetFocus(::aControls[i]:handle)
+         hwg_SetFocus(::aControls[i]:handle)
          Exit
       ENDIF
    NEXT
@@ -574,7 +574,7 @@ METHOD ShowPage(nPage) CLASS HTab
 
       FOR i := 1  TO Len(::aPages[nPage, 1]:aControls)
          IF (__ObjHasMsg(::aPages[nPage, 1]:aControls[i], "BSETGET") .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
-            SetFocus(::aPages[nPage, 1]:aControls[i]:handle)
+            hwg_SetFocus(::aPages[nPage, 1]:aControls[i]:handle)
             EXIT
          ENDIF
       NEXT
@@ -757,7 +757,7 @@ METHOD Notify(lParam) CLASS HTab
      /*
    CASE nCode == TCN_CLICK
       IF !Empty(::pages) .AND. ::nActive > 0 .AND. ::pages[::nActive]:enabled
-         SetFocus(::handle)
+         hwg_SetFocus(::handle)
          IF hb_IsBlock(::bAction)
             Eval(::bAction, Self, GetCurrentTab(::handle))
          ENDIF

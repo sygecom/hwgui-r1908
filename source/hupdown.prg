@@ -525,7 +525,7 @@ STATIC FUNCTION __Valid(oCtrl)
       res := IIf(res, oCtrl:value <= oCtrl:nUpper .AND. ;
                   oCtrl:value >= oCtrl:nLower , res)
       IF !res
-         SetFocus(oCtrl:handle)
+         hwg_SetFocus(oCtrl:handle)
          IF oDlg != NIL
             oDlg:nLastKey := 0
          ENDIF

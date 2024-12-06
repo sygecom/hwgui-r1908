@@ -264,7 +264,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          ENDIF
       ENDIF
    ELSEIF msg == WM_SETFOCUS .AND. nFocus > 0
-      SETFOCUS(nFocus)
+      hwg_SetFocus(nFocus)
    ENDIF
    IF (i := Ascan(::aMessages[1], msg)) != 0 .AND. ;
        (!::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE)
@@ -323,7 +323,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
    CASE WM_SETFOCUS
       IF nFocus > 0
-         SETFOCUS(nFocus)
+         hwg_SetFocus(nFocus)
       ENDIF
       EXIT
 

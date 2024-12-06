@@ -553,7 +553,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    oDlg:nInitFocus := IIf(hb_IsObject(oDlg:nInitFocus), oDlg:nInitFocus:handle, oDlg:nInitFocus)
    IF !Empty(oDlg:nInitFocus)
       IF PtrtouLong(oDlg:FindControl(, oDlg:nInitFocus):oParent:handle) == PtrtouLong(oDlg:handle)
-         SETFOCUS(oDlg:nInitFocus)
+         hwg_SetFocus(oDlg:nInitFocus)
       ENDIF
       nReturn := 0
    ENDIF
@@ -723,7 +723,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
                ENDIF
                RETURN 1
             ENDIF
-            //setfocus(odlg:handle)
+            //hwg_SetFocus(odlg:handle)
          ENDIF
       ELSEIF iParLow == IDCANCEL
          IF (oCtrl := oDlg:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled() .AND. oDlg:lExitOnEsc

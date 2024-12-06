@@ -99,13 +99,13 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
 
    IF hb_IsObject(::nInitFocus) .OR. ::nInitFocus > 0
       ::nInitFocus := IIf(hb_IsObject(::nInitFocus), ::nInitFocus:handle, ::nInitFocus)
-      SETFOCUS(::nInitFocus)
+      hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
    ELSEIF PtrtoUlong(GETFOCUS()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
       ::nFocus := ASCAN(::aControls, {|o|Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
          Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
-         SETFOCUS(::acontrols[::nFocus]:handle)
+         hwg_SetFocus(::acontrols[::nFocus]:handle)
          ::nFocus := GetFocus() //get::acontrols[1]:handle
       ENDIF
    ENDIF
@@ -125,7 +125,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
    ELSEIF msg == WM_SIZE
       RETURN onSize(Self, wParam, lParam)
    ELSEIF msg == WM_SETFOCUS .AND. ::nFocus != 0
-      SETFOCUS(::nFocus)
+      hwg_SetFocus(::nFocus)
    ELSEIF (i := AScan(HMainWindow():aMessages[1], msg)) != 0
       RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
@@ -156,7 +156,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
 
    CASE WM_SETFOCUS
       IF ::nFocus != 0
-         SETFOCUS(::nFocus)
+         hwg_SetFocus(::nFocus)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
 

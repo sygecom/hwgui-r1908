@@ -399,7 +399,7 @@ METHOD Notify(lParam) CLASS HRadioButton
             nSkip := 1
          ENDIF
          IF nSkip != 0
-            //SETFOCUS(::oParent:handle)
+            //hwg_SetFocus(::oParent:handle)
             ::oParent:SETFOCUS()
             GetSkip(::oparent, ::handle, , nSkip)
          ENDIF

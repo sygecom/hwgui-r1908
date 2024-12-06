@@ -301,7 +301,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                    SendMessage(oParent:handle, WM_COMMAND, makewparam(IDCANCEL, 0), ::handle)
                ENDIF
                          IF (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
-                   SETFOCUS(0)
+                   hwg_SetFocus(0)
                    ProcOkCancel(Self, VK_ESCAPE)
                    RETURN 0
                ENDIF
@@ -404,7 +404,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ENDIF
          ELSEIF msg == WM_LBUTTONDOWN
             IF GetFocus() != ::handle
-               //SetFocus(::handle)
+               //hwg_SetFocus(::handle)
                //RETURN 0
             ENDIF
          ELSEIF msg == WM_LBUTTONUP
@@ -423,7 +423,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             IF wParam == VK_TAB .AND. ::GetParentForm():Type >= WND_DLG_RESOURCE    // Tab
                nexthandle := GetNextDlgTabItem (GetActiveWindow(), GetFocus(), ;
                                                  IsCtrlShift(.F., .T.))
-               //SetFocus(nexthandle)
+               //hwg_SetFocus(nexthandle)
                PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
                RETURN 0
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
@@ -1259,7 +1259,7 @@ METHOD Valid() CLASS HEdit
          ::title := vari
          IF ::cType == "D"
             IF ::IsBadDate(vari)
-               SetFocus(0)
+               hwg_SetFocus(0)
                ::SetFocus(.T.)
                hwg_MsgBeep()
                SendMessage(::handle, EM_SETSEL, 0, 0)
@@ -1634,13 +1634,13 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
       //oCtrl := IIf(i > 0, oparent:acontrols[i], oParent)
       IF oForm:classname == oParent:classname .OR. oParent:className != "HTAB"
          IF oParent:Type == NIL .OR. oParent:Type < WND_DLG_RESOURCE
-             SetFocus(nextHandle)
+             hwg_SetFocus(nextHandle)
          ELSE
             PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ELSE
          IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) == PtrtouLong(getFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
-            SetFocus(nextHandle)
+            hwg_SetFocus(nextHandle)
          ELSEIF PtrtouLong(oParent:handle) == PtrtouLong(getFocus())
             PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ELSE
@@ -1687,7 +1687,7 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
             ENDIF
          ENDIF
       ELSE
-         SETFOCUS(oParent:aPages[nPage, 1]:aControls[1]:handle)
+         hwg_SetFocus(oParent:aPages[nPage, 1]:aControls[1]:handle)
          RETURN 0
       ENDIF
       IF (nSkip < 0 .AND. (k > i .OR. k == 0)) .OR. (nSkip > 0 .AND. i > k)
@@ -1884,10 +1884,10 @@ FUNCTION CheckFocus(oCtrl, lInside)
    IF (!Empty(oParent) .AND. !IsWindowVisible(oParent:handle)) .OR. Empty(GetActiveWindow()) // == 0
       IF !lInside .AND. Empty(oParent:nInitFocus) // == 0
          oParent:Show()
-         SetFocus(oParent:handle)
-         SetFocus(hGetFocus)
+         hwg_SetFocus(oParent:handle)
+         hwg_SetFocus(hGetFocus)
       ELSEIF !lInside .AND. !Empty(oParent:nInitFocus)
-       //  SetFocus(oParent:handle)
+       //  hwg_SetFocus(oParent:handle)
          RETURN .T.
      ENDIF
       RETURN .F.

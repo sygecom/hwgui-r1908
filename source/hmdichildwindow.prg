@@ -156,13 +156,13 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
 
    IF (hb_IsObject(::nInitFocus) .OR. ::nInitFocus > 0)
       ::nInitFocus := IIf(hb_IsObject(::nInitFocus), ::nInitFocus:handle, ::nInitFocus)
-      SETFOCUS(::nInitFocus)
+      hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
    ELSEIF PtrtoUlong(GETFOCUS()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
       ::nFocus := ASCAN(::aControls, {|o|Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
          Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
-         SETFOCUS(::acontrols[::nFocus]:handle)
+         hwg_SetFocus(::acontrols[::nFocus]:handle)
          ::nFocus := GetFocus() //get::acontrols[1]:handle
       ENDIF
    ENDIF
@@ -198,7 +198,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    ELSEIF msg == WM_MOVING .AND. ::lMaximized
       ::Maximize()
    ELSEIF msg == WM_SETFOCUS .AND. nFocus != 0
-      SETFOCUS(nFocus)
+      hwg_SetFocus(nFocus)
       //-::nFocus := 0
    ELSEIF msg == WM_DESTROY .AND. ::lModal .AND. !SelfFocus(::Screen:handle, ::handle)
       IF !Empty(::hActive) .AND. !SelfFocus(::hActive, ::Screen:handle)
@@ -256,7 +256,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
    CASE WM_SETFOCUS
       IF nFocus != 0
-         SETFOCUS(nFocus)
+         hwg_SetFocus(nFocus)
          //-::nFocus := 0
       ENDIF
       EXIT

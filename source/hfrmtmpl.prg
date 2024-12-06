@@ -419,7 +419,7 @@ METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
    NEXT
 
    IF ::lDebug .AND. (i := HWindow():GetMain()) != NIL
-      SetFocus(i:handle)
+      hwg_SetFocus(i:handle)
    ENDIF
    ::oDlg:Activate(lModal)
 
