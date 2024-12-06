@@ -818,7 +818,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 // Porcentajes para cada celda
    i := 1
    AEval(::aColPct, {||::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++})
+                                                 ::aColPct[i] * 100), i++})
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows
@@ -2038,7 +2038,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
 // Porcentajes para cada celda
    i := 1
    AEval(::aColPct, {||::aColPct[i] := IIf(::aColPct[i] < 1, ::aColPct[i] * 10000, ;
-                                                 ::aColPct[i] * 100), i ++})
+                                                 ::aColPct[i] * 100), i++})
 
    ::lTblNoSplit := lTblNoSplit
    ::nTblHdRows := nTblHdRows

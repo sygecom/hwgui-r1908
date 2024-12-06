@@ -33,7 +33,7 @@ Local nFirst, i
       Aadd(aScript, NIL)
    ENDIF
    IF Empty(aScript[4])
-      nScriptSch ++
+      nScriptSch++
       aScript[4] := nScriptSch
    ENDIF
    IF aScriptCurr == NIL

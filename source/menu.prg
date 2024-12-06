@@ -117,7 +117,7 @@ FUNCTION Hwg_FindMenuItem(aMenu, nId, nPos)
             RETURN aSubMenu
          ENDIF
       ENDIF
-      nPos ++
+      nPos++
    ENDDO
    RETURN NIL
 
@@ -167,7 +167,7 @@ FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
 
          ENDIF
       ENDIF
-      nPos ++
+      nPos++
    ENDDO
    IF hWnd != NIL .AND. oWnd != NIL
       Hwg_SetMenu(oWnd, aMenu)
@@ -194,12 +194,12 @@ FUNCTION Hwg_BeginMenu(oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp)
       s_nHeightBmp := IIf(nHeightBmp == NIL .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS(SM_CYMENUCHECK), nHeightBmp)
       s_nbkColor   := nbkColor 
    ELSE
-      nId   := IIf(nId == NIL, ++ _Id, nId)
+      nId   := IIf(nId == NIL, ++_Id, nId)
       aMenu := _aMenuDef
       FOR i := 1 TO _nLevel
          aMenu := ATail(aMenu)[1]
       NEXT
-      _nLevel ++
+      _nLevel++
       AAdd(aMenu, {{}, cTitle, nId, 0})
    ENDIF
    RETURN .T.
@@ -215,7 +215,7 @@ FUNCTION Hwg_ContextMenu()
 
 FUNCTION Hwg_EndMenu()
    IF _nLevel > 0
-      _nLevel --
+      _nLevel--
    ELSE
       BuildMenu(AClone(_aMenuDef), IIf(_oWnd != NIL, _oWnd:handle, NIL), ;
                  _oWnd,, IIf(_oWnd != NIL, .F., .T.))
@@ -244,7 +244,7 @@ FUNCTION Hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
    IF !Empty(cItem)
       cItem := StrTran(cItem, "\t", Chr(9))
    ENDIF
-   nId := IIf(nId == NIL .AND. cItem != NIL, ++ _Id, nId)
+   nId := IIf(nId == NIL .AND. cItem != NIL, ++_Id, nId)
    AAdd(aMenu, {bItem, cItem, nId, nFlag})
    IF lBitmap != NIL .OR. !Empty(lBitmap)
       IF lResource == NIL
@@ -270,7 +270,7 @@ FUNCTION Hwg_DefineAccelItem(nId, bItem, accFlag, accKey)
    FOR i := 1 TO _nLevel
       aMenu := ATail(aMenu)[1]
    NEXT
-   nId := IIf(nId == NIL, ++ _Id, nId)
+   nId := IIf(nId == NIL, ++_Id, nId)
    AAdd(aMenu, {bItem, NIL, nId, 0})
    AAdd(_aAccel, {accFlag, accKey, nId})
    RETURN .T.
@@ -309,7 +309,7 @@ FUNCTION Hwg_SearchPosBitmap(nPos_Id)
             lBmp := {_oBitmap[nPos][1], _oBitmap[nPos][2], _oBitmap[nPos][3]}
          ENDIF
 
-         nPos ++
+         nPos++
 
       ENDDO
    ENDIF

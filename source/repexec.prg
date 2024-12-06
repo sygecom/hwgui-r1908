@@ -415,7 +415,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
             ENDIF
          ENDIF
-         iItem ++
+         iItem++
       ENDDO
       FOR i := IIf(iSL == 0, 1, IIf(iDF > 0, iDF + 1, IIf(iPF > 0, iEPF + 1, iEL + 1))) TO Len(aPaintRep[FORM_ITEMS])
          IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP

@@ -40,7 +40,7 @@ METHOD AddFile(name) CLASS HFreeImage
    #ifdef __XHARBOUR__
       FOR EACH i IN ::aImages
          IF i:name == name
-            i:nCounter ++
+            i:nCounter++
             RETURN i
          ENDIF
       NEXT
@@ -93,7 +93,7 @@ METHOD Draw(hDC, nLeft, nTop, nWidth, nHeight) CLASS HFreeImage
 METHOD Release() CLASS HFreeImage
    LOCAL i, nlen := Len(::aImages)
 
-   ::nCounter --
+   ::nCounter--
    IF ::nCounter == 0
       #ifdef __XHARBOUR__
          FOR EACH i IN ::aImages

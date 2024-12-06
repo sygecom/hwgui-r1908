@@ -138,7 +138,7 @@ METHOD NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSiz
    END
    ::SetColor(, bColor)
    IF Hwg_Bitand(nStyle, WS_HSCROLL) > 0
-      ::nScrollBars ++
+      ::nScrollBars++
    ENDIF
    IF Hwg_Bitand(nStyle, WS_VSCROLL) > 0
       ::nScrollBars += 2

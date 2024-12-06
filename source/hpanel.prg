@@ -66,7 +66,7 @@ LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    */
    ::nGetSkip := 1
    IF Hwg_Bitand(nStyle, WS_HSCROLL) > 0
-      ::nScrollBars ++
+      ::nScrollBars++
    ENDIF
     IF Hwg_Bitand(nStyle, WS_VSCROLL) > 0
       ::nScrollBars += 2

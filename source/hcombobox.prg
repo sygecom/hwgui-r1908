@@ -1057,7 +1057,7 @@ METHOD Populate() CLASS HComboBox
              LongComboWidth := numofchars
          ENDIF
          (cAlias)->(DBSKIP())
-         i ++
+         i++
        ENDDO
        IF nRecno > 0
           (cAlias)->(DBGOTO(nRecno))

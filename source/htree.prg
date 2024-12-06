@@ -146,7 +146,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
             Imagelist_Add(oTree:himl, aImages[i])
             h := Len(oTree:aImages)
          ENDIF
-         h --
+         h--
          IF i == 1
             im1 := h
          ELSE
@@ -270,7 +270,7 @@ METHOD GetLevel(h) CLASS HTreeNode
 
    DO WHILE (oNode:oParent) != NIL
        oNode := oNode:oParent
-       iLevel ++
+       iLevel++
    ENDDO
    RETURN iLevel
 
@@ -539,10 +539,10 @@ METHOD SearchString(cText, iNivel, oNode, inodo) CLASS HTree
          RETURN oNodeRet
       ENDIF
       IF aItems[i]:Title = cText .AND. (iNivel == NIL .OR. aItems[i]:GetLevel() == iNivel)
-         iNodo ++ 
+         iNodo++ 
          RETURN aItems[i]
       ELSE
-         iNodo ++   
+         iNodo++
       ENDIF
    NEXT
    RETURN NIL 

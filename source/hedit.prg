@@ -1440,7 +1440,7 @@ METHOD Untransform(cBuffer) CLASS HEdit
                EXIT
             ENDIF
          NEXT
-         nFor --
+         nFor--
          IF nFor > 0
             cBuffer := Left(cBuffer, nFor - 1) + "-" + SubStr(cBuffer, nFor + 1)
          ELSE
@@ -1492,7 +1492,7 @@ METHOD FirstNotEditable(nPos) CLASS HEdit
    LOCAL nFor
    LOCAL nMaxLen := Len(::cPicMask)
 
-   FOR nFor := ++ nPos TO nMaxLen
+   FOR nFor := ++nPos TO nMaxLen
       IF !::IsEditable(nFor)
          RETURN nFor
       ENDIF

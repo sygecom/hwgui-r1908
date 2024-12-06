@@ -151,7 +151,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
       IF Len(cLine) == 0
          EXIT
       ENDIF
-      numlin ++
+      numlin++
       IF Right(cLine, 1) == ";"
          strfull += Left(cLine, Len(cLine) - 1)
          LOOP
@@ -357,7 +357,7 @@ LOCAL i, j, bOldError
          END SEQUENCE
          ErrorBlock(bOldError)
          tmpArray[i] := ""
-         i --
+         i--
          IF i > 0 .AND. tmpArray[i] == "JUMP"
             rezArray[2, i] := &("{||iscr:=" + LTrim(Str(IIf(prju, j - 1, j), 5)) + "}")
             tmpArray[i] := ""
@@ -439,7 +439,7 @@ PRIVATE iscr := 1, bOldError
                IF lParam .AND. aParams != NIL .AND. Len(aParams) >= j
                   &varname := aParams[j]
                ENDIF
-               j ++
+               j++
             ENDDO
             RECOVER
                WndOut()
@@ -449,7 +449,7 @@ PRIVATE iscr := 1, bOldError
             ErrorBlock(bOldError)
          ENDIF
       ENDIF
-      iscr ++
+      iscr++
    ENDDO
    IF lDebug
       bOldError := ErrorBlock({|e|MacroError(3, e, aScript[3, iscr])})
@@ -469,7 +469,7 @@ PRIVATE iscr := 1, bOldError
             ENDIF
 #endif
             EVAL(aScript[2, iscr])
-            iscr ++
+            iscr++
          ENDDO
 #ifdef __WINDOWS__
          hwg_scrDebug(aScript, 0)
@@ -480,7 +480,7 @@ PRIVATE iscr := 1, bOldError
       ELSE
          DO WHILE iscr > 0 .AND. iscr <= arlen
             EVAL(aScript[2, iscr])
-            iscr ++
+            iscr++
          ENDDO
       ENDIF
    RECOVER
@@ -514,7 +514,7 @@ MEMVAR aScriptt
          DoScript(aScript[2, i], aParams)
          EXIT
       ENDIF
-      i ++
+      i++
    ENDDO
 
 RETURN scr_RetValue

@@ -317,7 +317,7 @@ METHOD StartPage() CLASS HPrinter
    ELSE
       Hwg_StartPage(::hDC)
    ENDIF
-   ::nPage ++
+   ::nPage++
 
    RETURN NIL
 
@@ -521,9 +521,9 @@ METHOD ChangePage(oSayPage, n, nPage) CLASS hPrinter
       ELSEIF n == 2
          ::nCurrPage := Len(::aMeta)
       ELSEIF n == 1 .AND. ::nCurrPage < Len(::aMeta)
-         ::nCurrPage ++
+         ::nCurrPage++
       ELSEIF n == - 1 .AND. ::nCurrPage > 1
-         ::nCurrPage --
+         ::nCurrPage--
       ENDIF
       oSayPage:SetItem(::nCurrPage)
    ELSE
@@ -612,11 +612,11 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
    IF msg == WM_MOUSEWHEEL
       SetScrollRange(oCanvas:handle, SB_VERT, 1, 20)
       IF HIWORD(wParam) > 32678
-         IF ++ nPosVert > 20
+         IF ++nPosVert > 20
             nPosVert := 20
          ENDIF
       ELSE
-         IF -- nPosVert < 1
+         IF --nPosVert < 1
             nPosVert := 1
          ENDIF
       ENDIF

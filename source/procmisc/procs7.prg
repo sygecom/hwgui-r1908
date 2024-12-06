@@ -34,11 +34,11 @@ LOCAL stro := "", rez, oldpoz, poz1
       stro += SubStr(strbuf, oldpoz, poz)
       poz  += oldpoz - 1
    ENDIF
-   poz ++
+   poz++
    poz1 := Len(stro)
    IF poz1 > 2 .AND. Right(stro, 1) $ Chr(13) + Chr(10)
       IF SubStr(stro, poz1 - 1, 1) $ Chr(13) + Chr(10)
-         poz1 --
+         poz1--
       ENDIF
       stro := SubStr(stro, 1, poz1 - 1)
    ENDIF
@@ -79,7 +79,7 @@ FUNCTION FIND_Z(stroka, symb)
       ENDIF
       FOR i := poz1 TO poz - 1
          IF (j := At(SubStr(stroka, i, 1), ms1)) != 0
-            ms2[j] ++
+            ms2[j]++
          ENDIF
       NEXT
       IF ms2[1] == ms2[2] .AND. ms2[3] == ms2[4] .AND. ;
@@ -87,7 +87,7 @@ FUNCTION FIND_Z(stroka, symb)
          EXIT
       ELSE
          IF (j := At(SubStr(stroka, poz, 1), ms1)) != 0
-            ms2[j] ++
+            ms2[j]++
          ENDIF
          poz1 := poz + 1
       ENDIF

@@ -75,7 +75,7 @@ LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
    IF han != - 1
       strfull := ""
       DO WHILE .T.
-         kolstr ++
+         kolstr++
          stroka := IIf(iniDbf, RDSTRDBF(), RDSTR(han, @strbuf, @poz, STR_BUFLEN))
          IF Len(stroka) == 0
             EXIT
@@ -187,7 +187,7 @@ LOCAL len1, strv, newname
          IF Empty(stroka)
             EXIT
          ELSE
-            //i ++ (value not used)
+            //i++ (value not used)
             poz1 := FIND_Z(stroka)
             strv := LTrim(SubStr(stroka, 1, IIf(poz1 == 0, 9999, poz1 - 1)))
             IF Asc(strv) == 123 .AND. SubStr(strv, 2, 1) != "|"              // {

@@ -118,7 +118,7 @@ METHOD Init() CLASS HProgressBar
 
 METHOD STEP(cTitle)
 
-   ::nCount ++
+   ::nCount++
    IF ::nCount == ::nLimit
       ::nCount := 0
       UpdateProgressBar(::handle)

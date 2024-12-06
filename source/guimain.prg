@@ -347,7 +347,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
          ACTIVATE DIALOG oDlg NOMODAL
       ENDIF
    ELSEIF nStep == 1
-      iCou ++
+      iCou++
       IF iCou == nLimit
          iCou := 0
          UpdateProgressBar(hPBar)

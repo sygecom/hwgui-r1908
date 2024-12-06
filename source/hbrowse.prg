@@ -1902,7 +1902,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
          //   EXIT
          //ENDIF
          ::LineOut(cursor_row, 0, hDC, .F.)
-         cursor_row ++
+         cursor_row++
          Eval(::bSkip, Self, 1)
        ENDDO
        */
@@ -1994,7 +1994,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
          ELSE
             ::LineOut(cursor_row, 0, hDC, .F.)
          ENDIF
-         cursor_row ++
+         cursor_row++
          Eval(::bSkip, Self, 1)
       ENDDO
       ::internal[4] := Eval(::bRecno, Self)
@@ -2014,7 +2014,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
          //ELSE
             ::LineOut(cursor_row, 0, hDC, .F., .T.)
          //ENDIF
-         cursor_row ++
+         cursor_row++
       ENDDO
       IF ::lDispSep .AND. !Checkbit(::internal[1], 1) .AND. nRowsFill <= ::rowCurrCount
          ::SeparatorOut(hDC, ::rowCurrCount)
@@ -2771,7 +2771,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
          ELSE
             xSize := 0
             IF nCol > 0 .AND. lSelected .AND. nCol == nColumn
-               nCol ++
+               nCol++
             ENDIF
             IF nColumn == Len(::aColumns) .AND. !lFixed
                nColumn := hb_RAscan(::aColumns, {|c|c:lhide = .F.}) - 1
@@ -2782,7 +2782,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
          ENDIF
          x += xSize
          ::nPaintCol := IIf(::nPaintCol == ::freeze, ::nLeftCol, ::nPaintCol + 1)
-         nColumn ++
+         nColumn++
          IF !::lAdjRight .AND. ::nPaintCol > Len(::aColumns)
             EXIT
          ENDIF
@@ -2851,7 +2851,7 @@ STATIC FUNCTION LINERIGHT(oBrw)
    
    IF lEditable .OR. oBrw:lAutoEdit
       IF oBrw:colpos < oBrw:nColumns
-         oBrw:colpos ++
+         oBrw:colpos++
          RETURN NIL
       ENDIF
    ENDIF
@@ -2859,7 +2859,7 @@ STATIC FUNCTION LINERIGHT(oBrw)
        oBrw:nLeftCol < Len(oBrw:aColumns)
       i := oBrw:nLeftCol + oBrw:nColumns
       DO WHILE oBrw:nColumns + oBrw:nLeftCol - oBrw:freeze - 1 < Len(oBrw:aColumns) .AND. oBrw:nLeftCol + oBrw:nColumns == i
-         oBrw:nLeftCol ++
+         oBrw:nLeftCol++
       ENDDO
       oBrw:colpos := i - oBrw:nLeftCol + 1
    ENDIF
@@ -2871,10 +2871,10 @@ STATIC FUNCTION LINELEFT(oBrw)
    LOCAL lEditable := oBrw:lEditable .OR. oBrw:Highlight
 
    IF lEditable .OR. oBrw:lAutoEdit
-      oBrw:colpos --
+      oBrw:colpos--
    ENDIF
    IF oBrw:nLeftCol > oBrw:freeze + 1 .AND. (!lEditable .OR. oBrw:colpos < oBrw:freeze + 1)
-      oBrw:nLeftCol --
+      oBrw:nLeftCol--
       IF !lEditable .OR. oBrw:colpos < oBrw:freeze + 1
          oBrw:colpos := oBrw:freeze + 1
       ENDIF
@@ -3128,7 +3128,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
          RETURN NIL
       ENDIF
    ENDIF
-   ::rowPos ++
+   ::rowPos++
    IF ::rowPos > ::rowCount
       ::rowPos := ::rowCount
       IF ::lAppMode
@@ -3159,7 +3159,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
          Eval(::bSkip, Self, -1)
       ENDIF
       IF ::rowPos > 1
-         ::rowPos --
+         ::rowPos--
       ENDIF
       //::colPos := ::nLeftCol := 1
       ::colPos := Max(1, Ascan(::aColumns, {|c|c:lEditable}))
@@ -3186,7 +3186,7 @@ METHOD LINEUP() CLASS HBrowse
    IF Eval(::bBof, Self)
       Eval(::bGoTop, Self)
    ELSE
-      ::rowPos --
+      ::rowPos--
       IF ::rowPos == 0  // needs scroll
          ::rowPos := 1
          RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
@@ -3337,7 +3337,7 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
          x1 += xSize
          xSize := 0
       ENDIF
-      nCols ++
+      nCols++
    ENDDO
    x1  := ::x1
    aColumns[Len(aColumns), 1] += xSize
@@ -3353,7 +3353,7 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
       IF !::lAdjRight     // no column select
          RETURN NIL
       ENDIF
-      fif --
+      fif--
    ENDIF
    //nando
    fif := aColumns[fif, 2]
@@ -3538,7 +3538,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
          x1 += xSize
          xSize := 0
       ENDIF
-      nCols ++
+      nCols++
    ENDDO
    x1  := ::x1
    aColumns[Len(aColumns), 1] += xSize
@@ -3553,7 +3553,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
       IF !::lAdjRight     // no column select
          RETURN NIL
       ENDIF
-      fif --
+      fif--
    ENDIF
    fif := aColumns[fif, 2]
    IF nLine > 0 .AND. nLine <= ::rowCurrCount
@@ -3745,7 +3745,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
          ENDIF
          rowPos := ::rowPos - 1
          IF ::lAppMode .AND. ::nRecords != 0 .AND. ::rowPos != ::rowCount
-            rowPos ++
+            rowPos++
          ENDIF
          y1 := ::y1 + (::height + 1) * rowPos
 
@@ -3893,7 +3893,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   Eval(oColumn:block, ::varbuf, Self, fipos)
                ENDIF
                IF ::nRecords > 0
-                  ::rowPos ++
+                  ::rowPos++
                ENDIF
                ::lAppended := .T.
                IF !(Getkeystate(VK_UP) < 0 .OR. Getkeystate(VK_DOWN) < 0)
@@ -4291,7 +4291,7 @@ STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
       IF xstrt > xend
          EXIT
       ENDIF
-      klf ++
+      klf++
       i   := IIf(i == oBrw:freeze, fld1, i + 1)
       // xstrt += 2 * oBrw:width
       IF i > Len(oBrw:aColumns)
@@ -4463,7 +4463,7 @@ STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
    DO WHILE (nL := Len(hb_tokenPtr(@cStr, @nPos, ";"))) != 0
 #endif
       nMaxLen := Max(nMaxLen, nL)
-      nCount ++
+      nCount++
    ENDDO
    RETURN NIL
 
@@ -4594,7 +4594,7 @@ STATIC FUNCTION FltRecCount(oBrw)
    oBrw:aRecnoFilter := {}
    DO WHILE !(oBrw:Alias)->(Eof()) .AND. Eval(oBrw:bWhile, oBrw)
       IF Eval(oBrw:bFor, oBrw)
-         nCount ++
+         nCount++
          IF oBrw:lFilter
             AAdd(oBrw:aRecnoFilter, (oBrw:Alias)->(recno()))
          ENDIF

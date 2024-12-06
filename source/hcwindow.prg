@@ -166,7 +166,7 @@ METHOD FindControl(nId, nHandle) CLASS HCustomWindow
       IF Eval(bSearch, ::aControls[i])
          RETURN ::aControls[i]
       ENDIF
-      i --
+      i--
    ENDDO
 
 RETURN NIL
@@ -201,7 +201,7 @@ METHOD DelControl(oCtrl) CLASS HCustomWindow
    FOR i := Len(::aNotify) TO 1 STEP -1
       IF ::aNotify[i, 2] == id
          ADel(::aNotify, i)
-         h ++
+         h++
       ENDIF
    NEXT
 

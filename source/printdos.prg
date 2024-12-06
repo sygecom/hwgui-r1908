@@ -297,7 +297,7 @@ METHOD SetCols(nProw, nPcol) CLASS PrintDos
    IF ::nProw < nProw
       DO WHILE ::nProw < nProw
          ::NewLine()
-         ++ ::nProw
+         ++::nProw
       ENDDO
    ENDIF
 
@@ -450,7 +450,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
          ENDIF
          IF Left(stroka, 1) == Chr(12)
             AAdd(oText, "")
-            ++ oPage
+            ++oPage
          ENDIF
       ENDDO
       FClose(han)
@@ -511,7 +511,7 @@ STATIC FUNCTION PrintDosPrint(oText, oPrt)
 
 STATIC FUNCTION PrintDosAnt(nPage, oText)
    LOCAL oDlg := GetModalhandle()
-   nPage := -- nPage
+   nPage := --nPage
    IF nPage < 1
       nPage := 1
    ENDIF
@@ -524,7 +524,7 @@ STATIC FUNCTION PrintDosAnt(nPage, oText)
 
 STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
    LOCAL oDlg := GetModalhandle()
-   nPage := ++ nPage
+   nPage := ++nPage
    IF nPage > oPage
       nPage := oPage
    ENDIF
@@ -548,7 +548,7 @@ FUNCTION regenfile(o, new)
          stroka := SubStr(stroka, 1, nChr12 - 1)
       ENDIF
       o1:say(nLine, 0, stroka)
-      nLine ++
+      nLine++
 
       IF nChr12 > 0
          o1:eject()
