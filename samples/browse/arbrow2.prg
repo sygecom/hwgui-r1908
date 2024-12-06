@@ -26,13 +26,13 @@ local i, a, b
     oBrw1:oHeadFont := HFont():Add('Times New Roman', 0, -22, 400, , ,)
     a := { } 
     for i := 1 to 16
-        aAdd( a, { i, chr( asc("a")-1+i) } )
+        aAdd(a, { i, chr( asc("a")-1+i) })
     next
     for i := 1 to 16
-        aAdd( a, { i, chr( asc("A")-1+i) } )
+        aAdd(a, { i, chr( asc("A")-1+i) })
     next
     for i := 1 to 16
-        aAdd( a, { i, chr( asc("a")-1+i) } )
+        aAdd(a, { i, chr( asc("a")-1+i) })
     next
 
     oBrw1:aArray := a
@@ -44,7 +44,7 @@ local i, a, b
 
     b := { } 
     for i := 1 to 5
-        aAdd( b, { i, chr( asc("a")-1+i) } )
+        aAdd(b, { i, chr( asc("a")-1+i) })
     next
 
     oBrw2:aArray := b

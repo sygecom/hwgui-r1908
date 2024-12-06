@@ -15,9 +15,9 @@ cUser:="1"
 
   RADIOGROUP
    @ 50, 50 RADIOBUTTON oRadiobutton1 CAPTION "User 1      " OF oRadiogroup1 SIZE 110, 22   ;
-        ON CLICK {|| oRadiobutton1_onClick(  ) }
+        ON CLICK {|| oRadiobutton1_onClick() }
    @ 159, 51 RADIOBUTTON oRadiobutton2 CAPTION "User 2      " OF oRadiogroup1 SIZE 110, 22   ;
-        ON CLICK {|| oRadiobutton2_onClick(  ) }
+        ON CLICK {|| oRadiobutton2_onClick() }
   END RADIOGROUP SELECTED 1
 
    @ 315, 43 SAY oL      CAPTION "Label" SIZE 147, 22
@@ -48,12 +48,12 @@ STATIC FUNCTION protek()
  private lOpen:=.T.
 
 
- if cUser=="1" .and. n==2
+ if cUser=="1" .AND. n==2
     lOpen:=.F.
  endif
 
 
- if cUser=="2" .and. n==1
+ if cUser=="2" .AND. n==1
     lOpen:=.F.
  endif
 

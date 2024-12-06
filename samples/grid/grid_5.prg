@@ -74,7 +74,7 @@ FUNCTION Test()
         append blank
         REPLACE field_1 WITH i
         REPLACE field_2 WITH 'Test ' + str(i)
-        REPLACE field_3 WITH mod( i, 10) == 0
+        REPLACE field_3 WITH mod(i, 10) == 0
         REPLACE field_4 WITH Date() + i
         REPLACE field_5 WITH 'Memo Test'
     Next        
@@ -169,7 +169,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
 
         aFields[i, GET_LEN] := nLen
         aFields[i, GET_TYPE] := cType
-        aFields[i, GET_HEIGHT] := iif( cType == "M", 150, 25 )
+        aFields[i, GET_HEIGHT] := iif(cType == "M", 150, 25)
         aFields[i, GET_VALUE] := Fieldget(FieldPos(aFields[i, GET_FIELD]))
 
         nHeight += aFields[i, GET_HEIGHT]
@@ -191,12 +191,12 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
             
             cType  := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
             
-            if cType == "N" .and. aFields[i, GET_LIST] != NIL
+            if cType == "N" .AND. aFields[i, GET_LIST] != NIL
                 aFields[i, GET_OBJECT] := HComboBox():New( oForm,;
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD]),;
-                            IIF( ! aFields[i, GET_EDIT], NIL, WS_DISABLED ),;
+                            IIF(!aFields[i, GET_EDIT], NIL, WS_DISABLED),;
                             nCol,;
                             nRow,;
                             aFields[i, GET_LEN] * nGetSize,;
@@ -214,7 +214,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD]),;
-                            IIF( ! aFields[i, GET_EDIT], NIL, WS_DISABLED ),;
+                            IIF(!aFields[i, GET_EDIT], NIL, WS_DISABLED),;
                             nCol,;
                             nRow,;
                             aFields[i, GET_LEN] * nGetSize,;
@@ -234,7 +234,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD ]),;
-                            IIF( ! aFields[i, GET_EDIT], NIL, WS_DISABLED ),;
+                            IIF(!aFields[i, GET_EDIT], NIL, WS_DISABLED),;
                             nCol,;
                             nRow,;
                             aFields[i, GET_LEN] * nGetSize,;
@@ -314,7 +314,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
         Eval(bChange, oCtrl, n)
         
         if aFields[n, GET_VALID] != nil
-            if ! Eval(aFields[n, GET_VALID])
+            if !Eval(aFields[n, GET_VALID])
                 result := .F.            
                 oGet := aFields[n, GET_OBJECT]
             
@@ -325,7 +325,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
         for i := 1 to len(aFields)
             val := Fieldget(fieldpos(aFields[i, GET_FIELD])) 
             
-            if valtype(val) == "D" .and. empty(val)
+            if valtype(val) == "D" .AND. empty(val)
                 Fieldput(Fieldpos(aFields[i, GET_FIELD]), Date())
             endif                        
 
@@ -348,11 +348,11 @@ STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
     elseif nCol == 2
         result := field->field_2
     elseif nCol == 3
-        result := iif( field->field_3, 'Y', 'N' )
+        result := iif(field->field_3, 'Y', 'N')
     elseif nCol == 4
-        result := DtoC( field->field_4 )
+        result := DtoC(field->field_4)
     elseif nCol == 5
-        result := MemoLine( field->field_5, 100, 1)
+        result := MemoLine(field->field_5, 100, 1)
     endif                                          
 Return result
 
@@ -364,9 +364,9 @@ STATIC FUNCTION OnKey(o, k, aItems)
         else
             MyDelete()
         endif
-    elseif k == VK_DELETE .and. hwg_MsgYesNo("Delete this record ?", "Warning")
+    elseif k == VK_DELETE .AND. hwg_MsgYesNo("Delete this record ?", "Warning")
         MyDelete()
-    endif        
+    endif
 return nil    
 
 STATIC FUNCTION OnClick(o, aItems)

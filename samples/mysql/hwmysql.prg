@@ -27,7 +27,7 @@ Local oFont, oIcon := HIcon():AddResource("ICON_1")
 Public hBitmap := LoadBitmap( "BITMAP_1" )
 Public connHandle := 0, cServer := "", cDatabase := "", cUser := ""
 Public cDataDef := ""
-Public mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+Public mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
 Public queHandle := 0, nNumFields, nNumRows
 Public aQueries := {}, nHistCurr, nHistoryMax := 20
 Private oBrw, BrwFont := Nil, oBrwFont := Nil
@@ -76,7 +76,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
 
    @ 0, 0 PANEL oPanelE OF oMainWindow SIZE 0, 24 ON SIZE {||.T.}
 
-   @ 0, 2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText( Memoread( SelectFile( "Script files( *.scr )", "*.scr", mypath )))} ;
+   @ 0, 2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText(Memoread(SelectFile("Script files( *.scr )", "*.scr", mypath)))};
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_OPEN" FROM RESOURCE TOOLTIP "Load script"
    @ 0, 24 OWNERBUTTON OF oPanelE ID 115 ON CLICK {||SaveScript()} ;
@@ -94,8 +94,8 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    oBrw:active := .F.
 
    Rdini( "demo.ini" )
-   IF Valtype( BrwFont ) == "A"
-      oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
+   IF Valtype(BrwFont) == "A"
+      oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
    ReadHistory( "qhistory.txt" )
 
@@ -117,7 +117,7 @@ Local oModDlg, oFont
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
-   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( getmodalhandle() )} ;
+   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog(getmodalhandle())} ;
        FLAT TEXT "Close" COLOR Vcolor("0000FF") FONT oFont
 
    oModDlg:Activate()
@@ -143,11 +143,11 @@ Local aBases, nChoic
          Return .F.
       ENDIF
    ENDIF
-   aBases := sqlListDB( connHandle )
+   aBases := sqlListDB(connHandle)
    nChoic := WChoice(aBases, "DataBases", 0, 50)
    IF nChoic != 0
-      cDatabase := aBases[ nChoic ]
-      IF sqlSelectD( connHandle, cDatabase ) != 0
+      cDatabase := aBases[nChoic]
+      IF sqlSelectD(connHandle, cDatabase) != 0
          hwg_MsgStop( "Can't connect to "+cDataBase )
          cDatabase := ""
       ELSE
@@ -174,9 +174,9 @@ Local cTable
       Return .F.
    ENDIF
 
-   nChoic := WChoice( aTables,cDataBase+"  tables", 50, 50 )
+   nChoic := WChoice(aTables,cDataBase+"  tables", 50, 50)
    IF nChoic != 0
-      cTable := aTables[ nChoic ]
+      cTable := aTables[nChoic]
       execSQL( "SHOW COLUMNS FROM " + cTable )
    ENDIF
 
@@ -189,7 +189,7 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
    DIALOG ACTIONS OF aModDlg ;
           ON 0,IDOK     ACTION {|| EndConnect() } ;
-          ON 0,IDCANCEL ACTION {|| EndDialog( getmodalhandle() )}
+          ON 0,IDCANCEL ACTION {|| EndDialog(getmodalhandle())}
 
    aModDlg:Activate()
 Return Nil
@@ -213,7 +213,7 @@ FUNCTION EndConnect()
 
 Local hDlg := getmodalhandle()
    IF connHandle > 0
-      sqlClose( connHandle )
+      sqlClose(connHandle)
       connHandle := 0
       IF queHandle > 0
          sqlFreeR( queHandle )
@@ -229,7 +229,7 @@ Local hDlg := getmodalhandle()
    connHandle := sqlConnect( cServer,Trim( cUser ),Trim( cPassword ) )
    IF connHandle != 0 .AND. !Empty( cDataDef )
       cDatabase := cDataDef
-      IF sqlSelectD( connHandle, cDatabase ) != 0
+      IF sqlSelectD(connHandle, cDatabase) != 0
          cDatabase := ""
          SetDlgItemText( hDlg, IDC_TEXT1, "Can't connect to " + cDataBase )
       ENDIF
@@ -246,7 +246,7 @@ Local hDlg := getmodalhandle()
       IF !Empty( cDataBase )
          WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
       ENDIF
-      EndDialog( hDlg )
+      EndDialog(hDlg)
       hwg_SetFocus( oEdit:handle )
    ENDIF
 Return
@@ -263,7 +263,7 @@ FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 Local aRect, i, nHbusy := oMainWindow:aOffset[4]
 
    aRect := GetClientRect( oEdit:handle )
-   nHbusy += aRect[ 4 ]
+   nHbusy += aRect[4]
    MoveWindow( oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8 )
 Return Nil
 
@@ -305,21 +305,21 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
    ELSE
       IF nHistCurr < nHistoryMax
          DO WHILE Len( stroka := RDSTR( Nil,@cQuery,@poz ) ) != 0
-            IF Asc( Ltrim( stroka ) ) > 32
-               Aadd( aQueries, Nil )
+            IF Asc(Ltrim( stroka )) > 32
+               Aadd(aQueries, Nil)
                Ains( aQueries, i )
-               aQueries[ i ] := { Padr( stroka, 76 ), lFirst }
+               aQueries[i] := { Padr( stroka, 76 ), lFirst }
                lFirst := .F.
                i ++
             ENDIF
          ENDDO
-         Aadd( aQueries, Nil )
+         Aadd(aQueries, Nil)
          Ains( aQueries, i )
-         aQueries[ i ] := { Space( 76 ), .F. }
+         aQueries[i] := { Space(76), .F. }
          nHistCurr ++
       ENDIF
       IF ( queHandle := sqlStoreR( connHandle ) ) != 0
-         sqlBrowse( queHandle )
+         sqlBrowse(queHandle)
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
          IF ( nNumFields := sqlFiCou( connHandle ) ) == 0
@@ -349,23 +349,23 @@ Local aQueRows, i, j, vartmp, af := {}
    aQueRows := Array( nNumRows )
 
    FOR i := 1 TO nNumRows
-      aQueRows[ i ] := sqlFetchR( queHandle )
+      aQueRows[i] := sqlFetchR( queHandle )
       IF i == 1
          FOR j := 1 TO nNumFields
             AAdd(af, {Valtype(aQueRows[i, j]), 0, 0})
          NEXT
       ENDIF
       FOR j := 1 TO nNumFields
-         IF af[ j, 1 ] == "C"
-            af[ j, 2 ] := Max( af[ j, 2 ], Len( aQueRows[ i, j ] ) )
-         ELSEIF af[ j, 1 ] == "N"
-            vartmp := STR( aQueRows[ i, j ] )
-            af[ j, 2 ] := Max( af[ j, 2 ], Len( vartmp ) )
-            af[ j, 3 ] := Max( af[ j, 3 ], IIF('.' $ vartmp,af[j, 2] - AT('.', vartmp), 0) )
-         ELSEIF af[ j, 1 ] == "D"
-            af[ j, 2 ] := 8
-         ELSEIF af[ j, 1 ] == "L"
-            af[ j, 2 ] := 1
+         IF af[j, 1] == "C"
+            af[j, 2] := Max( af[j, 2], Len( aQueRows[i, j] ) )
+         ELSEIF af[j, 1] == "N"
+            vartmp := STR( aQueRows[i, j] )
+            af[j, 2] := Max( af[j, 2], Len( vartmp ) )
+            af[j, 3] := Max( af[j, 3], IIF('.' $ vartmp,af[j, 2] - AT('.', vartmp), 0) )
+         ELSEIF af[j, 1] == "D"
+            af[j, 2] := 8
+         ELSEIF af[j, 1] == "L"
+            af[j, 2] := 1
          ENDIF
       NEXT
    NEXT
@@ -402,10 +402,10 @@ STATIC FUNCTION GetFromHistory()
 
 Local cQuery := "", i := oBrw:nCurrent
 
-   IF !Empty( oBrw:aArray[ i, 1 ] )
-      DO WHILE !oBrw:aArray[ i, 2 ]; i--; ENDDO
-      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[ i, 1 ] )
-         cQuery += Rtrim( oBrw:aArray[ i, 1 ] ) + Chr( 13 ) + Chr( 10 )
+   IF !Empty( oBrw:aArray[i, 1] )
+      DO WHILE !oBrw:aArray[i, 2]; i--; ENDDO
+      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[i, 1] )
+         cQuery += Rtrim( oBrw:aArray[i, 1] ) + Chr( 13 ) + Chr( 10 )
          i++
       ENDDO
       oEdit:SetText( cQuery )
@@ -430,18 +430,18 @@ LOCAL strbuf := Space(512), poz := 513
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0
-               Aadd( aQueries, { Space( 76 ), .F. } )
+               Aadd(aQueries, { Space(76), .F. })
                lFirst := .T.
             ENDIF
             lEmpty := .F.
-            Aadd( aQueries, { Padr( stroka, 76 ), lFirst } )
+            Aadd(aQueries, { Padr( stroka, 76 ), lFirst })
             IF lFirst
                nHistCurr ++
             ENDIF
             lFirst := .F.
          ENDIF
       ENDDO
-      FCLOSE( han )
+      FCLOSE(han)
    ENDIF
 Return nHistCurr
 
@@ -449,15 +449,15 @@ STATIC FUNCTION WriteHistory(fname)
 
 Local han, i, lEmpty := .T.
    IF !Empty( aQueries )
-      han := FCREATE( fname )
+      han := FCREATE(fname)
       IF han <> - 1
          FOR i := 1 TO Len( aQueries )
-            IF !Empty( aQueries[ i, 1 ] ) .OR. !lEmpty
-               FWRITE( han, Trim( aQueries[ i, 1 ] ) + Chr(13) + Chr(10) )
-               lEmpty := Empty( aQueries[ i, 1 ] )
+            IF !Empty( aQueries[i, 1] ) .OR. !lEmpty
+               FWRITE(han, Trim( aQueries[i, 1] ) + Chr(13) + Chr(10))
+               lEmpty := Empty( aQueries[i, 1] )
             ENDIF
          NEXT
-         FCLOSE( han )
+         FCLOSE(han)
       ENDIF
    ENDIF
 Return Nil
@@ -473,10 +473,10 @@ Local aRes, qHandle, nNumFields, nNumRows, i
          nNumFields := sqlNumFi( qHandle )
          aRes := { 0, Array(nNumFields), Array(nNumRows) }
          FOR i := 1 TO nNumFields
-            aRes[ 2,i ] := SqlFetchF(qHandle)[1]
+            aRes[2, i] := SqlFetchF(qHandle)[1]
          NEXT
          FOR i := 1 TO nNumRows
-            aRes[ 3,i ] := sqlFetchR( qHandle )
+            aRes[3, i] := sqlFetchR( qHandle )
          NEXT
          sqlFreeR( qHandle )
          Return aRes
@@ -496,11 +496,11 @@ FUNCTION FilExten(fname)
 
 LOCAL i
 
-RETURN IIF( ( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ) )
+RETURN IIF(( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ))
 
 FUNCTION SaveScript()
 
-Local fname := SaveFile( "*.scr","Script files( *.scr )", "*.scr", mypath )
+Local fname := SaveFile("*.scr","Script files( *.scr )", "*.scr", mypath)
    cQuery := oEdit:GetText()
    IF !Empty( fname )
       MemoWrit( fname,cQuery )
@@ -519,7 +519,7 @@ Return Nil
 EXIT PROCEDURE cleanup
 
    IF connHandle > 0
-      sqlClose( connHandle )
+      sqlClose(connHandle)
       IF queHandle > 0
          sqlFreeR( queHandle )
       ENDIF

@@ -26,7 +26,7 @@ Local i, aGraph[1]
 
    aGraph[1] := {}
    FOR i := -40 TO 40
-      Aadd( aGraph[1], { i, hwg_cos(i/10) } )
+      Aadd(aGraph[1], { i, hwg_cos(i/10) })
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
@@ -34,7 +34,7 @@ Local i, aGraph[1]
            FONT oFont
 
    @ 50, 30 GRAPH oGraph DATA aGraph SIZE 200, 100 COLOR 65280
-   // oGraph:oPen := HPen():Add( PS_SOLID, 2, oGraph:tcolor )
+   // oGraph:oPen := HPen():Add(PS_SOLID, 2, oGraph:tcolor)
 
    @ 90, 250 BUTTON "Close"  ;
        SIZE 120, 30          ;
@@ -51,7 +51,7 @@ Local i, aGraph[1]
 
    aGraph[1] := {}
    FOR i := 1 TO 6
-      Aadd( aGraph[1], { "",i*i } )
+      Aadd(aGraph[1], { "",i*i })
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
@@ -76,7 +76,7 @@ Local i, aGraph[1]
 
    aGraph[1] := {}
    FOR i := 1 TO 6
-      Aadd( aGraph[1], i*i )
+      Aadd(aGraph[1], i*i)
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;

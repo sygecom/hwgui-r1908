@@ -65,23 +65,23 @@ DECLARE  FT_FSKIP(n AS NUMERIC) //AS USUAL
 DECLARE  FT_MKDIR( CDIR AS STRING ) //AS USUAL
 DECLARE  StrPos( cBuffer AS STRING ) AS NUMERIC
 DECLARE  GetNumberofTableItems( cBuffer AS STRING ) AS NUMERIC
-DECLARE  FREADline( nH AS NUMERIC, @cB AS STRING, nMaxLine AS NUMERIC )
+DECLARE  FREADline(nH AS NUMERIC, @cB AS STRING, nMaxLine AS NUMERIC)
 //DECLARE  HBMAKE_FILEBASE() AS OBJECT
 DECLARE  HBMAKE_FILEBASE ;
     New( cname AS STRING) AS CLASS HBMAKE_FILEBASE;
     FOPEN()   AS OBJECT;
     closefile() AS OBJECT;
     fskip( OPTIONAL n  AS NUMERIC)  AS OBJECT;
-    FWRITE( c AS STRING) AS OBJECT;
+    FWRITE(c AS STRING) AS OBJECT;
     retrieve() AS STRING;
     fgoTop()      AS OBJECT;
     fgoBottom()     AS OBJECT;
     fgoto()    AS NUMERIC;
     create() AS OBJECT;
-    fappendByte( cByte )    AS OBJECT;
+    fappendByte(cByte)    AS OBJECT;
     BuffGet METHOD BufferGet( OPTIONAL lDirection AS LOGICAL ) AS NUMERIC;
     SKIP( OPTIONAL nRecord AS NUMERIC )                  AS OBJECT;
-    WRITE( cChar AS STRING )                   AS OBJECT;
+    WRITE(cChar AS STRING)                   AS OBJECT;
     goTop()                          AS OBJECT;
     goBottom()                       AS OBJECT;
     GOTO( OPTIONAL nValue AS NUMERIC)                   AS NUMERIC;
@@ -225,15 +225,15 @@ FUNCTION StrPos(cBuffer AS STRING)
       cChar := SUBSTR( cBuffer, x, 1 )
       IF cChar >= CHR( 64 ) .AND. cChar <= CHR( 90 ) .OR. cChar >= CHR( 97 ) ;
                  .AND. cChar <= CHR( 122 ) .OR. cChar >= CHR( 48 ) .AND. cChar <= CHR( 57 ) ;
-                 .OR. cChar == CHR( 60 ) .OR. cchar == CHR( ASC( "-" ) ) ;
-                 .OR. cchar == CHR( ASC( "(" ) ) .OR. cchar = CHR( ASC( "|" ) ) .OR. ;
-                 cchar == CHR( ASC( '.' ) ) .OR. cchar == CHR( ASC( '*' ) ) .OR. ;
-                 cchar == CHR( ASC( '#' ) ) .OR. cchar == CHR( ASC( '"' ) ) .OR. ;
-                 cchar == CHR( ASC( '/' ) ) .OR. cchar == CHR( ASC( "@" ) ) ;
-                 .OR. cchar == CHR( ASC( "=" ) ) .OR. cchar == CHR( ASC( 'Ä' ) ) ;
-                 .OR. cchar == CHR( ASC( '?' ) ) .OR. cchar == CHR( ASC( '!' ) ) ;
-                 .OR. cchar == CHR( ASC( "<" ) ) .OR. cchar == CHR( ASC( '>' ) ) ;
-                 .OR. cchar == CHR( ASC( '!' ) ) .OR. cchar == CHR( ASC( '+' ) )
+                 .OR. cChar == CHR( 60 ) .OR. cchar == CHR( ASC("-") ) ;
+                 .OR. cchar == CHR( ASC("(") ) .OR. cchar = CHR( ASC("|") ) .OR. ;
+                 cchar == CHR( ASC('.') ) .OR. cchar == CHR( ASC('*') ) .OR. ;
+                 cchar == CHR( ASC('#') ) .OR. cchar == CHR( ASC('"') ) .OR. ;
+                 cchar == CHR( ASC('/') ) .OR. cchar == CHR( ASC("@") ) ;
+                 .OR. cchar == CHR( ASC("=") ) .OR. cchar == CHR( ASC('Ä') ) ;
+                 .OR. cchar == CHR( ASC('?') ) .OR. cchar == CHR( ASC('!') ) ;
+                 .OR. cchar == CHR( ASC("<") ) .OR. cchar == CHR( ASC('>') ) ;
+                 .OR. cchar == CHR( ASC('!') ) .OR. cchar == CHR( ASC('+') )
 
          nPos := x
 
@@ -260,9 +260,9 @@ FUNCTION GetNumberofTableItems(cBuffer)
 
    cBuffer := ALLTRIM( cBuffer )
 
-   DO WHILE AT( SPACE( 3 ), cBuffer ) > 0
-      cItem := SUBSTR( cBuffer, 1, AT( SPACE( 3 ), cBuffer ) - 1 )
-      IF AT( SPACE( 3 ), cBuffer ) == 0
+   DO WHILE AT( SPACE(3), cBuffer ) > 0
+      cItem := SUBSTR( cBuffer, 1, AT( SPACE(3), cBuffer ) - 1 )
+      IF AT( SPACE(3), cBuffer ) == 0
          nItem ++
       ELSE
          cBuffer := ALLTRIM( STRTRAN( cBuffer, cItem, '' ) )
@@ -290,10 +290,10 @@ FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
    LOCAL nEol AS NUMERIC
    LOCAL nNumRead AS NUMERIC
    LOCAL lReturn as Logical
-   cLine    := SPACE( nMaxLine )
+   cLine    := SPACE(nMaxLine)
    cB       := ''
    nSavePos := FSEEK( nH, 0, FS_RELATIVE )
-   nNumRead := FREAD( nH, @cLine, nMaxLine )
+   nNumRead := FREAD(nH, @cLine, nMaxLine)
    IF ( nEol := AT( EOL, SUBSTR( cLine, 1, nNumRead ) ) ) == 0
       cB := cLine
    ELSE

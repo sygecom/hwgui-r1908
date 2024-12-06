@@ -42,13 +42,13 @@ FUNCTION calculator()
    @ 272, 63 OWNERBUTTON oOw1  SIZE 106, 36   ;
         TEXT 'Calculator'  ;
         COORDINATES 3, 0, 0, 0  ;
-        ON CLICK {|| oOw1_onClick(  ) }
+        ON CLICK {|| oOw1_onClick() }
    @ 72, 102 SAY oLabel2 CAPTION "F2 - activate calculator"  SIZE 235, 26 ;
         STYLE SS_CENTER +DT_VCENTER+DT_SINGLELINE+WS_DLGFRAME +WS_DISABLED
    @ 119, 71 GET UPDOWN oValue VAR vValue  ;
         RANGE -2147483647, 2147483647  INCREMENT 1 SIZE 149, 24  PICTURE '999,999.99'  ;
-        VALID  {|| thisform:oLabel2:disable( ) } ;
-        WHEN  {|| thisform:oLabel2:Enable( ) } ;
+        VALID  {|| thisform:oLabel2:disable() } ;
+        WHEN  {|| thisform:oLabel2:Enable() } ;
         ON KEYDOWN {|This, nKeyPress, nShiftAltCtrl| oValue_onKeyDown( This, nKeyPress, nShiftAltCtrl ) }
         oValue:FontBold := .T.
    @ 72, 74 SAY oLabel1 CAPTION "Value:"  SIZE 42, 21
@@ -57,7 +57,7 @@ FUNCTION calculator()
         STYLE BS_LEFT
    @ 297, 271 BUTTONEX oBtn1 CAPTION "OK"   SIZE 100, 42 ;
         STYLE BS_CENTER +WS_TABSTOP  ;
-        ON CLICK {|| thisform:Close( ) }
+        ON CLICK {|| thisform:Close() }
 
    ACTIVATE DIALOG oDlg
 

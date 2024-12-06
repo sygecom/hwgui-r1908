@@ -22,7 +22,7 @@ FUNCTION Main()
             FErase('temp.dbf')
         END
                     
-        DBCreate( "temp.dbf", {{"LINE", "C", 300, 0}} )
+        DBCreate("temp.dbf", {{"LINE", "C", 300, 0}})
         
         USE temp
                         
@@ -75,7 +75,7 @@ Return result
 FUNCTION FileOpen()
 
         Local fname
-        fname := SelectFile( "Select File", "*.*")
+        fname := SelectFile("Select File", "*.*")
 
         Zap
         APPEND FROM (fname) SDF

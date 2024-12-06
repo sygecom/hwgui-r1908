@@ -38,7 +38,7 @@ Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
    CreateArList( oBrw1,aSample1 )
 
    CreateArList( oBrw2,aSample2 )
-   oBmp := HBitmap():AddResource( OBM_CHECK )
+   oBmp := HBitmap():AddResource(OBM_CHECK)
    oBrw2:aColumns[1]:aBitmaps := { ;
       { {|l|l}, oBmp } ;
    }
@@ -52,7 +52,7 @@ Return Nil
 STATIC FUNCTION BrwKey(oBrw, key)
 
    IF key == 32
-      oBrw:aArray[ oBrw:nCurrent, 1 ] := !oBrw:aArray[ oBrw:nCurrent, 1 ]
+      oBrw:aArray[oBrw:nCurrent, 1] := !oBrw:aArray[oBrw:nCurrent, 1]
       oBrw:RefreshLine()
    ENDIF
 

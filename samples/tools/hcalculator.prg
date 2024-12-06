@@ -24,7 +24,7 @@ CLASS HCalculator
    DATA aOperando
    DATA lClear
    DATA nMemory
-   DATA bColor        INIT RGB( 255, 255, 255 )
+   DATA bColor        INIT RGB(255, 255, 255)
    DATA nLeft         INIT 0
    DATA nTop          INIT 0
    DATA nWidth        INIT 196
@@ -33,33 +33,33 @@ CLASS HCalculator
    DATA Style, nFontSize
 
    METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
-   METHOD DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) PROTECTED
+   METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) PROTECTED
    METHOD INIT( oCurrGet )
    METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )
    METHOD Calculando( cNumero )
-   METHOD GetRefresh( )
-   METHOD End() INLINE  ::GetRefresh(), IIf( ::lCompacta, PostMessage( ::oFormCalc:Handle, WM_CLOSE, 0, 0 ),  )
+   METHOD GetRefresh()
+   METHOD End() INLINE  ::GetRefresh(), IIf(::lCompacta, PostMessage(::oFormCalc:Handle, WM_CLOSE, 0, 0),)
 ENDCLASS
 
 METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCalculator
 
-   ::Title := IIF( cTitle == Nil, ::Title, cTitle )
-   ::DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
+   ::Title := IIF(cTitle == Nil, ::Title, cTitle)
+   ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
    
    RETURN Self
 
-METHOD DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCalculator
+METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalculator
    LOCAL nStyle
 
-   ::bColor    := IIf( bColor == Nil, ::bColor, bColor )
-   ::lCompacta := IIf( lCompacta == Nil, ::lCompacta, lCompacta )
-   ::nLeft     := IIf( nLeft == Nil, ::nLeft, nLeft )
-   ::nTop      := IIf( nTop == Nil, ::nTop, nTop )
+   ::bColor    := IIf(bColor == Nil, ::bColor, bColor)
+   ::lCompacta := IIf(lCompacta == Nil, ::lCompacta, lCompacta)
+   ::nLeft     := IIf(nLeft == Nil, ::nLeft, nLeft)
+   ::nTop      := IIf(nTop == Nil, ::nTop, nTop)
 
-   ::Style := WS_POPUP + IIf( EMPTY( lCompacta ), WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + ;
-                        IIf( ::nLeft + ::nTop = 0, DS_CENTER, 0 ), DS_CONTROL + DS_MODALFRAME )
-   ::nWidth := IIf( nWidth == Nil, ::nWidth, nWidth )
-   ::nHeight :=  IIf( nHeight == Nil, ::nHeight, nHeight )
+   ::Style := WS_POPUP + IIf(EMPTY( lCompacta ), WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + ;
+                        IIf(::nLeft + ::nTop = 0, DS_CENTER, 0), DS_CONTROL + DS_MODALFRAME)
+   ::nWidth := IIf(nWidth == Nil, ::nWidth, nWidth)
+   ::nHeight :=  IIf(nHeight == Nil, ::nHeight, nHeight)
 
    RETURN Nil
 
@@ -72,7 +72,7 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
 
    LOCAL hWin := GetActiveWindow()
    ::oCurrGet := oGet
-   ::DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
+   ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
 
    IF !::lCompacta .AND. ::Hwnd != Nil
       SetWindowPos( ::Hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED )
@@ -85,7 +85,7 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
      STYLE ::Style                          ;
      ON INIT {|This| ::Init( This, oGet ) } ;
      ON LOSTFOCUS {| | IIF(::lCompacta, ::End(), .T.) }  ;
-     ON EXIT { | | ::Hwnd := Nil ,::GetRefresh( ) }
+     ON EXIT { | | ::Hwnd := Nil ,::GetRefresh() }
 
    ::oFormCalc:minHeight := 220
    ::oFormCalc:maxHeight := 258
@@ -203,7 +203,7 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
         
    ACTIVATE DIALOG ::oFormCalc NOMODAL
    
-   ::nFontSize := TxtRect( "9", ::oFormCalc, ::oFormCalc:oCalculo:oFont )[ 1 ]
+   ::nFontSize := TxtRect( "9", ::oFormCalc, ::oFormCalc:oCalculo:oFont )[1]
    ::Hwnd := ::oFormCalc:Handle
 
    RETURN 0
@@ -217,27 +217,27 @@ METHOD Calculando( cNumero ) CLASS HCalculator
    Private nCalculo1 , ncalculo2
 
    IF IsCtrlShift(.F., .T.) .AND. ( cNumero = "5" .OR. cNumero = "8" )
-      cNumero := IIF( cNumero = "8", "*", IIF( cNumero = "5", "%", cNumero ) )
+      cNumero := IIF(cNumero = "8", "*", IIF(cNumero = "5", "%", cNumero))
    ENDIF
    If cNumero $ "/*-+%="
       nCars := oForm:oCalculo:nWidth / ::nFontSize
       oForm:oCalculo:Caption += oForm:oVisor:Caption + " "+cNumero+" "
       oForm:oCalculo:Caption := RIGHT( oForm:oCalculo:Caption, nCars )
-      ::cOperador := IIF( cNumero != "=", cNumero, ::cOperador )
-      cOperar := IIF( cOperar = Nil, cNumero, cOperar )
-      If ::aOperando[ 1 ] = Nil .AND. !::lClear
-         ::aOperando[ 1 ] := Val( StrTran(oForm:oVisor:Caption,",",".") )
-      ElseIf ::aOperando[ 2 ] = Nil .AND. ! ::lClear
-         ::aOperando[ 2 ] := Val( StrTran(oForm:oVisor:Caption,",",".") )
+      ::cOperador := IIF(cNumero != "=", cNumero, ::cOperador)
+      cOperar := IIF(cOperar = Nil, cNumero, cOperar)
+      If ::aOperando[1] = Nil .AND. !::lClear
+         ::aOperando[1] := Val( StrTran(oForm:oVisor:Caption,",",".") )
+      ElseIf ::aOperando[2] = Nil .AND. !::lClear
+         ::aOperando[2] := Val( StrTran(oForm:oVisor:Caption,",",".") )
       EndIf
       ::lClear := .T.
    ElseIf cNumero == "#"
       oForm:oVisor:Caption := iIf(oForm:oVisor:Caption = "-", SubStr(oForm:oVisor:Caption, 2),"-"+oForm:oVisor:Caption)
       ::cOperador := cNumero
-      If ::aOperando[ 2 ] != Nil
-         ::aOperando[ 2 ] := Val( StrTran(oForm:oVisor:Caption,",",".") )
-      ElseIf ::aOperando[ 1 ] != Nil
-         ::aOperando[ 1 ] := Val( StrTran(oForm:oVisor:Caption,",",".") )
+      If ::aOperando[2] != Nil
+         ::aOperando[2] := Val( StrTran(oForm:oVisor:Caption,",",".") )
+      ElseIf ::aOperando[1] != Nil
+         ::aOperando[1] := Val( StrTran(oForm:oVisor:Caption,",",".") )
       EndIf
       ::lClear := .T.
    ElseIf cNumero == " "
@@ -247,8 +247,8 @@ METHOD Calculando( cNumero ) CLASS HCalculator
    ElseIf cNumero == "C"
       oForm:oVisor:Caption := "0"
       ::lClear := .T.
-      ::aOperando[ 1 ] := IIf( ::aOperando[ 1 ] != Nil .and. ::aOperando[ 2 ] = nIL, ::aOperando[ 1 ], Nil )
-      ::aOperando[ 2 ] := Nil //IIf( ::aOperando[ 2 ] = nIL, Nil, 0 )
+      ::aOperando[1] := IIf(::aOperando[1] != Nil .AND. ::aOperando[2] = nIL, ::aOperando[1], Nil)
+      ::aOperando[2] := Nil //IIf(::aOperando[2] = nIL, Nil, 0)
       return nil
    ElseIf Empty( cNumero )
       oForm:oVisor:Caption := "0"
@@ -269,28 +269,28 @@ METHOD Calculando( cNumero ) CLASS HCalculator
       ::nMemory := Val( StrTran( oForm:oVisor:Caption,",",".") )
       oForm:oMemory:caption := "M"
    Else
-      oForm:oVisor:Caption := IIf( ::lClear .OR. cOperar = "=","", oForm:oVisor:Caption )
+      oForm:oVisor:Caption := IIf(::lClear .OR. cOperar = "=","", oForm:oVisor:Caption)
       oForm:oVisor:Caption += cNumero
       ::lClear := .F.
       cOperar := ""
    EndIf
 
-   If cNumero == "=" .And. (! Empty( ::aOperando[ 1 ]) .And. Empty( ::aOperando[ 2 ]) )
-      ::aOperando[ 2 ] := ::aOperando[ 3 ]
+   If cNumero == "=" .AND. (!Empty( ::aOperando[1]) .AND. Empty( ::aOperando[2]) )
+      ::aOperando[2] := ::aOperando[3]
    EndIf
-   If ! Empty( cOperar ) .And. (! Empty( ::aOperando[ 1 ]) .And. ! Empty( ::aOperando[ 2 ]) )
+   If !Empty( cOperar ) .AND. (!Empty( ::aOperando[1]) .AND. !Empty( ::aOperando[2]) )
       If ::cOperador == "%"
-        ::aOperando[ 1 ] := (::aOperando[ 1 ] * ::aOperando[ 2 ] ) / 100
+        ::aOperando[1] := (::aOperando[1] * ::aOperando[2] ) / 100
       Else
-        nCalculo1 := ::aOperando[ 1 ]
-        nCalculo2 := ::aOperando[ 2 ]
-        ::aOperando[ 1 ] := &( "nCalculo1" + cOperar + "nCalculo2" )
+        nCalculo1 := ::aOperando[1]
+        nCalculo2 := ::aOperando[2]
+        ::aOperando[1] := &( "nCalculo1" + cOperar + "nCalculo2" )
       EndIf
-      ::aOperando[ 1 ] := IIf( ::aOperando[ 1 ] - Int( ::aOperando[ 1 ] ) = 0 ,;
-                          Int( ::aOperando[ 1 ]), ::aOperando[ 1 ] )
-      oForm:oVisor:Caption := Ltrim( Str(::aOperando[ 1 ] ) )
-      ::aOperando[ 3 ] := ::aOperando[ 2 ]
-      ::aOperando[ 2 ] := Nil
+      ::aOperando[1] := IIf(::aOperando[1] - Int( ::aOperando[1] ) = 0 ,;
+                          Int( ::aOperando[1]), ::aOperando[1])
+      oForm:oVisor:Caption := Ltrim( Str(::aOperando[1] ) )
+      ::aOperando[3] := ::aOperando[2]
+      ::aOperando[2] := Nil
       ::lClear := .T.
    EndIf
    If cNumero == "="
@@ -300,12 +300,12 @@ METHOD Calculando( cNumero ) CLASS HCalculator
          RETURN Nil
       EndIf
    EndIf
-   oForm:oBtnRes:SetFocus( )
+   oForm:oBtnRes:SetFocus()
 
   Return Nil
 
 
-METHOD INIT( ) CLASS HCalculator
+METHOD INIT() CLASS HCalculator
    LOCAL aCoors
 
    SETDLGKEY( ::oFormCalc ,, 8,{|| ::Calculando( " ") })
@@ -339,18 +339,18 @@ METHOD INIT( ) CLASS HCalculator
          aCoors := { ::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
           ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + GETSYSTEMMETRICS( SM_CYCAPTION ) + 8, 0, 0 }
       ENDIF
-      aCoors[ 3 ] := IIF( ::lCompacta, MAX( 130, ::oCurrGet:nWidth + 8 ), ::nWidth )
-      ::oFormCalc:Move( aCoors[ 1 ] + 1, aCoors[ 2 ] + ::oCurrGet:nHeight + 1 , aCoors[ 3 ], 180, 0 )
+      aCoors[3] := IIF(::lCompacta, MAX( 130, ::oCurrGet:nWidth + 8 ), ::nWidth)
+      ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1 , aCoors[3], 180, 0)
    EndIf
    ::oFormCalc:nInitFocus:= ::oFormCalc:oBtnRes
 
    RETURN Nil
 
-METHOD GetRefresh( ) CLASS HCalculator
-   LOCAL Value := ::aOperando[ 1 ]
+METHOD GetRefresh() CLASS HCalculator
+   LOCAL Value := ::aOperando[1]
 
    If ::oCurrGet != Nil
-      If  Value != Nil
+      If Value != Nil
          ::oCurrGet:Value := Value
          //::oCurrGet:SetFocus()
       EndIf

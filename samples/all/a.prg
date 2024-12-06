@@ -18,7 +18,7 @@ Private oMainWindow, oPanel
 Private oFont := Nil, cImageDir := "..\image\"
 Private nColor, oBmp2
 
-   // hb_SetCodepage( "RU1251" )
+   // hb_SetCodepage("RU1251")
 
    INIT WINDOW oMainWindow MDI TITLE "Example" ;
          MENUPOS 3 COLOR HBrush():Add(16744703):handle 
@@ -52,10 +52,10 @@ Private nColor, oBmp2
          MENUITEM "&MsgGet" ;
                ACTION CopyStringToClipboard(MsgGet("Dialog Sample","Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
-         MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg( )
+         MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()
          MENUITEM "&Windows print" ;
-               ACTION Iif( OpenReport("a.rpt","Simple"),PrintReport(,, .T.), .F.)
+               ACTION Iif(OpenReport("a.rpt","Simple"),PrintReport(,, .T.), .F.)
          MENUITEM "&Print Preview" ACTION PrnTest()
          MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
          MENUITEM "&Command ProgressBar" ACTION TestProgres()
@@ -141,7 +141,7 @@ Return Nil
 FUNCTION MdiChildFromPrg(o)
 
 Local cTitle := "MdiChild from prg", cText := "Input something"
-Local oChildWnd, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
+Local oChildWnd, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 // Local aTabs := { "Monday","Tuesday","Wednesday","Thursday","Friday" }
 Local oCmd1, oCmd2, oCmd3
@@ -160,7 +160,7 @@ Local oCmd1, oCmd2, oCmd3
    
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif( nColor==Nil,Vcolor("0000FF"),nColor )
+        SIZE 90, 20 COLOR Iif(nColor==Nil,Vcolor("0000FF"),nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
 
@@ -273,7 +273,7 @@ Local oSay
    CreateArList( oBrw,aSample )
    oBrw:bColorSel    := 12507070  // 15149157449
 
-   oBmp := HBitmap():AddStandard( OBM_LFARROWI )
+   oBmp := HBitmap():AddStandard(OBM_LFARROWI)
    oBrw:aColumns[1]:aBitmaps := { ;
       { {|l|l}, oBmp } ;
    }
@@ -304,7 +304,7 @@ Return Nil
 STATIC FUNCTION BrwKey(oBrw, key)
 
    IF key == 32
-      oBrw:aArray[ oBrw:nCurrent, 1 ] := !oBrw:aArray[ oBrw:nCurrent, 1 ]
+      oBrw:aArray[oBrw:nCurrent, 1] := !oBrw:aArray[oBrw:nCurrent, 1]
       oBrw:RefreshLine()
    ENDIF
 
@@ -313,12 +313,12 @@ Return .T.
 FUNCTION FileOpen()
 
 Local oModDlg, oBrw
-Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
-Local fname := SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
+Local mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+Local fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 Local nId
 
    IF !Empty( fname )
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+      mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
       // use &fname new codepage RU866
       use &fname new
       nId := 111
@@ -330,7 +330,7 @@ Local nId
 
       MENU OF oModDlg
          MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont),oBrw:Refresh() )
-         MENUITEM "&Exit" ACTION EndDialog( oModDlg:handle )
+         MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 
       @ 0, 0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
@@ -352,18 +352,18 @@ Return Nil
 FUNCTION FileClose(oDlg)
 
    Local oBrw := oDlg:FindControl( 111 )
-   dbSelectArea( oBrw:alias )
+   dbSelectArea(oBrw:alias)
    dbCloseArea()
 Return .T.
 
 FUNCTION PrintDos()
 
-Local han := fcreate( "LPT1", 0 )
+Local han := fcreate("LPT1", 0)
   if han != -1
-     fwrite( han, Chr(10)+Chr(13)+"Example of dos printing ..."+Chr(10)+Chr(13) )
-     fwrite( han, "Line 2 ..."+Chr(10)+Chr(13) )
-     fwrite( han, "---------------------------"+Chr(10)+Chr(13)+Chr(12) )
-     fclose( han )
+     fwrite(han, Chr(10)+Chr(13)+"Example of dos printing ..."+Chr(10)+Chr(13))
+     fwrite(han, "Line 2 ..."+Chr(10)+Chr(13))
+     fwrite(han, "---------------------------"+Chr(10)+Chr(13)+Chr(12))
+     fclose(han)
   else
      hwg_MsgStop("Can't open printer port!")
   endif
@@ -386,9 +386,9 @@ Local oPrinter, oFont
    oPrinter:Box( 5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5 )
    oPrinter:SetTextColor( 2788990 )
    oPrinter:Say( "Windows printing first sample !", 50, 10, 165, 26,DT_CENTER,oFont  )
-   oPrinter:Line( 45, 30, 170, 30 )
-   oPrinter:Line( 45, 5, 45, 30 )
-   oPrinter:Line( 170, 5, 170, 30 )
+   oPrinter:Line(45, 30, 170, 30)
+   oPrinter:Line(45, 5, 45, 30)
+   oPrinter:Line(170, 5, 170, 30)
    oPrinter:Say( "----------", 50, 120, 150, 132,DT_CENTER  )
    oPrinter:Box( 50, 134, 160, 146 )
    oPrinter:Say( "End Of Report", 50, 135, 160, 146,DT_CENTER  )
@@ -398,9 +398,9 @@ Local oPrinter, oFont
    oPrinter:Box( 5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5 )
    oPrinter:SetTextColor( 2755990 )
    oPrinter:Say( "Printing second sample !", 50, 10, 185, 26,DT_CENTER,oFont  )
-   oPrinter:Line( 45, 30, 170, 30 )
-   oPrinter:Line( 45, 5, 45, 30 )
-   oPrinter:Line( 170, 5, 170, 30 )
+   oPrinter:Line(45, 30, 170, 30)
+   oPrinter:Line(45, 5, 45, 30)
+   oPrinter:Line(170, 5, 170, 30)
    oPrinter:Say( "----------", 50, 120, 150, 132,DT_CENTER  )
    oPrinter:Box( 50, 134, 160, 146 )
    oPrinter:Say( "End Of Report", 50, 135, 160, 146,DT_CENTER  )
@@ -414,7 +414,7 @@ Return Nil
 FUNCTION DialogFromPrg(o)
 
 Local cTitle := "Dialog from prg", cText := "Input something"
-Local oModDlg, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
+Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 // Local aTabs := { "Monday","Tuesday","Wednesday","Thursday","Friday" }
 
@@ -431,7 +431,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif( nColor==Nil,Vcolor("0000FF"),nColor )
+        SIZE 90, 20 COLOR Iif(nColor==Nil,Vcolor("0000FF"),nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
 

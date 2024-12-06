@@ -133,7 +133,7 @@ Local aSelect:=SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
 if len(aSelect) ==0
    return Nil
 endif
-if LEN(oBrow:aArray) == 1 .and. obrow:aArray[1]=="" 
+if LEN(oBrow:aArray) == 1 .AND. obrow:aArray[1]=="" 
    obrow:aArray := {}
 endif
 For i:=1 to Len(oBrow:aArray)
@@ -219,7 +219,7 @@ Local oFolderFile:=SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 if empty(oFolderFile); Return Nil; Endif
 if file(oFolderFile)
    If(hwg_MsgYesNo("File "+oFolderFile+" EXIT ..Replace?"))
-     Erase( oFolderFile )
+     Erase(oFolderFile)
    Else
      hwg_MsgInfo("No file SAVED.")
      Return Nil
@@ -639,7 +639,7 @@ for i:=1 to Len(voCFiles)
        fwrite(oArq,oName+".obj : "+voCFiles[i]+CRF)
        fwrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** "+CRF)
 
-    endif   
+    endif
 Next
 Endif
  

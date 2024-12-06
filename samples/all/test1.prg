@@ -56,9 +56,9 @@ Local upd := 12, d1 := Date()+1
 
    @  10, 240 BUTTON "Ok" ID IDOK  SIZE 50, 32
    @  70, 240 BUTTON "Cancel" ID IDCANCEL  SIZE 50, 32
-   @ 130, 240 BUTTON "Enable/Disable" SIZE 100, 32 ON CLICK {|| IIF( oGet:IsEnabled(), oGet:Disable(), oGet:Enable() )}
+   @ 130, 240 BUTTON "Enable/Disable" SIZE 100, 32 ON CLICK {|| IIF(oGet:IsEnabled(), oGet:Disable(), oGet:Enable())}
    @ 240, 240 BUTTON "SetFocus" SIZE 70, 32 ON CLICK {|| oGet:Setfocus() }
-   @ 320, 240 BUTTON "Enabled ?" SIZE 70, 32 ON CLICK {|| IIF( oGet:IsEnabled(), hwg_MsgInfo("Yes"), hwg_MsgStop("No")) }
+   @ 320, 240 BUTTON "Enabled ?" SIZE 70, 32 ON CLICK {|| IIF(oGet:IsEnabled(), hwg_MsgInfo("Yes"), hwg_MsgStop("No")) }
    @ 400, 240 BUTTON "Close" SIZE 50, 32 ON CLICK {|| oModDlg:Close() }
 
    @  10, 280 BUTTON "WinDir" SIZE 100, 32 ON CLICK {|| hwg_MsgInfo(Getwindowsdir()) }

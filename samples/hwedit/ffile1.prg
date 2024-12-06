@@ -77,21 +77,21 @@ CLASS HBMake_FileBase FROM FileMan
    METHOD FOPEN()   // This opens the specified file
    METHOD closefile()                   // This closes the specified file
    METHOD fskip( n )                    // Moves the byte pointer within the file
-   METHOD FWRITE( c )                   // Write passed data to file w/ len() == nSkipLenght
+   METHOD FWRITE(c)                   // Write passed data to file w/ len() == nSkipLenght
    METHOD retrieve()                    // Returns the contents of the file at current pos
    METHOD fgoTop()  // Move the byte pointer to the top of the file
    METHOD fgoBottom()                   // Move the byte pointer to the bottom of the file
    METHOD fgoto()   // Moves the byte pointer to a specific location
    METHOD create()
-   message fappend METHOD fappendByte( cByte )
+   message fappend METHOD fappendByte(cByte)
    message BuffGet METHOD BufferGet( lDirection )
    METHOD SKIP( nRecord )               // Moves the byte pointer within the file
-   METHOD WRITE( cChar )                // Write passed data to file w/ len() == nSkipLenght
+   METHOD WRITE(cChar)                // Write passed data to file w/ len() == nSkipLenght
    METHOD goTop()   // Move the byte pointer to the top of the file
    METHOD goBottom()                    // Move the byte pointer to the bottom of the file
    METHOD GOTO( nValue )                // Moves the byte pointer to a specific location
    METHOD OPEN()
-   message append METHOD appendLine( cline )
+   message append METHOD appendLine(cline)
 
 ENDCLASS
 
@@ -183,7 +183,7 @@ METHOD fgoBottom() CLASS HBMake_FileBase
 METHOD closefile() CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
-      FCLOSE( ::nDosHandle )
+      FCLOSE(::nDosHandle)
       ::nLastDosMessage := FERROR()
       ::delItem( ::nDosHandle )
       ::lAtTop    := ::lAtBottom := pFALSE
@@ -204,8 +204,8 @@ METHOD retrieve() CLASS HBMake_FileBase
    LOCAL nMoved        // as int
 
    IF ::noDosError() .AND. ::nDosHandle > 0
-      cReturn           := SPACE( ::nSkipLength )
-      nMoved            := FREAD( ::nDosHandle, @cReturn, ::nSkipLength )
+      cReturn           := SPACE(::nSkipLength)
+      nMoved            := FREAD(::nDosHandle, @cReturn, ::nSkipLength)
       ::nLastDosMessage := FERROR()
       FSEEK( ::nDosHandle, - ( nMoved ), 1 )                // Re-position the pointer
    ENDIF
@@ -218,11 +218,11 @@ METHOD retrieve() CLASS HBMake_FileBase
    Purpose: To write out to the contents of the file the value in the
             parameter <cChar>.
 */
-METHOD FWRITE( cChar ) CLASS HBMake_FileBase
+METHOD FWRITE(cChar) CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
       IF cChar IS pCHARACTER
-         FWRITE( ::nDosHandle, cChar, 1 )
+         FWRITE(::nDosHandle, cChar, 1)
          ::nLastDosMessage := FERROR()
          IF ::noDosError()
             FSEEK( ::nDosHandle, ::nPosition, 0 )           // Re-position the pointer
@@ -274,10 +274,10 @@ METHOD Create() CLASS HBMake_FileBase
    LOCAL nFile         // as int
 
    IF ::noDosError()
-      nFile             := FCREATE( ::cName, ::nCreateMode )
+      nFile             := FCREATE(::cName, ::nCreateMode)
       ::nLastDosMessage := FERROR()
       IF ::noDosError()                 // No Error
-         FCLOSE( nFile )                // Close the file
+         FCLOSE(nFile)                // Close the file
          ::fopen()  // Re-open the file
       ENDIF
    ENDIF
@@ -292,7 +292,7 @@ METHOD Create() CLASS HBMake_FileBase
 METHOD FOPEN() CLASS HBMake_FileBase
 
    IF ::noDosError()
-      ::nDosHandle :=::openfile( ::cName, ::nOpenMode )
+      ::nDosHandle :=::openfile(::cName, ::nOpenMode)
       ::nEndOfFile := FSEEK( ::nDosHandle, 0, 2 )
       ::nPosition  := FSEEK( ::nDosHandle, 0, 0 )
       ::lAtTop     := pTRUE
@@ -301,14 +301,14 @@ METHOD FOPEN() CLASS HBMake_FileBase
 
 RETURN ( self )
 
-METHOD fappendByte( cByte ) CLASS HBMake_FileBase
+METHOD fappendByte(cByte) CLASS HBMake_FileBase
 
    DEFAULT cByte TO ""
 
    IF !EMPTY( cByte )                   // Valid line
       IF ::noDosError() .AND. ::nDosHandle > 0              // No error
          FSEEK( ::nDosHandle, 0, 2 )
-         FWRITE( ::nDosHandle, cByte, 1 )
+         FWRITE(::nDosHandle, cByte, 1)
          ::nEndOfFile  := FSEEK( ::nDosHandle, 0, 2 )
          ::nPosition   := FSEEK( ::nDosHandle, - ( LEN( cByte ) ), 2 )
          ::nSkipLength := LEN( cByte )
@@ -321,7 +321,7 @@ RETURN ( self )
 // End of File: FFile1.prg
 METHOD OPEN() CLASS HBMake_FileBase
 
-   Self:nDosHandle := Self:openfile( ::cName, ::nOpenMode )
+   Self:nDosHandle := Self:openfile(::cName, ::nOpenMode)
    ::nEndOfFile    := FSEEK( Self:nDosHandle, 0, 2 )
    FSEEK( Self:nDosHandle, 0, 0 )
    ::nSkipLength := Self:Buffget()
@@ -357,15 +357,15 @@ METHOD goBottom() CLASS HBMake_FileBase
    IF Self:noDosError() .AND. Self:nDosHandle > 0
       ::fgobottom()
       // Now, back off from the end one line length and set the marker
-      cBuffer := SPACE( pBUFFER_LENGTH )
+      cBuffer := SPACE(pBUFFER_LENGTH)
       FSEEK( Self:nDosHandle, - ( pBUFFER_LENGTH ), 2 )
-      FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
+      FREAD(Self:nDosHandle, @cBuffer, pBUFFER_LENGTH)
       IF RIGHT( cBuffer, 2 ) == pCRLF   // We need to remove this extra one!
          cBuffer   := LEFT( cBuffer, LEN( cBuffer ) - 2 )
          lWithCRLF := pTRUE
       ENDIF
       cBuffer       := SUBSTR( cBuffer, RAT( pCRLF, cBuffer ) + 2 )
-      ::nSkipLength := LEN( cBuffer ) + IF( lWithCRLF, 2, 0 )
+      ::nSkipLength := LEN( cBuffer ) + IIF(lWithCRLF, 2, 0)
       ::nposition   := FSEEK( Self:nDosHandle, - ( LEN( cBuffer ) ), 2 )
       IF lWithCRLF
          ::nposition := FSEEK( Self:nDosHandle, - 2, 1 )
@@ -386,7 +386,7 @@ METHOD goBottom() CLASS HBMake_FileBase
 METHOD FCLOSE() CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
-      FCLOSE( Self:nDosHandle )
+      FCLOSE(Self:nDosHandle)
       Self:nLastDosMessage := FERROR()
       Self:delItem( Self:nDosHandle )
       Self:lAtTop    := Self:lAtBottom := pFALSE
@@ -401,14 +401,14 @@ METHOD FCLOSE() CLASS HBMake_FileBase
    Purpose: To write out to the contents of the file the value in the
             parameter <cChar>.
 */
-METHOD WRITE( cChar ) CLASS HBMake_FileBase
+METHOD WRITE(cChar) CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
       IF cChar IS pCHARACTER
          IF cChar > Self:nSkipLength    // we are going to truncate for now...
-            FWRITE( Self:nDosHandle, cChar, Self:nSkipLength )
+            FWRITE(Self:nDosHandle, cChar, Self:nSkipLength)
          ELSE
-            FWRITE( Self:nDosHandle, cChar, LEN( cChar ) )
+            FWRITE(Self:nDosHandle, cChar, LEN( cChar ))
          ENDIF
          FSEEK( Self:nDosHandle, ::nposition, 0 )
          Self:nLastDosMessage := FERROR()
@@ -449,13 +449,13 @@ METHOD Buffget( lForward ) CLASS HBMake_FileBase
    IF !lForward
 
       nRead := FSEEK( Self:nDosHandle, ;
-                      - ( IF( ::nposition < pBUFFER_LENGTH, ;
+                      - ( IIF(::nposition < pBUFFER_LENGTH, ;
                       ::nposition, ;
-                      pBUFFER_LENGTH ) ), ;
+                      pBUFFER_LENGTH) ), ;
                       1 )               // rewind backwards
 
-      cBuffer := SPACE( ::nposition - nRead )
-      FREAD( Self:nDosHandle, @cBuffer, ( ::nposition - nRead ) )
+      cBuffer := SPACE(::nposition - nRead)
+      FREAD(Self:nDosHandle, @cBuffer, ( ::nposition - nRead ))
 
       IF RIGHT( cBuffer, 2 ) == pCRLF   // with line already
          cBuffer   := LEFT( cBuffer, LEN( cBuffer ) - 2 )
@@ -464,10 +464,10 @@ METHOD Buffget( lForward ) CLASS HBMake_FileBase
       nLocation := LEN( cBuffer ) - ( RAT( pCRLF, cBuffer ) )
 
    ELSE
-      cBuffer := SPACE( pBUFFER_LENGTH )
-      nRead   := FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
-      FSEEK( Self:nDosHandle, - ( IF( nRead < pBUFFER_LENGTH, nRead, ;
-             pBUFFER_LENGTH ) ), 1 )    // Rewind
+      cBuffer := SPACE(pBUFFER_LENGTH)
+      nRead   := FREAD(Self:nDosHandle, @cBuffer, pBUFFER_LENGTH)
+      FSEEK( Self:nDosHandle, - ( IIF(nRead < pBUFFER_LENGTH, nRead, ;
+             pBUFFER_LENGTH) ), 1 )    // Rewind
 
       // Now, parse the string. and file
 
@@ -485,14 +485,14 @@ METHOD Buffget( lForward ) CLASS HBMake_FileBase
 
    RETURN ( nLocation )
 */
-   /* Method:  appendLine( <cLine )
+   /* Method:  appendLine(<cLine>)
    Params:  <cLine>         Character line to append
    Returns: Self
    Purpose: To append a blank CRLF delimited line at the end of the file.
             If <cLine> is not passed or if it an empty line with 0 bytes
             in length, the function will not operate.
 */
-METHOD appendLine( cLine ) CLASS HBMake_FileBase
+METHOD appendLine(cLine) CLASS HBMake_FileBase
 
    DEFAULT cLine TO ""
 
@@ -502,7 +502,7 @@ METHOD appendLine( cLine ) CLASS HBMake_FileBase
             cLIne += pCRLF
          ENDIF
          FSEEK( Self:nDosHandle, 0, 2 )
-         FWRITE( Self:nDosHandle, cLine )
+         FWRITE(Self:nDosHandle, cLine)
          ::nEndOfFile  := FSEEK( Self:nDosHandle, 0, 2 )
          ::nposition   := FSEEK( Self:nDosHandle, - ( LEN( cLine ) ), 2 )
          ::nSkipLength := LEN( cLine )
@@ -571,8 +571,8 @@ METHOD GOTO( nValue ) CLASS HBMake_FileBase
          IF nValue > 0                  // o.k. so far
             FSEEK( Self:nDosHandle, 0, 0 )                  // start at the top
             WHILE lContinue
-               cBuffer   := SPACE( pBUFFER_LENGTH )
-               lContinue := ( FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH ) == ;
+               cBuffer   := SPACE(pBUFFER_LENGTH)
+               lContinue := ( FREAD(Self:nDosHandle, @cBuffer, pBUFFER_LENGTH) == ;
                               pBUFFER_LENGTH )
                cBuffer := cLine + cBuffer
                WHILE pCRLF $ cBuffer
@@ -614,13 +614,13 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
    IF !lForward
 
       nRead := FSEEK( Self:nDosHandle, ;
-                      - ( IF( ::nposition < pBUFFER_LENGTH, ;
+                      - ( IIF( ::nposition < pBUFFER_LENGTH, ;
                       ::nposition, ;
-                      pBUFFER_LENGTH ) ), ;
+                      pBUFFER_LENGTH) ), ;
                       1 )               // rewind backwards
 
-      cBuffer := SPACE( ::nposition - nRead )
-      FREAD( Self:nDosHandle, @cBuffer, ( ::nposition - nRead ) )
+      cBuffer := SPACE(::nposition - nRead)
+      FREAD(Self:nDosHandle, @cBuffer, ( ::nposition - nRead ))
 
       IF RIGHT( cBuffer, 2 ) == pCRLF   // with line already
          cBuffer   := LEFT( cBuffer, LEN( cBuffer ) - 2 )
@@ -629,10 +629,10 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
       nLocation := LEN( cBuffer ) - ( RAT( pCRLF, cBuffer ) )
 
    ELSE
-      cBuffer := SPACE( pBUFFER_LENGTH )
-      nRead   := FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
-      FSEEK( Self:nDosHandle, - ( IF( nRead < pBUFFER_LENGTH, nRead, ;
-             pBUFFER_LENGTH ) ), 1 )    // Rewind
+      cBuffer := SPACE(pBUFFER_LENGTH)
+      nRead   := FREAD(Self:nDosHandle, @cBuffer, pBUFFER_LENGTH)
+      FSEEK( Self:nDosHandle, - ( IIF(nRead < pBUFFER_LENGTH, nRead, ;
+             pBUFFER_LENGTH) ), 1 )    // Rewind
 
       // Now, parse the string. and file
 

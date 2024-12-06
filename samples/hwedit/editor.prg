@@ -29,7 +29,7 @@
 *****************
 FUNCTION Main()
 *****************
-local oPanel ,oIcon := HIcon():AddRESOURCE( "MAINICON" )
+local oPanel ,oIcon := HIcon():AddRESOURCE("MAINICON")
 public alterado:=.F.,;
        ID_COLORB:=8454143,;
        ID_COLORF:=0,;
@@ -43,7 +43,7 @@ private oMainWindow,;
         vText,;
         aTermMetr := { 800 },;
         auto:=5001,;
-        oIconchild := HIcon():AddFile( "prg.ico" ),;
+        oIconchild := HIcon():AddFile("prg.ico"),;
         form_panel,;
         cfontenome:='Courier New',;
         texto:=''
@@ -76,7 +76,7 @@ public ID_indioma:=8001,;
        m_site
 
 // carregando as variaveis de configuracoes
-if ! file('config.dat')
+if !file('config.dat')
      save all like ID_* to config.dat
 endif
 restore from config.dat additive
@@ -254,7 +254,7 @@ FUNCTION novo(tipo)
  WriteStatus(  HMainWIndow():GetMdiActive(), 3,'Novo Arquivo')
  WriteStatus( HMainWIndow():GetMdiActive(), 1,'Lin:      0')
  WriteStatus(  HMainWIndow():GetMdiActive(), 2,'Col:      0')
- SendMessage( oEdit&i:Handle, WM_ENABLE, 1, 0 )
+ SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus( oEdit&i:Handle )
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
  re_SetDefault( oEdit&i:handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
@@ -262,7 +262,7 @@ RETURN (.T.)
 *****************
 FUNCTION Texto()
 *****************
- local oIcone := HIcon():AddFile( "CHILD.ico" )
+ local oIcone := HIcon():AddFile("CHILD.ico")
  LOCAL cBuffer   := ''
  LOCAL NPOS      := 0
  LOCAL nlenpos,;
@@ -284,7 +284,7 @@ FUNCTION Texto()
  oCaracter:=0
  r_linha:=0
  linhas:={}
- while ! ft_FEOF()
+ while !ft_FEOF()
       linha :=allTrim(Substr( FT_FReadLn( @s_lEof ), 1 ) )
       //
       if len(linha) # 0
@@ -297,9 +297,9 @@ FUNCTION Texto()
              if subs(linha,f, 1)= ' '
                 for g = f+1 to len(linha)
                        oCaracter++
-                    if subs(linha,g, 1)<> ' ' .and. subs(linha,g, 1)<> '(' .and. ! empty(subs(linha,g, 1))
+                    if subs(linha,g, 1)<> ' ' .AND. subs(linha,g, 1)<> '(' .AND. !empty(subs(linha,g, 1))
                         fun:=fun+subs(linha,g, 1)
-                    elseif  g = len(linha)
+                    elseif g = len(linha)
                        aadd(oFunc,fun)
                        aadd(funcoes,rd_lin)
                        aadd(oLinha,{rd_lin,r_linha})
@@ -317,7 +317,7 @@ FUNCTION Texto()
          endif
       endif
       rd_lin++
-      FT_FSKIP( )
+      FT_FSKIP()
  enddo
 //
  alterado:=.F.
@@ -341,7 +341,7 @@ FUNCTION Texto()
  WriteStatus( o&I, 3,vText)
  WriteStatus( o&I, 1,'Lin:      0')
  WriteStatus( o&I, 2,'Col:      0')
- SendMessage( oEdit&i:Handle, WM_ENABLE, 1, 0 )
+ SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle )
  // colocando cores nas funcoes
  re_SetDefault( oEdit&i:handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
@@ -362,14 +362,14 @@ FUNCTION funcao()
 *******************
 
 if maxi
-  //SendMessage( oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0 )
+  //SendMessage(oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
   oMainWindow:Maximize()
 endif
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
     dats:=dtoc(date())
     WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
     WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
-    if ! set(_SET_INSERT )
+    if !set(_SET_INSERT )
        strinsert:='INSERT ON '
     else
         strinsert:='INSERT OFF '
@@ -421,10 +421,10 @@ Local oParent, nPos
  endif
  IF msg == WM_KEYUP
      nVirtCode := wParam
-     if  wParam == 45
-          Set( _SET_INSERT, ! Set( _SET_INSERT ) )
+     if wParam == 45
+          Set( _SET_INSERT, !Set( _SET_INSERT ) )
      ENDIF
-     if ! set(_SET_INSERT )
+     if !set(_SET_INSERT )
         strinsert:='INSERT ON '
      else
         strinsert:='INSERT OFF '
@@ -463,7 +463,7 @@ Local oParent, nPos
             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
             hwg_SetFocus(aControls[hWnd]:Handle )
              //
-             pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
+             pos := SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
              pos1 := Loword(pos)
              //
              //hwg_MsgInfo(str(pos1))
@@ -508,7 +508,7 @@ FUNCTION Pesquisa()
 local pesq,get01
 local flags:=1
 Local hWnd, oWindow, aControls, i
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      //
@@ -521,12 +521,12 @@ Local hWnd, oWindow, aControls, i
      if pesq:lResult
          IF oWindow != Nil
              aControls := oWindow
-             SendMessage( aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus( aControls[hWnd]:Handle )
              //
              SendMessage(aControls[hWnd]:Handle, 176, 2, alltrim(get01))
              //
-             SendMessage( aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus( aControls[hWnd]:Handle )
          endif
      endif
@@ -566,7 +566,7 @@ FUNCTION Vai(oEdit)
 local pesq,get01
 local flags:=1
 Local hWnd, oWindow, aControls, i
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      INIT DIALOG pesq clipper TITLE  "Linha" ;
@@ -613,16 +613,16 @@ FUNCTION Salvar_Projeto(oOpcao)
 Local fName, fTexto, fSalve
 Local hWnd, oWindow, aControls, i
 local cfile :="temp"
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      //
      
-    nHandle =FCREATE( cFile, FC_NORMAL )
-    IF( nHandle > 0 )
-//      FWRITE( nHandle, EditorGetText(oEdit) )
+    nHandle =FCREATE(cFile, FC_NORMAL)
+    IF (nHandle > 0)
+//      FWRITE(nHandle, EditorGetText(oEdit))
 
-        FCLOSE( nHandle )
+        FCLOSE(nHandle)
 
      IF oWindow != Nil
         aControls := oWindow
@@ -646,7 +646,7 @@ Return Nil
 FUNCTION buscafunc(linha)
 *********************
 Local hWnd, oWindow, aControls, i
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      IF oWindow != Nil
@@ -668,7 +668,7 @@ return (.T.)
 FUNCTION cor_fundo()
 *************************
 Local hWnd, oWindow, aControls, i
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
@@ -684,7 +684,7 @@ retu .T.
 FUNCTION cor_Fonte()
 *************************
 Local hWnd, oWindow, aControls, i
- if  HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      aControls := oWindow

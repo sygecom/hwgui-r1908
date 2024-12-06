@@ -14,7 +14,7 @@ FUNCTION Main()
    Local cIniFile:="HwGui.ini"
 
    //Create the inifile
-   if !file( cIniFile )
+   if !file(cIniFile)
 
       Hwg_WriteIni( 'Config', 'WallParer' , "No Paper", cIniFile )
       Hwg_WriteIni( 'Config', 'DirHwGUima', "C:\HwGUI" , cIniFile )

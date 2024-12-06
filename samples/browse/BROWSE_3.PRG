@@ -103,7 +103,7 @@ STATIC FUNCTION BrowseKey(oBr, key)
 
    LOCAL xFun
  
-   IF key == 112 //.and. lHelp == .T.      && f1
+   IF key == 112 // .AND. lHelp == .T.      && f1
       //D_HELP()
    ELSE
      hwg_MsgInfo(Str(key))

@@ -249,7 +249,7 @@ LOCAL Estrutura := {}
 LOCAL i := 1
 LOCAL nIncrement := 10
 
-  IF ! FILE("TSTBRW.DBF")
+  IF !FILE("TSTBRW.DBF")
      AADD(Estrutura, {"FIELD1", "N", 10, 02})
      AADD(Estrutura, {"FIELD2", "C", 11, 00})
      AADD(Estrutura, {"FIELD3", "D", 08, 00})

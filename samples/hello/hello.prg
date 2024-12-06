@@ -30,7 +30,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
          STYLE TCS_FIXEDWIDTH+TCS_FORCELABELLEFT  ;
          ON CHANGE {|o,n|ChangeTab(o,oGetTab,n)}
    // @ 20, 60 TAB oTab ITEMS aTabs SIZE 90, 100 STYLE TCS_FIXEDWIDTH+TCS_VERTICAL+TCS_FORCELABELLEFT+WS_CLIPSIBLINGS  // +TCS_RIGHT
-   SetTabSize( oTab:handle, 20, 20 )
+   SetTabSize(oTab:handle, 20, 20)
    @ 10, 30 RICHEDIT oGetTab TEXT "" OF oTab SIZE 120, 60 ;
           STYLE ES_MULTILINE
 
@@ -38,11 +38,11 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
    @ 270, 60 TREE oTree SIZE 140, 100 EDITABLE
 
-   oTree:AddNode( "First" )
-   oTree:AddNode( "Second" )
-   oItem := oTree:AddNode( "Third" )
-   oItem:AddNode( "Third-1" )
-   oTree:AddNode( "Forth" )
+   oTree:AddNode("First")
+   oTree:AddNode("Second")
+   oItem := oTree:AddNode("Third")
+   oItem:AddNode("Third-1")
+   oTree:AddNode("Forth")
 
 
    @ 100, 180 BUTTON "Close"  SIZE 150, 30  ON CLICK {||EndWindow()}
@@ -58,7 +58,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
          MENUITEM "Info" ACTION hwg_MsgTemp("")
       ENDMENU
       MENU TITLE "Third"
-         MENUITEM "Wchoice" ACTION Wchoice( acho,"Select",,,,, 15132390,,VColor( "008000" ) )
+         MENUITEM "Wchoice" ACTION Wchoice(acho,"Select",,,,, 15132390,,VColor( "008000" ))
          MENUITEM "SelectFolder" ACTION hwg_MsgInfo( SelectFolder("!!!") )
          MENU TITLE "Submenu"
             MENUITEM "ShellExecute" ACTION (ShellExecute("d:\temp\podst.doc"),hwg_MsgInfo(str(oMainWindow:handle)))

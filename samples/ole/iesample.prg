@@ -44,12 +44,12 @@ Return
 
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
-Local mypath := "\" + Curdir() + Iif( Empty( Curdir() ), "", "\" )
-Local fname := SelectFile( "HTML files", "*.htm;*.html", mypath )
+Local mypath := "\" + Curdir() + Iif(Empty( Curdir() ), "", "\")
+Local fname := SelectFile("HTML files", "*.htm;*.html", mypath)
 
    IF !Empty( fname )
       oEdit:SetText( fname )
-      oIE:DisplayPage( fname )
+      oIE:DisplayPage(fname)
    ENDIF
 
 Return
@@ -64,6 +64,6 @@ Local cUrl := "http://www.google.com/search?q=", cItem
          cUrl += '+' + cItem
       ENDDO
       oEdit:SetText( cUrl )
-      oIE:DisplayPage( cUrl )
+      oIE:DisplayPage(cUrl)
    ENDIF
 Return Nil

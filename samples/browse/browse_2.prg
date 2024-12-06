@@ -103,8 +103,8 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
             aHide   To {}
 
 
-    ASize( aAction, 10 )
-    ASize( aHide, 10 )
+    ASize(aAction, 10)
+    ASize(aHide, 10)
 
 
 
@@ -113,7 +113,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_first" FROM RESOURCE  TRANSPARENT;
                   TOOLTIP "First Record" ;
-                  ON CLICK iif( Empty(aAction[1]), {|| oCtrl:Top() }, aAction[1] )
+                  ON CLICK iif(Empty(aAction[1]), {|| oCtrl:Top() }, aAction[1])
 
         nLeft += 24
 
@@ -126,7 +126,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_prior" FROM RESOURCE TRANSPARENT;
                   TOOLTIP "Prior" ;
-                  ON CLICK iif( Empty(aAction[2]), {|| oCtrl:LineUp() }, aAction[2] )
+                  ON CLICK iif(Empty(aAction[2]), {|| oCtrl:LineUp() }, aAction[2])
 
         nLeft += 24
 
@@ -139,7 +139,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_next" FROM RESOURCE TRANSPARENT;
                   TOOLTIP "Next" ;
-                  ON CLICK iif( Empty(aAction[3]), {|| oCtrl:LineDown() }, aAction[3] )
+                  ON CLICK iif(Empty(aAction[3]), {|| oCtrl:LineDown() }, aAction[3])
 
         nLeft += 24
 
@@ -152,7 +152,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_last" FROM RESOURCE TRANSPARENT;
                   TOOLTIP "Last Record" ;
-                  ON CLICK iif( Empty(aAction[4]), {|| oCtrl:Bottom() }, aAction[4] )
+                  ON CLICK iif(Empty(aAction[4]), {|| oCtrl:Bottom() }, aAction[4])
 
         nLeft += 24
 
@@ -165,7 +165,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_append" FROM RESOURCE TRANSPARENT;
                   TOOLTIP "New" ;
-                  ON CLICK iif( Empty(aAction[5]), {|| oCtrl:Append() }, aAction[5] )
+                  ON CLICK iif(Empty(aAction[5]), {|| oCtrl:Append() }, aAction[5])
 
         nLeft += 24
 
@@ -178,7 +178,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_delete" FROM RESOURCE TRANSPARENT ;
                   TOOLTIP "Delete" ;
-                  ON CLICK iif( Empty(aAction[6]), {|| IIF( hwg_MsgYesNo("Confirma exclusão ?", "Exclusão"), DBDelete(), NIL ), oCtrl:top(), oCtrl:refresh() }, aAction[6] )
+                  ON CLICK iif(Empty(aAction[6]), {|| IIF( hwg_MsgYesNo("Confirma exclusão ?", "Exclusão"), DBDelete(), NIL ), oCtrl:top(), oCtrl:refresh() }, aAction[6])
 
         nLeft += 24
 
@@ -191,7 +191,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_edit" FROM RESOURCE TRANSPARENT ;
                   TOOLTIP "Edit" ;
-                  ON CLICK iif( Empty(aAction[7]), {|| oCtrl:edit()}, aAction[7] )
+                  ON CLICK iif(Empty(aAction[7]), {|| oCtrl:edit()}, aAction[7])
 
         nLeft += 24
 
@@ -230,7 +230,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
         @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
                   BITMAP "t_refresh" FROM RESOURCE TRANSPARENT ;
                   TOOLTIP "Refresh" ;
-                  ON CLICK iif( Empty(aAction[10]), {|| oCtrl:refresh()}, aAction[10] )
+                  ON CLICK iif(Empty(aAction[10]), {|| oCtrl:refresh()}, aAction[10])
 
         nLeft += 24
 
@@ -240,14 +240,15 @@ Return Nil
 
 FUNCTION ReplaceIndex(oPos)
 
-if  ! oBrowse:lAppMode
-  hwg_MsgInfo("Key press in col "+str(oPos))
-  if oPos==1
-    Set Order to 1
-  Else
-    Set Order to 2
-  EndIf
-endif
-oBrowse:Refresh()
+   IF !oBrowse:lAppMode
+      hwg_MsgInfo("Key press in col " + Str(oPos))
+      IF oPos == 1
+         SET ORDER TO 1
+      ELSE
+         SET ORDER TO 2
+      ENDIF
+   ENDIF
 
-Return Nil
+   oBrowse:Refresh()
+
+RETURN NIL

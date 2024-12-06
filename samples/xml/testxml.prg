@@ -16,7 +16,7 @@ Local i, j, fname := ""
 Private oXmlDoc, lIniChanged := .F., nCurrentItem
 Private oMainWindow, oFont
 
-   oXmlDoc := HXMLDoc():Read( "testxml.xml" )
+   oXmlDoc := HXMLDoc():Read("testxml.xml")
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
@@ -59,9 +59,9 @@ Local cName, cInfo
 
    IF nItem > 0
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
-      cName := oXmlNode:GetAttribute( "name" )
+      cName := oXmlNode:GetAttribute("name")
       FOR i := 1 TO Len( oXmlNode:aItems )
-         IF Valtype( oXmlNode:aItems[i] ) == "C"
+         IF Valtype(oXmlNode:aItems[i]) == "C"
             cInfo := oXmlNode:aItems[i]
          ELSEIF oXmlNode:aItems[i]:title == "font"
             oItemFont := FontFromXML( oXmlNode:aItems[i] )
@@ -73,7 +73,7 @@ Local cName, cInfo
       oItemFont := oFont
    ENDIF
 
-   INIT DIALOG oDlg TITLE Iif( nItem==0,"New item","Change item" )  ;
+   INIT DIALOG oDlg TITLE Iif(nItem==0,"New item","Change item")  ;
    AT 210, 10  SIZE 300, 150  FONT oFont
 
    @ 20, 20 SAY "Name:" SIZE 60, 22
@@ -91,10 +91,10 @@ Local cName, cInfo
 
    IF oDlg:lResult .AND. !Empty(cName) .AND. !Empty(cInfo)
       IF nItem == 0
-         oXmlNode := oXmlDoc:aItems[1]:Add( HXMLNode():New( "item" ) )
-         oXmlNode:SetAttribute( "name",Trim(cName) )
-         oXmlNode:Add( Trim(cInfo) )
-         oXMLNode:Add( Font2XML( Iif( oFontNew!=Nil,oFontNew,oFont ) ) )
+         oXmlNode := oXmlDoc:aItems[1]:Add(HXMLNode():New( "item" ))
+         oXmlNode:SetAttribute("name",Trim(cName))
+         oXmlNode:Add(Trim(cInfo))
+         oXMLNode:Add(Font2XML( Iif(oFontNew!=Nil,oFontNew,oFont) ))
          lIniChanged := .T.
 
          aMenu := oMainWindow:menu[1, 1]
@@ -103,13 +103,13 @@ Local cName, cInfo
               &( "{||NewItem("+LTrim(Str(nId-1020, 2))+")}" ), Len(aMenu[1])-1 )
 
       ELSE
-         IF oXmlNode:GetAttribute( "name" ) != cName
-            oXmlNode:SetAttribute( "name", cName )
+         IF oXmlNode:GetAttribute("name") != cName
+            oXmlNode:SetAttribute("name", cName)
             lIniChanged := .T.
             SetMenuCaption( , 1020+nItem, cName )
          ENDIF
          FOR i := 1 TO Len( oXmlNode:aItems )
-            IF Valtype( oXmlNode:aItems[i] ) == "C"
+            IF Valtype(oXmlNode:aItems[i]) == "C"
                IF cInfo != oXmlNode:aItems[i]
                   oXmlNode:aItems[i] := cInfo
                   lIniChanged := .T.
@@ -128,12 +128,12 @@ Return Nil
 
 FUNCTION FontFromXML(oXmlNode)
 
-Local width  := oXmlNode:GetAttribute( "width" )
-Local height := oXmlNode:GetAttribute( "height" )
-Local weight := oXmlNode:GetAttribute( "weight" )
-Local charset := oXmlNode:GetAttribute( "charset" )
-Local ita   := oXmlNode:GetAttribute( "italic" )
-Local under := oXmlNode:GetAttribute( "underline" )
+Local width  := oXmlNode:GetAttribute("width")
+Local height := oXmlNode:GetAttribute("height")
+Local weight := oXmlNode:GetAttribute("weight")
+Local charset := oXmlNode:GetAttribute("charset")
+Local ita   := oXmlNode:GetAttribute("italic")
+Local under := oXmlNode:GetAttribute("underline")
 
   IF width != Nil
      width := Val( width )
@@ -154,28 +154,28 @@ Local under := oXmlNode:GetAttribute( "underline" )
      under := Val( under )
   ENDIF
 
-Return HFont():Add( oXmlNode:GetAttribute( "name" ),  ;
-                    width, height, weight, charset,   ;
-                    ita, under )
+Return HFont():Add(oXmlNode:GetAttribute("name"),  ;
+                   width, height, weight, charset,   ;
+                   ita, under)
 
 FUNCTION Font2XML(oFont)
 
 Local aAttr := {}
 
-   Aadd( aAttr, { "name",oFont:name } )
-   Aadd( aAttr, { "width",Ltrim(Str(oFont:width, 5)) } )
-   Aadd( aAttr, { "height",Ltrim(Str(oFont:height, 5)) } )
+   Aadd(aAttr, { "name",oFont:name })
+   Aadd(aAttr, { "width",Ltrim(Str(oFont:width, 5)) })
+   Aadd(aAttr, { "height",Ltrim(Str(oFont:height, 5)) })
    IF oFont:weight != 0
-      Aadd( aAttr, { "weight",Ltrim(Str(oFont:weight, 5)) } )
+      Aadd(aAttr, { "weight",Ltrim(Str(oFont:weight, 5)) })
    ENDIF
    IF oFont:charset != 0
-      Aadd( aAttr, { "charset",Ltrim(Str(oFont:charset, 5)) } )
+      Aadd(aAttr, { "charset",Ltrim(Str(oFont:charset, 5)) })
    ENDIF
    IF oFont:Italic != 0
-      Aadd( aAttr, { "italic",Ltrim(Str(oFont:Italic, 5)) } )
+      Aadd(aAttr, { "italic",Ltrim(Str(oFont:Italic, 5)) })
    ENDIF
    IF oFont:Underline != 0
-      Aadd( aAttr, { "underline",Ltrim(Str(oFont:Underline, 5)) } )
+      Aadd(aAttr, { "underline",Ltrim(Str(oFont:Underline, 5)) })
    ENDIF
 
 Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
@@ -183,7 +183,7 @@ Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 FUNCTION SaveOptions()
 
    IF lIniChanged
-      oXmlDoc:Save( "testxml.xml" )
+      oXmlDoc:Save("testxml.xml")
    ENDIF
    CLOSE ALL
 

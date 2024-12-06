@@ -50,7 +50,7 @@ Local cText := GetEditText( oEdit:oParent:handle, oEdit:id )
 
    oChar:Show()
    oChar:MoveTo( aTop[1]+20, aTop[2]+70 )
-   oChar:LanguageID := Iif( Asc(cText)>122,"&H0419","&H0409" )
+   oChar:LanguageID := Iif(Asc(cText)>122,"&H0419","&H0409")
    oChar:Speak( cText )
    oChar:Hide()
 Return Nil

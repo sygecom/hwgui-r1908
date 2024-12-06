@@ -40,7 +40,7 @@ FUNCTION CreateMdiChild()
  LOCAL  vCodigo := ""
 
 
-  IF  !EMPTY( [PDV] )
+  IF !EMPTY( [PDV] )
      IF HWindow():FindWindow( [PDV] ) != Nil
         BRINGTOTOP( HWindow():FindWindow( [PDV] ):handle )
         RETURN Nil

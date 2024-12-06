@@ -41,11 +41,11 @@ FUNCTION TestRtf()
 LOCAL cOutFile, oRtf, anchos, i
 LOCAL j, aMarca, lFormato := .F.
 
-   cOutFile := SaveFile( "*.rtf","RTF files( *.rtf )","*.rtf" )
+   cOutFile := SaveFile("*.rtf","RTF files( *.rtf )","*.rtf")
    IF Empty( cOutFile )
       Return Nil
    ENDIF
-   IF File( cOutFile ) .AND. !hwg_MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
+   IF File(cOutFile) .AND. !hwg_MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
       Return Nil
    ENDIF
 
@@ -54,7 +54,7 @@ LOCAL j, aMarca, lFormato := .F.
 
    cOutFile:=alltrim(cOutFile)
 
-   oRtf := SetupRTF( cOutFile)
+   oRtf := SetupRTF(cOutFile)
 
    // Metodos nuevos que se han introducido
 

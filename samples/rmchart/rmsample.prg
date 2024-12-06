@@ -108,7 +108,7 @@ Private oChart
                :DataString       := "30*15*40*35"
          END
    END
-   oChart:Draw2Clipboard( RMC_EMF )  // Copy in clipboard
+   oChart:Draw2Clipboard(RMC_EMF)  // Copy in clipboard
    ris = oChart:Draw(.T.)
    oChart:Enable()
    oChart:Show()

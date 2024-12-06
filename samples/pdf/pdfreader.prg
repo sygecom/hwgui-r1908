@@ -31,7 +31,7 @@ Private oPdf
 
    @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
 
-   opdf := ViewPdf( oPanel, "SAMPLE.PDF", 0, 0, 500, 366 )
+   opdf := ViewPdf(oPanel, "SAMPLE.PDF", 0, 0, 500, 366)
 
    ACTIVATE WINDOW oMainWnd
 

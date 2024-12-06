@@ -7,7 +7,7 @@
 FUNCTION pesquisaglobal()
 **************************
 LOCAL oDlgPesq,getpesq,ocomb,atu:=1
-local oIcon := HIcon():AddRESOURCE( "SEARCHICON" )
+local oIcon := HIcon():AddRESOURCE("SEARCHICON")
 local oDir:=directory(DiskName()+':\*.',"D", .T.) // pegando diretirio
 private rd_pesq:='',;
         diretorio :={},;
@@ -15,7 +15,7 @@ private rd_pesq:='',;
         get01
 //
 for f = 1 to len(oDir) // filtrando diretorios
-    if odir[f, 1]#'.' .and. odir[f, 1]#'..'
+    if odir[f, 1]#'.' .AND. odir[f, 1]#'..'
        aadd(diretorio,DiskName()+':\'+oDir[f, 1]+'\')
     endif
 next f
@@ -51,7 +51,7 @@ private arq_contem:={},;
         result:=''
 //
 for f:= 1 to len(arquivos) // filtrando arquivos
-    if arquivos[f, 1]#'.' .and. arquivos[f, 1]#'..'
+    if arquivos[f, 1]#'.' .AND. arquivos[f, 1]#'..'
        aadd(nom_arq,arquivos[f, 1])
     endif
 next f
@@ -67,7 +67,7 @@ for g := 1 to len(nom_arq)
   get01:refresh()
   //
   lin:=0
-  while ! FT_FEOF()
+  while !FT_FEOF()
      linha :=upper(Substr( FT_FReadLn( @s_lEof ), 1 ) )
      //
      texto:=upper(rd_text)

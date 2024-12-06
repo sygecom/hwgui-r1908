@@ -16,7 +16,7 @@
 #include "guilib.ch"
 #include "common.ch"
 
-#translate RGB( <nRed>, <nGreen>, <nBlue> ) => ( <nRed> + ( <nGreen> * 256 ) + ( <nBlue> * 65536 ) )
+#translate RGB(<nRed>, <nGreen>, <nBlue>) => ( <nRed> + ( <nGreen> * 256 ) + ( <nBlue> * 65536 ) )
 
 Static oMain, oForm, oFont, oGrid
 Static nCount := 50, conn, leof := .F.
@@ -103,10 +103,10 @@ FUNCTION OnDispInfo(o, x, y)
     Local result := '', i
 
 
-    if x > Lastrec() .and. ! lEof
+    if x > Lastrec() .AND. !lEof
         res := PQexec(conn, 'FETCH FORWARD 10 FROM cursor_1')
 
-        if ! ISCHARACTER(res)
+        if !ISCHARACTER(res)
 
             if PQLastrec(res) != 10
                 lEof := .T.
@@ -137,7 +137,7 @@ FUNCTION OnDispInfo(o, x, y)
         elseif y == 3
             result := descr
         end            
-    endif        
+    endif
     
 Return result
 
@@ -147,9 +147,9 @@ FUNCTION CriaBase()
             FErase('trash.dbf')
         END
                     
-        DBCreate( "trash.dbf", {{'code', 'N', 10, 0},;
-                                {'creation', 'D',  8, 0},;
-                                {'descr', 'C', 40, 0}} )
+        DBCreate("trash.dbf", {{'code', 'N', 10, 0},;
+                               {'creation', 'D',  8, 0},;
+                               {'descr', 'C', 40, 0}})
         
         USE trash                         
         

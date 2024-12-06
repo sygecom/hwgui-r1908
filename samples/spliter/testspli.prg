@@ -14,11 +14,11 @@ Local oMainWindow, oFont, oSplitV, oSplitH, oEdit1, oEdit2
 
    @ 20, 10 TREE oTree SIZE 140, 100
 
-   oTree:AddNode( "First" )
-   oTree:AddNode( "Second" )
-   oItem := oTree:AddNode( "Third" )
-   oItem:AddNode( "Third-1" )
-   oTree:AddNode( "Forth" )
+   oTree:AddNode("First")
+   oTree:AddNode("Second")
+   oItem := oTree:AddNode("Third")
+   oItem:AddNode("Third-1")
+   oTree:AddNode("Forth")
 
    @ 163, 10 EDITBOX oEdit1 CAPTION "Hello, World!"  SIZE 200, 100
 
