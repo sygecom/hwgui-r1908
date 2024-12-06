@@ -1,6 +1,8 @@
 #include "hwgui.ch"
 #include "tab.rh"
-func main
+
+FUNCTION Main()
+
 Local oDlg1,oDlg2,oDlg3,oTab
 Local aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
 Local oBrw1, oBrw2
@@ -33,11 +35,12 @@ oDlg1:lRouteCommand := .T.
    REDEFINE COMBOBOX aCombo ID 101
    REDEFINE BROWSE oBrw1 ARRAY ID 104
    REDEFINE BROWSE oBrw2 ARRAY ID 105
- 
+
    CreateArList( oBrw1,aSample1 )
    CreateArList( oBrw2,aSample2 )
   activate dialog oDlg1
-return nil
+
+RETURN NIL
 
 FUNCTION buildtabPages(oTab, aPage, aTitle)
 
@@ -49,4 +52,5 @@ for each n in aPage
    otab:endpage()
    n:oParent := nil
 next
-return .T.
+
+RETURN .T.

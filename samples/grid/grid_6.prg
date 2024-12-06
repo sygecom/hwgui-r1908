@@ -32,7 +32,7 @@ FUNCTION Main()
 
         ACTIVATE WINDOW oMain
 
-Return Nil
+RETURN NIL
 
 FUNCTION Test()
 
@@ -84,28 +84,28 @@ enddo
              @ 200, 395 button "LVS_SMALLICON" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_SMALLICON)}
              @ 300, 395 button "LVS_LIST" size 95, 25 on click  {|| LISTVIEW_SETVIEW(oGrid:handle,LVS_LIST)}
              @ 700, 395 BUTTON 'Close' SIZE 95, 25 ON CLICK {|| oForm:Close() }
-             
-        ACTIVATE DIALOG oForm 
-                
-Return Nil
+
+        ACTIVATE DIALOG oForm
+
+RETURN NIL
 
 FUNCTION OnKey(o, k)
 
 //    hwg_MsgInfo(str(k))
 
-return nil
+RETURN NIL
 
 FUNCTION OnPosChange(o, row)
 
 //    hwg_MsgInfo( str(row) )
 
-return nil
+RETURN NIL
 
 FUNCTION OnClick(o)
 
 //    hwg_MsgInfo( 'click' )
 
-return nil
+RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
-return 'Row: ' + ltrim(str(x)) + ' Col: ' + ltrim(str(y))
+RETURN 'Row: ' + ltrim(str(x)) + ' Col: ' + ltrim(str(y))

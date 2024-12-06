@@ -22,7 +22,8 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION OpenConfig()
 
@@ -45,4 +46,4 @@ Local e1 := "Xxxx"
 
    PropertySheet( GetActiveWindow(),{ aDlg1, aDlg2 }, "Sheet Example" )
 
-Return Nil
+RETURN NIL

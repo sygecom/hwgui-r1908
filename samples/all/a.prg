@@ -82,7 +82,7 @@ Private nColor, oBmp2
 
    ACTIVATE WINDOW oMainWindow MAXIMIZED
 
-return nil
+RETURN NIL
 
 FUNCTION CreateChildWindow()
 
@@ -136,7 +136,7 @@ Local e5 := 10320.54
 
    oChildWnd:Activate()
 
-Return Nil
+RETURN NIL
 
 FUNCTION MdiChildFromPrg(o)
 
@@ -199,8 +199,7 @@ Local oCmd1, oCmd2, oCmd3
    
    ACTIVATE WINDOW oChildWnd
  
-Return Nil
-
+RETURN NIL
 
 FUNCTION NoExit()
 
@@ -212,7 +211,8 @@ Local oDlg, oGet, vGet:="Dialog if no close in ENTER or EXIT"
    @ 20, 190  BUTTON "Ok" SIZE 100, 32;
    ON CLICK {|| oDlg:Close()} 
    oDlg:Activate()
-Return Nil
+
+RETURN NIL
 
 FUNCTION OpenAbout()
 
@@ -284,12 +284,12 @@ Local oSay
    ACTIVATE DIALOG oModDlg
    oIcon:Release()
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION About2()
 
    IF oBmp2 == Nil
-      Return
+      RETURN NIL
    ENDIF
 
    INIT DIALOG oModDlg TITLE "About2"   ;
@@ -299,7 +299,7 @@ STATIC FUNCTION About2()
 
    ACTIVATE DIALOG oModDlg
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION BrwKey(oBrw, key)
 
@@ -308,7 +308,7 @@ STATIC FUNCTION BrwKey(oBrw, key)
       oBrw:RefreshLine()
    ENDIF
 
-Return .T.
+RETURN .T.
 
 FUNCTION FileOpen()
 
@@ -347,14 +347,16 @@ Local nId
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
-Return Nil
+
+RETURN NIL
 
 FUNCTION FileClose(oDlg)
 
    Local oBrw := oDlg:FindControl( 111 )
    dbSelectArea(oBrw:alias)
    dbCloseArea()
-Return .T.
+
+RETURN .T.
 
 FUNCTION PrintDos()
 
@@ -367,7 +369,8 @@ Local han := fcreate("LPT1", 0)
   else
      hwg_MsgStop("Can't open printer port!")
   endif
-return nil
+
+RETURN NIL
 
 FUNCTION PrnTest()
 
@@ -375,7 +378,7 @@ Local oPrinter, oFont
 
    INIT PRINTER oPrinter
    IF oPrinter == Nil
-      Return Nil
+      RETURN NIL
    ENDIF
 
    oFont := oPrinter:AddFont( "Times New Roman", 10 )
@@ -409,7 +412,7 @@ Local oPrinter, oFont
    oPrinter:Preview()
    oPrinter:End()
 
-Return Nil
+RETURN NIL
 
 FUNCTION DialogFromPrg(o)
 
@@ -467,7 +470,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
-Return Nil
+RETURN NIL
 
 #define DTM_SETFORMAT       4101
 
@@ -479,7 +482,8 @@ Static lFirst := .F., o
       lFirst := .T.
    ENDIF
    SendMessage(o:handle, DTM_SETFORMAT, 0, "dd':'MM':'yyyy")
-Return Nil
+
+RETURN NIL
 
 FUNCTION Sendemail(endereco)
 
@@ -518,7 +522,7 @@ END PAGE of oTab
 
 ACTIVATE DIALOG oDlg
 
-return nil
+RETURN NIL
 
 FUNCTION ActiveTopMost(nHandle, lActive)
     
@@ -528,8 +532,7 @@ FUNCTION ActiveTopMost(nHandle, lActive)
        lSucess := RemoveTopMost(nHandle) // Remove TopMost
     endif
     
-    RETURN lSucess
-
+RETURN lSucess
 
 FUNCTION TestProgres()
 
@@ -560,8 +563,8 @@ Do while ct<1001
    ostatus:step()
    ++ct
 EndDo
-Return Nil
 
+RETURN NIL
 
 FUNCTION RRectangle()
 
@@ -578,5 +581,4 @@ INIT DIALOG oDlg TITLE "Sample HRect"    ;
 
    oDlg:Activate()
 
-return nil
-
+RETURN NIL

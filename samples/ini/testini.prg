@@ -32,7 +32,8 @@ FUNCTION Main()
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION ReadIni()
 
@@ -42,4 +43,4 @@ hwg_MsgInfo( Hwg_GetIni( 'Config', 'WallParer' ,, cIniFile ) )
 hwg_MsgInfo( Hwg_GetIni( 'Config', 'DirHwGUima',, cIniFile ) )
 hwg_MsgInfo( Hwg_GetIni( 'Print',  'Spoll'     ,, cIniFile ) )
 
-Return Nil
+RETURN NIL

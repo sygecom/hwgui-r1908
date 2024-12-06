@@ -1,7 +1,7 @@
 /*
  * $Id: browse_2.prg 1831 2012-01-20 11:49:21Z LFBASSO $
  */
- 
+
 #include "windows.ch"
 #include "guilib.ch"
 #include "common.ch"
@@ -11,9 +11,9 @@ Static oBrowse
 FUNCTION Main()
 
         Local oMain
-        
+
         CreateDB()
-        
+
         INIT WINDOW oMain MAIN TITLE "Browse Example - Database - Delphi Style" ;
              AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -24,7 +24,8 @@ FUNCTION Main()
                 ENDMENU
 
         ACTIVATE WINDOW oMain
-Return Nil
+
+RETURN NIL
 
 FUNCTION BrowseTest_2()
 
@@ -57,7 +58,8 @@ FUNCTION BrowseTest_2()
 
 
         ACTIVATE DIALOG oForm
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION CreateDB()
 
@@ -93,11 +95,10 @@ STATIC FUNCTION CreateDB()
     Next
 
     DBGotop()
-Return Nil
+
+RETURN NIL
 
 FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
-
-
 
     Default aAction To {},;
             aHide   To {}
@@ -236,7 +237,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
     endif
 
-Return Nil
+RETURN NIL
 
 FUNCTION ReplaceIndex(oPos)
 

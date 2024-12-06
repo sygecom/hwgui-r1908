@@ -71,7 +71,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
         BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0, 4, 0, 0
    @ 402, 3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
         SIZE 80, 40 FLAT ;
-        TEXT "Exit" FONT oFont COORDINATES 0, 20, 0, 0 ; 
+        TEXT "Exit" FONT oFont COORDINATES 0, 20, 0, 0 ;
         BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0, 4, 0, 0
 
    @ 0, 0 PANEL oPanelE OF oMainWindow SIZE 0, 24 ON SIZE {||.T.}
@@ -108,7 +108,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
 
    WriteHistory( "qhistory.txt" )
 
-Return Nil
+RETURN NIL
 
 FUNCTION About()
 
@@ -121,7 +121,8 @@ Local oModDlg, oFont
        FLAT TEXT "Close" COLOR Vcolor("0000FF") FONT oFont
 
    oModDlg:Activate()
-Return Nil
+
+RETURN NIL
 
 FUNCTION AboutDraw()
 
@@ -131,7 +132,8 @@ Local hDC
    hDC := BeginPaint( getmodalhandle(), pps )
    DrawBitmap( hDC, hBitmap,, 0, 0 )
    EndPaint( getmodalhandle(), pps )
-Return Nil
+
+RETURN NIL
 
 FUNCTION DataBases()
 
@@ -140,7 +142,7 @@ Local aBases, nChoic
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+         RETURN .F.
       ENDIF
    ENDIF
    aBases := sqlListDB(connHandle)
@@ -155,7 +157,7 @@ Local aBases, nChoic
       ENDIF
    ENDIF
 
-Return Nil
+RETURN NIL
 
 FUNCTION Tables()
 
@@ -165,13 +167,13 @@ Local cTable
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+         RETURN .F.
       ENDIF
    ENDIF
    aTables := sqlListTbl( connHandle )
    IF Empty( aTables )
       hwg_MsgInfo( "No tables !" )
-      Return .F.
+      RETURN .F.
    ENDIF
 
    nChoic := WChoice(aTables,cDataBase+"  tables", 50, 50)
@@ -180,7 +182,7 @@ Local cTable
       execSQL( "SHOW COLUMNS FROM " + cTable )
    ENDIF
 
-Return Nil
+RETURN NIL
 
 FUNCTION Connect()
 
@@ -192,7 +194,8 @@ Local aModDlg
           ON 0,IDCANCEL ACTION {|| EndDialog(getmodalhandle())}
 
    aModDlg:Activate()
-Return Nil
+
+RETURN NIL
 
 FUNCTION InitConnect()
 
@@ -207,7 +210,8 @@ Local hDlg := getmodalhandle()
    ELSE
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
    ENDIF
-Return .F.
+
+RETURN .F.
 
 FUNCTION EndConnect()
 
@@ -249,14 +253,15 @@ Local hDlg := getmodalhandle()
       EndDialog(hDlg)
       hwg_SetFocus( oEdit:handle )
    ENDIF
-Return
+
+RETURN NIL
 
 FUNCTION ResizeEditQ(nWidth, nHeight)
 
    MoveWindow( oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95 )
    MoveWindow( oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95 )
 
-Return Nil
+RETURN NIL
 
 FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 
@@ -265,7 +270,8 @@ Local aRect, i, nHbusy := oMainWindow:aOffset[4]
    aRect := GetClientRect( oEdit:handle )
    nHbusy += aRect[4]
    MoveWindow( oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8 )
-Return Nil
+
+RETURN NIL
 
 FUNCTION Execute()
 
@@ -273,7 +279,7 @@ Local cQuery := Ltrim( oEdit:GetText() )
 Local arScr, nError, nLineEr
 
    IF Empty( cQuery )
-      Return .F.
+      RETURN .F.
    ENDIF
    IF Left( cQuery, 2 ) == "//"
       IF ( arScr := RdScript( ,cQuery ) ) <> Nil
@@ -286,7 +292,7 @@ Local arScr, nError, nLineEr
       execSQL( cQuery )
    ENDIF
 
-Return .T.
+RETURN .T.
 
 FUNCTION execSQL(cQuery)
 
@@ -295,7 +301,7 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+         RETURN .F.
       ENDIF
    ENDIF
    IF ( res := sqlQuery( connHandle, cQuery) ) != 0
@@ -333,7 +339,8 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
          ENDIF
       ENDIF
    ENDIF
-Return res == 0
+
+RETURN res == 0
 
 FUNCTION sqlBrowse(queHandle)
 
@@ -341,7 +348,7 @@ Local aQueRows, i, j, vartmp, af := {}
    nNumRows := sqlNRows( queHandle )
    WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows, 5 ) + " rows" )
    IF nNumRows == 0
-      Return Nil
+      RETURN NIL
    ENDIF
    oBrw:InitBrw()
    oBrw:active := .T.
@@ -379,12 +386,13 @@ Local aQueRows, i, j, vartmp, af := {}
    oBrw:bcolorSel := VColor( "800080" )
    oBrw:ofont      := oBrwFont
    RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
-Return Nil
+
+RETURN NIL
 
 FUNCTION BrowHistory()
 
    IF nHistCurr == 0
-      Return Nil
+      RETURN NIL
    ENDIF
    oBrw:active := .T.
    oBrw:InitBrw()
@@ -396,7 +404,7 @@ FUNCTION BrowHistory()
    oBrw:bEnter := {|h,o|GetFromHistory(h,o)}
    RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION GetFromHistory()
 
@@ -411,7 +419,8 @@ Local cQuery := "", i := oBrw:nCurrent
       oEdit:SetText( cQuery )
       hwg_SetFocus( oEdit:handle )
    ENDIF
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION ReadHistory(fname)
 
@@ -443,7 +452,8 @@ LOCAL strbuf := Space(512), poz := 513
       ENDDO
       FCLOSE(han)
    ENDIF
-Return nHistCurr
+
+RETURN nHistCurr
 
 STATIC FUNCTION WriteHistory(fname)
 
@@ -460,13 +470,14 @@ Local han, i, lEmpty := .T.
          FCLOSE(han)
       ENDIF
    ENDIF
-Return Nil
+
+RETURN NIL
 
 FUNCTION DoSQL(cQuery)
 
 Local aRes, qHandle, nNumFields, nNumRows, i
    IF sqlQuery( connHandle, cQuery) != 0
-      Return { 1 }
+      RETURN {1}
    ELSE
       IF ( qHandle := sqlStoreR( connHandle ) ) != 0
          nNumRows := sqlNRows( qHandle )
@@ -479,18 +490,19 @@ Local aRes, qHandle, nNumFields, nNumRows, i
             aRes[3, i] := sqlFetchR( qHandle )
          NEXT
          sqlFreeR( qHandle )
-         Return aRes
+         RETURN aRes
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
          IF sqlFiCou( connHandle ) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
-            Return { 0, sqlAffRows( connHandle ) }
+            RETURN {0, sqlAffRows(connHandle)}
          ELSE
-            Return { 2 }
+            RETURN {2}
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+
+RETURN NIL
 
 FUNCTION FilExten(fname)
 
@@ -505,16 +517,17 @@ Local fname := SaveFile("*.scr","Script files( *.scr )", "*.scr", mypath)
    IF !Empty( fname )
       MemoWrit( fname,cQuery )
    ENDIF
-Return Nil
+
+RETURN NIL
 
 FUNCTION WndOut()
-Return Nil
+RETURN NIL
 
 FUNCTION MsgSay(cText)
 
    hwg_MsgStop( cText )
 
-Return Nil
+RETURN NIL
 
 EXIT PROCEDURE cleanup
 
@@ -525,4 +538,4 @@ EXIT PROCEDURE cleanup
       ENDIF
    ENDIF
 
-Return
+RETURN

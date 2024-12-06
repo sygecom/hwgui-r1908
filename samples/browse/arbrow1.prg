@@ -50,5 +50,4 @@ LOCAL oWinMain
     readexit(.T.)
     oWinMain:Activate()
 
-RETURN(NIL)
-
+RETURN NIL

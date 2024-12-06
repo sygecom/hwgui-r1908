@@ -5,7 +5,6 @@ FUNCTION Main()
 
 Local oMainWindow
 
-
    INIT WINDOW oMainWindow MAIN TITLE "Example" COLOR COLOR_3DLIGHT ;
      AT 200, 0 SIZE 400, 100
 
@@ -17,7 +16,8 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return nil
+
+RETURN NIL
 
 STATIC FUNCTION Graph1()
 
@@ -42,7 +42,7 @@ Local i, aGraph[1]
 
    ACTIVATE DIALOG oModDlg
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION Graph2()
 
@@ -67,7 +67,7 @@ Local i, aGraph[1]
 
    ACTIVATE DIALOG oModDlg
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION Graph3()
 
@@ -92,4 +92,4 @@ Local i, aGraph[1]
 */
    ACTIVATE DIALOG oModDlg
 
-Return Nil
+RETURN NIL

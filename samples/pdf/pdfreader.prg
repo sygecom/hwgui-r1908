@@ -35,7 +35,7 @@ Private oPdf
 
    ACTIVATE WINDOW oMainWnd
 
-Return
+RETURN NIL
 
 CLASS PdfReader  FROM HActiveX
 CLASS VAR winclass INIT "Pdfreader"
@@ -44,8 +44,10 @@ ENDCLASS
 
 
 METHOD New(p1,p2,p3,p4,p5,p6) CLASS PdfReader
+
   ::Super:New(p1,p2,p3,p4,p5,p6)
-RETURN
+
+RETURN NIL
 
 FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
 
@@ -54,4 +56,4 @@ FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
     oPdf := PdfReader():New( oWindow, "AcroPDF.PDF.1", 0, 0, nHeight, nWidth )
     oPdf:LoadFile(cPdfFile)
 
-    return oPdf
+RETURN oPdf

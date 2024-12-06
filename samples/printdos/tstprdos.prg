@@ -32,20 +32,19 @@
 *
 *************************************************************************************
 
-
 #include "windows.ch"
 #include "guilib.ch"
 #include "fileio.ch"
- 
+
 #define PF_BUFFERS   2048
 
 FUNCTION Main()
 
-Local oMain 
-  
-   INIT WINDOW oMain MAIN TITLE "Example for PrintDos Class" 
-  
- 
+Local oMain
+
+   INIT WINDOW oMain MAIN TITLE "Example for PrintDos Class"
+
+
    MENU OF oMain
       MENU TITLE "&Test to File"
          MENUITEM "&Print DOS CLASS"     ACTION TestDosClass("Test.prn")
@@ -57,12 +56,12 @@ Local oMain
          SEPARATOR
          MENUITEM "&Exit" ACTION EndWindow()
       ENDMENU
- 
+
       MENU TITLE "T&est to Print"
          MENUITEM "&Print DOS CLASS"     ACTION TestDosClass()
          MENUITEM "&CLASS Style Clipper" ACTION TestDosClipper()
          MENUITEM "&Print in DeskJet   " ACTION DeskJet("LPT2")
-  
+
       ENDMENU
       MENU TITLE "Te&st to WinPrinters"
          MENUITEM "&Using Select   "        ACTION TestDosClass("SELECT")
@@ -71,46 +70,46 @@ Local oMain
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION ShellAbout("Test PrintDos","By Sandro R. R. Freire")
       ENDMENU
-       
+
    ENDMENU
 
    oMain:Activate()
 
-return nil
+RETURN NIL
 
 FUNCTION TestDosClass(oTest)
 
 If hwg_MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
 
-   oPrint:=Printdos():New(oTest)   //oTest=Nil LPT1  
-   
+   oPrint:=Printdos():New(oTest)   //oTest=Nil LPT1
+
    oPrint:Say(0,  1,  "LINE 0 COL 1")
    oPrint:Say(10, 11, "LINE 10 COL 11")
    oPrint:Say(10, 31, "LINE 10 COL 31")
    oPrint:Say(14, 21, "LINE 14 COL 21")
    oPrint:Say(30, 34, "LINE 30 COL 34")
    oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE "+STR(oPrint:nProw)+ " COL "+STR(oPrint:nPcol))
-   oPrint:Say(40, 24, "11222333000144","@r 99.999.999/9999-99") 
+   oPrint:Say(40, 24, "11222333000144","@r 99.999.999/9999-99")
    oPrint:Say(oPrint:nProw+1, oPrint:nPcol,"Valor" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol, 996659.8, "@E 999,999,999.99" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol+2, 22.11)
    oPrint:Say(oPrint:nProw, oPrint:nPcol+1, DATE())
- 
+
    oPrint:Eject()
-   
+
    oPrint:Say(01, 10,"End of printer text, the PrintDos Class")
 
    oPrint:SetPrc(0, 0)
-   
+
    oPrint:End()
- 
+
    if !Empty(oTest)
       OpenRel(oTest)
-   EndIF  
-   
+   EndIF
+
 Endif
 
-Return Nil
+RETURN NIL
 
 FUNCTION TestDosClipper(oTest)
 
@@ -131,22 +130,22 @@ If hwg_MsgYesNo("Printing style clipper to "+Iif(oTest==Nil,"LPT1",oTest),"Print
    @ wprow(oPrinter), wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
    @ wprow(oPrinter), wPcol(oPrinter)+1 PSAY  22.11  OF oPrinter
    @ wprow(oPrinter), wPcol(oPrinter)+1 PSAY DATE() OF oPrinter
-   
+
    EJECT OF oPrinter
-   
+
    @ 01, 10 PSAY "End of printer text, the PrintDos Class - Style Clipper" OF oPrinter
 
    wSetPrc(0, 0, oPrinter)
-   
+
    END PRINTER oPrinter
 
    If !Empty(oTest)
      OpenRel(oTest)
-   EndIF  
+   EndIF
 
 Endif
 
-Return Nil
+RETURN NIL
 
 FUNCTION OpenRel(oText)
 
@@ -165,19 +164,19 @@ Local lText   := MemoRead(oText)
 
    ACTIVATE DIALOG oDlg
 
-RETURN
+RETURN NIL
 
 FUNCTION TestPrinterFile(oTest)
 
 If hwg_MsgYesNo("Printing File "+oTest)
 
-   oPrint:=Printdos():New()   //oTest=Nil LPT1  
+   oPrint:=Printdos():New()   //oTest=Nil LPT1
    oPrint:PrinterFile(oTest)
    oPrint:End()
 
 EndIf
 
-Return Nil
+RETURN NIL
 
 FUNCTION TestGraphic()
 
@@ -217,7 +216,8 @@ oPrint1:=Printdos():New("GRAPHIC")
 oPrint1:txttoGraphic("Graphic.txt", -6, .T.) //Parameters Name graphic, Size, Preview
 
 oPrint1:End()
-Return Nil
+
+RETURN NIL
 
 FUNCTION TestPreview()
 
@@ -259,7 +259,7 @@ oPrint1:=Printdos():New("PREVIEW")
 oPrint1:Preview("Preview.txt")
 oPrint1:End()
 
-Return Nil
+RETURN NIL
 
 FUNCTION DeskJet(oTest)
 
@@ -283,17 +283,19 @@ If hwg_MsgYesNo("Printing InkJet/DeskJet "+Iif(oTest==Nil,"LPT1",oTest),"PrintDo
    @ wprow(oPrinter), wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
    @ wprow(oPrinter), wPcol(oPrinter)+1 PSAY  22.11  OF oPrinter
    @ wprow(oPrinter), wPcol(oPrinter)+1 PSAY DATE() OF oPrinter
-   
+
    EJECT OF oPrinter
-   
+
    @ 01, 10 PSAY "End of printer text, the PrintDos Class - Style Clipper" OF oPrinter
 
    wSetPrc(0, 0, oPrinter)
-   
+
    END PRINTER oPrinter
 
    If !Empty(oTest)
      OpenRel(oTest)
-   EndIF  
+   EndIF
 
 Endif
+
+RETURN NIL

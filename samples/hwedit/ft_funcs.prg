@@ -118,6 +118,7 @@ FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
       ENDIF
    ENDIF
    nHandle:= theHandle:nHan
+
 RETURN nHandle
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
@@ -191,7 +192,7 @@ FUNCTION FT_FSKIP(n AS NUMERIC)
 
    TheHandle:Skip( n )
 
-RETURN nil
+RETURN NIL
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
@@ -205,7 +206,7 @@ FUNCTION FT_MKDIR(CDIR AS STRING)
 
    MAKEDIR( cdir )
 
-RETURN nil
+RETURN NIL
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
@@ -270,7 +271,8 @@ FUNCTION GetNumberofTableItems(cBuffer)
       ENDIF
    ENDDO
    nItem ++
-   RETURN nItem
+
+RETURN nItem
 
 #define EOL hb_osnewline()
 
@@ -301,6 +303,7 @@ FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
       FSEEK( nH, nSavePos + nEol + 1, FS_SET )
    ENDIF
     lReturn := (nNumRead != 0)
+
 RETURN lReturn
 
 *+ EOF: FT_FUNCS.PRG

@@ -46,7 +46,7 @@ METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCal
    ::Title := IIF(cTitle == Nil, ::Title, cTitle)
    ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
    
-   RETURN Self
+RETURN Self
 
 METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalculator
    LOCAL nStyle
@@ -61,7 +61,7 @@ METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalcu
    ::nWidth := IIf(nWidth == Nil, ::nWidth, nWidth)
    ::nHeight :=  IIf(nHeight == Nil, ::nHeight, nHeight)
 
-   RETURN Nil
+RETURN NIL
 
 METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCalculator
 
@@ -76,7 +76,7 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
 
    IF !::lCompacta .AND. ::Hwnd != Nil
       SetWindowPos( ::Hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED )
-      RETURN Nil
+      RETURN NIL
    ENDIF
    INIT DIALOG ::oFormCalc TITLE ::Title ;
         COLOR ::bColor ; //15852761  ;
@@ -200,14 +200,13 @@ METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )  CLASS HCa
          BACKCOLOR 16578289  ;
         FONT HFont():Add('Consolas', 0, -12, 400, , ,)
         oCalculo:Anchor := 75
-        
+
    ACTIVATE DIALOG ::oFormCalc NOMODAL
-   
+
    ::nFontSize := TxtRect( "9", ::oFormCalc, ::oFormCalc:oCalculo:oFont )[1]
    ::Hwnd := ::oFormCalc:Handle
 
-   RETURN 0
-
+RETURN 0
 
 METHOD Calculando( cNumero ) CLASS HCalculator
    LOCAL oForm := ::oFormCalc
@@ -249,7 +248,7 @@ METHOD Calculando( cNumero ) CLASS HCalculator
       ::lClear := .T.
       ::aOperando[1] := IIf(::aOperando[1] != Nil .AND. ::aOperando[2] = nIL, ::aOperando[1], Nil)
       ::aOperando[2] := Nil //IIf(::aOperando[2] = nIL, Nil, 0)
-      return nil
+      RETURN NIL
    ElseIf Empty( cNumero )
       oForm:oVisor:Caption := "0"
       oForm:oCalculo:Caption := ""
@@ -257,7 +256,7 @@ METHOD Calculando( cNumero ) CLASS HCalculator
       ::aOperando := {, , 0 }
       If ::oCurrGet != Nil
          ::End()
-         RETURN Nil
+         RETURN NIL
       EndIf
    ElseIf cNumero == "MC"
       ::nMemory := 0
@@ -297,13 +296,12 @@ METHOD Calculando( cNumero ) CLASS HCalculator
       oForm:oCalculo:Caption := ""
       If ::oCurrGet != Nil
          ::End()
-         RETURN Nil
+         RETURN NIL
       EndIf
    EndIf
    oForm:oBtnRes:SetFocus()
 
-  Return Nil
-
+RETURN NIL
 
 METHOD INIT() CLASS HCalculator
    LOCAL aCoors
@@ -344,7 +342,7 @@ METHOD INIT() CLASS HCalculator
    EndIf
    ::oFormCalc:nInitFocus:= ::oFormCalc:oBtnRes
 
-   RETURN Nil
+RETURN NIL
 
 METHOD GetRefresh() CLASS HCalculator
    LOCAL Value := ::aOperando[1]
@@ -355,6 +353,7 @@ METHOD GetRefresh() CLASS HCalculator
          //::oCurrGet:SetFocus()
       EndIf
    EndIf
-   RETURN .T.
+
+RETURN .T.
 
 /* end */

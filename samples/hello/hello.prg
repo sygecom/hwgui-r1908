@@ -80,7 +80,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
    ACTIVATE WINDOW oMainWindow
 
-Return nil
+RETURN NIL
 
 STATIC FUNCTION ChangeTab(oWnd, oGet, n)
 
@@ -89,7 +89,7 @@ Static lastTab := 1
    SetDlgItemText( oGet:oParent:handle,oGet:id,aGetsTab[n] )
    lastTab := n
 
-Return Nil
+RETURN NIL
 
 FUNCTION PS1(oWnd)
 
@@ -104,4 +104,4 @@ Local oDlg1, oDlg2
 
    PropertySheet( GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300 )
 
-Return
+RETURN NIL

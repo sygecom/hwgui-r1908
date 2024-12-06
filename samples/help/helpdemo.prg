@@ -16,7 +16,7 @@ FUNCTION Main()
 
     ACTIVATE WINDOW oMain
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION Test()
 
@@ -40,4 +40,4 @@ STATIC FUNCTION Test()
 
     ACTIVATE DIALOG oModDlg
 
-Return Nil
+RETURN NIL

@@ -6,12 +6,9 @@ PRIVATE oRadiogroup1, oL     , oRadiobutton1, oRadiobutton2, oPage , oLabel1, oL
 
 cUser:="1"
 
-
-
    INIT DIALOG oDlg TITLE "Form1" ;
         AT 422, 66 SIZE 500, 400 ;
         ON INIT {|| onDlgInit() }
-
 
   RADIOGROUP
    @ 50, 50 RADIOBUTTON oRadiobutton1 CAPTION "User 1      " OF oRadiogroup1 SIZE 110, 22   ;
@@ -40,23 +37,21 @@ cUser:="1"
   END PAGE OF oPage
 
    ACTIVATE DIALOG oDlg
-RETURN
+
+RETURN NIL
 
 STATIC FUNCTION protek()
 
  parameters o,n
  private lOpen:=.T.
 
-
  if cUser=="1" .AND. n==2
     lOpen:=.F.
  endif
 
-
  if cUser=="2" .AND. n==1
     lOpen:=.F.
  endif
-
 
  if lOpen
  oPage:settab(n)
@@ -67,29 +62,25 @@ STATIC FUNCTION protek()
  oPage:ChangePage(4)
  endif
 
-
-
-
-Return Nil
-
+RETURN NIL
 
 STATIC FUNCTION onDlgInit()
 
 oPage:settab(4)
 oPage:ShowPage(4)
 
-RETURN Nil
+RETURN NIL
 
 STATIC FUNCTION oRadiobutton1_onClick()
 
 cUser:="1"
 oL:settext("only 1,3")
 
-RETURN Nil
+RETURN NIL
 
 STATIC FUNCTION oRadiobutton2_onClick()
 
 cUser:="2"
 oL:settext("only 2,3")
 
-RETURN Nil
+RETURN NIL

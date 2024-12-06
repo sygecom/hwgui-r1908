@@ -25,7 +25,7 @@ FUNCTION Main()
 
    ACTIVATE WINDOW oMain
 
-Return Nil
+RETURN NIL
 
 FUNCTION Test()
 
@@ -64,7 +64,7 @@ FUNCTION Test()
 
    ACTIVATE DIALOG oForm
 
-Return Nil
+RETURN NIL
 
 FUNCTION BoundTest()
 
@@ -96,7 +96,7 @@ FUNCTION BoundTest()
 
    ACTIVATE DIALOG oForm
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
 
@@ -108,4 +108,5 @@ STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
       This:SETVALUE(TRIM( This:aitems[n] ))
       KEYB_EVENT(VK_END, .T., .T.)
    ENDIF
-   RETURN Nil
+
+RETURN NIL

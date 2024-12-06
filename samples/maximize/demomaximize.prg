@@ -37,4 +37,4 @@ Private oFont := Nil
 
     ACTIVATE WINDOW oMain MAXIMIZED
 
-return nil
+RETURN NIL

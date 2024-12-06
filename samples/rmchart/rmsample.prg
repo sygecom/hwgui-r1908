@@ -28,21 +28,23 @@ CLASS VAR winclass INIT "RmChart"
   METHOD New()
 ENDCLASS
 
-
 METHOD New(p1,p2,p3,p4,p5,p6) CLASS RmChart
+
   ::EventMap( 1 , "CLICKED" , SELF )
                                       // Map event 1 to Clicked method
                                       // ...7... I don't remember why I put 7
                                       // should be the number of parameters to
                                       // pass to the function
                                       // Mapping must be done before calling New
-  ::Super:New(p1,p2,p3,p4,p5,p6)        // 
-RETURN
+  ::Super:New(p1,p2,p3,p4,p5,p6)        //
+
+RETURN NIL
 
 METHOD Clicked(...) CLASS RmChart
-hwg_MsgInfo( "Mouse button pressed" , ::winclass )
-Return
 
+hwg_MsgInfo( "Mouse button pressed" , ::winclass )
+
+RETURN NIL
 
 FUNCTION Main()
 
@@ -115,4 +117,4 @@ Private oChart
 
    ACTIVATE WINDOW oMainWnd
 
-Return
+RETURN NIL

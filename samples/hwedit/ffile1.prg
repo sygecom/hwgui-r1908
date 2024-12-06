@@ -111,7 +111,7 @@ METHOD new( cName ) CLASS HBMake_FileBase
 
    ::cName := cName
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  skip( <nRecords> )
    Params:  <nRecords>
@@ -141,7 +141,7 @@ METHOD fskip( nRecords ) CLASS HBMake_FileBase
       ENDCASE
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  gotop()
    Params:  N/A
@@ -157,7 +157,7 @@ METHOD fgotop() CLASS HBMake_FileBase
       ::lAtBottom       := pFALSE
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  gobottom()
    Params:  N/A
@@ -173,7 +173,7 @@ METHOD fgoBottom() CLASS HBMake_FileBase
       ::lAtBottom       := pTRUE
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  close()
    Params:  N/A
@@ -190,7 +190,7 @@ METHOD closefile() CLASS HBMake_FileBase
       ::nPosition := 0
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  retrieve
    Params:  N/A
@@ -210,7 +210,7 @@ METHOD retrieve() CLASS HBMake_FileBase
       FSEEK( ::nDosHandle, - ( nMoved ), 1 )                // Re-position the pointer
    ENDIF
 
-   RETURN ( cReturn )
+RETURN cReturn
 
    /* Method:  write(<cChar>)
    Params:  <cChar>
@@ -230,7 +230,7 @@ METHOD FWRITE(cChar) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  goto(<nRecord>)
    Params:  <nRecord>       The record byte to move to
@@ -262,7 +262,7 @@ METHOD fgoto( nValue ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( ::nPosition )
+RETURN ::nPosition
 
    /* Method:  create()
    Params:  N/A
@@ -282,7 +282,7 @@ METHOD Create() CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  open()
    Params:  N/A
@@ -299,7 +299,7 @@ METHOD FOPEN() CLASS HBMake_FileBase
       ::lAtBottom  := pFALSE
    ENDIF
 
-RETURN ( self )
+RETURN self
 
 METHOD fappendByte(cByte) CLASS HBMake_FileBase
 
@@ -316,7 +316,7 @@ METHOD fappendByte(cByte) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( self )
+RETURN self
 
 // End of File: FFile1.prg
 METHOD OPEN() CLASS HBMake_FileBase
@@ -328,7 +328,8 @@ METHOD OPEN() CLASS HBMake_FileBase
    ::lAtTop      := pTRUE
    ::lAtBottom   := pFALSE
    ::nHan        := Self:nDosHandle
-   RETURN ( self )
+
+RETURN self
 
    /* Method:  gotop()
    Params:  N/A
@@ -342,7 +343,7 @@ METHOD gotop() CLASS HBMake_FileBase
       ::nSkipLength := Self:Buffget()
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  gobottom()
    Params:  N/A
@@ -372,7 +373,7 @@ METHOD goBottom() CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  close()
    Params:  N/A
@@ -393,7 +394,7 @@ METHOD FCLOSE() CLASS HBMake_FileBase
       Self:nPosition := 0
    ENDIF
 
-   RETURN ( self )
+RETURN self
 */
    /* Method:  write(<cChar>)
    Params:  <cChar>
@@ -418,7 +419,7 @@ METHOD WRITE(cChar) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  getBuffer( <lDirection> )
    Params:  <lDirection>    Logical toggle for direction
@@ -483,7 +484,7 @@ METHOD Buffget( lForward ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( nLocation )
+RETURN nLocation
 */
    /* Method:  appendLine(<cLine>)
    Params:  <cLine>         Character line to append
@@ -510,7 +511,7 @@ METHOD appendLine(cLine) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  skip( <nRecords> )
    Params:  <nRecords>
@@ -548,7 +549,7 @@ METHOD SKIP( nRecords ) CLASS HBMake_FileBase
       ENDCASE
    ENDIF
 
-   RETURN ( self )
+RETURN self
 
    /* Method:  goto(<nRecord>)
    Params:  <nRecord>       The record byte to move to
@@ -598,7 +599,7 @@ METHOD GOTO( nValue ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( nCount )
+RETURN nCount
 
 // End of File: FFile2.prg
 
@@ -648,6 +649,6 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( nLocation )
+RETURN nLocation
 
 *+ EOF: FFILE1.PRG

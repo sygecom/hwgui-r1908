@@ -39,7 +39,7 @@ FUNCTION Main()
         
         oServer:Close()
         
-Return Nil
+RETURN NIL
 
 FUNCTION Test()
 
@@ -61,16 +61,18 @@ FUNCTION Test()
              @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:Close() }
              
         ACTIVATE DIALOG oForm
-Return Nil
+
+RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
     Local result := ''
-    
+
     DBGoto(x)
-    
+
     result := field->line
-Return result
+
+RETURN result
 
 FUNCTION FileOpen()
 
@@ -80,5 +82,4 @@ FUNCTION FileOpen()
         Zap
         APPEND FROM (fname) SDF
 
-Return Test()
-
+RETURN Test()

@@ -7,8 +7,8 @@
  *
 */
 
-
 #Include "hwgui.ch"
+
 STATIC Thisform
 
 FUNCTION Main()
@@ -24,7 +24,7 @@ FUNCTION Main()
 
    ACTIVATE WINDOW oMain
 
-Return Nil
+RETURN NIL
 
 FUNCTION calculator()
 
@@ -32,13 +32,12 @@ FUNCTION calculator()
 
   LOCAL  vValue := 0
 
-
   INIT DIALOG oDlg TITLE "Calculando" ;
     AT 0, 0 SIZE 415, 325 ;
         FONT HFont():Add('Verdana', 0, -13, 400, , ,) CLIPPER  NOEXIT  ;
-     STYLE WS_POPUP+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER 
+     STYLE WS_POPUP+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER
     Thisform := oDlg
-    
+
    @ 272, 63 OWNERBUTTON oOw1  SIZE 106, 36   ;
         TEXT 'Calculator'  ;
         COORDINATES 3, 0, 0, 0  ;
@@ -61,7 +60,6 @@ FUNCTION calculator()
 
    ACTIVATE DIALOG oDlg
 
-
 RETURN oDlg:lresult
 
 STATIC FUNCTION oOw1_onClick()
@@ -79,4 +77,5 @@ STATIC FUNCTION oValue_onKeyDown(This, nKeyPress, nShiftAltCtrl)
       oCalc := HCalculator():New()
       oCalc:Show(This, .T.)
    ENDIF
-   RETURN .T.
+
+RETURN .T.

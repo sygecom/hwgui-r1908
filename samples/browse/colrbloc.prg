@@ -70,7 +70,7 @@ INIT WINDOW oWinMain MAIN  ;
 
    oWinMain:Activate()
 
-RETURN(NIL)
+RETURN NIL
 
 *****************************
 STATIC FUNCTION BrwDbs(lEdit, lZebra)
@@ -186,7 +186,7 @@ LOCAL nLast := 0
         END
    oDlg:Activate()
 
-RETURN(NIL)
+RETURN NIL
 
 *******************************************************
 STATIC FUNCTION BrowseMove(oBrw, cPar, oEdGoto, cType)
@@ -206,7 +206,8 @@ IF cType == "Dbs"
 ELSEIF cType == "Array"
   oEdGoto:SetText(oBrw:nCurrent)
 END
-Return Nil
+
+RETURN NIL
 
 *************************************************
 STATIC FUNCTION GoToRec(oBrw, nRec, nLast, cType)
@@ -229,7 +230,7 @@ oBrw:Refresh()
 
 hwg_SetFocus(oBrw:handle)
 
-RETURN(.T.)
+RETURN .T.
 
 *************************************************************
 STATIC FUNCTION BrowseDbKey(oBrwDb, nKey, nLast, oLbl2, cPar)
@@ -240,7 +241,7 @@ ELSEIF nKey == VK_RETURN
 
 END
 
-Return .T.
+RETURN .T.
 
 *************************
 STATIC FUNCTION CriaDbf()
@@ -280,7 +281,7 @@ LOCAL nIncrement := 10
         FIELD->FIELD5 := STRZERO(i, 5)
   Next
 
-RETURN(.T.)
+RETURN .T.
 
 *****************************
 STATIC FUNCTION BrwArr(lEdit, lZebra)
@@ -407,7 +408,7 @@ LOCAL nI
 */
    oDlg:Activate()
 
-RETURN(.T.)
+RETURN .T.
 
 ******************************
 STATIC FUNCTION Create_Array()
@@ -432,7 +433,7 @@ LOCAL aArray := {}
     AADD(aArray, { n, STRZERO(i, 4), DATE() + i, "jgçpqy " + STRZERO(i, 23), STRZERO(i, 5)})
   Next
 
-RETURN(aArray)
+RETURN aArray
 
 /* -------------------------------------------------------------------------- */
 
@@ -460,5 +461,5 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
        cVar += "/"
    NEXT
    hwg_MsgInfo(LEFT(cVar, LEN(cVar) - 1))
-RETURN NIL
 
+RETURN NIL

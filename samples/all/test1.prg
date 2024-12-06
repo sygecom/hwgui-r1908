@@ -18,7 +18,8 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION DlgGet()
 
@@ -78,4 +79,5 @@ Local upd := 12, d1 := Date()+1
                "DatePicker: "+Dtoc(d1)                                ;
                ,"Results:" )
    ENDIF
-Return Nil
+
+RETURN NIL

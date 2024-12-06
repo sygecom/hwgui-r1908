@@ -25,7 +25,8 @@ Private var1 := 10320.54
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION DlgGet(lColor)
 
@@ -101,18 +102,19 @@ Private oSayT
                ,"Results:" )
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION SetTimer(oDlg, oTimer)
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION TimerFunc()
 
    oSayT:SetValue(Time())
-Return Nil
 
+RETURN NIL
 
 FUNCTION TestBallon()
 
@@ -129,5 +131,4 @@ FUNCTION TestBallon()
 
    ACTIVATE DIALOG oWnd
 
-   Return Nil
-
+RETURN NIL

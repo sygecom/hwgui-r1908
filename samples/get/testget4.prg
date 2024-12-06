@@ -1,6 +1,6 @@
 /*
  * HWGUI using sample
- * 
+ *
  *
  * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
  * www - http://www.geocities.com/alkresin/
@@ -74,4 +74,4 @@ wnome   := "Nome"
 
    oFont:Release()
 
-Return Nil
+RETURN NIL

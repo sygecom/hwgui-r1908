@@ -25,7 +25,7 @@ FUNCTION Main()
 
    ACTIVATE WINDOW oMainWindow
 
-return (NIL)
+RETURN NIL
 
 FUNCTION CreateChild(lClip)
 
@@ -56,4 +56,4 @@ FUNCTION CreateChild(lClip)
 
    oChild:Activate(.T.)
 
-return (NIL)
+RETURN NIL

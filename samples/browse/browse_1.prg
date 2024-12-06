@@ -1,7 +1,7 @@
 /*
  * $Id: browse_1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
  */
- 
+
 #include "windows.ch"
 #include "guilib.ch"
 
@@ -25,7 +25,8 @@ FUNCTION Main()
                 ENDMENU
 
         ACTIVATE WINDOW oMain
-Return Nil
+
+RETURN NIL
 
 FUNCTION BrowseTest()
 
@@ -85,26 +86,27 @@ FUNCTION BrowseTest()
                     PICTURE "@E 999,999.99"
                             
         ACTIVATE DIALOG oForm
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION BrowseWhen()
 
    hwg_MsgExclamation("When Event")
 
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION BrowseValid()
 
    hwg_MsgExclamation("Valid Event"+STR(TENTA))
    ++TENTA
 
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION BrowseMove()
 
    hwg_MsgInfo("Going to record " + ltrim(str(recno())))
 
-return Nil
+RETURN NIL
 
 STATIC FUNCTION BrowseUpdate(oBrow, colpos)
 
@@ -119,7 +121,7 @@ STATIC FUNCTION BrowseUpdate(oBrow, colpos)
 
    oBrowse:RefreshLine()
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION BrowseKey(oBrowse, key)
 
@@ -127,7 +129,7 @@ STATIC FUNCTION BrowseKey(oBrowse, key)
       oBrowse:Append()
    ENDIF
 
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION CreateDB()
 
@@ -152,4 +154,4 @@ STATIC FUNCTION CreateDB()
    REPLACE Status WITH .T.
    REPLACE Price WITH 150.31
 
-Return Nil
+RETURN NIL

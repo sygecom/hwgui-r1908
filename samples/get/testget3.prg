@@ -16,7 +16,8 @@ HWG_INITCOMMONCONTROLSEX()
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION DlgGet()
 
@@ -108,7 +109,9 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
                "DatePicker: "+Dtoc(d1)                                ;
                ,"Results:" )
    ENDIF
-Return Nil
+
+RETURN NIL
+
 PROC HB_GTSYS; RETURN
 PROC HB_GT_DEFAULT_GUI; RETURN
 
@@ -125,7 +128,7 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
 //   otool:=Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
 //   oTool:oParent:AddEvent(BN_CLICKED, 701, {|x, y|DlgGet()})
 /*   @ 0, 0 toolbar oTool of oModDlg size 50, 100 ID 700 items aItem
-   
+
    TOOLBUTTON  otool ;
           ID 701 ;
            BITMAP 2;
@@ -153,11 +156,11 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
            TOOLTIP "ola3" ;
            ON CLICK {|x,y|DlgGet()}
 */
-return nil
+
+RETURN NIL
 
 #include "hbclass.ch"
 class mymenu
 data handle
 method new(c) inline ::handle :=c,self
 endclass
-

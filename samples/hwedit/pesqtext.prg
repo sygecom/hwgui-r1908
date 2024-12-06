@@ -40,7 +40,9 @@ next g
    @ 605, 395 BUTTON "&O.K." SIZE 80, 32 ID IDOK ON CLICK {||pesq(diretorio[oComb],rd_pesq)}
    //readexit(.T.)
  ACTIVATE DIALOG oDlgPesq
-RETURN
+
+RETURN NIL
+
 *****************************
 FUNCTION pesq(rd_dir, rd_text)
 *****************************
@@ -82,5 +84,5 @@ for g := 1 to len(nom_arq)
      FT_FSKIP()
   enddo
 next g
-retu .T.
 
+RETURN .T.

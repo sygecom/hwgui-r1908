@@ -103,7 +103,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
 
    ACTIVATE WINDOW oWndMain
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION FileOpen()
 
@@ -140,7 +140,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
 
    ENDIF
    
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION ChangeFont()
 
@@ -153,15 +153,16 @@ Memvar oBrw, oFont
       oBrw:oFont := oFont
       oBrw:ReFresh()
    ENDIF
-   
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION SetDataCP(cp)
 
 Memvar DataCP
 
    DataCP := cp
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION SelectIndex()
 
@@ -170,10 +171,10 @@ Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
 Memvar oBrw, oFont
 
    IF Len( oBrw:aColumns ) == 0
-      Return Nil
+      RETURN NIL
    ENDIF
-   
-   i := 1   
+
+   i := 1
    DO WHILE !EMPTY( indname := ORDNAME(i) )
       AADD(aIndex, { indname, ORDKEY( i ), ORDBAGNAME(i) })
       iLen := Max( iLen, Len( OrdKey( i ) ) )
@@ -182,7 +183,7 @@ Memvar oBrw, oFont
 
    width := Min( oBrw:width * ( iLen + 20 ), GetDesktopWidth() )
    height := oBrw:height * ( Len( aIndex ) + 2 )
-   
+
    INIT DIALOG oDlg TITLE "Select Order" ;
          AT 0, 0                  ;
          SIZE width+2,height+2   ;
@@ -211,7 +212,7 @@ Memvar oBrw, oFont
       UpdBrowse()
    ENDIF
                            
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION NewIndex()
 
@@ -221,7 +222,7 @@ Local oMsg
 Memvar oBrw
 
    IF Len( oBrw:aColumns ) == 0
-      Return Nil
+      RETURN NIL
    ENDIF
 
    INIT DIALOG oDlg TITLE "Create Order" ;
@@ -273,7 +274,7 @@ Memvar oBrw
       ENDIF
    ENDIF
    
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION OpenIndex()
 
@@ -282,7 +283,7 @@ Local fname := SelectFile("index files( *.cdx )", "*.cdx", mypath)
 Memvar oBrw
 
    IF Len( oBrw:aColumns ) == 0
-      Return Nil
+      RETURN NIL
    ENDIF
 
    IF !Empty( fname )
@@ -290,7 +291,7 @@ Memvar oBrw
       UpdBrowse()
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION ReIndex()
 
@@ -298,29 +299,29 @@ Local oMsg
 Memvar oBrw
 
    IF Len( oBrw:aColumns ) == 0
-      Return Nil
+      RETURN NIL
    ENDIF
 
    oMsg = DlgWait("Reindexing")
    REINDEX
    oMsg:Close()
    oBrw:Refresh()
-   
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION CloseIndex()
 
 Memvar oBrw
 
    IF Len( oBrw:aColumns ) == 0
-      Return Nil
+      RETURN NIL
    ENDIF
-   
+
    OrdListClear()
    Set Order To 0
    UpdBrowse()
-   
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION UpdBrowse()
 
@@ -336,7 +337,8 @@ Memvar oBrw, oSay1
    oBrw:Refresh()
    oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))))
    oSay2:SetValue("")
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION DlgWait(cTitle)
 
@@ -350,11 +352,11 @@ Local oDlg
 
    ACTIVATE DIALOG oDlg NOMODAL
 
-Return oDlg
+RETURN oDlg
 
 STATIC FUNCTION ModiStru(lNew)
 
-Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg 
+Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg
 Local oGet1, oGet2, oGet3, oGet4
 Local af, af0, cName := "", nType := 1, cLen := "0", cDec := "0", i
 Local aTypes := { "Character","Numeric","Date","Logical" }
@@ -386,7 +388,7 @@ Memvar oBrw, currentCP, currFname
    oBrowse:AddColumn(HColumn():New("Type", {|v, o|o:aArray[o:nCurrent, 2]}, "C", 1, 0))
    oBrowse:AddColumn(HColumn():New("Length", {|v, o|o:aArray[o:nCurrent, 3]}, "N", 5, 0))
    oBrowse:AddColumn(HColumn():New("Dec", {|v, o|o:aArray[o:nCurrent, 4]}, "N", 2, 0))
-   
+
    @ 10, 230 GET oGet1 VAR cName SIZE 100, 24
    @ 120, 230 GET COMBOBOX oGet2 VAR nType ITEMS aTypes SIZE 100, 24
    @ 230, 230 GET oGet3 VAR cLen SIZE 50, 24
@@ -396,12 +398,12 @@ Memvar oBrw, currentCP, currFname
    @ 110, 270 BUTTON "Insert" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 2)}
    @ 200, 270 BUTTON "Change" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 3)}
    @ 290, 270 BUTTON "Remove" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 4)}
-   
+
    @ 280, 10  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
    @ 280, 50 BUTTON "Cancel" SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oDlg
-   
+
    IF oDlg:lResult
 
       oMsg = DlgWait("Restructuring")
@@ -410,7 +412,7 @@ Memvar oBrw, currentCP, currFname
       nRec := RecNo()
       SET ORDER TO 0
       GO TOP
-      
+
       fname := "a0_new"
       dbCreate(fname,af)
       IF currentCP != Nil
@@ -419,7 +421,7 @@ Memvar oBrw, currentCP, currFname
          use (fname) new
       ENDIF
       dbSelectArea(cAlias)
-      
+
       DO WHILE !Eof()
          dbSelectArea(fname)
          APPEND BLANK
@@ -483,10 +485,9 @@ Memvar oBrw, currentCP, currFname
 
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION brw_onPosChg(oBrowse, oGet1, oGet2, oGet3, oGet4)
-
 
    oGet1:SetGet( oBrowse:aArray[oBrowse:nCurrent, 1] )
    oGet1:Refresh()
@@ -499,7 +500,7 @@ STATIC FUNCTION brw_onPosChg(oBrowse, oGet1, oGet2, oGet3, oGet4)
    oGet4:SetGet( Ltrim(Str(oBrowse:aArray[oBrowse:nCurrent, 4])) )
    oGet4:Refresh()
    
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
 
@@ -531,7 +532,7 @@ Local cName, cType, nLen, nDec
    ENDIF
    oBrowse:Refresh()
    
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION dbv_Goto()
 
@@ -548,7 +549,7 @@ Memvar oBrw
       Eval(oBrw:bScrollPos, oBrw, 0)
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION dbv_Seek()
 
@@ -573,7 +574,7 @@ Memvar oBrw, oSay2
       ENDIF
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION dbv_Locate()
 
@@ -585,7 +586,7 @@ Memvar oBrw, oSay2
 
       cLocate := GetData(cLocate,"Locate","Input condition:")
       IF Empty( cLocate )
-         Return Nil
+         RETURN NIL
       ENDIF
 
       bOldError := ERRORBLOCK( { | e | MacroError(e) } )
@@ -616,7 +617,7 @@ Memvar oBrw, oSay2
       Eval( oBrw:bGoTo, oBrw, nRec )
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION dbv_Continue()
 
@@ -636,7 +637,7 @@ Memvar oBrw, oSay2
       ENDIF
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION GetData(cRes, cTitle, cText)
 
@@ -655,17 +656,18 @@ Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 
    oFont:Release()
    IF oModDlg:lResult
-      Return Trim( cRes )
+      RETURN Trim( cRes )
    ELSE
       cRes := ""
    ENDIF
 
-Return cRes
+RETURN cRes
 
 STATIC FUNCTION MacroError(e)
 
    hwg_MsgStop( ErrorMessage(e),"Expression error" )
    BREAK
+
 RETURN .T.
 
 STATIC FUNCTION dbv_Pack()
@@ -682,7 +684,8 @@ Memvar oBrw, oSay1, oSay2
       oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))))
       oSay2:SetValue("")
    ENDIF
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION dbv_Zap()
 
@@ -698,7 +701,8 @@ Memvar oBrw, oSay1, oSay2
       oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))))
       oSay2:SetValue("")
    ENDIF
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION dbv_DelRec()
 
@@ -713,5 +717,4 @@ Memvar oBrw
       oBrw:RefreshLine()
    ENDIF
 
-Return Nil
-                                                
+RETURN NIL

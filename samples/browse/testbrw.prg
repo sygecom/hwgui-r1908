@@ -14,7 +14,8 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION DlgGet()
 
@@ -47,7 +48,8 @@ Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
    oBrw2:bKeyDown := {|o,key|BrwKey(o,key)}
 
    ACTIVATE DIALOG oModDlg
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION BrwKey(oBrw, key)
 
@@ -56,4 +58,4 @@ STATIC FUNCTION BrwKey(oBrw, key)
       oBrw:RefreshLine()
    ENDIF
 
-Return .T.
+RETURN .T.

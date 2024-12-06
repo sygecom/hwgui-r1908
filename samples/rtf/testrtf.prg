@@ -17,10 +17,9 @@ Private oMainWindow, oPanel
 Private oFont := Nil, cDir := "\"+Curdir()+"\"
 Private nColor, oBmp2
 
-
    INIT WINDOW oMainWindow MDI TITLE "Example" ;
          MENUPOS 3
-  
+
    MENU OF oMainWindow
       MENU TITLE "&File"
          MENUITEM "&Test RTF" ACTION TestRTF()
@@ -34,7 +33,7 @@ Private nColor, oBmp2
 
    oMainWindow:Activate()
 
-return nil
+RETURN NIL
 
 FUNCTION TestRtf()
 
@@ -43,10 +42,10 @@ LOCAL j, aMarca, lFormato := .F.
 
    cOutFile := SaveFile("*.rtf","RTF files( *.rtf )","*.rtf")
    IF Empty( cOutFile )
-      Return Nil
+      RETURN NIL
    ENDIF
    IF File(cOutFile) .AND. !hwg_MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
-      Return Nil
+      RETURN NIL
    ENDIF
 
    //      Open the output file & set some defaults
@@ -185,8 +184,6 @@ LOCAL j, aMarca, lFormato := .F.
 
 RETURN NIL
 
-
-
 STATIC FUNCTION SetupRTF(cOutFile)
 *********************************************************************
 * Description:
@@ -314,6 +311,5 @@ BEGIN FOOTER oRTF
 END FOOTER oRTF
 
 RETURN oRTF
+
 **********************  END OF SetupRTF()  ***********************
-
-

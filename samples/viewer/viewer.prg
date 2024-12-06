@@ -89,7 +89,7 @@ Private nVert, nHorz
 
    ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
 
@@ -111,7 +111,7 @@ Local i, aItem
       ENDIF
    ENDIF
 
-Return -1
+RETURN -1
 
 STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
 
@@ -143,7 +143,7 @@ Local stepV
       ENDIF
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
 
@@ -176,7 +176,7 @@ Local stepH
 
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION FileOpen(oWnd)
 
@@ -250,7 +250,7 @@ Local aCoors
       oSayScale:SetValue(Str(nKoef*100, 4)+" %")
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION Zoom(oWnd, nOp)
 
@@ -258,7 +258,7 @@ Local aCoors
 Local stepV, stepH
 
    IF oImage == Nil
-      Return Nil
+      RETURN NIL
    ENDIF
    aCoors := GetClientRect( oWnd:handle )
    nVert := ( oWnd:nHeight - aCoors[4] )
@@ -312,7 +312,7 @@ Local stepV, stepH
    ShowScrollBar( oWnd:handle,SB_HORZ,lScrollH )
    ShowScrollBar( oWnd:handle,SB_VERT,lScrollV )
 
-Return Nil
+RETURN NIL
 
 /*
 STATIC FUNCTION PaintWindow(oWnd)
@@ -321,7 +321,7 @@ Local stepV, stepH
 Local nOffsV, nOffsH
 
    IF oImage == Nil
-      Return -1
+      RETURN -1
    ENDIF
 
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
@@ -344,16 +344,16 @@ Local nOffsV, nOffsH
    ENDIF
    EndPaint( oWnd:handle, pps )
 
-Return 0
+RETURN 0
 */
 
 STATIC FUNCTION ImageInfo()
 
    IF oImage == Nil
-      Return Nil
+      RETURN NIL
    ENDIF
 
-Return Nil
+RETURN NIL
 
 #pragma BEGINDUMP
 

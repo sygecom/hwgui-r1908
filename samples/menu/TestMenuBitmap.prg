@@ -38,10 +38,11 @@ Private oMenu
                 MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
                 //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
         ACTIVATE WINDOW oMain
-Return Nil
+
+RETURN NIL
 
 FUNCTION Test()
 
 hwg_MsgInfo("Test")
 
-Return Nil
+RETURN NIL

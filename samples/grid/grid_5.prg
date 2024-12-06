@@ -29,7 +29,7 @@
 Static oMain, oForm, oBrowse
 
 #xcommand ADD COLUMN TO GRIDEDIT <aGrid> ;
-            FIELD <cField>               ;            
+            FIELD <cField>               ;
             [ LABEL <cLabel> ]           ;
             [ PICTURE <cPicture> ]       ;
             [ <lReadonly:READONLY> ]     ;
@@ -51,15 +51,15 @@ FUNCTION Main()
 
         ACTIVATE WINDOW oMain
 
-Return Nil
+RETURN NIL
 
 FUNCTION Test()
 
     Local aItems := {}
     Local i
-    
+
     PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
-        
+
     Ferase('temp.dbf')
 
     DBCreate("temp.dbf", {{"field_1", "N", 10, 0},;
@@ -69,7 +69,7 @@ FUNCTION Test()
 	                  {"field_5", "M", 10, 0}})
 
     use temp new
-    
+
     For i := 1 to 100
         append blank
         REPLACE field_1 WITH i
@@ -77,16 +77,16 @@ FUNCTION Test()
         REPLACE field_3 WITH mod(i, 10) == 0
         REPLACE field_4 WITH Date() + i
         REPLACE field_5 WITH 'Memo Test'
-    Next        
-        
+    Next
+
     commit
 
     ADD COLUMN TO GRIDEDIT aItems FIELD "Field_1" LABEL "Number" LIST {'List 1', 'List 2'}
     ADD COLUMN TO GRIDEDIT aItems FIELD "Field_2" LABEL "Char" PICTURE "@!" //READONLY
-    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_3" LABEL "Bool" 
-    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_4" LABEL "Date" 
-    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_5" LABEL "Memo" 
-   
+    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_3" LABEL "Bool"
+    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_4" LABEL "Date"
+    ADD COLUMN TO GRIDEDIT aItems FIELD "Field_5" LABEL "Memo"
+
     INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Edit";
         FONT oFont ;
         AT 0, 0 SIZE 700, 425 ;
@@ -96,24 +96,24 @@ FUNCTION Test()
                 ITEMCOUNT LastRec() ;
                 ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key, aItems) } ;
                 ON CLICK {|oCtrl| OnClick(oCtrl, aItems) } ;
-                ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } 
+                ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) }
 
         ADD COLUMN TO GRID oGrid HEADER "Number" WIDTH 100
         ADD COLUMN TO GRID oGrid HEADER "Descr"  WIDTH 250
         ADD COLUMN TO GRID oGrid HEADER "Bool"   WIDTH 70
         ADD COLUMN TO GRID oGrid HEADER "Date"   WIDTH 100
-        ADD COLUMN TO GRID oGrid HEADER "Memo"   WIDTH 200        
-                                 
+        ADD COLUMN TO GRID oGrid HEADER "Memo"   WIDTH 200
+
         @  10, 395 BUTTON 'Insert' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_INSERT, aItems ) }
         @  90, 395 BUTTON 'Change' SIZE 75, 25 ON CLICK {|| OnClick( oGrid, aItems ) }
         @ 170, 395 BUTTON 'Delete' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_DELETE, aItems ) }
 
-        @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:close() }                            
+        @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:close() }
 
-    ACTIVATE DIALOG oForm                
+    ACTIVATE DIALOG oForm
 
-Return Nil
-    
+RETURN NIL
+
 FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
 
     Local i
@@ -126,7 +126,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     Local nGetSize := 10
     Local oForm
     Local nRow := 10
-    Local nCol 
+    Local nCol
     Local nHeight := 0
     Local cValid
     Local nStyle := 0
@@ -300,7 +300,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     Unlock
     DBSelectArea(nArea)
     
-Return oForm:lResult
+RETURN oForm:lResult
 
 STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
 
@@ -336,7 +336,8 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
             endif            
         next        
     endif            
-Return result
+
+RETURN result
 
 STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
 
@@ -354,7 +355,8 @@ STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
     elseif nCol == 5
         result := MemoLine(field->field_5, 100, 1)
     endif                                          
-Return result
+
+RETURN result
 
 STATIC FUNCTION OnKey(o, k, aItems)
 
@@ -367,13 +369,14 @@ STATIC FUNCTION OnKey(o, k, aItems)
     elseif k == VK_DELETE .AND. hwg_MsgYesNo("Delete this record ?", "Warning")
         MyDelete()
     endif
-return nil    
+
+RETURN NIL
 
 STATIC FUNCTION OnClick(o, aItems)
 
     GridEdit('temp', aItems, .F., {|oCtrl, colpos| myblock(oCtrl, colpos)})
 
-return nil
+RETURN NIL
 
 STATIC FUNCTION myblock(oCtrl, colpos)
 
@@ -381,7 +384,7 @@ STATIC FUNCTION myblock(oCtrl, colpos)
         replace field_5 with 'hello'
     endif
 
-return nil
+RETURN NIL
 
 STATIC FUNCTION mydelete()
 
@@ -389,4 +392,4 @@ STATIC FUNCTION mydelete()
     PACK
     oGrid:SetItemCount(Lastrec())
 
-return nil
+RETURN NIL

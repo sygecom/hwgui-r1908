@@ -76,5 +76,4 @@ local i, a, b
 
     oWinMain:Activate()
 
-RETURN(NIL)
-
+RETURN NIL

@@ -41,7 +41,7 @@ Private oMainWindow, oChar
       oAgent:End()
    ENDIF
 
-Return Nil
+RETURN NIL
 
 STATIC FUNCTION SpeakIt(oEdit)
 
@@ -53,4 +53,5 @@ Local cText := GetEditText( oEdit:oParent:handle, oEdit:id )
    oChar:LanguageID := Iif(Asc(cText)>122,"&H0419","&H0409")
    oChar:Speak( cText )
    oChar:Hide()
-Return Nil
+
+RETURN NIL

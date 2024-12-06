@@ -18,4 +18,4 @@ Local oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
    ACTIVATE WINDOW oMainWindow NOSHOW
    oTrayMenu:End()
 
-Return Nil
+RETURN NIL

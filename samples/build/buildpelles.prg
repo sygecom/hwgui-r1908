@@ -1,8 +1,8 @@
 /*
  *$Id: buildpelles.prg 1615 2011-02-18 13:53:35Z mlacecilia $
  *
- * HWGUI - Harbour Win32 GUI library 
- * 
+ * HWGUI - Harbour Win32 GUI library
+ *
  * File to Build APP using Pelles C Compiler
  * Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
  * www - http://www.lumainformatica.com.br
@@ -35,14 +35,14 @@ If !File(oDirec+"BuildPelles.Ini")
   Hwg_WriteIni( 'Config', 'Dir_HARBOUR', "C:\xHARBOUR", oDirec+"BuildPelles.Ini" )
   Hwg_WriteIni( 'Config', 'Dir_PELLES', "C:\POCC", oDirec+"BuildPelles.Ini" )
 EndIf
- 
+
 Private lSaved:=.F.
 Private oBrowse1, oBrowse2, oBrowse3
 Private oDlg
 PRIVATE oButton1, oExeName, oLabel1, oLibFolder, oButton4, oLabel2, oIncFolder, oLabel3, oButton3, oPrgFlag, oLabel4, oCFlag, oLabel5, oButton2, oMainPrg, oLabel6, oTab
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
-   
+
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "HwGUI Build For Pelles C Compiler" ;
         AT 213, 195 SIZE 513, 265  font oFont
 
@@ -53,7 +53,7 @@ PRIVATE oButton1, oExeName, oLabel1, oLibFolder, oButton4, oLabel2, oIncFolder, 
       @ 136, 44 GET oExeName VAR vGt1 ID ID_EXENAME  SIZE 206, 24
 
       @  20, 74 SAY oLabel2 CAPTION "Lib Folder" SIZE 80, 22
-      @ 136, 74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234, 24  
+      @ 136, 74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234, 24
 
       @  20, 104 SAY oLabel3 CAPTION "Include Folder" SIZE 105, 22
       @ 136, 104 GET oIncFolder VAR vGt3 ID ID_INCFOLDER   SIZE 234, 24
@@ -124,16 +124,17 @@ PRIVATE oButton1, oExeName, oLabel1, oLibFolder, oButton4, oLabel2, oIncFolder, 
    @ 419, 200 BUTTON oButton4 CAPTION "Save" on Click {||SaveBuildFile()}   SIZE 78, 52
 
    ACTIVATE DIALOG oDlg
-RETURN
+
+RETURN NIL
 
 STATIC FUNCTION SearchFile(oBrow, oFile)
 
 Local oTotReg:={}, i
 Local aSelect:=SelectMultipleFiles("xBase Files ("+oFile+")", oFile ) 
 if len(aSelect) ==0
-   return Nil
+   RETURN NIL
 endif
-if LEN(oBrow:aArray) == 1 .AND. obrow:aArray[1]=="" 
+if LEN(oBrow:aArray) == 1 .AND. obrow:aArray[1]==""
    obrow:aArray := {}
 endif
 For i:=1 to Len(oBrow:aArray)
@@ -144,7 +145,8 @@ For i:=1 to Len(aSelect)
 Next
 obrow:aArray := oTotReg
 obrow:refresh()
-Return Nil
+
+RETURN NIL
 
 STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 
@@ -152,19 +154,21 @@ Local oTextAnt:=oGet:GetText()
 Local fFile:=SelectFile(nName + " (" + oFile + ")", oFile, , , .T.)
 If !Empty(oTextAnt)
    fFile:=oTextAnt //
-endif   
+endif
 oGet:SetText(fFile)
 oGet:Refresh()
-Return Nil
 
+RETURN NIL
 
 FUNCTION ReadBuildFile()
 
 Local oLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal:=""
-Local oFolderFile:=SelectFile("HwGUI File Build (*.bld)", "*.bld" ) 
-if empty(oFolderFile); Return Nil; Endif
-   
+Local oFolderFile:=SelectFile("HwGUI File Build (*.bld)", "*.bld" )
+if empty(oFolderFile)
+   RETURN NIL
+Endif
+
 oExeName:SetText( Hwg_GetIni( 'Config', 'ExeName' , , oFolderFile ))
 oLibFolder:SetText(Hwg_GetIni( 'Config', 'LibFolder' , , oFolderFile ))
 oIncFolder:SetText(Hwg_GetIni( 'Config', 'IncludeFolder' , , oFolderFile ))
@@ -178,8 +182,8 @@ For i:=1 to 300
         AADD(oBr1, oSel1)
     EndIf
 Next
-    
-  
+
+
 For i:=1 to 300
     oSel2:=Hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , oFolderFile )
     if !empty(oSel2) //.or. oSel2#Nil
@@ -210,21 +214,23 @@ oBrowse2:Refresh()
 oBrowse3:Refresh()
 oBrowse4:Refresh()
 
-Return Nil
+RETURN NIL
 
 FUNCTION SaveBuildFile()
 
 Local oLibFiles, i, oNome, g
 Local oFolderFile:=SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" ) 
-if empty(oFolderFile); Return Nil; Endif
+if empty(oFolderFile)
+   RETURN NIL
+Endif
 if file(oFolderFile)
    If(hwg_MsgYesNo("File "+oFolderFile+" EXIT ..Replace?"))
      Erase(oFolderFile)
    Else
      hwg_MsgInfo("No file SAVED.")
-     Return Nil
+     RETURN NIL
    EndIf
-EndIf     
+EndIf
 Hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), oFolderFile )
 Hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), oFolderFile )
 Hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), oFolderFile )
@@ -272,7 +278,8 @@ if Len(oBrowse4:aArray)>=1
 endif   
 
 hwg_Msginfo("File "+oFolderFile+" saved","HwGUI Build")
-Return Nil
+
+RETURN NIL
 
 FUNCTION BuildApp()
 
@@ -280,7 +287,9 @@ If hwg_MsgYesNo("Yes Compile to BAT, No compile to PoMake")
    BuildBat()
 Else
    BuildPoMake()
-EndIf   
+EndIf
+
+RETURN NIL
 
 FUNCTION BuildBat()
 
@@ -291,17 +300,17 @@ If File(oDirec+"BuildPelles.Ini")
    vHwGUI:=Hwg_GetIni( 'Config', 'DIR_HwGUI' , , oDirec+"BuildPelles.Ini" )
    vHarbour:=Hwg_GetIni( 'Config', 'DIR_HARBOUR' , , oDirec+"BuildPelles.Ini")
    vPelles:=Hwg_GetIni( 'Config', 'DIR_PELLES' , , oDirec+"BuildPelles.Ini" )
-Else 
+Else
    vHwGUI:="C:\HWGUI"
    vHarbour:="C:\Harbour"
-   vPelles:="C:\Pocc"   
+   vPelles:="C:\Pocc"
 EndIf
-voExeName  :=oExeName:GetText() 
-voLibFolder:=oLibFolder:GetText() 
+voExeName  :=oExeName:GetText()
+voLibFolder:=oLibFolder:GetText()
 voIncFolder:=oIncFolder:GetText()
-voPrgFlag  :=oPrgFlag:GetText() 
-voCFlag    :=oCFlag:GetText() 
-voPrgMain  :=oMainPrg:GetText() 
+voPrgFlag  :=oPrgFlag:GetText()
+voCFlag    :=oCFlag:GetText()
+voPrgMain  :=oMainPrg:GetText()
 
 voPrgFiles :=oBrowse1:aArray
 voCFiles   :=oBrowse2:aArray
@@ -469,7 +478,8 @@ if file(voExeName+".exe")
 Else 
    ShellExecute("NotePad error.log")   
 Endif   
-Return Nil
+
+RETURN NIL
 
 FUNCTION BuildPoMake()
 
@@ -481,18 +491,18 @@ If File(oDirec+"BuildPelles.Ini")
    vHwGUI:=Hwg_GetIni( 'Config', 'DIR_HwGUI' , , oDirec+"BuildPelles.Ini" )
    vHarbour:=Hwg_GetIni( 'Config', 'DIR_HARBOUR' , , oDirec+"BuildPelles.Ini")
    vPelles:=Hwg_GetIni( 'Config', 'DIR_PELLES' , , oDirec+"BuildPelles.Ini" )
-Else 
+Else
    vHwGUI:="C:\HWGUI"
    vHarbour:="C:\Harbour"
-   vPelles:="C:\Pocc"   
+   vPelles:="C:\Pocc"
 EndIf
- 
-voExeName  :=oExeName:GetText() 
-voLibFolder:=oLibFolder:GetText() 
+
+voExeName  :=oExeName:GetText()
+voLibFolder:=oLibFolder:GetText()
 voIncFolder:=oIncFolder:GetText()
-voPrgFlag  :=oPrgFlag:GetText() 
-voCFlag    :=oCFlag:GetText() 
-voPrgMain  :=oMainPrg:GetText() 
+voPrgFlag  :=oPrgFlag:GetText()
+voCFlag    :=oCFlag:GetText()
+voPrgMain  :=oMainPrg:GetText()
 
 voPrgFiles :=oBrowse1:aArray
 voCFiles   :=oBrowse2:aArray
@@ -645,5 +655,4 @@ Endif
  
 fClose(oName)
 
-Return Nil
- 
+RETURN NIL

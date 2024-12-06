@@ -224,7 +224,9 @@ public funcoes:={}
    //ADD STATUS TO oMainWindow ID IDC_STATUS 50, 50, 400, 12, 90, 95, 90
    CheckMenuItem( ,id_indioma, !IsCheckedMenuItem( ,id_indioma ) )
  ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
+
 ****************
 FUNCTION novo(tipo)
 ****************
@@ -258,7 +260,9 @@ FUNCTION novo(tipo)
  hwg_SetFocus( oEdit&i:Handle )
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
  re_SetDefault( oEdit&i:handle,ID_COLORF,ID_FONT,,) // cor e fonte padrao
-RETURN (.T.)
+
+RETURN .T.
+
 *****************
 FUNCTION Texto()
 *****************
@@ -272,7 +276,7 @@ FUNCTION Texto()
  oFunc:={}
  oLinha:={}
  if empty(vText)
-    return (.T.)
+    RETURN .T.
  endif
  i:=alltrim(str(auto))
  private vText&i:=Memoread(vText)
@@ -356,7 +360,9 @@ FUNCTION Texto()
  */
  hwg_SetFocus( oEdit&i:Handle )
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
-RETURN
+
+RETURN NIL
+
 *******************
 FUNCTION funcao()
 *******************
@@ -401,7 +407,9 @@ FUNCTION painel(wmdi)
        SIZE 24, 24 FLAT                ;
        BITMAP "BMP_SAVE" FROM RESOURCE COORDINATES 0, 4, 0, 0 ;
        TOOLTIP bsalvar
-retu nil
+
+RETURN NIL
+
 *******************************
 FUNCTION fecha_texto()
 *******************************
@@ -410,7 +418,9 @@ Local h := HMainWIndow():GetMdiActive():handle
         hwg_MsgYesNo('Deseja Salvar o arquivo')
     endif
     SendMessage(h, WM_CLOSE, 0, 0)
-retu (.T.)
+
+RETURN .T.
+
 *******************************
 FUNCTION richeditProc(oEdit, msg, wParam, lParam)
 *******************************
@@ -456,10 +466,10 @@ Local oParent, nPos
      if nvirtCode = 32 .or. nvirtCode = 13 .or. nvirtCode = 8
          hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
          oWindow:=HMainWIndow():GetMdiActive():aControls
-         IF oWindow != Nil 
+         IF oWindow != Nil
 
             aControls := oWindow
-            
+
             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
             hwg_SetFocus(aControls[hWnd]:Handle )
              //
@@ -483,7 +493,9 @@ Local oParent, nPos
         texto:=texto+chr(nvirtCode)
      endif
 ENDIF
-Return -1
+
+RETURN -1
+
 ***********************
 FUNCTION indioma(rd_ID)
 ***********************
@@ -496,12 +508,16 @@ CheckMenuItem( ,rd_ID, !IsCheckedMenuItem( ,rd_ID ) )
  ID_indioma:=rd_id
  save all like ID_* to config.dat
 hwg_MsgInfo(reiniciar)
-return (.T.)
+
+RETURN .T.
+
 ***********************
 FUNCTION aguarde()
 ***********************
 hwg_MsgInfo(desenvolvimento)
-retu .T.
+
+RETURN .T.
+
 ****************************
 FUNCTION Pesquisa()
 
@@ -531,14 +547,18 @@ Local hWnd, oWindow, aControls, i
          endif
      endif
  endif
-return .T.
+
+RETURN .T.
+
 ***************************
 FUNCTION painel2(wmdi, array)
 ***************************
 local oCombo
    @ 0, 0 PANEL oPanel of wmdi SIZE 150, 30
    @ 650, 2 GET COMBOBOX oCombo ITEMS oFunc SIZE 140, 200 of oPanel ON CHANGE {|| buscafunc(oCombo)}
-retu nil
+
+RETURN NIL
+
 ***************************
 FUNCTION Ajuda(rArq)
 ***************************
@@ -558,7 +578,7 @@ oIE:Visible := .T.
 
 oIE:Navigate(rArq )
 
-RETURN
+RETURN NIL
 
 ****************************
 FUNCTION Vai(oEdit)
@@ -592,7 +612,8 @@ Local hWnd, oWindow, aControls, i
      endif
  endif
 
-return .T.
+RETURN .T.
+
 **********************
 FUNCTION seleciona()
 **********************
@@ -606,7 +627,9 @@ Local hWnd, oWindow, aControls, i
     SendMessage(aControls[hWnd]:handle, EM_SETSEL, 0, 0)
     SendMessage(aControls[hWnd]:handle, EM_SETSEL, 100000, 0)
  ENDIF
-retu .T.
+
+RETURN .T.
+
 *******************************
 FUNCTION Salvar_Projeto(oOpcao)
 *******************************
@@ -617,7 +640,7 @@ local cfile :="temp"
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      //
-     
+
     nHandle =FCREATE(cFile, FC_NORMAL)
     IF (nHandle > 0)
 //      FWRITE(nHandle, EditorGetText(oEdit))
@@ -641,7 +664,9 @@ local cfile :="temp"
  else
    hwg_MsgInfo('Nada para salvar')
  endif
-Return Nil
+
+RETURN NIL
+
 *********************
 FUNCTION buscafunc(linha)
 *********************
@@ -650,7 +675,7 @@ Local hWnd, oWindow, aControls, i
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
      IF oWindow != Nil
-         pos_y := funcoes[linha]                                         
+         pos_y := funcoes[linha]
          aControls := oWindow
          SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
          hwg_SetFocus(aControls[hWnd]:Handle )
@@ -663,7 +688,9 @@ Local hWnd, oWindow, aControls, i
          //
       ENDIF
   endif
-return (.T.)
+
+RETURN .T.
+
 *************************
 FUNCTION cor_fundo()
 *************************
@@ -679,7 +706,9 @@ Local hWnd, oWindow, aControls, i
    hwg_MsgInfo('Abra um documento Primeiro')
  endif
  hwg_SetFocus(aControls[hWnd]:Handle )
-retu .T.
+
+RETURN .T.
+
 *************************
 FUNCTION cor_Fonte()
 *************************
@@ -695,7 +724,8 @@ Local hWnd, oWindow, aControls, i
    hwg_MsgInfo('Abra um documento Primeiro')
  endif
  hwg_SetFocus(aControls[hWnd]:Handle )
-retu .T.
+
+RETURN .T.
 
 *************************
 FUNCTION sintaxe(comando)
@@ -721,5 +751,4 @@ else
   ret:=.F.
 endif
 
-retu ret
-
+RETURN RET

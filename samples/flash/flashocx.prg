@@ -36,7 +36,7 @@ Private oFlash
 
    ACTIVATE WINDOW oMainWnd
 
-Return
+RETURN NIL
 
 CLASS ShockwaveFlash FROM HActiveX
 CLASS VAR winclass INIT "ShockwaveFlash"
@@ -45,8 +45,10 @@ ENDCLASS
 
 
 METHOD New(p1,p2,p3,p4,p5,p6) CLASS ShockwaveFlash
+
   ::Super:New(p1,p2,p3,p4,p5,p6)
-RETURN
+
+RETURN NIL
 
 FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
 
@@ -55,5 +57,4 @@ FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
     oFlash := ShockwaveFlash():New( oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth )
     oFlash:LoadMovie(0,cFlashFile)
 
-    return oFlash
-
+RETURN oFlash

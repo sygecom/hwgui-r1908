@@ -6,13 +6,12 @@
  * Demo for Browse using Set Relatarion
  *
  */
- 
+
 #include "hwgui.ch"
 #include "dbstruct.ch"
 
 #define x_BLUE       16711680
 #define x_RED             255
-
 
 FUNCTION Main()
 
@@ -83,29 +82,29 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Teste";
 
    fErase("teste1.dbf")
    
-RETURN Nil
+RETURN NIL
 
- 
 STATIC FUNCTION Teste_CreateColumn(oBrw, oCol, oHead, oAr, seq, oType, oLen, oDec)
 
 Local i
 Local nArea := &oAr->(select())
-    
+
    oBrw:AddColumn( HColumn():New(oHead ,;
                                      FieldWBlock( oCol, nArea ),  ;
                                      oType, oLen, oDec, .F.) )
                                     //"C",   30,   2
    oBrw:Refresh()
 
-RETURN Nil
+RETURN NIL
 
 STATIC FUNCTION BrowseKey(oBr, key)
 
    LOCAL xFun
- 
+
    IF key == 112 // .AND. lHelp == .T.      && f1
       //D_HELP()
    ELSE
      hwg_MsgInfo(Str(key))
    ENDIF
-Return .T.
+
+RETURN .T.

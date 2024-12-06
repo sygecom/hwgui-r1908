@@ -14,7 +14,8 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+
+RETURN NIL
 
 FUNCTION DlgGet()
 
@@ -76,14 +77,15 @@ Local h1 := hbitmap():addFile("..\image\exit.bmp")
                "DatePicker: "+Dtoc(d1)                                ;
                ,"Results:" )
    ENDIF
-Return Nil
+
+RETURN NIL
 
 FUNCTION bother(ob, m, w, l, o, o1)
 
-if m == WM_MOUSEMOVE
-   o:cancelhover()
-   o1:cancelhover()
-  return 0
-endif
-return -1
+   IF m == WM_MOUSEMOVE
+      o:cancelhover()
+      o1:cancelhover()
+      RETURN 0
+   ENDIF
 
+RETURN -1

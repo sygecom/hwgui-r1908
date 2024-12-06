@@ -1,6 +1,8 @@
 #include "guilib.ch"
 #include "windows.ch"
-func main
+
+FUNCTION Main()
+
 local o
 init window o main
 
@@ -9,4 +11,5 @@ init window o main
 @ 80, 40 nicebutton [Culik]  of o id 102 size 40, 40 red 136 green 157 blue 234 on click {||endwindow()}
 @ 80, 80 nicebutton [guimaraes]  of o id 102 size 60, 60 red 198 green 045 blue 215 on click {||endwindow()}
 activate window o
-return nil
+
+RETURN NIL

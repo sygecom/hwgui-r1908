@@ -49,7 +49,7 @@ Private oMainWindow, oFont
 
    ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
 FUNCTION NewItem(nItem)
 
@@ -124,7 +124,7 @@ Local cName, cInfo
       ENDIF
    ENDIF
 
-Return Nil
+RETURN NIL
 
 FUNCTION FontFromXML(oXmlNode)
 
@@ -154,7 +154,7 @@ Local under := oXmlNode:GetAttribute("underline")
      under := Val( under )
   ENDIF
 
-Return HFont():Add(oXmlNode:GetAttribute("name"),  ;
+RETURN HFont():Add(oXmlNode:GetAttribute("name"),  ;
                    width, height, weight, charset,   ;
                    ita, under)
 
@@ -178,7 +178,7 @@ Local aAttr := {}
       Aadd(aAttr, { "underline",Ltrim(Str(oFont:Underline, 5)) })
    ENDIF
 
-Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
+RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
 FUNCTION SaveOptions()
 
@@ -187,4 +187,4 @@ FUNCTION SaveOptions()
    ENDIF
    CLOSE ALL
 
-Return Nil
+RETURN NIL

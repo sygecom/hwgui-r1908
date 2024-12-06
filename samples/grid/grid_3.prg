@@ -25,7 +25,7 @@ FUNCTION Main()
 
         SET (_SET_DATEFORMAT, "yyyy-mm-dd")
         CriaBase()
-        
+
         INIT WINDOW oMain MAIN TITLE "Postgres Sample Using low level functions" ;
              AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -36,26 +36,26 @@ FUNCTION Main()
                 ENDMENU
 
         ACTIVATE WINDOW oMain
-        
+
         res := PQexec(conn, 'CLOSE cursor_1')
-        PQclear(res)    
-        
+        PQclear(res)
+
         res = PQexec(conn, "END")
         PQclear(res)
 
         PQClose(conn)
-        
-Return Nil
+
+RETURN NIL
 
 FUNCTION Test()
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
-        
+
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "Postgres Demo";
              FONT oFont ;
              AT 0, 0 SIZE 700, 425 ;
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
-                
+
              @ 10, 10 GRID oGrid OF oForm SIZE 680, 375;
                      ITEMCOUNT 10000 ;
                      ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
@@ -63,40 +63,40 @@ FUNCTION Test()
                      ON CLICK {|oCtrl| OnClick(oCtrl) } ;
                      ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } ;
                      COLOR VColor('D3D3D3');
-                     BACKCOLOR VColor('BEBEBE') 
-                     
+                     BACKCOLOR VColor('BEBEBE')
+
                      /*
                      ON LOSTFOCUS {|| hwg_MsgInfo('lost focus') } ;
-                     ON GETFOCUS {|| hwg_MsgInfo('get focus')  }                     
+                     ON GETFOCUS {|| hwg_MsgInfo('get focus')  }
                      */
 
              ADD COLUMN TO GRID oGrid HEADER "Code" WIDTH 50
              ADD COLUMN TO GRID oGrid HEADER "Date" WIDTH 80
              ADD COLUMN TO GRID oGrid HEADER "Description" WIDTH 100
-                                                              
+
              @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:Close() }
-             
+
         ACTIVATE DIALOG oForm
-                
-Return Nil
+
+RETURN NIL
 
 FUNCTION OnKey(o, k)
 
 //    hwg_MsgInfo(str(k))
 
-return nil
+RETURN NIL
 
 FUNCTION OnPosChange(o, row)
 
 //    hwg_MsgInfo( str(row) )
 
-return nil
+RETURN NIL
 
 FUNCTION OnClick(o)
 
 //    hwg_MsgInfo( 'click' )
 
-return nil
+RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
@@ -120,69 +120,69 @@ FUNCTION OnDispInfo(o, x, y)
             next
         else
             lEof := .T.
-            
+
             hwg_MsgInfo(res)
-        
+
         endif
-        PQclear(res)              
+        PQclear(res)
     endif
-    
+
     if x <= Lastrec()
         dbgoto(x)
-        
+
         if y == 1
             result := str(code)
         elseif y == 2
             result := dtoc(creation)
         elseif y == 3
             result := descr
-        end            
+        end
     endif
-    
-Return result
+
+RETURN result
 
 FUNCTION CriaBase()
 
         IF File('trash.dbf')
             FErase('trash.dbf')
         END
-                    
+
         DBCreate("trash.dbf", {{'code', 'N', 10, 0},;
                                {'creation', 'D',  8, 0},;
                                {'descr', 'C', 40, 0}})
-        
-        USE trash                         
-        
+
+        USE trash
+
         conn := PQConnect('test', 'localhost', 'Rodrigo', 'moreno', 5432)
-        
+
         if ISCHARACTER(conn)
             hwg_MsgInfo(conn)
             quit
         endif
 
         res := PQexec(conn, "drop table test")
-        PQclear(res)    
+        PQclear(res)
 
         res := PQexec(conn, "create table test (code numeric(10), creation date, descr char(40))")
-        PQclear(res)    
+        PQclear(res)
 
         For i := 1 to 100
-            res := PQexec(conn, "insert into test (code,creation,descr) values ("+ str(i) + ",'" + DtoC(date()+i) + "','test')")            
-            PQclear(res)    
-        Next  
-        
+            res := PQexec(conn, "insert into test (code,creation,descr) values ("+ str(i) + ",'" + DtoC(date()+i) + "','test')")
+            PQclear(res)
+        Next
+
         res = PQexec(conn, "BEGIN")
-        PQclear(res)    
+        PQclear(res)
 
-        res := PQexec(conn, 'DECLARE cursor_1 NO SCROLL CURSOR WITH HOLD FOR SELECT * FROM test')        
-        PQclear(res)    
-return nil        
+        res := PQexec(conn, 'DECLARE cursor_1 NO SCROLL CURSOR WITH HOLD FOR SELECT * FROM test')
+        PQclear(res)
 
+RETURN NIL
 
 FUNCTION MyVal(xValue, type)
 
     Local result
-    
+
     if valtype(xValue) == 'U'
         if type == 'N'
             result := 0
@@ -196,6 +196,7 @@ FUNCTION MyVal(xValue, type)
     elseif type == 'C'
         result := xvalue
     elseif type == 'D'
-        result := CtoD(xvalue)    
+        result := CtoD(xvalue)
     endif
-Return result
+
+RETURN result

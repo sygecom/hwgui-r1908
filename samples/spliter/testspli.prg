@@ -32,4 +32,4 @@ Local oMainWindow, oFont, oSplitV, oSplitH, oEdit1, oEdit2
 
    ACTIVATE WINDOW oMainWindow
 
-Return nil
+RETURN NIL

@@ -15,7 +15,7 @@ Local oMainWindow
 
    ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
 FUNCTION DlgGet()
 
@@ -72,17 +72,17 @@ Local aIP := { 10, 1, 2, 3 }
                "IpAddress: " + StrZero(aIP[1], 3, 0) + "." + StrZero(aIP[2], 3, 0) + "." + StrZero(aIP[3], 3, 0) + "." +  StrZero(aIP[4], 3, 0) ;
                ,"Results:" )
    ENDIF
-Return Nil
 
+RETURN NIL
 
 FUNCTION IpGetFocus()
 
    hwg_MsgInfo("GetFocus")
 
-return (NIL)
+RETURN NIL
 
 FUNCTION IpLostFocus()
 
    hwg_MsgInfo("LostFocus")
 
-return (NIL)
+RETURN NIL

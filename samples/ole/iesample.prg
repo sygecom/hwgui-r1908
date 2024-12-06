@@ -40,7 +40,7 @@ Local oEdit, cUrl, oIE
 
     ACTIVATE WINDOW oMainWnd
 
-Return
+RETURN NIL
 
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
@@ -52,7 +52,7 @@ Local fname := SelectFile("HTML files", "*.htm;*.html", mypath)
       oIE:DisplayPage(fname)
    ENDIF
 
-Return
+RETURN NIL
 
 STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
 
@@ -66,4 +66,5 @@ Local cUrl := "http://www.google.com/search?q=", cItem
       oEdit:SetText( cUrl )
       oIE:DisplayPage(cUrl)
    ENDIF
-Return Nil
+
+RETURN NIL

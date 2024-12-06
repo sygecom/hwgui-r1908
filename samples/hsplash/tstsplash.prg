@@ -18,4 +18,4 @@ Local oSplash
 
    ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL

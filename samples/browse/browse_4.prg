@@ -56,15 +56,16 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
         JUSTIFY LINE DT_LEFT
 
    oBrowse:Refresh()
- 
+
    ACTIVATE DIALOG oDlg
 
    fErase("browse_4.dbf")
-RETURN Nil
+
+RETURN NIL
 
 STATIC FUNCTION sair()
 
    hwg_MsgInfo('Registros selecionados'+chr(13)+chr(10)+valToPrg(oBrowse:aSelected))
    EndDialog()
 
-return .T.
+RETURN .T.

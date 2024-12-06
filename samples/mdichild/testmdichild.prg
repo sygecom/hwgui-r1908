@@ -23,11 +23,9 @@ FUNCTION Main()
       MENUITEM "&Create a child" ACTION CreateMdiChild()
    ENDMENU
 
-
    ACTIVATE WINDOW oMainWindow  MAXIMIZED
 
-return (NIL)
-
+RETURN NIL
 
 FUNCTION CreateMdiChild()
 
@@ -213,7 +211,6 @@ FUNCTION CreateMdiChild()
         oLabel19:Anchor := 9
 
    ACTIVATE WINDOW oWin CENTER
-
 
 RETURN NIL
 

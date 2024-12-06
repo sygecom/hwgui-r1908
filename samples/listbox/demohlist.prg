@@ -16,7 +16,7 @@ Local oMainWindow
 
    ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
 FUNCTION Teste()
 
@@ -41,4 +41,4 @@ Local oList, oItems:={"Item01","Item02","Item03","Item04"}
    IF oModDlg:lResult
     ENDIF
 
-Return Nil
+RETURN NIL
