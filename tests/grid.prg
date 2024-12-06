@@ -1,6 +1,6 @@
 #include "hwgui.ch"
 
-PROCEDURE Main()
+FUNCTION Main()
 
    LOCAL oDialog
    LOCAL oGrid
@@ -31,4 +31,4 @@ PROCEDURE Main()
 
    ACTIVATE DIALOG oDialog ON ACTIVATE {||SetFocus(oGrid:handle)}
 
-RETURN
+RETURN NIL

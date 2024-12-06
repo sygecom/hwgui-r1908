@@ -1,6 +1,6 @@
 #include "hwgui.ch"
 
-PROCEDURE Main()
+FUNCTION Main()
 
    LOCAL oDialog
    LOCAL cCB1
@@ -33,4 +33,4 @@ PROCEDURE Main()
    hwg_MsgInfo(cCB3, "Info")
    hwg_MsgInfo(cCB4, "Info")
 
-RETURN
+RETURN NIL

@@ -1,6 +1,6 @@
 #include "hwgui.ch"
 
-PROCEDURE Main()
+FUNCTION Main()
 
    LOCAL oDialog
    LOCAL oTab
@@ -95,4 +95,4 @@ PROCEDURE Main()
       hwg_MsgInfo("CANCEL", "Info")
    ENDIF
 
-RETURN
+RETURN NIL

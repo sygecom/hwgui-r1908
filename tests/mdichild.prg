@@ -1,6 +1,6 @@
 #include "hwgui.ch"
 
-PROCEDURE Main()
+FUNCTION Main()
 
    LOCAL oMainWindow
 
@@ -13,7 +13,7 @@ PROCEDURE Main()
 
    ACTIVATE WINDOW oMainWindow MAXIMIZED
 
-RETURN
+RETURN NIL
 
 STATIC FUNCTION NewChild()
 
