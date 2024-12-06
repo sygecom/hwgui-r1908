@@ -516,10 +516,12 @@ HB_FUNC(POSTMESSAGE)
                              ));
 }
 
-HB_FUNC(SETFOCUS)
+HB_FUNC(HWG_SETFOCUS)
 {
   hwg_ret_HWND(SetFocus(hwg_par_HWND(1)));
 }
+
+HB_FUNC_TRANSLATE(SETFOCUS, HWG_SETFOCUS);
 
 HB_FUNC(GETFOCUS)
 {
