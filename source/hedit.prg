@@ -594,7 +594,7 @@ RETURN Self
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD Value(Value) CLASS HEdit
-   
+
    LOCAL vari
 
    IF Value != NIL
@@ -928,8 +928,9 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0 // old code for reference (to be deleted)
 METHOD Input(cChar, nPos) CLASS HEdit
-   
+
    LOCAL cPic
 
    IF !Empty(::cPicMask) .AND. nPos > Len(::cPicMask)
@@ -989,11 +990,81 @@ METHOD Input(cChar, nPos) CLASS HEdit
    ENDIF
 
 RETURN cChar
+#else
+METHOD Input(cChar, nPos) CLASS HEdit
+
+   LOCAL cPic
+
+   IF !Empty(::cPicMask) .AND. nPos > Len(::cPicMask)
+      RETURN NIL
+   ENDIF
+
+   SWITCH ::cType
+   CASE "N"
+      IF cChar == "-"
+         IF nPos != 1
+            RETURN NIL
+         ENDIF
+         ::lFirst := .F.
+      ELSEIF !(cChar $ "0123456789")
+         RETURN NIL
+      ENDIF
+      EXIT
+   CASE "D"
+      IF !(cChar $ "0123456789")
+         RETURN NIL
+      ENDIF
+      EXIT
+   CASE "L"
+      IF !(Upper(cChar) $ "YNTF")
+         RETURN NIL
+      ENDIF
+   ENDSWITCH
+
+   IF !Empty(::cPicFunc) .AND. !::cType == "N"
+      cChar := Transform(cChar, ::cPicFunc)
+   ENDIF
+
+   IF !Empty(::cPicMask)
+      cPic := SubStr(::cPicMask, nPos, 1)
+      cChar := Transform(cChar, cPic)
+      SWITCH cPic
+      CASE "A"
+         IF !IsAlpha(cChar)
+            cChar := NIL
+         ENDIF
+         EXIT
+      CASE "N"
+         IF !IsAlpha(cChar) .AND. !IsDigit(cChar)
+            cChar := NIL
+         ENDIF
+         EXIT
+      CASE "9"
+         IF !IsDigit(cChar) .AND. cChar != "-"
+            cChar := NIL
+         ENDIF
+         EXIT
+      CASE "#"
+         IF !IsDigit(cChar) .AND. !(cChar == " ") .AND. !(cChar $ "+-")
+            cChar := NIL
+         ENDIF
+         EXIT
+#ifdef __XHARBOUR__
+      DEFAULT
+#else
+      OTHERWISE
+#endif
+         cChar := Transform(cChar, cPic)
+      ENDSWITCH
+   ENDIF
+
+RETURN cChar
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD GetApplyKey(cKey) CLASS HEdit
-   
+
    LOCAL nPos
    LOCAL nGetLen
    LOCAL nLen
