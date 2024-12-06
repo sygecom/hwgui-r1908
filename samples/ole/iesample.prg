@@ -10,7 +10,8 @@
 
 #include "hwgui.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWnd, oPanelTool, oPanelIE, oFont
 Local oEdit, cUrl, oIE
 
@@ -41,7 +42,8 @@ Local oEdit, cUrl, oIE
 
 Return
 
-Static Function OpenFile( oIE,oEdit )
+STATIC FUNCTION OpenFile(oIE, oEdit)
+
 Local mypath := "\" + Curdir() + Iif( Empty( Curdir() ), "", "\" )
 Local fname := SelectFile( "HTML files", "*.htm;*.html", mypath )
 
@@ -52,7 +54,8 @@ Local fname := SelectFile( "HTML files", "*.htm;*.html", mypath )
 
 Return
 
-Static Function FindInGoogle( cQuery,oIE,oEdit )
+STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
+
 Local cUrl := "http://www.google.com/search?q=", cItem
 
    IF !Empty( cItem := NextItem( cQuery, .T.,' ' ) )

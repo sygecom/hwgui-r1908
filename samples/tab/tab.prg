@@ -39,10 +39,7 @@ oDlg1:lRouteCommand := .T.
   activate dialog oDlg1
 return nil
 
-
-
-
-function buildtabPages(oTab,aPage,aTitle)
+FUNCTION buildtabPages(oTab, aPage, aTitle)
 
 Local n
 for each n in aPage

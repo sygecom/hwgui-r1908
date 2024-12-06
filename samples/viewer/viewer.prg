@@ -17,7 +17,8 @@
 #define SCROLLVRANGE       20
 #define SCROLLHRANGE       20
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow, oFont
 // Local hDCwindow
 Private oToolBar, oImage, oSayMain, oSayScale
@@ -90,7 +91,8 @@ Private nVert, nHorz
 
 Return Nil
 
-Static Function MessagesProc( oWnd, msg, wParam, lParam )
+STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
+
 Local i, aItem
 
    IF msg == WM_VSCROLL
@@ -111,7 +113,8 @@ Local i, aItem
 
 Return -1
 
-Static Function Vscroll( oWnd, nScrollCode, nNewPos )
+STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
+
 Local stepV
 
    IF nScrollCode == SB_LINEDOWN
@@ -142,7 +145,8 @@ Local stepV
 
 Return Nil
 
-Static Function Hscroll( oWnd, nScrollCode, nNewPos )
+STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
+
 Local stepH
 
    IF nScrollCode == SB_LINEDOWN
@@ -174,7 +178,8 @@ Local stepH
 
 Return Nil
 
-Static Function FileOpen( oWnd )
+STATIC FUNCTION FileOpen(oWnd)
+
 Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
 Local fname
 Local aCoors
@@ -247,7 +252,8 @@ Local aCoors
 
 Return Nil
 
-Static Function Zoom( oWnd,nOp )
+STATIC FUNCTION Zoom(oWnd, nOp)
+
 Local aCoors
 Local stepV, stepH
 
@@ -309,7 +315,8 @@ Local stepV, stepH
 Return Nil
 
 /*
-Static Function PaintWindow( oWnd )
+STATIC FUNCTION PaintWindow(oWnd)
+
 Local stepV, stepH
 Local nOffsV, nOffsH
 
@@ -340,7 +347,7 @@ Local nOffsV, nOffsH
 Return 0
 */
 
-Static Function ImageInfo()
+STATIC FUNCTION ImageInfo()
 
    IF oImage == Nil
       Return Nil

@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oFont
 Local oAgent, oEdit
 Private oMainWindow, oChar
@@ -42,7 +43,8 @@ Private oMainWindow, oChar
 
 Return Nil
 
-Static Function SpeakIt( oEdit )
+STATIC FUNCTION SpeakIt(oEdit)
+
 Local aTop := ClientToScreen(oMainWindow:handle, 0, 0)
 Local cText := GetEditText( oEdit:oParent:handle, oEdit:id )
 

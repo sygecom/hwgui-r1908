@@ -21,7 +21,7 @@
 Static oMain, oForm, oFont, oGrid
 Static nCount := 50, conn, leof := .F.
 
-Function Main()
+FUNCTION Main()
 
         SET (_SET_DATEFORMAT, "yyyy-mm-dd")
         CriaBase()
@@ -47,7 +47,8 @@ Function Main()
         
 Return Nil
 
-Function Test()
+FUNCTION Test()
+
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
         
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "Postgres Demo";
@@ -79,31 +80,38 @@ Function Test()
                 
 Return Nil
 
-Function OnKey( o, k )
+FUNCTION OnKey(o, k)
+
 //    hwg_MsgInfo(str(k))
+
 return nil
 
-Function OnPosChange( o, row )
+FUNCTION OnPosChange(o, row)
+
 //    hwg_MsgInfo( str(row) )
+
 return nil
 
-Function OnClick( o )
-//    hwg_MsgInfo( 'click' )
-return nil    
+FUNCTION OnClick(o)
 
-Function OnDispInfo( o, x, y )
+//    hwg_MsgInfo( 'click' )
+
+return nil
+
+FUNCTION OnDispInfo(o, x, y)
+
     Local result := '', i
-    
-    
+
+
     if x > Lastrec() .and. ! lEof
         res := PQexec(conn, 'FETCH FORWARD 10 FROM cursor_1')
-        
+
         if ! ISCHARACTER(res)
 
             if PQLastrec(res) != 10
                 lEof := .T.
             end
-            
+
             for i := 1 to PQLastrec(res)
                 Append Blank
                 Replace Code     WITH myval(PQGetvalue(res, i, 1), 'N')
@@ -133,7 +141,8 @@ Function OnDispInfo( o, x, y )
     
 Return result
 
-Function CriaBase()
+FUNCTION CriaBase()
+
         IF File('trash.dbf')
             FErase('trash.dbf')
         END
@@ -170,7 +179,8 @@ Function CriaBase()
 return nil        
 
 
-Function MyVal( xValue, type )
+FUNCTION MyVal(xValue, type)
+
     Local result
     
     if valtype(xValue) == 'U'

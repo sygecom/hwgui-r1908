@@ -15,7 +15,8 @@ the Direct and Indirect way
 #include "windows.ch"
 #include "guilib.ch"
 
-FUNCTION Main
+FUNCTION Main()
+
 Local oMain
 
    INIT WINDOW oMain MAIN TITLE "Browse Example - Database" ;
@@ -32,7 +33,8 @@ Local oMain
 
 RETURN .T.
 
-FUNCTION IndirectDialog
+FUNCTION IndirectDialog()
+
 Local iDialog
 
    INIT DIALOG iDialog CLIPPER NOEXIT TITLE "Intermediate Dialog"  ;
@@ -44,7 +46,8 @@ Local iDialog
    ACTIVATE DIALOG iDialog
 
 
-function TestForm()
+FUNCTION TestForm()
+
 Local cTitle := "Dialog from prg"
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local oRadio1, oRadio2, onome, ocodigo, wcodigo, wnome, wfracao

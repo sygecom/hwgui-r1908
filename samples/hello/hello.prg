@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow, oBtn, aCombo := {"First","Second" }, cTool := "Example", oFont
 Local aTabs := { "A","B","C","D","E","F","G","H","I","J","K","L","M","N" }, oTab
 Local acho := { {"First item", 180}, {"Second item", 200} }
@@ -81,14 +82,17 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
 Return nil
 
-Static Function ChangeTab( oWnd,oGet,n )
+STATIC FUNCTION ChangeTab(oWnd, oGet, n)
+
 Static lastTab := 1
    aGetsTab[lastTab] := GetEditText( oGet:oParent:handle,oGet:id )
    SetDlgItemText( oGet:oParent:handle,oGet:id,aGetsTab[n] )
    lastTab := n
+
 Return Nil
 
-Function PS1( oWnd )
+FUNCTION PS1(oWnd)
+
 Local oDlg1, oDlg2
 
    INIT DIALOG oDlg1 TITLE "PAGE_1" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER

@@ -10,7 +10,8 @@
 #include "hwgui.ch"
 #include "dbstruct.ch"
 
-Function Main
+FUNCTION Main()
+
 Local aField:={{"CODIGO", "N", 3, 0},{"NOME", "C", 30, 0}}
 Local oDlg, i
 PRIVATE oBrowse, oSai, oConsulta
@@ -61,7 +62,9 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
    fErase("browse_4.dbf")
 RETURN Nil
 
-static function sair()
+STATIC FUNCTION sair()
+
    hwg_MsgInfo('Registros selecionados'+chr(13)+chr(10)+valToPrg(oBrowse:aSelected))
    EndDialog()
+
 return .T.

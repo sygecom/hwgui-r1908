@@ -8,6 +8,7 @@ STATIC nFirstRecordFilter := 0
 
 
 FUNCTION Main()
+
   PRIVATE frmTesteBrowse
   
   INIT WINDOW frmTesteBrowse MAIN TITLE "Teste HBrowse com filtro" ;

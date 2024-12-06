@@ -27,7 +27,7 @@
 #define FT_WHOLEWORD = 2
 #define EM_FINDTEXT = 199
 *****************
-function Main()
+FUNCTION Main()
 *****************
 local oPanel ,oIcon := HIcon():AddRESOURCE( "MAINICON" )
 public alterado:=.F.,;
@@ -358,7 +358,7 @@ FUNCTION Texto()
  SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0,ID_COLORB)  // cor de fundo
 RETURN
 *******************
-function funcao()
+FUNCTION funcao()
 *******************
 
 if maxi
@@ -379,7 +379,7 @@ endif
  endif
 
 ***************************
-function painel(wmdi)
+FUNCTION painel(wmdi)
 ***************************
    @ 0, 0 PANEL oPanel of wmdi SIZE 150, 30
 
@@ -403,7 +403,7 @@ function painel(wmdi)
        TOOLTIP bsalvar
 retu nil
 *******************************
-function fecha_texto()
+FUNCTION fecha_texto()
 *******************************
 Local h := HMainWIndow():GetMdiActive():handle
     if alterado
@@ -412,7 +412,7 @@ Local h := HMainWIndow():GetMdiActive():handle
     SendMessage(h, WM_CLOSE, 0, 0)
 retu (.T.)
 *******************************
-Function richeditProc( oEdit, msg, wParam, lParam )
+FUNCTION richeditProc(oEdit, msg, wParam, lParam)
 *******************************
 Local nVirtCode,strinsert:=''
 Local oParent, nPos
@@ -485,7 +485,7 @@ Local oParent, nPos
 ENDIF
 Return -1
 ***********************
-function indioma(rd_ID)
+FUNCTION indioma(rd_ID)
 ***********************
 for f := 8001 to 8002
   if IsCheckedMenuItem( ,f )
@@ -498,12 +498,13 @@ CheckMenuItem( ,rd_ID, !IsCheckedMenuItem( ,rd_ID ) )
 hwg_MsgInfo(reiniciar)
 return (.T.)
 ***********************
-function aguarde()
+FUNCTION aguarde()
 ***********************
 hwg_MsgInfo(desenvolvimento)
 retu .T.
 ****************************
-function Pesquisa()
+FUNCTION Pesquisa()
+
 local pesq,get01
 local flags:=1
 Local hWnd, oWindow, aControls, i
@@ -532,14 +533,14 @@ Local hWnd, oWindow, aControls, i
  endif
 return .T.
 ***************************
-function painel2(wmdi,array)
+FUNCTION painel2(wmdi, array)
 ***************************
 local oCombo
    @ 0, 0 PANEL oPanel of wmdi SIZE 150, 30
    @ 650, 2 GET COMBOBOX oCombo ITEMS oFunc SIZE 140, 200 of oPanel ON CHANGE {|| buscafunc(oCombo)}
 retu nil
 ***************************
-Function Ajuda( rArq)
+FUNCTION Ajuda(rArq)
 ***************************
 local vpasta:=curdir()
 oIE := TOleAuto():GetActiveObject( "InternetExplorer.Application" )
@@ -560,7 +561,7 @@ oIE:Navigate(rArq )
 RETURN
 
 ****************************
-function Vai(oEdit)
+FUNCTION Vai(oEdit)
 ****************************
 local pesq,get01
 local flags:=1
@@ -593,7 +594,7 @@ Local hWnd, oWindow, aControls, i
 
 return .T.
 **********************
-function seleciona()
+FUNCTION seleciona()
 **********************
 Local hWnd, oWindow, aControls, i
  hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
@@ -607,7 +608,7 @@ Local hWnd, oWindow, aControls, i
  ENDIF
 retu .T.
 *******************************
-Function Salvar_Projeto(oOpcao)
+FUNCTION Salvar_Projeto(oOpcao)
 *******************************
 Local fName, fTexto, fSalve
 Local hWnd, oWindow, aControls, i
@@ -642,7 +643,7 @@ local cfile :="temp"
  endif
 Return Nil
 *********************
-function buscafunc(linha)
+FUNCTION buscafunc(linha)
 *********************
 Local hWnd, oWindow, aControls, i
  if  HMainWIndow():GetMdiActive() != nil
@@ -664,7 +665,7 @@ Local hWnd, oWindow, aControls, i
   endif
 return (.T.)
 *************************
-function cor_fundo()
+FUNCTION cor_fundo()
 *************************
 Local hWnd, oWindow, aControls, i
  if  HMainWIndow():GetMdiActive() != nil
@@ -680,7 +681,7 @@ Local hWnd, oWindow, aControls, i
  SetFocus(aControls[hWnd]:Handle )
 retu .T.
 *************************
-function cor_Fonte()
+FUNCTION cor_Fonte()
 *************************
 Local hWnd, oWindow, aControls, i
  if  HMainWIndow():GetMdiActive() != nil
@@ -697,7 +698,7 @@ Local hWnd, oWindow, aControls, i
 retu .T.
 
 *************************
-function sintaxe(comando)
+FUNCTION sintaxe(comando)
 *************************
 local comand:=upper(alltrim(comando))
 local ret := .T.

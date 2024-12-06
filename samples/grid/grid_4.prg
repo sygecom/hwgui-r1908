@@ -16,7 +16,8 @@
 
 Static oMain, oForm, oFont, oGrid
 
-Function Main()
+FUNCTION Main()
+
         IF File('temp.dbf')
             FErase('temp.dbf')
         END
@@ -40,7 +41,8 @@ Function Main()
         
 Return Nil
 
-Function Test()
+FUNCTION Test()
+
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
         
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "File Viewer";
@@ -61,7 +63,8 @@ Function Test()
         ACTIVATE DIALOG oForm
 Return Nil
 
-Function OnDispInfo( o, x, y )    
+FUNCTION OnDispInfo(o, x, y)
+
     Local result := ''
     
     DBGoto(x)
@@ -69,11 +72,13 @@ Function OnDispInfo( o, x, y )
     result := field->line
 Return result
 
-Function FileOpen()
+FUNCTION FileOpen()
+
         Local fname
         fname := SelectFile( "Select File", "*.*")
-    
+
         Zap
         APPEND FROM (fname) SDF
+
 Return Test()
 

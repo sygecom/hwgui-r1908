@@ -11,7 +11,8 @@
 
 STATIC oPrinter,aSize:={280, 220}
 
-function Main
+FUNCTION Main()
+
 Private oMainWindow, oPanel
 Private oFont := Nil, cDir := "\"+Curdir()+"\"
 Private nColor, oBmp2
@@ -36,6 +37,7 @@ Private nColor, oBmp2
 return nil
 
 FUNCTION TestRtf()
+
 LOCAL cOutFile, oRtf, anchos, i
 LOCAL j, aMarca, lFormato := .F.
 

@@ -21,7 +21,8 @@ REQUEST OPENREPORT
 Memvar connHandle, cServer, cDatabase, cUser, cDataDef, queHandle, nNumFields
 Memvar nNumRows, aQueries
 
-Function Main()
+FUNCTION Main()
+
 Local oFont, oIcon := HIcon():AddResource("ICON_1")
 Public hBitmap := LoadBitmap( "BITMAP_1" )
 Public connHandle := 0, cServer := "", cDatabase := "", cUser := ""
@@ -109,7 +110,8 @@ Private oMainWindow, oEdit, oPanel, oPanelE
 
 Return Nil
 
-Function About
+FUNCTION About()
+
 Local oModDlg, oFont
 
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
@@ -121,7 +123,8 @@ Local oModDlg, oFont
    oModDlg:Activate()
 Return Nil
 
-Function AboutDraw
+FUNCTION AboutDraw()
+
 Local pps
 Local hDC
    pps := DefinePaintStru()
@@ -130,7 +133,8 @@ Local hDC
    EndPaint( getmodalhandle(), pps )
 Return Nil
 
-Function DataBases
+FUNCTION DataBases()
+
 Local aBases, nChoic
 
    IF connHandle == 0
@@ -153,7 +157,8 @@ Local aBases, nChoic
 
 Return Nil
 
-Function Tables
+FUNCTION Tables()
+
 Local aTables, nChoic
 Local cTable
 
@@ -177,7 +182,8 @@ Local cTable
 
 Return Nil
 
-Function Connect
+FUNCTION Connect()
+
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
@@ -188,7 +194,8 @@ Local aModDlg
    aModDlg:Activate()
 Return Nil
 
-Function InitConnect
+FUNCTION InitConnect()
+
 Local hDlg := getmodalhandle()
    SetDlgItemText( hDlg, IDC_EDIT1, cServer )
    SetDlgItemText( hDlg, IDC_EDIT2, cUser )
@@ -202,7 +209,8 @@ Local hDlg := getmodalhandle()
    ENDIF
 Return .F.
 
-Function EndConnect
+FUNCTION EndConnect()
+
 Local hDlg := getmodalhandle()
    IF connHandle > 0
       sqlClose( connHandle )
@@ -243,13 +251,15 @@ Local hDlg := getmodalhandle()
    ENDIF
 Return
 
-Function ResizeEditQ( nWidth, nHeight )
+FUNCTION ResizeEditQ(nWidth, nHeight)
 
    MoveWindow( oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95 )
    MoveWindow( oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95 )
+
 Return Nil
 
-Function ResizeBrwQ( oBrw, nWidth, nHeight )
+FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
+
 Local aRect, i, nHbusy := oMainWindow:aOffset[4]
 
    aRect := GetClientRect( oEdit:handle )
@@ -257,7 +267,8 @@ Local aRect, i, nHbusy := oMainWindow:aOffset[4]
    MoveWindow( oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8 )
 Return Nil
 
-Function Execute
+FUNCTION Execute()
+
 Local cQuery := Ltrim( oEdit:GetText() )
 Local arScr, nError, nLineEr
 
@@ -277,7 +288,8 @@ Local arScr, nError, nLineEr
 
 Return .T.
 
-Function execSQL( cQuery )
+FUNCTION execSQL(cQuery)
+
 Local res, stroka, poz := 0, lFirst := .T., i := 1
 
    IF connHandle == 0
@@ -323,7 +335,8 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
    ENDIF
 Return res == 0
 
-Function sqlBrowse( queHandle )
+FUNCTION sqlBrowse(queHandle)
+
 Local aQueRows, i, j, vartmp, af := {}
    nNumRows := sqlNRows( queHandle )
    WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows, 5 ) + " rows" )
@@ -368,7 +381,7 @@ Local aQueRows, i, j, vartmp, af := {}
    RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
 Return Nil
 
-Function BrowHistory()
+FUNCTION BrowHistory()
 
    IF nHistCurr == 0
       Return Nil
@@ -382,9 +395,11 @@ Function BrowHistory()
    oBrw:ofont := oBrwFont
    oBrw:bEnter := {|h,o|GetFromHistory(h,o)}
    RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
+
 Return Nil
 
-Static Function GetFromHistory()
+STATIC FUNCTION GetFromHistory()
+
 Local cQuery := "", i := oBrw:nCurrent
 
    IF !Empty( oBrw:aArray[ i, 1 ] )
@@ -398,7 +413,8 @@ Local cQuery := "", i := oBrw:nCurrent
    ENDIF
 Return Nil
 
-Static Function ReadHistory( fname )
+STATIC FUNCTION ReadHistory(fname)
+
 Local han, stroka, lFirst := .T., lEmpty := .F.
 LOCAL strbuf := Space(512), poz := 513
 
@@ -429,7 +445,8 @@ LOCAL strbuf := Space(512), poz := 513
    ENDIF
 Return nHistCurr
 
-Static Function WriteHistory( fname )
+STATIC FUNCTION WriteHistory(fname)
+
 Local han, i, lEmpty := .T.
    IF !Empty( aQueries )
       han := FCREATE( fname )
@@ -445,7 +462,8 @@ Local han, i, lEmpty := .T.
    ENDIF
 Return Nil
 
-FUNCTION DoSQL( cQuery )
+FUNCTION DoSQL(cQuery)
+
 Local aRes, qHandle, nNumFields, nNumRows, i
    IF sqlQuery( connHandle, cQuery) != 0
       Return { 1 }
@@ -474,11 +492,14 @@ Local aRes, qHandle, nNumFields, nNumRows, i
    ENDIF
 Return Nil
 
-FUNCTION FilExten( fname )
+FUNCTION FilExten(fname)
+
 LOCAL i
+
 RETURN IIF( ( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ) )
 
-Function SaveScript
+FUNCTION SaveScript()
+
 Local fname := SaveFile( "*.scr","Script files( *.scr )", "*.scr", mypath )
    cQuery := oEdit:GetText()
    IF !Empty( fname )
@@ -486,18 +507,22 @@ Local fname := SaveFile( "*.scr","Script files( *.scr )", "*.scr", mypath )
    ENDIF
 Return Nil
 
-Function WndOut()
+FUNCTION WndOut()
 Return Nil
 
-Function MsgSay( cText )
+FUNCTION MsgSay(cText)
+
    hwg_MsgStop( cText )
+
 Return Nil
 
 EXIT PROCEDURE cleanup
+
    IF connHandle > 0
       sqlClose( connHandle )
       IF queHandle > 0
          sqlFreeR( queHandle )
       ENDIF
    ENDIF
+
 Return

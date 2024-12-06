@@ -8,7 +8,8 @@
 
 Static oBrowse
 
-Function Main
+FUNCTION Main()
+
         Local oMain
         
         CreateDB()
@@ -25,7 +26,7 @@ Function Main
         ACTIVATE WINDOW oMain
 Return Nil
 
-Function BrowseTest_2()
+FUNCTION BrowseTest_2()
 
         Local oForm, oFont
         PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -10
@@ -58,7 +59,8 @@ Function BrowseTest_2()
         ACTIVATE DIALOG oForm
 Return Nil
 
-Static Function CreateDB()
+STATIC FUNCTION CreateDB()
+
     Local i, letra:=100
 
     if file('test.dbf')
@@ -93,7 +95,7 @@ Static Function CreateDB()
     DBGotop()
 Return Nil
 
-Function DBNavigator( oCtrl, nLeft, nTop, aAction, aHide )
+FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
 
 
@@ -236,7 +238,7 @@ Function DBNavigator( oCtrl, nLeft, nTop, aAction, aHide )
 
 Return Nil
 
-Function ReplaceIndex(oPos)
+FUNCTION ReplaceIndex(oPos)
 
 if  ! oBrowse:lAppMode
   hwg_MsgInfo("Key press in col "+str(oPos))

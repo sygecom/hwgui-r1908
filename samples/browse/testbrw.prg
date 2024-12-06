@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -15,7 +16,8 @@ Local oMainWindow
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function DlgGet
+FUNCTION DlgGet()
+
 Local oModDlg, oBrw1, oBrw2
 Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
 Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
@@ -47,9 +49,11 @@ Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
    ACTIVATE DIALOG oModDlg
 Return Nil
 
-Static Function BrwKey( oBrw, key )
+STATIC FUNCTION BrwKey(oBrw, key)
+
    IF key == 32
       oBrw:aArray[ oBrw:nCurrent, 1 ] := !oBrw:aArray[ oBrw:nCurrent, 1 ]
       oBrw:RefreshLine()
    ENDIF
+
 Return .T.

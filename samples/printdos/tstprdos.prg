@@ -1,6 +1,6 @@
 /*
  * HWGUI using sample
- * 
+ *
  * Demo for PrintDos CLASS
  * Copyright 2003 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
  * www - http://www.lumainformatica.com.br
@@ -39,7 +39,8 @@
  
 #define PF_BUFFERS   2048
 
-function Main
+FUNCTION Main()
+
 Local oMain 
   
    INIT WINDOW oMain MAIN TITLE "Example for PrintDos Class" 
@@ -77,7 +78,7 @@ Local oMain
 
 return nil
 
-Function TestDosClass(oTest)
+FUNCTION TestDosClass(oTest)
 
 If hwg_MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
 
@@ -111,7 +112,8 @@ Endif
 
 Return Nil
 
-Function TestDosClipper(oTest)
+FUNCTION TestDosClipper(oTest)
+
 Local oPrinter
 
 If hwg_MsgYesNo("Printing style clipper to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
@@ -147,6 +149,7 @@ Endif
 Return Nil
 
 FUNCTION OpenRel(oText)
+
 LOCAL oDlg
 Local oFont
 Local lText   := MemoRead( oText ) 
@@ -164,7 +167,7 @@ Local lText   := MemoRead( oText )
 
 RETURN
 
-Function TestPrinterFile(oTest)
+FUNCTION TestPrinterFile(oTest)
 
 If hwg_MsgYesNo("Printing File "+oTest)
 
@@ -176,7 +179,8 @@ EndIf
 
 Return Nil
 
-Function TestGraphic()
+FUNCTION TestGraphic()
+
 Local oPrint, oPrint1
 
 oPrint:=Printdos():New("Graphic.txt")
@@ -215,7 +219,8 @@ oPrint1:txttoGraphic("Graphic.txt", -6, .T.) //Parameters Name graphic, Size, Pr
 oPrint1:End()
 Return Nil
 
-Function TestPreview()
+FUNCTION TestPreview()
+
 Local oPrint, oPrint1
 
 oPrint:=Printdos():New("Preview.txt")
@@ -256,7 +261,8 @@ oPrint1:End()
 
 Return Nil
 
-Function DeskJet(oTest)
+FUNCTION DeskJet(oTest)
+
 Local oPrinter
 
 If hwg_MsgYesNo("Printing InkJet/DeskJet "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")

@@ -1,7 +1,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-FUNCTION main
+FUNCTION Main()
 
    LOCAL oMain, i
 
@@ -21,8 +21,8 @@ FUNCTION main
 
    RETURN nil
 
+STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
 
-STATIC FUNCTION stdScroll( oDlg, msg, wParam, lParam, nIncr )
    LOCAL nScrollCode := LOWORD( wParam )
    LOCAL nNewPos := HIWORD( wParam )
    LOCAL x, y, xx, yy, pg

@@ -18,7 +18,7 @@
 
 //================================================================//
 
-Function Main
+FUNCTION Main()
 
    Local oWnd
 
@@ -42,7 +42,7 @@ Function Main
 
 //================================================================//
 
-Function Dlg1
+FUNCTION Dlg1()
 
    Local oDlg
    Local oMC
@@ -71,7 +71,7 @@ Function Dlg1
 
 //================================================================//
 
-Function Dlg2
+FUNCTION Dlg2()
 
    Local oDlg
    Local oMC
@@ -95,4 +95,3 @@ Function Dlg2
    Return Nil
 
 //================================================================//
-

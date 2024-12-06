@@ -16,7 +16,9 @@
 #DEFINE  ID_PRGFLAG     10004
 #DEFINE  ID_CFLAG       10005
 #DEFINE  ID_PRGMAIN     10006
-FUNCTION Main
+
+FUNCTION Main()
+
 Local oFont
 Local aBrowse1, aBrowse2, aBrowse3, aBrowse4
 LOCAL oPasta  := DiskName()+":\"+CurDir()+"\"
@@ -124,7 +126,8 @@ PRIVATE oButton1, oExeName, oLabel1, oLibFolder, oButton4, oLabel2, oIncFolder, 
    ACTIVATE DIALOG oDlg
 RETURN
 
-Static Function SearchFile(oBrow, oFile)
+STATIC FUNCTION SearchFile(oBrow, oFile)
+
 Local oTotReg:={}, i
 Local aSelect:=SelectMultipleFiles("xBase Files ("+oFile+")", oFile ) 
 if len(aSelect) ==0
@@ -143,7 +146,8 @@ obrow:aArray := oTotReg
 obrow:refresh()
 Return Nil
 
-Static Function SearchFileName(nName, oGet, oFile)
+STATIC FUNCTION SearchFileName(nName, oGet, oFile)
+
 Local oTextAnt:=oGet:GetText()
 Local fFile:=SelectFile(nName + " (" + oFile + ")", oFile, , , .T.)
 If !Empty(oTextAnt)
@@ -154,7 +158,8 @@ oGet:Refresh()
 Return Nil
 
 
-Function ReadBuildFile()
+FUNCTION ReadBuildFile()
+
 Local oLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal:=""
 Local oFolderFile:=SelectFile("HwGUI File Build (*.bld)", "*.bld" ) 
@@ -207,7 +212,8 @@ oBrowse4:Refresh()
 
 Return Nil
 
-Function SaveBuildFile()
+FUNCTION SaveBuildFile()
+
 Local oLibFiles, i, oNome, g
 Local oFolderFile:=SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" ) 
 if empty(oFolderFile); Return Nil; Endif
@@ -268,14 +274,16 @@ endif
 hwg_Msginfo("File "+oFolderFile+" saved","HwGUI Build")
 Return Nil
 
-Function BuildApp()
+FUNCTION BuildApp()
+
 If hwg_MsgYesNo("Yes Compile to BAT, No compile to PoMake")
    BuildBat()
 Else
    BuildPoMake()
 EndIf   
 
-Function BuildBat()
+FUNCTION BuildBat()
+
 Local voExeName, voLibFolder, voIncFolder, voPrgFlag, voCFlag, voPrgMain, voPrgFiles, voCFiles,voResFiles
 Local oLibFiles, CRF:=CHR(13)+CHR(10), oName, oInc, lName, gDir
 Local oArq:=fCreate("Hwg_Build.bat"),i, vHwGUI, vHarbour, vPelles
@@ -463,7 +471,8 @@ Else
 Endif   
 Return Nil
 
-Function BuildPoMake()
+FUNCTION BuildPoMake()
+
 Local voExeName, voLibFolder, voIncFolder, voPrgFlag, voCFlag, voPrgMain, voPrgFiles, voCFiles,voResFiles
 Local oLibFiles, CRF:=CHR(13)+CHR(10), oName, oInc, lName, gDir
 Local oArq:=fCreate("Makefile.pc"),i, vHwGUI, vHarbour, vPelles

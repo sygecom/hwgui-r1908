@@ -8,7 +8,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 Private var1 := 10320.54
 
@@ -26,7 +27,8 @@ Private var1 := 10320.54
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function DlgGet(lColor)
+FUNCTION DlgGet(lColor)
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oTimer
 Local e1 := "Dialog from prg"
 Local e2 := Date()
@@ -101,18 +103,18 @@ Private oSayT
 
 Return Nil
 
-Static Function SetTimer( oDlg,oTimer )
+STATIC FUNCTION SetTimer(oDlg, oTimer)
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
 Return Nil
 
-Static Function TimerFunc()
+STATIC FUNCTION TimerFunc()
 
    oSayT:SetValue( Time() )
 Return Nil
 
 
-Function TestBallon
+FUNCTION TestBallon()
 
    Local oWnd
 

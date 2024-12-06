@@ -11,7 +11,7 @@
 #Include "hwgui.ch"
 STATIC Thisform
 
-Function Main ()
+FUNCTION Main()
 
    INIT WINDOW oMain MAIN TITLE "Calculator Sample" ;
       AT 0, 0 ;
@@ -26,7 +26,7 @@ Function Main ()
 
 Return Nil
 
-FUNCTION calculator( )
+FUNCTION calculator()
 
   LOCAL oDlg,  oGroup1, oBtn1, oOw1, oValue, oLabel1
 
@@ -64,14 +64,15 @@ FUNCTION calculator( )
 
 RETURN oDlg:lresult
 
-STATIC FUNCTION oOw1_onClick
+STATIC FUNCTION oOw1_onClick()
+
    LOCAL ocalc
    oCalc := HCalculator():New('Calculator')
    oCalc:Show()
- RETURN .T.
 
+RETURN .T.
 
-STATIC FUNCTION oValue_onKeyDown( This, nKeyPress, nShiftAltCtrl )
+STATIC FUNCTION oValue_onKeyDown(This, nKeyPress, nShiftAltCtrl)
 
    LOCAL oCalc
    IF nKeyPress = VK_F2
@@ -79,5 +80,3 @@ STATIC FUNCTION oValue_onKeyDown( This, nKeyPress, nShiftAltCtrl )
       oCalc:Show(This, .T.)
    ENDIF
    RETURN .T.
-
-

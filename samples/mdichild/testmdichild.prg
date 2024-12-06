@@ -1,9 +1,9 @@
 /*
  * HWGUI using sample
- * 
+ *
  *
  * Jose Augusto M de Andrade Jr - jamaj@terra.com.br
- * 
+ *
 */
 
 #include "windows.ch"
@@ -12,9 +12,10 @@
 static aChilds := {}
 static Thisform
 
-function Main()
+FUNCTION Main()
+
    Local oMainWindow
-   
+
    INIT WINDOW oMainWindow MAIN MDI TITLE "HwGui - Mdi Child Windows Example" STYLE WS_CLIPCHILDREN ;
 
    MENU OF oMainWindow
@@ -28,7 +29,7 @@ function Main()
 return (NIL)
 
 
-FUNCTION CreateMdiChild(  )
+FUNCTION CreateMdiChild()
 
   LOCAL oWin,  oStatus1, oContainer1, oContainer2, oContainer3, oContainer4, oContainer5, oGroup1 ;
         , oButtonex1, oButtonex2, oButtonex3, oButtonex4, oGroup2, oButtonex5, oButtonex6, oLabel13 ;
@@ -214,12 +215,11 @@ FUNCTION CreateMdiChild(  )
    ACTIVATE WINDOW oWin CENTER
 
 
-RETURN  NIL
+RETURN NIL
 
-STATIC FUNCTION oBrowse1_onInit( This )
+STATIC FUNCTION oBrowse1_onInit(This)
 
    This:aArray := {{"7891234512345", "CERVEJA STELA 330ML", 6, "UN", 1.99, 11.94}}
    This:HighlightStyle := 0
- RETURN .T.
 
-
+RETURN .T.

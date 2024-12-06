@@ -17,7 +17,8 @@ REQUEST HB_CODEPAGE_RU1251
 #endif
 */
 
-Function Main
+FUNCTION Main()
+
 Local oWinPrn, i
 
 #ifdef __PLATFORM__Linux__

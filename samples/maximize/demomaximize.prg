@@ -2,25 +2,25 @@
  * $Id:
  *
  * HWGUI demo for screen Maximized
- * 
+ *
  *
  * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
  * www - http://www.geocities.com/alkresin/
  *
  * Copyright 2004 Sandro <sandrorrfreire@yahoo.com.br>
- * 
+ *
 */
 
 #include "windows.ch"
 #include "guilib.ch"
- 
+
 * --------------------------------------------
-function Main
+FUNCTION Main()
 * --------------------------------------------
 Private oMain, temp1
 Private oDlg
 Private oFont := Nil
- 
+
    INIT WINDOW oMain MAIN TITLE "Demo Maximize"
 
     MENU OF oMain
@@ -36,6 +36,5 @@ Private oFont := Nil
     ENDMENU
 
     ACTIVATE WINDOW oMain MAXIMIZED
- 
+
 return nil
- 

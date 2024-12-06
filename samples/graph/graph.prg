@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 
 
@@ -18,7 +19,8 @@ Local oMainWindow
    ACTIVATE WINDOW oMainWindow
 Return nil
 
-Static Function Graph1
+STATIC FUNCTION Graph1()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
 Local i, aGraph[1]
 
@@ -42,7 +44,8 @@ Local i, aGraph[1]
 
 Return Nil
 
-Static Function Graph2
+STATIC FUNCTION Graph2()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
 Local i, aGraph[1]
 
@@ -66,7 +69,8 @@ Local i, aGraph[1]
 
 Return Nil
 
-Static Function Graph3
+STATIC FUNCTION Graph3()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
 Local i, aGraph[1]
 

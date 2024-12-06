@@ -9,7 +9,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -23,7 +24,8 @@ Local oMainWindow
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function OpenConfig
+FUNCTION OpenConfig()
+
 Local aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
 Local oBrw1, oBrw2
 Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }

@@ -73,7 +73,7 @@ INIT WINDOW oWinMain MAIN  ;
 RETURN(NIL)
 
 *****************************
-STATIC FUNCTION BrwDbs( lEdit, lZebra )
+STATIC FUNCTION BrwDbs(lEdit, lZebra)
 *****************************
 LOCAL oEdGoto
 LOCAL oBrwDb
@@ -189,7 +189,7 @@ LOCAL nLast := 0
 RETURN(NIL)
 
 *******************************************************
-STATIC FUNCTION BrowseMove(oBrw, cPar, oEdGoto, cType )
+STATIC FUNCTION BrowseMove(oBrw, cPar, oEdGoto, cType)
 *******************************************************
 IF cPar == "Home"
   oBrw:TOP()
@@ -440,7 +440,8 @@ RETURN(aArray)
  #XTRANSLATE HB_PVALUE(<var>)  => PVALUE(<var>)
 #endif
 
-FUNCTION MsgD( cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10 )
+FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
+
    LOCAL nI, nLen := PCOUNT(), cVar := ""
    FOR nI := 1 TO nLen
        IF HB_PVALUE(nI) == NIL

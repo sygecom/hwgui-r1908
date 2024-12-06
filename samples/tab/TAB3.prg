@@ -1,6 +1,7 @@
 #include "hwgui.ch"
 
-FUNCTION _Main
+FUNCTION Main()
+
 PRIVATE oRadiogroup1, oL     , oRadiobutton1, oRadiobutton2, oPage , oLabel1, oLabel4, oLabel3, oLabel2
 
 cUser:="1"
@@ -41,7 +42,8 @@ cUser:="1"
    ACTIVATE DIALOG oDlg
 RETURN
 
-STATIC function protek
+STATIC FUNCTION protek()
+
  parameters o,n
  private lOpen:=.T.
 
@@ -71,20 +73,23 @@ STATIC function protek
 Return Nil
 
 
-STATIC FUNCTION onDlgInit
+STATIC FUNCTION onDlgInit()
+
 oPage:settab(4)
 oPage:ShowPage(4)
 
 RETURN Nil
 
-STATIC FUNCTION oRadiobutton1_onClick
+STATIC FUNCTION oRadiobutton1_onClick()
+
 cUser:="1"
 oL:settext("only 1,3")
+
 RETURN Nil
 
-STATIC FUNCTION oRadiobutton2_onClick
+STATIC FUNCTION oRadiobutton2_onClick()
+
 cUser:="2"
 oL:settext("only 2,3")
 
 RETURN Nil
-

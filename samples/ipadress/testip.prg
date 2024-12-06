@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -13,9 +14,11 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
+
 Return Nil
 
-Function DlgGet
+FUNCTION DlgGet()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local cRes, aCombo := { "First","Second" }
 Local oGet
@@ -72,10 +75,14 @@ Local aIP := { 10, 1, 2, 3 }
 Return Nil
 
 
-function IpGetFocus()
+FUNCTION IpGetFocus()
+
    hwg_MsgInfo("GetFocus")
+
 return (NIL)
 
-function IpLostFocus()
+FUNCTION IpLostFocus()
+
    hwg_MsgInfo("LostFocus")
+
 return (NIL)

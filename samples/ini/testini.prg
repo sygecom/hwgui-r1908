@@ -8,7 +8,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
 
    Local oMainWindow
    Local cIniFile:="HwGui.ini"
@@ -34,9 +34,12 @@ Function Main
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function ReadIni()
+FUNCTION ReadIni()
+
 Local cIniFile:="HwGui.ini"
+
 hwg_MsgInfo( Hwg_GetIni( 'Config', 'WallParer' ,, cIniFile ) )
 hwg_MsgInfo( Hwg_GetIni( 'Config', 'DirHwGUima',, cIniFile ) )
 hwg_MsgInfo( Hwg_GetIni( 'Print',  'Spoll'     ,, cIniFile ) )
+
 Return Nil

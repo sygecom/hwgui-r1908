@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"
@@ -18,4 +19,3 @@ Local oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
    oTrayMenu:End()
 
 Return Nil
-

@@ -44,7 +44,8 @@ hwg_MsgInfo( "Mouse button pressed" , ::winclass )
 Return
 
 
-Function Main
+FUNCTION Main()
+
 Local oMainWnd, oPanelTool, oPanelIE, oFont
 Local cUrl, oIE
 Private oEdit

@@ -3,7 +3,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 HWG_INITCOMMONCONTROLSEX()
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -17,7 +18,8 @@ HWG_INITCOMMONCONTROLSEX()
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function DlgGet
+FUNCTION DlgGet()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local cRes, aCombo := { "First","Second" }
 Local oGet
@@ -109,7 +111,9 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
 Return Nil
 PROC HB_GTSYS; RETURN
 PROC HB_GT_DEFAULT_GUI; RETURN
-function CreateBar(oModDlg,otool)
+
+FUNCTION CreateBar(oModDlg, otool)
+
 //Local hTool
 //Local aItem := {{-1, 701, 0x04, 0x0000, 0, "teste1"}, {-1, 702, 0x04, 0x0000, 0, "teste2"}, {-1, 703, 0x04, 0x0000, 0, "teste3"}}
 Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {3, 702, 0x04, 0x0000, 0, "teste2", , "rtrt"}, {-1, 702, 0x04, 0x0000, 0, "teste3", , "teste222"}}

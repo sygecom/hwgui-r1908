@@ -38,7 +38,8 @@ Static oMain, oForm, oBrowse
           => ;
           aadd(<aGrid>, {<cField>, <cLabel>, <cPicture>, <.lReadonly.>, <{bValid}>, <aList>})
 
-Function Main()
+FUNCTION Main()
+
         INIT WINDOW oMain MAIN TITLE "Grid Edition Sample" ;
              AT 0, 0 ;
              SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -49,9 +50,11 @@ Function Main()
                 ENDMENU
 
         ACTIVATE WINDOW oMain
+
 Return Nil
 
-Function Test()
+FUNCTION Test()
+
     Local aItems := {}
     Local i
     
@@ -111,7 +114,8 @@ Function Test()
 
 Return Nil
     
-Function GridEdit(cAlias, aFields, lAppend, bChange)
+FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
+
     Local i
     Local cField
     Local nSay := 0
@@ -298,7 +302,8 @@ Function GridEdit(cAlias, aFields, lAppend, bChange)
     
 Return oForm:lResult
 
-static Function __valid(value, oCtrl, aFields, bChange)
+STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
+
     Local result := .T.
     Local i, n, oGet
     Local val
@@ -333,7 +338,8 @@ static Function __valid(value, oCtrl, aFields, bChange)
     endif            
 Return result
 
-Static Function OnDispInfo( oCtrl, nRow, nCol )
+STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
+
     Local result := ''
     DBGoto(nRow)
     
@@ -350,7 +356,8 @@ Static Function OnDispInfo( oCtrl, nRow, nCol )
     endif                                          
 Return result
 
-Static Function OnKey( o, k, aItems )
+STATIC FUNCTION OnKey(o, k, aItems)
+
     if k == VK_INSERT
         if GridEdit('temp', aItems, .T., {|oCtrl, colpos| myblock(oCtrl, colpos)})
             o:SetItemCount(lastrec())
@@ -362,18 +369,24 @@ Static Function OnKey( o, k, aItems )
     endif        
 return nil    
 
-Static function OnClick( o, aItems )
-    GridEdit('temp', aItems, .F., {|oCtrl, colpos| myblock(oCtrl, colpos)})
-return nil    
+STATIC FUNCTION OnClick(o, aItems)
 
-Static function myblock( oCtrl, colpos )
+    GridEdit('temp', aItems, .F., {|oCtrl, colpos| myblock(oCtrl, colpos)})
+
+return nil
+
+STATIC FUNCTION myblock(oCtrl, colpos)
+
     if colpos == 3
         replace field_5 with 'hello'
-    endif            
-return nil    
-    
-Static Function mydelete()
+    endif
+
+return nil
+
+STATIC FUNCTION mydelete()
+
     DELETE
     PACK
     oGrid:SetItemCount(Lastrec())
+
 return nil

@@ -16,9 +16,8 @@
 #include "rmchart.ch"
 #include "hbclass.ch"
 
+FUNCTION Main()
 
-
-Function Main
 Local oMainWnd, oPanel
 Private oPdf
 
@@ -48,12 +47,11 @@ METHOD New(p1,p2,p3,p4,p5,p6) CLASS PdfReader
   ::Super:New(p1,p2,p3,p4,p5,p6)
 RETURN
 
-function ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
+FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
+
     local oPdf
 
     oPdf := PdfReader():New( oWindow, "AcroPDF.PDF.1", 0, 0, nHeight, nWidth )
     oPdf:LoadFile(cPdfFile)
 
     return oPdf
-
-

@@ -1,10 +1,10 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 Local oSplash
-
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 0, 0 SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -19,5 +19,3 @@ Local oSplash
    ACTIVATE WINDOW oMainWindow
 
 Return Nil
-
- 

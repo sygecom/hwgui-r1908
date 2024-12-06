@@ -9,7 +9,8 @@
 #include "guilib.ch"
 #include "hxml.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oXmlNode
 Local i, j, fname := ""
 Private oXmlDoc, lIniChanged := .F., nCurrentItem
@@ -50,7 +51,8 @@ Private oMainWindow, oFont
 
 Return Nil
 
-Function NewItem( nItem )
+FUNCTION NewItem(nItem)
+
 Local oDlg, oItemFont, oFontNew
 Local oXmlNode, fname, i, j, aMenu, nId
 Local cName, cInfo
@@ -124,7 +126,8 @@ Local cName, cInfo
 
 Return Nil
 
-Function FontFromXML( oXmlNode )
+FUNCTION FontFromXML(oXmlNode)
+
 Local width  := oXmlNode:GetAttribute( "width" )
 Local height := oXmlNode:GetAttribute( "height" )
 Local weight := oXmlNode:GetAttribute( "weight" )
@@ -155,7 +158,8 @@ Return HFont():Add( oXmlNode:GetAttribute( "name" ),  ;
                     width, height, weight, charset,   ;
                     ita, under )
 
-Function Font2XML( oFont )
+FUNCTION Font2XML(oFont)
+
 Local aAttr := {}
 
    Aadd( aAttr, { "name",oFont:name } )
@@ -176,9 +180,11 @@ Local aAttr := {}
 
 Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
-Function SaveOptions()
+FUNCTION SaveOptions()
+
    IF lIniChanged
       oXmlDoc:Save( "testxml.xml" )
    ENDIF
    CLOSE ALL
+
 Return Nil

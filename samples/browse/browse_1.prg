@@ -8,7 +8,8 @@
 Static nCount := 0
 Static oBrowse
 
-Function Main
+FUNCTION Main()
+
         Local oMain
         
         CreateDB()
@@ -26,7 +27,8 @@ Function Main
         ACTIVATE WINDOW oMain
 Return Nil
 
-Function BrowseTest()
+FUNCTION BrowseTest()
+
         Local oForm, oFont
 
         SetToolTipBalloon(.T.)
@@ -85,59 +87,69 @@ Function BrowseTest()
         ACTIVATE DIALOG oForm
 Return Nil
 
-Static Function BrowseWhen()
-        hwg_MsgExclamation("When Event")
+STATIC FUNCTION BrowseWhen()
+
+   hwg_MsgExclamation("When Event")
+
 Return .T.
 
-Static Function BrowseValid()
-        hwg_MsgExclamation("Valid Event"+STR(TENTA))
-        ++TENTA
+STATIC FUNCTION BrowseValid()
+
+   hwg_MsgExclamation("Valid Event"+STR(TENTA))
+   ++TENTA
+
 Return .T.
 
-Static Function BrowseMove()
-        hwg_MsgInfo("Going to record " + ltrim(str(recno())))
+STATIC FUNCTION BrowseMove()
+
+   hwg_MsgInfo("Going to record " + ltrim(str(recno())))
+
 return Nil
-        
-Static Function BrowseUpdate( oBrow, colpos)
-        hwg_MsgExclamation("Column " + ltrim(str(colpos)) + " Changed")
-        
-        if colpos == 2
-                oBrow:Append()
-        else                
-                oBrow:DoHScroll( SB_LINERIGHT )
-                oBrow:Edit()
-        end                
-                
-        oBrowse:RefreshLine()
+
+STATIC FUNCTION BrowseUpdate(oBrow, colpos)
+
+   hwg_MsgExclamation("Column " + ltrim(str(colpos)) + " Changed")
+
+   if colpos == 2
+      oBrow:Append()
+   else
+      oBrow:DoHScroll( SB_LINERIGHT )
+      oBrow:Edit()
+   end
+
+   oBrowse:RefreshLine()
+
 Return Nil
 
-Static Function BrowseKey( oBrowse, key )   
-   IF key == VK_INSERT 
+STATIC FUNCTION BrowseKey(oBrowse, key)
+
+   IF key == VK_INSERT
       oBrowse:Append()
-   END
+   ENDIF
+
 Return .T.
 
-Static Function CreateDB()
-        if file('browse_1.dbf')
-                FErase('browse_1.dbf')
-        end
-        
-        DBCreate('browse_1', {{'code', 'N', 6, 0},;
-                              {'desc', 'C', 40, 0},;
-                              {'list', 'N', 1, 0},;
-                              {'creation', 'D', 8, 0},;
-                              {'status', 'L', 1, 0},;
-                              {'price', 'N', 10, 2}})
-                              
-        USE browse_1 EXCLUSIVE                   
-        
-        APPEND BLANK
-        REPLACE Code WITH 1
-        REPLACE Desc WITH "Testing code"           
-        REPLACE list WITH 1
-        REPLACE creation WITH Date()
-        REPLACE Status WITH .T.
-        REPLACE Price WITH 150.31        
-Return Nil
+STATIC FUNCTION CreateDB()
 
- 
+   if file('browse_1.dbf')
+      FErase('browse_1.dbf')
+   end
+
+   DBCreate('browse_1', {{'code', 'N', 6, 0},;
+                         {'desc', 'C', 40, 0},;
+                         {'list', 'N', 1, 0},;
+                         {'creation', 'D', 8, 0},;
+                         {'status', 'L', 1, 0},;
+                         {'price', 'N', 10, 2}})
+
+   USE browse_1 EXCLUSIVE
+
+   APPEND BLANK
+   REPLACE Code WITH 1
+   REPLACE Desc WITH "Testing code"
+   REPLACE list WITH 1
+   REPLACE creation WITH Date()
+   REPLACE Status WITH .T.
+   REPLACE Price WITH 150.31
+
+Return Nil

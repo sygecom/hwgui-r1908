@@ -16,7 +16,8 @@
 #include "rmchart.ch"
 #include "hbclass.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWnd, oPanel
 Local mypath := curdrive()+":\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
 Private oFlash
@@ -47,7 +48,8 @@ METHOD New(p1,p2,p3,p4,p5,p6) CLASS ShockwaveFlash
   ::Super:New(p1,p2,p3,p4,p5,p6)
 RETURN
 
-function FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
+FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
+
     local oFlash
 
     oFlash := ShockwaveFlash():New( oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth )

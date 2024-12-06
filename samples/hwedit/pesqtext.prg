@@ -42,7 +42,7 @@ next g
  ACTIVATE DIALOG oDlgPesq
 RETURN
 *****************************
-function pesq(rd_dir,rd_text)
+FUNCTION pesq(rd_dir, rd_text)
 *****************************
 local arquivos:=directory(rd_dir+'*.prg',"D", .T.) // pegando arquivos
 local nom_arq:={}

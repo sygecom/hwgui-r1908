@@ -15,7 +15,7 @@
 
 Static oMain, oForm, oFont, oGrid
 
-Function Main()
+FUNCTION Main()
 
         INIT WINDOW oMain MAIN TITLE "Grid Sample" ;
              AT 0, 0 ;
@@ -29,7 +29,8 @@ Function Main()
         ACTIVATE WINDOW oMain
 Return Nil
 
-Function Test()
+FUNCTION Test()
+
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
         
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "Grid Demo";
@@ -56,18 +57,23 @@ Function Test()
                 
 Return Nil
 
-Function OnKey( o, k )
+FUNCTION OnKey(o, k)
+
 //    hwg_MsgInfo(str(k))
-return nil    
 
-Function OnPosChange( o, row )
+return nil
+
+FUNCTION OnPosChange(o, row)
+
 //    hwg_MsgInfo( str(row) )
-return nil    
 
-Function OnClick( o )
+return nil
+
+FUNCTION OnClick(o)
+
 //    hwg_MsgInfo( 'click' )
-return nil    
 
-Function OnDispInfo( o, x, y )
+return nil
+
+FUNCTION OnDispInfo(o, x, y)
 return 'Row: ' + ltrim(str(x)) + ' Col: ' + ltrim(str(y))
-

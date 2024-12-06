@@ -12,7 +12,8 @@
 // REQUEST HB_CODEPAGE_RU866
 // REQUEST HB_CODEPAGE_RU1251
 
-function Main
+FUNCTION Main()
+
 Private oMainWindow, oPanel
 Private oFont := Nil, cImageDir := "..\image\"
 Private nColor, oBmp2
@@ -83,7 +84,8 @@ Private nColor, oBmp2
 
 return nil
 
-Function CreateChildWindow
+FUNCTION CreateChildWindow()
+
 Local oChildWnd, oPanel, oFontBtn, oBoton1, oBoton2
 Local e1 := "Dialog from prg"
 Local e2 := Date()
@@ -136,7 +138,8 @@ Local e5 := 10320.54
 
 Return Nil
 
-Function MdiChildFromPrg( o )
+FUNCTION MdiChildFromPrg(o)
+
 Local cTitle := "MdiChild from prg", cText := "Input something"
 Local oChildWnd, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
@@ -199,7 +202,8 @@ Local oCmd1, oCmd2, oCmd3
 Return Nil
 
 
-function NoExit()
+FUNCTION NoExit()
+
 Local oDlg, oGet, vGet:="Dialog if no close in ENTER or EXIT"
 
    INIT DIALOG oDlg TITLE "No Exit Enter and Esc"     ;
@@ -210,7 +214,8 @@ Local oDlg, oGet, vGet:="Dialog if no close in ENTER or EXIT"
    oDlg:Activate()
 Return Nil
 
-function OpenAbout
+FUNCTION OpenAbout()
+
 Local oModDlg, oFontBtn, oFontDlg, oBrw
 Local aSample := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
 Local oBmp, oIcon := HIcon():AddFile("image\PIM.ICO")
@@ -281,7 +286,7 @@ Local oSay
 
 Return Nil
 
-Static Function About2()
+STATIC FUNCTION About2()
 
    IF oBmp2 == Nil
       Return
@@ -296,14 +301,17 @@ Static Function About2()
 
 Return Nil
 
-Static Function BrwKey( oBrw, key )
+STATIC FUNCTION BrwKey(oBrw, key)
+
    IF key == 32
       oBrw:aArray[ oBrw:nCurrent, 1 ] := !oBrw:aArray[ oBrw:nCurrent, 1 ]
       oBrw:RefreshLine()
    ENDIF
+
 Return .T.
 
-Function FileOpen
+FUNCTION FileOpen()
+
 Local oModDlg, oBrw
 Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
 Local fname := SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
@@ -341,13 +349,15 @@ Local nId
    ENDIF
 Return Nil
 
-Function FileClose( oDlg )
+FUNCTION FileClose(oDlg)
+
    Local oBrw := oDlg:FindControl( 111 )
    dbSelectArea( oBrw:alias )
    dbCloseArea()
 Return .T.
 
-function printdos
+FUNCTION PrintDos()
+
 Local han := fcreate( "LPT1", 0 )
   if han != -1
      fwrite( han, Chr(10)+Chr(13)+"Example of dos printing ..."+Chr(10)+Chr(13) )
@@ -359,7 +369,8 @@ Local han := fcreate( "LPT1", 0 )
   endif
 return nil
 
-Function PrnTest
+FUNCTION PrnTest()
+
 Local oPrinter, oFont
 
    INIT PRINTER oPrinter
@@ -400,7 +411,8 @@ Local oPrinter, oFont
 
 Return Nil
 
-Function DialogFromPrg( o )
+FUNCTION DialogFromPrg(o)
+
 Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
@@ -458,7 +470,9 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 Return Nil
 
 #define DTM_SETFORMAT       4101
-Static Function CreateC( oDlg )
+
+STATIC FUNCTION CreateC(oDlg)
+
 Static lFirst := .F., o
    IF !lFirst
       @ 50, 200 DATEPICKER o SIZE 80, 24
@@ -467,14 +481,15 @@ Static lFirst := .F., o
    SendMessage(o:handle, DTM_SETFORMAT, 0, "dd':'MM':'yyyy")
 Return Nil
 
-Function Sendemail(endereco)
+FUNCTION Sendemail(endereco)
+
 ShellExecute("rundll32.exe", "open", ;
             "url.dll,FileProtocolHandler " + ;
             "mailto:"+endereco+"?cc=&bcc=" + ;
             "&subject=Ref%20:" + ;
             "&body=This%20is%20test%20.", , 1)
 
-Function TestTab()
+FUNCTION TestTab()
 
 Local oDlg, oTAB
 Local oGet1, oGet2, oVar1:="1", oVar2:="2"
@@ -505,7 +520,7 @@ ACTIVATE DIALOG oDlg
 
 return nil
 
-FUNCTION ActiveTopMost( nHandle, lActive )
+FUNCTION ActiveTopMost(nHandle, lActive)
     
     if lActive
        lSucess := SetTopMost(nHandle)    // Set TopMost
@@ -516,7 +531,8 @@ FUNCTION ActiveTopMost( nHandle, lActive )
     RETURN lSucess
 
 
-Function TestProgres()
+FUNCTION TestProgres()
+
 Local oDlg,ostatus,oBar
 Local cRes, aCombo := { "First","Second" }
 Private oProg
@@ -536,7 +552,8 @@ oCombo := HComboBox():New(ostatus, , , , 65536, 0, 2, 200, 20, aCombo, , , , , ,
    
    oDlg:Activate() 
 
-Function MudeProg(ostatus)
+FUNCTION MudeProg(ostatus)
+
 Local ct:=1
 Do while ct<1001
    oProg:Step()
@@ -546,7 +563,8 @@ EndDo
 Return Nil
 
 
-function RRectangle()
+FUNCTION RRectangle()
+
 Local oDlg, oR1, oR2, oR3   
 
 INIT DIALOG oDlg TITLE "Sample HRect"    ;

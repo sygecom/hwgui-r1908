@@ -11,7 +11,7 @@
 
 Static oMain, oForm, oFont, oBar
 
-Function Main ()
+FUNCTION Main()
 
    INIT WINDOW oMain MAIN TITLE "ComboBox Sample" ;
       AT 0, 0 ;
@@ -27,7 +27,7 @@ Function Main ()
 
 Return Nil
 
-Function Test ()
+FUNCTION Test()
 
    Local nCombo := 1
    Local cCombo := "Four"
@@ -66,7 +66,7 @@ Function Test ()
 
 Return Nil
 
-Function BoundTest ()
+FUNCTION BoundTest()
 
    Local nCombo := 1
    Local cCombo := "Four"
@@ -98,7 +98,8 @@ Function BoundTest ()
 
 Return Nil
 
-Static Function oCombo3_onInteractiveChange( value,This )  
+STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
+
    LOCAL cTexto,n
 
    cTexto := TRIM( This:GetText() )

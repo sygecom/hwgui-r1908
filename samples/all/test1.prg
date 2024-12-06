@@ -1,7 +1,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -19,7 +20,8 @@ Local oMainWindow
    ACTIVATE WINDOW oMainWindow
 Return Nil
 
-Function DlgGet
+FUNCTION DlgGet()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local cRes, aCombo := { "First","Second" }
 Local oGet

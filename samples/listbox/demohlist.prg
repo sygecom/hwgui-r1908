@@ -2,8 +2,8 @@
 #include "guilib.ch"
 // #include "listbox.ch"
 
+FUNCTION Main()
 
-Function Main
 Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
@@ -15,9 +15,11 @@ Local oMainWindow
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
+
 Return Nil
 
-Function Teste
+FUNCTION Teste()
+
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local oList, oItems:={"Item01","Item02","Item03","Item04"}
 
@@ -30,7 +32,7 @@ Local oList, oItems:={"Item01","Item02","Item03","Item04"}
              INIT 1 ;
              SIZE 210, 220            ;
              ON INIT {||hwg_MsgInfo("Teste")} ;
-             TOOLTIP "Test ListBox"       
+             TOOLTIP "Test ListBox"
 
    @  10, 280 BUTTON "Ok" ID IDOK  SIZE 50, 32
     ACTIVATE DIALOG oModDlg
@@ -38,4 +40,5 @@ Local oList, oItems:={"Item01","Item02","Item03","Item04"}
 
    IF oModDlg:lResult
     ENDIF
+
 Return Nil

@@ -1,9 +1,10 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main()
+FUNCTION Main()
+
     Local oMain
-        
+
     INIT WINDOW oMain MAIN TITLE "Help Demo" HELP "helpdemo.hlp";
          AT 0, 0 ;
          SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -14,14 +15,16 @@ Function Main()
             ENDMENU
 
     ACTIVATE WINDOW oMain
+
 Return Nil
 
-Static Function Test()
+STATIC FUNCTION Test()
+
     Local cVar := Space(30)
     Local oVar
     Local oModDlg
     Local xVar := Space(50)
-    
+
     INIT DIALOG oModDlg TITLE "Press F1 to invoke Context Help"  ;
         AT 210, 10  SIZE 300, 300 HELPID 3
 
@@ -34,7 +37,7 @@ Static Function Test()
        @ 180, 240 BUTTON "Cancel" ID IDCANCEL  SIZE 100, 32
 
        oVar:helpid := 4
-   
-    ACTIVATE DIALOG oModDlg
-Return Nil
 
+    ACTIVATE DIALOG oModDlg
+
+Return Nil

@@ -17,7 +17,7 @@ Static oSayDlg2
 
 //--------------------------------------------------------------------------//
 
-Function Main ()
+FUNCTION Main()
 
    INIT WINDOW oWnd MAIN TITLE "TrackBar Control - Demo" ;
       COLOR COLOR_3DLIGHT+1 ;
@@ -46,7 +46,7 @@ Function Main ()
 
 //--------------------------------------------------------------------------//
 
-Function UpdateSay ()
+FUNCTION UpdateSay()
 
    oSay:SetValue( str( oTB:GetValue() ) )
 
@@ -54,7 +54,7 @@ Function UpdateSay ()
 
 //--------------------------------------------------------------------------//
 
-Function Dlg1 ()
+FUNCTION Dlg1()
 
    INIT DIALOG oDlg1 TITLE "Dialog 1" ;
       AT 20, 20 SIZE 500, 300
@@ -77,7 +77,7 @@ Function Dlg1 ()
 
 //--------------------------------------------------------------------------//
 
-Function UpdateSayDlg1 ()
+FUNCTION UpdateSayDlg1()
 
    oSayDlg1:SetValue( str( oTB1:GetValue() ) )
 
@@ -85,7 +85,7 @@ Function UpdateSayDlg1 ()
 
 //--------------------------------------------------------------------------//
 
-Function Dlg2 ()
+FUNCTION Dlg2()
 
    INIT DIALOG oDlg2 TITLE "Dialog 2" ;
       AT 20, 20 SIZE 500, 300
@@ -109,7 +109,7 @@ Function Dlg2 ()
 
 //--------------------------------------------------------------------------//
 
-Function UpdateSayDlg2 ()
+FUNCTION UpdateSayDlg2()
 
    oSayDlg2:SetValue( str( oTB2:GetValue() ) )
 

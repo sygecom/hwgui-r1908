@@ -6,7 +6,8 @@
 
 #include "hwgui.ch"
 
-Function Main
+FUNCTION Main()
+
 Local oMainWindow, oFont
 Local oIco1 := HIcon():AddFile("..\image\ok.ico")
 Local oIco2 := HIcon():AddFile("..\image\cancel.ico")

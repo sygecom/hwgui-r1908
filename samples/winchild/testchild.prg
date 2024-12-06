@@ -11,7 +11,8 @@
 
 static aChilds := {}
 
-function Main()
+FUNCTION Main()
+
    Local oMainWindow
 
    INIT WINDOW oMainWindow MAIN MDI TITLE "HwGui - Child Windows Example" STYLE WS_CLIPCHILDREN ;
@@ -26,9 +27,8 @@ function Main()
 
 return (NIL)
 
+FUNCTION CreateChild(lClip)
 
-
-function CreateChild(lClip)
    Local oChild
    Local cTitle := "Child Window #" + Str(len(aChilds) + 1, 2, 0)
    Local oIcon := HIcon():AddFile("..\image\PIM.ICO")
@@ -43,11 +43,11 @@ function CreateChild(lClip)
    oChild := HWindow():New(WND_CHILD, oIcon, Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
                            NIL, bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), oBmp)
    */
-   
+
    oChild := HChildWindow():New(oIcon,Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
                           bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), NIL)
-   
-   // Test if we could create the window object 
+
+   // Test if we could create the window object
    If ISOBJECT(oChild)
       aAdd(aChilds,oChild)
    Else
@@ -57,4 +57,3 @@ function CreateChild(lClip)
    oChild:Activate(.T.)
 
 return (NIL)
-

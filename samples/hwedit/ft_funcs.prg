@@ -100,8 +100,10 @@ STATIC TheHandle As Object
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION FT_FUSE( cFile AS STRING, nMode  AS NUMERIC)
+FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
+
    Local nHandle as numeric
+
    IF nMode == nil
       nMode := 2
    ENDIF
@@ -127,7 +129,9 @@ RETURN nHandle
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
 FUNCTION ft_FEOF()
+
    LOCAL lRETURN as LOGICAL := theHandle:lAtBottom
+
 RETURN lRETURN
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
@@ -138,9 +142,10 @@ RETURN lRETURN
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION FReadLn(  cLine AS STRING)
+FUNCTION FReadLn(cLine AS STRING)
 
    cLine := theHandle:retrieve()
+
 RETURN cLine
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
@@ -173,6 +178,7 @@ RETURN cBuffer
 FUNCTION FT_FGotop()
 
    theHandle:Gotop()
+
 RETURN NIL
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
@@ -181,9 +187,10 @@ RETURN NIL
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION FT_FSKIP( n AS NUMERIC)
+FUNCTION FT_FSKIP(n AS NUMERIC)
 
    TheHandle:Skip( n )
+
 RETURN nil
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
@@ -194,7 +201,7 @@ RETURN nil
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION FT_MKDIR( CDIR AS STRING)
+FUNCTION FT_MKDIR(CDIR AS STRING)
 
    MAKEDIR( cdir )
 
@@ -209,7 +216,7 @@ RETURN nil
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION StrPos( cBuffer AS STRING)
+FUNCTION StrPos(cBuffer AS STRING)
 
    LOCAL nPos AS NUMERIC :=0
    LOCAL x   AS NUMERIC
@@ -246,7 +253,7 @@ RETURN nPos
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION GetNumberofTableItems( cBuffer )
+FUNCTION GetNumberofTableItems(cBuffer)
 
    LOCAL cItem AS STRING
    LOCAL nItem AS NUMERIC := 0
@@ -276,7 +283,7 @@ FUNCTION GetNumberofTableItems( cBuffer )
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION FREADline( nH as Numeric, cB AS STRING, nMaxLine as Numeric)
+FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
 
    LOCAL cLine AS STRING
    LOCAL nSavePos AS NUMERIC

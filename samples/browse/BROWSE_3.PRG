@@ -14,7 +14,8 @@
 #define x_RED             255
 
 
-Function Main
+FUNCTION Main()
+
 Local oArq1:={{"COD", "C", 3, 0}}
 Local oArq2:={{"COD1", "C", 3, 0},{"NOME", "C", 30, 0}}
 Local oDlg, i
@@ -85,7 +86,8 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Teste";
 RETURN Nil
 
  
-STATIC FUNCTION Teste_CreateColumn( oBrw, oCol, oHead, oAr, seq, oType, oLen, oDec )
+STATIC FUNCTION Teste_CreateColumn(oBrw, oCol, oHead, oAr, seq, oType, oLen, oDec)
+
 Local i
 Local nArea := &oAr->(select())
     
@@ -97,7 +99,8 @@ Local nArea := &oAr->(select())
 
 RETURN Nil
 
-Static Function BrowseKey( oBr, key )   
+STATIC FUNCTION BrowseKey(oBr, key)
+
    LOCAL xFun
  
    IF key == 112 //.and. lHelp == .T.      && f1

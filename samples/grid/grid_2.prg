@@ -20,7 +20,7 @@
 
 Static oMain, oForm, oFont, oGrid, oServer, oQuery
 
-Function Main()
+FUNCTION Main()
 
         ConnectGrid()
         
@@ -39,7 +39,8 @@ Function Main()
         
 Return Nil
 
-Function Test()
+FUNCTION Test()
+
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
         
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "Postgres Sample";
@@ -62,7 +63,8 @@ Function Test()
         ACTIVATE DIALOG oForm
 Return Nil
 
-Function ConnectGrid()
+FUNCTION ConnectGrid()
+
     Local cHost := 'Localhost'
     Local cDatabase := 'test'
     Local cUser := 'Rodrigo'
