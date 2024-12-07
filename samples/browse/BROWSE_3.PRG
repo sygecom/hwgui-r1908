@@ -60,7 +60,7 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Teste";
    Select Teste
    
    @ 9, 8 BROWSE oBrowse DATABASE SIZE 466, 196 STYLE WS_VSCROLL + WS_HSCROLL;
-    ON KEYDOWN {|o,key| BrowseKey(o, key) } ;
+    ON KEYDOWN {|o, key| BrowseKey(o, key) } ;
 
    @ 393, 214 BUTTON oSai CAPTION "Sair" ON CLICK {||EndDialog()} SIZE 80, 32
 
@@ -71,7 +71,7 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Teste";
    Teste_CreateColumn(oBrowse, "COD", "CODIGO", "TESTE", 1, "C", 3, 0)
    Teste_CreateColumn(oBrowse, "NOME", "NOME", "TESTE1", 1, "C", 30, 0)
    oBrowse:acolumns[2]:footing:="test;test2"
-   oBrowse:acolumns[2]:bColorfoot:={|| {x_BLUE,x_RED}}
+   oBrowse:acolumns[2]:bColorfoot:={|| {x_BLUE, x_RED}}
    oBrowse:acolumns[2]:nJusFoot:=DT_CENTER
 
    oBrowse:Refresh()
@@ -89,9 +89,9 @@ STATIC FUNCTION Teste_CreateColumn(oBrw, oCol, oHead, oAr, seq, oType, oLen, oDe
 Local i
 Local nArea := &oAr->(select())
 
-   oBrw:AddColumn( HColumn():New(oHead ,;
-                                     FieldWBlock( oCol, nArea ),  ;
-                                     oType, oLen, oDec, .F.) )
+   oBrw:AddColumn(HColumn():New(oHead ,;
+                                     FieldWBlock(oCol, nArea),  ;
+                                     oType, oLen, oDec, .F.))
                                     //"C",   30,   2
    oBrw:Refresh()
 

@@ -29,7 +29,7 @@ Private oPdf
       ENDMENU
    ENDMENU
 
-   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
+   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y), opdf:Move(, , x, y), opdf:Refresh()}
 
    opdf := ViewPdf(oPanel, "SAMPLE.PDF", 0, 0, 500, 366)
 
@@ -43,9 +43,9 @@ CLASS VAR winclass INIT "Pdfreader"
 ENDCLASS
 
 
-METHOD New(p1,p2,p3,p4,p5,p6) CLASS PdfReader
+METHOD New(p1, p2, p3, p4, p5, p6) CLASS PdfReader
 
-  ::Super:New(p1,p2,p3,p4,p5,p6)
+  ::Super:New(p1, p2, p3, p4, p5, p6)
 
 RETURN NIL
 
@@ -53,7 +53,7 @@ FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
 
     local oPdf
 
-    oPdf := PdfReader():New( oWindow, "AcroPDF.PDF.1", 0, 0, nHeight, nWidth )
+    oPdf := PdfReader():New(oWindow, "AcroPDF.PDF.1", 0, 0, nHeight, nWidth)
     oPdf:LoadFile(cPdfFile)
 
 RETURN oPdf

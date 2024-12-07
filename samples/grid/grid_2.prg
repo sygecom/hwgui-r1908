@@ -52,7 +52,7 @@ FUNCTION Test()
                      ITEMCOUNT oQuery:Lastrec() ;
                      COLOR VColor('D3D3D3');
                      BACKCOLOR RGB(220, 220, 220) ;
-                     ON DISPINFO {|oCtrl, nRow, nCol| valtoprg(oQuery:FieldGet( nRow, nCol )) }
+                     ON DISPINFO {|oCtrl, nRow, nCol| valtoprg(oQuery:FieldGet(nRow, nCol)) }
 
              ADD COLUMN TO GRID oGrid HEADER "Column 1" WIDTH  50
              ADD COLUMN TO GRID oGrid HEADER "Column 2" WIDTH 200

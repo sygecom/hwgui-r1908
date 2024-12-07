@@ -3,8 +3,8 @@
 
 FUNCTION Main()
 
-Local oDlg1,oDlg2,oDlg3,oTab
-Local aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
+Local oDlg1, oDlg2, oDlg3, oTab
+Local aDlg1, aDlg2, aCombo := { "Aaaa", "Bbbb" }
 Local oBrw1, oBrw2
 Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
 Local aSample2 := { {"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40} }
@@ -12,13 +12,13 @@ Local e1 := "Xxxx"
 Local e2 := "Xxxx"
 Local e3 := "Xxxx"
 
-init dialog oDlg1 from resource DIALOG_1 clipper NOEXIT NOEXITESC  on init {|| buildtabPages(oTab,{adlg1,adlg2},{"pagina1","pagina2"})}
+init dialog oDlg1 from resource DIALOG_1 clipper NOEXIT NOEXITESC  on init {|| buildtabPages(oTab, {adlg1, adlg2}, {"pagina1", "pagina2"})}
 
 /*
-aDlg1:oParent:=oTab,aDlg2:oParent:=oTab,;
+aDlg1:oParent:=oTab, aDlg2:oParent:=oTab,;
 aDlg1:Activate(.T.),      aDlg2:Activate(.T.), ;
-aDlg2:hide(),    oTab:StartPage("pagina1",aDlg1),    oTab:EndPage(), ;
-oTab:StartPage("pagina2",aDlg2),    oTab:EndPage(),otab:changepage(1)
+aDlg2:hide(),    oTab:StartPage("pagina1", aDlg1),    oTab:EndPage(), ;
+oTab:StartPage("pagina2", aDlg2),    oTab:EndPage(), otab:changepage(1)
 
 }
 */
@@ -36,8 +36,8 @@ oDlg1:lRouteCommand := .T.
    REDEFINE BROWSE oBrw1 ARRAY ID 104
    REDEFINE BROWSE oBrw2 ARRAY ID 105
 
-   CreateArList( oBrw1,aSample1 )
-   CreateArList( oBrw2,aSample2 )
+   CreateArList(oBrw1, aSample1)
+   CreateArList(oBrw2, aSample2)
   activate dialog oDlg1
 
 RETURN NIL
@@ -48,7 +48,7 @@ Local n
 for each n in aPage
    n:oParent := oTab
    n:activate(.T.)
-   oTab:startpage(aTitle[hb_enumindex()],n)
+   oTab:startpage(aTitle[hb_enumindex()], n)
    otab:endpage()
    n:oParent := nil
 next

@@ -44,7 +44,7 @@ FUNCTION BrowseTest()
                 @  5, 5 BROWSE oBrowse DATABASE OF oForm SIZE 690, 375 STYLE WS_VSCROLL + WS_HSCROLL ;
                         AUTOEDIT ;
                         APPEND ;
-                        ON KEYDOWN {|o,key| BrowseKey(o, key) } ;
+                        ON KEYDOWN {|o, key| BrowseKey(o, key) } ;
                         ON UPDATE {|oBrow, Colpos| BrowseUpdate(oBrow, colpos) } ;
                         ON POSCHANGE {|| BrowseMove() } 
                 PUBLIC TENTA:=1
@@ -115,7 +115,7 @@ STATIC FUNCTION BrowseUpdate(oBrow, colpos)
    if colpos == 2
       oBrow:Append()
    else
-      oBrow:DoHScroll( SB_LINERIGHT )
+      oBrow:DoHScroll(SB_LINERIGHT)
       oBrow:Edit()
    end
 

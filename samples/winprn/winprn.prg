@@ -22,10 +22,10 @@ FUNCTION Main()
 Local oWinPrn, i
 
 #ifdef __PLATFORM__Linux__
-   oWinPrn := HWinPrn():New( ,"RU866","RUKOI8" )
+   oWinPrn := HWinPrn():New(, "RU866", "RUKOI8")
    oWinPrn:StartDoc(.T., "/apps/a2.ps")
 #else
-   oWinPrn := HWinPrn():New( ,"RU866","RU1251" )
+   oWinPrn := HWinPrn():New(, "RU866", "RU1251")
    oWinPrn:StartDoc(.T.)
 #endif
 
@@ -69,7 +69,7 @@ Local oWinPrn, i
    oWinPrn:NextPage()
    oWinPrn:PrintLine(oWinPrn:oFont:name + " " + Str(oWinPrn:oFont:height) + " " + Str(oWinPrn:nCharW) + " " + Str(oWinPrn:nLineHeight))
    FOR i := 1 TO 80
-      oWinPrn:PrintLine(Padl( i, 3 ) + " --------")
+      oWinPrn:PrintLine(Padl(i, 3) + " --------")
    NEXT
 
    oWinPrn:End()

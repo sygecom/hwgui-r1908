@@ -19,7 +19,7 @@ cUser:="1"
 
    @ 315, 43 SAY oL      CAPTION "Label" SIZE 147, 22
    @ 27, 113 TAB oPage  ITEMS {} SIZE 455, 238   ;
-        ON INIT {|oCtrl| oCtrl:bChange:={|o,nPage|   Protek(o,nPage) } }
+        ON INIT {|oCtrl| oCtrl:bChange:={|o, nPage|Protek(o, nPage) } }
   BEGIN PAGE 'Tab1' OF oPage
    @ 40, 62 SAY oLabel1 CAPTION "Here Page 1" OF oPage  SIZE 225, 22
   END PAGE OF oPage
@@ -42,7 +42,7 @@ RETURN NIL
 
 STATIC FUNCTION protek()
 
- parameters o,n
+ parameters o, n
  private lOpen:=.T.
 
  if cUser=="1" .AND. n==2

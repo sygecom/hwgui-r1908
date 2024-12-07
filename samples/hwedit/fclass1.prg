@@ -67,8 +67,8 @@ CLASS FileMan
    data nHan
    data nLastDosMessage                 // Holds the DOS error level of last operation
 
-   METHOD addItem( nDos, cFile, cPath ) // Adds an item to the array of handles
-   METHOD delItem( xitem )              // Deletes an item from the array of handles
+   METHOD addItem(nDos, cFile, cPath) // Adds an item to the array of handles
+   METHOD delItem(xitem)              // Deletes an item from the array of handles
 
    METHOD new()     // The constructor for this class
    METHOD closeAll()                    // Closes all of those files
@@ -82,7 +82,7 @@ CLASS FileMan
    METHOD noDosError()                  // Returns a logical true/false
 
    METHOD openfile(cFile, nMethod)    // Opens the specified file and sets error
-   METHOD Buffget( ld ) virtual
+   METHOD Buffget(ld) virtual
 
 ENDCLASS
 
@@ -120,7 +120,7 @@ RETURN self
 METHOD closeAll() CLASS FileMan
 
    IF ::nLastDosMessage == 0
-      AEVAL( ::aDosHandles, { | aFile | FCLOSE(aFile[pDOS_HANDLE]) } )
+      AEVAL(::aDosHandles, { | aFile | FCLOSE(aFile[pDOS_HANDLE]) })
    ENDIF
 
 RETURN self
@@ -138,7 +138,7 @@ RETURN self
 METHOD rewindAll() CLASS FileMan
 
    IF ::nLastDosMessage == 0
-      AEVAL( ::aDosHandles, { | aFile | FSEEK( aFile[pDOS_HANDLE], 0, 0 ) } )
+      AEVAL(::aDosHandles, { | aFile | FSEEK(aFile[pDOS_HANDLE], 0, 0) })
    ENDIF
 
 RETURN self
@@ -155,7 +155,7 @@ RETURN self
 METHOD writeAll() CLASS FileMan
 
    IF ::nLastDosMessage == 0
-      AEVAL( ::aDosHandles, { | aFile | FWRITE(aFile[pDOS_HANDLE], "", 0) } )
+      AEVAL(::aDosHandles, { | aFile | FWRITE(aFile[pDOS_HANDLE], "", 0) })
    ENDIF
 
 RETURN self
@@ -173,8 +173,8 @@ METHOD getFileName(nId) CLASS FileMan                     // Obtains the name of
 
    IF ::nLastDosMessage == 0
       IF nId IS pNUMERIC
-         nPosition := ASCAN( ::aDosHandles, ;
-                             { | aFile | nId == aFile[pDOS_HANDLE] } )
+         nPosition := ASCAN(::aDosHandles, ;
+                             { | aFile | nId == aFile[pDOS_HANDLE] })
          IF nPosition != 0
             cName := ::aDosHandles[nPosition, pDOS_FILE]
          ENDIF
@@ -196,8 +196,8 @@ METHOD getFileId(cName) CLASS FileMan                     // Obtains the ID base
 
    IF ::nLastDosMessage == 0
       IF cName IS pCHARACTER
-         nPosition := ASCAN( ::aDosHandles, ;
-                             { | aFile | cName == aFile[pDOS_FILE] } )
+         nPosition := ASCAN(::aDosHandles, ;
+                             { | aFile | cName == aFile[pDOS_FILE] })
          IF nPosition != 0
             nId := ::aDosHandles[nPosition, pDOS_HANDLE]
          ENDIF
@@ -222,15 +222,15 @@ METHOD getFilePath(xItem) CLASS FileMan                   // Obtains file path b
    IF ::nLastDosMessage == 0
       DO CASE
          CASE ( xItem IS pCHARACTER )   // we've got the file name
-            nPosition := ASCAN( ::aDosHandles, ;
-                                { | aFile | xItem == aFile[pDOS_FILE] } )
+            nPosition := ASCAN(::aDosHandles, ;
+                                { | aFile | xItem == aFile[pDOS_FILE] })
             IF nPosition != 0
                cPath := ::aDosHandles[nPosition, pDOS_PATH]
             ENDIF
 
          CASE ( xItem IS pNUMERIC )     // we've got the file path
-            nPosition := ASCAN( ::aDosHandles, ;
-                                { | aFile | xItem == aFile[pDOS_HANDLE] } )
+            nPosition := ASCAN(::aDosHandles, ;
+                                { | aFile | xItem == aFile[pDOS_HANDLE] })
             IF nPosition != 0
                cPath := ::aDosHandles[nPosition, pDOS_PATH]
             ENDIF
@@ -243,7 +243,7 @@ RETURN cPath
    // The following two methods are for the sole purpose of manipulating the
    // array of DOS file handles
 
-   /* Method:  ::addItem( <nDos>, <cFile> [, <cPath] )
+   /* Method:  ::addItem(<nDos>, <cFile> [, <cPath])
    Params:  <nDos>          DOS file handle
             <cFile>         File name
             <cPath>         File path, defaults to ""
@@ -254,7 +254,7 @@ RETURN cPath
             ::nLastDosMessage is 0.  The return value of the method will
             be the object itself.
 */
-METHOD addItem( nDos, cFile, cPath ) CLASS FileMan
+METHOD addItem(nDos, cFile, cPath) CLASS FileMan
 
    DEFAULT cPath TO ""
 
@@ -264,7 +264,7 @@ METHOD addItem( nDos, cFile, cPath ) CLASS FileMan
 
 RETURN self
 
-   /* Method:  ::delItem( <xItem> )
+   /* Method:  ::delItem(<xItem>)
    Params:  <xItem>         DOS file handle or file name
    Returns: <lSuccess>      Success status of operation
    Purpose: To go through the stack of opened file handles and based on the
@@ -277,7 +277,7 @@ RETURN self
             otherwise, a logical true (.T.) will be returned.
 */
 
-METHOD delItem( xItem ) CLASS FileMan
+METHOD delItem(xItem) CLASS FileMan
 
    LOCAL nPosition     // as int
    LOCAL lSuccess  := pTRUE                // as logical
@@ -288,29 +288,29 @@ METHOD delItem( xItem ) CLASS FileMan
    IF ::nLastDosMessage == 0            // No DOS error!
       DO CASE
          CASE ( xItem IS pNUMERIC )     // It's a DOS file handle
-            nPosition := ASCAN( ::aDosHandles, ;
-                                { | aItem | xItem == aItem[pDOS_HANDLE] } )
+            nPosition := ASCAN(::aDosHandles, ;
+                                { | aItem | xItem == aItem[pDOS_HANDLE] })
             IF nPosition == 0
                // Don't remove and set the return value of the function
                lSuccess := pFALSE
             ELSE
                // Since we have a position, remove from the table and keep the
                // default return value
-               ADEL( ::aDosHandles, nPosition )
-               ASIZE(::aDosHandles, LEN( ::aDosHandles ) - 1)
+               ADEL(::aDosHandles, nPosition)
+               ASIZE(::aDosHandles, LEN(::aDosHandles) - 1)
             ENDIF
 
          CASE ( xItem IS pCHARACTER )   // It's a file name
-            nPosition := ASCAN( ::aDosHandles, ;
-                                { | aItem | xItem == aItem[pDOS_FILE] } )
+            nPosition := ASCAN(::aDosHandles, ;
+                                { | aItem | xItem == aItem[pDOS_FILE] })
             IF nPosition == 0
                // Don't remove and set the return value of the function
                lSuccess := pFALSE
             ELSE
                // Since we have a position, remove from the table and keep the
                // default return value
-               ADEL( ::aDosHandles, nPosition )
-               ASIZE(::aDosHandles, LEN( ::aDosHandles ) - 1)
+               ADEL(::aDosHandles, nPosition)
+               ASIZE(::aDosHandles, LEN(::aDosHandles) - 1)
             ENDIF
 
          OTHERWISE
@@ -353,14 +353,14 @@ METHOD openfile(cFile, nMethod) CLASS FileMan
 
    DEFAULT nMethod TO 0
 
-   nFileHandle := FOPEN( cFile, nMethod )                   // opens the file
-   IF !EMPTY( FERROR() )                // There was an error in opening
+   nFileHandle := FOPEN(cFile, nMethod)                   // opens the file
+   IF !EMPTY(FERROR())                // There was an error in opening
       ::nLastDosMessage := FERROR()
       nFileHandle       := - 1
    ELSE
       cFileName := DOSFILENAME(cFile)
-      cPath     := STRTRAN( cFile, cFileName, "" )
-      ::addItem( nFileHandle, cFileName, cPath )
+      cPath     := STRTRAN(cFile, cFileName, "")
+      ::addItem(nFileHandle, cFileName, cPath)
    ENDIF
    ::nHan := nFileHandle
 

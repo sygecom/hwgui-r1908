@@ -19,7 +19,7 @@
 FUNCTION Main()
 
 Local oMainWnd, oPanel
-Local mypath := curdrive()+":\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+Local mypath := curdrive()+":\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
 Private oFlash
 
    INIT WINDOW oMainWnd TITLE "FlashPlayer example" AT 200, 0 SIZE 500, 400
@@ -30,9 +30,9 @@ Private oFlash
       ENDMENU
    ENDMENU
 
-   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y)}
+   @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y)}
 
-   oFlash := FlashPlayer( oPanel, mypath+"mma.swf", 0, 0, 500, 366 )
+   oFlash := FlashPlayer(oPanel, mypath+"mma.swf", 0, 0, 500, 366)
 
    ACTIVATE WINDOW oMainWnd
 
@@ -44,9 +44,9 @@ CLASS VAR winclass INIT "ShockwaveFlash"
 ENDCLASS
 
 
-METHOD New(p1,p2,p3,p4,p5,p6) CLASS ShockwaveFlash
+METHOD New(p1, p2, p3, p4, p5, p6) CLASS ShockwaveFlash
 
-  ::Super:New(p1,p2,p3,p4,p5,p6)
+  ::Super:New(p1, p2, p3, p4, p5, p6)
 
 RETURN NIL
 
@@ -54,7 +54,7 @@ FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
 
     local oFlash
 
-    oFlash := ShockwaveFlash():New( oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth )
-    oFlash:LoadMovie(0,cFlashFile)
+    oFlash := ShockwaveFlash():New(oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth)
+    oFlash:LoadMovie(0, cFlashFile)
 
 RETURN oFlash

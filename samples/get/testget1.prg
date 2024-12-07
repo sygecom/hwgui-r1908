@@ -20,9 +20,9 @@ RETURN NIL
 FUNCTION DlgGet()
 
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First","Second","laranja","banana","pera","uva" }
+Local cRes, aCombo := { "First", "Second", "laranja", "banana", "pera", "uva" }
 Local oGet
-Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1,o,o1,o2
+Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1, o, o1, o2
 Local upd := 12, d1 := Date()+1
 Local h  := hbitmap():addFile("..\image\open.bmp")
 Local h1 := hbitmap():addFile("..\image\exit.bmp")
@@ -68,14 +68,14 @@ Local h1 := hbitmap():addFile("..\image\exit.bmp")
    oFont:Release()
 
    IF oModDlg:lResult
-      hwg_MsgInfo( e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1,"On","Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2,"On","Off") + chr(10) + chr(13) + ;
+      hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
+               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;
                "DatePicker: "+Dtoc(d1)                                ;
-               ,"Results:" )
+               , "Results:")
    ENDIF
 
 RETURN NIL

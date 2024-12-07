@@ -3,11 +3,11 @@
 
 FUNCTION Main()
 
-Local oMainWindow, oBtn, aCombo := {"First","Second" }, cTool := "Example", oFont
-Local aTabs := { "A","B","C","D","E","F","G","H","I","J","K","L","M","N" }, oTab
+Local oMainWindow, oBtn, aCombo := {"First", "Second" }, cTool := "Example", oFont
+Local aTabs := { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" }, oTab
 Local acho := { {"First item", 180}, {"Second item", 200} }
 Local oEdit, oGetTab, oTree, oItem
-Private aGetsTab := { "","","","","","","","","","","","","","" }
+Private aGetsTab := { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
 
    // PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 4
@@ -20,7 +20,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
    @ 20, 10 RICHEDIT oEdit TEXT "Hello, world !"  SIZE 200, 30
 
-   re_SetCharFormat( oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } } )
+   re_SetCharFormat(oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } })
 
    @ 270, 10 COMBOBOX aCombo  SIZE 100, 150 TOOLTIP "Combobox"
 
@@ -28,7 +28,7 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
    @ 20, 60 TAB oTab ITEMS aTabs SIZE 140, 100      ;
          STYLE TCS_FIXEDWIDTH+TCS_FORCELABELLEFT  ;
-         ON CHANGE {|o,n|ChangeTab(o,oGetTab,n)}
+         ON CHANGE {|o, n|ChangeTab(o, oGetTab, n)}
    // @ 20, 60 TAB oTab ITEMS aTabs SIZE 90, 100 STYLE TCS_FIXEDWIDTH+TCS_VERTICAL+TCS_FORCELABELLEFT+WS_CLIPSIBLINGS  // +TCS_RIGHT
    SetTabSize(oTab:handle, 20, 20)
    @ 10, 30 RICHEDIT oGetTab TEXT "" OF oTab SIZE 120, 60 ;
@@ -51,17 +51,17 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
       MENU TITLE "File"
          MENUITEM "Ps" ACTION Ps1(oMainWindow)
          SEPARATOR
-         MENUITEM "YYYYY" ACTION hwg_MsgGet( "Example","Input anything")
+         MENUITEM "YYYYY" ACTION hwg_MsgGet("Example", "Input anything")
       ENDMENU
       MENU TITLE "Help"
          MENUITEM "About" ACTION hwg_MsgInfo("About")
          MENUITEM "Info" ACTION hwg_MsgTemp("")
       ENDMENU
       MENU TITLE "Third"
-         MENUITEM "Wchoice" ACTION Wchoice(acho,"Select",,,,, 15132390,,VColor( "008000" ))
-         MENUITEM "SelectFolder" ACTION hwg_MsgInfo( SelectFolder("!!!") )
+         MENUITEM "Wchoice" ACTION Wchoice(acho, "Select", , , , , 15132390, , VColor("008000"))
+         MENUITEM "SelectFolder" ACTION hwg_MsgInfo(SelectFolder("!!!"))
          MENU TITLE "Submenu"
-            MENUITEM "ShellExecute" ACTION (ShellExecute("d:\temp\podst.doc"),hwg_MsgInfo(str(oMainWindow:handle)))
+            MENUITEM "ShellExecute" ACTION (ShellExecute("d:\temp\podst.doc"), hwg_MsgInfo(str(oMainWindow:handle)))
             MENUITEM "S2" ACTION hwg_MsgStop("S2")
          ENDMENU
       ENDMENU
@@ -69,13 +69,13 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
 
 /*   
    aMenu := { ;
-     { { { {||hwg_MsgInfo("Xxxx")},"XXXXX", 130 }, ;
+     { { { {||hwg_MsgInfo("Xxxx")}, "XXXXX", 130 }, ;
          { ,, 131 }, ;
-         { {||hwg_MsgInfo("Yyyy")},"YYYYY", 132 } ;
-       },"File", 120 }, ;
-     { {||hwg_MsgInfo("Help")},"Help", 121 } ;
+         { {||hwg_MsgInfo("Yyyy")}, "YYYYY", 132 } ;
+       }, "File", 120 }, ;
+     { {||hwg_MsgInfo("Help")}, "Help", 121 } ;
    }
-   BuildMenu( aMenu,hWnd,aMainWindow )
+   BuildMenu(aMenu, hWnd, aMainWindow)
 */
 
    ACTIVATE WINDOW oMainWindow
@@ -85,8 +85,8 @@ RETURN NIL
 STATIC FUNCTION ChangeTab(oWnd, oGet, n)
 
 Static lastTab := 1
-   aGetsTab[lastTab] := GetEditText( oGet:oParent:handle,oGet:id )
-   SetDlgItemText( oGet:oParent:handle,oGet:id,aGetsTab[n] )
+   aGetsTab[lastTab] := GetEditText(oGet:oParent:handle, oGet:id)
+   SetDlgItemText(oGet:oParent:handle, oGet:id, aGetsTab[n])
    lastTab := n
 
 RETURN NIL
@@ -102,6 +102,6 @@ Local oDlg1, oDlg2
    INIT DIALOG oDlg2 TITLE "PAGE_2" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20, 35 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER
 
-   PropertySheet( GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300 )
+   PropertySheet(GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
 
 RETURN NIL

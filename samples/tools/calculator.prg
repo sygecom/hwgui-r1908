@@ -48,7 +48,7 @@ FUNCTION calculator()
         RANGE -2147483647, 2147483647  INCREMENT 1 SIZE 149, 24  PICTURE '999,999.99'  ;
         VALID  {|| thisform:oLabel2:disable() } ;
         WHEN  {|| thisform:oLabel2:Enable() } ;
-        ON KEYDOWN {|This, nKeyPress, nShiftAltCtrl| oValue_onKeyDown( This, nKeyPress, nShiftAltCtrl ) }
+        ON KEYDOWN {|This, nKeyPress, nShiftAltCtrl| oValue_onKeyDown(This, nKeyPress, nShiftAltCtrl) }
         oValue:FontBold := .T.
    @ 72, 74 SAY oLabel1 CAPTION "Value:"  SIZE 42, 21
 

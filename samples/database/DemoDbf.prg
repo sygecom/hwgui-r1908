@@ -40,7 +40,7 @@ SET CENT ON
 
 
       MENU TITLE "&Help"
-         MENUITEM "&As" ACTION hwg_MsgInfo("HwGUI Harbour Win32 GUI","Copyright (c) Alexander Kresin")
+         MENUITEM "&As" ACTION hwg_MsgInfo("HwGUI Harbour Win32 GUI", "Copyright (c) Alexander Kresin")
       ENDMENU
    ENDMENU
 
@@ -55,7 +55,7 @@ Local Tel_Ferramentas, oPanel, oFontBtn, Titulo:="Tab Forneced"
 Private Gt_Cod, Gt_Name, Gt_Adress, Gt_Fone, Gt_e_Mail
 Private oCod, oName, oAdress, oFone, oe_Mail //Declaracao das variaveis de tabela
 Private oOper:=1
-Private oBotNew, oBotEdit,oBotRet, oBotNext, oBotSave, oBottop, oBotBott, oBotDelete, oBotClose, oBotPrint
+Private oBotNew, oBotEdit, oBotRet, oBotNext, oBotSave, oBottop, oBotBott, oBotDelete, oBotClose, oBotPrint
 
    PREPARE FONT oFontBtn NAME "Arial" WIDTH 0 HEIGHT -12
 
@@ -79,7 +79,7 @@ Private oBotNew, oBotEdit,oBotRet, oBotNext, oBotSave, oBottop, oBotBott, oBotDe
        SIZE 44, 38 FLAT ;
        TEXT "Edit"
 
-   @ 89, 3 OWNERBUTTON oBotSave OF Tel_Ferramentas ON CLICK {||OpenBotons(),SaveTab()} ;
+   @ 89, 3 OWNERBUTTON oBotSave OF Tel_Ferramentas ON CLICK {||OpenBotons(), SaveTab()} ;
        SIZE 44, 38 FLAT ;
        TEXT "Save"
 
@@ -227,7 +227,7 @@ if oOper=1
    oCod:=StrZero(val(oCod), 3)
    Seek oCod
    If Found()
-      hwg_MsgInfo("Cod."+oCod+" no valid...","Mensagem")
+      hwg_MsgInfo("Cod." + oCod + " no valid...", "Mensagem")
       RETURN NIL
    Endif
    Append Blank
@@ -276,7 +276,7 @@ FUNCTION DeleteRecord()
 Select TabDbf
 Seek oCod
 If Found()
-   If hwg_MsgYesNo("Delete Cod "+oCod ,"Mensagem")
+   If hwg_MsgYesNo("Delete Cod " + oCod, "Mensagem")
       RLock()
       Delete
       Unlock

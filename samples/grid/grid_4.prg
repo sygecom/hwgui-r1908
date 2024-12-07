@@ -49,11 +49,10 @@ FUNCTION Test()
              FONT oFont ;
              AT 0, 0 SIZE 700, 425 ;
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
-             
-                
+
              @ 10, 10 GRID oGrid OF oForm SIZE 680, 375;
                      ITEMCOUNT Lastrec() ;
-                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } ;
+                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo(oCtrl, nRow, nCol) } ;
                      NOGRIDLINES
 
              ADD COLUMN TO GRID oGrid HEADER "" WIDTH  800

@@ -21,7 +21,7 @@ Private var1 := 10320.54
       MENUITEM "&Get a value" ACTION DlgGet(.F.)
       MENUITEM "&Get using SetcolorinFocus" ACTION DlgGet(.T.)
       MENUITEM "&Text Ballon" ACTION TestBallon()
-      MENUITEM "&Hd Serial  " ACTION hwg_MsgInfo( HdSerial("C:\"),"HD Serial number" )
+      MENUITEM "&Hd Serial  " ACTION hwg_MsgInfo(HdSerial("C:\"), "HD Serial number")
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
@@ -46,12 +46,12 @@ Private oSayT
    FONT oFont ;
    ON INIT {|| SetTimer(oModDlg,@oTimer)}
 
-   SET KEY FSHIFT,VK_F3 TO hwg_MsgInfo("Shift-F3") 
-   SET KEY FCONTROL,VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
-   SET KEY 0,VK_F3 TO hwg_MsgInfo("F3") 
+   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 
+   SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
+   SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
    
    If lColor <> Nil
-      SetColorinFocus( lColor )
+      SetColorinFocus(lColor)
    EndIf
    
    @ 20, 10 SAY "Input something:" SIZE 260, 22
@@ -80,7 +80,7 @@ Private oSayT
         PASSWORD                        ;
         SIZE 260, 26
 
-   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
+   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., EndDialog()}
    @ 180, 250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;
@@ -92,14 +92,14 @@ Private oSayT
    oTimer:End()
 
    IF oModDlg:lResult
-      hwg_MsgInfo( e1 + chr(10) + chr(13) +       ;
+      hwg_MsgInfo(e1 + chr(10) + chr(13) +       ;
                e6 + chr(10) + chr(13) +       ;
                Dtoc(e2) + chr(10) + chr(13) + ;
                Str(e3) + chr(10) + chr(13) +  ;
                e4 + chr(10) + chr(13) +       ;
                Str(e5) + chr(10) + chr(13) +  ;
                e7 + chr(10) + chr(13)         ;
-               ,"Results:" )
+               , "Results:")
    ENDIF
 
 RETURN NIL

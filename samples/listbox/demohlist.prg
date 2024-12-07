@@ -21,7 +21,7 @@ RETURN NIL
 FUNCTION Teste()
 
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local oList, oItems:={"Item01","Item02","Item03","Item04"}
+Local oList, oItems:={"Item01", "Item02", "Item03", "Item04"}
 
    INIT DIALOG oModDlg TITLE "Test"  ;
    AT 0, 0  SIZE 450, 350   ;

@@ -21,7 +21,7 @@ FUNCTION DlgGet()
 
 Local oModDlg, oBrw1, oBrw2
 Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
-Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
+Local aSample2 := { {.T., "Line 1", 10}, {.T., "Line 2", 22}, {.F., "Line 3", 40} }
 
    INIT DIALOG oModDlg TITLE "About"          ;
    AT 190, 10  SIZE 400, 240
@@ -36,16 +36,16 @@ Local aSample2 := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
        SIZE 180, 35 FLAT                                  ;
        TEXT "Close" COLOR Vcolor("0000FF")
 
-   CreateArList( oBrw1,aSample1 )
+   CreateArList(oBrw1, aSample1)
 
-   CreateArList( oBrw2,aSample2 )
+   CreateArList(oBrw2, aSample2)
    oBmp := HBitmap():AddResource(OBM_CHECK)
    oBrw2:aColumns[1]:aBitmaps := { ;
       { {|l|l}, oBmp } ;
    }
    oBrw2:aColumns[2]:length := 6
    oBrw2:aColumns[3]:length := 4
-   oBrw2:bKeyDown := {|o,key|BrwKey(o,key)}
+   oBrw2:bKeyDown := {|o, key|BrwKey(o, key)}
 
    ACTIVATE DIALOG oModDlg
 

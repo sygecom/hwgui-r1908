@@ -22,13 +22,13 @@ RETURN NIL
 FUNCTION DlgGet()
 
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First","Second" }
+Local cRes, aCombo := { "First", "Second" }
 Local oGet
 Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1
 Local upd := 12, d1 := Date()+1
 //Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}}, {3, 702, 0x04, 0x0000, 0, "teste2",}, {-1, 702, 0x04, 0x0000, 0, "teste3",}}
 Local otool
-Local omenu,omenu1
+Local omenu, omenu1
 Local amenu
    INIT DIALOG oModDlg TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 300                  ;
@@ -49,7 +49,7 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
            TEXT "teste1"  ;
            TOOLTIP "ola" ;
            menu amenu;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 
    TOOLBUTTON  otool ;
           ID 702 ;
@@ -58,7 +58,7 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
            STATE 4;
            TEXT "teste2"  ;
            TOOLTIP "ola2" ;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 
    TOOLBUTTON  otool ;
           ID 703 ;
@@ -67,7 +67,7 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
            STATE 4;
            TEXT ""  ;
            TOOLTIP "ola3" ;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 
 
 
@@ -100,14 +100,14 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
    oFont:Release()
 
    IF oModDlg:lResult
-      hwg_MsgInfo( e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1,"On","Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2,"On","Off") + chr(10) + chr(13) + ;
+      hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
+               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;
                "DatePicker: "+Dtoc(d1)                                ;
-               ,"Results:" )
+               , "Results:")
    ENDIF
 
 RETURN NIL
@@ -123,7 +123,7 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
 //Local pItem
 //
 //  hTool := CREATETOOLBAR(oModDlg:handle, 700, 0, 0, 0, 50, 100)
-// //  pItem :=  TOOLBARADDBUTTONS(hTool,aTool,len(aTool))
+// //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, len(aTool))
  //
 //   otool:=Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
 //   oTool:oParent:AddEvent(BN_CLICKED, 701, {|x, y|DlgGet()})
@@ -136,7 +136,7 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
            STATE 4;
            TEXT "teste1"  ;
            TOOLTIP "ola" ;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 
    TOOLBUTTON  otool ;
           ID 702 ;
@@ -145,7 +145,7 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
            STATE 4;
            TEXT "teste2"  ;
            TOOLTIP "ola2" ;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 
    TOOLBUTTON  otool ;
           ID 703 ;
@@ -154,7 +154,7 @@ Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {
            STATE 4;
            TEXT ""  ;
            TOOLTIP "ola3" ;
-           ON CLICK {|x,y|DlgGet()}
+           ON CLICK {|x, y|DlgGet()}
 */
 
 RETURN NIL
@@ -162,5 +162,5 @@ RETURN NIL
 #include "hbclass.ch"
 class mymenu
 data handle
-method new(c) inline ::handle :=c,self
+method new(c) inline ::handle := c, self
 endclass

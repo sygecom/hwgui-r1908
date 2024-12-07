@@ -24,10 +24,10 @@ Memvar nNumRows, aQueries
 FUNCTION Main()
 
 Local oFont, oIcon := HIcon():AddResource("ICON_1")
-Public hBitmap := LoadBitmap( "BITMAP_1" )
+Public hBitmap := LoadBitmap("BITMAP_1")
 Public connHandle := 0, cServer := "", cDatabase := "", cUser := ""
 Public cDataDef := ""
-Public mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+Public mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
 Public queHandle := 0, nNumFields, nNumRows
 Public aQueries := {}, nHistCurr, nHistoryMax := 20
 Private oBrw, BrwFont := Nil, oBrwFont := Nil
@@ -44,7 +44,7 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    ADD STATUS TO oMainWindow PARTS 0, 0, 0
    @ 0, 380 EDITBOX oEdit CAPTION ""      ;
        SIZE 476, 95                       ;
-       ON SIZE {|o,x,y|ResizeEditQ(x,y)} ;
+       ON SIZE {|o, x, y|ResizeEditQ(x, y)} ;
        STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
 
    @ 0, 0 PANEL oPanel SIZE 0, 44
@@ -85,28 +85,28 @@ Private oMainWindow, oEdit, oPanel, oPanelE
    @ 0, 46 OWNERBUTTON OF oPanelE ID 116 ON CLICK {||BrowHistory()} ;
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_HIST" FROM RESOURCE TOOLTIP "Show history"
-   @ 0, 68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),hwg_SetFocus(oEdit:handle)} ;
+   @ 0, 68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""), hwg_SetFocus(oEdit:handle)} ;
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_CLEAR" FROM RESOURCE TOOLTIP "Clear"
 
    @ 0, 0 BROWSE oBrw ARRAY OF oMainWindow SIZE 500, 376 ;
-           ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
+           ON SIZE {|o, x, y|ResizeBrwQ(o, x, y)}
    oBrw:active := .F.
 
-   Rdini( "demo.ini" )
+   Rdini("demo.ini")
    IF Valtype(BrwFont) == "A"
       oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
-   ReadHistory( "qhistory.txt" )
+   ReadHistory("qhistory.txt")
 
    WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
-   hwg_SetFocus( oEdit:handle )
-   // HideWindow( oBrw:handle )
-   SetCtrlFont( oEdit:oParent:handle, oEdit:id, oBrwFont:handle )
+   hwg_SetFocus(oEdit:handle)
+   // HideWindow(oBrw:handle)
+   SetCtrlFont(oEdit:oParent:handle, oEdit:id, oBrwFont:handle)
 
    ACTIVATE WINDOW oMainWindow
 
-   WriteHistory( "qhistory.txt" )
+   WriteHistory("qhistory.txt")
 
 RETURN NIL
 
@@ -129,9 +129,9 @@ FUNCTION AboutDraw()
 Local pps
 Local hDC
    pps := DefinePaintStru()
-   hDC := BeginPaint( getmodalhandle(), pps )
-   DrawBitmap( hDC, hBitmap,, 0, 0 )
-   EndPaint( getmodalhandle(), pps )
+   hDC := BeginPaint(getmodalhandle(), pps)
+   DrawBitmap(hDC, hBitmap,, 0, 0)
+   EndPaint(getmodalhandle(), pps)
 
 RETURN NIL
 
@@ -150,10 +150,10 @@ Local aBases, nChoic
    IF nChoic != 0
       cDatabase := aBases[nChoic]
       IF sqlSelectD(connHandle, cDatabase) != 0
-         hwg_MsgStop( "Can't connect to "+cDataBase )
+         hwg_MsgStop("Can't connect to "+cDataBase)
          cDatabase := ""
       ELSE
-         WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
+         WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
       ENDIF
    ENDIF
 
@@ -170,16 +170,16 @@ Local cTable
          RETURN .F.
       ENDIF
    ENDIF
-   aTables := sqlListTbl( connHandle )
-   IF Empty( aTables )
-      hwg_MsgInfo( "No tables !" )
+   aTables := sqlListTbl(connHandle)
+   IF Empty(aTables)
+      hwg_MsgInfo("No tables !")
       RETURN .F.
    ENDIF
 
-   nChoic := WChoice(aTables,cDataBase+"  tables", 50, 50)
+   nChoic := WChoice(aTables, cDataBase + "  tables", 50, 50)
    IF nChoic != 0
       cTable := aTables[nChoic]
-      execSQL( "SHOW COLUMNS FROM " + cTable )
+      execSQL("SHOW COLUMNS FROM " + cTable)
    ENDIF
 
 RETURN NIL
@@ -190,8 +190,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
    DIALOG ACTIONS OF aModDlg ;
-          ON 0,IDOK     ACTION {|| EndConnect() } ;
-          ON 0,IDCANCEL ACTION {|| EndDialog(getmodalhandle())}
+          ON 0, IDOK     ACTION {|| EndConnect() } ;
+          ON 0, IDCANCEL ACTION {|| EndDialog(getmodalhandle())}
 
    aModDlg:Activate()
 
@@ -200,15 +200,15 @@ RETURN NIL
 FUNCTION InitConnect()
 
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_EDIT1, cServer )
-   SetDlgItemText( hDlg, IDC_EDIT2, cUser )
-   SetDlgItemText( hDlg, IDC_EDIT4, cDataDef )
-   IF Empty( cServer )
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
-   ELSEIF Empty( cUser )
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+   SetDlgItemText(hDlg, IDC_EDIT1, cServer)
+   SetDlgItemText(hDlg, IDC_EDIT2, cUser)
+   SetDlgItemText(hDlg, IDC_EDIT4, cDataDef)
+   IF Empty(cServer)
+      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT1))
+   ELSEIF Empty(cUser)
+      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT2))
    ELSE
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT3))
    ENDIF
 
 RETURN .F.
@@ -220,46 +220,46 @@ Local hDlg := getmodalhandle()
       sqlClose(connHandle)
       connHandle := 0
       IF queHandle > 0
-         sqlFreeR( queHandle )
+         sqlFreeR(queHandle)
          queHandle := 0
       ENDIF
    ENDIF
-   cServer := GetDlgItemText( hDlg, IDC_EDIT1, 30 )
-   cUser := GetDlgItemText( hDlg, IDC_EDIT2, 20 )
-   cPassword := GetDlgItemText( hDlg, IDC_EDIT3, 20 )
-   cDataDef := GetDlgItemText( hDlg, IDC_EDIT4, 20 )
+   cServer := GetDlgItemText(hDlg, IDC_EDIT1, 30)
+   cUser := GetDlgItemText(hDlg, IDC_EDIT2, 20)
+   cPassword := GetDlgItemText(hDlg, IDC_EDIT3, 20)
+   cDataDef := GetDlgItemText(hDlg, IDC_EDIT4, 20)
 
-   SetDlgItemText( hDlg, IDC_TEXT1, "Wait, please ..." )
-   connHandle := sqlConnect( cServer,Trim( cUser ),Trim( cPassword ) )
-   IF connHandle != 0 .AND. !Empty( cDataDef )
+   SetDlgItemText(hDlg, IDC_TEXT1, "Wait, please ...")
+   connHandle := sqlConnect(cServer, Trim(cUser), Trim(cPassword))
+   IF connHandle != 0 .AND. !Empty(cDataDef)
       cDatabase := cDataDef
       IF sqlSelectD(connHandle, cDatabase) != 0
          cDatabase := ""
-         SetDlgItemText( hDlg, IDC_TEXT1, "Can't connect to " + cDataBase )
+         SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cDataBase)
       ENDIF
    ELSE
-      SetDlgItemText( hDlg, IDC_TEXT1, "Can't connect to " + cServer )
+      SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cServer)
       cDatabase := ""
    ENDIF
    IF connHandle == 0
       WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
       WriteStatus(Hwindow():GetMain(), 2, "")
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT1))
    ELSE
       WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
-      IF !Empty( cDataBase )
-         WriteStatus( Hwindow():GetMain(), 2,"DataBase: " + cDataBase )
+      IF !Empty(cDataBase)
+         WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
       ENDIF
       EndDialog(hDlg)
-      hwg_SetFocus( oEdit:handle )
+      hwg_SetFocus(oEdit:handle)
    ENDIF
 
 RETURN NIL
 
 FUNCTION ResizeEditQ(nWidth, nHeight)
 
-   MoveWindow( oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95 )
-   MoveWindow( oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95 )
+   MoveWindow(oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95)
+   MoveWindow(oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95)
 
 RETURN NIL
 
@@ -267,29 +267,29 @@ FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 
 Local aRect, i, nHbusy := oMainWindow:aOffset[4]
 
-   aRect := GetClientRect( oEdit:handle )
+   aRect := GetClientRect(oEdit:handle)
    nHbusy += aRect[4]
-   MoveWindow( oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8 )
+   MoveWindow(oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8)
 
 RETURN NIL
 
 FUNCTION Execute()
 
-Local cQuery := Ltrim( oEdit:GetText() )
+Local cQuery := Ltrim(oEdit:GetText())
 Local arScr, nError, nLineEr
 
-   IF Empty( cQuery )
+   IF Empty(cQuery)
       RETURN .F.
    ENDIF
-   IF Left( cQuery, 2 ) == "//"
-      IF ( arScr := RdScript( ,cQuery ) ) <> Nil
-         DoScript( arScr )
+   IF Left(cQuery, 2) == "//"
+      IF ( arScr := RdScript(, cQuery) ) <> Nil
+         DoScript(arScr)
       ELSE
-         nError := CompileErr( @nLineEr )
-         hwg_MsgStop( "Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)) )
+         nError := CompileErr(@nLineEr)
+         hwg_MsgStop("Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)))
       ENDIF
    ELSE
-      execSQL( cQuery )
+      execSQL(cQuery)
    ENDIF
 
 RETURN .T.
@@ -304,37 +304,37 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
          RETURN .F.
       ENDIF
    ENDIF
-   IF ( res := sqlQuery( connHandle, cQuery) ) != 0
+   IF ( res := sqlQuery(connHandle, cQuery)) != 0
       cQuery := ""
-      hwg_MsgInfo( "Operation failed: " + STR( res ) + "( " + sqlGetErr( connHandle ) + " )" )
-      WriteStatus( Hwindow():GetMain(), 3, sqlGetErr( connHandle ) )
+      hwg_MsgInfo("Operation failed: " + STR(res) + "( " + sqlGetErr(connHandle) + " )")
+      WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
-         DO WHILE Len( stroka := RDSTR( Nil,@cQuery,@poz ) ) != 0
-            IF Asc(Ltrim( stroka )) > 32
+         DO WHILE Len(stroka := RDSTR(Nil,@cQuery,@poz)) != 0
+            IF Asc(Ltrim(stroka)) > 32
                Aadd(aQueries, Nil)
-               Ains( aQueries, i )
-               aQueries[i] := { Padr( stroka, 76 ), lFirst }
+               Ains(aQueries, i)
+               aQueries[i] := { Padr(stroka, 76), lFirst }
                lFirst := .F.
                i ++
             ENDIF
          ENDDO
          Aadd(aQueries, Nil)
-         Ains( aQueries, i )
+         Ains(aQueries, i)
          aQueries[i] := { Space(76), .F. }
          nHistCurr ++
       ENDIF
-      IF ( queHandle := sqlStoreR( connHandle ) ) != 0
+      IF ( queHandle := sqlStoreR(connHandle) ) != 0
          sqlBrowse(queHandle)
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
-         IF ( nNumFields := sqlFiCou( connHandle ) ) == 0
+         IF ( nNumFields := sqlFiCou(connHandle) ) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
-            WriteStatus( Hwindow():GetMain(), 3, Str( sqlAffRows( connHandle ) ) + " rows updated." )
+            WriteStatus(Hwindow():GetMain(), 3, Str(sqlAffRows(connHandle)) + " rows updated.")
          ELSE
-            @ 20, 2 SAY "Operation failed:" + sqlGetErr( connHandle )
-            hwg_MsgInfo( "Operation failed: " + "( " + sqlGetErr( connHandle ) + " )" )
-            WriteStatus( Hwindow():GetMain(), 3, sqlGetErr( connHandle ) )
+            @ 20, 2 SAY "Operation failed:" + sqlGetErr(connHandle)
+            hwg_MsgInfo("Operation failed: " + "( " + sqlGetErr(connHandle) + " )")
+            WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
             res := -1
          ENDIF
       ENDIF
@@ -345,18 +345,18 @@ RETURN res == 0
 FUNCTION sqlBrowse(queHandle)
 
 Local aQueRows, i, j, vartmp, af := {}
-   nNumRows := sqlNRows( queHandle )
-   WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows, 5 ) + " rows" )
+   nNumRows := sqlNRows(queHandle)
+   WriteStatus(Hwindow():GetMain(), 3, Str(nNumRows, 5) + " rows")
    IF nNumRows == 0
       RETURN NIL
    ENDIF
    oBrw:InitBrw()
    oBrw:active := .T.
-   nNumFields := sqlNumFi( queHandle )
-   aQueRows := Array( nNumRows )
+   nNumFields := sqlNumFi(queHandle)
+   aQueRows := Array(nNumRows)
 
    FOR i := 1 TO nNumRows
-      aQueRows[i] := sqlFetchR( queHandle )
+      aQueRows[i] := sqlFetchR(queHandle)
       IF i == 1
          FOR j := 1 TO nNumFields
             AAdd(af, {Valtype(aQueRows[i, j]), 0, 0})
@@ -364,11 +364,11 @@ Local aQueRows, i, j, vartmp, af := {}
       ENDIF
       FOR j := 1 TO nNumFields
          IF af[j, 1] == "C"
-            af[j, 2] := Max( af[j, 2], Len( aQueRows[i, j] ) )
+            af[j, 2] := Max(af[j, 2], Len(aQueRows[i, j]))
          ELSEIF af[j, 1] == "N"
-            vartmp := STR( aQueRows[i, j] )
-            af[j, 2] := Max( af[j, 2], Len( vartmp ) )
-            af[j, 3] := Max( af[j, 3], IIF('.' $ vartmp,af[j, 2] - AT('.', vartmp), 0) )
+            vartmp := STR(aQueRows[i, j])
+            af[j, 2] := Max(af[j, 2], Len(vartmp))
+            af[j, 3] := Max(af[j, 3], IIF('.' $ vartmp, af[j, 2] - AT('.', vartmp), 0))
          ELSEIF af[j, 1] == "D"
             af[j, 2] := 8
          ELSEIF af[j, 1] == "L"
@@ -376,16 +376,16 @@ Local aQueRows, i, j, vartmp, af := {}
          ENDIF
       NEXT
    NEXT
-   CreateArList( oBrw, aQueRows )
+   CreateArList(oBrw, aQueRows)
    FOR i := 1 TO nNumFields
       oBrw:aColumns[i]:heading := SqlFetchF(queHandle)[1]
       oBrw:aColumns[i]:type   := af[i, 1]
       oBrw:aColumns[i]:length := af[i, 2]
       oBrw:aColumns[i]:dec    := af[i, 3]
    NEXT
-   oBrw:bcolorSel := VColor( "800080" )
+   oBrw:bcolorSel := VColor("800080")
    oBrw:ofont      := oBrwFont
-   RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
+   RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
 
 RETURN NIL
 
@@ -399,10 +399,10 @@ FUNCTION BrowHistory()
    oBrw:aArray := aQueries
    oBrw:AddColumn(HColumn():New("History of queries", {|value, o|o:aArray[o:nCurrent, 1]}, "C", 76, 0))
 
-   oBrw:bcolorSel := VColor( "800080" )
+   oBrw:bcolorSel := VColor("800080")
    oBrw:ofont := oBrwFont
-   oBrw:bEnter := {|h,o|GetFromHistory(h,o)}
-   RedrawWindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
+   oBrw:bEnter := {|h, o|GetFromHistory(h, o)}
+   RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
 
 RETURN NIL
 
@@ -410,14 +410,14 @@ STATIC FUNCTION GetFromHistory()
 
 Local cQuery := "", i := oBrw:nCurrent
 
-   IF !Empty( oBrw:aArray[i, 1] )
+   IF !Empty(oBrw:aArray[i, 1])
       DO WHILE !oBrw:aArray[i, 2]; i--; ENDDO
-      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[i, 1] )
-         cQuery += Rtrim( oBrw:aArray[i, 1] ) + Chr( 13 ) + Chr( 10 )
+      DO WHILE i <= oBrw:nRecords .AND. !Empty(oBrw:aArray[i, 1])
+         cQuery += Rtrim(oBrw:aArray[i, 1]) + Chr(13) + Chr(10)
          i++
       ENDDO
-      oEdit:SetText( cQuery )
-      hwg_SetFocus( oEdit:handle )
+      oEdit:SetText(cQuery)
+      hwg_SetFocus(oEdit:handle)
    ENDIF
 
 RETURN NIL
@@ -428,14 +428,14 @@ Local han, stroka, lFirst := .T., lEmpty := .F.
 LOCAL strbuf := Space(512), poz := 513
 
    nHistCurr := 0
-   han := FOPEN( fname, FO_READ + FO_SHARED )
+   han := FOPEN(fname, FO_READ + FO_SHARED)
    IF han <> - 1
       DO WHILE .T.
-         stroka := RDSTR( han,@strbuf,@poz, 512 )
-         IF LEN( stroka ) == 0
+         stroka := RDSTR(han,@strbuf,@poz, 512)
+         IF LEN(stroka) == 0
             EXIT
          ENDIF
-         IF LEFT( stroka, 1 ) == Chr(10) .OR. LEFT( stroka, 1 ) == CHR(13)
+         IF LEFT(stroka, 1) == Chr(10) .OR. LEFT(stroka, 1) == CHR(13)
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0
@@ -443,7 +443,7 @@ LOCAL strbuf := Space(512), poz := 513
                lFirst := .T.
             ENDIF
             lEmpty := .F.
-            Aadd(aQueries, { Padr( stroka, 76 ), lFirst })
+            Aadd(aQueries, { Padr(stroka, 76), lFirst })
             IF lFirst
                nHistCurr ++
             ENDIF
@@ -458,13 +458,13 @@ RETURN nHistCurr
 STATIC FUNCTION WriteHistory(fname)
 
 Local han, i, lEmpty := .T.
-   IF !Empty( aQueries )
+   IF !Empty(aQueries)
       han := FCREATE(fname)
       IF han <> - 1
-         FOR i := 1 TO Len( aQueries )
-            IF !Empty( aQueries[i, 1] ) .OR. !lEmpty
-               FWRITE(han, Trim( aQueries[i, 1] ) + Chr(13) + Chr(10))
-               lEmpty := Empty( aQueries[i, 1] )
+         FOR i := 1 TO Len(aQueries)
+            IF !Empty(aQueries[i, 1]) .OR. !lEmpty
+               FWRITE(han, Trim(aQueries[i, 1]) + Chr(13) + Chr(10))
+               lEmpty := Empty(aQueries[i, 1])
             ENDIF
          NEXT
          FCLOSE(han)
@@ -476,24 +476,24 @@ RETURN NIL
 FUNCTION DoSQL(cQuery)
 
 Local aRes, qHandle, nNumFields, nNumRows, i
-   IF sqlQuery( connHandle, cQuery) != 0
+   IF sqlQuery(connHandle, cQuery) != 0
       RETURN {1}
    ELSE
-      IF ( qHandle := sqlStoreR( connHandle ) ) != 0
-         nNumRows := sqlNRows( qHandle )
-         nNumFields := sqlNumFi( qHandle )
+      IF ( qHandle := sqlStoreR(connHandle) ) != 0
+         nNumRows := sqlNRows(qHandle)
+         nNumFields := sqlNumFi(qHandle)
          aRes := { 0, Array(nNumFields), Array(nNumRows) }
          FOR i := 1 TO nNumFields
             aRes[2, i] := SqlFetchF(qHandle)[1]
          NEXT
          FOR i := 1 TO nNumRows
-            aRes[3, i] := sqlFetchR( qHandle )
+            aRes[3, i] := sqlFetchR(qHandle)
          NEXT
-         sqlFreeR( qHandle )
+         sqlFreeR(qHandle)
          RETURN aRes
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
-         IF sqlFiCou( connHandle ) == 0
+         IF sqlFiCou(connHandle) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
             RETURN {0, sqlAffRows(connHandle)}
          ELSE
@@ -508,14 +508,14 @@ FUNCTION FilExten(fname)
 
 LOCAL i
 
-RETURN IIF(( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ))
+RETURN IIF(( i := RAT('.', fname) ) = 0, "", SUBSTR(fname, i + 1))
 
 FUNCTION SaveScript()
 
-Local fname := SaveFile("*.scr","Script files( *.scr )", "*.scr", mypath)
+Local fname := SaveFile("*.scr", "Script files( *.scr )", "*.scr", mypath)
    cQuery := oEdit:GetText()
-   IF !Empty( fname )
-      MemoWrit( fname,cQuery )
+   IF !Empty(fname)
+      MemoWrit(fname, cQuery)
    ENDIF
 
 RETURN NIL
@@ -525,7 +525,7 @@ RETURN NIL
 
 FUNCTION MsgSay(cText)
 
-   hwg_MsgStop( cText )
+   hwg_MsgStop(cText)
 
 RETURN NIL
 
@@ -534,7 +534,7 @@ EXIT PROCEDURE cleanup
    IF connHandle > 0
       sqlClose(connHandle)
       IF queHandle > 0
-         sqlFreeR( queHandle )
+         sqlFreeR(queHandle)
       ENDIF
    ENDIF
 

@@ -6,9 +6,9 @@
 **************************
 FUNCTION pesquisaglobal()
 **************************
-LOCAL oDlgPesq,getpesq,ocomb,atu:=1
+LOCAL oDlgPesq, getpesq, ocomb, atu:=1
 local oIcon := HIcon():AddRESOURCE("SEARCHICON")
-local oDir:=directory(DiskName()+':\*.',"D", .T.) // pegando diretirio
+local oDir:=directory(DiskName()+':\*.', "D", .T.) // pegando diretirio
 private rd_pesq:='',;
         diretorio :={},;
         resultado:='',;
@@ -16,7 +16,7 @@ private rd_pesq:='',;
 //
 for f = 1 to len(oDir) // filtrando diretorios
     if odir[f, 1]#'.' .AND. odir[f, 1]#'..'
-       aadd(diretorio,DiskName()+':\'+oDir[f, 1]+'\')
+       aadd(diretorio, DiskName() + ':\' + oDir[f, 1] + '\')
     endif
 next f
  //
@@ -37,7 +37,7 @@ next g
    @ 20, 74 GET COMBOBOX oComb ITEMS diretorio SIZE 340, 200
    @ 15, 111 get get01 var  resultado SIZE 657, 280 STYLE ES_MULTILINE+WS_HSCROLL+WS_VSCROLL
    //@ 364, 77 CHECKBOX "Incluir Sub-diretorios" SIZE 147, 22
-   @ 605, 395 BUTTON "&O.K." SIZE 80, 32 ID IDOK ON CLICK {||pesq(diretorio[oComb],rd_pesq)}
+   @ 605, 395 BUTTON "&O.K." SIZE 80, 32 ID IDOK ON CLICK {||pesq(diretorio[oComb], rd_pesq)}
    //readexit(.T.)
  ACTIVATE DIALOG oDlgPesq
 
@@ -46,7 +46,7 @@ RETURN NIL
 *****************************
 FUNCTION pesq(rd_dir, rd_text)
 *****************************
-local arquivos:=directory(rd_dir+'*.prg',"D", .T.) // pegando arquivos
+local arquivos:=directory(rd_dir+'*.prg', "D", .T.) // pegando arquivos
 local nom_arq:={}
 local s_lEof:=.F.
 private arq_contem:={},;
@@ -54,7 +54,7 @@ private arq_contem:={},;
 //
 for f:= 1 to len(arquivos) // filtrando arquivos
     if arquivos[f, 1]#'.' .AND. arquivos[f, 1]#'..'
-       aadd(nom_arq,arquivos[f, 1])
+       aadd(nom_arq, arquivos[f, 1])
     endif
 next f
 //
@@ -70,12 +70,12 @@ for g := 1 to len(nom_arq)
   //
   lin:=0
   while !FT_FEOF()
-     linha :=upper(Substr( FT_FReadLn( @s_lEof ), 1 ) )
+     linha :=upper(Substr(FT_FReadLn(@s_lEof), 1))
      //
      texto:=upper(rd_text)
      //
      //hwg_MsgInfo(linha)
-     if at (texto,linha) # 0
+     if at (texto, linha) # 0
          resultado:=resultado+str(lin, 6)+':'+linha +chr(13)+chr(10)
          get01:refresh()
      endif

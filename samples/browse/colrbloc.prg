@@ -37,7 +37,7 @@ SET(_SET_DATEFORMAT, "dd/mm/yyyy")
 SET(_SET_EPOCH, 1950)
 
 REQUEST DBFCDX                      // Causes DBFCDX RDD to be linked in
-rddSetDefault( "DBFCDX" )           // Set up DBFCDX as default driver
+rddSetDefault("DBFCDX")           // Set up DBFCDX as default driver
 
 *FERASE("TSTBRW.DBF")
 
@@ -351,7 +351,7 @@ LOCAL nI
         ON CLICK {|| BrowseMove(oBrwArr, "End", oEdGoto, "Array" ) } ;
         TOOLTIP "Last Record"
 
-       CreateArList( oBrwArr, aArrayTst )
+       CreateArList(oBrwArr, aArrayTst)
 
         oBrwArr:bcolorSel := x_BLUE
 

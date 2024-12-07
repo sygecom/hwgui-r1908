@@ -27,7 +27,7 @@ RETURN NIL
 
 FUNCTION OpenConfig()
 
-Local aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
+Local aDlg1, aDlg2, aCombo := { "Aaaa", "Bbbb" }
 Local oBrw1, oBrw2
 Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
 Local aSample2 := { {"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40} }
@@ -41,9 +41,9 @@ Local e1 := "Xxxx"
    REDEFINE BROWSE oBrw1 ARRAY ID 104
    REDEFINE BROWSE oBrw2 ARRAY ID 105
 
-   CreateArList( oBrw1,aSample1 )
-   CreateArList( oBrw2,aSample2 )
+   CreateArList(oBrw1, aSample1)
+   CreateArList(oBrw2, aSample2)
 
-   PropertySheet( GetActiveWindow(),{ aDlg1, aDlg2 }, "Sheet Example" )
+   PropertySheet(GetActiveWindow(),{ aDlg1, aDlg2 }, "Sheet Example")
 
 RETURN NIL

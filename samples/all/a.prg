@@ -37,7 +37,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=Hwg_ChooseColor(nColor, .F.), ;
-                     hwg_MsgInfo(Iif(nColor!=Nil,str(nColor),"--"),"Color value"))
+                     hwg_MsgInfo(Iif(nColor != Nil, str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION EndWindow()
@@ -50,12 +50,12 @@ Private nColor, oBmp2
          MENUITEM "&Class HRect" ACTION RRectangle()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION CopyStringToClipboard(MsgGet("Dialog Sample","Input table name"))
+               ACTION CopyStringToClipboard(MsgGet("Dialog Sample", "Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()
          MENUITEM "&Windows print" ;
-               ACTION Iif(OpenReport("a.rpt","Simple"),PrintReport(,, .T.), .F.)
+               ACTION Iif(OpenReport("a.rpt", "Simple"), PrintReport(,, .T.), .F.)
          MENUITEM "&Print Preview" ACTION PrnTest()
          MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
          MENUITEM "&Command ProgressBar" ACTION TestProgres()
@@ -126,12 +126,12 @@ Local e5 := 10320.54
         PICTURE "@e 999,999,999.99"     ;
         SIZE 260, 25
 
-   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo( e1 + chr(10) + chr(13) + ;
+   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo(e1 + chr(10) + chr(13) + ;
                Dtoc(e2) + chr(10) + chr(13) + ;
                Str(e3) + chr(10) + chr(13) +  ;
                e4 + chr(10) + chr(13) +       ;
                Str(e5) + chr(10) + chr(13)    ;
-               ,"Results:" ) ,oChildWnd:Close() )}
+               , "Results:"), oChildWnd:Close() )}
    @ 180, 190 BUTTONEX "Cancel" SIZE 100, 32 ON CLICK {||oChildWnd:Close()}
 
    oChildWnd:Activate()
@@ -142,8 +142,8 @@ FUNCTION MdiChildFromPrg(o)
 
 Local cTitle := "MdiChild from prg", cText := "Input something"
 Local oChildWnd, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
-// Local aTabs := { "Monday","Tuesday","Wednesday","Thursday","Friday" }
+Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
+// Local aTabs := { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
 Local oCmd1, oCmd2, oCmd3
 
    INIT WINDOW oChildWnd MDICHILD TITLE "Child";
@@ -160,7 +160,7 @@ Local oCmd1, oCmd2, oCmd3
    
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif(nColor==Nil,Vcolor("0000FF"),nColor)
+        SIZE 90, 20 COLOR Iif(nColor==Nil, Vcolor("0000FF"), nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
 
@@ -217,7 +217,7 @@ RETURN NIL
 FUNCTION OpenAbout()
 
 Local oModDlg, oFontBtn, oFontDlg, oBrw
-Local aSample := { {.T.,"Line 1", 10}, {.T.,"Line 2", 22}, {.F.,"Line 3", 40} }
+Local aSample := { {.T., "Line 1", 10}, {.T., "Line 2", 22}, {.F., "Line 3", 40} }
 Local oBmp, oIcon := HIcon():AddFile("image\PIM.ICO")
 Local oSay
 
@@ -270,7 +270,7 @@ Local oSay
        BITMAP cImageDir+"door.bmp" COORDINATES 40, 10, 0, 0
        // 
 
-   CreateArList( oBrw,aSample )
+   CreateArList(oBrw, aSample)
    oBrw:bColorSel    := 12507070  // 15149157449
 
    oBmp := HBitmap():AddStandard(OBM_LFARROWI)
@@ -279,7 +279,7 @@ Local oSay
    }
    oBrw:aColumns[2]:length := 6
    oBrw:aColumns[3]:length := 4
-   oBrw:bKeyDown := {|o,key|BrwKey(o,key)}
+   oBrw:bKeyDown := {|o, key|BrwKey(o, key)}
 
    ACTIVATE DIALOG oModDlg
    oIcon:Release()
@@ -313,33 +313,33 @@ RETURN .T.
 FUNCTION FileOpen()
 
 Local oModDlg, oBrw
-Local mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+Local mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
 Local fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 Local nId
 
-   IF !Empty( fname )
-      mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+   IF !Empty(fname)
+      mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
       // use &fname new codepage RU866
       use &fname new
       nId := 111
 
       INIT DIALOG oModDlg TITLE "1"                    ;
             AT 210, 10  SIZE 500, 300                    ;
-            ON INIT {|o|SetWindowText(o:handle,fname)} ;
+            ON INIT {|o|SetWindowText(o:handle, fname)} ;
             ON EXIT {|o|Fileclose(o)}
 
       MENU OF oModDlg
-         MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont),oBrw:Refresh() )
+         MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont), oBrw:Refresh() )
          MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 
       @ 0, 0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
             SIZE 500, 300                           ;
             STYLE WS_VSCROLL + WS_HSCROLL          ;
-            ON SIZE {|o,x,y|MoveWindow(o:handle, 0, 0, x, y)} ;
+            ON SIZE {|o, x, y|MoveWindow(o:handle, 0, 0, x, y)} ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
       CreateList(oBrw, .T.)
-      oBrw:bScrollPos := {|o,n,lEof,nPos|VScrollPos(o,n,lEof,nPos)}
+      oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF
@@ -352,7 +352,7 @@ RETURN NIL
 
 FUNCTION FileClose(oDlg)
 
-   Local oBrw := oDlg:FindControl( 111 )
+   Local oBrw := oDlg:FindControl(111)
    dbSelectArea(oBrw:alias)
    dbCloseArea()
 
@@ -381,32 +381,32 @@ Local oPrinter, oFont
       RETURN NIL
    ENDIF
 
-   oFont := oPrinter:AddFont( "Times New Roman", 10 )
+   oFont := oPrinter:AddFont("Times New Roman", 10)
 
    oPrinter:StartDoc(.T.)
    oPrinter:StartPage()
-   oPrinter:SetFont( oFont )
-   oPrinter:Box( 5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5 )
-   oPrinter:SetTextColor( 2788990 )
-   oPrinter:Say( "Windows printing first sample !", 50, 10, 165, 26,DT_CENTER,oFont  )
+   oPrinter:SetFont(oFont)
+   oPrinter:Box(5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5)
+   oPrinter:SetTextColor(2788990)
+   oPrinter:Say("Windows printing first sample !", 50, 10, 165, 26, DT_CENTER, oFont)
    oPrinter:Line(45, 30, 170, 30)
    oPrinter:Line(45, 5, 45, 30)
    oPrinter:Line(170, 5, 170, 30)
-   oPrinter:Say( "----------", 50, 120, 150, 132,DT_CENTER  )
-   oPrinter:Box( 50, 134, 160, 146 )
-   oPrinter:Say( "End Of Report", 50, 135, 160, 146,DT_CENTER  )
+   oPrinter:Say("----------", 50, 120, 150, 132, DT_CENTER)
+   oPrinter:Box(50, 134, 160, 146)
+   oPrinter:Say("End Of Report", 50, 135, 160, 146, DT_CENTER)
    oPrinter:EndPage()
    oPrinter:StartPage()
-   oPrinter:SetFont( oFont )
-   oPrinter:Box( 5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5 )
-   oPrinter:SetTextColor( 2755990 )
-   oPrinter:Say( "Printing second sample !", 50, 10, 185, 26,DT_CENTER,oFont  )
+   oPrinter:SetFont(oFont)
+   oPrinter:Box(5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5)
+   oPrinter:SetTextColor(2755990)
+   oPrinter:Say("Printing second sample !", 50, 10, 185, 26, DT_CENTER, oFont)
    oPrinter:Line(45, 30, 170, 30)
    oPrinter:Line(45, 5, 45, 30)
    oPrinter:Line(170, 5, 170, 30)
-   oPrinter:Say( "----------", 50, 120, 150, 132,DT_CENTER  )
-   oPrinter:Box( 50, 134, 160, 146 )
-   oPrinter:Say( "End Of Report", 50, 135, 160, 146,DT_CENTER  )
+   oPrinter:Say("----------", 50, 120, 150, 132, DT_CENTER)
+   oPrinter:Box(50, 134, 160, 146)
+   oPrinter:Say("End Of Report", 50, 135, 160, 146, DT_CENTER)
    oPrinter:EndPage()
    oPrinter:EndDoc()
    oPrinter:Preview()
@@ -418,8 +418,8 @@ FUNCTION DialogFromPrg(o)
 
 Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
-// Local aTabs := { "Monday","Tuesday","Wednesday","Thursday","Friday" }
+Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
+// Local aTabs := { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
 
    // o:bGetFocus := Nil
    INIT DIALOG oModDlg TITLE cTitle           ;
@@ -434,7 +434,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif(nColor==Nil,Vcolor("0000FF"),nColor)
+        SIZE 90, 20 COLOR Iif(nColor==Nil, Vcolor("0000FF"), nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
 
@@ -536,8 +536,8 @@ RETURN lSucess
 
 FUNCTION TestProgres()
 
-Local oDlg,ostatus,oBar
-Local cRes, aCombo := { "First","Second" }
+Local oDlg, ostatus, oBar
+Local cRes, aCombo := { "First", "Second" }
 Private oProg
 
 INIT DIALOG oDlg TITLE "Progress Bar"    ;

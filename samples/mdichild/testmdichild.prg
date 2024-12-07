@@ -38,9 +38,9 @@ FUNCTION CreateMdiChild()
  LOCAL  vCodigo := ""
 
 
-  IF !EMPTY( [PDV] )
-     IF HWindow():FindWindow( [PDV] ) != Nil
-        BRINGTOTOP( HWindow():FindWindow( [PDV] ):handle )
+  IF !EMPTY([PDV])
+     IF HWindow():FindWindow([PDV]) != Nil
+        BRINGTOTOP(HWindow():FindWindow([PDV]):handle)
         RETURN Nil
      ENDIF
   ENDIF
@@ -81,14 +81,14 @@ FUNCTION CreateMdiChild()
    @ 818, 180 BUTTONEX oButtonex1 CAPTION "Cancela Cupom"   SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
         ON CLICK {|This, Value| hwg_MsgInfo('Cancelado') } ;
-        ON GETFOCUS {|| Thisform:obuttonex1:SetColor( 255, rgb(225, 243, 252), .T.) } ;
-        ON INIT {|This| This:blostfocus:={|t,this| this:bcolor := NIL, this:Setcolor(0, NIL, .T.) } }
+        ON GETFOCUS {|| Thisform:obuttonex1:SetColor(255, rgb(225, 243, 252), .T.) } ;
+        ON INIT {|This| This:blostfocus:={|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.) } }
         oButtonex1:Anchor := 225
         oButtonex1:lNoThemes := .T.
    @ 818, 229 BUTTONEX oButtonex2 CAPTION "Leitura X"   SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
-        ON GETFOCUS {|| Thisform:obuttonex2:SetColor( 255,rgb(225, 243, 252) , .T.) } ;
-        ON INIT {|This| This:blostfocus:={|t,this| this:bcolor := NIL, this:Setcolor(0, NIL, .T.) } }
+        ON GETFOCUS {|| Thisform:obuttonex2:SetColor(255, rgb(225, 243, 252), .T.) } ;
+        ON INIT {|This| This:blostfocus:={|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.) } }
         oButtonex2:Anchor := 240
         oButtonex2:lNoThemes := .T.
    @ 818, 276 BUTTONEX oButtonex3 CAPTION "Redução Z"   SIZE 183, 38 ;
@@ -126,16 +126,16 @@ FUNCTION CreateMdiChild()
         oLabel8:Anchor := 161
    @ 8, 245 BROWSE oBrowse1 ARRAY SIZE 786, 180 ;
         STYLE WS_TABSTOP       ;
-        ON INIT {|This| oBrowse1_onInit( This ) }
+        ON INIT {|This| oBrowse1_onInit(This) }
 
     // CREATE oBrowse1   //  SCRIPT GENARATE BY DESIGNER
     oBrowse1:aArray := {}
-    oBrowse1:AddColumn( HColumn():New('Código', ColumnArBlock() ,'U', 13, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn( HColumn():New('Descrição', ColumnArBlock() ,'U', 27, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn( HColumn():New('Quantid.', ColumnArBlock() ,'N', 9, 3 , .F., 1,, '9,999.999',,,,,,,,,))
-    oBrowse1:AddColumn( HColumn():New('UN', ColumnArBlock() ,'U', 2, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn( HColumn():New('Valor Unit.', ColumnArBlock() ,'N', 9, 2 , .F., 1,,'@e 99,999.99',,,,,,,,,))
-    oBrowse1:AddColumn( HColumn():New('Valor Item', ColumnArBlock() ,'N', 10, 2 , .F., 1,,'@E 999,999.99',,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('Código', ColumnArBlock() ,'U', 13, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('Descrição', ColumnArBlock() ,'U', 27, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('Quantid.', ColumnArBlock() ,'N', 9, 3 , .F., 1,, '9,999.999',,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('UN', ColumnArBlock() ,'U', 2, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('Valor Unit.', ColumnArBlock() ,'N', 9, 2 , .F., 1,,'@e 99,999.99',,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New('Valor Item', ColumnArBlock() ,'N', 10, 2 , .F., 1,,'@E 999,999.99',,,,,,,,,))
 
     // END BROWSE SCRIPT  -  oBrowse1
         oBrowse1:Anchor := 135

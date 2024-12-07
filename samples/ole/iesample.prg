@@ -20,7 +20,7 @@ Local oEdit, cUrl, oIE
 
    MENU OF oMainWnd
       MENU TITLE "File"
-         MENUITEM "&Open file" ACTION OpenFile(oIE,oEdit)
+         MENUITEM "&Open file" ACTION OpenFile(oIE, oEdit)
          SEPARATOR
          MENUITEM "E&xit" ACTION oMainWnd:Close()
       ENDMENU
@@ -30,13 +30,13 @@ Local oEdit, cUrl, oIE
 
     @ 5, 4 EDITBOX oEdit CAPTION "http://kresin.belgorod.su" OF oPanelTool SIZE 400, 24
     @ 405, 4 BUTTON "Go!" OF oPanelTool SIZE 30, 24 ;
-        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle,oEdit:id)),oIE:DisplayPage(cUrl), .T.)}
+        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), oIE:DisplayPage(cUrl), .T.)}
     @ 435, 4 BUTTON "Search" OF oPanelTool SIZE 55, 24 ;
-        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle,oEdit:id)),FindInGoogle(cUrl,oIE,oEdit), .T.)}
+        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), FindInGoogle(cUrl, oIE, oEdit), .T.)}
 
-    @ 0, 34 PANEL oPanelIE SIZE 500, 366 ON SIZE {|o,x,y|o:Move(,,x,y-34)}
+    @ 0, 34 PANEL oPanelIE SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y - 34)}
 
-    oIE := HHtml():New( oPanelIE )
+    oIE := HHtml():New(oPanelIE)
 
     ACTIVATE WINDOW oMainWnd
 
@@ -44,11 +44,11 @@ RETURN NIL
 
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
-Local mypath := "\" + Curdir() + Iif(Empty( Curdir() ), "", "\")
+Local mypath := "\" + Curdir() + Iif(Empty(Curdir()), "", "\")
 Local fname := SelectFile("HTML files", "*.htm;*.html", mypath)
 
-   IF !Empty( fname )
-      oEdit:SetText( fname )
+   IF !Empty(fname)
+      oEdit:SetText(fname)
       oIE:DisplayPage(fname)
    ENDIF
 
@@ -58,12 +58,12 @@ STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
 
 Local cUrl := "http://www.google.com/search?q=", cItem
 
-   IF !Empty( cItem := NextItem( cQuery, .T.,' ' ) )
+   IF !Empty(cItem := NextItem(cQuery, .T., ' '))
       cUrl += cItem
-      DO WHILE !Empty( cItem := NextItem( cQuery,,' ' ) )
+      DO WHILE !Empty(cItem := NextItem(cQuery, , ' '))
          cUrl += '+' + cItem
       ENDDO
-      oEdit:SetText( cUrl )
+      oEdit:SetText(cUrl)
       oIE:DisplayPage(cUrl)
    ENDIF
 

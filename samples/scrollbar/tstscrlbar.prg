@@ -15,7 +15,7 @@ FUNCTION Main()
    next
 
 
-   oMain:bScroll := { | o, msg, wParam, lParam | stdScroll( o, msg, wParam, lParam ) }
+   oMain:bScroll := { | o, msg, wParam, lParam | stdScroll(o, msg, wParam, lParam) }
 
    ACTIVATE window oMain
 
@@ -31,8 +31,8 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
       nIncr := 10
    ENDIF
    pg := Max(Round(nIncr / 5, 0), 2)
-   x := GetScrollPos( oDlg:handle, SB_HORZ )
-   y := GetScrollPos( oDlg:handle, SB_VERT )
+   x := GetScrollPos(oDlg:handle, SB_HORZ)
+   y := GetScrollPos(oDlg:handle, SB_VERT)
    IF msg == WM_VSCROLL
       yy := y
       SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
@@ -58,8 +58,8 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          y := nNewPos
       ENDIF
       IF y != yy
-         SetScrollPos( oDlg:handle, SB_VERT, y )
-         ScrollWindow( oDlg:handle, 0, ( yy - y ) * nIncr )
+         SetScrollPos(oDlg:handle, SB_VERT, y)
+         ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
       ENDIF
    ELSEIF msg == WM_HSCROLL
       SetScrollRange(oDlg:handle, SB_HORZ, 0, nIncr)
@@ -86,8 +86,8 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          x := nNewPos
       ENDIF
       IF x != xx
-         SetScrollPos( oDlg:handle, SB_HORZ, x )
-         ScrollWindow( oDlg:handle, ( xx - x ) * nIncr, 0 )
+         SetScrollPos(oDlg:handle, SB_HORZ, x)
+         ScrollWindow(oDlg:handle, ( xx - x ) * nIncr, 0)
       ENDIF
    ELSEIF msg == WM_MOUSEWHEEL
       yy := y
@@ -102,8 +102,8 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          ENDIF
       ENDIF
       IF y != yy
-         SetScrollPos( oDlg:handle, SB_VERT, y )
-         ScrollWindow( oDlg:handle, 0, ( yy - y ) * nIncr )
+         SetScrollPos(oDlg:handle, SB_VERT, y)
+         ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
       ENDIF
    ENDIF
 

@@ -56,8 +56,8 @@ FUNCTION Dlg1()
    @ 20, 20 MONTHCALENDAR oMC ;
       SIZE 250, 250 ;
       INIT ctod("01/01/2004") ;
-      ON INIT {||hwg_MsgInfo("Evento On Init","MonthCalendar")} ;
-      ON CHANGE {||hwg_MsgInfo("Evento On Change","MonthCalendar")} ;
+      ON INIT {||hwg_MsgInfo("Evento On Init", "MonthCalendar")} ;
+      ON CHANGE {||hwg_MsgInfo("Evento On Change", "MonthCalendar")} ;
       NOTODAY NOTODAYCIRCLE WEEKNUMBERS ;
       FONT oFont ;
       TOOLTIP "MonthCalendar - NoToday - NoTodayCircle - WeekNumbers"

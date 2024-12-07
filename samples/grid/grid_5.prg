@@ -96,7 +96,7 @@ FUNCTION Test()
                 ITEMCOUNT LastRec() ;
                 ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key, aItems) } ;
                 ON CLICK {|oCtrl| OnClick(oCtrl, aItems) } ;
-                ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) }
+                ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo(oCtrl, nRow, nCol) }
 
         ADD COLUMN TO GRID oGrid HEADER "Number" WIDTH 100
         ADD COLUMN TO GRID oGrid HEADER "Descr"  WIDTH 250
@@ -104,9 +104,9 @@ FUNCTION Test()
         ADD COLUMN TO GRID oGrid HEADER "Date"   WIDTH 100
         ADD COLUMN TO GRID oGrid HEADER "Memo"   WIDTH 200
 
-        @  10, 395 BUTTON 'Insert' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_INSERT, aItems ) }
-        @  90, 395 BUTTON 'Change' SIZE 75, 25 ON CLICK {|| OnClick( oGrid, aItems ) }
-        @ 170, 395 BUTTON 'Delete' SIZE 75, 25 ON CLICK {|| OnKey( oGrid, VK_DELETE, aItems ) }
+        @  10, 395 BUTTON 'Insert' SIZE 75, 25 ON CLICK {|| OnKey(oGrid, VK_INSERT, aItems) }
+        @  90, 395 BUTTON 'Change' SIZE 75, 25 ON CLICK {|| OnClick(oGrid, aItems) }
+        @ 170, 395 BUTTON 'Delete' SIZE 75, 25 ON CLICK {|| OnKey(oGrid, VK_DELETE, aItems) }
 
         @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:close() }
 
@@ -144,7 +144,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     for i := 1 to len(aFields)
         ASize(aFields[i], 12)
         
-        nSay := max( nSay, len(aFields[i, GET_LABEL]) )
+        nSay := max(nSay, len(aFields[i, GET_LABEL]))
         
         cType := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
         
@@ -165,7 +165,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
         
         endif        
 
-        nGet := max( nGet, nLen )
+        nGet := max(nGet, nLen)
 
         aFields[i, GET_LEN] := nLen
         aFields[i, GET_TYPE] := cType
@@ -182,8 +182,8 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     INIT DIALOG oForm CLIPPER TITLE "Teste";
         FONT oFont ;
         AT 0, 0 ;
-        SIZE Min( GetDesktopWidth() - 50, (nSay + nGet) * nGetSize + nGetSize ), ;
-             Min( GetDesktopHeight() - 28, nheight ) ;
+        SIZE Min(GetDesktopWidth() - 50, (nSay + nGet) * nGetSize + nGetSize), ;
+             Min(GetDesktopHeight() - 28, nheight) ;
         STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 
         For i := 1 to len(aFields)
@@ -192,7 +192,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
             cType  := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
             
             if cType == "N" .AND. aFields[i, GET_LIST] != NIL
-                aFields[i, GET_OBJECT] := HComboBox():New( oForm,;
+                aFields[i, GET_OBJECT] := HComboBox():New(oForm,;
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD]),;
@@ -208,9 +208,9 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             NIL,;
                             {|value, oCtrl| __valid(value, oCtrl, aFields, bChange) },;
                             NIL)
-            
+
             elseif cType == 'L'
-                aFields[i, GET_OBJECT] := HCheckButton():New( oForm,;
+                aFields[i, GET_OBJECT] := HCheckButton():New(oForm,;
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD]),;
@@ -229,8 +229,8 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             NIL,;
                             NIL)
 
-            elseif cType = 'D' 
-                aFields[i, GET_OBJECT] := HDatePicker():New( oForm,;
+            elseif cType = 'D'
+                aFields[i, GET_OBJECT] := HDatePicker():New(oForm,;
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD ]),;
@@ -245,17 +245,17 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             {|value, oCtrl| __valid(value, oCtrl, aFields, bChange) },;
                             NIL,;
                             NIL,;
-                            NIL )
+                            NIL)
             else
                 if cType == "M"
-                    nStyle := WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE 
+                    nStyle := WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE
                 endif
-                
+
                 if aFields[i, GET_EDIT]
                     nStyle += WS_DISABLED
                 endif
                                     
-                aFields[i, GET_OBJECT] := HEdit():New( oForm, ;
+                aFields[i, GET_OBJECT] := HEdit():New(oForm, ;
                             3000 + i,;
                             aFields[i, GET_VALUE],;
                             FieldBlock(aFields[i, GET_FIELD]),;
@@ -265,20 +265,20 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             aFields[i, GET_LEN] * nGetSize,;
                             aFields[i, GET_HEIGHT],;
                             NIL,;
-                            NIL,NIL,NIL,;
+                            NIL, NIL, NIL,;
                             NIL,;
                             {|value, oCtrl| __valid(value, oCtrl, aFields, bChange) },;
                             NIL,;
                             NIL,;
                             NIL,;
                             aFields[i, GET_PICT],;
-                            .F.)            
-            endif                                                
-                                                
+                            .F.)
+            endif
+
             nRow += aFields[i, GET_HEIGHT] + 5
 
         Next
-    
+
         @ oForm:nWidth - 160, oForm:nHeight - 30 BUTTON "Ok"     ID IDOK SIZE 75, 25
         @ oForm:nWidth -  80, oForm:nHeight - 30 BUTTON "Cancel" ID IDCANCEL SIZE 75, 25 ON CLICK {|| oForm:Close() }
         

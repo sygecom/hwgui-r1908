@@ -20,7 +20,7 @@ RETURN NIL
 FUNCTION DlgGet()
 
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First","Second" }
+Local cRes, aCombo := { "First", "Second" }
 Local oGet
 Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1
 Local upd := 12, d1 := Date()+1
@@ -62,15 +62,15 @@ Local aIP := { 10, 1, 2, 3 }
    oFont:Release()
 
    IF oModDlg:lResult
-      hwg_MsgInfo( e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1,"On","Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2,"On","Off") + chr(10) + chr(13) + ;
+      hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
+               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;
                "DatePicker: "+Dtoc(d1) +                              ;
                "IpAddress: " + StrZero(aIP[1], 3, 0) + "." + StrZero(aIP[2], 3, 0) + "." + StrZero(aIP[3], 3, 0) + "." +  StrZero(aIP[4], 3, 0) ;
-               ,"Results:" )
+               , "Results:")
    ENDIF
 
 RETURN NIL

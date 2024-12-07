@@ -43,7 +43,7 @@ FUNCTION BrowseTest_2()
                 ADD COLUMN FieldBlock('field_1') TO oBrowse HEADER 'Field 1' EDITABLE
                 ADD COLUMN FieldBlock('field_2') TO oBrowse HEADER 'Field 2' EDITABLE LENGTH 30
 
-                DBNavigator( oBrowse, 5, 400 )
+                DBNavigator(oBrowse, 5, 400)
 
                 @ 530, 400 OWNERBUTTON OF oForm SIZE 80, 25 ;
                            TEXT "Ok" FONT oFont COORDINATES 0, 0, 0, 0 ;

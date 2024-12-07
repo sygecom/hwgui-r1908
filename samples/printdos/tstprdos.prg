@@ -68,7 +68,7 @@ Local oMain
          MENUITEM "U&sing Default Printerr" ACTION TestDosClipper("DEFAULT")
       ENDMENU
       MENU TITLE "&Help"
-         MENUITEM "&About" ACTION ShellAbout("Test PrintDos","By Sandro R. R. Freire")
+         MENUITEM "&About" ACTION ShellAbout("Test PrintDos", "By Sandro R. R. Freire")
       ENDMENU
 
    ENDMENU
@@ -79,7 +79,7 @@ RETURN NIL
 
 FUNCTION TestDosClass(oTest)
 
-If hwg_MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
 
    oPrint:=Printdos():New(oTest)   //oTest=Nil LPT1
 
@@ -89,15 +89,15 @@ If hwg_MsgYesNo("Printing PrintDos Class to "+Iif(oTest==Nil,"LPT1",oTest),"Prin
    oPrint:Say(14, 21, "LINE 14 COL 21")
    oPrint:Say(30, 34, "LINE 30 COL 34")
    oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE "+STR(oPrint:nProw)+ " COL "+STR(oPrint:nPcol))
-   oPrint:Say(40, 24, "11222333000144","@r 99.999.999/9999-99")
-   oPrint:Say(oPrint:nProw+1, oPrint:nPcol,"Valor" )
+   oPrint:Say(40, 24, "11222333000144", "@r 99.999.999/9999-99")
+   oPrint:Say(oPrint:nProw+1, oPrint:nPcol, "Valor" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol, 996659.8, "@E 999,999,999.99" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol+2, 22.11)
    oPrint:Say(oPrint:nProw, oPrint:nPcol+1, DATE())
 
    oPrint:Eject()
 
-   oPrint:Say(01, 10,"End of printer text, the PrintDos Class")
+   oPrint:Say(01, 10, "End of printer text, the PrintDos Class")
 
    oPrint:SetPrc(0, 0)
 
@@ -115,7 +115,7 @@ FUNCTION TestDosClipper(oTest)
 
 Local oPrinter
 
-If hwg_MsgYesNo("Printing style clipper to "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
 
@@ -265,7 +265,7 @@ FUNCTION DeskJet(oTest)
 
 Local oPrinter
 
-If hwg_MsgYesNo("Printing InkJet/DeskJet "+Iif(oTest==Nil,"LPT1",oTest),"PrintDos Class Demo")
+If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
    oPrinter:oPrintStyle:=3

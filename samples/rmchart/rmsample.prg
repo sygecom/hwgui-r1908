@@ -28,21 +28,21 @@ CLASS VAR winclass INIT "RmChart"
   METHOD New()
 ENDCLASS
 
-METHOD New(p1,p2,p3,p4,p5,p6) CLASS RmChart
+METHOD New(p1, p2, p3, p4, p5, p6) CLASS RmChart
 
-  ::EventMap( 1 , "CLICKED" , SELF )
+  ::EventMap(1 , "CLICKED" , SELF)
                                       // Map event 1 to Clicked method
                                       // ...7... I don't remember why I put 7
                                       // should be the number of parameters to
                                       // pass to the function
                                       // Mapping must be done before calling New
-  ::Super:New(p1,p2,p3,p4,p5,p6)        //
+  ::Super:New(p1, p2, p3, p4, p5, p6)        //
 
 RETURN NIL
 
 METHOD Clicked(...) CLASS RmChart
 
-hwg_MsgInfo( "Mouse button pressed" , ::winclass )
+hwg_MsgInfo("Mouse button pressed", ::winclass)
 
 RETURN NIL
 
@@ -79,9 +79,9 @@ Private oChart
     @ 205, 4 BUTTON "Redraw" OF oPanelTool SIZE 50, 24 ;
         ON CLICK {||oChart:Draw(.T.) }
 
-    @ 0, 34 PANEL oPanel SIZE 500, 366 ON SIZE {|o,x, y| o:Move(,,x,y), oChart:Move(,,x,y-32), oChart:Refresh() }
+    @ 0, 34 PANEL oPanel SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y), oChart:Move(, , x, y - 32), oChart:Refresh()}
 
-    oChart := RmChart():New( oPanel, "RMChart.RMChartX", 0, 0, oPanel:nHeight, oPanel:nWidth )
+    oChart := RmChart():New(oPanel, "RMChart.RMChartX", 0, 0, oPanel:nHeight, oPanel:nWidth)
 
     oChart:Clear()
     oChart:Reset()
@@ -89,10 +89,10 @@ Private oChart
     oChart:RMCStyle         := RMC_CTRLSTYLEFLAT
     oChart:RMCUserWatermark := "Test Test Test"
     oChart:AddRegion()
-    r1 := oChart:Region( 1 )
+    r1 := oChart:Region(1)
     r1:Footer = "hwgui does ocx too!"
     r1:AddCaption()
-    WITH OBJECT r1 			// oChart:Region( 1 )
+    WITH OBJECT r1 			// oChart:Region(1)
          WITH OBJECT :Caption()
               :Titel     := "rmchart test"
               :FontSize  := 10

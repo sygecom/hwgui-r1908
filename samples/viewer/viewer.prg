@@ -37,19 +37,19 @@ Private nVert, nHorz
      COLOR COLOR_3DLIGHT+1                      ;
      AT 200, 0 SIZE 400, 150                      ;
      FONT oFont                                 ;
-     ON OTHER MESSAGES {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
+     ON OTHER MESSAGES {|o, m, wp, lp|MessagesProc(o, m, wp, lp)}
      //      ON PAINT {|o|PaintWindow(o)}               ;
 
    MENU OF oMainWindow
       MENU TITLE "&File"
-         MENUITEM "&Open" ACTION FileOpen( oMainWindow )
+         MENUITEM "&Open" ACTION FileOpen(oMainWindow)
          SEPARATOR
          MENUITEM "&Exit"+Chr(9)+"Alt+x" ACTION EndWindow() ;
-           ACCELERATOR FALT,Asc("X")
+           ACCELERATOR FALT, Asc("X")
       ENDMENU
       MENU TITLE "&View"
-         MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
-         MENUITEM "Zoom &out" ACTION Zoom( oMainWindow, 1 )
+         MENUITEM "Zoom &in" ACTION Zoom(oMainWindow, -1)
+         MENUITEM "Zoom &out" ACTION Zoom(oMainWindow, 1)
          MENUITEM "Ori&ginal size" ACTION Zoom(oMainWindow, 0)
       ENDMENU
       MENU TITLE "&Help"
@@ -65,10 +65,10 @@ Private nVert, nHorz
    @ 2, 2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
         SIZE 24, 24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
         TOOLTIP "Open file"
-   @ 26, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow, 1 )} ;
+   @ 26, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom(oMainWindow, 1)} ;
         SIZE 24, 24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
         TOOLTIP "Zoom out"
-   @ 50, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow, -1)} ;
+   @ 50, 2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom(oMainWindow, -1)} ;
         SIZE 24, 24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
         TOOLTIP "Zoom in"
    @ 74, 2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
@@ -79,9 +79,9 @@ Private nVert, nHorz
         FONT oFont BACKCOLOR 12507070
 
 #ifdef __FREEIMAGE__
-   @ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   @ 0, oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #else
-   @ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   @ 0, oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #endif
 
    aScreen := GetWorkareaRect()
@@ -96,18 +96,18 @@ STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem
 
    IF msg == WM_VSCROLL
-      Vscroll( oWnd,LoWord(wParam),HiWord(wParam) )
+      Vscroll(oWnd, LoWord(wParam), HiWord(wParam))
    ELSEIF msg == WM_HSCROLL
-      Hscroll( oWnd,LoWord(wParam),HiWord(wParam) )
+      Hscroll(oWnd, LoWord(wParam), HiWord(wParam))
    ELSEIF msg == WM_KEYUP
       IF wParam == 40        // Down
-        VScroll( oWnd, SB_LINEDOWN )
+        VScroll(oWnd, SB_LINEDOWN)
       ELSEIF wParam == 38    // Up
-        VScroll( oWnd, SB_LINEUP )
+        VScroll(oWnd, SB_LINEUP)
       ELSEIF wParam == 39    // Right
-        HScroll( oWnd, SB_LINEDOWN )
+        HScroll(oWnd, SB_LINEDOWN)
       ELSEIF wParam == 37    // Left
-        HScroll( oWnd, SB_LINEUP )
+        HScroll(oWnd, SB_LINEUP)
       ENDIF
    ENDIF
 
@@ -122,24 +122,24 @@ Local stepV
          nStepV ++
          stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepV > 0
          nStepV --
          stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepV
          nStepV := nNewPos
          stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ENDIF
 
@@ -154,24 +154,24 @@ Local stepH
          nStepH ++
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepH > 0
          nStepH --
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepH
          nStepH := nNewPos
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
-         RedrawWindow( oSayMain:handle, RDW_ERASE + RDW_INVALIDATE )
+         SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
 
    ENDIF
@@ -180,7 +180,7 @@ RETURN NIL
 
 STATIC FUNCTION FileOpen(oWnd)
 
-Local mypath := "\" + CURDIR() + IIF(EMPTY( CURDIR() ), "", "\")
+Local mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
 Local fname
 Local aCoors
 
@@ -189,14 +189,14 @@ Local aCoors
 #else
    fname := SelectFile("Graphic files( *.jpg;*.gif;*.bmp )", "*.jpg;*.gif;*.bmp", mypath)
 #endif
-   IF !Empty( fname )
+   IF !Empty(fname)
       nKoef := 1
       nStepV := nStepH := 0
       IF lScrollH
-         SetScrollInfo( oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE )
+         SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
       ENDIF
       IF lScrollV
-         SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
+         SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
       ENDIF
       /*
       IF oImage != Nil
@@ -208,16 +208,16 @@ Local aCoors
       oSayMain:ReplaceImage(fname)
 #else
       // oImage := HBitmap():AddFile(fname)
-      oSayMain:ReplaceBitmap( fname )
+      oSayMain:ReplaceBitmap(fname)
 #endif
       oImage := oSayMain:oImage
       oSayMain:nOffsetH := oSayMain:nOffsetV := 0
 
       lScrollV := lScrollH := .F.
-      ShowScrollBar( oWnd:handle,SB_HORZ,lScrollH )
-      ShowScrollBar( oWnd:handle,SB_VERT,lScrollV )
+      ShowScrollBar(oWnd:handle, SB_HORZ, lScrollH)
+      ShowScrollBar(oWnd:handle, SB_VERT, lScrollV)
 
-      aCoors := GetClientRect( oWnd:handle )
+      aCoors := GetClientRect(oWnd:handle)
       nVert := ( oWnd:nHeight - aCoors[4] )
       nHorz := ( oWnd:nWidth-aCoors[3] )
       DO WHILE .T.
@@ -243,10 +243,10 @@ Local aCoors
       ENDIF
 
       // writelog("Window: "+str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
-      MoveWindow( oWnd:handle,oWnd:nLeft,oWnd:nTop,oWnd:nWidth,oWnd:nHeight )
+      MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
       oSayMain:nZoom := nKoef
-      InvalidateRect( oSayMain:handle, 0 )
-      oSayMain:Move(,,oWnd:nWidth-nHorz,oWnd:nHeight-nVert-oToolBar:nHeight)
+      InvalidateRect(oSayMain:handle, 0)
+      oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
       oSayScale:SetValue(Str(nKoef*100, 4)+" %")
    ENDIF
 
@@ -260,7 +260,7 @@ Local stepV, stepH
    IF oImage == Nil
       RETURN NIL
    ENDIF
-   aCoors := GetClientRect( oWnd:handle )
+   aCoors := GetClientRect(oWnd:handle)
    nVert := ( oWnd:nHeight - aCoors[4] )
    nHorz := ( oWnd:nWidth-aCoors[3] )
 
@@ -301,16 +301,16 @@ Local stepV, stepH
 
    oSayMain:nZoom := nKoef
    oSayScale:SetValue(Str(nKoef*100, 4)+" %")
-   InvalidateRect( oWnd:handle, 0 )
+   InvalidateRect(oWnd:handle, 0)
    // writelog("Window: "+str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
-   MoveWindow( oWnd:handle,oWnd:nLeft,oWnd:nTop,oWnd:nWidth,oWnd:nHeight )
+   MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
    stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
    oSayMain:nOffsetV := - nStepV * stepV
    oSayMain:nOffsetH := - nStepH * stepH
-   oSayMain:Move(,,oWnd:nWidth-nHorz,oWnd:nHeight-nVert-oToolBar:nHeight)
-   ShowScrollBar( oWnd:handle,SB_HORZ,lScrollH )
-   ShowScrollBar( oWnd:handle,SB_VERT,lScrollV )
+   oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
+   ShowScrollBar(oWnd:handle, SB_HORZ, lScrollH)
+   ShowScrollBar(oWnd:handle, SB_VERT, lScrollV)
 
 RETURN NIL
 
@@ -330,19 +330,19 @@ Local nOffsV, nOffsH
    nOffsH := nStepH * stepH
 
    pps := DefinePaintStru()
-   hDC := BeginPaint( oWnd:handle, pps )
+   hDC := BeginPaint(oWnd:handle, pps)
 
    // writelog("Paint: "+str(Round(oImage:nWidth * nKoef, 0)) + str(Round(oImage:nHeight * nKoef, 0)))
 #ifdef __FREEIMAGE__
-   oImage:Draw( hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
+   oImage:Draw(hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #else
-   DrawBitmap( hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
+   DrawBitmap(hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #endif
 
    IF lScrollV
-      SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
+      SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
    ENDIF
-   EndPaint( oWnd:handle, pps )
+   EndPaint(oWnd:handle, pps)
 
 RETURN 0
 */
@@ -366,7 +366,7 @@ RETURN NIL
 HB_FUNC(GETWORKAREARECT)
 {
    RECT rc;
-   PHB_ITEM aMetr = hb_itemArrayNew( 4 );
+   PHB_ITEM aMetr = hb_itemArrayNew(4);
    PHB_ITEM temp;
 
    SystemParametersInfo(
@@ -377,23 +377,23 @@ HB_FUNC(GETWORKAREARECT)
        0                // user profile update flag
       );
 
-   temp = hb_itemPutNI( NULL, rc.left );
-   hb_itemArrayPut( aMetr, 1, temp );
+   temp = hb_itemPutNI(NULL, rc.left);
+   hb_itemArrayPut(aMetr, 1, temp);
    hb_itemRelease(temp);
 
-   temp = hb_itemPutNI( NULL, rc.top );
-   hb_itemArrayPut( aMetr, 2, temp );
+   temp = hb_itemPutNI(NULL, rc.top);
+   hb_itemArrayPut(aMetr, 2, temp);
    hb_itemRelease(temp);
 
-   temp = hb_itemPutNI( NULL, rc.right );
-   hb_itemArrayPut( aMetr, 3, temp );
+   temp = hb_itemPutNI(NULL, rc.right);
+   hb_itemArrayPut(aMetr, 3, temp);
    hb_itemRelease(temp);
 
-   temp = hb_itemPutNI( NULL, rc.bottom );
-   hb_itemArrayPut( aMetr, 4, temp );
+   temp = hb_itemPutNI(NULL, rc.bottom);
+   hb_itemArrayPut(aMetr, 4, temp);
    hb_itemRelease(temp);
 
-   hb_itemReturn( aMetr );
+   hb_itemReturn(aMetr);
    hb_itemRelease(aMetr);
 
 }

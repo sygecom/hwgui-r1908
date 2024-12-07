@@ -9,7 +9,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-STATIC oPrinter,aSize:={280, 220}
+STATIC oPrinter, aSize := {280, 220}
 
 FUNCTION Main()
 
@@ -27,7 +27,7 @@ Private nColor, oBmp2
          MENUITEM "&Exit" ACTION EndWindow()
       ENDMENU
       MENU TITLE "&Help"
-         MENUITEM "&About" ACTION ShellAbout("Info","RTF Demo")
+         MENUITEM "&About" ACTION ShellAbout("Info", "RTF Demo")
       ENDMENU
    ENDMENU
 
@@ -40,11 +40,11 @@ FUNCTION TestRtf()
 LOCAL cOutFile, oRtf, anchos, i
 LOCAL j, aMarca, lFormato := .F.
 
-   cOutFile := SaveFile("*.rtf","RTF files( *.rtf )","*.rtf")
-   IF Empty( cOutFile )
+   cOutFile := SaveFile("*.rtf", "RTF files( *.rtf )", "*.rtf")
+   IF Empty(cOutFile)
       RETURN NIL
    ENDIF
-   IF File(cOutFile) .AND. !hwg_MsgYesNo( "Recreate it ?",cOutFile+" already exists!" )
+   IF File(cOutFile) .AND. !hwg_MsgYesNo("Recreate it ?", cOutFile + " already exists!")
       RETURN NIL
    ENDIF
 
@@ -143,10 +143,10 @@ LOCAL j, aMarca, lFormato := .F.
 			CELLBORDERS SINGLE ;          // Outline cells with thin border
 			COLSHADE aMarca;               // Sombras en columnas
 			HEADERROWS 2;                // dos lineas de titulos
-                        HEADER {"Sala","Generador","","","","","ACTIVIDAD",;
-                        "NºEXPOSICIONES AÑO POR TUBO","CARGA DE TRABAJO mA. min/semana"},;
-			{"","Marca","Modelo","Tension Pico (kVp)","Intensidad (mA)",;
-			"Nº Tubos","","",""};       // Titulos. Cada linea es una matriz
+                        HEADER {"Sala", "Generador", "", "", "", "", "ACTIVIDAD",;
+                        "NºEXPOSICIONES AÑO POR TUBO", "CARGA DE TRABAJO mA. min/semana"},;
+			{"", "Marca", "Modelo", "Tension Pico (kVp)", "Intensidad (mA)",;
+			"Nº Tubos", "", "", ""};       // Titulos. Cada linea es una matriz
 			HEADERSHADE 0;
 			HEADERFONTSIZE 10;
             HEADERHALIGN CENTER 
@@ -180,7 +180,7 @@ LOCAL j, aMarca, lFormato := .F.
 
    CLOSE RTF oRtf
 
-   hwg_MsgInfo( cOutFile + " is created !" )
+   hwg_MsgInfo(cOutFile + " is created !")
 
 RETURN NIL
 
@@ -195,14 +195,14 @@ STATIC FUNCTION SetupRTF(cOutFile)
 * 01/28/97   TRM         Creation
 *
 *********************************************************************
-LOCAL oRTF,i,nWidth:=0,lLandScape:=.F.
+LOCAL oRTF, i, nWidth:=0, lLandScape:=.F.
 LOCAL  ancpag
-MEMVAR nom_hosp1,nom_hosp2,nom_ser
+MEMVAR nom_hosp1, nom_hosp2, nom_ser
 MEMVAR cNomUser
 
 DEFINE RTF oRTF FILE cOutFile ;
 	FONTS "Times New Roman", "Arial", "Courier New" ;
-	FONTFAMILY "froman","fswiss","fmodern";
+	FONTFAMILY "froman", "fswiss", "fmodern";
         CHARSET 0, 0, 10;
 	FONTSIZE 12 ;
 	TWIPFACTOR 1440

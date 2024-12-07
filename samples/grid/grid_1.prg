@@ -44,7 +44,7 @@ FUNCTION Test()
                      ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
                      ON POSCHANGE {|oCtrl, nRow| OnPoschange(oCtrl, nRow) } ;
                      ON CLICK {|oCtrl| OnClick(oCtrl) } ;
-                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo( oCtrl, nRow, nCol ) } ;
+                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo(oCtrl, nRow, nCol) } ;
                      COLOR VColor('D3D3D3');
                      BACKCOLOR VColor('BEBEBE')
 
@@ -66,13 +66,13 @@ RETURN NIL
 
 FUNCTION OnPosChange(o, row)
 
-//    hwg_MsgInfo( str(row) )
+//    hwg_MsgInfo(str(row))
 
 RETURN NIL
 
 FUNCTION OnClick(o)
 
-//    hwg_MsgInfo( 'click' )
+//    hwg_MsgInfo('click')
 
 RETURN NIL
 
