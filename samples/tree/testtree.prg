@@ -83,13 +83,14 @@ RETURN NIL
 
 STATIC FUNCTION NodeOut(n, oSay)
 
-   LOCAL aText := { ;
-     "This is a sample application, which demonstrates using of TreeView control in HwGUI.", ;
-     "'Second' item is selected", ;
-     "'Third-1' item is selected", ;
-     "'Third-2' item is selected", ;
-     "'Forth' item is selected", ;
-     }
+   LOCAL aText := ;
+      { ;
+      "This is a sample application, which demonstrates using of TreeView control in HwGUI.", ;
+      "'Second' item is selected", ;
+      "'Third-1' item is selected", ;
+      "'Third-2' item is selected", ;
+      "'Forth' item is selected", ;
+      }
 
    IF n == 0
       oSay:SetValue("")

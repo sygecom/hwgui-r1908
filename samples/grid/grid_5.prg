@@ -55,8 +55,8 @@ RETURN NIL
 
 FUNCTION Test()
 
-    Local aItems := {}
-    Local i
+   LOCAL aItems := {}
+   LOCAL i
 
     PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
@@ -116,30 +116,30 @@ RETURN NIL
 
 FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
 
-    Local i
-    Local cField
-    Local nSay := 0
-    Local nGet := 0
-    Local cType
-    Local nLen
-    Local nRowSize := 30
-    Local nGetSize := 10
-    Local oForm
-    Local nRow := 10
-    Local nCol
-    Local nHeight := 0
-    Local cValid
-    Local nStyle := 0
-    Local nArea := Select()
-    
+   LOCAL i
+   LOCAL cField
+   LOCAL nSay := 0
+   LOCAL nGet := 0
+   LOCAL cType
+   LOCAL nLen
+   LOCAL nRowSize := 30
+   LOCAL nGetSize := 10
+   LOCAL oForm
+   LOCAL nRow := 10
+   LOCAL nCol
+   LOCAL nHeight := 0
+   LOCAL cValid
+   LOCAL nStyle := 0
+   LOCAL nArea := Select()
+
     DBSelectArea(cAlias)
-    
+
     if lAppend
         DBAppend()
     else
-        rlock()        
+        rlock()
     endif
-    
+
     /* set the highest say and get */
     for i := 1 to len(aFields)
         ASize(aFields[i], 12)
@@ -304,9 +304,11 @@ RETURN oForm:lResult
 
 STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
 
-    Local result := .T.
-    Local i, n, oGet
-    Local val
+   LOCAL result := .T.
+   LOCAL i
+   LOCAL n
+   LOCAL oGet
+   LOCAL val
 
     if ISOBJECT(oCtrl)
         n := oCtrl:id - 3000    
@@ -341,9 +343,10 @@ RETURN result
 
 STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
 
-    Local result := ''
+   LOCAL result := ''
+
     DBGoto(nRow)
-    
+
     if nCol == 1
         result := str(field->field_1)
     elseif nCol == 2
@@ -354,7 +357,7 @@ STATIC FUNCTION OnDispInfo(oCtrl, nRow, nCol)
         result := DtoC(field->field_4)
     elseif nCol == 5
         result := MemoLine(field->field_5, 100, 1)
-    endif                                          
+    endif
 
 RETURN result
 

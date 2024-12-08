@@ -14,7 +14,7 @@ static Thisform
 
 FUNCTION Main()
 
-   Local oMainWindow
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN MDI TITLE "HwGui - Mdi Child Windows Example" STYLE WS_CLIPCHILDREN ;
 
@@ -29,14 +29,45 @@ RETURN NIL
 
 FUNCTION CreateMdiChild()
 
-  LOCAL oWin,  oStatus1, oContainer1, oContainer2, oContainer3, oContainer4, oContainer5, oGroup1 ;
-        , oButtonex1, oButtonex2, oButtonex3, oButtonex4, oGroup2, oButtonex5, oButtonex6, oLabel13 ;
-        , oBrowse1, oLabel6, oLabel20, oLabel66, oLabel5, oLabel10, oLabel3, oLabel11 ;
-        , oLabel12, oLabel4, oCodigo, oLabel21, oContainer6, oLabel7, oLabel17 ;
-        , oLabel18, oLabel8, oLabel9, oLabel14, oLabel15, oLabel16, oLabel19
-
- LOCAL  vCodigo := ""
-
+   LOCAL oWin
+   LOCAL oStatus1
+   LOCAL oContainer1
+   LOCAL oContainer2
+   LOCAL oContainer3
+   LOCAL oContainer4
+   LOCAL oContainer5
+   LOCAL oGroup1
+   LOCAL oButtonex1
+   LOCAL oButtonex2
+   LOCAL oButtonex3
+   LOCAL oButtonex4
+   LOCAL oGroup2
+   LOCAL oButtonex5
+   LOCAL oButtonex6
+   LOCAL oLabel13
+   LOCAL oBrowse1
+   LOCAL oLabel6
+   LOCAL oLabel20
+   LOCAL oLabel66
+   LOCAL oLabel5
+   LOCAL oLabel10
+   LOCAL oLabel3
+   LOCAL oLabel11
+   LOCAL oLabel12
+   LOCAL oLabel4
+   LOCAL oCodigo
+   LOCAL oLabel21
+   LOCAL oContainer6
+   LOCAL oLabel7
+   LOCAL oLabel17
+   LOCAL oLabel18
+   LOCAL oLabel8
+   LOCAL oLabel9
+   LOCAL oLabel14
+   LOCAL oLabel15
+   LOCAL oLabel16
+   LOCAL oLabel19
+   LOCAL vCodigo := ""
 
   IF !EMPTY([PDV])
      IF HWindow():FindWindow([PDV]) != Nil

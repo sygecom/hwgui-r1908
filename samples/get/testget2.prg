@@ -10,8 +10,9 @@
 
 FUNCTION Main()
 
-Local oMainWindow
-Private var1 := 10320.54
+   LOCAL oMainWindow
+
+   PRIVATE var1 := 10320.54
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150
@@ -30,30 +31,32 @@ RETURN NIL
 
 FUNCTION DlgGet(lColor)
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oTimer
-Local e1 := "Dialog from prg"
-Local e2 := Date()
-Local e3 := 10320.54
-Local e4:="11222333444455"
-Local e5 := 10320.54
-Local e6 := "Max Lenght = 15"
-Local e7 := "Password"
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL oTimer
+   LOCAL e1 := "Dialog from prg"
+   LOCAL e2 := Date()
+   LOCAL e3 := 10320.54
+   LOCAL e4:="11222333444455"
+   LOCAL e5 := 10320.54
+   LOCAL e6 := "Max Lenght = 15"
+   LOCAL e7 := "Password"
 
-Private oSayT
+   PRIVATE oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 320                  ;
    FONT oFont ;
    ON INIT {|| SetTimer(oModDlg,@oTimer)}
 
-   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 
-   SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
+   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3")
+   SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3")
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
-   
+
    If lColor <> Nil
       SetColorinFocus(lColor)
    EndIf
-   
+
    @ 20, 10 SAY "Input something:" SIZE 260, 22
 
    @ 20, 35 GET e1                       ;
@@ -118,10 +121,9 @@ RETURN NIL
 
 FUNCTION TestBallon()
 
-   Local oWnd
+   LOCAL oWnd
 
    SetToolTipBalloon(.T.)
-
 
    INIT DIALOG oWnd CLIPPER TITLE "Dialog text Balon" ;
       AT 100, 100 SIZE 140, 100

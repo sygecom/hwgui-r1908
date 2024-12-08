@@ -15,11 +15,15 @@
 
 FUNCTION Main()
 
-Local oArq1:={{"COD", "C", 3, 0}}
-Local oArq2:={{"COD1", "C", 3, 0},{"NOME", "C", 30, 0}}
-Local oDlg, i
-PRIVATE oBrowse, oSai, oConsulta
-PRIVATE vConsulta
+   LOCAL oArq1 := {{"COD", "C", 3, 0}}
+   LOCAL oArq2 := {{"COD1", "C", 3, 0}, {"NOME", "C", 30, 0}}
+   LOCAL oDlg
+   LOCAL i
+
+   PRIVATE oBrowse
+   PRIVATE oSai
+   PRIVATE oConsulta
+   PRIVATE vConsulta
 
 If !File("Teste.dbf")
    dBCreate("teste.dbf", oArq1)
@@ -86,8 +90,8 @@ RETURN NIL
 
 STATIC FUNCTION Teste_CreateColumn(oBrw, oCol, oHead, oAr, seq, oType, oLen, oDec)
 
-Local i
-Local nArea := &oAr->(select())
+   LOCAL i
+   LOCAL nArea := &oAr->(select())
 
    oBrw:AddColumn(HColumn():New(oHead ,;
                                      FieldWBlock(oCol, nArea),  ;

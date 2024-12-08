@@ -3,16 +3,22 @@
 
 FUNCTION Main()
 
-Local oDlg1, oDlg2, oDlg3, oTab
-Local aDlg1, aDlg2, aCombo := { "Aaaa", "Bbbb" }
-Local oBrw1, oBrw2
-Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
-Local aSample2 := { {"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40} }
-Local e1 := "Xxxx"
-Local e2 := "Xxxx"
-Local e3 := "Xxxx"
+   LOCAL oDlg1
+   LOCAL oDlg2
+   LOCAL oDlg3
+   LOCAL oTab
+   LOCAL aDlg1
+   LOCAL aDlg2
+   LOCAL aCombo := {"Aaaa", "Bbbb"}
+   LOCAL oBrw1
+   LOCAL oBrw2
+   LOCAL aSample1 := {{"Alex", 17}, {"Victor", 42}, {"John", 31}}
+   LOCAL aSample2 := {{"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40}}
+   LOCAL e1 := "Xxxx"
+   LOCAL e2 := "Xxxx"
+   LOCAL e3 := "Xxxx"
 
-init dialog oDlg1 from resource DIALOG_1 clipper NOEXIT NOEXITESC  on init {|| buildtabPages(oTab, {adlg1, adlg2}, {"pagina1", "pagina2"})}
+   INIT DIALOG oDlg1 FROM RESOURCE DIALOG_1 CLIPPER NOEXIT NOEXITESC ON INIT {||buildtabPages(oTab, {adlg1, adlg2}, {"pagina1", "pagina2"})}
 
 /*
 aDlg1:oParent:=oTab, aDlg2:oParent:=oTab,;
@@ -44,13 +50,14 @@ RETURN NIL
 
 FUNCTION buildtabPages(oTab, aPage, aTitle)
 
-Local n
-for each n in aPage
-   n:oParent := oTab
-   n:activate(.T.)
-   oTab:startpage(aTitle[hb_enumindex()], n)
-   otab:endpage()
-   n:oParent := nil
-next
+   LOCAL n
+
+   for each n in aPage
+      n:oParent := oTab
+      n:activate(.T.)
+      oTab:startpage(aTitle[hb_enumindex()], n)
+      otab:endpage()
+      n:oParent := nil
+   next
 
 RETURN .T.

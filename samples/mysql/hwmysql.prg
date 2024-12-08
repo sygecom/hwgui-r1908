@@ -23,15 +23,30 @@ Memvar nNumRows, aQueries
 
 FUNCTION Main()
 
-Local oFont, oIcon := HIcon():AddResource("ICON_1")
-Public hBitmap := LoadBitmap("BITMAP_1")
-Public connHandle := 0, cServer := "", cDatabase := "", cUser := ""
-Public cDataDef := ""
-Public mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
-Public queHandle := 0, nNumFields, nNumRows
-Public aQueries := {}, nHistCurr, nHistoryMax := 20
-Private oBrw, BrwFont := Nil, oBrwFont := Nil
-Private oMainWindow, oEdit, oPanel, oPanelE
+   LOCAL oFont
+   LOCAL oIcon := HIcon():AddResource("ICON_1")
+
+   PUBLIC hBitmap := LoadBitmap("BITMAP_1")
+   PUBLIC connHandle := 0
+   PUBLIC cServer := ""
+   PUBLIC cDatabase := ""
+   PUBLIC cUser := ""
+   PUBLIC cDataDef := ""
+   PUBLIC mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   PUBLIC queHandle := 0
+   PUBLIC nNumFields
+   PUBLIC nNumRows
+   PUBLIC aQueries := {}
+   PUBLIC nHistCurr
+   PUBLIC nHistoryMax := 20
+
+   PRIVATE oBrw
+   PRIVATE BrwFont := NIL
+   PRIVATE oBrwFont := NIL
+   PRIVATE oMainWindow
+   PRIVATE oEdit
+   PRIVATE oPanel
+   PRIVATE oPanelE
 
    SET EPOCH TO 1960
    SET DATE FORMAT "dd/mm/yyyy"
@@ -112,7 +127,8 @@ RETURN NIL
 
 FUNCTION About()
 
-Local oModDlg, oFont
+   LOCAL oModDlg
+   LOCAL oFont
 
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
@@ -126,8 +142,9 @@ RETURN NIL
 
 FUNCTION AboutDraw()
 
-Local pps
-Local hDC
+   LOCAL pps
+   LOCAL hDC
+
    pps := DefinePaintStru()
    hDC := BeginPaint(getmodalhandle(), pps)
    DrawBitmap(hDC, hBitmap,, 0, 0)
@@ -137,7 +154,8 @@ RETURN NIL
 
 FUNCTION DataBases()
 
-Local aBases, nChoic
+   LOCAL aBases
+   LOCAL nChoic
 
    IF connHandle == 0
       Connect()
@@ -161,8 +179,9 @@ RETURN NIL
 
 FUNCTION Tables()
 
-Local aTables, nChoic
-Local cTable
+   LOCAL aTables
+   LOCAL nChoic
+   LOCAL cTable
 
    IF connHandle == 0
       Connect()
@@ -186,7 +205,7 @@ RETURN NIL
 
 FUNCTION Connect()
 
-Local aModDlg
+   LOCAL aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
    DIALOG ACTIONS OF aModDlg ;
@@ -199,7 +218,8 @@ RETURN NIL
 
 FUNCTION InitConnect()
 
-Local hDlg := getmodalhandle()
+   LOCAL hDlg := getmodalhandle()
+
    SetDlgItemText(hDlg, IDC_EDIT1, cServer)
    SetDlgItemText(hDlg, IDC_EDIT2, cUser)
    SetDlgItemText(hDlg, IDC_EDIT4, cDataDef)
@@ -215,7 +235,8 @@ RETURN .F.
 
 FUNCTION EndConnect()
 
-Local hDlg := getmodalhandle()
+   LOCAL hDlg := getmodalhandle()
+
    IF connHandle > 0
       sqlClose(connHandle)
       connHandle := 0
@@ -265,7 +286,9 @@ RETURN NIL
 
 FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 
-Local aRect, i, nHbusy := oMainWindow:aOffset[4]
+   LOCAL aRect
+   LOCAL i
+   LOCAL nHbusy := oMainWindow:aOffset[4]
 
    aRect := GetClientRect(oEdit:handle)
    nHbusy += aRect[4]
@@ -275,8 +298,10 @@ RETURN NIL
 
 FUNCTION Execute()
 
-Local cQuery := Ltrim(oEdit:GetText())
-Local arScr, nError, nLineEr
+   LOCAL cQuery := Ltrim(oEdit:GetText())
+   LOCAL arScr
+   LOCAL nError
+   LOCAL nLineEr
 
    IF Empty(cQuery)
       RETURN .F.
@@ -296,7 +321,11 @@ RETURN .T.
 
 FUNCTION execSQL(cQuery)
 
-Local res, stroka, poz := 0, lFirst := .T., i := 1
+   LOCAL res
+   LOCAL stroka
+   LOCAL poz := 0
+   LOCAL lFirst := .T.
+   LOCAL i := 1
 
    IF connHandle == 0
       Connect()
@@ -344,7 +373,12 @@ RETURN res == 0
 
 FUNCTION sqlBrowse(queHandle)
 
-Local aQueRows, i, j, vartmp, af := {}
+   LOCAL aQueRows
+   LOCAL i
+   LOCAL j
+   LOCAL vartmp
+   LOCAL af := {}
+
    nNumRows := sqlNRows(queHandle)
    WriteStatus(Hwindow():GetMain(), 3, Str(nNumRows, 5) + " rows")
    IF nNumRows == 0
@@ -408,7 +442,8 @@ RETURN NIL
 
 STATIC FUNCTION GetFromHistory()
 
-Local cQuery := "", i := oBrw:nCurrent
+   LOCAL cQuery := ""
+   LOCAL i := oBrw:nCurrent
 
    IF !Empty(oBrw:aArray[i, 1])
       DO WHILE !oBrw:aArray[i, 2]; i--; ENDDO
@@ -424,8 +459,12 @@ RETURN NIL
 
 STATIC FUNCTION ReadHistory(fname)
 
-Local han, stroka, lFirst := .T., lEmpty := .F.
-LOCAL strbuf := Space(512), poz := 513
+   LOCAL han
+   LOCAL stroka
+   LOCAL lFirst := .T.
+   LOCAL lEmpty := .F.
+   LOCAL strbuf := Space(512)
+   LOCAL poz := 513
 
    nHistCurr := 0
    han := FOPEN(fname, FO_READ + FO_SHARED)
@@ -457,7 +496,10 @@ RETURN nHistCurr
 
 STATIC FUNCTION WriteHistory(fname)
 
-Local han, i, lEmpty := .T.
+   LOCAL han
+   LOCAL i
+   LOCAL lEmpty := .T.
+
    IF !Empty(aQueries)
       han := FCREATE(fname)
       IF han <> - 1
@@ -475,7 +517,12 @@ RETURN NIL
 
 FUNCTION DoSQL(cQuery)
 
-Local aRes, qHandle, nNumFields, nNumRows, i
+   LOCAL aRes
+   LOCAL qHandle
+   LOCAL nNumFields
+   LOCAL nNumRows
+   LOCAL i
+
    IF sqlQuery(connHandle, cQuery) != 0
       RETURN {1}
    ELSE
@@ -506,13 +553,14 @@ RETURN NIL
 
 FUNCTION FilExten(fname)
 
-LOCAL i
+   LOCAL i
 
 RETURN IIF(( i := RAT('.', fname) ) = 0, "", SUBSTR(fname, i + 1))
 
 FUNCTION SaveScript()
 
-Local fname := SaveFile("*.scr", "Script files( *.scr )", "*.scr", mypath)
+   LOCAL fname := SaveFile("*.scr", "Script files( *.scr )", "*.scr", mypath)
+
    cQuery := oEdit:GetText()
    IF !Empty(fname)
       MemoWrit(fname, cQuery)

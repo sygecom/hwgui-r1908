@@ -15,30 +15,30 @@
 *---------------------------------------------------------------------------------------
 FUNCTION Main()
 *---------------------------------------------------------------------------------------
-Local oFontBtn
-Local oFont := Nil
-Local nColor, oSplah
-Private Form_Main
 
-Public oDir := "\"+Curdir()+"\"
+   LOCAL oFontBtn
+   LOCAL oFont := NIL
+   LOCAL nColor
+   LOCAL oSplah
 
-SET DELETE ON
-SET DATE BRIT
-SET CENT ON
+   PRIVATE Form_Main
+
+   PUBLIC oDir := "\" + Curdir() + "\"
+
+   SET DELETE ON
+   SET DATE BRIT
+   SET CENT ON
 
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
    INIT WINDOW Form_Main MAIN TITLE "HwGUI Harbour Win32 Gui"
-
 
    MENU OF Form_Main
       MENU TITLE "&Demo"
          MENUITEM "&Demo for TAB DBF " ID 303 ACTION Cadastro()
          SEPARATOR
          MENUITEM "&Exit" ACTION {||dbCloseAll(), EndWindow()}
-      ENDMENU                                                                                            
-
-
+      ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&As" ACTION hwg_MsgInfo("HwGUI Harbour Win32 GUI", "Copyright (c) Alexander Kresin")
       ENDMENU
@@ -51,11 +51,33 @@ RETURN NIL
 *---------------------------------------------------------------------------------------
 FUNCTION Cadastro()
 *---------------------------------------------------------------------------------------
-Local Tel_Ferramentas, oPanel, oFontBtn, Titulo:="Tab Forneced"
-Private Gt_Cod, Gt_Name, Gt_Adress, Gt_Fone, Gt_e_Mail
-Private oCod, oName, oAdress, oFone, oe_Mail //Declaracao das variaveis de tabela
-Private oOper:=1
-Private oBotNew, oBotEdit, oBotRet, oBotNext, oBotSave, oBottop, oBotBott, oBotDelete, oBotClose, oBotPrint
+
+   LOCAL Tel_Ferramentas
+   LOCAL oPanel
+   LOCAL oFontBtn
+   LOCAL Titulo := "Tab Forneced"
+
+   PRIVATE Gt_Cod
+   PRIVATE Gt_Name
+   PRIVATE Gt_Adress
+   PRIVATE Gt_Fone
+   PRIVATE Gt_e_Mail
+   PRIVATE oCod
+   PRIVATE oName
+   PRIVATE oAdress
+   PRIVATE oFone
+   PRIVATE oe_Mail // Declaracao das variaveis de tabela
+   PRIVATE oOper := 1
+   PRIVATE oBotNew
+   PRIVATE oBotEdit
+   PRIVATE oBotRet
+   PRIVATE oBotNext
+   PRIVATE oBotSave
+   PRIVATE oBottop
+   PRIVATE oBotBott
+   PRIVATE oBotDelete
+   PRIVATE oBotClose
+   PRIVATE oBotPrint
 
    PREPARE FONT oFontBtn NAME "Arial" WIDTH 0 HEIGHT -12
 
@@ -197,12 +219,13 @@ RETURN NIL
 FUNCTION GetRefresh()
 *---------------------------------------------------------------------------------------
 
-Local oDlg:=GetModalHandle()
-Gt_Cod:Refresh()
-Gt_Name:Refresh()
-Gt_Adress:Refresh()
-Gt_Fone:Refresh()
-Gt_e_Mail:Refresh()
+   LOCAL oDlg := GetModalHandle()
+
+   Gt_Cod:Refresh()
+   Gt_Name:Refresh()
+   Gt_Adress:Refresh()
+   Gt_Fone:Refresh()
+   Gt_e_Mail:Refresh()
 
 RETURN NIL
 
@@ -292,47 +315,49 @@ RETURN NIL
 FUNCTION OpenDbf()
 *---------------------------------------------------------------------------------------
 
-Local vTab:={}
-Local vArq:=oDir+"FORNECED.DBF"
-Local vInd1:=oDir+"FORNECED.NTX"
+   LOCAL vTab := {}
+   LOCAL vArq := oDir + "FORNECED.DBF"
+   LOCAL vInd1 := oDir + "FORNECED.NTX"
 
-If !File(vArq)
-   AADD(vTab,{"Cod    ", "C", 3, 0 })
-   AADD(vTab,{"Name     ", "C", 50, 0 })
-   AADD(vTab,{"Adress  ", "C", 50, 0 })
-   AADD(vTab,{"Fone  ", "C", 50, 0 })
-   AADD(vTab,{"e_Mail  ", "C", 30, 0 })
-   dBCreate(vArq, vTab)
-EndIf
-Use (vArq) Shared Alias TabDbf
-If !File(vInd1)
-   fLock()
-   Index on Cod   to (vInd1)
-   Unlock
-Else
-   Set Index to (vInd1)
-EndIf
+   If !File(vArq)
+      AADD(vTab,{"Cod    ", "C", 3, 0 })
+      AADD(vTab,{"Name     ", "C", 50, 0 })
+      AADD(vTab,{"Adress  ", "C", 50, 0 })
+      AADD(vTab,{"Fone  ", "C", 50, 0 })
+      AADD(vTab,{"e_Mail  ", "C", 30, 0 })
+      dBCreate(vArq, vTab)
+   EndIf
+   Use (vArq) Shared Alias TabDbf
+   If !File(vInd1)
+      fLock()
+      Index on Cod   to (vInd1)
+      Unlock
+   Else
+      Set Index to (vInd1)
+   EndIf
 
 RETURN NIL
 
 *---------------------------------------------------------------------------------------
 FUNCTION OpenGets()
 *---------------------------------------------------------------------------------------
-Gt_Cod:Enable()
-Gt_Name:Enable()
-Gt_Adress:Enable()
-Gt_Fone:Enable()
-Gt_e_Mail:Enable()
+
+   Gt_Cod:Enable()
+   Gt_Name:Enable()
+   Gt_Adress:Enable()
+   Gt_Fone:Enable()
+   Gt_e_Mail:Enable()
 
 RETURN NIL
 
 *---------------------------------------------------------------------------------------
 FUNCTION CloseGets()
 *---------------------------------------------------------------------------------------
-Gt_Cod:Disable()
-Gt_Name:Disable()
-Gt_Adress:Disable()
-Gt_Fone:Disable()
-Gt_e_Mail:Disable()
+
+   Gt_Cod:Disable()
+   Gt_Name:Disable()
+   Gt_Adress:Disable()
+   Gt_Fone:Disable()
+   Gt_e_Mail:Disable()
 
 RETURN NIL

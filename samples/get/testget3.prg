@@ -5,8 +5,10 @@
 
 FUNCTION Main()
 
-Local oMainWindow
-HWG_INITCOMMONCONTROLSEX()
+   LOCAL oMainWindow
+
+   HWG_INITCOMMONCONTROLSEX()
+
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150
 
@@ -21,24 +23,32 @@ RETURN NIL
 
 FUNCTION DlgGet()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First", "Second" }
-Local oGet
-Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1
-Local upd := 12, d1 := Date()+1
-//Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}}, {3, 702, 0x04, 0x0000, 0, "teste2",}, {-1, 702, 0x04, 0x0000, 0, "teste3",}}
-Local otool
-Local omenu, omenu1
-Local amenu
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second"}
+   LOCAL oGet
+   LOCAL e1 := "Dialog from prg"
+   LOCAL c1 := .F.
+   LOCAL c2 := .T.
+   LOCAL r1 := 2
+   LOCAL cm := 1
+   LOCAL upd := 12
+   LOCAL d1 := Date() + 1
+   //LOCAL aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}}, {3, 702, 0x04, 0x0000, 0, "teste2",}, {-1, 702, 0x04, 0x0000, 0, "teste3",}}
+   LOCAL otool
+   LOCAL omenu
+   LOCAL omenu1
+   LOCAL amenu
+
    INIT DIALOG oModDlg TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 300                  ;
    FONT oFont // on init  {||CreateBar(oModDlg,@otool)}
 
-Create menubar aMenu
-MENUBARITEM  amenu CAPTION "teste" ON 904 ACTION {||hwg_MsgYesNo("Really want to quit ?")}
-MENUBARITEM  amenu CAPTION "teste1" ON 905 ACTION {||.T.}
-MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
-
+   Create menubar aMenu
+   MENUBARITEM  amenu CAPTION "teste" ON 904 ACTION {||hwg_MsgYesNo("Really want to quit ?")}
+   MENUBARITEM  amenu CAPTION "teste1" ON 905 ACTION {||.T.}
+   MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
 
    @ 0, 0 toolbar oTool of oModDlg size oModDlg:nWidth, 40 ID 700
    TOOLBUTTON  otool ;
@@ -68,8 +78,6 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
            TEXT ""  ;
            TOOLTIP "ola3" ;
            ON CLICK {|x, y|DlgGet()}
-
-
 
    @ 20, 50 SAY "Input something:" SIZE 260, 22
    @ 20, 75 GET oGet VAR e1  ;
@@ -112,16 +120,19 @@ MENUBARITEM  amenu CAPTION "teste2" ON 906 ACTION {||.T.}
 
 RETURN NIL
 
-PROC HB_GTSYS; RETURN
-PROC HB_GT_DEFAULT_GUI; RETURN
+PROCEDURE HB_GTSYS
+RETURN
+
+PROCEDURE HB_GT_DEFAULT_GUI
+RETURN
 
 FUNCTION CreateBar(oModDlg, otool)
 
-//Local hTool
-//Local aItem := {{-1, 701, 0x04, 0x0000, 0, "teste1"}, {-1, 702, 0x04, 0x0000, 0, "teste2"}, {-1, 703, 0x04, 0x0000, 0, "teste3"}}
-Local aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {3, 702, 0x04, 0x0000, 0, "teste2", , "rtrt"}, {-1, 702, 0x04, 0x0000, 0, "teste3", , "teste222"}}
-//Local pItem
-//
+   //LOCAL hTool
+   //LOCAL aItem := {{-1, 701, 0x04, 0x0000, 0, "teste1"}, {-1, 702, 0x04, 0x0000, 0, "teste2"}, {-1, 703, 0x04, 0x0000, 0, "teste3"}}
+   LOCAL aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {3, 702, 0x04, 0x0000, 0, "teste2", , "rtrt"}, {-1, 702, 0x04, 0x0000, 0, "teste3", , "teste222"}}
+   //LOCAL pItem
+
 //  hTool := CREATETOOLBAR(oModDlg:handle, 700, 0, 0, 0, 50, 100)
 // //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, len(aTool))
  //

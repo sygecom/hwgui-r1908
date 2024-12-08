@@ -3,7 +3,9 @@
 
 FUNCTION Main()
 
-Local oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
+   LOCAL oMainWindow
+   LOCAL oTrayMenu
+   LOCAL oIcon := HIcon():AddResource("ICON_1")
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"
 

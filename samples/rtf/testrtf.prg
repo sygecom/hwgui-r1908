@@ -37,8 +37,13 @@ RETURN NIL
 
 FUNCTION TestRtf()
 
-LOCAL cOutFile, oRtf, anchos, i
-LOCAL j, aMarca, lFormato := .F.
+   LOCAL cOutFile
+   LOCAL oRtf
+   LOCAL anchos
+   LOCAL i
+   LOCAL j
+   LOCAL aMarca
+   LOCAL lFormato := .F.
 
    cOutFile := SaveFile("*.rtf", "RTF files( *.rtf )", "*.rtf")
    IF Empty(cOutFile)
@@ -195,10 +200,17 @@ STATIC FUNCTION SetupRTF(cOutFile)
 * 01/28/97   TRM         Creation
 *
 *********************************************************************
-LOCAL oRTF, i, nWidth:=0, lLandScape:=.F.
-LOCAL  ancpag
-MEMVAR nom_hosp1, nom_hosp2, nom_ser
-MEMVAR cNomUser
+
+   LOCAL oRTF
+   LOCAL i
+   LOCAL nWidth := 0
+   LOCAL lLandScape := .F.
+   LOCAL ancpag
+
+   MEMVAR nom_hosp1
+   MEMVAR nom_hosp2
+   MEMVAR nom_ser
+   MEMVAR cNomUser
 
 DEFINE RTF oRTF FILE cOutFile ;
 	FONTS "Times New Roman", "Arial", "Courier New" ;

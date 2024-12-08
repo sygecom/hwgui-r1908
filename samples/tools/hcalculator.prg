@@ -49,6 +49,7 @@ METHOD New(cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalcu
 RETURN Self
 
 METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalculator
+
    LOCAL nStyle
 
    ::bColor    := IIf(bColor == Nil, ::bColor, bColor)
@@ -65,12 +66,34 @@ RETURN NIL
 
 METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalculator
 
-   LOCAL   oCnt1, oCalculo, oVisor, oBtn4, oBtn18, oBtn19, oBtn20 ;
-        , oBtn9, oBtn16, oBtn17, oBtn15, oBtn8, oBtn12, oBtn13, oBtn14 ;
-        , oBtn11, oBtn21, oBtn22, oBtn3, oBtn5, oBtn6 ;
-        , oBtn7, oBtn10, obtnres, oBtn23, oMemory
-
+   LOCAL oCnt1
+   LOCAL oCalculo
+   LOCAL oVisor
+   LOCAL oBtn4
+   LOCAL oBtn18
+   LOCAL oBtn19
+   LOCAL oBtn20
+   LOCAL oBtn9
+   LOCAL oBtn16
+   LOCAL oBtn17
+   LOCAL oBtn15
+   LOCAL oBtn8
+   LOCAL oBtn12
+   LOCAL oBtn13
+   LOCAL oBtn14
+   LOCAL oBtn11
+   LOCAL oBtn21
+   LOCAL oBtn22
+   LOCAL oBtn3
+   LOCAL oBtn5
+   LOCAL oBtn6
+   LOCAL oBtn7
+   LOCAL oBtn10
+   LOCAL obtnres
+   LOCAL oBtn23
+   LOCAL oMemory
    LOCAL hWin := GetActiveWindow()
+
    ::oCurrGet := oGet
    ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
 
@@ -209,11 +232,15 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
 RETURN 0
 
 METHOD Calculando(cNumero) CLASS HCalculator
+
    LOCAL oForm := ::oFormCalc
-   Local nDiv := 1
-   Local cOperar := ::cOperador
-   Local nLen := Len(oForm:oVisor:Caption), nCars
-   Private nCalculo1 , ncalculo2
+   LOCAL nDiv := 1
+   LOCAL cOperar := ::cOperador
+   LOCAL nLen := Len(oForm:oVisor:Caption)
+   LOCAL nCars
+
+   PRIVATE nCalculo1
+   PRIVATE ncalculo2
 
    IF IsCtrlShift(.F., .T.) .AND. ( cNumero = "5" .OR. cNumero = "8" )
       cNumero := IIF(cNumero = "8", "*", IIF(cNumero = "5", "%", cNumero))
@@ -304,6 +331,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
 RETURN NIL
 
 METHOD INIT() CLASS HCalculator
+   
    LOCAL aCoors
 
    SETDLGKEY(::oFormCalc ,, 8,{|| ::Calculando(" ")})
@@ -345,6 +373,7 @@ METHOD INIT() CLASS HCalculator
 RETURN NIL
 
 METHOD GetRefresh() CLASS HCalculator
+   
    LOCAL Value := ::aOperando[1]
 
    If ::oCurrGet != Nil

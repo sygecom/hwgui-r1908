@@ -31,26 +31,27 @@
 ***********************
 FUNCTION Main()
 ***********************
-LOCAL oWinMain
+   
+   LOCAL oWinMain
 
-SET(_SET_DATEFORMAT, "dd/mm/yyyy")
-SET(_SET_EPOCH, 1950)
-
-REQUEST DBFCDX                      // Causes DBFCDX RDD to be linked in
-rddSetDefault("DBFCDX")           // Set up DBFCDX as default driver
-
-*FERASE("TSTBRW.DBF")
-
-IF !FILE("TSTBRW.DBF")
-   CriaDbf()
-ELSE
-   DBUSEAREA(.T., "DBFCDX", "TSTBRW", "TSTB")
-END
-
-INIT WINDOW oWinMain MAIN  ;
-     TITLE "Teste" AT 0, 0 SIZE 600, 400;
-    FONT HFont():Add('Arial', 0, -13, 400, , ,) ;
-    STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
+   SET(_SET_DATEFORMAT, "dd/mm/yyyy")
+   SET(_SET_EPOCH, 1950)
+   
+   REQUEST DBFCDX                      // Causes DBFCDX RDD to be linked in
+   rddSetDefault("DBFCDX")           // Set up DBFCDX as default driver
+   
+   *FERASE("TSTBRW.DBF")
+   
+   IF !FILE("TSTBRW.DBF")
+      CriaDbf()
+   ELSE
+      DBUSEAREA(.T., "DBFCDX", "TSTBRW", "TSTB")
+   END
+   
+   INIT WINDOW oWinMain MAIN  ;
+        TITLE "Teste" AT 0, 0 SIZE 600, 400;
+       FONT HFont():Add('Arial', 0, -13, 400, , ,) ;
+       STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 
 
    MENU OF oWinMain
@@ -75,12 +76,16 @@ RETURN NIL
 *****************************
 STATIC FUNCTION BrwDbs(lEdit, lZebra)
 *****************************
-LOCAL oEdGoto
-LOCAL oBrwDb
-LOCAL o_Obtn1, o_Obtn2, o_Obtn3, o_Obtn4
-LOCAL oTbar
-LOCAL nRec := 1
-LOCAL nLast := 0
+
+   LOCAL oEdGoto
+   LOCAL oBrwDb
+   LOCAL o_Obtn1
+   LOCAL o_Obtn2
+   LOCAL o_Obtn3
+   LOCAL o_Obtn4
+   LOCAL oTbar
+   LOCAL nRec := 1
+   LOCAL nLast := 0
 
   lZebra := IF(lZebra == NIL, .F., lZebra)
   DBSELECTAR("TSTB")
@@ -246,9 +251,10 @@ RETURN .T.
 *************************
 STATIC FUNCTION CriaDbf()
 *************************
-LOCAL Estrutura := {}
-LOCAL i := 1
-LOCAL nIncrement := 10
+
+   LOCAL Estrutura := {}
+   LOCAL i := 1
+   LOCAL nIncrement := 10
 
   IF !FILE("TSTBRW.DBF")
      AADD(Estrutura, {"FIELD1", "N", 10, 02})
@@ -286,14 +292,18 @@ RETURN .T.
 *****************************
 STATIC FUNCTION BrwArr(lEdit, lZebra)
 ****************************
-LOCAL oEdGoto
-LOCAL oBrwArr
-LOCAL o_Obtn1, o_Obtn2, o_Obtn3, o_Obtn4
-LOCAL oTbar
-LOCAL nRec := 1
-LOCAL aArrayTst := Create_Array()
-LOCAL nLast := LEN(aArrayTst)
-LOCAL nI
+
+   LOCAL oEdGoto
+   LOCAL oBrwArr
+   LOCAL o_Obtn1
+   LOCAL o_Obtn2
+   LOCAL o_Obtn3
+   LOCAL o_Obtn4
+   LOCAL oTbar
+   LOCAL nRec := 1
+   LOCAL aArrayTst := Create_Array()
+   LOCAL nLast := LEN(aArrayTst)
+   LOCAL nI
 
   lZebra := IF(lZebra == NIL, .F., lZebra)
   INIT DIALOG oDlg TITLE "Browse Array" ;
@@ -413,10 +423,11 @@ RETURN .T.
 ******************************
 STATIC FUNCTION Create_Array()
 ******************************
-LOCAL i := 1
-LOCAL n := 1
-LOCAL nIncrement := 10
-LOCAL aArray := {}
+
+   LOCAL i := 1
+   LOCAL n := 1
+   LOCAL nIncrement := 10
+   LOCAL aArray := {}
 
   For i := 1 to 200
     n := i
@@ -443,7 +454,10 @@ RETURN aArray
 
 FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
 
-   LOCAL nI, nLen := PCOUNT(), cVar := ""
+   LOCAL nI
+   LOCAL nLen := PCOUNT()
+   LOCAL cVar := ""
+
    FOR nI := 1 TO nLen
        IF HB_PVALUE(nI) == NIL
          cVar += "NIL"

@@ -18,9 +18,11 @@
 
 FUNCTION Main()
 
-Local oMainWnd, oPanel
-Local mypath := curdrive()+":\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
-Private oFlash
+   LOCAL oMainWnd
+   LOCAL oPanel
+   LOCAL mypath := curdrive() + ":\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+
+   PRIVATE oFlash
 
    INIT WINDOW oMainWnd TITLE "FlashPlayer example" AT 200, 0 SIZE 500, 400
 
@@ -43,7 +45,6 @@ CLASS VAR winclass INIT "ShockwaveFlash"
   METHOD New()
 ENDCLASS
 
-
 METHOD New(p1, p2, p3, p4, p5, p6) CLASS ShockwaveFlash
 
   ::Super:New(p1, p2, p3, p4, p5, p6)
@@ -52,9 +53,9 @@ RETURN NIL
 
 FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
 
-    local oFlash
+   LOCAL oFlash
 
-    oFlash := ShockwaveFlash():New(oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth)
-    oFlash:LoadMovie(0, cFlashFile)
+   oFlash := ShockwaveFlash():New(oWindow, "ShockwaveFlash.ShockwaveFlash.1", 0, 0, nHeight, nWidth)
+   oFlash:LoadMovie(0, cFlashFile)
 
 RETURN oFlash

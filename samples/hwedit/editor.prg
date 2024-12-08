@@ -29,51 +29,54 @@
 *****************
 FUNCTION Main()
 *****************
-local oPanel, oIcon := HIcon():AddRESOURCE("MAINICON")
-public alterado:=.F.,;
-       ID_COLORB:=8454143,;
-       ID_COLORF:=0,;
-       ID_FONT:=HFont():Add("Courier New", 0, -12)
-Set(_SET_INSERT)
-//
-private oMainWindow,;
-        maxi:=.F.,;
-        oText,;
-        tExto:= '',;
-        vText,;
-        aTermMetr := { 800 },;
-        auto:=5001,;
-        oIconchild := HIcon():AddFile("prg.ico"),;
-        form_panel,;
-        cfontenome:='Courier New',;
-        texto:=''
 
-//
-// variaveis para indiomas
-public ID_indioma:=8001,;
-       m_arquivo,;
-       m_novo,;
-       m_abrir,;
-       m_salvar,;
-       m_salvarcomo,;
-       m_fechar,;
-       m_sair,;
-       m_config,;
-       m_fonte,;
-       m_color_b,;
-       m_indioma,;
-       reiniciar,;
-       m_janela,;
-       m_lado,;
-       m_ajuda,;
-       m_sobre,;
-       desenvolvimento,;
-       Bnovo,;
-       babrir,;
-       Bsalvar,;
-       m_pesquisa,;
-       m_linha,;
-       m_site
+   LOCAL oPanel
+   LOCAL oIcon := HIcon():AddRESOURCE("MAINICON")
+
+   PUBLIC alterado := .F.
+   PUBLIC ID_COLORB := 8454143
+   PUBLIC ID_COLORF := 0
+   PUBLIC ID_FONT := HFont():Add("Courier New", 0, -12)
+
+   Set(_SET_INSERT)
+
+   PRIVATE oMainWindow
+   PRIVATE maxi := .F.
+   PRIVATE oText
+   PRIVATE tExto := ''
+   PRIVATE vText
+   PRIVATE aTermMetr := {800}
+   PRIVATE auto := 5001
+   PRIVATE oIconchild := HIcon():AddFile("prg.ico")
+   PRIVATE form_panel
+   PRIVATE cfontenome := 'Courier New'
+   PRIVATE texto := ''
+
+   // variaveis para indiomas
+   PUBLIC ID_indioma:=8001
+   PUBLIC m_arquivo
+   PUBLIC m_novo
+   PUBLIC m_abrir
+   PUBLIC m_salvar
+   PUBLIC m_salvarcomo
+   PUBLIC m_fechar
+   PUBLIC m_sair
+   PUBLIC m_config
+   PUBLIC m_fonte
+   PUBLIC m_color_b
+   PUBLIC m_indioma
+   PUBLIC reiniciar
+   PUBLIC m_janela
+   PUBLIC m_lado
+   PUBLIC m_ajuda
+   PUBLIC m_sobre
+   PUBLIC desenvolvimento
+   PUBLIC Bnovo
+   PUBLIC babrir
+   PUBLIC Bsalvar
+   PUBLIC m_pesquisa
+   PUBLIC m_linha
+   PUBLIC m_site
 
 // carregando as variaveis de configuracoes
 if !file('config.dat')
@@ -266,11 +269,13 @@ RETURN .T.
 *****************
 FUNCTION Texto()
 *****************
- local oIcone := HIcon():AddFile("CHILD.ico")
- LOCAL cBuffer   := ''
- LOCAL NPOS      := 0
- LOCAL nlenpos,;
- oCombo
+
+   LOCAL oIcone := HIcon():AddFile("CHILD.ico")
+   LOCAL cBuffer := ''
+   LOCAL NPOS := 0
+   LOCAL nlenpos
+   LOCAL oCombo
+
  m_a001:={}
  vText:=SELECTFile("Arquivos Texto", "*.PRG", CURDIR())
  oFunc:={}
@@ -413,7 +418,9 @@ RETURN NIL
 *******************************
 FUNCTION fecha_texto()
 *******************************
-Local h := HMainWIndow():GetMdiActive():handle
+   
+   LOCAL h := HMainWIndow():GetMdiActive():handle
+
     if alterado
         hwg_MsgYesNo('Deseja Salvar o arquivo')
     endif
@@ -424,8 +431,11 @@ RETURN .T.
 *******************************
 FUNCTION richeditProc(oEdit, msg, wParam, lParam)
 *******************************
-Local nVirtCode, strinsert := ''
-Local oParent, nPos
+
+   LOCAL nVirtCode
+   LOCAL strinsert := ''
+   LOCAL oParent
+   LOCAL nPos
 
  if msg == WM_KEYDOWN
  endif
@@ -521,9 +531,14 @@ RETURN .T.
 ****************************
 FUNCTION Pesquisa()
 
-local pesq, get01
-local flags:=1
-Local hWnd, oWindow, aControls, i
+   LOCAL pesq
+   LOCAL get01
+   LOCAL flags := 1
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -553,7 +568,9 @@ RETURN .T.
 ***************************
 FUNCTION painel2(wmdi, array)
 ***************************
-local oCombo
+
+   LOCAL oCombo
+
    @ 0, 0 PANEL oPanel of wmdi SIZE 150, 30
    @ 650, 2 GET COMBOBOX oCombo ITEMS oFunc SIZE 140, 200 of oPanel ON CHANGE {|| buscafunc(oCombo)}
 
@@ -562,30 +579,38 @@ RETURN NIL
 ***************************
 FUNCTION Ajuda(rArq)
 ***************************
-local vpasta:=curdir()
-oIE := TOleAuto():GetActiveObject("InternetExplorer.Application")
 
-IF Ole2TxtError() != "S_OK"
-      oIE := TOleAuto():New("InternetExplorer.Application")
-ENDIF
+   LOCAL vpasta := curdir()
 
-IF Ole2TxtError() != "S_OK"
-    hwg_MsgInfo("ERRO! IExplorer nao Localizado")
-    RETURN
-ENDIF
+   oIE := TOleAuto():GetActiveObject("InternetExplorer.Application")
+   
+   IF Ole2TxtError() != "S_OK"
+         oIE := TOleAuto():New("InternetExplorer.Application")
+   ENDIF
+   
+   IF Ole2TxtError() != "S_OK"
+       hwg_MsgInfo("ERRO! IExplorer nao Localizado")
+       RETURN
+   ENDIF
+   
+   oIE:Visible := .T.
 
-oIE:Visible := .T.
-
-oIE:Navigate(rArq )
+   oIE:Navigate(rArq )
 
 RETURN NIL
 
 ****************************
 FUNCTION Vai(oEdit)
 ****************************
-local pesq, get01
-local flags:=1
-Local hWnd, oWindow, aControls, i
+
+   LOCAL pesq
+   LOCAL get01
+   LOCAL flags := 1
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -617,7 +642,12 @@ RETURN .T.
 **********************
 FUNCTION seleciona()
 **********************
-Local hWnd, oWindow, aControls, i
+
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
  oWindow:=HMainWIndow():GetMdiActive():aControls
  IF oWindow != Nil
@@ -633,9 +663,16 @@ RETURN .T.
 *******************************
 FUNCTION Salvar_Projeto(oOpcao)
 *******************************
-Local fName, fTexto, fSalve
-Local hWnd, oWindow, aControls, i
-local cfile :="temp"
+
+   LOCAL fName
+   LOCAL fTexto
+   LOCAL fSalve
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+   LOCAL cfile := "temp"
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -670,7 +707,12 @@ RETURN NIL
 *********************
 FUNCTION buscafunc(linha)
 *********************
-Local hWnd, oWindow, aControls, i
+
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -694,7 +736,12 @@ RETURN .T.
 *************************
 FUNCTION cor_fundo()
 *************************
-Local hWnd, oWindow, aControls, i
+
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -712,7 +759,12 @@ RETURN .T.
 *************************
 FUNCTION cor_Fonte()
 *************************
-Local hWnd, oWindow, aControls, i
+
+   LOCAL hWnd
+   LOCAL oWindow
+   LOCAL aControls
+   LOCAL i
+
  if HMainWIndow():GetMdiActive() != nil
      hWnd :=Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass=="RichEdit20A"} )
      oWindow:=HMainWIndow():GetMdiActive():aControls
@@ -730,8 +782,10 @@ RETURN .T.
 *************************
 FUNCTION sintaxe(comando)
 *************************
-local comand:=upper(alltrim(comando))
-local ret := .T.
+
+   LOCAL comand := upper(alltrim(comando))
+   LOCAL ret := .T.
+
   //hwg_MsgInfo(comand)
 if comand =='FOR'
    ret:=.T.

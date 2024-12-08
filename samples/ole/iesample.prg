@@ -12,8 +12,13 @@
 
 FUNCTION Main()
 
-Local oMainWnd, oPanelTool, oPanelIE, oFont
-Local oEdit, cUrl, oIE
+   LOCAL oMainWnd
+   LOCAL oPanelTool
+   LOCAL oPanelIE
+   LOCAL oFont
+   LOCAL oEdit
+   LOCAL cUrl
+   LOCAL oIE
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -15
    INIT WINDOW oMainWnd TITLE "Example" AT 200, 0 SIZE 500, 400 FONT oFont
@@ -44,8 +49,8 @@ RETURN NIL
 
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
-Local mypath := "\" + Curdir() + Iif(Empty(Curdir()), "", "\")
-Local fname := SelectFile("HTML files", "*.htm;*.html", mypath)
+   LOCAL mypath := "\" + Curdir() + Iif(Empty(Curdir()), "", "\")
+   LOCAL fname := SelectFile("HTML files", "*.htm;*.html", mypath)
 
    IF !Empty(fname)
       oEdit:SetText(fname)
@@ -56,7 +61,8 @@ RETURN NIL
 
 STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
 
-Local cUrl := "http://www.google.com/search?q=", cItem
+   LOCAL cUrl := "http://www.google.com/search?q="
+   LOCAL cItem
 
    IF !Empty(cItem := NextItem(cQuery, .T., ' '))
       cUrl += cItem

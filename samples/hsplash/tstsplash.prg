@@ -3,8 +3,8 @@
 
 FUNCTION Main()
 
-Local oMainWindow
-Local oSplash
+   LOCAL oMainWindow
+   LOCAL oSplash
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 0, 0 SIZE GetDesktopWidth(), GetDesktopHeight() - 28

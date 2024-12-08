@@ -100,8 +100,8 @@ RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
-    Local result := '', i
-
+   LOCAL result := ''
+   LOCAL i
 
     if x > Lastrec() .AND. !lEof
         res := PQexec(conn, 'FETCH FORWARD 10 FROM cursor_1')
@@ -181,7 +181,7 @@ RETURN NIL
 
 FUNCTION MyVal(xValue, type)
 
-    Local result
+   LOCAL result
 
     if valtype(xValue) == 'U'
         if type == 'N'

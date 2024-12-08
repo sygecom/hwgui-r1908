@@ -19,7 +19,8 @@ REQUEST HB_CODEPAGE_RU1251
 
 FUNCTION Main()
 
-Local oWinPrn, i
+   LOCAL oWinPrn
+   LOCAL i
 
 #ifdef __PLATFORM__Linux__
    oWinPrn := HWinPrn():New(, "RU866", "RUKOI8")

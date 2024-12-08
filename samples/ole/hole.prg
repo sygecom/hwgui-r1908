@@ -3,9 +3,12 @@
 
 FUNCTION Main()
 
-Local oFont
-Local oAgent, oEdit
-Private oMainWindow, oChar
+   LOCAL oFont
+   LOCAL oAgent
+   LOCAL oEdit
+
+   PRIVATE oMainWindow
+   PRIVATE oChar
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
@@ -45,8 +48,8 @@ RETURN NIL
 
 STATIC FUNCTION SpeakIt(oEdit)
 
-Local aTop := ClientToScreen(oMainWindow:handle, 0, 0)
-Local cText := GetEditText(oEdit:oParent:handle, oEdit:id)
+   LOCAL aTop := ClientToScreen(oMainWindow:handle, 0, 0)
+   LOCAL cText := GetEditText(oEdit:oParent:handle, oEdit:id)
 
    oChar:Show()
    oChar:MoveTo(aTop[1]+20, aTop[2]+70)

@@ -10,8 +10,8 @@
 
 FUNCTION Main()
 
-   Local oMainWindow
-   Local cIniFile:="HwGui.ini"
+   LOCAL oMainWindow
+   LOCAL cIniFile := "HwGui.ini"
 
    //Create the inifile
    if !file(cIniFile)
@@ -20,8 +20,7 @@ FUNCTION Main()
       Hwg_WriteIni('Config', 'DirHwGUima', "C:\HwGUI" , cIniFile)
       Hwg_WriteIni('Print',  'Spoll'   ,   "Epson LX 80" , cIniFile)
 
-    endif 
-
+    endif
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150
@@ -37,10 +36,10 @@ RETURN NIL
 
 FUNCTION ReadIni()
 
-Local cIniFile:="HwGui.ini"
+   LOCAL cIniFile := "HwGui.ini"
 
-hwg_MsgInfo(Hwg_GetIni('Config', 'WallParer' ,, cIniFile))
-hwg_MsgInfo(Hwg_GetIni('Config', 'DirHwGUima',, cIniFile))
-hwg_MsgInfo(Hwg_GetIni('Print',  'Spoll'     ,, cIniFile))
+   hwg_MsgInfo(Hwg_GetIni('Config', 'WallParer' ,, cIniFile))
+   hwg_MsgInfo(Hwg_GetIni('Config', 'DirHwGUima',, cIniFile))
+   hwg_MsgInfo(Hwg_GetIni('Print',  'Spoll'     ,, cIniFile))
 
 RETURN NIL

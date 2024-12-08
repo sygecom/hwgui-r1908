@@ -19,11 +19,22 @@
 
 FUNCTION Main()
 
-Local oMainWindow, oFont
-// Local hDCwindow
-Private oToolBar, oImage, oSayMain, oSayScale
-Private aScreen, nKoef, lScrollV := .F., lScrollH := .F., nStepV := 0, nStepH := 0
-Private nVert, nHorz
+   LOCAL oMainWindow
+   LOCAL oFont
+   //LOCAL hDCwindow
+
+   PRIVATE oToolBar
+   PRIVATE oImage
+   PRIVATE oSayMain
+   PRIVATE oSayScale
+   PRIVATE aScreen
+   PRIVATE nKoef
+   PRIVATE lScrollV := .F.
+   PRIVATE lScrollH := .F.
+   PRIVATE nStepV := 0
+   PRIVATE nStepH := 0
+   PRIVATE nVert
+   PRIVATE nHorz
 
 #ifdef __FREEIMAGE__
    IF !FI_Init()
@@ -93,7 +104,8 @@ RETURN NIL
 
 STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
 
-Local i, aItem
+   LOCAL i
+   LOCAL aItem
 
    IF msg == WM_VSCROLL
       Vscroll(oWnd, LoWord(wParam), HiWord(wParam))
@@ -115,7 +127,7 @@ RETURN -1
 
 STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
 
-Local stepV
+   LOCAL stepV
 
    IF nScrollCode == SB_LINEDOWN
       IF nStepV < SCROLLVRANGE
@@ -147,7 +159,7 @@ RETURN NIL
 
 STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
 
-Local stepH
+   LOCAL stepH
 
    IF nScrollCode == SB_LINEDOWN
       IF nStepH < SCROLLHRANGE
@@ -180,9 +192,9 @@ RETURN NIL
 
 STATIC FUNCTION FileOpen(oWnd)
 
-Local mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
-Local fname
-Local aCoors
+   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL fname
+   LOCAL aCoors
 
 #ifdef __FREEIMAGE__
    fname := SelectFile("Graphic files( *.jpg;*.png;*.psd;*.tif )", "*.jpg;*.png;*.psd;*.tif", mypath)
@@ -254,8 +266,9 @@ RETURN NIL
 
 STATIC FUNCTION Zoom(oWnd, nOp)
 
-Local aCoors
-Local stepV, stepH
+   LOCAL aCoors
+   LOCAL stepV
+   LOCAL stepH
 
    IF oImage == Nil
       RETURN NIL
@@ -317,8 +330,10 @@ RETURN NIL
 /*
 STATIC FUNCTION PaintWindow(oWnd)
 
-Local stepV, stepH
-Local nOffsV, nOffsH
+   LOCAL stepV
+   LOCAL stepH
+   LOCAL nOffsV
+   LOCAL nOffsH
 
    IF oImage == Nil
       RETURN -1

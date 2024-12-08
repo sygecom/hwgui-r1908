@@ -10,7 +10,7 @@ Static oBrowse
 
 FUNCTION Main()
 
-        Local oMain
+   LOCAL oMain
 
         CreateDB()
 
@@ -29,7 +29,9 @@ RETURN NIL
 
 FUNCTION BrowseTest_2()
 
-        Local oForm, oFont
+   LOCAL oForm
+   LOCAL oFont
+
         PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -10
 
         INIT DIALOG oForm CLIPPER NOEXIT TITLE "DBNavigator";
@@ -63,7 +65,8 @@ RETURN NIL
 
 STATIC FUNCTION CreateDB()
 
-    Local i, letra:=100
+   LOCAL i
+   LOCAL letra := 100
 
     if file('test.dbf')
             FErase('test.dbf')

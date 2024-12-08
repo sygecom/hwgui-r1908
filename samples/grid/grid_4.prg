@@ -65,7 +65,7 @@ RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
-    Local result := ''
+   LOCAL result := ''
 
     DBGoto(x)
 
@@ -75,7 +75,8 @@ RETURN result
 
 FUNCTION FileOpen()
 
-        Local fname
+   LOCAL fname
+
         fname := SelectFile("Select File", "*.*")
 
         Zap

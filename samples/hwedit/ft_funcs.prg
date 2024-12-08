@@ -102,7 +102,7 @@ STATIC TheHandle As Object
 *+
 FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
 
-   Local nHandle as numeric
+   LOCAL nHandle AS NUMERIC
 
    IF nMode == nil
       nMode := 2
@@ -131,7 +131,7 @@ RETURN nHandle
 *+
 FUNCTION ft_FEOF()
 
-   LOCAL lRETURN as LOGICAL := theHandle:lAtBottom
+   LOCAL lRETURN AS LOGICAL := theHandle:lAtBottom
 
 RETURN lRETURN
 
@@ -220,8 +220,9 @@ RETURN NIL
 FUNCTION StrPos(cBuffer AS STRING)
 
    LOCAL nPos AS NUMERIC :=0
-   LOCAL x   AS NUMERIC
+   LOCAL x AS NUMERIC
    LOCAL cChar AS STRING
+
    FOR x := 1 TO LEN(cBuffer)
       cChar := SUBSTR(cBuffer, x, 1)
       IF cChar >= CHR(64) .AND. cChar <= CHR(90) .OR. cChar >= CHR(97) ;
@@ -291,7 +292,8 @@ FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
    LOCAL nSavePos AS NUMERIC
    LOCAL nEol AS NUMERIC
    LOCAL nNumRead AS NUMERIC
-   LOCAL lReturn as Logical
+   LOCAL lReturn AS LOGICAL
+
    cLine    := SPACE(nMaxLine)
    cB       := ''
    nSavePos := FSEEK(nH, 0, FS_RELATIVE)

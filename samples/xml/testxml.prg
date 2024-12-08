@@ -11,10 +11,16 @@
 
 FUNCTION Main()
 
-Local oXmlNode
-Local i, j, fname := ""
-Private oXmlDoc, lIniChanged := .F., nCurrentItem
-Private oMainWindow, oFont
+   LOCAL oXmlNode
+   LOCAL i
+   LOCAL j
+   LOCAL fname := ""
+
+   PRIVATE oXmlDoc
+   PRIVATE lIniChanged := .F.
+   PRIVATE nCurrentItem
+   PRIVATE oMainWindow
+   PRIVATE oFont
 
    oXmlDoc := HXMLDoc():Read("testxml.xml")
 
@@ -53,9 +59,17 @@ RETURN NIL
 
 FUNCTION NewItem(nItem)
 
-Local oDlg, oItemFont, oFontNew
-Local oXmlNode, fname, i, j, aMenu, nId
-Local cName, cInfo
+   LOCAL oDlg
+   LOCAL oItemFont
+   LOCAL oFontNew
+   LOCAL oXmlNode
+   LOCAL fname
+   LOCAL i
+   LOCAL j
+   LOCAL aMenu
+   LOCAL nId
+   LOCAL cName
+   LOCAL cInfo
 
    IF nItem > 0
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
@@ -128,12 +142,12 @@ RETURN NIL
 
 FUNCTION FontFromXML(oXmlNode)
 
-Local width  := oXmlNode:GetAttribute("width")
-Local height := oXmlNode:GetAttribute("height")
-Local weight := oXmlNode:GetAttribute("weight")
-Local charset := oXmlNode:GetAttribute("charset")
-Local ita   := oXmlNode:GetAttribute("italic")
-Local under := oXmlNode:GetAttribute("underline")
+   LOCAL width := oXmlNode:GetAttribute("width")
+   LOCAL height := oXmlNode:GetAttribute("height")
+   LOCAL weight := oXmlNode:GetAttribute("weight")
+   LOCAL charset := oXmlNode:GetAttribute("charset")
+   LOCAL ita := oXmlNode:GetAttribute("italic")
+   LOCAL under := oXmlNode:GetAttribute("underline")
 
   IF width != Nil
      width := Val(width)
@@ -160,7 +174,7 @@ RETURN HFont():Add(oXmlNode:GetAttribute("name"),  ;
 
 FUNCTION Font2XML(oFont)
 
-Local aAttr := {}
+   LOCAL aAttr := {}
 
    Aadd(aAttr, { "name", oFont:name })
    Aadd(aAttr, { "width", Ltrim(Str(oFont:width, 5)) })

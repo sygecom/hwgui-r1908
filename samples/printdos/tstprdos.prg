@@ -40,7 +40,7 @@
 
 FUNCTION Main()
 
-Local oMain
+   LOCAL oMain
 
    INIT WINDOW oMain MAIN TITLE "Example for PrintDos Class"
 
@@ -113,7 +113,7 @@ RETURN NIL
 
 FUNCTION TestDosClipper(oTest)
 
-Local oPrinter
+   LOCAL oPrinter
 
 If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
 
@@ -149,9 +149,9 @@ RETURN NIL
 
 FUNCTION OpenRel(oText)
 
-LOCAL oDlg
-Local oFont
-Local lText   := MemoRead(oText)
+   LOCAL oDlg
+   LOCAL oFont
+   LOCAL lText := MemoRead(oText)
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
@@ -180,7 +180,8 @@ RETURN NIL
 
 FUNCTION TestGraphic()
 
-Local oPrint, oPrint1
+   LOCAL oPrint
+   LOCAL oPrint1
 
 oPrint:=Printdos():New("Graphic.txt")
 
@@ -221,7 +222,8 @@ RETURN NIL
 
 FUNCTION TestPreview()
 
-Local oPrint, oPrint1
+   LOCAL oPrint
+   LOCAL oPrint1
 
 oPrint:=Printdos():New("Preview.txt")
 
@@ -263,7 +265,7 @@ RETURN NIL
 
 FUNCTION DeskJet(oTest)
 
-Local oPrinter
+   LOCAL oPrinter
 
 If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
 

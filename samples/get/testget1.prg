@@ -3,7 +3,7 @@
 
 FUNCTION Main()
 
-Local oMainWindow
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 600, 150
@@ -19,15 +19,23 @@ RETURN NIL
 
 FUNCTION DlgGet()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First", "Second", "laranja", "banana", "pera", "uva" }
-Local oGet
-Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1, o, o1, o2
-Local upd := 12, d1 := Date()+1
-Local h  := hbitmap():addFile("..\image\open.bmp")
-Local h1 := hbitmap():addFile("..\image\exit.bmp")
-
-
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second", "laranja", "banana", "pera", "uva"}
+   LOCAL oGet
+   LOCAL e1 := "Dialog from prg"
+   LOCAL c1 := .F.
+   LOCAL c2 := .T.
+   LOCAL r1 := 2
+   LOCAL cm := 1
+   LOCAL o
+   LOCAL o1
+   LOCAL o2
+   LOCAL upd := 12
+   LOCAL d1 := Date() + 1
+   LOCAL h := hbitmap():addFile("..\image\open.bmp")
+   LOCAL h1 := hbitmap():addFile("..\image\exit.bmp")
 
    INIT DIALOG oModDlg TITLE "Get a value"  ;
    AT 210, 10  SIZE 500, 300                  ;

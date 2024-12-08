@@ -28,9 +28,13 @@ RETURN NIL
 
 FUNCTION calculator()
 
-  LOCAL oDlg,  oGroup1, oBtn1, oOw1, oValue, oLabel1
-
-  LOCAL  vValue := 0
+  LOCAL oDlg
+  LOCAL oGroup1
+  LOCAL oBtn1
+  LOCAL oOw1
+  LOCAL oValue
+  LOCAL oLabel1
+  LOCAL vValue := 0
 
   INIT DIALOG oDlg TITLE "Calculando" ;
     AT 0, 0 SIZE 415, 325 ;
@@ -65,6 +69,7 @@ RETURN oDlg:lresult
 STATIC FUNCTION oOw1_onClick()
 
    LOCAL ocalc
+
    oCalc := HCalculator():New('Calculator')
    oCalc:Show()
 
@@ -73,6 +78,7 @@ RETURN .T.
 STATIC FUNCTION oValue_onKeyDown(This, nKeyPress, nShiftAltCtrl)
 
    LOCAL oCalc
+
    IF nKeyPress = VK_F2
       oCalc := HCalculator():New()
       oCalc:Show(This, .T.)

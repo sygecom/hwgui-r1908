@@ -3,7 +3,8 @@
 
 FUNCTION Main()
 
-   LOCAL oMain, i
+   LOCAL oMain
+   LOCAL i
 
    INIT WINDOW oMain main TITLE "Scrollbar example"  ;
         COLOR COLOR_3DLIGHT + 1                       ;
@@ -25,7 +26,11 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
 
    LOCAL nScrollCode := LOWORD(wParam)
    LOCAL nNewPos := HIWORD(wParam)
-   LOCAL x, y, xx, yy, pg
+   LOCAL x
+   LOCAL y
+   LOCAL xx
+   LOCAL yy
+   LOCAL pg
 
    IF !HB_IsNumeric(nIncr)
       nIncr := 10

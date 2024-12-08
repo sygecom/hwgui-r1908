@@ -66,11 +66,12 @@ RETURN NIL
 
 FUNCTION ConnectGrid()
 
-    Local cHost := 'Localhost'
-    Local cDatabase := 'test'
-    Local cUser := 'Rodrigo'
-    Local cPass := 'moreno'
-    Local oRow, i
+   LOCAL cHost := 'Localhost'
+   LOCAL cDatabase := 'test'
+   LOCAL cUser := 'Rodrigo'
+   LOCAL cPass := 'moreno'
+   LOCAL oRow
+   LOCAL i
 
     oServer := TPQServer():New(cHost, cDatabase, cUser, cPass)
 

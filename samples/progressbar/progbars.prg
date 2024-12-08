@@ -30,7 +30,7 @@ RETURN NIL
 
 FUNCTION Test()
 
-Local cMsgErr := "Bar doesn't exist"
+   LOCAL cMsgErr := "Bar doesn't exist"
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 

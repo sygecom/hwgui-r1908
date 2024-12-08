@@ -11,8 +11,11 @@
 ***********************
 FUNCTION Main()
 ***********************
-LOCAL oWinMain
-local i, a, b
+
+   LOCAL oWinMain
+   LOCAL i
+   LOCAL a
+   LOCAL b
 
     INIT WINDOW oWinMain MAIN  ;
         TITLE "Test scroll in HBrowse" AT 0, 0 SIZE 600, 400;

@@ -48,10 +48,15 @@ RETURN NIL
 
 FUNCTION Main()
 
-Local oMainWnd, oPanelTool, oPanelIE, oFont
-Local cUrl, oIE
-Private oEdit
-Private oChart
+   LOCAL oMainWnd
+   LOCAL oPanelTool
+   LOCAL oPanelIE
+   LOCAL oFont
+   LOCAL cUrl
+   LOCAL oIE
+
+   PRIVATE oEdit
+   PRIVATE oChart
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -15
    INIT WINDOW oMainWnd TITLE "rmchart example" AT 200, 0 SIZE 500, 400 FONT oFont

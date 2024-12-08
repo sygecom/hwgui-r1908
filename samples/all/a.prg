@@ -86,12 +86,16 @@ RETURN NIL
 
 FUNCTION CreateChildWindow()
 
-Local oChildWnd, oPanel, oFontBtn, oBoton1, oBoton2
-Local e1 := "Dialog from prg"
-Local e2 := Date()
-Local e3 := 10320.54
-Local e4:="11222333444455"
-Local e5 := 10320.54
+   LOCAL oChildWnd
+   LOCAL oPanel
+   LOCAL oFontBtn
+   LOCAL oBoton1
+   LOCAL oBoton2
+   LOCAL e1 := "Dialog from prg"
+   LOCAL e2 := Date()
+   LOCAL e3 := 10320.54
+   LOCAL e4 := "11222333444455"
+   LOCAL e5 := 10320.54
 
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
@@ -140,11 +144,18 @@ RETURN NIL
 
 FUNCTION MdiChildFromPrg(o)
 
-Local cTitle := "MdiChild from prg", cText := "Input something"
-Local oChildWnd, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
-// Local aTabs := { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
-Local oCmd1, oCmd2, oCmd3
+   LOCAL cTitle := "MdiChild from prg"
+   LOCAL cText := "Input something"
+   LOCAL oChildWnd
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second"}
+   LOCAL oEdit
+   LOCAL vard := "Monday"
+   // LOCAL aTabs := {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}
+   LOCAL oCmd1
+   LOCAL oCmd2
+   LOCAL oCmd3
 
    INIT WINDOW oChildWnd MDICHILD TITLE "Child";
    AT 210, 10  SIZE 350, 350                    ;
@@ -157,7 +168,7 @@ Local oCmd1, oCmd2, oCmd3
         STYLE WS_DLGFRAME              ;
         SIZE 260, 26 COLOR Vcolor("FF0000")
    oEdit:anchor := 11
-   
+
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
         SIZE 90, 20 COLOR Iif(nColor==Nil, Vcolor("0000FF"), nColor)
@@ -203,7 +214,9 @@ RETURN NIL
 
 FUNCTION NoExit()
 
-Local oDlg, oGet, vGet:="Dialog if no close in ENTER or EXIT"
+   LOCAL oDlg
+   LOCAL oGet
+   LOCAL vGet:="Dialog if no close in ENTER or EXIT"
 
    INIT DIALOG oDlg TITLE "No Exit Enter and Esc"     ;
    AT 190, 10  SIZE 360, 240   NOEXIT NOEXITESC
@@ -216,10 +229,14 @@ RETURN NIL
 
 FUNCTION OpenAbout()
 
-Local oModDlg, oFontBtn, oFontDlg, oBrw
-Local aSample := { {.T., "Line 1", 10}, {.T., "Line 2", 22}, {.F., "Line 3", 40} }
-Local oBmp, oIcon := HIcon():AddFile("image\PIM.ICO")
-Local oSay
+   LOCAL oModDlg
+   LOCAL oFontBtn
+   LOCAL oFontDlg
+   LOCAL oBrw
+   LOCAL aSample := {{.T., "Line 1", 10}, {.T., "Line 2", 22}, {.F., "Line 3", 40}}
+   LOCAL oBmp
+   LOCAL oIcon := HIcon():AddFile("image\PIM.ICO")
+   LOCAL oSay
 
    PREPARE FONT oFontDlg NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
@@ -312,10 +329,11 @@ RETURN .T.
 
 FUNCTION FileOpen()
 
-Local oModDlg, oBrw
-Local mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
-Local fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
-Local nId
+   LOCAL oModDlg
+   LOCAL oBrw
+   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
+   LOCAL nId
 
    IF !Empty(fname)
       mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
@@ -352,7 +370,8 @@ RETURN NIL
 
 FUNCTION FileClose(oDlg)
 
-   Local oBrw := oDlg:FindControl(111)
+   LOCAL oBrw := oDlg:FindControl(111)
+   
    dbSelectArea(oBrw:alias)
    dbCloseArea()
 
@@ -360,21 +379,23 @@ RETURN .T.
 
 FUNCTION PrintDos()
 
-Local han := fcreate("LPT1", 0)
-  if han != -1
-     fwrite(han, Chr(10)+Chr(13)+"Example of dos printing ..."+Chr(10)+Chr(13))
-     fwrite(han, "Line 2 ..."+Chr(10)+Chr(13))
-     fwrite(han, "---------------------------"+Chr(10)+Chr(13)+Chr(12))
-     fclose(han)
-  else
-     hwg_MsgStop("Can't open printer port!")
-  endif
+   LOCAL han := fcreate("LPT1", 0)
+
+   IF han != -1
+      fwrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
+      fwrite(han, "Line 2 ..." + Chr(10) + Chr(13))
+      fwrite(han, "---------------------------" + Chr(10) + Chr(13) + Chr(12))
+      fclose(han)
+   ELSE
+      hwg_MsgStop("Can't open printer port!")
+   ENDIF
 
 RETURN NIL
 
 FUNCTION PrnTest()
 
-Local oPrinter, oFont
+   LOCAL oPrinter
+   LOCAL oFont
 
    INIT PRINTER oPrinter
    IF oPrinter == Nil
@@ -416,10 +437,15 @@ RETURN NIL
 
 FUNCTION DialogFromPrg(o)
 
-Local cTitle := "Dialog from prg", cText := "Input something"
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
-// Local aTabs := { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+   LOCAL cTitle := "Dialog from prg"
+   LOCAL cText := "Input something"
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second"}
+   LOCAL oEdit
+   LOCAL vard := "Monday"
+   // LOCAL aTabs := {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}
 
    // o:bGetFocus := Nil
    INIT DIALOG oModDlg TITLE cTitle           ;
@@ -495,9 +521,18 @@ ShellExecute("rundll32.exe", "open", ;
 
 FUNCTION TestTab()
 
-Local oDlg, oTAB
-Local oGet1, oGet2, oVar1:="1", oVar2:="2"
-Local oGet3, oGet4, oVar3:="3", oVar4:="4", oGet5, oVar5 := "5"
+   LOCAL oDlg
+   LOCAL oTAB
+   LOCAL oGet1
+   LOCAL oGet2
+   LOCAL oVar1 := "1"
+   LOCAL oVar2 := "2"
+   LOCAL oGet3
+   LOCAL oGet4
+   LOCAL oVar3 := "3"
+   LOCAL oVar4 := "4"
+   LOCAL oGet5
+   LOCAL oVar5 := "5"
 
 INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200
 
@@ -536,9 +571,13 @@ RETURN lSucess
 
 FUNCTION TestProgres()
 
-Local oDlg, ostatus, oBar
-Local cRes, aCombo := { "First", "Second" }
-Private oProg
+   LOCAL oDlg
+   LOCAL ostatus
+   LOCAL oBar
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second"}
+
+   PRIVATE oProg
 
 INIT DIALOG oDlg TITLE "Progress Bar"    ;
    AT 190, 10  SIZE 360, 240               
@@ -557,22 +596,26 @@ oCombo := HComboBox():New(ostatus, , , , 65536, 0, 2, 200, 20, aCombo, , , , , ,
 
 FUNCTION MudeProg(ostatus)
 
-Local ct:=1
-Do while ct<1001
-   oProg:Step()
-   ostatus:step()
-   ++ct
-EndDo
+   LOCAL ct := 1
+
+   DO WHILE ct < 1001
+      oProg:Step()
+      ostatus:Step()
+      ++ct
+   ENDDO
 
 RETURN NIL
 
 FUNCTION RRectangle()
 
-Local oDlg, oR1, oR2, oR3   
+   LOCAL oDlg
+   LOCAL oR1
+   LOCAL oR2
+   LOCAL oR3
 
 INIT DIALOG oDlg TITLE "Sample HRect"    ;
    AT 190, 10  SIZE 600, 400
-  
+
        @ 230,  10, 400, 100 RECT oR1 of oDlg PRESS
        @  10,  10, 200, 100 RECT oR2 of oDlg RECT_STYLE 3
        @  10, 130, 100, 230 RECT oR3 of oDlg PRESS RECT_STYLE 2

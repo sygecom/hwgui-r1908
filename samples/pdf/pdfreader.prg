@@ -18,8 +18,10 @@
 
 FUNCTION Main()
 
-Local oMainWnd, oPanel
-Private oPdf
+   LOCAL oMainWnd
+   LOCAL oPanel
+
+   PRIVATE oPdf
 
    INIT WINDOW oMainWnd TITLE "Pdf example" AT 200, 0 SIZE 500, 400
 
@@ -51,7 +53,7 @@ RETURN NIL
 
 FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
 
-    local oPdf
+    LOCAL oPdf
 
     oPdf := PdfReader():New(oWindow, "AcroPDF.PDF.1", 0, 0, nHeight, nWidth)
     oPdf:LoadFile(cPdfFile)

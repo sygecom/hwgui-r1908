@@ -3,7 +3,7 @@
 
 FUNCTION Main()
 
-Local oMainWindow
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 0, 0 SIZE GetDesktopWidth(), GetDesktopHeight() - 28
@@ -23,11 +23,18 @@ RETURN NIL
 
 FUNCTION DlgGet()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local cRes, aCombo := { "First", "Second" }
-Local oGet
-Local e1 := "Dialog from prg", c1 := .F., c2 := .T., r1 := 2, cm := 1
-Local upd := 12, d1 := Date()+1
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL cRes
+   LOCAL aCombo := {"First", "Second"}
+   LOCAL oGet
+   LOCAL e1 := "Dialog from prg"
+   LOCAL c1 := .F.
+   LOCAL c2 := .T.
+   LOCAL r1 := 2
+   LOCAL cm := 1
+   LOCAL upd := 12
+   LOCAL d1 := Date() + 1
 
    INIT DIALOG oModDlg TITLE "Test"  ;
    AT 0, 0 SIZE 450, 350 STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU ;

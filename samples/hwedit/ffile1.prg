@@ -200,8 +200,8 @@ RETURN self
 */
 METHOD retrieve() CLASS HBMake_FileBase
 
-   LOCAL cReturn       // as char
-   LOCAL nMoved        // as int
+   LOCAL cReturn // as char
+   LOCAL nMoved  // as int
 
    IF ::noDosError() .AND. ::nDosHandle > 0
       cReturn           := SPACE(::nSkipLength)
@@ -271,7 +271,7 @@ RETURN ::nPosition
 */
 METHOD Create() CLASS HBMake_FileBase
 
-   LOCAL nFile         // as int
+   LOCAL nFile // as int
 
    IF ::noDosError()
       nFile             := FCREATE(::cName, ::nCreateMode)
@@ -352,8 +352,8 @@ RETURN self
 */
 METHOD goBottom() CLASS HBMake_FileBase
 
-   LOCAL cBuffer       // as char
-   LOCAL lWithCRLF := pFALSE               // as logical
+   LOCAL cBuffer             // as char
+   LOCAL lWithCRLF := pFALSE // as logical
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
       ::fgobottom()
@@ -440,10 +440,10 @@ RETURN self
 /* 
 METHOD Buffget(lForward) CLASS HBMake_FileBase
 
-   LOCAL cBuffer       // as char
-   LOCAL nLocation     // as int
-   LOCAL nRead         // as int
-   LOCAL lWithCRLF := pFALSE               // as logical
+   LOCAL cBuffer             // as char
+   LOCAL nLocation           // as int
+   LOCAL nRead               // as int
+   LOCAL lWithCRLF := pFALSE // as logical
 
    DEFAULT lForward TO pTRUE
 
@@ -524,7 +524,7 @@ RETURN self
 
 METHOD SKIP(nRecords) CLASS HBMake_FileBase
 
-   LOCAL nCount := 0   // as int
+   LOCAL nCount := 0 // as int
 
    DEFAULT nRecords TO 1
 
@@ -560,10 +560,10 @@ RETURN self
 */
 METHOD GOTO(nValue) CLASS HBMake_FileBase
 
-   LOCAL cLine     := ""                   // as char
-   LOCAL nCount    := 0                    // as int
-   LOCAL lContinue := pTRUE                // as logical
-   LOCAL cBuffer       // as char
+   LOCAL cLine := ""        // as char
+   LOCAL nCount := 0        // as int
+   LOCAL lContinue := pTRUE // as logical
+   LOCAL cBuffer            // as char
 
    DEFAULT nValue TO 0
 
@@ -605,10 +605,10 @@ RETURN nCount
 
 METHOD BufferGet(lForward) CLASS HBMake_FileBase
 
-   LOCAL cBuffer       // as char
-   LOCAL nLocation     // as int
-   LOCAL nRead         // as int
-   LOCAL lWithCRLF := pFALSE               // as logical
+   LOCAL cBuffer             // as char
+   LOCAL nLocation           // as int
+   LOCAL nRead               // as int
+   LOCAL lWithCRLF := pFALSE // as logical
 
    DEFAULT lForward TO pTRUE
 

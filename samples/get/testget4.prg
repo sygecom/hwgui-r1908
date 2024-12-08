@@ -17,7 +17,7 @@ the Direct and Indirect way
 
 FUNCTION Main()
 
-Local oMain
+   LOCAL oMain
 
    INIT WINDOW oMain MAIN TITLE "Browse Example - Database" ;
      AT 0, 0 ;
@@ -35,11 +35,11 @@ RETURN .T.
 
 FUNCTION IndirectDialog()
 
-Local iDialog
+   LOCAL iDialog
 
    INIT DIALOG iDialog CLIPPER NOEXIT TITLE "Intermediate Dialog"  ;
      STYLE WS_VISIBLE + WS_POPUP + WS_CAPTION + WS_SYSMENU  ;
-     AT 210, 10  SIZE 300, 300                    
+     AT 210, 10  SIZE 300, 300
 
    @ 20, 35 BUTTON "Open form" ON CLICK {|| TestForm()  }
 
@@ -48,14 +48,21 @@ Local iDialog
 
 FUNCTION TestForm()
 
-Local cTitle := "Dialog from prg"
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
-Local oRadio1, oRadio2, onome, ocodigo, wcodigo, wnome, wfracao
-Local bInit
+   LOCAL cTitle := "Dialog from prg"
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL oRadio1
+   LOCAL oRadio2
+   LOCAL onome
+   LOCAL ocodigo
+   LOCAL wcodigo
+   LOCAL wnome
+   LOCAL wfracao
+   LOCAL bInit
 
-wfracao := 1
-wcodigo := "XXXX"
-wnome   := "Nome"
+   wfracao := 1
+   wcodigo := "XXXX"
+   wnome   := "Nome"
 
    bInit := {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}
 

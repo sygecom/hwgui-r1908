@@ -20,7 +20,7 @@
 
 FUNCTION Main()
 
-   Local oWnd
+   LOCAL oWnd
 
    SET DATE BRITISH
    SET CENTURY ON
@@ -44,9 +44,9 @@ RETURN NIL
 
 FUNCTION Dlg1()
 
-   Local oDlg
-   Local oMC
-   Local oFont
+   LOCAL oDlg
+   LOCAL oMC
+   LOCAL oFont
 
    INIT DIALOG oDlg TITLE "Calendário - Exemplo 1" ;
       AT 20, 20 SIZE 500, 300
@@ -73,9 +73,9 @@ RETURN NIL
 
 FUNCTION Dlg2()
 
-   Local oDlg
-   Local oMC
-   Local oFont
+   LOCAL oDlg
+   LOCAL oMC
+   lOCAL oFont
 
    INIT DIALOG oDlg TITLE "Calendário - Exemplo 2" ;
       AT 20, 20 SIZE 500, 300

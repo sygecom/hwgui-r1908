@@ -6,29 +6,34 @@
 **************************
 FUNCTION pesquisaglobal()
 **************************
-LOCAL oDlgPesq, getpesq, ocomb, atu:=1
-local oIcon := HIcon():AddRESOURCE("SEARCHICON")
-local oDir:=directory(DiskName()+':\*.', "D", .T.) // pegando diretirio
-private rd_pesq:='',;
-        diretorio :={},;
-        resultado:='',;
-        get01
-//
-for f = 1 to len(oDir) // filtrando diretorios
-    if odir[f, 1]#'.' .AND. odir[f, 1]#'..'
-       aadd(diretorio, DiskName() + ':\' + oDir[f, 1] + '\')
-    endif
-next f
- //
-asort(diretorio)
-for g:= 1 to len(diretorio) // pegando diretorio atual
-       if upper(diretorio[g]) =DiskName()+':\'+upper(curdir()+'\')
-          atu:=g
+
+   LOCAL oDlgPesq
+   LOCAL getpesq
+   LOCAL ocomb
+   LOCAL atu := 1
+   LOCAL oIcon := HIcon():AddRESOURCE("SEARCHICON")
+   LOCAL oDir := directory(DiskName() + ':\*.', "D", .T.) // pegando diretorio
+
+   PRIVATE rd_pesq := ''
+   PRIVATE diretorio := {}
+   PRIVATE resultado := ''
+   PRIVATE get01
+
+   for f = 1 to len(oDir) // filtrando diretorios
+       if odir[f, 1]#'.' .AND. odir[f, 1]#'..'
+          aadd(diretorio, DiskName() + ':\' + oDir[f, 1] + '\')
        endif
-next g
- //
+   next f
+   
+   asort(diretorio)
+   for g:= 1 to len(diretorio) // pegando diretorio atual
+          if upper(diretorio[g]) =DiskName()+':\'+upper(curdir()+'\')
+             atu:=g
+          endif
+   next g
+
  oComb:=atu
- //
+
  INIT DIALOG oDlgPesq TITLE "Pesquisa Gobal" ICON oIcon;
         AT 26, 136 SIZE 694, 456
    @ 20, 10 SAY "Texto a Procurar" SIZE 111, 15
@@ -46,43 +51,45 @@ RETURN NIL
 *****************************
 FUNCTION pesq(rd_dir, rd_text)
 *****************************
-local arquivos:=directory(rd_dir+'*.prg', "D", .T.) // pegando arquivos
-local nom_arq:={}
-local s_lEof:=.F.
-private arq_contem:={},;
-        result:=''
-//
-for f:= 1 to len(arquivos) // filtrando arquivos
-    if arquivos[f, 1]#'.' .AND. arquivos[f, 1]#'..'
-       aadd(nom_arq, arquivos[f, 1])
-    endif
-next f
-//
-asort(nom_arq)
-resultado:=''
-get01:refresh()
-//
-for g := 1 to len(nom_arq)
-  arq:=FT_FUSE(rd_dir+nom_arq[g])
-  //
-  resultado:=resultado+nom_arq[g]+chr(13)+chr(10)
-  get01:refresh()
-  //
-  lin:=0
-  while !FT_FEOF()
-     linha :=upper(Substr(FT_FReadLn(@s_lEof), 1))
+
+   LOCAL arquivos := directory(rd_dir + '*.prg', "D", .T.) // pegando arquivos
+   LOCAL nom_arq := {}
+   LOCAL s_lEof := .F.
+
+   PRIVATE arq_contem := {}
+   PRIVATE result := ''
+
+   for f:= 1 to len(arquivos) // filtrando arquivos
+       if arquivos[f, 1]#'.' .AND. arquivos[f, 1]#'..'
+          aadd(nom_arq, arquivos[f, 1])
+       endif
+   next f
+   
+   asort(nom_arq)
+   resultado:=''
+   get01:refresh()
+
+   for g := 1 to len(nom_arq)
+     arq:=FT_FUSE(rd_dir+nom_arq[g])
      //
-     texto:=upper(rd_text)
+     resultado:=resultado+nom_arq[g]+chr(13)+chr(10)
+     get01:refresh()
      //
-     //hwg_MsgInfo(linha)
-     if at (texto, linha) # 0
-         resultado:=resultado+str(lin, 6)+':'+linha +chr(13)+chr(10)
-         get01:refresh()
-     endif
-     //
-     lin++
-     FT_FSKIP()
-  enddo
-next g
+     lin:=0
+     while !FT_FEOF()
+        linha :=upper(Substr(FT_FReadLn(@s_lEof), 1))
+        //
+        texto:=upper(rd_text)
+        //
+        //hwg_MsgInfo(linha)
+        if at (texto, linha) # 0
+            resultado:=resultado+str(lin, 6)+':'+linha +chr(13)+chr(10)
+            get01:refresh()
+        endif
+        //
+        lin++
+        FT_FSKIP()
+     enddo
+   next g
 
 RETURN .T.

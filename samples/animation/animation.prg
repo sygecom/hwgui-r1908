@@ -2,8 +2,11 @@
 
 FUNCTION Main()
 
-   LOCAL oWnd, oPanel
-   LOCAL oBut1, oBut2, oBut3
+   LOCAL oWnd
+   LOCAL oPanel
+   LOCAL oBut1
+   LOCAL oBut2
+   LOCAL oBut3
    LOCAL oCtrl
 
    INIT WINDOW oWnd MAIN ;

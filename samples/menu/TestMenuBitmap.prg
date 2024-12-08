@@ -15,9 +15,9 @@
 
 FUNCTION Main()
 
-Local oMain
+   LOCAL oMain
 
-Private oMenu
+   PRIVATE oMenu
 
         INIT WINDOW oMain MAIN TITLE "Teste" ;
              AT 0, 0 ; // BACKGROUND BITMAP OBMP ;

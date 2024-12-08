@@ -11,7 +11,7 @@
 
 FUNCTION Main()
 
-Local oMainWindow
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150
@@ -27,11 +27,14 @@ RETURN NIL
 
 FUNCTION OpenConfig()
 
-Local aDlg1, aDlg2, aCombo := { "Aaaa", "Bbbb" }
-Local oBrw1, oBrw2
-Local aSample1 := { {"Alex", 17}, {"Victor", 42}, {"John", 31} }
-Local aSample2 := { {"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40} }
-Local e1 := "Xxxx"
+   LOCAL aDlg1
+   LOCAL aDlg2
+   LOCAL aCombo := {"Aaaa", "Bbbb"}
+   LOCAL oBrw1
+   LOCAL oBrw2
+   LOCAL aSample1 := {{"Alex", 17}, {"Victor", 42}, {"John", 31}}
+   LOCAL aSample2 := {{"Line 1", 10}, {"Line 2", 22}, {"Line 3", 40}}
+   LOCAL e1 := "Xxxx"
 
    INIT DIALOG aDlg1 FROM RESOURCE  "PAGE_1" ON EXIT {||hwg_MsgInfo("Exit"), .T.}
    REDEFINE GET e1 ID 103

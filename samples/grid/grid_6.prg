@@ -36,21 +36,21 @@ RETURN NIL
 
 FUNCTION Test()
 
-Local aHead :={}
-Local n
-Local aItems :={}
-Local aStru
+   LOCAL aHead := {}
+   LOCAL n
+   LOCAL aItems := {}
+   LOCAL aStru
 
-use test new
-aStru := dbstruct()
-for n :=1 to len(astru)
-   aadd(aHead, aStru[n, 1])
-next
-go Top
-while !eof()
- aadd(aItems, {first, last, city, str(salary, 10, 2)})
- skip
-enddo
+   use test new
+   aStru := dbstruct()
+   for n :=1 to len(astru)
+      aadd(aHead, aStru[n, 1])
+   next
+   go Top
+   while !eof()
+    aadd(aItems, {first, last, city, str(salary, 10, 2)})
+    skip
+   enddo
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 

@@ -29,12 +29,17 @@ RETURN NIL
 
 FUNCTION Test()
 
-   Local nCombo := 1
-   Local cCombo := "Four"
-   Local xCombo := "Test"
-   Local aItems := {"First", "Second", "Third", "Four"}
-   Local cEdit  := Space(50)
-   Local oCombo1, oCombo2, oCombo3, oCombo4, oCombo5, oCombo6
+   LOCAL nCombo := 1
+   LOCAL cCombo := "Four"
+   LOCAL xCombo := "Test"
+   LOCAL aItems := {"First", "Second", "Third", "Four"}
+   LOCAL cEdit := Space(50)
+   LOCAL oCombo1
+   LOCAL oCombo2
+   LOCAL oCombo3
+   LOCAL oCombo4
+   LOCAL oCombo5
+   LOCAL oCombo6
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
@@ -68,11 +73,16 @@ RETURN NIL
 
 FUNCTION BoundTest()
 
-   Local nCombo := 1
-   Local cCombo := "Four"
-   Local xCombo := "Test"
-   Local aItems := {{"female", "f"},{"male", "m"}}
-   Local oCombo1, oCombo2, oCombo3, oCombo4, oCombo5, oCombo6
+   LOCAL nCombo := 1
+   LOCAL cCombo := "Four"
+   LOCAL xCombo := "Test"
+   LOCAL aItems := {{"female", "f"}, {"male", "m"}}
+   LOCAL oCombo1
+   LOCAL oCombo2
+   LOCAL oCombo3
+   LOCAL oCombo4
+   LOCAL oCombo5
+   LOCAL oCombo6
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
@@ -100,7 +110,8 @@ RETURN NIL
 
 STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
 
-   LOCAL cTexto, n
+   LOCAL cTexto
+   LOCAL n
 
    cTexto := TRIM(This:GetText())
    n := Ascan(This:aitems, {| a | a = cTexto })

@@ -3,11 +3,20 @@
 
 FUNCTION Main()
 
-Local oMainWindow, oBtn, aCombo := {"First", "Second" }, cTool := "Example", oFont
-Local aTabs := { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" }, oTab
-Local acho := { {"First item", 180}, {"Second item", 200} }
-Local oEdit, oGetTab, oTree, oItem
-Private aGetsTab := { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
+   LOCAL oMainWindow
+   LOCAL oBtn
+   LOCAL aCombo := {"First", "Second" }
+   LOCAL cTool := "Example"
+   LOCAL oFont
+   LOCAL aTabs := {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"}
+   LOCAL oTab
+   LOCAL acho := {{"First item", 180}, {"Second item", 200}}
+   LOCAL oEdit
+   LOCAL oGetTab
+   LOCAL oTree
+   LOCAL oItem
+
+   PRIVATE aGetsTab := {"", "", "", "", "", "", "", "", "", "", "", "", "", ""}
 
    // PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 4
@@ -93,7 +102,8 @@ RETURN NIL
 
 FUNCTION PS1(oWnd)
 
-Local oDlg1, oDlg2
+   LOCAL oDlg1
+   LOCAL oDlg2
 
    INIT DIALOG oDlg1 TITLE "PAGE_1" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20, 15 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER

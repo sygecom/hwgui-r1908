@@ -3,7 +3,7 @@
 
 FUNCTION Main()
 
-Local oMainWindow
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" COLOR COLOR_3DLIGHT ;
      AT 200, 0 SIZE 400, 100
@@ -21,8 +21,11 @@ RETURN NIL
 
 STATIC FUNCTION Graph1()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
-Local i, aGraph[1]
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL oGraph
+   LOCAL i
+   LOCAL aGraph[1]
 
    aGraph[1] := {}
    FOR i := -40 TO 40
@@ -46,8 +49,11 @@ RETURN NIL
 
 STATIC FUNCTION Graph2()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
-Local i, aGraph[1]
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL oGraph
+   LOCAL i
+   LOCAL aGraph[1]
 
    aGraph[1] := {}
    FOR i := 1 TO 6
@@ -71,8 +77,11 @@ RETURN NIL
 
 STATIC FUNCTION Graph3()
 
-Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13), oGraph
-Local i, aGraph[1]
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
+   LOCAL oGraph
+   LOCAL i
+   LOCAL aGraph[1]
 
    aGraph[1] := {}
    FOR i := 1 TO 6
