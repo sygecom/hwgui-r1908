@@ -472,7 +472,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
    IIf(cTitle == NIL, cTitle := "Print Preview", cTitle := cTitle)
 
    INIT DIALOG oDlg TITLE cTitle ;
-        At 0, 0 SIZE GETDESKTOPWIDTH(), GETDESKTOPHEIGHT() on init {||SendMessage(oedit1:handle, WM_VSCROLL, SB_TOP, 0)}
+        At 0, 0 SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() on init {||SendMessage(oedit1:handle, WM_VSCROLL, SB_TOP, 0)}
 
 
 
