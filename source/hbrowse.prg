@@ -862,9 +862,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       ELSEIF msg == WM_MBUTTONUP
          ::nWheelPress := IIf(::nWheelPress > 0, 0, lParam)
          IF ::nWheelPress > 0
-            Hwg_SetCursor(LOADCURSOR(32652))
+            Hwg_SetCursor(hwg_LoadCursor(32652))
          ELSE
-            Hwg_SetCursor(LOADCURSOR(IDC_ARROW))
+            Hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
          ENDIF
       /*
       ELSEIF msg == WM_MOUSEWHEEL
@@ -1280,9 +1280,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_MBUTTONUP
       ::nWheelPress := IIf(::nWheelPress > 0, 0, lParam)
       IF ::nWheelPress > 0
-         Hwg_SetCursor(LOADCURSOR(32652))
+         Hwg_SetCursor(hwg_LoadCursor(32652))
       ELSE
-         Hwg_SetCursor(LOADCURSOR(IDC_ARROW))
+         Hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
       ENDIF
       EXIT
 
@@ -1493,9 +1493,9 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
          ::aArray     := NIL
          ::aMargin := {1, 1, 0, 1}
          IF Empty(ColSizeCursor)
-            ColSizeCursor := LoadCursor(IDC_SIZEWE)
-            arrowCursor := LoadCursor(IDC_ARROW)
-            downCursor := LoadCursor(IDC_HAND)
+            ColSizeCursor := hwg_LoadCursor(IDC_SIZEWE)
+            arrowCursor := hwg_LoadCursor(IDC_ARROW)
+            downCursor := hwg_LoadCursor(IDC_HAND)
          ENDIF
          oPen64 :=  HPen():Add(PS_SOLID, 1, IIf(::Themed, RGB(128, 128, 128), RGB(64, 64, 64)))
       ENDIF

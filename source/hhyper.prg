@@ -27,7 +27,7 @@ CLASS HStaticLink FROM HSTATIC
    DATA state
    DATA m_bFireChild INIT .F.
 
-   DATA m_hHyperCursor INIT LoadCursor(32649)
+   DATA m_hHyperCursor INIT hwg_LoadCursor(32649)
 
    DATA m_bMouseOver INIT .F.
    DATA m_bVisited INIT .F.

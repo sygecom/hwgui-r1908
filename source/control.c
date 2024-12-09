@@ -995,7 +995,7 @@ HB_FUNC(GETANCESTOR)
   hwg_ret_HWND(GetAncestor(hwg_par_HWND(1), hb_parni(2)));
 }
 
-HB_FUNC(LOADCURSOR)
+HB_FUNC(HWG_LOADCURSOR)
 {
   void *hStr;
   LPCTSTR lpStr = HB_PARSTR(1, &hStr, NULL);
@@ -1010,6 +1010,8 @@ HB_FUNC(LOADCURSOR)
   }
   hb_strfree(hStr);
 }
+
+HB_FUNC_TRANSLATE(LOADCURSOR, HWG_LOADCURSOR);
 
 HB_FUNC(HWG_SETCURSOR)
 {
