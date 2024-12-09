@@ -199,11 +199,11 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
          CASE scom == "PRIVATE" .OR. scom == "PARAMETERS" .OR. scom == "LOCAL"
             IF Len(rezArray[2]) == 0 .OR. (i := ValType(ATail(rezArray[2]))) == "C" .OR. i == "A"
                IF Left(scom, 2) == "LO"
-                  AAdd(rezArray[2], " "+AllTrim(SubStr(stroka, 7)))
+                  AAdd(rezArray[2], " " + AllTrim(SubStr(stroka, 7)))
                ELSEIF Left(scom, 2) == "PR"
-                  AAdd(rezArray[2], " "+AllTrim(SubStr(stroka, 9)))
+                  AAdd(rezArray[2], " " + AllTrim(SubStr(stroka, 9)))
                ELSE
-                  AAdd(rezArray[2], "/"+AllTrim(SubStr(stroka, 12)))
+                  AAdd(rezArray[2], "/" + AllTrim(SubStr(stroka, 12)))
                ENDIF
                AAdd(tmpArray, "")
             ELSE
@@ -249,7 +249,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
          CASE scom == "RETURN"
             bOldError := ErrorBlock({|e|MacroError(1, e, stroka)})
             BEGIN SEQUENCE
-               AAdd(rezArray[2], &("{||EndScript("+LTrim(SubStr(stroka, 7))+")}"))
+               AAdd(rezArray[2], &("{||EndScript(" + LTrim(SubStr(stroka, 7)) + ")}"))
             RECOVER
                IF scrSource != NIL .AND. hb_IsChar(scrSource)
                   WndOut()
@@ -532,7 +532,7 @@ FUNCTION Codeblock(string)
    IF Left(string, 2) == "{|"
       RETURN &(string)
    ENDIF
-RETURN &("{||"+string+"}")
+RETURN &("{||" + string + "}")
 
 FUNCTION SetDebugInfo(lDebug)
 

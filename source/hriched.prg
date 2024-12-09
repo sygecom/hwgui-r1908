@@ -413,7 +413,7 @@ METHOD Print() CLASS HRichEdit
 /*
 Function DefRichProc(hEdit, msg, wParam, lParam)
 Local oEdit
-   // writelog("RichProc: " + Str(hEdit, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
+   // writelog("RichProc: " + Str(hEdit, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    oEdit := FindSelf(hEdit)
    IF msg == WM_CHAR
       oEdit:lChanged := .T.

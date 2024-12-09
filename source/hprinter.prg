@@ -168,7 +168,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
       ::nPHeight := IIf(::lmm, aPrnCoors[9], aPrnCoors[2])
       ::nHRes   := aPrnCoors[1] / aPrnCoors[3]
       ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
-      // writelog(":"+str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]))
+      // writelog(":" + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]))
       RETURN .T.
    ENDIF
 
@@ -720,7 +720,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    pps := DefinePaintStru()
    hDC := BeginPaint(oWnd:handle, pps)
    aArray := GetPPSRect(pps)
-   // tracelog("PPS"+str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]))
+   // tracelog("PPS" + str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]))
 
    IF (aArray[1] == 0 .AND. aArray[2] == 0)  // IF WHOLE AREA
       IF (::NeedsRedraw .OR. lRefreshVideo)

@@ -48,7 +48,7 @@ Local nFirst, i
       oBmpCurr := HBitmap():AddStandard(OBM_RGARROWD)
       oBmpPoint:= HBitmap():AddStandard(OBM_CHECK)
 #endif
-      INIT DIALOG oDlgDebug TITLE ("Script Debugger - "+aScript[1]) AT 210, 10 SIZE 500, 300 ;
+      INIT DIALOG oDlgDebug TITLE ("Script Debugger - " + aScript[1]) AT 210, 10 SIZE 500, 300 ;
            FONT oDlgFont STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX ;
            ON EXIT {|o|HB_SYMBOL_UNUSED(o), dlgDebugClose()}
 

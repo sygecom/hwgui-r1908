@@ -797,7 +797,7 @@ METHOD KeyRight(nPos) CLASS HEdit
 
    IF !Empty(::cPicMask)
       newpos := Len(::cPicMask)
-      //writelog("KeyRight-2 "+str(nPos) + " " +str(newPos))
+      //writelog("KeyRight-2 " + str(nPos) + " " + str(newPos))
       IF nPos > newpos .AND. !Empty(Trim(::Title))
          SendMessage(::handle, EM_SETSEL, newpos, newpos)
       ENDIF

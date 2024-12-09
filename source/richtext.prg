@@ -2505,7 +2505,7 @@ lHecho:=.F.
 
    cDir   := GetEnv("TEMP")
 
-   temp:=cDir+"\tmp"+padl(AllTrim(Str(::nFile, 4, 0)), 4, "0")+".wmf"
+   temp:=cDir + "\tmp" + padl(AllTrim(Str(::nFile, 4, 0)), 4, "0") + ".wmf"
 
    hDCOut := CreateMetaFile(temp)
 

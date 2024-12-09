@@ -510,7 +510,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       RETURN NIL
    ENDIF
    IF oCtrl != NIL .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
-      // writelog(oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname())
+      // writelog(oCtrl:cClass + " " + oCtrl:oParent:cClass + " " + oCtrl:oParent:oParent:Classname())
       nContainer := oForm:nContainer
    ENDIF
    IF Asc(cMethod) <= 32
@@ -545,8 +545,8 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
          RETURN bRes
       ELSE
          cCode1 := IIf(nContainer==0, ;
-               "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
-               "F("+Ltrim(Str(oCtrl:nId))+")")
+               "aControls[" + Ltrim(Str(Len(oForm:aControls))) + "]", ;
+               "F(" + Ltrim(Str(oCtrl:nId)) + ")")
          arrExe := Array(2)
          arrExe[2] := RdScript(, cMethod, 1, .T., cName)
          cCode :=  "{|" + cParam + ;
@@ -561,8 +561,8 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    ENDIF
 
    cCode1 := IIf(nContainer==0, ;
-         "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
-         "F("+Ltrim(Str(oCtrl:nId))+")")
+         "aControls[" + Ltrim(Str(Len(oForm:aControls))) + "]", ;
+         "F(" + Ltrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)
    arrExe[2] := RdScript(, cMethod, , .T., cName)
    cCode := "{|" + IIf(Empty(cParam), "", cParam) + ;
@@ -1070,7 +1070,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          oCtrl:cargo := cVarName
       ENDIF
       IF Type("m->name") == "C"
-         // writelog(oCtrlTmpl:cClass+" "+name)
+         // writelog(oCtrlTmpl:cClass + " " + name)
          __mvPut(name, oCtrl)
          name := NIL
       ENDIF
@@ -1369,7 +1369,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
          oPrinter:SetFont(oFont)
       ENDIF
       ::nTOffset := ::nAOffSet := ::ny := 0
-      // Writelog("Print-1 "+ str(oPrinter:nPage))
+      // Writelog("Print-1 " + str(oPrinter:nPage))
       FOR i := 1 TO Len(::aControls)
          ::PrintItem(::aControls[i])
       NEXT
@@ -1429,11 +1429,11 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
       y   := Val(xProperty[2]) * ::nKoefY
       x2  := Val(xProperty[5]) * ::nKoefX
       y2  := Val(xProperty[6]) * ::nKoefY
-      // writelog(xProperty[1]+" "+xProperty[2])
+      // writelog(xProperty[1] + " " + xProperty[2])
 
       IF oItem:cClass == "area"
          oItem:y2 := y2
-         // writelog("Area: "+cText+" "+IIf(::lNextPage, "T", "F"))
+         // writelog("Area: " + cText + " " + IIf(::lNextPage, "T", "F"))
          IF (xProperty := aGetSecond(oItem:aProp, "varoffset")) == NIL .OR. !xProperty
             ::nTOffset := ::nAOffSet := 0
          ENDIF
@@ -1464,7 +1464,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                ENDIF
             ENDDO
             IF lLastCycle
-               // writelog("--> "+str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
+               // writelog("--> " + str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
                ::nAOffSet += y2 - y + 1 - (::ny - y)
                ::nTOffset := 0
                ::lFinish := .T.
@@ -1489,7 +1489,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
             oItem:lMark := .T.
             ::lNextPage := .T.
             ::nTOffset := ::nAOffSet := 0
-            // writelog("::lNextPage := .T. "+ oItem:cClass)
+            // writelog("::lNextPage := .T. " + oItem:cClass)
             RETURN NIL
          ENDIF
       ENDIF
@@ -1551,11 +1551,11 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
             SetTransparentMode(::oPrinter:hDC, .F.)
-            // Writelog(str(x)+" "+str(y)+" "+str(x2)+" "+str(y2)+" "+str(::nAOffSet)+" "+str(::nTOffSet)+" Say: "+cText)
+            // Writelog(str(x) + " " + str(y) + " " + str(x2) + " " + str(y2) + " " + str(::nAOffSet) + " " + str(::nTOffSet) + " Say: " + cText)
          ENDIF
       ELSEIF oItem:cClass == "box"
          ::oPrinter:Box(x, y, x2, y2, oItem:oPen)
-         // writelog("Draw "+str(x)+" "+str(x+width-1))
+         // writelog("Draw " + str(x) + " " + str(x + width - 1))
       ELSEIF oItem:cClass == "vline"
          ::oPrinter:Line(x, y, x, y2, oItem:oPen)
       ELSEIF oItem:cClass == "hline"

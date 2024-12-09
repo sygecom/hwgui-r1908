@@ -3612,7 +3612,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
       ELSE
          i := IIf(::freeze > 0, 1, ::nLeftCol)
          DO WHILE x < ::x2 - 2 .AND. i <= nLastColumn     // Len(::aColumns)
-            // TraceLog("Colonna "+str(i)+"    x="+str(x))
+            // TraceLog("Colonna " + str(i) + "    x=" + str(x))
             IF !::aColumns[i]:lhide
                x += ::aColumns[i]:width
                ::xPosMouseOver := xPos

@@ -241,9 +241,9 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
        ELSEIF x2 == "1"
                  IF x3 == "0";  say += "SEPULUH "
                  ELSEIF x3 == "1";  say += "SEBELAS "
-                 ELSE;              say += bil(x3) +"BELAS "
+                 ELSE;              say += bil(x3) + "BELAS "
                  ENDIF
-       ELSE;     say += bil(x2)+"PULUH "+bil(x3)
+       ELSE;     say += bil(x2) + "PULUH " + bil(x3)
        ENDIF
 
  RETURN say
