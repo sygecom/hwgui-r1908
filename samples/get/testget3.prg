@@ -42,8 +42,8 @@ FUNCTION DlgGet()
    LOCAL amenu
 
    INIT DIALOG oModDlg TITLE "Get a value"  ;
-   AT 210, 10  SIZE 300, 300                  ;
-   FONT oFont // on init  {||CreateBar(oModDlg,@otool)}
+      AT 210, 10 SIZE 300, 300                  ;
+      FONT oFont // ON INIT {||CreateBar(oModDlg, @otool)}
 
    Create menubar aMenu
    MENUBARITEM  amenu CAPTION "teste" ON 904 ACTION {||hwg_MsgYesNo("Really want to quit ?")}
@@ -101,16 +101,16 @@ FUNCTION DlgGet()
    @ 20, 200 GET UPDOWN upd RANGE 0, 80 SIZE 50, 24
    @ 160, 200 GET DATEPICKER d1 SIZE 90, 24
 
-   @ 20, 240 BUTTON "Ok" ID IDOK  SIZE 100, 32
-   @ 180, 240 BUTTON "Cancel" ID IDCANCEL  SIZE 100, 32
+   @ 20, 240 BUTTON "Ok" ID IDOK SIZE 100, 32
+   @ 180, 240 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
    IF oModDlg:lResult
       hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
+               "Check1 - " + IIf(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + IIf(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;
@@ -134,7 +134,7 @@ FUNCTION CreateBar(oModDlg, otool)
    //LOCAL pItem
 
 //  hTool := CREATETOOLBAR(oModDlg:handle, 700, 0, 0, 0, 50, 100)
-// //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, len(aTool))
+// //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, Len(aTool))
  //
 //   otool:=Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
 //   oTool:oParent:AddEvent(BN_CLICKED, 701, {|x, y|DlgGet()})

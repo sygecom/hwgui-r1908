@@ -37,7 +37,7 @@ FUNCTION DlgGet(lColor)
    LOCAL e1 := "Dialog from prg"
    LOCAL e2 := Date()
    LOCAL e3 := 10320.54
-   LOCAL e4:="11222333444455"
+   LOCAL e4 := "11222333444455"
    LOCAL e5 := 10320.54
    LOCAL e6 := "Max Lenght = 15"
    LOCAL e7 := "Password"
@@ -45,9 +45,9 @@ FUNCTION DlgGet(lColor)
    PRIVATE oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
-   AT 210, 10  SIZE 300, 320                  ;
-   FONT oFont ;
-   ON INIT {|| SetTimer(oModDlg,@oTimer)}
+      AT 210, 10 SIZE 300, 320                  ;
+      FONT oFont ;
+      ON INIT {||SetTimer(oModDlg, @oTimer)}
 
    SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3")
    SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3")
@@ -67,9 +67,9 @@ FUNCTION DlgGet(lColor)
         MAXLENGTH 15                    ;
         SIZE 260, 26
 
-   @ 20, 95 GET e2  SIZE 260, 26
+   @ 20, 95 GET e2 SIZE 260, 26
 
-   @ 20, 125 GET e3  SIZE 260, 26
+   @ 20, 125 GET e3 SIZE 260, 26
 
    @ 20, 155 GET e4                      ;
         PICTURE "@R 99.999.999/9999-99" ;
@@ -83,7 +83,7 @@ FUNCTION DlgGet(lColor)
         PASSWORD                        ;
         SIZE 260, 26
 
-   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., EndDialog()}
+   @  20, 250 BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult := .T., EndDialog()}
    @ 180, 250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;

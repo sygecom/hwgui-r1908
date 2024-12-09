@@ -38,8 +38,8 @@ FUNCTION DlgGet()
    LOCAL h1 := hbitmap():addFile("..\image\exit.bmp")
 
    INIT DIALOG oModDlg TITLE "Get a value"  ;
-   AT 210, 10  SIZE 500, 300                  ;
-   FONT oFont on init  {||o:setfocus()}
+      AT 210, 10 SIZE 500, 300                  ;
+      FONT oFont ON INIT {||o:setfocus()}
 
    @ 20, 10 SAY "Input something:" SIZE 260, 22
    @ 20, 35 GET oGet VAR e1  ;
@@ -67,18 +67,18 @@ FUNCTION DlgGet()
        SIZE 32, 26 FLAT ;
        BITMAP "..\image\new.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "New MDI child window"
 
-   @ 20, 240 BUTTONEX o1 caption "Cancel" ID IDCANCEL  SIZE 100, 32     bitmap h:handle  style WS_TABSTOP
+   @ 20, 240 BUTTONEX o1 CAPTION "Cancel" ID IDCANCEL SIZE 100, 32 BITMAP h:handle STYLE WS_TABSTOP
 
-   @ 180, 240 BUTTONEX o  caption "TESt" ID IDCANCEL+10  SIZE 100, 32 ICON h1:handle style WS_TABSTOP BSTYLE ST_ALIGN_HORIZ
-   @ 340, 240 BUTTONEX o2 caption "Ok"     ID IDOK  SIZE 100, 32        bitmap h:handle  style WS_TABSTOP BSTYLE ST_ALIGN_HORIZ_RIGHT
+   @ 180, 240 BUTTONEX o CAPTION "TESt" ID IDCANCEL + 10 SIZE 100, 32 ICON h1:handle STYLE WS_TABSTOP BSTYLE ST_ALIGN_HORIZ
+   @ 340, 240 BUTTONEX o2 CAPTION "Ok" ID IDOK SIZE 100, 32 BITMAP h:handle STYLE WS_TABSTOP BSTYLE ST_ALIGN_HORIZ_RIGHT
 
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
    IF oModDlg:lResult
       hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
+               "Check1 - " + IIf(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + IIf(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;

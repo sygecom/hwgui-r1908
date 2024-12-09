@@ -17,24 +17,24 @@
 * --------------------------------------------
 FUNCTION Main()
 * --------------------------------------------
-Private oMain, temp1
-Private oDlg
-Private oFont := Nil
+
+   PRIVATE oMain
+   PRIVATE temp1
+   PRIVATE oDlg
+   PRIVATE oFont := NIL
 
    INIT WINDOW oMain MAIN TITLE "Demo Maximize"
 
-    MENU OF oMain
+   MENU OF oMain
       MENU TITLE "&Arquivo"
-
          MENUITEM "&Maximize   " ACTION oMain:Maximize()
          MENUITEM "&Minimize   " ACTION oMain:Minimize()
          MENUITEM "&Restore    " ACTION oMain:Restore()
          MENUITEM "&Center     " ACTION oMain:Center()
          MENUITEM "&Sair" ACTION EndWindow()
-
       ENDMENU
-    ENDMENU
+   ENDMENU
 
-    ACTIVATE WINDOW oMain MAXIMIZED
+   ACTIVATE WINDOW oMain MAXIMIZED
 
 RETURN NIL

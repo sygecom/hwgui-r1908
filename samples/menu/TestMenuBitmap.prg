@@ -19,30 +19,30 @@ FUNCTION Main()
 
    PRIVATE oMenu
 
-        INIT WINDOW oMain MAIN TITLE "Teste" ;
-             AT 0, 0 ; // BACKGROUND BITMAP OBMP ;
-             SIZE GetDesktopWidth(), GetDesktopHeight() - 28
+   INIT WINDOW oMain MAIN TITLE "Teste" ;
+      AT 0, 0 ; // BACKGROUND BITMAP OBMP ;
+      SIZE GetDesktopWidth(), GetDesktopHeight() - 28
 
-               MENU OF oMain
-                  MENU TITLE "Samples"
-                     MENUITEM "&Exit"    ID 1001 ACTION oMain:Close()   BITMAP "\hwgui\samples\image\exit_m.bmp"
-                     SEPARATOR
-                     MENUITEM "&New "    ID 1002 ACTION hwg_MsgInfo("New")  BITMAP "\hwgui\samples\image\new_m.bmp"
-                     MENUITEM "&Open"    ID 1003 ACTION hwg_MsgInfo("Open") BITMAP "\hwgui\samples\image\open_m.bmp"
-                     MENUITEM "&Demo"    ID 1004 ACTION Test()
-                     separator
-                     MENUITEM "&Bitmap and a Text"  ID 1005 ACTION Test()
-                  ENDMENU
-                ENDMENU
-                //The number ID is very important to use bitmap in menu
-                MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
-                //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
-        ACTIVATE WINDOW oMain
+   MENU OF oMain
+      MENU TITLE "Samples"
+         MENUITEM "&Exit" ID 1001 ACTION oMain:Close() BITMAP "\hwgui\samples\image\exit_m.bmp"
+         SEPARATOR
+         MENUITEM "&New " ID 1002 ACTION hwg_MsgInfo("New") BITMAP "\hwgui\samples\image\new_m.bmp"
+         MENUITEM "&Open" ID 1003 ACTION hwg_MsgInfo("Open") BITMAP "\hwgui\samples\image\open_m.bmp"
+         MENUITEM "&Demo" ID 1004 ACTION Test()
+         SEPARATOR
+         MENUITEM "&Bitmap and a Text" ID 1005 ACTION Test()
+      ENDMENU
+   ENDMENU
+   //The number ID is very important to use bitmap in menu
+   MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
+   //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
+   ACTIVATE WINDOW oMain
 
 RETURN NIL
 
 FUNCTION Test()
 
-hwg_MsgInfo("Test")
+   hwg_MsgInfo("Test")
 
 RETURN NIL

@@ -27,11 +27,11 @@ FUNCTION Main()
      FONT oFont                                  ;
      ON EXIT {||hwg_MsgYesNo("Really want to quit ?")}
 
-   @ 20, 10 RICHEDIT oEdit TEXT "Hello, world !"  SIZE 200, 30
+   @ 20, 10 RICHEDIT oEdit TEXT "Hello, world !" SIZE 200, 30
 
    re_SetCharFormat(oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } })
 
-   @ 270, 10 COMBOBOX aCombo  SIZE 100, 150 TOOLTIP "Combobox"
+   @ 270, 10 COMBOBOX aCombo SIZE 100, 150 TOOLTIP "Combobox"
 
    @ 20, 50 LINE LENGTH 100
 
@@ -53,8 +53,7 @@ FUNCTION Main()
    oItem:AddNode("Third-1")
    oTree:AddNode("Forth")
 
-
-   @ 100, 180 BUTTON "Close"  SIZE 150, 30  ON CLICK {||EndWindow()}
+   @ 100, 180 BUTTON "Close" SIZE 150, 30 ON CLICK {||EndWindow()}
 
    MENU OF oMainWindow
       MENU TITLE "File"
@@ -78,11 +77,11 @@ FUNCTION Main()
 
 /*   
    aMenu := { ;
-     { { { {||hwg_MsgInfo("Xxxx")}, "XXXXX", 130 }, ;
-         { ,, 131 }, ;
-         { {||hwg_MsgInfo("Yyyy")}, "YYYYY", 132 } ;
-       }, "File", 120 }, ;
-     { {||hwg_MsgInfo("Help")}, "Help", 121 } ;
+     {{{{||hwg_MsgInfo("Xxxx")}, "XXXXX", 130}, ;
+         {,, 131}, ;
+         {{||hwg_MsgInfo("Yyyy")}, "YYYYY", 132} ;
+       }, "File", 120}, ;
+     {{||hwg_MsgInfo("Help")}, "Help", 121} ;
    }
    BuildMenu(aMenu, hWnd, aMainWindow)
 */
@@ -93,7 +92,8 @@ RETURN NIL
 
 STATIC FUNCTION ChangeTab(oWnd, oGet, n)
 
-Static lastTab := 1
+   STATIC lastTab := 1
+
    aGetsTab[lastTab] := GetEditText(oGet:oParent:handle, oGet:id)
    SetDlgItemText(oGet:oParent:handle, oGet:id, aGetsTab[n])
    lastTab := n

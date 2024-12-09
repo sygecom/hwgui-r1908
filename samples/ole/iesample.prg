@@ -35,9 +35,9 @@ FUNCTION Main()
 
     @ 5, 4 EDITBOX oEdit CAPTION "http://kresin.belgorod.su" OF oPanelTool SIZE 400, 24
     @ 405, 4 BUTTON "Go!" OF oPanelTool SIZE 30, 24 ;
-        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), oIE:DisplayPage(cUrl), .T.)}
+        ON CLICK {||IIf(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), oIE:DisplayPage(cUrl), .T.)}
     @ 435, 4 BUTTON "Search" OF oPanelTool SIZE 55, 24 ;
-        ON CLICK {||Iif(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), FindInGoogle(cUrl, oIE, oEdit), .T.)}
+        ON CLICK {||IIf(!Empty(cUrl:=GetEditText(oEdit:oParent:handle, oEdit:id)), FindInGoogle(cUrl, oIE, oEdit), .T.)}
 
     @ 0, 34 PANEL oPanelIE SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y - 34)}
 
@@ -49,7 +49,7 @@ RETURN NIL
 
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
-   LOCAL mypath := "\" + Curdir() + Iif(Empty(Curdir()), "", "\")
+   LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    LOCAL fname := SelectFile("HTML files", "*.htm;*.html", mypath)
 
    IF !Empty(fname)
@@ -64,10 +64,10 @@ STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
    LOCAL cUrl := "http://www.google.com/search?q="
    LOCAL cItem
 
-   IF !Empty(cItem := NextItem(cQuery, .T., ' '))
+   IF !Empty(cItem := NextItem(cQuery, .T., " "))
       cUrl += cItem
-      DO WHILE !Empty(cItem := NextItem(cQuery, , ' '))
-         cUrl += '+' + cItem
+      DO WHILE !Empty(cItem := NextItem(cQuery, , " "))
+         cUrl += "+" + cItem
       ENDDO
       oEdit:SetText(cUrl)
       oIE:DisplayPage(cUrl)

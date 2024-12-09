@@ -32,7 +32,7 @@ FUNCTION Main()
    PUBLIC cDatabase := ""
    PUBLIC cUser := ""
    PUBLIC cDataDef := ""
-   PUBLIC mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   PUBLIC mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    PUBLIC queHandle := 0
    PUBLIC nNumFields
    PUBLIC nNumRows
@@ -109,7 +109,7 @@ FUNCTION Main()
    oBrw:active := .F.
 
    Rdini("demo.ini")
-   IF Valtype(BrwFont) == "A"
+   IF ValType(BrwFont) == "A"
       oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
    ReadHistory("qhistory.txt")
@@ -133,7 +133,7 @@ FUNCTION About()
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
-   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog(getmodalhandle())} ;
+   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {||EndDialog(getmodalhandle())} ;
        FLAT TEXT "Close" COLOR Vcolor("0000FF") FONT oFont
 
    oModDlg:Activate()
@@ -207,10 +207,10 @@ FUNCTION Connect()
 
    LOCAL aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
+   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {||InitConnect()}
    DIALOG ACTIONS OF aModDlg ;
-          ON 0, IDOK     ACTION {|| EndConnect() } ;
-          ON 0, IDCANCEL ACTION {|| EndDialog(getmodalhandle())}
+          ON 0, IDOK     ACTION {||EndConnect()} ;
+          ON 0, IDCANCEL ACTION {||EndDialog(getmodalhandle())}
 
    aModDlg:Activate()
 
@@ -393,7 +393,7 @@ FUNCTION sqlBrowse(queHandle)
       aQueRows[i] := sqlFetchR(queHandle)
       IF i == 1
          FOR j := 1 TO nNumFields
-            AAdd(af, {Valtype(aQueRows[i, j]), 0, 0})
+            AAdd(af, {ValType(aQueRows[i, j]), 0, 0})
          NEXT
       ENDIF
       FOR j := 1 TO nNumFields
@@ -402,7 +402,7 @@ FUNCTION sqlBrowse(queHandle)
          ELSEIF af[j, 1] == "N"
             vartmp := STR(aQueRows[i, j])
             af[j, 2] := Max(af[j, 2], Len(vartmp))
-            af[j, 3] := Max(af[j, 3], IIF('.' $ vartmp, af[j, 2] - AT('.', vartmp), 0))
+            af[j, 3] := Max(af[j, 3], IIf("." $ vartmp, af[j, 2] - AT(".", vartmp), 0))
          ELSEIF af[j, 1] == "D"
             af[j, 2] := 8
          ELSEIF af[j, 1] == "L"
@@ -467,14 +467,14 @@ STATIC FUNCTION ReadHistory(fname)
    LOCAL poz := 513
 
    nHistCurr := 0
-   han := FOPEN(fname, FO_READ + FO_SHARED)
+   han := FOpen(fname, FO_READ + FO_SHARED)
    IF han <> - 1
       DO WHILE .T.
          stroka := RDSTR(han,@strbuf,@poz, 512)
-         IF LEN(stroka) == 0
+         IF Len(stroka) == 0
             EXIT
          ENDIF
-         IF LEFT(stroka, 1) == Chr(10) .OR. LEFT(stroka, 1) == CHR(13)
+         IF Left(stroka, 1) == Chr(10) .OR. Left(stroka, 1) == CHR(13)
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0
@@ -489,7 +489,7 @@ STATIC FUNCTION ReadHistory(fname)
             lFirst := .F.
          ENDIF
       ENDDO
-      FCLOSE(han)
+      FClose(han)
    ENDIF
 
 RETURN nHistCurr
@@ -501,15 +501,15 @@ STATIC FUNCTION WriteHistory(fname)
    LOCAL lEmpty := .T.
 
    IF !Empty(aQueries)
-      han := FCREATE(fname)
+      han := FCreate(fname)
       IF han <> - 1
          FOR i := 1 TO Len(aQueries)
             IF !Empty(aQueries[i, 1]) .OR. !lEmpty
-               FWRITE(han, Trim(aQueries[i, 1]) + Chr(13) + Chr(10))
+               FWrite(han, Trim(aQueries[i, 1]) + Chr(13) + Chr(10))
                lEmpty := Empty(aQueries[i, 1])
             ENDIF
          NEXT
-         FCLOSE(han)
+         FClose(han)
       ENDIF
    ENDIF
 
@@ -555,7 +555,7 @@ FUNCTION FilExten(fname)
 
    LOCAL i
 
-RETURN IIF(( i := RAT('.', fname) ) = 0, "", SUBSTR(fname, i + 1))
+RETURN IIf(( i := RAT(".", fname) ) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION SaveScript()
 

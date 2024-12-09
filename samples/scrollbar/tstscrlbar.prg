@@ -16,7 +16,7 @@ FUNCTION Main()
    next
 
 
-   oMain:bScroll := { | o, msg, wParam, lParam | stdScroll(o, msg, wParam, lParam) }
+   oMain:bScroll := {|o, msg, wParam, lParam|stdScroll(o, msg, wParam, lParam)}
 
    ACTIVATE window oMain
 

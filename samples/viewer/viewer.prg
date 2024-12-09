@@ -192,7 +192,7 @@ RETURN NIL
 
 STATIC FUNCTION FileOpen(oWnd)
 
-   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    LOCAL fname
    LOCAL aCoors
 

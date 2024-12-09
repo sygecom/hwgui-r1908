@@ -33,7 +33,7 @@ STATIC FUNCTION Graph1()
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
-           AT 210, 10  SIZE 300, 300                  ;
+           AT 210, 10 SIZE 300, 300                  ;
            FONT oFont
 
    @ 50, 30 GRAPH oGraph DATA aGraph SIZE 200, 100 COLOR 65280
@@ -61,7 +61,7 @@ STATIC FUNCTION Graph2()
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
-           AT 210, 10  SIZE 300, 300                  ;
+           AT 210, 10 SIZE 300, 300                  ;
            FONT oFont
 
    @ 50, 30 GRAPH oGraph DATA aGraph SIZE 200, 200 COLOR 65280
@@ -89,7 +89,7 @@ STATIC FUNCTION Graph3()
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
-           AT 210, 10  SIZE 300, 300                  ;
+           AT 210, 10 SIZE 300, 300                  ;
            FONT oFont
 /*
    @ 50, 30 GRAPH oGraph DATA aGraph SIZE 200, 200 COLOR 65280

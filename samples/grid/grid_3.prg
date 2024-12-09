@@ -18,8 +18,13 @@
 
 #translate RGB(<nRed>, <nGreen>, <nBlue>) => ( <nRed> + ( <nGreen> * 256 ) + ( <nBlue> * 65536 ) )
 
-Static oMain, oForm, oFont, oGrid
-Static nCount := 50, conn, leof := .F.
+STATIC oMain
+STATIC oForm
+STATIC oFont
+STATIC oGrid
+STATIC nCount := 50
+STATIC conn
+STATIC leof := .F.
 
 FUNCTION Main()
 
@@ -37,7 +42,7 @@ FUNCTION Main()
 
         ACTIVATE WINDOW oMain
 
-        res := PQexec(conn, 'CLOSE cursor_1')
+        res := PQexec(conn, "CLOSE cursor_1")
         PQclear(res)
 
         res = PQexec(conn, "END")
@@ -58,23 +63,23 @@ FUNCTION Test()
 
              @ 10, 10 GRID oGrid OF oForm SIZE 680, 375;
                      ITEMCOUNT 10000 ;
-                     ON KEYDOWN {|oCtrl, key| OnKey(oCtrl, key) } ;
-                     ON POSCHANGE {|oCtrl, nRow| OnPoschange(oCtrl, nRow) } ;
-                     ON CLICK {|oCtrl| OnClick(oCtrl) } ;
-                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo(oCtrl, nRow, nCol) } ;
-                     COLOR VColor('D3D3D3');
-                     BACKCOLOR VColor('BEBEBE')
+                     ON KEYDOWN {|oCtrl, key|OnKey(oCtrl, key)} ;
+                     ON POSCHANGE {|oCtrl, nRow|OnPoschange(oCtrl, nRow)} ;
+                     ON CLICK {|oCtrl|OnClick(oCtrl)} ;
+                     ON DISPINFO {|oCtrl, nRow, nCol|OnDispInfo(oCtrl, nRow, nCol)} ;
+                     COLOR VColor("D3D3D3");
+                     BACKCOLOR VColor("BEBEBE")
 
                      /*
-                     ON LOSTFOCUS {|| hwg_MsgInfo('lost focus') } ;
-                     ON GETFOCUS {|| hwg_MsgInfo('get focus')  }
+                     ON LOSTFOCUS {||hwg_MsgInfo("lost focus")} ;
+                     ON GETFOCUS {||hwg_MsgInfo("get focus")}
                      */
 
              ADD COLUMN TO GRID oGrid HEADER "Code" WIDTH 50
              ADD COLUMN TO GRID oGrid HEADER "Date" WIDTH 80
              ADD COLUMN TO GRID oGrid HEADER "Description" WIDTH 100
 
-             @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:Close() }
+             @ 620, 395 BUTTON "Close" SIZE 75, 25 ON CLICK {||oForm:Close()}
 
         ACTIVATE DIALOG oForm
 
@@ -94,17 +99,17 @@ RETURN NIL
 
 FUNCTION OnClick(o)
 
-//    hwg_MsgInfo('click')
+//    hwg_MsgInfo("click")
 
 RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
-   LOCAL result := ''
+   LOCAL result := ""
    LOCAL i
 
     if x > Lastrec() .AND. !lEof
-        res := PQexec(conn, 'FETCH FORWARD 10 FROM cursor_1')
+        res := PQexec(conn, "FETCH FORWARD 10 FROM cursor_1")
 
         if !ISCHARACTER(res)
 
@@ -114,9 +119,9 @@ FUNCTION OnDispInfo(o, x, y)
 
             for i := 1 to PQLastrec(res)
                 Append Blank
-                Replace Code     WITH myval(PQGetvalue(res, i, 1), 'N')
-                Replace Creation WITH myval(PQGetvalue(res, i, 2), 'D')
-                Replace Descr    WITH myval(PQGetvalue(res, i, 3), 'C')
+                Replace Code     WITH myval(PQGetvalue(res, i, 1), "N")
+                Replace Creation WITH myval(PQGetvalue(res, i, 2), "D")
+                Replace Descr    WITH myval(PQGetvalue(res, i, 3), "C")
             next
         else
             lEof := .T.
@@ -143,17 +148,17 @@ RETURN result
 
 FUNCTION CriaBase()
 
-        IF File('trash.dbf')
-            FErase('trash.dbf')
+        IF File("trash.dbf")
+            FErase("trash.dbf")
         END
 
-        DBCreate("trash.dbf", {{'code', 'N', 10, 0},;
-                               {'creation', 'D',  8, 0},;
-                               {'descr', 'C', 40, 0}})
+        DBCreate("trash.dbf", {{"code", "N", 10, 0},;
+                               {"creation", "D",  8, 0},;
+                               {"descr", "C", 40, 0}})
 
         USE trash
 
-        conn := PQConnect('test', 'localhost', 'Rodrigo', 'moreno', 5432)
+        conn := PQConnect("test", "localhost", "Rodrigo", "moreno", 5432)
 
         if ISCHARACTER(conn)
             hwg_MsgInfo(conn)
@@ -174,7 +179,7 @@ FUNCTION CriaBase()
         res = PQexec(conn, "BEGIN")
         PQclear(res)
 
-        res := PQexec(conn, 'DECLARE cursor_1 NO SCROLL CURSOR WITH HOLD FOR SELECT * FROM test')
+        res := PQexec(conn, "DECLARE cursor_1 NO SCROLL CURSOR WITH HOLD FOR SELECT * FROM test")
         PQclear(res)
 
 RETURN NIL
@@ -183,20 +188,20 @@ FUNCTION MyVal(xValue, type)
 
    LOCAL result
 
-    if valtype(xValue) == 'U'
-        if type == 'N'
-            result := 0
-        elseif type == 'D'
-            result := CtoD('')
-        elseif type == 'C'
-            result := ''
-        endif
-    elseif type == 'N'
-        result := val(xvalue)
-    elseif type == 'C'
-        result := xvalue
-    elseif type == 'D'
-        result := CtoD(xvalue)
-    endif
+   IF ValType(xValue) == "U"
+      IF type == "N"
+         result := 0
+      ELSEIF type == "D"
+         result := CtoD("")
+      ELSEIF type == "C"
+         result := ""
+      ENDIF
+   ELSEIF type == "N"
+      result := val(xvalue)
+   ELSEIF type == "C"
+      result := xvalue
+   ELSEIF type == "D"
+      result := CtoD(xvalue)
+   ENDIF
 
 RETURN result

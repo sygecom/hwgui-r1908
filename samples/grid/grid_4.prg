@@ -14,12 +14,15 @@
 #include "guilib.ch"
 #include "common.ch"
 
-Static oMain, oForm, oFont, oGrid
+STATIC oMain
+STATIC oForm
+STATIC oFont
+STATIC oGrid
 
 FUNCTION Main()
 
-        IF File('temp.dbf')
-            FErase('temp.dbf')
+        IF File("temp.dbf")
+            FErase("temp.dbf")
         END
                     
         DBCreate("temp.dbf", {{"LINE", "C", 300, 0}})
@@ -52,12 +55,12 @@ FUNCTION Test()
 
              @ 10, 10 GRID oGrid OF oForm SIZE 680, 375;
                      ITEMCOUNT Lastrec() ;
-                     ON DISPINFO {|oCtrl, nRow, nCol| OnDispInfo(oCtrl, nRow, nCol) } ;
+                     ON DISPINFO {|oCtrl, nRow, nCol|OnDispInfo(oCtrl, nRow, nCol)} ;
                      NOGRIDLINES
 
              ADD COLUMN TO GRID oGrid HEADER "" WIDTH  800
                                                               
-             @ 620, 395 BUTTON 'Close' SIZE 75, 25 ON CLICK {|| oForm:Close() }
+             @ 620, 395 BUTTON "Close" SIZE 75, 25 ON CLICK {||oForm:Close()}
              
         ACTIVATE DIALOG oForm
 
@@ -65,7 +68,7 @@ RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
 
-   LOCAL result := ''
+   LOCAL result := ""
 
     DBGoto(x)
 

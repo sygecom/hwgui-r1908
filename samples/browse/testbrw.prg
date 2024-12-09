@@ -26,7 +26,7 @@ FUNCTION DlgGet()
    LOCAL aSample2 := {{.T., "Line 1", 10}, {.T., "Line 2", 22}, {.F., "Line 3", 40}}
 
    INIT DIALOG oModDlg TITLE "About"          ;
-   AT 190, 10  SIZE 400, 240
+   AT 190, 10 SIZE 400, 240
 
    @ 20, 30 BROWSE oBrw1 ARRAY SIZE 180, 110 ;
         STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL
@@ -34,7 +34,7 @@ FUNCTION DlgGet()
    @ 210, 30 BROWSE oBrw2 ARRAY SIZE 180, 110 ;
         STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL
 
-   @ 80, 180 OWNERBUTTON ON CLICK {|| EndDialog()} ;
+   @ 80, 180 OWNERBUTTON ON CLICK {||EndDialog()} ;
        SIZE 180, 35 FLAT                                  ;
        TEXT "Close" COLOR Vcolor("0000FF")
 
@@ -43,7 +43,7 @@ FUNCTION DlgGet()
    CreateArList(oBrw2, aSample2)
    oBmp := HBitmap():AddResource(OBM_CHECK)
    oBrw2:aColumns[1]:aBitmaps := { ;
-      { {|l|l}, oBmp } ;
+      {{|l|l}, oBmp} ;
    }
    oBrw2:aColumns[2]:length := 6
    oBrw2:aColumns[3]:length := 4

@@ -14,20 +14,20 @@ FUNCTION pesquisaglobal()
    LOCAL oIcon := HIcon():AddRESOURCE("SEARCHICON")
    LOCAL oDir := directory(DiskName() + ':\*.', "D", .T.) // pegando diretorio
 
-   PRIVATE rd_pesq := ''
+   PRIVATE rd_pesq := ""
    PRIVATE diretorio := {}
-   PRIVATE resultado := ''
+   PRIVATE resultado := ""
    PRIVATE get01
 
-   for f = 1 to len(oDir) // filtrando diretorios
+   for f = 1 to Len(oDir) // filtrando diretorios
        if odir[f, 1]#'.' .AND. odir[f, 1]#'..'
           aadd(diretorio, DiskName() + ':\' + oDir[f, 1] + '\')
        endif
    next f
    
    asort(diretorio)
-   for g:= 1 to len(diretorio) // pegando diretorio atual
-          if upper(diretorio[g]) =DiskName()+':\'+upper(curdir()+'\')
+   for g:= 1 to Len(diretorio) // pegando diretorio atual
+          if upper(diretorio[g]) =DiskName()+':\'+upper(CurDir()+'\')
              atu:=g
           endif
    next g
@@ -57,19 +57,19 @@ FUNCTION pesq(rd_dir, rd_text)
    LOCAL s_lEof := .F.
 
    PRIVATE arq_contem := {}
-   PRIVATE result := ''
+   PRIVATE result := ""
 
-   for f:= 1 to len(arquivos) // filtrando arquivos
+   for f:= 1 to Len(arquivos) // filtrando arquivos
        if arquivos[f, 1]#'.' .AND. arquivos[f, 1]#'..'
           aadd(nom_arq, arquivos[f, 1])
        endif
    next f
    
    asort(nom_arq)
-   resultado:=''
+   resultado := ""
    get01:refresh()
 
-   for g := 1 to len(nom_arq)
+   for g := 1 to Len(nom_arq)
      arq:=FT_FUSE(rd_dir+nom_arq[g])
      //
      resultado:=resultado+nom_arq[g]+chr(13)+chr(10)
@@ -77,7 +77,7 @@ FUNCTION pesq(rd_dir, rd_text)
      //
      lin:=0
      while !FT_FEOF()
-        linha :=upper(Substr(FT_FReadLn(@s_lEof), 1))
+        linha :=upper(SubStr(FT_FReadLn(@s_lEof), 1))
         //
         texto:=upper(rd_text)
         //

@@ -3,7 +3,7 @@
 */
 #include "hwgui.ch"
 
-STATIC nLastRecordFilter  := 0
+STATIC nLastRecordFilter := 0
 STATIC nFirstRecordFilter := 0
 
 FUNCTION Main()
@@ -29,19 +29,19 @@ FUNCTION Main()
   @ 010, 061 BROWSE DATABASE brwMesas ;
             SIZE 353, 283 ;
             STYLE WS_VSCROLL + WS_HSCROLL ;
-  	        ON POSCHANGE {|| EVAL(brwItens:bFirst), brwItens:Refresh()} ;
-  	        FOR { || EMPTY(fechado) }
+  	        ON POSCHANGE {||EVAL(brwItens:bFirst), brwItens:Refresh()} ;
+  	        FOR {||Empty(fechado)}
 
   brwMesas:bColorSel := 16711680 //Cor da linha do browse
 
-  ADD COLUMN {|| OrdKeyNo()} TO brwMesas ;
+  ADD COLUMN {||OrdKeyNo()} TO brwMesas ;
     HEADER "OrdKeyNo()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";
     JUSTIFY HEAD DT_LEFT ;
     JUSTIFY LINE DT_RIGHT
 
-  ADD COLUMN {|| RECNO()} TO brwMesas ;
+  ADD COLUMN {||RECNO()} TO brwMesas ;
     HEADER "Recno()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";
@@ -74,20 +74,20 @@ FUNCTION Main()
   @ 375, 061 BROWSE DATABASE brwItens ;
     SIZE 415, 283 ;
   	STYLE WS_VSCROLL + WS_HSCROLL ;
-  	FIRST {|| DBSEEK(mesas->mesa)} ;
-  	WHILE {|| mesa == mesas->mesa} ;
-  	FOR {|| EMPTY(fechado)}
+  	FIRST {||DBSEEK(mesas->mesa)} ;
+  	WHILE {||mesa == mesas->mesa} ;
+  	FOR {||Empty(fechado)}
 
   brwItens:bColorSel := 16711680
 
-  ADD COLUMN {|| OrdKeyNo()} TO brwItens ;
+  ADD COLUMN {||OrdKeyNo()} TO brwItens ;
     HEADER "OrdKeyNo()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";
     JUSTIFY HEAD DT_LEFT ;
     JUSTIFY LINE DT_RIGHT
 
-  ADD COLUMN {|| RECNO()} TO brwItens ;
+  ADD COLUMN {||RECNO()} TO brwItens ;
     HEADER "Recno()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";

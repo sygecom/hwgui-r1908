@@ -26,7 +26,7 @@ FUNCTION Teste()
    LOCAL oItems := {"Item01", "Item02", "Item03", "Item04"}
 
    INIT DIALOG oModDlg TITLE "Test"  ;
-   AT 0, 0  SIZE 450, 350   ;
+   AT 0, 0 SIZE 450, 350   ;
    FONT oFont
 
    @ 10, 40 LISTBOX oList ITEMS oItems ;
@@ -36,7 +36,7 @@ FUNCTION Teste()
              ON INIT {||hwg_MsgInfo("Teste")} ;
              TOOLTIP "Test ListBox"
 
-   @  10, 280 BUTTON "Ok" ID IDOK  SIZE 50, 32
+   @  10, 280 BUTTON "Ok" ID IDOK SIZE 50, 32
     ACTIVATE DIALOG oModDlg
     oFont:Release()
 

@@ -22,8 +22,10 @@ REQUEST DBFFPT
 REQUEST ORDKEYNO
 REQUEST ORDKEYCOUNT
 
-Static aFieldTypes := { "C", "N", "D", "L" }
-Static dbv_cLocate, dbv_nRec, dbv_cSeek
+STATIC aFieldTypes := {"C", "N", "D", "L"}
+STATIC dbv_cLocate
+STATIC dbv_nRec
+STATIC dbv_cSeek
 
 FUNCTION Main()
 
@@ -117,7 +119,7 @@ RETURN NIL
 
 STATIC FUNCTION FileOpen()
 
-   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    LOCAL fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 
    MEMVAR oBrw
@@ -141,7 +143,7 @@ STATIC FUNCTION FileOpen()
       oBrw:InitBrw(2)
       oBrw:active := .F.
       CreateList(oBrw, .T.)
-      oBrw:InsColumn(HColumn():New("*", {|| Iif(Deleted(),'*',' ') }, "C", 1, 0), 1)
+      oBrw:InsColumn(HColumn():New("*", {||IIf(Deleted(), "*", " ")}, "C", 1, 0), 1)
       oBrw:active := .T.
       oBrw:Refresh()
       oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
@@ -203,7 +205,7 @@ STATIC FUNCTION SelectIndex()
    ENDIF
 
    i := 1
-   DO WHILE !EMPTY(indname := ORDNAME(i))
+   DO WHILE !Empty(indname := ORDNAME(i))
       AADD(aIndex, { indname, ORDKEY(i), ORDBAGNAME(i) })
       iLen := Max(iLen, Len(OrdKey(i)))
       i ++
@@ -279,7 +281,7 @@ STATIC FUNCTION NewIndex()
    @ 10, 135 SAY "Condition:" SIZE 100, 22
    @ 10, 157 GET cCond SIZE 280, 24
 
-   @  30, 210  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T., EndDialog()}
+   @  30, 210  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult := .T., EndDialog()}
    @ 170, 210 BUTTON "Cancel" SIZE 100, 32 ON CLICK {||EndDialog()}
 
    oDlg:Activate()
@@ -289,18 +291,18 @@ STATIC FUNCTION NewIndex()
             !Empty(cExpr)
          oMsg = DlgWait("Indexing")
          IF lMulti
-            IF EMPTY(cCond)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), Iif(lUniq, .T., Nil))
+            IF Empty(cCond)
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
             ELSE
                ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), Iif(lUniq, .T., Nil))
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
             ENDIF
          ELSE
-            IF EMPTY(cCond)
-               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), Iif(lUniq, .T., Nil))
+            IF Empty(cCond)
+               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
             ELSE
                ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), Iif(lUniq, .T., Nil))
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
             ENDIF
          ENDIF
          oMsg:Close()
@@ -313,7 +315,7 @@ RETURN NIL
 
 STATIC FUNCTION OpenIndex()
 
-   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    LOCAL fname := SelectFile("index files( *.cdx )", "*.cdx", mypath)
 
    MEMVAR oBrw
@@ -457,7 +459,7 @@ STATIC FUNCTION ModiStru(lNew)
    @ 200, 270 BUTTON "Change" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 3)}
    @ 290, 270 BUTTON "Remove" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 4)}
 
-   @ 280, 10  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T., EndDialog()}
+   @ 280, 10  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult := .T., EndDialog()}
    @ 280, 50 BUTTON "Cancel" SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oDlg
@@ -501,9 +503,9 @@ STATIC FUNCTION ModiStru(lNew)
                   IF af[i, 3] >= af0[af[i, 5], 3]
                      FieldPut(i, xValue)
                   ELSE
-                     IF af[i, 2] =="C"
+                     IF af[i, 2] == "C"
                         FieldPut(i, Left(xValue, af[i, 3]))
-                     ELSEIF af[i, 2] =="N"
+                     ELSEIF af[i, 2] == "N"
                         FieldPut(i, 0)
                         lOverFlow := .T.
                      ENDIF
@@ -550,7 +552,7 @@ STATIC FUNCTION brw_onPosChg(oBrowse, oGet1, oGet2, oGet3, oGet4)
    oGet1:SetGet(oBrowse:aArray[oBrowse:nCurrent, 1])
    oGet1:Refresh()
 
-   oGet2:SetItem(Ascan(aFieldTypes, oBrowse:aArray[oBrowse:nCurrent, 2]))
+   oGet2:SetItem(AScan(aFieldTypes, oBrowse:aArray[oBrowse:nCurrent, 2]))
 
    oGet3:SetGet(Ltrim(Str(oBrowse:aArray[oBrowse:nCurrent, 3])))
    oGet3:Refresh()
@@ -658,14 +660,14 @@ STATIC FUNCTION dbv_Locate()
          RETURN NIL
       ENDIF
 
-      bOldError := ERRORBLOCK({|e|MacroError(e)})
+      bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE
-         cType := Valtype(&cLocate)
+         cType := ValType(&cLocate)
       RECOVER
-         ERRORBLOCK(bOldError)
+         ErrorBlock(bOldError)
          LOOP
       END SEQUENCE
-      ERRORBLOCK(bOldError)
+      ErrorBlock(bOldError)
 
       IF cType != "L"
          hwg_MsgStop("Wrong expression")
@@ -719,7 +721,7 @@ STATIC FUNCTION GetData(cRes, cTitle, cText)
         FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER
 
    @ 20, 10 SAY cText SIZE 260, 22
-   @ 20, 35 GET cres  SIZE 260, 26
+   @ 20, 35 GET cres SIZE 260, 26
 
    @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32

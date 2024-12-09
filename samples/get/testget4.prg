@@ -39,9 +39,9 @@ FUNCTION IndirectDialog()
 
    INIT DIALOG iDialog CLIPPER NOEXIT TITLE "Intermediate Dialog"  ;
      STYLE WS_VISIBLE + WS_POPUP + WS_CAPTION + WS_SYSMENU  ;
-     AT 210, 10  SIZE 300, 300
+     AT 210, 10 SIZE 300, 300
 
-   @ 20, 35 BUTTON "Open form" ON CLICK {|| TestForm()  }
+   @ 20, 35 BUTTON "Open form" ON CLICK {||TestForm()}
 
    ACTIVATE DIALOG iDialog
 
@@ -67,15 +67,15 @@ FUNCTION TestForm()
    bInit := {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE cTitle           ;
-     STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU  ;
-     AT 210, 10  SIZE 300, 300                    ;
-     FONT oFont                                 ;
-     ON EXIT {||hwg_MsgYesNo("Really exit ?")}
+      STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU  ;
+      AT 210, 10 SIZE 300, 300                    ;
+      FONT oFont                                 ;
+      ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20, 35 GET ocodigo VAR wcodigo PICTURE "@!" SIZE 100, 22 ;
-     NOBORDER STYLE ES_AUTOHSCROLL ;
-     WHEN {|| hwg_MsgInfo("WHEN codigo"), .T.  } ;
-     VALID {|| hwg_MsgInfo("VALID codigo"), .F.  }
+      NOBORDER STYLE ES_AUTOHSCROLL ;
+      WHEN {||hwg_MsgInfo("WHEN codigo"), .T.} ;
+      VALID {||hwg_MsgInfo("VALID codigo"), .F.}
 
    ACTIVATE DIALOG oModDlg
 

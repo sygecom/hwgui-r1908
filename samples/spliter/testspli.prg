@@ -25,12 +25,12 @@ FUNCTION Main()
    oItem:AddNode("Third-1")
    oTree:AddNode("Forth")
 
-   @ 163, 10 EDITBOX oEdit1 CAPTION "Hello, World!"  SIZE 200, 100
+   @ 163, 10 EDITBOX oEdit1 CAPTION "Hello, World!" SIZE 200, 100
 
    @ 160, 10 SPLITTER oSplitV SIZE 3, 100 DIVIDE {oTree} FROM {oEdit1}
    oSplitV:hCursor := LoadCursor("VSPLIT")
 
-   @ 20, 113 EDITBOX oEdit2 CAPTION "Example"  SIZE 344, 130
+   @ 20, 113 EDITBOX oEdit2 CAPTION "Example" SIZE 344, 130
 
    @ 20, 110 SPLITTER oSplitH SIZE 344, 3 DIVIDE {oTree, oEdit1, oSplitV} FROM {oEdit2}
    oSplitH:hCursor := LoadCursor("HSPLIT")

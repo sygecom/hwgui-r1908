@@ -19,7 +19,7 @@ FUNCTION Main()
 
    INIT WINDOW oWinMain MAIN  ;
        TITLE "Teste" AT 0, 0 SIZE 600, 400;
-       FONT HFont():Add('Arial', 0, -13, 400, , ,) ;
+       FONT HFont():Add("Arial", 0, -13, 400, , ,) ;
        STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 
    @ 10, 10 BROWSE oBrw ARRAY SIZE 180, 325 ;

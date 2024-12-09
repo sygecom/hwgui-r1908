@@ -9,7 +9,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-static aChilds := {}
+STATIC aChilds := {}
 
 FUNCTION Main()
 
@@ -29,7 +29,7 @@ RETURN NIL
 FUNCTION CreateChild(lClip)
 
    LOCAL oChild
-   LOCAL cTitle := "Child Window #" + Str(len(aChilds) + 1, 2, 0)
+   LOCAL cTitle := "Child Window #" + Str(Len(aChilds) + 1, 2, 0)
    LOCAL oIcon := HIcon():AddFile("..\image\PIM.ICO")
    LOCAL oBmp := HBitMap():AddFile("..\image\logo.bmp")
    LOCAL cMenu := ""
@@ -39,11 +39,11 @@ FUNCTION CreateChild(lClip)
 
    /*
    oChild := HWindow():New(WND_CHILD, oIcon, Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
-                           NIL, bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), oBmp)
+                           NIL, bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + AllTrim(Str(Len(aChilds))), oBmp)
    */
 
    oChild := HChildWindow():New(oIcon, Vcolor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;
-                          bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + Alltrim(Str(len(aChilds))), NIL)
+                          bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + AllTrim(Str(Len(aChilds))), NIL)
 
    // Test if we could create the window object
    If ISOBJECT(oChild)

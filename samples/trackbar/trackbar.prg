@@ -5,15 +5,15 @@
 
 //--------------------------------------------------------------------------//
 
-Static oWnd
-Static oDlg1
-Static oDlg2
-Static oTB
-Static oTB1
-Static oTB2
-Static oSay
-Static oSayDlg1
-Static oSayDlg2
+STATIC oWnd
+STATIC oDlg1
+STATIC oDlg2
+STATIC oTB
+STATIC oTB1
+STATIC oTB2
+STATIC oSay
+STATIC oSayDlg1
+STATIC oSayDlg2
 
 //--------------------------------------------------------------------------//
 

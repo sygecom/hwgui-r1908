@@ -27,9 +27,9 @@ FUNCTION Main()
       IF oChar == Nil .OR. oChar:hObj == 0
          cText := "No default character !"
       ELSE
-         @ 280, 20 BUTTON "Speak!"  SIZE 100, 30  ON CLICK {||SpeakIt(oEdit)}
+         @ 280, 20 BUTTON "Speak!" SIZE 100, 30 ON CLICK {||SpeakIt(oEdit)}
       ENDIF
-      @ 260, 90 BUTTON "Set Default"  SIZE 120, 30  ON CLICK {||oAgent:showDefaultCharacterProperties()}
+      @ 260, 90 BUTTON "Set Default" SIZE 120, 30 ON CLICK {||oAgent:showDefaultCharacterProperties()}
    ENDIF
 
    @ 20, 20 EDITBOX oEdit CAPTION "Hello, world !" SIZE 260, 30 STYLE ES_AUTOHSCROLL

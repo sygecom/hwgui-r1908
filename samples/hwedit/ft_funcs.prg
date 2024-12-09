@@ -69,10 +69,10 @@ DECLARE  FREADline(nH AS NUMERIC, @cB AS STRING, nMaxLine AS NUMERIC)
 //DECLARE  HBMAKE_FILEBASE() AS OBJECT
 DECLARE  HBMAKE_FILEBASE ;
     New(cname AS STRING) AS CLASS HBMAKE_FILEBASE;
-    FOPEN()   AS OBJECT;
+    FOpen()   AS OBJECT;
     closefile() AS OBJECT;
     fskip(OPTIONAL n AS NUMERIC)  AS OBJECT;
-    FWRITE(c AS STRING) AS OBJECT;
+    FWrite(c AS STRING) AS OBJECT;
     retrieve() AS STRING;
     fgoTop()      AS OBJECT;
     fgoBottom()     AS OBJECT;
@@ -88,7 +88,8 @@ DECLARE  HBMAKE_FILEBASE ;
     OPEN()                           AS OBJECT;
     append(OPTIONAL cline AS STRING) AS OBJECT
 
-STATIC TheHandle As Object
+STATIC TheHandle AS OBJECT
+
 /****
 *   FT_FUSE(cFile, nMode)   ---> nHandle
 *   Open a File
@@ -159,11 +160,11 @@ RETURN cLine
 *+
 FUNCTION FT_FReadLn()
 
-   LOCAL cBuffer AS STRING := ''
+   LOCAL cBuffer AS STRING := ""
 
    cBuffer := FReadLn(@cBuffer)
 
-   cBuffer := STRTRAN(cBuffer, CHR(13), '')
+   cBuffer := STRTRAN(cBuffer, CHR(13), "")
 
 RETURN cBuffer
 
@@ -223,8 +224,8 @@ FUNCTION StrPos(cBuffer AS STRING)
    LOCAL x AS NUMERIC
    LOCAL cChar AS STRING
 
-   FOR x := 1 TO LEN(cBuffer)
-      cChar := SUBSTR(cBuffer, x, 1)
+   FOR x := 1 TO Len(cBuffer)
+      cChar := SubStr(cBuffer, x, 1)
       IF cChar >= CHR(64) .AND. cChar <= CHR(90) .OR. cChar >= CHR(97) ;
                  .AND. cChar <= CHR(122) .OR. cChar >= CHR(48) .AND. cChar <= CHR(57) ;
                  .OR. cChar == CHR(60) .OR. cchar == CHR(ASC("-")) ;
@@ -260,14 +261,14 @@ FUNCTION GetNumberofTableItems(cBuffer)
    LOCAL cItem AS STRING
    LOCAL nItem AS NUMERIC := 0
 
-   cBuffer := ALLTRIM(cBuffer)
+   cBuffer := AllTrim(cBuffer)
 
    DO WHILE AT(SPACE(3), cBuffer) > 0
-      cItem := SUBSTR(cBuffer, 1, AT(SPACE(3), cBuffer) - 1)
+      cItem := SubStr(cBuffer, 1, AT(SPACE(3), cBuffer) - 1)
       IF AT(SPACE(3), cBuffer) == 0
          nItem ++
       ELSE
-         cBuffer := ALLTRIM(STRTRAN(cBuffer, cItem, ''))
+         cBuffer := AllTrim(STRTRAN(cBuffer, cItem, ""))
          nItem ++
       ENDIF
    ENDDO
@@ -295,14 +296,14 @@ FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
    LOCAL lReturn AS LOGICAL
 
    cLine    := SPACE(nMaxLine)
-   cB       := ''
-   nSavePos := FSEEK(nH, 0, FS_RELATIVE)
-   nNumRead := FREAD(nH, @cLine, nMaxLine)
-   IF (nEol := AT(EOL, SUBSTR(cLine, 1, nNumRead))) == 0
+   cB       := ""
+   nSavePos := FSeek(nH, 0, FS_RELATIVE)
+   nNumRead := FRead(nH, @cLine, nMaxLine)
+   IF (nEol := AT(EOL, SubStr(cLine, 1, nNumRead))) == 0
       cB := cLine
    ELSE
-      cB := SUBSTR(cLine, 1, nEol - 1)
-      FSEEK(nH, nSavePos + nEol + 1, FS_SET)
+      cB := SubStr(cLine, 1, nEol - 1)
+      FSeek(nH, nSavePos + nEol + 1, FS_SET)
    ENDIF
     lReturn := (nNumRead != 0)
 

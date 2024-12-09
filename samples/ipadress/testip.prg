@@ -34,7 +34,7 @@ FUNCTION DlgGet()
    LOCAL aIP := {10, 1, 2, 3}
 
    INIT DIALOG oModDlg TITLE "Get a value"  ;
-   AT 210, 10  SIZE 300, 300                  ;
+   AT 210, 10 SIZE 300, 300                  ;
    FONT oFont
 
    @ 20, 10 SAY "Input something:" SIZE 260, 22
@@ -60,18 +60,18 @@ FUNCTION DlgGet()
    @ 20, 170 GET UPDOWN upd RANGE 0, 80 SIZE 50, 30
    @ 160, 170 GET DATEPICKER d1 SIZE 80, 20
 
-   @ 20, 200 GET IPADDRESS ip1 VAR aIP SIZE 140, 26 ON GETFOCUS { |value, o| NIL  } ON LOSTFOCUS { |value, o| NIL  }
+   @ 20, 200 GET IPADDRESS ip1 VAR aIP SIZE 140, 26 ON GETFOCUS {|value, o|NIL} ON LOSTFOCUS {|value, o|NIL}
 
-   @ 20, 240 BUTTON "Ok" ID IDOK  SIZE 100, 32
-   @ 180, 240 BUTTON "Cancel" ID IDCANCEL  SIZE 100, 32
+   @ 20, 240 BUTTON "Ok" ID IDOK SIZE 100, 32
+   @ 180, 240 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
    IF oModDlg:lResult
       hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + Iif(c1, "On", "Off") + chr(10) + chr(13) + ;
-               "Check2 - " + Iif(c2, "On", "Off") + chr(10) + chr(13) + ;
+               "Check1 - " + IIf(c1, "On", "Off") + chr(10) + chr(13) + ;
+               "Check2 - " + IIf(c2, "On", "Off") + chr(10) + chr(13) + ;
                "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
                "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
                "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;

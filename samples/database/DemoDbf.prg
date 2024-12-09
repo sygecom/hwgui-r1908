@@ -23,7 +23,7 @@ FUNCTION Main()
 
    PRIVATE Form_Main
 
-   PUBLIC oDir := "\" + Curdir() + "\"
+   PUBLIC oDir := "\" + CurDir() + "\"
 
    SET DELETE ON
    SET DATE BRIT
@@ -92,8 +92,7 @@ FUNCTION Cadastro()
 
    CreateGets()
 
-
-    @ 2, 3 OWNERBUTTON oBotNew OF Tel_Ferramentas  ON CLICK {|| CreateVariable(), CloseBotons(), Gt_Cod:SetFocus()  } ;
+   @ 2, 3 OWNERBUTTON oBotNew OF Tel_Ferramentas ON CLICK {||CreateVariable(), CloseBotons(), Gt_Cod:SetFocus()} ;
        SIZE 44, 38 FLAT ;
        TEXT "New"
 
@@ -105,23 +104,23 @@ FUNCTION Cadastro()
        SIZE 44, 38 FLAT ;
        TEXT "Save"
 
-   @ 132, 3 OWNERBUTTON oBotRet OF Tel_Ferramentas  ON CLICK {||SkipTab(1)} ;
+   @ 132, 3 OWNERBUTTON oBotRet OF Tel_Ferramentas ON CLICK {||SkipTab(1)} ;
        SIZE 44, 38 FLAT ;
        TEXT "<--"
 
-   @ 175, 3 OWNERBUTTON oBotNext OF Tel_Ferramentas  ON CLICK {||SkipTab(2)} ;
+   @ 175, 3 OWNERBUTTON oBotNext OF Tel_Ferramentas ON CLICK {||SkipTab(2)} ;
        SIZE 44, 38 FLAT ;
        TEXT "-->"
 
-   @ 218, 3 OWNERBUTTON oBotTop OF Tel_Ferramentas  ON CLICK {||SkipTab(3)} ;
+   @ 218, 3 OWNERBUTTON oBotTop OF Tel_Ferramentas ON CLICK {||SkipTab(3)} ;
        SIZE 44, 38 FLAT ;
        TEXT "<-|"
 
-   @ 261, 3 OWNERBUTTON oBotBott OF Tel_Ferramentas  ON CLICK {||SkipTab(4)} ;
+   @ 261, 3 OWNERBUTTON oBotBott OF Tel_Ferramentas ON CLICK {||SkipTab(4)} ;
        SIZE 44, 38 FLAT ;
        TEXT "|->"
 
-   @ 304, 3 OWNERBUTTON oBotprint OF Tel_Ferramentas  ON CLICK {||hwg_MsgInfo("In development")} ;
+   @ 304, 3 OWNERBUTTON oBotprint OF Tel_Ferramentas ON CLICK {||hwg_MsgInfo("In development")} ;
        SIZE 44, 38 FLAT ;
        TEXT "Print"
 
@@ -129,10 +128,9 @@ FUNCTION Cadastro()
        SIZE 44, 38 FLAT ;
        TEXT "Delete"
 
-   @ 390, 3 OWNERBUTTON oBotClose OF Tel_Ferramentas  ON CLICK {||EndDialog()} ;
+   @ 390, 3 OWNERBUTTON oBotClose OF Tel_Ferramentas ON CLICK {||EndDialog()} ;
        SIZE 44, 38 FLAT ;
        TEXT "Close"
-
 
    Tel_Ferramentas:Activate()
 
@@ -141,32 +139,34 @@ RETURN NIL
 *---------------------------------------------------------------------------------------
 FUNCTION OpenBotons()
 *---------------------------------------------------------------------------------------
-oBotNew:Enable()
-oBotEdit:Enable()
-oBotRet:Enable()
-oBotNext:Enable()
-oBotSave:Disable()
-oBottop:Enable()
-oBotBott:Enable()
-oBotDelete:Enable()
-oBotClose:Enable()
-oBotPrint:Enable()
+
+   oBotNew:Enable()
+   oBotEdit:Enable()
+   oBotRet:Enable()
+   oBotNext:Enable()
+   oBotSave:Disable()
+   oBottop:Enable()
+   oBotBott:Enable()
+   oBotDelete:Enable()
+   oBotClose:Enable()
+   oBotPrint:Enable()
 
 RETURN NIL
 
 *---------------------------------------------------------------------------------------
 FUNCTION CloseBotons()
 *---------------------------------------------------------------------------------------
-oBotNew:Disable()
-oBotEdit:Disable()
-oBotRet:Disable()
-oBotNext:Disable()
-oBotSave:Enable()
-oBottop:Disable()
-oBotBott:Disable()
-oBotDelete:Disable()
-oBotClose:Enable()
-oBotPrint:Disable()
+
+   oBotNew:Disable()
+   oBotEdit:Disable()
+   oBotRet:Disable()
+   oBotNext:Disable()
+   oBotSave:Enable()
+   oBottop:Disable()
+   oBotBott:Disable()
+   oBotDelete:Disable()
+   oBotClose:Enable()
+   oBotPrint:Disable()
 
 RETURN NIL
 
@@ -174,20 +174,20 @@ RETURN NIL
 FUNCTION CreateGets()
 *---------------------------------------------------------------------------------------
 
-@ 2, 60 Say "Cod" SIZE 40, 20
-@ 65, 60 Get Gt_Cod VAR oCod PICTURE "999" STYLE WS_DISABLED SIZE 100, 20
+   @ 2, 60 Say "Cod" SIZE 40, 20
+   @ 65, 60 Get Gt_Cod VAR oCod PICTURE "999" STYLE WS_DISABLED SIZE 100, 20
 
-@ 2, 85 Say "Name" SIZE 50, 20
-@ 65, 85 Get Gt_Name VAR oName PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
+   @ 2, 85 Say "Name" SIZE 50, 20
+   @ 65, 85 Get Gt_Name VAR oName PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
 
-@ 2, 110 Say "Adress" SIZE 50, 20
-@ 65, 110 Get Gt_Adress VAR oAdress  PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
+   @ 2, 110 Say "Adress" SIZE 50, 20
+   @ 65, 110 Get Gt_Adress VAR oAdress PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
 
-@ 2, 135 Say "Fone" SIZE 50, 20
-@ 65, 135 Get Gt_Fone VAR oFone PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
+   @ 2, 135 Say "Fone" SIZE 50, 20
+   @ 65, 135 Get Gt_Fone VAR oFone PICTURE REPLICATE("X", 50) STYLE WS_DISABLED SIZE 310, 20
 
-@ 2, 160 Say "e_Mail" SIZE 50, 20
-@ 65, 160 Get Gt_e_Mail VAR oe_Mail PICTURE REPLICATE("X", 30) STYLE WS_DISABLED SIZE 190, 20
+   @ 2, 160 Say "e_Mail" SIZE 50, 20
+   @ 65, 160 Get Gt_e_Mail VAR oe_Mail PICTURE REPLICATE("X", 30) STYLE WS_DISABLED SIZE 190, 20
 
 RETURN NIL
 

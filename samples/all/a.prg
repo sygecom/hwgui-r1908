@@ -14,9 +14,12 @@
 
 FUNCTION Main()
 
-Private oMainWindow, oPanel
-Private oFont := Nil, cImageDir := "..\image\"
-Private nColor, oBmp2
+   PRIVATE oMainWindow
+   PRIVATE oPanel
+   PRIVATE oFont := NIL
+   PRIVATE cImageDir := "..\image\"
+   PRIVATE nColor
+   PRIVATE oBmp2
 
    // hb_SetCodepage("RU1251")
 
@@ -37,7 +40,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=Hwg_ChooseColor(nColor, .F.), ;
-                     hwg_MsgInfo(Iif(nColor != Nil, str(nColor), "--"), "Color value"))
+                     hwg_MsgInfo(IIf(nColor != Nil, str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION EndWindow()
@@ -55,7 +58,7 @@ Private nColor, oBmp2
          MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()
          MENUITEM "&Windows print" ;
-               ACTION Iif(OpenReport("a.rpt", "Simple"), PrintReport(,, .T.), .F.)
+               ACTION IIf(OpenReport("a.rpt", "Simple"), PrintReport(,, .T.), .F.)
          MENUITEM "&Print Preview" ACTION PrnTest()
          MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
          MENUITEM "&Command ProgressBar" ACTION TestProgres()
@@ -118,9 +121,9 @@ FUNCTION CreateChildWindow()
         PICTURE "XXXXXXXXXXXXXXX"       ;
         SIZE 260, 25
 
-   @ 20, 80 GET e2  SIZE 260, 25
+   @ 20, 80 GET e2 SIZE 260, 25
 
-   @ 20, 105 GET e3  SIZE 260, 25
+   @ 20, 105 GET e3 SIZE 260, 25
 
    @ 20, 130 GET e4                      ;
         PICTURE "@R 99.999.999/9999-99" ;
@@ -158,7 +161,7 @@ FUNCTION MdiChildFromPrg(o)
    LOCAL oCmd3
 
    INIT WINDOW oChildWnd MDICHILD TITLE "Child";
-   AT 210, 10  SIZE 350, 350                    ;
+   AT 210, 10 SIZE 350, 350                    ;
    FONT oFont                                 ;
    STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW        ;
    ON EXIT {||hwg_MsgYesNo("Really exit ?")}
@@ -171,9 +174,9 @@ FUNCTION MdiChildFromPrg(o)
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif(nColor==Nil, Vcolor("0000FF"), nColor)
+        SIZE 90, 20 COLOR IIf(nColor == Nil, Vcolor("0000FF"), nColor)
 
-   @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
+   @ 160, 70 GROUPBOX "RadioGroup" SIZE 130, 75
 
    RADIOGROUP
    @ 180, 90 RADIOBUTTON "Radio 1"  ;
@@ -216,13 +219,13 @@ FUNCTION NoExit()
 
    LOCAL oDlg
    LOCAL oGet
-   LOCAL vGet:="Dialog if no close in ENTER or EXIT"
+   LOCAL vGet := "Dialog if no close in ENTER or EXIT"
 
    INIT DIALOG oDlg TITLE "No Exit Enter and Esc"     ;
-   AT 190, 10  SIZE 360, 240   NOEXIT NOEXITESC
+   AT 190, 10 SIZE 360, 240   NOEXIT NOEXITESC
    @ 10, 10 GET oGet VAR vGET SIZE 200, 32
    @ 20, 190  BUTTON "Ok" SIZE 100, 32;
-   ON CLICK {|| oDlg:Close()} 
+   ON CLICK {||oDlg:Close()}
    oDlg:Activate()
 
 RETURN NIL
@@ -242,7 +245,7 @@ FUNCTION OpenAbout()
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    INIT DIALOG oModDlg TITLE "About"     ;
-   AT 190, 10  SIZE 360, 240               ;
+   AT 190, 10 SIZE 360, 240               ;
    ICON oIcon                            ;
    ON EXIT {||oBmp2 := HBitmap():AddWindow(oBrw), .T.} ;
    FONT oFontDlg
@@ -281,7 +284,7 @@ FUNCTION OpenAbout()
    @ 160, 30 BROWSE oBrw ARRAY SIZE 180, 110 ;
         STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL
 
-   @ 80, 180 OWNERBUTTON ON CLICK {|| EndDialog()}        ;
+   @ 80, 180 OWNERBUTTON ON CLICK {||EndDialog()}        ;
        SIZE 180, 35 FLAT                                  ;
        TEXT "Close" COLOR Vcolor("0000FF") FONT oFontBtn ;
        BITMAP cImageDir+"door.bmp" COORDINATES 40, 10, 0, 0
@@ -292,7 +295,7 @@ FUNCTION OpenAbout()
 
    oBmp := HBitmap():AddStandard(OBM_LFARROWI)
    oBrw:aColumns[1]:aBitmaps := { ;
-      { {|l|l}, oBmp } ;
+      {{|l|l}, oBmp} ;
    }
    oBrw:aColumns[2]:length := 6
    oBrw:aColumns[3]:length := 4
@@ -310,7 +313,7 @@ STATIC FUNCTION About2()
    ENDIF
 
    INIT DIALOG oModDlg TITLE "About2"   ;
-   AT 190, 10  SIZE 360, 240
+   AT 190, 10 SIZE 360, 240
 
    @ 10, 10 BITMAP oBmp2
 
@@ -331,18 +334,18 @@ FUNCTION FileOpen()
 
    LOCAL oModDlg
    LOCAL oBrw
-   LOCAL mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
    LOCAL fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
    LOCAL nId
 
    IF !Empty(fname)
-      mypath := "\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+      mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       // use &fname new codepage RU866
       use &fname new
       nId := 111
 
       INIT DIALOG oModDlg TITLE "1"                    ;
-            AT 210, 10  SIZE 500, 300                    ;
+            AT 210, 10 SIZE 500, 300                    ;
             ON INIT {|o|SetWindowText(o:handle, fname)} ;
             ON EXIT {|o|Fileclose(o)}
 
@@ -361,7 +364,7 @@ FUNCTION FileOpen()
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF
-      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_MsgInfo("Column number "+Str(n))}})
+      AEval(oBrw:aColumns, {|o|o:bHeadClick := {|oB, n|hwg_MsgInfo("Column number "+Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
@@ -379,13 +382,13 @@ RETURN .T.
 
 FUNCTION PrintDos()
 
-   LOCAL han := fcreate("LPT1", 0)
+   LOCAL han := FCreate("LPT1", 0)
 
    IF han != -1
-      fwrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
-      fwrite(han, "Line 2 ..." + Chr(10) + Chr(13))
-      fwrite(han, "---------------------------" + Chr(10) + Chr(13) + Chr(12))
-      fclose(han)
+      FWrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
+      FWrite(han, "Line 2 ..." + Chr(10) + Chr(13))
+      FWrite(han, "---------------------------" + Chr(10) + Chr(13) + Chr(12))
+      FClose(han)
    ELSE
       hwg_MsgStop("Can't open printer port!")
    ENDIF
@@ -449,7 +452,7 @@ FUNCTION DialogFromPrg(o)
 
    // o:bGetFocus := Nil
    INIT DIALOG oModDlg TITLE cTitle           ;
-   AT 210, 10  SIZE 300, 300                    ;
+   AT 210, 10 SIZE 300, 300                    ;
    FONT oFont                                 ;
    ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
@@ -460,9 +463,9 @@ FUNCTION DialogFromPrg(o)
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif(nColor==Nil, Vcolor("0000FF"), nColor)
+        SIZE 90, 20 COLOR IIf(nColor == Nil, Vcolor("0000FF"), nColor)
 
-   @ 160, 70 GROUPBOX "RadioGroup"  SIZE 130, 75
+   @ 160, 70 GROUPBOX "RadioGroup" SIZE 130, 75
 
    RADIOGROUP
    @ 180, 90 RADIOBUTTON "Radio 1"  ;
@@ -502,7 +505,9 @@ RETURN NIL
 
 STATIC FUNCTION CreateC(oDlg)
 
-Static lFirst := .F., o
+   STATIC lFirst := .F.
+   STATIC o
+
    IF !lFirst
       @ 50, 200 DATEPICKER o SIZE 80, 24
       lFirst := .T.
@@ -515,7 +520,7 @@ FUNCTION Sendemail(endereco)
 
 ShellExecute("rundll32.exe", "open", ;
             "url.dll,FileProtocolHandler " + ;
-            "mailto:"+endereco+"?cc=&bcc=" + ;
+            "mailto:" + endereco + "?cc=&bcc=" + ;
             "&subject=Ref%20:" + ;
             "&body=This%20is%20test%20.", , 1)
 
@@ -538,7 +543,7 @@ INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200
 
 @ 10, 10 TAB oTab ITEMS {} SIZE 180, 180 ;
    ON LOSTFOCUS {||hwg_MsgInfo("Lost Focus")};
-   ON INIT  {||hwg_SetFocus(oDlg:getlist[1]:handle)}
+   ON INIT {||hwg_SetFocus(oDlg:getlist[1]:handle)}
 
 BEGIN PAGE "Page 01" of oTab
 
@@ -580,7 +585,7 @@ FUNCTION TestProgres()
    PRIVATE oProg
 
 INIT DIALOG oDlg TITLE "Progress Bar"    ;
-   AT 190, 10  SIZE 360, 240               
+   AT 190, 10 SIZE 360, 240               
 
 @ 10, 10 PROGRESSBAR oProg  ;
              OF oDlg        ;
@@ -590,7 +595,7 @@ INIT DIALOG oDlg TITLE "Progress Bar"    ;
 ADD STATUS oStatus TO oDlg PARTS 400
 oBar   := HProgressBar():New(ostatus, , 0, 2, 200, 20, 200, 1000, rgb(12, 143, 243), rgb(243, 132, 143))
 oCombo := HComboBox():New(ostatus, , , , 65536, 0, 2, 200, 20, aCombo, , , , , , , .F., .F., , ,)
-@ 10, 60  BUTTON "Test" SIZE 100, 32 ON CLICK {|| MudeProg(oBar) }
+@ 10, 60  BUTTON "Test" SIZE 100, 32 ON CLICK {||MudeProg(oBar)}
    
    oDlg:Activate() 
 
@@ -614,7 +619,7 @@ FUNCTION RRectangle()
    LOCAL oR3
 
 INIT DIALOG oDlg TITLE "Sample HRect"    ;
-   AT 190, 10  SIZE 600, 400
+   AT 190, 10 SIZE 600, 400
 
        @ 230,  10, 400, 100 RECT oR1 of oDlg PRESS
        @  10,  10, 200, 100 RECT oR2 of oDlg RECT_STYLE 3

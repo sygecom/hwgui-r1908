@@ -28,7 +28,7 @@ FUNCTION Main()
    for i:=1 to 200
       Append Blank
       Teste->CODIGO:=i
-      TESTE->NOME:= 'NOME '+ALLTRIM(STR(I))
+      TESTE->NOME:= "NOME " + AllTrim(STR(I))
    end
    go top
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
@@ -37,16 +37,16 @@ FUNCTION Main()
    @  9, 8 BROWSE oBrowse DATABASE SIZE 466, 196 STYLE WS_VSCROLL + WS_HSCROLL;
       MULTISELECT
 
-   @ 9, 214 say 'Pressione a tecla CTRL e clique no registro a selecionar,'+chr(13)+chr(10)+'se clicar sem o CTRL a multiseleção é limpa' size 466, 42
+   @ 9, 214 say "Pressione a tecla CTRL e clique no registro a selecionar," + chr(13) + chr(10) + "se clicar sem o CTRL a multiseleção é limpa" size 466, 42
 
-   @ 393, 214 BUTTON oSai CAPTION "Sair"  ON CLICK {|| sair()} SIZE 80, 32
+   @ 393, 214 BUTTON oSai CAPTION "Sair"  ON CLICK {||sair()} SIZE 80, 32
 
    oBrowse:alias   := "Teste"
    oBrowse:aColumns := {}
 
     ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
-        HEADER 'Código';
-        TYPE 'N';
+        HEADER "Código";
+        TYPE "N";
         LENGTH 3 ;
         DEC 0 ;
         PICTURE "@E 999";
@@ -54,7 +54,7 @@ FUNCTION Main()
         JUSTIFY LINE DT_RIGHT
 
     ADD COLUMN FieldBlock(Fieldname(2) ) TO oBrowse ;
-        HEADER 'Descrição' ;
+        HEADER "Descrição" ;
         PICTURE "@!" ;
         JUSTIFY HEAD DT_CENTER ;
         JUSTIFY LINE DT_LEFT
@@ -69,7 +69,7 @@ RETURN NIL
 
 STATIC FUNCTION sair()
 
-   hwg_MsgInfo('Registros selecionados'+chr(13)+chr(10)+valToPrg(oBrowse:aSelected))
+   hwg_MsgInfo("Registros selecionados" + chr(13) + chr(10) + valToPrg(oBrowse:aSelected))
    EndDialog()
 
 RETURN .T.

@@ -20,7 +20,7 @@ FUNCTION Main()
 
    LOCAL oMainWnd
    LOCAL oPanel
-   LOCAL mypath := curdrive() + ":\" + CURDIR() + IIF(EMPTY(CURDIR()), "", "\")
+   LOCAL mypath := curdrive() + ":\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 
    PRIVATE oFlash
 

@@ -75,7 +75,7 @@ FUNCTION NewItem(nItem)
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
       cName := oXmlNode:GetAttribute("name")
       FOR i := 1 TO Len(oXmlNode:aItems)
-         IF Valtype(oXmlNode:aItems[i]) == "C"
+         IF ValType(oXmlNode:aItems[i]) == "C"
             cInfo := oXmlNode:aItems[i]
          ELSEIF oXmlNode:aItems[i]:title == "font"
             oItemFont := FontFromXML(oXmlNode:aItems[i])
@@ -87,18 +87,18 @@ FUNCTION NewItem(nItem)
       oItemFont := oFont
    ENDIF
 
-   INIT DIALOG oDlg TITLE Iif(nItem == 0, "New item", "Change item")  ;
-   AT 210, 10  SIZE 300, 150  FONT oFont
+   INIT DIALOG oDlg TITLE IIf(nItem == 0, "New item", "Change item")  ;
+      AT 210, 10 SIZE 300, 150 FONT oFont
 
    @ 20, 20 SAY "Name:" SIZE 60, 22
    @ 80, 20 GET cName SIZE 150, 26
 
-   @ 240, 20  BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew:=HFont():Select(oItemFont)}
+   @ 240, 20 BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew:=HFont():Select(oItemFont)}
 
    @ 20, 50 SAY "Info:" SIZE 60, 22
    @ 80, 50 GET cInfo SIZE 150, 26
 
-   @ 20, 110  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T., EndDialog()}
+   @ 20, 110 BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult := .T., EndDialog()}
    @ 180, 110 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    ACTIVATE DIALOG oDlg
@@ -108,7 +108,7 @@ FUNCTION NewItem(nItem)
          oXmlNode := oXmlDoc:aItems[1]:Add(HXMLNode():New("item"))
          oXmlNode:SetAttribute("name", Trim(cName))
          oXmlNode:Add(Trim(cInfo))
-         oXMLNode:Add(Font2XML(Iif(oFontNew != Nil, oFontNew, oFont)))
+         oXMLNode:Add(Font2XML(IIf(oFontNew != Nil, oFontNew, oFont)))
          lIniChanged := .T.
 
          aMenu := oMainWindow:menu[1, 1]
@@ -123,7 +123,7 @@ FUNCTION NewItem(nItem)
             SetMenuCaption(, 1020 + nItem, cName)
          ENDIF
          FOR i := 1 TO Len(oXmlNode:aItems)
-            IF Valtype(oXmlNode:aItems[i]) == "C"
+            IF ValType(oXmlNode:aItems[i]) == "C"
                IF cInfo != oXmlNode:aItems[i]
                   oXmlNode:aItems[i] := cInfo
                   lIniChanged := .T.

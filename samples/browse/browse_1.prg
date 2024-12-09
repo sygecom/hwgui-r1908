@@ -5,8 +5,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Static nCount := 0
-Static oBrowse
+STATIC nCount := 0
+STATIC oBrowse
 
 FUNCTION Main()
 
@@ -45,15 +45,15 @@ FUNCTION BrowseTest()
    @  5, 5 BROWSE oBrowse DATABASE OF oForm SIZE 690, 375 STYLE WS_VSCROLL + WS_HSCROLL ;
       AUTOEDIT ;
       APPEND ;
-      ON KEYDOWN {|o, key| BrowseKey(o, key) } ;
-      ON UPDATE {|oBrow, Colpos| BrowseUpdate(oBrow, colpos) } ;
-      ON POSCHANGE {|| BrowseMove() }
+      ON KEYDOWN {|o, key|BrowseKey(o, key)} ;
+      ON UPDATE {|oBrow, Colpos|BrowseUpdate(oBrow, colpos)} ;
+      ON POSCHANGE {||BrowseMove()}
 
-   PUBLIC TENTA:=1
+   PUBLIC TENTA := 1
 
    ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
-      HEADER 'Code';
-      TYPE 'N';
+      HEADER "Code";
+      TYPE "N";
       LENGTH 6 ;
       DEC 0 ;
       EDITABLE ;
@@ -64,7 +64,7 @@ FUNCTION BrowseTest()
       WHEN  BrowseWhen()
 
    ADD COLUMN FieldBlock(Fieldname(2) ) TO oBrowse ;
-      HEADER 'Description' ;
+      HEADER "Description" ;
       EDITABLE ;
       PICTURE "@!" ;
       JUSTIFY HEAD DT_CENTER ;
@@ -136,16 +136,16 @@ RETURN .T.
 
 STATIC FUNCTION CreateDB()
 
-   if file('browse_1.dbf')
-      FErase('browse_1.dbf')
+   if file("browse_1.dbf")
+      FErase("browse_1.dbf")
    end
 
-   DBCreate('browse_1', {{'code', 'N', 6, 0},;
-                         {'desc', 'C', 40, 0},;
-                         {'list', 'N', 1, 0},;
-                         {'creation', 'D', 8, 0},;
-                         {'status', 'L', 1, 0},;
-                         {'price', 'N', 10, 2}})
+   DBCreate("browse_1", {{"code", "N", 6, 0},;
+                         {"desc", "C", 40, 0},;
+                         {"list", "N", 1, 0},;
+                         {"creation", "D", 8, 0},;
+                         {"status", "L", 1, 0},;
+                         {"price", "N", 10, 2}})
 
    USE browse_1 EXCLUSIVE
 
