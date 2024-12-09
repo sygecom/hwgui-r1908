@@ -7,7 +7,7 @@ FUNCTION Main()
    LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
-     AT 0, 0 SIZE GetDesktopWidth(), GetDesktopHeight() - 28
+     AT 0, 0 SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
    MENU OF oMainWindow
       MENUITEM "&Exit" ACTION oMainWindow:Close()

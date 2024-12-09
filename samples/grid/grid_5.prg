@@ -44,7 +44,7 @@ FUNCTION Main()
 
         INIT WINDOW oMain MAIN TITLE "Grid Edition Sample" ;
              AT 0, 0 ;
-             SIZE GetDesktopWidth(), GetDesktopHeight() - 28
+             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
                 MENU OF oMain
                         MENUITEM "&Exit"   ACTION oMain:Close()
@@ -184,8 +184,8 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     INIT DIALOG oForm CLIPPER TITLE "Teste";
         FONT oFont ;
         AT 0, 0 ;
-        SIZE Min(GetDesktopWidth() - 50, (nSay + nGet) * nGetSize + nGetSize), ;
-             Min(GetDesktopHeight() - 28, nheight) ;
+        SIZE Min(hwg_GetDesktopWidth() - 50, (nSay + nGet) * nGetSize + nGetSize), ;
+             Min(hwg_GetDesktopHeight() - 28, nheight) ;
         STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
 
         For i := 1 to Len(aFields)

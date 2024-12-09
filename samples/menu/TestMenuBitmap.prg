@@ -21,7 +21,7 @@ FUNCTION Main()
 
    INIT WINDOW oMain MAIN TITLE "Teste" ;
       AT 0, 0 ; // BACKGROUND BITMAP OBMP ;
-      SIZE GetDesktopWidth(), GetDesktopHeight() - 28
+      SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
    MENU OF oMain
       MENU TITLE "Samples"

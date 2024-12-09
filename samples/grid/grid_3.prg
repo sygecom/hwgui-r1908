@@ -33,7 +33,7 @@ FUNCTION Main()
 
         INIT WINDOW oMain MAIN TITLE "Postgres Sample Using low level functions" ;
              AT 0, 0 ;
-             SIZE GetDesktopWidth(), GetDesktopHeight() - 28
+             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
                 MENU OF oMain
                         MENUITEM "&Exit"   ACTION oMain:Close()
