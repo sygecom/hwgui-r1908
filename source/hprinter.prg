@@ -180,7 +180,7 @@ METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS H
    IF ::lmm .AND. nHeight != NIL
       nHeight *= ::nVRes
    ENDIF
-   oFont := HFont():Add(fontName,, nHeight,          ;
+   oFont := HFont():Add(fontName,, nHeight, ;
                          IIf(lBold != NIL .AND. lBold, 700, 400), nCharset, ;
                          IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0))
 

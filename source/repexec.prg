@@ -208,8 +208,11 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_TEXT
          oFont := aPaintRep[FORM_ITEMS, i, ITEM_FONT]
          aPaintRep[FORM_ITEMS, i, ITEM_STATE] := HFont():Add(oFont:name, ;
-                                                                oFont:width, Round(oFont:height * prnYCoef, 0), oFont:weight, ;
-                                                                oFont:charset, oFont:italic)
+                                                             oFont:width, ;
+                                                             Round(oFont:height * prnYCoef, 0), ;
+                                                             oFont:weight, ;
+                                                             oFont:charset, ;
+                                                             oFont:italic)
       ENDIF
    NEXT
 

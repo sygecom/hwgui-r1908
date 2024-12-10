@@ -285,8 +285,8 @@ METHOD FontBold(lTrue) CLASS HControl
       IF oFont == NIL .AND. lTrue == NIL
           RETURN .T.
       ENDIF
-      ::oFont := IIf(oFont != NIL, HFont():Add(oFont:name, oFont:Width, , , , ,), ;
-         HFont():Add("", 0, , IIf(!Empty(lTrue), FW_BOLD, FW_REGULAR), , ,))
+      ::oFont := IIf(oFont != NIL, HFont():Add(oFont:name, oFont:Width), ;
+         HFont():Add("", 0, , IIf(!Empty(lTrue), FW_BOLD, FW_REGULAR)))
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(lTrue)

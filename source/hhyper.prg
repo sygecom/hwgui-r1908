@@ -101,17 +101,29 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    // Test The Font the underline must be 1
    IF ::oFont == NIL
       IF ::oParent:oFont != NIL
-         ::oFont := HFONT():Add(::oParent:oFont:name, ::oParent:oFont:width, ::oParent:oFont:height, ;
-                                 ::oParent:oFont:weight, ::oParent:oFont:charset, ::oParent:oFont:italic, 1, ::oParent:oFont:StrikeOut)
+         ::oFont := HFONT():Add(::oParent:oFont:name, ;
+                                ::oParent:oFont:width, ;
+                                ::oParent:oFont:height, ;
+                                ::oParent:oFont:weight, ;
+                                ::oParent:oFont:charset, ;
+                                ::oParent:oFont:italic, ;
+                                1, ;
+                                ::oParent:oFont:StrikeOut)
       ELSE
-         ::oFont := HFONT():Add("Arial", 0, - 12, , , , IIf(::lAllUnderline, 1,),)
+         ::oFont := HFONT():Add("Arial", 0, -12, , , , IIf(::lAllUnderline, 1,))
       ENDIF
    ELSE
       IF ::oFont:Underline  == 0 .AND. ::lAllUnderline
          oPrevFont := ::oFont
          ::oFont:Release()
-         ::oFont := HFONT():Add(oPrevFont:name, oPrevFont:width, oPrevFont:height, ;
-                                 oPrevFont:weight, oPrevFont:charset, oPrevFont:italic, 1, oPrevFont:StrikeOut)
+         ::oFont := HFONT():Add(oPrevFont:name, ;
+                                oPrevFont:width, ;
+                                oPrevFont:height, ;
+                                oPrevFont:weight, ;
+                                oPrevFont:charset, ;
+                                oPrevFont:italic, ;
+                                1, ;
+                                oPrevFont:StrikeOut)
       ENDIF
    ENDIF
    ::oFontUnder := HFONT():Add(::oFont:Name, 0, ::oFont:Height, , , , 1)
@@ -143,15 +155,27 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
 
    IF ::oFont == NIL
       IF ::oParent:oFont != NIL
-         ::oFont := HFONT():Add(::oParent:oFont:name, ::oParent:oFont:width, ::oParent:oFont:height, ;
-                                 ::oParent:oFont:weight, ::oParent:oFont:charset, ::oParent:oFont:italic, 1, ::oParent:oFont:StrikeOut)
+         ::oFont := HFONT():Add(::oParent:oFont:name, ;
+                                ::oParent:oFont:width, ;
+                                ::oParent:oFont:height, ;
+                                ::oParent:oFont:weight, ;
+                                ::oParent:oFont:charset, ;
+                                ::oParent:oFont:italic, ;
+                                1, ;
+                                ::oParent:oFont:StrikeOut)
       ENDIF
    ELSE
       IF ::oFont:Underline  == 0
          oPrevFont := ::oFont
          ::oFont:Release()
-         ::oFont := HFONT():Add(oPrevFont:name, oPrevFont:width, oPrevFont:height, ;
-                                 oPrevFont:weight, oPrevFont:charset, oPrevFont:italic, 1, oPrevFont:StrikeOut)
+         ::oFont := HFONT():Add(oPrevFont:name, ;
+                                oPrevFont:width, ;
+                                oPrevFont:height, ;
+                                oPrevFont:weight, ;
+                                oPrevFont:charset, ;
+                                oPrevFont:italic, ;
+                                1, ;
+                                oPrevFont:StrikeOut)
       ENDIF
    ENDIF
 

@@ -1089,13 +1089,13 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN NIL
 
-   FUNCTION RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet)
+FUNCTION RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet)
       LOCAL oCtrl := HGroup():New(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor)
       HRadioGroup():New(nInitValue, bSetGet)
       RETURN oCtrl
 
 
-   FUNCTION Font2XML(oFont)
+FUNCTION Font2XML(oFont)
       LOCAL aAttr := {}
 
       AAdd(aAttr, {"name", oFont:name})
@@ -1116,7 +1116,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN HXMLNode():New("font", HBXML_TYPE_SINGLE, aAttr)
 
-   FUNCTION hfrm_FontFromXML(oXmlNode)
+FUNCTION hfrm_FontFromXML(oXmlNode)
       LOCAL width  := oXmlNode:GetAttribute("width")
       LOCAL height := oXmlNode:GetAttribute("height")
       LOCAL weight := oXmlNode:GetAttribute("weight")
@@ -1143,11 +1143,9 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          under := Val(under)
       ENDIF
 
-      RETURN HFont():Add(oXmlNode:GetAttribute("name"), ;
-                          width, height, weight, charset, ;
-                          ita, under)
+RETURN HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
 
-   FUNCTION hfrm_Str2Arr(stroka)
+FUNCTION hfrm_Str2Arr(stroka)
       LOCAL arr := {}, pos1 := 2, pos2 := 1
 
       IF Len(stroka) > 2
@@ -1161,7 +1159,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN arr
 
-   FUNCTION hfrm_Arr2Str(arr)
+FUNCTION hfrm_Arr2Str(arr)
       LOCAL stroka := "{", i, cType
 
       FOR i := 1 TO Len(arr)
@@ -1178,7 +1176,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
       RETURN stroka + "}"
 
-   FUNCTION hfrm_GetProperty(xProp)
+FUNCTION hfrm_GetProperty(xProp)
       LOCAL c
 
       IF hb_IsChar(xProp)
