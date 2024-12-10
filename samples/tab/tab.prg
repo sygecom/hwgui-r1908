@@ -21,7 +21,7 @@ FUNCTION Main()
    INIT DIALOG oDlg1 FROM RESOURCE DIALOG_1 CLIPPER NOEXIT NOEXITESC ON INIT {||buildtabPages(oTab, {adlg1, adlg2}, {"pagina1", "pagina2"})}
 
 /*
-aDlg1:oParent:=oTab, aDlg2:oParent:=oTab,;
+aDlg1:oParent := oTab, aDlg2:oParent := oTab,;
 aDlg1:Activate(.T.),      aDlg2:Activate(.T.), ;
 aDlg2:hide(),    oTab:StartPage("pagina1", aDlg1),    oTab:EndPage(), ;
 oTab:StartPage("pagina2", aDlg2),    oTab:EndPage(), otab:changepage(1)

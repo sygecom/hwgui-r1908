@@ -38,8 +38,8 @@ FUNCTION Main()
          MENUITEM "&New" ACTION CreateChildWindow()
          MENUITEM "&Open" ACTION FileOpen()
          SEPARATOR
-         MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
-         MENUITEM "&Color" ACTION (nColor:=Hwg_ChooseColor(nColor, .F.), ;
+         MENUITEM "&Font" ACTION oFont := HFont():Select(oFont)
+         MENUITEM "&Color" ACTION (nColor := Hwg_ChooseColor(nColor, .F.), ;
                      hwg_MsgInfo(IIf(nColor != Nil, str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
@@ -291,7 +291,7 @@ FUNCTION OpenAbout()
        // 
 
    CreateArList(oBrw, aSample)
-   oBrw:bColorSel    := 12507070  // 15149157449
+   oBrw:bColorSel := 12507070  // 15149157449
 
    oBmp := HBitmap():AddStandard(OBM_LFARROWI)
    oBrw:aColumns[1]:aBitmaps := { ;
@@ -350,7 +350,7 @@ FUNCTION FileOpen()
             ON EXIT {|o|Fileclose(o)}
 
       MENU OF oModDlg
-         MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont), oBrw:Refresh() )
+         MENUITEM "&Font" ACTION ( oBrw:oFont := HFont():Select(oFont), oBrw:Refresh() )
          MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 
@@ -593,7 +593,7 @@ INIT DIALOG oDlg TITLE "Progress Bar"    ;
              BARWIDTH 10    ;
              QUANTITY 1000
 ADD STATUS oStatus TO oDlg PARTS 400
-oBar   := HProgressBar():New(ostatus, , 0, 2, 200, 20, 200, 1000, rgb(12, 143, 243), rgb(243, 132, 143))
+oBar := HProgressBar():New(ostatus, , 0, 2, 200, 20, 200, 1000, rgb(12, 143, 243), rgb(243, 132, 143))
 oCombo := HComboBox():New(ostatus, , , , 65536, 0, 2, 200, 20, aCombo, , , , , , , .F., .F., , ,)
 @ 10, 60  BUTTON "Test" SIZE 100, 32 ON CLICK {||MudeProg(oBar)}
    

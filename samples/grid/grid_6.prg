@@ -46,7 +46,7 @@ FUNCTION Test()
 
    use test new
    aStru := dbstruct()
-   for n :=1 to Len(astru)
+   for n := 1 to Len(astru)
       aadd(aHead, aStru[n, 1])
    next
    go Top
@@ -78,7 +78,7 @@ FUNCTION Test()
              ADD COLUMN TO GRID oGrid HEADER aHead[3] WIDTH 150  bitmap 3
              ADD COLUMN TO GRID oGrid HEADER aHead[4] WIDTH 150  bitmap 4
 
-             for n:=1 to Len(aItems)
+             for n := 1 to Len(aItems)
                 ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color rgb(255, 12, 123) backcolor rgb(192, 0, 255), header aItems[n, 2], header aItems[n, 3] bitmap 3, header aItems[n, 1] bitmap 1 color rgb(123, 122, 123)  backcolor rgb(192, 0, 255)
              next
 

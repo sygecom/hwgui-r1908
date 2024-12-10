@@ -224,7 +224,7 @@ STATIC FUNCTION SelectIndex()
        FONT oFont                   ;
        STYLE WS_BORDER+WS_VSCROLL + WS_HSCROLL ;
        ON SIZE {|o, x, y|o:Move(, , x, y)} ;
-       ON CLICK {|o|nChoice:=o:nCurrent, EndDialog(o:oParent:handle)}
+       ON CLICK {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
 
    oBrowse:aArray := aIndex
    oBrowse:AddColumn(HColumn():New("OrdName", {|v, o|o:aArray[o:nCurrent, 1]}, "C", 10, 0))
@@ -427,7 +427,7 @@ STATIC FUNCTION ModiStru(lNew)
       af := {{"", "", 0, 0}}
    ELSE
       af0 := dbStruct()
-      af  := dbStruct()
+      af := dbStruct()
       FOR i := 1 TO Len(af)
          Aadd(af[i], i)
       NEXT
@@ -578,8 +578,8 @@ STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
    ELSE
       cName := oGet1:SetGet()
       cType := aFieldTypes[Eval(oGet2:bSetGet, , oGet2)]
-      nLen  := Val(oGet3:SetGet())
-      nDec  := Val(oGet4:SetGet())
+      nLen := Val(oGet3:SetGet())
+      nDec := Val(oGet4:SetGet())
       IF nOperation == 1
          Aadd(oBrowse:aArray,{ cName, cType, nLen, nDec })
       ELSE

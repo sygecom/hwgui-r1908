@@ -191,7 +191,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
         For i := 1 to Len(aFields)
             @   10, nRow SAY aFields[i, GET_LABEL] SIZE Len(aFields[i, GET_LABEL]) * nGetSize, 25
             
-            cType  := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
+            cType := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
             
             if cType == "N" .AND. aFields[i, GET_LIST] != NIL
                 aFields[i, GET_OBJECT] := HComboBox():New(oForm,;

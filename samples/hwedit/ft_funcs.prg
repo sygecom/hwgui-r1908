@@ -52,8 +52,8 @@
 #include "directry.ch"
 #include "fileio.ch"
 #include "inkey.ch"
-#include 'hbdocdef.ch'
-#include 'common.ch'
+#include "hbdocdef.ch"
+#include "common.ch"
 
 #define xReadBuffer 4096
 DECLARE  FT_FUSE(CFILE AS STRING, NMODE AS NUMERIC) AS NUMERIC
@@ -220,7 +220,7 @@ RETURN NIL
 *+
 FUNCTION StrPos(cBuffer AS STRING)
 
-   LOCAL nPos AS NUMERIC :=0
+   LOCAL nPos AS NUMERIC := 0
    LOCAL x AS NUMERIC
    LOCAL cChar AS STRING
 
@@ -230,13 +230,13 @@ FUNCTION StrPos(cBuffer AS STRING)
                  .AND. cChar <= CHR(122) .OR. cChar >= CHR(48) .AND. cChar <= CHR(57) ;
                  .OR. cChar == CHR(60) .OR. cchar == CHR(ASC("-")) ;
                  .OR. cchar == CHR(ASC("(")) .OR. cchar = CHR(ASC("|")) .OR. ;
-                 cchar == CHR(ASC('.')) .OR. cchar == CHR(ASC('*')) .OR. ;
-                 cchar == CHR(ASC('#')) .OR. cchar == CHR(ASC('"')) .OR. ;
-                 cchar == CHR(ASC('/')) .OR. cchar == CHR(ASC("@")) ;
-                 .OR. cchar == CHR(ASC("=")) .OR. cchar == CHR(ASC('Ä')) ;
-                 .OR. cchar == CHR(ASC('?')) .OR. cchar == CHR(ASC('!')) ;
-                 .OR. cchar == CHR(ASC("<")) .OR. cchar == CHR(ASC('>')) ;
-                 .OR. cchar == CHR(ASC('!')) .OR. cchar == CHR(ASC('+'))
+                 cchar == CHR(ASC(".")) .OR. cchar == CHR(ASC("*")) .OR. ;
+                 cchar == CHR(ASC("#")) .OR. cchar == CHR(ASC('"')) .OR. ;
+                 cchar == CHR(ASC("/")) .OR. cchar == CHR(ASC("@")) ;
+                 .OR. cchar == CHR(ASC("=")) .OR. cchar == CHR(ASC("Ä")) ;
+                 .OR. cchar == CHR(ASC("?")) .OR. cchar == CHR(ASC("!")) ;
+                 .OR. cchar == CHR(ASC("<")) .OR. cchar == CHR(ASC(">")) ;
+                 .OR. cchar == CHR(ASC("!")) .OR. cchar == CHR(ASC("+"))
 
          nPos := x
 
@@ -295,8 +295,8 @@ FUNCTION FREADline(nH as Numeric, cB AS STRING, nMaxLine as Numeric)
    LOCAL nNumRead AS NUMERIC
    LOCAL lReturn AS LOGICAL
 
-   cLine    := SPACE(nMaxLine)
-   cB       := ""
+   cLine := SPACE(nMaxLine)
+   cB := ""
    nSavePos := FSeek(nH, 0, FS_RELATIVE)
    nNumRead := FRead(nH, @cLine, nMaxLine)
    IF (nEol := AT(EOL, SubStr(cLine, 1, nNumRead))) == 0

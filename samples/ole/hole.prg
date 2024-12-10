@@ -17,7 +17,7 @@ FUNCTION Main()
      AT 200, 0 SIZE 400, 250                       ;
      FONT oFont
 
-   oAgent:=TOleAuto():New("Agent.Control.2")
+   oAgent := TOleAuto():New("Agent.Control.2")
    IF oAgent == Nil .OR. oAgent:hObj == 0
       cText := "Ms Agent isn't installed !"
    ELSE

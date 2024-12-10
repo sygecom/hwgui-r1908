@@ -47,7 +47,7 @@ FUNCTION Test()
              @ 210, 390 BUTTON "Show Text" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr), (oBar:setLabel("New Text here")))}
              @ 305, 390 BUTTON "Create Bar" SIZE 95, 26 ON CLICK {||oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100)}
              @ 400, 390 BUTTON "Create Bar %" SIZE 95, 26 ON CLICK {||oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100,, .T.)}
-             @ 495, 390 BUTTON "Close Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr),(oBar:Close(), oBar:=Nil))}
+             @ 495, 390 BUTTON "Close Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr),(oBar:Close(), oBar := Nil))}
              @ 590, 390 BUTTON "Close" SIZE 95, 26 ON CLICK {||oForm:Close()}
 
         ACTIVATE DIALOG oForm

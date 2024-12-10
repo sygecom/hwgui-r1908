@@ -90,8 +90,8 @@ FUNCTION Main()
 
     oChart:Clear()
     oChart:Reset()
-    oChart:Font             := "Tahoma"
-    oChart:RMCStyle         := RMC_CTRLSTYLEFLAT
+    oChart:Font := "Tahoma"
+    oChart:RMCStyle := RMC_CTRLSTYLEFLAT
     oChart:RMCUserWatermark := "Test Test Test"
     oChart:AddRegion()
     r1 := oChart:Region(1)
@@ -99,20 +99,20 @@ FUNCTION Main()
     r1:AddCaption()
     WITH OBJECT r1 			// oChart:Region(1)
          WITH OBJECT :Caption()
-              :Titel     := "rmchart test"
-              :FontSize  := 10
-              :Bold      := .T.
+              :Titel := "rmchart test"
+              :FontSize := 10
+              :Bold := .T.
          END
          :AddGridlessSeries()
          WITH OBJECT :GridLessSeries
-               :SeriesStyle      := RMC_PIE_GRADIENT
-               :Alignment        := RMC_FULL
-               :Explodemode      := RMC_EXPLODE_NONE
-               :Lucent           := .F.
-               :ValueLabelOn     := RMC_VLABEL_ABSOLUTE
-               :HatchMode        := RMC_HATCHBRUSH_OFF
-               :StartAngle       := 0
-               :DataString       := "30*15*40*35"
+               :SeriesStyle := RMC_PIE_GRADIENT
+               :Alignment := RMC_FULL
+               :Explodemode := RMC_EXPLODE_NONE
+               :Lucent := .F.
+               :ValueLabelOn := RMC_VLABEL_ABSOLUTE
+               :HatchMode := RMC_HATCHBRUSH_OFF
+               :StartAngle := 0
+               :DataString := "30*15*40*35"
          END
    END
    oChart:Draw2Clipboard(RMC_EMF)  // Copy in clipboard

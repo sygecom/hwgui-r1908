@@ -204,14 +204,14 @@ RETURN NIL
 FUNCTION CreateVariable()
 *---------------------------------------------------------------------------------------
 
-oCod:=SPACE(5)
-oName:=SPACE(50)
-oAdress:=SPACE(50)
-oFone:=SPACE(50)
-oe_Mail:=SPACE(30)
+oCod := SPACE(5)
+oName := SPACE(50)
+oAdress := SPACE(50)
+oFone := SPACE(50)
+oe_Mail := SPACE(30)
 GetRefresh()
 OpenGets()
-oOper:=1 //Operacao para Inclusao
+oOper := 1 //Operacao para Inclusao
 
 RETURN NIL
 
@@ -233,11 +233,11 @@ RETURN NIL
 FUNCTION GetVars()
 *---------------------------------------------------------------------------------------
 
-oCod   :=TabDbf->Cod
-oName    :=TabDbf->Name
-oAdress :=TabDbf->Adress
-oFone :=TabDbf->Fone
-oe_Mail :=TabDbf->e_Mail
+oCod := TabDbf->Cod
+oName := TabDbf->Name
+oAdress := TabDbf->Adress
+oFone := TabDbf->Fone
+oe_Mail := TabDbf->e_Mail
 
 RETURN NIL
 
@@ -247,29 +247,29 @@ FUNCTION SaveTab()
 
 if oOper=1
    Select TabDbf
-   oCod:=StrZero(val(oCod), 3)
+   oCod := StrZero(val(oCod), 3)
    Seek oCod
    If Found()
       hwg_MsgInfo("Cod." + oCod + " no valid...", "Mensagem")
       RETURN NIL
    Endif
    Append Blank
-   TabDbf->Cod:=oCod
-   TabDbf->Name:=oName
-   TabDbf->Adress:=oAdress
-   TabDbf->Fone:=oFone
-   TabDbf->e_Mail:=oe_Mail
+   TabDbf->Cod := oCod
+   TabDbf->Name := oName
+   TabDbf->Adress := oAdress
+   TabDbf->Fone := oFone
+   TabDbf->e_Mail := oe_Mail
    Unlock
 Else
    RLock()
-   TabDbf->Name:=oName
-   TabDbf->Adress:=oAdress
-   TabDbf->Fone:=oFone
-   TabDbf->e_Mail:=oe_Mail
+   TabDbf->Name := oName
+   TabDbf->Adress := oAdress
+   TabDbf->Fone := oFone
+   TabDbf->e_Mail := oe_Mail
    Unlock
 EndIf
 CloseGets()
-oOper:=1
+oOper := 1
 
 RETURN NIL
 

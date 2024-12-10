@@ -85,80 +85,80 @@ endif
 restore from config.dat additive
 //// efetivando
 if ID_indioma = 8002
-   m_arquivo:="File"
-   m_novo   :="New"
-   m_abrir  :="Open"
-   m_salvar :="Save"
-   m_salvarcomo:="Save as.."
-   m_fechar :="Close"
-   m_sair   :="Exit"
+   m_arquivo := "File"
+   m_novo := "New"
+   m_abrir := "Open"
+   m_salvar := "Save"
+   m_salvarcomo := "Save as.."
+   m_fechar := "Close"
+   m_sair := "Exit"
    //
-   m_config:="Config"
-   m_fonte:="Font"
-   m_colorb:="Color Background"
-   m_colorf:="Color Font"
-   m_indioma:="Language"
+   m_config := "Config"
+   m_fonte := "Font"
+   m_colorb := "Color Background"
+   m_colorf := "Color Font"
+   m_indioma := "Language"
    //
-   reiniciar:="It is necessary To restart " + chr(13) + chr(10) + "to be loaded the new configurations "
+   reiniciar := "It is necessary To restart " + chr(13) + chr(10) + "to be loaded the new configurations "
    //
-   m_janela:="Windows"
-   m_lado:="Title Vertical"
+   m_janela := "Windows"
+   m_lado := "Title Vertical"
    //
-   m_ajuda:="Help"
-   m_sobre:="About"
-   m_Site:="Internet"
+   m_ajuda := "Help"
+   m_sobre := "About"
+   m_Site := "Internet"
    //
-   desenvolvimento:="In development"
+   desenvolvimento := "In development"
    //
-   Bnovo:="New"
-   babrir:="Open"
-   Bsalvar:="Save"
+   Bnovo := "New"
+   babrir := "Open"
+   Bsalvar := "Save"
    //
-   m_pesquisa:="Search"
-   m_localizar:="Find"
-   m_Linha:="Goto Line"
+   m_pesquisa := "Search"
+   m_localizar := "Find"
+   m_Linha := "Goto Line"
    //
-   m_editar:="Edit"
-   m_seleciona:="Select all"
-   m_pesq:="Find all files"
+   m_editar := "Edit"
+   m_seleciona := "Select all"
+   m_pesq := "Find all files"
 
 elseif ID_indioma = 8001
-   m_arquivo:="Arquivo"
-   m_novo   :="Novo"
-   m_abrir  :="Abrir"
-   m_salvar :="Salvar"
-   m_salvarcomo:="Salvar Como.."
-   m_fechar :="Fechar"
-   m_sair   :="Sair"
+   m_arquivo := "Arquivo"
+   m_novo := "Novo"
+   m_abrir := "Abrir"
+   m_salvar := "Salvar"
+   m_salvarcomo := "Salvar Como.."
+   m_fechar := "Fechar"
+   m_sair := "Sair"
    //
-   m_config:="Configurações"
-   m_fonte:="Fonte"
-   m_colorb:="Cor de Fundo"
-   m_colorf:="Cor da Fonte"
-   m_indioma:="Idioma"
+   m_config := "Configurações"
+   m_fonte := "Fonte"
+   m_colorb := "Cor de Fundo"
+   m_colorf := "Cor da Fonte"
+   m_indioma := "Idioma"
    //
-   reiniciar:="É necessário Reiniciar o Editor" + chr(13) + chr(10) + "Para ser carregado as novas configurações"
+   reiniciar := "É necessário Reiniciar o Editor" + chr(13) + chr(10) + "Para ser carregado as novas configurações"
    //
-   m_janela:="Janelas"
-   m_lado:="Lado a lado"
+   m_janela := "Janelas"
+   m_lado := "Lado a lado"
    //
-   m_ajuda:="Ajuda"
-   m_sobre:="Sobre"
-   m_Site:="Pagina na Internet"
+   m_ajuda := "Ajuda"
+   m_sobre := "Sobre"
+   m_Site := "Pagina na Internet"
    //
-   desenvolvimento:="Em desenvolvimento"
+   desenvolvimento := "Em desenvolvimento"
    //
-   Bnovo:="Novo"
-   babrir:="Abrir"
-   Bsalvar:="Salvar"
+   Bnovo := "Novo"
+   babrir := "Abrir"
+   Bsalvar := "Salvar"
    //
-   m_pesquisa:="Localizar"
-   m_localizar:="Procurar"
-   m_Linha:="Linha"
-   m_pesq:="Pesquisar em todos os arquivos"
+   m_pesquisa := "Localizar"
+   m_localizar := "Procurar"
+   m_Linha := "Linha"
+   m_pesq := "Pesquisar em todos os arquivos"
    //
-   m_editar:="Editar"
-   m_seleciona:="Selecionar tudo"
+   m_editar := "Editar"
+   m_seleciona := "Selecionar tudo"
  endif
 
 SET CENTURY on
@@ -202,7 +202,7 @@ PUBLIC funcoes := {}
      ENDMENU
 
      MENU TITLE "&"+m_config
-         MENUITEM "&"+m_fonte ACTION ID_FONT:=HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
+         MENUITEM "&"+m_fonte ACTION ID_FONT := HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
          MENUITEM "&"+m_colorb ACTION cor_fundo()
          MENUITEM "&"+m_colorf ACTION cor_fonte()
          MENU TITLE "&"+m_indioma
@@ -237,8 +237,8 @@ FUNCTION novo(tipo)
    PRIVATE vText := ""
 
  alterado := .F.
- i:=AllTrim(str(auto))
- oFunc:={}
+ i := AllTrim(str(auto))
+ oFunc := {}
 
    PRIVATE vText&i := Memoread(vText)
    PRIVATE oEdit&i
@@ -280,25 +280,25 @@ FUNCTION Texto()
    LOCAL nlenpos
    LOCAL oCombo
 
-   m_a001:={}
-   vText:=SELECTFile("Arquivos Texto", "*.PRG", CurDir())
-   oFunc:={}
-   oLinha:={}
+   m_a001 := {}
+   vText := SELECTFile("Arquivos Texto", "*.PRG", CurDir())
+   oFunc := {}
+   oLinha := {}
    if Empty(vText)
       RETURN .T.
    endif
-   i:=AllTrim(str(auto))
+   i := AllTrim(str(auto))
    PRIVATE vText&i := Memoread(vText)
    PRIVATE oEdit&i
    // pegado funcoes e procedures/////////////////////////////////////
-   arq:=FT_FUSE(vText)
+   arq := FT_FUSE(vText)
    s_lEof := .F.
-   rd_lin:=0
-   oCaracter:=0
-   r_linha:=0
-   linhas:={}
+   rd_lin := 0
+   oCaracter := 0
+   r_linha := 0
+   linhas := {}
    while !ft_FEOF()
-      linha :=AllTrim(SubStr(FT_FReadLn(@s_lEof), 1) )
+      linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1) )
       //
       if Len(linha) # 0
         aadd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
@@ -311,7 +311,7 @@ FUNCTION Texto()
                 for g = f+1 to Len(linha)
                        oCaracter++
                     if subs(linha, g, 1) <> " " .AND. subs(linha, g, 1) <> "(" .AND. !Empty(subs(linha, g, 1))
-                        fun:=fun+subs(linha, g, 1)
+                        fun := fun+subs(linha, g, 1)
                     elseif g = Len(linha)
                        aadd(oFunc, fun)
                        aadd(funcoes, rd_lin)
@@ -381,7 +381,7 @@ if maxi
   oMainWindow:Maximize()
 endif
  if HMainWIndow():GetMdiActive() != nil
-    dats:=dtoc(date())
+    dats := dtoc(date())
     WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
     WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
     if !set(_SET_INSERT )
@@ -456,7 +456,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
     // pega linha e coluna
      coluna := Loword(SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
      Linha := SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
-     coluna :=coluna - SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
+     coluna := coluna - SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
      //
      WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
      WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + str(linha, 6))
@@ -504,7 +504,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
          endif
          texto := ""
      else
-        texto:=texto+chr(nvirtCode)
+        texto := texto+chr(nvirtCode)
      endif
 ENDIF
 
@@ -519,7 +519,7 @@ for f := 8001 to 8002
   endif
 next f
 CheckMenuItem(, rd_ID, !IsCheckedMenuItem(, rd_ID))
- ID_indioma:=rd_id
+ ID_indioma := rd_id
  save all like ID_* to config.dat
 hwg_MsgInfo(reiniciar)
 
@@ -544,8 +544,8 @@ FUNCTION Pesquisa()
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != nil
-     hWnd :=AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
-     oWindow:=HMainWIndow():GetMdiActive():aControls
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+     oWindow := HMainWIndow():GetMdiActive():aControls
      //
      INIT DIALOG pesq clipper TITLE  "Pesquisar" ;
           AT 113, 214 SIZE 345, 103 STYLE DS_CENTER
@@ -616,8 +616,8 @@ FUNCTION Vai(oEdit)
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != nil
-     hWnd :=AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
-     oWindow:=HMainWIndow():GetMdiActive():aControls
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+     oWindow := HMainWIndow():GetMdiActive():aControls
      INIT DIALOG pesq clipper TITLE  "Linha" ;
           AT 113, 214 SIZE 345, 103 STYLE DS_CENTER
      @ 80, 17 SAY "Digite a linha " SIZE 173, 30
@@ -652,8 +652,8 @@ FUNCTION seleciona()
    LOCAL aControls
    LOCAL i
 
- hWnd :=AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
- oWindow:=HMainWIndow():GetMdiActive():aControls
+ hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+ oWindow := HMainWIndow():GetMdiActive():aControls
  IF oWindow != Nil
     aControls := oWindow
     SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
@@ -691,9 +691,9 @@ FUNCTION Salvar_Projeto(oOpcao)
      IF oWindow != Nil
         aControls := oWindow
         If Empty(vText) .or. oOpcao=2
-            fName:=SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
+            fName := SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
         Else
-            fName:=vText
+            fName := vText
         Endif
 
         fSalve := FCreate(fName) //Cria o arquivo
@@ -719,7 +719,7 @@ FUNCTION buscafunc(linha)
 
  if HMainWIndow():GetMdiActive() != nil
      hWnd := Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
-     oWindow:=HMainWIndow():GetMdiActive():aControls
+     oWindow := HMainWIndow():GetMdiActive():aControls
      IF oWindow != Nil
          pos_y := funcoes[linha]
          aControls := oWindow
@@ -747,10 +747,10 @@ FUNCTION cor_fundo()
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != nil
-     hWnd :=AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
-     oWindow:=HMainWIndow():GetMdiActive():aControls
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
+     oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
-     ID_COLORB:=Hwg_ChooseColor(ID_COLORB, .T.)
+     ID_COLORB := Hwg_ChooseColor(ID_COLORB, .T.)
      SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
      save all like ID_* to config.dat
  else
@@ -770,10 +770,10 @@ FUNCTION cor_Fonte()
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != nil
-     hWnd :=AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
-     oWindow:=HMainWIndow():GetMdiActive():aControls
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
+     oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
-     ID_COLORF:=Hwg_ChooseColor(ID_COLORF, .T.)
+     ID_COLORF := Hwg_ChooseColor(ID_COLORF, .T.)
      re_SetDefault(aControls[hWnd]:Handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
      save all like ID_* to config.dat
  else

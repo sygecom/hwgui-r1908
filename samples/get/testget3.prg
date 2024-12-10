@@ -35,7 +35,7 @@ FUNCTION DlgGet()
    LOCAL cm := 1
    LOCAL upd := 12
    LOCAL d1 := Date() + 1
-   //LOCAL aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}}, {3, 702, 0x04, 0x0000, 0, "teste2",}, {-1, 702, 0x04, 0x0000, 0, "teste3",}}
+   //LOCAL aitem := {{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}}, {3, 702, 0x04, 0x0000, 0, "teste2",}, {-1, 702, 0x04, 0x0000, 0, "teste3",}}
    LOCAL otool
    LOCAL omenu
    LOCAL omenu1
@@ -130,13 +130,13 @@ FUNCTION CreateBar(oModDlg, otool)
 
    //LOCAL hTool
    //LOCAL aItem := {{-1, 701, 0x04, 0x0000, 0, "teste1"}, {-1, 702, 0x04, 0x0000, 0, "teste2"}, {-1, 703, 0x04, 0x0000, 0, "teste3"}}
-   LOCAL aitem :={{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {3, 702, 0x04, 0x0000, 0, "teste2", , "rtrt"}, {-1, 702, 0x04, 0x0000, 0, "teste3", , "teste222"}}
+   LOCAL aitem := {{2, 701, 0x04, 0x0000, 0, "teste1", {|x, y|DlgGet()}, "teste"}, {3, 702, 0x04, 0x0000, 0, "teste2", , "rtrt"}, {-1, 702, 0x04, 0x0000, 0, "teste3", , "teste222"}}
    //LOCAL pItem
 
 //  hTool := CREATETOOLBAR(oModDlg:handle, 700, 0, 0, 0, 50, 100)
 // //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, Len(aTool))
  //
-//   otool:=Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
+//   otool := Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
 //   oTool:oParent:AddEvent(BN_CLICKED, 701, {|x, y|DlgGet()})
 /*   @ 0, 0 toolbar oTool of oModDlg size 50, 100 ID 700 items aItem
 

@@ -62,7 +62,7 @@ FUNCTION TestForm()
 
    wfracao := 1
    wcodigo := "XXXX"
-   wnome   := "Nome"
+   wnome := "Nome"
 
    bInit := {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}
 

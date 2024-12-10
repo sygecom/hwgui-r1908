@@ -25,10 +25,10 @@ FUNCTION Main()
       dBCreate("browse_4.dbf", aField)
    end
    Use browse_4 Exclusiv alias TESTE  NEW
-   for i:=1 to 200
+   for i := 1 to 200
       Append Blank
-      Teste->CODIGO:=i
-      TESTE->NOME:= "NOME " + AllTrim(STR(I))
+      Teste->CODIGO := i
+      TESTE->NOME := "NOME " + AllTrim(STR(I))
    end
    go top
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
@@ -41,7 +41,7 @@ FUNCTION Main()
 
    @ 393, 214 BUTTON oSai CAPTION "Sair"  ON CLICK {||sair()} SIZE 80, 32
 
-   oBrowse:alias   := "Teste"
+   oBrowse:alias := "Teste"
    oBrowse:aColumns := {}
 
     ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;

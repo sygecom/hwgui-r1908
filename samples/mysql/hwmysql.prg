@@ -413,12 +413,12 @@ FUNCTION sqlBrowse(queHandle)
    CreateArList(oBrw, aQueRows)
    FOR i := 1 TO nNumFields
       oBrw:aColumns[i]:heading := SqlFetchF(queHandle)[1]
-      oBrw:aColumns[i]:type   := af[i, 1]
+      oBrw:aColumns[i]:type := af[i, 1]
       oBrw:aColumns[i]:length := af[i, 2]
-      oBrw:aColumns[i]:dec    := af[i, 3]
+      oBrw:aColumns[i]:dec := af[i, 3]
    NEXT
    oBrw:bcolorSel := VColor("800080")
-   oBrw:ofont      := oBrwFont
+   oBrw:ofont := oBrwFont
    RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
 
 RETURN NIL

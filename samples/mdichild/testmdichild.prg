@@ -108,18 +108,18 @@ FUNCTION CreateMdiChild()
          BACKSTYLE 2
         oContainer6:Anchor := 11
    @ 8, 195 GET oCodigo VAR vCodigo SIZE 216, 38    ;
-        FONT HFont():Add('Times New Roman', 0, -27, 400, , ,)
+        FONT HFont():Add("Times New Roman", 0, -27, 400, , ,)
    @ 818, 180 BUTTONEX oButtonex1 CAPTION "Cancela Cupom" SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
-        ON CLICK {|This, Value|hwg_MsgInfo('Cancelado')} ;
+        ON CLICK {|This, Value|hwg_MsgInfo("Cancelado")} ;
         ON GETFOCUS {||Thisform:obuttonex1:SetColor(255, rgb(225, 243, 252), .T.)} ;
-        ON INIT {|This|This:blostfocus:={|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
+        ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex1:Anchor := 225
         oButtonex1:lNoThemes := .T.
    @ 818, 229 BUTTONEX oButtonex2 CAPTION "Leitura X" SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
         ON GETFOCUS {||Thisform:obuttonex2:SetColor(255, rgb(225, 243, 252), .T.)} ;
-        ON INIT {|This|This:blostfocus:={|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
+        ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex2:Anchor := 240
         oButtonex2:lNoThemes := .T.
    @ 818, 276 BUTTONEX oButtonex3 CAPTION "Redução Z" SIZE 183, 38 ;
@@ -132,7 +132,7 @@ FUNCTION CreateMdiChild()
    @ 808, 153 GROUPBOX oGroup1 CAPTION "Cupom Fiscal" SIZE 203, 219 ;
         STYLE BS_LEFT ;
          COLOR 8421376   ;
-        FONT HFont():Add('Arial Narrow', 0, -15, 400, , ,)
+        FONT HFont():Add("Arial Narrow", 0, -15, 400, , ,)
         oGroup1:Anchor := 225
    @ 11, 26 SAY oLabel6 CAPTION "07/09/2010" SIZE 75, 19 ;
          COLOR 16777215  BACKCOLOR 8421504
@@ -150,7 +150,7 @@ FUNCTION CreateMdiChild()
    @ 501, 429 SAY oLabel13 CAPTION "R$ 11,94" SIZE 287, 57 ;
         STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE;
          COLOR 3280604   ;
-        FONT HFont():Add('Arial', 0, -56, 400, , ,)
+        FONT HFont():Add("Arial", 0, -56, 400, , ,)
         oLabel13:Anchor := 164
    @ 359, 6 SAY oLabel8 CAPTION "Prazo" SIZE 47, 19 ;
          COLOR 16777215  BACKCOLOR 8421504
@@ -161,18 +161,18 @@ FUNCTION CreateMdiChild()
 
     // CREATE oBrowse1   //  SCRIPT GENARATE BY DESIGNER
     oBrowse1:aArray := {}
-    oBrowse1:AddColumn(HColumn():New('Código', ColumnArBlock() ,'U', 13, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New('Descrição', ColumnArBlock() ,'U', 27, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New('Quantid.', ColumnArBlock() ,'N', 9, 3 , .F., 1,, '9,999.999',,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New('UN', ColumnArBlock() ,'U', 2, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New('Valor Unit.', ColumnArBlock() ,'N', 9, 2 , .F., 1,,'@e 99,999.99',,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New('Valor Item', ColumnArBlock() ,'N', 10, 2 , .F., 1,,'@E 999,999.99',,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Código", ColumnArBlock() ,"U", 13, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Descrição", ColumnArBlock() ,"U", 27, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Quantid.", ColumnArBlock() ,"N", 9, 3 , .F., 1,, "9,999.999",,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("UN", ColumnArBlock() ,"U", 2, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Valor Unit.", ColumnArBlock() ,"N", 9, 2 , .F., 1,,"@e 99,999.99",,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Valor Item", ColumnArBlock() ,"N", 10, 2 , .F., 1,,"@E 999,999.99",,,,,,,,,))
 
     // END BROWSE SCRIPT  -  oBrowse1
         oBrowse1:Anchor := 135
    @ 12, 88 SAY oLabel6 CAPTION "BISCOITO RECHEADO BAUNILHA" SIZE 992, 53 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -48, 400, , ,)
+        FONT HFont():Add("Arial", 0, -48, 400, , ,)
         oLabel6:Anchor := 11
    @ 359, 26 SAY oLabel9 CAPTION "A VISTA" SIZE 80, 19 ;
          COLOR 16777215  BACKCOLOR 8421504
@@ -206,39 +206,39 @@ FUNCTION CreateMdiChild()
         oLabel18:Anchor := 161
    @ 8, 57 SAY oLabel5 CAPTION "Descrição do Produto" SIZE 1003, 27 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -19, 400, , ,)
+        FONT HFont():Add("Arial", 0, -19, 400, , ,)
         oLabel5:Anchor := 11
    @ 235, 155 SAY oLabel10 CAPTION "Quantidade" SIZE 147, 27 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -19, 400, , ,)
+        FONT HFont():Add("Arial", 0, -19, 400, , ,)
         oLabel10:Anchor := 161
    @ 433, 155 SAY oLabel3 CAPTION "Valor Unitário" SIZE 150, 27 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -19, 400, , ,)
+        FONT HFont():Add("Arial", 0, -19, 400, , ,)
         oLabel3:Anchor := 161
    @ 643, 154 SAY oLabel11 CAPTION "Total do Item" SIZE 150, 27 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -19, 400, , ,)
+        FONT HFont():Add("Arial", 0, -19, 400, , ,)
         oLabel11:Anchor := 161
    @ 8, 155 SAY oLabel21 CAPTION "Código" SIZE 216, 35 ;
         STYLE SS_CENTER +DT_VCENTER+DT_SINGLELINE+WS_DLGFRAME   ;
-        FONT HFont():Add('Arial', 0, -19, 700, , ,)
+        FONT HFont():Add("Arial", 0, -19, 700, , ,)
         oLabel21:Anchor := 161
         oLabel21:FontBold := .T.
    @ 10, 429 SAY oLabel12 CAPTION "Total Geral" SIZE 257, 62   ;
-        FONT HFont():Add('Arial', 0, -47, 400, , ,)
+        FONT HFont():Add("Arial", 0, -47, 400, , ,)
         oLabel12:Anchor := 6
    @ 398, 192 SAY oLabel2 CAPTION "X" SIZE 25, 36   ;
-        FONT HFont():Add('Arial', 0, -29, 400, , ,)
+        FONT HFont():Add("Arial", 0, -29, 400, , ,)
         oLabel2:Anchor := 161
    @ 593, 190 SAY oLabel4 CAPTION " =" SIZE 32, 36 ;
         STYLE SS_CENTER   ;
-        FONT HFont():Add('Arial', 0, -29, 400, , ,)
+        FONT HFont():Add("Arial", 0, -29, 400, , ,)
         oLabel4:Anchor := 161
    @ 11, 6 SAY oLabel7 CAPTION "Data" SIZE 43, 19 ;
-         COLOR 16777215  BACKCOLOR 8421504
+         COLOR 16777215 BACKCOLOR 8421504
    @ 957, 27 SAY oLabel19 CAPTION "18238" SIZE 57, 19 ;
-         COLOR 16777215  BACKCOLOR 8421504
+         COLOR 16777215 BACKCOLOR 8421504
         oLabel19:Anchor := 9
 
    ACTIVATE WINDOW oWin CENTER

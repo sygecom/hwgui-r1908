@@ -93,7 +93,7 @@ FUNCTION NewItem(nItem)
    @ 20, 20 SAY "Name:" SIZE 60, 22
    @ 80, 20 GET cName SIZE 150, 26
 
-   @ 240, 20 BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew:=HFont():Select(oItemFont)}
+   @ 240, 20 BUTTON "Font" SIZE 40, 32 ON CLICK {||oFontNew := HFont():Select(oItemFont)}
 
    @ 20, 50 SAY "Info:" SIZE 60, 22
    @ 80, 50 GET cInfo SIZE 150, 26

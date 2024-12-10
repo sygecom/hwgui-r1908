@@ -68,10 +68,10 @@ INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Teste";
 
    @ 393, 214 BUTTON oSai CAPTION "Sair" ON CLICK {||EndDialog()} SIZE 80, 32
 
-   oBrowse:alias   := "Teste"
+   oBrowse:alias := "Teste"
    oBrowse:aColumns := {}
-   oBrowse:nFootRows:=2
-   
+   oBrowse:nFootRows := 2
+
    Teste_CreateColumn(oBrowse, "COD", "CODIGO", "TESTE", 1, "C", 3, 0)
    Teste_CreateColumn(oBrowse, "NOME", "NOME", "TESTE1", 1, "C", 30, 0)
    oBrowse:acolumns[2]:footing := "test;test2"

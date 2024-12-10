@@ -60,7 +60,7 @@ FUNCTION TestRtf()
    //      Open the output file & set some defaults
 
 
-   cOutFile:=AllTrim(cOutFile)
+   cOutFile := AllTrim(cOutFile)
 
    oRtf := SetupRTF(cOutFile)
 
@@ -135,11 +135,11 @@ FUNCTION TestRtf()
    // Nueva definicion de tablas. Habia algunas propiedades de las celdas
    // que hacia que el MSWORD se quedara colgado.
 
-   anchos:={1.0, 1.0, 1.0, 1.2, 1.0, 1.0, 1.0, 1.5, 1.7}
-   aMarca=ARRAY(9)
+   anchos := {1.0, 1.0, 1.0, 1.2, 1.0, 1.0, 1.0, 1.5, 1.7}
+   aMarca := ARRAY(9)
    AFILL(aMarca, 0)
-   aMarca[7]:=25
-   aMarca[9]:=25
+   aMarca[7] := 25
+   aMarca[9] := 25
       DEFINE NEWTABLE oRTF ;              // Specify the RTF object
          ALIGN CENTER ;                // Center table horizontally on page
          FONTNUMBER 2 ;                // Use font #2 for the body rows
@@ -165,9 +165,9 @@ FUNCTION TestRtf()
                         FOR i=1 TO 40
                                        IF i==6
    // Se puede cambiar el formato de una celda individual en tiempo de ejecucion.
-                                 aMarca[5]:=1500
-                                 aMarca[7]:=2500
-                                 aMarca[9]:=2500
+                                 aMarca[5] := 1500
+                                 aMarca[7] := 2500
+                                 aMarca[9] := 2500
                   DEFINE CELL FORMAT oRTF ;
                      CELLSHADE aMarca
                                  lFormato := .T.

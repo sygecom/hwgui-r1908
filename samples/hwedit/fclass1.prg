@@ -350,10 +350,10 @@ METHOD openfile(cFile, nMethod) CLASS FileMan
    nFileHandle := FOpen(cFile, nMethod)                   // opens the file
    IF !Empty(FError())                // There was an error in opening
       ::nLastDosMessage := FError()
-      nFileHandle       := - 1
+      nFileHandle := -1
    ELSE
       cFileName := DOSFILENAME(cFile)
-      cPath     := STRTRAN(cFile, cFileName, "")
+      cPath := STRTRAN(cFile, cFileName, "")
       ::addItem(nFileHandle, cFileName, cPath)
    ENDIF
    ::nHan := nFileHandle

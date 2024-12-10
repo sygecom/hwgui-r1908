@@ -45,8 +45,8 @@ FUNCTION Main()
    oBrw:lDispHead := .T.
    oBrw:lSep3d := .T.
    oBrw:lAdjRight := .F.
-   oBrw:sepColor  := GetSysColor(COLOR_BTNSHADOW)
-   oBrw:colpos  := 2
+   oBrw:sepColor := GetSysColor(COLOR_BTNSHADOW)
+   oBrw:colpos := 2
 
    readexit(.T.)
    oWinMain:Activate()
