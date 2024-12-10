@@ -168,9 +168,7 @@ FUNCTION FontFromXML(oXmlNode)
      under := Val(under)
   ENDIF
 
-RETURN HFont():Add(oXmlNode:GetAttribute("name"),  ;
-                   width, height, weight, charset,   ;
-                   ita, under)
+RETURN HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
 
 FUNCTION Font2XML(oFont)
 
