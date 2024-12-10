@@ -170,7 +170,7 @@ METHOD Release() CLASS HBitmap
    IF ::nCounter == 0
       FOR EACH item IN ::aBitmaps
          IF item:handle == ::handle
-            DeleteObject(::handle)
+            hwg_DeleteObject(::handle)
             #ifdef __XHARBOUR__
             ADel(::aBitmaps, hb_enumIndex())
             #else
@@ -191,7 +191,7 @@ EXIT PROCEDURE CleanDrawWidgHBitmap
    LOCAL item
 
    FOR EACH item IN HBitmap():aBitmaps
-      DeleteObject(item:handle)
+      hwg_DeleteObject(item:handle)
    NEXT
 
 RETURN

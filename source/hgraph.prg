@@ -147,7 +147,7 @@ METHOD Paint(lpdis) CLASS HGraph
 
    FillRect(hDC, drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7], ::brush:handle)
    IF ::nType != 3
-      SelectObject(hDC, ::oPenCoor:handle)
+      hwg_SelectObject(hDC, ::oPenCoor:handle)
       Drawline(hDC, x1 + (0 - ::xmin) / ::scaleX, drawInfo[5] + 3, x1 + (0 - ::xmin) / ::scaleX, drawInfo[7] - 3)
       Drawline(hDC, drawInfo[4] + 3, y2 - (0 - ::ymin) / ::scaleY, drawInfo[6] - 3, y2 - (0 - ::ymin) / ::scaleY)
    ENDIF
@@ -156,7 +156,7 @@ METHOD Paint(lpdis) CLASS HGraph
       RETURN NIL
    ENDIF
 
-   SelectObject(hDC, ::oPen:handle)
+   hwg_SelectObject(hDC, ::oPen:handle)
    FOR i := 1 TO ::nGraphs
       nLen := Len(::aValues[i])
       IF ::nType == 1
@@ -183,8 +183,8 @@ METHOD Paint(lpdis) CLASS HGraph
          IF ::tbrush == NIL
             ::tbrush := HBrush():Add(::tcolor)
          ENDIF
-         SelectObject(hDC, ::oPenCoor:handle)
-         SelectObject(hDC, ::tbrush:handle)
+         hwg_SelectObject(hDC, ::oPenCoor:handle)
+         hwg_SelectObject(hDC, ::tbrush:handle)
          pie(hDC, x1 + 10, y1 + 10, x2 - 10, y2 - 10, x1, Round(y1 + (y2 - y1) / 2, 0), Round(x1 + (x2 - x1) / 2, 0), y1)
       ENDIF
    NEXT

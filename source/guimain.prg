@@ -257,7 +257,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    ENDIF
 
    hDC := GetDC(GetActiveWindow())
-   SelectObject(hDC, oFont:handle)
+   hwg_SelectObject(hDC, oFont:handle)
    aMetr := GetTextMetric(hDC)
    aArea := GetDeviceArea(hDC)
    aRect := GetWindowRect(GetActiveWindow())
@@ -475,11 +475,11 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
       oFont := oWin:oParent:oFont
    ENDIF
    IF oFont != NIL
-      hFont := SelectObject(hDC, oFont:handle)
+      hFont := hwg_SelectObject(hDC, oFont:handle)
    ENDIF
    ASize     := GetTextSize(hDC, cTxt)
    IF oFont != NIL
-      SelectObject(hDC, hFont)
+      hwg_SelectObject(hDC, hFont)
    ENDIF
    ReleaseDC(oWin:handle, hDC)
    RETURN ASize

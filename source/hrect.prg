@@ -115,7 +115,7 @@ METHOD Paint(lpdis) CLASS HRect_Line
    LOCAL x2 := drawInfo[6]
    LOCAL y2 := drawInfo[7]
 
-   SelectObject(hDC, ::oPen:handle)
+   hwg_SelectObject(hDC, ::oPen:handle)
 
    IF ::lVert
       DrawLine(hDC, x1, y1, x1, y2)
@@ -255,7 +255,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
    LOCAL  x2 := drawInfo[6], y2 := drawInfo[7]
 
    oldbkMode := SetBKMode(hdc, ::backStyle)
-   SelectObject(hDC, ::oPen:handle)
+   hwg_SelectObject(hDC, ::oPen:handle)
    IF ::ncStyle != NIL
       /*
       IF ::lnoBorder = .F.
@@ -278,14 +278,14 @@ METHOD Paint(lpdis) CLASS HDrawShape
    ELSE
       IF ::backStyle == OPAQUE
          IF ::Brush != NIL
-            SelectObject(hDC, ::Brush:handle)
+            hwg_SelectObject(hDC, ::Brush:handle)
          ENDIF
          //RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
       ENDIF
       IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle == OPAQUE
-         SelectObject(hDC, ::BrushFill:handle)
+         hwg_SelectObject(hDC, ::BrushFill:handle)
       ELSE
-         SelectObject(hDC, GetStockObject(NULL_BRUSH))
+         hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
       ENDIF
       RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
@@ -455,7 +455,7 @@ METHOD Paint(lpdis) CLASS HContainer
     x2  := drawInfo[6]
     y2  := drawInfo[7]
 
-   SelectObject(hDC, ::oPen:handle)
+   hwg_SelectObject(hDC, ::oPen:handle)
 
    IF ::ncStyle != NIL
       SetBkMode(hDC, ::backStyle)

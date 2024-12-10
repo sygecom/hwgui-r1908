@@ -254,9 +254,9 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
          oPenLight := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
          oPenGray := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
 
-         SelectObject(hDC, oPenLight:handle)
+         hwg_SelectObject(hDC, oPenLight:handle)
          DrawLine(hDC, 0, 1, aCoors[3] - 1, 1)
-         SelectObject(hDC, oPenGray:handle)
+         hwg_SelectObject(hDC, oPenGray:handle)
          DrawLine(hDC, 0, 0, aCoors[3] - 1, 0)
          oPenGray:Release()
          oPenLight:Release()

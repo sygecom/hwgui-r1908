@@ -83,7 +83,7 @@ METHOD Paint(lpdis) CLASS HLine
    LOCAL x2 := drawInfo[6]
    LOCAL y2 := drawInfo[7]
 
-   SelectObject(hDC, ::oPenLight:handle)
+   hwg_SelectObject(hDC, ::oPenLight:handle)
 
    IF Empty(::LineSlant)
       IF ::lVert

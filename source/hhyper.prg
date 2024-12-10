@@ -409,7 +409,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    dwFlags  += (DT_VCENTER + DT_END_ELLIPSIS)
    
    //::dc:SelectObject(::oFont:handle)
-   SelectObject(dc, ::oFont:handle)
+   hwg_SelectObject(dc, ::oFont:handle)
    IF ::state == LBL_NORMAL
       IF ::m_bVisited
          //::dc:SetTextColor(::m_sVisitedColor)
@@ -425,9 +425,9 @@ METHOD Paint(lpDis) CLASS HStaticLink
 
    //::dc:DrawText(strtext, rcClient, dwFlags)
    IF ::state == LBL_MOUSEOVER .AND. !::lAllUnderline
-      SelectObject(DC, ::oFontUnder:handle)
+      hwg_SelectObject(DC, ::oFontUnder:handle)
       DrawText(dc, strText, rcClient, dwFlags)
-      SelectObject(DC, ::oFont:handle)
+      hwg_SelectObject(DC, ::oFont:handle)
    ELSE
       DrawText(dc, strText, rcClient, dwFlags)
    ENDIF

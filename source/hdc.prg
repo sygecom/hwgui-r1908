@@ -144,7 +144,7 @@ METHOD SetBkMode(xMode) CLASS HDC
 
 METHOD SelectObject(xMode) CLASS HDC
 
-   RETURN SelectObject(::m_hDc, xMode)
+   RETURN hwg_SelectObject(::m_hDc, xMode)
 
 METHOD DrawText(strText, Rect, dwFlags) CLASS HDC
 

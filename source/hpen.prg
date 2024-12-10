@@ -88,7 +88,7 @@ METHOD Release() CLASS HPen
    IF ::nCounter == 0
       FOR EACH item IN ::aPens
          IF item:handle == ::handle
-            DeleteObject(::handle)
+            hwg_DeleteObject(::handle)
             #ifdef __XHARBOUR__
             ADel(::aPens, hb_EnumIndex())
             #else
@@ -109,7 +109,7 @@ EXIT PROCEDURE CleanDrawWidgHPen
    LOCAL item
 
    FOR EACH item IN HPen():aPens
-      DeleteObject(item:handle)
+      hwg_DeleteObject(item:handle)
    NEXT
 
 RETURN

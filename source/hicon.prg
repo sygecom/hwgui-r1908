@@ -128,7 +128,7 @@ METHOD Release() CLASS HIcon
    IF ::nCounter == 0
       FOR EACH item IN ::aIcons
          IF item:handle == ::handle
-            DeleteObject(::handle)
+            hwg_DeleteObject(::handle)
             #ifdef __XHARBOUR__
             ADel(::aIcons, hb_enumindex())
             #else
@@ -149,7 +149,7 @@ EXIT PROCEDURE CleanDrawWidgHIcon
    LOCAL item
 
    FOR EACH item IN HIcon():aIcons
-      DeleteObject(item:handle)
+      hwg_DeleteObject(item:handle)
    NEXT
 
 RETURN

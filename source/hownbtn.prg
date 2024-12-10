@@ -491,7 +491,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
 
    IF ::title != NIL
       IF ::oFont != NIL
-         SelectObject(hDC, ::oFont:handle)
+         hwg_SelectObject(hDC, ::oFont:handle)
       ENDIF
       IF ::lEnabled
          SetTextColor(hDC, ::tcolor)

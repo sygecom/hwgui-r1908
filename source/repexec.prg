@@ -491,7 +491,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          hBitmap := OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
          // writelog("hBitmap: " + str(hBitmap))
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
-         DeleteObject(hBitmap)
+         hwg_DeleteObject(hBitmap)
          // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
       ENDIF
    #endif

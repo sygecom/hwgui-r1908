@@ -1816,7 +1816,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
    hDC := BeginPaint(::handle, pps)
 
    IF ::ofont != NIL
-      SelectObject(hDC, ::ofont:handle)
+      hwg_SelectObject(hDC, ::ofont:handle)
    ENDIF
    IF ::brush == NIL .OR. ::lChanged
       ::Rebuild()
@@ -1836,9 +1836,9 @@ METHOD Paint(lLostFocus) CLASS HBrowse
 
    aMetrHead := AClone(aMetr)
    IF ::oHeadFont != NIL
-      oldfont := SelectObject(hDC, ::oHeadFont:handle)
+      oldfont := hwg_SelectObject(hDC, ::oHeadFont:handle)
       aMetrHead := GetTextMetric(hDC)
-      SelectObject(hDC, oldfont)
+      hwg_SelectObject(hDC, oldfont)
    ENDIF
    // USER DEFINE Height  IF != 0
    IF Empty(::nHeadHeight)
@@ -2113,7 +2113,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    oldBkColor := SetBkColor(hDC, GetSysColor(COLOR_3DFACE))
 
    IF ::hTheme == NIL
-      SelectObject(hDC, oPen64:handle)
+      hwg_SelectObject(hDC, oPen64:handle)
       Rectangle(hDC,;
                ::x1 - ::nShowMark - ::nDeleteMark, ;
                ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
@@ -2122,10 +2122,10 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    ENDIF
    IF !::lDispSep
       oPen := HPen():Add(PS_SOLID, 1, ::bColor)
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ELSEIF ::lDispSep
       oPen := HPen():Add(PS_SOLID, 1, ::sepColor)
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ENDIF
    IF ::lSep3d
       oPenLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
@@ -2133,7 +2133,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
 
    x := ::x1
    IF ::oHeadFont != NIL
-      oldfont := SelectObject(hDC, ::oHeadFont:handle)
+      oldfont := hwg_SelectObject(hDC, ::oHeadFont:handle)
    ENDIF
    IF ::headColor != NIL
       oldc := SetTextColor(hDC, ::headColor)
@@ -2172,7 +2172,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
             IF oPenHdr == NIL
                oPenHdr := HPen():Add(BS_SOLID, 1, 0)
             ENDIF
-            SelectObject(hDC, oPenHdr:handle)
+            hwg_SelectObject(hDC, oPenHdr:handle)
             cStr := oColumn:cGrid + ";"
             FOR nLine := 1 TO ::nHeadRows
                cNWSE := hb_tokenGet(@cStr, nLine, ";")
@@ -2189,7 +2189,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                   DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) + 1, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
                ENDIF
             NEXT
-            SelectObject(hDC, oPen:handle)
+            hwg_SelectObject(hDC, oPen:handle)
          ENDIF
          // Prints the column heading - justified
          aItemRect := {x, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, x + xSize, ::y1 + 1}
@@ -2265,7 +2265,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                {::x1 - xSize - 1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, ;
                ::x1 + 1, ::y1 + 1}, NIL)
       ELSE
-         SelectObject(hDC, oPen64:handle)
+         hwg_SelectObject(hDC, oPen64:handle)
          Rectangle(hDC, ::x1 - xSize -1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x1 - 1, ::y1)
          DrawButton(hDC, ::x1 - xSize - 0, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
@@ -2274,7 +2274,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    ENDIF
 
    IF ::hTheme != NIL
-      SelectObject(hDC, oPen64:handle)
+      hwg_SelectObject(hDC, oPen64:handle)
       Rectangle(hDC, ;
                ::x1 - ::nShowMark - ::nDeleteMark, ;
                ::y1, ;//- (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
@@ -2289,15 +2289,15 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       SetTextColor(hDC, oldc)
    ENDIF
    IF ::oHeadFont != NIL
-      SelectObject(hDC, oldfont)
+      hwg_SelectObject(hDC, oldfont)
    ENDIF
    IF ::lResizing .AND. xDragMove > 0
-      SelectObject(hDC, oPen64:handle)
+      hwg_SelectObject(hDC, oPen64:handle)
       //Rectangle(hDC, xDragMove, 1, xDragMove, 1 + (::nheight + 1))
       DrawLine(hDC, xDragMove, 1, xDragMove, (::nHeadHeight * ::nHeadRows) + ::nyHeight + 1 + (::rowCount * (::height + 1 + ::aMargin[3])))
    ENDIF
    IF ::lDispSep
-      DeleteObject(oPen)
+      hwg_DeleteObject(oPen)
       IF oPenHdr != NIL
          oPenHdr:Release()
       ENDIF
@@ -2323,12 +2323,12 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
      // IF oPen == NIL
          oPen := HPen():Add(PS_SOLID, 1, ::bColor)
      // ENDIF
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ELSEIF ::lDispSep
      // IF oPen == NIL
          oPen := HPen():Add(PS_SOLID, 1, ::sepColor)
      // ENDIF
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ENDIF
    IF ::lSep3d
       IF oPenLight == NIL
@@ -2354,14 +2354,14 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
       IF !oColumn:lHide
         IF ::lDispSep .AND. x > ::x1
            IF ::lSep3d
-              SelectObject(hDC, oPenLight:handle)
+              hwg_SelectObject(hDC, oPenLight:handle)
               //DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRows)
               DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
-              SelectObject(hDC, oPen:handle)
+              hwg_SelectObject(hDC, oPen:handle)
               DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * (nRowsFill))
               //DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * nRows)
            ELSE
-               SelectObject(hDC, oPen:handle)
+               hwg_SelectObject(hDC, oPen:handle)
                DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
                //DrawLine(hDC, x - 0, ::y1 + 1, x - 0, ::y1 + (::height + 1) * nRows)
            ENDIF
@@ -2371,14 +2371,14 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
               bColor := IIf(oColumn:bColorBlock != NIL, (Eval(oColumn:bColorBlock, ::FLDSTR(Self, fif), fif, Self))[2], oColumn:bColor)
               IF bColor != NIL
                  // horizontal
-                 SelectObject(hDC, HPen():Add(PS_SOLID, 1, bColor):handle)
+                 hwg_SelectObject(hDC, HPen():Add(PS_SOLID, 1, bColor):handle)
                  FOR i := 1 TO nRowsFill
                     DrawLine(hDC, x, ::y1 + (::height + 1) * i, x + xsize, ::y1 + (::height + 1) * i)
                  NEXT
               ENDIF
            ENDIF
            IF x > ::x1 - IIf(::lDeleteMark, 1, 0)
-              SelectObject(hDC, oPen:handle)
+              hwg_SelectObject(hDC, oPen:handle)
               DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRowsFill)
            ENDIF
         ENDIF
@@ -2398,12 +2398,12 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
       ENDIF
    ENDDO
    //  SEPARATOR HORIZONT
-    SelectObject(hDC, oPen:handle)
+    hwg_SelectObject(hDC, oPen:handle)
     IF !::lAdjRight
        IF ::lSep3d
-         SelectObject(hDC, oPenLight:handle)
+         hwg_SelectObject(hDC, oPenLight:handle)
          DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
-         SelectObject(hDC, oPen:handle)
+         hwg_SelectObject(hDC, oPen:handle)
          DrawLine(hDC, x - 2, ::y1 - (::height * ::nHeadRows), x - 2, ::y1 + (::height + 1) * (nRowsFill))
        ELSE
           DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
@@ -2421,7 +2421,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
    //ENDIF
    */
    IF ::lDispSep
-      DeleteObject(oPen)
+      hwg_DeleteObject(oPen)
       IF oPenLight != NIL
          oPenLight:Release()
       ENDIF
@@ -2439,10 +2439,10 @@ METHOD FooterOut(hDC) CLASS HBrowse
    nMl := IIf(::lShowMark, ::nShowMark, 0)+ IIf(::lDeleteMark, ::nDeleteMark, 0)
    IF !::lDispSep
       oPen := HPen():Add(PS_SOLID, 1, ::bColor)
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ELSEIF ::lDispSep
       oPen := HPen():Add(PS_SOLID, 1, ::sepColor)
-      SelectObject(hDC, oPen:handle)
+      hwg_SelectObject(hDC, oPen:handle)
    ENDIF
 
    x := ::x1
@@ -2468,10 +2468,10 @@ METHOD FooterOut(hDC) CLASS HBrowse
         ENDIF
 
         IF oColumn:FootFont != NIL
-           SelectObject(hDC, oColumn:FootFont:handle)
+           hwg_SelectObject(hDC, oColumn:FootFont:handle)
            lColumnFont := .T.
         ELSEIF lColumnFont
-           SelectObject(hDC, ::ofont:handle)
+           hwg_SelectObject(hDC, ::ofont:handle)
            lColumnFont := .F.
         ENDIF
 
@@ -2547,7 +2547,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
       oPen:Release()
    ENDIF
    IF nMl > 0
-      SelectObject(hDC, oPen64:handle)
+      hwg_SelectObject(hDC, oPen64:handle)
       xSize := nMl
       IF ::hTheme != NIL
          aItemRect := {::x1 - xSize, nY, ::x1 - 1, ::y2 + 1}
@@ -2558,7 +2558,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
       ENDIF
    ENDIF
    IF lColumnFont
-       SelectObject(hDC, ::oFont:handle)
+       hwg_SelectObject(hDC, ::oFont:handle)
    ENDIF
 
    RETURN NIL
@@ -2603,7 +2603,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                          ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                          ::x1 - ::nDeleteMark - 1, ; //IIf(::lDeleteMark, -1, -2), ;
                          ::y1 + (::height + 1) * ::nPaintRow + 1, 1)
-             SelectObject(hDC, oPen64:handle)
+             hwg_SelectObject(hDC, oPen64:handle)
              Rectangle(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * (::nPaintRow - 1), ;
                         ::x1  - ::nDeleteMark - 1, ::y1 + (::height + 1) * ::nPaintRow - 0) //, IIf(Deleted(), GetStockObject(7), ::brush:handle))
           ENDIF
@@ -2616,13 +2616,13 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                 IF !::lEditable .OR. ::HighlightStyle == 3 .OR. ::HighlightStyle == 0
                    ::internal[1] := 1
                    oPen := HPen():Add(0, 1, ::bcolorSel)
-                   SelectObject(hDC, GetStockObject(NULL_BRUSH))
-                   SelectObject(hDC, oPen:handle)
+                   hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
+                   hwg_SelectObject(hDC, oPen:handle)
                    RoundRect(hDC, ::x1, ;
                                  ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                                  ::xAdjRight - 2,;  //::x2 - 1, ;
                                  ::y1 + (::height + 1) * ::nPaintRow, 0, 0)
-                   DeleteObject(oPen)
+                   hwg_DeleteObject(oPen)
                    IF ((::Highlight .OR. !::lEditable) .AND. nCol == 0) .OR. (::HighlightStyle == 3 .AND. !SelfFocus(::handle))
                       RETURN NIL
                    ENDIF
@@ -2732,10 +2732,10 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                      oldBk1Color := SetBkColor(hDC, ::aColumns[::nPaintCol]:bColor)
                   ENDIF
                   IF ::aColumns[::nPaintCol]:oFont != NIL
-                     SelectObject(hDC, ::aColumns[::nPaintCol]:oFont:handle)
+                     hwg_SelectObject(hDC, ::aColumns[::nPaintCol]:oFont:handle)
                      lColumnFont := .T.
                   ELSEIF lColumnFont
-                     SelectObject(hDC, ::ofont:handle)
+                     hwg_SelectObject(hDC, ::ofont:handle)
                      lColumnFont := .F.
                   ENDIF
                   IF ::aColumns[::nPaintCol]:Hint
@@ -2803,7 +2803,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       SetTextColor(hDC, oldTColor)
       SetBkColor(hDC, oldBkColor)
       IF lColumnFont
-         SelectObject(hDC, ::ofont:handle)
+         hwg_SelectObject(hDC, ::ofont:handle)
       ENDIF
    ENDIF
    RETURN NIL

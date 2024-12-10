@@ -67,7 +67,7 @@ METHOD Release() CLASS HBrush
    IF ::nCounter == 0
       FOR EACH item IN ::aBrushes
          IF item:handle == ::handle
-            DeleteObject(::handle)
+            hwg_DeleteObject(::handle)
             #ifdef __XHARBOUR__
             ADel(::aBrushes, hb_enumindex())
             #else
@@ -88,7 +88,7 @@ EXIT PROCEDURE CleanDrawWidgHBrush
    LOCAL item
 
    FOR EACH item IN HBrush():aBrushes
-      DeleteObject(item:handle)
+      hwg_DeleteObject(item:handle)
    NEXT
 
 RETURN

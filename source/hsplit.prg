@@ -136,7 +136,7 @@ METHOD Paint() CLASS HSplitter
    ELSEIF !::lScrolling
       IF ::lCaptured
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
-         SelectObject(hDC, oBrushFill:handle)
+         hwg_SelectObject(hDC, oBrushFill:handle)
          DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP) + BF_MIDDLE)
          FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
       ELSEIF ::BackStyle == OPAQUE

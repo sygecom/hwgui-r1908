@@ -1104,9 +1104,9 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       DrawFocusRect(dc, focusRect)
    ENDIF
 
-   DeleteObject(br)
-   DeleteObject(brBackground)
-   DeleteObject(brBtnShadow)
+   hwg_DeleteObject(br)
+   hwg_DeleteObject(brBackground)
+   hwg_DeleteObject(brBtnShadow)
 
 RETURN NIL
 

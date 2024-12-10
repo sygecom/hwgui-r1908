@@ -148,14 +148,14 @@ METHOD PAINT(lpdis) CLASS HGroup
       //pnFrmDark := CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
       pnFrmDark := HPen():Add(PS_SOLID, 1, RGB(64, 64, 64))
       pnFrmLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
-      ppnOldPen := SelectObject(dc, pnFrmDark:handle)
+      ppnOldPen := hwg_SelectObject(dc, pnFrmDark:handle)
       MoveTo(dc, rcText[1] - 2, rcText[2])
       LineTo(dc, rc[1], rcText[2])
       LineTo(dc, rc[1], rc[4])
       LineTo(dc, rc[3], rc[4])
       LineTo(dc, rc[3], rcText[4])
       LineTo(dc, rcText[3], rcText[4])
-      SelectObject(dc, pnFrmLight:handle)
+      hwg_SelectObject(dc, pnFrmLight:handle)
       MoveTo(dc, rcText[1] - 2, rcText[2] + 1)
       LineTo(dc, rc[1] + 1, rcText[2] + 1)
       LineTo(dc, rc[1] + 1, rc[4] - 1)
@@ -165,14 +165,14 @@ METHOD PAINT(lpdis) CLASS HGroup
    ELSE // 3D frame
       pnFrmDark := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
       pnFrmLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
-      ppnOldPen := SelectObject(dc, pnFrmDark:handle)
+      ppnOldPen := hwg_SelectObject(dc, pnFrmDark:handle)
       MoveTo(dc, rcText[1] - 2, rcText[2])
       LineTo(dc, rc[1], rcText[2])
       LineTo(dc, rc[1], rc[4] - 1)
       LineTo(dc, rc[3] - 1, rc[4] - 1)
       LineTo(dc, rc[3] - 1, rcText[4])
       LineTo(dc, rcText[3], rcText[4])
-      SelectObject(dc, pnFrmLight:handle)
+      hwg_SelectObject(dc, pnFrmLight:handle)
       MoveTo(dc, rcText[1] - 2, rcText[2] + 1)
       LineTo(dc, rc[1] + 1, rcText[2] + 1)
       LineTo(dc, rc[1] + 1, rc[4] - 1)
@@ -195,9 +195,9 @@ METHOD PAINT(lpdis) CLASS HGroup
       DrawText(dc, szText, rcText, DT_VCENTER + DT_LEFT + DT_SINGLELINE + DT_NOCLIP)
    ENDIF
    // cleanup
-   DeleteObject(pnFrmLight)
-   DeleteObject(pnFrmDark)
-   SelectObject(dc, ppnOldPen)
+   hwg_DeleteObject(pnFrmLight)
+   hwg_DeleteObject(pnFrmDark)
+   hwg_SelectObject(dc, ppnOldPen)
 
 RETURN NIL
 

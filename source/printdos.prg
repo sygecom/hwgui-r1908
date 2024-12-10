@@ -390,7 +390,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
    oPrinter:StartDoc(oPreview)
    oPrinter:StartPage()
 
-   SelectObject(oPrinter:hDC, oFont:handle)
+   hwg_SelectObject(oPrinter:hDC, oFont:handle)
 
    IF han != - 1
       DO WHILE .T.

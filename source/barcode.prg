@@ -322,9 +322,9 @@ METHOD CreateBarcode(cCode) CLASS BarCode
    */
 
    Rich_SelectObject(::hDC, hOldPen)
-   DeleteObject(hPen)
+   hwg_DeleteObject(hPen)
    Rich_SelectObject(::hDC, hOldBrush)
-   DeleteObject(hBrush)
+   hwg_DeleteObject(hBrush)
 
    RETURN NIL
 

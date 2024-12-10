@@ -1582,7 +1582,7 @@ METHOD ReleaseObj(aControls) CLASS HRepTmpl
       ELSE
          IF aControls[i]:obj != NIL
             IF aControls[i]:cClass == "bitmap"
-               DeleteObject(aControls[i]:obj)
+               hwg_DeleteObject(aControls[i]:obj)
                aControls[i]:obj := NIL
             ELSEIF aControls[i]:cClass == "label"
                aControls[i]:obj:Release()

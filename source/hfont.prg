@@ -61,7 +61,7 @@ METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, fdwUnderl
          ::aFonts[i]:StrikeOut == fdwStrikeOut
          ::aFonts[i]:nCounter++
          IF nHandle != NIL
-            DeleteObject(nHandle)
+            hwg_DeleteObject(nHandle)
          ENDIF
          RETURN ::aFonts[i]
       ENDIF
@@ -131,7 +131,7 @@ METHOD Release() CLASS HFont
    IF ::nCounter == 0
       FOR EACH item IN ::aFonts
          IF item:handle == ::handle
-            DeleteObject(::handle)
+            hwg_DeleteObject(::handle)
             #ifdef __XHARBOUR__
             ADel(::aFonts, hb_enumindex())
             #else
@@ -152,7 +152,7 @@ EXIT PROCEDURE CleanDrawWidgHFont
    LOCAL item
 
    FOR EACH item IN HFont():aFonts
-      DeleteObject(item:handle)
+      hwg_DeleteObject(item:handle)
    NEXT
 
 RETURN

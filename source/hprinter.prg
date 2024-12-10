@@ -55,7 +55,7 @@ CLASS HPrinter INHERIT HObject
 
    METHOD SetMode(nOrientation)
    METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharSet)
-   METHOD SetFont(oFont) INLINE SelectObject(::hDC, oFont:handle)
+   METHOD SetFont(oFont) INLINE hwg_SelectObject(::hDC, oFont:handle)
    METHOD SetTextColor(nColor) INLINE SetTextColor(::hDC, nColor)
    METHOD SetTBkColor(nColor) INLINE SetBKColor(::hDC, nColor)
    METHOD SetBkmode(lmode) INLINE SetBkmode(::hDC, IIf(lmode, 1, 0))
@@ -201,10 +201,10 @@ METHOD END() CLASS HPrinter
 METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
 
    IF oPen != NIL
-      SelectObject(::hDC, oPen:handle)
+      hwg_SelectObject(::hDC, oPen:handle)
    ENDIF
    IF oBrush != NIL
-      SelectObject(::hDC, oBrush:handle)
+      hwg_SelectObject(::hDC, oBrush:handle)
    ENDIF
    IF ::lmm
       Box(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
@@ -217,7 +217,7 @@ METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
 METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
    IF oPen != NIL
-      SelectObject(::hDC, oPen:handle)
+      hwg_SelectObject(::hDC, oPen:handle)
    ENDIF
    IF ::lmm
       DrawLine(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
@@ -231,7 +231,7 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
    LOCAL hFont, nOldTC, nOldBC
 
    IF oFont != NIL
-      hFont := SelectObject(::hDC, oFont:handle)
+      hFont := hwg_SelectObject(::hDC, oFont:handle)
    ENDIF
    IF nTextColor != NIL
       nOldTC := SetTextColor(::hDC, nTextColor)
@@ -247,7 +247,7 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
    ENDIF
 
    IF oFont != NIL
-      SelectObject(::hDC, hFont)
+      hwg_SelectObject(::hDC, hFont)
    ENDIF
 
    IF nTextColor != NIL
@@ -275,11 +275,11 @@ METHOD GetTextWidth(cString, oFont) CLASS HPrinter
    LOCAL arr, hFont
 
    IF oFont != NIL
-      hFont := SelectObject(::hDC, oFont:handle)
+      hFont := hwg_SelectObject(::hDC, oFont:handle)
    ENDIF
    arr := GetTextSize(::hDC, cString)
    IF oFont != NIL
-      SelectObject(::hDC, hFont)
+      hwg_SelectObject(::hDC, hFont)
    ENDIF
 
    RETURN IIf(::lmm, Int(arr[1] / ::nHRes), arr[1])

@@ -100,7 +100,7 @@ METHOD Release() CLASS HFreeImage
             IF i:handle == ::handle
                FI_Unload(::handle)
                IF ::hBitmap != NIL
-                  DeleteObject(::hBitmap)
+                  hwg_DeleteObject(::hBitmap)
                ENDIF
                ADel(::aImages, hB_enumIndex())
                ASize(::aImages, nlen - 1)
@@ -112,7 +112,7 @@ METHOD Release() CLASS HFreeImage
             IF ::aImages[i]:handle == ::handle
                FI_Unload(::handle)
                IF ::hBitmap != NIL
-                  DeleteObject(::hBitmap)
+                  hwg_DeleteObject(::hBitmap)
                ENDIF
                ADel(::aImages, i)
                ASize(::aImages, nlen - 1)
@@ -206,7 +206,7 @@ METHOD Paint(lpdis) CLASS HSayFImage
    FOR i := 1 TO Len(HFreeImage():aImages)
       FI_Unload(HFreeImage():aImages[i]:handle)
       IF HFreeImage():aImages[i]:hBitmap != NIL
-         DeleteObject(HFreeImage():aImages[i]:hBitmap)
+         hwg_DeleteObject(HFreeImage():aImages[i]:hBitmap)
       ENDIF
    NEXT
    FI_End()

@@ -1301,7 +1301,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     ENDIF
     SetBkMode(::hDC, TRANSPARENT)
     IF oPage:oParent:oFont != NIL
-       SelectObject(::hDC, oPage:oParent:oFont:handle)
+       hwg_SelectObject(::hDC, oPage:oParent:oFont:handle)
     ENDIF
     IF oPage:lEnabled
        SetTextColor(::hDC, IIf(Empty(oPage:tColor), GetSysColor(COLOR_WINDOWTEXT), oPage:tColor))
