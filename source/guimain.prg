@@ -50,7 +50,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 
    IF pArray != NIL
       FOR i := 1 TO Len(pArray)
-         // writelog("InitControl1" + Str(pArray[i]:handle) + "/" + pArray[i]:classname + " " + Str(pArray[i]:nWidth) + "/" + Str(pArray[i]:nHeight))
+         // hwg_WriteLog("InitControl1" + Str(pArray[i]:handle) + "/" + pArray[i]:classname + " " + Str(pArray[i]:nWidth) + "/" + Str(pArray[i]:nHeight))
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
 //         IF Empty(pArray[i]:handle) .AND. !lNoActivate
             lInit := pArray[i]:lInit
@@ -64,7 +64,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
          IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong(pArray[i]:handle), pArray[i]:handle) <= 0 // TODO: verificar
             pArray[i]:handle := GetDlgItem(oWnd:handle, pArray[i]:id)
 
-            // writelog("InitControl2" + Str(pArray[i]:handle) + "/" + pArray[i]:classname)
+            // hwg_WriteLog("InitControl2" + Str(pArray[i]:handle) + "/" + pArray[i]:classname)
          ENDIF
          IF !Empty(pArray[i]:aControls)
             InitControls(pArray[i])

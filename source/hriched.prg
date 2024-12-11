@@ -113,7 +113,7 @@ METHOD Init() CLASS HRichEdit
 METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    LOCAL nDelta, nret
 
-   //HWG_writelog("rich" + Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+   // hwg_WriteLog("rich" + Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
    IF msg == WM_KEYUP .OR. msg == WM_LBUTTONDOWN .OR. msg == WM_LBUTTONUP // msg == WM_NOTIFY .OR.
       ::updatePos()
    ELSEIF msg == WM_MOUSEACTIVATE .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
@@ -413,7 +413,7 @@ METHOD Print() CLASS HRichEdit
 /*
 Function DefRichProc(hEdit, msg, wParam, lParam)
 Local oEdit
-   // writelog("RichProc: " + Str(hEdit, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
+   // hwg_WriteLog("RichProc: " + Str(hEdit, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    oEdit := FindSelf(hEdit)
    IF msg == WM_CHAR
       oEdit:lChanged := .T.

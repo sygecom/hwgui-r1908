@@ -233,7 +233,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
       ENDIF
    ENDIF
 
-   //HWG_WRITELOG(Str(MSG)+::TITLE+Chr(13))
+   // hwg_WriteLog(Str(MSG) + ::TITLE + Chr(13))
 
    IF !::lMultiLine
 
@@ -797,7 +797,7 @@ METHOD KeyRight(nPos) CLASS HEdit
 
    IF !Empty(::cPicMask)
       newpos := Len(::cPicMask)
-      //writelog("KeyRight-2 " + Str(nPos) + " " + Str(newPos))
+      // hwg_WriteLog("KeyRight-2 " + Str(nPos) + " " + Str(newPos))
       IF nPos > newpos .AND. !Empty(Trim(::Title))
          SendMessage(::handle, EM_SETSEL, newpos, newpos)
       ENDIF

@@ -266,7 +266,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       ENDIF
       //AgE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
       ENDIF
    ELSEIF msg == WM_CLOSE
@@ -342,7 +342,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       ENDIF
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -350,33 +350,33 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_SYSCOMMAND
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onSysCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
    CASE WM_SIZE
       //AGE SOMENTE NO DIALOG
-      //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+      // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
       RETURN onSize(Self, wParam, lParam)
 
    CASE WM_INITDIALOG
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN InitModalDlg(Self, wParam, lParam)
       ENDIF
       EXIT
 
    CASE WM_ERASEBKGND
       //AGE SOMENTE NO DIALOG
-      //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+      // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
       RETURN onEraseBk(Self, wParam)
 
    CASE WM_DESTROY
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onDestroy(Self)
       ENDIF
       EXIT
@@ -384,7 +384,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_ENTERIDLE
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onEnterIdle(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -392,7 +392,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_ACTIVATE
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onActivate(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -400,7 +400,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_PSPNOTIFY
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onPspNotify(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -408,7 +408,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_HELP
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onHelp(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -416,7 +416,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_CTLCOLORDLG
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
-         //writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
+         // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
          RETURN onDlgColor(Self, wParam, lParam)
       ENDIF
       EXIT
@@ -510,7 +510,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    HB_SYMBOL_UNUSED(wParam)
 
    // oDlg:handle := hDlg
-   // writelog(Str(oDlg:handle) + " " + oDlg:title)
+   // hwg_WriteLog(Str(oDlg:handle) + " " + oDlg:title)
    //  .if uMsg == WM_INITDIALOG
    //-EnableThemeDialogTexture(odlg:handle, 6)  //, ETDT_ENABLETAB)
 
@@ -1025,7 +1025,7 @@ FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lMo
          aHandles[i] := _CreatePropertySheetPage(aPages[i], aTemplates[i])
       ENDIF
       aSheet[i] := {aHandles[i], aPages[i]}
-      // Writelog("h: " + Str(aHandles[i]))
+      // hwg_WriteLog("h: " + Str(aHandles[i]))
    NEXT
    hSheet := _PropertySheet(hParentWindow, aHandles, Len(aHandles), cTitle, lModeless, lNoApply, lWizard)
    FOR i := 1 TO Len(aPages)

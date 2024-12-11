@@ -146,7 +146,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       ::BottomMargin     := (::nPHeight - ::TopMargin)+1
       ::LeftMargin       := aPrnCoors[11]
       ::RightMargin      := (::nPWidth - ::LeftMargin)+1
-      // writelog(::cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
+      // hwg_WriteLog(::cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
    ENDIF
 
    RETURN Self
@@ -168,7 +168,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
       ::nPHeight := IIf(::lmm, aPrnCoors[9], aPrnCoors[2])
       ::nHRes   := aPrnCoors[1] / aPrnCoors[3]
       ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
-      // writelog(":" + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
+      // hwg_WriteLog(":" + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
       RETURN .T.
    ENDIF
 
@@ -710,7 +710,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    rect := GetClientRect(oWnd:handle)
 
-   // WriteLog(Str(rect[1]) + Str(rect[2]) + Str(rect[3]) + Str(rect[4]))
+   // hwg_WriteLog(Str(rect[1]) + Str(rect[2]) + Str(rect[3]) + Str(rect[4]))
    // offscreen canvas must be THE WHOLE CANVAS !
 
    IF ::xOffset == NIL

@@ -260,8 +260,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
    LOCAL i
 
-   //Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
-   //   IIf(lParam != NIL, Str(lParam), "NIL"))
+   // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
+   //    IIf(lParam != NIL, Str(lParam), "NIL"))
 
    IF msg == WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR. ;
@@ -288,7 +288,7 @@ RETURN -1
 #else
 METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
-   // Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
+   // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
    //    IIf(lParam != NIL, Str(lParam), "NIL"))
 
    SWITCH msg

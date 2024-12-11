@@ -198,7 +198,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    aPrnCoors := GetDeviceArea(oPrinter:hDCPrn)
    prnXCoef := (aPrnCoors[1] / aPaintRep[FORM_WIDTH]) / aPaintRep[FORM_XKOEF]
    prnYCoef := (aPrnCoors[2] / aPaintRep[FORM_HEIGHT]) / aPaintRep[FORM_XKOEF]
-   // writelog(oPrinter:cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + " / " + Str(aPaintRep[FORM_WIDTH]) + " " + Str(aPaintRep[FORM_HEIGHT]) + Str(aPaintRep[FORM_XKOEF]) + " / " + Str(prnXCoef) + Str(prnYCoef))
+   // hwg_WriteLog(oPrinter:cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + " / " + Str(aPaintRep[FORM_WIDTH]) + " " + Str(aPaintRep[FORM_HEIGHT]) + Str(aPaintRep[FORM_XKOEF]) + " / " + Str(prnXCoef) + Str(prnYCoef))
 
    IF Type("oFontStandard") = "U"
       PRIVATE oFontStandard := HFont():Add("Arial", 0, -13, 400, 204)
@@ -278,8 +278,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
 
    #ifdef __DEBUG__
       oPrinter:END()
-      // Writelog("Startdoc")
-      // Writelog("Startpage")
+      // hwg_WriteLog("Startdoc")
+      // hwg_WriteLog("Startpage")
    #else
       oPrinter:StartDoc(lPreview)
       oPrinter:StartPage()
@@ -289,7 +289,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
       iItem := 1
       DO WHILE iItem <= Len(aPaintRep[FORM_ITEMS])
          aItem := aPaintRep[FORM_ITEMS, iItem]
-         // WriteLog(Str(iItem, 3) + ": " + Str(aItem[ITEM_TYPE]))
+         // hwg_WriteLog(Str(iItem, 3) + ": " + Str(aItem[ITEM_TYPE]))
          IF aItem[ITEM_TYPE] == TYPE_MARKER
             IF aItem[ITEM_CAPTION] == "PH"
                IF aItem[ITEM_STATE] == 0
@@ -312,8 +312,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                   aItem[ITEM_STATE] := 1
                   IF !ScriptExecute(aItem)
                      #ifdef __DEBUG__
-                        // Writelog("Endpage")
-                        // Writelog("Enddoc")
+                        // hwg_WriteLog("Endpage")
+                        // hwg_WriteLog("Enddoc")
                      #else
                         oPrinter:EndPage()
                         oPrinter:EndDoc()
@@ -335,8 +335,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                NEXT
                IF !ScriptExecute(aItem)
                   #ifdef __DEBUG__
-                     // Writelog("Endpage")
-                     // Writelog("Enddoc")
+                     // hwg_WriteLog("Endpage")
+                     // hwg_WriteLog("Enddoc")
                   #else
                      oPrinter:EndPage()
                      oPrinter:EndDoc()
@@ -346,13 +346,13 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                ENDIF
                IF !lLastCycle
                   nYadd += nLineHeight
-                  // Writelog(Str(nLineStartY) + " " + Str(nYadd) + " " + Str(nEndList))
+                  // hwg_WriteLog(Str(nLineStartY) + " " + Str(nYadd) + " " + Str(nEndList))
                   IF nLineStartY + nYadd + nLineHeight >= nEndList
-                     // Writelog("New Page")
+                     // hwg_WriteLog("New Page")
                      IF iPF == 0
                         #ifdef __DEBUG__
-                           // Writelog("Endpage")
-                           // Writelog("Startpage")
+                           // hwg_WriteLog("Endpage")
+                           // hwg_WriteLog("Startpage")
                         #else
                            oPrinter:EndPage()
                            oPrinter:StartPage()
@@ -381,8 +381,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                NEXT
                IF !lLastCycle
                   #ifdef __DEBUG__
-                     // Writelog("Endpage")
-                     // Writelog("Startpage")
+                     // hwg_WriteLog("Endpage")
+                     // hwg_WriteLog("Startpage")
                   #else
                      oPrinter:EndPage()
                      oPrinter:StartPage()
@@ -404,8 +404,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
             IF aItem[ITEM_TYPE] == TYPE_TEXT
                IF !ScriptExecute(aItem)
                   #ifdef __DEBUG__
-                     // Writelog("Endpage")
-                     // Writelog("Enddoc")
+                     // hwg_WriteLog("Endpage")
+                     // hwg_WriteLog("Enddoc")
                   #else
                      oPrinter:EndPage()
                      oPrinter:EndDoc()
@@ -431,8 +431,8 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    ENDDO
 
    #ifdef __DEBUG__
-      // Writelog("Endpage")
-      // Writelog("Enddoc")
+      // hwg_WriteLog("Endpage")
+      // hwg_WriteLog("Enddoc")
    #else
       oPrinter:EndPage()
       oPrinter:EndDoc()
@@ -459,17 +459,17 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
 
    x2 := x1 + aItem[ITEM_WIDTH] - 1
    y2 := y1 + aItem[ITEM_HEIGHT] - 1
-   // writelog(Str(aItem[ITEM_TYPE]) + ": " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION], "") + Str(x1) + Str(y1) + Str(x2) + Str(y2))
+   // hwg_WriteLog(Str(aItem[ITEM_TYPE]) + ": " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION], "") + Str(x1) + Str(y1) + Str(x2) + Str(y2))
    x1 := Round(x1 * prnXCoef, 0)
    y1 := Round(y1 * prnYCoef, 0)
    x2 := Round(x2 * prnXCoef, 0)
    y2 := Round(y2 * prnYCoef, 0)
-   // writelog("PrintItem-2: " + Str(x1) + Str(y1) + Str(x2) + Str(y2))
+   // hwg_WriteLog("PrintItem-2: " + Str(x1) + Str(y1) + Str(x2) + Str(y2))
 
    #ifdef __DEBUG__
-      // Writelog(Str(aItem[ITEM_TYPE]) + ": " + Str(x1) + " " + Str(y1) + " " + Str(x2) + " " + Str(y2) + " " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION] + IIf(aItem[ITEM_VAR] > 0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
+      // hwg_WriteLog(Str(aItem[ITEM_TYPE]) + ": " + Str(x1) + " " + Str(y1) + " " + Str(x2) + " " + Str(y2) + " " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION] + IIf(aItem[ITEM_VAR] > 0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
    #else
-      // Writelog(Str(aItem[ITEM_TYPE]) + ": " + Str(x1) + " " + Str(y1) + " " + Str(x2) + " " + Str(y2) + " " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION] + IIf(aItem[ITEM_VAR] > 0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
+      // hwg_WriteLog(Str(aItem[ITEM_TYPE]) + ": " + Str(x1) + " " + Str(y1) + " " + Str(x2) + " " + Str(y2) + " " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION] + IIf(aItem[ITEM_VAR] > 0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          IF aItem[ITEM_VAR] > 0
             stroka := IIf(lCalc, &(aItem[ITEM_CAPTION]), "")
@@ -489,7 +489,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          oPrinter:Box(x1, y1, x2, y2, aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          hBitmap := OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
-         // writelog("hBitmap: " + Str(hBitmap))
+         // hwg_WriteLog("hBitmap: " + Str(hBitmap))
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
          hwg_DeleteObject(hBitmap)
          // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
