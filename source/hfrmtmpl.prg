@@ -571,8 +571,9 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       cMethod := LTrim(cMethod)
    ENDIF
    IF Lower(Left(cMethod, 11)) == "parameters " .AND. (nPos := At(Chr(10), cMethod)) != 0
-      DO WHILE Substr(cMethod, --nPos, 1) <= " "; ENDDO
-      cParam := Alltrim(Substr(Left(cMethod, nPos), 12))
+      DO WHILE SubStr(cMethod, --nPos, 1) <= " "
+      ENDDO
+      cParam := Alltrim(SubStr(Left(cMethod, nPos), 12))
    ENDIF
    IF oForm:lDebug
       arr := {}
@@ -1496,7 +1497,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
          oPrinter:SetFont(oFont)
       ENDIF
       ::nTOffset := ::nAOffSet := ::ny := 0
-      // Writelog("Print-1 " + str(oPrinter:nPage))
+      // Writelog("Print-1 " + Str(oPrinter:nPage))
       FOR i := 1 TO Len(::aControls)
          ::PrintItem(::aControls[i])
       NEXT
@@ -1607,7 +1608,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                ENDIF
             ENDDO
             IF lLastCycle
-               // writelog("--> " + str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
+               // writelog("--> " + Str(::nAOffSet) + Str(y2 - y + 1 - (::ny - y)))
                ::nAOffSet += y2 - y + 1 - (::ny - y)
                ::nTOffset := 0
                ::lFinish := .T.
@@ -1649,7 +1650,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
             nPenWidth := Round(::nKoefPix, 0)
          ENDIF
          oItem:oPen := HPen():Add(nPenType, nPenWidth)
-         // writelog(str(nPenWidth) + " " + str(::nKoefY))
+         // writelog(Str(nPenWidth) + " " + Str(::nKoefY))
       ENDIF
       IF oItem:cClass == "label"
          IF (aMethod := aGetSecond(oItem:aMethods, "expression")) != NIL
@@ -1694,11 +1695,11 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
             SetTransparentMode(::oPrinter:hDC, .F.)
-            // Writelog(str(x) + " " + str(y) + " " + str(x2) + " " + str(y2) + " " + str(::nAOffSet) + " " + str(::nTOffSet) + " Say: " + cText)
+            // Writelog(Str(x) + " " + Str(y) + " " + Str(x2) + " " + Str(y2) + " " + Str(::nAOffSet) + " " + Str(::nTOffSet) + " Say: " + cText)
          ENDIF
       ELSEIF oItem:cClass == "box"
          ::oPrinter:Box(x, y, x2, y2, oItem:oPen)
-         // writelog("Draw " + str(x) + " " + str(x + width - 1))
+         // writelog("Draw " + Str(x) + " " + Str(x + width - 1))
       ELSEIF oItem:cClass == "vline"
          ::oPrinter:Line(x, y, x, y2, oItem:oPen)
       ELSEIF oItem:cClass == "hline"

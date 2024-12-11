@@ -146,7 +146,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       ::BottomMargin     := (::nPHeight - ::TopMargin)+1
       ::LeftMargin       := aPrnCoors[11]
       ::RightMargin      := (::nPWidth - ::LeftMargin)+1
-      // writelog(::cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]))
+      // writelog(::cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
    ENDIF
 
    RETURN Self
@@ -168,7 +168,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
       ::nPHeight := IIf(::lmm, aPrnCoors[9], aPrnCoors[2])
       ::nHRes   := aPrnCoors[1] / aPrnCoors[3]
       ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
-      // writelog(":" + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]))
+      // writelog(":" + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
       RETURN .T.
    ENDIF
 
@@ -710,7 +710,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    rect := GetClientRect(oWnd:handle)
 
-   // WriteLog(stR(rect[1])+ stR(rect[2])+ stR(rect[3])+ stR(rect[4]))
+   // WriteLog(Str(rect[1]) + Str(rect[2]) + Str(rect[3]) + Str(rect[4]))
    // offscreen canvas must be THE WHOLE CANVAS !
 
    IF ::xOffset == NIL
@@ -720,7 +720,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    pps := DefinePaintStru()
    hDC := BeginPaint(oWnd:handle, pps)
    aArray := GetPPSRect(pps)
-   // tracelog("PPS" + str(aArray[1])+str(aArray[2])+str(aArray[3])+str(aArray[4]))
+   // tracelog("PPS" + Str(aArray[1]) + Str(aArray[2]) + Str(aArray[3]) + Str(aArray[4]))
 
    IF (aArray[1] == 0 .AND. aArray[2] == 0)  // IF WHOLE AREA
       IF (::NeedsRedraw .OR. lRefreshVideo)

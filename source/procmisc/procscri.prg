@@ -43,13 +43,13 @@ LOCAL aFormCode, aFormName
             EXIT
          ELSEIF rejim == 0 .AND. Left(stroka, 1) == "#"
             IF Upper(Left(stroka, 7)) == "#SCRIPT"
-               scom := Upper(Ltrim(Substr(stroka, 9)))
+               scom := Upper(Ltrim(SubStr(stroka, 9)))
                IF scom == scrkod
                   aScr := RdScript(han, @strbuf, @poz, , fname + "," + scrkod)
                   EXIT
                ENDIF
             ELSEIF Left(stroka, 6) == "#BLOCK"
-               scom := Upper(Ltrim(Substr(stroka, 8)))
+               scom := Upper(Ltrim(SubStr(stroka, 8)))
                IF scom == scrkod
                   rejim     := - 1
                   aFormCode := {}

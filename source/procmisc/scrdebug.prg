@@ -86,7 +86,7 @@ Local nFirst, i
       oBrwScript:aColumns[1]:aBitmaps := {{{|n|n == 1}, oBmpCurr}, {{|n|n == 2}, oBmpPoint}}
 #endif
       oBrwScript:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), Left(o:aArray[o:nCurrent], 4)}, "C", 4, 0))
-      oBrwScript:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), Substr(o:aArray[o:nCurrent], 6)}, "C", 80, 0))
+      oBrwScript:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), SubStr(o:aArray[o:nCurrent], 6)}, "C", 80, 0))
 
       oBrwScript:bEnter:= {||AddBreakPoint()}
 

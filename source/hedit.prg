@@ -797,7 +797,7 @@ METHOD KeyRight(nPos) CLASS HEdit
 
    IF !Empty(::cPicMask)
       newpos := Len(::cPicMask)
-      //writelog("KeyRight-2 " + str(nPos) + " " + str(newPos))
+      //writelog("KeyRight-2 " + Str(nPos) + " " + Str(newPos))
       IF nPos > newpos .AND. !Empty(Trim(::Title))
          SendMessage(::handle, EM_SETSEL, newpos, newpos)
       ENDIF
@@ -855,7 +855,7 @@ METHOD DeleteChar(lBack) CLASS HEdit
    ELSE
       nPosEnd += 1
    ENDIF
-  // hwg_MsgInfo(Str(NPOSEND)+Str(NPOSSTART)+::TITLE)
+  // hwg_MsgInfo(Str(NPOSEND) + Str(NPOSSTART) + ::TITLE)
    /* NEW */
    IF nPosEnd - nPosStart - 1 > 1 .AND. ::lPicComplex .AND. ::cType != "N" //.AND. NPOSEND < nGetLen
       lBack := .T.
@@ -1114,7 +1114,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
          //-::title := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
          ::title := Transform(vari, StrTran(::cPicFunc, "Z", "") + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
          IF lSignal
-           ::title := "-" + substr(::title, 2)
+           ::title := "-" + SubStr(::title, 2)
          ENDIF
       ENDIF
       SetDlgItemText(::oParent:handle, ::id, ::title)

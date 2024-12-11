@@ -198,7 +198,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
    aPrnCoors := GetDeviceArea(oPrinter:hDCPrn)
    prnXCoef := (aPrnCoors[1] / aPaintRep[FORM_WIDTH]) / aPaintRep[FORM_XKOEF]
    prnYCoef := (aPrnCoors[2] / aPaintRep[FORM_HEIGHT]) / aPaintRep[FORM_XKOEF]
-   // writelog(oPrinter:cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2]) + " / " + str(aPaintRep[FORM_WIDTH]) + " " + str(aPaintRep[FORM_HEIGHT])+str(aPaintRep[FORM_XKOEF]) + " / " + str(prnXCoef)+str(prnYCoef))
+   // writelog(oPrinter:cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + " / " + Str(aPaintRep[FORM_WIDTH]) + " " + Str(aPaintRep[FORM_HEIGHT]) + Str(aPaintRep[FORM_XKOEF]) + " / " + Str(prnXCoef) + Str(prnYCoef))
 
    IF Type("oFontStandard") = "U"
       PRIVATE oFontStandard := HFont():Add("Arial", 0, -13, 400, 204)
@@ -459,12 +459,12 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
 
    x2 := x1 + aItem[ITEM_WIDTH] - 1
    y2 := y1 + aItem[ITEM_HEIGHT] - 1
-   // writelog(Str(aItem[ITEM_TYPE]) + ": " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION], "") + str(x1) + str(y1) + str(x2) + str(y2))
+   // writelog(Str(aItem[ITEM_TYPE]) + ": " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION], "") + Str(x1) + Str(y1) + Str(x2) + Str(y2))
    x1 := Round(x1 * prnXCoef, 0)
    y1 := Round(y1 * prnYCoef, 0)
    x2 := Round(x2 * prnXCoef, 0)
    y2 := Round(y2 * prnYCoef, 0)
-   // writelog("PrintItem-2: " + str(x1)+str(y1)+str(x2)+str(y2))
+   // writelog("PrintItem-2: " + Str(x1) + Str(y1) + Str(x2) + Str(y2))
 
    #ifdef __DEBUG__
       // Writelog(Str(aItem[ITEM_TYPE]) + ": " + Str(x1) + " " + Str(y1) + " " + Str(x2) + " " + Str(y2) + " " + IIf(aItem[ITEM_TYPE] == TYPE_TEXT, aItem[ITEM_CAPTION] + IIf(aItem[ITEM_VAR] > 0, "(" + &(aItem[ITEM_CAPTION]) + ")", ""), ""))
@@ -489,7 +489,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          oPrinter:Box(x1, y1, x2, y2, aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          hBitmap := OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
-         // writelog("hBitmap: " + str(hBitmap))
+         // writelog("hBitmap: " + Str(hBitmap))
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
          hwg_DeleteObject(hBitmap)
          // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)

@@ -205,7 +205,7 @@ RETURN xSay
 FUNCTION SayRupiah(nAngka)
 
    LOCAL n, kata, kalimat := IIf(nAngka < 0, "Minus ", "")
-   LOCAL char := strtran(str(ABS(INT(nAngka)), 15), " ", "0")
+   LOCAL char := strtran(Str(ABS(INT(nAngka)), 15), " ", "0")
 
    FOR n := 1 TO 5
       kalimat += tigades(subs(char, n * 3 - 2, 3), n)

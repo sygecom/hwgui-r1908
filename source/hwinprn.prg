@@ -214,14 +214,14 @@ Local i, i0, j, slen, c
       DO WHILE i <= slen
          IF (c := SubStr(cLine, i, 1)) < " "
             IF i0 != 0
-               ::PrintText(Substr(cLine, i0, i - i0))
+               ::PrintText(SubStr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
          ELSEIF (j := At(c, cPseudoChar)) != 0
             IF i0 != 0
-               ::PrintText(Substr(cLine, i0, i - i0))
+               ::PrintText(SubStr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
@@ -274,7 +274,7 @@ Local i, i0, j, slen, c
          i++
       ENDDO
       IF i0 != 0
-         ::PrintText(Substr(cLine, i0, i - i0))
+         ::PrintText(SubStr(cLine, i0, i - i0))
       ENDIF
    ENDIF
 

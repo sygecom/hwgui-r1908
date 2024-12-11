@@ -236,7 +236,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
    LOCAL aCoors
    LOCAL nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
 
-   // writelog(str(msg) + str(wParam) + str(lParam) + chr(13))
+   // writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
 
    IF msg == WM_MENUCHAR
       // PROCESS ACCELERATOR IN CONTROLS
@@ -290,7 +290,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
    LOCAL aCoors
    LOCAL nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
 
-   // writelog(str(msg) + str(wParam) + str(lParam) + chr(13))
+   // writelog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
 
    SWITCH msg
 

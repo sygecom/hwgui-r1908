@@ -50,7 +50,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 
    IF pArray != NIL
       FOR i := 1 TO Len(pArray)
-         // writelog("InitControl1" + str(pArray[i]:handle) + "/" + pArray[i]:classname + " " + str(pArray[i]:nWidth) + "/" + str(pArray[i]:nHeight))
+         // writelog("InitControl1" + Str(pArray[i]:handle) + "/" + pArray[i]:classname + " " + Str(pArray[i]:nWidth) + "/" + Str(pArray[i]:nHeight))
          IF Empty(pArray[i]:handle) .AND. !lNoActivate
 //         IF Empty(pArray[i]:handle) .AND. !lNoActivate
             lInit := pArray[i]:lInit
@@ -64,7 +64,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
          IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong(pArray[i]:handle), pArray[i]:handle) <= 0 // TODO: verificar
             pArray[i]:handle := GetDlgItem(oWnd:handle, pArray[i]:id)
 
-            // writelog("InitControl2" + str(pArray[i]:handle) + "/" + pArray[i]:classname)
+            // writelog("InitControl2" + Str(pArray[i]:handle) + "/" + pArray[i]:classname)
          ENDIF
          IF !Empty(pArray[i]:aControls)
             InitControls(pArray[i])
@@ -423,7 +423,7 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
     * from MSDN:  The first character of this buffer must be NULL
     *             if initialization is not necessary
     */
-   cFile := repl(chr(0), 32000)
+   cFile := repl(Chr(0), 32000)
    aFiles := {}
 
    cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, NIL, @nIndex)
