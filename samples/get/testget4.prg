@@ -1,16 +1,14 @@
-/*
- * HWGUI using sample
- *
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-
-THIS IS A REGRESSION TEST FOR THE GET SYSTEM
-
-WHEN and VALID should be called once and at the right moment both in
-the Direct and Indirect way
-
-*/
+//
+// HWGUI using sample
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
+// THIS IS A REGRESSION TEST FOR THE GET SYSTEM
+//
+// WHEN and VALID should be called once and at the right moment both in
+// the Direct and Indirect way
+//
 
 #include "windows.ch"
 #include "guilib.ch"

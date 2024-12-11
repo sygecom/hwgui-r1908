@@ -1,10 +1,9 @@
-/*
- * HWGUI using sample
- * 
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// HWGUI using sample
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -29,7 +28,7 @@ FUNCTION Main()
    @ 0, 0 PANEL oPanel SIZE 0, 32
    @ 2, 3 OWNERBUTTON OF oPanel ON CLICK {||CreateChildWindow()} ;
        SIZE 32, 26 FLAT ;
-       BITMAP cImageDir+"new.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "New MDI child window"
+       BITMAP cImageDir + "new.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "New MDI child window"
 
 //   ADD STATUS oStatus TO oMainWindow PARTS 400
 
@@ -40,7 +39,7 @@ FUNCTION Main()
          SEPARATOR
          MENUITEM "&Font" ACTION oFont := HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor := Hwg_ChooseColor(nColor, .F.), ;
-                     hwg_MsgInfo(IIf(nColor != Nil, str(nColor), "--"), "Color value"))
+                     hwg_MsgInfo(IIf(nColor != NIL, str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION EndWindow()
@@ -111,11 +110,11 @@ FUNCTION CreateChildWindow()
    @ 2, 3 OWNERBUTTON oBoton1 OF oPanel ID 108 ON CLICK {||oBoton2:Enable()} ;
        SIZE 44, 38 FLAT ;
        TEXT "New" FONT oFontBtn COORDINATES 0, 20, 0, 0  ;
-       BITMAP cImageDir+"new.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "New"
+       BITMAP cImageDir + "new.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "New"
    @ 46, 3 OWNERBUTTON oBoton2 OF oPanel ID 109 ON CLICK {||oBoton2:disable()} ;
        SIZE 44, 38 FLAT ;
        TEXT "Open" FONT oFontBtn COORDINATES 0, 20, 0, 0 ;
-       BITMAP cImageDir+"open.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "Open" DISABLED
+       BITMAP cImageDir + "open.bmp" COORDINATES 0, 4, 0, 0 TOOLTIP "Open" DISABLED
 
    @ 20, 55 GET e1                       ;
         PICTURE "XXXXXXXXXXXXXXX"       ;
@@ -133,11 +132,11 @@ FUNCTION CreateChildWindow()
         PICTURE "@e 999,999,999.99"     ;
         SIZE 260, 25
 
-   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo(e1 + chr(10) + chr(13) + ;
-               Dtoc(e2) + chr(10) + chr(13) + ;
-               Str(e3) + chr(10) + chr(13) +  ;
-               e4 + chr(10) + chr(13) +       ;
-               Str(e5) + chr(10) + chr(13)    ;
+   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo(e1 + Chr(10) + Chr(13) + ;
+               Dtoc(e2) + Chr(10) + Chr(13) + ;
+               Str(e3) + Chr(10) + Chr(13) +  ;
+               e4 + Chr(10) + Chr(13) +       ;
+               Str(e5) + Chr(10) + Chr(13)    ;
                , "Results:"), oChildWnd:Close() )}
    @ 180, 190 BUTTONEX "Cancel" SIZE 100, 32 ON CLICK {||oChildWnd:Close()}
 
@@ -174,7 +173,7 @@ FUNCTION MdiChildFromPrg(o)
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR IIf(nColor == Nil, Vcolor("0000FF"), nColor)
+        SIZE 90, 20 COLOR IIf(nColor == NIL, Vcolor("0000FF"), nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup" SIZE 130, 75
 
@@ -287,7 +286,7 @@ FUNCTION OpenAbout()
    @ 80, 180 OWNERBUTTON ON CLICK {||EndDialog()}        ;
        SIZE 180, 35 FLAT                                  ;
        TEXT "Close" COLOR Vcolor("0000FF") FONT oFontBtn ;
-       BITMAP cImageDir+"door.bmp" COORDINATES 40, 10, 0, 0
+       BITMAP cImageDir + "door.bmp" COORDINATES 40, 10, 0, 0
        // 
 
    CreateArList(oBrw, aSample)
@@ -308,7 +307,7 @@ RETURN NIL
 
 STATIC FUNCTION About2()
 
-   IF oBmp2 == Nil
+   IF oBmp2 == NIL
       RETURN NIL
    ENDIF
 
@@ -361,10 +360,10 @@ FUNCTION FileOpen()
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
       CreateList(oBrw, .T.)
       oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
-      IF oFont != Nil
+      IF oFont != NIL
          oBrw:ofont := oFont
       ENDIF
-      AEval(oBrw:aColumns, {|o|o:bHeadClick := {|oB, n|hwg_MsgInfo("Column number "+Str(n))}})
+      AEval(oBrw:aColumns, {|o|o:bHeadClick := {|oB, n|hwg_MsgInfo("Column number " + Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
@@ -401,7 +400,7 @@ FUNCTION PrnTest()
    LOCAL oFont
 
    INIT PRINTER oPrinter
-   IF oPrinter == Nil
+   IF oPrinter == NIL
       RETURN NIL
    ENDIF
 
@@ -450,7 +449,7 @@ FUNCTION DialogFromPrg(o)
    LOCAL vard := "Monday"
    // LOCAL aTabs := {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}
 
-   // o:bGetFocus := Nil
+   // o:bGetFocus := NIL
    INIT DIALOG oModDlg TITLE cTitle           ;
    AT 210, 10 SIZE 300, 300                    ;
    FONT oFont                                 ;
@@ -463,7 +462,7 @@ FUNCTION DialogFromPrg(o)
 
    @ 20, 70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20, 95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR IIf(nColor == Nil, Vcolor("0000FF"), nColor)
+        SIZE 90, 20 COLOR IIf(nColor == NIL, Vcolor("0000FF"), nColor)
 
    @ 160, 70 GROUPBOX "RadioGroup" SIZE 130, 75
 

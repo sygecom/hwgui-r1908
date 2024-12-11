@@ -1,16 +1,15 @@
-/*
- * $Id: grid_2.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
- * This Sample use Postgres Library, you need to link libpq.lib and libhbpg.lib
- *
-*/
+//
+// $Id: grid_2.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
+// This Sample use Postgres Library, you need to link libpq.lib and libhbpg.lib
+//
 
 #include "windows.ch"
 #include "guilib.ch"

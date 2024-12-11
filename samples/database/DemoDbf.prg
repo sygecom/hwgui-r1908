@@ -1,13 +1,11 @@
-/*
- *
- * Demo for Edit using command NOEXIT
- *
- * HwGUI by Alexander Kresin
- *
- * Copyright (c) 
- * Data 01/07/2003 - Sandro Freire <sandrorrfreire@yahoo.com.br>
- *
- */
+//
+// Demo for Edit using command NOEXIT
+//
+// HwGUI by Alexander Kresin
+//
+// Copyright (c)
+// Data 01/07/2003 - Sandro Freire <sandrorrfreire@yahoo.com.br>
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -320,11 +318,11 @@ FUNCTION OpenDbf()
    LOCAL vInd1 := oDir + "FORNECED.NTX"
 
    If !File(vArq)
-      AADD(vTab,{"Cod    ", "C", 3, 0 })
-      AADD(vTab,{"Name     ", "C", 50, 0 })
-      AADD(vTab,{"Adress  ", "C", 50, 0 })
-      AADD(vTab,{"Fone  ", "C", 50, 0 })
-      AADD(vTab,{"e_Mail  ", "C", 30, 0 })
+      AAdd(vTab,{"Cod    ", "C", 3, 0 })
+      AAdd(vTab,{"Name     ", "C", 50, 0 })
+      AAdd(vTab,{"Adress  ", "C", 50, 0 })
+      AAdd(vTab,{"Fone  ", "C", 50, 0 })
+      AAdd(vTab,{"e_Mail  ", "C", 30, 0 })
       dBCreate(vArq, vTab)
    EndIf
    Use (vArq) Shared Alias TabDbf

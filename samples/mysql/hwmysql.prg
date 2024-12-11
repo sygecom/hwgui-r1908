@@ -1,10 +1,10 @@
-/*
- * Mysql client ( Harbour + HWGUI )
- * Main file
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// Mysql client ( Harbour + HWGUI )
+// Main file
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "fileio.ch"
 #include "hwgui.ch"
@@ -18,8 +18,15 @@ REQUEST PADL
 REQUEST OEMTOANSI
 REQUEST OPENREPORT
 
-Memvar connHandle, cServer, cDatabase, cUser, cDataDef, queHandle, nNumFields
-Memvar nNumRows, aQueries
+MEMVAR connHandle
+MEMVAR cServer
+MEMVAR cDatabase
+MEMVAR cUser
+MEMVAR cDataDef
+MEMVAR queHandle
+MEMVAR nNumFields
+MEMVAR nNumRows
+MEMVAR aQueries
 
 FUNCTION Main()
 
@@ -474,7 +481,7 @@ STATIC FUNCTION ReadHistory(fname)
          IF Len(stroka) == 0
             EXIT
          ENDIF
-         IF Left(stroka, 1) == Chr(10) .OR. Left(stroka, 1) == CHR(13)
+         IF Left(stroka, 1) == Chr(10) .OR. Left(stroka, 1) == Chr(13)
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0

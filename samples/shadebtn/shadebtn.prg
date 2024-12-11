@@ -1,8 +1,7 @@
-/*
- * $Id: shadebtn.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- * Shade buttons sample
- * 
-*/
+//
+// $Id: shadebtn.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+// Shade buttons sample
+//
 
 #include "hwgui.ch"
 

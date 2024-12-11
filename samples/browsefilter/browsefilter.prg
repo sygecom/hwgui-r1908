@@ -1,6 +1,7 @@
-/*
-   Copyright (c) Luiz Henrique lh.santos at ibest.com.br
-*/
+//
+// Copyright (c) Luiz Henrique lh.santos at ibest.com.br
+//
+
 #include "hwgui.ch"
 
 STATIC nLastRecordFilter := 0

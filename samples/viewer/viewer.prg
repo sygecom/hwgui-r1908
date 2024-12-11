@@ -1,12 +1,12 @@
-/*
- * $Id: viewer.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * JPEG, BMP, PNG, MNG, TIFF images viewer.
- * FreeImage.dll should present to use this sample
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: viewer.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// JPEG, BMP, PNG, MNG, TIFF images viewer.
+// FreeImage.dll should present to use this sample
+//
+// Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -55,7 +55,7 @@ FUNCTION Main()
       MENU TITLE "&File"
          MENUITEM "&Open" ACTION FileOpen(oMainWindow)
          SEPARATOR
-         MENUITEM "&Exit"+Chr(9)+"Alt+x" ACTION EndWindow() ;
+         MENUITEM "&Exit" + Chr(9) + "Alt+x" ACTION EndWindow() ;
            ACCELERATOR FALT, Asc("X")
       ENDMENU
       MENU TITLE "&View"
@@ -254,12 +254,12 @@ STATIC FUNCTION FileOpen(oWnd)
          oWnd:nHeight := 100
       ENDIF
 
-      // writelog("Window: "+str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
+      // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
       MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
       oSayMain:nZoom := nKoef
       InvalidateRect(oSayMain:handle, 0)
       oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
-      oSayScale:SetValue(Str(nKoef*100, 4)+" %")
+      oSayScale:SetValue(Str(nKoef*100, 4) + " %")
    ENDIF
 
 RETURN NIL
@@ -288,13 +288,13 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    lScrollV := lScrollH := .F.
    oWnd:nWidth := Round(oImage:nWidth * nKoef, 0) + nHorz
    oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
-   // writelog("1->"+str(oWnd:nWidth)+str(aScreen[3])+" - "+str(oWnd:nHeight)+str(aScreen[4]))
+   // writelog("1->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
    IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
       oWnd:nLeft := 0
       IF oWnd:nWidth >= aScreen[3]
          oWnd:nWidth := aScreen[3]
          lScrollH := .T.
-         // writelog("2->"+str(oWnd:nWidth)+str(aScreen[3])+" - "+str(oWnd:nHeight)+str(aScreen[4]))
+         // writelog("2->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
       ENDIF
    ENDIF
    IF oWnd:nTop+oWnd:nHeight >= aScreen[4]
@@ -302,7 +302,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
       IF oWnd:nHeight >= aScreen[4]
          oWnd:nHeight := aScreen[4]
          lScrollV := .T.
-         // writelog("3->"+str(oWnd:nWidth)+str(aScreen[3])+" - "+str(oWnd:nHeight)+str(aScreen[4]))
+         // writelog("3->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
       ENDIF
    ENDIF
    IF oWnd:nWidth < 200
@@ -313,9 +313,9 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    ENDIF
 
    oSayMain:nZoom := nKoef
-   oSayScale:SetValue(Str(nKoef*100, 4)+" %")
+   oSayScale:SetValue(Str(nKoef*100, 4) + " %")
    InvalidateRect(oWnd:handle, 0)
-   // writelog("Window: "+str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
+   // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
    MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
    stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
@@ -347,7 +347,7 @@ STATIC FUNCTION PaintWindow(oWnd)
    pps := DefinePaintStru()
    hDC := BeginPaint(oWnd:handle, pps)
 
-   // writelog("Paint: "+str(Round(oImage:nWidth * nKoef, 0)) + str(Round(oImage:nHeight * nKoef, 0)))
+   // writelog("Paint: " + str(Round(oImage:nWidth * nKoef, 0)) + str(Round(oImage:nHeight * nKoef, 0)))
 #ifdef __FREEIMAGE__
    oImage:Draw(hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #else

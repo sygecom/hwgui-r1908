@@ -1,14 +1,14 @@
-/*
- * $Id: TestMenuBitmap.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * C level menu functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
- * Demo for use Bitmap in menu
-*/
+//
+// $Id: TestMenuBitmap.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// C level menu functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
+// Demo for use Bitmap in menu
+//
 
 #include "windows.ch"
 #include "guilib.ch"

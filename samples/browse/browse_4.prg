@@ -1,12 +1,11 @@
-/*
- * Demo by HwGUI Alexander Kresin
- *
- * Copyright (c)  Sandro R R Freire <sandro@lumainformatica.com.br>
- *
- * Demo for Browse using Set Relatarion
- *
- */
- 
+//
+// Demo by HwGUI Alexander Kresin
+//
+// Copyright (c) Sandro R R Freire <sandro@lumainformatica.com.br>
+//
+// Demo for Browse using Set Relatarion
+//
+
 #include "hwgui.ch"
 #include "dbstruct.ch"
 
@@ -37,7 +36,7 @@ FUNCTION Main()
    @  9, 8 BROWSE oBrowse DATABASE SIZE 466, 196 STYLE WS_VSCROLL + WS_HSCROLL;
       MULTISELECT
 
-   @ 9, 214 say "Pressione a tecla CTRL e clique no registro a selecionar," + chr(13) + chr(10) + "se clicar sem o CTRL a multiseleção é limpa" size 466, 42
+   @ 9, 214 say "Pressione a tecla CTRL e clique no registro a selecionar," + Chr(13) + Chr(10) + "se clicar sem o CTRL a multiseleção é limpa" size 466, 42
 
    @ 393, 214 BUTTON oSai CAPTION "Sair"  ON CLICK {||sair()} SIZE 80, 32
 
@@ -69,7 +68,7 @@ RETURN NIL
 
 STATIC FUNCTION sair()
 
-   hwg_MsgInfo("Registros selecionados" + chr(13) + chr(10) + valToPrg(oBrowse:aSelected))
+   hwg_MsgInfo("Registros selecionados" + Chr(13) + Chr(10) + valToPrg(oBrowse:aSelected))
    EndDialog()
 
 RETURN .T.

@@ -1,9 +1,9 @@
-/*
- *$Id: testget2.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HwGUI Samples
- * testget2.prg - GET system and Timer in dialog box.
- */
+//
+// $Id: testget2.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HwGUI Samples
+// testget2.prg - GET system and Timer in dialog box.
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -53,7 +53,7 @@ FUNCTION DlgGet(lColor)
    SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3")
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
-   If lColor <> Nil
+   If lColor != Nil
       SetColorinFocus(lColor)
    EndIf
 
@@ -95,13 +95,13 @@ FUNCTION DlgGet(lColor)
    oTimer:End()
 
    IF oModDlg:lResult
-      hwg_MsgInfo(e1 + chr(10) + chr(13) +       ;
-               e6 + chr(10) + chr(13) +       ;
-               Dtoc(e2) + chr(10) + chr(13) + ;
-               Str(e3) + chr(10) + chr(13) +  ;
-               e4 + chr(10) + chr(13) +       ;
-               Str(e5) + chr(10) + chr(13) +  ;
-               e7 + chr(10) + chr(13)         ;
+      hwg_MsgInfo(e1 + Chr(10) + Chr(13) +       ;
+               e6 + Chr(10) + Chr(13) +       ;
+               Dtoc(e2) + Chr(10) + Chr(13) + ;
+               Str(e3) + Chr(10) + Chr(13) +  ;
+               e4 + Chr(10) + Chr(13) +       ;
+               Str(e5) + Chr(10) + Chr(13) +  ;
+               e7 + Chr(10) + Chr(13)         ;
                , "Results:")
    ENDIF
 

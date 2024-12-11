@@ -1,14 +1,13 @@
-/*
- * $Id: grid_4.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
-*/
+//
+// $Id: grid_4.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
 
 #include "windows.ch"
 #include "guilib.ch"

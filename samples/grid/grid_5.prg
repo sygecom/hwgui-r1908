@@ -1,15 +1,15 @@
-/*
- * $Id: grid_5.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
- * This sample show how to edit records with grid control
-*/
+//
+// $Id: grid_5.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
+// This sample show how to edit records with grid control
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -38,7 +38,7 @@ STATIC oBrowse
             [ VALID <bValid> ]           ;
             [ LIST <aList> ]             ;
           => ;
-          aadd(<aGrid>, {<cField>, <cLabel>, <cPicture>, <.lReadonly.>, <{bValid}>, <aList>})
+          AAdd(<aGrid>, {<cField>, <cLabel>, <cPicture>, <.lReadonly.>, <{bValid}>, <aList>})
 
 FUNCTION Main()
 
@@ -146,7 +146,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     for i := 1 to Len(aFields)
         ASize(aFields[i], 12)
         
-        nSay := max(nSay, Len(aFields[i, GET_LABEL]))
+        nSay := Max(nSay, Len(aFields[i, GET_LABEL]))
         
         cType := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
         
@@ -167,7 +167,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
         
         endif        
 
-        nGet := max(nGet, nLen)
+        nGet := Max(nGet, nLen)
 
         aFields[i, GET_LEN] := nLen
         aFields[i, GET_TYPE] := cType
@@ -202,7 +202,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
                             nCol,;
                             nRow,;
                             aFields[i, GET_LEN] * nGetSize,;
-                            min(150, Len(aFields[i, GET_LIST]) * 25 + 25),;
+                            Min(150, Len(aFields[i, GET_LIST]) * 25 + 25),;
                             aFields[i, GET_LIST],;
                             NIL,;
                             NIL,;

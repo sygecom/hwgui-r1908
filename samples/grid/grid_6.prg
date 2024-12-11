@@ -1,14 +1,13 @@
-/*
- * $Id: grid_6.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
-*/
+//
+// $Id: grid_6.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HGrid class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+// Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -47,11 +46,11 @@ FUNCTION Test()
    use test new
    aStru := dbstruct()
    for n := 1 to Len(astru)
-      aadd(aHead, aStru[n, 1])
+      AAdd(aHead, aStru[n, 1])
    next
    go Top
    while !eof()
-    aadd(aItems, {first, last, city, str(salary, 10, 2)})
+    AAdd(aItems, {first, last, city, str(salary, 10, 2)})
     skip
    enddo
 

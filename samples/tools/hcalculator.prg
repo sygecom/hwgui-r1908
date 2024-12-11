@@ -1,12 +1,11 @@
-/*
- * $Id: hcalculator.prg
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCalculator class
- *
- * Copyright 2012 LuisFernandoBasso <lfbasso@via-rs.net>
- *
-*/
+//
+// $Id: hcalculator.prg
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HCalculator class
+//
+// Copyright 2012 LuisFernandoBasso <lfbasso@via-rs.net>
+//
 
 #include "windows.ch"
 #include "hbclass.ch"
@@ -191,7 +190,7 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
         ON CLICK {||::Calculando("MC")}
         oBtn21:Anchor := 224
    @ 119, 65 BUTTONEX oBtn20 CAPTION "&+" SIZE 34, 28 ;
-        STYLE BS_MULTILINE+BS_CENTER   ;
+        STYLE BS_MULTILINE + BS_CENTER   ;
         FONT HFont():Add("Tahoma", 0, -12, 400) ;
         ON CLICK {||::Calculando("#")}
    @ 82, 65 BUTTONEX oBtn19 CAPTION "C" ID IDCANCEL SIZE 34, 28 ;
@@ -208,12 +207,12 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
         ON CLICK {||::Calculando(" ")}
         oBtn4:FontBold := .T.
    @ 21, 24 SAY oVisor CAPTION "0" SIZE 168, 33 ;
-        STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE;
+        STYLE SS_RIGHT + DT_VCENTER + DT_SINGLELINE;
          BACKCOLOR 16578289  ;
         FONT HFont():Add("Consolas", 0, -24, 400)
         oVisor:Anchor := 75
    @ 7, 29 SAY oMemory CAPTION "" SIZE 15, 26 ;
-        STYLE DT_VCENTER+DT_SINGLELINE;
+        STYLE DT_VCENTER + DT_SINGLELINE;
          COLOR 6250335  BACKCOLOR 16578289  ;
         FONT HFont():Add("Arial", 0, -13, 700)
         oMemory:Anchor := 75
@@ -247,7 +246,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
    ENDIF
    If cNumero $ "/*-+%="
       nCars := oForm:oCalculo:nWidth / ::nFontSize
-      oForm:oCalculo:Caption += oForm:oVisor:Caption + " "+cNumero+" "
+      oForm:oCalculo:Caption += oForm:oVisor:Caption + " " + cNumero + " "
       oForm:oCalculo:Caption := RIGHT(oForm:oCalculo:Caption, nCars)
       ::cOperador := IIf(cNumero != "=", cNumero, ::cOperador)
       cOperar := IIf(cOperar = Nil, cNumero, cOperar)
@@ -258,7 +257,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       EndIf
       ::lClear := .T.
    ElseIf cNumero == "#"
-      oForm:oVisor:Caption := IIf(oForm:oVisor:Caption = "-", SubStr(oForm:oVisor:Caption, 2), "-"+oForm:oVisor:Caption)
+      oForm:oVisor:Caption := IIf(oForm:oVisor:Caption = "-", SubStr(oForm:oVisor:Caption, 2), "-" + oForm:oVisor:Caption)
       ::cOperador := cNumero
       If ::aOperando[2] != Nil
          ::aOperando[2] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
@@ -365,7 +364,7 @@ METHOD INIT() CLASS HCalculator
          aCoors := { ::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
           ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + GETSYSTEMMETRICS(SM_CYCAPTION) + 8, 0, 0 }
       ENDIF
-      aCoors[3] := IIf(::lCompacta, MAX(130, ::oCurrGet:nWidth + 8), ::nWidth)
+      aCoors[3] := IIf(::lCompacta, Max(130, ::oCurrGet:nWidth + 8), ::nWidth)
       ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1 , aCoors[3], 180, 0)
    EndIf
    ::oFormCalc:nInitFocus:= ::oFormCalc:oBtnRes

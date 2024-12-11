@@ -1,17 +1,16 @@
-/*
- *$Id: rmsample.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 and Linux (GTK) GUI library
- * rmsample.prg - sample of ActiveX container for the RMCHART ocx
- *
- * RMChart can be downloaded from http://www.rmchart.com/
- *
- * Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * Sample code derived from a sample code found on Internet.... oohg ?
- *
- */
+//
+// $Id: rmsample.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 and Linux (GTK) GUI library
+// rmsample.prg - sample of ActiveX container for the RMCHART ocx
+//
+// RMChart can be downloaded from http://www.rmchart.com/
+//
+// Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
+// Sample code derived from a sample code found on Internet.... oohg ?
+//
 
 #include "hwgui.ch"
 #include "rmchart.ch"

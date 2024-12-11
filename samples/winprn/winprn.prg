@@ -1,10 +1,9 @@
-/*
- * HWinPrn using sample
- * 
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// HWinPrn using sample
+//
+// Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "hwgui.ch"
 

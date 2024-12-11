@@ -1,9 +1,9 @@
-/*
- * $Id: testxml.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * This sample demonstrates reading/writing XML file and handling menu items
- * while run-time.
- */
+//
+// $Id: testxml.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// This sample demonstrates reading/writing XML file and handling menu items
+// while run-time.
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -174,20 +174,20 @@ FUNCTION Font2XML(oFont)
 
    LOCAL aAttr := {}
 
-   Aadd(aAttr, { "name", oFont:name })
-   Aadd(aAttr, { "width", Ltrim(Str(oFont:width, 5)) })
-   Aadd(aAttr, { "height", Ltrim(Str(oFont:height, 5)) })
+   AAdd(aAttr, { "name", oFont:name })
+   AAdd(aAttr, { "width", Ltrim(Str(oFont:width, 5)) })
+   AAdd(aAttr, { "height", Ltrim(Str(oFont:height, 5)) })
    IF oFont:weight != 0
-      Aadd(aAttr, { "weight", Ltrim(Str(oFont:weight, 5)) })
+      AAdd(aAttr, { "weight", Ltrim(Str(oFont:weight, 5)) })
    ENDIF
    IF oFont:charset != 0
-      Aadd(aAttr, { "charset", Ltrim(Str(oFont:charset, 5)) })
+      AAdd(aAttr, { "charset", Ltrim(Str(oFont:charset, 5)) })
    ENDIF
    IF oFont:Italic != 0
-      Aadd(aAttr, { "italic", Ltrim(Str(oFont:Italic, 5)) })
+      AAdd(aAttr, { "italic", Ltrim(Str(oFont:Italic, 5)) })
    ENDIF
    IF oFont:Underline != 0
-      Aadd(aAttr, { "underline", Ltrim(Str(oFont:Underline, 5)) })
+      AAdd(aAttr, { "underline", Ltrim(Str(oFont:Underline, 5)) })
    ENDIF
 
 RETURN HXMLNode():New("font", HBXML_TYPE_SINGLE, aAttr)

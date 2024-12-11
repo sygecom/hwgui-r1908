@@ -1,11 +1,10 @@
-/*
- * $Id: calculator.prg
- *
- * HWGUI - Harbour Win32 GUI library
- *
- * Sample
- *
-*/
+//
+// $Id: calculator.prg
+//
+// HWGUI - Harbour Win32 GUI library
+//
+// Sample
+//
 
 #Include "hwgui.ch"
 
@@ -39,7 +38,7 @@ FUNCTION calculator()
   INIT DIALOG oDlg TITLE "Calculando" ;
     AT 0, 0 SIZE 415, 325 ;
         FONT HFont():Add("Verdana", 0, -13, 400) CLIPPER  NOEXIT  ;
-     STYLE WS_POPUP+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER
+     STYLE WS_POPUP + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + DS_CENTER
     Thisform := oDlg
 
    @ 272, 63 OWNERBUTTON oOw1 SIZE 106, 36   ;
@@ -47,7 +46,7 @@ FUNCTION calculator()
         COORDINATES 3, 0, 0, 0  ;
         ON CLICK {||oOw1_onClick()}
    @ 72, 102 SAY oLabel2 CAPTION "F2 - activate calculator" SIZE 235, 26 ;
-        STYLE SS_CENTER +DT_VCENTER+DT_SINGLELINE+WS_DLGFRAME +WS_DISABLED
+        STYLE SS_CENTER + DT_VCENTER + DT_SINGLELINE + WS_DLGFRAME + WS_DISABLED
    @ 119, 71 GET UPDOWN oValue VAR vValue  ;
         RANGE -2147483647, 2147483647  INCREMENT 1 SIZE 149, 24  PICTURE "999,999.99"  ;
         VALID {||thisform:oLabel2:disable()} ;

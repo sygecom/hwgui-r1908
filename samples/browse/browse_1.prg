@@ -1,6 +1,6 @@
-/*
- * $Id: browse_1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- */
+//
+// $Id: browse_1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -100,7 +100,7 @@ RETURN .T.
 
 STATIC FUNCTION BrowseValid()
 
-   hwg_MsgExclamation("Valid Event"+STR(TENTA))
+   hwg_MsgExclamation("Valid Event" + STR(TENTA))
    ++TENTA
 
 RETURN .T.

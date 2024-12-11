@@ -1,13 +1,12 @@
-/*
- *  Editor de Codigos Fontes                 xHarbour/HwGUI
- *
- *  Editor.prg           Novembro de  2003
- *
- *  Copyright (c) Rodnei Hernandes Lino <lhr@enetec.com.br>
- *  By HwGUI for Alexander Kresin
- *
- */
-*--------------------------------------------------------------------
+//
+// Editor de Codigos Fontes                 xHarbour/HwGUI
+//
+// Editor.prg           Novembro de  2003
+//
+// Copyright (c) Rodnei Hernandes Lino <lhr@enetec.com.br>
+// By HwGUI for Alexander Kresin
+//
+
 #define HB_OS_WIN_32_USED
 #define _WIN32_WINNT 0x0400
 #define _WIN32_IE    0x0400
@@ -99,7 +98,7 @@ if ID_indioma = 8002
    m_colorf := "Color Font"
    m_indioma := "Language"
    //
-   reiniciar := "It is necessary To restart " + chr(13) + chr(10) + "to be loaded the new configurations "
+   reiniciar := "It is necessary To restart " + Chr(13) + Chr(10) + "to be loaded the new configurations "
    //
    m_janela := "Windows"
    m_lado := "Title Vertical"
@@ -137,7 +136,7 @@ elseif ID_indioma = 8001
    m_colorf := "Cor da Fonte"
    m_indioma := "Idioma"
    //
-   reiniciar := "É necessário Reiniciar o Editor" + chr(13) + chr(10) + "Para ser carregado as novas configurações"
+   reiniciar := "É necessário Reiniciar o Editor" + Chr(13) + Chr(10) + "Para ser carregado as novas configurações"
    //
    m_janela := "Janelas"
    m_lado := "Lado a lado"
@@ -172,52 +171,52 @@ PUBLIC funcoes := {}
    MENU OF oMainWindow
 
     ///
-     MENU TITLE  "&"+m_arquivo
-        MENUITEM "&"+m_novo+chr(9)+"CTRL+N" ACTION novo();
+     MENU TITLE  "&" + m_arquivo
+        MENUITEM "&" + m_novo + Chr(9) + "CTRL+N" ACTION novo();
                 ACCELERATOR FCONTROL, Asc("N")
-        MENUITEM "&"+m_abrir ACTION texto()
-        MENUITEM "&"+m_salvar+chr(9)+"CTRL+S" ACTION Salvar_Projeto(1);
+        MENUITEM "&" + m_abrir ACTION texto()
+        MENUITEM "&" + m_salvar + Chr(9) + "CTRL+S" ACTION Salvar_Projeto(1);
               ACCELERATOR FCONTROL, Asc("S")
         SEPARATOR
-        MENUITEM "&"+m_salvarcomo ACTION Salvar_Projeto(2)
-        MENUITEM "&"+m_fechar ACTION Fecha_texto()
+        MENUITEM "&" + m_salvarcomo ACTION Salvar_Projeto(2)
+        MENUITEM "&" + m_fechar ACTION Fecha_texto()
         SEPARATOR
-        MENUITEM "&"+m_sair ACTION endwindow()
+        MENUITEM "&" + m_sair ACTION endwindow()
 
      ENDMENU
-     MENU TITLE "&"+m_editar
-         MENUITEM "&"+m_seleciona+chr(9)+"CTRL+A" ACTION {||seleciona()} //;               ACCELERATOR FCONTROL, Asc("A")
+     MENU TITLE "&" + m_editar
+         MENUITEM "&" + m_seleciona + Chr(9) + "CTRL+A" ACTION {||seleciona()} //;               ACCELERATOR FCONTROL, Asc("A")
      ENDMENU
 
 
-     MENU TITLE "&"+m_Pesquisa
-         MENUITEM "&"+m_localizar+chr(9)+"CTRL+F" ACTION {|o, m, wp, lp|Pesquisa(o, m, wp, lp)} ;
+     MENU TITLE "&" + m_Pesquisa
+         MENUITEM "&" + m_localizar + Chr(9) + "CTRL+F" ACTION {|o, m, wp, lp|Pesquisa(o, m, wp, lp)} ;
               ACCELERATOR FCONTROL, Asc("F")
-         MENUITEM "&"+m_Linha+chr(9)+"CTRL+J" ACTION {||vai()} ;
+         MENUITEM "&" + m_Linha + Chr(9) + "CTRL+J" ACTION {||vai()} ;
               ACCELERATOR FCONTROL, Asc("J")
-         MENUITEM "&"+m_pesq+chr(9)+"CTRL+G" ACTION {||pesquisaglobal()} ;
+         MENUITEM "&" + m_pesq + Chr(9) + "CTRL+G" ACTION {||pesquisaglobal()} ;
               ACCELERATOR FCONTROL, Asc("G")
 
 
      ENDMENU
 
-     MENU TITLE "&"+m_config
-         MENUITEM "&"+m_fonte ACTION ID_FONT := HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
-         MENUITEM "&"+m_colorb ACTION cor_fundo()
-         MENUITEM "&"+m_colorf ACTION cor_fonte()
-         MENU TITLE "&"+m_indioma
+     MENU TITLE "&" + m_config
+         MENUITEM "&" + m_fonte ACTION ID_FONT := HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
+         MENUITEM "&" + m_colorb ACTION cor_fundo()
+         MENUITEM "&" + m_colorf ACTION cor_fonte()
+         MENU TITLE "&" + m_indioma
              MENUITEM "&Portugues Brazil " ID 8001 ACTION indioma(8001)
              MENUITEM "&Ingles " ID 8002  ACTION indioma(8002)
          ENDMENU
      ENDMENU
-     MENU TITLE "&"+m_janela
-         MENUITEM "&"+m_lado  ;
+     MENU TITLE "&" + m_janela
+         MENUITEM "&" + m_lado  ;
             ACTION SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0)
       ENDMENU
 
-     MENU TITLE "&"+m_ajuda
-         MENUITEM "&"+m_sobre ACTION aguarde()
-         MENUITEM "&"+m_site ACTION ajuda("www.lumainformatica.com.br")
+     MENU TITLE "&" + m_ajuda
+         MENUITEM "&" + m_sobre ACTION aguarde()
+         MENUITEM "&" + m_site ACTION ajuda("www.lumainformatica.com.br")
      ENDMENU
    ENDMENU
    //
@@ -244,7 +243,7 @@ FUNCTION novo(tipo)
    PRIVATE oEdit&i
 
  //
- INIT  window o&i MDICHILD TITLE "Novo Arquivo-"+i //STYLE WS_VISIBLE + WS_MAXIMIZE
+ INIT  window o&i MDICHILD TITLE "Novo Arquivo-" + i //STYLE WS_VISIBLE + WS_MAXIMIZE
     painel2(o&I, oFunc)
     //
     //@ 650, 2 get COMBOBOX oCombo ITEMS oFunc SIZE 140, 20
@@ -300,27 +299,27 @@ FUNCTION Texto()
    while !ft_FEOF()
       linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1) )
       //
-      if Len(linha) # 0
-        aadd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
+      if Len(linha) != 0
+        AAdd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
         //
-        if subs(upper(linha), 1, 4) == "FUNC" .or. subs(upper(linha), 1, 4) == "PROC"
+        if subs(Upper(linha), 1, 4) == "FUNC" .or. subs(Upper(linha), 1, 4) == "PROC"
            fun := ""
            for f:= 1 to Len(linha)+1
               oCaracter++
              if subs(linha, f, 1) = " "
                 for g = f+1 to Len(linha)
                        oCaracter++
-                    if subs(linha, g, 1) <> " " .AND. subs(linha, g, 1) <> "(" .AND. !Empty(subs(linha, g, 1))
+                    if subs(linha, g, 1) != " " .AND. subs(linha, g, 1) != "(" .AND. !Empty(subs(linha, g, 1))
                         fun := fun+subs(linha, g, 1)
                     elseif g = Len(linha)
-                       aadd(oFunc, fun)
-                       aadd(funcoes, rd_lin)
-                       aadd(oLinha,{rd_lin, r_linha})
+                       AAdd(oFunc, fun)
+                       AAdd(funcoes, rd_lin)
+                       AAdd(oLinha,{rd_lin, r_linha})
                        exit
                     else
-                       aadd(oFunc, fun)
-                       aadd(oLinha,{rd_lin, r_linha})
-                       aadd(funcoes, rd_lin)
+                       AAdd(oFunc, fun)
+                       AAdd(oLinha,{rd_lin, r_linha})
+                       AAdd(funcoes, rd_lin)
                        exit
                     endif
                 next g
@@ -504,7 +503,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
          endif
          texto := ""
      else
-        texto := texto+chr(nvirtCode)
+        texto := texto + Chr(nvirtCode)
      endif
 ENDIF
 
@@ -787,7 +786,7 @@ RETURN .T.
 FUNCTION sintaxe(comando)
 *************************
 
-   LOCAL comand := upper(AllTrim(comando))
+   LOCAL comand := Upper(AllTrim(comando))
    LOCAL ret := .T.
 
    //hwg_MsgInfo(comand)

@@ -1,6 +1,6 @@
-/*
- * Demo hbrowse
- */
+//
+// Demo hbrowse
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -29,13 +29,13 @@ FUNCTION Main()
     oBrw1:oHeadFont := HFont():Add("Times New Roman", 0, -22, 400)
     a := { } 
     for i := 1 to 16
-        aAdd(a, { i, chr(asc("a")-1+i) })
+        AAdd(a, { i, Chr(Asc("a")-1+i) })
     next
     for i := 1 to 16
-        aAdd(a, { i, chr(asc("A")-1+i) })
+        AAdd(a, { i, Chr(Asc("A")-1+i) })
     next
     for i := 1 to 16
-        aAdd(a, { i, chr(asc("a")-1+i) })
+        AAdd(a, { i, Chr(Asc("a")-1+i) })
     next
 
     oBrw1:aArray := a
@@ -47,7 +47,7 @@ FUNCTION Main()
 
     b := { } 
     for i := 1 to 5
-        aAdd(b, { i, chr(asc("a")-1+i) })
+        AAdd(b, { i, Chr(Asc("a")-1+i) })
     next
 
     oBrw2:aArray := b

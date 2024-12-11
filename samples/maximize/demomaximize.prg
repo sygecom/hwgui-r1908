@@ -1,15 +1,11 @@
-/*
- * $Id:
- *
- * HWGUI demo for screen Maximized
- *
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
- *
- * Copyright 2004 Sandro <sandrorrfreire@yahoo.com.br>
- *
-*/
+//
+// HWGUI demo for screen Maximized
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
+// Copyright 2004 Sandro <sandrorrfreire@yahoo.com.br>
+//
 
 #include "windows.ch"
 #include "guilib.ch"

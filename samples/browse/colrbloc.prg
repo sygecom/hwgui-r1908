@@ -1,19 +1,18 @@
-/*
- * Demo by HwGUI Alexander Kresin
- *  http://kresin.belgorod.su/
- *
- *
- * Paulo Flecha <pfflecha@yahoo.com>
- * 07/07/2005
- * Demo for Browse using bColorBlock
- *
- *       oBrowse:aColumns[1]:bColorBlock := {||IIf(nNumber < 0, ;
- *       {textColor, backColor, textColorSel, backColorSel} ,;
- *       {textColor, backColor, textColorSel, backColorSel})}
- *
- *       bColorBlock must return an array containing four colors values
- *
- */
+//
+// Demo by HwGUI Alexander Kresin
+// http://kresin.belgorod.su/
+//
+//
+// Paulo Flecha <pfflecha@yahoo.com>
+// 07/07/2005
+// Demo for Browse using bColorBlock
+//
+//       oBrowse:aColumns[1]:bColorBlock := {||IIf(nNumber < 0, ;
+//       {textColor, backColor, textColorSel, backColorSel} ,;
+//       {textColor, backColor, textColorSel, backColorSel})}
+//
+//       bColorBlock must return an array containing four colors values
+//
 
 #define x_BLUE       16711680
 #define x_DARKBLUE   10027008
@@ -257,11 +256,11 @@ STATIC FUNCTION CriaDbf()
    LOCAL nIncrement := 10
 
   IF !FILE("TSTBRW.DBF")
-     AADD(Estrutura, {"FIELD1", "N", 10, 02})
-     AADD(Estrutura, {"FIELD2", "C", 11, 00})
-     AADD(Estrutura, {"FIELD3", "D", 08, 00})
-     AADD(Estrutura, {"FIELD4", "C", 30, 00})
-     AADD(Estrutura, {"FIELD5", "C", 05, 00})
+     AAdd(Estrutura, {"FIELD1", "N", 10, 02})
+     AAdd(Estrutura, {"FIELD2", "C", 11, 00})
+     AAdd(Estrutura, {"FIELD3", "D", 08, 00})
+     AAdd(Estrutura, {"FIELD4", "C", 30, 00})
+     AAdd(Estrutura, {"FIELD5", "C", 05, 00})
 
      DBCREATE("TSTBRW.DBF", Estrutura)
      DBCLOSEAREA()
@@ -441,7 +440,7 @@ STATIC FUNCTION Create_Array()
              n := i
        END
     END
-    AADD(aArray, { n, STRZERO(i, 4), DATE() + i, "jgçpqy " + STRZERO(i, 23), STRZERO(i, 5)})
+    AAdd(aArray, { n, STRZERO(i, 4), DATE() + i, "jgçpqy " + STRZERO(i, 23), STRZERO(i, 5)})
   Next
 
 RETURN aArray

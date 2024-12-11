@@ -1,8 +1,8 @@
-/*
- * $Id: testrtf.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * The sample implemented by Sandro Freire <sandrorrfreire@yahoo.com.br>
- */
+//
+// $Id: testrtf.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// The sample implemented by Sandro Freire <sandrorrfreire@yahoo.com.br>
+//
 
 #include "common.ch"
 #include "richtext.ch"
@@ -77,7 +77,7 @@ FUNCTION TestRtf()
    TEXT "Cajas de Texto";
    FONTNUMBER 2;
    FONTSIZE 12 ;
-   APPEARANCE BOLD_ON+CAPS_ON;
+   APPEARANCE BOLD_ON + CAPS_ON;
         INDENT 0
 
    END TEXTBOX oRtf
@@ -94,7 +94,7 @@ FUNCTION TestRtf()
         STYLE 2
 
    NEW PARAGRAPH oRTF TEXT "CON LETRAS DE COLORES";
-   APPEARANCE BOLD_OFF+ITALIC_OFF+CAPS_OFF;
+   APPEARANCE BOLD_OFF + ITALIC_OFF + CAPS_OFF;
         FONTNUMBER 2;
         FONTCOLOR 3;
         STYLE 1;
@@ -296,7 +296,7 @@ BEGIN HEADER oRTF
                 FONTNUMBER 2;
       FONTSIZE 14 ;
                 FONTCOLOR 2;                            // Colores
-      APPEARANCE BOLD_ON+CAPS_ON+ITALIC_ON ;
+      APPEARANCE BOLD_ON + CAPS_ON + ITALIC_ON ;
       ALIGN CENTER
 
         WRITE NEWCELL oRtf TEXT ""

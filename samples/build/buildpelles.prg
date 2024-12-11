@@ -1,12 +1,12 @@
-/*
- *$Id: buildpelles.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library
- *
- * File to Build APP using Pelles C Compiler
- * Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
- * www - http://www.lumainformatica.com.br
-*/
+//
+// $Id: buildpelles.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library
+//
+// File to Build APP using Pelles C Compiler
+// Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
+// www - http://www.lumainformatica.com.br
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -38,7 +38,7 @@ FUNCTION Main()
 
    PRIVATE oDirec := DiskName() + ":\" + CurDir() + "\"
 
-   If !File(oDirec+"BuildPelles.Ini")
+   If !File(oDirec + "BuildPelles.Ini")
      Hwg_WriteIni("Config", "Dir_HwGUI", "C:\HwGUI", oDirec + "BuildPelles.Ini")
      Hwg_WriteIni("Config", "Dir_HARBOUR", "C:\xHARBOUR", oDirec + "BuildPelles.Ini")
      Hwg_WriteIni("Config", "Dir_PELLES", "C:\POCC", oDirec + "BuildPelles.Ini")
@@ -166,10 +166,10 @@ STATIC FUNCTION SearchFile(oBrow, oFile)
       obrow:aArray := {}
    endif
    For i := 1 to Len(oBrow:aArray)
-     AADD(oTotReg, oBrow:aArray[i])
+     AAdd(oTotReg, oBrow:aArray[i])
    Next
    For i := 1 to Len(aSelect)
-     AADD(oTotReg, aSelect[i])
+     AAdd(oTotReg, aSelect[i])
    Next
    obrow:aArray := oTotReg
    obrow:refresh()
@@ -219,7 +219,7 @@ FUNCTION ReadBuildFile()
    For i := 1 to 300
        oSel1 := Hwg_GetIni("FilesPRG", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel1) //.or. oSel1#Nil
-           AADD(oBr1, oSel1)
+           AAdd(oBr1, oSel1)
        EndIf
    Next
    
@@ -227,21 +227,21 @@ FUNCTION ReadBuildFile()
    For i := 1 to 300
        oSel2 := Hwg_GetIni("FilesC", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel2) //.or. oSel2#Nil
-           AADD(oBr2, oSel2)
+           AAdd(oBr2, oSel2)
        EndIf
    Next
    
    For i := 1 to 300
        oSel3 := Hwg_GetIni("FilesLIB", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel3) //.or. oSel3#Nil
-           AADD(oBr3, oSel3)
+           AAdd(oBr3, oSel3)
        EndIf
    Next
    
    For i := 1 to 300
        oSel4 := Hwg_GetIni("FilesRES", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel4) //.or. oSel4#Nil
-           AADD(oBr4, oSel4)
+           AAdd(oBr4, oSel4)
        EndIf
    Next
    
@@ -268,7 +268,7 @@ FUNCTION SaveBuildFile()
       RETURN NIL
    Endif
    if file(oFolderFile)
-      If(hwg_MsgYesNo("File "+oFolderFile+" EXIT ..Replace?"))
+      If(hwg_MsgYesNo("File " + oFolderFile + " EXIT ..Replace?"))
         Erase(oFolderFile)
       Else
         hwg_MsgInfo("No file SAVED.")
@@ -321,7 +321,7 @@ FUNCTION SaveBuildFile()
       Next
    endif
 
-   hwg_Msginfo("File "+oFolderFile+" saved", "HwGUI Build")
+   hwg_Msginfo("File " + oFolderFile + " saved", "HwGUI Build")
 
 RETURN NIL
 
@@ -347,7 +347,7 @@ FUNCTION BuildBat()
    LOCAL voCFiles
    LOCAL voResFiles
    LOCAL oLibFiles
-   LOCAL CRF := CHR(13) + CHR(10)
+   LOCAL CRF := Chr(13) + Chr(10)
    LOCAL oName
    LOCAL oInc
    LOCAL lName
@@ -358,7 +358,7 @@ FUNCTION BuildBat()
    LOCAL vHarbour
    LOCAL vPelles
 
-   If File(oDirec+"BuildPelles.Ini")
+   If File(oDirec + "BuildPelles.Ini")
       vHwGUI := Hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
       vHarbour := Hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
       vPelles := Hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
@@ -379,7 +379,7 @@ FUNCTION BuildBat()
    voLibFiles := oBrowse3:aArray
    voResFiles := oBrowse4:aArray
    
-   FWrite(oArq, "@echo off"+CRF)
+   FWrite(oArq, "@echo off" + CRF)
    
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
    lName := ""
@@ -393,7 +393,7 @@ FUNCTION BuildBat()
    for i := 1 to Len(lName)         
       oName += SubStr(lName, -i, 1)
    Next   
-   FWrite(oArq, "ECHO "+oName+".obj > make.tmp "+CRF)
+   FWrite(oArq, "ECHO " + oName + ".obj > make.tmp " + CRF)
    
    if Len(voPrgFiles)>0 
    
@@ -414,14 +414,14 @@ FUNCTION BuildBat()
                oName += SubStr(lName, -g, 1)
             Next   
    
-            FWrite(oArq, "ECHO "+oName+".obj >> make.tmp "+CRF)
+            FWrite(oArq, "ECHO " + oName + ".obj >> make.tmp " + CRF)
             
          Endif   
          
       Next
    Endif
       
-   //FWrite(oArq, "ECHO "+voExeName+".obj > make.tmp "+CRF)
+   //FWrite(oArq, "ECHO " + voExeName + ".obj > make.tmp " + CRF)
    FWrite(oArq, "echo " + vHarbour + "\lib\rtl%HB_MT%.lib  >> make.tmp" + CRF)
    FWrite(oArq, "echo " + vHarbour + "\lib\vm%HB_MT%.lib  >> make.tmp" + CRF)
    FWrite(oArq, "echo " + vHarbour + "\lib\gtwin.lib  >> make.tmp" + CRF)
@@ -499,7 +499,7 @@ FUNCTION BuildBat()
           if !Empty(oIncFolder)
              oInc := '/I"'+voIncFolder+'"'
           endif   
-          FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I""+vHarbour+"\INCLUDE" /I""+vPelles+"\INCLUDE" /I""+vPelles+"\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" '+oInc+' /D"HB_STATIC_STARTUP" /c' + CRF)
+          FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"" + vHarbour + "\INCLUDE" /I"" + vPelles + "\INCLUDE" /I"" + vPelles + "\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" '+oInc+' /D"HB_STATIC_STARTUP" /c' + CRF)
        endif   
    Next
    Endif
@@ -535,8 +535,8 @@ FUNCTION BuildBat()
    
    __Run("Hwg_Build.bat>Error.log")
    
-   if file(voExeName+".exe")
-      hwg_MsgInfo("File "+ voExeName+".exe Build correct")
+   if file(voExeName + ".exe")
+      hwg_MsgInfo("File " + voExeName + ".exe Build correct")
    Else 
       ShellExecute("NotePad error.log")   
    Endif   
@@ -555,7 +555,7 @@ FUNCTION BuildPoMake()
    LOCAL voCFiles
    LOCAL voResFiles
    LOCAL oLibFiles
-   LOCAL CRF := CHR(13) + CHR(10)
+   LOCAL CRF := Chr(13) + Chr(10)
    LOCAL oName
    LOCAL oInc
    LOCAL lName
@@ -566,7 +566,7 @@ FUNCTION BuildPoMake()
    LOCAL vHarbour
    LOCAL vPelles
 
-   If File(oDirec+"BuildPelles.Ini")
+   If File(oDirec + "BuildPelles.Ini")
       vHwGUI := Hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
       vHarbour := Hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
       vPelles := Hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
@@ -710,7 +710,7 @@ FUNCTION BuildPoMake()
        if !Empty(voPrgFiles[i])
           oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
           FWrite(oArq, oName + ".obj : " + oName + ".c" + CRF)
-          FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** "+CRF+CRF)
+          FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF + CRF)
       ENDIF    
    Next
    endif
@@ -725,7 +725,7 @@ FUNCTION BuildPoMake()
           oName := SubStr(voCFiles[i], 1, Len(voCFiles[i]) - 4)
    
           FWrite(oArq, oName + ".obj : " + voCFiles[i] + CRF)
-          FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** "+CRF)
+          FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF)
    
        endif
    Next

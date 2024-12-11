@@ -1,10 +1,8 @@
-/*
- * HWGUI using sample
- * 
- *
- * Jose Augusto M de Andrade Jr - jamaj@terra.com.br
- * 
-*/
+//
+// HWGUI using sample
+//
+// Jose Augusto M de Andrade Jr - jamaj@terra.com.br
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -47,7 +45,7 @@ FUNCTION CreateChild(lClip)
 
    // Test if we could create the window object
    If ISOBJECT(oChild)
-      aAdd(aChilds, oChild)
+      AAdd(aChilds, oChild)
    Else
        hwg_MsgStop("Erro ao tentar criar objeto HWindow!")
    Endif

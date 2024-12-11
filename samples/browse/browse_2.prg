@@ -1,6 +1,6 @@
-/*
- * $Id: browse_2.prg 1831 2012-01-20 11:49:21Z LFBASSO $
- */
+//
+// $Id: browse_2.prg 1831 2012-01-20 11:49:21Z LFBASSO $
+//
 
 #include "windows.ch"
 #include "guilib.ch"

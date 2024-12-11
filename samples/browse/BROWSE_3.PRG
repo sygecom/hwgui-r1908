@@ -1,11 +1,10 @@
-/*
- * Demo by HwGUI Alexander Kresin
- *
- * Copyright (c)  Sandro R R Freire <sandro@lumainformatica.com.br>
- *
- * Demo for Browse using Set Relatarion
- *
- */
+//
+// Demo by HwGUI Alexander Kresin
+//
+// Copyright (c) Sandro R R Freire <sandro@lumainformatica.com.br>
+//
+// Demo for Browse using Set Relatarion
+//
 
 #include "hwgui.ch"
 #include "dbstruct.ch"

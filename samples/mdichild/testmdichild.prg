@@ -1,10 +1,8 @@
-/*
- * HWGUI using sample
- *
- *
- * Jose Augusto M de Andrade Jr - jamaj@terra.com.br
- *
-*/
+//
+// HWGUI using sample
+//
+// Jose Augusto M de Andrade Jr - jamaj@terra.com.br
+//
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -78,7 +76,7 @@ FUNCTION CreateMdiChild()
 
   INIT WINDOW oWin MDICHILD TITLE "PDV" ;
     AT 0, 0 SIZE 1036, 560 ;
-     STYLE WS_CHILD+WS_CAPTION+WS_SYSMENU+WS_MAXIMIZEBOX+WS_SIZEBOX+DS_SYSMODAL
+     STYLE WS_CHILD + WS_CAPTION + WS_SYSMENU + WS_MAXIMIZEBOX + WS_SIZEBOX + DS_SYSMODAL
     Thisform := oWin
 
    ADD STATUS oStatus1 TO oWin
@@ -148,7 +146,7 @@ FUNCTION CreateMdiChild()
         STYLE BS_LEFT
         oGroup2:Anchor := 240
    @ 501, 429 SAY oLabel13 CAPTION "R$ 11,94" SIZE 287, 57 ;
-        STYLE SS_RIGHT +DT_VCENTER+DT_SINGLELINE;
+        STYLE SS_RIGHT + DT_VCENTER + DT_SINGLELINE;
          COLOR 3280604   ;
         FONT HFont():Add("Arial", 0, -56, 400)
         oLabel13:Anchor := 164
@@ -221,7 +219,7 @@ FUNCTION CreateMdiChild()
         FONT HFont():Add("Arial", 0, -19, 400)
         oLabel11:Anchor := 161
    @ 8, 155 SAY oLabel21 CAPTION "Código" SIZE 216, 35 ;
-        STYLE SS_CENTER +DT_VCENTER+DT_SINGLELINE+WS_DLGFRAME   ;
+        STYLE SS_CENTER + DT_VCENTER + DT_SINGLELINE + WS_DLGFRAME   ;
         FONT HFont():Add("Arial", 0, -19, 700)
         oLabel21:Anchor := 161
         oLabel21:FontBold := .T.

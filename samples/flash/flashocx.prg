@@ -1,16 +1,14 @@
-/*
- *$Id: flashocx.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 and Linux (GTK) GUI library
- * flashocx.prg - sample of ActiveX container for the Acrobat Reader ocx
- *
- *
- * Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * Sample code derived from a sample code found on Internet.... oohg ?
- *
- */
+//
+// $Id: flashocx.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 and Linux (GTK) GUI library
+// flashocx.prg - sample of ActiveX container for the Acrobat Reader ocx
+//
+// Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
+// Sample code derived from a sample code found on Internet.... oohg ?
+//
 
 #include "hwgui.ch"
 #include "rmchart.ch"
@@ -34,7 +32,7 @@ FUNCTION Main()
 
    @ 0, 0 PANEL oPanel SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y)}
 
-   oFlash := FlashPlayer(oPanel, mypath+"mma.swf", 0, 0, 500, 366)
+   oFlash := FlashPlayer(oPanel, mypath + "mma.swf", 0, 0, 500, 366)
 
    ACTIVATE WINDOW oMainWnd
 

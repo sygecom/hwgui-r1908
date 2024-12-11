@@ -76,13 +76,13 @@ FUNCTION DlgGet()
    oFont:Release()
 
    IF oModDlg:lResult
-      hwg_MsgInfo(e1 + chr(10) + chr(13) +                               ;
-               "Check1 - " + IIf(c1, "On", "Off") + chr(10) + chr(13) + ;
-               "Check2 - " + IIf(c2, "On", "Off") + chr(10) + chr(13) + ;
-               "Radio: " + Str(r1, 1) + chr(10) + chr(13) +            ;
-               "Combo: " + aCombo[cm] + chr(10) + chr(13) +           ;
-               "UpDown: "+Str(upd) + chr(10) + chr(13) +              ;
-               "DatePicker: "+Dtoc(d1)                                ;
+      hwg_MsgInfo(e1 + Chr(10) + Chr(13) +                               ;
+               "Check1 - " + IIf(c1, "On", "Off") + Chr(10) + Chr(13) + ;
+               "Check2 - " + IIf(c2, "On", "Off") + Chr(10) + Chr(13) + ;
+               "Radio: " + Str(r1, 1) + Chr(10) + Chr(13) +            ;
+               "Combo: " + aCombo[cm] + Chr(10) + Chr(13) +           ;
+               "UpDown: " + Str(upd) + Chr(10) + Chr(13) +              ;
+               "DatePicker: " + Dtoc(d1)                                ;
                , "Results:")
    ENDIF
 

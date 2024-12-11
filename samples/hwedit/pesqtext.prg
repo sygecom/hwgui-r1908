@@ -1,8 +1,8 @@
-
 #include "windows.ch"
 #include "guilib.ch"
 #include "fileio.ch"
 #include "common.ch"
+
 **************************
 FUNCTION pesquisaglobal()
 **************************
@@ -20,14 +20,14 @@ FUNCTION pesquisaglobal()
    PRIVATE get01
 
    for f = 1 to Len(oDir) // filtrando diretorios
-       if odir[f, 1] # "." .AND. odir[f, 1] # ".."
-          aadd(diretorio, DiskName() + ":\" + oDir[f, 1] + "\")
+       if odir[f, 1] != "." .AND. odir[f, 1] != ".."
+          AAdd(diretorio, DiskName() + ":\" + oDir[f, 1] + "\")
        endif
    next f
    
    asort(diretorio)
    for g:= 1 to Len(diretorio) // pegando diretorio atual
-          if upper(diretorio[g]) = DiskName() + ":\" + upper(CurDir() + "\")
+          if Upper(diretorio[g]) = DiskName() + ":\" + Upper(CurDir() + "\")
              atu := g
           endif
    next g
@@ -60,8 +60,8 @@ FUNCTION pesq(rd_dir, rd_text)
    PRIVATE result := ""
 
    for f:= 1 to Len(arquivos) // filtrando arquivos
-       if arquivos[f, 1] # "." .AND. arquivos[f, 1] # ".."
-          aadd(nom_arq, arquivos[f, 1])
+       if arquivos[f, 1] != "." .AND. arquivos[f, 1] != ".."
+          AAdd(nom_arq, arquivos[f, 1])
        endif
    next f
    
@@ -72,18 +72,18 @@ FUNCTION pesq(rd_dir, rd_text)
    for g := 1 to Len(nom_arq)
      arq := FT_FUSE(rd_dir+nom_arq[g])
      //
-     resultado := resultado + nom_arq[g] + chr(13) + chr(10)
+     resultado := resultado + nom_arq[g] + Chr(13) + Chr(10)
      get01:refresh()
      //
      lin := 0
      while !FT_FEOF()
-        linha := upper(SubStr(FT_FReadLn(@s_lEof), 1))
+        linha := Upper(SubStr(FT_FReadLn(@s_lEof), 1))
         //
-        texto := upper(rd_text)
+        texto := Upper(rd_text)
         //
         //hwg_MsgInfo(linha)
-        if at(texto, linha) # 0
-            resultado := resultado+str(lin, 6) + ":" + linha + chr(13) + chr(10)
+        if at(texto, linha) != 0
+            resultado := resultado+str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
             get01:refresh()
         endif
         //

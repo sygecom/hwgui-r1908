@@ -1,13 +1,12 @@
-/*
- *$Id: dbview.prg 1881 2012-09-04 11:47:36Z lfbasso $
- *
- * HWGUI - Harbour Win32 and Linux (GTK) GUI library
- * dbview.prg - dbf browsing sample
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- */
-
+//
+// $Id: dbview.prg 1881 2012-09-04 11:47:36Z lfbasso $
+//
+// HWGUI - Harbour Win32 and Linux (GTK) GUI library
+// dbview.prg - dbf browsing sample
+//
+// Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "hwgui.ch"
 #include "gtk.ch"
@@ -146,7 +145,7 @@ STATIC FUNCTION FileOpen()
       oBrw:InsColumn(HColumn():New("*", {||IIf(Deleted(), "*", " ")}, "C", 1, 0), 1)
       oBrw:active := .T.
       oBrw:Refresh()
-      oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
       oSay2:SetValue("")
       dbv_cLocate := dbv_cSeek := ""
       dbv_nRec := 0
@@ -206,7 +205,7 @@ STATIC FUNCTION SelectIndex()
 
    i := 1
    DO WHILE !Empty(indname := ORDNAME(i))
-      AADD(aIndex, { indname, ORDKEY(i), ORDBAGNAME(i) })
+      AAdd(aIndex, { indname, ORDKEY(i), ORDBAGNAME(i) })
       iLen := Max(iLen, Len(OrdKey(i)))
       i ++
    ENDDO
@@ -292,17 +291,17 @@ STATIC FUNCTION NewIndex()
          oMsg = DlgWait("Indexing")
          IF lMulti
             IF Empty(cCond)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ELSE
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
+               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ENDIF
          ELSE
             IF Empty(cCond)
-               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
+               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ELSE
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., Nil))
+               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
+               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ENDIF
          ENDIF
          oMsg:Close()
@@ -375,7 +374,7 @@ STATIC FUNCTION UpdBrowse()
       oBrw:bRecnoLog := &( "{||" + oBrw:alias + "->(ORDKEYNO())}" )
    ENDIF
    oBrw:Refresh()
-   oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+   oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
    oSay2:SetValue("")
 
 RETURN NIL
@@ -429,7 +428,7 @@ STATIC FUNCTION ModiStru(lNew)
       af0 := dbStruct()
       af := dbStruct()
       FOR i := 1 TO Len(af)
-         Aadd(af[i], i)
+         AAdd(af[i], i)
       NEXT
    ENDIF
 
@@ -524,7 +523,7 @@ STATIC FUNCTION ModiStru(lNew)
       ENDIF
 
       Close All
-      Ferase(currFname+".bak")
+      Ferase(currFname + ".bak")
       Frename(currFname + ".dbf", currFname + ".bak")
       Frename("a0_new.dbf", currFname + ".dbf")
       IF File("a0_new.fpt")
@@ -581,10 +580,10 @@ STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
       nLen := Val(oGet3:SetGet())
       nDec := Val(oGet4:SetGet())
       IF nOperation == 1
-         Aadd(oBrowse:aArray,{ cName, cType, nLen, nDec })
+         AAdd(oBrowse:aArray,{ cName, cType, nLen, nDec })
       ELSE
          IF nOperation == 2
-            Aadd(oBrowse:aArray, Nil)
+            AAdd(oBrowse:aArray, Nil)
             Ains(oBrowse:aArray, oBrowse:nCurrent)
          ENDIF
          oBrowse:aArray[oBrowse:nCurrent, 1] := cName
@@ -718,7 +717,7 @@ STATIC FUNCTION GetData(cRes, cTitle, cText)
    LOCAL oFont := HFont():Add("MS Sans Serif", 0, -13)
 
    INIT DIALOG oModDlg TITLE cTitle AT 0, 0 SIZE 300, 140 ;
-        FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER
+        FONT oFont CLIPPER STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + DS_CENTER
 
    @ 20, 10 SAY cText SIZE 260, 22
    @ 20, 35 GET cres SIZE 260, 26
@@ -759,7 +758,7 @@ STATIC FUNCTION dbv_Pack()
       oMsg:Close()
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
-      oSay1:SetValue("Records: "+Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
       oSay2:SetValue("")
    ENDIF
 

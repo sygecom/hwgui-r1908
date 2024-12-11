@@ -1,10 +1,11 @@
-/*
- * HWGUI using sample
- *
- * Demo for PrintDos CLASS
- * Copyright 2003 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
- * www - http://www.lumainformatica.com.br
-*/
+//
+// HWGUI using sample
+//
+// Demo for PrintDos CLASS
+// Copyright 2003 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
+// www - http://www.lumainformatica.com.br
+//
+
 *************************************************************************************
 * Example to conversion
 *
@@ -88,7 +89,7 @@ If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == Nil, "LPT1", oTest)
    oPrint:Say(10, 31, "LINE 10 COL 31")
    oPrint:Say(14, 21, "LINE 14 COL 21")
    oPrint:Say(30, 34, "LINE 30 COL 34")
-   oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE "+STR(oPrint:nProw)+ " COL "+STR(oPrint:nPcol))
+   oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE " + STR(oPrint:nProw)+ " COL " + STR(oPrint:nPcol))
    oPrint:Say(40, 24, "11222333000144", "@r 99.999.999/9999-99")
    oPrint:Say(oPrint:nProw+1, oPrint:nPcol, "Valor" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol, 996659.8, "@E 999,999,999.99" )
@@ -124,7 +125,7 @@ If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == Nil, "LPT1", oTest),
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter
    @ 14, 21 PSAY "LINE 14 COL 21" OF oPrinter
    @ 30, 34 PSAY "LINE 30 COL 34" OF oPrinter
-   @ wProw(oPrinter), wPCol(oPrinter) PSAY "LINE "+STR(wProw(oPrinter))+ " COL "+STR(wPcol(oPrinter)) OF oPrinter
+   @ wProw(oPrinter), wPCol(oPrinter) PSAY "LINE " + STR(wProw(oPrinter))+ " COL " + STR(wPcol(oPrinter)) OF oPrinter
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
    @ wprow(oPrinter)+1, wPcol(oPrinter) PSAY "Valor" OF oPrinter
    @ wprow(oPrinter), wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
@@ -155,7 +156,7 @@ FUNCTION OpenRel(oText)
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
-   INIT DIALOG oDlg TITLE "Open File:"+oText ;
+   INIT DIALOG oDlg TITLE "Open File:" + oText ;
         AT 204, 25 SIZE 777, 440 FONT oFont
 
    @ 1, 3 EDITBOX lText SIZE 772, 384 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE
@@ -168,7 +169,7 @@ RETURN NIL
 
 FUNCTION TestPrinterFile(oTest)
 
-If hwg_MsgYesNo("Printing File "+oTest)
+If hwg_MsgYesNo("Printing File " + oTest)
 
    oPrint := Printdos():New()   //oTest=Nil LPT1
    oPrint:PrinterFile(oTest)
@@ -278,7 +279,7 @@ If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == Nil, "LPT1", oTest), "
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter
    @ 14, 21 PSAY "LINE 14 COL 21" OF oPrinter
    @ 30, 34 PSAY "LINE 30 COL 34" OF oPrinter
-   @ wProw(oPrinter), wPCol(oPrinter) PSAY "LINE "+STR(wProw(oPrinter))+ " COL "+STR(wPcol(oPrinter)) OF oPrinter
+   @ wProw(oPrinter), wPCol(oPrinter) PSAY "LINE " + STR(wProw(oPrinter))+ " COL " + STR(wPcol(oPrinter)) OF oPrinter
    oPrinter:Descompress()
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
    @ wprow(oPrinter)+1, wPcol(oPrinter) PSAY "Valor" OF oPrinter
