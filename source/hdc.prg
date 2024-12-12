@@ -300,13 +300,13 @@ METHOD NEW(nWnd) CLASS HCLIENTDC
 
    ::Super:new()
    ::m_hWnd := nWnd
-   ::Attach(GetDc(::m_hWnd))
+   ::Attach(hwg_GetDC(::m_hWnd))
 
    RETURN Self
 
 METHOD END () CLASS HCLIENTDC
 
-   ReleaseDc(::m_hWnd, ::m_hDC)
+   hwg_ReleaseDc(::m_hWnd, ::m_hDC)
    ::m_hDC       := NIL
    ::m_hAttribDC := NIL
 

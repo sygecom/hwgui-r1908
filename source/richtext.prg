@@ -2408,7 +2408,7 @@ FUNCTION LoadPicture(cName, nWidth, nHeight, ScreenResX, ScreenResy)
 
    oWnd := GetWndDefault()
    hWnd := oWnd:hWnd
-   hdc := GetDc(hWnd)
+   hdc := hwg_GetDC(hWnd)
    ScreenResX := GETDEVICEC(hdc, 88)
    ScreenResY := GETDEVICEC(hdc, 90)
 

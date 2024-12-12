@@ -839,11 +839,11 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
-         PostMessage(::handle, WM_PRINT, GETDC(::handle), PRF_CHECKVISIBLE)
+         PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
       ENDIF
 
    ELSEIF msg == WM_SETFONT .AND. ::oFont != NIL .AND. ::lInit
-      SendMessage(::handle, WM_PRINT, GETDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
+      SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
 
    ELSEIF msg == WM_KEYDOWN .AND. GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
        IF ProcKeyList(Self, wParam)
@@ -967,13 +967,13 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
-         PostMessage(::handle, WM_PRINT, GETDC(::handle), PRF_CHECKVISIBLE)
+         PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
       ENDIF
       EXIT
 
    CASE WM_SETFONT
       IF ::oFont != NIL .AND. ::lInit
-         SendMessage(::handle, WM_PRINT, GETDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
+         SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
       ENDIF
       EXIT
 
@@ -1247,7 +1247,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
       ENDIF
    ENDIF
 
-   ::hDC := GetDC(::oParent:handle)
+   ::hDC := hwg_GetDC(::oParent:handle)
    FOR i := 1 TO Len(::oParent:Pages)
       oPage := ::oParent:Pages[i]
       client_rect := TabItemPos(::oParent:handle, i - 1)
@@ -1291,7 +1291,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     AEVAL(oPage:oParent:Pages, {|p|size += p:aItemPos[3] - p:aItemPos[1]})
     nStyle := SS_CENTER + DT_VCENTER + DT_SINGLELINE + DT_END_ELLIPSIS
 
-    ::hDC := IIf(::hDC == NIL, GetDC(::oParent:handle), ::hDC)
+    ::hDC := IIf(::hDC == NIL, hwg_GetDC(::oParent:handle), ::hDC)
     IF (ISTHEMEDLOAD())
        hTheme := NIL
        IF ::WindowsManifest

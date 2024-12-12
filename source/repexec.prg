@@ -163,10 +163,10 @@ RETURN res
 
 FUNCTION RecalcForm(aPaintRep, nFormWidth)
    LOCAL hDC, aMetr, aItem, i
-   hDC := GetDC(GetActiveWindow())
+   hDC := hwg_GetDC(GetActiveWindow())
    aMetr := GetDeviceArea(hDC)
    aPaintRep[FORM_XKOEF] := (aMetr[1] - XINDENT) / aPaintRep[FORM_WIDTH]
-   ReleaseDC(GetActiveWindow(), hDC)
+   hwg_ReleaseDC(GetActiveWindow(), hDC)
 
    IF nFormWidth != aMetr[1] - XINDENT
       FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])

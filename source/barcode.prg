@@ -91,7 +91,7 @@ FUNCTION main
    nWidth    := 200
    nHeight   := 40
 
-   oBC := Barcode():New(GetDC(oMainWindow:handle), "993198042124", nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, ;
+   oBC := Barcode():New(hwg_GetDC(oMainWindow:handle), "993198042124", nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, ;
       nColPane, lHorz, lTransparent, nPinWidth)
 
    @ 163, 10 EDITBOX oEdit1 CAPTION oBC:InitEAN13()  SIZE 100, 20
@@ -174,7 +174,7 @@ METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColP
    DEFAULT nPinWidth    := 1
 
 
-   //DEFAULT hDC    := GetDC(GetActiveWindow())
+   //DEFAULT hDC    := hwg_GetDC(GetActiveWindow())
 
    ::hDC          := hDC
    ::cText        := cText
