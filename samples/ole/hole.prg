@@ -48,7 +48,7 @@ RETURN NIL
 STATIC FUNCTION SpeakIt(oEdit)
 
    LOCAL aTop := ClientToScreen(oMainWindow:handle, 0, 0)
-   LOCAL cText := GetEditText(oEdit:oParent:handle, oEdit:id)
+   LOCAL cText := hwg_GetEditText(oEdit:oParent:handle, oEdit:id)
 
    oChar:Show()
    oChar:MoveTo(aTop[1]+20, aTop[2]+70)

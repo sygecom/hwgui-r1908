@@ -516,9 +516,9 @@ STATIC FUNCTION PrintDosAnt(nPage, oText)
       nPage := 1
    ENDIF
    IF nPage == 1  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
-      SetDlgItemText(oDlg, 1001, SUBS(oText[nPage], 2))  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
+      hwg_SetDlgItemText(oDlg, 1001, SUBS(oText[nPage], 2))  //Added by  Por Fernando Exclui 1 byte do oText nao sei de onde ele aparece
    ELSE
-      SetDlgItemText(oDlg, 1001, oText[nPage])
+      hwg_SetDlgItemText(oDlg, 1001, oText[nPage])
    ENDIF
    RETURN nPage
 
@@ -528,7 +528,7 @@ STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
    IF nPage > oPage
       nPage := oPage
    ENDIF
-   SetDlgItemText(oDlg, 1001, oText[nPage])
+   hwg_SetDlgItemText(oDlg, 1001, oText[nPage])
    RETURN nPage
 
 FUNCTION regenfile(o, new)

@@ -207,7 +207,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
 #ifdef __LINUX__
    IF !Empty(xRes := oEditExpr:GetText())
 #else
-   IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
+   IF !Empty(xRes := hwg_GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
       bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE
@@ -272,7 +272,7 @@ Local xRes, bOldError, lRes := .T., cType
 #ifdef __LINUX__
    IF !Empty(xRes := oEditExpr:GetText())
 #else
-   IF !Empty(xRes := GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
+   IF !Empty(xRes := hwg_GetEditText(oEditExpr:oParent:handle, oEditExpr:id))
 #endif
       bOldError := ErrorBlock({|e|MacroError(e)})
       BEGIN SEQUENCE

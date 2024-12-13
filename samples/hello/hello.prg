@@ -93,8 +93,8 @@ STATIC FUNCTION ChangeTab(oWnd, oGet, n)
 
    STATIC lastTab := 1
 
-   aGetsTab[lastTab] := GetEditText(oGet:oParent:handle, oGet:id)
-   SetDlgItemText(oGet:oParent:handle, oGet:id, aGetsTab[n])
+   aGetsTab[lastTab] := hwg_GetEditText(oGet:oParent:handle, oGet:id)
+   hwg_SetDlgItemText(oGet:oParent:handle, oGet:id, aGetsTab[n])
    lastTab := n
 
 RETURN NIL

@@ -227,15 +227,15 @@ FUNCTION InitConnect()
 
    LOCAL hDlg := getmodalhandle()
 
-   SetDlgItemText(hDlg, IDC_EDIT1, cServer)
-   SetDlgItemText(hDlg, IDC_EDIT2, cUser)
-   SetDlgItemText(hDlg, IDC_EDIT4, cDataDef)
+   hwg_SetDlgItemText(hDlg, IDC_EDIT1, cServer)
+   hwg_SetDlgItemText(hDlg, IDC_EDIT2, cUser)
+   hwg_SetDlgItemText(hDlg, IDC_EDIT4, cDataDef)
    IF Empty(cServer)
-      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT1))
+      hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT1))
    ELSEIF Empty(cUser)
-      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT2))
+      hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT2))
    ELSE
-      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT3))
+      hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT3))
    ENDIF
 
 RETURN .F.
@@ -252,27 +252,27 @@ FUNCTION EndConnect()
          queHandle := 0
       ENDIF
    ENDIF
-   cServer := GetDlgItemText(hDlg, IDC_EDIT1, 30)
-   cUser := GetDlgItemText(hDlg, IDC_EDIT2, 20)
-   cPassword := GetDlgItemText(hDlg, IDC_EDIT3, 20)
-   cDataDef := GetDlgItemText(hDlg, IDC_EDIT4, 20)
+   cServer := hwg_GetDlgItemText(hDlg, IDC_EDIT1, 30)
+   cUser := hwg_GetDlgItemText(hDlg, IDC_EDIT2, 20)
+   cPassword := hwg_GetDlgItemText(hDlg, IDC_EDIT3, 20)
+   cDataDef := get_GetDlgItemText(hDlg, IDC_EDIT4, 20)
 
-   SetDlgItemText(hDlg, IDC_TEXT1, "Wait, please ...")
+   hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Wait, please ...")
    connHandle := sqlConnect(cServer, Trim(cUser), Trim(cPassword))
    IF connHandle != 0 .AND. !Empty(cDataDef)
       cDatabase := cDataDef
       IF sqlSelectD(connHandle, cDatabase) != 0
          cDatabase := ""
-         SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cDataBase)
+         hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cDataBase)
       ENDIF
    ELSE
-      SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cServer)
+      hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Can't connect to " + cServer)
       cDatabase := ""
    ENDIF
    IF connHandle == 0
       WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
       WriteStatus(Hwindow():GetMain(), 2, "")
-      hwg_SetFocus(GetDlgItem(hDlg, IDC_EDIT1))
+      hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT1))
    ELSE
       WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
       IF !Empty(cDataBase)

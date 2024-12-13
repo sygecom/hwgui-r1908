@@ -348,7 +348,7 @@ FUNCTION Texto()
       //
       ADD STATUS TO o&I ID IDC_STATUS PARTS 50, 50, 400, 12, 90, 95, 90
       //
-      hwg_SetFocus(GetDlgItem(oEdit&i, ID_TEXTO))
+      hwg_SetFocus(hwg_GetDlgItem(oEdit&i, ID_TEXTO))
    auto++
  o&I:ACTIVATE()
  WriteStatus(o&I, 3, vText)

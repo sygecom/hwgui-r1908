@@ -255,7 +255,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                   ::GetApplyKey(SubStr(cClipboardText, nPos, 1))
                NEXT
                nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
-               ::title := ::UnTransform(GetEditText(::oParent:handle, ::id))
+               ::title := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
                SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
               ENDIF
             RETURN 0
@@ -370,7 +370,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                   ::lFirst := .F.
                   IF ::cType == "C"
                      //nPos := Len(Trim(::title))
-                     nPos := Len(Trim(GetEditText(::oParent:handle, ::id)))
+                     nPos := Len(Trim(hwg_GetEditText(::oParent:handle, ::id)))
                      SendMessage(::handle, EM_SETSEL, nPos, nPos)
                      RETURN 0
                   ENDIF
@@ -408,7 +408,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                //RETURN 0
             ENDIF
          ELSEIF msg == WM_LBUTTONUP
-            IF Empty(GetEditText(oParent:handle, ::id))
+            IF Empty(hwg_GetEditText(oParent:handle, ::id))
                SendMessage(::handle, EM_SETSEL, 0, 0)
             ENDIF
          ENDIF
@@ -602,7 +602,7 @@ METHOD Value(Value) CLASS HEdit
        ::Refresh()
    ENDIF
    //vari := ::UnTransform(::Title)
-   vari := ::UnTransform(GetEditText(::oParent:handle, ::id))
+   vari := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
 
    IF ::cType == "D"
       vari := CToD(vari)
@@ -629,7 +629,7 @@ METHOD Refresh() CLASS HEdit
       ENDIF
       ::Title := vari
    ENDIF
-   SetDlgItemText(::oParent:handle, ::id, ::title)
+   hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
    IF isWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //PtrtouLong(GetFocus()) == PtrtouLong(::handle)
       RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW) //+ RDW_NOCHILDREN)
    ENDIF
@@ -653,7 +653,7 @@ METHOD SetText(c) CLASS HEdit
       ENDIF
       //Super:SetText(::title)
       //SetWindowText(::handle, ::Title)
-      SetDlgItemText(::oParent:handle, ::id, ::title)
+      hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, c, Self)
       ENDIF
@@ -740,7 +740,7 @@ METHOD ParsePict(cPicture, vari) CLASS HEdit
    ENDIF
    IF Eval(::bSetGet, , Self) != NIL
       ::title := Transform(Eval(::bSetGet, , Self), ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
-      SetDlgItemText(::oParent:handle, ::id, ::title)
+      hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
    ENDIF
 
 RETURN NIL
@@ -921,7 +921,7 @@ METHOD DeleteChar(lBack) CLASS HEdit
       cBuf := Transform(cBuf, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    ENDIF
    ::title := cBuf
-   SetDlgItemText(::oParent:handle, ::id, ::title)
+   hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
    SendMessage(::handle, EM_SETSEL, nPosStart, nPosStart)
 
 RETURN NIL
@@ -1084,7 +1084,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
    IF HIWORD(x) != LOWORD(x)
       ::DeleteChar(.F.)
    ENDIF
-   ::title := GetEditText(::oParent:handle, ::id)
+   ::title := hwg_GetEditText(::oParent:handle, ::id)
    IF ::cType == "N" .AND. cKey $ ".," .AND. (nPos := At(".", ::cPicMask)) != 0
       IF ::lFirst
          // vari := 0
@@ -1117,7 +1117,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
            ::title := "-" + SubStr(::title, 2)
          ENDIF
       ENDIF
-      SetDlgItemText(::oParent:handle, ::id, ::title)
+      hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
       ::KeyRight(nPos - 1)
    ELSE
 
@@ -1168,7 +1168,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
          ELSEIF !Empty(::cPicMask) .AND. !"@" $ ::cPicMask
             ::title := PadR(::title, Len(::cPicMask))
          ENDIF
-         SetDlgItemText(::oParent:handle, ::id, ::title)
+         hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
          ::KeyRight(nPos)
          //Added By Sandro Freire
          IF ::cType == "N"
@@ -1326,7 +1326,7 @@ METHOD Valid() CLASS HEdit
    ENDIF
    IF hb_IsBlock(::bSetGet)
       IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
-         vari := ::UnTransform(GetEditText(::oParent:handle, ::id))
+         vari := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
          ::title := vari
          IF ::cType == "D"
             IF ::IsBadDate(vari)
@@ -1339,12 +1339,12 @@ METHOD Valid() CLASS HEdit
             vari := CToD(vari)
             IF __SetCentury() .AND. Len(Trim (::title)) < 10
                ::title := DTOC(vari)
-               SetDlgItemText(::oParent:handle, ::id, ::title)
+               hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
             ENDIF
          ELSEIF ::cType == "N"
             vari := Val(LTrim(vari))
             ::title := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
-            SetDlgItemText(::oParent:handle, ::id, ::title)
+            hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
          ELSEIF ::lMultiLine
               vari := ::GetText()
               ::title := vari
@@ -1420,10 +1420,10 @@ METHOD onChange(lForce) CLASS HEdit
       RETURN NIL
    ENDIF
    IF ::cType == "N"
-      vari := ::UnTransform(GetEditText(::oParent:handle, ::id), "vali")
+      vari := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id), "vali")
       vari := Val(LTrim(vari))
    ELSE
-      vari := ::UnTransform(GetEditText(::oParent:handle, ::id), "vali")
+      vari := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id), "vali")
       // ::Title := vari  // AQUI DA PROBLEMAS NA MASCARA DO CAMPO
    ENDIF
    IF hb_IsBlock(::bSetGet)

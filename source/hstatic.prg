@@ -33,7 +33,7 @@ CLASS HStatic INHERIT HControl
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, ;
       bDblClick, bOther)
    METHOD Activate()
-   //METHOD SetValue(value) INLINE SetDlgItemText(::oParent:handle, ::id, ;
+   //METHOD SetValue(value) INLINE hwg_SetDlgItemText(::oParent:handle, ::id, ;
    //
    METHOD SetText(value) INLINE ::SetValue(value)
    METHOD SetValue(cValue)
@@ -253,9 +253,9 @@ METHOD SetValue(cValue) CLASS HStatic
             ::nLeft, ::nTop, ::nWidth, ::nHeight)
          InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
       ENDIF
-      SetDlgItemText(::oParent:handle, ::id, cValue)
+      hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
    ELSEIF ::backstyle != TRANSPARENT
-      SetDlgItemText(::oParent:handle, ::id, cValue)
+      hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
    ENDIF
    ::Title := cValue
 

@@ -251,7 +251,7 @@ METHOD Valid() CLASS HUpDown
    LOCAL res
 
    /*
-   ::title := GetEditText(::oParent:handle, ::oEditUpDown:id)
+   ::title := hwg_GetEditText(::oParent:handle, ::oEditUpDown:id)
    ::nValue := Val(LTrim(::title))
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::nValue)
@@ -312,7 +312,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    ENDIF
    vari :=  vari + (::oUpDown:Increment * idelta)
    ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
-   SetDlgItemText(::oParent:handle, ::id, ::title)
+   hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
    ::SetFocus()
@@ -340,7 +340,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    IF ::bSetGet != NIL .AND. ::title != NIL
       ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    ENDIF
-   SetDlgItemText(::oParent:handle, ::id, ::title)
+   hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
 
    RETURN NIL
 
@@ -512,7 +512,7 @@ STATIC FUNCTION __Valid(oCtrl)
       RETURN .T.
    ENDIF
    nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)
-   oCtrl:title := GetEditText(oCtrl:oParent:handle, oCtrl:id)
+   oCtrl:title := hwg_GetEditText(oCtrl:oParent:handle, oCtrl:id)
    oCtrl:value := Val(LTrim(oCtrl:title))
    IF oCtrl:bSetGet != NIL
       Eval(oCtrl:bSetGet, oCtrl:value)

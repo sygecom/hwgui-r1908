@@ -295,7 +295,7 @@ METHOD INIT() CLASS HComboBox
          //
          IF ::lText
             IF ::lEdit
-               SetDlgItemText(getmodalhandle(), ::id, ::value)
+               hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
                SendMessage(::handle, CB_SELECTSTRING, -1, ::value)
                SendMessage(::handle, CB_SETEDITSEL, -1, 0)
             ELSE
@@ -613,7 +613,7 @@ METHOD Refresh() CLASS HComboBox
  */
    IF ::lText
       IF ::lEdit
-         SetDlgItemText(getmodalhandle(), ::id, ::value)
+         hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
          SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__
@@ -701,7 +701,7 @@ METHOD GetValue() CLASS HComboBox
    //::value := IIf(::lText, ::aItems[nPos], nPos)
    IF ::lText
        IF (::lEdit .OR. !hb_IsChar(::Value)) .AND. nPos <= 1
-           ::Value := GetEditText(::oParent:handle, ::id)
+           ::Value := hwg_GetEditText(::oParent:handle, ::id)
            nPos := SendMessage(::handle, CB_FINDSTRINGEXACT, -1, ::value) + 1
         ELSEIF nPos > 0
          ::value := ::aItems[nPos]
@@ -764,13 +764,13 @@ METHOD DisplayValue(cValue) CLASS HComboBox
 
    IF cValue != NIL
        IF ::lEdit .AND. hb_IsChar(cValue)
-         SetDlgItemText(::oParent:handle, ::id, cValue)
+         hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
          ::cDisplayValue := cValue
       ENDIF
    ENDIF
 
-RETURN IIf(!::lEdit, GetEditText(::oParent:handle, ::id), ::cDisplayValue)
-//RETURN IIf(IsWindow(::oParent:handle), GetEditText(::oParent:handle, ::id), ::cDisplayValue)
+RETURN IIf(!::lEdit, hwg_GetEditText(::oParent:handle, ::id), ::cDisplayValue)
+//RETURN IIf(IsWindow(::oParent:handle), hwg_GetEditText(::oParent:handle, ::id), ::cDisplayValue)
 
 //-------------------------------------------------------------------------------------------------------------------//
 

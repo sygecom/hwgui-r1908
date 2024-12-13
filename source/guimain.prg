@@ -62,7 +62,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
          ENDIF
 //           IF Empty(pArray[i]:handle)// <= 0
          IF IIf(hb_IsPointer(pArray[i]:handle), ptrtoulong(pArray[i]:handle), pArray[i]:handle) <= 0 // TODO: verificar
-            pArray[i]:handle := GetDlgItem(oWnd:handle, pArray[i]:id)
+            pArray[i]:handle := hwg_GetDlgItem(oWnd:handle, pArray[i]:id)
 
             // hwg_WriteLog("InitControl2" + Str(pArray[i]:handle) + "/" + pArray[i]:classname)
          ENDIF

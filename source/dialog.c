@@ -90,42 +90,50 @@ HB_FUNC(HWG_ENDDIALOG)
 /*
 GETDLGITEM(HWND, nId) --> HWND
 */
-HB_FUNC(GETDLGITEM)
+HB_FUNC(HWG_GETDLGITEM)
 {
   hwg_ret_HWND(GetDlgItem(hwg_par_HWND(1), hwg_par_int(2)));
 }
 
+HB_FUNC_TRANSLATE(GETDLGITEM, HWG_GETDLGITEM);
+
 /*
 GETDLGCTRLID(HWND) --> nId
 */
-HB_FUNC(GETDLGCTRLID)
+HB_FUNC(HWG_GETDLGCTRLID)
 {
   hwg_ret_int(GetDlgCtrlID(hwg_par_HWND(1)));
 }
 
+HB_FUNC_TRANSLATE(GETDLGCTRLID, HWG_GETDLGCTRLID);
+
 /*
 SETDLGITEMTEXT(HWND, nId, cText) --> NIL
 */
-HB_FUNC(SETDLGITEMTEXT)
+HB_FUNC(HWG_SETDLGITEMTEXT)
 {
   void *hText;
   SetDlgItemText(hwg_par_HWND(1), hwg_par_int(2), HB_PARSTR(3, &hText, NULL));
   hb_strfree(hText);
 }
 
+HB_FUNC_TRANSLATE(SETDLGITEMTEXT, HWG_SETDLGITEMTEXT);
+
 /*
 SETDLGITEMINT(HWND, nId, nValue, lSigned) --> NIL
 */
-HB_FUNC(SETDLGITEMINT)
+HB_FUNC(HWG_SETDLGITEMINT)
 {
   SetDlgItemInt(hwg_par_HWND(1), hwg_par_int(2), hwg_par_UINT(3),
                 (hb_pcount() < 4 || HB_ISNIL(4) || !hb_parl(4)) ? FALSE : TRUE);
 }
 
+HB_FUNC_TRANSLATE(SETDLGITEMINT, HWG_SETDLGITEMINT);
+
 /*
 GETDLGITEMTEXT(HWND, nId, nLen) --> cText
 */
-HB_FUNC(GETDLGITEMTEXT)
+HB_FUNC(HWG_GETDLGITEMTEXT)
 {
   int iLen = hb_parni(3);
   LPTSTR lpText = (LPTSTR)hb_xgrab((iLen + 1) * sizeof(TCHAR));
@@ -134,10 +142,12 @@ HB_FUNC(GETDLGITEMTEXT)
   hb_xfree(lpText);
 }
 
+HB_FUNC_TRANSLATE(GETDLGITEMTEXT, HWG_GETDLGITEMTEXT);
+
 /*
 GETEDITTEXT(HWND, nId) --> cText
 */
-HB_FUNC(GETEDITTEXT)
+HB_FUNC(HWG_GETEDITTEXT)
 {
   HWND hDlg = hwg_par_HWND(1);
   int id = hwg_par_int(2);
@@ -147,6 +157,8 @@ HB_FUNC(GETEDITTEXT)
   HB_RETSTR(lpText);
   hb_xfree(lpText);
 }
+
+HB_FUNC_TRANSLATE(GETEDITTEXT, HWG_GETEDITTEXT);
 
 /*
 CHECKDLGBUTTON(HWND, nId, lChecked) --> NIL
