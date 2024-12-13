@@ -7,9 +7,8 @@
 // Copyright 2012 LuisFernandoBasso <lfbasso@via-rs.net>
 //
 
-#include "windows.ch"
 #include "hbclass.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 CLASS HCalculator
 

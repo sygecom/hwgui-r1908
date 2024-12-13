@@ -4,8 +4,7 @@
 // Jose Augusto M de Andrade Jr - jamaj@terra.com.br
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 STATIC aChilds := {}
 STATIC Thisform

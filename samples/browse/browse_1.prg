@@ -2,8 +2,7 @@
 // $Id: browse_1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 STATIC nCount := 0
 STATIC oBrowse

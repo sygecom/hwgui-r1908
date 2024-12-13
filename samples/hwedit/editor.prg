@@ -12,10 +12,11 @@
 #define _WIN32_IE    0x0400
 #define OEMRESOURCE
 #define ID_TEXTO  300
-#include "windows.ch"
-#include "guilib.ch"
+
+#include "hwgui.ch"
 #include "fileio.ch"
 #include "common.ch"
+
 #define IDC_STATUS  2001
 #define false .F.
 #define true  .T.

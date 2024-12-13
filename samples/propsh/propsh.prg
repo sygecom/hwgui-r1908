@@ -6,8 +6,7 @@
 // www - http://www.geocities.com/alkresin/
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 FUNCTION Main()
 

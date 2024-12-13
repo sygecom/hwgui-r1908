@@ -7,8 +7,7 @@
 // Copyright 2004 Sandro <sandrorrfreire@yahoo.com.br>
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 * --------------------------------------------
 FUNCTION Main()

@@ -5,8 +5,7 @@
 // www - http://www.geocities.com/alkresin/
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 // REQUEST HB_CODEPAGE_RU866
 // REQUEST HB_CODEPAGE_RU1251

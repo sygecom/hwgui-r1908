@@ -11,8 +11,7 @@
 // This Sample use Postgres Library, you need to link libpq.lib and libhbpg.lib
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "common.ch"
 
 #translate RGB(<nRed>, <nGreen>, <nBlue>) => ( <nRed> + ( <nGreen> * 256 ) + ( <nBlue> * 65536 ) )

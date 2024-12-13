@@ -9,8 +9,7 @@
 // Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "common.ch"
 
 STATIC oMain

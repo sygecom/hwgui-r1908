@@ -1,5 +1,4 @@
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "fileio.ch"
 #include "common.ch"
 
