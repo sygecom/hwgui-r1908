@@ -112,7 +112,7 @@ RETURN NIL
 
 METHOD PAINT(lpdis) CLASS HGroup
 
-   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL DC := drawInfo[3]
    LOCAL ppnOldPen
    LOCAL pnFrmDark

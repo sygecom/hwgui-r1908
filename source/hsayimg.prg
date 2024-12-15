@@ -165,7 +165,7 @@ RETURN NIL
 
 METHOD Paint(lpdis) CLASS HSayBmp
 
-   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
 
    IF ::oImage != NIL .AND. !Empty(::oImage:handle)
       IF ::nZoom == NIL

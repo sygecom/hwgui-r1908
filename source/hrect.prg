@@ -108,7 +108,7 @@ METHOD Activate() CLASS HRect_Line
 //---------------------------------------------------------------------------
 METHOD Paint(lpdis) CLASS HRect_Line
 
-   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]
    LOCAL x1 := drawInfo[4]
    LOCAL y1 := drawInfo[5]
@@ -249,7 +249,7 @@ METHOD Curvature(nCurvature) CLASS HDrawShape
 
 //---------------------------------------------------------------------------
 METHOD Paint(lpdis) CLASS HDrawShape
-   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3], oldbkMode
    LOCAL  x1 := drawInfo[4], y1 := drawInfo[5]
    LOCAL  x2 := drawInfo[6], y2 := drawInfo[7]
@@ -448,7 +448,7 @@ METHOD Paint(lpdis) CLASS HContainer
    Local drawInfo, hDC
    Local x1, y1, x2, y2
 
-    drawInfo := GetDrawItemInfo(lpdis)
+    drawInfo := hwg_GetDrawItemInfo(lpdis)
     hDC := drawInfo[3]
     x1  := drawInfo[4]
     y1  := drawInfo[5]

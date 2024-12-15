@@ -265,7 +265,7 @@ RETURN NIL
 
 METHOD Paint(lpDis) CLASS HStatic
 
-   LOCAL drawInfo := GetDrawItemInfo(lpDis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL client_rect
    LOCAL szText
    LOCAL dwtext

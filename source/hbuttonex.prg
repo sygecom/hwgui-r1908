@@ -738,7 +738,7 @@ RETURN 0
 
 METHOD Paint(lpDis) CLASS HBUTTONEx
 
-   LOCAL drawInfo := GetDrawItemInfo(lpDis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
    LOCAL bIsPressed := HWG_BITAND(drawInfo[9], ODS_SELECTED) != 0
    LOCAL bIsFocused := HWG_BITAND(drawInfo[9], ODS_FOCUS) != 0

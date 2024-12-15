@@ -111,7 +111,7 @@ METHOD CalcMinMax() CLASS HGraph
 
 METHOD Paint(lpdis) CLASS HGraph
 
-   LOCAL drawInfo := GetDrawItemInfo(lpdis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]
    LOCAL x1 := drawInfo[4]
    LOCAL y1 := drawInfo[5]

@@ -183,7 +183,7 @@ METHOD Activate() CLASS HControlGen
 Return Nil
 
 METHOD Paint( lpdis ) CLASS HControlGen
-Local drawInfo := GetDrawItemInfo( lpdis )
+Local drawInfo := hwg_GetDrawItemInfo( lpdis )
 local i,octrl2
 Memvar hDC, oCtrl
 Private hDC := drawInfo[3], oCtrl := Self

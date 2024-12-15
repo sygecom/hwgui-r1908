@@ -367,7 +367,7 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
 
 METHOD Paint(lpDis) CLASS HStaticLink
 
-   LOCAL drawInfo := GetDrawItemInfo(lpDis)
+   LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
    LOCAL strtext := ::Title
    //LOCAL nOldBkMode
