@@ -160,15 +160,15 @@ METHOD fillrect(lpRect, clr) CLASS HDC
 
 
 METHOD CreateCompatibleDc(x) CLASS HDC
-   RETURN ::Attach(CreateCompatibleDC(x))
+   RETURN ::Attach(hwg_CreateCompatibleDC(x))
 
 METHOD SAVEDC() CLASS HDC
    LOCAL nRetVal := 0
 
    IF (!Empty(::m_hAttribDC))
-      nRetVal := SaveDC(::m_hAttribDC)
+      nRetVal := hwg_SaveDC(::m_hAttribDC)
    ENDIF
-   IF (::m_hDC != ::m_hAttribDC .AND. SaveDC(::m_hDC) != 0)
+   IF (::m_hDC != ::m_hAttribDC .AND. hwg_SaveDC(::m_hDC) != 0)
       nRetVal := - 1   // -1 is the only valid restore value for complex DCs
    ENDIF
    RETURN nRetVal
@@ -179,10 +179,10 @@ METHOD RestoreDC(nSavedDC) CLASS HDC
 
    LOCAL bRetVal := .T.
    IF (::m_hDC != ::m_hAttribDC)
-      bRetVal := RestoreDC(::m_hDC, nSavedDC)
+      bRetVal := hwg_RestoreDC(::m_hDC, nSavedDC)
    ENDIF
    IF (!Empty(::m_hAttribDC))
-      bRetVal := (bRetVal .AND. RestoreDC(::m_hAttribDC, nSavedDC))
+      bRetVal := (bRetVal .AND. hwg_RestoreDC(::m_hAttribDC, nSavedDC))
    ENDIF
    RETURN bRetVal
 
