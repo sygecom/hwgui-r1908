@@ -528,7 +528,7 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    HB_SYMBOL_UNUSED(lParam)
 
    IF hb_IsBlock(oWnd:bSetForm)
-      EVAL(oWnd:bSetForm, oWnd)
+      Eval(oWnd:bSetForm, oWnd)
    ENDIF
    IF !EMPTY(oWnd:oWndParent)
       oWnd:oParent := oWnd:oWndParent
@@ -606,7 +606,7 @@ STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
       IF wParam == 1 .AND. !SelfFocus(oWnd:Screen:handle, oWnd:handle)
          // triggered ON GETFOCUS MDI CHILD MAXIMIZED
          IF hb_IsBlock(oWnd:bSetForm)
-            EVAL(oWnd:bSetForm, oWnd)
+            Eval(oWnd:bSetForm, oWnd)
          ENDIF
          IF !oWnd:lSuspendMsgsHandling .AND.;
             oWnd:bGetFocus != NIL .AND. !Empty(GetFocus()) .AND. oWnd:IsMaximized()
@@ -663,18 +663,18 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEVAL(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
+         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
             EnableWindow(w:handle, .T.),)})
       ENDIF
    ELSEIF SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
       IF hb_IsBlock(oWnd:bSetForm)
-         EVAL(oWnd:bSetForm, oWnd)
+         Eval(oWnd:bSetForm, oWnd)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEVAL(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
+         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
             EnableWindow(w:handle, .F.),)})
-         AEVAL(oWnd:aChilds,{|wH|EnableWindow(wH, .T.)})
+         AEval(oWnd:aChilds,{|wH|EnableWindow(wH, .T.)})
      ENDIF
       IF oWnd:bGetFocus != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. !oWnd:IsMaximized()
          oWnd:lSuspendMsgsHandling := .T.

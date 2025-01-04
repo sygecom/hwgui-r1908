@@ -267,7 +267,7 @@ METHOD CREATETOOL() CLASS hToolBar
             hImage := HBitmap():AddResource(::aitem[n, 1], LR_LOADTRANSPARENT + LR_LOADMAP3DCOLORS, , ::nwSize, ;
                ::nhSize):handle
          ENDIF
-         IF (img := Ascan(aButton, hImage)) == 0
+         IF (img := AScan(aButton, hImage)) == 0
             AAdd(aButton, hImage)
             img := Len(aButton)
          ENDIF

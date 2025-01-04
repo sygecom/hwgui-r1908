@@ -544,7 +544,7 @@ METHOD GetAllCheck() CLASS hCheckComboBox
    LOCAL n
 
    FOR n := 1 TO Len(::aItems)
-      Aadd(aCheck, ::GetCheck(n))
+      AAdd(aCheck, ::GetCheck(n))
    NEXT
 
 RETURN aCheck

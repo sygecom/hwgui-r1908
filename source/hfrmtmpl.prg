@@ -229,7 +229,7 @@ METHOD Read(fname, cId) CLASS HFormTmpl
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], Self,, cName)})
+         AAdd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], Self,, cName)})
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2, 2]
             FOR j := 1 TO Len(::aFuncs[2])
@@ -520,9 +520,9 @@ FUNCTION ParseMethod(cMethod)
    LOCAL cLine
 
    IF (nPos1 := At(Chr(10), cMethod)) == 0
-      Aadd(arr, RTrim(cMethod))
+      AAdd(arr, RTrim(cMethod))
    ELSE
-      Aadd(arr, RTrim(Left(cMethod, nPos1 - 1)))
+      AAdd(arr, RTrim(Left(cMethod, nPos1 - 1)))
       DO WHILE .T.
          IF (nPos2 := hb_At(Chr(10), cMethod, nPos1 + 1)) == 0
             cLine := AllTrim(SubStr(cMethod, nPos1 + 1))
@@ -671,7 +671,7 @@ STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], oForm, oCtrl, cName)})
+         AAdd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), CompileMethod(pp, aItems[i]:aItems[1]:aItems[1], oForm, oCtrl, cName)})
       ELSEIF aItems[i]:title == "part"
          ReadCtrl(pp, aItems[i], oCtrl, oForm)
       ENDIF
@@ -1137,7 +1137,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             IF Empty(oCtrlTmpl:aControls)
                Select (oCtrl:Alias)
                j := (DBStruct())
-               //AEVAL(aStruct, {|aField| QOUT(aField[DBS_NAME])})
+               //AEval(aStruct, {|aField| QOUT(aField[DBS_NAME])})
                FOR i := 1 TO IIf(oCtrl:nColumns == 0, FCount(), oCtrl:nColumns)
                   //"AddColumn(HColumn():New(cHeader, Fblock, cValType, nLength, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))",; //oBrw:AddColumn
                   m->cHeader := FieldName(i)
@@ -1403,7 +1403,7 @@ METHOD Read(fname, cId) CLASS HRepTmpl
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
+         AAdd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2]
             FOR j := 1 TO Len(::aFuncs[2])
@@ -1787,7 +1787,7 @@ STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         Aadd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
+         AAdd(aMethods, {cName := Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1],, .T., cName)})
       ELSEIF aItems[i]:title == "part"
          ReadRepItem(aItems[i], IIf(oCtrl:cClass == "area", oCtrl, oContainer))
       ENDIF

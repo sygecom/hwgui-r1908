@@ -166,7 +166,7 @@ METHOD Editable(lEditable) CLASS HColumn
 
    IF lEditable != NIL
       ::lEditable := lEditable
-      ::oParent:lEditable := lEditable .OR. Ascan(::oParent:aColumns, {|c|c:lEditable}) > 0
+      ::oParent:lEditable := lEditable .OR. AScan(::oParent:aColumns, {|c|c:lEditable}) > 0
       RedrawWindow(::oParent:handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
    ENDIF
 
@@ -175,7 +175,7 @@ RETURN ::lEditable
 METHOD SortMark(nSortMark) CLASS HColumn
 
     IF nSortMark != NIL
-      AEVAL(::oParent:aColumns,{|c|c:nSortMark := 0})
+      AEval(::oParent:aColumns,{|c|c:nSortMark := 0})
       ::oParent:lHeadClick := .T.
       InvalidateRect(::oParent:handle, 0, ::oParent:x1, ::oParent:y1 - ::oParent:nHeadHeight * ::oParent:nHeadRows, ::oParent:x2, ::oParent:y1)
       ::oParent:lHeadClick := .F.
@@ -854,7 +854,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ELSE
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
-               AEVAL(::aColumns,{|c|c:lHeadClick := .F.})
+               AEval(::aColumns,{|c|c:lHeadClick := .F.})
                InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
                ::lHeadClick := .F.
             ENDIF
@@ -1266,7 +1266,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          ELSE
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
-               AEVAL(::aColumns, {|c|c:lHeadClick := .F.})
+               AEval(::aColumns, {|c|c:lHeadClick := .F.})
                InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
                ::lHeadClick := .F.
             ENDIF
@@ -1391,7 +1391,7 @@ STATIC FUNCTION InitColumn(oBrw, oColumn, n)
             xres := Eval(oColumn:block,, oBrw, n)
             ctype := ValType(xres)
          ELSE
-            xRes := SPACE(10)
+            xRes := Space(10)
             ctype := "C"
          ENDIF
       ENDIF
@@ -1464,7 +1464,7 @@ METHOD ShowColToolTips(lParam) CLASS HBrowse
    LOCAL pt
    LOCAL cTip := ""
 
-   IF Ascan(::aColumns, {|c|c:Hint != .F. .AND. c:Tooltip != NIL}) == 0
+   IF AScan(::aColumns, {|c|c:Hint != .F. .AND. c:Tooltip != NIL}) == 0
       RETURN NIL
    ENDIF
    pt := ::ButtonDown(lParam, .T.)
@@ -2001,7 +2001,7 @@ ENDIF
       IF ::Type == BRW_DATABASE
          nRecFilter := (::Alias)->(RecNo())
          IF ::lFilter .AND. Empty(::RelationalExpr)
-            nRecFilter := ASCAN(::aRecnoFilter, (::Alias)->(RecNo()))
+            nRecFilter := AScan(::aRecnoFilter, (::Alias)->(RecNo()))
          ELSEIF !Empty((::Alias)->(DBFILTER())) .AND. (::Alias)->(RecNo()) > ::nRecords
             nRecFilter := ::nRecords
          ENDIF
@@ -2027,7 +2027,7 @@ ENDIF
       cursor_row := 1
       ::oParent:lSuspendMsgsHandling := .T.
       ::internal[3] := Eval(::bRecno, Self)
-       AEVAL(::aColumns, {|c|c:aHints := {}})
+       AEval(::aColumns, {|c|c:aHints := {}})
       DO WHILE .T.
          // if we are on the current record, set current video line
          IF Eval(::bRecno, Self) == tmp
@@ -2310,7 +2310,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       ELSE
          xSize := 0
          IF fif == Len(::aColumns) .AND. !lFixed
-            fif := hb_RAscan(::aColumns, {|c|c:lhide = .F.}) - 1
+            fif := hb_RAScan(::aColumns, {|c|c:lhide = .F.}) - 1
                //::nPaintCol := nColumn
             x -= ::aColumns[fif + 1]:width
             lFixed := .T.
@@ -2463,7 +2463,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
       ELSE
          xSize := 0
          IF fif == Len(::aColumns) .AND. !lFixed
-            fif := hb_RAscan(::aColumns,{|c| c:lhide = .F.}) - 1
+            fif := hb_RAScan(::aColumns,{|c| c:lhide = .F.}) - 1
             x -= ::aColumns[fif + 1]:width
             lFixed := .T.
          ENDIF
@@ -2618,7 +2618,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
       ELSE
          xSize := 0
          IF fif == Len(::aColumns) .AND. !lFixed
-            fif := hb_RASCAN(::aColumns, {|c|c:lhide = .F.}) - 1
+            fif := hb_RAScan(::aColumns, {|c|c:lhide = .F.}) - 1
             x -= ::aColumns[fif + 1]:width
             lFixed := .T.
          ENDIF
@@ -2884,7 +2884,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                nCol++
             ENDIF
             IF nColumn == Len(::aColumns) .AND. !lFixed
-               nColumn := hb_RAscan(::aColumns, {|c|c:lhide = .F.}) - 1
+               nColumn := hb_RAScan(::aColumns, {|c|c:lhide = .F.}) - 1
                ::nPaintCol := nColumn
                x -= ::aColumns[::nPaintCol + 1]:width
                lFixed := .T.
@@ -3283,7 +3283,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
          ::rowPos--
       ENDIF
       //::colPos := ::nLeftCol := 1
-      ::colPos := Max(1, Ascan(::aColumns, {|c|c:lEditable}))
+      ::colPos := Max(1, AScan(::aColumns, {|c|c:lEditable}))
       ::nLeftCol := ::freeze + 1
    ENDIF
    IF !::lAppMode .OR. ::nLeftCol == 1
@@ -3465,7 +3465,7 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
          xSize := Max(::x2 - x1, xSize)
       ENDIF
       IF !::aColumns[nCols]:lHide
-         Aadd(aColumns, {xSize, ncols})
+         AAdd(aColumns, {xSize, ncols})
          x1 += xSize
          xSize := 0
       ENDIF
@@ -3621,7 +3621,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       ENDIF
    ENDIF
    IF ::lHeadClick
-      AEVAL(::aColumns,{|c|c:lHeadClick := .F.})
+      AEval(::aColumns,{|c|c:lHeadClick := .F.})
       InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
       ::lHeadClick := .F.
      Hwg_SetCursor(downCursor)
@@ -3674,7 +3674,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
          xSize := Max(::x2 - x1, xSize)
       ENDIF
       IF !::aColumns[nCols]:lhide
-         Aadd(aColumns, {xSize, ncols})
+         AAdd(aColumns, {xSize, ncols})
          x1 += xSize
          xSize := 0
       ENDIF
@@ -4192,7 +4192,7 @@ METHOD onClickColumn(value, oGet, oBtn) CLASS HBROWSE
    ENDIF
    IF oColumn:bClick != NIL
       ::oparent:lSuspendMsgsHandling := .T.
-      EVAL(oColumn:bClick, value, oGet, oColumn, Self)
+      Eval(oColumn:bClick, value, oGet, oColumn, Self)
       ::oparent:lSuspendMsgsHandling := .F.
     ENDIF
    oGet:SetFocus()
@@ -4206,7 +4206,7 @@ METHOD WhenColumn(value, oGet) CLASS HBROWSE
 
    IF oColumn:bWhen != NIL
       ::oparent:lSuspendMsgsHandling := .T.
-      res := EVAL(oColumn:bWhen, Value, oGet)
+      res := Eval(oColumn:bWhen, Value, oGet)
         oGet:lnovalid := res
         IF hb_IsLogical(res) .AND. !res
            ::SetFocus()
@@ -4230,7 +4230,7 @@ METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
    ENDIF
    IF oColumn:bValid != NIL
        ::oparent:lSuspendMsgsHandling := .T.
-       res := EVAL(oColumn:bValid, value, oGet)
+       res := Eval(oColumn:bValid, value, oGet)
          oGet:lnovalid := res
          IF hb_IsLogical(res) .AND. !res
             oGet:SetFocus()
@@ -4860,7 +4860,7 @@ STATIC FUNCTION FltRecNoRelative(oBrw)
 
    HB_SYMBOL_UNUSED(oBrw)
    IF oBrw:lFilter .AND. Empty(oBrw:RelationalExpr)
-      RETURN ASCAN(oBrw:aRecnoFilter, (oBrw:Alias)->(RecNo()))
+      RETURN AScan(oBrw:aRecnoFilter, (oBrw:Alias)->(RecNo()))
    ENDIF
    IF !Empty(DBFILTER()) .AND. (oBrw:Alias)->(RecNo()) > oBrw:nRecords
       RETURN oBrw:nRecords

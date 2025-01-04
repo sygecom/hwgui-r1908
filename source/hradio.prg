@@ -450,9 +450,9 @@ METHOD Valid(nKey) CLASS HRadioButton
       RETURN .T.
    ELSE
       ::oParent:lSuspendMsgsHandling := .T.
-       iValue := Ascan(::oGroup:aButtons, {|o|o:id == ::id})
+       iValue := AScan(::oGroup:aButtons, {|o|o:id == ::id})
       IF nEnter == VK_RETURN //< 0
-         //-iValue := Ascan(::oGroup:aButtons,{|o|o:id == ::id})
+         //-iValue := AScan(::oGroup:aButtons,{|o|o:id == ::id})
          IF !::GetValue()
             ::oGroup:nValue  := iValue
              ::oGroup:SetValue(::oGroup:nValue)      
@@ -460,7 +460,7 @@ METHOD Valid(nKey) CLASS HRadioButton
          ENDIF
       ELSEIF nEnter == 0 .AND. !GetKeyState(VK_RETURN) < 0
          IF !::GetValue()
-             ::oGroup:nValue := Ascan(::oGroup:aButtons, {|o|o:id == ::id})
+             ::oGroup:nValue := AScan(::oGroup:aButtons, {|o|o:id == ::id})
              ::oGroup:SetValue(::oGroup:nValue)
          ENDIF 
       ENDIF

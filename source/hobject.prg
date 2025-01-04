@@ -30,12 +30,12 @@ ENDCLASS
 METHOD DelObject(oCtrl) CLASS HObject
 
    LOCAL h := oCtrl:handle
-   LOCAL i := Ascan(::aObjects, {|o|o:handle == h})
+   LOCAL i := AScan(::aObjects, {|o|o:handle == h})
 
    SendMessage(h, WM_CLOSE, 0, 0)
    IF i != 0
-      Adel(::aObjects, i)
-      Asize(::aObjects, Len(::aObjects) - 1)
+      ADel(::aObjects, i)
+      ASize(::aObjects, Len(::aObjects) - 1)
    ENDIF
 
 RETURN NIL
@@ -70,7 +70,7 @@ FUNCTION ADDPROPERTY(oObjectName, cPropertyName, eNewValue)
       ENDIF
       IF !Empty(eNewValue)
          IF hb_IsBlock(eNewValue)
-            oObjectName: &(cPropertyName) := EVAL(eNewValue)
+            oObjectName: &(cPropertyName) := Eval(eNewValue)
          ELSE
             oObjectName: &(cPropertyName) := eNewValue
          ENDIF

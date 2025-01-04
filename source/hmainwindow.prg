@@ -137,7 +137,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
    lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. Hwg_BitAND(::Style, DS_CENTER) != 0
    DEFAULT lShow TO .T.
    CreateGetList(Self)
-   AEVAL(::aControls, {|o|o:lInit := .F.})
+   AEval(::aControls, {|o|o:lInit := .F.})
 
    IF ::Type == WND_MDI
 
@@ -266,7 +266,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
    ELSEIF msg == WM_SETFOCUS .AND. nFocus > 0
       hwg_SetFocus(nFocus)
    ENDIF
-   IF (i := Ascan(::aMessages[1], msg)) != 0 .AND. ;
+   IF (i := AScan(::aMessages[1], msg)) != 0 .AND. ;
        (!::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE)
       RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE

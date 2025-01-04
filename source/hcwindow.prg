@@ -441,7 +441,7 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
             ELSEIF !Empty(lRefresh) .AND. (lAll .OR. ASCAN(::GetList, {|o|o:handle == oCtrlTmp:handle}) > 0)
                oCtrlTmp:Refresh()
                IF oCtrlTmp:bRefresh != NIL
-                  EVAL(oCtrlTmp:bRefresh, oCtrlTmp)
+                  Eval(oCtrlTmp:bRefresh, oCtrlTmp)
                ENDIF
             ELSEIF IsWindowEnabled(oCtrlTmp:handle) .AND. !oCtrlTmp:lHide .AND. !lRefresh
                oCtrlTmp:SHOW(SW_SHOWNOACTIVATE)

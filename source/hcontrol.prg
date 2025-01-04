@@ -229,8 +229,8 @@ METHOD Enable() CLASS HControl
 
    EnableWindow(::handle, .T.)
    IF ::oParent:lGetSkipLostFocus .AND. !lEnable .AND. Hwg_BitaND(HWG_GETWINDOWSTYLE(::handle), WS_TABSTOP) > 0
-      nNext := Ascan(::oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(GetFocus())})
-      nPos := Ascan(::oParent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(::handle)})
+      nNext := AScan(::oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(GetFocus())})
+      nPos := AScan(::oParent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(::handle)})
       IF nPos < nNext
          SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
       ENDIF

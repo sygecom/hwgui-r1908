@@ -35,7 +35,7 @@ LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
 
    scrkod := IIf(scrkod == NIL, "000", Upper(scrkod))
-   han := FOPEN(fname, FO_READ + FO_SHARED)
+   han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
          stroka := RDSTR(han, @strbuf, @poz, STR_BUFLEN)
@@ -58,8 +58,8 @@ LOCAL aFormCode, aFormName
             ENDIF
          ELSEIF rejim == -1 .AND. Left(stroka, 1) == "@"
             i := At(" ", stroka)
-            Aadd(aFormCode, SubStr(stroka, 2, i - 2))
-            Aadd(aFormName, SubStr(stroka, i + 1))
+            AAdd(aFormCode, SubStr(stroka, 2, i - 2))
+            AAdd(aFormName, SubStr(stroka, i + 1))
          ELSEIF rejim == -1 .AND. Left(stroka, 9) == "#ENDBLOCK"
 #ifdef __WINDOWS__
             i := WCHOICE(aFormName)
@@ -67,19 +67,19 @@ LOCAL aFormCode, aFormName
             i := FCHOICE(aFormName)
 #endif
             IF i == 0
-               FCLOSE(han)
+               FClose(han)
                RETURN NIL
             ENDIF
             rejim  := 0
             scrkod := aFormCode[i]
          ENDIF
       ENDDO
-      FCLOSE(han)
+      FClose(han)
    ELSE
 #ifdef __WINDOWS__
       hwg_MsgStop(fname + " can't be opened ")
 #else
-      ALERT(fname + " can't be opened ")
+      Alert(fname + " can't be opened ")
 #endif
       RETURN NIL
    ENDIF
@@ -104,7 +104,7 @@ LOCAL rezArray := IIf(lDebugInfo, {"", {}, {}}, {"", {}})
       han := NIL
       poz := 0
    ELSEIF hb_IsChar(scrSource)
-      strbuf := SPACE(STR_BUFLEN)
+      strbuf := Space(STR_BUFLEN)
       poz    := STR_BUFLEN+1
       han    := FOPEN(scrSource, FO_READ + FO_SHARED)
    ELSE
@@ -173,11 +173,11 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
             ELSEIF Upper(Left(stroka, 6)) == "#DEBUG"
                IF !lDebug .AND. Len(rezArray[2]) == 0
                   lDebug := .T.
-                  Aadd(rezArray, {})
+                  AAdd(rezArray, {})
                   IF SubStr(stroka, 7, 3) == "GER"
                      AAdd(rezArray[2], stroka)
                      AAdd(tmpArray, "")
-                     Aadd(rezArray[3], Str(numlin, 4) + ":" + cLine)
+                     AAdd(rezArray[3], Str(numlin, 4) + ":" + cLine)
                   ENDIF
                ENDIF
                LOOP
@@ -287,7 +287,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
             AAdd(tmpArray, "")
          ENDCASE
          IF lDebug .AND. Len(rezArray[3]) < Len(rezArray[2])
-            Aadd(rezArray[3], Str(numlin, 4) + ":" + cLine)
+            AAdd(rezArray[3], Str(numlin, 4) + ":" + cLine)
          ENDIF
       ENDIF
    ENDDO
@@ -319,7 +319,7 @@ Local n, cTitle
    ENDIF
 #else
    IF nm == 1
-      ALERT("Error in;" + AllTrim(stroka))
+      Alert("Error in;" + AllTrim(stroka))
    ELSEIF nm == 2
       Alert("Script variables error")
    ELSEIF nm == 3
@@ -341,7 +341,7 @@ LOCAL i, j, bOldError
       AAdd(tmpArray, "JUMP")
       AAdd(rezArray[2], .F.)
       IF Len(rezArray) >= 3
-         Aadd(rezArray[3], Str(numlin, 4) + ":JUMP")
+         AAdd(rezArray[3], Str(numlin, 4) + ":JUMP")
       ENDIF
    ENDIF
    j := Len(rezArray[2])
@@ -468,7 +468,7 @@ PRIVATE iscr := 1, bOldError
                ENDDO
             ENDIF
 #endif
-            EVAL(aScript[2, iscr])
+            Eval(aScript[2, iscr])
             iscr++
          ENDDO
 #ifdef __WINDOWS__
@@ -479,7 +479,7 @@ PRIVATE iscr := 1, bOldError
 #endif
       ELSE
          DO WHILE iscr > 0 .AND. iscr <= arlen
-            EVAL(aScript[2, iscr])
+            Eval(aScript[2, iscr])
             iscr++
          ENDDO
       ENDIF

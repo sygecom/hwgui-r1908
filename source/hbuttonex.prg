@@ -335,7 +335,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_SYSKEYUP .OR. (msg == WM_KEYUP .AND. ;
-                     ASCAN({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0)
+                     AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0)
      IF CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
         wParam -= 48
      ENDIF
@@ -343,7 +343,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
         IF hb_IsBlock(::bClick) .OR. ::id < 3
            SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, BN_CLICKED), ::handle)
         ENDIF
-     ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
+     ELSEIF (nID := AScan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
               wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
         IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
            hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3
@@ -541,7 +541,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          IF hb_IsBlock(::bClick) .OR. ::id < 3
             SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, BN_CLICKED), ::handle)
          ENDIF
-      ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
+      ELSEIF (nID := AScan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
               wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
          IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
             hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3
@@ -551,7 +551,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
      EXIT
 
    CASE WM_KEYUP
-      IF ASCAN({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0
+      IF AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0
          IF CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
             wParam -= 48
          ENDIF
@@ -559,7 +559,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
             IF hb_IsBlock(::bClick) .OR. ::id < 3
                SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, BN_CLICKED), ::handle)
             ENDIF
-         ELSEIF (nID := Ascan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
+         ELSEIF (nID := AScan(::oparent:acontrols, {|o|IIf(hb_IsChar(o:title), (pos := At("&", o:title)) > 0 .AND. ;
                  wParam == Asc(Upper(SubStr(o:title, ++pos, 1))),)})) > 0
             IF __ObjHasMsg(::oParent:aControls[nID], "BCLICK") .AND. ;
                hb_IsBlock(::oParent:aControls[nID]:bClick) .OR. ::oParent:aControls[nID]:id < 3

@@ -51,19 +51,19 @@ RETURN Self
 
 METHOD Add(xItem) CLASS HXMLNode
 
-   Aadd(::aItems, xItem)
+   AAdd(::aItems, xItem)
 RETURN xItem
 
 METHOD GetAttribute(cName) CLASS HXMLNode
-Local i := Ascan(::aAttr, {|a|a[1]==cName})
+Local i := AScan(::aAttr, {|a|a[1]==cName})
 
 RETURN IIf(i==0, NIL, ::aAttr[i, 2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
-Local i := Ascan(::aAttr,{|a|a[1]==cName})
+Local i := AScan(::aAttr,{|a|a[1]==cName})
 
    IF i == 0
-      Aadd(::aAttr, {cName, cValue})
+      AAdd(::aAttr, {cName, cValue})
    ELSE
       ::aAttr[i, 2] := cValue
    ENDIF
@@ -71,11 +71,11 @@ Local i := Ascan(::aAttr,{|a|a[1]==cName})
 RETURN .T.
 
 METHOD DelAttribute(cName) CLASS HXMLNode
-Local i := Ascan(::aAttr,{|a|a[1]==cName})
+Local i := AScan(::aAttr,{|a|a[1]==cName})
 
    IF i != 0
-      Adel(::aAttr, i)
-      Asize(::aAttr, Len(::aAttr) - 1)
+      ADel(::aAttr, i)
+      ASize(::aAttr, Len(::aAttr) - 1)
    ENDIF
 RETURN .T.
 
@@ -175,7 +175,7 @@ Local i
       nStart := 1
    ENDIF
    DO WHILE .T.
-      i := Ascan(::aItems, {|a|!hb_IsChar(a) .AND. a:title == cTitle}, nStart)
+      i := AScan(::aItems, {|a|!hb_IsChar(a) .AND. a:title == cTitle}, nStart)
       IF i == 0
          EXIT
       ELSE
@@ -208,8 +208,8 @@ ENDCLASS
 METHOD New(encoding) CLASS HXMLDoc
 
    IF encoding != NIL
-      Aadd(::aAttr, {"version", "1.0"})
-      Aadd(::aAttr, {"encoding", encoding})
+      AAdd(::aAttr, {"version", "1.0"})
+      AAdd(::aAttr, {"encoding", encoding})
    ENDIF
 
 RETURN Self

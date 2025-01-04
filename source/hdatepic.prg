@@ -60,7 +60,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
    ::lShowTime := Hwg_BitAnd(nStyle, DTS_TIMEFORMAT) > 0
    ::dValue := IIf(vari == NIL .OR. !hb_IsDate(vari), CToD(Space(8)), vari)
-   ::tValue := IIf(vari == NIL .OR. !hb_IsChar(vari), SPACE(6), vari)
+   ::tValue := IIf(vari == NIL .OR. !hb_IsChar(vari), Space(6), vari)
    ::title := IIf(!::lShowTime, ::dValue, ::tValue)
 
    ::bSetGet := bSetGet
@@ -97,7 +97,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, bGfocus, bL
 
    HWG_InitCommonControlsEx()
    ::dValue := IIf(vari == NIL .OR. !hb_IsDate(vari), CToD(Space(8)), vari)
-   ::tValue := IIf(vari == NIL .OR. !hb_IsChar(vari), SPACE(6), vari)
+   ::tValue := IIf(vari == NIL .OR. !hb_IsChar(vari), Space(6), vari)
    ::bSetGet := bSetGet
    ::bChange := bChange
    ::lShowTime := lShowTime
