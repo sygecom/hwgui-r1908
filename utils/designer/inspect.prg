@@ -716,16 +716,16 @@ HB_SYMBOL_UNUSED( lParam )
 
    // writelog( str(msg)+str(wParam)+str(lParam) )
    IF msg == WM_MOUSEMOVE
-     * MouseMove( oDlg, wParam, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+     * MouseMove( oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONDOWN
-     * LButtonDown( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+     * LButtonDown( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONUP
-     * LButtonUp( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+     * LButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_RBUTTONUP
-      *RButtonUp( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      *RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
         oMenuisnp:Show( oDlg,oDlg:nTop+5,oDlg:nLeft+15,.T. )
       Return 1
    ELSEIF msg == WM_LBUTTONDBLCLK

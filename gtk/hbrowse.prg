@@ -344,10 +344,10 @@ Local aCoors, retValue := -1
          ::MouseMove( wParam, lParam )
 
       ELSEIF msg == WM_MOUSEWHEEL
-         ::MouseWheel( hwg_LOWORD( wParam ),;
-                          If( hwg_HIWORD( wParam ) > 32768,;
-                          hwg_HIWORD( wParam ) - 65535, hwg_HIWORD( wParam ) ),;
-                          hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+         ::MouseWheel( hwg_LOWORD(wParam),;
+                          If( hwg_HIWORD(wParam) > 32768,;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam) ),;
+                          hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       ELSEIF msg == WM_DESTROY
          ::End()
       ENDIF
@@ -1362,7 +1362,7 @@ Local xm := hwg_LOWORD(lParam), x1, fif
       IF ::nCursor == 1
          ::nCursor := 2
          Hwg_SetCursor( vCursor,::area )
-         xDrag := hwg_LOWORD( lParam )
+         xDrag := hwg_LOWORD(lParam)
       ENDIF
    ENDIF
 
@@ -1425,7 +1425,7 @@ RETURN Nil
 
 //----------------------------------------------------//
 METHOD MouseMove( wParam, lParam ) CLASS HBrowse
-Local xPos := hwg_LOWORD( lParam ), yPos := hwg_HIWORD( lParam )
+Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 Local x := ::x1, i := ::nLeftCol, res := .F.
 
    IF !::active .OR. Empty( ::aColumns ) .OR. ::x1 == Nil

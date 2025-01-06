@@ -992,17 +992,17 @@ Memvar oDesigner
    // writelog( str(msg)+str(wParam)+str(lParam) )
 
    IF msg == WM_MOUSEMOVE
-      MouseMove( oDlg, wParam, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      MouseMove( oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONDOWN
       StatusBarMsg(,'','')  //
-      LButtonDown( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      LButtonDown( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONUP
-      LButtonUp( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      LButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_RBUTTONUP
-      RButtonUp( oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONDBLCLK
          nkShift := GetKeyState(VK_MENU)
@@ -1113,7 +1113,7 @@ Memvar oDesigner
 Return -1
 
 Static Function ScrollProc( oDlg, msg, wParam, lParam )
-Local nScrollCode := hwg_LOWORD( wParam ), nNewPos := hwg_HIWORD( wParam )
+Local nScrollCode := hwg_LOWORD(wParam), nNewPos := hwg_HIWORD(wParam)
 Local oPanel := oDlg:aControls[1]:aControls[1]
 Local aCoors, nSize, x
 

@@ -28,7 +28,7 @@ Static Function onSize( oWnd,wParam,lParam )
    oWnd:nHeight := hwg_HIWORD(lParam)
 
    IF ISBLOCK( oWnd:bSize )
-       Eval( oWnd:bSize, oWnd, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+       Eval( oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
    ENDIF
 
 Return 0
@@ -386,8 +386,8 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
        SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
    ENDIF
 */   
-   iParHigh := hwg_HIWORD( wParam )
-   iParLow := hwg_LOWORD( wParam )
+   iParHigh := hwg_HIWORD(wParam)
+   iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
@@ -483,8 +483,8 @@ Local iParHigh, iParLow, iItem
    IF wParam == SC_CLOSE
       SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0 )
    ENDIF
-   iParHigh := hwg_HIWORD( wParam )
-   iParLow := hwg_LOWORD( wParam )
+   iParHigh := hwg_HIWORD(wParam)
+   iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
       Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )

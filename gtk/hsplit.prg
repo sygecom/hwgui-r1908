@@ -115,7 +115,7 @@ METHOD Move( x1,y1,width,height )  CLASS HSplitter
 Return Nil
 
 METHOD Drag( lParam ) CLASS HSplitter
-Local xPos := hwg_LOWORD( lParam ), yPos := hwg_HIWORD( lParam )
+Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
       IF xPos > 32000

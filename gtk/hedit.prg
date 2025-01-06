@@ -240,7 +240,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
    ELSE
 
       IF msg == WM_MOUSEWHEEL
-         nPos := hwg_HIWORD( wParam )
+         nPos := hwg_HIWORD(wParam)
          nPos := Iif( nPos > 32768, nPos - 65535, nPos )
          // SendMessage( ::handle,EM_SCROLL, Iif(nPos>0,SB_LINEUP,SB_LINEDOWN), 0 )
          // SendMessage( ::handle,EM_SCROLL, Iif(nPos>0,SB_LINEUP,SB_LINEDOWN), 0 )

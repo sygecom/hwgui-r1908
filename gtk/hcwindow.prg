@@ -259,7 +259,7 @@ Local oCtrl
 Return 0
 
 Static Function onCommand( oWnd,wParam )
-Local iItem, iParHigh := hwg_HIWORD( wParam ), iParLow := hwg_LOWORD( wParam )
+Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
@@ -276,14 +276,14 @@ Local oItem, iCont
    FOR each oItem in aControls
        IF oItem:bSize != Nil
           Eval( oItem:bSize, ;
-           oItem, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+           oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
        ENDIF
    NEXT
    #else
    FOR iCont := 1 TO nControls
        IF aControls[iCont]:bSize != Nil
           Eval( aControls[iCont]:bSize, ;
-           aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+           aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
        ENDIF
    NEXT
    #endif
@@ -294,7 +294,7 @@ Function onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
    IF oCtrl != Nil
-      msg := hwg_LOWORD (wParam)
+      msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
          IF ISBLOCK( oCtrl:bChange )
             Eval( oCtrl:bChange,oCtrl )

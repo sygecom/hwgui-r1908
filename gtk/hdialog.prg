@@ -247,7 +247,7 @@ Local aCoors
 Return 0
 
 Function DlgCommand( oDlg,wParam,lParam )
-Local iParHigh := hwg_HIWORD( wParam ), iParLow := hwg_LOWORD( wParam )
+Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 Local aMenu, i, hCtrl
 
    // WriteLog( Str(iParHigh,10)+"|"+Str(iParLow,10)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
@@ -310,7 +310,7 @@ Return 1
 
 Static Function onSize( oDlg,wParam,lParam )
    LOCAL aControls, iCont , nW1, nH1
-   LOCAL nW := hwg_LOWORD( lParam ), nH := hwg_HIWORD( lParam )
+   LOCAL nW := hwg_LOWORD(lParam), nH := hwg_HIWORD(lParam)
    LOCAL nScrollMax
    /*
    IF ( oDlg:nHeight = oDlg:minHeight .AND. nH < oDlg:minHeight ) .OR. ;
@@ -323,12 +323,12 @@ Static Function onSize( oDlg,wParam,lParam )
    nW1 := oDlg:nWidth
    nH1 := oDlg:nHeight
    *aControls := GetWindowRect( oDlg:handle )
-   oDlg:nWidth := hwg_LOWORD( lParam )  //aControls[3]-aControls[1]
+   oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
    //
 
    IF oDlg:bSize != Nil .AND. ;
        ( oDlg:oParent == Nil .OR. !__ObjHasMsg( oDlg:oParent,"ACONTROLS" ) )
-      Eval( oDlg:bSize, oDlg, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+      Eval( oDlg:bSize, oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
    ENDIF
    aControls := oDlg:aControls
    IF aControls != Nil
@@ -336,7 +336,7 @@ Static Function onSize( oDlg,wParam,lParam )
       FOR iCont := 1 TO Len( aControls )
          IF aControls[iCont]:bSize != Nil
             Eval( aControls[iCont]:bSize, ;
-             aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
+             aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
          ENDIF
       NEXT
    ENDIF
@@ -344,7 +344,7 @@ Static Function onSize( oDlg,wParam,lParam )
 Return 0
 
 Static Function onActivate( oDlg,wParam,lParam )
-Local iParLow := hwg_LOWORD( wParam )
+Local iParLow := hwg_LOWORD(wParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != Nil
       Eval( oDlg:bGetFocus, oDlg )
