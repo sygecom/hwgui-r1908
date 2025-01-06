@@ -42,7 +42,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bGetFocus, bKillFocus) CLASS HIPedit
 
-   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont)
 
    ::title   := ""

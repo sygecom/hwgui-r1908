@@ -58,10 +58,10 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    //   IF nStyle == NIL
    //      nStyle := SS_NOTIFY
    //   ELSE
-   nStyles := IIf(Hwg_BitAND(nStyle, WS_BORDER) != 0, WS_BORDER, 0)
-   nStyles += IIf(Hwg_BitAND(nStyle, WS_DLGFRAME) != 0, WS_DLGFRAME, 0)
-   nStyles += IIf(Hwg_BitAND(nStyle, WS_DISABLED) != 0, WS_DISABLED, 0)
-   nStyle  := Hwg_BitOr(nStyle, SS_NOTIFY) - nStyles
+   nStyles := IIf(hwg_BitAND(nStyle, WS_BORDER) != 0, WS_BORDER, 0)
+   nStyles += IIf(hwg_BitAND(nStyle, WS_DLGFRAME) != 0, WS_DLGFRAME, 0)
+   nStyles += IIf(hwg_BitAND(nStyle, WS_DISABLED) != 0, WS_DISABLED, 0)
+   nStyle  := hwg_BitOr(nStyle, SS_NOTIFY) - nStyles
    //    ENDIF
    // ENDIF
    //
@@ -71,10 +71,10 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := {|o, p|o:paint(p)}
-      nStyle := SS_OWNERDRAW + Hwg_Bitand(nStyle, SS_NOTIFY)
+      nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
    ELSEIF nStyle - SS_NOTIFY > 32 .OR. ::nStyleHS - SS_NOTIFY == 2
       bPaint := {|o, p|o:paint(p)}
-      nStyle := SS_OWNERDRAW + Hwg_Bitand(nStyle, SS_NOTIFY)
+      nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
    ENDIF
    ::hBrushDefault := HBrush():Add(GetSysColor(COLOR_BTNFACE))
 
@@ -152,7 +152,7 @@ METHOD Init() CLASS HStatic
       IF ::nHolder != 1
          ::nHolder := 1
          SetWindowObject(::handle, Self)
-         Hwg_InitStaticProc(::handle)
+         hwg_InitStaticProc(::handle)
       ENDIF
       IF ::classname == "HSTATIC"
          ::Auto_Size(::Title)

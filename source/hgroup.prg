@@ -40,7 +40,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, tcolor, ;
    bColor, lTransp, oRGroup) CLASS HGroup
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_GROUPBOX)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_GROUPBOX)
 
    ::title := cCaption
    ::oRGroup := oRGroup
@@ -144,7 +144,7 @@ METHOD PAINT(lpdis) CLASS HGroup
    ENDIF
    SetBkMode(dc, TRANSPARENT)
 
-   IF Hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
+   IF hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
       //pnFrmDark := CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
       pnFrmDark := HPen():Add(PS_SOLID, 1, RGB(64, 64, 64))
       pnFrmLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))

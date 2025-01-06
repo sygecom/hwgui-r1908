@@ -48,7 +48,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    HB_SYMBOL_UNUSED(cCaption)
 
    DEFAULT  lvert  TO .F.
-   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
                           WS_VISIBLE + WS_CHILD)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor)

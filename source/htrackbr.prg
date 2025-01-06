@@ -51,9 +51,9 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, bInit, b
       TickMarks := 0
    ENDIF
    IF bPaint != NIL
-      TickStyle := Hwg_BitOr(TickStyle, TBS_AUTOTICKS)
+      TickStyle := hwg_BitOr(TickStyle, TBS_AUTOTICKS)
    ENDIF
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP)
    nStyle += IIf(lVertical != NIL .AND. lVertical, TBS_VERT, 0)
    nStyle += TickStyle + TickMarks
 
@@ -93,7 +93,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    ELSEIF msg == WM_MOUSEMOVE
       IF ::hCursor != NIL
-         Hwg_SetCursor(::hCursor)
+         hwg_SetCursor(::hCursor)
       ENDIF
 
    ELSEIF msg == WM_ERASEBKGND
@@ -139,7 +139,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    CASE WM_MOUSEMOVE
       IF ::hCursor != NIL
-         Hwg_SetCursor(::hCursor)
+         hwg_SetCursor(::hCursor)
       ENDIF
       EXIT
 
@@ -191,7 +191,7 @@ METHOD Init() CLASS HTrackBar
       IF ::bPaint != NIL
          ::nHolder := 1
          SetWindowObject(::handle, Self)
-         Hwg_InitTrackProc(::handle)
+         hwg_InitTrackProc(::handle)
       ENDIF
    ENDIF
 

@@ -223,12 +223,12 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    y1 := IIf(y1 == NIL, ::nTop, y1)
    width := IIf(width == NIL, ::nWidth, width)
    height := IIf(height == NIL, ::nHeight, height)
-   IF Hwg_BitAnd(::style, WS_CHILD) == 0
+   IF hwg_BitAnd(::style, WS_CHILD) == 0
       rect := hwg_GetwindowRect(::handle)
       nHx := rect[4] - rect[2]  - hwg_GetclientRect(::handle)[4] - ;
-         IIf(Hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
+         IIf(hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
       nWx := rect[3] - rect[1]  - hwg_GetclientRect(::handle)[3] - ;
-         IIf(Hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
+         IIf(hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
    ENDIF
 
    IF nRePaint == NIL

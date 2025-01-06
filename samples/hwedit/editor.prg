@@ -750,7 +750,7 @@ FUNCTION cor_fundo()
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
-     ID_COLORB := Hwg_ChooseColor(ID_COLORB, .T.)
+     ID_COLORB := hwg_ChooseColor(ID_COLORB, .T.)
      SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
      save all like ID_* to config.dat
  else
@@ -773,7 +773,7 @@ FUNCTION cor_Fonte()
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
-     ID_COLORF := Hwg_ChooseColor(ID_COLORF, .T.)
+     ID_COLORF := hwg_ChooseColor(ID_COLORF, .T.)
      re_SetDefault(aControls[hWnd]:Handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
      save all like ID_* to config.dat
  else

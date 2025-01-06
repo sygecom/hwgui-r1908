@@ -79,7 +79,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
             bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick) CLASS HStaticLink
    LOCAL oPrevFont
    
-   nStyle := Hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
+   nStyle := hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
    ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
    ::title := IIf(cCaption != NIL, cCaption, "HWGUI HomePage")
    ::hbitmap := hbitmap
@@ -197,7 +197,7 @@ METHOD INIT() CLASS HStaticLink
       IF ::GetParentForm():Type <= WND_MDICHILD .OR. ::TYPE == NIL
          ::nHolder := 1
          SetWindowObject(::handle, Self)
-       //  Hwg_InitWinCtrl(::handle)
+       //  hwg_InitWinCtrl(::handle)
          HWG_INITSTATICPROC(::handle)
       ENDIF
       */

@@ -75,7 +75,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id := IIf(nId == NIL, ::NewId(), nId)
-   ::style := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_VISIBLE + WS_CHILD)
+   ::style := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_VISIBLE + WS_CHILD)
    ::nLeft := IIf(nLeft == NIL, 0, nLeft)
    ::nTop := IIf(nTop == NIL, 0, nTop)
    ::nWidth := IIf(nWidth == NIL, 0, nWidth)
@@ -228,7 +228,7 @@ METHOD Enable() CLASS HControl
    LOCAL nNext
 
    EnableWindow(::handle, .T.)
-   IF ::oParent:lGetSkipLostFocus .AND. !lEnable .AND. Hwg_BitaND(HWG_GETWINDOWSTYLE(::handle), WS_TABSTOP) > 0
+   IF ::oParent:lGetSkipLostFocus .AND. !lEnable .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(::handle), WS_TABSTOP) > 0
       nNext := AScan(::oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(GetFocus())})
       nPos := AScan(::oParent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(::handle)})
       IF nPos < nNext

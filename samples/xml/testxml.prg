@@ -40,7 +40,7 @@ FUNCTION Main()
             FOR i := 1 TO Len(oXmlDoc:aItems[1]:aItems)
                oXmlNode := oXmlDoc:aItems[1]:aItems[i]
                fname := oXmlNode:GetAttribute("name")
-               Hwg_DefineMenuItem(fname, 1020 + i, &("{||NewItem(" + LTrim(Str(i, 2)) + ")}"))
+               hwg_DefineMenuItem(fname, 1020 + i, &("{||NewItem(" + LTrim(Str(i, 2)) + ")}"))
             NEXT
             SEPARATOR
          ENDIF
@@ -112,7 +112,7 @@ FUNCTION NewItem(nItem)
 
          aMenu := oMainWindow:menu[1, 1]
          nId := aMenu[1][Len(aMenu[1])-2, 3]+1
-         Hwg_AddMenuItem(aMenu, cName, nId, .F., ;
+         hwg_AddMenuItem(aMenu, cName, nId, .F., ;
               &("{||NewItem(" + LTrim(Str(nId - 1020, 2)) + ")}"), Len(aMenu[1]) - 1)
 
       ELSE

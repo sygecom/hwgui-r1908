@@ -49,7 +49,7 @@ METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle) CLASS HRadioGroup
    ::aButtons := {}
    ::oParent := IIf(HWindow():GetMain() != NIL, HWindow():GetMain():oDefaultParent, NIL)
 
-   ::lEnabled :=  !Hwg_BitAnd(nStyle, WS_DISABLED) > 0
+   ::lEnabled :=  !hwg_BitAnd(nStyle, WS_DISABLED) > 0
 
    ::Super:New(::oParent, ,, ,,,,, bInit)
 
@@ -74,7 +74,7 @@ METHOD NewRg(oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeigh
 
    ::oGroupCurrent := Self
    ::aButtons := {}
-   ::lEnabled :=  !Hwg_BitAnd(nStyle, WS_DISABLED) > 0
+   ::lEnabled :=  !hwg_BitAnd(nStyle, WS_DISABLED) > 0
 
    ::Super:New(::oParent, , , nLeft, nTop, nWidth, nHeight, oFont, bInit)
    ::oHGroup := HGroup():New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
@@ -225,8 +225,8 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::id      := IIf(nId == NIL, ::NewId(), nId)
    ::title   := cCaption
    ::oGroup  := HRadioGroup():oGroupCurrent
-   ::Enabled := !Hwg_BitAnd(nStyle, WS_DISABLED) > 0
-   ::style   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+;
+   ::Enabled := !hwg_BitAnd(nStyle, WS_DISABLED) > 0
+   ::style   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+;
                         BS_NOTIFY + ;  // WS_CHILD + WS_VISIBLE
                        IIf(::oGroup != NIL .AND. Empty(::oGroup:aButtons), WS_GROUP , 0))
 

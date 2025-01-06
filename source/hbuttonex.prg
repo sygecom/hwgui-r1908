@@ -1098,7 +1098,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    ENDIF
 
    // Draw the focus rect
-   IF bIsFocused .AND. bDrawFocusRect .AND. Hwg_BitaND(::sTyle, WS_TABSTOP) != 0
+   IF bIsFocused .AND. bDrawFocusRect .AND. hwg_BitaND(::sTyle, WS_TABSTOP) != 0
       focusRect := COPYRECT(itemRect)
       InflateRect(@focusRect, - 3, - 3)
       DrawFocusRect(dc, focusRect)

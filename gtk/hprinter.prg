@@ -53,11 +53,11 @@ Local aPrnCoors
    ENDIF
    IF cPrinter == Nil
       /* Temporary instead of printer select dialog */
-      ::hDC := Hwg_OpenDefaultPrinter()
+      ::hDC := hwg_OpenDefaultPrinter()
    ELSEIF Empty( cPrinter )
-      ::hDC := Hwg_OpenDefaultPrinter()
+      ::hDC := hwg_OpenDefaultPrinter()
    ELSE
-      ::hDC := Hwg_OpenPrinter( cPrinter )
+      ::hDC := hwg_OpenPrinter( cPrinter )
       ::cPrinterName := cPrinter
    ENDIF
    IF ::hDC == 0
@@ -209,7 +209,7 @@ Return Nil
 
 METHOD StartDoc( lPreview, cFileName ) CLASS HPrinter
 
-   Hwg_StartDoc( ::hDC )
+   hwg_StartDoc( ::hDC )
    IF cFileName != Nil
       hwg_gp_ToFile( ::hDC,cFileName )
    ENDIF
@@ -218,18 +218,18 @@ Return Nil
 
 METHOD EndDoc() CLASS HPrinter
 
-   Hwg_EndDoc( ::hDC )
+   hwg_EndDoc( ::hDC )
 Return Nil
 
 METHOD StartPage() CLASS HPrinter
 
-   Hwg_StartPage( ::hDC )
+   hwg_StartPage( ::hDC )
    ::nPage ++
 Return Nil
 
 METHOD EndPage() CLASS HPrinter
 
-   Hwg_EndPage( ::hDC )
+   hwg_EndPage( ::hDC )
 Return Nil
 
 

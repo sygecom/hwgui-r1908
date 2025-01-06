@@ -339,7 +339,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
 
     ::lTABSTOP :=  nStyle == WS_TABSTOP
     ::bPaint   := {|o, p|o:paint(p)}
-    nStyle := SS_OWNERDRAW + IIf(nStyle == WS_TABSTOP, WS_TABSTOP , 0) + Hwg_Bitand(nStyle, SS_NOTIFY)
+    nStyle := SS_OWNERDRAW + IIf(nStyle == WS_TABSTOP, WS_TABSTOP , 0) + hwg_Bitand(nStyle, SS_NOTIFY)
     ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, , ;
               bInit, bSize, ::bPaint,, tcolor, bColor)
 
@@ -372,7 +372,7 @@ METHOD Activate() CLASS HContainer
          AddToolTip(::handle, ::handle, "")
          ::nHolder := 1
          SetWindowObject(::handle, Self)
-         Hwg_InitStaticProc(::handle)
+         hwg_InitStaticProc(::handle)
          ::linit := .T.
          IF Empty(::oParent:oParent) .AND. ::oParent:Type >= WND_DLG_RESOURCE
             ::Create()
@@ -394,7 +394,7 @@ METHOD Init() CLASS HContainer
       AddToolTip(::handle, ::handle, "")
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitStaticProc(::handle)
+      hwg_InitStaticProc(::handle)
       //SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
    ENDIF
    RETURN  NIL

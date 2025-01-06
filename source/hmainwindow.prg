@@ -91,7 +91,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
       ::tColor := clr
       ::oBmp := oBmp
       clr:= NIL // because error
-      ::handle := Hwg_InitMdiWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), , ; //clr, ;
+      ::handle := hwg_InitMdiWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), , ; //clr, ;
          nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
@@ -109,7 +109,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    ELSEIF lType == WND_MAIN
 
       clr := NIL // because error and WINDOW IS INVISIBLE
-      ::handle := Hwg_InitMainWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), ;
+      ::handle := hwg_InitMainWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), ;
          IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
@@ -134,7 +134,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
 
    DEFAULT lMaximized TO .F.
    DEFAULT lMinimized TO .F.
-   lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. Hwg_BitAND(::Style, DS_CENTER) != 0
+   lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. hwg_BitAND(::Style, DS_CENTER) != 0
    DEFAULT lShow TO .T.
    CreateGetList(Self)
    AEval(::aControls, {|o|o:lInit := .F.})
@@ -144,7 +144,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       oWndClient := HWindow():New(, , , ::style, ::title, , ::bInit, ::bDestroy, ::bSize, ::bPaint, ::bGetFocus, ;
          ::bLostFocus, ::bOther, ::obmp)
 
-      handle := Hwg_InitClientWindow(oWndClient, ::nMenuPos, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      handle := hwg_InitClientWindow(oWndClient, ::nMenuPos, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::oClient := HWindow():aWindows[2]
 
       //SetWindowPos(::oClient:handle, 0, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + ;
@@ -194,7 +194,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
          Eval(bActivate, Self)
       ENDIF
       AddToolTip(::handle, ::handle, "")
-      Hwg_ActivateMdiWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
+      hwg_ActivateMdiWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
 
    ELSEIF ::Type == WND_MAIN
 
@@ -218,7 +218,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       ENDIF
 
       AddToolTip(::handle, ::handle, "")
-      Hwg_ActivateMainWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
+      hwg_ActivateMainWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
 
    ENDIF
 
@@ -551,17 +551,17 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-   ELSEIF hb_IsArray(oWnd:menu) .AND. (aMenu := Hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
-      IF Hwg_BitAnd(aMenu[1, iCont, 4], FLAG_CHECK) > 0
+   ELSEIF hb_IsArray(oWnd:menu) .AND. (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
+      IF hwg_BitAnd(aMenu[1, iCont, 4], FLAG_CHECK) > 0
          CheckMenuItem(, aMenu[1, iCont, 3], !IsCheckedMenuItem(, aMenu[1, iCont, 3]))
       ENDIF
       IF aMenu[1, iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1], iCont, iParLow)
       ENDIF
-   ELSEIF oWnd:oPopup != NIL .AND. (aMenu := Hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iCont)) != NIL .AND. ;
+   ELSEIF oWnd:oPopup != NIL .AND. (aMenu := hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iCont)) != NIL .AND. ;
       aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1], iCont, wParam)
-   ELSEIF oWnd:oNotifyMenu != NIL .AND. (aMenu := Hwg_FindMenuItem(oWnd:oNotifyMenu:aMenu, wParam, @iCont)) != NIL ;
+   ELSEIF oWnd:oNotifyMenu != NIL .AND. (aMenu := hwg_FindMenuItem(oWnd:oNotifyMenu:aMenu, wParam, @iCont)) != NIL ;
       .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1], iCont, wParam)
    ELSEIF wParam != SC_CLOSE .AND. wParam != SC_MINIMIZE .AND. wParam != SC_MAXIMIZE .AND. ;

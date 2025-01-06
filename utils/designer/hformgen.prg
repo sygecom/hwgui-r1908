@@ -333,7 +333,7 @@ Private value, oCtrl
       IF ::oDlg:oFont == Nil
          ::oDlg:oFont := HFont():Add( "Arial",0,-13 )
       ENDIF
-      ::oDlg:style := Hwg_BitOr( ::oDlg:style,WS_VSCROLL+WS_HSCROLL+WS_MAXIMIZEBOX )
+      ::oDlg:style := hwg_BitOr( ::oDlg:style,WS_VSCROLL+WS_HSCROLL+WS_MAXIMIZEBOX )
 
       @ LEFT_INDENT,TOP_INDENT PANEL oPanel ;
         SIZE Round(::nPWidth*::nKoeff,0)-1, Round(::nPHeight*::nKoeff,0)-1 ;
@@ -1189,13 +1189,13 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
    HB_SYMBOL_UNUSED( wParam )
 
    IF oDesigner:addItem != Nil
-      Hwg_SetCursor( crossCursor )
+      hwg_SetCursor( crossCursor )
    ELSE
 
        aBDown := GetBDown()
        // : LFB
       IF aBDown[BDOWN_OCTRL]:CLASSNAME()="HDIALOG" .OR. aBDown[BDOWN_OCTRL]:CLASSNAME()="HPANEL"
-        Hwg_SetCursor( handCursor )
+        hwg_SetCursor( handCursor )
         RegionSelect(odlg,aBDown[ BDOWN_XPOS ],aBDown[ BDOWN_YPOS ],xpos,ypos)
         RETURN Nil
       ENDIF
@@ -1203,9 +1203,9 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
       IF aBDown[BDOWN_OCTRL] != Nil
          IF aBDown[BDOWN_NBORDER] > 0
             IF aBDown[BDOWN_NBORDER] == 1 .OR. aBDown[BDOWN_NBORDER] == 3
-               Hwg_SetCursor( horzCursor )
+               hwg_SetCursor( horzCursor )
             ELSEIF aBDown[BDOWN_NBORDER] == 2 .OR. aBDown[BDOWN_NBORDER] == 4
-               Hwg_SetCursor( vertCursor )
+               hwg_SetCursor( vertCursor )
             ENDIF
             CtrlResize( aBDown[BDOWN_OCTRL],xPos,yPos )
          ELSE
@@ -1214,9 +1214,9 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
       ELSE
          IF ( oCtrl := GetCtrlSelected( oDlg ) ) != Nil
             IF ( resizeDirection := CheckResize( oCtrl,xPos,yPos ) ) == 1 .OR. resizeDirection == 3
-               Hwg_SetCursor( horzCursor )
+               hwg_SetCursor( horzCursor )
             ELSEIF resizeDirection == 2 .OR. resizeDirection == 4
-               Hwg_SetCursor( vertCursor )
+               hwg_SetCursor( vertCursor )
             ENDIF
             SetvBDown( nil,xPos - oCtrl:nLeft , yPos - oCtrl:nTop,0 )
          ENDIF
@@ -1231,7 +1231,7 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
 
     // : LFB
       IF oCtrl = Nil.and.oDesigner:addItem = Nil
-         Hwg_SetCursor( handCursor )
+         hwg_SetCursor( handCursor )
          SetBDown(oDlg ,xPos,yPos)  //,resizeDirection )
       // fazer o desenho da marca‡Æo
       ENDIF
@@ -1247,13 +1247,13 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
          i := Ascan( oCtrl:aProp,{|a|Lower(a[1])=="height"} )
          IF i != 0 .AND. ( Len( oCtrl:aProp[i] ) == 3 .OR. oDesigner:lReport )
             SetBDown( oCtrl,xPos,yPos,resizeDirection )
-            Hwg_SetCursor( horzCursor )
+            hwg_SetCursor( horzCursor )
          ENDIF
       ELSEIF resizeDirection == 2 .OR. resizeDirection == 4
          i := Ascan( oCtrl:aProp,{|a|Lower(a[1])=="width"} )
          IF i != 0 .AND. ( Len( oCtrl:aProp[i] ) == 3 .OR. oDesigner:lReport )
             SetBDown( oCtrl,xPos,yPos,resizeDirection )
-            Hwg_SetCursor( vertCursor )
+            hwg_SetCursor( vertCursor )
          ENDIF
       ENDIF
    ELSE
@@ -1266,7 +1266,7 @@ Memvar oDesigner, crossCursor, horzCursor, VertCursor, handCursor
       ELSEIF ( oCtrl := GetCtrlSelected( oDlg ) ) != Nil
          // : LFB seleciona o DIALOG desmarcar todos
          SetCtrlSelected( oDlg )
-         Hwg_SetCursor( handCursor )
+         hwg_SetCursor( handCursor )
          // :END LFB
       ENDIF
    ENDIF

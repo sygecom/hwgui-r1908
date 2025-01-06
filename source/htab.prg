@@ -195,7 +195,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
 
    LOCAL i
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_CLIPSIBLINGS + WS_TABSTOP + TCS_TOOLTIPS)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_CLIPSIBLINGS + WS_TABSTOP + TCS_TOOLTIPS)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint)
 
@@ -271,7 +271,7 @@ METHOD Init() CLASS HTab
    IF !::lInit
       InitTabControl(::handle, ::aTabs, IIf(::himl != NIL, ::himl, 0))
       SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
-      IF Hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
+      IF hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
          ::TabHeightSize := 25 - (::oFont:Height + 12)
          x := ::nWidth / Len(::aPages) - 2
       ELSEIF ::TabHeightSize != NIL
@@ -318,7 +318,7 @@ METHOD Init() CLASS HTab
       ENDIF
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitTabProc(::handle)
+      hwg_InitTabProc(::handle)
 
    ENDIF
 
@@ -335,7 +335,7 @@ METHOD SetPaintSizePos(nFlag) CLASS HTab
    IF nFlag == - 1
       ::oPaint:nLeft := 1
       ::oPaint:nWidth := ::nWidth - 3
-      IF Hwg_BitAnd(::Style, TCS_BOTTOM) != 0
+      IF hwg_BitAnd(::Style, TCS_BOTTOM) != 0
          ::oPaint:nTop := 1
          ::oPaint:nHeight := aItemPos[2] - 3
       ELSE
@@ -563,7 +563,7 @@ METHOD ShowPage(nPage) CLASS HTab
       ENDIF
    /*
    FOR i := nFirst TO nEnd
-      IF (__ObjHasMsg(::aControls[i], "BSETGET") .AND. ::aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aControls[i]:style, WS_TABSTOP) != 0
+      IF (__ObjHasMsg(::aControls[i], "BSETGET") .AND. ::aControls[i]:bSetGet != NIL) .OR. hwg_BitAnd(::aControls[i]:style, WS_TABSTOP) != 0
          hwg_SetFocus(::aControls[i]:handle)
          Exit
       ENDIF
@@ -573,7 +573,7 @@ METHOD ShowPage(nPage) CLASS HTab
       ::aPages[nPage, 1]:show()
 
       FOR i := 1  TO Len(::aPages[nPage, 1]:aControls)
-         IF (__ObjHasMsg(::aPages[nPage, 1]:aControls[i], "BSETGET") .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL) .OR. Hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
+         IF (__ObjHasMsg(::aPages[nPage, 1]:aControls[i], "BSETGET") .AND. ::aPages[nPage, 1]:aControls[i]:bSetGet != NIL) .OR. hwg_BitAnd(::aPages[nPage, 1]:aControls[i]:style, WS_TABSTOP) != 0
             hwg_SetFocus(::aPages[nPage, 1]:aControls[i]:handle)
             EXIT
          ENDIF
@@ -696,7 +696,7 @@ METHOD Notify(lParam) CLASS HTab
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
    LOCAL nPage := SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
 
-   IF Hwg_BitAnd(::Style, TCS_BUTTONS) != 0
+   IF hwg_BitAnd(::Style, TCS_BUTTONS) != 0
       nPage := SendMessage(::handle, TCM_GETCURFOCUS, 0, 0) + 1
    ENDIF
    IF nPage == 0 .OR. ::handle != GetFocus()
@@ -1286,7 +1286,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     LOCAL nActive := oPage:oParent:GetActivePage()
     LOCAL hTheme
 
-    //nStyle := SS_CENTER + IIf(Hwg_BitAnd(oPage:oParent:Style, TCS_FIXEDWIDTH) != 0, ;
+    //nStyle := SS_CENTER + IIf(hwg_BitAnd(oPage:oParent:Style, TCS_FIXEDWIDTH) != 0, ;
     //                          SS_RIGHTJUST, DT_VCENTER + DT_SINGLELINE)
     AEval(oPage:oParent:Pages, {|p|size += p:aItemPos[3] - p:aItemPos[1]})
     nStyle := SS_CENTER + DT_VCENTER + DT_SINGLELINE + DT_END_ELLIPSIS
@@ -1317,7 +1317,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     ENDIF
     aItemPos[3] := IIf(size > oPage:oParent:nWidth .AND. aItemPos[1] + BmpSize + aTxtSize[1] > oPage:oParent:nWidth - 44, oPage:oParent:nWidth - 44, aItemPos[3])
     aItemRect := {aItemPos[1] + IIf(oPage:PageOrder == nActive + 1, 1, 0), aItemPos[2], aItemPos[3] - IIf(oPage:PageOrder == Len(oPage:oParent:Pages), 2, IIf(oPage:PageOrder == nActive - 1, 1, 0)), aItemPos[4] - 1}
-    IF Hwg_BitAnd(oPage:oParent:Style, TCS_BOTTOM) == 0
+    IF hwg_BitAnd(oPage:oParent:Style, TCS_BOTTOM) == 0
        IF hTheme != NIL .AND. oPage:brush == NIL
           hb_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE

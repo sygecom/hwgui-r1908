@@ -73,7 +73,7 @@ METHOD Init() CLASS HSplitter
       ::Super:Init()
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitWinCtrl(::handle)
+      hwg_InitWinCtrl(::handle)
    ENDIF
 
    RETURN NIL
@@ -86,7 +86,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
       IF ::hCursor == NIL
          ::hCursor := hwg_LoadCursor(IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS))
       ENDIF
-      Hwg_SetCursor(::hCursor)
+      hwg_SetCursor(::hCursor)
       IF ::lCaptured
          ::Drag(lParam)
          IF ::lScrolling
@@ -98,7 +98,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
    ELSEIF msg == WM_ERASEBKGND
 
    ELSEIF msg == WM_LBUTTONDOWN
-      Hwg_SetCursor(::hCursor)
+      hwg_SetCursor(::hCursor)
       SetCapture(::handle)
       ::lCaptured := .T.
       InvalidateRect(::handle, 1)

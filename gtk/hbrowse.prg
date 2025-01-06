@@ -203,7 +203,7 @@ METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
                   bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;
                   lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect ) CLASS HBrowse
 
-   nStyle   := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+ ;
+   nStyle   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+ ;
                     Iif(lNoBorder=Nil.OR.!lNoBorder,WS_BORDER,0)+            ;
                     Iif(lNoVScroll=Nil.OR.!lNoVScroll,WS_VSCROLL,0) )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,Iif( nWidth==Nil,0,nWidth ), ;
@@ -1361,7 +1361,7 @@ Local xm := hwg_LOWORD(lParam), x1, fif
    ELSEIF nLine == 0
       IF ::nCursor == 1
          ::nCursor := 2
-         Hwg_SetCursor( vCursor,::area )
+         hwg_SetCursor( vCursor,::area )
          xDrag := hwg_LOWORD(lParam)
       ENDIF
    ENDIF
@@ -1388,7 +1388,7 @@ Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
       ENDDO
       IF xPos > x1
          ::aColumns[i]:width := xPos - x1
-         Hwg_SetCursor( arrowCursor,::area )
+         hwg_SetCursor( arrowCursor,::area )
          ::nCursor := 0     
          InvalidateRect( hBrw, 0 )
       ENDIF
@@ -1433,7 +1433,7 @@ Local x := ::x1, i := ::nLeftCol, res := .F.
    ENDIF
    IF ::lDispSep .AND. yPos <= ::height+1
       IF wParam == 1 .AND. ::nCursor == 2
-         Hwg_SetCursor( vCursor,::area )
+         hwg_SetCursor( vCursor,::area )
          res := .T.
       ELSE
          DO WHILE x < ::x2 - 2 .AND. i <= Len( ::aColumns )
@@ -1442,14 +1442,14 @@ Local x := ::x1, i := ::nLeftCol, res := .F.
                   IF ::nCursor != 2
                      ::nCursor := 1
                   ENDIF
-                  Hwg_SetCursor( Iif(::nCursor==1,crossCursor,vCursor),::area )
+                  hwg_SetCursor( Iif(::nCursor==1,crossCursor,vCursor),::area )
                res := .T.
                EXIT
             ENDIF
          ENDDO
       ENDIF
       IF !res .AND. ::nCursor != 0
-         Hwg_SetCursor( arrowCursor,::area )
+         hwg_SetCursor( arrowCursor,::area )
          ::nCursor := 0
       ENDIF
    ENDIF
@@ -1457,7 +1457,7 @@ RETURN Nil
 
 //----------------------------------------------------------------------------//
 METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos ) CLASS HBrowse
-   if Hwg_BitAnd( nKeys, MK_MBUTTON ) != 0
+   if hwg_BitAnd( nKeys, MK_MBUTTON ) != 0
       if nDelta > 0
          ::PageUp()
       else

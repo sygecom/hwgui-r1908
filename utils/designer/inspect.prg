@@ -108,7 +108,7 @@ Private value, oCtrl := Iif( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrl
    IF ( j != 0 .AND. aDataDef[ j,5 ] != Nil ) .OR. aCtrlProp[ oBrw1:cargo,3 ] == "A"
       IF j != 0 .AND. aDataDef[ j,5 ] != Nil
          IF aDataDef[ j,5 ] == "color"
-            varbuf := Hwg_ChooseColor( Val(varbuf),.F. )
+            varbuf := hwg_ChooseColor( Val(varbuf),.F. )
             IF varbuf != Nil
                varbuf := Ltrim( Str( varbuf ) )
                lRes := .T.

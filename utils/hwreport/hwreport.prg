@@ -457,7 +457,7 @@ Local aItem, i, dx, dy
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF],0)-aPaintRep[FORM_Y]-1
    IF nAddItem > 0 
       IF xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
-         Hwg_SetCursor( crossCursor )
+         hwg_SetCursor( crossCursor )
       ENDIF
    ELSEIF itemPressed > 0
       IF IsCheckedMenuItem(,IDM_MOUSE2) .AND. Abs(xPos - mPos[1]) < 3 .AND. Abs(yPos - mPos[2]) < 3
@@ -533,7 +533,7 @@ Local aItem, i, dx, dy
                   TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
          aPaintRep[FORM_CHANGED] := .T.
          WriteItemInfo( aItem )
-         Hwg_SetCursor( Iif( resizeDirection==1.OR.resizeDirection==3,horzCursor,vertCursor ) )
+         hwg_SetCursor( Iif( resizeDirection==1.OR.resizeDirection==3,horzCursor,vertCursor ) )
          PostMessage( hWnd, WM_PAINT, 0, 0 )
       ENDIF
    ELSE
@@ -544,7 +544,7 @@ Local aItem, i, dx, dy
                 xPos < LEFT_INDENT+1+aItem[ITEM_X1] .AND. ;
                 yPos >= TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. yPos < TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
                IF aItem[ITEM_TYPE] != TYPE_VLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  Hwg_SetCursor( horzCursor )
+                  hwg_SetCursor( horzCursor )
                   itemBorder := i
                   resizeDirection := 1
                ENDIF
@@ -552,7 +552,7 @@ Local aItem, i, dx, dy
                 xPos < LEFT_INDENT+2+aItem[ITEM_X1]+aItem[ITEM_WIDTH] .AND. ;
                 yPos >= TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. yPos < LEFT_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
                IF aItem[ITEM_TYPE] != TYPE_VLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  Hwg_SetCursor( horzCursor )
+                  hwg_SetCursor( horzCursor )
                   itemBorder := i
                   resizeDirection := 3
                ENDIF
@@ -560,7 +560,7 @@ Local aItem, i, dx, dy
                 yPos < TOP_INDENT+1+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. ;
                 xPos >= LEFT_INDENT+aItem[ITEM_X1] .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]
                IF aItem[ITEM_TYPE] != TYPE_HLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  Hwg_SetCursor( vertCursor )
+                  hwg_SetCursor( vertCursor )
                   itemBorder := i
                   resizeDirection := 2
                ENDIF
@@ -568,7 +568,7 @@ Local aItem, i, dx, dy
                 yPos < TOP_INDENT+2+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT] .AND. ;
                 xPos >= LEFT_INDENT+aItem[ITEM_X1] .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]
                IF aItem[ITEM_TYPE] != TYPE_HLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  Hwg_SetCursor( vertCursor )
+                  hwg_SetCursor( vertCursor )
                   itemBorder := i
                   resizeDirection := 4
                ENDIF
@@ -591,7 +591,7 @@ Local hWnd := Hwindow():GetMain():handle
    ELSEIF itemBorder != 0
       itemSized := itemBorder
       mPos[1] := xPos; mPos[2] := yPos
-      Hwg_SetCursor( Iif( resizeDirection==1.OR.resizeDirection==3,horzCursor,vertCursor ) )
+      hwg_SetCursor( Iif( resizeDirection==1.OR.resizeDirection==3,horzCursor,vertCursor ) )
    ELSE
       IF ( i := DeselectAll() ) != 0
          InvalidateRect( hWnd, 0, LEFT_INDENT+aPaintRep[FORM_ITEMS,i,ITEM_X1]-3, ;

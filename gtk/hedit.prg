@@ -69,7 +69,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
                   oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt, ;
                   tcolor,bcolor,cPicture,lNoBorder, lMaxLength, lPassword ) CLASS HEdit
  
-   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), ;
+   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), ;
                 WS_TABSTOP+Iif(lNoBorder==Nil.OR.!lNoBorder,WS_BORDER,0)+;
                 Iif(lPassword==Nil .or. !lPassword, 0, ES_PASSWORD)  )
 
@@ -84,8 +84,8 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ENDIF
    ::bSetGet := bSetGet
 
-   IF Hwg_BitAnd( nStyle,ES_MULTILINE ) != 0
-      ::style := Hwg_BitOr( ::style,ES_WANTRETURN )
+   IF hwg_BitAnd( nStyle,ES_MULTILINE ) != 0
+      ::style := hwg_BitOr( ::style,ES_WANTRETURN )
       ::lMultiLine := .T.
    ENDIF
 
@@ -104,7 +104,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ::bGetFocus := bGFocus
    ::bLostFocus := bLFocus
    hwg_SetEvent( ::handle,"focus_in_event",WM_SETFOCUS,0,0 )
-   hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS,0,0 )   
+   hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS,0,0 )
    hwg_SetEvent( ::handle,"key_press_event",0,0,0 )
 
 Return Self

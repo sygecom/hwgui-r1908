@@ -47,7 +47,7 @@ LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
               IIf(nHeight == NIL, 0, nHeight), oParent:oFont, bInit, ;
               bSize, bPaint,,, bcolor)
 
-   ::lBorder  := IIf(Hwg_Bitand(nStyle, WS_BORDER) + Hwg_Bitand(nStyle, WS_DLGFRAME) > 0, .T., .F.)
+   ::lBorder  := IIf(hwg_Bitand(nStyle, WS_BORDER) + hwg_Bitand(nStyle, WS_DLGFRAME) > 0, .T., .F.)
    ::bPaint   := bPaint
    ::lResizeX := (::nWidth == 0)
    ::lResizeY := (::nHeight == 0)
@@ -65,10 +65,10 @@ LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ENDIF
    */
    ::nGetSkip := 1
-   IF Hwg_Bitand(nStyle, WS_HSCROLL) > 0
+   IF hwg_Bitand(nStyle, WS_HSCROLL) > 0
       ::nScrollBars++
    ENDIF
-    IF Hwg_Bitand(nStyle, WS_VSCROLL) > 0
+    IF hwg_Bitand(nStyle, WS_VSCROLL) > 0
       ::nScrollBars += 2
     ENDIF
 
@@ -132,7 +132,7 @@ METHOD Init() CLASS HPanel
       ::Super:Init()
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitWinCtrl(::handle)
+      hwg_InitWinCtrl(::handle)
 
       ::RedefineScrollbars()
       
@@ -196,7 +196,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
-   ELSEIF msg == WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. Hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
+   ELSEIF msg == WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
       Getskip(::oParent, ::handle, , ::nGetSkip)
 /*
    ELSEIF msg == WM_KEYUP

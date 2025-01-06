@@ -54,11 +54,11 @@ ENDCLASS
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bGfocus, bLfocus, ;
    bChange, ctooltip, tcolor, bcolor, lShowTime) CLASS HDatePicker
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(bSetGet != NIL, WS_TABSTOP, 0) + ;
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(bSetGet != NIL, WS_TABSTOP, 0) + ;
       IIf(lShowTime == NIL .OR. !lShowTime, 0, DTS_TIMEFORMAT))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, , , ctooltip, tcolor, bcolor)
 
-   ::lShowTime := Hwg_BitAnd(nStyle, DTS_TIMEFORMAT) > 0
+   ::lShowTime := hwg_BitAnd(nStyle, DTS_TIMEFORMAT) > 0
    ::dValue := IIf(vari == NIL .OR. !hb_IsDate(vari), CToD(Space(8)), vari)
    ::tValue := IIf(vari == NIL .OR. !hb_IsChar(vari), Space(6), vari)
    ::title := IIf(!::lShowTime, ::dValue, ::tValue)

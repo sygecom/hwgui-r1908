@@ -383,10 +383,10 @@ FUNCTION HdSerial(cDrive)
 
    RETURN cResult
 
-FUNCTION Hwg_GetIni(cSection, cEntry, cDefault, cFile)
+FUNCTION hwg_GetIni(cSection, cEntry, cDefault, cFile)
    RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile)
 
-FUNCTION Hwg_WriteIni(cSection, cEntry, cValue, cFile)
+FUNCTION hwg_WriteIni(cSection, cEntry, cValue, cFile)
    RETURN WritePrivateProfileString(cSection, cEntry, cValue, cFile)
 
 FUNCTION SetHelpFileName(cNewName)

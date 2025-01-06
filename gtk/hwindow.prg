@@ -178,13 +178,13 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
    IF lType == WND_MDI
 /*
       ::nMenuPos := nPos
-      ::handle := Hwg_InitMdiWindow( Self, ::szAppName,cTitle,cMenu,  ;
+      ::handle := hwg_InitMdiWindow( Self, ::szAppName,cTitle,cMenu,  ;
                     Iif(oIcon!=Nil,oIcon:handle,Nil),clr, ;
                     nStyle,::nLeft,::nTop,::nWidth,::nHeight )
 */
    ELSEIF lType == WND_MAIN
 
-      ::handle := Hwg_InitMainWindow( Self, ::szAppName,cTitle,cMenu, ;
+      ::handle := hwg_InitMainWindow( Self, ::szAppName,cTitle,cMenu, ;
               Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),::Style,::nLeft, ;
               ::nTop,::nWidth,::nHeight )
     
@@ -204,14 +204,14 @@ Local oWndClient, handle
 /*
       oWndClient := HWindow():New( ,,,::style,::title,,::bInit,::bDestroy,::bSize, ;
                               ::bPaint,::bGetFocus,::bLostFocus,::bOther )
-      handle := Hwg_InitClientWindow( oWndClient,::nMenuPos,::nLeft,::nTop+60,::nWidth,::nHeight )
+      handle := hwg_InitClientWindow( oWndClient,::nMenuPos,::nLeft,::nTop+60,::nWidth,::nHeight )
       oWndClient:handle = handle
-      Hwg_ActivateMdiWindow( ( lShow==Nil .OR. lShow ),::hAccel,::lMaximize )
+      hwg_ActivateMdiWindow( ( lShow==Nil .OR. lShow ),::hAccel,::lMaximize )
 */
    ELSEIF ::type == WND_MAIN
 
       ::lActivated := .T.
-      Hwg_ActivateMainWindow( ::handle,::hAccel, lMaximize, lMinimize )
+      hwg_ActivateMainWindow( ::handle,::hAccel, lMaximize, lMinimize )
 
    ENDIF
 
@@ -257,9 +257,9 @@ ENDCLASS
 METHOD Activate( lShow ) CLASS HMDIChildWindow
 
    CreateGetList( Self )
-   // Hwg_CreateMdiChildWindow( Self )
+   // hwg_CreateMdiChildWindow( Self )
    
-   ::handle := Hwg_CreateMdiChildWindow( Self )
+   ::handle := hwg_CreateMdiChildWindow( Self )
    InitControls( Self )
    IF ::bInit != Nil
       Eval( ::bInit,Self )
@@ -301,7 +301,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
                   cAppName,oBmp,cHelp,nHelpId )
    ::oParent := HWindow():GetMain()
    IF ISOBJECT( ::oParent )  
-       ::handle := Hwg_InitChildWindow( Self, ::szAppName,cTitle,cMenu, ;
+       ::handle := hwg_InitChildWindow( Self, ::szAppName,cTitle,cMenu, ;
           Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),nStyle,::nLeft, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
    ELSE
@@ -317,7 +317,7 @@ Return Self
 METHOD Activate( lShow ) CLASS HChildWindow
 
    CreateGetList( Self )
-   Hwg_ActivateChildWindow((lShow==Nil .OR. lShow),::handle )
+   hwg_ActivateChildWindow((lShow==Nil .OR. lShow),::handle )
 
 Return Nil
 
@@ -392,15 +392,15 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
    ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
-        ( aMenu := Hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
+        ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
         .AND. aMenu[ 1,iCont,1 ] != Nil
       Eval( aMenu[ 1,iCont,1 ] )
    ELSEIF oWnd:oPopup != Nil .AND. ;
-        ( aMenu := Hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
+        ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
         .AND. aMenu[ 1,iCont,1 ] != Nil
       Eval( aMenu[ 1,iCont,1 ] )
    ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
-        ( aMenu := Hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
+        ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
         .AND. aMenu[ 1,iCont,1 ] != Nil
       Eval( aMenu[ 1,iCont,1 ] )
    ENDIF
@@ -515,7 +515,7 @@ Local oItem
 */   
 Return 0
 
-Function Hwg_CenterWindow( oWnd )
+Function hwg_CenterWindow( oWnd )
 
    oWnd:nLeft := Int( ( GetDesktopWidth() - oWnd:nWidth ) / 2 )
    oWnd:nTop  := Int( ( GetDesktopHeight() - oWnd:nHeight ) / 2 )

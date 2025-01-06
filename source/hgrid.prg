@@ -80,7 +80,7 @@ METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, 
 
    DEFAULT aBit TO {}
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), LVS_SHOWSELALWAYS + WS_TABSTOP + IIf(lNoBord, 0, WS_BORDER) + ;
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), LVS_SHOWSELALWAYS + WS_TABSTOP + IIf(lNoBord, 0, WS_BORDER) + ;
                        LVS_REPORT + LVS_OWNERDATA + LVS_SINGLESEL)
 
    ::Super:New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint)

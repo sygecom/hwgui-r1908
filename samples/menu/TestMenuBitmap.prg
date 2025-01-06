@@ -35,7 +35,7 @@ FUNCTION Main()
    ENDMENU
    //The number ID is very important to use bitmap in menu
    MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
-   //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
+   //hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
    ACTIVATE WINDOW oMain
 
 RETURN NIL

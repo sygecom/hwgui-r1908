@@ -15,9 +15,9 @@ FUNCTION Main()
    //Create the inifile
    if !file(cIniFile)
 
-      Hwg_WriteIni("Config", "WallParer", "No Paper", cIniFile)
-      Hwg_WriteIni("Config", "DirHwGUima", "C:\HwGUI", cIniFile)
-      Hwg_WriteIni("Print", "Spoll", "Epson LX 80", cIniFile)
+      hwg_WriteIni("Config", "WallParer", "No Paper", cIniFile)
+      hwg_WriteIni("Config", "DirHwGUima", "C:\HwGUI", cIniFile)
+      hwg_WriteIni("Print", "Spoll", "Epson LX 80", cIniFile)
 
     endif
 
@@ -37,8 +37,8 @@ FUNCTION ReadIni()
 
    LOCAL cIniFile := "HwGui.ini"
 
-   hwg_MsgInfo(Hwg_GetIni("Config", "WallParer", , cIniFile))
-   hwg_MsgInfo(Hwg_GetIni("Config", "DirHwGUima", , cIniFile))
-   hwg_MsgInfo(Hwg_GetIni("Print", "Spoll", , cIniFile))
+   hwg_MsgInfo(hwg_GetIni("Config", "WallParer", , cIniFile))
+   hwg_MsgInfo(hwg_GetIni("Config", "DirHwGUima", , cIniFile))
+   hwg_MsgInfo(hwg_GetIni("Print", "Spoll", , cIniFile))
 
 RETURN NIL

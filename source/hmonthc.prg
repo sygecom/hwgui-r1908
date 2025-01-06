@@ -49,7 +49,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
             lWeekNumbers, bSelect) CLASS HMonthCalendar
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), 0) //WS_TABSTOP)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), 0) //WS_TABSTOP)
    nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
    nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
    nStyle   += IIf(lWeekNumbers == NIL .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)

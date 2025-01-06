@@ -813,13 +813,13 @@
 
 #xcommand MENU [ OF <oWnd> ] [ ID <nId> ] [ TITLE <cTitle> ] ;
           => ;
-    Hwg_BeginMenu( <oWnd>, <nId>, <cTitle> )
+    hwg_BeginMenu( <oWnd>, <nId>, <cTitle> )
 
 #xcommand CONTEXT MENU <oMenu> ;
           => ;
-    <oMenu> := Hwg_ContextMenu()
+    <oMenu> := hwg_ContextMenu()
 
-#xcommand ENDMENU           => Hwg_EndMenu()
+#xcommand ENDMENU           => hwg_EndMenu()
 
 #xcommand MENUITEM <item> [ ID <nId> ]    ;
             ACTION <act>                  ;
@@ -827,9 +827,9 @@
             [ <lDisabled: DISABLED> ]     ;
             [ MESSAGE <cMessage> ]        ;
           => ;
-    Hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>, <cMessage> )
+    hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>, <cMessage> )
 
-#xcommand SEPARATOR         => Hwg_DefineMenuItem()
+#xcommand SEPARATOR         => hwg_DefineMenuItem()
 
 #xcommand SET TIMER <oTimer> [ OF <oWnd> ] [ ID <id> ] ;
              VALUE <value> ACTION <bAction> ;

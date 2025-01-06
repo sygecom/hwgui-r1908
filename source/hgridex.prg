@@ -90,8 +90,8 @@ METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, 
 
    HB_SYMBOL_UNUSED(nItemCount)
 
-   //nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_VISIBLE + WS_CHILD + WS_TABSTOP + LVS_REPORT)
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + WS_BORDER)
+   //nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_VISIBLE + WS_CHILD + WS_TABSTOP + LVS_REPORT)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + WS_BORDER)
    ::Super:New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, ;
               bSize, bPaint)
    DEFAULT aBit TO {}
@@ -255,7 +255,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
 
    IF nCode == NM_CUSTOMDRAW .AND. GETNOTIFYCODEFROM(lParam) == ::handle
       Res := PROCESSCUSTU(::handle, lParam, ::aColors)
-      Hwg_SetDlgResult(oParent:handle, Res)
+      hwg_SetDlgResult(oParent:handle, Res)
       RETURN Res
    ENDIF
 
@@ -288,7 +288,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
 
    Res := ListViewNotify(Self, lParam)
    IF hb_IsNumeric(Res)
-      Hwg_SetDlgResult(oParent:handle, Res)
+      hwg_SetDlgResult(oParent:handle, Res)
       //RETURN 1
    ENDIF
    RETURN Res

@@ -59,7 +59,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
             tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder) CLASS HRichEdit
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER)
                         IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, IIf(bcolor == NIL, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
@@ -68,7 +68,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::bOther  := bOther
    ::bChange := bChange
    ::lAllowTabs := IIf(Empty(lAllowTabs), ::lAllowTabs, lAllowTabs)
-   ::lReadOnly := Hwg_BitAnd(nStyle, ES_READONLY) != 0
+   ::lReadOnly := hwg_BitAnd(nStyle, ES_READONLY) != 0
 
    hwg_InitRichEdit()
 
@@ -99,7 +99,7 @@ METHOD Init() CLASS HRichEdit
    IF !::lInit
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitRichProc(::handle)
+      hwg_InitRichProc(::handle)
       ::Super:Init()
       ::SetColor(::tColor, ::bColor)
       IF ::bChange != NIL

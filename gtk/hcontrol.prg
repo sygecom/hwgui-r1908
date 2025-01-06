@@ -62,7 +62,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
 
    ::oParent := Iif( oWndParent==Nil, ::oDefaultParent, oWndParent )
    ::id      := Iif( nId==Nil,::NewId(), nId )
-   ::style   := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),WS_VISIBLE+WS_CHILD )
+   ::style   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),WS_VISIBLE+WS_CHILD )
    ::oFont   := oFont
    ::nLeft   := nLeft
    ::nTop    := nTop
@@ -301,7 +301,7 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint ) CLASS HStatus
 
    bSize := Iif( bSize!=Nil, bSize, {|o,x,y|MoveWindow(o:handle,0,y-20,x,y)} )
-   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
+   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
    ::Super:New( oWndParent,nId,nStyle,0,0,0,0,oFont,bInit,bSize,bPaint )
 
    ::aParts  := aParts
@@ -382,7 +382,7 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
                   bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor ) CLASS HButton
 
-   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_PUSHBUTTON )
+   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_PUSHBUTTON )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,Iif( nWidth==Nil,90,nWidth ),;
               Iif( nHeight==Nil,30,nHeight ),oFont,bInit, ;
               bSize,bPaint,ctoolt,tcolor,bcolor )
@@ -478,7 +478,7 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption, ;
                   oFont,bInit,bSize,bPaint,tcolor,bcolor ) CLASS HGroup
 
-   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_GROUPBOX )
+   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_GROUPBOX )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,,tcolor,bcolor )
 

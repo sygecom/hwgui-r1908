@@ -326,7 +326,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
    lCheckBox   := IIf(lCheckBox == NIL, .F., lCheckBox)
    lDragDrop   := IIf(lDragDrop == NIL, .F., lDragDrop)
 
-   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP  + TVS_FULLROWSELECT + TVS_TRACKSELECT+; //TVS_HASLINES +  ;
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP  + TVS_FULLROWSELECT + TVS_TRACKSELECT+; //TVS_HASLINES +  ;
                             TVS_LINESATROOT + TVS_HASBUTTONS  + TVS_SHOWSELALWAYS + ;
                           IIf(lEditLabels == NIL .OR. !lEditLabels, 0, TVS_EDITLABELS) +;
                           IIf(lCheckBox == NIL .OR. !lCheckBox, 0, TVS_CHECKBOXES) +;
@@ -374,7 +374,7 @@ METHOD Init() CLASS HTree
       ::Super:Init()
       ::nHolder := 1
       SetWindowObject(::handle, Self)
-      Hwg_InitTreeView(::handle)
+      hwg_InitTreeView(::handle)
       IF ::himl != NIL
          SendMessage(::handle, TVM_SETIMAGELIST, TVSIL_NORMAL, ::himl)
       ENDIF

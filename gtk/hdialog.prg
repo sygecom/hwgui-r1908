@@ -75,7 +75,7 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD DelItem( oWnd,lModal )
    METHOD FindDialog( hWnd )
    METHOD GetActive()
-   METHOD Center()   INLINE Hwg_CenterWindow( Self )
+   METHOD Center()   INLINE hwg_CenterWindow( Self )
    METHOD Restore()  INLINE hwg_WindowRestore( ::handle )
    METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
    METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
@@ -112,7 +112,7 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
       ::nLeft := Int( ( GetDesktopWidth() - ::nWidth ) / 2 )
       ::nTop  := Int( ( GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF
-   ::handle := Hwg_CreateDlg( Self )
+   ::handle := hwg_CreateDlg( Self )
 
 RETURN Self
 
@@ -297,11 +297,11 @@ Local aMenu, i, hCtrl
          EndDialog( oDlg:handle )
       ENDIF
    ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. Valtype( oDlg:menu ) == "A" .AND. ;
-        ( aMenu := Hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
+        ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
         .AND. aMenu[ 1,i,1 ] != Nil
       Eval( aMenu[ 1,i,1 ] )
    ELSEIF __ObjHasMsg(oDlg,"OPOPUP") .AND. oDlg:oPopup != Nil .AND. ;
-         ( aMenu := Hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != Nil ;
+         ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != Nil ;
          .AND. aMenu[ 1,i,1 ] != Nil
          Eval( aMenu[ 1,i,1 ] )
    ENDIF

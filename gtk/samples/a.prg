@@ -33,7 +33,7 @@ Private nColor, oBmp2
          MENUITEM "&Open" ACTION FileOpen()
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
-         MENUITEM "&Color" ACTION (nColor:=Hwg_ChooseColor(nColor,.F.), ;
+         MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor,.F.), ;
                      MsgInfo(Iif(nColor!=Nil,str(nColor),"--"),"Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)

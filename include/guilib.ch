@@ -147,11 +147,11 @@
                [[ BACKCOLOR <bcolor> ][ COLOR <bcolor> ]]    ;
                [ BMPSIZE <nWidthBmp>, <nHeighBmp> ]          ;
           => ;
-          Hwg_BeginMenu( <oWnd>, <nId>, <cTitle>, <bcolor>, <nWidthBmp>,<nHeighBmp> )
+          hwg_BeginMenu( <oWnd>, <nId>, <cTitle>, <bcolor>, <nWidthBmp>,<nHeighBmp> )
 
-#xcommand CONTEXT MENU <oMenu> => <oMenu> := Hwg_ContextMenu()
+#xcommand CONTEXT MENU <oMenu> => <oMenu> := hwg_ContextMenu()
 
-#xcommand ENDMENU => Hwg_EndMenu()
+#xcommand ENDMENU => hwg_EndMenu()
 
 #xcommand MENUITEM <item> [ ID <nId> ]    ;
              ACTION <act>                  ;
@@ -160,28 +160,28 @@
              [ ACCELERATOR <flag>, <key> ] ;
              [<lDisabled: DISABLED>]       ;
           => ;
-          Hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>, <bmp>, <.res.>, .f. )
+          hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>, <bmp>, <.res.>, .f. )
 
 #xcommand MENUITEMCHECK <item> [ ID <nId> ]    ;
              [ ACTION <act> ]              ;
              [ ACCELERATOR <flag>, <key> ] ;
              [<lDisabled: DISABLED>]       ;
           => ;
-          Hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>,,, .t. )
+          hwg_DefineMenuItem( <item>, <nId>, <{act}>, <.lDisabled.>, <flag>, <key>,,, .t. )
 
 #xcommand MENUITEMBITMAP <oMain>  ID <nId> ;
              BITMAP <bmp>                  ;
              [<res: FROM RESOURCE>]         ;
           => ;
-          Hwg_InsertBitmapMenu( <oMain>:menu, <nId>, <bmp>, <.res.>)
+          hwg_InsertBitmapMenu( <oMain>:menu, <nId>, <bmp>, <.res.>)
 
 #xcommand ACCELERATOR <flag>, <key>       ;
              [ ID <nId> ]                  ;
              ACTION <act>                  ;
           => ;
-          Hwg_DefineAccelItem( <nId>, <{act}>, <flag>, <key> )
+          hwg_DefineAccelItem( <nId>, <{act}>, <flag>, <key> )
 
-#xcommand SEPARATOR => Hwg_DefineMenuItem()
+#xcommand SEPARATOR => hwg_DefineMenuItem()
 
 #include "_timer.ch"
 

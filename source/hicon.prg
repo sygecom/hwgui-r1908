@@ -63,7 +63,7 @@ METHOD AddResource(name, nWidth, nHeight, nFlags, lOEM) CLASS HIcon
    NEXT
    // ::classname := "HICON"
    IF lOEM // LR_SHARED is required for OEM images
-      ::handle := LoadImage(0, Val(name), IMAGE_ICON, nWidth, nHeight, Hwg_bitor(nFlags, LR_SHARED))
+      ::handle := LoadImage(0, Val(name), IMAGE_ICON, nWidth, nHeight, hwg_bitor(nFlags, LR_SHARED))
    ELSE
       ::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_ICON, nWidth, nHeight, nFlags)
    ENDIF

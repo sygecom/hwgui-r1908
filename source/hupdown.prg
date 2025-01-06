@@ -75,7 +75,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
    HB_SYMBOL_UNUSED(bOther)
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0))
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0))
 
    IF !hb_IsNumeric(vari)
       vari := 0
@@ -171,7 +171,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
       // MDICHILD WITH TAB
       ::nHolder := 1
       SetWindowObject(::oEditUpDown:handle, ::oEditUpDown)
-      Hwg_InitEditProc(::oEditUpDown:handle)
+      hwg_InitEditProc(::oEditUpDown:handle)
     ENDIF
    ::handle := ::oEditUpDown:handle
    ::hwndUpDown := CreateUpDownControl(::oParent:handle, ::idUpDown, ;
@@ -182,7 +182,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    IF ::nHolder == 0
       ::nHolder := 1
       SetWindowObject(::handle, ::oEditUpDown)
-      Hwg_InitEditProc(::handle)
+      hwg_InitEditProc(::handle)
    ENDIF
    RETURN NIL
 
@@ -297,7 +297,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
 
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == NIL , - 1 , 1)
 
-     IF ::oUpDown == NIL .OR. Hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
+     IF ::oUpDown == NIL .OR. hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          GetFocus() != ::handle .OR. ;
        (::oUpDown:bGetFocus != NIL .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown))
         RETURN 0
@@ -374,7 +374,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
             nUpDWidth, nLower, nUpper) CLASS HUpDown
 
-   nStyle   := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT)
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor)
 

@@ -398,10 +398,10 @@ METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, 
            lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, bRclick, bChgRowCol, ctooltip) CLASS HBrowse
 
    lNoVScroll := IIf(lNoVScroll == NIL, .F., lNoVScroll)
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ;
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ;
                           IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0) +            ;
                           IIf(!lNoVScroll, WS_VSCROLL, 0))
-   nStyle   -= IIf(Hwg_BitAND(nStyle, WS_VSCROLL) > 0 .AND. lNoVScroll, WS_VSCROLL, 0)
+   nStyle   -= IIf(hwg_BitAND(nStyle, WS_VSCROLL) > 0 .AND. lNoVScroll, WS_VSCROLL, 0)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
               IIf(nHeight == NIL, 0, nHeight), oFont, bInit, bSize, bPaint, ctooltip, tColor, bColor)
@@ -879,9 +879,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       ELSEIF msg == WM_MBUTTONUP
          ::nWheelPress := IIf(::nWheelPress > 0, 0, lParam)
          IF ::nWheelPress > 0
-            Hwg_SetCursor(hwg_LoadCursor(32652))
+            hwg_SetCursor(hwg_LoadCursor(32652))
          ELSE
-            Hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
+            hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
          ENDIF
       /*
       ELSEIF msg == WM_MOUSEWHEEL
@@ -1297,9 +1297,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_MBUTTONUP
       ::nWheelPress := IIf(::nWheelPress > 0, 0, lParam)
       IF ::nWheelPress > 0
-         Hwg_SetCursor(hwg_LoadCursor(32652))
+         hwg_SetCursor(hwg_LoadCursor(32652))
       ELSE
-         Hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
+         hwg_SetCursor(hwg_LoadCursor(IDC_ARROW))
       ENDIF
       EXIT
 
@@ -2817,7 +2817,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                                0, 0}
                      nCheckHeight := (::y1 + (::height + 1) * ::nPaintRow) - (::y1 + (::height + 1) * (::nPaintRow - 1)) - ::aMargin[1] - ::aMargin[3] - 1
                      nCheckHeight := IIf(nCheckHeight > 16, 16, nCheckHeight)
-                     IF Hwg_BitAND(::aColumns[::nPaintCol]:nJusLin, DT_CENTER) != 0
+                     IF hwg_BitAND(::aColumns[::nPaintCol]:nJusLin, DT_CENTER) != 0
                         rcBitmap[1] := rcBitmap[1] + (xsize - ::aMargin[2] - ::aMargin[4] - nCheckHeight + 1) / 2
                      ENDIF
                      rcBitmap[4] := ::y1 + (::height + 1) * ::nPaintRow - (1 + ::aMargin[3])
@@ -3550,7 +3550,7 @@ ELSEIF nLine == 0
    IF PtrtouLong(s_oCursor) ==  PtrtouLong(s_ColSizeCursor)
       ::lResizing := .T.
       ::isMouseOver := .F.
-      Hwg_SetCursor(s_oCursor)
+      hwg_SetCursor(s_oCursor)
       s_xDrag := hwg_LOWORD(lParam)
       s_xDragMove := s_xDrag
       InvalidateRect(::handle, 0)
@@ -3601,7 +3601,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       ENDDO
       IF xPos > x1
          ::aColumns[i]:width := xPos - x1
-         Hwg_SetCursor(s_arrowCursor)
+         hwg_SetCursor(s_arrowCursor)
          s_oCursor := 0
          ::isMouseOver := .F.
          //s_xDragMove := 0
@@ -3624,7 +3624,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       AEval(::aColumns,{|c|c:lHeadClick := .F.})
       InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
       ::lHeadClick := .F.
-     Hwg_SetCursor(s_downCursor)
+     hwg_SetCursor(s_downCursor)
    ENDIF
    /*
    IF PtrtouLong(GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
@@ -3751,7 +3751,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
        (::lResizing .AND. yPos > ::y1)) .AND. ;
       (xPos >= ::x1 .AND. xPos <= Max(s_xDragMove, ::xAdjRight) + 4)
       IF wParam == MK_LBUTTON .AND. ::lResizing
-         Hwg_SetCursor(s_oCursor)
+         hwg_SetCursor(s_oCursor)
          res := .T.
          s_xDragMove := xPos
          ::isMouseOver := .T.
@@ -3768,12 +3768,12 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
                   IF PtrtouLong(s_oCursor) != PtrtouLong(s_ColSizeCursor)
                      s_oCursor := s_ColSizeCursor
                   ENDIF
-                  Hwg_SetCursor(s_oCursor)
+                  hwg_SetCursor(s_oCursor)
                   res := .T.
                   EXIT
                ELSE
                   s_oCursor := s_DownCursor
-                  Hwg_SetCursor(s_oCursor)
+                  hwg_SetCursor(s_oCursor)
                   res := .T.
                ENDIF
             ENDIF
@@ -3781,7 +3781,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
          ENDDO
       ENDIF
       IF !res .AND. !Empty(s_oCursor)
-         Hwg_SetCursor(s_arrowCursor)
+         hwg_SetCursor(s_arrowCursor)
          s_oCursor := 0
          ::lResizing := .F.
       ENDIF
@@ -3799,7 +3799,7 @@ METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos) CLASS HBrowse
    HB_SYMBOL_UNUSED(nXPos)
    HB_SYMBOL_UNUSED(nYPos)
 
-   IF Hwg_BitAnd(nKeys, MK_MBUTTON) != 0
+   IF hwg_BitAnd(nKeys, MK_MBUTTON) != 0
       IF nDelta > 0
          ::PageUp()
       ELSE
@@ -4022,7 +4022,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
 
          ::lNoValid := .F.
          IF Type = "L" .AND. wParam != VK_RETURN
-             Hwg_SetCursor(s_arrowCursor)
+             hwg_SetCursor(s_arrowCursor)
              IF wParam == VK_SPACE
                 oModDlg:lResult := ::EditLogical(wParam)
                 RETURN NIL

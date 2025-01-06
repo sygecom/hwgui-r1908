@@ -72,18 +72,18 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    HB_SYMBOL_UNUSED(lCentered)
 
    DEFAULT lShow := .T.
-   lMinimized := !Empty(lMinimized) .AND. lMinimized .AND. Hwg_BitAnd(::style, WS_MINIMIZE) != 0
-   lMaximized := !Empty(lMaximized) .AND. lMaximized .AND. (Hwg_BitAnd(::style, WS_MAXIMIZE) != 0 .OR. ;
-      Hwg_BitAnd(::style, WS_SIZEBOX) != 0)
-   lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. Hwg_BitAND(::Style, DS_CENTER) != 0
+   lMinimized := !Empty(lMinimized) .AND. lMinimized .AND. hwg_BitAnd(::style, WS_MINIMIZE) != 0
+   lMaximized := !Empty(lMaximized) .AND. lMaximized .AND. (hwg_BitAnd(::style, WS_MAXIMIZE) != 0 .OR. ;
+      hwg_BitAnd(::style, WS_SIZEBOX) != 0)
+   lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. hwg_BitAND(::Style, DS_CENTER) != 0
    ::lModal := !Empty(lModal) .AND. lModal
    ::lChild := ::lModal .OR. ::lChild .OR. ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ;
       ::maxHeight > -1
-   ::lSizeBox := Hwg_BitAnd(::style, WS_SIZEBOX) != 0
+   ::lSizeBox := hwg_BitAnd(::style, WS_SIZEBOX) != 0
    ::WindowState := IIf(lMinimized, SW_SHOWMINIMIZED, IIf(lMaximized, SW_SHOWMAXIMIZED, IIf(lShow, SW_SHOWNORMAL, 0)))
 
    CreateGetList(Self)
-   // Hwg_CreateMdiChildWindow(Self)
+   // hwg_CreateMdiChildWindow(Self)
 
    ::Type := WND_MDICHILD
    ::rect := hwg_GetWindowRect(::handle)
@@ -95,14 +95,14 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ::nTop := (::oClient:nHeight - ::nHeight) / 2
    ENDIF
    ::aRectSave := {::nLeft, ::nTop, ::nwidth, ::nHeight}
-   IF Hwg_BitAND(::Style, DS_3DLOOK) > 0
+   IF hwg_BitAND(::Style, DS_3DLOOK) > 0
       //- efect  border 3d in mdichilds with no sizebox
       ::Style -= DS_3DLOOK
       l3d := .T.
    ENDIF
-   ::Style := Hwg_BitOr(::Style, WS_VISIBLE) - IIf(!lshow, WS_VISIBLE, 0) + ;
+   ::Style := hwg_BitOr(::Style, WS_VISIBLE) - IIf(!lshow, WS_VISIBLE, 0) + ;
       IIf(lMaximized .AND. !::lChild .AND. !::lModal, WS_MAXIMIZE, 0)
-   ::handle := Hwg_CreateMdiChildWindow(Self)
+   ::handle := hwg_CreateMdiChildWindow(Self)
    IF hb_IsNumeric(::TITLE) .AND. ::title == -1 // screen
       RETURN .T.
    ENDIF
@@ -159,8 +159,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
    ELSEIF PtrtoUlong(GETFOCUS()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
-      ::nFocus := ASCAN(::aControls, {|o|Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
-         Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
+      ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
+         hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
          hwg_SetFocus(::acontrols[::nFocus]:handle)
          ::nFocus := GetFocus() //get::acontrols[1]:handle
@@ -584,11 +584,11 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
       ENDIF
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF __ObjHasMsg(oWnd, "OPOPUP") .AND. oWnd:oPopup != NIL .AND. ;
-      (aMenu := Hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iItem)) != NIL .AND. aMenu[1, iItem, 1] != NIL
+      (aMenu := hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iItem)) != NIL .AND. aMenu[1, iItem, 1] != NIL
       Eval(aMenu[1, iItem, 1], wParam)
    ELSEIF iParHigh == 1 // acelerator
    ENDIF
-   IF oCtrl != NIL .AND. Hwg_BitaND(HWG_GETWINDOWSTYLE(oCtrl:handle), WS_TABSTOP) != 0 .AND. GetFocus() == oCtrl:handle
+   IF oCtrl != NIL .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(oCtrl:handle), WS_TABSTOP) != 0 .AND. GetFocus() == oCtrl:handle
       oWnd:nFocus := oCtrl:handle
    ENDIF
 

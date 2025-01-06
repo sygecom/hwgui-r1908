@@ -42,12 +42,12 @@ ENDCLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
    cTooltip, tcolor, bColor, bGFocus) CLASS HButton
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON + BS_NOTIFY)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON + BS_NOTIFY)
 
    ::title := cCaption
    ::bClick := bClick
    ::bGetFocus := bGFocus
-   ::lFlat := Hwg_BitAND(nStyle, BS_FLAT) != 0
+   ::lFlat := hwg_BitAND(nStyle, BS_FLAT) != 0
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 90, nWidth), ;
       IIf(nHeight == NIL, 30, nHeight), oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor)
@@ -284,7 +284,7 @@ METHOD NoteCaption(cNote) CLASS HButton         //*
 //#DEFINE BCM_SETNOTE  0x00001609
 
    IF cNote != NIL
-      IF Hwg_BitOr(::Style, BS_COMMANDLINK) > 0
+      IF hwg_BitOr(::Style, BS_COMMANDLINK) > 0
          SendMessage(::handle, BCM_SETNOTE, 0, ANSITOUNICODE(cNote))
       ENDIF
       ::cNote := cNote

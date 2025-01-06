@@ -138,7 +138,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
    ::AddItem( Self )
    IF lType == WND_MAIN
 
-      ::handle := Hwg_InitMainWindow( ::szAppName,cTitle,cMenu,    ;
+      ::handle := hwg_InitMainWindow( ::szAppName,cTitle,cMenu,    ;
               Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),::Style,::nLeft, ;
               ::nTop,::nWidth,::nHeight )
 
@@ -146,7 +146,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
 
       // Register MDI frame  class
       // Create   MDI frame  window -> aWindows[0]
-      Hwg_InitMdiWindow( ::szAppName,cTitle,cMenu,  ;
+      hwg_InitMdiWindow( ::szAppName,cTitle,cMenu,  ;
               Iif(oIcon!=Nil,oIcon:handle,Nil),clr, ;
               nStyle,::nLeft,::nTop,::nWidth,::nHeight )
       ::handle = hwg_GetWindowHandle(1)
@@ -155,7 +155,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
 
       ::oParent := HWindow():GetMain()
       IF ISOBJECT( ::oParent )  
-          ::handle := Hwg_InitChildWindow( ::szAppName,cTitle,cMenu,    ;
+          ::handle := hwg_InitChildWindow( ::szAppName,cTitle,cMenu,    ;
              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),nStyle,::nLeft, ;
              ::nTop,::nWidth,::nHeight,::oParent:handle )
       Else
@@ -164,14 +164,14 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       Endif
 
    ELSEIF lType == WND_MDICHILD //
-      ::szAppName := "MDICHILD" + Alltrim(Str(HWG_GETNUMWINDOWS()))
+      ::szAppName := "MDICHILD" + Alltrim(Str(hwg_GETNUMWINDOWS()))
       // Registra a classe
-      Hwg_InitMdiChildWindow(::szAppName ,cTitle,cMenu,  ;
+      hwg_InitMdiChildWindow(::szAppName ,cTitle,cMenu,  ;
               Iif(oIcon!=Nil,oIcon:handle,Nil),clr, ;
               nStyle,::nLeft,::nTop,::nWidth,::nHeight )
 
        // Cria a window
-       ::handle := Hwg_CreateMdiChildWindow( Self )
+       ::handle := hwg_CreateMdiChildWindow( Self )
        // Janela pai = janela cliente MDI
        oWndClient := HWindow():FindWindow(hwg_GetWindowHandle(2))
        ::oParent := oWndClient
@@ -188,7 +188,7 @@ METHOD Activate( lShow ) CLASS HWindow
 
 
    ELSEIF ::type == WND_MDI
-      Hwg_InitClientWindow( oWnd:nMenuPos,oWnd:nLeft,oWnd:nTop+60,oWnd:nWidth,oWnd:nHeight )
+      hwg_InitClientWindow( oWnd:nMenuPos,oWnd:nLeft,oWnd:nTop+60,oWnd:nWidth,oWnd:nHeight )
 
       oWndClient := HWindow():New( 0,,,oWnd:style,oWnd:title,,oWnd:nMenuPos,oWnd:bInit,oWnd:bDestroy,oWnd:bSize, ;
                               oWnd:bPaint,oWnd:bGetFocus,oWnd:bLostFocus,oWnd:bOther )
@@ -196,11 +196,11 @@ METHOD Activate( lShow ) CLASS HWindow
       oWndClient:handle := hwg_GetWindowHandle(2)
       oWndClient:oParent:= HWindow():GetMain()
 
-      Hwg_ActivateMdiWindow( ( lShow==Nil .OR. lShow ),::hAccel )
+      hwg_ActivateMdiWindow( ( lShow==Nil .OR. lShow ),::hAccel )
    ELSEIF ::type == WND_MAIN
-      Hwg_ActivateMainWindow( ( lShow==Nil .OR. lShow ),::hAccel )
+      hwg_ActivateMainWindow( ( lShow==Nil .OR. lShow ),::hAccel )
    ELSEIF ::type == WND_CHILD
-      Hwg_ActivateChildWindow( ::handle )
+      hwg_ActivateChildWindow( ::handle )
    Else
       
    ENDIF
@@ -286,15 +286,15 @@ Local oWnd, oBtn, oitem
            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
            Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
       ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
-           ( aMenu := Hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
+           ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
            .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
-           ( aMenu := Hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
+           ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
            .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
-           ( aMenu := Hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
+           ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
            .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ENDIF
@@ -420,7 +420,7 @@ Local oWnd, oBtn, oitem
    elseif msg == WM_MENUSELECT
       if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) <> 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
          if Valtype( oWnd:menu ) == "A"
-            if ( aMenu := Hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
+            if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
                if aMenu[ 1,iCont,2 ][2] != Nil
                   WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
                else
@@ -487,15 +487,15 @@ Local oWnd, oBtn, oitem
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
       ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
-             ( aMenu := Hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
+             ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
              .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
-             ( aMenu := Hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
+             ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
              .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
-             ( aMenu := Hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
+             ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
              .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
       ENDIF
@@ -929,18 +929,18 @@ Local oWndClient
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
       ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
-         ( aMenu := Hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
+         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
          .AND. aMenu[ 1,iCont,1 ] != Nil
 
          Eval( aMenu[ 1,iCont,1 ] )
 
       ELSEIF oWnd:oPopup != Nil .AND. ;
-         ( aMenu := Hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
+         ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
          .AND. aMenu[ 1,iCont,1 ] != Nil
 
          Eval( aMenu[ 1,iCont,1 ] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
-         ( aMenu := Hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
+         ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
          .AND. aMenu[ 1,iCont,1 ] != Nil
 
          Eval( aMenu[ 1,iCont,1 ] )

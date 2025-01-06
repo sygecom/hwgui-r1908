@@ -55,7 +55,7 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD FindWindow(hWndTitle)
    METHOD GetMain()
    METHOD GetMdiMain() INLINE IIf(::GetMain() != NIL, ::aWindows[1], NIL)
-   METHOD Center() INLINE Hwg_CenterWindow(::handle, ::Type)
+   METHOD Center() INLINE hwg_CenterWindow(::handle, ::Type)
    METHOD Restore() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
    METHOD Maximize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
    METHOD Minimize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
@@ -121,10 +121,10 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit,
    IF !hb_IsNumeric(cTitle)
       ::AddItem(Self)
    ENDIF
-   IF Hwg_Bitand(nStyle, WS_HSCROLL) > 0
+   IF hwg_Bitand(nStyle, WS_HSCROLL) > 0
       ::nScrollBars++
    ENDIF
-   IF Hwg_Bitand(nStyle, WS_VSCROLL) > 0
+   IF hwg_Bitand(nStyle, WS_VSCROLL) > 0
       ::nScrollBars += 2
    ENDIF
    ::bSetForm := bSetForm

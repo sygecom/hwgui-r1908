@@ -66,14 +66,14 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
       IF ::hCursor == Nil
          ::hCursor := LoadCursor( GDK_HAND1 )
       ENDIF
-      Hwg_SetCursor( ::hCursor,::handle )
+      hwg_SetCursor( ::hCursor,::handle )
       IF ::lCaptured
          ::Drag( lParam )
       ENDIF
    ELSEIF msg == WM_PAINT
       ::Paint()
    ELSEIF msg == WM_LBUTTONDOWN
-      Hwg_SetCursor( ::hCursor,::handle )
+      hwg_SetCursor( ::hCursor,::handle )
       ::lCaptured := .T.
    ELSEIF msg == WM_LBUTTONUP
       ::DragAll()

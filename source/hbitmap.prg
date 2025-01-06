@@ -58,7 +58,7 @@ METHOD AddResource(name, nFlags, lOEM, nWidth, nHeight) CLASS HBitmap
       ENDIF
    NEXT
    IF lOEM
-      ::handle := LoadImage(0, Val(name), IMAGE_BITMAP, NIL, NIL, Hwg_bitor(nFlags, LR_SHARED))
+      ::handle := LoadImage(0, Val(name), IMAGE_BITMAP, NIL, NIL, hwg_bitor(nFlags, LR_SHARED))
    ELSE
       //::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, NIL, NIL, nFlags)
       ::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, nWidth, nHeight, nFlags)

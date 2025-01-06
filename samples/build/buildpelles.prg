@@ -39,9 +39,9 @@ FUNCTION Main()
    PRIVATE oDirec := DiskName() + ":\" + CurDir() + "\"
 
    If !File(oDirec + "BuildPelles.Ini")
-     Hwg_WriteIni("Config", "Dir_HwGUI", "C:\HwGUI", oDirec + "BuildPelles.Ini")
-     Hwg_WriteIni("Config", "Dir_HARBOUR", "C:\xHARBOUR", oDirec + "BuildPelles.Ini")
-     Hwg_WriteIni("Config", "Dir_PELLES", "C:\POCC", oDirec + "BuildPelles.Ini")
+     hwg_WriteIni("Config", "Dir_HwGUI", "C:\HwGUI", oDirec + "BuildPelles.Ini")
+     hwg_WriteIni("Config", "Dir_HARBOUR", "C:\xHARBOUR", oDirec + "BuildPelles.Ini")
+     hwg_WriteIni("Config", "Dir_PELLES", "C:\POCC", oDirec + "BuildPelles.Ini")
    EndIf
 
    PRIVATE lSaved := .F.
@@ -209,15 +209,15 @@ FUNCTION ReadBuildFile()
       RETURN NIL
    Endif
 
-   oExeName:SetText(Hwg_GetIni("Config", "ExeName", , oFolderFile))
-   oLibFolder:SetText(Hwg_GetIni("Config", "LibFolder", , oFolderFile))
-   oIncFolder:SetText(Hwg_GetIni("Config", "IncludeFolder", , oFolderFile))
-   oPrgFlag:SetText(Hwg_GetIni("Config", "PrgFlags", , oFolderFile))
-   oCFlag:SetText(Hwg_GetIni("Config", "CFlags", , oFolderFile))
-   oMainPrg:SetText(Hwg_GetIni("Config", "PrgMain", , oFolderFile))
+   oExeName:SetText(hwg_GetIni("Config", "ExeName", , oFolderFile))
+   oLibFolder:SetText(hwg_GetIni("Config", "LibFolder", , oFolderFile))
+   oIncFolder:SetText(hwg_GetIni("Config", "IncludeFolder", , oFolderFile))
+   oPrgFlag:SetText(hwg_GetIni("Config", "PrgFlags", , oFolderFile))
+   oCFlag:SetText(hwg_GetIni("Config", "CFlags", , oFolderFile))
+   oMainPrg:SetText(hwg_GetIni("Config", "PrgMain", , oFolderFile))
    
    For i := 1 to 300
-       oSel1 := Hwg_GetIni("FilesPRG", AllTrim(Str(i)), , oFolderFile)
+       oSel1 := hwg_GetIni("FilesPRG", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel1) //.or. oSel1#Nil
            AAdd(oBr1, oSel1)
        EndIf
@@ -225,21 +225,21 @@ FUNCTION ReadBuildFile()
    
    
    For i := 1 to 300
-       oSel2 := Hwg_GetIni("FilesC", AllTrim(Str(i)), , oFolderFile)
+       oSel2 := hwg_GetIni("FilesC", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel2) //.or. oSel2#Nil
            AAdd(oBr2, oSel2)
        EndIf
    Next
    
    For i := 1 to 300
-       oSel3 := Hwg_GetIni("FilesLIB", AllTrim(Str(i)), , oFolderFile)
+       oSel3 := hwg_GetIni("FilesLIB", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel3) //.or. oSel3#Nil
            AAdd(oBr3, oSel3)
        EndIf
    Next
    
    For i := 1 to 300
-       oSel4 := Hwg_GetIni("FilesRES", AllTrim(Str(i)), , oFolderFile)
+       oSel4 := hwg_GetIni("FilesRES", AllTrim(Str(i)), , oFolderFile)
        if !Empty(oSel4) //.or. oSel4#Nil
            AAdd(oBr4, oSel4)
        EndIf
@@ -275,12 +275,12 @@ FUNCTION SaveBuildFile()
         RETURN NIL
       EndIf
    EndIf
-   Hwg_WriteIni("Config", "ExeName", oExeName:GetText(), oFolderFile)
-   Hwg_WriteIni("Config", "LibFolder", oLibFolder:GetText(), oFolderFile)
-   Hwg_WriteIni("Config", "IncludeFolder", oIncFolder:GetText(), oFolderFile)
-   Hwg_WriteIni("Config", "PrgFlags", oPrgFlag:GetText(), oFolderFile)
-   Hwg_WriteIni("Config", "CFlags", oCFlag:GetText(), oFolderFile)
-   Hwg_WriteIni("Config", "PrgMain", oMainPrg:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "ExeName", oExeName:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "LibFolder", oLibFolder:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "IncludeFolder", oIncFolder:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "PrgFlags", oPrgFlag:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "CFlags", oCFlag:GetText(), oFolderFile)
+   hwg_WriteIni("Config", "PrgMain", oMainPrg:GetText(), oFolderFile)
    oNome := ""
 
    if Len(oBrowse1:aArray)>=1
@@ -288,7 +288,7 @@ FUNCTION SaveBuildFile()
 
          if !Empty(oBrowse1:aArray[i])
 
-            Hwg_WriteIni("FilesPRG", AllTrim(Str(i)), oBrowse1:aArray[i], oFolderFile)
+            hwg_WriteIni("FilesPRG", AllTrim(Str(i)), oBrowse1:aArray[i], oFolderFile)
 
          EndIf
 
@@ -300,7 +300,7 @@ FUNCTION SaveBuildFile()
    if Len(oBrowse2:aArray)>=1
       for i := 1 to Len(oBrowse2:aArray)
          if !Empty(oBrowse2:aArray[i])
-            Hwg_WriteIni("FilesC", AllTrim(Str(i)), oBrowse2:aArray[i], oFolderFile)
+            hwg_WriteIni("FilesC", AllTrim(Str(i)), oBrowse2:aArray[i], oFolderFile)
         endif
       Next
    endif
@@ -308,7 +308,7 @@ FUNCTION SaveBuildFile()
    if Len(oBrowse3:aArray)>=1
       for i := 1 to Len(oBrowse3:aArray)
          if !Empty(oBrowse3:aArray[i])
-            Hwg_WriteIni("FilesLIB", AllTrim(Str(i)), oBrowse3:aArray[i], oFolderFile)
+            hwg_WriteIni("FilesLIB", AllTrim(Str(i)), oBrowse3:aArray[i], oFolderFile)
          endif
       Next
    endif
@@ -316,7 +316,7 @@ FUNCTION SaveBuildFile()
    if Len(oBrowse4:aArray)>=1
       for i := 1 to Len(oBrowse4:aArray)
          if !Empty(oBrowse4:aArray[i])
-            Hwg_WriteIni("FilesRES", AllTrim(Str(i)), oBrowse4:aArray[i], oFolderFile)
+            hwg_WriteIni("FilesRES", AllTrim(Str(i)), oBrowse4:aArray[i], oFolderFile)
         endif
       Next
    endif
@@ -359,9 +359,9 @@ FUNCTION BuildBat()
    LOCAL vPelles
 
    If File(oDirec + "BuildPelles.Ini")
-      vHwGUI := Hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
-      vHarbour := Hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
-      vPelles := Hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
+      vHwGUI := hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
+      vHarbour := hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
+      vPelles := hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
    Else
       vHwGUI := "C:\HWGUI"
       vHarbour := "C:\Harbour"
@@ -567,9 +567,9 @@ FUNCTION BuildPoMake()
    LOCAL vPelles
 
    If File(oDirec + "BuildPelles.Ini")
-      vHwGUI := Hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
-      vHarbour := Hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
-      vPelles := Hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
+      vHwGUI := hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
+      vHarbour := hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
+      vPelles := hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
    Else
       vHwGUI := "C:\HWGUI"
       vHarbour := "C:\Harbour"

@@ -82,7 +82,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength) CLASS HComboBox
 
    IF !Empty(nDisplay) .AND. nDisplay > 0
-      nStyle := Hwg_BitOr(nStyle, CBS_NOINTEGRALHEIGHT  + WS_VSCROLL)
+      nStyle := hwg_BitOr(nStyle, CBS_NOINTEGRALHEIGHT  + WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
       nDisplay := 6
@@ -95,7 +95,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       lEdit := .F.
    ENDIF
 
-   nStyle := Hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
+   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
       bcolor)
 
@@ -198,7 +198,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
 
    //::nHeightBox := INT(22 * 0.75) //   Meets A 22'S EDITBOX
    IF !Empty(nDisplay) .AND. nDisplay > 0
-      ::Style := Hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT) //+ WS_VSCROLL)
+      ::Style := hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT) //+ WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
       nDisplay := 6

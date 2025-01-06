@@ -43,7 +43,7 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit,
    ::Type := WND_CHILD
    ::rect := hwg_GetWindowRect(::handle)
    IF ISOBJECT(::oParent)
-      ::handle := Hwg_InitChildWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), ;
+      ::handle := hwg_InitChildWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), ;
          IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
    ELSE
       hwg_MsgStop("Create Main window first !", "HChildWindow():New()")
@@ -64,8 +64,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    HB_SYMBOL_UNUSED(lModal)
 
    DEFAULT lShow TO .T.
-   lMinimized := !Empty(lMinimized) .AND. lMinimized .AND. Hwg_BitAnd(::style, WS_MINIMIZE) != 0
-   lMaximized := !Empty(lMaximized) .AND. lMaximized .AND. Hwg_BitAnd(::style, WS_MAXIMIZE) != 0
+   lMinimized := !Empty(lMinimized) .AND. lMinimized .AND. hwg_BitAnd(::style, WS_MINIMIZE) != 0
+   lMaximized := !Empty(lMaximized) .AND. lMaximized .AND. hwg_BitAnd(::style, WS_MAXIMIZE) != 0
 
    ::Type := WND_CHILD
 
@@ -83,7 +83,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ENDIF
    ENDIF
 
-   Hwg_ActivateChildWindow(lShow, ::handle, lMaximized, lMinimized)
+   hwg_ActivateChildWindow(lShow, ::handle, lMaximized, lMinimized)
 
    IF !Empty(lCentered) .AND. lCentered
       IF !Empty(::oParent)
@@ -102,8 +102,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
    ELSEIF PtrtoUlong(GETFOCUS()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
-      ::nFocus := ASCAN(::aControls, {|o|Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
-         Hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
+      ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
+         hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
          hwg_SetFocus(::acontrols[::nFocus]:handle)
          ::nFocus := GetFocus() //get::acontrols[1]:handle
@@ -341,17 +341,17 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF hb_IsArray(oWnd:menu) .AND. ;
-      (aMenu := Hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
-      IF Hwg_BitAnd(aMenu[1, iCont, 4], FLAG_CHECK) > 0
+      (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
+      IF hwg_BitAnd(aMenu[1, iCont, 4], FLAG_CHECK) > 0
          CheckMenuItem(, aMenu[1, iCont, 3], !IsCheckedMenuItem(, aMenu[1, iCont, 3]))
       ENDIF
       IF aMenu[1, iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1], iCont, iParLow)
       ENDIF
-   ELSEIF oWnd:oPopup != NIL .AND. (aMenu := Hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iCont)) != NIL ;
+   ELSEIF oWnd:oPopup != NIL .AND. (aMenu := hwg_FindMenuItem(oWnd:oPopup:aMenu, wParam, @iCont)) != NIL ;
       .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1], iCont, wParam)
-   ELSEIF oWnd:oNotifyMenu != NIL .AND. (aMenu := Hwg_FindMenuItem(oWnd:oNotifyMenu:aMenu, wParam, @iCont)) != NIL ;
+   ELSEIF oWnd:oNotifyMenu != NIL .AND. (aMenu := hwg_FindMenuItem(oWnd:oNotifyMenu:aMenu, wParam, @iCont)) != NIL ;
       .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1], iCont, wParam)
    ELSEIF wParam != SC_CLOSE .AND. wParam != SC_MINIMIZE .AND. wParam != SC_MAXIMIZE .AND. ;

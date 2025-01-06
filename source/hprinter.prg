@@ -115,10 +115,10 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
          ::cPrinterName := cPrinterName
      ELSEIF Empty(cPrinter)
          cPrinterName := HWG_GETDEFAULTPRINTER()
-         ::hDCPrn := Hwg_OpenPrinter(cPrinterName)
+         ::hDCPrn := hwg_OpenPrinter(cPrinterName)
          ::cPrinterName := cPrinterName
       ELSE
-         ::hDCPrn := Hwg_OpenPrinter(cPrinter)
+         ::hDCPrn := hwg_OpenPrinter(cPrinter)
          ::cPrinterName := cPrinter
       ENDIF
    ENDIF
@@ -127,7 +127,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       RETURN NIL
    ELSE
       if lProprierties
-         if !Hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth)
+         if !hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth)
            RETURN NIL
          endif
       endif
@@ -294,7 +294,7 @@ METHOD StartDoc(lPreview, cMetaName) CLASS HPrinter
    ELSE
       ::lPreview := .F.
       ::hDC := ::hDCPrn
-      Hwg_StartDoc(::hDC)
+      hwg_StartDoc(::hDC)
    ENDIF
    ::nPage := 0
 
@@ -303,7 +303,7 @@ METHOD StartDoc(lPreview, cMetaName) CLASS HPrinter
 METHOD EndDoc() CLASS HPrinter
 
    IF !::lPreview
-      Hwg_EndDoc(::hDC)
+      hwg_EndDoc(::hDC)
    ENDIF
    RETURN NIL
 
@@ -315,7 +315,7 @@ METHOD StartPage() CLASS HPrinter
       AAdd(::aMeta, CreateMetaFile(::hDCPrn, fname))
       ::hDC := ATail(::aMeta)
    ELSE
-      Hwg_StartPage(::hDC)
+      hwg_StartPage(::hDC)
    ENDIF
    ::nPage++
 
@@ -329,7 +329,7 @@ METHOD EndPage() CLASS HPrinter
       ::aMeta[nLen] := CloseEnhMetaFile(::aMeta[nLen])
       ::hDC := 0
    ELSE
-      Hwg_EndPage(::hDC)
+      hwg_EndPage(::hDC)
    ENDIF
    RETURN NIL
 

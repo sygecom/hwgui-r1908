@@ -94,7 +94,7 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD Del()
    METHOD FindDialog(hWndTitle, lAll)
    METHOD GetActive()
-   METHOD Center() INLINE Hwg_CenterWindow(::handle, ::Type)
+   METHOD Center() INLINE hwg_CenterWindow(::handle, ::Type)
    METHOD Restore() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
    METHOD Maximize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
    METHOD Minimize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
@@ -137,13 +137,13 @@ METHOD NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSiz
       ::HelpId := nHelpId
    END
    ::SetColor(, bColor)
-   IF Hwg_Bitand(nStyle, WS_HSCROLL) > 0
+   IF hwg_Bitand(nStyle, WS_HSCROLL) > 0
       ::nScrollBars++
    ENDIF
-   IF Hwg_Bitand(nStyle, WS_VSCROLL) > 0
+   IF hwg_Bitand(nStyle, WS_VSCROLL) > 0
       ::nScrollBars += 2
    ENDIF
-   ::lContainer := Hwg_Bitand(nStyle, DS_CONTROL) > 0
+   ::lContainer := hwg_Bitand(nStyle, DS_CONTROL) > 0
 
 RETURN Self
 
@@ -168,14 +168,14 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
       IF lNoModal == NIL .OR. !lNoModal
          ::lModal := .T.
          ::Add()
-         // Hwg_DialogBox(HWindow():GetMain():handle, Self)
-         Hwg_DialogBox(GetActiveWindow(), Self)
+         // hwg_DialogBox(HWindow():GetMain():handle, Self)
+         hwg_DialogBox(GetActiveWindow(), Self)
       ELSE
          ::lModal  := .F.
          ::handle  := 0
          ::lResult := .F.
          ::Add()
-         Hwg_CreateDialog(hParent, Self)
+         hwg_CreateDialog(hParent, Self)
          /*
          IF ::oIcon != NIL
             SendMessage(::handle, WM_SETICON, 1, ::oIcon:handle)
@@ -192,14 +192,14 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
       IF lNoModal == NIL .OR. !lNoModal
          ::lModal := .T.
          ::Add()
-         // Hwg_DlgBoxIndirect(HWindow():GetMain():handle, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
-         Hwg_DlgBoxIndirect(GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         // hwg_DlgBoxIndirect(HWindow():GetMain():handle, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         hwg_DlgBoxIndirect(GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
       ELSE
          ::lModal  := .F.
          ::handle  := 0
          ::lResult := .F.
          ::Add()
-         Hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
          IF ::WindowState > SW_HIDE
             //InvalidateRect(::handle, 1)
             //BRINGTOTOP(::handle)
@@ -785,15 +785,15 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
          oDlg:nLastKey := 0
       ENDIF
    ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. hb_IsArray(oDlg:menu) .AND. ;
-      (aMenu := Hwg_FindMenuItem(oDlg:menu, iParLow, @i)) != NIL
-      IF Hwg_BitAnd(aMenu[1, i, 4], FLAG_CHECK) > 0
+      (aMenu := hwg_FindMenuItem(oDlg:menu, iParLow, @i)) != NIL
+      IF hwg_BitAnd(aMenu[1, i, 4], FLAG_CHECK) > 0
          CheckMenuItem(, aMenu[1, i, 3], !IsCheckedMenuItem(, aMenu[1, i, 3]))
       ENDIF
       IF hb_IsBlock(aMenu[1, i, 1])
          Eval(aMenu[1, i, 1], i, iParlow)
       ENDIF
    ELSEIF __ObjHasMsg(oDlg, "OPOPUP") .AND. hb_IsObject(oDlg:oPopup) .AND. ;
-      (aMenu := Hwg_FindMenuItem(oDlg:oPopup:aMenu, wParam, @i)) != NIL .AND. hb_IsBlock(aMenu[1, i, 1])
+      (aMenu := hwg_FindMenuItem(oDlg:oPopup:aMenu, wParam, @i)) != NIL .AND. hb_IsBlock(aMenu[1, i, 1])
       Eval(aMenu[1, i, 1], i, wParam)
    ENDIF
    IF !Empty(oDlg:nInitFocus)
@@ -965,7 +965,7 @@ STATIC FUNCTION onPspNotify(oDlg, wParam, lParam)
          oDlg:lSuspendMsgsHandling := .F.
       ENDIF
       // 'res' should be 0(Ok) or -1
-      Hwg_SetDlgResult(oDlg:handle, IIf(res, 0, -1))
+      hwg_SetDlgResult(oDlg:handle, IIf(res, 0, -1))
       RETURN 1
 
    CASE PSN_KILLACTIVE //.AND. !oDlg:aEvdisable
@@ -975,7 +975,7 @@ STATIC FUNCTION onPspNotify(oDlg, wParam, lParam)
          oDlg:lSuspendMsgsHandling := .F.
       ENDIF
       // 'res' should be 0(Ok) or 1
-      Hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 1))
+      hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 1))
       RETURN 1
 
    //CASE PSN_RESET
@@ -985,7 +985,7 @@ STATIC FUNCTION onPspNotify(oDlg, wParam, lParam)
          res := Eval(oDlg:bDestroy, oDlg)
       ENDIF
       // 'res' should be 0(Ok) or 2
-      Hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 2))
+      hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 2))
       IF res
          oDlg:lResult := .T.
       ENDIF
@@ -999,7 +999,7 @@ STATIC FUNCTION onPspNotify(oDlg, wParam, lParam)
 
       IF hb_IsBlock(oDlg:bOther)
          res := Eval(oDlg:bOther, oDlg, WM_NOTIFY, 0, lParam)
-         Hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 1))
+         hwg_SetDlgResult(oDlg:handle, IIf(res, 0, 1))
          RETURN 1
       ENDIF
 
@@ -1085,7 +1085,7 @@ FUNCTION EndDialog(handle)
       ENDIF
    ENDIF
 
-RETURN IIf(oDlg:lModal, Hwg_EndDialog(oDlg:handle), DestroyWindow(oDlg:handle))
+RETURN IIf(oDlg:lModal, hwg_EndDialog(oDlg:handle), DestroyWindow(oDlg:handle))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -1170,9 +1170,9 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE Hwg_ExitProcedure
+EXIT PROCEDURE hwg_ExitProcedure
 
-   Hwg_ExitProc()
+   hwg_ExitProc()
 
 RETURN
 
