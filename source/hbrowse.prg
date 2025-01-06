@@ -3922,7 +3922,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
          // x1 += aCoors[1]
          // y1 += aCoors[2]
 
-         aCoors := ClientToScreen(::handle, x1, y1)
+         aCoors := hwg_ClientToScreen(::handle, x1, y1)
          x1 := aCoors[1]
          y1 := aCoors[2] + 1
 

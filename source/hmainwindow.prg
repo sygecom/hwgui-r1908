@@ -249,7 +249,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          IF oMdi:lModal
             xPos := hwg_LOWORD(lParam)
             yPos := hwg_HIWORD(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
-            aCoors := ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
+            aCoors := hwg_ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF (!PtInRect(aCoors, {xPos, yPos}))
                hwg_MsgBeep()
                FOR i := 1 TO 6
@@ -305,7 +305,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          IF oMdi:lModal
             xPos := hwg_LOWORD(lParam)
             yPos := hwg_HIWORD(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
-            aCoors := ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
+            aCoors := hwg_ScreenToClient(::handle, GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF !PtInRect(aCoors, {xPos, yPos})
                hwg_MsgBeep()
                FOR i := 1 TO 6

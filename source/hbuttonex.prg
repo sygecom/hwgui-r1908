@@ -278,7 +278,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF wParam == MK_LBUTTON
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
-         acoor := ClientToScreen(::handle, pt[1], pt[2])
+         acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
@@ -371,7 +371,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF ::m_bIsToggle
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
-         acoor := ClientToScreen(::handle, pt[1], pt[2])
+         acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
 
          rectButton := GetWindowRect(::handle)
 
@@ -480,7 +480,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF wParam == MK_LBUTTON
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
-         acoor := ClientToScreen(::handle, pt[1], pt[2])
+         acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
@@ -585,7 +585,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF ::m_bIsToggle
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
-         acoor := ClientToScreen(::handle, pt[1], pt[2])
+         acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
@@ -1121,7 +1121,7 @@ METHOD PAINTBK(hdc) CLASS HBUTTONEx
    rect := GetClientRect(::handle)
 
    rect1 := GetWindowRect(::handle)
-   ScreenToClient(::oparent:handle, rect1)
+   hwg_ScreenToClient(::oparent:handle, rect1)
 
    IF ValType(::m_dcBk) == "U"
       ::m_dcBk := hdc():New()

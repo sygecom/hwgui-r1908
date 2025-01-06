@@ -37,7 +37,7 @@ Local aCoor
       ENDIF
       Hwg_trackmenu( ::handle,xPos,yPos,oWnd:handle )
    ELSE
-      aCoor := ClientToScreen( oWnd:handle,xPos,yPos )
+      aCoor := hwg_ClientToScreen( oWnd:handle,xPos,yPos )
       Hwg_trackmenu( ::handle,aCoor[1],aCoor[2],oWnd:handle )
    ENDIF
 
