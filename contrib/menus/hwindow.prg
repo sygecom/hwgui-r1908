@@ -280,8 +280,8 @@ Local oWnd, oBtn, oitem
           nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
           SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
       endif
-      iParHigh := HiWord( wParam )
-      iParLow := LoWord( wParam )
+      iParHigh := hwg_HIWORD( wParam )
+      iParLow := hwg_LOWORD( wParam )
       IF oWnd:aEvents != Nil .AND. ;
            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
            Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
@@ -314,14 +314,14 @@ Local oWnd, oBtn, oitem
          FOR each oItem in aControls
              IF oItem:bSize != Nil
                 Eval( oItem:bSize, ;
-                 oItem, LoWord( lParam ), HiWord( lParam ) )
+                 oItem, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #else
          FOR iCont := 1 TO nControls
              IF aControls[iCont]:bSize != Nil
                 Eval( aControls[iCont]:bSize, ;
-                 aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
+                 aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #endif
@@ -329,7 +329,7 @@ Local oWnd, oBtn, oitem
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if ISBLOCK( oWnd:bSize )
-          Eval( oWnd:bSize, oWnd, LoWord( lParam ), HiWord( lParam ) )
+          Eval( oWnd:bSize, oWnd, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
@@ -418,9 +418,9 @@ Local oWnd, oBtn, oitem
           endif
       endif
    elseif msg == WM_MENUSELECT
-      if NumAnd( HiWord(wParam), MF_HILITE ) <> 0 // HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
+      if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) <> 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
          if Valtype( oWnd:menu ) == "A"
-            if ( aMenu := Hwg_FindMenuItem( oWnd:menu, LoWord(wParam), @iCont ) ) != Nil
+            if ( aMenu := Hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
                if aMenu[ 1,iCont,2 ][2] != Nil
                   WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
                else
@@ -481,8 +481,8 @@ Local oWnd, oBtn, oitem
           nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
           SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
       endif
-      iParHigh := HiWord( wParam )
-      iParLow := LoWord( wParam )
+      iParHigh := hwg_HIWORD( wParam )
+      iParLow := hwg_LOWORD( wParam )
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
@@ -516,14 +516,14 @@ Local oWnd, oBtn, oitem
          FOR each oItem in aControls
              IF oItem:bSize != Nil
                 Eval( oItem:bSize, ;
-                 oItem, LoWord( lParam ), HiWord( lParam ) )
+                 oItem, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #else
          FOR iCont := 1 TO nControls
              IF aControls[iCont]:bSize != Nil
                 Eval( aControls[iCont]:bSize, ;
-                 aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
+                 aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #endif
@@ -531,7 +531,7 @@ Local oWnd, oBtn, oitem
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if oWnd:bSize != Nil
-          Eval( oWnd:bSize, oWnd, LoWord( lParam ), HiWord( lParam ) )
+          Eval( oWnd:bSize, oWnd, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
@@ -679,8 +679,8 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
              SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
           endif
       endif
-      iParHigh := HiWord( wParam )
-      iParLow := LoWord( wParam )
+      iParHigh := hwg_HIWORD( wParam )
+      iParLow := hwg_LOWORD( wParam )
       IF oWnd:aEvents != Nil .AND. ;
             ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ] )
@@ -715,14 +715,14 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
                FOR EACH oItem in aControls
                    IF oItem:bSize != Nil
                       Eval( oItem:bSize, ;
-                       oItem, LoWord( lParam ), HiWord( lParam ) )
+                       oItem, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
                    ENDIF
                NEXT
          #else
                FOR iCont := 1 TO nControls
                    IF aControls[iCont]:bSize != Nil
                       Eval( aControls[iCont]:bSize, ;
-                       aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
+                       aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
                    ENDIF
                NEXT
          #endif
@@ -923,8 +923,8 @@ Local oWndClient
           nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
           SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
       endif
-      iParHigh := HiWord( wParam )
-      iParLow := LoWord( wParam )
+      iParHigh := hwg_HIWORD( wParam )
+      iParLow := hwg_LOWORD( wParam )
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
@@ -962,14 +962,14 @@ Local oWndClient
          FOR each oItem in aControls
              IF oItem:bSize != Nil
                 Eval( oItem:bSize, ;
-                 oItem, LoWord( lParam ), HiWord( lParam ) )
+                 oItem, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #else
          FOR iCont := 1 TO nControls
              IF aControls[iCont]:bSize != Nil
                 Eval( aControls[iCont]:bSize, ;
-                 aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
+                 aControls[iCont], hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
              ENDIF
          NEXT
       #endif
@@ -977,7 +977,7 @@ Local oWndClient
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if oWnd:bSize != Nil
-          Eval( oWnd:bSize, oWnd, LoWord( lParam ), HiWord( lParam ) )
+          Eval( oWnd:bSize, oWnd, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )

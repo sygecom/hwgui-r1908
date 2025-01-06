@@ -399,7 +399,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
       ELSEIF msg == WM_KEYUP
          ProcKeyList(Self, wParam)        //working in MDICHILD AND DIALOG
       ELSEIF msg == WM_COMMAND .AND. ::lEdit .AND. !::ldropshow
-         IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. HiWord(wParam) == 1
+         IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
             RETURN 0
         ENDIF
       ELSEIF msg == CB_GETDROPPEDSTATE .AND. !::ldropshow
@@ -504,7 +504,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
       CASE WM_COMMAND
          IF ::lEdit .AND. !::ldropshow
-            IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. HiWord(wParam) == 1
+            IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
                RETURN 0
             ENDIF
          ENDIF

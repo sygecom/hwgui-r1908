@@ -239,12 +239,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          RETURN 0
       ENDIF
    ELSEIF msg == WM_MENUCHAR
-      RETURN onSysCommand(Self, SC_KEYMENU, LoWord(wParam))
+      RETURN onSysCommand(Self, SC_KEYMENU, hwg_LOWORD(wParam))
     ELSEIF msg == WM_MOVE //.OR. msg == 0x216
       aCoors := GetWindowRect(::handle)
       ::nLeft := aCoors[1]
          ::nTop  := aCoors[2]
-    ELSEIF msg == WM_UPDATEUISTATE .AND. HIWORD(wParam) != UISF_HIDEFOCUS
+    ELSEIF msg == WM_UPDATEUISTATE .AND. hwg_HIWORD(wParam) != UISF_HIDEFOCUS
       // prevent the screen flicker
        RETURN 1
    ELSEIF !::lActivated .AND. msg == WM_NCPAINT
@@ -305,7 +305,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       EXIT
 
    CASE WM_MENUCHAR
-      RETURN onSysCommand(Self, SC_KEYMENU, LoWord(wParam))
+      RETURN onSysCommand(Self, SC_KEYMENU, hwg_LOWORD(wParam))
 
    CASE WM_MOVE //.OR. msg == 0x216
       aCoors := GetWindowRect(::handle)
@@ -314,7 +314,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       EXIT
 
    CASE WM_UPDATEUISTATE
-      IF HIWORD(wParam) != UISF_HIDEFOCUS
+      IF hwg_HIWORD(wParam) != UISF_HIDEFOCUS
          // prevent the screen flicker
          RETURN 1
       ENDIF
@@ -674,8 +674,8 @@ RETURN 0
 
 FUNCTION DlgCommand(oDlg, wParam, lParam)
    
-   LOCAL iParHigh := HIWORD(wParam)
-   LOCAL iParLow := LOWORD(wParam)
+   LOCAL iParHigh := hwg_HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
    LOCAL aMenu
    LOCAL i
    LOCAL hCtrl
@@ -829,7 +829,7 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    //HB_SYMBOL_UNUSED(wParam)
 
    IF hb_IsObject(oDlg:oEmbedded)
-      oDlg:oEmbedded:Resize(LOWORD(lParam), HIWORD(lParam))
+      oDlg:oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    // VERIFY MIN SIZES AND MAX SIZES
    /*
@@ -844,8 +844,8 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    nH1 := oDlg:nHeight
    //aControls := GetWindowRect(oDlg:handle)
    IF wParam != 1 //SIZE_MINIMIZED
-      oDlg:nWidth := LOWORD(lParam)  //aControls[3]-aControls[1]
-      oDlg:nHeight := HIWORD(lParam) //aControls[4]-aControls[2]
+      oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
+      oDlg:nHeight := hwg_HIWORD(lParam) //aControls[4]-aControls[2]
    ENDIF
    // SCROLL BARS code here.
     IF oDlg:nScrollBars > -1 .AND. oDlg:lAutoScroll
@@ -854,14 +854,14 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    ENDIF
 
    IF hb_IsBlock(oDlg:bSize) .AND. (oDlg:oParent == NIL .OR. !__ObjHasMsg(oDlg:oParent, "ACONTROLS"))
-      Eval(oDlg:bSize, oDlg, LOWORD(lParam), HIWORD(lParam))
+      Eval(oDlg:bSize, oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    aControls := oDlg:aControls
    IF aControls != NIL .AND. !Empty(oDlg:Rect)
       oDlg:Anchor(oDlg, nW1, nH1, oDlg:nWidth, oDlg:nHeight)
       FOR iCont := 1 TO Len(aControls)
          IF hb_IsBlock(aControls[iCont]:bSize)
-            Eval(aControls[iCont]:bSize, aControls[iCont], LOWORD(lParam), HIWORD(lParam), nW1, nH1)
+            Eval(aControls[iCont]:bSize, aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam), nW1, nH1)
          ENDIF
       NEXT
    ENDIF
@@ -872,8 +872,8 @@ RETURN 0
 
 STATIC FUNCTION onActivate(oDlg, wParam, lParam)
 
-   LOCAL iParLow := LOWORD(wParam)
-   LOCAL iParHigh := HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
+   LOCAL iParHigh := hwg_HIWORD(wParam)
 
    //HB_SYMBOL_UNUSED(lParam)
 

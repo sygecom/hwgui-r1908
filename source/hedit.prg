@@ -249,12 +249,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
               ::lFirst := IIf(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
             cClipboardText := GETCLIPBOARDTEXT()
             IF !Empty(cClipboardText)
-               nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+               nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
                SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
                FOR nPos := 1 to Len(cClipboardText)
                   ::GetApplyKey(SubStr(cClipboardText, nPos, 1))
                NEXT
-               nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+               nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
                ::title := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
                SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
               ENDIF
@@ -467,10 +467,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
 
      // multiline
         IF msg == WM_SETFOCUS
-         //nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+         //nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
          PostMessage(::handle, EM_SETSEL, 0, 0)
       ELSEIF msg == WM_MOUSEWHEEL
-         nPos := HIWORD(wParam)
+         nPos := hwg_HIWORD(wParam)
          nPos := IIf(nPos > 32768, nPos - 65535, nPos)
          SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
          //SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
@@ -779,7 +779,7 @@ METHOD KeyRight(nPos) CLASS HEdit
    LOCAL newpos
 
    IF nPos == NIL
-      nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+      nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
    ENDIF
    IF ::cPicMask == NIL .OR. Empty(::cPicMask)
       SendMessage(::handle, EM_SETSEL, nPos, nPos)
@@ -813,7 +813,7 @@ RETURN 0
 METHOD KeyLeft(nPos) CLASS HEdit
 
    IF nPos == NIL
-      nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+      nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
    ENDIF
    IF ::cPicMask == NIL .OR. Empty(::cPicMask)
       SendMessage(::handle, EM_SETSEL, nPos - 2, nPos - 2)
@@ -837,8 +837,8 @@ RETURN 0
 METHOD DeleteChar(lBack) CLASS HEdit
    
    LOCAL nSel := SendMessage(::handle, EM_GETSEL, 0, 0)
-   LOCAL nPosEnd := HIWORD(nSel)
-   LOCAL nPosStart := LOWORD(nSel)
+   LOCAL nPosEnd := hwg_HIWORD(nSel)
+   LOCAL nPosStart := hwg_LOWORD(nSel)
    LOCAL nGetLen := Len(::cPicMask)
    LOCAL cBuf
    LOCAL nPosEdit
@@ -1081,7 +1081,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
    ENDIF
 
    x := SendMessage(::handle, EM_GETSEL, 0, 0)
-   IF HIWORD(x) != LOWORD(x)
+   IF hwg_HIWORD(x) != hwg_LOWORD(x)
       ::DeleteChar(.F.)
    ENDIF
    ::title := hwg_GetEditText(::oParent:handle, ::id)
@@ -1130,12 +1130,12 @@ METHOD GetApplyKey(cKey) CLASS HEdit
          ENDIF
          nPos := 1
       ELSE
-         nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+         nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
       ENDIF
       cKey := ::Input(cKey, nPos)
       IF cKey != NIL
          ::SetGetUpdated()
-         IF SET(_SET_INSERT) .OR. HIWORD(x) != LOWORD(x)
+         IF SET(_SET_INSERT) .OR. hwg_HIWORD(x) != hwg_LOWORD(x)
             IF ::lPicComplex
                nGetLen := Len(::cPicMask)
                FOR nLen := 0 TO nGetLen
@@ -1219,7 +1219,7 @@ METHOD SelStart(Start) CLASS HEdit
       ::nSelLength := 0
       SendMessage(::handle, EM_SETSEL, start, start)
    ELSEIF ::nSelLength == 0
-      nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0))
+      nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0))
       ::nSelStart := nPos
    ENDIF
 
@@ -1413,7 +1413,7 @@ RETURN .T.
 
 METHOD onChange(lForce) CLASS HEdit
 
-   //-LOCAL nPos := HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+   //-LOCAL nPos := hwg_HIWORD(SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
    LOCAL vari
 
    IF !SelfFocus(::handle) .AND. Empty(lForce)

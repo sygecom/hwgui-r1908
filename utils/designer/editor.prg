@@ -270,7 +270,7 @@ Return Nil
 
 Static Function EnChange( nEvent )
 Local pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
-Local nLength, pos1 := Loword(pos)+1, pos2 := Hiword(pos)+1
+Local nLength, pos1 := hwg_LOWORD(pos)+1, pos2 := hwg_HIWORD(pos)+1
 Local cBuffer, nLine, arr := {}, nLinePos
 Local oTheme := HDTheme():aThemes[HDTheme():nSelected]
 Local  nEditPos1, nEditPos2

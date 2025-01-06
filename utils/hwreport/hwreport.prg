@@ -307,15 +307,15 @@ Static Function MessagesProc( oWnd, msg, wParam, lParam )
 Local i, aItem, hWnd := oWnd:handle
 
    IF msg == WM_VSCROLL
-      Vscroll( hWnd,LoWord( wParam ),HiWord( wParam ) )
+      Vscroll( hWnd,hwg_LOWORD( wParam ),hwg_HIWORD( wParam ) )
    ELSEIF msg == WM_MOUSEMOVE
-      MouseMove( wParam, LoWord( lParam ), HiWord( lParam ) )
+      MouseMove( wParam, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
    ELSEIF msg == WM_LBUTTONDOWN
-      LButtonDown( LoWord( lParam ), HiWord( lParam ) )
+      LButtonDown( hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
    ELSEIF msg == WM_LBUTTONUP
-      LButtonUp( LoWord( lParam ), HiWord( lParam ) )
+      LButtonUp( hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
    ELSEIF msg == WM_LBUTTONDBLCLK
-      LButtonDbl( LoWord( lParam ), HiWord( lParam ) )
+      LButtonDbl( hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
    ELSEIF msg == WM_KEYDOWN
       IF wParam == 46
          DeleteItem()

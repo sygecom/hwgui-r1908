@@ -23,8 +23,8 @@ FUNCTION Main()
 
 STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
 
-   LOCAL nScrollCode := LOWORD(wParam)
-   LOCAL nNewPos := HIWORD(wParam)
+   LOCAL nScrollCode := hwg_LOWORD(wParam)
+   LOCAL nNewPos := hwg_HIWORD(wParam)
    LOCAL x
    LOCAL y
    LOCAL xx
@@ -96,7 +96,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
    ELSEIF msg == WM_MOUSEWHEEL
       yy := y
       SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
-      IF HIWORD(wParam) > 32678
+      IF hwg_HIWORD(wParam) > 32678
          IF ++y > nIncr
             y := nIncr
          ENDIF

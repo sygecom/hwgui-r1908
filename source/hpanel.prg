@@ -168,7 +168,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
       ENDIF
    ELSEIF msg == WM_SIZE
       IF ::oEmbedded != NIL
-         ::oEmbedded:Resize(Loword(lParam), Hiword(lParam))
+         ::oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       ENDIF
 
       ::RedefineScrollbars()

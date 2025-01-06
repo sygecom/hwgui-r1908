@@ -454,7 +454,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
         strinsert := "INSERT OFF "
      endif
     // pega linha e coluna
-     coluna := Loword(SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
+     coluna := hwg_LOWORD(SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
      Linha := SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
      coluna := coluna - SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
      //
@@ -488,7 +488,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
             hwg_SetFocus(aControls[hWnd]:Handle )
              //
              pos := SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
-             pos1 := Loword(pos)
+             pos1 := hwg_LOWORD(pos)
              //
              //hwg_MsgInfo(str(pos1))
              //hwg_MsgInfo(str(Len(texto)))

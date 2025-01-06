@@ -225,7 +225,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    LOCAL aCoors := GetWindowRect(oWnd:handle)
 
    IF oWnd:oEmbedded != NIL
-      oWnd:oEmbedded:Resize(LOWORD(lParam), HIWORD(lParam))
+      oWnd:oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    //InvalidateRect(oWnd:handle, 0)
    oWnd:Super:onEvent(WM_SIZE, wParam, lParam)
@@ -234,7 +234,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    oWnd:nHeight := aCoors[4] - aCoors[2]
 
    IF hb_IsBlock(oWnd:bSize)
-      Eval(oWnd:bSize, oWnd, LOWORD(lParam), HIWORD(lParam))
+      Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    IF oWnd:Type == WND_MDI .AND. Len(HWindow():aWindows) > 1
       aCoors := GetClientRect(oWnd:handle)
@@ -335,8 +335,8 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
       nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 2]:handle
       SendMessage(HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0)
    ENDIF
-   iParHigh := HIWORD(wParam)
-   iParLow := LOWORD(wParam)
+   iParHigh := hwg_HIWORD(wParam)
+   iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
@@ -586,8 +586,8 @@ RETURN -1
 
 STATIC FUNCTION onActivate(oWin, wParam, lParam)
 
-   LOCAL iParLow := LOWORD(wParam)
-   LOCAL iParHigh := HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
+   LOCAL iParHigh := hwg_HIWORD(wParam)
 
    HB_SYMBOL_UNUSED(lParam)
 

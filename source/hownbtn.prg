@@ -522,8 +522,8 @@ METHOD MouseMove(wParam, lParam) CLASS HOwnButton
    HB_SYMBOL_UNUSED(wParam)
 
    IF ::state != OBTN_INIT
-      xPos := LOWORD(lParam)
-      yPos := HIWORD(lParam)
+      xPos := hwg_LOWORD(lParam)
+      yPos := hwg_HIWORD(lParam)
       IF xPos > ::nWidth .OR. yPos > ::nHeight
          ReleaseCapture()
          res := .T.

@@ -107,9 +107,9 @@ STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
    LOCAL aItem
 
    IF msg == WM_VSCROLL
-      Vscroll(oWnd, LoWord(wParam), HiWord(wParam))
+      Vscroll(oWnd, hwg_LOWORD(wParam), hwg_HIWORD(wParam))
    ELSEIF msg == WM_HSCROLL
-      Hscroll(oWnd, LoWord(wParam), HiWord(wParam))
+      Hscroll(oWnd, hwg_LOWORD(wParam), hwg_HIWORD(wParam))
    ELSEIF msg == WM_KEYUP
       IF wParam == 40        // Down
         VScroll(oWnd, SB_LINEDOWN)

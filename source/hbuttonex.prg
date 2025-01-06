@@ -276,8 +276,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
    ELSEIF msg == WM_MOUSEMOVE
       IF wParam == MK_LBUTTON
-         pt[1] := LOWORD(lParam)
-         pt[2] := HIWORD(lParam)
+         pt[1] := hwg_LOWORD(lParam)
+         pt[2] := hwg_HIWORD(lParam)
          acoor := ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
@@ -369,8 +369,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ::m_bSent := .F.
       ENDIF
       IF ::m_bIsToggle
-         pt[1] := LOWORD(lParam)
-         pt[2] := HIWORD(lParam)
+         pt[1] := hwg_LOWORD(lParam)
+         pt[2] := hwg_HIWORD(lParam)
          acoor := ClientToScreen(::handle, pt[1], pt[2])
 
          rectButton := GetWindowRect(::handle)
@@ -478,8 +478,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
    CASE WM_MOUSEMOVE
       IF wParam == MK_LBUTTON
-         pt[1] := LOWORD(lParam)
-         pt[2] := HIWORD(lParam)
+         pt[1] := hwg_LOWORD(lParam)
+         pt[2] := hwg_HIWORD(lParam)
          acoor := ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
@@ -583,8 +583,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ::m_bSent := .F.
       ENDIF
       IF ::m_bIsToggle
-         pt[1] := LOWORD(lParam)
-         pt[2] := HIWORD(lParam)
+         pt[1] := hwg_LOWORD(lParam)
+         pt[2] := hwg_HIWORD(lParam)
          acoor := ClientToScreen(::handle, pt[1], pt[2])
          rectButton := GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)

@@ -551,9 +551,9 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
 
    IF msg == WM_VSCROLL
       setscrollrange(oCanvas:handle, SB_VERT, 1, 20)
-      wmsg := LOWORD(wParam)
+      wmsg := hwg_LOWORD(wParam)
       IF wmsg == SB_THUMBPOSITION .OR. wmsg == SB_THUMBTRACK
-         nPosVert := HIWORD(wParam)
+         nPosVert := hwg_HIWORD(wParam)
       ELSEIF wmsg == SB_LINEUP
          nPosVert := nPosVert - 1
          IF nPosVert < 1
@@ -581,9 +581,9 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
 
    IF msg == WM_HSCROLL
       setscrollrange(oCanvas:handle, SB_HORZ, 1, 20)
-      wmsg := LOWORD(wParam)
+      wmsg := hwg_LOWORD(wParam)
       IF wmsg == SB_THUMBPOSITION .OR. wmsg == SB_THUMBTRACK
-         nPosHorz := HIWORD(wParam)
+         nPosHorz := hwg_HIWORD(wParam)
       ELSEIF wmsg == SB_LINEUP
          nPosHorz := nPosHorz - 1
          IF nPosHorz < 1
@@ -611,7 +611,7 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
 
    IF msg == WM_MOUSEWHEEL
       SetScrollRange(oCanvas:handle, SB_VERT, 1, 20)
-      IF HIWORD(wParam) > 32678
+      IF hwg_HIWORD(wParam) > 32678
          IF ++nPosVert > 20
             nPosVert := 20
          ENDIF

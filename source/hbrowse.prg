@@ -542,10 +542,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       // moved to first
       IF msg == WM_MOUSEWHEEL .AND. !::oParent:lSuspendMsgsHandling
             ::isMouseOver := .F.
-            ::MouseWheel(LOWORD(wParam), ;
-                    IIf(HIWORD(wParam) > 32768, ;
-                        HIWORD(wParam) - 65535, HIWORD(wParam)), ;
-                    LOWORD(lParam), HIWORD(lParam))
+            ::MouseWheel(hwg_LOWORD(wParam), ;
+                    IIf(hwg_HIWORD(wParam) > 32768, ;
+                        hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
+                    hwg_LOWORD(lParam), hwg_HIWORD(lParam))
          //RETURN 0 because bother is not run
       ENDIF
       //
@@ -850,7 +850,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ::ButtonRDown(lParam)
       ELSEIF msg == WM_MOUSEMOVE .AND.!::oParent:lSuspendMsgsHandling
          IF ::nWheelPress > 0
-            ::MouseWheel(LOWORD(wParam), ::nWheelPress - lParam)
+            ::MouseWheel(hwg_LOWORD(wParam), ::nWheelPress - lParam)
          ELSE
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
@@ -885,10 +885,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ENDIF
       /*
       ELSEIF msg == WM_MOUSEWHEEL
-         ::MouseWheel(LOWORD(wParam), ;
-                    IIf(HIWORD(wParam) > 32768, ;
-                        HIWORD(wParam) - 65535, HIWORD(wParam)), ;
-                    LOWORD(lParam), HIWORD(lParam))
+         ::MouseWheel(hwg_LOWORD(wParam), ;
+                    IIf(hwg_HIWORD(wParam) > 32768, ;
+                        hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
+                    hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       */
       ELSEIF msg == WM_DESTROY
         IF hb_IsPointer(::hTheme)
@@ -932,8 +932,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_MOUSEWHEEL
       IF !::oParent:lSuspendMsgsHandling
          ::isMouseOver := .F.
-         ::MouseWheel(LOWORD(wParam), IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam)), ;
-            LOWORD(lParam), HIWORD(lParam))
+         ::MouseWheel(hwg_LOWORD(wParam), IIf(hwg_HIWORD(wParam) > 32768, hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
+            hwg_LOWORD(lParam), hwg_HIWORD(lParam))
          //RETURN 0 because bother is not run
       ENDIF
       EXIT
@@ -1262,7 +1262,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_MOUSEMOVE
       IF !::oParent:lSuspendMsgsHandling
          IF ::nWheelPress > 0
-            ::MouseWheel(LOWORD(wParam), ::nWheelPress - lParam)
+            ::MouseWheel(hwg_LOWORD(wParam), ::nWheelPress - lParam)
          ELSE
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
@@ -1304,8 +1304,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
       EXIT
 
    //CASE WM_MOUSEWHEEL
-   //   ::MouseWheel(LOWORD(wParam), IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam)), ;
-   //      LOWORD(lParam), HIWORD(lParam))
+   //   ::MouseWheel(hwg_LOWORD(wParam), IIf(hwg_HIWORD(wParam) > 32768, hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
+   //      hwg_LOWORD(lParam), hwg_HIWORD(lParam))
 
    CASE WM_DESTROY
      IF hb_IsPointer(::hTheme)
@@ -3004,7 +3004,7 @@ RETURN NIL
 #if 0 // old code for reference (to be deleted)
 METHOD DoVScroll(wParam) CLASS HBrowse
    
-   LOCAL nScrollCode := LOWORD(wParam)
+   LOCAL nScrollCode := hwg_LOWORD(wParam)
 
    IF nScrollCode == SB_LINEDOWN
       ::LINEDOWN(.T.)
@@ -3022,12 +3022,12 @@ METHOD DoVScroll(wParam) CLASS HBrowse
    ELSEIF nScrollCode == SB_THUMBPOSITION .OR. nScrollCode == SB_THUMBTRACK
       ::SetFocus()
       IF hb_IsBlock(::bScrollPos)
-         Eval(::bScrollPos, Self, nScrollCode, .F., HIWORD(wParam))
+         Eval(::bScrollPos, Self, nScrollCode, .F., hwg_HIWORD(wParam))
       ELSE
          IF (::Alias)->(IndexOrd()) == 0              // sk
-            (::Alias)->(DBGoTo(HIWORD(wParam)))   // sk
+            (::Alias)->(DBGoTo(hwg_HIWORD(wParam)))   // sk
          ELSE
-            (::Alias)->(OrdKeyGoTo(HIWORD(wParam))) // sk
+            (::Alias)->(OrdKeyGoTo(hwg_HIWORD(wParam))) // sk
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
@@ -3040,7 +3040,7 @@ RETURN 0
 #else
 METHOD DoVScroll(wParam) CLASS HBrowse
 
-   LOCAL nScrollCode := LOWORD(wParam)
+   LOCAL nScrollCode := hwg_LOWORD(wParam)
 
    SWITCH nScrollCode
    CASE SB_LINEDOWN
@@ -3065,12 +3065,12 @@ METHOD DoVScroll(wParam) CLASS HBrowse
    CASE SB_THUMBTRACK
       ::SetFocus()
       IF hb_IsBlock(::bScrollPos)
-         Eval(::bScrollPos, Self, nScrollCode, .F., HIWORD(wParam))
+         Eval(::bScrollPos, Self, nScrollCode, .F., hwg_HIWORD(wParam))
       ELSE
          IF (::Alias)->(IndexOrd()) == 0            // sk
-            (::Alias)->(DBGoTo(HIWORD(wParam)))     // sk
+            (::Alias)->(DBGoTo(hwg_HIWORD(wParam)))     // sk
          ELSE
-            (::Alias)->(OrdKeyGoTo(HIWORD(wParam))) // sk
+            (::Alias)->(OrdKeyGoTo(hwg_HIWORD(wParam))) // sk
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
@@ -3087,7 +3087,7 @@ RETURN 0
 #if 0 // old code for reference (to be deleted)
 METHOD DoHScroll(wParam) CLASS HBrowse
    
-   LOCAL nScrollCode := LOWORD(wParam)
+   LOCAL nScrollCode := hwg_LOWORD(wParam)
    LOCAL nPos
    LOCAL oldLeft := ::nLeftCol
    LOCAL nLeftCol
@@ -3122,13 +3122,13 @@ METHOD DoHScroll(wParam) CLASS HBrowse
       ::SetFocus()
       IF ::lEditable
          SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
-         SetScrollPos(::handle, SB_HORZ, HIWORD(wParam))
-         ::SetColumn(HIWORD(wParam))
+         SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
+         ::SetColumn(hwg_HIWORD(wParam))
       ELSE
-         IF HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
+         IF hwg_HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
             LineRight(Self)
          ENDIF
-         IF HIWORD(wParam) < (::colpos + ::nLeftCol - 1)
+         IF hwg_HIWORD(wParam) < (::colpos + ::nLeftCol - 1)
             LineLeft(Self)
          ENDIF
       ENDIF
@@ -3158,7 +3158,7 @@ RETURN NIL
 #else
 METHOD DoHScroll(wParam) CLASS HBrowse
 
-   LOCAL nScrollCode := LOWORD(wParam)
+   LOCAL nScrollCode := hwg_LOWORD(wParam)
    LOCAL nPos
    LOCAL oldLeft := ::nLeftCol
    LOCAL nLeftCol
@@ -3199,13 +3199,13 @@ METHOD DoHScroll(wParam) CLASS HBrowse
       ::SetFocus()
       IF ::lEditable
          SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
-         SetScrollPos(::handle, SB_HORZ, HIWORD(wParam))
-         ::SetColumn(HIWORD(wParam))
+         SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
+         ::SetColumn(hwg_HIWORD(wParam))
       ELSE
-         IF HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
+         IF hwg_HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
             LineRight(Self)
          ENDIF
-         IF HIWORD(wParam) < (::colpos + ::nLeftCol - 1)
+         IF hwg_HIWORD(wParam) < (::colpos + ::nLeftCol - 1)
             LineLeft(Self)
          ENDIF
       ENDIF
@@ -3447,14 +3447,14 @@ METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
 
    // Calculate the line you clicked on, keeping track of header
    IF (::lDispHead)
-      nLine := Int((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
+      nLine := Int((hwg_HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
    ELSE
-      nLine := Int(HIWORD(lParam) / (::height + 1) + 1)
+      nLine := Int(hwg_HIWORD(lParam) / (::height + 1) + 1)
    ENDIF
 
    STEP := nLine - ::rowPos
    res := .F.
-   xm := LOWORD(lParam)
+   xm := hwg_LOWORD(lParam)
 
    x1 := ::x1
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
@@ -3551,7 +3551,7 @@ ELSEIF nLine == 0
       ::lResizing := .T.
       ::isMouseOver := .F.
       Hwg_SetCursor(s_oCursor)
-      s_xDrag := LOWORD(lParam)
+      s_xDrag := hwg_LOWORD(lParam)
       s_xDragMove := s_xDrag
       InvalidateRect(::handle, 0)
    ELSEIF ::lDispHead .AND. nLine >= - ::nHeadRows .AND. ;
@@ -3580,7 +3580,7 @@ RETURN NIL
 //----------------------------------------------------//
 METHOD ButtonUp(lParam) CLASS HBrowse
 
-   LOCAL xPos := LOWORD(lParam)
+   LOCAL xPos := hwg_LOWORD(lParam)
    LOCAL x
    LOCAL x1
    LOCAL i
@@ -3660,11 +3660,11 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
 
    // Calculate the line you clicked on, keeping track of header
    IF (::lDispHead)
-      nLine := Int((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
+      nLine := Int((hwg_HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1)
    ELSE
-      nLine := Int(HIWORD(lParam) / (::height + 1) + 1)
+      nLine := Int(hwg_HIWORD(lParam) / (::height + 1) + 1)
    ENDIF
-   xm := LOWORD(lParam)
+   xm := hwg_LOWORD(lParam)
 
    x1 := ::x1
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
@@ -3715,8 +3715,8 @@ RETURN NIL
 METHOD ButtonDbl(lParam) CLASS HBrowse
    
    LOCAL nLine := Int(IIf(::lDispHead, ;
-                          ((HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1), ;
-                          HIWORD(lParam) / (::height + 1) + 1))
+                          ((hwg_HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1), ;
+                          hwg_HIWORD(lParam) / (::height + 1) + 1))
 
    IF nLine > 0 .AND. nLine <= ::rowCurrCount
       ::ButtonDown(lParam)
@@ -3728,8 +3728,8 @@ RETURN NIL
 //----------------------------------------------------//
 METHOD MouseMove(wParam, lParam) CLASS HBrowse
    
-   LOCAL xPos := LOWORD(lParam)
-   LOCAL yPos := HIWORD(lParam)
+   LOCAL xPos := hwg_LOWORD(lParam)
+   LOCAL yPos := hwg_HIWORD(lParam)
    LOCAL x := ::x1
    LOCAL i
    LOCAL res := .F.

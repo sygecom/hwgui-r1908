@@ -1074,8 +1074,8 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    nPageEnable := IIf(nPageEnable == NIL, 0, nPageEnable)
    nEvent := IIf(nEvent == NIL, 0, nEvent)
    IF PtrtoUlong(nPageEnable) > 128
-      pt[1] := LOWORD(nPageEnable)
-      pt[2] := HIWORD(nPageEnable)
+      pt[1] := hwg_LOWORD(nPageEnable)
+      pt[2] := hwg_HIWORD(nPageEnable)
    ENDIF
    FOR i := 1 TO Len(::Pages)
       IF !::pages[i]:enabled .OR. i == PtrtoUlong(nPageEnable)
@@ -1101,8 +1101,8 @@ METHOD ShowToolTips(lParam) CLASS HTab
    IF AScan(::Pages, {|p|p:ToolTip != NIL}) == 0
        RETURN NIL
    ENDIF
-   pt[1] := LOWORD(lParam)
-   pt[2] := HIWORD(lParam)
+   pt[1] := hwg_LOWORD(lParam)
+   pt[2] := hwg_HIWORD(lParam)
 
    FOR i := 1 TO Len(::Pages)
       client_rect := ::Pages[i]:aItemPos

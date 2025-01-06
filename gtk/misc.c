@@ -54,16 +54,19 @@ HB_FUNC( COPYSTRINGTOCLIPBOARD )
 {
 }
 
-HB_FUNC( LOWORD )
+HB_FUNC( HWG_LOWORD )
 {
    hb_retni( (int) ( hb_parnl( 1 ) & 0xFFFF ) );
 }
 
-HB_FUNC( HIWORD )
+HB_FUNC_TRANSLATE(LOWORD, HWG_LOWORD);
+
+HB_FUNC( HWG_HIWORD )
 {
    hb_retni( (int) ( ( hb_parnl( 1 ) >> 16 ) & 0xFFFF ) );
 }
 
+HB_FUNC_TRANSLATE(HIWORD, HWG_HIWORD);
 
 HB_FUNC( HWG_BITOR )
 {

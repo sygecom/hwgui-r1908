@@ -341,7 +341,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    LOCAL aCoors := GetWindowRect(oWnd:handle)
 
    IF oWnd:oEmbedded != NIL
-      oWnd:oEmbedded:Resize(LOWORD(lParam), HIWORD(lParam))
+      oWnd:oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    //InvalidateRect(oWnd:handle, 0)
    oWnd:Super:onEvent(WM_SIZE, wParam, lParam)
@@ -350,7 +350,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    oWnd:nHeight := aCoors[4] - aCoors[2]
 
    IF hb_IsBlock(oWnd:bSize)
-      Eval(oWnd:bSize, oWnd, LOWORD(lParam), HIWORD(lParam))
+      Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    IF oWnd:Type == WND_MDI .AND. Len(HWindow():aWindows) > 1
       aCoors := GetClientRect(oWnd:handle)
@@ -572,8 +572,8 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    IF wParam == SC_CLOSE
       SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0)
    ENDIF
-   iParHigh := HIWORD(wParam)
-   iParLow := LOWORD(wParam)
+   iParHigh := hwg_HIWORD(wParam)
+   iParLow := hwg_LOWORD(wParam)
    IF ISWINDOWVISIBLE(oWnd:handle)
       oCtrl := oWnd:FindControl(iParLow)
    ENDIF

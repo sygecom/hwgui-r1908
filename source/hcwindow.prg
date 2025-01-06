@@ -537,9 +537,9 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
 
    HB_SYMBOL_UNUSED(lParam)
 
-   nSBCode := loword(wParam)
+   nSBCode := hwg_LOWORD(wParam)
    IF msg == WM_MOUSEWHEEL
-      nSBCode := IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
+      nSBCode := IIf(hwg_HIWORD(wParam) > 32768, hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam))
       nSBCode := IIf(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
    ENDIF
    IF (msg == WM_VSCROLL) .OR. msg == WM_MOUSEWHEEL
@@ -559,7 +559,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
          Case nSBCode == SB_PAGEDOWN
             nInc := max(1, oForm:nVertInc)
          Case nSBCode == SB_THUMBTRACK
-            nPos := hiword(wParam)
+            nPos := hwg_HIWORD(wParam)
             nInc := nPos - oForm:nVscrollPos
          OTHERWISE
             nInc := 0
@@ -585,7 +585,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
             nInc := max(1, oForm:nVertInc / 2)
             EXIT
          Case SB_THUMBTRACK
-            nPos := hiword(wParam)
+            nPos := hwg_HIWORD(wParam)
             nInc := nPos - oForm:nVscrollPos
             EXIT
          Default
@@ -615,7 +615,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
          Case nSBCode == SB_PAGEDOWN
             nInc := HORZ_PTS
          Case nSBCode == SB_THUMBTRACK
-            nPos := hiword(wParam)
+            nPos := hwg_HIWORD(wParam)
             nInc := nPos - oForm:nHscrollPos
          OTHERWISE
             nInc := 0
@@ -641,7 +641,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
             nInc := HORZ_PTS
             EXIT
          Case SB_THUMBTRACK
-            nPos := hiword(wParam)
+            nPos := hwg_HIWORD(wParam)
             nInc := nPos - oForm:nHscrollPos
             EXIT
          Default
@@ -665,10 +665,10 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
 
    HB_SYMBOL_UNUSED(lParam)
 
-   nSBCode := loword(wParam)
+   nSBCode := hwg_LOWORD(wParam)
 
    IF msg == WM_MOUSEWHEEL
-      nSBCode := IIf(HIWORD(wParam) > 32768, HIWORD(wParam) - 65535, HIWORD(wParam))
+      nSBCode := IIf(hwg_HIWORD(wParam) > 32768, hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam))
       nSBCode := IIf(nSBCode < 0, SB_LINEDOWN, SB_LINEUP)
    ENDIF
 
@@ -697,7 +697,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
          nInc := max(1, oForm:nVertInc)
          EXIT
       CASE SB_THUMBTRACK
-         nPos := hiword(wParam)
+         nPos := hwg_HIWORD(wParam)
          nInc := nPos - oForm:nVscrollPos
          EXIT
       #ifdef __XHARBOUR__
@@ -735,7 +735,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
          nInc := HORZ_PTS
          EXIT
       CASE SB_THUMBTRACK
-         nPos := hiword(wParam)
+         nPos := hwg_HIWORD(wParam)
          nInc := nPos - oForm:nHscrollPos
          EXIT
       #ifdef __XHARBOUR__
@@ -881,7 +881,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
    HB_SYMBOL_UNUSED(lParam)
 
    nDelta := 0
-   wmsg := LOWORD(wParam)
+   wmsg := hwg_LOWORD(wParam)
 
    IF msg == WM_VSCROLL .OR. msg == WM_HSCROLL
       nMaxPos := IIf(msg == WM_VSCROLL, oForm:rect[4] - oForm:nCurHeight, oForm:rect[3] - oForm:nCurWidth)
@@ -901,7 +901,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
          ENDIF
          nDelta := Min(nMaxPos / 10, nMaxPos - oForm:nScrollPos)
       ELSEIF wmsg == SB_THUMBPOSITION
-         nPos := HIWORD(wParam)
+         nPos := hwg_HIWORD(wParam)
          nDelta := nPos - oForm:nScrollPos
       ELSEIF wmsg == SB_PAGEUP
          IF (oForm:nScrollPos <= 0)
@@ -1093,8 +1093,8 @@ RETURN -1
 STATIC FUNCTION onCommand(oWnd, wParam, lParam)
 
    LOCAL iItem
-   LOCAL iParHigh := HIWORD(wParam)
-   LOCAL iParLow := LOWORD(wParam)
+   LOCAL iParHigh := hwg_HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
    LOCAL oForm := oWnd:GetParentForm()
 
    HB_SYMBOL_UNUSED(lParam)
@@ -1155,7 +1155,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
    FOR EACH oItem IN aControls
       IF oItem:bSize != NIL
-         Eval(oItem:bSize, oItem, LOWORD(lParam), HIWORD(lParam))
+         Eval(oItem:bSize, oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       ENDIF
    NEXT
 
@@ -1169,7 +1169,7 @@ FUNCTION onTrackScroll(oWnd, msg, wParam, lParam)
    LOCAL oCtrl := oWnd:FindControl(, lParam)
 
    IF oCtrl != NIL
-      msg := LOWORD(wParam)
+      msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
          IF hb_IsBlock(oCtrl:bChange)
             Eval(oCtrl:bChange, oCtrl)
@@ -1195,7 +1195,7 @@ FUNCTION onTrackScroll(oWnd, msg, wParam, lParam)
    LOCAL oCtrl := oWnd:FindControl(, lParam)
 
    IF oCtrl != NIL
-      msg := LOWORD(wParam)
+      msg := hwg_LOWORD(wParam)
       SWITCH msg
       CASE TB_ENDTRACK
          IF hb_IsBlock(oCtrl:bChange)

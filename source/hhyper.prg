@@ -337,8 +337,8 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
    HB_SYMBOL_UNUSED(nFlags)
 
    IF ::state != LBL_INIT
-      xPos := LOWORD(lParam)
-      yPos := HIWORD(lParam)
+      xPos := hwg_LOWORD(lParam)
+      yPos := hwg_HIWORD(lParam)
       IF (!PtInRect({0, 0, ::nWidthOver, ::nHeight}, {xPos, yPos})) .AND. ::state != LBL_MOUSEOVER
           res := .T.
       ELSE

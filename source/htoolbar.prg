@@ -342,7 +342,7 @@ METHOD CREATETOOL() CLASS hToolBar
          nMax := 2
       ENDIF
       ::ndrop := nMax + IIf(!::WindowsManifest, 0, nDrop)
-      ::BtnHeight := MAX(HIWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)), ;
+      ::BtnHeight := MAX(hwg_HIWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)), ;
          ::nHeight - ::nDrop - IIf(!::lnoThemes .AND. Hwg_BitAnd(::Style, TBSTYLE_FLAT) > 0, 0, 2))
       IF !::lVertical
          SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::BtnWidth, ::BtnHeight))
@@ -350,7 +350,7 @@ METHOD CREATETOOL() CLASS hToolBar
          SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::nWidth - ::nDrop - 1, ::BtnWidth))
       ENDIF
    ENDIF
-   ::BtnWidth := LOWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0))
+   ::BtnWidth := hwg_LOWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0))
    /*
    IF ::lTransp
       nStyle := SendMessage(::handle, TB_GETSTYLE, 0, 0) + TBSTYLE_TRANSPARENT
@@ -501,10 +501,10 @@ METHOD RESIZE(xIncrSize, lWidth, lHeight) CLASS hToolBar
    IF xIncrSize != 1
       ::Move(::nLeft, ::nTop, ::nWidth, ::nHeight, 0)
    ENDIF
-   IF xIncrSize < 1 .OR. LOWORD(nSize) <= ::BtnWidth
+   IF xIncrSize < 1 .OR. hwg_LOWORD(nSize) <= ::BtnWidth
       ::BtnWidth := ::BtnWidth * xIncrSize
    ELSE
-      ::BtnWidth := LOWORD(nSize) * xIncrSize
+      ::BtnWidth := hwg_LOWORD(nSize) * xIncrSize
    ENDIF
    SendMessage(::handle, TB_SETBUTTONWIDTH, MAKELPARAM(::BtnWidth - 1, ::BtnWidth + 1))
    IF ::BtnWidth != NIL

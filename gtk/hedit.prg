@@ -240,7 +240,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
    ELSE
 
       IF msg == WM_MOUSEWHEEL
-         nPos := HiWord( wParam )
+         nPos := hwg_HIWORD( wParam )
          nPos := Iif( nPos > 32768, nPos - 65535, nPos )
          // SendMessage( ::handle,EM_SCROLL, Iif(nPos>0,SB_LINEUP,SB_LINEDOWN), 0 )
          // SendMessage( ::handle,EM_SCROLL, Iif(nPos>0,SB_LINEUP,SB_LINEDOWN), 0 )
@@ -565,7 +565,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
       cKey := Input( oEdit,cKey,nPos )
       IF cKey != Nil
          SetGetUpdated( oEdit )         
-         IF Set( _SET_INSERT ) // .or. HiWord(x) != LoWord(x)
+         IF Set( _SET_INSERT ) // .or. hwg_HIWORD(x) != hwg_LOWORD(x)
             IF oEdit:lPicComplex
                nGetLen := Len( oEdit:cPicMask )
                FOR nLen := 0 TO nGetLen

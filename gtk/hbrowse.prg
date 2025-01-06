@@ -344,10 +344,10 @@ Local aCoors, retValue := -1
          ::MouseMove( wParam, lParam )
 
       ELSEIF msg == WM_MOUSEWHEEL
-         ::MouseWheel( LoWord( wParam ),;
-                          If( HiWord( wParam ) > 32768,;
-                          HiWord( wParam ) - 65535, HiWord( wParam ) ),;
-                          LoWord( lParam ), HiWord( lParam ) )
+         ::MouseWheel( hwg_LOWORD( wParam ),;
+                          If( hwg_HIWORD( wParam ) > 32768,;
+                          hwg_HIWORD( wParam ) - 65535, hwg_HIWORD( wParam ) ),;
+                          hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
       ELSEIF msg == WM_DESTROY
          ::End()
       ENDIF
@@ -1299,10 +1299,10 @@ RETURN Nil
 //----------------------------------------------------//
 METHOD ButtonDown( lParam ) CLASS HBrowse
 Local hBrw := ::handle
-Local nLine := Int( HIWORD(lParam)/(::height+1) + Iif(::lDispHead,1-::nHeadRows,1) )
+Local nLine := Int( hwg_HIWORD(lParam)/(::height+1) + Iif(::lDispHead,1-::nHeadRows,1) )
 Local step := nLine - ::rowPos, res := .F., nrec
 Local maxPos, nPos
-Local xm := LOWORD(lParam), x1, fif
+Local xm := hwg_LOWORD(lParam), x1, fif
 
    ::lBtnDbl := .F.
    x1  := ::x1
@@ -1362,7 +1362,7 @@ Local xm := LOWORD(lParam), x1, fif
       IF ::nCursor == 1
          ::nCursor := 2
          Hwg_SetCursor( vCursor,::area )
-         xDrag := LoWord( lParam )
+         xDrag := hwg_LOWORD( lParam )
       ENDIF
    ENDIF
 
@@ -1371,7 +1371,7 @@ RETURN Nil
 //----------------------------------------------------//
 METHOD ButtonUp( lParam ) CLASS HBrowse
 Local hBrw := ::handle
-Local xPos := LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
+Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
 
    IF ::lBtnDbl
       ::lBtnDbl := .F.
@@ -1414,7 +1414,7 @@ RETURN Nil
 //----------------------------------------------------//
 METHOD ButtonDbl( lParam ) CLASS HBrowse
 Local hBrw := ::handle
-Local nLine := Int( HIWORD(lParam)/(::height+1) + Iif(::lDispHead,1-::nHeadRows,1) )
+Local nLine := Int( hwg_HIWORD(lParam)/(::height+1) + Iif(::lDispHead,1-::nHeadRows,1) )
 
    if nLine <= ::rowCurrCount
       ::ButtonDown( lParam )
@@ -1425,7 +1425,7 @@ RETURN Nil
 
 //----------------------------------------------------//
 METHOD MouseMove( wParam, lParam ) CLASS HBrowse
-Local xPos := LoWord( lParam ), yPos := HiWord( lParam )
+Local xPos := hwg_LOWORD( lParam ), yPos := hwg_HIWORD( lParam )
 Local x := ::x1, i := ::nLeftCol, res := .F.
 
    IF !::active .OR. Empty( ::aColumns ) .OR. ::x1 == Nil

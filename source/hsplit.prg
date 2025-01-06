@@ -150,7 +150,7 @@ METHOD Paint() CLASS HSplitter
    RETURN NIL
 
 METHOD Drag(lParam) CLASS HSplitter
-   LOCAL xPos := LOWORD(lParam), yPos := HIWORD(lParam)
+   LOCAL xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
       IF xPos > 32000

@@ -173,7 +173,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          RETURN 0
       ENDIF
    ELSEIF msg == WM_MOUSEWHEEL
-      nDelta := HIWORD(wParam)
+      nDelta := hwg_HIWORD(wParam)
       IF nDelta > 32768
          nDelta -= 65535
       ENDIF
@@ -280,7 +280,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       EXIT
 
    CASE WM_MOUSEWHEEL
-      nDelta := HIWORD(wParam)
+      nDelta := hwg_HIWORD(wParam)
       IF nDelta > 32768
          nDelta -= 65535
       ENDIF
@@ -326,7 +326,7 @@ METHOD ReadOnly(lreadOnly)
 
 METHOD UpdatePos() CLASS HRichEdit
    LOCAL npos := SendMessage(::handle, EM_GETSEL, 0, 0)
-   LOCAL pos1 := Loword(npos) + 1, pos2 := Hiword(npos) + 1
+   LOCAL pos1 := hwg_LOWORD(npos) + 1, pos2 := hwg_HIWORD(npos) + 1
 
    ::Line := SendMessage(::handle, EM_LINEFROMCHAR, pos1 - 1, 0) + 1
    ::LinesTotal := SendMessage(::handle, EM_GETLINECOUNT, 0, 0)

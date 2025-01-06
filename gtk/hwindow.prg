@@ -20,15 +20,15 @@ REQUEST ENDWINDOW
 
 Static Function onSize( oWnd,wParam,lParam )
 
-   // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(Loword(lParam))+" "+Str(HiWord(lParam)) )
+   // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)) )
 
    oWnd:Super:onEvent( WM_SIZE,wParam,lParam )
 
-   oWnd:nWidth  := Loword(lParam)
-   oWnd:nHeight := Hiword(lParam)
+   oWnd:nWidth  := hwg_LOWORD(lParam)
+   oWnd:nHeight := hwg_HIWORD(lParam)
 
    IF ISBLOCK( oWnd:bSize )
-       Eval( oWnd:bSize, oWnd, LoWord( lParam ), HiWord( lParam ) )
+       Eval( oWnd:bSize, oWnd, hwg_LOWORD( lParam ), hwg_HIWORD( lParam ) )
    ENDIF
 
 Return 0
@@ -386,8 +386,8 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
        SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
    ENDIF
 */   
-   iParHigh := HiWord( wParam )
-   iParLow := LoWord( wParam )
+   iParHigh := hwg_HIWORD( wParam )
+   iParLow := hwg_LOWORD( wParam )
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
@@ -409,9 +409,9 @@ Return 0
 
 Static Function onMove( oWnd, wParam, lParam )
 
-   // writelog( "onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(Loword(lParam))+str(Hiword(lParam)) )
-   oWnd:nLeft := Loword(lParam)
-   oWnd:nTop  := Hiword(lParam)
+   // writelog( "onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)) )
+   oWnd:nLeft := hwg_LOWORD(lParam)
+   oWnd:nTop  := hwg_HIWORD(lParam)
 
 Return 0
 
@@ -483,8 +483,8 @@ Local iParHigh, iParLow, iItem
    IF wParam == SC_CLOSE
       SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0 )
    ENDIF
-   iParHigh := HiWord( wParam )
-   iParLow := LoWord( wParam )
+   iParHigh := hwg_HIWORD( wParam )
+   iParLow := hwg_LOWORD( wParam )
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
       Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
