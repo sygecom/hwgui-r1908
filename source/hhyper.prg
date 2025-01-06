@@ -438,7 +438,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
 
 
 METHOD Resize(x, y) CLASS HStaticLink
-   //LOCAL aCoors := GetClientRect(::handle)
+   //LOCAL aCoors := hwg_GetClientRect(::handle)
    LOCAL aBmpSize, aTxtSize
    LOCAL nHeight := ::nHeight
    

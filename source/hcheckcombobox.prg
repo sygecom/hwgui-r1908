@@ -152,7 +152,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
    ELSEIF msg == WM_LBUTTONDOWN
 
-      rcClient := GetClientRect(::handle)
+      rcClient := hwg_GetClientRect(::handle)
 
       pt := {, }
       pt[1] := hwg_LOWORD(lParam)
@@ -238,7 +238,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       EXIT
 
    CASE WM_LBUTTONDOWN
-      rcClient := GetClientRect(::handle)
+      rcClient := hwg_GetClientRect(::handle)
       pt := {,}
       pt[1] := hwg_LOWORD(lParam)
       pt[2] := hwg_HIWORD(lParam)

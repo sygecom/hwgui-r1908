@@ -304,7 +304,7 @@ Local oWnd, oBtn, oitem
          Return Eval( oWnd:bPaint, oWnd )
       endif
    elseif msg == WM_MOVE
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nLeft := aControls[1]
       oWnd:nTop  := aControls[2]
    elseif msg == WM_SIZE
@@ -325,7 +325,7 @@ Local oWnd, oBtn, oitem
              ENDIF
          NEXT
       #endif
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if ISBLOCK( oWnd:bSize )
@@ -333,10 +333,10 @@ Local oWnd, oBtn, oitem
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          aControls := GetClientRect( hWnd )
+          aControls := hwg_GetClientRect( hWnd )
           // writelog( str(hWnd)+"=="+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
-          // aControls := GetClientRect( HWindow():aWindows[2]:handle )
+          // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           return 0
       endif
@@ -506,7 +506,7 @@ Local oWnd, oBtn, oitem
           Return Eval( oWnd:bPaint, oWnd )
       endif
    elseif msg == WM_MOVE
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nLeft := aControls[1]
       oWnd:nTop  := aControls[2]
    elseif msg == WM_SIZE
@@ -527,7 +527,7 @@ Local oWnd, oBtn, oitem
              ENDIF
          NEXT
       #endif
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if oWnd:bSize != Nil
@@ -535,10 +535,10 @@ Local oWnd, oBtn, oitem
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          aControls := GetClientRect( hWnd )
+          aControls := hwg_GetClientRect( hWnd )
           // writelog( str(hWnd)+"=="+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
-          // aControls := GetClientRect( HWindow():aWindows[2]:handle )
+          // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           return 1
       endif
@@ -952,7 +952,7 @@ Local oWndClient
          Return Eval( oWnd:bPaint, oWnd )
       endif
    elseif msg == WM_MOVE
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nLeft := aControls[1]
       oWnd:nTop  := aControls[2]
    elseif msg == WM_SIZE
@@ -973,7 +973,7 @@ Local oWndClient
              ENDIF
          NEXT
       #endif
-      aControls := GetWindowRect( hWnd )
+      aControls := hwg_GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
       if oWnd:bSize != Nil
@@ -981,10 +981,10 @@ Local oWndClient
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
           // writelog( str(hWnd)+"--"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          aControls := GetClientRect( hWnd )
+          aControls := hwg_GetClientRect( hWnd )
           // writelog( str(hWnd)+"=="+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
-          // aControls := GetClientRect( HWindow():aWindows[2]:handle )
+          // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
           return 1
       endif

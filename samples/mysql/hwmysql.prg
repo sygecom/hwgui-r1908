@@ -297,7 +297,7 @@ FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
    LOCAL i
    LOCAL nHbusy := oMainWindow:aOffset[4]
 
-   aRect := GetClientRect(oEdit:handle)
+   aRect := hwg_GetClientRect(oEdit:handle)
    nHbusy += aRect[4]
    MoveWindow(oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8)
 

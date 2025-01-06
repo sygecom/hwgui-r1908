@@ -160,7 +160,7 @@ METHOD Create() CLASS HNICEButton
    LOCAL w
    LOCAL h
 
-   Rct    := GetClientRect(::handle)
+   Rct    := hwg_GetClientRect(::handle)
    w      := Rct[3] - Rct[1]
    h      := Rct[4] - Rct[2]
    Region := CreateRoundRectRgn(0, 0, w, h, h * 0.90, h * 0.90)
@@ -257,7 +257,7 @@ METHOD PAINT() CLASS HNICEButton
    LOCAL h
    //  *******************
 
-   Rct  := GetClientRect(::handle)
+   Rct  := hwg_GetClientRect(::handle)
    x    := Rct[1]
    y    := Rct[2]
    w    := Rct[3] - Rct[1]

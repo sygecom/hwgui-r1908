@@ -224,10 +224,10 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    width := IIf(width == NIL, ::nWidth, width)
    height := IIf(height == NIL, ::nHeight, height)
    IF Hwg_BitAnd(::style, WS_CHILD) == 0
-      rect := GetwindowRect(::handle)
-      nHx := rect[4] - rect[2]  - GetclientRect(::handle)[4] - ;
+      rect := hwg_GetwindowRect(::handle)
+      nHx := rect[4] - rect[2]  - hwg_GetclientRect(::handle)[4] - ;
          IIf(Hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
-      nWx := rect[3] - rect[1]  - GetclientRect(::handle)[3] - ;
+      nWx := rect[3] - rect[1]  - hwg_GetclientRect(::handle)[3] - ;
          IIf(Hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
    ENDIF
 
@@ -760,7 +760,7 @@ RETURN NIL
 
 METHOD RedefineScrollbars() CLASS HCustomWindow
 
-   ::rect := GetClientRect(::handle)
+   ::rect := hwg_GetClientRect(::handle)
    IF ::nScrollBars > -1 .AND. ::bScroll == NIL
       IF ::nVscrollPos == 0
          ::ncurHeight := 0                                                              //* 4
@@ -786,7 +786,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
    LOCAL aMenu
    LOCAL nPos
 
-   tempRect := GetClientRect(::handle)
+   tempRect := hwg_GetClientRect(::handle)
    aMenu := IIf(__objHasData(Self, "MENU"), ::menu, NIL)
    // Calculate how many scrolling increments for the client area
    IF ::Type == WND_MDICHILD //.AND. ::aRectSave != NIL
@@ -1124,7 +1124,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
    nw1 := oWnd:nWidth
    nh1 := oWnd:nHeight
-   aCoors := GetWindowRect(oWnd:handle)
+   aCoors := hwg_GetWindowRect(oWnd:handle)
    IF Empty(oWnd:Type)
       oWnd:nWidth := aCoors[3] - aCoors[1]
       oWnd:nHeight := aCoors[4] - aCoors[2]

@@ -318,7 +318,7 @@ Local aCoors
 
       ::Init()
 //      IF __ObjHasMsg( ::oParent,"AOFFSET" )
-//         aCoors := GetWindowRect( ::handle )
+//         aCoors := hwg_GetWindowRect( ::handle )
 //         ::oParent:aOffset[4] := aCoors[4] - aCoors[2]
 //      ENDIF
    ENDIF

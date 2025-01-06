@@ -279,7 +279,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
-         rectButton := GetWindowRect(::handle)
+         rectButton := hwg_GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
             ::bMouseOverButton := .F.
@@ -373,7 +373,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
 
-         rectButton := GetWindowRect(::handle)
+         rectButton := hwg_GetWindowRect(::handle)
 
          IF !PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
@@ -481,7 +481,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
-         rectButton := GetWindowRect(::handle)
+         rectButton := hwg_GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
             ::bMouseOverButton := .F.
@@ -586,7 +586,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[1] := hwg_LOWORD(lParam)
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
-         rectButton := GetWindowRect(::handle)
+         rectButton := hwg_GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
             InvalidateRect(::handle, 0)
@@ -1118,9 +1118,9 @@ METHOD PAINTBK(hdc) CLASS HBUTTONEx
    LOCAL rect
    LOCAL rect1
 
-   rect := GetClientRect(::handle)
+   rect := hwg_GetClientRect(::handle)
 
-   rect1 := GetWindowRect(::handle)
+   rect1 := hwg_GetWindowRect(::handle)
    hwg_ScreenToClient(::oparent:handle, rect1)
 
    IF ValType(::m_dcBk) == "U"

@@ -260,7 +260,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    hwg_SelectObject(hDC, oFont:handle)
    aMetr := GetTextMetric(hDC)
    aArea := GetDeviceArea(hDC)
-   aRect := GetWindowRect(GetActiveWindow())
+   aRect := hwg_GetWindowRect(GetActiveWindow())
    hwg_ReleaseDC(GetActiveWindow(), hDC)
    height := (aMetr[1] + 1) * aLen + 4 + addY + 8
    IF height > aArea[2] - aRect[2] - nTop - 60

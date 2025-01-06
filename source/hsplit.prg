@@ -123,7 +123,7 @@ METHOD Paint() CLASS HSplitter
 
    pps := DefinePaintStru()
    hDC := BeginPaint(::handle, pps)
-   aCoors := GetClientRect(::handle)
+   aCoors := hwg_GetClientRect(::handle)
 
    x1 := aCoors[1] //+ IIf(::lVertical, 1, 2)
    y1 := aCoors[2] //+ IIf(::lVertical, 2, 1)

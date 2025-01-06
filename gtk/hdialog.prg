@@ -232,7 +232,7 @@ Local aCoors
          SpreadBitmap( hDC, oDlg:handle, oDlg:oBmp:handle )
          Return 1
       ELSE
-        aCoors := GetClientRect( oDlg:handle )
+        aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != Nil
            IF Valtype( oDlg:brush ) != "N"
               FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
@@ -322,7 +322,7 @@ Static Function onSize( oDlg,wParam,lParam )
 
    nW1 := oDlg:nWidth
    nH1 := oDlg:nHeight
-   *aControls := GetWindowRect( oDlg:handle )
+   *aControls := hwg_GetWindowRect( oDlg:handle )
    oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
    //
 

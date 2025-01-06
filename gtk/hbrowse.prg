@@ -258,7 +258,7 @@ Local aCoors, retValue := -1
       ELSEIF msg == WM_ERASEBKGND
          IF ::brush != Nil
 	    
-            aCoors := GetClientRect( ::handle )
+            aCoors := hwg_GetClientRect( ::handle )
             FillRect( wParam, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, ::brush:handle )
             retValue := 1
          ENDIF
@@ -566,7 +566,7 @@ Local oldBkColor, oldTColor
    IF ::brush == Nil .OR. ::lChanged
       ::Rebuild(hDC)
    ENDIF
-   aCoors := GetClientRect( ::handle )
+   aCoors := hwg_GetClientRect( ::handle )
    Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
    aMetr := GetTextMetric( hDC )
    

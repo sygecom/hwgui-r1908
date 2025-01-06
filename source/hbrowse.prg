@@ -1767,7 +1767,7 @@ METHOD AutoFit() CLASS HBrowse
    ::oParent:lSuspendMsgsHandling := .T.
    RedrawWindow(::handle, RDW_VALIDATE + RDW_UPDATENOW)
    ::oParent:lSuspendMsgsHandling := .F.
-   aCoors := GetWindowRect(::handle)
+   aCoors := hwg_GetWindowRect(::handle)
    IF ::nAutoFit == NIL
       ::nAutoFit := IIf(Max(0, ::x2 - ::xAdjRight - 2) == 0, 0, ::x2 / ::xAdjRight)
       nXincRelative := IIf((aCoors[3] - aCoors[1]) - (::nWidth) > 0, ::nAutoFit, 1 / ::nAutoFit)
@@ -1875,7 +1875,7 @@ ENDIF
 
 // Get client area coordinate
 
-   aCoors := GetClientRect(::handle)
+   aCoors := hwg_GetClientRect(::handle)
    aMetr := GetTextMetric(hDC)
    ::width := Round((aMetr[3] + aMetr[2]) / 2 - 1, 0)
 // If forceHeight is set, we should use that value
@@ -3918,7 +3918,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
          ENDIF
          y1 := ::y1 + (::height + 1) * rowPos
 
-         // aCoors := GetWindowRect(::handle)
+         // aCoors := hwg_GetWindowRect(::handle)
          // x1 += aCoors[1]
          // y1 += aCoors[2]
 

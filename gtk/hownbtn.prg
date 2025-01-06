@@ -131,7 +131,7 @@ METHOD Paint() CLASS HOwnButton
 Local hDC := GetDC( ::handle )
 Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
-   aCoors := GetClientRect( ::handle )
+   aCoors := hwg_GetClientRect( ::handle )
 
    // oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DFACE) )
    IF ::state == OBTN_INIT

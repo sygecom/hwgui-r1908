@@ -241,7 +241,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    ELSEIF msg == WM_MENUCHAR
       RETURN onSysCommand(Self, SC_KEYMENU, hwg_LOWORD(wParam))
     ELSEIF msg == WM_MOVE //.OR. msg == 0x216
-      aCoors := GetWindowRect(::handle)
+      aCoors := hwg_GetWindowRect(::handle)
       ::nLeft := aCoors[1]
          ::nTop  := aCoors[2]
     ELSEIF msg == WM_UPDATEUISTATE .AND. hwg_HIWORD(wParam) != UISF_HIDEFOCUS
@@ -308,7 +308,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       RETURN onSysCommand(Self, SC_KEYMENU, hwg_LOWORD(wParam))
 
    CASE WM_MOVE //.OR. msg == 0x216
-      aCoors := GetWindowRect(::handle)
+      aCoors := hwg_GetWindowRect(::handle)
       ::nLeft := aCoors[1]
       ::nTop  := aCoors[2]
       EXIT
@@ -518,8 +518,8 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       hwg__SetMenu(oDlg:handle, oDlg:menu[5])
    ENDIF
 
-  //- oDlg:rect := GetWindowRect(odlg:handle)
-   oDlg:rect := GetclientRect(oDlg:handle)
+  //- oDlg:rect := hwg_GetWindowRect(odlg:handle)
+   oDlg:rect := hwg_GetclientRect(oDlg:handle)
 
    IF hb_IsObject(oDlg:oIcon)
       SendMessage(oDlg:handle, WM_SETICON, 1, oDlg:oIcon:handle)
@@ -601,7 +601,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       ENDIF
    ENDIF
 
-   oDlg:rect := GetclientRect(oDlg:handle)
+   oDlg:rect := hwg_GetclientRect(oDlg:handle)
    IF oDlg:nScrollBars > -1
       AEval(oDlg:aControls, {|o|oDlg:ncurHeight := max(o:nTop + o:nHeight + VERT_PTS * 4, oDlg:ncurHeight)})
       AEval(oDlg:aControls, {|o|oDlg:ncurWidth := max(o:nLeft + o:nWidth  + HORZ_PTS * 4, oDlg:ncurWidth)})
@@ -655,7 +655,7 @@ STATIC FUNCTION onEraseBk(oDlg, hDC)
        RETURN 1
     ELSE
        /*
-       aCoors := GetClientRect(oDlg:handle)
+       aCoors := hwg_GetClientRect(oDlg:handle)
        IF oDlg:brush != NIL
           IF !hb_IsNumeric(oDlg:brush)
              FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oDlg:brush:handle)
@@ -842,7 +842,7 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    */
    nW1 := oDlg:nWidth
    nH1 := oDlg:nHeight
-   //aControls := GetWindowRect(oDlg:handle)
+   //aControls := hwg_GetWindowRect(oDlg:handle)
    IF wParam != 1 //SIZE_MINIMIZED
       oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
       oDlg:nHeight := hwg_HIWORD(lParam) //aControls[4]-aControls[2]

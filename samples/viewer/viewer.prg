@@ -228,7 +228,7 @@ STATIC FUNCTION FileOpen(oWnd)
       ShowScrollBar(oWnd:handle, SB_HORZ, lScrollH)
       ShowScrollBar(oWnd:handle, SB_VERT, lScrollV)
 
-      aCoors := GetClientRect(oWnd:handle)
+      aCoors := hwg_GetClientRect(oWnd:handle)
       nVert := ( oWnd:nHeight - aCoors[4] )
       nHorz := ( oWnd:nWidth-aCoors[3] )
       DO WHILE .T.
@@ -272,7 +272,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    IF oImage == Nil
       RETURN NIL
    ENDIF
-   aCoors := GetClientRect(oWnd:handle)
+   aCoors := hwg_GetClientRect(oWnd:handle)
    nVert := ( oWnd:nHeight - aCoors[4] )
    nHorz := ( oWnd:nWidth-aCoors[3] )
 

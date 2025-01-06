@@ -403,7 +403,7 @@ Return Nil
 // ------------------------------------------
 
 Static Function dlgOnSize( oDlg,h,w )
-Local aCoors := GetClientRect( oDlg:handle )
+Local aCoors := hwg_GetClientRect( oDlg:handle )
 Memvar oDesigner
 
    // Writelog( "dlgOnSize "+Str(h)+Str(w) )
@@ -876,10 +876,10 @@ Memvar oDesigner
    pps := DefinePaintStru()
    hDC := BeginPaint( oDlg:handle, pps )
 
-   // aCoors := GetClientRect( oDlg:handle )
+   // aCoors := hwg_GetClientRect( oDlg:handle )
    // FillRect( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], oDlg:brush:handle )
    IF oDesigner:lReport
-      aCoors := GetClientRect( oDlg:handle )
+      aCoors := hwg_GetClientRect( oDlg:handle )
       // x2 := x1 + Round( oForm:nPWidth * oForm:nKoeff, 0 ) - 1
       // y2 := y1 + Round( oForm:nPHeight * oForm:nKoeff, 0 ) - 1
       n1cm := Round( oForm:nKoeff * 10, 0 )
@@ -919,7 +919,7 @@ Memvar oDesigner
    ELSE
 
       if oDesigner:lShowGrid
-          aCoors := GetClientRect( oDlg:handle )
+          aCoors := hwg_GetClientRect( oDlg:handle )
           nTop   := aCoors[1]
           nLeft  := aCoors[2]
           nRight := aCoors[3]
@@ -954,7 +954,7 @@ Memvar oDesigner
       oDesigner:addItem := Nil
       IF IsCheckedMenuItem( oDesigner:oMainWnd:handle,1050 )
         i := 0
-        aCoors := GetClientRect( oDlg:handle )
+        aCoors := hwg_GetClientRect( oDlg:handle )
         n1cm := oDesigner:nPixelGrid
         x1 := n1cm
         DO WHILE x1 < (aCoors[3]-aCoors[1])
@@ -1014,7 +1014,7 @@ Memvar oDesigner
       Return 1
    ELSEIF msg == WM_MOVE
       IF !oDesigner:lReport
-         aCoors := GetWindowRect( oDlg:handle )
+         aCoors := hwg_GetWindowRect( oDlg:handle )
          oDlg:oParent:SetProp( "Left", Ltrim(Str(oDlg:nLeft := aCoors[1])) )
          oDlg:oParent:SetProp( "Top", Ltrim(Str(oDlg:nTop  := aCoors[2])) )
          InspUpdBrowse()
@@ -1122,7 +1122,7 @@ Local aCoors, nSize, x
    // writelog( "> "+str(msg)+str(wParam)+str(lParam) )
    IF msg == WM_VSCROLL
       x := oDlg:oParent:nYOffset
-      aCoors := GetClientRect( oDlg:handle )
+      aCoors := hwg_GetClientRect( oDlg:handle )
       nSize  := ( aCoors[4] - TOP_INDENT ) / oDlg:oParent:nKoeff
       IF nScrollCode == SB_LINEDOWN
          IF oDlg:oParent:nYOffset + nSize < oDlg:oParent:nPHeight
@@ -1149,7 +1149,7 @@ Local aCoors, nSize, x
 
    ELSEIF msg == WM_HSCROLL
       x := oDlg:oParent:nXOffset
-      aCoors := GetClientRect( oDlg:handle )
+      aCoors := hwg_GetClientRect( oDlg:handle )
       nSize  := ( aCoors[3] - LEFT_INDENT ) / oDlg:oParent:nKoeff
       IF nScrollCode == SB_LINEDOWN
          IF oDlg:oParent:nXOffset + nSize < oDlg:oParent:nPWidth

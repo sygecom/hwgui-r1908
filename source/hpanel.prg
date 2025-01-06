@@ -101,7 +101,7 @@ METHOD Activate() CLASS HPanel
       ::ResizeOffSet(0)
       /*
       IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
-         aCoors := GetWindowRect(::handle)
+         aCoors := hwg_GetWindowRect(::handle)
          nWidth := aCoors[3] - aCoors[1]
          nHeight:= aCoors[4] - aCoors[2]
          IF nWidth > nHeight .OR. nWidth == 0
@@ -235,11 +235,11 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
 
    pps    := DefinePaintStru()
    hDC    := BeginPaint(::handle, pps)
-   aCoors := GetClientRect(::handle)
+   aCoors := hwg_GetClientRect(::handle)
 
    SetBkMode(hDC, ::backStyle)
    IF ::backstyle == OPAQUE .AND. ::nrePaint = -1
-      aCoors := GetClientRect(::handle)
+      aCoors := hwg_GetClientRect(::handle)
       IF ::brush != NIL
          IF !hb_IsNumeric(::brush)
             FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], ::brush:handle)
@@ -352,7 +352,7 @@ METHOD Show() CLASS HPanel
    RETURN NIL
 
 METHOD Resize() CLASS HPanel
-   LOCAL aCoors := GetWindowRect(::handle)
+   LOCAL aCoors := hwg_GetWindowRect(::handle)
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
    
@@ -387,7 +387,7 @@ METHOD Resize() CLASS HPanel
 
 /* nMode => nMode = 0 INIT  / nMode = 1 RESIZE  / nMode = 2 SHOW  / nMode = 3 HIDE */
 METHOD ResizeOffSet(nMode) CLASS HPanel
-   LOCAL aCoors := GetWindowRect(::handle)
+   LOCAL aCoors := hwg_GetWindowRect(::handle)
    LOCAL nHeight := aCoors[4] - aCoors[2]
    LOCAL nWidth  := aCoors[3] - aCoors[1]
    LOCAL nWinc :=  nWidth  - ::nWidth

@@ -163,7 +163,7 @@ Local step, kolsteps, nsteps
 
    pps := DefinePaintStru()
    hDC := BeginPaint( hWnd, pps )
-   aCoors := GetClientRect( hWnd )
+   aCoors := hwg_GetClientRect( hWnd )
 
    IF aPaintRep[FORM_XKOEFCONST] == 0
       aMetr := GetDeviceArea( hDC )
@@ -408,7 +408,7 @@ Return -1
 
 Static Function VSCROLL( hWnd,nScrollCode, nNewPos )
 Local step  := Round(aPaintRep[FORM_XKOEF]*10,0)*2, nsteps := aPaintRep[FORM_Y]/step, kolsteps
-Local aCoors := GetClientRect( hWnd )
+Local aCoors := hwg_GetClientRect( hWnd )
 
    IF nScrollCode == SB_LINEDOWN
       kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF],0)- ;

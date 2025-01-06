@@ -71,7 +71,7 @@ METHOD Activate() CLASS HStatus
       ::Init()
       /*
       IF __ObjHasMsg(::oParent, "AOFFSET")
-         aCoors := GetWindowRect(::handle)
+         aCoors := hwg_GetWindowRect(::handle)
          ::oParent:aOffset[4] := aCoors[4] - aCoors[2]
       ENDIF
       */
@@ -140,14 +140,14 @@ METHOD StatusHeight(nHeight) CLASS HStatus
    LOCAL aCoors
 
    IF nHeight != NIL
-      aCoors := GetWindowRect(::handle)
+      aCoors := hwg_GetWindowRect(::handle)
       IF nHeight != 0
          IF ::lInit .AND. __ObjHasMsg(::oParent, "AOFFSET")
             ::oParent:aOffset[4] -= (aCoors[4] - aCoors[2])
          ENDIF
          SendMessage(::handle, SB_SETMINHEIGHT, nHeight, 0)
          SendMessage(::handle, WM_SIZE, 0, 0)
-         aCoors := GetWindowRect(::handle)
+         aCoors := hwg_GetWindowRect(::handle)
       ENDIF
       ::nStatusHeight := (aCoors[4] - aCoors[2]) - 1
       IF __ObjHasMsg(::oParent, "AOFFSET")

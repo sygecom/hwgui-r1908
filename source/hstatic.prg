@@ -274,7 +274,7 @@ METHOD Paint(lpDis) CLASS HStatic
    LOCAL dc := drawInfo[3]
 
    client_rect := CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
-   //client_rect := GetClientRect(::handle)
+   //client_rect := hwg_GetClientRect(::handle)
    szText := GetWindowText(::handle)
 
    // Map "Static Styles" to "Text Styles"

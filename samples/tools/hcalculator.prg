@@ -358,7 +358,7 @@ METHOD INIT() CLASS HCalculator
       ::oFormCalc:oVisor:Caption := AllTrim(STR(::oCurrGet:Value))
       ::lClear := ::oFormCalc:oVisor:Caption = "0"
       IF ::oFormCalc:Type >= WND_DLG_RESOURCE
-         aCoors := GetWindowRect(::oCurrGet:handle)
+         aCoors := hwg_GetWindowRect(::oCurrGet:handle)
       ELSE
          aCoors := { ::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
           ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + GETSYSTEMMETRICS(SM_CYCAPTION) + 8, 0, 0 }

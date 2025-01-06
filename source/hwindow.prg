@@ -195,7 +195,7 @@ RETURN -1
 
 FUNCTION onMove(oWnd)
 
-   LOCAL aControls := GetWindowRect(oWnd:handle)
+   LOCAL aControls := hwg_GetWindowRect(oWnd:handle)
 
    oWnd:nLeft := aControls[1]
    oWnd:nTop := aControls[2]

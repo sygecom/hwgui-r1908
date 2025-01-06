@@ -655,7 +655,7 @@ Local aRect, i, nHbusy := 0
    FOR i := 1 TO Len( aControls )
       IF aControls[i]:classname() == "HSTATUS"
          hWndStatus := aControls[i]:handle
-         aRect := GetClientRect( hWndStatus )
+         aRect := hwg_GetClientRect( hWndStatus )
          nHbusy += aRect[ 4 ]
       ENDIF
    NEXT

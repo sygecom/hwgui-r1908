@@ -86,7 +86,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    // Hwg_CreateMdiChildWindow(Self)
 
    ::Type := WND_MDICHILD
-   ::rect := GetWindowRect(::handle)
+   ::rect := hwg_GetWindowRect(::handle)
 
    ::GETMDIMAIN():WindowState := GetWindowPlacement(::GETMDIMAIN():handle)
    ::oClient := HWindow():aWindows[2]
@@ -338,7 +338,7 @@ RETURN -1
 
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
-   LOCAL aCoors := GetWindowRect(oWnd:handle)
+   LOCAL aCoors := hwg_GetWindowRect(oWnd:handle)
 
    IF oWnd:oEmbedded != NIL
       oWnd:oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
@@ -353,14 +353,14 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    IF oWnd:Type == WND_MDI .AND. Len(HWindow():aWindows) > 1
-      aCoors := GetClientRect(oWnd:handle)
+      aCoors := hwg_GetClientRect(oWnd:handle)
       //MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], ;
       //   aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
-      //aCoors := GetClientRect(HWindow():aWindows[2]:handle)
+      //aCoors := hwg_GetClientRect(HWindow():aWindows[2]:handle)
       SetWindowPos(HWindow():aWindows[2]:handle, NIL, oWnd:aOffset[1], oWnd:aOffset[2], ;
          aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4], ;
          SWP_NOZORDER + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
-      aCoors := GetWindowRect(HWindow():aWindows[2]:handle)
+      aCoors := hwg_GetWindowRect(HWindow():aWindows[2]:handle)
       HWindow():aWindows[2]:nWidth  := aCoors[3] - aCoors[1]
       HWindow():aWindows[2]:nHeight := aCoors[4] - aCoors[2]
       // ADDED =
@@ -411,7 +411,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
        ENDIF
        RETURN 1
    ELSEIF oWnd:type != WND_MDI //.AND. oWnd:type != WND_MAIN
-      aCoors := GetClientRect(oWnd:handle)
+      aCoors := hwg_GetClientRect(oWnd:handle)
       IF oWnd:brush != NIL
          IF !hb_IsNumeric(oWnd:brush)
             FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oWnd:brush:handle)

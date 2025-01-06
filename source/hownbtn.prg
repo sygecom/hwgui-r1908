@@ -367,7 +367,7 @@ METHOD Paint() CLASS HOwnButton
 
    hDC := BeginPaint(::handle, pps)
 
-   aCoors := GetClientRect(::handle)
+   aCoors := hwg_GetClientRect(::handle)
 
    IF ::state == OBTN_INIT
       ::state := OBTN_NORMAL
@@ -462,7 +462,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
    LOCAL y2
    LOCAL aCoors
 
-   aCoors := GetClientRect(::handle)
+   aCoors := hwg_GetClientRect(::handle)
    IF !Empty(::brush)
       FillRect(hDC, aCoors[1] + 2, aCoors[2] + 2, aCoors[3] - 2, aCoors[4] - 2, ::Brush:handle)
    ENDIF

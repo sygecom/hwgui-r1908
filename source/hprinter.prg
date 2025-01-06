@@ -708,7 +708,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    STATIC BrushLine := NIL
    STATIC BrushBackground := NIL
 
-   rect := GetClientRect(oWnd:handle)
+   rect := hwg_GetClientRect(oWnd:handle)
 
    // hwg_WriteLog(Str(rect[1]) + Str(rect[2]) + Str(rect[3]) + Str(rect[4]))
    // offscreen canvas must be THE WHOLE CANVAS !

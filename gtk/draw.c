@@ -578,10 +578,10 @@ HB_FUNC( DRAWGRAYBITMAP )
 {
 }
 
-HB_FUNC( GETCLIENTRECT )
+HB_FUNC( HWG_GETCLIENTRECT )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
-   PHB_ITEM aMetr = hb_itemArrayNew( 4 );    
+   PHB_ITEM aMetr = hb_itemArrayNew( 4 );
 
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 1 ), 0 );
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 2 ), 0 );
@@ -590,7 +590,9 @@ HB_FUNC( GETCLIENTRECT )
    hb_itemRelease( hb_itemReturn( aMetr ) );
 }
 
-HB_FUNC( GETWINDOWRECT )
+HB_FUNC_TRANSLATE(GETCLIENTRECT, HWG_GETCLIENTRECT);
+
+HB_FUNC( HWG_GETWINDOWRECT )
 {
 /*
    RECT rc;
@@ -617,5 +619,7 @@ HB_FUNC( GETWINDOWRECT )
 
    _itemReturn( aMetr );
    _itemRelease( aMetr );
-*/   
+*/
 }
+
+HB_FUNC_TRANSLATE(GETWINDOWRECT, HWG_GETWINDOWRECT);
