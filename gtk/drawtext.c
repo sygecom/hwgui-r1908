@@ -1,12 +1,12 @@
-/*
- * $Id: drawtext.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * C level text functions
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: drawtext.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// C level text functions
+//
+// Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "guilib.h"
 #include "hbapi.h"

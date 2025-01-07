@@ -1,12 +1,12 @@
-/*
- * $Id: hbrowse.prg 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HBrowse class - browse databases and arrays
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hbrowse.prg 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// HBrowse class - browse databases and arrays
+//
+// Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "inkey.ch"

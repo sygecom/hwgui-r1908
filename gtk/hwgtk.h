@@ -1,7 +1,6 @@
-/*
- * $Id: hwgtk.h 1625 2011-08-05 13:14:50Z druzus $
- */
-
+//
+// $Id: hwgtk.h 1625 2011-08-05 13:14:50Z druzus $
+//
 
 typedef struct HWGUI_HDC_STRU
 {

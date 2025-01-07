@@ -1,11 +1,10 @@
-/*
- * $Id: a.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- * HWGUI using sample
- * 
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: a.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+// HWGUI using sample
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "guilib.ch"

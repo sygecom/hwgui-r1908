@@ -1,16 +1,15 @@
-/*
- * $Id: hprogres.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HProgressBar class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
-/*
- * Copyright 2008 Luiz Rafal Culik Guimaraes <luiz at xharbour.com.br>
- * port for linux version
-*/
+//
+// $Id: hprogres.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library source code:
+// HProgressBar class
+//
+// Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
+// Copyright 2008 Luiz Rafal Culik Guimaraes <luiz at xharbour.com.br>
+// port for linux version
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

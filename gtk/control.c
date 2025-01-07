@@ -1,18 +1,17 @@
-/*
- * $Id: control.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * Widget creation functions
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * StatusBar /ProgressBar and monthCalendar Functions
- *
- * Copyright 2008 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
- * www - http://sites.uol.com.br/culikr/
- 
-*/
+//
+// $Id: control.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// Widget creation functions
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
+// StatusBar /ProgressBar and monthCalendar Functions
+//
+// Copyright 2008 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "guilib.h"
 #include "hbapifs.h"

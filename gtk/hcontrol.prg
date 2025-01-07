@@ -1,18 +1,17 @@
-/*
- *$Id: hcontrol.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HControl, HStatus, HStatic, HButton, HGroup, HLine classes 
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * ButtonEx class
- *
- * Copyright 2008 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
- * www - http://sites.uol.com.br/culikr/
- 
-*/
+//
+// $Id: hcontrol.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// HControl, HStatus, HStatic, HButton, HGroup, HLine classes
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
+// ButtonEx class
+//
+// Copyright 2008 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
+// www - http://sites.uol.com.br/culikr/
+//
 
 #include "windows.ch"
 #include "hbclass.ch"

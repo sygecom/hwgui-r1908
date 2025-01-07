@@ -1,12 +1,12 @@
-/*
- * $Id: drawwidg.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * Pens, brushes, fonts, bitmaps, icons handling
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// $Id: drawwidg.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// Pens, brushes, fonts, bitmaps, icons handling
+//
+// Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include "hbclass.ch"
 #include "windows.ch"

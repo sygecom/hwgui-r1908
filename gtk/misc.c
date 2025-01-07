@@ -1,12 +1,12 @@
-/*
- * $Id: misc.c 1625 2011-08-05 13:14:50Z druzus $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * Miscellaneous functions
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: misc.c 1625 2011-08-05 13:14:50Z druzus $
+//
+// HWGUI - Harbour Linux (GTK) GUI library source code:
+// Miscellaneous functions
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include <math.h>
 #include "guilib.h"
