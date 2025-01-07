@@ -43,7 +43,7 @@ FUNCTION Main()
    @ 214, 10 EDITBOX oGet ;
       CAPTION "Command" ;
       SIZE 106, 20 ;
-      COLOR Vcolor("FF0000") ;
+      COLOR VColor("FF0000") ;
       ON SIZE {|o, x, y|o:Move(, , x - oSplit:nLeft - oSplit:nWidth - 50)}
 
    @ 214, 35 TAB oTab ;

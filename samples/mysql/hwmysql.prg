@@ -141,7 +141,7 @@ FUNCTION About()
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {||EndDialog(getmodalhandle())} ;
-       FLAT TEXT "Close" COLOR Vcolor("0000FF") FONT oFont
+       FLAT TEXT "Close" COLOR VColor("0000FF") FONT oFont
 
    oModDlg:Activate()
 
