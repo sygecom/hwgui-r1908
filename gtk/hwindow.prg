@@ -75,13 +75,13 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
 
    ::oDefaultParent := Self
    ::title    := cTitle
-   ::style    := Iif( nStyle==Nil,0,nStyle )
+   ::style    := IIf(nStyle == NIL, 0, nStyle)
    ::oIcon    := oIcon
    ::oBmp     := oBmp
-   ::nTop     := Iif( y==Nil,0,y )
-   ::nLeft    := Iif( x==Nil,0,x )
-   ::nWidth   := Iif( width==Nil,0,width )
-   ::nHeight  := Iif( height==Nil,0,height )
+   ::nTop     := IIf(y == NIL, 0, y)
+   ::nLeft    := IIf(x == NIL, 0, x)
+   ::nWidth   := IIf(width == NIL, 0, width)
+   ::nHeight  := IIf(height == NIL, 0, height)
    ::oFont    := oFont
    ::bInit    := bInit
    ::bDestroy := bExit
@@ -111,27 +111,27 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
 RETURN Self
 
 METHOD AddItem( oWnd ) CLASS HWindow
-   Aadd( ::aWindows, oWnd )
+   AAdd(::aWindows, oWnd)
 RETURN Nil
 
 METHOD DelItem( oWnd ) CLASS HWindow
 Local i
-   IF ( i := Ascan( ::aWindows,{|o|o==oWnd} ) ) > 0
-      Adel( ::aWindows,i )
-      Asize( ::aWindows, Len(::aWindows)-1 )
+   IF ( i := AScan(::aWindows, {|o|o == oWnd}) ) > 0
+      ADel(::aWindows, i)
+      ASize(::aWindows, Len(::aWindows) - 1)
    ENDIF
 RETURN Nil
 
 METHOD FindWindow( hWnd ) CLASS HWindow
-// Local i := Ascan( ::aWindows, {|o|o:handle==hWnd} )
-// Return Iif( i == 0, Nil, ::aWindows[i] )
+// Local i := AScan(::aWindows, {|o|o:handle == hWnd})
+// Return IIf(i == 0, NIL, ::aWindows[i])
 Return GetWindowObject(hWnd)
 
 METHOD GetMain CLASS HWindow
-Return Iif(Len(::aWindows)>0,            ;
-	 Iif(::aWindows[1]:type==WND_MAIN, ;
+Return IIf(Len(::aWindows) > 0,            ;
+	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
-	   Iif(Len(::aWindows)>1,::aWindows[2],Nil)), Nil )
+	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
 
 
 
@@ -179,13 +179,13 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
 /*
       ::nMenuPos := nPos
       ::handle := hwg_InitMdiWindow( Self, ::szAppName,cTitle,cMenu,  ;
-                    Iif(oIcon!=Nil,oIcon:handle,Nil),clr, ;
+                    IIf(oIcon != NIL, oIcon:handle, NIL),clr, ;
                     nStyle,::nLeft,::nTop,::nWidth,::nHeight )
 */
    ELSEIF lType == WND_MAIN
 
       ::handle := hwg_InitMainWindow( Self, ::szAppName,cTitle,cMenu, ;
-              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),::Style,::nLeft, ;
+              IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),::Style,::nLeft, ;
               ::nTop,::nWidth,::nHeight )
     
    ENDIF
@@ -221,7 +221,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HMainWindow
 Local i
 
    // writelog( "On Event" + str(msg) + str(wParam) + str( lParam ) )
-   IF ( i := Ascan( ::aMessages[1],msg ) ) != 0
+   IF ( i := AScan(::aMessages[1], msg) ) != 0
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
@@ -270,7 +270,7 @@ Return Nil
 METHOD onEvent( msg, wParam, lParam )  CLASS HMDIChildWindow
 Local i
 
-   IF ( i := Ascan( ::aMessages[1],msg ) ) != 0
+   IF ( i := AScan(::aMessages[1], msg) ) != 0
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
@@ -302,7 +302,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
    ::oParent := HWindow():GetMain()
    IF ISOBJECT( ::oParent )  
        ::handle := hwg_InitChildWindow( Self, ::szAppName,cTitle,cMenu, ;
-          Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),nStyle,::nLeft, ;
+          IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),nStyle,::nLeft, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
    ELSE
        MsgStop("Create Main window first !","HChildWindow():New()" )
@@ -324,7 +324,7 @@ Return Nil
 METHOD onEvent( msg, wParam, lParam )  CLASS HChildWindow
 Local i
 
-   IF ( i := Ascan( HMainWindow():aMessages[1],msg ) ) != 0
+   IF ( i := AScan(HMainWindow():aMessages[1], msg) ) != 0
       Return Eval( HMainWindow():aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
@@ -348,7 +348,7 @@ Local oItem, iCont, nCont
       ENDIF
    NEXT
    #else
-   nCont := Len( HWindow():aWindows )
+   nCont := Len(HWindow():aWindows)
 
    FOR iCont := nCont TO 1 STEP -1
 
@@ -389,7 +389,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
-        ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+        ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
    ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
@@ -430,7 +430,7 @@ Local i
    IF wParam == SC_CLOSE
        IF ISBLOCK( oWnd:bDestroy )
           i := Eval( oWnd:bDestroy, oWnd )
-          i := IIf( Valtype(i) == "L",i,.t. )
+          i := IIf(ValType(i) == "L", i, .T.)
           IF !i
              Return 0
           ENDIF
@@ -486,7 +486,7 @@ Local iParHigh, iParLow, iItem
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
-      ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+      ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
       Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
    ENDIF
 */

@@ -45,14 +45,14 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
             lWeekNumbers ) CLASS HMonthCalendar
 
-//   nStyle := hwg_BitOr( Iif( nStyle==Nil, 0, nStyle ), WS_TABSTOP )
-//   nStyle   += Iif( lNoToday==Nil.OR.!lNoToday, 0, MCS_NOTODAY )
-//   nStyle   += Iif( lNoTodayCircle==Nil.OR.!lNoTodayCircle, 0, MCS_NOTODAYCIRCLE )
-//   nStyle   += Iif( lWeekNumbers==Nil.OR.!lWeekNumbers, 0, MCS_WEEKNUMBERS )
+//   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP )
+//   nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
+//   nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
+//   nStyle   += IIf(lWeekNumbers == NIL .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   ,,ctooltip )
 
-   ::value   := Iif( Valtype(vari)=="D" .And. !Empty(vari), vari, Date() )
+   ::value   := IIf(ValType(vari) == "D" .AND. !Empty(vari), vari, Date())
 
    ::bChange := bChange
 
@@ -68,7 +68,7 @@ Return Self
 
 METHOD Activate CLASS HMonthCalendar
 
-   If !empty(::oParent:handle )
+   If !Empty(::oParent:handle)
       ::handle := InitMonthCalendar ( ::oParent:handle, , ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       SetWindowObject( ::handle,Self )		  
@@ -85,7 +85,7 @@ METHOD Init() CLASS HMonthCalendar
 
    If !::lInit
       ::Super:Init()
-      If !Empty( ::value )
+      If !Empty(::value)
          SetMonthCalendarDate( ::handle , ::value )
       EndIf
    EndIf

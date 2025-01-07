@@ -21,7 +21,7 @@ CLASS HSayImage INHERIT HControl
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
                   bSize,ctoolt )
    METHOD Activate()
-   METHOD End()  INLINE ( ::Super:End(),iif(::oImage<>Nil,::oImage:Release(),::oImage:=Nil),::oImage := Nil )
+   METHOD End()  INLINE ( ::Super:End(),IIf(::oImage <> NIL, ::oImage:Release(), ::oImage := NIL),::oImage := Nil )
 
 ENDCLASS
 
@@ -29,7 +29,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
                   bSize,ctoolt ) CLASS HSayImage
 
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,               ;
-               Iif( nWidth!=Nil,nWidth,0 ),Iif( nHeight!=Nil,nHeight,0 ),, ;
+               IIf(nWidth != NIL, nWidth, 0),IIf(nHeight != NIL, nHeight, 0),, ;
                bInit,bSize,,ctoolt )
 
    ::title   := ""
@@ -38,7 +38,7 @@ Return Self
 
 METHOD Activate CLASS HSayImage
 
-   IF !Empty( ::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
@@ -72,11 +72,11 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
 
    IF Image != Nil
       IF lRes == Nil ; lRes := .F. ; ENDIF
-      ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
-                          HBitmap():AddResource( Image ), ;
-                          Iif( Valtype(Image) == "C",     ;
-                          HBitmap():AddFile( Image ), Image ) )
-      IF !Empty( ::oImage )
+      ::oImage := IIf(lRes .OR. ValType(Image) == "N",     ;
+                      HBitmap():AddResource(Image), ;
+                      IIf(ValType(Image) == "C",     ;
+                      HBitmap():AddFile(Image), Image))
+      IF !Empty(::oImage)
          IF nWidth == Nil .OR. nHeight == Nil
             ::nWidth  := ::oImage:nWidth
             ::nHeight := ::oImage:nHeight
@@ -124,10 +124,10 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
       ::oImage:Release()
    ENDIF
    IF lRes == Nil ; lRes := .F. ; ENDIF
-   ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
-                       HBitmap():AddResource( Image ), ;
-                       Iif( Valtype(Image) == "C",     ;
-                       HBitmap():AddFile( Image ), Image ) )
+   ::oImage := IIf(lRes .OR. ValType(Image) == "N",     ;
+                   HBitmap():AddResource( Image ), ;
+                   IIf(ValType(Image) == "C",     ;
+                   HBitmap():AddFile(Image), Image))
 
 Return Nil
 
@@ -147,10 +147,10 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    ::Super:New( oWndParent,nId,SS_ICON,nLeft,nTop,nWidth,nHeight,bInit,bSize,ctoolt )
 
    IF lRes == Nil ; lRes := .F. ; ENDIF
-   ::oImage := Iif( lRes .OR. Valtype(Image)=="N",    ;
-                       HIcon():AddResource( Image ),  ;
-                       Iif( Valtype(Image) == "C",    ;
-                       HIcon():AddFile( Image ), Image ) )
+   ::oImage := IIf(lRes .OR. ValType(Image) == "N",    ;
+                   HIcon():AddResource(Image),  ;
+                   IIf(ValType(Image) == "C",    ;
+                   HIcon():AddFile(Image), Image))
    ::Activate()
 
 Return Self

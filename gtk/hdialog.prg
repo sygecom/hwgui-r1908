@@ -89,13 +89,13 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
    ::xResourceID := xResourceID
    ::type     := lType
    ::title    := cTitle
-   ::style    := Iif( nStyle==Nil,WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX,nStyle )
+   ::style    := IIf(nStyle == NIL, WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX, nStyle)
    ::oBmp     := oBmp
    ::oIcon    := oIcon
-   ::nTop     := Iif( y==Nil,0,y )
-   ::nLeft    := Iif( x==Nil,0,x )
-   ::nWidth   := Iif( width==Nil,0,width )
-   ::nHeight  := Iif( height==Nil,0,height )
+   ::nTop     := IIf(y == NIL, 0, y)
+   ::nLeft    := IIf(x == NIL, 0, x)
+   ::nWidth   := IIf(width == NIL, 0, width)
+   ::nHeight  := IIf(height == NIL, 0, height)
    ::oFont    := oFont
    ::bInit    := bInit
    ::bDestroy := bExit
@@ -104,9 +104,9 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
    ::bGetFocus  := bGFocus
    ::bLostFocus := bLFocus
    ::bOther     := bOther
-   ::lClipper   := Iif( lClipper==Nil,.F.,lClipper )
-   ::lExitOnEnter:=Iif( lExitOnEnter==Nil,.T.,!lExitOnEnter )
-   ::lExitOnEsc  :=Iif( lExitOnEsc==Nil,.T.,!lExitOnEsc )
+   ::lClipper   := IIf(lClipper == NIL, .F., lClipper)
+   ::lExitOnEnter:=IIf(lExitOnEnter == NIL, .T., !lExitOnEnter)
+   ::lExitOnEsc  :=IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
 
    IF hwg_BitAnd( ::style, DS_CENTER ) > 0
       ::nLeft := Int( ( GetDesktopWidth() - ::nWidth ) / 2 )
@@ -126,11 +126,11 @@ Local hParent,oWnd
    ::lResult := .F.
    ::AddItem( Self,!lNoModal )
    IF !lNoModal
-      hParent := Iif( ::oParent!=Nil .AND. ;
-             __ObjHasMsg( ::oParent,"HANDLE") .AND. ::oParent:handle != NIL ;
-             .AND. !Empty(::oParent:handle ), ::oParent:handle, ;
-             Iif( ( oWnd:=HWindow():GetMain() ) != Nil,    ;
-             oWnd:handle,Nil ) )
+      hParent := IIf(::oParent != NIL .AND. ;
+             __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
+             .AND. !Empty(::oParent:handle), ::oParent:handle, ;
+             IIf((oWnd := HWindow():GetMain()) != NIL,    ;
+             oWnd:handle, NIL))
       hwg_Set_Modal( ::handle, hParent )
    ENDIF
    hwg_ShowAll( ::handle )
@@ -144,7 +144,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HDialog
 Local i
 
    // writelog( str(msg) + str(wParam) + str(lParam) )
-   IF ( i := Ascan( aMessModalDlg, {|a|a[1]==msg} ) ) != 0
+   IF ( i := AScan(aMessModalDlg, {|a|a[1] == msg}) ) != 0
       Return Eval( aMessModalDlg[i,2], Self, wParam, lParam )
    ELSE
       Return ::Super:onEvent( msg, wParam, lParam )
@@ -153,35 +153,35 @@ Local i
 RETURN 0
 
 METHOD AddItem( oWnd,lModal ) CLASS HDialog
-   Aadd( Iif( lModal,::aModalDialogs,::aDialogs ), oWnd )
+   AAdd(IIf(lModal, ::aModalDialogs, ::aDialogs), oWnd)
 RETURN Nil
 
 METHOD DelItem( oWnd,lModal ) CLASS HDialog
 Local i
    IF lModal
-      IF ( i := Ascan( ::aModalDialogs,{|o|o==oWnd} ) ) > 0
-         Adel( ::aModalDialogs,i )
-         Asize( ::aModalDialogs, Len(::aModalDialogs)-1 )
+      IF ( i := AScan(::aModalDialogs, {|o|o == oWnd}) ) > 0
+         ADel(::aModalDialogs, i)
+         ASize(::aModalDialogs, Len(::aModalDialogs) - 1)
       ENDIF
    ELSE
-      IF ( i := Ascan( ::aDialogs,{|o|o==oWnd} ) ) > 0
-         Adel( ::aDialogs,i )
-         Asize( ::aDialogs, Len(::aDialogs)-1 )
+      IF ( i := AScan(::aDialogs, {|o|o == oWnd}) ) > 0
+         ADel(::aDialogs, i)
+         ASize(::aDialogs, Len(::aDialogs) - 1)
       ENDIF
    ENDIF
 RETURN Nil
 
 METHOD FindDialog( hWnd ) CLASS HDialog
 /*
-Local i := Ascan( ::aDialogs, {|o|o:handle==hWnd} )
-Return Iif( i == 0, Nil, ::aDialogs[i] )
+Local i := AScan(::aDialogs, {|o|o:handle == hWnd})
+Return IIf(i == 0, NIL, ::aDialogs[i])
 */
 Return GetWindowObject(hWnd)
 
 METHOD GetActive() CLASS HDialog
 Local handle := GetFocus()
-Local i := Ascan( ::Getlist,{|o|o:handle==handle} )
-Return Iif( i == 0, Nil, ::Getlist[i] )
+Local i := AScan(::Getlist, {|o|o:handle == handle})
+Return IIf(i == 0, NIL, ::Getlist[i])
 
 // End of class
 // ------------------------------------
@@ -284,7 +284,7 @@ Local aMenu, i, hCtrl
    ENDIF
 
    IF oDlg:aEvents != Nil .AND. ;
-      ( i := Ascan( oDlg:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+      ( i := AScan(oDlg:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
       Eval( oDlg:aEvents[ i,3 ],oDlg,iParLow )
    ELSEIF iParHigh == 0 .AND. ( ;
         ( iParLow == IDOK .AND. oDlg:FindControl(IDOK) != Nil ) .OR. ;
@@ -333,7 +333,7 @@ Static Function onSize( oDlg,wParam,lParam )
    aControls := oDlg:aControls
    IF aControls != Nil
       oDlg:Anchor( oDlg, nW1, nH1, oDlg:nWidth, oDlg:nHeight )
-      FOR iCont := 1 TO Len( aControls )
+      FOR iCont := 1 TO Len(aControls)
          IF aControls[iCont]:bSize != Nil
             Eval( aControls[iCont]:bSize, ;
              aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
@@ -355,12 +355,12 @@ Local iParLow := hwg_LOWORD(wParam)
 Return 0
 
 Function GetModalDlg
-Local i := Len( HDialog():aModalDialogs )
-Return Iif( i>0, HDialog():aModalDialogs[i], 0 )
+Local i := Len(HDialog():aModalDialogs)
+Return IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
 Function GetModalHandle
-Local i := Len( HDialog():aModalDialogs )
-Return Iif( i>0, HDialog():aModalDialogs[i]:handle, 0 )
+Local i := Len(HDialog():aModalDialogs)
+Return IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
 Function EndDialog( handle )
 Local oDlg
@@ -396,15 +396,15 @@ Local i, aKeys
    aKeys := oDlg:KeyList
    IF block == Nil
 
-      IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
+      IF ( i := AScan(aKeys, {|a|a[1] == nctrl .AND. a[2] == nkey}) ) == 0
          Return .F.
       ELSE
-         Adel( oDlg:KeyList, i )
-         Asize( oDlg:KeyList, Len(oDlg:KeyList)-1 )
+         ADel(oDlg:KeyList, i)
+         ASize(oDlg:KeyList, Len(oDlg:KeyList) - 1)
       ENDIF
    ELSE
-      IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
-         Aadd( aKeys, { nctrl,nkey,block } )
+      IF ( i := AScan(aKeys, {|a|a[1] == nctrl .AND. a[2] == nkey}) ) == 0
+         AAdd(aKeys, {nctrl, nkey, block})
       ELSE
          aKeys[i,3] := block
       ENDIF

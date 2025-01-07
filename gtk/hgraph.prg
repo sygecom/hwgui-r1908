@@ -41,7 +41,7 @@ METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
 
    ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,oFont,, ;
                   bSize,{|o,lpdis|o:Paint(lpdis)},ctoolt, ;
-                  Iif( tcolor==Nil,Vcolor("FFFFFF"),tcolor ),Iif( bcolor==Nil,0,bcolor ) )
+                  IIf(tcolor == NIL, Vcolor("FFFFFF"), tcolor),IIf(bcolor == NIL, 0, bcolor) )
 
    ::aValues := aValues
    ::nType   := 1
@@ -53,7 +53,7 @@ Return Self
 
 METHOD Activate CLASS HGraph
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       SetWindowObject( ::handle,Self )
@@ -74,7 +74,7 @@ Local i, j, nLen
       ::ymax := ::ymaxSet
    ENDIF
    FOR i := 1 TO ::nGraphs
-      nLen := Len( ::aValues[i] )
+      nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 1 TO nLen
             ::xmax := Max( ::xmax,::aValues[i,j,1] )
@@ -139,7 +139,7 @@ Local px1, px2, py1, py2, nWidth
 
    SelectObject( hDC, ::oPen:handle )
    FOR i := 1 TO ::nGraphs
-      nLen := Len( ::aValues[i] )
+      nLen := Len(::aValues[i])
       IF ::nType == 1  
          FOR j := 2 TO nLen
             px1 := Round(x1+(::aValues[i,j-1,1]-::xmin)/::scaleX,0)

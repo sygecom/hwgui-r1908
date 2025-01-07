@@ -29,10 +29,10 @@ ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
                   bInit,bSize,bPaint,lDocked ) CLASS HPanel
-Local oParent:=iif(oWndParent==Nil, ::oDefaultParent, oWndParent)
+Local oParent:=IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    nStyle := SS_OWNERDRAW
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,Iif( nWidth==Nil,0,nWidth ), ;
+   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,IIf(nWidth == NIL, 0, nWidth), ;
                   nHeight,oParent:oFont,bInit, ;
                   bSize,bPaint )
 
@@ -44,7 +44,7 @@ Return Self
 
 METHOD Activate CLASS HPanel
 
-   IF !Empty( ::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreatePanel( ::oParent:handle, ::id, ;
                    ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
@@ -66,9 +66,9 @@ METHOD Init CLASS HPanel
    IF !::lInit
       IF ::bSize == Nil
          IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth==0 )
-            ::bSize := {|o,x,y|o:Move( ,Iif(::nTop>0,y-::nHeight,0),x,::nHeight )}
+            ::bSize := {|o,x,y|o:Move( ,IIf(::nTop > 0, y - ::nHeight, 0),x,::nHeight )}
          ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight==0 )
-            ::bSize := {|o,x,y|o:Move( Iif(::nLeft>0,x-::nLeft,0),,::nWidth,y )}
+            ::bSize := {|o,x,y|o:Move( IIf(::nLeft > 0, x - ::nLeft, 0),,::nWidth,y )}
          ENDIF
       ENDIF
 

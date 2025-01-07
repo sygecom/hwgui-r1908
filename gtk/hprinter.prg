@@ -41,7 +41,7 @@ CLASS HPrinter INHERIT HObject
    METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont )
    METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap )
    METHOD Preview()  INLINE Nil
-   METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC,cString,Iif(oFont==Nil,Nil,oFont:handle) )
+   METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC,cString,IIf(oFont == NIL, NIL, oFont:handle) )
 
 ENDCLASS
 
@@ -54,7 +54,7 @@ Local aPrnCoors
    IF cPrinter == Nil
       /* Temporary instead of printer select dialog */
       ::hDC := hwg_OpenDefaultPrinter()
-   ELSEIF Empty( cPrinter )
+   ELSEIF Empty(cPrinter)
       ::hDC := hwg_OpenDefaultPrinter()
    ELSE
       ::hDC := hwg_OpenPrinter( cPrinter )
@@ -64,10 +64,10 @@ Local aPrnCoors
       Return Nil
    ELSE
       aPrnCoors := hwg_gp_GetDeviceArea( ::hDC )
-      ::nWidth  := Iif( ::lmm, aPrnCoors[3], aPrnCoors[1] )
-      ::nHeight := Iif( ::lmm, aPrnCoors[4], aPrnCoors[2] )
-      ::nPWidth  := Iif( ::lmm, aPrnCoors[8], aPrnCoors[1] )
-      ::nPHeight := Iif( ::lmm, aPrnCoors[9], aPrnCoors[2] )
+      ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])
+      ::nHeight := IIf(::lmm, aPrnCoors[4], aPrnCoors[2])
+      ::nPWidth  := IIf(::lmm, aPrnCoors[8], aPrnCoors[1])
+      ::nPHeight := IIf(::lmm, aPrnCoors[9], aPrnCoors[2])
       ::nHRes   := aPrnCoors[1] / aPrnCoors[3]
       ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
       // writelog( ::cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]) )
@@ -100,8 +100,8 @@ Local oFont
       nHeight *= ::nVRes
    ENDIF
    oFont := HGP_Font():Add( fontName, nHeight, ;
-       Iif( lBold!=Nil.AND.lBold,700,400 ),    ;
-       Iif( lItalic!=Nil.AND.lItalic,255,0 ), Iif( lUnderline!=Nil.AND.lUnderline,1,0 ) )
+       IIf(lBold != NIL .AND. lBold, 700, 400),    ;
+       IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0) )
 
 Return oFont
 
@@ -251,7 +251,7 @@ CLASS HGP_Font INHERIT HObject
 ENDCLASS
 
 METHOD Add( fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Font
-Local i, nlen := Len( ::aFonts )
+Local i, nlen := Len(::aFonts)
 
    nHeight  := Iif( nHeight==Nil,13,Abs(nHeight) )
    nHeight -= 1
@@ -277,9 +277,9 @@ Local i, nlen := Len( ::aFonts )
    ::Italic    := fdwItalic
    ::Underline := fdwUnderline
 
-   fontName := StrTran( fontName," Regular"," " )
-   fontName := StrTran( fontName," Bold"," " )
-   fontName := Rtrim( StrTran( fontName," Italic"," " ) )
+   fontName := StrTran(fontName, " Regular", " ")
+   fontName := StrTran(fontName, " Bold", " ")
+   fontName := RTrim(StrTran(fontName, " Italic", " "))
    IF fnWeight > 400
       fontName += " Bold"
    ENDIF
@@ -291,12 +291,12 @@ Local i, nlen := Len( ::aFonts )
    ENDIF
    ::handle := hwg_gp_AddFont( fontName, nHeight )
 
-   Aadd( ::aFonts,Self )
+   AAdd(::aFonts, Self)
 
 Return Self
 
 METHOD Release(lAll) CLASS HGP_Font
-Local i, nlen := Len( ::aFonts )
+Local i, nlen := Len(::aFonts)
 
    IF lAll != Nil .AND. lAll
       For i := 1 TO nlen
@@ -310,8 +310,8 @@ Local i, nlen := Len( ::aFonts )
       For i := 1 TO nlen
          IF ::aFonts[i]:handle == ::handle
             hwg_gp_release( ::handle )
-            Adel( ::aFonts,i )
-            Asize( ::aFonts,nlen-1 )
+            ADel(::aFonts, i)
+            ASize(::aFonts, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -334,7 +334,7 @@ Local i
 
    nWidth := Iif( nWidth == Nil,1,nWidth )
 
-   FOR i := 1 TO Len( ::aPens )
+   FOR i := 1 TO Len(::aPens)
       IF ::aPens[i]:width == nWidth
          ::aPens[i]:nCounter ++
          Return ::aPens[i]
@@ -342,19 +342,19 @@ Local i
    NEXT
 
    ::width  := nWidth
-   Aadd( ::aPens, Self )
+   AAdd(::aPens, Self)
 
 Return Self
 
 METHOD Release() CLASS HGP_Pen
-Local i, nlen := Len( ::aPens )
+Local i, nlen := Len(::aPens)
 
    ::nCounter --
    IF ::nCounter == 0
       FOR i := 1 TO nlen
          IF ::aPens[i]:width == ::width
-            Adel( ::aPens,i )
-            Asize( ::aPens,nlen-1 )
+            ADel(::aPens, i)
+            ASize(::aPens, nlen - 1)
             Exit
          ENDIF
       NEXT

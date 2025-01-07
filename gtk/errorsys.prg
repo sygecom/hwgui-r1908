@@ -18,7 +18,7 @@ Static LogInitialPath := ""
 PROCEDURE ErrorSys
 
    ErrorBlock( { | oError | DefError( oError ) } )
-   LogInitialPath := "/" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "/" )
+   LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
 
    RETURN
 
@@ -52,20 +52,20 @@ STATIC FUNCTION DefError( oError )
    ENDIF
 
    cMessage := ErrorMessage( oError )
-   IF ! Empty( oError:osCode )
-      cDOSError := "(DOS Error " + LTrim( Str( oError:osCode ) ) + ")"
+   IF !Empty(oError:osCode)
+      cDOSError := "(DOS Error " + LTrim(Str(oError:osCode)) + ")"
    ENDIF
 
-   IF ! Empty( oError:osCode )
+   IF !Empty(oError:osCode)
       cMessage += " " + cDOSError
    ENDIF
 
    n := 2
-   WHILE ! Empty( ProcName( n ) )
+   WHILE !Empty(ProcName(n))
       #ifdef __XHARBOUR__
-         cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
+         cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName( n ) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #else
-         cMessage += Chr(13)+Chr(10) + "Called from " + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
+         cMessage += Chr(13)+Chr(10) + "Called from " + ProcName( n ) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #endif
    ENDDO
 
@@ -81,7 +81,7 @@ FUNCTION ErrorMessage( oError )
    LOCAL cMessage
 
    // start error message
-   cMessage := iif( oError:severity > ES_WARNING, "Error", "Warning" ) + " "
+   cMessage := IIf(oError:severity > ES_WARNING, "Error", "Warning") + " "
 
    // add subsystem name if available
    IF ISCHARACTER( oError:subsystem )
@@ -92,7 +92,7 @@ FUNCTION ErrorMessage( oError )
 
    // add subsystem's error code if available
    IF ISNUMBER( oError:subCode )
-      cMessage += "/" + LTrim( Str( oError:subCode ) )
+      cMessage += "/" + LTrim(Str(oError:subCode))
    ELSE
       cMessage += "/???"
    ENDIF
@@ -104,9 +104,9 @@ FUNCTION ErrorMessage( oError )
 
    // add either filename or operation
    DO CASE
-   CASE !Empty( oError:filename )
+   CASE !Empty(oError:filename)
       cMessage += ": " + oError:filename
-   CASE !Empty( oError:operation )
+   CASE !Empty(oError:operation)
       cMessage += ": " + oError:operation
    ENDCASE
 
@@ -115,7 +115,7 @@ FUNCTION ErrorMessage( oError )
 function WriteLog( cText,fname )
 Local nHand
 
-  fname := LogInitialPath + Iif( fname == Nil,"a.log",fname )
+  fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
   if !File( fname )
      nHand := Fcreate( fname )
   else

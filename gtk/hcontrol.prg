@@ -59,9 +59,9 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,ctoolt,tcolor,bcolor ) CLASS HControl
 
-   ::oParent := Iif( oWndParent==Nil, ::oDefaultParent, oWndParent )
-   ::id      := Iif( nId==Nil,::NewId(), nId )
-   ::style   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),WS_VISIBLE+WS_CHILD )
+   ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+   ::id      := IIf(nId == NIL, ::NewId(), nId)
+   ::style   := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle),WS_VISIBLE+WS_CHILD )
    ::oFont   := oFont
    ::nLeft   := nLeft
    ::nTop    := nTop
@@ -78,11 +78,11 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
 Return Self
 
 METHOD NewId() CLASS HControl
-Local nId := CONTROL_FIRST_ID + Len( ::oParent:aControls )
+Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
 
-   IF Ascan( ::oParent:aControls, {|o|o:id==nId} ) != 0
+   IF AScan(::oParent:aControls, {|o|o:id == nId}) != 0
       nId --
-      DO WHILE nId >= CONTROL_FIRST_ID .AND. Ascan( ::oParent:aControls, {|o|o:id==nId} ) != 0
+      DO WHILE nId >= CONTROL_FIRST_ID .AND. AScan(::oParent:aControls, {|o|o:id == nId}) != 0
          nId --
       ENDDO
    ENDIF
@@ -90,7 +90,7 @@ Return nId
 
 METHOD AddName( cName ) CLASS HControl
 
-   IF !EMPTY( cName ) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName
+   IF !Empty(cName) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
 			__objAddData( ::oParent, cName )
 	    ::oParent: & ( cName ) := Self
@@ -170,8 +170,8 @@ Local lMove := .F., lSize := .F.
       lSize := .T.
    ENDIF
    IF lMove .OR. lSize
-      hwg_MoveWidget( ::handle, Iif(lMove,::nLeft,Nil), Iif(lMove,::nTop,Nil), ;
-          Iif(lSize,::nWidth,Nil), Iif(lSize,::nHeight,Nil), lMoveParent )
+      hwg_MoveWidget( ::handle, IIf(lMove, ::nLeft, NIL), IIf(lMove, ::nTop, NIL), ;
+          IIf(lSize, ::nWidth, NIL), IIf(lSize, ::nHeight, NIL), lMoveParent )
    ENDIF
 Return Nil
 
@@ -299,8 +299,8 @@ ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint ) CLASS HStatus
 
-   bSize := Iif( bSize!=Nil, bSize, {|o,x,y|MoveWindow(o:handle,0,y-20,x,y)} )
-   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
+   bSize := IIf(bSize != NIL, bSize, {|o, x, y|MoveWindow(o:handle, 0, y - 20, x, y)})
+   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
    ::Super:New( oWndParent,nId,nStyle,0,0,0,0,oFont,bInit,bSize,bPaint )
 
    ::aParts  := aParts
@@ -311,7 +311,7 @@ Return Self
 METHOD Activate CLASS HStatus
 Local aCoors
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
 
       ::handle := CreateStatusWindow( ::oParent:handle, ::id )
 
@@ -358,7 +358,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
 Return Self
 
 METHOD Activate CLASS HStatic
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title )
       ::Init()
@@ -381,9 +381,9 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
                   bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor ) CLASS HButton
 
-   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_PUSHBUTTON )
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,Iif( nWidth==Nil,90,nWidth ),;
-              Iif( nHeight==Nil,30,nHeight ),oFont,bInit, ;
+   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON )
+   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,IIf(nWidth == NIL, 90, nWidth),;
+              IIf(nHeight == NIL, 30, nHeight),oFont,bInit, ;
               bSize,bPaint,ctoolt,tcolor,bcolor )
 
    ::title   := cCaption
@@ -403,7 +403,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
 Return Self
 
 METHOD Activate CLASS HButton
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       SetWindowObject( ::handle,Self )
@@ -447,11 +447,11 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
 RETURN Self
 
 METHOD Activate CLASS HButtonEX
-   IF !Empty(::oParent:handle )
-      if !empty(::hBitmap)
+   IF !Empty(::oParent:handle)
+      if !Empty(::hBitmap)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hBitmap) 
-      elseif !empty(::hIcon)     
+      elseif !Empty(::hIcon)
             ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hIcon) 
       else
@@ -477,7 +477,7 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption, ;
                   oFont,bInit,bSize,bPaint,tcolor,bcolor ) CLASS HGroup
 
-   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_GROUPBOX )
+   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), BS_GROUPBOX )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,,tcolor,bcolor )
 
@@ -487,7 +487,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption, ;
 Return Self
 
 METHOD Activate CLASS HGroup
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::Init()
@@ -512,12 +512,12 @@ METHOD New( oWndParent,nId,lVert,nLeft,nTop,nLength,bSize ) CLASS hline
    ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,,,,,bSize,{|o,lp|o:Paint(lp)} )
 
    ::title := ""
-   ::lVert := Iif( lVert==Nil, .F., lVert )
+   ::lVert := IIf(lVert == NIL, .F., lVert)
    IF ::lVert
       ::nWidth  := 10
-      ::nHeight := Iif( nLength==Nil,20,nLength )
+      ::nHeight := IIf(nLength == NIL, 20, nLength)
    ELSE
-      ::nWidth  := Iif( nLength==Nil,20,nLength )
+      ::nWidth  := IIf(nLength == NIL, 20, nLength)
       ::nHeight := 10
    ENDIF
 
@@ -526,7 +526,7 @@ METHOD New( oWndParent,nId,lVert,nLeft,nTop,nLength,bSize ) CLASS hline
 Return Self
 
 METHOD Activate CLASS hline
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := hwg_CreateSep( ::oParent:handle, ::lVert, ::nLeft, ::nTop, ;
                                  ::nWidth,::nHeight )
       ::Init()

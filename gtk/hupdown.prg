@@ -38,7 +38,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
          oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,   ;
          nUpDWidth,nLower,nUpper ) CLASS HUpDown
 
-   nStyle   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), WS_TABSTOP )
+   nStyle   := hwg_BitOr( iIf(nStyle == NIL, 0, nStyle), WS_TABSTOP )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,ctoolt,tcolor,bcolor )
 
@@ -74,7 +74,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 Return Self
 
 METHOD Activate CLASS HUpDown
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateUpDownControl( ::oParent:handle, ;
           ::nLeft,::nTop,::nWidth,::nHeight,Val(::title),::nLower,::nUpper )
       ::Init()

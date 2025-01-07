@@ -44,8 +44,8 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
                   bSize,bDraw,,color,bcolor )
 
    ::title   := ""
-   ::aLeft   := Iif( aLeft==Nil, {}, aLeft )
-   ::aRight  := Iif( aRight==Nil, {}, aRight )
+   ::aLeft   := IIf(aLeft == NIL, {}, aLeft)
+   ::aRight  := IIf(aRight == NIL, {}, aRight)
    ::lVertical := ( ::nHeight > ::nWidth )
 
    ::Activate()
@@ -53,7 +53,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
 Return Self
 
 METHOD Activate() CLASS HSplitter
-   IF !Empty( ::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateSplitter( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
@@ -135,7 +135,7 @@ Return Nil
 METHOD DragAll() CLASS HSplitter
 Local i, oCtrl, nDiff
 
-   FOR i := 1 TO Len( ::aRight )
+   FOR i := 1 TO Len(::aRight)
       oCtrl := ::aRight[i]
       IF ::lVertical
          nDiff := ::nLeft+::nWidth - oCtrl:nLeft
@@ -145,7 +145,7 @@ Local i, oCtrl, nDiff
          oCtrl:Move( ,oCtrl:nTop+nDiff,,oCtrl:nHeight-nDiff )
       ENDIF   
    NEXT
-   FOR i := 1 TO Len( ::aLeft )
+   FOR i := 1 TO Len(::aLeft)
       oCtrl := ::aLeft[i]
       IF ::lVertical
          nDiff := ::nLeft - ( oCtrl:nLeft + oCtrl:nWidth )

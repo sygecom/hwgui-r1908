@@ -32,12 +32,12 @@ ENDCLASS
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
                   bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor,bGFocus ) CLASS HCheckButton
 
-   nStyle   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_AUTO3STATE+WS_TABSTOP )
+   nStyle   := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), BS_AUTO3STATE+WS_TABSTOP )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,ctoolt,tcolor,bcolor )
 
    ::title   := cCaption
-   ::value   := Iif( vari==Nil .OR. Valtype(vari)!="L",.F.,vari )
+   ::value   := IIf(vari == NIL .OR. ValType(vari) != "L", .F., vari)
    ::bSetGet := bSetGet
 
    ::Activate()
@@ -56,7 +56,7 @@ Return Self
 
 METHOD Activate CLASS HCheckButton
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       SetWindowObject( ::handle,Self )
@@ -87,7 +87,7 @@ Local var
 
    IF ::bSetGet != Nil
        var := Eval( ::bSetGet,,nil )
-       ::value := Iif( var==Nil,.F.,var ) 
+       ::value := IIf(var == NIL, .F., var)
    ENDIF
 
    hwg_CheckButton( ::handle,::value )

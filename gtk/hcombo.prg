@@ -53,7 +53,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    if lEdit == Nil; lEdit := .f.; endif
    if lText == Nil; lText := .f.; endif
 
-   nStyle := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),Iif( lEdit,CBS_DROPDOWN,CBS_DROPDOWNLIST )+WS_TABSTOP )
+   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle),IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST)+WS_TABSTOP )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctoolt,tcolor,bcolor )
       
    ::lEdit := lEdit
@@ -64,9 +64,9 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    endif
    
    if ::lText
-      ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
+      ::value := IIf(vari == NIL .OR. ValType(vari) != "C", "", vari)
    else
-      ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
+      ::value := IIf(vari == NIL .OR. ValType(vari) != "N", 1, vari)
    endif      
    
    ::bSetGet := bSetGet
@@ -97,7 +97,7 @@ Return Self
 
 METHOD Activate CLASS HComboBox
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateCombo( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::hEdit := hwg_ComboGetEdit( ::handle )
@@ -158,9 +158,9 @@ Local vari, i
    IF ::bSetGet != Nil
       vari := Eval( ::bSetGet,,Self )
       if ::lText
-         ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
+         ::value := IIf(vari == NIL .OR. ValType(vari) != "C", "", vari)
       else
-         ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
+         ::value := IIf(vari == NIL .OR. ValType(vari) != "N", 1, vari)
       endif      
    ENDIF
 
@@ -208,7 +208,7 @@ Local vari := hwg_edit_Gettext( oCtrl:hEdit )
    IF oCtrl:lText
       oCtrl:value := vari
    ELSE
-      oCtrl:value := Ascan( oCtrl:aItems,vari )
+      oCtrl:value := AScan(oCtrl:aItems, vari)
    ENDIF
 
    IF oCtrl:bSetGet != Nil

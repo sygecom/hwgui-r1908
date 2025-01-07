@@ -104,11 +104,11 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
 Return Nil
 
 Static Function FileOpen
-Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
 Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
 
-   IF !Empty( fname )
+   IF !Empty(fname)
       close all
       
       IF DataCP != Nil
@@ -122,9 +122,9 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       oBrw:InitBrw( 2 )
       oBrw:active := .F.
       CreateList( oBrw,.T. )
-      Aadd( oBrw:aColumns,Nil )
+      AAdd(oBrw:aColumns, NIL)
       Ains( oBrw:aColumns,1 )
-      oBrw:aColumns[1] := HColumn():New( "*",{|v,o|Iif(Deleted(),'*',' ')},"C",1,0 )
+      oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")},"C",1,0 )
       oBrw:active := .T.
       oBrw:Refresh()
       oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
@@ -165,19 +165,19 @@ Local aIndex := { { "None","   ","   " } }, i, indname, iLen := 0
 Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
 Memvar oBrw, oFont
 
-   IF Len( oBrw:aColumns ) == 0
+   IF Len(oBrw:aColumns) == 0
       Return Nil
    ENDIF
    
    i := 1   
-   DO WHILE !EMPTY( indname := ORDNAME( i ) )
-      AADD( aIndex, { indname, ORDKEY( i ), ORDBAGNAME( i ) } )
-      iLen := Max( iLen, Len( OrdKey( i ) ) )
+   DO WHILE !Empty(indname := OrdName(i))
+      AAdd(aIndex, {indname, OrdKey(i), OrdBagName(i)})
+      iLen := Max( iLen, Len(OrdKey(i)))
       i ++
    ENDDO
 
    width := Min( oBrw:width * ( iLen + 20 ), GetDesktopWidth() )
-   height := oBrw:height * ( Len( aIndex ) + 2 )
+   height := oBrw:height * ( Len(aIndex) + 2 )
    
    INIT DIALOG oDlg TITLE "Select Order" ;
          AT 0,0                  ;
@@ -215,7 +215,7 @@ Local cName := "", lMulti := .T., lUniq := .F., cTag := "", cExpr := "", cCond :
 Local oMsg
 Memvar oBrw
 
-   IF Len( oBrw:aColumns ) == 0
+   IF Len(oBrw:aColumns) == 0
       Return Nil
    ENDIF
 
@@ -244,22 +244,22 @@ Memvar oBrw
    oDlg:Activate()
    
    IF oDlg:lResult
-      IF !Empty( cName ) .AND. ( !Empty( cTag ) .OR. !lMulti ) .AND. ;
-            !Empty( cExpr )
+      IF !Empty(cName) .AND. ( !Empty(cTag) .OR. !lMulti ) .AND. ;
+            !Empty(cExpr)
          oMsg = DlgWait("Indexing")
          IF lMulti
-            IF EMPTY( cCond )
-               ORDCREATE( RTRIM(cName),RTRIM(cTag),RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),Iif(lUniq,.T.,Nil) )
+            IF Empty(cCond)
+               ORDCREATE( RTRIM(cName),RTRIM(cTag),RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
             ELSE                     
                ordCondSet( RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,, )
-               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),Iif(lUniq,.T.,Nil) )
+               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
             ENDIF
          ELSE
-            IF EMPTY( cCond )
-               dbCreateIndex( RTRIM(cName),RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"),Iif(lUniq,.T.,Nil) )
+            IF Empty(cCond)
+               dbCreateIndex( RTRIM(cName),RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
             ELSE                     
                ordCondSet( RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,, )
-               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),Iif(lUniq,.T.,Nil) )
+               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
             ENDIF
          ENDIF
          oMsg:Close()
@@ -271,15 +271,15 @@ Memvar oBrw
 Return Nil
 
 Static Function OpenIndex()
-Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := SelectFile( "index files( *.cdx )", "*.cdx", mypath )
 Memvar oBrw
 
-   IF Len( oBrw:aColumns ) == 0
+   IF Len(oBrw:aColumns) == 0
       Return Nil
    ENDIF
 
-   IF !Empty( fname )
+   IF !Empty(fname)
       Set Index To (fname)
       UpdBrowse()
    ENDIF
@@ -290,7 +290,7 @@ Static Function ReIndex()
 Local oMsg
 Memvar oBrw
 
-   IF Len( oBrw:aColumns ) == 0
+   IF Len(oBrw:aColumns) == 0
       Return Nil
    ENDIF
 
@@ -304,7 +304,7 @@ Return Nil
 Static Function CloseIndex()
 Memvar oBrw
 
-   IF Len( oBrw:aColumns ) == 0
+   IF Len(oBrw:aColumns) == 0
       Return Nil
    ENDIF
    
@@ -356,7 +356,7 @@ Memvar oBrw, currentCP, currFname
       af0 := dbStruct()
       af  := dbStruct()
       FOR i := 1 TO Len(af)
-         Aadd( af[i],i )
+         AAdd(af[i], i)
       NEXT
    ENDIF
 
@@ -480,7 +480,7 @@ Static Function brw_onPosChg( oBrowse, oGet1, oGet2, oGet3, oGet4 )
    oGet1:SetGet( oBrowse:aArray[oBrowse:nCurrent,1] )
    oGet1:Refresh()
 
-   oGet2:SetItem( Ascan(aFieldTypes,oBrowse:aArray[oBrowse:nCurrent,2]) )
+   oGet2:SetItem( AScan(aFieldTypes, oBrowse:aArray[oBrowse:nCurrent, 2]))
    
    oGet3:SetGet( Ltrim(Str(oBrowse:aArray[oBrowse:nCurrent,3])) )
    oGet3:Refresh()
@@ -494,8 +494,8 @@ Static Function UpdStru( oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation )
 Local cName, cType, nLen, nDec
 
    IF nOperation == 4
-      Adel( oBrowse:aArray,oBrowse:nCurrent )
-      Asize( oBrowse:aArray, Len(oBrowse:aArray)-1 )
+      ADel(oBrowse:aArray, oBrowse:nCurrent)
+      ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
       IF oBrowse:nCurrent < Len(oBrowse:aArray) .AND. oBrowse:nCurrent > 1
          oBrowse:nCurrent --
       ENDIF
@@ -505,10 +505,10 @@ Local cName, cType, nLen, nDec
       nLen  := Val( oGet3:SetGet() )
       nDec  := Val( oGet4:SetGet() )
       IF nOperation == 1
-         Aadd( oBrowse:aArray,{ cName,cType,nLen,nDec } )
+         AAdd(oBrowse:aArray, {cName, cType, nLen, nDec})
       ELSE
          IF nOperation == 2
-            Aadd( oBrowse:aArray, Nil )
+            AAdd(oBrowse:aArray, NIL)
             Ains( oBrowse:aArray,oBrowse:nCurrent )
          ENDIF
          oBrowse:aArray[oBrowse:nCurrent,1] := cName
@@ -545,7 +545,7 @@ Memvar oBrw, oSay2
       MsgStop( "No active order !","Seek record" )
    ELSE
       cKey := GetData( dbv_cSeek,"Seek record","Input key:" )
-      IF !Empty( cKey )
+      IF !Empty(cKey)
          dbv_cSeek := cKey
          nRec := Eval( oBrw:bRecNo, oBrw )
          IF dbSeek( cKey )
@@ -569,7 +569,7 @@ Memvar oBrw, oSay2
    DO WHILE .T.
 
       cLocate := GetData( cLocate,"Locate","Input condition:" )
-      IF Empty( cLocate )
+      IF Empty(cLocate)
          Return Nil
       ENDIF
 
@@ -607,7 +607,7 @@ Static Function dbv_Continue()
 Local nRec
 Memvar oBrw, oSay2
 
-   IF !Empty( dbv_cLocate )
+   IF !Empty(dbv_cLocate)
       nRec := Eval( oBrw:bRecNo, oBrw )
       CONTINUE
       IF Found()
@@ -684,7 +684,7 @@ Return Nil
 Static Function dbv_DelRec()
 Memvar oBrw
 
-   IF !Empty( Alias() )
+   IF !Empty(Alias())
       IF Deleted()
          RECALL
       ELSE

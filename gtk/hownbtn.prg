@@ -55,13 +55,13 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,font,bInit, ;
                   bSize,bPaint,ctooltip )
 
-   ::lFlat   := Iif( lFlat==Nil,.F.,lFlat )
+   ::lFlat   := IIf(lFlat == NIL, .F., lFlat)
    ::bClick  := bClick
    ::state   := OBTN_INIT
-   ::nOrder  := iif( oWndParent==nil, 0, len( oWndParent:aControls ) )
+   ::nOrder  := IIf(oWndParent == NIL, 0, Len(oWndParent:aControls))
    
    ::text    := cText
-   ::tcolor  := Iif( color==Nil, 0, color )
+   ::tcolor  := IIf(color == NIL, 0, color)
    ::xt      := xt
    ::yt      := yt
    ::widtht  := widtht
@@ -71,12 +71,12 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
       ::lEnabled:=lEnabled
    endif
    IF bmp != Nil
-      ::bitmap := Iif( (lResour!=Nil.AND.lResour).OR.Valtype(bmp)=="N", ;
-                     HBitmap():AddResource( bmp ), ;
-                     HBitmap():AddFile( Iif( ::cPath!=Nil,::cPath+bmp,bmp ) ) )
+      ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. ValType(bmp) == "N", ;
+                     HBitmap():AddResource(bmp), ;
+                     HBitmap():AddFile(IIf(::cPath != NIL, ::cPath + bmp, bmp)))
       IF ::bitmap != Nil .AND. lTr != Nil .AND. lTr
          ::lTransp := .T.
-         hwg_alpha2pixbuf( ::bitmap:handle, Iif( trColor!=Nil,trColor,16777215 ) )
+         hwg_alpha2pixbuf( ::bitmap:handle, IIf(trColor != NIL, trColor, 16777215) )
       ENDIF
    ENDIF
    ::xb      := xb
@@ -90,7 +90,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
 Return Self
 
 METHOD Activate CLASS HOwnButton
-   IF !Empty( ::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateOwnBtn( ::oParent:handle, ::id, ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
@@ -159,10 +159,10 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
          ::widthb := ::bitmap:nWidth
          ::heightb := ::bitmap:nHeight
       ENDIF
-      x1 := Iif( ::xb!=Nil .AND. ::xb!=0, ::xb, ;
-                 Round( (aCoors[3]-aCoors[1]-::widthb) / 2, 0 ) )
-      y1 := Iif( ::yb!=Nil .AND. ::yb!=0, ::yb, ;
-                 Round( (aCoors[4]-aCoors[2]-::heightb) / 2, 0 ) )
+      x1 := IIf(::xb != NIL .AND. ::xb != 0, ::xb, ;
+                 Round((aCoors[3] - aCoors[1] - ::widthb) / 2, 0))
+      y1 := IIf(::yb != NIL .AND. ::yb != 0, ::yb, ;
+                 Round((aCoors[4] - aCoors[2] - ::heightb) / 2, 0))
       if ::lEnabled
          if ::oBitmap!=Nil
             ::bitmap:handle:=::oBitmap
@@ -187,15 +187,12 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       Else
          SetTextColor( hDC, 0 )
       EndIf
-      x1 := Iif( ::xt!=Nil .AND. ::xt!=0, ::xt, aCoors[1]+2 )
-      y1 := Iif( ::yt!=Nil .AND. ::yt!=0, ::yt, ;
-                              Round( ( aCoors[4]-aCoors[2]-aMetr[1] ) / 2, 0 ) )
-      x2 := Iif( ::widtht!=Nil .AND. ::widtht!=0, ;
-                          ::xt+::widtht-1, aCoors[3]-2 )
-      y2 := Iif( ::heightt!=Nil .AND. ::heightt!=0, ;
-                 ::yt+::heightt-1, y1+aMetr[1] )
+      x1 := IIf(::xt != NIL .AND. ::xt != 0, ::xt, aCoors[1] + 2)
+      y1 := IIf(::yt != NIL .AND. ::yt != 0, ::yt, Round((aCoors[4] - aCoors[2] - aMetr[1]) / 2, 0))
+      x2 := IIf(::widtht != NIL .AND. ::widtht != 0, ::xt + ::widtht - 1, aCoors[3] - 2)
+      y2 := IIf(::heightt != NIL .AND. ::heightt != 0, ::yt + ::heightt - 1, y1 + aMetr[1])
       // SetTransparentMode( hDC,.T. )
-      DrawText( hDC, ::text, x1, y1, x2, y2, Iif( ::xt!=Nil.AND.::xt!=0,DT_LEFT,DT_CENTER ) )
+      DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
       // SetTransparentMode( hDC,.F. )
    ENDIF
    // SetBkColor( hDC,oldBkColor )

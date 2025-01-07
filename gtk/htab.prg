@@ -54,15 +54,15 @@ LOCAL i, aBmpSize
                   bSize,bPaint )
 
    ::title   := ""
-   ::oFont   := Iif( oFont==Nil, ::oParent:oFont, oFont )
-   ::aTabs   := Iif( aTabs==Nil,{},aTabs )
+   ::oFont   := IIf(oFont == NIL, ::oParent:oFont, oFont)
+   ::aTabs   := IIf(aTabs == NIL, {}, aTabs)
    ::bChange := bChange
 
    ::bChange2 := bChange
 
-   ::bGetFocus :=IIf( bGetFocus==Nil, Nil, bGetFocus)
-   ::bLostFocus:=IIf( bLostFocus==Nil, Nil, bLostFocus)
-   ::bAction   :=IIf( bClick==Nil, Nil, bClick)
+   ::bGetFocus :=IIf(bGetFocus == NIL, NIL, bGetFocus)
+   ::bLostFocus:=IIf(bLostFocus == NIL, NIL, bLostFocus)
+   ::bAction   :=IIf(bClick == NIL, NIL, bClick)
 
    ::Activate()
 
@@ -70,7 +70,7 @@ Return Self
 
 METHOD Activate CLASS HTab
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateTabControl( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
 
@@ -83,14 +83,14 @@ Local i, h
 
    IF !::lInit
       ::Super:Init()
-      FOR i := 1 TO Len( ::aTabs )
+      FOR i := 1 TO Len(::aTabs)
          h := AddTab( ::handle, ::aTabs[i] )
-	 Aadd( ::aPages, { 0,0,.F.,h } )
+	 AAdd(::aPages, {0, 0, .F., h})
       NEXT
       
       SetWindowObject( ::handle,Self )
 
-      FOR i := 2 TO Len( ::aPages )
+      FOR i := 2 TO Len(::aPages)
          ::HidePage( i )
       NEXT
    ENDIF
@@ -102,17 +102,17 @@ METHOD SetTab( n ) CLASS HTab
 Return Nil
 
 METHOD StartPage( cname ) CLASS HTab
-Local i := Iif( cName==Nil, Len(::aPages)+1, Ascan( ::aTabs,cname ) )
+Local i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
 Local lNew := ( i == 0 )
 
    ::oTemp := ::oDefaultParent
    ::oDefaultParent := Self
    IF lNew
-      Aadd( ::aTabs,cname )
-      i := Len( ::aTabs )
+      AAdd(::aTabs, cname)
+      i := Len(::aTabs)
    ENDIF
-   DO WHILE Len( ::aPages ) < i
-      Aadd( ::aPages, { Len( ::aControls ),0,lNew,0 } )
+   DO WHILE Len(::aPages) < i
+      AAdd(::aPages, {Len(::aControls), 0, lNew, 0})
    ENDDO
    ::nActive := i
    ::aPages[ i,4 ] := AddTab( ::handle,::aTabs[i] )
@@ -121,8 +121,8 @@ Return Nil
 
 METHOD EndPage() CLASS HTab
 
-   ::aPages[ ::nActive,2 ] := Len( ::aControls ) - ::aPages[ ::nActive,1 ]
-   IF ::nActive > 1 .AND. ::handle != Nil .AND. !Empty( ::handle )
+   ::aPages[ ::nActive,2 ] := Len(::aControls) - ::aPages[ ::nActive,1 ]
+   IF ::nActive > 1 .AND. ::handle != Nil .AND. !Empty(::handle)
       ::HidePage( ::nActive )
    ENDIF
    ::nActive := 1
@@ -136,7 +136,7 @@ Return Nil
 
 METHOD ChangePage( nPage ) CLASS HTab
 
-   IF !Empty( ::aPages )
+   IF !Empty(::aPages)
 
       ::HidePage( ::nActive )
 
@@ -182,12 +182,12 @@ Return Nil
 
 METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
 
-   IF !Empty( ::aPages )
+   IF !Empty(::aPages)
       nFirst := ::aPages[ ::nActive,1 ] + 1
       nEnd   := ::aPages[ ::nActive,1 ] + ::aPages[ ::nActive,2 ]
    ELSE
       nFirst := 1
-      nEnd   := Len( ::aControls )
+      nEnd   := Len(::aControls)
    ENDIF
 
 Return ::nActive

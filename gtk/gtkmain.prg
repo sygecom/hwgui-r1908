@@ -19,7 +19,7 @@ Return Nil
 Function VColor( cColor )
 Local i,res := 0, n := 1, iValue
    cColor := Trim(cColor)
-   for i := 1 to Len( cColor )
+   for i := 1 to Len(cColor)
       iValue := Asc( Substr( cColor,Len(cColor)-i+1,1 ) )
       if iValue < 58 .and. iValue > 47
          iValue -= 48
@@ -39,10 +39,10 @@ Function MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
 Local oModDlg, oFont := HFont():Add( "Sans",0,12 )
 Local cRes := ""
 
-   nStyle := Iif( nStyle == Nil, 0, nStyle )
-   x := Iif( x == Nil, 210, x )
-   y := Iif( y == Nil, 10, y )
-   nDlgStyle := Iif( nDlgStyle == Nil, 0, nDlgStyle )
+   nStyle := IIf(nStyle == NIL, 0, nStyle)
+   x := IIf(x == NIL, 210, x)
+   y := IIf(y == NIL, 10, y)
+   nDlgStyle := IIf(nDlgStyle == NIL, 0, nDlgStyle)
 
    INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300,140 ;
         FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+nDlgStyle
@@ -57,7 +57,7 @@ Local cRes := ""
 
    oFont:Release()
    IF oModDlg:lResult
-      Return Trim( cRes )
+      Return Trim(cRes)
    ELSE
       cRes := ""
    ENDIF
@@ -66,7 +66,7 @@ Return cRes
 
 Function WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel )
 Local oDlg, oBrw
-Local nChoice := 0, i, aLen := Len( arr ), nLen := 0, addX := 20, addY := 30
+Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
 Local hDC, aMetr, width, height, screenh
 
    IF cTitle == Nil; cTitle := ""; ENDIF
@@ -76,7 +76,7 @@ Local hDC, aMetr, width, height, screenh
 
    IF Valtype( arr[1] ) == "A"
       FOR i := 1 TO aLen
-         nLen := Max( nLen,Len(arr[i,1]) )
+         nLen := Max( nLen,Len(arr[i, 1]) )
       NEXT
    ELSE
       FOR i := 1 TO aLen
@@ -150,12 +150,12 @@ Function RefreshAllGets( oDlg )
 Return Nil
 
 FUNCTION HWG_Version(oTip)
-RETURN "HwGUI " + HWG_VERSION + Iif( oTip==1," "+Version(), "" )
+RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
 
 Function WriteStatus( oWnd, nPart, cText, lRedraw )
 Local aControls, i
    aControls := oWnd:aControls
-   IF ( i := Ascan( aControls, {|o|o:ClassName()=="HSTATUS"} ) ) > 0
+   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
       WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
 
    ENDIF

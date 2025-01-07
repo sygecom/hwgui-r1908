@@ -40,17 +40,17 @@ ENDCLASS
 METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, ;
                    fdwUnderline, fdwStrikeOut, nHandle, lLinux ) CLASS HFont
 
-Local i, nlen := Len( ::aFonts )
+Local i, nlen := Len(::aFonts)
 
-   nHeight  := Iif( nHeight==Nil,13,Abs(nHeight) )
+   nHeight  := IIf(nHeight == NIL, 13, Abs(nHeight))
    IF lLinux == Nil .OR. !lLinux
       nHeight -= 3
    ENDIF
-   fnWeight := Iif( fnWeight==Nil,0,fnWeight )
-   fdwCharSet := Iif( fdwCharSet==Nil,0,fdwCharSet )
-   fdwItalic := Iif( fdwItalic==Nil,0,fdwItalic )
-   fdwUnderline := Iif( fdwUnderline==Nil,0,fdwUnderline )
-   fdwStrikeOut := Iif( fdwStrikeOut==Nil,0,fdwStrikeOut )
+   fnWeight := IIf(fnWeight == NIL, 0, fnWeight)
+   fdwCharSet := IIf(fdwCharSet == NIL, 0, fdwCharSet)
+   fdwItalic := IIf(fdwItalic == NIL, 0, fdwItalic)
+   fdwUnderline := IIf(fdwUnderline == NIL, 0, fdwUnderline)
+   fdwStrikeOut := IIf(fdwStrikeOut == NIL, 0, fdwStrikeOut)
 
    FOR i := 1 TO nlen
       IF ::aFonts[i]:name == fontName .AND.          ;
@@ -86,7 +86,7 @@ Local i, nlen := Len( ::aFonts )
    ::Underline := fdwUnderline
    ::StrikeOut := fdwStrikeOut
 
-   Aadd( ::aFonts,Self )
+   AAdd(::aFonts, Self)
 
 Return Self
 
@@ -100,7 +100,7 @@ Local af := SelectFont( oFont )
 Return ::Add( af[2],af[3],af[4],af[5],af[6],af[7],af[8],af[9],af[1],.T. )
 
 METHOD Release() CLASS HFont
-Local i, nlen := Len( ::aFonts )
+Local i, nlen := Len(::aFonts)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -108,8 +108,8 @@ Local i, nlen := Len( ::aFonts )
       For EACH i in ::aFonts
          IF i:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aFonts,hb_enumindex() )
-            Asize( ::aFonts,nlen-1 )
+            ADel(::aFonts, hb_enumindex())
+            ASize(::aFonts, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -117,8 +117,8 @@ Local i, nlen := Len( ::aFonts )
       For i := 1 TO nlen
          IF ::aFonts[i]:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aFonts,i )
-            Asize( ::aFonts,nlen-1 )
+            ADel(::aFonts, i)
+            ASize(::aFonts, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -144,9 +144,9 @@ ENDCLASS
 METHOD Add( nStyle,nWidth,nColor ) CLASS HPen
 Local i
 
-   nStyle := Iif( nStyle == Nil,BS_SOLID,nStyle )
-   nWidth := Iif( nWidth == Nil,1,nWidth )
-   nColor := Iif( nColor == Nil,Vcolor("000000"),nColor )
+   nStyle := IIf(nStyle == NIL, BS_SOLID, nStyle)
+   nWidth := IIf(nWidth == NIL, 1, nWidth)
+   nColor := IIf(nColor == NIL, Vcolor("000000"), nColor)
 
    #ifdef __XHARBOUR__
    For EACH i in ::aPens 
@@ -159,7 +159,7 @@ Local i
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aPens )
+   For i := 1 TO Len(::aPens)
       IF ::aPens[i]:style == nStyle .AND. ;
          ::aPens[i]:width == nWidth .AND. ;
          ::aPens[i]:color == nColor
@@ -174,16 +174,16 @@ Local i
    ::style  := nStyle
    ::width  := nWidth
    ::color  := nColor
-   Aadd( ::aPens, Self )
+   AAdd(::aPens, Self)
 
 Return Self
 
 METHOD Get( nStyle,nWidth,nColor ) CLASS HPen
 Local i
 
-   nStyle := Iif( nStyle == Nil,PS_SOLID,nStyle )
-   nWidth := Iif( nWidth == Nil,1,nWidth )
-   nColor := Iif( nColor == Nil,Vcolor("000000"),nColor )
+   nStyle := IIf(nStyle == NIL, PS_SOLID, nStyle)
+   nWidth := IIf(nWidth == NIL, 1, nWidth)
+   nColor := IIf(nColor == NIL, Vcolor("000000"), nColor)
 
    #ifdef __XHARBOUR__
    For EACH i in ::aPens 
@@ -195,7 +195,7 @@ Local i
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aPens )
+   For i := 1 TO Len(::aPens)
       IF ::aPens[i]:style == nStyle .AND. ;
          ::aPens[i]:width == nWidth .AND. ;
          ::aPens[i]:color == nColor
@@ -208,7 +208,7 @@ Local i
 Return Nil
 
 METHOD Release() CLASS HPen
-Local i, nlen := Len( ::aPens )
+Local i, nlen := Len(::aPens)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -216,8 +216,8 @@ Local i, nlen := Len( ::aPens )
       For EACH i  in ::aPens 
          IF i:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aPens,hb_EnumIndex() )
-            Asize( ::aPens,nlen-1 )
+            ADel(::aPens, hb_EnumIndex())
+            ASize(::aPens, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -225,8 +225,8 @@ Local i, nlen := Len( ::aPens )
       For i := 1 TO nlen
          IF ::aPens[i]:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aPens,i )
-            Asize( ::aPens,nlen-1 )
+            ADel(::aPens, i)
+            ASize(::aPens, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -260,7 +260,7 @@ Local i
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aBrushes )
+   For i := 1 TO Len(::aBrushes)
       IF ::aBrushes[i]:color == nColor
          ::aBrushes[i]:nCounter ++
          Return ::aBrushes[i]
@@ -269,12 +269,12 @@ Local i
    #endif
    ::handle := CreateSolidBrush( nColor )
    ::color  := nColor
-   Aadd( ::aBrushes,Self )
+   AAdd(::aBrushes, Self)
 
 Return Self
 
 METHOD Release() CLASS HBrush
-Local i, nlen := Len( ::aBrushes )
+Local i, nlen := Len(::aBrushes)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -282,8 +282,8 @@ Local i, nlen := Len( ::aBrushes )
       For EACH i IN ::aBrushes 
          IF i:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aBrushes,hb_EnumIndex() )
-            Asize( ::aBrushes,nlen-1 )
+            ADel(::aBrushes, hb_EnumIndex())
+            ASize(::aBrushes, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -291,8 +291,8 @@ Local i, nlen := Len( ::aBrushes )
       For i := 1 TO nlen
          IF ::aBrushes[i]:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aBrushes,i )
-            Asize( ::aBrushes,nlen-1 )
+            ADel(::aBrushes, i)
+            ASize(::aBrushes, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -322,7 +322,7 @@ METHOD AddResource( name ) CLASS HBitmap
 Local lPreDefined := .F., i, aBmpSize
 
    IF Valtype( name ) == "N"
-      name := Ltrim( Str( name ) )
+      name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF
    #ifdef __XHARBOUR__
@@ -333,20 +333,20 @@ Local lPreDefined := .F., i, aBmpSize
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aBitmaps )
+   For i := 1 TO Len(::aBitmaps)
       IF ::aBitmaps[i]:name == name
          ::aBitmaps[i]:nCounter ++
          Return ::aBitmaps[i]
       ENDIF
    NEXT
    #endif
-   ::handle :=   LoadBitmap( Iif( lPreDefined, Val(name),name ) )
-   IF !Empty( ::handle )
+   ::handle :=   LoadBitmap( IIf(lPreDefined, Val(name), name) )
+   IF !Empty(::handle)
       ::name   := name
       aBmpSize  := GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
-      Aadd( ::aBitmaps,Self )
+      AAdd(::aBitmaps, Self)
    ELSE
       Return Nil
    ENDIF
@@ -364,7 +364,7 @@ Local i, aBmpSize
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aBitmaps )
+   For i := 1 TO Len(::aBitmaps)
       IF ::aBitmaps[i]:name == name
          ::aBitmaps[i]:nCounter ++
          Return ::aBitmaps[i]
@@ -372,12 +372,12 @@ Local i, aBmpSize
    NEXT
    #endif
    ::handle := OpenImage( name )
-   IF !Empty( ::handle )
+   IF !Empty(::handle)
       ::name := name
       aBmpSize  := GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
-      Aadd( ::aBitmaps,Self )
+      AAdd(::aBitmaps, Self)
    ELSE
       Return Nil
    ENDIF
@@ -388,16 +388,16 @@ METHOD AddWindow( oWnd,lFull ) CLASS HBitmap
 Local i, aBmpSize
 
    // ::handle := Window2Bitmap( oWnd:handle,lFull )
-   ::name := Ltrim( Str( oWnd:handle ) )
+   ::name := LTrim(Str(oWnd:handle))
    aBmpSize  := GetBitmapSize( ::handle )
    ::nWidth  := aBmpSize[1]
    ::nHeight := aBmpSize[2]
-   Aadd( ::aBitmaps,Self )
+   AAdd(::aBitmaps, Self)
 
 Return Self
 
 METHOD Release() CLASS HBitmap
-Local i, nlen := Len( ::aBitmaps )
+Local i, nlen := Len(::aBitmaps)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -405,8 +405,8 @@ Local i, nlen := Len( ::aBitmaps )
       For EACH i IN ::aBitmaps
          IF i:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aBitmaps,hb_EnumIndex() )
-            Asize( ::aBitmaps,nlen-1 )
+            ADel(::aBitmaps, hb_EnumIndex())
+            ASize(::aBitmaps, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -414,8 +414,8 @@ Local i, nlen := Len( ::aBitmaps )
       For i := 1 TO nlen
          IF ::aBitmaps[i]:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aBitmaps,i )
-            Asize( ::aBitmaps,nlen-1 )
+            ADel(::aBitmaps, i)
+            ASize(::aBitmaps, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -444,7 +444,7 @@ METHOD AddResource( name ) CLASS HIcon
 Local lPreDefined := .F., i
 
    IF Valtype( name ) == "N"
-      name := Ltrim( Str( name ) )
+      name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF
    #ifdef __XHARBOUR__
@@ -455,16 +455,16 @@ Local lPreDefined := .F., i
       ENDIF
    NEXT
    #else
-   For i := 1 TO Len( ::aIcons )
+   For i := 1 TO Len(::aIcons)
       IF ::aIcons[i]:name == name
          ::aIcons[i]:nCounter ++
          Return ::aIcons[i]
       ENDIF
    NEXT
    #endif
-   // ::handle :=   LoadIcon( Iif( lPreDefined, Val(name),name ) )
+   // ::handle :=   LoadIcon( IIf(lPreDefined, Val(name), name) )
    ::name   := name
-   Aadd( ::aIcons,Self )
+   AAdd(::aIcons, Self)
 
 Return Self
 
@@ -479,7 +479,7 @@ Local i, aBmpSize
       ENDIF
    NEXT
 #else
-   For i := 1 TO Len( ::aIcons )
+   For i := 1 TO Len(::aIcons)
       IF ::aIcons[i]:name == name
          ::aIcons[i]:nCounter ++
          Return ::aIcons[i]
@@ -489,16 +489,16 @@ Local i, aBmpSize
 //   ::handle := LoadImage( 0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE+LR_LOADFROMFILE )
 //   ::handle := OpenImage( name )
 //   ::name := name
-//   Aadd( ::aIcons,Self )
+//   AAdd(::aIcons, Self)
 //  Tracelog("name = ",name)
    ::handle := OpenImage( name )
 //   tracelog("handle = ",::handle)
-   IF !Empty( ::handle )
+   IF !Empty(::handle)
       ::name := name
       aBmpSize  := GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
-      Aadd( ::aIcons,Self )
+      AAdd(::aIcons, Self)
    ELSE
       Return Nil
    ENDIF
@@ -506,7 +506,7 @@ Local i, aBmpSize
 Return Self
 
 METHOD Release() CLASS HIcon
-Local i, nlen := Len( ::aIcons )
+Local i, nlen := Len(::aIcons)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -514,8 +514,8 @@ Local i, nlen := Len( ::aIcons )
       For EACH i IN ::aIcons
          IF i:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aIcons,hb_EnumIndex() )
-            Asize( ::aIcons,nlen-1 )
+            ADel(::aIcons, hb_EnumIndex())
+            ASize(::aIcons, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -523,8 +523,8 @@ Local i, nlen := Len( ::aIcons )
       For i := 1 TO nlen
          IF ::aIcons[i]:handle == ::handle
             DeleteObject( ::handle )
-            Adel( ::aIcons,i )
-            Asize( ::aIcons,nlen-1 )
+            ADel(::aIcons, i)
+            ASize(::aIcons, nlen - 1)
             Exit
          ENDIF
       NEXT
@@ -536,19 +536,19 @@ Return Nil
 EXIT PROCEDURE CleanDrawWidg
 Local i
 
-   For i := 1 TO Len( HPen():aPens )
+   For i := 1 TO Len(HPen():aPens)
       DeleteObject( HPen():aPens[i]:handle )
    NEXT
-   For i := 1 TO Len( HBrush():aBrushes )
+   For i := 1 TO Len(HBrush():aBrushes)
       DeleteObject( HBrush():aBrushes[i]:handle )
    NEXT
-   For i := 1 TO Len( HFont():aFonts )
+   For i := 1 TO Len(HFont():aFonts)
       DeleteObject( HFont():aFonts[i]:handle )
    NEXT
-   For i := 1 TO Len( HBitmap():aBitmaps )
+   For i := 1 TO Len(HBitmap():aBitmaps)
       DeleteObject( HBitmap():aBitmaps[i]:handle )
    NEXT
-   For i := 1 TO Len( HIcon():aIcons )
+   For i := 1 TO Len(HIcon():aIcons)
       // DeleteObject( HIcon():aIcons[i]:handle )
    NEXT
 

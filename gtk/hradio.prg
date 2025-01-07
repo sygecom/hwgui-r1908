@@ -22,7 +22,7 @@ CLASS HRadioGroup INHERIT HObject
    METHOD New( vari,bSetGet )
    METHOD EndGroup( nSelected )
    METHOD SetValue( nValue )
-   METHOD Refresh()   INLINE Iif( ::bSetGet!=Nil,::SetValue(Eval(::bSetGet)),.T. )
+   METHOD Refresh()   INLINE IIf(::bSetGet != NIL, ::SetValue(Eval(::bSetGet)), .T.)
 ENDCLASS
 
 METHOD New( vari,bSetGet ) CLASS HRadioGroup
@@ -43,8 +43,8 @@ Local nLen
 
    IF ::oGroupCurrent != Nil .AND. ( nLen:=Len(::oGroupCurrent:aButtons) ) > 0
 
-      nSelected := Iif( nSelected!=Nil.AND.nSelected<=nLen.AND.nSelected > 0, ;
-                        nSelected, ::oGroupCurrent:value )
+      nSelected := IIf(nSelected != NIL .AND. nSelected <= nLen .AND. nSelected > 0, ;
+                       nSelected, ::oGroupCurrent:value )
       IF nSelected != 0 .AND. nSelected <= nlen
          hwg_CheckButton( ::oGroupCurrent:aButtons[nSelected]:handle,.T. )
       ENDIF
@@ -76,13 +76,13 @@ ENDCLASS
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
                   bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor ) CLASS HRadioButton
 
-   ::oParent := Iif( oWndParent==Nil, ::oDefaultParent, oWndParent )
-   ::id      := Iif( nId==Nil,::NewId(), nId )
+   ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+   ::id      := IIf(nId == NIL, ::NewId(), nId)
    ::title   := cCaption
    ::oGroup  := HRadioGroup():oGroupCurrent
-   ::style   := hwg_BitOr( Iif( nStyle==Nil,0,nStyle ), BS_AUTORADIOBUTTON+;
+   ::style   := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), BS_AUTORADIOBUTTON+;
                      WS_CHILD+WS_VISIBLE+ ;
-                     Iif( ::oGroup != Nil .AND. Empty( ::oGroup:aButtons ),WS_GROUP,0 ) )
+                     IIf(::oGroup != NIL .AND. Empty(::oGroup:aButtons), WS_GROUP, 0) )
    ::oFont   := oFont
    ::nLeft   := nLeft
    ::nTop    := nTop
@@ -110,7 +110,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       hwg_SetSignal( ::handle,"released",WM_LBUTTONUP,0,0 )
    ENDIF
    IF ::oGroup != Nil
-      Aadd( ::oGroup:aButtons,Self )
+      AAdd(::oGroup:aButtons, Self)
       IF ::oGroup:bSetGet != Nil
          hwg_SetSignal( ::handle,"released",WM_LBUTTONUP,0,0 )	 
       ENDIF
@@ -121,7 +121,7 @@ Return Self
 METHOD Activate CLASS HRadioButton
 Local groupHandle := ::oGroup:handle
 
-   IF !Empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, @groupHandle, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::oGroup:handle := groupHandle
@@ -144,7 +144,7 @@ Return Nil
 
 Static Function __Valid( oCtrl )
 
-   oCtrl:oGroup:value := Ascan( oCtrl:oGroup:aButtons,{|o|o:id==oCtrl:id} )
+   oCtrl:oGroup:value := AScan(oCtrl:oGroup:aButtons, {|o|o:id == oCtrl:id})
    IF oCtrl:oGroup:bSetGet != Nil
       Eval( oCtrl:oGroup:bSetGet,oCtrl:oGroup:value )
    ENDIF

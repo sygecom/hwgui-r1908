@@ -37,9 +37,9 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,b
 
    ::Super:New( oWndParent,nId,,nLeft,nTop,nWidth,nHeight,,bInit,bSize,bPaint,ctooltip )
 
-   ::maxPos  := Iif( maxPos==Nil,20,maxPos )
+   ::maxPos  := IIf(maxPos == NIL, 20, maxPos)
    ::lNewBox := .F.
-   ::nLimit := Iif( nRange != Nil,Int( nRange/::maxPos ),1 )
+   ::nLimit := IIf(nRange != NIL, Int(nRange / ::maxPos), 1)
 
    ::Activate()
 
@@ -49,23 +49,23 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
 
    // ::classname:= "HPROGRESSBAR"
    ::style   := WS_CHILD+WS_VISIBLE
-   nWidth := Iif( nWidth==Nil,220,nWidth )
-   nHeight := Iif( nHeight==Nil,60,nHeight )
-   nLeft   := Iif( nLeft==Nil,0,nLeft )
-   nTop    := Iif( nTop==Nil,0,nTop )
-   nWidth  := Iif( nWidth==Nil,220,nWidth )
-   nHeight := Iif( nHeight==Nil,60,nHeight )
+   nWidth := IIf(nWidth == NIL, 220, nWidth)
+   nHeight := IIf(nHeight == NIL, 60, nHeight)
+   nLeft   := IIf(nLeft == NIL, 0, nLeft)
+   nTop    := IIf(nTop == NIL, 0, nTop)
+   nWidth  := IIf(nWidth == NIL, 220, nWidth)
+   nHeight := IIf(nHeight == NIL, 60, nHeight)
    ::nLeft := 20
    ::nTop  := 25
    ::nWidth  := nWidth-40
    ::nheight  := 20
-   ::maxPos  := Iif( maxPos==Nil,20,maxPos )
+   ::maxPos  := IIf(maxPos == NIL, 20, maxPos)
    ::lNewBox := .T.
-   ::nLimit := Iif( nRange != Nil,Int( nRange/::maxPos ),1 )
+   ::nLimit := IIf(nRange != NIL, Int(nRange / ::maxPos), 1)
 
    INIT DIALOG ::oParent TITLE cTitle       ;
         AT nLeft,nTop SIZE nWidth,nHeight   ;
-        STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+Iif( nTop==0,DS_CENTER,0 )+DS_SYSMODAL
+        STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+IIf(nTop == 0, DS_CENTER, 0)+DS_SYSMODAL
 
    IF bExit != Nil
       ::oParent:bDestroy := bExit
@@ -81,7 +81,7 @@ Return Self
 
 METHOD Activate CLASS HProgressBar
 
-   IF !empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
       ::handle := CreateProgressBar( ::oParent:handle, ::maxPos, ;
                   ::nLeft, ::nTop, ::nWidth,::nHeight )
       ::Init()

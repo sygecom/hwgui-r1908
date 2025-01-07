@@ -33,7 +33,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor,.F.), ;
-                     MsgInfo(Iif(nColor!=Nil,str(nColor),"--"),"Color value"))
+                     MsgInfo(IIf(nColor != NIL, Str(nColor), "--"),"Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION EndWindow()
@@ -60,13 +60,13 @@ return nil
 
 Function FileOpen
 Local oModDlg, oBrw
-Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
 Local nId
 
-   IF !Empty( fname )
+   IF !Empty(fname)
    
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+      mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       use &fname new
       nId := 111
 
@@ -133,7 +133,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 
    @ 20,70 CHECKBOX "Check 1" SIZE 90, 20
    @ 20,95 CHECKBOX "Check 2"  ;
-        SIZE 90, 20 COLOR Iif( nColor==Nil,Vcolor("0000FF"),nColor )
+        SIZE 90, 20 COLOR IIf(nColor == NIL, Vcolor("0000FF"), nColor)
 
    @ 160,70 GROUPBOX "RadioGroup"  SIZE 130, 75
 

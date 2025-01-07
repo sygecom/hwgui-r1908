@@ -31,17 +31,17 @@ CLASS HTimer INHERIT HObject
 
    DATA   xName          HIDDEN
    ACCESS Name           INLINE ::xName
-   ASSIGN Name( cName )  INLINE IIF( !EMPTY( cName ) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName,;
-			( ::xName := cName, __objAddData( ::oParent, cName ), ::oParent: & ( cName ) := Self), Nil)
+   ASSIGN Name( cName )  INLINE IIf(!Empty(cName) .AND. ValType(cName) == "C" .AND. !":" $ cName .AND. !"[" $ cName, ;
+			(::xName := cName, __objAddData(::oParent, cName), ::oParent: &(cName) := Self), NIL)
 
 ENDCLASS
 
 METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 
-   ::oParent := Iif( oParent==Nil, HWindow():GetMain(), oParent )
+   ::oParent := IIf(oParent == NIL, HWindow():GetMain(), oParent)
    IF nId == nil
       nId := TIMER_FIRST_ID
-      DO WHILE AScan( ::aTimers, { | o | o:id == nId } ) !=  0
+      DO WHILE AScan(::aTimers, {|o|o:id == nId}) !=  0
          nId ++
       ENDDO
    ENDIF
@@ -53,7 +53,7 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 //   ::tag := hwg_SetTimer( ::id,::value )
 
    */
-   ::value   := IIF( VALTYPE( value ) = "N", value, 0 )
+   ::value   := IIf(ValType(value) == "N", value, 0)
    ::bAction := bAction
    /*
     if ::value > 0
@@ -61,7 +61,7 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
    endif
    */
    ::Init()
-   AAdd( ::aTimers, Self )
+   AAdd(::aTimers, Self)
    ::oParent:AddObject( Self )
 
 
@@ -74,10 +74,10 @@ METHOD End() CLASS HTimer
 Local i
 
    hwg_KillTimer( ::tag )
-   i := Ascan( ::aTimers,{|o|o:id==::id} )
+   i := AScan(::aTimers, {|o|o:id == ::id})
    IF i != 0
-      Adel( ::aTimers,i )
-      Asize( ::aTimers,Len( ::aTimers )-1 )
+      ADel(::aTimers, i)
+      ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF
 
 Return Nil
@@ -98,7 +98,7 @@ RETURN Nil
 
 
 Function TimerProc( hWnd, idTimer, Time ) 
-   LOCAL i := AScan( HTimer():aTimers, { | o | o:id == idTimer } )
+   LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
    HB_SYMBOL_UNUSED( hWnd )
 
@@ -112,7 +112,7 @@ Function TimerProc( hWnd, idTimer, Time )
 EXIT PROCEDURE CleanTimers
 Local oTimer, i
 
-   For i := 1 TO Len( HTimer():aTimers )
+   For i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]
       hwg_KillTimer( oTimer:tag )
    NEXT

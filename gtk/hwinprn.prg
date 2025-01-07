@@ -67,7 +67,7 @@ ENDCLASS
 
 METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
 
-   ::oPrinter := HPrinter():New( Iif( cPrinter==Nil,"",cPrinter ),.F. )
+   ::oPrinter := HPrinter():New( IIf(cPrinter == NIL, "", cPrinter),.F. )
    IF ::oPrinter == Nil
       Return Nil
    ENDIF
@@ -197,8 +197,8 @@ Local i, i0, j, slen, c
       ::y += ::nLineHeight + ::nLined
    ENDIF
 
-   IF cLine != Nil .AND. !Empty( cLine )
-      slen := Len( cLine )
+   IF cLine != Nil .AND. !Empty(cLine)
+      slen := Len(cLine)
       i := 1
       i0 := 0
       DO WHILE i <= slen
@@ -275,9 +275,9 @@ METHOD PrintText( cText ) CLASS HWinPrn
    IF ::lChanged
       ::SetMode()
    ENDIF
-   ::oPrinter:Say( Iif( ::cpFrom!=::cpTo, hb_Translate( cText,::cpFrom,::cpTo ), cText ), ;
+   ::oPrinter:Say( IIf(::cpFrom != ::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
             ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined )
-   ::x += ( ::nCharW * Len( cText ) )
+   ::x += ( ::nCharW * Len(cText) )
 
 Return Nil
 
@@ -296,13 +296,13 @@ Static aCodes := {   ;
    { Chr(27)+'G',,,,.t.,,},   ;     /* bold */
    { Chr(27)+'H',,,,.f.,, }   ;     /* cancel bold */
  }
-Local i, sLen := Len( aCodes ), c := Left( cLine,1 )
+Local i, sLen := Len(aCodes), c := Left( cLine,1 )
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen
          IF Left(aCodes[i,1],1) == c .AND. At( aCodes[i,1],Left(cLine,3 ) ) == 1
             ::InitValues( aCodes[i,2], aCodes[i,3], aCodes[i,4], aCodes[i,5], aCodes[i,6], aCodes[i,7]  )
-            Return Len( aCodes[i,1] )
+            Return Len(aCodes[i, 1])
          ENDIF
       NEXT
    ENDIF

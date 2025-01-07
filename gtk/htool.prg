@@ -61,7 +61,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
 Return Self
 
 METHOD Activate CLASS hToolBar
-   IF !empty(::oParent:handle )
+   IF !Empty(::oParent:handle)
 
       ::handle := CREATETOOLBAR(::oParent:handle )
       SetWindowObject( ::handle,Self )
@@ -80,7 +80,7 @@ Local nPos
 Local aItem
    IF !::lInit
       ::Super:Init()
-      For n := 1 TO len( ::aItem )
+      For n := 1 TO len(::aItem)
 
 //         IF Valtype( ::aItem[ n, 7 ] ) == "B"
 //
@@ -93,15 +93,15 @@ Local aItem
 //            ::aItem[ n, 10 ] := hwg__CreatePopupMenu()
 //            aTemp := ::aItem[ n, 9 ]
 //
-//            FOR n1 :=1 to Len( aTemp )
+//            FOR n1 :=1 to Len(aTemp)
 //               hwg__AddMenuItem( ::aItem[ n, 10 ], aTemp[ n1, 1 ], -1, .F., aTemp[ n1, 2 ], , .F. )
 //               ::oParent:AddEvent( BN_CLICKED, aTemp[ n1, 2 ], aTemp[ n1,3 ] )
 //            NEXT
 //
 //         ENDIF
          if valtype( ::aItem[ n, 1 ] ) == "N"
-            IF !empty( ::aItem[ n, 1 ] )
-               AAdd( aButton, ::aItem[ n , 1 ])
+            IF !Empty(::aItem[n, 1])
+               AAdd(aButton, ::aItem[n, 1])
             ENDIF
          elseif  valtype( ::aItem[ n, 1 ] ) == "C"
             if ".ico" $ lower(::aItem[ n, 1 ]) //if ".ico" in lower(::aItem[ n, 1 ])
@@ -110,14 +110,14 @@ Local aItem
                oImage:=hBitmap():AddFile( ::aItem[ n, 1 ] )
             endif
             if valtype(oImage) =="O"
-               aadd(aButton,Oimage:handle)
+               AAdd(aButton, Oimage:handle)
                ::aItem[ n, 1 ] := Oimage:handle
             endif
          ENDIF
 
       NEXT n
 
-/*      IF Len(aButton ) >0
+/*      IF Len(aButton) >0
 
           aBmpSize := GetBitmapSize( aButton[1] )
 
@@ -129,7 +129,7 @@ Local aItem
              hIm := CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLORDDB + ILC_MASK )
           ENDIF
 
-          FOR nPos :=1 to len(aButton)
+          FOR nPos :=1 to Len(aButton)
 
              aBmpSize := GetBitmapSize( aButton[nPos] )
 
@@ -146,7 +146,7 @@ Local aItem
 
       ENDIF
 */
-      if len( ::aItem ) >0
+      if Len(::aItem) >0
          For Each aItem in ::aItem
 
             if aItem[4] == TBSTYLE_BUTTON
@@ -155,7 +155,7 @@ Local aItem
                aItem[2] := hb_enumindex()
 //               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2],0 )
                TOOLBAR_SETACTION(aItem[11],aItem[7])
-               if !empty(aItem[8])
+               if !Empty(aItem[8])
                   AddtoolTip(::handle, aItem[11],aItem[8])
                endif
             elseif aitem[4] == TBSTYLE_SEP
@@ -179,19 +179,19 @@ METHOD Notify( lParam ) CLASS hToolBar
     IF nCode == TTN_GETDISPINFO
 
        nButton :=TOOLBAR_GETDISPINFOID( lParam )
-       nPos := AScan( ::aItem,  { | x | x[ 2 ] == nButton })
+       nPos := AScan(::aItem, {|x|x[2] == nButton})
        TOOLBAR_SETDISPINFO( lParam, ::aItem[ nPos, 8 ] )
 
     ELSEIF nCode == TBN_GETINFOTIP
 
        nId := TOOLBAR_GETINFOTIPID(lParam)
-       nPos := AScan( ::aItem,  { | x | x[ 2 ] == nId })
+       nPos := AScan(::aItem, {|x|x[2] == nId})
        TOOLBAR_GETINFOTIP( lParam, ::aItem[ nPos, 8 ] )
 
     ELSEIF nCode == TBN_DROPDOWN
        if valtype(::aItem[1,9]) ="A"
        nid := TOOLBAR_SUBMENUEXGETID( lParam )
-       nPos := AScan( ::aItem,  { | x | x[ 2 ] == nId })
+       nPos := AScan(::aItem, {|x|x[2] == nId})
        TOOLBAR_SUBMENUEx( lParam, ::aItem[ nPos, 10 ], ::oParent:handle )
        else
               TOOLBAR_SUBMENU(lParam,1,::oParent:handle)
@@ -207,13 +207,13 @@ METHOD AddButton(nBitIp,nId,bState,bStyle,cText,bClick,c,aMenu) CLASS hToolBar
    DEFAULT bstyle to 0x0000
    DEFAULT c to ""
    DEFAULT ctext to ""
-   AAdd( ::aItem ,{ nBitIp, nId, bState, bStyle, 0, cText, bClick, c, aMenu, hMenu ,0} )
+   AAdd(::aItem, {nBitIp, nId, bState, bStyle, 0, cText, bClick, c, aMenu, hMenu, 0})
 RETURN Self
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HToolbar
 Local nPos
    IF msg == WM_LBUTTONUP
-      nPos := ascan(::aItem,{|x| x[2] == wParam})
+      nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos>0
          IF ::aItem[nPos,7] != Nil
             Eval( ::aItem[nPos,7] ,Self )
