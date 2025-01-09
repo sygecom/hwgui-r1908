@@ -380,7 +380,7 @@ Memvar oDesigner
         ENDIF
       ENDIF
 
-      InvalidateRect( oCtrl:oParent:handle, 1, ;
+      hwg_InvalidateRect( oCtrl:oParent:handle, 1, ;
                oCtrl:nLeft-4, oCtrl:nTop-4, ;
                oCtrl:nLeft+oCtrl:nWidth+3,  ;
                oCtrl:nTop+oCtrl:nHeight+3 )
@@ -406,12 +406,12 @@ Memvar oDesigner
          aBDown[BDOWN_YPOS] := yPos
       ENDIF
 
-      InvalidateRect( oCtrl:oParent:handle, 0, ;
+      hwg_InvalidateRect( oCtrl:oParent:handle, 0, ;
                oCtrl:nLeft-4, oCtrl:nTop-4, ;
                oCtrl:nLeft+oCtrl:nWidth+3,  ;
                oCtrl:nTop+oCtrl:nHeight+3 )
 
-      MoveWindow( oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight )
+      hwg_MoveWindow( oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight )
       IF oDesigner:lReport
          oCtrl:oParent:oParent:oParent:oParent:lChanged := .T.
       ELSE
@@ -432,7 +432,7 @@ Local dx, dy
 Memvar oDesigner
 
    IF xPos != aBDown[BDOWN_XPOS] .OR. yPos != aBDown[BDOWN_YPOS]
-      InvalidateRect( oCtrl:oParent:handle, 1, ;
+      hwg_InvalidateRect( oCtrl:oParent:handle, 1, ;
                oCtrl:nLeft-4, oCtrl:nTop-4, ;
                oCtrl:nLeft+oCtrl:nWidth+3,  ;
                oCtrl:nTop+oCtrl:nHeight+3 )
@@ -475,11 +475,11 @@ Memvar oDesigner
       ENDIF
       aBDown[BDOWN_XPOS] := xPos
       aBDown[BDOWN_YPOS] := yPos
-      InvalidateRect( oCtrl:oParent:handle, 0, ;
+      hwg_InvalidateRect( oCtrl:oParent:handle, 0, ;
                oCtrl:nLeft-4, oCtrl:nTop-4, ;
                oCtrl:nLeft+oCtrl:nWidth+3,  ;
                oCtrl:nTop+oCtrl:nHeight+3 )
-      MoveWindow( oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight )
+      hwg_MoveWindow( oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight )
       IF oDesigner:lReport
          oCtrl:oParent:oParent:oParent:oParent:lChanged := .T.
       ELSE
@@ -538,7 +538,7 @@ Memvar oDesigner
            // NANDO POS O FOR
               FOR i = 1 to IIF(len(asels) > 0,LEN(asels),1)
                oFrm:oCtrlSelected := asels[i]  // NANDO POS
-           InvalidateRect( oFrm:oCtrlSelected:oParent:handle, 1, ;
+           hwg_InvalidateRect( oFrm:oCtrlSelected:oParent:handle, 1, ;
                   oFrm:oCtrlSelected:nLeft-4, oFrm:oCtrlSelected:nTop-4, ;
                   oFrm:oCtrlSelected:nLeft+oFrm:oCtrlSelected:nWidth+3,  ;
                   oFrm:oCtrlSelected:nTop+oFrm:oCtrlSelected:nHeight+3 )
@@ -550,7 +550,7 @@ Memvar oDesigner
             // CASO ELE QUER DESMARCAR UM
           i := Ascan( aSels, {|a| a:GetProp( "Name") == oCtrl:GetProp( "Name")} )
               IF i > 0
-              InvalidateRect( oCtrl:oParent:handle, 1, ;
+              hwg_InvalidateRect( oCtrl:oParent:handle, 1, ;
                   oCtrl:nLeft-4, oCtrl:nTop-4, ;
                   oCtrl:nLeft+oCtrl:nWidth+3,  ;
                   oCtrl:nTop+oCtrl:nHeight+3 )
@@ -570,7 +570,7 @@ Memvar oDesigner
 
       oFrm:oCtrlSelected := oCtrl
       IF oCtrl != Nil
-         InvalidateRect( oCtrl:oParent:handle, 0, ;
+         hwg_InvalidateRect( oCtrl:oParent:handle, 0, ;
                   oCtrl:nLeft-4, oCtrl:nTop-4, ;
                   oCtrl:nLeft+oCtrl:nWidth+3,  ;
                   oCtrl:nTop+oCtrl:nHeight+3 )
@@ -629,8 +629,8 @@ Function MoveCtrl( oCtrl )
       SendMessage( oCtrl:handle, WM_MOVE, 0, oCtrl:nLeft + oCtrl:nTop*65536 )
       SendMessage( oCtrl:handle, WM_SIZE, 0, oCtrl:nWidth + oCtrl:nHeight*65536 )
    ELSE
-      MoveWindow( oCtrl:handle,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight )
-      RedrawWindow( oCtrl:oParent:handle,RDW_ERASE + RDW_INVALIDATE )
+      hwg_MoveWindow( oCtrl:handle,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight )
+      hwg_RedrawWindow( oCtrl:oParent:handle,RDW_ERASE + RDW_INVALIDATE )
    ENDIF
 Return Nil
 
@@ -716,7 +716,7 @@ Local aTabs := oTab:GetProp( "Tabs" )
    AddTab( oTab:handle, Len( aTabs ), "New Page" )
    Aadd( aTabs,"New Page" )
    InspUpdProp( "Tabs", aTabs )
-   RedrawWindow( oTab:handle,5 )
+   hwg_RedrawWindow( oTab:handle,5 )
 Return Nil
 
 Function Page_Next( oTab )
@@ -1059,9 +1059,9 @@ Function RegionSelect(odlg,xi,yi,xPos,yPos)
     yi := ypos
     ypos := yf
   ENDIF
-  InvalidateRect( odlg:handle, 1, xPos+1, yPos+1,  xPos+2,yPos+2 )
+  hwg_InvalidateRect( odlg:handle, 1, xPos+1, yPos+1,  xPos+2,yPos+2 )
   Rectangle( hDC, xi, yi, xPos+1,yPos+1 )
-  InvalidateRect( odlg:handle, 1,  xi+1, yi+1,  xPos,yPos )
+  hwg_InvalidateRect( odlg:handle, 1,  xi+1, yi+1,  xPos,yPos )
 
  RETURN Nil
 

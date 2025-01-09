@@ -95,13 +95,13 @@ METHOD Init() CLASS HGroup
             FOR i := Len(::oparent:acontrols) TO 1 STEP -1
                IF nbs != i .AND.;
                    PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS == 0
-                   SetWindowPos(::oparent:acontrols[i]:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_FRAMECHANGED)
+                   hwg_SetWindowPos(::oparent:acontrols[i]:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_FRAMECHANGED)
                ENDIF
             NEXT
             */
-            SetWindowPos(::handle, NIL, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE)
+            hwg_SetWindowPos(::handle, NIL, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE)
          ELSE
-            SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
+            hwg_SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
          ENDIF
       ENDIF
    ENDIF

@@ -124,7 +124,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
        msg == EM_HIDESELECTION .OR. msg == WM_GETTEXTLENGTH .OR. msg == EM_GETFIRSTVISIBLELINE
       RETURN - 1
    ENDIF
-   IF msg == WM_SETFOCUS .AND. ::lSetFocus //.AND. ISWINDOWVISIBLE(::handle)
+   IF msg == WM_SETFOCUS .AND. ::lSetFocus //.AND. hwg_IsWindowVisible(::handle)
       ::lSetFocus := .F.
       PostMessage(::handle, EM_SETSEL, 0, 0)
    ELSEIF msg == WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
@@ -253,7 +253,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       RETURN -1
 
    CASE WM_SETFOCUS
-      IF ::lSetFocus // .AND. ISWINDOWVISIBLE(::handle)
+      IF ::lSetFocus // .AND. hwg_IsWindowVisible(::handle)
          ::lSetFocus := .F.
          PostMessage(::handle, EM_SETSEL, 0, 0)
       ELSEIF ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE

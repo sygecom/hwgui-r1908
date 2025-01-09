@@ -46,11 +46,11 @@ CLASS HControl INHERIT HCustomWindow
       PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, IIf(::oParent:FindControl(, GetFocus()) != NIL, ;
       0, ::handle), 1), .T.)
    METHOD Hide() INLINE (::oParent:lGetSkipLostFocus := .F., ::Super:Hide())
-   //METHOD Disable() INLINE EnableWindow(::handle, .F.)
+   //METHOD Disable() INLINE hwg_EnableWindow(::handle, .F.)
    METHOD Disable() INLINE (IIf(SELFFOCUS(::handle), SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0),), ;
-      EnableWindow(::handle, .F.))
+      hwg_EnableWindow(::handle, .F.))
    METHOD Enable()
-   METHOD IsEnabled() INLINE IsWindowEnabled(::handle)
+   METHOD IsEnabled() INLINE hwg_IsWindowEnabled(::handle)
    METHOD Enabled(lEnabled) SETGET
    METHOD SetFont(oFont)
    METHOD SetFocus(lValid)
@@ -149,7 +149,7 @@ METHOD INIT() CLASS HControl
       ENDIF
       IF oForm != NIL .AND. oForm:Type != WND_DLG_RESOURCE .AND. (::nLeft + ::nTop + ::nWidth + ::nHeight != 0)
          // fix init position in FORM reduce  flickering
-         SetWindowPos(::handle, NIL, ::nLeft, ::nTop, ::nWidth, ::nHeight, SWP_NOACTIVATE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER + SWP_NOSENDCHANGING) //+ SWP_DRAWFRAME)
+         hwg_SetWindowPos(::handle, NIL, ::nLeft, ::nTop, ::nWidth, ::nHeight, SWP_NOACTIVATE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER + SWP_NOSENDCHANGING) //+ SWP_DRAWFRAME)
       ENDIF
 
       IF hb_IsBlock(::bInit)
@@ -187,7 +187,7 @@ METHOD SetColor(tcolor, bColor, lRepaint) CLASS HControl
    ENDIF
 
    IF lRepaint != NIL .AND. lRepaint
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
 
 RETURN NIL
@@ -199,7 +199,7 @@ METHOD SetFocus(lValid) CLASS HControl
 
    LOCAL lSuspend := ::oParent:lSuspendMsgsHandling
 
-   IF !IsWindowEnabled(::handle)
+   IF !hwg_IsWindowEnabled(::handle)
       ::oParent:lSuspendMsgsHandling := .T.
       //GetSkip(::oParent, ::handle, , 1)
       SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0)
@@ -223,11 +223,11 @@ RETURN NIL
 
 METHOD Enable() CLASS HControl
 
-   LOCAL lEnable := IsWindowEnabled(::handle)
+   LOCAL lEnable := hwg_IsWindowEnabled(::handle)
    LOCAL nPos
    LOCAL nNext
 
-   EnableWindow(::handle, .T.)
+   hwg_EnableWindow(::handle, .T.)
    IF ::oParent:lGetSkipLostFocus .AND. !lEnable .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(::handle), WS_TABSTOP) > 0
       nNext := AScan(::oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(GetFocus())})
       nPos := AScan(::oParent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(::handle)})
@@ -248,8 +248,8 @@ METHOD DisableBackColor(DisableBColor)
          ::Disablebrush:Release()
       ENDIF
       ::Disablebrush := HBrush():Add(::DisableBColor)
-      IF !::IsEnabled() .AND. IsWindowVisible(::handle)
-         InvalidateRect(::handle, 0)
+      IF !::IsEnabled() .AND. hwg_IsWindowVisible(::handle)
+         hwg_InvalidateRect(::handle, 0)
       ENDIF
    ENDIF
 
@@ -291,7 +291,7 @@ METHOD FontBold(lTrue) CLASS HControl
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(lTrue)
       SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN ::oFont:weight == FW_BOLD
@@ -317,7 +317,7 @@ METHOD FontItalic(lTrue) CLASS HControl
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , lTrue)
       SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN ::oFont:Italic == 1
@@ -343,7 +343,7 @@ METHOD FontUnderline(lTrue) CLASS HControl
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , , lTrue)
       SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN ::oFont:Underline == 1
@@ -520,15 +520,15 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
    ENDIF
    // REDRAW AND INVALIDATE SCREEN
    IF x1 != X9 .OR. y1 != y9 .OR. w1 != w9 .OR. h1 != h9
-      IF isWindowVisible(::handle)
+      IF hwg_IsWindowVisible(::handle)
          IF (x1 != x9 .OR. y1 != y9) .AND. x9 < ::oParent:nWidth
-            InvalidateRect(::oParent:handle, 1, MAX(x9 - 1, 0), MAX(y9 - 1, 0), x9 + w9 + nCxv, y9 + h9 + nCyh)
+            hwg_InvalidateRect(::oParent:handle, 1, MAX(x9 - 1, 0), MAX(y9 - 1, 0), x9 + w9 + nCxv, y9 + h9 + nCyh)
          ELSE
              IF w1 < w9
-                InvalidateRect(::oParent:handle, 1, x1 + w1 - nCxv - 1, MAX(y1 - 2, 0), x1 + w9 + 2, y9 + h9 + nCxv + 1)
+                hwg_InvalidateRect(::oParent:handle, 1, x1 + w1 - nCxv - 1, MAX(y1 - 2, 0), x1 + w9 + 2, y9 + h9 + nCxv + 1)
              ENDIF
              IF h1 < h9
-                InvalidateRect(::oParent:handle, 1, MAX(x1 - 5, 0), y1 + h1 - nCyh - 1, x1 + w9 + 2, y1 + h9 + nCYh)
+                hwg_InvalidateRect(::oParent:handle, 1, MAX(x1 - 5, 0), y1 + h1 - nCyh - 1, x1 + w9 + 2, y1 + h9 + nCYh)
              ENDIF
          ENDIF
          //::Move(x1, y1, w1, h1, HWG_BITAND(::Style, WS_CLIPSIBLINGS + WS_CLIPCHILDREN) == 0)
@@ -536,19 +536,19 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
          IF ((x1 != x9 .OR. y1 != y9) .AND. (hb_IsBlock(::bPaint) .OR. x9 + w9 > ::oParent:nWidth)) .OR. ;
             (::backstyle == TRANSPARENT .AND. (::Title != NIL .AND. !Empty(::Title))) .OR. __ObjHasMsg(Self, "oImage")
             IF __ObjHasMsg(Self, "oImage") .OR. ::backstyle == TRANSPARENT //.OR. w9 != w1
-               InvalidateRect(::oParent:handle, 1, MAX(x1 - 1, 0), MAX(y1 - 1, 0), x1 + w1 + 1, y1 + h1 + 1)
+               hwg_InvalidateRect(::oParent:handle, 1, MAX(x1 - 1, 0), MAX(y1 - 1, 0), x1 + w1 + 1, y1 + h1 + 1)
             ELSE
-               RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
+               hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
             ENDIF
          ELSE
              IF Len(::aControls) == 0 .AND. ::Title != NIL
-               InvalidateRect(::handle, 0)
+               hwg_InvalidateRect(::handle, 0)
              ENDIF
              IF w1 > w9
-                InvalidateRect(::oParent:handle, 1, MAX(x1 + w9 - nCxv - 1, 0), MAX(y1, 0), x1 + w1 + nCxv, y1 + h1 + 2)
+                hwg_InvalidateRect(::oParent:handle, 1, MAX(x1 + w9 - nCxv - 1, 0), MAX(y1, 0), x1 + w1 + nCxv, y1 + h1 + 2)
              ENDIF
              IF h1 > h9
-                InvalidateRect(::oParent:handle, 1, MAX(x1, 0), MAX(y1 + h9 - nCyh - 1, 1), x1 + w1 + 2, y1 + h1 + nCyh)
+                hwg_InvalidateRect(::oParent:handle, 1, MAX(x1, 0), MAX(y1 + h9 - nCyh - 1, 1), x1 + w1 + 2, y1 + h1 + nCyh)
              ENDIF
          ENDIF
          // redefine new position e new size

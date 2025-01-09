@@ -23,10 +23,10 @@ PRIVATE aTermMetr := { 800 }
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
    INIT WINDOW oMainWindow MAIN TITLE "HWReport example" ;
-         ON SIZE {|o|MoveWindow(o:handle,0,0,aTermMetr[1],80)}
+         ON SIZE {|o|hwg_MoveWindow(o:handle,0,0,aTermMetr[1],80)}
 
    @ 0,0 PANEL oPanel OF oMainWindow ID IDCW_PANEL ;
-        ON SIZE {|o,x|MoveWindow(o:handle,0,0,x,48)}
+        ON SIZE {|o,x|hwg_MoveWindow(o:handle,0,0,x,48)}
 
     @ 2,3  OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
         SIZE 80,44 FLAT ;

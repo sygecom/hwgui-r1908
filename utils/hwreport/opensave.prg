@@ -75,7 +75,7 @@ Local res := .T.
          IF ( res := OpenFile( fname,@repName ) )
             aPaintRep[FORM_Y] := 0
             EnableMenuItem( ,1, .T., .F. )
-            RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             aPaintRep := Nil
             EnableMenuItem( ,1, .F., .F. )
@@ -110,7 +110,7 @@ Local i, aItem
       NEXT
       aPaintRep := Nil
       ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
-      RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
+      hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
       EnableMenuItem( ,1, .F., .F. )
    ENDIF
 Return .T.

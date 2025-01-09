@@ -414,7 +414,7 @@ Memvar oDesigner
          oDlg:oParent:SetProp("Height",Ltrim(Str(oDlg:nHeight:=aCoors[4])))
          *oDlg:oParent:SetProp("Height",Ltrim(Str(oDlg:nHeight:=aCoors[4]+21-21)))
      ELSE
-       RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
+       hwg_RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
        oDlg:show()
      ENDIF
       InspUpdBrowse()
@@ -1140,9 +1140,9 @@ Local aCoors, nSize, x
       IF x != oDlg:oParent:nYOffset
          oPanel:Move( , - Round(oDlg:oParent:nYOffset*oDlg:oParent:nKoeff,0 ) )
          IF oDlg:oParent:nYOffset + nSize >= oDlg:oParent:nPHeight
-            RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
-            InvalidateRect( oDlg:handle, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
+            hwg_InvalidateRect( oDlg:handle, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
             SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
@@ -1167,9 +1167,9 @@ Local aCoors, nSize, x
       IF x != oDlg:oParent:nXOffset
          oPanel:Move( - Round(oDlg:oParent:nXOffset*oDlg:oParent:nKoeff,0 ) )
          IF oDlg:oParent:nXOffset + nSize >= oDlg:oParent:nPWidth
-            RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
-            InvalidateRect( oDlg:handle, 0, LEFT_INDENT, 0, aCoors[3], aCoors[4] )
+            hwg_InvalidateRect( oDlg:handle, 0, LEFT_INDENT, 0, aCoors[3], aCoors[4] )
             SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
@@ -1297,7 +1297,7 @@ Memvar oDesigner
       // :LFB - selecionar objetos com o mouse
       IF oCtrl:CLASSNAME() = "HDIALOG" .OR. oCtrl:CLASSNAME() = "HPANEL"
         selsobjetos(odlg,aBDown[ BDOWN_XPOS ],aBDown[ BDOWN_YPOS ],xpos,ypos)
-        InvalidateRect( odlg:handle, 1, ;
+        hwg_InvalidateRect( odlg:handle, 1, ;
               0, 0,  oDlg:nWidth,oDlg:nHeight )
         SetBDown( Nil,0,0,0 )
          return -1
@@ -1447,7 +1447,7 @@ Local oContainer
       ENDIF
       IF ( i := Ascan( oDlg:aControls,{|o|o:handle==oCtrl:handle} ) ) ;
          < Ascan( oDlg:aControls,{|o|o:handle==oContainer:handle} )
-         DestroyWindow( oCtrl:handle )
+         hwg_DestroyWindow( oCtrl:handle )
          aDel( oDlg:aControls,i )
          oDlg:aControls[Len(oDlg:aControls)] := oCtrl
          oCtrl:lInit := .F.
@@ -1548,7 +1548,7 @@ Local i, nLeft, nTop, lSorted := .T., aTabs
 
    IF !lSorted .AND. ( lSub == Nil .OR. !lSub )
       FOR i := Len( aControls ) TO 1 STEP -1
-         DestroyWindow( aControls[i]:handle )
+         hwg_DestroyWindow( aControls[i]:handle )
       NEXT
    ENDIF
    IF !lSorted

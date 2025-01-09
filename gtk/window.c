@@ -661,19 +661,23 @@ HB_FUNC( GETWINDOWTEXT )
    hb_retc( cTitle );
 }
 
-HB_FUNC( ENABLEWINDOW )
+HB_FUNC( HWG_ENABLEWINDOW )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE( 1 );
    HB_BOOL lEnable = hb_parl( 2 );
    gtk_widget_set_sensitive( widget, lEnable );
 }
 
-HB_FUNC( ISWINDOWENABLED )
+HB_FUNC_TRANSLATE(ENABLEWINDOW, HWG_ENABLEWINDOW);
+
+HB_FUNC( HWG_ISWINDOWENABLED )
 {
    hb_retl( GTK_WIDGET_IS_SENSITIVE( (GtkWidget*) HB_PARHANDLE(1) ) );
 }
 
-HB_FUNC( MOVEWINDOW )
+HB_FUNC_TRANSLATE(ISWINDOWENABLED, HWG_ISWINDOWENABLED);
+
+HB_FUNC( HWG_MOVEWINDOW )
 {
    GtkWidget * hWnd = (GtkWidget*)HB_PARHANDLE(1);
 
@@ -682,6 +686,8 @@ HB_FUNC( MOVEWINDOW )
    if( !HB_ISNIL(4) || !HB_ISNIL(5) )
       gtk_window_resize( GTK_WINDOW(hWnd), hb_parni(4), hb_parni(5) );
 }
+
+HB_FUNC_TRANSLATE(MOVEWINDOW, HWG_MOVEWINDOW);
 
 HB_FUNC( HWG_WINDOWMAXIMIZE )
 {

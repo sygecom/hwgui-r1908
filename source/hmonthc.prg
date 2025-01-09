@@ -161,8 +161,8 @@ HB_FUNC(INITMONTHCALENDAR)
 
   MonthCal_GetMinReqRect(hMC, &rc);
 
-  //SetWindowPos(hMC, NULL, hb_parni(4), hb_parni(5), rc.right, rc.bottom, SWP_NOZORDER);
-  SetWindowPos(hMC, NULL, hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), SWP_NOZORDER);
+  //hwg_SetWindowPos(hMC, NULL, hb_parni(4), hb_parni(5), rc.right, rc.bottom, SWP_NOZORDER);
+  hwg_SetWindowPos(hMC, NULL, hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), SWP_NOZORDER);
 
   hwg_ret_HWND(hMC);
 }

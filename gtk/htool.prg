@@ -232,21 +232,21 @@ return nil
 METHOD EnableAllButtons() class htoolbar
    Local xItem
    For Each xItem in ::aItem
-      EnableWindow( xItem[ 11 ], .T. )
+      hwg_EnableWindow( xItem[ 11 ], .T. )
    Next
 RETURN Self
 
 METHOD DisableAllButtons() class htoolbar
    Local xItem
    For Each xItem in ::aItem
-      EnableWindow( xItem[ 11 ], .F. )
+      hwg_EnableWindow( xItem[ 11 ], .F. )
    Next
 RETURN Self
 
 METHOD EnableButtons(n) class htoolbar
-   EnableWindow( ::aItem[n, 11 ], .T. )
+   hwg_EnableWindow( ::aItem[n, 11 ], .T. )
 RETURN Self
 
 METHOD DisableButtons(n) class htoolbar
-   EnableWindow( ::aItem[n, 11 ], .T. )
+   hwg_EnableWindow( ::aItem[n, 11 ], .T. )
 RETURN Self

@@ -42,10 +42,10 @@ CLASS HControl INHERIT HCustomWindow
    METHOD SetColor( tcolor,bcolor,lRepaint )
    METHOD NewId()
 
-   METHOD Disable()	INLINE EnableWindow( ::handle, .F. )
-   METHOD Enable()	INLINE EnableWindow( ::handle, .T. )
-   METHOD IsEnabled()   INLINE IsWindowEnabled( ::Handle )
-   METHOD SetFocus()	INLINE EnableWindow( ::handle, .T. )
+   METHOD Disable()	INLINE hwg_EnableWindow( ::handle, .F. )
+   METHOD Enable()	INLINE hwg_EnableWindow( ::handle, .T. )
+   METHOD IsEnabled()   INLINE hwg_IsWindowEnabled( ::Handle )
+   METHOD SetFocus()	INLINE hwg_EnableWindow( ::handle, .T. )
    METHOD Move( x1,y1,width,height )
    /*
    METHOD GetText()     INLINE GetWindowText(::handle)
@@ -145,7 +145,7 @@ METHOD SetColor( tcolor,bcolor,lRepaint ) CLASS HControl
    ENDIF
 
    IF lRepaint != Nil .AND. lRepaint
-      RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
+      hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
    ENDIF
 
 Return Nil
@@ -273,13 +273,13 @@ METHOD onAnchor( x, y, w, h ) CLASS HControl
       ENDIF
       y1 := y9
    ENDIF
-   InvalidateRect( ::oParent:handle, 1, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+   hwg_InvalidateRect( ::oParent:handle, 1, ::nLeft, ::nTop, ::nWidth, ::nHeight )
    ::Move( ::handle, x1, y1, w1, h1 )
    ::nLeft := x1
    ::nTop := y1
    ::nWidth := w1
    ::nHeight := h1
-   RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
+   hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
 
    RETURN Nil
 
@@ -299,7 +299,7 @@ ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint ) CLASS HStatus
 
-   bSize := IIf(bSize != NIL, bSize, {|o, x, y|MoveWindow(o:handle, 0, y - 20, x, y)})
+   bSize := IIf(bSize != NIL, bSize, {|o, x, y|hwg_MoveWindow(o:handle, 0, y - 20, x, y)})
    nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
    ::Super:New( oWndParent,nId,nStyle,0,0,0,0,oFont,bInit,bSize,bPaint )
 

@@ -165,21 +165,21 @@ METHOD Create() CLASS HNICEButton
    h      := Rct[4] - Rct[2]
    Region := CreateRoundRectRgn(0, 0, w, h, h * 0.90, h * 0.90)
    SetWindowRgn(::handle, Region, .T.)
-   InvalidateRect(::handle, 0, 0)
+   hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
 
 METHOD Size() CLASS HNICEButton
 
    ::State := OBTN_NORMAL
-   InvalidateRect(::handle, 0, 0)
+   hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
 
 METHOD Moving() CLASS HNICEButton
 
    ::State := .F.
-   InvalidateRect(::handle, 0, 0)
+   hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
 
@@ -195,7 +195,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
 
       IF otmp != NIL .AND. otmp:id != ::id .AND. !otmp:lPress
          otmp:state := OBTN_NORMAL
-         InvalidateRect(otmp:handle, 0)
+         hwg_InvalidateRect(otmp:handle, 0)
          PostMessage(otmp:handle, WM_PAINT, 0, 0)
          SetNiceBtnSelected(NIL)
       ENDIF
@@ -204,7 +204,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
          ::state := OBTN_MOUSOVER
 
          // aBtn[CTRL_HANDLE] := hBtn
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
          PostMessage(::handle, WM_PAINT, 0, 0)
          SetNiceBtnSelected(Self)
       ENDIF
@@ -217,7 +217,7 @@ METHOD MUp() CLASS HNICEButton
    IF ::state == OBTN_PRESSED
       IF !::lPress
          ::state := IIf(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
          PostMessage(::handle, WM_PAINT, 0, 0)
       ENDIF
       IF !::lFlat
@@ -235,7 +235,7 @@ METHOD MDown() CLASS HNICEButton
    IF ::state != OBTN_PRESSED
       ::state := OBTN_PRESSED
 
-      InvalidateRect(::handle, 0, 0)
+      hwg_InvalidateRect(::handle, 0, 0)
       PostMessage(::handle, WM_PAINT, 0, 0)
       SetNiceBtnSelected(Self)
    ENDIF
@@ -298,7 +298,7 @@ METHOD RELEASE() CLASS HNiceButton
 
    ::lPress := .F.
    ::state  := OBTN_NORMAL
-   InvalidateRect(::handle, 0)
+   hwg_InvalidateRect(::handle, 0)
    PostMessage(::handle, WM_PAINT, 0, 0)
 
    RETURN NIL

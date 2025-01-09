@@ -133,7 +133,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
          nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
-         InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
+         hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
@@ -170,7 +170,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          //IF (PtInRect(rcItem, pt))
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
-            InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
+            hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
             nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
             ::SetCheck(nIndex, !::GetCheck(nIndex))
 
@@ -218,7 +218,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       IF wParam == VK_SPACE
          nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
-         InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
+         hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
          SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
@@ -251,7 +251,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          //IF PtInRect(rcItem, pt)
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
-            InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
+            hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
             nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
             ::SetCheck(nIndex, !::GetCheck(nIndex))
             // Notify that selection has changed
@@ -324,7 +324,7 @@ METHOD SetCheck(nIndex, bFlag) CLASS hCheckComboBox
    ::m_bTextUpdated := FALSE
 
    // Redraw the window
-   InvalidateRect(::handle, 0)
+   hwg_InvalidateRect(::handle, 0)
 
 RETURN nResult
 

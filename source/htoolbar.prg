@@ -201,7 +201,7 @@ METHOD CREATETOOL() CLASS hToolBar
          RETURN NIL
       ENDIF
       IF !::lCreate
-         DESTROYWINDOW(::handle)
+         hwg_DestroyWindow(::handle)
          ::Activate()
          //IF !Empty(::oFont)
          ::SetFont(::oFont)

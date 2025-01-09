@@ -85,7 +85,7 @@ HB_FUNC(HWG_INITCOMMONCONTROLSEX)
   }
 }
 
-HB_FUNC(MOVEWINDOW)
+HB_FUNC(HWG_MOVEWINDOW)
 {
   RECT rc;
 
@@ -98,6 +98,8 @@ HB_FUNC(MOVEWINDOW)
              (hb_pcount() < 6) ? TRUE : hb_parl(6)             // repaint flag
   );
 }
+
+HB_FUNC_TRANSLATE(MOVEWINDOW, HWG_MOVEWINDOW);
 
 /*
    CreateProgressBar(hParentWindow, nRange)

@@ -68,7 +68,7 @@ FUNCTION Main()
    ENDMENU
 
    @ 0, 0 PANEL oToolBar SIZE oMainWindow:nWidth, 28 ;
-      ON SIZE {|o, x, y|MoveWindow(o:handle, 0, 0, x, o:nHeight)}
+      ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, o:nHeight)}
 
 
 
@@ -134,7 +134,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepV > 0
@@ -142,7 +142,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepV
@@ -150,7 +150,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ENDIF
 
@@ -166,7 +166,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepH > 0
@@ -174,7 +174,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepH
@@ -182,7 +182,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
-         RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
 
    ENDIF
@@ -254,9 +254,9 @@ STATIC FUNCTION FileOpen(oWnd)
       ENDIF
 
       // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
-      MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
+      hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
       oSayMain:nZoom := nKoef
-      InvalidateRect(oSayMain:handle, 0)
+      hwg_InvalidateRect(oSayMain:handle, 0)
       oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
       oSayScale:SetValue(Str(nKoef*100, 4) + " %")
    ENDIF
@@ -313,9 +313,9 @@ STATIC FUNCTION Zoom(oWnd, nOp)
 
    oSayMain:nZoom := nKoef
    oSayScale:SetValue(Str(nKoef*100, 4) + " %")
-   InvalidateRect(oWnd:handle, 0)
+   hwg_InvalidateRect(oWnd:handle, 0)
    // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
-   MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
+   hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
    stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
    oSayMain:nOffsetV := - nStepV * stepV

@@ -108,7 +108,7 @@ Local cName, cType, nLen, nDec := 0
       Asize( oBrowse:aArray,Len( oBrowse:aArray ) - 1 )
       oBrowse:nRecords --
    ENDIF
-   RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
+   hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
 Return Nil
 
 Static Function EndStru( oDlg,lNew )

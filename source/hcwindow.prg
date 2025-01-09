@@ -112,9 +112,9 @@ CLASS HCustomWindow INHERIT HObject
    METHOD DelControl(oCtrl)
    METHOD AddEvent(nEvent, oCtrl, bAction, lNotify, cMethName)
    METHOD FindControl(nId, nHandle)
-   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle))
-   //METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle))
-   METHOD Show(nShow) INLINE (::lHide := .F., IIf(nShow == NIL, ShowWindow(::handle), ShowWindow(::handle, nShow)))
+   METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle))
+   //METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle))
+   METHOD Show(nShow) INLINE (::lHide := .F., IIf(nShow == NIL, hwg_ShowWindow(::handle), hwg_ShowWindow(::handle, nShow)))
    METHOD Move(x1, y1, width, height, nRePaint)
    METHOD onEvent(msg, wParam, lParam)
    METHOD END()
@@ -232,9 +232,9 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    ENDIF
 
    IF nRePaint == NIL
-      MoveWindow(::handle, x1, y1, Width + nWx, Height + nHx)
+      hwg_MoveWindow(::handle, x1, y1, Width + nWx, Height + nHx)
    ELSE
-      MoveWindow(::handle, x1, y1, Width + nWx, Height + nHx, nRePaint)
+      hwg_MoveWindow(::handle, x1, y1, Width + nWx, Height + nHx, nRePaint)
    ENDIF
 
    //IF x1 != NIL
@@ -249,7 +249,7 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    //IF height != NIL
    ::nHeight := height
    //ENDIF
-   //MoveWindow(::handle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+   //hwg_MoveWindow(::handle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
 RETURN NIL
 
@@ -430,7 +430,7 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
    lAll := IIf(lAll == NIL, .F., lAll)
    nLen := Len(oCtrl:aControls)
 
-   IF IsWindowVisible(::handle) .OR. nLen > 0
+   IF hwg_IsWindowVisible(::handle) .OR. nLen > 0
       FOR i := 1 TO nLen
          oCtrlTmp := oCtrl:aControls[i]
          lRefresh := !Empty(__ObjHasMethod(oCtrlTmp, "REFRESH"))
@@ -443,7 +443,7 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
                IF oCtrlTmp:bRefresh != NIL
                   Eval(oCtrlTmp:bRefresh, oCtrlTmp)
                ENDIF
-            ELSEIF IsWindowEnabled(oCtrlTmp:handle) .AND. !oCtrlTmp:lHide .AND. !lRefresh
+            ELSEIF hwg_IsWindowEnabled(oCtrlTmp:handle) .AND. !oCtrlTmp:lHide .AND. !lRefresh
                oCtrlTmp:SHOW(SW_SHOWNOACTIVATE)
             ENDIF
          ENDIF
@@ -492,7 +492,7 @@ METHOD SetColor(tcolor, bColor, lRepaint) CLASS HCustomWindow
    ENDIF
 
    IF lRepaint != NIL .AND. lRepaint
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
 
 RETURN NIL
@@ -1325,7 +1325,7 @@ FUNCTION FindAccelerator(oCtrl, lParam)
          RETURN FindAccelerator(oCtrl:aControls[i], lParam)
       ENDIF
       IF __ObjHasMsg(oCtrl:aControls[i], "TITLE") .AND. hb_IsChar(oCtrl:aControls[i]:title) .AND. ;
-         !oCtrl:aControls[i]:lHide .AND. IsWindowEnabled(oCtrl:aControls[i]:handle)
+         !oCtrl:aControls[i]:lHide .AND. hwg_IsWindowEnabled(oCtrl:aControls[i]:handle)
          IF (pos := At("&", oCtrl:aControls[i]:title)) > 0 .AND. ;
             Upper(Chr(lParam)) == Upper(SubStr(oCtrl:aControls[i]:title, ++pos, 1))
             RETURN oCtrl:aControls[i]

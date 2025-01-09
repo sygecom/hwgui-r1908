@@ -137,7 +137,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
    ELSEIF msg == WM_KILLFOCUS
       IF ::GetParentForm():handle != ::oParent:handle
       //- IF ::oParent:oParent != NIL
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
          SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
       ENDIF
    ELSEIF msg == WM_KEYDOWN
@@ -185,7 +185,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
    CASE WM_KILLFOCUS
       IF ::GetParentForm():handle != ::oParent:handle
       //- IF ::oParent:oParent != NIL
-          InvalidateRect(::handle, 0)
+          hwg_InvalidateRect(::handle, 0)
           SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
       ENDIF
       EXIT
@@ -257,7 +257,7 @@ METHOD Notify(lParam) CLASS HButton
    IF PtrtoUlong(lParam) == WM_KEYDOWN
       IF ::oParent:Classname == "HTAB"
          IF getfocus() != ::handle
-            InvalidateRect(::handle, 0)
+            hwg_InvalidateRect(::handle, 0)
             SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
          ENDIF
          IF getkeystate(VK_LEFT) + getkeystate(VK_UP) < 0 .OR. ;
@@ -310,7 +310,7 @@ METHOD onGetFocus() CLASS HButton
       IF res != NIL .AND. Empty(res)
          WhenSetFocus(Self, nSkip)
          IF ::lflat
-            InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+            hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
          ENDIF
       ENDIF
    ENDIF
@@ -322,7 +322,7 @@ RETURN res
 METHOD onLostFocus() CLASS HButton
 
    IF ::lflat
-      InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+      hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
    ::lnoWhen := .F.
    IF hb_IsBlock(::bLostFocus).AND. SelfFocus(GetParent(GetFocus()), ::getparentform():handle)

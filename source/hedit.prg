@@ -630,8 +630,8 @@ METHOD Refresh() CLASS HEdit
       ::Title := vari
    ENDIF
    hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
-   IF isWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //PtrtouLong(GetFocus()) == PtrtouLong(::handle)
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW) //+ RDW_NOCHILDREN)
+   IF hwg_IsWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //PtrtouLong(GetFocus()) == PtrtouLong(::handle)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW) //+ RDW_NOCHILDREN)
    ENDIF
 
 RETURN NIL
@@ -1952,7 +1952,7 @@ FUNCTION CheckFocus(oCtrl, lInside)
    LOCAL hGetFocus := PtrtouLong(GetFocus())
    LOCAL lModal
 
-   IF (!Empty(oParent) .AND. !IsWindowVisible(oParent:handle)) .OR. Empty(GetActiveWindow()) // == 0
+   IF (!Empty(oParent) .AND. !hwg_IsWindowVisible(oParent:handle)) .OR. Empty(GetActiveWindow()) // == 0
       IF !lInside .AND. Empty(oParent:nInitFocus) // == 0
          oParent:Show()
          hwg_SetFocus(oParent:handle)

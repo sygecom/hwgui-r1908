@@ -31,7 +31,7 @@ void hwg_parse_color( HB_ULONG ncolor, GdkColor * pColor )
    gdk_color_parse( color,pColor );
 }
 
-HB_FUNC( INVALIDATERECT )
+HB_FUNC( HWG_INVALIDATERECT )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
    int x1, y1, x2, y2;
@@ -47,11 +47,11 @@ HB_FUNC( INVALIDATERECT )
    {
       x1 = y1 = 0;
       x2 = widget->allocation.width;
-      y2 = widget->allocation.height;      
+      y2 = widget->allocation.height;
    }
    gtk_widget_queue_draw_area( widget, x1, y1,
         x2 - x1 + 1, y2 - y1 + 1 );
-   
+
 /*
    GdkRectangle rc;
 
@@ -66,6 +66,8 @@ HB_FUNC( INVALIDATERECT )
       ( hb_pcount() > 2 )? &rc:NULL, ( HB_ISNUM(2) )? hb_parni(2):1 );
 */
 }
+
+HB_FUNC_TRANSLATE(INVALIDATERECT, HWG_INVALIDATERECT);
 
 HB_FUNC( RECTANGLE )
 {
@@ -140,7 +142,7 @@ HB_FUNC( ROUNDRECT )
 */   
 }
 
-HB_FUNC( REDRAWWINDOW )
+HB_FUNC( HWG_REDRAWWINDOW )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
 /*
@@ -154,10 +156,12 @@ HB_FUNC( REDRAWWINDOW )
       rc.height = widget->allocation.height;
    }
    gdk_window_invalidate_rect( widget->window, &rc, TRUE );
-*/   
+*/
    gtk_widget_queue_draw_area( widget, 0, 0,
         widget->allocation.width, widget->allocation.height );
 }
+
+HB_FUNC_TRANSLATE(REDRAWWINDOW, HWG_REDRAWWINDOW);
 
 HB_FUNC( DRAWBUTTON )
 {

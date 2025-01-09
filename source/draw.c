@@ -90,9 +90,9 @@ HB_FUNC(GETPPSRECT)
 }
 
 /*
-INVALIDATERECT(HWND, nEraseBackgroundFlag, nLeft, nTop, nRight, nBottom) -->
+HWG_INVALIDATERECT(HWND, nEraseBackgroundFlag, nLeft, nTop, nRight, nBottom) -->
 */
-HB_FUNC(INVALIDATERECT)
+HB_FUNC(HWG_INVALIDATERECT)
 {
   RECT rc;
 
@@ -107,6 +107,8 @@ HB_FUNC(INVALIDATERECT)
   // TODO: parâmetro 3 é do tipo BOOL
   InvalidateRect(hwg_par_HWND(1), (hb_pcount() > 2) ? &rc : NULL, hb_parni(2));
 }
+
+HB_FUNC_TRANSLATE(INVALIDATERECT, HWG_INVALIDATERECT);
 
 /*
 MOVETO(HDC, nX, nY) -->
@@ -215,9 +217,9 @@ HB_FUNC(REDRAWWINDOW)
 #endif
 
 /*
-REDRAWWINDOW(HWND, nFlags, nX, nY, nWidth, nHeight) -->
+HWG_REDRAWWINDOW(HWND, nFlags, nX, nY, nWidth, nHeight) -->
 */
-HB_FUNC(REDRAWWINDOW)
+HB_FUNC(HWG_REDRAWWINDOW)
 {
   RECT rc;
 
@@ -235,6 +237,8 @@ HB_FUNC(REDRAWWINDOW)
 
   RedrawWindow(hwg_par_HWND(1), (hb_pcount() > 3) ? &rc : NULL, NULL, hwg_par_UINT(2));
 }
+
+HB_FUNC_TRANSLATE(REDRAWWINDOW, HWG_REDRAWWINDOW);
 
 /*
 DRAWBUTTON(HDC, nLeft, nTop, nRight, nBottom, nType) -->

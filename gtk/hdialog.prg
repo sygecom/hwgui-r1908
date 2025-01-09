@@ -255,7 +255,7 @@ Local aMenu, i, hCtrl
       IF iParLow == IDOK
          hCtrl := GetFocus()
          FOR i := Len(oDlg:GetList) TO 1 STEP -1
-            IF !oDlg:GetList[i]:lHide .AND. IsWindowEnabled( oDlg:Getlist[i]:Handle )
+            IF !oDlg:GetList[i]:lHide .AND. hwg_IsWindowEnabled( oDlg:Getlist[i]:Handle )
                EXIT
             ENDIF
          NEXT

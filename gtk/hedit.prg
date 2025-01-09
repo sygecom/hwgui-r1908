@@ -826,7 +826,7 @@ Local i, aLen
       IF ( aLen := Len(oParent:Getlist) ) > 1
          IF nSkip > 0
             DO WHILE ( i := i+nSkip ) <= aLen
-               IF !oParent:Getlist[i]:lHide .AND. IsWindowEnabled( oParent:Getlist[i]:Handle ) // Now tab and enter goes trhow the check, combo, etc...
+               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle ) // Now tab and enter goes trhow the check, combo, etc...
                   SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
        	         hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )
@@ -836,7 +836,7 @@ Local i, aLen
             ENDDO
          ELSE
             DO WHILE ( i := i+nSkip ) > 0
-               IF !oParent:Getlist[i]:lHide .AND. IsWindowEnabled( oParent:Getlist[i]:Handle )
+               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle )
                   SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
    	               hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )

@@ -180,7 +180,7 @@ Private cFor
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
-            RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
    ENDIF
@@ -352,7 +352,7 @@ Local hWnd, oWindow, aControls, i
    IF oWindow != Nil
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
-         RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+         hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
 

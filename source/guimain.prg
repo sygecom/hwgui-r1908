@@ -117,7 +117,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
       WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
       IF lRedraw != NIL .AND. lRedraw
-         RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ENDIF
    RETURN NIL
@@ -273,8 +273,8 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
         SIZE width, height       ;
         STYLE nStyle            ;
         FONT oFont              ;
-        ON INIT {|o|ResetWindowPos(o:handle), o:nInitFocus := oBrw}
-       //ON INIT {|o|ResetWindowPos(o:handle), oBrw:setfocus()}
+        ON INIT {|o|hwg_ResetWindowPos(o:handle), o:nInitFocus := oBrw}
+       //ON INIT {|o|hwg_ResetWindowPos(o:handle), oBrw:setfocus()}
    IF lArray
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
@@ -289,7 +289,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    ENDIF
 
    oBrw:oFont  := oFont
-   oBrw:bSize  := {|o, x, y|MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY)}
+   oBrw:bSize  := {|o, x, y|hwg_MoveWindow(o:handle, addX / 2, 10, x - addX, y - addY)}
    oBrw:bEnter := {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
    oBrw:bKeyDown := {|o, key|HB_SYMBOL_UNUSED(o), IIf(key == 27, (EndDialog(oDlg:handle), .F.), .T.)}
 
@@ -360,7 +360,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
          SetProgressBar(hPBar, maxPos)
       ENDIF
    ELSE
-      DestroyWindow(hPBar)
+      hwg_DestroyWindow(hPBar)
       IF oDlg != NIL
          EndDialog(oDlg:handle)
       ENDIF

@@ -100,7 +100,7 @@ CLASS HSayBmp INHERIT HSayImage
    METHOD Paint(lpdis)
    METHOD ReplaceBitmap(Image, lRes)
    //METHOD REFRESH() INLINE ::HIDE(), SendMessage(::handle, WM_PAINT, 0, 0), ::SHOW()
-   METHOD Refresh() INLINE RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW)
+   METHOD Refresh() INLINE hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW)
 
 ENDCLASS
 

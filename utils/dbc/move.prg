@@ -91,7 +91,7 @@ Local hWnd, oWindow, aControls, iCont
       ENDIF
 
       IF iCont > 0
-         RedrawWindow( aControls[iCont]:handle, RDW_ERASE + RDW_INVALIDATE )
+         hwg_RedrawWindow( aControls[iCont]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
 

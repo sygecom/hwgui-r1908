@@ -962,7 +962,7 @@ Local nColPos, lPaint := .f.
          IF !lPaint
             ::RefreshLine()
          ELSE
-            /* RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE ) */
+            /* hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE ) */
          ENDIF
       ENDIF
 
@@ -1004,7 +1004,7 @@ Local nScrollH, nLeftCol, colpos
             LineRight( Self,.F. )
          ENDDO
       ENDIF
-      InvalidateRect( ::area, 0 )
+      hwg_InvalidateRect( ::area, 0 )
    ENDIF
 
 RETURN Nil
@@ -1036,9 +1036,9 @@ LocaL i, nColumns := Len(oBrw:aColumns)
       IF lRefresh == Nil .OR. lRefresh
          IF oBrw:nLeftCol == oldLeft
             oBrw:internal[1] := 1
-            InvalidateRect( oBrw:area, 0, oBrw:x1, oBrw:y1+(oBrw:height+1)*oBrw:internal[2]-oBrw:height, oBrw:x2, oBrw:y1+(oBrw:height+1)*(oBrw:rowPos+1) )
+            hwg_InvalidateRect( oBrw:area, 0, oBrw:x1, oBrw:y1+(oBrw:height+1)*oBrw:internal[2]-oBrw:height, oBrw:x2, oBrw:y1+(oBrw:height+1)*(oBrw:rowPos+1) )
          ELSE
-            InvalidateRect( oBrw:area, 0 )
+            hwg_InvalidateRect( oBrw:area, 0 )
          ENDIF
       ENDIF
    ENDIF
@@ -1074,9 +1074,9 @@ LocaL nColumns := Len(oBrw:aColumns)
       IF lRefresh == Nil .OR. lRefresh
          IF oBrw:nLeftCol == oldLeft
             oBrw:internal[1] := 1
-            InvalidateRect( oBrw:area, 0, oBrw:x1, oBrw:y1+(oBrw:height+1)*oBrw:internal[2]-oBrw:height, oBrw:x2, oBrw:y1+(oBrw:height+1)*(oBrw:rowPos+1) )
+            hwg_InvalidateRect( oBrw:area, 0, oBrw:x1, oBrw:y1+(oBrw:height+1)*oBrw:internal[2]-oBrw:height, oBrw:x2, oBrw:y1+(oBrw:height+1)*(oBrw:rowPos+1) )
          ELSE
-            InvalidateRect( oBrw:area, 0 )
+            hwg_InvalidateRect( oBrw:area, 0 )
          ENDIF
       ENDIF
    ENDIF
@@ -1124,10 +1124,10 @@ Local nPos
    ::rowPos ++
    IF ::rowPos > ::rowCount
       ::rowPos := ::rowCount
-      InvalidateRect( ::area, 0 )
+      hwg_InvalidateRect( ::area, 0 )
    ELSE
       ::internal[1] := 1
-      InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*(::rowPos+1) )
+      hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*(::rowPos+1) )
    ENDIF
    IF ::lAppMode 
       IF ::rowPos > 1
@@ -1163,11 +1163,11 @@ Local nPos
       ::rowPos --
       IF ::rowPos = 0
          ::rowPos := 1
-         InvalidateRect( ::area, 0 )
+         hwg_InvalidateRect( ::area, 0 )
       ELSE
          ::internal[1] := 1
-         InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*::internal[2] )
-         InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
+         hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*::internal[2] )
+         hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
       ENDIF
 
       IF !lMouse .AND. ::hScrollV != Nil
@@ -1217,7 +1217,7 @@ Local nPos, step, lBof := .F.
       ENDIF
    ENDIF
 
-   InvalidateRect( ::area, 0 )
+   hwg_InvalidateRect( ::area, 0 )
    SetFocus( ::area )
 RETURN Nil
 
@@ -1250,7 +1250,7 @@ Local step := IIf(nRows > ::rowPos, nRows - ::rowPos + 1, nRows), lEof
       ENDIF
    ENDIF
 
-   InvalidateRect( ::area, 0 )
+   hwg_InvalidateRect( ::area, 0 )
    SetFocus( ::area )
 RETURN Nil
 
@@ -1268,7 +1268,7 @@ Local nPos
       ::nScrollV := nPos
    ENDIF
    
-   InvalidateRect( ::area, 0 )
+   hwg_InvalidateRect( ::area, 0 )
 
    IF lPaint == Nil .OR. lPaint
       SetFocus( ::area )
@@ -1289,7 +1289,7 @@ Local nPos
       ::nScrollV := nPos
    ENDIF
    
-   InvalidateRect( ::area, 0 )
+   hwg_InvalidateRect( ::area, 0 )
    SetFocus( ::area )
 
 RETURN Nil
@@ -1345,8 +1345,8 @@ Local xm := hwg_LOWORD(lParam), x1, fif
       ENDIF
       IF res
          ::internal[1] := 1
-         InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*::internal[2] )
-         InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
+         hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::internal[2]-::height, ::x2, ::y1+(::height+1)*::internal[2] )
+         hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
       ENDIF
       
    ELSEIF ::lDispHead .and.;
@@ -1388,7 +1388,7 @@ Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
          ::aColumns[i]:width := xPos - x1
          hwg_SetCursor( arrowCursor,::area )
          ::nCursor := 0     
-         InvalidateRect( hBrw, 0 )
+         hwg_InvalidateRect( hBrw, 0 )
       ENDIF
    ELSEIF ::aSelected != Nil
       IF ::nCtrlPress == GDK_Control_L
@@ -1611,7 +1611,7 @@ Return .T.
 //----------------------------------------------------//
 METHOD RefreshLine() CLASS HBrowse
    ::internal[1] := 0
-   InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
+   hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
 RETURN Nil
 
 //----------------------------------------------------//
@@ -1619,9 +1619,9 @@ METHOD Refresh( lFull ) CLASS HBrowse
 
    IF lFull == Nil .OR. lFull
       ::internal[1] := 15
-      RedrawWindow( ::area, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
+      hwg_RedrawWindow( ::area, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
    ELSE
-      InvalidateRect( ::area, 0 )
+      hwg_InvalidateRect( ::area, 0 )
       ::internal[1] := SetBit( ::internal[1], 1, 0 )
    ENDIF
    

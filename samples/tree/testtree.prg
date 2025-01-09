@@ -58,7 +58,7 @@ FUNCTION DlgGet()
       DIVIDE {oTree} FROM {oSay} ;
       ON SIZE {|o, x, y|o:Move(, , , y - 20)}
 
-   oSplit:bEndDrag := {||RedrawWindow(oSay:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)}
+   oSplit:bEndDrag := {||hwg_RedrawWindow(oSay:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)}
 
    ACTIVATE DIALOG oDlg
 

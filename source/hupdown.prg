@@ -54,11 +54,11 @@ CLASS HUpDown INHERIT HControl
    METHOD SetColor(tColor, bColor, lRedraw) INLINE ::super:SetColor(tColor, bColor, lRedraw), IIf(::oEditUpDown != NIL, ;
                                              ::oEditUpDown:SetColor(tColor, bColor, lRedraw),)
    METHOD DisableBackColor(DisableBColor) SETGET
-   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown))
-   METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown))
-   METHOD Enable() INLINE (::Super:Enable(), EnableWindow(::hwndUpDown, .T.), InvalidateRect(::hwndUpDown, 0))
-                          //InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight))
-   METHOD Disable() INLINE (::Super:Disable(), EnableWindow(::hwndUpDown, .F.))
+   METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle), hwg_HideWindow(::hwndUpDown))
+   METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle), hwg_ShowWindow(::hwndUpDown))
+   METHOD Enable() INLINE (::Super:Enable(), hwg_EnableWindow(::hwndUpDown, .T.), hwg_InvalidateRect(::hwndUpDown, 0))
+                          //hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight))
+   METHOD Disable() INLINE (::Super:Disable(), hwg_EnableWindow(::hwndUpDown, .F.))
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + hwg_GetClientRect(::hwndUpDown)[3] - 1
@@ -165,8 +165,8 @@ METHOD CREATEUPDOWN() CLASS Hupdown
        AddToolTip(::GetParentForm():handle, ::oEditUpDown:handle, ::tooltip)
        ::oEditUpDown:SetFont(::oFont)
        ::oEditUpDown:DisableBrush := ::DisableBrush  
-       SETWINDOWPOS(::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE)
-       DESTROYWINDOW(::handle)
+       hwg_SetWindowPos(::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE)
+       hwg_DestroyWindow(::handle)
    ELSEIF ::getParentForm():Type < WND_DLG_RESOURCE .AND. ::oParent:ClassName = "HTAB" //!Empty(::oParent:oParent)
       // MDICHILD WITH TAB
       ::nHolder := 1
@@ -242,7 +242,7 @@ METHOD Refresh() CLASS HUpDown
    ::oEditUpDown:Title :=  ::Title
    ::oEditUpDown:Refresh()
    IF SelfFocus(::handle)
-      InvalidateRect(::hwndUpDown, 0)
+      hwg_InvalidateRect(::hwndUpDown, 0)
    ENDIF
 
    RETURN NIL
@@ -365,8 +365,8 @@ CLASS VAR winclass   INIT "EDIT"
    METHOD Init()
    METHOD OnEvent(msg, wParam, lParam)
    METHOD Refresh()
-   METHOD Hide() INLINE (::lHide := .T., HideWindow(::handle), HideWindow(::hwndUpDown))
-   METHOD Show() INLINE (::lHide := .F., ShowWindow(::handle), ShowWindow(::hwndUpDown))
+   METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle), hwg_HideWindow(::hwndUpDown))
+   METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle), hwg_ShowWindow(::hwndUpDown))
 
 ENDCLASS
 

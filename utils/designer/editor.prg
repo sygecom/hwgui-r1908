@@ -169,7 +169,7 @@ Function EditMethod( cMethName, cMethod )
    INIT DIALOG oDlg TITLE "Edit '"+cMethName+"' method"          ;
       AT 100,240  SIZE 600,300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_MAXIMIZEBOX+WS_SIZEBOX ;
-      ON INIT {||MoveWindow(oDlg:handle,100,240,600,310)}        ;
+      ON INIT {||hwg_MoveWindow(oDlg:handle,100,240,600,310)}        ;
       ON EXIT {|| dummy := Iif(lRes:=(oEdit:lChanged.AND.MsgYesNo("Code was changed! Save it?", "Designer")),cMethod:=oEdit:GetText(),.F.),.T.}
 
    MENU OF oDlg
@@ -233,7 +233,7 @@ Local oFont
        oEdit:oFont := oFont
        SetWindowFont( oEdit:handle,oFont:handle )
        editShow( ,.T. )
-       // RedrawWindow( oEdit:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
+       // hwg_RedrawWindow( oEdit:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
        HDTheme():oFont := oFont
        HDTheme():lChanged := .T.
    ENDIF

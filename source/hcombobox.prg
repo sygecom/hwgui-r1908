@@ -331,7 +331,7 @@ METHOD INIT() CLASS HComboBox
       ENDIF
    ENDIF
    IF !::lResource
-      MoveWindow(::handle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      hwg_MoveWindow(::handle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       // HEIGHT COMBOBOX
       SendMessage(::handle, CB_SETITEMHEIGHT, -1, ::nHeightBox)
    ENDIF
@@ -876,7 +876,7 @@ METHOD onChange(lForce) CLASS HComboBox
    IF !SelfFocus(::handle) .AND. Empty(lForce)
       RETURN NIL
    ENDIF
-   IF !isWindowVisible(::handle)
+   IF !hwg_IsWindowVisible(::handle)
       ::SetItem(::Value)
       RETURN NIL
    ENDIF

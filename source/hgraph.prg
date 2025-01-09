@@ -198,6 +198,6 @@ METHOD Rebuild(aValues, nType) CLASS HGraph
       ::nType := nType
    ENDIF
    ::CalcMinMax()
-   RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
+   hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
 
    RETURN NIL

@@ -85,9 +85,9 @@ CLASS HButtonEX INHERIT HButton
    //METHOD SetText(c) INLINE ::title := c, ::caption := c, ;
    METHOD SetText(c) INLINE ;
       ::title := c, ;
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE), ;
-      IIf(::oParent != NIL .AND. isWindowVisible(::handle), ;
-          InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight),), ;
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE), ;
+      IIf(::oParent != NIL .AND. hwg_IsWindowVisible(::handle), ;
+          hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight),), ;
       SetWindowText(::handle, ::title)
    //METHOD SaveParentBackground()
 
@@ -170,7 +170,7 @@ METHOD SetBitmap(hBitMap) CLASS HButtonEX
    IF hb_IsNumeric(hBitmap) // TODO: verificar
       ::hBitmap := hBitmap
       SendMessage(::handle, BM_SETIMAGE, IMAGE_BITMAP, ::hBitmap)
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN Self
@@ -184,7 +184,7 @@ METHOD SetIcon(hIcon) CLASS HButtonEX
    IF hb_IsNumeric(::hIcon) // TODO: verificar
       ::hIcon := hIcon
       SendMessage(::handle, BM_SETIMAGE, IMAGE_ICON, ::hIcon)
-      RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN Self
@@ -267,7 +267,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ::Themed := .F.
       ENDIF
       ::m_bFirstTime := .T.
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
       RETURN 0
    ELSEIF msg == WM_ERASEBKGND
       RETURN 0
@@ -288,7 +288,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ENDIF
       IF(!::bMouseOverButton)
          ::bMouseOverButton := .T.
-         InvalidateRect(::handle, .F.)
+         hwg_InvalidateRect(::handle, .F.)
          TRACKMOUSEVENT(::handle)
       ENDIF
       RETURN 0
@@ -377,7 +377,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
          IF !PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
-            InvalidateRect(::handle, 0)
+            hwg_InvalidateRect(::handle, 0)
             SendMessage(::handle, BM_SETSTATE, 0, 0)
             ::m_bLButtonDown := .T.
          ENDIF
@@ -393,7 +393,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ::m_bLButtonDown := .T.
       IF ::m_bIsToggle
          ::m_bToggled := !::m_bToggled
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
       ENDIF
       RETURN -1
 
@@ -430,7 +430,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF wParam == VK_RETURN .OR. wParam == VK_SPACE
          IF ::m_bIsToggle
             ::m_bToggled := !::m_bToggled
-            InvalidateRect(::handle, 0)
+            hwg_InvalidateRect(::handle, 0)
          ELSE
             SendMessage(::handle, BM_SETSTATE, 1, 0)
             //::m_bSent := .T.
@@ -467,7 +467,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          ::Themed := .F.
       ENDIF
       ::m_bFirstTime := .T.
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
       RETURN 0
 
    CASE WM_ERASEBKGND
@@ -490,7 +490,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ENDIF
       IF !::bMouseOverButton
          ::bMouseOverButton := .T.
-         InvalidateRect(::handle, .F.)
+         hwg_InvalidateRect(::handle, .F.)
          TRACKMOUSEVENT(::handle)
       ENDIF
       RETURN 0
@@ -589,7 +589,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          rectButton := hwg_GetWindowRect(::handle)
          IF !PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
-            InvalidateRect(::handle, 0)
+            hwg_InvalidateRect(::handle, 0)
             SendMessage(::handle, BM_SETSTATE, 0, 0)
             ::m_bLButtonDown := .T.
          ENDIF
@@ -605,7 +605,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ::m_bLButtonDown := .T.
       IF ::m_bIsToggle
          ::m_bToggled := !::m_bToggled
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
       ENDIF
       RETURN -1
 
@@ -641,7 +641,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       CASE VK_SPACE
          IF ::m_bIsToggle
             ::m_bToggled := !::m_bToggled
-            InvalidateRect(::handle, 0)
+            hwg_InvalidateRect(::handle, 0)
          ELSE
             SendMessage(::handle, BM_SETSTATE, 1, 0)
             //::m_bSent := .T.
@@ -672,9 +672,9 @@ METHOD CancelHover() CLASS HBUTTONEx
    IF ::bMouseOverButton .AND. ::id != IDOK //NANDO
       ::bMouseOverButton := .F.
       IF !::lflat
-         InvalidateRect(::handle, .F.)
+         hwg_InvalidateRect(::handle, .F.)
       ELSE
-         InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+         hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
       ENDIF
    ENDIF
 
@@ -711,7 +711,7 @@ METHOD SetDefaultColor(tColor, bColor, lPaint) CLASS HBUTTONEx
    ::m_crColors[BTNST_COLOR_FG_FOCUS] := GetSysColor(COLOR_BTNTEXT)
    */
    IF lPaint
-      InvalidateRect(::handle, .F.)
+      hwg_InvalidateRect(::handle, .F.)
    ENDIF
 
 RETURN Self
@@ -729,7 +729,7 @@ METHOD SetColorEx(nIndex, nColor, lPaint) CLASS HBUTTONEx
    ::m_crColors[nIndex] := nColor
 
    IF lPaint
-      InvalidateRect(::handle, .F.)
+      hwg_InvalidateRect(::handle, .F.)
    ENDIF
 
 RETURN 0

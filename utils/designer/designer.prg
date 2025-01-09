@@ -179,7 +179,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
        CheckMenuItem(oDesigner:oMainWnd:handle,1052,.T.)
    endif
 
-   @ 0,0 PANEL oPanel SIZE 280,200 ON SIZE {|o,x,y|MoveWindow(o:handle,0,0,x,y-21),statusbarmsg('')}
+   @ 0,0 PANEL oPanel SIZE 280,200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle,0,0,x,y-21),statusbarmsg('')}
 
    IF !oDesigner:lSingleForm
       @ 2,3 OWNERBUTTON OF oPanel       ;
@@ -421,7 +421,7 @@ ENDCLASS
 
 Static Function StartDes( oDlg,p1,cForm )
 
-   MoveWindow( oDlg:handle,0,0,oDlg:nWidth+10,oDlg:nHeight )
+   hwg_MoveWindow( oDlg:handle,0,0,oDlg:nWidth+10,oDlg:nHeight )
 
    IF p1 != Nil .AND. Left( p1,1 ) $ "-/"
       IF ( p1 := Substr( p1,2,1 ) ) == "n"
@@ -802,7 +802,7 @@ LOCAL opanelx, oTabx
 Local oFont
 
    IF !empty(hwg_findwindow(0,"Toolbars - Classes ") )// > 0
-     Showwindow(oDlgx:handle)
+     hwg_Showwindow(oDlgx:handle)
      SetFocus( oDlgx:handle )
      RETURN NIL
    ENDIF
@@ -816,7 +816,7 @@ Local oFont
 
       //ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
-   @ 0,0 PANEL oPanelx SIZE 395,98 ON SIZE {|o,x,y|MoveWindow(o:handle,0,0,x+4,y+20)}
+   @ 0,0 PANEL oPanelx SIZE 395,98 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle,0,0,x+4,y+20)}
    @ 1,1 TAB oTabx ITEMS {} OF oPanelx SIZE 390,98 FONT oFont ;
        ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
 

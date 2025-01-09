@@ -275,7 +275,7 @@ Local oWindow := HMainWindow():GetMdiActive(), aControls, i
    IF oWindow != Nil
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-         RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+         hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
    EndDialog( getmodalhandle() )
@@ -360,7 +360,7 @@ Local oWindow, aControls, i
    IF oWindow != Nil
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-         RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+         hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
 
@@ -381,7 +381,7 @@ Local oWindow, aControls, i
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-            RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
    ENDIF
@@ -399,7 +399,7 @@ Local oWindow, aControls, i
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-            RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
    ENDIF
@@ -659,7 +659,7 @@ Local aRect, i, nHbusy := 0
          nHbusy += aRect[ 4 ]
       ENDIF
    NEXT
-   MoveWindow( oBrw:handle, 0, 0, nWidth, nHeight-nHBusy )
+   hwg_MoveWindow( oBrw:handle, 0, 0, nWidth, nHeight-nHBusy )
 Return Nil
 
 FUNCTION Fiopen( fname, alsname, prend, pass )

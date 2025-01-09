@@ -209,7 +209,7 @@ FUNCTION onMove(oWnd)
       ENDIF
    ENDIF
    IF oWnd:isMinimized() .AND. !Empty(oWnd:Screen)
-      SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
+      hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
          SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
    ENDIF
 

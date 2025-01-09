@@ -144,10 +144,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    LOCAL nret
 
    IF msg == WM_PAINT
-      InvalidateRect(::handle, 0)
+      hwg_InvalidateRect(::handle, 0)
       ::Paint()
    ELSEIF msg == WM_NCPAINT
-     //- RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE + RDW_INTERNALPAINT)
+     //- hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE + RDW_INTERNALPAINT)
    ELSEIF msg == WM_ERASEBKGND
       IF ::backstyle == OPAQUE
          RETURN ::nrePaint
@@ -267,7 +267,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
 
 METHOD Release() CLASS HPanel
 
-   InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+   hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ::ResizeOffSet(3)
    /*
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
@@ -319,7 +319,7 @@ METHOD Hide() CLASS HPanel
     ::Super:Hide()
     IF ::oParent:type == WND_MDI .AND. lRes
        //SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
-       InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop + 1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop + 1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
     ENDIF
     RETURN NIL
 
@@ -332,7 +332,7 @@ METHOD Show() CLASS HPanel
    ::nrePaint := - 1
    lRes := ::ResizeOffSet(2)
    /*
-   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //hwg_IsWindowVisible(::handle)
       IF (::nWidth > ::nHeight .OR. ::nWidth == 0) .AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] += ::nHeight
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -347,7 +347,7 @@ METHOD Show() CLASS HPanel
    ::Super:Show()
    IF ::oParent:type == WND_MDI .AND. lRes
        //SendMessage(::oParent:handle, WM_SIZE, 0, MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
-       InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop+1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop+1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
    RETURN NIL
 
@@ -356,7 +356,7 @@ METHOD Resize() CLASS HPanel
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
    
-   IF !isWindowVisible(::handle) .OR. (::nHeight == nHeight .AND. ::nWidth == nWidth)
+   IF !hwg_IsWindowVisible(::handle) .OR. (::nHeight == nHeight .AND. ::nWidth == nWidth)
       RETURN NIL
    ENDIF
 
@@ -364,7 +364,7 @@ METHOD Resize() CLASS HPanel
       RETURN NIL
    ENDIF
    /*
-   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //ISWINDOwVISIBLE(::handle)
+   IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI   //hwg_IsWindowVisible(::handle)
       IF (::nWidth > ::nHeight .OR. ::nWidth == 0) //.AND. ::oParent:aOffset[2] > 0
          ::oParent:aOffset[2] += (nHeight - ::nHeight)
       ELSEIF ::nHeight > ::nWidth .OR. ::nHeight == 0
@@ -381,7 +381,7 @@ METHOD Resize() CLASS HPanel
    */
    ::nWidth  := aCoors[3] - aCoors[1]
    ::nHeight := aCoors[4] - aCoors[2]
-   //RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
+   //hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
  
    RETURN NIL
 

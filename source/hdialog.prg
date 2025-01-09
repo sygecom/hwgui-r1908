@@ -201,11 +201,11 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          ::Add()
          hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
          IF ::WindowState > SW_HIDE
-            //InvalidateRect(::handle, 1)
+            //hwg_InvalidateRect(::handle, 1)
             //BRINGTOTOP(::handle)
             //UPDATEWINDOW(::handle)
-            SetWindowPos(::handle, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED)
-            RedrawWindow(::handle, RDW_UPDATENOW + RDW_NOCHILDREN)
+            hwg_SetWindowPos(::handle, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED)
+            hwg_RedrawWindow(::handle, RDW_UPDATENOW + RDW_NOCHILDREN)
          ENDIF
 
          /*
@@ -578,8 +578,8 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
 
    POSTMESSAGE(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
 
-   IF !oDlg:lModal .AND. !isWindowVisible(oDlg:handle)
-      SHOWWINDOW(oDlg:handle, SW_SHOWDEFAULT)
+   IF !oDlg:lModal .AND. !hwg_IsWindowVisible(oDlg:handle)
+      hwg_ShowWindow(oDlg:handle, SW_SHOWDEFAULT)
    ENDIF
 
    IF hb_IsBlock(oDlg:bGetFocus)
@@ -757,9 +757,9 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
       ENDIF
    ENDIF
 
-   //IF oDlg:nInitFocus > 0 //.AND. !isWindowVisible(oDlg:handle)
+   //IF oDlg:nInitFocus > 0 //.AND. !hwg_IsWindowVisible(oDlg:handle)
    // comentado, vc não pode testar um ponteiro como se fosse numerico
-   IF !Empty(oDlg:nInitFocus)  //.AND. !isWindowVisible(oDlg:handle)
+   IF !Empty(oDlg:nInitFocus)  //.AND. !hwg_IsWindowVisible(oDlg:handle)
       PostMessage(oDlg:handle, WM_NEXTDLGCTL, oDlg:nInitFocus, 1)
    ENDIF
    IF oDlg:aEvents != NIL .AND. ;
@@ -810,7 +810,7 @@ FUNCTION DlgMouseMove()
 
    IF hb_IsObject(oBtn) .AND. !oBtn:lPress
       oBtn:state := OBTN_NORMAL
-      InvalidateRect(oBtn:handle, 0)
+      hwg_InvalidateRect(oBtn:handle, 0)
       // PostMessage(oBtn:handle, WM_PAINT, 0, 0)
       SetNiceBtnSelected(NIL)
    ENDIF
@@ -888,8 +888,8 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
          Eval(oDlg:bOnActivate, oDlg)
          //-oDlg:lSuspendMsgsHandling := .F.
       ENDIF
-   ELSEIF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. IsWindowVisible(oDlg:handle) //.AND. PtrtoUlong(lParam) == 0
-      IF hb_IsBlock(oDlg:bGetFocus) //.AND. IsWindowVisible(::handle)
+   ELSEIF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. hwg_IsWindowVisible(oDlg:handle) //.AND. PtrtoUlong(lParam) == 0
+      IF hb_IsBlock(oDlg:bGetFocus) //.AND. hwg_IsWindowVisible(::handle)
          oDlg:lSuspendMsgsHandling := .T.
          IF iParHigh > 0  // MINIMIZED
             //odlg:restore()
@@ -1085,7 +1085,7 @@ FUNCTION EndDialog(handle)
       ENDIF
    ENDIF
 
-RETURN IIf(oDlg:lModal, hwg_EndDialog(oDlg:handle), DestroyWindow(oDlg:handle))
+RETURN IIf(oDlg:lModal, hwg_EndDialog(oDlg:handle), hwg_DestroyWindow(oDlg:handle))
 
 //-------------------------------------------------------------------------------------------------------------------//
 

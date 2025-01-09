@@ -355,7 +355,7 @@ FUNCTION FileOpen()
       @ 0, 0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
             SIZE 500, 300                           ;
             STYLE WS_VSCROLL + WS_HSCROLL          ;
-            ON SIZE {|o, x, y|MoveWindow(o:handle, 0, 0, x, y)} ;
+            ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y)} ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
       CreateList(oBrw, .T.)
       oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}

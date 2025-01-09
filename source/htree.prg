@@ -301,7 +301,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD FindChildPos(oNode, h)
    METHOD GetSelected() INLINE IIf(hb_IsObject(::oItem := TreeGetSelected(::handle)), ::oItem, NIL)
    METHOD EditLabel(oNode) BLOCK {|Self, o|SendMessage(::handle, TVM_EDITLABEL, 0, o:handle)}
-   METHOD Expand(oNode, lAllNode)   //BLOCK {|Self, o|SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
+   METHOD Expand(oNode, lAllNode)   //BLOCK {|Self, o|SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
    METHOD Select(oNode) BLOCK {|Self, o|SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle)}
    METHOD Clean()
    METHOD Notify(lParam)
@@ -856,7 +856,7 @@ METHOD Expand(oNode, lAllNode) CLASS HTree
          ::Expand(oNode:aItems[i], lAllNode)
       ENDIF
    NEXT
-   RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)
+   hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)
    RETURN NIL
 
 STATIC PROCEDURE ReleaseTree(aItems)

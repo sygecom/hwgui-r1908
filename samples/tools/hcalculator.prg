@@ -96,7 +96,7 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
    ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
 
    IF !::lCompacta .AND. ::Hwnd != Nil
-      SetWindowPos(::Hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED)
+      hwg_SetWindowPos(::Hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED)
       RETURN NIL
    ENDIF
    INIT DIALOG ::oFormCalc TITLE ::Title ;

@@ -182,7 +182,7 @@ CLASS VAR winclass   INIT "STATIC"
    METHOD Paint(lpDis)
    METHOD SetColor(tcolor, bcolor, lRedraw)
    METHOD Curvature(nCurvature)
-   //METHOD Refresh() INLINE SendMessage(::handle, WM_PAINT, 0, 0), RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+   //METHOD Refresh() INLINE SendMessage(::handle, WM_PAINT, 0, 0), hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
 
 ENDCLASS
 
@@ -233,7 +233,7 @@ METHOD SetColor(tcolor, bColor, lRedraw) CLASS HDrawShape
    ::brushFill := HBrush():Add(tColor, ::nfstyle)
    ::Super:SetColor(tColor, bColor)
    IF !Empty(lRedraw)
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
    RETURN NIL
 
@@ -242,8 +242,8 @@ METHOD Curvature(nCurvature) CLASS HDrawShape
 
    IF nCurvature != NIL
       ::nCurvature := nCurvature
-      RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_ERASENOW, ::nLeft, ::nTop, ::nWidth, ::nHeight)
-      InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+      hwg_RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_ERASENOW, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
    RETURN NIL
 
@@ -395,7 +395,7 @@ METHOD Init() CLASS HContainer
       ::nHolder := 1
       SetWindowObject(::handle, Self)
       hwg_InitStaticProc(::handle)
-      //SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
+      //hwg_SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
    ENDIF
    RETURN  NIL
 

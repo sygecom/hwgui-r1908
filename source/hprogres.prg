@@ -36,7 +36,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD SetLabel(cCaption)
    METHOD SetAnimation(nAnimation) SETGET
    METHOD Close()
-   METHOD End() INLINE DestroyWindow(::handle)
+   METHOD End() INLINE hwg_DestroyWindow(::handle)
 
 ENDCLASS
 
@@ -170,7 +170,7 @@ METHOD SetAnimation(nAnimation) CLASS HProgressBar
 
 METHOD Close()
 
-   DestroyWindow(::handle)
+   hwg_DestroyWindow(::handle)
    IF ::lNewBox
       EndDialog(::oParent:handle)
    ENDIF

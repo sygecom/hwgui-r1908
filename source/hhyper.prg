@@ -299,8 +299,8 @@ METHOD OnClicked() CLASS HStaticLink
       ::m_bVisited := .T.
    ENDIF
    ::state := LBL_NORMAL
-   InvalidateRect(::handle, 0)
-   RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+   hwg_InvalidateRect(::handle, 0)
+   hwg_RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
    ::SetFocus()
 
    RETURN NIL
@@ -350,14 +350,14 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
       ENDIF
       IF (res .AND. !::m_bVisited) .OR. (res .AND. ::m_bVisited)
          ::state := LBL_NORMAL
-         InvalidateRect(::handle, 0)
-         RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+         hwg_InvalidateRect(::handle, 0)
+         hwg_RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ENDIF
       IF (::state == LBL_NORMAL .AND. !res) .OR. ;
          (::state == LBL_NORMAL .AND. !res .AND. ::m_bVisited)
          ::state := LBL_MOUSEOVER
-         InvalidateRect(::handle, 0)
-         RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+         hwg_InvalidateRect(::handle, 0)
+         hwg_RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
          //SetCapture(::handle)
       ENDIF
 
@@ -463,7 +463,7 @@ METHOD Resize(x, y) CLASS HStaticLink
 
    IF nHeight != ::nHeight
       ::Move(, , , ::nHeight, 0)
-      InvalidateRect(::handle, 0)
+      hwg_InvalidateRect(::handle, 0)
    ENDIF
 
    RETURN NIL

@@ -95,7 +95,7 @@ METHOD Activate CLASS HOwnButton
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    if !::lEnabled
-      EnableWindow( ::handle, .f. )
+      hwg_EnableWindow( ::handle, .f. )
       ::Disable()
    EndIf
 
@@ -207,11 +207,11 @@ Local res := .F.
    IF ::state != OBTN_INIT
       IF !lEnter .AND. !::lPress
          ::state := OBTN_NORMAL
-         RedrawWindow( ::handle )
+         hwg_RedrawWindow( ::handle )
       ENDIF
       IF lEnter .AND. ::state == OBTN_NORMAL
          ::state := OBTN_MOUSOVER
-         RedrawWindow( ::handle )
+         hwg_RedrawWindow( ::handle )
       ENDIF
    ENDIF
    
@@ -220,7 +220,7 @@ Return Nil
 METHOD MDown()  CLASS HOwnButton
    IF ::state != OBTN_PRESSED
       ::state := OBTN_PRESSED
-      RedrawWindow( ::handle )
+      hwg_RedrawWindow( ::handle )
       SetFocus( ::handle )
    ENDIF
 Return Nil
@@ -229,7 +229,7 @@ METHOD MUp() CLASS HOwnButton
    IF ::state == OBTN_PRESSED
       IF !::lPress
          ::state := OBTN_NORMAL
-         RedrawWindow( ::handle )
+         hwg_RedrawWindow( ::handle )
       ENDIF
       IF ::bClick != Nil
          Eval( ::bClick, ::oParent, ::id )
@@ -241,7 +241,7 @@ Return Nil
 METHOD Release()  CLASS HOwnButton
    ::lPress := .F.
    ::state := OBTN_NORMAL
-   RedrawWindow( ::handle )
+   hwg_RedrawWindow( ::handle )
 Return Nil
 
 METHOD End()  CLASS HOwnButton
@@ -260,9 +260,9 @@ Return Nil
 
 METHOD Enable() CLASS HOwnButton
 
-   EnableWindow( ::handle, .T. )
+   hwg_EnableWindow( ::handle, .T. )
    ::lEnabled:=.T.
-   RedrawWindow( ::handle )
+   hwg_RedrawWindow( ::handle )
 
 Return Nil
 
@@ -270,8 +270,8 @@ METHOD Disable() CLASS HOwnButton
 
    ::state   := OBTN_INIT
    ::lEnabled:=.F.
-   RedrawWindow( ::handle )
-   EnableWindow( ::handle, .F. )
+   hwg_RedrawWindow( ::handle )
+   hwg_EnableWindow( ::handle, .F. )
 
 Return Nil
 

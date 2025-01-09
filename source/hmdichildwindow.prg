@@ -140,7 +140,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       //::show()
       //-upDateWindow(::handle)
    ELSE
-      SetWindowPos(::handle, NIL, ::nLeft, ::nTop, ::nWidth, ::nHeight, SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOZORDER)
+      hwg_SetWindowPos(::handle, NIL, ::nLeft, ::nTop, ::nWidth, ::nHeight, SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOZORDER)
    ENDIF
 
    // SCROLLSBARS
@@ -343,7 +343,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    IF oWnd:oEmbedded != NIL
       oWnd:oEmbedded:Resize(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
-   //InvalidateRect(oWnd:handle, 0)
+   //hwg_InvalidateRect(oWnd:handle, 0)
    oWnd:Super:onEvent(WM_SIZE, wParam, lParam)
 
    oWnd:nWidth := aCoors[3] - aCoors[1]
@@ -354,10 +354,10 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    ENDIF
    IF oWnd:Type == WND_MDI .AND. Len(HWindow():aWindows) > 1
       aCoors := hwg_GetClientRect(oWnd:handle)
-      //MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], ;
+      //hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], ;
       //   aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
       //aCoors := hwg_GetClientRect(HWindow():aWindows[2]:handle)
-      SetWindowPos(HWindow():aWindows[2]:handle, NIL, oWnd:aOffset[1], oWnd:aOffset[2], ;
+      hwg_SetWindowPos(HWindow():aWindows[2]:handle, NIL, oWnd:aOffset[1], oWnd:aOffset[2], ;
          aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4], ;
          SWP_NOZORDER + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
       aCoors := hwg_GetWindowRect(HWindow():aWindows[2]:handle)
@@ -367,10 +367,10 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       IF !Empty(oWnd:Screen)
           oWnd:Screen:nWidth := aCoors[3] - aCoors[1]
           oWnd:Screen:nHeight := aCoors[4] - aCoors[2]
-          //InvalidateRect(oWnd:Screen:handle, 1) // flick in screen in resize window
-          SetWindowPos(oWnd:screen:handle, NIL, 0, 0, oWnd:Screen:nWidth, oWnd:Screen:nHeight, ;
+          //hwg_InvalidateRect(oWnd:Screen:handle, 1) // flick in screen in resize window
+          hwg_SetWindowPos(oWnd:screen:handle, NIL, 0, 0, oWnd:Screen:nWidth, oWnd:Screen:nHeight, ;
              SWP_NOACTIVATE + SWP_NOSENDCHANGING + SWP_NOZORDER)
-          InvalidateRect(oWnd:Screen:handle, 1)
+          hwg_InvalidateRect(oWnd:Screen:handle, 1)
       ENDIF
       IF !Empty(oWnd := oWnd:GetMdiActive()) .AND.oWnd:type == WND_MDICHILD .AND. oWnd:lMaximized .AND. ;
          (oWnd:lModal .OR. oWnd:lChild)
@@ -416,7 +416,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
          IF !hb_IsNumeric(oWnd:brush)
             FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oWnd:brush:handle)
             IF !Empty(oWnd:Screen) .AND. SELFFOCUS(oWnd:handle, oWnd:Screen:handle)
-               SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
+               hwg_SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
                   SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER)
             ENDIF
             RETURN 1
@@ -464,7 +464,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          oWnd:Hide()
          RETURN 0
       ENDIF
-      SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
+      hwg_SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
          SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER + SWP_FRAMECHANGED)
    ELSEIF (wParam == SC_MAXIMIZE .OR. wparam == SC_MAXIMIZE2) .AND. oWnd:type == WND_MDICHILD .AND. ;
       (oWnd:lChild .OR. oWnd:lModal)
@@ -479,15 +479,15 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          IF oWnd:lSizeBox
             HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
          ENDIF
-         MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
-         MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
+         hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
+         hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
             oWnd:aRectSave[2] - (oWnd:nTop - oWnd:aRectSave[2]), oWnd:aRectSave[3], oWnd:aRectSave[4])
       ELSE
           // maximized
           IF oWnd:lSizeBox
              HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
           ENDIF
-         MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
+         hwg_MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
       ENDIF
       oWnd:aRectSave := aClone(ars)
       oWnd:lMaximized := !oWnd:lMaximized
@@ -574,7 +574,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    ENDIF
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
-   IF ISWINDOWVISIBLE(oWnd:handle)
+   IF hwg_IsWindowVisible(oWnd:handle)
       oCtrl := oWnd:FindControl(iParLow)
    ENDIF
    IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
@@ -600,7 +600,7 @@ STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
 
    IF !Empty(oWnd:Screen)
       IF wParam == 1 .AND. SelfFocus(oWnd:Screen:handle, oWnd:handle)
-         SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
+         hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
          RETURN 1
       ENDIF
       IF wParam == 1 .AND. !SelfFocus(oWnd:Screen:handle, oWnd:handle)
@@ -650,13 +650,13 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
    ENDIF
 
    IF lScreen .AND. (Empty(lParam) .OR. SelfFocus(lParam, oWnd:Screen:handle)) .AND. !lConf //wParam != oWnd:handle
-      //-SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
+      //-hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
       RETURN 0
    ELSEIF lConf //oWnd:handle == wParam
       IF !SelfFocus(oWnd:Screen:handle, wParam) .AND. oWnd:bLostFocus != NIL //.AND.wParam == 0
          oWnd:lSuspendMsgsHandling := .T.
          //IF oWnd:Screen:handle == lParam
-         //   SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
+         //   hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
          //ENDIF
          Eval(oWnd:bLostFocus, oWnd)
          oWnd:lSuspendMsgsHandling := .F.
@@ -664,7 +664,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
          AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
-            EnableWindow(w:handle, .T.),)})
+            hwg_EnableWindow(w:handle, .T.),)})
       ENDIF
    ELSEIF SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
       IF hb_IsBlock(oWnd:bSetForm)
@@ -673,8 +673,8 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
          AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
-            EnableWindow(w:handle, .F.),)})
-         AEval(oWnd:aChilds,{|wH|EnableWindow(wH, .T.)})
+            hwg_EnableWindow(w:handle, .F.),)})
+         AEval(oWnd:aChilds,{|wH|hwg_EnableWindow(wH, .T.)})
      ENDIF
       IF oWnd:bGetFocus != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. !oWnd:IsMaximized()
          oWnd:lSuspendMsgsHandling := .T.

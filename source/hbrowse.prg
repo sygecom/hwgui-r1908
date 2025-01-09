@@ -167,7 +167,7 @@ METHOD Editable(lEditable) CLASS HColumn
    IF lEditable != NIL
       ::lEditable := lEditable
       ::oParent:lEditable := lEditable .OR. AScan(::oParent:aColumns, {|c|c:lEditable}) > 0
-      RedrawWindow(::oParent:handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
+      hwg_RedrawWindow(::oParent:handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
    ENDIF
 
 RETURN ::lEditable
@@ -177,7 +177,7 @@ METHOD SortMark(nSortMark) CLASS HColumn
     IF nSortMark != NIL
       AEval(::oParent:aColumns,{|c|c:nSortMark := 0})
       ::oParent:lHeadClick := .T.
-      InvalidateRect(::oParent:handle, 0, ::oParent:x1, ::oParent:y1 - ::oParent:nHeadHeight * ::oParent:nHeadRows, ::oParent:x2, ::oParent:y1)
+      hwg_InvalidateRect(::oParent:handle, 0, ::oParent:x1, ::oParent:y1 - ::oParent:nHeadHeight * ::oParent:nHeadRows, ::oParent:x2, ::oParent:y1)
       ::oParent:lHeadClick := .F.
       ::nSortMark := nSortMark
     ENDIF
@@ -566,7 +566,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::Themed := .F.
          ENDIF
          ::m_bFirstTime := .T.
-         RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+         hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
          RETURN 0
       ENDIF
       IF msg == WM_PAINT
@@ -581,7 +581,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ::lRepaintBackground := .T.
          ::isMouseOver := .F.
          IF ::AutoColumnFit == 1
-            IF !isWindowVisible(::oParent:handle)
+            IF !hwg_IsWindowVisible(::oParent:handle)
                ::Rebuild()
                ::lRepaintBackground := .F.
             ENDIF
@@ -855,7 +855,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
                AEval(::aColumns,{|c|c:lHeadClick := .F.})
-               InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
+               hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
                ::lHeadClick := .F.
             ENDIF
             IF (!::allMouseOver) .AND. ::hTheme != NIL
@@ -947,7 +947,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          ::Themed := .F.
       ENDIF
       ::m_bFirstTime := .T.
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
       RETURN 0
 
    CASE WM_PAINT
@@ -962,7 +962,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
       ::lRepaintBackground := .T.
       ::isMouseOver := .F.
       IF ::AutoColumnFit == 1
-         IF !isWindowVisible(::oParent:handle)
+         IF !hwg_IsWindowVisible(::oParent:handle)
             ::Rebuild()
             ::lRepaintBackground := .F.
          ENDIF
@@ -1267,7 +1267,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
                AEval(::aColumns, {|c|c:lHeadClick := .F.})
-               InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
+               hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
                ::lHeadClick := .F.
             ENDIF
             IF !::allMouseOver .AND. ::hTheme != NIL
@@ -1488,8 +1488,8 @@ METHOD SetRefresh(nSeconds) CLASS HBrowse
       IF ::oTimer != NIL
          ::oTimer:Interval := nSeconds * 1000
       ELSEIF nSeconds > 0
-         SET TIMER ::oTimer OF ::GetParentForm() VALUE (nSeconds * 1000)  ACTION {||IIf(isWindowVisible(::handle),;
-            (::internal[1] := 12, InvalidateRect(::handle, 0, ::x1, ::y1, ::x1 + ::xAdjRight, ;
+         SET TIMER ::oTimer OF ::GetParentForm() VALUE (nSeconds * 1000)  ACTION {||IIf(hwg_IsWindowVisible(::handle),;
+            (::internal[1] := 12, hwg_InvalidateRect(::handle, 0, ::x1, ::y1, ::x1 + ::xAdjRight, ;
             ::y1 + ::rowCount * (::height + 1) + 1)), NIL)}
       ENDIF
       ::nSetRefresh := nSeconds
@@ -1765,7 +1765,7 @@ METHOD AutoFit() CLASS HBrowse
    ENDIF
    ::lAdjRight := .F.
    ::oParent:lSuspendMsgsHandling := .T.
-   RedrawWindow(::handle, RDW_VALIDATE + RDW_UPDATENOW)
+   hwg_RedrawWindow(::handle, RDW_VALIDATE + RDW_UPDATENOW)
    ::oParent:lSuspendMsgsHandling := .F.
    aCoors := hwg_GetWindowRect(::handle)
    IF ::nAutoFit == NIL
@@ -2940,7 +2940,7 @@ METHOD SetColumn(nCol) CLASS HBrowse
          IF !lPaint
             ::RefreshLine()
          ELSE
-            RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+            hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
          ENDIF
       ENDIF
 
@@ -3146,7 +3146,7 @@ METHOD DoHScroll(wParam) CLASS HBrowse
       //   ::RefreshLine()
       //ELSE
       IF ::nLeftCol != ::nVisibleColLeft
-         RedrawWindow(::handle, RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW)  // Force a complete redraw
+         hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW)  // Force a complete redraw
       ELSE
          ::RefreshLine()
       ENDIF
@@ -3223,7 +3223,7 @@ METHOD DoHScroll(wParam) CLASS HBrowse
       //   ::RefreshLine()
       //ELSE
       IF ::nLeftCol != ::nVisibleColLeft
-         RedrawWindow(::handle, RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
+         hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
       ELSE
          ::RefreshLine()
       ENDIF
@@ -3254,9 +3254,9 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
       ::rowPos := ::rowCount
       IF ::lAppMode
           //::nLeftCol := ::freeze + 1
-          RedrawWindow(::handle, RDW_INVALIDATE + RDW_UPDATENOW + RDW_NOERASE)
+          hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_UPDATENOW + RDW_NOERASE)
       ELSE
-          RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
+          hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
       ENDIF
       //::Refresh(.F.)  //::nFootRows > 0)
       ::internal[1] := 14
@@ -3267,11 +3267,11 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
    /*
    nUpper := ::y1  +  (::height + 1) * (::rowPos - 2)
    nLower := ::y1 + (::height + 1) * (::rowPos)
-   InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, nUpper, ::x2, nLower)
+   hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, nUpper, ::x2, nLower)
    */
-   InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::internal[2] - ::height, ;
+   hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::internal[2] - ::height, ;
       ::xAdjRight, ::y1 + (::height + 1) * ::internal[2])
-   InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos - ::height, ;
+   hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos - ::height, ;
       ::xAdjRight, ::y1 + (::height + 1) * ::rowPos)
 
    //ENDIF
@@ -3310,16 +3310,16 @@ METHOD LINEUP() CLASS HBrowse
       ::rowPos--
       IF ::rowPos == 0  // needs scroll
          ::rowPos := 1
-         RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
+         hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT)
          //::Refresh(.F., .T.)
          ::internal[1] := 14
       ELSE
          ::internal[1] := 0
       ENDIF
       //::internal[1] := 14 //0
-      InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
+      hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
          ::internal[2] - ::height, ::xAdjRight, ::y1 + (::height + 1) * ::internal[2])
-      InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
+      hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
          ::rowPos - ::height, ::xAdjRight, ::y1 + (::height + 1) * ::rowPos)
       //ENDIF
       IF hb_IsBlock(::bScrollPos)
@@ -3411,7 +3411,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
       ::Refresh(::nFootRows > 0)
       //::SetFocus()
    ELSE
-      //InvalidateRect(::handle, 0)
+      //hwg_InvalidateRect(::handle, 0)
       ::internal[1] := SetBit(::internal[1], 1, 0)
    ENDIF
 
@@ -3424,7 +3424,7 @@ METHOD TOP() CLASS HBrowse
    Eval(::bGoTop, Self)
    VScrollPos(Self, 0, .F.)
 
-   //InvalidateRect(::handle, 0)
+   //hwg_InvalidateRect(::handle, 0)
    ::Refresh(::nFootRows > 0)
    ::internal[1] := SetBit(::internal[1], 1, 0)
    ::SetFocus()
@@ -3535,10 +3535,10 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
    ENDIF
    IF res
       ::internal[1] := 15   // Force FOOTER
-      //RedrawWindow(::handle, RDW_INVALIDATE)
-      InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
+      //hwg_RedrawWindow(::handle, RDW_INVALIDATE)
+      hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
          ::internal[2] - ::height, ::xAdjRight, ::y1 + (::height + 1) * ::internal[2])
-      InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
+      hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ;
          ::rowPos - ::height, ::xAdjRight, ::y1 + (::height + 1) * ::rowPos)
    ENDIF
    ::fipos := Min(::colpos + ::nLeftCol - 1 - ::freeze, Len(::aColumns))
@@ -3553,12 +3553,12 @@ ELSEIF nLine == 0
       hwg_SetCursor(s_oCursor)
       s_xDrag := hwg_LOWORD(lParam)
       s_xDragMove := s_xDrag
-      InvalidateRect(::handle, 0)
+      hwg_InvalidateRect(::handle, 0)
    ELSEIF ::lDispHead .AND. nLine >= - ::nHeadRows .AND. ;
       fif <= Len(::aColumns) //.AND. ;
       //::aColumns[fif]:bHeadClick != NIL
       ::aColumns[fif]:lHeadClick := .T.
-      InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
+      hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
      // hwg_MsgInfo("C")
       IF ::aColumns[fif]:bHeadClick != NIL
          ::isMouseOver := .F.
@@ -3605,7 +3605,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
          s_oCursor := 0
          ::isMouseOver := .F.
          //s_xDragMove := 0
-         InvalidateRect(::handle, 0)
+         hwg_InvalidateRect(::handle, 0)
          ::lResizing := .F.
       ENDIF
 
@@ -3622,7 +3622,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
    ENDIF
    IF ::lHeadClick
       AEval(::aColumns,{|c|c:lHeadClick := .F.})
-      InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
+      hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
       ::lHeadClick := .F.
      hwg_SetCursor(s_downCursor)
    ENDIF
@@ -3745,7 +3745,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
       RETURN NIL
    ENDIF
    IF ::isMouseOver
-      InvalidateRect(::handle, 0, s_axPosMouseOver[1], ::y1 - ::nHeadHeight * ::nHeadRows, s_axPosMouseOver[2], ::y1)
+      hwg_InvalidateRect(::handle, 0, s_axPosMouseOver[1], ::y1 - ::nHeadHeight * ::nHeadRows, s_axPosMouseOver[2], ::y1)
    ENDIF
    IF ::lDispHead .AND. (yPos <= ::nHeadHeight * ::nHeadRows + 1 .OR.; // ::height*::nHeadRows+1
        (::lResizing .AND. yPos > ::y1)) .AND. ;
@@ -3755,7 +3755,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
          res := .T.
          s_xDragMove := xPos
          ::isMouseOver := .T.
-         InvalidateRect(::handle, 0, xPos - 18, ::y1 - (::nHeadHeight * ::nHeadRows), xPos + 18, ;
+         hwg_InvalidateRect(::handle, 0, xPos - 18, ::y1 - (::nHeadHeight * ::nHeadRows), xPos + 18, ;
             ::y2 - (::nFootHeight * ::nFootRows) - 1)
       ELSE
          i := IIf(::freeze > 0, 1, ::nLeftCol)
@@ -3788,7 +3788,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
       ::isMouseOver := IIf(::hTheme != NIL .AND. ::xPosMouseOver != 0, .T., .F.)
    ENDIF
    IF ::isMouseOver
-      InvalidateRect(::handle, 0, ::xPosMouseOver - 1, ::y1 - ::nHeadHeight * ::nHeadRows, ::xPosMouseOver + 1, ::y1)
+      hwg_InvalidateRect(::handle, 0, ::xPosMouseOver - 1, ::y1 - ::nHeadHeight * ::nHeadRows, ::xPosMouseOver + 1, ::y1)
    ENDIF
 
 RETURN NIL
@@ -3930,8 +3930,8 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
 
          ::lNoValid := .T.
          IF Type != "L"
-            bInit := IIf(wParam == NIL .OR. wParam == 13 .OR. Empty(lParam), {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}, ;
-                       {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1), ;
+            bInit := IIf(wParam == NIL .OR. wParam == 13 .OR. Empty(lParam), {|o|hwg_MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}, ;
+                       {|o|hwg_MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1), ;
                            o:aControls[1]:SetFocus(), PostMessage(o:aControls[1]:handle, WM_CHAR, wParam, lParam)})
          ELSE
             bInit := {||.F.}
@@ -4084,7 +4084,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   ::DoHScroll(SB_LINERIGHT)
                ENDIF
                ::lUpdated := .T.
-               InvalidateRect(::handle, 0, ::x1, ::y1 + (::height + 1) * (::rowPos - 2), ::x2, ;
+               hwg_InvalidateRect(::handle, 0, ::x1, ::y1 + (::height + 1) * (::rowPos - 2), ::x2, ;
                   ::y1 + (::height + 1) * ::rowPos)
                ::RefreshLine()
             ENDIF
@@ -4096,14 +4096,14 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
 
          ELSEIF ::lAppMode
             ::lAppMode := .F.
-            //InvalidateRect(::handle, 0, ::x1, ::y1 + (::height + 1) * ::rowPos, ::x2, ::y1 + (::height + 1) * ;
+            //hwg_InvalidateRect(::handle, 0, ::x1, ::y1 + (::height + 1) * ::rowPos, ::x2, ::y1 + (::height + 1) * ;
             //   (::rowPos + 2))
             IF ::Type == BRW_DATABASE .AND. Eval(::bEof, Self)
                Eval(::bSkip, Self, -1)
             ENDIF
             IF ::rowPos < ::rowCount
                //::RefreshLine()
-               InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos, ;
+               hwg_InvalidateRect(::handle, 0, ::x1 - ::nShowMark - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos, ;
                   ::x2, ::y1 + (::height + 1) * (::rowPos + 1))
             ELSE
                ::Refresh()
@@ -4323,7 +4323,7 @@ METHOD RefreshLine() CLASS HBrowse
    LOCAL nInternal := ::internal[1]
 
    ::internal[1] := 0
-   InvalidateRect(::handle, 0, ::x1 - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos - ::height, ::x2, ;
+   hwg_InvalidateRect(::handle, 0, ::x1 - ::nDeleteMark, ::y1 + (::height + 1) * ::rowPos - ::height, ::x2, ;
       ::y1 + (::height + 1) * ::rowPos)
    ::internal[1] := nInternal
 
@@ -4344,21 +4344,21 @@ METHOD Refresh(lFull, lLineUp) CLASS HBrowse
             // you need this? becausee it will not let scroll you browse? // lfbasso@
       ENDIF
       ::internal[1] := 15
-      //RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
+      //hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
       IF ::nCurrent < ::rowCount .AND. ::rowPos <= ::nCurrent .AND. Empty(lLineUp)
          ::rowPos := ::nCurrent
       ENDIF
-      //RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
+      //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
    ELSE
-      InvalidateRect(::handle, 0)
+      hwg_InvalidateRect(::handle, 0)
       ::internal[1] := SetBit(::internal[1], 1, 0)
       IF ::nCurrent < ::rowCount .AND. ::rowPos <= ::nCurrent .AND. Empty(lLineUp)
          ::rowPos := ::nCurrent
       ENDIF
-      //RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
+      //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
    ENDIF
-   //RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
-   RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
+   //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
+   hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
 
 RETURN NIL
 

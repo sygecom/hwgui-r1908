@@ -167,7 +167,7 @@ Private value, oCtrl := Iif( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrl
                EvalCode( aDataDef[ j,4 ] )
             ENDIF
          ENDIF
-         RedrawWindow( oCtrl:handle,5 )
+         hwg_RedrawWindow( oCtrl:handle,5 )
          HFormGen():oDlgSelected:oParent:lChanged := .T.
          oBrw1:lUpdated := .T.
          oBrw1:Refresh()
@@ -298,7 +298,7 @@ Private value, oCtrl := Iif( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrl
          EvalCode( oDesigner:aDataDef[ j,4 ] )
       ENDIF
    ENDIF
-   RedrawWindow( oCtrl:handle,5 )
+   hwg_RedrawWindow( oCtrl:handle,5 )
    HFormGen():oDlgSelected:oParent:lChanged := .T.
    oBrw1:lUpdated := .T.
    oBrw1:aEvents := {}
@@ -330,22 +330,22 @@ Memvar oDesigner
       AT 0,280  SIZE 220,300       ;
       FONT HFont():Add( "MS Sans Serif",0,-12,400,,,)  ;
       STYLE nStilo;
-      ON INIT {||IIF(!lshow,oDesigner:oDlgInsp:hide(),),MoveWindow(oDesigner:oDlgInsp:handle,0,134,280,410)}   ;
+      ON INIT {||IIF(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle,0,134,280,410)}   ;
       ON GETFOCUS {|o| o:show(),.t.};
       ON EXIT {||oDesigner:oDlgInsp:=Nil,CheckMenuItem(oDesigner:oMainWnd:handle,1010,.F.),.T.} ;
       ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
    @ 0,0 COMBOBOX oCombo ITEMS {} SIZE 220,22 ;
           STYLE WS_VSCROLL                     ;
-          ON SIZE {|o,x|MoveWindow(o:handle,0,0,x,250)} ;
+          ON SIZE {|o,x|hwg_MoveWindow(o:handle,0,0,x,250)} ;
           ON CHANGE {||ComboOnChg()}
 
    @ 0,28 TAB oTab ITEMS {} SIZE 220,250 ;
-      ON SIZE {|o,x,y|MoveWindow(o:handle,0,28,x,y-28)}
+      ON SIZE {|o,x,y|hwg_MoveWindow(o:handle,0,28,x,y-28)}
 
    BEGIN PAGE "Properties" OF oTab
       @ 2,30 PBROWSE oBrw1 ARRAY SIZE 214,218 STYLE WS_VSCROLL ;
-         ON SIZE {|o,x,y|MoveWindow(o:handle,2,30,x-6,y-32)}
+         ON SIZE {|o,x,y|hwg_MoveWindow(o:handle,2,30,x-6,y-32)}
          setdlgkey(oDesigner:oDlgInsp,0,VK_DELETE,{|| ResetToDefault(oBrw1)} )
 
       oBrw1:tColor := GetSysColor( COLOR_BTNTEXT )
@@ -362,7 +362,7 @@ Memvar oDesigner
 
    BEGIN PAGE "Events" OF oTab
       @ 2,30 PBROWSE oBrw2 ARRAY SIZE 214,218 STYLE WS_VSCROLL ;
-         ON SIZE {|o,x,y|MoveWindow(o:handle,2,30,x-6,y-32)}
+         ON SIZE {|o,x,y|hwg_MoveWindow(o:handle,2,30,x-6,y-32)}
       oBrw2:tColor := GetSysColor( COLOR_BTNTEXT )
       oBrw2:tColorSel := 8404992
       oBrw2:bColor := oBrw2:bColorSel := GetSysColor( COLOR_BTNFACE )
@@ -778,7 +778,7 @@ Private value,oCtrl := Iif( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlS
            EvalCode( oDesigner:aDataDef[ j,4 ] )
         ENDIF
      ENDIF
-     RedrawWindow( oCtrl:handle,5 )
+     hwg_RedrawWindow( oCtrl:handle,5 )
      HFormGen():oDlgSelected:oParent:lChanged := .T.
      oBrw1:lUpdated := .T.
      oBrw1:Refresh()

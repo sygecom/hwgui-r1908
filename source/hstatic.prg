@@ -248,10 +248,10 @@ METHOD SetValue(cValue) CLASS HStatic
 
    ::Auto_Size(cValue)
    IF ::Title != cValue
-      IF ::backstyle == TRANSPARENT .AND. ::Title != cValue .AND. isWindowVisible(::handle)
-         RedrawWindow(::oParent:handle, RDW_NOERASE + RDW_INVALIDATE + RDW_ERASENOW, ;
+      IF ::backstyle == TRANSPARENT .AND. ::Title != cValue .AND. hwg_IsWindowVisible(::handle)
+         hwg_RedrawWindow(::oParent:handle, RDW_NOERASE + RDW_INVALIDATE + RDW_ERASENOW, ;
             ::nLeft, ::nTop, ::nWidth, ::nHeight)
-         InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+         hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
       ENDIF
       hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
    ELSEIF ::backstyle != TRANSPARENT

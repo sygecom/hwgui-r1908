@@ -62,7 +62,7 @@ FUNCTION Main()
       DIVIDE {oTree} FROM {oTab, oGet} ;
       ON SIZE {|o, x, y|o:Move(, , , y - 20)}
 
-   oSplit:bEndDrag := {||RedrawWindow(oTab:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)}
+   oSplit:bEndDrag := {||hwg_RedrawWindow(oTab:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)}
 
    BuildTree(oMainWindow, oTree, oTab)
 

@@ -61,7 +61,7 @@ FUNCTION TestForm()
    wcodigo := "XXXX"
    wnome := "Nome"
 
-   bInit := {|o|MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}
+   bInit := {|o|hwg_MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE cTitle           ;
       STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU  ;

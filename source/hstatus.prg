@@ -177,7 +177,7 @@ METHOD SetTextPanel(nPart, cText, lRedraw) CLASS HStatus
    //WriteStatusWindow(::handle, nPart - 1, cText)
    SendMessage(::handle, SB_SETTEXT, nPart - 1, cText)
    IF lRedraw != NIL .AND. lRedraw
-      RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+      hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
 
 RETURN NIL

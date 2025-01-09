@@ -508,8 +508,8 @@ STATIC FUNCTION SetTimerPrinter(oDlg, oTimer)
    RETURN NIL
 
 STATIC FUNCTION TimerFunc(o)
-   //RedrawWindow(o:handle, RDW_ERASE + RDW_INVALIDATE)
-   RedrawWindow(o:handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE) // Force a complete redraw
+   //hwg_RedrawWindow(o:handle, RDW_ERASE + RDW_INVALIDATE)
+   hwg_RedrawWindow(o:handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE) // Force a complete redraw
    RETURN NIL
 
 METHOD ChangePage(oSayPage, n, nPage) CLASS hPrinter
@@ -690,7 +690,7 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
    ::y2 := ::y1 + nHeight - 1
 
    IF nZoom != NIL .OR. msg != NIL
-      RedrawWindow(oCanvas:handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE) // Force a complete redraw
+      hwg_RedrawWindow(oCanvas:handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE) // Force a complete redraw
    ENDIF
 
    RETURN NIL

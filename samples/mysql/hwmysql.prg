@@ -123,7 +123,7 @@ FUNCTION Main()
 
    WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
    hwg_SetFocus(oEdit:handle)
-   // HideWindow(oBrw:handle)
+   // hwg_HideWindow(oBrw:handle)
    SetCtrlFont(oEdit:oParent:handle, oEdit:id, oBrwFont:handle)
 
    ACTIVATE WINDOW oMainWindow
@@ -286,8 +286,8 @@ RETURN NIL
 
 FUNCTION ResizeEditQ(nWidth, nHeight)
 
-   MoveWindow(oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95)
-   MoveWindow(oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95)
+   hwg_MoveWindow(oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95)
+   hwg_MoveWindow(oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95)
 
 RETURN NIL
 
@@ -299,7 +299,7 @@ FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 
    aRect := hwg_GetClientRect(oEdit:handle)
    nHbusy += aRect[4]
-   MoveWindow(oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8)
+   hwg_MoveWindow(oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8)
 
 RETURN NIL
 
@@ -426,7 +426,7 @@ FUNCTION sqlBrowse(queHandle)
    NEXT
    oBrw:bcolorSel := VColor("800080")
    oBrw:ofont := oBrwFont
-   RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
+   hwg_RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
 
 RETURN NIL
 
@@ -443,7 +443,7 @@ FUNCTION BrowHistory()
    oBrw:bcolorSel := VColor("800080")
    oBrw:ofont := oBrwFont
    oBrw:bEnter := {|h, o|GetFromHistory(h, o)}
-   RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
+   hwg_RedrawWindow(oBrw:handle, RDW_ERASE + RDW_INVALIDATE)
 
 RETURN NIL
 

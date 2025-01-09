@@ -519,6 +519,6 @@ Function hwg_CenterWindow( oWnd )
 
    oWnd:nLeft := Int( ( GetDesktopWidth() - oWnd:nWidth ) / 2 )
    oWnd:nTop  := Int( ( GetDesktopHeight() - oWnd:nHeight ) / 2 )
-   MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
+   hwg_MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
 Return Nil
