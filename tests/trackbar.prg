@@ -5,7 +5,7 @@ FUNCTION Main()
    LOCAL oDialog
    LOCAL oTrackBar
    LOCAL oSay
-   LOCAL bUpdateSay := {||oSay:SetValue(alltrim(str(oTrackBar:GetValue())))}
+   LOCAL bUpdateSay := {||oSay:SetValue(AllTrim(Str(oTrackBar:GetValue())))}
 
    INIT DIALOG oDialog TITLE "Test" SIZE 500, 300
 
@@ -18,7 +18,7 @@ FUNCTION Main()
       AUTOTICKS ;
       TOOLTIP "trackbar control"
 
-   @ 300, 100 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(str(oTrackBar:GetValue()))} SIZE 100,40
+   @ 300, 100 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(Str(oTrackBar:GetValue()))} SIZE 100,40
    @ 300, 200 BUTTON "Set Value" ON CLICK {||oTrackBar:SetValue(25), Eval(bUpdateSay)} SIZE 100,40
 
    @ 100, 100 SAY oSay CAPTION "25" SIZE 40, 40

@@ -32,7 +32,7 @@ STATIC FUNCTION ShowDialog1()
 
    ++n
 
-   INIT DIALOG oDialog TITLE "Dialog (MODAL) " + alltrim(str(n)) ;
+   INIT DIALOG oDialog TITLE "Dialog (MODAL) " + AllTrim(Str(n)) ;
       SIZE 640, 480 FONT HFont():Add("Courier New", 0, -13) ;
       STYLE DS_CENTER ;
       ON EXIT {||hwg_MsgYesNo("Confirm exit ?")}
@@ -73,10 +73,10 @@ STATIC FUNCTION ShowDialog2()
 
    ++n
 
-   INIT DIALOG oDialog TITLE "Dialog (NOMODAL) " + alltrim(str(n)) ;
+   INIT DIALOG oDialog TITLE "Dialog (NOMODAL) " + AllTrim(Str(n)) ;
       SIZE 640, 480 FONT HFont():Add("Verdana", 0, -13) ;
       STYLE DS_CENTER ;
-      ON EXIT {||IIF(hwg_MsgYesNo("Confirm exit ?"),(SetFocus(oMainWindow:handle), .T.), .F.)}
+      ON EXIT {||IIf(hwg_MsgYesNo("Confirm exit ?"), (SetFocus(oMainWindow:handle), .T.), .F.)}
 
    @ 20, 40 SAY "Field&1 (ALT+1):" SIZE 130, 26
    @ 160, 40 EDITBOX oEdit1 CAPTION "" SIZE 300, 26

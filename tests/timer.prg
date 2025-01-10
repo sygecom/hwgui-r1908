@@ -8,9 +8,9 @@ FUNCTION Main()
 
    INIT DIALOG oDialog TITLE "Test" SIZE 640, 480
 
-   @ 20, 20 SAY oLabel CAPTION time() SIZE 120, 30
+   @ 20, 20 SAY oLabel CAPTION Time() SIZE 120, 30
 
-   SET TIMER oTimer OF oDialog VALUE 100 ACTION {||oLabel:SetText(time())}
+   SET TIMER oTimer OF oDialog VALUE 100 ACTION {||oLabel:SetText(Time())}
 
    ACTIVATE DIALOG oDialog
 

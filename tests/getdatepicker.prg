@@ -21,8 +21,8 @@ FUNCTION Main()
 
    ACTIVATE DIALOG oDialog
 
-   hwg_MsgInfo(dtoc(dDate1), "Info")
-   hwg_MsgInfo(dtoc(dDate2), "Info")
-   hwg_MsgInfo(dtoc(dDate3), "Info")
+   hwg_MsgInfo(DToC(dDate1), "Info")
+   hwg_MsgInfo(DToC(dDate2), "Info")
+   hwg_MsgInfo(DToC(dDate3), "Info")
 
 RETURN NIL

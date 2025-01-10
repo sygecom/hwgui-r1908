@@ -29,7 +29,7 @@ STATIC FUNCTION ShowQtDialog()
    ++n
 
    oDialog := QDialog():new()
-   oDialog:setWindowTitle("Dialog " + alltrim(str(n)))
+   oDialog:setWindowTitle("Dialog " + AllTrim(Str(n)))
    oDialog:exec()
    oDialog:delete()
 

@@ -21,8 +21,8 @@ FUNCTION Main()
 
    ACTIVATE DIALOG oDialog
 
-   hwg_MsgInfo(str(oCB1:value), "Info")
-   hwg_MsgInfo(str(oCB2:value), "Info")
-   hwg_MsgInfo(str(oCB3:value), "Info")
+   hwg_MsgInfo(Str(oCB1:value), "Info")
+   hwg_MsgInfo(Str(oCB2:value), "Info")
+   hwg_MsgInfo(Str(oCB3:value), "Info")
 
 RETURN NIL

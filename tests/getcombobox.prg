@@ -21,8 +21,8 @@ FUNCTION Main()
 
    ACTIVATE DIALOG oDialog
 
-   hwg_MsgInfo(str(nCB1), "Info")
-   hwg_MsgInfo(str(nCB2), "Info")
-   hwg_MsgInfo(str(nCB3), "Info")
+   hwg_MsgInfo(Str(nCB1), "Info")
+   hwg_MsgInfo(Str(nCB2), "Info")
+   hwg_MsgInfo(Str(nCB3), "Info")
 
 RETURN NIL
