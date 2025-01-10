@@ -720,14 +720,7 @@ static LRESULT CALLBACK s_MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return DefWindowProc(hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? DefWindowProc(hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -754,14 +747,7 @@ static LRESULT CALLBACK s_FrameWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return DefFrameProc(hWnd, aWindows[1], uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? DefFrameProc(hWnd, aWindows[1], uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -807,14 +793,7 @@ static LRESULT CALLBACK s_MDIChildWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return DefMDIChildProc(hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? DefMDIChildProc(hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {

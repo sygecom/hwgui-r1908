@@ -628,14 +628,7 @@ static LRESULT CALLBACK s_ModalDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
     else
 #endif
       res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return FALSE;
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? FALSE : res;
   }
   else
   {
@@ -715,14 +708,7 @@ static LRESULT CALLBACK s_DlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 #endif
 
       res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return FALSE;
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? FALSE : res;
   }
   else
   {
@@ -799,14 +785,7 @@ static LRESULT CALLBACK s_PSPProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return FALSE;
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? FALSE : res;
   }
   else
   {

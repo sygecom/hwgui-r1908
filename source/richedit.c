@@ -443,14 +443,7 @@ LRESULT APIENTRY RichSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {

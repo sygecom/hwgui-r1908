@@ -1179,14 +1179,7 @@ LRESULT APIENTRY TreeViewSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigTreeViewProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigTreeViewProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1218,14 +1211,7 @@ LRESULT CALLBACK WinCtrlProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return DefWindowProc(hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? DefWindowProc(hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1257,14 +1243,7 @@ LRESULT APIENTRY StaticSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigStaticProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigStaticProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1297,14 +1276,7 @@ LRESULT APIENTRY ButtonSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc((WNDPROC)wpOrigButtonProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc((WNDPROC)wpOrigButtonProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1331,14 +1303,7 @@ LRESULT APIENTRY ComboSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigComboProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigComboProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1370,14 +1335,7 @@ LRESULT APIENTRY ListSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigListProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigListProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1414,14 +1372,7 @@ LRESULT APIENTRY UpDownSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigUpDownProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigUpDownProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1453,14 +1404,7 @@ LRESULT APIENTRY DatePickerSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigDatePickerProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigDatePickerProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1492,14 +1436,7 @@ LRESULT APIENTRY TrackSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigTrackProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigTrackProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
@@ -1531,14 +1468,7 @@ LRESULT APIENTRY TabSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     hwg_vmPushLPARAM(lParam);
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
-    if (res == -1)
-    {
-      return CallWindowProc(wpOrigTabProc, hWnd, uMsg, wParam, lParam);
-    }
-    else
-    {
-      return res;
-    }
+    return (res == -1) ? CallWindowProc(wpOrigTabProc, hWnd, uMsg, wParam, lParam) : res;
   }
   else
   {
