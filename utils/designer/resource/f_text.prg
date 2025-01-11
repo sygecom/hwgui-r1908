@@ -9,9 +9,11 @@ aCtrlTable := { { "STATIC","label" }, { "BUTTON","button" }, &&
 
 #SCRIPT READ
 FUNCTION STR2FONT
-PARAMETERS cFont
-PRIVATE oFont
-   IF !Empty( cFont )
+   
+   PARAMETERS cFont
+   PRIVATE oFont
+   
+   IF !Empty(cFont)
       oFont := HFont():Add( NextItem( cFont,.T.,"," ), &&
             Val(NextItem( cFont,,"," )),Val(NextItem( cFont,,"," )), &&
             Val(NextItem( cFont,,"," )),Val(NextItem( cFont,,"," )), &&
@@ -21,33 +23,48 @@ PRIVATE oFont
 Return oFont
 ENDFUNC
 
-Private strbuf := Space(512), poz := 513, stroka, nMode := 0, itemName, i
-Private han := FOPEN( oForm:path+oForm:filename )
-Private cCaption, x, y, nWidth, nHeight, nStyle, lClipper, oFont, tColor, bColor, cFont
+   PRIVATE strbuf := Space(512)
+   PRIVATE poz := 513
+   PRIVATE stroka
+   PRIVATE nMode := 0
+   PRIVATE itemName
+   PRIVATE i
+   PRIVATE han := FOPEN( oForm:path+oForm:filename )
+   PRIVATE cCaption
+   PRIVATE x
+   PRIVATE y
+   PRIVATE nWidth
+   PRIVATE nHeight
+   PRIVATE nStyle
+   PRIVATE lClipper
+   PRIVATE oFont
+   PRIVATE tColor
+   PRIVATE bColor
+   PRIVATE cFont
 
    IF han == - 1
       MsgStop( "Can't open "+oForm:path+oForm:filename )
       Return
    ENDIF
    DO WHILE .T.
-      stroka := RDSTR( han,@strbuf,@poz,512 )
+      stroka := RDSTR( han,@strbuf,@poz, 512 )
       IF LEN( stroka ) == 0
          EXIT
       ENDIF
       stroka := Ltrim( stroka )
       IF nMode == 0
-         IF Left( stroka,1 ) == "#"
-            IF Upper( Substr( stroka,2,4 ) ) == "FORM"
-               stroka := Ltrim( Substr( stroka,7 ) )
+         IF Left( stroka, 1 ) == "#"
+            IF Upper(SubStr(stroka, 2, 4)) == "FORM"
+               stroka := Ltrim(SubStr(stroka, 7))
                itemName := NextItem( stroka,.T. )
-               IF Empty( oForm:name ) .OR. Upper( itemName ) == Upper( oForm:name )
+               IF Empty(oForm:name) .OR. Upper(itemName) == Upper(oForm:name)
                   x := NextItem( stroka )
                   y := NextItem( stroka )
                   nWidth := NextItem( stroka )
                   nHeight := NextItem( stroka )
                   nStyle := Val( NextItem( stroka ) )
-                  oForm:lGet := ( Upper( NextItem( stroka) ) == "T" )
-                  lClipper := ( Upper( NextItem( stroka ) ) == "T" )
+                  oForm:lGet := ( Upper(NextItem(stroka)) == "T" )
+                  lClipper := ( Upper(NextItem(stroka)) == "T" )
                   cFont := NextItem( stroka )
                   oFont := CallFunc( "Str2Font", { cFont } )
                   oForm:CreateDialog( { {"Left",x}, {"Top",y},{"Width",nWidth},{"Height",nHeight},{"Caption",itemName},{"Font",oFont} } )
@@ -56,8 +73,8 @@ Private cCaption, x, y, nWidth, nHeight, nStyle, lClipper, oFont, tColor, bColor
             ENDIF
          ENDIF
       ELSEIF nMode == 1
-         IF Left( stroka,1 ) == "#"
-            IF Upper( Substr( stroka,2,7 ) ) == "ENDFORM"
+         IF Left( stroka, 1 ) == "#"
+            IF Upper(SubStr(stroka, 2, 7)) == "ENDFORM"
                Exit
             ENDIF
          ELSE           
@@ -89,8 +106,13 @@ Return
 #ENDSCRIPT
 
 #SCRIPT WRITE
-Private han, fname := oForm:path + oForm:filename, stroka, oCtrl
-Private aControls := oForm:oDlg:aControls, alen := Len( aControls ), i
+   PRIVATE han
+   PRIVATE fname := oForm:path + oForm:filename
+   PRIVATE stroka
+   PRIVATE oCtrl
+   PRIVATE aControls := oForm:oDlg:aControls
+   PRIVATE alen := Len( aControls )
+   PRIVATE i
 
    han := Fcreate( fname )
    Fwrite( han, "#FORM " + oForm:name &&
@@ -99,9 +121,9 @@ Private aControls := oForm:oDlg:aControls, alen := Len( aControls ), i
        + ";" + Ltrim( Str(oForm:oDlg:nWidth) )   &&
        + ";" + Ltrim( Str(oForm:oDlg:nHeight ) ) &&
        + ";" + Ltrim( Str(oForm:oDlg:style) )    &&
-       + ";" + Iif(oForm:lGet,"T","F")           &&
-       + ";" + Iif(oForm:oDlg:lClipper,"T","F")  &&
-       + ";" + Iif(oForm:oDlg:oFont!=Nil,        &&
+       + ";" + IIf(oForm:lGet,"T","F")           &&
+       + ";" + IIf(oForm:oDlg:lClipper,"T","F")  &&
+       + ";" + IIf(oForm:oDlg:oFont!=Nil,        &&
        oForm:oDlg:oFont:name + "," + Ltrim(Str(oForm:oDlg:oFont:width)) &&
        + "," + Ltrim(Str(oForm:oDlg:oFont:height)) + "," + Ltrim(Str(oForm:oDlg:oFont:weight)) &&
        + "," + Ltrim(Str(oForm:oDlg:oFont:charset)) + "," + Ltrim(Str(oForm:oDlg:oFont:italic)) &&
@@ -112,20 +134,20 @@ Private aControls := oForm:oDlg:aControls, alen := Len( aControls ), i
    DO WHILE i <= alen
       oCtrl := aControls[i]
       stroka := CnvCtrlName( oCtrl:cClass,.T. ) + ";" + Rtrim( oCtrl:title) &&
-          + ";" + Ltrim( Str(Iif(oCtrl:id<34000,oCtrl:id,0)) ) &&
+          + ";" + Ltrim( Str(IIf(oCtrl:id<34000,oCtrl:id, 0)) ) &&
           + ";" + Ltrim( Str(oCtrl:nLeft) )    &&
           + ";" + Ltrim( Str(oCtrl:nTop) )     &&
           + ";" + Ltrim( Str(oCtrl:nWidth) )   &&
           + ";" + Ltrim( Str(oCtrl:nHeight ) ) &&
           + ";" + Ltrim( Str(oCtrl:style) )    &&
-          + ";" + Iif(oCtrl:oFont!=Nil,        &&
+          + ";" + IIf(oCtrl:oFont!=Nil,        &&
           oCtrl:oFont:name + "," + Ltrim(Str(oCtrl:oFont:width)) &&
           + "," + Ltrim(Str(oCtrl:oFont:height)) + "," + Ltrim(Str(oCtrl:oFont:weight)) &&
           + "," + Ltrim(Str(oCtrl:oFont:charset)) + "," + Ltrim(Str(oCtrl:oFont:italic)) &&
           + "," + Ltrim(Str(oCtrl:oFont:underline)) + "," + Ltrim(Str(oCtrl:oFont:strikeout)) &&
           ,"")  &&
-          + ";" + Iif(oCtrl:tcolor!=Nil.AND.oCtrl:tcolor!=0,Ltrim(Str(oCtrl:tcolor)),"") &&
-          + ";" + Iif(oCtrl:bcolor!=Nil,Ltrim(Str(oCtrl:bcolor)),"")
+          + ";" + IIf(oCtrl:tcolor!=Nil.AND.oCtrl:tcolor!=0,Ltrim(Str(oCtrl:tcolor)),"") &&
+          + ";" + IIf(oCtrl:bcolor!=Nil,Ltrim(Str(oCtrl:bcolor)),"")
       Fwrite( han, stroka + _Chr(10) )
       i++
    ENDDO

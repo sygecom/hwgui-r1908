@@ -11,7 +11,8 @@ REQUEST SHELLABOUT
 
 
 Function Main
-Local oForm := HFormTmpl():Read( example() )
+
+   LOCAL oForm := HFormTmpl():Read( example() )
 
 oForm:ShowMain()
 

@@ -16,7 +16,8 @@ REQUEST HWG_CHOOSECOLOR
 // #include "example.frm"
 
 Function Main
-Local oForm := HFormTmpl():Read( "example.xml" )
+
+   LOCAL oForm := HFormTmpl():Read( "example.xml" )
 
  oForm:ShowMain()
 

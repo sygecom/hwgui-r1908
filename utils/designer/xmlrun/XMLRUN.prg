@@ -207,18 +207,18 @@ EXTERNAL ADSMGKILLUSER, ADSMGGETHANDLE
 
 FUNCTION Main(fileXML)
 
- LOCAL  cFile
- MEMVAR oForm
- PUBLIC oForm
+   LOCAL cFile
+   MEMVAR oForm
+   PUBLIC oForm
 
  HWG_InitCommonControlsEx()
 
- rddRegister("DBFCDX",1)
+ rddRegister("DBFCDX", 1)
  rddsetdefault("DBFCDX")
- rddRegister("SIXCDX",1)
+ rddRegister("SIXCDX", 1)
  rddsetdefault("SIXCDX")
 
- //rddRegister("ADS",1)
+ //rddRegister("ADS", 1)
  //rddsetdefault("ADS")
  //AdsSetServerType(1)
  //adsSetFileType(2)
@@ -233,7 +233,7 @@ FUNCTION Main(fileXML)
 
     filexml:=""
     IF FILE("XMLRUN.DEF")
-       filexml:=RTRIM(MEMOLINE( MEMOREAD("XMLRUN.DEF"),128,1))
+       filexml:=RTRIM(MEMOLINE( MEMOREAD("XMLRUN.DEF"), 128, 1))
     ENDIF
 
     IF !FILE(filexml)
@@ -259,7 +259,7 @@ RETURN TRUE
 
 
 FUNCTION rmatch(c,f)
- RETURN (ALLTRIM(c)=="" .or. UPPER(ALLTRIM(c))$UPPER(f))
+ RETURN (allTrim(c) == "" .OR. Upper(AllTrim(c)) $ Upper(f))
 
 
 
@@ -337,8 +337,10 @@ FUNCTION rmatch(c,f)
 
 
 function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
-   local lforever
-   local lFirstPass := .T.
+   
+   LOCAL lforever
+   LOCAL lFirstPass := .T.
+
    if(nSeconds==NIL, nSeconds:=20,)
 
    lforever := (nSeconds == 0)
@@ -347,13 +349,13 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 
    do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
 
-      if ! lfirstPass
+      if !lfirstPass
 
 	 /* => Koreksi Ke GUI
          @ maxrow()-2, 00 clear
          @ maxrow()-1, 00 say ;
          padc([Trying to open database. Will keep trying for ] ;
-         + ltrim(str(nSeconds,4,1))+[ seconds],80)
+         + ltrim(str(nSeconds, 4, 1))+[ seconds], 80)
          @ maxrow(), 00 say padc([Hit Esc to abort], 80)
 	 */
 
@@ -367,7 +369,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
          use (cdatabase) alias (calias) /* via "ADS" */ shared new
       endif
 
-      if ! neterr()                     // USE SUCCEEDS
+      if !neterr()                     // USE SUCCEEDS
 	 if cPassWord<>NIL
 	    sx_SetPass(cPassWord)
 	 endif
@@ -383,7 +385,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 
 function filelock(nSeconds)
 
-   Local lforever
+   LOCAL lforever
 
    lforever := (nSeconds == 0)
    if(nSeconds==NIL, nSeconds:=20,)
@@ -408,8 +410,9 @@ function filelock(nSeconds)
 
 
 function reclock(nSeconds)
-   Local lforever
-   Local oldPos:=Recno()
+
+   LOCAL lforever
+   LOCAL oldPos := Recno()
 
    if DBRLOCK(OldPos)
       return .t.                        // LOCKED
@@ -425,14 +428,14 @@ function reclock(nSeconds)
       if DBRLOCK(OldPos)
          return .t.                     // LOCKED
       endif
-      MsgStop("Record is in use exclusive by another", alias()+" #"+str(oldpos,11))
+      MsgStop("Record is in use exclusive by another", alias()+" #"+str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
    enddo
 
 
 
-   MsgStop("Record failed to locked", alias()+" #"+str(oldpos,11))
+   MsgStop("Record failed to locked", alias()+" #"+str(oldpos, 11))
 
    return .f.                           // NOT LOCKED
 
@@ -440,11 +443,13 @@ function reclock(nSeconds)
 
 
 function addrec(nSeconds)
-   local lforever, oldcolor
+   
+   LOCAL lforever
+   LOCAL oldcolor
 
    append blank
 
-   if ! neterr()
+   if !neterr()
       return .t.												// APPEND SUCCESS
    endif
 
@@ -459,12 +464,12 @@ function addrec(nSeconds)
       @ maxrow()-2, 00 clear
       @ maxrow()-1, 00 say ;
       padc([Trying to add a record. Will keep trying for ] ;
-      + ltrim(str(nSeconds,4,1))+[ seconds],80)
+      + ltrim(str(nSeconds, 4, 1))+[ seconds], 80)
       @ maxrow(), 00 say padc([Hit Esc to abort], 80)
       */
 
       append blank
-      if ! neterr()
+      if !neterr()
          return .t.
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
@@ -482,14 +487,20 @@ function addrec(nSeconds)
 
 function Usr2infStr(g,lKosong) && usr to informix str
 
- Local dd:="",mm:="",yy, cpress:=alltrim(g:title),  nLen, c:="", i
- Local nPot:=2
+   LOCAL dd := ""
+   LOCAL mm := ""
+   LOCAL yy
+   LOCAL cpress := alltrim(g:title)
+   LOCAL nLen
+   LOCAL c := ""
+   LOCAL i
+   LOCAL nPot := 2
 
  set date to french
 
  *** Default Boleh Kosong ***
 
- if empty(cPress)
+ if Empty(cPress)
 
     if lKosong==NIL
        return .T.
@@ -497,17 +508,17 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
     MsgInfo("Tidak boleh kosong")
     return .f.
-    //return iif(lKosong==NIL,.t.,.f.)
+    //return IIf(lKosong==NIL,.t.,.f.)
  end
 
 
  //if (ctod(g:buffer)=ctod("  /  /  "))
 
-      cpress:=strtran(cPress," ","")
-      cpress:=strtran(cPress,".","")
-      cpress:=strtran(cpress,"-","")
-      cpress:=strtran(cpress,"/","")
-      cpress:=strtran(cpress,",","")
+      cpress:=StrTran(cPress," ","")
+      cpress:=StrTran(cPress,".","")
+      cpress:=StrTran(cpress,"-","")
+      cpress:=StrTran(cpress,"/","")
+      cpress:=StrTran(cpress,",","")
       nLen:=len(cpress)
 
  *:minimum 6  &  max 9 char
@@ -524,48 +535,48 @@ function Usr2infStr(g,lKosong) && usr to informix str
        c:=""
 
        for i:=1 to nLen
-           c+= if(isdigit(subst(cPress,i,1)),"9","A")
+           c+= if(isdigit(subst(cPress, i, 1)),"9","A")
        next
 
        *:Kalau 2 Char Pertama Adalah Angka
-       cPress:= if( left(c,2)=="99", cPress, "0"+cPress)
-            c:= if( left(c,2)=="99", c,      "9"+c)
+       cPress:= if( left(c, 2)=="99", cPress, "0"+cPress)
+            c:= if( left(c, 2)=="99", c,      "9"+c)
 
 	*:isi Hari
-        dd:=left(cPress,2)+"."
+        dd:=left(cPress, 2)+"."
 
 
-	if subst(c,3,3)="AAA"
+	if subst(c, 3, 3)="AAA"
 
-	   mm:=subst(cPress,3,3)
-	   mm:=transform( lower(mm),"!xx")
+	   mm:=subst(cPress, 3, 3)
+	   mm:=transform( Lower(mm),"!xx")
 
 	   *:Koreksi untuk ejaan Inggris
-	   mm:=strtran( mm,"Peb","Feb")
-	   mm:=strtran( mm,"May","Mei")
-	   mm:=strtran( mm,"Aug","Agt")
-	   mm:=strtran( mm,"Agu","Agt")
-	   mm:=strtran( mm,"Nov","Nop")
-	   mm:=strtran( mm,"Dec","Des")
-	   mm:=strtran( mm,"Oct","Okt")
+	   mm:=StrTran( mm,"Peb","Feb")
+	   mm:=StrTran( mm,"May","Mei")
+	   mm:=StrTran( mm,"Aug","Agt")
+	   mm:=StrTran( mm,"Agu","Agt")
+	   mm:=StrTran( mm,"Nov","Nop")
+	   mm:=StrTran( mm,"Dec","Des")
+	   mm:=StrTran( mm,"Oct","Okt")
 
-           mm:=str((at(mm,"JanFebMarAprMeiJunJulAgtSepOktNopDes")+2)/3,2)+"."
+           mm:=str((at(mm,"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
 
 	   nPot--
 
         else
 
-	   mm:=subst(cpress,3,2)+"."
+	   mm:=subst(cpress, 3, 2)+"."
 
         end
 
 	   yy:=right(cPress,((len(c)-len(dd+mm))+nPot))
 
 	   if len(yy)==2
-	      yy:= left(dtos(date()),2)+yy
+	      yy:= left(dtos(date()), 2)+yy
 	   endif
 
-      if  VALTYPE(ctod(dd+mm+yy))!="D"  .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
+      if  ValType(ctod(dd+mm+yy))!="D"  .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
           MsgStop("Pengisian Tanggal Belum Benar!!!")
           return .f.
       else
@@ -581,13 +592,15 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
 function d2infstr(d) && date to informix style string
 
-  local dd, mmm, yyyy
+   LOCAL dd
+   LOCAL mmm
+   LOCAL yyyy
 
-  if empty(d); return "           "; end
+  if Empty(d); return "           "; end
 
-  dd:=right(dtos(d),2);  yyyy:=left(dtos(d),4)
+  dd:=right(dtos(d), 2);  yyyy:=left(dtos(d), 4)
 
-  mmm:=subst("JanFebMarAprMeiJunJulAgtSepOktNopDes",month(d)*3-2,3)
+  mmm:=subst("JanFebMarAprMeiJunJulAgtSepOktNopDes",month(d) * 3 - 2, 3)
 
  return (dd+"-"+mmm+"-"+yyyy)
 
@@ -597,9 +610,11 @@ function d2infstr(d) && date to informix style string
 
 function infstr2d(s) && informix string to date
 
- local dd:=left(s,2)+"/", yy:="/"+right(s,4), mm
+   LOCAL dd := left(s, 2)+"/"
+   LOCAL yy := "/"+right(s, 4)
+   LOCAL mm
 
- mm:=str( (at(subst(s,4,3),"JanFebMarAprMeiJunJulAgtSepOktNopDes")+2)/3,2)
+ mm:=str( (at(subst(s, 4, 3),"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
 
  return ctod(dd+mm+yy)
 

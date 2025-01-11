@@ -33,13 +33,21 @@ CLASS HDTheme
    DATA quote
    DATA number
 
-   METHOD New( name )  INLINE ( ::name:=name, Self )
-   METHOD Add( name )  INLINE ( ::name:=name,Aadd(::aThemes,Self),Self )
+   METHOD New( name )  INLINE ( ::name := name, Self )
+   METHOD Add( name )  INLINE ( ::name := name,Aadd(::aThemes,Self),Self )
 ENDCLASS
 
-Function LoadEdOptions( cFileName )
-Local oIni := HXMLDoc():Read( cFileName )
-Local i, j, j1, cTheme, oTheme, oThemeXML, arr, oOptDesc
+FUNCTION LoadEdOptions( cFileName )
+
+   LOCAL oIni := HXMLDoc():Read( cFileName )
+   LOCAL i
+   LOCAL j
+   LOCAL j1
+   LOCAL cTheme
+   LOCAL oTheme
+   LOCAL oThemeXML
+   LOCAL arr
+   LOCAL oOptDesc
 
    cIniName := cFileName
    oOptDesc := oIni:aItems[1]
@@ -87,8 +95,13 @@ Local i, j, j1, cTheme, oTheme, oThemeXML, arr, oOptDesc
 Return Nil
 
 Function SaveEdOptions( oOptDesc )
-Local oIni := HXMLDoc():Read( m->cCurDir+cIniName )
-Local i, oNode, nStart, oThemeDesc, aAttr
+
+   LOCAL oIni := HXMLDoc():Read( m->cCurDir+cIniName )
+   LOCAL i
+   LOCAL oNode
+   LOCAL nStart
+   LOCAL oThemeDesc
+   LOCAL aAttr
 
 HB_SYMBOL_UNUSED( oOptDesc )
 
@@ -157,33 +170,36 @@ HB_SYMBOL_UNUSED( oOptDesc )
 
 Return Nil
 
-Function EditMethod( cMethName, cMethod )
- Local i, lRes := .F., dummy
- Local oFont := HDTheme():oFont
- Local cParamString
- Memvar oDesigner
+FUNCTION EditMethod( cMethName, cMethod )
 
-   i := Ascan( oDesigner:aMethDef, {|a|a[1]==Lower(cMethName)} )
-   cParamString := Iif( i == 0, "", oDesigner:aMethDef[i,2] )
+   LOCAL i
+   LOCAL lRes := .F.
+   LOCAL dummy
+   LOCAL oFont := HDTheme():oFont
+   LOCAL cParamString
+   MEMVAR oDesigner
+
+   i := Ascan( oDesigner:aMethDef, {|a|a[1] == Lower(cMethName)} )
+   cParamString := IIf( i == 0, "", oDesigner:aMethDef[i, 2] )
 
    INIT DIALOG oDlg TITLE "Edit '"+cMethName+"' method"          ;
-      AT 100,240  SIZE 600,300  FONT oDesigner:oMainWnd:oFont    ;
+      AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_MAXIMIZEBOX+WS_SIZEBOX ;
-      ON INIT {||hwg_MoveWindow(oDlg:handle,100,240,600,310)}        ;
-      ON EXIT {|| dummy := Iif(lRes:=(oEdit:lChanged.AND.MsgYesNo("Code was changed! Save it?", "Designer")),cMethod:=oEdit:GetText(),.F.),.T.}
+      ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
+      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(),.F.),.T.}
 
    MENU OF oDlg
       MENU TITLE "&Options"
          MENUITEM "&Font" ACTION editChgFont()
          MENU TITLE "&Select theme"
             FOR i := 1 TO Len( HDTheme():aThemes )
-               hwg_DefineMenuItem( HDTheme():aThemes[i]:name, 1020+i, &( "{||ChangeTheme("+LTrim(Str(i,2))+"),HDTheme():lChanged:=.T.}" ) )
+               hwg_DefineMenuItem( HDTheme():aThemes[i]:name, 1020+i, &( "{||ChangeTheme("+LTrim(Str(i, 2))+"),HDTheme():lChanged:=.T.}" ) )
             NEXT
          ENDMENU
          MENUITEM "&Configure" ACTION EditColors()
       ENDMENU
 
-      MENUITEM "&Parameters" ACTION Iif(!Empty(cParamString).and.Upper(Left(oEdit:Gettext(),10))!="PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged:=.T.),.F.)
+      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged := .T.),.F.)
 
       MENU TITLE "&Templates "+cMethName
 
@@ -195,10 +211,10 @@ Function EditMethod( cMethName, cMethod )
       MENUITEM "&Exit" ACTION oDlg:Close()
    ENDMENU
 
-   @ 0,0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
+   @ 0, 0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
        STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_WANTRETURN ;
        ON INIT {||ChangeTheme( HDTheme():nSelected )}                 ;
-       ON GETFOCUS {||Iif(oEdit:cargo,(SendMessage(oEdit:handle,EM_SETSEL,0,0),oEdit:cargo:=.F.),.F.)} ;
+       ON GETFOCUS {||IIf(oEdit:cargo,(SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.),.F.)} ;
        ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
        FONT oFont
    //           STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL+ES_WANTRETURN+WS_VSCROLL+WS_HSCROLL
@@ -208,9 +224,9 @@ Function EditMethod( cMethName, cMethod )
 
    // oEdit:title := cMethod
    *-SetDlgKey( odlg, 0,VK_TAB, {msginfo('tab')})
-         *-{SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2),0)})
+         *-{SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
-   *-SetDlgKey( oEdit, 0,9)
+   *-SetDlgKey( oEdit, 0, 9)
    IF lRes
       Return cMethod
    ENDIF
@@ -219,15 +235,16 @@ Return Nil
 Function ChangeTheme( nTheme )
 
    IF HDTheme():nSelected != Nil
-      CheckMenuItem( oDlg:handle,1020+HDTheme():nSelected, .F. )
+      CheckMenuItem( oDlg:handle, 1020+HDTheme():nSelected, .F. )
    ENDIF
-   CheckMenuItem( oDlg:handle,1020+nTheme, .T. )
+   CheckMenuItem( oDlg:handle, 1020+nTheme, .T. )
    HDTheme():nSelected := nTheme
    editShow( ,.T. )
 Return Nil
 
-Static Function editChgFont()
-Local oFont
+STATIC FUNCTION editChgFont()
+
+   LOCAL oFont
 
    IF ( oFont := HFont():Select( oEdit:oFont ) ) != Nil
        oEdit:oFont := oFont
@@ -242,13 +259,15 @@ Return Nil
 // re_SetDefault( hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset )
 // re_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic, lUnderline )
 
-Static Function editShow( cText,lRedraw )
-Local arrHi, oTheme := HDTheme():aThemes[HDTheme():nSelected]
+STATIC FUNCTION editShow( cText,lRedraw )
+
+   LOCAL arrHi
+   LOCAL oTheme := HDTheme():aThemes[HDTheme():nSelected]
 
    IF lRedraw != Nil .AND. lRedraw
       // cText := oEdit:Gettext()
       nTextLength := SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 ) + 1
-      cText := re_GetTextRange( oEdit:handle,1,nTextLength )
+      cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
    ELSE
       IF cText == Nil
          cText := oEdit:title
@@ -257,10 +276,10 @@ Local arrHi, oTheme := HDTheme():aThemes[HDTheme():nSelected]
    ENDIF
    SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
    re_SetDefault( oEdit:handle,oTheme:normal[1],oEdit:oFont:name,,oTheme:normal[3],oTheme:normal[4],,oEdit:oFont:charset )
-   SendMessage( oEdit:handle,EM_SETBKGNDCOLOR,0,oTheme:normal[2] )
+   SendMessage(oEdit:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    oEdit:SetText( cText )
-   cText := re_GetTextRange( oEdit:handle,1,nTextLength )
-   IF !Empty( arrHi := CreateHiLight( cText ) )
+   cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
+   IF !Empty(arrHi := CreateHiLight(cText))
       re_SetCharFormat( oEdit:handle,arrHi )
    ENDIF
    SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
@@ -268,12 +287,19 @@ Local arrHi, oTheme := HDTheme():aThemes[HDTheme():nSelected]
 
 Return Nil
 
-Static Function EnChange( nEvent )
-Local pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
-Local nLength, pos1 := hwg_LOWORD(pos)+1, pos2 := hwg_HIWORD(pos)+1
-Local cBuffer, nLine, arr := {}, nLinePos
-Local oTheme := HDTheme():aThemes[HDTheme():nSelected]
-Local  nEditPos1, nEditPos2
+STATIC FUNCTION EnChange( nEvent )
+
+   LOCAL pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
+   LOCAL nLength
+   LOCAL pos1 := hwg_LOWORD(pos)+1
+   LOCAL pos2 := hwg_HIWORD(pos)+1
+   LOCAL cBuffer
+   LOCAL nLine
+   LOCAL arr := {}
+   LOCAL nLinePos
+   LOCAL oTheme := HDTheme():aThemes[HDTheme():nSelected]
+   LOCAL nEditPos1
+   LOCAL nEditPos2
 
    IF nEvent == 1        // EN_SELCHANGE
       nEditPos1 := pos1
@@ -282,7 +308,7 @@ Local  nEditPos1, nEditPos2
       SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
       nLength := SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 )
       IF nLength - nTextLength > 2
-         // writelog( "1: "+str(nLength,5)+" "+str(nTextLength,5) )
+         // writelog( "1: "+str(nLength, 5)+" "+str(nTextLength, 5) )
       ELSE
          nLine := SendMessage( oEdit:handle, EM_LINEFROMCHAR, -1, 0 )
          cBuffer := re_getline( oEdit:handle,nLine )
@@ -291,7 +317,7 @@ Local  nEditPos1, nEditPos2
          Aadd( arr, { nLinePos,nLinePos+Len(cBuffer), ;
             oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4], } )
          HiLightString( cBuffer, arr, nLinePos )
-         IF !Empty( arr )
+         IF !Empty(arr)
             re_SetCharFormat( oEdit:handle,arr )
          ENDIF
       ENDIF
@@ -304,8 +330,11 @@ Local  nEditPos1, nEditPos2
    // writelog( "EnChange "+str(pos1)+" "+str(pos2) ) // +" Length: "+str(nLength) )
 Return Nil
 
-Static Function CreateHilight( cText,oTheme )
-Local arr := {}, nPos, nLinePos := 1
+STATIC FUNCTION CreateHilight( cText,oTheme )
+
+   LOCAL arr := {}
+   LOCAL nPos
+   LOCAL nLinePos := 1
 
    DO WHILE .T.
       #ifdef __XHARBOUR__
@@ -313,17 +342,21 @@ Local arr := {}, nPos, nLinePos := 1
       #else
       IF ( nPos := HB_At( Chr(10), cText, nLinePos ) ) != 0 .OR. ( nPos := HB_At( Chr(13), cText, nLinePos ) ) != 0
       #endif
-         HiLightString( SubStr( cText,nLinePos,nPos-nLinePos ), arr, nLinePos,oTheme )
+         HiLightString( SubStr(cText, nLinePos, nPos - nLinePos), arr, nLinePos,oTheme )
          nLinePos := nPos + 1
       ELSE
-         HiLightString( SubStr( cText,nLinePos ), arr, nLinePos,oTheme )
+         HiLightString( SubStr(cText, nLinePos), arr, nLinePos,oTheme )
          EXIT
       ENDIF
    ENDDO
 Return arr
 
-Static Function HiLightString( stroka, arr, nLinePos, oTheme )
-Local nStart, nPos := 1, sLen := Len( stroka ), cWord
+STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
+
+   LOCAL nStart
+   LOCAL nPos := 1
+   LOCAL sLen := Len( stroka )
+   LOCAL cWord
 
    IF oTheme == Nil
       oTheme := HDTheme():aThemes[HDTheme():nSelected]
@@ -338,8 +371,8 @@ Local nStart, nPos := 1, sLen := Len( stroka ), cWord
    DO WHILE nPos < sLen
       cWord := NextWord( stroka,@nPos,@nStart )
       // writelog( "-->"+str(nStart)+" "+str(nPos)+" "+str(len(cword))+" "+ str(asc(cword)))
-      IF !Empty( cWord )
-         IF Left( cWord,1 ) == '"' .OR. Left( cWord,1 ) == "'"
+      IF !Empty(cWord)
+         IF Left( cWord, 1 ) == '"' .OR. Left( cWord, 1 ) == "'"
             Aadd( arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
                oTheme:quote[1],,,oTheme:quote[3],oTheme:quote[4], } )
          ELSEIF Ascan( HDTheme():aKeyWords,Upper(cWord) ) != 0
@@ -355,19 +388,43 @@ Local nStart, nPos := 1, sLen := Len( stroka ), cWord
 
 Return arr
 
-Static Function EditColors()
-Local oDlg, i, j, temp, oBtn2
-Local cText := "// The code sample" + Chr(10) + ;
+STATIC FUNCTION EditColors()
+
+   LOCAL oDlg
+   LOCAL i
+   LOCAL j
+   LOCAL temp
+   LOCAL oBtn2
+   LOCAL cText := "// The code sample" + Chr(10) + ;
                "do while ++nItem < 120"+ Chr(10) + ;
                "  if aItems[ nItem ] == 'scheme'"+ Chr(10) + ;
                "    nFactor := 22.5"+ Chr(10) + ;
                "  endif"
 
-Memvar oBrw, oEditC, oSayT, oCheckB, oCheckI, oSayB, aSchemes
-Memvar nScheme, nType, oTheme, cScheme, oDesigner
+   MEMVAR oBrw
+   MEMVAR oEditC
+   MEMVAR oSayT
+   MEMVAR oCheckB
+   MEMVAR oCheckI
+   MEMVAR oSayB
+   MEMVAR aSchemes
+   MEMVAR nScheme
+   MEMVAR nType
+   MEMVAR oTheme
+   MEMVAR cScheme
+   MEMVAR oDesigner
 
-Private oBrw, oEditC, oSayT, oCheckB, oCheckI, oSayB, aSchemes := Array( Len( HDTheme():aThemes ) )
-Private nScheme, nType := 2, oTheme := HDTheme():New(), cScheme := ""
+   PRIVATE oBrw
+   PRIVATE oEditC
+   PRIVATE oSayT
+   PRIVATE oCheckB
+   PRIVATE oCheckI
+   PRIVATE oSayB
+   PRIVATE aSchemes := Array( Len( HDTheme():aThemes ) )
+   PRIVATE nScheme
+   PRIVATE nType := 2
+   PRIVATE oTheme := HDTheme():New()
+   PRIVATE cScheme := ""
 
    FOR i := 1 TO Len( aSchemes )
       aSchemes[i] := { HDTheme():aThemes[i]:name, HDTheme():aThemes[i]:normal, ;
@@ -376,65 +433,65 @@ Private nScheme, nType := 2, oTheme := HDTheme():New(), cScheme := ""
    NEXT
 
    INIT DIALOG oDlg TITLE "Color schemes" ;
-      AT 200,140 SIZE 440,355  FONT oDesigner:oMainWnd:oFont ;
+      AT 200, 140 SIZE 440, 355  FONT oDesigner:oMainWnd:oFont ;
       ON INIT {||UpdSample()}
 
-   @ 10,10 BUTTON "Delete scheme" SIZE 110,30 ON CLICK {||UpdSample(1)}
+   @ 10, 10 BUTTON "Delete scheme" SIZE 110, 30 ON CLICK {||UpdSample(1)}
 
-   @ 140,10 BROWSE oBrw ARRAY SIZE 130,80
-   oBrw:bPosChanged := {||nScheme:=oBrw:nCurrent,UpdSample()}
+   @ 140, 10 BROWSE oBrw ARRAY SIZE 130, 80
+   oBrw:bPosChanged := {||nScheme := oBrw:nCurrent,UpdSample()}
    oBrw:aArray := aSchemes
-   oBrw:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED( v ),o:aArray[o:nCurrent,1]},"C",15,0,.T. ) )
+   oBrw:AddColumn(HColumn():New(, {|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 1]}, "C", 15, 0, .T.))
    oBrw:lDispHead := .F.
    nScheme := oBrw:nCurrent := oBrw:rowPos := HDTheme():nSelected
 
-   @ 290,10 GET cScheme SIZE 110,26
-   @ 290,40 BUTTON "Add scheme" SIZE 110,30 ON CLICK {||UpdSample(2)}
+   @ 290, 10 GET cScheme SIZE 110, 26
+   @ 290, 40 BUTTON "Add scheme" SIZE 110, 30 ON CLICK {||UpdSample(2)}
 
-   @ 10,120 GROUPBOX "" SIZE 140,140
+   @ 10, 120 GROUPBOX "" SIZE 140, 140
    RADIOGROUP
-   @ 20,130 RADIOBUTTON "Normal" SIZE 120,24 ON CLICK {||nType:=2,UpdSample(),oBtn2:Show()}
-   @ 20,154 RADIOBUTTON "Keyword" SIZE 120,24 ON CLICK {||nType:=3,UpdSample(),oBtn2:Hide()}
-   @ 20,178 RADIOBUTTON "Comment" SIZE 120,24 ON CLICK {||nType:=4,UpdSample(),oBtn2:Hide()}
-   @ 20,202 RADIOBUTTON "Quote" SIZE 120,24 ON CLICK {||nType:=5,UpdSample(),oBtn2:Hide()}
-   @ 20,226 RADIOBUTTON "Number" SIZE 120,24 ON CLICK {||nType:=6,UpdSample(),oBtn2:Hide()}
+   @ 20, 130 RADIOBUTTON "Normal" SIZE 120, 24 ON CLICK {||nType := 2,UpdSample(),oBtn2:Show()}
+   @ 20, 154 RADIOBUTTON "Keyword" SIZE 120, 24 ON CLICK {||nType := 3,UpdSample(),oBtn2:Hide()}
+   @ 20, 178 RADIOBUTTON "Comment" SIZE 120, 24 ON CLICK {||nType := 4,UpdSample(),oBtn2:Hide()}
+   @ 20, 202 RADIOBUTTON "Quote" SIZE 120, 24 ON CLICK {||nType := 5,UpdSample(),oBtn2:Hide()}
+   @ 20, 226 RADIOBUTTON "Number" SIZE 120, 24 ON CLICK {||nType := 6,UpdSample(),oBtn2:Hide()}
    END RADIOGROUP SELECTED 1
 
-   @ 170,110 GROUPBOX "" SIZE 250,75
-   @ 180,127 SAY "Text color" SIZE 100,24
-   @ 280,125 SAY oSayT CAPTION "" SIZE 24,24
-   @ 305,127 BUTTON "..." SIZE 20,20 ON CLICK {||Iif((temp:=hwg_ChooseColor(aSchemes[nScheme,nType][1],.F.))!=Nil,(aSchemes[nScheme,nType][1]:=temp,UpdSample()),.F.)}
-   @ 180,152 SAY "Background" SIZE 100,24
-   @ 280,150 SAY oSayB CAPTION "" SIZE 24,24
-   @ 305,152 BUTTON oBtn2 CAPTION "..." SIZE 20,20 ON CLICK {||Iif((temp:=hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.))!=Nil,(aSchemes[nScheme,nType][2]:=temp,UpdSample()),.F.)}
-   @ 350,125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60,24 ON CLICK {||aSchemes[nScheme,nType][3]:=IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.t.}
-   @ 350,150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60,24 ON CLICK {||aSchemes[nScheme,nType][4]:=IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.t.}
+   @ 170, 110 GROUPBOX "" SIZE 250, 75
+   @ 180, 127 SAY "Text color" SIZE 100, 24
+   @ 280, 125 SAY oSayT CAPTION "" SIZE 24, 24
+   @ 305, 127 BUTTON "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][1],.F.))!=Nil,(aSchemes[nScheme,nType][1] := temp,UpdSample()),.F.)}
+   @ 180, 152 SAY "Background" SIZE 100, 24
+   @ 280, 150 SAY oSayB CAPTION "" SIZE 24, 24
+   @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.))!=Nil,(aSchemes[nScheme,nType][2] := temp,UpdSample()),.F.)}
+   @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.t.}
+   @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.t.}
 
-   @ 170,190 RICHEDIT oEditC TEXT cText SIZE 250,100 STYLE ES_MULTILINE
+   @ 170, 190 RICHEDIT oEditC TEXT cText SIZE 250, 100 STYLE ES_MULTILINE
 
-   @ 60,310 BUTTON "Ok" SIZE 100,32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
-   @ 200,310 BUTTON "Cancel" ID IDCANCEL SIZE 100,32
+   @ 60, 310 BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult := .T.,EndDialog()}
+   @ 200, 310 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    oDlg:Activate()
 
    IF oDlg:lResult
       FOR i := 1 TO Len( HDTheme():aThemes )
-         IF Ascan( aSchemes,{|a|Lower(a[1])==Lower(HDTheme():aThemes[i]:name)} ) == 0
+         IF Ascan( aSchemes,{|a|Lower(a[1]) == Lower(HDTheme():aThemes[i]:name)} ) == 0
             Adel( HDTheme():aThemes,i )
             Asize( HDTheme():aThemes,Len(HDTheme():aThemes)-1 )
          ENDIF
       NEXT
       FOR i := 1 TO Len( aSchemes )
-         j := Ascan( HDTheme():aThemes,{|o|Lower(o:name)==Lower(aSchemes[i,1])} )
+         j := Ascan( HDTheme():aThemes,{|o|Lower(o:name) == Lower(aSchemes[i, 1])} )
          IF j == 0
-            HDTheme():Add( aSchemes[i,1] )
+            HDTheme():Add( aSchemes[i, 1] )
             j := Len( HDTheme():aThemes )
          ENDIF
-         HDTheme():aThemes[j]:normal  := aSchemes[i,2]
-         HDTheme():aThemes[j]:command := aSchemes[i,3]
-         HDTheme():aThemes[j]:comment := aSchemes[i,4]
-         HDTheme():aThemes[j]:quote   := aSchemes[i,5]
-         HDTheme():aThemes[j]:number  := aSchemes[i,6]
+         HDTheme():aThemes[j]:normal  := aSchemes[i, 2]
+         HDTheme():aThemes[j]:command := aSchemes[i, 3]
+         HDTheme():aThemes[j]:comment := aSchemes[i, 4]
+         HDTheme():aThemes[j]:quote   := aSchemes[i, 5]
+         HDTheme():aThemes[j]:number  := aSchemes[i, 6]
       NEXT
       HDTheme():lChanged := .T.
    ENDIF
@@ -442,8 +499,18 @@ Private nScheme, nType := 2, oTheme := HDTheme():New(), cScheme := ""
 Return Nil
 
 Static Function UpdSample( nAction )
-Memvar aSchemes, nScheme, oBRW, cScheme, oSayT, nType, oSayB
-Memvar oTheme, oCheckB, oCheckI, oEditC
+
+   MEMVAR aSchemes
+   MEMVAR nScheme
+   MEMVAR oBRW
+   MEMVAR cScheme
+   MEMVAR oSayT
+   MEMVAR nType
+   MEMVAR oSayB
+   MEMVAR oTheme
+   MEMVAR oCheckB
+   MEMVAR oCheckI
+   MEMVAR oEditC
 
    IF nAction != Nil
       IF nAction == 1
@@ -451,7 +518,7 @@ Memvar oTheme, oCheckB, oCheckI, oEditC
             MsgStop( "Can't delete the only theme !", "Designer" )
             Return Nil
          ENDIF
-         IF MsgYesNo( "Really delete the '" + aSchemes[nScheme,1] + "' theme ?", "Designer" )
+         IF MsgYesNo( "Really delete the '" + aSchemes[nScheme, 1] + "' theme ?", "Designer" )
             Adel( aSchemes,nScheme )
             Asize( aSchemes,Len(aSchemes)-1 )
             nScheme := oBrw:nCurrent := oBrw:rowPos := 1
@@ -460,14 +527,14 @@ Memvar oTheme, oCheckB, oCheckI, oEditC
             Return Nil
          ENDIF
       ELSEIF nAction == 2
-         IF Empty( cScheme )
+         IF Empty(cScheme)
             MsgStop( "You must specify the theme name !", "Designer" )
             Return Nil
          ENDIF
-         IF Ascan( aSchemes,{|a|Lower(a[1])==Lower(cScheme)} ) == 0
-            Aadd( aSchemes,{ cScheme, AClone(aSchemes[nScheme,2]), ;
-                AClone(aSchemes[nScheme,3]), AClone(aSchemes[nScheme,4]), ;
-                AClone(aSchemes[nScheme,5]), AClone(aSchemes[nScheme,6]) } )
+         IF Ascan( aSchemes,{|a|Lower(a[1]) == Lower(cScheme)} ) == 0
+            Aadd( aSchemes,{ cScheme, AClone(aSchemes[nScheme, 2]), ;
+                AClone(aSchemes[nScheme, 3]), AClone(aSchemes[nScheme, 4]), ;
+                AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6]) } )
             oBrw:Refresh()
          ELSE
             MsgStop( "The " + cScheme + " theme exists already !", "Designer" )
@@ -481,20 +548,20 @@ Memvar oTheme, oCheckB, oCheckI, oEditC
    CheckDlgButton( oCheckB:oParent:handle,oCheckB:id,aSchemes[nScheme,nType][3] )
    CheckDlgButton( oCheckI:oParent:handle,oCheckI:id,aSchemes[nScheme,nType][4] )
 
-   oTheme:normal  := aSchemes[nScheme,2]
-   oTheme:command := aSchemes[nScheme,3]
-   oTheme:comment := aSchemes[nScheme,4]
-   oTheme:quote   := aSchemes[nScheme,5]
-   oTheme:number  := aSchemes[nScheme,6]
+   oTheme:normal  := aSchemes[nScheme, 2]
+   oTheme:command := aSchemes[nScheme, 3]
+   oTheme:comment := aSchemes[nScheme, 4]
+   oTheme:quote   := aSchemes[nScheme, 5]
+   oTheme:number  := aSchemes[nScheme, 6]
    re_SetDefault( oEditC:handle,oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4] )
-   SendMessage( oEditC:handle,EM_SETBKGNDCOLOR,0,oTheme:normal[2] )
+   SendMessage(oEditC:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    re_SetCharFormat( oEditC:handle,CreateHiLight(oEditC:GetText(),oTheme) )
 Return Nil
 
 
-static function InsertField(nModus)
+STATIC FUNCTION InsertField(nModus)
 
-  LOCAL cDBF:=MsgGet("DBF Name","input table name")
+   LOCAL cDBF := MsgGet("DBF Name","input table name")
 
 HB_SYMBOL_UNUSED( nModus )
 
@@ -566,8 +633,8 @@ HB_FUNC( NEXTWORD )
       hb_retclen( ptr,nPos-(ptr-cStr) );
    else
       hb_retc( ptr );
-   hb_storni( nPos+1,2 );
-   hb_storni( ptr-cStr+1,3 );
+   hb_storni( nPos+1, 2 );
+   hb_storni( ptr-cStr+1, 3 );
 }
 
 #pragma ENDDUMP
