@@ -34,7 +34,7 @@ CLASS HDTheme
    DATA number
 
    METHOD New( name )  INLINE ( ::name := name, Self )
-   METHOD Add( name )  INLINE ( ::name := name,Aadd(::aThemes,Self),Self )
+   METHOD Add( name )  INLINE ( ::name := name,AAdd(::aThemes, Self),Self )
 ENDCLASS
 
 FUNCTION LoadEdOptions( cFileName )
@@ -51,20 +51,20 @@ FUNCTION LoadEdOptions( cFileName )
 
    cIniName := cFileName
    oOptDesc := oIni:aItems[1]
-   FOR i := 1 TO Len( oOptDesc:aItems )
+   FOR i := 1 TO Len(oOptDesc:aItems)
       IF oOptDesc:aItems[i]:title == "font"
          HDTheme():oFont := hfrm_FontFromxml( oOptDesc:aItems[i] )
       ELSEIF oOptDesc:aItems[i]:title == "keywords"
          HDTheme():aKeyWords := hfrm_Str2Arr( oOptDesc:aItems[i]:aItems[1] )
       ELSEIF oOptDesc:aItems[i]:title == "themes"
          cTheme := oOptDesc:aItems[i]:GetAttribute( "selected" )
-         FOR j := 1 TO Len( oOptDesc:aItems[i]:aItems )
+         FOR j := 1 TO Len(oOptDesc:aItems[i]:aItems)
             oThemeXML := oOptDesc:aItems[i]:aItems[j]
             oTheme := HDTheme():Add( oThemeXML:GetAttribute( "name" ) )
             IF oTheme:name == cTheme
                HDTheme():nSelected := j
             ENDIF
-            FOR j1 := 1 TO Len( oThemeXML:aItems )
+            FOR j1 := 1 TO Len(oThemeXML:aItems)
                arr := { oThemeXML:aItems[j1]:GetAttribute("tcolor"), ;
                         oThemeXML:aItems[j1]:GetAttribute("bcolor"), ;
                         oThemeXML:aItems[j1]:GetAttribute("bold"),   ;
@@ -116,51 +116,51 @@ HB_SYMBOL_UNUSED( oOptDesc )
       oNode := oNode:aItems[nStart]
       oNode:SetAttribute( "selected", HDTheme():aThemes[HDTheme():nSelected]:name )
       oNode:aItems := {}
-      FOR i := 1 TO Len( HDTheme():aThemes )
+      FOR i := 1 TO Len(HDTheme():aThemes)
          oThemeDesc := oNode:Add( HXMLNode():New( "theme",,{ {"name",HDTheme():aThemes[i]:name} } ) )
-         aAttr := { {"tcolor",Ltrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
-                    {"bcolor",Ltrim(Str(HDTheme():aThemes[i]:normal[2]))} }
+         aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
+                    {"bcolor",LTrim(Str(HDTheme():aThemes[i]:normal[2]))} }
          IF HDTheme():aThemes[i]:normal[3]
-            Aadd( aAttr, { "bold","True" } )
+            AAdd(aAttr, { "bold","True" })
          ENDIF
          IF HDTheme():aThemes[i]:normal[4]
-            Aadd( aAttr, { "italic","True" } )
+            AAdd(aAttr, { "italic","True" })
          ENDIF
          oThemeDesc:Add( HXMLNode():New( "normal",HBXML_TYPE_SINGLE,aAttr ) )
 
-         aAttr := { {"tcolor",Ltrim(Str(HDTheme():aThemes[i]:command[1]))} }
+         aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:command[1]))} }
          IF HDTheme():aThemes[i]:command[3]
-            Aadd( aAttr, { "bold","True" } )
+            AAdd(aAttr, { "bold","True" })
          ENDIF
          IF HDTheme():aThemes[i]:command[4]
-            Aadd( aAttr, { "italic","True" } )
+            AAdd(aAttr, { "italic","True" })
          ENDIF
          oThemeDesc:Add( HXMLNode():New( "command",HBXML_TYPE_SINGLE,aAttr ) )
 
-         aAttr := { {"tcolor",Ltrim(Str(HDTheme():aThemes[i]:comment[1]))} }
+         aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:comment[1]))} }
          IF HDTheme():aThemes[i]:comment[3]
-            Aadd( aAttr, { "bold","True" } )
+            AAdd(aAttr, { "bold","True" })
          ENDIF
          IF HDTheme():aThemes[i]:comment[4]
-            Aadd( aAttr, { "italic","True" } )
+            AAdd(aAttr, { "italic","True" })
          ENDIF
          oThemeDesc:Add( HXMLNode():New( "comment",HBXML_TYPE_SINGLE,aAttr ) )
 
-         aAttr := { {"tcolor",Ltrim(Str(HDTheme():aThemes[i]:quote[1]))} }
+         aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:quote[1]))} }
          IF HDTheme():aThemes[i]:quote[3]
-            Aadd( aAttr, { "bold","True" } )
+            AAdd(aAttr, { "bold","True" })
          ENDIF
          IF HDTheme():aThemes[i]:quote[4]
-            Aadd( aAttr, { "italic","True" } )
+            AAdd(aAttr, { "italic","True" })
          ENDIF
          oThemeDesc:Add( HXMLNode():New( "quote",HBXML_TYPE_SINGLE,aAttr ) )
 
-         aAttr := { {"tcolor",Ltrim(Str(HDTheme():aThemes[i]:number[1]))} }
+         aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:number[1]))} }
          IF HDTheme():aThemes[i]:number[3]
-            Aadd( aAttr, { "bold","True" } )
+            AAdd(aAttr, { "bold","True" })
          ENDIF
          IF HDTheme():aThemes[i]:number[4]
-            Aadd( aAttr, { "italic","True" } )
+            AAdd(aAttr, { "italic","True" })
          ENDIF
          oThemeDesc:Add( HXMLNode():New( "number",HBXML_TYPE_SINGLE,aAttr ) )
 
@@ -179,7 +179,7 @@ FUNCTION EditMethod( cMethName, cMethod )
    LOCAL cParamString
    MEMVAR oDesigner
 
-   i := Ascan( oDesigner:aMethDef, {|a|a[1] == Lower(cMethName)} )
+   i := AScan(oDesigner:aMethDef, {|a|a[1] == Lower(cMethName)})
    cParamString := IIf( i == 0, "", oDesigner:aMethDef[i, 2] )
 
    INIT DIALOG oDlg TITLE "Edit '"+cMethName+"' method"          ;
@@ -192,7 +192,7 @@ FUNCTION EditMethod( cMethName, cMethod )
       MENU TITLE "&Options"
          MENUITEM "&Font" ACTION editChgFont()
          MENU TITLE "&Select theme"
-            FOR i := 1 TO Len( HDTheme():aThemes )
+            FOR i := 1 TO Len(HDTheme():aThemes)
                hwg_DefineMenuItem( HDTheme():aThemes[i]:name, 1020+i, &( "{||ChangeTheme("+LTrim(Str(i, 2))+"),HDTheme():lChanged:=.T.}" ) )
             NEXT
          ENDMENU
@@ -223,7 +223,7 @@ FUNCTION EditMethod( cMethName, cMethod )
    // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
 
    // oEdit:title := cMethod
-   *-SetDlgKey( odlg, 0,VK_TAB, {msginfo('tab')})
+   *-SetDlgKey( odlg, 0,VK_TAB, {msginfo("tab")})
          *-{SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
    *-SetDlgKey( oEdit, 0, 9)
@@ -272,7 +272,7 @@ STATIC FUNCTION editShow( cText,lRedraw )
       IF cText == Nil
          cText := oEdit:title
       ENDIF
-      nTextLength := Len( cText )
+      nTextLength := Len(cText)
    ENDIF
    SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
    re_SetDefault( oEdit:handle,oTheme:normal[1],oEdit:oFont:name,,oTheme:normal[3],oTheme:normal[4],,oEdit:oFont:charset )
@@ -308,14 +308,14 @@ STATIC FUNCTION EnChange( nEvent )
       SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
       nLength := SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 )
       IF nLength - nTextLength > 2
-         // writelog( "1: "+str(nLength, 5)+" "+str(nTextLength, 5) )
+         // writelog( "1: "+Str(nLength, 5)+" "+Str(nTextLength, 5) )
       ELSE
          nLine := SendMessage( oEdit:handle, EM_LINEFROMCHAR, -1, 0 )
          cBuffer := re_getline( oEdit:handle,nLine )
-         // writelog( "pos: "+Ltrim(str(pos1))+" Line: "+Ltrim(str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer )
+         // writelog( "pos: "+LTrim(Str(pos1))+" Line: "+LTrim(Str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer )
          nLinePos := SendMessage( oEdit:handle, EM_LINEINDEX, nLine, 0 ) + 1
-         Aadd( arr, { nLinePos,nLinePos+Len(cBuffer), ;
-            oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4], } )
+         AAdd(arr, { nLinePos,nLinePos+Len(cBuffer), ;
+            oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4], })
          HiLightString( cBuffer, arr, nLinePos )
          IF !Empty(arr)
             re_SetCharFormat( oEdit:handle,arr )
@@ -327,7 +327,7 @@ STATIC FUNCTION EnChange( nEvent )
       nTextLength := nLength
       SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
    ENDIF
-   // writelog( "EnChange "+str(pos1)+" "+str(pos2) ) // +" Length: "+str(nLength) )
+   // writelog( "EnChange "+Str(pos1)+" "+Str(pos2) ) // +" Length: "+Str(nLength) )
 Return Nil
 
 STATIC FUNCTION CreateHilight( cText,oTheme )
@@ -355,32 +355,32 @@ STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
 
    LOCAL nStart
    LOCAL nPos := 1
-   LOCAL sLen := Len( stroka )
+   LOCAL sLen := Len(stroka)
    LOCAL cWord
 
    IF oTheme == Nil
       oTheme := HDTheme():aThemes[HDTheme():nSelected]
    ENDIF
 
-   IF Left( Ltrim( stroka ), 2 ) == "//"
-      Aadd( arr, { nLinePos,nLinePos+Len(stroka), ;
-          oTheme:comment[1],,,oTheme:comment[3],oTheme:comment[4], } )
+   IF Left(LTrim(stroka), 2) == "//"
+      AAdd(arr, { nLinePos,nLinePos+Len(stroka), ;
+          oTheme:comment[1],,,oTheme:comment[3],oTheme:comment[4], })
       Return arr
    ENDIF
    SET EXACT ON
    DO WHILE nPos < sLen
       cWord := NextWord( stroka,@nPos,@nStart )
-      // writelog( "-->"+str(nStart)+" "+str(nPos)+" "+str(len(cword))+" "+ str(asc(cword)))
+      // writelog( "-->"+Str(nStart)+" "+Str(nPos)+" "+Str(Len(cword))+" "+ Str(asc(cword)))
       IF !Empty(cWord)
-         IF Left( cWord, 1 ) == '"' .OR. Left( cWord, 1 ) == "'"
-            Aadd( arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
-               oTheme:quote[1],,,oTheme:quote[3],oTheme:quote[4], } )
-         ELSEIF Ascan( HDTheme():aKeyWords,Upper(cWord) ) != 0
-            Aadd( arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
-               oTheme:command[1],,,oTheme:command[3],oTheme:command[4], } )
+         IF Left(cWord, 1) == '"' .OR. Left(cWord, 1) == "'"
+            AAdd(arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
+               oTheme:quote[1],,,oTheme:quote[3],oTheme:quote[4], })
+         ELSEIF AScan(HDTheme():aKeyWords, Upper(cWord)) != 0
+            AAdd(arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
+               oTheme:command[1],,,oTheme:command[3],oTheme:command[4], })
          ELSEIF IsDigit( cWord )
-            Aadd( arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
-               oTheme:number[1],,,oTheme:number[3],oTheme:number[4], } )
+            AAdd(arr, { nLinePos+nStart-1,nLinePos+nPos-1, ;
+               oTheme:number[1],,,oTheme:number[3],oTheme:number[4], })
          ENDIF
       ENDIF
    ENDDO
@@ -420,13 +420,13 @@ STATIC FUNCTION EditColors()
    PRIVATE oCheckB
    PRIVATE oCheckI
    PRIVATE oSayB
-   PRIVATE aSchemes := Array( Len( HDTheme():aThemes ) )
+   PRIVATE aSchemes := Array( Len(HDTheme():aThemes) )
    PRIVATE nScheme
    PRIVATE nType := 2
    PRIVATE oTheme := HDTheme():New()
    PRIVATE cScheme := ""
 
-   FOR i := 1 TO Len( aSchemes )
+   FOR i := 1 TO Len(aSchemes)
       aSchemes[i] := { HDTheme():aThemes[i]:name, HDTheme():aThemes[i]:normal, ;
           HDTheme():aThemes[i]:command, HDTheme():aThemes[i]:comment,          ;
           HDTheme():aThemes[i]:quote, HDTheme():aThemes[i]:number }
@@ -475,17 +475,17 @@ STATIC FUNCTION EditColors()
    oDlg:Activate()
 
    IF oDlg:lResult
-      FOR i := 1 TO Len( HDTheme():aThemes )
-         IF Ascan( aSchemes,{|a|Lower(a[1]) == Lower(HDTheme():aThemes[i]:name)} ) == 0
-            Adel( HDTheme():aThemes,i )
-            Asize( HDTheme():aThemes,Len(HDTheme():aThemes)-1 )
+      FOR i := 1 TO Len(HDTheme():aThemes)
+         IF AScan(aSchemes, {|a|Lower(a[1]) == Lower(HDTheme():aThemes[i]:name)}) == 0
+            ADel(HDTheme():aThemes, i)
+            ASize(HDTheme():aThemes, Len(HDTheme():aThemes) - 1)
          ENDIF
       NEXT
-      FOR i := 1 TO Len( aSchemes )
-         j := Ascan( HDTheme():aThemes,{|o|Lower(o:name) == Lower(aSchemes[i, 1])} )
+      FOR i := 1 TO Len(aSchemes)
+         j := AScan(HDTheme():aThemes, {|o|Lower(o:name) == Lower(aSchemes[i, 1])})
          IF j == 0
             HDTheme():Add( aSchemes[i, 1] )
-            j := Len( HDTheme():aThemes )
+            j := Len(HDTheme():aThemes)
          ENDIF
          HDTheme():aThemes[j]:normal  := aSchemes[i, 2]
          HDTheme():aThemes[j]:command := aSchemes[i, 3]
@@ -514,13 +514,13 @@ Static Function UpdSample( nAction )
 
    IF nAction != Nil
       IF nAction == 1
-         IF Len( aSchemes ) == 1
+         IF Len(aSchemes) == 1
             MsgStop( "Can't delete the only theme !", "Designer" )
             Return Nil
          ENDIF
          IF MsgYesNo( "Really delete the '" + aSchemes[nScheme, 1] + "' theme ?", "Designer" )
-            Adel( aSchemes,nScheme )
-            Asize( aSchemes,Len(aSchemes)-1 )
+            ADel(aSchemes, nScheme)
+            ASize(aSchemes, Len(aSchemes) - 1)
             nScheme := oBrw:nCurrent := oBrw:rowPos := 1
             oBrw:Refresh()
          ELSE
@@ -531,10 +531,10 @@ Static Function UpdSample( nAction )
             MsgStop( "You must specify the theme name !", "Designer" )
             Return Nil
          ENDIF
-         IF Ascan( aSchemes,{|a|Lower(a[1]) == Lower(cScheme)} ) == 0
-            Aadd( aSchemes,{ cScheme, AClone(aSchemes[nScheme, 2]), ;
+         IF AScan(aSchemes, {|a|Lower(a[1]) == Lower(cScheme)}) == 0
+            AAdd(aSchemes,{ cScheme, AClone(aSchemes[nScheme, 2]), ;
                 AClone(aSchemes[nScheme, 3]), AClone(aSchemes[nScheme, 4]), ;
-                AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6]) } )
+                AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6]) })
             oBrw:Refresh()
          ELSE
             MsgStop( "The " + cScheme + " theme exists already !", "Designer" )
@@ -587,7 +587,7 @@ int At_Any( char* cFind, char* cStr, int* nPos)
 {
    char c;
    int i;
-   int iLen = strlen( cFind );
+   int iLen = strlen(cFind);
 
    while( ( c = *( cStr+(*nPos) ) ) != 0 )
    {
@@ -621,16 +621,16 @@ HB_FUNC( NEXTWORD )
       if( ptr1 )
       {
          nPos = ptr1 - cStr + 1;
-         hb_retclen( ptr,ptr1-ptr+1 );
+         hb_retclen(ptr, ptr1 - ptr + 1);
       }
       else
       {
-         nPos = strlen( cStr );
+         nPos = strlen(cStr);
          hb_retc( ptr );
       }
    }
    else if( At_Any( cSep,cStr,&nPos ) )
-      hb_retclen( ptr,nPos-(ptr-cStr) );
+      hb_retclen(ptr, nPos - (ptr - cStr));
    else
       hb_retc( ptr );
    hb_storni( nPos+1, 2 );

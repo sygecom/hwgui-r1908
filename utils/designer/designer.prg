@@ -77,7 +77,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    IF p0 != Nil .AND. ( p0 == "-r" .OR. p0 == "/r" )
       oDesigner:lReport := .T.
       IF p1 != Nil
-         IF Left( p1, 1 ) $ "-/"
+         IF Left(p1, 1) $ "-/"
             p0 := p1
             p1 := p2
          ELSE
@@ -155,7 +155,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
             i := 1
             DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != Nil
                hwg_DefineMenuItem( oDesigner:aRecent[i], 1020+i, ;
-                  &( "{||HFormGen():Open('"+oDesigner:aRecent[i]+"')}" ) )
+                  &( "{||HFormGen():Open('" + oDesigner:aRecent[i] + "')}" ) )
                i ++
             ENDDO
          EndIf
@@ -195,7 +195,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
        CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.T.)
    endif
 
-   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0,x,y-21),statusbarmsg('')}
+   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0,x,y-21),statusbarmsg("")}
 
    IF !oDesigner:lSingleForm
       @ 2, 3 OWNERBUTTON OF oPanel       ;
@@ -445,7 +445,7 @@ Static Function StartDes( oDlg,p1,cForm )
 
    hwg_MoveWindow(oDlg:handle, 0, 0, oDlg:nWidth + 10, oDlg:nHeight)
 
-   IF p1 != Nil .AND. Left( p1, 1 ) $ "-/"
+   IF p1 != Nil .AND. Left(p1, 1) $ "-/"
       IF ( p1 := SubStr(p1, 2, 1) ) == "n"
          HFormGen():New()
       ELSEIF p1 == "f"
@@ -497,16 +497,16 @@ STATIC FUNCTION ReadIniFiles()
    IF Empty(oIni:aItems)
       CreateIni( oIni )
    ENDIF
-   FOR i := 1 TO Len( oIni:aItems[1]:aItems )
+   FOR i := 1 TO Len(oIni:aItems[1]:aItems)
       oNode := oIni:aItems[1]:aItems[i]
       IF oNode:title == cwitem
          IF !Empty(oNode:aItems)
             cWidgetsFileName := oNode:aItems[1]
          ENDIF
       ELSEIF oNode:title == cfitem
-         Aadd( oDesigner:aFormats, { oNode:GetAttribute("name"), oNode:GetAttribute("ext"), ;
+         AAdd(oDesigner:aFormats, { oNode:GetAttribute("name"), oNode:GetAttribute("ext"), ;
              oNode:GetAttribute("file"),oNode:GetAttribute("rdscr"), ;
-             oNode:GetAttribute("wrscr"),oNode:GetAttribute("cnvtable") } )
+             oNode:GetAttribute("wrscr"),oNode:GetAttribute("cnvtable") })
       ELSEIF oNode:title == "editor"
          LoadEdOptions( oNode:aItems[1] )
       ELSEIF oNode:title == "grid"
@@ -525,7 +525,7 @@ STATIC FUNCTION ReadIniFiles()
                 oDesigner:ds_mypath := Lower(l_ds_mypath)
              ENDIF
       ELSEIF oNode:title == critem .AND. !oDesigner:lSingleForm
-         FOR j := 1 TO Min( Len( oNode:aItems ),MAX_RECENT_FILES )
+         FOR j := 1 TO Min( Len(oNode:aItems),MAX_RECENT_FILES )
             oDesigner:aRecent[j] := Lower(Trim(oNode:aItems[j]:aItems[1]))
          NEXT
       ENDIF
@@ -563,11 +563,11 @@ STATIC FUNCTION BuildSet( oTab )
 
    IF !Empty(oDesigner:oWidgetsSet:aItems)
       aSet := oDesigner:oWidgetsSet:aItems[1]:aItems
-      FOR i := 1 TO Len( aSet )
+      FOR i := 1 TO Len(aSet)
          IF aSet[i]:title == "set"
             oTab:StartPage( aSet[i]:GetAttribute( "name" ) )
             x1 := 4
-            FOR j := 1 TO Len( aSet[i]:aItems )
+            FOR j := 1 TO Len(aSet[i]:aItems)
                IF aSet[i]:aItems[j]:title == "widget"
                   oWidget := aSet[i]:aItems[j]
                   cText := oWidget:GetAttribute( "text" )
@@ -587,11 +587,11 @@ STATIC FUNCTION BuildSet( oTab )
          ELSEIF aSet[i]:title == "form"
             oDesigner:oFormDesc := aSet[i]
          ELSEIF aSet[i]:title == "data"
-            FOR j := 1 TO Len( aSet[i]:aItems )
+            FOR j := 1 TO Len(aSet[i]:aItems)
                IF aSet[i]:aItems[j]:title == "property"
                   oProperty := aSet[i]:aItems[j]
                   b1 := b2 := b3 := b4 := Nil
-                  FOR j1 := 1 TO Len( oProperty:aItems )
+                  FOR j1 := 1 TO Len(oProperty:aItems)
                      IF oProperty:aItems[j1]:title == "code1"
                         b1 := oProperty:aItems[j1]:aItems[1]:aItems[1]
                      ELSEIF oProperty:aItems[j1]:title == "code2"
@@ -607,10 +607,10 @@ STATIC FUNCTION BuildSet( oTab )
                   IF cDlg != Nil
                      arr := {}
                       DO WHILE ( j1 := At( ",",cDlg ) ) > 0
-                           Aadd( arr,Left( cDlg,j1-1 ) )
-                          cDlg := LTrim( SubStr(cDlg, j1 + 1) )
+                           AAdd(arr, Left(cDlg, j1 - 1))
+                          cDlg := LTrim(SubStr(cDlg, j1 + 1))
                          ENDDO
-                      Aadd( arr, cDlg )
+                      AAdd(arr, cDlg)
                   ELSE
                      arr := Nil
                   ENDIF
@@ -619,15 +619,15 @@ STATIC FUNCTION BuildSet( oTab )
                      cDlg := Lower(cDlg)
                   ENDIF
 
-                  Aadd( oDesigner:aDataDef, { Lower(oProperty:GetAttribute("name")), ;
-                                     b1,b2,b3,cDlg,arr,b4 } )
+                  AAdd(oDesigner:aDataDef, { Lower(oProperty:GetAttribute("name")), ;
+                                     b1,b2,b3,cDlg,arr,b4 })
                ENDIF
             NEXT
          ELSEIF aSet[i]:title == "methods"
-            FOR j := 1 TO Len( aSet[i]:aItems )
+            FOR j := 1 TO Len(aSet[i]:aItems)
                IF aSet[i]:aItems[j]:title == "method"
-                  Aadd( oDesigner:aMethDef, { Lower(aSet[i]:aItems[j]:GetAttribute("name")), ;
-                                     aSet[i]:aItems[j]:GetAttribute("params") } )
+                  AAdd(oDesigner:aMethDef, { Lower(aSet[i]:aItems[j]:GetAttribute("name")), ;
+                                     aSet[i]:aItems[j]:GetAttribute("params") })
                ENDIF
             NEXT
          ENDIF
@@ -643,7 +643,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
    LOCAL oBtn
 
    oTab:Move( ,, x-6, y-33 )
-   FOR i := 1 TO Len( oTab:aControls )
+   FOR i := 1 TO Len(oTab:aControls)
       oBtn := oTab:aControls[i]
       IF oBtn:Classname == "HOWNBUTTON"
          IF oBtn:nLeft == 4 .AND. oBtn:nTop == 32
@@ -687,10 +687,10 @@ FUNCTION DeleteCtrl()
 
    IF oDlg != Nil .AND. ( oCtrl := GetCtrlSelected( oDlg ) ) != Nil
       IF oCtrl:oContainer != Nil
-         i := Ascan( oCtrl:oContainer:aControls,{|o|o:handle==oCtrl:handle} )
+         i := AScan(oCtrl:oContainer:aControls, {|o|o:handle == oCtrl:handle})
          IF i != 0
-            Adel( oCtrl:oContainer:aControls,i )
-            Asize( oCtrl:oContainer:aControls,Len(oCtrl:oContainer:aControls)-1 )
+            ADel(oCtrl:oContainer:aControls, i)
+            ASize(oCtrl:oContainer:aControls, Len(oCtrl:oContainer:aControls) - 1)
          ENDIF
       ENDIF
       IF oDesigner:lReport
@@ -712,7 +712,7 @@ FUNCTION FindWidget( cClass )
    LOCAL aSet := oDesigner:oWidgetsSet:aItems[1]:aItems
    LOCAL oNode
 
-   FOR i := 1 TO Len( aSet )
+   FOR i := 1 TO Len(aSet)
       IF aSet[i]:title == "set"
          IF ( oNode := aSet[i]:Find( "widget", 1,{|o|o:GetAttribute("class")==cClass} ) ) != Nil
             Return oNode
@@ -753,7 +753,7 @@ Return Nil
 FUNCTION AddRecent( oForm )
 
    LOCAL i
-   LOCAL cItem := Lower(Trim(oForm:path+oForm:filename))
+   LOCAL cItem := Lower(Trim(oForm:path + oForm:filename))
    MEMVAR oDesigner
 
    IF oDesigner:aRecent[1] == Nil .OR. !( oDesigner:aRecent[1] == cItem )
@@ -761,10 +761,10 @@ FUNCTION AddRecent( oForm )
          IF oDesigner:aRecent[i] == Nil
             EXIT
          ELSEIF oDesigner:aRecent[i] == cItem
-            Adel( oDesigner:aRecent,i )
+            ADel(oDesigner:aRecent, i)
          ENDIF
       NEXT
-      Ains( oDesigner:aRecent, 1 )
+      AIns(oDesigner:aRecent, 1)
       oDesigner:aRecent[1] := cItem
       oDesigner:lChgRecent := .T.
    ENDIF
@@ -775,7 +775,7 @@ STATIC FUNCTION EndIde()
 
    LOCAL i
    LOCAL j
-   LOCAL alen := Len( HFormGen():aForms )
+   LOCAL alen := Len(HFormGen():aForms)
    LOCAL lRes := .T.
    LOCAL oIni
    LOCAL critem
@@ -785,7 +785,7 @@ STATIC FUNCTION EndIde()
 
   IF alen > 0
      IF MsgYesNo( "Do you really want to quit ?", "Designer" )
-        FOR i := Len( HFormGen():aForms ) TO 1 STEP -1
+        FOR i := Len(HFormGen():aForms) TO 1 STEP -1
            HFormGen():aForms[i]:End( ,.F. )
         NEXT
      ELSE
@@ -808,7 +808,7 @@ STATIC FUNCTION EndIde()
         i := 1
         IF oIni:aItems[1]:Find( critem,@i ) == Nil
            oIni:aItems[1]:Add( HXMLNode():New( critem,, ) )
-           i := Len( oIni:aItems[1]:aItems )
+           i := Len(oIni:aItems[1]:aItems)
         ENDIF
         j := 1
         oIni:aItems[1]:aItems[i]:aItems := {}
@@ -819,7 +819,7 @@ STATIC FUNCTION EndIde()
      ENDIF
 
         i := 1
-        oNode := HXMLNode():New( "grid",HBXML_TYPE_SINGLE,{{"default",alltrim(str(oDesigner:nPixelGrid))}} )
+        oNode := HXMLNode():New( "grid",HBXML_TYPE_SINGLE,{{"default",AllTrim(Str(oDesigner:nPixelGrid))}} )
         IF oIni:aItems[1]:Find( "grid",@i ) == Nil
            oIni:aItems[1]:Add( oNode )
         ELSE
@@ -851,9 +851,9 @@ Function StatusBarMsg(cfile,cpos,ctam)
    
    MEMVAR oDesigner
 
-  //cfile := IIf(cfile = Nil,'',cfile)
-  cpos := IIf(cpos = Nil,'',cpos)
-  ctam := IIf(ctam = Nil,'',ctam)
+  //cfile := IIf(cfile = Nil,"",cfile)
+  cpos := IIf(cpos = Nil,"",cpos)
+  ctam := IIf(ctam = Nil,"",ctam)
    IF cFile != Nil
      WriteStatus( oDesigner:oMainWnd, 1,"File: "+cfile ,.T.)
   ENDIF

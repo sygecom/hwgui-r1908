@@ -90,14 +90,14 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
            Upper(cProperty) == "YES"
          ::lContainer := .T.
       ENDIF
-      FOR i := 1 TO Len( oXMLDesc:aItems )
+      FOR i := 1 TO Len(oXMLDesc:aItems)
          IF oXMLDesc:aItems[i]:title == "paint"
             oPaint := oXMLDesc:aItems[i]
             IF !Empty(oPaint:aItems) .AND. oPaint:aItems[1]:type == HBXML_TYPE_CDATA
                ::aPaint := RdScript( ,oPaint:aItems[1]:aItems[1] )
             ENDIF
             IF ( bmp := oPaint:GetAttribute( "bmp" ) ) != Nil
-               IF Isdigit( Left( bmp, 1 ) )
+               IF Isdigit( Left(bmp, 1) )
                   ::oBitmap := HBitmap():AddStandard( Val(bmp) )
                ELSEIF "." $ bmp
                   ::oBitmap := HBitmap():AddFile( bmp )
@@ -120,29 +120,29 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
             ELSE
                xProperty := oXMLDesc:aItems[i]:GetAttribute( "value" )
             ENDIF
-            Aadd( ::aProp, { oXMLDesc:aItems[i]:GetAttribute( "name" ),  ;
+            AAdd(::aProp, { oXMLDesc:aItems[i]:GetAttribute( "name" ),  ;
                              xProperty, ;
-                             oXMLDesc:aItems[i]:GetAttribute( "type" ) } )
+                             oXMLDesc:aItems[i]:GetAttribute( "type" ) })
             IF oXMLDesc:aItems[i]:GetAttribute( "hidden" ) != Nil
-               Aadd( Atail( ::aProp ),.T. )
+               AAdd(ATail(::aProp), .T.)
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "method"
-            Aadd( ::aMethods, { oXMLDesc:aItems[i]:GetAttribute( "name" ),"" } )
+            AAdd(::aMethods, { oXMLDesc:aItems[i]:GetAttribute( "name" ),"" })
          ENDIF
       NEXT
    ENDIF
    IF aProp != Nil
-      FOR i := 1 TO Len( aProp )
+      FOR i := 1 TO Len(aProp)
          cPropertyName := Lower(aProp[i, 1])
-         IF ( j := Ascan( ::aProp, {|a|Lower(a[1]) == cPropertyName} ) ) != 0
+         IF ( j := AScan(::aProp, {|a|Lower(a[1]) == cPropertyName}) ) != 0
             ::aProp[j, 2] := aProp[i, 2]
          ENDIF
       NEXT
    ENDIF
-   FOR i := 1 TO Len( ::aProp )
+   FOR i := 1 TO Len(::aProp)
       value := ::aProp[i, 2]
       cPropertyName := Lower(::aProp[i, 1])
-      j := Ascan( oDesigner:aDataDef, {|a|a[1]==cPropertyName} )
+      j := AScan(oDesigner:aDataDef, {|a|a[1] == cPropertyName})
       IF value != Nil
          IF j != 0 .AND. oDesigner:aDataDef[j, 3] != Nil
             // pArray := oDesigner:aDataDef[j, 6]
@@ -162,8 +162,8 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
       ::bSize   := {|o,x,y|ctrlOnSize(o,x,y)}
       ::SetColor( ::tcolor,::bcolor )
       // :LFB pos
-        statusbarmsg(,'x: '+ltrim(str(::nLeft))+'  y: '+ltrim(str(::nTop)),;
-          'w: '+ltrim(str(::nWidth))+'  h: '+ltrim(str(::nHeight)))
+        statusbarmsg(, "x: " + LTrim(Str(::nLeft)) + "  y: " + LTrim(Str(::nTop)), ;
+          "w: " + LTrim(Str(::nWidth)) + "  h: " + LTrim(Str(::nHeight)))
          // :END LFB
    ENDIF
 
@@ -205,7 +205,7 @@ METHOD Paint( lpdis ) CLASS HControlGen
      DoScript( ::aPaint )
   ENDIF
   // :LFB pos
-  IF LEN(asels) > 1
+  IF Len(asels) > 1
     for i=1 to Len(asels)
       octrl2 := asels[i]
       IF oCtrl2 != Nil .AND. ::handle == oCtrl2:handle
@@ -233,7 +233,7 @@ METHOD GetPropIndex(cName ) CLASS HControlGen
    LOCAL i := 0
 
    cName := Lower(cName)
-   i := Ascan( ::aProp,{|a|Lower(a[1]) == cName} )
+   i := AScan(::aProp, {|a|Lower(a[1]) == cName})
 Return (i)
 
 METHOD SetProp( xName,xValue )
@@ -242,7 +242,7 @@ METHOD SetProp( xName,xValue )
 
    IF ValType( xName ) == "C"
       xName := Lower(xName)
-      //xName := Ascan( ::aProp,{|a|Lower(a[1]) == xName} )
+      //xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
      iIndex := ::GetPropIndex( xName )
     ENDIF
     IF ValType( xName ) == "N"
@@ -267,7 +267,7 @@ METHOD SetCoor( xName,nValue )
    IF oDesigner:lReport
       nValue := Round( nValue/::oParent:oParent:oParent:oParent:nKoeff, 1 )
    ENDIF
-   ::SetProp( xName,Ltrim(Str(nValue)) )
+   ::SetProp( xName,LTrim(Str(nValue)) )
 
 Return nValue
 
@@ -304,9 +304,9 @@ FUNCTION ctrlOnSize( oCtrl, x, y )
 
    IF oCtrl:Adjust == 5
       *-IF oCtrl:oParent:nTop != Nil
-        FOR i=1 to len(acontrols)
+        FOR i=1 to Len(acontrols)
           oCtrls := aControls[i]
-              *-msginfo(STR(oCtrl:oParent:nTop)+'-'+STR(oCtrl:nTop)) //+'-'+STR(oCtrl:oparent:oParent:nTop))
+              *-msginfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass="browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop+oCtrls:nHeight)
                  oCtrl:Move(oCtrl:nLeft ,oCtrls:nTop+2 )
               *oCtrl:SetProp( "Top","oCtrls:nTop+2" )
@@ -330,21 +330,21 @@ FUNCTION CreateName( cPropertyName, oCtrl )
    LOCAL aControls := oCtrl:oParent:aControls
    LOCAL arr := {}
    LOCAL cName := IIf(cPropertyName!="v","o","v") + Upper(Left(oCtrl:cClass, 1)) + SubStr(oCtrl:cClass, 2)
-   LOCAL nLen := Len( cName )
+   LOCAL nLen := Len(cName)
 
-   FOR i := 1 TO Len( aControls )
-      IF( j := Ascan( aControls[i]:aProp, {|a|a[1]==cPropertyName} ) ) > 0
-         IF Left( aControls[i]:aProp[j, 2],nLen ) == cName
-            Aadd( arr,SubStr(aControls[i]:aProp[j, 2], nLen + 1) )
+   FOR i := 1 TO Len(aControls)
+      IF( j := AScan(aControls[i]:aProp, {|a|a[1] == cPropertyName}) ) > 0
+         IF Left(aControls[i]:aProp[j, 2], nLen) == cName
+            AAdd(arr,SubStr(aControls[i]:aProp[j, 2], nLen + 1))
          ENDIF
       ENDIF
    NEXT
    i := 1
-   DO WHILE Ascan( arr,Ltrim(Str(i)) ) > 0
+   DO WHILE AScan(arr, LTrim(Str(i))) > 0
       i ++
    ENDDO
 
-Return cName+Ltrim(Str(i))
+Return cName+LTrim(Str(i))
 
 FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
 
@@ -374,9 +374,9 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
       dy := yPos
    ENDIF
 
-   // writelog( "V0=("+alltrim(str(oCtrl:nLeft))+","+alltrim(str(oCtrl:nTop))+") P1=("+alltrim(str(xPos,5))+","+alltrim(str(yPos,5)
-   // )+ ") B1=("+alltrim(str(aBDown[2]))+","+alltrim(str(aBDown[3]))+")  d=("+alltrim(str(dx, 3))+","+alltrim(str(dy, 3))+") " )
-   // writelog( "vBDown=("+alltrim(str(vBDown[2]))+","+alltrim(str(vBDown[3]))+") " )
+   // writelog( "V0=("+AllTrim(Str(oCtrl:nLeft))+","+AllTrim(Str(oCtrl:nTop))+") P1=("+AllTrim(Str(xPos,5))+","+AllTrim(Str(yPos,5)
+   // )+ ") B1=("+AllTrim(Str(aBDown[2]))+","+AllTrim(Str(aBDown[3]))+")  d=("+AllTrim(Str(dx, 3))+","+AllTrim(Str(dy, 3))+") " )
+   // writelog( "vBDown=("+AllTrim(Str(vBDown[2]))+","+AllTrim(Str(vBDown[3]))+") " )
 
    IF dx != 0 .OR. dy != 0
       IF !lChild .AND. lMouse .AND. Abs( xPos - aBDown[BDOWN_XPOS] ) < 3 .AND. Abs( yPos - aBDown[BDOWN_YPOS] ) < 3
@@ -396,11 +396,11 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
             mdx := (mdx - oDesigner:nPixelGrid )
           endif
 
-          // writelog( "coordinate normalizzate=" +"   N= " +str(dx)+"   mdx="+str(mdx) )
+          // writelog( "coordinate normalizzate=" +"   N= " +Str(dx)+"   mdx="+Str(mdx) )
 
           dx = ( vdx - oCtrl:nLeft ) - mdx
 
-          // writelog( "Output:   dx= " +str(dx)+"   NLeft="+str(oCtrl:nLeft+dx)+ "  aBBDown2="+ alltrim(str(mdy)) )
+          // writelog( "Output:   dx= " +Str(dx)+"   NLeft="+Str(oCtrl:nLeft+dx)+ "  aBBDown2="+ AllTrim(Str(mdy)) )
 
           if abs( int( ( ( mdy ) / oDesigner:nPixelGrid) * 10 ) ) <= 4
             mdy := mdy
@@ -449,7 +449,7 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
       ELSE
          oCtrl:oParent:oParent:lChanged := .T.
       ENDIF
-      FOR i := 1 TO Len( oCtrl:aControls )
+      FOR i := 1 TO Len(oCtrl:aControls)
          CtrlMove( oCtrl:aControls[i],dx,dy,.F.,.T. )
       NEXT
       IF !lChild
@@ -576,7 +576,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
         // aqui desmarca o anterior nando colocou
             IF nsh >= 0    // nando pos
            // NANDO POS O FOR
-              FOR i = 1 to IIf(len(asels) > 0,LEN(asels), 1)
+              FOR i = 1 to IIf(Len(asels) > 0, Len(asels), 1)
                oFrm:oCtrlSelected := asels[i]  // NANDO POS
            hwg_InvalidateRect( oFrm:oCtrlSelected:oParent:handle, 1, ;
                   oFrm:oCtrlSelected:nLeft-4, oFrm:oCtrlSelected:nTop-4, ;
@@ -588,14 +588,14 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
           RETURN Nil
         ELSE
             // CASO ELE QUER DESMARCAR UM
-          i := Ascan( aSels, {|a| a:GetProp( "Name") == oCtrl:GetProp( "Name")} )
+          i := AScan(aSels, {|a|a:GetProp("Name") == oCtrl:GetProp("Name")})
               IF i > 0
               hwg_InvalidateRect( oCtrl:oParent:handle, 1, ;
                   oCtrl:nLeft-4, oCtrl:nTop-4, ;
                   oCtrl:nLeft+oCtrl:nWidth+3,  ;
                   oCtrl:nTop+oCtrl:nHeight+3 )
-                  ADEL(aSels,i)
-                 ASIZE(Asels,LEN(aSels)-1)
+                  ADel(aSels, i)
+                  ASize(Asels, Len(aSels) - 1)
             RETURN nil
           ENDIF
           //
@@ -604,7 +604,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
       // nando pos
         aSels := IIf( nsh >= 0, {} ,asels)
         IF oCtrl != Nil
-           AADD(aSels,oCtrl)
+           AAdd(aSels, oCtrl)
         ENDIF
       //
 
@@ -622,7 +622,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
             IF n != Nil
                i := n
             ELSE
-               i := Ascan( oDlg:aControls,{|o|o:handle==oCtrl:handle} )
+               i := AScan(oDlg:aControls, {|o|o:handle == oCtrl:handle})
             ENDIF
             InspUpdCombo( i )
          ENDIF
@@ -664,7 +664,7 @@ Return 0
 
 Function MoveCtrl( oCtrl )
 
-   // writelog( "MoveCtrl "+str(oCtrl:nWidth) + str(oCtrl:nHeight) )
+   // writelog( "MoveCtrl "+Str(oCtrl:nWidth) + Str(oCtrl:nHeight) )
    IF oCtrl:ClassName() == "HDIALOG"
       SendMessage( oCtrl:handle, WM_MOVE, 0, oCtrl:nLeft + oCtrl:nTop*65536 )
       SendMessage( oCtrl:handle, WM_SIZE, 0, oCtrl:nWidth + oCtrl:nHeight*65536 )
@@ -691,7 +691,7 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
    ELSE
       delta := 30
    ENDIF
-   FOR i := Len( aControls ) To 1 STEP -1
+   FOR i := Len(aControls) To 1 STEP -1
       IF !aControls[i]:lHide
          IF lLeft .AND. aControls[i]:nLeft+aControls[i]:nWidth < oCtrl:nLeft .AND. ;
             aControls[i]:nLeft+aControls[i]:nWidth + delta > oCtrl:nLeft .AND. ;
@@ -759,8 +759,8 @@ FUNCTION Page_New( oTab )
       aTabs := {}
       oTab:SetProp( "Tabs",aTabs )
    ENDIF
-   AddTab( oTab:handle, Len( aTabs ), "New Page" )
-   Aadd( aTabs,"New Page" )
+   AddTab( oTab:handle, Len(aTabs), "New Page" )
+   AAdd(aTabs, "New Page")
    InspUpdProp( "Tabs", aTabs )
    hwg_RedrawWindow( oTab:handle, 5 )
 Return Nil
@@ -778,7 +778,7 @@ FUNCTION Page_Upd( oTab, arr )
    LOCAL i
    LOCAL nTabs := SendMessage(oTab:handle, TCM_GETITEMCOUNT, 0, 0)
 
-   FOR i := 1 TO Len( arr )
+   FOR i := 1 TO Len(arr)
       IF i <= nTabs
          SetTabName( oTab:handle, i-1, arr[i] )
       ELSE
@@ -797,16 +797,16 @@ FUNCTION Page_Select( oTab, nTab, lForce )
    IF ( lForce != Nil .AND. lForce ) .OR. GetCurrentTab( oTab:handle ) != nTab
 
       SendMessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
-      FOR i := 1 TO Len( oTab:aControls )
+      FOR i := 1 TO Len(oTab:aControls)
          oCtrl := oTab:aControls[i]
          IF oCtrl:nPage != nTab .AND. !oCtrl:lHide
             oCtrl:Hide()
-            FOR j := 1 TO Len( oCtrl:aControls )
+            FOR j := 1 TO Len(oCtrl:aControls)
                oCtrl:aControls[j]:Hide()
             NEXT
          ELSEIF oCtrl:nPage == nTab .AND. oCtrl:lHide
             oCtrl:Show()
-            FOR j := 1 TO Len( oCtrl:aControls )
+            FOR j := 1 TO Len(oCtrl:aControls)
                oCtrl:aControls[j]:Show()
             NEXT
          ENDIF
@@ -827,13 +827,13 @@ FUNCTION EditMenu()
    PRIVATE nMaxId := 0
 
    oDlg := HFormGen():oDlgSelected
-   FOR i := 1 TO Len( oDlg:aControls )
+   FOR i := 1 TO Len(oDlg:aControls)
       IF oDlg:aControls[i]:cClass == "menu"
          aMenu := oDlg:aControls[i]:GetProp( "aTree" )
          IF aMenu == Nil
             aMenu := oDlg:aControls[i]:SetProp( "aTree", { { ,"Menu", 32000,Nil } } )
          ENDIF
-         aMenu := aClone( aMenu )
+         aMenu := AClone(aMenu)
          EXIT
       ENDIF
    NEXT
@@ -869,11 +869,11 @@ Return Nil
 
 STATIC FUNCTION BuildTree( oParent, aMenu )
 
-   LOCAL i := Len( aMenu )
+   LOCAL i := Len(aMenu)
    LOCAL oNode
    MEMVAR nMaxId
 
-   FOR i := 1 TO Len( aMenu )
+   FOR i := 1 TO Len(aMenu)
       INSERT NODE oNode CAPTION aMenu[i, 2] TO oParent
       oNode:cargo := aMenu[i, 3]
       nMaxId := Max( nMaxId,aMenu[i, 3] )
@@ -900,7 +900,7 @@ STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
    LOCAL aSubarr
 
    nPos := 1
-   DO WHILE nPos <= Len( aTree )
+   DO WHILE nPos <= Len(aTree)
       IF aTree[npos, 3] == nId
          Return aTree
       ELSEIF ValType(aTree[npos, 1]) == "A"
@@ -933,8 +933,8 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       nMaxId ++
       oNode:cargo := nMaxId
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         Aadd( aSubarr,Nil )
-         Ains( aSubarr,nPos+1 )
+         AAdd(aSubarr, Nil)
+         AIns(aSubarr, nPos + 1)
          aSubarr[nPos+1] := { Nil,"New",nMaxId,Nil }
       ENDIF
    ELSEIF nAction == 2   // Insert before
@@ -947,8 +947,8 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       nMaxId ++
       oNode:cargo := nMaxId
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         Aadd( aSubarr,Nil )
-         Ains( aSubarr,nPos )
+         AAdd(aSubarr, Nil)
+         AIns(aSubarr, nPos)
          aSubarr[nPos] := { Nil,"New",nMaxId,Nil }
       ENDIF
    ELSEIF nAction == 9   // Insert Separaodr
@@ -961,8 +961,8 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       nMaxId ++
       oNode:cargo := nMaxId
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         Aadd( aSubarr,Nil )
-         Ains( aSubarr,nPos+1 )
+         AAdd(aSubarr, Nil)
+         AIns(aSubarr, nPos + 1)
          aSubarr[nPos+1] := { Nil,"-",nMaxId,Nil }
       ENDIF
    ELSEIF nAction == 3   // Insert child
@@ -975,12 +975,12 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
          IF ValType( aSubarr[nPos, 1] ) != "A"
             aSubarr[nPos, 1] := {}
          ENDIF
-         Aadd( aSubarr[nPos, 1], { Nil,"New",nMaxId,Nil } )
+         AAdd(aSubarr[nPos, 1], { Nil,"New",nMaxId,Nil })
       ENDIF
    ELSEIF nAction == 4   // Delete
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         Adel( aSubarr,nPos )
-         Asize( aSubarr,Len(aSubarr)-1 )
+         ADel(aSubarr, nPos)
+         ASize(aSubarr, Len(aSubarr) - 1)
       ENDIF
       oTree:oSelected:Delete()
    ELSEIF nAction == 10  &&.AND. oTree:oSelected:cargo != "SEPARATOR" // Edit code
@@ -1003,13 +1003,13 @@ FUNCTION GetMenu()
    PRIVATE nMaxId := 0
 
    oDlg := HFormGen():oDlgSelected
-   FOR i := 1 TO Len( oDlg:aControls )
+   FOR i := 1 TO Len(oDlg:aControls)
       IF oDlg:aControls[i]:cClass == "menu"
          aMenu := oDlg:aControls[i]:GetProp( "aTree" )
          IF aMenu == Nil
             aMenu := oDlg:aControls[i]:SetProp( "aTree", { { ,"Menu", 32000,Nil } } )
          ENDIF
-         aMenu := aClone( aMenu )
+         aMenu := AClone(aMenu)
          EXIT
       ENDIF
    NEXT
@@ -1044,7 +1044,7 @@ FUNCTION asels_ajustar(najuste)
    LOCAL nCenterLeft
    LOCAL asels := aselCtrls()
 
- IF LEN(aSels) <= 1 .AND. nAjuste <7
+ IF Len(aSels) <= 1 .AND. nAjuste <7
    RETURN Nil
  ENDIF
  oCtrl := asels[1]
@@ -1057,7 +1057,7 @@ FUNCTION asels_ajustar(najuste)
  *-nTop, nLeft, nWidth, nHeight
  ncenterTop := INT(octrl:oparent:nHeight / 2)
  nCenterLeft := INT(octrl:oparent:nWidth / 2)
- IF LEN(aSels) = 1
+ IF Len(aSels) = 1
    IF nAjuste = 8
         // center horizontally
        SetBDown(, 0, 0, 0)
@@ -1070,7 +1070,7 @@ FUNCTION asels_ajustar(najuste)
    RETURN Nil
  ENDIF
 
- FOR i = 2 to len(asels)
+ FOR i = 2 to Len(asels)
     oCtrl := asels[i]
     IF oCtrl != Nil
        nminLeft   := IIf(octrl:nLeft < nminLeft,octrl:nLeft,nminLeft)
@@ -1081,7 +1081,7 @@ FUNCTION asels_ajustar(najuste)
        nmaxheight := IIf(octrl:nHeight > nmaxHeight,octrl:nHeight,nmaxHeight)
     ENDIF
  NEXT
- FOR i = 1 to len(asels)
+ FOR i = 1 to Len(asels)
    oCtrl := asels[i]
     IF nAjuste = 1
       // alinhas a esquerda
@@ -1166,8 +1166,8 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
    yi := ypos
    ypos := yf
  ENDIF
- //msginfo(str(xi)+','+str(yi)+','+str(xpos)+','+str(ypos))
- FOR i = 1 to Len( oDlg:aControls )
+ //msginfo(Str(xi)+","+Str(yi)+","+Str(xpos)+","+Str(ypos))
+ FOR i = 1 to Len(oDlg:aControls)
     oCtrl := oDlg:aControls[i]
     IF ((yi <= oCtrl:nTop +  oCtrl:nHeight .AND. yPos >= oCtrl:nTop) .OR. ;
          (yPos <= oCtrl:nTop + oCtrl:nHeight .AND. yi >= oCtrl:nTop)) .AND. ;

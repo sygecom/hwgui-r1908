@@ -233,7 +233,7 @@ FUNCTION Main(fileXML)
 
     filexml:=""
     IF FILE("XMLRUN.DEF")
-       filexml:=RTRIM(MEMOLINE( MEMOREAD("XMLRUN.DEF"), 128, 1))
+       filexml:=RTrim(MEMOLINE( MEMOREAD("XMLRUN.DEF"), 128, 1))
     ENDIF
 
     IF !FILE(filexml)
@@ -259,7 +259,7 @@ RETURN TRUE
 
 
 FUNCTION rmatch(c,f)
- RETURN (allTrim(c) == "" .OR. Upper(AllTrim(c)) $ Upper(f))
+ RETURN (AllTrim(c) == "" .OR. Upper(AllTrim(c)) $ Upper(f))
 
 
 
@@ -355,7 +355,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
          @ maxrow()-2, 00 clear
          @ maxrow()-1, 00 say ;
          padc([Trying to open database. Will keep trying for ] ;
-         + ltrim(str(nSeconds, 4, 1))+[ seconds], 80)
+         + LTrim(Str(nSeconds, 4, 1))+[ seconds], 80)
          @ maxrow(), 00 say padc([Hit Esc to abort], 80)
 	 */
 
@@ -428,14 +428,14 @@ function reclock(nSeconds)
       if DBRLOCK(OldPos)
          return .t.                     // LOCKED
       endif
-      MsgStop("Record is in use exclusive by another", alias()+" #"+str(oldpos, 11))
+      MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
    enddo
 
 
 
-   MsgStop("Record failed to locked", alias()+" #"+str(oldpos, 11))
+   MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
 
    return .f.                           // NOT LOCKED
 
@@ -464,7 +464,7 @@ function addrec(nSeconds)
       @ maxrow()-2, 00 clear
       @ maxrow()-1, 00 say ;
       padc([Trying to add a record. Will keep trying for ] ;
-      + ltrim(str(nSeconds, 4, 1))+[ seconds], 80)
+      + LTrim(Str(nSeconds, 4, 1))+[ seconds], 80)
       @ maxrow(), 00 say padc([Hit Esc to abort], 80)
       */
 
@@ -490,7 +490,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
    LOCAL dd := ""
    LOCAL mm := ""
    LOCAL yy
-   LOCAL cpress := alltrim(g:title)
+   LOCAL cpress := AllTrim(g:title)
    LOCAL nLen
    LOCAL c := ""
    LOCAL i
@@ -519,7 +519,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
       cpress:=StrTran(cpress,"-","")
       cpress:=StrTran(cpress,"/","")
       cpress:=StrTran(cpress,",","")
-      nLen:=len(cpress)
+      nLen:=Len(cpress)
 
  *:minimum 6  &  max 9 char
 
@@ -539,11 +539,11 @@ function Usr2infStr(g,lKosong) && usr to informix str
        next
 
        *:Kalau 2 Char Pertama Adalah Angka
-       cPress:= if( left(c, 2)=="99", cPress, "0"+cPress)
-            c:= if( left(c, 2)=="99", c,      "9"+c)
+       cPress:= if( Left(c, 2)=="99", cPress, "0"+cPress)
+            c:= if( Left(c, 2)=="99", c,      "9"+c)
 
 	*:isi Hari
-        dd:=left(cPress, 2)+"."
+        dd := Left(cPress, 2)+"."
 
 
 	if subst(c, 3, 3)="AAA"
@@ -560,7 +560,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 	   mm:=StrTran( mm,"Dec","Des")
 	   mm:=StrTran( mm,"Oct","Okt")
 
-           mm:=str((at(mm,"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
+           mm:=Str((at(mm,"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
 
 	   nPot--
 
@@ -570,10 +570,10 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
         end
 
-	   yy:=right(cPress,((len(c)-len(dd+mm))+nPot))
+	   yy := Right(cPress, ((Len(c) - Len(dd + mm)) + nPot))
 
-	   if len(yy)==2
-	      yy:= left(dtos(date()), 2)+yy
+	   if Len(yy) == 2
+	      yy:= Left(dtos(date()), 2)+yy
 	   endif
 
       if  ValType(ctod(dd+mm+yy))!="D"  .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
@@ -598,7 +598,7 @@ function d2infstr(d) && date to informix style string
 
   if Empty(d); return "           "; end
 
-  dd:=right(dtos(d), 2);  yyyy:=left(dtos(d), 4)
+  dd := Right(dtos(d), 2);  yyyy := Left(dtos(d), 4)
 
   mmm:=subst("JanFebMarAprMeiJunJulAgtSepOktNopDes",month(d) * 3 - 2, 3)
 
@@ -610,11 +610,11 @@ function d2infstr(d) && date to informix style string
 
 function infstr2d(s) && informix string to date
 
-   LOCAL dd := left(s, 2)+"/"
-   LOCAL yy := "/"+right(s, 4)
+   LOCAL dd := Left(s, 2)+"/"
+   LOCAL yy := "/"+Right(s, 4)
    LOCAL mm
 
- mm:=str( (at(subst(s, 4, 3),"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
+ mm := Str( (at(subst(s, 4, 3),"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
 
  return ctod(dd+mm+yy)
 

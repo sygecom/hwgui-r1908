@@ -120,7 +120,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    ENDIF
    oColumn := ::aColumns[2]
    cName := Lower(aProp[::cargo, 1])
-   j := Ascan( aDataDef, {|a|a[1]==cName} )
+   j := AScan(aDataDef, {|a|a[1] == cName})
    varbuf := Eval( oColumn:block,,Self, 2 )
 
    IF ( j != 0 .AND. aDataDef[j, 5] != Nil ) .OR. aCtrlProp[oBrw1:cargo, 3] == "A"
@@ -128,7 +128,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
          IF aDataDef[j, 5] == "color"
             varbuf := hwg_ChooseColor( Val(varbuf),.F. )
             IF varbuf != Nil
-               varbuf := Ltrim( Str( varbuf ) )
+               varbuf := LTrim(Str(varbuf))
                lRes := .T.
             ENDIF
          ELSEIF aDataDef[j, 5] == "font"
@@ -150,7 +150,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
             FONT ::oFont                   ;
             WHEN {||PostMessage( oBtn:handle,WM_CLOSE, 0, 0 ),OgET:REFRESH()   ,.T.}
 
-           @ x1,y1-2 BUTTON oBtn CAPTION '...' OF oBrw1;
+           @ x1,y1-2 BUTTON oBtn CAPTION "..." OF oBrw1;
             SIZE 13,::height+6  ;
             ON CLICK {|| (varbuf := IIF (aDataDef[j, 1] == "filename",;
                     SelectFile( "Animation Files( *.avi )", "*.avi"),IIF (aDataDef[j, 1] == "filedbf", ;
@@ -176,7 +176,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
 
       IF lRes
          cName := Lower(aProp[oBrw1:cargo, 1])
-         j := Ascan( aDataDef, {|a|a[1]==cName} )
+         j := AScan(aDataDef, {|a|a[1] == cName})
          value := aProp[oBrw1:cargo, 2] := varbuf
          aCtrlProp[oBrw1:cargo, 2] := value
          IF j != 0 .AND. aDataDef[j, 3] != Nil
@@ -207,9 +207,9 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                IF !Empty(ALIAS(i))
                   aItemsaux  := ARRAY(&(alias(i))->(FCOUNT()) )
                   &(alias(i))->(Afields(aItemsAux))
-                  FOR k = 1 TO LEN(aItemsaux)
-                     AADD(aitems,ALIAS(i) + "->" + aItemsAux[k])
-                      //AADD(aitems, aItemsAux[k])
+                  FOR k = 1 TO Len(aItemsaux)
+                     AAdd(aitems, ALIAS(i) + "->" + aItemsAux[k])
+                      //AAdd(aitems, aItemsAux[k])
                   NEXT
                ENDIF
             NEXT
@@ -219,14 +219,14 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                  aItems := {" "}
                  IF select(alias()) > 0
                     DO WHILE !Empty(ORDNAME(i))
-                        AADD(aItems,ORDNAME(i++))
+                        AAdd(aItems, ORDNAME(i++))
                      ENDDO
                   ENDIF
              ELSE
              aItems := IIf( j != 0 .AND. aDataDef[j, 6] != Nil, aDataDef[j, 6], { "True","False" } )
          ENDIF
          varbuf := AllTrim(varbuf)
-         nChoic := Ascan( aItems,varbuf )
+         nChoic := AScan(aItems, varbuf)
 
          @ x1,y1-2 COMBOBOX oGet           ;
             ITEMS aItems                   ;
@@ -265,7 +265,7 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      if fif == Len( ::aColumns )
+      if fif == Len(::aColumns)
          xSize := Max( ::x2 - x, xSize )
       endif
       if x > ::x1
@@ -276,7 +276,7 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
       endif
       x += xSize
       fif := IIf( fif = ::freeze, ::nLeftCol, fif + 1 )
-      if fif > Len( ::aColumns )
+      if fif > Len(::aColumns)
          exit
       endif
    ENDDO
@@ -306,13 +306,13 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
 
    cName := Lower(aProp[oBrw1:cargo, 1])
 
-   j := Ascan( oDesigner:aDataDef, {|a|a[1]==cName} )
+   j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
 
    IF oGet:Classname() == "HCOMBOBOX"
       vari := SendMessage( oGet:handle,CB_GETCURSEL, 0, 0 ) + 1
       value := aProp[oBrw1:cargo, 2] := oGet:aItems[vari]
    ELSE
-      vari := TRIM(oGet:GetText())   // :LFB -  COLOCOU TRIM
+      vari := Trim(oGet:GetText())   // :LFB -  COLOCOU TRIM
       value := aProp[oBrw1:cargo, 2] := vari
    ENDIF
    IF oCombo:value == 1
@@ -461,15 +461,15 @@ FUNCTION InspSetCombo()
    oCombo:aItems := {}
    IF oDlg != Nil
       n := 0
-      Aadd( oCombo:aItems, "Form." + oDlg:title )
+      AAdd(oCombo:aItems, "Form." + oDlg:title)
       oCtrl := GetCtrlSelected( oDlg )
       aControls := IIf( oDesigner:lReport, oDlg:aControls[1]:aControls[1]:aControls, ;
           oDlg:aControls )
-      FOR i := 1 TO Len( aControls )
+      FOR i := 1 TO Len(aControls)
         if ( oDesigner:lReport )
-            Aadd( oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title!=Nil,Left(aControls[i]:title, 15),Ltrim(str(aControls[i]:id)) ) )
+            AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != Nil, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
         else
-            Aadd( oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2) )
+            AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
         endif
         IF oCtrl != Nil .AND. oCtrl:handle == aControls[i]:handle
             n := i
@@ -495,15 +495,15 @@ FUNCTION InspUpdCombo( n )
       aControls := IIf( oDesigner:lReport, ;
          HFormGen():oDlgSelected:aControls[1]:aControls[1]:aControls, ;
          HFormGen():oDlgSelected:aControls )
-      i := Len( aControls )
-      IF i >= Len( oCombo:aItems )
+      i := Len(aControls)
+      IF i >= Len(oCombo:aItems)
    if ( oDesigner:lReport )
-      Aadd( oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title!=Nil,Left(aControls[i]:title, 15),Ltrim(str(aControls[i]:id)) ) )
+      AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != Nil, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
    else
-      Aadd( oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2) )
+      AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
    endif
 
-      ELSEIF i + 1 < Len( oCombo:aItems )
+      ELSEIF i + 1 < Len(oCombo:aItems)
          Return InspSetCombo()
       ENDIF
    ENDIF
@@ -554,13 +554,13 @@ STATIC FUNCTION InspSetBrowse()
 
    IF oCombo:value > 0
       o := IIf( oCombo:value == 1, HFormGen():oDlgSelected:oParent, GetCtrlSelected( HFormGen():oDlgSelected ) )
-      FOR i := 1 TO Len( o:aProp )
-         IF Len( o:aProp[i] ) == 3
-            Aadd( aProp, { o:aProp[i, 1], o:aProp[i, 2] } )
+      FOR i := 1 TO Len(o:aProp)
+         IF Len(o:aProp[i]) == 3
+            AAdd(aProp, { o:aProp[i, 1], o:aProp[i, 2] })
          ENDIF
       NEXT
-      FOR i := 1 TO Len( o:aMethods )
-         Aadd( aMethods, { o:aMethods[i, 1], o:aMethods[i, 2] } )
+      FOR i := 1 TO Len(o:aMethods)
+         AAdd(aMethods, { o:aMethods[i, 1], o:aMethods[i, 2] })
       NEXT
    ENDIF
 
@@ -569,7 +569,7 @@ STATIC FUNCTION InspSetBrowse()
 
    Eval( oBrw1:bGoTop,oBrw1 )
    Eval( oBrw2:bGoTop,oBrw2 )
-   oBrw1:rowPos := 1 //IIf(nrow > LEN(APROP), 1,NROW-1) //1
+   oBrw1:rowPos := 1 //IIf(nrow > Len(APROP), 1,NROW-1) //1
    oBrw2:rowPos := 1
    oBrw1:Refresh()
    oBrw2:Refresh()
@@ -592,7 +592,7 @@ FUNCTION InspUpdBrowse()
 
    oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
    IF oDesigner:oDlgInsp != Nil
-      FOR i := 1 TO Len( aProp )
+      FOR i := 1 TO Len(aProp)
          value := IIf( oCombo:value == 1,oCtrl:oParent:aProp[i, 2],oCtrl:aProp[i, 2] )
          IF ValType(aProp[i, 2]) != "O" .AND. ValType(aProp[i, 2]) != "A" ;
                .AND. ( aProp[i, 2] == Nil .OR. !( aProp[i, 2] == value ) )
@@ -603,8 +603,8 @@ FUNCTION InspUpdBrowse()
       IF lChg .AND. !oBrw1:lHide
          oBrw1:Refresh()
          // : LFB pos
-         statusbarmsg(,'x: '+ltrim(str(oCtrl:nLeft))+'  y: '+ltrim(str(oCtrl:nTop)),;
-         'w: '+ltrim(str(oCtrl:nWidth))+' h: '+ltrim(str(oCtrl:nHeight)))
+         statusbarmsg(,"x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
+         "w: "+LTrim(Str(oCtrl:nWidth))+" h: "+LTrim(Str(oCtrl:nHeight)))
          // : LFB
       ENDIF
    ENDIF
@@ -616,7 +616,7 @@ FUNCTION InspUpdProp( cName, xValue )
    LOCAL i
 
    cName := Lower(cName)
-   IF ( i := Ascan( aProp, {|a|Lower(a[1]) == Lower(cName)} ) ) > 0
+   IF ( i := AScan(aProp, {|a|Lower(a[1]) == Lower(cName)}) ) > 0
       aProp[i, 2] := xValue
       oBrw1:Refresh()
    ENDIF
@@ -635,7 +635,7 @@ STATIC FUNCTION EditArray( arr )
       arr := {}
    ENDIF
    IF Empty(arr)
-      Aadd( arr,"....." )
+      AAdd(arr,".....")
    ENDIF
    arrold := arr
    INIT DIALOG oDlg TITLE "Edit "+aProp[nRec, 1]+" array" ;
@@ -662,7 +662,7 @@ STATIC FUNCTION EditArray( arr )
    ACTIVATE DIALOG oDlg
 
    IF oDlg:lResult
-      IF Len( arr ) == 1 .AND. arr[1] == "....."
+      IF Len(arr) == 1 .AND. arr[1] == "....."
          arr := Nil //{} NANDO POS
       ENDIF
       Return arr
@@ -675,9 +675,9 @@ STATIC FUNCTION onclick_deleteitem(oBrw)
   IF oBrw:nCurrent = 1 .AND. oBrw:aArray[oBrw:nCurrent] = ".."
     RETURN nil
   ENDIF
-  IF len(obrw:aArray) > 0 .AND. msgyesno("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
-     oBrw:aArray := ADEL(obrw:aArray,oBrw:nCurrent)
-     obrw:aArray := ASIZE(obrw:aArray,len(obrw:aArray)-1)
+  IF Len(obrw:aArray) > 0 .AND. msgyesno("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
+     oBrw:aArray := ADel(obrw:aArray, oBrw:nCurrent)
+     obrw:aArray := ASize(obrw:aArray, Len(obrw:aArray) - 1)
      obrw:refresh()
   ENDIF
 RETURN nil
@@ -706,12 +706,12 @@ FUNCTION ObjInspector(oObject )
 #else
    aClassMsgProp := __ObjGetValueDiff( oObject)
 #endif
-   For i = 1 to len(aClassMsgProp)
+   For i = 1 to Len(aClassMsgProp)
      ctype := ValType(aClassMsgProp[i, 2])
      do case
        CASE ctype="C"
        CASE ctype="N"
-       aClassMsgProp[i, 2] := str(aClassMsgProp[i, 2])
+       aClassMsgProp[i, 2] := Str(aClassMsgProp[i, 2])
        CASE ctype="L"
        aClassMsgProp[i, 2] := IIf(aClassMsgProp[i, 2],"True","False")
        otherwise
@@ -734,11 +734,11 @@ FUNCTION ObjInspector(oObject )
       size 80, 25 ;
       on click { || EndDialog() }
 
-  @ nLeft + 150, ntop+2 SAY "Object: " + 'oObject'  SIZE 200, 24
+  @ nLeft + 150, ntop+2 SAY "Object: " + "oObject"  SIZE 200, 24
    nLin = nTop + 30
 
   @ 6,nlin-5 TAB oPage1 ITEMS {} SIZE 580, 360
-  BEGIN PAGE ' Properties ' OF oPage1
+  BEGIN PAGE " Properties " OF oPage1
    @ 010, nLin browse oBrw array ;
       size 570, 300 ;
       style WS_VSCROLL + WS_HSCROLL
@@ -752,7 +752,7 @@ FUNCTION ObjInspector(oObject )
 
    END PAGE OF oPage1
 
-   BEGIN PAGE ' Methods ' OF oPage1
+   BEGIN PAGE " Methods " OF oPage1
       @ 010, nLin browse oBrw2 array ;
       size 570, 300 ;
       style WS_VSCROLL + WS_HSCROLL
@@ -775,7 +775,7 @@ STATIC Function MessagesOthers( oDlg, msg, wParam, lParam )
 
 HB_SYMBOL_UNUSED( lParam )
 
-   // writelog( str(msg)+str(wParam)+str(lParam) )
+   // writelog( Str(msg)+Str(wParam)+Str(lParam) )
    IF msg == WM_MOUSEMOVE
      * MouseMove( oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
@@ -791,7 +791,7 @@ HB_SYMBOL_UNUSED( lParam )
       Return 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()
-      *MSGINFO('Futura a‡Æo dos Eventos')
+      *MSGINFO("Futura a‡Æo dos Eventos")
       Return 1
    ELSEIF msg == WM_MOVE
    ELSEIF msg == WM_KEYDOWN
@@ -827,11 +827,11 @@ STATIC FUNCTION resettodefault(oBrw1)
    PRIVATE oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
 
      cName := Lower(aProp[oBrw1:nCurrent, 1])
-     j := Ascan( oDesigner:aDataDef, {|a|a[1]==cName} )
+     j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
      IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] = Nil
        return Nil
      ENDIF
-     IF ltrim(oBrw1:aArray[oBrw1:nCurrent, 1]) = "Font"
+     IF LTrim(oBrw1:aArray[oBrw1:nCurrent, 1]) = "Font"
         value := aProp[oBrw1:nCurrent, 2]
         value:name := ""
      ELSE

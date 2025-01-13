@@ -47,24 +47,24 @@ ENDFUNC
   ENDIF
   DO WHILE .T.
     stroka := RDSTR( han,@strbuf,@poz, 512 )
-    IF LEN( stroka ) == 0
+    IF Len(stroka) == 0
       EXIT
     ENDIF
-    IF Left( stroka, 1 ) == ";"
+    IF Left(stroka, 1) == ";"
       LOOP
     ENDIF
-    stroka := Ltrim( stroka )
+    stroka := LTrim(stroka)
     IF nMode == 0
-      IF Left( stroka, 1 ) == "#"
+      IF Left(stroka, 1) == "#"
         IF Upper(SubStr(stroka, 2, 6)) == "REPORT"
-          stroka := Ltrim( SubStr(stroka, 9) )
+          stroka := LTrim(SubStr(stroka, 9))
           IF Empty(oForm:name) .OR. Upper(stroka) == Upper(oForm:name)
             nMode := 1
           ENDIF
         ENDIF
       ENDIF
     ELSEIF nMode == 1
-      IF Left( stroka, 1 ) == "#"
+      IF Left(stroka, 1) == "#"
         IF Upper(SubStr(stroka, 2, 6)) == "ENDREP"
           Exit
         ELSEIF Upper(SubStr(stroka, 2, 6)) == "SCRIPT"
@@ -95,7 +95,7 @@ ENDFUNC
           nVar := Val( NextItem( stroka ) )
 
           oFont := CallFunc( "Str2Font", { cFont } )
-          Aadd( arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar } )
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
           itemName := Lower(itemName)
@@ -107,7 +107,7 @@ ENDFUNC
           nAlign := Val( NextItem( cFont,.T.,"," ) ) + 1
           nVar   := Val( NextItem( cFont,,"," ) )
 
-          Aadd( arr,{ itemName,x,y,nWidth,nHeight,Nil,nAlign,nVar } )
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,nAlign,nVar })
 
         ELSEIF itemName == "BITMAP"
           itemName := Lower(itemName)
@@ -117,7 +117,7 @@ ENDFUNC
           nWidth := Val( NextItem( stroka ) )
           nHeight := Val( NextItem( stroka ) )
 
-          Aadd( arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption } )
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption })
 
         ELSEIF itemName == "MARKER"
           itemName := "area"
@@ -126,44 +126,44 @@ ENDFUNC
           y := Val( NextItem( stroka ) )
           nHeight := 0
           IF cCaption == "EPF"
-            IF ( i := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="PF"} ) ) != 0
+            IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PF"}) ) != 0
               arr[i, 5] := y - arr[i, 3]
             ENDIF
           ELSEIF cCaption == "EL"
           ELSE
             IF cCaption == "SL"
-              IF ( i := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="PH"} ) ) != 0
+              IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) != 0
                 arr[i, 5] := y - arr[i, 3]
               ENDIF
             ELSEIF cCaption == "PF"
-              IF ( i := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="SL"} ) ) != 0
+              IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "SL"}) ) != 0
                 arr[i, 5] := y - arr[i, 3]
               ENDIF
             ELSEIF cCaption == "DF"
-              IF ( i := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="SL"} ) ) != 0 .AND. arr[i, 5] == 0
+              IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "SL"}) ) != 0 .AND. arr[i, 5] == 0
                 arr[i, 5] := y - arr[i, 3]
               ENDIF
               nHeight := Round( oForm:nPHeight*oForm:nKoeff, 0 ) - y
             ENDIF
-            Aadd( arr,{ itemName, 0,y, 9999,nHeight,Nil,cCaption,Nil } )
+            AAdd(arr,{ itemName, 0,y, 9999,nHeight,Nil,cCaption,Nil })
           ENDIF
         ENDIF
       ENDIF
     ELSEIF nMode == 2
-      IF Left( stroka, 1 ) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
+      IF Left(stroka, 1) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
          nMode := 1
          IF itemName == "area"
            IF cm == "SL"
              arr[Len(arr), 6] := cCaption
            ELSE
-             IF ( i := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="SL"} ) ) != 0
+             IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "SL"}) ) != 0
                arr[i, 8] := cCaption
              ENDIF
            ENDIF
          ELSEIF itemName == "label"
            arr[Len(arr), 6] := cCaption
          ELSE
-           IF ( j := Ascan( oForm:aMethods,{|a|a[1]=="onRepInit"} ) ) != 0
+           IF ( j := AScan(oForm:aMethods, {|a|a[1] == "onRepInit"}) ) != 0
               oForm:aMethods[j, 2] := cCaption
            ENDIF
          ENDIF
@@ -171,21 +171,21 @@ ENDFUNC
         cCaption += stroka+Chr(13)+chr(10)
         IF itemName == "FORM"
           DO WHILE !Empty(cFont := getNextVar(@stroka))
-            Aadd( aVars,cFont )
+            AAdd(aVars,cFont)
           ENDDO
         ENDIF
       ENDIF
     ENDIF
   ENDDO
   Fclose( han )
-  arr := Asort( arr,,, {|z,y|z[3]<y[3].OR.(z[3]==y[3].AND.z[2]<y[2]).OR.(z[3]==y[3].AND.z[2]==y[2].AND.(z[4]>y[4].OR.z[5]>y[5]))} )
-  IF ( j := Ascan( arr,{|a|a[1]=="area".AND.a[7]=="PH"} ) ) > 1
-    Aadd( arr,Nil )
-    Ains( arr, 1 )
+  arr := ASort(arr, , , {|z, y|z[3] < y[3] .OR. (z[3] == y[3] .AND. z[2] < y[2]) .OR. (z[3] == y[3] .AND. z[2] == y[2] .AND. (z[4] > y[4] .OR. z[5] > y[5]))})
+  IF ( j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) > 1
+    AAdd(arr,Nil)
+    AIns(arr, 1)
     arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,Nil,"DH",Nil }
   ENDIF
   i := 1
-  DO WHILE i <= Len( arr )
+  DO WHILE i <= Len(arr)
     oArea := Nil
     j := i - 1
     DO WHILE j > 0      
@@ -206,20 +206,20 @@ ENDFUNC
       cCaption := IIf( arr[i, 7]=="PH","PageHeader",IIf( arr[i, 7]=="SL", ;
           "Table",IIf( arr[i, 7]=="PF","PageFooter",IIf( arr[i, 7]=="DH","DocHeader","DocFooter" ) ) ) )
       oArea := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],"area",  ;
-       { { "Left","0" }, { "Top",Ltrim(Str(y)) }, { "Width",cWidth }, ;
-       { "Height",Ltrim(Str(nHeight)) }, { "Right",cWidth }, { "Bottom",Ltrim(Str(y2)) }, { "AreaType",cCaption } } )
+       { { "Left","0" }, { "Top",LTrim(Str(y)) }, { "Width",cWidth }, ;
+       { "Height",LTrim(Str(nHeight)) }, { "Right",cWidth }, { "Bottom",LTrim(Str(y2)) }, { "AreaType",cCaption } } )
       IF arr[i, 6] != Nil
-        j := Ascan( oArea:aMethods,{|a|a[1]=="onBegin"} )
+        j := AScan(oArea:aMethods, {|a|a[1] == "onBegin"})
         oArea:aMethods[j, 2] := arr[i, 6]
       ENDIF
       IF arr[i, 8] != Nil
-        j := Ascan( oArea:aMethods,{|a|a[1]=="onNextLine"} )
+        j := AScan(oArea:aMethods, {|a|a[1] == "onNextLine"})
         oArea:aMethods[j, 2] := arr[i, 8]
       ENDIF
     ELSEIF arr[i, 1] == "label"
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
-       { { "Left",Ltrim(Str(x)) }, { "Top",Ltrim(Str(y)) }, { "Width",Ltrim(Str(nWidth)) }, ;
-       { "Height",Ltrim(Str(nHeight)) }, { "Right",Ltrim(Str(x2)) }, { "Bottom",Ltrim(Str(y2)) }, ;
+       { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
+       { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
        { "Caption",IIf(arr[i, 10]==1,"",arr[i, 7]) }, ;
        { "Justify",IIf(arr[i, 9]=0,"Left",IIf(arr[i, 9]=2,"Center","Right")) }, ;
        {"Font",arr[i, 8]} } )
@@ -228,27 +228,27 @@ ENDFUNC
         oCtrl:oContainer := oArea
       ENDIF
       IF arr[i, 10] == 1
-        j := Ascan( oCtrl:aMethods,{|a|a[1]=="Expression"} )
+        j := AScan(oCtrl:aMethods, {|a|a[1] == "Expression"})
         oCtrl:aMethods[j, 2] := "Return "+arr[i, 7]
       ENDIF
       IF arr[i, 6] != Nil
-        j := Ascan( oCtrl:aMethods,{|a|a[1]=="onBegin"} )
+        j := AScan(oCtrl:aMethods, {|a|a[1] == "onBegin"})
         oCtrl:aMethods[j, 2] := arr[i, 6]
       ENDIF
     ELSEIF arr[i, 1] == "bitmap"
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
-       { { "Left",Ltrim(Str(x)) }, { "Top",Ltrim(Str(y)) }, { "Width",Ltrim(Str(nWidth)) }, ;
-       { "Height",Ltrim(Str(nHeight)) }, { "Right",Ltrim(Str(x2)) }, { "Bottom",Ltrim(Str(y2)) }, { "Bitmap",arr[i, 7] } } )
+       { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
+       { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, { "Bitmap",arr[i, 7] } } )
       IF oArea != Nil
         oArea:AddControl( oCtrl )
         oCtrl:oContainer := oArea
       ENDIF
     ELSE
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
-       { { "Left",Ltrim(Str(x)) }, { "Top",Ltrim(Str(y)) }, { "Width",Ltrim(Str(nWidth)) }, ;
-       { "Height",Ltrim(Str(nHeight)) }, { "Right",Ltrim(Str(x2)) }, { "Bottom",Ltrim(Str(y2)) }, ;
+       { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
+       { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
        {"PenType",{"SOLID","DASH","DOT","DASHDOT","DASHDOTDOT"}[arr[i, 7]]}, ;
-       { "PenWidth",Ltrim(Str(arr[i, 8])) } } )
+       { "PenWidth",LTrim(Str(arr[i, 8])) } } )
       IF oArea != Nil
         oArea:AddControl( oCtrl )
         oCtrl:oContainer := oArea

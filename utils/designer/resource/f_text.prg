@@ -48,14 +48,14 @@ ENDFUNC
    ENDIF
    DO WHILE .T.
       stroka := RDSTR( han,@strbuf,@poz, 512 )
-      IF LEN( stroka ) == 0
+      IF Len(stroka) == 0
          EXIT
       ENDIF
-      stroka := Ltrim( stroka )
+      stroka := LTrim(stroka)
       IF nMode == 0
-         IF Left( stroka, 1 ) == "#"
+         IF Left(stroka, 1) == "#"
             IF Upper(SubStr(stroka, 2, 4)) == "FORM"
-               stroka := Ltrim(SubStr(stroka, 7))
+               stroka := LTrim(SubStr(stroka, 7))
                itemName := NextItem( stroka,.T. )
                IF Empty(oForm:name) .OR. Upper(itemName) == Upper(oForm:name)
                   x := NextItem( stroka )
@@ -73,7 +73,7 @@ ENDFUNC
             ENDIF
          ENDIF
       ELSEIF nMode == 1
-         IF Left( stroka, 1 ) == "#"
+         IF Left(stroka, 1) == "#"
             IF Upper(SubStr(stroka, 2, 7)) == "ENDFORM"
                Exit
             ENDIF
@@ -111,43 +111,43 @@ Return
    PRIVATE stroka
    PRIVATE oCtrl
    PRIVATE aControls := oForm:oDlg:aControls
-   PRIVATE alen := Len( aControls )
+   PRIVATE alen := Len(aControls)
    PRIVATE i
 
    han := Fcreate( fname )
    Fwrite( han, "#FORM " + oForm:name &&
-       + ";" + Ltrim( Str(oForm:oDlg:nLeft) )    &&
-       + ";" + Ltrim( Str(oForm:oDlg:nTop) )     &&
-       + ";" + Ltrim( Str(oForm:oDlg:nWidth) )   &&
-       + ";" + Ltrim( Str(oForm:oDlg:nHeight ) ) &&
-       + ";" + Ltrim( Str(oForm:oDlg:style) )    &&
-       + ";" + IIf(oForm:lGet,"T","F")           &&
-       + ";" + IIf(oForm:oDlg:lClipper,"T","F")  &&
-       + ";" + IIf(oForm:oDlg:oFont!=Nil,        &&
-       oForm:oDlg:oFont:name + "," + Ltrim(Str(oForm:oDlg:oFont:width)) &&
-       + "," + Ltrim(Str(oForm:oDlg:oFont:height)) + "," + Ltrim(Str(oForm:oDlg:oFont:weight)) &&
-       + "," + Ltrim(Str(oForm:oDlg:oFont:charset)) + "," + Ltrim(Str(oForm:oDlg:oFont:italic)) &&
-       + "," + Ltrim(Str(oForm:oDlg:oFont:underline)) + "," + Ltrim(Str(oForm:oDlg:oFont:strikeout)) &&
+       + ";" + LTrim(Str(oForm:oDlg:nLeft))    &&
+       + ";" + LTrim(Str(oForm:oDlg:nTop))     &&
+       + ";" + LTrim(Str(oForm:oDlg:nWidth))   &&
+       + ";" + LTrim(Str(oForm:oDlg:nHeight)) &&
+       + ";" + LTrim(Str(oForm:oDlg:style))    &&
+       + ";" + IIf(oForm:lGet, "T", "F")           &&
+       + ";" + IIf(oForm:oDlg:lClipper, "T", "F")  &&
+       + ";" + IIf(oForm:oDlg:oFont != Nil,        &&
+       oForm:oDlg:oFont:name + "," + LTrim(Str(oForm:oDlg:oFont:width)) &&
+       + "," + LTrim(Str(oForm:oDlg:oFont:height)) + "," + LTrim(Str(oForm:oDlg:oFont:weight)) &&
+       + "," + LTrim(Str(oForm:oDlg:oFont:charset)) + "," + LTrim(Str(oForm:oDlg:oFont:italic)) &&
+       + "," + LTrim(Str(oForm:oDlg:oFont:underline)) + "," + LTrim(Str(oForm:oDlg:oFont:strikeout)) &&
        ,"") &&
        + _Chr(10) )
    i := 1
    DO WHILE i <= alen
       oCtrl := aControls[i]
-      stroka := CnvCtrlName( oCtrl:cClass,.T. ) + ";" + Rtrim( oCtrl:title) &&
-          + ";" + Ltrim( Str(IIf(oCtrl:id<34000,oCtrl:id, 0)) ) &&
-          + ";" + Ltrim( Str(oCtrl:nLeft) )    &&
-          + ";" + Ltrim( Str(oCtrl:nTop) )     &&
-          + ";" + Ltrim( Str(oCtrl:nWidth) )   &&
-          + ";" + Ltrim( Str(oCtrl:nHeight ) ) &&
-          + ";" + Ltrim( Str(oCtrl:style) )    &&
-          + ";" + IIf(oCtrl:oFont!=Nil,        &&
+      stroka := CnvCtrlName( oCtrl:cClass,.T. ) + ";" + RTrim(oCtrl:title) &&
+          + ";" + LTrim(Str(IIf(oCtrl:id < 34000, oCtrl:id, 0))) &&
+          + ";" + LTrim(Str(oCtrl:nLeft))    &&
+          + ";" + LTrim(Str(oCtrl:nTop))     &&
+          + ";" + LTrim(Str(oCtrl:nWidth))   &&
+          + ";" + LTrim(Str(oCtrl:nHeight)) &&
+          + ";" + LTrim(Str(oCtrl:style))    &&
+          + ";" + IIf(oCtrl:oFont != Nil,        &&
           oCtrl:oFont:name + "," + Ltrim(Str(oCtrl:oFont:width)) &&
-          + "," + Ltrim(Str(oCtrl:oFont:height)) + "," + Ltrim(Str(oCtrl:oFont:weight)) &&
-          + "," + Ltrim(Str(oCtrl:oFont:charset)) + "," + Ltrim(Str(oCtrl:oFont:italic)) &&
-          + "," + Ltrim(Str(oCtrl:oFont:underline)) + "," + Ltrim(Str(oCtrl:oFont:strikeout)) &&
+          + "," + LTrim(Str(oCtrl:oFont:height)) + "," + LTrim(Str(oCtrl:oFont:weight)) &&
+          + "," + LTrim(Str(oCtrl:oFont:charset)) + "," + LTrim(Str(oCtrl:oFont:italic)) &&
+          + "," + LTrim(Str(oCtrl:oFont:underline)) + "," + LTrim(Str(oCtrl:oFont:strikeout)) &&
           ,"")  &&
-          + ";" + IIf(oCtrl:tcolor!=Nil.AND.oCtrl:tcolor!=0,Ltrim(Str(oCtrl:tcolor)),"") &&
-          + ";" + IIf(oCtrl:bcolor!=Nil,Ltrim(Str(oCtrl:bcolor)),"")
+          + ";" + IIf(oCtrl:tcolor != Nil .AND. oCtrl:tcolor != 0, LTrim(Str(oCtrl:tcolor)), "") &&
+          + ";" + IIf(oCtrl:bcolor != Nil, Ltrim(Str(oCtrl:bcolor)), "")
       Fwrite( han, stroka + _Chr(10) )
       i++
    ENDDO
