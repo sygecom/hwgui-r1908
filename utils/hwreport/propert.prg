@@ -14,8 +14,8 @@
 #define UDS_SETBUDDYINT     2
 #define UDS_ALIGNRIGHT      4
 
-Static aPenStyles := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
-Static aVariables := { "Static", "Variable" }
+STATIC s_aPenStyles := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
+STATIC s_aVariables := { "Static", "Variable" }
 memvar apaintrep, mypath
 Function LButtonDbl( xPos, yPos )
 Local i, aItem
@@ -52,7 +52,7 @@ Local aModDlg
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndStatic(aItem)}  ;
         ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
-   REDEFINE COMBOBOX aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
+   REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
    aModDlg:Activate()
 
 Return Nil
@@ -66,7 +66,7 @@ Local oFont := aItem[ITEM_FONT]
    IF aItem[ITEM_SCRIPT] != Nil
       SetDlgItemText( hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT] )
    ENDIF
-   // SetComboBox( hDlg, IDC_COMBOBOX3, aVariables, aItem[ITEM_VAR]+1 )
+   // SetComboBox( hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1 )
    SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
@@ -77,7 +77,7 @@ Local hDlg := getmodalhandle()
    aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
    aItem[ITEM_ALIGN] := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0, ;
                           Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ),1,2 ))
-   aItem[ITEM_VAR] := Ascan( aVariables,GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 ) ) - 1
+   aItem[ITEM_VAR] := Ascan( s_aVariables,GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 ) ) - 1
    aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
@@ -99,7 +99,7 @@ Local oPen := aItem[ITEM_PEN]
    INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {|| InitLine(aItem) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndLine(aItem)}
-   REDEFINE COMBOBOX aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
+   REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
    aModDlg:Activate()
 
 Return Nil
@@ -107,7 +107,7 @@ Return Nil
 Static Function InitLine( aItem )
 Local hDlg := getmodalhandle()
 Local oPen := aItem[ITEM_PEN]
-   // SetComboBox( hDlg, IDC_COMBOBOX1, aPenStyles, aPen[1]+1 )
+   // SetComboBox( hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1 )
    IF aItem[ITEM_TYPE] == TYPE_BOX
    ELSE
       SendMessage( GetDlgItem( hDlg,IDC_COMBOBOX2 ), WM_ENABLE, 0, 0 )
@@ -120,7 +120,7 @@ Local hDlg := getmodalhandle()
 Local nWidth := Val( GetEditText( hDlg, IDC_EDIT1 ) )
 Local cType := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
 Local oPen := aItem[ITEM_PEN]
-   i := Ascan( aPenStyles,cType )
+   i := Ascan( s_aPenStyles,cType )
    IF oPen:style != i-1 .OR. oPen:width != nWidth
       oPen:Release()
       aItem[ITEM_PEN] := HPen():Add( i-1,nWidth,0 )
