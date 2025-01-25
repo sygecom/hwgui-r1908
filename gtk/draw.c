@@ -471,33 +471,37 @@ HB_FUNC( DELETEOBJECT )
 
 }
 
-HB_FUNC( DEFINEPAINTSTRU )
+HB_FUNC( HWG_DEFINEPAINTSTRU )
 {
    PHWGUI_PPS pps = (PHWGUI_PPS) hb_xgrab( sizeof(HWGUI_PPS) );
-   
+
    pps->hDC = NULL;
    HB_RETHANDLE( pps );
 }
 
-HB_FUNC( BEGINPAINT )
+HB_FUNC_TRANSLATE(DEFINEPAINTSTRU, HWG_DEFINEPAINTSTRU);
+
+HB_FUNC( HWG_BEGINPAINT )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
    PHWGUI_PPS pps = (PHWGUI_PPS) HB_PARHANDLE(2);
-   PHWGUI_HDC hDC = (PHWGUI_HDC) hb_xgrab( sizeof(HWGUI_HDC) );   
-   
+   PHWGUI_HDC hDC = (PHWGUI_HDC) hb_xgrab( sizeof(HWGUI_HDC) );
+
    memset( hDC, 0, sizeof(HWGUI_HDC) );
    hDC->widget = widget;
    hDC->window = widget->window;
    hDC->gc = gdk_gc_new( widget->window );
    hDC->layout = gtk_widget_create_pango_layout( hDC->widget,NULL );
    hDC->fcolor = hDC->bcolor = -1;
-   
+
    pps->hDC = hDC;
 
    HB_RETHANDLE( hDC );
 }
 
-HB_FUNC( ENDPAINT )
+HB_FUNC_TRANSLATE(BEGINPAINT, HWG_BEGINPAINT);
+
+HB_FUNC( HWG_ENDPAINT )
 {
    PHWGUI_PPS pps = (PHWGUI_PPS) HB_PARHANDLE(2);
    PHWGUI_HDC hDC = pps->hDC;
@@ -508,6 +512,8 @@ HB_FUNC( ENDPAINT )
    hb_xfree( hDC );
    hb_xfree( pps );
 }
+
+HB_FUNC_TRANSLATE(ENDPAINT, HWG_ENDPAINT);
 
 HB_FUNC( GETDC )
 {

@@ -1806,14 +1806,14 @@ METHOD Paint(lLostFocus) CLASS HBrowse
    LOCAL nRecFilter
 
    IF !::active .OR. Empty(::aColumns) .OR. ::lHeadClick  //.OR. ::isMouseOver //.AND. ::internal[1] == WM_MOUSEMOVE)
-      pps := DefinePaintStru()
-      hDC := BeginPaint(::handle, pps)
+      pps := hwg_DefinePaintStru()
+      hDC := hwg_BeginPaint(::handle, pps)
       IF ::lHeadClick .OR. ::isMouseOver
           ::oParent:lSuspendMsgsHandling := .T.
           ::HeaderOut(hDC)
           ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
-      EndPaint(::handle, pps)
+      hwg_EndPaint(::handle, pps)
       ::isMouseOver := .F.
 
       RETURN NIL
@@ -1863,8 +1863,8 @@ ENDIF
 
 // Open Paint procedure
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(::handle, pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(::handle, pps)
 
    IF ::ofont != NIL
       hwg_SelectObject(hDC, ::ofont:handle)
@@ -2118,7 +2118,7 @@ ENDIF
    ENDIF
 
    // End paint block
-   EndPaint(::handle, pps)
+   hwg_EndPaint(::handle, pps)
 
    ::internal[1] := 15
    ::internal[2] := ::rowPos

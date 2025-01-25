@@ -152,10 +152,10 @@ FUNCTION AboutDraw()
    LOCAL pps
    LOCAL hDC
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(getmodalhandle(), pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(getmodalhandle(), pps)
    DrawBitmap(hDC, hBitmap,, 0, 0)
-   EndPaint(getmodalhandle(), pps)
+   hwg_EndPaint(getmodalhandle(), pps)
 
 RETURN NIL
 

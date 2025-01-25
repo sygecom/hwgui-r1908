@@ -363,9 +363,9 @@ METHOD Paint() CLASS HOwnButton
    LOCAL aCoors
    LOCAL state
 
-   pps := DefinePaintStru()
+   pps := hwg_DefinePaintStru()
 
-   hDC := BeginPaint(::handle, pps)
+   hDC := hwg_BeginPaint(::handle, pps)
 
    aCoors := hwg_GetClientRect(::handle)
 
@@ -448,7 +448,7 @@ METHOD Paint() CLASS HOwnButton
 
    ::DrawItems(hDC)
 
-   EndPaint(::handle, pps)
+   hwg_EndPaint(::handle, pps)
 
 RETURN NIL
 

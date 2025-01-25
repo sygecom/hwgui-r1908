@@ -54,8 +54,8 @@ METHOD Paint() CLASS HShadeButton
    LOCAL pps, hDC
    LOCAL nState
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(::handle, pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(::handle, pps)
 
    IF ::state == OBTN_INIT
       ::state := OBTN_NORMAL
@@ -73,7 +73,7 @@ METHOD Paint() CLASS HShadeButton
 
    ::DrawItems(hDC)
 
-   EndPaint(::handle, pps)
+   hwg_EndPaint(::handle, pps)
    RETURN NIL
 
 METHOD END() CLASS HShadeButton

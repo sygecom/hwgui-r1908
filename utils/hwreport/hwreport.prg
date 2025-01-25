@@ -161,8 +161,8 @@ Local step, kolsteps, nsteps
       Return -1
    ENDIF
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint( hWnd, pps )
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint( hWnd, pps )
    aCoors := hwg_GetClientRect( hWnd )
 
    IF aPaintRep[FORM_XKOEFCONST] == 0
@@ -251,7 +251,7 @@ Local step, kolsteps, nsteps
       SetScrollInfo( hWnd, SB_VERT, 1, nSteps+1, 1, kolsteps+1 )
    ENDIF
 
-   EndPaint( hWnd, pps )
+   hwg_EndPaint( hWnd, pps )
 Return 0
 
 Static Function PaintItem( hDC, aItem, aCoors, lPreview )

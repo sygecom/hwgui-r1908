@@ -717,8 +717,8 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
       ::ResizePreviewDlg(oWnd)
    ENDIF
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(oWnd:handle, pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(oWnd:handle, pps)
    aArray := GetPPSRect(pps)
    // tracelog("PPS" + Str(aArray[1]) + Str(aArray[2]) + Str(aArray[3]) + Str(aArray[4]))
 
@@ -780,7 +780,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
       DrawLine(hDC, ::x1, ::y1, ::x2, ::y2)
    #endif
 
-   EndPaint(oWnd:handle, pps)
+   hwg_EndPaint(oWnd:handle, pps)
 
    RETURN NIL
 

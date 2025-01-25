@@ -244,8 +244,8 @@ METHOD MDown() CLASS HNICEButton
 
 METHOD PAINT() CLASS HNICEButton
 
-   LOCAL ps        := DefinePaintStru()
-   LOCAL hDC       := BeginPaint(::handle, ps)
+   LOCAL ps        := hwg_DefinePaintStru()
+   LOCAL hDC       := hwg_BeginPaint(::handle, ps)
    LOCAL Rct
    LOCAL Size
    LOCAL T
@@ -286,7 +286,7 @@ METHOD PAINT() CLASS HNICEButton
       TextOut(hDC, XCtr - Size[1] / 2, YCtr - Size[2] / 2, T)
    ENDIF
 
-   EndPaint(::handle, ps)
+   hwg_EndPaint(::handle, ps)
 
    RETURN Self
 

@@ -973,8 +973,8 @@ STATIC FUNCTION PaintDlg( oDlg )
    LOCAL nBottom
    MEMVAR oDesigner
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint( oDlg:handle, pps )
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint( oDlg:handle, pps )
 
    // aCoors := hwg_GetClientRect( oDlg:handle )
    // FillRect( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], oDlg:brush:handle )
@@ -1069,7 +1069,7 @@ STATIC FUNCTION PaintDlg( oDlg )
 */
    ENDIF
 
-   EndPaint( oDlg:handle, pps )
+   hwg_EndPaint( oDlg:handle, pps )
 
 Return Nil
 
@@ -1078,13 +1078,13 @@ STATIC FUNCTION PaintPanel( oPanel )
    LOCAL pps
    LOCAL hDC
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint( oPanel:handle, pps )
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint( oPanel:handle, pps )
 
    IF oPanel:oParent:Classname() == "HPANEL"
    ENDIF
 
-   EndPaint( oPanel:handle, pps )
+   hwg_EndPaint( oPanel:handle, pps )
 
 Return Nil
 

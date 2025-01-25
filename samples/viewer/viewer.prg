@@ -343,8 +343,8 @@ STATIC FUNCTION PaintWindow(oWnd)
    nOffsV := nStepV * stepV
    nOffsH := nStepH * stepH
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(oWnd:handle, pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(oWnd:handle, pps)
 
    // writelog("Paint: " + str(Round(oImage:nWidth * nKoef, 0)) + str(Round(oImage:nHeight * nKoef, 0)))
 #ifdef __FREEIMAGE__
@@ -356,7 +356,7 @@ STATIC FUNCTION PaintWindow(oWnd)
    IF lScrollV
       SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
    ENDIF
-   EndPaint(oWnd:handle, pps)
+   hwg_EndPaint(oWnd:handle, pps)
 
 RETURN 0
 */

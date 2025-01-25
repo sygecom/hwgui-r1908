@@ -121,8 +121,8 @@ METHOD Paint() CLASS HSplitter
    LOCAL pps, hDC, aCoors, x1, y1, x2, y2, oBrushFill
 
 
-   pps := DefinePaintStru()
-   hDC := BeginPaint(::handle, pps)
+   pps := hwg_DefinePaintStru()
+   hDC := hwg_BeginPaint(::handle, pps)
    aCoors := hwg_GetClientRect(::handle)
 
    x1 := aCoors[1] //+ IIf(::lVertical, 1, 2)
@@ -145,7 +145,7 @@ METHOD Paint() CLASS HSplitter
    ELSEIF !::lMoved .AND. ::BackStyle == OPAQUE
       DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP)) //+ BF_MIDDLE)
    ENDIF
-   EndPaint(::handle, pps)
+   hwg_EndPaint(::handle, pps)
 
    RETURN NIL
 

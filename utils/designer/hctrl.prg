@@ -1126,7 +1126,7 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
    LOCAL xf
    LOCAL yf
 
-   pps := DefinePaintStru()
+   pps := hwg_DefinePaintStru()
    hDC := GetDC( GetActiveWindow() )
    IF oPenSel == Nil
       oPenSel := HPen():Add( PS_SOLID, 1, 255 )

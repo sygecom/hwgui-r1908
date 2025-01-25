@@ -233,8 +233,8 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
       RETURN NIL
    ENDIF
 
-   pps    := DefinePaintStru()
-   hDC    := BeginPaint(::handle, pps)
+   pps    := hwg_DefinePaintStru()
+   hDC    := hwg_BeginPaint(::handle, pps)
    aCoors := hwg_GetClientRect(::handle)
 
    SetBkMode(hDC, ::backStyle)
@@ -262,7 +262,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
          oPenLight:Release()
       ENDIF
    ENDIF
-   EndPaint(::handle, pps)
+   hwg_EndPaint(::handle, pps)
    RETURN NIL
 
 METHOD Release() CLASS HPanel
