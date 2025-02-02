@@ -59,7 +59,7 @@ RETURN Self
 METHOD Activate() CLASS HAnimation
 
    IF !Empty(::oParent:handle)
-      ::handle := Animate_Create(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_Animate_Create(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 
@@ -72,9 +72,9 @@ METHOD Init() CLASS HAnimation
    IF !::lInit
       ::Super:Init()
       IF ::xResID != NIL
-         Animate_OpenEx(::handle, GetResources(), ::xResID)
+         hwg_Animate_OpenEx(::handle, GetResources(), ::xResID)
       ELSEIF ::cFileName != NIL
-         Animate_Open(::handle, ::cFileName)
+         hwg_Animate_Open(::handle, ::cFileName)
       ENDIF
    ENDIF
 
@@ -86,7 +86,7 @@ METHOD Open(cFileName) CLASS HAnimation
 
    IF cFileName != NIL
       ::cFileName := cFileName
-      Animate_Open(::handle, ::cFileName)
+      hwg_Animate_Open(::handle, ::cFileName)
    ENDIF
 
 RETURN NIL
@@ -98,7 +98,7 @@ METHOD Play(nFrom, nTo, nRep) CLASS HAnimation
    nFrom := IIf(nFrom == NIL, 0, nFrom)
    nTo := IIf(nTo == NIL, -1, nTo)
    nRep := IIf(nRep == NIL, -1, nRep)
-   Animate_Play(::handle, nFrom, nTo, nRep)
+   hwg_Animate_Play(::handle, nFrom, nTo, nRep)
 
 RETURN Self
 
@@ -107,7 +107,7 @@ RETURN Self
 METHOD Seek(nFrame) CLASS HAnimation
 
    nFrame := IIf(nFrame == NIL, 0, nFrame)
-   Animate_Seek(::handle, nFrame)
+   hwg_Animate_Seek(::handle, nFrame)
 
 RETURN Self
 
@@ -115,7 +115,7 @@ RETURN Self
 
 METHOD Stop() CLASS HAnimation
 
-   Animate_Stop(::handle)
+   hwg_Animate_Stop(::handle)
 
 RETURN Self
 
@@ -123,7 +123,7 @@ RETURN Self
 
 METHOD Close() CLASS HAnimation
 
-   Animate_Close(::handle)
+   hwg_Animate_Close(::handle)
 
 RETURN NIL
 
@@ -131,7 +131,7 @@ RETURN NIL
 
 METHOD Destroy() CLASS HAnimation
 
-   Animate_Destroy(::handle)
+   hwg_Animate_Destroy(::handle)
 
 RETURN NIL
 
