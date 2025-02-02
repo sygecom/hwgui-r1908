@@ -916,7 +916,7 @@ METHOD InitMatrix25(lCheck) CLASS BarCode
 /*
 RICH_RECTANGLE(HDC, nLeft, nTop, nRight, nBottom) --> .T.|.F.
 */
-HB_FUNC(RICH_RECTANGLE)
+HB_FUNC_STATIC(RICH_RECTANGLE)
 {
   hwg_ret_BOOL(Rectangle(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5)));
 }
@@ -924,7 +924,7 @@ HB_FUNC(RICH_RECTANGLE)
 /*
 RICH_CREATEPEN(nStyle, nWidth, nColor) --> HPEN
 */
-HB_FUNC(RICH_CREATEPEN)
+HB_FUNC_STATIC(RICH_CREATEPEN)
 {
   hwg_ret_HPEN(CreatePen(hwg_par_int(1), hwg_par_int(2), hwg_par_COLORREF(3)));
 }
@@ -932,7 +932,7 @@ HB_FUNC(RICH_CREATEPEN)
 /*
 RICH_SELECTOBJECT(HDC, HGDIOBJ) --> HGDIOBJ
 */
-HB_FUNC(RICH_SELECTOBJECT)
+HB_FUNC_STATIC(RICH_SELECTOBJECT)
 {
   hwg_ret_HGDIOBJ(SelectObject(hwg_par_HDC(1), hwg_par_HGDIOBJ(2)));
 }
@@ -940,7 +940,7 @@ HB_FUNC(RICH_SELECTOBJECT)
 /*
 RICH_CREATESOLIDBRUSH(nColor) --> HBRUSH
 */
-HB_FUNC(RICH_CREATESOLIDBRUSH)
+HB_FUNC_STATIC(RICH_CREATESOLIDBRUSH)
 {
   hwg_ret_HBRUSH(CreateSolidBrush(hwg_par_COLORREF(1)));
 }
