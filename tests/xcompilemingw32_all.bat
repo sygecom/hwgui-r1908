@@ -1,4 +1,5 @@
 call xcompilemingw32 animation
+call xcompilemingw32 barcode
 call xcompilemingw32 browse
 call xcompilemingw32 browse2
 call xcompilemingw32 button
@@ -14,6 +15,7 @@ call xcompilemingw32 getcombobox
 call xcompilemingw32 getcombobox2
 call xcompilemingw32 getcombobox3
 call xcompilemingw32 getdatepicker
+call xcompilemingw32 getipaddress
 call xcompilemingw32 grid
 call xcompilemingw32 listbox
 call xcompilemingw32 mainwindow

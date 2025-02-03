@@ -1,4 +1,5 @@
 call xcompilemsvc32 animation
+call xcompilemsvc32 barcode
 call xcompilemsvc32 browse
 call xcompilemsvc32 browse2
 call xcompilemsvc32 button
@@ -14,6 +15,7 @@ call xcompilemsvc32 getcombobox
 call xcompilemsvc32 getcombobox2
 call xcompilemsvc32 getcombobox3
 call xcompilemsvc32 getdatepicker
+call xcompilemsvc32 getipaddress
 call xcompilemsvc32 grid
 call xcompilemsvc32 listbox
 call xcompilemsvc32 mainwindow

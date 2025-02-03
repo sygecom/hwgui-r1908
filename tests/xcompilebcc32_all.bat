@@ -1,4 +1,5 @@
 call xcompilebcc32 animation
+call xcompilebcc32 barcode
 call xcompilebcc32 browse
 call xcompilebcc32 browse2
 call xcompilebcc32 button
@@ -14,6 +15,7 @@ call xcompilebcc32 getcombobox
 call xcompilebcc32 getcombobox2
 call xcompilebcc32 getcombobox3
 call xcompilebcc32 getdatepicker
+call xcompilebcc32 getipaddress
 call xcompilebcc32 grid
 call xcompilebcc32 listbox
 call xcompilebcc32 mainwindow

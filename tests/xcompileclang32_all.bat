@@ -1,4 +1,5 @@
 call xcompileclang32 animation
+call xcompileclang32 barcode
 call xcompileclang32 browse
 call xcompileclang32 browse2
 call xcompileclang32 button
@@ -14,6 +15,7 @@ call xcompileclang32 getcombobox
 call xcompileclang32 getcombobox2
 call xcompileclang32 getcombobox3
 call xcompileclang32 getdatepicker
+call xcompileclang32 getipaddress
 call xcompileclang32 grid
 call xcompileclang32 listbox
 call xcompileclang32 mainwindow
