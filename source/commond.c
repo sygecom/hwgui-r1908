@@ -16,7 +16,6 @@
 
 HB_FUNC(SELECTFONT)
 {
-
   CHOOSEFONT cf;
   LOGFONT lf;
   HFONT hfont;
@@ -24,7 +23,7 @@ HB_FUNC(SELECTFONT)
   PHB_ITEM temp1;
   PHB_ITEM aMetr = hb_itemArrayNew(9), temp;
 
-  /* Initialize members of the CHOOSEFONT structure. */
+  // Initialize members of the CHOOSEFONT structure.
   if (pObj)
   {
     memset(&lf, 0, sizeof(LOGFONT));
@@ -64,7 +63,7 @@ HB_FUNC(SELECTFONT)
   cf.nSizeMin = 0;
   cf.nSizeMax = 0;
 
-  /* Display the CHOOSEFONT common-dialog box. */
+  // Display the CHOOSEFONT common-dialog box.
 
   if (!ChooseFont(&cf))
   {
@@ -73,9 +72,9 @@ HB_FUNC(SELECTFONT)
     return;
   }
 
-  /* Create a logical font based on the user's   */
-  /* selection and return a handle identifying   */
-  /* that font.                                  */
+  // Create a logical font based on the user's
+  // selection and return a handle identifying
+  // that font.
 
   hfont = CreateFontIndirect(cf.lpLogFont);
 
@@ -358,13 +357,11 @@ HB_FUNC(HDGETSERIAL)
   hb_strfree(hStr);
 }
 
-/*
- The functions added by extract for the Minigui Lib Open Source project
- Copyright 2002 Roberto Lopez <roblez@ciudad.com.ar>
- http://www.geocities.com/harbour_minigui/
- HB_FUNC(GETPRIVATEPROFILESTRING)
- HB_FUNC(WRITEPRIVATEPROFILESTRING)
-*/
+// The functions added by extract for the Minigui Lib Open Source project
+// Copyright 2002 Roberto Lopez <roblez@ciudad.com.ar>
+// http://www.geocities.com/harbour_minigui/
+// HB_FUNC(GETPRIVATEPROFILESTRING)
+// HB_FUNC(WRITEPRIVATEPROFILESTRING)
 
 HB_FUNC(GETPRIVATEPROFILESTRING)
 {
@@ -423,16 +420,16 @@ static void StartPrn(void)
 
     PrintDlg(&s_pd);
 
-    /*
-       if (PrintDlg(&s_pd) == TRUE)
-       {
-         hb_retl(TRUE);
-       }
-       else
-       {
-         hb_retl(FALSE);
-       }
-     */
+#if 0
+    if (PrintDlg(&s_pd) == TRUE)
+    {
+      hb_retl(TRUE);
+    }
+    else
+    {
+      hb_retl(FALSE);
+    }
+#endif
   }
 }
 
