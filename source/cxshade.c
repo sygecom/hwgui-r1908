@@ -42,21 +42,21 @@ typedef struct CXDIB_STRU
 
 } CXDIB, *PCXDIB;
 
-PCXDIB cxdib_New(void);
-void cxdib_Release(PCXDIB pdib);
-BOOL cxdib_IsWin30Dib(PCXDIB pdib);
-WORD cxdib_GetPaletteSize(PCXDIB pdib);
-BYTE *cxdib_GetBits(PCXDIB pdib);
-long cxdib_GetSize(PCXDIB pdib);
-BOOL cxdib_IsValid(PCXDIB pdib);
-void cxdib_Clone(PCXDIB pdib, PCXDIB src);
-void cxdib_Clear(PCXDIB pdib, BYTE bval);
-HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount);
-long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset);
-long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize);
-void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b);
-void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc);
-void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i);
+//PCXDIB cxdib_New(void); // not used
+static void cxdib_Release(PCXDIB pdib);
+//BOOL cxdib_IsWin30Dib(PCXDIB pdib); // not used
+static WORD cxdib_GetPaletteSize(PCXDIB pdib);
+static BYTE *cxdib_GetBits(PCXDIB pdib);
+static long cxdib_GetSize(PCXDIB pdib);
+static BOOL cxdib_IsValid(PCXDIB pdib);
+static void cxdib_Clone(PCXDIB pdib, PCXDIB src);
+static void cxdib_Clear(PCXDIB pdib, BYTE bval);
+static HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount);
+static long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset);
+static long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize);
+static void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b);
+static void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc);
+static void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i);
 
 typedef struct CXSHADE_STRU
 {
@@ -68,15 +68,15 @@ typedef struct CXSHADE_STRU
 
 } CXSHADE, *PCXSHADE;
 
-PCXSHADE cxshade_New(RECT *prect, BOOL lFlat);
-void cxshade_Release(PCXSHADE pshade);
-void cxshade_Draw(PCXSHADE pshade, HDC pRealDC, short state);
-void cxshade_SetShade(PCXSHADE pshade, UINT shadeID, BYTE palette, BYTE granularity, BYTE highlight, BYTE coloring,
+static PCXSHADE cxshade_New(RECT *prect, BOOL lFlat);
+static void cxshade_Release(PCXSHADE pshade);
+static void cxshade_Draw(PCXSHADE pshade, HDC pRealDC, short state);
+static void cxshade_SetShade(PCXSHADE pshade, UINT shadeID, BYTE palette, BYTE granularity, BYTE highlight, BYTE coloring,
                       COLORREF color, RECT *prect);
-void cxshade_SetFlat(PCXSHADE pshade, BOOL bFlag);
-COLORREF cxshade_SetTextColor(PCXSHADE pshade, COLORREF new_color);
+//void cxshade_SetFlat(PCXSHADE pshade, BOOL bFlag); // not used
+//COLORREF cxshade_SetTextColor(PCXSHADE pshade, COLORREF new_color); // not used
 
-void Draw3dRect(HDC hDC, RECT *lprect, COLORREF clrTopLeft, COLORREF clrBottomRight)
+static void Draw3dRect(HDC hDC, RECT *lprect, COLORREF clrTopLeft, COLORREF clrBottomRight)
 {
   RECT r;
   int x, y, cx, cy;
@@ -103,7 +103,7 @@ void Draw3dRect(HDC hDC, RECT *lprect, COLORREF clrTopLeft, COLORREF clrBottomRi
   ExtTextOut(hDC, 0, 0, ETO_OPAQUE, &r, NULL, 0, NULL);
 }
 
-void cxdib_Release(PCXDIB pdib)
+static void cxdib_Release(PCXDIB pdib)
 {
   if (pdib->hDib)
   {
@@ -111,12 +111,12 @@ void cxdib_Release(PCXDIB pdib)
   }
 }
 
-WORD cxdib_GetPaletteSize(PCXDIB pdib)
+static WORD cxdib_GetPaletteSize(PCXDIB pdib)
 {
   return (pdib->m_nColors * sizeof(RGBQUAD));
 }
 
-BYTE *cxdib_GetBits(PCXDIB pdib)
+static BYTE *cxdib_GetBits(PCXDIB pdib)
 {
   if (pdib->hDib)
   {
@@ -125,17 +125,17 @@ BYTE *cxdib_GetBits(PCXDIB pdib)
   return NULL;
 }
 
-long cxdib_GetSize(PCXDIB pdib)
+static long cxdib_GetSize(PCXDIB pdib)
 {
   return pdib->m_bi.biSize + pdib->m_bi.biSizeImage + cxdib_GetPaletteSize(pdib);
 }
 
-BOOL cxdib_IsValid(PCXDIB pdib)
+static BOOL cxdib_IsValid(PCXDIB pdib)
 {
   return (pdib->hDib != NULL);
 }
 
-void cxdib_Clone(PCXDIB pdib, PCXDIB src)
+static void cxdib_Clone(PCXDIB pdib, PCXDIB src)
 {
   cxdib_Create(pdib, src->m_bi.biWidth, src->m_bi.biHeight, src->m_bi.biBitCount);
   if (pdib->hDib)
@@ -144,7 +144,7 @@ void cxdib_Clone(PCXDIB pdib, PCXDIB src)
   }
 }
 
-void cxdib_Clear(PCXDIB pdib, BYTE bval)
+static void cxdib_Clear(PCXDIB pdib, BYTE bval)
 {
   if (pdib->hDib)
   {
@@ -152,7 +152,7 @@ void cxdib_Clear(PCXDIB pdib, BYTE bval)
   }
 }
 
-HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount)
+static HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount)
 {
   LPBITMAPINFOHEADER lpbi; // pointer to BITMAPINFOHEADER
   DWORD dwLen;             // size of memory block
@@ -231,7 +231,7 @@ HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount)
   return pdib->hDib; // return handle to the DIB
 }
 
-long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset)
+static long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset)
 {
   if ((pdib->hDib) && (pDC))
   {
@@ -245,7 +245,7 @@ long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset)
   return 0;
 }
 
-long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize)
+static long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize)
 {
   if ((pdib->hDib) && (pDC))
   {
@@ -259,7 +259,7 @@ long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize,
   return 0;
 }
 
-void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b)
+static void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b)
 {
   if ((pdib->hDib) && (pdib->m_nColors))
   {
@@ -275,7 +275,7 @@ void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b)
   }
 }
 
-void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc)
+static void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc)
 {
   if ((pdib->hDib == NULL) || (pdib->m_nColors == 0))
   {
@@ -303,7 +303,7 @@ void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc)
   }
 }
 
-void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i)
+static void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i)
 {
   BYTE *iDst;
 
@@ -318,7 +318,7 @@ void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i)
 
 /*  --------------------------------------------------------------  */
 
-PCXSHADE cxshade_New(RECT *prect, BOOL lFlat)
+static PCXSHADE cxshade_New(RECT *prect, BOOL lFlat)
 {
   PCXSHADE pshade = (PCXSHADE)hb_xgrab(sizeof(CXSHADE));
 
@@ -331,7 +331,7 @@ PCXSHADE cxshade_New(RECT *prect, BOOL lFlat)
   return pshade;
 }
 
-void cxshade_Release(PCXSHADE pshade)
+static void cxshade_Release(PCXSHADE pshade)
 {
   cxdib_Release(&(pshade->m_dNormal));
   cxdib_Release(&(pshade->m_dDown));
@@ -342,7 +342,7 @@ void cxshade_Release(PCXSHADE pshade)
   hb_xfree(pshade);
 }
 
-void cxshade_Draw(PCXSHADE pshade, HDC pRealDC, short state)
+static void cxshade_Draw(PCXSHADE pshade, HDC pRealDC, short state)
 {
   int cx = pshade->m_rect.right - pshade->m_rect.left;
   int cy = pshade->m_rect.bottom - pshade->m_rect.top;
@@ -459,7 +459,7 @@ void cxshade_Draw(PCXSHADE pshade, HDC pRealDC, short state)
 }
 
 // #include "stdio.h"
-void cxshade_SetShade(PCXSHADE pshade, UINT shadeID, BYTE palette, BYTE granularity, BYTE highlight, BYTE coloring,
+static void cxshade_SetShade(PCXSHADE pshade, UINT shadeID, BYTE palette, BYTE granularity, BYTE highlight, BYTE coloring,
                       COLORREF color, RECT *prect)
 {
   long sXSize, sYSize, bytes, j, i, k, h;
