@@ -46,8 +46,8 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
               bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
               cTooltip, lEnabled)
 
-   ::hShade := shade_New(0, 0, nWidth, nHeight, lFlat)
-   shade_Set(::hShade, shadeID, palette, granularity, highlight, coloring, shcolor)
+   ::hShade := hwg_Shade_New(0, 0, nWidth, nHeight, lFlat)
+   hwg_Shade_Set(::hShade, shadeID, palette, granularity, highlight, coloring, shcolor)
    RETURN Self
 
 METHOD Paint() CLASS HShadeButton
@@ -69,7 +69,7 @@ METHOD Paint() CLASS HShadeButton
       nState := STATE_DISABLED
    ENDIF
 
-   shade_Draw(::hShade, hDC, nState)
+   hwg_Shade_Draw(::hShade, hDC, nState)
 
    ::DrawItems(hDC)
 
@@ -79,5 +79,5 @@ METHOD Paint() CLASS HShadeButton
 METHOD END() CLASS HShadeButton
 
    ::Super:END()
-   shade_Release(::hShade)
+   hwg_Shade_Release(::hShade)
    RETURN NIL
