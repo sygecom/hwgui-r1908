@@ -78,7 +78,7 @@ FUNCTION FileOpen()
 
    LOCAL fname
 
-        fname := SelectFile("Select File", "*.*")
+        fname := hwg_SelectFile("Select File", "*.*")
 
         Zap
         APPEND FROM (fname) SDF

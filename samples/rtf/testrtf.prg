@@ -48,7 +48,7 @@ FUNCTION TestRtf()
    LOCAL aMarca
    LOCAL lFormato := .F.
 
-   cOutFile := SaveFile("*.rtf", "RTF files( *.rtf )", "*.rtf")
+   cOutFile := hwg_SaveFile("*.rtf", "RTF files( *.rtf )", "*.rtf")
    IF Empty(cOutFile)
       RETURN NIL
    ENDIF

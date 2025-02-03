@@ -105,7 +105,7 @@ Return Nil
 
 Static Function FileOpen
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Local fname := SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
+Local fname := hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
 Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
 
    IF !Empty(fname)
@@ -272,7 +272,7 @@ Return Nil
 
 Static Function OpenIndex()
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Local fname := SelectFile( "index files( *.cdx )", "*.cdx", mypath )
+Local fname := hwg_SelectFile( "index files( *.cdx )", "*.cdx", mypath )
 Memvar oBrw
 
    IF Len(oBrw:aColumns) == 0

@@ -136,7 +136,7 @@ Local aModDlg, res := .T.
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndBitmap(aItem)}  ;
         ON 0,IDCANCEL     ACTION {|| res := .F.,EndDialog( getmodalhandle() )} ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||OpenBmp(aItem,SelectFile("Bitmap files( *.bmp )", "*.bmp",mypath))} ;
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||OpenBmp(aItem,hwg_SelectFile("Bitmap files( *.bmp )", "*.bmp",mypath))} ;
         ON EN_CHANGE,IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
    aModDlg:Activate()
 

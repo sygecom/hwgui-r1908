@@ -54,9 +54,9 @@ Local fname, s1, s2
       s2 := "*.prg"
    ENDIF
    IF lOpen
-      fname := SelectFile( s1, s2,mypath )
+      fname := hwg_SelectFile( s1, s2,mypath )
    ELSE
-      fname := SaveFile( s2,s1,s2,mypath )
+      fname := hwg_SaveFile( s2,s1,s2,mypath )
    ENDIF
    SetDlgItemText( hDlg, IDC_EDIT1, fname )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )

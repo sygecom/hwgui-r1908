@@ -281,7 +281,7 @@ FUNCTION Texto()
    LOCAL oCombo
 
    m_a001 := {}
-   vText := SELECTFile("Arquivos Texto", "*.PRG", CurDir())
+   vText := hwg_SelectFile("Arquivos Texto", "*.PRG", CurDir())
    oFunc := {}
    oLinha := {}
    if Empty(vText)
@@ -691,7 +691,7 @@ FUNCTION Salvar_Projeto(oOpcao)
      IF oWindow != Nil
         aControls := oWindow
         If Empty(vText) .or. oOpcao=2
-            fName := SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
+            fName := hwg_SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
         Else
             fName := vText
         Endif

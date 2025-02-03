@@ -81,7 +81,7 @@ void cancel_font(gpointer fontseldlg)
   hb_ret();
 }
 
-HB_FUNC(SELECTFONT)
+HB_FUNC(HWG_SELECTFONT)
 {
   GtkWidget *fontseldlg;
   GtkFontSelection *fontsel;
@@ -106,6 +106,8 @@ HB_FUNC(SELECTFONT)
   gtk_main();
 }
 
+HB_FUNC_TRANSLATE(SELECTFONT, HWG_SELECTFONT);
+
 void store_filename(gpointer file_selector)
 {
   hb_retc((char *)gtk_file_selection_get_filename(GTK_FILE_SELECTION(file_selector)));
@@ -118,7 +120,7 @@ void cancel_filedlg(gpointer file_selector)
   gtk_widget_destroy((GtkWidget *)file_selector);
 }
 
-HB_FUNC(SELECTFILE)
+HB_FUNC(HWG_SELECTFILE)
 {
   GtkWidget *file_selector;
   const char *cMask = (hb_pcount() > 1 && HB_ISCHAR(2)) ? hb_parc(2) : NULL;
@@ -138,10 +140,12 @@ HB_FUNC(SELECTFILE)
   {
     gtk_file_selection_complete((GtkFileSelection *)file_selector, cMask);
   }
-  
+
   gtk_widget_show(file_selector);
   gtk_main();
 }
+
+HB_FUNC_TRANSLATE(SELECTFILE, HWG_SELECTFILE);
 
 void store_color(gpointer colorseldlg)
 {

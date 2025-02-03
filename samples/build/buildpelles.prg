@@ -179,7 +179,7 @@ RETURN NIL
 STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 
    LOCAL oTextAnt := oGet:GetText()
-   LOCAL fFile := SelectFile(nName + " (" + oFile + ")", oFile, , , .T.)
+   LOCAL fFile := hwg_SelectFile(nName + " (" + oFile + ")", oFile, , , .T.)
 
    If !Empty(oTextAnt)
       fFile := oTextAnt //
@@ -203,7 +203,7 @@ FUNCTION ReadBuildFile()
    LOCAL i
    LOCAL oSel4
    LOCAL aPal := ""
-   LOCAL oFolderFile := SelectFile("HwGUI File Build (*.bld)", "*.bld")
+   LOCAL oFolderFile := hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld")
 
    if Empty(oFolderFile)
       RETURN NIL
@@ -262,7 +262,7 @@ FUNCTION SaveBuildFile()
    LOCAL i
    LOCAL oNome
    LOCAL g
-   LOCAL oFolderFile := SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld")
+   LOCAL oFolderFile := hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld")
 
    if Empty(oFolderFile)
       RETURN NIL

@@ -398,7 +398,7 @@ METHOD OpenFile(cFile) CLASS HRichEdit
 METHOD Print() CLASS HRichEdit
 
    IF ::hDCPrinter == NIL
-    //  ::hDCPrinter := PrintSetup()
+    //  ::hDCPrinter := hwg_PrintSetup()
    ENDIF
    IF HWG_STARTDOC(::hDCPrinter) != 0
       IF PrintRTF(::handle, ::hDCPrinter) != 0

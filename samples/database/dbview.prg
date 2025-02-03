@@ -119,7 +119,7 @@ RETURN NIL
 STATIC FUNCTION FileOpen()
 
    LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-   LOCAL fname := SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
+   LOCAL fname := hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 
    MEMVAR oBrw
    MEMVAR oSay1
@@ -315,7 +315,7 @@ RETURN NIL
 STATIC FUNCTION OpenIndex()
 
    LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-   LOCAL fname := SelectFile("index files( *.cdx )", "*.cdx", mypath)
+   LOCAL fname := hwg_SelectFile("index files( *.cdx )", "*.cdx", mypath)
 
    MEMVAR oBrw
 

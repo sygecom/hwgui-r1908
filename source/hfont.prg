@@ -90,7 +90,7 @@ RETURN Self
 
 METHOD Select(oFont, nCharSet) CLASS HFont
 
-   LOCAL af := SelectFont(oFont)
+   LOCAL af := hwg_SelectFont(oFont)
 
    IF af == NIL
       RETURN NIL

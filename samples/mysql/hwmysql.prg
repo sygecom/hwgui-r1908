@@ -98,7 +98,7 @@ FUNCTION Main()
 
    @ 0, 0 PANEL oPanelE OF oMainWindow SIZE 0, 24 ON SIZE {||.T.}
 
-   @ 0, 2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText(Memoread(SelectFile("Script files( *.scr )", "*.scr", mypath)))};
+   @ 0, 2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText(Memoread(hwg_SelectFile("Script files( *.scr )", "*.scr", mypath)))};
         SIZE 20, 22 FLAT ;
         BITMAP "BMP_OPEN" FROM RESOURCE TOOLTIP "Load script"
    @ 0, 24 OWNERBUTTON OF oPanelE ID 115 ON CLICK {||SaveScript()} ;
@@ -566,7 +566,7 @@ RETURN IIf(( i := RAT(".", fname) ) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION SaveScript()
 
-   LOCAL fname := SaveFile("*.scr", "Script files( *.scr )", "*.scr", mypath)
+   LOCAL fname := hwg_SaveFile("*.scr", "Script files( *.scr )", "*.scr", mypath)
 
    cQuery := oEdit:GetText()
    IF !Empty(fname)

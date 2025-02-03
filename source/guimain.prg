@@ -376,7 +376,7 @@ FUNCTION EndWindow()
 
 FUNCTION HdSerial(cDrive)
 
-   LOCAL n       :=  HDGETSERIAL(cDrive)
+   LOCAL n       :=  hwg_HDGetSerial(cDrive)
    LOCAL cHex    :=  HB_NUMTOHEX(n)
    LOCAL cResult
    cResult := SubStr(cHex, 1, 4) + "-" + SubStr(cHex, 5, 4)
@@ -384,10 +384,10 @@ FUNCTION HdSerial(cDrive)
    RETURN cResult
 
 FUNCTION hwg_GetIni(cSection, cEntry, cDefault, cFile)
-   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile)
+   RETURN hwg_GetPrivateProfileString(cSection, cEntry, cDefault, cFile)
 
 FUNCTION hwg_WriteIni(cSection, cEntry, cValue, cFile)
-   RETURN WritePrivateProfileString(cSection, cEntry, cValue, cFile)
+   RETURN hwg_WritePrivateProfileString(cSection, cEntry, cValue, cFile)
 
 FUNCTION SetHelpFileName(cNewName)
    STATIC cName := ""
@@ -426,7 +426,7 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
    cFile := repl(Chr(0), 32000)
    aFiles := {}
 
-   cPath := _GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, NIL, @nIndex)
+   cPath := hwg__GetOpenFileName(hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, NIL, @nIndex)
 
    nAt := At(Chr(0) + Chr(0), cFile)
    IF nAt != 0

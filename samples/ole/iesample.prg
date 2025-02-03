@@ -50,7 +50,7 @@ RETURN NIL
 STATIC FUNCTION OpenFile(oIE, oEdit)
 
    LOCAL mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-   LOCAL fname := SelectFile("HTML files", "*.htm;*.html", mypath)
+   LOCAL fname := hwg_SelectFile("HTML files", "*.htm;*.html", mypath)
 
    IF !Empty(fname)
       oEdit:SetText(fname)

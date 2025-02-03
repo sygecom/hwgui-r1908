@@ -111,7 +111,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
    ELSE
 
       IF cPrinter == NIL
-         ::hDCPrn := PrintSetup(@cPrinterName)
+         ::hDCPrn := hwg_PrintSetup(@cPrinterName)
          ::cPrinterName := cPrinterName
      ELSEIF Empty(cPrinter)
          cPrinterName := HWG_GETDEFAULTPRINTER()

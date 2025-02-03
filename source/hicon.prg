@@ -102,7 +102,7 @@ METHOD AddFile(name, nWidth, nHeight) CLASS HIcon
    name := IIf(!File(name) .AND. FILE(CutPath(name)), CutPath(name), name)
    IF !File(name)
       cCurDir := DiskName() + ":\" + CurDir()
-      name := SelectFile("Image Files( *.jpg;*.gif;*.bmp;*.ico )", CutPath(name), FilePath(name), "Locate " + name) //"*.jpg;*.gif;*.bmp;*.ico"
+      name := hwg_SelectFile("Image Files( *.jpg;*.gif;*.bmp;*.ico )", CutPath(name), FilePath(name), "Locate " + name) //"*.jpg;*.gif;*.bmp;*.ico"
       DirChange(cCurDir)
    ENDIF
 

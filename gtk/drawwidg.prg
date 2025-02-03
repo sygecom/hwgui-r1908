@@ -91,7 +91,7 @@ Local i, nlen := Len(::aFonts)
 Return Self
 
 METHOD Select( oFont ) CLASS HFont
-Local af := SelectFont( oFont )
+Local af := hwg_SelectFont( oFont )
 
    IF af == Nil
       Return Nil
