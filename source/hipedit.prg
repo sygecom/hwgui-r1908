@@ -86,7 +86,7 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
 
 METHOD Activate() CLASS HIPedit
    IF !Empty(::oParent:handle)
-      ::handle := InitIPAddress(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_InitIPAddress(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
    RETURN NIL
@@ -102,17 +102,17 @@ METHOD Init() CLASS HIPedit
    RETURN NIL
 
 METHOD SetValue(aValue) CLASS HIPedit
-   SETIPADDRESS(::handle , aValue[1], aValue[2], aValue[3], aValue[4])
+   hwg_SetIPAddress(::handle , aValue[1], aValue[2], aValue[3], aValue[4])
    ::aValue := aValue
    RETURN NIL
 
 
 METHOD GetValue() CLASS HIPedit
-   ::aValue := GETIPADDRESS(::handle)
+   ::aValue := hwg_GetIPAddress(::handle)
    RETURN ::aValue
 
 METHOD Clear() CLASS HIPedit
-   CLEARIPADDRESS(::handle)
+   hwg_ClearIPAddress(::handle)
    ::aValue := {0, 0, 0, 0}
    RETURN ::aValue
 
