@@ -1535,7 +1535,6 @@ HB_FUNC(TOOLBARADDBUTTONS)
 
   for (ulCount = 0; (ulCount < hb_arrayLen(pArray)); ulCount++)
   {
-
     pTemp = hb_arrayGetItemPtr(pArray, ulCount + 1);
     ulID = hb_arrayGetNI(pTemp, 1);
     if (hb_arrayGetNI(pTemp, 4) == TBSTYLE_SEP)

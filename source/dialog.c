@@ -520,8 +520,10 @@ HB_FUNC(HWG__PROPERTYSHEET)
     dwFlags |= PSH_WIZARD;
   }
   for (i = 0; i < nPages; i++)
+  {
     psp[i] = (HPROPSHEETPAGE)(LONG_PTR)hb_arrayGetNL(pArr, i + 1);
-
+  }
+  
   psh.dwSize = sizeof(PROPSHEETHEADER);
   psh.dwFlags = dwFlags;
   psh.hwndParent = hwg_par_HWND(1);
@@ -701,13 +703,17 @@ static LRESULT CALLBACK s_DlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
   {
     int i;
     for (i = 0; i < iDialogs; i++)
+    {
       if (aDialogs[i] == hDlg)
       {
         break;
       }
+    }
     iDialogs--;
     for (; i < iDialogs; i++)
+    {
       aDialogs[i] = aDialogs[i + 1];
+    }
   }
 
   pObject = (PHB_ITEM)GetWindowLongPtr(hDlg, GWLP_USERDATA);
@@ -788,13 +794,17 @@ static LRESULT CALLBACK s_PSPProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
   {
     int i;
     for (i = 0; i < iDialogs; i++)
+    {
       if (aDialogs[i] == hDlg)
       {
         break;
       }
+    }
     iDialogs--;
     for (; i < iDialogs; i++)
+    {
       aDialogs[i] = aDialogs[i + 1];
+    }
   }
 
   pObject = (PHB_ITEM)GetWindowLongPtr(hDlg, GWLP_USERDATA);
