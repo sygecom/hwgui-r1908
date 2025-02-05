@@ -54,7 +54,7 @@ STATIC aCustomEvents := { ;
 CLASS HCustomWindow INHERIT HObject
 
    CLASS VAR oDefaultParent SHARED
-   CLASS VAR WindowsManifest INIT !Empty(FindResource(, 1, RT_MANIFEST)) SHARED
+   CLASS VAR WindowsManifest INIT !Empty(hwg_FindResource(, 1, RT_MANIFEST)) SHARED
 
    DATA handle INIT 0
    DATA oParent

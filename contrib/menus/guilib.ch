@@ -858,9 +858,9 @@
 /* open an .dll resource */
 #xcommand SET RESOURCES TO <cName1> ;
        => ;
-            LoadResource( <cName1> )
+            hwg_LoadResource( <cName1> )
 
-#xcommand SET RESOURCES TO => LOADRESOURCE( NIL )
+#xcommand SET RESOURCES TO => hwg_LoadResource( NIL )
 
 // Addded by jamaj 
 #xcommand DEFAULT <uVar1> := <uVal1> ;

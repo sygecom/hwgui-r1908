@@ -72,7 +72,7 @@ METHOD Init() CLASS HAnimation
    IF !::lInit
       ::Super:Init()
       IF ::xResID != NIL
-         hwg_Animate_OpenEx(::handle, GetResources(), ::xResID)
+         hwg_Animate_OpenEx(::handle, hwg_GetResources(), ::xResID)
       ELSEIF ::cFileName != NIL
          hwg_Animate_Open(::handle, ::cFileName)
       ENDIF

@@ -195,9 +195,9 @@
 #include "_graph.ch"
 
 /* open an .dll resource */
-#xcommand SET RESOURCES TO <cName1> => LoadResource( <cName1> )
+#xcommand SET RESOURCES TO <cName1> => hwg_LoadResource( <cName1> )
 
-#xcommand SET RESOURCES TO => LOADRESOURCE( NIL )
+#xcommand SET RESOURCES TO => hwg_LoadResource( NIL )
 
 #xcommand SET COLORFOCUS <x:ON,OFF,&> [COLOR [<tColor>],[<bColor>]] [< lFixed : NOFIXED >] [< lPersistent : PERSISTENT >];
           => ;
