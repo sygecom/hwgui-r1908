@@ -102,7 +102,7 @@ RETURN Self
 METHOD Activate() CLASS HListBox
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateListbox(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_CreateListbox(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 
@@ -153,9 +153,9 @@ METHOD Init() CLASS HListBox
          ENDIF
          SendMessage(::handle, LB_RESETCONTENT, 0, 0)
          FOR i := 1 TO Len(::aItems)
-            ListboxAddString(::handle, ::aItems[i])
+            hwg_ListboxAddString(::handle, ::aItems[i])
          NEXT
-         ListboxSetString(::handle, ::value)
+         hwg_ListboxSetString(::handle, ::value)
       ENDIF
    ENDIF
 
@@ -245,9 +245,9 @@ METHOD Requery() CLASS HListBox
 
    SendMessage(::handle, LB_RESETCONTENT, 0, 0)
    FOR i := 1 TO Len(::aItems)
-      ListboxAddString(::handle, ::aItems[i])
+      hwg_ListboxAddString(::handle, ::aItems[i])
    NEXT
-   ListboxSetString(::handle, ::value)
+   hwg_ListboxSetString(::handle, ::value)
    ::refresh()
 
 RETURN NIL
@@ -303,12 +303,12 @@ METHOD AddItems(p) CLASS HListBox
    //LOCAL i
 
    AAdd(::aItems, p)
-   ListboxAddString(::handle, p)
+   hwg_ListboxAddString(::handle, p)
    //   SendMessage(::handle, LB_RESETCONTENT, 0, 0)
    //   FOR i := 1 TO Len(::aItems)
-   //      ListboxAddString(::handle, ::aItems[i])
+   //      hwg_ListboxAddString(::handle, ::aItems[i])
    //   NEXT
-   ListboxSetString(::handle, ::value)
+   hwg_ListboxSetString(::handle, ::value)
 
 RETURN Self
 
@@ -335,7 +335,7 @@ METHOD Clear() CLASS HListBox
    ::aItems := {}
    ::value := 0
    SendMessage(::handle, LB_RESETCONTENT, 0, 0)
-   ListboxSetString(::handle, ::value)
+   hwg_ListboxSetString(::handle, ::value)
 
 RETURN .T.
 
