@@ -206,7 +206,7 @@ FUNCTION ListViewNotify(oCtrl, lParam)
 
    LOCAL aCord
 
-   SWITCH GetNotifyCode(lParam)
+   SWITCH hwg_GetNotifyCode(lParam)
 
    CASE LVN_KEYDOWN
       IF hb_IsBlock(oCtrl:bKeydown)

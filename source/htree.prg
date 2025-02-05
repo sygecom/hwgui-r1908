@@ -568,7 +568,7 @@ METHOD ItemHeight(nHeight) CLASS HTree
 #if 0 // old code for reference (to be deleted)
 METHOD Notify(lParam) CLASS HTree
    
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL oItem
    LOCAL cText
    LOCAL nAct
@@ -640,7 +640,7 @@ METHOD Notify(lParam) CLASS HTree
 
     ELSEIF nCode == NM_CLICK  //.AND. ::oitem != NIL // .AND. !::lEditLabels
        nHitem :=  Tree_GetNotify(lParam, 1)
-       //nHitem :=  GETNOTIFYcode(lParam)
+       //nHitem :=  hwg_GetNotifyCode(lParam)
        oItem  := tree_Hittest(::handle,,, @nAct)
        IF nAct == TVHT_ONITEMSTATEICON
           IF ::oItem == NIL .OR. oItem:handle != ::oitem:handle
@@ -695,7 +695,7 @@ METHOD Notify(lParam) CLASS HTree
 #else
 METHOD Notify(lParam) CLASS HTree
 
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL oItem
    LOCAL cText
    LOCAL nAct
@@ -782,7 +782,7 @@ METHOD Notify(lParam) CLASS HTree
 
    CASE NM_CLICK
       nHitem :=  Tree_GetNotify(lParam, 1)
-      //nHitem :=  GETNOTIFYcode(lParam)
+      //nHitem :=  hwg_GetNotifyCode(lParam)
       oItem  := tree_Hittest(::handle,,, @nAct)
       IF nAct == TVHT_ONITEMSTATEICON
          IF ::oItem == NIL .OR. oItem:handle != ::oitem:handle

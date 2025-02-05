@@ -171,11 +171,11 @@ Static Function InitConfig
 Local hDlg := getmodalhandle()
 Local st := Iif( nServerType == ADS_REMOTE_SERVER,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
 Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,IDC_RADIOBUTTON5 ) )
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,st )
-   CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
-   CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
-   CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,st )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
    ServerButton( nServerType - 1 )
 #else
    MsgInfo("No config in mode DBFCDX")
@@ -185,27 +185,27 @@ Return .T.
 Static Function EndConfig()
 Local hDlg := getmodalhandle()
 Local new_numdriv, new_servertype, serverPath
-   new_numdriv := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
-                  Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
+   new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
+                  Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
    IF new_numdriv != numdriv
       numdriv := new_numdriv
       #ifdef RDD_ADS
          AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
       #endif
    ENDIF
-   IF SET( _SET_EXCLUSIVE ) != IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
+   IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
       SET( _SET_EXCLUSIVE, .NOT. SET( _SET_EXCLUSIVE ) )
    ENDIF
-   IF prrdonly != IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
+   IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
       prrdonly := .NOT. prrdonly
    ENDIF
 #ifdef RDD_ADS
-   IF AdsLocking() != IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
+   IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
       AdsLocking( !AdsLocking() )
    ENDIF
    dformat := GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 )
    SET DATE FORMAT dformat
-   new_servertype := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), ;
+   new_servertype := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), ;
                        ADS_LOCAL_SERVER, ADS_REMOTE_SERVER )
    IF new_servertype != nServerType
       nServerType := new_servertype
@@ -219,7 +219,7 @@ Local new_numdriv, new_servertype, serverPath
          IF Empty( serverPath ) .OR. !AdsConnect( serverPath )
              nServerType := 1
              AdsSetServerType( nServerType )
-             CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
+             hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
              ServerButton( 0 )
              SetDlgItemText( hDlg, IDC_TEXT1, "Cannot connect to "+serverPath )
              Return .F.
@@ -298,14 +298,14 @@ Return Nil
 Static Function InitNewIndex
 Local hDlg := getmodalhandle()
    SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
-   CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function TagName
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT3 )
-   IF IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
+   IF hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
       SendMessage( hEdit, WM_ENABLE, 1, 0 )
    ELSE
       SendMessage( hEdit, WM_ENABLE, 0, 0 )
@@ -322,7 +322,7 @@ Local oWindow, aControls, i
       SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
       Return Nil
    ENDIF
-   isMulti := IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
+   isMulti := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
    IF isMulti
       tagname := GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty( tagname )
@@ -330,7 +330,7 @@ Local oWindow, aControls, i
          Return Nil
       ENDIF
    ENDIF
-   isUniq := IsDlgButtonChecked( hDlg,IDC_CHECKBOX2 )
+   isUniq := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX2 )
    expkey := GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty( expkey )
       SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
@@ -421,11 +421,11 @@ Return Nil
 Static Function InitOpen
 Local hDlg := getmodalhandle()
 Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,IDC_RADIOBUTTON5 ) )
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
-   CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
-   CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
 #ifdef RDD_ADS
-   CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
 #endif
    SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return .T.
@@ -442,22 +442,22 @@ Local oldLock := AdsLocking()
    IF !Empty( fname )
       alsName := GetEditText( hDlg, IDC_EDIT3 )
       pass := GetEditText( hDlg, IDC_EDIT4 )
-      new_numdriv := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
-                     Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
+      new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
+                     Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
       IF new_numdriv != numdriv
          numdriv := new_numdriv
          #ifdef RDD_ADS
             AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
          #endif
       ENDIF
-      IF SET( _SET_EXCLUSIVE ) != IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
+      IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
          SET( _SET_EXCLUSIVE, .NOT. SET( _SET_EXCLUSIVE ) )
       ENDIF
-      IF prrdonly != IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
+      IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
          prrdonly := .NOT. prrdonly
       ENDIF
 #ifdef RDD_ADS
-      IF AdsLocking() != IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
+      IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
          AdsLocking( !AdsLocking() )
       ENDIF
 #endif

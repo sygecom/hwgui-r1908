@@ -388,7 +388,7 @@ METHOD Valid() CLASS HCheckButton
    ENDIF
 
    IF l == BST_INDETERMINATE
-      CheckDlgButton(::oParent:handle, ::id, .F.)
+      hwg_CheckDlgButton(::oParent:handle, ::id, .F.)
       SendMessage(::handle, BM_SETCHECK, 0, 0)
       ::lValue := .F.
    ELSE

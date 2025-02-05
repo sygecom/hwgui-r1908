@@ -107,7 +107,7 @@ METHOD INIT() CLASS HPager
 
 METHOD Notify(lParam) CLASS HPager
 
-   LOCAL nCode :=  GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
 
    IF nCode == PGN_CALCSIZE
       PAGERONPAGERCALCSIZE(lParam, ::hTool)

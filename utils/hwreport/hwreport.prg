@@ -130,7 +130,7 @@ Return Nil
 Static Function NewReport( oMainWindow )
 Local oDlg
 
-   INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||CheckRadioButton( oDlg:handle,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1)}
+   INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||hwg_CheckRadioButton( oDlg:handle,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1)}
    DIALOG ACTIONS OF oDlg ;
         ON 0,IDOK  ACTION {|| EndNewrep(oMainWindow,oDlg)}
 
@@ -141,7 +141,7 @@ Return Nil
 Static Function EndNewrep( oMainWindow,oDlg )
 
    aPaintRep := { 0,0,0,0,0,{},"","",.F.,0,Nil }
-   IF IsDlgButtonChecked( oDlg:handle,IDC_RADIOBUTTON1 )
+   IF hwg_IsDlgButtonChecked( oDlg:handle,IDC_RADIOBUTTON1 )
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE
       aPaintRep[FORM_WIDTH] := 297 ; aPaintRep[FORM_HEIGHT] := 210

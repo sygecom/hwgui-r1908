@@ -60,7 +60,7 @@ Return Nil
 Static Function InitStatic( aItem )
 Local hDlg := getmodalhandle()
 Local oFont := aItem[ITEM_FONT]
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
      Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,Iif(aItem[ITEM_ALIGN]==1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
    SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
    IF aItem[ITEM_SCRIPT] != Nil
@@ -75,8 +75,8 @@ Static Function EndStatic( aItem )
 Local hDlg := getmodalhandle()
 
    aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
-   aItem[ITEM_ALIGN] := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0, ;
-                          Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ),1,2 ))
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0, ;
+                          Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ),1,2 ))
    aItem[ITEM_VAR] := Ascan( s_aVariables,GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 ) ) - 1
    aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
@@ -233,13 +233,13 @@ Return Nil
 
 Static Function InitMarkF( aItem )
 Local hDlg := getmodalhandle()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
       Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
 Return .T.
 
 Static Function EndMarkF( aItem )
 Local hDlg := getmodalhandle()
-   aItem[ITEM_ALIGN] := Iif( IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0,1 )
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0,1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.

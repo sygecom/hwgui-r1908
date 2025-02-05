@@ -365,7 +365,7 @@ RETURN NIL
 #if 0 // old code for reference (to be deleted)
 METHOD Notify(lParam) CLASS hToolBar
 
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nId
    LOCAL nButton
    LOCAL nPos
@@ -407,7 +407,7 @@ RETURN 0
 #else
 METHOD Notify(lParam) CLASS hToolBar
 
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nId
    LOCAL nButton
    LOCAL nPos

@@ -38,7 +38,7 @@ Return Nil
 
 Static Function InitOpen( lOpen )
 Local hDlg := getmodalhandle()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
    SetWindowText( hDlg, Iif( lOpen,"Open report","Save report" ) )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
@@ -46,7 +46,7 @@ Return .T.
 Static Function BrowFile( lOpen )
 Local hDlg := getmodalhandle()
 Local fname, s1, s2
-   IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 )
+   IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 )
       s1 := "Report files( *.rpt )"
       s2 := "*.rpt"
    ELSE

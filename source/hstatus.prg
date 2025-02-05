@@ -111,7 +111,7 @@ RETURN Self
 
 METHOD Notify(lParam) CLASS HStatus
 
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nParts := GetNotifySBParts(lParam) - 1
 
    SWITCH nCode

@@ -170,7 +170,7 @@ RETURN Nil
 /*
 METHOD Notify( lParam ) CLASS hToolBar
 
-    Local nCode :=  GetNotifyCode( lParam )
+    Local nCode :=  hwg_GetNotifyCode( lParam )
     Local nId
 
     Local nButton

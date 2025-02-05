@@ -188,19 +188,19 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
    IF oCtrl != Nil
       IF oCtrl:ClassName() == "HTAB"
          DO CASE
-         CASE ( nCode := GetNotifyCode( lParam ) ) == TCN_SELCHANGE
+         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SELCHANGE
             IF oCtrl != Nil .AND. oCtrl:bChange != Nil
                Eval( oCtrl:bChange, oCtrl, GetCurrentTab( oCtrl:handle ) )
             ENDIF
-         CASE ( nCode := GetNotifyCode( lParam ) ) == TCN_CLICK
+         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_CLICK
               if oCtrl != Nil .AND. oCtrl:bAction != nil
                  Eval( oCtrl:bAction, oCtrl, GetCurrentTab( oCtrl:handle ) )
               endif
-         CASE ( nCode := GetNotifyCode( lParam ) ) == TCN_SETFOCUS
+         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SETFOCUS
               if oCtrl != Nil .AND. oCtrl:bGetFocus != nil
                  Eval( oCtrl:bGetFocus, oCtrl, GetCurrentTab( oCtrl:handle ) )
               endif
-         CASE ( nCode := GetNotifyCode( lParam ) ) == TCN_KILLFOCUS
+         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_KILLFOCUS
               if oCtrl != Nil .AND. oCtrl:bLostFocus != nil
                  Eval( oCtrl:bLostFocus, oCtrl, GetCurrentTab( oCtrl:handle ))
               endif
@@ -212,7 +212,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
       ELSEIF oCtrl:ClassName() == "HGRID"         
          Return ListViewNotify( oCtrl,lParam )               
       ELSE
-         nCode := GetNotifyCode( lParam )
+         nCode := hwg_GetNotifyCode( lParam )
          // writelog("Code: "+str(nCode))
          IF nCode == EN_PROTECTED
             Return 1

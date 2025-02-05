@@ -692,7 +692,7 @@ RETURN ::nActive
 
 METHOD Notify(lParam) CLASS HTab
    
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
    LOCAL nPage := SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
 

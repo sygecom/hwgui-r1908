@@ -290,7 +290,7 @@ METHOD Init() CLASS HEditUpDown
    RETURN NIL
 
 METHOD Notify(lParam) CLASS HeditUpDown
-   Local nCode := GetNotifyCode(lParam)
+   Local nCode := hwg_GetNotifyCode(lParam)
    Local iPos := GETNOTIFYDELTAPOS(lParam, 1)
    Local iDelta := GETNOTIFYDELTAPOS(lParam, 2)
    Local vari, res

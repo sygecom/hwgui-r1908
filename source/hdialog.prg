@@ -951,7 +951,7 @@ RETURN 1
 
 STATIC FUNCTION onPspNotify(oDlg, wParam, lParam)
 
-   LOCAL nCode := GetNotifyCode(lParam)
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL res := .T.
 
    HB_SYMBOL_UNUSED(wParam)
@@ -1019,18 +1019,18 @@ FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lMo
    aSheet := Array(Len(aPages))
    FOR i := 1 TO Len(aPages)
       IF aPages[i]:Type == WND_DLG_RESOURCE
-         aHandles[i] := _CreatePropertySheetPage(aPages[i])
+         aHandles[i] := hwg__CreatePropertySheetPage(aPages[i])
       ELSE
-         aTemplates[i] := CreateDlgTemplate(aPages[i], x1, y1, width, height, WS_CHILD + WS_VISIBLE + WS_BORDER)
-         aHandles[i] := _CreatePropertySheetPage(aPages[i], aTemplates[i])
+         aTemplates[i] := hwg_CreateDlgTemplate(aPages[i], x1, y1, width, height, WS_CHILD + WS_VISIBLE + WS_BORDER)
+         aHandles[i] := hwg__CreatePropertySheetPage(aPages[i], aTemplates[i])
       ENDIF
       aSheet[i] := {aHandles[i], aPages[i]}
       // hwg_WriteLog("h: " + Str(aHandles[i]))
    NEXT
-   hSheet := _PropertySheet(hParentWindow, aHandles, Len(aHandles), cTitle, lModeless, lNoApply, lWizard)
+   hSheet := hwg__PropertySheet(hParentWindow, aHandles, Len(aHandles), cTitle, lModeless, lNoApply, lWizard)
    FOR i := 1 TO Len(aPages)
       IF aPages[i]:Type != WND_DLG_RESOURCE
-         ReleaseDlgTemplate(aTemplates[i])
+         hwg_ReleaseDlgTemplate(aTemplates[i])
       ENDIF
    NEXT
 

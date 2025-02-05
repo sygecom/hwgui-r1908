@@ -50,7 +50,7 @@ Static Function InitRepl()
 Local hDlg := getmodalhandle()
 
    RecNumberDisable()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
 Return Nil
 
@@ -81,12 +81,12 @@ Private finame, cValue, cFor
       ENDIF
       nrec := Recno()
       SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-      IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+      IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
          REPLACE ALL &finame WITH &cValue FOR &cFor
-      ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
          nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          REPLACE NEXT nrest &finame WITH &cValue FOR &cFor
-      ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
          REPLACE REST &finame WITH &cValue FOR &cFor
       ENDIF
       Go nrec
@@ -124,7 +124,7 @@ Local hDlg := getmodalhandle()
       SetWindowText( hDlg,"Count")
    ENDIF
    RecNumberDisable()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    SetFocus( GetDlgItem( hDlg, IDC_EDITFOR ) )
 Return Nil
 
@@ -145,30 +145,30 @@ Private cFor
       ENDIF
       SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF nAct == 1
-         IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
             DELETE ALL FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             DELETE NEXT nrest FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
             DELETE REST FOR &cFor
          ENDIF
       ELSEIF nAct == 2
-         IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
             RECALL ALL FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             RECALL NEXT nrest FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
             RECALL REST FOR &cFor
          ENDIF
       ELSEIF nAct == 3
-         IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
             COUNT TO nsum ALL FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             COUNT TO nsum NEXT nrest FOR &cFor
-         ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
             COUNT TO nsum REST FOR &cFor
          ENDIF
          SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
@@ -207,7 +207,7 @@ Return Nil
 Static Function InitSum()
 Local hDlg := getmodalhandle()
    RecNumberDisable()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
@@ -232,12 +232,12 @@ Private nsum := 0
       SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       blsum := &( "{||nsum:=nsum+" + cSumf + "}" )
       blfor := &( "{||" + cFor + "}" )
-      IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+      IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
          DBEVAL( blsum, blfor )
-      ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
          nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          DBEVAL( blsum, blfor,, nrest )
-      ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
          DBEVAL( blsum, blfor,,,, .T. )
       ENDIF
       Go nrec
@@ -281,7 +281,7 @@ Return Nil
 Static Function InitApp()
 Local hDlg := getmodalhandle()
    DelimDisable()
-   CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
+   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
@@ -296,12 +296,12 @@ Local fname, nRec := Recno()
    ENDIF
 
    SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-   IF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+   IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
       // DBEVAL( blsum, blfor )
-   ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+   ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
       // nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
       // DBEVAL( blsum, blfor,, nrest )
-   ELSEIF IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+   ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
       // DBEVAL( blsum, blfor,,,, .T. )
    ENDIF
    Go nrec

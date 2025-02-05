@@ -997,7 +997,7 @@ STATIC FUNCTION onNotify(oWnd, wParam, lParam)
       IF __ObjHasMsg(oCtrl, "NOTIFY")
          RETURN oCtrl:Notify(lParam)
       ELSE
-         nCode := GetNotifyCode(lParam)
+         nCode := hwg_GetNotifyCode(lParam)
          IF nCode == EN_PROTECTED
             RETURN 1
          ELSEIF oWnd:aNotify != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
