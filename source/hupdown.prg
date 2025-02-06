@@ -162,7 +162,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    ::nHolder := 0
    IF !::lCreate
        ::Activate()
-       AddToolTip(::GetParentForm():handle, ::oEditUpDown:handle, ::tooltip)
+       hwg_AddToolTip(::GetParentForm():handle, ::oEditUpDown:handle, ::tooltip)
        ::oEditUpDown:SetFont(::oFont)
        ::oEditUpDown:DisableBrush := ::DisableBrush  
        hwg_SetWindowPos(::oEditUpDown:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE +  SWP_NOMOVE)

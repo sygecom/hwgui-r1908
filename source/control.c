@@ -311,7 +311,7 @@ HB_FUNC(GETNOTIFYSBPARTS)
   hb_retnl((LONG)(((NMMOUSE *)HB_PARHANDLE(1))->dwItemSpec));
 }
 
-HB_FUNC(ADDTOOLTIP) // changed by MAG
+HB_FUNC(HWG_ADDTOOLTIP) // changed by MAG
 {
   TOOLINFO ti;
   HWND hWnd = hwg_par_HWND(1);
@@ -344,7 +344,9 @@ HB_FUNC(ADDTOOLTIP) // changed by MAG
   hb_strfree(hStr);
 }
 
-HB_FUNC(DELTOOLTIP)
+HB_FUNC_TRANSLATE(ADDTOOLTIP, HWG_ADDTOOLTIP);
+
+HB_FUNC(HWG_DELTOOLTIP)
 {
   TOOLINFO ti;
 
@@ -361,7 +363,9 @@ HB_FUNC(DELTOOLTIP)
   }
 }
 
-HB_FUNC(SETTOOLTIPTITLE)
+HB_FUNC_TRANSLATE(DELTOOLTIP, HWG_DELTOOLTIP);
+
+HB_FUNC(HWG_SETTOOLTIPTITLE)
 {
   HWND hWnd = hwg_par_HWND(1);
 
@@ -382,18 +386,22 @@ HB_FUNC(SETTOOLTIPTITLE)
   }
 }
 
-/*
-HB_FUNC(SHOWTOOLTIP)
-{
-   MSG msg;
+HB_FUNC_TRANSLATE(SETTOOLTIPTITLE, HWG_SETTOOLTIPTITLE);
 
-   msg.lParam = hb_parnl(3);
-   msg.wParam = hb_parnl(2);
-   msg.message = WM_MOUSEMOVE;
-   msg.hwnd = hwg_par_HWND(1);
-   hb_retnl(SendMessage(s_hWndTT, TTM_RELAYEVENT, 0, (LPARAM)(LPMSG)&msg));
+#if 0
+HB_FUNC(HWG_SHOWTOOLTIP)
+{
+  MSG msg;
+
+  msg.lParam = hb_parnl(3);
+  msg.wParam = hb_parnl(2);
+  msg.message = WM_MOUSEMOVE;
+  msg.hwnd = hwg_par_HWND(1);
+  hb_retnl(SendMessage(s_hWndTT, TTM_RELAYEVENT, 0, (LPARAM)(LPMSG)&msg));
 }
-*/
+
+HB_FUNC_TRANSLATE(SHOWTOOLTIP, HWG_SHOWTOOLTIP);
+#endif
 
 HB_FUNC(CREATEUPDOWNCONTROL)
 {
@@ -1025,21 +1033,27 @@ HB_FUNC(HWG_GETCURSOR)
   hwg_ret_HCURSOR(GetCursor());
 }
 
-HB_FUNC(GETTOOLTIPHANDLE) // added by MAG
+HB_FUNC(HWG_GETTOOLTIPHANDLE) // added by MAG
 {
   hwg_ret_HWND(s_hWndTT);
 }
 
-HB_FUNC(SETTOOLTIPBALLOON) // added by MAG
+HB_FUNC_TRANSLATE(GETTOOLTIPHANDLE, HWG_GETTOOLTIPHANDLE);
+
+HB_FUNC(HWG_SETTOOLTIPBALLOON) // added by MAG
 {
   s_lToolTipBalloon = hb_parl(1);
   s_hWndTT = 0;
 }
 
-HB_FUNC(GETTOOLTIPBALLOON) // added by MAG
+HB_FUNC_TRANSLATE(SETTOOLTIPBALLOON, HWG_SETTOOLTIPBALLOON);
+
+HB_FUNC(HWG_GETTOOLTIPBALLOON) // added by MAG
 {
   hb_retl(s_lToolTipBalloon);
 }
+
+HB_FUNC_TRANSLATE(GETTOOLTIPBALLOON, HWG_GETTOOLTIPBALLOON);
 
 HB_FUNC(HWG_REGPANEL)
 {

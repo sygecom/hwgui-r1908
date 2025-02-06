@@ -32,7 +32,7 @@ FUNCTION BrowseTest()
    LOCAL oForm
    LOCAL oFont
 
-   SetToolTipBalloon(.T.)
+   hwg_SetToolTipBalloon(.T.)
 
    PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 

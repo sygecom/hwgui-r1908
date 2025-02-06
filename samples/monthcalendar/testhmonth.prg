@@ -24,7 +24,7 @@ FUNCTION Main()
    SET DATE BRITISH
    SET CENTURY ON
 
-   SetTooltipBalloon(.T.)
+   hwg_SetTooltipBalloon(.T.)
 
    INIT WINDOW oWnd MAIN TITLE "Controle MonthCalendar" ;
       AT 100, 100 SIZE 640, 480

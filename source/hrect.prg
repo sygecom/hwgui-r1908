@@ -369,7 +369,7 @@ METHOD Activate() CLASS HContainer
       ::handle := CreateStatic(::oParent:handle, ::id, ::style, ;
                                 ::nLeft, ::nTop, ::nWidth, ::nHeight)
       IF !::lInit
-         AddToolTip(::handle, ::handle, "")
+         hwg_AddToolTip(::handle, ::handle, "")
          ::nHolder := 1
          SetWindowObject(::handle, Self)
          hwg_InitStaticProc(::handle)
@@ -391,7 +391,7 @@ METHOD Init() CLASS HContainer
 
    IF !::lInit
       ::Super:init()
-      AddToolTip(::handle, ::handle, "")
+      hwg_AddToolTip(::handle, ::handle, "")
       ::nHolder := 1
       SetWindowObject(::handle, Self)
       hwg_InitStaticProc(::handle)

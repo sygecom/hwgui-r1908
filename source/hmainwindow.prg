@@ -193,7 +193,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       IF (bActivate != NIL)
          Eval(bActivate, Self)
       ENDIF
-      AddToolTip(::handle, ::handle, "")
+      hwg_AddToolTip(::handle, ::handle, "")
       hwg_ActivateMdiWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
 
    ELSEIF ::Type == WND_MAIN
@@ -217,7 +217,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
          Eval(bActivate, Self)
       ENDIF
 
-      AddToolTip(::handle, ::handle, "")
+      hwg_AddToolTip(::handle, ::handle, "")
       hwg_ActivateMainWindow((lShow == NIL .OR. lShow), ::hAccel, lMaximized, lMinimized)
 
    ENDIF

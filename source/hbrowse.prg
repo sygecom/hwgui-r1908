@@ -1476,7 +1476,7 @@ METHOD ShowColToolTips(lParam) CLASS HBrowse
       cTip := ::aColumns[pt[2]]:ToolTip
    ENDIF
    IF !Empty(cTip) .OR. !Empty(s_xToolTip)
-      SETTOOLTIPTITLE(::GetparentForm():handle, ::handle, cTip)
+      hwg_SetToolTipTitle(::GetparentForm():handle, ::handle, cTip)
       s_xToolTip := IIf(!Empty(cTip), cTip, IIf(!Empty(s_xToolTip), NIL, s_xToolTip))
    ENDIF
 

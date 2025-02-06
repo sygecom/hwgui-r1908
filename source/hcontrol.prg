@@ -133,11 +133,11 @@ METHOD INIT() CLASS HControl
 
    IF !::lInit
       //IF ::tooltip != NIL
-      //   AddToolTip(::oParent:handle, ::handle, ::tooltip)
+      //   hwg_AddToolTip(::oParent:handle, ::handle, ::tooltip)
       //ENDIF
       ::oparent:lSuspendMsgsHandling := .T.
       IF Len(::aControls) == 0 .AND. ::winclass != "SysTabControl32" .AND. !hb_IsNumeric(oForm)
-         AddToolTip(oForm:handle, ::handle, ::tooltip)
+         hwg_AddToolTip(oForm:handle, ::handle, ::tooltip)
       ENDIF
       ::oparent:lSuspendMsgsHandling := .F.
       IF ::oFont != NIL .AND. !hb_IsNumeric(::oFont) .AND. ::oParent != NIL
@@ -353,7 +353,7 @@ RETURN ::oFont:Underline == 1
 METHOD SetToolTip (cToolTip) CLASS HControl
 
    IF hb_IsChar(cToolTip) .AND. cToolTip != ::ToolTip
-      SETTOOLTIPTITLE(::GetparentForm():handle, ::handle, ctooltip)
+      hwg_SetToolTipTitle(::GetparentForm():handle, ::handle, ctooltip)
       ::Tooltip := cToolTip
    ENDIF
 
@@ -395,7 +395,7 @@ METHOD END() CLASS HControl
    ::Super:END()
 
    IF ::tooltip != NIL
-      DelToolTip(::oParent:handle, ::handle)
+      hwg_DelToolTip(::oParent:handle, ::handle)
       ::tooltip := NIL
    ENDIF
 

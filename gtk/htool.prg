@@ -156,7 +156,7 @@ Local aItem
 //               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2],0 )
                TOOLBAR_SETACTION(aItem[11],aItem[7])
                if !Empty(aItem[8])
-                  AddtoolTip(::handle, aItem[11],aItem[8])
+                  hwg_AddtoolTip(::handle, aItem[11],aItem[8])
                endif
             elseif aitem[4] == TBSTYLE_SEP
                aItem[11] := CreateToolBarButton(::handle,,,.t.)

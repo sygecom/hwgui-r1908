@@ -122,7 +122,7 @@ FUNCTION TestBallon()
 
    LOCAL oWnd
 
-   SetToolTipBalloon(.T.)
+   hwg_SetToolTipBalloon(.T.)
 
    INIT DIALOG oWnd CLIPPER TITLE "Dialog text Balon" ;
       AT 100, 100 SIZE 140, 100

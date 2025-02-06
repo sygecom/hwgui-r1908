@@ -284,7 +284,7 @@ METHOD Init() CLASS HTab
       IF ::himl != NIL
          SendMessage(::handle, TCM_SETIMAGELIST, 0, ::himl)
       ENDIF
-      AddToolTip(::GetParentForm():handle, ::handle, "")
+      hwg_AddToolTip(::GetParentForm():handle, ::handle, "")
       ::Super:Init()
 
       IF Len(::aPages) > 0

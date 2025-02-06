@@ -657,7 +657,7 @@ HB_FUNC(CREATEOWNBTN)
   HB_RETHANDLE(hCtrl);
 }
 
-HB_FUNC(ADDTOOLTIP)
+HB_FUNC(HWG_ADDTOOLTIP)
 {
   if (!pTooltip)
   {
@@ -665,6 +665,8 @@ HB_FUNC(ADDTOOLTIP)
   }
   gtk_tooltips_set_tip(pTooltip, (GtkWidget *)HB_PARHANDLE(2), hb_parc(3), NULL);
 }
+
+HB_FUNC_TRANSLATE(ADDTOOLTIP, HWG_ADDTOOLTIP);
 
 static gint cb_timer(gchar *data)
 {
