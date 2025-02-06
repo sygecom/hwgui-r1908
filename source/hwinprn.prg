@@ -20,7 +20,7 @@
 #define   MODE_ELITECOND  3
 #define   MODE_USER      10
 
-Static cPseudoChar := "дмЁ╨зиуж©╩╥╦юхсты╪╫╬бкярайопцлфг╢╧╣╤енвь"
+Static s_cPseudoChar := "дмЁ╨зиуж©╩╥╦юхсты╪╫╬бкярайопцлфг╢╧╣╤енвь"
 
 
 CLASS HWinPrn INHERIT HObject
@@ -219,7 +219,7 @@ Local i, i0, j, slen, c
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
-         ELSEIF (j := At(c, cPseudoChar)) != 0
+         ELSEIF (j := At(c, s_cPseudoChar)) != 0
             IF i0 != 0
                ::PrintText(SubStr(cLine, i0, i - i0))
                i0 := 0

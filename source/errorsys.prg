@@ -13,12 +13,12 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-STATIC LogInitialPath := ""
+STATIC s_LogInitialPath := ""
 
 PROCEDURE hwg_ErrorSys
 
    ErrorBlock({|oError|DefError(oError)})
-   LogInitialPath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
+   s_LogInitialPath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 
    RETURN
 
@@ -71,7 +71,7 @@ STATIC FUNCTION DefError(oError)
    cMessage += Chr(13) + Chr(10) + "Time:" + Time()
 
 
-   MemoWrit(LogInitialPath + "Error.log", cMessage)
+   MemoWrit(s_LogInitialPath + "Error.log", cMessage)
 
    ErrorPreview(cMessage)
    EndWindow()
@@ -124,7 +124,7 @@ FUNCTION ErrorMessage(oError)
 FUNCTION hwg_WriteLog(cText, fname)
    LOCAL nHand
 
-   fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
+   fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
    IF !File(fname)
       nHand := FCreate(fname)
    ELSE

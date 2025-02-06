@@ -22,7 +22,7 @@
 // nando
 STATIC coName
 //
-STATIC aClass := { ;
+STATIC s_aClass := { ;
    "label", "button", "buttonex", "toolbutton", "checkbox", ;
    "radiobutton", "editbox", "group", "radiogroup", ;
    "bitmap", "icon", "richedit", "datepicker", "updown", ;
@@ -32,7 +32,7 @@ STATIC aClass := { ;
    "progressbar", "shadebutton", "listbox", "gridex", ;
    "timer", "link" ;
    }
-STATIC aCtrls := { ;
+STATIC s_aCtrls := { ;
    "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
    "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
    "HButtonex():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,hbmp,nBStyle,hIco )",  ;
@@ -695,7 +695,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
    LOCAL xProperty
    LOCAL cType
    LOCAL cPName
-   LOCAL nCtrl := AScan(aClass, oCtrlTmpl:cClass)
+   LOCAL nCtrl := AScan(s_aClass, oCtrlTmpl:cClass)
    LOCAL xInitValue
    LOCAL cInitName
    LOCAL cVarName
@@ -755,7 +755,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
    ENDIF
 
    /* Declaring of variables, which are in the appropriate 'New()' function */
-   stroka := aCtrls[nCtrl]
+   stroka := s_aCtrls[nCtrl]
    IF (i := At("New(", stroka)) != 0
       i += 4
       DO WHILE .T.

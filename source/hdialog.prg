@@ -16,9 +16,9 @@
 #define WM_PSPNOTIFY WM_USER + 1010
 #define FLAG_CHECK 2
 
-STATIC aSheet := NIL
+STATIC s_aSheet := NIL
 #if 0 // old code for reference (to be deleted)
-STATIC aMessModalDlg := { ;
+STATIC s_aMessModalDlg := { ;
    {WM_COMMAND, {|o, w, l|DlgCommand(o, w, l)}},         ;
    {WM_SYSCOMMAND, {|o, w, l|onSysCommand(o, w, l)}},    ;
    {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
@@ -254,20 +254,20 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          POSTMESSAGE(::handle, WM_ACTIVATE, MAKEWPARAM(WA_ACTIVE, 0), ::handle)
       ENDIF
    ENDIF
-   IF (i := AScan(aMessModalDlg, {|a|a[1] == msg})) != 0
+   IF (i := AScan(s_aMessModalDlg, {|a|a[1] == msg})) != 0
       IF ::lRouteCommand .AND. (msg == WM_COMMAND .OR. msg == WM_NOTIFY)
          nPos := AScan(::aControls, {|x|x:className() == "HTAB"})
          IF nPos > 0
             oTab := ::aControls[nPos]
             IF Len(oTab:aPages) > 0
-               Eval(aMessModalDlg[i, 2], oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
+               Eval(s_aMessModalDlg[i, 2], oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
             ENDIF
          ENDIF
       ENDIF
       //AgE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling .OR. msg == WM_ERASEBKGND .OR. msg == WM_SIZE
          // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
-         RETURN Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
+         RETURN Eval(s_aMessModalDlg[i, 2], Self, wParam, lParam)
       ENDIF
    ELSEIF msg == WM_CLOSE
       ::close()
@@ -1016,7 +1016,7 @@ FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lMo
    LOCAL aHandles := Array(Len(aPages))
    LOCAL aTemplates := Array(Len(aPages))
 
-   aSheet := Array(Len(aPages))
+   s_aSheet := Array(Len(aPages))
    FOR i := 1 TO Len(aPages)
       IF aPages[i]:Type == WND_DLG_RESOURCE
          aHandles[i] := hwg__CreatePropertySheetPage(aPages[i])
@@ -1024,7 +1024,7 @@ FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lMo
          aTemplates[i] := hwg_CreateDlgTemplate(aPages[i], x1, y1, width, height, WS_CHILD + WS_VISIBLE + WS_BORDER)
          aHandles[i] := hwg__CreatePropertySheetPage(aPages[i], aTemplates[i])
       ENDIF
-      aSheet[i] := {aHandles[i], aPages[i]}
+      s_aSheet[i] := {aHandles[i], aPages[i]}
       // hwg_WriteLog("h: " + Str(aHandles[i]))
    NEXT
    hSheet := hwg__PropertySheet(hParentWindow, aHandles, Len(aHandles), cTitle, lModeless, lNoApply, lWizard)
