@@ -160,3 +160,11 @@ Local aControls, i
 
    ENDIF
 Return Nil
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
+
+#pragma ENDDUMP
