@@ -424,7 +424,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                nexthandle := GetNextDlgTabItem (GetActiveWindow(), GetFocus(), ;
                                                  IsCtrlShift(.F., .T.))
                //hwg_SetFocus(nexthandle)
-               PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+               hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
                RETURN 0
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
                RETURN -1
@@ -468,7 +468,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
      // multiline
         IF msg == WM_SETFOCUS
          //nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
-         PostMessage(::handle, EM_SETSEL, 0, 0)
+         hwg_PostMessage(::handle, EM_SETSEL, 0, 0)
       ELSEIF msg == WM_MOUSEWHEEL
          nPos := hwg_HIWORD(wParam)
          nPos := IIf(nPos > 32768, nPos - 65535, nPos)
@@ -1707,15 +1707,15 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
          IF oParent:Type == NIL .OR. oParent:Type < WND_DLG_RESOURCE
              hwg_SetFocus(nextHandle)
          ELSE
-            PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
+            hwg_PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ELSE
          IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) == PtrtouLong(getFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
             hwg_SetFocus(nextHandle)
          ELSEIF PtrtouLong(oParent:handle) == PtrtouLong(getFocus())
-            PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+            hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ELSE
-            PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
+            hwg_PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ENDIF
 
@@ -1782,7 +1782,7 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
                   ENDIF
                   */
          ELSE
-            PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+            hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
          IF !Empty(nextHandle) .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(nextHandle), WS_TABSTOP) == 0
             NextFocusTab(oParent, nextHandle, nSkip)

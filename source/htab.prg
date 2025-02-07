@@ -839,7 +839,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
-         PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
+         hwg_PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
       ENDIF
 
    ELSEIF msg == WM_SETFONT .AND. ::oFont != NIL .AND. ::lInit
@@ -967,7 +967,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
-         PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
+         hwg_PostMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE)
       ENDIF
       EXIT
 

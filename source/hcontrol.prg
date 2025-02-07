@@ -43,7 +43,7 @@ CLASS HControl INHERIT HCustomWindow
    //METHOD SetColor(tcolor, bColor, lRepaint)
    METHOD NewId()
    METHOD Show(nShow) INLINE ::Super:Show(nShow), IIf(::oParent:lGetSkipLostFocus, ;
-      PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, IIf(::oParent:FindControl(, GetFocus()) != NIL, ;
+      hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, IIf(::oParent:FindControl(, GetFocus()) != NIL, ;
       0, ::handle), 1), .T.)
    METHOD Hide() INLINE (::oParent:lGetSkipLostFocus := .F., ::Super:Hide())
    //METHOD Disable() INLINE hwg_EnableWindow(::handle, .F.)

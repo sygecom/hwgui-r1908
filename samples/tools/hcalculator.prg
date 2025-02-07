@@ -36,7 +36,7 @@ CLASS HCalculator
    METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)
    METHOD Calculando(cNumero)
    METHOD GetRefresh()
-   METHOD End() INLINE  ::GetRefresh(), IIf(::lCompacta, PostMessage(::oFormCalc:Handle, WM_CLOSE, 0, 0),)
+   METHOD End() INLINE  ::GetRefresh(), IIf(::lCompacta, hwg_PostMessage(::oFormCalc:Handle, WM_CLOSE, 0, 0),)
 ENDCLASS
 
 METHOD New(cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalculator

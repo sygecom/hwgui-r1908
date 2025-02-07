@@ -350,7 +350,7 @@ Local i, aItem, hWnd := oWnd:handle
                               LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF],0), ;
                               TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
                   ENDIF
-                  PostMessage( hWnd, WM_PAINT, 0, 0 )
+                  hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
                ENDIF
             ENDIF
          NEXT
@@ -372,7 +372,7 @@ Local i, aItem, hWnd := oWnd:handle
                               LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF],0), ;
                               TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
                   ENDIF
-                  PostMessage( hWnd, WM_PAINT, 0, 0 )
+                  hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
                ENDIF
             ENDIF
          NEXT
@@ -389,7 +389,7 @@ Local i, aItem, hWnd := oWnd:handle
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
                            TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
-                  PostMessage( hWnd, WM_PAINT, 0, 0 )
+                  hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
                ENDIF
             ENDIF
          NEXT
@@ -405,7 +405,7 @@ Local i, aItem, hWnd := oWnd:handle
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+4, ;
                            TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
-                  PostMessage( hWnd, WM_PAINT, 0, 0 )
+                  hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
                ENDIF
             ENDIF
          NEXT
@@ -434,7 +434,7 @@ Local aCoors := hwg_GetClientRect( hWnd )
       IF nsteps > 0
          aPaintRep[FORM_Y] -= step
          hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
-         PostMessage( hWnd, WM_PAINT, 0, 0 )
+         hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nsteps
@@ -445,7 +445,7 @@ Local aCoors := hwg_GetClientRect( hWnd )
             hwg_RedrawWindow( hWnd, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
-            PostMessage( hWnd, WM_PAINT, 0, 0 )
+            hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
    ENDIF
@@ -499,7 +499,7 @@ Local aItem, i, dx, dy
          s_mPos[1] := xPos; s_mPos[2] := yPos
          aPaintRep[FORM_CHANGED] := .T.
          WriteItemInfo( aItem )
-         PostMessage( hWnd, WM_PAINT, 0, 0 )
+         hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       ELSE
          aItem[ITEM_STATE] := STATE_SELECTED
          s_itemPressed := 0
@@ -541,7 +541,7 @@ Local aItem, i, dx, dy
          aPaintRep[FORM_CHANGED] := .T.
          WriteItemInfo( aItem )
          hwg_SetCursor( Iif( s_resizeDirection==1.OR.s_resizeDirection==3,s_horzCursor,s_vertCursor ) )
-         PostMessage( hWnd, WM_PAINT, 0, 0 )
+         hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       ENDIF
    ELSE
       FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
@@ -627,7 +627,7 @@ Local hWnd := Hwindow():GetMain():handle
          ENDIF
       NEXT
       IF res
-         PostMessage( hWnd, WM_PAINT, 0, 0 )
+         hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       ENDIF
    ENDIF
 Return Nil
@@ -663,7 +663,7 @@ Local hWnd := Hwindow():GetMain():handle
                TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
                TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
-      PostMessage( hWnd, WM_PAINT, 0, 0 )
+      hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       IF Len( aPaintRep[FORM_ITEMS] ) == 1
          EnableMenuItem( ,IDM_CLOSE, .T., .T. )
          EnableMenuItem( ,IDM_SAVE, .T., .T. )
@@ -708,7 +708,7 @@ Local i, aItem
             EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
             EnableMenuItem( ,IDM_FOPT, .F., .T. )
          ENDIF
-         PostMessage( hWnd, WM_PAINT, 0, 0 )
+         hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
          EXIT
       ENDIF
    NEXT

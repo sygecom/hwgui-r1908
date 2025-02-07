@@ -148,7 +148,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
             SIZE nWidth, ::height+6        ;
             STYLE ES_AUTOHSCROLL           ;
             FONT ::oFont                   ;
-            WHEN {||PostMessage( oBtn:handle,WM_CLOSE, 0, 0 ),OgET:REFRESH()   ,.T.}
+            WHEN {||hwg_PostMessage( oBtn:handle,WM_CLOSE, 0, 0 ),OgET:REFRESH()   ,.T.}
 
            @ x1,y1-2 BUTTON oBtn CAPTION "..." OF oBrw1;
             SIZE 13,::height+6  ;
@@ -158,7 +158,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )",;
                       "*.jpg;*.gif;*.bmp;*.ico")))), ;
                    IIf(!Empty(varbuf),oGet:refresh(),nil)} //,;
-                  *   VldBrwGet(oGet)} //,   PostMessage( oBtn:handle,WM_CLOSE, 0, 0 )}
+                  *   VldBrwGet(oGet)} //,   hwg_PostMessage( oBtn:handle,WM_CLOSE, 0, 0 )}
                   // : END LFB
             //varbuf := hwg_SelectFile( "All files ( *.* )","*.*" )
             //
@@ -333,10 +333,10 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    oBrw1:aEvents := {}
    oBrw1:aNotify := {}
    oBrw1:aControls := {}
-   PostMessage( oGet:handle,WM_CLOSE, 0, 0 )
+   hwg_PostMessage( oGet:handle,WM_CLOSE, 0, 0 )
    // :LFB POS
    IF ValType(obtn) = "O"
-     PostMessage( oBtn:handle,WM_CLOSE, 0, 0 )
+     hwg_PostMessage( oBtn:handle,WM_CLOSE, 0, 0 )
    ENDIF
    obrw1:bPosChanged:= nil
    // : END LFB
@@ -442,7 +442,7 @@ Static Function DlgCancel()
    IF !Empty(oBrw1:aControls)
       oBrw1:aEvents := {}
       oBrw1:aNotify := {}
-      PostMessage( oBrw1:aControls[1]:handle,WM_CLOSE, 0, 0 )
+      hwg_PostMessage( oBrw1:aControls[1]:handle,WM_CLOSE, 0, 0 )
       oBrw1:aControls := {}
       // oBrw1:DelControl( oBrw1:aControls[1] )
       // oBrw1:Refresh()

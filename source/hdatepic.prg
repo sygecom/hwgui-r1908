@@ -268,7 +268,7 @@ METHOD onChange(nMess) CLASS HDatePicker
 
    IF (nMess == DTN_DATETIMECHANGE .AND. hwg_SendMessage(::handle, DTM_GETMONTHCAL, 0, 0) == 0) .OR. nMess == DTN_CLOSEUP
       IF nMess == DTN_CLOSEUP
-         POSTMESSAGE(::handle, WM_KEYDOWN, VK_RIGHT, 0)
+         hwg_PostMessage(::handle, WM_KEYDOWN, VK_RIGHT, 0)
          ::SetFocus()
       ENDIF
       ::dValue := GetDatePicker(::handle)
@@ -334,7 +334,7 @@ METHOD Valid() CLASS HDatePicker
       res := IIf(hb_IsLogical(res), res, .T.)
       ::oparent:lSuspendMsgsHandling := .F.
       IF !res
-         POSTMESSAGE(::handle, WM_KEYDOWN, VK_RIGHT, 0)
+         hwg_PostMessage(::handle, WM_KEYDOWN, VK_RIGHT, 0)
          ::SetFocus(.T.)
       ENDIF
    ENDIF

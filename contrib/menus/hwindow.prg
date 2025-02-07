@@ -692,7 +692,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       if oBtn != Nil
           oBtn:state := OBTN_NORMAL
           InvalidateRect( oBtn:handle, 0 )
-          PostMessage( oBtn:handle, WM_PAINT, 0, 0 )
+          hwg_PostMessage( oBtn:handle, WM_PAINT, 0, 0 )
           SetOwnBtnSelected( Nil )
       endif
    elseif msg == WM_PAINT

@@ -532,12 +532,12 @@ METHOD MouseMove(wParam, lParam) CLASS HOwnButton
          ::state := OBTN_NORMAL
          hwg_InvalidateRect(::handle, 0)
          hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
-         //PostMessage(::handle, WM_PAINT, 0, 0)
+         //hwg_PostMessage(::handle, WM_PAINT, 0, 0)
       ENDIF
       IF ::state == OBTN_NORMAL .AND. !res
          ::state := OBTN_MOUSOVER
          hwg_InvalidateRect(::handle, 0)
-         //PostMessage(::handle, WM_PAINT, 0, 0)
+         //hwg_PostMessage(::handle, WM_PAINT, 0, 0)
          hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
          SetCapture(::handle)
       ENDIF
@@ -559,7 +559,7 @@ METHOD MDown() CLASS HOwnButton
    ELSEIF ::lCheck
       ::state := OBTN_NORMAL
       hwg_InvalidateRect(::handle, 0)
-      PostMessage(::handle, WM_PAINT, 0, 0)
+      hwg_PostMessage(::handle, WM_PAINT, 0, 0)
    ENDIF
 
 RETURN NIL
@@ -606,7 +606,7 @@ METHOD Release() CLASS HOwnButton
    ::state := OBTN_NORMAL
    hwg_InvalidateRect(::handle, 0)
    hwg_RedrawWindow(::handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE)
-   //PostMessage(::handle, WM_PAINT, 0, 0)
+   //hwg_PostMessage(::handle, WM_PAINT, 0, 0)
 
 RETURN NIL
 
@@ -669,7 +669,7 @@ METHOD END() CLASS HOwnButton
       ::oBitmap:Release()
       ::oBitmap := NIL
    ENDIF
-   PostMessage(::handle, WM_CLOSE, 0, 0)
+   hwg_PostMessage(::handle, WM_CLOSE, 0, 0)
 
 RETURN NIL
 

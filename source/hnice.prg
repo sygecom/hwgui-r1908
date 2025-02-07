@@ -196,7 +196,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
       IF otmp != NIL .AND. otmp:id != ::id .AND. !otmp:lPress
          otmp:state := OBTN_NORMAL
          hwg_InvalidateRect(otmp:handle, 0)
-         PostMessage(otmp:handle, WM_PAINT, 0, 0)
+         hwg_PostMessage(otmp:handle, WM_PAINT, 0, 0)
          SetNiceBtnSelected(NIL)
       ENDIF
 
@@ -205,7 +205,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
 
          // aBtn[CTRL_HANDLE] := hBtn
          hwg_InvalidateRect(::handle, 0)
-         PostMessage(::handle, WM_PAINT, 0, 0)
+         hwg_PostMessage(::handle, WM_PAINT, 0, 0)
          SetNiceBtnSelected(Self)
       ENDIF
    ENDIF
@@ -218,7 +218,7 @@ METHOD MUp() CLASS HNICEButton
       IF !::lPress
          ::state := IIf(::lFlat, OBTN_MOUSOVER, OBTN_NORMAL)
          hwg_InvalidateRect(::handle, 0)
-         PostMessage(::handle, WM_PAINT, 0, 0)
+         hwg_PostMessage(::handle, WM_PAINT, 0, 0)
       ENDIF
       IF !::lFlat
          SetNiceBtnSelected(NIL)
@@ -236,7 +236,7 @@ METHOD MDown() CLASS HNICEButton
       ::state := OBTN_PRESSED
 
       hwg_InvalidateRect(::handle, 0, 0)
-      PostMessage(::handle, WM_PAINT, 0, 0)
+      hwg_PostMessage(::handle, WM_PAINT, 0, 0)
       SetNiceBtnSelected(Self)
    ENDIF
 
@@ -299,7 +299,7 @@ METHOD RELEASE() CLASS HNiceButton
    ::lPress := .F.
    ::state  := OBTN_NORMAL
    hwg_InvalidateRect(::handle, 0)
-   PostMessage(::handle, WM_PAINT, 0, 0)
+   hwg_PostMessage(::handle, WM_PAINT, 0, 0)
 
    RETURN NIL
 

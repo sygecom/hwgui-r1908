@@ -508,7 +508,7 @@ HB_FUNC(HWG_SENDMESSAGE)
 
 HB_FUNC_TRANSLATE(SENDMESSAGE, HWG_SENDMESSAGE);
 
-HB_FUNC(POSTMESSAGE)
+HB_FUNC(HWG_POSTMESSAGE)
 {
 
   hb_retnl((LONG)PostMessage(hwg_par_HWND(1), // handle of destination window
@@ -517,6 +517,8 @@ HB_FUNC(POSTMESSAGE)
                              hwg_par_LPARAM(4)                                              // second message parameter
                              ));
 }
+
+HB_FUNC_TRANSLATE(POSTMESSAGE, HWG_POSTMESSAGE);
 
 HB_FUNC(HWG_SETFOCUS)
 {

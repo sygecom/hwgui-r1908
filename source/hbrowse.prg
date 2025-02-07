@@ -3932,7 +3932,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
          IF Type != "L"
             bInit := IIf(wParam == NIL .OR. wParam == 13 .OR. Empty(lParam), {|o|hwg_MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1)}, ;
                        {|o|hwg_MoveWindow(o:handle, x1, y1, nWidth, o:nHeight + 1), ;
-                           o:aControls[1]:SetFocus(), PostMessage(o:aControls[1]:handle, WM_CHAR, wParam, lParam)})
+                           o:aControls[1]:SetFocus(), hwg_PostMessage(o:aControls[1]:handle, WM_CHAR, wParam, lParam)})
          ELSE
             bInit := {||.F.}
          ENDIF
@@ -4188,7 +4188,7 @@ METHOD onClickColumn(value, oGet, oBtn) CLASS HBROWSE
    IF hb_IsDate(value)
       ::varbuf := value
       oGet:refresh()
-      POSTMESSAGE(oBtn:handle, WM_KEYDOWN, VK_TAB, 0)
+      hwg_PostMessage(oBtn:handle, WM_KEYDOWN, VK_TAB, 0)
    ENDIF
    IF oColumn:bClick != NIL
       ::oparent:lSuspendMsgsHandling := .T.

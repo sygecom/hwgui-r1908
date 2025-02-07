@@ -126,7 +126,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
    IF msg == WM_SETFOCUS .AND. ::lSetFocus //.AND. hwg_IsWindowVisible(::handle)
       ::lSetFocus := .F.
-      PostMessage(::handle, EM_SETSEL, 0, 0)
+      hwg_PostMessage(::handle, EM_SETSEL, 0, 0)
    ELSEIF msg == WM_SETFOCUS .AND. ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
         ::lctrltab := ::GetParentForm(Self):lDisableCtrlTab
         ::GetParentForm(Self):lDisableCtrlTab := ::lAllowTabs
@@ -255,7 +255,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    CASE WM_SETFOCUS
       IF ::lSetFocus // .AND. hwg_IsWindowVisible(::handle)
          ::lSetFocus := .F.
-         PostMessage(::handle, EM_SETSEL, 0, 0)
+         hwg_PostMessage(::handle, EM_SETSEL, 0, 0)
       ELSEIF ::lAllowTabs .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
          ::lctrltab := ::GetParentForm(Self):lDisableCtrlTab
          ::GetParentForm(Self):lDisableCtrlTab := ::lAllowTabs

@@ -251,7 +251,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       /* triggered on activate the modal dialog is visible only when */
       ::lActivated := .T.
       IF ::lModal .AND. hb_IsBlock(::bOnActivate)
-         POSTMESSAGE(::handle, WM_ACTIVATE, MAKEWPARAM(WA_ACTIVE, 0), ::handle)
+         hwg_PostMessage(::handle, WM_ACTIVATE, MAKEWPARAM(WA_ACTIVE, 0), ::handle)
       ENDIF
    ENDIF
    IF (i := AScan(s_aMessModalDlg, {|a|a[1] == msg})) != 0
@@ -325,7 +325,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          /* triggered on activate the modal dialog is visible only when */
          ::lActivated := .T.
          IF ::lModal .AND. hb_IsBlock(::bOnActivate)
-            POSTMESSAGE(::handle, WM_ACTIVATE, MAKEWPARAM(WA_ACTIVE, 0), ::handle)
+            hwg_PostMessage(::handle, WM_ACTIVATE, MAKEWPARAM(WA_ACTIVE, 0), ::handle)
          ENDIF
       ENDIF
       EXIT
@@ -576,7 +576,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       RETURN oDlg
    ENDIF
 
-   POSTMESSAGE(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_PostMessage(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
 
    IF !oDlg:lModal .AND. !hwg_IsWindowVisible(oDlg:handle)
       hwg_ShowWindow(oDlg:handle, SW_SHOWDEFAULT)
@@ -736,7 +736,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
             RETURN 0
          ELSEIF hb_IsObject(oCtrl) .AND. oCtrl:IsEnabled() .AND. !Selffocus(oCtrl:handle)
             //oCtrl:SetFocus()
-            PostMessage(oDlg:handle, WM_NEXTDLGCTL, oCtrl:handle, 1)
+            hwg_PostMessage(oDlg:handle, WM_NEXTDLGCTL, oCtrl:handle, 1)
          ELSEIF oDlg:lGetSkiponEsc
             hCtrl := GetFocus()
             oCtrl := oDlg:FindControl(, hctrl)
@@ -760,7 +760,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
    //IF oDlg:nInitFocus > 0 //.AND. !hwg_IsWindowVisible(oDlg:handle)
    // comentado, vc não pode testar um ponteiro como se fosse numerico
    IF !Empty(oDlg:nInitFocus)  //.AND. !hwg_IsWindowVisible(oDlg:handle)
-      PostMessage(oDlg:handle, WM_NEXTDLGCTL, oDlg:nInitFocus, 1)
+      hwg_PostMessage(oDlg:handle, WM_NEXTDLGCTL, oDlg:nInitFocus, 1)
    ENDIF
    IF oDlg:aEvents != NIL .AND. ;
       (i := AScan(oDlg:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
@@ -811,7 +811,7 @@ FUNCTION DlgMouseMove()
    IF hb_IsObject(oBtn) .AND. !oBtn:lPress
       oBtn:state := OBTN_NORMAL
       hwg_InvalidateRect(oBtn:handle, 0)
-      // PostMessage(oBtn:handle, WM_PAINT, 0, 0)
+      // hwg_PostMessage(oBtn:handle, WM_PAINT, 0, 0)
       SetNiceBtnSelected(NIL)
    ENDIF
 

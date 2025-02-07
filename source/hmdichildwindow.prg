@@ -202,8 +202,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       //-::nFocus := 0
    ELSEIF msg == WM_DESTROY .AND. ::lModal .AND. !SelfFocus(::Screen:handle, ::handle)
       IF !Empty(::hActive) .AND. !SelfFocus(::hActive, ::Screen:handle)
-         PostMessage(nFocus, WM_SETFOCUS, 0, 0)
-         PostMessage(::hActive , WM_SETFOCUS, 0, 0)
+         hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
+         hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
       ENDIF
       ::GETMDIMAIN():lSuspendMsgsHandling := .F.
    ENDIF
@@ -264,8 +264,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    CASE WM_DESTROY
       IF ::lModal .AND. !SelfFocus(::Screen:handle, ::handle)
          IF !Empty(::hActive) .AND. !SelfFocus(::hActive, ::Screen:handle)
-            PostMessage(nFocus, WM_SETFOCUS, 0, 0)
-            PostMessage(::hActive , WM_SETFOCUS, 0, 0)
+            hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
+            hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
          ENDIF
          ::GETMDIMAIN():lSuspendMsgsHandling := .F.
       ENDIF
