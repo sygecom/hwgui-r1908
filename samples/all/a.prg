@@ -516,7 +516,7 @@ RETURN NIL
 
 FUNCTION Sendemail(endereco)
 
-ShellExecute("rundll32.exe", "open", ;
+hwg_ShellExecute("rundll32.exe", "open", ;
             "url.dll,FileProtocolHandler " + ;
             "mailto:" + endereco + "?cc=&bcc=" + ;
             "&subject=Ref%20:" + ;

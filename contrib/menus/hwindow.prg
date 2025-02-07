@@ -212,7 +212,7 @@ METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu, cTooltip ) CLASS HWindow
    ::bNotify     := bNotify
    ::oNotifyMenu := oNotifyMenu
    ::oNotifyIcon := oNotifyIcon
-   ShellNotifyIcon( .T., ::handle, oNotifyIcon:handle, cTooltip )
+   hwg_ShellNotifyIcon( .T., ::handle, oNotifyIcon:handle, cTooltip )
    ::lTray := .T.
 
 RETURN Nil
@@ -393,7 +393,7 @@ Local oWnd, oBtn, oitem
              endif
           Endif
           if oWnd:oNotifyIcon != Nil
-             ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
+             hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
           endif
           if oWnd:hAccel != Nil
              DestroyAcceleratorTable( oWnd:hAccel )
@@ -599,7 +599,7 @@ Local oWnd, oBtn, oitem
                 return 1
              endif
              if oWnd:oNotifyIcon != Nil
-                ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
+                hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
              endif
              if oWnd:hAccel != Nil
                 DestroyAcceleratorTable( oWnd:hAccel )
@@ -1065,7 +1065,7 @@ Local oWndClient
           Endif
    
           if oWnd:oNotifyIcon != Nil
-             ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
+             hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
           endif
           if oWnd:hAccel != Nil
              DestroyAcceleratorTable( oWnd:hAccel )

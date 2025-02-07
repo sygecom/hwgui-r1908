@@ -13,7 +13,7 @@ FUNCTION Main()
       MENUITEM "Shell ABout" ACTION ShellAbout("Rodrigo Moreno", "Test")
       MENUITEM "Exclamation" ACTION hwg_MsgExclamation("Are You Sure ?", "Warning")
       MENUITEM "Retry Cancel" ACTION hwg_MsgRetryCancel("Are You Sure ?", "Retry")
-      MENUITEM "Calc" ACTION ShellExecute("calc")
+      MENUITEM "Calc" ACTION hwg_ShellExecute("calc")
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow

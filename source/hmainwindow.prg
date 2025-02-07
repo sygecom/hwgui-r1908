@@ -422,7 +422,7 @@ METHOD InitTray(oNotifyIcon, bNotify, oNotifyMenu, cTooltip) CLASS HMainWindow
    ::bNotify := bNotify
    ::oNotifyMenu := oNotifyMenu
    ::oNotifyIcon := oNotifyIcon
-   ShellNotifyIcon(.T., ::handle, oNotifyIcon:handle, cTooltip)
+   hwg_ShellNotifyIcon(.T., ::handle, oNotifyIcon:handle, cTooltip)
    ::lTray := .T.
 
 RETURN NIL
@@ -643,7 +643,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          oWnd:bDestroy := NIL
       ENDIF
       IF __ObjHasMsg(oWnd, "ONOTIFYICON") .AND. oWnd:oNotifyIcon != NIL
-         ShellNotifyIcon(.F., oWnd:handle, oWnd:oNotifyIcon:handle)
+         hwg_ShellNotifyIcon(.F., oWnd:handle, oWnd:oNotifyIcon:handle)
       ENDIF
       IF __ObjHasMsg(oWnd, "HACCEL") .AND. oWnd:hAccel != NIL
          DestroyAcceleratorTable(oWnd:hAccel)

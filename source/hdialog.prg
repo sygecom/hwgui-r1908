@@ -934,12 +934,12 @@ FUNCTION onHelp(oDlg, wParam, lParam)
          ENDIF
          IF "chm" $ Lower(CutPath(SetHelpFileName()))
             nHelpId := IIf(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
-            ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
+            hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
          ELSE
             WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
          ENDIF
       ELSEIF cDir != NIL
-         ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()), cDir)
+         hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()), cDir)
       ELSE
          WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
       ENDIF

@@ -436,7 +436,7 @@ Local i
           ENDIF
        ENDIF  
        IF __ObjHasMsg( oWnd,"ONOTIFYICON" ) .AND. oWnd:oNotifyIcon != Nil
-          ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
+          hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
        ENDIF
        IF __ObjHasMsg( oWnd,"HACCEL" ) .AND. oWnd:hAccel != Nil
           DestroyAcceleratorTable( oWnd:hAccel )

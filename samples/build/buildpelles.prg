@@ -538,7 +538,7 @@ FUNCTION BuildBat()
    if file(voExeName + ".exe")
       hwg_MsgInfo("File " + voExeName + ".exe Build correct")
    Else 
-      ShellExecute("NotePad error.log")   
+      hwg_ShellExecute("NotePad error.log")   
    Endif   
 
 RETURN NIL

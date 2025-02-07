@@ -245,7 +245,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 
 METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
-   LOCAL hInstance := SHELLEXECUTE(csLink, "open", NIL, NIL, 2)
+   LOCAL hInstance := hwg_ShellExecute(csLink, "open", NIL, NIL, 2)
    //ShellExecute(NULL              , _T("open")                             , csLink.operator LPCTSTR(), NULL                                 , NULL                                   , 2);
 
    IF hInstance < 33
