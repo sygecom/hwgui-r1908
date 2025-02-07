@@ -74,8 +74,8 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD AddRow(a, bUpdate)
    METHOD Notify(lParam)
 
-   METHOD DELETEROW() INLINE IIf(::bFlag , (SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F.), .T.)
-   METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := {}, SendMessage(::handle, LVM_DELETEALLITEMS, 0, 0)
+   METHOD DELETEROW() INLINE IIf(::bFlag , (hwg_SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F.), .T.)
+   METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := {}, hwg_SendMessage(::handle, LVM_DELETEALLITEMS, 0, 0)
    METHOD SELECTALL() INLINE ListViewSelectAll(::handle)
    METHOD SELECTLAST() INLINE ListViewSelectLastItem(::handle)
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
@@ -260,7 +260,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    ENDIF
 
    IF nCode == NM_CLICK
-      iSelect := SendMessage(::handle, LVM_GETNEXTITEM, -1, LVNI_FOCUSED)
+      iSelect := hwg_SendMessage(::handle, LVM_GETNEXTITEM, -1, LVNI_FOCUSED)
 
       IF (iSelect == -1)
          RETURN 0

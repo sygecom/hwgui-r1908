@@ -110,7 +110,7 @@ Local oPen := aItem[ITEM_PEN]
    // SetComboBox( hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1 )
    IF aItem[ITEM_TYPE] == TYPE_BOX
    ELSE
-      SendMessage( GetDlgItem( hDlg,IDC_COMBOBOX2 ), WM_ENABLE, 0, 0 )
+      hwg_SendMessage( GetDlgItem( hDlg,IDC_COMBOBOX2 ), WM_ENABLE, 0, 0 )
    ENDIF
    SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width,1) )
 Return .T.

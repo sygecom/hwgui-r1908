@@ -63,7 +63,7 @@ CLASS HUpDown INHERIT HControl
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + hwg_GetClientRect(::hwndUpDown)[3] - 1
                               ::Super:Move(x1, y1 , IIf(width != NIL, width, ::nWidth), height, nRepaint) ,;
-                              SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
+                              hwg_SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
                               IIf(::lHide, ::Hide(), ::Show())
 
 ENDCLASS
@@ -262,7 +262,7 @@ METHOD Valid() CLASS HUpDown
       ::nValue := IIf(::nValue > ::nUpper, Min(::nValue, ::nUpper), Max(::nValue, ::nLower))
       ::SetValue(::nValue)
       ::oEditUpDown:Refresh()
-      SendMessage(::oEditUpDown:handle, EM_SETSEL, 0, -1)
+      hwg_SendMessage(::oEditUpDown:handle, EM_SETSEL, 0, -1)
       ::SetFocus()
       RETURN res
    ENDIF

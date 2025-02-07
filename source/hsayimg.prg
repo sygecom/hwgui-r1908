@@ -99,7 +99,7 @@ CLASS HSayBmp INHERIT HSayImage
    METHOD Init()
    METHOD Paint(lpdis)
    METHOD ReplaceBitmap(Image, lRes)
-   //METHOD REFRESH() INLINE ::HIDE(), SendMessage(::handle, WM_PAINT, 0, 0), ::SHOW()
+   //METHOD REFRESH() INLINE ::HIDE(), hwg_SendMessage(::handle, WM_PAINT, 0, 0), ::SHOW()
    METHOD Refresh() INLINE hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW)
 
 ENDCLASS
@@ -158,7 +158,7 @@ METHOD Init() CLASS HSayBmp
    IF !::lInit
       ::Super:Init()
       IF ::oImage != NIL .AND. !Empty(::oImage:handle)
-         SendMessage(::handle, STM_SETIMAGE, IMAGE_BITMAP, ::oImage:handle)
+         hwg_SendMessage(::handle, STM_SETIMAGE, IMAGE_BITMAP, ::oImage:handle)
       ENDIF
    ENDIF
 RETURN NIL
@@ -224,7 +224,7 @@ CLASS HSayIcon INHERIT HSayImage
                bSize, ctooltip, lOEM, bClick, bDblClick)
    METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip)
    METHOD Init()
-   METHOD REFRESH() INLINE SendMessage(::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle)
+   METHOD REFRESH() INLINE hwg_SendMessage(::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle)
 
 ENDCLASS
 
@@ -268,7 +268,7 @@ METHOD Init() CLASS HSayIcon
 
    IF !::lInit
       ::Super:Init()
-      SendMessage(::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle)
+      hwg_SendMessage(::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle)
    ENDIF
    RETURN NIL
 

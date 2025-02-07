@@ -32,7 +32,7 @@ METHOD DelObject(oCtrl) CLASS HObject
    LOCAL h := oCtrl:handle
    LOCAL i := AScan(::aObjects, {|o|o:handle == h})
 
-   SendMessage(h, WM_CLOSE, 0, 0)
+   hwg_SendMessage(h, WM_CLOSE, 0, 0)
    IF i != 0
       ADel(::aObjects, i)
       ASize(::aObjects, Len(::aObjects) - 1)

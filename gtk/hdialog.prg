@@ -195,7 +195,7 @@ Local iCont
    ENDIF
    /*
    IF oDlg:oIcon != Nil
-      SendMessage( oDlg:handle,WM_SETICON,1,oDlg:oIcon:handle )
+      hwg_SendMessage( oDlg:handle,WM_SETICON,1,oDlg:oIcon:handle )
    ENDIF
    */
    IF oDlg:Title != NIL
@@ -203,7 +203,7 @@ Local iCont
    ENDIF
    /*
    IF oDlg:oFont != Nil
-      SendMessage( oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0 )
+      hwg_SendMessage( oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0 )
    ENDIF
    */
    IF oDlg:bInit != Nil

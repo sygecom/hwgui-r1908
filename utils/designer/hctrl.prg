@@ -631,7 +631,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
             InspUpdCombo( 0 )
          ENDIF
       ENDIF
-      SendMessage(handle, WM_PAINT, 0, 0)
+      hwg_SendMessage(handle, WM_PAINT, 0, 0)
    ENDIF
 Return Nil
 
@@ -666,8 +666,8 @@ Function MoveCtrl( oCtrl )
 
    // writelog( "MoveCtrl "+Str(oCtrl:nWidth) + Str(oCtrl:nHeight) )
    IF oCtrl:ClassName() == "HDIALOG"
-      SendMessage( oCtrl:handle, WM_MOVE, 0, oCtrl:nLeft + oCtrl:nTop*65536 )
-      SendMessage( oCtrl:handle, WM_SIZE, 0, oCtrl:nWidth + oCtrl:nHeight*65536 )
+      hwg_SendMessage( oCtrl:handle, WM_MOVE, 0, oCtrl:nLeft + oCtrl:nTop*65536 )
+      hwg_SendMessage( oCtrl:handle, WM_SIZE, 0, oCtrl:nWidth + oCtrl:nHeight*65536 )
    ELSE
       hwg_MoveWindow( oCtrl:handle,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight )
       hwg_RedrawWindow( oCtrl:oParent:handle,RDW_ERASE + RDW_INVALIDATE )
@@ -776,7 +776,7 @@ Return Nil
 FUNCTION Page_Upd( oTab, arr )
 
    LOCAL i
-   LOCAL nTabs := SendMessage(oTab:handle, TCM_GETITEMCOUNT, 0, 0)
+   LOCAL nTabs := hwg_SendMessage(oTab:handle, TCM_GETITEMCOUNT, 0, 0)
 
    FOR i := 1 TO Len(arr)
       IF i <= nTabs
@@ -796,7 +796,7 @@ FUNCTION Page_Select( oTab, nTab, lForce )
 
    IF ( lForce != Nil .AND. lForce ) .OR. GetCurrentTab( oTab:handle ) != nTab
 
-      SendMessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
+      hwg_SendMessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
       FOR i := 1 TO Len(oTab:aControls)
          oCtrl := oTab:aControls[i]
          IF oCtrl:nPage != nTab .AND. !oCtrl:lHide

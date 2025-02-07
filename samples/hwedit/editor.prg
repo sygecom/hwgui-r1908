@@ -212,7 +212,7 @@ PUBLIC funcoes := {}
      ENDMENU
      MENU TITLE "&" + m_janela
          MENUITEM "&" + m_lado  ;
-            ACTION SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0)
+            ACTION hwg_SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0)
       ENDMENU
 
      MENU TITLE "&" + m_ajuda
@@ -263,9 +263,9 @@ FUNCTION novo(tipo)
  WriteStatus(HMainWIndow():GetMdiActive(), 3,"Novo Arquivo")
  WriteStatus(HMainWIndow():GetMdiActive(), 1,"Lin:      0")
  WriteStatus(HMainWIndow():GetMdiActive(), 2,"Col:      0")
- SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
+ hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle)
- SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
+ hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
  re_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
 
 RETURN .T.
@@ -354,7 +354,7 @@ FUNCTION Texto()
  WriteStatus(o&I, 3, vText)
  WriteStatus(o&I, 1, "Lin:      0")
  WriteStatus(o&I, 2, "Col:      0")
- SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
+ hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle )
  // colocando cores nas funcoes
  re_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
@@ -368,7 +368,7 @@ FUNCTION Texto()
  next f
  */
  hwg_SetFocus(oEdit&i:Handle)
- SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
+ hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
 
 RETURN NIL
 
@@ -377,7 +377,7 @@ FUNCTION funcao()
 *******************
 
 if maxi
-  //SendMessage(oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+  //hwg_SendMessage(oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
   oMainWindow:Maximize()
 endif
  if HMainWIndow():GetMdiActive() != nil
@@ -428,7 +428,7 @@ FUNCTION fecha_texto()
     if alterado
         hwg_MsgYesNo("Deseja Salvar o arquivo")
     endif
-    SendMessage(h, WM_CLOSE, 0, 0)
+    hwg_SendMessage(h, WM_CLOSE, 0, 0)
 
 RETURN .T.
 
@@ -454,9 +454,9 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
         strinsert := "INSERT OFF "
      endif
     // pega linha e coluna
-     coluna := hwg_LOWORD(SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
-     Linha := SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
-     coluna := coluna - SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
+     coluna := hwg_LOWORD(hwg_SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
+     Linha := hwg_SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
+     coluna := coluna - hwg_SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
      //
      WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
      WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + str(linha, 6))
@@ -474,7 +474,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
            hwg_MsgYesNo("Deseja Salvar o arquivo")
          endif
          h := HMainWIndow():GetMdiActive():handle
-         SendMessage(h, WM_CLOSE, 0, 0)
+         hwg_SendMessage(h, WM_CLOSE, 0, 0)
      endif
      //
      if nvirtCode = 32 .or. nvirtCode = 13 .or. nvirtCode = 8
@@ -484,10 +484,10 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
 
             aControls := oWindow
 
-            SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
+            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
             hwg_SetFocus(aControls[hWnd]:Handle )
              //
-             pos := SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
+             pos := hwg_SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
              pos1 := hwg_LOWORD(pos)
              //
              //hwg_MsgInfo(str(pos1))
@@ -499,7 +499,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
                 re_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
              endif
             //
-            SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
+            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
             hwg_SetFocus(aControls[hWnd]:Handle )
          endif
          texto := ""
@@ -556,12 +556,12 @@ FUNCTION Pesquisa()
      if pesq:lResult
          IF oWindow != Nil
              aControls := oWindow
-             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus(aControls[hWnd]:Handle)
              //
-             SendMessage(aControls[hWnd]:Handle, 176, 2, AllTrim(get01))
+             hwg_SendMessage(aControls[hWnd]:Handle, 176, 2, AllTrim(get01))
              //
-             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus(aControls[hWnd]:Handle)
          endif
      endif
@@ -628,13 +628,13 @@ FUNCTION Vai(oEdit)
          IF oWindow != Nil
              pos_y := val(get01)
              aControls := oWindow
-             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
              hwg_SetFocus(aControls[hWnd]:Handle )
              //
-             SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
-             Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
+             hwg_SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
+             hwg_Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
              //
-             SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
              hwg_SetFocus(aControls[hWnd]:Handle )
              //
          ENDIF
@@ -656,10 +656,10 @@ FUNCTION seleciona()
  oWindow := HMainWIndow():GetMdiActive():aControls
  IF oWindow != Nil
     aControls := oWindow
-    SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+    hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
     hwg_SetFocus(aControls[hWnd]:Handle )
-    SendMessage(aControls[hWnd]:handle, EM_SETSEL, 0, 0)
-    SendMessage(aControls[hWnd]:handle, EM_SETSEL, 100000, 0)
+    hwg_SendMessage(aControls[hWnd]:handle, EM_SETSEL, 0, 0)
+    hwg_SendMessage(aControls[hWnd]:handle, EM_SETSEL, 100000, 0)
  ENDIF
 
 RETURN .T.
@@ -723,13 +723,13 @@ FUNCTION buscafunc(linha)
      IF oWindow != Nil
          pos_y := funcoes[linha]
          aControls := oWindow
-         SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
+         hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
          hwg_SetFocus(aControls[hWnd]:Handle )
          //
-         SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
-         Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
+         hwg_SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
+         hwg_Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
          //
-         SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+         hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
          hwg_SetFocus(aControls[hWnd]:Handle)
          //
       ENDIF
@@ -751,7 +751,7 @@ FUNCTION cor_fundo()
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
      ID_COLORB := hwg_ChooseColor(ID_COLORB, .T.)
-     SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
+     hwg_SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
      save all like ID_* to config.dat
  else
    hwg_MsgInfo("Abra um documento Primeiro")

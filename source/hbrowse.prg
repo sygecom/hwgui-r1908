@@ -608,7 +608,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ENDIF
 
          IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
-             SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+             hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
          ENDIF
          */
          ::internal[1] := 15 //force redraw header, footer and separator
@@ -826,9 +826,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
          ELSEIF wParam == VK_ESCAPE .AND. ::lESC
             IF ::GetParentForm():Type < WND_DLG_RESOURCE
-               SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
+               hwg_SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
             ELSE
-               SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
+               hwg_SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
             ENDIF
          ELSEIF wParam == VK_CONTROL  //17
             ::lCtrlPress := .T.
@@ -993,7 +993,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          //   Eval(::bLostFocus, Self)
          //ENDIF
          //IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
-         //    SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+         //    hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
          //ENDIF
          ::internal[1] := 15 //force redraw header, footer and separator
       ENDIF
@@ -1225,9 +1225,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          CASE VK_ESCAPE
             IF ::lESC
                IF ::GetParentForm():Type < WND_DLG_RESOURCE
-                  SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
+                  hwg_SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
                ELSE
-                  SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
+                  hwg_SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
                ENDIF
             ENDIF
             EXIT
@@ -1671,7 +1671,7 @@ METHOD Rebuild() CLASS HBrowse
    IF ::bcolor != NIL
       ::brush := HBrush():Add(::bcolor)
 //      IF hDC != NIL
-//         SendMessage(::handle, WM_ERASEBKGND, hDC, 0)
+//         hwg_SendMessage(::handle, WM_ERASEBKGND, hDC, 0)
 //      ENDIF
    ENDIF
    IF ::bcolorSel != NIL
@@ -4004,7 +4004,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                ENDIF
                oGet:lNoValid := .T.
                IF !Empty(wParam) .AND. wParam != 13 .AND. !Empty(lParam)
-                  SendMessage(oGet:handle, WM_CHAR, wParam, lParam)
+                  hwg_SendMessage(oGet:handle, WM_CHAR, wParam, lParam)
                ENDIF
             ELSE
                oGet1 := ::varbuf

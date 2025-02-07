@@ -266,7 +266,7 @@ RETURN NIL
 
 METHOD onChange(nMess) CLASS HDatePicker
 
-   IF (nMess == DTN_DATETIMECHANGE .AND. SendMessage(::handle, DTM_GETMONTHCAL, 0, 0) == 0) .OR. nMess == DTN_CLOSEUP
+   IF (nMess == DTN_DATETIMECHANGE .AND. hwg_SendMessage(::handle, DTM_GETMONTHCAL, 0, 0) == 0) .OR. nMess == DTN_CLOSEUP
       IF nMess == DTN_CLOSEUP
          POSTMESSAGE(::handle, WM_KEYDOWN, VK_RIGHT, 0)
          ::SetFocus()
@@ -304,7 +304,7 @@ METHOD When() CLASS HDatePicker
       ::oParent:lSuspendMsgsHandling := .F.
       IF hb_IsLogical(res) .AND. !res
          WhenSetFocus(Self, nSkip)
-         SendMessage(::handle, DTM_CLOSEMONTHCAL, 0, 0)
+         hwg_SendMessage(::handle, DTM_CLOSEMONTHCAL, 0, 0)
       ELSE
          ::SetFocus()
       ENDIF

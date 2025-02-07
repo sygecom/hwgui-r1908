@@ -103,7 +103,7 @@ METHOD Init() CLASS HRichEdit
       ::Super:Init()
       ::SetColor(::tColor, ::bColor)
       IF ::bChange != NIL
-         SendMessage(::handle, EM_SETEVENTMASK, 0, ENM_SELCHANGE + ENM_CHANGE)
+         hwg_SendMessage(::handle, EM_SETEVENTMASK, 0, ENM_SELCHANGE + ENM_CHANGE)
          ::oParent:AddEvent(EN_CHANGE, ::id, {||::onChange()})
       ENDIF
    ENDIF
@@ -168,7 +168,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       ENDIF
       IF wParam == VK_ESCAPE .AND. ::GetParentForm():handle != ::oParent:handle
          IF GetParent(::oParent:handle) != NIL
-            //SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
+            //hwg_SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
          ENDIF
          RETURN 0
       ENDIF
@@ -177,8 +177,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       IF nDelta > 32768
          nDelta -= 65535
       ENDIF
-      SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
-      //SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      //hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
    ELSEIF msg == WM_DESTROY
       ::END()
    ENDIF
@@ -210,7 +210,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       CASE VK_ESCAPE
          IF ::GetParentForm():handle != ::oParent:handle
             //IF GetParent(::oParent:handle) != NIL
-               //SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
+               //hwg_SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
             //ENDIF
             RETURN 0
          ENDIF
@@ -284,8 +284,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
       IF nDelta > 32768
          nDelta -= 65535
       ENDIF
-      SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
-      //SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
+      //hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
       EXIT
 
    CASE WM_DESTROY
@@ -309,7 +309,7 @@ METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
       re_SetDefault(::handle, tColor) //, ID_FONT ,,) // cor e fonte padrao
    ENDIF
    IF bColor != NIL
-      SendMessage(::handle, EM_SETBKGNDCOLOR, 0, bColor) // cor de fundo
+      hwg_SendMessage(::handle, EM_SETBKGNDCOLOR, 0, bColor) // cor de fundo
    ENDIF
    ::super:SetColor(tColor, bColor, lRedraw)
 
@@ -318,22 +318,22 @@ METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 METHOD ReadOnly(lreadOnly)
 
    IF lreadOnly != NIL
-      IF !Empty(SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
+      IF !Empty(hwg_SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
           ::lReadOnly := lReadOnly
       ENDIF
    ENDIF
    RETURN ::lReadOnly
 
 METHOD UpdatePos() CLASS HRichEdit
-   LOCAL npos := SendMessage(::handle, EM_GETSEL, 0, 0)
+   LOCAL npos := hwg_SendMessage(::handle, EM_GETSEL, 0, 0)
    LOCAL pos1 := hwg_LOWORD(npos) + 1, pos2 := hwg_HIWORD(npos) + 1
 
-   ::Line := SendMessage(::handle, EM_LINEFROMCHAR, pos1 - 1, 0) + 1
-   ::LinesTotal := SendMessage(::handle, EM_GETLINECOUNT, 0, 0)
+   ::Line := hwg_SendMessage(::handle, EM_LINEFROMCHAR, pos1 - 1, 0) + 1
+   ::LinesTotal := hwg_SendMessage(::handle, EM_GETLINECOUNT, 0, 0)
    ::SelText := RE_GETTEXTRANGE(::handle, pos1, pos2)
    ::SelStart := pos1
    ::SelLength := pos2 - pos1
-   ::Col := pos1 - SendMessage(::handle, EM_LINEINDEX, -1, 0)
+   ::Col := pos1 - hwg_SendMessage(::handle, EM_LINEINDEX, -1, 0)
 
    RETURN nPos
 

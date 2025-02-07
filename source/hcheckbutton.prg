@@ -37,7 +37,7 @@ CLASS HCheckButton INHERIT HControl
    // METHOD Disable()
    // METHOD Enable()
    METHOD SetValue(lValue)
-   METHOD GetValue() INLINE (SendMessage(::handle, BM_GETCHECK, 0, 0) == 1)
+   METHOD GetValue() INLINE (hwg_SendMessage(::handle, BM_GETCHECK, 0, 0) == 1)
    METHOD onGotFocus()
    METHOD onClick()
    METHOD KillFocus()
@@ -122,7 +122,7 @@ METHOD Init() CLASS HCheckButton
       HWG_INITBUTTONPROC(::handle)
       ::Super:Init()
       IF ::lValue
-         SendMessage(::handle, BM_SETCHECK, 1, 0)
+         hwg_SendMessage(::handle, BM_SETCHECK, 1, 0)
       ENDIF
    ENDIF
 
@@ -243,7 +243,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 
 METHOD SetValue(lValue) CLASS HCheckButton
 
-   SendMessage(::handle, BM_SETCHECK, IIf(Empty(lValue), 0, 1), 0)
+   hwg_SendMessage(::handle, BM_SETCHECK, IIf(Empty(lValue), 0, 1), 0)
    ::lValue := IIf(lValue == NIL .OR. !hb_IsLogical(lValue), .F., lValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, lValue, Self)
@@ -260,7 +260,7 @@ METHOD Value(lValue) CLASS HCheckButton
       ::SetValue(lValue)
    ENDIF
 
-   RETURN SendMessage(::handle, BM_GETCHECK, 0, 0) == 1
+   RETURN hwg_SendMessage(::handle, BM_GETCHECK, 0, 0) == 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -271,11 +271,11 @@ METHOD Refresh() CLASS HCheckButton
    IF hb_IsBlock(::bSetGet)
       var := Eval(::bSetGet,, Self)
       IF var == NIL .OR. !hb_IsLogical(var)
-        var := SendMessage(::handle, BM_GETCHECK, 0, 0) == 1
+        var := hwg_SendMessage(::handle, BM_GETCHECK, 0, 0) == 1
       ENDIF
       ::lValue := IIf(var == NIL .OR. !hb_IsLogical(var), .F., var)
    ENDIF
-   SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
+   hwg_SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
 
    RETURN NIL
 
@@ -285,7 +285,7 @@ METHOD Refresh() CLASS HCheckButton
 METHOD Disable() CLASS HCheckButton
 
    ::Super:Disable()
-   SendMessage(::handle, BM_SETCHECK, BST_INDETERMINATE, 0)
+   hwg_SendMessage(::handle, BM_SETCHECK, BST_INDETERMINATE, 0)
 
    RETURN NIL
 #endif
@@ -296,7 +296,7 @@ METHOD Disable() CLASS HCheckButton
 METHOD Enable() CLASS HCheckButton
 
    ::Super:Enable()
-   SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
+   hwg_SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
 
    RETURN NIL
 #endif
@@ -381,7 +381,7 @@ METHOD When() CLASS HCheckButton
 
 METHOD Valid() CLASS HCheckButton
 
-   LOCAL l := SendMessage(::handle, BM_GETCHECK, 0, 0)
+   LOCAL l := hwg_SendMessage(::handle, BM_GETCHECK, 0, 0)
 
    IF !CheckFocus(Self, .T.) .OR. ::lnoValid
       RETURN .T.
@@ -389,7 +389,7 @@ METHOD Valid() CLASS HCheckButton
 
    IF l == BST_INDETERMINATE
       hwg_CheckDlgButton(::oParent:handle, ::id, .F.)
-      SendMessage(::handle, BM_SETCHECK, 0, 0)
+      hwg_SendMessage(::handle, BM_SETCHECK, 0, 0)
       ::lValue := .F.
    ELSE
       ::lValue := (l == 1)

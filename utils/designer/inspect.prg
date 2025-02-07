@@ -309,7 +309,7 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
 
    IF oGet:Classname() == "HCOMBOBOX"
-      vari := SendMessage( oGet:handle,CB_GETCURSEL, 0, 0 ) + 1
+      vari := hwg_SendMessage( oGet:handle,CB_GETCURSEL, 0, 0 ) + 1
       value := aProp[oBrw1:cargo, 2] := oGet:aItems[vari]
    ELSE
       vari := Trim(oGet:GetText())   // :LFB -  COLOCOU TRIM
@@ -524,7 +524,7 @@ STATIC FUNCTION ComboOnChg()
    LOCAL n
    LOCAL aControls := IIf( oDesigner:lReport,oDlg:aControls[1]:aControls[1]:aControls,oDlg:aControls )
 
-   oCombo:value := SendMessage( oCombo:handle,CB_GETCURSEL, 0, 0 ) + 1
+   oCombo:value := hwg_SendMessage( oCombo:handle,CB_GETCURSEL, 0, 0 ) + 1
    IF oDlg != Nil
       n := oCombo:value - 1
       oCtrl := GetCtrlSelected( oDlg )

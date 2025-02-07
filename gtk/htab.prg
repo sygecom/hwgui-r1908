@@ -98,7 +98,7 @@ Local i, h
 Return Nil
 
 METHOD SetTab( n ) CLASS HTab
-   SendMessage( ::handle, TCM_SETCURFOCUS, n-1, 0 )
+   hwg_SendMessage( ::handle, TCM_SETCURFOCUS, n-1, 0 )
 Return Nil
 
 METHOD StartPage( cname ) CLASS HTab

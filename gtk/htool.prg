@@ -142,7 +142,7 @@ Local aItem
 
           NEXT
 
-       SendMessage( ::Handle, TB_SETIMAGELIST, 0, hIm )
+       hwg_SendMessage( ::Handle, TB_SETIMAGELIST, 0, hIm )
 
       ENDIF
 */

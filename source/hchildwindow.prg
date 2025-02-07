@@ -72,7 +72,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    CreateGetList(Self)
    InitControls(SELF)
    InitObjects(Self, .T.)
-   SendMessage(::handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_SendMessage(::handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    IF hb_IsBlock(::bInit)
       //::hide()
       IF !hb_IsNumeric(nReturn := Eval(::bInit, Self))
@@ -134,7 +134,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
       ELSEIF msg == WM_NOTIFY .AND. !::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(wParam)) != NIL .AND. oCtrl:className != "HTAB"
             ::nFocus := oCtrl:handle
-            SendMessage(oCtrl:handle, msg, wParam, lParam)
+            hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
@@ -200,7 +200,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
       IF !::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(wParam)) != NIL .AND. oCtrl:className != "HTAB"
             ::nFocus := oCtrl:handle
-            SendMessage(oCtrl:handle, msg, wParam, lParam)
+            hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
@@ -256,7 +256,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       IF !Empty(oWnd := oWnd:GetMdiActive()) .AND. oWnd:type == WND_MDICHILD .AND. oWnd:lMaximized .AND. ;
          (oWnd:lModal .OR. oWnd:lChild)
          oWnd:lMaximized := .F.
-         //-SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+         //-hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
       ENDIF
       //
       RETURN 0
@@ -300,7 +300,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    ENDIF
    IF wParam == SC_CLOSE
       IF Len(HWindow():aWindows) > 2 .AND. ;
-         (nHandle := SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
+         (nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
          // CLOSE ONLY MDICHILD HERE
          oChild := oWnd:FindWindow(nHandle)
          IF oChild != NIL
@@ -316,24 +316,24 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
                ENDIF
             ENDIF
          ENDIF
-         SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
+         hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
       ENDIF
    ELSEIF wParam == SC_RESTORE
       IF Len(HWindow():aWindows) > 2 .AND. ;
-         (nHandle := SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
-         SendMessage(HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0)
+         (nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
+         hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0)
       ENDIF
    ELSEIF wParam == SC_MAXIMIZE
       IF Len(HWindow():aWindows) > 2 .AND. ;
-         (nHandle := SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
-         SendMessage(HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0)
+         (nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
+         hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0)
       ENDIF
    ELSEIF wParam > FIRST_MDICHILD_ID .AND. wParam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
       IF oWnd:bMdiMenu != NIL
          Eval(oWnd:bMdiMenu, HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 2], wParam)
       ENDIF
       nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 2]:handle
-      SendMessage(HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0)
+      hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0)
    ENDIF
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
@@ -453,8 +453,8 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
    ELSEIF (wParam == SC_MAXIMIZE .OR. wparam == SC_MAXIMIZE2) .AND. oWnd:type == WND_MDICHILD .AND. ;
       (oWnd:lChild .OR. oWnd:lModal)
       IF oWnd:WindowState == SW_SHOWMINIMIZED
-          SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_RESTORE, 0)
-          SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+          hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_RESTORE, 0)
+          hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
           RETURN 0
       ENDIF
       ars := aClone(oWnd:aRectSave)
@@ -489,7 +489,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          !Empty(oChild := oWnd:GetMdiActive()))
          IF (oCtrl := FindAccelerator(oChild, lParam)) != NIL
             oCtrl:SetFocus()
-            SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
+            hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
             RETURN -2
             // MNC_IGNORE = 0  MNC_CLOSE = 1  MNC_EXECUTE = 2  MNC_SELECT = 3
          ENDIF

@@ -60,10 +60,10 @@ CLASS HToolBar INHERIT HControl
    METHOD CreateTool()
    METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex)
    METHOD Notify(lParam)
-   METHOD EnableButton(idButton, lEnable) INLINE SendMessage(::handle, TB_ENABLEBUTTON, INT(idButton), ;
+   METHOD EnableButton(idButton, lEnable) INLINE hwg_SendMessage(::handle, TB_ENABLEBUTTON, INT(idButton), ;
       MAKELONG(IIf(lEnable, 1, 0), 0))
-   METHOD ShowButton(idButton) INLINE SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(0, 0))
-   METHOD HideButton(idButton) INLINE SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(1, 0))
+   METHOD ShowButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(0, 0))
+   METHOD HideButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(1, 0))
    METHOD REFRESH() VIRTUAL
    METHOD RESIZE(xIncrSize, lWidth, lHeight)
 
@@ -216,8 +216,8 @@ METHOD CREATETOOL() CLASS hToolBar
    ENDIF
    /*
    IF ::lVertical
-      nStyle := SendMessage(::handle, TB_GETSTYLE, 0, 0) + CCS_VERT
-      SendMessage(::handle, TB_SETSTYLE, 0, nStyle)
+      nStyle := hwg_SendMessage(::handle, TB_GETSTYLE, 0, 0) + CCS_VERT
+      hwg_SendMessage(::handle, TB_SETSTYLE, 0, nStyle)
    ENDIF
    */
    nlistimg := 0
@@ -228,7 +228,7 @@ METHOD CREATETOOL() CLASS hToolBar
       ::nwSize := MAX(16, (::nHeight - 16))
    ENDIF
    IF ::nwSize != NIL
-      SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nwSize, ::nhSize))
+      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nwSize, ::nhSize))
    ENDIF
 
    FOR n := 1 TO Len(::aItem)
@@ -252,7 +252,7 @@ METHOD CREATETOOL() CLASS hToolBar
          IIf(hwg_Bitand(::aItem[n, 4], BTNS_DROPDOWN) != 0, 8, 0)))
       /*
       IF ::nSize != NIL
-         SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nSize, ::nSize))
+         hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nSize, ::nSize))
       ENDIF
       */
       IF hb_IsChar(::aItem[n, 1]) .OR. ::aItem[n, 1] > 1
@@ -321,19 +321,19 @@ METHOD CREATETOOL() CLASS hToolBar
          */
          Imagelist_Add(hIm, aButton[nPos])
       NEXT
-      SendMessage(::handle, TB_SETIMAGELIST, 0, hIm)
+      hwg_SendMessage(::handle, TB_SETIMAGELIST, 0, hIm)
    ELSEIF Len(aButton) == 0
-      SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(0, 0))
-      //SendMessage(::handle, TB_SETDRAWTEXTFLAGS, DT_CENTER + DT_VCENTER, DT_CENTER + DT_VCENTER)
+      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(0, 0))
+      //hwg_SendMessage(::handle, TB_SETDRAWTEXTFLAGS, DT_CENTER + DT_VCENTER, DT_CENTER + DT_VCENTER)
    ENDIF
-   SendMessage(::handle, TB_SETINDENT, ::nIndent, 0)
+   hwg_SendMessage(::handle, TB_SETINDENT, ::nIndent, 0)
    IF !Empty(::BtnWidth)
-      SendMessage(::handle, TB_SETBUTTONWIDTH, 0, MAKELPARAM(::BtnWidth - 1, ::BtnWidth + 1))
-      //SendMessage(::handle, TB_SETBUTTONWIDTH, MAKELPARAM(::BtnWidth, ::BtnWidth))
+      hwg_SendMessage(::handle, TB_SETBUTTONWIDTH, 0, MAKELPARAM(::BtnWidth - 1, ::BtnWidth + 1))
+      //hwg_SendMessage(::handle, TB_SETBUTTONWIDTH, MAKELPARAM(::BtnWidth, ::BtnWidth))
    ENDIF
    IF Len(::aItem) > 0
       TOOLBARADDBUTTONS(::handle, ::aItem, Len(::aItem))
-      SendMessage(::handle, TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS)
+      hwg_SendMessage(::handle, TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS)
    ENDIF
    IF ::BtnWidth != NIL
       IF hwg_BitAnd(::Style, CCS_NODIVIDER) > 0
@@ -342,19 +342,19 @@ METHOD CREATETOOL() CLASS hToolBar
          nMax := 2
       ENDIF
       ::ndrop := nMax + IIf(!::WindowsManifest, 0, nDrop)
-      ::BtnHeight := MAX(hwg_HIWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)), ;
+      ::BtnHeight := MAX(hwg_HIWORD(hwg_SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)), ;
          ::nHeight - ::nDrop - IIf(!::lnoThemes .AND. hwg_BitAnd(::Style, TBSTYLE_FLAT) > 0, 0, 2))
       IF !::lVertical
-         SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::BtnWidth, ::BtnHeight))
+         hwg_SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::BtnWidth, ::BtnHeight))
       ELSE
-         SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::nWidth - ::nDrop - 1, ::BtnWidth))
+         hwg_SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::nWidth - ::nDrop - 1, ::BtnWidth))
       ENDIF
    ENDIF
-   ::BtnWidth := hwg_LOWORD(SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0))
+   ::BtnWidth := hwg_LOWORD(hwg_SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0))
    /*
    IF ::lTransp
-      nStyle := SendMessage(::handle, TB_GETSTYLE, 0, 0) + TBSTYLE_TRANSPARENT
-      SendMessage(::handle, TB_SETSTYLE, 0, nStyle)
+      nStyle := hwg_SendMessage(::handle, TB_GETSTYLE, 0, 0) + TBSTYLE_TRANSPARENT
+      hwg_SendMessage(::handle, TB_SETSTYLE, 0, nStyle)
    ENDIF
    */
 
@@ -497,7 +497,7 @@ METHOD RESIZE(xIncrSize, lWidth, lHeight) CLASS hToolBar
    IF ::Anchor == 0 .OR. (!lWidth .AND. !lHeight)
       RETURN NIL
    ENDIF
-   nSize := SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)
+   nSize := hwg_SendMessage(::handle, TB_GETBUTTONSIZE, 0, 0)
    IF xIncrSize != 1
       ::Move(::nLeft, ::nTop, ::nWidth, ::nHeight, 0)
    ENDIF
@@ -506,14 +506,14 @@ METHOD RESIZE(xIncrSize, lWidth, lHeight) CLASS hToolBar
    ELSE
       ::BtnWidth := hwg_LOWORD(nSize) * xIncrSize
    ENDIF
-   SendMessage(::handle, TB_SETBUTTONWIDTH, MAKELPARAM(::BtnWidth - 1, ::BtnWidth + 1))
+   hwg_SendMessage(::handle, TB_SETBUTTONWIDTH, MAKELPARAM(::BtnWidth - 1, ::BtnWidth + 1))
    IF ::BtnWidth != NIL
       IF !::lVertical
-         SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::BtnWidth, ::BtnHeight))
+         hwg_SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::BtnWidth, ::BtnHeight))
       ELSE
-         SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::nWidth - ::nDrop - 1, ::BtnWidth))
+         hwg_SendMessage(::handle, TB_SETBUTTONSIZE, 0, MAKELPARAM(::nWidth - ::nDrop - 1, ::BtnWidth))
       ENDIF
-      SendMessage(::handle, WM_SIZE, 0, 0)
+      hwg_SendMessage(::handle, WM_SIZE, 0, 0)
    ENDIF
 
 RETURN NIL

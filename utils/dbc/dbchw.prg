@@ -102,8 +102,8 @@ PUBLIC nQueryWndHandle := 0
        ON IDM_CALCUL  ACTION  Calcul()      ;
        ON IDM_DSCRIPT ACTION  Scripts(2)    ;
        ON IDM_EXIT    ACTION  hwg_EndWindow()   ;
-       ON IDM_TILE    ACTION  SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0) ;
-       ON IDM_CASCADE ACTION  SendMessage(HWindow():GetMain():handle,WM_MDICASCADE,0,0)
+       ON IDM_TILE    ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0) ;
+       ON IDM_CASCADE ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDICASCADE,0,0)
 
 /*
     @ 0,0 PANEL oPanel  SIZE 0,28
@@ -127,9 +127,9 @@ PUBLIC nQueryWndHandle := 0
 Return Nil
 
 Function ChildClose
-Local nHandle := SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
+Local nHandle := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
    if nHandle > 0
-      SendMessage( HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0 )
+      hwg_SendMessage( HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0 )
    endif
 Return Nil
 
@@ -234,7 +234,7 @@ Return .T.
 
 Static Function ServerButton( iEnable )
 Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT1 )
-   SendMessage( hEdit, WM_ENABLE, iEnable, 0 )
+   hwg_SendMessage( hEdit, WM_ENABLE, iEnable, 0 )
 Return .T.
 
 /* -----------------------  Select Order --------------------- */
@@ -306,9 +306,9 @@ Static Function TagName
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT3 )
    IF hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
-      SendMessage( hEdit, WM_ENABLE, 1, 0 )
+      hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    ELSE
-      SendMessage( hEdit, WM_ENABLE, 0, 0 )
+      hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
    ENDIF
 Return Nil
 
@@ -519,7 +519,7 @@ Local oWindow, aControls, oBrowse, i
             oBrowse:bcolorSel  := VColor( "800080" )
             oBrowse:ofont := oBrwFont
             oBrowse:cargo := improc
-            SendMessage( HWindow():GetMain():handle, WM_MDIACTIVATE, hChild, 0 )
+            hwg_SendMessage( HWindow():GetMain():handle, WM_MDIACTIVATE, hChild, 0 )
             oBrowse:Refresh()
          ENDIF
       ENDIF

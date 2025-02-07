@@ -59,7 +59,7 @@ RETURN 0
 METHOD ExecuteTool(nid) CLASS HToolBarEx
 
    IF nid > 0
-      SendMessage(::oParent:handle, WM_COMMAND, makewparam(nid, BN_CLICKED), ::handle)
+      hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(nid, BN_CLICKED), ::handle)
       RETURN 0
    ENDIF
 

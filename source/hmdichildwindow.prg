@@ -218,7 +218,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
          onTrackScroll(Self, msg, wParam, lParam)
       ELSEIF msg == WM_NOTIFY .AND.!::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(, GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
-            SendMessage(oCtrl:handle, msg, wParam, lParam)
+            hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
@@ -316,7 +316,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    CASE WM_NOTIFY
       IF !::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(, GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
-            SendMessage(oCtrl:handle, msg, wParam, lParam)
+            hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
@@ -375,7 +375,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       IF !Empty(oWnd := oWnd:GetMdiActive()) .AND.oWnd:type == WND_MDICHILD .AND. oWnd:lMaximized .AND. ;
          (oWnd:lModal .OR. oWnd:lChild)
          oWnd:lMaximized := .F.
-         //-SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+         //-hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
       ENDIF
       //
       RETURN 0
@@ -469,8 +469,8 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
    ELSEIF (wParam == SC_MAXIMIZE .OR. wparam == SC_MAXIMIZE2) .AND. oWnd:type == WND_MDICHILD .AND. ;
       (oWnd:lChild .OR. oWnd:lModal)
       IF oWnd:WindowState == SW_SHOWMINIMIZED
-          SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_RESTORE, 0)
-          SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+          hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_RESTORE, 0)
+          hwg_SendMessage(oWnd:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
           RETURN 0
       ENDIF
       ars := aClone(oWnd:aRectSave)
@@ -505,7 +505,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          !Empty(oChild := oWnd:GetMdiActive()))
          IF (oCtrl := FindAccelerator(oChild, lParam)) != NIL
             oCtrl:SetFocus()
-            SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
+            hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
             RETURN - 2
             // MNC_IGNORE = 0  MNC_CLOSE = 1  MNC_EXECUTE = 2  MNC_SELECT = 3
          ENDIF
@@ -537,7 +537,7 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
       oWnd:Closable(.F.)
    ENDIF
    IF oWnd:oFont != NIL
-      SendMessage(oWnd:handle, WM_SETFONT, oWnd:oFont:handle, 0)
+      hwg_SendMessage(oWnd:handle, WM_SETFONT, oWnd:oFont:handle, 0)
    ENDIF
    InitControls(oWnd)
    InitObjects(oWnd, .T.)
@@ -551,8 +551,8 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    ENDIF
    //draw rect focus
    oWnd:nInitFocus := IIf(hb_IsObject(oWnd:nInitFocus), oWnd:nInitFocus:handle, oWnd:nInitFocus)
-   SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
-   SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
    IF oWnd:WindowState > 0
       onMove(oWnd)
    ENDIF
@@ -570,7 +570,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    LOCAL oCtrl
 
    IF wParam == SC_CLOSE
-      SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0)
+      hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0)
    ENDIF
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)

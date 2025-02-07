@@ -133,16 +133,16 @@ RETURN NIL
 METHOD onevent(msg, wParam, lParam) CLASS HButton
 
    IF msg == WM_SETFOCUS .AND. ::oParent:oParent == NIL
-      //- SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
+      //- hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
    ELSEIF msg == WM_KILLFOCUS
       IF ::GetParentForm():handle != ::oParent:handle
       //- IF ::oParent:oParent != NIL
          hwg_InvalidateRect(::handle, 0)
-         SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
+         hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
       ENDIF
    ELSEIF msg == WM_KEYDOWN
       IF (wParam == VK_RETURN .OR. wParam == VK_SPACE)
-         SendMessage(::handle, WM_LBUTTONDOWN, 0, MAKELPARAM(1, 1))
+         hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
       IF !ProcKeyList(Self, wParam)
@@ -159,7 +159,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
       ENDIF
    ELSEIF msg == WM_KEYUP
       IF (wParam == VK_RETURN .OR. wParam == VK_SPACE)
-         SendMessage(::handle, WM_LBUTTONUP, 0, MAKELPARAM(1, 1))
+         hwg_SendMessage(::handle, WM_LBUTTONUP, 0, MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
    ELSEIF msg == WM_GETDLGCODE .AND. !Empty(lParam)
@@ -179,20 +179,20 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
 
    //CASE WM_SETFOCUS
    //   IF ::oParent:oParent == NIL
-   //      //- SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
+   //      //- hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
    //   ENDIF
 
    CASE WM_KILLFOCUS
       IF ::GetParentForm():handle != ::oParent:handle
       //- IF ::oParent:oParent != NIL
           hwg_InvalidateRect(::handle, 0)
-          SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
+          hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
       ENDIF
       EXIT
 
    CASE WM_KEYDOWN
       IF (wParam == VK_RETURN .OR. wParam == VK_SPACE)
-         SendMessage(::handle, WM_LBUTTONDOWN, 0, MAKELPARAM(1, 1))
+         hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
       IF !ProcKeyList(Self, wParam)
@@ -214,7 +214,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
 
    CASE WM_KEYUP
       IF (wParam == VK_RETURN .OR. wParam == VK_SPACE)
-         SendMessage(::handle, WM_LBUTTONUP, 0, MAKELPARAM(1, 1))
+         hwg_SendMessage(::handle, WM_LBUTTONUP, 0, MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
       EXIT
@@ -258,7 +258,7 @@ METHOD Notify(lParam) CLASS HButton
       IF ::oParent:Classname == "HTAB"
          IF getfocus() != ::handle
             hwg_InvalidateRect(::handle, 0)
-            SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
+            hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
          ENDIF
          IF getkeystate(VK_LEFT) + getkeystate(VK_UP) < 0 .OR. ;
             (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0)
@@ -285,7 +285,7 @@ METHOD NoteCaption(cNote) CLASS HButton         //*
 
    IF cNote != NIL
       IF hwg_BitOr(::Style, BS_COMMANDLINK) > 0
-         SendMessage(::handle, BCM_SETNOTE, 0, ANSITOUNICODE(cNote))
+         hwg_SendMessage(::handle, BCM_SETNOTE, 0, ANSITOUNICODE(cNote))
       ENDIF
       ::cNote := cNote
    ENDIF

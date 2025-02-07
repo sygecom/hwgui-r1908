@@ -47,7 +47,7 @@ CLASS HControl INHERIT HCustomWindow
       0, ::handle), 1), .T.)
    METHOD Hide() INLINE (::oParent:lGetSkipLostFocus := .F., ::Super:Hide())
    //METHOD Disable() INLINE hwg_EnableWindow(::handle, .F.)
-   METHOD Disable() INLINE (IIf(SELFFOCUS(::handle), SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0),), ;
+   METHOD Disable() INLINE (IIf(SELFFOCUS(::handle), hwg_SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0),), ;
       hwg_EnableWindow(::handle, .F.))
    METHOD Enable()
    METHOD IsEnabled() INLINE hwg_IsWindowEnabled(::handle)
@@ -202,14 +202,14 @@ METHOD SetFocus(lValid) CLASS HControl
    IF !hwg_IsWindowEnabled(::handle)
       ::oParent:lSuspendMsgsHandling := .T.
       //GetSkip(::oParent, ::handle, , 1)
-      SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0)
+      hwg_SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, 0, 0)
       ::oParent:lSuspendMsgsHandling := lSuspend
    ELSE
       ::oParent:lSuspendMsgsHandling := !Empty(lValid)
       IF ::GetParentForm():Type < WND_DLG_RESOURCE
          hwg_SetFocus(::handle)
       ELSE
-         SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
+         hwg_SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
       ENDIF
       ::oParent:lSuspendMsgsHandling := lSuspend
    ENDIF
@@ -232,7 +232,7 @@ METHOD Enable() CLASS HControl
       nNext := AScan(::oParent:aControls, {|o|PtrtouLong(o:handle) == PtrtouLong(GetFocus())})
       nPos := AScan(::oParent:acontrols, {|o|PtrtouLong(o:handle) == PtrtouLong(::handle)})
       IF nPos < nNext
-         SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
+         hwg_SendMessage(GetActiveWindow(), WM_NEXTDLGCTL, ::handle, 1)
       ENDIF
    ENDIF
 
@@ -290,7 +290,7 @@ METHOD FontBold(lTrue) CLASS HControl
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(lTrue)
-      SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
+      hwg_SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 
@@ -316,7 +316,7 @@ METHOD FontItalic(lTrue) CLASS HControl
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , lTrue)
-      SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
+      hwg_SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 
@@ -342,7 +342,7 @@ METHOD FontUnderline(lTrue) CLASS HControl
    ENDIF
    IF lTrue != NIL
       ::oFont := ::oFont:SetFontStyle(, , , lTrue)
-      SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
+      hwg_SendMessage(::handle, WM_SETFONT, ::oFont:handle, MAKELPARAM(0, 1))
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT)
    ENDIF
 

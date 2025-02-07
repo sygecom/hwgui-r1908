@@ -126,7 +126,7 @@ METHOD Enabled(lEnabled) CLASS HPage
       ENDIF
       IF AScan(::oParent:Pages, {|p|p:lEnabled}) == 0
          ::oParent:Disable()
-         SendMessage(::oParent:handle, TCM_SETCURSEL, -1, 0)
+         hwg_SendMessage(::oParent:handle, TCM_SETCURSEL, -1, 0)
       ENDIF
    ENDIF
 
@@ -270,7 +270,7 @@ METHOD Init() CLASS HTab
 
    IF !::lInit
       InitTabControl(::handle, ::aTabs, IIf(::himl != NIL, ::himl, 0))
-      SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
+      hwg_SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
       IF hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
          ::TabHeightSize := 25 - (::oFont:Height + 12)
          x := ::nWidth / Len(::aPages) - 2
@@ -280,9 +280,9 @@ METHOD Init() CLASS HTab
       ELSE
          ::TabHeightSize := 23
       ENDIF
-      SendMessage(::handle, TCM_SETITEMSIZE, 0, MAKELPARAM(x, ::TabHeightSize))
+      hwg_SendMessage(::handle, TCM_SETITEMSIZE, 0, MAKELPARAM(x, ::TabHeightSize))
       IF ::himl != NIL
-         SendMessage(::handle, TCM_SETIMAGELIST, 0, ::himl)
+         hwg_SendMessage(::handle, TCM_SETIMAGELIST, 0, ::himl)
       ENDIF
       hwg_AddToolTip(::GetParentForm():handle, ::handle, "")
       ::Super:Init()
@@ -305,7 +305,7 @@ METHOD Init() CLASS HTab
             ::HidePage(i)
             ::nActive := IIf(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
          NEXT
-         SendMessage(::handle, TCM_SETCURFOCUS, ::nActive - 1, 0)
+         hwg_SendMessage(::handle, TCM_SETCURFOCUS, ::nActive - 1, 0)
          IF ::nActive == 0
             ::Disable()
             ::ShowPage(1)
@@ -313,7 +313,7 @@ METHOD Init() CLASS HTab
             ::ShowPage(::nActive)
          ENDIF
       ELSE
-         Asize(::aPages, SendMessage(::handle, TCM_GETITEMCOUNT, 0, 0))
+         Asize(::aPages, hwg_SendMessage(::handle, TCM_GETITEMCOUNT, 0, 0))
          AEval(::aPages, {|a, i|HB_SYMBOL_UNUSED(a), ::AddPage(HPage():New("", i, .T.,), "")})
       ENDIF
       ::nHolder := 1
@@ -365,7 +365,7 @@ METHOD SetTab(n) CLASS HTab
    IF n > 0 .AND. n <= Len(::aPages)
       IF ::Pages[n]:Enabled
          ::changePage(n)
-         SendMessage(::handle, TCM_SETCURFOCUS, n - 1, 0)
+         hwg_SendMessage(::handle, TCM_SETCURFOCUS, n - 1, 0)
       ENDIF
    ENDIF
 
@@ -694,17 +694,17 @@ METHOD Notify(lParam) CLASS HTab
    
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nkeyDown := GetNotifyKeydown(lParam)
-   LOCAL nPage := SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
+   LOCAL nPage := hwg_SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
 
    IF hwg_BitAnd(::Style, TCS_BUTTONS) != 0
-      nPage := SendMessage(::handle, TCM_GETCURFOCUS, 0, 0) + 1
+      nPage := hwg_SendMessage(::handle, TCM_GETCURFOCUS, 0, 0) + 1
    ENDIF
    IF nPage == 0 .OR. ::handle != GetFocus()
       IF nCode == TCN_SELCHANGE .AND. ::handle != GetFocus() .AND. ::lClick
-         SendMessage(::handle, TCM_SETCURSEL, SendMessage(::handle, ::nPrevPage - 1, 0, 0), 0)
+         hwg_SendMessage(::handle, TCM_SETCURSEL, hwg_SendMessage(::handle, ::nPrevPage - 1, 0, 0), 0)
          RETURN 0
       ELSEIF nCode == TCN_SELCHANGE
-         SendMessage(::handle, TCM_SETCURSEL, SendMessage(::handle, TCM_GETCURFOCUS, 0, 0), 0)
+         hwg_SendMessage(::handle, TCM_SETCURSEL, hwg_SendMessage(::handle, TCM_GETCURFOCUS, 0, 0), 0)
       ENDIF
       ::nPrevPage := nPage
       RETURN 0
@@ -829,8 +829,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
          ::ShowPage(::nActive)
-         IF SendMessage(::handle, TCM_GETROWCOUNT, 0, 0) > 1
-            hwg_InvalidateRect(::handle, 0, 1, ::Pages[1]:aItemPos[2], ::nWidth - 1, ::Pages[1]:aItemPos[4] * SendMessage(::handle, TCM_GETROWCOUNT, 0, 0))
+         IF hwg_SendMessage(::handle, TCM_GETROWCOUNT, 0, 0) > 1
+            hwg_InvalidateRect(::handle, 0, 1, ::Pages[1]:aItemPos[2], ::nWidth - 1, ::Pages[1]:aItemPos[4] * hwg_SendMessage(::handle, TCM_GETROWCOUNT, 0, 0))
          ENDIF
       ENDIF
 
@@ -843,7 +843,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ENDIF
 
    ELSEIF msg == WM_SETFONT .AND. ::oFont != NIL .AND. ::lInit
-      SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
+      hwg_SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
 
    ELSEIF msg == WM_KEYDOWN .AND. GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
        IF ProcKeyList(Self, wParam)
@@ -903,7 +903,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
           ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-          SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+          hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
           ::nPrevPage := 0
       ENDIF
       IF msg == WM_DRAWITEM
@@ -955,9 +955,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
          ::ShowPage(::nActive)
-         IF SendMessage(::handle, TCM_GETROWCOUNT, 0, 0) > 1
+         IF hwg_SendMessage(::handle, TCM_GETROWCOUNT, 0, 0) > 1
             hwg_InvalidateRect(::handle, 0, 1, ::Pages[1]:aItemPos[2], ::nWidth - 1, ;
-               ::Pages[1]:aItemPos[4] * SendMessage(::handle, TCM_GETROWCOUNT, 0, 0))
+               ::Pages[1]:aItemPos[4] * hwg_SendMessage(::handle, TCM_GETROWCOUNT, 0, 0))
          ENDIF
       ENDIF
       EXIT
@@ -973,7 +973,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    CASE WM_SETFONT
       IF ::oFont != NIL .AND. ::lInit
-         SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
+         hwg_SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
       ENDIF
       EXIT
 
@@ -1047,7 +1047,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
          ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-         SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+         hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
          ::nPrevPage := 0
       ENDIF
       IF msg == WM_DRAWITEM
@@ -1131,12 +1131,12 @@ STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
      FOR i := nStart TO nEnd STEP nSkip
          IF oCtrl:pages[i]:enabled
             IF (nSkip > 0 .AND. i > nStart) .OR. (nSkip < 0 .AND. i < nStart)
-               SendMessage(oCtrl:handle, TCM_SETCURFOCUS, i - nSkip - 1, 0) // BOTOES
+               hwg_SendMessage(oCtrl:handle, TCM_SETCURFOCUS, i - nSkip - 1, 0) // BOTOES
             ENDIF
             RETURN i
          ELSEIF i == nEnd
             IF oCtrl:pages[i - nSkip]:enabled
-             SendMessage(oCtrl:handle, TCM_SETCURFOCUS, i - (nSkip * 2) - 1, 0) // BOTOES
+             hwg_SendMessage(oCtrl:handle, TCM_SETCURFOCUS, i - (nSkip * 2) - 1, 0) // BOTOES
              RETURN (i - nSkip)
           ENDIF
             RETURN nPage
@@ -1163,7 +1163,7 @@ FUNCTION FindTabAccelerator(oPage, nKey)
   FOR i := 1 TO Len(oPage:aPages)
      IF (pos := At("&", oPage:Pages[i]:caption)) > 0 .AND. cKey == Upper(SubStr(oPage:Pages[i]:caption, ++pos, 1))
         IF oPage:pages[i]:Enabled
-            SendMessage(oPage:handle, TCM_SETCURFOCUS, i - 1, 0)
+            hwg_SendMessage(oPage:handle, TCM_SETCURFOCUS, i - 1, 0)
         ENDIF
         RETURN  i
      ENDIF
@@ -1233,7 +1233,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
       RETURN 0
    ENDIF
 
-   nPage := SendMessage(::oParent:handle, TCM_GETCURFOCUS, 0, 0) + 1
+   nPage := hwg_SendMessage(::oParent:handle, TCM_GETCURFOCUS, 0, 0) + 1
    oPage := IIf(nPage > 0, ::oParent:Pages[nPage], ::oParent:Pages[1])
 
    ::disablebrush := oPage:brush

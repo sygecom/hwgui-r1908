@@ -182,7 +182,7 @@ CLASS VAR winclass   INIT "STATIC"
    METHOD Paint(lpDis)
    METHOD SetColor(tcolor, bcolor, lRedraw)
    METHOD Curvature(nCurvature)
-   //METHOD Refresh() INLINE SendMessage(::handle, WM_PAINT, 0, 0), hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
+   //METHOD Refresh() INLINE hwg_SendMessage(::handle, WM_PAINT, 0, 0), hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
 
 ENDCLASS
 

@@ -206,7 +206,7 @@ CLASS VAR winclass   INIT "BUTTON"
    METHOD Activate()
    METHOD Init()
    METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp)
-   METHOD GetValue() INLINE (SendMessage(::handle, BM_GETCHECK, 0, 0) == 1)
+   METHOD GetValue() INLINE (hwg_SendMessage(::handle, BM_GETCHECK, 0, 0) == 1)
   // METHOD Notify(lParam)
    METHOD onevent(msg, wParam, lParam)
    METHOD onGotFocus()

@@ -37,7 +37,7 @@ CLASS HTrackBar INHERIT HControl
    METHOD Init()
    METHOD SetValue(nValue)
    METHOD GetValue()
-   METHOD GetNumTics() INLINE SendMessage(::handle, TBM_GETNUMTICS, 0, 0)
+   METHOD GetNumTics() INLINE hwg_SendMessage(::handle, TBM_GETNUMTICS, 0, 0)
 
 ENDCLASS
 
@@ -187,7 +187,7 @@ METHOD Init() CLASS HTrackBar
    IF !::lInit
       ::Super:Init()
       TrackBarSetRange(::handle, ::nLow, ::nHigh)
-      SendMessage(::handle, TBM_SETPOS, 1, ::value)
+      hwg_SendMessage(::handle, TBM_SETPOS, 1, ::value)
       IF ::bPaint != NIL
          ::nHolder := 1
          SetWindowObject(::handle, Self)
@@ -200,7 +200,7 @@ RETURN NIL
 METHOD SetValue(nValue) CLASS HTrackBar
 
    IF hb_IsNumeric(nValue)
-      SendMessage(::handle, TBM_SETPOS, 1, nValue)
+      hwg_SendMessage(::handle, TBM_SETPOS, 1, nValue)
       ::value := nValue
    ENDIF
 
@@ -208,7 +208,7 @@ RETURN NIL
 
 METHOD GetValue() CLASS HTrackBar
 
-   ::value := SendMessage(::handle, TBM_GETPOS, 0, 0)
+   ::value := hwg_SendMessage(::handle, TBM_GETPOS, 0, 0)
 
 RETURN ::value
 

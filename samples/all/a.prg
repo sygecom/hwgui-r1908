@@ -77,7 +77,7 @@ FUNCTION Main()
       ENDMENU
       MENU TITLE "&Windows"
          MENUITEM "&Tile"  ;
-            ACTION SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0)
+            ACTION hwg_SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0)
       ENDMENU
    ENDMENU
 
@@ -510,7 +510,7 @@ STATIC FUNCTION CreateC(oDlg)
       @ 50, 200 DATEPICKER o SIZE 80, 24
       lFirst := .T.
    ENDIF
-   SendMessage(o:handle, DTM_SETFORMAT, 0, "dd':'MM':'yyyy")
+   hwg_SendMessage(o:handle, DTM_SETFORMAT, 0, "dd':'MM':'yyyy")
 
 RETURN NIL
 

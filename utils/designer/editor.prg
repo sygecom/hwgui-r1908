@@ -214,7 +214,7 @@ FUNCTION EditMethod( cMethName, cMethod )
    @ 0, 0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
        STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_WANTRETURN ;
        ON INIT {||ChangeTheme( HDTheme():nSelected )}                 ;
-       ON GETFOCUS {||IIf(oEdit:cargo,(SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.),.F.)} ;
+       ON GETFOCUS {||IIf(oEdit:cargo,(hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.),.F.)} ;
        ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
        FONT oFont
    //           STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL+ES_WANTRETURN+WS_VSCROLL+WS_HSCROLL
@@ -224,7 +224,7 @@ FUNCTION EditMethod( cMethName, cMethod )
 
    // oEdit:title := cMethod
    *-SetDlgKey( odlg, 0,VK_TAB, {msginfo("tab")})
-         *-{SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
+         *-{hwg_SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
    *-SetDlgKey( oEdit, 0, 9)
    IF lRes
@@ -266,7 +266,7 @@ STATIC FUNCTION editShow( cText,lRedraw )
 
    IF lRedraw != Nil .AND. lRedraw
       // cText := oEdit:Gettext()
-      nTextLength := SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 ) + 1
+      nTextLength := hwg_SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 ) + 1
       cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
    ELSE
       IF cText == Nil
@@ -274,22 +274,22 @@ STATIC FUNCTION editShow( cText,lRedraw )
       ENDIF
       nTextLength := Len(cText)
    ENDIF
-   SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
+   hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
    re_SetDefault( oEdit:handle,oTheme:normal[1],oEdit:oFont:name,,oTheme:normal[3],oTheme:normal[4],,oEdit:oFont:charset )
-   SendMessage(oEdit:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
+   hwg_SendMessage(oEdit:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    oEdit:SetText( cText )
    cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
    IF !Empty(arrHi := CreateHiLight(cText))
       re_SetCharFormat( oEdit:handle,arrHi )
    ENDIF
-   SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
+   hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
    oEdit:oParent:AddEvent( EN_CHANGE,oEdit:id,{||EnChange(2)} )
 
 Return Nil
 
 STATIC FUNCTION EnChange( nEvent )
 
-   LOCAL pos := SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
+   LOCAL pos := hwg_SendMessage( oEdit:handle, EM_GETSEL, 0, 0 )
    LOCAL nLength
    LOCAL pos1 := hwg_LOWORD(pos)+1
    LOCAL pos2 := hwg_HIWORD(pos)+1
@@ -305,15 +305,15 @@ STATIC FUNCTION EnChange( nEvent )
       nEditPos1 := pos1
       nEditPos2 := pos2
    ELSE                  // EN_CHANGE
-      SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
-      nLength := SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 )
+      hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
+      nLength := hwg_SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 )
       IF nLength - nTextLength > 2
          // writelog( "1: "+Str(nLength, 5)+" "+Str(nTextLength, 5) )
       ELSE
-         nLine := SendMessage( oEdit:handle, EM_LINEFROMCHAR, -1, 0 )
+         nLine := hwg_SendMessage( oEdit:handle, EM_LINEFROMCHAR, -1, 0 )
          cBuffer := re_getline( oEdit:handle,nLine )
          // writelog( "pos: "+LTrim(Str(pos1))+" Line: "+LTrim(Str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer )
-         nLinePos := SendMessage( oEdit:handle, EM_LINEINDEX, nLine, 0 ) + 1
+         nLinePos := hwg_SendMessage( oEdit:handle, EM_LINEINDEX, nLine, 0 ) + 1
          AAdd(arr, { nLinePos,nLinePos+Len(cBuffer), ;
             oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4], })
          HiLightString( cBuffer, arr, nLinePos )
@@ -325,7 +325,7 @@ STATIC FUNCTION EnChange( nEvent )
          oEdit:lChanged := .T.
       ENDIF
       nTextLength := nLength
-      SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
+      hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
    ENDIF
    // writelog( "EnChange "+Str(pos1)+" "+Str(pos2) ) // +" Length: "+Str(nLength) )
 Return Nil
@@ -554,7 +554,7 @@ Static Function UpdSample( nAction )
    oTheme:quote   := aSchemes[nScheme, 5]
    oTheme:number  := aSchemes[nScheme, 6]
    re_SetDefault( oEditC:handle,oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4] )
-   SendMessage(oEditC:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
+   hwg_SendMessage(oEditC:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    re_SetCharFormat( oEditC:handle,CreateHiLight(oEditC:GetText(),oTheme) )
 Return Nil
 

@@ -126,9 +126,9 @@ FUNCTION ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
-      ntxtLen := SendMessage(aControls[i]:handle, SB_GETTEXTLENGTH, nPart - 1, 0)
+      ntxtLen := hwg_SendMessage(aControls[i]:handle, SB_GETTEXTLENGTH, nPart - 1, 0)
       cText := Replicate(Chr(0), ntxtLen)
-      SendMessage(aControls[i]:handle, SB_GETTEXT, nPart - 1, @cText)
+      hwg_SendMessage(aControls[i]:handle, SB_GETTEXT, nPart - 1, @cText)
    ENDIF
    RETURN cText
 
@@ -370,7 +370,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
 
 FUNCTION hwg_EndWindow()
    IF HWindow():GetMain() != NIL
-      SendMessage(HWindow():aWindows[1]:handle, WM_SYSCOMMAND, SC_CLOSE, 0)
+      hwg_SendMessage(HWindow():aWindows[1]:handle, WM_SYSCOMMAND, SC_CLOSE, 0)
    ENDIF
    RETURN NIL
 

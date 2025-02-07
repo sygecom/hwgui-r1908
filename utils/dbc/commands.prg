@@ -36,14 +36,14 @@ Return Nil
 Static Function RecNumberEdit
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
-   SendMessage( hEdit, WM_ENABLE, 1, 0 )
+   hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
    SetFocus( hEdit )
 Return Nil
 
 Static Function RecNumberDisable
 Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDITRECN )
-   SendMessage( hEdit, WM_ENABLE, 0, 0 )
+   hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
 Return Nil
 
 Static Function InitRepl()
@@ -268,14 +268,14 @@ Return Nil
 Static Function DelimEdit
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
-   SendMessage( hEdit, WM_ENABLE, 1, 0 )
+   hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
    SetFocus( hEdit )
 Return Nil
 
 Static Function DelimDisable
 Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDITDWITH )
-   SendMessage( hEdit, WM_ENABLE, 0, 0 )
+   hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
 Return Nil
 
 Static Function InitApp()
@@ -347,7 +347,7 @@ Local hWnd, oWindow, aControls, i
       Zap
    ENDIF
 
-   hWnd := SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
+   hWnd := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
    oWindow := HWindow():FindWindow( hWnd )
    IF oWindow != Nil
       aControls := oWindow:aControls

@@ -56,10 +56,10 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD GetMain()
    METHOD GetMdiMain() INLINE IIf(::GetMain() != NIL, ::aWindows[1], NIL)
    METHOD Center() INLINE hwg_CenterWindow(::handle, ::Type)
-   METHOD Restore() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
-   METHOD Maximize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
-   METHOD Minimize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
-   METHOD Close() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_CLOSE, 0)
+   METHOD Restore() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
+   METHOD Maximize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+   METHOD Minimize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
+   METHOD Close() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_CLOSE, 0)
    METHOD Release() INLINE ::Close(), ::super:Release(), Self := NIL
    METHOD isMaximized() INLINE GetWindowPlacement(::handle) == SW_SHOWMAXIMIZED
    METHOD isMinimized() INLINE GetWindowPlacement(::handle) == SW_SHOWMINIMIZED
@@ -182,7 +182,7 @@ FUNCTION ReleaseAllWindows(hWnd)
 
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != NIL .AND. PtrToUlong(oItem:oParent:handle) == PtrToUlong(hWnd)
-         SendMessage(oItem:handle, WM_CLOSE, 0, 0)
+         hwg_SendMessage(oItem:handle, WM_CLOSE, 0, 0)
       ENDIF
    NEXT
    IF PtrToUlong(HWindow():aWindows[1]:handle) == PtrToUlong(hWnd)

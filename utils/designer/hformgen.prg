@@ -1255,7 +1255,7 @@ STATIC FUNCTION ScrollProc( oDlg, msg, wParam, lParam )
             hwg_RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             hwg_InvalidateRect( oDlg:handle, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
-            SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
+            hwg_SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
 
@@ -1282,7 +1282,7 @@ STATIC FUNCTION ScrollProc( oDlg, msg, wParam, lParam )
             hwg_RedrawWindow( oDlg:handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             hwg_InvalidateRect( oDlg:handle, 0, LEFT_INDENT, 0, aCoors[3], aCoors[4] )
-            SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
+            hwg_SendMessage( oDlg:handle, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
    /*

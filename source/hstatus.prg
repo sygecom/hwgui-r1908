@@ -145,8 +145,8 @@ METHOD StatusHeight(nHeight) CLASS HStatus
          IF ::lInit .AND. __ObjHasMsg(::oParent, "AOFFSET")
             ::oParent:aOffset[4] -= (aCoors[4] - aCoors[2])
          ENDIF
-         SendMessage(::handle, SB_SETMINHEIGHT, nHeight, 0)
-         SendMessage(::handle, WM_SIZE, 0, 0)
+         hwg_SendMessage(::handle, SB_SETMINHEIGHT, nHeight, 0)
+         hwg_SendMessage(::handle, WM_SIZE, 0, 0)
          aCoors := hwg_GetWindowRect(::handle)
       ENDIF
       ::nStatusHeight := (aCoors[4] - aCoors[2]) - 1
@@ -164,9 +164,9 @@ METHOD GetTextPanel(nPart) CLASS HStatus
    LOCAL ntxtLen
    LOCAL cText := ""
 
-   ntxtLen := SendMessage(::handle, SB_GETTEXTLENGTH, nPart - 1, 0)
+   ntxtLen := hwg_SendMessage(::handle, SB_GETTEXTLENGTH, nPart - 1, 0)
    cText := Replicate(Chr(0), ntxtLen)
-   SendMessage(::handle, SB_GETTEXT, nPart - 1, @cText)
+   hwg_SendMessage(::handle, SB_GETTEXT, nPart - 1, @cText)
 
 RETURN cText
 
@@ -175,7 +175,7 @@ RETURN cText
 METHOD SetTextPanel(nPart, cText, lRedraw) CLASS HStatus
 
    //WriteStatusWindow(::handle, nPart - 1, cText)
-   SendMessage(::handle, SB_SETTEXT, nPart - 1, cText)
+   hwg_SendMessage(::handle, SB_SETTEXT, nPart - 1, cText)
    IF lRedraw != NIL .AND. lRedraw
       hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ENDIF
@@ -198,7 +198,7 @@ METHOD SetIconPanel(nPart, cIcon, nWidth, nHeight) CLASS HStatus
       oIcon := HIcon():addFile(cIcon, nWidth, nHeight)
    ENDIF
    IF !Empty(oIcon)
-      SendMessage(::handle, SB_SETICON, nPart - 1, oIcon:handle)
+      hwg_SendMessage(::handle, SB_SETICON, nPart - 1, oIcon:handle)
    ENDIF
 
 RETURN NIL

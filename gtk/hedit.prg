@@ -242,8 +242,8 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
       IF msg == WM_MOUSEWHEEL
          nPos := hwg_HIWORD(wParam)
          nPos := IIf(nPos > 32768, nPos - 65535, nPos)
-         // SendMessage( ::handle,EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0 )
-         // SendMessage( ::handle,EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0 )
+         // hwg_SendMessage( ::handle,EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0 )
+         // hwg_SendMessage( ::handle,EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0 )
       ENDIF
 
    ENDIF

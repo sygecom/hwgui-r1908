@@ -179,7 +179,7 @@ METHOD DelControl(oCtrl) CLASS HCustomWindow
    LOCAL id := oCtrl:id
    LOCAL i := AScan(::aControls, {|o|o:handle == h})
 
-   SendMessage(h, WM_CLOSE, 0, 0)
+   hwg_SendMessage(h, WM_CLOSE, 0, 0)
    IF i != 0
       ADel(::aControls, i)
       ASize(::aControls, Len(::aControls) -1)
@@ -466,7 +466,7 @@ METHOD SetTextClass(x) CLASS HCustomWindow
       ::SetText(x)
    ELSE
       ::title := x
-      SendMessage(::handle, WM_SETTEXT, 0, ::Title)
+      hwg_SendMessage(::handle, WM_SETTEXT, 0, ::Title)
    ENDIF
    //::Refresh()
 
@@ -1269,11 +1269,11 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
          oWin:lResult := .T.
          IF lForce
          ELSEIF hb_IsBlock(oCtrl:bClick) .AND. !lForce
-            SendMessage(oCtrl:oParent:handle, WM_COMMAND, makewparam(oCtrl:id, BN_CLICKED), oCtrl:handle)
+            hwg_SendMessage(oCtrl:oParent:handle, WM_COMMAND, makewparam(oCtrl:id, BN_CLICKED), oCtrl:handle)
          ELSEIF oWin:lExitOnEnter
             oWin:close()
          ELSE
-            SendMessage(oWin:handle, WM_COMMAND, makewparam(IDOK, 0), oCtrlFocu:handle)
+            hwg_SendMessage(oWin:handle, WM_COMMAND, makewparam(IDOK, 0), oCtrlFocu:handle)
          ENDIF
          RETURN .T.
       ENDIF
@@ -1281,7 +1281,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
       IF (oCtrl := oWin:FindControl(IDCANCEL)) != NIL .AND. oCtrl:IsEnabled()
          oCtrl:SetFocus()
          oWin:lResult := .F.
-         SendMessage(oCtrl:oParent:handle, WM_COMMAND, makewparam(oCtrl:id, BN_CLICKED), oCtrl:handle)
+         hwg_SendMessage(oCtrl:oParent:handle, WM_COMMAND, makewparam(oCtrl:id, BN_CLICKED), oCtrl:handle)
       ELSEIF oWin:lGetSkiponEsc
          oCtrl := oCtrlFocu
          IF oCtrl != NIL .AND. __ObjHasMsg(oCtrl, "OGROUP") .AND. oCtrl:oGroup:oHGroup != NIL
@@ -1296,7 +1296,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
          oWin:close()
       ELSEIF !oWin:lExitOnEsc
          oWin:nLastKey := 0
-         SendMessage(oWin:handle, WM_COMMAND, makewparam(IDCANCEL, 0), oCtrlFocu:handle)
+         hwg_SendMessage(oWin:handle, WM_COMMAND, makewparam(IDCANCEL, 0), oCtrlFocu:handle)
          RETURN .F.
       ENDIF
       RETURN .T.

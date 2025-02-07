@@ -221,7 +221,7 @@ METHOD Delete(lInternal) CLASS HTreeNode
       NEXT
    ENDIF
    tree_ReleaseNode(::oTree:handle, ::handle)
-   SendMessage(::oTree:handle, TVM_DELETEITEM, 0, ::handle)
+   hwg_SendMessage(::oTree:handle, TVM_DELETEITEM, 0, ::handle)
    IF lInternal == NIL
       aItems := IIf(::oParent == NIL, ::oTree:aItems, ::oParent:aItems)
       j := AScan(aItems, {|o|o:handle == h})
@@ -258,7 +258,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
       TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1))
       ::lChecked := lChecked
    ELSE
-      state := SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
+      state := hwg_SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
       ::lChecked := int(state / 4092) == 2
    ENDIF
    RETURN ::lChecked
@@ -300,9 +300,9 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD FindChild(h)
    METHOD FindChildPos(oNode, h)
    METHOD GetSelected() INLINE IIf(hb_IsObject(::oItem := TreeGetSelected(::handle)), ::oItem, NIL)
-   METHOD EditLabel(oNode) BLOCK {|Self, o|SendMessage(::handle, TVM_EDITLABEL, 0, o:handle)}
-   METHOD Expand(oNode, lAllNode)   //BLOCK {|Self, o|SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
-   METHOD Select(oNode) BLOCK {|Self, o|SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle)}
+   METHOD EditLabel(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_EDITLABEL, 0, o:handle)}
+   METHOD Expand(oNode, lAllNode)   //BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
+   METHOD Select(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle)}
    METHOD Clean()
    METHOD Notify(lParam)
    METHOD END() INLINE (::Super:END(), ReleaseTree(::aItems))
@@ -311,8 +311,8 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD ItemHeight(nHeight) SETGET
    METHOD SearchString(cText, iNivel, oNode, inodo)
    METHOD Selecteds(oItem, aSels)
-   METHOD Top() INLINE IIf(!Empty(::aItems), (::Select(::aItems[1]), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_TOP), NIL)),)
-   METHOD Bottom() INLINE IIf(!Empty(::aItems), (::Select(::aItems[Len(::aItems)]), SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_BOTTOM), NIL)),)
+   METHOD Top() INLINE IIf(!Empty(::aItems), (::Select(::aItems[1]), hwg_SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_TOP), NIL)),)
+   METHOD Bottom() INLINE IIf(!Empty(::aItems), (::Select(::aItems[Len(::aItems)]), hwg_SendMessage(::handle, WM_VSCROLL, MAKEWPARAM(0, SB_BOTTOM), NIL)),)
 
 ENDCLASS
 
@@ -376,7 +376,7 @@ METHOD Init() CLASS HTree
       SetWindowObject(::handle, Self)
       hwg_InitTreeView(::handle)
       IF ::himl != NIL
-         SendMessage(::handle, TVM_SETIMAGELIST, TVSIL_NORMAL, ::himl)
+         hwg_SendMessage(::handle, TVM_SETIMAGELIST, TVSIL_NORMAL, ::himl)
       ENDIF
 
    ENDIF
@@ -424,7 +424,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
 
    ELSEIF msg == WM_LBUTTONUP .AND. ::lDragging .AND. ::hitemDrop != NIL
       ::lDragging := .F.
-      SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, NIL)
+      hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, NIL)
 
       IF hb_IsBlock(::bDrag)
          nEval :=  Eval(::bDrag, Self, ::hitemDrag, ::hitemDrop)
@@ -551,7 +551,7 @@ METHOD Clean() CLASS HTree
 
    ::lEmpty := .T.
    ReleaseTree(::aItems)
-   SendMessage(::handle, TVM_DELETEITEM, 0, TVI_ROOT)
+   hwg_SendMessage(::handle, TVM_DELETEITEM, 0, TVI_ROOT)
    ::aItems := {}
 
    RETURN NIL
@@ -559,9 +559,9 @@ METHOD Clean() CLASS HTree
 METHOD ItemHeight(nHeight) CLASS HTree
 
    IF nHeight != NIL
-      SendMessage(::handle, TVM_SETITEMHEIGHT, nHeight, 0)
+      hwg_SendMessage(::handle, TVM_SETITEMHEIGHT, nHeight, 0)
    ELSE
-      nHeight := SendMessage(::handle, TVM_GETITEMHEIGHT, 0, 0)
+      nHeight := hwg_SendMessage(::handle, TVM_GETITEMHEIGHT, 0, 0)
    ENDIF
    RETURN  nHeight
 
@@ -579,7 +579,7 @@ METHOD Notify(lParam) CLASS HTree
    IF ncode == NM_SETCURSOR .AND. ::lDragging
       ::hitemDrop := tree_Hittest(::handle,,, @nAct)
       IF ::hitemDrop != NIL
-         SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
+         hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
       ENDIF
    ENDIF
 
@@ -596,14 +596,14 @@ METHOD Notify(lParam) CLASS HTree
             ELSEIF oItem:oTree:bAction != NIL
                Eval(oItem:oTree:bAction, oItem, Self)
             ENDIF
-            SendMessage(::handle, TVM_SETITEM, , oitem:handle)
+            hwg_SendMessage(::handle, TVM_SETITEM, , oitem:handle)
          ENDIF
       ENDIF
 
    ELSEIF nCode == TVN_BEGINLABELEDIT .OR. nCode == TVN_BEGINLABELEDITW
       s_aEvents := aClone(::oParent:aEvents)
-      ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
-      ::oParent:AddEvent(0, IDCANCEL, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
+      ::oParent:AddEvent(0, IDOK, {||hwg_SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
+      ::oParent:AddEvent(0, IDCANCEL, {||hwg_SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
 
       // RETURN 1
 
@@ -709,7 +709,7 @@ METHOD Notify(lParam) CLASS HTree
       IF ::lDragging
          ::hitemDrop := tree_Hittest(::handle,,, @nAct)
          IF ::hitemDrop != NIL
-            SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
+            hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
          ENDIF
       ENDIF
       EXIT
@@ -728,7 +728,7 @@ METHOD Notify(lParam) CLASS HTree
             ELSEIF oItem:oTree:bAction != NIL
                Eval(oItem:oTree:bAction, oItem, Self)
             ENDIF
-            SendMessage(::handle, TVM_SETITEM, , oitem:handle)
+            hwg_SendMessage(::handle, TVM_SETITEM, , oitem:handle)
          ENDIF
       ENDIF
       EXIT
@@ -736,8 +736,8 @@ METHOD Notify(lParam) CLASS HTree
    CASE TVN_BEGINLABELEDIT
    CASE TVN_BEGINLABELEDITW
       s_aEvents := aClone(::oParent:aEvents)
-      ::oParent:AddEvent(0, IDOK, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
-      ::oParent:AddEvent(0, IDCANCEL, {||SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
+      ::oParent:AddEvent(0, IDOK, {||hwg_SendMessage(::handle, TVM_ENDEDITLABELNOW, 0, 0)})
+      ::oParent:AddEvent(0, IDCANCEL, {||hwg_SendMessage(::handle, TVM_ENDEDITLABELNOW, 1, 0)})
       // RETURN 1
       EXIT
 
@@ -850,7 +850,7 @@ METHOD Expand(oNode, lAllNode) CLASS HTree
    LOCAL i
    LOCAL iLen := Len(oNode:aitems)
    
-   SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, oNode:handle)
+   hwg_SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, oNode:handle)
    FOR i := 1 TO iLen
       IF !Empty(lAllNode) .AND. Len(oNode:aitems) > 0
          ::Expand(oNode:aItems[i], lAllNode)

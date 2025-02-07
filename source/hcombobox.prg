@@ -281,10 +281,10 @@ METHOD INIT() CLASS HComboBox
                ::value := 1
             ENDIF
          ENDIF
-         SendMessage(::handle, CB_RESETCONTENT, 0, 0)
+         hwg_SendMessage(::handle, CB_RESETCONTENT, 0, 0)
          FOR i := 1 TO Len(::aItems)
             hwg_ComboAddString(::handle, ::aItems[i])
-            numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
+            numofchars := hwg_SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
             IF numofchars > LongComboWidth
                LongComboWidth := numofchars
             ENDIF
@@ -296,8 +296,8 @@ METHOD INIT() CLASS HComboBox
          IF ::lText
             IF ::lEdit
                hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
-               SendMessage(::handle, CB_SELECTSTRING, -1, ::value)
-               SendMessage(::handle, CB_SETEDITSEL, -1, 0)
+               hwg_SendMessage(::handle, CB_SELECTSTRING, -1, ::value)
+               hwg_SendMessage(::handle, CB_SETEDITSEL, -1, 0)
             ELSE
                #ifdef __XHARBOUR__
                hwg_ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
@@ -305,27 +305,27 @@ METHOD INIT() CLASS HComboBox
                hwg_ComboSetString(::handle, hb_AScan(::aItems, ::value, , , .T.))
                #endif
             ENDIF
-            //SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
+            //hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
             SetWindowText(::handle, ::value)
          ELSE
             hwg_ComboSetString(::handle, ::value)
          ENDIF
          avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
          NewLongComboWidth := (LongComboWidth - 2) * avgwidth
-         SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
+         hwg_SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
       ::Super:Init()
       IF !::lResource
          // HEIGHT Items
          IF !Empty(::nhItem)
-            SendMessage(::handle, CB_SETITEMHEIGHT, 0, ::nhItem + 0.10)
+            hwg_SendMessage(::handle, CB_SETITEMHEIGHT, 0, ::nhItem + 0.10)
          ELSE
-            ::nhItem := SendMessage(::handle, CB_GETITEMHEIGHT, 0, 0) + 0.10
+            ::nhItem := hwg_SendMessage(::handle, CB_GETITEMHEIGHT, 0, 0) + 0.10
          ENDIF
-         nHeightBox := SendMessage(::handle, CB_GETITEMHEIGHT, -1, 0) //+ 0.750
+         nHeightBox := hwg_SendMessage(::handle, CB_GETITEMHEIGHT, -1, 0) //+ 0.750
          //  WIDTH  Items
          IF !Empty(::ncWidth)
-            SendMessage(::handle, CB_SETDROPPEDWIDTH, ::ncWidth, 0)
+            hwg_SendMessage(::handle, CB_SETDROPPEDWIDTH, ::ncWidth, 0)
          ENDIF
          ::nHeight := Int(nHeightBox / 0.75 + (::nhItem * ::nDisplay)) + 3
       ENDIF
@@ -333,12 +333,12 @@ METHOD INIT() CLASS HComboBox
    IF !::lResource
       hwg_MoveWindow(::handle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       // HEIGHT COMBOBOX
-      SendMessage(::handle, CB_SETITEMHEIGHT, -1, ::nHeightBox)
+      hwg_SendMessage(::handle, CB_SETITEMHEIGHT, -1, ::nHeightBox)
    ENDIF
    ::Refresh()
    IF ::lEdit
-      SendMessage(::handle, CB_SETEDITSEL, -1, 0)
-      SendMessage(::handle, WM_SETREDRAW, 1, 0)
+      hwg_SendMessage(::handle, CB_SETEDITSEL, -1, 0)
+      hwg_SendMessage(::handle, WM_SETREDRAW, 1, 0)
    ENDIF
 
 RETURN NIL
@@ -550,7 +550,7 @@ RETURN -1
 METHOD MaxLength(nMaxLength) CLASS HComboBox
 
    IF nMaxLength != NIL .AND. ::lEdit
-       SendMessage(::handle, CB_LIMITTEXT, nMaxLength, 0)
+       hwg_SendMessage(::handle, CB_LIMITTEXT, nMaxLength, 0)
        ::nMaxLength := nMaxLength
    ENDIF
 
@@ -560,7 +560,7 @@ RETURN ::nMaxLength
 
 METHOD Requery() CLASS HComboBox
 
-   SendMessage(::handle, CB_RESETCONTENT, 0, 0)
+   hwg_SendMessage(::handle, CB_RESETCONTENT, 0, 0)
    ::Populate()
 
    /*
@@ -590,7 +590,7 @@ METHOD Refresh() CLASS HComboBox
          IF ::lText
          //vari := IIf(::bSetGetField != NIL .AND. hb_IsChar(vari), Trim(vari), vari)
             ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
-               //SendMessage(::handle, CB_SETEDITSEL, 0, Len(::value))
+               //hwg_SendMessage(::handle, CB_SETEDITSEL, 0, Len(::value))
          ELSE
             ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
          ENDIF
@@ -605,7 +605,7 @@ METHOD Refresh() CLASS HComboBox
    ENDIF
 
    /*
-   SendMessage(::handle, CB_RESETCONTENT, 0, 0)
+   hwg_SendMessage(::handle, CB_RESETCONTENT, 0, 0)
 
    FOR i := 1 TO Len(::aItems)
       hwg_ComboAddString(::handle, ::aItems[i])
@@ -614,7 +614,7 @@ METHOD Refresh() CLASS HComboBox
    IF ::lText
       IF ::lEdit
          hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
-         SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
+         hwg_SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__
       hwg_ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
@@ -696,13 +696,13 @@ RETURN NIL
 
 METHOD GetValue() CLASS HComboBox
 
-   LOCAL nPos := SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1
+   LOCAL nPos := hwg_SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1
 
    //::value := IIf(::lText, ::aItems[nPos], nPos)
    IF ::lText
        IF (::lEdit .OR. !hb_IsChar(::Value)) .AND. nPos <= 1
            ::Value := hwg_GetEditText(::oParent:handle, ::id)
-           nPos := SendMessage(::handle, CB_FINDSTRINGEXACT, -1, ::value) + 1
+           nPos := hwg_SendMessage(::handle, CB_FINDSTRINGEXACT, -1, ::value) + 1
         ELSEIF nPos > 0
          ::value := ::aItems[nPos]
       ENDIF
@@ -727,7 +727,7 @@ RETURN ::value
 
 METHOD GetValueBound(xItem) CLASS HComboBox
 
-   LOCAL nPos := SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1
+   LOCAL nPos := hwg_SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1
 
    IF ::columnBound == 1
       RETURN NIL
@@ -779,11 +779,11 @@ METHOD DeleteItem(xIndex) CLASS HComboBox
    LOCAL nIndex
 
    IF ::lText .AND. hb_IsChar(xIndex)
-         nIndex := SendMessage(::handle, CB_FINDSTRINGEXACT, -1, xIndex) + 1
+         nIndex := hwg_SendMessage(::handle, CB_FINDSTRINGEXACT, -1, xIndex) + 1
    ELSE
        nIndex := xIndex
    ENDIF
-   IF SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= Len(ocombo:aitems)
+   IF hwg_SendMessage(::handle, CB_DELETESTRING, nIndex - 1, 0) > 0               //<= Len(ocombo:aitems)
       ADel(::Aitems, nIndex)
       ASize(::Aitems, Len(::aitems) - 1)
       IF Len(::AitemsBound) > 0
@@ -801,7 +801,7 @@ METHOD AddItem(cItem, cItemBound, nPos) CLASS HComboBox
 
    LOCAL nCount
 
-   nCount := SendMessage(::handle, CB_GETCOUNT, 0, 0) + 1
+   nCount := hwg_SendMessage(::handle, CB_GETCOUNT, 0, 0) + 1
    IF Len(::Aitems) == Len(::AitemsBound) .AND. cItemBound != NIL
       IF nCount == 1
          ::RowSource({{cItem, cItemBound}})
@@ -836,7 +836,7 @@ METHOD SetCueBanner(cText, lShowFoco) CLASS HComboBox
    LOCAL lRet := .F.
 
    IF ::lEdit
-      lRet := SendMessage(::handle, CB_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
+      lRet := hwg_SendMessage(::handle, CB_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
    ENDIF
 
 RETURN lRet
@@ -847,13 +847,13 @@ METHOD InteractiveChange() CLASS HComboBox
 
    LOCAL npos
 
-   npos := SendMessage(::handle, CB_GETEDITSEL, 0, 0)
+   npos := hwg_SendMessage(::handle, CB_GETEDITSEL, 0, 0)
    ::SelStart := nPos
    ::cDisplayValue := GetWindowText(::handle)
    ::oparent:lSuspendMsgsHandling := .T.
    Eval(::bChangeInt, ::value, Self)
    ::oparent:lSuspendMsgsHandling := .F.
-   SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
+   hwg_SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
 
 RETURN NIL
 
@@ -881,9 +881,9 @@ METHOD onChange(lForce) CLASS HComboBox
       RETURN NIL
    ENDIF
 
-   ::SetItem(SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
+   ::SetItem(hwg_SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
    IF hb_IsBlock(::bChangeSel)
-      //::SetItem(SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
+      //::SetItem(hwg_SendMessage(::handle, CB_GETCURSEL, 0, 0) + 1)
       ::oparent:lSuspendMsgsHandling := .T.
       Eval(::bChangeSel, ::Value, Self)
       ::oparent:lSuspendMsgsHandling := .F.
@@ -907,7 +907,7 @@ METHOD When() CLASS HComboBox
       //::Refresh()
    ELSE
       //  SetWindowText(::handle, ::value)
-      //  SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
+      //  hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
    ENDIF
    nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
    IF hb_IsBlock(::bGetFocus)
@@ -1039,7 +1039,7 @@ METHOD Populate() CLASS HComboBox
    ELSEIF ::lText .AND. !::lEdit .AND. Empty(::value)
       ::value := IIf(cAlias == NIL, ::aItems[1], (cAlias)->(&(value)))
    ENDIF
-   SendMessage(::handle, CB_RESETCONTENT, 0, 0)
+   hwg_SendMessage(::handle, CB_RESETCONTENT, 0, 0)
    ::AitemsBound := {}
    IF cAlias != NIL .AND. SELECT(cAlias) > 0
       ::aItems := {}
@@ -1052,7 +1052,7 @@ METHOD Populate() CLASS HComboBox
             AAdd(::AitemsBound, (cAlias)->(&(cValueBound)))
          ENDIF
          hwg_ComboAddString(::handle, ::aItems[i])
-         numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
+         numofchars := hwg_SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
          IF numofchars > LongComboWidth
              LongComboWidth := numofchars
          ENDIF
@@ -1075,7 +1075,7 @@ METHOD Populate() CLASS HComboBox
           ELSE
              hwg_ComboAddString(::handle, ::aItems[i])
           ENDIF
-          numofchars := SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
+          numofchars := hwg_SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
           if numofchars > LongComboWidth
               LongComboWidth := numofchars
           endif

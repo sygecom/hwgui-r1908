@@ -95,9 +95,9 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD FindDialog(hWndTitle, lAll)
    METHOD GetActive()
    METHOD Center() INLINE hwg_CenterWindow(::handle, ::Type)
-   METHOD Restore() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
-   METHOD Maximize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
-   METHOD Minimize() INLINE SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
+   METHOD Restore() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
+   METHOD Maximize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+   METHOD Minimize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
    METHOD Close() INLINE EndDialog(::handle)
    METHOD Release() INLINE ::Close(), Self := NIL
 
@@ -178,7 +178,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          hwg_CreateDialog(hParent, Self)
          /*
          IF ::oIcon != NIL
-            SendMessage(::handle, WM_SETICON, 1, ::oIcon:handle)
+            hwg_SendMessage(::handle, WM_SETICON, 1, ::oIcon:handle)
          ENDIF
          */
       ENDIF
@@ -210,7 +210,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
 
          /*
          IF ::oIcon != NIL
-            SendMessage(::handle, WM_SETICON, 1, ::oIcon:handle)
+            hwg_SendMessage(::handle, WM_SETICON, 1, ::oIcon:handle)
          ENDIF
          */
       ENDIF
@@ -522,10 +522,10 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    oDlg:rect := hwg_GetclientRect(oDlg:handle)
 
    IF hb_IsObject(oDlg:oIcon)
-      SendMessage(oDlg:handle, WM_SETICON, 1, oDlg:oIcon:handle)
+      hwg_SendMessage(oDlg:handle, WM_SETICON, 1, oDlg:oIcon:handle)
    ENDIF
    IF hb_IsObject(oDlg:oFont)
-      SendMessage(oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0)
+      hwg_SendMessage(oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0)
    ENDIF
    IF oDlg:Title != NIL
       SetWindowText(oDlg:handle, oDlg:Title)
@@ -558,13 +558,13 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       nReturn := 0
    ENDIF
 
-   uis := SendMessage(oDlg:handle, WM_QUERYUISTATE, 0, 0)
+   uis := hwg_SendMessage(oDlg:handle, WM_QUERYUISTATE, 0, 0)
    // draw focus
    IF uis != 0
       // triggered to mouse
-      SendMessage(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+      hwg_SendMessage(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
    ELSE
-      SendMessage(oDlg:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+      hwg_SendMessage(oDlg:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
    ENDIF
 
    // CALL DIALOG NOT VISIBLE
@@ -699,7 +699,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
             RETURN 1
          ENDIF
          IF hb_IsObject(oCtrl) .AND. (GetNextDlgTabItem(GetActiveWindow(), hCtrl, 1) == hCtrl .OR. SelfFocus(oCtrl:handle, hCtrl))
-            SendMessage(oCtrl:handle, WM_KILLFOCUS, 0, 0)
+            hwg_SendMessage(oCtrl:handle, WM_KILLFOCUS, 0, 0)
          ENDIF
          IF hb_IsObject(oCtrl) .AND. oCtrl:id == IDOK .AND. __ObjHasMsg(oCtrl, "BCLICK") .AND. oCtrl:bClick == NIL
             oDlg:lResult := .T.
@@ -732,7 +732,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
                RETURN 1
             ENDIF
             oDlg:bDestroy := NIL
-            SendMessage(oCtrl:handle, WM_CLOSE, 0, 0)
+            hwg_SendMessage(oCtrl:handle, WM_CLOSE, 0, 0)
             RETURN 0
          ELSEIF hb_IsObject(oCtrl) .AND. oCtrl:IsEnabled() .AND. !Selffocus(oCtrl:handle)
             //oCtrl:SetFocus()
@@ -753,7 +753,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
          nEsc := (getkeystate(VK_ESCAPE) < 0)
          //oDlg:nLastKey := VK_ESCAPE
       ELSEIF iParLow == IDHELP  // HELP
-         SendMessage(oDlg:handle, WM_HELP, 0, 0)
+         hwg_SendMessage(oDlg:handle, WM_HELP, 0, 0)
       ENDIF
    ENDIF
 
@@ -879,7 +879,7 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
 
    IF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. oDlg:lContainer .AND. !SelfFocus(lParam, oDlg:handle)
       UpdateWindow(oDlg:handle)
-      SendMessage(lParam, WM_NCACTIVATE, 1, NIL)
+      hwg_SendMessage(lParam, WM_NCACTIVATE, 1, NIL)
       RETURN 0
    ENDIF
    IF iParLow == WA_ACTIVE .AND. SelfFocus(lParam, oDlg:handle)
@@ -1073,7 +1073,7 @@ FUNCTION EndDialog(handle)
    ENDIF
    // force control triggered killfocus
    IF !Empty(hFocus) .AND. (oCtrl := oDlg:FindControl(, hFocus)) != NIL .AND. oCtrl:bLostFocus != NIL .AND. oDlg:lModal
-      SendMessage(hFocus, WM_KILLFOCUS, 0, 0)
+      hwg_SendMessage(hFocus, WM_KILLFOCUS, 0, 0)
    ENDIF
    IF hb_IsBlock(oDlg:bDestroy)
       //oDlg:lSuspendMsgsHandling := .T.
@@ -1153,7 +1153,7 @@ STATIC FUNCTION onSysCommand(oDlg, wParam, lParam)
       // accelerator IN TAB/CONTAINER
       IF (oCtrl := FindAccelerator(oDlg, lParam)) != NIL
          oCtrl:SetFocus()
-         SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
+         hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
          RETURN 2
       ENDIF
       EXIT

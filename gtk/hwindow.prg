@@ -162,7 +162,7 @@ CLASS HMainWindow INHERIT HWindow
                      cAppName,oBmp,cHelp,nHelpId )
    METHOD Activate( lShow )
    METHOD onEvent( msg, wParam, lParam )
-   // METHOD GetMdiActive()  INLINE ::FindWindow( SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
+   // METHOD GetMdiActive()  INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
 
 ENDCLASS
 
@@ -344,7 +344,7 @@ Local oItem, iCont, nCont
    #ifdef __XHARBOUR__
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != Nil .AND. oItem:oParent:handle == hWnd
-          SendMessage( oItem:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( oItem:handle,WM_CLOSE,0,0 )
       ENDIF
    NEXT
    #else
@@ -354,7 +354,7 @@ Local oItem, iCont, nCont
 
       IF HWindow():aWindows[iCont]:oParent != Nil .AND. ;
               HWindow():aWindows[iCont]:oParent:handle == hWnd
-          SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE,0,0 )
       ENDIF
 
    NEXT
@@ -370,20 +370,20 @@ Static Function onCommand( oWnd,wParam,lParam )
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
-       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
-          SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
+       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
        ENDIF
    ELSEIF wParam == SC_RESTORE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
-          SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
        ENDIF
    ELSEIF wParam == SC_MAXIMIZE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
-          SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
        ENDIF
    ELSEIF wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
        nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
-       SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
+       hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
    ENDIF
 */   
    iParHigh := hwg_HIWORD(wParam)
@@ -481,7 +481,7 @@ Static Function onMdiCommand( oWnd,wParam )
 Local iParHigh, iParLow, iItem
 /*
    IF wParam == SC_CLOSE
-      SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0 )
+      hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0 )
    ENDIF
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)

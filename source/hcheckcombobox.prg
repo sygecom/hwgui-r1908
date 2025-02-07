@@ -131,11 +131,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
    ELSEIF msg == WM_CHAR
       IF (wParam == VK_SPACE)
 
-         nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
+         nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
-         SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+         hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
@@ -160,8 +160,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
       IF (PtInRect(rcClient, pt))
 
-         nItemHeight := SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
-         nTopIndex := SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
+         nItemHeight := hwg_SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
+         nTopIndex := hwg_SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
 
          // Compute which index to check/uncheck
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
@@ -171,12 +171,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
             hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
-            nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
+            nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
             ::SetCheck(nIndex, !::GetCheck(nIndex))
 
             // Notify that selection has changed
 
-            SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+            hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
 
          ENDIF
       ENDIF
@@ -216,11 +216,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
    CASE WM_CHAR
       IF wParam == VK_SPACE
-         nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
+         nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
-         SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+         hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF ::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal
          IF wParam == VK_TAB
@@ -243,8 +243,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       pt[1] := hwg_LOWORD(lParam)
       pt[2] := hwg_HIWORD(lParam)
       IF PtInRect(rcClient, pt)
-         nItemHeight := SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
-         nTopIndex := SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
+         nItemHeight := hwg_SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
+         nTopIndex := hwg_SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
          // Compute which index to check/uncheck
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
@@ -252,10 +252,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
             hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
-            nIndex := SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
+            nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
             ::SetCheck(nIndex, !::GetCheck(nIndex))
             // Notify that selection has changed
-            SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+            hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
          ENDIF
       ENDIF
       EXIT
@@ -345,7 +345,7 @@ METHOD SelectAll(bCheck) CLASS hCheckComboBox
 
    DEFAULT bCheck TO .T.
 
-   nCount := SendMessage(::handle, CB_GETCOUNT, 0, 0)
+   nCount := hwg_SendMessage(::handle, CB_GETCOUNT, 0, 0)
 
    FOR i := 1 TO nCount
       ::SetCheck(i, bCheck)
@@ -366,7 +366,7 @@ METHOD RecalcText() CLASS hCheckComboBox
    IF (!::m_bTextUpdated)
 
       // Get the list count
-      ncount := SendMessage(::handle, CB_GETCOUNT, 0, 0)
+      ncount := hwg_SendMessage(::handle, CB_GETCOUNT, 0, 0)
 
       // Get the list separator
 
@@ -501,7 +501,7 @@ METHOD MeasureItem(l) CLASS hCheckComboBox
 
       IF (!::m_bItemHeightSet)
          ::m_bItemHeightSet := .T.
-         SendMessage(::handle, CB_SETITEMHEIGHT, - 1, MAKELONG(lpMeasureItemStruct[5], 0))
+         hwg_SendMessage(::handle, CB_SETITEMHEIGHT, - 1, MAKELONG(lpMeasureItemStruct[5], 0))
       ENDIF
 
       dc:SelectObject(pFont)

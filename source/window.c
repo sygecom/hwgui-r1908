@@ -491,7 +491,7 @@ HB_FUNC(HWG_CREATEMDICHILDWINDOW)
   hb_strfree(hTitle);
 }
 
-HB_FUNC(SENDMESSAGE)
+HB_FUNC(HWG_SENDMESSAGE)
 {
   void *hText;
   LPCTSTR lpText = HB_PARSTR(4, &hText, NULL);
@@ -505,6 +505,8 @@ HB_FUNC(SENDMESSAGE)
                              ));
   hb_strfree(hText);
 }
+
+HB_FUNC_TRANSLATE(SENDMESSAGE, HWG_SENDMESSAGE);
 
 HB_FUNC(POSTMESSAGE)
 {

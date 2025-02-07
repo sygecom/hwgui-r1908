@@ -302,7 +302,7 @@ Return cDest
 
 Function SaveBuildFile()
 Local cLibFiles, i, oNome, g
-Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" ) 
+Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 if empty(cFolderFile); Return Nil; Endif
 if file(cFolderFile)
    If(MsgYesNo("File "+cFolderFile+" EXIT ..Replace?"))
@@ -648,7 +648,7 @@ Local oDlg, oEdit
 
    @ 10,10 EDITBOX oEdit CAPTION cMess SIZE 480,440 STYLE WS_VSCROLL+WS_HSCROLL+ES_MULTILINE+ES_READONLY ;
         COLOR 16777088 BACKCOLOR 0 ;
-        ON GETFOCUS {||SendMessage(oEdit:handle,EM_SETSEL,0,0)}
+        ON GETFOCUS {||hwg_SendMessage(oEdit:handle,EM_SETSEL,0,0)}
 
    @ 200,460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100,32 
 

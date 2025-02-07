@@ -553,7 +553,7 @@ METHOD MDown() CLASS HOwnButton
       ::state := OBTN_PRESSED
       //hwg_InvalidateRect(::handle, 0)
       //::SetFocus()
-      SendMessage(::handle, WM_SETFOCUS, 0, 0)
+      hwg_SendMessage(::handle, WM_SETFOCUS, 0, 0)
       hwg_InvalidateRect(::handle, 0)
       hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
    ELSEIF ::lCheck

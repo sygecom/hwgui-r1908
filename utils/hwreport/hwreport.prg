@@ -427,7 +427,7 @@ Local aCoors := hwg_GetClientRect( hWnd )
             hwg_RedrawWindow( hWnd, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
-            SendMessage( hWnd, WM_PAINT, 0, 0 )
+            hwg_SendMessage( hWnd, WM_PAINT, 0, 0 )
          ENDIF
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP

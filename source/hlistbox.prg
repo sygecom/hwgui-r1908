@@ -149,9 +149,9 @@ METHOD Init() CLASS HListBox
             ::value := 1
          ENDIF
          IF !Empty(::nItemHeight)
-            SendMessage(::handle, LB_SETITEMHEIGHT, 0, ::nItemHeight)
+            hwg_SendMessage(::handle, LB_SETITEMHEIGHT, 0, ::nItemHeight)
          ENDIF
-         SendMessage(::handle, LB_RESETCONTENT, 0, 0)
+         hwg_SendMessage(::handle, LB_RESETCONTENT, 0, 0)
          FOR i := 1 TO Len(::aItems)
             hwg_ListboxAddString(::handle, ::aItems[i])
          NEXT
@@ -243,7 +243,7 @@ METHOD Requery() CLASS HListBox
 
    LOCAL i
 
-   SendMessage(::handle, LB_RESETCONTENT, 0, 0)
+   hwg_SendMessage(::handle, LB_RESETCONTENT, 0, 0)
    FOR i := 1 TO Len(::aItems)
       hwg_ListboxAddString(::handle, ::aItems[i])
    NEXT
@@ -272,7 +272,7 @@ RETURN NIL
 METHOD SetItem(nPos) CLASS HListBox
 
    ::value := nPos
-   SendMessage(::handle, LB_SETCURSEL, nPos - 1, 0)
+   hwg_SendMessage(::handle, LB_SETCURSEL, nPos - 1, 0)
 
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::value)
@@ -304,7 +304,7 @@ METHOD AddItems(p) CLASS HListBox
 
    AAdd(::aItems, p)
    hwg_ListboxAddString(::handle, p)
-   //   SendMessage(::handle, LB_RESETCONTENT, 0, 0)
+   //   hwg_SendMessage(::handle, LB_RESETCONTENT, 0, 0)
    //   FOR i := 1 TO Len(::aItems)
    //      hwg_ListboxAddString(::handle, ::aItems[i])
    //   NEXT
@@ -316,7 +316,7 @@ RETURN Self
 
 METHOD DeleteItem(nPos) CLASS HListBox
 
-   IF SendMessage(::handle, LB_DELETESTRING, nPos - 1, 0) >= 0 //<= Len(ocombo:aitems)
+   IF hwg_SendMessage(::handle, LB_DELETESTRING, nPos - 1, 0) >= 0 //<= Len(ocombo:aitems)
       ADel(::Aitems, nPos)
       ASize(::Aitems, Len(::aitems) - 1)
       ::value := Min(Len(::aitems), ::value)
@@ -334,7 +334,7 @@ METHOD Clear() CLASS HListBox
 
    ::aItems := {}
    ::value := 0
-   SendMessage(::handle, LB_RESETCONTENT, 0, 0)
+   hwg_SendMessage(::handle, LB_RESETCONTENT, 0, 0)
    hwg_ListboxSetString(::handle, ::value)
 
 RETURN .T.
@@ -347,7 +347,7 @@ METHOD onChange(oCtrl) CLASS HListBox
 
    HB_SYMBOL_UNUSED(oCtrl)
 
-   nPos := SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
+   nPos := hwg_SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
    ::SetItem(nPos)
 
 RETURN NIL
@@ -399,7 +399,7 @@ METHOD Valid(oCtrl) CLASS HListBox
    ENDIF
    //nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
    IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
-      ::value := SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
+      ::value := hwg_SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, ::value, Self)
       ENDIF
