@@ -17,7 +17,7 @@
 #include "hbclass.ch"
 #include "guilib.ch"
 
-REQUEST ENDWINDOW
+REQUEST HWG_ENDWINDOW
 
 #define  CONTROL_FIRST_ID   34000
 

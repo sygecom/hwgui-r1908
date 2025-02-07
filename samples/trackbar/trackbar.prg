@@ -25,7 +25,7 @@ FUNCTION Main()
    MENU OF oWnd
       MENUITEM "&Dialog 1" ACTION Dlg1()
       MENUITEM "&Dialog 2" ACTION Dlg2()
-      MENUITEM "&Exit"     ACTION EndWindow()
+      MENUITEM "&Exit"     ACTION hwg_EndWindow()
    ENDMENU
 
    @ 20, 20 TRACKBAR oTB ;

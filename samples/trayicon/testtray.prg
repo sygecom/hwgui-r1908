@@ -11,7 +11,7 @@ FUNCTION Main()
    CONTEXT MENU oTrayMenu
       MENUITEM "Message"  ACTION hwg_MsgInfo("Tray Message !")
       SEPARATOR
-      MENUITEM "Exit"  ACTION EndWindow()
+      MENUITEM "Exit"  ACTION hwg_EndWindow()
    ENDMENU
 
    oMainWindow:InitTray(oIcon, , oTrayMenu, "TestTray")

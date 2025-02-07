@@ -54,7 +54,7 @@ FUNCTION Main()
 
    MENU OF oWinMain
       MENU TITLE "&Arquivo"
-          MENUITEM "&Sair"              ACTION EndWindow()
+          MENUITEM "&Sair"              ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Browse"
          MENUITEM "&Database"           ACTION BrwDbs(.F.)

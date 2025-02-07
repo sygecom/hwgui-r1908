@@ -8,7 +8,7 @@ FUNCTION Main()
 
    MENU OF oMainWindow
       MENUITEM "&New child" ACTION NewChild()
-      MENUITEM "&Exit" ACTION EndWindow()
+      MENUITEM "&Exit" ACTION hwg_EndWindow()
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow MAXIMIZED

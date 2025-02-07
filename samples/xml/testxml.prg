@@ -44,7 +44,7 @@ FUNCTION Main()
             NEXT
             SEPARATOR
          ENDIF
-         MENUITEM "Exit" ACTION EndWindow()
+         MENUITEM "Exit" ACTION hwg_EndWindow()
       ENDMENU
 
       MENU TITLE "Help"

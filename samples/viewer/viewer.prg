@@ -54,7 +54,7 @@ FUNCTION Main()
       MENU TITLE "&File"
          MENUITEM "&Open" ACTION FileOpen(oMainWindow)
          SEPARATOR
-         MENUITEM "&Exit" + Chr(9) + "Alt+x" ACTION EndWindow() ;
+         MENUITEM "&Exit" + Chr(9) + "Alt+x" ACTION hwg_EndWindow() ;
            ACCELERATOR FALT, Asc("X")
       ENDMENU
       MENU TITLE "&View"

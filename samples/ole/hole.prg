@@ -34,7 +34,7 @@ FUNCTION Main()
    @ 20, 20 EDITBOX oEdit CAPTION "Hello, world !" SIZE 260, 30 STYLE ES_AUTOHSCROLL
 
    @ 20, 200 LINE LENGTH 180
-   @ 260, 170 BUTTON "Close" SIZE 120, 30 ON CLICK {||EndWindow()}
+   @ 260, 170 BUTTON "Close" SIZE 120, 30 ON CLICK {||hwg_EndWindow()}
 
    ACTIVATE WINDOW oMainWindow
 

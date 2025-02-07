@@ -26,7 +26,7 @@ FUNCTION Main()
          MENUITEM "&Minimize   " ACTION oMain:Minimize()
          MENUITEM "&Restore    " ACTION oMain:Restore()
          MENUITEM "&Center     " ACTION oMain:Center()
-         MENUITEM "&Sair" ACTION EndWindow()
+         MENUITEM "&Sair" ACTION hwg_EndWindow()
       ENDMENU
    ENDMENU
 

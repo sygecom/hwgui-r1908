@@ -11,7 +11,7 @@ FUNCTION Main()
          MENUITEM "Dialog&1 (MODAL)" ACTION ShowDialog1()
          MENUITEM "Dialog&2 (NOMODAL)" ACTION ShowDialog2()
          SEPARATOR
-         MENUITEM "E&xit" ACTION EndWindow()
+         MENUITEM "E&xit" ACTION hwg_EndWindow()
       ENDMENU
    ENDMENU
 

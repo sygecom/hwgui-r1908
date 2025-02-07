@@ -72,7 +72,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
          MENUITEM "&Print static" ID IDM_PRINT ACTION PrintRpt()
          MENUITEM "&Print full" ID IDM_PREVIEW ACTION (ClonePaintRep(aPaintRep),PrintReport(,,.T.))
          SEPARATOR
-         MENUITEM "&Exit" ID IDM_EXIT ACTION EndWindow()
+         MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Items"
          MENUITEM "&Text" ID IDM_ITEMTEXT ACTION s_nAddItem:=TYPE_TEXT

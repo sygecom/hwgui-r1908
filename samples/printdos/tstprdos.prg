@@ -55,7 +55,7 @@ FUNCTION Main()
          MENUITEM "&Printer in Graphic Mode" ACTION TestGraphic()
          MENUITEM "&Test in Preview        " ACTION TestPreview()
          SEPARATOR
-         MENUITEM "&Exit" ACTION EndWindow()
+         MENUITEM "&Exit" ACTION hwg_EndWindow()
       ENDMENU
 
       MENU TITLE "T&est to Print"

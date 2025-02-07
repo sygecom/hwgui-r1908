@@ -314,7 +314,7 @@ Local n, cTitle
    ENDIF
    stroka += Chr(13)+Chr(10) + Chr(13)+Chr(10) + "Continue ?"
    IF !hwg_MsgYesNo(stroka, cTitle)
-      EndWindow()
+      hwg_EndWindow()
       QUIT
    ENDIF
 #else

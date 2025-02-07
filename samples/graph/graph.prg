@@ -8,7 +8,7 @@ FUNCTION Main()
      AT 200, 0 SIZE 400, 100
 
    MENU OF oMainWindow
-      MENUITEM "&Exit" ACTION EndWindow()
+      MENUITEM "&Exit" ACTION hwg_EndWindow()
       MENUITEM "&Graph1" ACTION Graph1()
       MENUITEM "&Graph2" ACTION Graph2()
       MENUITEM "&Graph3" ACTION Graph3()

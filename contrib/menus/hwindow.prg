@@ -98,7 +98,7 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD FindWindow( hWnd )
    METHOD GetMain()
    METHOD GetMdiActive()
-   METHOD Close()	INLINE EndWindow()
+   METHOD Close()	INLINE hwg_EndWindow()
 ENDCLASS
 
 METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;

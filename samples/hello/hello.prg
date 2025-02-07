@@ -52,7 +52,7 @@ FUNCTION Main()
    oItem:AddNode("Third-1")
    oTree:AddNode("Forth")
 
-   @ 100, 180 BUTTON "Close" SIZE 150, 30 ON CLICK {||EndWindow()}
+   @ 100, 180 BUTTON "Close" SIZE 150, 30 ON CLICK {||hwg_EndWindow()}
 
    MENU OF oMainWindow
       MENU TITLE "File"

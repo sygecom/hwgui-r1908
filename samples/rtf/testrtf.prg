@@ -27,7 +27,7 @@ FUNCTION Main()
       MENU TITLE "&File"
          MENUITEM "&Test RTF" ACTION TestRTF()
          SEPARATOR
-         MENUITEM "&Exit" ACTION EndWindow()
+         MENUITEM "&Exit" ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION ShellAbout("Info", "RTF Demo")

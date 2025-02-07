@@ -32,7 +32,7 @@ FUNCTION Main()
    MENU OF oWnd
       MENUITEM "&Calendário 1" ACTION Dlg1()
       MENUITEM "&Calendário 2" ACTION Dlg2()
-      MENUITEM "&Sair"         ACTION EndWindow()
+      MENUITEM "&Sair"         ACTION hwg_EndWindow()
    ENDMENU
 
    ACTIVATE WINDOW oWnd

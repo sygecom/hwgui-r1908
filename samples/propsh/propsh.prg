@@ -16,7 +16,7 @@ FUNCTION Main()
      AT 200, 0 SIZE 400, 150
 
    MENU OF oMainWindow
-      MENUITEM "&Exit" ACTION EndWindow()
+      MENUITEM "&Exit" ACTION hwg_EndWindow()
       MENUITEM "&Property Sheet" ACTION OpenConfig()
    ENDMENU
 

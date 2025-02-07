@@ -12,7 +12,7 @@ FUNCTION Main()
          MENUITEM "Option A2" ACTION hwg_MsgInfo("A2")
          MENUITEM "Option A3" ACTION hwg_MsgInfo("A3")
          SEPARATOR
-         MENUITEM "Exit" ACTION EndWindow()
+         MENUITEM "Exit" ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "Menu B"
          MENUITEM "Option B1" ACTION hwg_MsgInfo("B1")

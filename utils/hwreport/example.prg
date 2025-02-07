@@ -28,7 +28,7 @@ PRIVATE aTermMetr := { 800 }
    @ 0,0 PANEL oPanel OF oMainWindow ID IDCW_PANEL ;
         ON SIZE {|o,x|hwg_MoveWindow(o:handle,0,0,x,48)}
 
-    @ 2,3  OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
+    @ 2,3  OWNERBUTTON OF oPanel ID 113 ON CLICK {||hwg_EndWindow()} ;
         SIZE 80,44 FLAT ;
         TEXT "Exit" COLOR Vcolor("0000FF") FONT oFont
     @ 82,3 OWNERBUTTON OF oPanel ID 108 ON CLICK {||Print1()} ;

@@ -15,7 +15,7 @@ FUNCTION Main()
    INIT WINDOW oMainWindow MAIN MDI TITLE "HwGui - Child Windows Example" STYLE WS_CLIPCHILDREN ;
 
    MENU OF oMainWindow
-      MENUITEM "&Exit" ACTION EndWindow()
+      MENUITEM "&Exit" ACTION hwg_EndWindow()
       MENUITEM "&Create a child" ACTION CreateChild()
    ENDMENU
 

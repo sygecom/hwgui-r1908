@@ -10,7 +10,7 @@
 
 #include "hwgui.ch"
 
-Function EndWindow()
+Function hwg_EndWindow()
    IF HWindow():GetMain() != Nil
       HWindow():aWindows[1]:Close()
    ENDIF

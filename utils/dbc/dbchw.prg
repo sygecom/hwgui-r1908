@@ -101,7 +101,7 @@ PUBLIC nQueryWndHandle := 0
        ON IDM_QUEEDIT ACTION  Query(.T.)    ;
        ON IDM_CALCUL  ACTION  Calcul()      ;
        ON IDM_DSCRIPT ACTION  Scripts(2)    ;
-       ON IDM_EXIT    ACTION  EndWindow()   ;
+       ON IDM_EXIT    ACTION  hwg_EndWindow()   ;
        ON IDM_TILE    ACTION  SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0) ;
        ON IDM_CASCADE ACTION  SendMessage(HWindow():GetMain():handle,WM_MDICASCADE,0,0)
 

@@ -29,7 +29,7 @@ FUNCTION Main()
          SEPARATOR
          MENUITEM "&Font" ACTION hwg_MsgInfo("font")
          SEPARATOR
-         MENUITEM "&Exit" ACTION EndWindow()
+         MENUITEM "&Exit" ACTION hwg_EndWindow()
       ENDMENU
    ENDMENU
 

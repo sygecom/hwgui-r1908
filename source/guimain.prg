@@ -368,7 +368,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
 
    RETURN NIL
 
-FUNCTION EndWindow()
+FUNCTION hwg_EndWindow()
    IF HWindow():GetMain() != NIL
       SendMessage(HWindow():aWindows[1]:handle, WM_SYSCOMMAND, SC_CLOSE, 0)
    ENDIF

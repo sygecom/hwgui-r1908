@@ -182,7 +182,7 @@ PUBLIC funcoes := {}
         MENUITEM "&" + m_salvarcomo ACTION Salvar_Projeto(2)
         MENUITEM "&" + m_fechar ACTION Fecha_texto()
         SEPARATOR
-        MENUITEM "&" + m_sair ACTION endwindow()
+        MENUITEM "&" + m_sair ACTION hwg_EndWindow()
 
      ENDMENU
      MENU TITLE "&" + m_editar

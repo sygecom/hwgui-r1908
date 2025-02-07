@@ -17,7 +17,7 @@ FUNCTION Main()
       SIZE 400, 150
 
    MENU OF oMainWindow
-      MENUITEM "&Exit" ACTION EndWindow()
+      MENUITEM "&Exit" ACTION hwg_EndWindow()
       MENUITEM "&Tree" ACTION DlgGet()
    ENDMENU
 

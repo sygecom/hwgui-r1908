@@ -91,7 +91,7 @@ FUNCTION Main()
         SIZE 80, 40 FLAT ;
         TEXT "About" FONT oFont COORDINATES 0, 20, 0, 0 ;
         BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0, 4, 0, 0
-   @ 402, 3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||EndWindow()} ;
+   @ 402, 3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||hwg_EndWindow()} ;
         SIZE 80, 40 FLAT ;
         TEXT "Exit" FONT oFont COORDINATES 0, 20, 0, 0 ;
         BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0, 4, 0, 0

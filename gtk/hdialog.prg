@@ -12,7 +12,7 @@
 #include "hbclass.ch"
 #include "guilib.ch"
 
-REQUEST ENDWINDOW
+REQUEST HWG_ENDWINDOW
 
 Static aMessModalDlg := { ;
          { WM_COMMAND,{|o,w,l|DlgCommand(o,w,l)} },         ;

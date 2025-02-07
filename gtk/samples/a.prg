@@ -36,7 +36,7 @@ Private nColor, oBmp2
                      MsgInfo(IIf(nColor != NIL, Str(nColor), "--"),"Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
-         MENUITEM "&Exit" ACTION EndWindow()
+         MENUITEM "&Exit" ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Samples"
          MENUITEMCHECK "&Checked" ID 1001 

@@ -74,7 +74,7 @@ STATIC FUNCTION DefError(oError)
    MemoWrit(s_LogInitialPath + "Error.log", cMessage)
 
    ErrorPreview(cMessage)
-   EndWindow()
+   hwg_EndWindow()
    PostQuitMessage(0)
 
    RETURN .F.

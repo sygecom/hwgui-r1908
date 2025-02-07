@@ -34,7 +34,7 @@ FUNCTION Main()
       MENU TITLE "&Demo"
          MENUITEM "&Demo for TAB DBF " ID 303 ACTION Cadastro()
          SEPARATOR
-         MENUITEM "&Exit" ACTION {||dbCloseAll(), EndWindow()}
+         MENUITEM "&Exit" ACTION {||dbCloseAll(), hwg_EndWindow()}
       ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&As" ACTION hwg_MsgInfo("HwGUI Harbour Win32 GUI", "Copyright (c) Alexander Kresin")

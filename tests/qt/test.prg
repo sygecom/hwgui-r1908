@@ -12,7 +12,7 @@ FUNCTION Main()
       MENU TITLE "&Menu"
          MENUITEM "&Dialog" ACTION ShowQtDialog()
          SEPARATOR
-         MENUITEM "E&xit" ACTION EndWindow()
+         MENUITEM "E&xit" ACTION hwg_EndWindow()
       ENDMENU
    ENDMENU
 
