@@ -484,4 +484,10 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
    hwg_ReleaseDC(oWin:handle, hDC)
    RETURN ASize
 
+#pragma BEGINDUMP
 
+#include <hbapi.h>
+
+HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
+
+#pragma ENDDUMP
