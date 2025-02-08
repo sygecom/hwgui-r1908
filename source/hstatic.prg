@@ -158,7 +158,7 @@ METHOD Init() CLASS HStatic
          ::Auto_Size(::Title)
       ENDIF
       IF ::title != NIL
-         SetWindowText(::handle, ::title)
+         hwg_SetWindowText(::handle, ::title)
       ENDIF
    ENDIF
 
@@ -275,7 +275,7 @@ METHOD Paint(lpDis) CLASS HStatic
 
    client_rect := CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
    //client_rect := hwg_GetClientRect(::handle)
-   szText := GetWindowText(::handle)
+   szText := hwg_GetWindowText(::handle)
 
    // Map "Static Styles" to "Text Styles"
    nstyle := ::nStyleHS // ::style

@@ -184,7 +184,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
       ENDIF
       /*
       IF ::title != NIL
-          SetWindowText(::handle, ::title)
+          hwg_SetWindowText(::handle, ::title)
       ENDIF
       */
 
@@ -528,7 +528,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       hwg_SendMessage(oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0)
    ENDIF
    IF oDlg:Title != NIL
-      SetWindowText(oDlg:handle, oDlg:Title)
+      hwg_SetWindowText(oDlg:handle, oDlg:Title)
    ENDIF
    IF !oDlg:lClosable
       oDlg:Closable(.F.)

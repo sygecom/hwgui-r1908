@@ -799,19 +799,23 @@ HB_FUNC(GETWINDOWOBJECT)
   }
 }
 
-HB_FUNC(SETWINDOWTEXT)
+HB_FUNC(HWG_SETWINDOWTEXT)
 {
   gchar *gcTitle = hwg_convert_to_utf8(hb_parcx(2));
   gtk_window_set_title(GTK_WINDOW(HB_PARHANDLE(1)), gcTitle);
   g_free(gcTitle);
 }
 
-HB_FUNC(GETWINDOWTEXT)
+HB_FUNC_TRANSLATE(SETWINDOWTEXT, HWG_SETWINDOWTEXT);
+
+HB_FUNC(HWG_GETWINDOWTEXT)
 {
   char *cTitle = (char *)gtk_window_get_title(GTK_WINDOW(HB_PARHANDLE(1)));
 
   hb_retc(cTitle);
 }
+
+HB_FUNC_TRANSLATE(GETWINDOWTEXT, HWG_GETWINDOWTEXT);
 
 HB_FUNC(HWG_ENABLEWINDOW)
 {

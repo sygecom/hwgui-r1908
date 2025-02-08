@@ -264,7 +264,7 @@ METHOD PAINT() CLASS HNICEButton
    h    := Rct[4] - Rct[2]
    XCtr := (Rct[1] + Rct[3]) / 2
    YCtr := (Rct[2] + Rct[4]) / 2
-   T    := GetWindowText(::handle)
+   T    := hwg_GetWindowText(::handle)
    // **********************************
    //         Draw our control
    // **********************************

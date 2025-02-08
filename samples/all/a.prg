@@ -344,7 +344,7 @@ FUNCTION FileOpen()
 
       INIT DIALOG oModDlg TITLE "1"                    ;
             AT 210, 10 SIZE 500, 300                    ;
-            ON INIT {|o|SetWindowText(o:handle, fname)} ;
+            ON INIT {|o|hwg_SetWindowText(o:handle, fname)} ;
             ON EXIT {|o|Fileclose(o)}
 
       MENU OF oModDlg

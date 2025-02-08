@@ -48,8 +48,8 @@ CLASS HControl INHERIT HCustomWindow
    METHOD SetFocus()	INLINE hwg_EnableWindow( ::handle, .T. )
    METHOD Move( x1,y1,width,height )
    /*
-   METHOD GetText()     INLINE GetWindowText(::handle)
-   METHOD SetText( c )  INLINE SetWindowText( ::Handle, c )
+   METHOD GetText()     INLINE hwg_GetWindowText(::handle)
+   METHOD SetText( c )  INLINE hwg_SetWindowText( ::Handle, c )
    */
    METHOD onAnchor( x, y, w, h )
    METHOD End()

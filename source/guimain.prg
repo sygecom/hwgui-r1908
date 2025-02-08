@@ -355,7 +355,7 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
    ELSEIF nStep == 2
       UpdateProgressBar(hPBar)
    ELSEIF nStep == 3
-      SetWindowText(oDlg:handle, cTitle)
+      hwg_SetWindowText(oDlg:handle, cTitle)
       IF maxPos != NIL
          SetProgressBar(hPBar, maxPos)
       ENDIF

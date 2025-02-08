@@ -119,9 +119,9 @@ Return Nil
 Static Function InitDele(nAct)
 Local hDlg := getmodalhandle()
    IF nAct == 2
-      SetWindowText( hDlg,"Recall")
+      hwg_SetWindowText( hDlg,"Recall")
    ELSEIF nAct == 3
-      SetWindowText( hDlg,"Count")
+      hwg_SetWindowText( hDlg,"Count")
    ENDIF
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )

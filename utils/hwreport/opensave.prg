@@ -39,7 +39,7 @@ Return Nil
 Static Function InitOpen( lOpen )
 Local hDlg := getmodalhandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
-   SetWindowText( hDlg, Iif( lOpen,"Open report","Save report" ) )
+   hwg_SetWindowText( hDlg, Iif( lOpen,"Open report","Save report" ) )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 

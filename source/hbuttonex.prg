@@ -88,7 +88,7 @@ CLASS HButtonEX INHERIT HButton
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE), ;
       IIf(::oParent != NIL .AND. hwg_IsWindowVisible(::handle), ;
           hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight),), ;
-      SetWindowText(::handle, ::title)
+      hwg_SetWindowText(::handle, ::title)
    //METHOD SaveParentBackground()
 
 END CLASS

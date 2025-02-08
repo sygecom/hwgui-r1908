@@ -766,7 +766,7 @@ if lIndonesia
  oB:aColumns[5]:Heading:="Angsuran (Rp)"
  oB:aColumns[6]:Heading:="Saldo (Rp)"
 
- SetWindowText(oDlg:handle,"Mencari Angsuran")
+ hwg_SetWindowText(oDlg:handle,"Mencari Angsuran")
 
 else
  oLabel1:SetText("Present Value")
@@ -790,7 +790,7 @@ else
  oB:aColumns[4]:Heading:="Interest (Rp)"
  oB:aColumns[5]:Heading:="Annuity (Rp)"
  oB:aColumns[6]:Heading:="Balance (Rp)"
- SetWindowText(oDlg:handle,"Find Annuity")
+ hwg_SetWindowText(oDlg:handle,"Find Annuity")
 
 endif
 

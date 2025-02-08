@@ -54,8 +54,8 @@ CLASS HControl INHERIT HCustomWindow
    METHOD Enabled(lEnabled) SETGET
    METHOD SetFont(oFont)
    METHOD SetFocus(lValid)
-   METHOD GetText() INLINE GetWindowText(::handle)
-   METHOD SetText(c) INLINE SetWindowText(::handle, c), ::title := c, ::Refresh()
+   METHOD GetText() INLINE hwg_GetWindowText(::handle)
+   METHOD SetText(c) INLINE hwg_SetWindowText(::handle, c), ::title := c, ::Refresh()
    METHOD Refresh() VIRTUAL
    METHOD onAnchor(x, y, w, h)
    METHOD SetToolTip(ctooltip)

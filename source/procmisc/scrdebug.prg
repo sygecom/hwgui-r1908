@@ -121,7 +121,7 @@ Local nFirst, i
          ENDIF
       ENDIF
       s_aScriptCurr := aScript
-      SetWindowText(s_oDlgDebug:handle, "Script Debugger - " + aScript[1])
+      hwg_SetWindowText(s_oDlgDebug:handle, "Script Debugger - " + aScript[1])
    ENDIF
 
    s_oBrwScript:aArray := aScript[3]

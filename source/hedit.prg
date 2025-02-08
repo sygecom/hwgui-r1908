@@ -652,7 +652,7 @@ METHOD SetText(c) CLASS HEdit
          ::title := c
       ENDIF
       //Super:SetText(::title)
-      //SetWindowText(::handle, ::Title)
+      //hwg_SetWindowText(::handle, ::Title)
       hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, c, Self)

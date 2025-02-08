@@ -204,7 +204,7 @@ METHOD INIT() CLASS HStaticLink
       ::Resize()
       ::Super:init()
       IF ::Title != NIL
-         SETWINDOWTEXT(::handle, ::title)
+         hwg_SetWindowText(::handle, ::title)
       ENDIF
 
    ENDIF

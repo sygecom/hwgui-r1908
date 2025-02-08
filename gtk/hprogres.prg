@@ -101,7 +101,7 @@ Return Nil
 METHOD Set( cTitle,nPos ) CLASS HProgressBar
 
    IF cTitle != Nil
-      SetWindowText( ::oParent:handle,cTitle )
+      hwg_SetWindowText( ::oParent:handle,cTitle )
    ENDIF
    IF nPos != Nil
       SetProgressBar( ::handle,nPos )

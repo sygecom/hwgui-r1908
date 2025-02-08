@@ -306,7 +306,7 @@ METHOD INIT() CLASS HComboBox
                #endif
             ENDIF
             //hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
-            SetWindowText(::handle, ::value)
+            hwg_SetWindowText(::handle, ::value)
          ELSE
             hwg_ComboSetString(::handle, ::value)
          ENDIF
@@ -849,7 +849,7 @@ METHOD InteractiveChange() CLASS HComboBox
 
    npos := hwg_SendMessage(::handle, CB_GETEDITSEL, 0, 0)
    ::SelStart := nPos
-   ::cDisplayValue := GetWindowText(::handle)
+   ::cDisplayValue := hwg_GetWindowText(::handle)
    ::oparent:lSuspendMsgsHandling := .T.
    Eval(::bChangeInt, ::value, Self)
    ::oparent:lSuspendMsgsHandling := .F.
@@ -906,7 +906,7 @@ METHOD When() CLASS HComboBox
    IF !::lText
       //::Refresh()
    ELSE
-      //  SetWindowText(::handle, ::value)
+      //  hwg_SetWindowText(::handle, ::value)
       //  hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
    ENDIF
    nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)

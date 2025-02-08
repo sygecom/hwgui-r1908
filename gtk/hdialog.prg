@@ -199,7 +199,7 @@ Local iCont
    ENDIF
    */
    IF oDlg:Title != NIL
-      SetWindowText(oDlg:Handle,oDlg:Title)
+      hwg_SetWindowText(oDlg:Handle,oDlg:Title)
    ENDIF
    /*
    IF oDlg:oFont != Nil
