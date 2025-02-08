@@ -40,7 +40,7 @@ Static Function InitOpen( lOpen )
 Local hDlg := getmodalhandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
    SetWindowText( hDlg, Iif( lOpen,"Open report","Save report" ) )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
 Static Function BrowFile( lOpen )
@@ -59,7 +59,7 @@ Local fname, s1, s2
       fname := hwg_SaveFile( s2,s1,s2,mypath )
    ENDIF
    SetDlgItemText( hDlg, IDC_EDIT1, fname )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function EndOpen( lOpen )
@@ -90,7 +90,7 @@ Local res := .T.
          EndDialog( hDlg )
       ENDIF
    ELSE
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
    ENDIF
 Return .T.
 

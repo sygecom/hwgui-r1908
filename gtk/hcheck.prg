@@ -104,7 +104,7 @@ Local res
    IF oCtrl:bLostFocus != Nil .AND. ;
          Valtype( res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) ) == "L" ;
 	 .AND. !res
-      SetFocus( oCtrl:handle )
+      hwg_SetFocus( oCtrl:handle )
    ENDIF
 
 Return .T.

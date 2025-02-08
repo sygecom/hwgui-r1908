@@ -310,7 +310,7 @@ RedrawWindow( oDlg:handle, 4 + 1 + 2 + 256 )]]>
       <![CDATA[oBC:=Barcode():New( GetDC( oDlg:handle) , alltrim(cData) , nxLeft, nxTop, nxWidth, nxHeight, nBCodeType,nColText, nColPane, lHorz,lTransparent, nPinxWidth)
 oBc:showBarcode()
 //DrawText(GetDC( oDlg:handle), alltrim(cData),nxLeft-5, nxTop+nxHeight-12,nxLeft+nxWidth,nxTop+nxHeight, 0)
-setFocus(oEB2:handle)
+hwg_SetFocus(oEB2:handle)
 //setBkColor(oDlg:handle,0)
 
 ]]>

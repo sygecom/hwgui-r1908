@@ -709,10 +709,12 @@ HB_FUNC(HWG_KILLTIMER)
   gtk_timeout_remove((gint)hb_parni(1));
 }
 
-HB_FUNC(GETPARENT)
+HB_FUNC(HWG_GETPARENT)
 {
   hb_retptr((void *)((GtkWidget *)HB_PARHANDLE(1))->parent);
 }
+
+HB_FUNC_TRANSLATE(GETPARENT, HWG_GETPARENT);
 
 HB_FUNC(LOADCURSOR)
 {

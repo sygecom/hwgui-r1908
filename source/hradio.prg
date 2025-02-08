@@ -117,7 +117,7 @@ METHOD EndGroup(nSelected) CLASS HRadioGroup
          ENDIF
       ENDIF
       IF Empty(::oParent)
-         ::oParent := ::oGroupCurrent:aButtons[nLen]:oParent //GetParentForm()
+         ::oParent := ::oGroupCurrent:aButtons[nLen]:oParent //hwg_GetParentForm()
       ENDIF
       //::Init()
    ENDIF
@@ -456,7 +456,7 @@ METHOD Valid(nKey) CLASS HRadioButton
          IF !::GetValue()
             ::oGroup:nValue  := iValue
              ::oGroup:SetValue(::oGroup:nValue)      
-            ::SetFocus(.T.) 
+            ::SetFocus(.T.)
          ENDIF
       ELSEIF nEnter == 0 .AND. !GetKeyState(VK_RETURN) < 0
          IF !::GetValue()
@@ -468,11 +468,11 @@ METHOD Valid(nKey) CLASS HRadioButton
    IF ::oGroup:bSetGet != NIL
       Eval(::oGroup:bSetGet, ::oGroup:nValue)
    ENDIF
-   hCtrl := GetFocus()
+   hCtrl := hwg_GetFocus()
    IF hb_IsBlock(::bLostFocus) .AND. (nEnter == 0 .OR. iValue == Len(::oGroup:aButtons))
       Eval(::bLostFocus, Self, ::oGroup:nValue)
    ENDIF
-   IF nEnter == VK_RETURN .AND. SELFFOCUS(hctrl)
+   IF nEnter == VK_RETURN .AND. hwg_SelfFocus(hctrl)
        GetSkip(::oParent, hCtrl, , 1)
    ENDIF
    ::oParent:lSuspendMsgsHandling := .F.  

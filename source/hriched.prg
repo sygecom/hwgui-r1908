@@ -167,8 +167,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
           RETURN 0
       ENDIF
       IF wParam == VK_ESCAPE .AND. ::GetParentForm():handle != ::oParent:handle
-         IF GetParent(::oParent:handle) != NIL
-            //hwg_SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
+         IF hwg_GetParent(::oParent:handle) != NIL
+            //hwg_SendMessage(hwg_GetParent(::oParent:handle), WM_CLOSE, 0, 0)
          ENDIF
          RETURN 0
       ENDIF
@@ -209,8 +209,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          EXIT
       CASE VK_ESCAPE
          IF ::GetParentForm():handle != ::oParent:handle
-            //IF GetParent(::oParent:handle) != NIL
-               //hwg_SendMessage(GetParent(::oParent:handle), WM_CLOSE, 0, 0)
+            //IF hwg_GetParent(::oParent:handle) != NIL
+               //hwg_SendMessage(hwg_GetParent(::oParent:handle), WM_CLOSE, 0, 0)
             //ENDIF
             RETURN 0
          ENDIF

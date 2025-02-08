@@ -318,7 +318,7 @@ METHOD Valid() CLASS HDatePicker
 
    LOCAL res := .T.
 
-   //IF !SELFFOCUS(GetParent(GetFocus()), ::GetParentForm():handle)
+   //IF !hwg_SelfFocus(GetParent(hwg_GetFocus()), ::GetParentForm():handle)
    //   RETURN .T.
    //ENDIF
    IF !CheckFocus(Self, .T.) .OR. ::lnoValid

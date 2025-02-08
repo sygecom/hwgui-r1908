@@ -679,9 +679,9 @@ Local oldBkColor, oldTColor
       ::Edit()
    ENDIF
 
-   IF ::oGet == Nil .AND. ( ( tmp := GetFocus() ) == ::oParent:handle .OR. ;
+   IF ::oGet == Nil .AND. ( ( tmp := hwg_GetFocus() ) == ::oParent:handle .OR. ;
          ::oParent:FindControl(,tmp) != Nil )
-      SetFocus( ::area )
+      hwg_SetFocus( ::area )
    ENDIF
    ::lAppMode := .F.
 
@@ -1042,7 +1042,7 @@ LocaL i, nColumns := Len(oBrw:aColumns)
          ENDIF
       ENDIF
    ENDIF
-   SetFocus( oBrw:area )
+   hwg_SetFocus( oBrw:area )
    
 RETURN Nil
 
@@ -1080,7 +1080,7 @@ LocaL nColumns := Len(oBrw:aColumns)
          ENDIF
       ENDIF
    ENDIF
-   SetFocus( oBrw:area )
+   hwg_SetFocus( oBrw:area )
 
 RETURN Nil
 
@@ -1117,7 +1117,7 @@ Local nPos
       IF ::lAppable .AND. !lMouse
          ::lAppMode := .T.
       ELSE
-         SetFocus( ::area )
+         hwg_SetFocus( ::area )
          Return Nil
       ENDIF
    ENDIF
@@ -1146,7 +1146,7 @@ Local nPos
       ENDIF
    ENDIF
 
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
 
 RETURN Nil
 
@@ -1182,7 +1182,7 @@ Local nPos
       ENDIF
       
    ENDIF
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
    
 RETURN Nil
 
@@ -1218,7 +1218,7 @@ Local nPos, step, lBof := .F.
    ENDIF
 
    hwg_InvalidateRect( ::area, 0 )
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
 RETURN Nil
 
 //----------------------------------------------------//
@@ -1251,7 +1251,7 @@ Local step := IIf(nRows > ::rowPos, nRows - ::rowPos + 1, nRows), lEof
    ENDIF
 
    hwg_InvalidateRect( ::area, 0 )
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
 RETURN Nil
 
 //----------------------------------------------------//
@@ -1271,7 +1271,7 @@ Local nPos
    hwg_InvalidateRect( ::area, 0 )
 
    IF lPaint == Nil .OR. lPaint
-      SetFocus( ::area )
+      hwg_SetFocus( ::area )
    ENDIF
 
 RETURN Nil
@@ -1290,7 +1290,7 @@ Local nPos
    ENDIF
    
    hwg_InvalidateRect( ::area, 0 )
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
 
 RETURN Nil
 
@@ -1406,7 +1406,7 @@ Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
       ENDIF
    ENDIF
 
-   SetFocus( ::area )
+   hwg_SetFocus( ::area )
 RETURN Nil
 
 //----------------------------------------------------//
@@ -1523,7 +1523,7 @@ Local oColumn, type
                PICTURE oColumn:picture        ;
                VALID {||VldBrwEdit( Self,fipos )}
 	 ::oGet:Show()
-	 SetFocus( ::oGet:handle )
+	 hwg_SetFocus( ::oGet:handle )
 	 hwg_edit_SetPos( ::oGet:handle, 0 )
        ::oGet:bAnyEvent := {|o,msg,c|GetEventHandler(Self,msg,c)}
 
@@ -1536,7 +1536,7 @@ Static Function GetEventHandler( oBrw, msg, cod )
 
    IF msg == WM_KEYDOWN .AND. cod == GDK_Escape
       oBrw:oGet:nLastKey := GDK_Escape
-      SetFocus( oBrw:area )
+      hwg_SetFocus( oBrw:area )
       Return 1
    ENDIF
 Return 0
@@ -1604,7 +1604,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
    ENDIF
    oBrw:oParent:DelControl( oBrw:oGet )
    oBrw:oGet := Nil
-   SetFocus( oBrw:area )
+   hwg_SetFocus( oBrw:area )
 
 Return .T.
 

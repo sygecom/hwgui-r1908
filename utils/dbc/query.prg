@@ -46,7 +46,7 @@ Return Nil
 Static Function InitQuery()
 Local hDlg := getmodalhandle()
    SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
-   SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
 Return Nil
 
 Static Function EndQuery( lOk )
@@ -59,7 +59,7 @@ Static lConnected := .F.
    IF lOk
       cQuery := GetEditText( hDlg, IDC_EDITQUERY )
       IF Empty( cQuery )
-         SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
+         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
          Return Nil
       ENDIF
 

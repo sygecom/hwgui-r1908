@@ -629,7 +629,7 @@ Local vari, oDlg
          oCtrl:title := vari
          IF oCtrl:cType == "D"
             IF IsBadDate( vari )
-               SetFocus( oCtrl:handle )
+               hwg_SetFocus( oCtrl:handle )
 	       hwg_edit_SetPos( oCtrl:handle,0 )
                Return .F.
             ENDIF
@@ -645,7 +645,7 @@ Local vari, oDlg
             oDlg:nLastKey := 27
          ENDIF
          IF oCtrl:bLostFocus != Nil .AND. !Eval( oCtrl:bLostFocus, vari, oCtrl )
-            SetFocus( oCtrl:handle )
+            hwg_SetFocus( oCtrl:handle )
 	      hwg_edit_SetPos( oCtrl:handle,0 )
             IF oDlg != Nil
                oDlg:nLastKey := 0
@@ -827,7 +827,7 @@ Local i, aLen
          IF nSkip > 0
             DO WHILE ( i := i+nSkip ) <= aLen
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle ) // Now tab and enter goes trhow the check, combo, etc...
-                  SetFocus( oParent:Getlist[i]:handle )
+                  hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
        	         hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )
                   ENDIF
@@ -837,7 +837,7 @@ Local i, aLen
          ELSE
             DO WHILE ( i := i+nSkip ) > 0
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle )
-                  SetFocus( oParent:Getlist[i]:handle )
+                  hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
    	               hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )
                   ENDIF

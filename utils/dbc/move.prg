@@ -43,7 +43,7 @@ Local hDlg := getmodalhandle(), cTitle
       cTitle := "Input record number"
    ENDIF
    SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
 Return Nil
 
 Static Function EndMove( lOk, nMove )
@@ -54,7 +54,7 @@ Local hWnd, oWindow, aControls, iCont
    IF lOk
       cExpres := GetDlgItemText( hDlg, IDC_EDIT6, 80 )
       IF Empty( cExpres )
-         SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
+         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
          Return Nil
       ENDIF
 

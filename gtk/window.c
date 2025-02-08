@@ -755,10 +755,12 @@ GtkWidget *GetActiveWindow(void)
   return (pList) ? pList->data : NULL;
 }
 
-HB_FUNC(GETACTIVEWINDOW)
+HB_FUNC(HWG_GETACTIVEWINDOW)
 {
   HB_RETHANDLE(GetActiveWindow());
 }
+
+HB_FUNC_TRANSLATE(GETACTIVEWINDOW, HWG_GETACTIVEWINDOW);
 
 HB_FUNC(SETWINDOWOBJECT)
 {
@@ -892,16 +894,20 @@ HB_FUNC(HWG_RELEASEOBJECT)
   }
 }
 
-HB_FUNC(SETFOCUS)
+HB_FUNC(HWG_SETFOCUS)
 {
   gtk_widget_grab_focus((GtkWidget *)HB_PARHANDLE(1));
 }
 
-HB_FUNC(GETFOCUS)
+HB_FUNC_TRANSLATE(SETFOCUS, HWG_SETFOCUS);
+
+HB_FUNC(HWG_GETFOCUS)
 {
   GtkWidget *hCtrl;
   hCtrl = gtk_window_get_focus(gtk_window_list_toplevels()->data);
 }
+
+HB_FUNC_TRANSLATE(GETFOCUS, HWG_GETFOCUS);
 
 HB_FUNC(HWG_DESTROYWINDOW)
 {

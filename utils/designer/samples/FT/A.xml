@@ -226,7 +226,7 @@ SETcOLORiNFOCUS(.T.)
 //WriteStatus(oDlg,2, rich_tgln(date(),"H P, D M Y"), .t.)
 WriteStatus(oDlg,2, DTOC(date()), .t.)
 WriteStatus(oDlg,4," (c)2006 Richard Roesnadi", .t.)
-SetFocus(oPv:handle)
+hwg_SetFocus(oPv:handle)
 ]]>
   </method>
   <part class="editbox">

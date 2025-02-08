@@ -413,13 +413,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          ENDIF
            IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == NIL
-             //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
+             //  GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
            ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == NIL
-             //  GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
+             //  GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , -1)
             RETURN 0
@@ -522,13 +522,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             ENDIF
             IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
                IF ::oParent:oParent == NIL
-                  //GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
+                  //GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
                ENDIF
                GetSkip(::oParent, ::handle, , 1)
                RETURN 0
             ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
                IF ::oParent:oParent == NIL
-                  //GetSkip(::oParent, GetAncestor(::handle, GA_PARENT), , 1)
+                  //GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
                ENDIF
                GetSkip(::oParent, ::handle, , -1)
                RETURN 0
@@ -873,7 +873,7 @@ RETURN .T.
 
 METHOD onChange(lForce) CLASS HComboBox
 
-   IF !SelfFocus(::handle) .AND. Empty(lForce)
+   IF !hwg_SelfFocus(::handle) .AND. Empty(lForce)
       RETURN NIL
    ENDIF
    IF !hwg_IsWindowVisible(::handle)
@@ -940,7 +940,7 @@ METHOD Valid() CLASS HComboBox
    LOCAL oDlg
    LOCAL nSkip
    LOCAL res
-   LOCAL hCtrl := getfocus()
+   LOCAL hCtrl := hwg_GetFocus()
    LOCAL ltab := GETKEYSTATE(VK_TAB) < 0
 
    IF ::lNoValid .OR. !CheckFocus(Self, .T.)
@@ -970,14 +970,14 @@ METHOD Valid() CLASS HComboBox
       IF oDlg != NIL
          oDlg:nLastKey := 0
       ENDIF
-      IF lTab .AND. SelfFocus(hCtrl) .AND. !SelfFocus(::oParent:handle, oDlg:handle)
+      IF lTab .AND. hwg_SelfFocus(hCtrl) .AND. !hwg_SelfFocus(::oParent:handle, oDlg:handle)
         // IF ::oParent:CLASSNAME = "HTAB"
             ::oParent:SETFOCUS()
             Getskip(::oparent, ::handle, , nSkip)
        //  ENDIF
       ENDIF
       ::oparent:lSuspendMsgsHandling := .F.
-      IF Empty(GETFOCUS()) // getfocus return pointer = 0                 //::nValidSetfocus = ::handle
+      IF Empty(hwg_GetFocus()) // getfocus return pointer = 0                 //::nValidSetfocus = ::handle
          GetSkip(::oParent, ::handle, , ::nGetSkip)
       ENDIF
    ENDIF

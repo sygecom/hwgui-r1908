@@ -162,7 +162,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                   // : END LFB
             //varbuf := hwg_SelectFile( "All files ( *.* )","*.*" )
             //
-            SetFocus( obtn:handle )
+            hwg_SetFocus( obtn:handle )
             IF varbuf != Nil
                lRes := .T.
             ENDIF
@@ -243,7 +243,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
             FONT ::oFont                   ;
             VALID {||VldBrwGet(oGet)}
       ENDIF
-      SetFocus( oGet:handle )
+      hwg_SetFocus( oGet:handle )
    ENDIF
 RETURN Nil
 
@@ -806,7 +806,7 @@ Return -1
 FUNCTION ActiveTopMost( nHandle, lActive )
 
    LOCAL lSucess   // ,nHandle
-  nHandle:=GetActiveWindow()
+  nHandle:=hwg_GetActiveWindow()
 
   IF lActive
        lSucess := SetTopMost(nHandle)    // Set TopMost

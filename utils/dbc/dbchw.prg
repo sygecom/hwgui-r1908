@@ -299,7 +299,7 @@ Static Function InitNewIndex
 Local hDlg := getmodalhandle()
    SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function TagName
@@ -319,21 +319,21 @@ Local oWindow, aControls, i
 
    indname := GetDlgItemText( hDlg, IDC_EDIT2, 20 )
    IF Empty( indname )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
       Return Nil
    ENDIF
    isMulti := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
    IF isMulti
       tagname := GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty( tagname )
-         SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
          Return Nil
       ENDIF
    ENDIF
    isUniq := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX2 )
    expkey := GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty( expkey )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
       Return Nil
    ENDIF
    expfor := GetDlgItemText( hDlg, IDC_EDIT5, 60 )
@@ -427,7 +427,7 @@ Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,ID
 #ifdef RDD_ADS
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
 #endif
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return .T.
 
 Static Function EndOpen()
@@ -475,7 +475,7 @@ Local oldLock := AdsLocking()
 #endif
       EndDialog( hDlg )
    ELSE
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
    ENDIF
 Return .T.
 
@@ -542,7 +542,7 @@ Return Nil
 
 Static Function InitCalc()
 Local hDlg := getmodalhandle()
-   SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
 Return Nil
 
 Static Function EndCalc()
@@ -551,7 +551,7 @@ Local cExpr, res
 
    cExpr := GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
    IF Empty( cExpr )
-      SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
       Return Nil
    ENDIF
    IF TYPE( TRIM( cExpr ) ) $ "UEUI"
@@ -569,7 +569,7 @@ Return Nil
 Function Scripts( nAct )
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||SetFocus(GetDlgItem(getmodalhandle(),IDC_EDIT8))}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(GetDlgItem(getmodalhandle(),IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndScri(nAct)}   ;
         ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() ) }  ;
@@ -584,7 +584,7 @@ Local fname, arScr, nError, nLineEr, obl
 
    fname := GetDlgItemText( hDlg, IDC_EDIT8, 80 )
    IF Empty( fname )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT8 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT8 ) )
       Return Nil
    ENDIF
    SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -618,7 +618,7 @@ Local i, aControls, oBrw
          IF Valtype( oBrw:cargo ) == "N"
             Select( oBrw:cargo )
             improc := oBrw:cargo
-            SetFocus( oBrw:handle )
+            hwg_SetFocus( oBrw:handle )
          ENDIF
       ENDIF
    ENDIF

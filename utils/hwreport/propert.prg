@@ -68,7 +68,7 @@ Local oFont := aItem[ITEM_FONT]
    ENDIF
    // SetComboBox( hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1 )
    SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
 Static Function EndStatic( aItem )

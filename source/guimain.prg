@@ -80,7 +80,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
    RETURN .T.
 
 FUNCTION FindParent(hCtrl, nLevel)
-   LOCAL i, oParent, hParent := GetParent(hCtrl)
+   LOCAL i, oParent, hParent := hwg_GetParent(hCtrl)
    IF !Empty(hParent)
       IF (i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent})) != 0
          RETURN HDialog():aModalDialogs[i]
@@ -104,7 +104,7 @@ FUNCTION FindSelf(hCtrl)
    LOCAL oParent
    oParent := FindParent(hCtrl)
    IF oParent == NIL
-      oParent := GetAncestor(hCtrl, GA_PARENT)
+      oParent := hwg_GetAncestor(hCtrl, GA_PARENT)
    ENDIF
    IF oParent != NIL .AND. !hb_IsNumeric(oParent)
       RETURN oParent:FindControl(, hCtrl)
@@ -256,12 +256,12 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
       ENDIF
    ENDIF
 
-   hDC := hwg_GetDC(GetActiveWindow())
+   hDC := hwg_GetDC(hwg_GetActiveWindow())
    hwg_SelectObject(hDC, oFont:handle)
    aMetr := GetTextMetric(hDC)
    aArea := GetDeviceArea(hDC)
-   aRect := hwg_GetWindowRect(GetActiveWindow())
-   hwg_ReleaseDC(GetActiveWindow(), hDC)
+   aRect := hwg_GetWindowRect(hwg_GetActiveWindow())
+   hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
    height := (aMetr[1] + 1) * aLen + 4 + addY + 8
    IF height > aArea[2] - aRect[2] - nTop - 60
       height := aArea[2] - aRect[2] - nTop - 60

@@ -256,7 +256,7 @@ METHOD Notify(lParam) CLASS HButton
    //
    IF PtrtoUlong(lParam) == WM_KEYDOWN
       IF ::oParent:Classname == "HTAB"
-         IF getfocus() != ::handle
+         IF hwg_GetFocus() != ::handle
             hwg_InvalidateRect(::handle, 0)
             hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
          ENDIF
@@ -325,7 +325,7 @@ METHOD onLostFocus() CLASS HButton
       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
    ::lnoWhen := .F.
-   IF hb_IsBlock(::bLostFocus).AND. SelfFocus(GetParent(GetFocus()), ::getparentform():handle)
+   IF hb_IsBlock(::bLostFocus).AND. hwg_SelfFocus(hwg_GetParent(hwg_GetFocus()), ::getparentform():handle)
       ::oparent:lSuspendMsgsHandling := .T.
       Eval(::bLostFocus, ::title, Self)
       ::oparent:lSuspendMsgsHandling := .F.

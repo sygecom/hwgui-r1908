@@ -179,7 +179,7 @@ Return IIf(i == 0, NIL, ::aDialogs[i])
 Return GetWindowObject(hWnd)
 
 METHOD GetActive() CLASS HDialog
-Local handle := GetFocus()
+Local handle := hwg_GetFocus()
 Local i := AScan(::Getlist, {|o|o:handle == handle})
 Return IIf(i == 0, NIL, ::Getlist[i])
 
@@ -253,7 +253,7 @@ Local aMenu, i, hCtrl
    // WriteLog( Str(iParHigh,10)+"|"+Str(iParLow,10)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
    IF iParHigh == 0
       IF iParLow == IDOK
-         hCtrl := GetFocus()
+         hCtrl := hwg_GetFocus()
          FOR i := Len(oDlg:GetList) TO 1 STEP -1
             IF !oDlg:GetList[i]:lHide .AND. hwg_IsWindowEnabled( oDlg:Getlist[i]:Handle )
                EXIT

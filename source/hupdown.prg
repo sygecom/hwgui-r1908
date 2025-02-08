@@ -241,7 +241,7 @@ METHOD Refresh() CLASS HUpDown
    ENDIF
    ::oEditUpDown:Title :=  ::Title
    ::oEditUpDown:Refresh()
-   IF SelfFocus(::handle)
+   IF hwg_SelfFocus(::handle)
       hwg_InvalidateRect(::hwndUpDown, 0)
    ENDIF
 
@@ -298,7 +298,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == NIL , - 1 , 1)
 
      IF ::oUpDown == NIL .OR. hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
-         GetFocus() != ::handle .OR. ;
+         hwg_GetFocus() != ::handle .OR. ;
        (::oUpDown:bGetFocus != NIL .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown))
         RETURN 0
    ENDIF
@@ -518,7 +518,7 @@ STATIC FUNCTION __Valid(oCtrl)
       Eval(oCtrl:bSetGet, oCtrl:value)
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .T.
-   hctrl := getfocus()
+   hctrl := hwg_GetFocus()
    oDlg := ParentGetDialog(oCtrl)
    IF oCtrl:bLostFocus != NIL
       res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)
@@ -531,13 +531,13 @@ STATIC FUNCTION __Valid(oCtrl)
          ENDIF
       ENDIF
    ENDIF
-   IF ltab .AND. hctrl == getfocus() .AND. res
+   IF ltab .AND. hctrl == hwg_GetFocus() .AND. res
       IF oCtrl:oParent:CLASSNAME = "HTAB"
          getskip(oCtrl:oparent, oCtrl:handle, , nSkip)
       ENDIF
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .F.
-   IF Empty(GetFocus()) //= 0
+   IF Empty(hwg_GetFocus()) //= 0
       GetSkip(octrl:oParent, octrl:handle, , octrl:nGetSkip)
    ENDIF
 

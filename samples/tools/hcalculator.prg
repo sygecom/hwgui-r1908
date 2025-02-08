@@ -90,7 +90,7 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
    LOCAL obtnres
    LOCAL oBtn23
    LOCAL oMemory
-   LOCAL hWin := GetActiveWindow()
+   LOCAL hWin := hwg_GetActiveWindow()
 
    ::oCurrGet := oGet
    ::DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)

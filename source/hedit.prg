@@ -403,7 +403,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                 ::Title := IIf(::cType == "D", CTOD(""), IIf(::cType == "N", 0, ""))
             ENDIF
          ELSEIF msg == WM_LBUTTONDOWN
-            IF GetFocus() != ::handle
+            IF hwg_GetFocus() != ::handle
                //hwg_SetFocus(::handle)
                //RETURN 0
             ENDIF
@@ -421,10 +421,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             RETURN -1
          ELSEIF msg == WM_KEYDOWN
             IF wParam == VK_TAB .AND. ::GetParentForm():Type >= WND_DLG_RESOURCE    // Tab
-               nexthandle := GetNextDlgTabItem (GetActiveWindow(), GetFocus(), ;
+               nexthandle := GetNextDlgTabItem (hwg_GetActiveWindow(), hwg_GetFocus(), ;
                                                  IsCtrlShift(.F., .T.))
                //hwg_SetFocus(nexthandle)
-               hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+               hwg_PostMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
                RETURN 0
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
                RETURN -1
@@ -630,7 +630,7 @@ METHOD Refresh() CLASS HEdit
       ::Title := vari
    ENDIF
    hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
-   IF hwg_IsWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //PtrtouLong(GetFocus()) == PtrtouLong(::handle)
+   IF hwg_IsWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //PtrtouLong(hwg_GetFocus()) == PtrtouLong(::handle)
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW) //+ RDW_NOCHILDREN)
    ENDIF
 
@@ -1374,7 +1374,7 @@ METHOD Valid() CLASS HEdit
                ::oparent:lSuspendMsgsHandling := .F.
                RETURN .F.
             ENDIF
-            IF Empty(GetFocus())
+            IF Empty(hwg_GetFocus())
                GetSkip(::oParent, ::handle, , ::nGetSkip)
             ENDIF
          ENDIF
@@ -1400,7 +1400,7 @@ METHOD Valid() CLASS HEdit
            ::oparent:lSuspendMsgsHandling := .F.
            RETURN .F.
         ENDIF
-        IF Empty(GetFocus())
+        IF Empty(hwg_GetFocus())
            GetSkip(::oParent, ::handle, , ::nGetSkip)
         ENDIF
      ENDIF
@@ -1416,7 +1416,7 @@ METHOD onChange(lForce) CLASS HEdit
    //-LOCAL nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
    LOCAL vari
 
-   IF !SelfFocus(::handle) .AND. Empty(lForce)
+   IF !hwg_SelfFocus(::handle) .AND. Empty(lForce)
       RETURN NIL
    ENDIF
    IF ::cType == "N"
@@ -1710,17 +1710,17 @@ FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
             hwg_PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ELSE
-         IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) == PtrtouLong(getFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
+         IF oForm:Type < WND_DLG_RESOURCE .AND. PtrtouLong(oParent:handle) == PtrtouLong(hwg_GetFocus()) //oParent:oParent:Type < WND_DLG_RESOURCE
             hwg_SetFocus(nextHandle)
-         ELSEIF PtrtouLong(oParent:handle) == PtrtouLong(getFocus())
-            hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+         ELSEIF PtrtouLong(oParent:handle) == PtrtouLong(hwg_GetFocus())
+            hwg_PostMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ELSE
             hwg_PostMessage(oParent:handle, WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
       ENDIF
 
    ENDIF
-   IF nSkip != 0 .AND. SelfFocus(hctrl, nextHandle) .AND. oCtrl != NIL
+   IF nSkip != 0 .AND. hwg_SelfFocus(hctrl, nextHandle) .AND. oCtrl != NIL
      // necessario para executa um codigo do lostfcosu
       IF __ObjHasMsg(oCtrl, "BLOSTFOCUS") .AND. oCtrl:blostfocus != NIL
          hwg_SendMessage(nexthandle, WM_KILLFOCUS, 0, 0)
@@ -1768,7 +1768,7 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
          IF Type("oParent:oParent:Type") = "N" .AND. oParent:oParent:Type < WND_DLG_RESOURCE
              nextHandle := GetNextDlgTabItem (oParent:oParent:handle, hctrl, (nSkip < 0))
          ELSE
-             nextHandle := GetNextDlgTabItem (GetActiveWindow(), hCtrl, (nSkip < 0))
+             nextHandle := GetNextDlgTabItem (hwg_GetActiveWindow(), hCtrl, (nSkip < 0))
          ENDIF
          IF AScan(oParent:oParent:acontrols, {|o|o:handle == hCtrl}) == 0
              RETURN IIf(nSkip > 0, NextFocus(oParent:oParent, oParent:handle, nSkip), oParent:handle)
@@ -1782,7 +1782,7 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
                   ENDIF
                   */
          ELSE
-            hwg_PostMessage(GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
+            hwg_PostMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
          ENDIF
          IF !Empty(nextHandle) .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(nextHandle), WS_TABSTOP) == 0
             NextFocusTab(oParent, nextHandle, nSkip)
@@ -1804,9 +1804,9 @@ STATIC FUNCTION NextFocus(oParent, hCtrl, nSkip)
    LOCAL lnoTabStop := .T.
 
    oParent := IIf(oParent:Type == NIL, oParent:GetParentForm(), oParent)
-   nWindow := IIf(oParent:Type <= WND_DLG_RESOURCE, oParent:handle, GetActiveWindow())
+   nWindow := IIf(oParent:Type <= WND_DLG_RESOURCE, oParent:handle, hwg_GetActiveWindow())
 
-   i := AScan(oparent:acontrols, {|o|SelfFocus(o:handle, hCtrl)})
+   i := AScan(oparent:acontrols, {|o|hwg_SelfFocus(o:handle, hCtrl)})
    IF i > 0 .AND. Len(oParent:acontrols[i]:aControls) > 0 .AND. ;
       oParent:aControls[i]:className != "HTAB" .AND. (PtrtouLong(hCtrl) != PtrtouLong(nextHandle))
       nextHandle := NextFocusContainer(oParent:aControls[i], hCtrl, nSkip)
@@ -1831,9 +1831,9 @@ STATIC FUNCTION NextFocus(oParent, hCtrl, nSkip)
       ELSE
          lnoTabStop := .F.
        ENDIF
-      i := AScan(oParent:aControls, {|o|SelfFocus(o:handle, nextHandle)})
+      i := AScan(oParent:aControls, {|o|hwg_SelfFocus(o:handle, nextHandle)})
 
-      IF (lnoTabStop .AND. i > 0 .AND. !SelfFocus(hCtrl, NextHandle)) .OR. (i > 0 .AND. i <= Len(oParent:aControls) .AND. ;
+      IF (lnoTabStop .AND. i > 0 .AND. !hwg_SelfFocus(hCtrl, NextHandle)) .OR. (i > 0 .AND. i <= Len(oParent:aControls) .AND. ;
            oparent:acontrols[i]:classname = "HGROUP") .OR. (i == 0 .AND. !Empty(nextHandle))
           RETURN NextFocus(oParent, nextHandle, nSkip)
       ENDIF
@@ -1949,10 +1949,10 @@ Luis Fernando Basso contribution
 FUNCTION CheckFocus(oCtrl, lInside)
 
    LOCAL oParent := ParentGetDialog(oCtrl)
-   LOCAL hGetFocus := PtrtouLong(GetFocus())
+   LOCAL hGetFocus := PtrtouLong(hwg_GetFocus())
    LOCAL lModal
 
-   IF (!Empty(oParent) .AND. !hwg_IsWindowVisible(oParent:handle)) .OR. Empty(GetActiveWindow()) // == 0
+   IF (!Empty(oParent) .AND. !hwg_IsWindowVisible(oParent:handle)) .OR. Empty(hwg_GetActiveWindow()) // == 0
       IF !lInside .AND. Empty(oParent:nInitFocus) // == 0
          oParent:Show()
          hwg_SetFocus(oParent:handle)
@@ -1969,9 +1969,9 @@ FUNCTION CheckFocus(oCtrl, lInside)
    ENDIF
    IF oParent != NIL .AND. lInside   // valid
       lModal := oParent:lModal .AND. oParent:Type >  WND_DLG_RESOURCE
-      IF ((!Empty(hGetFocus) .AND. lModal .AND. !SelfFocus(GetWindowParent(hGetFocus), oParent:handle)) .OR. ;
-         (SelfFocus(hGetFocus, oCtrl:oParent:handle))) .AND. ;
-          SelfFocus(oParent:handle, oCtrl:oParent:handle)
+      IF ((!Empty(hGetFocus) .AND. lModal .AND. !hwg_SelfFocus(GetWindowParent(hGetFocus), oParent:handle)) .OR. ;
+         (hwg_SelfFocus(hGetFocus, oCtrl:oParent:handle))) .AND. ;
+          hwg_SelfFocus(oParent:handle, oCtrl:oParent:handle)
          RETURN .F.
       ENDIF
       oCtrl:lNoWhen := .F.
@@ -1985,7 +1985,7 @@ RETURN .T.
 
 FUNCTION WhenSetFocus(oCtrl, nSkip)
 
-   IF SelfFocus(oCtrl:handle) .OR. Empty(GetFocus())
+   IF hwg_SelfFocus(oCtrl:handle) .OR. Empty(hwg_GetFocus())
        GetSkip(oCtrl:oParent, oCtrl:handle, , nSkip)
    ENDIF
 
@@ -1995,8 +1995,8 @@ RETURN NIL
 
 FUNCTION GetWindowParent(nHandle)
 
-   DO WHILE !Empty(GetParent(nHandle)) .AND. !SelfFocus(nHandle, GetActiveWindow())
-      nHandle := GetParent(nHandle)
+   DO WHILE !Empty(hwg_GetParent(nHandle)) .AND. !hwg_SelfFocus(nHandle, hwg_GetActiveWindow())
+      nHandle := hwg_GetParent(nHandle)
    ENDDO
 
 RETURN PtrtouLong(nHandle)

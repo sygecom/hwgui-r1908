@@ -422,11 +422,11 @@ METHOD Valid(oCtrl) CLASS HListBox
          oDlg:nLastKey := 0
       ENDIF
    ENDIF
-   IF Empty(GetFocus())
+   IF Empty(hwg_GetFocus())
       GetSkip(::oParent, ::handle,, ::nGetSkip)
    ENDIF
 
-   //IF lTab .AND. GETFOCUS() == ::handle
+   //IF lTab .AND. hwg_GetFocus() == ::handle
    //   IF ::oParent:CLASSNAME = "HTAB"
    //      ::oParent:SETFOCUS()
    //   ENDIF

@@ -68,12 +68,12 @@ Local cName, cType, nLen, nDec := 0
    IF nOper < 4
       cName := GetDlgItemText( hDlg, IDC_EDIT2, 10 )
       IF Empty( cName )
-         SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
          Return Nil
       ENDIF
       cType := Left( GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1 )
       IF Empty( cType )
-         SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
+         hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
          Return Nil
       ENDIF
       IF cType == "D" 
@@ -85,7 +85,7 @@ Local cName, cType, nLen, nDec := 0
       ELSE
          nLen  := Val( GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
          IF nLen == 0
-            SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+            hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
             Return Nil
          ENDIF
          IF cType == "N" 

@@ -405,7 +405,7 @@ METHOD Valid() CLASS HCheckButton
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
-   IF Empty(GetFocus())
+   IF Empty(hwg_GetFocus())
       GetSkip(::oParent, ::handle,, ::nGetSkip)
    ENDIF
 

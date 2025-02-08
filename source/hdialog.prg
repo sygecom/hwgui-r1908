@@ -160,7 +160,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
    hParent := IIf(hb_IsObject(::oParent) .AND. ;
                    __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
                    .AND. !Empty(::oParent:handle) , ::oParent:handle, ;
-                   IIf((oWnd := HWindow():GetMain()) != NIL, oWnd:handle, GetActiveWindow()))
+                   IIf((oWnd := HWindow():GetMain()) != NIL, oWnd:handle, hwg_GetActiveWindow()))
 
    ::WindowState := IIf(hb_IsNumeric(nShow), nShow, SW_SHOWNORMAL)
 
@@ -169,7 +169,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          ::lModal := .T.
          ::Add()
          // hwg_DialogBox(HWindow():GetMain():handle, Self)
-         hwg_DialogBox(GetActiveWindow(), Self)
+         hwg_DialogBox(hwg_GetActiveWindow(), Self)
       ELSE
          ::lModal  := .F.
          ::handle  := 0
@@ -193,7 +193,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          ::lModal := .T.
          ::Add()
          // hwg_DlgBoxIndirect(HWindow():GetMain():handle, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
-         hwg_DlgBoxIndirect(GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         hwg_DlgBoxIndirect(hwg_GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
       ELSE
          ::lModal  := .F.
          ::handle  := 0
@@ -474,9 +474,9 @@ METHOD FindDialog(hWndTitle, lAll) CLASS HDialog
    LOCAL i
 
    IF cType != "C"
-      i := AScan(::aDialogs, {|o|SelfFocus(o:handle, hWndTitle)})
+      i := AScan(::aDialogs, {|o|hwg_SelfFocus(o:handle, hWndTitle)})
       IF i == 0 .AND. (lAll != NIL .AND. lAll)
-          i := AScan(::aModalDialogs, {|o|SelfFocus(o:handle, hWndTitle)})
+          i := AScan(::aModalDialogs, {|o|hwg_SelfFocus(o:handle, hWndTitle)})
           RETURN IIf(i == 0, NIL, ::aModalDialogs[i])
       ENDIF
    ELSE
@@ -493,7 +493,7 @@ RETURN IIf(i == 0, NIL, ::aDialogs[i])
 
 METHOD GetActive() CLASS HDialog
    
-   LOCAL handle := GetFocus()
+   LOCAL handle := hwg_GetFocus()
    LOCAL i := AScan(::Getlist, {|o|o:handle == handle})
    
 RETURN IIf(i == 0, NIL, ::Getlist[i])
@@ -686,10 +686,10 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
 
    IF iParHigh == 0
       IF iParLow == IDOK
-         hCtrl := GetFocus()
+         hCtrl := hwg_GetFocus()
          oCtrl := oDlg:FindControl(, hCtrl)
-         IF oCtrl == NIL .OR. !SelfFocus(oCtrl:handle, hCtrl)
-            hCtrl := GetAncestor(hCtrl, GA_PARENT)
+         IF oCtrl == NIL .OR. !hwg_SelfFocus(oCtrl:handle, hCtrl)
+            hCtrl := hwg_GetAncestor(hCtrl, GA_PARENT)
             IF (oCtrl := oDlg:FindControl(, hCtrl)) != NIL
                GetSkip(oCtrl:oParent, hCtrl, , 1)
             ENDIF
@@ -698,7 +698,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
          IF hb_IsObject(oCtrl) .AND. oCtrl:classname = "HTAB"
             RETURN 1
          ENDIF
-         IF hb_IsObject(oCtrl) .AND. (GetNextDlgTabItem(GetActiveWindow(), hCtrl, 1) == hCtrl .OR. SelfFocus(oCtrl:handle, hCtrl))
+         IF hb_IsObject(oCtrl) .AND. (GetNextDlgTabItem(hwg_GetActiveWindow(), hCtrl, 1) == hCtrl .OR. hwg_SelfFocus(oCtrl:handle, hCtrl))
             hwg_SendMessage(oCtrl:handle, WM_KILLFOCUS, 0, 0)
          ENDIF
          IF hb_IsObject(oCtrl) .AND. oCtrl:id == IDOK .AND. __ObjHasMsg(oCtrl, "BCLICK") .AND. oCtrl:bClick == NIL
@@ -734,11 +734,11 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
             oDlg:bDestroy := NIL
             hwg_SendMessage(oCtrl:handle, WM_CLOSE, 0, 0)
             RETURN 0
-         ELSEIF hb_IsObject(oCtrl) .AND. oCtrl:IsEnabled() .AND. !Selffocus(oCtrl:handle)
+         ELSEIF hb_IsObject(oCtrl) .AND. oCtrl:IsEnabled() .AND. !hwg_SelfFocus(oCtrl:handle)
             //oCtrl:SetFocus()
             hwg_PostMessage(oDlg:handle, WM_NEXTDLGCTL, oCtrl:handle, 1)
          ELSEIF oDlg:lGetSkiponEsc
-            hCtrl := GetFocus()
+            hCtrl := hwg_GetFocus()
             oCtrl := oDlg:FindControl(, hctrl)
             IF hb_IsObject(oCtrl) .AND. __ObjHasMsg(oCtrl, "OGROUP") .AND. hb_IsObject(oCtrl:oGroup:oHGroup)
                 oCtrl := oCtrl:oGroup:oHGroup
@@ -877,12 +877,12 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
 
    //HB_SYMBOL_UNUSED(lParam)
 
-   IF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. oDlg:lContainer .AND. !SelfFocus(lParam, oDlg:handle)
+   IF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. oDlg:lContainer .AND. !hwg_SelfFocus(lParam, oDlg:handle)
       UpdateWindow(oDlg:handle)
       hwg_SendMessage(lParam, WM_NCACTIVATE, 1, NIL)
       RETURN 0
    ENDIF
-   IF iParLow == WA_ACTIVE .AND. SelfFocus(lParam, oDlg:handle)
+   IF iParLow == WA_ACTIVE .AND. hwg_SelfFocus(lParam, oDlg:handle)
       IF hb_IsBlock(oDlg:bOnActivate)
         //- oDlg:lSuspendMsgsHandling := .T.
          Eval(oDlg:bOnActivate, oDlg)
@@ -1057,7 +1057,7 @@ RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 FUNCTION EndDialog(handle)
 
    LOCAL oDlg
-   LOCAL hFocus := GetFocus()
+   LOCAL hFocus := hwg_GetFocus()
    LOCAL oCtrl
    LOCAL res
 

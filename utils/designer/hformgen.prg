@@ -78,7 +78,7 @@ METHOD New() CLASS HFormGen
 
    LOCAL i := 1
    LOCAL name
-   LOCAL hDCwindow := GetDC( GetActiveWindow() )
+   LOCAL hDCwindow := GetDC( hwg_GetActiveWindow() )
    LOCAL aTermMetr := GetDeviceArea( hDCwindow )
 
    DeleteDC( hDCwindow )
@@ -349,12 +349,12 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
    NEXT
 
    IF oDesigner:lReport
-      hDC := GetDC( GetActiveWindow() )
+      hDC := GetDC( hwg_GetActiveWindow() )
       aMetr := GetDeviceArea( hDC )
       // writelog( Str(aMetr[1])+Str(aMetr[2])+Str(aMetr[3])+Str(aMetr[4])+Str(aMetr[5])+Str(aMetr[6])+Str(aMetr[7])+Str(aMetr[8])+Str(aMetr[9]) )
       ::nKoeff := ( aMetr[1]/aMetr[3] + aMetr[2]/aMetr[4] ) / 2
       // writelog( Str(::nKoeff) )
-      ReleaseDC( GetActiveWindow(),hDC )
+      ReleaseDC( hwg_GetActiveWindow(),hDC )
       ::SetPaper( ::GetProp("Paper Size"),::GetProp("Orientation") )
       IF ::oDlg:oFont == Nil
          ::oDlg:oFont := HFont():Add( "Arial", 0, -13 )
@@ -572,7 +572,7 @@ STATIC FUNCTION BrowFile( lOpen,nType,oEdit1, oEdit2 )
       fname := CutPath( fname )
       oEdit1:SetGet( fname )
       oEdit1:Refresh()
-      SetFocus( oEdit2:handle )
+      hwg_SetFocus( oEdit2:handle )
    ENDIF
 
 Return Nil

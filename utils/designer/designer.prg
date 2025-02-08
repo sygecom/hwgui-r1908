@@ -463,7 +463,7 @@ Static Function StartDes( oDlg,p1,cForm )
             HFormGen():Open( ,cForm )
          ENDIF
          hwg_SetForegroundWindow( HFormGen():aForms[1]:oDlg:handle )
-         SetFocus( HFormGen():aForms[1]:oDlg:handle )
+         hwg_SetFocus( HFormGen():aForms[1]:oDlg:handle )
 // #endif
 #endif
       ENDIF
@@ -875,7 +875,7 @@ FUNCTION SoControles()
 
    IF !Empty(hwg_findwindow(0,"Toolbars - Classes "))// > 0
      hwg_Showwindow(oDlgx:handle)
-     SetFocus( oDlgx:handle )
+     hwg_SetFocus( oDlgx:handle )
      RETURN NIL
    ENDIF
 

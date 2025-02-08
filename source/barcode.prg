@@ -174,7 +174,7 @@ METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColP
    DEFAULT nPinWidth    := 1
 
 
-   //DEFAULT hDC    := hwg_GetDC(GetActiveWindow())
+   //DEFAULT hDC    := hwg_GetDC(hwg_GetActiveWindow())
 
    ::hDC          := hDC
    ::cText        := cText

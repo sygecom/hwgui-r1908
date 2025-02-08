@@ -38,7 +38,7 @@ Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
-   SetFocus( hEdit )
+   hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function RecNumberDisable
@@ -51,7 +51,7 @@ Local hDlg := getmodalhandle()
 
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
 Return Nil
 
 Static Function EndRepl()
@@ -64,12 +64,12 @@ Private finame, cValue, cFor
 
    finame := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 )
    IF Empty( finame )
-      SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
       Return Nil
    ENDIF
    cValue := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty( cValue )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
@@ -125,7 +125,7 @@ Local hDlg := getmodalhandle()
    ENDIF
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   SetFocus( GetDlgItem( hDlg, IDC_EDITFOR ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITFOR ) )
 Return Nil
 
 Static Function EndDele( nAct )
@@ -208,7 +208,7 @@ Static Function InitSum()
 Local hDlg := getmodalhandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndSum()
@@ -218,7 +218,7 @@ Private nsum := 0
 
    cSumf := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF EMPTY( cSumf )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
 
@@ -270,7 +270,7 @@ Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
-   SetFocus( hEdit )
+   hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function DelimDisable
@@ -282,7 +282,7 @@ Static Function InitApp()
 Local hDlg := getmodalhandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
-   SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndApp()
@@ -291,7 +291,7 @@ Local fname, nRec := Recno()
 
    fname := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF EMPTY( fname )
-      SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
 

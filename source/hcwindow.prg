@@ -129,7 +129,7 @@ CLASS HCustomWindow INHERIT HObject
    METHOD RedefineScrollbars()
    METHOD SetTextClass(x) HIDDEN
    METHOD GetParentForm(oCtrl)
-   METHOD ActiveControl() INLINE ::FindControl(, GetFocus())
+   METHOD ActiveControl() INLINE ::FindControl(, hwg_GetFocus())
    METHOD Closable(lClosable) SETGET
    METHOD Release() INLINE ::DelControl(Self)
    METHOD SetAll(cProperty, Value, aControls, cClass)
@@ -422,7 +422,7 @@ METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
 
    LOCAL nlen
    LOCAL i
-   LOCAL hCtrl := GetFocus()
+   LOCAL hCtrl := hwg_GetFocus()
    LOCAL oCtrlTmp
    LOCAL lRefresh
 
@@ -1102,8 +1102,8 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    IF oWnd:aEvents != NIL .AND. !oForm:lSuspendMsgsHandling .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       IF oForm:Type < WND_DLG_RESOURCE
-         IF SelfFocus(GetParent(GetFocus()) , oForm:handle)
-            oForm:nFocus := GetFocus() //lParam
+         IF hwg_SelfFocus(hwg_GetParent(hwg_GetFocus()) , oForm:handle)
+            oForm:nFocus := hwg_GetFocus() //lParam
          ENDIF
       ENDIF
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)

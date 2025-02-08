@@ -46,6 +46,6 @@ FUNCTION OpenConfig()
    hwg_CreateArList(oBrw1, aSample1)
    hwg_CreateArList(oBrw2, aSample2)
 
-   PropertySheet(GetActiveWindow(),{ aDlg1, aDlg2 }, "Sheet Example")
+   PropertySheet(hwg_GetActiveWindow(),{ aDlg1, aDlg2 }, "Sheet Example")
 
 RETURN NIL

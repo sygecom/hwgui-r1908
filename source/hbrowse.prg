@@ -826,9 +826,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
          ELSEIF wParam == VK_ESCAPE .AND. ::lESC
             IF ::GetParentForm():Type < WND_DLG_RESOURCE
-               hwg_SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
+               hwg_SendMessage(hwg_GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
             ELSE
-               hwg_SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
+               hwg_SendMessage(hwg_GetParent(::handle), WM_CLOSE, 0, 0)
             ENDIF
          ELSEIF wParam == VK_CONTROL  //17
             ::lCtrlPress := .T.
@@ -1225,9 +1225,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          CASE VK_ESCAPE
             IF ::lESC
                IF ::GetParentForm():Type < WND_DLG_RESOURCE
-                  hwg_SendMessage(GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
+                  hwg_SendMessage(hwg_GetParent(::handle), WM_SYSCOMMAND, SC_CLOSE, 0)
                ELSE
-                  hwg_SendMessage(GetParent(::handle), WM_CLOSE, 0, 0)
+                  hwg_SendMessage(hwg_GetParent(::handle), WM_CLOSE, 0, 0)
                ENDIF
             ENDIF
             EXIT
@@ -2139,7 +2139,7 @@ ENDIF
    ::lAppMode := .F.
 
    // fixed postion vertical scroll bar in refresh out browse
-   IF GetFocus() != ::handle .OR. nRecFilter = - 1
+   IF hwg_GetFocus() != ::handle .OR. nRecFilter = - 1
        Eval(::bSkip, Self, 1)
        Eval(::bSkip, Self, -1)
        IF hb_IsBlock(::bScrollPos) // array
@@ -2721,8 +2721,8 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
              DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1,;
                           (::y1 + (::height + 1) * (::nPaintRow - 1)) + ;
                           ((::y1 + (::height + 1) * (::nPaintRow)) - (::y1 + (::height + 1) * (::nPaintRow - 1))) / 2 - 6)
-             IF ::HighlightStyle == 2 .OR. ((::HighlightStyle == 0 .AND. SelfFocus(::handle)) .OR. ;
-                  (::HighlightStyle == 3 .AND. (::Highlight .OR. ::lEditable .OR. !SelfFocus(::handle))))
+             IF ::HighlightStyle == 2 .OR. ((::HighlightStyle == 0 .AND. hwg_SelfFocus(::handle)) .OR. ;
+                  (::HighlightStyle == 3 .AND. (::Highlight .OR. ::lEditable .OR. !hwg_SelfFocus(::handle))))
                 IF !::lEditable .OR. ::HighlightStyle == 3 .OR. ::HighlightStyle == 0
                    ::internal[1] := 1
                    oPen := HPen():Add(0, 1, ::bcolorSel)
@@ -2733,7 +2733,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                                  ::xAdjRight - 2,;  //::x2 - 1, ;
                                  ::y1 + (::height + 1) * ::nPaintRow, 0, 0)
                    hwg_DeleteObject(oPen)
-                   IF ((::Highlight .OR. !::lEditable) .AND. nCol == 0) .OR. (::HighlightStyle == 3 .AND. !SelfFocus(::handle))
+                   IF ((::Highlight .OR. !::lEditable) .AND. nCol == 0) .OR. (::HighlightStyle == 3 .AND. !hwg_SelfFocus(::handle))
                       RETURN NIL
                    ENDIF
                 ENDIF
@@ -3243,7 +3243,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
          ::lAppMode := .T.
       ELSE
          Eval(::bSkip, Self, -1)
-         IF !SELFFOCUS(::handle)
+         IF !hwg_SelfFocus(::handle)
            ::SetFocus()
          ENDIF
          RETURN NIL
@@ -3569,7 +3569,7 @@ ELSEIF nLine == 0
       ::lHeadClick := .T.
    ENDIF
 ENDIF
-   IF (PtrtouLong(GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
+   IF (PtrtouLong(hwg_GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
        ::GetParentForm():Type < WND_DLG_RESOURCE)
        ::SetFocus()
        ::RefreshLine()
@@ -3627,7 +3627,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
      hwg_SetCursor(s_downCursor)
    ENDIF
    /*
-   IF PtrtouLong(GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
+   IF PtrtouLong(hwg_GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
        ::GetParentForm():Type < WND_DLG_RESOURCE
        ::SetFocus()
    ENDIF
@@ -4225,7 +4225,7 @@ METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
    IF !CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
       RETURN .T.
    ENDIF
-   IF oBtn != NIL .AND. GetFocus() == oBtn:handle
+   IF oBtn != NIL .AND. hwg_GetFocus() == oBtn:handle
       RETURN .T.
    ENDIF
    IF oColumn:bValid != NIL

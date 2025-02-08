@@ -158,12 +158,12 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ::nInitFocus := IIf(hb_IsObject(::nInitFocus), ::nInitFocus:handle, ::nInitFocus)
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
-   ELSEIF PtrtoUlong(GETFOCUS()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
+   ELSEIF PtrtoUlong(hwg_GetFocus()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
       ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
          hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
          hwg_SetFocus(::acontrols[::nFocus]:handle)
-         ::nFocus := GetFocus() //get::acontrols[1]:handle
+         ::nFocus := hwg_GetFocus() //get::acontrols[1]:handle
       ENDIF
    ENDIF
 
@@ -200,8 +200,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    ELSEIF msg == WM_SETFOCUS .AND. nFocus != 0
       hwg_SetFocus(nFocus)
       //-::nFocus := 0
-   ELSEIF msg == WM_DESTROY .AND. ::lModal .AND. !SelfFocus(::Screen:handle, ::handle)
-      IF !Empty(::hActive) .AND. !SelfFocus(::hActive, ::Screen:handle)
+   ELSEIF msg == WM_DESTROY .AND. ::lModal .AND. !hwg_SelfFocus(::Screen:handle, ::handle)
+      IF !Empty(::hActive) .AND. !hwg_SelfFocus(::hActive, ::Screen:handle)
          hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
          hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
       ENDIF
@@ -217,7 +217,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
          ENDIF
          onTrackScroll(Self, msg, wParam, lParam)
       ELSEIF msg == WM_NOTIFY .AND.!::lSuspendMsgsHandling
-         IF (oCtrl := ::FindControl(, GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
+         IF (oCtrl := ::FindControl(, hwg_GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
             hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
@@ -262,8 +262,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       EXIT
 
    CASE WM_DESTROY
-      IF ::lModal .AND. !SelfFocus(::Screen:handle, ::handle)
-         IF !Empty(::hActive) .AND. !SelfFocus(::hActive, ::Screen:handle)
+      IF ::lModal .AND. !hwg_SelfFocus(::Screen:handle, ::handle)
+         IF !Empty(::hActive) .AND. !hwg_SelfFocus(::hActive, ::Screen:handle)
             hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
             hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
          ENDIF
@@ -315,7 +315,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
    CASE WM_NOTIFY
       IF !::lSuspendMsgsHandling
-         IF (oCtrl := ::FindControl(, GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
+         IF (oCtrl := ::FindControl(, hwg_GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
             hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
          ENDIF
       ENDIF
@@ -415,7 +415,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
       IF oWnd:brush != NIL
          IF !hb_IsNumeric(oWnd:brush)
             FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oWnd:brush:handle)
-            IF !Empty(oWnd:Screen) .AND. SELFFOCUS(oWnd:handle, oWnd:Screen:handle)
+            IF !Empty(oWnd:Screen) .AND. hwg_SelfFocus(oWnd:handle, oWnd:Screen:handle)
                hwg_SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
                   SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER)
             ENDIF
@@ -579,8 +579,8 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    ENDIF
    IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
-      IF PtrtouLong(GetParent(GetFocus())) == PtrtouLong(oWnd:handle)
-         oWnd:nFocus := GetFocus()
+      IF PtrtouLong(hwg_GetParent(hwg_GetFocus())) == PtrtouLong(oWnd:handle)
+         oWnd:nFocus := hwg_GetFocus()
       ENDIF
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF __ObjHasMsg(oWnd, "OPOPUP") .AND. oWnd:oPopup != NIL .AND. ;
@@ -588,7 +588,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
       Eval(aMenu[1, iItem, 1], wParam)
    ELSEIF iParHigh == 1 // acelerator
    ENDIF
-   IF oCtrl != NIL .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(oCtrl:handle), WS_TABSTOP) != 0 .AND. GetFocus() == oCtrl:handle
+   IF oCtrl != NIL .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(oCtrl:handle), WS_TABSTOP) != 0 .AND. hwg_GetFocus() == oCtrl:handle
       oWnd:nFocus := oCtrl:handle
    ENDIF
 
@@ -599,17 +599,17 @@ RETURN 0
 STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
 
    IF !Empty(oWnd:Screen)
-      IF wParam == 1 .AND. SelfFocus(oWnd:Screen:handle, oWnd:handle)
+      IF wParam == 1 .AND. hwg_SelfFocus(oWnd:Screen:handle, oWnd:handle)
          hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
          RETURN 1
       ENDIF
-      IF wParam == 1 .AND. !SelfFocus(oWnd:Screen:handle, oWnd:handle)
+      IF wParam == 1 .AND. !hwg_SelfFocus(oWnd:Screen:handle, oWnd:handle)
          // triggered ON GETFOCUS MDI CHILD MAXIMIZED
          IF hb_IsBlock(oWnd:bSetForm)
             Eval(oWnd:bSetForm, oWnd)
          ENDIF
          IF !oWnd:lSuspendMsgsHandling .AND.;
-            oWnd:bGetFocus != NIL .AND. !Empty(GetFocus()) .AND. oWnd:IsMaximized()
+            oWnd:bGetFocus != NIL .AND. !Empty(hwg_GetFocus()) .AND. oWnd:IsMaximized()
             oWnd:lSuspendMsgsHandling := .T.
             Eval(oWnd:bGetFocus, oWnd)
             oWnd:lSuspendMsgsHandling := .F.
@@ -649,11 +649,11 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
    ENDIF
 
-   IF lScreen .AND. (Empty(lParam) .OR. SelfFocus(lParam, oWnd:Screen:handle)) .AND. !lConf //wParam != oWnd:handle
+   IF lScreen .AND. (Empty(lParam) .OR. hwg_SelfFocus(lParam, oWnd:Screen:handle)) .AND. !lConf //wParam != oWnd:handle
       //-hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
       RETURN 0
    ELSEIF lConf //oWnd:handle == wParam
-      IF !SelfFocus(oWnd:Screen:handle, wParam) .AND. oWnd:bLostFocus != NIL //.AND.wParam == 0
+      IF !hwg_SelfFocus(oWnd:Screen:handle, wParam) .AND. oWnd:bLostFocus != NIL //.AND.wParam == 0
          oWnd:lSuspendMsgsHandling := .T.
          //IF oWnd:Screen:handle == lParam
          //   hwg_SetWindowPos(oWnd:Screen:handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE + SWP_NOOWNERZORDER + SWP_NOSIZE + SWP_NOMOVE)
@@ -666,7 +666,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
          AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
             hwg_EnableWindow(w:handle, .T.),)})
       ENDIF
-   ELSEIF SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
+   ELSEIF hwg_SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
       IF hb_IsBlock(oWnd:bSetForm)
          Eval(oWnd:bSetForm, oWnd)
       ENDIF

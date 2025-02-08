@@ -111,6 +111,6 @@ FUNCTION PS1(oWnd)
    INIT DIALOG oDlg2 TITLE "PAGE_2" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20, 35 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER
 
-   PropertySheet(GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
+   PropertySheet(hwg_GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
 
 RETURN NIL

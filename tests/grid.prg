@@ -29,6 +29,6 @@ FUNCTION Main()
 
    @ (640 - 100) / 2, 480 - 80 BUTTON "&Ok" OF oDialog ID IDOK SIZE 100, 32
 
-   ACTIVATE DIALOG oDialog ON ACTIVATE {||SetFocus(oGrid:handle)}
+   ACTIVATE DIALOG oDialog ON ACTIVATE {||hwg_SetFocus(oGrid:handle)}
 
 RETURN NIL

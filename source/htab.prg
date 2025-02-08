@@ -591,7 +591,7 @@ METHOD Refresh(lAll) CLASS HTab
    LOCAL nFirst
    LOCAL nEnd
    LOCAL lRefresh
-   LOCAL hCtrl := GetFocus()
+   LOCAL hCtrl := hwg_GetFocus()
 
    IF ::nActive != 0
       IF !::lResourceTab
@@ -699,8 +699,8 @@ METHOD Notify(lParam) CLASS HTab
    IF hwg_BitAnd(::Style, TCS_BUTTONS) != 0
       nPage := hwg_SendMessage(::handle, TCM_GETCURFOCUS, 0, 0) + 1
    ENDIF
-   IF nPage == 0 .OR. ::handle != GetFocus()
-      IF nCode == TCN_SELCHANGE .AND. ::handle != GetFocus() .AND. ::lClick
+   IF nPage == 0 .OR. ::handle != hwg_GetFocus()
+      IF nCode == TCN_SELCHANGE .AND. ::handle != hwg_GetFocus() .AND. ::lClick
          hwg_SendMessage(::handle, TCM_SETCURSEL, hwg_SendMessage(::handle, ::nPrevPage - 1, 0, 0), 0)
          RETURN 0
       ELSEIF nCode == TCN_SELCHANGE
@@ -731,7 +731,7 @@ METHOD Notify(lParam) CLASS HTab
             IF nPage == ::nPrevPage
             RETURN 0
         ENDIF
-              //IF GETFOCUS() != ::handle
+              //IF hwg_GetFocus() != ::handle
             //   ::SETFOCUS()
             //ENDIF
         IF hb_IsBlock(::bChange)
@@ -845,7 +845,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    ELSEIF msg == WM_SETFONT .AND. ::oFont != NIL .AND. ::lInit
       hwg_SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
 
-   ELSEIF msg == WM_KEYDOWN .AND. GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
+   ELSEIF msg == WM_KEYDOWN .AND. hwg_GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
        IF ProcKeyList(Self, wParam)
           RETURN - 1
        ELSEIF wParam == VK_ESCAPE
@@ -865,8 +865,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
           GetSkip(::oParent, ::handle, , -1)
           RETURN 0
        ENDIF
-   ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(, GETFOCUS()):classname = "HUPDO"
-       IF GetFocus() == ::handle
+   ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(, hwg_GetFocus()):classname = "HUPDO"
+       IF hwg_GetFocus() == ::handle
           hwg_InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
        ENDIF
        IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
@@ -887,7 +887,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
           ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
    ELSEIF (hwg_IsWindowVisible(::handle) .AND. ::nActivate == NIL) .OR. msg == WM_KILLFOCUS
-      ::nActivate := getfocus()
+      ::nActivate := hwg_GetFocus()
    ENDIF
 
    IF hb_IsBlock(::bOther)
@@ -898,7 +898,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
-      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. PtrtouLong(GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
+      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. PtrtouLong(hwg_GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
           GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
           ::GetParentForm():nInitFocus := 0
       ENDIF
@@ -978,7 +978,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       EXIT
 
    CASE WM_KEYDOWN
-      IF GetFocus() == ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
+      IF hwg_GetFocus() == ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
          IF ProcKeyList(Self, wParam)
             RETURN -1
          ELSEIF wParam == VK_ESCAPE
@@ -1003,8 +1003,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    CASE WM_HSCROLL
    CASE WM_VSCROLL
-      //.AND. ::FINDCONTROL(, GETFOCUS()):classname = "HUPDO"
-      IF GetFocus() == ::handle
+      //.AND. ::FINDCONTROL(, hwg_GetFocus()):classname = "HUPDO"
+      IF hwg_GetFocus() == ::handle
           hwg_InvalidateRect(::oPaint:handle, 1, 0, 0, ::nwidth, 30) //::TabHeightSize + 2)
       ENDIF
       IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
@@ -1029,7 +1029,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
          ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
    ELSEIF (hwg_IsWindowVisible(::handle) .AND. ::nActivate == NIL) .OR. msg == WM_KILLFOCUS
-      ::nActivate := getfocus()
+      ::nActivate := hwg_GetFocus()
    ENDIF
 
    IF hb_IsBlock(::bOther)
@@ -1042,7 +1042,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
-         PtrtouLong(GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
+         PtrtouLong(hwg_GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
          GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
          ::GetParentForm():nInitFocus := 0
       ENDIF
@@ -1256,7 +1256,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
          //SetBkMode(hDC, TRANSPARENT)
          IF nPage == oPage:PageOrder
             FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
-            IF GetFocus() == oPage:oParent:handle
+            IF hwg_GetFocus() == oPage:oParent:handle
                InflateRect(@client_rect, - 2, - 2)
                DrawFocusRect(::hDC, client_rect)
             endif

@@ -857,8 +857,8 @@ FUNCTION EditMenu()
    @ 40, 290 BUTTON "Ok" SIZE 100, 30 ON CLICK {||oDlg:lResult := .T.,EndDialog()}
    @ 260, 290 BUTTON "Cancel" SIZE 100, 30 ON CLICK {||EndDialog()}
 
-   oDlg:AddEvent( 0,IDOK,{||SetFocus(oDlg:aControls[2]:handle)} )
-   oDlg:AddEvent( 0,IDCANCEL,{||SetFocus(oDlg:aControls[2]:handle)} )
+   oDlg:AddEvent( 0,IDOK,{||hwg_SetFocus(oDlg:aControls[2]:handle)} )
+   oDlg:AddEvent( 0,IDCANCEL,{||hwg_SetFocus(oDlg:aControls[2]:handle)} )
 
    ACTIVATE DIALOG oDlg
    IF oDlg:lResult
@@ -1127,7 +1127,7 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
    LOCAL yf
 
    pps := hwg_DefinePaintStru()
-   hDC := GetDC( GetActiveWindow() )
+   hDC := GetDC( hwg_GetActiveWindow() )
    IF oPenSel == Nil
       oPenSel := HPen():Add( PS_SOLID, 1, 255 )
    ENDIF

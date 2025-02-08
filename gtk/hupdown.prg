@@ -114,7 +114,7 @@ Static Function __Valid( oCtrl )
    ENDIF
    IF oCtrl:bLostFocus != Nil .AND. !Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) .OR. ;
          oCtrl:value > oCtrl:nUpper .OR. oCtrl:value < oCtrl:nLower
-      SetFocus( oCtrl:handle )
+      hwg_SetFocus( oCtrl:handle )
    ENDIF
 
 Return .T.
