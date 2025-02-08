@@ -42,8 +42,8 @@ oDlg1:lRouteCommand := .T.
    REDEFINE BROWSE oBrw1 ARRAY ID 104
    REDEFINE BROWSE oBrw2 ARRAY ID 105
 
-   CreateArList(oBrw1, aSample1)
-   CreateArList(oBrw2, aSample2)
+   hwg_CreateArList(oBrw1, aSample1)
+   hwg_CreateArList(oBrw2, aSample2)
   activate dialog oDlg1
 
 RETURN NIL

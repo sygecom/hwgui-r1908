@@ -417,7 +417,7 @@ FUNCTION sqlBrowse(queHandle)
          ENDIF
       NEXT
    NEXT
-   CreateArList(oBrw, aQueRows)
+   hwg_CreateArList(oBrw, aQueRows)
    FOR i := 1 TO nNumFields
       oBrw:aColumns[i]:heading := SqlFetchF(queHandle)[1]
       oBrw:aColumns[i]:type := af[i, 1]

@@ -288,7 +288,7 @@ FUNCTION OpenAbout()
        BITMAP cImageDir + "door.bmp" COORDINATES 40, 10, 0, 0
        // 
 
-   CreateArList(oBrw, aSample)
+   hwg_CreateArList(oBrw, aSample)
    oBrw:bColorSel := 12507070  // 15149157449
 
    oBmp := HBitmap():AddStandard(OBM_LFARROWI)

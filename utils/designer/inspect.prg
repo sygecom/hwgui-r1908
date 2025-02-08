@@ -743,7 +743,7 @@ FUNCTION ObjInspector(oObject )
       size 570, 300 ;
       style WS_VSCROLL + WS_HSCROLL
 
-   CreateArList( oBrw, aClassMsgProp )
+   hwg_CreateArList( oBrw, aClassMsgProp )
 
    oBrw:aColumns[1]:length = 30
    oBrw:aColumns[1]:heading = " Property "
@@ -757,7 +757,7 @@ FUNCTION ObjInspector(oObject )
       size 570, 300 ;
       style WS_VSCROLL + WS_HSCROLL
 
-   CreateArList( oBrw2, aClassMsgMtdo )
+   hwg_CreateArList( oBrw2, aClassMsgMtdo )
 
    oBrw2:aColumns[1]:length = 10
    oBrw2:aColumns[1]:heading = "Methods"

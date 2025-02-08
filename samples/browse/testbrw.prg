@@ -37,9 +37,9 @@ FUNCTION DlgGet()
        SIZE 180, 35 FLAT                                  ;
        TEXT "Close" COLOR VColor("0000FF")
 
-   CreateArList(oBrw1, aSample1)
+   hwg_CreateArList(oBrw1, aSample1)
 
-   CreateArList(oBrw2, aSample2)
+   hwg_CreateArList(oBrw2, aSample2)
    oBmp := HBitmap():AddResource(OBM_CHECK)
    oBrw2:aColumns[1]:aBitmaps := { ;
       {{|l|l}, oBmp} ;

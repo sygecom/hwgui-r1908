@@ -121,7 +121,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Prg (Files)" of oTAB
       @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
  	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
-      createarlist(oBrowse1,aFiles1)
+      hwg_CreateArList(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
       oBrowse1:bcolorSel := VColor( "800080" )
@@ -133,7 +133,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "C (Files)" of oTAB
       @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
  	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
-      createarlist(oBrowse2,aFiles2)
+      hwg_CreateArList(oBrowse2,aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
       oBrowse2:bcolorSel := VColor( "800080" )
@@ -144,7 +144,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Lib (Files)" of oTAB
       @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
  	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
-      createarlist(oBrowse3,aFiles3)
+      hwg_CreateArList(oBrowse3,aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
       oBrowse3:bcolorSel := VColor( "800080" )
@@ -155,7 +155,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Resource (Files)" of oTAB
       @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
  	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
-      createarlist(oBrowse4,aFiles4)
+      hwg_CreateArList(oBrowse4,aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
       oBrowse4:bcolorSel := VColor( "800080" )

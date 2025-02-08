@@ -1707,7 +1707,7 @@ STATIC FUNCTION FLDCOUNT( oBrw, xstrt, xend, fld1 )
 RETURN IIf(klf == 0, 1, klf)
 
 //----------------------------------------------------//
-FUNCTION CREATEARLIST( oBrw, arr )
+FUNCTION HWG_CREATEARLIST( oBrw, arr )
    local i
    oBrw:type  := BRW_ARRAY
    oBrw:aArray := arr
@@ -1817,3 +1817,11 @@ Local nL, nPos := 0
       nCount ++
    enddo
 RETURN nil
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+HB_FUNC_TRANSLATE(CREATEARLIST, HWG_CREATEARLIST);
+
+#pragma ENDDUMP

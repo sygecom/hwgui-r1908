@@ -4498,7 +4498,7 @@ STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
 RETURN IIf(klf == 0, 1, klf)
 
 //----------------------------------------------------//
-FUNCTION CREATEARLIST(oBrw, arr)
+FUNCTION HWG_CREATEARLIST(oBrw, arr)
    
    LOCAL i
    
@@ -4915,3 +4915,11 @@ STATIC FUNCTION LenVal(xVal, cType, cPict)
    ENDSWITCH
 
 RETURN nLen
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+HB_FUNC_TRANSLATE(CREATEARLIST, HWG_CREATEARLIST);
+
+#pragma ENDDUMP

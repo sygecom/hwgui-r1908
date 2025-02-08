@@ -359,7 +359,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
         ON CLICK {||BrowseMove(oBrwArr, "End", oEdGoto, "Array")} ;
         TOOLTIP "Last Record"
 
-       CreateArList(oBrwArr, aArrayTst)
+       hwg_CreateArList(oBrwArr, aArrayTst)
 
         oBrwArr:bcolorSel := x_BLUE
 

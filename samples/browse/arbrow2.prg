@@ -38,7 +38,7 @@ FUNCTION Main()
     next
 
     oBrw1:aArray := a
-    CreateArList(oBrw1, a)
+    hwg_CreateArList(oBrw1, a)
     oBrw1:aColumns[1]:length := 5
     oBrw1:aColumns[2]:length := 5
     oBrw1:aColumns[1]:width := 50
@@ -50,7 +50,7 @@ FUNCTION Main()
     next
 
     oBrw2:aArray := b
-    CreateArList(oBrw2, b)
+    hwg_CreateArList(oBrw2, b)
     oBrw2:lAdjRight := .F.
     oBrw2:aColumns[1]:length := 5
     oBrw2:aColumns[2]:length := 5

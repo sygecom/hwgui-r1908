@@ -113,7 +113,7 @@ Local hDC, aMetr, width, height, screenh
    ELSE
       oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]},"C",nLen ) )
    ENDIF
-   CreateArList( oBrw, arr )
+   hwg_CreateArList( oBrw, arr )
    oBrw:lDispHead := .F.
    IF clrT != Nil
       oBrw:tcolor := clrT

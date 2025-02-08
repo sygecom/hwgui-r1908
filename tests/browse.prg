@@ -20,7 +20,7 @@ FUNCTION Main()
                    AllTrim(Str(n)) + "," + "5"}
    NEXT n
 
-   CreateArList(oBrowse, aData)
+   hwg_CreateArList(oBrowse, aData)
 
    oBrowse:aColumns[1]:heading := "Column 1"
    oBrowse:aColumns[2]:heading := "Column 2"
