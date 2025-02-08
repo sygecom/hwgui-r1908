@@ -62,12 +62,12 @@ Local hDlg := getmodalhandle()
 Local oFont := aItem[ITEM_FONT]
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
      Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,Iif(aItem[ITEM_ALIGN]==1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
-   SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
    IF aItem[ITEM_SCRIPT] != Nil
-      SetDlgItemText( hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT] )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT] )
    ENDIF
    // SetComboBox( hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1 )
-   SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
+   hwg_SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
@@ -88,7 +88,7 @@ Local hDlg := getmodalhandle()
 Local oFont := HFont():Select()
    IF oFont != Nil
       aItem[ITEM_FONT] := oFont
-      SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
    ENDIF
 Return .T.
 
@@ -112,7 +112,7 @@ Local oPen := aItem[ITEM_PEN]
    ELSE
       hwg_SendMessage( GetDlgItem( hDlg,IDC_COMBOBOX2 ), WM_ENABLE, 0, 0 )
    ENDIF
-   SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width,1) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width,1) )
 Return .T.
 
 Static Function EndLine( aItem )
@@ -145,7 +145,7 @@ Return res
 Static Function OpenBmp( aItem,fname )
 Local hDlg := getmodalhandle()
    Local aBmpSize
-   SetDlgItemText( hDlg, IDC_EDIT1, fname )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    IF !Empty( fname )
       IF aItem[ITEM_BITMAP] != Nil
          DeleteObject( aItem[ITEM_BITMAP]:handle )
@@ -155,8 +155,8 @@ Local hDlg := getmodalhandle()
       aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       aItem[ITEM_WIDTH] :=  aItem[ITEM_BITMAP]:nWidth
       aItem[ITEM_HEIGHT] := aItem[ITEM_BITMAP]:nHeight
-      SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
-      SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
    ENDIF
 Return Nil
 
@@ -166,7 +166,7 @@ Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
-      SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100,0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100,0))) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100,0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100,0))) )
    ENDIF
 Return Nil
 
@@ -176,9 +176,9 @@ Local aBmpSize, hUp
    hUp := CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
-      SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
-      SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
-      SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
       SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1],0) )
    ENDIF
 Return .T.
@@ -207,9 +207,9 @@ Return Nil
 
 Static Function InitMarkL( aItem )
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_TEXT1, "Script:" )
+   hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Script:" )
    IF Valtype(aItem[ITEM_SCRIPT]) == "C"
-      SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_SCRIPT] )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_SCRIPT] )
    ENDIF
 Return .T.
 
@@ -257,9 +257,9 @@ Return Nil
 
 Static Function InitFOpt()
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_TEXT1, "Variables:" )
+   hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Variables:" )
    IF Valtype(aPaintRep[FORM_VARS]) == "C"
-      SetDlgItemText( hDlg, IDC_EDIT1, aPaintRep[FORM_VARS] )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT1, aPaintRep[FORM_VARS] )
    ENDIF
 Return .T.
 

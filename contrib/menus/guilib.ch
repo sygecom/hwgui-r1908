@@ -61,9 +61,9 @@
 
 #xcommand ACTIVATE WINDOW <oWnd> [<lNoShow: NOSHOW>]     ;
            => ;
-      <oWnd>:Activate( !<.lNoShow.>) 
-                                                        
-  
+      <oWnd>:Activate( !<.lNoShow.>)
+
+
 #xcommand ACTIVATE DIALOG <oDlg>                        ;
             [ <lNoModal: NOMODAL> ]                     ;
           => ;
@@ -807,7 +807,7 @@
 
 #xcommand SAY <value> TO <oDlg> ID <id> ;
           => ;
-    SetDlgItemText( <oDlg>:handle, <id>, <value> )
+    hwg_SetDlgItemText( <oDlg>:handle, <id>, <value> )
 
 /*   Menu system     */
 

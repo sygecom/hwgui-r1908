@@ -32,17 +32,17 @@ Local hDlg := getmodalhandle(), cTitle
    WriteStatus( HMainWindow():GetMdiActive(),3,"" )
    IF nMove == 1
       cTitle := "Input locate expression"
-      SetDlgItemText( hDlg, IDC_EDIT6, cLocate )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT6, cLocate )
    ELSEIF nMove == 2
       cTitle := "Input seek string"
-      SetDlgItemText( hDlg, IDC_EDIT6, cSeek )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT6, cSeek )
    ELSEIF nMove == 3
       cTitle := "Input filter expression"
-      SetDlgItemText( hDlg, IDC_EDIT6, cFilter )
+      hwg_SetDlgItemText( hDlg, IDC_EDIT6, cFilter )
    ELSEIF nMove == 4
       cTitle := "Input record number"
    ENDIF
-   SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
+   hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
 Return Nil
 

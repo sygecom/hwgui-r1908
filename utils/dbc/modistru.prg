@@ -52,12 +52,12 @@ Return Nil
 
 Static Function SetField( oBrw )
 Local hDlg := getmodalhandle(), i
-   SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent,1] )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent,1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent,2], "CNDLM" ) ) != 0
       hwg_ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
    ENDIF
-   SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,3] ) ) )
-   SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,4] ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,3] ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,4] ) ) )
 Return Nil
 
 Static Function ModiStru( nOper )

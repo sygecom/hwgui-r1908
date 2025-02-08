@@ -215,13 +215,13 @@ Local new_numdriv, new_servertype, serverPath
          IF Right( serverPath ) != "/" .AND. Right( serverPath ) != "\"
             serverPath += "\"
          ENDIF
-         SetDlgItemText( hDlg, IDC_TEXT1, "Waiting for connection ..." )
+         hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Waiting for connection ..." )
          IF Empty( serverPath ) .OR. !AdsConnect( serverPath )
              nServerType := 1
              AdsSetServerType( nServerType )
              hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
              ServerButton( 0 )
-             SetDlgItemText( hDlg, IDC_TEXT1, "Cannot connect to "+serverPath )
+             hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Cannot connect to "+serverPath )
              Return .F.
          ELSE
              mypath := serverPath
@@ -297,7 +297,7 @@ Return Nil
 
 Static Function InitNewIndex
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
@@ -338,7 +338,7 @@ Local oWindow, aControls, i
    ENDIF
    expfor := GetDlgItemText( hDlg, IDC_EDIT5, 60 )
    indname := mypath + indname
-   SetDlgItemText( hDlg, IDC_TEXT2, "Indexing ..." )
+   hwg_SetDlgItemText( hDlg, IDC_TEXT2, "Indexing ..." )
    IF numdriv = 1 .AND. isMulti
       IF EMPTY( expfor )
          ORDCREATE( RTRIM( indname ), RTRIM( tagname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
@@ -413,7 +413,7 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndOpen()}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) }
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) }
    aModDlg:Activate()
 
 Return Nil
@@ -558,7 +558,7 @@ Local cExpr, res
       MsgStop( "Wrong expression" )
    ELSE
       res := &( TRIM( cExpr ) )
-      SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
    ENDIF
 
 Return Nil
@@ -573,7 +573,7 @@ Local aModDlg
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndScri(nAct)}   ;
         ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() ) }  ;
-        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||SetDlgItemText( getmodalhandle(), IDC_EDIT8, hwg_SelectFile( "Script files( *.scr )", "*.scr", mypath ) ) }
+        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT8, hwg_SelectFile( "Script files( *.scr )", "*.scr", mypath ) ) }
    aModDlg:Activate()
 
 Return Nil
@@ -587,7 +587,7 @@ Local fname, arScr, nError, nLineEr, obl
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT8 ) )
       Return Nil
    ENDIF
-   SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+   hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
    IF ( arScr := RdScript( fname ) ) <> Nil
       IF nAct == 1
          obl := SELECT()

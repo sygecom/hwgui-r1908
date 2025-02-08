@@ -139,7 +139,7 @@
 
 #xcommand SAY <value> TO <oDlg> ID <id> ;
           => ;
-          SetDlgItemText( <oDlg>:handle, <id>, <value> )
+          hwg_SetDlgItemText( <oDlg>:handle, <id>, <value> )
 
 /*   Menu system     */
 

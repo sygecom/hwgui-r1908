@@ -45,7 +45,7 @@ Return Nil
 
 Static Function InitQuery()
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
+   hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
 Return Nil
 
@@ -89,7 +89,7 @@ Static lConnected := .F.
          ENDIF
          Return .F.
       ENDIF
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF !AdsExecuteSqlDirect( cQuery )
          MsgStop( "SQL execution failed" )
          IF !Empty( oldArea )

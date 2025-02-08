@@ -29,8 +29,8 @@ Local oDlg
    INIT DIALOG oDlg FROM RESOURCE "DLG_FILE" ON INIT {|| InitOpen(lOpen) }
    DIALOG ACTIONS OF oDlg ;
         ON 0,IDOK         ACTION {|| EndOpen(lOpen)}  ;
-        ON BN_CLICKED,IDC_RADIOBUTTON1 ACTION {||SetDlgItemText(oDlg:handle,IDC_TEXT1,"Report Name:")} ;
-        ON BN_CLICKED,IDC_RADIOBUTTON2 ACTION {||SetDlgItemText(oDlg:handle,IDC_TEXT1,"Function Name:")} ;
+        ON BN_CLICKED,IDC_RADIOBUTTON1 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1,"Report Name:")} ;
+        ON BN_CLICKED,IDC_RADIOBUTTON2 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1,"Function Name:")} ;
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||BrowFile(lOpen)}
    oDlg:Activate()
 
@@ -58,7 +58,7 @@ Local fname, s1, s2
    ELSE
       fname := hwg_SaveFile( s2,s1,s2,mypath )
    ENDIF
-   SetDlgItemText( hDlg, IDC_EDIT1, fname )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 

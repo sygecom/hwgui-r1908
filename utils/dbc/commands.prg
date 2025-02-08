@@ -37,7 +37,7 @@ Static Function RecNumberEdit
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
-   SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
+   hwg_SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
    hwg_SetFocus( hEdit )
 Return Nil
 
@@ -80,7 +80,7 @@ Private finame, cValue, cFor
          cFor := ".T."
       ENDIF
       nrec := Recno()
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
          REPLACE ALL &finame WITH &cValue FOR &cFor
       ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
@@ -90,7 +90,7 @@ Private finame, cValue, cFor
          REPLACE REST &finame WITH &cValue FOR &cFor
       ENDIF
       Go nrec
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Done !" )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Done !" )
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
@@ -143,7 +143,7 @@ Private cFor
       IF EMPTY( cFor )
          cFor := ".T."
       ENDIF
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF nAct == 1
          IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
             DELETE ALL FOR &cFor
@@ -171,7 +171,7 @@ Private cFor
          ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
             COUNT TO nsum REST FOR &cFor
          ENDIF
-         SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
+         hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
          Go nrec
          Return Nil
       ENDIF
@@ -229,7 +229,7 @@ Private nsum := 0
       IF EMPTY( cFor )
          cFor := ".T."
       ENDIF
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       blsum := &( "{||nsum:=nsum+" + cSumf + "}" )
       blfor := &( "{||" + cFor + "}" )
       IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
@@ -241,7 +241,7 @@ Private nsum := 0
          DBEVAL( blsum, blfor,,,, .T. )
       ENDIF
       Go nrec
-      SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
       Return Nil
    ENDIF
 
@@ -257,7 +257,7 @@ Local aModDlg
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndApp()}  ;
         ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) } ;
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) } ;
         ON BN_CLICKED,IDC_RADIOBUTTON11 ACTION {|| DelimEdit() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON10 ACTION {|| DelimDisable() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON9 ACTION {|| DelimDisable() }
@@ -269,7 +269,7 @@ Static Function DelimEdit
 Local hDlg := getmodalhandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
-   SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
+   hwg_SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
    hwg_SetFocus( hEdit )
 Return Nil
 
@@ -295,7 +295,7 @@ Local fname, nRec := Recno()
       Return Nil
    ENDIF
 
-   SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+   hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
    IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
       // DBEVAL( blsum, blfor )
    ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
@@ -324,7 +324,7 @@ Return Nil
 
 Static Function InitRPZ( nAct )
 Local hDlg := getmodalhandle()
-   SetDlgItemText( hDlg, IDC_TEXTHEAD, Iif( nAct==1,"Reindex ?", ;
+   hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, Iif( nAct==1,"Reindex ?", ;
                                        Iif( nAct==2,"Pack ?", "Zap ?" ) ) )
 Return Nil
 
@@ -338,7 +338,7 @@ Local hWnd, oWindow, aControls, i
          Return Nil
       ENDIF
    ENDIF
-   SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
+   hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
    IF nAct == 1
       Reindex
    ELSEIF nAct == 2
