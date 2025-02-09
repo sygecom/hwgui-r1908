@@ -361,7 +361,7 @@ METHOD INIT() CLASS HCalculator
          aCoors := hwg_GetWindowRect(::oCurrGet:handle)
       ELSE
          aCoors := { ::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
-          ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + GETSYSTEMMETRICS(SM_CYCAPTION) + 8, 0, 0 }
+          ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + hwg_GetSystemMetrics(SM_CYCAPTION) + 8, 0, 0 }
       ENDIF
       aCoors[3] := IIf(::lCompacta, Max(130, ::oCurrGet:nWidth + 8), ::nWidth)
       ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1 , aCoors[3], 180, 0)

@@ -190,8 +190,8 @@ FUNCTION hwg_BeginMenu(oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp)
       s__oMenu    := NIL
       s__nLevel   := 0
       s__Id       := IIf(nId == NIL, MENU_FIRST_ID, nId)
-      s_nWidthBmp  := IIf(nWidthBmp == NIL .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS(SM_CXMENUCHECK), nWidthBmp)
-      s_nHeightBmp := IIf(nHeightBmp == NIL .OR. !HWG_ISWIN7(), GETSYSTEMMETRICS(SM_CYMENUCHECK), nHeightBmp)
+      s_nWidthBmp  := IIf(nWidthBmp == NIL .OR. !HWG_ISWIN7(), hwg_GetSystemMetrics(SM_CXMENUCHECK), nWidthBmp)
+      s_nHeightBmp := IIf(nHeightBmp == NIL .OR. !HWG_ISWIN7(), hwg_GetSystemMetrics(SM_CYMENUCHECK), nHeightBmp)
       s_nbkColor   := nbkColor 
    ELSE
       nId   := IIf(nId == NIL, ++s__Id, nId)

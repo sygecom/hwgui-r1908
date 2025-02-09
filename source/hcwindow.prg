@@ -226,9 +226,9 @@ METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
    IF hwg_BitAnd(::style, WS_CHILD) == 0
       rect := hwg_GetwindowRect(::handle)
       nHx := rect[4] - rect[2]  - hwg_GetclientRect(::handle)[4] - ;
-         IIf(hwg_BitAnd(::style, WS_HSCROLL) > 0, GetSystemMetrics(SM_CYHSCROLL), 0)
+         IIf(hwg_BitAnd(::style, WS_HSCROLL) > 0, hwg_GetSystemMetrics(SM_CYHSCROLL), 0)
       nWx := rect[3] - rect[1]  - hwg_GetclientRect(::handle)[3] - ;
-         IIf(hwg_BitAnd(::style, WS_VSCROLL) > 0, GetSystemMetrics(SM_CXVSCROLL), 0)
+         IIf(hwg_BitAnd(::style, WS_VSCROLL) > 0, hwg_GetSystemMetrics(SM_CXVSCROLL), 0)
    ENDIF
 
    IF nRePaint == NIL
@@ -799,7 +799,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
       nhMax := Max(::ncurHeight, ::Rect[4])
       ::nHorzInc := INT((nwMax - tempRect[3]) / HORZ_PTS + HORZ_PTS)
       ::nVertInc := INT((nhMax - tempRect[4]) / VERT_PTS + VERT_PTS - ;
-         IIf(amenu != NIL, GetSystemMetrics(SM_CYMENU), 0)) // MENU
+         IIf(amenu != NIL, hwg_GetSystemMetrics(SM_CYMENU), 0)) // MENU
    ENDIF
     // Set the vertical and horizontal scrolling info
    IF ::nScrollBars == 0 .OR. ::nScrollBars == 2

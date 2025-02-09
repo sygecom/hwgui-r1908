@@ -100,7 +100,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
 
       // ADDED screen to backgroup to MDI MAIN
       ::Screen := HMdiChildWindow():New(, ::tcolor, WS_CHILD + WS_MAXIMIZE + MB_USERICON + WS_DISABLED, ;
-         0, 0, ::nWidth * 1, ::nheight * 1 - GETSYSTEMMETRICS(SM_CYSMCAPTION) - GETSYSTEMMETRICS(SM_CYSMCAPTION), ;
+         0, 0, ::nWidth * 1, ::nheight * 1 - hwg_GetSystemMetrics(SM_CYSMCAPTION) - hwg_GetSystemMetrics(SM_CYSMCAPTION), ;
          -1, , , , , ::bSize, , , , , , ::oBmp, , , , , ,)
       ::Screen:Type := WND_MDICHILD
 
@@ -153,7 +153,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       /*
       // ADDED screen to backgroup to MDI MAIN
       ::Screen := HMdiChildWindow():New(, ::tcolor, WS_CHILD + MB_USERICON + WS_MAXIMIZE + WS_DISABLED, ;
-         0, 0, ::nWidth * 1, ::nheight * 1 - GETSYSTEMMETRICS(SM_CYSMCAPTION) - GETSYSTEMMETRICS(SM_CYSMCAPTION), ;
+         0, 0, ::nWidth * 1, ::nheight * 1 - hwg_GetSystemMetrics(SM_CYSMCAPTION) - hwg_GetSystemMetrics(SM_CYSMCAPTION), ;
          -1, , , , , , , , , , , ::oBmp, , , , , ,)
       */
 
@@ -248,7 +248,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          oMdi := ::GetMdiActive()
          IF oMdi:lModal
             xPos := hwg_LOWORD(lParam)
-            yPos := hwg_HIWORD(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
+            yPos := hwg_HIWORD(lParam) // + ::nTop + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION)
             aCoors := hwg_ScreenToClient(::handle, hwg_GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF (!PtInRect(aCoors, {xPos, yPos}))
                hwg_MsgBeep()
@@ -304,7 +304,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          oMdi := ::GetMdiActive()
          IF oMdi:lModal
             xPos := hwg_LOWORD(lParam)
-            yPos := hwg_HIWORD(lParam) // + ::nTop + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION)
+            yPos := hwg_HIWORD(lParam) // + ::nTop + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION)
             aCoors := hwg_ScreenToClient(::handle, hwg_GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
             IF !PtInRect(aCoors, {xPos, yPos})
                hwg_MsgBeep()

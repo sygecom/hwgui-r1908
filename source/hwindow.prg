@@ -201,7 +201,7 @@ FUNCTION onMove(oWnd)
    oWnd:nTop := aControls[2]
    IF oWnd:type == WND_MDICHILD .AND. !oWnd:lMaximized
       //oWnd:aRectSave := {oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight}
-      IF oWnd:nHeight > GETSYSTEMMETRICS(SM_CYCAPTION) + 6
+      IF oWnd:nHeight > hwg_GetSystemMetrics(SM_CYCAPTION) + 6
           oWnd:aRectSave := {oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight}
       ELSE
         oWnd:aRectSave[1] := oWnd:nLeft

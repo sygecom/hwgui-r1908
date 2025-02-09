@@ -147,7 +147,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::RedefineScrollbars()
    /*
    IF ::nScrollBars > - 1
-      AEval(::aControls, {|o|::ncurHeight := max(o:nTop + o:nHeight + GetSystemMetrics(SM_CYMENU) + GETSYSTEMMETRICS(SM_CYCAPTION) + 12 , ::ncurHeight)})
+      AEval(::aControls, {|o|::ncurHeight := max(o:nTop + o:nHeight + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION) + 12 , ::ncurHeight)})
       AEval(::aControls, {|o|::ncurWidth := max(o:nLeft + o:nWidth + 24, ::ncurWidth)})
       ::ResetScrollbars()
       ::SetupScrollbars()

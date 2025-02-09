@@ -418,8 +418,8 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
    LOCAL y9
    LOCAL w9
    LOCAL h9
-   LOCAL nCxv := IIf(HWG_BITAND(::style, WS_VSCROLL) != 0, GetSystemMetrics(SM_CXVSCROLL) + 1, 3)
-   LOCAL nCyh := IIf(HWG_BITAND(::style, WS_HSCROLL) != 0, GetSystemMetrics(SM_CYHSCROLL) + 1, 3)
+   LOCAL nCxv := IIf(HWG_BITAND(::style, WS_VSCROLL) != 0, hwg_GetSystemMetrics(SM_CXVSCROLL) + 1, 3)
+   LOCAL nCyh := IIf(HWG_BITAND(::style, WS_HSCROLL) != 0, hwg_GetSystemMetrics(SM_CYHSCROLL) + 1, 3)
 
    nAnchor := ::anchor
    x9 := ::nLeft
