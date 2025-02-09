@@ -406,7 +406,7 @@ METHOD Activate CLASS HButton
    IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil
@@ -458,7 +458,7 @@ METHOD Activate CLASS HButtonEX
             ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,nil) 
       endif		  
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil

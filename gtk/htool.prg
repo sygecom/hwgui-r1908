@@ -64,7 +64,7 @@ METHOD Activate CLASS hToolBar
    IF !Empty(::oParent:handle)
 
       ::handle := CREATETOOLBAR(::oParent:handle )
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 RETURN Nil

@@ -88,7 +88,7 @@ Local i, h
 	 AAdd(::aPages, {0, 0, .F., h})
       NEXT
       
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
 
       FOR i := 2 TO Len(::aPages)
          ::HidePage( i )

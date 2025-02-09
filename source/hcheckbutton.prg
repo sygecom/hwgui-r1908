@@ -118,7 +118,7 @@ METHOD Init() CLASS HCheckButton
 
    IF !::lInit
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       HWG_INITBUTTONPROC(::handle)
       ::Super:Init()
       IF ::lValue

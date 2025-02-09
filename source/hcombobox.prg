@@ -270,7 +270,7 @@ METHOD INIT() CLASS HComboBox
 
    IF !::lInit
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       HWG_INITCOMBOPROC(::handle)
       IF ::aItems != NIL .AND. !Empty(::aItems)
          /*

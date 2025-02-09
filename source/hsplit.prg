@@ -72,7 +72,7 @@ METHOD Init() CLASS HSplitter
    IF !::lInit
       ::Super:Init()
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitWinCtrl(::handle)
    ENDIF
 

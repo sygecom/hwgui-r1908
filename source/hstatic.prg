@@ -151,7 +151,7 @@ METHOD Init() CLASS HStatic
       ::Super:init()
       IF ::nHolder != 1
          ::nHolder := 1
-         SetWindowObject(::handle, Self)
+         hwg_SetWindowObject(::handle, Self)
          hwg_InitStaticProc(::handle)
       ENDIF
       IF ::classname == "HSTATIC"

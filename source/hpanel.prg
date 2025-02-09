@@ -131,7 +131,7 @@ METHOD Init() CLASS HPanel
 
       ::Super:Init()
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitWinCtrl(::handle)
 
       ::RedefineScrollbars()

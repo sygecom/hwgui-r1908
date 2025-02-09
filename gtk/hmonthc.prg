@@ -71,7 +71,7 @@ METHOD Activate CLASS HMonthCalendar
    If !Empty(::oParent:handle)
       ::handle := InitMonthCalendar ( ::oParent:handle, , ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
-      SetWindowObject( ::handle,Self )		  
+      hwg_SetWindowObject( ::handle,Self )		  
 //      MonthCalendarChange(::handle,{||
         MONTHCALENDAR_SETACTION(::handle,{||::value:=GetMonthCalendarDate( ::handle )})
       ::Init()

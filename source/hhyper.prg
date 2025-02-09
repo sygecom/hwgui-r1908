@@ -196,7 +196,7 @@ METHOD INIT() CLASS HStaticLink
       /*
       IF ::GetParentForm():Type <= WND_MDICHILD .OR. ::TYPE == NIL
          ::nHolder := 1
-         SetWindowObject(::handle, Self)
+         hwg_SetWindowObject(::handle, Self)
        //  hwg_InitWinCtrl(::handle)
          HWG_INITSTATICPROC(::handle)
       ENDIF

@@ -102,7 +102,7 @@ METHOD Activate CLASS HComboBox
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::hEdit := hwg_ComboGetEdit( ::handle )
       ::Init()
-      SetWindowObject( ::hEdit,Self )      
+      hwg_SetWindowObject( ::hEdit,Self )      
    ENDIF
 Return Nil
 

@@ -30,7 +30,7 @@ END CLASS
 METHOD init() CLASS HToolBarEx
 
    ::Super:init()
-   SetWindowObject(::handle, Self)
+   hwg_SetWindowObject(::handle, Self)
    SETTOOLHANDLE(::handle)
    Sethook()
 

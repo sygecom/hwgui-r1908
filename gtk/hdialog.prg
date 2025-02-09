@@ -176,7 +176,7 @@ METHOD FindDialog( hWnd ) CLASS HDialog
 Local i := AScan(::aDialogs, {|o|o:handle == hWnd})
 Return IIf(i == 0, NIL, ::aDialogs[i])
 */
-Return GetWindowObject(hWnd)
+Return hwg_GetWindowObject(hWnd)
 
 METHOD GetActive() CLASS HDialog
 Local handle := hwg_GetFocus()
@@ -371,7 +371,7 @@ Local oDlg
          Return Nil
       ENDIF
    ELSE
-      oDlg := GetWindowObject( handle )
+      oDlg := hwg_GetWindowObject( handle )
    ENDIF
 
    // writelog( "EndDialog-1" )

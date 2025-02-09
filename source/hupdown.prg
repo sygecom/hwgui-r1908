@@ -170,7 +170,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    ELSEIF ::getParentForm():Type < WND_DLG_RESOURCE .AND. ::oParent:ClassName = "HTAB" //!Empty(::oParent:oParent)
       // MDICHILD WITH TAB
       ::nHolder := 1
-      SetWindowObject(::oEditUpDown:handle, ::oEditUpDown)
+      hwg_SetWindowObject(::oEditUpDown:handle, ::oEditUpDown)
       hwg_InitEditProc(::oEditUpDown:handle)
     ENDIF
    ::handle := ::oEditUpDown:handle
@@ -181,7 +181,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    ::oEditUpDown:lInit := .T.
    IF ::nHolder == 0
       ::nHolder := 1
-      SetWindowObject(::handle, ::oEditUpDown)
+      hwg_SetWindowObject(::handle, ::oEditUpDown)
       hwg_InitEditProc(::handle)
    ENDIF
    RETURN NIL
@@ -433,7 +433,7 @@ METHOD Init() CLASS HUpDown
    IF !::lInit
       ::Super:Init()
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       HWG_INITUpDownPROC(::handle)
       ::hwndUpDown := CreateUpDownControl(::oParent:handle, ::idUpDown, ;
                                         ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nUpper, ::nLower, Val(::title))

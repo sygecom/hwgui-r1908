@@ -56,7 +56,7 @@ METHOD Activate CLASS HGraph
    IF !Empty(::oParent:handle)
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil

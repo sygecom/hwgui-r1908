@@ -205,7 +205,7 @@ METHOD Init() CLASS HEdit
    IF !::lInit
       ::Super:Init()
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitEditProc(::handle)
       ::Refresh()
       //IF ::bChange != NIL .OR. ::lMultiLine

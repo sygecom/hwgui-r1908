@@ -466,7 +466,7 @@ METHOD Init() CLASS HBrowse
 
    IF !::lInit
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       ::Super:Init()
       ::InitBrw(, .T.)
       //VScrollPos(Self, 0, .F.)

@@ -371,7 +371,7 @@ METHOD Activate() CLASS HContainer
       IF !::lInit
          hwg_AddToolTip(::handle, ::handle, "")
          ::nHolder := 1
-         SetWindowObject(::handle, Self)
+         hwg_SetWindowObject(::handle, Self)
          hwg_InitStaticProc(::handle)
          ::linit := .T.
          IF Empty(::oParent:oParent) .AND. ::oParent:Type >= WND_DLG_RESOURCE
@@ -393,7 +393,7 @@ METHOD Init() CLASS HContainer
       ::Super:init()
       hwg_AddToolTip(::handle, ::handle, "")
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitStaticProc(::handle)
       //hwg_SetWindowPos(::handle, HWND_BOTTOM, 0, 0, 0, 0 , SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER)
    ENDIF

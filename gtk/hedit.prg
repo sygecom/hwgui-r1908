@@ -114,7 +114,7 @@ METHOD Activate CLASS HEdit
    IF !Empty(::oParent:handle)
       ::handle := CreateEdit( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil

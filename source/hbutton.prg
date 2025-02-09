@@ -114,7 +114,7 @@ METHOD Init() CLASS HButton
       IF !(::GetParentForm():classname == ::oParent:classname .AND. ::GetParentForm():Type >= WND_DLG_RESOURCE) .OR. ;
          !::GetParentForm():lModal .OR. ::nHolder == 1
          ::nHolder := 1
-         SetWindowObject(::handle, Self)
+         hwg_SetWindowObject(::handle, Self)
          HWG_INITBUTTONPROC(::handle)
       ENDIF
       ::Super:init()

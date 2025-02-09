@@ -125,7 +125,7 @@ Local groupHandle := ::oGroup:handle
       ::handle := CreateButton( ::oParent:handle, @groupHandle, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::oGroup:handle := groupHandle
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil

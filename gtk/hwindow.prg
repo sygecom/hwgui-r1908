@@ -125,7 +125,7 @@ RETURN Nil
 METHOD FindWindow( hWnd ) CLASS HWindow
 // Local i := AScan(::aWindows, {|o|o:handle == hWnd})
 // Return IIf(i == 0, NIL, ::aWindows[i])
-Return GetWindowObject(hWnd)
+Return hwg_GetWindowObject(hWnd)
 
 METHOD GetMain CLASS HWindow
 Return IIf(Len(::aWindows) > 0,            ;

@@ -190,7 +190,7 @@ METHOD Init() CLASS HTrackBar
       hwg_SendMessage(::handle, TBM_SETPOS, 1, ::value)
       IF ::bPaint != NIL
          ::nHolder := 1
-         SetWindowObject(::handle, Self)
+         hwg_SetWindowObject(::handle, Self)
          hwg_InitTrackProc(::handle)
       ENDIF
    ENDIF

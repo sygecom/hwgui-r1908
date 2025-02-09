@@ -122,7 +122,7 @@ METHOD Init CLASS HOwnButton
 
    IF !::lInit
       ::Super:Init()
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
 Return Nil

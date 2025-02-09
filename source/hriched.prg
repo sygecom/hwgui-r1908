@@ -98,7 +98,7 @@ METHOD Activate() CLASS HRichEdit
 METHOD Init() CLASS HRichEdit
    IF !::lInit
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitRichProc(::handle)
       ::Super:Init()
       ::SetColor(::tColor, ::bColor)

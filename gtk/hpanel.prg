@@ -73,7 +73,7 @@ METHOD Init CLASS HPanel
       ENDIF
 
       ::Super:Init()
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
 Return Nil

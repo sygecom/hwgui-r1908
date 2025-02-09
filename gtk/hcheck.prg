@@ -59,7 +59,7 @@ METHOD Activate CLASS HCheckButton
    IF !Empty(::oParent:handle)
       ::handle := CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
-      SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
 Return Nil

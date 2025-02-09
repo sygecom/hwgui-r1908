@@ -275,7 +275,7 @@ METHOD INIT() CLASS hCheckComboBox
    LOCAL i
 
    //::nHolder := 1
-   //SetWindowObject(::handle, Self)  // because hcombobox is handling
+   //hwg_SetWindowObject(::handle, Self)  // because hcombobox is handling
    //HWG_INITCOMBOPROC(::handle)
    IF !::lInit
       ::Super:Init()

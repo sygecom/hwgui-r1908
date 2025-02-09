@@ -373,7 +373,7 @@ METHOD Init() CLASS HTree
    IF !::lInit
       ::Super:Init()
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitTreeView(::handle)
       IF ::himl != NIL
          hwg_SendMessage(::handle, TVM_SETIMAGELIST, TVSIL_NORMAL, ::himl)

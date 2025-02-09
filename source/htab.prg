@@ -317,7 +317,7 @@ METHOD Init() CLASS HTab
          AEval(::aPages, {|a, i|HB_SYMBOL_UNUSED(a), ::AddPage(HPage():New("", i, .T.,), "")})
       ENDIF
       ::nHolder := 1
-      SetWindowObject(::handle, Self)
+      hwg_SetWindowObject(::handle, Self)
       hwg_InitTabProc(::handle)
 
    ENDIF
