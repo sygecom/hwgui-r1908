@@ -41,7 +41,7 @@ METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
 
    ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,oFont,, ;
                   bSize,{|o,lpdis|o:Paint(lpdis)},ctoolt, ;
-                  IIf(tcolor == NIL, Vcolor("FFFFFF"), tcolor),IIf(bcolor == NIL, 0, bcolor) )
+                  IIf(tcolor == NIL, hwg_VColor("FFFFFF"), tcolor),IIf(bcolor == NIL, 0, bcolor) )
 
    ::aValues := aValues
    ::nType   := 1

@@ -16,7 +16,7 @@ Function hwg_EndWindow()
    ENDIF
 Return Nil
 
-Function VColor( cColor )
+Function hwg_VColor( cColor )
 Local i,res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
@@ -167,6 +167,7 @@ Return Nil
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
+HB_FUNC_TRANSLATE(VCOLOR, HWG_VCOLOR);
 #endif
 
 #pragma ENDDUMP

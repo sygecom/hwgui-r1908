@@ -554,9 +554,9 @@ Local oldBkColor, oldTColor
    ENDIF
 
    IF ::tcolor == Nil ; ::tcolor := 0 ; ENDIF
-   IF ::bcolor == Nil ; ::bcolor := VColor( "FFFFFF" ) ; ENDIF
-   IF ::tcolorSel == Nil ; ::tcolorSel := VColor( "FFFFFF" ) ; ENDIF
-   IF ::bcolorSel == Nil ; ::bcolorSel := VColor( "808080" ) ; ENDIF
+   IF ::bcolor == Nil ; ::bcolor := hwg_VColor( "FFFFFF" ) ; ENDIF
+   IF ::tcolorSel == Nil ; ::tcolorSel := hwg_VColor( "FFFFFF" ) ; ENDIF
+   IF ::bcolorSel == Nil ; ::bcolorSel := hwg_VColor( "808080" ) ; ENDIF
 
    hDC := GetDC( ::area )
 

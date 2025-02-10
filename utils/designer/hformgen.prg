@@ -1026,7 +1026,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           nBottom := aCoors[4]           *  PS_DOT
           // : LFB
           SetROP2(hDC, 9)
-          oPenDivider := HPen():Add(PS_DOT, 1, VColor("606060"))
+          oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("606060"))
           SelectObject( hDC,oPenDivider:handle )
           // :END LFB
           for i := nLeft+oDesigner:nPixelGrid to nRight step oDesigner:nPixelGrid
@@ -1037,7 +1037,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           next
           // : LFB
           SetROP2(hDC, 13)
-          oPenDivider := HPen():Add(PS_SOLID, 1, VColor("0"))
+          oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))
           SelectObject( hDC,oPenDivider:handle )
           // :END LFB
       endif

@@ -30,13 +30,13 @@ PRIVATE aTermMetr := { 800 }
 
     @ 2,3  OWNERBUTTON OF oPanel ID 113 ON CLICK {||hwg_EndWindow()} ;
         SIZE 80,44 FLAT ;
-        TEXT "Exit" COLOR Vcolor("0000FF") FONT oFont
+        TEXT "Exit" COLOR hwg_VColor("0000FF") FONT oFont
     @ 82,3 OWNERBUTTON OF oPanel ID 108 ON CLICK {||Print1()} ;
         SIZE 120,22 FLAT ;
-        TEXT "Print Example.rpt" COLOR Vcolor("FF0000") FONT oFont
+        TEXT "Print Example.rpt" COLOR hwg_VColor("FF0000") FONT oFont
     @ 82,25 OWNERBUTTON OF oPanel ID 109 ON CLICK {||Print2()} ;
         SIZE 120,22 FLAT ;
-        TEXT "Print MyReport()" COLOR Vcolor("E60099") FONT oFont
+        TEXT "Print MyReport()" COLOR hwg_VColor("E60099") FONT oFont
 
    hDCwindow := GetDC( oMainWindow:handle )
    aTermMetr := GetDeviceArea( hDCwindow )

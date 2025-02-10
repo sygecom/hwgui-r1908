@@ -146,7 +146,7 @@ Local i
 
    nStyle := IIf(nStyle == NIL, BS_SOLID, nStyle)
    nWidth := IIf(nWidth == NIL, 1, nWidth)
-   nColor := IIf(nColor == NIL, Vcolor("000000"), nColor)
+   nColor := IIf(nColor == NIL, hwg_VColor("000000"), nColor)
 
    #ifdef __XHARBOUR__
    For EACH i in ::aPens 
@@ -183,7 +183,7 @@ Local i
 
    nStyle := IIf(nStyle == NIL, PS_SOLID, nStyle)
    nWidth := IIf(nWidth == NIL, 1, nWidth)
-   nColor := IIf(nColor == NIL, Vcolor("000000"), nColor)
+   nColor := IIf(nColor == NIL, hwg_VColor("000000"), nColor)
 
    #ifdef __XHARBOUR__
    For EACH i in ::aPens 

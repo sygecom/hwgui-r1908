@@ -132,7 +132,7 @@ FUNCTION ReadStatus(oWnd, nPart)
    ENDIF
    RETURN cText
 
-FUNCTION VColor(cColor)
+FUNCTION hwg_VColor(cColor)
    LOCAL i, res := 0, n := 1, iValue
    cColor := Trim(cColor)
    FOR i := 1 TO Len(cColor)
@@ -490,6 +490,7 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
+HB_FUNC_TRANSLATE(VCOLOR, HWG_VCOLOR);
 #endif
 
 #pragma ENDDUMP

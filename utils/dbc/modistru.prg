@@ -44,7 +44,7 @@ LOCAL af, oBrw
    oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent,2] },"C",4,0  ) )
    oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent,3] },"N",4,0  ) )
    oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent,4] },"N",2,0  ) )
-   oBrw:bcolorSel := VColor( "800080" )
+   oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont      := oBrwFont
 
    oModDlg:Activate()

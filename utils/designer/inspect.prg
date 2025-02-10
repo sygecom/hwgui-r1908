@@ -645,7 +645,7 @@ STATIC FUNCTION EditArray( arr )
        ON SIZE {|o,x,y|o:Move(,,x,y-45)}
     oBrw:acolumns:={}
    oBrw:bcolor := 15132390
-   oBrw:bcolorSel := VColor( "008000" )
+   oBrw:bcolorSel := hwg_VColor( "008000" )
    oBrw:lAppable := .T.
    oBrw:aArray := arr
    oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v!=Nil,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},"C", 100, 0,.T. ) )

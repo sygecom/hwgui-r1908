@@ -11,7 +11,7 @@
 STATIC s_lColorinFocus := .F.
 STATIC s_lFixedColor := .T.
 STATIC s_tColorSelect := 0
-STATIC s_bColorSelect := 13434879 //vcolor("CCFFFF")
+STATIC s_bColorSelect := 13434879 //hwg_VColor("CCFFFF")
 STATIC s_lPersistColorSelect := .F.
 STATIC s_bDisablecolor := NIL  // GetSysColor(COLOR_BTNHIGHLIGHT)
 
@@ -47,7 +47,7 @@ CLASS HEdit INHERIT HControl
    DATA lFirst INIT .T.
    DATA lChanged INIT .F.
    DATA nMaxLength INIT NIL
-   //DATA nColorinFocus INIT vcolor("CCFFFF")
+   //DATA nColorinFocus INIT hwg_VColor("CCFFFF")
    DATA lFocu INIT .F.
    DATA lReadOnly INIT .F.
    DATA lNoPaste INIT .F.

@@ -143,7 +143,7 @@ Local oModDlg, oFont
    REDEFINE BITMAP "BITMAP_1" FROM RESOURCE ID IDC_BMP1
    REDEFINE OWNERBUTTON ID IDC_OWNB1  ;
             ON CLICK {|| EndDialog()} ;
-            FLAT TEXT "Close" COLOR Vcolor("0000FF") FONT oFont
+            FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    oModDlg:Activate()
 
@@ -261,7 +261,7 @@ Local indname
    oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent,3] },"C",ordlen,0  ) )
    oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent,4] },"C",8,0  ) )
   
-   oBrw:bColorSel    := VColor( "800080" )
+   oBrw:bColorSel    := hwg_VColor( "800080" )
    oBrw:ofont := oBrwFont
 
    oModDlg:Activate()
@@ -502,7 +502,7 @@ Local oWindow, aControls, oBrowse, i
       @ 0,0 BROWSE oBrowse DATABASE  ;
            ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
 
-      oBrowse:bcolorSel  := VColor( "800080" )
+      oBrowse:bcolorSel  := hwg_VColor( "800080" )
       oBrowse:ofont := oBrwFont
       oBrowse:cargo := improc
       CreateList( oBrowse,.T. )
@@ -516,7 +516,7 @@ Local oWindow, aControls, oBrowse, i
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             oBrowse := aControls[ i ]
             oBrowse:InitBrw()
-            oBrowse:bcolorSel  := VColor( "800080" )
+            oBrowse:bcolorSel  := hwg_VColor( "800080" )
             oBrowse:ofont := oBrwFont
             oBrowse:cargo := improc
             hwg_SendMessage( HWindow():GetMain():handle, WM_MDIACTIVATE, hChild, 0 )

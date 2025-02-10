@@ -1838,11 +1838,11 @@ ENDIF
       ::tcolor := 0
    ENDIF
    IF ::bcolor == NIL
-      ::bcolor := VColor("FFFFFF")
+      ::bcolor := hwg_VColor("FFFFFF")
    ENDIF
 
    //IF ::httcolor == NIL
-   //   ::httcolor := VColor("FFFFFF")
+   //   ::httcolor := hwg_VColor("FFFFFF")
    //ENDIF
    //IF ::htbcolor == NIL
    //   ::htbcolor := 2896388
@@ -1855,10 +1855,10 @@ ENDIF
    ENDIF
 
    IF ::tcolorSel == NIL
-      ::tcolorSel := VColor("FFFFFF")
+      ::tcolorSel := hwg_VColor("FFFFFF")
    ENDIF
    IF ::bcolorSel == NIL
-      ::bcolorSel := VColor("808080")
+      ::bcolorSel := hwg_VColor("808080")
    ENDIF
 
 // Open Paint procedure
