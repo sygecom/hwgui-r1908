@@ -298,7 +298,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                IF oParent:handle == ::oParent:handle .AND. oParent:lExitOnEsc .AND. ;
                                   oParent:FindControl(IDCANCEL) != NIL .AND. ;
                                 !oParent:FindControl(IDCANCEL):IsEnabled()
-                   hwg_SendMessage(oParent:handle, WM_COMMAND, makewparam(IDCANCEL, 0), ::handle)
+                   hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
                ENDIF
                          IF (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
                    hwg_SetFocus(0)
@@ -316,7 +316,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                   ::SetColor(::tcolorOld, ::bColorOld)
                   ::bColor := ::bColorOld
                   ::brush := IIf(::bColorOld == NIL, NIL, ::brush)
-                  hwg_SendMessage(::handle, WM_MOUSEMOVE, 0, MAKELPARAM(1, 1))
+                  hwg_SendMessage(::handle, WM_MOUSEMOVE, 0, hwg_MAKELPARAM(1, 1))
                ENDIF
                ::lFocu := .F.
             ENDIF
@@ -446,7 +446,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ::SetColor(::tcolorOld, ::bColorOld, .T.)
             ::bColor := ::bColorOld
             ::brush := IIf(::bColorOld == NIL, NIL, ::brush)
-            hwg_SendMessage(::handle, WM_MOUSEMOVE, 0, MAKELPARAM(1, 1))
+            hwg_SendMessage(::handle, WM_MOUSEMOVE, 0, hwg_MAKELPARAM(1, 1))
          ENDIF
       ENDIF
       IF msg == WM_SETFOCUS //.AND. ::cType == "N"

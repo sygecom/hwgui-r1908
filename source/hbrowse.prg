@@ -608,7 +608,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ENDIF
 
          IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
-             hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+             hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(::id, 0), ::handle)
          ENDIF
          */
          ::internal[1] := 15 //force redraw header, footer and separator
@@ -993,7 +993,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          //   Eval(::bLostFocus, Self)
          //ENDIF
          //IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
-         //    hwg_SendMessage(::oParent:handle, WM_COMMAND, makewparam(::id, 0), ::handle)
+         //    hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(::id, 0), ::handle)
          //ENDIF
          ::internal[1] := 15 //force redraw header, footer and separator
       ENDIF
