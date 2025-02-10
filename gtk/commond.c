@@ -106,7 +106,9 @@ HB_FUNC(HWG_SELECTFONT)
   gtk_main();
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(SELECTFONT, HWG_SELECTFONT);
+#endif
 
 void store_filename(gpointer file_selector)
 {
@@ -145,7 +147,9 @@ HB_FUNC(HWG_SELECTFILE)
   gtk_main();
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(SELECTFILE, HWG_SELECTFILE);
+#endif
 
 void store_color(gpointer colorseldlg)
 {

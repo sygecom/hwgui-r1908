@@ -666,7 +666,9 @@ HB_FUNC(HWG_ADDTOOLTIP)
   gtk_tooltips_set_tip(pTooltip, (GtkWidget *)HB_PARHANDLE(2), hb_parc(3), NULL);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ADDTOOLTIP, HWG_ADDTOOLTIP);
+#endif
 
 static gint cb_timer(gchar *data)
 {
@@ -714,7 +716,9 @@ HB_FUNC(HWG_GETPARENT)
   hb_retptr((void *)((GtkWidget *)HB_PARHANDLE(1))->parent);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(GETPARENT, HWG_GETPARENT);
+#endif
 
 HB_FUNC(LOADCURSOR)
 {

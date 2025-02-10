@@ -488,6 +488,8 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
 
 #include <hbapi.h>
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
+#endif
 
 #pragma ENDDUMP
