@@ -64,4 +64,5 @@ HWGUI. O objetivo destas alterações é a padronização do código-fonte, de f
 atualizar e recompilar após estes commits.
 
 A flag 'HWGUI_FUNC_TRANSLATE_ON' ativa o redirecionamento das funções sem o prefixo 'HWG_' para as funções com prefixo,
-podendo ser utilizada em casos onde o código-fonte do desenvolvedor ainda não foi atualizado.
+podendo ser utilizada em casos onde o código-fonte do desenvolvedor ainda não foi atualizado. Caso tenha dúvidas ou problemas
+na utilização desta flag, utilize a seção Issues para relatar a dúvida ou problema.
