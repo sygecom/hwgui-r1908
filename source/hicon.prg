@@ -63,12 +63,12 @@ METHOD AddResource(name, nWidth, nHeight, nFlags, lOEM) CLASS HIcon
    NEXT
    // ::classname := "HICON"
    IF lOEM // LR_SHARED is required for OEM images
-      ::handle := LoadImage(0, Val(name), IMAGE_ICON, nWidth, nHeight, hwg_bitor(nFlags, LR_SHARED))
+      ::handle := hwg_LoadImage(0, Val(name), IMAGE_ICON, nWidth, nHeight, hwg_bitor(nFlags, LR_SHARED))
    ELSE
-      ::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_ICON, nWidth, nHeight, nFlags)
+      ::handle := hwg_LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_ICON, nWidth, nHeight, nFlags)
    ENDIF
    ::name := name
-   aIconSize := GetIconSize(::handle)
+   aIconSize := hwg_GetIconSize(::handle)
    ::nWidth := aIconSize[1]
    ::nHeight := aIconSize[2]
 
@@ -106,10 +106,10 @@ METHOD AddFile(name, nWidth, nHeight) CLASS HIcon
       DirChange(cCurDir)
    ENDIF
 
-   //::handle := LoadImage(0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE + LR_LOADFROMFILE)
-   ::handle := LoadImage(0, name, IMAGE_ICON, nWidth, nHeight, LR_DEFAULTSIZE + LR_LOADFROMFILE + LR_SHARED)
+   //::handle := hwg_LoadImage(0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE + LR_LOADFROMFILE)
+   ::handle := hwg_LoadImage(0, name, IMAGE_ICON, nWidth, nHeight, LR_DEFAULTSIZE + LR_LOADFROMFILE + LR_SHARED)
    ::name := cname
-   aIconSize := GetIconSize(::handle)
+   aIconSize := hwg_GetIconSize(::handle)
    ::nWidth := aIconSize[1]
    ::nHeight := aIconSize[2]
 

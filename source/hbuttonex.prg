@@ -762,7 +762,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    LOCAL uAlign
    LOCAL uStyleTmp
    LOCAL aTxtSize := IIf(!Empty(::caption), TxtRect(::caption, Self), {0, 0})
-   LOCAL aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
+   LOCAL aBmpSize := IIf(!Empty(::hbitmap), hwg_GetBitmapSize(::hbitmap), {0, 0})
    LOCAL itemRectOld
    LOCAL saveCaptionRect
    LOCAL bmpRect

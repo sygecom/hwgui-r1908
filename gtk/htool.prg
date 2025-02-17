@@ -119,7 +119,7 @@ Local aItem
 
 /*      IF Len(aButton) >0
 
-          aBmpSize := GetBitmapSize( aButton[1] )
+          aBmpSize := hwg_GetBitmapSize( aButton[1] )
 
           IF aBmpSize[ 3 ] == 4
              hIm := CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR4 + ILC_MASK )
@@ -131,7 +131,7 @@ Local aItem
 
           FOR nPos :=1 to Len(aButton)
 
-             aBmpSize := GetBitmapSize( aButton[nPos] )
+             aBmpSize := hwg_GetBitmapSize( aButton[nPos] )
 
              IF aBmpSize[3] == 24
 //             Imagelist_AddMasked( hIm,aButton[nPos],RGB(236,223,216) )

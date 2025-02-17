@@ -143,15 +143,15 @@ METHOD Init() CLASS HGridEx
       ::nHolder := 1
 
       FOR n := 1 TO Len(::aBitmaps)
-         AAdd(aButton, LoadImage(, ::aBitmaps[n], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
+         AAdd(aButton, hwg_LoadImage(, ::aBitmaps[n], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
       NEXT
 
       IF Len(aButton) > 0
 
-         aBmpSize := GetBitmapSize(aButton[1])
+         aBmpSize := hwg_GetBitmapSize(aButton[1])
          nmax := aBmpSize[3]
          FOR n := 2 TO Len(aButton)
-            aBmpSize := GetBitmapSize(aButton[n])
+            aBmpSize := hwg_GetBitmapSize(aButton[n])
             nmax := Max(nmax, aBmpSize[3])
          NEXT
 
@@ -166,7 +166,7 @@ METHOD Init() CLASS HGridEx
 
          FOR nPos := 1 TO Len(aButton)
 
-            aBmpSize := GetBitmapSize(aButton[nPos])
+            aBmpSize := hwg_GetBitmapSize(aButton[nPos])
 
             IF aBmpSize[3] == 24
                Imagelist_Add(::hIm, aButton[nPos])

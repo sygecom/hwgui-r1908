@@ -309,9 +309,9 @@ HB_FUNC(DRAWEDGE)
 }
 
 /*
-LOADICON(nIcon|cIcon) --> HICON
+HWG_LOADICON(nIcon|cIcon) --> HICON
 */
-HB_FUNC(LOADICON)
+HB_FUNC(HWG_LOADICON)
 {
   if (HB_ISNUM(1))
   {
@@ -325,10 +325,14 @@ HB_FUNC(LOADICON)
   }
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LOADICON, HWG_LOADICON);
+#endif
+
 /*
-LOADIMAGE(HINSTANCE, nImage|cImage, nType, nWidth, nHeight, nLoadFlags) --> HANDLE
+HWG_LOADIMAGE(HINSTANCE, nImage|cImage, nType, nWidth, nHeight, nLoadFlags) --> HANDLE
 */
-HB_FUNC(LOADIMAGE)
+HB_FUNC(HWG_LOADIMAGE)
 {
   void *hString = NULL;
   hwg_ret_HANDLE(LoadImage(HB_ISNIL(1) ? GetModuleHandle(NULL) : hwg_par_HINSTANCE(1),
@@ -337,10 +341,14 @@ HB_FUNC(LOADIMAGE)
   hb_strfree(hString);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LOADIMAGE, HWG_LOADIMAGE);
+#endif
+
 /*
-LOADBITMAP(nBitmap|cBitmap, lp2) --> HBITMAP
+HWG_LOADBITMAP(nBitmap|cBitmap, lp2) --> HBITMAP
 */
-HB_FUNC(LOADBITMAP)
+HB_FUNC(HWG_LOADBITMAP)
 {
   if (HB_ISNUM(1))
   {
@@ -360,6 +368,10 @@ HB_FUNC(LOADBITMAP)
     hb_strfree(hString);
   }
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LOADBITMAP, HWG_LOADBITMAP);
+#endif
 
 /*
  * Window2Bitmap(hWnd)
@@ -560,9 +572,9 @@ HB_FUNC(CENTERBITMAP)
 }
 
 /*
-GETBITMAPSIZE(HBITMAP) --> aInfo[4]
+HWG_GETBITMAPSIZE(HBITMAP) --> aInfo[4]
 */
-HB_FUNC(GETBITMAPSIZE)
+HB_FUNC(HWG_GETBITMAPSIZE)
 {
   BITMAP bitmap;
   PHB_ITEM aMetr = hb_itemArrayNew(4);
@@ -590,10 +602,15 @@ HB_FUNC(GETBITMAPSIZE)
   hb_itemReturnRelease(aMetr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETBITMAPSIZE, HWG_GETBITMAPSIZE);
+#endif
+
+
 /*
-GETICONSIZE(HICON) --> aInfo[3]
+HWG_GETICONSIZE(HICON) --> aInfo[3]
 */
-HB_FUNC(GETICONSIZE)
+HB_FUNC(HWG_GETICONSIZE)
 {
   ICONINFO iinfo;
   PHB_ITEM aMetr = hb_itemArrayNew(3);
@@ -617,10 +634,14 @@ HB_FUNC(GETICONSIZE)
   hb_itemReturnRelease(aMetr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETICONSIZE, HWG_GETICONSIZE);
+#endif
+
 /*
-OPENBITMAP(cFileName, HDC) --> HBITMAP
+HWG_OPENBITMAP(cFileName, HDC) --> HBITMAP
 */
-HB_FUNC(OPENBITMAP)
+HB_FUNC(HWG_OPENBITMAP)
 {
   BITMAPFILEHEADER bmfh;
   BITMAPINFOHEADER bmih;
@@ -719,6 +740,10 @@ HB_FUNC(OPENBITMAP)
 
   hwg_ret_HBITMAP(hbm);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(OPENBITMAP, HWG_OPENBITMAP);
+#endif
 
 /*
 DRAWICON(HDC, HICON, nX, nY) -->
@@ -923,9 +948,9 @@ HB_FUNC(DRAWGRAYBITMAP)
 #include <ocidl.h>
 
 /*
-OPENIMAGE(cFileName, lp2) --> HANDLE
+HWG_OPENIMAGE(cFileName, lp2) --> HANDLE
 */
-HB_FUNC(OPENIMAGE)
+HB_FUNC(HWG_OPENIMAGE)
 {
   const char *cFileName = hb_parc(1);
   BOOL lString = (HB_ISNIL(2)) ? 0 : hb_parl(2);
@@ -1010,6 +1035,10 @@ HB_FUNC(OPENIMAGE)
   pPic->lpVtbl->Release(pPic);
 #endif
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(OPENIMAGE, HWG_OPENIMAGE);
+#endif
 
 /*
 PATBLT(HDC, nX, nY, nWidth, nHeight, nRop) --> .T.|.F.

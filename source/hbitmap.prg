@@ -58,13 +58,13 @@ METHOD AddResource(name, nFlags, lOEM, nWidth, nHeight) CLASS HBitmap
       ENDIF
    NEXT
    IF lOEM
-      ::handle := LoadImage(0, Val(name), IMAGE_BITMAP, NIL, NIL, hwg_bitor(nFlags, LR_SHARED))
+      ::handle := hwg_LoadImage(0, Val(name), IMAGE_BITMAP, NIL, NIL, hwg_bitor(nFlags, LR_SHARED))
    ELSE
-      //::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, NIL, NIL, nFlags)
-      ::handle := LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, nWidth, nHeight, nFlags)
+      //::handle := hwg_LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, NIL, NIL, nFlags)
+      ::handle := hwg_LoadImage(NIL, IIf(lPreDefined, Val(name), name), IMAGE_BITMAP, nWidth, nHeight, nFlags)
    ENDIF
    ::name := name
-   aBmpSize := GetBitmapSize(::handle)
+   aBmpSize := hwg_GetBitmapSize(::handle)
    ::nWidth := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, SELF)
@@ -85,9 +85,9 @@ METHOD AddStandard(nId) CLASS HBitmap
          RETURN item
       ENDIF
    NEXT
-   ::handle := LoadBitmap(nId, .T.)
+   ::handle := hwg_LoadBitmap(nId, .T.)
    ::name := name
-   aBmpSize := GetBitmapSize(::handle)
+   aBmpSize := hwg_GetBitmapSize(::handle)
    ::nWidth := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, SELF)
@@ -122,22 +122,22 @@ METHOD AddFile(name, hDC, lTranparent, nWidth, nHeight) CLASS HBitmap
 
    IF Lower(Right(name, 4)) != ".bmp" .OR. (nWidth == NIL .AND. nHeight == NIL .AND. lTranparent == NIL)
       IF Lower(Right(name, 4)) == ".bmp"
-         ::handle := OpenBitmap(name, hDC)
+         ::handle := hwg_OpenBitmap(name, hDC)
       ELSE
-         ::handle := OpenImage(name)
+         ::handle := hwg_OpenImage(name)
       ENDIF
    ELSE
       IF lTranparent != NIL .AND. lTranparent
-         ::handle := LoadImage(NIL, name, IMAGE_BITMAP, nWidth, nHeight, LR_LOADFROMFILE + LR_LOADTRANSPARENT + LR_LOADMAP3DCOLORS)
+         ::handle := hwg_LoadImage(NIL, name, IMAGE_BITMAP, nWidth, nHeight, LR_LOADFROMFILE + LR_LOADTRANSPARENT + LR_LOADMAP3DCOLORS)
       ELSE
-         ::handle := LoadImage(NIL, name, IMAGE_BITMAP, nWidth, nHeight, LR_LOADFROMFILE)
+         ::handle := hwg_LoadImage(NIL, name, IMAGE_BITMAP, nWidth, nHeight, LR_LOADFROMFILE)
       ENDIF
    ENDIF
    IF Empty(::handle)
       RETURN NIL
    ENDIF
    ::name := cname
-   aBmpSize := GetBitmapSize(::handle)
+   aBmpSize := hwg_GetBitmapSize(::handle)
    ::nWidth := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, SELF)
@@ -152,7 +152,7 @@ METHOD AddWindow(oWnd, lFull) CLASS HBitmap
 
    ::handle := Window2Bitmap(oWnd:handle, lFull)
    ::name := LTrim(hb_valToStr(oWnd:handle)) // TODO: verificar o que ocorre quando for tipo P
-   aBmpSize := GetBitmapSize(::handle)
+   aBmpSize := hwg_GetBitmapSize(::handle)
    ::nWidth := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, SELF)

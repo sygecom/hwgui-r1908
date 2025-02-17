@@ -152,7 +152,7 @@ Local hDlg := getmodalhandle()
       ENDIF
       aItem[ITEM_CAPTION] := fname
       aItem[ITEM_BITMAP] := HBitmap():AddFile( fname )
-      aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
+      aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       aItem[ITEM_WIDTH] :=  aItem[ITEM_BITMAP]:nWidth
       aItem[ITEM_HEIGHT] := aItem[ITEM_BITMAP]:nHeight
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
@@ -165,7 +165,7 @@ Local hDlg := getmodalhandle()
 Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != Nil
-      aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
+      aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100,0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100,0))) )
    ENDIF
 Return Nil
@@ -175,7 +175,7 @@ Local hDlg := getmodalhandle()
 Local aBmpSize, hUp
    hUp := CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
    IF aItem[ITEM_BITMAP] != Nil
-      aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
+      aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
@@ -186,7 +186,7 @@ Return .T.
 Static Function EndBitmap( aItem )
 Local hDlg := getmodalhandle()
 Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
-Local aBmpSize := GetBitmapSize( aItem[ITEM_BITMAP]:handle )
+Local aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
 
    aItem[ITEM_WIDTH] := Round(aBmpSize[1]*nValue/100,0)
    aItem[ITEM_HEIGHT] := Round(aBmpSize[2]*nValue/100,0)

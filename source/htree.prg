@@ -142,7 +142,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
          cImage := Upper(aImages[i])
          IF (h := AScan(oTree:aImages, cImage)) == 0
             AAdd(oTree:aImages, cImage)
-            aImages[i] := IIf(oTree:Type, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
+            aImages[i] := IIf(oTree:Type, hwg_LoadBitmap(aImages[i]), hwg_OpenBitmap(aImages[i]))
             Imagelist_Add(oTree:himl, aImages[i])
             h := Len(oTree:aImages)
          ENDIF
@@ -354,9 +354,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
       ::aImages := {}
       FOR i := 1 TO Len(aImages)
          AAdd(::aImages, Upper(aImages[i]))
-         aImages[i] := IIf(lResour != NIL .AND. lResour, LoadBitmap(aImages[i]), OpenBitmap(aImages[i]))
+         aImages[i] := IIf(lResour != NIL .AND. lResour, hwg_LoadBitmap(aImages[i]), hwg_OpenBitmap(aImages[i]))
       NEXT
-      aBmpSize := GetBitmapSize(aImages[1])
+      aBmpSize := hwg_GetBitmapSize(aImages[1])
       ::himl := CreateImageList(aImages, aBmpSize[1], aBmpSize[2], 12, nBC)
       ::Image1 := 0
       IF Len(aImages) > 1

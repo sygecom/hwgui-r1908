@@ -1706,7 +1706,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
          ::oPrinter:Line(x, y, x2, y, oItem:oPen)
       ELSEIF oItem:cClass == "bitmap"
          IF oItem:obj == NIL
-            oItem:obj := OpenBitmap(aGetSecond(oItem:aProp, "bitmap"), ::oPrinter:hDC)
+            oItem:obj := hwg_OpenBitmap(aGetSecond(oItem:aProp, "bitmap"), ::oPrinter:hDC)
          ENDIF
          ::oPrinter:Bitmap(x, y, x2, y2,, oItem:obj)
       ENDIF

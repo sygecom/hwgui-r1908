@@ -340,10 +340,10 @@ Local lPreDefined := .F., i, aBmpSize
       ENDIF
    NEXT
    #endif
-   ::handle :=   LoadBitmap( IIf(lPreDefined, Val(name), name) )
+   ::handle :=   hwg_LoadBitmap( IIf(lPreDefined, Val(name), name) )
    IF !Empty(::handle)
       ::name   := name
-      aBmpSize  := GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
@@ -371,10 +371,10 @@ Local i, aBmpSize
       ENDIF
    NEXT
    #endif
-   ::handle := OpenImage( name )
+   ::handle := hwg_OpenImage( name )
    IF !Empty(::handle)
       ::name := name
-      aBmpSize  := GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
@@ -389,7 +389,7 @@ Local i, aBmpSize
 
    // ::handle := Window2Bitmap( oWnd:handle,lFull )
    ::name := LTrim(Str(oWnd:handle))
-   aBmpSize  := GetBitmapSize( ::handle )
+   aBmpSize  := hwg_GetBitmapSize( ::handle )
    ::nWidth  := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, Self)
@@ -462,7 +462,7 @@ Local lPreDefined := .F., i
       ENDIF
    NEXT
    #endif
-   // ::handle :=   LoadIcon( IIf(lPreDefined, Val(name), name) )
+   // ::handle :=   hwg_LoadIcon( IIf(lPreDefined, Val(name), name) )
    ::name   := name
    AAdd(::aIcons, Self)
 
@@ -486,16 +486,16 @@ Local i, aBmpSize
       ENDIF
    NEXT
 #endif
-//   ::handle := LoadImage( 0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE+LR_LOADFROMFILE )
-//   ::handle := OpenImage( name )
+//   ::handle := hwg_LoadImage( 0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE+LR_LOADFROMFILE )
+//   ::handle := hwg_OpenImage( name )
 //   ::name := name
 //   AAdd(::aIcons, Self)
 //  Tracelog("name = ",name)
-   ::handle := OpenImage( name )
+   ::handle := hwg_OpenImage( name )
 //   tracelog("handle = ",::handle)
    IF !Empty(::handle)
       ::name := name
-      aBmpSize  := GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize( ::handle )
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aIcons, Self)

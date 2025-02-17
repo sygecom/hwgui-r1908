@@ -33,7 +33,7 @@ FUNCTION Main()
    LOCAL oFont
    LOCAL oIcon := HIcon():AddResource("ICON_1")
 
-   PUBLIC hBitmap := LoadBitmap("BITMAP_1")
+   PUBLIC hBitmap := hwg_LoadBitmap("BITMAP_1")
    PUBLIC connHandle := 0
    PUBLIC cServer := ""
    PUBLIC cDatabase := ""

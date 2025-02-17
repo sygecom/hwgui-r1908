@@ -377,7 +377,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    //LOCAL POLDFONT
    //LOCAL DWSTYLE
    LOCAL bHasTitle
-   LOCAL aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
+   LOCAL aBmpSize := IIf(!Empty(::hbitmap), hwg_GetBitmapSize(::hbitmap), {0, 0})
    LOCAL itemRect := copyrect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
    LOCAL captionRect := {drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]}
    LOCAL bmpRect
@@ -447,7 +447,7 @@ METHOD Resize(x, y) CLASS HStaticLink
    ENDIF
 
    x := IIf(x == NIL, 0, x - ::nWidth + 1)
-   aBmpSize := IIf(!Empty(::hbitmap), GetBitmapSize(::hbitmap), {0, 0})
+   aBmpSize := IIf(!Empty(::hbitmap), hwg_GetBitmapSize(::hbitmap), {0, 0})
    aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
    aTxtSize := TxtRect(::Title, Self)

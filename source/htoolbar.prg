@@ -260,7 +260,7 @@ METHOD CREATETOOL() CLASS hToolBar
             IF !File(::aitem[n, 1])
                LOOP
             ENDIF
-            //AAdd(aButton, LoadImage(, ::aitem[n, 1], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION+ LR_LOADFROMFILE))
+            //AAdd(aButton, hwg_LoadImage(, ::aitem[n, 1], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION+ LR_LOADFROMFILE))
             hImage := HBITMAP():AddFile(::aitem[n, 1], , .T., ::nwSize, ::nhSize):handle
          ELSE
             // AAdd(aButton, HBitmap():AddResource(::aitem[n, 1]):handle)
@@ -282,21 +282,21 @@ METHOD CREATETOOL() CLASS hToolBar
                ::nSize):handle
          ENDIF
          */
-         //AAdd(aButton, LoadImage(, ::aitem[n, 1], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
+         //AAdd(aButton, hwg_LoadImage(, ::aitem[n, 1], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
          //hImage := HBitmap():AddResource(::aitem[n, 1], LR_LOADTRANSPARENT + LR_LOADMAP3DCOLORS + LR_SHARED, , ;
          //   ::nSize, ::nSize):handle
       ENDIF
    NEXT
    IF Len(aButton) > 0 //.AND. ::lResource
-      aBmpSize := GetBitmapSize(aButton[1])
+      aBmpSize := hwg_GetBitmapSize(aButton[1])
       /*
       nmax := aBmpSize[3]
 
       FOR n := 2 TO Len(aButton)
-         aBmpSize := GetBitmapSize(aButton[n])
+         aBmpSize := hwg_GetBitmapSize(aButton[n])
          nmax := Max(nmax, aBmpSize[3])
       NEXT
-      aBmpSize := GetBitmapSize(aButton[1])
+      aBmpSize := hwg_GetBitmapSize(aButton[1])
 
       IF nmax == 4
          hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
@@ -310,7 +310,7 @@ METHOD CREATETOOL() CLASS hToolBar
       */
       hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
       FOR nPos := 1 TO Len(aButton)
-         //aBmpSize := GetBitmapSize(aButton[nPos])
+         //aBmpSize := hwg_GetBitmapSize(aButton[nPos])
          /*
          IF aBmpSize[3] == 24
             //Imagelist_AddMasked(hIm, aButton[nPos], RGB(236, 223, 216))

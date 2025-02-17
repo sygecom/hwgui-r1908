@@ -131,12 +131,12 @@ METHOD Init() CLASS HGrid
    IF !::lInit
       ::Super:Init()
       FOR n := 1 TO Len(::aBitmaps)
-         AAdd(aButton, LoadImage(, ::aBitmaps[n], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
+         AAdd(aButton, hwg_LoadImage(, ::aBitmaps[n], IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE + LR_CREATEDIBSECTION))
       NEXT
 
       IF Len(aButton) > 0
 
-         aBmpSize := GetBitmapSize(aButton[1])
+         aBmpSize := hwg_GetBitmapSize(aButton[1])
 
          IF aBmpSize[3] == 4
             ::hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
@@ -148,7 +148,7 @@ METHOD Init() CLASS HGrid
 
          FOR nPos := 1 TO Len(aButton)
 
-            aBmpSize := GetBitmapSize(aButton[nPos])
+            aBmpSize := hwg_GetBitmapSize(aButton[nPos])
 
             IF aBmpSize[3] == 24
                //Imagelist_AddMasked(::hIm, aButton[nPos], RGB(236, 223, 216))

@@ -488,7 +488,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BOX
          oPrinter:Box(x1, y1, x2, y2, aItem[ITEM_PEN])
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
-         hBitmap := OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
+         hBitmap := hwg_OpenBitmap(aItem[ITEM_CAPTION], oPrinter:hDC)
          // hwg_WriteLog("hBitmap: " + Str(hBitmap))
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
          hwg_DeleteObject(hBitmap)
