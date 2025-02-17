@@ -118,9 +118,9 @@ METHOD Paint(lpdis) CLASS HRect_Line
    hwg_SelectObject(hDC, ::oPen:handle)
 
    IF ::lVert
-      DrawLine(hDC, x1, y1, x1, y2)
+      hwg_DrawLine(hDC, x1, y1, x1, y2)
    ELSE
-      DrawLine(hDC, x1, y1, x2, y1)
+      hwg_DrawLine(hDC, x1, y1, x2, y1)
    ENDIF
 
    RETURN NIL
@@ -260,19 +260,19 @@ METHOD Paint(lpdis) CLASS HDrawShape
       /*
       IF ::lnoBorder = .F.
          IF ::ncStyle == 0      // RAISED
-            DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM)  // raised  forte      8
+            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM)  // raised  forte      8
          ELSEIF ::ncStyle == 1  // sunken
-            DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKEN, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM) // sunken mais forte
+            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKEN, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM) // sunken mais forte
          ELSEIF ::ncStyle == 2  // FRAME
-            DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED + BDR_RAISEDOUTER, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM) // FRAME
+            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED + BDR_RAISEDOUTER, BF_LEFT + BF_TOP + BF_RIGHT + BF_BOTTOM) // FRAME
          ELSE                   // FLAT
-            DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKENINNER, BF_TOP)
-            DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISEDOUTER, BF_BOTTOM)
-            DrawEdge(hDC, x1, y2, x2, y1, BDR_SUNKENINNER, BF_LEFT)
-            DrawEdge(hDC, x1, y2, x2, y1, BDR_RAISEDOUTER, BF_RIGHT)
+            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKENINNER, BF_TOP)
+            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISEDOUTER, BF_BOTTOM)
+            hwg_DrawEdge(hDC, x1, y2, x2, y1, BDR_SUNKENINNER, BF_LEFT)
+            hwg_DrawEdge(hDC, x1, y2, x2, y1, BDR_RAISEDOUTER, BF_RIGHT)
          ENDIF
       ELSE
-         DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
+         hwg_DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
       ENDIF
       */
    ELSE
@@ -280,14 +280,14 @@ METHOD Paint(lpdis) CLASS HDrawShape
          IF ::Brush != NIL
             hwg_SelectObject(hDC, ::Brush:handle)
          ENDIF
-         //RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
+         //hwg_RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
       ENDIF
       IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle == OPAQUE
          hwg_SelectObject(hDC, ::BrushFill:handle)
       ELSE
          hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
       ENDIF
-      RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
+      hwg_RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
    SetBKMode(hDC, oldbkMode)
    RETURN NIL
@@ -461,26 +461,26 @@ METHOD Paint(lpdis) CLASS HContainer
       SetBkMode(hDC, ::backStyle)
       IF !::lnoBorder
          IF ::ncStyle == 0      // RAISED
-           DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM)  // raised  forte      8
+           hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM)  // raised  forte      8
          ELSEIF ::ncStyle == 1  // sunken
-           DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKEN, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // sunken mais forte
+           hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKEN, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // sunken mais forte
          ELSEIF ::ncStyle == 2  // FRAME
-           DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED+BDR_RAISEDOUTER, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // FRAME
+           hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED+BDR_RAISEDOUTER, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM) // FRAME
          ELSE                   // FLAT
-           DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKENINNER, BF_TOP)
-           DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISEDOUTER, BF_BOTTOM)
-           DrawEdge(hDC, x1, y2, x2, y1, BDR_SUNKENINNER, BF_LEFT)
-           DrawEdge(hDC, x1, y2, x2, y1, BDR_RAISEDOUTER, BF_RIGHT)
+           hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_SUNKENINNER, BF_TOP)
+           hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISEDOUTER, BF_BOTTOM)
+           hwg_DrawEdge(hDC, x1, y2, x2, y1, BDR_SUNKENINNER, BF_LEFT)
+           hwg_DrawEdge(hDC, x1, y2, x2, y1, BDR_RAISEDOUTER, BF_RIGHT)
          ENDIF
       ELSE
-         DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
+         hwg_DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
       ENDIF
       IF ::backStyle != TRANSPARENT
          IF ::Brush != NIL
-            FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle)
+            hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle)
          ENDIF
       ELSE
-         FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5))
+         hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5))
       ENDIF
       //SetBkMode(hDC, 0)
    ENDIF

@@ -229,16 +229,16 @@ Local aCoors
 /*
    IF __ObjHasMsg( oDlg,"OBMP") 
       IF oDlg:oBmp != Nil
-         SpreadBitmap( hDC, oDlg:handle, oDlg:oBmp:handle )
+         hwg_SpreadBitmap( hDC, oDlg:handle, oDlg:oBmp:handle )
          Return 1
       ELSE
         aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != Nil
            IF Valtype( oDlg:brush ) != "N"
-              FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
+              hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
            ENDIF
         ELSE
-           FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,COLOR_3DFACE+1 )
+           hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,COLOR_3DFACE+1 )
         ENDIF
         Return 1
       ENDIF

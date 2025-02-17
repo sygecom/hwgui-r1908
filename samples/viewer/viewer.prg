@@ -350,7 +350,7 @@ STATIC FUNCTION PaintWindow(oWnd)
 #ifdef __FREEIMAGE__
    oImage:Draw(hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #else
-   DrawBitmap(hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
+   hwg_DrawBitmap(hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #endif
 
    IF lScrollV

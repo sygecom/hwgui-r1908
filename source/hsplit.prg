@@ -137,13 +137,13 @@ METHOD Paint() CLASS HSplitter
       IF ::lCaptured
          oBrushFill := HBrush():Add(RGB(156, 156, 156))
          hwg_SelectObject(hDC, oBrushFill:handle)
-         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP) + BF_MIDDLE)
-         FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
+         hwg_DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP) + BF_MIDDLE)
+         hwg_FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)
       ELSEIF ::BackStyle == OPAQUE
-         DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
+         hwg_DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_LEFT, BF_TOP))
       ENDIF
    ELSEIF !::lMoved .AND. ::BackStyle == OPAQUE
-      DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP)) //+ BF_MIDDLE)
+      hwg_DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP)) //+ BF_MIDDLE)
    ENDIF
    hwg_EndPaint(::handle, pps)
 

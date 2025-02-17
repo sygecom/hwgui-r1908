@@ -289,7 +289,7 @@ METHOD Paint(lpDis) CLASS HStatic
    SetBkMode(dc, ::backstyle)
    IF ::BackStyle == OPAQUE
       brBackground := IIf(!Empty(::brush), ::brush, ::hBrushDefault)
-      FillRect(dc, client_rect[1], client_rect[2], client_rect[3], client_rect[4], brBackground:handle)
+      hwg_FillRect(dc, client_rect[1], client_rect[2], client_rect[3], client_rect[4], brBackground:handle)
    ENDIF
 
    IF ::tcolor != NIL .AND. ::isEnabled()

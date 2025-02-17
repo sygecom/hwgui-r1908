@@ -418,7 +418,7 @@ Return 0
 Static Function onEraseBk( oWnd,wParam )
 /*
    IF oWnd:oBmp != Nil
-       SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
+       hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
        Return 1
    ENDIF
 */   

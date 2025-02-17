@@ -87,27 +87,27 @@ METHOD Paint(lpdis) CLASS HLine
 
    IF Empty(::LineSlant)
       IF ::lVert
-         // DrawEdge(hDC, x1, y1, x1 + 2, y2, EDGE_SUNKEN, BF_RIGHT)
-         DrawLine(hDC, x1 + 1, y1, x1 + 1, y2)
+         // hwg_DrawEdge(hDC, x1, y1, x1 + 2, y2, EDGE_SUNKEN, BF_RIGHT)
+         hwg_DrawLine(hDC, x1 + 1, y1, x1 + 1, y2)
       ELSE
-         // DrawEdge(hDC, x1, y1, x2, y1 + 2, EDGE_SUNKEN, BF_RIGHT)
-         DrawLine(hDC, x1, y1 + 1, x2, y1 + 1)
+         // hwg_DrawEdge(hDC, x1, y1, x2, y1 + 2, EDGE_SUNKEN, BF_RIGHT)
+         hwg_DrawLine(hDC, x1, y1 + 1, x2, y1 + 1)
       ENDIF
       SelectObject(hDC, ::oPenGray:handle)
       IF ::lVert
-         DrawLine(hDC, x1, y1, x1, y2)
+         hwg_DrawLine(hDC, x1, y1, x1, y2)
       ELSE
-         DrawLine(hDC, x1, y1, x2, y1)
+         hwg_DrawLine(hDC, x1, y1, x2, y1)
       ENDIF
    ELSE
       IF (x2 - x1) <= ::nBorder //.OR. ::nWidth <= ::nBorder
-         DrawLine(hDC, x1, y1, x1, y2)
+         hwg_DrawLine(hDC, x1, y1, x1, y2)
       ELSEIF (y2 - y1) <= ::nBorder //.OR. ::nHeight <= ::nBorder
-         DrawLine(hDC, x1, y1, x2, y1)
+         hwg_DrawLine(hDC, x1, y1, x2, y1)
       ELSEIF ::LineSlant == "/"
-         DrawLine(hDC, x1, y1 + y2, x1 + x2, y1)
+         hwg_DrawLine(hDC, x1, y1 + y2, x1 + x2, y1)
       ELSEIF ::LineSlant == "\"
-         DrawLine(hDC, x1, y1, x1 + x2, y1 + y2)
+         hwg_DrawLine(hDC, x1, y1, x1 + x2, y1 + y2)
       ENDIF
     ENDIF
 

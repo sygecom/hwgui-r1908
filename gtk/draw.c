@@ -73,7 +73,7 @@ HB_FUNC(HWG_INVALIDATERECT)
 HB_FUNC_TRANSLATE(INVALIDATERECT, HWG_INVALIDATERECT);
 #endif
 
-HB_FUNC(RECTANGLE)
+HB_FUNC(HWG_RECTANGLE)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   int x1 = hb_parni(2), y1 = hb_parni(3);
@@ -81,13 +81,21 @@ HB_FUNC(RECTANGLE)
   gdk_draw_rectangle(hDC->window, hDC->gc, 0, x1, y1, hb_parni(4) - x1 + 1, hb_parni(5) - y1 + 1);
 }
 
-HB_FUNC(DRAWLINE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RECTANGLE, HWG_RECTANGLE);
+#endif
+
+HB_FUNC(HWG_DRAWLINE)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   gdk_draw_line(hDC->window, hDC->gc, hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5));
 }
 
-HB_FUNC(PIE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWLINE, HWG_DRAWLINE);
+#endif
+
+HB_FUNC(HWG_PIE)
 {
   /*
      int res = Pie(
@@ -106,11 +114,15 @@ HB_FUNC(PIE)
      else
      {
        hb_retnl( 0 );
-     }  
+     }
   */
 }
 
-HB_FUNC(ELLIPSE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PIE, HWG_PIE);
+#endif
+
+HB_FUNC(HWG_ELLIPSE)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   int x1 = hb_parni(2), y1 = hb_parni(3);
@@ -118,7 +130,11 @@ HB_FUNC(ELLIPSE)
   gdk_draw_arc(hDC->window, hDC->gc, 0, x1, y1, hb_parni(4) - x1 + 1, hb_parni(5) - y1 + 1, 0, 360 * 64);
 }
 
-HB_FUNC(FILLRECT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ELLIPSE, HWG_ELLIPSE);
+#endif
+
+HB_FUNC(HWG_FILLRECT)
 {
   int x1 = hb_parni(2), y1 = hb_parni(3);
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
@@ -132,7 +148,11 @@ HB_FUNC(FILLRECT)
   gdk_gc_set_foreground(hDC->gc, &(values.foreground));
 }
 
-HB_FUNC(ROUNDRECT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(FILLRECT, HWG_FILLRECT);
+#endif
+
+HB_FUNC(HWG_ROUNDRECT)
 {
   /*
      hb_parl( RoundRect(
@@ -146,6 +166,10 @@ HB_FUNC(ROUNDRECT)
      ) );
   */
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ROUNDRECT, HWG_ROUNDRECT);
+#endif
 
 HB_FUNC(HWG_REDRAWWINDOW)
 {
@@ -169,7 +193,7 @@ HB_FUNC(HWG_REDRAWWINDOW)
 HB_FUNC_TRANSLATE(REDRAWWINDOW, HWG_REDRAWWINDOW);
 #endif
 
-HB_FUNC(DRAWBUTTON)
+HB_FUNC(HWG_DRAWBUTTON)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   int left = hb_parni(2);
@@ -220,10 +244,14 @@ HB_FUNC(DRAWBUTTON)
   }
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWBUTTON, HWG_DRAWBUTTON);
+#endif
+
 /*
- * DrawEdge( hDC,x1,y1,x2,y2,nFlag,nBorder )
+ * hwg_DrawEdge( hDC,x1,y1,x2,y2,nFlag,nBorder )
  */
-HB_FUNC(DRAWEDGE)
+HB_FUNC(HWG_DRAWEDGE)
 {
   /*
      RECT rc;
@@ -239,6 +267,10 @@ HB_FUNC(DRAWEDGE)
      hb_retl( DrawEdge( hDC, &rc, edge, grfFlags ) );
   */
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWEDGE, HWG_DRAWEDGE);
+#endif
 
 HB_FUNC(HWG_LOADICON)
 {
@@ -295,16 +327,20 @@ HB_FUNC_TRANSLATE(LOADBITMAP, HWG_LOADBITMAP);
 #endif
 
 /*
- * Window2Bitmap( hWnd )
+ * hwg_Window2Bitmap( hWnd )
  */
 HB_FUNC(WINDOW2BITMAP)
 {
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WINDOW2BITMAP, HWG_WINDOW2BITMAP);
+#endif
+
 /*
- * DrawBitmap( hDC, hBitmap, style, x, y, width, height )
+ * hwg_DrawBitmap( hDC, hBitmap, style, x, y, width, height )
  */
-HB_FUNC(DRAWBITMAP)
+HB_FUNC(HWG_DRAWBITMAP)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   PHWGUI_PIXBUF obj = (PHWGUI_PIXBUF)HB_PARHANDLE(2);
@@ -316,18 +352,30 @@ HB_FUNC(DRAWBITMAP)
   gdk_draw_pixbuf(hDC->window, hDC->gc, obj->handle, 0, 0, x, y, width, height, GDK_RGB_DITHER_NONE, 0, 0);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWBITMAP, HWG_DRAWBITMAP);
+#endif
+
 /*
- * DrawTransparentBitmap( hDC, hBitmap, x, y )
+ * hwg_DrawTransparentBitmap( hDC, hBitmap, x, y )
  */
-HB_FUNC(DRAWTRANSPARENTBITMAP)
+HB_FUNC(HWG_DRAWTRANSPARENTBITMAP)
 {
 }
 
-/*  SpreadBitmap( hDC, hWnd, hBitmap, style )
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWTRANSPARENTBITMAP, HWG_DRAWTRANSPARENTBITMAP);
+#endif
+
+/*  hwg_SpreadBitmap( hDC, hWnd, hBitmap, style )
  */
-HB_FUNC(SPREADBITMAP)
+HB_FUNC(HWG_SPREADBITMAP)
 {
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SPREADBITMAP, HWG_SPREADBITMAP);
+#endif
 
 HB_FUNC(HWG_GETBITMAPSIZE)
 {
@@ -413,10 +461,14 @@ HB_FUNC(HWG_ALPHA2PIXBUF)
   }
 }
 
-HB_FUNC(DRAWICON)
+HB_FUNC(HWG_DRAWICON)
 {
   // DrawIcon( (HDC)hb_parnl( 1 ), hb_parni( 3 ), hb_parni( 4 ), (HICON)hb_parnl( 2 ) );
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWICON, HWG_DRAWICON);
+#endif
 
 HB_FUNC(GETSYSCOLOR)
 {

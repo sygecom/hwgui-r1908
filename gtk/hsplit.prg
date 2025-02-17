@@ -103,7 +103,7 @@ Local hDC
       Eval( ::bPaint,Self )
    ELSE
       hDC := GetDC( ::handle )
-      DrawButton( hDC, 0,0,::nWidth-1,::nHeight-1,6 )
+      hwg_DrawButton( hDC, 0,0,::nWidth-1,::nHeight-1,6 )
       releaseDC( ::handle, hDC )
    ENDIF
 

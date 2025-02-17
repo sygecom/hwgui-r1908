@@ -344,7 +344,7 @@ Local oWnd, oBtn, oitem
       return DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != Nil
-          SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
+          hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
           return 1
       endif
    elseif msg == WM_DRAWITEM
@@ -546,7 +546,7 @@ Local oWnd, oBtn, oitem
       return DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != Nil
-          SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
+          hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
           return 1
       endif
    elseif msg == WM_DRAWITEM
@@ -992,7 +992,7 @@ Local oWndClient
       return DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != Nil
-          SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
+          hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
           return 1
       endif
    elseif msg == WM_DRAWITEM

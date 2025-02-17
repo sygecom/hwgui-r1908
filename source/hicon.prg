@@ -26,7 +26,7 @@ CLASS HIcon INHERIT HObject
 
    METHOD AddResource(name, nWidth, nHeight, nFlags, lOEM)
    METHOD AddFile(name, nWidth, nHeight)
-   METHOD Draw(hDC, x, y) INLINE DrawIcon(hDC, ::handle, x, y)
+   METHOD Draw(hDC, x, y) INLINE hwg_DrawIcon(hDC, ::handle, x, y)
    METHOD Release()
 
 ENDCLASS

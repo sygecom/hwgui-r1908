@@ -87,7 +87,7 @@ METHOD FromBitmap(oBitmap) CLASS HFreeImage
 METHOD Draw(hDC, nLeft, nTop, nWidth, nHeight) CLASS HFreeImage
 
    FI_Draw(::handle, hDC, ::nWidth, ::nHeight, nLeft, nTop, nWidth, nHeight)
-   // DrawBitmap(hDC, ::hBitmap,, nLeft, nTop, ::nWidth, ::nHeight)
+   // hwg_DrawBitmap(hDC, ::hBitmap,, nLeft, nTop, ::nWidth, ::nHeight)
    RETURN NIL
 
 METHOD Release() CLASS HFreeImage

@@ -140,17 +140,17 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    IF ::lFlat
       IF ::state == OBTN_NORMAL
-         DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],0 )
+         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],0 )
       ELSEIF ::state == OBTN_MOUSOVER
-         DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],1 )
+         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],1 )
       ELSEIF ::state == OBTN_PRESSED
-         DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],2 )
+         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],2 )
       ENDIF
    ELSE
       IF ::state == OBTN_NORMAL
-         DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],5 )
+         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],5 )
       ELSEIF ::state == OBTN_PRESSED
-         DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],6 )
+         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4],6 )
       ENDIF
    ENDIF
 
@@ -168,7 +168,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
             ::bitmap:handle:=::oBitmap
             ::oBitmap:=Nil
          EndIf
-         DrawBitmap( hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb )
+         hwg_DrawBitmap( hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb )
       Else
          ::oBitmap:=::bitmap:handle
          DrawGrayBitmap( hDC, ::bitmap:handle, x1, y1 )

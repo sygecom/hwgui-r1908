@@ -28,7 +28,7 @@ CLASS HBitmap INHERIT HObject
    METHOD AddStandard(nId)
    METHOD AddFile(name, hDC, lTranparent, nWidth, nHeight)
    METHOD AddWindow(oWnd, lFull)
-   METHOD Draw(hDC, x1, y1, width, height) INLINE DrawBitmap(hDC, ::handle, SRCCOPY, x1, y1, width, height)
+   METHOD Draw(hDC, x1, y1, width, height) INLINE hwg_DrawBitmap(hDC, ::handle, SRCCOPY, x1, y1, width, height)
    METHOD Release()
 
 ENDCLASS
@@ -150,7 +150,7 @@ METHOD AddWindow(oWnd, lFull) CLASS HBitmap
 
    LOCAL aBmpSize
 
-   ::handle := Window2Bitmap(oWnd:handle, lFull)
+   ::handle := hwg_Window2Bitmap(oWnd:handle, lFull)
    ::name := LTrim(hb_valToStr(oWnd:handle)) // TODO: verificar o que ocorre quando for tipo P
    aBmpSize := hwg_GetBitmapSize(::handle)
    ::nWidth := aBmpSize[1]

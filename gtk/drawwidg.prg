@@ -387,7 +387,7 @@ Return Self
 METHOD AddWindow( oWnd,lFull ) CLASS HBitmap
 Local i, aBmpSize
 
-   // ::handle := Window2Bitmap( oWnd:handle,lFull )
+   // ::handle := hwg_Window2Bitmap( oWnd:handle,lFull )
    ::name := LTrim(Str(oWnd:handle))
    aBmpSize  := hwg_GetBitmapSize( ::handle )
    ::nWidth  := aBmpSize[1]

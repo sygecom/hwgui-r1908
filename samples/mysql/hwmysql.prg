@@ -154,7 +154,7 @@ FUNCTION AboutDraw()
 
    pps := hwg_DefinePaintStru()
    hDC := hwg_BeginPaint(getmodalhandle(), pps)
-   DrawBitmap(hDC, hBitmap,, 0, 0)
+   hwg_DrawBitmap(hDC, hBitmap,, 0, 0)
    hwg_EndPaint(getmodalhandle(), pps)
 
 RETURN NIL

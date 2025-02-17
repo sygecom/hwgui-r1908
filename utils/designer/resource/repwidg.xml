@@ -23,15 +23,15 @@
             <![CDATA[
             Private pArray, nJust, nLines, i, dy, nFirst, ny
             if Empty(oCtrl:title)
-              FillRect( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,1 )
+              hwg_FillRect( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,1 )
               if oCtrl:GetProp("Border") == "True"
-                Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
+                hwg_Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
               endif
             else
               pArray := oDesigner:aDataDef[Ascan(oDesigner:aDataDef,{|a|a[1]=="justify"}),6]
               nJust := Ascan(pArray,oCtrl:GetProp("Justify"))-1
               if oCtrl:GetProp( "Border" ) == "True"
-                Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
+                hwg_Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
               endif
               SetTransparentMode( hDC,.T. )
               if oCtrl:GetProp( "Multiline" ) == "True"
@@ -81,7 +81,7 @@
             type := Ascan(pArray,oCtrl:GetProp("PenType"))-1
             width := Val(oCtrl:GetProp("PenWidth"))
             SelectObject( hDC, HPen():Get( type,width ):handle )
-            Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
+            hwg_Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
             ]]>
          </paint>
          <property name="Left" type="N" value="0" />
@@ -147,9 +147,9 @@
          <paint>
             <![CDATA[
             if oCtrl:oBitmap != Nil
-              DrawBitmap( hDC,oCtrl:oBitmap:handle,,0,0,oCtrl:nWidth,oCtrl:nHeight )
+              hwg_DrawBitmap( hDC,oCtrl:oBitmap:handle,,0,0,oCtrl:nWidth,oCtrl:nHeight )
             else
-              DrawEdge( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
+              hwg_DrawEdge( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
             endif
             ]]>
          </paint>
@@ -172,7 +172,7 @@
                oPen := HPen():Add( 4,1 )
             endif
             SelectObject( hDC, oPen:handle )
-            Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
+            hwg_Rectangle( hDC,0,0,oCtrl:nWidth-1,oCtrl:nHeight-1 )
             ]]>
          </paint>
          <property name="Left" type="N" value="0" />

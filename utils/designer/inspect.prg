@@ -270,9 +270,9 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
       endif
       if x > ::x1
          SelectObject( hDC, oPenLight:handle )
-         DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
+         hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
          SelectObject( hDC, oPenGray:handle )
-         DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
+         hwg_DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
       endif
       x += xSize
       fif := IIf( fif = ::freeze, ::nLeftCol, fif + 1 )
@@ -283,7 +283,7 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
 
    SelectObject( hDC, oPen:handle )
    FOR i := 1 to nRows
-      DrawLine( hDC, ::x1, ::y1+(::height+1)*i, IIf(::lAdjRight, ::x2, x), ::y1+(::height+1)*i )
+      hwg_DrawLine( hDC, ::x1, ::y1+(::height+1)*i, IIf(::lAdjRight, ::x2, x), ::y1+(::height+1)*i )
    NEXT
 
    oPen:Release()

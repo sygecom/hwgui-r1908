@@ -203,7 +203,7 @@ METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
       y2 *= ::nVRes
    ENDIF 
 
-   // DrawBitmap( ::hDC,hBitmap,Iif(nOpt==Nil,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
+   // hwg_DrawBitmap( ::hDC,hBitmap,Iif(nOpt==Nil,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
 
 Return Nil
 

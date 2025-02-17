@@ -80,14 +80,18 @@ PHB_ITEM Rect2Array(RECT *rc)
 }
 
 /*
-GETPPSRECT(PAINTSTRUCT) --> aRect
+HWG_GETPPSRECT(PAINTSTRUCT) --> aRect
 */
-HB_FUNC(GETPPSRECT)
+HB_FUNC(HWG_GETPPSRECT)
 {
   PAINTSTRUCT *pps = hwg_par_PAINTSTRUCT(1);
   PHB_ITEM aMetr = Rect2Array(&pps->rcPaint);
   hb_itemReturnRelease(aMetr);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETPPSRECT, HWG_GETPPSRECT);
+#endif
 
 /*
 HWG_INVALIDATERECT(HWND, nEraseBackgroundFlag, nLeft, nTop, nRight, nBottom) -->
@@ -113,25 +117,33 @@ HB_FUNC_TRANSLATE(INVALIDATERECT, HWG_INVALIDATERECT);
 #endif
 
 /*
-MOVETO(HDC, nX, nY) -->
+HWG_MOVETO(HDC, nX, nY) -->
 */
-HB_FUNC(MOVETO) // TODO: sincronizar nome da função com função da WINAPI
+HB_FUNC(HWG_MOVETO) // TODO: sincronizar nome da função com função da WINAPI
 {
   MoveToEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MOVETO, HWG_MOVETO);
+#endif
+
 /*
-LINETO(HDC, nX, nY) -->
+HWG_LINETO(HDC, nX, nY) -->
 */
-HB_FUNC(LINETO)
+HB_FUNC(HWG_LINETO)
 {
   LineTo(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LINETO, HWG_LINETO);
+#endif
+
 /*
-RECTANGLE(HDC, nX1, nY1, nX2, nY2) -->
+HWG_RECTANGLE(HDC, nX1, nY1, nX2, nY2) -->
 */
-HB_FUNC(RECTANGLE) // TODO: usar outro nome para esta função
+HB_FUNC(HWG_RECTANGLE) // TODO: usar outro nome para esta função
 {
   HDC hDC = hwg_par_HDC(1);
   int x1 = hb_parni(2);
@@ -145,47 +157,67 @@ HB_FUNC(RECTANGLE) // TODO: usar outro nome para esta função
   LineTo(hDC, x1, y1);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RECTANGLE, HWG_RECTANGLE);
+#endif
+
 /*
-BOX(HDC, nLeft, nTop, nRight, nBottom) -->
+HWG_BOX(HDC, nLeft, nTop, nRight, nBottom) -->
 */
-HB_FUNC(BOX) // TODO: sincronizar nome da função com função da WINAPI
+HB_FUNC(HWG_BOX) // TODO: sincronizar nome da função com função da WINAPI
 {
   Rectangle(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BOX, HWG_BOX);
+#endif
+
 /*
-DRAWLINE(HDC, nX1, nY1, nX2, nY2) -->
+HWG_DRAWLINE(HDC, nX1, nY1, nX2, nY2) -->
 */
-HB_FUNC(DRAWLINE)
+HB_FUNC(HWG_DRAWLINE)
 {
   HDC hDC = hwg_par_HDC(1);
   MoveToEx(hDC, hb_parni(2), hb_parni(3), NULL);
   LineTo(hDC, hb_parni(4), hb_parni(5));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWLINE, HWG_DRAWLINE);
+#endif
+
 /*
-PIE(HDC, nLeft, nTop, nRight, nBottom, nXR1, nYR1, nXR2, nYR2) --> numeric
+HWG_PIE(HDC, nLeft, nTop, nRight, nBottom, nXR1, nYR1, nXR2, nYR2) --> numeric
 */
-HB_FUNC(PIE)
+HB_FUNC(HWG_PIE)
 {
   int res = Pie(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5), hwg_par_int(6),
                 hwg_par_int(7), hwg_par_int(8), hwg_par_int(9));
   hb_retnl(res ? 0 : (LONG)GetLastError()); // TODO: o retorno da função é BOOL
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PIE, HWG_PIE);
+#endif
+
 /*
-ELLIPSE(HDC, nLeft, nTop, nRight, nBottom) --> numeric
+HWG_ELLIPSE(HDC, nLeft, nTop, nRight, nBottom) --> numeric
 */
-HB_FUNC(ELLIPSE)
+HB_FUNC(HWG_ELLIPSE)
 {
   int res = Ellipse(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5));
   hb_retnl(res ? 0 : (LONG)GetLastError()); // TODO: o retorno da função é BOOL
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ELLIPSE, HWG_ELLIPSE);
+#endif
+
 /*
-FILLRECT(HDC, nLeft, nTop, nRight, nBottom, HBRUSH) -->
+HWG_FILLRECT(HDC, nLeft, nTop, nRight, nBottom, HBRUSH) -->
 */
-HB_FUNC(FILLRECT)
+HB_FUNC(HWG_FILLRECT)
 {
   RECT rc;
 
@@ -198,14 +230,22 @@ HB_FUNC(FILLRECT)
   FillRect(HB_ISPOINTER(1) ? hwg_par_HDC(1) : (HDC)(LONG_PTR)hb_parnl(1), &rc, hwg_par_HBRUSH(6));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(FILLRECT, HWG_FILLRECT);
+#endif
+
 /*
-ROUNDRECT(HDC, nLeft, nTop, nRight, nBottom, nWidth, nHeight) --> .T.|.F.
+HWG_ROUNDRECT(HDC, nLeft, nTop, nRight, nBottom, nWidth, nHeight) --> .T.|.F.
 */
-HB_FUNC(ROUNDRECT)
+HB_FUNC(HWG_ROUNDRECT)
 {
   hwg_ret_BOOL(RoundRect(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5), hwg_par_int(6),
                          hwg_par_int(7)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ROUNDRECT, HWG_ROUNDRECT);
+#endif
 
 #if 0
 HB_FUNC(REDRAWWINDOW)
@@ -245,9 +285,9 @@ HB_FUNC_TRANSLATE(REDRAWWINDOW, HWG_REDRAWWINDOW);
 #endif
 
 /*
-DRAWBUTTON(HDC, nLeft, nTop, nRight, nBottom, nType) -->
+HWG_DRAWBUTTON(HDC, nLeft, nTop, nRight, nBottom, nType) -->
 */
-HB_FUNC(DRAWBUTTON)
+HB_FUNC(HWG_DRAWBUTTON)
 {
   RECT rc;
   HDC hDC = hwg_par_HDC(1);
@@ -287,14 +327,18 @@ HB_FUNC(DRAWBUTTON)
   }
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWBUTTON, HWG_DRAWBUTTON);
+#endif
+
 /*
- * DrawEdge(hDC, x1, y1, x2, y2, nFlag, nBorder)
+ * hwg_DrawEdge(hDC, x1, y1, x2, y2, nFlag, nBorder)
  */
 
 /*
-DRAWEDGE(HDC, nLeft, nTop, nRight, nBottom, nEdge, nGrfFlags) --> .T.|.F.
+HWG_DRAWEDGE(HDC, nLeft, nTop, nRight, nBottom, nEdge, nGrfFlags) --> .T.|.F.
 */
-HB_FUNC(DRAWEDGE)
+HB_FUNC(HWG_DRAWEDGE)
 {
   RECT rc;
   UINT edge = (HB_ISNIL(6)) ? EDGE_RAISED : hwg_par_UINT(6);
@@ -307,6 +351,10 @@ HB_FUNC(DRAWEDGE)
 
   hwg_ret_BOOL(DrawEdge(hwg_par_HDC(1), &rc, edge, grfFlags));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWEDGE, HWG_DRAWEDGE);
+#endif
 
 /*
 HWG_LOADICON(nIcon|cIcon) --> HICON
@@ -374,13 +422,13 @@ HB_FUNC_TRANSLATE(LOADBITMAP, HWG_LOADBITMAP);
 #endif
 
 /*
- * Window2Bitmap(hWnd)
+ * hwg_Window2Bitmap(hWnd)
  */
 
 /*
-WINDOW2BITMAP(HWND, lFull) --> HBITMAP
+HWG_WINDOW2BITMAP(HWND, lFull) --> HBITMAP
 */
-HB_FUNC(WINDOW2BITMAP)
+HB_FUNC(HWG_WINDOW2BITMAP)
 {
   HWND hWnd = hwg_par_HWND(1);
   BOOL lFull = (HB_ISNIL(2)) ? 0 : (BOOL)hb_parl(2);
@@ -409,14 +457,18 @@ HB_FUNC(WINDOW2BITMAP)
   hwg_ret_HBITMAP(hBitmap);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WINDOW2BITMAP, HWG_WINDOW2BITMAP);
+#endif
+
 /*
- * DrawBitmap(hDC, hBitmap, style, x, y, width, height)
+ * hwg_DrawBitmap(hDC, hBitmap, style, x, y, width, height)
  */
 
 /*
-DRAWBITMAP(HDC, HBITMAP, np3, nX, nY, nWidth, nHeight) -->
+HWG_DRAWBITMAP(HDC, HBITMAP, np3, nX, nY, nWidth, nHeight) -->
 */
-HB_FUNC(DRAWBITMAP)
+HB_FUNC(HWG_DRAWBITMAP)
 {
   HDC hDC = hwg_par_HDC(1);
   HDC hDCmem = CreateCompatibleDC(hDC);
@@ -442,14 +494,18 @@ HB_FUNC(DRAWBITMAP)
   DeleteDC(hDCmem);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWBITMAP, HWG_DRAWBITMAP);
+#endif
+
 /*
- * DrawTransparentBitmap(hDC, hBitmap, x, y [,trColor])
+ * hwg_DrawTransparentBitmap(hDC, hBitmap, x, y [,trColor])
  */
 
 /*
-DRAWTRANSPARENTBITMAP(HDC, HBITMAP, nX, nY, nTrColor, nWidthDest, nHeightDest) -->
+HWG_DRAWTRANSPARENTBITMAP(HDC, HBITMAP, nX, nY, nTrColor, nWidthDest, nHeightDest) -->
 */
-HB_FUNC(DRAWTRANSPARENTBITMAP)
+HB_FUNC(HWG_DRAWTRANSPARENTBITMAP)
 {
   HDC hDC = hwg_par_HDC(1);
   HBITMAP hBitmap = hwg_par_HBITMAP(2);
@@ -511,13 +567,17 @@ HB_FUNC(DRAWTRANSPARENTBITMAP)
   DeleteDC(dcTrans);
 }
 
-/*  SpreadBitmap(hDC, hWnd, hBitmap, style)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWTRANSPARENTBITMAP, HWG_DRAWTRANSPARENTBITMAP);
+#endif
+
+/*  hwg_SpreadBitmap(hDC, hWnd, hBitmap, style)
  */
 
 /*
-SPREADBITMAP(HDC, HWND, HBITMAP, np4) -->
+HWG_SPREADBITMAP(HDC, HWND, HBITMAP, np4) -->
 */
-HB_FUNC(SPREADBITMAP)
+HB_FUNC(HWG_SPREADBITMAP)
 {
   HDC hDC = HB_ISPOINTER(1) ? hwg_par_HDC(1) : (HDC)(LONG_PTR)hb_parnl(1); // TODO: revisar e usar somente hwg_par_HDC
   HDC hDCmem = CreateCompatibleDC(hDC);
@@ -544,13 +604,17 @@ HB_FUNC(SPREADBITMAP)
   DeleteDC(hDCmem);
 }
 
-/*  CenterBitmap(hDC, hWnd, hBitmap, style, brush)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SPREADBITMAP, HWG_SPREADBITMAP);
+#endif
+
+/*  hwg_CenterBitmap(hDC, hWnd, hBitmap, style, brush)
  */
 
 /*
-CENTERBITMAP(HDC, HWND, HBITMAP, np4, HBRUSH) -->
+HWG_CENTERBITMAP(HDC, HWND, HBITMAP, np4, HBRUSH) -->
 */
-HB_FUNC(CENTERBITMAP)
+HB_FUNC(HWG_CENTERBITMAP)
 {
   HDC hDC = hwg_par_HDC(1);
   HDC hDCmem = CreateCompatibleDC(hDC);
@@ -570,6 +634,10 @@ HB_FUNC(CENTERBITMAP)
 
   DeleteDC(hDCmem);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CENTERBITMAP, HWG_CENTERBITMAP);
+#endif
 
 /*
 HWG_GETBITMAPSIZE(HBITMAP) --> aInfo[4]
@@ -746,12 +814,16 @@ HB_FUNC_TRANSLATE(OPENBITMAP, HWG_OPENBITMAP);
 #endif
 
 /*
-DRAWICON(HDC, HICON, nX, nY) -->
+HWG_DRAWICON(HDC, HICON, nX, nY) -->
 */
-HB_FUNC(DRAWICON) // TODO: ordem dos parâmetros não segue a função da WINAPI
+HB_FUNC(HWG_DRAWICON) // TODO: ordem dos parâmetros não segue a função da WINAPI
 {
   DrawIcon(hwg_par_HDC(1), hwg_par_int(3), hwg_par_int(4), hwg_par_HICON(2)); // TODO: o retorno é BOOL
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWICON, HWG_DRAWICON);
+#endif
 
 /*
 GETSYSCOLOR(nIndex) --> color

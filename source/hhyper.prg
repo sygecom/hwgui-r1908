@@ -393,16 +393,16 @@ METHOD Paint(lpDis) CLASS HStaticLink
       bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]
       IF ::backstyle == TRANSPARENT
-         DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
+         hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ELSE
-         DrawBitmap(dc, ::hbitmap, , bmpRect[1], bmpRect[2])
+         hwg_DrawBitmap(dc, ::hbitmap, , bmpRect[1], bmpRect[2])
       ENDIF
       rcclient[1] +=  IIf(::iStyle == ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
    ENDIF
    SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
        SetBkColor(DC, IIf(::bColor == NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
-       FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
+       hwg_FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
    //dwstyle    := ::style

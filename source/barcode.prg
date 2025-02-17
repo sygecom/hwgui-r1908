@@ -306,9 +306,9 @@ METHOD CreateBarcode(cCode) CLASS BarCode
 
       IF SubStr(cCode, i, 1) = "1"
          IF ::lHorizontal = .T.
-            Rectangle(::hDC, nX, nY, nX + ::nHeight, (nY += ::nPinWidth))
+            hwg_Rectangle(::hDC, nX, nY, nX + ::nHeight, (nY += ::nPinWidth))
          ELSE
-            Rectangle(::hDC, nX, nY, (nX += ::nPinWidth), nY + ::nWidth)
+            hwg_Rectangle(::hDC, nX, nY, (nX += ::nPinWidth), nY + ::nWidth)
          ENDIF
       ELSE
          IF ::lHorizontal = .T.

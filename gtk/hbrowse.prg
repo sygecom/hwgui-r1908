@@ -259,7 +259,7 @@ Local aCoors, retValue := -1
          IF ::brush != Nil
 	    
             aCoors := hwg_GetClientRect( ::handle )
-            FillRect( wParam, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, ::brush:handle )
+            hwg_FillRect( wParam, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, ::brush:handle )
             retValue := 1
          ENDIF
 
@@ -567,7 +567,7 @@ Local oldBkColor, oldTColor
       ::Rebuild(hDC)
    ENDIF
    aCoors := hwg_GetClientRect( ::handle )
-   Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
+   hwg_Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
    aMetr := GetTextMetric( hDC )
    
    ::width := aMetr[ 2 ]
@@ -718,9 +718,9 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
       endif
       if ::lDispHead .AND. !::lAppMode
          if oColumn:cGrid == nil
-            DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1,5 )
+            hwg_DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1,5 )
          else
-            DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1,0 )
+            hwg_DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1,0 )
             if oPenHdr == nil
                oPenHdr := HPen():Add( BS_SOLID,1,0 )
             endif
@@ -729,16 +729,16 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
             for nLine := 1 to ::nHeadRows
                cNWSE := hb_tokenGet(@cStr, nLine, ';')
                if At('S', cNWSE) != 0
-                  DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine), x+xSize-1, ::y1-(::height)*(::nHeadRows-nLine))
+                  hwg_DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine), x+xSize-1, ::y1-(::height)*(::nHeadRows-nLine))
                endif
                if At('N', cNWSE) != 0
-                  DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine+1), x+xSize-1, ::y1-(::height)*(::nHeadRows-nLine+1))
+                  hwg_DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine+1), x+xSize-1, ::y1-(::height)*(::nHeadRows-nLine+1))
                endif
                if At('E', cNWSE) != 0
-                  DrawLine(hDC, x+xSize-2, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-2, ::y1-(::height)*(::nHeadRows-nLine))
+                  hwg_DrawLine(hDC, x+xSize-2, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-2, ::y1-(::height)*(::nHeadRows-nLine))
                endif
                if At('W', cNWSE) != 0
-                  DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x-1, ::y1-(::height)*(::nHeadRows-nLine))
+                  hwg_DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x-1, ::y1-(::height)*(::nHeadRows-nLine))
                endif
             next
             SelectObject( hDC, oPen:handle )
@@ -753,16 +753,16 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
       if ::lDispSep .AND. x > ::x1
          IF ::lSep3d
             SelectObject( hDC, oPenLight:handle )
-            DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
+            hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
             SelectObject( hDC, oPen:handle )
-            DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
+            hwg_DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
          ELSE
-            DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
+            hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
          ENDIF
       endif
       x += xSize
       if ! ::lAdjRight .and. fif == Len(::aColumns)
-         DrawLine( hDC, x-1, ::y1-(::height*::nHeadRows), x-1, ::y1+(::height+1)*nRows )
+         hwg_DrawLine( hDC, x-1, ::y1-(::height*::nHeadRows), x-1, ::y1+(::height+1)*nRows )
       endif
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
       if fif > Len(::aColumns)
@@ -772,7 +772,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
 
    IF ::lDispSep
       for i := 1 to nRows
-         DrawLine( hDC, ::x1, ::y1+(::height+1)*i, IIf(::lAdjRight, ::x2, x), ::y1+(::height+1)*i )
+         hwg_DrawLine( hDC, ::x1, ::y1+(::height+1)*i, IIf(::lAdjRight, ::x2, x), ::y1+(::height+1)*i )
       next
       oPen:Release()
       if oPenHdr != nil
@@ -825,7 +825,7 @@ Local oColumn
    enddo
 
    IF ::lDispSep
-      DrawLine( hDC, ::x1, ::y1+(::rowCount)*(::height+1)+1, IIf(::lAdjRight, ::x2, x), ::y1+(::rowCount)*(::height+1)+1 )
+      hwg_DrawLine( hDC, ::x1, ::y1+(::rowCount)*(::height+1)+1, IIf(::lAdjRight, ::x2, x), ::y1+(::rowCount)*(::height+1)+1 )
       oPen:Release()
    ENDIF
 
@@ -879,7 +879,7 @@ Local aCores
             hBReal := IIf(::aColumns[fif]:brush != NIL, ;
                          ::aColumns[fif]:brush:handle,   ;
                          oLineBrush:handle )
-            FillRect( hDC, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-IIf(::lSep3d, 2, 1)-1,::y1+(::height+1)*nstroka, hBReal )
+            hwg_FillRect( hDC, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-IIf(::lSep3d, 2, 1)-1,::y1+(::height+1)*nstroka, hBReal )
             IF !lClear
                IF ::aColumns[fif]:aBitmaps != Nil .AND. !Empty(::aColumns[fif]:aBitmaps)
                   FOR j := 1 TO Len(::aColumns[fif]:aBitmaps)
@@ -889,13 +889,13 @@ Local aCores
                            y1 := 0
                            bh := ::height
                            bw := Int( ob:nWidth * ( ob:nHeight / ::height ) )
-                           DrawBitmap( hDC, ob:handle,, x, y1+::y1+(::height+1)*(nstroka-1)+1, bw, bh )
+                           hwg_DrawBitmap( hDC, ob:handle,, x, y1+::y1+(::height+1)*(nstroka-1)+1, bw, bh )
                         /*   
                         ELSE
                            y1 := Int( (::height-ob:nHeight)/2 )
                            bh := ob:nHeight
                            bw := ob:nWidth
-                           DrawTransparentBitmap( hDC, ob:handle, x, y1+::y1+(::height+1)*(nstroka-1)+1 )
+                           hwg_DrawTransparentBitmap( hDC, ob:handle, x, y1+::y1+(::height+1)*(nstroka-1)+1 )
                         ENDIF
                         */
                         EXIT

@@ -154,11 +154,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          /*
          IF ::brush != NIL
             IF !hb_IsNumeric(::brush)
-               FillRect(wParam, 0, 0, ::nWidth, ::nHeight, ::brush:handle)
+               hwg_FillRect(wParam, 0, 0, ::nWidth, ::nHeight, ::brush:handle)
             ENDIF
             RETURN 1
          ELSE
-            FillRect(wParam, 0, 0, ::nWidth, ::nHeight, COLOR_3DFACE + 1)
+            hwg_FillRect(wParam, 0, 0, ::nWidth, ::nHeight, COLOR_3DFACE + 1)
             RETURN 1
          ENDIF
          */
@@ -242,10 +242,10 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
       aCoors := hwg_GetClientRect(::handle)
       IF ::brush != NIL
          IF !hb_IsNumeric(::brush)
-            FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], ::brush:handle)
+            hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], ::brush:handle)
          ENDIF
       ELSE
-         FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], COLOR_3DFACE + 1)
+         hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], COLOR_3DFACE + 1)
       ENDIF
    ENDIF
    ::nrePaint := -1
@@ -255,9 +255,9 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
          oPenGray := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
 
          hwg_SelectObject(hDC, oPenLight:handle)
-         DrawLine(hDC, 0, 1, aCoors[3] - 1, 1)
+         hwg_DrawLine(hDC, 0, 1, aCoors[3] - 1, 1)
          hwg_SelectObject(hDC, oPenGray:handle)
-         DrawLine(hDC, 0, 0, aCoors[3] - 1, 0)
+         hwg_DrawLine(hDC, 0, 0, aCoors[3] - 1, 0)
          oPenGray:Release()
          oPenLight:Release()
       ENDIF

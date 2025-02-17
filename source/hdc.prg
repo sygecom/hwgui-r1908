@@ -84,11 +84,11 @@ METHOD NEW() CLASS HDC
    RETURN Self
 
 METHOD MOVETO(x1, y1) CLASS HDC
-   MoveTo(::m_hDC, x1, y1)
+   hwg_MoveTo(::m_hDC, x1, y1)
    RETURN Self
 
 METHOD LINETO(x1, y1) CLASS HDC
-   LineTo(::m_hDC, x1, y1)
+   hwg_LineTo(::m_hDC, x1, y1)
    RETURN Self
 
 METHOD Attach(hDC) CLASS HDC
@@ -154,7 +154,7 @@ METHOD DrawText(strText, Rect, dwFlags) CLASS HDC
 
 METHOD fillrect(lpRect, clr) CLASS HDC
 
-   FillRect(::m_hDC, lpRect[1], lpRect[2], lpRect[3], lpRect[4], clr)
+   hwg_FillRect(::m_hDC, lpRect[1], lpRect[2], lpRect[3], lpRect[4], clr)
 
    RETURN NIL
 
@@ -269,7 +269,7 @@ METHOD SetArcDirection(nArcDirection)
 
 
 METHOD PIE(arect, apt1, apt2)
-   RETURN PIE(::m_hdc, arect[1], arect[2], arect[3], arect[4], apt1[1], apt1[2], apt2[1], apt2[2])
+   RETURN hwg_Pie(::m_hdc, arect[1], arect[2], arect[3], arect[4], apt1[1], apt1[2], apt2[1], apt2[2])
 
 METHOD SetROP2(nDrawMode)
 

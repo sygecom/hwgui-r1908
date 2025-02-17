@@ -107,10 +107,10 @@ Local hDC := GetDC( ::handle )
 
    IF ::oImage != Nil
       IF ::nZoom == Nil
-         DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
+         hwg_DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
                ::nOffsetV, ::nWidth, ::nHeight )
       ELSE
-         DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
+         hwg_DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
                ::nOffsetV, ::oImage:nWidth*::nZoom, ::oImage:nHeight*::nZoom )
       ENDIF
    ENDIF

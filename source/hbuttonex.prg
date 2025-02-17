@@ -813,7 +813,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       IF !::lFlat
          hb_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL)
       ELSEIF bIsDisabled
-         FillRect(dc, itemRect[1] + 1, itemRect[2] + 1, itemRect[3] - 1, itemRect[4] - 1, GetSysColorBrush(GetSysColor(COLOR_BTNFACE)))
+         hwg_FillRect(dc, itemRect[1] + 1, itemRect[2] + 1, itemRect[3] - 1, itemRect[4] - 1, GetSysColorBrush(GetSysColor(COLOR_BTNFACE)))
       ELSEIF ::bMouseOverButton .OR. bIsFocused
          hb_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL) // + PBS_DEFAULTED
       ENDIF
@@ -826,7 +826,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       ENDIF
       crColor := GetSysColor(COLOR_BTNFACE)
       brBackground := HBRUSH():Add(crColor)
-      FillRect(dc, itemRect, brBackground:handle)
+      hwg_FillRect(dc, itemRect, brBackground:handle)
 
       IF bIsPressed
          brBtnShadow := HBRUSH():Add(GetSysColor(COLOR_BTNSHADOW))
@@ -935,7 +935,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
          captionRect[3] -= ::PictureMargin
       ENDIF
       IF !bIsDisabled
-          DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
+          hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ELSE
           DrawGrayBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ENDIF
@@ -1058,27 +1058,27 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
                SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_IN])
                fillRect := COPYRECT(itemRect)
                IF bIsPressed
-                  DrawButton(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], 6)
+                  hwg_DrawButton(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], 6)
                ENDIF
                InflateRect(@fillRect, - 2, - 2)
-               FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_IN]:handle)
+               hwg_FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_IN]:handle)
             ELSE
                IF bIsFocused
                   SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_FOCUS])
                   SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_FOCUS])
                   fillRect := COPYRECT(itemRect)
                   InflateRect(@fillRect, - 2, - 2)
-                  FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_FOCUS]:handle)
+                  hwg_FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_FOCUS]:handle)
                ELSE
                   SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_OUT])
                   SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_OUT])
                   fillRect := COPYRECT(itemRect)
                   InflateRect(@fillRect, - 2, - 2)
-                  FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_OUT]:handle)
+                  hwg_FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_OUT]:handle)
                ENDIF
             ENDIF
             IF hb_IsNumeric(::hbitmap) .AND. ::m_bDrawTransparent
-               DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
+               hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
             ELSEIF hb_IsNumeric(::hbitmap) .OR. hb_IsNumeric(::hicon)
                DrawTheIcon(::handle, dc, bHasTitle, @itemRect1, @captionRect1, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
             ENDIF

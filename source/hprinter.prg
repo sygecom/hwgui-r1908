@@ -207,9 +207,9 @@ METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
       hwg_SelectObject(::hDC, oBrush:handle)
    ENDIF
    IF ::lmm
-      Box(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
+      hwg_Box(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
    ELSE
-      Box(::hDC, x1, y1, x2, y2)
+      hwg_Box(::hDC, x1, y1, x2, y2)
    ENDIF
 
    RETURN NIL
@@ -220,9 +220,9 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
       hwg_SelectObject(::hDC, oPen:handle)
    ENDIF
    IF ::lmm
-      DrawLine(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
+      hwg_DrawLine(::hDC, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2)
    ELSE
-      DrawLine(::hDC, x1, y1, x2, y2)
+      hwg_DrawLine(::hDC, x1, y1, x2, y2)
    ENDIF
 
    RETURN NIL
@@ -264,9 +264,9 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
 METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
 
    IF ::lmm
-      DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), ::nHRes * x1, ::nVRes * y1, ::nHRes * (x2 - x1 + 1), ::nVRes * (y2 - y1 + 1))
+      hwg_DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), ::nHRes * x1, ::nVRes * y1, ::nHRes * (x2 - x1 + 1), ::nVRes * (y2 - y1 + 1))
    ELSE
-      DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), x1, y1, x2 - x1 + 1, y2 - y1 + 1)
+      hwg_DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), x1, y1, x2 - x1 + 1, y2 - y1 + 1)
    ENDIF
 
    RETURN NIL
@@ -719,7 +719,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    pps := hwg_DefinePaintStru()
    hDC := hwg_BeginPaint(oWnd:handle, pps)
-   aArray := GetPPSRect(pps)
+   aArray := hwg_GetPPSRect(pps)
    // tracelog("PPS" + Str(aArray[1]) + Str(aArray[2]) + Str(aArray[3]) + Str(aArray[4]))
 
    IF (aArray[1] == 0 .AND. aArray[2] == 0)  // IF WHOLE AREA
@@ -740,26 +740,26 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
          IF ::NeedsRedraw
             // Draw the canvas background (gray)
-            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[4], BrushBackground)
-            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[1], rect[4], BrushBorder)
-            FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[2], BrushBorder)
+            hwg_FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[4], BrushBackground)
+            hwg_FillRect(::memDC:m_hDC, rect[1], rect[2], rect[1], rect[4], BrushBorder)
+            hwg_FillRect(::memDC:m_hDC, rect[1], rect[2], rect[3], rect[2], BrushBorder)
             // Draw the PAPER background (white)
-            FillRect(::memDC:m_hDC, ::x1 - 1, ::y1 - 1, ::x2 + 1, ::y2 + 1, BrushLine)
-            FillRect(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2, BrushWhite)
+            hwg_FillRect(::memDC:m_hDC, ::x1 - 1, ::y1 - 1, ::x2 + 1, ::y2 + 1, BrushLine)
+            hwg_FillRect(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2, BrushWhite)
             // Draw the actual printer data
             PlayEnhMetafile(::memDC:m_hDC, ::aMeta[::nCurrPage], ::x1, ::y1, ::x2, ::y2)
             // Draw
-            // Rectangle(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2)
+            // hwg_Rectangle(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2)
 
-            FillRect(::memDC:m_hDC, ::x2, ::y1 + 2, ::x2 + 1, ::y2 + 2, BrushBlack)
-            FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 1, ::x2 + 2, ::y2 + 2, BrushShadow)
-            FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 2, ::x2 + 2, ::y2 + 2, BrushLine)
-            FillRect(::memDC:m_hDC, ::x2 + 2, ::y1 + 2, ::x2 + 3, ::y2 + 2, BrushShadow)
+            hwg_FillRect(::memDC:m_hDC, ::x2, ::y1 + 2, ::x2 + 1, ::y2 + 2, BrushBlack)
+            hwg_FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 1, ::x2 + 2, ::y2 + 2, BrushShadow)
+            hwg_FillRect(::memDC:m_hDC, ::x2 + 1, ::y1 + 2, ::x2 + 2, ::y2 + 2, BrushLine)
+            hwg_FillRect(::memDC:m_hDC, ::x2 + 2, ::y1 + 2, ::x2 + 3, ::y2 + 2, BrushShadow)
 
 
-            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2, ::x2, ::y2 + 2, BrushBlack)
-            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 1, ::x2 + 1, ::y2 + 2, BrushLine)
-            FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 2, ::x2 + 2, ::y2 + 3, BrushShadow)
+            hwg_FillRect(::memDC:m_hDC, ::x1 + 2, ::y2, ::x2, ::y2 + 2, BrushBlack)
+            hwg_FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 1, ::x2 + 1, ::y2 + 2, BrushLine)
+            hwg_FillRect(::memDC:m_hDC, ::x1 + 2, ::y2 + 2, ::x2 + 2, ::y2 + 3, BrushShadow)
             ::NeedsRedraw := .F.
          ENDIF
          // tracelog("bitblt")
@@ -777,7 +777,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
    #if 0
       // Draws a line from upper left to bottom right of the PAPER
       // used to check for PAPER dimension...
-      DrawLine(hDC, ::x1, ::y1, ::x2, ::y2)
+      hwg_DrawLine(hDC, ::x1, ::y1, ::x2, ::y2)
    #endif
 
    hwg_EndPaint(oWnd:handle, pps)

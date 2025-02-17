@@ -210,14 +210,14 @@ METHOD Paint( lpdis ) CLASS HControlGen
       octrl2 := asels[i]
       IF oCtrl2 != Nil .AND. ::handle == oCtrl2:handle
         SelectObject( hDC, oPenSel:handle )
-        Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
+        hwg_Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
       ENDIF
     next
   ELSE // :LEFB
     oCtrl := GetCtrlSelected( HFormGen():oDlgSelected )
     IF oCtrl != Nil .AND. ::handle == oCtrl:handle
       SelectObject( hDC, oPenSel:handle )
-      Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
+      hwg_Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
     ENDIF
   ENDIF // :END LFB
 
@@ -1143,7 +1143,7 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
     ypos := yf
   ENDIF
   hwg_InvalidateRect( odlg:handle, 1, xPos+1, yPos+1,  xPos+2,yPos+2 )
-  Rectangle( hDC, xi, yi, xPos+1,yPos+1 )
+  hwg_Rectangle( hDC, xi, yi, xPos+1,yPos+1 )
   hwg_InvalidateRect( odlg:handle, 1,  xi+1, yi+1,  xPos,yPos )
 
  RETURN Nil

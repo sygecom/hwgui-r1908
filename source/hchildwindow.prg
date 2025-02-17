@@ -388,16 +388,16 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
    IF oWnd:oBmp != NIL .AND. oWnd:type != WND_MDI
       oWndArea := IIf(oWnd:type != WND_MAIN, oWnd:oClient, oWnd)
       IF oWnd:lBmpCenter
-         CenterBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle, , oWnd:nBmpClr)
+         hwg_CenterBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle, , oWnd:nBmpClr)
       ELSE
-         SpreadBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle)
+         hwg_SpreadBitmap(wParam, oWndArea:handle, oWnd:oBmp:handle)
       ENDIF
       RETURN 1
    ELSEIF oWnd:type != WND_MDI //.AND. oWnd:type != WND_MAIN
       aCoors := hwg_GetClientRect(oWnd:handle)
       IF oWnd:brush != NIL
          IF !hb_IsNumeric(oWnd:brush)
-            FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oWnd:brush:handle)
+            hwg_FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oWnd:brush:handle)
             IF !Empty(oWnd:Screen) .AND. hwg_SelfFocus(oWnd:handle, oWnd:Screen:handle)
                hwg_SetWindowPos(oWnd:handle, HWND_BOTTOM, 0, 0, 0, 0, ;
                   SWP_NOREDRAW + SWP_NOACTIVATE + SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_NOOWNERZORDER)
@@ -405,7 +405,7 @@ STATIC FUNCTION onEraseBk(oWnd, wParam)
             RETURN 1
          ENDIF
       ELSEIF oWnd:Type != WND_MAIN
-         FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, COLOR_3DFACE + 1)
+         hwg_FillRect(wParam, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, COLOR_3DFACE + 1)
          RETURN 1
       ENDIF
 

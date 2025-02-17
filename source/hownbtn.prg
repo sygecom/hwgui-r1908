@@ -411,20 +411,20 @@ METHOD Paint() CLASS HOwnButton
              hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
          ELSE
             //SetBkMode(hdc, 1)
-            DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
+            hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
          ENDIF
       ELSE
          IF ::state == OBTN_NORMAL
             IF !hwg_SelfFocus(::handle, hwg_GetFocus())
                // NORM
-               DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
+               hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
             ELSE
-               DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 1)
+               hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 1)
             ENDIF
          ELSEIF ::state == OBTN_MOUSOVER
-            DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 1)
+            hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 1)
          ELSEIF ::state == OBTN_PRESSED
-            DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 2)
+            hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 2)
          ENDIF
       ENDIF
    ELSE
@@ -435,13 +435,13 @@ METHOD Paint() CLASS HOwnButton
          ELSE //IF ::state != OBTN_NORMAL
             hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
          //ELSE
-         //   DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
+         //   hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
          ENDIF
       ELSE
          IF ::state == OBTN_NORMAL
-            DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 5)
+            hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 5)
          ELSEIF ::state == OBTN_PRESSED
-            DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 6)
+            hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 6)
          ENDIF
       ENDIF
    ENDIF
@@ -464,7 +464,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
 
    aCoors := hwg_GetClientRect(::handle)
    IF !Empty(::brush)
-      FillRect(hDC, aCoors[1] + 2, aCoors[2] + 2, aCoors[3] - 2, aCoors[4] - 2, ::Brush:handle)
+      hwg_FillRect(hDC, aCoors[1] + 2, aCoors[2] + 2, aCoors[3] - 2, aCoors[4] - 2, ::Brush:handle)
    ENDIF
 
    IF ::oBitmap != NIL
@@ -476,12 +476,12 @@ METHOD DrawItems(hDC) CLASS HOwnButton
       y1 := IIf(::yb != NIL .AND. ::yb != 0, ::yb, Round((::nHeight - ::heightb) / 2, 0))
       IF ::lEnabled
          IF ::oBitmap:ClassName() == "HICON"
-            DrawIcon(hDC, ::oBitmap:handle, x1, y1)
+            hwg_DrawIcon(hDC, ::oBitmap:handle, x1, y1)
          ELSE
             IF ::lTransp
-               DrawTransparentBitmap(hDC, ::oBitmap:handle, x1, y1, ::trColor)
+               hwg_DrawTransparentBitmap(hDC, ::oBitmap:handle, x1, y1, ::trColor)
             ELSE
-               DrawBitmap(hDC, ::oBitmap:handle,, x1, y1, ::widthb, ::heightb)
+               hwg_DrawBitmap(hDC, ::oBitmap:handle,, x1, y1, ::widthb, ::heightb)
             ENDIF
          ENDIF
       ELSE

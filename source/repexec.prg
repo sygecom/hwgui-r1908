@@ -492,7 +492,7 @@ FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
          // hwg_WriteLog("hBitmap: " + Str(hBitmap))
          oPrinter:Bitmap(x1, y1, x2, y2,, hBitmap)
          hwg_DeleteObject(hBitmap)
-         // DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
+         // hwg_DrawBitmap(hDC, aItem[ITEM_BITMAP], SRCAND, x1, y1, x2 - x1 + 1, y2 - y1 + 1)
       ENDIF
    #endif
    RETURN NIL

@@ -648,9 +648,9 @@ STATIC FUNCTION onEraseBk(oDlg, hDC)
 
     IF __ObjHasMsg(oDlg, "OBMP") .AND. hb_IsObject(oDlg:oBmp)
        IF oDlg:lBmpCenter
-          CenterBitmap(hDC, oDlg:handle, oDlg:oBmp:handle, , oDlg:nBmpClr)
+          hwg_CenterBitmap(hDC, oDlg:handle, oDlg:oBmp:handle, , oDlg:nBmpClr)
        ELSE
-          SpreadBitmap(hDC, oDlg:handle, oDlg:oBmp:handle)
+          hwg_SpreadBitmap(hDC, oDlg:handle, oDlg:oBmp:handle)
        ENDIF
        RETURN 1
     ELSE
@@ -658,14 +658,14 @@ STATIC FUNCTION onEraseBk(oDlg, hDC)
        aCoors := hwg_GetClientRect(oDlg:handle)
        IF oDlg:brush != NIL
           IF !hb_IsNumeric(oDlg:brush)
-             FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oDlg:brush:handle)
+             hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oDlg:brush:handle)
           ENDIF
        ELSE
-          FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, COLOR_3DFACE + 1)
+          hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, COLOR_3DFACE + 1)
        ENDIF
        RETURN 1
        */
-       //FillRect(hDC, aCoors[1], aCoors[2], aCoors[1] + 1, aCoors[2] + 1)
+       //hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[1] + 1, aCoors[2] + 1)
     ENDIF
 
 RETURN 0

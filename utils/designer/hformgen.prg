@@ -977,25 +977,25 @@ STATIC FUNCTION PaintDlg( oDlg )
    hDC := hwg_BeginPaint( oDlg:handle, pps )
 
    // aCoors := hwg_GetClientRect( oDlg:handle )
-   // FillRect( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], oDlg:brush:handle )
+   // hwg_FillRect( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], oDlg:brush:handle )
    IF oDesigner:lReport
       aCoors := hwg_GetClientRect( oDlg:handle )
       // x2 := x1 + Round( oForm:nPWidth * oForm:nKoeff, 0 ) - 1
       // y2 := y1 + Round( oForm:nPHeight * oForm:nKoeff, 0 ) - 1
       n1cm := Round( oForm:nKoeff * 10, 0 )
 
-      FillRect( hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_3DLIGHT+1 )
-      FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
+      hwg_FillRect( hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_3DLIGHT+1 )
+      hwg_FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
       i := 0
       // SelectObject( hDC,oPenLine:handle )
       SelectObject( hDC,oDlg:oFont:handle )
       oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DLIGHT) )
       DO WHILE i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
          xt := x1+i*n1cm
-         DrawLine( hDC,xt+Round(n1cm/4, 0), 0,xt+Round(n1cm/4, 0), 4 )
-         DrawLine( hDC,xt+Round(n1cm/2, 0), 0,xt+Round(n1cm/2, 0), 8 )
-         DrawLine( hDC,xt+Round(n1cm*3/4, 0), 0,xt+Round(n1cm*3/4, 0), 4 )
-         DrawLine( hDC,xt, 0, xt, 12 )
+         hwg_DrawLine( hDC,xt+Round(n1cm/4, 0), 0,xt+Round(n1cm/4, 0), 4 )
+         hwg_DrawLine( hDC,xt+Round(n1cm/2, 0), 0,xt+Round(n1cm/2, 0), 8 )
+         hwg_DrawLine( hDC,xt+Round(n1cm*3/4, 0), 0,xt+Round(n1cm*3/4, 0), 4 )
+         hwg_DrawLine( hDC,xt, 0, xt, 12 )
          IF i > 0
             DrawText( hDC,LTrim(Str(i+oForm:nXOffset/10, 2)),xt-15, 12,xt+15,TOP_INDENT-5,DT_CENTER )
          ENDIF
@@ -1004,16 +1004,16 @@ STATIC FUNCTION PaintDlg( oDlg )
       i := 0
       DO WHILE i*n1cm < (aCoors[4]-aCoors[2]-TOP_INDENT)
          yt := y1+i*n1cm
-         DrawLine( hDC, 0,yt+Round(n1cm/4, 0), 4,yt+Round(n1cm/4, 0) )
-         DrawLine( hDC, 0,yt+Round(n1cm/2, 0), 8,yt+Round(n1cm/2, 0) )
-         DrawLine( hDC, 0,yt+Round(n1cm*3/4,0), 4,yt+Round(n1cm*3/4, 0) )
-         DrawLine( hDC, 0,yt, 12,yt )
+         hwg_DrawLine( hDC, 0,yt+Round(n1cm/4, 0), 4,yt+Round(n1cm/4, 0) )
+         hwg_DrawLine( hDC, 0,yt+Round(n1cm/2, 0), 8,yt+Round(n1cm/2, 0) )
+         hwg_DrawLine( hDC, 0,yt+Round(n1cm*3/4,0), 4,yt+Round(n1cm*3/4, 0) )
+         hwg_DrawLine( hDC, 0,yt, 12,yt )
          IF i > 0
             DrawText( hDC,LTrim(Str(i+oForm:nYOffset/10, 2)), 12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
          ENDIF
          i++
       ENDDO
-      // FillRect( hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1 )
+      // hwg_FillRect( hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1 )
       SetScrollInfo( oDlg:handle, SB_HORZ, 1, oForm:nXOffset/10+1, 1, Round((oForm:nPWidth-(aCoors[3]-LEFT_INDENT)/oForm:nKoeff)/10, 0)+1 )
       SetScrollInfo( oDlg:handle, SB_VERT, 1, oForm:nYOffset/10+1, 1, Round((oForm:nPHeight-(aCoors[4]-TOP_INDENT)/oForm:nKoeff)/10, 0)+1 )
    ELSE
@@ -1030,10 +1030,10 @@ STATIC FUNCTION PaintDlg( oDlg )
           SelectObject( hDC,oPenDivider:handle )
           // :END LFB
           for i := nLeft+oDesigner:nPixelGrid to nRight step oDesigner:nPixelGrid
-              DrawLine( hDC, i, nTop,i, nBottom )  //v
+              hwg_DrawLine( hDC, i, nTop,i, nBottom )  //v
           next
           for i := nTop+oDesigner:nPixelGrid to nBottom step oDesigner:nPixelGrid
-             DrawLine( hDC, nLeft+2, i, nRight, i )    //h
+             hwg_DrawLine( hDC, nLeft+2, i, nRight, i )    //h
           next
           // : LFB
           SetROP2(hDC, 13)
@@ -1044,9 +1044,9 @@ STATIC FUNCTION PaintDlg( oDlg )
 
       IF oCtrl != Nil .AND. oCtrl:nTop >= 0
              // : LFB tirei a borda do objeto selecionado
-         //Rectangle( hDC, oCtrl:nLeft-3, oCtrl:nTop-3, ;
+         //hwg_Rectangle( hDC, oCtrl:nLeft-3, oCtrl:nTop-3, ;
          //            oCtrl:nLeft+oCtrl:nWidth+2, oCtrl:nTop+oCtrl:nHeight+2 )
-         Rectangle( hDC, oCtrl:nLeft-1, oCtrl:nTop-1, ;
+         hwg_Rectangle( hDC, oCtrl:nLeft-1, oCtrl:nTop-1, ;
                      oCtrl:nLeft+oCtrl:nWidth, oCtrl:nTop+oCtrl:nHeight )
 
       ENDIF
@@ -1060,7 +1060,7 @@ STATIC FUNCTION PaintDlg( oDlg )
         DO WHILE x1 < (aCoors[3]-aCoors[1])
           y1 := n1cm
           DO WHILE y1 < (aCoors[4]-aCoors[2])
-            DrawLine( hDC,x1,y1,x1+1,y1+1 )
+            hwg_DrawLine( hDC,x1,y1,x1+1,y1+1 )
        y1 += n1cm
           ENDDO
           x1 += n1cm

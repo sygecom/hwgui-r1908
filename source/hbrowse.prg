@@ -1905,8 +1905,8 @@ ENDIF
    ::y2 := aCoors[4] // - IIf(::nFootRows > 0, ::nFootHeight*::nFootRows, 0)
    //--::xAdjRight := ::x2
    IF ::lRepaintBackground
-      //FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::x2, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
-      FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::xAdjRight, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
+      //hwg_FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::x2, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
+      hwg_FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::xAdjRight, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
       ::lRepaintBackground := .F.
    ENDIF
 
@@ -2074,7 +2074,7 @@ ENDIF
       // fill the remaining canvas area with background color if needed
       nRows := cursor_row - 1
       IF nRows < ::rowCount .OR. (nRows * (::height - 1) + ::nHeadHeight + ::nFootHeight) < ::nHeight
-       //  FillRect(hDC, ::x1, ::y1 + (::height + 1) * nRows + 1, ::x2, ::y2, ::brush:handle)
+       //  hwg_FillRect(hDC, ::x1, ::y1 + (::height + 1) * nRows + 1, ::x2, ::y2, ::brush:handle)
       ENDIF
       Eval(::bGoTo, Self, tmp)
    ENDIF
@@ -2183,7 +2183,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
 
    IF ::hTheme == NIL
       hwg_SelectObject(hDC, s_oPen64:handle)
-      Rectangle(hDC,;
+      hwg_Rectangle(hDC,;
                ::x1 - ::nShowMark - ::nDeleteMark, ;
                ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x2, ;
@@ -2228,15 +2228,15 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       IF !oColumn:lHide
        IF ::lDispHead .AND. !::lAppMode
          IF oColumn:cGrid == NIL
-          //-  DrawButton(hDC, x - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xSize - 1, ::y1 + 1, 1)
+          //-  hwg_DrawButton(hDC, x - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xSize - 1, ::y1 + 1, 1)
             IF xsize != xsizeMax
-                DrawButton(hDC, x + xsize, ::y1 - ::nHeadHeight * ::nHeadRows, x + xsizeMax, ::y1 + 1, 0)
+                hwg_DrawButton(hDC, x + xsize, ::y1 - ::nHeadHeight * ::nHeadRows, x + xsizeMax, ::y1 + 1, 0)
             ENDIF
          ELSE
             // Draws a grid to the NWSE coordinate...
-          //-  DrawButton(hDC, x - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xSize - 1, ::y1 + 1, 0)
+          //-  hwg_DrawButton(hDC, x - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xSize - 1, ::y1 + 1, 0)
             IF xSize != xSizeMax
-          //-    DrawButton(hDC, x + xsize - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xsizeMax - 1, ::y1 + 1, 0)
+          //-    hwg_DrawButton(hDC, x + xsize - 1, ::y1 - ::nHeadHeight * ::nHeadRows, x + xsizeMax - 1, ::y1 + 1, 0)
             ENDIF
             IF oPenHdr == NIL
                oPenHdr := HPen():Add(BS_SOLID, 1, 0)
@@ -2246,16 +2246,16 @@ METHOD HeaderOut(hDC) CLASS HBrowse
             FOR nLine := 1 TO ::nHeadRows
                cNWSE := hb_tokenGet(@cStr, nLine, ";")
                IF At("S", cNWSE) != 0
-                  DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine), x + xSize - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
+                  hwg_DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine), x + xSize - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
                ENDIF
                IF At("N", cNWSE) != 0
-                  DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1), x + xSize - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1))
+                  hwg_DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1), x + xSize - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1))
                ENDIF
                IF At("E", cNWSE) != 0
-                  DrawLine(hDC, x + xSize - 2, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) + 1, x + xSize - 2, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
+                  hwg_DrawLine(hDC, x + xSize - 2, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) + 1, x + xSize - 2, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
                ENDIF
                IF At("W", cNWSE) != 0
-                  DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) + 1, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
+                  hwg_DrawLine(hDC, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) + 1, x - 1, ::y1 - (::nHeadHeight) * (::nHeadRows - nLine))
                ENDIF
             NEXT
             hwg_SelectObject(hDC, oPen:handle)
@@ -2274,7 +2274,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
              hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, NIL)
              SetBkMode(hDC, 1)
          ELSE
-             DrawButton(hDC, x, ;
+             hwg_DrawButton(hDC, x, ;
                  ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                  x + xSize, ;
                  ::y1, ;
@@ -2297,13 +2297,13 @@ METHOD HeaderOut(hDC) CLASS HBrowse
             oBmpSort := IIf(oColumn:SortMark == 1, HBitmap():AddStandard(OBM_UPARROWD), HBitmap():AddStandard(OBM_DNARROWD))
             captionRect[2] := (::nHeadHeight + 17) / 2 - 17
             IF oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE  ==  DT_RIGHT .OR. xSize < aTxtSize[1] + nMd
-               DrawTransparentBitmap(hDC, oBmpSort:handle, captionRect[1] + (captionRect[3] - captionRect[1]), captionRect[2] + 2, ,)
+               hwg_DrawTransparentBitmap(hDC, oBmpSort:handle, captionRect[1] + (captionRect[3] - captionRect[1]), captionRect[2] + 2, ,)
             ELSEIF oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE  ==  DT_CENTER
                CaptionRect[1] := captionRect[1] + (captionRect[3] - captionRect[1] + aTxtSize[1]) / 2  +  ;
                    MIN((x + xSize - (1 + ::aMargin[2])) - (captionRect[1] + (captionRect[3] - captionRect[1] + aTxtSize[1]) / 2) - 16, 8)
-               DrawBitmap(hDC, oBmpSort:handle,, captionRect[1] - 1, captionRect[2], ,)
+               hwg_DrawBitmap(hDC, oBmpSort:handle,, captionRect[1] - 1, captionRect[2], ,)
             ELSE
-               DrawTransparentBitmap(hDC, oBmpSort:handle, captionRect[1] - nMe, captionRect[2], ,)
+               hwg_DrawTransparentBitmap(hDC, oBmpSort:handle, captionRect[1] - nMe, captionRect[2], ,)
             ENDIF
          ENDIF
        ENDIF
@@ -2335,23 +2335,23 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                ::x1 + 1, ::y1 + 1}, NIL)
       ELSE
          hwg_SelectObject(hDC, s_oPen64:handle)
-         Rectangle(hDC, ::x1 - xSize -1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
+         hwg_Rectangle(hDC, ::x1 - xSize -1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x1 - 1, ::y1)
-         DrawButton(hDC, ::x1 - xSize - 0, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
+         hwg_DrawButton(hDC, ::x1 - xSize - 0, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x1 - 1, ::y1, 1)
       ENDIF
    ENDIF
 
    IF ::hTheme != NIL
       hwg_SelectObject(hDC, s_oPen64:handle)
-      Rectangle(hDC, ;
+      hwg_Rectangle(hDC, ;
                ::x1 - ::nShowMark - ::nDeleteMark, ;
                ::y1, ;//- (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x2, ;
                ::y1)
    ENDIF
    IF !::lAdjRight
-      DrawLine(hDC, ::xAdjRight, ::y1 - 1, ::x2, ::y1 - 1)
+      hwg_DrawLine(hDC, ::xAdjRight, ::y1 - 1, ::x2, ::y1 - 1)
    ENDIF
    SetBkColor(hDC, oldBkColor)
    IF ::headColor != NIL
@@ -2362,8 +2362,8 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    ENDIF
    IF ::lResizing .AND. s_xDragMove > 0
       hwg_SelectObject(hDC, s_oPen64:handle)
-      //Rectangle(hDC, s_xDragMove, 1, s_xDragMove, 1 + (::nheight + 1))
-      DrawLine(hDC, s_xDragMove, 1, s_xDragMove, (::nHeadHeight * ::nHeadRows) + ::nyHeight + 1 + (::rowCount * (::height + 1 + ::aMargin[3])))
+      //hwg_Rectangle(hDC, s_xDragMove, 1, s_xDragMove, 1 + (::nheight + 1))
+      hwg_DrawLine(hDC, s_xDragMove, 1, s_xDragMove, (::nHeadHeight * ::nHeadRows) + ::nyHeight + 1 + (::rowCount * (::height + 1 + ::aMargin[3])))
    ENDIF
    IF ::lDispSep
       hwg_DeleteObject(oPen)
@@ -2416,10 +2416,10 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
 
    x := ::x1 //- IIf(::lShowMark .AND. !::lDeleteMark, 1, 0)
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
-   FillRect(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * nRowsfill + 1, ::x2, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
+   hwg_FillRect(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * nRowsfill + 1, ::x2, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)
    // SEPARATOR HORIZONT
    FOR i := 1 TO nRowsFill
-      DrawLine(hDC, ::x1 - ::nDeleteMark, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, ::x2), ::y1 + (::height + 1) * i)
+      hwg_DrawLine(hDC, ::x1 - ::nDeleteMark, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, ::x2), ::y1 + (::height + 1) * i)
    NEXT
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
@@ -2433,15 +2433,15 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
         IF ::lDispSep .AND. x > ::x1
            IF ::lSep3d
               hwg_SelectObject(hDC, oPenLight:handle)
-              //DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRows)
-              DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
+              //hwg_DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRows)
+              hwg_DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
               hwg_SelectObject(hDC, oPen:handle)
-              DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * (nRowsFill))
-              //DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * nRows)
+              hwg_DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * (nRowsFill))
+              //hwg_DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * nRows)
            ELSE
                hwg_SelectObject(hDC, oPen:handle)
-               DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
-               //DrawLine(hDC, x - 0, ::y1 + 1, x - 0, ::y1 + (::height + 1) * nRows)
+               hwg_DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * (nRowsFill))
+               //hwg_DrawLine(hDC, x - 0, ::y1 + 1, x - 0, ::y1 + (::height + 1) * nRows)
            ENDIF
         ELSE
            // SEPARATOR VERTICAL
@@ -2451,13 +2451,13 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
                  // horizontal
                  hwg_SelectObject(hDC, HPen():Add(PS_SOLID, 1, bColor):handle)
                  FOR i := 1 TO nRowsFill
-                    DrawLine(hDC, x, ::y1 + (::height + 1) * i, x + xsize, ::y1 + (::height + 1) * i)
+                    hwg_DrawLine(hDC, x, ::y1 + (::height + 1) * i, x + xsize, ::y1 + (::height + 1) * i)
                  NEXT
               ENDIF
            ENDIF
            IF x > ::x1 - IIf(::lDeleteMark, 1, 0)
               hwg_SelectObject(hDC, oPen:handle)
-              DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRowsFill)
+              hwg_DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRowsFill)
            ENDIF
         ENDIF
       ELSE
@@ -2480,21 +2480,21 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
     IF !::lAdjRight
        IF ::lSep3d
          hwg_SelectObject(hDC, oPenLight:handle)
-         DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
+         hwg_DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
          hwg_SelectObject(hDC, oPen:handle)
-         DrawLine(hDC, x - 2, ::y1 - (::height * ::nHeadRows), x - 2, ::y1 + (::height + 1) * (nRowsFill))
+         hwg_DrawLine(hDC, x - 2, ::y1 - (::height * ::nHeadRows), x - 2, ::y1 + (::height + 1) * (nRowsFill))
        ELSE
-          DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
+          hwg_DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
        ENDIF
-      // DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
+      // hwg_DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * (nRowsFill))
 
     ELSE
-       DrawLine(hDC, x, ::y1 - (::height * ::nHeadRows), x, ::y1 + (::height + 1) * (nRowsFill))
+       hwg_DrawLine(hDC, x, ::y1 - (::height * ::nHeadRows), x, ::y1 + (::height + 1) * (nRowsFill))
     ENDIF
     /*
    //IF ::lDispSep
       FOR i := 1 TO nRows
-         DrawLine(hDC, ::x1, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, x), ::y1 + (::height + 1) * i)
+         hwg_DrawLine(hDC, ::x1, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, x), ::y1 + (::height + 1) * i)
       NEXT
    //ENDIF
    */
@@ -2575,8 +2575,8 @@ METHOD FooterOut(hDC) CLASS HBrowse
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               SetBkMode(hDC, 1)
            ELSE
-              DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize, ::y2, 0)
-              DrawLine(hDC, x, ::y2, x + xSize, ::y2)
+              hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize, ::y2, 0)
+              hwg_DrawLine(hDC, x, ::y2, x + xSize, ::y2)
            ENDIF
         ELSE
            IF ::hTheme != NIL
@@ -2584,12 +2584,12 @@ METHOD FooterOut(hDC) CLASS HBrowse
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               SetBkMode(hDC, 1)
            ELSE
-              DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1, 0)
+              hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1, 0)
            ENDIF
         ENDIF
 
         IF oBrush != NIL
-           FillRect(hDC, x, ::y2 - nPixelFooterHeight + 1, ;
+           hwg_FillRect(hDC, x, ::y2 - nPixelFooterHeight + 1, ;
                 x + xSize - 1, ::y2, oBrush:handle)
         ELSE
            oldBkColor := SetBkColor(hDC, GetSysColor(COLOR_3DFACE))
@@ -2613,7 +2613,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
         ENDIF
 // Draw footer separator
         IF ::lDispSep .AND. x >= ::x1
-           DrawLine(hDC, x + xSize - 1, nY + 3, x + xSize - 1, ::y2 - 4)
+           hwg_DrawLine(hDC, x + xSize - 1, nY + 3, x + xSize - 1, ::y2 - 4)
         ENDIF
       ELSE
          xSize := 0
@@ -2631,10 +2631,10 @@ METHOD FooterOut(hDC) CLASS HBrowse
    ENDDO
 
    IF ::lDispSep
-      //DrawLine(hDC, ::x1, nY, IIf(::lAdjRight, ::x2, x), nY)
-      //DrawLine(hDC, ::x1, nY + 1, IIf(::lAdjRight, ::x2, x), nY + 1)
+      //hwg_DrawLine(hDC, ::x1, nY, IIf(::lAdjRight, ::x2, x), nY)
+      //hwg_DrawLine(hDC, ::x1, nY + 1, IIf(::lAdjRight, ::x2, x), nY + 1)
       IF HWG_BITAND(::style, WS_HSCROLL) != 0
-          DrawLine(hDC, ::x1, ::y2 - 1, IIf(::lAdjRight, ::x2, x), ::y2 - 1)
+          hwg_DrawLine(hDC, ::x1, ::y2 - 1, IIf(::lAdjRight, ::x2, x), ::y2 - 1)
       ENDIF
       oPen:Release()
    ENDIF
@@ -2645,7 +2645,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
          aItemRect := {::x1 - xSize, nY, ::x1 - 1, ::y2 + 1}
          hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
       ELSE
-        DrawButton(hDC, ::x1 - xSize, nY, ;
+        hwg_DrawButton(hDC, ::x1 - xSize, nY, ;
                ::x1 - 1, ::y2, 1)
       ENDIF
    ENDIF
@@ -2698,7 +2698,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       ::nPaintCol := IIf(::freeze > 0, 1, ::nLeftCol)
       ::nPaintRow := nRow
       IF ::lDeleteMark
-         FillRect(hDC, ::x1 - ::nDeleteMark - 0, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
+         hwg_FillRect(hDC, ::x1 - ::nDeleteMark - 0, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                         ::x1 - 1, ::y1 + (::height + 1) * ::nPaintRow, IIf(Deleted(), GetStockObject(7), GetStockObject(0))) //::brush:handle))
       ENDIF
       IF ::lShowMark
@@ -2709,16 +2709,16 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                        ::x1 - ::nDeleteMark, ;
                        ::y1 + (::height + 1) * ::nPaintRow + 1}, NIL)
           ELSE
-             DrawButton(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 0,;
+             hwg_DrawButton(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 0,;
                          ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                          ::x1 - ::nDeleteMark - 1, ; //IIf(::lDeleteMark, -1, -2), ;
                          ::y1 + (::height + 1) * ::nPaintRow + 1, 1)
              hwg_SelectObject(hDC, s_oPen64:handle)
-             Rectangle(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * (::nPaintRow - 1), ;
+             hwg_Rectangle(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * (::nPaintRow - 1), ;
                         ::x1  - ::nDeleteMark - 1, ::y1 + (::height + 1) * ::nPaintRow - 0) //, IIf(Deleted(), GetStockObject(7), ::brush:handle))
           ENDIF
           IF lSelected
-             DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1,;
+             hwg_DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1,;
                           (::y1 + (::height + 1) * (::nPaintRow - 1)) + ;
                           ((::y1 + (::height + 1) * (::nPaintRow)) - (::y1 + (::height + 1) * (::nPaintRow - 1))) / 2 - 6)
              IF ::HighlightStyle == 2 .OR. ((::HighlightStyle == 0 .AND. hwg_SelfFocus(::handle)) .OR. ;
@@ -2728,7 +2728,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                    oPen := HPen():Add(0, 1, ::bcolorSel)
                    hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
                    hwg_SelectObject(hDC, oPen:handle)
-                   RoundRect(hDC, ::x1, ;
+                   hwg_RoundRect(hDC, ::x1, ;
                                  ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                                  ::xAdjRight - 2,;  //::x2 - 1, ;
                                  ::y1 + (::height + 1) * ::nPaintRow, 0, 0)
@@ -2782,12 +2782,12 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                           ::aColumns[::nPaintCol]:brush:handle, oLineBrush:handle)
              ENDIF
              // Fill background color of a cell
-             FillRect(hDC, x, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
+             hwg_FillRect(hDC, x, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                       x + xSize - IIf(::lSep3d, 2, 1), ::y1 + (::height + 1) * ::nPaintRow, hBReal)
              IF xSize != xSizeMax
                 // !adjright
                 hBReal := HBrush():Add(16448764):handle
-                FillRect(hDC, x + xsize, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
+                hwg_FillRect(hDC, x + xsize, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                        x + xSizeMax - IIf(::lSep3d, 2, 1), ::y1 + (::height + 1) * ::nPaintRow, hBReal) //::brush:handle)
              ENDIF
              IF !lClear
@@ -2799,10 +2799,10 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                            y1 := 0
                            bh := ::height
                            bw := Int(ob:nWidth * (ob:nHeight / ::height))
-                           DrawBitmap(hDC, ob:handle,, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, bw, bh)
+                           hwg_DrawBitmap(hDC, ob:handle,, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, bw, bh)
                         ELSE
                            y1 := Int((::height - ob:nHeight) / 2)
-                           DrawTransparentBitmap(hDC, ob:handle, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1)
+                           hwg_DrawTransparentBitmap(hDC, ob:handle, x + (Int(::aColumns[::nPaintCol]:width - ob:nWidth) / 2), y1 + ::y1 + (::height + 1) * (::nPaintRow - 1) + 1)
                         ENDIF
                         EXIT
                      ENDIF
@@ -2860,7 +2860,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
 
 // Clipping rectangle
                   #if 0
-                     rectangle(hDC, ;
+                     hwg_Rectangle(hDC, ;
                                x + ::aMargin[4], ;
                                ::y1 + (::height + 1) * (::nPaintRow - 1) + 1 + ::aMargin[1], ;
                                x + xSize - (2 + ::aMargin[2]), ;
@@ -2905,7 +2905,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
          xSize := Max(::x2 - x, xSizeMax)
 
          xSize := Max(::x2 - x, xSize)
-         FillRect(hDC, x, 0, ;
+         hwg_FillRect(hDC, x, 0, ;
                    x + xSize - IIf(::lSep3d, 2, 1), ::y2, oLineBrush)
 
       ENDIF

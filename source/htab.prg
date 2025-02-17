@@ -1242,7 +1242,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
         ::nHeight := 1
         ::move(, , , ::nHeight)
       ELSEIF oPage:brush != NIL
-        FillRect(hDC, x1 + 1, y1 + 2, x2 - 1, y2 - 0, oPage:brush:handle) //obrush)
+        hwg_FillRect(hDC, x1 + 1, y1 + 2, x2 - 1, y2 - 0, oPage:brush:handle) //obrush)
         ::oParent:RedrawControls()
       ENDIF
    ENDIF
@@ -1255,13 +1255,13 @@ METHOD Paint(lpdis) CLASS HPaintTab
       IF oPage:brush != NIL //.AND. client_rect[4] - client_rect[2] > 5
          //SetBkMode(hDC, TRANSPARENT)
          IF nPage == oPage:PageOrder
-            FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
+            hwg_FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
             IF hwg_GetFocus() == oPage:oParent:handle
                InflateRect(@client_rect, - 2, - 2)
                DrawFocusRect(::hDC, client_rect)
             endif
          ELSE
-            FillRect(::hDC, client_rect[1] + IIf(i == nPage + 1, 2, 1), ;
+            hwg_FillRect(::hDC, client_rect[1] + IIf(i == nPage + 1, 2, 1), ;
                              client_rect[2] + 1, ;
                              client_rect[3] - IIf(i == nPage - 1, 3, 2) - IIf(i == Len(::oParent:Pages), 1, 0), ;
                              client_rect[4] - 1, oPage:brush:handle)
@@ -1321,7 +1321,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        IF hTheme != NIL .AND. oPage:brush == NIL
           hb_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
-          FillRect(::hDC, aItemPos[1] + BmpSize + 3, aItemPos[2] + 4, aItemPos[3] - 3, aItemPos[4] - 5, ;
+          hwg_FillRect(::hDC, aItemPos[1] + BmpSize + 3, aItemPos[2] + 4, aItemPos[3] - 3, aItemPos[4] - 5, ;
                    IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
@@ -1337,7 +1337,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        IF hTheme != NIL .AND. oPage:brush == NIL
           hb_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
-          FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH))) // oPage:oParent:brush:handle))
+          hwg_FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH))) // oPage:oParent:brush:handle))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
           DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2] + 2, aItemPos[3], aItemPos[4] + 2, nstyle)
