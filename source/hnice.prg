@@ -275,7 +275,7 @@ METHOD PAINT() CLASS HNICEButton
 
    Size := GetTextSize(hDC, T)
 
-   Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
+   hwg_Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
    SetBkMode(hDC, TRANSPARENT)
 
    IF (::State == OBTN_MOUSOVER)

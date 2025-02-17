@@ -835,11 +835,11 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
          IF !::lFlat .OR. ::bMouseOverButton
             uState := HWG_BITOR(HWG_BITOR(DFCS_BUTTONPUSH, IIf(::bMouseOverButton, DFCS_HOT, 0)), ;
                IIf(bIsPressed, DFCS_PUSHED, 0))
-            DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
+            hwg_DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
          ELSEIF bIsFocused
             uState := HWG_BITOR(HWG_BITOR(DFCS_BUTTONPUSH + DFCS_MONO, ; // DFCS_FLAT , ;
                IIf(::bMouseOverButton, DFCS_HOT, 0)), IIf(bIsPressed, DFCS_PUSHED, 0))
-            DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
+            hwg_DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
          ENDIF
       ENDIF
    ENDIF
@@ -879,10 +879,10 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    uStyleTmp := HWG_GETWINDOWSTYLE(::handle)
    itemRectOld := aclone(itemRect)
    IF hb_BitAnd(uStyleTmp, BS_MULTILINE) != 0 .AND. !Empty(::caption) .AND. ;
-      INT(aTxtSize[2]) !=  INT(DrawText(dc, ::caption, itemRect[1], itemRect[2],;
+      INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect[1], itemRect[2],;
           itemRect[3] - IIf(::iStyle == ST_ALIGN_VERT, 0, aBmpSize[1] + 8),;
           itemRect[4], DT_CALCRECT + uAlign + DT_WORDBREAK, itemRectOld))
-      //-INT(aTxtSize[2]) !=  INT(DrawText(dc, ::caption, itemRect, DT_CALCRECT + uAlign + DT_WORDBREAK))
+      //-INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect, DT_CALCRECT + uAlign + DT_WORDBREAK))
       uAlign += DT_WORDBREAK
       lMultiline := .T.
       drawInfo[4] += 2
@@ -910,24 +910,24 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    itemRectOld := AClone(itemRect)
 
    IF !Empty(::caption) .AND. !Empty(::hbitmap)  //.AND.!Empty(::hicon)
-      nHeight := aTxtSize[2] //nHeight := IIf(lMultiLine, DrawText(dc, ::caption, itemRect, DT_CALCRECT + uAlign + DT_WORDBREAK), aTxtSize[2])
+      nHeight := aTxtSize[2] //nHeight := IIf(lMultiLine, hwg_DrawText(dc, ::caption, itemRect, DT_CALCRECT + uAlign + DT_WORDBREAK), aTxtSize[2])
       IF ::iStyle == ST_ALIGN_HORIZ
           itemRect[1] := IIf(::PictureMargin == 0, (((::nWidth - aTxtSize[1] - aBmpSize[1] / 2) / 2)) / 2, ::PictureMargin)
          itemRect[1] := IIf(itemRect[1] < 0, 0, itemRect[1])
       ELSEIF ::iStyle == ST_ALIGN_HORIZ_RIGHT
       ELSEIF ::iStyle == ST_ALIGN_VERT .OR. ::iStyle == ST_ALIGN_OVERLAP
-         nHeight := IIf(lMultiLine, DrawText(dc, ::caption, itemRect, DT_CALCRECT + DT_WORDBREAK), aTxtSize[2])
+         nHeight := IIf(lMultiLine, hwg_DrawText(dc, ::caption, itemRect, DT_CALCRECT + DT_WORDBREAK), aTxtSize[2])
          ::iStyle := ST_ALIGN_OVERLAP
          itemRect[1] := (::nWidth - aBmpSize[1]) /  2
          itemRect[2] := IIf(::PictureMargin == 0, (((::nHeight - (nHeight + aBmpSize[2] + 1)) / 2)), ::PictureMargin)
       ENDIF
    ELSEIF !Empty(::caption)
-      nHeight := aTxtSize[2] //nHeight := IIf(lMultiLine, DrawText(dc, ::caption, itemRect, DT_CALCRECT + DT_WORDBREAK), aTxtSize[2])
+      nHeight := aTxtSize[2] //nHeight := IIf(lMultiLine, hwg_DrawText(dc, ::caption, itemRect, DT_CALCRECT + DT_WORDBREAK), aTxtSize[2])
    ENDIF
 
    bHasTitle := hb_IsChar(::caption) .AND. !Empty(::Caption)
 
-   //   DrawTheIcon(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
+   //   hwg_DrawTheIcon(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
    IF hb_IsNumeric(::hbitmap) .AND. ::m_bDrawTransparent .AND. (!bIsDisabled .OR. ::istyle == ST_ALIGN_HORIZ_RIGHT)
       bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
       IF ::istyle == ST_ALIGN_HORIZ_RIGHT
@@ -937,13 +937,13 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       IF !bIsDisabled
           hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ELSE
-          DrawGrayBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
+          hwg_DrawGrayBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ENDIF
    ELSEIF hb_IsNumeric(::hbitmap) .OR. hb_IsNumeric(::hicon)
        IF ::istyle == ST_ALIGN_HORIZ_RIGHT             
          captionRect[3] -= ::PictureMargin 
        ENDIF
-       DrawTheIcon(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
+       hwg_DrawTheIcon(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
    ELSE
        InflateRect(@captionRect, - 3, - 3)       
    ENDIF
@@ -963,7 +963,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
       IF hb_IsNumeric(::hicon) .OR. hb_IsNumeric(::hbitmap)
           IF !lmultiline .AND. ::iStyle != ST_ALIGN_OVERLAP
-             // DrawText(dc, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], uAlign + DT_CALCRECT, @captionRect)
+             // hwg_DrawText(dc, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], uAlign + DT_CALCRECT, @captionRect)
           ELSEIF !Empty(::caption)
              // figura no topo texto em baixo
              IF ::iStyle == ST_ALIGN_OVERLAP //ST_ALIGN_VERT
@@ -973,7 +973,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
                 captionRect[2] := (::nHeight - nHeight) / 2 + 2
              ENDIF
              savecaptionRect := aclone(captionRect)
-             DrawText(dc, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], uAlign, @captionRect)
+             hwg_DrawText(dc, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], uAlign, @captionRect)
           ENDIF
       ELSE
          //- uAlign += DT_CENTER
@@ -994,10 +994,10 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
          OffsetRect(@captionRect, 1, 1)
          SetTextColor(DC, GetSysColor(COLOR_3DHILIGHT))
-         DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_CENTER, @captionRect)
+         hwg_DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_CENTER, @captionRect)
          OffsetRect(@captionRect, -1, -1)
          SetTextColor(DC, GetSysColor(COLOR_3DSHADOW))
-         DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_VCENTER + DT_CENTER, @captionRect)
+         hwg_DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_VCENTER + DT_CENTER, @captionRect)
 
       ELSE
 
@@ -1043,16 +1043,16 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
             OffsetRect(@captionRect, 1, 1)
             SetTextColor(dc, GetSysColor(COLOR_3DHILIGHT))
-            DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
+            hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
             OffsetRect(@captionRect, -1, -1)
             SetTextColor(dc, GetSysColor(COLOR_3DSHADOW))
-            DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
+            hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
             // if
          ELSE
 
             //SetTextColor(dc, GetSysColor(COLOR_BTNTEXT))
             //SetBkColor(dc, GetSysColor(COLOR_BTNFACE))
-            //DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
+            //hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
             IF ::bMouseOverButton .OR. bIsPressed
                SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_IN])
                SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_IN])
@@ -1080,7 +1080,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
             IF hb_IsNumeric(::hbitmap) .AND. ::m_bDrawTransparent
                hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
             ELSEIF hb_IsNumeric(::hbitmap) .OR. hb_IsNumeric(::hicon)
-               DrawTheIcon(::handle, dc, bHasTitle, @itemRect1, @captionRect1, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
+               hwg_DrawTheIcon(::handle, dc, bHasTitle, @itemRect1, @captionRect1, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
             ENDIF
 
             IF hb_IsNumeric(::hicon) .OR. hb_IsNumeric(::hbitmap)
@@ -1091,7 +1091,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
                captionRect[2] := (::nHeight  - nHeight) / 2 + 2
             ENDIF
 
-            DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
+            hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
 
          ENDIF
       ENDIF
@@ -1101,7 +1101,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    IF bIsFocused .AND. bDrawFocusRect .AND. hwg_BitaND(::sTyle, WS_TABSTOP) != 0
       focusRect := COPYRECT(itemRect)
       InflateRect(@focusRect, - 3, - 3)
-      DrawFocusRect(dc, focusRect)
+      hwg_DrawFocusRect(dc, focusRect)
    ENDIF
 
    hwg_DeleteObject(br)

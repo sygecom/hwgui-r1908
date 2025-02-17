@@ -241,9 +241,9 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
    ENDIF
 
    IF ::lmm
-      DrawText(::hDC, cString, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2, IIf(nOpt == NIL, DT_LEFT, nOpt))
+      hwg_DrawText(::hDC, cString, ::nHRes * x1, ::nVRes * y1, ::nHRes * x2, ::nVRes * y2, IIf(nOpt == NIL, DT_LEFT, nOpt))
    ELSE
-      DrawText(::hDC, cString, x1, y1, x2, y2, IIf(nOpt == NIL, DT_LEFT, nOpt))
+      hwg_DrawText(::hDC, cString, x1, y1, x2, y2, IIf(nOpt == NIL, DT_LEFT, nOpt))
    ENDIF
 
    IF oFont != NIL

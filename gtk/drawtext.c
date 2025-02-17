@@ -54,7 +54,7 @@ HB_FUNC(TEXTOUT)
   g_free(cText);
 }
 
-HB_FUNC(DRAWTEXT)
+HB_FUNC(HWG_DRAWTEXT)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   char *cText = hwg_convert_to_utf8(hb_parc(2));
@@ -87,6 +87,10 @@ HB_FUNC(DRAWTEXT)
 
   g_free(cText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWTEXT, HWG_DRAWTEXT);
+#endif
 
 HB_FUNC(GETTEXTMETRIC)
 {

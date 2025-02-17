@@ -426,10 +426,10 @@ METHOD Paint(lpDis) CLASS HStaticLink
    //::dc:DrawText(strtext, rcClient, dwFlags)
    IF ::state == LBL_MOUSEOVER .AND. !::lAllUnderline
       hwg_SelectObject(DC, ::oFontUnder:handle)
-      DrawText(dc, strText, rcClient, dwFlags)
+      hwg_DrawText(dc, strText, rcClient, dwFlags)
       hwg_SelectObject(DC, ::oFont:handle)
    ELSE
-      DrawText(dc, strText, rcClient, dwFlags)
+      hwg_DrawText(dc, strText, rcClient, dwFlags)
    ENDIF
 
   // ::dc:END()

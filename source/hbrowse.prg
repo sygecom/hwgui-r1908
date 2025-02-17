@@ -2286,7 +2286,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          cStr := oColumn:heading + ";"
          FOR nLine := 1 TO ::nHeadRows
             aTxtSize := IIf(nLine == 1, TxtRect(cStr, Self), aTxtSize)
-            DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                       x + ::aMargin[4] + 1 + nMe, ;
                       ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) +  ::aMargin[1] + 1, ;
                       x + xSize - (2 + ::aMargin[2] + nMd), ;
@@ -2598,7 +2598,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
         nY := ::y2 - nPixelFooterHeight
 
         FOR nLine := 1 TO ::nFootRows
-            DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                    x + ::aMargin[4], ;
                    nY + (nLine - 1) * (::nFootHeight + 1) + 1 + ::aMargin[1], ;
                    x + xSize - (1 + ::aMargin[2]), ;
@@ -2830,7 +2830,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                            nState := hwg_bitor(nstate, DFCS_CHECKED)
                         ENDIF
                         nState += IIf(::lEditable .OR. ::aColumns[::nPaintCol]:lEditable, 0, DFCS_INACTIVE)
-                        DrawFrameControl(hDC, rcBitmap, DFC_BUTTON, nState + DFCS_FLAT)
+                        hwg_DrawFrameControl(hDC, rcBitmap, DFC_BUTTON, nState + DFCS_FLAT)
                      ENDIF
                      sviv := ""
                   ENDIF
@@ -2851,7 +2851,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                   IF ::aColumns[::nPaintCol]:Hint
                       AAdd(::aColumns[::nPaintCol]:aHints, sViv)
                   ENDIF
-                  DrawText(hDC, sviv, ;
+                  hwg_DrawText(hDC, sviv, ;
                             x + ::aMargin[4] + 1, ;
                             ::y1 + (::height + 1) * (::nPaintRow - 1) + 1 + ::aMargin[1], ;
                             x + xSize - (2 + ::aMargin[2]), ;

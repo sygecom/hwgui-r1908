@@ -739,7 +739,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
             //hSubMenu := GetSubMenu(hMenu, nPosMenu)
    
             // hwg_SendMessage( hJanClient, WM_MDISETMENU, hmenu, 0 )
-            DrawMenuBar(hJanBase)
+            hwg_DrawMenuBar(hJanBase)
    
             If  oWnd:bGetFocus != Nil
                Eval( oWnd:bGetFocus, oWnd )
@@ -764,7 +764,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
             hMenu := aMenu[5]
 
             hwg_SendMessage( hJanBase, WM_MDISETMENU, hMenu, 0 )
-            DrawMenuBar(hJanBase)
+            hwg_DrawMenuBar(hJanBase)
       endif
 
       nReturn := 0

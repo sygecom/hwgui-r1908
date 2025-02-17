@@ -1646,9 +1646,9 @@ HB_FUNC(HB_DRAWTHEMEBACKGROUND)
 }
 
 /*
-DRAWTHEICON(HWND, HDC, lHasTitle, aRectItem, aRectTitle, lIsPressed, lIsDisabled, HICON, HBITMAP, nStyle) -->
+HWG_DRAWTHEICON(HWND, HDC, lHasTitle, aRectItem, aRectTitle, lIsPressed, lIsDisabled, HICON, HBITMAP, nStyle) -->
 */
-HB_FUNC(DRAWTHEICON)
+HB_FUNC(HWG_DRAWTHEICON)
 {
   RECT rpItem;
   RECT rpTitle;
@@ -1675,6 +1675,10 @@ HB_FUNC(DRAWTHEICON)
   hb_storvni(rpTitle.right, 5, 3);
   hb_storvni(rpTitle.bottom, 5, 4);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWTHEICON, HWG_DRAWTHEICON);
+#endif
 
 /*
 //PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)

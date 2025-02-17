@@ -192,7 +192,7 @@ METHOD PAINT(lpdis) CLASS HGroup
             hwg_FillRect(DC, rcText[1] - 2, rc[2] + 1, rcText[3] + 1, rc[2] + iUpDist + 2, ::brush:handle)
          ENDIF
       ENDIF
-      DrawText(dc, szText, rcText, DT_VCENTER + DT_LEFT + DT_SINGLELINE + DT_NOCLIP)
+      hwg_DrawText(dc, szText, rcText, DT_VCENTER + DT_LEFT + DT_SINGLELINE + DT_NOCLIP)
    ENDIF
    // cleanup
    hwg_DeleteObject(pnFrmLight)

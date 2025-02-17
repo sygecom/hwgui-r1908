@@ -485,7 +485,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
             ENDIF
          ENDIF
       ELSE
-         DrawGrayBitmap(hDC, ::oBitmap:handle, x1, y1)
+         hwg_DrawGrayBitmap(hDC, ::oBitmap:handle, x1, y1)
       ENDIF
    ENDIF
 
@@ -504,7 +504,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
       x2 := ::nWidth - 4
       y2 := ::nHeight - 4
       SetTransparentMode(hDC, .T.)
-      DrawText(hDC, ::title, x1, y1, x2, y2, ;
+      hwg_DrawText(hDC, ::title, x1, y1, x2, y2, ;
          IIf(::xt != 0, DT_LEFT, DT_CENTER) + IIf(::yt != 0, DT_TOP, DT_VCENTER + DT_SINGLELINE))
       SetTransparentMode(hDC, .F.)
    ENDIF

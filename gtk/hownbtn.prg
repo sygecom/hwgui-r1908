@@ -171,7 +171,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
          hwg_DrawBitmap( hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb )
       Else
          ::oBitmap:=::bitmap:handle
-         DrawGrayBitmap( hDC, ::bitmap:handle, x1, y1 )
+         hwg_DrawGrayBitmap( hDC, ::bitmap:handle, x1, y1 )
       EndIf
    ENDIF
 
@@ -192,7 +192,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       x2 := IIf(::widtht != NIL .AND. ::widtht != 0, ::xt + ::widtht - 1, aCoors[3] - 2)
       y2 := IIf(::heightt != NIL .AND. ::heightt != 0, ::yt + ::heightt - 1, y1 + aMetr[1])
       // SetTransparentMode( hDC,.T. )
-      DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
+      hwg_DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
       // SetTransparentMode( hDC,.F. )
    ENDIF
    // SetBkColor( hDC,oldBkColor )

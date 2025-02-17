@@ -450,8 +450,8 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
          nstate := hwg_bitor(nstate, DFCS_CHECKED)
       ENDIF
 
-      // Draw the checkmark using DrawFrameControl
-      DrawFrameControl(dc, rcBitmap, DFC_BUTTON, nstate)
+      // Draw the checkmark using hwg_DrawFrameControl
+      hwg_DrawFrameControl(dc, rcBitmap, DFC_BUTTON, nstate)
    ENDIF
 
    IF (hwg_Bitand(drawInfo[9], ODS_SELECTED) != 0)
@@ -470,10 +470,10 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
 
    ExtTextOut(dc, 0, 0, rcText[1], rcText[2], rcText[3], rcText[4])
 
-   DrawText(dc, " " + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS)
+   hwg_DrawText(dc, " " + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS)
 
    IF ((hwg_Bitand(drawInfo[9], ODS_FOCUS + ODS_SELECTED)) == (ODS_FOCUS + ODS_SELECTED))
-      DrawFocusRect(dc, rcText)
+      hwg_DrawFocusRect(dc, rcText)
    ENDIF
 
 RETURN Self

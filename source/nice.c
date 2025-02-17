@@ -221,11 +221,15 @@ HB_FUNC(RGB)
   hb_retnl(RGB(hb_parni(1), hb_parni(2), hb_parni(3)));
 }
 
-HB_FUNC(DRAW_GRADIENT)
+HB_FUNC(HWG_DRAW_GRADIENT)
 {
   Draw_Gradient(hwg_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
                 hb_parni(8));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAW_GRADIENT, HWG_DRAW_GRADIENT);
+#endif
 
 HB_FUNC(GRADIENT)
 {

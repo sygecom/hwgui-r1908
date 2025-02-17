@@ -219,7 +219,7 @@ Local step, kolsteps, nsteps
       hwg_DrawLine( hDC,xt+Round(n1cm*3/4,0),0,xt+Round(n1cm*3/4,0),4 )
       hwg_DrawLine( hDC,xt,0,xt,12 )
       IF i > 0 .AND. i < aPaintRep[FORM_WIDTH]/10
-         DrawText( hDC,Ltrim(Str(i,2)),xt-15,12,xt+15,TOP_INDENT-5,DT_CENTER )
+         hwg_DrawText( hDC,Ltrim(Str(i,2)),xt-15,12,xt+15,TOP_INDENT-5,DT_CENTER )
       ENDIF
       i++
    ENDDO
@@ -231,7 +231,7 @@ Local step, kolsteps, nsteps
       hwg_DrawLine( hDC,0,yt+Round(n1cm*3/4,0),4,yt+Round(n1cm*3/4,0) )
       hwg_DrawLine( hDC,0,yt,12,yt )
       IF i > 0 .AND. i < aPaintRep[FORM_HEIGHT]/10
-         DrawText( hDC,Ltrim(Str(i+nsteps*2,2)),12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
+         hwg_DrawText( hDC,Ltrim(Str(i+nsteps*2,2)),12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
       ENDIF
       i++
    ENDDO
@@ -283,7 +283,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
             hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
          ELSE
       SelectObject( hDC, Iif(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
-            DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2, ;
+            hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2, ;
               Iif(aItem[ITEM_ALIGN]==0,DT_LEFT,Iif(aItem[ITEM_ALIGN]==1,DT_RIGHT,DT_CENTER)) )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
@@ -305,7 +305,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          SelectObject( hDC,s_oPenDivider:handle )
          hwg_DrawLine( hDC,LEFT_INDENT,y1,LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF],0),y1 )
          SelectObject( hDC, oFontSmall:handle )
-         DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2,DT_CENTER )
+         hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2,DT_CENTER )
       ENDIF
    ENDIF
 Return Nil

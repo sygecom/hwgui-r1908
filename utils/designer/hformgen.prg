@@ -997,7 +997,7 @@ STATIC FUNCTION PaintDlg( oDlg )
          hwg_DrawLine( hDC,xt+Round(n1cm*3/4, 0), 0,xt+Round(n1cm*3/4, 0), 4 )
          hwg_DrawLine( hDC,xt, 0, xt, 12 )
          IF i > 0
-            DrawText( hDC,LTrim(Str(i+oForm:nXOffset/10, 2)),xt-15, 12,xt+15,TOP_INDENT-5,DT_CENTER )
+            hwg_DrawText( hDC,LTrim(Str(i+oForm:nXOffset/10, 2)),xt-15, 12,xt+15,TOP_INDENT-5,DT_CENTER )
          ENDIF
          i++
       ENDDO
@@ -1009,7 +1009,7 @@ STATIC FUNCTION PaintDlg( oDlg )
          hwg_DrawLine( hDC, 0,yt+Round(n1cm*3/4,0), 4,yt+Round(n1cm*3/4, 0) )
          hwg_DrawLine( hDC, 0,yt, 12,yt )
          IF i > 0
-            DrawText( hDC,LTrim(Str(i+oForm:nYOffset/10, 2)), 12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
+            hwg_DrawText( hDC,LTrim(Str(i+oForm:nYOffset/10, 2)), 12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
          ENDIF
          i++
       ENDDO

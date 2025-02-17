@@ -296,12 +296,12 @@ METHOD Paint(lpDis) CLASS HStatic
       SetTextColor(dc, ::tcolor)
    ELSEIF !::isEnabled()
       SetTextColor(dc, 16777215) //GetSysColor(COLOR_WINDOW))
-      DrawText(dc, szText, {client_rect[1] + 1, client_rect[2] + 1, client_rect[3] + 1, client_rect[4] + 1}, dwtext)
+      hwg_DrawText(dc, szText, {client_rect[1] + 1, client_rect[2] + 1, client_rect[3] + 1, client_rect[4] + 1}, dwtext)
       SetBkMode(dc, TRANSPARENT)
       SetTextColor(dc, 10526880) //GetSysColor(COLOR_GRAYTEXT))
    ENDIF
    // Draw the text
-   DrawText(dc, szText, client_rect, dwtext)
+   hwg_DrawText(dc, szText, client_rect, dwtext)
 
 RETURN NIL
 

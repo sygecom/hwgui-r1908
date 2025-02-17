@@ -47,7 +47,7 @@
          <paint>
             <![CDATA[
             hwg_FillRect( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,oCtrl:brush:handle )
-            DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -76,7 +76,7 @@
             <![CDATA[
             hwg_DrawEdge( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,10 )
             hwg_FillRect( hDC,2,2,oCtrl:nWidth-2,oCtrl:nHeight-2,oCtrl:brush:handle )
-            DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -114,7 +114,7 @@
          <paint>
             <![CDATA[
             hwg_DrawButton( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
-            DrawText( hDC,oCtrl:title,0,0,oCtrl:nWidth,oCtrl:nHeight,37 )
+            hwg_DrawText( hDC,oCtrl:title,0,0,oCtrl:nWidth,oCtrl:nHeight,37 )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -140,7 +140,7 @@
             <![CDATA[
             hwg_DrawEdge( hDC,2,4,16,18,10 )
             hwg_FillRect( hDC,4,6,14,16,21 )
-            DrawText( hDC,oCtrl:title,20,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,20,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -167,7 +167,7 @@
          <paint>
             <![CDATA[
             hwg_Ellipse( hDC,4,6,14,16 )
-            DrawText( hDC,oCtrl:title,20,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,20,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -193,7 +193,7 @@
          <paint>
             <![CDATA[
             hwg_DrawEdge( hDC,0,8,oCtrl:nWidth,oCtrl:nHeight,6 )
-            DrawText( hDC,oCtrl:title,6,0,oCtrl:nWidth-9,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,6,0,oCtrl:nWidth-9,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -211,7 +211,7 @@
          <paint>
             <![CDATA[
             hwg_DrawEdge( hDC,0,8,oCtrl:nWidth,oCtrl:nHeight,6 )
-            DrawText( hDC,oCtrl:title,6,0,oCtrl:nWidth-9,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,6,0,oCtrl:nWidth-9,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -350,7 +350,7 @@
             <![CDATA[
             hwg_DrawEdge( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,10 )
             hwg_FillRect( hDC,2,2,oCtrl:nWidth-2,oCtrl:nHeight-2,oCtrl:brush:handle )
-            DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -416,7 +416,7 @@
             hwg_DrawEdge( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,10 )
             hwg_FillRect( hDC,2,2,oCtrl:nWidth-2,oCtrl:nHeight-2,21 )
             SetBkColor( hDC,16777215 )
-            DrawText( hDC,Dtoc(Date()),2,3,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,Dtoc(Date()),2,3,oCtrl:nWidth,oCtrl:nHeight )
             hwg_DrawBitmap( hDC,oCtrl:oBitmap:handle,,oCtrl:nWidth-oCtrl:oBitmap:nWidth-2,2 )
             ]]>
          </paint>
@@ -583,7 +583,7 @@
          <paint>
             <![CDATA[
             hwg_FillRect( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,oCtrl:brush:handle )
-            DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
+            hwg_DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight )
             ]]>
          </paint>
          <property name="Name" type="C" />
@@ -638,9 +638,9 @@
             private xt := Max(Val(oCtrl:GetProp("TextLeft")),2),yt
             hwg_DrawButton( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
             if ( yt := Val(oCtrl:GetProp("TextTop")) ) == 0
-              DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
+              hwg_DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
             else
-              DrawText( hDC,oCtrl:title,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
+              hwg_DrawText( hDC,oCtrl:title,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
             endif
             if oCtrl:oBitmap != Nil
               xt := Iif( (xt:=Val(oCtrl:GetProp("BmpLeft")))==0,(oCtrl:nWidth-oCtrl:oBitmap:nWidth)/2,xt )
@@ -678,9 +678,9 @@
             private xt := Max(Val(oCtrl:GetProp("TextLeft")),2),yt
             hwg_DrawButton( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
             if ( yt := Val(oCtrl:GetProp("TextTop")) ) == 0
-              DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
+              hwg_DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
             else
-              DrawText( hDC,oCtrl:title,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
+              hwg_DrawText( hDC,oCtrl:title,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
             endif
             if oCtrl:oBitmap != Nil
               xt := Iif( (xt:=Val(oCtrl:GetProp("BmpLeft")))==0,(oCtrl:nWidth-oCtrl:oBitmap:nWidth)/2,xt )
@@ -727,17 +727,17 @@
               yt := (oCtrl:nHeight-oCtrl:oBitmap:nHeight)/2
               xt := Iif(cpp="0-Left",1,iif(cpp="2-Right",oCtrl:nWidth-oCtrl:oBitmap:nWidth,(oCtrl:nWidth-oCtrl:oBitmap:nWidth)/2 ))
               if cpp="0" // left
-                DrawText( hDC,oCtrl:title,xt+oCtrl:oBitmap:nWidth,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
+                hwg_DrawText( hDC,oCtrl:title,xt+oCtrl:oBitmap:nWidth,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
                 hwg_DrawBitmap( hDC,oCtrl:oBitmap:handle,,xt,yt,oCtrl:oBitmap:nWidth,oCtrl:oBitmap:nHeight )
               elseif cpp="2"  //Right"
-                DrawText( hDC,oCtrl:title,1,0,oCtrl:nWidth-oCtrl:oBitmap:nWidth,oCtrl:nHeight,37 )
+                hwg_DrawText( hDC,oCtrl:title,1,0,oCtrl:nWidth-oCtrl:oBitmap:nWidth,oCtrl:nHeight,37 )
                 hwg_DrawBitmap( hDC,oCtrl:oBitmap:handle,,xt-3,yt,oCtrl:oBitmap:nWidth,oCtrl:oBitmap:nHeight )
               else // center
-                DrawText( hDC,oCtrl:title,0,yt/2+19,oCtrl:nWidth,yt+oCtrl:nHeight,37 )
+                hwg_DrawText( hDC,oCtrl:title,0,yt/2+19,oCtrl:nWidth,yt+oCtrl:nHeight,37 )
                 hwg_DrawBitmap( hDC,oCtrl:oBitmap:handle,,xt,yt-8,oCtrl:oBitmap:nWidth,oCtrl:oBitmap:nHeight )
               endif
             else
-          DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
+          hwg_DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
             endif
             ]]>
          </paint>
@@ -818,10 +818,10 @@
             private xt := 2 //Max(Val(oCtrl:GetProp("Heading")),2),yt
             hwg_DrawButton( hDC,0,0,90,20,5 )
             //if ( yt := Val(oCtrl:GetProp("Header")) ) == 0
-             // DrawText( hDC,"Header1",xt,0,90-xt*2,20,37 )
-             DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
+             // hwg_DrawText( hDC,"Header1",xt,0,90-xt*2,20,37 )
+             hwg_DrawText( hDC,oCtrl:title,xt,0,oCtrl:nWidth-xt*2,oCtrl:nHeight,37 )
             //else
-            //  DrawText( hDC,oCtrl:heading,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
+            //  hwg_DrawText( hDC,oCtrl:heading,xt,yt,oCtrl:nWidth-xt*2,yt+GetTextMetric(hDC)[1],37 )
             //endif
          ]]></paint>
          <property name="Name" type="C" />
@@ -919,7 +919,7 @@
          <paint>
             <![CDATA[
             hwg_DrawButton( hDC,0,0,oCtrl:nWidth,oCtrl:nHeight,5 )
-            DrawText( hDC,oCtrl:title,0,0,oCtrl:nWidth,oCtrl:nHeight,37 )
+            hwg_DrawText( hDC,oCtrl:title,0,0,oCtrl:nWidth,oCtrl:nHeight,37 )
             ]]>
          </paint>
          <property name="Name" type="C" />

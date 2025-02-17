@@ -43,14 +43,14 @@
                 dy := oCtrl:nHeight / nLines
                 nFirst := i := ny := 1
                 do while ( i := At( ";",oCtrl:title,i ) ) > 0
-                  DrawText( hDC,Substr(oCtrl:title,nFirst,i-nFirst),2,2+ny,oCtrl:nWidth,ny+dy,nJust )
+                  hwg_DrawText( hDC,Substr(oCtrl:title,nFirst,i-nFirst),2,2+ny,oCtrl:nWidth,ny+dy,nJust )
                   i ++
                   nFirst := i
                   ny += dy
                 enddo
-                DrawText( hDC,Substr(oCtrl:title,nFirst,Len(oCtrl:title)-nFirst+1),2,ny,oCtrl:nWidth,ny+dy,nJust )
+                hwg_DrawText( hDC,Substr(oCtrl:title,nFirst,Len(oCtrl:title)-nFirst+1),2,ny,oCtrl:nWidth,ny+dy,nJust )
               else
-                DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight,nJust )
+                hwg_DrawText( hDC,oCtrl:title,2,2,oCtrl:nWidth,oCtrl:nHeight,nJust )
               endif
               SetTransparentMode( hDC,.F. )
             endif

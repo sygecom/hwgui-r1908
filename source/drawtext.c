@@ -77,10 +77,10 @@ HB_FUNC(TEXTOUT)
 }
 
 /*
-DRAWTEXT(HDC, cText, nLeft, nTop, nRight, nBottom, nFormat, p8) --> numeric
-DRAWTEXT(HDC, cText, aRect, nFormat, p8) --> numeric
+HWG_DRAWTEXT(HDC, cText, nLeft, nTop, nRight, nBottom, nFormat, p8) --> numeric
+HWG_DRAWTEXT(HDC, cText, aRect, nFormat, p8) --> numeric
 */
-HB_FUNC(DRAWTEXT)
+HB_FUNC(HWG_DRAWTEXT)
 {
   void *hText;
   HB_SIZE nLen;

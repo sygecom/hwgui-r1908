@@ -1258,7 +1258,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
             hwg_FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
             IF hwg_GetFocus() == oPage:oParent:handle
                InflateRect(@client_rect, - 2, - 2)
-               DrawFocusRect(::hDC, client_rect)
+               hwg_DrawFocusRect(::hDC, client_rect)
             endif
          ELSE
             hwg_FillRect(::hDC, client_rect[1] + IIf(i == nPage + 1, 2, 1), ;
@@ -1325,13 +1325,13 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
                    IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
-          DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] - 1, aItemPos[3], aItemPos[4] - 1, nstyle)
+          hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] - 1, aItemPos[3], aItemPos[4] - 1, nstyle)
        ELSE
           IF oPage:lEnabled == .F.
-             DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
+             hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
              SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
           ENDIF
-          DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
+          hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
        ENDIF
     ELSE
        IF hTheme != NIL .AND. oPage:brush == NIL
@@ -1340,13 +1340,13 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
           hwg_FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH))) // oPage:oParent:brush:handle))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
-          DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2] + 2, aItemPos[3], aItemPos[4] + 2, nstyle)
+          hwg_DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2] + 2, aItemPos[3], aItemPos[4] + 2, nstyle)
        ELSE
           IF oPage:lEnabled == .F.
-             DrawText(::hDC, oPage:caption, aItemPos[1] + 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
+             hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
              SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
           ENDIF
-          DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2], aItemPos[3], aItemPos[4], nstyle)
+          hwg_DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2], aItemPos[3], aItemPos[4], nstyle)
        ENDIF
     ENDIF
     IF oPage:lEnabled .AND. oPage:brush == NIL

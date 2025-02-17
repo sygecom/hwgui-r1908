@@ -967,13 +967,13 @@ HB_FUNC_TRANSLATE(GETDRAWITEMINFO, HWG_GETDRAWITEMINFO);
 #endif
 
 /*
- * DrawGrayBitmap(hDC, hBitmap, x, y)
+ * hwg_DrawGrayBitmap(hDC, hBitmap, x, y)
  */
 
 /*
-DRAWGRAYBITMAP(HDC, HBITMAP, nX, nY) -->
+HWG_DRAWGRAYBITMAP(HDC, HBITMAP, nX, nY) -->
 */
-HB_FUNC(DRAWGRAYBITMAP)
+HB_FUNC(HWG_DRAWGRAYBITMAP)
 {
   HDC hDC = hwg_par_HDC(1);
   HBITMAP hBitmap = hwg_par_HBITMAP(2);
@@ -1271,9 +1271,9 @@ HB_FUNC(FRAMERECT)
 }
 
 /*
-DRAWFRAMECONTROL(HDC, aRect, nType, nState) --> .T.|.F.
+HWG_DRAWFRAMECONTROL(HDC, aRect, nType, nState) --> .T.|.F.
 */
-HB_FUNC(DRAWFRAMECONTROL)
+HB_FUNC(HWG_DRAWFRAMECONTROL)
 {
   RECT pRect;
 
@@ -1284,6 +1284,10 @@ HB_FUNC(DRAWFRAMECONTROL)
 
   hwg_ret_BOOL(DrawFrameControl(hwg_par_HDC(1), &pRect, hwg_par_UINT(3), hwg_par_UINT(4)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWFRAMECONTROL, HWG_DRAWFRAMECONTROL);
+#endif
 
 /*
 OFFSETRECT(aRect, nX, nY) --> .T.|.F.
@@ -1305,9 +1309,9 @@ HB_FUNC(OFFSETRECT)
 }
 
 /*
-DRAWFOCUSRECT(HDC, aRect) --> .T.|.F.
+HWG_DRAWFOCUSRECT(HDC, aRect) --> .T.|.F.
 */
-HB_FUNC(DRAWFOCUSRECT)
+HB_FUNC(HWG_DRAWFOCUSRECT)
 {
   RECT pRect;
 
@@ -1318,6 +1322,10 @@ HB_FUNC(DRAWFOCUSRECT)
 
   hwg_ret_BOOL(DrawFocusRect(hwg_par_HDC(1), &pRect));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DRAWFOCUSRECT, HWG_DRAWFOCUSRECT);
+#endif
 
 BOOL Array2Point(PHB_ITEM aPoint, POINT *pt)
 {

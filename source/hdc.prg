@@ -148,7 +148,7 @@ METHOD SelectObject(xMode) CLASS HDC
 
 METHOD DrawText(strText, Rect, dwFlags) CLASS HDC
 
-   DrawText(::m_hDC, strText, Rect[1], Rect[2], Rect[3], Rect[4], dwFlags)
+   hwg_DrawText(::m_hDC, strText, Rect[1], Rect[2], Rect[3], Rect[4], dwFlags)
 
    RETURN NIL
 

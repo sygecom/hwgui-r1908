@@ -746,7 +746,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
          // Ahora Titulos Justificados !!!
          cStr := oColumn:heading + ';'
          for nLine := 1 to ::nHeadRows
-            DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-1,::y1-(::height)*(::nHeadRows-nLine),;
+            hwg_DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x+xSize-1,::y1-(::height)*(::nHeadRows-nLine),;
                oColumn:nJusHead  + if(oColumn:lSpandHead, DT_NOCLIP, 0) )
          next
       endif
@@ -812,7 +812,7 @@ Local oColumn
       if oColumn:footing <> nil
          cStr := oColumn:footing + ';'
          for nLine := 1 to ::nFootRows
-            DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'),;
+            hwg_DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'),;
                x, ::y1+(::rowCount+nLine-1)*(::height+1)+1, x+xSize-1, ::y1+(::rowCount+nLine)*(::height+1),;
                oColumn:nJusLin + if(oColumn:lSpandFoot, DT_NOCLIP, 0) )
          next
@@ -917,7 +917,7 @@ Local aCores
                      SelectObject( hDC, ::ofont:handle )
                      lColumnFont := .F.
                   ENDIF
-                  DrawText( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
+                  hwg_DrawText( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
                   IF ::aColumns[fif]:tColor != Nil
                      SetTextColor( hDC, oldT1Color )
                   ENDIF
