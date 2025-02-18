@@ -691,12 +691,12 @@ RETURN Nil
 METHOD HeaderOut( hDC ) CLASS HBrowse
 Local i, x, oldc, fif, xSize
 Local nRows := Min( ::nRecords+IIf(::lAppMode, 1, 0),::rowCount )
-Local oPen // , oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DFACE) )
+Local oPen // , oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DFACE) )
 Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
 
    /*
    IF ::lSep3d
-      oPenLight := HPen():Add( PS_SOLID,1,GetSysColor(COLOR_3DHILIGHT) )
+      oPenLight := HPen():Add( PS_SOLID,1,hwg_GetSysColor(COLOR_3DHILIGHT) )
    ENDIF
    */
    IF ::lDispSep
@@ -706,7 +706,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
 
    x := ::x1
    if ::headColor != Nil
-      oldc := SetTextColor( hDC,::headColor )
+      oldc := hwg_SetTextColor( hDC,::headColor )
    endif
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
 
@@ -783,9 +783,9 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
       endif  
    ENDIF
 
-   /* SetBkColor( hDC,oldBkColor ) */
+   /* hwg_SetBkColor( hDC,oldBkColor ) */
    if ::headColor <> Nil
-      SetTextColor( hDC,oldc )
+      hwg_SetTextColor( hDC,oldc )
    ENDIF
 
 RETURN Nil
@@ -847,8 +847,8 @@ Local aCores
       Eval( ::bLineOut,Self,lSelected )
    ENDIF
    IF ::nRecords > 0
-      oldBkColor := SetBkColor( hDC, IIf(lSelected, ::bcolorSel, ::bcolor) )
-      oldTColor  := SetTextColor( hDC, IIf(lSelected, ::tcolorSel, ::tcolor) )
+      oldBkColor := hwg_SetBkColor( hDC, IIf(lSelected, ::bcolorSel, ::bcolor) )
+      oldTColor  := hwg_SetTextColor( hDC, IIf(lSelected, ::tcolorSel, ::tcolor) )
       fldname := SPACE( 8 )
       fif     := IIf(::freeze > 0, 1, ::nLeftCol)
 
@@ -905,10 +905,10 @@ Local aCores
                   sviv := AllTrim(FldStr(Self, fif))
                   // Ahora lineas Justificadas !!
                   IF ::aColumns[fif]:tColor != Nil
-                     oldT1Color := SetTextColor( hDC, ::aColumns[fif]:tColor )
+                     oldT1Color := hwg_SetTextColor( hDC, ::aColumns[fif]:tColor )
                   ENDIF
                   IF ::aColumns[fif]:bColor != Nil
-                     oldBk1Color := SetBkColor( hDC, ::aColumns[fif]:bColor )
+                     oldBk1Color := hwg_SetBkColor( hDC, ::aColumns[fif]:bColor )
                   ENDIF
                   IF ::aColumns[fif]:oFont != Nil
                      SelectObject( hDC, ::aColumns[fif]:oFont:handle )
@@ -919,10 +919,10 @@ Local aCores
                   ENDIF
                   hwg_DrawText( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
                   IF ::aColumns[fif]:tColor != Nil
-                     SetTextColor( hDC, oldT1Color )
+                     hwg_SetTextColor( hDC, oldT1Color )
                   ENDIF
                   IF ::aColumns[fif]:bColor != Nil
-                     SetBkColor( hDC, oldBk1Color )
+                     hwg_SetBkColor( hDC, oldBk1Color )
                   ENDIF
                ENDIF
             ENDIF
@@ -934,8 +934,8 @@ Local aCores
             EXIT
          ENDIF
       ENDDO
-      SetTextColor( hDC,oldTColor )
-      SetBkColor( hDC,oldBkColor )
+      hwg_SetTextColor( hDC,oldTColor )
+      hwg_SetBkColor( hDC,oldBkColor )
       IF lColumnFont
          SelectObject( hDC, ::ofont:handle )
       ENDIF

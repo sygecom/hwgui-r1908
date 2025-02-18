@@ -441,8 +441,8 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
    ENDIF
 
    IF (ncheck > 0)
-      SetBkColor(dc, GetSysColor(COLOR_WINDOW))
-      SetTextColor(dc, GetSysColor(COLOR_WINDOWTEXT))
+      hwg_SetBkColor(dc, hwg_GetSysColor(COLOR_WINDOW))
+      hwg_SetTextColor(dc, hwg_GetSysColor(COLOR_WINDOWTEXT))
 
       nstate := DFCS_BUTTONCHECK
 
@@ -455,12 +455,12 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
    ENDIF
 
    IF (hwg_Bitand(drawInfo[9], ODS_SELECTED) != 0)
-      SetBkColor(dc, GetSysColor(COLOR_HIGHLIGHT))
-      SetTextColor(dc, GetSysColor(COLOR_HIGHLIGHTTEXT))
+      hwg_SetBkColor(dc, hwg_GetSysColor(COLOR_HIGHLIGHT))
+      hwg_SetTextColor(dc, hwg_GetSysColor(COLOR_HIGHLIGHTTEXT))
 
    ELSE
-      SetBkColor(dc, GetSysColor(COLOR_WINDOW))
-      SetTextColor(dc, GetSysColor(COLOR_WINDOWTEXT))
+      hwg_SetBkColor(dc, hwg_GetSysColor(COLOR_WINDOW))
+      hwg_SetTextColor(dc, hwg_GetSysColor(COLOR_WINDOWTEXT))
    ENDIF
 
    // Erase and draw
@@ -468,7 +468,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       strtext := ""
    ENDIF
 
-   ExtTextOut(dc, 0, 0, rcText[1], rcText[2], rcText[3], rcText[4])
+   hwg_ExtTextOut(dc, 0, 0, rcText[1], rcText[2], rcText[3], rcText[4])
 
    hwg_DrawText(dc, " " + strtext, rcText[1], rcText[2], rcText[3], rcText[4], DT_SINGLELINE + DT_VCENTER + DT_END_ELLIPSIS)
 

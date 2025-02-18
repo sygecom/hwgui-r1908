@@ -56,8 +56,8 @@ CLASS HPrinter INHERIT HObject
    METHOD SetMode(nOrientation)
    METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharSet)
    METHOD SetFont(oFont) INLINE hwg_SelectObject(::hDC, oFont:handle)
-   METHOD SetTextColor(nColor) INLINE SetTextColor(::hDC, nColor)
-   METHOD SetTBkColor(nColor) INLINE SetBKColor(::hDC, nColor)
+   METHOD SetTextColor(nColor) INLINE hwg_SetTextColor(::hDC, nColor)
+   METHOD SetTBkColor(nColor) INLINE hwg_SetBkColor(::hDC, nColor)
    METHOD SetBkmode(lmode) INLINE SetBkmode(::hDC, IIf(lmode, 1, 0))
    METHOD StartDoc(lPreview, cMetaName)
    METHOD EndDoc()
@@ -234,10 +234,10 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
       hFont := hwg_SelectObject(::hDC, oFont:handle)
    ENDIF
    IF nTextColor != NIL
-      nOldTC := SetTextColor(::hDC, nTextColor)
+      nOldTC := hwg_SetTextColor(::hDC, nTextColor)
    ENDIF
    IF nBkColor != NIL
-      nOldBC := SetBKColor(::hDC, nBkColor)
+      nOldBC := hwg_SetBkColor(::hDC, nBkColor)
    ENDIF
 
    IF ::lmm
@@ -251,11 +251,11 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
    ENDIF
 
    IF nTextColor != NIL
-      SetTextColor(::hDC, nOldTC)
+      hwg_SetTextColor(::hDC, nOldTC)
    ENDIF
 
    IF nBkColor != NIL
-      SetBKColor(::hDC, nOldBC)
+      hwg_SetBkColor(::hDC, nOldBC)
    ENDIF
 
 
@@ -277,7 +277,7 @@ METHOD GetTextWidth(cString, oFont) CLASS HPrinter
    IF oFont != NIL
       hFont := hwg_SelectObject(::hDC, oFont:handle)
    ENDIF
-   arr := GetTextSize(::hDC, cString)
+   arr := hwg_GetTextSize(::hDC, cString)
    IF oFont != NIL
       hwg_SelectObject(::hDC, hFont)
    ENDIF
@@ -727,9 +727,9 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
          IF ValType(::memDC) == "U"
             ::memDC := hDC():New()
             ::memDC:CreateCompatibleDC(hDC)
-            ::memBitmap := CreateCompatibleBitmap(hDC, rect[3] - rect[1], rect[4] - rect[2])
+            ::memBitmap := hwg_CreateCompatibleBitmap(hDC, rect[3] - rect[1], rect[4] - rect[2])
             ::memDC:SelectObject(::memBitmap)
-            Brush           := HBrush():Add(GetSysColor(COLOR_3DHILIGHT + 1)):handle
+            Brush           := HBrush():Add(hwg_GetSysColor(COLOR_3DHILIGHT + 1)):handle
             BrushWhite      := HBrush():Add(RGB(255, 255, 255)):handle
             BrushBlack      := HBrush():Add(RGB(0, 0, 0)):handle
             BrushLine       := HBrush():Add(RGB(102, 100, 92)):handle

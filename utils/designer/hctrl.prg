@@ -1205,7 +1205,7 @@ FUNCTION GetTextWidth( cString, oFont ,hdc)
    IF oFont != Nil
       hFont := SelectObject( hDC,oFont:handle )
    ENDIF
-   arr := GetTextSize( hDC,cString )
+   arr := hwg_GetTextSize( hDC,cString )
    IF oFont != Nil
       SelectObject( hDC,hFont )
    ENDIF

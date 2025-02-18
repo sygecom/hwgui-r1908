@@ -90,7 +90,7 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor) CLASS HR
       ::nWidth  := IIf(nLength == NIL, 20, nLength)
       ::nHeight := 10
    ENDIF
-   ::oPen := HPen():Add(BS_SOLID, 1, GetSysColor(nColor))
+   ::oPen := HPen():Add(BS_SOLID, 1, hwg_GetSysColor(nColor))
 
    ::Activate()
 
@@ -212,7 +212,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
    IF ::ncStyle == NIL
       ::oPen := HPen():Add(::nbStyle, ::nBorder, ::tColor)
    //ELSE  // CONTAINER
-   //    ::oPen := HPen():Add(PS_SOLID, 5, GetSysColor(COLOR_3DHILIGHT))
+   //    ::oPen := HPen():Add(PS_SOLID, 5, hwg_GetSysColor(COLOR_3DHILIGHT))
    ENDIF
 
   RETURN Self
@@ -358,7 +358,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
      // SET ENVIRONMENT
        Eval(::bLoad, Self)
    ENDIF
-   ::oPen := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
+   ::oPen := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
 
   RETURN Self
 

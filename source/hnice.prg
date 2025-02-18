@@ -273,16 +273,16 @@ METHOD PAINT() CLASS HNICEButton
       ::state := OBTN_NORMAL
    ENDIF
 
-   Size := GetTextSize(hDC, T)
+   Size := hwg_GetTextSize(hDC, T)
 
    hwg_Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
    SetBkMode(hDC, TRANSPARENT)
 
    IF (::State == OBTN_MOUSOVER)
-      SetTextColor(hDC, hwg_VColor("FF0000"))
+      hwg_SetTextColor(hDC, hwg_VColor("FF0000"))
       TextOut(hDC, XCtr - (Size[1] / 2) + 1, YCtr - (Size[2] / 2) + 1, T)
    ELSE
-      SetTextColor(hDC, hwg_VColor("0000FF"))
+      hwg_SetTextColor(hDC, hwg_VColor("0000FF"))
       TextOut(hDC, XCtr - Size[1] / 2, YCtr - Size[2] / 2, T)
    ENDIF
 

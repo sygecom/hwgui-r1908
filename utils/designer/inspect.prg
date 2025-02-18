@@ -256,8 +256,8 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
    LOCAL nRows := Min( ::nRecords,::rowCount )
    LOCAL oColumn
    LOCAL oPen := HPen():Add( PS_SOLID, 1,::sepColor )
-   LOCAL oPenLight := HPen():Add( PS_SOLID, 1,GetSysColor(COLOR_3DHILIGHT) )
-   LOCAL oPenGray  := HPen():Add( PS_SOLID, 1,GetSysColor(COLOR_3DSHADOW) )
+   LOCAL oPenLight := HPen():Add( PS_SOLID, 1,hwg_GetSysColor(COLOR_3DHILIGHT) )
+   LOCAL oPenGray  := HPen():Add( PS_SOLID, 1,hwg_GetSysColor(COLOR_3DSHADOW) )
 
    x := ::x1
    fif := IIf( ::freeze > 0, 1, ::nLeftCol )
@@ -378,13 +378,13 @@ FUNCTION InspOpen(lShow)
          ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
          setdlgkey(oDesigner:oDlgInsp, 0, VK_DELETE,{|| ResetToDefault(oBrw1)} )
 
-      oBrw1:tColor := GetSysColor( COLOR_BTNTEXT )
+      oBrw1:tColor := hwg_GetSysColor( COLOR_BTNTEXT )
       oBrw1:tColorSel := 8404992
-      oBrw1:bColor := oBrw1:bColorSel := GetSysColor( COLOR_BTNFACE )
+      oBrw1:bColor := oBrw1:bColorSel := hwg_GetSysColor( COLOR_BTNFACE )
       oBrw1:freeze := 1
       oBrw1:lDispHead := .F.
       oBrw1:lSep3d := .T.
-      oBrw1:sepColor  := GetSysColor( COLOR_BTNSHADOW )
+      oBrw1:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw1:aArray := aProp
       oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0, .T. ) )
       oBrw1:AddColumn( HColumn():New( ,ColumnArBlock(),"U", 100, 0, .T. ) )
@@ -393,13 +393,13 @@ FUNCTION InspOpen(lShow)
    BEGIN PAGE "Events" OF oTab
       @ 2, 30 PBROWSE oBrw2 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
          ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
-      oBrw2:tColor := GetSysColor( COLOR_BTNTEXT )
+      oBrw2:tColor := hwg_GetSysColor( COLOR_BTNTEXT )
       oBrw2:tColorSel := 8404992
-      oBrw2:bColor := oBrw2:bColorSel := GetSysColor( COLOR_BTNFACE )
+      oBrw2:bColor := oBrw2:bColorSel := hwg_GetSysColor( COLOR_BTNFACE )
       oBrw2:freeze := 1
       oBrw2:lDispHead := .F.
       oBrw2:lSep3d := .T.
-      oBrw2:sepColor  := GetSysColor( COLOR_BTNSHADOW )
+      oBrw2:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw2:aArray := aMethods
       oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0,.T. ) )
       oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 2]),"",":"+o:aArray[o:nCurrent, 1])},"C", 100, 0,.T. ) )

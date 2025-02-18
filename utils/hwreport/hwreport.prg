@@ -211,7 +211,7 @@ Local step, kolsteps, nsteps
    i := 0
    SelectObject( hDC,s_oPenLine:handle )
    SelectObject( hDC,Iif(lPreview,oFontSmall:handle,oFontStandard:handle) )
-   oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DLIGHT) )
+   oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DLIGHT) )
    DO WHILE i <= aPaintRep[FORM_WIDTH]/10 .AND. i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
       xt := x1+i*n1cm
       hwg_DrawLine( hDC,xt+Round(n1cm/4,0),0,xt+Round(n1cm/4,0),4 )
@@ -237,7 +237,7 @@ Local step, kolsteps, nsteps
    ENDDO
    hwg_FillRect( hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1 )
    hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_WINDOW+1 )
-   SetBkColor( hDC,GetSysColor(COLOR_WINDOW) )
+   hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_WINDOW) )
    FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] != TYPE_BITMAP
          PaintItem( hDC, aPaintRep[FORM_ITEMS,i], aCoors, lPreview )
@@ -248,7 +248,7 @@ Local step, kolsteps, nsteps
          PaintItem( hDC, aPaintRep[FORM_ITEMS,i], aCoors, lPreview )
       ENDIF
    NEXT
-   SetBkColor( hDC,oldBkColor )
+   hwg_SetBkColor( hDC,oldBkColor )
 
    kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF],0)- ;
       (aCoors[4]-aCoors[2]-TOP_INDENT) ) / step, 0 ) + 1

@@ -62,7 +62,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER)
                         IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-              bSize, bPaint, ctooltip, tcolor, IIf(bcolor == NIL, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
+              bSize, bPaint, ctooltip, tcolor, IIf(bcolor == NIL, hwg_GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
 
    ::title   := vari
    ::bOther  := bOther

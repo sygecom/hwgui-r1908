@@ -1257,7 +1257,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
          IF nPage == oPage:PageOrder
             hwg_FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
             IF hwg_GetFocus() == oPage:oParent:handle
-               InflateRect(@client_rect, - 2, - 2)
+               hwg_InflateRect(@client_rect, - 2, - 2)
                hwg_DrawFocusRect(::hDC, client_rect)
             endif
          ELSE
@@ -1304,10 +1304,10 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        hwg_SelectObject(::hDC, oPage:oParent:oFont:handle)
     ENDIF
     IF oPage:lEnabled
-       SetTextColor(::hDC, IIf(Empty(oPage:tColor), GetSysColor(COLOR_WINDOWTEXT), oPage:tColor))
+       hwg_SetTextColor(::hDC, IIf(Empty(oPage:tColor), hwg_GetSysColor(COLOR_WINDOWTEXT), oPage:tColor))
     ELSE
-         //SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
-         SetTextColor(::hDC, GetSysColor(COLOR_BTNHIGHLIGHT))
+         //hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_GRAYTEXT))
+         hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_BTNHIGHLIGHT))
     ENDIF
     aTxtSize := TxtRect(oPage:caption, oPage:oParent)
     IF oPage:oParent:himl != NIL
@@ -1329,7 +1329,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        ELSE
           IF oPage:lEnabled == .F.
              hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
-             SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
+             hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_GRAYTEXT))
           ENDIF
           hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
        ENDIF
@@ -1344,7 +1344,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        ELSE
           IF oPage:lEnabled == .F.
              hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + 1, aItemPos[2] + 1, aItemPos[3] + 1, aItemPos[4] + 1, nstyle)
-             SetTextColor(::hDC, GetSysColor(COLOR_GRAYTEXT))
+             hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_GRAYTEXT))
           ENDIF
           hwg_DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2], aItemPos[3], aItemPos[4], nstyle)
        ENDIF

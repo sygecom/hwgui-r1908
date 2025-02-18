@@ -93,7 +93,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, 
    ::state := OBTN_INIT
    ::nOrder := IIf(oWndParent == NIL, 0, Len(oWndParent:aControls))
    ::title := cText
-   ::tcolor := IIf(color == NIL, GetSysColor(COLOR_BTNTEXT), color)
+   ::tcolor := IIf(color == NIL, hwg_GetSysColor(COLOR_BTNTEXT), color)
    IF bColor != NIL
       ::bcolor := bcolor
       ::brush := HBrush():Add(bcolor)
@@ -321,7 +321,7 @@ METHOD Redefine(oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, cText, col
    ::bClick := bClick
    ::state := OBTN_INIT
    ::title := cText
-   ::tcolor := IIf(color == NIL, GetSysColor(COLOR_BTNTEXT), color)
+   ::tcolor := IIf(color == NIL, hwg_GetSysColor(COLOR_BTNTEXT), color)
    ::ofont := font
    ::xt := IIf(xt == NIL, 0, xt)
    ::yt := IIf(yt == NIL, 0, yt)
@@ -494,19 +494,19 @@ METHOD DrawItems(hDC) CLASS HOwnButton
          hwg_SelectObject(hDC, ::oFont:handle)
       ENDIF
       IF ::lEnabled
-         SetTextColor(hDC, ::tcolor)
+         hwg_SetTextColor(hDC, ::tcolor)
       ELSE
-         //SetTextColor(hDC, RGB(255, 255, 255))
-         SetTextColor(hDC, GETSYSCOLOR(COLOR_INACTIVECAPTION))
+         //hwg_SetTextColor(hDC, RGB(255, 255, 255))
+         hwg_SetTextColor(hDC, hwg_GetSysColor(COLOR_INACTIVECAPTION))
       ENDIF
       x1 := IIf(::xt != 0, ::xt, 4)
       y1 := IIf(::yt != 0, ::yt, 4)
       x2 := ::nWidth - 4
       y2 := ::nHeight - 4
-      SetTransparentMode(hDC, .T.)
+      hwg_SetTransparentMode(hDC, .T.)
       hwg_DrawText(hDC, ::title, x1, y1, x2, y2, ;
          IIf(::xt != 0, DT_LEFT, DT_CENTER) + IIf(::yt != 0, DT_TOP, DT_VCENTER + DT_SINGLELINE))
-      SetTransparentMode(hDC, .F.)
+      hwg_SetTransparentMode(hDC, .F.)
    ENDIF
 
 RETURN NIL

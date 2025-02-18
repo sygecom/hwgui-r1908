@@ -13,7 +13,7 @@ STATIC s_lFixedColor := .T.
 STATIC s_tColorSelect := 0
 STATIC s_bColorSelect := 13434879 //hwg_VColor("CCFFFF")
 STATIC s_lPersistColorSelect := .F.
-STATIC s_bDisablecolor := NIL  // GetSysColor(COLOR_BTNHIGHLIGHT)
+STATIC s_bDisablecolor := NIL  // hwg_GetSysColor(COLOR_BTNHIGHLIGHT)
 
 #include "windows.ch"
 #include "hbclass.ch"
@@ -110,10 +110,10 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    //IF owndParent:oParent != NIL
    //   bPaint := {|o, p|o:paint(p)}
    //ENDIF
-   bcolor := IIf(bcolor == NIL .AND. hwg_BitAnd(nStyle, WS_DISABLED) == 0, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor)
+   bcolor := IIf(bcolor == NIL .AND. hwg_BitAnd(nStyle, WS_DISABLED) == 0, hwg_GetSysColor(COLOR_BTNHIGHLIGHT), bcolor)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
               bSize, bPaint, ctooltip, tcolor, bcolor)
-//              bSize, bPaint, ctooltip, tcolor, IIf(bcolor == NIL, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
+//              bSize, bPaint, ctooltip, tcolor, IIf(bcolor == NIL, hwg_GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
 
    IF vari != NIL
       ::cType := ValType(vari)
@@ -552,7 +552,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bGf
    bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange) CLASS HEdit
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
-      IIf(bcolor == NIL, GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
+      IIf(bcolor == NIL, hwg_GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
    ::bKeyDown := bKeyDown
    IF hb_IsLogical(lMultiLine)
       ::lMultiLine := lMultiLine
@@ -1930,7 +1930,7 @@ FUNCTION SetDisableBackColor(lDef, bcolor)
       RETURN .F.
    ENDIF
    IF Empty(bColor)
-      s_bDisablecolor := IIf(Empty(s_bDisablecolor), GetSysColor(COLOR_BTNHIGHLIGHT), s_bDisablecolor)
+      s_bDisablecolor := IIf(Empty(s_bDisablecolor), hwg_GetSysColor(COLOR_BTNHIGHLIGHT), s_bDisablecolor)
    ELSE
       s_bDisablecolor := bColor
    ENDIF

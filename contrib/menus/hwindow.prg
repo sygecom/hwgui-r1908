@@ -775,10 +775,10 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       /*
       if ( oBtn := oWnd:FindControl(,lParam) ) != Nil
           if oBtn:tcolor != Nil
-             SetTextColor( wParam, oBtn:tcolor )
+             hwg_SetTextColor( wParam, oBtn:tcolor )
           endif
           if oBtn:bcolor != Nil
-             SetBkColor( wParam, oBtn:bcolor )
+             hwg_SetBkColor( wParam, oBtn:bcolor )
              Return oBtn:brush:handle
           endif
           nReturn := 0

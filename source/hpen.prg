@@ -49,7 +49,7 @@ METHOD Add(nStyle, nWidth, nColor) CLASS HPen
       ENDIF
    NEXT
 
-   ::handle := CreatePen(nStyle, nWidth, nColor)
+   ::handle := hwg_CreatePen(nStyle, nWidth, nColor)
    ::style := nStyle
    ::width := nWidth
    ::color := nColor

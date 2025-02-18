@@ -76,7 +76,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
       bPaint := {|o, p|o:paint(p)}
       nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
    ENDIF
-   ::hBrushDefault := HBrush():Add(GetSysColor(COLOR_BTNFACE))
+   ::hBrushDefault := HBrush():Add(hwg_GetSysColor(COLOR_BTNFACE))
 
    ::Super:New(oWndParent, nId, nStyle + nStyles, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ;
       cTooltip, tcolor, bColor)
@@ -293,12 +293,12 @@ METHOD Paint(lpDis) CLASS HStatic
    ENDIF
 
    IF ::tcolor != NIL .AND. ::isEnabled()
-      SetTextColor(dc, ::tcolor)
+      hwg_SetTextColor(dc, ::tcolor)
    ELSEIF !::isEnabled()
-      SetTextColor(dc, 16777215) //GetSysColor(COLOR_WINDOW))
+      hwg_SetTextColor(dc, 16777215) //hwg_GetSysColor(COLOR_WINDOW))
       hwg_DrawText(dc, szText, {client_rect[1] + 1, client_rect[2] + 1, client_rect[3] + 1, client_rect[4] + 1}, dwtext)
       SetBkMode(dc, TRANSPARENT)
-      SetTextColor(dc, 10526880) //GetSysColor(COLOR_GRAYTEXT))
+      hwg_SetTextColor(dc, 10526880) //hwg_GetSysColor(COLOR_GRAYTEXT))
    ENDIF
    // Draw the text
    hwg_DrawText(dc, szText, client_rect, dwtext)

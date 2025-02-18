@@ -298,7 +298,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
    /*
    ::tcolor  := tcolor
    IF tColor != NIL .AND. bColor == NIL
-      bColor := GetSysColor(COLOR_3DFACE)
+      bColor := hwg_GetSysColor(COLOR_3DFACE)
    ENDIF
    */
    ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)

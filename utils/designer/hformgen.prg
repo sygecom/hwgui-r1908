@@ -835,7 +835,7 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
             lDef := .T.
          /*
          ELSEIF ( cPropertyName == "textcolor" .AND. oCtrl:tColor == 0 ) .OR. ;
-                ( cPropertyName == "backcolor" .AND. oCtrl:bColor == GetSysColor( COLOR_3DFACE ) )
+                ( cPropertyName == "backcolor" .AND. oCtrl:bColor == hwg_GetSysColor( COLOR_3DFACE ) )
             lDef := .T.
          */
          ELSEIF ( cPropertyName == "name" .AND. Empty(oCtrl:aProp[j, 2]) )
@@ -989,7 +989,7 @@ STATIC FUNCTION PaintDlg( oDlg )
       i := 0
       // SelectObject( hDC,oPenLine:handle )
       SelectObject( hDC,oDlg:oFont:handle )
-      oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DLIGHT) )
+      oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DLIGHT) )
       DO WHILE i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
          xt := x1+i*n1cm
          hwg_DrawLine( hDC,xt+Round(n1cm/4, 0), 0,xt+Round(n1cm/4, 0), 4 )

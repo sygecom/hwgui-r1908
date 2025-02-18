@@ -1674,7 +1674,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
                   oItem:obj := hrep_FontFromxml(::oPrinter, xProperty, aGetSecond(oItem:aProp, "fonth") * ::nKoefY)
                ENDIF
             ENDIF
-            SetTransparentMode(::oPrinter:hDC, .T.)
+            hwg_SetTransparentMode(::oPrinter:hDC, .T.)
             IF (xProperty := aGetSecond(oItem:aProp, "multiline")) != NIL .AND. xProperty
                nLines := i := 1
                DO WHILE (i := hb_At(";", cText, i)) > 0
@@ -1694,7 +1694,7 @@ METHOD PrintItem(oItem) CLASS HRepTmpl
             ELSE
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
-            SetTransparentMode(::oPrinter:hDC, .F.)
+            hwg_SetTransparentMode(::oPrinter:hDC, .F.)
             // hwg_WriteLog(Str(x) + " " + Str(y) + " " + Str(x2) + " " + Str(y2) + " " + Str(::nAOffSet) + " " + Str(::nTOffSet) + " Say: " + cText)
          ENDIF
       ELSEIF oItem:cClass == "box"

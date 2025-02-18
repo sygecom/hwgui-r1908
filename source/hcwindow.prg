@@ -479,7 +479,7 @@ METHOD SetColor(tcolor, bColor, lRepaint) CLASS HCustomWindow
    IF tcolor != NIL
       ::tcolor := tcolor
       IF bColor == NIL .AND. ::bColor == NIL
-         bColor := GetSysColor(COLOR_3DFACE)
+         bColor := hwg_GetSysColor(COLOR_3DFACE)
       ENDIF
    ENDIF
 
@@ -1041,15 +1041,15 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
 
    IF oCtrl != NIL .AND. !hb_IsNumeric(oCtrl)
       IF oCtrl:tcolor != NIL
-         SetTextColor(wParam, oCtrl:tcolor)
+         hwg_SetTextColor(wParam, oCtrl:tcolor)
       ENDIF
       SetBkMode(wParam, oCtrl:backstyle)
       IF !oCtrl:IsEnabled() .AND. oCtrl:Disablebrush != NIL
          SetBkMode(wParam, TRANSPARENT)
-         SetBkColor(wParam, oCtrl:DisablebColor)
+         hwg_SetBkColor(wParam, oCtrl:DisablebColor)
          RETURN oCtrl:disablebrush:handle
       ELSEIF oCtrl:bcolor != NIL .AND. oCtrl:BackStyle == OPAQUE
-         SetBkColor(wParam, oCtrl:bcolor)
+         hwg_SetBkColor(wParam, oCtrl:bcolor)
          IF oCtrl:brush != NIL
             RETURN oCtrl:brush:handle
          ELSEIF oCtrl:oParent:brush != NIL
@@ -1339,7 +1339,7 @@ RETURN NIL
 
 FUNCTION GetBackColorParent(oCtrl, lSelf, lTransparent)
 
-   LOCAL bColor := GetSysColor(COLOR_BTNFACE)
+   LOCAL bColor := hwg_GetSysColor(COLOR_BTNFACE)
    LOCAL hTheme
    LOCAL brush := NIL
 

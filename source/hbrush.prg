@@ -47,9 +47,9 @@ METHOD Add(nColor, nHatch) CLASS HBrush
       ENDIF
    NEXT
    IF nHatch != 99
-      ::handle := CreateHatchBrush(nHatch, nColor)
+      ::handle := hwg_CreateHatchBrush(nHatch, nColor)
    ELSE
-      ::handle := CreateSolidBrush(nColor)
+      ::handle := hwg_CreateSolidBrush(nColor)
    ENDIF
    ::color := nColor
    AAdd(::aBrushes, SELF)

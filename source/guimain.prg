@@ -477,7 +477,7 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
    IF oFont != NIL
       hFont := hwg_SelectObject(hDC, oFont:handle)
    ENDIF
-   ASize     := GetTextSize(hDC, cTxt)
+   ASize     := hwg_GetTextSize(hDC, cTxt)
    IF oFont != NIL
       hwg_SelectObject(hDC, hFont)
    ENDIF

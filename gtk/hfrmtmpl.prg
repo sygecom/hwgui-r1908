@@ -1206,7 +1206,7 @@ Memvar lLastCycle, lSkipItem
                   oItem:obj := hrep_FontFromxml( ::oPrinter,xProperty,aGetSecond(oItem:aProp,"fonth")*::nKoefY )
                ENDIF
             ENDIF
-            // SetTransparentMode( ::oPrinter:hDC,.T. )
+            // hwg_SetTransparentMode( ::oPrinter:hDC,.T. )
             IF ( xProperty := aGetSecond( oItem:aProp,"multiline" ) ) != Nil ;
                    .AND. xProperty
                nLines := i := 1
@@ -1227,7 +1227,7 @@ Memvar lLastCycle, lSkipItem
             ELSE
                ::oPrinter:Say( cText,x,y,x2,y2,nJustify,oItem:obj )
             ENDIF
-            // SetTransparentMode( ::oPrinter:hDC,.F. )
+            // hwg_SetTransparentMode( ::oPrinter:hDC,.F. )
             // Writelog( str(x)+" "+str(y)+" "+str(x2)+" "+str(y2)+" "+str(::nAOffSet)+" "+str(::nTOffSet)+" Say: "+cText)
          ENDIF
       ELSEIF oItem:cClass == "box"

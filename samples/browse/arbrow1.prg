@@ -35,14 +35,14 @@ FUNCTION Main()
 
    oBrw:aColumns[2]:lEditable = .T.
 
-   oBrw:tColor := GetSysColor(COLOR_BTNTEXT)
+   oBrw:tColor := hwg_GetSysColor(COLOR_BTNTEXT)
    oBrw:tColorSel := 8404992
-   oBrw:bColor := oBrw:bColorSel := GetSysColor(COLOR_BTNFACE)
+   oBrw:bColor := oBrw:bColorSel := hwg_GetSysColor(COLOR_BTNFACE)
    oBrw:freeze := 1
    oBrw:lDispHead := .T.
    oBrw:lSep3d := .T.
    oBrw:lAdjRight := .F.
-   oBrw:sepColor := GetSysColor(COLOR_BTNSHADOW)
+   oBrw:sepColor := hwg_GetSysColor(COLOR_BTNSHADOW)
    oBrw:colpos := 2
 
    readexit(.T.)

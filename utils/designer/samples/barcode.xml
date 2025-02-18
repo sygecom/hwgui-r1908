@@ -234,7 +234,7 @@ refreshAllGets(oDlg)]]>
         <property name="Caption">[Back Color]</property>
       </style>
       <method name="onClick">
-        <![CDATA[//MsgInfo(str(GetSysColor(15)))
+        <![CDATA[//MsgInfo(str(hwg_GetSysColor(15)))
 nColPane:=hwg_ChooseColor(nColPane)
 refreshAllGets(oDlg)
 ]]>
@@ -311,7 +311,7 @@ RedrawWindow( oDlg:handle, 4 + 1 + 2 + 256 )]]>
 oBc:showBarcode()
 //DrawText(GetDC( oDlg:handle), alltrim(cData),nxLeft-5, nxTop+nxHeight-12,nxLeft+nxWidth,nxTop+nxHeight, 0)
 hwg_SetFocus(oEB2:handle)
-//setBkColor(oDlg:handle,0)
+//hwg_SetBkColor(oDlg:handle,0)
 
 ]]>
     </method>

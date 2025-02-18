@@ -401,7 +401,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    ENDIF
    SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
-       SetBkColor(DC, IIf(::bColor == NIL, GetSysColor(COLOR_3DFACE), ::bcolor))
+       hwg_SetBkColor(DC, IIf(::bColor == NIL, hwg_GetSysColor(COLOR_3DFACE), ::bcolor))
        hwg_FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
    ENDIF
    dwFlags    := DT_LEFT + DT_WORDBREAK
@@ -413,14 +413,14 @@ METHOD Paint(lpDis) CLASS HStaticLink
    IF ::state == LBL_NORMAL
       IF ::m_bVisited
          //::dc:SetTextColor(::m_sVisitedColor)
-         SetTextColor(DC, ::m_sVisitedColor)
+         hwg_SetTextColor(DC, ::m_sVisitedColor)
       ELSE
          //::dc:SetTextColor(::m_sLinkColor)
-         SetTextColor(DC, ::m_sLinkColor)
+         hwg_SetTextColor(DC, ::m_sLinkColor)
       ENDIF
    ELSEIF ::state == LBL_MOUSEOVER
       //::dc:SetTextColor(::m_sHoverColor)
-      SetTextColor(DC, ::m_sHoverColor)
+      hwg_SetTextColor(DC, ::m_sHoverColor)
    ENDIF
 
    //::dc:DrawText(strtext, rcClient, dwFlags)

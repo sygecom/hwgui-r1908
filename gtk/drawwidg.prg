@@ -170,7 +170,7 @@ Local i
    NEXT
    #endif
 
-   ::handle := CreatePen( nStyle,nWidth,nColor )
+   ::handle := hwg_CreatePen( nStyle,nWidth,nColor )
    ::style  := nStyle
    ::width  := nWidth
    ::color  := nColor
@@ -267,7 +267,7 @@ Local i
       ENDIF
    NEXT
    #endif
-   ::handle := CreateSolidBrush( nColor )
+   ::handle := hwg_CreateSolidBrush( nColor )
    ::color  := nColor
    AAdd(::aBrushes, Self)
 

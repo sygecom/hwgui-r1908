@@ -1848,10 +1848,10 @@ ENDIF
    //   ::htbcolor := 2896388
    //ENDIF
    IF ::httcolor == NIL
-      ::httcolor := GETSYSCOLOR(COLOR_HIGHLIGHTTEXT)
+      ::httcolor := hwg_GetSysColor(COLOR_HIGHLIGHTTEXT)
    ENDIF
    IF ::htbcolor == NIL
-      ::htbcolor := GETSYSCOLOR(COLOR_HIGHLIGHT)
+      ::htbcolor := hwg_GetSysColor(COLOR_HIGHLIGHT)
    ENDIF
 
    IF ::tcolorSel == NIL
@@ -2179,7 +2179,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    LOCAL state
    LOCAL aItemRect
 
-   oldBkColor := SetBkColor(hDC, GetSysColor(COLOR_3DFACE))
+   oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DFACE))
 
    IF ::hTheme == NIL
       hwg_SelectObject(hDC, s_oPen64:handle)
@@ -2197,7 +2197,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       hwg_SelectObject(hDC, oPen:handle)
    ENDIF
    IF ::lSep3d
-      oPenLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
+      oPenLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
    ENDIF
 
    x := ::x1
@@ -2205,14 +2205,14 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       oldfont := hwg_SelectObject(hDC, ::oHeadFont:handle)
    ENDIF
    IF ::headColor != NIL
-      oldc := SetTextColor(hDC, ::headColor)
+      oldc := hwg_SetTextColor(hDC, ::headColor)
    ENDIF
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
 
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       IF oColumn:headColor != NIL
-         toldc := SetTextColor(hDC, oColumn:headColor)
+         toldc := hwg_SetTextColor(hDC, oColumn:headColor)
       ENDIF
       xSize := oColumn:width
       IF ::lAdjRight .AND. fif == Len(::aColumns)
@@ -2268,7 +2268,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
             s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,{x, x + xsize }, s_axPosMouseOver)
          ELSE
             state := IIf(::hTheme != NIL, PBS_PRESSED, 6)
-            InflateRect(@aItemRect, -1, -1)
+            hwg_InflateRect(@aItemRect, -1, -1)
          ENDIF
          IF ::hTheme != NIL
              hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, NIL)
@@ -2319,7 +2319,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
       x += xSize
 
       IF oColumn:headColor != NIL
-         SetTextColor(hDC, toldc)
+         hwg_SetTextColor(hDC, toldc)
       ENDIF
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
       IF fif > Len(::aColumns)
@@ -2353,9 +2353,9 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    IF !::lAdjRight
       hwg_DrawLine(hDC, ::xAdjRight, ::y1 - 1, ::x2, ::y1 - 1)
    ENDIF
-   SetBkColor(hDC, oldBkColor)
+   hwg_SetBkColor(hDC, oldBkColor)
    IF ::headColor != NIL
-      SetTextColor(hDC, oldc)
+      hwg_SetTextColor(hDC, oldc)
    ENDIF
    IF ::oHeadFont != NIL
       hwg_SelectObject(hDC, oldfont)
@@ -2410,7 +2410,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
    ENDIF
    IF ::lSep3d
       IF oPenLight == NIL
-         oPenLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
+         oPenLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
       ENDIF
    ENDIF
 
@@ -2551,8 +2551,8 @@ METHOD FooterOut(hDC) CLASS HBrowse
         aColorFoot := NIL
         IF oColumn:bColorFoot != NIL
            aColorFoot := Eval(oColumn:bColorFoot, Self)
-           oldBkColor := SetBkColor(hDC, aColorFoot[2])
-           oldTColor := SetTextColor(hDC, aColorFoot[1])
+           oldBkColor := hwg_SetBkColor(hDC, aColorFoot[2])
+           oldTColor := hwg_SetTextColor(hDC, aColorFoot[1])
            oBrush := HBrush():Add(aColorFoot[2])
         ELSE
            //oBrush := ::brush
@@ -2592,7 +2592,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
            hwg_FillRect(hDC, x, ::y2 - nPixelFooterHeight + 1, ;
                 x + xSize - 1, ::y2, oBrush:handle)
         ELSE
-           oldBkColor := SetBkColor(hDC, GetSysColor(COLOR_3DFACE))
+           oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DFACE))
         ENDIF
 
         nY := ::y2 - nPixelFooterHeight
@@ -2607,8 +2607,8 @@ METHOD FooterOut(hDC) CLASS HBrowse
         NEXT   // nando DT_VCENTER + DT_SINGLELINE
 
         IF aColorFoot != NIL
-           SetBkColor(hDC, oldBkColor)
-           SetTextColor(hDC, oldTColor)
+           hwg_SetBkColor(hDC, oldBkColor)
+           hwg_SetTextColor(hDC, oldTColor)
            oBrush:release()
         ENDIF
 // Draw footer separator
@@ -2693,8 +2693,8 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       Eval(::bLineOut, Self, lSelected)
    ENDIF
    IF ::nRecords > 0 .OR. lClear
-  //    oldBkColor := SetBkColor(hDC, IIf(nCol >= 1, ::htbcolor, IIf(lSelected, ::bcolorSel, ::bcolor)))
-  //    oldTColor := SetTextColor(hDC, IIf(nCol >= 1, ::httcolor, IIf(lSelected, ::tcolorSel, ::tcolor)))
+  //    oldBkColor := hwg_SetBkColor(hDC, IIf(nCol >= 1, ::htbcolor, IIf(lSelected, ::bcolorSel, ::bcolor)))
+  //    oldTColor := hwg_SetTextColor(hDC, IIf(nCol >= 1, ::httcolor, IIf(lSelected, ::tcolorSel, ::tcolor)))
       ::nPaintCol := IIf(::freeze > 0, 1, ::nLeftCol)
       ::nPaintRow := nRow
       IF ::lDeleteMark
@@ -2742,8 +2742,8 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
              ENDIF
           ENDIF
       ENDIF
-      oldBkColor := SetBkColor(hDC, IIf(nCol >= 1, ::htbcolor, IIf(lSelected, ::bcolorSel, ::bcolor)))
-      oldTColor := SetTextColor(hDC, IIf(nCol >= 1, ::httcolor, IIf(lSelected, ::tcolorSel, ::tcolor)))
+      oldBkColor := hwg_SetBkColor(hDC, IIf(nCol >= 1, ::htbcolor, IIf(lSelected, ::bcolorSel, ::bcolor)))
+      oldTColor := hwg_SetTextColor(hDC, IIf(nCol >= 1, ::httcolor, IIf(lSelected, ::tcolorSel, ::tcolor)))
       ::nVisibleColLeft := ::nPaintCol
       DO WHILE x < ::x2 - 2
          // if bColorBlock defined get the colors
@@ -2836,10 +2836,10 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                   ENDIF
                   // Ahora lineas Justificadas !!
                   IF ::aColumns[::nPaintCol]:tColor != NIL //.AND. (::nPaintCol != ::colPos .OR. !lSelected)
-                     oldT1Color := SetTextColor(hDC, ::aColumns[::nPaintCol]:tColor)
+                     oldT1Color := hwg_SetTextColor(hDC, ::aColumns[::nPaintCol]:tColor)
                   ENDIF
                   IF ::aColumns[::nPaintCol]:bColor != NIL //.AND. (::nPaintCol != ::colPos .OR. !lSelected)
-                     oldBk1Color := SetBkColor(hDC, ::aColumns[::nPaintCol]:bColor)
+                     oldBk1Color := hwg_SetBkColor(hDC, ::aColumns[::nPaintCol]:bColor)
                   ENDIF
                   IF ::aColumns[::nPaintCol]:oFont != NIL
                      hwg_SelectObject(hDC, ::aColumns[::nPaintCol]:oFont:handle)
@@ -2869,11 +2869,11 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                   #endif
 
                   IF ::aColumns[::nPaintCol]:tColor != NIL //.AND. (::nPaintCol != ::colPos .OR. !lSelected)
-                     SetTextColor(hDC, oldT1Color)
+                     hwg_SetTextColor(hDC, oldT1Color)
                   ENDIF
 
                   IF ::aColumns[::nPaintCol]:bColor != NIL //.AND. (::nPaintCol != ::colPos .OR. !lSelected)
-                     SetBkColor(hDC, oldBk1Color)
+                     hwg_SetBkColor(hDC, oldBk1Color)
                   ENDIF
                 ENDIF
               ENDIF
@@ -2910,8 +2910,8 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
 
       ENDIF
 */
-      SetTextColor(hDC, oldTColor)
-      SetBkColor(hDC, oldBkColor)
+      hwg_SetTextColor(hDC, oldTColor)
+      hwg_SetBkColor(hDC, oldBkColor)
       IF lColumnFont
          hwg_SelectObject(hDC, ::ofont:handle)
       ENDIF

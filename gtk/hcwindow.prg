@@ -237,10 +237,10 @@ Local oCtrl  := oWnd:FindControl(,lParam)
 
    IF oCtrl != Nil
       IF oCtrl:tcolor != Nil
-         SetTextColor( wParam, oCtrl:tcolor )
+         hwg_SetTextColor( wParam, oCtrl:tcolor )
       ENDIF
       IF oCtrl:bcolor != Nil
-         SetBkColor( wParam, oCtrl:bcolor )
+         hwg_SetBkColor( wParam, oCtrl:bcolor )
          Return oCtrl:brush:handle
       ENDIF
    ENDIF

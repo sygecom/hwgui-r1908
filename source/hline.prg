@@ -49,8 +49,8 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, n
          ::nWidth := IIf(nLength == NIL, 20, nLength)
          ::nHeight := ::nBorder + 1 //10
       ENDIF
-      ::oPenLight := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
-      ::oPenGray := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
+      ::oPenLight := HPen():Add(BS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
+      ::oPenGray := HPen():Add(BS_SOLID, 1, hwg_GetSysColor(COLOR_3DSHADOW))
    ELSE
       ::nWidth := nLength
       ::nHeight := nHeight

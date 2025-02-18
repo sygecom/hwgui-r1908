@@ -145,9 +145,9 @@ METHOD PAINT(lpdis) CLASS HGroup
    SetBkMode(dc, TRANSPARENT)
 
    IF hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
-      //pnFrmDark := CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
+      //pnFrmDark := hwg_CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
       pnFrmDark := HPen():Add(PS_SOLID, 1, RGB(64, 64, 64))
-      pnFrmLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
+      pnFrmLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
       ppnOldPen := hwg_SelectObject(dc, pnFrmDark:handle)
       hwg_MoveTo(dc, rcText[1] - 2, rcText[2])
       hwg_LineTo(dc, rc[1], rcText[2])
@@ -163,8 +163,8 @@ METHOD PAINT(lpdis) CLASS HGroup
       hwg_LineTo(dc, rc[3] - 1, rcText[4] + 1)
       hwg_LineTo(dc, rcText[3], rcText[4] + 1)
    ELSE // 3D frame
-      pnFrmDark := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
-      pnFrmLight := HPen():Add(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
+      pnFrmDark := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DSHADOW))
+      pnFrmLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
       ppnOldPen := hwg_SelectObject(dc, pnFrmDark:handle)
       hwg_MoveTo(dc, rcText[1] - 2, rcText[2])
       hwg_LineTo(dc, rc[1], rcText[2])

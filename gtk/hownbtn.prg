@@ -133,7 +133,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    aCoors := hwg_GetClientRect( ::handle )
 
-   // oldBkColor := SetBkColor( hDC,GetSysColor(COLOR_3DFACE) )
+   // oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DFACE) )
    IF ::state == OBTN_INIT
       ::state := OBTN_NORMAL
    ENDIF
@@ -183,19 +183,19 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       ENDIF
       aMetr := GetTextMetric( hDC )
       if ::lEnabled //if button is enabled
-         SetTextColor( hDC,::tcolor )
+         hwg_SetTextColor( hDC,::tcolor )
       Else
-         SetTextColor( hDC, 0 )
+         hwg_SetTextColor( hDC, 0 )
       EndIf
       x1 := IIf(::xt != NIL .AND. ::xt != 0, ::xt, aCoors[1] + 2)
       y1 := IIf(::yt != NIL .AND. ::yt != 0, ::yt, Round((aCoors[4] - aCoors[2] - aMetr[1]) / 2, 0))
       x2 := IIf(::widtht != NIL .AND. ::widtht != 0, ::xt + ::widtht - 1, aCoors[3] - 2)
       y2 := IIf(::heightt != NIL .AND. ::heightt != 0, ::yt + ::heightt - 1, y1 + aMetr[1])
-      // SetTransparentMode( hDC,.T. )
+      // hwg_SetTransparentMode( hDC,.T. )
       hwg_DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
-      // SetTransparentMode( hDC,.F. )
+      // hwg_SetTransparentMode( hDC,.F. )
    ENDIF
-   // SetBkColor( hDC,oldBkColor )
+   // hwg_SetBkColor( hDC,oldBkColor )
    releaseDC( ::handle, hDC )
 
 Return Nil

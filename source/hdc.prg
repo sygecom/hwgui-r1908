@@ -55,7 +55,7 @@ CLASS HDC
    METHOD SelectClipRgn(pRgn)
    METHOD SetTextcolor(xColor)
    METHOD SetBkMode(xMode)
-   METHOD SetBkColor(clr) INLINE    SetBkColor(::m_hDC, clr)
+   METHOD SetBkColor(clr) INLINE    hwg_SetBkColor(::m_hDC, clr)
    METHOD SelectObject(xMode)
    METHOD DrawText(strText, Rect, dwFlags)
    METHOD CreateCompatibleDc(x)
@@ -129,14 +129,14 @@ METHOD SelectClipRgn(pRgn) CLASS HDC
 
 METHOD fillsolidrect(lpRect, clr) CLASS HDC
 
-   SetBkColor(::m_hDC, clr)
-   ExtTextOut(::m_hDC, 0, 0, lpRect[1], lpRect[2], lpRect[3], lpRect[4], NIL)
+   hwg_SetBkColor(::m_hDC, clr)
+   hwg_ExtTextOut(::m_hDC, 0, 0, lpRect[1], lpRect[2], lpRect[3], lpRect[4], NIL)
 
    RETURN NIL
 
 METHOD SetTextColor(xColor) CLASS HDC
 
-   RETURN SetTextColor(::m_hDc, xColor)
+   RETURN hwg_SetTextColor(::m_hDc, xColor)
 
 METHOD SetBkMode(xMode) CLASS HDC
 

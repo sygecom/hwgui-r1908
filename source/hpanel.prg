@@ -163,7 +163,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          ENDIF
          */
       ELSE
-         SETTRANSPARENTMODE(wParam, .T.)
+         hwg_SetTransparentMode(wParam, .T.)
          RETURN GetStockObject(NULL_BRUSH)
       ENDIF
    ELSEIF msg == WM_SIZE
@@ -251,8 +251,8 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
    ::nrePaint := -1
    IF ::nScrollBars = - 1
       IF !::lBorder
-         oPenLight := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT))
-         oPenGray := HPen():Add(BS_SOLID, 1, GetSysColor(COLOR_3DSHADOW))
+         oPenLight := HPen():Add(BS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
+         oPenGray := HPen():Add(BS_SOLID, 1, hwg_GetSysColor(COLOR_3DSHADOW))
 
          hwg_SelectObject(hDC, oPenLight:handle)
          hwg_DrawLine(hDC, 0, 1, aCoors[3] - 1, 1)

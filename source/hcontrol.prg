@@ -174,7 +174,7 @@ METHOD SetColor(tcolor, bColor, lRepaint) CLASS HControl
    IF tcolor != NIL
       ::tcolor := tcolor
       IF bColor == NIL .AND. ::bColor == NIL
-         bColor := GetSysColor(COLOR_3DFACE)
+         bColor := hwg_GetSysColor(COLOR_3DFACE)
       ENDIF
    ENDIF
 

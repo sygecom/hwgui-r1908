@@ -95,7 +95,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ::tcolor  := tcolor
    /*
    IF tColor != Nil .AND. bColor == Nil
-      bColor := GetSysColor( COLOR_3DFACE )
+      bColor := hwg_GetSysColor( COLOR_3DFACE )
    ENDIF
    ::bcolor  := bcolor
    IF bColor != Nil
