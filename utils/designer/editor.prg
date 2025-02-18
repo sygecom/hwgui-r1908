@@ -186,7 +186,7 @@ FUNCTION EditMethod( cMethName, cMethod )
       AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_MAXIMIZEBOX+WS_SIZEBOX ;
       ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
-      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(),.F.),.T.}
+      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(),.F.),.T.}
 
    MENU OF oDlg
       MENU TITLE "&Options"
@@ -223,7 +223,7 @@ FUNCTION EditMethod( cMethName, cMethod )
    // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
 
    // oEdit:title := cMethod
-   *-SetDlgKey( odlg, 0,VK_TAB, {msginfo("tab")})
+   *-SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
          *-{hwg_SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
    *-SetDlgKey( oEdit, 0, 9)
@@ -515,10 +515,10 @@ Static Function UpdSample( nAction )
    IF nAction != Nil
       IF nAction == 1
          IF Len(aSchemes) == 1
-            MsgStop( "Can't delete the only theme !", "Designer" )
+            hwg_MsgStop( "Can't delete the only theme !", "Designer" )
             Return Nil
          ENDIF
-         IF MsgYesNo( "Really delete the '" + aSchemes[nScheme, 1] + "' theme ?", "Designer" )
+         IF hwg_MsgYesNo( "Really delete the '" + aSchemes[nScheme, 1] + "' theme ?", "Designer" )
             ADel(aSchemes, nScheme)
             ASize(aSchemes, Len(aSchemes) - 1)
             nScheme := oBrw:nCurrent := oBrw:rowPos := 1
@@ -528,7 +528,7 @@ Static Function UpdSample( nAction )
          ENDIF
       ELSEIF nAction == 2
          IF Empty(cScheme)
-            MsgStop( "You must specify the theme name !", "Designer" )
+            hwg_MsgStop( "You must specify the theme name !", "Designer" )
             Return Nil
          ENDIF
          IF AScan(aSchemes, {|a|Lower(a[1]) == Lower(cScheme)}) == 0
@@ -537,7 +537,7 @@ Static Function UpdSample( nAction )
                 AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6]) })
             oBrw:Refresh()
          ELSE
-            MsgStop( "The " + cScheme + " theme exists already !", "Designer" )
+            hwg_MsgStop( "The " + cScheme + " theme exists already !", "Designer" )
             Return Nil
          ENDIF
       ENDIF
@@ -567,11 +567,11 @@ HB_SYMBOL_UNUSED( nModus )
 
   IF FILE(cDBF)
 
-   MSGINFO("later..")
+   hwg_MsgInfo("later..")
 
 
   ELSE
-        MSGINFO(cDBF+chr(13)+"Not Found")
+        hwg_MsgInfo(cDBF+chr(13)+"Not Found")
   ENDIF
 
   return (Nil)

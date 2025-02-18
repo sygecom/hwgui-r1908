@@ -135,7 +135,7 @@ hwg_SetFocus( oEdit2:handle )]]>
       <![CDATA[hwg_SetFocus(oEdit1:handle)
 if Eof()
   if dbSeek( m_cod )
-     msginfo( "The "+m_cod+" exists already !" )
+     hwg_MsgInfo( "The "+m_cod+" exists already !" )
      go bottom
      dbSkip(1)
      return

@@ -43,7 +43,7 @@ ENDFUNC
    PRIVATE cFont
 
    IF han == - 1
-      MsgStop( "Can't open "+oForm:path+oForm:filename )
+      hwg_MsgStop( "Can't open "+oForm:path+oForm:filename )
       Return
    ENDIF
    DO WHILE .T.
@@ -80,7 +80,7 @@ ENDFUNC
          ELSE           
             itemName := CnvCtrlName( NextItem( stroka,.T. ) )
             IF itemName == Nil
-               MsgStop( "Wrong item name: " + NextItem( stroka,.T. ) )
+               hwg_MsgStop( "Wrong item name: " + NextItem( stroka,.T. ) )
                Return
             ENDIF
             cCaption := NextItem( stroka )

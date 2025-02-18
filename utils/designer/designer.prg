@@ -109,11 +109,11 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
    IF ValType( crossCursor ) != "N"
-      crossCursor := LoadCursor( IDC_CROSS )
-      horzCursor  := LoadCursor( IDC_SIZEWE )
-      vertCursor  := LoadCursor( IDC_SIZENS )
+      crossCursor := hwg_LoadCursor( IDC_CROSS )
+      horzCursor  := hwg_LoadCursor( IDC_SIZEWE )
+      vertCursor  := hwg_LoadCursor( IDC_SIZENS )
       // :LFB
-      handCursor   := LoadCursor( IDC_HAND )  //65581
+      handCursor   := hwg_LoadCursor( IDC_HAND )  //65581
       // :END LFB
    ENDIF
 
@@ -139,9 +139,9 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
             MENUITEM "&New "+IIf(!oDesigner:lReport,"Form","Report")  ACTION HFormGen():New()
             MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():Open()
             SEPARATOR
-            MENUITEM "&Save "+IIf(!oDesigner:lReport,"Form","Report")   ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),MsgStop("No Form in use!", "Designer"))
-            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(.T.),MsgStop("No Form in use!"))
-            MENUITEM "&Close "+IIf(!oDesigner:lReport,"Form","Report")  ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:End(),MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save "+IIf(!oDesigner:lReport,"Form","Report")   ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_MsgStop("No Form in use!"))
+            MENUITEM "&Close "+IIf(!oDesigner:lReport,"Form","Report")  ACTION IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
             If !lOmmitMenuFile
                MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():OpenR()
@@ -185,7 +185,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM "&AutoAdjust" ID 1011 ACTION CheckMenuItem(oDesigner:oMainWnd:handle, 1011,!IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1011))
       ENDMENU
       MENU TITLE "&Help"
-         MENUITEM "&About" ACTION MsgInfo("Visual Designer", "Designer")
+         MENUITEM "&About" ACTION hwg_MsgInfo("Visual Designer", "Designer")
       ENDMENU
    ENDMENU
 
@@ -212,7 +212,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       @ 55, 6 LINE LENGTH 18 VERTICAL
 
       @ 60, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),MsgStop("No Form in use!"))} ;
+          ON CLICK {||IIf(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!"))} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "BMP_SAVE" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Save Form"
@@ -390,7 +390,7 @@ if ( oDesigner:oDlgInsp == NIL )
         oDesigner:lShowGrid  := .F.
     endif
 else
-    msginfo( "Close the form(s) first to change the grid status","Warning")
+    hwg_MsgInfo( "Close the form(s) first to change the grid status","Warning")
 endif
 Return ( NIL )
 
@@ -411,7 +411,7 @@ if ( oDesigner:oDlgInsp == NIL )
         oDesigner:lShowGrid  := .F.
     endif
 else
-    msginfo( "Close the form first to change the grid status","Warning")
+    hwg_MsgInfo( "Close the form first to change the grid status","Warning")
 endif
 Return ( NIL )
 
@@ -535,7 +535,7 @@ STATIC FUNCTION ReadIniFiles()
       oDesigner:oWidgetsSet := HXMLDoc():Read( cCurDir + cWidgetsFileName )
    ENDIF
    IF oDesigner:oWidgetsSet == Nil .OR. Empty(oDesigner:oWidgetsSet:aItems)
-      MsgStop( "Widgets file isn't found!","Designer error" )
+      hwg_MsgStop( "Widgets file isn't found!","Designer error" )
       Return .F.
    ENDIF
 
@@ -784,7 +784,7 @@ STATIC FUNCTION EndIde()
    MEMVAR cCurDir
 
   IF alen > 0
-     IF MsgYesNo( "Do you really want to quit ?", "Designer" )
+     IF hwg_MsgYesNo( "Do you really want to quit ?", "Designer" )
         FOR i := Len(HFormGen():aForms) TO 1 STEP -1
            HFormGen():aForms[i]:End( ,.F. )
         NEXT

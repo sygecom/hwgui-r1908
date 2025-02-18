@@ -209,14 +209,14 @@ METHOD Paint( lpdis ) CLASS HControlGen
     for i=1 to Len(asels)
       octrl2 := asels[i]
       IF oCtrl2 != Nil .AND. ::handle == oCtrl2:handle
-        SelectObject( hDC, oPenSel:handle )
+        hwg_SelectObject( hDC, oPenSel:handle )
         hwg_Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
       ENDIF
     next
   ELSE // :LEFB
     oCtrl := GetCtrlSelected( HFormGen():oDlgSelected )
     IF oCtrl != Nil .AND. ::handle == oCtrl:handle
-      SelectObject( hDC, oPenSel:handle )
+      hwg_SelectObject( hDC, oPenSel:handle )
       hwg_Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
     ENDIF
   ENDIF // :END LFB
@@ -306,7 +306,7 @@ FUNCTION ctrlOnSize( oCtrl, x, y )
       *-IF oCtrl:oParent:nTop != Nil
         FOR i=1 to Len(acontrols)
           oCtrls := aControls[i]
-              *-msginfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
+              *-hwg_MsgInfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass="browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop+oCtrls:nHeight)
                  oCtrl:Move(oCtrl:nLeft ,oCtrls:nTop+2 )
               *oCtrl:SetProp( "Top","oCtrls:nTop+2" )
@@ -1127,11 +1127,11 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
    LOCAL yf
 
    pps := hwg_DefinePaintStru()
-   hDC := GetDC( hwg_GetActiveWindow() )
+   hDC := hwg_GetDC( hwg_GetActiveWindow() )
    IF oPenSel == Nil
       oPenSel := HPen():Add( PS_SOLID, 1, 255 )
    ENDIF
-  SelectObject( hDC, oPenSel:handle )
+  hwg_SelectObject( hDC, oPenSel:handle )
   IF xpos < xi
     xf := xi
     xi := xpos
@@ -1166,7 +1166,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
    yi := ypos
    ypos := yf
  ENDIF
- //msginfo(Str(xi)+","+Str(yi)+","+Str(xpos)+","+Str(ypos))
+ //hwg_MsgInfo(Str(xi)+","+Str(yi)+","+Str(xpos)+","+Str(ypos))
  FOR i = 1 to Len(oDlg:aControls)
     oCtrl := oDlg:aControls[i]
     IF ((yi <= oCtrl:nTop +  oCtrl:nHeight .AND. yPos >= oCtrl:nTop) .OR. ;
@@ -1183,9 +1183,9 @@ FUNCTION AUTOSIZE(oCtrl)
    LOCAL aSize := {}
 
    IF oCtrl:oFont != NIL
-        asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oFont,GetDC(oCtrl:handle)) //nHdc)
+        asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oFont,hwg_GetDC(oCtrl:handle)) //nHdc)
      ELSE
-        asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oparent:oFont,GetDC(oCtrl:handle)) //nHdc)
+        asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oparent:oFont,hwg_GetDC(oCtrl:handle)) //nHdc)
     ENDIF
     IF octrl:nLeft = Nil
       return nil
@@ -1203,11 +1203,11 @@ FUNCTION GetTextWidth( cString, oFont ,hdc)
    LOCAL hFont
 
    IF oFont != Nil
-      hFont := SelectObject( hDC,oFont:handle )
+      hFont := hwg_SelectObject( hDC,oFont:handle )
    ENDIF
    arr := hwg_GetTextSize( hDC,cString )
    IF oFont != Nil
-      SelectObject( hDC,hFont )
+      hwg_SelectObject( hDC,hFont )
    ENDIF
 
 Return arr

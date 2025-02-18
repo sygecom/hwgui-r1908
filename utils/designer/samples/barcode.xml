@@ -234,7 +234,7 @@ refreshAllGets(oDlg)]]>
         <property name="Caption">[Back Color]</property>
       </style>
       <method name="onClick">
-        <![CDATA[//MsgInfo(str(hwg_GetSysColor(15)))
+        <![CDATA[//hwg_MsgInfo(str(hwg_GetSysColor(15)))
 nColPane:=hwg_ChooseColor(nColPane)
 refreshAllGets(oDlg)
 ]]>
@@ -307,9 +307,9 @@ RedrawWindow( oDlg:handle, 4 + 1 + 2 + 256 )]]>
       <property name="Caption">[Display]</property>
     </style>
     <method name="onClick">
-      <![CDATA[oBC:=Barcode():New( GetDC( oDlg:handle) , alltrim(cData) , nxLeft, nxTop, nxWidth, nxHeight, nBCodeType,nColText, nColPane, lHorz,lTransparent, nPinxWidth)
+      <![CDATA[oBC:=Barcode():New( hwg_GetDC( oDlg:handle) , alltrim(cData) , nxLeft, nxTop, nxWidth, nxHeight, nBCodeType,nColText, nColPane, lHorz,lTransparent, nPinxWidth)
 oBc:showBarcode()
-//DrawText(GetDC( oDlg:handle), alltrim(cData),nxLeft-5, nxTop+nxHeight-12,nxLeft+nxWidth,nxTop+nxHeight, 0)
+//DrawText(hwg_GetDC( oDlg:handle), alltrim(cData),nxLeft-5, nxTop+nxHeight-12,nxLeft+nxWidth,nxTop+nxHeight, 0)
 hwg_SetFocus(oEB2:handle)
 //hwg_SetBkColor(oDlg:handle,0)
 

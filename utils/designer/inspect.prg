@@ -269,9 +269,9 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
          xSize := Max( ::x2 - x, xSize )
       endif
       if x > ::x1
-         SelectObject( hDC, oPenLight:handle )
+         hwg_SelectObject( hDC, oPenLight:handle )
          hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
-         SelectObject( hDC, oPenGray:handle )
+         hwg_SelectObject( hDC, oPenGray:handle )
          hwg_DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
       endif
       x += xSize
@@ -281,7 +281,7 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
       endif
    ENDDO
 
-   SelectObject( hDC, oPen:handle )
+   hwg_SelectObject( hDC, oPen:handle )
    FOR i := 1 to nRows
       hwg_DrawLine( hDC, ::x1, ::y1+(::height+1)*i, IIf(::lAdjRight, ::x2, x), ::y1+(::height+1)*i )
    NEXT
@@ -675,7 +675,7 @@ STATIC FUNCTION onclick_deleteitem(oBrw)
   IF oBrw:nCurrent = 1 .AND. oBrw:aArray[oBrw:nCurrent] = ".."
     RETURN nil
   ENDIF
-  IF Len(obrw:aArray) > 0 .AND. msgyesno("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
+  IF Len(obrw:aArray) > 0 .AND. hwg_MsgYesNo("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
      oBrw:aArray := ADel(obrw:aArray, oBrw:nCurrent)
      obrw:aArray := ASize(obrw:aArray, Len(obrw:aArray) - 1)
      obrw:refresh()
@@ -791,7 +791,7 @@ HB_SYMBOL_UNUSED( lParam )
       Return 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()
-      *MSGINFO("Futura a‡Æo dos Eventos")
+      *hwg_MsgInfo("Futura a‡Æo dos Eventos")
       Return 1
    ELSEIF msg == WM_MOVE
    ELSEIF msg == WM_KEYDOWN

@@ -71,9 +71,9 @@ EXTERNAL HWG_SELECTFONT, HWG_SELECTFILE, HWG_SAVEFILE, HWG_PRINTSETUP
 //EXTERNAL HWG_CONTEXTMENU
 
 EXTERNAL RDINI, HWG_CHOOSECOLOR, OPENREPORT
-EXTERNAL HSAYFIMAGE, MSGYESNO, MSGOKCANCEL, MSGEXCLAMATION, HUPDOWN
+EXTERNAL HSAYFIMAGE, HWG_MSGYESNO, HWG_MSGOKCANCEL, HWG_MSGEXCLAMATION, HUPDOWN
 EXTERNAL HTAB, HDATEPICKER, HWG_SHELLEXECUTE, SETTOPMOST
-EXTERNAL REMOVETOPMOST, HPROGRESSBAR, HRECT, GETDESKTOPWIDTH
+EXTERNAL REMOVETOPMOST, HPROGRESSBAR, HRECT, HWG_GETDESKTOPWIDTH
 
 //REQUEST HB_CODEPAGE_RU866
 //REQUEST HB_CODEPAGE_RUKOI8
@@ -104,7 +104,7 @@ EXTERNAL RDDSYS, RDDINFO, RDDLIST, RDDSETDEFAULT, RDDREGISTER, RDDNAME
 
 EXTERNAL HWINPRN
 EXTERNAL HSPLITTER, HWG_COS, HGRAPH
-EXTERNAL GETDESKTOPHEIGHT, HLISTBOX, HXMLDOC
+EXTERNAL HWG_GETDESKTOPHEIGHT, HLISTBOX, HXMLDOC
 EXTERNAL SETMENUCAPTION, HSPLASH, HWG_SETTOOLTIPBALLOON, HWG_LOADRESOURCE
 EXTERNAL HIPEDIT, RICHTEXT, HRICHEDIT, MSGRETRYCANCEL, HMONTHCALENDAR
 EXTERNAL PRINTDOS, /*, BARCODE */ HSTATICLINK, CREATEOBJECT
@@ -400,11 +400,11 @@ function filelock(nSeconds)
       endif
       inkey(.5)      // wait 1/2 second
       nSeconds := nSeconds - .5
-      MsgStop("File is in use by another", alias())
+      hwg_MsgStop("File is in use by another", alias())
    enddo
 
 
-   MsgStop("File failed to locked", alias())
+   hwg_MsgStop("File failed to locked", alias())
 
  return .f.
 
@@ -428,14 +428,14 @@ function reclock(nSeconds)
       if DBRLOCK(OldPos)
          return .t.                     // LOCKED
       endif
-      MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
+      hwg_MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
    enddo
 
 
 
-   MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
+   hwg_MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
 
    return .f.                           // NOT LOCKED
 
@@ -474,12 +474,12 @@ function addrec(nSeconds)
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds  - .5
-      MsgStop("Record is in use exclusive by another")
+      hwg_MsgStop("Record is in use exclusive by another")
 
    enddo
 
 
-   MsgStop("Record failed to locked", alias())
+   hwg_MsgStop("Record failed to locked", alias())
 
    return .f.                           // NOT LOCKED
 
@@ -506,7 +506,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
        return .T.
     endif
 
-    MsgInfo("Tidak boleh kosong")
+    hwg_MsgInfo("Tidak boleh kosong")
     return .f.
     //return IIf(lKosong==NIL,.t.,.f.)
  end
@@ -524,7 +524,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
  *:minimum 6  &  max 9 char
 
  if ((nLen<6) .or. (nLen>9))
-     MsgStop("Pengisian Tanggal Belum Benar!!!")
+     hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
      return .f.
  end
 
@@ -577,7 +577,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 	   endif
 
       if  ValType(ctod(dd+mm+yy))!="D"  .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
-          MsgStop("Pengisian Tanggal Belum Benar!!!")
+          hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
           return .f.
       else
        g:SetGet(d2infstr( ctod(dd+mm+yy) ))

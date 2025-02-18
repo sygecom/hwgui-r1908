@@ -21,7 +21,7 @@
   </style>
   <method name="onFormExit">
     <![CDATA[dbCloseAll()
-MsgInfo("On Form Exit.. returning <x>","hwGui XMLRUN Sample")]]>
+hwg_MsgInfo("On Form Exit.. returning <x>","hwGui XMLRUN Sample")]]>
   </method>
   <part class="browse">
     <style>

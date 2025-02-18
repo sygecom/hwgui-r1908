@@ -137,7 +137,7 @@ FUNCTION ABRW2TXT
 //aSession:= saveSession()
 n:=len(aData)
 IF n<=1
-   MsgInfo("Isi Field terlebih dulu")
+   hwg_MsgInfo("Isi Field terlebih dulu")
    RETURN .F.
 ENDIF
 
@@ -372,7 +372,7 @@ return .t.
       <![CDATA[Private iVal, i, aSum,z,y,w,pkt
 
 if (nPV==0  .OR. val(iPa)==0  .OR. Val(iPm)==0  )
-  msgStop("Field * harus diisi","Perhatian")
+  hwg_MsgStop("Field * harus diisi","Perhatian")
 else
 
 // FindAnnuity()
@@ -615,7 +615,7 @@ findAnnuity()
     <method name="onClick">
       <![CDATA[
 if nPV==0
- MsgInfo("Belum ada yang Hasil..")
+ hwg_MsgInfo("Belum ada yang Hasil..")
  return .f.
 endif
 iif(empty(fname),fname:="*.FA")
@@ -657,7 +657,7 @@ ABRW2TXT()
       <property name="BmpTop">5</property>
     </style>
     <method name="onClick">
-      <![CDATA[MsgInfo("Reserved (Next Version)")
+      <![CDATA[hwg_MsgInfo("Reserved (Next Version)")
 ]]>
     </method>
   </part>
@@ -674,7 +674,7 @@ ABRW2TXT()
       <property name="BmpTop">5</property>
     </style>
     <method name="onClick">
-      <![CDATA[MsgInfo("1.Entry Present Value (nilai kontan)"+chr(13)+"2.Entry Interest (bunga %) pa=pertahun pm=per bulan"+chr(13)+"3.Entry Period (periode/jangka waktu)"+chr(13)+"Then"+chr(13)+"Click Annuity Button","Hint:Find annuity/cari angsuran")
+      <![CDATA[hwg_MsgInfo("1.Entry Present Value (nilai kontan)"+chr(13)+"2.Entry Interest (bunga %) pa=pertahun pm=per bulan"+chr(13)+"3.Entry Period (periode/jangka waktu)"+chr(13)+"Then"+chr(13)+"Click Annuity Button","Hint:Find annuity/cari angsuran")
 
 ]]>
     </method>
@@ -740,7 +740,7 @@ ABRW2TXT()
       <property name="varName">[lIndonesia]</property>
     </style>
     <method name="onClick">
-      <![CDATA[//MsgInfo( iif(lIndonesia,"Indonesia","English") )
+      <![CDATA[//hwg_MsgInfo( iif(lIndonesia,"Indonesia","English") )
 if lIndonesia
  oLabel1:SetText("Nilai Kontan")
  oLabel2:SetText("Nilai Akhir")

@@ -42,7 +42,7 @@ ENDFUNC
    PRIVATE aVars
 
   IF han == - 1
-    MsgStop( "Can't open "+oForm:path+oForm:filename )
+    hwg_MsgStop( "Can't open "+oForm:path+oForm:filename )
     Return
   ENDIF
   DO WHILE .T.

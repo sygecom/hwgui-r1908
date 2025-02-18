@@ -78,7 +78,7 @@ METHOD New() CLASS HFormGen
 
    LOCAL i := 1
    LOCAL name
-   LOCAL hDCwindow := GetDC( hwg_GetActiveWindow() )
+   LOCAL hDCwindow := hwg_GetDC( hwg_GetActiveWindow() )
    LOCAL aTermMetr := GetDeviceArea( hDCwindow )
 
    DeleteDC( hDCwindow )
@@ -94,7 +94,7 @@ METHOD New() CLASS HFormGen
    ::name := name
    //::CreateDialog( { {"Left",LTrim(Str(aTermMetr[1]-500))},  //{"Top","120"},{"Width","500"},{"Height","400"},{"Caption",name} } )
    //::CreateDialog( { {"Left","325"}, {"Top","060"},{"Width","498"},{"Height","470"},{"Caption",name} } )
-   IF Getdesktopwidth() < 1024
+   IF hwg_Getdesktopwidth() < 1024
      ::CreateDialog( { {"Left","225"}, {"Top","110"},{"Width","550"},{"Height","400"},{"Caption",name} } )
    ELSE
      ::CreateDialog( { {"Left","125"}, {"Top","150"},{"Width","750"},{"Height","600"},{"Caption",name} } )
@@ -111,7 +111,7 @@ METHOD OpenR( fname )  CLASS HFormGen
    
    LOCAL oForm := ::aForms[1]
    MEMVAR oDesigner
-   IF !MsgYesNo( "The form will be opened INSTEAD of current ! Do you agree ?", "Designer")
+   IF !hwg_MsgYesNo( "The form will be opened INSTEAD of current ! Do you agree ?", "Designer")
       Return Nil
    ENDIF
    oDesigner:lSingleForm := .F.
@@ -159,7 +159,7 @@ METHOD Open( fname,cForm )  CLASS HFormGen
              InspSetCombo()
       ENDIF
       IF ::oDlg == Nil .OR. Empty(::oDlg:aControls)
-         MsgStop( "Can't load the form", "Designer" )
+         hwg_MsgStop( "Can't load the form", "Designer" )
       ELSEIF !oDesigner:lSingleForm .AND. fname != Nil
          AddRecent( Self )
       ENDIF
@@ -179,7 +179,7 @@ METHOD End( lDlg,lCloseDes ) CLASS HFormGen
 
    IF lDlg == Nil; lDlg := .F.; ENDIF
    IF ::lChanged
-      IF MsgYesNo( ::name + " was changed. Save it ?", "Designer" )
+      IF hwg_MsgYesNo( ::name + " was changed. Save it ?", "Designer" )
          ::Save()
       ENDIF
    ENDIF
@@ -228,7 +228,7 @@ METHOD Save( lAs ) CLASS HFormGen
 
    IF lAs == Nil; lAs := .F.; ENDIF
    IF !::lChanged .AND. !lAs
-      MsgStop( "Nothing to save", "Designer" )
+      hwg_MsgStop( "Nothing to save", "Designer" )
       Return Nil
    ENDIF
 
@@ -349,12 +349,12 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
    NEXT
 
    IF oDesigner:lReport
-      hDC := GetDC( hwg_GetActiveWindow() )
+      hDC := hwg_GetDC( hwg_GetActiveWindow() )
       aMetr := GetDeviceArea( hDC )
       // writelog( Str(aMetr[1])+Str(aMetr[2])+Str(aMetr[3])+Str(aMetr[4])+Str(aMetr[5])+Str(aMetr[6])+Str(aMetr[7])+Str(aMetr[8])+Str(aMetr[9]) )
       ::nKoeff := ( aMetr[1]/aMetr[3] + aMetr[2]/aMetr[4] ) / 2
       // writelog( Str(::nKoeff) )
-      ReleaseDC( hwg_GetActiveWindow(),hDC )
+      hwg_ReleaseDC( hwg_GetActiveWindow(),hDC )
       ::SetPaper( ::GetProp("Paper Size"),::GetProp("Orientation") )
       IF ::oDlg:oFont == Nil
          ::oDlg:oFont := HFont():Add( "Arial", 0, -13 )
@@ -379,8 +379,8 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
 
    IF oDesigner:oDlgInsp == Nil
      //
-      InspOpen(IIf(Getdesktopwidth()>800,.T.,.F.))
-      IF Getdesktopwidth()<=800
+      InspOpen(IIf(hwg_Getdesktopwidth()>800,.T.,.F.))
+      IF hwg_Getdesktopwidth()<=800
              oDesigner:oDlgInsp:HIDE()
           ENDIF
          //  NANDO escondeu ele
@@ -701,10 +701,10 @@ STATIC FUNCTION ReadForm( oForm,cForm )
    MEMVAR oDesigner
 
    IF Empty(oDoc:aItems)
-      MsgStop( "Can't open "+oForm:path+oForm:filename, "Designer" )
+      hwg_MsgStop( "Can't open "+oForm:path+oForm:filename, "Designer" )
       Return Nil
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute( "class" ) != IIf( oDesigner:lReport,"report","form" )
-      MsgStop( "Form description isn't found", "Designer" )
+      hwg_MsgStop( "Form description isn't found", "Designer" )
       Return Nil
    ENDIF
    oForm:cEncoding := oDoc:GetAttribute( "encoding" )
@@ -987,8 +987,8 @@ STATIC FUNCTION PaintDlg( oDlg )
       hwg_FillRect( hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_3DLIGHT+1 )
       hwg_FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
       i := 0
-      // SelectObject( hDC,oPenLine:handle )
-      SelectObject( hDC,oDlg:oFont:handle )
+      // hwg_SelectObject( hDC,oPenLine:handle )
+      hwg_SelectObject( hDC,oDlg:oFont:handle )
       oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DLIGHT) )
       DO WHILE i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
          xt := x1+i*n1cm
@@ -1027,7 +1027,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           // : LFB
           SetROP2(hDC, 9)
           oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("606060"))
-          SelectObject( hDC,oPenDivider:handle )
+          hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB
           for i := nLeft+oDesigner:nPixelGrid to nRight step oDesigner:nPixelGrid
               hwg_DrawLine( hDC, i, nTop,i, nBottom )  //v
@@ -1038,7 +1038,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           // : LFB
           SetROP2(hDC, 13)
           oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))
-          SelectObject( hDC,oPenDivider:handle )
+          hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB
       endif
 
@@ -1742,7 +1742,7 @@ FUNCTION DoPreview()
    MEMVAR oDesigner
 
    IF HFormGen():oDlgSelected == Nil
-      MsgStop( "No Form in use!", "Designer" )
+      hwg_MsgStop( "No Form in use!", "Designer" )
       Return Nil
    ENDIF
 

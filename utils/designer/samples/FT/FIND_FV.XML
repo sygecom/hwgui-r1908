@@ -25,7 +25,7 @@
   </style>
   <method name="common">
     <![CDATA[function info
-msgInfo("pv")
+hwg_MsgInfo("pv")
 endfunc]]>
   </method>
   <method name="onFormInit">
@@ -385,7 +385,7 @@ oPeriod:refresh()
     <method name="onClick">
       <![CDATA[private aSave
 if nA==0 .or. VAl(iPa)==0
-   MsgInfo("isi field yang dibutuhkan")
+   hwg_MsgInfo("isi field yang dibutuhkan")
    return .t.
 endif
 
@@ -425,7 +425,7 @@ SaveArray(@aSave,@fName)]]>
       <property name="BmpTop">5</property>
     </style>
     <method name="onClick">
-      <![CDATA[MsgInfo("Setup..")]]>
+      <![CDATA[hwg_MsgInfo("Setup..")]]>
     </method>
   </part>
   <part class="ownerbutton">
@@ -441,7 +441,7 @@ SaveArray(@aSave,@fName)]]>
       <property name="BmpTop">5</property>
     </style>
     <method name="onClick">
-      <![CDATA[MsgInfo("Help","Bantuan")]]>
+      <![CDATA[hwg_MsgInfo("Help","Bantuan")]]>
     </method>
   </part>
   <part class="bitmap">
