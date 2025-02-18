@@ -480,7 +480,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
 *        COLOR oColor1 BACKCOLOR oColor2  //Blue to Black  && Original
 //   @ 88, 19 EDITBOX oEdit ID 1001 SIZE 548, 465 STYLE WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE ;
 //        COLOR oColor1 BACKCOLOR oColor2 FONT oFont //Blue to Black  //Added by  por Fernando Athayde
-   @ 88, 19 EDITBOX oedit1 CAPTION oEdit ID 1001 SIZE GETDESKTOPWIDTH() - 100, GETDESKTOPHEIGHT() - 100 STYLE WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE ;
+   @ 88, 19 EDITBOX oedit1 CAPTION oEdit ID 1001 SIZE hwg_GetDesktopWidth() - 100, hwg_GetDesktopHeight() - 100 STYLE WS_VSCROLL + WS_HSCROLL + ES_AUTOHSCROLL + ES_MULTILINE ;
       COLOR oColor1 BACKCOLOR oColor2 FONT oFont //Blue to Black  //Added by  por Fernando Athayde
 
 
