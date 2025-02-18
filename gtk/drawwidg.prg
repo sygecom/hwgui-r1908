@@ -71,7 +71,7 @@ Local i, nlen := Len(::aFonts)
    NEXT
 
    IF nHandle == Nil
-      ::handle := CreateFont( fontName, nWidth, nHeight*1024 ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut )
+      ::handle := hwg_CreateFont( fontName, nWidth, nHeight*1024 ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut )
    ELSE
       ::handle := nHandle
       nHeight := nHeight / 1024

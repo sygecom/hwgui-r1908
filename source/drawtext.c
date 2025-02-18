@@ -57,17 +57,21 @@ HB_FUNC_TRANSLATE(ENDPAINT, HWG_ENDPAINT);
 #endif
 
 /*
-DELETEDC(HDC) -->
+HWG_DELETEDC(HDC) -->
 */
-HB_FUNC(DELETEDC)
+HB_FUNC(HWG_DELETEDC)
 {
   DeleteDC(hwg_par_HDC(1)); // TODO: o retorno é BOOL
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DELETEDC, HWG_DELETEDC);
+#endif
+
 /*
-TEXTOUT(HDC, nX, nY, cString) -->
+HWG_TEXTOUT(HDC, nX, nY, cString) -->
 */
-HB_FUNC(TEXTOUT)
+HB_FUNC(HWG_TEXTOUT)
 {
   void *hText;
   HB_SIZE nLen;
@@ -75,6 +79,10 @@ HB_FUNC(TEXTOUT)
   TextOut(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), lpText, (int)nLen); // TODO: o retorno é BOOL
   hb_strfree(hText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TEXTOUT, HWG_TEXTOUT);
+#endif
 
 /*
 HWG_DRAWTEXT(HDC, cText, nLeft, nTop, nRight, nBottom, nFormat, p8) --> numeric
@@ -117,9 +125,9 @@ HB_FUNC(HWG_DRAWTEXT)
 }
 
 /*
-GETTEXTMETRIC(HDC) --> array[8]
+HWG_GETTEXTMETRIC(HDC) --> array[8]
 */
-HB_FUNC(GETTEXTMETRIC)
+HB_FUNC(HWG_GETTEXTMETRIC)
 {
   TEXTMETRIC tm;
   PHB_ITEM aMetr = hb_itemArrayNew(8);
@@ -161,6 +169,10 @@ HB_FUNC(GETTEXTMETRIC)
 
   hb_itemReturnRelease(aMetr);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETTEXTMETRIC, HWG_GETTEXTMETRIC);
+#endif
 
 /*
 HWG_GETTEXTSIZE(HDC, cText) -->
@@ -261,9 +273,9 @@ HB_FUNC_TRANSLATE(GETWINDOWRECT, HWG_GETWINDOWRECT);
 #endif
 
 /*
-GETCLIENTAREA(PAINTSTRUCT) --> aRect[4]
+HWG_GETCLIENTAREA(PAINTSTRUCT) --> aRect[4]
 */
-HB_FUNC(GETCLIENTAREA)
+HB_FUNC(HWG_GETCLIENTAREA)
 {
   PAINTSTRUCT *pps = hwg_par_PAINTSTRUCT(1);
   PHB_ITEM aMetr = hb_itemArrayNew(4);
@@ -287,6 +299,10 @@ HB_FUNC(GETCLIENTAREA)
 
   hb_itemReturnRelease(aMetr);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETCLIENTAREA, HWG_GETCLIENTAREA);
+#endif
 
 /*
 HWG_SETTEXTCOLOR(HDC, COLORREF) --> COLORREF
@@ -399,30 +415,38 @@ HB_FUNC_TRANSLATE(EXTTEXTOUT, HWG_EXTTEXTOUT);
 #endif
 
 /*
-WRITESTATUSWINDOW(HWND, nIndex) -->
+HWG_WRITESTATUSWINDOW(HWND, nIndex) -->
 */
-HB_FUNC(WRITESTATUSWINDOW)
+HB_FUNC(HWG_WRITESTATUSWINDOW)
 {
   void *hString;
   SendMessage(hwg_par_HWND(1), SB_SETTEXT, hwg_par_WPARAM(2), (LPARAM)HB_PARSTR(3, &hString, NULL));
   hb_strfree(hString);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WRITESTATUSWINDOW, HWG_WRITESTATUSWINDOW);
+#endif
+
 /*
-WINDOWFROMDC(HDC) --> HWND
+HWG_WINDOWFROMDC(HDC) --> HWND
 */
-HB_FUNC(WINDOWFROMDC)
+HB_FUNC(HWG_WINDOWFROMDC)
 {
   hwg_ret_HWND(WindowFromDC(hwg_par_HDC(1)));
 }
 
-/* CreateFont(fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet], [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut])
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WINDOWFROMDC, HWG_WINDOWFROMDC);
+#endif
+
+/* hwg_CreateFont(fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet], [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut])
  */
 
 /*
-CREATEFONT(cFontName, nWidth, nHeight, nWeight, nCharSet, nItalic, nUnderline, nStrikeOut) --> HFONT
+HWG_CREATEFONT(cFontName, nWidth, nHeight, nWeight, nCharSet, nItalic, nUnderline, nStrikeOut) --> HFONT
 */
-HB_FUNC(CREATEFONT)
+HB_FUNC(HWG_CREATEFONT)
 {
   HFONT hFont;
   int fnWeight = (HB_ISNIL(4)) ? 0 : hwg_par_int(4);
@@ -437,17 +461,25 @@ HB_FUNC(CREATEFONT)
   hwg_ret_HFONT(hFont);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEFONT, HWG_CREATEFONT);
+#endif
+
 /*
- * SetCtrlFont(hWnd, ctrlId, hFont)
+ * hwg_SetCtrlFont(hWnd, ctrlId, hFont)
  */
 
 /*
-SETCTRLFONT(HWND, nID, HFONT) -->
+HWG_SETCTRLFONT(HWND, nID, HFONT) -->
 */
-HB_FUNC(SETCTRLFONT)
+HB_FUNC(HWG_SETCTRLFONT)
 {
   SendDlgItemMessage(hwg_par_HWND(1), hwg_par_int(2), WM_SETFONT, (WPARAM)hwg_par_HFONT(3), 0);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETCTRLFONT, HWG_SETCTRLFONT);
+#endif
 
 /*
  */
@@ -464,17 +496,21 @@ HB_FUNC(ANSITOOEM)
 }
 
 /*
-CREATERECTRGN(nX1, nY1, nX2, nY2) --> HRGN
+HWG_CREATERECTRGN(nX1, nY1, nX2, nY2) --> HRGN
 */
-HB_FUNC(CREATERECTRGN)
+HB_FUNC(HWG_CREATERECTRGN)
 {
   hwg_ret_HRGN(CreateRectRgn(hwg_par_int(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATERECTRGN, HWG_CREATERECTRGN);
+#endif
+
 /*
-CREATERECTRGNINDIRECT(NIL, nLeft, nTop, nRight, nBottom) --> HRGN
+HWG_CREATERECTRGNINDIRECT(NIL, nLeft, nTop, nRight, nBottom) --> HRGN
 */
-HB_FUNC(CREATERECTRGNINDIRECT)
+HB_FUNC(HWG_CREATERECTRGNINDIRECT)
 {
   RECT rc;
   rc.left = hb_parni(2);
@@ -484,26 +520,38 @@ HB_FUNC(CREATERECTRGNINDIRECT)
   hwg_ret_HRGN(CreateRectRgnIndirect(&rc));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATERECTRGNINDIRECT, HWG_CREATERECTRGNINDIRECT);
+#endif
+
 /*
-EXTSELECTCLIPRGN(HDC, HRGN, nMode) --> numeric
+HWG_EXTSELECTCLIPRGN(HDC, HRGN, nMode) --> numeric
 */
-HB_FUNC(EXTSELECTCLIPRGN)
+HB_FUNC(HWG_EXTSELECTCLIPRGN)
 {
   hwg_ret_int(ExtSelectClipRgn(hwg_par_HDC(1), hwg_par_HRGN(2), hwg_par_int(3)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(EXTSELECTCLIPRGN, HWG_EXTSELECTCLIPRGN);
+#endif
+
 /*
-SELECTCLIPRGN(HDC, HRGN) --> numeric
+HWG_SELECTCLIPRGN(HDC, HRGN) --> numeric
 */
-HB_FUNC(SELECTCLIPRGN)
+HB_FUNC(HWG_SELECTCLIPRGN)
 {
   hwg_ret_int(SelectClipRgn(hwg_par_HDC(1), hwg_par_HRGN(2)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SELECTCLIPRGN, HWG_SELECTCLIPRGN);
+#endif
+
 /*
-CREATEFONTINDIRECT(cFontName, nWeight, nHeight, nQuality) --> HFONT
+HWG_CREATEFONTINDIRECT(cFontName, nWeight, nHeight, nQuality) --> HFONT
 */
-HB_FUNC(CREATEFONTINDIRECT)
+HB_FUNC(HWG_CREATEFONTINDIRECT)
 {
   LOGFONT lf;
   HFONT f;
@@ -516,3 +564,7 @@ HB_FUNC(CREATEFONTINDIRECT)
   f = CreateFontIndirect(&lf);
   hwg_ret_HFONT(f);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEFONTINDIRECT, HWG_CREATEFONTINDIRECT);
+#endif

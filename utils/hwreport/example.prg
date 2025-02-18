@@ -40,7 +40,7 @@ PRIVATE aTermMetr := { 800 }
 
    hDCwindow := GetDC( oMainWindow:handle )
    aTermMetr := GetDeviceArea( hDCwindow )
-   DeleteDC( hDCwindow )
+   hwg_DeleteDC( hDCwindow )
 
    oMainWindow:Activate()
 

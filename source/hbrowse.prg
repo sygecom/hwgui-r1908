@@ -1876,7 +1876,7 @@ ENDIF
 // Get client area coordinate
 
    aCoors := hwg_GetClientRect(::handle)
-   aMetr := GetTextMetric(hDC)
+   aMetr := hwg_GetTextMetric(hDC)
    ::width := Round((aMetr[3] + aMetr[2]) / 2 - 1, 0)
 // If forceHeight is set, we should use that value
    IF (::forceHeight > 0)
@@ -1888,7 +1888,7 @@ ENDIF
    aMetrHead := AClone(aMetr)
    IF ::oHeadFont != NIL
       oldfont := hwg_SelectObject(hDC, ::oHeadFont:handle)
-      aMetrHead := GetTextMetric(hDC)
+      aMetrHead := hwg_GetTextMetric(hDC)
       hwg_SelectObject(hDC, oldfont)
    ENDIF
    // USER DEFINE Height  IF != 0

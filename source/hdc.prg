@@ -68,7 +68,7 @@ CLASS HDC
    METHOD SetViewportOrg(x, y)
    METHOD SetViewportExt(x, y)
    METHOD SetArcDirection(nArcDirection)
-   METHOD GetTextMetric() INLINE GetTextMetric(::m_hDC)
+   METHOD GetTextMetric() INLINE hwg_GetTextMetric(::m_hDC)
    METHOD SetROP2(nDrawMode)
    METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE    BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
 
@@ -103,7 +103,7 @@ METHOD Attach(hDC) CLASS HDC
    RETURN .T.
 
 METHOD deletedc() CLASS HDC
-   DeleteDc(::m_hDC)
+   hwg_DeleteDc(::m_hDC)
    ::m_hDC := NIL
    ::m_hAttribDC := NIL
    RETURN NIL
@@ -118,11 +118,11 @@ METHOD SelectClipRgn(pRgn) CLASS HDC
    LOCAL nRetVal := - 1
 
    IF (::m_hDC != ::m_hAttribDC)
-      nRetVal := SelectClipRgn(::m_hDC, pRgn)
+      nRetVal := hwg_SelectClipRgn(::m_hDC, pRgn)
    ENDIF
 
    IF !Empty(::m_hAttribDC)
-      nRetVal := SelectClipRgn(::m_hAttribDC, pRgn)
+      nRetVal := hwg_SelectClipRgn(::m_hAttribDC, pRgn)
    ENDIF
 
    RETURN nRetVal

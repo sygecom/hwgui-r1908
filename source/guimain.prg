@@ -115,7 +115,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
-      WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
+      hwg_WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
       IF lRedraw != NIL .AND. lRedraw
          hwg_RedrawWindow(aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
@@ -258,7 +258,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    hDC := hwg_GetDC(hwg_GetActiveWindow())
    hwg_SelectObject(hDC, oFont:handle)
-   aMetr := GetTextMetric(hDC)
+   aMetr := hwg_GetTextMetric(hDC)
    aArea := GetDeviceArea(hDC)
    aRect := hwg_GetWindowRect(hwg_GetActiveWindow())
    hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)

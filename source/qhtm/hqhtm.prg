@@ -169,7 +169,7 @@ METHOD Init() CLASS HQhtmButton
 
    ::Super:Init()
    IF ::oFont == NIL .AND. ::oParent:oFont == NIL
-      SetCtrlFont(::oParent:handle, ::id, GetStockObject(SYSTEM_FONT))
+      hwg_SetCtrlFont(::oParent:handle, ::id, GetStockObject(SYSTEM_FONT))
    ENDIF
    hwg_SetWindowText(::handle, ::cHtml)
    QHTM_SetHtmlButton(::handle)

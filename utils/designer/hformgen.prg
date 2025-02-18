@@ -81,7 +81,7 @@ METHOD New() CLASS HFormGen
    LOCAL hDCwindow := hwg_GetDC( hwg_GetActiveWindow() )
    LOCAL aTermMetr := GetDeviceArea( hDCwindow )
 
-   DeleteDC( hDCwindow )
+   hwg_DeleteDC( hDCwindow )
    DO WHILE .T.
       name := "Form"+LTrim(Str(i))
       IF AScan(::aForms, {|o|o:name == name}) == 0

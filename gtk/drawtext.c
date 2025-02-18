@@ -25,15 +25,19 @@
 
 void hwg_parse_color(HB_ULONG ncolor, GdkColor *pColor);
 
-HB_FUNC(DELETEDC)
+HB_FUNC(HWG_DELETEDC)
 {
   // DeleteDC( (HDC) hb_parnl( 1 ) );
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DELETEDC, HWG_DELETEDC);
+#endif
+
 /*
- * TextOut( hDC, x, y, cText )
+ * hwg_TextOut( hDC, x, y, cText )
  */
-HB_FUNC(TEXTOUT)
+HB_FUNC(HWG_TEXTOUT)
 {
   PHWGUI_HDC hDC = (PHWGUI_HDC)HB_PARHANDLE(1);
   char *cText = hwg_convert_to_utf8(hb_parc(4));
@@ -53,6 +57,10 @@ HB_FUNC(TEXTOUT)
                               (hDC->fcolor != -1) ? &fcolor : NULL, (hDC->bcolor != -1) ? &bcolor : NULL);
   g_free(cText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TEXTOUT, HWG_TEXTOUT);
+#endif
 
 HB_FUNC(HWG_DRAWTEXT)
 {
@@ -155,7 +163,7 @@ HB_FUNC(HWG_GETTEXTSIZE)
 HB_FUNC_TRANSLATE(GETTEXTSIZE, HWG_GETTEXTSIZE);
 #endif
 
-HB_FUNC(GETCLIENTAREA)
+HB_FUNC(HWG_GETCLIENTAREA)
 {
   /*
      PAINTSTRUCT *pps = (PAINTSTRUCT*) hb_parnl( 1 );
@@ -182,6 +190,10 @@ HB_FUNC(GETCLIENTAREA)
      _itemRelease( aMetr );
   */
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETCLIENTAREA, HWG_GETCLIENTAREA);
+#endif
 
 HB_FUNC(HWG_SETTEXTCOLOR)
 {
@@ -267,7 +279,7 @@ HB_FUNC(HWG_EXTTEXTOUT)
 HB_FUNC_TRANSLATE(EXTTEXTOUT, HWG_EXTTEXTOUT);
 #endif
 
-HB_FUNC(WRITESTATUSWINDOW)
+HB_FUNC(HWG_WRITESTATUSWINDOW)
 {
   // SendMessage( (HWND) hb_parnl( 1 ), SB_SETTEXT, hb_parni( 2 ), (LPARAM) hb_parc( 3 ) );
   char *cText = hwg_convert_to_utf8(hb_parcx(3));
@@ -278,15 +290,23 @@ HB_FUNC(WRITESTATUSWINDOW)
   g_free(cText);
 }
 
-HB_FUNC(WINDOWFROMDC)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WRITESTATUSWINDOW, HWG_WRITESTATUSWINDOW);
+#endif
+
+HB_FUNC(HWG_WINDOWFROMDC)
 {
   // hb_retnl( (HB_LONG) WindowFromDC( (HDC) hb_parnl( 1 ) ) );
 }
 
-/* CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet],
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WINDOWFROMDC, HWG_WINDOWFROMDC);
+#endif
+
+/* hwg_CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet],
                [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut]  )
 */
-HB_FUNC(CREATEFONT)
+HB_FUNC(HWG_CREATEFONT)
 {
   PangoFontDescription *hFont;
   PHWGUI_FONT h = (PHWGUI_FONT)hb_xgrab(sizeof(HWGUI_FONT));
@@ -302,15 +322,19 @@ HB_FUNC(CREATEFONT)
   {
     pango_font_description_set_weight(hFont, hb_parni(4));
   }
-  
+
   h->type = HWGUI_OBJECT_FONT;
   h->hFont = hFont;
 
   HB_RETHANDLE(h);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEFONT, HWG_CREATEFONT);
+#endif
+
 /*
- * SetCtrlFont( hCtrl, hFont )
+ * hwg_SetCtrlFont( hCtrl, hFont )
  */
 HB_FUNC(HWG_SETCTRLFONT)
 {
@@ -322,9 +346,13 @@ HB_FUNC(HWG_SETCTRLFONT)
   {
     hCtrl = (GtkWidget *)hLabel;
   }
-  
+
   style = gtk_style_copy(gtk_widget_get_style(hCtrl));
 
   style->font_desc = ((PHWGUI_FONT)HB_PARHANDLE(2))->hFont;
   gtk_widget_set_style(hCtrl, style);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETCTRLFONT, HWG_SETCTRLFONT);
+#endif

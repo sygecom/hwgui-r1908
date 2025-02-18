@@ -156,7 +156,7 @@ Function WriteStatus( oWnd, nPart, cText, lRedraw )
 Local aControls, i
    aControls := oWnd:aControls
    IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
-      WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
+      hwg_WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
 
    ENDIF
 Return Nil

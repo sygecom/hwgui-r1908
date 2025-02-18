@@ -174,7 +174,7 @@ RETURN cText
 
 METHOD SetTextPanel(nPart, cText, lRedraw) CLASS HStatus
 
-   //WriteStatusWindow(::handle, nPart - 1, cText)
+   //hwg_WriteStatusWindow(::handle, nPart - 1, cText)
    hwg_SendMessage(::handle, SB_SETTEXT, nPart - 1, cText)
    IF lRedraw != NIL .AND. lRedraw
       hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)

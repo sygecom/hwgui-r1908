@@ -141,11 +141,11 @@ METHOD INIT() CLASS HControl
       ENDIF
       ::oparent:lSuspendMsgsHandling := .F.
       IF ::oFont != NIL .AND. !hb_IsNumeric(::oFont) .AND. ::oParent != NIL
-         SetCtrlFont(::oParent:handle, ::id, ::oFont:handle)
+         hwg_SetCtrlFont(::oParent:handle, ::id, ::oFont:handle)
       ELSEIF oForm != NIL .AND. !hb_IsNumeric(oForm) .AND. oForm:oFont != NIL
-         SetCtrlFont(::oParent:handle, ::id, oForm:oFont:handle)
+         hwg_SetCtrlFont(::oParent:handle, ::id, oForm:oFont:handle)
       ELSEIF ::oParent != NIL .AND. ::oParent:oFont != NIL
-         SetCtrlFont(::handle, ::id, ::oParent:oFont:handle)
+         hwg_SetCtrlFont(::handle, ::id, ::oParent:oFont:handle)
       ENDIF
       IF oForm != NIL .AND. oForm:Type != WND_DLG_RESOURCE .AND. (::nLeft + ::nTop + ::nWidth + ::nHeight != 0)
          // fix init position in FORM reduce  flickering

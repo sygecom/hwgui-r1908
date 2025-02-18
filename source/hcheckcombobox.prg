@@ -429,7 +429,7 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
 
       ncheck := 1 + (COMBOBOXGETITEMDATA(::handle, drawInfo[1]))
 
-      metrics := GETTEXTMETRIC(dc)
+      metrics := hwg_GetTextMetric(dc)
 
       rcBitmap[1] := 0
       rcBitmap[3] := rcBitmap[1] + metrics[1] + metrics[4] + 6

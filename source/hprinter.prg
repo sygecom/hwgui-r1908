@@ -157,7 +157,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
    hDC := SetPrinterMode(::cPrinterName, @hPrinter, nOrientation)
    IF hDC != NIL
       IF ::hDCPrn != 0
-         DeleteDC(::hDCPrn)
+         hwg_DeleteDC(::hDCPrn)
       ENDIF
       ::hDCPrn := hDC
       ::hPrinter := hPrinter
@@ -189,7 +189,7 @@ METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS H
 METHOD END() CLASS HPrinter
 
    IF !Empty(::hDCPrn)
-      DeleteDC(::hDCPrn)
+      hwg_DeleteDC(::hDCPrn)
       ::hDCPrn := NIL
    ENDIF
    IF !Empty(::hPrinter)
