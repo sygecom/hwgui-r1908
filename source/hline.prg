@@ -93,7 +93,7 @@ METHOD Paint(lpdis) CLASS HLine
          // hwg_DrawEdge(hDC, x1, y1, x2, y1 + 2, EDGE_SUNKEN, BF_RIGHT)
          hwg_DrawLine(hDC, x1, y1 + 1, x2, y1 + 1)
       ENDIF
-      SelectObject(hDC, ::oPenGray:handle)
+      hwg_SelectObject(hDC, ::oPenGray:handle)
       IF ::lVert
          hwg_DrawLine(hDC, x1, y1, x1, y2)
       ELSE
