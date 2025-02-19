@@ -235,7 +235,7 @@ RETURN Self
 METHOD Activate CLASS HBrowse
 
    if !Empty(::oParent:handle)
-      ::handle := CreateBrowse( Self )
+      ::handle := hwg_CreateBrowse( Self )
       ::Init()
    endif
 RETURN Self

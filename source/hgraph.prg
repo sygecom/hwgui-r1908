@@ -66,7 +66,7 @@ METHOD Redefine(oWndParent, nId, aValues, oFont, ;
 
 METHOD Activate() CLASS HGraph
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF

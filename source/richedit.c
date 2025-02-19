@@ -36,7 +36,7 @@ HB_FUNC(HWG_INITRICHEDIT)
   }
 }
 
-HB_FUNC(CREATERICHEDIT)
+HB_FUNC(HWG_CREATERICHEDIT)
 {
   HWND hCtrl;
   void *hText;
@@ -60,6 +60,10 @@ HB_FUNC(CREATERICHEDIT)
 
   hwg_ret_HWND(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATERICHEDIT, HWG_CREATERICHEDIT);
+#endif
 
 /*
  * re_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,

@@ -8,7 +8,7 @@ Local meditbox := "", mnome:= space( 50 )
 //hb_settermcp("PT850","PTISO")
 INIT DIALOG oModDlg TITLE "Teste da Acentuação" ;
    AT 210,10  SIZE 300,300       on init {||otool:refresh(),hwg_Enablewindow(oTool:aItem[2,11],.f.)}
-//createtoolbar(omodDlg:handle,0,0,20,20)   
+//hwg_CreateToolBar(omodDlg:handle,0,0,20,20)   
    @ 0,0 toolbar oTool of oModDlg size 50,100 ID 700
    TOOLBUTTON  otool ;
            ID 701 ;

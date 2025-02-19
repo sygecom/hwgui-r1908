@@ -63,7 +63,7 @@ Return Self
 METHOD Activate CLASS hToolBar
    IF !Empty(::oParent:handle)
 
-      ::handle := CREATETOOLBAR(::oParent:handle )
+      ::handle := hwg_CreateToolBar(::oParent:handle )
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
@@ -122,11 +122,11 @@ Local aItem
           aBmpSize := hwg_GetBitmapSize( aButton[1] )
 
           IF aBmpSize[ 3 ] == 4
-             hIm := CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR4 + ILC_MASK )
+             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR4 + ILC_MASK )
           ELSEIF aBmpSize[ 3 ] == 8
-             hIm := CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR8 + ILC_MASK )
+             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR8 + ILC_MASK )
           ELSEIF aBmpSize[ 3 ] == 24
-             hIm := CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLORDDB + ILC_MASK )
+             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLORDDB + ILC_MASK )
           ENDIF
 
           FOR nPos :=1 to Len(aButton)
@@ -151,7 +151,7 @@ Local aItem
 
             if aItem[4] == TBSTYLE_BUTTON
 
-               aItem[11] := CreateToolBarButton(::handle,aItem[1],aItem[6],.f.)
+               aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6],.f.)
                aItem[2] := hb_enumindex()
 //               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2],0 )
                TOOLBAR_SETACTION(aItem[11],aItem[7])
@@ -159,7 +159,7 @@ Local aItem
                   hwg_AddtoolTip(::handle, aItem[11],aItem[8])
                endif
             elseif aitem[4] == TBSTYLE_SEP
-               aItem[11] := CreateToolBarButton(::handle,,,.t.)
+               aItem[11] := hwg_CreateToolBarButton(::handle,,,.t.)
                aItem[2] := hb_enumindex()
             endif
          next

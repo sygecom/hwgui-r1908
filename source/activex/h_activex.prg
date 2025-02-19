@@ -61,7 +61,7 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    ::Super:New(oWnd, , nStyle, nLeft, nTop, nWidth, nHeight)   // ,,,, bSize)
    ::title := cProgId
 
-   ::handle := CreateActivex(nExStyle, cClsName, cProgId, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+   ::handle := hwg_CreateActivex(nExStyle, cClsName, cProgId, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
       ::oParent:handle, ::Id)
 
    ::Init()

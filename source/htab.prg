@@ -218,7 +218,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
          AAdd(::aImages, aImages[i])
       NEXT
       ::aBmpSize := hwg_GetBitmapSize(aImages[1])
-      ::himl := CreateImageList(aImages, ::aBmpSize[1], ::aBmpSize[2], 12, nBC)
+      ::himl := hwg_CreateImageList(aImages, ::aBmpSize[1], ::aBmpSize[2], 12, nBC)
       ::Image1 := 0
       IF Len(aImages) > 1
          ::Image2 := 1
@@ -236,7 +236,7 @@ RETURN Self
 METHOD Activate() CLASS HTab
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateTabControl(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_CreateTabControl(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 
@@ -1209,7 +1209,7 @@ RETURN Self
 METHOD Activate() CLASS HPaintTab
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
    ENDIF
 
 RETURN NIL

@@ -2450,7 +2450,7 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
 
    temp := cDir + "\tmp" + padl(AllTrim(Str(::nFile, 4, 0)), 4, "0") + ".wmf"
 
-   hDCOut := CreateMetaFile(temp)
+   hDCOut := hwg_CreateMetaFile(temp)
 
    hDib := DibRead(cName)
 

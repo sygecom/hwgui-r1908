@@ -122,7 +122,7 @@ RETURN Self
 METHOD Activate() CLASS HDatePicker
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateDatePicker(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+      ::handle := hwg_CreateDatePicker(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
       ::Init()
    ENDIF
 

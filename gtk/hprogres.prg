@@ -82,7 +82,7 @@ Return Self
 METHOD Activate CLASS HProgressBar
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateProgressBar( ::oParent:handle, ::maxPos, ;
+      ::handle := hwg_CreateProgressBar( ::oParent:handle, ::maxPos, ;
                   ::nLeft, ::nTop, ::nWidth,::nHeight )
       ::Init()
    ENDIF

@@ -54,7 +54,7 @@ Return Self
 
 METHOD Activate() CLASS HSplitter
    IF !Empty(::oParent:handle)
-      ::handle := CreateSplitter( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateSplitter( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF

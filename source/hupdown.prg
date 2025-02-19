@@ -174,7 +174,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
       hwg_InitEditProc(::oEditUpDown:handle)
     ENDIF
    ::handle := ::oEditUpDown:handle
-   ::hwndUpDown := CreateUpDownControl(::oParent:handle, ::idUpDown, ;
+   ::hwndUpDown := hwg_CreateUpDownControl(::oParent:handle, ::idUpDown, ;
                                      ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, -2147483647, 2147483647, Val(::title))
                                     // ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nLower, ::nUpper, Val(::title))
    ::oEditUpDown:oUpDown := Self
@@ -423,7 +423,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 METHOD Activate CLASS HUpDown
    IF !Empty(::oParent:handle)
-      ::handle := CreateEdit(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateEdit(::oParent:handle, ::id, ;
                              ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF
@@ -435,7 +435,7 @@ METHOD Init() CLASS HUpDown
       ::nHolder := 1
       hwg_SetWindowObject(::handle, Self)
       HWG_INITUpDownPROC(::handle)
-      ::hwndUpDown := CreateUpDownControl(::oParent:handle, ::idUpDown, ;
+      ::hwndUpDown := hwg_CreateUpDownControl(::oParent:handle, ::idUpDown, ;
                                         ::styleUpDown, 0, 0, ::nUpDownWidth, 0, ::handle, ::nUpper, ::nLower, Val(::title))
    ENDIF
    RETURN NIL

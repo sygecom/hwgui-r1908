@@ -80,7 +80,7 @@ RETURN Self
 METHOD Activate() CLASS HButton
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
+      ::handle := hwg_CreateButton(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF
 

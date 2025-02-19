@@ -71,7 +71,7 @@ Return Self
 METHOD Activate CLASS HTab
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateTabControl( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateTabControl( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
 
       ::Init()

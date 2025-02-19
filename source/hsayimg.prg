@@ -60,7 +60,7 @@ METHOD Redefine(oWndParent, nId, bInit, bSize, ctooltip) CLASS HSayImage
 METHOD Activate() CLASS HSayImage
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
       ::Init()
    ENDIF

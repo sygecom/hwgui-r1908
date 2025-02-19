@@ -96,7 +96,7 @@ METHOD Activate() CLASS HPanel
    LOCAL handle := ::oParent:handle
 
    IF !Empty(handle)
-      ::handle := CreatePanel(handle, ::id, ;
+      ::handle := hwg_CreatePanel(handle, ::id, ;
                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::ResizeOffSet(0)
       /*

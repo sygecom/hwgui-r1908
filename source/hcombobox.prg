@@ -172,7 +172,7 @@ RETURN Self
 METHOD Activate() CLASS HComboBox
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateCombo(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_CreateCombo(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
       ::nHeight := INT(::nHeightBox / 0.75)
    ENDIF

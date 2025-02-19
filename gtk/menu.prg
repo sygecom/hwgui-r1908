@@ -211,7 +211,7 @@ Function hwg_EndMenu()
       BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != NIL,_oWnd:handle, NIL), ;
                    _oWnd,,IIf(_oWnd != NIL, .F., .T.) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
-         // _oWnd:hAccel := CreateAcceleratorTable( _aAccel )
+         // _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )
       ENDIF
       _aMenuDef := Nil
       _oBitmap  := Nil

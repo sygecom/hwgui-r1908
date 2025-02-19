@@ -157,11 +157,15 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
   }
 }
 
-HB_FUNC(CREATEROUNDRECTRGN)
+HB_FUNC(HWG_CREATEROUNDRECTRGN)
 {
   hwg_ret_HRGN(CreateRoundRectRgn(hwg_par_int(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5),
                                   hwg_par_int(6)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEROUNDRECTRGN, HWG_CREATEROUNDRECTRGN);
+#endif
 
 HB_FUNC(SETWINDOWRGN)
 {
@@ -197,7 +201,7 @@ HB_FUNC(HWG_REGNICE)
   }
 }
 
-HB_FUNC(CREATENICEBTN)
+HB_FUNC(HWG_CREATENICEBTN)
 {
   DWORD ulStyle = HB_ISNUM(3) ? hwg_par_DWORD(3) : WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
   void *hTitle;
@@ -206,6 +210,10 @@ HB_FUNC(CREATENICEBTN)
                               hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
   hb_strfree(hTitle);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATENICEBTN, HWG_CREATENICEBTN);
+#endif
 
 HB_FUNC(ISMOUSEOVER)
 {

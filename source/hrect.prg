@@ -99,7 +99,7 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor) CLASS HR
 //---------------------------------------------------------------------------
 METHOD Activate() CLASS HRect_Line
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
@@ -221,7 +221,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
 
 METHOD Activate() CLASS HDrawShape
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
@@ -366,7 +366,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
 METHOD Activate() CLASS HContainer
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ;
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ;
                                 ::nLeft, ::nTop, ::nWidth, ::nHeight)
       IF !::lInit
          hwg_AddToolTip(::handle, ::handle, "")

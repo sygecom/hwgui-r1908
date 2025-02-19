@@ -357,7 +357,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
          aImages[i] := IIf(lResour != NIL .AND. lResour, hwg_LoadBitmap(aImages[i]), hwg_OpenBitmap(aImages[i]))
       NEXT
       aBmpSize := hwg_GetBitmapSize(aImages[1])
-      ::himl := CreateImageList(aImages, aBmpSize[1], aBmpSize[2], 12, nBC)
+      ::himl := hwg_CreateImageList(aImages, aBmpSize[1], aBmpSize[2], 12, nBC)
       ::Image1 := 0
       IF Len(aImages) > 1
          ::Image2 := 1
@@ -386,7 +386,7 @@ METHOD Init() CLASS HTree
 METHOD Activate() CLASS HTree
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateTree(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateTree(::oParent:handle, ::id, ;
                               ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::tcolor, ::bcolor)
       ::Init()
    ENDIF

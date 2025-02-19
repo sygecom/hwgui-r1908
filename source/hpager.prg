@@ -91,7 +91,7 @@ METHOD Activate() CLASS HPager
 
    IF !Empty(::oParent:handle)
 
-      ::handle := CREATEPAGER(::oParent:handle, ::id, ;
+      ::handle := hwg_CreatePager(::oParent:handle, ::id, ;
                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, IIf(::lVert, PGS_VERT, PGS_HORZ))
 
       ::Init()

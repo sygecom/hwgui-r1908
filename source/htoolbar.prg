@@ -159,7 +159,7 @@ METHOD Activate() CLASS hToolBar
 
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
-      ::handle := CREATETOOLBAR(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
+      ::handle := hwg_CreateToolBar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
       ::Init()
    ENDIF
 
@@ -299,16 +299,16 @@ METHOD CREATETOOL() CLASS hToolBar
       aBmpSize := hwg_GetBitmapSize(aButton[1])
 
       IF nmax == 4
-         hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
+         hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
       ELSEIF nmax == 8
-         hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
+         hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
       ELSEIF nMax == 16
-         hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+         hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
       ELSEIF nmax == 24
-         hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+         hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
       ENDIF
       */
-      hIm := CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+      hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
       FOR nPos := 1 TO Len(aButton)
          //aBmpSize := hwg_GetBitmapSize(aButton[nPos])
          /*

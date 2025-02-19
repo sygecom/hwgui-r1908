@@ -173,7 +173,7 @@ Return Nil
 Static Function InitBitmap( aItem )
 Local hDlg := getmodalhandle()
 Local aBmpSize, hUp
-   hUp := CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
+   hUp := hwg_CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )

@@ -122,7 +122,7 @@ METHOD Activate CLASS HRadioButton
 Local groupHandle := ::oGroup:handle
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton( ::oParent:handle, @groupHandle, ;
+      ::handle := hwg_CreateButton( ::oParent:handle, @groupHandle, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::oGroup:handle := groupHandle
       hwg_SetWindowObject( ::handle,Self )

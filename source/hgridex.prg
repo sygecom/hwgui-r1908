@@ -157,11 +157,11 @@ METHOD Init() CLASS HGridEx
 
 
          IF nmax == 4
-            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
+            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
          ELSEIF nmax == 8
-            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
+            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
          ELSEIF nmax == 24
-            ::hIm := CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
          ENDIF
 
          FOR nPos := 1 TO Len(aButton)

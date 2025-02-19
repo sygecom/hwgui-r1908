@@ -184,7 +184,7 @@ METHOD Activate() CLASS HControlGen
          PRIVATE oCtrl := Self
          ::handle := &( ::cCreate )
       ELSE
-         ::handle := CreateStatic( ::oParent:handle, ::id, ;
+         ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
                ::style, ::nLeft, ::nTop, ::nWidth,::nHeight )
       ENDIF
       ::Init()

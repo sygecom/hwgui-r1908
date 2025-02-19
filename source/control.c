@@ -104,9 +104,9 @@ HB_FUNC_TRANSLATE(MOVEWINDOW, HWG_MOVEWINDOW);
 #endif
 
 /*
-   CreateProgressBar(hParentWindow, nRange)
+   hwg_CreateProgressBar(hParentWindow, nRange)
 */
-HB_FUNC(CREATEPROGRESSBAR)
+HB_FUNC(HWG_CREATEPROGRESSBAR)
 {
   HWND hPBar, hParentWindow = hwg_par_HWND(1);
   RECT rcClient;
@@ -141,6 +141,10 @@ HB_FUNC(CREATEPROGRESSBAR)
   hwg_ret_HWND(hPBar);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEPROGRESSBAR, HWG_CREATEPROGRESSBAR);
+#endif
+
 /*
    UpdateProgressBar(hPBar)
 */
@@ -155,9 +159,9 @@ HB_FUNC(SETPROGRESSBAR)
 }
 
 /*
-   CreatePanel(hParentWindow, nPanelControlID, nStyle, x1, y1, nWidth, nHeight)
+   hwg_CreatePanel(hParentWindow, nPanelControlID, nStyle, x1, y1, nWidth, nHeight)
 */
-HB_FUNC(CREATEPANEL)
+HB_FUNC(HWG_CREATEPANEL)
 {
   hwg_ret_HWND(CreateWindowEx(0, TEXT("PANEL"), NULL,
                               WS_CHILD | WS_VISIBLE | SS_GRAYRECT | SS_OWNERDRAW | CCS_TOP | hwg_par_DWORD(3),
@@ -165,20 +169,28 @@ HB_FUNC(CREATEPANEL)
                               hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEPANEL, HWG_CREATEPANEL);
+#endif
+
 /*
-   CreateOwnBtn(hParentWIndow, nBtnControlID, x, y, nWidth, nHeight)
+   hwg_CreateOwnBtn(hParentWIndow, nBtnControlID, x, y, nWidth, nHeight)
 */
-HB_FUNC(CREATEOWNBTN)
+HB_FUNC(HWG_CREATEOWNBTN)
 {
   hwg_ret_HWND(CreateWindowEx(0, TEXT("OWNBTN"), NULL, WS_CHILD | WS_VISIBLE | SS_GRAYRECT | SS_OWNERDRAW,
                               hwg_par_int(3), hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_HWND(1),
                               hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEOWNBTN, HWG_CREATEOWNBTN);
+#endif
+
 /*
-   CreateStatic(hParentWyndow, nControlID, nStyle, x, y, nWidth, nHeight)
+   hwg_CreateStatic(hParentWyndow, nControlID, nStyle, x, y, nWidth, nHeight)
 */
-HB_FUNC(CREATESTATIC)
+HB_FUNC(HWG_CREATESTATIC)
 {
   DWORD ulStyle = hwg_par_DWORD(3);
   DWORD ulExStyle = ((!HB_ISNIL(8)) ? hwg_par_DWORD(8) : 0) | ((ulStyle & WS_BORDER) ? WS_EX_CLIENTEDGE : 0);
@@ -198,10 +210,14 @@ HB_FUNC(CREATESTATIC)
    */
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATESTATIC, HWG_CREATESTATIC);
+#endif
+
 /*
-   CreateButton(hParentWIndow, nButtonID, nStyle, x, y, nWidth, nHeight, cCaption)
+   hwg_CreateButton(hParentWIndow, nButtonID, nStyle, x, y, nWidth, nHeight, cCaption)
 */
-HB_FUNC(CREATEBUTTON)
+HB_FUNC(HWG_CREATEBUTTON)
 {
   void *hStr;
   hwg_ret_HWND(CreateWindowEx(0, TEXT("BUTTON"), HB_PARSTR(8, &hStr, NULL), WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3),
@@ -210,21 +226,29 @@ HB_FUNC(CREATEBUTTON)
   hb_strfree(hStr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEBUTTON, HWG_CREATEBUTTON);
+#endif
+
 /*
-   CreateCombo(hParentWIndow, nComboID, nStyle, x, y, nWidth, nHeight, cInitialString)
+   hwg_CreateCombo(hParentWIndow, nComboID, nStyle, x, y, nWidth, nHeight, cInitialString)
 */
-HB_FUNC(CREATECOMBO)
+HB_FUNC(HWG_CREATECOMBO)
 {
   hwg_ret_HWND(CreateWindowEx(0, TEXT("COMBOBOX"), TEXT(""), WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
                               GetModuleHandle(NULL), NULL));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATECOMBO, HWG_CREATECOMBO);
+#endif
+
 /*
-   CreateBrowse(hParentWIndow, nControlID, nStyle, x, y, nWidth, nHeight,
+   hwg_CreateBrowse(hParentWIndow, nControlID, nStyle, x, y, nWidth, nHeight,
                cTitle)
 */
-HB_FUNC(CREATEBROWSE)
+HB_FUNC(HWG_CREATEBROWSE)
 {
   DWORD dwStyle = hwg_par_DWORD(3);
   void *hStr;
@@ -234,7 +258,11 @@ HB_FUNC(CREATEBROWSE)
   hb_strfree(hStr);
 }
 
-/* CreateStatusWindow - creates a status window and divides it into
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEBROWSE, HWG_CREATEBROWSE);
+#endif
+
+/* hwg_CreateStatusWindow - creates a status window and divides it into
      the specified number of parts.
  Returns the handle to the status window.
  hwndParent - parent window for the status window
@@ -243,7 +271,7 @@ HB_FUNC(CREATEBROWSE)
  pArray - Array with Lengths of parts, if first item == 0, status window
           will be divided into equal parts.
 */
-HB_FUNC(CREATESTATUSWINDOW)
+HB_FUNC(HWG_CREATESTATUSWINDOW)
 {
   // Ensure that the common control DLL is loaded.
   InitCommonControls();
@@ -253,6 +281,10 @@ HB_FUNC(CREATESTATUSWINDOW)
                               SBARS_SIZEGRIP | WS_CHILD | WS_VISIBLE | WS_OVERLAPPED | WS_CLIPSIBLINGS, 0, 0, 0, 0,
                               hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATESTATUSWINDOW, HWG_CREATESTATUSWINDOW);
+#endif
 
 HB_FUNC(HWG_INITSTATUS)
 {
@@ -413,12 +445,16 @@ HB_FUNC_TRANSLATE(SHOWTOOLTIP, HWG_SHOWTOOLTIP);
 #endif
 #endif
 
-HB_FUNC(CREATEUPDOWNCONTROL)
+HB_FUNC(HGW_CREATEUPDOWNCONTROL)
 {
   hwg_ret_HWND(CreateUpDownControl(WS_CHILD | WS_BORDER | WS_VISIBLE | hb_parni(3), hb_parni(4), hb_parni(5),
                                    hb_parni(6), hb_parni(7), hwg_par_HWND(1), hb_parni(2), GetModuleHandle(NULL),
                                    hwg_par_HWND(8), hb_parni(9), hb_parni(10), hb_parni(11)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEUPDOWNCONTROL, HWG_CREATEUPDOWNCONTROL);
+#endif
 
 HB_FUNC(SETUPDOWN)
 {
@@ -443,13 +479,17 @@ HB_FUNC(GETNOTIFYDELTAPOS)
   }
 }
 
-HB_FUNC(CREATEDATEPICKER)
+HB_FUNC(HWG_CREATEDATEPICKER)
 {
   hwg_ret_HWND(CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("SYSDATETIMEPICK32"), NULL,
                               WS_CHILD | WS_VISIBLE | WS_TABSTOP | hwg_par_DWORD(7), hwg_par_int(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
                               GetModuleHandle(NULL), NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEDATEPICKER, HWG_CREATEDATEPICKER);
+#endif
 
 HB_FUNC(SETDATEPICKER)
 {
@@ -542,12 +582,16 @@ HB_FUNC(GETTIMEPICKER)
   hb_retc(szTime);
 }
 
-HB_FUNC(CREATETABCONTROL)
+HB_FUNC(HWG_CREATETABCONTROL)
 {
   hwg_ret_HWND(CreateWindowEx(0, WC_TABCONTROL, NULL, WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
                               GetModuleHandle(NULL), NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETABCONTROL, HWG_CREATETABCONTROL);
+#endif
 
 HB_FUNC(INITTABCONTROL)
 {
@@ -665,7 +709,7 @@ HB_FUNC(GETNOTIFYKEYDOWN)
   hb_retni((WORD)(((TC_KEYDOWN *)HB_PARHANDLE(1))->wVKey));
 }
 
-HB_FUNC(CREATETREE)
+HB_FUNC(HWG_CREATETREE)
 {
   HWND hCtrl = CreateWindowEx(WS_EX_CLIENTEDGE, WC_TREEVIEW, 0, WS_CHILD | WS_VISIBLE | WS_TABSTOP | hwg_par_DWORD(3),
                               hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1),
@@ -682,6 +726,10 @@ HB_FUNC(CREATETREE)
 
   hwg_ret_HWND(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETREE, HWG_CREATETREE);
+#endif
 
 HB_FUNC(TREEADDNODE)
 {
@@ -950,9 +998,9 @@ HB_FUNC(TREE_RELEASENODE)
 }
 
 /*
- * CreateImagelist(array, cx, cy, nGrow, flags)
+ * hwg_CreateImagelist(array, cx, cy, nGrow, flags)
  */
-HB_FUNC(CREATEIMAGELIST)
+HB_FUNC(HWG_CREATEIMAGELIST)
 {
   PHB_ITEM pArray = hb_param(1, HB_IT_ARRAY);
   UINT flags = (HB_ISNIL(5)) ? ILC_COLOR : hb_parni(5);
@@ -971,6 +1019,10 @@ HB_FUNC(CREATEIMAGELIST)
 
   HB_RETHANDLE(himl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEIMAGELIST, HWG_CREATEIMAGELIST);
+#endif
 
 HB_FUNC(IMAGELIST_ADD)
 {
@@ -1543,7 +1595,7 @@ typedef struct tagNMTBGETINFOTIPW
 
 #endif
 
-HB_FUNC(CREATETOOLBAR)
+HB_FUNC(HWG_CREATETOOLBAR)
 {
   DWORD ulStyle = hwg_par_DWORD(3);
   DWORD ulExStyle = ((!HB_ISNIL(8)) ? hwg_par_DWORD(8) : 0) | ((ulStyle & WS_BORDER) ? WS_EX_CLIENTEDGE : 0);
@@ -1553,6 +1605,10 @@ HB_FUNC(CREATETOOLBAR)
                               hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1),
                               hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETOOLBAR, HWG_CREATETOOLBAR);
+#endif
 
 HB_FUNC(TOOLBARADDBUTTONS)
 {
@@ -1753,7 +1809,7 @@ HB_FUNC(TOOLBAR_SUBMENUEXGETID)
   hb_retnl((LONG)lpnmTB->iItem);
 }
 
-HB_FUNC(CREATEPAGER)
+HB_FUNC(HWG_CREATEPAGER)
 {
   BOOL bVert = hb_parl(8);
   hwg_ret_HWND(CreateWindowEx(0, WC_PAGESCROLLER, NULL,
@@ -1762,7 +1818,11 @@ HB_FUNC(CREATEPAGER)
                               GetModuleHandle(NULL), NULL));
 }
 
-HB_FUNC(CREATEREBAR)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEPAGER, HWG_CREATEPAGER);
+#endif
+
+HB_FUNC(HWG_CREATEREBAR)
 {
   DWORD ulStyle = hwg_par_DWORD(3);
   DWORD ulExStyle =
@@ -1773,6 +1833,10 @@ HB_FUNC(CREATEREBAR)
                               hwg_par_int(4), hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1),
                               hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEREBAR, HWG_CREATEREBAR);
+#endif
 
 HB_FUNC(REBARSETIMAGELIST)
 {

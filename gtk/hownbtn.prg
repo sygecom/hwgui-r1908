@@ -91,7 +91,7 @@ Return Self
 
 METHOD Activate CLASS HOwnButton
    IF !Empty(::oParent:handle)
-      ::handle := CreateOwnBtn( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateOwnBtn( ::oParent:handle, ::id, ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    if !::lEnabled

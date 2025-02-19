@@ -338,12 +338,12 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
       ENDIF
       IF oWnd != NIL
          oDlg := NIL
-         hPBar := CreateProgressBar(oWnd:handle, maxPos, 20, 25, width - 40, 20)
+         hPBar := hwg_CreateProgressBar(oWnd:handle, maxPos, 20, 25, width - 40, 20)
       ELSE
          INIT DIALOG oDlg TITLE cTitle   ;
               At x1, y1 SIZE width, height ;
               STYLE nStyle               ;
-              ON INIT {|o|hPBar := CreateProgressBar(o:handle, maxPos, 20, 25, width - 40, 20)}
+              ON INIT {|o|hPBar := hwg_CreateProgressBar(o:handle, maxPos, 20, 25, width - 40, 20)}
          ACTIVATE DIALOG oDlg NOMODAL
       ENDIF
    ELSEIF nStep == 1

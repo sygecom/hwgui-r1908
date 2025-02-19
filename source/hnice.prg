@@ -110,7 +110,7 @@ METHOD Redefine(oWndParent, nId, nStyleEx, ;
 METHOD Activate() CLASS HNiceButton
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateNiceBtn(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateNiceBtn(::oParent:handle, ::id, ;
                                  ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::ExStyle, ::Text)
       ::Init()
    ENDIF
@@ -163,7 +163,7 @@ METHOD Create() CLASS HNICEButton
    Rct    := hwg_GetClientRect(::handle)
    w      := Rct[3] - Rct[1]
    h      := Rct[4] - Rct[2]
-   Region := CreateRoundRectRgn(0, 0, w, h, h * 0.90, h * 0.90)
+   Region := hwg_CreateRoundRectRgn(0, 0, w, h, h * 0.90, h * 0.90)
    SetWindowRgn(::handle, Region, .T.)
    hwg_InvalidateRect(::handle, 0, 0)
 

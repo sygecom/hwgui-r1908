@@ -66,7 +66,7 @@ RETURN Self
 METHOD Activate() CLASS HLine
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 

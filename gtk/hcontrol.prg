@@ -313,7 +313,7 @@ Local aCoors
 
    IF !Empty(::oParent:handle)
 
-      ::handle := CreateStatusWindow( ::oParent:handle, ::id )
+      ::handle := hwg_CreateStatusWindow( ::oParent:handle, ::id )
 
       ::Init()
 //      IF __ObjHasMsg( ::oParent,"AOFFSET" )
@@ -359,7 +359,7 @@ Return Self
 
 METHOD Activate CLASS HStatic
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title )
       ::Init()
    ENDIF
@@ -404,7 +404,7 @@ Return Self
 
 METHOD Activate CLASS HButton
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
@@ -449,13 +449,13 @@ RETURN Self
 METHOD Activate CLASS HButtonEX
    IF !Empty(::oParent:handle)
       if !Empty(::hBitmap)
-      ::handle := CreateButton( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hBitmap) 
       elseif !Empty(::hIcon)
-            ::handle := CreateButton( ::oParent:handle, ::id, ;
+            ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hIcon) 
       else
-            ::handle := CreateButton( ::oParent:handle, ::id, ;
+            ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,nil) 
       endif		  
       hwg_SetWindowObject( ::handle,Self )
@@ -488,7 +488,7 @@ Return Self
 
 METHOD Activate CLASS HGroup
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::Init()
    ENDIF

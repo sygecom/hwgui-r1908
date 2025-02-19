@@ -66,7 +66,7 @@ RETURN Self
 METHOD Activate() CLASS HStatus
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatusWindow(::oParent:handle, ::id)
+      ::handle := hwg_CreateStatusWindow(::oParent:handle, ::id)
       ::StatusHeight(::nStatusHeight)
       ::Init()
       /*

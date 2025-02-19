@@ -69,7 +69,7 @@ static void _Ax_Init(void)
   }
 }
 
-HB_FUNC(CREATEACTIVEX)
+HB_FUNC(HWG_CREATEACTIVEX)
 {
   _Ax_Init();
   hwg_ret_HWND(CreateWindowEx(ISNIL(1) ? 0 : hwg_par_DWORD(1),                   // nExStyle
@@ -85,6 +85,10 @@ HB_FUNC(CREATEACTIVEX)
                               // GetModuleHandle(0),
                               0, 0, NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEACTIVEX, HWG_CREATEACTIVEX);
+#endif
 
 HB_FUNC(ATLAXGETDISP) // hWnd -> pDisp
 {

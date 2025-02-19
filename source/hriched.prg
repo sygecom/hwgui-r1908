@@ -89,7 +89,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
 METHOD Activate() CLASS HRichEdit
    IF !Empty(::oParent:handle)
-      ::handle := CreateRichEdit(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateRichEdit(::oParent:handle, ::id, ;
                                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF

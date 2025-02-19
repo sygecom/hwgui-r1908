@@ -112,7 +112,7 @@ Return Self
 METHOD Activate CLASS HEdit
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateEdit( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateEdit( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       hwg_SetWindowObject( ::handle,Self )
       ::Init()

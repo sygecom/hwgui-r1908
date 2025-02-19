@@ -72,9 +72,9 @@ LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
 }
 
 /*
-   CreateEdit(hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight, cInitialString)
+   hwg_CreateEdit(hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight, cInitialString)
 */
-HB_FUNC(CREATEEDIT)
+HB_FUNC(HWG_CREATEEDIT)
 {
   HWND hWndEdit;
   DWORD ulStyle = hwg_par_DWORD(3);
@@ -101,3 +101,7 @@ HB_FUNC(CREATEEDIT)
 
   hwg_ret_HWND(hWndEdit);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEEDIT, HWG_CREATEEDIT);
+#endif

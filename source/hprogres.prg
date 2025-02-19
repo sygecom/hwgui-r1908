@@ -99,7 +99,7 @@ METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPerc
 METHOD Activate() CLASS HProgressBar
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateProgressBar(::oParent:handle, ::maxPos, ::style, ;
+      ::handle := hwg_CreateProgressBar(::oParent:handle, ::maxPos, ::style, ;
                                      ::nLeft, ::nTop, ::nWidth, IIf(::nHeight == 0, NIL, ::nHeight))
       ::Init()
    ENDIF

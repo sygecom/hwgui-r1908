@@ -60,9 +60,9 @@ GtkFixed *getFixedBox(GObject *handle)
 }
 
 /*
-   CreateStatic( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight, nExtStyle, cTitle )
+   hwg_CreateStatic( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight, nExtStyle, cTitle )
 */
-HB_FUNC(CREATESTATIC)
+HB_FUNC(HWG_CREATESTATIC)
 {
   HB_ULONG ulStyle = hb_parnl(3);
   const char *cTitle = (hb_pcount() > 8) ? hb_parc(9) : "";
@@ -106,6 +106,10 @@ HB_FUNC(CREATESTATIC)
   HB_RETHANDLE(hCtrl);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATESTATIC, HWG_CREATESTATIC);
+#endif
+
 HB_FUNC(HWG_STATIC_SETTEXT)
 {
   gchar *gcTitle = hwg_convert_to_utf8(hb_parcx(2));
@@ -115,10 +119,10 @@ HB_FUNC(HWG_STATIC_SETTEXT)
 }
 
 /*
-   CreateButton( hParentWindow, nButtonID, nStyle, x, y, nWidth, nHeight,
+   hwg_CreateButton( hParentWindow, nButtonID, nStyle, x, y, nWidth, nHeight,
                  cCaption )
 */
-HB_FUNC(CREATEBUTTON)
+HB_FUNC(HWG_CREATEBUTTON)
 {
   GtkWidget *hCtrl, *img;
   HB_ULONG ulStyle = hb_parnl(3);
@@ -165,6 +169,10 @@ HB_FUNC(CREATEBUTTON)
   HB_RETHANDLE(hCtrl);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEBUTTON, HWG_CREATEBUTTON);
+#endif
+
 HB_FUNC(HWG_CHECKBUTTON)
 {
   gtk_toggle_button_set_active((GtkToggleButton *)HB_PARHANDLE(1), hb_parl(2));
@@ -176,10 +184,10 @@ HB_FUNC(HWG_ISBUTTONCHECKED)
 }
 
 /*
-   CreateEdit( hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight,
+   hwg_CreateEdit( hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight,
                cInitialString )
 */
-HB_FUNC(CREATEEDIT)
+HB_FUNC(HWG_CREATEEDIT)
 {
   GtkWidget *hCtrl;
   const char *cTitle = (hb_pcount() > 7) ? hb_parc(8) : "";
@@ -221,13 +229,17 @@ HB_FUNC(CREATEEDIT)
     else
     {
       gtk_entry_set_text((GtkEntry *)hCtrl, gcTitle);
-    }  
+    }
     g_free(gcTitle);
   }
 
   all_signal_connect((gpointer)hCtrl);
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEEDIT, HWG_CREATEEDIT);
+#endif
 
 HB_FUNC(HWG_EDIT_SETTEXT)
 {
@@ -288,9 +300,9 @@ HB_FUNC(HWG_EDIT_GETPOS)
 }
 
 /*
-   CreateCombo( hParentWIndow, nComboID, nStyle, x, y, nWidth, nHeight )
+   hwg_CreateCombo( hParentWIndow, nComboID, nStyle, x, y, nWidth, nHeight )
 */
-HB_FUNC(CREATECOMBO)
+HB_FUNC(HWG_CREATECOMBO)
 {
   GtkWidget *hCtrl = gtk_combo_new();
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
@@ -302,6 +314,10 @@ HB_FUNC(CREATECOMBO)
 
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATECOMBO, HWG_CREATECOMBO);
+#endif
 
 HB_FUNC(HWG_COMBOSETARRAY)
 {
@@ -341,7 +357,7 @@ HB_FUNC( HWG_COMBOGETSTRING )
 }
 */
 
-HB_FUNC(CREATEUPDOWNCONTROL)
+HB_FUNC(HWG_CREATEUPDOWNCONTROL)
 {
   GtkObject *adj = gtk_adjustment_new((gdouble)hb_parnl(6), // value
                                       (gdouble)hb_parnl(7), // lower
@@ -359,6 +375,10 @@ HB_FUNC(CREATEUPDOWNCONTROL)
   HB_RETHANDLE(hCtrl);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEUPDOWNCONTROL, HWG_CREATEUPDOWNCONTROL);
+#endif
+
 HB_FUNC(HWG_SETUPDOWN)
 {
   gtk_spin_button_set_value((GtkSpinButton *)HB_PARHANDLE(1), (gdouble)hb_parnl(2));
@@ -372,7 +392,7 @@ HB_FUNC(HWG_GETUPDOWN)
 #define WS_VSCROLL 2097152 // 0x00200000L
 #define WS_HSCROLL 1048576 // 0x00100000L
 
-HB_FUNC(CREATEBROWSE)
+HB_FUNC(HWG_CREATEBROWSE)
 {
   GtkWidget *vbox, *hbox;
   GtkWidget *vscroll, *hscroll;
@@ -456,6 +476,10 @@ HB_FUNC(CREATEBROWSE)
   HB_RETHANDLE(hbox);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEBROWSE, HWG_CREATEBROWSE);
+#endif
+
 HB_FUNC(HWG_GETADJVALUE)
 {
   GtkAdjustment *adj = (GtkAdjustment *)HB_PARHANDLE(1);
@@ -527,7 +551,7 @@ HB_FUNC(HWG_SETADJOPTIONS)
   }
 }
 
-HB_FUNC(CREATETABCONTROL)
+HB_FUNC(HWG_CREATETABCONTROL)
 {
   GtkWidget *hCtrl = gtk_notebook_new();
 
@@ -540,6 +564,10 @@ HB_FUNC(CREATETABCONTROL)
 
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETABCONTROL, HWG_CREATETABCONTROL);
+#endif
 
 HB_FUNC(ADDTAB)
 {
@@ -588,9 +616,9 @@ HB_FUNC(HWG_CREATESEP)
 }
 
 /*
-   CreatePanel( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight, nExtStyle, cTitle )
+   hwg_CreatePanel( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight, nExtStyle, cTitle )
 */
-HB_FUNC(CREATEPANEL)
+HB_FUNC(HWG_CREATEPANEL)
 {
   GtkWidget *hCtrl;
   GtkFixed *box, *fbox;
@@ -620,6 +648,10 @@ HB_FUNC(CREATEPANEL)
   HB_RETHANDLE(hCtrl);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEPANEL, HWG_CREATEPANEL);
+#endif
+
 HB_FUNC(DESTROYPANEL)
 {
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
@@ -630,9 +662,9 @@ HB_FUNC(DESTROYPANEL)
 }
 
 /*
-   CreateOwnBtn( hParentWindow, nControlID, x, y, nWidth, nHeight )
+   hwg_CreateOwnBtn( hParentWindow, nControlID, x, y, nWidth, nHeight )
 */
-HB_FUNC(CREATEOWNBTN)
+HB_FUNC(HWG_CREATEOWNBTN)
 {
   GtkWidget *hCtrl;
   GtkFixed *box;
@@ -656,6 +688,10 @@ HB_FUNC(CREATEOWNBTN)
 
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEOWNBTN, HWG_CREATEOWNBTN);
+#endif
 
 HB_FUNC(HWG_ADDTOOLTIP)
 {
@@ -771,7 +807,7 @@ HB_FUNC(HWG_MOVEWIDGET)
   }
 }
 
-HB_FUNC(CREATEPROGRESSBAR)
+HB_FUNC(HWG_CREATEPROGRESSBAR)
 {
   GtkWidget *hCtrl;
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
@@ -784,6 +820,10 @@ HB_FUNC(CREATEPROGRESSBAR)
   gtk_widget_set_size_request(hCtrl, hb_parni(5), hb_parni(6));
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEPROGRESSBAR, HWG_CREATEPROGRESSBAR);
+#endif
 
 HB_FUNC(UPDATEPROGRESSBAR)
 {
@@ -803,7 +843,7 @@ HB_FUNC(SETPROGRESSBAR)
   }
 }
 
-HB_FUNC(CREATESTATUSWINDOW)
+HB_FUNC(HWG_CREATESTATUSWINDOW)
 {
   GtkWidget *w;
   GObject *handle = (GObject *)HB_PARHANDLE(1);
@@ -815,6 +855,10 @@ HB_FUNC(CREATESTATUSWINDOW)
 
   HB_RETHANDLE(w);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATESTATUSWINDOW, HWG_CREATESTATUSWINDOW);
+#endif
 
 HB_FUNC(STATUSBARSETTEXT)
 {
@@ -842,7 +886,7 @@ static void toolbar_clicked(GtkWidget *item, gpointer user_data)
   HB_SYMBOL_UNUSED(item);
 }
 
-HB_FUNC(CREATETOOLBAR)
+HB_FUNC(HWG_CREATETOOLBAR)
 {
   GtkWidget *hCtrl = gtk_toolbar_new();
 
@@ -858,7 +902,11 @@ HB_FUNC(CREATETOOLBAR)
   HB_RETHANDLE(hCtrl);
 }
 
-HB_FUNC(CREATETOOLBARBUTTON)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETOOLBAR, HWG_CREATETOOLBAR);
+#endif
+
+HB_FUNC(HWG_CREATETOOLBARBUTTON)
 {
 #if GTK_CHECK_VERSION(2, 4, 1)
   GtkWidget *toolbutton1, *img;
@@ -899,6 +947,10 @@ HB_FUNC(CREATETOOLBARBUTTON)
   HB_RETHANDLE(toolbutton1);
 #endif
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATETOOLBARBUTTON, HWG_CREATETOOLBARBUTTON);
+#endif
 
 HB_FUNC(TOOLBAR_SETACTION)
 {
@@ -993,7 +1045,7 @@ HB_FUNC(GETMONTHCALENDARDATE)
   hb_retds(szDate);
 }
 
-HB_FUNC(CREATEIMAGE)
+HB_FUNC(HWG_CREATEIMAGE)
 {
   GtkWidget *hCtrl;
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
@@ -1009,6 +1061,10 @@ HB_FUNC(CREATEIMAGE)
   gtk_widget_set_size_request(hCtrl, hb_parni(5), hb_parni(6));
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEIMAGE, HWG_CREATEIMAGE);
+#endif
 
 HB_FUNC(MONTHCALENDAR_SETACTION)
 {
@@ -1075,9 +1131,9 @@ HB_FUNC(SETBGCOLOR)
 }
 
 /*
-   CreateSplitter( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight )
+   hwg_CreateSplitter( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight )
 */
-HB_FUNC(CREATESPLITTER)
+HB_FUNC(HWG_CREATESPLITTER)
 {
   HB_ULONG ulStyle = hb_parnl(3);
   GtkWidget *hCtrl;
@@ -1108,3 +1164,7 @@ HB_FUNC(CREATESPLITTER)
   all_signal_connect((gpointer)hCtrl);
   HB_RETHANDLE(hCtrl);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATESPLITTER, HWG_CREATESPLITTER);
+#endif

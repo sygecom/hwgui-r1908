@@ -75,7 +75,7 @@ Return Self
 
 METHOD Activate CLASS HUpDown
    IF !Empty(::oParent:handle)
-      ::handle := CreateUpDownControl( ::oParent:handle, ;
+      ::handle := hwg_CreateUpDownControl( ::oParent:handle, ;
           ::nLeft,::nTop,::nWidth,::nHeight,Val(::title),::nLower,::nUpper )
       ::Init()
    ENDIF

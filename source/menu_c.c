@@ -356,9 +356,9 @@ HB_FUNC(HWG_DESTROYMENU)
 }
 
 /*
- * CreateAcceleratorTable(_aAccel)
+ * hwg_CreateAcceleratorTable(_aAccel)
  */
-HB_FUNC(CREATEACCELERATORTABLE)
+HB_FUNC(HWG_CREATEACCELERATORTABLE)
 {
   PHB_ITEM pArray = hb_param(1, HB_IT_ARRAY), pSubArr;
   LPACCEL lpaccl;
@@ -379,6 +379,10 @@ HB_FUNC(CREATEACCELERATORTABLE)
   hb_xfree(lpaccl);
   hwg_ret_HACCEL(h);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEACCELERATORTABLE, HWG_CREATEACCELERATORTABLE);
+#endif
 
 /*
  * DestroyAcceleratorTable(hAccel)

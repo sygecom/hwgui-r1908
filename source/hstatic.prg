@@ -136,7 +136,7 @@ RETURN Self
 METHOD Activate() CLASS HStatic
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
       ::Init()
       //::Style := ::nStyleHS
    ENDIF

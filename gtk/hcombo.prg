@@ -98,11 +98,11 @@ Return Self
 METHOD Activate CLASS HComboBox
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateCombo( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateCombo( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::hEdit := hwg_ComboGetEdit( ::handle )
       ::Init()
-      hwg_SetWindowObject( ::hEdit,Self )      
+      hwg_SetWindowObject( ::hEdit,Self )
    ENDIF
 Return Nil
 

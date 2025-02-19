@@ -82,9 +82,9 @@ HB_FUNC(QHTM_END)
 }
 
 /*
-   CreateQHTM(hParentWindow, nID, nStyle, x1, y1, nWidth, nHeight)
+   hwg_CreateQHTM(hParentWindow, nID, nStyle, x1, y1, nWidth, nHeight)
 */
-HB_FUNC(CREATEQHTM)
+HB_FUNC(HWG_CREATEQHTM)
 {
   if (s_qhtmInit(NULL))
   {
@@ -99,6 +99,10 @@ HB_FUNC(CREATEQHTM)
     hb_retnl(0);
   }
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEQHTM, HWG_CREATEQHTM);
+#endif
 
 HB_FUNC(QHTM_GETNOTIFY)
 {

@@ -45,7 +45,7 @@ Return Self
 METHOD Activate CLASS HPanel
 
    IF !Empty(::oParent:handle)
-      ::handle := CreatePanel( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreatePanel( ::oParent:handle, ::id, ;
                    ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF

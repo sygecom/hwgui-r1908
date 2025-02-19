@@ -269,7 +269,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 METHOD Activate() CLASS HRadioButton
    IF !Empty(::oParent:handle)
-      ::handle := CreateButton(::oParent:handle, ::id, ;
+      ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
       ::Init()
    ENDIF

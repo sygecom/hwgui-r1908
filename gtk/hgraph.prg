@@ -54,7 +54,7 @@ Return Self
 METHOD Activate CLASS HGraph
 
    IF !Empty(::oParent:handle)
-      ::handle := CreateStatic( ::oParent:handle, ::id, ;
+      ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
@@ -162,7 +162,7 @@ Local px1, px2, py1, py2, nWidth
          NEXT
       ELSEIF ::nType == 3
          hwg_DrawButton( hDC,5,5,80,30,5 )
-         hwg_DrawButton( hDC,5,35,80,55,6 )	 
+         hwg_DrawButton( hDC,5,35,80,55,6 )
          /*
          IF ::tbrush == Nil
             ::tbrush := HBrush():Add( ::tcolor )
