@@ -31,8 +31,8 @@ METHOD init() CLASS HToolBarEx
 
    ::Super:init()
    hwg_SetWindowObject(::handle, Self)
-   SETTOOLHANDLE(::handle)
-   Sethook()
+   hwg_SetToolHandle(::handle)
+   hwg_Sethook()
 
 RETURN Self
 
@@ -47,7 +47,7 @@ METHOD onEvent(msg, w, l) CLASS HToolBarEx
    IF msg == WM_KEYDOWN
       RETURN -1
    ELSEIF msg == WM_KEYUP
-      unsethook()
+      hwg_UnsetHook()
       RETURN -1
    ENDIF
 
@@ -83,7 +83,7 @@ RETURN (lAlt .AND. (Asc(SubStr(cKeyb, VK_MENU + 1, 1)) >= 128))
 
 PROCEDURE MyDestructor() CLASS HToolBarEx
 
-   unsethook()
+   hwg_UnsetHook()
 
 RETURN
 

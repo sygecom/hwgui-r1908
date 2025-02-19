@@ -61,9 +61,9 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD Minimize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
    METHOD Close() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_CLOSE, 0)
    METHOD Release() INLINE ::Close(), ::super:Release(), Self := NIL
-   METHOD isMaximized() INLINE GetWindowPlacement(::handle) == SW_SHOWMAXIMIZED
-   METHOD isMinimized() INLINE GetWindowPlacement(::handle) == SW_SHOWMINIMIZED
-   METHOD isNormal() INLINE GetWindowPlacement(::handle) == SW_SHOWNORMAL
+   METHOD isMaximized() INLINE hwg_GetWindowPlacement(::handle) == SW_SHOWMAXIMIZED
+   METHOD isMinimized() INLINE hwg_GetWindowPlacement(::handle) == SW_SHOWMINIMIZED
+   METHOD isNormal() INLINE hwg_GetWindowPlacement(::handle) == SW_SHOWNORMAL
 
 
 ENDCLASS

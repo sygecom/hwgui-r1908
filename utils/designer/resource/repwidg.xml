@@ -246,7 +246,7 @@
            o:SetProp( "FontH",Ltrim(Str(aTMetr[1]*aMetr[4]/aMetr[2])) )
            hwg_ReleaseDC( hwg_GetActiveWindow(),hDC )
           ]]></code2>
-         <code3><![CDATA[ SetWindowFont( oCtrl:handle,oCtrl:oFont:handle,.T. ) ]]></code3>
+         <code3><![CDATA[ hwg_SetWindowFont( oCtrl:handle,oCtrl:oFont:handle,.T. ) ]]></code3>
       </property>
       <property name="Justify" array="Left,Center,Right">
       </property>

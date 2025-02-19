@@ -285,7 +285,7 @@ METHOD NoteCaption(cNote) CLASS HButton         //*
 
    IF cNote != NIL
       IF hwg_BitOr(::Style, BS_COMMANDLINK) > 0
-         hwg_SendMessage(::handle, BCM_SETNOTE, 0, ANSITOUNICODE(cNote))
+         hwg_SendMessage(::handle, BCM_SETNOTE, 0, hwg_AnsiToUnicode(cNote))
       ENDIF
       ::cNote := cNote
    ENDIF

@@ -88,7 +88,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::Type := WND_MDICHILD
    ::rect := hwg_GetWindowRect(::handle)
 
-   ::GETMDIMAIN():WindowState := GetWindowPlacement(::GETMDIMAIN():handle)
+   ::GETMDIMAIN():WindowState := hwg_GetWindowPlacement(::GETMDIMAIN():handle)
    ::oClient := HWindow():aWindows[2]
    IF lCentered
       ::nLeft := (::oClient:nWidth - ::nWidth) / 2
@@ -188,7 +188,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
    IF msg == WM_GETMINMAXINFO //= &H24
       IF ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
          IIf(::minWidth > -1, ::minWidth, NIL), ;
          IIf(::minHeight > -1, ::minHeight, NIL), ;
          IIf(::maxWidth > -1, ::maxWidth, NIL), ;
@@ -239,7 +239,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
    CASE WM_GETMINMAXINFO //= &H24
       IF ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
          IIf(::minWidth > -1, ::minWidth, NIL), ;
          IIf(::minHeight > -1, ::minHeight, NIL), ;
          IIf(::maxWidth > -1, ::maxWidth, NIL), ;
@@ -458,7 +458,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       RETURN - 1
    ENDIF
 
-   oWnd:WindowState := GetWindowPlacement(oWnd:handle)
+   oWnd:WindowState := hwg_GetWindowPlacement(oWnd:handle)
    IF wParam == SC_MINIMIZE
       IF __ObjHasMsg(oWnd, "LTRAY") .AND. oWnd:lTray
          oWnd:Hide()
@@ -679,7 +679,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       IF oWnd:bGetFocus != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. !oWnd:IsMaximized()
          oWnd:lSuspendMsgsHandling := .T.
          IF Empty(oWnd:nFocus)
-            UpdateWindow(oWnd:handle)
+            hwg_UpdateWindow(oWnd:handle)
          ENDIF
          Eval(oWnd:bGetFocus, oWnd)
          oWnd:lSuspendMsgsHandling := .F.

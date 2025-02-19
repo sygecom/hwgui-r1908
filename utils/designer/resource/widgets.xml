@@ -1009,7 +1009,7 @@
       </property>
       <property name="Font" dlg="Font">
          <code2><![CDATA[ oCtrl:oFont := value ]]></code2>
-         <code3><![CDATA[ SetWindowFont( oCtrl:handle,oCtrl:oFont:handle,.T. ) ]]></code3>
+         <code3><![CDATA[ hwg_SetWindowFont( oCtrl:handle,oCtrl:oFont:handle,.T. ) ]]></code3>
       </property>
       <property name="Justify" array="Left,Center,Right">
       </property>

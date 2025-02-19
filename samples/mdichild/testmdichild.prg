@@ -68,7 +68,7 @@ FUNCTION CreateMdiChild()
 
   IF !Empty([PDV])
      IF HWindow():FindWindow([PDV]) != Nil
-        BRINGTOTOP(HWindow():FindWindow([PDV]):handle)
+        hwg_BringToTop(HWindow():FindWindow([PDV]):handle)
         RETURN Nil
      ENDIF
   ENDIF

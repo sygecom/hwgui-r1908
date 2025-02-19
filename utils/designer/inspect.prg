@@ -809,9 +809,9 @@ FUNCTION ActiveTopMost( nHandle, lActive )
   nHandle:=hwg_GetActiveWindow()
 
   IF lActive
-       lSucess := SetTopMost(nHandle)    // Set TopMost
+       lSucess := hwg_SetTopMost(nHandle)    // Set TopMost
   ELSE
-       lSucess := RemoveTopMost(nHandle) // Remove TopMost
+       lSucess := hwg_RemoveTopMost(nHandle) // Remove TopMost
   ENDIF
 
 RETURN lSucess

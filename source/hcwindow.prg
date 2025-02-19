@@ -266,7 +266,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
    IF msg == WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR. ;
          ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
                       IIf(::minWidth  > -1, ::minWidth, NIL), ;
                       IIf(::minHeight > -1, ::minHeight, NIL), ;
                       IIf(::maxWidth  > -1, ::maxWidth, NIL), ;
@@ -295,7 +295,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
    CASE WM_GETMINMAXINFO
       IF ::minWidth > -1 .OR. ::maxWidth > -1 .OR. ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
                       IIf(::minWidth > -1, ::minWidth, NIL), ;
                       IIf(::minHeight > -1, ::minHeight, NIL), ;
                       IIf(::maxWidth > -1, ::maxWidth, NIL), ;
@@ -847,7 +847,7 @@ RETURN NIL
 METHOD ResetScrollbars() CLASS HCustomWindow
    // Reset our window scrolling information
 
-   LOCAL lMaximized := GetWindowPlacement(::handle) == SW_MAXIMIZE
+   LOCAL lMaximized := hwg_GetWindowPlacement(::handle) == SW_MAXIMIZE
 
    IF lMaximized
       ScrollWindow(::handle, ::nHscrollPos * HORZ_PTS, 0)

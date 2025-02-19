@@ -310,7 +310,7 @@ METHOD INIT() CLASS HComboBox
          ELSE
             hwg_ComboSetString(::handle, ::value)
          ENDIF
-         avgwidth := GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
+         avgwidth := hwg_GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
          NewLongComboWidth := (LongComboWidth - 2) * avgwidth
          hwg_SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
@@ -770,7 +770,7 @@ METHOD DisplayValue(cValue) CLASS HComboBox
    ENDIF
 
 RETURN IIf(!::lEdit, hwg_GetEditText(::oParent:handle, ::id), ::cDisplayValue)
-//RETURN IIf(IsWindow(::oParent:handle), hwg_GetEditText(::oParent:handle, ::id), ::cDisplayValue)
+//RETURN IIf(hwg_IsWindow(::oParent:handle), hwg_GetEditText(::oParent:handle, ::id), ::cDisplayValue)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -836,7 +836,7 @@ METHOD SetCueBanner(cText, lShowFoco) CLASS HComboBox
    LOCAL lRet := .F.
 
    IF ::lEdit
-      lRet := hwg_SendMessage(::handle, CB_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
+      lRet := hwg_SendMessage(::handle, CB_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), hwg_AnsiToUnicode(cText))
    ENDIF
 
 RETURN lRet

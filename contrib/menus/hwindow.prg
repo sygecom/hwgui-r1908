@@ -860,7 +860,7 @@ Local oItem, iCont, nCont
    #endif
    
    If HWindow():GetMain() == oWnd
-      ExitProcess(0)
+      hwg_ExitProcess(0)
    Endif  
 
 return Nil

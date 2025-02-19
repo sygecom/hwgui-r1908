@@ -1262,7 +1262,7 @@ METHOD SetCueBanner(cText, lShowFoco) CLASS HEdit
    LOCAL lRet := .F.
 
    IF !::lMultiLine
-      lRet := hwg_SendMessage(::handle, EM_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), ANSITOUNICODE(cText))
+      lRet := hwg_SendMessage(::handle, EM_SETCUEBANNER, IIf(Empty(lShowFoco), 0, 1), hwg_AnsiToUnicode(cText))
    ENDIF
 
 RETURN lRet

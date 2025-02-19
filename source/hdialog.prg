@@ -202,8 +202,8 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
          IF ::WindowState > SW_HIDE
             //hwg_InvalidateRect(::handle, 1)
-            //BRINGTOTOP(::handle)
-            //UPDATEWINDOW(::handle)
+            //hwg_BringToTop(::handle)
+            //hwg_UpdateWindow(::handle)
             hwg_SetWindowPos(::handle, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_FRAMECHANGED)
             hwg_RedrawWindow(::handle, RDW_UPDATENOW + RDW_NOCHILDREN)
          ENDIF
@@ -231,7 +231,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    IF msg == WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR. ;
          ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
                       IIf(::minWidth  > -1, ::minWidth, NIL), ;
                       IIf(::minHeight > -1, ::minHeight, NIL), ;
                       IIf(::maxWidth  > -1, ::maxWidth, NIL), ;
@@ -295,7 +295,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
    CASE WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR. ;
          ::minHeight > -1 .OR. ::maxHeight > -1
-         MINMAXWINDOW(::handle, lParam, ;
+         hwg_MinMaxWindow(::handle, lParam, ;
                       IIf(::minWidth  > -1, ::minWidth, NIL), ;
                       IIf(::minHeight > -1, ::minHeight, NIL), ;
                       IIf(::maxWidth  > -1, ::maxWidth, NIL), ;
@@ -878,7 +878,7 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
    //HB_SYMBOL_UNUSED(lParam)
 
    IF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. oDlg:lContainer .AND. !hwg_SelfFocus(lParam, oDlg:handle)
-      UpdateWindow(oDlg:handle)
+      hwg_UpdateWindow(oDlg:handle)
       hwg_SendMessage(lParam, WM_NCACTIVATE, 1, NIL)
       RETURN 0
    ENDIF

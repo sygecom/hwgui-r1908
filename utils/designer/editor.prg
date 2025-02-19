@@ -248,7 +248,7 @@ STATIC FUNCTION editChgFont()
 
    IF ( oFont := HFont():Select( oEdit:oFont ) ) != Nil
        oEdit:oFont := oFont
-       SetWindowFont( oEdit:handle,oFont:handle )
+       hwg_SetWindowFont( oEdit:handle,oFont:handle )
        editShow( ,.T. )
        // hwg_RedrawWindow( oEdit:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
        HDTheme():oFont := oFont

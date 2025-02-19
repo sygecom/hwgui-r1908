@@ -262,10 +262,10 @@ METHOD SetFont(oFont) CLASS HControl
    IF oFont != NIL
       IF hb_IsObject(oFont)
          ::oFont := oFont:SetFontStyle()
-         SetWindowFont(::handle, ::oFont:handle, .T.)
+         hwg_SetWindowFont(::handle, ::oFont:handle, .T.)
       ENDIF
    ELSEIF ::oParent:oFont != NIL
-      SetWindowFont(::handle, ::oParent:oFont:handle, .T.)
+      hwg_SetWindowFont(::handle, ::oParent:oFont:handle, .T.)
    ENDIF
 
 RETURN ::oFont

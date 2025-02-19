@@ -280,7 +280,7 @@ METHOD Paint(lpDis) CLASS HStatic
    // Map "Static Styles" to "Text Styles"
    nstyle := ::nStyleHS // ::style
    IF nStyle - SS_NOTIFY < DT_SINGLELINE
-      SetAStyle(@nstyle, @dwtext)
+      hwg_SetAStyle(@nstyle, @dwtext)
    ELSE
       dwtext := nStyle - DT_NOCLIP
    ENDIF

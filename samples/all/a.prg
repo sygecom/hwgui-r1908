@@ -565,9 +565,9 @@ RETURN NIL
 FUNCTION ActiveTopMost(nHandle, lActive)
     
     if lActive
-       lSucess := SetTopMost(nHandle)    // Set TopMost
+       lSucess := hwg_SetTopMost(nHandle)    // Set TopMost
     else   
-       lSucess := RemoveTopMost(nHandle) // Remove TopMost
+       lSucess := hwg_RemoveTopMost(nHandle) // Remove TopMost
     endif
     
 RETURN lSucess
