@@ -63,10 +63,10 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD DelItem( oWnd )
    METHOD FindWindow( hWnd )
    METHOD GetMain()
-   METHOD Restore()  INLINE hwg_WindowRestore( ::handle )
+   METHOD Restore() INLINE hwg_WindowRestore( ::handle )
    METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
    METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
-   METHOD Close()	INLINE hwg_DestroyWindow( ::handle )
+   METHOD Close() INLINE hwg_DestroyWindow( ::handle )
 ENDCLASS
 
 METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
@@ -162,7 +162,7 @@ CLASS HMainWindow INHERIT HWindow
                      cAppName,oBmp,cHelp,nHelpId )
    METHOD Activate( lShow )
    METHOD onEvent( msg, wParam, lParam )
-   // METHOD GetMdiActive()  INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
+   // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
 
 ENDCLASS
 

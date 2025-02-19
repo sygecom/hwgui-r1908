@@ -31,8 +31,8 @@ CLASS HControl INHERIT HCustomWindow
    DATA name
    DATA Anchor          INIT 0
    DATA   xName           HIDDEN
-   ACCESS Name            INLINE ::xName
-   ASSIGN Name( cName )   INLINE ::AddName( cName ) 
+   ACCESS Name INLINE ::xName
+   ASSIGN Name( cName ) INLINE ::AddName( cName ) 
 
 
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
@@ -42,14 +42,14 @@ CLASS HControl INHERIT HCustomWindow
    METHOD SetColor( tcolor,bcolor,lRepaint )
    METHOD NewId()
 
-   METHOD Disable()	INLINE hwg_EnableWindow( ::handle, .F. )
-   METHOD Enable()	INLINE hwg_EnableWindow( ::handle, .T. )
-   METHOD IsEnabled()   INLINE hwg_IsWindowEnabled( ::Handle )
-   METHOD SetFocus()	INLINE hwg_EnableWindow( ::handle, .T. )
+   METHOD Disable() INLINE hwg_EnableWindow( ::handle, .F. )
+   METHOD Enable() INLINE hwg_EnableWindow( ::handle, .T. )
+   METHOD IsEnabled() INLINE hwg_IsWindowEnabled( ::Handle )
+   METHOD SetFocus() INLINE hwg_EnableWindow( ::handle, .T. )
    METHOD Move( x1,y1,width,height )
    /*
-   METHOD GetText()     INLINE hwg_GetWindowText(::handle)
-   METHOD SetText( c )  INLINE hwg_SetWindowText( ::Handle, c )
+   METHOD GetText() INLINE hwg_GetWindowText(::handle)
+   METHOD SetText( c ) INLINE hwg_SetWindowText( ::Handle, c )
    */
    METHOD onAnchor( x, y, w, h )
    METHOD End()

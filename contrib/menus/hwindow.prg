@@ -55,7 +55,7 @@ CLASS HCustomWindow INHERIT HObject
    METHOD FindControl( nId,nHandle )
    METHOD Hide() INLINE (::lHide:=.T.,hwg_HideWindow(::handle))
    METHOD Show() INLINE (::lHide:=.F.,hwg_ShowWindow(::handle))
-   METHOD Restore()  INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
+   METHOD Restore() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
    METHOD Maximize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0)
    METHOD Minimize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
 ENDCLASS

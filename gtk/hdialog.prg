@@ -75,11 +75,11 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD DelItem( oWnd,lModal )
    METHOD FindDialog( hWnd )
    METHOD GetActive()
-   METHOD Center()   INLINE hwg_CenterWindow( Self )
-   METHOD Restore()  INLINE hwg_WindowRestore( ::handle )
+   METHOD Center() INLINE hwg_CenterWindow( Self )
+   METHOD Restore() INLINE hwg_WindowRestore( ::handle )
    METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
    METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
-   METHOD Close()    INLINE EndDialog( ::handle )
+   METHOD Close() INLINE EndDialog( ::handle )
 ENDCLASS
 
 METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;

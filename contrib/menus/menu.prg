@@ -20,8 +20,8 @@ STATIC _aMenuDef, _oWnd, _aAccel, _nLevel, _Id, _oMenu
 CLASS HMenu INHERIT HObject
    DATA handle
    DATA aMenu 
-   METHOD New()  INLINE Self
-   METHOD End()  INLINE hwg_DestroyMenu(::handle)
+   METHOD New() INLINE Self
+   METHOD End() INLINE hwg_DestroyMenu(::handle)
    METHOD Show( oWnd,xPos,yPos,lWnd )
 ENDCLASS
 

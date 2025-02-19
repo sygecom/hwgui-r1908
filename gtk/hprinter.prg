@@ -40,8 +40,8 @@ CLASS HPrinter INHERIT HObject
    METHOD Line( x1,y1,x2,y2,oPen )
    METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont )
    METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap )
-   METHOD Preview()  INLINE Nil
-   METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC,cString,IIf(oFont == NIL, NIL, oFont:handle) )
+   METHOD Preview() INLINE Nil
+   METHOD GetTextWidth( cString, oFont ) INLINE hwg_gp_GetTextSize( ::hDC,cString,IIf(oFont == NIL, NIL, oFont:handle) )
 
 ENDCLASS
 

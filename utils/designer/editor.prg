@@ -33,8 +33,8 @@ CLASS HDTheme
    DATA quote
    DATA number
 
-   METHOD New( name )  INLINE ( ::name := name, Self )
-   METHOD Add( name )  INLINE ( ::name := name,AAdd(::aThemes, Self),Self )
+   METHOD New( name ) INLINE ( ::name := name, Self )
+   METHOD Add( name ) INLINE ( ::name := name,AAdd(::aThemes, Self),Self )
 ENDCLASS
 
 FUNCTION LoadEdOptions( cFileName )
