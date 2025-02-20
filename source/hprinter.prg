@@ -730,12 +730,12 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
             ::memBitmap := hwg_CreateCompatibleBitmap(hDC, rect[3] - rect[1], rect[4] - rect[2])
             ::memDC:SelectObject(::memBitmap)
             Brush           := HBrush():Add(hwg_GetSysColor(COLOR_3DHILIGHT + 1)):handle
-            BrushWhite      := HBrush():Add(RGB(255, 255, 255)):handle
-            BrushBlack      := HBrush():Add(RGB(0, 0, 0)):handle
-            BrushLine       := HBrush():Add(RGB(102, 100, 92)):handle
-            BrushBackground := HBrush():Add(RGB(204, 200, 184)):handle
-            BrushShadow     := HBrush():Add(RGB(178, 175, 161)):handle
-            BrushBorder     := HBrush():Add(RGB(129, 126, 115)):handle
+            BrushWhite      := HBrush():Add(hwg_RGB(255, 255, 255)):handle
+            BrushBlack      := HBrush():Add(hwg_RGB(0, 0, 0)):handle
+            BrushLine       := HBrush():Add(hwg_RGB(102, 100, 92)):handle
+            BrushBackground := HBrush():Add(hwg_RGB(204, 200, 184)):handle
+            BrushShadow     := HBrush():Add(hwg_RGB(178, 175, 161)):handle
+            BrushBorder     := HBrush():Add(hwg_RGB(129, 126, 115)):handle
          ENDIF
 
          IF ::NeedsRedraw

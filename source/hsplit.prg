@@ -135,7 +135,7 @@ METHOD Paint() CLASS HSplitter
       Eval(::bPaint, Self)
    ELSEIF !::lScrolling
       IF ::lCaptured
-         oBrushFill := HBrush():Add(RGB(156, 156, 156))
+         oBrushFill := HBrush():Add(hwg_RGB(156, 156, 156))
          hwg_SelectObject(hDC, oBrushFill:handle)
          hwg_DrawEdge(hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf(::lVertical, BF_RECT, BF_TOP) + BF_MIDDLE)
          hwg_FillRect(hDC, x1, y1, x2, y2, oBrushFill:handle)

@@ -618,20 +618,20 @@ Local oSay
    LINK "http://www.hwgui.net" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241,249,91)
 
 
    @ 20,60 SAY "Hwgui Kresin Page"        ;
    LINK "http://kresin.belgorod.su/hwgui.html" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241,249,91)
 
    @ 20,80 SAY "Hwgui international Forum"        ;
    LINK "http://br.groups.yahoo.com/group/hwguibr" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241,249,91)
                              
    @ 40, 120 BUTTONex oBtExit  CAPTION "Close"  BITMAP oImgExit:Handle  on Click {||EndDialog()}    SIZE 180,35  
   

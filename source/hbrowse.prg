@@ -1524,7 +1524,7 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
             s_arrowCursor := hwg_LoadCursor(IDC_ARROW)
             s_downCursor := hwg_LoadCursor(IDC_HAND)
          ENDIF
-         s_oPen64 := HPen():Add(PS_SOLID, 1, IIf(::Themed, RGB(128, 128, 128), RGB(64, 64, 64)))
+         s_oPen64 := HPen():Add(PS_SOLID, 1, IIf(::Themed, hwg_RGB(128, 128, 128), hwg_RGB(64, 64, 64)))
       ENDIF
    ENDIF
 

@@ -820,7 +820,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    ELSE
 
       IF bIsFocused .OR. ::id == IDOK
-         br := HBRUSH():Add(RGB(1, 1, 1))
+         br := HBRUSH():Add(hwg_RGB(1, 1, 1))
          hwg_FrameRect(dc, itemRect, br:handle)
          hwg_InflateRect(@itemRect, -1, -1)
       ENDIF

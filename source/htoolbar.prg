@@ -313,7 +313,7 @@ METHOD CREATETOOL() CLASS hToolBar
          //aBmpSize := hwg_GetBitmapSize(aButton[nPos])
          /*
          IF aBmpSize[3] == 24
-            //Imagelist_AddMasked(hIm, aButton[nPos], RGB(236, 223, 216))
+            //Imagelist_AddMasked(hIm, aButton[nPos], hwg_RGB(236, 223, 216))
             Imagelist_Add(hIm, aButton[nPos])
          ELSE
             Imagelist_Add(hIm, aButton[nPos])

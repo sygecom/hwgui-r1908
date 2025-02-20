@@ -496,7 +496,7 @@ METHOD DrawItems(hDC) CLASS HOwnButton
       IF ::lEnabled
          hwg_SetTextColor(hDC, ::tcolor)
       ELSE
-         //hwg_SetTextColor(hDC, RGB(255, 255, 255))
+         //hwg_SetTextColor(hDC, hwg_RGB(255, 255, 255))
          hwg_SetTextColor(hDC, hwg_GetSysColor(COLOR_INACTIVECAPTION))
       ENDIF
       x1 := IIf(::xt != 0, ::xt, 4)

@@ -109,13 +109,13 @@ FUNCTION CreateMdiChild()
    @ 818, 180 BUTTONEX oButtonex1 CAPTION "Cancela Cupom" SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
         ON CLICK {|This, Value|hwg_MsgInfo("Cancelado")} ;
-        ON GETFOCUS {||Thisform:obuttonex1:SetColor(255, rgb(225, 243, 252), .T.)} ;
+        ON GETFOCUS {||Thisform:obuttonex1:SetColor(255, hwg_RGB(225, 243, 252), .T.)} ;
         ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex1:Anchor := 225
         oButtonex1:lNoThemes := .T.
    @ 818, 229 BUTTONEX oButtonex2 CAPTION "Leitura X" SIZE 183, 38 ;
         STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
-        ON GETFOCUS {||Thisform:obuttonex2:SetColor(255, rgb(225, 243, 252), .T.)} ;
+        ON GETFOCUS {||Thisform:obuttonex2:SetColor(255, hwg_RGB(225, 243, 252), .T.)} ;
         ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex2:Anchor := 240
         oButtonex2:lNoThemes := .T.

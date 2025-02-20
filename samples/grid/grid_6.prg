@@ -78,7 +78,7 @@ FUNCTION Test()
              ADD COLUMN TO GRID oGrid HEADER aHead[4] WIDTH 150  bitmap 4
 
              for n := 1 to Len(aItems)
-                ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color rgb(255, 12, 123) backcolor rgb(192, 0, 255), header aItems[n, 2], header aItems[n, 3] bitmap 3, header aItems[n, 1] bitmap 1 color rgb(123, 122, 123)  backcolor rgb(192, 0, 255)
+                ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color hwg_RGB(255, 12, 123) backcolor hwg_RGB(192, 0, 255), header aItems[n, 2], header aItems[n, 3] bitmap 3, header aItems[n, 1] bitmap 1 color hwg_RGB(123, 122, 123)  backcolor hwg_RGB(192, 0, 255)
              next
 
              @ 0, 395 button "LVS_REPORT" size 95, 25 on click {||LISTVIEW_SETVIEW(oGrid:handle, LVS_REPORT)}

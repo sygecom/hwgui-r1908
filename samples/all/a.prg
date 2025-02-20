@@ -270,13 +270,13 @@ FUNCTION OpenAbout()
    LINK "http://kresin.belgorod.su/hwgui.html" ;
        SIZE 130, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR RGB(241, 249, 91)
+        VISITCOLOR hwg_RGB(241, 249, 91)
 
    @ 20, 160 SAY "Hwgui international Forum"        ;
    LINK "http://br.groups.yahoo.com/group/hwguibr" ;
        SIZE 200, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR RGB(241, 249, 91)
+        VISITCOLOR hwg_RGB(241, 249, 91)
 
 
    @ 160, 30 BROWSE oBrw ARRAY SIZE 180, 110 ;
@@ -591,7 +591,7 @@ INIT DIALOG oDlg TITLE "Progress Bar"    ;
              BARWIDTH 10    ;
              QUANTITY 1000
 ADD STATUS oStatus TO oDlg PARTS 400
-oBar := HProgressBar():New(ostatus, , 0, 2, 200, 20, 200, 1000, rgb(12, 143, 243), rgb(243, 132, 143))
+oBar := HProgressBar():New(ostatus, , 0, 2, 200, 20, 200, 1000, hwg_RGB(12, 143, 243), hwg_RGB(243, 132, 143))
 oCombo := HComboBox():New(ostatus, , , , 65536, 0, 2, 200, 20, aCombo, , , , , , , .F., .F., , ,)
 @ 10, 60  BUTTON "Test" SIZE 100, 32 ON CLICK {||MudeProg(oBar)}
    

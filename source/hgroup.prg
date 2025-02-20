@@ -145,8 +145,8 @@ METHOD PAINT(lpdis) CLASS HGroup
    hwg_SetBkMode(dc, TRANSPARENT)
 
    IF hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
-      //pnFrmDark := hwg_CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
-      pnFrmDark := HPen():Add(PS_SOLID, 1, RGB(64, 64, 64))
+      //pnFrmDark := hwg_CreatePen(PS_SOLID, 1, hwg_RGB(0, 0, 0)))
+      pnFrmDark := HPen():Add(PS_SOLID, 1, hwg_RGB(64, 64, 64))
       pnFrmLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
       ppnOldPen := hwg_SelectObject(dc, pnFrmDark:handle)
       hwg_MoveTo(dc, rcText[1] - 2, rcText[2])

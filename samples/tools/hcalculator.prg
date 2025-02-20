@@ -22,7 +22,7 @@ CLASS HCalculator
    DATA aOperando
    DATA lClear
    DATA nMemory
-   DATA bColor        INIT RGB(255, 255, 255)
+   DATA bColor        INIT hwg_RGB(255, 255, 255)
    DATA nLeft         INIT 0
    DATA nTop          INIT 0
    DATA nWidth        INIT 196
