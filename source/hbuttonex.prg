@@ -260,7 +260,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    IF msg == WM_THEMECHANGED
       IF ::Themed
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
             ::hTheme := NIL
             //::m_bFirstTime := .T.
          ENDIF
@@ -460,7 +460,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    CASE WM_THEMECHANGED
       IF ::Themed
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
             ::hTheme := NIL
             //::m_bFirstTime := .T.
          ENDIF
@@ -776,11 +776,11 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       ::m_bFirstTime := .F.
       IF ISTHEMEDLOAD()
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
          ENDIF
          ::hTheme := NIL
          IF ::WindowsManifest
-            ::hTheme := hb_OpenThemeData(::handle, "BUTTON")
+            ::hTheme := hwg_OpenThemeData(::handle, "BUTTON")
          ENDIF
       ENDIF
    ENDIF

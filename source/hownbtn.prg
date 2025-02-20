@@ -154,7 +154,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
    IF msg == WM_THEMECHANGED
       IF ::Themed
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
             ::hTheme := NIL
          ENDIF
          ::Themed := .F.
@@ -217,7 +217,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
    CASE WM_THEMECHANGED
       IF ::Themed
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
             ::hTheme := NIL
          ENDIF
          ::Themed := .F.
@@ -380,10 +380,10 @@ METHOD Paint() CLASS HOwnButton
       ::m_bFirstTime := .F.
       IF ISTHEMEDLOAD()
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
          ENDIF
          IF ::WindowsManifest
-            ::hTheme := hb_OpenThemeData(::handle, "BUTTON")
+            ::hTheme := hwg_OpenThemeData(::handle, "BUTTON")
          ENDIF
          ::hTheme := IIf(Empty(::hTheme), NIL, ::hTheme)
       ENDIF

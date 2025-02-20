@@ -560,7 +560,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       IF msg == WM_THEMECHANGED
          IF ::Themed
             IF hb_IsPointer(::hTheme)
-               HB_CLOSETHEMEDATA(::htheme)
+               hwg_CloseThemeData(::htheme)
                ::hTheme := NIL
             ENDIF
             ::Themed := .F.
@@ -892,7 +892,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
       */
       ELSEIF msg == WM_DESTROY
         IF hb_IsPointer(::hTheme)
-           HB_CLOSETHEMEDATA(::htheme)
+           hwg_CloseThemeData(::htheme)
           ::hTheme := NIL
         ENDIF
         ::END()
@@ -941,7 +941,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_THEMECHANGED
       IF ::Themed
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
             ::hTheme := NIL
          ENDIF
          ::Themed := .F.
@@ -1309,7 +1309,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
 
    CASE WM_DESTROY
      IF hb_IsPointer(::hTheme)
-        HB_CLOSETHEMEDATA(::htheme)
+        hwg_CloseThemeData(::htheme)
        ::hTheme := NIL
      ENDIF
      ::END()
@@ -1822,10 +1822,10 @@ METHOD Paint(lLostFocus) CLASS HBrowse
       ::m_bFirstTime := .F.
       IF (ISTHEMEDLOAD())
          IF hb_IsPointer(::hTheme)
-            HB_CLOSETHEMEDATA(::htheme)
+            hwg_CloseThemeData(::htheme)
          ENDIF
          IF ::WindowsManifest
-            ::hTheme := hb_OpenThemeData(::handle, "HEADER")
+            ::hTheme := hwg_OpenThemeData(::handle, "HEADER")
          ENDIF
          ::hTheme := IIf(Empty(::hTheme), NIL, ::hTheme)
       ENDIF

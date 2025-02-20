@@ -1353,10 +1353,10 @@ FUNCTION GetBackColorParent(oCtrl, lSelf, lTransparent)
          //-brush := oCtrl:Pages[oCtrl:GetActivePage()]:brush
          bColor := oCtrl:Pages[oCtrl:GetActivePage()]:bColor
       ELSEIF ISTHEMEACTIVE() .AND. oCtrl:WindowsManifest
-         hTheme := hb_OpenThemeData(oCtrl:handle, "TAB") //oCtrl:oParent:WinClass)
+         hTheme := hwg_OpenThemeData(oCtrl:handle, "TAB") //oCtrl:oParent:WinClass)
          IF !Empty(hTheme)
             bColor := HWG_GETTHEMESYSCOLOR(hTheme, COLOR_WINDOW)
-            HB_CLOSETHEMEDATA(hTheme)
+            hwg_CloseThemeData(hTheme)
             //-brush := HBrush():Add(bColor)
          ENDIF
       ENDIF

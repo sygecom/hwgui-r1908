@@ -1295,7 +1295,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
     IF (ISTHEMEDLOAD())
        hTheme := NIL
        IF ::WindowsManifest
-           hTheme := hb_OpenThemeData(::oParent:handle, "TAB")
+           hTheme := hwg_OpenThemeData(::oParent:handle, "TAB")
        ENDIF
        hTheme := IIf(Empty(hTheme), NIL, hTheme)
     ENDIF
