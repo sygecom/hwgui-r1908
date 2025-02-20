@@ -378,7 +378,7 @@ METHOD Paint() CLASS HOwnButton
    ENDIF
    IF ::Themed .AND. ::m_bFirstTime
       ::m_bFirstTime := .F.
-      IF ISTHEMEDLOAD()
+      IF hwg_ISThemedLoad()
          IF hb_IsPointer(::hTheme)
             hwg_CloseThemeData(::htheme)
          ENDIF

@@ -78,7 +78,7 @@ METHOD Init() CLASS HGroup
       //-IF ::backStyle == TRANSPARENT .OR. ::bColor != NIL
       IF ::oBrush != NIL .OR. ::backStyle == TRANSPARENT
          nbs := HWG_GETWINDOWSTYLE(::handle)
-         nbs := modstyle(nbs, BS_TYPEMASK, BS_OWNERDRAW + WS_DISABLED)
+         nbs := hwg_ModStyle(nbs, BS_TYPEMASK, BS_OWNERDRAW + WS_DISABLED)
          HWG_SETWINDOWSTYLE(::handle, nbs)
          ::bPaint := {|o, p|o:paint(p)}
       ENDIF

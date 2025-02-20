@@ -100,7 +100,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, btnWidth, oFon
    ::nIndent := IIf(nIndent != NIL, nIndent, 1)
    ::nwSize := IIf(nwSize != NIL .AND. nwSize > 11, nwSize, 16)
    ::nhSize := IIf(nhSize != NIL .AND. nhSize > 11, nhSize, ::nwSize - 1)
-   ::lnoThemes := !ISTHEMEACTIVE() .OR. !::WindowsManifest
+   ::lnoThemes := !hwg_IsThemeActive() .OR. !::WindowsManifest
    IF hwg_BitAnd(::Style, WS_DLGFRAME + WS_BORDER + CCS_NODIVIDER) == 0
       IF !::lVertical
          ::Line := HLine():New(oWndParent, , , nLeft, nTop + nHeight + ;

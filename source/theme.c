@@ -1177,7 +1177,7 @@ static int image_top(int cy, const RECT *Rect, DWORD style)
   return y;
 }
 
-HB_FUNC(INITTHEMELIB)
+HB_FUNC(HWG_INITTHEMELIB)
 {
   m_hThemeDll = LoadLibrary(TEXT("UxTheme.dll"));
 
@@ -1187,7 +1187,11 @@ HB_FUNC(INITTHEMELIB)
   }
 }
 
-HB_FUNC(ENDTHEMELIB)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(INITTHEMELIB, HWG_INITTHEMELIB);
+#endif
+
+HB_FUNC(HWG_ENDTHEMELIB)
 {
   if (m_hThemeDll != NULL)
   {
@@ -1198,13 +1202,21 @@ HB_FUNC(ENDTHEMELIB)
   ThemeLibLoaded = FALSE;
 }
 
-HB_FUNC(ONNOTIFYCUSTOMDRAW)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ENDTHEMELIB, HWG_ENDTHEMELIB);
+#endif
+
+HB_FUNC(HWG_ONNOTIFYCUSTOMDRAW)
 {
   // HWND hWnd = ( HWND ) hb_parnl(1) ;
   LPARAM lParam = hwg_par_LPARAM(1);
   // PHB_ITEM pColor = hb_param(3, HB_IT_ARRAY);
   hb_retnl((LONG)OnNotifyCustomDraw(lParam));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ONNOTIFYCUSTOMDRAW, HWG_ONNOTIFYCUSTOMDRAW);
+#endif
 
 /*
 
@@ -1622,12 +1634,16 @@ HB_FUNC_TRANSLATE(HB_OPENTHEMEDATA, HWG_OPENTHEMEDATA);
 #endif
 
 /*
-ISTHEMEDLOAD() --> .T.|.F.
+HWG_ISTHEMEDLOAD() --> .T.|.F.
 */
-HB_FUNC(ISTHEMEDLOAD)
+HB_FUNC(HWG_ISTHEMEDLOAD)
 {
   hb_retl(ThemeLibLoaded);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ISTHEMEDLOAD, HWG_ISTHEMEDLOAD);
+#endif
 
 /*
 HWG_DRAWTHEMEBACKGROUND(HTHEME, HDC, nPartId, nStateId) --> numeric
@@ -1689,13 +1705,13 @@ HB_FUNC_TRANSLATE(DRAWTHEICON, HWG_DRAWTHEICON);
 #endif
 
 /*
-//PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
+//hwg_PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
 */
 
 /*
-PREPAREIMAGERECT(p1, p2, p3, p4, p5, p6, p7, p8, p9) -->
+HWG_PREPAREIMAGERECT(p1, p2, p3, p4, p5, p6, p7, p8, p9) -->
 */
-HB_FUNC(PREPAREIMAGERECT)
+HB_FUNC(HWG_PREPAREIMAGERECT)
 {
   HWND hButtonWnd = hwg_par_HWND(1);
   HDC dc = hwg_par_HDC(2);
@@ -1743,6 +1759,10 @@ HB_FUNC(PREPAREIMAGERECT)
   hb_itemReturnRelease(Rect2Array(&rImage));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PREPAREIMAGERECT, HWG_PREPAREIMAGERECT);
+#endif
+
 /*
 HWG_DRAWTHEMETEXT(HTHEME, HDC, nPartId, nStateId, cText, nTextFlags, nTextFlags2, aRect) -->
 */
@@ -1780,9 +1800,9 @@ HB_FUNC_TRANSLATE(HB_CLOSETHEMEDATA, HWG_CLOSETHEMEDATA);
 #endif
 
 /*
-TRACKMOUSEVENT(HWND, nFlags, nHoverTime) -->
+HWG_TRACKMOUSEVENT(HWND, nFlags, nHoverTime) -->
 */
-HB_FUNC(TRACKMOUSEVENT)
+HB_FUNC(HWG_TRACKMOUSEVENT) // TODO: deveria ser HWG_TRACKMOUSEEVENT e não HWG_TRACKMOUSEVENT
 {
   HWND m_hWnd = hwg_par_HWND(1);
   DWORD dwFlags = (DWORD)hb_parnl(2);
@@ -1796,10 +1816,14 @@ HB_FUNC(TRACKMOUSEVENT)
   _TrackMouseEvent(&csTME);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TRACKMOUSEVENT, HWG_TRACKMOUSEVENT);
+#endif
+
 /*
-BUTTONEXONSETSTYLE(wParam, lParam, HWND, @lFlag) -->
+HWG_BUTTONEXONSETSTYLE(wParam, lParam, HWND, @lFlag) -->
 */
-HB_FUNC(BUTTONEXONSETSTYLE)
+HB_FUNC(HWG_BUTTONEXONSETSTYLE)
 {
   WPARAM wParam = hwg_par_WPARAM(1);
   LPARAM lParam = hwg_par_LPARAM(2);
@@ -1824,26 +1848,38 @@ HB_FUNC(BUTTONEXONSETSTYLE)
   hb_retnint(DefWindowProc(hwg_par_HWND(3), BM_SETSTYLE, (wParam & ~BS_TYPEMASK) | BS_OWNERDRAW, lParam));
 } // End of OnSetStyle
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BUTTONEXONSETSTYLE, HWG_BUTTONEXONSETSTYLE);
+#endif
+
 /*
-GETTHESTYLE(np1, np2) --> numeric
+HWG_GETTHESTYLE(np1, np2) --> numeric
 */
-HB_FUNC(GETTHESTYLE)
+HB_FUNC(HWG_GETTHESTYLE)
 {
   LONG nBS = hb_parnl(1);
   LONG nBS1 = hb_parnl(2);
   hb_retnl(nBS & nBS1);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETTHESTYLE, HWG_GETTHESTYLE);
+#endif
+
 /*
-MODSTYLE(np1, np2, np3) --> numeric
+HWG_MODSTYLE(np1, np2, np3) --> numeric
 */
-HB_FUNC(MODSTYLE)
+HB_FUNC(HWG_MODSTYLE)
 {
   LONG nbs = hb_parnl(1);
   LONG b = hb_parnl(2);
   LONG c = hb_parnl(3);
   hb_retnl((nbs & ~b) | c);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MODSTYLE, HWG_MODSTYLE);
+#endif
 
 /*
 HWG_DRAWTHEMEPARENTBACKGROUND(HWND, HDC, aRect) --> numeric
@@ -1865,12 +1901,16 @@ HB_FUNC_TRANSLATE(HB_DRAWTHEMEPARENTBACKGROUND, HWG_DRAWTHEMEPARENTBACKGROUND);
 #endif
 
 /*
-ISTHEMEACTIVE() --> .T.|.F.
+HWG_ISTHEMEACTIVE() --> .T.|.F.
 */
-HB_FUNC(ISTHEMEACTIVE)
+HB_FUNC(HWG_ISTHEMEACTIVE)
 {
   hb_retl(hb_IsThemeActive());
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ISTHEMEACTIVE, HWG_ISTHEMEACTIVE);
+#endif
 
 /*
 HWG_GETTHEMESYSCOLOR(HTHEME, nColorId) --> COLORREF

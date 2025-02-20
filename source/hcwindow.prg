@@ -1057,7 +1057,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
          ENDIF
       ELSEIF oCtrl:BackStyle == TRANSPARENT
          /*
-         IF (oCtrl:classname $ "HCHECKBUTTON" .AND. (!oCtrl:lnoThemes .AND. (ISTHEMEACTIVE() .AND. oCtrl:WindowsManifest))) .OR.;
+         IF (oCtrl:classname $ "HCHECKBUTTON" .AND. (!oCtrl:lnoThemes .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest))) .OR.;
             (oCtrl:classname $ "HGROUP*HRADIOGROUP*HRADIOBUTTON" .AND. !oCtrl:lnoThemes)
                 RETURN GetBackColorParent(oCtrl, , .T.):handle
              ENDIF
@@ -1067,7 +1067,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
             RETURN GetStockObject(NULL_BRUSH)
          ENDIF
          RETURN GetBackColorParent(oCtrl, , .T.):handle
-      ELSEIF oCtrl:winClass == "BUTTON" .AND. (ISTHEMEACTIVE() .AND. oCtrl:WindowsManifest)
+      ELSEIF oCtrl:winClass == "BUTTON" .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest)
          RETURN GetBackColorParent(oCtrl, , .T.):handle
       ENDIF
    ENDIF
@@ -1352,7 +1352,7 @@ FUNCTION GetBackColorParent(oCtrl, lSelf, lTransparent)
       IF Len(oCtrl:aPages) > 0 .AND. oCtrl:Pages[oCtrl:GETACTIVEPAGE()]:bColor != NIL
          //-brush := oCtrl:Pages[oCtrl:GetActivePage()]:brush
          bColor := oCtrl:Pages[oCtrl:GetActivePage()]:bColor
-      ELSEIF ISTHEMEACTIVE() .AND. oCtrl:WindowsManifest
+      ELSEIF hwg_IsThemeActive() .AND. oCtrl:WindowsManifest
          hTheme := hwg_OpenThemeData(oCtrl:handle, "TAB") //oCtrl:oParent:WinClass)
          IF !Empty(hTheme)
             bColor := HWG_GETTHEMESYSCOLOR(hTheme, COLOR_WINDOW)

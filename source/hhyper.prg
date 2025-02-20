@@ -223,9 +223,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
          IF ::state != LBL_MOUSEOVER
             //::allMouseOver := .T.
       //      ::state := LBL_MOUSEOVER
-            TRACKMOUSEVENT(::handle)
+            hwg_TrackMousEvent(::handle)
           ELSE
-            TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
+            hwg_TrackMousEvent(::handle, TME_HOVER + TME_LEAVE)
          ENDIF
         */
    ELSEIF (msg == WM_MOUSELEAVE .OR. msg == WM_NCMOUSELEAVE)
@@ -390,7 +390,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
    IF hb_IsNumeric(::hbitmap)
       bHasTitle := hb_IsChar(strtext) .AND. !Empty(strtext)
       itemRect[4] := aBmpSize[2] + 1
-      bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
+      bmpRect := hwg_PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]
       IF ::backstyle == TRANSPARENT
          hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])

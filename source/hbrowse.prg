@@ -860,9 +860,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ENDIF
             IF (!::allMouseOver) .AND. ::hTheme != NIL
                ::allMouseOver := .T.
-               TRACKMOUSEVENT(::handle)
+               hwg_TrackMousEvent(::handle)
             ELSE
-               TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
+               hwg_TrackMousEvent(::handle, TME_HOVER + TME_LEAVE)
             ENDIF
          ENDIF
       ELSEIF msg == WM_MOUSEHOVER
@@ -1272,9 +1272,9 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
             ENDIF
             IF !::allMouseOver .AND. ::hTheme != NIL
                ::allMouseOver := .T.
-               TRACKMOUSEVENT(::handle)
+               hwg_TrackMousEvent(::handle)
             ELSE
-               TRACKMOUSEVENT(::handle, TME_HOVER + TME_LEAVE)
+               hwg_TrackMousEvent(::handle, TME_HOVER + TME_LEAVE)
             ENDIF
          ENDIF
       ENDIF
@@ -1820,7 +1820,7 @@ METHOD Paint(lLostFocus) CLASS HBrowse
    ENDIF
    IF (::m_bFirstTime) .AND. ::Themed
       ::m_bFirstTime := .F.
-      IF (ISTHEMEDLOAD())
+      IF (hwg_ISThemedLoad())
          IF hb_IsPointer(::hTheme)
             hwg_CloseThemeData(::htheme)
          ENDIF

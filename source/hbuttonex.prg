@@ -213,7 +213,7 @@ METHOD INIT() CLASS HButtonEx
       IF HB_IsNumeric(::handle) .AND. ::handle > 0 // TODO: verificar
          nbs := HWG_GETWINDOWSTYLE(::handle)
 
-         ::m_nTypeStyle := GetTheStyle(nbs, BS_TYPEMASK)
+         ::m_nTypeStyle := hwg_GetTheStyle(nbs, BS_TYPEMASK)
 
          // Check if this is a checkbox
 
@@ -226,7 +226,7 @@ METHOD INIT() CLASS HButtonEx
             // Adjust style for default button
             ::m_nTypeStyle := BS_PUSHBUTTON
          ENDIF
-         nbs := modstyle(nbs, BS_TYPEMASK, BS_OWNERDRAW)
+         nbs := hwg_ModStyle(nbs, BS_TYPEMASK, BS_OWNERDRAW)
          HWG_SETWINDOWSTYLE(::handle, nbs)
 
       ENDIF
@@ -272,7 +272,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    ELSEIF msg == WM_ERASEBKGND
       RETURN 0
    ELSEIF msg == BM_SETSTYLE
-      RETURN BUTTONEXONSETSTYLE(wParam, lParam, ::handle, @::m_bIsDefault)
+      RETURN hwg_ButtonExOnSetStyle(wParam, lParam, ::handle, @::m_bIsDefault)
 
    ELSEIF msg == WM_MOUSEMOVE
       IF wParam == MK_LBUTTON
@@ -289,7 +289,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF(!::bMouseOverButton)
          ::bMouseOverButton := .T.
          hwg_InvalidateRect(::handle, .F.)
-         TRACKMOUSEVENT(::handle)
+         hwg_TrackMousEvent(::handle)
       ENDIF
       RETURN 0
    ELSEIF msg == WM_MOUSELEAVE
@@ -474,7 +474,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       RETURN 0
 
    CASE BM_SETSTYLE
-      RETURN BUTTONEXONSETSTYLE(wParam, lParam, ::handle, @::m_bIsDefault)
+      RETURN hwg_ButtonExOnSetStyle(wParam, lParam, ::handle, @::m_bIsDefault)
 
    CASE WM_MOUSEMOVE
       IF wParam == MK_LBUTTON
@@ -491,7 +491,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       IF !::bMouseOverButton
          ::bMouseOverButton := .T.
          hwg_InvalidateRect(::handle, .F.)
-         TRACKMOUSEVENT(::handle)
+         hwg_TrackMousEvent(::handle)
       ENDIF
       RETURN 0
 
@@ -774,7 +774,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
    IF ::m_bFirstTime
       ::m_bFirstTime := .F.
-      IF ISTHEMEDLOAD()
+      IF hwg_IsThemedLoad()
          IF hb_IsPointer(::hTheme)
             hwg_CloseThemeData(::htheme)
          ENDIF
@@ -929,7 +929,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
    //   hwg_DrawTheIcon(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle)
    IF hb_IsNumeric(::hbitmap) .AND. ::m_bDrawTransparent .AND. (!bIsDisabled .OR. ::istyle == ST_ALIGN_HORIZ_RIGHT)
-      bmpRect := PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
+      bmpRect := hwg_PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, ::hIcon, ::hbitmap, ::iStyle)
       IF ::istyle == ST_ALIGN_HORIZ_RIGHT
          bmpRect[1] -= ::PictureMargin
          captionRect[3] -= ::PictureMargin

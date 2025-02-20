@@ -570,7 +570,7 @@ RETURN NIL
 
 INIT PROCEDURE starttheme()
 
-   INITTHEMELIB()
+   hwg_InitThemeLib()
 
 RETURN
 
@@ -578,7 +578,7 @@ RETURN
 
 EXIT PROCEDURE endtheme()
 
-   ENDTHEMELIB()
+   hwg_EndThemeLib()
 
 RETURN
 
