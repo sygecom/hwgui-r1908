@@ -1032,7 +1032,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
             captionRect[2] := (::nHeight  - nHeight) / 2 + 2
          ENDIF
 
-         hb_DrawThemeText(::hTheme, dc, BP_PUSHBUTTON, IIf(bIsDisabled, PBS_DISABLED, PBS_NORMAL), ::caption, ;
+         hwg_DrawThemeText(::hTheme, dc, BP_PUSHBUTTON, IIf(bIsDisabled, PBS_DISABLED, PBS_NORMAL), ::caption, ;
             uAlign + DT_END_ELLIPSIS, 0, captionRect)
 
       ELSE

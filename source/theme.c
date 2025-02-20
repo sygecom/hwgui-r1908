@@ -1740,9 +1740,9 @@ HB_FUNC(PREPAREIMAGERECT)
 }
 
 /*
-HB_DRAWTHEMETEXT(HTHEME, HDC, nPartId, nStateId, cText, nTextFlags, nTextFlags2, aRect) -->
+HWG_DRAWTHEMETEXT(HTHEME, HDC, nPartId, nStateId, cText, nTextFlags, nTextFlags2, aRect) -->
 */
-HB_FUNC(HB_DRAWTHEMETEXT)
+HB_FUNC(HWG_DRAWTHEMETEXT)
 {
   LPCSTR pText = hb_parc(5);
   RECT pRect;
@@ -1758,6 +1758,10 @@ HB_FUNC(HB_DRAWTHEMETEXT)
                    hwg_par_DWORD(6), hwg_par_DWORD(7), &pRect);
   hb_xfree(output);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(HB_DRAWTHEMETEXT, HWG_DRAWTHEMETEXT);
+#endif
 
 /*
 HB_CLOSETHEMEDATA(HTHEME) -->
