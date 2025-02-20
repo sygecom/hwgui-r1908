@@ -671,7 +671,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       IF oWnd:lMaximized
          // restore
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
+            hwg_SetWindowStyle(oWnd:handle, hwg_GetWindowStyle(oWnd:handle) + WS_SIZEBOX)
          ENDIF
          hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
          hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
@@ -679,7 +679,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       ELSE
          // maximized
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
+            hwg_SetWindowStyle(oWnd:handle, hwg_GetWindowStyle(oWnd:handle) - WS_SIZEBOX)
          ENDIF
          hwg_MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
       ENDIF

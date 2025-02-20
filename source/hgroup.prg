@@ -77,9 +77,9 @@ METHOD Init() CLASS HGroup
       ::Super:Init()
       //-IF ::backStyle == TRANSPARENT .OR. ::bColor != NIL
       IF ::oBrush != NIL .OR. ::backStyle == TRANSPARENT
-         nbs := HWG_GETWINDOWSTYLE(::handle)
+         nbs := hwg_GetWindowStyle(::handle)
          nbs := hwg_ModStyle(nbs, BS_TYPEMASK, BS_OWNERDRAW + WS_DISABLED)
-         HWG_SETWINDOWSTYLE(::handle, nbs)
+         hwg_SetWindowStyle(::handle, nbs)
          ::bPaint := {|o, p|o:paint(p)}
       ENDIF
       IF ::oRGroup != NIL
@@ -129,7 +129,7 @@ METHOD PAINT(lpdis) CLASS HGroup
    aSize := TxtRect(IIf(Empty(szText), "A", szText), Self)
    // distance from window top to group rect
    iUpDist := (aSize[2] / 2)
-   dwStyle := ::Style //HWG_GETWINDOWSTYLE(::handle) //GetStyle();
+   dwStyle := ::Style //hwg_GetWindowStyle(::handle) //GetStyle();
    rcText := {0, rc[2] + iUpDist, 0, rc[2] + iUpDist}
    IF Empty(szText)
    ELSEIF hb_BitAnd(dwStyle, BS_CENTER) == BS_RIGHT // right aligned

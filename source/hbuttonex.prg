@@ -211,7 +211,7 @@ METHOD INIT() CLASS HButtonEx
 
       //::SetDefaultColor(, , .F.)
       IF HB_IsNumeric(::handle) .AND. ::handle > 0 // TODO: verificar
-         nbs := HWG_GETWINDOWSTYLE(::handle)
+         nbs := hwg_GetWindowStyle(::handle)
 
          ::m_nTypeStyle := hwg_GetTheStyle(nbs, BS_TYPEMASK)
 
@@ -227,7 +227,7 @@ METHOD INIT() CLASS HButtonEx
             ::m_nTypeStyle := BS_PUSHBUTTON
          ENDIF
          nbs := hwg_ModStyle(nbs, BS_TYPEMASK, BS_OWNERDRAW)
-         HWG_SETWINDOWSTYLE(::handle, nbs)
+         hwg_SetWindowStyle(::handle, nbs)
 
       ENDIF
 
@@ -876,7 +876,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 //             DT_CENTER | DT_VCENTER | DT_SINGLELINE
 //   uAlign += DT_WORDBREAK + DT_CENTER + DT_CALCRECT +  DT_VCENTER + DT_SINGLELINE  // DT_SINGLELINE + DT_VCENTER + DT_WORDBREAK
  //  uAlign += DT_VCENTER
-   uStyleTmp := HWG_GETWINDOWSTYLE(::handle)
+   uStyleTmp := hwg_GetWindowStyle(::handle)
    itemRectOld := aclone(itemRect)
    IF hb_BitAnd(uStyleTmp, BS_MULTILINE) != 0 .AND. !Empty(::caption) .AND. ;
       INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect[1], itemRect[2],;

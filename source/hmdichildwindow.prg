@@ -159,8 +159,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
    ELSEIF PtrtoUlong(hwg_GetFocus()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
-      ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_TABSTOP) != 0 .AND. ;
-         hwg_BitaND(HWG_GETWINDOWSTYLE(o:handle), WS_DISABLED) == 0})
+      ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0 .AND. ;
+         hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
          hwg_SetFocus(::acontrols[::nFocus]:handle)
          ::nFocus := hwg_GetFocus() //get::acontrols[1]:handle
@@ -477,7 +477,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       IF oWnd:lMaximized
          // restore
          IF oWnd:lSizeBox
-            HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) + WS_SIZEBOX)
+            hwg_SetWindowStyle(oWnd:handle, hwg_GetWindowStyle(oWnd:handle) + WS_SIZEBOX)
          ENDIF
          hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1], oWnd:aRectSave[2], oWnd:aRectSave[3], oWnd:aRectSave[4])
          hwg_MoveWindow(oWnd:handle, oWnd:aRectSave[1] - (oWnd:nLeft - oWnd:aRectSave[1]), ;
@@ -485,7 +485,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       ELSE
           // maximized
           IF oWnd:lSizeBox
-             HWG_SETWINDOWSTYLE(oWnd:handle, HWG_GETWINDOWSTYLE(oWnd:handle) - WS_SIZEBOX)
+             hwg_SetWindowStyle(oWnd:handle, hwg_GetWindowStyle(oWnd:handle) - WS_SIZEBOX)
           ENDIF
          hwg_MoveWindow(oWnd:handle, oWnd:oClient:nLeft, oWnd:oClient:nTop, oWnd:oClient:nWidth, oWnd:oClient:nHeight)
       ENDIF
@@ -588,7 +588,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
       Eval(aMenu[1, iItem, 1], wParam)
    ELSEIF iParHigh == 1 // acelerator
    ENDIF
-   IF oCtrl != NIL .AND. hwg_BitaND(HWG_GETWINDOWSTYLE(oCtrl:handle), WS_TABSTOP) != 0 .AND. hwg_GetFocus() == oCtrl:handle
+   IF oCtrl != NIL .AND. hwg_BitaND(hwg_GetWindowStyle(oCtrl:handle), WS_TABSTOP) != 0 .AND. hwg_GetFocus() == oCtrl:handle
       oWnd:nFocus := oCtrl:handle
    ENDIF
 
