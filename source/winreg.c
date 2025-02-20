@@ -66,9 +66,9 @@ __inline long PtrToLong(const void *p)
 #define hwg_par_HKEY(n) (HKEY)(ULONG_PTR) hb_parnint(n)
 
 /*
-REGCLOSEKEY(HKEY) --> numeric
+HWG_REGCLOSEKEY(HKEY) --> numeric
 */
-HB_FUNC(REGCLOSEKEY)
+HB_FUNC(HWG_REGCLOSEKEY)
 {
   if (RegCloseKey(hwg_par_HKEY(1)) == ERROR_SUCCESS)
   {
@@ -80,10 +80,14 @@ HB_FUNC(REGCLOSEKEY)
   }
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGCLOSEKEY, HWG_REGCLOSEKEY);
+#endif
+
 /*
-REGOPENKEYEX(HKEY, cSubKey) --> numeric
+HWG_REGOPENKEYEX(HKEY, cSubKey) --> numeric
 */
-HB_FUNC(REGOPENKEYEX)
+HB_FUNC(HWG_REGOPENKEYEX)
 {
   void *hValue;
   LONG lError;
@@ -102,10 +106,14 @@ HB_FUNC(REGOPENKEYEX)
   hb_strfree(hValue);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGOPENKEYEX, HWG_REGOPENKEYEX);
+#endif
+
 /*
-REGQUERYVALUEEX(HKEY, cValueName, NIL, nType, cData) --> numeric
+HWG_REGQUERYVALUEEX(HKEY, cValueName, NIL, nType, cData) --> numeric
 */
-HB_FUNC(REGQUERYVALUEEX)
+HB_FUNC(HWG_REGQUERYVALUEEX)
 {
   HKEY hwKey = hwg_par_HKEY(1);
   LONG lError;
@@ -134,10 +142,14 @@ HB_FUNC(REGQUERYVALUEEX)
   hb_strfree(hValue);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGQUERYVALUEEX, HWG_REGQUERYVALUEEX);
+#endif
+
 /*
-REGENUMKEYEX(HKEY, nIndex, cBuffer, nBufferSize, NIL, cClass, nClassBufferSize) --> numeric
+HWG_REGENUMKEYEX(HKEY, nIndex, cBuffer, nBufferSize, NIL, cClass, nClassBufferSize) --> numeric
 */
-HB_FUNC(REGENUMKEYEX)
+HB_FUNC(HWG_REGENUMKEYEX)
 {
   FILETIME ft;
   long nErr;
@@ -158,10 +170,14 @@ HB_FUNC(REGENUMKEYEX)
   hb_retnl(nErr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGENUMKEYEX, HWG_REGENUMKEYEX);
+#endif
+
 /*
-REGSETVALUEEX(HKEY, cValueName, NIL, nType, cData) --> numeric
+HWG_REGSETVALUEEX(HKEY, cValueName, NIL, nType, cData) --> numeric
 */
-HB_FUNC(REGSETVALUEEX)
+HB_FUNC(HWG_REGSETVALUEEX)
 {
   void *hValue;
   hb_retnl(RegSetValueEx(hwg_par_HKEY(1), HB_PARSTRDEF(2, &hValue, NULL), 0, hwg_par_DWORD(4),
@@ -169,10 +185,14 @@ HB_FUNC(REGSETVALUEEX)
   hb_strfree(hValue);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGSETVALUEEX, HWG_REGSETVALUEEX);
+#endif
+
 /*
-REGCREATEKEY(HKEY, cSubKey, nHKResult) --> numeric
+HWG_REGCREATEKEY(HKEY, cSubKey, nHKResult) --> numeric
 */
-HB_FUNC(REGCREATEKEY)
+HB_FUNC(HWG_REGCREATEKEY)
 {
   HKEY hKey;
   LONG nErr;
@@ -186,11 +206,15 @@ HB_FUNC(REGCREATEKEY)
   hb_strfree(hValue);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGCREATEKEY, HWG_REGCREATEKEY);
+#endif
+
 /*
-REGCREATEKEYEX(HKEY, cSubKey, NIL, cClass, nOptions, nSamDesired, cSecurityAttributes, nHKResult, nDisposition) -->
+HWG_REGCREATEKEYEX(HKEY, cSubKey, NIL, cClass, nOptions, nSamDesired, cSecurityAttributes, nHKResult, nDisposition) -->
 numeric
 */
-HB_FUNC(REGCREATEKEYEX)
+HB_FUNC(HWG_REGCREATEKEYEX)
 {
   HKEY hkResult;
   DWORD dwDisposition;
@@ -216,25 +240,37 @@ HB_FUNC(REGCREATEKEYEX)
   hb_strfree(hClass);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGCREATEKEYEX, HWG_REGCREATEKEYEX);
+#endif
+
 /*
-REGDELETEKEY(HKEY, cKey) --> numeric
+HWG_REGDELETEKEY(HKEY, cKey) --> numeric
 */
-HB_FUNC(REGDELETEKEY)
+HB_FUNC(HWG_REGDELETEKEY)
 {
   void *hValue;
   hb_retni(RegDeleteKey(hwg_par_HKEY(1), HB_PARSTRDEF(2, &hValue, NULL)) == ERROR_SUCCESS ? 0 : -1);
   hb_strfree(hValue);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGDELETEKEY, HWG_REGDELETEKEY);
+#endif
+
 //  For strange reasons this function is not working properly
 //  May be I am missing something. Pritpal Bedi.
 
 /*
-REGDELETEVALUE(HKEY, cValueName) --> numeric
+HWG_REGDELETEVALUE(HKEY, cValueName) --> numeric
 */
-HB_FUNC(REGDELETEVALUE)
+HB_FUNC(HWG_REGDELETEVALUE)
 {
   void *hValue;
   hb_retni(RegDeleteValue(hwg_par_HKEY(1), HB_PARSTRDEF(2, &hValue, NULL)) == ERROR_SUCCESS ? 0 : -1);
   hb_strfree(hValue);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REGDELETEVALUE, HWG_REGDELETEVALUE);
+#endif
