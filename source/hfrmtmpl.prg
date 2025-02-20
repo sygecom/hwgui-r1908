@@ -1473,7 +1473,7 @@ METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
          NEXT
       ENDIF
    NEXT
-   xTemp := GetDeviceArea(oPrinter:hDCPrn)
+   xTemp := hwg_GetDeviceArea(oPrinter:hDCPrn)
    ::nKoefPix := ((xTemp[1] / xTemp[3] + xTemp[2] / xTemp[4]) / 2) / 3.8
    oPrinter:SetMode(nOrientation)
    ::nKoefX := oPrinter:nWidth / nPWidth

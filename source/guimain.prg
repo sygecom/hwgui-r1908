@@ -259,7 +259,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
    hDC := hwg_GetDC(hwg_GetActiveWindow())
    hwg_SelectObject(hDC, oFont:handle)
    aMetr := hwg_GetTextMetric(hDC)
-   aArea := GetDeviceArea(hDC)
+   aArea := hwg_GetDeviceArea(hDC)
    aRect := hwg_GetWindowRect(hwg_GetActiveWindow())
    hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
    height := (aMetr[1] + 1) * aLen + 4 + addY + 8

@@ -79,7 +79,7 @@ METHOD SetMode( nOrientation ) CLASS HPrinter
 Local x
 
    IF ( nOrientation == 1 .OR. nOrientation == 2 ) .AND. nOrientation != ::nOrient
-      SetPrinterMode( ::hDC, nOrientation )
+      hwg_SetPrinterMode( ::hDC, nOrientation )
       x := ::nHRes
       ::nHRes := ::nVRes
       ::nVRes := x

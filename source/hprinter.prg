@@ -132,7 +132,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
          endif
       endif
 
-      aPrnCoors := GetDeviceArea(::hDCPrn)
+      aPrnCoors := hwg_GetDeviceArea(::hDCPrn)
       ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])
       ::nHeight := IIf(::lmm, aPrnCoors[4], aPrnCoors[2])
       ::nPWidth  := IIf(::lmm, aPrnCoors[8], aPrnCoors[1])
@@ -154,14 +154,14 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
 METHOD SetMode(nOrientation) CLASS HPrinter
    LOCAL hPrinter := ::hPrinter, hDC, aPrnCoors
 
-   hDC := SetPrinterMode(::cPrinterName, @hPrinter, nOrientation)
+   hDC := hwg_SetPrinterMode(::cPrinterName, @hPrinter, nOrientation)
    IF hDC != NIL
       IF ::hDCPrn != 0
          hwg_DeleteDC(::hDCPrn)
       ENDIF
       ::hDCPrn := hDC
       ::hPrinter := hPrinter
-      aPrnCoors := GetDeviceArea(::hDCPrn)
+      aPrnCoors := hwg_GetDeviceArea(::hDCPrn)
       ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])
       ::nHeight := IIf(::lmm, aPrnCoors[4], aPrnCoors[2])
       ::nPWidth  := IIf(::lmm, aPrnCoors[8], aPrnCoors[1])
@@ -193,7 +193,7 @@ METHOD END() CLASS HPrinter
       ::hDCPrn := NIL
    ENDIF
    IF !Empty(::hPrinter)
-      ClosePrinter(::hPrinter)
+      hwg_ClosePrinter(::hPrinter)
    ENDIF
    ::ReleaseMeta()
    RETURN NIL
@@ -326,7 +326,7 @@ METHOD EndPage() CLASS HPrinter
 
    IF ::lPreview
       nLen := Len(::aMeta)
-      ::aMeta[nLen] := CloseEnhMetaFile(::aMeta[nLen])
+      ::aMeta[nLen] := hwg_CloseEnhMetaFile(::aMeta[nLen])
       ::hDC := 0
    ELSE
       hwg_EndPage(::hDC)
@@ -342,7 +342,7 @@ METHOD ReleaseMeta() CLASS HPrinter
 
    nLen := Len(::aMeta)
    FOR i := 1 TO nLen
-      DeleteEnhMetaFile(::aMeta[i])
+      hwg_DeleteEnhMetaFile(::aMeta[i])
    NEXT
    ::aMeta := NIL
 
@@ -747,7 +747,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
             hwg_FillRect(::memDC:m_hDC, ::x1 - 1, ::y1 - 1, ::x2 + 1, ::y2 + 1, BrushLine)
             hwg_FillRect(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2, BrushWhite)
             // Draw the actual printer data
-            PlayEnhMetafile(::memDC:m_hDC, ::aMeta[::nCurrPage], ::x1, ::y1, ::x2, ::y2)
+            hwg_PlayEnhMetafile(::memDC:m_hDC, ::aMeta[::nCurrPage], ::x1, ::y1, ::x2, ::y2)
             // Draw
             // hwg_Rectangle(::memDC:m_hDC, ::x1, ::y1, ::x2, ::y2)
 
@@ -791,10 +791,10 @@ METHOD PrintMeta(nPage) CLASS HPrinter
       ::StartDoc()
       IF nPage == NIL
          FOR nPage := 1 TO Len(::aMeta)
-            PrintEnhMetafile(::hDCPrn, ::aMeta[nPage])
+            hwg_PrintEnhMetafile(::hDCPrn, ::aMeta[nPage])
          NEXT
       ELSE
-         PrintEnhMetafile(::hDCPrn, ::aMeta[nPage])
+         hwg_PrintEnhMetafile(::hDCPrn, ::aMeta[nPage])
       ENDIF
       ::EndDoc()
       ::lPreview := .T.
