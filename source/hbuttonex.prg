@@ -811,11 +811,11 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
          ENDIF
       ENDIF
       IF !::lFlat
-         hb_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL)
+         hwg_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL)
       ELSEIF bIsDisabled
          hwg_FillRect(dc, itemRect[1] + 1, itemRect[2] + 1, itemRect[3] - 1, itemRect[4] - 1, hwg_GetSysColorBrush(hwg_GetSysColor(COLOR_BTNFACE)))
       ELSEIF ::bMouseOverButton .OR. bIsFocused
-         hb_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL) // + PBS_DEFAULTED
+         hwg_DrawThemeBackground(::hTheme, dc, BP_PUSHBUTTON, state, itemRect, NIL) // + PBS_DEFAULTED
       ENDIF
    ELSE
 

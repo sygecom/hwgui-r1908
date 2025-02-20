@@ -1626,9 +1626,9 @@ HB_FUNC(ISTHEMEDLOAD)
 }
 
 /*
-HB_DRAWTHEMEBACKGROUND(HTHEME, HDC, nPartId, nStateId) --> numeric
+HWG_DRAWTHEMEBACKGROUND(HTHEME, HDC, nPartId, nStateId) --> numeric
 */
-HB_FUNC(HB_DRAWTHEMEBACKGROUND)
+HB_FUNC(HWG_DRAWTHEMEBACKGROUND)
 {
   RECT pRect;
   RECT pClipRect;
@@ -1644,6 +1644,10 @@ HB_FUNC(HB_DRAWTHEMEBACKGROUND)
 
   hb_retnl(hb_DrawThemeBackground(hwg_par_HTHEME(1), hwg_par_HDC(2), hwg_par_int(3), hwg_par_int(4), &pRect, NULL));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(HB_DRAWTHEMEBACKGROUND, HWG_DRAWTHEMEBACKGROUND);
+#endif
 
 /*
 HWG_DRAWTHEICON(HWND, HDC, lHasTitle, aRectItem, aRectTitle, lIsPressed, lIsDisabled, HICON, HBITMAP, nStyle) -->

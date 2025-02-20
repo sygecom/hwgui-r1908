@@ -406,9 +406,9 @@ METHOD Paint() CLASS HOwnButton
       IF ::Themed
          //hwg_SetBkMode(hdc, TRANSPARENT)
          IF ::handle == hwg_GetFocus() .AND. ::lCheck
-            hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
+            hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
          ELSEIF ::state != OBTN_NORMAL
-             hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
+             hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
          ELSE
             //hwg_SetBkMode(hdc, 1)
             hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
@@ -431,9 +431,9 @@ METHOD Paint() CLASS HOwnButton
       IF ::Themed
          //hwg_SetBkMode(hdc, TRANSPARENT)
          IF hwg_SelfFocus(::handle, hwg_GetFocus()) .AND. ::lCheck
-            hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
+            hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
          ELSE //IF ::state != OBTN_NORMAL
-            hb_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
+            hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, state, aCoors, NIL)
          //ELSE
          //   hwg_DrawButton(hDC, 0, 0, aCoors[3], aCoors[4], 0)
          ENDIF

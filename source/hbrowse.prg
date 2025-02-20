@@ -2271,7 +2271,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
             hwg_InflateRect(@aItemRect, -1, -1)
          ENDIF
          IF ::hTheme != NIL
-             hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, NIL)
+             hwg_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, NIL)
              hwg_SetBkMode(hDC, 1)
          ELSE
              hwg_DrawButton(hDC, x, ;
@@ -2330,7 +2330,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
    IF ::lShowMark .OR. ::lDeleteMark
       xSize := ::nShowMark + ::nDeleteMark
       IF ::hTheme != NIL
-         hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 1, ;
+         hwg_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 1, ;
                {::x1 - xSize - 1, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, ;
                ::x1 + 1, ::y1 + 1}, NIL)
       ELSE
@@ -2572,7 +2572,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
         IF ::lDispSep
            IF ::hTheme != NIL
               aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize, ::y2 + 1}
-              hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
+              hwg_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               hwg_SetBkMode(hDC, 1)
            ELSE
               hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize, ::y2, 0)
@@ -2581,7 +2581,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
         ELSE
            IF ::hTheme != NIL
               aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1}
-              hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
+              hwg_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
               hwg_SetBkMode(hDC, 1)
            ELSE
               hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1, 0)
@@ -2643,7 +2643,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
       xSize := nMl
       IF ::hTheme != NIL
          aItemRect := {::x1 - xSize, nY, ::x1 - 1, ::y2 + 1}
-         hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
+         hwg_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
       ELSE
         hwg_DrawButton(hDC, ::x1 - xSize, nY, ;
                ::x1 - 1, ::y2, 1)
@@ -2703,7 +2703,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       ENDIF
       IF ::lShowMark
          IF ::hTheme != NIL
-             hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, IIf(lSelected, PBS_VERTICAL, PBS_VERTICAL), ;
+             hwg_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, IIf(lSelected, PBS_VERTICAL, PBS_VERTICAL), ;
                       {::x1 - ::nShowMark - ::nDeleteMark - 1,;
                        ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                        ::x1 - ::nDeleteMark, ;
