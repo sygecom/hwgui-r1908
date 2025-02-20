@@ -551,8 +551,8 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    ENDIF
    //draw rect focus
    oWnd:nInitFocus := IIf(hb_IsObject(oWnd:nInitFocus), oWnd:nInitFocus:handle, oWnd:nInitFocus)
-   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
-   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEACCEL), 0)
    IF oWnd:WindowState > 0
       onMove(oWnd)
    ENDIF

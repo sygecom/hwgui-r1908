@@ -562,9 +562,9 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
    // draw focus
    IF uis != 0
       // triggered to mouse
-      hwg_SendMessage(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+      hwg_SendMessage(oDlg:handle, WM_CHANGEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEACCEL), 0)
    ELSE
-      hwg_SendMessage(oDlg:handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEACCEL), 0)
+      hwg_SendMessage(oDlg:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEACCEL), 0)
    ENDIF
 
    // CALL DIALOG NOT VISIBLE
@@ -576,7 +576,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       RETURN oDlg
    ENDIF
 
-   hwg_PostMessage(oDlg:handle, WM_CHANGEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_PostMessage(oDlg:handle, WM_CHANGEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
 
    IF !oDlg:lModal .AND. !hwg_IsWindowVisible(oDlg:handle)
       hwg_ShowWindow(oDlg:handle, SW_SHOWDEFAULT)
@@ -635,7 +635,7 @@ STATIC FUNCTION onDlgColor(oDlg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(lParam)
 
-   SetBkMode(wParam, 1) // Transparent mode
+   hwg_SetBkMode(wParam, 1) // Transparent mode
    IF oDlg:bcolor != NIL .AND. !hb_IsNumeric(oDlg:brush)
        RETURN oDlg:brush:handle
    ENDIF

@@ -142,7 +142,7 @@ METHOD PAINT(lpdis) CLASS HGroup
       rcText[1] := rc[1] + OFS_X
       rcText[3] := rcText[1] + aSize[1]
    ENDIF
-   SetBkMode(dc, TRANSPARENT)
+   hwg_SetBkMode(dc, TRANSPARENT)
 
    IF hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
       //pnFrmDark := hwg_CreatePen(PS_SOLID, 1, RGB(0, 0, 0)))
@@ -185,7 +185,7 @@ METHOD PAINT(lpdis) CLASS HGroup
 
    // draw text (if any)
    IF !Empty(szText) && !(dwExStyle & (BS_ICON | BS_BITMAP)))
-      SetBkMode(dc, TRANSPARENT)
+      hwg_SetBkMode(dc, TRANSPARENT)
       IF ::oBrush != NIL
          hwg_FillRect(DC, rc[1] + 2, rc[2] + iUpDist + 2, rc[3] - 2, rc[4] - 2, ::brush:handle)
          IF !::lTransparent

@@ -37,8 +37,8 @@ CLASS HToolButton INHERIT HObject
    METHOD New(oParent, cName, nBitIp, nId, bState, bStyle, cText, bClick, ctip, aMenu)
    METHOD Enable() INLINE ::oParent:EnableButton(::id, .T.)
    METHOD Disable() INLINE ::oParent:EnableButton(::id, .F.)
-   METHOD Show() INLINE hwg_SendMessage(::oParent:handle, TB_HIDEBUTTON, INT(::id), MAKELONG(0, 0))
-   METHOD Hide() INLINE hwg_SendMessage(::oParent:handle, TB_HIDEBUTTON, INT(::id), MAKELONG(1, 0))
+   METHOD Show() INLINE hwg_SendMessage(::oParent:handle, TB_HIDEBUTTON, INT(::id), hwg_MAKELONG(0, 0))
+   METHOD Hide() INLINE hwg_SendMessage(::oParent:handle, TB_HIDEBUTTON, INT(::id), hwg_MAKELONG(1, 0))
    METHOD Enabled(lEnabled) SETGET
    METHOD Checked(lCheck) SETGET
    METHOD Pressed(lPressed) SETGET
@@ -113,7 +113,7 @@ METHOD Pressed(lPressed) CLASS HToolButton
    IF lPressed != NIL
       nState := hwg_SendMessage(::oParent:handle, TB_GETSTATE, INT(::id), 0)
       hwg_SendMessage(::oParent:handle, TB_SETSTATE, INT(::id), ;
-         MAKELONG(IIf(lPressed, HWG_BITOR(nState, TBSTATE_PRESSED), ;
+         hwg_MAKELONG(IIf(lPressed, HWG_BITOR(nState, TBSTATE_PRESSED), ;
          nState - HWG_BITAND(nState, TBSTATE_PRESSED)), 0))
       ::lPressed := lPressed
    ENDIF
@@ -129,7 +129,7 @@ METHOD Checked(lcheck) CLASS HToolButton
    IF lCheck != NIL
       nState := hwg_SendMessage(::oParent:handle, TB_GETSTATE, INT(::id), 0)
       hwg_SendMessage(::oParent:handle, TB_SETSTATE, INT(::id), ;
-         MAKELONG(IIf(lCheck, HWG_BITOR(nState, TBSTATE_CHECKED), ;
+         hwg_MAKELONG(IIf(lCheck, HWG_BITOR(nState, TBSTATE_CHECKED), ;
          nState - HWG_BITAND(nState, TBSTATE_CHECKED)), 0))
       ::lChecked := lCheck
    ENDIF

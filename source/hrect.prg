@@ -254,7 +254,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
    LOCAL  x1 := drawInfo[4], y1 := drawInfo[5]
    LOCAL  x2 := drawInfo[6], y2 := drawInfo[7]
 
-   oldbkMode := SetBKMode(hdc, ::backStyle)
+   oldbkMode := hwg_SetBKMode(hdc, ::backStyle)
    hwg_SelectObject(hDC, ::oPen:handle)
    IF ::ncStyle != NIL
       /*
@@ -289,7 +289,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
       ENDIF
       hwg_RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
-   SetBKMode(hDC, oldbkMode)
+   hwg_SetBkMode(hDC, oldbkMode)
    RETURN NIL
 
 // END NEW CLASSE
@@ -458,7 +458,7 @@ METHOD Paint(lpdis) CLASS HContainer
    hwg_SelectObject(hDC, ::oPen:handle)
 
    IF ::ncStyle != NIL
-      SetBkMode(hDC, ::backStyle)
+      hwg_SetBkMode(hDC, ::backStyle)
       IF !::lnoBorder
          IF ::ncStyle == 0      // RAISED
            hwg_DrawEdge(hDC, x1, y1, x2, y2, BDR_RAISED, BF_LEFT+BF_TOP+BF_RIGHT+BF_BOTTOM)  // raised  forte      8
@@ -482,7 +482,7 @@ METHOD Paint(lpdis) CLASS HContainer
       ELSE
          hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5))
       ENDIF
-      //SetBkMode(hDC, 0)
+      //hwg_SetBkMode(hDC, 0)
    ENDIF
 
    RETURN 1

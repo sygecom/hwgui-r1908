@@ -130,7 +130,7 @@ METHOD Paint() CLASS HSplitter
    x2 := aCoors[3] //- IIf(::lVertical, 0, 3)
    y2 := aCoors[4] //- IIf(::lVertical, 3, 0)
 
-   SetBkMode(hDC, ::backStyle)
+   hwg_SetBkMode(hDC, ::backStyle)
    IF hb_IsBlock(::bPaint)
       Eval(::bPaint, Self)
    ELSEIF !::lScrolling

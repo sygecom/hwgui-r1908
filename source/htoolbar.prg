@@ -61,9 +61,9 @@ CLASS HToolBar INHERIT HControl
    METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex)
    METHOD Notify(lParam)
    METHOD EnableButton(idButton, lEnable) INLINE hwg_SendMessage(::handle, TB_ENABLEBUTTON, INT(idButton), ;
-      MAKELONG(IIf(lEnable, 1, 0), 0))
-   METHOD ShowButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(0, 0))
-   METHOD HideButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), MAKELONG(1, 0))
+      hwg_MAKELONG(IIf(lEnable, 1, 0), 0))
+   METHOD ShowButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), hwg_MAKELONG(0, 0))
+   METHOD HideButton(idButton) INLINE hwg_SendMessage(::handle, TB_HIDEBUTTON, INT(idButton), hwg_MAKELONG(1, 0))
    METHOD REFRESH() VIRTUAL
    METHOD RESIZE(xIncrSize, lWidth, lHeight)
 
@@ -228,7 +228,7 @@ METHOD CREATETOOL() CLASS hToolBar
       ::nwSize := MAX(16, (::nHeight - 16))
    ENDIF
    IF ::nwSize != NIL
-      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nwSize, ::nhSize))
+      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, hwg_MAKELONG(::nwSize, ::nhSize))
    ENDIF
 
    FOR n := 1 TO Len(::aItem)
@@ -252,7 +252,7 @@ METHOD CREATETOOL() CLASS hToolBar
          IIf(hwg_Bitand(::aItem[n, 4], BTNS_DROPDOWN) != 0, 8, 0)))
       /*
       IF ::nSize != NIL
-         hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(::nSize, ::nSize))
+         hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, hwg_MAKELONG(::nSize, ::nSize))
       ENDIF
       */
       IF hb_IsChar(::aItem[n, 1]) .OR. ::aItem[n, 1] > 1
@@ -323,7 +323,7 @@ METHOD CREATETOOL() CLASS hToolBar
       NEXT
       hwg_SendMessage(::handle, TB_SETIMAGELIST, 0, hIm)
    ELSEIF Len(aButton) == 0
-      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, MAKELONG(0, 0))
+      hwg_SendMessage(::handle, TB_SETBITMAPSIZE, 0, hwg_MAKELONG(0, 0))
       //hwg_SendMessage(::handle, TB_SETDRAWTEXTFLAGS, DT_CENTER + DT_VCENTER, DT_CENTER + DT_VCENTER)
    ENDIF
    hwg_SendMessage(::handle, TB_SETINDENT, ::nIndent, 0)

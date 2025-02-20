@@ -135,7 +135,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
-         hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+         hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
@@ -176,7 +176,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
             // Notify that selection has changed
 
-            hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+            hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
 
          ENDIF
       ENDIF
@@ -220,7 +220,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
-         hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+         hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
       ENDIF
       IF ::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal
          IF wParam == VK_TAB
@@ -255,7 +255,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
             nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
             ::SetCheck(nIndex, !::GetCheck(nIndex))
             // Notify that selection has changed
-            hwg_SendMessage(::oParent:handle, WM_COMMAND, MAKELONG(::id, CBN_SELCHANGE), ::handle)
+            hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
          ENDIF
       ENDIF
       EXIT
@@ -501,7 +501,7 @@ METHOD MeasureItem(l) CLASS hCheckComboBox
 
       IF (!::m_bItemHeightSet)
          ::m_bItemHeightSet := .T.
-         hwg_SendMessage(::handle, CB_SETITEMHEIGHT, - 1, MAKELONG(lpMeasureItemStruct[5], 0))
+         hwg_SendMessage(::handle, CB_SETITEMHEIGHT, - 1, hwg_MAKELONG(lpMeasureItemStruct[5], 0))
       ENDIF
 
       dc:SelectObject(pFont)

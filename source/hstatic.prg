@@ -286,7 +286,7 @@ METHOD Paint(lpDis) CLASS HStatic
    ENDIF
 
    // Set transparent background
-   SetBkMode(dc, ::backstyle)
+   hwg_SetBkMode(dc, ::backstyle)
    IF ::BackStyle == OPAQUE
       brBackground := IIf(!Empty(::brush), ::brush, ::hBrushDefault)
       hwg_FillRect(dc, client_rect[1], client_rect[2], client_rect[3], client_rect[4], brBackground:handle)
@@ -297,7 +297,7 @@ METHOD Paint(lpDis) CLASS HStatic
    ELSEIF !::isEnabled()
       hwg_SetTextColor(dc, 16777215) //hwg_GetSysColor(COLOR_WINDOW))
       hwg_DrawText(dc, szText, {client_rect[1] + 1, client_rect[2] + 1, client_rect[3] + 1, client_rect[4] + 1}, dwtext)
-      SetBkMode(dc, TRANSPARENT)
+      hwg_SetBkMode(dc, TRANSPARENT)
       hwg_SetTextColor(dc, 10526880) //hwg_GetSysColor(COLOR_GRAYTEXT))
    ENDIF
    // Draw the text

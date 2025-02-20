@@ -788,7 +788,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       ::Themed := .T.
    ENDIF
 
-   SetBkMode(dc, TRANSPARENT)
+   hwg_SetBkMode(dc, TRANSPARENT)
    IF ::m_bDrawTransparent
 //        ::PaintBk(DC)
    ENDIF
@@ -989,7 +989,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       OffsetRect(@captionRect, 0, (centerRectHeight - captionRectHeight) / 2)
 
 
-/*      SetBkMode(dc, TRANSPARENT)
+/*      hwg_SetBkMode(dc, TRANSPARENT)
       IF bIsDisabled
 
          OffsetRect(@captionRect, 1, 1)
@@ -1037,7 +1037,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
       ELSE
 
-         SetBkMode(dc, TRANSPARENT)
+         hwg_SetBkMode(dc, TRANSPARENT)
 
          IF bIsDisabled
 

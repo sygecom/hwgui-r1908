@@ -237,7 +237,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
    hDC    := hwg_BeginPaint(::handle, pps)
    aCoors := hwg_GetClientRect(::handle)
 
-   SetBkMode(hDC, ::backStyle)
+   hwg_SetBkMode(hDC, ::backStyle)
    IF ::backstyle == OPAQUE .AND. ::nrePaint = -1
       aCoors := hwg_GetClientRect(::handle)
       IF ::brush != NIL

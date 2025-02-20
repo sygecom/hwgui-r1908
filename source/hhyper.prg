@@ -399,7 +399,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
       ENDIF
       rcclient[1] +=  IIf(::iStyle == ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
    ENDIF
-   SetBkMode(DC, ::backstyle)
+   hwg_SetBkMode(DC, ::backstyle)
    IF ::backstyle != TRANSPARENT
        hwg_SetBkColor(DC, IIf(::bColor == NIL, hwg_GetSysColor(COLOR_3DFACE), ::bcolor))
        hwg_FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)

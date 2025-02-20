@@ -72,7 +72,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    CreateGetList(Self)
    InitControls(SELF)
    InitObjects(Self, .T.)
-   hwg_SendMessage(::handle, WM_UPDATEUISTATE, makelong(UIS_CLEAR, UISF_HIDEFOCUS), 0)
+   hwg_SendMessage(::handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    IF hb_IsBlock(::bInit)
       //::hide()
       IF !hb_IsNumeric(nReturn := Eval(::bInit, Self))

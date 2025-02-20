@@ -1043,9 +1043,9 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
       IF oCtrl:tcolor != NIL
          hwg_SetTextColor(wParam, oCtrl:tcolor)
       ENDIF
-      SetBkMode(wParam, oCtrl:backstyle)
+      hwg_SetBkMode(wParam, oCtrl:backstyle)
       IF !oCtrl:IsEnabled() .AND. oCtrl:Disablebrush != NIL
-         SetBkMode(wParam, TRANSPARENT)
+         hwg_SetBkMode(wParam, TRANSPARENT)
          hwg_SetBkColor(wParam, oCtrl:DisablebColor)
          RETURN oCtrl:disablebrush:handle
       ELSEIF oCtrl:bcolor != NIL .AND. oCtrl:BackStyle == OPAQUE

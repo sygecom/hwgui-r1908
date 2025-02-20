@@ -297,7 +297,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
 
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == NIL , - 1 , 1)
 
-     IF ::oUpDown == NIL .OR. hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
+     IF ::oUpDown == NIL .OR. hwg_BitAnd(hwg_GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          hwg_GetFocus() != ::handle .OR. ;
        (::oUpDown:bGetFocus != NIL .AND. !Eval(::oUpDown:bGetFocus, ::oUpDown:nValue, ::oUpDown))
         RETURN 0

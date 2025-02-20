@@ -1253,7 +1253,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
       client_rect := TabItemPos(::oParent:handle, i - 1)
       oPage:aItemPos := client_rect
       IF oPage:brush != NIL //.AND. client_rect[4] - client_rect[2] > 5
-         //SetBkMode(hDC, TRANSPARENT)
+         //hwg_SetBkMode(hDC, TRANSPARENT)
          IF nPage == oPage:PageOrder
             hwg_FillRect(::hDC, client_rect[1], client_rect[2] + 1, client_rect[3], client_rect[4] + 2, oPage:brush:handle)
             IF hwg_GetFocus() == oPage:oParent:handle
@@ -1299,7 +1299,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        ENDIF
        hTheme := IIf(Empty(hTheme), NIL, hTheme)
     ENDIF
-    SetBkMode(::hDC, TRANSPARENT)
+    hwg_SetBkMode(::hDC, TRANSPARENT)
     IF oPage:oParent:oFont != NIL
        hwg_SelectObject(::hDC, oPage:oParent:oFont:handle)
     ENDIF

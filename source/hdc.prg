@@ -140,7 +140,7 @@ METHOD SetTextColor(xColor) CLASS HDC
 
 METHOD SetBkMode(xMode) CLASS HDC
 
-   RETURN SetBkMode(::m_hDc, xMode)
+   RETURN hwg_SetBkMode(::m_hDc, xMode)
 
 METHOD SelectObject(xMode) CLASS HDC
 

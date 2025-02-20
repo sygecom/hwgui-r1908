@@ -164,7 +164,7 @@ METHOD Create() CLASS HNICEButton
    w      := Rct[3] - Rct[1]
    h      := Rct[4] - Rct[2]
    Region := hwg_CreateRoundRectRgn(0, 0, w, h, h * 0.90, h * 0.90)
-   SetWindowRgn(::handle, Region, .T.)
+   hwg_SetWindowRgn(::handle, Region, .T.)
    hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
@@ -276,7 +276,7 @@ METHOD PAINT() CLASS HNICEButton
    Size := hwg_GetTextSize(hDC, T)
 
    hwg_Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
-   SetBkMode(hDC, TRANSPARENT)
+   hwg_SetBkMode(hDC, TRANSPARENT)
 
    IF (::State == OBTN_MOUSOVER)
       hwg_SetTextColor(hDC, hwg_VColor("FF0000"))

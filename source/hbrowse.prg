@@ -2272,7 +2272,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          ENDIF
          IF ::hTheme != NIL
              hb_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, state, aItemRect, NIL)
-             SetBkMode(hDC, 1)
+             hwg_SetBkMode(hDC, 1)
          ELSE
              hwg_DrawButton(hDC, x, ;
                  ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
@@ -2573,7 +2573,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
            IF ::hTheme != NIL
               aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize, ::y2 + 1}
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
-              SetBkMode(hDC, 1)
+              hwg_SetBkMode(hDC, 1)
            ELSE
               hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize, ::y2, 0)
               hwg_DrawLine(hDC, x, ::y2, x + xSize, ::y2)
@@ -2582,7 +2582,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
            IF ::hTheme != NIL
               aItemRect := {x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1}
               hb_DrawThemeBackground(::hTheme, hDC, PBS_NORMAL, 0, aItemRect, NIL)
-              SetBkMode(hDC, 1)
+              hwg_SetBkMode(hDC, 1)
            ELSE
               hwg_DrawButton(hDC, x, ::y2 - nPixelFooterHeight, x + xsize + 1, ::y2 + 1, 0)
            ENDIF

@@ -843,7 +843,7 @@ METHOD DeleteChar(lBack) CLASS HEdit
    LOCAL cBuf
    LOCAL nPosEdit
 
-   IF hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0
+   IF hwg_BitAnd(hwg_GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0
       RETURN NIL
    ENDIF
    IF nGetLen == 0
@@ -1076,7 +1076,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
    LOCAL lSignal := .F.
 
    /* AJ: 11-03-2007 */
-   IF hwg_BitAnd(GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0
+   IF hwg_BitAnd(hwg_GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0
       RETURN 0
    ENDIF
 
