@@ -51,8 +51,8 @@
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
-             [ WHEN  <bGfocus> ]        ;
-             [ VALID <bLfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [<lPassword: PASSWORD>]    ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ STYLE <nStyle> ]         ;
@@ -79,8 +79,8 @@
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
-             [ WHEN  <bGfocus> ]        ;
-             [ VALID <bLfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
