@@ -163,7 +163,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
-         RE_INSERTTEXT(::handle, Chr(VK_TAB))
+         hwg_RE_InsertText(::handle, Chr(VK_TAB))
           RETURN 0
       ENDIF
       IF wParam == VK_ESCAPE .AND. ::GetParentForm():handle != ::oParent:handle
@@ -203,7 +203,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
             GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
-            RE_INSERTTEXT(::handle, Chr(VK_TAB))
+            hwg_RE_InsertText(::handle, Chr(VK_TAB))
             RETURN 0
          ENDIF
          EXIT
@@ -306,7 +306,7 @@ RETURN -1
 METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 
    IF tcolor != NIL
-      re_SetDefault(::handle, tColor) //, ID_FONT ,,) // cor e fonte padrao
+      hwg_RE_SetDefault(::handle, tColor) //, ID_FONT ,,) // cor e fonte padrao
    ENDIF
    IF bColor != NIL
       hwg_SendMessage(::handle, EM_SETBKGNDCOLOR, 0, bColor) // cor de fundo
@@ -330,7 +330,7 @@ METHOD UpdatePos() CLASS HRichEdit
 
    ::Line := hwg_SendMessage(::handle, EM_LINEFROMCHAR, pos1 - 1, 0) + 1
    ::LinesTotal := hwg_SendMessage(::handle, EM_GETLINECOUNT, 0, 0)
-   ::SelText := RE_GETTEXTRANGE(::handle, pos1, pos2)
+   ::SelText := hwg_RE_GetTextRange(::handle, pos1, pos2)
    ::SelStart := pos1
    ::SelLength := pos2 - pos1
    ::Col := pos1 - hwg_SendMessage(::handle, EM_LINEINDEX, -1, 0)

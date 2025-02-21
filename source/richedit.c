@@ -66,10 +66,10 @@ HB_FUNC_TRANSLATE(CREATERICHEDIT, HWG_CREATERICHEDIT);
 #endif
 
 /*
- * re_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
+ * hwg_RE_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
            lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected)
  */
-HB_FUNC(RE_SETCHARFORMAT)
+HB_FUNC(HWG_RE_SETCHARFORMAT)
 {
   HWND hCtrl = hwg_par_HWND(1);
   CHARRANGE chrOld, chrNew;
@@ -220,10 +220,14 @@ HB_FUNC(RE_SETCHARFORMAT)
   SendMessage(hCtrl, EM_HIDESELECTION, 0, 0);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_SETCHARFORMAT, HWG_RE_SETCHARFORMAT);
+#endif
+
 /*
- * re_SetDefault(hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset)
+ * hwg_RE_SetDefault(hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset)
  */
-HB_FUNC(RE_SETDEFAULT)
+HB_FUNC(HWG_RE_SETDEFAULT)
 {
   HWND hCtrl = hwg_par_HWND(1);
   CHARFORMAT2 cf;
@@ -272,10 +276,14 @@ HB_FUNC(RE_SETDEFAULT)
   SendMessage(hCtrl, EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_SETDEFAULT, HWG_RE_SETDEFAULT);
+#endif
+
 /*
- * re_CharFromPos(hEdit, xPos, yPos) --> nPos
+ * hwg_RE_CharFromPos(hEdit, xPos, yPos) --> nPos
  */
-HB_FUNC(RE_CHARFROMPOS)
+HB_FUNC(HWG_RE_CHARFROMPOS)
 {
   HWND hCtrl = hwg_par_HWND(1);
   int x = hb_parni(2);
@@ -289,10 +297,14 @@ HB_FUNC(RE_CHARFROMPOS)
   hb_retnl(ul);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_CHARFROMPOS, HWG_RE_CHARFROMPOS);
+#endif
+
 /*
- * re_GetTextRange(hEdit, n1, n2)
+ * hwg_RE_GetTextRange(hEdit, n1, n2)
  */
-HB_FUNC(RE_GETTEXTRANGE)
+HB_FUNC(HWG_RE_GETTEXTRANGE)
 {
   HWND hCtrl = hwg_par_HWND(1);
   TEXTRANGE tr;
@@ -307,10 +319,14 @@ HB_FUNC(RE_GETTEXTRANGE)
   hb_xfree(tr.lpstrText);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_GETTEXTRANGE, HWG_RE_GETTEXTRANGE);
+#endif
+
 /*
- * re_GetLine(hEdit, nLine)
+ * hwg_RE_GetLine(hEdit, nLine)
  */
-HB_FUNC(RE_GETLINE)
+HB_FUNC(HWG_RE_GETLINE)
 {
   HWND hCtrl = hwg_par_HWND(1);
   int nLine = hb_parni(2);
@@ -324,17 +340,25 @@ HB_FUNC(RE_GETLINE)
   hb_xfree(lpBuf);
 }
 
-HB_FUNC(RE_INSERTTEXT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_GETLINE, HWG_RE_GETLINE);
+#endif
+
+HB_FUNC(HWG_RE_INSERTTEXT)
 {
   void *hString;
   SendMessage(hwg_par_HWND(1), EM_REPLACESEL, 0, (LPARAM)HB_PARSTR(2, &hString, NULL));
   hb_strfree(hString);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_INSERTTEXT, HWG_RE_INSERTTEXT);
+#endif
+
 /*
- * re_FindText(hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp)
+ * hwg_RE_FindText(hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp)
  */
-HB_FUNC(RE_FINDTEXT)
+HB_FUNC(HWG_RE_FINDTEXT)
 {
   HWND hCtrl = hwg_par_HWND(1);
   FINDTEXTEX ft;
@@ -352,7 +376,11 @@ HB_FUNC(RE_FINDTEXT)
   hb_retnl(lPos);
 }
 
-HB_FUNC(RE_SETZOOM)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_FINDTEXT, HWG_RE_FINDTEXT);
+#endif
+
+HB_FUNC(HWG_RE_SETZOOM)
 {
   HWND hwnd = hwg_par_HWND(1);
   int nNum = hb_parni(2);
@@ -360,13 +388,21 @@ HB_FUNC(RE_SETZOOM)
   hb_retnl((BOOL)SendMessage(hwnd, EM_SETZOOM, nNum, nDen));
 }
 
-HB_FUNC(RE_ZOOMOFF)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_SETZOOM, HWG_RE_SETZOOM);
+#endif
+
+HB_FUNC(HWG_RE_ZOOMOFF)
 {
   HWND hwnd = hwg_par_HWND(1);
   hb_retnl((BOOL)SendMessage(hwnd, EM_SETZOOM, 0, 0L));
 }
 
-HB_FUNC(RE_GETZOOM)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_SETZOOMOFF, HWG_RE_SETZOOMOFF);
+#endif
+
+HB_FUNC(HWG_RE_GETZOOM)
 {
   HWND hwnd = hwg_par_HWND(1);
   int nNum = hb_parni(2);
@@ -376,7 +412,11 @@ HB_FUNC(RE_GETZOOM)
   hb_storni(nDen, 3);
 }
 
-HB_FUNC(PRINTRTF)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RE_GETZOOM, HWG_RE_GETZOOM);
+#endif
+
+HB_FUNC(HWG_PRINTRTF)
 {
   HWND hwnd = hwg_par_HWND(1);
   HDC hdc = hwg_par_HDC(2);
@@ -421,6 +461,10 @@ HB_FUNC(PRINTRTF)
   SendMessage(hwnd, EM_HIDESELECTION, 0, 0);
   hb_retnl((BOOL)fSuccess);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PRINTRTF, HWG_PRINTRTF);
+#endif
 
 HB_FUNC(HWG_INITRICHPROC)
 {
@@ -476,7 +520,7 @@ static DWORD CALLBACK EditStreamCallback(DWORD_PTR dwCookie, LPBYTE lpBuff, LONG
   return !ReadFile(hFile, lpBuff, cb, (DWORD *)pcb, NULL);
 }
 
-HB_FUNC(SAVERICHEDIT)
+HB_FUNC(HWG_SAVERICHEDIT)
 {
 
   HWND hWnd = hwg_par_HWND(1);
@@ -501,7 +545,11 @@ HB_FUNC(SAVERICHEDIT)
   hwg_ret_HANDLE(hFile);
 }
 
-HB_FUNC(LOADRICHEDIT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SAVERICHEDIT, HWG_SAVERICHEDIT);
+#endif
+
+HB_FUNC(HWG_LOADRICHEDIT)
 {
 
   HWND hWnd = hwg_par_HWND(1);
@@ -524,3 +572,7 @@ HB_FUNC(LOADRICHEDIT)
   CloseHandle(hFile);
   hwg_ret_HANDLE(hFile);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LOADRICHEDIT, HWG_LOADRICHEDIT);
+#endif

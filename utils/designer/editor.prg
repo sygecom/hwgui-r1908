@@ -256,8 +256,8 @@ STATIC FUNCTION editChgFont()
    ENDIF
 Return Nil
 
-// re_SetDefault( hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset )
-// re_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic, lUnderline )
+// hwg_RE_SetDefault( hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset )
+// hwg_RE_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic, lUnderline )
 
 STATIC FUNCTION editShow( cText,lRedraw )
 
@@ -267,7 +267,7 @@ STATIC FUNCTION editShow( cText,lRedraw )
    IF lRedraw != Nil .AND. lRedraw
       // cText := oEdit:Gettext()
       nTextLength := hwg_SendMessage( oEdit:handle, WM_GETTEXTLENGTH, 0, 0 ) + 1
-      cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
+      cText := hwg_RE_GetTextRange( oEdit:handle, 1,nTextLength )
    ELSE
       IF cText == Nil
          cText := oEdit:title
@@ -275,12 +275,12 @@ STATIC FUNCTION editShow( cText,lRedraw )
       nTextLength := Len(cText)
    ENDIF
    hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, 0 )
-   re_SetDefault( oEdit:handle,oTheme:normal[1],oEdit:oFont:name,,oTheme:normal[3],oTheme:normal[4],,oEdit:oFont:charset )
+   hwg_RE_SetDefault( oEdit:handle,oTheme:normal[1],oEdit:oFont:name,,oTheme:normal[3],oTheme:normal[4],,oEdit:oFont:charset )
    hwg_SendMessage(oEdit:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    oEdit:SetText( cText )
-   cText := re_GetTextRange( oEdit:handle, 1,nTextLength )
+   cText := hwg_RE_GetTextRange( oEdit:handle, 1,nTextLength )
    IF !Empty(arrHi := CreateHiLight(cText))
-      re_SetCharFormat( oEdit:handle,arrHi )
+      hwg_RE_SetCharFormat( oEdit:handle,arrHi )
    ENDIF
    hwg_SendMessage( oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE )
    oEdit:oParent:AddEvent( EN_CHANGE,oEdit:id,{||EnChange(2)} )
@@ -311,14 +311,14 @@ STATIC FUNCTION EnChange( nEvent )
          // writelog( "1: "+Str(nLength, 5)+" "+Str(nTextLength, 5) )
       ELSE
          nLine := hwg_SendMessage( oEdit:handle, EM_LINEFROMCHAR, -1, 0 )
-         cBuffer := re_getline( oEdit:handle,nLine )
+         cBuffer := hwg_RE_GetLine( oEdit:handle,nLine )
          // writelog( "pos: "+LTrim(Str(pos1))+" Line: "+LTrim(Str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer )
          nLinePos := hwg_SendMessage( oEdit:handle, EM_LINEINDEX, nLine, 0 ) + 1
          AAdd(arr, { nLinePos,nLinePos+Len(cBuffer), ;
             oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4], })
          HiLightString( cBuffer, arr, nLinePos )
          IF !Empty(arr)
-            re_SetCharFormat( oEdit:handle,arr )
+            hwg_RE_SetCharFormat( oEdit:handle,arr )
          ENDIF
       ENDIF
       IF nTextLength != nLength
@@ -553,9 +553,9 @@ Static Function UpdSample( nAction )
    oTheme:comment := aSchemes[nScheme, 4]
    oTheme:quote   := aSchemes[nScheme, 5]
    oTheme:number  := aSchemes[nScheme, 6]
-   re_SetDefault( oEditC:handle,oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4] )
+   hwg_RE_SetDefault( oEditC:handle,oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4] )
    hwg_SendMessage(oEditC:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
-   re_SetCharFormat( oEditC:handle,CreateHiLight(oEditC:GetText(),oTheme) )
+   hwg_RE_SetCharFormat( oEditC:handle,CreateHiLight(oEditC:GetText(),oTheme) )
 Return Nil
 
 

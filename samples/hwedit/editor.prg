@@ -266,7 +266,7 @@ FUNCTION novo(tipo)
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle)
  hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
- re_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
+ hwg_RE_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
 
 RETURN .T.
 
@@ -357,14 +357,14 @@ FUNCTION Texto()
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle )
  // colocando cores nas funcoes
- re_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
+ hwg_RE_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
  /*
  for f = 1 to Len(linhas)
     for g := 0 to linhas[f]
-             hwg_MsgInfo(re_GetTextRange(oEdit&i, g, 1))
+             hwg_MsgInfo(hwg_RE_GetTextRange(oEdit&i, g, 1))
     next f
 
-   //re_SetCharFormat(oEdit&i:handle, 6, olinha[f, 2], 255, , , .T.)
+   //hwg_RE_SetCharFormat(oEdit&i:handle, 6, olinha[f, 2], 255, , , .T.)
  next f
  */
  hwg_SetFocus(oEdit&i:Handle)
@@ -494,9 +494,9 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
              //hwg_MsgInfo(str(Len(texto)))
              if sintaxe(texto)
 
-                re_SetCharFormat(aControls[hWnd]:Handle,{{,,,,,,},{(pos1-Len(texto)), Len(texto), 255,,, .T.}})
+                hwg_RE_SetCharFormat(aControls[hWnd]:Handle,{{,,,,,,},{(pos1-Len(texto)), Len(texto), 255,,, .T.}})
              else
-                re_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
+                hwg_RE_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
              endif
             //
             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
@@ -774,7 +774,7 @@ FUNCTION cor_Fonte()
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
      ID_COLORF := hwg_ChooseColor(ID_COLORF, .T.)
-     re_SetDefault(aControls[hWnd]:Handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
+     hwg_RE_SetDefault(aControls[hWnd]:Handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
      save all like ID_* to config.dat
  else
    hwg_MsgInfo("Abra um documento Primeiro")

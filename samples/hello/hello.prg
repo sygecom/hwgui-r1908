@@ -28,7 +28,7 @@ FUNCTION Main()
 
    @ 20, 10 RICHEDIT oEdit TEXT "Hello, world !" SIZE 200, 30
 
-   re_SetCharFormat(oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } })
+   hwg_RE_SetCharFormat(oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } })
 
    @ 270, 10 COMBOBOX aCombo SIZE 100, 150 TOOLTIP "Combobox"
 
