@@ -51,7 +51,7 @@ FUNCTION Main()
          MENUITEM "&Class HRect" ACTION RRectangle()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION CopyStringToClipboard(MsgGet("Dialog Sample", "Input table name"))
+               ACTION hwg_CopyStringToClipboard(MsgGet("Dialog Sample", "Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()

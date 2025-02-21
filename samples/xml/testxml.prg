@@ -48,7 +48,7 @@ FUNCTION Main()
       ENDMENU
 
       MENU TITLE "Help"
-         MENUITEM "About" ACTION ShellAbout("", "")
+         MENUITEM "About" ACTION hwg_ShellAbout("", "")
       ENDMENU
    ENDMENU
 

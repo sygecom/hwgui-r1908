@@ -344,7 +344,7 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
       ELSE
         hwg_SetCursor(::m_hHyperCursor)
         IF (!PtInRect({4, 4, ::nWidthover - 6, ::nHeight - 6}, {xPos, yPos}))
-           //ReleaseCapture()
+           //hwg_ReleaseCapture()
            res := .T.
         ENDIF
       ENDIF
@@ -358,7 +358,7 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
          ::state := LBL_MOUSEOVER
          hwg_InvalidateRect(::handle, 0)
          hwg_RedrawWindow(::oParent:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT, ::nLeft, ::nTop, ::nWidth, ::nHeight)
-         //SetCapture(::handle)
+         //hwg_SetCapture(::handle)
       ENDIF
 
    ENDIF

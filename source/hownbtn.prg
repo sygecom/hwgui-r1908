@@ -525,7 +525,7 @@ METHOD MouseMove(wParam, lParam) CLASS HOwnButton
       xPos := hwg_LOWORD(lParam)
       yPos := hwg_HIWORD(lParam)
       IF xPos > ::nWidth .OR. yPos > ::nHeight
-         ReleaseCapture()
+         hwg_ReleaseCapture()
          res := .T.
       ENDIF
       IF res .AND. !::lPress
@@ -539,7 +539,7 @@ METHOD MouseMove(wParam, lParam) CLASS HOwnButton
          hwg_InvalidateRect(::handle, 0)
          //hwg_PostMessage(::handle, WM_PAINT, 0, 0)
          hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE)
-         SetCapture(::handle)
+         hwg_SetCapture(::handle)
       ENDIF
    ENDIF
 
@@ -581,7 +581,7 @@ METHOD MUp() CLASS HOwnButton
       ENDIF
    ENDIF
    IF hb_IsBlock(::bClick)
-      ReleaseCapture()
+      hwg_ReleaseCapture()
       Eval(::bClick, ::oParent, ::id)
       Release()
    ENDIF

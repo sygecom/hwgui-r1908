@@ -306,7 +306,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD Clean()
    METHOD Notify(lParam)
    METHOD END() INLINE (::Super:END(), ReleaseTree(::aItems))
-   METHOD isExpand(oNodo) INLINE !CheckBit(oNodo, TVE_EXPAND)
+   METHOD isExpand(oNodo) INLINE !hwg_CheckBit(oNodo, TVE_EXPAND)
    METHOD onEvent(msg, wParam, lParam)
    METHOD ItemHeight(nHeight) SETGET
    METHOD SearchString(cText, iNivel, oNode, inodo)
@@ -624,7 +624,7 @@ METHOD Notify(lParam) CLASS HTree
       IF hb_IsObject(oItem)
          IF ::bExpand != NIL
             RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
-                              CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
+                              hwg_CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
                         0, 1)
          ENDIF
       ENDIF
@@ -761,7 +761,7 @@ METHOD Notify(lParam) CLASS HTree
       IF hb_IsObject(oItem)
          IF ::bExpand != NIL
             RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
-                            CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
+                            hwg_CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
                        0, 1)
          ENDIF
       ENDIF

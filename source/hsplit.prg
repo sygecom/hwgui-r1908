@@ -99,11 +99,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    ELSEIF msg == WM_LBUTTONDOWN
       hwg_SetCursor(::hCursor)
-      SetCapture(::handle)
+      hwg_SetCapture(::handle)
       ::lCaptured := .T.
       hwg_InvalidateRect(::handle, 1)
    ELSEIF msg == WM_LBUTTONUP
-      ReleaseCapture()
+      hwg_ReleaseCapture()
       ::lCaptured := .F.
       ::lMoved := .F.
       ::DragAll(.F.)

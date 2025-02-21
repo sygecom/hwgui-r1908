@@ -99,7 +99,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    //ENDIF
 
    IF ValType( cCurDir ) != "C"
-      cCurDir := GetCurrentDir() + "\"
+      cCurDir := hwg_GetCurrentDir() + "\"
    ENDIF
    oDesigner:ds_mypath := cCurDir
 

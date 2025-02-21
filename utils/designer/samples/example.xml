@@ -50,7 +50,7 @@ orep1 := hreptmpl():Read("testrep1.xml")]]>
         </item>
         <item name="Help" id="32004">
           <item name="About" id="32005">
-            <![CDATA[ShellAbout("HwGUI forms example","")]]>
+            <![CDATA[hwg_ShellAbout("HwGUI forms example","")]]>
           </item>
         </item>
       </property>

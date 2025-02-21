@@ -243,11 +243,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             RETURN -1
          ELSEIF ::lCopy .AND. (msg == WM_MOUSELEAVE .OR. (msg == WM_KEYUP .AND. (wParam == VK_C .OR. wParam == VK_X)))
             ::lcopy := .F.
-            COPYSTRINGTOCLIPBOARD(::UnTransform(GETCLIPBOARDTEXT()))
+            hwg_CopyStringToClipboard(::UnTransform(hwg_GetClipboardText()))
             RETURN -1
          ELSEIF msg == WM_PASTE .AND. !::lNoPaste
               ::lFirst := IIf(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
-            cClipboardText := GETCLIPBOARDTEXT()
+            cClipboardText := hwg_GetClipboardText()
             IF !Empty(cClipboardText)
                nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
                hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
@@ -260,10 +260,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
               ENDIF
             RETURN 0
          ELSEIF msg == WM_CHAR
-            IF !CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)
+            IF !hwg_CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)
                nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
                nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
-               nShiftAltCtrl += IIf(Checkbit(lParam, 28), 4, nShiftAltCtrl)
+               nShiftAltCtrl += IIf(hwg_Checkbit(lParam, 28), 4, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .T.
                lRes := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .F.
@@ -325,8 +325,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                RETURN ::GetApplyKey(Chr(wParam))
             ENDIF
          ELSEIF msg == WM_KEYDOWN
-            //IF (CheckBit(lParam, 25) .OR. wParam > 111) .AND. hb_IsBlock(::bKeyDown)
-            IF ((CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124)) .AND. ;
+            //IF (hwg_CheckBit(lParam, 25) .OR. wParam > 111) .AND. hb_IsBlock(::bKeyDown)
+            IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124)) .AND. ;
                hb_IsBlock(::bKeyDown)
                nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
                nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
@@ -1243,7 +1243,7 @@ METHOD SelText(cText) CLASS HEdit
    IF cText != NIL
       hwg_SendMessage(::handle, EM_SETSEL, ::nSelStart, ::nSelStart + ::nSelLength)
       hwg_SendMessage(::handle, WM_CUT, 0, 0)
-      COPYSTRINGTOCLIPBOARD(cText)
+      hwg_CopyStringToClipboard(cText)
       hwg_SendMessage(::handle, EM_SETSEL, ::nSelStart, ::nSelStart)
       hwg_SendMessage(::handle, WM_PASTE, 0, 0)
       ::nSelLength := 0

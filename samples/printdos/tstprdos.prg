@@ -69,7 +69,7 @@ FUNCTION Main()
          MENUITEM "U&sing Default Printerr" ACTION TestDosClipper("DEFAULT")
       ENDMENU
       MENU TITLE "&Help"
-         MENUITEM "&About" ACTION ShellAbout("Test PrintDos", "By Sandro R. R. Freire")
+         MENUITEM "&About" ACTION hwg_ShellAbout("Test PrintDos", "By Sandro R. R. Freire")
       ENDMENU
 
    ENDMENU

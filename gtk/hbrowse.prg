@@ -657,7 +657,7 @@ Local oldBkColor, oldTColor
    ENDIF
 
    ::LineOut( ::rowPos, IIf(::lEditable, ::colpos, 0), hDC, .T.)
-   IF Checkbit( ::internal[1],1 ) .OR. ::lAppMode
+   IF hwg_Checkbit( ::internal[1],1 ) .OR. ::lAppMode
       ::HeaderOut( hDC )
       if ::nFootRows > 0
          ::FooterOut( hDC )
@@ -1622,7 +1622,7 @@ METHOD Refresh( lFull ) CLASS HBrowse
       hwg_RedrawWindow( ::area, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
    ELSE
       hwg_InvalidateRect( ::area, 0 )
-      ::internal[1] := SetBit( ::internal[1], 1, 0 )
+      ::internal[1] := hwg_SetBit( ::internal[1], 1, 0 )
    ENDIF
    
 RETURN Nil

@@ -30,7 +30,7 @@ FUNCTION Main()
          MENUITEM "&Exit" ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Help"
-         MENUITEM "&About" ACTION ShellAbout("Info", "RTF Demo")
+         MENUITEM "&About" ACTION hwg_ShellAbout("Info", "RTF Demo")
       ENDMENU
    ENDMENU
 

@@ -336,7 +336,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
    ELSEIF msg == WM_SYSKEYUP .OR. (msg == WM_KEYUP .AND. ;
                      AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0)
-     IF CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
+     IF hwg_CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
         wParam -= 48
      ENDIF
      IF !Empty(::title) .AND. (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
@@ -534,7 +534,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       EXIT
 
    CASE WM_SYSKEYUP
-      IF CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
+      IF hwg_CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
          wParam -= 48
       ENDIF
       IF !Empty(::title) .AND. (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
@@ -552,7 +552,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
    CASE WM_KEYUP
       IF AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0
-         IF CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
+         IF hwg_CheckBit(lParam, 23) .AND. (wParam > 95 .AND. wParam < 106)
             wParam -= 48
          ENDIF
          IF !Empty(::title) .AND. (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))

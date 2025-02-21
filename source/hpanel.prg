@@ -164,7 +164,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
          */
       ELSE
          hwg_SetTransparentMode(wParam, .T.)
-         RETURN GetStockObject(NULL_BRUSH)
+         RETURN hwg_GetStockObject(NULL_BRUSH)
       ENDIF
    ELSEIF msg == WM_SIZE
       IF ::oEmbedded != NIL

@@ -285,7 +285,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
       IF ::nfStyle != BS_TRANSPARENT .OR. ::backStyle == OPAQUE
          hwg_SelectObject(hDC, ::BrushFill:handle)
       ELSE
-         hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
+         hwg_SelectObject(hDC, hwg_GetStockObject(NULL_BRUSH))
       ENDIF
       hwg_RoundRect(hDC, x1 + 1, y1 + 1, x2, y2 , ::nCurvature, ::nCurvature)
    ENDIF
@@ -480,7 +480,7 @@ METHOD Paint(lpdis) CLASS HContainer
             hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , ::brush:handle)
          ENDIF
       ELSE
-         hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , GetStockObject(5))
+         hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2 , hwg_GetStockObject(5))
       ENDIF
       //hwg_SetBkMode(hDC, 0)
    ENDIF

@@ -471,7 +471,7 @@ Local aItem, i, dx, dy
          Return Nil
       ENDIF
       aItem := aPaintRep[FORM_ITEMS,s_itemPressed]
-      IF CheckBit( wParam, MK_LBUTTON )
+      IF hwg_CheckBit( wParam, MK_LBUTTON )
          hWnd := Hwindow():GetMain():handle
          hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
@@ -506,7 +506,7 @@ Local aItem, i, dx, dy
       ENDIF
    ELSEIF s_itemSized > 0
       aItem := aPaintRep[FORM_ITEMS,s_itemSized]
-      IF CheckBit( wParam, MK_LBUTTON )
+      IF hwg_CheckBit( wParam, MK_LBUTTON )
          dx := xPos - s_mPos[1]
          dy := yPos - s_mPos[2]
          hWnd := Hwindow():GetMain():handle

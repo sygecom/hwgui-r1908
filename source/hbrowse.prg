@@ -620,7 +620,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ::DoVScroll(wParam)
 
       ELSEIF msg == WM_CHAR
-         IF !CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
+         IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
              nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
              nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
@@ -692,7 +692,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
       ELSEIF msg == WM_KEYDOWN .AND. !::oParent:lSuspendMsgsHandling
          //::isMouseOver := .F.
-         IF ((CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124) .OR.;
+         IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124) .OR.;
                wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. ;
                hb_IsBlock(::bKeyDown)
              nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
@@ -1008,7 +1008,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
       EXIT
 
    CASE WM_CHAR
-      IF !CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
+      IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
          nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
          nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
          //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
@@ -1081,7 +1081,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
    CASE WM_KEYDOWN
       IF !::oParent:lSuspendMsgsHandling
          //::isMouseOver := .F.
-         IF ((CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam >= VK_F1 .AND. wParam <= VK_F12) .OR. ;
+         IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam >= VK_F1 .AND. wParam <= VK_F12) .OR. ;
             wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. hb_IsBlock(::bKeyDown)
             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
@@ -2067,7 +2067,7 @@ ENDIF
          //ENDIF
          cursor_row++
       ENDDO
-      IF ::lDispSep .AND. !Checkbit(::internal[1], 1) .AND. nRowsFill <= ::rowCurrCount
+      IF ::lDispSep .AND. !hwg_Checkbit(::internal[1], 1) .AND. nRowsFill <= ::rowCurrCount
          ::SeparatorOut(hDC, ::rowCurrCount)
       ENDIF
       nRowsFill := cursor_row - 1
@@ -2102,7 +2102,7 @@ ENDIF
    // if bit-1 refresh header and footer
    ::oParent:lSuspendMsgsHandling := .F.
 
-   IF Checkbit(::internal[1], 1) .OR. ::lAppMode
+   IF hwg_Checkbit(::internal[1], 1) .OR. ::lAppMode
       //IF ::lDispSep
          ::SeparatorOut(hDC, nRowsFill)
       //ENDIF
@@ -2699,7 +2699,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       ::nPaintRow := nRow
       IF ::lDeleteMark
          hwg_FillRect(hDC, ::x1 - ::nDeleteMark - 0, ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
-                        ::x1 - 1, ::y1 + (::height + 1) * ::nPaintRow, IIf(Deleted(), GetStockObject(7), GetStockObject(0))) //::brush:handle))
+                        ::x1 - 1, ::y1 + (::height + 1) * ::nPaintRow, IIf(Deleted(), hwg_GetStockObject(7), hwg_GetStockObject(0))) //::brush:handle))
       ENDIF
       IF ::lShowMark
          IF ::hTheme != NIL
@@ -2715,7 +2715,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                          ::y1 + (::height + 1) * ::nPaintRow + 1, 1)
              hwg_SelectObject(hDC, s_oPen64:handle)
              hwg_Rectangle(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 1, ::y1 + (::height + 1) * (::nPaintRow - 1), ;
-                        ::x1  - ::nDeleteMark - 1, ::y1 + (::height + 1) * ::nPaintRow - 0) //, IIf(Deleted(), GetStockObject(7), ::brush:handle))
+                        ::x1  - ::nDeleteMark - 1, ::y1 + (::height + 1) * ::nPaintRow - 0) //, IIf(Deleted(), hwg_GetStockObject(7), ::brush:handle))
           ENDIF
           IF lSelected
              hwg_DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1,;
@@ -2726,7 +2726,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                 IF !::lEditable .OR. ::HighlightStyle == 3 .OR. ::HighlightStyle == 0
                    ::internal[1] := 1
                    oPen := HPen():Add(0, 1, ::bcolorSel)
-                   hwg_SelectObject(hDC, GetStockObject(NULL_BRUSH))
+                   hwg_SelectObject(hDC, hwg_GetStockObject(NULL_BRUSH))
                    hwg_SelectObject(hDC, oPen:handle)
                    hwg_RoundRect(hDC, ::x1, ;
                                  ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
@@ -3287,7 +3287,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
       ::nLeftCol := ::freeze + 1
    ENDIF
    IF !::lAppMode .OR. ::nLeftCol == 1
-      ::internal[1] := SetBit(::internal[1], 1, 0)
+      ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ENDIF
 
    IF hb_IsBlock(::bScrollPos)
@@ -3327,7 +3327,7 @@ METHOD LINEUP() CLASS HBrowse
       ELSEIF ::nRecords > 1
          VScrollPos(Self, 0, .F.)
       ENDIF
-      ::internal[1] := SetBit(::internal[1], 1, 0)
+      ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ENDIF
   // ::SetFocus() ??
 
@@ -3412,7 +3412,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
       //::SetFocus()
    ELSE
       //hwg_InvalidateRect(::handle, 0)
-      ::internal[1] := SetBit(::internal[1], 1, 0)
+      ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ENDIF
 
 RETURN NIL
@@ -3426,7 +3426,7 @@ METHOD TOP() CLASS HBrowse
 
    //hwg_InvalidateRect(::handle, 0)
    ::Refresh(::nFootRows > 0)
-   ::internal[1] := SetBit(::internal[1], 1, 0)
+   ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ::SetFocus()
 
 RETURN NIL
@@ -4351,7 +4351,7 @@ METHOD Refresh(lFull, lLineUp) CLASS HBrowse
       //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
    ELSE
       hwg_InvalidateRect(::handle, 0)
-      ::internal[1] := SetBit(::internal[1], 1, 0)
+      ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
       IF ::nCurrent < ::rowCount .AND. ::rowPos <= ::nCurrent .AND. Empty(lLineUp)
          ::rowPos := ::nCurrent
       ENDIF

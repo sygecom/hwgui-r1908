@@ -924,7 +924,7 @@ FUNCTION onHelp(oDlg, wParam, lParam)
          cDir := IIf(Empty(FilePath(SetHelpFileName())), Curdir(), FilePath(SetHelpFileName()))
       ENDIF
       IF !Empty(lParam)
-         oCtrl := oDlg:FindControl(NIL, GetHelpData(lParam))
+         oCtrl := oDlg:FindControl(NIL, hwg_GetHelpData(lParam))
       ENDIF
       IF hb_IsObject(oCtrl)
          nHelpId := oCtrl:HelpId
@@ -936,12 +936,12 @@ FUNCTION onHelp(oDlg, wParam, lParam)
             nHelpId := IIf(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
             hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
          ELSE
-            WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
+            hwg_WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
          ENDIF
       ELSEIF cDir != NIL
          hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()), cDir)
       ELSE
-         WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
+         hwg_WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
       ENDIF
    ENDIF
 

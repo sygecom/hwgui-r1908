@@ -1064,7 +1064,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
          */
          IF __ObjHasMsg(oCtrl, "PAINT") .OR. oCtrl:lnoThemes .OR. ;
             (oCtrl:winClass == "BUTTON" .AND. oCtrl:classname != "HCHECKBUTTON")
-            RETURN GetStockObject(NULL_BRUSH)
+            RETURN hwg_GetStockObject(NULL_BRUSH)
          ENDIF
          RETURN GetBackColorParent(oCtrl, , .T.):handle
       ELSEIF oCtrl:winClass == "BUTTON" .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest)

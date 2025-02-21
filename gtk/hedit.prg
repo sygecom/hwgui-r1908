@@ -219,7 +219,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Tab     // Tab
-            IF CheckBit( lParam,1 )
+            IF hwg_CheckBit( lParam,1 )
                GetSkip( oParent,::handle,-1 )
             ELSE
                GetSkip( oParent,::handle,1 )

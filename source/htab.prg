@@ -1322,7 +1322,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
           hwg_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
           hwg_FillRect(::hDC, aItemPos[1] + BmpSize + 3, aItemPos[2] + 4, aItemPos[3] - 3, aItemPos[4] - 5, ;
-                   IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH)))
+                   IIf(oPage:brush != NIL, oPage:brush:handle, hwg_GetStockObject(NULL_BRUSH)))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
           hwg_DrawText(::hDC, oPage:caption, aItemPos[1] + BmpSize - 1, aItemPos[2] - 1, aItemPos[3], aItemPos[4] - 1, nstyle)
@@ -1337,7 +1337,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
        IF hTheme != NIL .AND. oPage:brush == NIL
           hwg_DrawThemeBackground(hTheme, ::hDC, BP_PUSHBUTTON, 0, aItemRect, NIL)
        ELSE
-          hwg_FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, GetStockObject(NULL_BRUSH))) // oPage:oParent:brush:handle))
+          hwg_FillRect(::hDC, aItemPos[1] + 3, aItemPos[2] + 3, aItemPos[3] - 4, aItemPos[4] - 5, IIf(oPage:brush != NIL, oPage:brush:handle, hwg_GetStockObject(NULL_BRUSH))) // oPage:oParent:brush:handle))
        ENDIF
        IF nActive == oPage:PageOrder                       // 4
           hwg_DrawText(::hDC, oPage:caption, aItemPos[1], aItemPos[2] + 2, aItemPos[3], aItemPos[4] + 2, nstyle)

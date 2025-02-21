@@ -10,7 +10,7 @@ FUNCTION Main()
    MENU OF oMainWindow
       MENUITEM "&Exit" ACTION oMainWindow:Close()
       MENUITEM "&More" ACTION DlgGet()
-      MENUITEM "Shell ABout" ACTION ShellAbout("Rodrigo Moreno", "Test")
+      MENUITEM "Shell ABout" ACTION hwg_ShellAbout("Rodrigo Moreno", "Test")
       MENUITEM "Exclamation" ACTION hwg_MsgExclamation("Are You Sure ?", "Warning")
       MENUITEM "Retry Cancel" ACTION hwg_MsgRetryCancel("Are You Sure ?", "Retry")
       MENUITEM "Calc" ACTION hwg_ShellExecute("calc")
