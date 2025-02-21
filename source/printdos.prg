@@ -532,7 +532,7 @@ STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
    RETURN nPage
 
 FUNCTION regenfile(o, new)
-   LOCAL aText := AFillText(o)
+   LOCAL aText := hwg_AFillText(o)
    LOCAL stroka
    LOCAL o1 := printdos():new(new)
    LOCAL nLine := 0
@@ -611,7 +611,7 @@ static HB_BOOL file_read(FILE *stream, char *string)
 }
 
 //----------------------------------------------------------------------------//
-HB_FUNC(AFILLTEXT)
+HB_FUNC(HWG_AFILLTEXT) // TODO: static ?
 {
    FILE *inFile ;
    const char *pSrc = hb_parc(1) ;
@@ -651,5 +651,9 @@ HB_FUNC(AFILLTEXT)
    hb_xfree(string);
    fclose(inFile);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(AFILLTEXT, HWG_AFILLTEXT);
+#endif
 
 #PRAGMA ENDDUMP
