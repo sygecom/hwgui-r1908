@@ -296,7 +296,7 @@ METHOD When() CLASS HDatePicker
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
-      nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
+      nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), - 1, 1)
       ::oParent:lSuspendMsgsHandling := .T.
       ::lnoValid := .T.
       res :=  Eval(::bGetFocus, IIf(::lShowTime, ::tValue, ::dValue), Self)

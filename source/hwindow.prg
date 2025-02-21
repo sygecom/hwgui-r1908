@@ -186,7 +186,7 @@ FUNCTION ReleaseAllWindows(hWnd)
       ENDIF
    NEXT
    IF PtrToUlong(HWindow():aWindows[1]:handle) == PtrToUlong(hWnd)
-      PostQuitMessage(0)
+      hwg_PostQuitMessage(0)
    ENDIF
 
 RETURN -1

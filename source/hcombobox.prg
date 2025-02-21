@@ -399,25 +399,25 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
       ELSEIF msg == WM_KEYUP
          ProcKeyList(Self, wParam)        //working in MDICHILD AND DIALOG
       ELSEIF msg == WM_COMMAND .AND. ::lEdit .AND. !::ldropshow
-         IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
+         IF hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_UP) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
             RETURN 0
         ENDIF
       ELSEIF msg == CB_GETDROPPEDSTATE .AND. !::ldropshow
-           IF GETKEYSTATE(VK_RETURN) < 0
+           IF hwg_GetKeyState(VK_RETURN) < 0
             ::GetValue()
           ENDIF
-         IF (GETKEYSTATE(VK_RETURN) < 0 .OR. GETKEYSTATE(VK_ESCAPE) < 0) .AND. ;
+         IF (hwg_GetKeyState(VK_RETURN) < 0 .OR. hwg_GetKeyState(VK_ESCAPE) < 0) .AND. ;
             (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
             !::GetParentForm(Self):lModal)
-            ProcOkCancel(Self, IIf(GETKEYSTATE(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
+            ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
          ENDIF
-           IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
+           IF hwg_GetKeyState(VK_TAB) + hwg_GetKeyState(VK_DOWN) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == NIL
              //  GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
-           ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
+           ELSEIF hwg_GetKeyState(VK_UP) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == NIL
              //  GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
             ENDIF
@@ -504,7 +504,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
       CASE WM_COMMAND
          IF ::lEdit .AND. !::ldropshow
-            IF GETKEYSTATE(VK_DOWN) + GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
+            IF hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_UP) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
                RETURN 0
             ENDIF
          ENDIF
@@ -512,21 +512,21 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
       CASE CB_GETDROPPEDSTATE
          IF !::ldropshow
-            IF GETKEYSTATE(VK_RETURN) < 0
+            IF hwg_GetKeyState(VK_RETURN) < 0
                ::GetValue()
             ENDIF
-            IF (GETKEYSTATE(VK_RETURN) < 0 .OR. GETKEYSTATE(VK_ESCAPE) < 0) .AND. ;
+            IF (hwg_GetKeyState(VK_RETURN) < 0 .OR. hwg_GetKeyState(VK_ESCAPE) < 0) .AND. ;
                (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
                !::GetParentForm(Self):lModal)
-               ProcOkCancel(Self, IIf(GETKEYSTATE(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
+               ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
             ENDIF
-            IF GETKEYSTATE(VK_TAB) + GETKEYSTATE(VK_DOWN) < 0 .AND. GetKeyState(VK_SHIFT) > 0
+            IF hwg_GetKeyState(VK_TAB) + hwg_GetKeyState(VK_DOWN) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
                IF ::oParent:oParent == NIL
                   //GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
                ENDIF
                GetSkip(::oParent, ::handle, , 1)
                RETURN 0
-            ELSEIF GETKEYSTATE(VK_UP) < 0 .AND. GetKeyState(VK_SHIFT) > 0
+            ELSEIF hwg_GetKeyState(VK_UP) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
                IF ::oParent:oParent == NIL
                   //GetSkip(::oParent, hwg_GetAncestor(::handle, GA_PARENT), , 1)
                ENDIF
@@ -909,7 +909,7 @@ METHOD When() CLASS HComboBox
       //  hwg_SetWindowText(::handle, ::value)
       //  hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
    ENDIF
-   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), - 1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), - 1, 1)
    IF hb_IsBlock(::bGetFocus)
       ::oParent:lSuspendMsgsHandling := .T.
       ::lnoValid := .T.
@@ -941,13 +941,13 @@ METHOD Valid() CLASS HComboBox
    LOCAL nSkip
    LOCAL res
    LOCAL hCtrl := hwg_GetFocus()
-   LOCAL ltab := GETKEYSTATE(VK_TAB) < 0
+   LOCAL ltab := hwg_GetKeyState(VK_TAB) < 0
 
    IF ::lNoValid .OR. !CheckFocus(Self, .T.)
       RETURN .T.
    ENDIF
 
-   nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0, - 1, 1)
 
    IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != VK_ESCAPE
       // end by sauli

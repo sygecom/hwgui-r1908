@@ -381,7 +381,7 @@ Local oWnd, oBtn, oitem
          NEXT
       #endif
       HWindow():DelItem( oWnd )
-      PostQuitMessage (0)
+      hwg_PostQuitMessage(0)
       return 0
    elseif msg == WM_SYSCOMMAND
       if wParam == SC_CLOSE
@@ -587,7 +587,7 @@ Local oWnd, oBtn, oitem
 
       // Return 0  // Default
 
-      PostQuitMessage (0)
+      hwg_PostQuitMessage(0)
       return 1
 
    elseif msg == WM_SYSCOMMAND
@@ -1040,7 +1040,7 @@ Local oWndClient
           Eval( oWnd:bDestroy, oWnd )
       endif
 
-      PostQuitMessage (0)
+      hwg_PostQuitMessage(0)
 
       // return 0
       return 1

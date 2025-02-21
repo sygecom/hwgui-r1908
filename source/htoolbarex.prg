@@ -70,7 +70,7 @@ RETURN -200
 /*
 STATIC FUNCTION IsAltShift(lAlt)
 
-   LOCAL cKeyb := GetKeyboardState()
+   LOCAL cKeyb := hwg_GetKeyboardState()
 
    IF lAlt == NIL
       lAlt := .T.

@@ -75,7 +75,7 @@ STATIC FUNCTION DefError(oError)
 
    ErrorPreview(cMessage)
    hwg_EndWindow()
-   PostQuitMessage(0)
+   hwg_PostQuitMessage(0)
 
    RETURN .F.
 

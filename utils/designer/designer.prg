@@ -919,7 +919,7 @@ RETURN NIL
 
 FUNCTION HWLASTKEY()
 
-   LOCAL ckeyb := GETKEYBOARDSTATE()
+   LOCAL ckeyb := hwg_GetKeyBoardState()
    LOCAL i
 
  FOR i= 1 to 255

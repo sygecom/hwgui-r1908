@@ -317,7 +317,7 @@ METHOD onClick() CLASS HCheckButton
 
 METHOD killFocus() CLASS HCheckButton
 
-   LOCAL ndown := Getkeystate(VK_RIGHT) + Getkeystate(VK_DOWN) + GetKeyState(VK_TAB)
+   LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
 
    IF !CheckFocus(Self, .T.)
@@ -325,7 +325,7 @@ METHOD killFocus() CLASS HCheckButton
    ENDIF
 
    IF ::oParent:classname = "HTAB"
-      IF getkeystate(VK_LEFT) + getkeystate(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0)
+      IF hwg_GetKeyState(VK_LEFT) + hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0)
          nSkip := -1
       ELSEIF ndown < 0
          nSkip := 1
@@ -334,7 +334,7 @@ METHOD killFocus() CLASS HCheckButton
          GetSkip(::oparent, ::handle, , nSkip)
       ENDIF
    ENDIF
-   IF getkeystate(VK_RETURN) < 0 .AND. ::lEnter
+   IF hwg_GetKeyState(VK_RETURN) < 0 .AND. ::lEnter
       ::SetValue(!::GetValue())
       ::VALID()
    ENDIF
@@ -357,7 +357,7 @@ METHOD When() CLASS HCheckButton
       RETURN .T.
    ENDIF
 
-   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
 
    IF hb_IsBlock(::bGetFocus)
       ::lnoValid := .T.

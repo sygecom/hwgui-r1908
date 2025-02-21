@@ -750,7 +750,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
                ENDIF
             ENDIF
          ENDIF
-         nEsc := (getkeystate(VK_ESCAPE) < 0)
+         nEsc := (hwg_GetKeyState(VK_ESCAPE) < 0)
          //oDlg:nLastKey := VK_ESCAPE
       ELSEIF iParLow == IDHELP  // HELP
          hwg_SendMessage(oDlg:handle, WM_HELP, 0, 0)

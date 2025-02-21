@@ -1113,7 +1113,7 @@ STATIC FUNCTION MessagesProc( oDlg, msg, wParam, lParam )
       RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       Return 1
    ELSEIF msg == WM_LBUTTONDBLCLK
-         nkShift := GetKeyState(VK_MENU)
+         nkShift := hwg_GetKeyState(VK_MENU)
          IF nkShift < 0  .OR. GetCtrlSelected( IIf(oDlg:oParent:Classname()=="HDIALOG",oDlg:oParent,oDlg) )!= Nil
              IIf( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
           ELSE
@@ -1158,8 +1158,8 @@ STATIC FUNCTION MessagesProc( oDlg, msg, wParam, lParam )
          ENDIF
 
    ELSEIF msg == WM_KEYUP
-      nkShift := GetKeyState(VK_SHIFT)
-      nShift := IIf(GetKeyState(17) < 0, 10, 1)
+      nkShift := hwg_GetKeyState(VK_SHIFT)
+      nShift := IIf(hwg_GetKeyState(17) < 0, 10, 1)
       oCtrl := GetCtrlSelected( IIf(oDlg:oParent:Classname()=="HDIALOG",oDlg:oParent,oDlg) )
       IF wParam == 40        // Down
          IF oCtrl != Nil

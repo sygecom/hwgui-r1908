@@ -251,7 +251,7 @@ RETURN NIL
 /*
 METHOD Notify(lParam) CLASS HButton
 
-   LOCAL ndown := getkeystate(VK_RIGHT) + getkeystate(VK_DOWN) + GetKeyState(VK_TAB)
+   LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
    //
    IF PtrtoUlong(lParam) == WM_KEYDOWN
@@ -260,8 +260,8 @@ METHOD Notify(lParam) CLASS HButton
             hwg_InvalidateRect(::handle, 0)
             hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
          ENDIF
-         IF getkeystate(VK_LEFT) + getkeystate(VK_UP) < 0 .OR. ;
-            (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0)
+         IF hwg_GetKeyState(VK_LEFT) + hwg_GetKeyState(VK_UP) < 0 .OR. ;
+            (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0)
             nSkip := -1
          ELSEIF ndown < 0
             nSkip := 1
@@ -303,7 +303,7 @@ METHOD onGetFocus() CLASS HButton
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
-      nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
+      nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
       ::oParent:lSuspendMsgsHandling := .T.
       res := Eval(::bGetFocus, ::title, Self)
       ::oParent:lSuspendMsgsHandling := .F.

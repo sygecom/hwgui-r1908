@@ -571,7 +571,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
         oFrm:oCtrlSelected:handle != oCtrl:handle )
       handle := IIf( oCtrl!=Nil,oCtrl:oParent:handle, ;
                         oFrm:oCtrlSelected:oParent:handle )
-      nSh := IIf(nShift != Nil,nShift,GetKeyState(VK_SHIFT))       // nando po
+      nSh := IIf(nShift != Nil,nShift,hwg_GetKeyState(VK_SHIFT))       // nando po
       IF oFrm:oCtrlSelected != Nil
         // aqui desmarca o anterior nando colocou
             IF nsh >= 0    // nando pos

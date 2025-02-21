@@ -361,7 +361,7 @@ Local oItem, iCont, nCont
    #endif
 
    If HWindow():aWindows[1]:handle == hWnd
-      PostQuitMessage( 0 )
+      hwg_PostQuitMessage( 0 )
    Endif
 */
 return -1

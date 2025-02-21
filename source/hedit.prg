@@ -666,7 +666,7 @@ RETURN NIL
 
 FUNCTION IsCtrlShift(lCtrl, lShift)
    
-   LOCAL cKeyb := GetKeyboardState()
+   LOCAL cKeyb := hwg_GetKeyboardState()
 
    IF lCtrl == NIL
       lCtrl := .T.
@@ -1280,7 +1280,7 @@ METHOD When() CLASS HEdit
    ENDIF
 
    ::lFirst := .T.
-   nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
    IF hb_IsBlock(::bGetFocus)
       ::lnoValid := .T.
       IF ::cType == "D"

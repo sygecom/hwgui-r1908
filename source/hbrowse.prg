@@ -680,7 +680,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
                oParent := oParent:oParent
             ENDDO
             IF oParent != NIL .AND. !Empty(oParent:KeyList)
-               cKeyb := GetKeyboardState()
+               cKeyb := hwg_GetKeyboardState()
                nCtrl := IIf(Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(SubStr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
                IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nCtrl.AND.a[2] == wParam})) > 0
                   Eval(oParent:KeyList[nPos, 3], Self)
@@ -1068,7 +1068,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
             oParent := oParent:oParent
          ENDDO
          IF oParent != NIL .AND. !Empty(oParent:KeyList)
-            cKeyb := GetKeyboardState()
+            cKeyb := hwg_GetKeyboardState()
             nCtrl := IIf(Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, ;
                IIf(Asc(SubStr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
             IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nCtrl .AND. a[2] == wParam})) > 0
@@ -4065,7 +4065,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   ::rowPos++
                ENDIF
                ::lAppended := .T.
-               IF !(Getkeystate(VK_UP) < 0 .OR. Getkeystate(VK_DOWN) < 0)
+               IF !(hwg_GetKeyState(VK_UP) < 0 .OR. hwg_GetKeyState(VK_DOWN) < 0)
                   ::DoHScroll(SB_LINERIGHT)
                ENDIF
                ::Refresh(::nFootRows > 0)
@@ -4080,7 +4080,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                ELSE
                   Eval(oColumn:block, ::varbuf, Self, fipos)
                ENDIF
-               IF !(Getkeystate(VK_UP) < 0 .OR. Getkeystate(VK_DOWN) < 0 .OR. Getkeystate(VK_SPACE) < 0) .AND. Type != "L"
+               IF !(hwg_GetKeyState(VK_UP) < 0 .OR. hwg_GetKeyState(VK_DOWN) < 0 .OR. hwg_GetKeyState(VK_SPACE) < 0) .AND. Type != "L"
                   ::DoHScroll(SB_LINERIGHT)
                ENDIF
                ::lUpdated := .T.
@@ -4277,7 +4277,7 @@ METHOD When() CLASS HBrowse
    ENDIF
 
    IF hb_IsBlock(::bGetFocus)
-      nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
+      nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
       ::oParent:lSuspendMsgsHandling := .T.
       ::lnoValid := .T.
       //::setfocus()

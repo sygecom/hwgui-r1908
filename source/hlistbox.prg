@@ -364,7 +364,7 @@ METHOD When(oCtrl) CLASS HListBox
    IF !CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
-    nSkip := IIf(GetKeyState(VK_UP) < 0 .OR. (GetKeyState(VK_TAB) < 0 .AND. GetKeyState(VK_SHIFT) < 0), -1, 1)
+    nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::value, Self)
    ENDIF
@@ -389,7 +389,7 @@ METHOD Valid(oCtrl) CLASS HListBox
 
    LOCAL res
    LOCAL oDlg
-   //LOCAL ltab := GETKEYSTATE(VK_TAB) < 0
+   //LOCAL ltab := hwg_GetKeyState(VK_TAB) < 0
    //LOCAL nSkip
 
    HB_SYMBOL_UNUSED(oCtrl)
@@ -397,7 +397,7 @@ METHOD Valid(oCtrl) CLASS HListBox
    IF !CheckFocus(Self, .T.) .OR. ::lNoValid
       RETURN .T.
    ENDIF
-   //nSkip := IIf(GetKeyState(VK_SHIFT) < 0, - 1, 1)
+   //nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0, - 1, 1)
    IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
       ::value := hwg_SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
       IF hb_IsBlock(::bSetGet)

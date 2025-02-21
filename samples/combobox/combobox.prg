@@ -117,7 +117,7 @@ STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
 
    cTexto := TRIM(This:GetText())
    n := AScan(This:aitems, {|a|a = cTexto})
-   IF !Empty(cTexto) .AND. (GETKEYSTATE(VK_DELETE) + GETKEYSTATE(VK_BACK)) >= 0 .AND. n > 0
+   IF !Empty(cTexto) .AND. (hwg_GetKeyState(VK_DELETE) + hwg_GetKeyState(VK_BACK)) >= 0 .AND. n > 0
       This:SETVALUE(TRIM(This:aitems[n]))
       KEYB_EVENT(VK_END, .T., .T.)
    ENDIF

@@ -68,9 +68,9 @@ FUNCTION DlgGet()
    @ 320, 240 BUTTON "Enabled ?" SIZE 70, 32 ON CLICK {||IIf(oGet:IsEnabled(), hwg_MsgInfo("Yes"), hwg_MsgStop("No"))}
    @ 400, 240 BUTTON "Close" SIZE 50, 32 ON CLICK {||oModDlg:Close()}
 
-   @  10, 280 BUTTON "WinDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(Getwindowsdir())}
-   @ 120, 280 BUTTON "SystemDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(Getsystemdir())}
-   @ 230, 280 BUTTON "TempDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(Gettempdir())}
+   @  10, 280 BUTTON "WinDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(hwg_GetWindowsDir())}
+   @ 120, 280 BUTTON "SystemDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(hwg_GetSystemDir())}
+   @ 230, 280 BUTTON "TempDir" SIZE 100, 32 ON CLICK {||hwg_MsgInfo(hwg_GetTempDir())}
 
    ACTIVATE DIALOG oModDlg
    oFont:Release()

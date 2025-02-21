@@ -506,12 +506,12 @@ STATIC FUNCTION __When(oCtrl)
 
 STATIC FUNCTION __Valid(oCtrl)
    LOCAL res := .T., hctrl , nSkip, oDlg
-   LOCAL ltab :=  GETKEYSTATE(VK_TAB) < 0
+   LOCAL ltab :=  hwg_GetKeyState(VK_TAB) < 0
 
    IF !CheckFocus(oCtrl, .T.) .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
-   nSkip := IIf(GetKeyState(VK_SHIFT) < 0 , - 1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0 , - 1, 1)
    oCtrl:title := hwg_GetEditText(oCtrl:oParent:handle, oCtrl:id)
    oCtrl:value := Val(LTrim(oCtrl:title))
    IF oCtrl:bSetGet != NIL
