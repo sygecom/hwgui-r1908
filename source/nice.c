@@ -46,7 +46,7 @@ LRESULT CALLBACK NiceButtProc(HWND, UINT, WPARAM, LPARAM);
 
 static GRADIENTFILL s_pGradientfill = NULL;
 
-void Draw_Gradient(HDC hdc, int x, int y, int w, int h, int r, int g, int b)
+static void Draw_Gradient(HDC hdc, int x, int y, int w, int h, int r, int g, int b)
 {
   TRIVERTEX Vert[2];
   GRADIENT_RECT Rect;
@@ -92,7 +92,7 @@ void Draw_Gradient(HDC hdc, int x, int y, int w, int h, int r, int g, int b)
   s_pGradientfill(hdc, Vert, 2, &Rect, 1, GRADIENT_FILL_RECT_V);
 }
 
-void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode) // int , int g, int b, int nMode )
+static void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode) // int , int g, int b, int nMode )
 {
   TRIVERTEX Vert[2];
   GRADIENT_RECT Rect;
