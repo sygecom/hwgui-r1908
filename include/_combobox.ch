@@ -57,7 +57,7 @@
             [ ID <nId> ]               ;
             [ SIZE <width>, <height> ] ;
             [ DISPLAYCOUNT <nDisplay>] ;
-            [ ITEMHEIGHT <nhItem>    ] ; 
+            [ ITEMHEIGHT <nhItem>    ] ;
             [ COLUMNWIDTH <ncWidth>  ] ;
             [ MAXLENGTH <nMaxLength> ] ;
             [ COLOR <color> ]          ;
@@ -69,8 +69,8 @@
             [ TOOLTIP <ctoolt> ]       ;
             [ <edit: EDIT> ]           ;
             [ <text: TEXT> ]           ;
-            [ WHEN  <bGfocus> ]        ;
-            [ VALID <bLfocus> ]        ;
+            [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+            [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
     [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
@@ -78,8 +78,8 @@
                     <nStyle>,<x>,<y>,<width>,<height>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<ctoolt>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
-										<bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;
-    [ <oCombo>:name := <(oCombo)> ]                                                                      
+                    <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;
+    [ <oCombo>:name := <(oCombo)> ]
 
 
 #xcommand REDEFINE GET COMBOBOX [ <oCombo> VAR ] <vari> ;
@@ -91,11 +91,11 @@
             [ ON CHANGE <bChange> ]    ;
             [ FONT <oFont> ]           ;
             [ TOOLTIP <ctoolt> ]       ;
-            [ WHEN  <bGfocus> ]        ;
-            [ VALID <bLfocus> ]        ;
+            [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+            [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
             [ <edit: EDIT> ]           ;
-            [ <text: TEXT> ]           ;            
+            [ <text: TEXT> ]           ;
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
