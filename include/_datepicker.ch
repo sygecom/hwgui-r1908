@@ -34,7 +34,7 @@
              [ ON CHANGE <bChange> ]    ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
-             [<lShowTime: SHOWTIME>]    ;             
+             [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
              <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
@@ -49,8 +49,8 @@
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
-             [ WHEN <bGfocus> ]         ;
-             [ VALID <bLfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]         ;
+             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
