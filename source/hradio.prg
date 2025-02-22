@@ -385,7 +385,7 @@ METHOD Notify(lParam) CLASS HRadioButton
       RETURN 0
    ENDIF
 
-   IF PTRTOULONG(lParam) == WM_KEYDOWN
+   IF hwg_PtrToUlong(lParam) == WM_KEYDOWN
       IF hwg_GetKeyState(VK_RETURN) < 0 //.AND. ::oGroup:value < Len(::oGroup:aButtons)
          ::oParent:lSuspendMsgsHandling := .T.
          __VALID(Self)

@@ -161,7 +161,7 @@ METHOD FindWindow(hWndTitle) CLASS HWindow
    LOCAL i
 
    IF cType != "C"
-      i := AScan(::aWindows, {|o|PtrtoUlong(o:handle) == PtrtoUlong(hWndTitle)})
+      i := AScan(::aWindows, {|o|hwg_PtrToUlong(o:handle) == hwg_PtrToUlong(hWndTitle)})
    ELSE
       i := AScan(::aWindows, {|o|hb_IsChar(o:Title) .AND. o:Title == hWndTitle})
    ENDIF
@@ -181,11 +181,11 @@ FUNCTION ReleaseAllWindows(hWnd)
    LOCAL oItem
 
    FOR EACH oItem IN HWindow():aWindows
-      IF oItem:oParent != NIL .AND. PtrToUlong(oItem:oParent:handle) == PtrToUlong(hWnd)
+      IF oItem:oParent != NIL .AND. hwg_PtrToUlong(oItem:oParent:handle) == hwg_PtrToUlong(hWnd)
          hwg_SendMessage(oItem:handle, WM_CLOSE, 0, 0)
       ENDIF
    NEXT
-   IF PtrToUlong(HWindow():aWindows[1]:handle) == PtrToUlong(hWnd)
+   IF hwg_PtrToUlong(HWindow():aWindows[1]:handle) == hwg_PtrToUlong(hWnd)
       hwg_PostQuitMessage(0)
    ENDIF
 

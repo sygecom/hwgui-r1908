@@ -101,7 +101,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ::nInitFocus := IIf(hb_IsObject(::nInitFocus), ::nInitFocus:handle, ::nInitFocus)
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
-   ELSEIF PtrtoUlong(hwg_GetFocus()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
+   ELSEIF hwg_PtrToUlong(hwg_GetFocus()) == hwg_PtrToUlong(::handle) .AND. Len(::acontrols) > 0
       ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0 .AND. ;
          hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
@@ -528,17 +528,17 @@ STATIC FUNCTION onNotifyIcon(oWnd, wParam, lParam)
    LOCAL ar
 
    IF wParam == ID_NOTIFYICON
-      IF PtrtoUlong(lParam) == WM_LBUTTONDOWN
+      IF hwg_PtrToUlong(lParam) == WM_LBUTTONDOWN
          IF hb_IsBlock(oWnd:bNotify)
             Eval(oWnd:bNotify)
          ENDIF
-      ELSEIF PtrtoUlong(lParam) == WM_MOUSEMOVE
+      ELSEIF hwg_PtrToUlong(lParam) == WM_MOUSEMOVE
          //IF hb_IsBlock(oWnd:bNotify)
          //   oWnd:lSuspendMsgsHandling := .T.
          //   Eval(oWnd:bNotify)
          //   oWnd:lSuspendMsgsHandling := .F.
          //ENDIF
-      ELSEIF PtrtoUlong(lParam) == WM_RBUTTONDOWN
+      ELSEIF hwg_PtrToUlong(lParam) == WM_RBUTTONDOWN
          IF oWnd:oNotifyMenu != NIL
             ar := hwg_GetCursorPos()
             oWnd:oNotifyMenu:Show(oWnd, ar[1], ar[2])
@@ -592,7 +592,7 @@ STATIC FUNCTION onActivate(oWin, wParam, lParam)
    HB_SYMBOL_UNUSED(lParam)
 
    IF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. hwg_IsWindowVisible(oWin:handle)
-      IF (oWin:type == WND_MDICHILD .AND. PtrtoUlong(lParam) == 0) .OR. (oWin:type != WND_MDICHILD .AND. iParHigh == 0)
+      IF (oWin:type == WND_MDICHILD .AND. hwg_PtrToUlong(lParam) == 0) .OR. (oWin:type != WND_MDICHILD .AND. iParHigh == 0)
          IF oWin:bGetFocus != NIL //.AND. hwg_IsWindowVisible(::handle)
             oWin:lSuspendMsgsHandling := .T.
             IF iParHigh > 0 // MINIMIZED
@@ -603,8 +603,8 @@ STATIC FUNCTION onActivate(oWin, wParam, lParam)
          ENDIF
       ENDIF
    ELSEIF iParLow == WA_INACTIVE
-      IF (oWin:type == WND_MDICHILD .AND. PtrtoUlong(lParam) != 0) .OR. ;
-         (oWin:type != WND_MDICHILD .AND. iParHigh == 0 .AND. PtrtoUlong(lParam) == 0)
+      IF (oWin:type == WND_MDICHILD .AND. hwg_PtrToUlong(lParam) != 0) .OR. ;
+         (oWin:type != WND_MDICHILD .AND. iParHigh == 0 .AND. hwg_PtrToUlong(lParam) == 0)
          IF oWin:bLostFocus != NIL //.AND. hwg_IsWindowVisible(::handle)
             oWin:lSuspendMsgsHandling := .T.
             Eval(oWin:bLostFocus, oWin, lParam)

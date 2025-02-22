@@ -158,7 +158,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
       ::nInitFocus := IIf(hb_IsObject(::nInitFocus), ::nInitFocus:handle, ::nInitFocus)
       hwg_SetFocus(::nInitFocus)
       ::nFocus := ::nInitFocus
-   ELSEIF PtrtoUlong(hwg_GetFocus()) == PtrtoUlong(::handle) .AND. Len(::acontrols) > 0
+   ELSEIF hwg_PtrToUlong(hwg_GetFocus()) == hwg_PtrToUlong(::handle) .AND. Len(::acontrols) > 0
       ::nFocus := ASCAN(::aControls, {|o|hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0 .AND. ;
          hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_DISABLED) == 0})
       IF ::nFocus > 0
@@ -579,7 +579,7 @@ STATIC FUNCTION onMdiCommand(oWnd, wParam)
    ENDIF
    IF oWnd:aEvents != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
-      IF PtrtouLong(hwg_GetParent(hwg_GetFocus())) == PtrtouLong(oWnd:handle)
+      IF hwg_PtrToUlong(hwg_GetParent(hwg_GetFocus())) == hwg_PtrToUlong(oWnd:handle)
          oWnd:nFocus := hwg_GetFocus()
       ENDIF
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
@@ -663,7 +663,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(wParam), ;
+         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. hwg_PtrToUlong(w:handle) != hwg_PtrToUlong(wParam), ;
             hwg_EnableWindow(w:handle, .T.),)})
       ENDIF
    ELSEIF hwg_SelfFocus(oWnd:handle, lParam) //.AND. ownd:screen:handle != WPARAM
@@ -672,7 +672,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
       ENDIF
       IF oWnd:lModal
          aWndMain := oWnd:GETMAIN():aWindows
-         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. PtrtoUlong(w:handle) != PtrtoUlong(lParam), ;
+         AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. hwg_PtrToUlong(w:handle) != hwg_PtrToUlong(lParam), ;
             hwg_EnableWindow(w:handle, .F.),)})
          AEval(oWnd:aChilds,{|wH|hwg_EnableWindow(wH, .T.)})
      ENDIF

@@ -154,7 +154,7 @@ RETURN NIL
 
 METHOD FindControl(nId, nHandle) CLASS HCustomWindow
 
-   LOCAL bSearch := IIf(nId != NIL, {|o|o:id == nId}, {|o|PtrtoUlong(o:handle) == PtrtoUlong(nHandle)})
+   LOCAL bSearch := IIf(nId != NIL, {|o|o:id == nId}, {|o|hwg_PtrToUlong(o:handle) == hwg_PtrToUlong(nHandle)})
    LOCAL i := Len(::aControls)
    LOCAL oCtrl
 

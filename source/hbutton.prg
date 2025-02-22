@@ -254,7 +254,7 @@ METHOD Notify(lParam) CLASS HButton
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
    //
-   IF PtrtoUlong(lParam) == WM_KEYDOWN
+   IF hwg_PtrToUlong(lParam) == WM_KEYDOWN
       IF ::oParent:Classname == "HTAB"
          IF hwg_GetFocus() != ::handle
             hwg_InvalidateRect(::handle, 0)

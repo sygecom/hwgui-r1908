@@ -898,7 +898,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
-      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. PtrtouLong(hwg_GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
+      IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
           GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
           ::GetParentForm():nInitFocus := 0
       ENDIF
@@ -1042,7 +1042,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
-         PtrtouLong(hwg_GetParent(::GetParentForm():nInitFocus)) == PtrtouLong(::handle)
+         hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
          GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
          ::GetParentForm():nInitFocus := 0
       ENDIF
@@ -1073,12 +1073,12 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    ENDIF
    nPageEnable := IIf(nPageEnable == NIL, 0, nPageEnable)
    nEvent := IIf(nEvent == NIL, 0, nEvent)
-   IF PtrtoUlong(nPageEnable) > 128
+   IF hwg_PtrToUlong(nPageEnable) > 128
       pt[1] := hwg_LOWORD(nPageEnable)
       pt[2] := hwg_HIWORD(nPageEnable)
    ENDIF
    FOR i := 1 TO Len(::Pages)
-      IF !::pages[i]:enabled .OR. i == PtrtoUlong(nPageEnable)
+      IF !::pages[i]:enabled .OR. i == hwg_PtrToUlong(nPageEnable)
          //client_rect := ::Pages[i]:aItemPos
          client_rect := TabItemPos(::handle, i - 1)
          IF (PtInRect(client_rect, pt)) .AND. i != nPageEnable

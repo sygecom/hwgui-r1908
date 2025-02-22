@@ -306,7 +306,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    IF msg == WM_KEYDOWN
 
 #ifdef __XHARBOUR__
-      IF hb_BitIsSet(PtrtoUlong(lParam), 30)  // the key was down before ?
+      IF hb_BitIsSet(hwg_PtrToUlong(lParam), 30)  // the key was down before ?
 #else
       IF hb_BitTest(lParam, 30)   // the key was down before ?
 #endif
@@ -501,7 +501,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
    CASE WM_KEYDOWN
       #ifdef __XHARBOUR__
-      IF hb_BitIsSet(PtrtoUlong(lParam), 30)  // the key was down before ?
+      IF hb_BitIsSet(hwg_PtrToUlong(lParam), 30)  // the key was down before ?
       #else
       IF hb_BitTest(lParam, 30)   // the key was down before ?
       #endif

@@ -552,7 +552,7 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
 
    oDlg:nInitFocus := IIf(hb_IsObject(oDlg:nInitFocus), oDlg:nInitFocus:handle, oDlg:nInitFocus)
    IF !Empty(oDlg:nInitFocus)
-      IF PtrtouLong(oDlg:FindControl(, oDlg:nInitFocus):oParent:handle) == PtrtouLong(oDlg:handle)
+      IF hwg_PtrToUlong(oDlg:FindControl(, oDlg:nInitFocus):oParent:handle) == hwg_PtrToUlong(oDlg:handle)
          hwg_SetFocus(oDlg:nInitFocus)
       ENDIF
       nReturn := 0
@@ -888,7 +888,7 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
          Eval(oDlg:bOnActivate, oDlg)
          //-oDlg:lSuspendMsgsHandling := .F.
       ENDIF
-   ELSEIF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. hwg_IsWindowVisible(oDlg:handle) //.AND. PtrtoUlong(lParam) == 0
+   ELSEIF (iParLow == WA_ACTIVE .OR. iParLow == WA_CLICKACTIVE) .AND. hwg_IsWindowVisible(oDlg:handle) //.AND. hwg_PtrToUlong(lParam) == 0
       IF hb_IsBlock(oDlg:bGetFocus) //.AND. hwg_IsWindowVisible(::handle)
          oDlg:lSuspendMsgsHandling := .T.
          IF iParHigh > 0  // MINIMIZED
@@ -897,7 +897,7 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
          Eval(oDlg:bGetFocus, oDlg, lParam)
          oDlg:lSuspendMsgsHandling := .F.
       ENDIF
-   ELSEIF iParLow == WA_INACTIVE .AND. hb_IsBlock(oDlg:bLostFocus) //.AND. PtrtoUlong(lParam) == 0
+   ELSEIF iParLow == WA_INACTIVE .AND. hb_IsBlock(oDlg:bLostFocus) //.AND. hwg_PtrToUlong(lParam) == 0
       oDlg:lSuspendMsgsHandling := .T.
       Eval(oDlg:bLostFocus, oDlg, lParam)
       oDlg:lSuspendMsgsHandling := .F.

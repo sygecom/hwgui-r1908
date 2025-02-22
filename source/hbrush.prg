@@ -38,7 +38,7 @@ METHOD Add(nColor, nHatch) CLASS HBrush
       nHatch := 99
    ENDIF
    IF hb_IsPointer(nColor)
-      nColor := PTRTOULONG(nColor)
+      nColor := hwg_PtrToUlong(nColor)
    ENDIF
    FOR EACH item IN ::aBrushes
       IF item:color == nColor .AND. item:nHatch == nHatch

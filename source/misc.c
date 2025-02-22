@@ -865,10 +865,14 @@ HB_FUNC(GETNEXTDLGGROUPITEM)
   hwg_ret_HWND(GetNextDlgGroupItem(hwg_par_HWND(1), hwg_par_HWND(2), hb_parl(3)));
 }
 
-HB_FUNC(PTRTOULONG)
+HB_FUNC(HWG_PTRTOULONG)
 {
   hb_retnl(HB_ISPOINTER(1) ? (LONG)PtrToUlong(hb_parptr(1)) : hb_parnl(1));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PTRTOULONG, HWG_PTRTOULONG);
+#endif
 
 HB_FUNC(OUTPUTDEBUGSTRING)
 {

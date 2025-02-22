@@ -3547,7 +3547,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
    ENDIF
 
 ELSEIF nLine == 0
-   IF PtrtouLong(s_oCursor) ==  PtrtouLong(s_ColSizeCursor)
+   IF hwg_PtrToUlong(s_oCursor) ==  hwg_PtrToUlong(s_ColSizeCursor)
       ::lResizing := .T.
       ::isMouseOver := .F.
       hwg_SetCursor(s_oCursor)
@@ -3569,7 +3569,7 @@ ELSEIF nLine == 0
       ::lHeadClick := .T.
    ENDIF
 ENDIF
-   IF (PtrtouLong(hwg_GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
+   IF (hwg_PtrToUlong(hwg_GetActiveWindow()) == hwg_PtrToUlong(::GetParentForm():handle) .OR. ;
        ::GetParentForm():Type < WND_DLG_RESOURCE)
        ::SetFocus()
        ::RefreshLine()
@@ -3627,7 +3627,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
      hwg_SetCursor(s_downCursor)
    ENDIF
    /*
-   IF PtrtouLong(hwg_GetActiveWindow()) == PtrtouLong(::GetParentForm():handle) .OR. ;
+   IF hwg_PtrToUlong(hwg_GetActiveWindow()) == hwg_PtrToUlong(::GetParentForm():handle) .OR. ;
        ::GetParentForm():Type < WND_DLG_RESOURCE
        ::SetFocus()
    ENDIF
@@ -3765,7 +3765,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
                x += ::aColumns[i]:width
                ::xPosMouseOver := xPos
                IF Abs(x - xPos) < 8
-                  IF PtrtouLong(s_oCursor) != PtrtouLong(s_ColSizeCursor)
+                  IF hwg_PtrToUlong(s_oCursor) != hwg_PtrToUlong(s_ColSizeCursor)
                      s_oCursor := s_ColSizeCursor
                   ENDIF
                   hwg_SetCursor(s_oCursor)
