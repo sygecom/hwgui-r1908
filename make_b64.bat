@@ -10,7 +10,7 @@ if not exist obj\b64\bin md obj\b64\bin
 if not exist obj\b64\mt md obj\b64\mt
 :BUILD
 
-set C_USR=-Wno-visibility -Wno-missing-declarations -Wno-deprecated-declarations
+set C_USR=-Wno-visibility -Wno-missing-declarations -Wno-deprecated-declarations -Wno-int-to-pointer-cast
 
 rem   make -fmakefile.bc  > make_b32.log
 rem   if errorlevel 1 goto BUILD_ERR
