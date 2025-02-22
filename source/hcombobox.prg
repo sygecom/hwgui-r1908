@@ -85,7 +85,11 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
       nStyle := hwg_BitOr(nStyle, CBS_NOINTEGRALHEIGHT  + WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
+      #ifdef __SYGECOM__
+      nDisplay := 10
+      #else
       nDisplay := 6
+      #endif
    ENDIF
    nHeight := IIf(Empty(nHeight), 24, nHeight)
    ::nHeightBox := Int(nHeight * 0.75)                    //   Meets A 22'S EDITBOX
@@ -201,7 +205,11 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPa
       ::Style := hwg_BitOr(::Style, CBS_NOINTEGRALHEIGHT) //+ WS_VSCROLL)
       // CBS_NOINTEGRALHEIGHT. CRIATE VERTICAL SCROOL BAR
    ELSE
+      #ifdef __SYGECOM__
+      nDisplay := 10
+      #else
       nDisplay := 6
+      #endif
    ENDIF
    //::nHeight := (::nHeight + 16.250) * nDisplay
    ::lResource := .T.
