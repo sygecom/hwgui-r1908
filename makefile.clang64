@@ -78,6 +78,8 @@ $(LIB_DIR)/libhwgui.a : \
    $(OBJ_DIR)/hrect.o \
    $(OBJ_DIR)/hriched.o \
    $(OBJ_DIR)/hsayimg.o \
+   $(OBJ_DIR)/hsaybmp.o \
+   $(OBJ_DIR)/hsayicon.o \
    $(OBJ_DIR)/hshbtn.o \
    $(OBJ_DIR)/hsplash.o \
    $(OBJ_DIR)/hsplit.o \

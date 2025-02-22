@@ -106,6 +106,8 @@ HWGUI_LIB_OBJS = \
    $(OBJ_DIR)\hradio.obj \
    $(OBJ_DIR)\hriched.obj \
    $(OBJ_DIR)\hsayimg.obj \
+   $(OBJ_DIR)\hsaybmp.obj \
+   $(OBJ_DIR)\hsayicon.obj \
    $(OBJ_DIR)\hshbtn.obj \
    $(OBJ_DIR)\hsplit.obj \
    $(OBJ_DIR)\htab.obj \
@@ -407,6 +409,12 @@ $(OBJ_DIR)\hsayimg.c : $(SRC_DIR)\hsayimg.prg
    $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@
 
 $(OBJ_DIR)\hsayimg.obj : $(OBJ_DIR)\hsayimg.c
+   $(CC_EXE) $(CFLAGS) -fo$@ $**
+
+$(OBJ_DIR)\hsayicon.c : $(SRC_DIR)\hsayicon.prg
+   $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@
+
+$(OBJ_DIR)\hsayicon.obj : $(OBJ_DIR)\hsayicon.c
    $(CC_EXE) $(CFLAGS) -fo$@ $**
 
 $(OBJ_DIR)\hshbtn.obj : $(OBJ_DIR)\hshbtn.c

@@ -173,6 +173,8 @@ HWGUI_LIB_OBJS = \
    $(HWGUI_OBJ_DIR)\hrebar.obj \
    $(HWGUI_OBJ_DIR)\hriched.obj \
    $(HWGUI_OBJ_DIR)\hsayimg.obj \
+   $(HWGUI_OBJ_DIR)\hsaybmp.obj \
+   $(HWGUI_OBJ_DIR)\hsayicon.obj \
    $(HWGUI_OBJ_DIR)\hshbtn.obj \
    $(HWGUI_OBJ_DIR)\hsplash.obj \
    $(HWGUI_OBJ_DIR)\hsplit.obj \

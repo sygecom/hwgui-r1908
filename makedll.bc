@@ -95,6 +95,8 @@ $(LIB_DIR)\hwgui-b32.dll:   \
    $(OBJ_DIR)\hradio.obj \
    $(OBJ_DIR)\hriched.obj \
    $(OBJ_DIR)\hsayimg.obj \
+   $(OBJ_DIR)\hsaybmp.obj \
+   $(OBJ_DIR)\hsayicon.obj \
    $(OBJ_DIR)\hsplash.obj \
    $(OBJ_DIR)\hsplit.obj \
    $(OBJ_DIR)\htab.obj \
