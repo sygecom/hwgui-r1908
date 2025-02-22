@@ -304,21 +304,36 @@ METHOD INIT() CLASS HComboBox
          IF ::lText
             IF ::lEdit
                hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
+               #ifdef __SYGECOM__
+               #else
                hwg_SendMessage(::handle, CB_SELECTSTRING, -1, ::value)
                hwg_SendMessage(::handle, CB_SETEDITSEL, -1, 0)
+               #endif
             ELSE
                #ifdef __XHARBOUR__
+               #ifdef __SYGECOM__
+               hwg_ComboSetString(::handle, AScan(::aItems, AllTrim(::value)))
+               #else
                hwg_ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
+               #endif
                #else
                hwg_ComboSetString(::handle, hb_AScan(::aItems, ::value, , , .T.))
                #endif
             ENDIF
+            #ifdef __SYGECOM__
+            hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
+            #else
             //hwg_SendMessage(::handle, CB_SELECTSTRING, 0, ::value)
+            #endif
             hwg_SetWindowText(::handle, ::value)
          ELSE
             hwg_ComboSetString(::handle, ::value)
          ENDIF
+         #ifdef __SYGECOM__
+         avgwidth := hwg_GetFontDialogUnits(::oParent:handle)
+         #else
          avgwidth := hwg_GetFontDialogUnits(::oParent:handle) + 0.75 //, ::oParent:oFont:handle)
+         #endif
          NewLongComboWidth := (LongComboWidth - 2) * avgwidth
          hwg_SendMessage(::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0)
       ENDIF
@@ -625,7 +640,11 @@ METHOD Refresh() CLASS HComboBox
          hwg_SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__
+      #ifdef __SYGECOM__
+      hwg_ComboSetString(::handle, AScan(::aItems, ::value))
+      #else
       hwg_ComboSetString(::handle, AScan(::aItems, ::value, , , .T.))
+      #endif
       #else
       hwg_ComboSetString(::handle, hb_AScan(::aItems, ::value, , , .T.))
       #endif
@@ -744,7 +763,11 @@ METHOD GetValueBound(xItem) CLASS HComboBox
       IF ::lText
           //nPos := IIf(::Value == NIL, 0, AScan(::aItems, ::Value))
           #ifdef __XHARBOUR__
+          #ifdef __SYGECOM__
+          nPos := IIf(::Value == NIL, 0, AScan(::aItems, ::value))
+          #else
           nPos := IIf(::Value == NIL, 0, AScan(::aItems, ::value, , , .T.))
+          #endif
           #else
           nPos := IIf(::Value == NIL, 0, hb_AScan(::aItems, ::value, , , .T.))
           #endif
@@ -752,7 +775,11 @@ METHOD GetValueBound(xItem) CLASS HComboBox
    ELSE
       //nPos := AScan(::aItemsBound, xItem)
       #ifdef __XHARBOUR__
+      #ifdef __SYGECOM__
+      nPos := AScan(::aItemsBound, xItem)
+      #else
       nPos := AScan(::aItemsBound, xItem, , , .T.)
+      #endif
       #else
       nPos := hb_AScan(::aItemsBound, xItem, , , .T.)
       #endif
