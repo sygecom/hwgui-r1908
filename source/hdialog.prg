@@ -16,6 +16,14 @@
 #define WM_PSPNOTIFY WM_USER + 1010
 #define FLAG_CHECK 2
 
+#ifdef __SYGECOM__
+#ifdef __COMPILER_BCC77__
+   #define SYG_AUMENTA_TELA   10
+#else
+   #define SYG_AUMENTA_TELA   0
+#endif
+#endif
+
 STATIC s_aSheet := NIL
 #if 0 // old code for reference (to be deleted)
 STATIC s_aMessModalDlg := { ;
@@ -193,13 +201,21 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
          ::lModal := .T.
          ::Add()
          // hwg_DlgBoxIndirect(HWindow():GetMain():handle, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         #ifdef __SYGECOM
+         Hwg_DlgBoxIndirect(hwg_GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth + SYG_AUMENTA_TELA, ::nHeight + SYG_AUMENTA_TELA, ::style)
+         #else
          hwg_DlgBoxIndirect(hwg_GetActiveWindow(), Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         #endif
       ELSE
          ::lModal  := .F.
          ::handle  := 0
          ::lResult := .F.
          ::Add()
+         #ifdef __SYGECOM__
+         Hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth + SYG_AUMENTA_TELA, ::nHeight + SYG_AUMENTA_TELA, ::style)
+         #else
          hwg_CreateDlgIndirect(hParent, Self, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
+         #endif
          IF ::WindowState > SW_HIDE
             //hwg_InvalidateRect(::handle, 1)
             //hwg_BringToTop(::handle)
