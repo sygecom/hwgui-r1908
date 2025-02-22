@@ -21,7 +21,11 @@ CLASS HStatic INHERIT HControl
 
    CLASS VAR winclass INIT "STATIC"
 
+   #ifdef __SYGECOM__
+   DATA AutoSize INIT .T.
+   #else
    DATA AutoSize INIT .F.
+   #endif
    //DATA lTransparent INIT .F. HIDDEN
    DATA nStyleHS
    DATA bClick
