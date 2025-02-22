@@ -68,6 +68,8 @@ $(LIB_DIR)/libhwgui.a : \
    $(OBJ_DIR)/hprinter.o \
    $(OBJ_DIR)/hradio.o \
    $(OBJ_DIR)/hsayimg.o \
+   $(OBJ_DIR)/hsaybmp.o \
+   $(OBJ_DIR)/hsayicon.o \
    $(OBJ_DIR)/hsplit.o \
    $(OBJ_DIR)/htab.o \
    $(OBJ_DIR)/htimer.o \

@@ -99,6 +99,8 @@ source/hpager.prg
 source/hrebar.prg
 source/hriched.prg
 source/hsayimg.prg
+source/hsaybmp.prg
+source/hsayicon.prg
 source/hshbtn.prg
 source/hsplash.prg
 source/hsplit.prg

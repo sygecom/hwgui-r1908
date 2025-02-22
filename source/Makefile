@@ -70,6 +70,8 @@ PRG_SOURCES=\
 	htree.prg \
 	hsplit.prg \
 	hsayimg.prg \
+	hsaybmp.prg \
+	hsayicon.prg \
 	hshbtn.prg \
 	richtext.prg \
 	hnice.prg \

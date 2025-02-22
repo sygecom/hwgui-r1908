@@ -861,8 +861,8 @@ Function StatusBarMsg(cfile,cpos,ctam)
   WriteStatus(oDesigner:oMainWnd, 3,ctam ,.T.)
 
   *WriteStatus(OdLG, 4, "INS", .T.)
-  WriteStatus(oDesigner:oMainWnd, 5,IIf(IsNUmLockActive(),"NUM" ,"   "),.T.)
-  WriteStatus(oDesigner:oMainWnd, 6,IIf(IsCapsLockActive(),"CAPS","    ") ,.T.)
+  WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(),"NUM" ,"   "),.T.)
+  WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(),"CAPS","    ") ,.T.)
 
 RETURN Nil
 
