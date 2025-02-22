@@ -101,7 +101,11 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
    DEFAULT iStyle TO ST_ALIGN_HORIZ
    DEFAULT Transp TO .T.
+   #ifdef __SYGECOM__
+   DEFAULT nPictureMargin TO 1
+   #else
    DEFAULT nPictureMargin TO 0
+   #endif
    DEFAULT lnoThemes  TO .F.
 
    ::m_bLButtonDown := .F.
