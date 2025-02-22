@@ -1,5 +1,5 @@
 # hwgui-r1908
-HWGUI r1908 para testes com Harbour e xHarbour 32-bit/64-bit
+HWGUI r1908 (fork) para Harbour e xHarbour 32-bit/64-bit
 
 # Compatibilidade
 
@@ -66,3 +66,6 @@ atualizar e recompilar após estes commits.
 A flag 'HWGUI_FUNC_TRANSLATE_ON' ativa o redirecionamento das funções sem o prefixo 'HWG_' para as funções com prefixo,
 podendo ser utilizada em casos onde o código-fonte do desenvolvedor ainda não foi atualizado. Caso tenha dúvidas ou problemas
 na utilização desta flag, utilize a seção Issues para relatar a dúvida ou problema.
+
+A flag '__SYGECOM__' é utilizada para personalizar o código-fonte para utilização por um usuário específico. Apenas
+ignore esta flag, caso não faça parte das partes envolvidas nestas personalizações.
