@@ -94,8 +94,8 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
       ENDMENU
       MENU TITLE "&Options"
          MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
-         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
          MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (CheckMenuItem(,IDM_MOUSE2,!IsCheckedMenuItem(,IDM_MOUSE2)))
       ENDMENU
       MENUITEM "&About" ID IDM_ABOUT ACTION About()
@@ -253,9 +253,9 @@ Local step, kolsteps, nsteps
    kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF],0)- ;
       (aCoors[4]-aCoors[2]-TOP_INDENT) ) / step, 0 ) + 1
    IF lPreview
-      SetScrollInfo( hWnd, SB_VERT, 1 )
+      hwg_SetScrollInfo( hWnd, SB_VERT, 1 )
    ELSE
-      SetScrollInfo( hWnd, SB_VERT, 1, nSteps+1, 1, kolsteps+1 )
+      hwg_SetScrollInfo( hWnd, SB_VERT, 1, nSteps+1, 1, kolsteps+1 )
    ENDIF
 
    hwg_EndPaint( hWnd, pps )

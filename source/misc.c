@@ -576,12 +576,16 @@ HB_FUNC(HWG_WINHELP)
 HB_FUNC_TRANSLATE(WINHELP, HWG_WINHELP);
 #endif
 
-HB_FUNC(GETNEXTDLGTABITEM)
+HB_FUNC(HWG_GETNEXTDLGTABITEM)
 {
   hwg_ret_HWND(GetNextDlgTabItem(hwg_par_HWND(1), hwg_par_HWND(2), hb_parl(3)));
 }
 
-HB_FUNC(SLEEP)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETNEXTDLGTABITEM, HWG_GETNEXTDLGTABITEM);
+#endif
+
+HB_FUNC(HWG_SLEEP)
 {
   if (hb_parinfo(1))
   {
@@ -589,7 +593,11 @@ HB_FUNC(SLEEP)
   }
 }
 
-HB_FUNC(KEYB_EVENT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SLEEP, HWG_SLEEP);
+#endif
+
+HB_FUNC(HWG_KEYB_EVENT) // TODO: a função da WinAPi se chama keybd_event
 {
   DWORD dwFlags = (!(HB_ISNIL(2)) && hb_parl(2)) ? KEYEVENTF_EXTENDEDKEY : 0;
   int bShift = (!(HB_ISNIL(3)) && hb_parl(3)) ? TRUE : FALSE;
@@ -626,9 +634,13 @@ HB_FUNC(KEYB_EVENT)
   }
 }
 
-/* SetScrollInfo(hWnd, nType, nRedraw, nPos, nPage, nmax)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(KEYB_EVENT, HWG_KEYB_EVENT);
+#endif
+
+/* hwg_SetScrollInfo(hWnd, nType, nRedraw, nPos, nPage, nmax)
  */
-HB_FUNC(SETSCROLLINFO)
+HB_FUNC(HWG_SETSCROLLINFO)
 {
   SCROLLINFO si;
   UINT fMask = (hb_pcount() < 4) ? SIF_DISABLENOSCROLL : 0;
@@ -661,7 +673,11 @@ HB_FUNC(SETSCROLLINFO)
   );
 }
 
-HB_FUNC(GETSCROLLRANGE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETSCROLLINFO, HWG_SETSCROLLINFO);
+#endif
+
+HB_FUNC(HWG_GETSCROLLRANGE)
 {
   int MinPos, MaxPos;
 
@@ -674,26 +690,42 @@ HB_FUNC(GETSCROLLRANGE)
   hb_storni(MaxPos, 4);
 }
 
-HB_FUNC(SETSCROLLRANGE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETSCROLLRANGE, HWG_GETSCROLLRANGE);
+#endif
+
+HB_FUNC(HWG_SETSCROLLRANGE)
 {
   hwg_ret_BOOL(SetScrollRange(hwg_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parl(5)));
 }
 
-HB_FUNC(GETSCROLLPOS)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETSCROLLRANGE, HWG_SETSCROLLRANGE);
+#endif
+
+HB_FUNC(HWG_GETSCROLLPOS)
 {
   hb_retni(GetScrollPos(hwg_par_HWND(1), // handle of window with scroll bar
                         hb_parni(2)      // scroll bar flags
                         ));
 }
 
-HB_FUNC(SETSCROLLPOS)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETSCROLLPOS, HWG_GETSCROLLPOS);
+#endif
+
+HB_FUNC(HWG_SETSCROLLPOS)
 {
   SetScrollPos(hwg_par_HWND(1), // handle of window with scroll bar
                hb_parni(2),     // scroll bar flags
                hb_parni(3), TRUE);
 }
 
-HB_FUNC(SHOWSCROLLBAR)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETSCROLLPOS, HWG_SETSCROLLPOS);
+#endif
+
+HB_FUNC(HWG_SHOWSCROLLBAR)
 {
   ShowScrollBar(hwg_par_HWND(1), // handle of window with scroll bar
                 hb_parni(2),     // scroll bar flags
@@ -701,10 +733,18 @@ HB_FUNC(SHOWSCROLLBAR)
   );
 }
 
-HB_FUNC(SCROLLWINDOW)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SHOWSCROLLBAR, HWG_SHOWSCROLLBAR);
+#endif
+
+HB_FUNC(HWG_SCROLLWINDOW)
 {
   ScrollWindow(hwg_par_HWND(1), hb_parni(2), hb_parni(3), NULL, NULL);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SCROLLWINDOW, HWG_SCROLLWINDOW);
+#endif
 
 HB_FUNC(ISCAPSLOCKACTIVE)
 {
@@ -867,17 +907,25 @@ HB_FUNC(HEDITEX_CTLCOLOR)
   hwg_ret_HBRUSH(hBrush);
 }
 
-HB_FUNC(GETKEYBOARDCOUNT)
+HB_FUNC(HGW_GETKEYBOARDCOUNT)
 {
   LPARAM lParam = hwg_par_LPARAM(1);
 
   hb_retni((WORD)lParam);
 }
 
-HB_FUNC(GETNEXTDLGGROUPITEM)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETKEYBOARDCOUNT, HWG_GETKEYBOARDCOUNT);
+#endif
+
+HB_FUNC(HWG_GETNEXTDLGGROUPITEM)
 {
   hwg_ret_HWND(GetNextDlgGroupItem(hwg_par_HWND(1), hwg_par_HWND(2), hb_parl(3)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETNEXTDLGGROUPITEM, HWG_GETNEXTDLGGROUPITEM);
+#endif
 
 HB_FUNC(HWG_PTRTOULONG)
 {

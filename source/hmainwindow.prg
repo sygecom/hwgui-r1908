@@ -254,7 +254,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
                hwg_MsgBeep()
                FOR i := 1 TO 6
                   hwg_FlashWindow(oMdi:handle, 1)
-                  Sleep(60)
+                  hwg_Sleep(60)
                NEXT
                hwg_SetWindowPos(oMdi:handle, HWND_TOP, 0, 0, 0, 0, ;
                              SWP_NOMOVE + SWP_NOSIZE +  SWP_NOOWNERZORDER + SWP_FRAMECHANGED)
@@ -310,7 +310,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
                hwg_MsgBeep()
                FOR i := 1 TO 6
                   hwg_FlashWindow(oMdi:handle, 1)
-                  Sleep(60)
+                  hwg_Sleep(60)
                NEXT
                hwg_SetWindowPos(oMdi:handle, HWND_TOP, 0, 0, 0, 0, ;
                   SWP_NOMOVE + SWP_NOSIZE + SWP_NOOWNERZORDER + SWP_FRAMECHANGED)

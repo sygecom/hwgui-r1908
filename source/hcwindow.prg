@@ -595,8 +595,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
       nInc := Max(-oForm:nVscrollPos, Min(nInc, oForm:nVscrollMax - oForm:nVscrollPos))
       oForm:nVscrollPos += nInc
       nDelta := -VERT_PTS * nInc
-      ScrollWindow(oForm:handle, 0, nDelta) //, NIL, NIL)
-      SetScrollPos(oForm:handle, SB_VERT, oForm:nVscrollPos, .T.)
+      hwg_ScrollWindow(oForm:handle, 0, nDelta) //, NIL, NIL)
+      hwg_SetScrollPos(oForm:handle, SB_VERT, oForm:nVscrollPos, .T.)
 
    ELSEIF (msg == WM_HSCROLL) //.OR. msg == WM_MOUSEWHEEL
     // Handle vertical scrollbar messages
@@ -651,8 +651,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
       nInc := max(-oForm:nHscrollPos, min(nInc, oForm:nHscrollMax - oForm:nHscrollPos))
       oForm:nHscrollPos += nInc
       nDelta := -HORZ_PTS * nInc
-      ScrollWindow(oForm:handle, nDelta, 0) //, NIL, NIL)
-      SetScrollPos(oForm:handle, SB_HORZ, oForm:nHscrollPos, .T.)
+      hwg_ScrollWindow(oForm:handle, nDelta, 0) //, NIL, NIL)
+      hwg_SetScrollPos(oForm:handle, SB_HORZ, oForm:nHscrollPos, .T.)
    ENDIF
    RETURN NIL
 #else
@@ -710,8 +710,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
       nInc := Max(-oForm:nVscrollPos, Min(nInc, oForm:nVscrollMax - oForm:nVscrollPos))
       oForm:nVscrollPos += nInc
       nDelta := -VERT_PTS * nInc
-      ScrollWindow(oForm:handle, 0, nDelta) //, NIL, NIL)
-      SetScrollPos(oForm:handle, SB_VERT, oForm:nVscrollPos, .T.)
+      hwg_ScrollWindow(oForm:handle, 0, nDelta) //, NIL, NIL)
+      hwg_SetScrollPos(oForm:handle, SB_VERT, oForm:nVscrollPos, .T.)
 
    CASE WM_HSCROLL
       // Handle horizontal scrollbar messages
@@ -748,8 +748,8 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
       nInc := max(-oForm:nHscrollPos, min(nInc, oForm:nHscrollMax - oForm:nHscrollPos))
       oForm:nHscrollPos += nInc
       nDelta := -HORZ_PTS * nInc
-      ScrollWindow(oForm:handle, nDelta, 0) //, NIL, NIL)
-      SetScrollPos(oForm:handle, SB_HORZ, oForm:nHscrollPos, .T.)
+      hwg_ScrollWindow(oForm:handle, nDelta, 0) //, NIL, NIL)
+      hwg_SetScrollPos(oForm:handle, SB_HORZ, oForm:nHscrollPos, .T.)
 
    ENDSWITCH
 
@@ -805,37 +805,37 @@ METHOD SetupScrollbars() CLASS HCustomWindow
    IF ::nScrollBars == 0 .OR. ::nScrollBars == 2
       ::nHscrollMax := Max(0, ::nHorzInc)
       IF ::nHscrollMax < HORZ_PTS / 2
-         //-  ScrollWindow(::handle, ::nHscrollPos * HORZ_PTS, 0)
+         //-  hwg_ScrollWindow(::handle, ::nHscrollPos * HORZ_PTS, 0)
       ELSEIF ::nHScrollMax <= HORZ_PTS
          ::nHScrollMax := 0
       ENDIF
       ::nHscrollPos := Min(::nHscrollPos, ::nHscrollMax)
-      SetScrollPos(::handle, SB_HORZ, ::nHscrollPos, .T.)
-      SetScrollInfo(::handle, SB_HORZ, 1, ::nHScrollPos , HORZ_PTS, ::nHscrollMax)
+      hwg_SetScrollPos(::handle, SB_HORZ, ::nHscrollPos, .T.)
+      hwg_SetScrollInfo(::handle, SB_HORZ, 1, ::nHScrollPos , HORZ_PTS, ::nHscrollMax)
       IF ::nHscrollPos > 0
-         nPos := GetScrollPos(::handle, SB_HORZ)
+         nPos := hwg_GetScrollPos(::handle, SB_HORZ)
          IF nPos < ::nHscrollPos
-            ScrollWindow(::handle, 0, (::nHscrollPos - nPos) * SB_HORZ)
+            hwg_ScrollWindow(::handle, 0, (::nHscrollPos - nPos) * SB_HORZ)
             ::nVscrollPos := nPos
-            SetScrollPos(::handle, SB_HORZ, ::nHscrollPos, .T.)
+            hwg_SetScrollPos(::handle, SB_HORZ, ::nHscrollPos, .T.)
          ENDIF
       ENDIF
    ENDIF
    IF ::nScrollBars == 1 .OR. ::nScrollBars == 2
       ::nVscrollMax := INT(Max(0, ::nVertInc))
       IF ::nVscrollMax < VERT_PTS / 2
-         //-  ScrollWindow(::handle, 0, ::nVscrollPos * VERT_PTS)
+         //-  hwg_ScrollWindow(::handle, 0, ::nVscrollPos * VERT_PTS)
       ELSEIF ::nVScrollMax <= VERT_PTS
          ::nVScrollMax := 0
       ENDIF
-      SetScrollPos(::handle, SB_VERT, ::nVscrollPos, .T.)
-      SetScrollInfo(::handle, SB_VERT, 1, ::nVscrollPos , VERT_PTS, ::nVscrollMax)
+      hwg_SetScrollPos(::handle, SB_VERT, ::nVscrollPos, .T.)
+      hwg_SetScrollInfo(::handle, SB_VERT, 1, ::nVscrollPos , VERT_PTS, ::nVscrollMax)
       IF ::nVscrollPos > 0 //.AND. nPosVert != ::nVscrollPos
-         nPos := GetScrollPos(::handle, SB_VERT)
+         nPos := hwg_GetScrollPos(::handle, SB_VERT)
          IF nPos < ::nVscrollPos
-            ScrollWindow(::handle, 0, (::nVscrollPos - nPos) * VERT_PTS)
+            hwg_ScrollWindow(::handle, 0, (::nVscrollPos - nPos) * VERT_PTS)
             ::nVscrollPos := nPos
-            SetScrollPos(::handle, SB_VERT, ::nVscrollPos, .T.)
+            hwg_SetScrollPos(::handle, SB_VERT, ::nVscrollPos, .T.)
          ENDIF
       ENDIF
    ENDIF
@@ -850,19 +850,19 @@ METHOD ResetScrollbars() CLASS HCustomWindow
    LOCAL lMaximized := hwg_GetWindowPlacement(::handle) == SW_MAXIMIZE
 
    IF lMaximized
-      ScrollWindow(::handle, ::nHscrollPos * HORZ_PTS, 0)
-      ScrollWindow(::handle, 0, ::nVscrollPos * VERT_PTS)
+      hwg_ScrollWindow(::handle, ::nHscrollPos * HORZ_PTS, 0)
+      hwg_ScrollWindow(::handle, 0, ::nVscrollPos * VERT_PTS)
       ::nHscrollPos := 0
       ::nVscrollPos := 0
    ENDIF
    /*
    IF ::nScrollBars == 0 .OR. ::nScrollBars == 2
-      ScrollWindow(::handle, 0 * HORZ_PTS, 0)
-      SetScrollPos(::handle, SB_HORZ, 0, .T.)
+      hwg_ScrollWindow(::handle, 0 * HORZ_PTS, 0)
+      hwg_SetScrollPos(::handle, SB_HORZ, 0, .T.)
    ENDIF
    IF ::nScrollBars == 1 .OR. ::nScrollBars == 2
-      ScrollWindow(::handle, 0, 0 * VERT_PTS)
-      SetScrollPos(::handle, SB_VERT, 0, .T.)
+      hwg_ScrollWindow(::handle, 0, 0 * VERT_PTS)
+      hwg_SetScrollPos(::handle, SB_VERT, 0, .T.)
    ENDIF
    */
 
@@ -913,11 +913,11 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
       ENDIF
       oForm:nScrollPos += nDelta
       IF msg == WM_VSCROLL
-         setscrollpos(oForm:handle, SB_VERT, oForm:nScrollPos)
-         ScrollWindow(oForm:handle, 0, -nDelta)
+         hwg_SetScrollPos(oForm:handle, SB_VERT, oForm:nScrollPos)
+         hwg_ScrollWindow(oForm:handle, 0, -nDelta)
       ELSE
-         setscrollpos(oForm:handle, SB_HORZ, oForm:nScrollPos)
-         ScrollWindow(oForm:handle, -nDelta, 0)
+         hwg_SetScrollPos(oForm:handle, SB_HORZ, oForm:nScrollPos)
+         hwg_ScrollWindow(oForm:handle, -nDelta, 0)
       ENDIF
       RETURN -1
 

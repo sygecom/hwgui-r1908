@@ -35,11 +35,11 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
       nIncr := 10
    ENDIF
    pg := Max(Round(nIncr / 5, 0), 2)
-   x := GetScrollPos(oDlg:handle, SB_HORZ)
-   y := GetScrollPos(oDlg:handle, SB_VERT)
+   x := hwg_GetScrollPos(oDlg:handle, SB_HORZ)
+   y := hwg_GetScrollPos(oDlg:handle, SB_VERT)
    IF msg == WM_VSCROLL
       yy := y
-      SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
+      hwg_SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
       IF nScrollCode == SB_LINEDOWN
          IF ++y > nIncr
             y := nIncr
@@ -62,11 +62,11 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          y := nNewPos
       ENDIF
       IF y != yy
-         SetScrollPos(oDlg:handle, SB_VERT, y)
-         ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
+         hwg_SetScrollPos(oDlg:handle, SB_VERT, y)
+         hwg_ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
       ENDIF
    ELSEIF msg == WM_HSCROLL
-      SetScrollRange(oDlg:handle, SB_HORZ, 0, nIncr)
+      hwg_SetScrollRange(oDlg:handle, SB_HORZ, 0, nIncr)
       xx := x
       IF nScrollCode == SB_LINERIGHT
          IF ++x > nIncr
@@ -90,12 +90,12 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          x := nNewPos
       ENDIF
       IF x != xx
-         SetScrollPos(oDlg:handle, SB_HORZ, x)
-         ScrollWindow(oDlg:handle, ( xx - x ) * nIncr, 0)
+         hwg_SetScrollPos(oDlg:handle, SB_HORZ, x)
+         hwg_ScrollWindow(oDlg:handle, ( xx - x ) * nIncr, 0)
       ENDIF
    ELSEIF msg == WM_MOUSEWHEEL
       yy := y
-      SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
+      hwg_SetScrollRange(oDlg:handle, SB_VERT, 0, nIncr)
       IF hwg_HIWORD(wParam) > 32678
          IF ++y > nIncr
             y := nIncr
@@ -106,8 +106,8 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          ENDIF
       ENDIF
       IF y != yy
-         SetScrollPos(oDlg:handle, SB_VERT, y)
-         ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
+         hwg_SetScrollPos(oDlg:handle, SB_VERT, y)
+         hwg_ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
       ENDIF
    ENDIF
 

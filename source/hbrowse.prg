@@ -1746,7 +1746,7 @@ METHOD Rebuild() CLASS HBrowse
       ENDIF
    NEXT
    IF HWG_BITAND(::style, WS_HSCROLL) != 0
-       SetScrollInfo(::handle, SB_HORZ, 1, 0, 1, Len(::aColumns))
+       hwg_SetScrollInfo(::handle, SB_HORZ, 1, 0, 1, Len(::aColumns))
    ENDIF
 
    ::lChanged := .F.
@@ -3121,8 +3121,8 @@ METHOD DoHScroll(wParam) CLASS HBrowse
    ELSEIF nScrollCode == SB_THUMBTRACK .OR. nScrollCode == SB_THUMBPOSITION
       ::SetFocus()
       IF ::lEditable
-         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
-         SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
+         hwg_SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         hwg_SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
          ::SetColumn(hwg_HIWORD(wParam))
       ELSE
          IF hwg_HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
@@ -3136,9 +3136,9 @@ METHOD DoHScroll(wParam) CLASS HBrowse
 
    IF ::nLeftCol != oldLeft .OR. ::colpos != oldPos
       IF HWG_BITAND(::style, WS_HSCROLL) != 0
-         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         hwg_SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
          nPos := ::colpos + ::nLeftCol - 1
-         SetScrollPos(::handle, SB_HORZ, nPos)
+         hwg_SetScrollPos(::handle, SB_HORZ, nPos)
       ENDIF
       // TODO: here I force a full repaint and HSCROLL appears...
       //       but we should do more checks....
@@ -3198,8 +3198,8 @@ METHOD DoHScroll(wParam) CLASS HBrowse
    CASE SB_THUMBPOSITION
       ::SetFocus()
       IF ::lEditable
-         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
-         SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
+         hwg_SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         hwg_SetScrollPos(::handle, SB_HORZ, hwg_HIWORD(wParam))
          ::SetColumn(hwg_HIWORD(wParam))
       ELSE
          IF hwg_HIWORD(wParam) > (::colpos + ::nLeftCol - 1)
@@ -3213,9 +3213,9 @@ METHOD DoHScroll(wParam) CLASS HBrowse
 
    IF ::nLeftCol != oldLeft .OR. ::colpos != oldPos
       IF HWG_BITAND(::style, WS_HSCROLL) != 0
-         SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
+         hwg_SetScrollRange(::handle, SB_HORZ, 1, Len(::aColumns))
          nPos := ::colpos + ::nLeftCol - 1
-         SetScrollPos(::handle, SB_HORZ, nPos)
+         hwg_SetScrollPos(::handle, SB_HORZ, nPos)
       ENDIF
       // TODO: here I force a full repaint and HSCROLL appears...
       //       but we should do more checks....
@@ -3970,7 +3970,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                DISPLAYCOUNT  IIf(Len(oColumn:aList) > ::rowCount, ::rowCount - 1, Len(oColumn:aList)) ;
                VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet)};
                WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet)}
-            //oCombo:bSelect := {||KEYB_EVENT(VK_RETURN)}
+            //oCombo:bSelect := {||hwg_Keyb_Event(VK_RETURN)}
 
             oModDlg:AddEvent(0, IDOK, {||oModDlg:lResult := .T., oModDlg:close()})
 
@@ -4336,7 +4336,7 @@ METHOD Refresh(lFull, lLineUp) CLASS HBrowse
       IF ::lFilter
          ::nLastRecordFilter := 0
          ::nFirstRecordFilter := 0
-         //SetScrollPos(::handle, SB_VERT, 0)
+         //hwg_SetScrollPos(::handle, SB_VERT, 0)
          //::RowPos := 0
          /*
          (::Alias)->(FltGoTop(Self)) // sk
@@ -4387,13 +4387,13 @@ METHOD BrwScrollVPos() CLASS HBrowse
          minPos := IIf(nIndexOrd == 0, (::Alias)->(RecNo()), (::Alias)->(ordkeyno()))
          (::Alias)->(DBGoTo(nrecno))
          IF minPos != maxPos
-            SetScrollRange(::handle, SB_VERT, minPos, maxPos)
+            hwg_SetScrollRange(::handle, SB_VERT, minPos, maxPos)
          ENDIF
           // (::Alias)->(DBGoTo(nrecno))
       ENDIF
    ELSE
       ::nRecCount := (::Alias)->(Reccount())
-      SetScrollRange(::handle, SB_VERT, 1, ::nRecCount)
+      hwg_SetScrollRange(::handle, SB_VERT, 1, ::nRecCount)
    ENDIF
    RETURN IIf(lDisableVScrollPos, ::nRecCount / 2, nPosRecno)
     //IIf((::Alias)->(IndexOrd()) == 0 .OR. ::lDisableVScrollPos, (::Alias)->(RecNo()), (::Alias)->(ordkeyno()))
@@ -4570,7 +4570,7 @@ FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
    IF oBrw:lNoVScroll
       RETURN NIL
    ENDIF
-   GetScrollRange(oBrw:handle, SB_VERT, @minPos, @maxPos)
+   hwg_GetScrollRange(oBrw:handle, SB_VERT, @minPos, @maxPos)
    IF nPos == NIL
       IF oBrw:Type != BRW_DATABASE
          IF nType > 0 .AND. lEof
@@ -4578,7 +4578,7 @@ FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
          ENDIF
          nPos := IIf(oBrw:nRecords > 1, Round(((maxPos - minPos + 1) / (oBrw:nRecords - 1)) * ;
                                                 (Eval(oBrw:bRecnoLog, oBrw) - 1), 0), minPos)
-         SetScrollPos(oBrw:handle, SB_VERT, nPos)
+         hwg_SetScrollPos(oBrw:handle, SB_VERT, nPos)
       ELSEIF !Empty(oBrw:Alias)
          nrecno := (oBrw:Alias)->(RecNo())
          Eval(oBrw:bGotop, oBrw)
@@ -4586,12 +4586,12 @@ FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
          Eval(oBrw:bGobot, oBrw)
          maxPos := IIf((oBrw:Alias)->(IndexOrd()) == 0, (oBrw:Alias)->(RecNo()), (oBrw:Alias)->(ordkeyno()))
          IF minPos != maxPos
-            SetScrollRange(oBrw:handle, SB_VERT, minPos, maxPos)
+            hwg_SetScrollRange(oBrw:handle, SB_VERT, minPos, maxPos)
          ENDIF
          (oBrw:Alias)->(DBGoTo(nrecno))
-         SetScrollPos(oBrw:handle, SB_VERT, IIf((oBrw:Alias)->(IndexOrd()) == 0, (oBrw:Alias)->(RecNo()), (oBrw:Alias)->(ordkeyno())))
+         hwg_SetScrollPos(oBrw:handle, SB_VERT, IIf((oBrw:Alias)->(IndexOrd()) == 0, (oBrw:Alias)->(RecNo()), (oBrw:Alias)->(ordkeyno())))
 
-//         SetScrollPos(oBrw:handle, SB_VERT, oBrw:BrwScrollVPos())
+//         hwg_SetScrollPos(oBrw:handle, SB_VERT, oBrw:BrwScrollVPos())
       ENDIF
    ELSE
       oldRecno := Eval(oBrw:bRecnoLog, oBrw)
@@ -4602,7 +4602,7 @@ FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
          newRecno := oBrw:nRecords
       ENDIF
       IF nType == SB_THUMBPOSITION
-         SetScrollPos(oBrw:handle, SB_VERT, nPos)
+         hwg_SetScrollPos(oBrw:handle, SB_VERT, nPos)
       ENDIF
       IF newRecno != oldRecno
          Eval(oBrw:bSkip, oBrw, newRecno - oldRecno)
@@ -4628,7 +4628,7 @@ Function HScrollPos(oBrw, nType, lEof, nPos)
    LOCAL nColPixel
    LOCAL nBWidth := oBrw:nWidth // :width is _not_ browse width
 
-   GetScrollRange(oBrw:handle, SB_HORZ, @minPos, @maxPos)
+   hwg_GetScrollRange(oBrw:handle, SB_HORZ, @minPos, @maxPos)
 
    IF nType == SB_THUMBPOSITION
 
@@ -4643,7 +4643,7 @@ Function HScrollPos(oBrw, nType, lEof, nPos)
       oBrw:colpos := Max(i, oBrw:nLeftCol) - oBrw:nLeftCol + 1
    ENDIF
 
-   SetScrollPos(oBrw:handle, SB_HORZ, nPos)
+   hwg_SetScrollPos(oBrw:handle, SB_HORZ, nPos)
 
 RETURN NIL
 */

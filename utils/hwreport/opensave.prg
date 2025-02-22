@@ -109,7 +109,7 @@ Local i, aItem
          ENDIF
       NEXT
       aPaintRep := Nil
-      ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
+      hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
       hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
       EnableMenuItem( ,1, .F., .F. )
    ENDIF

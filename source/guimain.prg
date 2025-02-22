@@ -156,7 +156,7 @@ FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    LOCAL cRes := IIf(cResIni != NIL, Trim(cResIni), "")
    /*
    IF !Empty(cRes)
-      Keyb_Event(VK_END)
+      hwg_Keyb_Event(VK_END)
    ENDIF
    */
    nStyle := IIf(nStyle == NIL, 0, nStyle)
@@ -175,7 +175,7 @@ FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
    oModDlg:aControls[4]:Anchor := 9
    
-   ACTIVATE DIALOG oModDlg ON ACTIVATE {||IIf(!Empty(cRes), KEYB_EVENT(VK_END), .T.)}
+   ACTIVATE DIALOG oModDlg ON ACTIVATE {||IIf(!Empty(cRes), hwg_Keyb_Event(VK_END), .T.)}
 
    oFont:Release()
    IF oModDlg:lResult

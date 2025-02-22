@@ -714,7 +714,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
          IF hb_IsObject(oCtrl) .AND. oCtrl:classname = "HTAB"
             RETURN 1
          ENDIF
-         IF hb_IsObject(oCtrl) .AND. (GetNextDlgTabItem(hwg_GetActiveWindow(), hCtrl, 1) == hCtrl .OR. hwg_SelfFocus(oCtrl:handle, hCtrl))
+         IF hb_IsObject(oCtrl) .AND. (hwg_GetNextDlgTabItem(hwg_GetActiveWindow(), hCtrl, 1) == hCtrl .OR. hwg_SelfFocus(oCtrl:handle, hCtrl))
             hwg_SendMessage(oCtrl:handle, WM_KILLFOCUS, 0, 0)
          ENDIF
          IF hb_IsObject(oCtrl) .AND. oCtrl:id == IDOK .AND. __ObjHasMsg(oCtrl, "BCLICK") .AND. oCtrl:bClick == NIL
