@@ -7,7 +7,7 @@ HRB_DIR = $(HB_PATH)
 !ENDIF
 INC_DIR = include
 OBJ_DIR = obj\vc
-LIB_DIR = lib\vc
+LIB_DIR = lib\win\msvc
 SRC_DIR = source
 CFLAGS = /W3 /nologo
 # /DHWG_USE_POINTER_ITEM

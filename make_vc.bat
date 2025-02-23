@@ -3,7 +3,8 @@ if "%1" == "clean" goto CLEAN
 if "%1" == "CLEAN" goto CLEAN
 
 if not exist lib md lib
-if not exist lib\vc md lib\vc
+if not exist lib\win md lib\win
+if not exist lib\win\msvc md lib\win\msvc
 if not exist obj md obj
 if not exist obj\vc md obj\vc
 

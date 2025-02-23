@@ -23,7 +23,7 @@ cl -c -I..\include -I%HB_INC_DIR% %1.c
 
 rem o -> exe
 
-cl /EHsc %1.obj %HB_PATH%\obj\vcw64\mainwin.obj /link /out:%1.exe /LIBPATH:..\lib\vc64 /LIBPATH:%HB_LIB_DIR% %HWG_LIBS% %HB_LIBS% %SYS_LIBS% /NODEFAULTLIB:LIBC /NODEFAULTLIB:msvcrt /force:multiple /nxcompat:NO /subsystem:windows
+cl /EHsc %1.obj %HB_PATH%\obj\vcw64\mainwin.obj /link /out:%1.exe /LIBPATH:..\lib\win\msvc64 /LIBPATH:%HB_LIB_DIR% %HWG_LIBS% %HB_LIBS% %SYS_LIBS% /NODEFAULTLIB:LIBC /NODEFAULTLIB:msvcrt /force:multiple /nxcompat:NO /subsystem:windows
 
 rem exclusão dos arquivo temporários
 
