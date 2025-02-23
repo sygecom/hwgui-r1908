@@ -439,7 +439,7 @@
       </widget>
       <widget class="monthcalendar" name="Month Calendar control" bmp="BMP_CALEN">
          <create>
-            <![CDATA[InitMonthCalendar(oCtrl:oParent:handle,oCtrl:id,oCtrl:style,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight)
+            <![CDATA[hwg_InitMonthCalendar(oCtrl:oParent:handle,oCtrl:id,oCtrl:style,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight)
             ]]>
          </create>
          <property name="Name" type="C" />

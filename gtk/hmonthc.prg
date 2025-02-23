@@ -69,11 +69,11 @@ Return Self
 METHOD Activate CLASS HMonthCalendar
 
    If !Empty(::oParent:handle)
-      ::handle := InitMonthCalendar ( ::oParent:handle, , ;
+      ::handle := hwg_InitMonthCalendar( ::oParent:handle, , ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       hwg_SetWindowObject( ::handle,Self )		  
 //      MonthCalendarChange(::handle,{||
-        MONTHCALENDAR_SETACTION(::handle,{||::value:=GetMonthCalendarDate( ::handle )})
+        MONTHCALENDAR_SETACTION(::handle,{||::value:=hwg_GetMonthCalendarDate( ::handle )})
       ::Init()
    EndIf
 
@@ -86,7 +86,7 @@ METHOD Init() CLASS HMonthCalendar
    If !::lInit
       ::Super:Init()
       If !Empty(::value)
-         SetMonthCalendarDate( ::handle , ::value )
+         hwg_SetMonthCalendarDate( ::handle , ::value )
       EndIf
    EndIf
 
@@ -97,7 +97,7 @@ Return Nil
 METHOD SetValue( dValue ) CLASS HMonthCalendar
 
    If Valtype(dValue)=="D" .And. !Empty(dValue)
-      SetMonthCalendarDate( ::handle, dValue )
+      hwg_SetMonthCalendarDate( ::handle, dValue )
       ::value := dValue
    EndIf
 

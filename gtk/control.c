@@ -992,7 +992,7 @@ HB_FUNC(TAB_SETACTION)
   g_signal_connect(hCtrl, "switch-page", G_CALLBACK(tabchange_clicked), (void *)pItem);
 }
 
-HB_FUNC(INITMONTHCALENDAR)
+HB_FUNC(HWG_INITMONTHCALENDAR)
 {
   GtkWidget *hCtrl;
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
@@ -1007,7 +1007,11 @@ HB_FUNC(INITMONTHCALENDAR)
   HB_RETHANDLE(hCtrl);
 }
 
-HB_FUNC(SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Control.c
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(INITMONTHCALENDAR, HWG_INITMONTHCALENDAR);
+#endif
+
+HB_FUNC(HWG_SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Control.c
 {
   PHB_ITEM pDate = hb_param(2, HB_IT_DATE);
 
@@ -1027,7 +1031,11 @@ HB_FUNC(SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Co
   }
 }
 
-HB_FUNC(GETMONTHCALENDARDATE)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETMONTHCALENDARDATE, HWG_SETMONTHCALENDARDATE);
+#endif
+
+HB_FUNC(HWG_GETMONTHCALENDARDATE)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   char szDate[9];
@@ -1044,6 +1052,10 @@ HB_FUNC(GETMONTHCALENDARDATE)
   szDate[8] = 0;
   hb_retds(szDate);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETMONTHCALENDARDATE, HWG_GETMONTHCALENDARDATE);
+#endif
 
 HB_FUNC(HWG_CREATEIMAGE)
 {
