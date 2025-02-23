@@ -574,10 +574,10 @@ STATIC FUNCTION onCloseQuery(o)
    IF hb_IsBlock(o:bCloseQuery)
       IF Eval(o:bCloseQuery)
          ReleaseAllWindows(o:handle)
-      END
+      ENDIF
    ELSE
       ReleaseAllWindows(o:handle)
-   END
+   ENDIF
 
 RETURN -1
 // end sauli
