@@ -73,7 +73,7 @@ RETURN Self
 METHOD Activate() CLASS HTrackBar
 
    IF !Empty(::oParent:handle)
-      ::handle := InitTrackBar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+      ::handle := hwg_InitTrackBar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
                                ::nLow, ::nHigh)
       ::Init()
    ENDIF
@@ -186,7 +186,7 @@ METHOD Init() CLASS HTrackBar
 
    IF !::lInit
       ::Super:Init()
-      TrackBarSetRange(::handle, ::nLow, ::nHigh)
+      hwg_TrackBarSetRange(::handle, ::nLow, ::nHigh)
       hwg_SendMessage(::handle, TBM_SETPOS, 1, ::value)
       IF ::bPaint != NIL
          ::nHolder := 1
@@ -217,13 +217,13 @@ RETURN ::value
 #include "hwingui.h"
 #include <commctrl.h>
 
-HB_FUNC(INITTRACKBAR)
+HB_FUNC(HWG_INITTRACKBAR)
 {
   hwg_ret_HWND(CreateWindowEx(0, TRACKBAR_CLASS, 0, hwg_par_DWORD(3), hwg_par_int(4), hwg_par_int(5), hwg_par_int(6),
                               hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
 }
 
-HB_FUNC(TRACKBARSETRANGE)
+HB_FUNC(HWG_TRACKBARSETRANGE)
 {
   SendMessage(hwg_par_HWND(1), TBM_SETRANGE, TRUE, MAKELONG(hb_parni(2), hb_parni(3)));
 }

@@ -459,7 +459,7 @@
       </widget>
       <widget class="trackbar" name="Track Bar control" bmp="BMP_TRACK">
          <create>
-            <![CDATA[InitTrackBar(oCtrl:oParent:handle,oCtrl:id,oCtrl:style,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight,0,100)
+            <![CDATA[hwg_InitTrackBar(oCtrl:oParent:handle,oCtrl:id,oCtrl:style,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight,0,100)
             ]]>
          </create>
          <property name="Name" type="C" />
