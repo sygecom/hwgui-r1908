@@ -46,7 +46,10 @@ CLASS HDatePicker INHERIT HControl
    METHOD When()
    METHOD Valid()
    METHOD Value(Value) SETGET
-
+   #ifdef __SYGECOM__   
+   METHOD VarGet()      INLINE ::GetValue()
+   METHOD GetText()     INLINE ::GetValue()
+   #endif   
 ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
