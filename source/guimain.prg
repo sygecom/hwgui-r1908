@@ -410,9 +410,11 @@ cTip  :   *.dbf
 cInitDir: Initial directory
 
 */
-
+#ifdef __SYGECOM__
+FUNCTION HWG_SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
+#else
 FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
-
+#endif
    LOCAL aFiles, cPath, cFile, cFilter, nAt
    LOCAL hWnd := 0
    LOCAL nFlags := NIL
