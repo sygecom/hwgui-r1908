@@ -258,6 +258,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ::title := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
                hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
               ENDIF
+              #ifdef __SYGECOM__
+              HWG_MSGINFO('Esse campo não permite a Opção Colar',"Aviso do Sistema")
+              #endif
             RETURN 0
          ELSEIF msg == WM_CHAR
             IF !hwg_CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)

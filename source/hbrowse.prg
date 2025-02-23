@@ -3984,6 +3984,17 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                oModDlg:lResult := .T.
             ELSEIF Type != "M"
                nHGet := Max((::height - (TxtRect("N", self))[2]) / 2, 0)
+               #ifdef __SYGECOM__
+               @ 0, nHGet GET oGet VAR ::varbuf       ;
+                  SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
+                  NOBORDER                       ;
+                  STYLE ES_AUTOHSCROLL           ;
+                  TOOLTIP 'Prescione Enter para validar';
+                  FONT ::oFont                   ;
+                  PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
+                  VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
+               #else
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
@@ -3991,10 +4002,11 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   FONT ::oFont                   ;
                   PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
                   VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
-                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)}
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
                   //VALID oColumn:bValid           ;
                   //WHEN oColumn:bWhen
                  //oModDlg:AddEvent(0, IDOK, {||oModDlg:lResult := .T., oModDlg:close()})
+               #endif  
                IF oColumn:bClick != NIL
                   IF Type != "D"
                      @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16, ::height - 0 ;
@@ -4013,7 +4025,11 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                ENDIF
             ELSE
                oGet1 := ::varbuf
+               #ifdef __SYGECOM__
+               @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid TOOLTIP 'Prescione Enter para validar'
+               #else
                @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid
+               #endif
                @ 010, 252 ownerbutton owb2 text "Save" size 80, 24 ON Click {||::varbuf := oGet1, oModDlg:close(), oModDlg:lResult := .T.}
                @ 100, 252 ownerbutton owb1 text "Close" size 80, 24 ON CLICK {||oModDlg:close()}
             ENDIF

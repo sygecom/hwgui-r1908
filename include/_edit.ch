@@ -43,7 +43,36 @@
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>,,,,<bKeyDown> )
 
 /* SAY ... GET system     */
+#ifdef __SYGECOM__
+#xcommand @ <x>,<y> GET [ <oEdit> VAR ]  <vari>  ;
+             [ OF <oWnd> ]              ;
+             [ ID <nId> ]               ;
+             [ SIZE <width>, <height> ] ;
+             [ COLOR <color> ]          ;
+             [ BACKCOLOR <bcolor> ]     ;
+             [ PICTURE <cPicture> ]     ;
+             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
+             [<lPassword: PASSWORD>]    ;
+             [ MAXLENGTH <nMaxLength> ] ;
+             [ STYLE <nStyle> ]         ;
+             [<lnoborder: NOBORDER>]    ;
+             [ FONT <oFont> ]           ;
+             [ ON INIT <bInit> ]        ;
+             [ ON SIZE <bSize> ]        ;
+             [ TOOLTIP <ctoolt> ]       ;
+             [ ON KEYDOWN <bKeyDown>   ];
+             [ ON CHANGE <bChange> ]    ;
+             [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
+          => ;
+          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
+             {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
+             <nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
+             <bGfocus>,<bLfocus>,IIF(!EMPTY(<ctoolt>),<ctoolt>,),<color>,<bcolor>,<cPicture>,;
+             <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
+          [ <oEdit>:name := <(oEdit)> ]
 
+#else
 #xcommand @ <x>,<y> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -71,7 +100,7 @@
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]
-
+#endif
 /* Added MULTILINE: AJ: 11-03-2007*/
 #xcommand REDEFINE GET [ <oEdit> VAR ] <vari>  ;
              [ OF <oWnd> ]              ;
