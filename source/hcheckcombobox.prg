@@ -19,7 +19,7 @@
 
 #include "hwingui.h"
 
-HB_FUNC(COPYDATA)
+HB_FUNC(HWG_COPYDATA)
 {
   LPARAM lParam = (LPARAM)hb_parnl(1);
   void *hText;
@@ -28,6 +28,10 @@ HB_FUNC(COPYDATA)
   lstrcpyn((LPTSTR)lParam, m_strText, (INT)wParam);
   hb_strfree(hText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(COPYDATA, HWG_COPYDATA);
+#endif
 
 #pragma enddump
 
@@ -521,7 +525,7 @@ METHOD OnGetText(wParam, lParam) CLASS hCheckComboBox
    ENDIF
 
    // Copy the 'fake' window text
-   copydata(lParam, ::m_strText, wParam)
+   hwg_CopyData(lParam, ::m_strText, wParam)
 
 RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
