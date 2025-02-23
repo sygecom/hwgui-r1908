@@ -3596,8 +3596,13 @@ METHOD ButtonUp(lParam) CLASS HBrowse
                x1 := x - ::aColumns[i]:width
                EXIT
             ENDIF
-            i := IIf(i == ::freeze, ::nLeftCol, i + 1)
+            #ifndef __SYGECOM__   
+            i := IIf(i == ::freeze, ::nLeftCol, i + 1) 
+            #endif
          ENDIF
+         #ifdef __SYGECOM__   
+         i := IIf(i == ::freeze, ::nLeftCol, i + 1)
+         #endif
       ENDDO
       IF xPos > x1
          ::aColumns[i]:width := xPos - x1
