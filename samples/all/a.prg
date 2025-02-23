@@ -45,7 +45,7 @@ FUNCTION Main()
       ENDMENU
       MENU TITLE "&Samples"
          MENUITEM "&Checked" ID 1001 ;
-               ACTION CheckMenuItem(, 1001, !IsCheckedMenuItem(, 1001))
+               ACTION hwg_CheckMenuItem(, 1001, !hwg_IsCheckedMenuItem(, 1001))
          SEPARATOR
          MENUITEM "&Test Tab" ACTION TestTab()
          MENUITEM "&Class HRect" ACTION RRectangle()

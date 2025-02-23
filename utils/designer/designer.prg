@@ -164,7 +164,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM If(!lOmmitMenuFile,"&Exit","&Close Designer") ACTION oDesigner:oMainWnd:Close()
       ENDMENU
       MENU TITLE "&Edit"
-         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,EnableMenuItem(, 1012,.T.,.T.),.F.))
+         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
          MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
       ENDMENU
       MENU TITLE "&View"
@@ -172,7 +172,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
     SEPARATOR
          MENUITEM "&Show Grid 5px" ID 1050 ACTION ShowGrid5px()
          MENUITEM "&Show Grid 10px" ID 1052 ACTION ShowGrid10px()
-         MENUITEM "S&nap to Grid" ID 1051 ACTION CheckMenuItem(oDesigner:oMainWnd:handle, 1051,!IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1051))
+         MENUITEM "S&nap to Grid" ID 1051 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1051,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1051))
          SEPARATOR
          MENUITEM "&Preview"  ACTION DoPreview()
          SEPARATOR
@@ -182,7 +182,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM "&Delete"  ACTION DeleteCtrl()
       ENDMENU
       MENU TITLE "&Options"
-         MENUITEM "&AutoAdjust" ID 1011 ACTION CheckMenuItem(oDesigner:oMainWnd:handle, 1011,!IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1011))
+         MENUITEM "&AutoAdjust" ID 1011 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1011,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1011))
       ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION hwg_MsgInfo("Visual Designer", "Designer")
@@ -190,9 +190,9 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDMENU
 
    if ( oDesigner:nPixelGrid == 12 )
-       CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.T.)
+       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.T.)
    else
-       CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.T.)
+       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.T.)
    endif
 
    @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0,x,y-21),statusbarmsg("")}
@@ -285,7 +285,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    BuildSet( oTab )
 
    CONTEXT MENU oDesigner:oCtrlMenu
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,EnableMenuItem(, 1012,.T.,.T.),.F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
       SEPARATOR
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
@@ -320,7 +320,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
       MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
       SEPARATOR
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,EnableMenuItem(, 1012,.T.,.T.),.F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=Nil,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
       MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
@@ -380,9 +380,9 @@ STATIC FUNCTION ShowGrid10px()
    MEMVAR oDesigner
 
 if ( oDesigner:oDlgInsp == NIL )
-    CheckMenuItem(oDesigner:oMainWnd:handle, 1052,!IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
-    CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.F.)
-    if (IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.F.)
+    if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
         oDesigner:nPixelGrid := 18
    oDesigner:lShowGrid  := .T.
     else
@@ -401,9 +401,9 @@ STATIC FUNCTION ShowGrid5px()
    MEMVAR oDesigner
 
 if ( oDesigner:oDlgInsp == NIL )
-    CheckMenuItem(oDesigner:oMainWnd:handle, 1050,!IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
-    CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.F.)
-    if (IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.F.)
+    if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
         oDesigner:nPixelGrid := 12
             oDesigner:lShowGrid  := .T.
     else

@@ -324,18 +324,20 @@ Local i, aMenu, oDlg
 
 Return aMenu
 
+// TODO: adição do prefixo HWG_ conflita com função já existente
 Function CheckMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
-   aMenu := GetMenuByHandle( hWnd )   
+   aMenu := GetMenuByHandle( hWnd )
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          hwg_CheckMenuItem( aSubmenu[1,nPos,5], lValue )
-      ENDIF   
+      ENDIF
    ENDIF
-   
+
 Return Nil
 
+// TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsCheckedMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos, lRes := .F.
    
@@ -348,6 +350,7 @@ Local aMenu, aSubMenu, nPos, lRes := .F.
    
 Return lRes
 
+// TODO: adição do prefixo HWG_ conflita com função já existente
 Function EnableMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
@@ -355,11 +358,12 @@ Local aMenu, aSubMenu, nPos
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          hwg_EnableMenuItem( aSubmenu[1,nPos,5], lValue )
-      ENDIF   
+      ENDIF
    ENDIF
-   
+
 Return Nil
 
+// TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsEnabledMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos
 

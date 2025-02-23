@@ -74,11 +74,11 @@ Local res := .T.
       IF lOpen
          IF ( res := OpenFile( fname,@repName ) )
             aPaintRep[FORM_Y] := 0
-            EnableMenuItem( ,1, .T., .F. )
+            hwg_EnableMenuItem( ,1, .T., .F. )
             hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             aPaintRep := Nil
-            EnableMenuItem( ,1, .F., .F. )
+            hwg_EnableMenuItem( ,1, .F., .F. )
          ENDIF
       ELSE
          res := SaveRFile( fname,repName )
@@ -111,7 +111,7 @@ Local i, aItem
       aPaintRep := Nil
       hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
       hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
-      EnableMenuItem( ,1, .F., .F. )
+      hwg_EnableMenuItem( ,1, .F., .F. )
    ENDIF
 Return .T.
 
@@ -281,12 +281,12 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
       MsgStop( repname+" not found or empty!" )
       res := .F.
    ELSE
-      EnableMenuItem( ,IDM_CLOSE, .T., .T. )
-      EnableMenuItem( ,IDM_SAVE, .T., .T. )
-      EnableMenuItem( ,IDM_SAVEAS, .T., .T. )
-      EnableMenuItem( ,IDM_PRINT, .T., .T. )
-      EnableMenuItem( ,IDM_PREVIEW, .T., .T. )
-      EnableMenuItem( ,IDM_FOPT, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_CLOSE, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_SAVE, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_SAVEAS, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_PRINT, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_PREVIEW, .T., .T. )
+      hwg_EnableMenuItem( ,IDM_FOPT, .T., .T. )
 
       aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]==y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
       IF !lPrg

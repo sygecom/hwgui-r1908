@@ -553,7 +553,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF hb_IsArray(oWnd:menu) .AND. (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL
       IF hwg_BitAnd(aMenu[1, iCont, 4], FLAG_CHECK) > 0
-         CheckMenuItem(, aMenu[1, iCont, 3], !IsCheckedMenuItem(, aMenu[1, iCont, 3]))
+         hwg_CheckMenuItem(, aMenu[1, iCont, 3], !hwg_IsCheckedMenuItem(, aMenu[1, iCont, 3]))
       ENDIF
       IF aMenu[1, iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1], iCont, iParLow)
@@ -646,7 +646,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          hwg_ShellNotifyIcon(.F., oWnd:handle, oWnd:oNotifyIcon:handle)
       ENDIF
       IF __ObjHasMsg(oWnd, "HACCEL") .AND. oWnd:hAccel != NIL
-         DestroyAcceleratorTable(oWnd:hAccel)
+         hwg_DestroyAcceleratorTable(oWnd:hAccel)
       ENDIF
       RETURN -1
    ENDIF

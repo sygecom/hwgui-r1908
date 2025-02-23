@@ -107,10 +107,10 @@ FUNCTION Main()
    @ 5, 4 SAY oSay1 CAPTION "" OF oPanel SIZE 150, 22 FONT oFont
    @ 160, 4 SAY oSay2 CAPTION "" OF oPanel SIZE 100, 22 FONT oFont
 
-   EnableMenuItem(, 31010, .F.)
-   EnableMenuItem(, 31020, .F.)
-   EnableMenuItem(, 31030, .F.)
-   EnableMenuItem(, 31040, .F.)
+   hwg_EnableMenuItem(, 31010, .F.)
+   hwg_EnableMenuItem(, 31020, .F.)
+   hwg_EnableMenuItem(, 31030, .F.)
+   hwg_EnableMenuItem(, 31040, .F.)
 
    ACTIVATE WINDOW oWndMain
 
@@ -150,10 +150,10 @@ STATIC FUNCTION FileOpen()
       dbv_cLocate := dbv_cSeek := ""
       dbv_nRec := 0
       
-      EnableMenuItem(, 31010, .T.)
-      EnableMenuItem(, 31020, .T.)
-      EnableMenuItem(, 31030, .T.)
-      EnableMenuItem(, 31040, .T.)
+      hwg_EnableMenuItem(, 31010, .T.)
+      hwg_EnableMenuItem(, 31020, .T.)
+      hwg_EnableMenuItem(, 31030, .T.)
+      hwg_EnableMenuItem(, 31040, .T.)
 
    ENDIF
    

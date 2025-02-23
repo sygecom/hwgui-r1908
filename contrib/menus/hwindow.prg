@@ -396,7 +396,7 @@ Local oWnd, oBtn, oitem
              hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
           endif
           if oWnd:hAccel != Nil
-             DestroyAcceleratorTable( oWnd:hAccel )
+             hwg_DestroyAcceleratorTable( oWnd:hAccel )
           endif
       elseif wParam == SC_MINIMIZE
           if oWnd:lTray
@@ -602,7 +602,7 @@ Local oWnd, oBtn, oitem
                 hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
              endif
              if oWnd:hAccel != Nil
-                DestroyAcceleratorTable( oWnd:hAccel )
+                hwg_DestroyAcceleratorTable( oWnd:hAccel )
              endif
           endif
       elseif wParam == SC_MINIMIZE
@@ -1068,7 +1068,7 @@ Local oWndClient
              hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
           endif
           if oWnd:hAccel != Nil
-             DestroyAcceleratorTable( oWnd:hAccel )
+             hwg_DestroyAcceleratorTable( oWnd:hAccel )
           endif
           return 0
       elseif wParam == SC_MINIMIZE

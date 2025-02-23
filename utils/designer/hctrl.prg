@@ -383,7 +383,7 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
          Return .F.
       ENDIF
 
-      IF IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1051 )
+      IF hwg_IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1051 )
         IF !lChild .AND. lMouse
           vdx := xPos - vBDown[BDOWN_XPOS]
           vdy := yPos - vBDown[BDOWN_YPOS]

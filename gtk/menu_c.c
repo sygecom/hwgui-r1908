@@ -116,11 +116,15 @@ HB_FUNC(HWG__SETMENU)
   hb_retl(1);
 }
 
-HB_FUNC(GETMENUHANDLE)
+HB_FUNC(HWG_GETMENUHANDLE)
 {
   // HWND handle = ( hb_pcount()>0 && !HB_ISNIL(1) )? (HWND)hb_parnl(1):aWindows[0];
   // hb_retnl( (HB_LONG) GetMenu( handle ) );
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETMENUHANDLE, HWG_GETMENUHANDLE);
+#endif
 
 HB_FUNC(HWG_CHECKMENUITEM)
 {
@@ -205,17 +209,21 @@ HB_FUNC_TRANSLATE(CREATEACCELERATORTABLE, HWG_CREATEACCELERATORTABLE);
 #endif
 
 /*
- * DestroyAcceleratorTable( hAccel )
+ * hwg_DestroyAcceleratorTable( hAccel )
  */
-HB_FUNC(DESTROYACCELERATORTABLE)
+HB_FUNC(HWG_DESTROYACCELERATORTABLE)
 {
   // hb_retl( DestroyAcceleratorTable( (HACCEL) hb_parnl(1) ) );
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DESTROYACCELERATORTABLE, HWG_DESTROYACCELERATORTABLE);
+#endif
+
 /*
- *  SetMenuCaption( hMenu, nMenuId, cCaption )
+ *  hwg_SetMenuCaption( hMenu, nMenuId, cCaption )
  */
-HB_FUNC(SETMENUCAPTION)
+HB_FUNC(HWG_SETMENUCAPTION)
 {
   /*
      MENUITEMINFO mii;
@@ -235,3 +243,7 @@ HB_FUNC(SETMENUCAPTION)
      }
   */
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETMENUCAPTION, HWG_SETMENUCAPTION);
+#endif

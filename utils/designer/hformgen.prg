@@ -1052,7 +1052,7 @@ STATIC FUNCTION PaintDlg( oDlg )
       ENDIF
 /*
       oDesigner:addItem := Nil
-      IF IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050)
+      IF hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050)
         i := 0
         aCoors := hwg_GetClientRect( oDlg:handle )
         n1cm := oDesigner:nPixelGrid
@@ -1511,7 +1511,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
          oDesigner:oBtnPressed:Release()
       ENDIF
       oDesigner:addItem := Nil
-      IF IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1011 )
+      IF hwg_IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1011 )
          AdjustCtrl( oCtrl )
       ENDIF
    ENDIF
@@ -1531,14 +1531,14 @@ STATIC FUNCTION RButtonUp( oDlg, xPos, yPos )
          ELSE
             IF oDesigner:lReport .AND. Lower(oCtrl:cClass) $ "hline.vline" ;
                .AND. oCtrl:oContainer != Nil .AND. Lower(oCtrl:oContainer:cClass) == "box"
-               EnableMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
                IF oCtrl:lEmbed
-                  CheckMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
                ELSE
-                  CheckMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
                ENDIF
             ELSE
-               EnableMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
             ENDIF
             oDesigner:oCtrlMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos,.T. )
          ENDIF

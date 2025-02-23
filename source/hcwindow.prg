@@ -933,9 +933,9 @@ METHOD Closable(lClosable) CLASS HCustomWindow
 
    IF lClosable != NIL
       IF !lClosable
-         hMenu := EnableMenuSystemItem(::handle, SC_CLOSE, .F.)
+         hMenu := hwg_EnableMenuSystemItem(::handle, SC_CLOSE, .F.)
       ELSE
-         hMenu := EnableMenuSystemItem(::handle, SC_CLOSE, .T.)
+         hMenu := hwg_EnableMenuSystemItem(::handle, SC_CLOSE, .T.)
       ENDIF
       IF !Empty(hMenu)
          ::lClosable := lClosable

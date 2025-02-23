@@ -117,10 +117,10 @@ PUBLIC nQueryWndHandle := 0
       oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
    ENDIF
 
-   EnableMenuItem( ,1, .F., .F. )
-   EnableMenuItem( ,2, .F., .F. )
-   EnableMenuItem( ,3, .F., .F. )
-   EnableMenuItem( ,4, .F., .F. )
+   hwg_EnableMenuItem( ,1, .F., .F. )
+   hwg_EnableMenuItem( ,2, .F., .F. )
+   hwg_EnableMenuItem( ,3, .F., .F. )
+   hwg_EnableMenuItem( ,4, .F., .F. )
 
    aMainWindow:Activate()
 
@@ -487,10 +487,10 @@ Local oWindow, aControls, oBrowse, i
    ENDIF
 
    IF Len( HWindow():aWindows ) == 2
-      EnableMenuItem( ,1, .T., .F. )
-      EnableMenuItem( ,2, .T., .F. )
-      EnableMenuItem( ,3, .T., .F. )
-      EnableMenuItem( ,4, .T., .F. )
+      hwg_EnableMenuItem( ,1, .T., .F. )
+      hwg_EnableMenuItem( ,2, .T., .F. )
+      hwg_EnableMenuItem( ,3, .T., .F. )
+      hwg_EnableMenuItem( ,4, .T., .F. )
    ENDIF
    IF hChild == Nil .OR. hChild == 0
       INIT WINDOW oWindow MDICHILD TITLE fname ;
@@ -638,10 +638,10 @@ Local i, aControls, oBrw
             ENDIF
             FiClose()
             IF Len( HWindow():aWindows ) == 3
-               EnableMenuItem( ,1, .F., .F. )
-               EnableMenuItem( ,2, .F., .F. )
-               EnableMenuItem( ,3, .F., .F. )
-               EnableMenuItem( ,4, .F., .F. )
+               hwg_EnableMenuItem( ,1, .F., .F. )
+               hwg_EnableMenuItem( ,2, .F., .F. )
+               hwg_EnableMenuItem( ,3, .F., .F. )
+               hwg_EnableMenuItem( ,4, .F., .F. )
             ENDIF
          ENDIF
       ENDIF

@@ -225,7 +225,7 @@ PUBLIC funcoes := {}
    SET TIMER tp1 OF oMainWindow ID 1001 VALUE 30 ACTION {||funcao()}
    //
    //ADD STATUS TO oMainWindow ID IDC_STATUS 50, 50, 400, 12, 90, 95, 90
-   CheckMenuItem(, id_indioma, !IsCheckedMenuItem(, id_indioma))
+   hwg_CheckMenuItem(, id_indioma, !hwg_IsCheckedMenuItem(, id_indioma))
  ACTIVATE WINDOW oMainWindow
 
 RETURN NIL
@@ -514,11 +514,11 @@ RETURN -1
 FUNCTION indioma(rd_ID)
 ***********************
 for f := 8001 to 8002
-  if IsCheckedMenuItem(, f)
-    CheckMenuItem(, f, !IsCheckedMenuItem(, f))
+  if hwg_IsCheckedMenuItem(, f)
+    hwg_CheckMenuItem(, f, !hwg_IsCheckedMenuItem(, f))
   endif
 next f
-CheckMenuItem(, rd_ID, !IsCheckedMenuItem(, rd_ID))
+hwg_CheckMenuItem(, rd_ID, !hwg_IsCheckedMenuItem(, rd_ID))
  ID_indioma := rd_id
  save all like ID_* to config.dat
 hwg_MsgInfo(reiniciar)
