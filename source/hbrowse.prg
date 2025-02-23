@@ -194,6 +194,9 @@ METHOD Value(xValue) CLASS HColumn
          IF (::oParent:Alias)->(RLock())
             (::oParent:Alias)->(Eval(::block, varbuf, ::oParent, ::Column))
             (::oParent:Alias)->(DBUnlock())
+            #ifdef __SYGECOM__   
+            (::oParent:Alias)->(DBcommit())
+            #endif
          ELSE
              hwg_MsgStop("Can't lock the record!")
          ENDIF
@@ -4068,6 +4071,9 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   (::Alias)->(DBAppend())
                   (::Alias)->(Eval(oColumn:block, ::varbuf, Self, fipos))
                   (::Alias)->(DBUnlock())
+                  #ifdef __SYGECOM__   
+                  (::Alias)->(DBcommit())
+                  #endif
                ELSE
                   IF hb_IsArray(::aArray[1])
                      AAdd(::aArray, Array(Len(::aArray[1])))
@@ -4095,6 +4101,9 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   IF (::Alias)->(RLock())
                      (::Alias)->(Eval(oColumn:block, ::varbuf, Self, fipos))
                      (::Alias)->(DBUnlock())
+                     #ifdef __SYGECOM__   
+                     (::Alias)->(DBcommit())
+                     #endif
                   ELSE
                      hwg_MsgStop("Can't lock the record!")
                   ENDIF
@@ -4168,6 +4177,9 @@ METHOD EditLogical(wParam, lParam) CLASS HBrowse
          IF (::Alias)->(RLock())
             (::Alias)->(Eval(::aColumns[::fipos]:block, !::varbuf, Self, ::fipos))
             (::Alias)->(DBUnlock())
+            #ifdef __SYGECOM__   
+            (::Alias)->(DBcommit())
+            #endif
          ELSE
              hwg_MsgStop("Can't lock the record!")
          ENDIF
