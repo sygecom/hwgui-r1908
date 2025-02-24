@@ -10,7 +10,7 @@ if not exist obj\vc64 md obj\vc64
 
 :BUILD
 
-   nmake /Fmakefile.vc64 %1 %2 %3 > make_vc64.log
+   nmake /Fmakefile.vc64 %1 %2 %3 > make_msvc64.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
@@ -19,7 +19,7 @@ if not exist obj\vc64 md obj\vc64
 
 :BUILD_ERR
 
-   notepad make_vc64.log
+   notepad make_msvc64.log
    goto EXIT
 
 :CLEAN
@@ -27,9 +27,8 @@ if not exist obj\vc64 md obj\vc64
    del lib\vc64\*.bak
    del obj\vc64\*.obj
    del obj\vc64\*.c
-   del make_vc64.log
+   del make_msvc64.log
 
    goto EXIT
 
 :EXIT
-

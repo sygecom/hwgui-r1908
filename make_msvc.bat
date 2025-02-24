@@ -10,7 +10,7 @@ if not exist obj\vc md obj\vc
 
 :BUILD
 
-   nmake /Fmakefile.vc %1 %2 %3 > make_vc.log
+   nmake /Fmakefile.vc %1 %2 %3 > make_msvc.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
@@ -19,7 +19,7 @@ if not exist obj\vc md obj\vc
 
 :BUILD_ERR
 
-   notepad make_vc.log
+   notepad make_msvc.log
    goto EXIT
 
 :CLEAN
@@ -27,7 +27,7 @@ if not exist obj\vc md obj\vc
    del lib\vc\*.bak
    del obj\vc\*.obj
    del obj\vc\*.c
-   del make_vc.log
+   del make_msvc.log
 
    goto EXIT
 
