@@ -1133,13 +1133,17 @@ HB_FUNC_TRANSLATE(OPENIMAGE, HWG_OPENIMAGE);
 #endif
 
 /*
-PATBLT(HDC, nX, nY, nWidth, nHeight, nRop) --> .T.|.F.
+HWG_PATBLT(HDC, nX, nY, nWidth, nHeight, nRop) --> .T.|.F.
 */
-HB_FUNC(PATBLT)
+HB_FUNC(HWG_PATBLT)
 {
   hwg_ret_BOOL(
       PatBlt(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5), hwg_par_DWORD(6)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PATBLT, HWG_PATBLT);
+#endif
 
 /*
 SAVEDC(HDC) --> .T.|.F.
@@ -1179,73 +1183,105 @@ HB_FUNC_TRANSLATE(CREATECOMPATIBLEDC, HWG_CREATECOMPATIBLEDC);
 #endif
 
 /*
-SETMAPMODE(HDC, nMode) --> numeric
+HWG_SETMAPMODE(HDC, nMode) --> numeric
 */
-HB_FUNC(SETMAPMODE)
+HB_FUNC(HWG_SETMAPMODE)
 {
   hwg_ret_int(SetMapMode(hwg_par_HDC(1), hwg_par_int(2)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETMAPMODE, HWG_SETMAPMODE);
+#endif
+
 /*
-SETWINDOWORGEX(HDC, nX, nY) -->
+HWG_SETWINDOWORGEX(HDC, nX, nY) -->
 */
-HB_FUNC(SETWINDOWORGEX) // TODO: o retorno é BOOL
+HB_FUNC(HWG_SETWINDOWORGEX) // TODO: o retorno é BOOL
 {
   SetWindowOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
   hb_stornl(0, 4);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETWINDOWORGEX, HWG_SETWINDOWORGEX);
+#endif
+
 /*
-SETWINDOWEXTEX(HDC, nX, nY) -->
+HWG_SETWINDOWEXTEX(HDC, nX, nY) -->
 */
-HB_FUNC(SETWINDOWEXTEX) // TODO: o retorno é BOOL
+HB_FUNC(HWG_SETWINDOWEXTEX) // TODO: o retorno é BOOL
 {
   SetWindowExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
   hb_stornl(0, 4);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETWINDOWEXTEX, HWG_SETWINDOWEXTEX);
+#endif
+
 /*
-SETVIEWPORTORGEX(HDC, nX, nY) -->
+HWG_SETVIEWPORTORGEX(HDC, nX, nY) -->
 */
-HB_FUNC(SETVIEWPORTORGEX) // TODO: o retorno é BOOL
+HB_FUNC(HWG_SETVIEWPORTORGEX) // TODO: o retorno é BOOL
 {
   SetViewportOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
   hb_stornl(0, 4);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETVIEWPORTORGEX, HWG_SETVIEWPORTORGEX);
+#endif
+
 /*
-SETVIEWPORTEXTEX(HDC, nX, nY) -->
+HWG_SETVIEWPORTEXTEX(HDC, nX, nY) -->
 */
-HB_FUNC(SETVIEWPORTEXTEX) // TODO: o retorno é BOOL
+HB_FUNC(HWG_SETVIEWPORTEXTEX) // TODO: o retorno é BOOL
 {
   SetViewportExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
   hb_stornl(0, 4);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETVIEWPORTEXTEX, HWG_SETVIEWPORTEXTEX);
+#endif
+
 /*
-SETARCDIRECTION(HDC, nDir) --> numeric
+HWG_SETARCDIRECTION(HDC, nDir) --> numeric
 */
-HB_FUNC(SETARCDIRECTION)
+HB_FUNC(HWG_SETARCDIRECTION)
 {
   hwg_ret_int(SetArcDirection(hwg_par_HDC(1), hwg_par_int(2)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETARCDIRECTION, HWG_SETARCDIRECTION);
+#endif
+
 /*
-SETROP2(HDC, nRop2) --> numeric
+HWG_SETROP2(HDC, nRop2) --> numeric
 */
-HB_FUNC(SETROP2)
+HB_FUNC(HWG_SETROP2)
 {
   hwg_ret_int(SetROP2(hwg_par_HDC(1), hwg_par_int(2)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETROP2, HWG_SETROP2);
+#endif
+
 /*
-BITBLT(HDC, nX, nY, nWidth, nHeight, HDCSRC, nX, nY, nRop) --> .T.|.F.
+HWG_BITBLT(HDC, nX, nY, nWidth, nHeight, HDCSRC, nX, nY, nRop) --> .T.|.F.
 */
-HB_FUNC(BITBLT)
+HB_FUNC(HWG_BITBLT)
 {
   hwg_ret_BOOL(BitBlt(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4), hwg_par_int(5), hwg_par_HDC(6),
                       hwg_par_int(7), hwg_par_int(8), hwg_par_DWORD(9)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BITBLT, HWG_BITBLT);
+#endif
 
 /*
 HWG_CREATECOMPATIBLEBITMAP(HDC, nWidth, nHeight) --> HBITMAP
@@ -1322,9 +1358,9 @@ HB_FUNC_TRANSLATE(DRAWFRAMECONTROL, HWG_DRAWFRAMECONTROL);
 #endif
 
 /*
-OFFSETRECT(aRect, nX, nY) --> .T.|.F.
+HWG_OFFSETRECT(aRect, nX, nY) --> .T.|.F.
 */
-HB_FUNC(OFFSETRECT)
+HB_FUNC(HWG_OFFSETRECT)
 {
   RECT pRect;
 
@@ -1339,6 +1375,10 @@ HB_FUNC(OFFSETRECT)
   hb_storvni(pRect.right, 1, 3);
   hb_storvni(pRect.bottom, 1, 4);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(OFFSETRECT, HWG_OFFSETRECT);
+#endif
 
 /*
 HWG_DRAWFOCUSRECT(HDC, aRect) --> .T.|.F.
@@ -1372,9 +1412,9 @@ BOOL Array2Point(PHB_ITEM aPoint, POINT *pt)
 }
 
 /*
-PTINRECT(aRect, aPoint) --> .T.|.F.
+HWG_PTINRECT(aRect, aPoint) --> .T.|.F.
 */
-HB_FUNC(PTINRECT)
+HB_FUNC(HWG_PTINRECT)
 {
   POINT pt;
   RECT rect;
@@ -1384,10 +1424,14 @@ HB_FUNC(PTINRECT)
   hwg_ret_BOOL(PtInRect(&rect, pt));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PTINRECT, HWG_PTINRECT);
+#endif
+
 /*
-GETMEASUREITEMINFO(MEASUREITEMSTRUCT) --> array
+HWG_GETMEASUREITEMINFO(MEASUREITEMSTRUCT) --> array
 */
-HB_FUNC(GETMEASUREITEMINFO)
+HB_FUNC(HWG_GETMEASUREITEMINFO)
 {
   MEASUREITEMSTRUCT *lpdis = (MEASUREITEMSTRUCT *)HB_PARHANDLE(1); // hb_parnl(1);
   PHB_ITEM aMetr = hb_itemArrayNew(5);
@@ -1415,15 +1459,23 @@ HB_FUNC(GETMEASUREITEMINFO)
   hb_itemReturnRelease(aMetr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETMEASUREITEMINFO, HWG_GETMEASUREITEMINFO);
+#endif
+
 /*
-COPYRECT(aRect) --> aRect
+HWG_COPYRECT(aRect) --> aRect
 */
-HB_FUNC(COPYRECT)
+HB_FUNC(HWG_COPYRECT)
 {
   RECT p;
   Array2Rect(hb_param(1, HB_IT_ARRAY), &p);
   hb_itemReturnRelease(Rect2Array(&p));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(COPYRECT, HWG_COPYRECT);
+#endif
 
 /*
 GETWINDOWDC(HWND) --> HDC
@@ -1438,9 +1490,9 @@ HB_FUNC_TRANSLATE(GETWINDOWDC, HWG_GETWINDOWDC);
 #endif
 
 /*
-MODIFYSTYLE(HWND, np2, np3) -->
+HWG_MODIFYSTYLE(HWND, np2, np3) -->
 */
-HB_FUNC(MODIFYSTYLE)
+HB_FUNC(HWG_MODIFYSTYLE)
 {
   HWND hWnd = hwg_par_HWND(1);
   DWORD dwStyle = (DWORD)GetWindowLongPtr(hWnd, GWL_STYLE);
@@ -1449,6 +1501,10 @@ HB_FUNC(MODIFYSTYLE)
   DWORD dwNewStyle = (dwStyle & ~a) | b;
   SetWindowLongPtr(hWnd, GWL_STYLE, dwNewStyle);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MODIFYSTYLE, HWG_MODIFYSTYLE);
+#endif
 
 #if 0
 HB_FUNC(PTRRECT2ARRAY)

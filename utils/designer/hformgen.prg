@@ -1025,7 +1025,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           nRight := aCoors[3]
           nBottom := aCoors[4]           *  PS_DOT
           // : LFB
-          SetROP2(hDC, 9)
+          hwg_SetROP2(hDC, 9)
           oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("606060"))
           hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB
@@ -1036,7 +1036,7 @@ STATIC FUNCTION PaintDlg( oDlg )
              hwg_DrawLine( hDC, nLeft+2, i, nRight, i )    //h
           next
           // : LFB
-          SetROP2(hDC, 13)
+          hwg_SetROP2(hDC, 13)
           oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))
           hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB

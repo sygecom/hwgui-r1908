@@ -250,7 +250,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
             xPos := hwg_LOWORD(lParam)
             yPos := hwg_HIWORD(lParam) // + ::nTop + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION)
             aCoors := hwg_ScreenToClient(::handle, hwg_GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
-            IF (!PtInRect(aCoors, {xPos, yPos}))
+            IF (!hwg_PtInRect(aCoors, {xPos, yPos}))
                hwg_MsgBeep()
                FOR i := 1 TO 6
                   hwg_FlashWindow(oMdi:handle, 1)
@@ -306,7 +306,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
             xPos := hwg_LOWORD(lParam)
             yPos := hwg_HIWORD(lParam) // + ::nTop + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION)
             aCoors := hwg_ScreenToClient(::handle, hwg_GetWindowRect(oMdi:handle)) // acoors[1], acoors[2])
-            IF !PtInRect(aCoors, {xPos, yPos})
+            IF !hwg_PtInRect(aCoors, {xPos, yPos})
                hwg_MsgBeep()
                FOR i := 1 TO 6
                   hwg_FlashWindow(oMdi:handle, 1)

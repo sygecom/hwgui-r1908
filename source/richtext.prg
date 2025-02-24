@@ -2484,7 +2484,7 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
 
     // initialize the metafile
       SETWNDEX(hDCOut, 0, 0)
-      SetWindowExtEx(hDCOut, nWidth, nHeight);
+      hwg_SetWindowExtEx(hDCOut, nWidth, nHeight);
 
       DibDraw(hDCOut, hDib, hPal, 0, 0, nWidth, nHeight, nRaster)
 

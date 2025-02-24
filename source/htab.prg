@@ -1081,7 +1081,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
       IF !::pages[i]:enabled .OR. i == hwg_PtrToUlong(nPageEnable)
          //client_rect := ::Pages[i]:aItemPos
          client_rect := TabItemPos(::handle, i - 1)
-         IF (PtInRect(client_rect, pt)) .AND. i != nPageEnable
+         IF (hwg_PtInRect(client_rect, pt)) .AND. i != nPageEnable
             RETURN 0
          ENDIF
          ::oPaint:ShowTextTabs(::pages[i], client_rect)
@@ -1106,7 +1106,7 @@ METHOD ShowToolTips(lParam) CLASS HTab
 
    FOR i := 1 TO Len(::Pages)
       client_rect := ::Pages[i]:aItemPos
-      IF (PtInRect(client_rect, pt))
+      IF (hwg_PtInRect(client_rect, pt))
          ::SetToolTip(IIf(::Pages[i]:Tooltip == NIL, "", ::Pages[i]:Tooltip))
          EXIT
       ENDIF

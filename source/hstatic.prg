@@ -277,7 +277,7 @@ METHOD Paint(lpDis) CLASS HStatic
    LOCAL brBackground
    LOCAL dc := drawInfo[3]
 
-   client_rect := CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
+   client_rect := hwg_CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
    //client_rect := hwg_GetClientRect(::handle)
    szText := hwg_GetWindowText(::handle)
 

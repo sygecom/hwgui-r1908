@@ -156,11 +156,11 @@ METHOD SetAnimation(nAnimation) CLASS HProgressBar
    IF nAnimation != NIL
        IF nAnimation <= 0
           hwg_SendMessage(::handle, PBM_SETMARQUEE, 0, NIL)
-          MODIFYSTYLE(::handle, PBS_MARQUEE, 0)
+          hwg_ModifyStyle(::handle, PBS_MARQUEE, 0)
           hwg_SendMessage(::handle, PBM_SETPOS, 0, 0)
        ELSE
           IF hwg_BitAND(::Style, PBS_MARQUEE) == 0
-             MODIFYSTYLE(::handle, PBS_MARQUEE, PBS_MARQUEE)
+             hwg_ModifyStyle(::handle, PBS_MARQUEE, PBS_MARQUEE)
          ENDIF
          hwg_SendMessage(::handle, PBM_SETMARQUEE, 1, nAnimation)
        ENDIF
