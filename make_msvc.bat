@@ -23,8 +23,8 @@ if not exist obj\vc md obj\vc
    goto EXIT
 
 :CLEAN
-   del lib\vc\*.lib
-   del lib\vc\*.bak
+   del lib\win\msvc\*.lib
+   del lib\win\msvc\*.bak
    del obj\vc\*.obj
    del obj\vc\*.c
    del make_msvc.log

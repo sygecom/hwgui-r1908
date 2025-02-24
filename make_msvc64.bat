@@ -23,8 +23,8 @@ if not exist obj\vc64 md obj\vc64
    goto EXIT
 
 :CLEAN
-   del lib\vc64\*.lib
-   del lib\vc64\*.bak
+   del lib\win\msvc64\*.lib
+   del lib\win\msvc64\*.bak
    del obj\vc64\*.obj
    del obj\vc64\*.c
    del make_msvc64.log
