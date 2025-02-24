@@ -30,7 +30,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent)
    METHOD Init()
    METHOD Activate()
-   METHOD Increment() INLINE UpdateProgressBar(::handle)
+   METHOD Increment() INLINE hwg_UpdateProgressBar(::handle)
    METHOD STEP(cTitle)
    METHOD SET(cTitle, nPos)
    METHOD SetLabel(cCaption)
@@ -121,7 +121,7 @@ METHOD STEP(cTitle)
    ::nCount++
    IF ::nCount == ::nLimit
       ::nCount := 0
-      UpdateProgressBar(::handle)
+      hwg_UpdateProgressBar(::handle)
       ::SET(cTitle)
       IF !Empty(::lPercent)
          ::nPercent += ::maxPos  //::nLimit
@@ -138,7 +138,7 @@ METHOD SET(cTitle, nPos) CLASS HProgressBar
       hwg_SetWindowText(::oParent:handle, cTitle)
    ENDIF
    IF nPos != NIL
-      SetProgressBar(::handle, nPos)
+      hwg_SetProgressBar(::handle, nPos)
    ENDIF
 
    RETURN NIL

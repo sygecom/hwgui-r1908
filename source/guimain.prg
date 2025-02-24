@@ -350,14 +350,14 @@ FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height
       iCou++
       IF iCou == nLimit
          iCou := 0
-         UpdateProgressBar(hPBar)
+         hwg_UpdateProgressBar(hPBar)
       ENDIF
    ELSEIF nStep == 2
-      UpdateProgressBar(hPBar)
+      hwg_UpdateProgressBar(hPBar)
    ELSEIF nStep == 3
       hwg_SetWindowText(oDlg:handle, cTitle)
       IF maxPos != NIL
-         SetProgressBar(hPBar, maxPos)
+         hwg_SetProgressBar(hPBar, maxPos)
       ENDIF
    ELSE
       hwg_DestroyWindow(hPBar)

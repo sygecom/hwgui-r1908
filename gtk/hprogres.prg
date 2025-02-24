@@ -26,7 +26,7 @@ CLASS HProgressBar INHERIT HControl
    METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange, bInit,bSize,bPaint,ctooltip )
    METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit,bInit,bSize,bPaint,ctooltip )
    METHOD Activate()
-   METHOD Increment() INLINE UpdateProgressBar( ::handle )
+   METHOD Increment() INLINE hwg_UpdateProgressBar( ::handle )
    METHOD Step()
    METHOD Set( cTitle,nPos )
    METHOD Close()
@@ -93,7 +93,7 @@ METHOD Step()
    ::nCount ++
    IF ::nCount == ::nLimit
       ::nCount := 0
-      UpdateProgressBar( ::handle )
+      hwg_UpdateProgressBar( ::handle )
    ENDIF
 
 Return Nil
@@ -104,7 +104,7 @@ METHOD Set( cTitle,nPos ) CLASS HProgressBar
       hwg_SetWindowText( ::oParent:handle,cTitle )
    ENDIF
    IF nPos != Nil
-      SetProgressBar( ::handle,nPos )
+      hwg_SetProgressBar( ::handle,nPos )
    ENDIF
 
 Return Nil
