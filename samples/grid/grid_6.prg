@@ -81,10 +81,10 @@ FUNCTION Test()
                 ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color hwg_RGB(255, 12, 123) backcolor hwg_RGB(192, 0, 255), header aItems[n, 2], header aItems[n, 3] bitmap 3, header aItems[n, 1] bitmap 1 color hwg_RGB(123, 122, 123)  backcolor hwg_RGB(192, 0, 255)
              next
 
-             @ 0, 395 button "LVS_REPORT" size 95, 25 on click {||LISTVIEW_SETVIEW(oGrid:handle, LVS_REPORT)}
-             @ 100, 395 button "LVS_ICON" size 95, 25 on click {||LISTVIEW_SETVIEW(oGrid:handle, LVS_ICON)}
-             @ 200, 395 button "LVS_SMALLICON" size 95, 25 on click {||LISTVIEW_SETVIEW(oGrid:handle, LVS_SMALLICON)}
-             @ 300, 395 button "LVS_LIST" size 95, 25 on click {||LISTVIEW_SETVIEW(oGrid:handle, LVS_LIST)}
+             @ 0, 395 button "LVS_REPORT" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_REPORT)}
+             @ 100, 395 button "LVS_ICON" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_ICON)}
+             @ 200, 395 button "LVS_SMALLICON" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_SMALLICON)}
+             @ 300, 395 button "LVS_LIST" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_LIST)}
              @ 700, 395 BUTTON "Close" SIZE 95, 25 ON CLICK {||oForm:Close()}
 
         ACTIVATE DIALOG oForm
