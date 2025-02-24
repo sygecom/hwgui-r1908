@@ -10,7 +10,7 @@ if not exist obj\vc md obj\vc
 
 :BUILD
 
-   nmake /Fmakefile.vc %1 %2 %3 > make_msvc.log
+   nmake /Fmakefile.msvc %1 %2 %3 > make_msvc.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK

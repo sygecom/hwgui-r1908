@@ -10,7 +10,7 @@ if not exist obj\vc64 md obj\vc64
 
 :BUILD
 
-   nmake /Fmakefile.vc64 %1 %2 %3 > make_msvc64.log
+   nmake /Fmakefile.msvc64 %1 %2 %3 > make_msvc64.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
