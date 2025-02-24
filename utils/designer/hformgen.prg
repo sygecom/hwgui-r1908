@@ -1398,7 +1398,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
       ENDIF
    ENDIF
    IF oCtrl != Nil .AND. Lower(oCtrl:cClass) == "page"
-      i := Tab_HitTest( oCtrl:handle,,,@flag )
+      i := hwg_Tab_HitTest( oCtrl:handle,,,@flag )
       IF i >= 0 .AND. flag == 4 .OR. flag == 6
          Page_Select( oCtrl, i+1 )
       ENDIF
@@ -1494,7 +1494,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
          oContainer:AddControl( oCtrl )
          oCtrl:oContainer := oContainer
          IF Lower(oContainer:cClass) == "page"
-            oCtrl:nPage := GetCurrentTab( oContainer:handle )
+            oCtrl:nPage := hwg_GetCurrentTab( oContainer:handle )
             IF oCtrl:nPage == 0
                oCtrl:nPage ++
             ENDIF
@@ -1577,7 +1577,7 @@ FUNCTION Container( oDlg,oCtrl )
       oContainer:AddControl( oCtrl )
       oCtrl:oContainer := oContainer
       IF Lower(oContainer:cClass) == "page"
-         oCtrl:nPage := GetCurrentTab( oContainer:handle )
+         oCtrl:nPage := hwg_GetCurrentTab( oContainer:handle )
          IF oCtrl:nPage == 0
             oCtrl:nPage ++
          ENDIF

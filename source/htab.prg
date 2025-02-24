@@ -92,7 +92,7 @@ METHOD SetTabText(cText) CLASS HPage
       RETURN NIL
    ENDIF
 
-   SetTabName(::oParent:handle, ::PageOrder - 1, cText)
+   hwg_SetTabName(::oParent:handle, ::PageOrder - 1, cText)
    ::xCaption := cText
    hwg_InvalidateRect(::oParent:handle, 0, ::aItemPos[1], ::aItemPos[2], ::aItemPos[1] + ::aItemPos[3], ::aItemPos[2] + ::aItemPos[4])
    hwg_InvalidateRect(::oParent:handle, 0)
@@ -269,7 +269,7 @@ METHOD Init() CLASS HTab
    LOCAL x := 0
 
    IF !::lInit
-      InitTabControl(::handle, ::aTabs, IIf(::himl != NIL, ::himl, 0))
+      hwg_InitTabControl(::handle, ::aTabs, IIf(::himl != NIL, ::himl, 0))
       hwg_SendMessage(::handle, TCM_SETMINTABWIDTH, 0, 0)
       IF hwg_BitAnd(::Style, TCS_FIXEDWIDTH) != 0
          ::TabHeightSize := 25 - (::oFont:Height + 12)
@@ -426,7 +426,7 @@ METHOD EndPage() CLASS HTab
    IF !::lResourceTab
       ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
       IF ::handle != NIL .AND. !Empty(::handle)
-         AddTab(::handle, ::nActive, ::aTabs[::nActive])
+         hwg_AddTab(::handle, ::nActive, ::aTabs[::nActive])
       ENDIF
       IF ::nActive > 1 .AND. ::handle != NIL .AND. !Empty(::handle)
          ::HidePage(::nActive)
@@ -451,7 +451,7 @@ METHOD EndPage() CLASS HTab
    ELSE
       IF ::handle != NIL .AND. !Empty(::handle)
 
-         AddTabDialog(::handle, ::nActive, ::aTabs[::nActive], ::aPages[::nactive, 1]:handle)
+         hwg_AddTabDialog(::handle, ::nActive, ::aTabs[::nActive], ::aPages[::nactive, 1]:handle)
       ENDIF
       IF ::nActive > 1 .AND. ::handle != NIL .AND. !Empty(::handle)
          ::HidePage(::nActive)
@@ -666,11 +666,11 @@ RETURN ::nActive
 METHOD DeletePage(nPage) CLASS HTab
    IF ::lResourceTab
       ADel(::m_arrayStatusTab, nPage,, .T.)
-      DeleteTab(::handle, nPage)
+      hwg_DeleteTab(::handle, nPage)
       ::nActive := nPage - 1
 
    ELSE
-      DeleteTab(::handle, nPage - 1)
+      hwg_DeleteTab(::handle, nPage - 1)
 
       ADel(::aPages, nPage)
       ADel(::Pages, nPage)
@@ -693,7 +693,7 @@ RETURN ::nActive
 METHOD Notify(lParam) CLASS HTab
    
    LOCAL nCode := hwg_GetNotifyCode(lParam)
-   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeydown(lParam)
    LOCAL nPage := hwg_SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
 
    IF hwg_BitAnd(::Style, TCS_BUTTONS) != 0
@@ -736,9 +736,9 @@ METHOD Notify(lParam) CLASS HTab
             //ENDIF
         IF hb_IsBlock(::bChange)
            ::oparent:lSuspendMsgsHandling := .T.
-           Eval(::bChange, Self, GetCurrentTab(::handle))
+           Eval(::bChange, Self, hwg_GetCurrentTab(::handle))
            IF hb_IsBlock(::bGetFocus) .AND. nPage != ::nPrevPage .AND. ::Pages[nPage]:Enabled .AND. ::nActivate > 0
-              Eval(::bGetFocus, GetCurrentTab(::handle), Self)
+              Eval(::bGetFocus, hwg_GetCurrentTab(::handle), Self)
               ::nActivate := 0
            ENDIF
            ::oparent:lSuspendMsgsHandling := .F.
@@ -759,7 +759,7 @@ METHOD Notify(lParam) CLASS HTab
       IF !Empty(::pages) .AND. ::nActive > 0 .AND. ::pages[::nActive]:enabled
          hwg_SetFocus(::handle)
          IF hb_IsBlock(::bAction)
-            Eval(::bAction, Self, GetCurrentTab(::handle))
+            Eval(::bAction, Self, hwg_GetCurrentTab(::handle))
          ENDIF
       ENDIF
    */
@@ -767,18 +767,18 @@ METHOD Notify(lParam) CLASS HTab
       IF !Empty(::pages) .AND. ::nActive > 0 .AND. ::pages[::nActive]:enabled
           IF hb_IsBlock(::bRClick)
               ::oparent:lSuspendMsgsHandling := .T.
-              Eval(::bRClick, Self, GetCurrentTab(::handle))
+              Eval(::bRClick, Self, hwg_GetCurrentTab(::handle))
               ::oparent:lSuspendMsgsHandling := .F.
           ENDIF
       ENDIF
 
    CASE nCode == TCN_SETFOCUS
       IF hb_IsBlock(::bGetFocus) .AND. !::Pages[nPage]:Enabled
-         Eval(::bGetFocus, GetCurrentTab(::handle), Self)
+         Eval(::bGetFocus, hwg_GetCurrentTab(::handle), Self)
       ENDIF
    CASE nCode == TCN_KILLFOCUS
       IF hb_IsBlock(::bLostFocus)
-         Eval(::bLostFocus, GetCurrentTab(::handle), Self)
+         Eval(::bLostFocus, hwg_GetCurrentTab(::handle), Self)
       ENDIF
 
    ENDCASE
@@ -786,7 +786,7 @@ METHOD Notify(lParam) CLASS HTab
         (::lClick .AND. nCode == TCN_SELCHANGE)
        ::oparent:lSuspendMsgsHandling := .T.
        IF hb_IsBlock(::bAction) .AND. ::lClick
-          Eval(::bAction, Self, GetCurrentTab(::handle))
+          Eval(::bAction, Self, hwg_GetCurrentTab(::handle))
        ENDIF
        ::oparent:lSuspendMsgsHandling := .F.
        ::lClick := .F.
@@ -883,7 +883,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
      IF msg == WM_NOTIFY .AND. hwg_IsWindowVisible(::oParent:handle) .AND. ::nActivate == NIL
       IF hb_IsBlock(::bGetFocus)
           ::oParent:lSuspendMsgsHandling := .T.
-          Eval(::bGetFocus, Self, GetCurrentTab(::handle))
+          Eval(::bGetFocus, Self, hwg_GetCurrentTab(::handle))
           ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
    ELSEIF (hwg_IsWindowVisible(::handle) .AND. ::nActivate == NIL) .OR. msg == WM_KILLFOCUS
@@ -1025,7 +1025,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    IF msg == WM_NOTIFY .AND. hwg_IsWindowVisible(::oParent:handle) .AND. ::nActivate == NIL
       IF hb_IsBlock(::bGetFocus)
          ::oParent:lSuspendMsgsHandling := .T.
-         Eval(::bGetFocus, Self, GetCurrentTab(::handle))
+         Eval(::bGetFocus, Self, hwg_GetCurrentTab(::handle))
          ::oParent:lSuspendMsgsHandling := .F.
       ENDIF
    ELSEIF (hwg_IsWindowVisible(::handle) .AND. ::nActivate == NIL) .OR. msg == WM_KILLFOCUS

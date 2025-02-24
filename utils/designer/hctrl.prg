@@ -759,7 +759,7 @@ FUNCTION Page_New( oTab )
       aTabs := {}
       oTab:SetProp( "Tabs",aTabs )
    ENDIF
-   AddTab( oTab:handle, Len(aTabs), "New Page" )
+   hwg_AddTab( oTab:handle, Len(aTabs), "New Page" )
    AAdd(aTabs, "New Page")
    InspUpdProp( "Tabs", aTabs )
    hwg_RedrawWindow( oTab:handle, 5 )
@@ -780,9 +780,9 @@ FUNCTION Page_Upd( oTab, arr )
 
    FOR i := 1 TO Len(arr)
       IF i <= nTabs
-         SetTabName( oTab:handle, i-1, arr[i] )
+         hwg_SetTabName( oTab:handle, i-1, arr[i] )
       ELSE
-         AddTab( oTab:handle, i-1, arr[i] )
+         hwg_AddTab( oTab:handle, i-1, arr[i] )
       ENDIF
    NEXT
 
@@ -794,7 +794,7 @@ FUNCTION Page_Select( oTab, nTab, lForce )
    LOCAL j
    LOCAL oCtrl
 
-   IF ( lForce != Nil .AND. lForce ) .OR. GetCurrentTab( oTab:handle ) != nTab
+   IF ( lForce != Nil .AND. lForce ) .OR. hwg_GetCurrentTab( oTab:handle ) != nTab
 
       hwg_SendMessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
       FOR i := 1 TO Len(oTab:aControls)

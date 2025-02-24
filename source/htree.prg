@@ -574,7 +574,7 @@ METHOD Notify(lParam) CLASS HTree
    LOCAL nAct
    LOCAL nHitem
    LOCAL leval
-   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeyDown(lParam)
     
    IF ncode == NM_SETCURSOR .AND. ::lDragging
       ::hitemDrop := tree_Hittest(::handle,,, @nAct)
@@ -701,7 +701,7 @@ METHOD Notify(lParam) CLASS HTree
    LOCAL nAct
    LOCAL nHitem
    LOCAL leval
-   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeyDown(lParam)
 
    SWITCH nCode
 
