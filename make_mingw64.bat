@@ -3,7 +3,8 @@ if "%1" == "clean" goto CLEAN
 if "%1" == "CLEAN" goto CLEAN
 
 if not exist lib md lib
-if not exist lib\gcc64 md lib\gcc64
+if not exist lib\win md lib\win
+if not exist lib\win\mingw64 md lib\win\mingw64
 if not exist obj md obj
 if not exist obj\gcc64 md obj\gcc64
 
@@ -21,8 +22,8 @@ if not exist obj\gcc64 md obj\gcc64
    goto EXIT
 
 :CLEAN
-   del lib\gcc64\*.a
-   del lib\gcc64\*.bak
+   del lib\win\mingw64\*.a
+   del lib\win\mingw64\*.bak
    del obj\gcc64\*.o
    del obj\gcc64\*.c
 
