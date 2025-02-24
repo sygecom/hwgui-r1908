@@ -10,7 +10,7 @@ if not exist obj\cl md obj\cl
 
 :BUILD
 
-   mingw32-make.exe -f makefile.clang
+   mingw32-make.exe -f makefile.clang > make_clang.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
@@ -19,6 +19,7 @@ if not exist obj\cl md obj\cl
 
 :BUILD_ERR
 
+   notepad make_clang.log
    goto EXIT
 
 :CLEAN
@@ -26,6 +27,7 @@ if not exist obj\cl md obj\cl
    del lib\win\clang\*.bak
    del obj\*.o
    del obj\*.c
+   del make_clang.log
 
    goto EXIT
 

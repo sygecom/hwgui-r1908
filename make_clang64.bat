@@ -10,7 +10,7 @@ if not exist obj\cl64 md obj\cl64
 
 :BUILD
 
-   mingw32-make.exe -f makefile.clang64
+   mingw32-make.exe -f makefile.clang64 > make_clang64.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
@@ -19,6 +19,7 @@ if not exist obj\cl64 md obj\cl64
 
 :BUILD_ERR
 
+   notepad make_clang64.log
    goto EXIT
 
 :CLEAN
@@ -26,6 +27,7 @@ if not exist obj\cl64 md obj\cl64
    del lib\win\clang64\*.bak
    del obj\*.o
    del obj\*.c
+   del make_clang64.log
 
    goto EXIT
 
