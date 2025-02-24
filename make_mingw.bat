@@ -10,7 +10,7 @@ if not exist obj\gcc md obj\gcc
 :BUILD
 
    rem set path=c:\softools\mingw\bin
-   mingw32-make.exe -f makefile.gcc
+   mingw32-make.exe -f makefile.mingw
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK

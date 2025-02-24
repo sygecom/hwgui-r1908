@@ -9,7 +9,7 @@ if not exist obj\gcc64 md obj\gcc64
 
 :BUILD
 
-   mingw32-make.exe -f makefile.gcc64
+   mingw32-make.exe -f makefile.mingw64
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
