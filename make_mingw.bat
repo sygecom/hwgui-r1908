@@ -11,7 +11,7 @@ if not exist obj\gcc md obj\gcc
 :BUILD
 
    rem set path=c:\softools\mingw\bin
-   mingw32-make.exe -f makefile.mingw
+   mingw32-make.exe -f makefile.mingw > make_mingw.log
    if errorlevel 1 goto BUILD_ERR
 
 :BUILD_OK
@@ -20,6 +20,7 @@ if not exist obj\gcc md obj\gcc
 
 :BUILD_ERR
 
+   notepad make_mingw.log
    goto EXIT
 
 :CLEAN
@@ -27,6 +28,7 @@ if not exist obj\gcc md obj\gcc
    del lib\win\mingw\*.bak
    del obj\gcc\*.o
    del obj\gcc\*.c
+   del make_mingw.log
 
    goto EXIT
 
