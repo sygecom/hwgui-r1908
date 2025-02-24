@@ -14,9 +14,9 @@ if not exist obj\b32\mt md obj\b32\mt
 rem   make -fmakefile.bc  > make_bcc.log
 rem   if errorlevel 1 goto BUILD_ERR
 rem   set ACTIVEX_SUPPORT=ON
-make -l EXE_OBJ_DIR=obj\b32\bin OBJ_DIR=obj\b32 -fmakefile.bc %1 %2 %3 > make_bcc.log
+make -l EXE_OBJ_DIR=obj\b32\bin OBJ_DIR=obj\b32 -fmakefile.bcc %1 %2 %3 > make_bcc.log
 if errorlevel 1 goto BUILD_ERR
-make -l OBJ_DIR=obj\b32\mt -DHB_THREAD_SUPPORT -DHB_MT=mt -fmakefile.bc %2 %3 >> make_bcc.log
+make -l OBJ_DIR=obj\b32\mt -DHB_THREAD_SUPPORT -DHB_MT=mt -fmakefile.bcc %2 %3 >> make_bcc.log
 if errorlevel 1 goto BUILD_ERR
 
 

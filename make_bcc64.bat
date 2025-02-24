@@ -16,9 +16,9 @@ set C_USR=-Wno-visibility -Wno-missing-declarations -Wno-deprecated-declarations
 rem   make -fmakefile.bc  > make_bcc64.log
 rem   if errorlevel 1 goto BUILD_ERR
 rem   set ACTIVEX_SUPPORT=ON
-make -l EXE_OBJ_DIR=obj\b64\bin OBJ_DIR=obj\b64 -fmakefile.bc64 %1 %2 %3 > make_bcc64.log
+make -l EXE_OBJ_DIR=obj\b64\bin OBJ_DIR=obj\b64 -fmakefile.bcc64 %1 %2 %3 > make_bcc64.log
 if errorlevel 1 goto BUILD_ERR
-make -l OBJ_DIR=obj\b64\mt -DHB_THREAD_SUPPORT -DHB_MT=mt -fmakefile.bc64 %2 %3 >> make_bcc64.log
+make -l OBJ_DIR=obj\b64\mt -DHB_THREAD_SUPPORT -DHB_MT=mt -fmakefile.bcc64 %2 %3 >> make_bcc64.log
 if errorlevel 1 goto BUILD_ERR
 
 

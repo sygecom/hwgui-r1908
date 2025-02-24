@@ -7,7 +7,7 @@ if "%1" == "CLEAN" goto CLEAN
    IF NOT EXIST OBJ\DLL MD OBJ\DLL
    del makedll.log
    del *.@@@
-   make -f makedll.bc %1 %2 %3 %4 %5 %6 > makedll.log
+   make -f makedll.bcc %1 %2 %3 %4 %5 %6 > makedll.log
 
    if errorlevel 1 goto BUILD_ERR
 
