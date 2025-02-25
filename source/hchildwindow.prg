@@ -130,7 +130,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
       RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL .OR. msg == WM_MOUSEWHEEL
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ELSEIF msg == WM_NOTIFY .AND. !::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(wParam)) != NIL .AND. oCtrl:className != "HTAB"
             ::nFocus := oCtrl:handle
@@ -193,7 +193,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
    CASE WM_HSCROLL
    CASE WM_VSCROLL
    CASE WM_MOUSEWHEEL
-      onTrackScroll(Self, msg, wParam, lParam)
+      hwg_OnTrackScroll(Self, msg, wParam, lParam)
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
    CASE WM_NOTIFY
@@ -487,7 +487,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       // accelerator MDICHILD
       IF Len(HWindow():aWindows) > 2 .AND. ((oChild := oWnd):Type == WND_MDICHILD .OR. ;
          !Empty(oChild := oWnd:GetMdiActive()))
-         IF (oCtrl := FindAccelerator(oChild, lParam)) != NIL
+         IF (oCtrl := hwg_FindAccelerator(oChild, lParam)) != NIL
             oCtrl:SetFocus()
             hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
             RETURN -2

@@ -217,7 +217,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
                  RETURN 0
              ENDIF
          ENDIF
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF

@@ -152,7 +152,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       ENDIF
       RETURN 0
    ELSEIF msg == WM_KEYDOWN
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_LBUTTONDOWN
 
@@ -238,7 +238,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       RETURN 0
 
    CASE WM_KEYDOWN
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
       EXIT
 
    CASE WM_LBUTTONDOWN

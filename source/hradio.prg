@@ -339,7 +339,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       ENDIF
    ENDIF
    IF msg == WM_GETDLGCODE //.AND. !Empty(wParam)
-       IF wParam == VK_RETURN .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
+       IF wParam == VK_RETURN .AND. hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
          RETURN 0
       ELSEIF wParam == VK_ESCAPE .AND. ;
                   (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
@@ -353,7 +353,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       ENDIF
       RETURN DLGC_WANTMESSAGE
    ELSEIF msg == WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       IF wParam == VK_LEFT .OR. wParam == VK_UP
          GetSkip(::oparent, ::handle, , -1)
          RETURN 0
@@ -369,7 +369,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
          RETURN 0
       ENDIF
    ELSEIF msg == WM_KEYUP
-      ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
       IF (wParam == VK_RETURN)
          RETURN 0
       ENDIF
@@ -391,7 +391,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
    SWITCH msg
 
    CASE WM_GETDLGCODE //.AND. !Empty(wParam)
-      IF wParam == VK_RETURN .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
+      IF wParam == VK_RETURN .AND. hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
          RETURN 0
       ELSEIF wParam == VK_ESCAPE .AND. (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
          RETURN DLGC_WANTMESSAGE
@@ -405,7 +405,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       RETURN DLGC_WANTMESSAGE
 
    CASE WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       SWITCH wParam
       CASE VK_LEFT
       CASE VK_UP
@@ -425,7 +425,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       EXIT
 
    CASE WM_KEYUP
-      ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
       IF wParam == VK_RETURN
          RETURN 0
       ENDIF

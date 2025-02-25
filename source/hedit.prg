@@ -278,7 +278,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ::DeleteChar(.T.)
                RETURN 0
             ELSEIF wParam == VK_RETURN
-               IF !ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND. ;
+               IF !hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND. ;
                        (::GetParentForm():Type < WND_DLG_RESOURCE .OR. ;
                    !::GetParentForm():lModal)
                    GetSkip(oParent, ::handle, , 1)
@@ -302,7 +302,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ENDIF
                          IF (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
                    hwg_SetFocus(0)
-                   ProcOkCancel(Self, VK_ESCAPE)
+                   hwg_ProcOkCancel(Self, VK_ESCAPE)
                    RETURN 0
                ENDIF
                RETURN 0 //-1
@@ -426,7 +426,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                //hwg_SetFocus(nexthandle)
                hwg_PostMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
                RETURN 0
-            ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
+            ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
                RETURN -1
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_TAB) .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
                GetSkip(oParent, ::handle, , 1)
@@ -507,7 +507,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
 
    //IF msg == WM_KEYDOWN
    IF (msg == WM_KEYUP .OR. msg == WM_SYSKEYUP) .AND. wParam != VK_ESCAPE     /* BETTER FOR DESIGNER */
-      IF !ProcKeyList(Self, wParam)
+      IF !hwg_ProcKeyList(Self, wParam)
          IF hb_IsBlock(::bKeyUp)
             IF !Eval(::bKeyUp, Self, wParam)
                RETURN -1

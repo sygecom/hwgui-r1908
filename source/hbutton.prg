@@ -145,7 +145,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
          hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, hwg_MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
-      IF !ProcKeyList(Self, wParam)
+      IF !hwg_ProcKeyList(Self, wParam)
          IF wParam == VK_TAB
             GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
@@ -195,7 +195,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
          hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, hwg_MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
-      IF !ProcKeyList(Self, wParam)
+      IF !hwg_ProcKeyList(Self, wParam)
          SWITCH wParam
          CASE VK_TAB
             GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))

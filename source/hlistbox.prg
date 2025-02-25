@@ -174,7 +174,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
       ENDIF
    ENDIF
    IF msg == WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN - 1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
@@ -209,7 +209,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
    SWITCH msg
 
    CASE WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN -1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE

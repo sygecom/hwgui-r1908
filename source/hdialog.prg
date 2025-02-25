@@ -293,7 +293,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          IF ::nScrollBars != -1 .AND. ::bScroll == NIL
             ::Super:ScrollHV(Self, msg, wParam, lParam)
          ENDIF
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
@@ -447,7 +447,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       IF ::nScrollBars != -1 .AND. ::bScroll == NIL
          ::Super:ScrollHV(Self, msg, wParam, lParam)
       ENDIF
-      onTrackScroll(Self, msg, wParam, lParam)
+      hwg_OnTrackScroll(Self, msg, wParam, lParam)
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
 #ifdef __XHARBOUR__
@@ -1167,7 +1167,7 @@ STATIC FUNCTION onSysCommand(oDlg, wParam, lParam)
 
    CASE SC_KEYMENU
       // accelerator IN TAB/CONTAINER
-      IF (oCtrl := FindAccelerator(oDlg, lParam)) != NIL
+      IF (oCtrl := hwg_FindAccelerator(oDlg, lParam)) != NIL
          oCtrl:SetFocus()
          hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
          RETURN 2

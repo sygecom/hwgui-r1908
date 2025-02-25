@@ -336,7 +336,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       ELSEIF wParam == VK_TAB
          GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
       ENDIF
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_SYSKEYUP .OR. (msg == WM_KEYUP .AND. ;
                      AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0)
@@ -419,7 +419,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    ELSEIF msg == WM_GETDLGCODE
          IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
            oParent := ::GetParentForm()
-           IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
+           IF !hwg_ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
               hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
            ELSEIF oParent:FindControl(IDCANCEL) != NIL .AND. !oParent:FindControl(IDCANCEL):IsEnabled() .AND. oParent:lExitOnEsc
               hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
@@ -534,7 +534,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       CASE VK_TAB
          GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
       ENDSWITCH
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
       EXIT
 
    CASE WM_SYSKEYUP
@@ -626,7 +626,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
    CASE WM_GETDLGCODE
       IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
          oParent := ::GetParentForm()
-         IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
+         IF !hwg_ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
             hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
          ELSEIF oParent:FindControl(IDCANCEL) != NIL .AND. !oParent:FindControl(IDCANCEL):IsEnabled() .AND. oParent:lExitOnEsc
             hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)

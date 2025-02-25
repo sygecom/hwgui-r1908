@@ -141,7 +141,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
       ENDIF
    ENDIF
    IF msg == WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       IF wParam == VK_TAB
          GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
@@ -162,7 +162,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYUP
-      ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
 
     ELSEIF msg == WM_GETDLGCODE .AND. !Empty(lParam)
       IF wParam == VK_RETURN .OR. wParam == VK_TAB
@@ -191,7 +191,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
    SWITCH msg
 
    CASE WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       SWITCH wParam
       CASE VK_TAB
          GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
@@ -217,7 +217,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
       EXIT
 
    CASE WM_KEYUP
-      ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
       EXIT
 
    CASE WM_GETDLGCODE

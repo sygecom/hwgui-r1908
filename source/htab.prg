@@ -225,7 +225,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
       ENDIF
    ENDIF
    ::oPaint := HPaintTab():New(Self, , 0, 0, 0, 0) //, ::oFont)
-   //::brush := GetBackColorParent(Self, .T.)
+   //::brush := hwg_GetBackColorParent(Self, .T.)
    HWG_InitCommonControlsEx()
    ::Activate()
 
@@ -256,7 +256,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip
    ::aTabs := {}
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
 
-   ::brush := GetBackColorParent(Self, .T.)
+   ::brush := hwg_GetBackColorParent(Self, .T.)
    ::oPaint := HPaintTab():New(Self, , 0, 0, 0, 0) //, ::oFont)
 
 RETURN Self
@@ -846,7 +846,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       hwg_SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
 
    ELSEIF msg == WM_KEYDOWN .AND. hwg_GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
-       IF ProcKeyList(Self, wParam)
+       IF hwg_ProcKeyList(Self, wParam)
           RETURN - 1
        ELSEIF wParam == VK_ESCAPE
          RETURN 0
@@ -979,7 +979,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    CASE WM_KEYDOWN
       IF hwg_GetFocus() == ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
-         IF ProcKeyList(Self, wParam)
+         IF hwg_ProcKeyList(Self, wParam)
             RETURN -1
          ELSEIF wParam == VK_ESCAPE
             RETURN 0

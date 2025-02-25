@@ -416,7 +416,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
       RETURN 0
 
    ELSEIF msg == WM_KEYUP
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
 

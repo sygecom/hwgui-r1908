@@ -392,7 +392,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), - 1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN .AND. ;
-            !ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND.;
+            !hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND.;
                        (::GetParentForm():Type < WND_DLG_RESOURCE .OR. ;
                    !::GetParentForm():lModal)
             GetSkip(::oParent, ::handle, , 1)
@@ -408,7 +408,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
            RETURN  DLGC_WANTCHARS + DLGC_WANTARROWS
 
       ELSEIF msg == WM_KEYDOWN
-         //ProcKeyList(Self, wParam)
+         //hwg_ProcKeyList(Self, wParam)
          IF wparam == VK_RIGHT .OR. wParam == VK_RETURN //.AND. !::lEdit
              GetSkip(::oParent, ::handle, , 1)
              RETURN 0
@@ -420,7 +420,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          ENDIF
 
       ELSEIF msg == WM_KEYUP
-         ProcKeyList(Self, wParam)        //working in MDICHILD AND DIALOG
+         hwg_ProcKeyList(Self, wParam)        //working in MDICHILD AND DIALOG
       ELSEIF msg == WM_COMMAND .AND. ::lEdit .AND. !::ldropshow
          IF hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_UP) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0 .AND. hwg_HIWORD(wParam) == 1
             RETURN 0
@@ -432,7 +432,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          IF (hwg_GetKeyState(VK_RETURN) < 0 .OR. hwg_GetKeyState(VK_ESCAPE) < 0) .AND. ;
             (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
             !::GetParentForm(Self):lModal)
-            ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
+            hwg_ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
          ENDIF
            IF hwg_GetKeyState(VK_TAB) + hwg_GetKeyState(VK_DOWN) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
             IF ::oParent:oParent == NIL
@@ -491,7 +491,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
                GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSEIF wParam == VK_RETURN .AND. ;
-               !ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND. ;
+               !hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND. ;
                (::GetParentForm():Type < WND_DLG_RESOURCE .OR. !::GetParentForm():lModal)
                GetSkip(::oParent, ::handle, , 1)
                RETURN 0
@@ -509,7 +509,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          RETURN DLGC_WANTCHARS + DLGC_WANTARROWS
 
       CASE WM_KEYDOWN
-         //ProcKeyList(Self, wParam)
+         //hwg_ProcKeyList(Self, wParam)
          IF wparam == VK_RIGHT .OR. wParam == VK_RETURN //.AND. !::lEdit
             GetSkip(::oParent, ::handle, , 1)
             RETURN 0
@@ -522,7 +522,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
          EXIT
 
       CASE WM_KEYUP
-         ProcKeyList(Self, wParam) //working in MDICHILD AND DIALOG
+         hwg_ProcKeyList(Self, wParam) //working in MDICHILD AND DIALOG
          EXIT
 
       CASE WM_COMMAND
@@ -541,7 +541,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
             IF (hwg_GetKeyState(VK_RETURN) < 0 .OR. hwg_GetKeyState(VK_ESCAPE) < 0) .AND. ;
                (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
                !::GetParentForm(Self):lModal)
-               ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
+               hwg_ProcOkCancel(Self, IIf(hwg_GetKeyState(VK_RETURN) < 0, VK_RETURN, VK_ESCAPE))
             ENDIF
             IF hwg_GetKeyState(VK_TAB) + hwg_GetKeyState(VK_DOWN) < 0 .AND. hwg_GetKeyState(VK_SHIFT) > 0
                IF ::oParent:oParent == NIL

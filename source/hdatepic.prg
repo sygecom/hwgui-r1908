@@ -161,7 +161,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
          RETURN 0
       ENDIF
     ELSEIF msg == WM_KEYDOWN
-       IF ProcKeyList(Self, wParam)
+       IF hwg_ProcKeyList(Self, wParam)
           RETURN 0
        ENDIF
    ELSEIF msg == WM_GETDLGCODE
@@ -193,7 +193,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
       ENDIF
       EXIT
    CASE WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
       EXIT

@@ -458,7 +458,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
 
     ELSEIF msg == WM_KEYDOWN
 
-        ProcKeyList(Self, wParam)
+        hwg_ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_VSCROLL
     ENDIF

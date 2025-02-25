@@ -113,7 +113,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
       ENDIF
 
    ELSEIF msg == WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
 
@@ -163,7 +163,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
       EXIT
 
    CASE WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
       EXIT

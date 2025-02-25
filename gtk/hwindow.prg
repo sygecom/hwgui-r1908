@@ -225,7 +225,7 @@ Local i
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         // onTrackScroll( Self,wParam,lParam )
+         // hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -274,7 +274,7 @@ Local i
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         onTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -328,7 +328,7 @@ Local i
       Return Eval( HMainWindow():aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         onTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
