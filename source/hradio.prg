@@ -280,7 +280,7 @@ METHOD Init() CLASS HRadioButton
       ::nHolder := 1
       hwg_SetWindowObject(::handle, Self)
       HWG_INITBUTTONPROC(::handle)
-      ::Enabled :=  ::oGroup:lEnabled .AND. ::Enabled 
+      ::Enabled :=  ::oGroup:lEnabled .AND. ::Enabled
       ::Super:Init()
    ENDIF
 RETURN NIL
@@ -329,9 +329,10 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
    ENDIF
    RETURN Self
 
+#if 0 // old code for reference
 METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
     LOCAL oCtrl
-     
+
    IF hb_IsBlock(::bOther)
       IF Eval(::bOther, Self, msg, wParam, lParam) != -1
          RETURN 0
@@ -342,14 +343,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
          RETURN 0
       ELSEIF wParam == VK_ESCAPE .AND. ;
                   (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
-         RETURN DLGC_WANTMESSAGE  
+         RETURN DLGC_WANTMESSAGE
        ELSEIF (wParam != VK_TAB .AND. hwg_GetDlgMessage(lParam) == WM_CHAR) .OR. hwg_GetDlgMessage(lParam) == WM_SYSCHAR .OR. ;
-               wParam == VK_ESCAPE 
-         RETURN -1         
-      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam == VK_RETURN  // DIALOG 
+               wParam == VK_ESCAPE
+         RETURN -1
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam == VK_RETURN  // DIALOG
          ::VALID(VK_RETURN)   // dialog funciona
          RETURN DLGC_WANTARROWS
-      ENDIF 
+      ENDIF
       RETURN DLGC_WANTMESSAGE
    ELSEIF msg == WM_KEYDOWN
       //IF ProcKeyList(Self, wParam)
@@ -371,12 +372,73 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
       IF (wParam == VK_RETURN)
          RETURN 0
-      ENDIF  
+      ENDIF
    ELSEIF msg == WM_NOTIFY
    ENDIF
 
    RETURN -1
-/*
+#else
+METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
+
+   LOCAL oCtrl
+
+   IF hb_IsBlock(::bOther)
+      IF Eval(::bOther, Self, msg, wParam, lParam) != -1
+         RETURN 0
+      ENDIF
+   ENDIF
+
+   SWITCH msg
+
+   CASE WM_GETDLGCODE //.AND. !Empty(wParam)
+      IF wParam == VK_RETURN .AND. ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
+         RETURN 0
+      ELSEIF wParam == VK_ESCAPE .AND. (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
+         RETURN DLGC_WANTMESSAGE
+      ELSEIF (wParam != VK_TAB .AND. hwg_GetDlgMessage(lParam) == WM_CHAR) .OR. hwg_GetDlgMessage(lParam) == WM_SYSCHAR .OR. ;
+         wParam == VK_ESCAPE
+         RETURN -1
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam == VK_RETURN  // DIALOG
+         ::VALID(VK_RETURN)   // dialog funciona
+         RETURN DLGC_WANTARROWS
+      ENDIF
+      RETURN DLGC_WANTMESSAGE
+
+   CASE WM_KEYDOWN
+      //IF ProcKeyList(Self, wParam)
+      SWITCH wParam
+      CASE VK_LEFT
+      CASE VK_UP
+         GetSkip(::oparent, ::handle, , -1)
+         RETURN 0
+      CASE VK_RIGHT
+      CASE VK_DOWN
+         GetSkip(::oparent, ::handle, , 1)
+         RETURN 0
+      CASE VK_TAB //.AND. nType < WND_DLG_RESOURCE
+         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         RETURN 0
+      CASE VK_RETURN
+         ::VALID(VK_RETURN)
+         RETURN 0
+      ENDSWITCH
+      EXIT
+
+   CASE WM_KEYUP
+      ProcKeyList(Self, wParam)   // working in MDICHILD AND DIALOG
+      IF wParam == VK_RETURN
+         RETURN 0
+      ENDIF
+      EXIT
+
+   CASE WM_NOTIFY
+
+   ENDSWITCH
+
+RETURN -1
+#endif
+
+#if 0
 METHOD Notify(lParam) CLASS HRadioButton
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
@@ -407,7 +469,7 @@ METHOD Notify(lParam) CLASS HRadioButton
    ENDIF
 
    RETURN NIL
-*/
+#endif
 
 METHOD onGotFocus() CLASS HRadioButton
    RETURN ::When()
