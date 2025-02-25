@@ -53,7 +53,9 @@ static void cxdib_Clone(PCXDIB pdib, PCXDIB src);
 static void cxdib_Clear(PCXDIB pdib, BYTE bval);
 static HDIB cxdib_Create(PCXDIB pdib, DWORD dwWidth, DWORD dwHeight, WORD wBitCount);
 static long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset);
+#if 0
 static long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize);
+#endif
 static void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b);
 static void cxdib_BlendPalette(PCXDIB pdib, COLORREF cr, long perc);
 static void cxdib_SetPixelIndex(PCXDIB pdib, long x, long y, BYTE i);
@@ -245,6 +247,7 @@ static long cxdib_Draw(PCXDIB pdib, HDC pDC, long xoffset, long yoffset)
   return 0;
 }
 
+#if 0
 static long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long xsize, long ysize)
 {
   if ((pdib->hDib) && (pDC))
@@ -258,6 +261,7 @@ static long cxdib_Stretch(PCXDIB pdib, HDC pDC, long xoffset, long yoffset, long
   }
   return 0;
 }
+#endif
 
 static void cxdib_SetPaletteIndex(PCXDIB pdib, BYTE idx, BYTE r, BYTE g, BYTE b)
 {

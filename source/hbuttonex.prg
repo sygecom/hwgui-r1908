@@ -284,7 +284,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := hwg_GetWindowRect(::handle)
-         IF !PtInRect(rectButton, acoor)
+         IF !hwg_PtInRect(rectButton, acoor)
             hwg_SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
             ::bMouseOverButton := .F.
             RETURN 0
@@ -379,7 +379,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
          rectButton := hwg_GetWindowRect(::handle)
 
-         IF !PtInRect(rectButton, acoor)
+         IF !hwg_PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
             hwg_InvalidateRect(::handle, 0)
             hwg_SendMessage(::handle, BM_SETSTATE, 0, 0)
@@ -486,7 +486,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := hwg_GetWindowRect(::handle)
-         IF !PtInRect(rectButton, acoor)
+         IF !hwg_PtInRect(rectButton, acoor)
             hwg_SendMessage(::handle, BM_SETSTATE, ::m_bToggled, 0)
             ::bMouseOverButton := .F.
             RETURN 0
@@ -591,7 +591,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          pt[2] := hwg_HIWORD(lParam)
          acoor := hwg_ClientToScreen(::handle, pt[1], pt[2])
          rectButton := hwg_GetWindowRect(::handle)
-         IF !PtInRect(rectButton, acoor)
+         IF !hwg_PtInRect(rectButton, acoor)
             ::m_bToggled := !::m_bToggled
             hwg_InvalidateRect(::handle, 0)
             hwg_SendMessage(::handle, BM_SETSTATE, 0, 0)
@@ -752,7 +752,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    LOCAL captionRect
    LOCAL centerRect
    LOCAL bHasTitle
-   LOCAL itemRect := copyrect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
+   LOCAL itemRect := hwg_CopyRect({drawInfo[4], drawInfo[5], drawInfo[6], drawInfo[7]})
    LOCAL state
    LOCAL crColor
    LOCAL brBackground
@@ -959,11 +959,11 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
       // If button is pressed then "press" title also
       IF bIsPressed .AND. !::Themed
-         OffsetRect(@captionRect, 1, 1)
+         hwg_OffsetRect(@captionRect, 1, 1)
       ENDIF
 
       // Center text
-      centerRect := copyrect(captionRect)
+      centerRect := hwg_CopyRect(captionRect)
 
       IF hb_IsNumeric(::hicon) .OR. hb_IsNumeric(::hbitmap)
           IF !lmultiline .AND. ::iStyle != ST_ALIGN_OVERLAP
@@ -987,19 +987,19 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       captionRectHeight := captionRect[4] - captionRect[2]
       //centerRectWidth := centerRect[3] - centerRect[1]
       centerRectHeight := centerRect[4] - centerRect[2]
-//ok      OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
-//      OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
-//      OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
-      OffsetRect(@captionRect, 0, (centerRectHeight - captionRectHeight) / 2)
+//ok      hwg_OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
+//      hwg_OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
+//      hwg_OffsetRect(@captionRect, (centerRectWidth - captionRectWidth) / 2, (centerRectHeight - captionRectHeight) / 2)
+      hwg_OffsetRect(@captionRect, 0, (centerRectHeight - captionRectHeight) / 2)
 
 
 /*      hwg_SetBkMode(dc, TRANSPARENT)
       IF bIsDisabled
 
-         OffsetRect(@captionRect, 1, 1)
+         hwg_OffsetRect(@captionRect, 1, 1)
          hwg_SetTextColor(DC, hwg_GetSysColor(COLOR_3DHILIGHT))
          hwg_DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_CENTER, @captionRect)
-         OffsetRect(@captionRect, -1, -1)
+         hwg_OffsetRect(@captionRect, -1, -1)
          hwg_SetTextColor(DC, hwg_GetSysColor(COLOR_3DSHADOW))
          hwg_DrawText(DC, ::caption, captionRect[1], captionRect[2], captionRect[3], captionRect[4], DT_WORDBREAK + DT_VCENTER + DT_CENTER, @captionRect)
 
@@ -1045,10 +1045,10 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
          IF bIsDisabled
 
-            OffsetRect(@captionRect, 1, 1)
+            hwg_OffsetRect(@captionRect, 1, 1)
             hwg_SetTextColor(dc, hwg_GetSysColor(COLOR_3DHILIGHT))
             hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
-            OffsetRect(@captionRect, -1, -1)
+            hwg_OffsetRect(@captionRect, -1, -1)
             hwg_SetTextColor(dc, hwg_GetSysColor(COLOR_3DSHADOW))
             hwg_DrawText(dc, ::caption, @captionRect[1], @captionRect[2], @captionRect[3], @captionRect[4], uAlign)
             // if
@@ -1060,7 +1060,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
             IF ::bMouseOverButton .OR. bIsPressed
                hwg_SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_IN])
                hwg_SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_IN])
-               fillRect := COPYRECT(itemRect)
+               fillRect := hwg_CopyRect(itemRect)
                IF bIsPressed
                   hwg_DrawButton(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], 6)
                ENDIF
@@ -1070,13 +1070,13 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
                IF bIsFocused
                   hwg_SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_FOCUS])
                   hwg_SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_FOCUS])
-                  fillRect := COPYRECT(itemRect)
+                  fillRect := hwg_CopyRect(itemRect)
                   hwg_InflateRect(@fillRect, - 2, - 2)
                   hwg_FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_FOCUS]:handle)
                ELSE
                   hwg_SetTextColor(dc, ::m_crColors[BTNST_COLOR_FG_OUT])
                   hwg_SetBkColor(dc, ::m_crColors[BTNST_COLOR_BK_OUT])
-                  fillRect := COPYRECT(itemRect)
+                  fillRect := hwg_CopyRect(itemRect)
                   hwg_InflateRect(@fillRect, - 2, - 2)
                   hwg_FillRect(dc, fillRect[1], fillRect[2], fillRect[3], fillRect[4], ::m_crBrush[BTNST_COLOR_BK_OUT]:handle)
                ENDIF
@@ -1103,7 +1103,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
 
    // Draw the focus rect
    IF bIsFocused .AND. bDrawFocusRect .AND. hwg_BitaND(::sTyle, WS_TABSTOP) != 0
-      focusRect := COPYRECT(itemRect)
+      focusRect := hwg_CopyRect(itemRect)
       hwg_InflateRect(@focusRect, - 3, - 3)
       hwg_DrawFocusRect(dc, focusRect)
    ENDIF
@@ -1135,7 +1135,7 @@ METHOD PAINTBK(hdc) CLASS HBUTTONEx
       ::m_dcBk:BitBlt(0, 0, rect[3] - rect[1], rect[4] - rect[4], clDC:m_hDc, rect1[1], rect1[2], SRCCOPY)
    ENDIF
 
-   BitBlt(hdc, 0, 0, rect[3] - rect[1], rect[4] - rect[4], ::m_dcBk:m_hDC, 0, 0, SRCCOPY)
+   hwg_BitBlt(hdc, 0, 0, rect[3] - rect[1], rect[4] - rect[4], ::m_dcBk:m_hDC, 0, 0, SRCCOPY)
 
 RETURN Self
 

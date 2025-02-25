@@ -235,9 +235,9 @@ Return Nil
 Function ChangeTheme( nTheme )
 
    IF HDTheme():nSelected != Nil
-      CheckMenuItem( oDlg:handle, 1020+HDTheme():nSelected, .F. )
+      hwg_CheckMenuItem( oDlg:handle, 1020+HDTheme():nSelected, .F. )
    ENDIF
-   CheckMenuItem( oDlg:handle, 1020+nTheme, .T. )
+   hwg_CheckMenuItem( oDlg:handle, 1020+nTheme, .T. )
    HDTheme():nSelected := nTheme
    editShow( ,.T. )
 Return Nil

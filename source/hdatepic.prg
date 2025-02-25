@@ -223,21 +223,21 @@ RETURN IIf(::lShowTime, ::tValue, ::dValue)
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD GetValue() CLASS HDatePicker
-RETURN IIf(!::lShowTime, GetDatePicker(::handle), GetTimePicker(::handle))
+RETURN IIf(!::lShowTime, hwg_GetDatePicker(::handle), hwg_GetTimePicker(::handle))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD SetValue(xValue) CLASS HDatePicker
 
    IF Empty(xValue)
-      SetDatePickerNull(::handle)
+      hwg_SetDatePickerNull(::handle)
    ELSEIF ::lShowTime
-      SetDatePicker(::handle, Date(), StrTran(xValue, ":", ""))
+      hwg_SetDatePicker(::handle, Date(), StrTran(xValue, ":", ""))
    ELSE
-      SetDatePicker(::handle, xValue, StrTran(::tValue, ":", ""))
+      hwg_SetDatePicker(::handle, xValue, StrTran(::tValue, ":", ""))
    ENDIF
-   ::dValue := GetDatePicker(::handle)
-   ::tValue := GetTimePicker(::handle)
+   ::dValue := hwg_GetDatePicker(::handle)
+   ::tValue := hwg_GetTimePicker(::handle)
    ::title := IIf(::lShowTime, ::tValue, ::dValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, IIf(::lShowTime, ::tValue, ::dValue), Self)
@@ -257,8 +257,8 @@ METHOD Refresh() CLASS HDatePicker
       ENDIF
    ENDIF
    IF Empty(::dValue) .AND. !::lShowTime
-      //SetDatePickerNull(::handle)
-      SetDatePicker(::handle, date(), StrTran(Time(), ":", ""))
+      //hwg_SetDatePickerNull(::handle)
+      hwg_SetDatePicker(::handle, date(), StrTran(Time(), ":", ""))
    ELSE
       ::SetValue(IIf(!::lShowTime, ::dValue, ::tValue))
    ENDIF
@@ -274,8 +274,8 @@ METHOD onChange(nMess) CLASS HDatePicker
          hwg_PostMessage(::handle, WM_KEYDOWN, VK_RIGHT, 0)
          ::SetFocus()
       ENDIF
-      ::dValue := GetDatePicker(::handle)
-      ::tValue := GetTimePicker(::handle)
+      ::dValue := hwg_GetDatePicker(::handle)
+      ::tValue := hwg_GetTimePicker(::handle)
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, IIf(::lShowTime, ::tValue, ::dValue), Self)
       ENDIF
@@ -327,7 +327,7 @@ METHOD Valid() CLASS HDatePicker
    IF !CheckFocus(Self, .T.) .OR. ::lnoValid
       RETURN .T.
    ENDIF
-   ::dValue := GetDatePicker(::handle)
+   ::dValue := hwg_GetDatePicker(::handle)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, IIf(::lShowTime, ::tValue, ::dValue), Self)
    ENDIF

@@ -179,7 +179,7 @@ Local aBmpSize, hUp
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
-      SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1],0) )
+      hwg_SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1],0) )
    ENDIF
 Return .T.
 

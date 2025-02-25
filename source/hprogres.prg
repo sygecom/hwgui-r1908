@@ -30,7 +30,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
    METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent)
    METHOD Init()
    METHOD Activate()
-   METHOD Increment() INLINE UpdateProgressBar(::handle)
+   METHOD Increment() INLINE hwg_UpdateProgressBar(::handle)
    METHOD STEP(cTitle)
    METHOD SET(cTitle, nPos)
    METHOD SetLabel(cCaption)
@@ -121,7 +121,7 @@ METHOD STEP(cTitle)
    ::nCount++
    IF ::nCount == ::nLimit
       ::nCount := 0
-      UpdateProgressBar(::handle)
+      hwg_UpdateProgressBar(::handle)
       ::SET(cTitle)
       IF !Empty(::lPercent)
          ::nPercent += ::maxPos  //::nLimit
@@ -138,7 +138,7 @@ METHOD SET(cTitle, nPos) CLASS HProgressBar
       hwg_SetWindowText(::oParent:handle, cTitle)
    ENDIF
    IF nPos != NIL
-      SetProgressBar(::handle, nPos)
+      hwg_SetProgressBar(::handle, nPos)
    ENDIF
 
    RETURN NIL
@@ -156,11 +156,11 @@ METHOD SetAnimation(nAnimation) CLASS HProgressBar
    IF nAnimation != NIL
        IF nAnimation <= 0
           hwg_SendMessage(::handle, PBM_SETMARQUEE, 0, NIL)
-          MODIFYSTYLE(::handle, PBS_MARQUEE, 0)
+          hwg_ModifyStyle(::handle, PBS_MARQUEE, 0)
           hwg_SendMessage(::handle, PBM_SETPOS, 0, 0)
        ELSE
           IF hwg_BitAND(::Style, PBS_MARQUEE) == 0
-             MODIFYSTYLE(::handle, PBS_MARQUEE, PBS_MARQUEE)
+             hwg_ModifyStyle(::handle, PBS_MARQUEE, PBS_MARQUEE)
          ENDIF
          hwg_SendMessage(::handle, PBM_SETMARQUEE, 1, nAnimation)
        ENDIF

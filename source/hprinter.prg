@@ -764,7 +764,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
          ENDIF
          // tracelog("bitblt")
          lRefreshVideo := .F.
-         BitBlt(hDC, rect[1], rect[2], rect[3], rect[4], ::memDC:m_hDC, 0, 0, SRCCOPY)
+         hwg_BitBlt(hDC, rect[1], rect[2], rect[3], rect[4], ::memDC:m_hDC, 0, 0, SRCCOPY)
       ELSE   // window fully uncovered... force a repaint
          lRefreshVideo := .T.
       ENDIF

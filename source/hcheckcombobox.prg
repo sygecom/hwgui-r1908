@@ -19,7 +19,7 @@
 
 #include "hwingui.h"
 
-HB_FUNC(COPYDATA)
+HB_FUNC(HWG_COPYDATA)
 {
   LPARAM lParam = (LPARAM)hb_parnl(1);
   void *hText;
@@ -28,6 +28,10 @@ HB_FUNC(COPYDATA)
   lstrcpyn((LPTSTR)lParam, m_strText, (INT)wParam);
   hb_strfree(hText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(COPYDATA, HWG_COPYDATA);
+#endif
 
 #pragma enddump
 
@@ -158,7 +162,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       pt[1] := hwg_LOWORD(lParam)
       pt[2] := hwg_HIWORD(lParam)
 
-      IF (PtInRect(rcClient, pt))
+      IF (hwg_PtInRect(rcClient, pt))
 
          nItemHeight := hwg_SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
          nTopIndex := hwg_SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
@@ -167,7 +171,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
 
-         //IF (PtInRect(rcItem, pt))
+         //IF (hwg_PtInRect(rcItem, pt))
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
             hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
@@ -242,13 +246,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       pt := {,}
       pt[1] := hwg_LOWORD(lParam)
       pt[2] := hwg_HIWORD(lParam)
-      IF PtInRect(rcClient, pt)
+      IF hwg_PtInRect(rcClient, pt)
          nItemHeight := hwg_SendMessage(::handle, LB_GETITEMHEIGHT, 0, 0)
          nTopIndex := hwg_SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
          // Compute which index to check/uncheck
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
          rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
-         //IF PtInRect(rcItem, pt)
+         //IF hwg_PtInRect(rcItem, pt)
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
             hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
@@ -483,7 +487,7 @@ RETURN Self
 METHOD MeasureItem(l) CLASS hCheckComboBox
 
    LOCAL dc := HCLIENTDC():new(::handle)
-   LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO(l)
+   LOCAL lpMeasureItemStruct := hwg_GetMeasureItemInfo(l)
    LOCAL metrics
    LOCAL pFont
 
@@ -521,7 +525,7 @@ METHOD OnGetText(wParam, lParam) CLASS hCheckComboBox
    ENDIF
 
    // Copy the 'fake' window text
-   copydata(lParam, ::m_strText, wParam)
+   hwg_CopyData(lParam, ::m_strText, wParam)
 
 RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 

@@ -5,7 +5,7 @@
 HRB_DIR = $(HB_PATH)
 INC_DIR = include
 OBJ_DIR = obj/gcc
-LIB_DIR = lib/gcc
+LIB_DIR = lib/win/mingw
 SRC_DIR = source
 PROCMISC_DIR = source\procmisc
 HBXML_DIR    = source\xml

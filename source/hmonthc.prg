@@ -78,7 +78,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 METHOD Activate() CLASS HMonthCalendar
 
    IF !Empty(::oParent:handle)
-      ::handle := InitMonthCalendar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      ::handle := hwg_InitMonthCalendar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 
@@ -91,7 +91,7 @@ METHOD Init() CLASS HMonthCalendar
    IF !::lInit
       ::Super:Init()
       IF !Empty(::value)
-         SetMonthCalendarDate(::handle, ::value)
+         hwg_SetMonthCalendarDate(::handle, ::value)
       ENDIF
       ::oParent:AddEvent(MCN_SELECT, Self, {||::onSelect()}, .T., "onSelect")
       ::oParent:AddEvent(MCN_SELCHANGE, Self, {||::onChange()}, .T., "onChange")
@@ -105,7 +105,7 @@ METHOD Init() CLASS HMonthCalendar
 METHOD SetValue(dValue) CLASS HMonthCalendar
 
    IF hb_IsDate(dValue) .And. !Empty(dValue)
-      SetMonthCalendarDate(::handle, dValue)
+      hwg_SetMonthCalendarDate(::handle, dValue)
       ::value := dValue
    ENDIF
 
@@ -115,7 +115,7 @@ METHOD SetValue(dValue) CLASS HMonthCalendar
 
 METHOD GetValue() CLASS HMonthCalendar
 
-   ::value := GetMonthCalendarDate(::handle)
+   ::value := hwg_GetMonthCalendarDate(::handle)
 
    RETURN ::value
 
@@ -152,7 +152,7 @@ METHOD onSelect() CLASS HMonthCalendar
 #include "missing.h"
 #endif
 
-HB_FUNC(INITMONTHCALENDAR)
+HB_FUNC(HWG_INITMONTHCALENDAR)
 {
   RECT rc;
 
@@ -167,7 +167,7 @@ HB_FUNC(INITMONTHCALENDAR)
   hwg_ret_HWND(hMC);
 }
 
-HB_FUNC(SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Control.c
+HB_FUNC(HWG_SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Control.c
 {
   PHB_ITEM pDate = hb_param(2, HB_IT_DATE);
 
@@ -195,7 +195,11 @@ HB_FUNC(SETMONTHCALENDARDATE) // adaptation of function SetDatePicker of file Co
   }
 }
 
-HB_FUNC(GETMONTHCALENDARDATE) // adaptation of function GetDatePicker of file Control.c
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETMONTHCALENDARDATE, HWG_SETMONTHCALENDARDATE);
+#endif
+
+HB_FUNC(HWG_GETMONTHCALENDARDATE) // adaptation of function GetDatePicker of file Control.c
 {
   SYSTEMTIME st;
   char szDate[9];
@@ -204,5 +208,9 @@ HB_FUNC(GETMONTHCALENDARDATE) // adaptation of function GetDatePicker of file Co
   szDate[8] = 0;
   hb_retds(szDate);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETMONTHCALENDARDATE, HWG_GETMONTHCALENDARDATE);
+#endif
 
 #pragma ENDDUMP

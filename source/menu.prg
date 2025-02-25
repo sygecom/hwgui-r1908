@@ -323,6 +323,6 @@ FUNCTION DeleteMenuItem(oWnd, nId)
       ADel(aSubMenu[1], nPos)
       ASize(aSubMenu[1], Len(aSubMenu[1]) - 1)
 
-      hwg_DeleteMenu(GetMenuHandle(oWnd:handle), nId)
+      hwg_DeleteMenu(hwg_GetMenuHandle(oWnd:handle), nId)
    ENDIF
    RETURN NIL

@@ -59,7 +59,7 @@ CLASS HDC
    METHOD SelectObject(xMode)
    METHOD DrawText(strText, Rect, dwFlags)
    METHOD CreateCompatibleDc(x)
-   METHOD patblt(a, s, d, f, g) INLINE patblt(::m_hDc, a, s, d, f, g)
+   METHOD patblt(a, s, d, f, g) INLINE hwg_PatBlt(::m_hDc, a, s, d, f, g)
    METHOD Savedc()
    METHOD RestoreDC(nSavedDC)
    METHOD SetMapMode(nMapMode)
@@ -70,7 +70,7 @@ CLASS HDC
    METHOD SetArcDirection(nArcDirection)
    METHOD GetTextMetric() INLINE hwg_GetTextMetric(::m_hDC)
    METHOD SetROP2(nDrawMode)
-   METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE    BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
+   METHOD BitBlt(x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop) INLINE hwg_BitBlt(::m_hDc, x, y, nWidth, nHeight, pSrcDC, xSrc, ySrc, dwRop)
 
    METHOD PIE(arect, apt1, apt2)
    METHOD DeleteDc()
@@ -194,7 +194,7 @@ METHOD SetMapMode(nMapMode) CLASS HDC
       nRetVal := ::SetMapMode(::m_hDC, nMapMode)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nRetVal := SetMapMode(::m_hAttribDC, nMapMode)
+      nRetVal := hwg_SetMapMode(::m_hAttribDC, nMapMode)
    ENDIF
    RETURN nRetVal
 
@@ -206,10 +206,10 @@ METHOD SetWindowOrg(x, y) CLASS HDC
    LOCAL point
 
    IF (::m_hDC != ::m_hAttribDC)
-      SetWindowOrgEx(::m_hDC, x, y, @point)
+      hwg_SetWindowOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetWindowOrgEx(::m_hAttribDC, x, y, @point)
+      hwg_SetWindowOrgEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -220,10 +220,10 @@ METHOD SetWindowExt(x, y) CLASS HDC
    LOCAL point
 
    IF (::m_hDC != ::m_hAttribDC)
-      SetWindowExtEx(::m_hDC, x, y, @point)
+      hwg_SetWindowExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetWindowExtEx(::m_hAttribDC, x, y, @point)
+      hwg_SetWindowExtEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -234,10 +234,10 @@ METHOD SetViewportOrg(x, y) CLASS HDC
    LOCAL point
 
    IF (::m_hDC != ::m_hAttribDC)
-      SetViewportOrgEx(::m_hDC, x, y, @point)
+      hwg_SetViewportOrgEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetViewportOrgEx(::m_hAttribDC, x, y, @point)
+      hwg_SetViewportOrgEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -247,10 +247,10 @@ METHOD SetViewportExt(x, y) CLASS HDC
    LOCAL point
 
    IF (::m_hDC != ::m_hAttribDC)
-      SetViewportExtEx(::m_hDC, x, y, @point)
+      hwg_SetViewportExtEx(::m_hDC, x, y, @point)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      SetViewportExtEx(::m_hAttribDC, x, y, @point)
+      hwg_SetViewportExtEx(::m_hAttribDC, x, y, @point)
    ENDIF
    RETURN point
 
@@ -260,10 +260,10 @@ METHOD SetArcDirection(nArcDirection)
 
    LOCAL nResult := 0
    IF (::m_hDC != ::m_hAttribDC)
-      nResult := SetArcDirection(::m_hDC, nArcDirection)
+      nResult := hwg_SetArcDirection(::m_hDC, nArcDirection)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nResult := SetArcDirection(::m_hAttribDC, nArcDirection)
+      nResult := hwg_SetArcDirection(::m_hAttribDC, nArcDirection)
    ENDIF
    RETURN nResult
 
@@ -277,10 +277,10 @@ METHOD SetROP2(nDrawMode)
    LOCAL nRetVal := 0
 
    IF (::m_hDC != ::m_hAttribDC)
-      nRetVal := SetROP2(::m_hDC, nDrawMode)
+      nRetVal := hwg_SetROP2(::m_hDC, nDrawMode)
    ENDIF
    IF !Empty(::m_hAttribDC)
-      nRetVal := SetROP2(::m_hAttribDC, nDrawMode)
+      nRetVal := hwg_SetROP2(::m_hAttribDC, nDrawMode)
    ENDIF
    RETURN nRetVal
 

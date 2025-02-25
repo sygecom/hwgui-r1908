@@ -22,7 +22,7 @@ bcc32 -c -O2 -tW -M -I..\include -I%HB_INC_DIR% %1.c
 
 @rem obj -> exe
 
-ilink32 -Gn -Tpe -aa -L..\lib\b32 -L%HB_LIB_DIR% c0w32.obj %1.obj, %1.exe, %1.map, %HWG_LIBS% %HB_LIBS% cw32.lib import32.lib
+ilink32 -Gn -Tpe -aa -L..\lib\win\bcc -L%HB_LIB_DIR% c0w32.obj %1.obj, %1.exe, %1.map, %HWG_LIBS% %HB_LIBS% cw32.lib import32.lib
 
 @rem exclusão dos arquivo temporários
 

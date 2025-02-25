@@ -84,7 +84,7 @@ Local i, h
    IF !::lInit
       ::Super:Init()
       FOR i := 1 TO Len(::aTabs)
-         h := AddTab( ::handle, ::aTabs[i] )
+         h := hwg_AddTab( ::handle, ::aTabs[i] )
 	 AAdd(::aPages, {0, 0, .F., h})
       NEXT
       
@@ -115,7 +115,7 @@ Local lNew := ( i == 0 )
       AAdd(::aPages, {Len(::aControls), 0, lNew, 0})
    ENDDO
    ::nActive := i
-   ::aPages[ i,4 ] := AddTab( ::handle,::aTabs[i] )
+   ::aPages[ i,4 ] := hwg_AddTab( ::handle,::aTabs[i] )
 
 Return Nil
 

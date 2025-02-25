@@ -439,7 +439,7 @@ Local i
           hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
        ENDIF
        IF __ObjHasMsg( oWnd,"HACCEL" ) .AND. oWnd:hAccel != Nil
-          DestroyAcceleratorTable( oWnd:hAccel )
+          hwg_DestroyAcceleratorTable( oWnd:hAccel )
        ENDIF
    ELSEIF wParam == SC_MINIMIZE
        IF __ObjHasMsg( oWnd,"LTRAY" ) .AND. oWnd:lTray

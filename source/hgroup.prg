@@ -96,7 +96,7 @@ METHOD Init() CLASS HGroup
             nbs := AScan(::oparent:acontrols, {|o|o:handle == ::handle})
             FOR i := Len(::oparent:acontrols) TO 1 STEP -1
                IF nbs != i .AND.;
-                   PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS == 0
+                   hwg_PtInRect({::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight}, {::oparent:acontrols[i]:nLeft, ::oparent:acontrols[i]:nTop}) //.AND. NOUTOBJS == 0
                    hwg_SetWindowPos(::oparent:acontrols[i]:handle, ::handle, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE + SWP_FRAMECHANGED)
                ENDIF
             NEXT
@@ -123,7 +123,7 @@ METHOD PAINT(lpdis) CLASS HGroup
    LOCAL szText
    LOCAL aSize
    LOCAL dwStyle
-   LOCAL rc := copyrect({drawInfo[4], drawInfo[5], drawInfo[6] - 1, drawInfo[7] - 1})
+   LOCAL rc := hwg_CopyRect({drawInfo[4], drawInfo[5], drawInfo[6] - 1, drawInfo[7] - 1})
    LOCAL rcText
 
    // determine text length

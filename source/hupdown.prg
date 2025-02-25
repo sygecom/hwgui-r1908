@@ -200,7 +200,7 @@ METHOD SetRange(nLower, nUpper) CLASS HUpDown
    
    ::nLower := IIf(nLower != NIL, nLower, ::nLower)
    ::nUpper := IIf(nUpper != NIL, nUpper, ::nUpper)
-   SETRANGEUPDOWN(::nLower, ::nUpper)
+   hwg_SetRangeUpDown(::nLower, ::nUpper)
 
    RETURN NIL
 
@@ -220,7 +220,7 @@ METHOD SetValue(nValue) CLASS HUpDown
    ENDIF
    ::nValue := nValue
    ::title := Str(::nValue)
-   SetUpDown(::hwndUpDown, ::nValue)
+   hwg_SetUpDown(::hwndUpDown, ::nValue)
    IF hb_IsBlock(::bSetGet)
       Eval(::bSetGet, ::nValue, Self)
    ENDIF
@@ -233,11 +233,11 @@ METHOD Refresh() CLASS HUpDown
       ::nValue := Eval(::bSetGet, , Self)
       IF Str(::nValue) != ::title
          //::title := Str(::nValue)
-         //SetUpDown(::hwndUpDown, ::nValue)
+         //hwg_SetUpDown(::hwndUpDown, ::nValue)
          ::SetValue(::nValue)
       ENDIF
    ELSE
-      SetUpDown(::hwndUpDown, Val(::title))
+      hwg_SetUpDown(::hwndUpDown, Val(::title))
    ENDIF
    ::oEditUpDown:Title :=  ::Title
    ::oEditUpDown:Refresh()
@@ -291,8 +291,8 @@ METHOD Init() CLASS HEditUpDown
 
 METHOD Notify(lParam) CLASS HeditUpDown
    Local nCode := hwg_GetNotifyCode(lParam)
-   Local iPos := GETNOTIFYDELTAPOS(lParam, 1)
-   Local iDelta := GETNOTIFYDELTAPOS(lParam, 2)
+   Local iPos := hwg_GetNotifyDeltaPos(lParam, 1)
+   Local iDelta := hwg_GetNotifyDeltaPos(lParam, 2)
    Local vari, res
 
    //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == NIL , - 1 , 1)
@@ -471,10 +471,10 @@ METHOD Refresh() CLASS HUpDown
       ::value := Eval(::bSetGet)
       IF Str(::value) != ::title
          ::title := Str(::value)
-         SetUpDown(::hwndUpDown, ::value)
+         hwg_SetUpDown(::hwndUpDown, ::value)
       ENDIF
    ELSE
-      SetUpDown(::hwndUpDown, Val(::title))
+      hwg_SetUpDown(::hwndUpDown, Val(::title))
    ENDIF
 
    RETURN NIL

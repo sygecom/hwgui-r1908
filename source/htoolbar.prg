@@ -222,7 +222,7 @@ METHOD CREATETOOL() CLASS hToolBar
    */
    nlistimg := 0
    IF ::nIDB != NIL .AND. ::nIDB >= 0
-      nlistimg := TOOLBAR_LOADSTANDARTIMAGE(::handle, ::nIDB)
+      nlistimg := hwg_ToolBar_LoadStandartImage(::handle, ::nIDB)
    ENDIF
    IF hwg_BitAnd(::Style, TBSTYLE_LIST) > 0 .AND. ::nwSize == NIL
       ::nwSize := MAX(16, (::nHeight - 16))
@@ -273,7 +273,7 @@ METHOD CREATETOOL() CLASS hToolBar
          ENDIF
          ::aItem[n, 1] := img + nlistimg //n
          IF !::lResource
-            TOOLBAR_LOADIMAGE(::handle, aButton[img])
+            hwg_ToolBar_LoadImage(::handle, aButton[img])
          ENDIF
       ELSE
          /*
@@ -332,7 +332,7 @@ METHOD CREATETOOL() CLASS hToolBar
       //hwg_SendMessage(::handle, TB_SETBUTTONWIDTH, hwg_MAKELPARAM(::BtnWidth, ::BtnWidth))
    ENDIF
    IF Len(::aItem) > 0
-      TOOLBARADDBUTTONS(::handle, ::aItem, Len(::aItem))
+      hwg_ToolBarAddButtons(::handle, ::aItem, Len(::aItem))
       hwg_SendMessage(::handle, TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS)
    ENDIF
    IF ::BtnWidth != NIL
@@ -372,30 +372,30 @@ METHOD Notify(lParam) CLASS hToolBar
 
    IF nCode == TTN_GETDISPINFO
 
-      nButton := TOOLBAR_GETDISPINFOID(lParam)
+      nButton := hwg_ToolBar_GetDispInfoId(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nButton})
-      TOOLBAR_SETDISPINFO(lParam, ::aItem[nPos, 8])
+      hwg_ToolBar_SetDispInfo(lParam, ::aItem[nPos, 8])
 
    ELSEIF nCode == TBN_GETINFOTIP
 
-      nId := TOOLBAR_GETINFOTIPID(lParam)
+      nId := hwg_ToolBar_GetInfoTipId(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nId})
-      TOOLBAR_GETINFOTIP(lParam, ::aItem[nPos, 8])
+      hwg_ToolBar_GetInfoTip(lParam, ::aItem[nPos, 8])
 
    ELSEIF nCode == TBN_DROPDOWN
 
-      nId := TOOLBAR_SUBMENUEXGETID(lParam)
+      nId := hwg_ToolBar_SubMenuExGetId(lParam)
       IF nId > 0 //hb_IsArray(::aItem[1, 9])
-         //nid := TOOLBAR_SUBMENUEXGETID(lParam)
+         //nid := hwg_ToolBar_SubMenuExGetId(lParam)
          nPos := AScan(::aItem, {|x|x[2] == nId})
-         TOOLBAR_SUBMENUEx(lParam, ::aItem[nPos, 10], ::oParent:handle)
+         hwg_ToolBar_SubMenuEx(lParam, ::aItem[nPos, 10], ::oParent:handle)
       ELSE
-         TOOLBAR_SUBMENU(lParam, 1, ::oParent:handle)
+         hwg_ToolBar_SubMenu(lParam, 1, ::oParent:handle)
       ENDIF
 
    ELSEIF nCode == NM_CLICK //.AND. ::GetParentForm():Type <= WND_MAIN
 
-      nId := TOOLBAR_IDCLICK(lParam)
+      nId := hwg_ToolBar_IdClick(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nId})
       IF nPos > 0 .AND. ::aItem[nPos, 7] != NIL
          Eval(::aItem[nPos, 7], ::aItem[nPos, 11], nId)
@@ -415,30 +415,30 @@ METHOD Notify(lParam) CLASS hToolBar
    SWITCH nCode
 
    CASE TTN_GETDISPINFO
-      nButton := TOOLBAR_GETDISPINFOID(lParam)
+      nButton := hwg_ToolBar_GetDispInfoId(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nButton})
-      TOOLBAR_SETDISPINFO(lParam, ::aItem[nPos, 8])
+      hwg_ToolBar_SetDispInfo(lParam, ::aItem[nPos, 8])
       EXIT
 
    CASE TBN_GETINFOTIP
-      nId := TOOLBAR_GETINFOTIPID(lParam)
+      nId := hwg_ToolBar_GetInfoTipId(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nId})
-      TOOLBAR_GETINFOTIP(lParam, ::aItem[nPos, 8])
+      hwg_ToolBar_GetInfoTip(lParam, ::aItem[nPos, 8])
       EXIT
 
    CASE TBN_DROPDOWN
-      nId := TOOLBAR_SUBMENUEXGETID(lParam)
+      nId := hwg_ToolBar_SubMenuExGetId(lParam)
       IF nId > 0 //hb_IsArray(::aItem[1, 9])
-         //nid := TOOLBAR_SUBMENUEXGETID(lParam)
+         //nid := hwg_ToolBar_SubMenuExGetId(lParam)
          nPos := AScan(::aItem, {|x|x[2] == nId})
-         TOOLBAR_SUBMENUEx(lParam, ::aItem[nPos, 10], ::oParent:handle)
+         hwg_ToolBar_SubMenuEx(lParam, ::aItem[nPos, 10], ::oParent:handle)
       ELSE
-         TOOLBAR_SUBMENU(lParam, 1, ::oParent:handle)
+         hwg_ToolBar_SubMenu(lParam, 1, ::oParent:handle)
       ENDIF
       EXIT
 
    CASE NM_CLICK //.AND. ::GetParentForm():Type <= WND_MAIN
-      nId := TOOLBAR_IDCLICK(lParam)
+      nId := hwg_ToolBar_IdClick(lParam)
       nPos := AScan(::aItem, {|x|x[2] == nId})
       IF nPos > 0 .AND. ::aItem[nPos, 7] != NIL
          Eval(::aItem[nPos, 7], ::aItem[nPos, 11], nId)

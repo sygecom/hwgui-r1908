@@ -119,7 +119,7 @@ FUNCTION NewItem(nItem)
          IF oXmlNode:GetAttribute("name") != cName
             oXmlNode:SetAttribute("name", cName)
             lIniChanged := .T.
-            SetMenuCaption(, 1020 + nItem, cName)
+            hwg_SetMenuCaption(, 1020 + nItem, cName)
          ENDIF
          FOR i := 1 TO Len(oXmlNode:aItems)
             IF ValType(oXmlNode:aItems[i]) == "C"

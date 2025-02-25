@@ -38,7 +38,7 @@ FUNCTION Main()
          STYLE TCS_FIXEDWIDTH+TCS_FORCELABELLEFT  ;
          ON CHANGE {|o, n|ChangeTab(o, oGetTab, n)}
    // @ 20, 60 TAB oTab ITEMS aTabs SIZE 90, 100 STYLE TCS_FIXEDWIDTH+TCS_VERTICAL+TCS_FORCELABELLEFT+WS_CLIPSIBLINGS  // +TCS_RIGHT
-   SetTabSize(oTab:handle, 20, 20)
+   hwg_SetTabSize(oTab:handle, 20, 20)
    @ 10, 30 RICHEDIT oGetTab TEXT "" OF oTab SIZE 120, 60 ;
           STYLE ES_MULTILINE
 

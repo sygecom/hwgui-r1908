@@ -66,9 +66,9 @@ CLASS HGrid INHERIT HControl
    METHOD Init()
    METHOD AddColumn(cHeader, nWidth, nJusHead, nBit) INLINE AAdd(::aColumns, {cHeader, nWidth, nJusHead, nBit})
    METHOD Refresh()
-   METHOD RefreshLine() INLINE Listview_update(::handle, Listview_getfirstitem(::handle))
-   METHOD SetItemCount(nItem) INLINE Listview_setitemcount(::handle, nItem)
-   METHOD Row() INLINE Listview_getfirstitem(::handle)
+   METHOD RefreshLine() INLINE hwg_ListView_Update(::handle, hwg_Listview_GetFirstItem(::handle))
+   METHOD SetItemCount(nItem) INLINE hwg_Listview_SetItemCount(::handle, nItem)
+   METHOD Row() INLINE hwg_Listview_GetFirstItem(::handle)
    METHOD Notify(lParam)
 
 ENDCLASS
@@ -111,7 +111,7 @@ RETURN Self
 METHOD Activate() CLASS HGrid
 
    IF !Empty(::oParent:handle)
-      ::handle := ListView_Create(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ;
+      ::handle := hwg_ListView_Create(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ;
                                   ::lNoScroll)
       ::Init()
    ENDIF
@@ -159,24 +159,24 @@ METHOD Init() CLASS HGrid
 
          NEXT
 
-         Listview_setimagelist(::handle, ::him)
+         hwg_ListView_SetImageList(::handle, ::him)
 
       ENDIF
 
-      Listview_Init(::handle, ::ItemCount, ::lNoLines)
+      hwg_Listview_Init(::handle, ::ItemCount, ::lNoLines)
 
       FOR i := 1 TO Len(::aColumns)
-         Listview_addcolumn(::handle, i, ::aColumns[i, 2], ::aColumns[i, 1], ::aColumns[i, 3], ;
+         hwg_Listview_AddColumn(::handle, i, ::aColumns[i, 2], ::aColumns[i, 1], ::aColumns[i, 3], ;
                             IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4], 0))
       NEXT
 
       IF ::color != NIL
-         ListView_SetTextColor(::handle, ::color)
+         hwg_ListView_SetTextColor(::handle, ::color)
       ENDIF
 
       IF ::bkcolor != NIL
-         Listview_setbkcolor(::handle, ::bkcolor)
-         Listview_settextbkcolor(::handle, ::bkcolor)
+         hwg_Listview_SetBkColor(::handle, ::bkcolor)
+         hwg_Listview_SetTextBkColor(::handle, ::bkcolor)
       ENDIF
    ENDIF
 
@@ -189,9 +189,9 @@ METHOD Refresh() CLASS HGrid
    LOCAL iFirst
    LOCAL iLast
 
-   iFirst := ListView_GetTopIndex(::handle)
-   iLast := iFirst + ListView_GetCountPerPage(::handle)
-   ListView_RedrawItems(::handle, iFirst, iLast)
+   iFirst := hwg_ListView_GetTopIndex(::handle)
+   iLast := iFirst + hwg_ListView_GetCountPerPage(::handle)
+   hwg_ListView_RedrawItems(::handle, iFirst, iLast)
 
 RETURN NIL
 
@@ -210,14 +210,14 @@ FUNCTION ListViewNotify(oCtrl, lParam)
 
    CASE LVN_KEYDOWN
       IF hb_IsBlock(oCtrl:bKeydown)
-         Eval(oCtrl:bKeyDown, oCtrl, Listview_GetGridKey(lParam))
+         Eval(oCtrl:bKeyDown, oCtrl, hwg_ListView_GetGridKey(lParam))
       ENDIF
       EXIT
 
    CASE NM_DBLCLK
       IF hb_IsBlock(oCtrl:bEnter)
-         aCord := Listview_Hittest(oCtrl:handle, GetCursorRow() - GetWindowRow(oCtrl:handle), ;
-                                   GetCursorCol() - GetWindowCol(oCtrl:handle))
+         aCord := hwg_ListView_HitTest(oCtrl:handle, hwg_GetCursorRow() - hwg_GetWindowRow(oCtrl:handle), ;
+                                   hwg_GetCursorCol() - hwg_GetWindowCol(oCtrl:handle))
          oCtrl:nRow := aCord[1]
          oCtrl:nCol := aCord[2]
          Eval(oCtrl:bEnter, oCtrl)
@@ -239,16 +239,16 @@ FUNCTION ListViewNotify(oCtrl, lParam)
    CASE LVN_ITEMCHANGED
       oCtrl:nRow := oCtrl:Row()
       IF hb_IsBlock(oCtrl:bPosChg)
-         Eval(oCtrl:bPosChg, oCtrl, Listview_getfirstitem(oCtrl:handle))
+         Eval(oCtrl:bPosChg, oCtrl, hwg_Listview_GetFirstItem(oCtrl:handle))
       ENDIF
       EXIT
 
    CASE LVN_GETDISPINFO
       IF hb_IsBlock(oCtrl:bDispInfo)
-         aCord := Listview_getdispinfo(lParam)
+         aCord := hwg_ListView_GetDispInfo(lParam)
          oCtrl:nRow := aCord[1]
          oCtrl:nCol := aCord[2]
-         Listview_setdispinfo(lParam, Eval(oCtrl:bDispInfo, oCtrl, oCtrl:nRow, oCtrl:nCol))
+         hwg_ListView_SetDispInfo(lParam, Eval(oCtrl:bDispInfo, oCtrl, oCtrl:nRow, oCtrl:nCol))
       ENDIF
 
    ENDSWITCH

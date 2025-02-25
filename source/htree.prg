@@ -105,8 +105,8 @@ CLASS HTreeNode INHERIT HObject
    METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages)
    METHOD Delete(lInternal)
    METHOD FindChild(h)
-   METHOD GetText() INLINE TreeGetNodeText(::oTree:handle, ::handle)
-   METHOD SetText(cText) INLINE TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText), ::title := cText
+   METHOD GetText() INLINE hwg_TreeGetNodeText(::oTree:handle, ::handle)
+   METHOD SetText(cText) INLINE hwg_TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText), ::title := cText
    METHOD Checked(lChecked)  SETGET
    METHOD GetLevel(h)
 
@@ -173,7 +173,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
          nPos := 1
       ENDIF
    ENDIF
-   ::handle := TreeAddNode(Self, oTree:handle,               ;
+   ::handle := hwg_TreeAddNode(Self, oTree:handle,               ;
                             IIf(oParent == NIL, NIL, oParent:handle), ;
                             IIf(oPrev == NIL, NIL, oPrev:handle), nPos, cTitle, im1, im2)
 
@@ -220,7 +220,7 @@ METHOD Delete(lInternal) CLASS HTreeNode
          ::aItems[j] := NIL
       NEXT
    ENDIF
-   tree_ReleaseNode(::oTree:handle, ::handle)
+   hwg_Tree_ReleaseNode(::oTree:handle, ::handle)
    hwg_SendMessage(::oTree:handle, TVM_DELETEITEM, 0, ::handle)
    IF lInternal == NIL
       aItems := IIf(::oParent == NIL, ::oTree:aItems, ::oParent:aItems)
@@ -255,7 +255,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
    LOCAL state
 
    IF lChecked != NIL
-      TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1))
+      hwg_TreeSetItem(::oTree:handle, ::handle, TREE_SETITEM_CHECK, IIf(lChecked, 2, 1))
       ::lChecked := lChecked
    ELSE
       state := hwg_SendMessage(::oTree:handle, TVM_GETITEMSTATE, ::handle,, TVIS_STATEIMAGEMASK) - 1
@@ -299,10 +299,10 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages)
    METHOD FindChild(h)
    METHOD FindChildPos(oNode, h)
-   METHOD GetSelected() INLINE IIf(hb_IsObject(::oItem := TreeGetSelected(::handle)), ::oItem, NIL)
+   METHOD GetSelected() INLINE IIf(hb_IsObject(::oItem := hwg_TreeGetSelected(::handle)), ::oItem, NIL)
    METHOD EditLabel(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_EDITLABEL, 0, o:handle)}
    METHOD Expand(oNode, lAllNode)   //BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_EXPAND, TVE_EXPAND, o:handle), hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE)}
-   METHOD Select(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := TreeGetSelected(::handle)}
+   METHOD Select(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := hwg_TreeGetSelected(::handle)}
    METHOD Clean()
    METHOD Notify(lParam)
    METHOD END() INLINE (::Super:END(), ReleaseTree(::aItems))
@@ -574,10 +574,10 @@ METHOD Notify(lParam) CLASS HTree
    LOCAL nAct
    LOCAL nHitem
    LOCAL leval
-   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeyDown(lParam)
     
    IF ncode == NM_SETCURSOR .AND. ::lDragging
-      ::hitemDrop := tree_Hittest(::handle,,, @nAct)
+      ::hitemDrop := hwg_Tree_HitTest(::handle,,, @nAct)
       IF ::hitemDrop != NIL
          hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
       ENDIF
@@ -586,8 +586,8 @@ METHOD Notify(lParam) CLASS HTree
    IF nCode == TVN_SELCHANGING  //.AND. ::oitem != NIL // .OR. NCODE = -500
 
    ELSEIF nCode == TVN_SELCHANGED //.OR. nCode == TVN_ITEMCHANGEDW
-      ::oItemOld := Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
-      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      ::oItemOld := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
+      oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          oItem:oTree:oSelected := oItem
          IF oItem != NIL .AND. !oItem:oTree:lEmpty
@@ -608,29 +608,29 @@ METHOD Notify(lParam) CLASS HTree
       // RETURN 1
 
    ELSEIF nCode == TVN_ENDLABELEDIT .OR. nCode == TVN_ENDLABELEDITW
-      IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
-         oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
+      IF !Empty(cText := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
+         oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
          IF hb_IsObject(oItem)
             IF !(cText == oItem:GetText()) .AND. ;
                (oItem:oTree:bItemChange == NIL .OR. Eval(oItem:oTree:bItemChange, oItem, cText))
-               TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
+               hwg_TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
             ENDIF
          ENDIF
       ENDIF
       ::oParent:aEvents := s_aEvents
 
    ELSEIF nCode == TVN_ITEMEXPANDING .OR. nCode == TVN_ITEMEXPANDINGW
-      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          IF ::bExpand != NIL
             RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
-                              hwg_CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
+                              hwg_CheckBit(hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
                         0, 1)
          ENDIF
       ENDIF
 
    ELSEIF nCode == TVN_BEGINDRAG .AND. ::lDragDrop
-      ::hitemDrag := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      ::hitemDrag := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       ::lDragging := .T.
 
    ELSEIF nCode == TVN_KEYDOWN
@@ -639,9 +639,9 @@ METHOD Notify(lParam) CLASS HTree
       ENDIF
 
     ELSEIF nCode == NM_CLICK  //.AND. ::oitem != NIL // .AND. !::lEditLabels
-       nHitem :=  Tree_GetNotify(lParam, 1)
+       nHitem :=  hwg_Tree_GetNotify(lParam, 1)
        //nHitem :=  hwg_GetNotifyCode(lParam)
-       oItem  := tree_Hittest(::handle,,, @nAct)
+       oItem  := hwg_Tree_HitTest(::handle,,, @nAct)
        IF nAct == TVHT_ONITEMSTATEICON
           IF ::oItem == NIL .OR. oItem:handle != ::oitem:handle
             ::Select(oItem)
@@ -665,18 +665,18 @@ METHOD Notify(lParam) CLASS HTree
 
    ELSEIF nCode == NM_DBLCLK
       IF hb_IsBlock(::bDblClick)
-         oItem  := tree_Hittest(::handle,,, @nAct)
+         oItem  := hwg_Tree_HitTest(::handle,,, @nAct)
          Eval(::bDblClick, oItem, Self, nAct)
       ENDIF
    ELSEIF nCode == NM_RCLICK
       IF hb_IsBlock(::bRClick)
-         oItem  := tree_Hittest(::handle,,, @nAct)
+         oItem  := hwg_Tree_HitTest(::handle,,, @nAct)
          Eval(::bRClick, oItem, Self, nAct)
       ENDIF
 
       /* working only windows 7
    ELSEIF nCode == - 24 .AND. ::oitem != NIL
-      //nhitem := tree_Hittest(::handle,,, @nAct)
+      //nhitem := hwg_Tree_HitTest(::handle,,, @nAct)
       IF hb_IsBlock(::bCheck)
          lEval := Eval(::bCheck, !::oItem:checked, ::oItem, Self)
       ENDIF
@@ -701,13 +701,13 @@ METHOD Notify(lParam) CLASS HTree
    LOCAL nAct
    LOCAL nHitem
    LOCAL leval
-   LOCAL nkeyDown := GetNotifyKeydown(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeyDown(lParam)
 
    SWITCH nCode
 
    CASE NM_SETCURSOR
       IF ::lDragging
-         ::hitemDrop := tree_Hittest(::handle,,, @nAct)
+         ::hitemDrop := hwg_Tree_HitTest(::handle,,, @nAct)
          IF ::hitemDrop != NIL
             hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_DROPHILITE, ::hitemDrop:handle)
          ENDIF
@@ -718,8 +718,8 @@ METHOD Notify(lParam) CLASS HTree
       EXIT
 
    CASE TVN_SELCHANGED
-      ::oItemOld := Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
-      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      ::oItemOld := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_OLDPARAM)
+      oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          oItem:oTree:oSelected := oItem
          IF oItem != NIL .AND. !oItem:oTree:lEmpty
@@ -743,12 +743,12 @@ METHOD Notify(lParam) CLASS HTree
 
    CASE TVN_ENDLABELEDIT
    CASE TVN_ENDLABELEDITW
-      IF !Empty(cText := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
-         oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
+      IF !Empty(cText := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_EDIT))
+         oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_EDITPARAM)
          IF hb_IsObject(oItem)
             IF !(cText == oItem:GetText()) .AND. ;
                (oItem:oTree:bItemChange == NIL .OR. Eval(oItem:oTree:bItemChange, oItem, cText))
-               TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
+               hwg_TreeSetItem(oItem:oTree:handle, oItem:handle, TREE_SETITEM_TEXT, cText)
             ENDIF
          ENDIF
       ENDIF
@@ -757,11 +757,11 @@ METHOD Notify(lParam) CLASS HTree
 
    CASE TVN_ITEMEXPANDING
    CASE TVN_ITEMEXPANDINGW
-      oItem := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+      oItem := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
       IF hb_IsObject(oItem)
          IF ::bExpand != NIL
             RETURN IIf(Eval(oItem:oTree:bExpand, oItem, ;
-                            hwg_CheckBit(Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
+                            hwg_CheckBit(hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_ACTION), TVE_EXPAND)), ;
                        0, 1)
          ENDIF
       ENDIF
@@ -769,7 +769,7 @@ METHOD Notify(lParam) CLASS HTree
 
    CASE TVN_BEGINDRAG
       IF ::lDragDrop
-         ::hitemDrag := Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
+         ::hitemDrag := hwg_Tree_GetNotify(lParam, TREE_GETNOTIFY_PARAM)
          ::lDragging := .T.
       ENDIF
       EXIT
@@ -781,9 +781,9 @@ METHOD Notify(lParam) CLASS HTree
       EXIT
 
    CASE NM_CLICK
-      nHitem :=  Tree_GetNotify(lParam, 1)
+      nHitem :=  hwg_Tree_GetNotify(lParam, 1)
       //nHitem :=  hwg_GetNotifyCode(lParam)
-      oItem  := tree_Hittest(::handle,,, @nAct)
+      oItem  := hwg_Tree_HitTest(::handle,,, @nAct)
       IF nAct == TVHT_ONITEMSTATEICON
          IF ::oItem == NIL .OR. oItem:handle != ::oitem:handle
             ::Select(oItem)
@@ -808,14 +808,14 @@ METHOD Notify(lParam) CLASS HTree
 
    CASE NM_DBLCLK
       IF hb_IsBlock(::bDblClick)
-         oItem := tree_Hittest(::handle,,, @nAct)
+         oItem := hwg_Tree_HitTest(::handle,,, @nAct)
          Eval(::bDblClick, oItem, Self, nAct)
       ENDIF
       EXIT
 
    CASE NM_RCLICK
       IF hb_IsBlock(::bRClick)
-         oItem := tree_Hittest(::handle,,, @nAct)
+         oItem := hwg_Tree_HitTest(::handle,,, @nAct)
          Eval(::bRClick, oItem, Self, nAct)
       ENDIF
 
@@ -865,7 +865,7 @@ STATIC PROCEDURE ReleaseTree(aItems)
    LOCAL iLen := Len(aItems)
 
    FOR i := 1 TO iLen
-      tree_ReleaseNode(aItems[i]:oTree:handle, aItems[i]:handle)
+      hwg_Tree_ReleaseNode(aItems[i]:oTree:handle, aItems[i]:handle)
       ReleaseTree(aItems[i]:aItems)
       // hwg_DecreaseHolders(aItems[i]:handle)
    NEXT
@@ -879,13 +879,13 @@ STATIC PROCEDURE MarkCheckTree(oItem, state)
    LOCAL oParent
 
    FOR i := 1 TO iLen
-      TreeSetItem(oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state)
+      hwg_TreeSetItem(oItem:oTree:handle, oItem:aitems[i]:handle, TREE_SETITEM_CHECK, state)
       MarkCheckTree(oItem:aItems[i], state)
    NEXT
    IF state == 1
       oParent := oItem:oParent
       DO WHILE oParent != NIL
-         TreeSetItem(oItem:oTree:handle, oParent:handle, TREE_SETITEM_CHECK, state)
+         hwg_TreeSetItem(oItem:oTree:handle, oParent:handle, TREE_SETITEM_CHECK, state)
          oParent := oParent:oParent
       ENDDO
    ENDIF

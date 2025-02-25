@@ -190,19 +190,19 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
          DO CASE
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SELCHANGE
             IF oCtrl != Nil .AND. oCtrl:bChange != Nil
-               Eval( oCtrl:bChange, oCtrl, GetCurrentTab( oCtrl:handle ) )
+               Eval( oCtrl:bChange, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
             ENDIF
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_CLICK
               if oCtrl != Nil .AND. oCtrl:bAction != nil
-                 Eval( oCtrl:bAction, oCtrl, GetCurrentTab( oCtrl:handle ) )
+                 Eval( oCtrl:bAction, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
               endif
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SETFOCUS
               if oCtrl != Nil .AND. oCtrl:bGetFocus != nil
-                 Eval( oCtrl:bGetFocus, oCtrl, GetCurrentTab( oCtrl:handle ) )
+                 Eval( oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
               endif
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_KILLFOCUS
               if oCtrl != Nil .AND. oCtrl:bLostFocus != nil
-                 Eval( oCtrl:bLostFocus, oCtrl, GetCurrentTab( oCtrl:handle ))
+                 Eval( oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab( oCtrl:handle ))
               endif
         ENDCASE
       ELSEIF oCtrl:ClassName() == "HQHTM"

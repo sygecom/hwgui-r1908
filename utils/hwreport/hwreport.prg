@@ -94,21 +94,21 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
       ENDMENU
       MENU TITLE "&Options"
          MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
-         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,IsCheckedMenuItem(,IDM_VIEW1)),CheckMenuItem(,IDM_VIEW1,!IsCheckedMenuItem(,IDM_VIEW1)),Iif(IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-         MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (CheckMenuItem(,IDM_MOUSE2,!IsCheckedMenuItem(,IDM_MOUSE2)))
+         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),Iif(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),Iif(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (hwg_CheckMenuItem(,IDM_MOUSE2,!hwg_IsCheckedMenuItem(,IDM_MOUSE2)))
       ENDMENU
       MENUITEM "&About" ID IDM_ABOUT ACTION About()
    ENDMENU
 
-   EnableMenuItem( ,IDM_CLOSE, .F., .T. )
-   EnableMenuItem( ,IDM_SAVE, .F., .T. )
-   EnableMenuItem( ,IDM_SAVEAS, .F., .T. )
-   EnableMenuItem( ,IDM_PRINT, .F., .T. )
-   EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
-   EnableMenuItem( ,IDM_FOPT, .F., .T. )
-   EnableMenuItem( ,1, .F., .F. )
-   CheckMenuItem( ,IDM_MOUSE2, .t. )
+   hwg_EnableMenuItem( ,IDM_CLOSE, .F., .T. )
+   hwg_EnableMenuItem( ,IDM_SAVE, .F., .T. )
+   hwg_EnableMenuItem( ,IDM_SAVEAS, .F., .T. )
+   hwg_EnableMenuItem( ,IDM_PRINT, .F., .T. )
+   hwg_EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
+   hwg_EnableMenuItem( ,IDM_FOPT, .F., .T. )
+   hwg_EnableMenuItem( ,1, .F., .F. )
+   hwg_CheckMenuItem( ,IDM_MOUSE2, .t. )
 
    oMainWindow:Activate()
 
@@ -148,7 +148,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
    ENDIF
 
    aPaintRep[FORM_Y] := 0
-   EnableMenuItem( ,1, .T., .F. )
+   hwg_EnableMenuItem( ,1, .T., .F. )
    WriteStatus( oMainWindow,2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
    hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -177,7 +177,7 @@ Local step, kolsteps, nsteps
       aPaintRep[FORM_XKOEFCONST] := ( aMetr[1]-XINDENT )/aPaintRep[FORM_WIDTH]
    ENDIF
 
-   IF IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       lPreview := .T.
       aPaintRep[FORM_Y] := 0
       IF aPaintRep[FORM_WIDTH] > aPaintRep[FORM_HEIGHT]
@@ -456,7 +456,7 @@ Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2
 Local hWnd
 Local aItem, i, dx, dy
 
-   IF aPaintRep == Nil .OR. IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    s_itemBorder := 0
@@ -467,7 +467,7 @@ Local aItem, i, dx, dy
          hwg_SetCursor( s_crossCursor )
       ENDIF
    ELSEIF s_itemPressed > 0
-      IF IsCheckedMenuItem(,IDM_MOUSE2) .AND. Abs(xPos - s_mPos[1]) < 3 .AND. Abs(yPos - s_mPos[2]) < 3
+      IF hwg_IsCheckedMenuItem(,IDM_MOUSE2) .AND. Abs(xPos - s_mPos[1]) < 3 .AND. Abs(yPos - s_mPos[2]) < 3
          Return Nil
       ENDIF
       aItem := aPaintRep[FORM_ITEMS,s_itemPressed]
@@ -591,7 +591,7 @@ Return Nil
 Static Function LButtonDown( xPos, yPos )
 Local i, aItem, res := .F.
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == Nil .OR. IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    IF s_nAddItem > 0
@@ -635,7 +635,7 @@ Return Nil
 Static Function LButtonUp( xPos, yPos )
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, aItem
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == Nil .OR. IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF],0)-1
@@ -665,12 +665,12 @@ Local hWnd := Hwindow():GetMain():handle
                TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
       hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       IF Len( aPaintRep[FORM_ITEMS] ) == 1
-         EnableMenuItem( ,IDM_CLOSE, .T., .T. )
-         EnableMenuItem( ,IDM_SAVE, .T., .T. )
-         EnableMenuItem( ,IDM_SAVEAS, .T., .T. )
-         EnableMenuItem( ,IDM_PRINT, .T., .T. )
-         EnableMenuItem( ,IDM_PREVIEW, .T., .T. )
-         EnableMenuItem( ,IDM_FOPT, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_CLOSE, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_SAVE, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_SAVEAS, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_PRINT, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_PREVIEW, .T., .T. )
+         hwg_EnableMenuItem( ,IDM_FOPT, .T., .T. )
       ENDIF
    ELSEIF s_itemPressed > 0
       aPaintRep[FORM_ITEMS,s_itemPressed,ITEM_STATE] := STATE_SELECTED
@@ -701,12 +701,12 @@ Local i, aItem
          WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
          IF Len( aPaintRep[FORM_ITEMS] ) == 0
-            EnableMenuItem( ,IDM_CLOSE, .F., .T. )
-            EnableMenuItem( ,IDM_SAVE, .F., .T. )
-            EnableMenuItem( ,IDM_SAVEAS, .F., .T. )
-            EnableMenuItem( ,IDM_PRINT, .F., .T. )
-            EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
-            EnableMenuItem( ,IDM_FOPT, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_CLOSE, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_SAVE, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_SAVEAS, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_PRINT, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
+            hwg_EnableMenuItem( ,IDM_FOPT, .F., .T. )
          ENDIF
          hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
          EXIT

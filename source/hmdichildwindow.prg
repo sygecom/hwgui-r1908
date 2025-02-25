@@ -453,7 +453,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
          hwg_ShellNotifyIcon(.F., oWnd:handle, oWnd:oNotifyIcon:handle)
       ENDIF
       IF __ObjHasMsg(oWnd, "HACCEL") .AND. oWnd:hAccel != NIL
-         DestroyAcceleratorTable(oWnd:hAccel)
+         hwg_DestroyAcceleratorTable(oWnd:hAccel)
       ENDIF
       RETURN - 1
    ENDIF

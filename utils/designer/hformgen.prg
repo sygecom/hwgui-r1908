@@ -1025,7 +1025,7 @@ STATIC FUNCTION PaintDlg( oDlg )
           nRight := aCoors[3]
           nBottom := aCoors[4]           *  PS_DOT
           // : LFB
-          SetROP2(hDC, 9)
+          hwg_SetROP2(hDC, 9)
           oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("606060"))
           hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB
@@ -1036,7 +1036,7 @@ STATIC FUNCTION PaintDlg( oDlg )
              hwg_DrawLine( hDC, nLeft+2, i, nRight, i )    //h
           next
           // : LFB
-          SetROP2(hDC, 13)
+          hwg_SetROP2(hDC, 13)
           oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))
           hwg_SelectObject( hDC,oPenDivider:handle )
           // :END LFB
@@ -1052,7 +1052,7 @@ STATIC FUNCTION PaintDlg( oDlg )
       ENDIF
 /*
       oDesigner:addItem := Nil
-      IF IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050)
+      IF hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050)
         i := 0
         aCoors := hwg_GetClientRect( oDlg:handle )
         n1cm := oDesigner:nPixelGrid
@@ -1398,7 +1398,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
       ENDIF
    ENDIF
    IF oCtrl != Nil .AND. Lower(oCtrl:cClass) == "page"
-      i := Tab_HitTest( oCtrl:handle,,,@flag )
+      i := hwg_Tab_HitTest( oCtrl:handle,,,@flag )
       IF i >= 0 .AND. flag == 4 .OR. flag == 6
          Page_Select( oCtrl, i+1 )
       ENDIF
@@ -1494,7 +1494,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
          oContainer:AddControl( oCtrl )
          oCtrl:oContainer := oContainer
          IF Lower(oContainer:cClass) == "page"
-            oCtrl:nPage := GetCurrentTab( oContainer:handle )
+            oCtrl:nPage := hwg_GetCurrentTab( oContainer:handle )
             IF oCtrl:nPage == 0
                oCtrl:nPage ++
             ENDIF
@@ -1511,7 +1511,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
          oDesigner:oBtnPressed:Release()
       ENDIF
       oDesigner:addItem := Nil
-      IF IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1011 )
+      IF hwg_IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1011 )
          AdjustCtrl( oCtrl )
       ENDIF
    ENDIF
@@ -1531,14 +1531,14 @@ STATIC FUNCTION RButtonUp( oDlg, xPos, yPos )
          ELSE
             IF oDesigner:lReport .AND. Lower(oCtrl:cClass) $ "hline.vline" ;
                .AND. oCtrl:oContainer != Nil .AND. Lower(oCtrl:oContainer:cClass) == "box"
-               EnableMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
                IF oCtrl:lEmbed
-                  CheckMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
                ELSE
-                  CheckMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
                ENDIF
             ELSE
-               EnableMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
             ENDIF
             oDesigner:oCtrlMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos,.T. )
          ENDIF
@@ -1577,7 +1577,7 @@ FUNCTION Container( oDlg,oCtrl )
       oContainer:AddControl( oCtrl )
       oCtrl:oContainer := oContainer
       IF Lower(oContainer:cClass) == "page"
-         oCtrl:nPage := GetCurrentTab( oContainer:handle )
+         oCtrl:nPage := hwg_GetCurrentTab( oContainer:handle )
          IF oCtrl:nPage == 0
             oCtrl:nPage ++
          ENDIF

@@ -803,7 +803,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
    ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. hb_IsArray(oDlg:menu) .AND. ;
       (aMenu := hwg_FindMenuItem(oDlg:menu, iParLow, @i)) != NIL
       IF hwg_BitAnd(aMenu[1, i, 4], FLAG_CHECK) > 0
-         CheckMenuItem(, aMenu[1, i, 3], !IsCheckedMenuItem(, aMenu[1, i, 3]))
+         hwg_CheckMenuItem(, aMenu[1, i, 3], !hwg_IsCheckedMenuItem(, aMenu[1, i, 3]))
       ENDIF
       IF hb_IsBlock(aMenu[1, i, 1])
          Eval(aMenu[1, i, 1], i, iParlow)

@@ -178,23 +178,23 @@ METHOD Notify( lParam ) CLASS hToolBar
 
     IF nCode == TTN_GETDISPINFO
 
-       nButton :=TOOLBAR_GETDISPINFOID( lParam )
+       nButton := hwg_ToolBar_GetDispInfoId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nButton})
-       TOOLBAR_SETDISPINFO( lParam, ::aItem[ nPos, 8 ] )
+       hwg_ToolBar_SetDispInfo( lParam, ::aItem[ nPos, 8 ] )
 
     ELSEIF nCode == TBN_GETINFOTIP
 
-       nId := TOOLBAR_GETINFOTIPID(lParam)
+       nId := hwg_ToolBar_GetInfoTipId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nId})
-       TOOLBAR_GETINFOTIP( lParam, ::aItem[ nPos, 8 ] )
+       hwg_ToolBar_GetInfoTip( lParam, ::aItem[ nPos, 8 ] )
 
     ELSEIF nCode == TBN_DROPDOWN
        if valtype(::aItem[1,9]) ="A"
-       nid := TOOLBAR_SUBMENUEXGETID( lParam )
+       nid := hwg_ToolBar_SubMenuExGetId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nId})
-       TOOLBAR_SUBMENUEx( lParam, ::aItem[ nPos, 10 ], ::oParent:handle )
+       hwg_ToolBar_SubMenuEx( lParam, ::aItem[ nPos, 10 ], ::oParent:handle )
        else
-              TOOLBAR_SUBMENU(lParam,1,::oParent:handle)
+              hwg_ToolBar_SubMenu(lParam,1,::oParent:handle)
        endif
     ENDIF
 
