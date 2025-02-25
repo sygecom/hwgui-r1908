@@ -374,6 +374,7 @@ FUNCTION hwg_EndWindow()
    ENDIF
    RETURN NIL
 
+// TODO: mover para outro arquivo .prg por não ter relação nenhuma com GUI
 FUNCTION hwg_HdSerial(cDrive)
 
    LOCAL n       :=  hwg_HDGetSerial(cDrive)
