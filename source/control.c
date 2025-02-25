@@ -457,7 +457,7 @@ HB_FUNC_TRANSLATE(SHOWTOOLTIP, HWG_SHOWTOOLTIP);
 #endif
 #endif
 
-HB_FUNC(HGW_CREATEUPDOWNCONTROL)
+HB_FUNC(HWG_CREATEUPDOWNCONTROL)
 {
   hwg_ret_HWND(CreateUpDownControl(WS_CHILD | WS_BORDER | WS_VISIBLE | hb_parni(3), hb_parni(4), hb_parni(5),
                                    hb_parni(6), hb_parni(7), hwg_par_HWND(1), hb_parni(2), GetModuleHandle(NULL),
@@ -2181,7 +2181,7 @@ HB_FUNC(HWG_GETLOCALEINFO)
 HB_FUNC_TRANSLATE(GETLOCALEINFO, HWG_GETLOCALEINFO);
 #endif
 
-HB_FUNC(HGW_COMBOBOXGETLBTEXT)
+HB_FUNC(HWG_COMBOBOXGETLBTEXT)
 {
   HWND hWnd = hwg_par_HWND(1);
   int nIndex = hb_parnl(2);
