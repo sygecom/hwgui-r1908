@@ -343,10 +343,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       ELSEIF wParam == VK_ESCAPE .AND. ;
                   (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
          RETURN DLGC_WANTMESSAGE  
-       ELSEIF (wParam != VK_TAB .AND. GETDLGMESSAGE(lParam) == WM_CHAR) .OR. GETDLGMESSAGE(lParam) == WM_SYSCHAR .OR. ;
+       ELSEIF (wParam != VK_TAB .AND. hwg_GetDlgMessage(lParam) == WM_CHAR) .OR. hwg_GetDlgMessage(lParam) == WM_SYSCHAR .OR. ;
                wParam == VK_ESCAPE 
          RETURN -1         
-      ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam == VK_RETURN  // DIALOG 
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam == VK_RETURN  // DIALOG 
          ::VALID(VK_RETURN)   // dialog funciona
          RETURN DLGC_WANTARROWS
       ENDIF 

@@ -417,7 +417,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       RETURN 0
 
    ELSEIF msg == WM_GETDLGCODE
-         IF wParam == VK_ESCAPE .AND. (GETDLGMESSAGE(lParam) == WM_KEYDOWN .OR. GETDLGMESSAGE(lParam) == WM_KEYUP)
+         IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
            oParent := ::GetParentForm()
            IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
               hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
@@ -426,7 +426,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
               RETURN 0
            ENDIF
         ENDIF
-      RETURN IIf(wParam == VK_ESCAPE, -1, ButtonGetDlgCode(lParam))
+      RETURN IIf(wParam == VK_ESCAPE, -1, hwg_ButtonGetDlgCode(lParam))
 
    ELSEIF msg == WM_SYSCOLORCHANGE
       ::SetDefaultColors()
@@ -624,7 +624,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       RETURN 0
 
    CASE WM_GETDLGCODE
-      IF wParam == VK_ESCAPE .AND. (GETDLGMESSAGE(lParam) == WM_KEYDOWN .OR. GETDLGMESSAGE(lParam) == WM_KEYUP)
+      IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
          oParent := ::GetParentForm()
          IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
             hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
@@ -633,7 +633,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
             RETURN 0
          ENDIF
       ENDIF
-      RETURN IIf(wParam == VK_ESCAPE, -1, ButtonGetDlgCode(lParam))
+      RETURN IIf(wParam == VK_ESCAPE, -1, hwg_ButtonGetDlgCode(lParam))
 
    CASE WM_SYSCOLORCHANGE
       ::SetDefaultColors()

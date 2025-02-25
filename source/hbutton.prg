@@ -164,8 +164,8 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
       ENDIF
    ELSEIF msg == WM_GETDLGCODE .AND. !Empty(lParam)
       IF wParam == VK_RETURN .OR. wParam == VK_TAB
-      ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE
          RETURN -1
       ENDIF
       RETURN DLGC_WANTMESSAGE
@@ -222,8 +222,8 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
    CASE WM_GETDLGCODE
       IF !Empty(lParam)
          IF wParam == VK_RETURN .OR. wParam == VK_TAB
-         ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE
             RETURN -1
          ENDIF
          RETURN DLGC_WANTMESSAGE

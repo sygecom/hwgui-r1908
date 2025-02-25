@@ -136,7 +136,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       IF (wParam == VK_SPACE)
 
          nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
-         rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
+         rcItem := hwg_ComboGetItemRect(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
          hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
@@ -169,7 +169,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
          // Compute which index to check/uncheck
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
-         rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
+         rcItem := hwg_ComboGetItemRect(::handle, nIndex - 1)
 
          //IF (hwg_PtInRect(rcItem, pt))
          IF pt[1] < ::nWidthCheck
@@ -221,7 +221,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
    CASE WM_CHAR
       IF wParam == VK_SPACE
          nIndex := hwg_SendMessage(::handle, CB_GETCURSEL, wParam, lParam) + 1
-         rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
+         rcItem := hwg_ComboGetItemRect(::handle, nIndex - 1)
          hwg_InvalidateRect(::handle, .F., rcItem[1], rcItem[2], rcItem[3], rcItem[4])
          ::SetCheck(nIndex, !::GetCheck(nIndex))
          hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKELONG(::id, CBN_SELCHANGE), ::handle)
@@ -251,7 +251,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
          nTopIndex := hwg_SendMessage(::handle, LB_GETTOPINDEX, 0, 0)
          // Compute which index to check/uncheck
          nIndex := (nTopIndex + pt[2] / nItemHeight) + 1
-         rcItem := COMBOGETITEMRECT(::handle, nIndex - 1)
+         rcItem := hwg_ComboGetItemRect(::handle, nIndex - 1)
          //IF hwg_PtInRect(rcItem, pt)
          IF pt[1] < ::nWidthCheck
             // Invalidate this window
@@ -319,7 +319,7 @@ RETURN NIL
 
 METHOD SetCheck(nIndex, bFlag) CLASS hCheckComboBox
 
-   LOCAL nResult := COMBOBOXSETITEMDATA(::handle, nIndex - 1, bFlag)
+   LOCAL nResult := hwg_ComboBoxSetItemData(::handle, nIndex - 1, bFlag)
 
    IF (nResult < 0)
       RETURN nResult
@@ -336,7 +336,7 @@ RETURN nResult
 
 METHOD GetCheck(nIndex) CLASS hCheckComboBox
 
-   LOCAL l := COMBOBOXGETITEMDATA(::handle, nIndex - 1)
+   LOCAL l := hwg_ComboBoxGetItemData(::handle, nIndex - 1)
 
 RETURN IIf(l == 1, .T., .F.)
 
@@ -374,7 +374,7 @@ METHOD RecalcText() CLASS hCheckComboBox
 
       // Get the list separator
 
-      strSeparator := GetLocaleInfo()
+      strSeparator := hwg_GetLocaleInfo()
 
       // If none found, the the ''
       IF Len(strSeparator) == 0
@@ -387,9 +387,9 @@ METHOD RecalcText() CLASS hCheckComboBox
 
       FOR i := 1 TO ncount
 
-         IF (COMBOBOXGETITEMDATA(::handle, i)) == 1
+         IF (hwg_ComboBoxGetItemData(::handle, i)) == 1
 
-            COMBOBOXGETLBTEXT(::handle, i, @stritem)
+            hwg_ComboBoxGetLBText(::handle, i, @stritem)
 
             IF !Empty(strtext)
                strtext += strSeparator
@@ -429,9 +429,9 @@ METHOD Paint(lpDis) CLASS hCheckComboBox
       ncheck := 0
 
    ELSE
-      COMBOBOXGETLBTEXT(::handle, drawInfo[1], @strtext)
+      hwg_ComboBoxGetLBText(::handle, drawInfo[1], @strtext)
 
-      ncheck := 1 + (COMBOBOXGETITEMDATA(::handle, drawInfo[1]))
+      ncheck := 1 + (hwg_ComboBoxGetItemData(::handle, drawInfo[1]))
 
       metrics := hwg_GetTextMetric(dc)
 

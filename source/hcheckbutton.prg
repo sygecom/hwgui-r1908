@@ -169,9 +169,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
            RETURN -1
       ELSEIF wParam == VK_ESCAPE .AND. (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
          RETURN DLGC_WANTMESSAGE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE .OR. ;
-         GETDLGMESSAGE(lParam) == WM_SYSCHAR
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE .OR. ;
+         hwg_GetDlgMessage(lParam) == WM_SYSCHAR
          RETURN -1
       ENDIF
       RETURN DLGC_WANTMESSAGE //+ DLGC_WANTCHARS
@@ -227,8 +227,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
          ELSEIF wParam == VK_ESCAPE .AND. ;
             (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE .OR. GETDLGMESSAGE(lParam) == WM_SYSCHAR
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE .OR. hwg_GetDlgMessage(lParam) == WM_SYSCHAR
             RETURN -1
          ENDIF
          RETURN DLGC_WANTMESSAGE //+ DLGC_WANTCHARS
