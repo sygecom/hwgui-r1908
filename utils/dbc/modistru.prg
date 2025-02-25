@@ -207,7 +207,7 @@ Local oPBar, nSch := 0
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             oBrowse := aControls[ i ]
-            CreateList( oBrowse,.T. )
+            hwg_CreateList( oBrowse,.T. )
          ENDIF
       ENDIF
    ENDIF

@@ -357,8 +357,8 @@ FUNCTION FileOpen()
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y)} ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      CreateList(oBrw, .T.)
-      oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
+      hwg_CreateList(oBrw, .T.)
+      oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
       IF oFont != NIL
          oBrw:ofont := oFont
       ENDIF

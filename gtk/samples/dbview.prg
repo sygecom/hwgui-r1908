@@ -88,7 +88,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
       FONT oFont                     ;
       ON SIZE {|o,x,y|o:Move(,,x-1,y-28)}
       
-   oBrw:bScrollPos := {|o,n,lEof,nPos|VScrollPos(o,n,lEof,nPos)}
+   oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
 
    @ 0,272 PANEL oPanel SIZE 0,26 ON SIZE {|o,x,y|o:Move(0,y-26,x-1,y-8)}
    @ 5,4 SAY oSay1 CAPTION "" OF oPanel SIZE 150,22 FONT oFont
@@ -121,7 +121,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       
       oBrw:InitBrw( 2 )
       oBrw:active := .F.
-      CreateList( oBrw,.T. )
+      hwg_CreateList( oBrw,.T. )
       AAdd(oBrw:aColumns, NIL)
       Ains( oBrw:aColumns,1 )
       oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")},"C",1,0 )

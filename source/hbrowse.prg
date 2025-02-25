@@ -469,7 +469,7 @@ METHOD Init() CLASS HBrowse
       hwg_SetWindowObject(::handle, Self)
       ::Super:Init()
       ::InitBrw(, .T.)
-      //VScrollPos(Self, 0, .F.)
+      //hwg_VScrollPos(Self, 0, .F.)
       IF ::GetParentForm():Type < WND_DLG_RESOURCE
          ::GetParentForm():lDisableCtrlTab := .T.
       ENDIF
@@ -1580,7 +1580,7 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
       ::bRcou := {|o|Len(o:aArray)}
       ::bRecnoLog := ::bRecno  := {|o|o:nCurrent}
       ::bGoTo := {|o, n|o:nCurrent := n}
-      ::bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
+      ::bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
    ENDIF
 
    IF lInit
@@ -2145,7 +2145,7 @@ ENDIF
        IF hb_IsBlock(::bScrollPos) // array
          Eval(::bScrollPos, Self, 1, .F.)
       ELSE
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
    ENDIF
 
@@ -3031,7 +3031,7 @@ METHOD DoVScroll(wParam) CLASS HBrowse
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          ::refresh()
       ENDIF
    ENDIF
@@ -3074,7 +3074,7 @@ METHOD DoVScroll(wParam) CLASS HBrowse
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          ::refresh()
       ENDIF
    ENDSWITCH
@@ -3293,7 +3293,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, 1, .F.)
    ELSEIF ::nRecords > 1
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
   // ::SetFocus()  ??
@@ -3325,7 +3325,7 @@ METHOD LINEUP() CLASS HBrowse
       IF hb_IsBlock(::bScrollPos)
          Eval(::bScrollPos, Self, -1, .F.)
       ELSEIF ::nRecords > 1
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
       ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ENDIF
@@ -3355,7 +3355,7 @@ METHOD PAGEUP() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, -STEP, lBof)
    ELSEIF ::nRecords > 1
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh(::nFootRows > 0)
@@ -3385,7 +3385,7 @@ METHOD PAGEDOWN() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, STEP, .F.)
    ELSE
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh(::nFootRows > 0)
@@ -3405,7 +3405,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
       Eval(::bGoBot, Self)
    ENDIF
 
-   VScrollPos(Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.))
+   hwg_VScrollPos(Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.))
 
    IF lPaint == NIL .OR. lPaint
       ::Refresh(::nFootRows > 0)
@@ -3422,7 +3422,7 @@ METHOD TOP() CLASS HBrowse
 
    ::rowPos := 1
    Eval(::bGoTop, Self)
-   VScrollPos(Self, 0, .F.)
+   hwg_VScrollPos(Self, 0, .F.)
 
    //hwg_InvalidateRect(::handle, 0)
    ::Refresh(::nFootRows > 0)
@@ -3506,7 +3506,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF hb_IsBlock(::bScrollPos)
          Eval(::bScrollPos, Self, STEP, .F.)
       ELSEIF ::nRecords > 1
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
       res := .T.
 
@@ -3516,7 +3516,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
          IF hb_IsBlock(::bScrollPos)
             Eval(::bScrollPos, Self, STEP, .F.)
          ELSEIF ::nRecords > 1
-            VScrollPos(Self, 0, .F.)
+            hwg_VScrollPos(Self, 0, .F.)
          ENDIF
          res := .T.
       ELSEIF nRec > 0
@@ -3529,7 +3529,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF ::colpos != fif - ::nLeftCol + 1 + ::freeze
          // Colpos should not go beyond last column or I get bound errors on ::Edit()
          ::colpos := Min(::nColumns + 1, fif - ::nLeftCol + 1 + ::freeze)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          res := .T.
       ENDIF
    ENDIF
@@ -4508,7 +4508,7 @@ FUNCTION HWG_CREATEARLIST(oBrw, arr)
       // oBrw:aColumns := {}
       IF hb_IsArray(arr[1])
          FOR i := 1 TO Len(arr[1])
-            oBrw:AddColumn(HColumn():New(, ColumnArBlock()))
+            oBrw:AddColumn(HColumn():New(, hwg_ColumnArBlock()))
          NEXT
       ELSE
          oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}))
@@ -4537,7 +4537,7 @@ PROCEDURE ARSKIP(oBrw, nSkip)
 RETURN
 
 //----------------------------------------------------//
-FUNCTION CreateList(oBrw, lEditable)
+FUNCTION hwg_CreateList(oBrw, lEditable)
    
    LOCAL i
    LOCAL nArea := Select()
@@ -4559,7 +4559,7 @@ FUNCTION CreateList(oBrw, lEditable)
 
 RETURN NIL
 
-FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
+FUNCTION hwg_VScrollPos(oBrw, nType, lEof, nPos)
    
    LOCAL minPos
    LOCAL maxPos
@@ -4661,7 +4661,7 @@ METHOD ShowSizes() CLASS HBrowse
 
 RETURN NIL
 
-FUNCTION ColumnArBlock()
+FUNCTION hwg_ColumnArBlock()
 RETURN {|value, o, n|IIf(value == NIL, ;
                          o:aArray[IIf(o:nCurrent < 1, 1, o:nCurrent), n], ;
                          o:aArray[IIf(o:nCurrent < 1, 1, o:nCurrent), n] := value)}
@@ -4922,6 +4922,9 @@ RETURN nLen
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(CREATEARLIST, HWG_CREATEARLIST);
+HB_FUNC_TRANSLATE(CREATELIST, HWG_CREATELIST);
+HB_FUNC_TRANSLATE(VSCROLLPOS, HWG_VSCROLLPOS);
+HB_FUNC_TRANSLATE(COLUMNARBLOCK, HWG_COLUMNARBLOCK);
 #endif
 
 #pragma ENDDUMP

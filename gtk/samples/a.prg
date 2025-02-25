@@ -85,8 +85,8 @@ Local nId
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o,x,y|o:Move(,,x,y)}         ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      CreateList( oBrw,.T. )
-      oBrw:bScrollPos := {|o,n,lEof,nPos|VScrollPos(o,n,lEof,nPos)}
+      hwg_CreateList( oBrw,.T. )
+      oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF

@@ -101,7 +101,7 @@ FUNCTION Main()
       FONT oFont                     ;
       ON SIZE {|o, x, y|o:Move(, , x - 1, y - 28)}
 
-   oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
+   oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
 
    @ 0, 272 PANEL oPanel SIZE 0, 26 ON SIZE {|o, x, y|o:Move(0, y - 26, x - 1, y - 8)}
    @ 5, 4 SAY oSay1 CAPTION "" OF oPanel SIZE 150, 22 FONT oFont
@@ -141,7 +141,7 @@ STATIC FUNCTION FileOpen()
 
       oBrw:InitBrw(2)
       oBrw:active := .F.
-      CreateList(oBrw, .T.)
+      hwg_CreateList(oBrw, .T.)
       oBrw:InsColumn(HColumn():New("*", {||IIf(Deleted(), "*", " ")}, "C", 1, 0), 1)
       oBrw:active := .T.
       oBrw:Refresh()

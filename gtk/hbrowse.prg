@@ -475,7 +475,7 @@ METHOD InitBrw( nType )  CLASS HBrowse
       ::bRcou   := { | o | Len(o:aArray) }
       ::bRecnoLog := ::bRecno  := { | o | o:nCurrent }
       ::bGoTo   := { | o, n | o:nCurrent := n }
-      ::bScrollPos := {|o,n,lEof,nPos|VScrollPos(o,n,lEof,nPos)}
+      ::bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
    endif
 RETURN Nil
 
@@ -1715,7 +1715,7 @@ FUNCTION HWG_CREATEARLIST( oBrw, arr )
       // oBrw:aColumns := {}
       IF Valtype( arr[1] ) == "A"
          FOR i := 1 TO Len(arr[1])
-            oBrw:AddColumn( HColumn():New( ,ColumnArBlock() ) )
+            oBrw:AddColumn( HColumn():New( ,hwg_ColumnArBlock() ) )
          NEXT
       ELSE
          oBrw:AddColumn( HColumn():New( ,{|value,o| o:aArray[ o:nCurrent ] } ) )
@@ -1740,7 +1740,7 @@ Local tekzp1
 RETURN
 
 //----------------------------------------------------//
-FUNCTION CreateList( oBrw,lEditable )
+FUNCTION hwg_CreateList( oBrw,lEditable )
 Local i
 Local nArea := select()
 Local kolf := FCOUNT()
@@ -1761,7 +1761,7 @@ Local kolf := FCOUNT()
 
 RETURN Nil
 
-Function VScrollPos( oBrw, nType, lEof, nPos )
+Function hwg_VScrollPos( oBrw, nType, lEof, nPos )
 Local maxPos := hwg_getAdjValue( oBrw:hScrollV,1 ) - hwg_getAdjValue( oBrw:hScrollV,4 )
 Local oldRecno, newRecno
 
@@ -1804,7 +1804,7 @@ METHOD ShowSizes() CLASS HBrowse
    MsgInfo( cText )
 RETURN nil
 
-Function ColumnArBlock()
+Function hwg_ColumnArBlock()
 Return {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
 
 Static function HdrToken(cStr, nMaxLen, nCount)
@@ -1824,6 +1824,9 @@ RETURN nil
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(CREATEARLIST, HWG_CREATEARLIST);
+HB_FUNC_TRANSLATE(CREATELIST, HWG_CREATELIST);
+HB_FUNC_TRANSLATE(VSCROLLPOS, HWG_VSCROLLPOS);
+HB_FUNC_TRANSLATE(COLUMNARBLOCK, HWG_COLUMNARBLOCK);
 #endif
 
 #pragma ENDDUMP

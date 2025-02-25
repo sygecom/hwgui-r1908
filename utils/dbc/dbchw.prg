@@ -505,7 +505,7 @@ Local oWindow, aControls, oBrowse, i
       oBrowse:bcolorSel  := hwg_VColor( "800080" )
       oBrowse:ofont := oBrwFont
       oBrowse:cargo := improc
-      CreateList( oBrowse,.T. )
+      hwg_CreateList( oBrowse,.T. )
       oBrowse:lAppable := .T.
 
       oWindow:Activate()
