@@ -223,7 +223,7 @@ static char *WriteArray(char *ptr, PHB_ITEM pArray)
   return ptr;
 }
 
-HB_FUNC(ARRAY2STRING)
+HB_FUNC(HWG_ARRAY2STRING)
 {
   PHB_ITEM pArray = hb_param(1, HB_IT_ARRAY);
   HB_ULONG ulMemoSize = ArrayMemoSize(pArray);
@@ -233,7 +233,11 @@ HB_FUNC(ARRAY2STRING)
   hb_retclen_buffer(szResult, ulMemoSize);
 }
 
-HB_FUNC(STRING2ARRAY)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ARRAY2STRING, HWG_ARRAY2STRING);
+#endif
+
+HB_FUNC(HWG_STRING2ARRAY)
 {
   const char *szResult = hb_parc(1);
   PHB_ITEM pItem = hb_itemNew(NULL);
@@ -245,3 +249,7 @@ HB_FUNC(STRING2ARRAY)
 
   hb_itemReturnRelease(pItem);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(STRING2ARRAY, HWG_STRING2ARRAY);
+#endif

@@ -302,7 +302,7 @@ void Blowfish_Init(BLOWFISH_CTX *ctx, unsigned char *key, int keyLen)
 #include <hbapiitm.h>
 #include "guilib.h"
 
-HB_FUNC(BF_ENCRYPT)
+HB_FUNC(HWG_BF_ENCRYPT)
 {
 
   BLOWFISH_CTX ctx;
@@ -364,7 +364,11 @@ HB_FUNC(BF_ENCRYPT)
   hb_xfree(ptro);
 }
 
-HB_FUNC(BF_DECRYPT)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BF_ENCRYPT, HWG_BF_ENCRYPT);
+#endif
+
+HB_FUNC(HWG_BF_DECRYPT)
 {
 
   BLOWFISH_CTX ctx;
@@ -426,3 +430,7 @@ HB_FUNC(BF_DECRYPT)
   hb_xfree(key);
   hb_xfree(ptro);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BF_DECRYPT, HWG_BF_DECRYPT);
+#endif
