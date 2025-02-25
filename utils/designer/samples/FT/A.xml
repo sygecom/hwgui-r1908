@@ -222,10 +222,10 @@ SETcOLORiNFOCUS(.T.)
 ]]>
   </method>
   <method name="onDlgInit">
-    <![CDATA[WriteStatus(oDlg,1," I.H.K 1.01a", .t.)
-//WriteStatus(oDlg,2, rich_tgln(date(),"H P, D M Y"), .t.)
-WriteStatus(oDlg,2, DTOC(date()), .t.)
-WriteStatus(oDlg,4," (c)2006 Richard Roesnadi", .t.)
+    <![CDATA[hwg_WriteStatus(oDlg,1," I.H.K 1.01a", .t.)
+//hwg_WriteStatus(oDlg,2, rich_tgln(date(),"H P, D M Y"), .t.)
+hwg_WriteStatus(oDlg,2, DTOC(date()), .t.)
+hwg_WriteStatus(oDlg,4," (c)2006 Richard Roesnadi", .t.)
 hwg_SetFocus(oPv:handle)
 ]]>
   </method>
@@ -425,8 +425,8 @@ oB:aColumns[5]:footing:=trans(aSum[2],"@EZ 99,999,999,999.99")
 oB:aColumns[7]:footing:=trans(aSum[3],"@EZ 99,999,999,999.99")
 oB:aColumns[8]:footing:=trans(aSum[4],"@EZ 99,999,999,999.99")
 oB:refresh()
-WriteStatus(oDlg,3," Result Annuity : Rp"+trans(nA, "@EZ 999,999,999,999.999999"))
-refreshAllGets(oDlg)
+hwg_WriteStatus(oDlg,3," Result Annuity : Rp"+trans(nA, "@EZ 999,999,999,999.999999"))
+hwg_RefreshAllGets(oDlg)
 
 endif
 return .t.]]>
@@ -509,7 +509,7 @@ nFV:=0
 nA:=0
 iPa:=""
 iPm:=""
-RefreshAllGets(oDlg)
+hwg_RefreshAllGets(oDlg)
 ]]>
     </method>
   </part>
@@ -581,7 +581,7 @@ nUD:=aSave[5]
 //   aSum[3]+= aData[i,7]
 //   aSum[4]+= aData[i,8]
 //enddo
-refreshAllGets(oDlg)
+hwg_RefreshAllGets(oDlg)
 findAnnuity()
 
 //oB:aColumns[4]:footing:=trans(aSum[1],"@EZ 99,999,999,999.99")

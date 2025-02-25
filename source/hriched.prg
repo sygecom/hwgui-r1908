@@ -414,7 +414,7 @@ METHOD Print() CLASS HRichEdit
 Function DefRichProc(hEdit, msg, wParam, lParam)
 Local oEdit
    // hwg_WriteLog("RichProc: " + Str(hEdit, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
-   oEdit := FindSelf(hEdit)
+   oEdit := hwg_FindSelf(hEdit)
    IF msg == WM_CHAR
       oEdit:lChanged := .T.
    ELSEIF msg == WM_KEYDOWN

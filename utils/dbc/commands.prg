@@ -176,7 +176,7 @@ Private cFor
          Return Nil
       ENDIF
       Go nrec
-      WriteStatus( oWindow,3,"Done" )
+      hwg_WriteStatus( oWindow,3,"Done" )
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0

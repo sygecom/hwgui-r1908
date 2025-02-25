@@ -44,7 +44,7 @@ Private nColor, oBmp2
          MENUITEM "&Test Tab" ACTION TestTab()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION hwg_CopyStringToClipboard(MsgGet("Dialog Sample","Input table name"))
+               ACTION hwg_CopyStringToClipboard(hwg_MsgGet("Dialog Sample","Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          #ifdef TEST_PRINT         
          SEPARATOR

@@ -39,7 +39,7 @@
 ]]>
   </method>
   <method name="onDlgInit">
-    <![CDATA[refreshAllGets(oDlg)]]>
+    <![CDATA[hwg_RefreshAllGets(oDlg)]]>
   </method>
   <part class="menu">
     <style>
@@ -202,7 +202,7 @@
       </style>
       <method name="onClick">
         <![CDATA[nColText:=hwg_ChooseColor(nColText)
-refreshAllGets(oDlg)]]>
+hwg_RefreshAllGets(oDlg)]]>
       </method>
     </part>
     <part class="editbox">
@@ -236,7 +236,7 @@ refreshAllGets(oDlg)]]>
       <method name="onClick">
         <![CDATA[//hwg_MsgInfo(str(hwg_GetSysColor(15)))
 nColPane:=hwg_ChooseColor(nColPane)
-refreshAllGets(oDlg)
+hwg_RefreshAllGets(oDlg)
 ]]>
       </method>
     </part>

@@ -1309,7 +1309,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
          //hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_GRAYTEXT))
          hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_BTNHIGHLIGHT))
     ENDIF
-    aTxtSize := TxtRect(oPage:caption, oPage:oParent)
+    aTxtSize := hwg_TxtRect(oPage:caption, oPage:oParent)
     IF oPage:oParent:himl != NIL
         BmpSize := ((aItemPos[3] - aItemPos[1]) - (oPage:oParent:aBmpSize[1] + aTxtSize[1])) / 2
         BmpSize += oPage:oParent:aBmpSize[1]

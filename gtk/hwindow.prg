@@ -260,7 +260,7 @@ METHOD Activate( lShow ) CLASS HMDIChildWindow
    // hwg_CreateMdiChildWindow( Self )
    
    ::handle := hwg_CreateMdiChildWindow( Self )
-   InitControls( Self )
+   hwg_InitControls( Self )
    IF ::bInit != Nil
       Eval( ::bInit,Self )
    ENDIF  
@@ -470,7 +470,7 @@ Return 0
 
 Static Function onMdiCreate( oWnd,lParam )
 /*
-   InitControls( oWnd )
+   hwg_InitControls( oWnd )
    IF oWnd:bInit != Nil
       Eval( oWnd:bInit,oWnd )
    ENDIF  

@@ -62,7 +62,7 @@ LOCAL aFormCode, aFormName
             AAdd(aFormName, SubStr(stroka, i + 1))
          ELSEIF rejim == -1 .AND. Left(stroka, 9) == "#ENDBLOCK"
 #ifdef __WINDOWS__
-            i := WCHOICE(aFormName)
+            i := hwg_WChoice(aFormName)
 #else
             i := FCHOICE(aFormName)
 #endif

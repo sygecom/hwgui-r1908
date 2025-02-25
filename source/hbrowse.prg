@@ -1689,8 +1689,8 @@ METHOD Rebuild() CLASS HBrowse
       IF oColumn:lEditable
          ::lEditable := .T.
       ENDIF
-      //FontSize := TxtRect("a", Self, oColumn:oFont)[1]
-      FontSize := IIf(oColumn:type $ "DN", TxtRect("9", Self, oColumn:oFont)[1], TxtRect("N", Self, oColumn:oFont)[1])
+      //FontSize := hwg_TxtRect("a", Self, oColumn:oFont)[1]
+      FontSize := IIf(oColumn:type $ "DN", hwg_TxtRect("9", Self, oColumn:oFont)[1], hwg_TxtRect("N", Self, oColumn:oFont)[1])
       IF oColumn:aBitmaps != NIL
          IF oColumn:heading != NIL
             /*
@@ -2285,7 +2285,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                                                                IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE == DT_RIGHT, 1, 0))
          cStr := oColumn:heading + ";"
          FOR nLine := 1 TO ::nHeadRows
-            aTxtSize := IIf(nLine == 1, TxtRect(cStr, Self), aTxtSize)
+            aTxtSize := IIf(nLine == 1, hwg_TxtRect(cStr, Self), aTxtSize)
             hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                       x + ::aMargin[4] + 1 + nMe, ;
                       ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) +  ::aMargin[1] + 1, ;
@@ -3978,7 +3978,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
             IF Type == "L"
                oModDlg:lResult := .T.
             ELSEIF Type != "M"
-               nHGet := Max((::height - (TxtRect("N", self))[2]) / 2, 0)
+               nHGet := Max((::height - (hwg_TxtRect("N", self))[2]) / 2, 0)
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;

@@ -156,7 +156,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ::DisableBackColor := s_bDisablecolor
    // defines the number of characters based on the size of control
    IF Empty(::nMaxLength) .AND. ::cType == "C" .AND. Empty(cPicture) .AND. hwg_BitAnd(nStyle, ES_AUTOHSCROLL) == 0
-       nWidth := (TxtRect(" ", Self))[1]
+       nWidth := (hwg_TxtRect(" ", Self))[1]
        ::nMaxLength := INT((::nWidth - nWidth) / nWidth) - 1
        ::nMaxLength := IIf(::nMaxLength < 10, 10, ::nMaxLength)
    ENDIF

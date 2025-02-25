@@ -149,7 +149,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
 
    aPaintRep[FORM_Y] := 0
    hwg_EnableMenuItem( ,1, .T., .F. )
-   WriteStatus( oMainWindow,2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+   hwg_WriteStatus( oMainWindow,2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
    hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
 
@@ -607,7 +607,7 @@ Local hWnd := Hwindow():GetMain():handle
             TOP_INDENT+aPaintRep[FORM_ITEMS,i,ITEM_Y1]+aPaintRep[FORM_ITEMS,i,ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
          res := .T.
       ENDIF
-      WriteStatus( Hwindow():GetMain(),1,"" )
+      hwg_WriteStatus( Hwindow():GetMain(),1,"" )
       FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS,i]
          IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
@@ -657,7 +657,7 @@ Local hWnd := Hwindow():GetMain():handle
       DeselectAll( Len( aPaintRep[FORM_ITEMS] ) )
       aPaintRep[FORM_CHANGED] := .T.
       WriteItemInfo( Atail( aPaintRep[FORM_ITEMS] ) )
-      WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+      hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
          Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
       hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
@@ -697,8 +697,8 @@ Local i, aItem
          Adel( aPaintRep[FORM_ITEMS],i )
          Asize( aPaintRep[FORM_ITEMS], Len( aPaintRep[FORM_ITEMS] ) - 1 )
          aPaintRep[FORM_CHANGED] := .T.
-         WriteStatus( Hwindow():GetMain(),1,"" )
-         WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+         hwg_WriteStatus( Hwindow():GetMain(),1,"" )
+         hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
          IF Len( aPaintRep[FORM_ITEMS] ) == 0
             hwg_EnableMenuItem( ,IDM_CLOSE, .F., .T. )
@@ -729,7 +729,7 @@ Local i, iPrevSelected := 0
 Return iPrevSelected
 
 Static Function WriteItemInfo( aItem )
-   WriteStatus( Hwindow():GetMain(),1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
+   hwg_WriteStatus( Hwindow():GetMain(),1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
 Return Nil

@@ -19,7 +19,7 @@
 
 //STATIC _winwait (variable not used)
 
-FUNCTION InitObjects(oWnd)
+FUNCTION hwg_InitObjects(oWnd)
    LOCAL i, pArray := oWnd:aObjects 
    LOCAL LoadArray := HObject():aObjects
    
@@ -43,7 +43,7 @@ FUNCTION InitObjects(oWnd)
    HObject():aObjects := {}
    RETURN .T.
 
-FUNCTION InitControls(oWnd, lNoActivate)
+FUNCTION hwg_InitControls(oWnd, lNoActivate)
    LOCAL i, pArray := oWnd:aControls, lInit
 
    lNoActivate := IIf(lNoActivate == NIL, .F., lNoActivate)
@@ -67,7 +67,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
             // hwg_WriteLog("InitControl2" + Str(pArray[i]:handle) + "/" + pArray[i]:classname)
          ENDIF
          IF !Empty(pArray[i]:aControls)
-            InitControls(pArray[i])
+            hwg_InitControls(pArray[i])
          ENDIF
          pArray[i]:Init()
           // nando required to classes that inherit the class of patterns hwgui
@@ -79,7 +79,7 @@ FUNCTION InitControls(oWnd, lNoActivate)
 
    RETURN .T.
 
-FUNCTION FindParent(hCtrl, nLevel)
+FUNCTION hwg_FindParent(hCtrl, nLevel) // TODO: static ?
    LOCAL i, oParent, hParent := hwg_GetParent(hCtrl)
    IF !Empty(hParent)
       IF (i := AScan(HDialog():aModalDialogs, {|o|o:handle == hParent})) != 0
@@ -94,15 +94,15 @@ FUNCTION FindParent(hCtrl, nLevel)
       nLevel := 0
    ENDIF
    IF nLevel < 2
-      IF (oParent := FindParent(hParent, nLevel + 1)) != NIL
+      IF (oParent := hwg_FindParent(hParent, nLevel + 1)) != NIL
          RETURN oParent:FindControl(, hParent)
       ENDIF
    ENDIF
    RETURN NIL
 
-FUNCTION FindSelf(hCtrl)
+FUNCTION hwg_FindSelf(hCtrl)
    LOCAL oParent
-   oParent := FindParent(hCtrl)
+   oParent := hwg_FindParent(hCtrl)
    IF oParent == NIL
       oParent := hwg_GetAncestor(hCtrl, GA_PARENT)
    ENDIF
@@ -111,7 +111,7 @@ FUNCTION FindSelf(hCtrl)
    ENDIF
    RETURN NIL
 
-FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
+FUNCTION hwg_WriteStatus(oWnd, nPart, cText, lRedraw)
    LOCAL aControls, i
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
@@ -122,7 +122,7 @@ FUNCTION WriteStatus(oWnd, nPart, cText, lRedraw)
    ENDIF
    RETURN NIL
 
-FUNCTION ReadStatus(oWnd, nPart)
+FUNCTION hwg_ReadStatus(oWnd, nPart)
    LOCAL aControls, i, ntxtLen, cText := ""
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
@@ -151,7 +151,7 @@ FUNCTION hwg_VColor(cColor)
    NEXT
    RETURN res
 
-FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
+FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
    LOCAL oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
    LOCAL cRes := IIf(cResIni != NIL, Trim(cResIni), "")
    /*
@@ -186,7 +186,7 @@ FUNCTION MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
 
    RETURN cRes
 
-FUNCTION WAITRUN(cRun)
+FUNCTION hwg_WaitRun(cRun)
 //#ifdef __XHARBOUR__
 Local hIn, hOut, nRet, hProc
    // "Launching process", cProc
@@ -206,7 +206,7 @@ Local hIn, hOut, nRet, hProc
 //   RETURN 0
 //#endif
 
-FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, cOk, cCancel)
+FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, cOk, cCancel)
    LOCAL oDlg, oBrw, nChoice := 0, lArray := .T., nField, lNewFont := .F.
    LOCAL i, aLen, nLen := 0, addX := 20, addY := 20, minWidth := 0, x1
    LOCAL hDC, aMetr, width, height, aArea, aRect
@@ -322,7 +322,7 @@ FUNCTION WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, 
 
    RETURN nChoice
 
-FUNCTION ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height)
+FUNCTION hwg_ShowProgress(nStep, maxPos, nRange, cTitle, oWnd, x1, y1, width, height)
    LOCAL nStyle := WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX
    STATIC oDlg, hPBar, iCou, nLimit
 
@@ -374,7 +374,7 @@ FUNCTION hwg_EndWindow()
    ENDIF
    RETURN NIL
 
-FUNCTION HdSerial(cDrive)
+FUNCTION hwg_HdSerial(cDrive)
 
    LOCAL n       :=  hwg_HDGetSerial(cDrive)
    LOCAL cHex    :=  HB_NUMTOHEX(n)
@@ -389,7 +389,7 @@ FUNCTION hwg_GetIni(cSection, cEntry, cDefault, cFile)
 FUNCTION hwg_WriteIni(cSection, cEntry, cValue, cFile)
    RETURN hwg_WritePrivateProfileString(cSection, cEntry, cValue, cFile)
 
-FUNCTION SetHelpFileName(cNewName)
+FUNCTION hwg_SetHelpFileName(cNewName)
    STATIC cName := ""
    LOCAL cOldName := cName
    IF cNewName != NIL
@@ -397,7 +397,7 @@ FUNCTION SetHelpFileName(cNewName)
    ENDIF
    RETURN cOldName
 
-FUNCTION RefreshAllGets(oDlg)
+FUNCTION hwg_RefreshAllGets(oDlg)
 
    AEval(oDlg:GetList, {|o|o:Refresh()})
    RETURN NIL
@@ -411,7 +411,7 @@ cInitDir: Initial directory
 
 */
 
-FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
+FUNCTION hwg_SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
 
    LOCAL aFiles, cPath, cFile, cFilter, nAt
    LOCAL hWnd := 0
@@ -462,7 +462,7 @@ FUNCTION HWG_Version(oTip)
    ENDIF
    RETURN oVersion
 
-FUNCTION TxtRect(cTxt, oWin, oFont)
+FUNCTION hwg_TxtRect(cTxt, oWin, oFont)
 
    LOCAL hDC
    LOCAL ASize
@@ -491,6 +491,21 @@ FUNCTION TxtRect(cTxt, oWin, oFont)
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
 HB_FUNC_TRANSLATE(VCOLOR, HWG_VCOLOR);
+HB_FUNC_TRANSLATE(INITOBJETCS, HWG_INITOBJECTS);
+HB_FUNC_TRANSLATE(INITCONTROLS, HWG_INITCONTROLS);
+HB_FUNC_TRANSLATE(FINDPARENT, HWG_FINDPARENT);
+HB_FUNC_TRANSLATE(FINDSELF, HWG_FINDSELF);
+HB_FUNC_TRANSLATE(WRITESTATUS, HWG_WRITESTATUS);
+HB_FUNC_TRANSLATE(READSTATUS, HWG_READSTATUS);
+HB_FUNC_TRANSLATE(MSGGET, HWG_MSGGET);
+HB_FUNC_TRANSLATE(WAITRUN, HWG_WAITRUN);
+HB_FUNC_TRANSLATE(WCHOICE, HWG_WCHOICE);
+HB_FUNC_TRANSLATE(SHOWPROGRESS, HWG_SHOWPROGRESS);
+HB_FUNC_TRANSLATE(HDSERIAL, HWG_HDSERIAL);
+HB_FUNC_TRANSLATE(SETHELPFILENAME, HWG_SETHELPFILENAME);
+HB_FUNC_TRANSLATE(REFRESHALLGETS, HWG_REFRESHALLGETS);
+HB_FUNC_TRANSLATE(SELECTMULTIPLEFILES, HWG_SELECTMULTIPLEFILES);
+HB_FUNC_TRANSLATE(TXTRECT, HWG_TXTRECT);
 #endif
 
 #pragma ENDDUMP

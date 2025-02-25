@@ -293,7 +293,7 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
          RecalcForm( aPaintRep,nFormWidth )
       ENDIF
 
-      WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+      hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
    ENDIF
 Return res

@@ -343,7 +343,7 @@ METHOD Auto_Size(cValue) CLASS HStatic
 
    IF ::autosize  //.OR. ::lOwnerDraw
       nAlign := ::nStyleHS - SS_NOTIFY
-      ASize := TxtRect(cValue, Self)
+      ASize := hwg_TxtRect(cValue, Self)
       // ajust VCENTER
       // ::nTop := ::nTop + Int((::nHeight - ASize[2] + 2) / 2)
       SWITCH nAlign

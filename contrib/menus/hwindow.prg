@@ -422,12 +422,12 @@ Local oWnd, oBtn, oitem
          if Valtype( oWnd:menu ) == "A"
             if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
                if aMenu[ 1,iCont,2 ][2] != Nil
-                  WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
+                  hwg_WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
                else
-                  WriteStatus( oWnd, 1, "" ) // clear message
+                  hwg_WriteStatus( oWnd, 1, "" ) // clear message
                endif
             else
-               WriteStatus( oWnd, 1, "" ) // clear message
+               hwg_WriteStatus( oWnd, 1, "" ) // clear message
             endif
          endif
       EndIf
@@ -656,7 +656,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       IF ISOBJECT(oWnd) 
 
          oWnd:handle := hWnd
-         InitControls( oWnd )
+         hwg_InitControls( oWnd )
       ELSE
 
          MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd,10),"Create Error!")

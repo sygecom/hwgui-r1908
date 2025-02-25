@@ -121,7 +121,7 @@ FUNCTION Main()
    ENDIF
    ReadHistory("qhistory.txt")
 
-   WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
+   hwg_WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
    hwg_SetFocus(oEdit:handle)
    // hwg_HideWindow(oBrw:handle)
    SetCtrlFont(oEdit:oParent:handle, oEdit:id, oBrwFont:handle)
@@ -171,14 +171,14 @@ FUNCTION DataBases()
       ENDIF
    ENDIF
    aBases := sqlListDB(connHandle)
-   nChoic := WChoice(aBases, "DataBases", 0, 50)
+   nChoic := hwg_WChoice(aBases, "DataBases", 0, 50)
    IF nChoic != 0
       cDatabase := aBases[nChoic]
       IF sqlSelectD(connHandle, cDatabase) != 0
          hwg_MsgStop("Can't connect to "+cDataBase)
          cDatabase := ""
       ELSE
-         WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
+         hwg_WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
       ENDIF
    ENDIF
 
@@ -202,7 +202,7 @@ FUNCTION Tables()
       RETURN .F.
    ENDIF
 
-   nChoic := WChoice(aTables, cDataBase + "  tables", 50, 50)
+   nChoic := hwg_WChoice(aTables, cDataBase + "  tables", 50, 50)
    IF nChoic != 0
       cTable := aTables[nChoic]
       execSQL("SHOW COLUMNS FROM " + cTable)
@@ -270,13 +270,13 @@ FUNCTION EndConnect()
       cDatabase := ""
    ENDIF
    IF connHandle == 0
-      WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
-      WriteStatus(Hwindow():GetMain(), 2, "")
+      hwg_WriteStatus(Hwindow():GetMain(), 1, "Not Connected")
+      hwg_WriteStatus(Hwindow():GetMain(), 2, "")
       hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT1))
    ELSE
-      WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
+      hwg_WriteStatus(Hwindow():GetMain(), 1, "Connected to " + cServer)
       IF !Empty(cDataBase)
-         WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
+         hwg_WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
       ENDIF
       EndDialog(hDlg)
       hwg_SetFocus(oEdit:handle)
@@ -343,7 +343,7 @@ FUNCTION execSQL(cQuery)
    IF ( res := sqlQuery(connHandle, cQuery)) != 0
       cQuery := ""
       hwg_MsgInfo("Operation failed: " + STR(res) + "( " + sqlGetErr(connHandle) + " )")
-      WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
+      hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
          DO WHILE Len(stroka := RDSTR(Nil,@cQuery,@poz)) != 0
@@ -366,11 +366,11 @@ FUNCTION execSQL(cQuery)
          // Should query have returned rows? (Was it a SELECT like query?)
          IF ( nNumFields := sqlFiCou(connHandle) ) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
-            WriteStatus(Hwindow():GetMain(), 3, Str(sqlAffRows(connHandle)) + " rows updated.")
+            hwg_WriteStatus(Hwindow():GetMain(), 3, Str(sqlAffRows(connHandle)) + " rows updated.")
          ELSE
             @ 20, 2 SAY "Operation failed:" + sqlGetErr(connHandle)
             hwg_MsgInfo("Operation failed: " + "( " + sqlGetErr(connHandle) + " )")
-            WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
+            hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
             res := -1
          ENDIF
       ENDIF
@@ -387,7 +387,7 @@ FUNCTION sqlBrowse(queHandle)
    LOCAL af := {}
 
    nNumRows := sqlNRows(queHandle)
-   WriteStatus(Hwindow():GetMain(), 3, Str(nNumRows, 5) + " rows")
+   hwg_WriteStatus(Hwindow():GetMain(), 3, Str(nNumRows, 5) + " rows")
    IF nNumRows == 0
       RETURN NIL
    ENDIF

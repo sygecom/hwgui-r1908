@@ -157,7 +157,7 @@ STATIC FUNCTION SearchFile(oBrow, oFile)
 
    LOCAL oTotReg := {}
    LOCAL i
-   LOCAL aSelect := SelectMultipleFiles("xBase Files (" + oFile + ")", oFile)
+   LOCAL aSelect := hwg_SelectMultipleFiles("xBase Files (" + oFile + ")", oFile)
 
    if Len(aSelect) ==0
       RETURN NIL

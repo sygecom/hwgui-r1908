@@ -561,7 +561,7 @@ Return Nil
 
 STATIC FUNCTION InsertField(nModus)
 
-   LOCAL cDBF := MsgGet("DBF Name","input table name")
+   LOCAL cDBF := hwg_MsgGet("DBF Name","input table name")
 
 HB_SYMBOL_UNUSED( nModus )
 

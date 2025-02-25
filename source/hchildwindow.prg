@@ -70,8 +70,8 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::Type := WND_CHILD
 
    CreateGetList(Self)
-   InitControls(SELF)
-   InitObjects(Self, .T.)
+   hwg_InitControls(SELF)
+   hwg_InitObjects(Self, .T.)
    hwg_SendMessage(::handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    IF hb_IsBlock(::bInit)
       //::hide()

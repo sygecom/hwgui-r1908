@@ -113,11 +113,11 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ENDIF
 
    // is necessary for set zorder control
-   //InitControls(Self) ??? maybe
+   //hwg_InitControls(Self) ??? maybe
 
    /*  in ONMDICREATE
    /*
-   InitObjects(Self, .T.)
+   hwg_InitObjects(Self, .T.)
    IF hb_IsBlock(::bInit)
       Eval(::bInit, Self)
    ENDIF
@@ -539,8 +539,8 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    IF oWnd:oFont != NIL
       hwg_SendMessage(oWnd:handle, WM_SETFONT, oWnd:oFont:handle, 0)
    ENDIF
-   InitControls(oWnd)
-   InitObjects(oWnd, .T.)
+   hwg_InitControls(oWnd)
+   hwg_InitObjects(oWnd, .T.)
    IF oWnd:bInit != NIL
       IF !hb_IsNumeric(nReturn := Eval(oWnd:bInit, oWnd))
          IF hb_IsLogical(nReturn) .AND. !nReturn

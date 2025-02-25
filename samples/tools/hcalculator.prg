@@ -224,7 +224,7 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
 
    ACTIVATE DIALOG ::oFormCalc NOMODAL
 
-   ::nFontSize := TxtRect("9", ::oFormCalc, ::oFormCalc:oCalculo:oFont)[1]
+   ::nFontSize := hwg_TxtRect("9", ::oFormCalc, ::oFormCalc:oCalculo:oFont)[1]
    ::Hwnd := ::oFormCalc:Handle
 
 RETURN 0

@@ -271,7 +271,7 @@ Static Function SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
-   WriteStatus( oWindow,2,"Order: "+oBrw:aArray[oBrw:nCurrent,2] )
+   hwg_WriteStatus( oWindow,2,"Order: "+oBrw:aArray[oBrw:nCurrent,2] )
    IF oWindow != Nil
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
@@ -355,7 +355,7 @@ Local oWindow, aControls, i
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
-   WriteStatus( oWindow,2,"Order: "+Iif( isMulti,tagname,CutPath(indname) ) )
+   hwg_WriteStatus( oWindow,2,"Order: "+Iif( isMulti,tagname,CutPath(indname) ) )
 
    IF oWindow != Nil
       aControls := oWindow:aControls
@@ -524,8 +524,8 @@ Local oWindow, aControls, oBrowse, i
          ENDIF
       ENDIF
    ENDIF
-   WriteStatus( oWindow,1,Ltrim(Str(Reccount(),10))+" records" )
-   WriteStatus( oWindow,2,"Order: None",.T. )
+   hwg_WriteStatus( oWindow,1,Ltrim(Str(Reccount(),10))+" records" )
+   hwg_WriteStatus( oWindow,2,"Order: None",.T. )
 Return oWindow:handle
 
 /* -----------------------  Calculator  --------------------- */
@@ -695,7 +695,7 @@ LOCAL bOldError, oError
             DBUSEAREA(,, fname, alsname,, prrdonly )
          RECOVER USING oError
             IF oError:genCode == EG_BADALIAS .OR. oError:genCode == EG_DUPALIAS
-               IF EMPTY( alsname := MsgGet( "","Bad alias name, input other:" ) )
+               IF EMPTY( alsname := hwg_MsgGet( "","Bad alias name, input other:" ) )
                   res := .F.
                ELSE
                   LOOP

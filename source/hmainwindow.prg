@@ -95,7 +95,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
          nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
-         SetHelpFileName(cHelp)
+         hwg_SetHelpFileName(cHelp)
       ENDIF
 
       // ADDED screen to backgroup to MDI MAIN
@@ -113,7 +113,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
          IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
-         SetHelpFileName(cHelp)
+         hwg_SetHelpFileName(cHelp)
       ENDIF
 
    ENDIF
@@ -167,7 +167,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       // recalculate area offset
       hwg_SendMessage(::handle, WM_SIZE, 0, hwg_MAKELPARAM(::nWidth, ::nHeight))
 
-      InitControls(Self)
+      hwg_InitControls(Self)
       IF hb_IsBlock(::bInit)
          lres := Eval(::bInit, Self)
          IF hb_IsLogical(lres) .AND. !lres

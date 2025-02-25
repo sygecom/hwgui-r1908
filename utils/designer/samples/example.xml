@@ -145,7 +145,7 @@ orep1 := hreptmpl():Read("testrep1.xml")]]>
       <property name="aParts">{120,0}</property>
     </style>
     <method name="onInit">
-      <![CDATA[WriteStatus( oDlg,1,Dtoc(Date()),.T. )
+      <![CDATA[hwg_WriteStatus( oDlg,1,Dtoc(Date()),.T. )
 ]]>
     </method>
   </part>

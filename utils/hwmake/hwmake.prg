@@ -175,7 +175,7 @@ RETURN
 
 Static Function SearchFile(oBrow, oFile)
 Local oTotReg:={}, i
-Local aSelect:=SelectMultipleFiles("xBase Files ("+oFile+")", oFile ) 
+Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile ) 
 if len(aSelect) ==0
    return Nil
 endif
@@ -587,7 +587,7 @@ If File( cFile )
    fErase( cFile )
 EndIf 
 Memowrit( cFile, cProc + " " + cSend + cLog ) 
-nRet := WaitRun( cFile ) 
+nRet := hwg_WaitRun( cFile )
 If File( cFile )
    fErase( cFile )
 EndIf
