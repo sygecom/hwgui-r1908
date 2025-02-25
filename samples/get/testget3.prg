@@ -134,7 +134,7 @@ FUNCTION CreateBar(oModDlg, otool)
    //LOCAL pItem
 
 //  hTool := CREATETOOLBAR(oModDlg:handle, 700, 0, 0, 0, 50, 100)
-// //  pItem :=  TOOLBARADDBUTTONS(hTool, aTool, Len(aTool))
+// //  pItem :=  hwg_ToolBarAddButtons(hTool, aTool, Len(aTool))
  //
 //   otool := Htoolbar():New(, , , 0, 0, 50, 100, "Input something:", , , , , , , , .F., aitem)
 //   oTool:oParent:AddEvent(BN_CLICKED, 701, {|x, y|DlgGet()})

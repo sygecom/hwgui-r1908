@@ -74,7 +74,7 @@ METHOD Caption(cText) CLASS HToolButton
 
    IF cText != NIL
       ::Title := cText
-      TOOLBAR_SETBUTTONINFO(::oParent:handle, ::id, cText)
+      hwg_ToolBar_SetButtonInfo(::oParent:handle, ::id, cText)
    ENDIF
 
 RETURN ::Title
