@@ -11,6 +11,8 @@ call xcompilemingw64 datepicker
 call xcompilemingw64 dialog
 call xcompilemingw64 dialog2
 call xcompilemingw64 dialog3
+call xcompilemingw64 get1
+call xcompilemingw64 get2
 call xcompilemingw64 getcombobox
 call xcompilemingw64 getcombobox2
 call xcompilemingw64 getcombobox3

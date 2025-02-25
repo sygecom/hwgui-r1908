@@ -11,6 +11,8 @@ call xcompilemingw32 datepicker
 call xcompilemingw32 dialog
 call xcompilemingw32 dialog2
 call xcompilemingw32 dialog3
+call xcompilemingw32 get1
+call xcompilemingw32 get2
 call xcompilemingw32 getcombobox
 call xcompilemingw32 getcombobox2
 call xcompilemingw32 getcombobox3
