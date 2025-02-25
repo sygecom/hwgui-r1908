@@ -169,9 +169,9 @@ METHOD Init() CLASS HGridEx
             aBmpSize := hwg_GetBitmapSize(aButton[nPos])
 
             IF aBmpSize[3] == 24
-               Imagelist_Add(::hIm, aButton[nPos])
+               hwg_Imagelist_Add(::hIm, aButton[nPos])
             ELSE
-               Imagelist_Add(::hIm, aButton[nPos])
+               hwg_Imagelist_Add(::hIm, aButton[nPos])
             ENDIF
 
          NEXT

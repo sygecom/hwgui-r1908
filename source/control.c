@@ -1128,18 +1128,26 @@ HB_FUNC(HWG_CREATEIMAGELIST)
 HB_FUNC_TRANSLATE(CREATEIMAGELIST, HWG_CREATEIMAGELIST);
 #endif
 
-HB_FUNC(IMAGELIST_ADD)
+HB_FUNC(HWG_IMAGELIST_ADD)
 {
   hb_retnl(ImageList_Add(hwg_par_HIMAGELIST(1), hwg_par_HBITMAP(2), NULL));
 }
 
-HB_FUNC(IMAGELIST_ADDMASKED)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(IMAGELIST_ADD, HWG_IMAGELIST_ADD);
+#endif
+
+HB_FUNC(HWG_IMAGELIST_ADDMASKED)
 {
   hb_retnl(ImageList_AddMasked(hwg_par_HIMAGELIST(1), hwg_par_HBITMAP(2), hwg_par_COLORREF(3)));
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(IMAGELIST_ADDMASKED, HWG_IMAGELIST_ADDMASKED);
+#endif
+
 /*
- *  SetTimer(hWnd, idTimer, i_MilliSeconds)
+ *  hwg_SetTimer(hWnd, idTimer, i_MilliSeconds)
  */
 
 /* 22/09/2005 - <maurilio.longo@libero.it>
@@ -1147,19 +1155,27 @@ HB_FUNC(IMAGELIST_ADDMASKED)
       the TimerProc, this way I can receive WM_TIMER messages
       inside an ON OTHER MESSAGES code block
 */
-HB_FUNC(SETTIMER)
+HB_FUNC(HWG_SETTIMER)
 {
   SetTimer(hwg_par_HWND(1), (UINT)hb_parni(2), hwg_par_UINT(3), hb_pcount() == 3 ? (TIMERPROC)s_timerProc : NULL);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETTIMER, HWG_SETTIMER);
+#endif
+
 /*
- *  KillTimer(hWnd, idTimer)
+ *  hwg_KillTimer(hWnd, idTimer)
  */
 
-HB_FUNC(KILLTIMER)
+HB_FUNC(HWG_KILLTIMER)
 {
   hwg_ret_BOOL(KillTimer(hwg_par_HWND(1), (UINT)hb_parni(2)));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(KILLTIMER, HWG_KILLTIMER);
+#endif
 
 HB_FUNC(HWG_GETPARENT)
 {
@@ -1816,11 +1832,15 @@ HB_FUNC(HWG_TOOLBAR_LOADSTANDARTIMAGE)
 HB_FUNC_TRANSLATE(LOADSTANDARTIMAGE, HWG_LOADSTANDARTIMAGE);
 #endif
 
-HB_FUNC(ImageList_GetImageCount)
+HB_FUNC(HWG_IMAGELIST_GETIMAGECOUNT)
 {
   HIMAGELIST hWndCtrl = hwg_par_HIMAGELIST(1);
   hb_retni(ImageList_GetImageCount(hWndCtrl));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(IMAGELIST_GETIMAGECOUNT, HWG_IMAGELIST_GETIMAGECOUNT);
+#endif
 
 HB_FUNC(HWG_TOOLBAR_SETDISPINFO)
 {
@@ -1990,7 +2010,7 @@ HB_FUNC(HWG_CREATEREBAR)
 HB_FUNC_TRANSLATE(CREATEREBAR, HWG_CREATEREBAR);
 #endif
 
-HB_FUNC(REBARSETIMAGELIST)
+HB_FUNC(HWG_REBARSETIMAGELIST)
 {
   HWND hWnd = hwg_par_HWND(1);
   HIMAGELIST p = (HB_ISNUM(2) || HB_ISPOINTER(2)) ? hwg_par_HIMAGELIST(2) : NULL;
@@ -2002,6 +2022,10 @@ HB_FUNC(REBARSETIMAGELIST)
   rbi.himl = (HB_ISNUM(2) || HB_ISPOINTER(2)) ? (HIMAGELIST)p : NULL;
   SendMessage(hWnd, RB_SETBARINFO, 0, (LPARAM)&rbi);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(REBARSETIMAGELIST, HWG_REBARSETIMAGELIST);
+#endif
 
 static BOOL _AddBar(HWND pParent, HWND pBar, REBARBANDINFO *pRBBI)
 {
@@ -2062,7 +2086,7 @@ static BOOL AddBar1(HWND pParent, HWND pBar, COLORREF clrFore, COLORREF clrBack,
   return _AddBar(pParent, pBar, &rbBand);
 }
 
-HB_FUNC(ADDBARBITMAP)
+HB_FUNC(HWG_ADDBARBITMAP)
 {
   HWND pParent = hwg_par_HWND(1);
   HWND pBar = hwg_par_HWND(2);
@@ -2074,7 +2098,11 @@ HB_FUNC(ADDBARBITMAP)
   hb_strfree(hStr);
 }
 
-HB_FUNC(ADDBARCOLORS)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ADDBARBITMAP, HWG_ADDBARBITMAP);
+#endif
+
+HB_FUNC(HWG_ADDBARCOLORS)
 {
   HWND pParent = hwg_par_HWND(1);
   HWND pBar = hwg_par_HWND(2);
@@ -2087,6 +2115,10 @@ HB_FUNC(ADDBARCOLORS)
   hb_retl(AddBar1(pParent, pBar, clrFore, clrBack, pszText, dwStyle));
   hb_strfree(hStr);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ADDBARCOLORS, HWG_ADDBARCOLORS);
+#endif
 
 // Combo Box Procedure
 
@@ -2189,7 +2221,7 @@ HB_FUNC(GETDLGMESSAGE)
   hb_retnl(0);
 }
 
-HB_FUNC(HANDLETOPTR)
+HB_FUNC(HWG_HANDLETOPTR)
 {
   DWORD h = hb_parnl(1);
 #ifdef HWG_USE_POINTER_ITEM
@@ -2200,14 +2232,22 @@ HB_FUNC(HANDLETOPTR)
   hb_retnl((LONG)h);
 }
 
-HB_FUNC(TABITEMPOS)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(HANDLETOPTR, HWG_HANDLETOPTR);
+#endif
+
+HB_FUNC(HWG_TABITEMPOS)
 {
   RECT pRect;
   TabCtrl_GetItemRect(hwg_par_HWND(1), hb_parni(2), &pRect);
   hb_itemReturnRelease(Rect2Array(&pRect));
 }
 
-HB_FUNC(GETTABNAME)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TABITEMPOS, HWG_TABITEMPOS);
+#endif
+
+HB_FUNC(HWG_GETTABNAME)
 {
   TC_ITEM tie;
   TCHAR d[255] = {0};
@@ -2218,3 +2258,7 @@ HB_FUNC(GETTABNAME)
   TabCtrl_GetItem(hwg_par_HWND(1), hb_parni(2) - 1, (LPTCITEM)&tie);
   HB_RETSTR(tie.pszText);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(GETTABNAME, HWG_GETTABNAME);
+#endif

@@ -1036,7 +1036,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
 
    LOCAL oCtrl
 
-   //lParam := HANDLETOPTR(lParam)
+   //lParam := hwg_HandleToPtr(lParam)
    oCtrl := oWnd:FindControl(, lParam)
 
    IF oCtrl != NIL .AND. !hb_IsNumeric(oCtrl)

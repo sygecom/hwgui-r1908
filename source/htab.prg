@@ -43,7 +43,7 @@ CLASS HPage INHERIT HObject
    METHOD New(cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip)
    METHOD Enable() INLINE ::Enabled(.T.)
    METHOD Disable() INLINE ::Enabled(.F.)
-   METHOD GetTabText() INLINE GetTabName(::oParent:handle, ::PageOrder - 1)
+   METHOD GetTabText() INLINE hwg_GetTabName(::oParent:handle, ::PageOrder - 1)
    METHOD SetTabText(cText)
    METHOD Refresh() INLINE ::oParent:ShowPage(::PageOrder)
    METHOD Enabled(lEnabled) SETGET
@@ -98,7 +98,7 @@ METHOD SetTabText(cText) CLASS HPage
    hwg_InvalidateRect(::oParent:handle, 0)
    /*
    FOR i := 1 TO Len(::oParent:Pages)
-      ::oParent:Pages[i]:aItemPos := TabItemPos(::oParent:handle, i - 1)
+      ::oParent:Pages[i]:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)
    NEXT
    */
 RETURN NIL
@@ -288,7 +288,7 @@ METHOD Init() CLASS HTab
       ::Super:Init()
 
       IF Len(::aPages) > 0
-         //::Pages[1]:aItemPos := TabItemPos(::handle, 0)
+         //::Pages[1]:aItemPos := hwg_TabItemPos(::handle, 0)
          /*
          IF AScan(::Pages, {|p|p:brush != NIL}) > 0
             ::SetPaintSizePos(-1)
@@ -301,7 +301,7 @@ METHOD Init() CLASS HTab
          ::SetPaintSizePos(IIf(AScan(::Pages, {|p|p:brush != NIL}) > 0, -1, 1))
          ::nActive := 0
          FOR i := 1 TO Len(::aPages)
-            ::Pages[i]:aItemPos := TabItemPos(::handle, i - 1)
+            ::Pages[i]:aItemPos := hwg_TabItemPos(::handle, i - 1)
             ::HidePage(i)
             ::nActive := IIf(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
          NEXT
@@ -330,7 +330,7 @@ METHOD SetPaintSizePos(nFlag) CLASS HTab
    
    LOCAL aItemPos
 
-   ::Pages[::nActive]:aItemPos := TabItemPos(::handle, ::nActive - 1) //0)
+   ::Pages[::nActive]:aItemPos := hwg_TabItemPos(::handle, ::nActive - 1) //0)
    aItemPos := ::Pages[::nActive]:aItemPos
    IF nFlag == - 1
       ::oPaint:nLeft := 1
@@ -389,7 +389,7 @@ METHOD StartPage(cname, oDlg, lEnabled, tColor, bColor, cTooltip) CLASS HTab
    ENDIF
    ::AddPage(HPage():New(cname, Len(::aPages), lEnabled, tColor, bcolor, cTooltip), cName)
    ::nActive := Len(::aPages)
-   ::Pages[::nActive]:aItemPos := {0, 0, 0, 0} //TabItemPos(::handle, ::nActive - 1)
+   ::Pages[::nActive]:aItemPos := {0, 0, 0, 0} //hwg_TabItemPos(::handle, ::nActive - 1)
 
 RETURN NIL
 
@@ -477,7 +477,7 @@ METHOD ChangePage(nPage) CLASS HTab
       RETURN NIL
    ENDIF
    IF !Empty(::aPages) .AND. ::pages[nPage]:enabled
-      //-client_rect := TabItemPos(::handle, ::nActive - 1)
+      //-client_rect := hwg_TabItemPos(::handle, ::nActive - 1)
       IF ::nActive > 0
          ::HidePage(::nActive)
          IF ::Pages[nPage]:brush != NIL
@@ -824,7 +824,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       RETURN -1  // painted objects without METHOD PAINT
 
    ELSEIF msg == WM_PRINT
-      //-AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})
+      //-AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)})
       //- ::SetPaintSizePos(-1)
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
@@ -835,7 +835,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ENDIF
 
    ELSEIF msg == WM_SIZE
-      AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::handle, i - 1)})
+      AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::handle, i - 1)})
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
@@ -950,7 +950,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       RETURN -1 // painted objects without METHOD PAINT
 
    CASE WM_PRINT
-      //-AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})
+      //-AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)})
       //- ::SetPaintSizePos(-1)
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
@@ -963,7 +963,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       EXIT
 
    CASE WM_SIZE
-      AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::handle, i - 1)})
+      AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::handle, i - 1)})
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
@@ -1080,7 +1080,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    FOR i := 1 TO Len(::Pages)
       IF !::pages[i]:enabled .OR. i == hwg_PtrToUlong(nPageEnable)
          //client_rect := ::Pages[i]:aItemPos
-         client_rect := TabItemPos(::handle, i - 1)
+         client_rect := hwg_TabItemPos(::handle, i - 1)
          IF (hwg_PtInRect(client_rect, pt)) .AND. i != nPageEnable
             RETURN 0
          ENDIF
@@ -1250,7 +1250,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
    ::hDC := hwg_GetDC(::oParent:handle)
    FOR i := 1 TO Len(::oParent:Pages)
       oPage := ::oParent:Pages[i]
-      client_rect := TabItemPos(::oParent:handle, i - 1)
+      client_rect := hwg_TabItemPos(::oParent:handle, i - 1)
       oPage:aItemPos := client_rect
       IF oPage:brush != NIL //.AND. client_rect[4] - client_rect[2] > 5
          //hwg_SetBkMode(hDC, TRANSPARENT)

@@ -143,7 +143,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
          IF (h := AScan(oTree:aImages, cImage)) == 0
             AAdd(oTree:aImages, cImage)
             aImages[i] := IIf(oTree:Type, hwg_LoadBitmap(aImages[i]), hwg_OpenBitmap(aImages[i]))
-            Imagelist_Add(oTree:himl, aImages[i])
+            hwg_Imagelist_Add(oTree:himl, aImages[i])
             h := Len(oTree:aImages)
          ENDIF
          h--
