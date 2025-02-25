@@ -380,7 +380,7 @@ METHOD Valid() CLASS HRichEdit
 METHOD SaveFile(cFile) CLASS HRichEdit
 
    IF !Empty(cFile)
-      IF !Empty(SAVERICHEDIT(::handle, cFile))
+      IF !Empty(hwg_SaveRichEdit(::handle, cFile))
           RETURN .T.
       ENDIF
    ENDIF
@@ -389,7 +389,7 @@ METHOD SaveFile(cFile) CLASS HRichEdit
 METHOD OpenFile(cFile) CLASS HRichEdit
 
    IF !Empty(cFile)
-      IF !Empty(LOADRICHEDIT(::handle, cFile))
+      IF !Empty(hwg_LoadRichEdit(::handle, cFile))
           RETURN .T.
       ENDIF
    ENDIF
@@ -401,7 +401,7 @@ METHOD Print() CLASS HRichEdit
     //  ::hDCPrinter := hwg_PrintSetup()
    ENDIF
    IF HWG_STARTDOC(::hDCPrinter) != 0
-      IF PrintRTF(::handle, ::hDCPrinter) != 0
+      IF hwg_PrintRTF(::handle, ::hDCPrinter) != 0
           HWG_ENDDOC(::hDCPrinter)
       ELSE
          HWG_ABORTDOC(::hDCPrinter)
