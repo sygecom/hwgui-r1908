@@ -198,7 +198,7 @@ Return Self
 METHOD Activate( lShow, lMaximize, lMinimize ) CLASS HMainWindow
 Local oWndClient, handle
 
-   // CreateGetList( Self )
+   // hwg_CreateGetList( Self )
 
    IF ::type == WND_MDI
 /*
@@ -256,7 +256,7 @@ ENDCLASS
 
 METHOD Activate( lShow ) CLASS HMDIChildWindow
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
    // hwg_CreateMdiChildWindow( Self )
    
    ::handle := hwg_CreateMdiChildWindow( Self )
@@ -316,7 +316,7 @@ Return Self
 
 METHOD Activate( lShow ) CLASS HChildWindow
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
    hwg_ActivateChildWindow((lShow==Nil .OR. lShow),::handle )
 
 Return Nil

@@ -193,19 +193,19 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
        (hwg_SelfFocus(hwg_GetParent(::GetParentForm():nInitFocus), ::handle) .OR. ;
          hwg_SelfFocus(hwg_GetParent(::GetParentForm():nInitFocus), hwg_GetParent(::handle)))
-      GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(hwg_SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
+      hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(hwg_SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
    ELSEIF msg == WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
-      Getskip(::oParent, ::handle, , ::nGetSkip)
+      hwg_GetSkip(::oParent, ::handle, , ::nGetSkip)
 /*
    ELSEIF msg == WM_KEYUP
        IF wParam == VK_DOWN
-          getskip(::oparent, ::handle, , 1)
+          hwg_GetSkip(::oparent, ::handle, , 1)
        ELSEIF wParam == VK_UP
-          getskip(::oparent, ::handle, , -1)
+          hwg_GetSkip(::oparent, ::handle, , -1)
        ELSEIF wParam == VK_TAB
-          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+          hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
        ENDIF
        RETURN 0
 */

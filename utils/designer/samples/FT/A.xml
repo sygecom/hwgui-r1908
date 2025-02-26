@@ -218,7 +218,7 @@ nI:=0
 nA:=0
 nN:=1
 lFixed:= .f.
-SETcOLORiNFOCUS(.T.)
+hwg_SetColorInFocus(.T.)
 ]]>
   </method>
   <method name="onDlgInit">

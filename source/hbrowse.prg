@@ -621,8 +621,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
       ELSEIF msg == WM_CHAR
          IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+             nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
                 IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
@@ -664,13 +664,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::lShiftPress := .F.
          ENDIF
          IF wParam == VK_TAB .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-            IF IsCtrlShift(.T., .F.)
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            IF hwg_IsCtrlShift(.T., .F.)
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ENDIF
             /*
             ELSE
-               ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+               ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             ENDIF
             */
          ENDIF
@@ -695,8 +695,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124) .OR.;
                wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. ;
                hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+             nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
                 RETURN 0
@@ -711,10 +711,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
          IF wParam == VK_TAB
             IF ::lCtrlPress
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSE
-               ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+               ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             ENDIF
          ELSEIF wParam == VK_DOWN //40        // Down
             IF ::lShiftPress .AND. ::aSelected != NIL
@@ -1009,8 +1009,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
 
    CASE WM_CHAR
       IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
-         nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-         nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+         nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+         nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
          //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
          IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
             IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
@@ -1054,12 +1054,12 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          ::lShiftPress := .F.
       ENDIF
       IF wParam == VK_TAB .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-         IF IsCtrlShift(.T., .F.)
-            getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         IF hwg_IsCtrlShift(.T., .F.)
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
          //ELSE
-         //   ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+         //   ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
          //ENDIF
       ENDIF
       IF wParam != VK_SHIFT .AND. wParam != VK_CONTROL .AND. wParam != VK_MENU
@@ -1083,8 +1083,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          //::isMouseOver := .F.
          IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam >= VK_F1 .AND. wParam <= VK_F12) .OR. ;
             wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. hb_IsBlock(::bKeyDown)
-            nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-            nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+            nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+            nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
             nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
             IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
                RETURN 0
@@ -1094,10 +1094,10 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          SWITCH wParam
          CASE VK_TAB
             IF ::lCtrlPress
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ENDIF
-            ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+            ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             EXIT
          CASE VK_DOWN
             IF !::ChangeRowCol(1)
@@ -4222,7 +4222,7 @@ METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
    LOCAL res := .T.
    LOCAL oColumn := ::aColumns[::fipos]
 
-   IF !CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
+   IF !hwg_CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
       RETURN .T.
    ENDIF
    IF oBtn != NIL .AND. hwg_GetFocus() == oBtn:handle
@@ -4269,7 +4269,7 @@ METHOD When() CLASS HBrowse
    LOCAL nSkip
    LOCAL res := .T.
 
-   IF !CheckFocus(self, .F.)
+   IF !hwg_CheckFocus(self, .F.)
       RETURN .F.
    ENDIF
    IF ::HighlightStyle == 0 .OR. ::HighlightStyle == 3
@@ -4285,7 +4285,7 @@ METHOD When() CLASS HBrowse
       res := IIf(hb_IsLogical(res), res, .T.)
       ::lnoValid := !res
       IF !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ENDIF
       ::oParent:lSuspendMsgsHandling := .F.
    ENDIF
@@ -4296,8 +4296,8 @@ METHOD Valid() CLASS HBrowse
    
    LOCAL res
 
-   //IF ::bLostFocus != NIL .AND. (!CheckFocus(Self, .T.) .OR.::lNoValid)
-   IF !CheckFocus(self, .T.) .OR. ::lNoValid
+   //IF ::bLostFocus != NIL .AND. (!hwg_CheckFocus(Self, .T.) .OR.::lNoValid)
+   IF !hwg_CheckFocus(self, .T.) .OR. ::lNoValid
       RETURN .T.
    ENDIF
    IF ::HighlightStyle == 0 .OR. ::HighlightStyle == 3

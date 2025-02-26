@@ -119,7 +119,7 @@ RETURN Self
 METHOD Activate( lNoModal ) CLASS HDialog
 Local hParent,oWnd
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
 
    IF lNoModal==Nil ; lNoModal:=.F. ; ENDIF
    ::lModal := !lNoModal
@@ -270,7 +270,7 @@ Local aMenu, i, hCtrl
             ENDIF
          ENDIF
          IF oDlg:lClipper
-            IF !GetSkip( oDlg,hCtrl,1 )
+            IF !hwg_GetSkip( oDlg,hCtrl,1 )
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )

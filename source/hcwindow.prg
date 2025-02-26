@@ -1233,9 +1233,9 @@ FUNCTION hwg_ProcKeyList(oCtrl, wParam, oMain)
       RETURN .F.
    ENDIF
    IF wParam != VK_SHIFT .AND. wParam != VK_CONTROL .AND. wParam != VK_MENU
-      oParent := IIf(oMain != NIL, oMain, ParentGetDialog(oCtrl))
+      oParent := IIf(oMain != NIL, oMain, hwg_ParentGetDialog(oCtrl))
       IF oParent != NIL .AND. !Empty(oParent:KeyList)
-         nctrl := IIf(IsCtrlShift(.T., .F.), FCONTROL, IIf(IsCtrlShift(.F., .T.), FSHIFT, 0))
+         nctrl := IIf(hwg_IsCtrlShift(.T., .F.), FCONTROL, IIf(hwg_IsCtrlShift(.F., .T.), FSHIFT, 0))
          IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam})) > 0
             Eval(oParent:KeyList[nPos, 3], oCtrl)
             RETURN .T.
@@ -1287,7 +1287,7 @@ FUNCTION hwg_ProcOkCancel(oCtrl, nKey, lForce)
          IF oCtrl != NIL .AND. __ObjHasMsg(oCtrl, "OGROUP") .AND. oCtrl:oGroup:oHGroup != NIL
             oCtrl := oCtrl:oGroup:oHGroup
          ENDIF
-         IF oCtrl != NIL .AND. GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
+         IF oCtrl != NIL .AND. hwg_GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
             IF AScan(oWin:GetList, {|o|o:handle == oCtrl:handle}) > 1
                RETURN .T.
             ENDIF

@@ -444,7 +444,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
                RETURN 0
             ENDIF
          ENDDO
-         IF !IsCtrlShift(.T.)
+         IF !hwg_IsCtrlShift(.T.)
             IF (::hitemDrag:oParent == NIL .OR. ::hitemDrop:oParent == NIL) .OR. ;
                (::hitemDrag:oParent:handle == ::hitemDrop:oParent:handle)
                IF ::FindChildPos(::hitemDrop:oParent, ::hitemDrag:handle) > ::FindChildPos(::hitemDrop:oParent, ::hitemDrop:handle)
@@ -457,7 +457,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
          ENDIF
       ENDIF
       // fazr a arotina para copias os nodos filhos ao arrastar
-      IF !IsCtrlShift(.T.)
+      IF !hwg_IsCtrlShift(.T.)
          IF ::hitemDrop:oParent != NIL
             hitemNew := ::hitemDrop:oParent:AddNode(::hitemDrag:GetText(), htiPrev, htiNext, ::hitemDrag:bAction,, ::hitemDrag:lchecked, ::hitemDrag:bClick) //, ::hitemDrop:aImages)
          ELSE

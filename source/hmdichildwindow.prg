@@ -82,7 +82,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::lSizeBox := hwg_BitAnd(::style, WS_SIZEBOX) != 0
    ::WindowState := IIf(lMinimized, SW_SHOWMINIMIZED, IIf(lMaximized, SW_SHOWMAXIMIZED, IIf(lShow, SW_SHOWNORMAL, 0)))
 
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    // hwg_CreateMdiChildWindow(Self)
 
    ::Type := WND_MDICHILD

@@ -19,7 +19,7 @@ FUNCTION Main()
    MENU OF oMainWindow
       MENUITEM "&Exit" ACTION hwg_EndWindow()
       MENUITEM "&Get a value" ACTION DlgGet(.F.)
-      MENUITEM "&Get using SetcolorinFocus" ACTION DlgGet(.T.)
+      MENUITEM "&Get using hwg_SetColorInFocus" ACTION DlgGet(.T.)
       MENUITEM "&Text Ballon" ACTION TestBallon()
       MENUITEM "&Hd Serial  " ACTION hwg_MsgInfo(hwg_HdSerial("C:\"), "HD Serial number")
    ENDMENU
@@ -53,7 +53,7 @@ FUNCTION DlgGet(lColor)
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
    If lColor != Nil
-      SetColorinFocus(lColor)
+      hwg_SetColorInFocus(lColor)
    EndIf
 
    @ 20, 10 SAY "Input something:" SIZE 260, 22

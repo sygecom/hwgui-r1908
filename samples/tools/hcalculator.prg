@@ -240,7 +240,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
    PRIVATE nCalculo1
    PRIVATE ncalculo2
 
-   IF IsCtrlShift(.F., .T.) .AND. ( cNumero = "5" .OR. cNumero = "8" )
+   IF hwg_IsCtrlShift(.F., .T.) .AND. ( cNumero = "5" .OR. cNumero = "8" )
       cNumero := IIf(cNumero = "8", "*", IIf(cNumero = "5", "%", cNumero))
    ENDIF
    If cNumero $ "/*-+%="

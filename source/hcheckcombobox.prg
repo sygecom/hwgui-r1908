@@ -143,10 +143,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       ENDIF
       IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal)
          IF wParam == VK_TAB
-            GetSkip(::oParent, ::handle,, IIf(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oParent, ::handle,, IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN
-            GetSkip(::oParent, ::handle, , 1)
+            hwg_GetSkip(::oParent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDIF
@@ -228,10 +228,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
       ENDIF
       IF ::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. !::GetParentForm(Self):lModal
          IF wParam == VK_TAB
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_RETURN
-            GetSkip(::oParent, ::handle, , 1)
+            hwg_GetSkip(::oParent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDIF

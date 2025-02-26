@@ -415,14 +415,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    ENDIF
    IF ::lTABSTOP
       IF msg == WM_SETFOCUS
-         GetSkip(::oparent, ::handle, , ::nGetSkip)
+         hwg_GetSkip(::oparent, ::handle, , ::nGetSkip)
       ELSEIF msg == WM_KEYUP
          IF wParam == VK_DOWN
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
          ELSEIF wParam == VK_UP
-            GetSkip(::oparent, ::handle, , -1)
+            hwg_GetSkip(::oparent, ::handle, , -1)
          ELSEIF wParam == VK_TAB
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          ENDIF
          RETURN 0
       ELSEIF msg == WM_SYSKEYUP

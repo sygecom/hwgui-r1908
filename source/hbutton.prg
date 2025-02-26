@@ -147,13 +147,13 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
       ENDIF
       IF !hwg_ProcKeyList(Self, wParam)
          IF wParam == VK_TAB
-            GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oparent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_LEFT .OR. wParam == VK_UP
-            GetSkip(::oparent, ::handle, , -1)
+            hwg_GetSkip(::oparent, ::handle, , -1)
             RETURN 0
          ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDIF
@@ -198,15 +198,15 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
       IF !hwg_ProcKeyList(Self, wParam)
          SWITCH wParam
          CASE VK_TAB
-            GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oparent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          CASE VK_LEFT
          CASE VK_UP
-            GetSkip(::oparent, ::handle, , -1)
+            hwg_GetSkip(::oparent, ::handle, , -1)
             RETURN 0
          CASE VK_RIGHT
          CASE VK_DOWN
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDSWITCH
       ENDIF
@@ -268,7 +268,7 @@ METHOD Notify(lParam) CLASS HButton
          ENDIF
          IF nSkip != 0
             ::oParent:Setfocus()
-            GetSkip(::oparent, ::handle, , nSkip)
+            hwg_GetSkip(::oparent, ::handle, , nSkip)
             RETURN 0
          ENDIF
       ENDIF
@@ -299,7 +299,7 @@ METHOD onGetFocus() CLASS HButton
    LOCAL res := .T.
    LOCAL nSkip
 
-   IF !CheckFocus(Self, .F.) .OR. ::bGetFocus == NIL
+   IF !hwg_CheckFocus(Self, .F.) .OR. ::bGetFocus == NIL
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
@@ -308,7 +308,7 @@ METHOD onGetFocus() CLASS HButton
       res := Eval(::bGetFocus, ::title, Self)
       ::oParent:lSuspendMsgsHandling := .F.
       IF res != NIL .AND. Empty(res)
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
          IF ::lflat
             hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
          ENDIF

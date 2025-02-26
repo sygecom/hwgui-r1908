@@ -164,7 +164,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
 
    ::lOnActivated := .T.
    ::bOnActivate := IIf(bOnActivate != NIL, bOnActivate, ::bOnActivate)
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    hParent := IIf(hb_IsObject(::oParent) .AND. ;
                    __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
                    .AND. !Empty(::oParent:handle) , ::oParent:handle, ;
@@ -707,7 +707,7 @@ FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
          IF oCtrl == NIL .OR. !hwg_SelfFocus(oCtrl:handle, hCtrl)
             hCtrl := hwg_GetAncestor(hCtrl, GA_PARENT)
             IF (oCtrl := oDlg:FindControl(, hCtrl)) != NIL
-               GetSkip(oCtrl:oParent, hCtrl, , 1)
+               hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
             ENDIF
          ENDIF
 
@@ -726,13 +726,13 @@ FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
              /*
          IF !oDlg:lExitOnEnter .AND. lParam > 0 .AND. lParam != hCtrl
             IF oCtrl:oParent:oParent != NIL
-                GetSkip(oCtrl:oParent, hCtrl, , 1)
+                hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
             eNDIF
              RETURN 0
          ENDIF
          */
          IF oDlg:lClipper
-            IF hb_IsObject(oCtrl) .AND. !GetSkip(oCtrl:oParent, hCtrl, , 1)
+            IF hb_IsObject(oCtrl) .AND. !hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog(oDlg:handle)
@@ -760,7 +760,7 @@ FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
                 oCtrl := oCtrl:oGroup:oHGroup
                 hCtrl := oCtrl:handle
             ENDIF
-            IF hb_IsObject(oCtrl) .AND. GetSkip(oCtrl:oParent, hCtrl, , -1)
+            IF hb_IsObject(oCtrl) .AND. hwg_GetSkip(oCtrl:oParent, hCtrl, , -1)
                IF AScan(oDlg:GetList, {|o|o:handle == hCtrl}) > 1
                   RETURN 1
                ENDIF

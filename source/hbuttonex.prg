@@ -328,13 +328,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          RETURN 0
       ENDIF
       IF wParam == VK_LEFT .OR. wParam == VK_UP
-         GetSkip(::oParent, ::handle, , -1)
+         hwg_GetSkip(::oParent, ::handle, , -1)
          RETURN 0
       ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       ELSEIF wParam == VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDIF
       hwg_ProcKeyList(Self, wParam)
 
@@ -525,14 +525,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          RETURN 0
       CASE VK_LEFT
       CASE VK_UP
-         GetSkip(::oParent, ::handle, , -1)
+         hwg_GetSkip(::oParent, ::handle, , -1)
          RETURN 0
       CASE VK_RIGHT
       CASE VK_DOWN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       CASE VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDSWITCH
       hwg_ProcKeyList(Self, wParam)
       EXIT

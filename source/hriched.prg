@@ -138,11 +138,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
    IF msg == WM_CHAR
       IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+         IF (hwg_IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
             RETURN 0
          ENDIF
       ENDIF
-       IF !IsCtrlShift(.T., .F.)
+       IF !hwg_IsCtrlShift(.T., .F.)
          ::lChanged := .T.
       ENDIF
    ELSEIF hb_IsBlock(::bOther)
@@ -153,14 +153,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    ENDIF
    IF msg == WM_KEYUP
      IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF IsCtrlShift(.T., .F.)
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         IF hwg_IsCtrlShift(.T., .F.)
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYDOWN
-      IF wParam == VK_TAB .AND. (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+      IF wParam == VK_TAB .AND. (hwg_IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_TAB .AND. ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
          hwg_RE_InsertText(::handle, Chr(VK_TAB))
@@ -199,8 +199,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
          ::lChanged := .T.
          EXIT
       CASE VK_TAB
-         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         IF (hwg_IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF ::GetParentForm(Self):Type >= WND_DLG_RESOURCE
             hwg_RE_InsertText(::handle, Chr(VK_TAB))
@@ -220,8 +220,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
    CASE WM_KEYUP
       ::updatePos()
       IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF IsCtrlShift(.T., .F.)
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         IF hwg_IsCtrlShift(.T., .F.)
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
       ENDIF
@@ -270,11 +270,11 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
 
    CASE WM_CHAR
       IF wParam == VK_TAB .AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         IF (IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
+         IF (hwg_IsCtrlShift(.T., .F.) .OR. !::lAllowTabs)
             RETURN 0
          ENDIF
       ENDIF
-      IF !IsCtrlShift(.T., .F.)
+      IF !hwg_IsCtrlShift(.T., .F.)
          ::lChanged := .T.
       ENDIF
       EXIT
@@ -355,7 +355,7 @@ METHOD onLostFocus() CLASS HRichEdit
 
 METHOD When() CLASS HRichEdit
 
-    IF !CheckFocus(Self, .F.)
+    IF !hwg_CheckFocus(Self, .F.)
        RETURN .T.
    ENDIF
    ::title := ::GetText()
@@ -367,7 +367,7 @@ METHOD When() CLASS HRichEdit
 
 METHOD Valid() CLASS HRichEdit
 
-   IF hb_IsBlock(::bLostFocus) .AND. !CheckFocus(Self, .T.)
+   IF hb_IsBlock(::bLostFocus) .AND. !hwg_CheckFocus(Self, .T.)
        RETURN .T.
    ENDIF
    ::title := ::GetText()

@@ -856,13 +856,13 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
              RETURN 0
           ENDIF
        ELSEIF (wparam == VK_DOWN .OR. wparam == VK_RETURN) .AND. ::nActive > 0  //
-           GetSkip(Self, ::handle, , 1)
+           hwg_GetSkip(Self, ::handle, , 1)
            RETURN 0
        ELSEIF wParam == VK_TAB
-           GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+           hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
            RETURN 0
        ELSEIF wparam == VK_UP .AND. ::nActive > 0  //
-          GetSkip(::oParent, ::handle, , -1)
+          hwg_GetSkip(::oParent, ::handle, , -1)
           RETURN 0
        ENDIF
    ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(, hwg_GetFocus()):classname = "HUPDO"
@@ -899,7 +899,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    ENDIF
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
-          GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
+          hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
           ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
@@ -989,13 +989,13 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
                RETURN 0
             ENDIF
          ELSEIF (wparam == VK_DOWN .OR. wparam == VK_RETURN) .AND. ::nActive > 0
-            GetSkip(Self, ::handle, , 1)
+            hwg_GetSkip(Self, ::handle, , 1)
             RETURN 0
          ELSEIF wParam == VK_TAB
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wparam == VK_UP .AND. ::nActive > 0
-            GetSkip(::oParent, ::handle, , -1)
+            hwg_GetSkip(::oParent, ::handle, , -1)
             RETURN 0
          ENDIF
       ENDIF
@@ -1043,7 +1043,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
          hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
-         GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
+         hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
          ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE

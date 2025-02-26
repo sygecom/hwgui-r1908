@@ -178,7 +178,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
          RETURN - 1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
         //RETURN 0
       ENDIF
          IF hb_IsBlock(::bKeyDown)
@@ -213,7 +213,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
          RETURN -1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
         //RETURN 0
       ENDIF
          IF hb_IsBlock(::bKeyDown)
@@ -361,7 +361,7 @@ METHOD When(oCtrl) CLASS HListBox
 
    HB_SYMBOL_UNUSED(oCtrl)
 
-   IF !CheckFocus(Self, .F.)
+   IF !hwg_CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
     nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
@@ -375,7 +375,7 @@ METHOD When(oCtrl) CLASS HListBox
       ::oparent:lSuspendMsgsHandling := .F.
       ::lnoValid := !res
       IF !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ELSE
          ::SetFocus()
       ENDIF
@@ -394,11 +394,11 @@ METHOD Valid(oCtrl) CLASS HListBox
 
    HB_SYMBOL_UNUSED(oCtrl)
 
-   IF !CheckFocus(Self, .T.) .OR. ::lNoValid
+   IF !hwg_CheckFocus(Self, .T.) .OR. ::lNoValid
       RETURN .T.
    ENDIF
    //nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0, - 1, 1)
-   IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
+   IF (oDlg := hwg_ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
       ::value := hwg_SendMessage(::handle, LB_GETCURSEL, 0, 0) + 1
       IF hb_IsBlock(::bSetGet)
          Eval(::bSetGet, ::value, Self)
@@ -423,14 +423,14 @@ METHOD Valid(oCtrl) CLASS HListBox
       ENDIF
    ENDIF
    IF Empty(hwg_GetFocus())
-      GetSkip(::oParent, ::handle,, ::nGetSkip)
+      hwg_GetSkip(::oParent, ::handle,, ::nGetSkip)
    ENDIF
 
    //IF lTab .AND. hwg_GetFocus() == ::handle
    //   IF ::oParent:CLASSNAME = "HTAB"
    //      ::oParent:SETFOCUS()
    //   ENDIF
-   //   GetSkip(::oparent, ::handle,, nSkip)
+   //   hwg_GetSkip(::oparent, ::handle,, nSkip)
    //ENDIF
 
 RETURN .T.

@@ -136,7 +136,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
    DEFAULT lMinimized TO .F.
    lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. hwg_BitAND(::Style, DS_CENTER) != 0
    DEFAULT lShow TO .T.
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    AEval(::aControls, {|o|o:lInit := .F.})
 
    IF ::Type == WND_MDI

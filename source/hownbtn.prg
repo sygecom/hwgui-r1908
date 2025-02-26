@@ -617,7 +617,7 @@ METHOD onGetFocus() CLASS HOwnButton
    LOCAL res := .T.
    LOCAL nSkip
 
-   IF ::bGetFocus == NIL .OR. !CheckFocus(Self, .F.)
+   IF ::bGetFocus == NIL .OR. !hwg_CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
    nSkip := iif(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), -1, 1)
@@ -625,7 +625,7 @@ METHOD onGetFocus() CLASS HOwnButton
       ::oparent:lSuspendMsgsHandling := .T.
       res := Eval(::bGetFocus, ::title, Self)
       IF res != NIL .AND. Empty(res)
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ENDIF
    ENDIF
    ::oparent:lSuspendMsgsHandling := .F.
@@ -636,7 +636,7 @@ RETURN res
 
 METHOD onLostFocus() CLASS HOwnButton
 
-   IF ::bLostFocus != NIL .AND. !CheckFocus(Self, .T.)
+   IF ::bLostFocus != NIL .AND. !hwg_CheckFocus(Self, .T.)
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bLostFocus)

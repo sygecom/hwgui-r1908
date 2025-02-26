@@ -180,12 +180,12 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             Return 0
          ELSEIF wParam == GDK_Down     // KeyDown
             IF lParam == 0
-               GetSkip( oParent,::handle,1 )
+               hwg_GetSkip( oParent,::handle,1 )
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Up     // KeyUp
             IF lParam == 0
-               GetSkip( oParent,::handle,-1 )
+               hwg_GetSkip( oParent,::handle,-1 )
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Right     // KeyRight
@@ -220,13 +220,13 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             ENDIF
          ELSEIF wParam == GDK_Tab     // Tab
             IF hwg_CheckBit( lParam,1 )
-               GetSkip( oParent,::handle,-1 )
+               hwg_GetSkip( oParent,::handle,-1 )
             ELSE
-               GetSkip( oParent,::handle,1 )
+               hwg_GetSkip( oParent,::handle,1 )
             ENDIF
             Return 1
          ELSEIF wParam == GDK_Return  // Enter
-            IF !GetSkip( oParent,::handle,1,.T. ) .AND. ::bSetGet != Nil
+            IF !hwg_GetSkip( oParent,::handle,1,.T. ) .AND. ::bSetGet != Nil
 	       __Valid( Self )
 	    ENDIF
             Return 1
@@ -613,7 +613,7 @@ Local res
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, oCtrl:title, oCtrl )
       IF !res
-         GetSkip( oCtrl:oParent,oCtrl:handle,1 )
+         hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
       ENDIF
       Return res
    ENDIF
@@ -624,7 +624,7 @@ Static Function __valid( oCtrl )
 Local vari, oDlg
 
     IF oCtrl:bSetGet != Nil
-      IF ( oDlg := ParentGetDialog( oCtrl ) ) == Nil .OR. oDlg:nLastKey != 27
+      IF ( oDlg := hwg_ParentGetDialog( oCtrl ) ) == Nil .OR. oDlg:nLastKey != 27
          vari := UnTransform( oCtrl,hwg_Edit_GetText( oCtrl:handle ) )
          oCtrl:title := vari
          IF oCtrl:cType == "D"
@@ -793,7 +793,7 @@ Local i, nLen
    NEXT
 Return .F.
 
-Function CreateGetList( oDlg )
+Function hwg_CreateGetList( oDlg )
 Local i, j, aLen1 := Len(oDlg:aControls), aLen2
 
    FOR i := 1 TO aLen1
@@ -810,7 +810,7 @@ Local i, j, aLen1 := Len(oDlg:aControls), aLen2
    NEXT
 Return Nil
 
-Function GetSkip( oParent,hCtrl,nSkip,lClipper )
+Function hwg_GetSkip( oParent,hCtrl,nSkip,lClipper )
 Local i, aLen
 
    DO WHILE oParent != Nil .AND. !__ObjHasMsg( oParent,"GETLIST" )
@@ -853,13 +853,13 @@ Return .F.
 Function SetGetUpdated( o )
 
    o:lChanged := .T.
-   IF ( o := ParentGetDialog( o ) ) != Nil
+   IF ( o := hwg_ParentGetDialog( o ) ) != Nil
       o:lUpdated := .T.
    ENDIF
 
 Return Nil
 
-Function ParentGetDialog( o )
+Function hwg_ParentGetDialog( o )
    DO WHILE .T.
       o := o:oParent
       IF o == Nil
@@ -872,3 +872,14 @@ Function ParentGetDialog( o )
    ENDDO
 Return o
 
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CREATEGETLIST, HWG_CREATEGETLIST);
+HB_FUNC_TRANSLATE(GETSKIP, HWG_GETSKIP);
+HB_FUNC_TRANSLATE(PARENTGETDIALOG, HWG_PARENTGETDIALOG);
+#endif
+
+#pragma ENDDUMP

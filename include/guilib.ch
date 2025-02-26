@@ -201,11 +201,11 @@
 
 #xcommand SET COLORFOCUS <x:ON,OFF,&> [COLOR [<tColor>],[<bColor>]] [< lFixed : NOFIXED >] [< lPersistent : PERSISTENT >];
           => ;
-          SetColorinFocus( <(x)> , <tColor>, <bColor>, <.lFixed.>, <.lPersistent.> )
+          hwg_SetColorInFocus( <(x)> , <tColor>, <bColor>, <.lFixed.>, <.lPersistent.> )
 
 #xcommand SET DISABLEBACKCOLOR <x:ON,OFF,&> [COLOR [<bColor>]] ;
           => ;
-          SetDisableBackColor( <(x)> , <bColor> )
+          hwg_SetDisableBackColor( <(x)> , <bColor> )
 
 // Addded by jamaj
 #xcommand DEFAULT <uVar1> := <uVal1> ;

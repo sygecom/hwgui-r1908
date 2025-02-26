@@ -261,8 +261,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             RETURN 0
          ELSEIF msg == WM_CHAR
             IF !hwg_CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)
-               nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-               nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+               nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+               nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
                nShiftAltCtrl += IIf(hwg_Checkbit(lParam, 28), 4, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .T.
                lRes := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl)
@@ -281,7 +281,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                IF !hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE) .AND. ;
                        (::GetParentForm():Type < WND_DLG_RESOURCE .OR. ;
                    !::GetParentForm():lModal)
-                   GetSkip(oParent, ::handle, , 1)
+                   hwg_GetSkip(oParent, ::handle, , 1)
                   RETURN 0
                ELSEIF ::GetParentForm():Type < WND_DLG_RESOURCE
                   RETURN 0
@@ -290,7 +290,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ELSEIF wParam == VK_TAB
                IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
                    !::GetParentForm(Self):lModal)
-                  //- GetSkip(oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+                  //- hwg_GetSkip(oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
                ENDIF
                RETURN 0
             ELSEIF wParam == VK_ESCAPE
@@ -321,15 +321,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ::lFocu := .F.
             ENDIF
             //
-            IF !IsCtrlShift(, .F.)
+            IF !hwg_IsCtrlShift(, .F.)
                RETURN ::GetApplyKey(Chr(wParam))
             ENDIF
          ELSEIF msg == WM_KEYDOWN
             //IF (hwg_CheckBit(lParam, 25) .OR. wParam > 111) .AND. hb_IsBlock(::bKeyDown)
             IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124)) .AND. ;
                hb_IsBlock(::bKeyDown)
-               nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-               nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+               nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+               nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
                nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
                ::oparent:lSuspendMsgsHandling := .T.
                lRes := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl)
@@ -341,32 +341,32 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             IF wParam == 40 .AND. ::oUpDown != NIL // KeyDown
                RETURN -1
             ELSEIF wParam == 40 //.OR. (wParam == 399 .AND. ::oUpDown != NIL)   // KeyDown
-               IF !IsCtrlShift()
-                  GetSkip(oParent, ::handle, , 1)
+               IF !hwg_IsCtrlShift()
+                  hwg_GetSkip(oParent, ::handle, , 1)
                   RETURN 0
                ENDIF
             ELSEIF wParam == 38 .AND. ::oUpDown != NIL   // KeyUp
                RETURN -1
             ELSEIF wParam == 38 //.OR. (wParam == 377 .AND. ::oUpDown != NIL)   // KeyUp
-               IF !IsCtrlShift()
-                  GetSkip(oParent, ::handle, , -1)
+               IF !hwg_IsCtrlShift()
+                  hwg_GetSkip(oParent, ::handle, , -1)
                   RETURN 0
                ENDIF
             ELSEIF wParam == 39     // KeyRight
                ::lFocu := .F.
-               IF !IsCtrlShift()
+               IF !hwg_IsCtrlShift()
                   ::lFirst := .F.
                   RETURN ::KeyRight()
                ENDIF
             ELSEIF wParam == 37     // KeyLeft
                ::lFocu := .F.
-               IF !IsCtrlShift()
+               IF !hwg_IsCtrlShift()
                   ::lFirst := .F.
                   RETURN ::KeyLeft()
                ENDIF
             ELSEIF wParam == 35     // End
                ::lFocu := .F.
-               IF !IsCtrlShift()
+               IF !hwg_IsCtrlShift()
                   ::lFirst := .F.
                   IF ::cType == "C"
                      //nPos := Len(Trim(::title))
@@ -377,12 +377,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ENDIF
             ELSEIF wParam == 36     // HOME
                ::lFocu := .F.
-               IF !IsCtrlShift()
+               IF !hwg_IsCtrlShift()
                   hwg_SendMessage(::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1)
                   RETURN 0
                ENDIF
             ELSEIF wParam == 45     // Insert
-               IF !IsCtrlShift()
+               IF !hwg_IsCtrlShift()
                   SET(_SET_INSERT, !SET(_SET_INSERT))
                ENDIF
             ELSEIF wParam == 46     // Del
@@ -391,10 +391,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ::DeleteChar(.F.)
                RETURN 0
             ELSEIF wParam == VK_TAB     // Tab
-               GetSkip(oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSEIF wParam == VK_RETURN  // Enter
-               //GetSkip(oParent, ::handle, .T., 1)
+               //hwg_GetSkip(oParent, ::handle, .T., 1)
                RETURN 0
             ENDIF
             IF "K" $ ::cPicFunc .AND. ::lFocu .AND. !Empty(::Title)
@@ -422,14 +422,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
          ELSEIF msg == WM_KEYDOWN
             IF wParam == VK_TAB .AND. ::GetParentForm():Type >= WND_DLG_RESOURCE    // Tab
                nexthandle := hwg_GetNextDlgTabItem(hwg_GetActiveWindow(), hwg_GetFocus(), ;
-                                                 IsCtrlShift(.F., .T.))
+                                                 hwg_IsCtrlShift(.F., .T.))
                //hwg_SetFocus(nexthandle)
                hwg_PostMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, nextHandle, 1)
                RETURN 0
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. hwg_ProcOkCancel(Self, wParam, ::GetParentForm():Type >= WND_DLG_RESOURCE)
                RETURN -1
             ELSEIF (wParam == VK_RETURN .OR. wParam == VK_TAB) .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-               GetSkip(oParent, ::handle, , 1)
+               hwg_GetSkip(oParent, ::handle, , 1)
 
                RETURN 0
             ENDIF
@@ -476,21 +476,21 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
          //hwg_SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
       ELSEIF msg == WM_CHAR
          IF wParam == VK_TAB
-               GetSkip(oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_ESCAPE
             RETURN 0
          ELSEIF wParam == VK_RETURN .AND. !::lWantReturn .AND. ::bSetGet != NIL
                 //IF (::GetParentForm():Type < WND_DLG_RESOURCE .OR. ;
             //     !::GetParentForm():lModal)
-                 GetSkip(oParent, ::handle, , 1)
+                 hwg_GetSkip(oParent, ::handle, , 1)
                  RETURN 0
             //ENDIF
             //RETURN -1
          ENDIF
       ELSEIF msg == WM_KEYDOWN
          IF wParam == VK_TAB     // Tab
-        //    GetSkip(oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+        //    hwg_GetSkip(oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
           //  RETURN 0
          ELSEIF wParam == VK_ESCAPE
             RETURN -1
@@ -523,7 +523,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             oParent := oParent:oParent
          ENDDO
          IF oParent != NIL .AND. !Empty(oParent:KeyList)
-            nctrl := IIf(IsCtrlShift(.T., .F.), FCONTROL, IIf(IsCtrlShift(.F., .T.), FSHIFT, 0))
+            nctrl := IIf(hwg_IsCtrlShift(.T., .F.), FCONTROL, IIf(hwg_IsCtrlShift(.F., .T.), FSHIFT, 0))
             IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam})) > 0
                Eval(oParent:KeyList[nPos, 3], Self)
             ENDIF
@@ -630,7 +630,7 @@ METHOD Refresh() CLASS HEdit
       ::Title := vari
    ENDIF
    hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
-   IF hwg_IsWindowVisible(::handle) .AND. !Empty(GetWindowParent(::handle)) //hwg_PtrToUlong(hwg_GetFocus()) == hwg_PtrToUlong(::handle)
+   IF hwg_IsWindowVisible(::handle) .AND. !Empty(hwg_GetWindowParent(::handle)) //hwg_PtrToUlong(hwg_GetFocus()) == hwg_PtrToUlong(::handle)
       hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW) //+ RDW_NOCHILDREN)
    ENDIF
 
@@ -664,8 +664,8 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION IsCtrlShift(lCtrl, lShift)
-   
+FUNCTION hwg_IsCtrlShift(lCtrl, lShift)
+
    LOCAL cKeyb := hwg_GetKeyboardState()
 
    IF lCtrl == NIL
@@ -681,7 +681,7 @@ RETURN (lCtrl .AND. (Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128)) .OR. ;
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD ParsePict(cPicture, vari) CLASS HEdit
-   
+
    LOCAL nAt
    LOCAL i
    LOCAL masklen
@@ -803,7 +803,7 @@ METHOD KeyRight(nPos) CLASS HEdit
       ENDIF
    ENDIF
    IF ::oUpDown != NIL .AND. nPos > newPos
-      GetSkip(::oParent, ::handle, , 1)
+      hwg_GetSkip(::oParent, ::handle, , 1)
    ENDIF
 
 RETURN 0
@@ -827,7 +827,7 @@ METHOD KeyLeft(nPos) CLASS HEdit
    ENDIF
    //IF ::oUpDown != NIL .AND. nPos <= 0
    IF nPos <= 1
-      GetSkip(::oParent, ::handle, , -1)
+      hwg_GetSkip(::oParent, ::handle, , -1)
    ENDIF
 
 RETURN 0
@@ -1187,7 +1187,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
          ELSEIF !SET(_SET_CONFIRM)
              IF (::cType != "D" .AND. !"@"$::cPicFunc .AND. Empty(::cPicMask) .AND. !Empty(::nMaxLength) .AND. nLen >= ::nMaxLength-1) .OR. ;
                     (!Empty(::nMaxLength) .AND. nPos = ::nMaxLength) .OR. nPos == Len(::cPicMask)
-                 GetSkip(::oParent, ::handle, , 1)
+                 hwg_GetSkip(::oParent, ::handle, , 1)
              ENDIF
          ENDIF
       ENDIF
@@ -1275,7 +1275,7 @@ METHOD When() CLASS HEdit
    LOCAL nSkip
    LOCAL vari
 
-   IF !CheckFocus(Self, .F.)
+   IF !hwg_CheckFocus(Self, .F.)
       RETURN .F.
    ENDIF
 
@@ -1297,14 +1297,14 @@ METHOD When() CLASS HEdit
       ::oParent:lSuspendMsgsHandling := .F.
       IF !res
          /*
-         oParent := ParentGetDialog(Self)
+         oParent := hwg_ParentGetDialog(Self)
          IF Self == ATail(oParent:GetList)
             nSkip := -1
          ELSEIF Self == oParent:getList[1]
             nSkip := 1
          ENDIF
          */
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ELSE
          ::SetFocus()
       ENDIF
@@ -1320,12 +1320,12 @@ METHOD Valid() CLASS HEdit
    LOCAL vari
    LOCAL oDlg
 
-   //IF ::bLostFocus != NIL .AND. (::lNoValid .OR. !CheckFocus(Self, .T.))
-   IF (!CheckFocus(Self, .T.) .OR. ::lNoValid) .AND. ::bLostFocus != NIL
+   //IF ::bLostFocus != NIL .AND. (::lNoValid .OR. !hwg_CheckFocus(Self, .T.))
+   IF (!hwg_CheckFocus(Self, .T.) .OR. ::lNoValid) .AND. ::bLostFocus != NIL
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bSetGet)
-      IF (oDlg := ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
+      IF (oDlg := hwg_ParentGetDialog(Self)) == NIL .OR. oDlg:nLastKey != 27
          vari := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
          ::title := vari
          IF ::cType == "D"
@@ -1375,7 +1375,7 @@ METHOD Valid() CLASS HEdit
                RETURN .F.
             ENDIF
             IF Empty(hwg_GetFocus())
-               GetSkip(::oParent, ::handle, , ::nGetSkip)
+               hwg_GetSkip(::oParent, ::handle, , ::nGetSkip)
             ENDIF
          ENDIF
          IF oDlg != NIL
@@ -1401,7 +1401,7 @@ METHOD Valid() CLASS HEdit
            RETURN .F.
         ENDIF
         IF Empty(hwg_GetFocus())
-           GetSkip(::oParent, ::handle, , ::nGetSkip)
+           hwg_GetSkip(::oParent, ::handle, , ::nGetSkip)
         ENDIF
      ENDIF
    ENDIF
@@ -1612,7 +1612,7 @@ METHOD SetGetUpdated() CLASS HEdit
    LOCAL oParent
 
    ::lChanged := .T.
-   IF (oParent := ParentGetDialog(Self)) != NIL
+   IF (oParent := hwg_ParentGetDialog(Self)) != NIL
       oParent:lUpdated := .T.
    ENDIF
 
@@ -1646,7 +1646,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION CreateGetList(oDlg, oCnt)
+FUNCTION hwg_CreateGetList(oDlg, oCnt)
    
    LOCAL i
    LOCAL oCtrl
@@ -1661,7 +1661,7 @@ FUNCTION CreateGetList(oDlg, oCnt)
    ENDIF
    FOR i := 1 TO aLen1
       IF Len(oCtrl:aControls[i]:aControls) > 0
-         CreateGetList(oDlg, oCtrl:aControls[i])
+         hwg_CreateGetList(oDlg, oCtrl:aControls[i])
       ENDIF
       IF __ObjHasMsg(oCtrl:aControls[i], "BSETGET") .AND. oCtrl:aControls[i]:bSetGet != NIL
          AAdd(oDlg:GetList, oCtrl:aControls[i])
@@ -1672,7 +1672,7 @@ RETURN oCtrl
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetSkip(oParent, hCtrl, lClipper, nSkip)
+FUNCTION hwg_GetSkip(oParent, hCtrl, lClipper, nSkip)
    
    LOCAL i
    LOCAL nextHandle
@@ -1892,7 +1892,7 @@ RETURN nextHandle
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ParentGetDialog(o)
+FUNCTION hwg_ParentGetDialog(o)
 
    DO WHILE (o := o:oParent) != NIL .AND. !__ObjHasMsg(o, "GETLIST")
    ENDDO
@@ -1901,7 +1901,7 @@ RETURN o
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION SetColorinFocus(lDef, tcolor, bcolor, lFixed, lPersist)
+FUNCTION hwg_SetColorInFocus(lDef, tcolor, bcolor, lFixed, lPersist)
 
    IF !hb_IsLogical(lDef)
       lDef := (hb_IsChar(lDef) .AND. Upper(lDef) = "ON")
@@ -1919,7 +1919,7 @@ RETURN .T.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION SetDisableBackColor(lDef, bcolor)
+FUNCTION hwg_SetDisableBackColor(lDef, bcolor)
 
    IF !hb_IsLogical(lDef)
       lDef := (hb_IsChar(lDef) .AND. Upper(lDef) = "ON")
@@ -1943,12 +1943,12 @@ RETURN .T.
 Luis Fernando Basso contribution
 */
 
-/** CheckFocus
+/** hwg_CheckFocus
 * check focus of controls before calling events
 */
-FUNCTION CheckFocus(oCtrl, lInside)
+FUNCTION hwg_CheckFocus(oCtrl, lInside)
 
-   LOCAL oParent := ParentGetDialog(oCtrl)
+   LOCAL oParent := hwg_ParentGetDialog(oCtrl)
    LOCAL hGetFocus := hwg_PtrToUlong(hwg_GetFocus())
    LOCAL lModal
 
@@ -1969,7 +1969,7 @@ FUNCTION CheckFocus(oCtrl, lInside)
    ENDIF
    IF oParent != NIL .AND. lInside   // valid
       lModal := oParent:lModal .AND. oParent:Type >  WND_DLG_RESOURCE
-      IF ((!Empty(hGetFocus) .AND. lModal .AND. !hwg_SelfFocus(GetWindowParent(hGetFocus), oParent:handle)) .OR. ;
+      IF ((!Empty(hGetFocus) .AND. lModal .AND. !hwg_SelfFocus(hwg_GetWindowParent(hGetFocus), oParent:handle)) .OR. ;
          (hwg_SelfFocus(hGetFocus, oCtrl:oParent:handle))) .AND. ;
           hwg_SelfFocus(oParent:handle, oCtrl:oParent:handle)
          RETURN .F.
@@ -1983,17 +1983,17 @@ RETURN .T.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION WhenSetFocus(oCtrl, nSkip)
+FUNCTION hwg_WhenSetFocus(oCtrl, nSkip)
 
    IF hwg_SelfFocus(oCtrl:handle) .OR. Empty(hwg_GetFocus())
-       GetSkip(oCtrl:oParent, oCtrl:handle, , nSkip)
+       hwg_GetSkip(oCtrl:oParent, oCtrl:handle, , nSkip)
    ENDIF
 
 RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetWindowParent(nHandle)
+FUNCTION hwg_GetWindowParent(nHandle)
 
    DO WHILE !Empty(hwg_GetParent(nHandle)) .AND. !hwg_SelfFocus(nHandle, hwg_GetActiveWindow())
       nHandle := hwg_GetParent(nHandle)
@@ -2002,3 +2002,21 @@ FUNCTION GetWindowParent(nHandle)
 RETURN hwg_PtrToUlong(nHandle)
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ISCTRLSHIFT, HWG_ISCTRLSHIFT);
+HB_FUNC_TRANSLATE(CREATEGETLIST, HWG_CREATEGETLIST);
+HB_FUNC_TRANSLATE(GETSKIP, HWG_GETSKIP);
+HB_FUNC_TRANSLATE(PARENTGETDIALOG, HWG_PARENTGETDIALOG);
+HB_FUNC_TRANSLATE(SETCOLORINFOCUS, HWG_SETCOLORINFOCUS);
+HB_FUNC_TRANSLATE(SETDISABLEBACKCOLOR, HWG_SETDISABLEBACKCOLOR);
+HB_FUNC_TRANSLATE(CHECKFOCUS, HWG_CHECKFOCUS);
+HB_FUNC_TRANSLATE(WHENSETFOCUS, HWG_WHENSETFOCUS);
+HB_FUNC_TRANSLATE(GETWINDOWPARENT, HWG_GETWINDOWPARENT);
+#endif
+
+#pragma ENDDUMP

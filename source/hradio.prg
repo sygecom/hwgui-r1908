@@ -254,7 +254,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
       ::lnoValid := .T.
    ENDIF
 
-   ::oParent:AddEvent(BN_KILLFOCUS, Self, {||CheckFocus(Self, .T.)})
+   ::oParent:AddEvent(BN_KILLFOCUS, Self, {||hwg_CheckFocus(Self, .T.)})
 
    IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
@@ -318,7 +318,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
       ::lnoValid := .T.
    ENDIF
    //::oParent:AddEvent(BN_KILLFOCUS, Self, {||::Notify(WM_KEYDOWN)})
-   ::oParent:AddEvent(BN_KILLFOCUS, Self, {||CheckFocus(Self, .T.)})
+   ::oParent:AddEvent(BN_KILLFOCUS, Self, {||hwg_CheckFocus(Self, .T.)})
    IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
       // IF ::oGroup:bSetGet != NIL
@@ -355,13 +355,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
    ELSEIF msg == WM_KEYDOWN
       //IF hwg_ProcKeyList(Self, wParam)
       IF wParam == VK_LEFT .OR. wParam == VK_UP
-         GetSkip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
          RETURN 0
       ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-         GetSkip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN 0
       ELSEIF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ENDIF
       IF (wParam == VK_RETURN)
@@ -409,14 +409,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
       SWITCH wParam
       CASE VK_LEFT
       CASE VK_UP
-         GetSkip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
          RETURN 0
       CASE VK_RIGHT
       CASE VK_DOWN
-         GetSkip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN 0
       CASE VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       CASE VK_RETURN
          ::VALID(VK_RETURN)
@@ -443,7 +443,7 @@ METHOD Notify(lParam) CLASS HRadioButton
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
 
-   IF !CheckFocus(Self, .T.)
+   IF !hwg_CheckFocus(Self, .T.)
       RETURN 0
    ENDIF
 
@@ -463,7 +463,7 @@ METHOD Notify(lParam) CLASS HRadioButton
          IF nSkip != 0
             //hwg_SetFocus(::oParent:handle)
             ::oParent:SETFOCUS()
-            GetSkip(::oparent, ::handle, , nSkip)
+            hwg_GetSkip(::oparent, ::handle, , nSkip)
          ENDIF
       ENDIF
    ENDIF
@@ -482,7 +482,7 @@ METHOD onClick() CLASS HRadioButton
 METHOD When() CLASS HRadioButton
    LOCAL res := .T., nSkip
 
-   IF !CheckFocus(Self, .F.)
+   IF !hwg_CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
    nSkip := IIf(hwg_GetKeyState(VK_UP) < 0 .OR. (hwg_GetKeyState(VK_TAB) < 0 .AND. hwg_GetKeyState(VK_SHIFT) < 0), - 1, 1)
@@ -494,7 +494,7 @@ METHOD When() CLASS HRadioButton
       ::lnoValid := !res
       ::oparent:lSuspendMsgsHandling := .F.
       IF !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ELSE
          ::SETfOCUS()   
       ENDIF
@@ -535,7 +535,7 @@ METHOD Valid(nKey) CLASS HRadioButton
       Eval(::bLostFocus, Self, ::oGroup:nValue)
    ENDIF
    IF nEnter == VK_RETURN .AND. hwg_SelfFocus(hctrl)
-       GetSkip(::oParent, hCtrl, , 1)
+       hwg_GetSkip(::oParent, hCtrl, , 1)
    ENDIF
    ::oParent:lSuspendMsgsHandling := .F.  
    
