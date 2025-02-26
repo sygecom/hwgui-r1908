@@ -168,7 +168,7 @@ Return Nil
 
 Static Function InitConfig
 #ifdef RDD_ADS
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local st := Iif( nServerType == ADS_REMOTE_SERVER,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
 Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,IDC_RADIOBUTTON5 ) )
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
@@ -183,7 +183,7 @@ Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,ID
 Return .T.
 
 Static Function EndConfig()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local new_numdriv, new_servertype, serverPath
    new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
                   Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
@@ -233,7 +233,7 @@ Local new_numdriv, new_servertype, serverPath
 Return .T.
 
 Static Function ServerButton( iEnable )
-Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT1 )
+Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
    hwg_SendMessage( hEdit, WM_ENABLE, iEnable, 0 )
 Return .T.
 
@@ -278,7 +278,7 @@ Local oWindow := HMainWindow():GetMdiActive(), aControls, i
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
-   EndDialog( getmodalhandle() )
+   EndDialog( hwg_GetModalHandle() )
 Return Nil
 
 /* -----------------------  Creating New Index --------------------- */
@@ -289,22 +289,22 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {|| InitNewIndex() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndNewIndex()}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() ) }  ;
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
         ON BN_CLICKED,IDC_CHECKBOX1 ACTION {|| TagName() }
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitNewIndex
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function TagName
-Local hDlg := getmodalhandle()
-Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT3 )
+Local hDlg := hwg_GetModalHandle()
+Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    IF hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
       hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    ELSE
@@ -313,7 +313,7 @@ Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDIT3 )
 Return Nil
 
 Static Function EndNewIndex()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local indname, isMulti, isUniq, tagname, expkey, expfor
 Local oWindow, aControls, i
 
@@ -413,13 +413,13 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndOpen()}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) }
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) }
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitOpen
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,IDC_RADIOBUTTON5 ) )
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
@@ -431,7 +431,7 @@ Local nd := Iif( numdriv==1,IDC_RADIOBUTTON3,Iif( numdriv==2,IDC_RADIOBUTTON4,ID
 Return .T.
 
 Static Function EndOpen()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local new_numdriv, old_numdriv := numdriv, alsName, fname, pass
 Local oldExcl := SET( _SET_EXCLUSIVE ), oldRdonly := prrdonly
 #ifdef RDD_ADS
@@ -541,12 +541,12 @@ Local oModDlg
 Return Nil
 
 Static Function InitCalc()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
 Return Nil
 
 Static Function EndCalc()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local cExpr, res
 
    cExpr := GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
@@ -569,17 +569,17 @@ Return Nil
 Function Scripts( nAct )
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(GetDlgItem(getmodalhandle(),IDC_EDIT8))}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(GetDlgItem(hwg_GetModalHandle(),IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndScri(nAct)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() ) }  ;
-        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT8, hwg_SelectFile( "Script files( *.scr )", "*.scr", mypath ) ) }
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
+        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile( "Script files( *.scr )", "*.scr", mypath ) ) }
    aModDlg:Activate()
 
 Return Nil
 
 Static Function EndScri( lOk, nAct )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local fname, arScr, nError, nLineEr, obl
 
    fname := GetDlgItemText( hDlg, IDC_EDIT8, 80 )

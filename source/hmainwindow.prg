@@ -51,7 +51,7 @@ CLASS VAR aMessages INIT { ;
                              {|o|onDestroy(o)},                    ;
                              {|o, w|onEndSession(o, w)},           ;
                              {|o, w, l|onActivate(o, w, l)},       ;
-                             {|o, w, l|onHelp(o, w, l)}            ;
+                             {|o, w, l|hwg_onHelp(o, w, l)}            ;
                            } ;
                          }
 #endif
@@ -389,7 +389,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
    CASE WM_HELP
       IF !::lSuspendMsgsHandling
-         RETURN onHelp(Self, wParam, lParam)
+         RETURN hwg_onHelp(Self, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
 

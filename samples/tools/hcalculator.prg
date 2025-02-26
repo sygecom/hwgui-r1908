@@ -332,21 +332,21 @@ METHOD INIT() CLASS HCalculator
    
    LOCAL aCoors
 
-   SETDLGKEY(::oFormCalc, , 8, {||::Calculando(" ")})
-   SETDLGKEY(::oFormCalc, , 46, {||::Calculando("")})
-   SETDLGKEY(::oFormCalc, , 110, {||::Calculando(",")})
-   SETDLGKEY(::oFormCalc, , 188, {||::Calculando(",")})
-   SETDLGKEY(::oFormCalc, , 190, {||::Calculando(".")})
-   SETDLGKEY(::oFormCalc, , 194, {||::Calculando(".")})
-   SETDLGKEY(::oFormCalc, , 106, {||::Calculando("*")})
-   SETDLGKEY(::oFormCalc, , 107, {||::Calculando("+")})
-   SETDLGKEY(::oFormCalc, FSHIFT, 187, {||::Calculando("+")})
-   SETDLGKEY(::oFormCalc, , 109, {||::Calculando("-")})
-   SETDLGKEY(::oFormCalc, , 189, {||::Calculando("-")})
-   SETDLGKEY(::oFormCalc, , 111, {||::Calculando("/")})
-   SETDLGKEY(::oFormCalc, , 193, {||::Calculando("/")})
-   SETDLGKEY(::oFormCalc, , 187, {||::Calculando("=")})
-   SETDLGKEY(::oFormCalc, , 13, {||::Calculando("=")})
+   hwg_SetDlgKey(::oFormCalc, , 8, {||::Calculando(" ")})
+   hwg_SetDlgKey(::oFormCalc, , 46, {||::Calculando("")})
+   hwg_SetDlgKey(::oFormCalc, , 110, {||::Calculando(",")})
+   hwg_SetDlgKey(::oFormCalc, , 188, {||::Calculando(",")})
+   hwg_SetDlgKey(::oFormCalc, , 190, {||::Calculando(".")})
+   hwg_SetDlgKey(::oFormCalc, , 194, {||::Calculando(".")})
+   hwg_SetDlgKey(::oFormCalc, , 106, {||::Calculando("*")})
+   hwg_SetDlgKey(::oFormCalc, , 107, {||::Calculando("+")})
+   hwg_SetDlgKey(::oFormCalc, FSHIFT, 187, {||::Calculando("+")})
+   hwg_SetDlgKey(::oFormCalc, , 109, {||::Calculando("-")})
+   hwg_SetDlgKey(::oFormCalc, , 189, {||::Calculando("-")})
+   hwg_SetDlgKey(::oFormCalc, , 111, {||::Calculando("/")})
+   hwg_SetDlgKey(::oFormCalc, , 193, {||::Calculando("/")})
+   hwg_SetDlgKey(::oFormCalc, , 187, {||::Calculando("=")})
+   hwg_SetDlgKey(::oFormCalc, , 13, {||::Calculando("=")})
 
    ::lClear := .T.
    ::aOperando := {, , 0}

@@ -280,7 +280,7 @@ Local aCoors, retValue := -1
          ::DoVScroll( wParam )
 
       ELSEIF msg == WM_COMMAND
-         DlgCommand( Self, wParam, lParam )
+         hwg_DlgCommand( Self, wParam, lParam )
 
 
       ELSEIF msg == WM_KEYUP

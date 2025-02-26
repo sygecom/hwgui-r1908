@@ -216,7 +216,7 @@ RETURN NIL
 FUNCTION GetRefresh()
 *---------------------------------------------------------------------------------------
 
-   LOCAL oDlg := GetModalHandle()
+   LOCAL oDlg := hwg_GetModalHandle()
 
    Gt_Cod:Refresh()
    Gt_Name:Refresh()

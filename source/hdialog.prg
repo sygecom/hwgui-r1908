@@ -27,7 +27,7 @@
 STATIC s_aSheet := NIL
 #if 0 // old code for reference (to be deleted)
 STATIC s_aMessModalDlg := { ;
-   {WM_COMMAND, {|o, w, l|DlgCommand(o, w, l)}},         ;
+   {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}},         ;
    {WM_SYSCOMMAND, {|o, w, l|onSysCommand(o, w, l)}},    ;
    {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
    {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
@@ -36,7 +36,7 @@ STATIC s_aMessModalDlg := { ;
    {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
    {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}},        ;
    {WM_PSPNOTIFY, {|o, w, l|onPspNotify(o, w, l)}},      ;
-   {WM_HELP, {|o, w, l|onHelp(o, w, l)}},                ;
+   {WM_HELP, {|o, w, l|hwg_OnHelp(o, w, l)}},                ;
    {WM_CTLCOLORDLG, {|o, w, l|onDlgColor(o, w, l)}}      ;
    }
 #endif
@@ -352,14 +352,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          IF nPos > 0
             oTab := ::aControls[nPos]
             IF Len(oTab:aPages) > 0
-               Eval({|o, w, l|DlgCommand(o, w, l)}, oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
+               Eval({|o, w, l|hwg_DlgCommand(o, w, l)}, oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
             ENDIF
          ENDIF
       ENDIF
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
          // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
-         RETURN DlgCommand(Self, wParam, lParam)
+         RETURN hwg_DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -425,7 +425,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
          // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
-         RETURN onHelp(Self, wParam, lParam)
+         RETURN hwg_OnHelp(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -688,7 +688,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION DlgCommand(oDlg, wParam, lParam)
+FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
    
    LOCAL iParHigh := hwg_HIWORD(wParam)
    LOCAL iParLow := hwg_LOWORD(wParam)
@@ -820,7 +820,7 @@ RETURN 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION DlgMouseMove()
+FUNCTION hwg_DlgMouseMove()
 
    LOCAL oBtn := SetNiceBtnSelected()
 
@@ -926,7 +926,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION onHelp(oDlg, wParam, lParam)
+FUNCTION hwg_OnHelp(oDlg, wParam, lParam)
 
    LOCAL oCtrl
    LOCAL nHelpId
@@ -1025,7 +1025,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lModeless, lNoApply, lWizard)
+FUNCTION hwg_PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lModeless, lNoApply, lWizard)
 
    LOCAL hSheet
    LOCAL i
@@ -1054,7 +1054,7 @@ RETURN hSheet
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetModalDlg
+FUNCTION hwg_GetModalDlg()
 
    LOCAL i := Len(HDialog():aModalDialogs)
 
@@ -1062,7 +1062,7 @@ RETURN IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetModalHandle
+FUNCTION hwg_GetModalHandle()
 
    LOCAL i := Len(HDialog():aModalDialogs)
 
@@ -1070,6 +1070,7 @@ RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+// TODO: o prefixo HWG_ não pode ser utilizado pois já existe hwg_EndDialog
 FUNCTION EndDialog(handle)
 
    LOCAL oDlg
@@ -1105,7 +1106,7 @@ RETURN IIf(oDlg:lModal, hwg_EndDialog(oDlg:handle), hwg_DestroyWindow(oDlg:handl
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION SetDlgKey(oDlg, nctrl, nkey, block)
+FUNCTION hwg_SetDlgKey(oDlg, nctrl, nkey, block)
 
    LOCAL i
    LOCAL aKeys
@@ -1193,3 +1194,19 @@ EXIT PROCEDURE hwg_ExitProcedure
 RETURN
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DLGCOMMAND, HWG_DLGCOMMAND);
+HB_FUNC_TRANSLATE(DLGMOUSEMOVE, HWG_DLGMOUSEMOVE);
+HB_FUNC_TRANSLATE(ONHELP, HWG_ONHELP);
+HB_FUNC_TRANSLATE(PROPERTYSHEET, HWG_PROPERTYSHEET);
+HB_FUNC_TRANSLATE(GETMODALDLG, HWG_GETMODALDLG);
+HB_FUNC_TRANSLATE(GETMODALHANDLE, HWG_GETMODALHANDLE);
+HB_FUNC_TRANSLATE(SETDLGKEY, HWG_SETDLGKEY);
+#endif
+
+#pragma ENDDUMP

@@ -44,13 +44,13 @@ Local aModDlg
 Return Nil
 
 Static Function InitQuery()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
 Return Nil
 
 Static Function EndQuery( lOk )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local oldArea := Alias(), tmpdriv, tmprdonly
 Local id1
 Local aChildWnd, hChild
@@ -127,7 +127,7 @@ Return .T.
 
 Function QuerySave
 Local fname := hwg_SaveFile( "*.que","Query files( *.que )", "*.que", mypath )
-   cQuery := GetDlgItemText( getmodalhandle(), IDC_EDITQUERY, 400 )
+   cQuery := GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
    IF !Empty( fname )
       MemoWrit( fname,cQuery )
    ENDIF

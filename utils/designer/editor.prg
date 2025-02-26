@@ -223,10 +223,10 @@ FUNCTION EditMethod( cMethName, cMethod )
    // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
 
    // oEdit:title := cMethod
-   *-SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
+   *-hwg_SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
          *-{hwg_SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
-   *-SetDlgKey( oEdit, 0, 9)
+   *-hwg_SetDlgKey( oEdit, 0, 9)
    IF lRes
       Return cMethod
    ENDIF

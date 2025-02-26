@@ -434,7 +434,7 @@ Local oWnd, oBtn, oitem
       Return 0
    else
       if msg == WM_MOUSEMOVE
-          DlgMouseMove()
+          hwg_DlgMouseMove()
       endif
       if ISBLOCK( oWnd:bOther )
           Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
@@ -626,7 +626,7 @@ Local oWnd, oBtn, oitem
       endif
    else
       if msg == WM_MOUSEMOVE
-          DlgMouseMove()
+          hwg_DlgMouseMove()
       endif
       if oWnd:bOther != Nil
           Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
@@ -1093,7 +1093,7 @@ Local oWndClient
    else
       If ISOBJECT(oWnd)
          if msg == WM_MOUSEMOVE
-             DlgMouseMove()
+             hwg_DlgMouseMove()
          endif
          if ISBLOCK(oWnd:bOther)
              Eval( oWnd:bOther, oWnd, msg, wParam, lParam )

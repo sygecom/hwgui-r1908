@@ -510,7 +510,7 @@ STATIC FUNCTION PrintDosPrint(oText, oPrt)
 
 
 STATIC FUNCTION PrintDosAnt(nPage, oText)
-   LOCAL oDlg := GetModalhandle()
+   LOCAL oDlg := hwg_GetModalhandle()
    nPage := --nPage
    IF nPage < 1
       nPage := 1
@@ -523,7 +523,7 @@ STATIC FUNCTION PrintDosAnt(nPage, oText)
    RETURN nPage
 
 STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
-   LOCAL oDlg := GetModalhandle()
+   LOCAL oDlg := hwg_GetModalHandle()
    nPage := ++nPage
    IF nPage > oPage
       nPage := oPage

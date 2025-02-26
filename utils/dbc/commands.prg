@@ -34,7 +34,7 @@ Local af := Array( Fcount() )
 Return Nil
 
 Static Function RecNumberEdit
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    hwg_SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
@@ -42,12 +42,12 @@ Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
 Return Nil
 
 Static Function RecNumberDisable
-Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDITRECN )
+Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
    hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
 Return Nil
 
 Static Function InitRepl()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
@@ -55,7 +55,7 @@ Local hDlg := getmodalhandle()
 Return Nil
 
 Static Function EndRepl()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nrest, nrec
 Local oWindow, aControls, i
 Private finame, cValue, cFor
@@ -108,7 +108,7 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_DEL" ON INIT {|| InitDele(nAct) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndDele(nAct)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}  ;
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}  ;
         ON BN_CLICKED,IDC_RADIOBUTTON7 ACTION {|| RecNumberEdit() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON6 ACTION {|| RecNumberDisable() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable() }
@@ -117,7 +117,7 @@ Local aModDlg
 Return Nil
 
 Static Function InitDele(nAct)
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    IF nAct == 2
       hwg_SetWindowText( hDlg,"Recall")
    ELSEIF nAct == 3
@@ -129,7 +129,7 @@ Local hDlg := getmodalhandle()
 Return Nil
 
 Static Function EndDele( nAct )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nrest, nsum, nRec := Recno()
 Local oWindow, aControls, i
 Private cFor
@@ -196,7 +196,7 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_SUM" ON INIT {|| InitSum() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndSum()}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}  ;
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}  ;
         ON BN_CLICKED,IDC_RADIOBUTTON7 ACTION {|| RecNumberEdit() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON6 ACTION {|| RecNumberDisable() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable() }
@@ -205,14 +205,14 @@ Local aModDlg
 Return Nil
 
 Static Function InitSum()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndSum()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local cSumf, cFor, nrest, blsum, blfor, nRec := Recno()
 Private nsum := 0
 
@@ -256,8 +256,8 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_APFROM" ON INIT {|| InitApp() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndApp()}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( getmodalhandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) } ;
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}  ;
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) } ;
         ON BN_CLICKED,IDC_RADIOBUTTON11 ACTION {|| DelimEdit() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON10 ACTION {|| DelimDisable() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON9 ACTION {|| DelimDisable() }
@@ -266,7 +266,7 @@ Local aModDlg
 Return Nil
 
 Static Function DelimEdit
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    hwg_SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
@@ -274,19 +274,19 @@ Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
 Return Nil
 
 Static Function DelimDisable
-Local hEdit := GetDlgItem( getmodalhandle(),IDC_EDITDWITH )
+Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
    hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
 Return Nil
 
 Static Function InitApp()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndApp()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local fname, nRec := Recno()
 
    fname := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
@@ -317,19 +317,19 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_OKCANCEL" ON INIT {|| InitRPZ(nAct) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndRPZ(nAct)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() ) }
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitRPZ( nAct )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, Iif( nAct==1,"Reindex ?", ;
                                        Iif( nAct==2,"Pack ?", "Zap ?" ) ) )
 Return Nil
 
 Static Function EndRPZ( nAct )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local hWnd, oWindow, aControls, i
 
    IF .NOT. msmode[ improc, 1 ]

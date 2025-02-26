@@ -51,7 +51,7 @@ LOCAL af, oBrw
 Return Nil
 
 Static Function SetField( oBrw )
-Local hDlg := getmodalhandle(), i
+Local hDlg := hwg_GetModalHandle(), i
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent,1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent,2], "CNDLM" ) ) != 0
       hwg_ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
@@ -61,7 +61,7 @@ Local hDlg := getmodalhandle(), i
 Return Nil
 
 Static Function ModiStru( nOper )
-Local oDlg := getmodalDlg(), hDlg := oDlg:handle
+Local oDlg := hwg_GetModalDlg(), hDlg := oDlg:handle
 Local oBrowse := oDlg:FindControl( ID_BROWSE )
 Local cName, cType, nLen, nDec := 0
 
@@ -211,6 +211,6 @@ Local oPBar, nSch := 0
          ENDIF
       ENDIF
    ENDIF
-   EndDialog( getmodalhandle() )
+   EndDialog( hwg_GetModalHandle() )
 Return Nil
 

@@ -187,7 +187,7 @@
 
 #xcommand SET KEY <nctrl>,<nkey> [ OF <oDlg> ] [ TO <func> ] ;
           => ;
-          SetDlgKey( <oDlg>, <nctrl>, <nkey>, <{func}> )
+          hwg_SetDlgKey( <oDlg>, <nctrl>, <nkey>, <{func}> )
 
 #translate LastKey( )  =>  HWG_LASTKEY( )
 

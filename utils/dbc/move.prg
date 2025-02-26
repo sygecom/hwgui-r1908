@@ -28,7 +28,7 @@ Local aModDlg
 Return Nil
 
 Static Function InitMove( nMove )
-Local hDlg := getmodalhandle(), cTitle
+Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_WriteStatus( HMainWindow():GetMdiActive(),3,"" )
    IF nMove == 1
       cTitle := "Input locate expression"
@@ -47,7 +47,7 @@ Local hDlg := getmodalhandle(), cTitle
 Return Nil
 
 Static Function EndMove( lOk, nMove )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local cExpres, nrec, key
 Local hWnd, oWindow, aControls, iCont
 

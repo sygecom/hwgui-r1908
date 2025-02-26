@@ -121,7 +121,7 @@ Local aModDlg, oFont
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE SAY "HWREPORT" OF aModDlg ID 101 COLOR hwg_VColor("0000FF")
-   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( getmodalhandle() )} ;
+   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( hwg_GetModalHandle() )} ;
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()

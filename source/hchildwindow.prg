@@ -188,7 +188,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
       RETURN onActivate(Self, wParam, lParam)
 
    CASE WM_HELP
-      RETURN onHelp(Self, wParam, lParam)
+      RETURN hwg_OnHelp(Self, wParam, lParam)
 
    CASE WM_HSCROLL
    CASE WM_VSCROLL

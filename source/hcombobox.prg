@@ -303,7 +303,7 @@ METHOD INIT() CLASS HComboBox
          //
          IF ::lText
             IF ::lEdit
-               hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
+               hwg_SetDlgItemText(hwg_GetModalHandle(), ::id, ::value)
                #ifdef __SYGECOM__
                #else
                hwg_SendMessage(::handle, CB_SELECTSTRING, -1, ::value)
@@ -636,7 +636,7 @@ METHOD Refresh() CLASS HComboBox
  */
    IF ::lText
       IF ::lEdit
-         hwg_SetDlgItemText(getmodalhandle(), ::id, ::value)
+         hwg_SetDlgItemText(hwg_GetModalHandle(), ::id, ::value)
          hwg_SendMessage(::handle, CB_SETEDITSEL, 0, ::SelStart)
       ENDIF
       #ifdef __XHARBOUR__

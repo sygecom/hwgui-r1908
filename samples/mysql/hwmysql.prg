@@ -140,7 +140,7 @@ FUNCTION About()
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
-   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {||EndDialog(getmodalhandle())} ;
+   REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {||EndDialog(hwg_GetModalHandle())} ;
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    oModDlg:Activate()
@@ -153,9 +153,9 @@ FUNCTION AboutDraw()
    LOCAL hDC
 
    pps := hwg_DefinePaintStru()
-   hDC := hwg_BeginPaint(getmodalhandle(), pps)
+   hDC := hwg_BeginPaint(hwg_GetModalHandle(), pps)
    hwg_DrawBitmap(hDC, hBitmap,, 0, 0)
-   hwg_EndPaint(getmodalhandle(), pps)
+   hwg_EndPaint(hwg_GetModalHandle(), pps)
 
 RETURN NIL
 
@@ -217,7 +217,7 @@ FUNCTION Connect()
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {||InitConnect()}
    DIALOG ACTIONS OF aModDlg ;
           ON 0, IDOK     ACTION {||EndConnect()} ;
-          ON 0, IDCANCEL ACTION {||EndDialog(getmodalhandle())}
+          ON 0, IDCANCEL ACTION {||EndDialog(hwg_GetModalHandle())}
 
    aModDlg:Activate()
 
@@ -225,7 +225,7 @@ RETURN NIL
 
 FUNCTION InitConnect()
 
-   LOCAL hDlg := getmodalhandle()
+   LOCAL hDlg := hwg_GetModalHandle()
 
    hwg_SetDlgItemText(hDlg, IDC_EDIT1, cServer)
    hwg_SetDlgItemText(hDlg, IDC_EDIT2, cUser)
@@ -242,7 +242,7 @@ RETURN .F.
 
 FUNCTION EndConnect()
 
-   LOCAL hDlg := getmodalhandle()
+   LOCAL hDlg := hwg_GetModalHandle()
 
    IF connHandle > 0
       sqlClose(connHandle)

@@ -653,7 +653,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
             ::GetParentForm(self):onEvent(msg, wparam, lparam)
          ELSE
-            DlgCommand(Self, wParam, lParam)
+            hwg_DlgCommand(Self, wParam, lParam)
          ENDIF
 
       ELSEIF msg == WM_KEYUP //.AND. !::oParent:lSuspendMsgsHandling
@@ -1042,7 +1042,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
       IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
          ::GetParentForm(self):OnEvent(msg, wparam, lparam)
       ELSE
-         DlgCommand(Self, wParam, lParam)
+         hwg_DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -3740,7 +3740,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
    ::isMouseOver := IIf(::lDispHead .AND. ::hTheme != NIL .AND. currxPos != 0, .T., .F.)
    nLastColumn := IIf(::lAdjRight, Len(::aColumns) - 1, Len(::aColumns))
 
-   // DlgMouseMove()
+   // hwg_DlgMouseMove()
    IF !::active .OR. Empty(::aColumns) .OR. ::x1 == NIL
       RETURN NIL
    ENDIF
