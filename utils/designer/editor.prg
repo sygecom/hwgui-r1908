@@ -108,9 +108,9 @@ HB_SYMBOL_UNUSED( oOptDesc )
    oNode := oIni:aItems[1]
    nStart := 1
    IF oNode:Find( "font",@nStart ) == Nil
-      oNode:Add( Font2XML( HDTheme():oFont ) )
+      oNode:Add( hwg_Font2XML( HDTheme():oFont ) )
    ELSE
-      oNode:aItems[nStart] := Font2XML( HDTheme():oFont )
+      oNode:aItems[nStart] := hwg_Font2XML( HDTheme():oFont )
    ENDIF
    IF oNode:Find( "themes",@nStart ) != Nil
       oNode := oNode:aItems[nStart]

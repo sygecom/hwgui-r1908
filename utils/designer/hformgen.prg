@@ -847,7 +847,7 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
             IF Lower(oCtrl:aProp[j, 1]) == "font"
                IF oCtrl:oFont != Nil
                   oNode1 := oStyle:Add( HXMLNode():New( "property",,{ { "name","font" } } ) )
-                  oNode1:Add( Font2XML( oCtrl:oFont ) )
+                  oNode1:Add( hwg_Font2XML( oCtrl:oFont ) )
                ENDIF
             ELSEIF Lower(oCtrl:aProp[j, 1]) == "atree"
                oNode1 := oStyle:Add( HXMLNode():New( "property",,{ { "name","atree" } } ) )
@@ -917,7 +917,7 @@ STATIC FUNCTION WriteForm( oForm )
          IF Lower(oForm:aProp[i, 1]) == "font"
             IF oForm:oDlg:oFont != Nil
                oNode1 := oStyle:Add( HXMLNode():New( "property",,{ { "name",oForm:aProp[i, 1] } } ) )
-               oNode1:Add( Font2XML( oForm:oDlg:oFont ) )
+               oNode1:Add( hwg_Font2XML( oForm:oDlg:oFont ) )
             ENDIF
          ELSEIF oForm:aProp[i, 2] != Nil
             IF oForm:aProp[i, 3] == "C"

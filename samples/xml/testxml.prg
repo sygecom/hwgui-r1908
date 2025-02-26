@@ -107,7 +107,7 @@ FUNCTION NewItem(nItem)
          oXmlNode := oXmlDoc:aItems[1]:Add(HXMLNode():New("item"))
          oXmlNode:SetAttribute("name", Trim(cName))
          oXmlNode:Add(Trim(cInfo))
-         oXMLNode:Add(Font2XML(IIf(oFontNew != Nil, oFontNew, oFont)))
+         oXMLNode:Add(hwg_Font2XML(IIf(oFontNew != Nil, oFontNew, oFont)))
          lIniChanged := .T.
 
          aMenu := oMainWindow:menu[1, 1]
@@ -129,7 +129,7 @@ FUNCTION NewItem(nItem)
                ENDIF
             ELSEIF oXmlNode:aItems[i]:title == "font"
                IF oFontNew != Nil
-                  oXMLNode:aItems[i] := Font2XML(oFontNew)
+                  oXMLNode:aItems[i] := hwg_Font2XML(oFontNew)
                   lIniChanged := .T.
                ENDIF
             ENDIF
@@ -169,7 +169,7 @@ FUNCTION FontFromXML(oXmlNode)
 
 RETURN HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
 
-FUNCTION Font2XML(oFont)
+FUNCTION hwg_Font2XML(oFont)
 
    LOCAL aAttr := {}
 

@@ -554,7 +554,7 @@ FUNCTION Func_name
    PARAMETERS oCtrl, nMeth
 
    PRIVATE cName
-   PRIVATE arr := ParseMethod( oCtrl:aMethods[nMeth, 2] )
+   PRIVATE arr := hwg_ParseMethod( oCtrl:aMethods[nMeth, 2] )
 
    IF Len(arr) == 1 .OR. ( Len(arr) == 2 .AND. ;
          Lower(Left(arr[1], 11)) == "parameters " )
