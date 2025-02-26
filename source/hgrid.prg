@@ -198,11 +198,11 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD Notify(lParam) CLASS HGrid
-RETURN ListViewNotify(Self, lParam)
+RETURN hwg_ListViewNotify(Self, lParam)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ListViewNotify(oCtrl, lParam)
+FUNCTION hwg_ListViewNotify(oCtrl, lParam)
 
    LOCAL aCord
 
@@ -256,3 +256,13 @@ FUNCTION ListViewNotify(oCtrl, lParam)
 RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LISTVIEWNOTIFY, HWG_LISTVIEWNOTIFY);
+#endif
+
+#pragma ENDDUMP

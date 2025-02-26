@@ -286,7 +286,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    IF nCode == LVN_KEYDOWN
    ENDIF
 
-   Res := ListViewNotify(Self, lParam)
+   Res := hwg_ListViewNotify(Self, lParam)
    IF hb_IsNumeric(Res)
       hwg_SetDlgResult(oParent:handle, Res)
       //RETURN 1
