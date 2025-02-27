@@ -647,7 +647,7 @@ Return cRes
 
 STATIC FUNCTION MacroError( e )
 
-   MsgStop( ErrorMessage(e),"Expression error" )
+   MsgStop( hwg_ErrorMessage(e),"Expression error" )
    BREAK
 RETURN .T.
 
