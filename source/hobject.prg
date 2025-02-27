@@ -47,7 +47,7 @@ RETURN
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ADDMETHOD(oObjectName, cMethodName, pFunction)
+FUNCTION hwg_AddMethod(oObjectName, cMethodName, pFunction)
 
    IF hb_IsObject(oObjectName) .AND. !Empty(cMethodName)
       IF !__ObjHasMsg(oObjectName, cMethodName)
@@ -60,7 +60,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ADDPROPERTY(oObjectName, cPropertyName, eNewValue)
+FUNCTION hwg_AddProperty(oObjectName, cPropertyName, eNewValue)
 
    IF hb_IsObject(oObjectName) .AND. !Empty(cPropertyName)
       IF !__objHasData(oObjectName, cPropertyName)
@@ -82,7 +82,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION REMOVEPROPERTY(oObjectName, cPropertyName)
+FUNCTION hwg_RemoveProperty(oObjectName, cPropertyName)
 
    IF hb_IsObject(oObjectName) .AND. !Empty(cPropertyName) .AND. __objHasData(oObjectName, cPropertyName)
        RETURN Empty(__objDelData(oObjectName, cPropertyName))
@@ -99,3 +99,15 @@ INIT PROCEDURE HWGINIT
 RETURN
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ADDMETHOD, HWG_ADDMETHOD);
+HB_FUNC_TRANSLATE(ADDPROPERTY, HWG_ADDPROPERTY);
+HB_FUNC_TRANSLATE(REMOVEPROPERTY, HWG_REMOVEPROPERTY);
+#endif
+
+#pragma ENDDUMP
