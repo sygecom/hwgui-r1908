@@ -124,6 +124,7 @@ METHOD INIT() CLASS HNiceButton
    ENDIF
    RETURN NIL
 
+#if 0 // old code for reference
 FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 
    LOCAL oBtn
@@ -152,6 +153,66 @@ FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 
    ENDIF
    RETURN .F.
+#else
+FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
+
+   LOCAL oBtn
+
+   SWITCH msg
+
+   //CASE WM_CREATE
+   //   EXIT
+
+   CASE WM_MOUSEMOVE
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MouseMove(wParam, lParam)
+      ENDIF
+      EXIT
+
+   CASE WM_PAINT
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:Paint()
+      ENDIF
+      EXIT
+
+   CASE WM_LBUTTONDOWN
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MDown()
+      ENDIF
+      EXIT
+
+   CASE WM_LBUTTONUP
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MUp()
+      ENDIF
+      EXIT
+
+   //CASE WM_LBUTTONDBLCLK
+   //   IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+   //   ENDIF
+   //   EXIT
+
+   CASE WM_DESTROY
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:END()
+         RETURN .T.
+      ENDIF
+      EXIT
+
+   //CASE WM_MOVING
+   //   IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+   //   ENDIF
+   //   EXIT
+
+   CASE WM_SIZE
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:Size()
+      ENDIF
+
+   ENDSWITCH
+
+RETURN .F.
+#endif
 
 METHOD Create() CLASS HNICEButton
 
