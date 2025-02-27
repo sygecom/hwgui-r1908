@@ -296,7 +296,7 @@ METHOD Paint(lpdis) CLASS HDrawShape
 
 
 //-----------------------------------------------------------------
-FUNCTION Rect(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST)
+FUNCTION hwg_Rect(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST)
 
    IF lPress == NIL
       lPress := .F.
@@ -489,3 +489,12 @@ METHOD Paint(lpdis) CLASS HContainer
 
 // END NEW CLASSE
 
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RECT, HWG_RECT);
+#endif
+
+#pragma ENDDUMP

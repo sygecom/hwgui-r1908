@@ -1143,7 +1143,7 @@ STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
          ENDIF
        NEXT
      ELSE
-      nPageAcel := FindTabAccelerator(oCtrl, nKeyDown)
+      nPageAcel := hwg_FindTabAccelerator(oCtrl, nKeyDown)
       IF nPageAcel == 0
          hwg_MsgBeep()
       ENDIF
@@ -1153,7 +1153,7 @@ RETURN nPage
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION FindTabAccelerator(oPage, nKey)
+FUNCTION hwg_FindTabAccelerator(oPage, nKey)
   
    LOCAL i
    LOCAL pos
@@ -1356,3 +1356,13 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
 RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(FINDTABACCELERATOR, HWG_FINDTABACCELERATOR);
+#endif
+
+#pragma ENDDUMP

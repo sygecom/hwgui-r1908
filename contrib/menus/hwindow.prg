@@ -361,7 +361,7 @@ Local oWnd, oBtn, oitem
       DlgEnterIdle( oWnd, wParam, lParam )
 
    elseif msg == WM_CLOSE
-      ReleaseAllWindows(oWnd,hWnd)
+      hwg_ReleaseAllWindows(oWnd,hWnd)
 
    elseif msg == WM_DESTROY
       //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")
@@ -835,7 +835,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
    nReturn := NIL
 Return (nReturn)
 
-function ReleaseAllWindows( oWnd, hWnd )
+function hwg_ReleaseAllWindows( oWnd, hWnd )
 Local oItem, iCont, nCont
 
    //  Vamos mandar destruir as filhas
@@ -1015,7 +1015,7 @@ Local oWndClient
       endif
    
    elseif msg == WM_CLOSE
-      ReleaseAllWindows(oWnd,hWnd)
+      hwg_ReleaseAllWindows(oWnd,hWnd)
    
    elseif msg == WM_DESTROY
       //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")

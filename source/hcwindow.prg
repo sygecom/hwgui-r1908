@@ -1140,7 +1140,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       ENDIF
    ENDIF
    IF oWnd:nScrollBars > -1 .AND. oWnd:lAutoScroll .AND. !Empty(oWnd:Type)
-      onMove(oWnd)
+      hwg_OnMove(oWnd)
       oWnd:ResetScrollbars()
       oWnd:SetupScrollbars()
    ENDIF
@@ -1315,7 +1315,7 @@ FUNCTION hwg_FindAccelerator(oCtrl, lParam)
    nlen := Len(oCtrl:aControls)
    FOR i := 1 TO nLen
       IF oCtrl:aControls[i]:classname = "HTAB"
-         IF (pos := FindTabAccelerator(oCtrl:aControls[i], lParam)) > 0 .AND. ;
+         IF (pos := hwg_FindTabAccelerator(oCtrl:aControls[i], lParam)) > 0 .AND. ;
             oCtrl:aControls[i]:Pages[pos]:Enabled
             oCtrl:aControls[i]:SetTab(pos)
             RETURN oCtrl:aControls[i]

@@ -167,7 +167,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
       RETURN onEraseBk(Self, wParam)
 
    CASE WM_MOVE
-      RETURN onMove(Self)
+      RETURN hwg_OnMove(Self)
 
    CASE WM_SYSCOMMAND
       RETURN onSysCommand(Self, wParam, lParam)
@@ -573,10 +573,10 @@ STATIC FUNCTION onCloseQuery(o)
 
    IF hb_IsBlock(o:bCloseQuery)
       IF Eval(o:bCloseQuery)
-         ReleaseAllWindows(o:handle)
+         hwg_ReleaseAllWindows(o:handle)
       ENDIF
    ELSE
-      ReleaseAllWindows(o:handle)
+      hwg_ReleaseAllWindows(o:handle)
    ENDIF
 
 RETURN -1

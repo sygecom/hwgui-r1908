@@ -176,7 +176,7 @@ RETURN IIf(Len(::aWindows) > 0, IIf(::aWindows[1]:Type == WND_MAIN, ::aWindows[1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ReleaseAllWindows(hWnd)
+FUNCTION hwg_ReleaseAllWindows(hWnd)
 
    LOCAL oItem
 
@@ -193,7 +193,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION onMove(oWnd)
+FUNCTION hwg_OnMove(oWnd)
 
    LOCAL aControls := hwg_GetWindowRect(oWnd:handle)
 
@@ -216,3 +216,13 @@ FUNCTION onMove(oWnd)
 RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RELEASEALLWINDOWS, HWG_RELEASEALLWINDOWS);
+#endif
+
+#pragma ENDDUMP

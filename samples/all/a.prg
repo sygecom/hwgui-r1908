@@ -623,7 +623,7 @@ INIT DIALOG oDlg TITLE "Sample HRect"    ;
        @  10,  10, 200, 100 RECT oR2 of oDlg RECT_STYLE 3
        @  10, 130, 100, 230 RECT oR3 of oDlg PRESS RECT_STYLE 2
 
-       Rect(oDlg, 10, 250, 590, 320, , 1 )
+       hwg_Rect(oDlg, 10, 250, 590, 320, , 1 )
 
    oDlg:Activate()
 

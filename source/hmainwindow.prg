@@ -42,7 +42,7 @@ CLASS VAR aMessages INIT { ;
                            { ;
                              {|o, w, l|onCommand(o, w, l)},        ;
                              {|o, w|onEraseBk(o, w)},              ;
-                             {|o|onMove(o)},                       ;
+                             {|o|hwg_OnMove(o)},                       ;
                              {|o, w, l|onSize(o, w, l)},           ;
                              {|o, w, l|onSysCommand(o, w, l)},     ;
                              {|o, w, l|onNotifyIcon(o, w, l)},     ;
@@ -338,7 +338,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
    CASE WM_MOVE
       IF !::lSuspendMsgsHandling
-         RETURN onMove(Self)
+         RETURN hwg_OnMove(Self)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
@@ -783,10 +783,10 @@ STATIC FUNCTION onCloseQuery(o)
 
    IF hb_IsBlock(o:bCloseQuery)
       IF Eval(o:bCloseQuery)
-         ReleaseAllWindows(o:handle)
+         hwg_ReleaseAllWindows(o:handle)
       ENDIF
    ELSE
-      ReleaseAllWindows(o:handle)
+      hwg_ReleaseAllWindows(o:handle)
    ENDIF
 
 RETURN -1

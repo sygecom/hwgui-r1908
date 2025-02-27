@@ -1335,7 +1335,7 @@ static void CALLBACK s_timerProc(HWND hWnd, UINT message, UINT idTimer, DWORD dw
 
   if (s_pSymTest == NULL)
   {
-    s_pSymTest = hb_dynsymGetCase("TIMERPROC");
+    s_pSymTest = hb_dynsymGetCase("HWG_TIMERPROC");
   }
 
   if (hb_dynsymIsFunction(s_pSymTest))

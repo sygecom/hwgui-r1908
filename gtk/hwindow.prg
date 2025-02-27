@@ -148,7 +148,7 @@ CLASS HMainWindow INHERIT HWindow
          {|o,w|onSysCommand(o,w)},         ;
          {|o,w,l|onNotifyIcon(o,w,l)},     ;
          {|o,w,l|onEnterIdle(o,w,l)},      ;
-         {|o|ReleaseAllWindows(o:handle)}, ;
+         {|o|hwg_ReleaseAllWindows(o:handle)}, ;
          {|o|onDestroy(o)}                 ;
       } ;
    }
@@ -336,7 +336,7 @@ Local i
 Return -1
 */
 
-Function ReleaseAllWindows( hWnd )
+Function hwg_ReleaseAllWindows( hWnd )
 Local oItem, iCont, nCont
 /*
    //  Vamos mandar destruir as filhas
@@ -522,3 +522,13 @@ Function hwg_CenterWindow( oWnd )
    hwg_MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
 Return Nil
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RELEASEALLWINDOWS, HWG_RELEASEALLWINDOWS);
+#endif
+
+#pragma ENDDUMP

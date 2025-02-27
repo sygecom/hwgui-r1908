@@ -35,7 +35,7 @@ CLASS VAR aMessages INIT { ;
                              {|o, w, l|HB_SYMBOL_UNUSED(w), onMdiCreate(o, l)},        ;
                              {|o, w|onMdiCommand(o, w)},         ;
                              {|o, w|onEraseBk(o, w)},            ;
-                             {|o|onMove(o)},                   ;
+                             {|o|hwg_OnMove(o)},                   ;
                              {|o, w, l|onSize(o, w, l)},           ;
                              {|o, w|onMdiNcActivate(o, w)},      ;
                              {|o, w, l|onSysCommand(o, w, l)},         ;
@@ -131,7 +131,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ENDIF
 
    IF lShow
-      //-onMove(Self)
+      //-hwg_OnMove(Self)
       IF lMinimized .OR. ::WindowState == SW_SHOWMINIMIZED
          ::Minimize()
       ELSEIF ::WindowState == SW_SHOWMAXIMIZED .AND. !::IsMaximized()
@@ -284,7 +284,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       RETURN onEraseBk(Self, wParam)
 
    CASE WM_MOVE
-      RETURN onMove(Self)
+      RETURN hwg_OnMove(Self)
 
    CASE WM_SIZE
       RETURN onSize(Self, wParam, lParam)
@@ -554,7 +554,7 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEACCEL), 0)
    IF oWnd:WindowState > 0
-      onMove(oWnd)
+      hwg_OnMove(oWnd)
    ENDIF
 
 RETURN -1
