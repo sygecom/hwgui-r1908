@@ -1,7 +1,7 @@
 #include "hwgui.ch"
 #include "nice.h"
 
-REQUEST nicebuttproc
+REQUEST hwg_NiceButtProc
 
 FUNCTION Main()
 

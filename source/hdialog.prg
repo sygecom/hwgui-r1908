@@ -822,13 +822,13 @@ RETURN 1
 
 FUNCTION hwg_DlgMouseMove()
 
-   LOCAL oBtn := SetNiceBtnSelected()
+   LOCAL oBtn := hwg_SetNiceBtnSelected()
 
    IF hb_IsObject(oBtn) .AND. !oBtn:lPress
       oBtn:state := OBTN_NORMAL
       hwg_InvalidateRect(oBtn:handle, 0)
       // hwg_PostMessage(oBtn:handle, WM_PAINT, 0, 0)
-      SetNiceBtnSelected(NIL)
+      hwg_SetNiceBtnSelected(NIL)
    ENDIF
 
 RETURN 0

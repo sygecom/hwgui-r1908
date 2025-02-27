@@ -124,7 +124,7 @@ METHOD INIT() CLASS HNiceButton
    ENDIF
    RETURN NIL
 
-FUNCTION NICEBUTTPROC(hBtn, msg, wParam, lParam)
+FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 
    LOCAL oBtn
    IF msg != WM_CREATE
@@ -191,13 +191,13 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
    HB_SYMBOL_UNUSED(lParam)
 
    IF ::lFlat .AND. ::state != OBTN_INIT
-      otmp := SetNiceBtnSelected()
+      otmp := hwg_SetNiceBtnSelected()
 
       IF otmp != NIL .AND. otmp:id != ::id .AND. !otmp:lPress
          otmp:state := OBTN_NORMAL
          hwg_InvalidateRect(otmp:handle, 0)
          hwg_PostMessage(otmp:handle, WM_PAINT, 0, 0)
-         SetNiceBtnSelected(NIL)
+         hwg_SetNiceBtnSelected(NIL)
       ENDIF
 
       IF ::state == OBTN_NORMAL
@@ -206,7 +206,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
          // aBtn[CTRL_HANDLE] := hBtn
          hwg_InvalidateRect(::handle, 0)
          hwg_PostMessage(::handle, WM_PAINT, 0, 0)
-         SetNiceBtnSelected(Self)
+         hwg_SetNiceBtnSelected(Self)
       ENDIF
    ENDIF
 
@@ -221,7 +221,7 @@ METHOD MUp() CLASS HNICEButton
          hwg_PostMessage(::handle, WM_PAINT, 0, 0)
       ENDIF
       IF !::lFlat
-         SetNiceBtnSelected(NIL)
+         hwg_SetNiceBtnSelected(NIL)
       ENDIF
       IF hb_IsBlock(::bClick)
          Eval(::bClick, ::oParent, ::id)
@@ -237,7 +237,7 @@ METHOD MDown() CLASS HNICEButton
 
       hwg_InvalidateRect(::handle, 0, 0)
       hwg_PostMessage(::handle, WM_PAINT, 0, 0)
-      SetNiceBtnSelected(Self)
+      hwg_SetNiceBtnSelected(Self)
    ENDIF
 
    RETURN Self
@@ -303,7 +303,7 @@ METHOD RELEASE() CLASS HNiceButton
 
    RETURN NIL
 
-FUNCTION SetNiceBtnSelected(oBtn)
+FUNCTION hwg_SetNiceBtnSelected(oBtn)
 
    LOCAL otmp := HNiceButton() :oSelected
 
@@ -313,3 +313,13 @@ FUNCTION SetNiceBtnSelected(oBtn)
 
    RETURN otmp
 
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(NICEBUTTPROC, HWG_NICEBUTTPROC);
+HB_FUNC_TRANSLATE(SETNICEBTNSELECTED, HWG_SETNICEBTNSELECTED);
+#endif
+
+#pragma ENDDUMP
