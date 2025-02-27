@@ -82,7 +82,7 @@ FUNCTION Main()
        }, "File", 120}, ;
      {{||hwg_MsgInfo("Help")}, "Help", 121} ;
    }
-   BuildMenu(aMenu, hWnd, aMainWindow)
+   hwg_BuildMenu(aMenu, hWnd, aMainWindow)
 */
 
    ACTIVATE WINDOW oMainWindow

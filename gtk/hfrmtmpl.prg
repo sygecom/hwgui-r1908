@@ -666,7 +666,7 @@ MEMVAR aImages, lEditLabels, aParts
          ENDIF
 
       ELSEIF cPName == "atree"
-         BuildMenu( xProperty,oForm:oDlg:handle,oForm:oDlg )
+         hwg_BuildMenu( xProperty,oForm:oDlg:handle,oForm:oDlg )
       ELSE
         IF cPName == "tooltip"
             cPName := "c" + cPName
