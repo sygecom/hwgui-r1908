@@ -56,7 +56,7 @@ FUNCTION Main()
          MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()
          MENUITEM "&Windows print" ;
-               ACTION IIf(OpenReport("a.rpt", "Simple"), PrintReport(,, .T.), .F.)
+               ACTION IIf(hwg_OpenReport("a.rpt", "Simple"), hwg_PrintReport(,, .T.), .F.)
          MENUITEM "&Print Preview" ACTION PrnTest()
          MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
          MENUITEM "&Command ProgressBar" ACTION TestProgres()

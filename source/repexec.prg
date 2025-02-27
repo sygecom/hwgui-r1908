@@ -24,15 +24,15 @@ REQUEST DBSkip
 REQUEST DBGoTop
 REQUEST DBCloseArea
 
-FUNCTION ClonePaintRep(ar)
+FUNCTION hwg_ClonePaintRep(ar)
    s_aPaintRep := AClone(ar)
    RETURN NIL
 
-FUNCTION SetPaintRep(ar)
+FUNCTION hwg_SetPaintRep(ar)
    s_aPaintRep := ar
    RETURN NIL
 
-FUNCTION OpenReport(fname, repName)
+FUNCTION hwg_OpenReport(fname, repName)
    LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
    LOCAL han
    LOCAL itemName, aItem, res := .T.
@@ -161,7 +161,7 @@ ELSE
 ENDIF
 RETURN res
 
-FUNCTION RecalcForm(aPaintRep, nFormWidth)
+FUNCTION hwg_RecalcForm(aPaintRep, nFormWidth)
    LOCAL hDC, aMetr, aItem, i
    hDC := hwg_GetDC(hwg_GetActiveWindow())
    aMetr := hwg_GetDeviceArea(hDC)
@@ -179,7 +179,7 @@ FUNCTION RecalcForm(aPaintRep, nFormWidth)
    ENDIF
    RETURN NIL
 
-FUNCTION PrintReport(printerName, oPrn, lPreview)
+FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
    LOCAL oPrinter := IIf(oPrn != NIL, oPrn, HPrinter():New(printerName))
    LOCAL aPrnCoors, prnXCoef, prnYCoef
    LOCAL iItem, aItem, nLineStartY := 0, nLineHeight := 0, nPHStart := 0
@@ -296,7 +296,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                   aItem[ITEM_STATE] := 1
                   FOR i := 1 TO iPH - 1
                      IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                        PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+                        hwg_PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
                      ENDIF
                   NEXT
                ENDIF
@@ -305,7 +305,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                   // IF iPH == 0
                   FOR i := 1 TO iSL - 1
                      IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                        PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+                        hwg_PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
                      ENDIF
                   NEXT
                   // ENDIF
@@ -330,7 +330,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
             ELSEIF aItem[ITEM_CAPTION] == "EL"
                FOR i := iSL + 1 TO iEL - 1
                   IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                     PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+                     hwg_PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
                   ENDIF
                NEXT
                IF !ScriptExecute(aItem)
@@ -376,7 +376,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
             ELSEIF aItem[ITEM_CAPTION] == "EPF"
                FOR i := iPF + 1 TO iEPF - 1
                   IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-                     PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+                     hwg_PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
                   ENDIF
                NEXT
                IF !lLastCycle
@@ -415,14 +415,14 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
                ENDIF
             ENDIF
             IF aItem[ITEM_TYPE] != TYPE_BITMAP
-               PrintItem(oPrinter, s_aPaintRep, aItem, prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+               hwg_PrintItem(oPrinter, s_aPaintRep, aItem, prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
             ENDIF
          ENDIF
          iItem++
       ENDDO
       FOR i := IIf(iSL == 0, 1, IIf(iDF > 0, iDF + 1, IIf(iPF > 0, iEPF + 1, iEL + 1))) TO Len(s_aPaintRep[FORM_ITEMS])
          IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-            PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
+            hwg_PrintItem(oPrinter, s_aPaintRep, s_aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, IIf(lAddMode, nYadd, 0), .T.)
          ENDIF
       NEXT
       IF lFinish
@@ -451,7 +451,7 @@ FUNCTION PrintReport(printerName, oPrn, lPreview)
 
    RETURN .T.
 
-FUNCTION PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
+FUNCTION hwg_PrintItem(oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc)
    LOCAL x1 := aItem[ITEM_X1], y1 := aItem[ITEM_Y1] + nYadd, x2, y2
    LOCAL hBitmap, stroka
 
@@ -512,4 +512,17 @@ STATIC FUNCTION ScriptExecute(aItem)
    ENDIF
    RETURN .T.
 
+#pragma BEGINDUMP
 
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(CLONEPAINTREP, HWG_CLONEPAINTREP);
+HB_FUNC_TRANSLATE(SETPAINTREP, HWG_SETPAINTREP);
+HB_FUNC_TRANSLATE(OPENREPORT, HWG_OPENREPORT);
+HB_FUNC_TRANSLATE(RECALCFORM, HWG_RECALCFORM);
+HB_FUNC_TRANSLATE(PRINTREPORT, HWG_PRINTREPORT);
+HB_FUNC_TRANSLATE(PRINTITEM, HWG_PRINTITEM);
+#endif
+
+#pragma ENDDUMP

@@ -70,7 +70,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
          MENUITEM "Save &as..." ID IDM_SAVEAS ACTION FileDlg(.F.)
          SEPARATOR
          MENUITEM "&Print static" ID IDM_PRINT ACTION PrintRpt()
-         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (ClonePaintRep(aPaintRep),PrintReport(,,.T.))
+         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (hwg_ClonePaintRep(aPaintRep),hwg_PrintReport(,,.T.))
          SEPARATOR
          MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
       ENDMENU
