@@ -260,9 +260,9 @@ FUNCTION novo(tipo)
     //
     ADD STATUS TO o&I ID IDC_STATUS PARTS 50, 50, 400, 12, 90, 95, 90
  o&I:ACTIVATE()
- WriteStatus(HMainWIndow():GetMdiActive(), 3,"Novo Arquivo")
- WriteStatus(HMainWIndow():GetMdiActive(), 1,"Lin:      0")
- WriteStatus(HMainWIndow():GetMdiActive(), 2,"Col:      0")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 3,"Novo Arquivo")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1,"Lin:      0")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2,"Col:      0")
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle)
  hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
@@ -351,9 +351,9 @@ FUNCTION Texto()
       hwg_SetFocus(hwg_GetDlgItem(oEdit&i, ID_TEXTO))
    auto++
  o&I:ACTIVATE()
- WriteStatus(o&I, 3, vText)
- WriteStatus(o&I, 1, "Lin:      0")
- WriteStatus(o&I, 2, "Col:      0")
+ hwg_WriteStatus(o&I, 3, vText)
+ hwg_WriteStatus(o&I, 1, "Lin:      0")
+ hwg_WriteStatus(o&I, 2, "Col:      0")
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle )
  // colocando cores nas funcoes
@@ -382,14 +382,14 @@ if maxi
 endif
  if HMainWIndow():GetMdiActive() != nil
     dats := dtoc(date())
-    WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
-    WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
+    hwg_WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
+    hwg_WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
     if !set(_SET_INSERT )
        strinsert := "INSERT ON "
     else
         strinsert := "INSERT OFF "
     endif
-    WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
+    hwg_WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
 
  endif
 
@@ -458,15 +458,15 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      Linha := hwg_SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
      coluna := coluna - hwg_SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
      //
-     WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
-     WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + str(linha, 6))
-     WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:" + str(coluna, 6))
+     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
+     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + str(linha, 6))
+     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:" + str(coluna, 6))
       //
      if oEdit:lChanged
-          WriteStatus(HMainWIndow():GetMdiActive(), 4, "*")
+          hwg_WriteStatus(HMainWIndow():GetMdiActive(), 4, "*")
           alterado := .T.
      else
-         WriteStatus(HMainWIndow():GetMdiActive(), 4, " ")
+         hwg_WriteStatus(HMainWIndow():GetMdiActive(), 4, " ")
      endif
      //
      if nvirtCode = 27

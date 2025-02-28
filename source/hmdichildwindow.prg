@@ -35,7 +35,7 @@ CLASS VAR aMessages INIT { ;
                              {|o, w, l|HB_SYMBOL_UNUSED(w), onMdiCreate(o, l)},        ;
                              {|o, w|onMdiCommand(o, w)},         ;
                              {|o, w|onEraseBk(o, w)},            ;
-                             {|o|onMove(o)},                   ;
+                             {|o|hwg_OnMove(o)},                   ;
                              {|o, w, l|onSize(o, w, l)},           ;
                              {|o, w|onMdiNcActivate(o, w)},      ;
                              {|o, w, l|onSysCommand(o, w, l)},         ;
@@ -82,7 +82,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::lSizeBox := hwg_BitAnd(::style, WS_SIZEBOX) != 0
    ::WindowState := IIf(lMinimized, SW_SHOWMINIMIZED, IIf(lMaximized, SW_SHOWMAXIMIZED, IIf(lShow, SW_SHOWNORMAL, 0)))
 
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    // hwg_CreateMdiChildWindow(Self)
 
    ::Type := WND_MDICHILD
@@ -113,11 +113,11 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ENDIF
 
    // is necessary for set zorder control
-   //InitControls(Self) ??? maybe
+   //hwg_InitControls(Self) ??? maybe
 
    /*  in ONMDICREATE
    /*
-   InitObjects(Self, .T.)
+   hwg_InitObjects(Self, .T.)
    IF hb_IsBlock(::bInit)
       Eval(::bInit, Self)
    ENDIF
@@ -131,7 +131,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ENDIF
 
    IF lShow
-      //-onMove(Self)
+      //-hwg_OnMove(Self)
       IF lMinimized .OR. ::WindowState == SW_SHOWMINIMIZED
          ::Minimize()
       ELSEIF ::WindowState == SW_SHOWMAXIMIZED .AND. !::IsMaximized()
@@ -215,7 +215,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
          IF ::nScrollBars != -1
              ::ScrollHV(Self, msg, wParam, lParam)
          ENDIF
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ELSEIF msg == WM_NOTIFY .AND.!::lSuspendMsgsHandling
          IF (oCtrl := ::FindControl(, hwg_GetFocus())) != NIL .AND. oCtrl:ClassName != "HTAB"
             hwg_SendMessage(oCtrl:handle, msg, wParam, lParam)
@@ -284,7 +284,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       RETURN onEraseBk(Self, wParam)
 
    CASE WM_MOVE
-      RETURN onMove(Self)
+      RETURN hwg_OnMove(Self)
 
    CASE WM_SIZE
       RETURN onSize(Self, wParam, lParam)
@@ -310,7 +310,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       IF ::nScrollBars != -1
          ::ScrollHV(Self, msg, wParam, lParam)
       ENDIF
-      onTrackScroll(Self, msg, wParam, lParam)
+      hwg_OnTrackScroll(Self, msg, wParam, lParam)
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
    CASE WM_NOTIFY
@@ -503,7 +503,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       // accelerator MDICHILD
       IF Len(HWindow():aWindows) > 2 .AND. ((oChild := oWnd):Type == WND_MDICHILD .OR. ;
          !Empty(oChild := oWnd:GetMdiActive()))
-         IF (oCtrl := FindAccelerator(oChild, lParam)) != NIL
+         IF (oCtrl := hwg_FindAccelerator(oChild, lParam)) != NIL
             oCtrl:SetFocus()
             hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
             RETURN - 2
@@ -539,8 +539,8 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    IF oWnd:oFont != NIL
       hwg_SendMessage(oWnd:handle, WM_SETFONT, oWnd:oFont:handle, 0)
    ENDIF
-   InitControls(oWnd)
-   InitObjects(oWnd, .T.)
+   hwg_InitControls(oWnd)
+   hwg_InitObjects(oWnd, .T.)
    IF oWnd:bInit != NIL
       IF !hb_IsNumeric(nReturn := Eval(oWnd:bInit, oWnd))
          IF hb_IsLogical(nReturn) .AND. !nReturn
@@ -554,7 +554,7 @@ STATIC FUNCTION onMdiCreate(oWnd, lParam)
    hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEFOCUS), 0)
    hwg_SendMessage(oWnd:handle, WM_UPDATEUISTATE, hwg_MAKELONG(UIS_CLEAR, UISF_HIDEACCEL), 0)
    IF oWnd:WindowState > 0
-      onMove(oWnd)
+      hwg_OnMove(oWnd)
    ENDIF
 
 RETURN -1

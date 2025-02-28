@@ -141,15 +141,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
       ENDIF
    ENDIF
    IF msg == WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       IF wParam == VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_LEFT .OR. wParam == VK_UP
-         GetSkip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
          RETURN 0
       ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-         GetSkip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN 0
       ELSEIF (wParam == VK_RETURN) // .OR. wParam == VK_SPACE)
          IF ::lEnter
@@ -157,21 +157,21 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
             ::VALID()
             RETURN 0 //-1
          ELSE
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYUP
-      ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
 
     ELSEIF msg == WM_GETDLGCODE .AND. !Empty(lParam)
       IF wParam == VK_RETURN .OR. wParam == VK_TAB
            RETURN -1
       ELSEIF wParam == VK_ESCAPE .AND. (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
          RETURN DLGC_WANTMESSAGE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE .OR. ;
-         GETDLGMESSAGE(lParam) == WM_SYSCHAR
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE .OR. ;
+         hwg_GetDlgMessage(lParam) == WM_SYSCHAR
          RETURN -1
       ENDIF
       RETURN DLGC_WANTMESSAGE //+ DLGC_WANTCHARS
@@ -191,18 +191,18 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
    SWITCH msg
 
    CASE WM_KEYDOWN
-      //IF ProcKeyList(Self, wParam)
+      //IF hwg_ProcKeyList(Self, wParam)
       SWITCH wParam
       CASE VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       CASE VK_LEFT
       CASE VK_UP
-         GetSkip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
          RETURN 0
       CASE VK_RIGHT
       CASE VK_DOWN
-         GetSkip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN 0
       CASE VK_RETURN // .OR. wParam == VK_SPACE)
          IF ::lEnter
@@ -210,14 +210,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
             ::VALID()
             RETURN 0 //-1
          ELSE
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDSWITCH
       EXIT
 
    CASE WM_KEYUP
-      ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
+      hwg_ProcKeyList(Self, wParam) // working in MDICHILD AND DIALOG
       EXIT
 
    CASE WM_GETDLGCODE
@@ -227,8 +227,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
          ELSEIF wParam == VK_ESCAPE .AND. ;
             (oCtrl := ::GetParentForm:FindControl(IDCANCEL)) != NIL .AND. !oCtrl:IsEnabled()
             RETURN DLGC_WANTMESSAGE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE .OR. GETDLGMESSAGE(lParam) == WM_SYSCHAR
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE .OR. hwg_GetDlgMessage(lParam) == WM_SYSCHAR
             RETURN -1
          ENDIF
          RETURN DLGC_WANTMESSAGE //+ DLGC_WANTCHARS
@@ -320,7 +320,7 @@ METHOD killFocus() CLASS HCheckButton
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
 
-   IF !CheckFocus(Self, .T.)
+   IF !hwg_CheckFocus(Self, .T.)
       RETURN .T.
    ENDIF
 
@@ -331,7 +331,7 @@ METHOD killFocus() CLASS HCheckButton
          nSkip := 1
       ENDIF
       IF nSkip != 0
-         GetSkip(::oparent, ::handle, , nSkip)
+         hwg_GetSkip(::oparent, ::handle, , nSkip)
       ENDIF
    ENDIF
    IF hwg_GetKeyState(VK_RETURN) < 0 .AND. ::lEnter
@@ -353,7 +353,7 @@ METHOD When() CLASS HCheckButton
    LOCAL res := .T.
    LOCAL nSkip
 
-   IF !CheckFocus(Self, .F.)
+   IF !hwg_CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
 
@@ -369,7 +369,7 @@ METHOD When() CLASS HCheckButton
       ENDIF
       ::lnoValid := !res
       IF !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ENDIF
    ENDIF
 
@@ -383,7 +383,7 @@ METHOD Valid() CLASS HCheckButton
 
    LOCAL l := hwg_SendMessage(::handle, BM_GETCHECK, 0, 0)
 
-   IF !CheckFocus(Self, .T.) .OR. ::lnoValid
+   IF !hwg_CheckFocus(Self, .T.) .OR. ::lnoValid
       RETURN .T.
    ENDIF
 
@@ -406,7 +406,7 @@ METHOD Valid() CLASS HCheckButton
    ENDIF
 
    IF Empty(hwg_GetFocus())
-      GetSkip(::oParent, ::handle,, ::nGetSkip)
+      hwg_GetSkip(::oParent, ::handle,, ::nGetSkip)
    ENDIF
 
    RETURN .T.

@@ -169,9 +169,9 @@ METHOD Init() CLASS HGridEx
             aBmpSize := hwg_GetBitmapSize(aButton[nPos])
 
             IF aBmpSize[3] == 24
-               Imagelist_Add(::hIm, aButton[nPos])
+               hwg_Imagelist_Add(::hIm, aButton[nPos])
             ELSE
-               Imagelist_Add(::hIm, aButton[nPos])
+               hwg_Imagelist_Add(::hIm, aButton[nPos])
             ENDIF
 
          NEXT
@@ -286,7 +286,7 @@ METHOD Notify(lParam) CLASS HGRIDEX
    IF nCode == LVN_KEYDOWN
    ENDIF
 
-   Res := ListViewNotify(Self, lParam)
+   Res := hwg_ListViewNotify(Self, lParam)
    IF hb_IsNumeric(Res)
       hwg_SetDlgResult(oParent:handle, Res)
       //RETURN 1

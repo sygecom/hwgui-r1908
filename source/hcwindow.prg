@@ -1036,7 +1036,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
 
    LOCAL oCtrl
 
-   //lParam := HANDLETOPTR(lParam)
+   //lParam := hwg_HandleToPtr(lParam)
    oCtrl := oWnd:FindControl(, lParam)
 
    IF oCtrl != NIL .AND. !hb_IsNumeric(oCtrl)
@@ -1059,16 +1059,16 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
          /*
          IF (oCtrl:classname $ "HCHECKBUTTON" .AND. (!oCtrl:lnoThemes .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest))) .OR.;
             (oCtrl:classname $ "HGROUP*HRADIOGROUP*HRADIOBUTTON" .AND. !oCtrl:lnoThemes)
-                RETURN GetBackColorParent(oCtrl, , .T.):handle
+                RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
              ENDIF
          */
          IF __ObjHasMsg(oCtrl, "PAINT") .OR. oCtrl:lnoThemes .OR. ;
             (oCtrl:winClass == "BUTTON" .AND. oCtrl:classname != "HCHECKBUTTON")
             RETURN hwg_GetStockObject(NULL_BRUSH)
          ENDIF
-         RETURN GetBackColorParent(oCtrl, , .T.):handle
+         RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
       ELSEIF oCtrl:winClass == "BUTTON" .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest)
-         RETURN GetBackColorParent(oCtrl, , .T.):handle
+         RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
       ENDIF
    ENDIF
 
@@ -1140,7 +1140,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       ENDIF
    ENDIF
    IF oWnd:nScrollBars > -1 .AND. oWnd:lAutoScroll .AND. !Empty(oWnd:Type)
-      onMove(oWnd)
+      hwg_OnMove(oWnd)
       oWnd:ResetScrollbars()
       oWnd:SetupScrollbars()
    ENDIF
@@ -1164,7 +1164,7 @@ RETURN -1
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-FUNCTION onTrackScroll(oWnd, msg, wParam, lParam)
+FUNCTION hwg_OnTrackScroll(oWnd, msg, wParam, lParam)
 
    LOCAL oCtrl := oWnd:FindControl(, lParam)
 
@@ -1190,7 +1190,7 @@ FUNCTION onTrackScroll(oWnd, msg, wParam, lParam)
 
 RETURN -1
 #else
-FUNCTION onTrackScroll(oWnd, msg, wParam, lParam)
+FUNCTION hwg_OnTrackScroll(oWnd, msg, wParam, lParam)
 
    LOCAL oCtrl := oWnd:FindControl(, lParam)
 
@@ -1223,26 +1223,26 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ProcKeyList(oCtrl, wParam, oMain)
+FUNCTION hwg_ProcKeyList(oCtrl, wParam, oMain)
 
    LOCAL oParent
    LOCAL nCtrl
    LOCAL nPos
 
-   IF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. ProcOkCancel(oCtrl, wParam)
+   IF (wParam == VK_RETURN .OR. wParam == VK_ESCAPE) .AND. hwg_ProcOkCancel(oCtrl, wParam)
       RETURN .F.
    ENDIF
    IF wParam != VK_SHIFT .AND. wParam != VK_CONTROL .AND. wParam != VK_MENU
-      oParent := IIf(oMain != NIL, oMain, ParentGetDialog(oCtrl))
+      oParent := IIf(oMain != NIL, oMain, hwg_ParentGetDialog(oCtrl))
       IF oParent != NIL .AND. !Empty(oParent:KeyList)
-         nctrl := IIf(IsCtrlShift(.T., .F.), FCONTROL, IIf(IsCtrlShift(.F., .T.), FSHIFT, 0))
+         nctrl := IIf(hwg_IsCtrlShift(.T., .F.), FCONTROL, IIf(hwg_IsCtrlShift(.F., .T.), FSHIFT, 0))
          IF (nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam})) > 0
             Eval(oParent:KeyList[nPos, 3], oCtrl)
             RETURN .T.
          ENDIF
       ENDIF
       IF oParent != NIL .AND. oMain == NIL .AND. HWindow():GetMain() != NIL
-          ProcKeyList(oCtrl, wParam, HWindow():GetMain():aWindows[1])
+          hwg_ProcKeyList(oCtrl, wParam, HWindow():GetMain():aWindows[1])
       ENDIF
    ENDIF
 
@@ -1250,7 +1250,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
+FUNCTION hwg_ProcOkCancel(oCtrl, nKey, lForce)
 
    LOCAL oWin := oCtrl:GetParentForm()
    LOCAL lEscape
@@ -1287,7 +1287,7 @@ FUNCTION ProcOkCancel(oCtrl, nKey, lForce)
          IF oCtrl != NIL .AND. __ObjHasMsg(oCtrl, "OGROUP") .AND. oCtrl:oGroup:oHGroup != NIL
             oCtrl := oCtrl:oGroup:oHGroup
          ENDIF
-         IF oCtrl != NIL .AND. GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
+         IF oCtrl != NIL .AND. hwg_GetSkip(oCtrl:oParent, oCtrl:handle, , -1)
             IF AScan(oWin:GetList, {|o|o:handle == oCtrl:handle}) > 1
                RETURN .T.
             ENDIF
@@ -1306,7 +1306,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION FindAccelerator(oCtrl, lParam)
+FUNCTION hwg_FindAccelerator(oCtrl, lParam)
 
    LOCAL nlen
    LOCAL i
@@ -1315,14 +1315,14 @@ FUNCTION FindAccelerator(oCtrl, lParam)
    nlen := Len(oCtrl:aControls)
    FOR i := 1 TO nLen
       IF oCtrl:aControls[i]:classname = "HTAB"
-         IF (pos := FindTabAccelerator(oCtrl:aControls[i], lParam)) > 0 .AND. ;
+         IF (pos := hwg_FindTabAccelerator(oCtrl:aControls[i], lParam)) > 0 .AND. ;
             oCtrl:aControls[i]:Pages[pos]:Enabled
             oCtrl:aControls[i]:SetTab(pos)
             RETURN oCtrl:aControls[i]
          ENDIF
       ENDIF
       IF Len(oCtrl:aControls[i]:aControls) > 0
-         RETURN FindAccelerator(oCtrl:aControls[i], lParam)
+         RETURN hwg_FindAccelerator(oCtrl:aControls[i], lParam)
       ENDIF
       IF __ObjHasMsg(oCtrl:aControls[i], "TITLE") .AND. hb_IsChar(oCtrl:aControls[i]:title) .AND. ;
          !oCtrl:aControls[i]:lHide .AND. hwg_IsWindowEnabled(oCtrl:aControls[i]:handle)
@@ -1337,7 +1337,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetBackColorParent(oCtrl, lSelf, lTransparent)
+FUNCTION hwg_GetBackColorParent(oCtrl, lSelf, lTransparent)
 
    LOCAL bColor := hwg_GetSysColor(COLOR_BTNFACE)
    LOCAL hTheme
@@ -1371,3 +1371,17 @@ FUNCTION GetBackColorParent(oCtrl, lSelf, lTransparent)
 RETURN brush
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ONTRACKSCROLL, HWG_ONTRACKSCROLL);
+HB_FUNC_TRANSLATE(PROCKEYLIST, HWG_PROCKEYLIST);
+HB_FUNC_TRANSLATE(PROCOKCANCEL, HWG_PROCOKCANCEL);
+HB_FUNC_TRANSLATE(FINDACCELERATOR, HWG_FINDACCELERATOR);
+HB_FUNC_TRANSLATE(GETBACKCOLORPARENT, HWG_GETBACKCOLORPARENT);
+#endif
+
+#pragma ENDDUMP

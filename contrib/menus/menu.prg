@@ -158,7 +158,7 @@ Local nPos
    ENDIF
 Return 0
 
-Function BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
+Function hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
 Local hMenu, nPos, aMenu
 
    IF nPosParent == Nil
@@ -188,7 +188,7 @@ Local hMenu, nPos, aMenu
    nPos := 1
    DO WHILE nPos <= Len( aMenu[1] )
       IF Valtype( aMenu[ 1,nPos,1 ] ) == "A"
-         BuildMenu( aMenu,,,nPos )
+         hwg_BuildMenu( aMenu,,,nPos )
       ELSE
          //hwg__AddMenuItem( hMenu, aMenu[1,npos,2], nPos, .T., aMenu[1,nPos,3], ;
          //          aMenu[1,npos,4],.F. )
@@ -238,7 +238,7 @@ Function hwg_EndMenu()
    IF _nLevel > 0
       _nLevel --
    ELSE
-      BuildMenu( Aclone(_aMenuDef), Iif( _oWnd!=Nil,_oWnd:handle,Nil ), ;
+      hwg_BuildMenu( Aclone(_aMenuDef), Iif( _oWnd!=Nil,_oWnd:handle,Nil ), ;
                    _oWnd,,Iif( _oWnd!=Nil,.F.,.T. ) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty( _aAccel )
          _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )

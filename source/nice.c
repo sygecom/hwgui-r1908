@@ -132,7 +132,7 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 {
   LRESULT res;
   PHB_DYNS pSymTest;
-  if ((pSymTest = hb_dynsymFind("NICEBUTTPROC")) != NULL)
+  if ((pSymTest = hb_dynsymFind("HWG_NICEBUTTPROC")) != NULL)
   {
     hb_vmPushSymbol(hb_dynsymSymbol(pSymTest));
     hb_vmPushNil();       /* places NIL at self */

@@ -449,16 +449,16 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
    ENDIF
    IF msg == WM_CHAR
       IF wParam == VK_TAB
-          GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+          hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
           RETURN 0
       ELSEIF wParam == VK_RETURN
-          GetSkip(::oParent, ::handle, , 1)
+          hwg_GetSkip(::oParent, ::handle, , 1)
           RETURN 0
         ENDIF
 
     ELSEIF msg == WM_KEYDOWN
 
-        ProcKeyList(Self, wParam)
+        hwg_ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_VSCROLL
     ENDIF
@@ -482,7 +482,7 @@ METHOD Refresh() CLASS HUpDown
 STATIC FUNCTION __When(oCtrl)
    LOCAL res := .T., oParent, nSkip
 
-   IF !CheckFocus(oCtrl, .F.)
+   IF !hwg_CheckFocus(oCtrl, .F.)
       RETURN .T.
    ENDIF
    IF oCtrl:bGetFocus != NIL
@@ -493,13 +493,13 @@ STATIC FUNCTION __When(oCtrl)
       oCtrl:oParent:lSuspendMsgsHandling := .F.
       oCtrl:lnoValid := !res
       IF !res
-         oParent := ParentGetDialog(oCtrl)
+         oParent := hwg_ParentGetDialog(oCtrl)
          IF oCtrl == ATail(oParent:GetList)
             nSkip := - 1
          ELSEIF oCtrl == oParent:getList[1]
             nSkip := 1
          ENDIF
-         GetSkip(oCtrl:oParent, oCtrl:handle, , nSkip)
+         hwg_GetSkip(oCtrl:oParent, oCtrl:handle, , nSkip)
       ENDIF
    ENDIF
    RETURN res
@@ -508,7 +508,7 @@ STATIC FUNCTION __Valid(oCtrl)
    LOCAL res := .T., hctrl , nSkip, oDlg
    LOCAL ltab :=  hwg_GetKeyState(VK_TAB) < 0
 
-   IF !CheckFocus(oCtrl, .T.) .OR. oCtrl:lnoValid
+   IF !hwg_CheckFocus(oCtrl, .T.) .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
    nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0 , - 1, 1)
@@ -519,7 +519,7 @@ STATIC FUNCTION __Valid(oCtrl)
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .T.
    hctrl := hwg_GetFocus()
-   oDlg := ParentGetDialog(oCtrl)
+   oDlg := hwg_ParentGetDialog(oCtrl)
    IF oCtrl:bLostFocus != NIL
       res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)
       res := IIf(res, oCtrl:value <= oCtrl:nUpper .AND. ;
@@ -533,12 +533,12 @@ STATIC FUNCTION __Valid(oCtrl)
    ENDIF
    IF ltab .AND. hctrl == hwg_GetFocus() .AND. res
       IF oCtrl:oParent:CLASSNAME = "HTAB"
-         getskip(oCtrl:oparent, oCtrl:handle, , nSkip)
+         hwg_GetSkip(oCtrl:oparent, oCtrl:handle, , nSkip)
       ENDIF
    ENDIF
    oCtrl:oparent:lSuspendMsgsHandling := .F.
    IF Empty(hwg_GetFocus()) //= 0
-      GetSkip(octrl:oParent, octrl:handle, , octrl:nGetSkip)
+      hwg_GetSkip(octrl:oParent, octrl:handle, , octrl:nGetSkip)
    ENDIF
 
    RETURN res

@@ -65,7 +65,7 @@ FUNCTION Main()
          MENUITEM "Info" ACTION hwg_MsgTemp("")
       ENDMENU
       MENU TITLE "Third"
-         MENUITEM "Wchoice" ACTION Wchoice(acho, "Select", , , , , 15132390, , hwg_VColor("008000"))
+         MENUITEM "Wchoice" ACTION hwg_Wchoice(acho, "Select", , , , , 15132390, , hwg_VColor("008000"))
          MENUITEM "SelectFolder" ACTION hwg_MsgInfo(hwg_SelectFolder("!!!"))
          MENU TITLE "Submenu"
             MENUITEM "ShellExecute" ACTION (hwg_ShellExecute("d:\temp\podst.doc"), hwg_MsgInfo(str(oMainWindow:handle)))
@@ -82,7 +82,7 @@ FUNCTION Main()
        }, "File", 120}, ;
      {{||hwg_MsgInfo("Help")}, "Help", 121} ;
    }
-   BuildMenu(aMenu, hWnd, aMainWindow)
+   hwg_BuildMenu(aMenu, hWnd, aMainWindow)
 */
 
    ACTIVATE WINDOW oMainWindow
@@ -111,6 +111,6 @@ FUNCTION PS1(oWnd)
    INIT DIALOG oDlg2 TITLE "PAGE_2" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20, 35 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER
 
-   PropertySheet(hwg_GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
+   hwg_PropertySheet(hwg_GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
 
 RETURN NIL

@@ -92,12 +92,12 @@ METHOD Init CLASS HTimer
 
 METHOD onAction()
 
-   TimerProc( , ::id, ::interval )
+   hwg_TimerProc( , ::id, ::interval )
    
 RETURN Nil
 
 
-Function TimerProc( hWnd, idTimer, Time ) 
+Function hwg_TimerProc( hWnd, idTimer, Time )
    LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
    HB_SYMBOL_UNUSED( hWnd )
@@ -118,3 +118,13 @@ Local oTimer, i
    NEXT
 
 Return
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TIMERPROC, HWG_TIMERPROC);
+#endif
+
+#pragma ENDDUMP

@@ -90,7 +90,7 @@ HB_FUNC(HWG_CREATEACTIVEX)
 HB_FUNC_TRANSLATE(CREATEACTIVEX, HWG_CREATEACTIVEX);
 #endif
 
-HB_FUNC(ATLAXGETDISP) // hWnd -> pDisp
+HB_FUNC(HWG_ATLAXGETDISP) // hWnd -> pDisp
 {
   IUnknown *pUnk;
   IDispatch *pDisp;
@@ -100,6 +100,10 @@ HB_FUNC(ATLAXGETDISP) // hWnd -> pDisp
   pUnk->lpVtbl->Release(pUnk);
   HB_RETHANDLE(pDisp);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ATLAXGETDISP, HWG_ATLAXGETDISP);
+#endif
 
 /*
  *   oskar 20070829
@@ -501,10 +505,10 @@ static const IEventHandlerVtbl IEventHandler_Vtbl = {QueryInterface, AddRef,    
 
 typedef IEventHandler device_interface;
 
-// Hash  // SetupConnectionPoint(oOle:hObj, @hSink, hEvents)             -> nError
-// Array // SetupConnectionPoint(oOle:hObj, @hSink, aEvents, aExecEvent) -> nError
+// Hash  // hwg_SetupConnectionPoint(oOle:hObj, @hSink, hEvents)             -> nError
+// Array // hwg_SetupConnectionPoint(oOle:hObj, @hSink, aEvents, aExecEvent) -> nError
 
-HB_FUNC(SETUPCONNECTIONPOINT)
+HB_FUNC(HWG_SETUPCONNECTIONPOINT)
 {
   IConnectionPointContainer *pIConnectionPointContainerTemp = NULL;
   IUnknown *pIUnknown = NULL;
@@ -621,8 +625,12 @@ HB_FUNC(SETUPCONNECTIONPOINT)
   hb_retnl(hr);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETUPCONNECTIONPOINT, HWG_SETUPCONNECTIONPOINT);
+#endif
+
 //------------------------------------------------------------------------------
-HB_FUNC(SHUTDOWNCONNECTIONPOINT)
+HB_FUNC(HWG_SHUTDOWNCONNECTIONPOINT)
 {
   MyRealIEventHandler *this = (MyRealIEventHandler *)HB_PARHANDLE(1);
   if (this->pIConnectionPoint)
@@ -634,10 +642,18 @@ HB_FUNC(SHUTDOWNCONNECTIONPOINT)
   }
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SHUTDOWNCONNECTIONPOINT, HWG_SHUTDOWNCONNECTIONPOINT);
+#endif
+
 //------------------------------------------------------------------------------
-HB_FUNC(RELEASEDISPATCH)
+HB_FUNC(HWG_RELEASEDISPATCH)
 {
   IDispatch *pObj;
   pObj = (IDispatch *)HB_PARHANDLE(1);
   pObj->lpVtbl->Release(pObj);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RELEASEDISPATCH, HWG_RELEASEDISPATCH);
+#endif

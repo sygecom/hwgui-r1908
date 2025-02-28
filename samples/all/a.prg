@@ -51,12 +51,12 @@ FUNCTION Main()
          MENUITEM "&Class HRect" ACTION RRectangle()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION hwg_CopyStringToClipboard(MsgGet("Dialog Sample", "Input table name"))
+               ACTION hwg_CopyStringToClipboard(hwg_MsgGet("Dialog Sample", "Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg()
          MENUITEM "&DOS print" ACTION PrintDos()
          MENUITEM "&Windows print" ;
-               ACTION IIf(OpenReport("a.rpt", "Simple"), PrintReport(,, .T.), .F.)
+               ACTION IIf(hwg_OpenReport("a.rpt", "Simple"), hwg_PrintReport(,, .T.), .F.)
          MENUITEM "&Print Preview" ACTION PrnTest()
          MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
          MENUITEM "&Command ProgressBar" ACTION TestProgres()
@@ -357,8 +357,8 @@ FUNCTION FileOpen()
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y)} ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      CreateList(oBrw, .T.)
-      oBrw:bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
+      hwg_CreateList(oBrw, .T.)
+      oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
       IF oFont != NIL
          oBrw:ofont := oFont
       ENDIF
@@ -623,7 +623,7 @@ INIT DIALOG oDlg TITLE "Sample HRect"    ;
        @  10,  10, 200, 100 RECT oR2 of oDlg RECT_STYLE 3
        @  10, 130, 100, 230 RECT oR3 of oDlg PRESS RECT_STYLE 2
 
-       Rect(oDlg, 10, 250, 590, 320, , 1 )
+       hwg_Rect(oDlg, 10, 250, 590, 320, , 1 )
 
    oDlg:Activate()
 

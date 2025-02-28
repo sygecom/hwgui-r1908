@@ -145,15 +145,15 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
          hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, hwg_MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
-      IF !ProcKeyList(Self, wParam)
+      IF !hwg_ProcKeyList(Self, wParam)
          IF wParam == VK_TAB
-            GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oparent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_LEFT .OR. wParam == VK_UP
-            GetSkip(::oparent, ::handle, , -1)
+            hwg_GetSkip(::oparent, ::handle, , -1)
             RETURN 0
          ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDIF
       ENDIF
@@ -164,8 +164,8 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
       ENDIF
    ELSEIF msg == WM_GETDLGCODE .AND. !Empty(lParam)
       IF wParam == VK_RETURN .OR. wParam == VK_TAB
-      ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-      ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+      ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR.wParam == VK_ESCAPE
          RETURN -1
       ENDIF
       RETURN DLGC_WANTMESSAGE
@@ -195,18 +195,18 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
          hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, hwg_MAKELPARAM(1, 1))
          RETURN 0
       ENDIF
-      IF !ProcKeyList(Self, wParam)
+      IF !hwg_ProcKeyList(Self, wParam)
          SWITCH wParam
          CASE VK_TAB
-            GetSkip(::oparent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oparent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          CASE VK_LEFT
          CASE VK_UP
-            GetSkip(::oparent, ::handle, , -1)
+            hwg_GetSkip(::oparent, ::handle, , -1)
             RETURN 0
          CASE VK_RIGHT
          CASE VK_DOWN
-            GetSkip(::oparent, ::handle, , 1)
+            hwg_GetSkip(::oparent, ::handle, , 1)
             RETURN 0
          ENDSWITCH
       ENDIF
@@ -222,8 +222,8 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
    CASE WM_GETDLGCODE
       IF !Empty(lParam)
          IF wParam == VK_RETURN .OR. wParam == VK_TAB
-         ELSEIF GETDLGMESSAGE(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
-         ELSEIF GETDLGMESSAGE(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_KEYDOWN .AND. wParam != VK_ESCAPE
+         ELSEIF hwg_GetDlgMessage(lParam) == WM_CHAR .OR. wParam == VK_ESCAPE
             RETURN -1
          ENDIF
          RETURN DLGC_WANTMESSAGE
@@ -268,7 +268,7 @@ METHOD Notify(lParam) CLASS HButton
          ENDIF
          IF nSkip != 0
             ::oParent:Setfocus()
-            GetSkip(::oparent, ::handle, , nSkip)
+            hwg_GetSkip(::oparent, ::handle, , nSkip)
             RETURN 0
          ENDIF
       ENDIF
@@ -299,7 +299,7 @@ METHOD onGetFocus() CLASS HButton
    LOCAL res := .T.
    LOCAL nSkip
 
-   IF !CheckFocus(Self, .F.) .OR. ::bGetFocus == NIL
+   IF !hwg_CheckFocus(Self, .F.) .OR. ::bGetFocus == NIL
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
@@ -308,7 +308,7 @@ METHOD onGetFocus() CLASS HButton
       res := Eval(::bGetFocus, ::title, Self)
       ::oParent:lSuspendMsgsHandling := .F.
       IF res != NIL .AND. Empty(res)
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
          IF ::lflat
             hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
          ENDIF

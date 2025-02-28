@@ -328,15 +328,15 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          RETURN 0
       ENDIF
       IF wParam == VK_LEFT .OR. wParam == VK_UP
-         GetSkip(::oParent, ::handle, , -1)
+         hwg_GetSkip(::oParent, ::handle, , -1)
          RETURN 0
       ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       ELSEIF wParam == VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDIF
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
 
    ELSEIF msg == WM_SYSKEYUP .OR. (msg == WM_KEYUP .AND. ;
                      AScan({VK_SPACE, VK_RETURN, VK_ESCAPE}, wParam) == 0)
@@ -417,16 +417,16 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       RETURN 0
 
    ELSEIF msg == WM_GETDLGCODE
-         IF wParam == VK_ESCAPE .AND. (GETDLGMESSAGE(lParam) == WM_KEYDOWN .OR. GETDLGMESSAGE(lParam) == WM_KEYUP)
+         IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
            oParent := ::GetParentForm()
-           IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
+           IF !hwg_ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
               hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
            ELSEIF oParent:FindControl(IDCANCEL) != NIL .AND. !oParent:FindControl(IDCANCEL):IsEnabled() .AND. oParent:lExitOnEsc
               hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
               RETURN 0
            ENDIF
         ENDIF
-      RETURN IIf(wParam == VK_ESCAPE, -1, ButtonGetDlgCode(lParam))
+      RETURN IIf(wParam == VK_ESCAPE, -1, hwg_ButtonGetDlgCode(lParam))
 
    ELSEIF msg == WM_SYSCOLORCHANGE
       ::SetDefaultColors()
@@ -525,16 +525,16 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
          RETURN 0
       CASE VK_LEFT
       CASE VK_UP
-         GetSkip(::oParent, ::handle, , -1)
+         hwg_GetSkip(::oParent, ::handle, , -1)
          RETURN 0
       CASE VK_RIGHT
       CASE VK_DOWN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       CASE VK_TAB
-         GetSkip(::oparent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oparent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDSWITCH
-      ProcKeyList(Self, wParam)
+      hwg_ProcKeyList(Self, wParam)
       EXIT
 
    CASE WM_SYSKEYUP
@@ -624,16 +624,16 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
       RETURN 0
 
    CASE WM_GETDLGCODE
-      IF wParam == VK_ESCAPE .AND. (GETDLGMESSAGE(lParam) == WM_KEYDOWN .OR. GETDLGMESSAGE(lParam) == WM_KEYUP)
+      IF wParam == VK_ESCAPE .AND. (hwg_GetDlgMessage(lParam) == WM_KEYDOWN .OR. hwg_GetDlgMessage(lParam) == WM_KEYUP)
          oParent := ::GetParentForm()
-         IF !ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
+         IF !hwg_ProcKeyList(Self, wParam) .AND. (oParent:Type < WND_DLG_RESOURCE .OR. !oParent:lModal)
             hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
          ELSEIF oParent:FindControl(IDCANCEL) != NIL .AND. !oParent:FindControl(IDCANCEL):IsEnabled() .AND. oParent:lExitOnEsc
             hwg_SendMessage(oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(IDCANCEL, 0), ::handle)
             RETURN 0
          ENDIF
       ENDIF
-      RETURN IIf(wParam == VK_ESCAPE, -1, ButtonGetDlgCode(lParam))
+      RETURN IIf(wParam == VK_ESCAPE, -1, hwg_ButtonGetDlgCode(lParam))
 
    CASE WM_SYSCOLORCHANGE
       ::SetDefaultColors()
@@ -765,7 +765,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    //LOCAL centerRectWidth
    LOCAL uAlign
    LOCAL uStyleTmp
-   LOCAL aTxtSize := IIf(!Empty(::caption), TxtRect(::caption, Self), {0, 0})
+   LOCAL aTxtSize := IIf(!Empty(::caption), hwg_TxtRect(::caption, Self), {0, 0})
    LOCAL aBmpSize := IIf(!Empty(::hbitmap), hwg_GetBitmapSize(::hbitmap), {0, 0})
    LOCAL itemRectOld
    LOCAL saveCaptionRect

@@ -27,7 +27,7 @@
 STATIC s_aSheet := NIL
 #if 0 // old code for reference (to be deleted)
 STATIC s_aMessModalDlg := { ;
-   {WM_COMMAND, {|o, w, l|DlgCommand(o, w, l)}},         ;
+   {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}},         ;
    {WM_SYSCOMMAND, {|o, w, l|onSysCommand(o, w, l)}},    ;
    {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
    {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
@@ -36,7 +36,7 @@ STATIC s_aMessModalDlg := { ;
    {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
    {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}},        ;
    {WM_PSPNOTIFY, {|o, w, l|onPspNotify(o, w, l)}},      ;
-   {WM_HELP, {|o, w, l|onHelp(o, w, l)}},                ;
+   {WM_HELP, {|o, w, l|hwg_OnHelp(o, w, l)}},                ;
    {WM_CTLCOLORDLG, {|o, w, l|onDlgColor(o, w, l)}}      ;
    }
 #endif
@@ -164,7 +164,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
 
    ::lOnActivated := .T.
    ::bOnActivate := IIf(bOnActivate != NIL, bOnActivate, ::bOnActivate)
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    hParent := IIf(hb_IsObject(::oParent) .AND. ;
                    __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
                    .AND. !Empty(::oParent:handle) , ::oParent:handle, ;
@@ -293,7 +293,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          IF ::nScrollBars != -1 .AND. ::bScroll == NIL
             ::Super:ScrollHV(Self, msg, wParam, lParam)
          ENDIF
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
@@ -352,14 +352,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
          IF nPos > 0
             oTab := ::aControls[nPos]
             IF Len(oTab:aPages) > 0
-               Eval({|o, w, l|DlgCommand(o, w, l)}, oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
+               Eval({|o, w, l|hwg_DlgCommand(o, w, l)}, oTab:aPages[oTab:GetActivePage(), 1], wParam, lParam)
             ENDIF
          ENDIF
       ENDIF
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
          // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
-         RETURN DlgCommand(Self, wParam, lParam)
+         RETURN hwg_DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -425,7 +425,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       //AGE SOMENTE NO DIALOG
       IF !::lSuspendMsgsHandling
          // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
-         RETURN onHelp(Self, wParam, lParam)
+         RETURN hwg_OnHelp(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -447,7 +447,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
       IF ::nScrollBars != -1 .AND. ::bScroll == NIL
          ::Super:ScrollHV(Self, msg, wParam, lParam)
       ENDIF
-      onTrackScroll(Self, msg, wParam, lParam)
+      hwg_OnTrackScroll(Self, msg, wParam, lParam)
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
 #ifdef __XHARBOUR__
@@ -550,8 +550,8 @@ STATIC FUNCTION InitModalDlg(oDlg, wParam, lParam)
       oDlg:Closable(.F.)
    ENDIF
 
-   InitObjects(oDlg)
-   InitControls(oDlg, .T.)
+   hwg_InitObjects(oDlg)
+   hwg_InitControls(oDlg, .T.)
 
    IF hb_IsBlock(oDlg:bInit)
       oDlg:lSuspendMsgsHandling := .T.
@@ -688,7 +688,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION DlgCommand(oDlg, wParam, lParam)
+FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
    
    LOCAL iParHigh := hwg_HIWORD(wParam)
    LOCAL iParLow := hwg_LOWORD(wParam)
@@ -707,7 +707,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
          IF oCtrl == NIL .OR. !hwg_SelfFocus(oCtrl:handle, hCtrl)
             hCtrl := hwg_GetAncestor(hCtrl, GA_PARENT)
             IF (oCtrl := oDlg:FindControl(, hCtrl)) != NIL
-               GetSkip(oCtrl:oParent, hCtrl, , 1)
+               hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
             ENDIF
          ENDIF
 
@@ -726,13 +726,13 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
              /*
          IF !oDlg:lExitOnEnter .AND. lParam > 0 .AND. lParam != hCtrl
             IF oCtrl:oParent:oParent != NIL
-                GetSkip(oCtrl:oParent, hCtrl, , 1)
+                hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
             eNDIF
              RETURN 0
          ENDIF
          */
          IF oDlg:lClipper
-            IF hb_IsObject(oCtrl) .AND. !GetSkip(oCtrl:oParent, hCtrl, , 1)
+            IF hb_IsObject(oCtrl) .AND. !hwg_GetSkip(oCtrl:oParent, hCtrl, , 1)
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog(oDlg:handle)
@@ -760,7 +760,7 @@ FUNCTION DlgCommand(oDlg, wParam, lParam)
                 oCtrl := oCtrl:oGroup:oHGroup
                 hCtrl := oCtrl:handle
             ENDIF
-            IF hb_IsObject(oCtrl) .AND. GetSkip(oCtrl:oParent, hCtrl, , -1)
+            IF hb_IsObject(oCtrl) .AND. hwg_GetSkip(oCtrl:oParent, hCtrl, , -1)
                IF AScan(oDlg:GetList, {|o|o:handle == hCtrl}) > 1
                   RETURN 1
                ENDIF
@@ -820,15 +820,15 @@ RETURN 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION DlgMouseMove()
+FUNCTION hwg_DlgMouseMove()
 
-   LOCAL oBtn := SetNiceBtnSelected()
+   LOCAL oBtn := hwg_SetNiceBtnSelected()
 
    IF hb_IsObject(oBtn) .AND. !oBtn:lPress
       oBtn:state := OBTN_NORMAL
       hwg_InvalidateRect(oBtn:handle, 0)
       // hwg_PostMessage(oBtn:handle, WM_PAINT, 0, 0)
-      SetNiceBtnSelected(NIL)
+      hwg_SetNiceBtnSelected(NIL)
    ENDIF
 
 RETURN 0
@@ -926,7 +926,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION onHelp(oDlg, wParam, lParam)
+FUNCTION hwg_OnHelp(oDlg, wParam, lParam)
 
    LOCAL oCtrl
    LOCAL nHelpId
@@ -935,9 +935,9 @@ FUNCTION onHelp(oDlg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
 
-   IF !Empty(SetHelpFileName())
-      IF "chm" $ Lower(CutPath(SetHelpFileName()))
-         cDir := IIf(Empty(FilePath(SetHelpFileName())), Curdir(), FilePath(SetHelpFileName()))
+   IF !Empty(hwg_SetHelpFileName())
+      IF "chm" $ Lower(CutPath(hwg_SetHelpFileName()))
+         cDir := IIf(Empty(FilePath(hwg_SetHelpFileName())), Curdir(), FilePath(hwg_SetHelpFileName()))
       ENDIF
       IF !Empty(lParam)
          oCtrl := oDlg:FindControl(NIL, hwg_GetHelpData(lParam))
@@ -948,16 +948,16 @@ FUNCTION onHelp(oDlg, wParam, lParam)
             oParent := oCtrl:oParent
             nHelpId := IIf(Empty(oParent:HelpId), oDlg:HelpId, oParent:HelpId)
          ENDIF
-         IF "chm" $ Lower(CutPath(SetHelpFileName()))
+         IF "chm" $ Lower(CutPath(hwg_SetHelpFileName()))
             nHelpId := IIf(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
-            hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
+            hwg_ShellExecute("hh.exe", "open", CutPath(hwg_SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
          ELSE
-            hwg_WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
+            hwg_WinHelp(oDlg:handle, hwg_SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
          ENDIF
       ELSEIF cDir != NIL
-         hwg_ShellExecute("hh.exe", "open", CutPath(SetHelpFileName()), cDir)
+         hwg_ShellExecute("hh.exe", "open", CutPath(hwg_SetHelpFileName()), cDir)
       ELSE
-         hwg_WinHelp(oDlg:handle, SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
+         hwg_WinHelp(oDlg:handle, hwg_SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
       ENDIF
    ENDIF
 
@@ -1025,7 +1025,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lModeless, lNoApply, lWizard)
+FUNCTION hwg_PropertySheet(hParentWindow, aPages, cTitle, x1, y1, width, height, lModeless, lNoApply, lWizard)
 
    LOCAL hSheet
    LOCAL i
@@ -1054,7 +1054,7 @@ RETURN hSheet
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetModalDlg
+FUNCTION hwg_GetModalDlg()
 
    LOCAL i := Len(HDialog():aModalDialogs)
 
@@ -1062,7 +1062,7 @@ RETURN IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION GetModalHandle
+FUNCTION hwg_GetModalHandle()
 
    LOCAL i := Len(HDialog():aModalDialogs)
 
@@ -1070,6 +1070,7 @@ RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+// TODO: o prefixo HWG_ não pode ser utilizado pois já existe hwg_EndDialog
 FUNCTION EndDialog(handle)
 
    LOCAL oDlg
@@ -1105,7 +1106,7 @@ RETURN IIf(oDlg:lModal, hwg_EndDialog(oDlg:handle), hwg_DestroyWindow(oDlg:handl
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION SetDlgKey(oDlg, nctrl, nkey, block)
+FUNCTION hwg_SetDlgKey(oDlg, nctrl, nkey, block)
 
    LOCAL i
    LOCAL aKeys
@@ -1167,7 +1168,7 @@ STATIC FUNCTION onSysCommand(oDlg, wParam, lParam)
 
    CASE SC_KEYMENU
       // accelerator IN TAB/CONTAINER
-      IF (oCtrl := FindAccelerator(oDlg, lParam)) != NIL
+      IF (oCtrl := hwg_FindAccelerator(oDlg, lParam)) != NIL
          oCtrl:SetFocus()
          hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
          RETURN 2
@@ -1193,3 +1194,19 @@ EXIT PROCEDURE hwg_ExitProcedure
 RETURN
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DLGCOMMAND, HWG_DLGCOMMAND);
+HB_FUNC_TRANSLATE(DLGMOUSEMOVE, HWG_DLGMOUSEMOVE);
+HB_FUNC_TRANSLATE(ONHELP, HWG_ONHELP);
+HB_FUNC_TRANSLATE(PROPERTYSHEET, HWG_PROPERTYSHEET);
+HB_FUNC_TRANSLATE(GETMODALDLG, HWG_GETMODALDLG);
+HB_FUNC_TRANSLATE(GETMODALHANDLE, HWG_GETMODALHANDLE);
+HB_FUNC_TRANSLATE(SETDLGKEY, HWG_SETDLGKEY);
+#endif
+
+#pragma ENDDUMP

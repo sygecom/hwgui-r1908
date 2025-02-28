@@ -125,7 +125,7 @@ Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 
 Return IIf(aSubMenu == NIL, 0, aSubMenu[5])
 
-Function BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
+Function hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
 Local hMenu, nPos, aMenu, i, oBmp
 
    IF nPosParent == Nil   
@@ -150,7 +150,7 @@ Local hMenu, nPos, aMenu, i, oBmp
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
       IF Valtype( aMenu[ 1,nPos,1 ] ) == "A"
-         BuildMenu( aMenu,hWnd,,nPos )
+         hwg_BuildMenu( aMenu,hWnd,,nPos )
       ELSE 
          IF aMenu[ 1,nPos,1 ] == Nil .OR. aMenu[ 1,nPos,2 ] != Nil
             IF Len(aMenu[1, npos]) == 4
@@ -208,7 +208,7 @@ Function hwg_EndMenu()
    IF _nLevel > 0
       _nLevel --
    ELSE
-      BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != NIL,_oWnd:handle, NIL), ;
+      hwg_BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != NIL,_oWnd:handle, NIL), ;
                    _oWnd,,IIf(_oWnd != NIL, .F., .T.) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
          // _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )
@@ -375,3 +375,13 @@ Local aMenu, aSubMenu, nPos
    ENDIF
    
 Return Nil
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BUILDMENU, HWG_BUILDMENU);
+#endif
+
+#pragma ENDDUMP

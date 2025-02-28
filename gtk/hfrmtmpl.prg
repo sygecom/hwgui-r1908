@@ -27,7 +27,7 @@ Static aCtrls := { ;
   "HRadioButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
   "HEdit():New(oPrnt,nId,cInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,cPicture,lNoBorder,nMaxLength,lPassword)", ;
   "HGroup():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor)", ;
-  "RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
+  "hwg_RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
   "HSayBmp():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Bitmap,lResource,onInit,onSize,ctooltip)", ;
   "HSayIcon():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Icon,lResource,onInit,onSize,ctooltip)", ;
   "HRichEdit():New(oPrnt,nId,cInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor)", ;
@@ -430,7 +430,7 @@ Local i, aTree := {}, oNode, subarr
 
 Return IIf(Empty(aTree), NIL, aTree)
 
-Function ParseMethod( cMethod )
+Function hwg_ParseMethod( cMethod )
 Local arr := {}, nPos1, nPos2, cLine
 
    IF ( nPos1 := At( Chr(10),cMethod ) ) == 0
@@ -472,7 +472,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
       // writelog( oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname() )
       nContainer := oForm:nContainer
    ENDIF
-   arr := ParseMethod( cMethod )
+   arr := hwg_ParseMethod( cMethod )
    IF Len(arr) == 1
       cCode := IIf(Lower(Left(arr[1], 6)) == "return", LTrim(SubStr(arr[1], 8)), arr[1])
       bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
@@ -524,7 +524,7 @@ Return arrExe
 STATIC FUNCTION CompileErr( e, stroka )
 Local n
 
-   MsgStop( ErrorMessage( e ) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
+   MsgStop( hwg_ErrorMessage( e ) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
           AllTrim(stroka),"Script compiling error" )
    BREAK
 RETURN .T.
@@ -666,7 +666,7 @@ MEMVAR aImages, lEditLabels, aParts
          ENDIF
 
       ELSEIF cPName == "atree"
-         BuildMenu( xProperty,oForm:oDlg:handle,oForm:oDlg )
+         hwg_BuildMenu( xProperty,oForm:oDlg:handle,oForm:oDlg )
       ELSE
         IF cPName == "tooltip"
             cPName := "c" + cPName
@@ -761,13 +761,13 @@ MEMVAR aImages, lEditLabels, aParts
 
 Return Nil
 
-Function RadioNew( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet )
+Function hwg_RadioNew( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet )
 Local oCtrl := HGroup():New( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor )
    HRadioGroup():New( nInitValue,bSetGet )
 Return oCtrl
 
 
-Function Font2XML( oFont )
+Function hwg_Font2XML( oFont )
 Local aAttr := {}
 
    AAdd(aAttr, {"name", oFont:name})
@@ -1350,3 +1350,14 @@ Local name  := oXmlNode:GetAttribute( "name" ), i
 
 Return oPrinter:AddFont( name, height, (weight>400), (ita>0), (under>0), charset )
 
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PARSEMETHOD, HWG_PARSEMETHOD);
+HB_FUNC_TRANSLATE(RADIONEW, HWG_RADIONEW);
+HB_FUNC_TRANSLATE(FONT2XML, HWG_FONT2XML);
+#endif
+
+#pragma ENDDUMP

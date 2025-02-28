@@ -210,7 +210,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
       ELSEIF oCtrl:ClassName() == "HTREE"
          Return TreeNotify( oCtrl,lParam )
       ELSEIF oCtrl:ClassName() == "HGRID"         
-         Return ListViewNotify( oCtrl,lParam )               
+         Return hwg_ListViewNotify( oCtrl,lParam )               
       ELSE
          nCode := hwg_GetNotifyCode( lParam )
          // writelog("Code: "+str(nCode))
@@ -290,7 +290,7 @@ Local oItem, iCont
 
 Return 0
 
-Function onTrackScroll( oWnd,wParam,lParam )
+Function hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
    IF oCtrl != Nil
@@ -309,3 +309,13 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
    ENDIF
 
 Return 0
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ONTRACKSCROLL, HWG_ONTRACKSCROLL);
+#endif
+
+#pragma ENDDUMP

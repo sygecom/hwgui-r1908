@@ -128,7 +128,7 @@ METHOD END() CLASS HIPedit
 STATIC FUNCTION __GetFocus(oCtrl)
    LOCAL xRet
 
-   IF !CheckFocus(oCtrl, .F.)
+   IF !hwg_CheckFocus(oCtrl, .F.)
       RETURN .T.
    ENDIF
 
@@ -146,7 +146,7 @@ STATIC FUNCTION __GetFocus(oCtrl)
 STATIC FUNCTION __KillFocus(oCtrl)
    LOCAL xRet
 
-   IF !CheckFocus(oCtrl, .T.) .OR. oCtrl:lNoValid
+   IF !hwg_CheckFocus(oCtrl, .T.) .OR. oCtrl:lNoValid
       RETURN .T.
    ENDIF
 

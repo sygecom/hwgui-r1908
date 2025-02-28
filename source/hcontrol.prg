@@ -204,7 +204,7 @@ METHOD SetFocus(lValid) CLASS HControl
 
    IF !hwg_IsWindowEnabled(::handle)
       ::oParent:lSuspendMsgsHandling := .T.
-      //GetSkip(::oParent, ::handle, , 1)
+      //hwg_GetSkip(::oParent, ::handle, , 1)
       hwg_SendMessage(hwg_GetActiveWindow(), WM_NEXTDLGCTL, 0, 0)
       ::oParent:lSuspendMsgsHandling := lSuspend
    ELSE

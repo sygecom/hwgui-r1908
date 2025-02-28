@@ -128,7 +128,7 @@ METHOD PAINT(lpdis) CLASS HGroup
 
    // determine text length
    szText := ::Title
-   aSize := TxtRect(IIf(Empty(szText), "A", szText), Self)
+   aSize := hwg_TxtRect(IIf(Empty(szText), "A", szText), Self)
    // distance from window top to group rect
    iUpDist := (aSize[2] / 2)
    dwStyle := ::Style //hwg_GetWindowStyle(::handle) //GetStyle();

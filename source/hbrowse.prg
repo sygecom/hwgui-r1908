@@ -15,7 +15,7 @@
 //    0-DT_LEFT, 1-DT_RIGHT y 2-DT_CENTER. 27.07.2002. WHT.                 //
 // 2) Ahora la variable "cargo" del metodo Hbrowse si es codeblock          //
 //    ejectuta el CB. 27.07.2002. WHT                                       //
-// 3) Se agreg¢ el Metodo "ShowSizes". Para poder ver la "width" de cada    //
+// 3) Se agregÂ¢ el Metodo "ShowSizes". Para poder ver la "width" de cada    //
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -472,7 +472,7 @@ METHOD Init() CLASS HBrowse
       hwg_SetWindowObject(::handle, Self)
       ::Super:Init()
       ::InitBrw(, .T.)
-      //VScrollPos(Self, 0, .F.)
+      //hwg_VScrollPos(Self, 0, .F.)
       IF ::GetParentForm():Type < WND_DLG_RESOURCE
          ::GetParentForm():lDisableCtrlTab := .T.
       ENDIF
@@ -624,8 +624,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
       ELSEIF msg == WM_CHAR
          IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+             nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
                 IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
@@ -656,7 +656,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
             ::GetParentForm(self):onEvent(msg, wparam, lparam)
          ELSE
-            DlgCommand(Self, wParam, lParam)
+            hwg_DlgCommand(Self, wParam, lParam)
          ENDIF
 
       ELSEIF msg == WM_KEYUP //.AND. !::oParent:lSuspendMsgsHandling
@@ -667,13 +667,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
             ::lShiftPress := .F.
          ENDIF
          IF wParam == VK_TAB .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-            IF IsCtrlShift(.T., .F.)
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            IF hwg_IsCtrlShift(.T., .F.)
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ENDIF
             /*
             ELSE
-               ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+               ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             ENDIF
             */
          ENDIF
@@ -698,8 +698,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam > 111 .AND. wParam < 124) .OR.;
                wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. ;
                hb_IsBlock(::bKeyDown)
-             nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-             nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+             nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+             nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
              nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
              IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
                 RETURN 0
@@ -714,10 +714,10 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
          IF wParam == VK_TAB
             IF ::lCtrlPress
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ELSE
-               ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+               ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             ENDIF
          ELSEIF wParam == VK_DOWN //40        // Down
             IF ::lShiftPress .AND. ::aSelected != NIL
@@ -1012,8 +1012,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
 
    CASE WM_CHAR
       IF !hwg_CheckBit(lParam, 32) //.AND. hb_IsBlock(::bKeyDown)
-         nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-         nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+         nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+         nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
          //nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
          IF hb_IsBlock(::bKeyDown) .AND. wParam != VK_TAB .AND. wParam != VK_RETURN
             IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
@@ -1045,7 +1045,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
       IF ::GetParentForm(self):Type < WND_DLG_RESOURCE
          ::GetParentForm(self):OnEvent(msg, wparam, lparam)
       ELSE
-         DlgCommand(Self, wParam, lParam)
+         hwg_DlgCommand(Self, wParam, lParam)
       ENDIF
       EXIT
 
@@ -1057,12 +1057,12 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          ::lShiftPress := .F.
       ENDIF
       IF wParam == VK_TAB .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
-         IF IsCtrlShift(.T., .F.)
-            getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         IF hwg_IsCtrlShift(.T., .F.)
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ENDIF
          //ELSE
-         //   ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+         //   ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
          //ENDIF
       ENDIF
       IF wParam != VK_SHIFT .AND. wParam != VK_CONTROL .AND. wParam != VK_MENU
@@ -1086,8 +1086,8 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          //::isMouseOver := .F.
          IF ((hwg_CheckBit(lParam, 25) .AND. wParam != 111) .OR. (wParam >= VK_F1 .AND. wParam <= VK_F12) .OR. ;
             wParam == VK_TAB .OR. wParam == VK_RETURN) .AND. hb_IsBlock(::bKeyDown)
-            nShiftAltCtrl := IIf(IsCtrlShift(.F., .T.), 1, 0)
-            nShiftAltCtrl += IIf(IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
+            nShiftAltCtrl := IIf(hwg_IsCtrlShift(.F., .T.), 1, 0)
+            nShiftAltCtrl += IIf(hwg_IsCtrlShift(.T., .F.), 2, nShiftAltCtrl)
             nShiftAltCtrl += IIf(wParam > 111, 4, nShiftAltCtrl)
             IF Empty(nRet := Eval(::bKeyDown, Self, wParam, nShiftAltCtrl, msg)) .AND. nRet != NIL
                RETURN 0
@@ -1097,10 +1097,10 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
          SWITCH wParam
          CASE VK_TAB
             IF ::lCtrlPress
-               getskip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                RETURN 0
             ENDIF
-            ::DoHScroll(IIf(IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
+            ::DoHScroll(IIf(hwg_IsCtrlShift(.F., .T.), SB_LINELEFT, SB_LINERIGHT))
             EXIT
          CASE VK_DOWN
             IF !::ChangeRowCol(1)
@@ -1583,7 +1583,7 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
       ::bRcou := {|o|Len(o:aArray)}
       ::bRecnoLog := ::bRecno  := {|o|o:nCurrent}
       ::bGoTo := {|o, n|o:nCurrent := n}
-      ::bScrollPos := {|o, n, lEof, nPos|VScrollPos(o, n, lEof, nPos)}
+      ::bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
    ENDIF
 
    IF lInit
@@ -1692,8 +1692,8 @@ METHOD Rebuild() CLASS HBrowse
       IF oColumn:lEditable
          ::lEditable := .T.
       ENDIF
-      //FontSize := TxtRect("a", Self, oColumn:oFont)[1]
-      FontSize := IIf(oColumn:type $ "DN", TxtRect("9", Self, oColumn:oFont)[1], TxtRect("N", Self, oColumn:oFont)[1])
+      //FontSize := hwg_TxtRect("a", Self, oColumn:oFont)[1]
+      FontSize := IIf(oColumn:type $ "DN", hwg_TxtRect("9", Self, oColumn:oFont)[1], hwg_TxtRect("N", Self, oColumn:oFont)[1])
       IF oColumn:aBitmaps != NIL
          IF oColumn:heading != NIL
             /*
@@ -2148,7 +2148,7 @@ ENDIF
        IF hb_IsBlock(::bScrollPos) // array
          Eval(::bScrollPos, Self, 1, .F.)
       ELSE
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
    ENDIF
 
@@ -2288,7 +2288,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                                                                IIf(oColumn:nJusHead - DT_VCENTER - DT_SINGLELINE == DT_RIGHT, 1, 0))
          cStr := oColumn:heading + ";"
          FOR nLine := 1 TO ::nHeadRows
-            aTxtSize := IIf(nLine == 1, TxtRect(cStr, Self), aTxtSize)
+            aTxtSize := IIf(nLine == 1, hwg_TxtRect(cStr, Self), aTxtSize)
             hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                       x + ::aMargin[4] + 1 + nMe, ;
                       ::y1 - (::nHeadHeight) * (::nHeadRows - nLine + 1) +  ::aMargin[1] + 1, ;
@@ -3034,7 +3034,7 @@ METHOD DoVScroll(wParam) CLASS HBrowse
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          ::refresh()
       ENDIF
    ENDIF
@@ -3077,7 +3077,7 @@ METHOD DoVScroll(wParam) CLASS HBrowse
          ENDIF
          Eval(::bSkip, Self, 1)
          Eval(::bSkip, Self, -1)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          ::refresh()
       ENDIF
    ENDSWITCH
@@ -3296,7 +3296,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, 1, .F.)
    ELSEIF ::nRecords > 1
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
   // ::SetFocus()  ??
@@ -3328,7 +3328,7 @@ METHOD LINEUP() CLASS HBrowse
       IF hb_IsBlock(::bScrollPos)
          Eval(::bScrollPos, Self, -1, .F.)
       ELSEIF ::nRecords > 1
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
       ::internal[1] := hwg_SetBit(::internal[1], 1, 0)
    ENDIF
@@ -3358,7 +3358,7 @@ METHOD PAGEUP() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, -STEP, lBof)
    ELSEIF ::nRecords > 1
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh(::nFootRows > 0)
@@ -3388,7 +3388,7 @@ METHOD PAGEDOWN() CLASS HBrowse
    IF hb_IsBlock(::bScrollPos)
       Eval(::bScrollPos, Self, STEP, .F.)
    ELSE
-      VScrollPos(Self, 0, .F.)
+      hwg_VScrollPos(Self, 0, .F.)
    ENDIF
 
    ::Refresh(::nFootRows > 0)
@@ -3408,7 +3408,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
       Eval(::bGoBot, Self)
    ENDIF
 
-   VScrollPos(Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.))
+   hwg_VScrollPos(Self, 0, IIf(::Type == BRW_ARRAY, .F., .T.))
 
    IF lPaint == NIL .OR. lPaint
       ::Refresh(::nFootRows > 0)
@@ -3425,7 +3425,7 @@ METHOD TOP() CLASS HBrowse
 
    ::rowPos := 1
    Eval(::bGoTop, Self)
-   VScrollPos(Self, 0, .F.)
+   hwg_VScrollPos(Self, 0, .F.)
 
    //hwg_InvalidateRect(::handle, 0)
    ::Refresh(::nFootRows > 0)
@@ -3509,7 +3509,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF hb_IsBlock(::bScrollPos)
          Eval(::bScrollPos, Self, STEP, .F.)
       ELSEIF ::nRecords > 1
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
       ENDIF
       res := .T.
 
@@ -3519,7 +3519,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
          IF hb_IsBlock(::bScrollPos)
             Eval(::bScrollPos, Self, STEP, .F.)
          ELSEIF ::nRecords > 1
-            VScrollPos(Self, 0, .F.)
+            hwg_VScrollPos(Self, 0, .F.)
          ENDIF
          res := .T.
       ELSEIF nRec > 0
@@ -3532,7 +3532,7 @@ IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF ::colpos != fif - ::nLeftCol + 1 + ::freeze
          // Colpos should not go beyond last column or I get bound errors on ::Edit()
          ::colpos := Min(::nColumns + 1, fif - ::nLeftCol + 1 + ::freeze)
-         VScrollPos(Self, 0, .F.)
+         hwg_VScrollPos(Self, 0, .F.)
          res := .T.
       ENDIF
    ENDIF
@@ -3748,7 +3748,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
    ::isMouseOver := IIf(::lDispHead .AND. ::hTheme != NIL .AND. currxPos != 0, .T., .F.)
    nLastColumn := IIf(::lAdjRight, Len(::aColumns) - 1, Len(::aColumns))
 
-   // DlgMouseMove()
+   // hwg_DlgMouseMove()
    IF !::active .OR. Empty(::aColumns) .OR. ::x1 == NIL
       RETURN NIL
    ENDIF
@@ -3986,8 +3986,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
             IF Type == "L"
                oModDlg:lResult := .T.
             ELSEIF Type != "M"
-               nHGet := Max((::height - (TxtRect("N", self))[2]) / 2, 0)
-               #ifdef __SYGECOM__
+               nHGet := Max((::height - (hwg_TxtRect("N", self))[2]) / 2, 0)
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
@@ -4255,7 +4254,7 @@ METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
    LOCAL res := .T.
    LOCAL oColumn := ::aColumns[::fipos]
 
-   IF !CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
+   IF !hwg_CheckFocus(oGet, .T.) //.OR. oGet:lNoValid
       RETURN .T.
    ENDIF
    IF oBtn != NIL .AND. hwg_GetFocus() == oBtn:handle
@@ -4302,7 +4301,7 @@ METHOD When() CLASS HBrowse
    LOCAL nSkip
    LOCAL res := .T.
 
-   IF !CheckFocus(self, .F.)
+   IF !hwg_CheckFocus(self, .F.)
       RETURN .F.
    ENDIF
    IF ::HighlightStyle == 0 .OR. ::HighlightStyle == 3
@@ -4318,7 +4317,7 @@ METHOD When() CLASS HBrowse
       res := IIf(hb_IsLogical(res), res, .T.)
       ::lnoValid := !res
       IF !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
       ENDIF
       ::oParent:lSuspendMsgsHandling := .F.
    ENDIF
@@ -4329,8 +4328,8 @@ METHOD Valid() CLASS HBrowse
    
    LOCAL res
 
-   //IF ::bLostFocus != NIL .AND. (!CheckFocus(Self, .T.) .OR.::lNoValid)
-   IF !CheckFocus(self, .T.) .OR. ::lNoValid
+   //IF ::bLostFocus != NIL .AND. (!hwg_CheckFocus(Self, .T.) .OR.::lNoValid)
+   IF !hwg_CheckFocus(self, .T.) .OR. ::lNoValid
       RETURN .T.
    ENDIF
    IF ::HighlightStyle == 0 .OR. ::HighlightStyle == 3
@@ -4541,7 +4540,7 @@ FUNCTION HWG_CREATEARLIST(oBrw, arr)
       // oBrw:aColumns := {}
       IF hb_IsArray(arr[1])
          FOR i := 1 TO Len(arr[1])
-            oBrw:AddColumn(HColumn():New(, ColumnArBlock()))
+            oBrw:AddColumn(HColumn():New(, hwg_ColumnArBlock()))
          NEXT
       ELSE
          oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}))
@@ -4570,7 +4569,7 @@ PROCEDURE ARSKIP(oBrw, nSkip)
 RETURN
 
 //----------------------------------------------------//
-FUNCTION CreateList(oBrw, lEditable)
+FUNCTION hwg_CreateList(oBrw, lEditable)
    
    LOCAL i
    LOCAL nArea := Select()
@@ -4592,7 +4591,7 @@ FUNCTION CreateList(oBrw, lEditable)
 
 RETURN NIL
 
-FUNCTION VScrollPos(oBrw, nType, lEof, nPos)
+FUNCTION hwg_VScrollPos(oBrw, nType, lEof, nPos)
    
    LOCAL minPos
    LOCAL maxPos
@@ -4694,7 +4693,7 @@ METHOD ShowSizes() CLASS HBrowse
 
 RETURN NIL
 
-FUNCTION ColumnArBlock()
+FUNCTION hwg_ColumnArBlock()
 RETURN {|value, o, n|IIf(value == NIL, ;
                          o:aArray[IIf(o:nCurrent < 1, 1, o:nCurrent), n], ;
                          o:aArray[IIf(o:nCurrent < 1, 1, o:nCurrent), n] := value)}
@@ -4955,6 +4954,9 @@ RETURN nLen
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(CREATEARLIST, HWG_CREATEARLIST);
+HB_FUNC_TRANSLATE(CREATELIST, HWG_CREATELIST);
+HB_FUNC_TRANSLATE(VSCROLLPOS, HWG_VSCROLLPOS);
+HB_FUNC_TRANSLATE(COLUMNARBLOCK, HWG_COLUMNARBLOCK);
 #endif
 
 #pragma ENDDUMP

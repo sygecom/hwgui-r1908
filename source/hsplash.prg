@@ -57,7 +57,7 @@ METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CLASS HSplash
 
 METHOD CountSeconds(oTime, oDlg)
 
-   SET TIMER ::oTimer OF oDlg VALUE oTime  ACTION {||EndDialog(GetModalHandle())}
+   SET TIMER ::oTimer OF oDlg VALUE oTime  ACTION {||EndDialog(hwg_GetModalHandle())}
 
    RETURN NIL
 

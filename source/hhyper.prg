@@ -450,7 +450,7 @@ METHOD Resize(x, y) CLASS HStaticLink
    aBmpSize := IIf(!Empty(::hbitmap), hwg_GetBitmapSize(::hbitmap), {0, 0})
    aBmpSize[1] += IIf(aBmpSize[1] > 0, 6, 0)
    ::Move(, , ::nWidth + x, , 0)
-   aTxtSize := TxtRect(::Title, Self)
+   aTxtSize := hwg_TxtRect(::Title, Self)
    aTxtSize[2] += IIf(::lAllUnderline, 0, 3)
    IF aTxtSize[1] + 1  <  ::nWidth - aBmpSize[1] //tava 20
       ::nHeight := aTxtSize[2] + 2

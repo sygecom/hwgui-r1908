@@ -11,6 +11,8 @@ call xcompileclang64 datepicker
 call xcompileclang64 dialog
 call xcompileclang64 dialog2
 call xcompileclang64 dialog3
+call xcompileclang64 get1
+call xcompileclang64 get2
 call xcompileclang64 getcombobox
 call xcompileclang64 getcombobox2
 call xcompileclang64 getcombobox3

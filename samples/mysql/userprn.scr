@@ -2,8 +2,8 @@
 Private aUsers
   aResult := DoSql( "Select host,user From user" )
   if aResult[1] == 0
-     if OpenReport( "userprn.rpt","users" )
-        PrintReport()
+     if hwg_OpenReport( "userprn.rpt","users" )
+        hwg_PrintReport()
         hwg_MsgInfo( "Done!","Script result" )
      else
         hwg_MsgStop( "Can't open report" )

@@ -58,7 +58,7 @@ Local aModDlg
 Return Nil
 
 Static Function InitStatic( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local oFont := aItem[ITEM_FONT]
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
      Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,Iif(aItem[ITEM_ALIGN]==1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
@@ -72,7 +72,7 @@ Local oFont := aItem[ITEM_FONT]
 Return .T.
 
 Static Function EndStatic( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 
    aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
    aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0, ;
@@ -84,7 +84,7 @@ Local hDlg := getmodalhandle()
 Return .T.
 
 Static Function SetItemFont( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local oFont := HFont():Select()
    IF oFont != Nil
       aItem[ITEM_FONT] := oFont
@@ -105,7 +105,7 @@ Local oPen := aItem[ITEM_PEN]
 Return Nil
 
 Static Function InitLine( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local oPen := aItem[ITEM_PEN]
    // SetComboBox( hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1 )
    IF aItem[ITEM_TYPE] == TYPE_BOX
@@ -116,7 +116,7 @@ Local oPen := aItem[ITEM_PEN]
 Return .T.
 
 Static Function EndLine( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nWidth := Val( GetEditText( hDlg, IDC_EDIT1 ) )
 Local cType := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
 Local oPen := aItem[ITEM_PEN]
@@ -135,7 +135,7 @@ Local aModDlg, res := .T.
    INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndBitmap(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| res := .F.,EndDialog( getmodalhandle() )} ;
+        ON 0,IDCANCEL     ACTION {|| res := .F.,EndDialog( hwg_GetModalHandle() )} ;
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||OpenBmp(aItem,hwg_SelectFile("Bitmap files( *.bmp )", "*.bmp",mypath))} ;
         ON EN_CHANGE,IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
    aModDlg:Activate()
@@ -143,7 +143,7 @@ Local aModDlg, res := .T.
 Return res
 
 Static Function OpenBmp( aItem,fname )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    Local aBmpSize
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    IF !Empty( fname )
@@ -161,7 +161,7 @@ Local hDlg := getmodalhandle()
 Return Nil
 
 Static Function UpdateProcent( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != Nil
@@ -171,7 +171,7 @@ Local aBmpSize
 Return Nil
 
 Static Function InitBitmap( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
    hUp := hwg_CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
    IF aItem[ITEM_BITMAP] != Nil
@@ -184,7 +184,7 @@ Local aBmpSize, hUp
 Return .T.
 
 Static Function EndBitmap( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
 Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
 
@@ -200,13 +200,13 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndMarkL(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitMarkL( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Script:" )
    IF Valtype(aItem[ITEM_SCRIPT]) == "C"
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_SCRIPT] )
@@ -214,7 +214,7 @@ Local hDlg := getmodalhandle()
 Return .T.
 
 Static Function EndMarkL( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
@@ -226,19 +226,19 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndMarkF(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitMarkF( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
       Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
 Return .T.
 
 Static Function EndMarkF( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0,1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
@@ -250,13 +250,13 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt() }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndFOpt()}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( getmodalhandle() )}
+        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 Return Nil
 
 Static Function InitFOpt()
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Variables:" )
    IF Valtype(aPaintRep[FORM_VARS]) == "C"
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aPaintRep[FORM_VARS] )
@@ -264,7 +264,7 @@ Local hDlg := getmodalhandle()
 Return .T.
 
 Static Function EndFOpt( aItem )
-Local hDlg := getmodalhandle()
+Local hDlg := hwg_GetModalHandle()
    aPaintRep[FORM_VARS] := GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )

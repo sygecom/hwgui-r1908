@@ -376,7 +376,7 @@ FUNCTION InspOpen(lShow)
    BEGIN PAGE "Properties" OF oTab
       @ 2, 30 PBROWSE oBrw1 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
          ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
-         setdlgkey(oDesigner:oDlgInsp, 0, VK_DELETE,{|| ResetToDefault(oBrw1)} )
+         hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE,{|| ResetToDefault(oBrw1)} )
 
       oBrw1:tColor := hwg_GetSysColor( COLOR_BTNTEXT )
       oBrw1:tColorSel := 8404992
@@ -387,7 +387,7 @@ FUNCTION InspOpen(lShow)
       oBrw1:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw1:aArray := aProp
       oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0, .T. ) )
-      oBrw1:AddColumn( HColumn():New( ,ColumnArBlock(),"U", 100, 0, .T. ) )
+      oBrw1:AddColumn( HColumn():New( ,hwg_ColumnArBlock(),"U", 100, 0, .T. ) )
    END PAGE OF oTab
 
    BEGIN PAGE "Events" OF oTab

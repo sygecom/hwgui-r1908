@@ -117,7 +117,7 @@ Local res
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
       IF Valtype(res) == "L" .AND. !res
-         GetSkip( oCtrl:oParent,oCtrl:handle,1 )
+         hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
       ENDIF
       Return res
    ENDIF

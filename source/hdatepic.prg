@@ -157,19 +157,19 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
    ENDIF
    IF msg == WM_CHAR
       IF wParam == VK_TAB
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_RETURN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       ENDIF
     ELSEIF msg == WM_KEYDOWN
-       IF ProcKeyList(Self, wParam)
+       IF hwg_ProcKeyList(Self, wParam)
           RETURN 0
        ENDIF
    ELSEIF msg == WM_GETDLGCODE
       IF wParam == VK_TAB //.AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         //GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         //hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN DLGC_WANTTAB
       ENDIF
    ENDIF
@@ -188,21 +188,21 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
 
    CASE WM_CHAR
       IF wParam == VK_TAB
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ELSEIF wParam == VK_RETURN
-         GetSkip(::oParent, ::handle, , 1)
+         hwg_GetSkip(::oParent, ::handle, , 1)
          RETURN 0
       ENDIF
       EXIT
    CASE WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
       EXIT
    CASE WM_GETDLGCODE
       IF wParam == VK_TAB //.AND. ::GetParentForm(Self):Type < WND_DLG_RESOURCE
-         // GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         // hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN DLGC_WANTTAB
       ENDIF
    ENDSWITCH
@@ -295,7 +295,7 @@ METHOD When() CLASS HDatePicker
    LOCAL res := .T.
    LOCAL nSkip
 
-   IF !CheckFocus(Self, .F.)
+   IF !hwg_CheckFocus(Self, .F.)
       RETURN .T.
    ENDIF
    IF hb_IsBlock(::bGetFocus)
@@ -306,7 +306,7 @@ METHOD When() CLASS HDatePicker
       ::lnoValid := !res
       ::oParent:lSuspendMsgsHandling := .F.
       IF hb_IsLogical(res) .AND. !res
-         WhenSetFocus(Self, nSkip)
+         hwg_WhenSetFocus(Self, nSkip)
          hwg_SendMessage(::handle, DTM_CLOSEMONTHCAL, 0, 0)
       ELSE
          ::SetFocus()
@@ -324,7 +324,7 @@ METHOD Valid() CLASS HDatePicker
    //IF !hwg_SelfFocus(GetParent(hwg_GetFocus()), ::GetParentForm():handle)
    //   RETURN .T.
    //ENDIF
-   IF !CheckFocus(Self, .T.) .OR. ::lnoValid
+   IF !hwg_CheckFocus(Self, .T.) .OR. ::lnoValid
       RETURN .T.
    ENDIF
    ::dValue := hwg_GetDatePicker(::handle)

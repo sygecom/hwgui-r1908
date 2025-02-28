@@ -193,16 +193,16 @@ METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
       RETURN 0
    ELSEIF msg == WM_KEYUP
       IF wParam == VK_DOWN
-         getskip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
       ELSEIF wParam == VK_UP
-         getskip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
       ELSEIF wParam == VK_TAB
-         GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDIF
       RETURN 0
    ELSEIF msg == WM_SYSKEYUP
       IF (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
-         getskip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN  0
       ENDIF
    ELSEIF msg == WM_GETDLGCODE
@@ -230,17 +230,17 @@ METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
    CASE WM_KEYUP
       SWITCH wParam
       CASE VK_DOWN
-         getskip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
       CASE VK_UP
-         getskip(::oparent, ::handle, , -1)
+         hwg_GetSkip(::oparent, ::handle, , -1)
       CASE VK_TAB
-         GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDSWITCH
       RETURN 0
 
    CASE WM_SYSKEYUP
       IF (pos := At("&", ::title)) > 0 .AND. wParam == Asc(Upper(SubStr(::title, ++pos, 1)))
-         getskip(::oparent, ::handle, , 1)
+         hwg_GetSkip(::oparent, ::handle, , 1)
          RETURN  0
       ENDIF
       EXIT
@@ -350,7 +350,7 @@ METHOD Auto_Size(cValue) CLASS HStatic
 
    IF ::autosize  //.OR. ::lOwnerDraw
       nAlign := ::nStyleHS - SS_NOTIFY
-      ASize := TxtRect(cValue, Self)
+      ASize := hwg_TxtRect(cValue, Self)
       // ajust VCENTER
       // ::nTop := ::nTop + Int((::nHeight - ASize[2] + 2) / 2)
       SWITCH nAlign

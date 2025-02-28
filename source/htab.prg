@@ -43,7 +43,7 @@ CLASS HPage INHERIT HObject
    METHOD New(cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip)
    METHOD Enable() INLINE ::Enabled(.T.)
    METHOD Disable() INLINE ::Enabled(.F.)
-   METHOD GetTabText() INLINE GetTabName(::oParent:handle, ::PageOrder - 1)
+   METHOD GetTabText() INLINE hwg_GetTabName(::oParent:handle, ::PageOrder - 1)
    METHOD SetTabText(cText)
    METHOD Refresh() INLINE ::oParent:ShowPage(::PageOrder)
    METHOD Enabled(lEnabled) SETGET
@@ -98,7 +98,7 @@ METHOD SetTabText(cText) CLASS HPage
    hwg_InvalidateRect(::oParent:handle, 0)
    /*
    FOR i := 1 TO Len(::oParent:Pages)
-      ::oParent:Pages[i]:aItemPos := TabItemPos(::oParent:handle, i - 1)
+      ::oParent:Pages[i]:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)
    NEXT
    */
 RETURN NIL
@@ -225,7 +225,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
       ENDIF
    ENDIF
    ::oPaint := HPaintTab():New(Self, , 0, 0, 0, 0) //, ::oFont)
-   //::brush := GetBackColorParent(Self, .T.)
+   //::brush := hwg_GetBackColorParent(Self, .T.)
    HWG_InitCommonControlsEx()
    ::Activate()
 
@@ -256,7 +256,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip
    ::aTabs := {}
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
 
-   ::brush := GetBackColorParent(Self, .T.)
+   ::brush := hwg_GetBackColorParent(Self, .T.)
    ::oPaint := HPaintTab():New(Self, , 0, 0, 0, 0) //, ::oFont)
 
 RETURN Self
@@ -288,7 +288,7 @@ METHOD Init() CLASS HTab
       ::Super:Init()
 
       IF Len(::aPages) > 0
-         //::Pages[1]:aItemPos := TabItemPos(::handle, 0)
+         //::Pages[1]:aItemPos := hwg_TabItemPos(::handle, 0)
          /*
          IF AScan(::Pages, {|p|p:brush != NIL}) > 0
             ::SetPaintSizePos(-1)
@@ -301,7 +301,7 @@ METHOD Init() CLASS HTab
          ::SetPaintSizePos(IIf(AScan(::Pages, {|p|p:brush != NIL}) > 0, -1, 1))
          ::nActive := 0
          FOR i := 1 TO Len(::aPages)
-            ::Pages[i]:aItemPos := TabItemPos(::handle, i - 1)
+            ::Pages[i]:aItemPos := hwg_TabItemPos(::handle, i - 1)
             ::HidePage(i)
             ::nActive := IIf(::nActive == 0 .AND. ::Pages[i]:Enabled, i, ::nActive)
          NEXT
@@ -330,7 +330,7 @@ METHOD SetPaintSizePos(nFlag) CLASS HTab
    
    LOCAL aItemPos
 
-   ::Pages[::nActive]:aItemPos := TabItemPos(::handle, ::nActive - 1) //0)
+   ::Pages[::nActive]:aItemPos := hwg_TabItemPos(::handle, ::nActive - 1) //0)
    aItemPos := ::Pages[::nActive]:aItemPos
    IF nFlag == - 1
       ::oPaint:nLeft := 1
@@ -389,7 +389,7 @@ METHOD StartPage(cname, oDlg, lEnabled, tColor, bColor, cTooltip) CLASS HTab
    ENDIF
    ::AddPage(HPage():New(cname, Len(::aPages), lEnabled, tColor, bcolor, cTooltip), cName)
    ::nActive := Len(::aPages)
-   ::Pages[::nActive]:aItemPos := {0, 0, 0, 0} //TabItemPos(::handle, ::nActive - 1)
+   ::Pages[::nActive]:aItemPos := {0, 0, 0, 0} //hwg_TabItemPos(::handle, ::nActive - 1)
 
 RETURN NIL
 
@@ -477,7 +477,7 @@ METHOD ChangePage(nPage) CLASS HTab
       RETURN NIL
    ENDIF
    IF !Empty(::aPages) .AND. ::pages[nPage]:enabled
-      //-client_rect := TabItemPos(::handle, ::nActive - 1)
+      //-client_rect := hwg_TabItemPos(::handle, ::nActive - 1)
       IF ::nActive > 0
          ::HidePage(::nActive)
          IF ::Pages[nPage]:brush != NIL
@@ -824,7 +824,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       RETURN -1  // painted objects without METHOD PAINT
 
    ELSEIF msg == WM_PRINT
-      //-AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})
+      //-AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)})
       //- ::SetPaintSizePos(-1)
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
@@ -835,7 +835,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       ENDIF
 
    ELSEIF msg == WM_SIZE
-      AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::handle, i - 1)})
+      AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::handle, i - 1)})
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
@@ -846,7 +846,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       hwg_SendMessage(::handle, WM_PRINT, hwg_GetDC(::handle), PRF_CHECKVISIBLE) //+ PRF_ERASEBKGND) //PRF_CLIENT + PRF_CHILDREN + PRF_OWNED)
 
    ELSEIF msg == WM_KEYDOWN .AND. hwg_GetFocus()= ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
-       IF ProcKeyList(Self, wParam)
+       IF hwg_ProcKeyList(Self, wParam)
           RETURN - 1
        ELSEIF wParam == VK_ESCAPE
          RETURN 0
@@ -856,13 +856,13 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
              RETURN 0
           ENDIF
        ELSEIF (wparam == VK_DOWN .OR. wparam == VK_RETURN) .AND. ::nActive > 0  //
-           GetSkip(Self, ::handle, , 1)
+           hwg_GetSkip(Self, ::handle, , 1)
            RETURN 0
        ELSEIF wParam == VK_TAB
-           GetSkip(::oParent, ::handle, , iif(IsCtrlShift(.F., .T.), -1, 1))
+           hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
            RETURN 0
        ELSEIF wparam == VK_UP .AND. ::nActive > 0  //
-          GetSkip(::oParent, ::handle, , -1)
+          hwg_GetSkip(::oParent, ::handle, , -1)
           RETURN 0
        ENDIF
    ELSEIF msg == WM_HSCROLL .OR. msg == WM_VSCROLL //.AND. ::FINDCONTROL(, hwg_GetFocus()):classname = "HUPDO"
@@ -899,7 +899,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    ENDIF
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
-          GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
+          hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
           ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
@@ -950,7 +950,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       RETURN -1 // painted objects without METHOD PAINT
 
    CASE WM_PRINT
-      //-AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::oParent:handle, i - 1)})
+      //-AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::oParent:handle, i - 1)})
       //- ::SetPaintSizePos(-1)
       ::SetPaintSizePos(IIf(::nPaintHeight > 1, -1, 1))
       IF ::nActive > 0
@@ -963,7 +963,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
       EXIT
 
    CASE WM_SIZE
-      AEval(::Pages, {|p, i|p:aItemPos := TabItemPos(::handle, i - 1)})
+      AEval(::Pages, {|p, i|p:aItemPos := hwg_TabItemPos(::handle, i - 1)})
       ::oPaint:nHeight := ::nPaintHeight
       ::oPaint:Anchor := IIf(::nPaintHeight > 1, 15, 0)
       IF ::nPaintHeight > 1
@@ -979,7 +979,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
 
    CASE WM_KEYDOWN
       IF hwg_GetFocus() == ::handle //.OR. (msg == WM_GETDLGCODE .AND. wparam == VK_RETURN))
-         IF ProcKeyList(Self, wParam)
+         IF hwg_ProcKeyList(Self, wParam)
             RETURN -1
          ELSEIF wParam == VK_ESCAPE
             RETURN 0
@@ -989,13 +989,13 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
                RETURN 0
             ENDIF
          ELSEIF (wparam == VK_DOWN .OR. wparam == VK_RETURN) .AND. ::nActive > 0
-            GetSkip(Self, ::handle, , 1)
+            hwg_GetSkip(Self, ::handle, , 1)
             RETURN 0
          ELSEIF wParam == VK_TAB
-            GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+            hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wparam == VK_UP .AND. ::nActive > 0
-            GetSkip(::oParent, ::handle, , -1)
+            hwg_GetSkip(::oParent, ::handle, , -1)
             RETURN 0
          ENDIF
       ENDIF
@@ -1043,7 +1043,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
    IF !((msg == WM_COMMAND .OR. msg == WM_NOTIFY) .AND. ::oParent:lSuspendMsgsHandling .AND. ::lSuspendMsgsHandling)
       IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
          hwg_PtrToUlong(hwg_GetParent(::GetParentForm():nInitFocus)) == hwg_PtrToUlong(::handle)
-         GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
+         hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus, , 0)
          ::GetParentForm():nInitFocus := 0
       ENDIF
       IF msg == WM_KILLFOCUS .AND. ::GetParentForm() != NIL .AND. ::GetParentForm():Type < WND_DLG_RESOURCE
@@ -1080,7 +1080,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    FOR i := 1 TO Len(::Pages)
       IF !::pages[i]:enabled .OR. i == hwg_PtrToUlong(nPageEnable)
          //client_rect := ::Pages[i]:aItemPos
-         client_rect := TabItemPos(::handle, i - 1)
+         client_rect := hwg_TabItemPos(::handle, i - 1)
          IF (hwg_PtInRect(client_rect, pt)) .AND. i != nPageEnable
             RETURN 0
          ENDIF
@@ -1143,7 +1143,7 @@ STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
          ENDIF
        NEXT
      ELSE
-      nPageAcel := FindTabAccelerator(oCtrl, nKeyDown)
+      nPageAcel := hwg_FindTabAccelerator(oCtrl, nKeyDown)
       IF nPageAcel == 0
          hwg_MsgBeep()
       ENDIF
@@ -1153,7 +1153,7 @@ RETURN nPage
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-FUNCTION FindTabAccelerator(oPage, nKey)
+FUNCTION hwg_FindTabAccelerator(oPage, nKey)
   
    LOCAL i
    LOCAL pos
@@ -1250,7 +1250,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
    ::hDC := hwg_GetDC(::oParent:handle)
    FOR i := 1 TO Len(::oParent:Pages)
       oPage := ::oParent:Pages[i]
-      client_rect := TabItemPos(::oParent:handle, i - 1)
+      client_rect := hwg_TabItemPos(::oParent:handle, i - 1)
       oPage:aItemPos := client_rect
       IF oPage:brush != NIL //.AND. client_rect[4] - client_rect[2] > 5
          //hwg_SetBkMode(hDC, TRANSPARENT)
@@ -1309,7 +1309,7 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
          //hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_GRAYTEXT))
          hwg_SetTextColor(::hDC, hwg_GetSysColor(COLOR_BTNHIGHLIGHT))
     ENDIF
-    aTxtSize := TxtRect(oPage:caption, oPage:oParent)
+    aTxtSize := hwg_TxtRect(oPage:caption, oPage:oParent)
     IF oPage:oParent:himl != NIL
         BmpSize := ((aItemPos[3] - aItemPos[1]) - (oPage:oParent:aBmpSize[1] + aTxtSize[1])) / 2
         BmpSize += oPage:oParent:aBmpSize[1]
@@ -1356,3 +1356,13 @@ METHOD showTextTabs(oPage, aItemPos) CLASS HPaintTab
 RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(FINDTABACCELERATOR, HWG_FINDTABACCELERATOR);
+#endif
+
+#pragma ENDDUMP

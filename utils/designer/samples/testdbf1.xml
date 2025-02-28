@@ -58,7 +58,7 @@ Function GetVars
   m_Adress :=TabDbf->Adress
   m_Fone :=TabDbf->Fone
   m_e_Mail :=TabDbf->e_Mail
-  RefreshAllGets(oDlg)
+  hwg_RefreshAllGets(oDlg)
 ENDFUNC
 
 ]]>

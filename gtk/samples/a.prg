@@ -44,7 +44,7 @@ Private nColor, oBmp2
          MENUITEM "&Test Tab" ACTION TestTab()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION hwg_CopyStringToClipboard(MsgGet("Dialog Sample","Input table name"))
+               ACTION hwg_CopyStringToClipboard(hwg_MsgGet("Dialog Sample","Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          #ifdef TEST_PRINT         
          SEPARATOR
@@ -85,8 +85,8 @@ Local nId
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o,x,y|o:Move(,,x,y)}         ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      CreateList( oBrw,.T. )
-      oBrw:bScrollPos := {|o,n,lEof,nPos|VScrollPos(o,n,lEof,nPos)}
+      hwg_CreateList( oBrw,.T. )
+      oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF

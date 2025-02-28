@@ -48,7 +48,7 @@ STATIC FUNCTION DefError(oError)
       RETURN .F.
    ENDIF
 
-   cMessage := ErrorMessage(oError)
+   cMessage := hwg_ErrorMessage(oError)
    IF !Empty(oError:osCode)
       cDOSError := "(DOS Error " + LTrim(Str(oError:osCode)) + ")"
    ENDIF
@@ -80,7 +80,7 @@ STATIC FUNCTION DefError(oError)
    RETURN .F.
 
 
-FUNCTION ErrorMessage(oError)
+FUNCTION hwg_ErrorMessage(oError)
    LOCAL cMessage
 
    // start error message
@@ -150,3 +150,13 @@ STATIC FUNCTION ErrorPreview(cMess)
 
    oDlg:Activate()
    RETURN NIL
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(ERRORMESSAGE, HWG_ERRORMESSAGE);
+#endif
+
+#pragma ENDDUMP

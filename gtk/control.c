@@ -722,7 +722,7 @@ static gint cb_timer(gchar *data)
 
   if (!pSymTimerProc)
   {
-    pSymTimerProc = hb_dynsymFind("TIMERPROC");
+    pSymTimerProc = hb_dynsymFind("HWG_TIMERPROC");
   }
 
   if (pSymTimerProc)

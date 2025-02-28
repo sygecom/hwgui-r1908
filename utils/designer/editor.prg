@@ -108,9 +108,9 @@ HB_SYMBOL_UNUSED( oOptDesc )
    oNode := oIni:aItems[1]
    nStart := 1
    IF oNode:Find( "font",@nStart ) == Nil
-      oNode:Add( Font2XML( HDTheme():oFont ) )
+      oNode:Add( hwg_Font2XML( HDTheme():oFont ) )
    ELSE
-      oNode:aItems[nStart] := Font2XML( HDTheme():oFont )
+      oNode:aItems[nStart] := hwg_Font2XML( HDTheme():oFont )
    ENDIF
    IF oNode:Find( "themes",@nStart ) != Nil
       oNode := oNode:aItems[nStart]
@@ -223,10 +223,10 @@ FUNCTION EditMethod( cMethName, cMethod )
    // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
 
    // oEdit:title := cMethod
-   *-SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
+   *-hwg_SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
          *-{hwg_SendMessage(oEdit:handle,EM_SETTABSTOPS  ,space(2), 0)})
    ACTIVATE DIALOG oDlg
-   *-SetDlgKey( oEdit, 0, 9)
+   *-hwg_SetDlgKey( oEdit, 0, 9)
    IF lRes
       Return cMethod
    ENDIF
@@ -561,7 +561,7 @@ Return Nil
 
 STATIC FUNCTION InsertField(nModus)
 
-   LOCAL cDBF := MsgGet("DBF Name","input table name")
+   LOCAL cDBF := hwg_MsgGet("DBF Name","input table name")
 
 HB_SYMBOL_UNUSED( nModus )
 

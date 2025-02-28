@@ -361,13 +361,13 @@ METHOD PrinterFile(fname) CLASS PrintDos
 
    RETURN .T.
 
-FUNCTION wProw(oPrinter)
+FUNCTION hwg_wProw(oPrinter)
    RETURN oPrinter:nProw
 
-FUNCTION wPCol(oPrinter)
+FUNCTION hwg_wPCol(oPrinter)
    RETURN oPrinter:nPcol
 
-FUNCTION wSetPrc(x, y, oPrinter)
+FUNCTION hwg_wSetPrc(x, y, oPrinter)
    oPrinter:SetPrc(x, y)
    RETURN NIL
 
@@ -510,7 +510,7 @@ STATIC FUNCTION PrintDosPrint(oText, oPrt)
 
 
 STATIC FUNCTION PrintDosAnt(nPage, oText)
-   LOCAL oDlg := GetModalhandle()
+   LOCAL oDlg := hwg_GetModalhandle()
    nPage := --nPage
    IF nPage < 1
       nPage := 1
@@ -523,7 +523,7 @@ STATIC FUNCTION PrintDosAnt(nPage, oText)
    RETURN nPage
 
 STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
-   LOCAL oDlg := GetModalhandle()
+   LOCAL oDlg := hwg_GetModalHandle()
    nPage := ++nPage
    IF nPage > oPage
       nPage := oPage
@@ -531,7 +531,7 @@ STATIC FUNCTION PrintDosNext(oPage, nPage, oText)
    hwg_SetDlgItemText(oDlg, 1001, oText[nPage])
    RETURN nPage
 
-FUNCTION regenfile(o, new)
+FUNCTION hwg_regenfile(o, new)
    LOCAL aText := hwg_AFillText(o)
    LOCAL stroka
    LOCAL o1 := printdos():new(new)
@@ -654,6 +654,10 @@ HB_FUNC(HWG_AFILLTEXT) // TODO: static ?
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(AFILLTEXT, HWG_AFILLTEXT);
+HB_FUNC_TRANSLATE(WPROW, HWG_WPROW);
+HB_FUNC_TRANSLATE(WPCOL, HWG_WPCOL);
+HB_FUNC_TRANSLATE(WSETPRC, HWG_WSETPRC);
+HB_FUNC_TRANSLATE(REGENFILE, HWG_REGENFILE);
 #endif
 
 #PRAGMA ENDDUMP

@@ -35,7 +35,7 @@ Local i,res := 0, n := 1, iValue
    next
 Return res
 
-Function MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
+Function hwg_MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
 Local oModDlg, oFont := HFont():Add( "Sans",0,12 )
 Local cRes := ""
 
@@ -64,7 +64,7 @@ Local cRes := ""
 
 Return cRes
 
-Function WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel )
+Function hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel )
 Local oDlg, oBrw
 Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
 Local hDC, aMetr, width, height, screenh
@@ -144,7 +144,7 @@ EXIT PROCEDURE GTKEXIT()
 Return
 */
 
-Function RefreshAllGets( oDlg )
+Function hwg_RefreshAllGets( oDlg )
 
    AEval( oDlg:GetList, {|o|o:Refresh()} )
 Return Nil
@@ -152,7 +152,7 @@ Return Nil
 FUNCTION HWG_Version(oTip)
 RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
 
-Function WriteStatus( oWnd, nPart, cText, lRedraw )
+Function hwg_WriteStatus( oWnd, nPart, cText, lRedraw )
 Local aControls, i
    aControls := oWnd:aControls
    IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
@@ -168,6 +168,10 @@ Return Nil
 #ifdef HWGUI_FUNC_TRANSLATE_ON
 HB_FUNC_TRANSLATE(ENDWINDOW, HWG_ENDWINDOW);
 HB_FUNC_TRANSLATE(VCOLOR, HWG_VCOLOR);
+HB_FUNC_TRANSLATE(MSGGET, HWG_MSGGET);
+HB_FUNC_TRANSLATE(WCHOICE, HWG_WCHOICE);
+HB_FUNC_TRANSLATE(REFRESHALLGETS, HWG_REFRESHALLGETS);
+HB_FUNC_TRANSLATE(WRITESTATUS, HWG_WRITESTATUS);
 #endif
 
 #pragma ENDDUMP

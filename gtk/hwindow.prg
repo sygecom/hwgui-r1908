@@ -148,7 +148,7 @@ CLASS HMainWindow INHERIT HWindow
          {|o,w|onSysCommand(o,w)},         ;
          {|o,w,l|onNotifyIcon(o,w,l)},     ;
          {|o,w,l|onEnterIdle(o,w,l)},      ;
-         {|o|ReleaseAllWindows(o:handle)}, ;
+         {|o|hwg_ReleaseAllWindows(o:handle)}, ;
          {|o|onDestroy(o)}                 ;
       } ;
    }
@@ -198,7 +198,7 @@ Return Self
 METHOD Activate( lShow, lMaximize, lMinimize ) CLASS HMainWindow
 Local oWndClient, handle
 
-   // CreateGetList( Self )
+   // hwg_CreateGetList( Self )
 
    IF ::type == WND_MDI
 /*
@@ -225,7 +225,7 @@ Local i
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         // onTrackScroll( Self,wParam,lParam )
+         // hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -256,11 +256,11 @@ ENDCLASS
 
 METHOD Activate( lShow ) CLASS HMDIChildWindow
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
    // hwg_CreateMdiChildWindow( Self )
    
    ::handle := hwg_CreateMdiChildWindow( Self )
-   InitControls( Self )
+   hwg_InitControls( Self )
    IF ::bInit != Nil
       Eval( ::bInit,Self )
    ENDIF  
@@ -274,7 +274,7 @@ Local i
       Return Eval( ::aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         onTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -316,7 +316,7 @@ Return Self
 
 METHOD Activate( lShow ) CLASS HChildWindow
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
    hwg_ActivateChildWindow((lShow==Nil .OR. lShow),::handle )
 
 Return Nil
@@ -328,7 +328,7 @@ Local i
       Return Eval( HMainWindow():aMessages[2,i], Self, wParam, lParam )
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         onTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -336,7 +336,7 @@ Local i
 Return -1
 */
 
-Function ReleaseAllWindows( hWnd )
+Function hwg_ReleaseAllWindows( hWnd )
 Local oItem, iCont, nCont
 /*
    //  Vamos mandar destruir as filhas
@@ -470,7 +470,7 @@ Return 0
 
 Static Function onMdiCreate( oWnd,lParam )
 /*
-   InitControls( oWnd )
+   hwg_InitControls( oWnd )
    IF oWnd:bInit != Nil
       Eval( oWnd:bInit,oWnd )
    ENDIF  
@@ -522,3 +522,13 @@ Function hwg_CenterWindow( oWnd )
    hwg_MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
 Return Nil
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RELEASEALLWINDOWS, HWG_RELEASEALLWINDOWS);
+#endif
+
+#pragma ENDDUMP

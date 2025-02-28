@@ -31,7 +31,7 @@ CLASS VAR aTimers   INIT {}
          (::xName := cName, __objAddData(::oParent, cName), ::oParent: &(cName) := Self), NIL)
    ACCESS Interval INLINE ::value
    ASSIGN Interval(x) INLINE ::value := x, ;
-                                           SetTimer(::oParent:handle, ::id, ::value)
+                                           hwg_SetTimer(::oParent:handle, ::id, ::value)
 
    METHOD New(oParent, nId, value, bAction)
    METHOD Init()
@@ -55,7 +55,7 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
    ::bAction := bAction
    /*
     if ::value > 0
-      SetTimer(oParent:handle, ::id, ::value)
+      hwg_SetTimer(oParent:handle, ::id, ::value)
    endif
    */
    ::Init()
@@ -67,7 +67,7 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
 METHOD Init() CLASS HTimer
    IF !::lInit
       IF ::value > 0
-         SetTimer(::oParent:handle, ::id, ::value)
+         hwg_SetTimer(::oParent:handle, ::id, ::value)
       ENDIF
    ENDIF
    RETURN  NIL
@@ -76,7 +76,7 @@ METHOD END() CLASS HTimer
    LOCAL i
 
    IF ::oParent != NIL
-      KillTimer(::oParent:handle, ::id)
+      hwg_KillTimer(::oParent:handle, ::id)
    ENDIF
    IF (i := AScan(::aTimers, {|o|o:id == ::id})) > 0
       ADel(::aTimers, i)
@@ -87,12 +87,12 @@ METHOD END() CLASS HTimer
 
 METHOD onAction()
 
-   TimerProc(, ::id, ::interval)
+   hwg_TimerProc(, ::id, ::interval)
 
 RETURN NIL
 
 
-FUNCTION TimerProc(hWnd, idTimer, Time)
+FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
    LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
    HB_SYMBOL_UNUSED(hWnd)
@@ -111,7 +111,17 @@ FUNCTION TimerProc(hWnd, idTimer, Time)
 
    FOR i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]
-      KillTimer(oTimer:oParent:handle, oTimer:id)
+      hwg_KillTimer(oTimer:oParent:handle, oTimer:id)
    NEXT
 
    RETURN
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TIMERPROC, HWG_TIMERPROC);
+#endif
+
+#pragma ENDDUMP

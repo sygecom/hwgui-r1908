@@ -108,12 +108,12 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    ELSEIF msg == WM_CHAR
       IF wParam == VK_TAB
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ENDIF
 
    ELSEIF msg == WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
 
@@ -157,13 +157,13 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTrackBar
 
    CASE WM_CHAR
       IF wParam == VK_TAB
-         GetSkip(::oParent, ::handle, , IIf(IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
          RETURN 0
       ENDIF
       EXIT
 
    CASE WM_KEYDOWN
-      IF ProcKeyList(Self, wParam)
+      IF hwg_ProcKeyList(Self, wParam)
          RETURN 0
       ENDIF
       EXIT

@@ -839,7 +839,7 @@
 
 #xcommand SET KEY <nctrl>,<nkey> [ OF <oDlg> ] [ TO <func> ] ;
           => ;
-    SetDlgKey( <oDlg>, <nctrl>, <nkey>, <{func}> )
+    hwg_SetDlgKey( <oDlg>, <nctrl>, <nkey>, <{func}> )
 
 /*             */
 #xcommand @ <x>,<y> GRAPH [ <oGraph> DATA ] <aData> ;

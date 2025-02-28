@@ -15,7 +15,7 @@
 REQUEST HWG_ENDWINDOW
 
 Static aMessModalDlg := { ;
-         { WM_COMMAND,{|o,w,l|DlgCommand(o,w,l)} },         ;
+         { WM_COMMAND,{|o,w,l|hwg_DlgCommand(o,w,l)} },         ;
          { WM_SIZE,{|o,w,l|onSize(o,w,l)} },                ;
          { WM_INITDIALOG,{|o,w,l|InitModalDlg(o,w,l)} },    ;
          { WM_ERASEBKGND,{|o,w|onEraseBk(o,w)} },           ;
@@ -119,7 +119,7 @@ RETURN Self
 METHOD Activate( lNoModal ) CLASS HDialog
 Local hParent,oWnd
 
-   CreateGetList( Self )
+   hwg_CreateGetList( Self )
 
    IF lNoModal==Nil ; lNoModal:=.F. ; ENDIF
    ::lModal := !lNoModal
@@ -246,7 +246,7 @@ Local aCoors
 */   
 Return 0
 
-Function DlgCommand( oDlg,wParam,lParam )
+Function hwg_DlgCommand( oDlg,wParam,lParam )
 Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 Local aMenu, i, hCtrl
 
@@ -270,7 +270,7 @@ Local aMenu, i, hCtrl
             ENDIF
          ENDIF
          IF oDlg:lClipper
-            IF !GetSkip( oDlg,hCtrl,1 )
+            IF !hwg_GetSkip( oDlg,hCtrl,1 )
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )
@@ -354,11 +354,11 @@ Local iParLow := hwg_LOWORD(wParam)
 
 Return 0
 
-Function GetModalDlg
+Function hwg_GetModalDlg()
 Local i := Len(HDialog():aModalDialogs)
 Return IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
-Function GetModalHandle
+Function hwg_GetModalHandle()
 Local i := Len(HDialog():aModalDialogs)
 Return IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
@@ -384,7 +384,7 @@ Local oDlg
    // writelog("EndDialog-10")
 Return  hwg_DestroyWindow( oDlg:handle )
 
-Function SetDlgKey( oDlg, nctrl, nkey, block )
+Function hwg_SetDlgKey( oDlg, nctrl, nkey, block )
 Local i, aKeys
 
    IF oDlg == Nil ; oDlg := HCustomWindow():oDefaultParent ; ENDIF
@@ -411,3 +411,16 @@ Local i, aKeys
    ENDIF
 
 Return .T.
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DLGCOMMAND, HWG_DLGCOMMAND);
+HB_FUNC_TRANSLATE(GETMODALDLG, HWG_GETMODALDLG);
+HB_FUNC_TRANSLATE(GETMODALHANDLE, HWG_GETMODALHANDLE);
+HB_FUNC_TRANSLATE(SETDLGKEY, HWG_SETDLGKEY);
+#endif
+
+#pragma ENDDUMP

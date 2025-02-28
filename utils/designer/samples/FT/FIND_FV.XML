@@ -37,10 +37,10 @@ nA:=0
 nN:=1]]>
   </method>
   <method name="onDlgInit">
-    <![CDATA[WriteStatus(oDlg,1," I.H.K 1.01a", .t.)
-//WriteStatus(oDlg,2, rich_tgln(date(),"H P, D M Y"), .t.)
-WriteStatus(oDlg,2, dtoc(date()), .t.)
-WriteStatus(oDlg,4," (c)2006 Richard Roesnadi", .t.)
+    <![CDATA[hwg_WriteStatus(oDlg,1," I.H.K 1.01a", .t.)
+//hwg_WriteStatus(oDlg,2, rich_tgln(date(),"H P, D M Y"), .t.)
+hwg_WriteStatus(oDlg,2, dtoc(date()), .t.)
+hwg_WriteStatus(oDlg,4," (c)2006 Richard Roesnadi", .t.)
 ]]>
   </method>
   <part class="editbox">
@@ -285,7 +285,7 @@ oB:aColumns[5]:footing:=""
 oB:aColumns[6]:footing:=""
 
 oB:refresh()
-refreshAllGets(oDlg)
+hwg_RefreshAllGets(oDlg)
 ]]>
     </method>
   </part>

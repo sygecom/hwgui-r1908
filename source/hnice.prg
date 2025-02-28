@@ -124,12 +124,13 @@ METHOD INIT() CLASS HNiceButton
    ENDIF
    RETURN NIL
 
-FUNCTION NICEBUTTPROC(hBtn, msg, wParam, lParam)
+#if 0 // old code for reference
+FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 
    LOCAL oBtn
    IF msg != WM_CREATE
       IF AScan({WM_MOUSEMOVE, WM_PAINT, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_LBUTTONDBLCLK, WM_DESTROY, WM_MOVING, WM_SIZE}, msg) > 0
-         IF (oBtn := FindSelf(hBtn)) == NIL
+         IF (oBtn := hwg_FindSelf(hBtn)) == NIL
             RETURN .F.
          ENDIF
 
@@ -152,6 +153,66 @@ FUNCTION NICEBUTTPROC(hBtn, msg, wParam, lParam)
 
    ENDIF
    RETURN .F.
+#else
+FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
+
+   LOCAL oBtn
+
+   SWITCH msg
+
+   //CASE WM_CREATE
+   //   EXIT
+
+   CASE WM_MOUSEMOVE
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MouseMove(wParam, lParam)
+      ENDIF
+      EXIT
+
+   CASE WM_PAINT
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:Paint()
+      ENDIF
+      EXIT
+
+   CASE WM_LBUTTONDOWN
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MDown()
+      ENDIF
+      EXIT
+
+   CASE WM_LBUTTONUP
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:MUp()
+      ENDIF
+      EXIT
+
+   //CASE WM_LBUTTONDBLCLK
+   //   IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+   //   ENDIF
+   //   EXIT
+
+   CASE WM_DESTROY
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:END()
+         RETURN .T.
+      ENDIF
+      EXIT
+
+   //CASE WM_MOVING
+   //   IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+   //   ENDIF
+   //   EXIT
+
+   CASE WM_SIZE
+      IF (oBtn := hwg_FindSelf(hBtn)) != NIL
+         oBtn:Size()
+      ENDIF
+
+   ENDSWITCH
+
+RETURN .F.
+#endif
 
 METHOD Create() CLASS HNICEButton
 
@@ -191,13 +252,13 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
    HB_SYMBOL_UNUSED(lParam)
 
    IF ::lFlat .AND. ::state != OBTN_INIT
-      otmp := SetNiceBtnSelected()
+      otmp := hwg_SetNiceBtnSelected()
 
       IF otmp != NIL .AND. otmp:id != ::id .AND. !otmp:lPress
          otmp:state := OBTN_NORMAL
          hwg_InvalidateRect(otmp:handle, 0)
          hwg_PostMessage(otmp:handle, WM_PAINT, 0, 0)
-         SetNiceBtnSelected(NIL)
+         hwg_SetNiceBtnSelected(NIL)
       ENDIF
 
       IF ::state == OBTN_NORMAL
@@ -206,7 +267,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
          // aBtn[CTRL_HANDLE] := hBtn
          hwg_InvalidateRect(::handle, 0)
          hwg_PostMessage(::handle, WM_PAINT, 0, 0)
-         SetNiceBtnSelected(Self)
+         hwg_SetNiceBtnSelected(Self)
       ENDIF
    ENDIF
 
@@ -221,7 +282,7 @@ METHOD MUp() CLASS HNICEButton
          hwg_PostMessage(::handle, WM_PAINT, 0, 0)
       ENDIF
       IF !::lFlat
-         SetNiceBtnSelected(NIL)
+         hwg_SetNiceBtnSelected(NIL)
       ENDIF
       IF hb_IsBlock(::bClick)
          Eval(::bClick, ::oParent, ::id)
@@ -237,7 +298,7 @@ METHOD MDown() CLASS HNICEButton
 
       hwg_InvalidateRect(::handle, 0, 0)
       hwg_PostMessage(::handle, WM_PAINT, 0, 0)
-      SetNiceBtnSelected(Self)
+      hwg_SetNiceBtnSelected(Self)
    ENDIF
 
    RETURN Self
@@ -303,7 +364,7 @@ METHOD RELEASE() CLASS HNiceButton
 
    RETURN NIL
 
-FUNCTION SetNiceBtnSelected(oBtn)
+FUNCTION hwg_SetNiceBtnSelected(oBtn)
 
    LOCAL otmp := HNiceButton() :oSelected
 
@@ -313,3 +374,13 @@ FUNCTION SetNiceBtnSelected(oBtn)
 
    RETURN otmp
 
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(NICEBUTTPROC, HWG_NICEBUTTPROC);
+HB_FUNC_TRANSLATE(SETNICEBTNSELECTED, HWG_SETNICEBTNSELECTED);
+#endif
+
+#pragma ENDDUMP

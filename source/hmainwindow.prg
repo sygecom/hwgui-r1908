@@ -42,7 +42,7 @@ CLASS VAR aMessages INIT { ;
                            { ;
                              {|o, w, l|onCommand(o, w, l)},        ;
                              {|o, w|onEraseBk(o, w)},              ;
-                             {|o|onMove(o)},                       ;
+                             {|o|hwg_OnMove(o)},                       ;
                              {|o, w, l|onSize(o, w, l)},           ;
                              {|o, w, l|onSysCommand(o, w, l)},     ;
                              {|o, w, l|onNotifyIcon(o, w, l)},     ;
@@ -51,7 +51,7 @@ CLASS VAR aMessages INIT { ;
                              {|o|onDestroy(o)},                    ;
                              {|o, w|onEndSession(o, w)},           ;
                              {|o, w, l|onActivate(o, w, l)},       ;
-                             {|o, w, l|onHelp(o, w, l)}            ;
+                             {|o, w, l|hwg_onHelp(o, w, l)}            ;
                            } ;
                          }
 #endif
@@ -95,7 +95,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
          nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
-         SetHelpFileName(cHelp)
+         hwg_SetHelpFileName(cHelp)
       ENDIF
 
       // ADDED screen to backgroup to MDI MAIN
@@ -113,7 +113,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
          IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       IF cHelp != NIL
-         SetHelpFileName(cHelp)
+         hwg_SetHelpFileName(cHelp)
       ENDIF
 
    ENDIF
@@ -136,7 +136,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
    DEFAULT lMinimized TO .F.
    lCentered := (!lMaximized .AND. !Empty(lCentered) .AND. lCentered) .OR. hwg_BitAND(::Style, DS_CENTER) != 0
    DEFAULT lShow TO .T.
-   CreateGetList(Self)
+   hwg_CreateGetList(Self)
    AEval(::aControls, {|o|o:lInit := .F.})
 
    IF ::Type == WND_MDI
@@ -167,7 +167,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMain
       // recalculate area offset
       hwg_SendMessage(::handle, WM_SIZE, 0, hwg_MAKELPARAM(::nWidth, ::nHeight))
 
-      InitControls(Self)
+      hwg_InitControls(Self)
       IF hb_IsBlock(::bInit)
          lres := Eval(::bInit, Self)
          IF hb_IsLogical(lres) .AND. !lres
@@ -274,7 +274,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
          IF ::nScrollBars != -1
              ::ScrollHV(Self, msg, wParam, lParam)
          ENDIF
-         onTrackScroll(Self, msg, wParam, lParam)
+         hwg_OnTrackScroll(Self, msg, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
@@ -338,7 +338,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
    CASE WM_MOVE
       IF !::lSuspendMsgsHandling
-         RETURN onMove(Self)
+         RETURN hwg_OnMove(Self)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
@@ -389,7 +389,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
    CASE WM_HELP
       IF !::lSuspendMsgsHandling
-         RETURN onHelp(Self, wParam, lParam)
+         RETURN hwg_onHelp(Self, wParam, lParam)
       ENDIF
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
@@ -399,7 +399,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
       IF ::nScrollBars != -1
          ::ScrollHV(Self, msg, wParam, lParam)
       ENDIF
-      onTrackScroll(Self, msg, wParam, lParam)
+      hwg_OnTrackScroll(Self, msg, wParam, lParam)
       RETURN ::Super:onEvent(msg, wParam, lParam)
 
    #ifdef __XHARBOUR__
@@ -697,7 +697,7 @@ STATIC FUNCTION onSysCommand(oWnd, wParam, lParam)
       // accelerator MDICHILD
       IF Len(HWindow():aWindows) > 2 .AND. ;
          ((oChild := oWnd):Type == WND_MDICHILD .OR. !Empty(oChild := oWnd:GetMdiActive()))
-         IF (oCtrl := FindAccelerator(oChild, lParam)) != NIL
+         IF (oCtrl := hwg_FindAccelerator(oChild, lParam)) != NIL
             oCtrl:SetFocus()
             hwg_SendMessage(oCtrl:handle, WM_SYSKEYUP, lParam, 0)
             RETURN -2
@@ -783,10 +783,10 @@ STATIC FUNCTION onCloseQuery(o)
 
    IF hb_IsBlock(o:bCloseQuery)
       IF Eval(o:bCloseQuery)
-         ReleaseAllWindows(o:handle)
+         hwg_ReleaseAllWindows(o:handle)
       ENDIF
    ELSE
-      ReleaseAllWindows(o:handle)
+      hwg_ReleaseAllWindows(o:handle)
    ENDIF
 
 RETURN -1

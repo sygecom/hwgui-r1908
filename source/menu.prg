@@ -126,7 +126,7 @@ FUNCTION hwg_GetSubMenuHandle(aMenu, nId)
 
    RETURN IIf(aSubMenu == NIL, 0, aSubMenu[5])
 
-FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
+FUNCTION hwg_BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
    LOCAL hMenu, nPos, aMenu, oBmp
 
    IF nPosParent == NIL
@@ -153,7 +153,7 @@ FUNCTION BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
       IF hb_IsArray(aMenu[1, nPos, 1])
-         BuildMenu(aMenu,,, nPos)
+         hwg_BuildMenu(aMenu,,, nPos)
       ELSE
          IF aMenu[1, nPos, 1] == NIL .OR. aMenu[1, nPos, 2] != NIL
             /* This code just for sure menu runtime hfrmtmpl.prg is enable */
@@ -217,7 +217,7 @@ FUNCTION hwg_EndMenu()
    IF s__nLevel > 0
       s__nLevel--
    ELSE
-      BuildMenu(AClone(s__aMenuDef), IIf(s__oWnd != NIL, s__oWnd:handle, NIL), ;
+      hwg_BuildMenu(AClone(s__aMenuDef), IIf(s__oWnd != NIL, s__oWnd:handle, NIL), ;
                  s__oWnd,, IIf(s__oWnd != NIL, .F., .T.))
       IF s__oWnd != NIL .AND. s__aAccel != NIL .AND. !Empty(s__aAccel)
          s__oWnd:hAccel := hwg_CreateAcceleratorTable(s__aAccel)
@@ -316,7 +316,7 @@ FUNCTION hwg_SearchPosBitmap(nPos_Id)
 
    RETURN lBmp
 
-FUNCTION DeleteMenuItem(oWnd, nId)
+FUNCTION hwg_DeleteMenuItem(oWnd, nId)
    LOCAL aSubMenu, nPos
 
    IF (aSubMenu := hwg_FindMenuItem(oWnd:menu, nId, @nPos)) != NIL
@@ -326,3 +326,14 @@ FUNCTION DeleteMenuItem(oWnd, nId)
       hwg_DeleteMenu(hwg_GetMenuHandle(oWnd:handle), nId)
    ENDIF
    RETURN NIL
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(BUILDMENU, HWG_BUILDMENU);
+HB_FUNC_TRANSLATE(DELETEMENUITEM, HWG_DELETEMENUITEM);
+#endif
+
+#pragma ENDDUMP

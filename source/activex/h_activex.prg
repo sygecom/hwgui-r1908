@@ -66,7 +66,7 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
 
    ::Init()
 
-   ::hObj := AtlAxGetDisp(::handle)
+   ::hObj := hwg_AtlAxGetDisp(::handle)
 
    bErrorBlock := ErrorBlock({|x|break(x)})
    #ifdef __XHARBOUR__
@@ -84,7 +84,7 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    #endif
    ErrorBlock(bErrorBlock)
 
-   SetupConnectionPoint(::hObj, @hSink, ::aAxEv, ::aAxExec)
+   hwg_SetupConnectionPoint(::hObj, @hSink, ::aAxEv, ::aAxExec)
    ::hSink := hSink
 
    RETURN SELF
@@ -92,8 +92,8 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
 *-----------------------------------------------------------------------------*
 METHOD Release() CLASS HActiveX
 *-----------------------------------------------------------------------------*
-   SHUTDOWNCONNECTIONPOINT(::hSink)
-   ReleaseDispatch(::hObj)
+   hwg_ShutdownConnectionPoint(::hSink)
+   hwg_ReleaseDispatch(::hObj)
 RETURN ::Super:Release()
 
 *-----------------------------------------------------------------------------* 

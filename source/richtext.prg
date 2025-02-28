@@ -93,7 +93,7 @@ CLASS RichText
    METHOD END() INLINE ::TextCode("par\pard"), ::CloseGroup(), FClose(::hFile)
 
    // Core methods for writing control codes & data to the output file
-   METHOD TextCode(cCode) //INLINE FWRITE(::hFile, FormatCode(cCode))
+   METHOD TextCode(cCode) //INLINE FWRITE(::hFile, hwg_FormatCode(cCode))
    METHOD NumCode(cCode, nValue, lScale)
    METHOD LogicCode(cCode, lTest)
    METHOD Write(xData, lCodesOK)
@@ -586,7 +586,7 @@ METHOD Write(xData, lCodesOK) CLASS RichText
             ELSE
                cWrite += "\plain\f" + AllTrim(Str(::nFontAct - 1)) + ;
                          "\fs" + AllTrim(Str(::nFontSize * 2)) + ;
-                         "\cf" + AllTrim(Str(::nFontColor)) + AllTrim(::cLastApar) + "\'" + Lower(NewBase(nChar, 16))
+                         "\cf" + AllTrim(Str(::nFontColor)) + AllTrim(::cLastApar) + "\'" + Lower(hwg_NewBase(nChar, 16))
             ENDIF
          ELSE
             cWrite += ::aTranslate[Asc(cChar) - 127]
@@ -627,7 +627,7 @@ METHOD NumCode(cCode, nValue, lScale) CLASS RichText
 
    IF hb_IsChar(cCode) .AND. hb_IsNumeric(nValue)
 
-      cCode := FormatCode(cCode)
+      cCode := hwg_FormatCode(cCode)
 
       cWrite += cCode
 
@@ -679,7 +679,7 @@ RETURN cWrite
 // 01/12/97   TRM         Creation
 //
 //********************************************************************
-FUNCTION FormatCode(cCode)
+FUNCTION hwg_FormatCode(cCode)
 
    cCode := AllTrim(cCode)
    IF !(Left(cCode, 1) == "\")
@@ -687,7 +687,7 @@ FUNCTION FormatCode(cCode)
    ENDIF
 
 RETURN cCode
-//***********************  END OF FormatCode()  ***********************
+//*********************  END OF hwg_FormatCode()  *********************
 
 //********************************************************************
 // Description:  Define the default setup for a table.
@@ -1198,7 +1198,7 @@ RETURN cShadeCode
 // 01/06/97   TRM         Creation
 //
 //********************************************************************
-FUNCTION IntlTranslate()
+FUNCTION hwg_IntlTranslate()
 
    LOCAL i
    LOCAL aTranslate[128]
@@ -1218,7 +1218,7 @@ FUNCTION IntlTranslate()
    NEXT
 
 RETURN aTranslate
-//**********************  END OF IntlTranslate()  *********************
+//********************  END OF hwg_IntlTranslate()  *******************
 
 //********************************************************************
 // Description:  Convert a decimal numeric to a string in another
@@ -1231,7 +1231,7 @@ RETURN aTranslate
 // 01/12/97   TRM         Creation
 //
 //********************************************************************
-FUNCTION NewBase(nDec, nBase)
+FUNCTION hwg_NewBase(nDec, nBase)
 
    LOCAL cNewBase := ""
    LOCAL nDividend
@@ -1261,7 +1261,7 @@ FUNCTION NewBase(nDec, nBase)
    ENDDO
 
 RETURN cNewBase
-//************************  END OF NewBase()  *************************
+//**********************  END OF hwg_NewBase()  ***********************
 
 METHOD BegBookMark(texto) CLASS RichText
 
@@ -1664,7 +1664,7 @@ METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign
       ::CloseGroup()
       ::CloseGroup()
    ELSE
-      cExt := Upper(cFileExt(cName))
+      cExt := Upper(hwg_cFileExt(cName))
 
       DO CASE
       CASE cExt == "BMP"
@@ -1850,7 +1850,7 @@ METHOD TextCode(cCode) CLASS RichText
 
    LOCAL codigo
 
-   codigo := FormatCode(cCode)
+   codigo := hwg_FormatCode(cCode)
 
    FWrite(::hFile, codigo)
 
@@ -2527,11 +2527,11 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
 RETURN NIL
 */
 
-FUNCTION cFileExt(cFile)
+FUNCTION hwg_cFileExt(cFile)
 RETURN SubStr(cFile, At(".", cFile) + 1)
 
 #ifndef __XHARBOUR__
-FUNCTION CStr(xExp)
+FUNCTION CStr(xExp) // TODO: prefixo HWG_
 
    LOCAL cType
 
@@ -2584,3 +2584,16 @@ FUNCTION CStr(xExp)
 
 RETURN ""
 #endif
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(FORMATCODE, HWG_FORMATCODE);
+HB_FUNC_TRANSLATE(INTLTRANSLATE, HWG_INTLTRANSLATE);
+HB_FUNC_TRANSLATE(NEWBASE, HWG_NEWBASE);
+HB_FUNC_TRANSLATE(CFILEEXT, HWG_CFILEEXT);
+#endif
+
+#pragma ENDDUMP

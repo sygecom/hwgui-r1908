@@ -41,7 +41,7 @@ STATIC s_aCtrls := { ;
    "HRadioButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
    "HEdit():New(oPrnt,nId,cInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,cPicture,lNoBorder,nMaxLength,lPassword)", ;
    "HGroup():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor)", ;
-   "RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
+   "hwg_RadioNew(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet)", ;
    "HSayBmp():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Bitmap,lResource,onInit,onSize,ctooltip)", ;
    "HSayIcon():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,Icon,lResource,onInit,onSize,ctooltip)", ;
    "HRichEdit():New(oPrnt,nId,cInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor)", ;
@@ -512,7 +512,7 @@ STATIC FUNCTION ReadTree(pp, oForm, aParent, oDesc)
 
 RETURN IIf(Empty(aTree), NIL, aTree)
 
-FUNCTION ParseMethod(cMethod)
+FUNCTION hwg_ParseMethod(cMethod)
 
    LOCAL arr := {}
    LOCAL nPos1
@@ -578,7 +578,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
    IF oForm:lDebug
       arr := {}
    ELSE
-      arr := ParseMethod(cMethod)
+      arr := hwg_ParseMethod(cMethod)
    ENDIF
    IF Len(arr) == 1
       cCode := IIf(Lower(Left(arr[1], 6)) == "return", LTrim(SubStr(arr[1], 8)), arr[1])
@@ -633,7 +633,7 @@ RETURN arrExe
 
 STATIC PROCEDURE CompileErr(e, stroka)
 
-   hwg_MsgStop(ErrorMessage(e) + Chr(10) + Chr(13) + "in" + Chr(10) + Chr(13) + AllTrim(stroka), "Script compiling error")
+   hwg_MsgStop(hwg_ErrorMessage(e) + Chr(10) + Chr(13) + "in" + Chr(10) + Chr(13) + AllTrim(stroka), "Script compiling error")
    BREAK(NIL)
 
 STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
@@ -997,7 +997,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          ccaption := xProperty
          // FiM NANDO
       ELSEIF cPName == "atree"
-         BuildMenu(xProperty, oForm:oDlg:handle, oForm:oDlg)
+         hwg_BuildMenu(xProperty, oForm:oDlg:handle, oForm:oDlg)
       ELSE
          IF cPName == "tooltip"
             cPName := "c" + cPName
@@ -1178,7 +1178,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 
 RETURN NIL
 
-FUNCTION RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet)
+FUNCTION hwg_RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor, nInitValue, bSetGet)
 
    LOCAL oCtrl := HGroup():New(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFont, onInit, onSize, onPaint, TextColor, BackColor)
 
@@ -1186,7 +1186,7 @@ FUNCTION RadioNew(oPrnt, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, oFo
 
 RETURN oCtrl
 
-FUNCTION Font2XML(oFont)
+FUNCTION hwg_Font2XML(oFont)
 
    LOCAL aAttr := {}
 
@@ -1820,3 +1820,15 @@ STATIC FUNCTION hrep_FontFromXML(oPrinter, oXmlNode, height)
    under := IIf(under != NIL, Val(under), 0)
 
 RETURN oPrinter:AddFont(oXmlNode:GetAttribute("name"), height, (weight > 400), (ita > 0), (under > 0), charset)
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PARSEMETHOD, HWG_PARSEMETHOD);
+HB_FUNC_TRANSLATE(RADIONEW, HWG_RADIONEW);
+HB_FUNC_TRANSLATE(FONT2XML, HWG_FONT2XML);
+#endif
+
+#pragma ENDDUMP

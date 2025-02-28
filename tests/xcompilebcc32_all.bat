@@ -11,6 +11,8 @@ call xcompilebcc32 datepicker
 call xcompilebcc32 dialog
 call xcompilebcc32 dialog2
 call xcompilebcc32 dialog3
+call xcompilebcc32 get1
+call xcompilebcc32 get2
 call xcompilebcc32 getcombobox
 call xcompilebcc32 getcombobox2
 call xcompilebcc32 getcombobox3

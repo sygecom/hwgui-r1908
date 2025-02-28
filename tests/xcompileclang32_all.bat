@@ -11,6 +11,8 @@ call xcompileclang32 datepicker
 call xcompileclang32 dialog
 call xcompileclang32 dialog2
 call xcompileclang32 dialog3
+call xcompileclang32 get1
+call xcompileclang32 get2
 call xcompileclang32 getcombobox
 call xcompileclang32 getcombobox2
 call xcompileclang32 getcombobox3

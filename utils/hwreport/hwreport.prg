@@ -70,7 +70,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
          MENUITEM "Save &as..." ID IDM_SAVEAS ACTION FileDlg(.F.)
          SEPARATOR
          MENUITEM "&Print static" ID IDM_PRINT ACTION PrintRpt()
-         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (ClonePaintRep(aPaintRep),PrintReport(,,.T.))
+         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (hwg_ClonePaintRep(aPaintRep),hwg_PrintReport(,,.T.))
          SEPARATOR
          MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
       ENDMENU
@@ -121,7 +121,7 @@ Local aModDlg, oFont
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE SAY "HWREPORT" OF aModDlg ID 101 COLOR hwg_VColor("0000FF")
-   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( getmodalhandle() )} ;
+   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( hwg_GetModalHandle() )} ;
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()
@@ -149,7 +149,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
 
    aPaintRep[FORM_Y] := 0
    hwg_EnableMenuItem( ,1, .T., .F. )
-   WriteStatus( oMainWindow,2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+   hwg_WriteStatus( oMainWindow,2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
    hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
 
@@ -607,7 +607,7 @@ Local hWnd := Hwindow():GetMain():handle
             TOP_INDENT+aPaintRep[FORM_ITEMS,i,ITEM_Y1]+aPaintRep[FORM_ITEMS,i,ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
          res := .T.
       ENDIF
-      WriteStatus( Hwindow():GetMain(),1,"" )
+      hwg_WriteStatus( Hwindow():GetMain(),1,"" )
       FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS,i]
          IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
@@ -657,7 +657,7 @@ Local hWnd := Hwindow():GetMain():handle
       DeselectAll( Len( aPaintRep[FORM_ITEMS] ) )
       aPaintRep[FORM_CHANGED] := .T.
       WriteItemInfo( Atail( aPaintRep[FORM_ITEMS] ) )
-      WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+      hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
          Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
       hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
@@ -697,8 +697,8 @@ Local i, aItem
          Adel( aPaintRep[FORM_ITEMS],i )
          Asize( aPaintRep[FORM_ITEMS], Len( aPaintRep[FORM_ITEMS] ) - 1 )
          aPaintRep[FORM_CHANGED] := .T.
-         WriteStatus( Hwindow():GetMain(),1,"" )
-         WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
+         hwg_WriteStatus( Hwindow():GetMain(),1,"" )
+         hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
          IF Len( aPaintRep[FORM_ITEMS] ) == 0
             hwg_EnableMenuItem( ,IDM_CLOSE, .F., .T. )
@@ -729,7 +729,7 @@ Local i, iPrevSelected := 0
 Return iPrevSelected
 
 Static Function WriteItemInfo( aItem )
-   WriteStatus( Hwindow():GetMain(),1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
+   hwg_WriteStatus( Hwindow():GetMain(),1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
 Return Nil
