@@ -169,7 +169,11 @@ FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
         STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + nDlgStyle
 
    @ 20, 10 SAY cText SIZE 260, 22
+   #ifdef __SYGECOM__
+   @ 20, 35 GET cRes  SIZE 260, 26 STYLE WS_TABSTOP + ES_AUTOHSCROLL + nStyle TOOLTIP 'Pressione ESC para cancelar' 
+   #else
    @ 20, 35 GET cRes  SIZE 260, 26 STYLE WS_TABSTOP + ES_AUTOHSCROLL + nStyle
+   #endif
    oModDlg:aControls[2]:Anchor := 11
    @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
@@ -374,7 +378,7 @@ FUNCTION hwg_EndWindow()
    ENDIF
    RETURN NIL
 
-// TODO: mover para outro arquivo .prg por n„o ter relaÁ„o nenhuma com GUI
+// TODO: mover para outro arquivo .prg por n√£o ter rela√ß√£o nenhuma com GUI
 FUNCTION hwg_HdSerial(cDrive)
 
    LOCAL n       :=  hwg_HDGetSerial(cDrive)
@@ -413,7 +417,6 @@ cInitDir: Initial directory
 */
 
 FUNCTION hwg_SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle)
-
    LOCAL aFiles, cPath, cFile, cFilter, nAt
    LOCAL hWnd := 0
    LOCAL nFlags := NIL

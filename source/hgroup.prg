@@ -44,7 +44,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
    ::title := cCaption
    ::oRGroup := oRGroup
-
+   #ifdef __SYGECOM__
+   ::setcolor( IIF(tcolor == NIL,16711680,tcolor), bcolor ) // define uma cor padrão quando não vem preenchido
+   #endif
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint,, tcolor, bColor)
 
    ::oBrush := IIf(bColor != NIL, ::brush, NIL)

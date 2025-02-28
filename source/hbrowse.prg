@@ -15,7 +15,7 @@
 //    0-DT_LEFT, 1-DT_RIGHT y 2-DT_CENTER. 27.07.2002. WHT.                 //
 // 2) Ahora la variable "cargo" del metodo Hbrowse si es codeblock          //
 //    ejectuta el CB. 27.07.2002. WHT                                       //
-// 3) Se agreg¢ el Metodo "ShowSizes". Para poder ver la "width" de cada    //
+// 3) Se agregÂ¢ el Metodo "ShowSizes". Para poder ver la "width" de cada    //
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -194,6 +194,9 @@ METHOD Value(xValue) CLASS HColumn
          IF (::oParent:Alias)->(RLock())
             (::oParent:Alias)->(Eval(::block, varbuf, ::oParent, ::Column))
             (::oParent:Alias)->(DBUnlock())
+            #ifdef __SYGECOM__   
+            (::oParent:Alias)->(DBcommit())
+            #endif
          ELSE
              hwg_MsgStop("Can't lock the record!")
          ENDIF
@@ -3596,8 +3599,13 @@ METHOD ButtonUp(lParam) CLASS HBrowse
                x1 := x - ::aColumns[i]:width
                EXIT
             ENDIF
-            i := IIf(i == ::freeze, ::nLeftCol, i + 1)
+            #ifndef __SYGECOM__   
+            i := IIf(i == ::freeze, ::nLeftCol, i + 1) 
+            #endif
          ENDIF
+         #ifdef __SYGECOM__   
+         i := IIf(i == ::freeze, ::nLeftCol, i + 1)
+         #endif
       ENDDO
       IF xPos > x1
          ::aColumns[i]:width := xPos - x1
@@ -3983,13 +3991,24 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
                   STYLE ES_AUTOHSCROLL           ;
+                  TOOLTIP 'Prescione Enter para validar';
                   FONT ::oFont                   ;
                   PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
                   VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
-                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)}
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
+               #else
+               @ 0, nHGet GET oGet VAR ::varbuf       ;
+                  SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
+                  NOBORDER                       ;
+                  STYLE ES_AUTOHSCROLL           ;
+                  FONT ::oFont                   ;
+                  PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
+                  VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
                   //VALID oColumn:bValid           ;
                   //WHEN oColumn:bWhen
                  //oModDlg:AddEvent(0, IDOK, {||oModDlg:lResult := .T., oModDlg:close()})
+               #endif  
                IF oColumn:bClick != NIL
                   IF Type != "D"
                      @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16, ::height - 0 ;
@@ -4008,7 +4027,11 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                ENDIF
             ELSE
                oGet1 := ::varbuf
+               #ifdef __SYGECOM__
+               @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid TOOLTIP 'Prescione Enter para validar'
+               #else
                @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid
+               #endif
                @ 010, 252 ownerbutton owb2 text "Save" size 80, 24 ON Click {||::varbuf := oGet1, oModDlg:close(), oModDlg:lResult := .T.}
                @ 100, 252 ownerbutton owb1 text "Close" size 80, 24 ON CLICK {||oModDlg:close()}
             ENDIF
@@ -4047,6 +4070,9 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   (::Alias)->(DBAppend())
                   (::Alias)->(Eval(oColumn:block, ::varbuf, Self, fipos))
                   (::Alias)->(DBUnlock())
+                  #ifdef __SYGECOM__   
+                  (::Alias)->(DBcommit())
+                  #endif
                ELSE
                   IF hb_IsArray(::aArray[1])
                      AAdd(::aArray, Array(Len(::aArray[1])))
@@ -4074,6 +4100,9 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   IF (::Alias)->(RLock())
                      (::Alias)->(Eval(oColumn:block, ::varbuf, Self, fipos))
                      (::Alias)->(DBUnlock())
+                     #ifdef __SYGECOM__   
+                     (::Alias)->(DBcommit())
+                     #endif
                   ELSE
                      hwg_MsgStop("Can't lock the record!")
                   ENDIF
@@ -4147,6 +4176,9 @@ METHOD EditLogical(wParam, lParam) CLASS HBrowse
          IF (::Alias)->(RLock())
             (::Alias)->(Eval(::aColumns[::fipos]:block, !::varbuf, Self, ::fipos))
             (::Alias)->(DBUnlock())
+            #ifdef __SYGECOM__   
+            (::Alias)->(DBcommit())
+            #endif
          ELSE
              hwg_MsgStop("Can't lock the record!")
          ENDIF

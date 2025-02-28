@@ -71,6 +71,12 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    //
    ::nStyleHS := IIf(nStyle == NIL, 0, nStyle)
    ::BackStyle := OPAQUE
+   #ifdef __SYGECOM__  // forçar a sempre ter o fundo transparente
+      ::BackStyle := TRANSPARENT
+      ::extStyle += WS_EX_TRANSPARENT
+      bPaint := {|o, p|o:paint(p)}
+      nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
+   #else
    IF (lTransp != NIL .AND. lTransp) //.OR. ::lOwnerDraw
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
@@ -80,6 +86,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
       bPaint := {|o, p|o:paint(p)}
       nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
    ENDIF
+   #endif
    ::hBrushDefault := HBrush():Add(hwg_GetSysColor(COLOR_BTNFACE))
 
    ::Super:New(oWndParent, nId, nStyle + nStyles, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ;

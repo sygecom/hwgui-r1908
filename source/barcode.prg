@@ -90,10 +90,13 @@ FUNCTION main
 
    nWidth    := 200
    nHeight   := 40
-
+#ifdef __SYGECOM__
+   oBC := HWG_Barcode():New(hwg_GetDC(oMainWindow:handle), "993198042124", nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, ;
+      nColPane, lHorz, lTransparent, nPinWidth)
+#else
    oBC := Barcode():New(hwg_GetDC(oMainWindow:handle), "993198042124", nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, ;
       nColPane, lHorz, lTransparent, nPinWidth)
-
+#endif
    @ 163, 10 EDITBOX oEdit1 CAPTION oBC:InitEAN13()  SIZE 100, 20
 
    ACTIVATE WINDOW oMainWindow
@@ -107,8 +110,11 @@ FUNCTION main
 *         Name: Barcode
 *  Description:
 *-----------------------------------------------------------------------------
+#ifdef __SYGECOM__
+CLASS HWG_Barcode
+#else
 CLASS Barcode
-
+#endif
    DATA hDC           // handle of the window, dialog or printer object
    DATA cText         // barcode text
    DATA nTop          // top position
@@ -161,8 +167,13 @@ ENDCLASS
 *  Description:
 *-----------------------------------------------------------------------------
 
-METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColPane, lHorz, lTransparent, ;
-   nPinWidth) CLASS Barcode
+#ifdef __SYGECOM__
+METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColPane, lHorz, lTransparent, nPinWidth) CLASS HWG_Barcode
+#else
+METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColPane, lHorz, lTransparent, nPinWidth) CLASS Barcode
+#endif
+   
+   
 
    DEFAULT nWidth       := 200
    DEFAULT nHeight      := 20
@@ -196,8 +207,11 @@ METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColP
 *         Name: ShowBarcode
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD ShowBarcode() CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD ShowBarcode() CLASS HWG_Barcode
+#else
+METHOD ShowBarcode() CLASS Barcode
+#endif
    LOCAL cCode, cCode2
 
    DO CASE
@@ -254,8 +268,11 @@ METHOD ShowBarcode() CLASS BarCode
 *         Name: CreateBarcode
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD CreateBarcode(cCode) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD CreateBarcode(cCode) CLASS HWG_Barcode
+#else
+METHOD CreateBarcode(cCode) CLASS Barcode
+#endif
    LOCAL i, hPen, hOldPen, hBrush, hOldBrush
 
    LOCAL nX    := ::nTop
@@ -333,8 +350,11 @@ METHOD CreateBarcode(cCode) CLASS BarCode
 *         Name: InitCode39
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitCode39(lCheck) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitCode39(lCheck) CLASS HWG_Barcode
+#else
+METHOD InitCode39(lCheck) CLASS Barcode
+#endif
    LOCAL cCars   := "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-. *$/+%"
    LOCAL aBarras := { ;
       "1110100010101110", ;
@@ -416,8 +436,11 @@ METHOD InitCode39(lCheck) CLASS BarCode
 *         Name: InitCode128
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitCode128(cMode) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitCode128(cMode) CLASS HWG_Barcode
+#else
+METHOD InitCode128(cMode) CLASS Barcode
+#endif
    LOCAL aCode := { ;
       "212222", "222122", "222221", "121223", "121322", "131222", ;
       "122213", "122312", "132212", "221213", "221312", "231212", ;
@@ -547,8 +570,11 @@ METHOD InitCode128(cMode) CLASS BarCode
 *         Name: InitEAN13
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitEAN13() CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitEAN13() CLASS HWG_Barcode
+#else
+METHOD InitEAN13() CLASS Barcode
+#endif
    LOCAL derecha := [1110010110011011011001000010101110010011101010000100010010010001110100]
    LOCAL izda1   := [0001101001100100100110111101010001101100010101111011101101101110001011]
    LOCAL izda2   := [0100111011001100110110100001001110101110010000101001000100010010010111]
@@ -618,8 +644,11 @@ METHOD InitEAN13() CLASS BarCode
 *         Name: InitUPC
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitUPC(nLen) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitUPC(nLen) CLASS HWG_Barcode
+#else
+METHOD InitUPC(nLen) CLASS Barcode
+#endif
    LOCAL derecha := [1110010110011011011001000010101110010011101010000100010010010001110100]
    LOCAL izda1   := [0001101001100100100110111101010001101100010101111011101101101110001011]
 
@@ -680,8 +709,11 @@ METHOD InitUPC(nLen) CLASS BarCode
 *         Name: InitE13BL
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitE13BL(nLen) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitE13BL(nLen) CLASS HWG_Barcode
+#else
+METHOD InitE13BL(nLen) CLASS Barcode
+#endif
    nLen := Int(nLen / 2)
 
    RETURN "101" + Replicate("0", nLen * 7) + "01010" + Replicate("0", nLen * 7) + "101"
@@ -691,8 +723,11 @@ METHOD InitE13BL(nLen) CLASS BarCode
 *         Name: InitCodabar
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitCodabar() CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitCodabar() CLASS HWG_Barcode
+#else
+METHOD InitCodabar() CLASS Barcode
+#endif
    //this system not test the start/end code
 
    LOCAL cChar := "0123456789-$:/.+ABCDTN*E"
@@ -720,8 +755,11 @@ METHOD InitCodabar() CLASS BarCode
 *         Name: InitSup5
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitSub5() CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitSub5() CLASS HWG_Barcode
+#else
+METHOD InitSub5() CLASS Barcode
+#endif
    LOCAL izda1   := [0001101001100100100110111101010001101100010101111011101101101110001011]
    LOCAL izda2   := [0100111011001100110110100001001110101110010000101001000100010010010111]
    LOCAL primero := [ooooooooeoeeooeeoeooeeeooeooeeoeeooeoeeeoooeoeoeoeoeeooeeoeo]
@@ -757,8 +795,11 @@ METHOD InitSub5() CLASS BarCode
 *         Name: InitIndustrial25
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitIndustrial25(lCheck) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitIndustrial25(lCheck) CLASS HWG_Barcode
+#else
+METHOD InitIndustrial25(lCheck) CLASS Barcode
+#endif
    LOCAL n
    LOCAL aBar := { ;
       "00110", "10001", "01001", "11000", "00101", ;
@@ -802,8 +843,11 @@ METHOD InitIndustrial25(lCheck) CLASS BarCode
 *         Name: InitInterleave25
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitInterleave25(lMode) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitInterleave25(lMode) CLASS HWG_Barcode
+#else
+METHOD InitInterleave25(lMode) CLASS Barcode
+#endif
    LOCAL n, m
    LOCAL aBar := { ;
       "00110", "10001", "01001", "11000", "00101", ;
@@ -865,8 +909,11 @@ METHOD InitInterleave25(lMode) CLASS BarCode
 *         Name: InitIndust25
 *  Description:
 *-----------------------------------------------------------------------------
-METHOD InitMatrix25(lCheck) CLASS BarCode
-
+#ifdef __SYGECOM__
+METHOD InitMatrix25(lCheck) CLASS HWG_Barcode
+#else
+METHOD InitMatrix25(lCheck) CLASS Barcode
+#endif
    LOCAL n
    LOCAL aBar := { ;
       "00110", "10001", "01001", "11000", "00101", ;

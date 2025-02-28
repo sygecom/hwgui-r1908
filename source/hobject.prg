@@ -91,13 +91,13 @@ FUNCTION hwg_RemoveProperty(oObjectName, cPropertyName)
 RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
-
+#ifndef __SYGECOM__
 INIT PROCEDURE HWGINIT
 
    hwg_ErrorSys()
 
 RETURN
-
+#endif
 //-------------------------------------------------------------------------------------------------------------------//
 
 #pragma BEGINDUMP

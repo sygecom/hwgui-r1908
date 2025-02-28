@@ -245,19 +245,25 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ::lcopy := .F.
             hwg_CopyStringToClipboard(::UnTransform(hwg_GetClipboardText()))
             RETURN -1
-         ELSEIF msg == WM_PASTE .AND. !::lNoPaste
-              ::lFirst := IIf(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
-            cClipboardText := hwg_GetClipboardText()
-            IF !Empty(cClipboardText)
-               nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
-               hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
-               FOR nPos := 1 to Len(cClipboardText)
-                  ::GetApplyKey(SubStr(cClipboardText, nPos, 1))
-               NEXT
-               nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
-               ::title := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
-               hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
-              ENDIF
+         ELSEIF msg == WM_PASTE 
+            IF !::lNoPaste
+               ::lFirst := IIf(::cType == "N" .AND. "E" $ ::cPicFunc, .T., .F.)
+               cClipboardText := hwg_GetClipboardText()
+               IF !Empty(cClipboardText)
+                  nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+                  hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
+                  FOR nPos := 1 to Len(cClipboardText)
+                     ::GetApplyKey(SubStr(cClipboardText, nPos, 1))
+                  NEXT
+                  nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
+                  ::title := ::UnTransform(hwg_GetEditText(::oParent:handle, ::id))
+                  hwg_SendMessage(::handle, EM_SETSEL, nPos - 1, nPos - 1)
+               ENDIF
+            ELSE   
+              #ifdef __SYGECOM__
+              HWG_MSGINFO('Esse campo não permite a Opção Colar',"Aviso do Sistema")
+              #endif
+            ENDIF  
             RETURN 0
          ELSEIF msg == WM_CHAR
             IF !hwg_CheckBit(lParam, 32) .AND. hb_IsBlock(::bKeyDown)
