@@ -3987,6 +3987,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                oModDlg:lResult := .T.
             ELSEIF Type != "M"
                nHGet := Max((::height - (hwg_TxtRect("N", self))[2]) / 2, 0)
+               #ifdef __SYGECOM__
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
@@ -3995,7 +3996,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   FONT ::oFont                   ;
                   PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
                   VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
-                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)}
                #else
                @ 0, nHGet GET oGet VAR ::varbuf       ;
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
@@ -4004,11 +4005,11 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   FONT ::oFont                   ;
                   PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
                   VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
-                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)} 
+                  WHEN {|oColumn, oGet|::WhenColumn(oColumn, oGet, oBtn)}
                   //VALID oColumn:bValid           ;
                   //WHEN oColumn:bWhen
                  //oModDlg:AddEvent(0, IDOK, {||oModDlg:lResult := .T., oModDlg:close()})
-               #endif  
+               #endif
                IF oColumn:bClick != NIL
                   IF Type != "D"
                      @ nWidth - 15, 0  OWNERBUTTON oBtn  SIZE 16, ::height - 0 ;
