@@ -47,10 +47,6 @@ HB_FUNC(HWG_PLAYSOUND)
   hb_strfree(hSound);
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(PLAYSOUND, HWG_PLAYSOUND);
-#endif
-
 HB_FUNC(HWG_MCISENDSTRING)
 {
   TCHAR cBuffer[256] = {0};
@@ -65,10 +61,6 @@ HB_FUNC(HWG_MCISENDSTRING)
   hb_strfree(hCommand);
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(MCISENDSTRING, HWG_MCISENDSTRING);
-#endif
-
 /* Functions bellow for play video's and wav's*/
 
 HB_FUNC(HWG_MCISENDCOMMAND) // ()
@@ -78,10 +70,6 @@ HB_FUNC(HWG_MCISENDCOMMAND) // ()
                           hb_parnl(3),             // Flags
                           (DWORD_PTR)hb_parc(4))); // Parameter Block
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(MCISENDCOMMAND, HWG_MCISENDCOMMAND);
-#endif
 
 //----------------------------------------------------------------------------//
 
@@ -93,10 +81,6 @@ HB_FUNC(HWG_MCIGETERRORSTRING) // ()
                                  cBuffer, HB_SIZEOFARRAY(cBuffer)));
   HB_STORSTR(cBuffer, 2);
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(MCIGETERRORSTRING, HWG_MCIGETERRORSTRING);
-#endif
 
 //----------------------------------------------------------------------------//
 
@@ -121,10 +105,6 @@ HB_FUNC(HWG_NMCIOPEN)
   hb_strfree(hDevice);
   hb_strfree(hName);
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(NMCIOPEN, HWG_NMCIOPEN);
-#endif
 
 //----------------------------------------------------------------------------//
 
@@ -152,10 +132,6 @@ HB_FUNC(HWG_NMCIPLAY)
                           MCI_PLAY, dwFlags, (DWORD_PTR)(LPMCI_PLAY_PARMS)&mciPlayParms));
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(NMCIPLAY, HWG_NMCIPLAY);
-#endif
-
 //----------------------------------------------------------------------------//
 
 HB_FUNC(HWG_NMCIWINDOW)
@@ -170,5 +146,11 @@ HB_FUNC(HWG_NMCIWINDOW)
 }
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(PLAYSOUND, HWG_PLAYSOUND);
+HB_FUNC_TRANSLATE(MCISENDSTRING, HWG_MCISENDSTRING);
+HB_FUNC_TRANSLATE(MCISENDCOMMAND, HWG_MCISENDCOMMAND);
+HB_FUNC_TRANSLATE(MCIGETERRORSTRING, HWG_MCIGETERRORSTRING);
+HB_FUNC_TRANSLATE(NMCIOPEN, HWG_NMCIOPEN);
+HB_FUNC_TRANSLATE(NMCIPLAY, HWG_NMCIPLAY);
 HB_FUNC_TRANSLATE(NMCIWINDOW, HWG_NMCIWINDOW);
 #endif

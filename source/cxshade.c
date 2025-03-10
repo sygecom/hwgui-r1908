@@ -743,10 +743,6 @@ HB_FUNC(HWG_SHADE_NEW)
   HB_RETHANDLE(pshade);
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SHADE_NEW, HWG_SHADE_NEW);
-#endif
-
 /*
  * shade_Release(pshade)
  */
@@ -754,10 +750,6 @@ HB_FUNC(HWG_SHADE_RELEASE)
 {
   cxshade_Release((PCXSHADE)HB_PARHANDLE(1));
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SHADE_RELEASE, HWG_SHADE_RELEASE);
-#endif
 
 /*
  * shade_Set(pshade, shadeID, palette, granularity, highlight, coloring, color, nLeft, nTop, nRight, nBottom)
@@ -781,10 +773,6 @@ HB_FUNC(HWG_SHADE_SET)
   cxshade_SetShade(pshade, shadeID, palette, granularity, highlight, coloring, color, (HB_ISNIL(8)) ? NULL : &rect);
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SHADE_SET, HWG_SHADE_SET);
-#endif
-
 /*
  * shade_Draw(pshade, hDC, nState)
  */
@@ -794,5 +782,8 @@ HB_FUNC(HWG_SHADE_DRAW)
 }
 
 #ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SHADE_NEW, HWG_SHADE_NEW);
+HB_FUNC_TRANSLATE(SHADE_RELEASE, HWG_SHADE_RELEASE);
+HB_FUNC_TRANSLATE(SHADE_SET, HWG_SHADE_SET);
 HB_FUNC_TRANSLATE(SHADE_DRAW, HWG_SHADE_DRAW);
 #endif
