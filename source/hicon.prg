@@ -144,7 +144,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE CleanDrawWidgHIcon
+EXIT PROCEDURE hwg_CleanDrawWidgHIcon
 
    LOCAL item
 

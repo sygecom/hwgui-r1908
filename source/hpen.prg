@@ -104,7 +104,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE CleanDrawWidgHPen
+EXIT PROCEDURE hwg_CleanDrawWidgHPen
 
    LOCAL item
 

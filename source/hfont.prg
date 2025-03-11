@@ -147,7 +147,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE CleanDrawWidgHFont
+EXIT PROCEDURE hwg_CleanDrawWidgHFont
 
    LOCAL item
 

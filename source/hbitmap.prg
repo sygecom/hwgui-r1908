@@ -186,7 +186,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE CleanDrawWidgHBitmap
+EXIT PROCEDURE hwg_CleanDrawWidgHBitmap
 
    LOCAL item
 

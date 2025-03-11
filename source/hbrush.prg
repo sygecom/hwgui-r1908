@@ -83,7 +83,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE CleanDrawWidgHBrush
+EXIT PROCEDURE hwg_CleanDrawWidgHBrush
 
    LOCAL item
 
