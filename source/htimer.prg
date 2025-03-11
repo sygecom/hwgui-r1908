@@ -106,7 +106,7 @@ FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
 
 
 
-   EXIT PROCEDURE CleanTimers
+   EXIT PROCEDURE hwg_CleanTimers
    LOCAL oTimer, i
 
    FOR i := 1 TO Len(HTimer():aTimers)
