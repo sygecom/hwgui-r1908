@@ -200,7 +200,7 @@ METHOD Paint(lpdis) CLASS HSayFImage
    RETURN Self
 
 
-   EXIT PROCEDURE CleanImages
+   EXIT PROCEDURE hwg_CleanImages
    LOCAL i
 
    FOR i := 1 TO Len(HFreeImage():aImages)
