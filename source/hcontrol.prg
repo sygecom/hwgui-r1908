@@ -571,7 +571,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-INIT PROCEDURE starttheme()
+INIT PROCEDURE hwg_StartTheme()
 
    hwg_InitThemeLib()
 
@@ -579,7 +579,7 @@ RETURN
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-EXIT PROCEDURE endtheme()
+EXIT PROCEDURE hgw_EndTheme()
 
    hwg_EndThemeLib()
 
