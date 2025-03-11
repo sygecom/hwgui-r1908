@@ -231,8 +231,10 @@ METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
       SWITCH wParam
       CASE VK_DOWN
          hwg_GetSkip(::oparent, ::handle, , 1)
+         EXIT
       CASE VK_UP
          hwg_GetSkip(::oparent, ::handle, , -1)
+         EXIT
       CASE VK_TAB
          hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
       ENDSWITCH
