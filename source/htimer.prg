@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define  TIMER_FIRST_ID   33900
 

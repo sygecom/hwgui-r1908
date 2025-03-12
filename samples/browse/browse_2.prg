@@ -3,7 +3,7 @@
 //
 
 #include "hwgui.ch"
-#include "common.ch"
+#include <common.ch>
 
 STATIC oBrowse
 

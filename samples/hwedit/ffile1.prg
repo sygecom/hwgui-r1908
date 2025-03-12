@@ -48,7 +48,7 @@
 // If you do not wish that, delete this exception notice.
 
 #include <hbclass.ch>
-#include "common.ch"
+#include <common.ch>
 #include "hbdocdef.ch"
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北

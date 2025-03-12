@@ -51,7 +51,7 @@
 #include "fileio.ch"
 #include "inkey.ch"
 #include "hbdocdef.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define xReadBuffer 4096
 DECLARE  FT_FUSE(CFILE AS STRING, NMODE AS NUMERIC) AS NUMERIC

@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define FIRST_MDICHILD_ID 501
 #define MAX_MDICHILD_WINDOWS 18

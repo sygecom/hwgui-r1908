@@ -13,7 +13,7 @@
 #include <hbclass.ch>
 #include "guilib.ch"
 #include "hxml.ch"
-#include "common.ch"
+#include <common.ch>
 
 #include "designer.ch"
 

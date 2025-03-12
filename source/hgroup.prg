@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define TRANSPARENT 1
 #define BS_TYPEMASK SS_TYPEMASK

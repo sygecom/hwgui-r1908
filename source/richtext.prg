@@ -37,7 +37,7 @@
 // 읕컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴켸
 
 #include <hbclass.ch>
-#include "common.ch"
+#include <common.ch>
 #include "guilib.ch"
 #include "windows.ch"
 

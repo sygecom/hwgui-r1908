@@ -11,7 +11,7 @@
 #include <hbclass.ch>
 #include "windows.ch"
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 #define BUF_SIZE  200
 
 //----------------------------------------------------------------------------//

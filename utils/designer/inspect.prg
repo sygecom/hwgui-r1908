@@ -12,7 +12,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #xcommand @ <x>,<y> PBROWSE [ <oBrw> ] ;
             [ <lArr: ARRAY> ]          ;

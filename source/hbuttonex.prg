@@ -17,7 +17,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define TRANSPARENT 1
 #define BTNST_COLOR_BK_IN     1            // Background color when mouse is INside

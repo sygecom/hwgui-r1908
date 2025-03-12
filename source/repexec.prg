@@ -12,7 +12,7 @@
 #include "guilib.ch"
 #include "repmain.h"
 #include "fileio.ch"
-#include "common.ch"
+#include <common.ch>
 
 // #define __DEBUG__
 

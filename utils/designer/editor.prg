@@ -12,7 +12,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 #include "hxml.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define ES_SAVESEL 0x00008000
 

@@ -12,7 +12,7 @@
 #include "inkey.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #DEFINE IDTOOLBAR 700
 #DEFINE IDMAXBUTTONTOOLBAR 64

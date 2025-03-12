@@ -21,7 +21,7 @@
 
 #include "windows.ch"
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #include "inkey.ch"
 #include "dbstruct.ch"

@@ -15,7 +15,7 @@
 
 #include "hwgui.ch"
 #include "fileio.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define IDC_STATUS  2001
 #define false .F.

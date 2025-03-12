@@ -8,7 +8,7 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "common.ch"
+#include <common.ch>
 #include "error.ch"
 #include "windows.ch"
 #include "guilib.ch"

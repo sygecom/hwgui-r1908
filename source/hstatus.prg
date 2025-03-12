@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 //#define NM_FIRST                 (0 - 0)
 //#define NM_CLICK                (NM_FIRST-2)    // uses NMCLICK struct

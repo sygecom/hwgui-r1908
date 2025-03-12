@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include <hbclass.ch>
 #include "guilib.ch"
-#include "common.ch"
+#include <common.ch>
 
 #define WM_PSPNOTIFY WM_USER + 1010
 #define FLAG_CHECK 2

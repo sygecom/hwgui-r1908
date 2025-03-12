@@ -1,6 +1,6 @@
 #include "hwgui.ch"
 #include "fileio.ch"
-#include "common.ch"
+#include <common.ch>
 
 **************************
 FUNCTION pesquisaglobal()
