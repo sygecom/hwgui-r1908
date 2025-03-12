@@ -47,7 +47,7 @@
 // whether to permit this exception to apply to your modifications.
 // If you do not wish that, delete this exception notice.
 
-#include "directry.ch"
+#include <directry.ch>
 #include <fileio.ch>
 #include <inkey.ch>
 #include "hbdocdef.ch"
