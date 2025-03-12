@@ -11,7 +11,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 #include "repmain.h"
-#include "fileio.ch"
+#include <fileio.ch>
 #include <common.ch>
 
 // #define __DEBUG__

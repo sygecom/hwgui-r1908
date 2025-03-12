@@ -14,7 +14,7 @@
 #define ID_TEXTO  300
 
 #include "hwgui.ch"
-#include "fileio.ch"
+#include <fileio.ch>
 #include <common.ch>
 
 #define IDC_STATUS  2001

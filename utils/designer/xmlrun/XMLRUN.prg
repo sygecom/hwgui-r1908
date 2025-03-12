@@ -30,7 +30,7 @@
 #include <dbStruct.ch>
 #include <Common.ch>
 #include <inkey.ch>
-#include "fileio.CH"
+#include <fileio.CH>
 
 #DEFINE FALSE .F.
 #DEFINE TRUE .T.

@@ -48,7 +48,7 @@
 // If you do not wish that, delete this exception notice.
 
 #include "directry.ch"
-#include "fileio.ch"
+#include <fileio.ch>
 #include <inkey.ch>
 #include "hbdocdef.ch"
 #include <common.ch>

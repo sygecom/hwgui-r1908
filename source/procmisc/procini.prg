@@ -50,7 +50,7 @@
     which you want to read.
 */
 
-#include "fileio.ch"
+#include <fileio.ch>
 #define STR_BUFLEN  1024
 
 FUNCTION RDINI(fname, prm1, prm2, prm3, prm4)

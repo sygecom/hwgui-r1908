@@ -1,5 +1,5 @@
 #include "hwgui.ch"
-#include "fileio.ch"
+#include <fileio.ch>
 #include <common.ch>
 
 **************************
