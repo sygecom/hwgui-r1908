@@ -170,7 +170,7 @@ FUNCTION CreateBar(oModDlg, otool)
 
 RETURN NIL
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 class mymenu
 data handle
 method new(c) inline ::handle := c, self

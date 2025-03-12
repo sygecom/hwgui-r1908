@@ -12,7 +12,7 @@
 
 #include "hwgui.ch"
 #include "rmchart.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 FUNCTION Main()
 

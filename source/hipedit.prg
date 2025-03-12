@@ -9,7 +9,7 @@
 //
 
 #include "windows.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "guilib.ch"
 
 #define  IPN_FIELDCHANGED   4294966436

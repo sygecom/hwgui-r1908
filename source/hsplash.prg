@@ -10,7 +10,7 @@
 
 #include "guilib.ch"
 #include "windows.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 CLASS HSplash
 

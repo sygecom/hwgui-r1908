@@ -9,7 +9,7 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "hwgui.ch"
 
 #define STATE_DEFAULT    1

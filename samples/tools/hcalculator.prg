@@ -7,7 +7,7 @@
 // Copyright 2012 LuisFernandoBasso <lfbasso@via-rs.net>
 //
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "hwgui.ch"
 
 CLASS HCalculator

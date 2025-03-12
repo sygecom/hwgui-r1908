@@ -17,7 +17,7 @@
 
 #include "windows.ch"
 #include "guilib.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "hxml.ch"
 #include "extmodul.ch"
 

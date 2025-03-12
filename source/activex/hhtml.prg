@@ -9,7 +9,7 @@
 //
 
 #include "hwgui.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 #define WEBPAGE_GOBACK      0
 #define WEBPAGE_GOFORWARD   1

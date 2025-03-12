@@ -14,7 +14,7 @@
 
 #include "hwgui.ch"
 #include "rmchart.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 
 /* Class RmChart has been defined in order to intercept in a possible OOP way

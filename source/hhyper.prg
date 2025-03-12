@@ -5,7 +5,7 @@
 // HStaticLink class
 //
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "common.ch"
 #include "hwgui.ch"
 

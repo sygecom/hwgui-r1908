@@ -8,7 +8,7 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "fileio.ch"
 #include "hxml.ch"
 

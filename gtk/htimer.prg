@@ -9,7 +9,7 @@
 //
 
 #include "windows.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "guilib.ch"
 
 #define  TIMER_FIRST_ID   33900

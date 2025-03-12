@@ -11,7 +11,7 @@
 //--------------------------------------------------------------------------//
 
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "guilib.ch"
 
 #define MCS_DAYSTATE             1

@@ -25,7 +25,7 @@
 
 #include "inkey.ch"
 #include "dbstruct.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 #ifdef __XHARBOUR__
    #xtranslate hb_RAScan([<x,...>]) => RAScan(<x>)

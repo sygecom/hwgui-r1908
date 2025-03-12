@@ -15,7 +15,7 @@
 //#translate :crTransparent => :m_csbitmaps\[5\] // not used
 
 #include "windows.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "guilib.ch"
 #include "common.ch"
 

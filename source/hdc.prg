@@ -8,7 +8,7 @@
 // www - http://sites.uol.com.br/culikr/
 //
 
-#include "hbclass.ch"
+#include <hbclass.ch>
 #include "hwgui.ch"
 
 CLASS HPAINTDC FROM HDC

@@ -9,7 +9,7 @@
 */
 
 #include "windows.ch"
-#include "HBClass.ch"
+#include <HBClass.ch>
 #include "guilib.ch"
 
 #define  FIRST_MDICHILD_ID     501
