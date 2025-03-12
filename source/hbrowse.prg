@@ -23,7 +23,7 @@
 #include "guilib.ch"
 #include <common.ch>
 
-#include "inkey.ch"
+#include <inkey.ch>
 #include "dbstruct.ch"
 #include <hbclass.ch>
 

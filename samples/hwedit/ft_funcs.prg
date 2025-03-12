@@ -49,7 +49,7 @@
 
 #include "directry.ch"
 #include "fileio.ch"
-#include "inkey.ch"
+#include <inkey.ch>
 #include "hbdocdef.ch"
 #include <common.ch>
 

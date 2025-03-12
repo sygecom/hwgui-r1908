@@ -8,7 +8,7 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "inkey.ch"
+#include <inkey.ch>
 #include <hbclass.ch>
 #include "hwgui.ch"
 
