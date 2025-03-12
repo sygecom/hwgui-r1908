@@ -24,7 +24,7 @@
 
 #include "windows.ch"
 #include "guilib.ch"
-#include "hbextern.ch"
+#include <hbextern.ch>
 #include <hbclass.ch>
 #include "hxml.ch"
 #include <dbStruct.ch>

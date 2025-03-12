@@ -12,7 +12,7 @@
 
 
 // LFB pos
-#include "hbextern.ch"
+#include <hbextern.ch>
 // END LFB
 
 #include "windows.ch"

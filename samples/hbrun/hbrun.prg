@@ -45,7 +45,7 @@
 // whether to permit this exception to apply to your modifications.
 // If you do not wish that, delete this exception notice.
 
-#include "hbextern.ch"
+#include <hbextern.ch>
 
 EXTERNAL HCHECKBUTTON
 EXTERNAL HEDIT
