@@ -9,7 +9,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 #include "dbchw.h"
-#include "error.ch"
+#include <error.ch>
 #ifdef RDD_ADS
    #include "ads.ch"
 #endif

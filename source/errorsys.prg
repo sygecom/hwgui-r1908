@@ -9,7 +9,7 @@
 //
 
 #include <common.ch>
-#include "error.ch"
+#include <error.ch>
 #include "windows.ch"
 #include "guilib.ch"
 
