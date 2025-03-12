@@ -10,7 +10,7 @@
 
 #include "windows.ch"
 #include <inkey.ch>
-#include "dbstruct.ch"
+#include <dbstruct.ch>
 #include <hbclass.ch>
 #include "guilib.ch"
 #include "gtk.ch"

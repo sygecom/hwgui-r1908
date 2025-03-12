@@ -7,7 +7,7 @@
 //
 
 #include "hwgui.ch"
-#include "dbstruct.ch"
+#include <dbstruct.ch>
 
 FUNCTION Main()
 

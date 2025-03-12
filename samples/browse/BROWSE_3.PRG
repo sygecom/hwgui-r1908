@@ -7,7 +7,7 @@
 //
 
 #include "hwgui.ch"
-#include "dbstruct.ch"
+#include <dbstruct.ch>
 
 #define x_BLUE       16711680
 #define x_RED             255

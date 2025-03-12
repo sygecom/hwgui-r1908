@@ -24,7 +24,7 @@
 #include <common.ch>
 
 #include <inkey.ch>
-#include "dbstruct.ch"
+#include <dbstruct.ch>
 #include <hbclass.ch>
 
 #ifdef __XHARBOUR__
