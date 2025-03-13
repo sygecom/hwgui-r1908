@@ -53,7 +53,7 @@ PUBLIC nQueryWndHandle := 0
    SET EPOCH TO 1960
    SET DATE FORMAT dformat
 
-   Rdini( "dbc.ini" )
+   hwg_Rdini( "dbc.ini" )
    mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
 
 #ifdef RDD_ADS
@@ -297,7 +297,7 @@ Return Nil
 
 Static Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
-   hwg_SetDlgItemText( hDlg, IDC_EDIT2, CutExten( CutPath( msfile[ improc ] ) ) + INDEXEXT() )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[ improc ] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
@@ -355,7 +355,7 @@ Local oWindow, aControls, i
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
-   hwg_WriteStatus( oWindow,2,"Order: "+Iif( isMulti,tagname,CutPath(indname) ) )
+   hwg_WriteStatus( oWindow,2,"Order: "+Iif( isMulti,tagname,hwg_CutPath(indname) ) )
 
    IF oWindow != Nil
       aControls := oWindow:aControls
@@ -685,7 +685,7 @@ LOCAL bOldError, oError
          RETURN .F.
       ENDIF
       SELECT( improc )
-      alsname := IIF( alsname = Nil, CutExten( CutPath( fname ) ), Trim( CutExten( CutPath( alsname ) ) ) )
+      alsname := IIF( alsname = Nil, hwg_CutExten( hwg_CutPath( fname ) ), Trim( hwg_CutExten( hwg_CutPath( alsname ) ) ) )
       IF ( i := AT( '~', alsname ) ) <> 0
          alsname := Stufmy( alsname, i, 1, '_' )
       ENDIF
@@ -714,7 +714,7 @@ LOCAL bOldError, oError
       IF NETERR()
          IF SET( _SET_EXCLUSIVE )
             SET( _SET_EXCLUSIVE, .F. )
-            DBUSEAREA(,, fname, CutExten( IIF( alsname = Nil, fname, alsname ) ),, prrdonly )
+            DBUSEAREA(,, fname, hwg_CutExten( IIF( alsname = Nil, fname, alsname ) ),, prrdonly )
             IF NETERR()
                MsgStop( strerr )
                improc := oldimp

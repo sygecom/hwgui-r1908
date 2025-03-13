@@ -250,12 +250,12 @@ FUNCTION Browse2Prg
    ENDDO
 
    IF nType = BRW_DATABASE
-      cAlias := Left(CutPath(cAlias), At(".", CutPath(cAlias)) - 1)
+      cAlias := Left(hwg_CutPath(cAlias), At(".", hwg_CutPath(cAlias)) - 1)
       cAlias := Lower(Trim(IIf((temp := oCtrl:GetProp("alias")) != Nil .AND. !Empty(temp), temp, calias)))
       cBrowser += Space( 4 ) + cname + ":alias := '" + calias + "'" + _chr( 10 )
       // abrir tablea
       //     IF (temp:=oCtrl:GetProp("filedbf")) != Nil //.AND. !Empty(temp)
-      //      cTmpAlias := Lower(Left(CutPath(temp), At(".", CutPath(temp)) - 1))
+      //      cTmpAlias := Lower(Left(hwg_CutPath(temp), At(".", hwg_CutPath(temp)) - 1))
       //      IF select(cTmpalias) = 0
       //        USE (value) NEW SHARED ALIAS (cTmpAlias) VIA "DBFCDX" //ftmp
       //SET INDEX TO (cTmpAlias)
@@ -1429,7 +1429,7 @@ FUNCTION Ctrl2Prg
 
             DO WHILE .T.
 
-               stroka := RdStr( , oForm:aMethods[i, 2], @j1 )
+               stroka := hwg_RdStr( , oForm:aMethods[i, 2], @j1 )
 
                IF Len(stroka) == 0
                   EXIT

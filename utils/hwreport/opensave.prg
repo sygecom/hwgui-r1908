@@ -134,10 +134,10 @@ Static Function OpenFile( fname,repName )
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han := FOPEN( fname, FO_READ + FO_SHARED )
 Local i, itemName, aItem, res := .T., sFont
-Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
+Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
    IF han <> - 1
       DO WHILE .T.
-         stroka := RDSTR( han,@strbuf,@poz,512 )
+         stroka := hwg_RDSTR( han,@strbuf,@poz,512 )
          IF LEN( stroka ) = 0
             EXIT
          ENDIF
@@ -177,21 +177,21 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
                   ENDIF
                ENDIF
             ELSE
-               IF ( itemName := NextItem( stroka,.T. ) ) == "FORM"
-                  aPaintRep[FORM_WIDTH] := Val( NextItem( stroka ) )
-                  aPaintRep[FORM_HEIGHT] := Val( NextItem( stroka ) )
-                  nFormWidth := Val( NextItem( stroka ) )
+               IF ( itemName := hwg_NextItem( stroka,.T. ) ) == "FORM"
+                  aPaintRep[FORM_WIDTH] := Val( hwg_NextItem( stroka ) )
+                  aPaintRep[FORM_HEIGHT] := Val( hwg_NextItem( stroka ) )
+                  nFormWidth := Val( hwg_NextItem( stroka ) )
                ELSEIF itemName == "TEXT"
-                  Aadd( aPaintRep[FORM_ITEMS], { 1,NextItem(stroka),Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)),Val(NextItem(stroka)),Nil,NextItem(stroka), ;
-                           Val(NextItem(stroka)),0,Nil,0 } )
+                  Aadd( aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),Nil,hwg_NextItem(stroka), ;
+                           Val(hwg_NextItem(stroka)),0,Nil,0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_FONT] := HFont():Add( NextItem( aItem[ITEM_FONT],.T.,"," ), ;
-                    Val(NextItem( aItem[ITEM_FONT],,"," )),Val(NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(NextItem( aItem[ITEM_FONT],,"," )),Val(NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(NextItem( aItem[ITEM_FONT],,"," )),Val(NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(NextItem( aItem[ITEM_FONT],,"," )) )
+                  aItem[ITEM_FONT] := HFont():Add( hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )) )
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -202,12 +202,12 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
                   ENDIF
                ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
                   Aadd( aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE",2,Iif(itemName=="VLINE",3,4)), ;
-                           "",Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)),0,NextItem(stroka),Nil,0,0,Nil,0 } )
+                           "",Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)),0,hwg_NextItem(stroka),Nil,0,0,Nil,0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_PEN] := HPen():Add( Val(NextItem( aItem[ITEM_PEN],.T.,"," )), ;
-                          Val(NextItem( aItem[ITEM_PEN],,"," )),Val(NextItem( aItem[ITEM_PEN],,"," )) )
+                  aItem[ITEM_PEN] := HPen():Add( Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
+                          Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )) )
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -217,10 +217,10 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
                      EXIT
                   ENDIF
                ELSEIF itemName == "BITMAP"
-                  Aadd( aPaintRep[FORM_ITEMS], { 5, NextItem(stroka), ;
-                           Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)),0,Nil,Nil,0,0,Nil,0 } )
+                  Aadd( aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
+                           Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)),0,Nil,Nil,0,0,Nil,0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_BITMAP] := HBitmap():AddFile( aItem[ITEM_CAPTION] )
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
@@ -232,9 +232,9 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWid
                      EXIT
                   ENDIF
                ELSEIF itemName == "MARKER"
-                  Aadd( aPaintRep[FORM_ITEMS], { 6, NextItem(stroka),Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                           Val(NextItem(stroka)), Val(NextItem(stroka)), ;
+                  Aadd( aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                           Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Nil,Nil,0,0,Nil,0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                ENDIF
@@ -301,7 +301,7 @@ Return res
 Static Function SaveRFile( fname,repName )
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han, hanOut, isOut := .F., res := .F.
-Local lPrg := ( Upper(FilExten(fname))=="PRG" )
+Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
 
    IF File( fname )
       han := FOPEN( fname, FO_READWRITE + FO_EXCLUSIVE )
@@ -309,7 +309,7 @@ Local lPrg := ( Upper(FilExten(fname))=="PRG" )
          hanOut := FCREATE( mypath+"__rpt.tmp" )
          IF hanOut <> - 1
             DO WHILE .T.
-               stroka := RDSTR( han,@strbuf,@poz,512 )
+               stroka := hwg_RDSTR( han,@strbuf,@poz,512 )
                IF LEN( stroka ) = 0
                   EXIT
                ENDIF
@@ -499,7 +499,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
          Fwrite( han,"#SCRIPT"+Chr(10) )
       ENDIF
       DO WHILE .T.
-         stroka := RDSTR( , cScript, @poz )
+         stroka := hwg_RDSTR( , cScript, @poz )
          IF LEN( stroka ) = 0
             IF lPrg
                Fwrite( han,Chr(10) )

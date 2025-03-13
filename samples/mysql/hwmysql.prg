@@ -115,7 +115,7 @@ FUNCTION Main()
            ON SIZE {|o, x, y|ResizeBrwQ(o, x, y)}
    oBrw:active := .F.
 
-   Rdini("demo.ini")
+   hwg_Rdini("demo.ini")
    IF ValType(BrwFont) == "A"
       oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
@@ -346,7 +346,7 @@ FUNCTION execSQL(cQuery)
       hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
-         DO WHILE Len(stroka := RDSTR(Nil,@cQuery,@poz)) != 0
+         DO WHILE Len(stroka := hwg_RDSTR(Nil,@cQuery,@poz)) != 0
             IF Asc(Ltrim(stroka)) > 32
                Aadd(aQueries, Nil)
                Ains(aQueries, i)
@@ -477,7 +477,7 @@ STATIC FUNCTION ReadHistory(fname)
    han := FOpen(fname, FO_READ + FO_SHARED)
    IF han <> - 1
       DO WHILE .T.
-         stroka := RDSTR(han,@strbuf,@poz, 512)
+         stroka := hwg_RDSTR(han,@strbuf,@poz, 512)
          IF Len(stroka) == 0
             EXIT
          ENDIF

@@ -44,7 +44,7 @@ FUNCTION hwg_OpenReport(fname, repName)
    han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR(han, @strbuf, @poz, 512)
+         stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
          IF Len(stroka) == 0
             EXIT
          ENDIF
@@ -74,22 +74,22 @@ FUNCTION hwg_OpenReport(fname, repName)
                   ENDIF
                ENDIF
             ELSE
-               IF (itemName := NextItem(stroka, .T.)) == "FORM"
-                  s_aPaintRep[FORM_WIDTH] := Val(NextItem(stroka))
-                  s_aPaintRep[FORM_HEIGHT] := Val(NextItem(stroka))
-                  nFormWidth := Val(NextItem(stroka))
+               IF (itemName := hwg_NextItem(stroka, .T.)) == "FORM"
+                  s_aPaintRep[FORM_WIDTH] := Val(hwg_NextItem(stroka))
+                  s_aPaintRep[FORM_HEIGHT] := Val(hwg_NextItem(stroka))
+                  nFormWidth := Val(hwg_NextItem(stroka))
                   s_aPaintRep[FORM_XKOEF] := nFormWidth / s_aPaintRep[FORM_WIDTH]
                ELSEIF itemName == "TEXT"
-                  AAdd(s_aPaintRep[FORM_ITEMS], {1, NextItem(stroka), Val(NextItem(stroka)), ;
-                                                  Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                                  Val(NextItem(stroka)), Val(NextItem(stroka)), 0, NextItem(stroka), ;
-                                                  Val(NextItem(stroka)), 0, NIL, 0})
+                  AAdd(s_aPaintRep[FORM_ITEMS], {1, hwg_NextItem(stroka), Val(hwg_NextItem(stroka)), ;
+                                                  Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                                                  Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), 0, hwg_NextItem(stroka), ;
+                                                  Val(hwg_NextItem(stroka)), 0, NIL, 0})
                   aItem := ATail(s_aPaintRep[FORM_ITEMS])
-                  aItem[ITEM_FONT] := HFont():Add(NextItem(aItem[ITEM_FONT], .T., ","), ;
-                                                     Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
-                                                     Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
-                                                     Val(NextItem(aItem[ITEM_FONT],, ",")), Val(NextItem(aItem[ITEM_FONT],, ",")), ;
-                                                     Val(NextItem(aItem[ITEM_FONT],, ",")))
+                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem(aItem[ITEM_FONT], .T., ","), ;
+                                                     Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), ;
+                                                     Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), ;
+                                                     Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), Val(hwg_NextItem(aItem[ITEM_FONT],, ",")), ;
+                                                     Val(hwg_NextItem(aItem[ITEM_FONT],, ",")))
                   IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                   aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                   aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -100,12 +100,12 @@ FUNCTION hwg_OpenReport(fname, repName)
                ENDIF
             ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
                AAdd(s_aPaintRep[FORM_ITEMS], {IIf(itemName == "HLINE", 2, IIf(itemName == "VLINE", 3, 4)), ;
-                                                "", Val(NextItem(stroka)), ;
-                                                Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                                Val(NextItem(stroka)), 0, NextItem(stroka), 0, 0, 0, NIL, 0})
+                                                "", Val(hwg_NextItem(stroka)), ;
+                                                Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                                                Val(hwg_NextItem(stroka)), 0, hwg_NextItem(stroka), 0, 0, 0, NIL, 0})
                aItem := ATail(s_aPaintRep[FORM_ITEMS])
-               aItem[ITEM_PEN] := HPen():Add(Val(NextItem(aItem[ITEM_PEN], .T., ",")), ;
-                                                Val(NextItem(aItem[ITEM_PEN],, ",")), Val(NextItem(aItem[ITEM_PEN],, ",")))
+               aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem(aItem[ITEM_PEN], .T., ",")), ;
+                                                Val(hwg_NextItem(aItem[ITEM_PEN],, ",")), Val(hwg_NextItem(aItem[ITEM_PEN],, ",")))
                IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -115,10 +115,10 @@ FUNCTION hwg_OpenReport(fname, repName)
                EXIT
             ENDIF
          ELSEIF itemName == "BITMAP"
-            AAdd(s_aPaintRep[FORM_ITEMS], {5, NextItem(stroka), ;
-                                             Val(NextItem(stroka)), ;
-                                             Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                             Val(NextItem(stroka)), 0, 0, 0, 0, 0, NIL, 0})
+            AAdd(s_aPaintRep[FORM_ITEMS], {5, hwg_NextItem(stroka), ;
+                                             Val(hwg_NextItem(stroka)), ;
+                                             Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                                             Val(hwg_NextItem(stroka)), 0, 0, 0, 0, 0, NIL, 0})
             aItem := ATail(s_aPaintRep[FORM_ITEMS])
             IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
@@ -129,9 +129,9 @@ FUNCTION hwg_OpenReport(fname, repName)
                EXIT
             ENDIF
          ELSEIF itemName == "MARKER"
-            AAdd(s_aPaintRep[FORM_ITEMS], {6, NextItem(stroka), Val(NextItem(stroka)), ;
-                                             Val(NextItem(stroka)), Val(NextItem(stroka)), ;
-                                             Val(NextItem(stroka)), Val(NextItem(stroka)), ;
+            AAdd(s_aPaintRep[FORM_ITEMS], {6, hwg_NextItem(stroka), Val(hwg_NextItem(stroka)), ;
+                                             Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
+                                             Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                                              0, 0, 0, 0, NIL, 0})
             aItem := ATail(s_aPaintRep[FORM_ITEMS])
          ENDIF
@@ -218,11 +218,11 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
 
    IF hb_IsChar(s_aPaintRep[FORM_VARS])
       DO WHILE .T.
-         stroka := RDSTR(, s_aPaintRep[FORM_VARS], @poz)
+         stroka := hwg_RDSTR(, s_aPaintRep[FORM_VARS], @poz)
          IF Len(stroka) == 0
             EXIT
          ENDIF
-         DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
+         DO WHILE !Empty(varName := hwg_getNextVar(@stroka, @varValue))
             PRIVATE &varName
             IF varValue != NIL
                &varName := &varValue

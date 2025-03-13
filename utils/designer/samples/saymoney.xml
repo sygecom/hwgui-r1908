@@ -45,10 +45,10 @@
     <style>
       <property name="Geometry">{20,54,92,28}</property>
       <property name="Name">[oOwnerbutton1]</property>
-      <property name="Caption">[SayDollar()]</property>
+      <property name="Caption">[hwg_SayDollar()]</property>
     </style>
     <method name="onClick">
-      <![CDATA[Olsay:SETTEXT(SAYDOLLAR(nValue))]]>
+      <![CDATA[Olsay:SETTEXT(hwg_SAYDOLLAR(nValue))]]>
     </method>
   </part>
   <part class="label">
@@ -65,10 +65,10 @@
     <style>
       <property name="Geometry">{21,85,92,28}</property>
       <property name="Name">[oOwnerbutton2]</property>
-      <property name="Caption">[SayRupiah()]</property>
+      <property name="Caption">[hwg_SayRupiah()]</property>
     </style>
     <method name="onClick">
-      <![CDATA[Olsay:SETTEXT(SAYRUPIAH(nValue))]]>
+      <![CDATA[Olsay:SETTEXT(hwg_SAYRUPIAH(nValue))]]>
     </method>
   </part>
   <part class="ownerbutton">

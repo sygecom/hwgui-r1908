@@ -942,11 +942,11 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 /*
       ELSEIF cPName == "filedbf"
          IF !Empty(xProperty)
-            cAliasdbf := Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)
-            IF Select(Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) == 0
-               USE (xProperty) NEW SHARED Alias (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1)) //ftmp
+            cAliasdbf := Left(hwg_CutPath(xProperty), At(".", hwg_CutPath(xProperty)) - 1)
+            IF Select(Left(hwg_CutPath(xProperty), At(".", hwg_CutPath(xProperty)) - 1)) == 0
+               USE (xProperty) NEW SHARED Alias (Left(hwg_CutPath(xProperty), At(".", hwg_CutPath(xProperty)) - 1)) //ftmp
             ENDIF
-            Select (Left(CutPath(xProperty), At(".", CutPath(xProperty)) - 1))
+            Select (Left(hwg_CutPath(xProperty), At(".", hwg_CutPath(xProperty)) - 1))
          ENDIF
 */
       ELSEIF cPName == "columnscount"

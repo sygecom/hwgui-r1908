@@ -1053,7 +1053,7 @@
       <property name="FileDbf" dlg="file">
          <code2><![CDATA[
            Private cAlias
-            cAlias := LEFT(CutPath( value ),AT(".",CutPath( value ))-1)
+            cAlias := LEFT(hwg_CutPath( value ),AT(".",hwg_CutPath( value ))-1)
             IF !EMPTY(value) .AND. SELECT(cAlias) = 0
                IF select(calias) = 0
                  USE (value) NEW SHARED ALIAS (cAlias) //ftmp

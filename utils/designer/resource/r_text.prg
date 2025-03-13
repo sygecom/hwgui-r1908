@@ -5,11 +5,11 @@ FUNCTION STR2FONT
    PRIVATE oFont
   
   IF !Empty(cFont)
-    oFont := HFont():Add( NextItem( cFont,.T.,"," ), ;
-       Val(NextItem( cFont,,"," )),Val(NextItem( cFont,,"," )), ;
-       Val(NextItem( cFont,,"," )),Val(NextItem( cFont,,"," )), ;
-       Val(NextItem( cFont,,"," )),Val(NextItem( cFont,,"," )), ;
-       Val(NextItem( cFont,,"," )) )
+    oFont := HFont():Add( hwg_NextItem( cFont,.T.,"," ), ;
+       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
+       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
+       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
+       Val(hwg_NextItem( cFont,,"," )) )
   ENDIF
 Return oFont
 ENDFUNC
@@ -46,7 +46,7 @@ ENDFUNC
     Return
   ENDIF
   DO WHILE .T.
-    stroka := RDSTR( han,@strbuf,@poz, 512 )
+    stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
     IF Len(stroka) == 0
       EXIT
     ENDIF
@@ -75,55 +75,55 @@ ENDFUNC
           ENDIF
         ENDIF
       ELSE
-        IF ( itemName := NextItem( stroka,.T. ) ) == "FORM"
-          cWidth := NextItem( stroka )
+        IF ( itemName := hwg_NextItem( stroka,.T. ) ) == "FORM"
+          cWidth := hwg_NextItem( stroka )
           nWidth := Val( cWidth )
-          nHeight:= Val( NextItem( stroka ) )
-          xKoef := nWidth / Val( NextItem( stroka ) )
+          nHeight:= Val( hwg_NextItem( stroka ) )
+          xKoef := nWidth / Val( hwg_NextItem( stroka ) )
           oForm:CreateDialog( { {"Left","300"}, {"Top","120"}, ;
               {"Width","500"},{"Height","400"},{"Caption",itemName}, ;
               {"Paper Size","A4"},{"Orientation",IIf(nWidth>nHeight,"Landscape","Portrait")} } )
         ELSEIF itemName == "TEXT"
           itemName := "label"
-          cCaption := NextItem( stroka )
-          x := Val( NextItem( stroka ) )
-          y := Val( NextItem( stroka ) )
-          nWidth := Val( NextItem( stroka ) )
-          nHeight := Val( NextItem( stroka ) )
-          nAlign := Val( NextItem( stroka ) )
-          cFont := NextItem( stroka )
-          nVar := Val( NextItem( stroka ) )
+          cCaption := hwg_NextItem( stroka )
+          x := Val( hwg_NextItem( stroka ) )
+          y := Val( hwg_NextItem( stroka ) )
+          nWidth := Val( hwg_NextItem( stroka ) )
+          nHeight := Val( hwg_NextItem( stroka ) )
+          nAlign := Val( hwg_NextItem( stroka ) )
+          cFont := hwg_NextItem( stroka )
+          nVar := Val( hwg_NextItem( stroka ) )
 
           oFont := CallFunc( "Str2Font", { cFont } )
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
           itemName := Lower(itemName)
-          x := Val( NextItem( stroka ) )
-          y := Val( NextItem( stroka ) )
-          nWidth := Val( NextItem( stroka ) )
-          nHeight:= Val( NextItem( stroka ) )
-          cFont  := NextItem( stroka )
-          nAlign := Val( NextItem( cFont,.T.,"," ) ) + 1
-          nVar   := Val( NextItem( cFont,,"," ) )
+          x := Val( hwg_NextItem( stroka ) )
+          y := Val( hwg_NextItem( stroka ) )
+          nWidth := Val( hwg_NextItem( stroka ) )
+          nHeight:= Val( hwg_NextItem( stroka ) )
+          cFont  := hwg_NextItem( stroka )
+          nAlign := Val( hwg_NextItem( cFont,.T.,"," ) ) + 1
+          nVar   := Val( hwg_NextItem( cFont,,"," ) )
 
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,nAlign,nVar })
 
         ELSEIF itemName == "BITMAP"
           itemName := Lower(itemName)
-          cCaption := NextItem( stroka )
-          x := Val( NextItem( stroka ) )
-          y := Val( NextItem( stroka ) )
-          nWidth := Val( NextItem( stroka ) )
-          nHeight := Val( NextItem( stroka ) )
+          cCaption := hwg_NextItem( stroka )
+          x := Val( hwg_NextItem( stroka ) )
+          y := Val( hwg_NextItem( stroka ) )
+          nWidth := Val( hwg_NextItem( stroka ) )
+          nHeight := Val( hwg_NextItem( stroka ) )
 
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption })
 
         ELSEIF itemName == "MARKER"
           itemName := "area"
-          cm := cCaption := NextItem( stroka )
-          x := Val( NextItem( stroka ) )
-          y := Val( NextItem( stroka ) )
+          cm := cCaption := hwg_NextItem( stroka )
+          x := Val( hwg_NextItem( stroka ) )
+          y := Val( hwg_NextItem( stroka ) )
           nHeight := 0
           IF cCaption == "EPF"
             IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PF"}) ) != 0
@@ -170,7 +170,7 @@ ENDFUNC
       ELSE
         cCaption += stroka+Chr(13)+chr(10)
         IF itemName == "FORM"
-          DO WHILE !Empty(cFont := getNextVar(@stroka))
+          DO WHILE !Empty(cFont := hwg_getNextVar(@stroka))
             AAdd(aVars,cFont)
           ENDDO
         ENDIF

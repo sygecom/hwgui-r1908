@@ -132,8 +132,8 @@ METHOD Open( fname,cForm )  CLASS HFormGen
    PRIVATE aCtrlTable
 
    IF fname != Nil
-      ::path := Filepath( fname )
-      ::filename := CutPath( fname )
+      ::path := hwg_Filepath( fname )
+      ::filename := hwg_CutPath( fname )
    ENDIF
    IF fname != Nil .OR. cForm != Nil .OR. FileDlg( Self,.T. )
       IF ::type == 1
@@ -517,7 +517,7 @@ STATIC FUNCTION FileDlg( oFrm,lOpen )
        AT 50, 100 SIZE 310, 250 FONT oDesigner:oMainWnd:oFont
 
    @ 10, 20 GET COMBOBOX nType ITEMS aCombo SIZE 140, 24 ;
-       ON CHANGE {||IIf(lOpen,.F.,(fname:=CutExten(fname)+IIf(!Empty(fname),"."+aFormats[af[nType], 2],""),oEdit1:Refresh()))}
+       ON CHANGE {||IIf(lOpen,.F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname),"."+aFormats[af[nType], 2],""),oEdit1:Refresh()))}
 
    @ 10, 70 GET oEdit1 VAR fname  ;
         STYLE ES_AUTOHSCROLL      ;
@@ -537,11 +537,11 @@ STATIC FUNCTION FileDlg( oFrm,lOpen )
 
    IF oDlg:lResult
       oFrm:type := af[nType]
-      oFrm:filename := CutPath( fname )
-      IF Empty(FilExten(oFrm:filename))
+      oFrm:filename := hwg_CutPath( fname )
+      IF Empty(hwg_FilExten(oFrm:filename))
          oFrm:filename += "."+aFormats[af[nType], 2]
       ENDIF
-      oFrm:path := IIf( Empty(FilePath(fname)), oDesigner:ds_mypath, FilePath(fname) )
+      oFrm:path := IIf( Empty(hwg_FilePath(fname)), oDesigner:ds_mypath, hwg_FilePath(fname) )
       Return .T.
    ENDIF
 
@@ -564,12 +564,12 @@ STATIC FUNCTION BrowFile( lOpen,nType,oEdit1, oEdit2 )
       fname := hwg_SaveFile( s2,s1,s2,oDesigner:ds_mypath )
    ENDIF
    IF !Empty(fname)
-      l_ds_mypath := Lower(FilePath(fname))
+      l_ds_mypath := Lower(hwg_FilePath(fname))
       IF !( oDesigner:ds_mypath == l_ds_mypath )
          oDesigner:ds_mypath := l_ds_mypath
          oDesigner:lChgPath  := .T.
       ENDIF
-      fname := CutPath( fname )
+      fname := hwg_CutPath( fname )
       oEdit1:SetGet( fname )
       oEdit1:Refresh()
       hwg_SetFocus( oEdit2:handle )

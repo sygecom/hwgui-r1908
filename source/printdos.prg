@@ -394,7 +394,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR(han, @strbuf, @poz, 2052)
+         stroka := hwg_RDSTR(han, @strbuf, @poz, 2052)
          IF Len(stroka) == 0
             EXIT
          ENDIF
@@ -439,7 +439,7 @@ METHOD Preview(fName, cTitle) CLASS PrintDos
 
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR(han, @strbuf, @poz, 2052)
+         stroka := hwg_RDSTR(han, @strbuf, @poz, 2052)
          IF Len(stroka) == 0
             EXIT
          ENDIF

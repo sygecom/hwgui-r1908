@@ -200,7 +200,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
 
          // : LFB - CAMPOS PARA AS COLUNAS
          IF ( j != 0 .AND. aDataDef[j, 6] != Nil .AND.aDataDef[j, 6][1] = "@afields" )// funcao
-            //cAlias := LEFT(CutPath( value ),AT(".",CutPath( value ))-1)
+            //cAlias := LEFT(hwg_CutPath( value ),AT(".",hwg_CutPath( value ))-1)
             aItems := {" "}
             FOR i = 1 to 200
                cAlias := ALIAS(i)

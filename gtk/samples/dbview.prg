@@ -117,7 +117,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       ELSE
          use (fname) new
       ENDIF
-      currFname := CutExten( fname )
+      currFname := hwg_CutExten( fname )
       
       oBrw:InitBrw( 2 )
       oBrw:active := .F.

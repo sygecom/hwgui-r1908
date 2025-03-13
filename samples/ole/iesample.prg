@@ -64,9 +64,9 @@ STATIC FUNCTION FindInGoogle(cQuery, oIE, oEdit)
    LOCAL cUrl := "http://www.google.com/search?q="
    LOCAL cItem
 
-   IF !Empty(cItem := NextItem(cQuery, .T., " "))
+   IF !Empty(cItem := hwg_NextItem(cQuery, .T., " "))
       cUrl += cItem
-      DO WHILE !Empty(cItem := NextItem(cQuery, , " "))
+      DO WHILE !Empty(cItem := hwg_NextItem(cQuery, , " "))
          cUrl += "+" + cItem
       ENDDO
       oEdit:SetText(cUrl)

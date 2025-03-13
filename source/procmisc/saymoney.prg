@@ -9,12 +9,12 @@
 //
 
 //
-// English   :  SayDollar(nDollar) -> Say in Dollar
-// Indonesia :  SayRupiah(nRupiah) -> Say in Rupiah
+// English   :  hwg_SayDollar(nDollar) -> Say in Dollar
+// Indonesia :  hwg_SayRupiah(nRupiah) -> Say in Rupiah
 //
 
 // English Say Money
-FUNCTION SayDollar(nDollar)
+FUNCTION hwg_SayDollar(nDollar)
 
  LOCAL cDollar := Right(LTrim(Str(nDollar, 15)), 11)
  LOCAL nAA := 1
@@ -195,14 +195,14 @@ FUNCTION SayDollar(nDollar)
 ENDDO
 
 RETURN xSay
-// eof SayDollar
+// eof hwg_SayDollar
 
 
 // Indonesian Say Money
 
 #define  PECAHAN {"TRILIUN ", "MILYAR ", "JUTA ", "RIBU ", "RUPIAH"}
 
-FUNCTION SayRupiah(nAngka)
+FUNCTION hwg_SayRupiah(nAngka)
 
    LOCAL n, kata, kalimat := IIf(nAngka < 0, "Minus ", "")
    LOCAL char := strtran(Str(ABS(INT(nAngka)), 15), " ", "0")
@@ -254,4 +254,4 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
 STATIC FUNCTION bil(x)
 RETURN IIf(x != "0", bil_asli[val(x)] + " ", "")
 
-// eof SayRupiah
+// eof hwg_SayRupiah

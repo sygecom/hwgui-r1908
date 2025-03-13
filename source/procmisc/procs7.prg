@@ -7,7 +7,7 @@
 //         www - http://kresin.belgorod.su
 //
 
-FUNCTION RDSTR(han, strbuf, poz, buflen)
+FUNCTION HWG_RDSTR(han, strbuf, poz, buflen)
 LOCAL stro := "", rez, oldpoz, poz1
 
    oldpoz := poz
@@ -44,23 +44,23 @@ LOCAL stro := "", rez, oldpoz, poz1
    ENDIF
 RETURN stro
 
-FUNCTION getNextVar(stroka, varValue)
+FUNCTION hwg_getNextVar(stroka, varValue)
 
 LOCAL varName, iPosEnd, iPos3
    IF Empty(stroka)
       RETURN ""
    ELSE
-      IF (iPosEnd := Find_Z(stroka)) == 0
+      IF (iPosEnd := hwg_Find_Z(stroka)) == 0
          iPosEnd := IIf(Right(stroka, 1) = ";", Len(stroka), Len(stroka) + 1)
       ENDIF
-      ipos3    := Find_Z(Left(stroka, iPosEnd - 1), ":")
+      ipos3    := hwg_Find_Z(Left(stroka, iPosEnd - 1), ":")
       varName  := RTrim(LTrim(Left(stroka, IIf(ipos3 == 0, iPosEnd, iPos3) - 1)))
       varValue := IIf(iPos3 != 0, LTrim(SubStr(stroka, iPos3 + 2, iPosEnd - iPos3 - 2)), NIL)
       stroka   := SubStr(stroka, iPosEnd + 1)
    ENDIF
 RETURN varName
 
-FUNCTION FIND_Z(stroka, symb)
+FUNCTION HWG_FIND_Z(stroka, symb)
 
    LOCAL poz
    LOCAL poz1 := 1
@@ -96,37 +96,37 @@ FUNCTION FIND_Z(stroka, symb)
 
 #ifdef __WINDOWS__
 
-FUNCTION Fchoice()
+FUNCTION hwg_Fchoice()
 
    RETURN 1
 
 #endif
 
-FUNCTION CutExten(fname)
+FUNCTION hwg_CutExten(fname)
 
 LOCAL i
 RETURN IIf((i := Rat(".", fname)) == 0, fname, SubStr(fname, 1, i - 1))
 
-FUNCTION FilExten(fname)
+FUNCTION hwg_FilExten(fname)
 
 LOCAL i
 RETURN IIf((i := Rat(".", fname)) == 0, "", SubStr(fname, i + 1))
 
-FUNCTION FilePath(fname)
+FUNCTION hwg_FilePath(fname)
 
 LOCAL i
 RETURN IIf((i := Rat("\", fname)) == 0, ;
             IIf((i := Rat("/", fname)) == 0, "", Left(fname, i)), ;
             Left(fname, i))
 
-FUNCTION CutPath(fname)
+FUNCTION hwg_CutPath(fname)
 
 LOCAL i
 RETURN IIf((i := Rat("\", fname)) == 0, ;
             IIf((i := Rat("/", fname)) == 0, fname, SubStr(fname, i + 1)), ;
             SubStr(fname, i + 1))
 
-FUNCTION NextItem(stroka, lFirst, cSep)
+FUNCTION hwg_NextItem(stroka, lFirst, cSep)
 
 STATIC nPos
 LOCAL i, oldPos
@@ -148,3 +148,23 @@ LOCAL i, oldPos
       ENDIF
    ENDIF
 RETURN ""
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RDSTR, HWG_RDSTR);
+HB_FUNC_TRANSLATE(GETNEXTVAR, HWG_GETNEXTVAR);
+HB_FUNC_TRANSLATE(FIND_Z, HWG_FIND_Z);
+#ifdef __WINDOWS__
+HB_FUNC_TRANSLATE(FCHOICE, HWG_FCHOICE);
+#endif
+HB_FUNC_TRANSLATE(CUTEXTEN, HWG_CUTEXTEN);
+HB_FUNC_TRANSLATE(FILEXTEN, HWG_FILEXTEN);
+HB_FUNC_TRANSLATE(FILEPATH, HWG_FILEPATH);
+HB_FUNC_TRANSLATE(CUTPATH, HWG_CUTPATH);
+HB_FUNC_TRANSLATE(NEXTITEM, HWG_NEXTITEM);
+#endif
+
+#pragma ENDDUMP

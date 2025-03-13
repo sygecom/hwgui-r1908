@@ -91,7 +91,7 @@ METHOD AddFile(name, nWidth, nHeight) CLASS HIcon
    IF nHeight == NIL
       nHeight := 0
    ENDIF
-   cname := CutPath(name)
+   cname := hwg_CutPath(name)
    FOR EACH item IN ::aIcons
       IF item:name == name
          item:nCounter++
@@ -99,10 +99,10 @@ METHOD AddFile(name, nWidth, nHeight) CLASS HIcon
       ENDIF
    NEXT
    // ::classname := "HICON"
-   name := IIf(!File(name) .AND. FILE(CutPath(name)), CutPath(name), name)
+   name := IIf(!File(name) .AND. FILE(hwg_CutPath(name)), hwg_CutPath(name), name)
    IF !File(name)
       cCurDir := DiskName() + ":\" + CurDir()
-      name := hwg_SelectFile("Image Files( *.jpg;*.gif;*.bmp;*.ico )", CutPath(name), FilePath(name), "Locate " + name) //"*.jpg;*.gif;*.bmp;*.ico"
+      name := hwg_SelectFile("Image Files( *.jpg;*.gif;*.bmp;*.ico )", hwg_CutPath(name), hwg_FilePath(name), "Locate " + name) //"*.jpg;*.gif;*.bmp;*.ico"
       DirChange(cCurDir)
    ENDIF
 

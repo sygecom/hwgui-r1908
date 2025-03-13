@@ -38,7 +38,7 @@ LOCAL aFormCode, aFormName
    han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
-         stroka := RDSTR(han, @strbuf, @poz, STR_BUFLEN)
+         stroka := hwg_RDSTR(han, @strbuf, @poz, STR_BUFLEN)
          IF Len(stroka) == 0
             EXIT
          ELSEIF rejim == 0 .AND. Left(stroka, 1) == "#"
@@ -64,7 +64,7 @@ LOCAL aFormCode, aFormName
 #ifdef __WINDOWS__
             i := hwg_WChoice(aFormName)
 #else
-            i := FCHOICE(aFormName)
+            i := hwg_FCHOICE(aFormName)
 #endif
             IF i == 0
                FClose(han)
@@ -147,7 +147,7 @@ LOCAL scom, poz1, stroka, strfull := "", bOldError, i, tmpArray := {}
 Local cLine, lDebug := (Len(rezArray) >= 3)
 
    DO WHILE .T.
-      cLine := RDSTR(han, @strbuf, @poz, STR_BUFLEN)
+      cLine := hwg_RDSTR(han, @strbuf, @poz, STR_BUFLEN)
       IF Len(cLine) == 0
          EXIT
       ENDIF
@@ -431,7 +431,7 @@ PRIVATE iscr := 1, bOldError
             bOldError := ErrorBlock({|e|MacroError(2, e)})
             BEGIN SEQUENCE
             j := 1
-            DO WHILE !Empty(varName := getNextVar(@stroka, @varValue))
+            DO WHILE !Empty(varName := hwg_getNextVar(@stroka, @varValue))
                PRIVATE &varName
                IF varvalue != NIL
                   &varName := &varValue

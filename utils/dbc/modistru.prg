@@ -192,7 +192,7 @@ Local oPBar, nSch := 0
       USE
       SELECT 20
       USE
-      fi1 := Cutexten( msfile[ improc ] )
+      fi1 := hwg_Cutexten( msfile[ improc ] )
       ERASE &(fi1+".bak")
       FRENAME( fi1 + ".dbf", fi1 + ".bak" )
       FRENAME( mypath + "a0_new.DBF", fi1 + ".dbf" )

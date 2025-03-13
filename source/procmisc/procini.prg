@@ -9,7 +9,7 @@
 //
 
 /*
- Function Rdini scans file line by line, creates variables ( if they doesn't
+ Function hwg_Rdini scans file line by line, creates variables ( if they doesn't
  declared yet ) as Public and asiignes them values.
  File format:
       ...
@@ -43,7 +43,7 @@
 
     var_name={ ... { ... } ... }
 
- Syntax: Rdini ( ini_file_name, [section1_name], [section2_name],;
+ Syntax: hwg_Rdini ( ini_file_name, [section1_name], [section2_name],;
                  [section3_name], [section4_name] ),
    where ini_file_name - name of .ini - file you want to read,
    section1_name, ..., section4_name - names of sections in .ini - file
@@ -53,7 +53,7 @@
 #include <fileio.ch>
 #define STR_BUFLEN  1024
 
-FUNCTION RDINI(fname, prm1, prm2, prm3, prm4)
+FUNCTION HWG_RDINI(fname, prm1, prm2, prm3, prm4)
 
 LOCAL han, stroka, strfull, kolstr
 //LOCAL rez (variable not used)
@@ -62,7 +62,7 @@ LOCAL poz1, vname
 LOCAL prblo, lTruncAr
 LOCAL lWinIni  := (hb_IsArray(prm1))
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
-LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
+LOCAL iniDbf := (Upper(hwg_FilExten(fname)) == "DBF")
 
    kolstr := 0
    prblo  := .T.
@@ -76,7 +76,7 @@ LOCAL iniDbf := (Upper(FilExten(fname)) == "DBF")
       strfull := ""
       DO WHILE .T.
          kolstr++
-         stroka := IIf(iniDbf, RDSTRDBF(), RDSTR(han, @strbuf, @poz, STR_BUFLEN))
+         stroka := IIf(iniDbf, RDSTRDBF(), hwg_RDSTR(han, @strbuf, @poz, STR_BUFLEN))
          IF Len(stroka) == 0
             EXIT
          ENDIF
@@ -179,7 +179,7 @@ LOCAL poz1
 //LOCAL i := 0 (variable/value not used)
 //LOCAL lenm (variable not used)
 LOCAL len1, strv, newname
-   poz1 := FIND_Z(SubStr(stroka, 2), "}")
+   poz1 := hwg_FIND_Z(SubStr(stroka, 2), "}")
    IF poz1 != 0
       stroka := SubStr(stroka, 2, poz1 - 1)
       //lenm   := Len(&vname) (value not used)
@@ -188,7 +188,7 @@ LOCAL len1, strv, newname
             EXIT
          ELSE
             //i++ (value not used)
-            poz1 := FIND_Z(stroka)
+            poz1 := hwg_FIND_Z(stroka)
             strv := LTrim(SubStr(stroka, 1, IIf(poz1 == 0, 9999, poz1 - 1)))
             IF Asc(strv) == 123 .AND. SubStr(strv, 2, 1) != "|"              // {
                AAdd(&vname, {})
@@ -213,3 +213,13 @@ FIELD INICOND, INITEXT
    stroka := IIf(Empty(INICOND) .OR. &(INICOND), Trim(INITEXT), "")
    SKIP
 RETURN stroka
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(RDINI, HWG_RDINI);
+#endif
+
+#pragma ENDDUMP

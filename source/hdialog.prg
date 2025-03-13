@@ -936,8 +936,8 @@ FUNCTION hwg_OnHelp(oDlg, wParam, lParam)
    HB_SYMBOL_UNUSED(wParam)
 
    IF !Empty(hwg_SetHelpFileName())
-      IF "chm" $ Lower(CutPath(hwg_SetHelpFileName()))
-         cDir := IIf(Empty(FilePath(hwg_SetHelpFileName())), Curdir(), FilePath(hwg_SetHelpFileName()))
+      IF "chm" $ Lower(hwg_CutPath(hwg_SetHelpFileName()))
+         cDir := IIf(Empty(hwg_FilePath(hwg_SetHelpFileName())), Curdir(), hwg_FilePath(hwg_SetHelpFileName()))
       ENDIF
       IF !Empty(lParam)
          oCtrl := oDlg:FindControl(NIL, hwg_GetHelpData(lParam))
@@ -948,14 +948,14 @@ FUNCTION hwg_OnHelp(oDlg, wParam, lParam)
             oParent := oCtrl:oParent
             nHelpId := IIf(Empty(oParent:HelpId), oDlg:HelpId, oParent:HelpId)
          ENDIF
-         IF "chm" $ Lower(CutPath(hwg_SetHelpFileName()))
+         IF "chm" $ Lower(hwg_CutPath(hwg_SetHelpFileName()))
             nHelpId := IIf(hb_IsNumeric(nHelpId), LTrim(Str(nHelpId)), nHelpId)
-            hwg_ShellExecute("hh.exe", "open", CutPath(hwg_SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
+            hwg_ShellExecute("hh.exe", "open", hwg_CutPath(hwg_SetHelpFileName()) + "::" + nHelpId + ".html", cDir)
          ELSE
             hwg_WinHelp(oDlg:handle, hwg_SetHelpFileName(), IIf(Empty(nHelpId), 3, 1), nHelpId)
          ENDIF
       ELSEIF cDir != NIL
-         hwg_ShellExecute("hh.exe", "open", CutPath(hwg_SetHelpFileName()), cDir)
+         hwg_ShellExecute("hh.exe", "open", hwg_CutPath(hwg_SetHelpFileName()), cDir)
       ELSE
          hwg_WinHelp(oDlg:handle, hwg_SetHelpFileName(), IIf(Empty(oDlg:HelpId), 3, 1), oDlg:HelpId)
       ENDIF
