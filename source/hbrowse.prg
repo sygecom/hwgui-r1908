@@ -4433,7 +4433,7 @@ METHOD BrwScrollVPos() CLASS HBrowse
 */
 //----------------------------------------------------//
 METHOD FldStr(oBrw, numf) CLASS HBrowse
-   
+
    LOCAL cRes
    LOCAL vartmp
    LOCAL Type
@@ -4471,10 +4471,12 @@ METHOD FldStr(oBrw, numf) CLASS HBrowse
          IF Type == "U" .AND. vartmp != NIL
             Type := ValType(vartmp)
          ENDIF
-         IF Type == "C"
+         SWITCH Type
+         CASE "C"
             //cRes := Padr(vartmp, oBrw:aColumns[numf]:length)
             cRes := vartmp
-         ELSEIF Type == "N"
+            EXIT
+         CASE "N"
             IF oBrw:aColumns[numf]:aList != NIL .AND. (oBrw:aColumns[numf]:bWhen == NIL .OR. Eval(oBrw:aColumns[numf]:bWhen))
                IF vartmp == 0
                   cRes := ""
@@ -4485,24 +4487,29 @@ METHOD FldStr(oBrw, numf) CLASS HBrowse
                cRes := PadL(Str(vartmp, oBrw:aColumns[numf]:length, ;
                                   oBrw:aColumns[numf]:dec), oBrw:aColumns[numf]:length)
             ENDIF
-         ELSEIF Type == "D"
+            EXIT
+         CASE "D"
             cRes := PadR(DToC(vartmp), oBrw:aColumns[numf]:length)
-
-         ELSEIF Type == "L"
+            EXIT
+         CASE "L"
             cRes := PadR(IIf(vartmp, "T", "F"), oBrw:aColumns[numf]:length)
-
-         ELSEIF Type == "M"
+            EXIT
+         CASE "M"
             cRes := IIf(Empty(vartmp), "<memo>", "<MEMO>")
-
-         ELSEIF Type == "O"
+            EXIT
+         CASE "O"
             cRes := "<" + vartmp:Classname() + ">"
-
-         ELSEIF Type == "A"
+            EXIT
+         CASE "A"
             cRes := "<Array>"
-
-         ELSE
+            EXIT
+         #ifdef __XHARBOUR__
+         DEFAULT
+         #else
+         OTHERWISE
+         #endif
             cRes := Space(oBrw:aColumns[numf]:length)
-         ENDIF
+         ENDSWITCH
       ENDIF
    ENDIF
 
@@ -4510,7 +4517,7 @@ RETURN cRes
 
 //----------------------------------------------------//
 STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
-   
+
    LOCAL klf := 0
    LOCAL i := IIf(oBrw:freeze > 0, 1, fld1)
 
