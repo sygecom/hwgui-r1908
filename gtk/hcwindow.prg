@@ -290,6 +290,7 @@ Local oItem, iCont
 
 Return 0
 
+#if 0 // old code for reference (to be deleted)
 Function hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
@@ -309,6 +310,31 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
    ENDIF
 
 Return 0
+#else
+Function hwg_onTrackScroll( oWnd,wParam,lParam )
+Local oCtrl := oWnd:FindControl( , lParam ), msg
+
+   IF oCtrl != Nil
+      msg := hwg_LOWORD(wParam)
+      SWITCH msg
+      CASE TB_ENDTRACK
+         IF ISBLOCK( oCtrl:bChange )
+            Eval( oCtrl:bChange,oCtrl )
+            Return 0
+         ENDIF
+         EXIT
+      CASE TB_THUMBTRACK
+      CASE TB_PAGEUP
+      CASE TB_PAGEDOWN
+         IF ISBLOCK( oCtrl:bThumbDrag )
+            Eval( oCtrl:bThumbDrag,oCtrl )
+            Return 0
+         ENDIF
+      ENDSWITCH
+   ENDIF
+
+Return 0
+#endif
 
 #pragma BEGINDUMP
 
