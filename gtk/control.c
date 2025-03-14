@@ -660,7 +660,7 @@ HB_FUNC(HWG_CREATEPANEL)
 HB_FUNC_TRANSLATE(CREATEPANEL, HWG_CREATEPANEL);
 #endif
 
-HB_FUNC(DESTROYPANEL)
+HB_FUNC(HWG_DESTROYPANEL)
 {
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
   if (box)
@@ -668,6 +668,10 @@ HB_FUNC(DESTROYPANEL)
     gtk_widget_destroy((GtkWidget *)box);
   }
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(DESTROYPANEL, HWG_DESTROYPANEL);
+#endif
 
 /*
    hwg_CreateOwnBtn( hParentWindow, nControlID, x, y, nWidth, nHeight )
@@ -764,7 +768,7 @@ HB_FUNC(HWG_GETPARENT)
 HB_FUNC_TRANSLATE(GETPARENT, HWG_GETPARENT);
 #endif
 
-HB_FUNC(LOADCURSOR)
+HB_FUNC(HWG_LOADCURSOR)
 {
   if (HB_ISCHAR(1))
   {
@@ -773,8 +777,12 @@ HB_FUNC(LOADCURSOR)
   else
   {
     HB_RETHANDLE(gdk_cursor_new((GdkCursorType)hb_parni(1)));
-  }  
+  }
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(LOADCURSOR, HWG_LOADCURSOR);
+#endif
 
 HB_FUNC(HWG_SETCURSOR)
 {
@@ -876,7 +884,7 @@ HB_FUNC(HWG_CREATESTATUSWINDOW)
 HB_FUNC_TRANSLATE(CREATESTATUSWINDOW, HWG_CREATESTATUSWINDOW);
 #endif
 
-HB_FUNC(STATUSBARSETTEXT)
+HB_FUNC(HWG_STATUSBARSETTEXT)
 {
   gchar *gcTitle = hwg_convert_to_utf8(hb_parcx(3));
   GtkWidget *w = (GtkWidget *)hb_parptr(1);
@@ -885,15 +893,23 @@ HB_FUNC(STATUSBARSETTEXT)
   g_free(gcTitle);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(STATUSBARSETTEXT, HWG_STATUSBARSETTEXT);
+#endif
+
 /* ------------------------------------------------------------------------ */
 
 /* void gtk_statusbar_pop (GtkStatusbar *statusbar, guint context_id); */
-HB_FUNC(STATUSBARREMOVETEXT)
+HB_FUNC(HWG_STATUSBARREMOVETEXT)
 {
   GtkWidget *w = (GtkWidget *)HB_PARHANDLE(1);
   int iStatus = hb_parni(2 - 1);
   gtk_statusbar_pop(GTK_STATUSBAR(w), iStatus);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(STATUSBARREMOVETEXT, HWG_STATUSBARREMOVETEXT);
+#endif
 
 static void toolbar_clicked(GtkWidget *item, gpointer user_data)
 {
@@ -968,12 +984,16 @@ HB_FUNC(HWG_CREATETOOLBARBUTTON)
 HB_FUNC_TRANSLATE(CREATETOOLBARBUTTON, HWG_CREATETOOLBARBUTTON);
 #endif
 
-HB_FUNC(TOOLBAR_SETACTION)
+HB_FUNC(HWG_TOOLBAR_SETACTION)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   PHB_ITEM pItem = hb_itemParam(2);
   g_signal_connect(hCtrl, "clicked", G_CALLBACK(toolbar_clicked), (void *)pItem);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TOOLBAR_SETACTION, HWG_TOOLBAR_SETACTION);
+#endif
 
 static void tabchange_clicked(GtkNotebook *item, GtkNotebookPage *Page, guint pagenum, gpointer user_data)
 {
@@ -1000,13 +1020,17 @@ static void tabchange_clicked(GtkNotebook *item, GtkNotebookPage *Page, guint pa
 //   hb_itemRelease( Disk );
 // }
 
-HB_FUNC(TAB_SETACTION)
+HB_FUNC(HWG_TAB_SETACTION)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   //  gpointer dwNewLong = g_object_get_data( (GObject*) HB_PARHANDLE(1), "obj" );
   PHB_ITEM pItem = hb_itemParam(2);
   g_signal_connect(hCtrl, "switch-page", G_CALLBACK(tabchange_clicked), (void *)pItem);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(TAB_SETACTION, HWG_TAB_SETACTION);
+#endif
 
 HB_FUNC(HWG_INITMONTHCALENDAR)
 {
@@ -1094,7 +1118,7 @@ HB_FUNC(HWG_CREATEIMAGE)
 HB_FUNC_TRANSLATE(CREATEIMAGE, HWG_CREATEIMAGE);
 #endif
 
-HB_FUNC(MONTHCALENDAR_SETACTION)
+HB_FUNC(HWG_MONTHCALENDAR_SETACTION)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   PHB_ITEM pItem = hb_itemParam(2);
@@ -1102,9 +1126,13 @@ HB_FUNC(MONTHCALENDAR_SETACTION)
   g_signal_connect(hCtrl, "day-selected", G_CALLBACK(toolbar_clicked), (void *)pItem);
 }
 
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MONTHCALENDAR_SETACTION, HWG_MONTHCALENDAR_SETACTION);
+#endif
+
 void hwg_parse_color(HB_ULONG ncolor, GdkColor *pColor);
 
-HB_FUNC(SETFGCOLOR)
+HB_FUNC(HWG_SETFGCOLOR)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   GdkColor fColor;
@@ -1123,7 +1151,7 @@ HB_FUNC(SETFGCOLOR)
   {
     label = g_object_get_data((GObject *)hCtrl, "label");
   }
-  
+
   if (label)
   {
     hwg_parse_color(hColor, &fColor);
@@ -1131,7 +1159,11 @@ HB_FUNC(SETFGCOLOR)
   }
 }
 
-HB_FUNC(SETBGCOLOR)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETFGCOLOR, HWG_SETFGCOLOR);
+#endif
+
+HB_FUNC(HWG_SETBGCOLOR)
 {
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
   GdkColor fColor;
@@ -1157,6 +1189,10 @@ HB_FUNC(SETBGCOLOR)
   //  gtk_widget_modify_bg(hCtrl,GTK_STATE_ACTIVE,&fColor);
   //  gtk_widget_modify_bg(hCtrl,GTK_STATE_PRELIGHT,&fColor);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETBGCOLOR, HWG_SETBGCOLOR);
+#endif
 
 /*
    hwg_CreateSplitter( hParentWindow, nControlID, nStyle, x, y, nWidth, nHeight )

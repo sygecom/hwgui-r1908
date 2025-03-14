@@ -449,9 +449,9 @@ METHOD InitBrw( nType )  CLASS HBrowse
       ::aArray     := Nil
 
       if Empty(crossCursor)
-         crossCursor := LoadCursor( GDK_CROSS )
-         arrowCursor := LoadCursor( GDK_LEFT_PTR )
-         vCursor := LoadCursor( GDK_SB_V_DOUBLE_ARROW )
+         crossCursor := hwg_LoadCursor( GDK_CROSS )
+         arrowCursor := hwg_LoadCursor( GDK_LEFT_PTR )
+         vCursor := hwg_LoadCursor( GDK_SB_V_DOUBLE_ARROW )
       endif
       
    endif

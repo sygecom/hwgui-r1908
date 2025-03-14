@@ -93,7 +93,7 @@ Local id := oCtrl:id, h
 Local i := AScan(::aControls, {|o|o == oCtrl})
 
    IF oCtrl:ClassName() == "HPANEL"
-      DestroyPanel( oCtrl:handle )
+      hwg_DestroyPanel( oCtrl:handle )
    ELSE
       hwg_DestroyWindow( oCtrl:handle )
    ENDIF

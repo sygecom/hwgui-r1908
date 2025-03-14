@@ -116,7 +116,7 @@ Local o
          o := o:oParent
       ENDDO
       if ::tcolor != nil          
-            SETFGCOLOR(::handle,::tcolor)
+            hwg_SETFGCOLOR(::handle,::tcolor)
       endif	    
       
       
@@ -293,7 +293,7 @@ CLASS HStatus INHERIT HControl
    METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint )
    METHOD Activate()
    METHOD Init()
-   method SetText(t,n) inline  STATUSBARSETTEXT(::handle,n,t)
+   method SetText(t,n) inline  hwg_STATUSBARSETTEXT(::handle,n,t)
 
 ENDCLASS
 

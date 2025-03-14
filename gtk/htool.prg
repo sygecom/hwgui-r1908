@@ -154,7 +154,7 @@ Local aItem
                aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6],.f.)
                aItem[2] := hb_enumindex()
 //               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2],0 )
-               TOOLBAR_SETACTION(aItem[11],aItem[7])
+               hwg_TOOLBAR_SETACTION(aItem[11],aItem[7])
                if !Empty(aItem[8])
                   hwg_AddtoolTip(::handle, aItem[11],aItem[8])
                endif

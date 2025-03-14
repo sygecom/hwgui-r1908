@@ -64,7 +64,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == Nil
-         ::hCursor := LoadCursor( GDK_HAND1 )
+         ::hCursor := hwg_LoadCursor( GDK_HAND1 )
       ENDIF
       hwg_SetCursor( ::hCursor,::handle )
       IF ::lCaptured
