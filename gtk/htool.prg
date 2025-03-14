@@ -82,7 +82,7 @@ Local aItem
       ::Super:Init()
       For n := 1 TO len(::aItem)
 
-//         IF Valtype( ::aItem[ n, 7 ] ) == "B"
+//         IF HB_IsBlock( ::aItem[ n, 7 ] )
 //
 //            ::oParent:AddEvent( BN_CLICKED, ::aItem[ n, 2 ], ::aItem[ n ,7 ] )
 //
