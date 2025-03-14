@@ -106,8 +106,9 @@ METHOD Activate CLASS HComboBox
    ENDIF
 Return Nil
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
-   
+
    IF msg == EN_SETFOCUS
       IF ::bSetGet == Nil
          IF ::bGetFocus != Nil
@@ -126,8 +127,33 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
       ENDIF
 
    ENDIF
-   
+
 Return 0
+#else
+METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
+
+   SWITCH msg
+   CASE EN_SETFOCUS
+      IF ::bSetGet == Nil
+         IF ::bGetFocus != Nil
+            Eval( ::bGetFocus, hwg_Edit_GetText( ::hEdit ), Self )
+         ENDIF
+      ELSE
+         __When( Self )
+      ENDIF
+      EXIT
+   CASE EN_KILLFOCUS
+      IF ::bSetGet == Nil
+         IF ::bLostFocus != Nil
+            Eval( ::bLostFocus, hwg_Edit_GetText( ::hEdit ), Self )
+         ENDIF
+      ELSE
+         __Valid( Self )
+      ENDIF
+   ENDSWITCH
+
+Return 0
+#endif
 
 METHOD Init() CLASS HComboBox
 Local i
@@ -135,7 +161,7 @@ Local i
    IF !::lInit
       ::Super:Init()
       IF ::aItems != Nil
-	 hwg_ComboSetArray( ::handle, ::aItems )      
+	 hwg_ComboSetArray( ::handle, ::aItems )
          IF ::value == Nil
             IF ::lText
                 ::value := ::aItems[1]
