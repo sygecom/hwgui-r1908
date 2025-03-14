@@ -411,6 +411,7 @@ METHOD Activate CLASS HButton
    ENDIF
 Return Nil
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam )  CLASS HButton
 
    IF msg == WM_LBUTTONUP
@@ -418,7 +419,20 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
          Eval( ::bClick,Self )
       ENDIF
    ENDIF
+
 Return  NIL
+#else
+METHOD onEvent( msg, wParam, lParam )  CLASS HButton
+
+   SWITCH msg
+   CASE WM_LBUTTONUP
+      IF ::bClick != Nil
+         Eval( ::bClick,Self )
+      ENDIF
+   ENDSWITCH
+
+Return  NIL
+#endif
 
 CLASS HButtonEX INHERIT HButton
 
