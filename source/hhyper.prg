@@ -211,11 +211,12 @@ METHOD INIT() CLASS HStaticLink
 
    RETURN NIL
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 
    IF msg == WM_PAINT
       //::PAint()
-      
+
    ELSEIF msg == WM_MOUSEMOVE
       hwg_SetCursor(::m_hHyperCursor)
      ::OnMouseMove(wParam, lParam)
@@ -242,6 +243,52 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
    ENDIF
 
    RETURN - 1
+#else
+METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
+
+   SWITCH msg
+
+   //CASE WM_PAINT
+   //   //::PAint()
+   //   EXIT
+
+   CASE WM_MOUSEMOVE
+      hwg_SetCursor(::m_hHyperCursor)
+      ::OnMouseMove(wParam, lParam)
+      /*
+         IF ::state != LBL_MOUSEOVER
+            //::allMouseOver := .T.
+      //      ::state := LBL_MOUSEOVER
+            hwg_TrackMousEvent(::handle)
+          ELSE
+            hwg_TrackMousEvent(::handle, TME_HOVER + TME_LEAVE)
+         ENDIF
+      */
+      EXIT
+
+   CASE WM_MOUSELEAVE
+   CASE WM_NCMOUSELEAVE
+      ::state := LBL_NORMAL
+      EXIT
+
+   //CASE WM_MOUSEHOVER
+   //   EXIT
+
+   CASE WM_SETCURSOR
+      ::OnSetCursor(msg, wParam, lParam)
+      EXIT
+
+   CASE WM_LBUTTONDOWN
+      hwg_SetCursor(::m_hHyperCursor)
+      ::OnClicked()
+      //EXIT
+
+   //CASE WM_SIZE
+
+   ENDSWITCH
+
+RETURN -1
+#endif
 
 METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
