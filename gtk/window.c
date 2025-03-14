@@ -951,10 +951,14 @@ HB_FUNC(HWG_SET_MODAL)
   }
 }
 
-HB_FUNC(WINDOWSETRESIZE)
+HB_FUNC(HWG_WINDOWSETRESIZE)
 {
   gtk_window_set_resizable((GtkWindow *)HB_PARHANDLE(1), hb_parl(2));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(WINDOWSETRESIZE, HWG_WINDOWSETRESIZE);
+#endif
 
 gchar *hwg_convert_to_utf8(const char *szText)
 {
