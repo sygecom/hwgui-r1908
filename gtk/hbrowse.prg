@@ -241,6 +241,7 @@ METHOD Activate CLASS HBrowse
 RETURN Self
 
 //----------------------------------------------------//
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
 Local aCoors, retValue := -1
 
@@ -257,7 +258,7 @@ Local aCoors, retValue := -1
 
       ELSEIF msg == WM_ERASEBKGND
          IF ::brush != Nil
-	    
+
             aCoors := hwg_GetClientRect( ::handle )
             hwg_FillRect( wParam, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, ::brush:handle )
             retValue := 1
@@ -340,7 +341,7 @@ Local aCoors, retValue := -1
       ELSEIF msg == WM_LBUTTONDBLCLK
          ::ButtonDbl( lParam )
 
-      ELSEIF msg == WM_MOUSEMOVE      
+      ELSEIF msg == WM_MOUSEMOVE
          ::MouseMove( wParam, lParam )
 
       ELSEIF msg == WM_MOUSEWHEEL
@@ -353,8 +354,159 @@ Local aCoors, retValue := -1
       ENDIF
 
    ENDIF
-      
+
 Return retValue
+#else
+METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
+Local aCoors, retValue := -1
+
+   // WriteLog( "Brw: "+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   IF ::active .AND. !Empty(::aColumns)
+
+      IF ::bOther != Nil
+         Eval( ::bOther,Self,msg,wParam,lParam )
+      ENDIF
+
+      SWITCH msg
+
+      CASE WM_PAINT
+         ::Paint()
+         retValue := 1
+         EXIT
+
+      CASE WM_ERASEBKGND
+         IF ::brush != Nil
+            aCoors := hwg_GetClientRect( ::handle )
+            hwg_FillRect( wParam, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, ::brush:handle )
+            retValue := 1
+         ENDIF
+         EXIT
+
+      CASE WM_SETFOCUS
+         IF ::bGetFocus != Nil
+            Eval( ::bGetFocus, Self )
+         ENDIF
+         EXIT
+
+      CASE WM_KILLFOCUS
+         IF ::bLostFocus != Nil
+            Eval( ::bLostFocus, Self )
+         ENDIF
+         EXIT
+
+      CASE WM_HSCROLL
+         ::DoHScroll()
+         EXIT
+
+      CASE WM_VSCROLL
+         ::DoVScroll( wParam )
+         EXIT
+
+      CASE WM_COMMAND
+         hwg_DlgCommand( Self, wParam, lParam )
+         EXIT
+
+      CASE WM_KEYUP
+         IF wParam == GDK_Control_L .OR. wParam == GDK_Control_R
+            IF wParam == ::nCtrlPress
+               ::nCtrlPress := 0
+            ENDIF
+         ENDIF
+         retValue := 1
+         EXIT
+
+      CASE WM_KEYDOWN
+         IF ::bKeyDown != Nil
+            IF !Eval( ::bKeyDown,Self,wParam )
+               retValue := 1
+            ENDIF
+         ENDIF
+         SWITCH wParam
+         CASE GDK_Down        // Down
+            ::LINEDOWN()
+            EXIT
+         CASE GDK_Up    // Up
+            ::LINEUP()
+            EXIT
+         CASE GDK_Right    // Right
+            LineRight( Self )
+            EXIT
+         CASE GDK_Left    // Left
+            LineLeft( Self )
+            EXIT
+         CASE GDK_Home    // Home
+            ::DoHScroll( SB_LEFT )
+            EXIT
+         CASE GDK_End    // End
+            ::DoHScroll( SB_RIGHT )
+            EXIT
+         CASE GDK_Page_Down    // PageDown
+            IF ::nCtrlPress != 0
+               ::BOTTOM()
+            ELSE
+               ::PageDown()
+            ENDIF
+            EXIT
+         CASE GDK_Page_Up    // PageUp
+            IF ::nCtrlPress != 0
+               ::TOP()
+            ELSE
+               ::PageUp()
+            ENDIF
+            EXIT
+         CASE GDK_Return  // Enter
+            ::Edit()
+            EXIT
+         CASE GDK_Control_L
+         CASE GDK_Control_R
+            IF ::nCtrlPress == 0
+               ::nCtrlPress := wParam
+            ENDIF
+            EXIT
+         #ifdef __XHARBOUR__
+         DEFAULT
+         #else
+         OTHERWISE
+         #endif
+            IF (wParam >= 48 .and. wParam <= 90 .or. wParam >= 96 .and. wParam <= 111 ) .and. ::lAutoEdit
+               ::Edit( wParam,lParam )
+            ENDIF
+         ENDSWITCH
+         retValue := 1
+         EXIT
+
+      CASE WM_LBUTTONDOWN
+         ::ButtonDown( lParam )
+         EXIT
+
+      CASE WM_LBUTTONUP
+         ::ButtonUp( lParam )
+         EXIT
+
+      CASE WM_LBUTTONDBLCLK
+         ::ButtonDbl( lParam )
+         EXIT
+
+      CASE WM_MOUSEMOVE
+         ::MouseMove( wParam, lParam )
+         EXIT
+
+      CASE WM_MOUSEWHEEL
+         ::MouseWheel( hwg_LOWORD(wParam),;
+                          If( hwg_HIWORD(wParam) > 32768,;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam) ),;
+                          hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+         EXIT
+
+      CASE WM_DESTROY
+         ::End()
+
+      ENDSWITCH
+
+   ENDIF
+
+Return retValue
+#endif
 
 //----------------------------------------------------//
 METHOD Init CLASS HBrowse
