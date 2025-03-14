@@ -10,6 +10,7 @@
 
 #include "windows.ch"
 #include <hbclass.ch>
+#include <common.ch>
 #include "guilib.ch"
 
 #define  IPN_FIELDCHANGED   4294966436
@@ -48,7 +49,7 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
    ::title   := ""
 
    ::bSetGet := bSetGet
-   DEFAULT aValue := {0, 0, 0, 0}
+   DEFAULT aValue TO {0, 0, 0, 0}
    ::aValue  := aValue
    ::bGetFocus  := bGetFocus
    ::bKillFocus := bKillFocus

@@ -71,7 +71,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    HB_SYMBOL_UNUSED(lMinimized)
    HB_SYMBOL_UNUSED(lCentered)
 
-   DEFAULT lShow := .T.
+   DEFAULT lShow TO .T.
    lMinimized := !Empty(lMinimized) .AND. lMinimized .AND. hwg_BitAnd(::style, WS_MINIMIZE) != 0
    lMaximized := !Empty(lMaximized) .AND. lMaximized .AND. (hwg_BitAnd(::style, WS_MAXIMIZE) != 0 .OR. ;
       hwg_BitAnd(::style, WS_SIZEBOX) != 0)

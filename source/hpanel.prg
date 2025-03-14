@@ -10,6 +10,7 @@
 
 #include "windows.ch"
 #include <hbclass.ch>
+#include <common.ch>
 #include "guilib.ch"
 
 #define TRANSPARENT 1
@@ -396,7 +397,7 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
 
    nWinc := IIf(nMode == 1, nWinc, IIf(nMode == 2, ::nWidth, nWidth))
    nHinc := IIf(nMode == 1, nHinc, IIf(nMode == 2, ::nHeight, nHeight))
-   DEFAULT nMode := 0
+   DEFAULT nMode TO 0
 
    IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
       IF (::nWidth > ::nHeight .OR. ::nWidth == 0) //.AND. ::oParent:aOffset[2] > 0 //::nWidth = ::oParent:nWidth)

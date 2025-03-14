@@ -208,6 +208,9 @@
           hwg_SetDisableBackColor( <(x)> , <bColor> )
 
 // Addded by jamaj
+// NOTAS:
+// comando não utilizado no código-fonte da HWGUI
+// mantido apenas para compatibilidade (MAG)
 #xcommand DEFAULT <uVar1> := <uVal1> ;
              [, <uVarN> := <uValN> ] ;
           => ;

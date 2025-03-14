@@ -59,10 +59,10 @@ METHOD New(oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
             cText, cTooltip, r, g, b) CLASS HNiceButton
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,, bInit, ;
               ,, cTooltip)
-   DEFAULT g := ::g
-   DEFAULT b := ::b
+   DEFAULT g TO ::g
+   DEFAULT b TO ::b
 
-   DEFAULT r := ::r
+   DEFAULT r TO ::r
    ::lFlat  := .T.
    ::bClick := bClick
    ::nOrder  := IIf(oWndParent == NIL, 0, Len(oWndParent:aControls))
@@ -89,9 +89,9 @@ METHOD Redefine(oWndParent, nId, nStyleEx, ;
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0,, bInit,,, cTooltip)
 
-   DEFAULT g := ::g
-   DEFAULT b := ::b
-   DEFAULT r := ::r
+   DEFAULT g TO ::g
+   DEFAULT b TO ::b
+   DEFAULT r TO ::r
 
    ::lFlat  := .T.
 

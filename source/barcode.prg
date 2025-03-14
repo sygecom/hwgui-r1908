@@ -9,6 +9,7 @@
 //
 
 #include <hbclass.ch>
+#include <common.ch>
 #include "guilib.ch"
 #include "windows.ch"
 
@@ -36,7 +37,7 @@
    #define MATRIX25CHECK   17
 
 
-   #xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; END
+   //#xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; END (DEPRECATED)
 
 #xcommand @ < nTop >, < nLeft > BARCODE < oBC >   ;
 [DEVICE <hDC>                ] ;
@@ -175,17 +176,17 @@ METHOD New(hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, nColText, nColP
    
    
 
-   DEFAULT nWidth       := 200
-   DEFAULT nHeight      := 20
+   DEFAULT nWidth TO 200
+   DEFAULT nHeight TO 20
 
-   DEFAULT nColText     := 0
-   DEFAULT nColPane     := hwg_RGB(255, 255, 255)
-   DEFAULT lHorz        := .T.
-   DEFAULT lTransparent := .F.
-   DEFAULT nPinWidth    := 1
+   DEFAULT nColText TO 0
+   DEFAULT nColPane TO hwg_RGB(255, 255, 255)
+   DEFAULT lHorz TO .T.
+   DEFAULT lTransparent TO .F.
+   DEFAULT nPinWidth TO 1
 
 
-   //DEFAULT hDC    := hwg_GetDC(hwg_GetActiveWindow())
+   //DEFAULT hDC TO hwg_GetDC(hwg_GetActiveWindow())
 
    ::hDC          := hDC
    ::cText        := cText
@@ -406,7 +407,7 @@ METHOD InitCode39(lCheck) CLASS Barcode
    LOCAL cCode  := ::cText
    LOCAL nCheck := 0
 
-   DEFAULT lCheck := .F.
+   DEFAULT lCheck TO .F.
 
    cCode := Upper(cCode)
 
@@ -811,7 +812,7 @@ METHOD InitIndustrial25(lCheck) CLASS Barcode
    LOCAL nCheck   := 0
    LOCAL cCode    := trans(::cText, "@9") // only digits
 
-   DEFAULT lCheck := .F.
+   DEFAULT lCheck TO .F.
 
    IF lCheck
       FOR n := 1 TO Len(cCode) STEP 2
@@ -862,7 +863,7 @@ METHOD InitInterleave25(lMode) CLASS Barcode
    LOCAL nCheck := 0
    LOCAL cCode  := trans(::cText, "@9") // only digits
 
-   DEFAULT lMode := .F.
+   DEFAULT lMode TO .F.
 
    nLen   := Len(cCode)
    IF (nLen % 2 == 1 .AND. !lMode)
@@ -924,7 +925,7 @@ METHOD InitMatrix25(lCheck) CLASS Barcode
    LOCAL nCheck := 0
    LOCAL cCode  := trans(::cText, "@9") // only digits
 
-   DEFAULT lCheck := .F.
+   DEFAULT lCheck TO .F.
 
    IF lCheck
       FOR n := 1 TO Len(cCode) STEP 2

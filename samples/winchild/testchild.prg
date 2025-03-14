@@ -32,7 +32,7 @@ FUNCTION CreateChild(lClip)
    LOCAL cMenu := ""
    LOCAL bExit := {|oSelf|hwg_MsgInfo("Bye!" , "Destroy message from " + oSelf:title)}
 
-   DEFAULT lClip := .F.
+   DEFAULT lClip TO .F.
 
    /*
    oChild := HWindow():New(WND_CHILD, oIcon, hwg_VColor("0000FF"), NIL, 10, 10, 200, 100, cTitle, cMenu, NIL, NIL, ;

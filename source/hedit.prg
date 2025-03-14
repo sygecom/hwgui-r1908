@@ -17,6 +17,7 @@ STATIC s_bDisablecolor := NIL  // hwg_GetSysColor(COLOR_BTNHIGHLIGHT)
 
 #include "windows.ch"
 #include <hbclass.ch>
+#include <common.ch>
 #include "hblang.ch"
 #include "guilib.ch"
 
@@ -1685,7 +1686,7 @@ FUNCTION hwg_GetSkip(oParent, hCtrl, lClipper, nSkip)
    LOCAL oCtrl
    LOCAL oForm := IIf((oForm := oParent:GetParentForm()) == NIL, oParent, oForm)
 
-   DEFAULT nSkip := 1
+   DEFAULT nSkip TO 1
    IF oParent == NIL .OR. (lClipper != NIL .AND. lClipper .AND. !oForm:lClipper)
       RETURN .F.
    ENDIF

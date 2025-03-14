@@ -1067,7 +1067,7 @@ METHOD ShowDisablePage(nPageEnable, nEvent) CLASS HTab
    LOCAL i
    LOCAL pt := {,}
 
-   DEFAULT nPageEnable := 0
+   DEFAULT nPageEnable TO 0
    IF !hwg_IsWindowVisible(::handle) .OR. (AScan(::Pages, {|p|!p:lEnabled}) == 0 .AND. nPageEnable == NIL)
       RETURN - 1
    ENDIF
