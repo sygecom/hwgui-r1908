@@ -281,7 +281,7 @@ Return Nil
 METHOD SetText( c ) CLASS HEdit
 
   IF c != Nil
-     if valtype(c)="O"
+     if HB_IsObject(c)
         //in run time return object
         return nil
      endif

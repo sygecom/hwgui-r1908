@@ -335,7 +335,7 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    oBrw1:aControls := {}
    hwg_PostMessage( oGet:handle,WM_CLOSE, 0, 0 )
    // :LFB POS
-   IF ValType(obtn) = "O"
+   IF HB_IsObject(obtn)
      hwg_PostMessage( oBtn:handle,WM_CLOSE, 0, 0 )
    ENDIF
    obrw1:bPosChanged:= nil
@@ -594,7 +594,7 @@ FUNCTION InspUpdBrowse()
    IF oDesigner:oDlgInsp != Nil
       FOR i := 1 TO Len(aProp)
          value := IIf( oCombo:value == 1,oCtrl:oParent:aProp[i, 2],oCtrl:aProp[i, 2] )
-         IF ValType(aProp[i, 2]) != "O" .AND. !HB_IsArray(aProp[i, 2]) ;
+         IF !HB_IsObject(aProp[i, 2]) .AND. !HB_IsArray(aProp[i, 2]) ;
                .AND. ( aProp[i, 2] == Nil .OR. !( aProp[i, 2] == value ) )
             aProp[i, 2] := value
             lChg := .T.
