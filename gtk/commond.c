@@ -106,10 +106,6 @@ HB_FUNC(HWG_SELECTFONT)
   gtk_main();
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SELECTFONT, HWG_SELECTFONT);
-#endif
-
 void store_filename(gpointer file_selector)
 {
   hb_retc((char *)gtk_file_selection_get_filename(GTK_FILE_SELECTION(file_selector)));
@@ -146,10 +142,6 @@ HB_FUNC(HWG_SELECTFILE)
   gtk_widget_show(file_selector);
   gtk_main();
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SELECTFILE, HWG_SELECTFILE);
-#endif
 
 void store_color(gpointer colorseldlg)
 {
@@ -214,3 +206,8 @@ HB_FUNC(HWG_CHOOSECOLOR)
   gtk_widget_show(colorseldlg);
   gtk_main();
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SELECTFONT, HWG_SELECTFONT);
+HB_FUNC_TRANSLATE(SELECTFILE, HWG_SELECTFILE);
+#endif

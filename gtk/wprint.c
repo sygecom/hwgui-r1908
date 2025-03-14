@@ -173,19 +173,11 @@ HB_FUNC(HWG_SETPRINTERMODE)
                          (hb_parni(2) == 1) ? (const guchar *)"R0" : (const guchar *)"R270");
 }
 
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(SETPRINTERMODE, HWG_SETPRINTERMODE);
-#endif
-
 HB_FUNC(HWG_CLOSEPRINTER)
 {
   // HANDLE hPrinter = (HANDLE)hb_parnl(1);
   // ClosePrinter( hPrinter );
 }
-
-#ifdef HWGUI_FUNC_TRANSLATE_ON
-HB_FUNC_TRANSLATE(CLOSEPRINTER, HWG_CLOSEPRINTER);
-#endif
 
 HB_FUNC(HWG_UNREFPRINTER)
 {
@@ -460,5 +452,10 @@ HB_FUNC(HWG_GP_SETLINEWIDTH)
 
   gnome_print_setlinewidth(print->gpc, (gdouble)hb_parni(2));
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SETPRINTERMODE, HWG_SETPRINTERMODE);
+HB_FUNC_TRANSLATE(CLOSEPRINTER, HWG_CLOSEPRINTER);
+#endif
 
 #endif
