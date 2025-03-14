@@ -181,7 +181,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       ELSEIF ::oParent:oFont != Nil
          hwg_SelectObject( hDC, ::oParent:ofont:handle )
       ENDIF
-      aMetr := GetTextMetric( hDC )
+      aMetr := hwg_GetTextMetric( hDC )
       if ::lEnabled //if button is enabled
          hwg_SetTextColor( hDC,::tcolor )
       Else

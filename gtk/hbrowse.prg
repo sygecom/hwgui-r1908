@@ -568,7 +568,7 @@ Local oldBkColor, oldTColor
    ENDIF
    aCoors := hwg_GetClientRect( ::handle )
    hwg_Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
-   aMetr := GetTextMetric( hDC )
+   aMetr := hwg_GetTextMetric( hDC )
    
    ::width := aMetr[ 2 ]
    ::height := Max( aMetr[ 1 ], ::minHeight )
