@@ -73,6 +73,7 @@ METHOD Init() CLASS HCheckButton
    ENDIF
 Return Nil
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
    IF msg == WM_LBUTTONUP
@@ -80,7 +81,21 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
    ELSEIF msg == BN_SETFOCUS
       __When( Self )
    ENDIF
+
 Return Nil
+#else
+METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
+
+   SWITCH msg
+   CASE WM_LBUTTONUP
+      __Valid( Self )
+      EXIT
+   CASE BN_SETFOCUS
+      __When( Self )
+   ENDSWITCH
+
+Return Nil
+#endif
 
 METHOD Refresh() CLASS HCheckButton
 Local var
