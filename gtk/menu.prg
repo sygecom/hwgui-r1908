@@ -110,7 +110,7 @@ Local nPos1, aSubMenu
    DO WHILE nPos <= Len(aMenu[1])
       IF aMenu[ 1,npos,3 ] == nId
          Return aMenu
-      ELSEIF Valtype( aMenu[ 1,npos,1 ] ) == "A"
+      ELSEIF HB_IsArray( aMenu[ 1,npos,1 ] )
          IF ( aSubMenu := hwg_FindMenuItem( aMenu[ 1,nPos ] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
             Return aSubMenu
@@ -149,7 +149,7 @@ Local hMenu, nPos, aMenu, i, oBmp
 
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
-      IF Valtype( aMenu[ 1,nPos,1 ] ) == "A"
+      IF HB_IsArray( aMenu[ 1,nPos,1 ] )
          hwg_BuildMenu( aMenu,hWnd,,nPos )
       ELSE 
          IF aMenu[ 1,nPos,1 ] == Nil .OR. aMenu[ 1,nPos,2 ] != Nil

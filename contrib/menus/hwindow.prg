@@ -285,7 +285,7 @@ Local oWnd, oBtn, oitem
       IF oWnd:aEvents != Nil .AND. ;
            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
            Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
-      ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
+      ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
            .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
@@ -419,7 +419,7 @@ Local oWnd, oBtn, oitem
       endif
    elseif msg == WM_MENUSELECT
       if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) <> 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
-         if Valtype( oWnd:menu ) == "A"
+         if HB_IsArray( oWnd:menu )
             if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
                if aMenu[ 1,iCont,2 ][2] != Nil
                   hwg_WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
@@ -486,7 +486,7 @@ Local oWnd, oBtn, oitem
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
-      ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
+      ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
              .AND. aMenu[ 1,iCont,1 ] != Nil
          Eval( aMenu[ 1,iCont,1 ] )
@@ -928,7 +928,7 @@ Local oWndClient
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
          Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
-      ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
+      ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
          .AND. aMenu[ 1,iCont,1 ] != Nil
 

@@ -877,7 +877,7 @@ STATIC FUNCTION BuildTree( oParent, aMenu )
       INSERT NODE oNode CAPTION aMenu[i, 2] TO oParent
       oNode:cargo := aMenu[i, 3]
       nMaxId := Max( nMaxId,aMenu[i, 3] )
-      IF ValType( aMenu[i, 1] ) == "A"
+      IF HB_IsArray( aMenu[i, 1] )
          BuildTree( oNode, aMenu[i, 1] )
       ENDIF
    NEXT
@@ -903,7 +903,7 @@ STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
    DO WHILE nPos <= Len(aTree)
       IF aTree[npos, 3] == nId
          Return aTree
-      ELSEIF ValType(aTree[npos, 1]) == "A"
+      ELSEIF HB_IsArray(aTree[npos, 1])
          IF ( aSubarr := FindTreeItem( aTree[nPos, 1] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
             Return aSubarr
@@ -972,7 +972,7 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       nMaxId ++
       oNode:cargo := nMaxId
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         IF ValType( aSubarr[nPos, 1] ) != "A"
+         IF !HB_IsArray( aSubarr[nPos, 1] )
             aSubarr[nPos, 1] := {}
          ENDIF
          AAdd(aSubarr[nPos, 1], { Nil,"New",nMaxId,Nil })

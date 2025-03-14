@@ -116,7 +116,7 @@ FUNCTION Main()
    oBrw:active := .F.
 
    hwg_Rdini("demo.ini")
-   IF ValType(BrwFont) == "A"
+   IF HB_IsArray(BrwFont)
       oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
    ReadHistory("qhistory.txt")

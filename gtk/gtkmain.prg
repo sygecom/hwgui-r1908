@@ -74,7 +74,7 @@ Local hDC, aMetr, width, height, screenh
    IF nTop == Nil; nTop := 10; ENDIF
    IF oFont == Nil; oFont := HFont():Add( "Times",0,12 ); ENDIF
 
-   IF Valtype( arr[1] ) == "A"
+   IF HB_IsArray( arr[1] )
       FOR i := 1 TO aLen
          nLen := Max( nLen,Len(arr[i, 1]) )
       NEXT
@@ -108,7 +108,7 @@ Local hDC, aMetr, width, height, screenh
        ON SIZE {|o,x,y|o:Move(,,x,y)} ;
        ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
-   IF Valtype( arr[1] ) == "A"
+   IF HB_IsArray( arr[1] )
       oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent,1]},"C",nLen ) )
    ELSE
       oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]},"C",nLen ) )

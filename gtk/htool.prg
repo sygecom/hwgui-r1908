@@ -88,7 +88,7 @@ Local aItem
 //
 //         ENDIF
 
-//         IF Valtype( ::aItem[ n, 9 ] ) == "A"
+//         IF HB_IsArray( ::aItem[ n, 9 ] )
 //
 //            ::aItem[ n, 10 ] := hwg__CreatePopupMenu()
 //            aTemp := ::aItem[ n, 9 ]
@@ -189,7 +189,7 @@ METHOD Notify( lParam ) CLASS hToolBar
        hwg_ToolBar_GetInfoTip( lParam, ::aItem[ nPos, 8 ] )
 
     ELSEIF nCode == TBN_DROPDOWN
-       if valtype(::aItem[1,9]) ="A"
+       if HB_IsArray(::aItem[1,9])
        nid := hwg_ToolBar_SubMenuExGetId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx( lParam, ::aItem[ nPos, 10 ], ::oParent:handle )

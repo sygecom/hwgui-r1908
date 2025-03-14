@@ -733,7 +733,7 @@ Function Evalcode( xCode )
          xCode := &( "{||" + xCode + "}" )
       ENDIF
    ENDIF
-   IF ValType( xCode ) == "A"
+   IF HB_IsArray( xCode )
       Return hwg_DoScript( xCode )
    ELSE
       Return Eval( xCode )

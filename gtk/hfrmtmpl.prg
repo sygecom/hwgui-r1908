@@ -1336,7 +1336,7 @@ Local ita   := oXmlNode:GetAttribute( "italic" )
 Local under := oXmlNode:GetAttribute( "underline" )
 Local name  := oXmlNode:GetAttribute( "name" ), i
 
-  IF Valtype( HRepTmpl():aFontTable ) == "A"
+  IF HB_IsArray( HRepTmpl():aFontTable )
      IF ( i := AScan(HRepTmpl():aFontTable, {|a|Lower(a[1]) == Lower(name)}) ) != 0
         name := HRepTmpl():aFontTable[ i,2 ]
      ENDIF

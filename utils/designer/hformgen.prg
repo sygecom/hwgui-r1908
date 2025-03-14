@@ -145,10 +145,10 @@ METHOD Open( fname,cForm )  CLASS HFormGen
          IF ValType( aFormats[::type, 6] ) == "C"
             aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
-         IF ValType( aFormats[::type, 6] ) == "A"
+         IF HB_IsArray( aFormats[::type, 6] )
             hwg_DoScript( aFormats[::type, 6] )
          ENDIF
-         IF ValType( aFormats[::type, 4] ) == "A"
+         IF HB_IsArray( aFormats[::type, 4] )
             hwg_DoScript( aFormats[::type, 4] )
          ENDIF
       ENDIF
@@ -245,7 +245,7 @@ METHOD Save( lAs ) CLASS HFormGen
          IF ValType( aFormats[::type, 5] ) == "C"
             aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
-         IF ValType( aFormats[::type, 5] ) == "A"
+         IF HB_IsArray( aFormats[::type, 5] )
             hwg_DoScript( aFormats[::type, 5] )
          ENDIF
          ::type := 1
@@ -259,10 +259,10 @@ METHOD Save( lAs ) CLASS HFormGen
          IF ValType( aFormats[::type, 6] ) == "C"
             aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
-         IF ValType( aFormats[::type, 6] ) == "A"
+         IF HB_IsArray( aFormats[::type, 6] )
             hwg_DoScript( aFormats[::type, 6] )
          ENDIF
-         IF ValType( aFormats[::type, 5] ) == "A"
+         IF HB_IsArray( aFormats[::type, 5] )
             hwg_DoScript( aFormats[::type, 5] )
          ENDIF
       ENDIF
@@ -785,7 +785,7 @@ STATIC FUNCTION WriteTree( aTree, oParent )
    LOCAL type
 
    FOR i := 1 TO Len(aTree)
-      IF aTree[i, 4] != Nil .OR. ( ValType( aTree[i, 1] ) == "A" .AND. !Empty(aTree[i, 1]) )
+      IF aTree[i, 4] != Nil .OR. ( HB_IsArray( aTree[i, 1] ) .AND. !Empty(aTree[i, 1]) )
          type := HBXML_TYPE_TAG
       ELSE
          type := HBXML_TYPE_SINGLE
@@ -795,7 +795,7 @@ STATIC FUNCTION WriteTree( aTree, oParent )
       IF aTree[i, 4] != Nil
          oNode:Add( HXMLNode():New( ,HBXML_TYPE_CDATA,,aTree[i, 4] ) )
       ENDIF
-      IF ValType( aTree[i, 1] ) == "A" .AND. !Empty(aTree[i, 1])
+      IF HB_IsArray( aTree[i, 1] ) .AND. !Empty(aTree[i, 1])
          WriteTree( aTree[i, 1], oNode )
       ENDIF
    NEXT

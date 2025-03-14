@@ -391,7 +391,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
-   ELSEIF Valtype( oWnd:menu ) == "A" .AND. ;
+   ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
         .AND. aMenu[ 1,iCont,1 ] != Nil
       Eval( aMenu[ 1,iCont,1 ] )

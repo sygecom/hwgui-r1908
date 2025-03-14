@@ -113,7 +113,7 @@ PUBLIC nQueryWndHandle := 0
         BITMAP "BMP_OPEN" FROM RESOURCE COORDINATES 0,4,0,0
 */
 
-   IF Valtype( BrwFont ) == "A"
+   IF HB_IsArray( BrwFont )
       oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
    ENDIF
 

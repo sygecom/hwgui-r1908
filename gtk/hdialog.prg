@@ -190,7 +190,7 @@ Static Function InitModalDlg( oDlg )
 Local iCont
 
    // writelog( str(oDlg:handle)+" "+oDlg:title )
-   IF Valtype( oDlg:menu ) == "A"
+   IF HB_IsArray( oDlg:menu )
       hwg__SetMenu( oDlg:handle, oDlg:menu[5] )
    ENDIF
    /*
@@ -296,7 +296,7 @@ Local aMenu, i, hCtrl
       IF oDlg:lExitOnEsc
          EndDialog( oDlg:handle )
       ENDIF
-   ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. Valtype( oDlg:menu ) == "A" .AND. ;
+   ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
         .AND. aMenu[ 1,i,1 ] != Nil
       Eval( aMenu[ 1,i,1 ] )

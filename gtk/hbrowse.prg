@@ -1711,7 +1711,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
             (oBrw:alias)->( Eval( oColumn:block,oBrw:varbuf,oBrw,fipos ) )
             UNLOCK
          ELSE
-            IF Valtype(oBrw:aArray[1]) == "A"
+            IF HB_IsArray(oBrw:aArray[1])
                AAdd(oBrw:aArray, Array(Len(oBrw:aArray[1])))
                FOR fif := 2 TO Len((oBrw:aArray[1]))
                   oBrw:aArray[Len(oBrw:aArray),fif] := ;
@@ -1865,7 +1865,7 @@ FUNCTION HWG_CREATEARLIST( oBrw, arr )
    oBrw:aArray := arr
    IF Len(oBrw:aColumns) == 0
       // oBrw:aColumns := {}
-      IF Valtype( arr[1] ) == "A"
+      IF HB_IsArray( arr[1] )
          FOR i := 1 TO Len(arr[1])
             oBrw:AddColumn( HColumn():New( ,hwg_ColumnArBlock() ) )
          NEXT

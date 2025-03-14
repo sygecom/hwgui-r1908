@@ -187,7 +187,7 @@ Local hMenu, nPos, aMenu
 
    nPos := 1
    DO WHILE nPos <= Len( aMenu[1] )
-      IF Valtype( aMenu[ 1,nPos,1 ] ) == "A"
+      IF HB_IsArray( aMenu[ 1,nPos,1 ] )
          hwg_BuildMenu( aMenu,,,nPos )
       ELSE
          //hwg__AddMenuItem( hMenu, aMenu[1,npos,2], nPos, .T., aMenu[1,nPos,3], ;

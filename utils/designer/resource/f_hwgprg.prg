@@ -31,14 +31,14 @@ FUNCTION Menu2Prg
    //            [<lDisabled: DISABLED>]       ;
 
    i := 1
-   IF ValType( aLMenu[i, 1] ) == "A"
+   IF HB_IsArray( aLMenu[i, 1] )
       stroka := Space( 2 ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str( aLMenu[i, 3] ) + " "
       FWrite( han, _Chr( 10 ) + stroka )
    ENDIF
 
    DO WHILE i <=  Len(aLMenu)
 
-      IF ValType( aLMenu[i, 1] ) == "A"
+      IF HB_IsArray( aLMenu[i, 1] )
          //BuildTree( oNode, aMenu[i, 1] )
          stroka := Space( 2 * nMaxid ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str( aLMenu[i, 3] ) + " "
          FWrite( han, _Chr( 10 ) + stroka )

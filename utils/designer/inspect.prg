@@ -594,7 +594,7 @@ FUNCTION InspUpdBrowse()
    IF oDesigner:oDlgInsp != Nil
       FOR i := 1 TO Len(aProp)
          value := IIf( oCombo:value == 1,oCtrl:oParent:aProp[i, 2],oCtrl:aProp[i, 2] )
-         IF ValType(aProp[i, 2]) != "O" .AND. ValType(aProp[i, 2]) != "A" ;
+         IF ValType(aProp[i, 2]) != "O" .AND. !HB_IsArray(aProp[i, 2]) ;
                .AND. ( aProp[i, 2] == Nil .OR. !( aProp[i, 2] == value ) )
             aProp[i, 2] := value
             lChg := .T.
