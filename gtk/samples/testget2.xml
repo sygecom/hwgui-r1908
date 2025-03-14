@@ -13,7 +13,7 @@ e2:= Date()
 e3:= 10320.54
 e4:= "11222333444455"
 e5 := 10320.54
-hwg_SetDlgKey(,4,0x72, hwg_Codeblock( 'MsgInfo("Shift-F3")' ) )
+hwg_SetDlgKey(,4,0x72, hwg_Codeblock( 'hwg_MsgInfo("Shift-F3")' ) )
 ]]>
   </method>
   <method name="onDlgInit">
@@ -21,7 +21,7 @@ hwg_SetDlgKey(,4,0x72, hwg_Codeblock( 'MsgInfo("Shift-F3")' ) )
   </method>
   <method name="onDlgExit">
     <![CDATA[oTimer:End()
-MsgInfo( e1 + chr(10) + chr(13) + Dtoc(e2) + chr(10) + chr(13) ;
+hwg_MsgInfo( e1 + chr(10) + chr(13) + Dtoc(e2) + chr(10) + chr(13) ;
     + Str(e3) + chr(10) + chr(13) + e4 + chr(10) + chr(13) ;
     + Str(e5) + chr(10) + chr(13), "Results:" )
 Return .T.]]>

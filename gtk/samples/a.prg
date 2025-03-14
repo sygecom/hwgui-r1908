@@ -33,7 +33,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor,.F.), ;
-                     MsgInfo(IIf(nColor != NIL, Str(nColor), "--"),"Color value"))
+                     hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"),"Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION hwg_EndWindow()
@@ -90,7 +90,7 @@ Local nId
       IF oFont != Nil
          oBrw:ofont := oFont
       ENDIF
-      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| MsgInfo("Column number "+Str(n))}})
+      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_MsgInfo("Column number "+Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
@@ -110,7 +110,7 @@ Local han := fcreate( "LPT1",0 )
      fwrite( han, "---------------------------"+Chr(10)+Chr(13)+Chr(12) )
      fclose( han )
   else
-     MsgStop("Can't open printer port!")
+     hwg_MsgStop("Can't open printer port!")
   endif
 return nil
 
@@ -124,7 +124,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
    INIT DIALOG oModDlg TITLE cTitle           ;
    AT 210,10  SIZE 300,300                    ;
    FONT oFont                                 ;
-   ON EXIT {||MsgYesNo("Really exit ?")}
+   ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20,10 SAY cText SIZE 260, 22
    @ 20,35 EDITBOX oEdit CAPTION ""    ;
@@ -179,7 +179,7 @@ INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200 ;
    ON INIT  {||hwg_SetFocus(oDlg:getlist[1]:handle)}
 
 @ 10, 10 TAB oTab ITEMS {} SIZE 180, 180 ;
-   ON LOSTFOCUS {||MsgInfo("Lost Focus")}
+   ON LOSTFOCUS {||hwg_MsgInfo("Lost Focus")}
 
 
 BEGIN PAGE "Page 01" of oTab

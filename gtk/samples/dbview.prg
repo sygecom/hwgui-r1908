@@ -78,7 +78,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
        ENDMENU
      ENDMENU
      MENU TITLE "&Help"
-       MENUITEM "&About" ACTION MsgInfo("Dbf Files Browser" + Chr(10) + "2005" )
+       MENUITEM "&About" ACTION hwg_MsgInfo("Dbf Files Browser" + Chr(10) + "2005" )
      ENDMENU
    ENDMENU
    
@@ -264,7 +264,7 @@ Memvar oBrw
          ENDIF
          oMsg:Close()
       ELSE
-         MsgStop( "Fill necessary fields" )
+         hwg_MsgStop( "Fill necessary fields" )
       ENDIF
    ENDIF
    
@@ -447,7 +447,7 @@ Memvar oBrw, currentCP, currFname
          SKIP
       ENDDO
       IF lOverFlow
-         MsgInfo( "There was overflow in Numeric field","Warning!" )
+         hwg_MsgInfo( "There was overflow in Numeric field","Warning!" )
       ENDIF
 
       Close All
@@ -542,7 +542,7 @@ Local cKey, nRec
 Memvar oBrw, oSay2
 
    IF OrdNumber() == 0
-      MsgStop( "No active order !","Seek record" )
+      hwg_MsgStop( "No active order !","Seek record" )
    ELSE
       cKey := GetData( dbv_cSeek,"Seek record","Input key:" )
       IF !Empty(cKey)
@@ -583,7 +583,7 @@ Memvar oBrw, oSay2
       ERRORBLOCK( bOldError )
 
       IF cType != "L"
-         MsgStop( "Wrong expression" )
+         hwg_MsgStop( "Wrong expression" )
       ELSE
          EXIT
       ENDIF
@@ -647,7 +647,7 @@ Return cRes
 
 STATIC FUNCTION MacroError( e )
 
-   MsgStop( hwg_ErrorMessage(e),"Expression error" )
+   hwg_MsgStop( hwg_ErrorMessage(e),"Expression error" )
    BREAK
 RETURN .T.
 
@@ -655,7 +655,7 @@ Static Function dbv_Pack()
 Local oMsg, cTitle := "Packing database"
 Memvar oBrw, oSay1, oSay2
 
-   IF MsgYesNo( "Are you really want it ?",cTitle )
+   IF hwg_MsgYesNo( "Are you really want it ?",cTitle )
       oMsg = DlgWait( cTitle )
       PACK
       oMsg:Close()
@@ -670,7 +670,7 @@ Static Function dbv_Zap()
 Local oMsg, cTitle := "Zap database"
 Memvar oBrw, oSay1, oSay2
 
-   IF MsgYesNo( "ALL DATA WILL BE LOST !!! Are you really want it ?",cTitle )
+   IF hwg_MsgYesNo( "ALL DATA WILL BE LOST !!! Are you really want it ?",cTitle )
       oMsg = DlgWait( cTitle )
       ZAP
       oMsg:Close()

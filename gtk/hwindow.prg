@@ -305,7 +305,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
           IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),nStyle,::nLeft, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
    ELSE
-       MsgStop("Create Main window first !","HChildWindow():New()" )
+       hwg_MsgStop("Create Main window first !","HChildWindow():New()" )
        Return Nil
    ENDIF
    IF ::bInit != Nil

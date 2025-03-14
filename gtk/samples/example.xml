@@ -26,7 +26,7 @@
         </item>
         <item name="Help" id="32004">
           <item name="About" id="32005">
-            <![CDATA[MsgInfo("HwGUI forms example","")]]>
+            <![CDATA[hwg_MsgInfo("HwGUI forms example","")]]>
           </item>
         </item>
       </property>

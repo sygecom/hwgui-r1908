@@ -42,32 +42,52 @@ static int MessageBox(const char *cMsg, const char *cTitle, int message_type, in
   return result;
 }
 
-HB_FUNC(MSGINFO)
+HB_FUNC(HWG_MSGINFO)
 {
   const char *cTitle = (hb_pcount() == 1) ? "" : hb_parc(2);
   MessageBox(hb_parc(1), cTitle, GTK_MESSAGE_INFO, GTK_BUTTONS_OK);
 }
 
-HB_FUNC(MSGSTOP)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MSGINFO, HWG_MSGINFO);
+#endif
+
+HB_FUNC(HWG_MSGSTOP)
 {
   const char *cTitle = (hb_pcount() == 1) ? "" : hb_parc(2);
   MessageBox(hb_parc(1), cTitle, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE);
 }
 
-HB_FUNC(MSGOKCANCEL)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MSGSTOP, HWG_MSGSTOP);
+#endif
+
+HB_FUNC(HWG_MSGOKCANCEL)
 {
   const char *cTitle = (hb_pcount() == 1) ? "" : hb_parc(2);
   hb_retl(MessageBox(hb_parc(1), cTitle, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL) == GTK_RESPONSE_OK);
 }
 
-HB_FUNC(MSGYESNO)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MSGOKCANCEL, HWG_MSGOKCANCEL);
+#endif
+
+HB_FUNC(HWG_MSGYESNO)
 {
   const char *cTitle = (hb_pcount() == 1) ? "" : hb_parc(2);
   hb_retl(MessageBox(hb_parc(1), cTitle, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO) == GTK_RESPONSE_YES);
 }
 
-HB_FUNC(MSGEXCLAMATION)
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MSGYESNO, HWG_MSGYESNO);
+#endif
+
+HB_FUNC(HWG_MSGEXCLAMATION)
 {
   const char *cTitle = (hb_pcount() == 1) ? "" : hb_parc(2);
   MessageBox(hb_parc(1), cTitle, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE);
 }
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(MSGEXCLAMATION, HWG_MSGEXCLAMATION);
+#endif

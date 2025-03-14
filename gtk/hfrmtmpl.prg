@@ -157,10 +157,10 @@ Local cPre
    ENDIF
 
    IF Empty(oDoc:aItems)
-      MsgStop( "Can't open "+fname )
+      hwg_MsgStop( "Can't open "+fname )
       Return Nil
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute( "class" ) != "form"
-      MsgStop( "Form description isn't found" )
+      hwg_MsgStop( "Form description isn't found" )
       Return Nil
    ENDIF
 
@@ -524,7 +524,7 @@ Return arrExe
 STATIC FUNCTION CompileErr( e, stroka )
 Local n
 
-   MsgStop( hwg_ErrorMessage( e ) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
+   hwg_MsgStop( hwg_ErrorMessage( e ) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
           AllTrim(stroka),"Script compiling error" )
    BREAK
 RETURN .T.
@@ -927,10 +927,10 @@ Local cPre
    ENDIF
 
    IF Empty(oDoc:aItems)
-      MsgStop( "Can't open "+fname )
+      hwg_MsgStop( "Can't open "+fname )
       Return Nil
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute( "class" ) != "report"
-      MsgStop( "Report description isn't found" )
+      hwg_MsgStop( "Report description isn't found" )
       Return Nil
    ENDIF
 

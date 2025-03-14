@@ -1585,7 +1585,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
             IF (oBrw:alias)->( Rlock() )
                (oBrw:alias)->( Eval( oColumn:block,oBrw:varbuf,oBrw,fipos ) )
             ELSE
-               MsgStop("Can't lock the record!")
+               hwg_MsgStop("Can't lock the record!")
             ENDIF
          ELSE
             Eval( oColumn:block,oBrw:varbuf,oBrw,fipos )
@@ -1801,7 +1801,7 @@ METHOD ShowSizes() CLASS HBrowse
    local cText := ""
    aeval( ::aColumns,;
           { | v,e | cText += ::aColumns[e]:heading + ": " + str( round(::aColumns[e]:width/8,0)-2  ) + chr(10)+chr(13) } )
-   MsgInfo( cText )
+   hwg_MsgInfo( cText )
 RETURN nil
 
 Function hwg_ColumnArBlock()
