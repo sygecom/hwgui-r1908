@@ -95,8 +95,8 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
    ENDIF
    
    IF hwg_BitAnd( ::style, DS_CENTER ) > 0 
-      ::nLeft := Int( ( GetDesktopWidth() - ::nWidth ) / 2 )
-      ::nTop  := Int( ( GetDesktopHeight() - ::nHeight ) / 2 )
+      ::nLeft := Int( ( hwg_GetDesktopWidth() - ::nWidth ) / 2 )
+      ::nTop  := Int( ( hwg_GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF 
    
    IF nHelpId != nil
@@ -517,8 +517,8 @@ Return 0
 
 Function hwg_CenterWindow( oWnd )
 
-   oWnd:nLeft := Int( ( GetDesktopWidth() - oWnd:nWidth ) / 2 )
-   oWnd:nTop  := Int( ( GetDesktopHeight() - oWnd:nHeight ) / 2 )
+   oWnd:nLeft := Int( ( hwg_GetDesktopWidth() - oWnd:nWidth ) / 2 )
+   oWnd:nTop  := Int( ( hwg_GetDesktopHeight() - oWnd:nHeight ) / 2 )
    hwg_MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
 Return Nil

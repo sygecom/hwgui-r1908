@@ -89,7 +89,7 @@ Local hDC, aMetr, width, height, screenh
    aMetr := hwg_GetTextMetric( hDC )
    hwg_ReleaseDC( hwg_GetActiveWindow(),hDC )
    height := (aMetr[1]+1)*aLen+4+addY
-   screenh := GETDESKTOPHEIGHT()
+   screenh := hwg_GETDESKTOPHEIGHT()
    IF height > screenh * 2/3
       height := Int( screenh *2/3 )
       addX := addY := 0

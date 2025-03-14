@@ -109,8 +109,8 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
    ::lExitOnEsc  :=IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
 
    IF hwg_BitAnd( ::style, DS_CENTER ) > 0
-      ::nLeft := Int( ( GetDesktopWidth() - ::nWidth ) / 2 )
-      ::nTop  := Int( ( GetDesktopHeight() - ::nHeight ) / 2 )
+      ::nLeft := Int( ( hwg_GetDesktopWidth() - ::nWidth ) / 2 )
+      ::nTop  := Int( ( hwg_GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF
    ::handle := hwg_CreateDlg( Self )
 

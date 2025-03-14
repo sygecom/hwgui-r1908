@@ -208,7 +208,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
       ELSEIF oCtrl:ClassName() == "HQHTM"
          Return oCtrl:Notify( oWnd,lParam )
       ELSEIF oCtrl:ClassName() == "HTREE"
-         Return TreeNotify( oCtrl,lParam )
+         Return hwg_TreeNotify( oCtrl,lParam )
       ELSEIF oCtrl:ClassName() == "HGRID"         
          Return hwg_ListViewNotify( oCtrl,lParam )
       ELSE
