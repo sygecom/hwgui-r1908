@@ -728,13 +728,13 @@ Function Evalcode( xCode )
    IF ValType( xCode ) == "C"
       nLines := mlCount( xCode )
       IF nLines > 1
-         xCode := RdScript( ,xCode )
+         xCode := hwg_RdScript( ,xCode )
       ELSE
          xCode := &( "{||" + xCode + "}" )
       ENDIF
    ENDIF
    IF ValType( xCode ) == "A"
-      Return DoScript( xCode )
+      Return hwg_DoScript( xCode )
    ELSE
       Return Eval( xCode )
    ENDIF

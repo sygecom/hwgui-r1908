@@ -54,13 +54,13 @@ Local nFirst, i
 
       MENU OF s_oDlgDebug
          MENUITEM "E&xit" ACTION s_oDlgDebug:Close()
-         MENUITEM "&Step" ACTION (s_nDebugMode := 0, SetDebugRun())
+         MENUITEM "&Step" ACTION (s_nDebugMode := 0, hwg_SetDebugRun())
          MENU TITLE "&Animate"
-            MENUITEM "&0.5 seconds" ACTION (s_nAnimaTime := 0.5, s_nDebugMode := 1, SetDebugRun())
-            MENUITEM "&1 seconds" ACTION (s_nAnimaTime := 1, s_nDebugMode := 1, SetDebugRun())
-            MENUITEM "&3 seconds" ACTION (s_nAnimaTime := 3, s_nDebugMode := 1, SetDebugRun())
+            MENUITEM "&0.5 seconds" ACTION (s_nAnimaTime := 0.5, s_nDebugMode := 1, hwg_SetDebugRun())
+            MENUITEM "&1 seconds" ACTION (s_nAnimaTime := 1, s_nDebugMode := 1, hwg_SetDebugRun())
+            MENUITEM "&3 seconds" ACTION (s_nAnimaTime := 3, s_nDebugMode := 1, hwg_SetDebugRun())
          ENDMENU
-         MENUITEM "&Run" ACTION (s_nDebugMode := 2, SetDebugRun())
+         MENUITEM "&Run" ACTION (s_nDebugMode := 2, hwg_SetDebugRun())
       ENDMENU
 
       @ 0, 0 BROWSE s_oBrwData ARRAY SIZE 500, 0 STYLE WS_BORDER + WS_VSCROLL ;
@@ -152,10 +152,10 @@ Local nFirst, i
             DO WHILE Seconds() - nFirst < s_nAnimaTime
                hwg_ProcessMessage()
             ENDDO
-            SetDebugRun()
+            hwg_SetDebugRun()
          ENDIF
       ELSEIF s_nDebugMode == 2
-         SetDebugRun()
+         hwg_SetDebugRun()
       ENDIF
    ENDIF
 
@@ -164,8 +164,8 @@ RETURN .T.
 Static Function dlgDebugClose()
 
    s_oDlgDebug := NIL
-   SetDebugger(.F.)
-   SetDebugRun()
+   hwg_SetDebugger(.F.)
+   hwg_SetDebugRun()
    s_aBreakPoints := s_aScriptCurr := NIL
    s_aBreaks  := {}
    s_aWatches := {}
@@ -304,6 +304,16 @@ STATIC FUNCTION MacroError(e)
    BREAK
 RETURN .T. // Warning W0028  Unreachable code
 
-Function scrBreakPoint()
+Function hwg_scrBreakPoint()
    s_nDebugMode := 0
 RETURN .T.
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(SCRBREAKPOINT, HWG_SCRBREAKPOINT);
+#endif
+
+#pragma ENDDUMP

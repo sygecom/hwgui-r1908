@@ -16,7 +16,7 @@ e2:= Date()
 e3:= 10320.54
 e4:= "11222333444455"
 e5 := 10320.54
-hwg_SetDlgKey(,4,0x72, Codeblock( 'hwg_MsgInfo("Shift-F3")' ) )
+hwg_SetDlgKey(,4,0x72, hwg_Codeblock( 'hwg_MsgInfo("Shift-F3")' ) )
 ]]>
   </method>
   <method name="onDlgInit">

@@ -29,7 +29,7 @@ STATIC s_y__size := 0, s_x__size := 0
 
 REQUEST __PP_STDRULES
 
-FUNCTION OpenScript(fname, scrkod)
+FUNCTION hwg_OpenScript(fname, scrkod)
 LOCAL han, stroka, scom, aScr, rejim := 0, i
 LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
 LOCAL aFormCode, aFormName
@@ -45,7 +45,7 @@ LOCAL aFormCode, aFormName
             IF Upper(Left(stroka, 7)) == "#SCRIPT"
                scom := Upper(Ltrim(SubStr(stroka, 9)))
                IF scom == scrkod
-                  aScr := RdScript(han, @strbuf, @poz, , fname + "," + scrkod)
+                  aScr := hwg_RdScript(han, @strbuf, @poz, , fname + "," + scrkod)
                   EXIT
                ENDIF
             ELSEIF Left(stroka, 6) == "#BLOCK"
@@ -85,7 +85,7 @@ LOCAL aFormCode, aFormName
    ENDIF
 RETURN aScr
 
-FUNCTION RdScript(scrSource, strbuf, poz, lppNoInit, cTitle)
+FUNCTION hwg_RdScript(scrSource, strbuf, poz, lppNoInit, cTitle)
 STATIC s_pp
 LOCAL han
 LOCAL rezArray := IIf(s_lDebugInfo, {"", {}, {}}, {"", {}})
@@ -115,15 +115,15 @@ LOCAL rezArray := IIf(s_lDebugInfo, {"", {}, {}}, {"", {}})
          s_pp := __pp_init()
       ENDIF
       IF hb_IsChar(scrSource)
-         WndOut("Compiling ...")
-         WndOut("")
+         hwg_WndOut("Compiling ...")
+         hwg_WndOut("")
       ENDIF
       s_numlin := 0
       IF !CompileScr(s_pp, han, @strbuf, @poz, rezArray, scrSource)
          rezArray := NIL
       ENDIF
       IF scrSource != NIL .AND. hb_IsChar(scrSource)
-         WndOut()
+         hwg_WndOut()
          FCLOSE(han)
       ENDIF
       IF !lppNoInit
@@ -133,9 +133,9 @@ LOCAL rezArray := IIf(s_lDebugInfo, {"", {}, {}}, {"", {}})
 #ifdef __WINDOWS__
       hwg_MsgStop("Can't open " + scrSource)
 #else
-      WndOut("Can't open " + scrSource)
+      hwg_WndOut("Can't open " + scrSource)
       WAIT ""
-      WndOut()
+      hwg_WndOut()
 #endif
       s_nLastError := -1
       RETURN NIL
@@ -249,10 +249,10 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
          CASE scom == "RETURN"
             bOldError := ErrorBlock({|e|MacroError(1, e, stroka)})
             BEGIN SEQUENCE
-               AAdd(rezArray[2], &("{||EndScript(" + LTrim(SubStr(stroka, 7)) + ")}"))
+               AAdd(rezArray[2], &("{||hwg_EndScript(" + LTrim(SubStr(stroka, 7)) + ")}"))
             RECOVER
                IF scrSource != NIL .AND. hb_IsChar(scrSource)
-                  WndOut()
+                  hwg_WndOut()
                   FCLOSE(han)
                ENDIF
                ErrorBlock(bOldError)
@@ -277,7 +277,7 @@ Local cLine, lDebug := (Len(rezArray) >= 3)
                AAdd(rezArray[2], &("{||" + AllTrim(stroka) + "}"))
             RECOVER
                IF scrSource != NIL .AND. hb_IsChar(scrSource)
-                  WndOut()
+                  hwg_WndOut()
                   FCLOSE(han)
                ENDIF
                ErrorBlock(bOldError)
@@ -405,7 +405,7 @@ LOCAL bOldError
    NEXT
 RETURN .F.
 
-FUNCTION DoScript(aScript, aParams)
+FUNCTION hwg_DoScript(aScript, aParams)
 LOCAL arlen, stroka, varName, varValue, lDebug, lParam, j, RetValue, lSetDebugger := .F.
 MEMVAR iscr, bOldError, aScriptt
 PRIVATE iscr := 1, bOldError
@@ -423,7 +423,7 @@ PRIVATE iscr := 1, bOldError
          IF Left(aScript[2, iscr], 1) == "#"
             IF !s_lDebugger
                lSetDebugger := .T.
-               SetDebugger()
+               hwg_SetDebugger()
             ENDIF
          ELSE
             stroka := SubStr(aScript[2, iscr], 2)
@@ -442,7 +442,7 @@ PRIVATE iscr := 1, bOldError
                j++
             ENDDO
             RECOVER
-               WndOut()
+               hwg_WndOut()
                ErrorBlock(bOldError)
                RETURN .F.
             END SEQUENCE
@@ -474,7 +474,7 @@ PRIVATE iscr := 1, bOldError
 #ifdef __WINDOWS__
          hwg_scrDebug(aScript, 0)
          IF lSetDebugger
-            SetDebugger(.F.)
+            hwg_SetDebugger(.F.)
          ENDIF
 #endif
       ELSE
@@ -484,7 +484,7 @@ PRIVATE iscr := 1, bOldError
          ENDDO
       ENDIF
    RECOVER
-      WndOut()
+      hwg_WndOut()
       ErrorBlock(bOldError)
 #ifdef __WINDOWS__
       IF lDebug .AND. s_lDebugger
@@ -494,13 +494,13 @@ PRIVATE iscr := 1, bOldError
       RETURN .F.
    END SEQUENCE
    ErrorBlock(bOldError)
-   WndOut()
+   hwg_WndOut()
 
    RetValue := s_scr_RetValue
 /*   s_scr_RetValue := NIL */
 RETURN RetValue
 
-FUNCTION CallFunc(cProc, aParams, aScript)
+FUNCTION hwg_CallFunc(cProc, aParams, aScript)
 Local i := 1
 MEMVAR aScriptt
 
@@ -511,7 +511,7 @@ MEMVAR aScriptt
    cProc := Upper(cProc)
    DO WHILE i <= Len(aScript[2]) .AND. hb_IsArray(aScript[2, i])
       IF aScript[2, i, 1] == cProc
-         DoScript(aScript[2, i], aParams)
+         hwg_DoScript(aScript[2, i], aParams)
          EXIT
       ENDIF
       i++
@@ -519,32 +519,32 @@ MEMVAR aScriptt
 
 RETURN s_scr_RetValue
 
-FUNCTION EndScript(xRetValue)
+FUNCTION hwg_EndScript(xRetValue)
    s_scr_RetValue := xRetValue
    iscr := -99
 RETURN NIL
 
-FUNCTION CompileErr(nLine)
+FUNCTION hwg_CompileErr(nLine)
    nLine := s_numlin
 RETURN s_nLastError
 
-FUNCTION Codeblock(string)
+FUNCTION hwg_Codeblock(string)
    IF Left(string, 2) == "{|"
       RETURN &(string)
    ENDIF
 RETURN &("{||" + string + "}")
 
-FUNCTION SetDebugInfo(lDebug)
+FUNCTION hwg_SetDebugInfo(lDebug)
 
    s_lDebugInfo := IIf(lDebug == NIL, .T., lDebug)
 RETURN .T.
 
-FUNCTION SetDebugger(lDebug)
+FUNCTION hwg_SetDebugger(lDebug)
 
    s_lDebugger := IIf(lDebug == NIL, .T., lDebug)
 RETURN .T.
 
-FUNCTION SetDebugRun()
+FUNCTION hwg_SetDebugRun()
 
    s_lDebugRun := .T.
 RETURN .T.
@@ -552,12 +552,12 @@ RETURN .T.
 
 #ifdef __WINDOWS__
 
-STATIC FUNCTION WndOut()
+STATIC FUNCTION hwg_WndOut()
 RETURN NIL
 
 #else
 
-FUNCTION WndOut(sout, noscroll, prnew)
+FUNCTION hwg_WndOut(sout, noscroll, prnew)
 LOCAL y1, x1, y2, x2, oldc, ly__size := (s_y__size != 0)
 STATIC w__buf
    IF sout == NIL .AND. !ly__size
@@ -592,15 +592,15 @@ RETURN NIL
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-*+    Function WndGet()
+*+    Function hwg_WndGet()
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION WndGet(sout, varget, spict)
+FUNCTION hwg_WndGet(sout, varget, spict)
 
 LOCAL y1, x1, y2, x2, oldc
 LOCAL GetList := {}
-   WndOut(sout)
+   hwg_WndOut(sout)
    y1   := 13 - INT(s_y__size / 2)
    x1   := 41 - INT(s_x__size / 2)
    y2   := y1 + s_y__size
@@ -618,14 +618,38 @@ RETURN IIf(LASTKEY() == 27, NIL, varget)
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-*+    Function WndOpen()
+*+    Function hwg_WndOpen()
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
-FUNCTION WndOpen(ysize, xsize)
+FUNCTION hwg_WndOpen(ysize, xsize)
 
    s_y__size := ysize
    s_x__size := xsize
-   WndOut("",, .T.)
+   hwg_WndOut("",, .T.)
 RETURN NIL
 #endif
+
+#pragma BEGINDUMP
+
+#include <hbapi.h>
+
+#ifdef HWGUI_FUNC_TRANSLATE_ON
+HB_FUNC_TRANSLATE(OPENSCRIPT, HWG_OPENSCRIPT);
+HB_FUNC_TRANSLATE(RDSCRIPT, HWG_RDSCRIPT);
+HB_FUNC_TRANSLATE(DOSCRIPT, HWG_DOSCRIPT);
+HB_FUNC_TRANSLATE(CALLFUNC, HWG_CALLFUNC);
+HB_FUNC_TRANSLATE(ENDSCRIPT, HWG_ENDSCRIPT);
+HB_FUNC_TRANSLATE(COMPILEERR, HWG_COMPILEERR);
+HB_FUNC_TRANSLATE(CODEBLOCK, HWG_CODEBLOCK);
+HB_FUNC_TRANSLATE(SETDEBUGINFO, HWG_SETDEBUGINFO);
+HB_FUNC_TRANSLATE(SETDEBUGGER, HWG_SETDEBUGGER);
+HB_FUNC_TRANSLATE(SETDEBUGRUN, HWG_SETDEBUGRUN);
+#ifndef __WINDOWS__
+HB_FUNC_TRANSLATE(WNDOUT, HWG_WNDOUT);
+HB_FUNC_TRANSLATE(WNDGET, HWG_WNDGET);
+HB_FUNC_TRANSLATE(WNDOPEN, HWG_WNDOPEN);
+#endif
+#endif
+
+#pragma ENDDUMP

@@ -94,7 +94,7 @@ ENDFUNC
           cFont := hwg_NextItem( stroka )
           nVar := Val( hwg_NextItem( stroka ) )
 
-          oFont := CallFunc( "Str2Font", { cFont } )
+          oFont := hwg_CallFunc( "Str2Font", { cFont } )
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"

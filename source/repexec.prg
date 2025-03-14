@@ -501,13 +501,13 @@ STATIC FUNCTION ScriptExecute(aItem)
    LOCAL nError, nLineEr
    IF aItem[ITEM_SCRIPT] != NIL .AND. !Empty(aItem[ITEM_SCRIPT])
       IF hb_IsChar(aItem[ITEM_SCRIPT])
-         IF (aItem[ITEM_SCRIPT] := RdScript(, aItem[ITEM_SCRIPT])) == NIL
-            nError := CompileErr(@nLineEr)
+         IF (aItem[ITEM_SCRIPT] := hwg_RdScript(, aItem[ITEM_SCRIPT])) == NIL
+            nError := hwg_CompileErr(@nLineEr)
             hwg_MsgStop("Script error (" + LTrim(Str(nError)) + "), line " + LTrim(Str(nLineEr)))
             RETURN .F.
          ENDIF
       ENDIF
-      DoScript(aItem[ITEM_SCRIPT])
+      hwg_DoScript(aItem[ITEM_SCRIPT])
       RETURN .T.
    ENDIF
    RETURN .T.

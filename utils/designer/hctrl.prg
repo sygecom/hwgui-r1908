@@ -94,7 +94,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
          IF oXMLDesc:aItems[i]:title == "paint"
             oPaint := oXMLDesc:aItems[i]
             IF !Empty(oPaint:aItems) .AND. oPaint:aItems[1]:type == HBXML_TYPE_CDATA
-               ::aPaint := RdScript( ,oPaint:aItems[1]:aItems[1] )
+               ::aPaint := hwg_RdScript( ,oPaint:aItems[1]:aItems[1] )
             ENDIF
             IF ( bmp := oPaint:GetAttribute( "bmp" ) ) != Nil
                IF Isdigit( Left(bmp, 1) )
@@ -202,7 +202,7 @@ METHOD Paint( lpdis ) CLASS HControlGen
    PRIVATE oCtrl := Self
 
   IF ::aPaint != Nil
-     DoScript( ::aPaint )
+     hwg_DoScript( ::aPaint )
   ENDIF
   // :LFB pos
   IF Len(asels) > 1

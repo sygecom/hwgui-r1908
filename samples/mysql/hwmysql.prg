@@ -314,10 +314,10 @@ FUNCTION Execute()
       RETURN .F.
    ENDIF
    IF Left(cQuery, 2) == "//"
-      IF ( arScr := RdScript(, cQuery) ) <> Nil
-         DoScript(arScr)
+      IF ( arScr := hwg_RdScript(, cQuery) ) <> Nil
+         hwg_DoScript(arScr)
       ELSE
-         nError := CompileErr(@nLineEr)
+         nError := hwg_CompileErr(@nLineEr)
          hwg_MsgStop("Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)))
       ENDIF
    ELSE
@@ -575,7 +575,7 @@ FUNCTION SaveScript()
 
 RETURN NIL
 
-FUNCTION WndOut()
+FUNCTION hwg_WndOut()
 RETURN NIL
 
 FUNCTION MsgSay(cText)

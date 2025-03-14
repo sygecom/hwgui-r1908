@@ -66,7 +66,7 @@ ENDFUNC
                   oForm:lGet := ( Upper(hwg_NextItem(stroka)) == "T" )
                   lClipper := ( Upper(hwg_NextItem(stroka)) == "T" )
                   cFont := hwg_NextItem( stroka )
-                  oFont := CallFunc( "Str2Font", { cFont } )
+                  oFont := hwg_CallFunc( "Str2Font", { cFont } )
                   oForm:CreateDialog( { {"Left",x}, {"Top",y},{"Width",nWidth},{"Height",nHeight},{"Caption",itemName},{"Font",oFont} } )
                   nMode := 1
                ENDIF
@@ -93,7 +93,7 @@ ENDFUNC
             cFont := hwg_NextItem( stroka )
             tColor := hwg_NextItem( stroka )
             bColor := hwg_NextItem( stroka )
-            oFont := CallFunc( "Str2Font", { cFont } )
+            oFont := hwg_CallFunc( "Str2Font", { cFont } )
             HControlGen():New( oForm:oDlg,itemName, &&
              { { "Left",x }, { "Top",y }, { "Width",nWidth }, &&
              { "Height",nHeight }, { "Caption",cCaption }, &&

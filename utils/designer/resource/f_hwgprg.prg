@@ -43,7 +43,7 @@ FUNCTION Menu2Prg
          stroka := Space( 2 * nMaxid ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str( aLMenu[i, 3] ) + " "
          FWrite( han, _Chr( 10 ) + stroka )
          nMaxId += 1
-         CallFunc( "Menu2Prg", { oCtrl , alMenu[i, 1] } )
+         hwg_CallFunc( "Menu2Prg", { oCtrl , alMenu[i, 1] } )
          nMaxId -= 1
          stroka := Space( 2 * nmaxid ) + "  ENDMENU  "
          FWrite( han, _Chr( 10 ) + stroka )
@@ -143,7 +143,7 @@ FUNCTION Tool2Prg
                ENDIF
 
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF ValType( cName := Callfunc( "FUNC_NAME", { oCtrl1, k } ) ) == "C"
+               IF ValType( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl1, k } ) ) == "C"
                   IF !Empty(cLocalParam)
                      // SubStr(oCtrl1:aMethods[k, 2], 1, j)
                      IF lsubParameter
@@ -168,7 +168,7 @@ FUNCTION Tool2Prg
          //        if !Empty(cFormParameters)
          //                          cTool += ",{||"+ cFormParameters +"}")
          //        else
-         cTool += "," + CallFunc( "Bloco2Prg", { aMethods, "onClick" } )
+         cTool += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onClick" } )
          //        endif
          //ELSE
          //  cTool += ",{|| .T. }"
@@ -374,7 +374,7 @@ FUNCTION Browse2Prg
                   temp := ""
                ENDIF
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF ValType( cName := Callfunc( "FUNC_NAME", { oCtrl1, k } ) ) == "C"
+               IF ValType( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl1, k } ) ) == "C"
                   temp :=  " {|" + temp + "| " +  cName + "( " + temp + " ) }"
                ELSE
                   temp := " {|" + temp + "| " + IIf( Len(cName) == 1, cName[1], cName[2] ) + " }"
@@ -383,11 +383,11 @@ FUNCTION Browse2Prg
             ENDIF
             k ++
          ENDDO
-         cbrowser += "," + CallFunc( "Bloco2Prg", { aMethods, "onLostFocus" } )
-         cbrowser += "," + CallFunc( "Bloco2Prg", { aMethods, "onGetFocus" } )
+         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onLostFocus" } )
+         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onGetFocus" } )
          cbrowser += "," + IIf( ( temp := oCtrl1:GetProp("Items" ) ) != Nil, temp, "" )
-         cbrowser += "," + CallFunc( "Bloco2Prg", { aMethods, "ColorBlock" } )
-         cbrowser += "," + CallFunc( "Bloco2Prg", { aMethods, "HeadClick" } )
+         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "ColorBlock" } )
+         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "HeadClick" } )
          //cbrowser += "))"
          FWrite( han, cbrowser + "))" + _CHR( 10 ) )
          //( <cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>,<nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <{bClrBlck}>, <{bHeadClick}> ) )
@@ -779,7 +779,7 @@ FUNCTION Ctrl2Prg
          stroka += "SIZE " + LTrim(Str(oCtrl:nWidth)) + "," + LTrim(Str(oCtrl:nHeight * nHeight)) + " "
       ENDIF
 
-      stroka += CallFunc( "Style2Prg", { oCtrl } ) + " "
+      stroka += hwg_CallFunc( "Style2Prg", { oCtrl } ) + " "
       // barraprogress
       IF ( temp := oCtrl:GetProp( "BarWidth" ) ) != Nil //.AND. temp == "True"
          stroka += " BARWIDTH " + temp
@@ -801,7 +801,7 @@ FUNCTION Ctrl2Prg
       //
       IF oCtrl:cClass != "ownerbutton" .AND. oCtrl:cClass != "shadebutton"
 
-         stroka += CallFunc( "Color2Prg", { oCtrl } ) + " "
+         stroka += hwg_CallFunc( "Color2Prg", { oCtrl } ) + " "
 
       ENDIF
       //
@@ -892,7 +892,7 @@ FUNCTION Ctrl2Prg
       ENDIF
 
       IF ( temp := oCtrl:GetProp( "Font" ) ) != Nil
-         stroka += CallFunc( "FONT2STR", { temp } )
+         stroka += hwg_CallFunc( "FONT2STR", { temp } )
       ENDIF
 
       // tooltip
@@ -973,7 +973,7 @@ FUNCTION Ctrl2Prg
 
             ENDIF
 
-            IF ValType( cName := Callfunc( "FUNC_NAME", { oCtrl, i } ) ) == "C"
+            IF ValType( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl, i } ) ) == "C"
                //
                IF oCtrl:cClass == "timer"
                   stroka := " {|" + temp + "| " + cName + "( " + temp + " ) }"
@@ -1020,13 +1020,13 @@ FUNCTION Ctrl2Prg
    ENDIF
    // gerar o codigo da TOOLBAR
    IF oCtrl:cClass == "toolbar"
-      stroka := CallFunc( "Tool2Prg", { oCtrl } )
+      stroka := hwg_CallFunc( "Tool2Prg", { oCtrl } )
       FWrite( han, _chr( 10 ) + stroka )
    ENDIF
 
    // gerar o codigo do browse
    IF oCtrl:cClass == "browse"
-      stroka := CallFunc( "Browse2Prg", { oCtrl } )
+      stroka := hwg_CallFunc( "Browse2Prg", { oCtrl } )
       FWrite( han, _chr( 10 ) + stroka )
    ENDIF
 
@@ -1034,7 +1034,7 @@ FUNCTION Ctrl2Prg
 
       IF oCtrl:cClass == "page" .AND. ;
             ( temp := oCtrl:GetProp( "Tabs" ) ) != Nil .AND. !Empty(temp)
-         //stroka := CallFunc( "Style2Prg", { oCtrl } ) + " "
+         //stroka := hwg_CallFunc( "Style2Prg", { oCtrl } ) + " "
          //Fwrite( han, stroka)
          j := 1
          DO WHILE j <= Len(temp)
@@ -1043,7 +1043,7 @@ FUNCTION Ctrl2Prg
             i := 1
             DO WHILE i <= Len(oCtrl:aControls)
                IF oCtrl:aControls[i]:nPage == j
-                  CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
+                  hwg_CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
                ENDIF
                i ++
             ENDDO
@@ -1063,7 +1063,7 @@ FUNCTION Ctrl2Prg
 
       i := 1
       DO WHILE i <= Len(oCtrl:aControls)
-         CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
+         hwg_CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
          i ++
       ENDDO
 
@@ -1262,7 +1262,7 @@ FUNCTION Ctrl2Prg
 
    ENDIF
 
-   //CallFunc( "Imagem2Prg", { oForm } )
+   //hwg_CallFunc( "Imagem2Prg", { oForm } )
    // Imagens
    cStyle := ""
    temp := oForm:GetProp( "icon" )
@@ -1324,7 +1324,7 @@ FUNCTION Ctrl2Prg
       LTrim(Str(oForm:oDlg:nHeight + temp)) )
 
    IF ( temp := oForm:GetProp( "Font" ) ) != Nil
-      FWrite( han, CallFunc( "FONT2STR",{ temp } ) )
+      FWrite( han, hwg_CallFunc( "FONT2STR",{ temp } ) )
    ENDIF
 
 
@@ -1377,12 +1377,12 @@ FUNCTION Ctrl2Prg
    DO WHILE i <= aLen
       IF aControls[i]:cClass != "menu"
          IF aControls[i]:oContainer == Nil
-            CallFunc( "Ctrl2Prg", { aControls[i] } )
+            hwg_CallFunc( "Ctrl2Prg", { aControls[i] } )
          ENDIF
       ELSE
          nMaxId := 0
          FWrite( han, _Chr( 10 ) + " MENU OF " + cformname + " " )
-         CallFunc( "Menu2Prg", { aControls[i] , getmenu() } )
+         hwg_CallFunc( "Menu2Prg", { aControls[i] , getmenu() } )
          FWrite( han, _Chr( 10 ) + " ENDMENU" + " " + _chr( 10 ) + _chr( 10 ) )
       ENDIF
       i ++
@@ -1490,7 +1490,7 @@ FUNCTION Ctrl2Prg
 
          IF oCtrl:aMethods[i, 2] != Nil .AND. !Empty(oCtrl:aMethods[i, 2])
 
-            IF ValType( cName := Callfunc( "FUNC_NAME", { oCtrl, i } ) ) == "C"
+            IF ValType( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl, i } ) ) == "C"
 
                FWrite( han, "STATIC FUNCTION " + cName + _Chr( 10 ) )
                FWrite( han, oCtrl:aMethods[i, 2] )

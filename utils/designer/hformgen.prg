@@ -140,16 +140,16 @@ METHOD Open( fname,cForm )  CLASS HFormGen
          ReadForm( Self,cForm )
       ELSE
          IF ValType( aFormats[::type, 4] ) == "C"
-            aFormats[::type, 4] := OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 4] )
+            aFormats[::type, 4] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 4] )
          ENDIF
          IF ValType( aFormats[::type, 6] ) == "C"
-            aFormats[::type, 6] := OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
+            aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
          IF ValType( aFormats[::type, 6] ) == "A"
-            DoScript( aFormats[::type, 6] )
+            hwg_DoScript( aFormats[::type, 6] )
          ENDIF
          IF ValType( aFormats[::type, 4] ) == "A"
-            DoScript( aFormats[::type, 4] )
+            hwg_DoScript( aFormats[::type, 4] )
          ENDIF
       ENDIF
       IF ::oDlg != Nil
@@ -243,10 +243,10 @@ METHOD Save( lAs ) CLASS HFormGen
          ::type := 3
          ::filename := StrTran(::filename,"xml","prg")
          IF ValType( aFormats[::type, 5] ) == "C"
-            aFormats[::type, 5] := OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
+            aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
          IF ValType( aFormats[::type, 5] ) == "A"
-            DoScript( aFormats[::type, 5] )
+            hwg_DoScript( aFormats[::type, 5] )
          ENDIF
          ::type := 1
          ::filename := StrTran(::filename,"prg","xml")
@@ -254,16 +254,16 @@ METHOD Save( lAs ) CLASS HFormGen
         */
       ELSE
          IF ValType( aFormats[::type, 5] ) == "C"
-            aFormats[::type, 5] := OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
+            aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
          IF ValType( aFormats[::type, 6] ) == "C"
-            aFormats[::type, 6] := OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
+            aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
          IF ValType( aFormats[::type, 6] ) == "A"
-            DoScript( aFormats[::type, 6] )
+            hwg_DoScript( aFormats[::type, 6] )
          ENDIF
          IF ValType( aFormats[::type, 5] ) == "A"
-            DoScript( aFormats[::type, 5] )
+            hwg_DoScript( aFormats[::type, 5] )
          ENDIF
       ENDIF
       IF !oDesigner:lSingleForm .AND. !( ::filename == "__tmp.xml" )

@@ -588,21 +588,21 @@ Local fname, arScr, nError, nLineEr, obl
       Return Nil
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-   IF ( arScr := RdScript( fname ) ) <> Nil
+   IF ( arScr := hwg_RdScript( fname ) ) <> Nil
       IF nAct == 1
          obl := SELECT()
          GO TOP
          DO WHILE .NOT. EOF()
-            DoScript( arScr )
+            hwg_DoScript( arScr )
             SELECT( obl )
             SKIP
          ENDDO
       ELSE
-         DoScript( arScr )
+         hwg_DoScript( arScr )
       ENDIF
       MsgInfo( "Script executed" )
    ELSE
-      nError := CompileErr( @nLineEr )
+      nError := hwg_CompileErr( @nLineEr )
       MsgStop( "Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)) )
    ENDIF
    EndDialog( hDlg )
@@ -793,7 +793,7 @@ LOCAL fname := msfile[ improc ]
    ENDIF
 RETURN .T.
 
-Function WndOut()
+Function hwg_WndOut()
 Return Nil
 
 Function MsgSay( cText )

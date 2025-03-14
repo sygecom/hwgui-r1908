@@ -189,11 +189,11 @@ Local cPre
             ::aFuncs := ::aMethods[ j,2,2 ]
             FOR j := 1 TO Len(::aFuncs[2])
                cPre := "#xtranslate "+ ::aFuncs[2,j,1] + ;
-                     "( <params,...> ) => callfunc('"  + ;
+                     "( <params,...> ) => hwg_callfunc('"  + ;
                      Upper(::aFuncs[2,j,1]) +"',\{ <params> \}, oDlg:oParent:aFuncs )"
                __Preprocess( cPre )
                cPre := "#xtranslate "+ ::aFuncs[2,j,1] + ;
-                     "() => callfunc('"  + ;
+                     "() => hwg_callfunc('"  + ;
                      Upper(::aFuncs[2,j,1]) +"',, oDlg:oParent:aFuncs )"
                __Preprocess( cPre )
             NEXT
@@ -496,9 +496,9 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
                "aControls[" + LTrim(Str(Len(oForm:aControls))) + "]", ;
                "F(" + LTrim(Str(oCtrl:nId)) + ")")
          arrExe := Array(2)
-         arrExe[2] := RdScript( ,cMethod,1,.T. )
+         arrExe[2] := hwg_RdScript( ,cMethod,1,.T. )
          cCode :=  "{|" + LTrim(SubStr(arr[1], 12)) + ;
-            "|DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
+            "|hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
             IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2],{", ;
                    cCode1 + ":aMethods[" + ;
                    LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2],{") + ;
@@ -512,8 +512,8 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          "aControls[" + LTrim(Str(Len(oForm:aControls))) + "]", ;
          "F(" + LTrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)
-   arrExe[2] := RdScript( ,cMethod,,.T. )
-   cCode :=  "{||DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
+   arrExe[2] := hwg_RdScript( ,cMethod,,.T. )
+   cCode :=  "{||hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
       IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2])", ;
              cCode1 + ":aMethods[" + ;
              LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2])") + "}"
@@ -954,16 +954,16 @@ Local cPre
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         AAdd(aMethods, {Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1], , .T.)})
+         AAdd(aMethods, {Lower(aItems[i]:GetAttribute("name")), hwg_RdScript(, aItems[i]:aItems[1]:aItems[1], , .T.)})
          IF aMethods[ (j := Len(aMethods)),1 ] == "common"
             ::aFuncs := ::aMethods[ j,2 ]
             FOR j := 1 TO Len(::aFuncs[2])
                cPre := "#xtranslate "+ ::aFuncs[2,j,1] + ;
-                     "( <params,...> ) => callfunc('"  + ;
+                     "( <params,...> ) => hwg_callfunc('"  + ;
                      Upper(::aFuncs[2,j,1]) +"',\{ <params> \}, oReport:aFuncs )"
                __Preprocess( cPre )
                cPre := "#xtranslate "+ ::aFuncs[2,j,1] + ;
-                     "() => callfunc('"  + ;
+                     "() => hwg_callfunc('"  + ;
                      Upper(::aFuncs[2,j,1]) +"',, oReport:aFuncs )"
                __Preprocess( cPre )
             NEXT
@@ -1019,7 +1019,7 @@ Private oReport := Self
    ::nKoefX := oPrinter:nWidth / nPWidth
    ::nKoefY := oPrinter:nHeight / nPHeight
    IF ( aMethod := aGetSecond( ::aMethods,"onrepinit" ) ) != Nil
-      DoScript( aMethod,{ p1,p2,p3 } )
+      hwg_DoScript( aMethod,{ p1,p2,p3 } )
    ENDIF
    IF xProperty != Nil
       oFont := hrep_FontFromxml( oPrinter,xProperty,aGetSecond(::aProp,"fonth")*::nKoefY )
@@ -1053,7 +1053,7 @@ Private oReport := Self
       oFont:Release()
    ENDIF
    IF ( aMethod := aGetSecond( ::aMethods,"onrepexit" ) ) != Nil
-      DoScript( aMethod )
+      hwg_DoScript( aMethod )
    ENDIF
    IF lPreview != Nil .AND. lPreview
       oPrinter:Preview()
@@ -1084,10 +1084,10 @@ Memvar lLastCycle, lSkipItem
    ENDIF
    IF !__mvExist("LSKIPITEM") .OR. !lSkipItem
       IF ( aMethod := aGetSecond( oItem:aMethods,"onbegin" ) ) != Nil
-         DoScript( aMethod )
+         hwg_DoScript( aMethod )
       ENDIF
       IF ( aMethod := aGetSecond( oItem:aMethods,"condition" ) ) != Nil
-         lRes := DoScript( aMethod )
+         lRes := hwg_DoScript( aMethod )
          IF !lRes .AND. oItem:cClass == "area"
             ::nAOffSet += Val( aGetSecond( oItem:aProp,"geometry" )[4] ) * ::nKoefY
          ENDIF
@@ -1130,7 +1130,7 @@ Memvar lLastCycle, lSkipItem
                ELSE
                   ::nTOffset := ::ny - y
                   IF ( aMethod := aGetSecond( oItem:aMethods,"onnextline" ) ) != Nil
-                     DoScript( aMethod )
+                     hwg_DoScript( aMethod )
                   ENDIF
                ENDIF
             ENDDO
@@ -1185,7 +1185,7 @@ Memvar lLastCycle, lSkipItem
       ENDIF
       IF oItem:cClass == "label"
          IF ( aMethod := aGetSecond( oItem:aMethods,"expression" ) ) != Nil
-            cText := DoScript( aMethod )
+            cText := hwg_DoScript( aMethod )
          ELSE
             cText := aGetSecond( oItem:aProp,"caption" )
          ENDIF
@@ -1249,7 +1249,7 @@ Memvar lLastCycle, lSkipItem
    ENDIF
 
    IF ( aMethod := aGetSecond( oItem:aMethods,"onend" ) ) != Nil
-      DoScript( aMethod )
+      hwg_DoScript( aMethod )
    ENDIF
 
 Return Nil
@@ -1312,7 +1312,7 @@ Local nPenWidth, nPenType
             ENDIF
          NEXT
       ELSEIF aItems[i]:title == "method"
-         AAdd(aMethods, {Lower(aItems[i]:GetAttribute("name")), RdScript(, aItems[i]:aItems[1]:aItems[1], , .T.)})
+         AAdd(aMethods, {Lower(aItems[i]:GetAttribute("name")), hwg_RdScript(, aItems[i]:aItems[1]:aItems[1], , .T.)})
       ELSEIF aItems[i]:title == "part"
          ReadRepItem( aItems[i],IIf(oCtrl:cClass == "area", oCtrl, oContainer) )
       ENDIF
