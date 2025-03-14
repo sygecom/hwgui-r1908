@@ -1788,18 +1788,18 @@ STATIC FUNCTION FldStr( oBrw,numf )
    local nItem := numf
    local type
    local pict
-   
+
    if numf <= Len(oBrw:aColumns)
 
       pict := oBrw:aColumns[numf]:picture
 
       if pict != nil
          if oBrw:type == BRW_DATABASE
-             rez := (oBrw:alias)->(transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict)) 
+             rez := (oBrw:alias)->(transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict))
          else
-             rez := transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict) 
+             rez := transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict)
          endif
-         
+
       else
          if oBrw:type == BRW_DATABASE
              vartmp := (oBrw:alias)->(eval( oBrw:aColumns[numf]:block,,oBrw,numf ))
@@ -1811,30 +1811,36 @@ STATIC FUNCTION FldStr( oBrw,numf )
          if type == "U" .AND. vartmp != Nil
             type := Valtype( vartmp )
          endif
-         if type == "C"
+         SWITCH type
+         CASE "C"
             rez := padr( vartmp, oBrw:aColumns[numf]:length )
-
-         elseif type == "N"
+            EXIT
+         CASE "N"
             rez := PADL( STR( vartmp, oBrw:aColumns[numf]:length, ;
                    oBrw:aColumns[numf]:dec ),oBrw:aColumns[numf]:length )
-         elseif type == "D"
+            EXIT
+         CASE "D"
             rez := PADR( DTOC( vartmp ),oBrw:aColumns[numf]:length )
-
-         elseif type == "L"
+            EXIT
+         CASE "L"
             rez := PADR( IIf(vartmp, "T", "F"),oBrw:aColumns[numf]:length )
-
-         elseif type == "M" 
+            EXIT
+         CASE "M"
             rez := "<Memo>"
-
-         elseif type == "O" 
+            EXIT
+         CASE "O"
             rez := "<" + vartmp:Classname() + ">"
-
-         elseif type == "A" 
+            EXIT
+         CASE "A"
             rez := "<Array>"
-
-         else
+            EXIT
+         #ifdef __XHARBOUR__
+         DEFAULT
+         #else
+         OTHERWISE
+         #endif
             rez := Space( oBrw:aColumns[numf]:length )
-         endif
+         ENDSWITCH
       endif
    endif
 
