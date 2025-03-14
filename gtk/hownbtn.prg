@@ -128,7 +128,7 @@ METHOD Init CLASS HOwnButton
 Return Nil
 
 METHOD Paint() CLASS HOwnButton
-Local hDC := GetDC( ::handle )
+Local hDC := hwg_GetDC( ::handle )
 Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    aCoors := hwg_GetClientRect( ::handle )
@@ -177,9 +177,9 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    IF ::text != Nil
       IF ::ofont != Nil
-         SelectObject( hDC, ::ofont:handle )
+         hwg_SelectObject( hDC, ::ofont:handle )
       ELSEIF ::oParent:oFont != Nil
-         SelectObject( hDC, ::oParent:ofont:handle )
+         hwg_SelectObject( hDC, ::oParent:ofont:handle )
       ENDIF
       aMetr := GetTextMetric( hDC )
       if ::lEnabled //if button is enabled
@@ -196,7 +196,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       // hwg_SetTransparentMode( hDC,.F. )
    ENDIF
    // hwg_SetBkColor( hDC,oldBkColor )
-   releaseDC( ::handle, hDC )
+   hwg_releaseDC( ::handle, hDC )
 
 Return Nil
 

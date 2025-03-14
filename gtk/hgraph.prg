@@ -98,8 +98,8 @@ Local i, j, nLen
 Return Nil
 
 METHOD Paint( lpdis ) CLASS HGraph
-Local hDC := GetDC( ::handle )
-// Local drawInfo := GetDrawItemInfo( lpdis )
+Local hDC := hwg_GetDC( ::handle )
+// Local drawInfo := hwg_GetDrawItemInfo( lpdis )
 // Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
 Local x1 := 0, y1 := 0, x2 := ::nWidth, y2 := ::nHeight
 Local i, j, nLen
@@ -129,7 +129,7 @@ Local px1, px2, py1, py2, nWidth
 
    hwg_FillRect( hDC, 0, 0, ::nWidth, ::nHeight, ::brush:handle )
    IF ::nType != 3
-      SelectObject( hDC, ::oPenCoor:handle )
+      hwg_SelectObject( hDC, ::oPenCoor:handle )
       hwg_Drawline( hDC, x1+(0-::xmin)/::scaleX, 3, x1+(0-::xmin)/::scaleX, ::nHeight-3 )
       hwg_Drawline( hDC, 3, y2-(0-::ymin)/::scaleY, ::nWidth-3, y2-(0-::ymin)/::scaleY )
    ENDIF
@@ -137,7 +137,7 @@ Local px1, px2, py1, py2, nWidth
       Return Nil
    ENDIF
 
-   SelectObject( hDC, ::oPen:handle )
+   hwg_SelectObject( hDC, ::oPen:handle )
    FOR i := 1 TO ::nGraphs
       nLen := Len(::aValues[i])
       IF ::nType == 1  
@@ -167,13 +167,13 @@ Local px1, px2, py1, py2, nWidth
          IF ::tbrush == Nil
             ::tbrush := HBrush():Add( ::tcolor )
          ENDIF
-         SelectObject( hDC, ::oPenCoor:handle )
-         SelectObject( hDC, ::tbrush:handle )
+         hwg_SelectObject( hDC, ::oPenCoor:handle )
+         hwg_SelectObject( hDC, ::tbrush:handle )
          hwg_pie( hDC, x1+10,y1+10,x2-10,y2-10, x1,round(y1+(y2-y1)/2,0),round(x1+(x2-x1)/2,0),y1 )
 	 */
       ENDIF
    NEXT
-   releaseDC( ::handle, hDC )
+   hwg_releaseDC( ::handle, hDC )
    
 Return Nil
 

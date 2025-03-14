@@ -84,9 +84,9 @@ Local hDC, aCoors, oPenLight, oPenGray
    IF ::bPaint != Nil
       Eval( ::bPaint,Self )
    ELSE
-      hDC := GetDC( ::handle )
+      hDC := hwg_GetDC( ::handle )
       hwg_DrawButton( hDC, 0,0,::nWidth-1,::nHeight-1,5 )
-      releaseDC( ::handle, hDC )
+      hwg_releaseDC( ::handle, hDC )
    ENDIF
 
 Return Nil

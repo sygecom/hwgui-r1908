@@ -558,10 +558,10 @@ Local oldBkColor, oldTColor
    IF ::tcolorSel == Nil ; ::tcolorSel := hwg_VColor( "FFFFFF" ) ; ENDIF
    IF ::bcolorSel == Nil ; ::bcolorSel := hwg_VColor( "808080" ) ; ENDIF
 
-   hDC := GetDC( ::area )
+   hDC := hwg_GetDC( ::area )
 
    if ::ofont != Nil
-      SelectObject( hDC, ::ofont:handle )
+      hwg_SelectObject( hDC, ::ofont:handle )
    endif
    IF ::brush == Nil .OR. ::lChanged
       ::Rebuild(hDC)
@@ -664,7 +664,7 @@ Local oldBkColor, oldTColor
       endif
    ENDIF
 
-   ReleaseDC( ::area,hDC )
+   hwg_ReleaseDC( ::area,hDC )
    ::internal[1] := 15
    ::internal[2] := ::rowPos
    tmp := eval( ::bRecno,Self )
@@ -701,7 +701,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
    */
    IF ::lDispSep
       oPen := HPen():Add( PS_SOLID,1,::sepColor )
-      SelectObject( hDC, oPen:handle ) 
+      hwg_SelectObject( hDC, oPen:handle ) 
    ENDIF
 
    x := ::x1
@@ -724,7 +724,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
             if oPenHdr == nil
                oPenHdr := HPen():Add( BS_SOLID,1,0 )
             endif
-            SelectObject( hDC, oPenHdr:handle )
+            hwg_SelectObject( hDC, oPenHdr:handle )
             cStr := oColumn:cGrid + ';'
             for nLine := 1 to ::nHeadRows
                cNWSE := hb_tokenGet(@cStr, nLine, ';')
@@ -741,7 +741,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
                   hwg_DrawLine(hDC, x-1, ::y1-(::height)*(::nHeadRows-nLine+1)+1, x-1, ::y1-(::height)*(::nHeadRows-nLine))
                endif
             next
-            SelectObject( hDC, oPen:handle )
+            hwg_SelectObject( hDC, oPen:handle )
          endif
          // Ahora Titulos Justificados !!!
          cStr := oColumn:heading + ';'
@@ -752,9 +752,9 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
       endif
       if ::lDispSep .AND. x > ::x1
          IF ::lSep3d
-            SelectObject( hDC, oPenLight:handle )
+            hwg_SelectObject( hDC, oPenLight:handle )
             hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
-            SelectObject( hDC, oPen:handle )
+            hwg_SelectObject( hDC, oPen:handle )
             hwg_DrawLine( hDC, x-2, ::y1+1, x-2, ::y1+(::height+1)*nRows )
          ELSE
             hwg_DrawLine( hDC, x-1, ::y1+1, x-1, ::y1+(::height+1)*nRows )
@@ -797,7 +797,7 @@ Local oColumn
 
    IF ::lDispSep
       oPen := HPen():Add( BS_SOLID,1,::sepColor )
-      SelectObject( hDC, oPen:handle )
+      hwg_SelectObject( hDC, oPen:handle )
    ENDIF
 
    x := ::x1
@@ -911,10 +911,10 @@ Local aCores
                      oldBk1Color := hwg_SetBkColor( hDC, ::aColumns[fif]:bColor )
                   ENDIF
                   IF ::aColumns[fif]:oFont != Nil
-                     SelectObject( hDC, ::aColumns[fif]:oFont:handle )
+                     hwg_SelectObject( hDC, ::aColumns[fif]:oFont:handle )
                      lColumnFont := .T.
                   ELSEIF lColumnFont
-                     SelectObject( hDC, ::ofont:handle )
+                     hwg_SelectObject( hDC, ::ofont:handle )
                      lColumnFont := .F.
                   ENDIF
                   hwg_DrawText( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
@@ -937,7 +937,7 @@ Local aCores
       hwg_SetTextColor( hDC,oldTColor )
       hwg_SetBkColor( hDC,oldBkColor )
       IF lColumnFont
-         SelectObject( hDC, ::ofont:handle )
+         hwg_SelectObject( hDC, ::ofont:handle )
       ENDIF
    ENDIF
    

@@ -84,10 +84,10 @@ Local hDC, aMetr, width, height, screenh
       NEXT
    ENDIF
 
-   hDC := GetDC( hwg_GetActiveWindow() )
-   SelectObject( hDC, ofont:handle )
+   hDC := hwg_GetDC( hwg_GetActiveWindow() )
+   hwg_SelectObject( hDC, ofont:handle )
    aMetr := GetTextMetric( hDC )
-   ReleaseDC( hwg_GetActiveWindow(),hDC )
+   hwg_ReleaseDC( hwg_GetActiveWindow(),hDC )
    height := (aMetr[1]+1)*aLen+4+addY
    screenh := GETDESKTOPHEIGHT()
    IF height > screenh * 2/3

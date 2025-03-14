@@ -66,7 +66,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSayBmp
 Return 0
 
 METHOD Paint() CLASS HSayBmp
-Local hDC := GetDC( ::handle )
+Local hDC := hwg_GetDC( ::handle )
 
    IF ::oImage != Nil
       IF ::nZoom == Nil
@@ -77,7 +77,7 @@ Local hDC := GetDC( ::handle )
                ::nOffsetV, ::oImage:nWidth*::nZoom, ::oImage:nHeight*::nZoom )
       ENDIF
    ENDIF
-   releaseDC( ::handle, hDC )
+   hwg_releaseDC( ::handle, hDC )
 
 Return Nil
 

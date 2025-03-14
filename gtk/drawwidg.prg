@@ -64,7 +64,7 @@ Local i, nlen := Len(::aFonts)
 
          ::aFonts[i]:nCounter ++
          IF nHandle != Nil
-            DeleteObject( nHandle )
+            hwg_DeleteObject( nHandle )
          ENDIF
          Return ::aFonts[i]
       ENDIF
@@ -107,7 +107,7 @@ Local i, nlen := Len(::aFonts)
    #ifdef __XHARBOUR__
       For EACH i in ::aFonts
          IF i:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aFonts, hb_enumindex())
             ASize(::aFonts, nlen - 1)
             Exit
@@ -116,7 +116,7 @@ Local i, nlen := Len(::aFonts)
    #else
       For i := 1 TO nlen
          IF ::aFonts[i]:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aFonts, i)
             ASize(::aFonts, nlen - 1)
             Exit
@@ -215,7 +215,7 @@ Local i, nlen := Len(::aPens)
    #ifdef __XHARBOUR__
       For EACH i  in ::aPens 
          IF i:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aPens, hb_EnumIndex())
             ASize(::aPens, nlen - 1)
             Exit
@@ -224,7 +224,7 @@ Local i, nlen := Len(::aPens)
    #else
       For i := 1 TO nlen
          IF ::aPens[i]:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aPens, i)
             ASize(::aPens, nlen - 1)
             Exit
@@ -281,7 +281,7 @@ Local i, nlen := Len(::aBrushes)
    #ifdef __XHARBOUR__
       For EACH i IN ::aBrushes 
          IF i:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aBrushes, hb_EnumIndex())
             ASize(::aBrushes, nlen - 1)
             Exit
@@ -290,7 +290,7 @@ Local i, nlen := Len(::aBrushes)
    #else
       For i := 1 TO nlen
          IF ::aBrushes[i]:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aBrushes, i)
             ASize(::aBrushes, nlen - 1)
             Exit
@@ -404,7 +404,7 @@ Local i, nlen := Len(::aBitmaps)
    #ifdef __XHARBOUR__
       For EACH i IN ::aBitmaps
          IF i:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aBitmaps, hb_EnumIndex())
             ASize(::aBitmaps, nlen - 1)
             Exit
@@ -413,7 +413,7 @@ Local i, nlen := Len(::aBitmaps)
    #else
       For i := 1 TO nlen
          IF ::aBitmaps[i]:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aBitmaps, i)
             ASize(::aBitmaps, nlen - 1)
             Exit
@@ -513,7 +513,7 @@ Local i, nlen := Len(::aIcons)
    #ifdef __XHARBOUR__
       For EACH i IN ::aIcons
          IF i:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aIcons, hb_EnumIndex())
             ASize(::aIcons, nlen - 1)
             Exit
@@ -522,7 +522,7 @@ Local i, nlen := Len(::aIcons)
    #else
       For i := 1 TO nlen
          IF ::aIcons[i]:handle == ::handle
-            DeleteObject( ::handle )
+            hwg_DeleteObject( ::handle )
             ADel(::aIcons, i)
             ASize(::aIcons, nlen - 1)
             Exit
@@ -537,19 +537,19 @@ EXIT PROCEDURE CleanDrawWidg
 Local i
 
    For i := 1 TO Len(HPen():aPens)
-      DeleteObject( HPen():aPens[i]:handle )
+      hwg_DeleteObject( HPen():aPens[i]:handle )
    NEXT
    For i := 1 TO Len(HBrush():aBrushes)
-      DeleteObject( HBrush():aBrushes[i]:handle )
+      hwg_DeleteObject( HBrush():aBrushes[i]:handle )
    NEXT
    For i := 1 TO Len(HFont():aFonts)
-      DeleteObject( HFont():aFonts[i]:handle )
+      hwg_DeleteObject( HFont():aFonts[i]:handle )
    NEXT
    For i := 1 TO Len(HBitmap():aBitmaps)
-      DeleteObject( HBitmap():aBitmaps[i]:handle )
+      hwg_DeleteObject( HBitmap():aBitmaps[i]:handle )
    NEXT
    For i := 1 TO Len(HIcon():aIcons)
-      // DeleteObject( HIcon():aIcons[i]:handle )
+      // hwg_DeleteObject( HIcon():aIcons[i]:handle )
    NEXT
 
 Return

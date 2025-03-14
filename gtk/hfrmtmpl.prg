@@ -1264,7 +1264,7 @@ Local i
          IF aControls[i]:obj != Nil
             IF aControls[i]:cClass == "bitmap"
 /*
-               DeleteObject( aControls[i]:obj )
+               hwg_DeleteObject( aControls[i]:obj )
 */
                aControls[i]:obj := Nil
             ELSEIF aControls[i]:cClass == "label"
