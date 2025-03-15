@@ -1629,7 +1629,7 @@ Local oColumn, type
 
    fipos := ::colpos + ::nLeftCol - 1 - ::freeze
    IF ::bEnter == Nil .OR. ;
-         ( Valtype( lRes := Eval( ::bEnter, Self, fipos ) ) == 'L' .AND. !lRes )
+         ( HB_IsLogical( lRes := Eval( ::bEnter, Self, fipos ) ) .AND. !lRes )
       oColumn := ::aColumns[fipos]
       IF ::type == BRW_DATABASE
          ::varbuf := (::alias)->(Eval( oColumn:block,,Self,fipos ))
@@ -1698,7 +1698,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
 
    IF oBrw:oGet:nLastKey != GDK_Escape
       IF oColumn:aList != Nil
-         IF valtype(oBrw:varbuf) == 'N'
+         IF HB_IsNumeric(oBrw:varbuf)
             oBrw:varbuf := nChoic
          ELSE
             oBrw:varbuf := oColumn:aList[nChoic]
