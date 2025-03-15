@@ -297,12 +297,12 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
    IF oCtrl != Nil
       msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
-         IF ISBLOCK( oCtrl:bChange )
+         IF HB_IsBlock( oCtrl:bChange )
             Eval( oCtrl:bChange,oCtrl )
             Return 0
          ENDIF
       ELSEIF msg == TB_THUMBTRACK .OR. msg == TB_PAGEUP .OR. msg == TB_PAGEDOWN
-         IF ISBLOCK( oCtrl:bThumbDrag )
+         IF HB_IsBlock( oCtrl:bThumbDrag )
             Eval( oCtrl:bThumbDrag,oCtrl )
             Return 0
          ENDIF
@@ -318,7 +318,7 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
       msg := hwg_LOWORD(wParam)
       SWITCH msg
       CASE TB_ENDTRACK
-         IF ISBLOCK( oCtrl:bChange )
+         IF HB_IsBlock( oCtrl:bChange )
             Eval( oCtrl:bChange,oCtrl )
             Return 0
          ENDIF
@@ -326,7 +326,7 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
       CASE TB_THUMBTRACK
       CASE TB_PAGEUP
       CASE TB_PAGEDOWN
-         IF ISBLOCK( oCtrl:bThumbDrag )
+         IF HB_IsBlock( oCtrl:bThumbDrag )
             Eval( oCtrl:bThumbDrag,oCtrl )
             Return 0
          ENDIF

@@ -328,7 +328,7 @@ Local oWnd, oBtn, oitem
       aControls := hwg_GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
-      if ISBLOCK( oWnd:bSize )
+      if HB_IsBlock( oWnd:bSize )
           Eval( oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
@@ -350,7 +350,7 @@ Local oWnd, oBtn, oitem
    elseif msg == WM_DRAWITEM
 
       if ( oBtn := oWnd:FindControl(wParam) ) != Nil
-          if ISBLOCK( oBtn:bPaint )
+          if HB_IsBlock( oBtn:bPaint )
              Eval( oBtn:bPaint, oBtn, lParam )
           endif
       endif
@@ -385,7 +385,7 @@ Local oWnd, oBtn, oitem
       return 0
    elseif msg == WM_SYSCOMMAND
       if wParam == SC_CLOSE
-          if ISBLOCK( oWnd:bDestroy )
+          if HB_IsBlock( oWnd:bDestroy )
              i := Eval( oWnd:bDestroy, oWnd )
              i := IIf(HB_IsLogical(i),i,.t.)
              if !i
@@ -407,7 +407,7 @@ Local oWnd, oBtn, oitem
    elseif msg == WM_NOTIFYICON
       if wParam == ID_NOTIFYICON
           if lParam == WM_LBUTTONDOWN
-             if ISBLOCK( oWnd:bNotify )
+             if HB_IsBlock( oWnd:bNotify )
                 Eval( oWnd:bNotify )
              endif
           elseif lParam == WM_RBUTTONDOWN
@@ -436,7 +436,7 @@ Local oWnd, oBtn, oitem
       if msg == WM_MOUSEMOVE
           hwg_DlgMouseMove()
       endif
-      if ISBLOCK( oWnd:bOther )
+      if HB_IsBlock( oWnd:bOther )
           Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
       endif
    endif
@@ -697,7 +697,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       endif
    elseif msg == WM_PAINT
 
-      if HB_ISObject(oWnd) .and. ISBLOCK(oWnd:bPaint)
+      if HB_ISObject(oWnd) .and. HB_IsBlock(oWnd:bPaint)
 
          // WriteLog( "|DefMDIChild Paint"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
 
@@ -800,7 +800,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       Endif
    elseif msg == WM_DESTROY
       if HB_IsObject(oWnd) 
-         if ISBLOCK(oWnd:bDestroy)
+         if HB_IsBlock(oWnd:bDestroy)
              Eval( oWnd:bDestroy, oWnd )
          endif
          aControls := oWnd:aControls
@@ -824,11 +824,11 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       nReturn := 1
       Return (nReturn)
    elseif msg == WM_CREATE
-      IF ISBLOCK(oWnd:bInit)
+      IF HB_IsBlock(oWnd:bInit)
          Eval( oWnd:bInit,oWnd )
       ENDIF
    else
-      if HB_IsObject(oWnd) .and. ISBLOCK(oWnd:bOther)
+      if HB_IsObject(oWnd) .and. HB_IsBlock(oWnd:bOther)
          Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
       endif
    endif
@@ -901,7 +901,7 @@ Local oWndClient
    endif
 
    if msg == WM_CREATE
-        if ISBLOCK(oWnd:bInit)
+        if HB_IsBlock(oWnd:bInit)
             Eval( oWnd:bInit, oWnd )
         endif
    elseif msg == WM_COMMAND
@@ -1036,7 +1036,7 @@ Local oWndClient
       #endif
       // HWindow():DelItem( oWnd )
 
-      if ISBLOCK(oWnd:bDestroy)
+      if HB_IsBlock(oWnd:bDestroy)
           Eval( oWnd:bDestroy, oWnd )
       endif
 
@@ -1095,7 +1095,7 @@ Local oWndClient
          if msg == WM_MOUSEMOVE
              hwg_DlgMouseMove()
          endif
-         if ISBLOCK(oWnd:bOther)
+         if HB_IsBlock(oWnd:bOther)
              Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
          endif
       Endif

@@ -108,7 +108,7 @@ Local o
       ELSEIF ::oParent:oFont != Nil
          hwg_SetCtrlFont( ::handle, ::oParent:oFont:handle )
       ENDIF
-      IF ISBLOCK(::bInit)
+      IF HB_IsBlock(::bInit)
          Eval( ::bInit, Self )
       ENDIF
       o := ::oParent

@@ -881,7 +881,7 @@
     [<oIp> := ] HIpEdit():New( <oWnd>,<nId>,<vari>,{|v| iif(v==Nil,<vari>,<vari>:=v)},<nStyle>,<x>,<y>,<width>,<height>,<oFont>, <bGfocus>, <bLfocus> )
 
 #define ISOBJECT(c)    ( Valtype(c) == "O" ) // deprecated
-#define ISBLOCK(c)    ( Valtype(c) == "B" )
+#define ISBLOCK(c)    ( Valtype(c) == "B" ) // deprecated
 #define ISARRAY(c)    ( Valtype(c) == "A" )
 #define ISNUMBER(c)    ( Valtype(c) == "N" )
 #define ISLOGICAL(c)    ( Valtype(c) == "L" )

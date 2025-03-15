@@ -27,7 +27,7 @@ Static Function onSize( oWnd,wParam,lParam )
    oWnd:nWidth  := hwg_LOWORD(lParam)
    oWnd:nHeight := hwg_HIWORD(lParam)
 
-   IF ISBLOCK( oWnd:bSize )
+   IF HB_IsBlock( oWnd:bSize )
        Eval( oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
    ENDIF
 
@@ -300,7 +300,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
                   bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,  ;
                   cAppName,oBmp,cHelp,nHelpId )
    ::oParent := HWindow():GetMain()
-   IF HB_IsObject( ::oParent )  
+   IF HB_IsObject( ::oParent )
        ::handle := hwg_InitChildWindow( Self, ::szAppName,cTitle,cMenu, ;
           IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),nStyle,::nLeft, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
@@ -428,7 +428,7 @@ Static Function onSysCommand( oWnd,wParam )
 Local i
 /*
    IF wParam == SC_CLOSE
-       IF ISBLOCK( oWnd:bDestroy )
+       IF HB_IsBlock( oWnd:bDestroy )
           i := Eval( oWnd:bDestroy, oWnd )
           i := IIf(HB_IsLogical(i), i, .T.)
           IF !i
@@ -455,7 +455,7 @@ Local ar
 /*
    IF wParam == ID_NOTIFYICON
        IF lParam == WM_LBUTTONDOWN
-          IF ISBLOCK( oWnd:bNotify )
+          IF HB_IsBlock( oWnd:bNotify )
              Eval( oWnd:bNotify )
           ENDIF
        ELSEIF lParam == WM_RBUTTONDOWN
