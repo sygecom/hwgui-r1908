@@ -101,7 +101,7 @@ Return Nil
 Function F_Locate( oBrw, cExpres )
 Local nrec, i, res, block
    cLocate := cExpres
-   IF VALTYPE( &cLocate ) == "L"
+   IF HB_IsLogical( &cLocate )
       nrec := RECNO()
       block := &( "{||" + cLocate + "}" )
       IF oBrw:prflt
@@ -143,7 +143,7 @@ Return Nil
 Function F_Filter( oBrw, cExpres )
 Local i, nrec
    cFilter := cExpres
-   IF VALTYPE( &cFilter ) == "L"
+   IF HB_IsLogical( &cFilter )
       nrec := RECNO()
       dbSetFilter( &( "{||"+ cFilter + "}" ), cFilter )
       GO TOP

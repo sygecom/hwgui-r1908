@@ -430,7 +430,7 @@ Local i
    IF wParam == SC_CLOSE
        IF ISBLOCK( oWnd:bDestroy )
           i := Eval( oWnd:bDestroy, oWnd )
-          i := IIf(ValType(i) == "L", i, .T.)
+          i := IIf(HB_IsLogical(i), i, .T.)
           IF !i
              Return 0
           ENDIF

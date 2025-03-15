@@ -37,7 +37,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
                   bSize,bPaint,ctoolt,tcolor,bcolor )
 
    ::title   := cCaption
-   ::value   := IIf(vari == NIL .OR. ValType(vari) != "L", .F., vari)
+   ::value   := IIf(vari == NIL .OR. !HB_IsLogical(vari), .F., vari)
    ::bSetGet := bSetGet
 
    ::Activate()
@@ -117,7 +117,7 @@ Local res
       Eval( oCtrl:bSetGet,oCtrl:value, oCtrl )
    ENDIF
    IF oCtrl:bLostFocus != Nil .AND. ;
-         Valtype( res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) ) == "L" ;
+         HB_IsLogical( res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) ) ;
 	 .AND. !res
       hwg_SetFocus( oCtrl:handle )
    ENDIF
@@ -131,7 +131,7 @@ Local res
 
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
-      IF Valtype(res) == "L" .AND. !res
+      IF HB_IsLogical(res) .AND. !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
       ENDIF
       Return res
