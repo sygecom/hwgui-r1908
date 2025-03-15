@@ -35,7 +35,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
 
    IF Image != Nil
       IF lRes == Nil ; lRes := .F. ; ENDIF
-      ::oImage := IIf(lRes .OR. ValType(Image) == "N",     ;
+      ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),     ;
                       HBitmap():AddResource(Image), ;
                       IIf(ValType(Image) == "C",     ;
                       HBitmap():AddFile(Image), Image))
@@ -87,7 +87,7 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
       ::oImage:Release()
    ENDIF
    IF lRes == Nil ; lRes := .F. ; ENDIF
-   ::oImage := IIf(lRes .OR. ValType(Image) == "N",     ;
+   ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),     ;
                    HBitmap():AddResource( Image ), ;
                    IIf(ValType(Image) == "C",     ;
                    HBitmap():AddFile(Image), Image))

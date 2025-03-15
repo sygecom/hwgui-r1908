@@ -71,7 +71,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
       ::lEnabled:=lEnabled
    endif
    IF bmp != Nil
-      ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. ValType(bmp) == "N", ;
+      ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. HB_IsNumeric(bmp), ;
                      HBitmap():AddResource(bmp), ;
                      HBitmap():AddFile(IIf(::cPath != NIL, ::cPath + bmp, bmp)))
       IF ::bitmap != Nil .AND. lTr != Nil .AND. lTr

@@ -43,7 +43,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
                   bSize,bPaint,ctoolt,tcolor,bcolor )
 
    IF vari != Nil
-      IF Valtype(vari) != "N"
+      IF !HB_IsNumeric(vari)
          vari := 0
          Eval( bSetGet,vari )
       ENDIF

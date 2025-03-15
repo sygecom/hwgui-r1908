@@ -234,7 +234,7 @@ Local aCoors
       ELSE
         aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != Nil
-           IF Valtype( oDlg:brush ) != "N"
+           IF !HB_IsNumeric( oDlg:brush )
               hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
            ENDIF
         ELSE

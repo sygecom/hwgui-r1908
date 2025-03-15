@@ -108,7 +108,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
-   IF ValType( crossCursor ) != "N"
+   IF !HB_IsNumeric( crossCursor )
       crossCursor := hwg_LoadCursor( IDC_CROSS )
       horzCursor  := hwg_LoadCursor( IDC_SIZEWE )
       vertCursor  := hwg_LoadCursor( IDC_SIZENS )

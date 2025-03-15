@@ -53,7 +53,7 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 //   ::tag := hwg_SetTimer( ::id,::value )
 
    */
-   ::value   := IIf(ValType(value) == "N", value, 0)
+   ::value   := IIf(HB_IsNumeric(value), value, 0)
    ::bAction := bAction
    /*
     if ::value > 0

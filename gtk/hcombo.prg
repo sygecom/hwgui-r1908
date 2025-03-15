@@ -66,7 +66,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    if ::lText
       ::value := IIf(vari == NIL .OR. ValType(vari) != "C", "", vari)
    else
-      ::value := IIf(vari == NIL .OR. ValType(vari) != "N", 1, vari)
+      ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
    endif      
    
    ::bSetGet := bSetGet
@@ -186,7 +186,7 @@ Local vari, i
       if ::lText
          ::value := IIf(vari == NIL .OR. ValType(vari) != "C", "", vari)
       else
-         ::value := IIf(vari == NIL .OR. ValType(vari) != "N", 1, vari)
+         ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
       endif      
    ENDIF
 

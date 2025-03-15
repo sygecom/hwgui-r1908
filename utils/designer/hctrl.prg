@@ -245,7 +245,7 @@ METHOD SetProp( xName,xValue )
       //xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
      iIndex := ::GetPropIndex( xName )
     ENDIF
-    IF ValType( xName ) == "N"
+    IF HB_IsNumeric( xName )
       iIndex := xName
     ENDIF
 

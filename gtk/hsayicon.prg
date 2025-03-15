@@ -26,7 +26,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    ::Super:New( oWndParent,nId,SS_ICON,nLeft,nTop,nWidth,nHeight,bInit,bSize,ctoolt )
 
    IF lRes == Nil ; lRes := .F. ; ENDIF
-   ::oImage := IIf(lRes .OR. ValType(Image) == "N",    ;
+   ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),    ;
                    HIcon():AddResource(Image),  ;
                    IIf(ValType(Image) == "C",    ;
                    HIcon():AddFile(Image), Image))

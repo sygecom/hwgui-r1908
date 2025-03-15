@@ -615,7 +615,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
-         IF Valtype( oBrw:cargo ) == "N"
+         IF HB_IsNumeric( oBrw:cargo )
             Select( oBrw:cargo )
             improc := oBrw:cargo
             hwg_SetFocus( oBrw:handle )
@@ -630,7 +630,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
-         IF Valtype( oBrw:cargo ) == "N"
+         IF HB_IsNumeric( oBrw:cargo )
             Select( oBrw:cargo )
             improc := oBrw:cargo
             IF Alias() == "ADSSQL"

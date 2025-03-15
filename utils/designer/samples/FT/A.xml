@@ -467,7 +467,7 @@ return .t.]]>
       <property name="varName">[xBT]</property>
     </style>
     <method name="onInit">
-      <![CDATA[oCBPeriod:bChangeSel:= {|a,b,c|  if(valtype(a)="N" .and. oB:aColumns[1]:heading<>{"Bulan","Tahun"}[xBT], eval(oBtnA:bClick),)  }
+      <![CDATA[oCBPeriod:bChangeSel:= {|a,b,c|  if(HB_IsNumeric(a) .and. oB:aColumns[1]:heading<>{"Bulan","Tahun"}[xBT], eval(oBtnA:bClick),)  }
 ]]>
     </method>
   </part>

@@ -321,7 +321,7 @@ ENDCLASS
 METHOD AddResource( name ) CLASS HBitmap
 Local lPreDefined := .F., i, aBmpSize
 
-   IF Valtype( name ) == "N"
+   IF HB_IsNumeric( name )
       name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF
@@ -443,7 +443,7 @@ ENDCLASS
 METHOD AddResource( name ) CLASS HIcon
 Local lPreDefined := .F., i
 
-   IF Valtype( name ) == "N"
+   IF HB_IsNumeric( name )
       name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF

@@ -461,7 +461,7 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
          cVar += "NIL"
        ELSEIF HB_IsBlock(HB_PVALUE(nI))
          cVar += "CODEBLOCK"
-       ELSEIF ValType(HB_PVALUE(nI)) == "N"
+       ELSEIF HB_IsNumeric(HB_PVALUE(nI))
          cVar += STR(HB_PVALUE(nI))
        ELSEIF ValType(HB_PVALUE(nI)) == "D"
          cVar += DTOS(HB_PVALUE(nI))

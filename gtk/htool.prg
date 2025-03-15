@@ -99,7 +99,7 @@ Local aItem
 //            NEXT
 //
 //         ENDIF
-         if valtype( ::aItem[ n, 1 ] ) == "N"
+         if HB_IsNumeric( ::aItem[ n, 1 ] )
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
