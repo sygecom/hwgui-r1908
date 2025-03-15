@@ -28,7 +28,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    IF lRes == Nil ; lRes := .F. ; ENDIF
    ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),    ;
                    HIcon():AddResource(Image),  ;
-                   IIf(ValType(Image) == "C",    ;
+                   IIf(HB_IsChar(Image),    ;
                    HIcon():AddFile(Image), Image))
    ::Activate()
 

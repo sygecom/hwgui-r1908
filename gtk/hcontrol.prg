@@ -90,7 +90,7 @@ Return nId
 
 METHOD AddName( cName ) CLASS HControl
 
-   IF !Empty(cName) .AND. VALTYPE( cName) == "C" .AND. ! ":" $ cName .AND. ! "[" $ cName
+   IF !Empty(cName) .AND. HB_IsChar( cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
 			__objAddData( ::oParent, cName )
 	    ::oParent: & ( cName ) := Self

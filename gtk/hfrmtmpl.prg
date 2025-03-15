@@ -853,7 +853,7 @@ Return stroka + "}"
 Function hfrm_GetProperty( xProp )
 Local c
 
-   IF Valtype( xProp ) == "C"
+   IF HB_IsChar( xProp )
       c := Left( xProp,1 )
       IF c == "["
          xProp := Substr( xProp,2,Len(xProp)-2 )
@@ -1189,7 +1189,7 @@ Memvar lLastCycle, lSkipItem
          ELSE
             cText := aGetSecond( oItem:aProp,"caption" )
          ENDIF
-         IF Valtype( cText ) == "C"
+         IF HB_IsChar( cText )
             IF ( xProperty := aGetSecond( oItem:aProp,"border" ) ) != Nil ;
                    .AND. xProperty
                ::oPrinter:Box( x,y,x2,y2 )

@@ -139,10 +139,10 @@ METHOD Open( fname,cForm )  CLASS HFormGen
       IF ::type == 1
          ReadForm( Self,cForm )
       ELSE
-         IF ValType( aFormats[::type, 4] ) == "C"
+         IF HB_IsChar( aFormats[::type, 4] )
             aFormats[::type, 4] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 4] )
          ENDIF
-         IF ValType( aFormats[::type, 6] ) == "C"
+         IF HB_IsChar( aFormats[::type, 6] )
             aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
          IF HB_IsArray( aFormats[::type, 6] )
@@ -242,7 +242,7 @@ METHOD Save( lAs ) CLASS HFormGen
              //  salvar PRG diretamente sem necessidade de ficar mudando
          ::type := 3
          ::filename := StrTran(::filename,"xml","prg")
-         IF ValType( aFormats[::type, 5] ) == "C"
+         IF HB_IsChar( aFormats[::type, 5] )
             aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
          IF HB_IsArray( aFormats[::type, 5] )
@@ -253,10 +253,10 @@ METHOD Save( lAs ) CLASS HFormGen
         // :END LFB
         */
       ELSE
-         IF ValType( aFormats[::type, 5] ) == "C"
+         IF HB_IsChar( aFormats[::type, 5] )
             aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
-         IF ValType( aFormats[::type, 6] ) == "C"
+         IF HB_IsChar( aFormats[::type, 6] )
             aFormats[::type, 6] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 6] )
          ENDIF
          IF HB_IsArray( aFormats[::type, 6] )
@@ -307,7 +307,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
       FOR i := 1 TO Len(oFormDesc:aItems)
          IF oFormDesc:aItems[i]:title == "property"
             IF !Empty(oFormDesc:aItems[i]:aItems)
-               IF ValType( oFormDesc:aItems[i]:aItems[1]:aItems[1] ) == "C"
+               IF HB_IsChar( oFormDesc:aItems[i]:aItems[1]:aItems[1] )
                   oFormDesc:aItems[i]:aItems[1]:aItems[1] := &( "{||" + oFormDesc:aItems[i]:aItems[1]:aItems[1] + "}" )
                ENDIF
                xProperty := Eval( oFormDesc:aItems[i]:aItems[1]:aItems[1] )
@@ -397,7 +397,7 @@ Return IIf( i==0, Nil, ::aProp[i, 2] )
 
 METHOD SetProp( xName,xValue ) CLASS HFormGen
 
-   IF ValType( xName ) == "C"
+   IF HB_IsChar( xName )
       xName := Lower(xName)
       xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
    ENDIF
@@ -762,7 +762,7 @@ FUNCTION IsDefault( oCtrl,aPropItem )
                    Lower(aItems[j1]:GetAttribute("name")) == cPropName
 
          IF !Empty(aItems[j1]:aItems)
-            IF ValType( aItems[j1]:aItems[1]:aItems[1] ) == "C"
+            IF HB_IsChar( aItems[j1]:aItems[1]:aItems[1] )
                aItems[j1]:aItems[1]:aItems[1] := &( "{||" + aItems[j1]:aItems[1]:aItems[1] + "}" )
             ENDIF
             xProperty := Eval( aItems[j1]:aItems[1]:aItems[1] )

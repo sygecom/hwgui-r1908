@@ -467,7 +467,7 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
          cVar += DTOS(HB_PVALUE(nI))
        ELSEIF HB_IsLogical(HB_PVALUE(nI))
          cVar += IF(HB_PVALUE(nI), ".T.", ".F.")
-       ELSEIF ValType(HB_PVALUE(nI)) == "C"
+       ELSEIF HB_IsChar(HB_PVALUE(nI))
          cVar += HB_PVALUE(nI)
        ENDIF
        cVar += "/"

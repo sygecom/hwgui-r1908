@@ -103,7 +103,7 @@ Local aItem
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
-         elseif  valtype( ::aItem[ n, 1 ] ) == "C"
+         elseif  HB_IsChar( ::aItem[ n, 1 ] )
             if ".ico" $ lower(::aItem[ n, 1 ]) //if ".ico" in lower(::aItem[ n, 1 ])
                oImage:=hIcon():AddFile( ::aItem[ n, 1 ] )
             else

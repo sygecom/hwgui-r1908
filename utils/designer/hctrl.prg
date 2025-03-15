@@ -77,7 +77,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
    ::id      := ::NewId()
    ::style   := WS_VISIBLE+WS_CHILD+WS_DISABLED+SS_OWNERDRAW
 
-   IF ValType( xClass ) == "C"
+   IF HB_IsChar( xClass )
       oXMLDesc := FindWidget( xClass )
    ELSE
       oXMLDesc := xClass
@@ -113,7 +113,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "property"
             IF !Empty(oXMLDesc:aItems[i]:aItems)
-               IF ValType( oXMLDesc:aItems[i]:aItems[1]:aItems[1] ) == "C"
+               IF HB_IsChar( oXMLDesc:aItems[i]:aItems[1]:aItems[1] )
                   oXMLDesc:aItems[i]:aItems[1]:aItems[1] := &( "{||" + oXMLDesc:aItems[i]:aItems[1]:aItems[1] + "}" )
                ENDIF
                xProperty := Eval( oXMLDesc:aItems[i]:aItems[1]:aItems[1] )
@@ -240,7 +240,7 @@ METHOD SetProp( xName,xValue )
 
    LOCAL iIndex := 0
 
-   IF ValType( xName ) == "C"
+   IF HB_IsChar( xName )
       xName := Lower(xName)
       //xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
      iIndex := ::GetPropIndex( xName )

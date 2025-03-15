@@ -98,7 +98,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    //   __mvPublic( "cCurDir" )
    //ENDIF
 
-   IF ValType( cCurDir ) != "C"
+   IF !HB_IsChar( cCurDir )
       cCurDir := hwg_GetCurrentDir() + "\"
    ENDIF
    oDesigner:ds_mypath := cCurDir
@@ -531,7 +531,7 @@ STATIC FUNCTION ReadIniFiles()
       ENDIF
    NEXT
 
-   IF ValType( cWidgetsFileName ) == "C"
+   IF HB_IsChar( cWidgetsFileName )
       oDesigner:oWidgetsSet := HXMLDoc():Read( cCurDir + cWidgetsFileName )
    ENDIF
    IF oDesigner:oWidgetsSet == Nil .OR. Empty(oDesigner:oWidgetsSet:aItems)
@@ -725,7 +725,7 @@ Function Evalcode( xCode )
    
    LOCAL nLines
 
-   IF ValType( xCode ) == "C"
+   IF HB_IsChar( xCode )
       nLines := mlCount( xCode )
       IF nLines > 1
          xCode := hwg_RdScript( ,xCode )
