@@ -576,7 +576,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 	      yy:= Left(dtos(date()), 2)+yy
 	   endif
 
-      if  ValType(ctod(dd+mm+yy))!="D"  .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
+      if  !HB_IsDate(ctod(dd+mm+yy)) .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
           return .f.
       else

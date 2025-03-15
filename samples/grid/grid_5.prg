@@ -328,13 +328,13 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
         for i := 1 to Len(aFields)
             val := Fieldget(fieldpos(aFields[i, GET_FIELD])) 
             
-            if ValType(val) == "D" .AND. Empty(val)
+            if HB_IsDate(val) .AND. Empty(val)
                 Fieldput(Fieldpos(aFields[i, GET_FIELD]), Date())
             endif                        
 
             oGet := aFields[i, GET_OBJECT]
         
-            if oGet:id != oCtrl:id .or. ValType(val) == "D"
+            if oGet:id != oCtrl:id .or. HB_IsDate(val)
                 oGet:refresh()
             endif            
         next        

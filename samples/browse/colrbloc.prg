@@ -463,7 +463,7 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
          cVar += "CODEBLOCK"
        ELSEIF HB_IsNumeric(HB_PVALUE(nI))
          cVar += STR(HB_PVALUE(nI))
-       ELSEIF ValType(HB_PVALUE(nI)) == "D"
+       ELSEIF HB_IsDate(HB_PVALUE(nI))
          cVar += DTOS(HB_PVALUE(nI))
        ELSEIF HB_IsLogical(HB_PVALUE(nI))
          cVar += IF(HB_PVALUE(nI), ".T.", ".F.")

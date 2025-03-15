@@ -52,7 +52,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   ,,ctooltip )
 
-   ::value   := IIf(ValType(vari) == "D" .AND. !Empty(vari), vari, Date())
+   ::value   := IIf(HB_IsDate(vari) .AND. !Empty(vari), vari, Date())
 
    ::bChange := bChange
 
@@ -96,7 +96,7 @@ Return Nil
 
 METHOD SetValue( dValue ) CLASS HMonthCalendar
 
-   If Valtype(dValue)=="D" .And. !Empty(dValue)
+   If HB_IsDate(dValue) .And. !Empty(dValue)
       hwg_SetMonthCalendarDate( ::handle, dValue )
       ::value := dValue
    EndIf
