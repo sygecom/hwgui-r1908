@@ -154,7 +154,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
    ELSEIF lType == WND_CHILD // Janelas modeless que pertencem a MAIN - jamaj
 
       ::oParent := HWindow():GetMain()
-      IF ISOBJECT( ::oParent )  
+      IF HB_IsObject( ::oParent )
           ::handle := hwg_InitChildWindow( ::szAppName,cTitle,cMenu,    ;
              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),nStyle,::nLeft, ;
              ::nTop,::nWidth,::nHeight,::oParent:handle )
@@ -653,7 +653,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
-      IF ISOBJECT(oWnd) 
+      IF HB_IsObject(oWnd) 
 
          oWnd:handle := hWnd
          hwg_InitControls( oWnd )
@@ -697,7 +697,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       endif
    elseif msg == WM_PAINT
 
-      if ISOBJECT(oWnd) .and. ISBLOCK(oWnd:bPaint)
+      if HB_ISObject(oWnd) .and. ISBLOCK(oWnd:bPaint)
 
          // WriteLog( "|DefMDIChild Paint"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
 
@@ -708,7 +708,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       endif
 
    elseif msg == WM_SIZE
-      If ISOBJECT( oWnd )
+      If HB_IsObject( oWnd )
          aControls := oWnd:aControls
          nControls := Len( aControls )
          #ifdef __XHARBOUR__
@@ -729,7 +729,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
      Endif
    elseif msg == WM_NCACTIVATE
       //WriteLog( "|DefMDIChild"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
-      if ISOBJECT(oWnd)
+      if HB_IsObject(oWnd)
          if wParam = 1 // Ativando
             // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd,10) ) 
             // Pega o menu atribuido
@@ -793,13 +793,13 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       endif
 
    elseif msg == WM_NCDESTROY
-      If ISOBJECT(oWnd) 
+      If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
         MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIChildProc")
       Endif
    elseif msg == WM_DESTROY
-      if ISOBJECT(oWnd) 
+      if HB_IsObject(oWnd) 
          if ISBLOCK(oWnd:bDestroy)
              Eval( oWnd:bDestroy, oWnd )
          endif
@@ -828,7 +828,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          Eval( oWnd:bInit,oWnd )
       ENDIF
    else
-      if ISOBJECT(oWnd) .and. ISBLOCK(oWnd:bOther)
+      if HB_IsObject(oWnd) .and. ISBLOCK(oWnd:bOther)
          Eval( oWnd:bOther, oWnd, msg, wParam, lParam )
       endif
    endif
@@ -880,7 +880,7 @@ Local oWndClient
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
-      IF ISOBJECT(oWnd) 
+      IF HB_IsObject(oWnd) 
          oWnd:handle := hWnd
       ELSE
 
@@ -1046,7 +1046,7 @@ Local oWndClient
       return 1
 
    elseif msg == WM_NCDESTROY
-      If ISOBJECT(oWnd) 
+      If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
         MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIWndProc")
@@ -1091,7 +1091,7 @@ Local oWndClient
           endif
       endif
    else
-      If ISOBJECT(oWnd)
+      If HB_IsObject(oWnd)
          if msg == WM_MOUSEMOVE
              hwg_DlgMouseMove()
          endif

@@ -311,7 +311,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
    LOCAL oGet
    LOCAL val
 
-    if ISOBJECT(oCtrl)
+    if HB_IsObject(oCtrl)
         n := oCtrl:id - 3000    
         
         Eval(bChange, oCtrl, n)

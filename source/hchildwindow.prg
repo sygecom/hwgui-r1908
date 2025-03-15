@@ -42,7 +42,7 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit,
    ::oParent := HWindow():GetMain()
    ::Type := WND_CHILD
    ::rect := hwg_GetWindowRect(::handle)
-   IF ISOBJECT(::oParent)
+   IF HB_IsObject(::oParent)
       ::handle := hwg_InitChildWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), ;
          IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
    ELSE
