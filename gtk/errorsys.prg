@@ -84,7 +84,7 @@ FUNCTION hwg_ErrorMessage( oError )
    cMessage := IIf(oError:severity > ES_WARNING, "Error", "Warning") + " "
 
    // add subsystem name if available
-   IF ISCHARACTER( oError:subsystem )
+   IF HB_IsChar( oError:subsystem )
       cMessage += oError:subsystem()
    ELSE
       cMessage += "???"
@@ -98,7 +98,7 @@ FUNCTION hwg_ErrorMessage( oError )
    ENDIF
 
    // add error description if available
-   IF ISCHARACTER( oError:description )
+   IF HB_IsChar( oError:description )
       cMessage += "  " + oError:description
    ENDIF
 
