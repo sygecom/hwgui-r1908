@@ -222,7 +222,7 @@
 #define ISOBJECT(c)    ( Valtype(c) == "O" ) // deprecated
 #define ISBLOCK(c)     ( Valtype(c) == "B" ) // deprecated
 #define ISARRAY(c)     ( Valtype(c) == "A" ) // deprecated
-#define ISNUMBER(c)    ( Valtype(c) == "N" )
+#define ISNUMBER(c)    ( Valtype(c) == "N" ) // deprecated
 #define ISLOGICAL(c)   ( Valtype(c) == "L" )
 
 /* Commands for PrintDos Class*/
