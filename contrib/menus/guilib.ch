@@ -884,7 +884,7 @@
 #define ISBLOCK(c)    ( Valtype(c) == "B" ) // deprecated
 #define ISARRAY(c)    ( Valtype(c) == "A" ) // deprecated
 #define ISNUMBER(c)    ( Valtype(c) == "N" ) // deprecated
-#define ISLOGICAL(c)    ( Valtype(c) == "L" )
+#define ISLOGICAL(c)    ( Valtype(c) == "L" ) // deprecated
 
 
 /* Commands for PrintDos Class*/
