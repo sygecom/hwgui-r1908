@@ -102,9 +102,9 @@ Function hwg_TimerProc( hWnd, idTimer, Time )
 
    HB_SYMBOL_UNUSED( hWnd )
 
-   IF i != 0 .AND. HTimer():aTimers[ i ]:value > 0 .AND. HTimer():aTimers[ i ]:bAction != Nil .AND.;
-      HB_IsBlock( HTimer():aTimers[ i ]:bAction )
-      Eval( HTimer():aTimers[ i ]:bAction, HTimer():aTimers[i], time )
+   IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != Nil .AND.;
+      HB_IsBlock( HTimer():aTimers[i]:bAction )
+      Eval( HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time )
    ENDIF
 
    RETURN Nil

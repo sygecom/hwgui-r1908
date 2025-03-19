@@ -285,7 +285,7 @@ Local aMenu, i, hCtrl
 
    IF oDlg:aEvents != Nil .AND. ;
       ( i := AScan(oDlg:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oDlg:aEvents[ i,3 ],oDlg,iParLow )
+      Eval( oDlg:aEvents[i,3],oDlg,iParLow )
    ELSEIF iParHigh == 0 .AND. ( ;
         ( iParLow == IDOK .AND. oDlg:FindControl(IDOK) != Nil ) .OR. ;
           iParLow == IDCANCEL )
@@ -298,12 +298,12 @@ Local aMenu, i, hCtrl
       ENDIF
    ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
-        .AND. aMenu[ 1,i,1 ] != Nil
-      Eval( aMenu[ 1,i,1 ] )
+        .AND. aMenu[1,i,1] != Nil
+      Eval( aMenu[1,i,1] )
    ELSEIF __ObjHasMsg(oDlg,"OPOPUP") .AND. oDlg:oPopup != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != Nil ;
-         .AND. aMenu[ 1,i,1 ] != Nil
-         Eval( aMenu[ 1,i,1 ] )
+         .AND. aMenu[1,i,1] != Nil
+         Eval( aMenu[1,i,1] )
    ENDIF
 
 Return 1

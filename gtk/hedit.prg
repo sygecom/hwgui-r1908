@@ -137,7 +137,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             cKeyb := hwg_GetKeyboardState()
             nctrl := IIf(Asc(Substr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(Substr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
             IF ( nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam}) ) > 0
-               Eval( oParent:KeyList[ nPos,3 ] )
+               Eval( oParent:KeyList[nPos,3] )
             ENDIF
 	    */
          ENDIF

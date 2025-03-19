@@ -652,7 +652,7 @@ Local hWnd := Hwindow():GetMain():handle
                  Iif( lastFont==Nil,HFont():Add( "Arial",0,-13 ),lastFont )
       ELSEIF s_nAddItem == TYPE_MARKER
          aItem[ITEM_X1] := -s_aInitialSize[s_nAddItem,1]
-         aItem[ITEM_CAPTION] := s_aMarkers[ s_nMarkerType ]
+         aItem[ITEM_CAPTION] := s_aMarkers[s_nMarkerType]
       ENDIF
       DeselectAll( Len( aPaintRep[FORM_ITEMS] ) )
       aPaintRep[FORM_CHANGED] := .T.

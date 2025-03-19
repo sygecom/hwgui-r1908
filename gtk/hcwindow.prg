@@ -157,13 +157,13 @@ METHOD Anchor( oCtrl, x, y, w, h ) CLASS HCustomWindow
    LOCAL nlen , i, x1, y1
    nlen := Len(oCtrl:aControls)
    FOR i = 1 TO nlen
-      IF __ObjHasMsg( oCtrl:aControls[ i ], "ANCHOR" ) .AND. oCtrl:aControls[ i ]:anchor > 0
-         x1 := oCtrl:aControls[ i ]:nWidth
-         y1 := oCtrl:aControls[ i ]:nHeight
-         oCtrl:aControls[ i ]:onAnchor( x, y, w, h )
+      IF __ObjHasMsg( oCtrl:aControls[i], "ANCHOR" ) .AND. oCtrl:aControls[i]:anchor > 0
+         x1 := oCtrl:aControls[i]:nWidth
+         y1 := oCtrl:aControls[i]:nHeight
+         oCtrl:aControls[i]:onAnchor( x, y, w, h )
          IF Len(oCtrl:aControls[i]:aControls) > 0
-            //::Anchor( oCtrl:aControls[ i ], x1, y1, oCtrl:nWidth, oCtrl:nHeight )
-            ::Anchor( oCtrl:aControls[ i ], x, y, oCtrl:nWidth, oCtrl:nHeight )
+            //::Anchor( oCtrl:aControls[i], x1, y1, oCtrl:nWidth, oCtrl:nHeight )
+            ::Anchor( oCtrl:aControls[i], x, y, oCtrl:nWidth, oCtrl:nHeight )
          ENDIF
       ENDIF
    NEXT
@@ -218,7 +218,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
             Return 1
          ELSEIF oWnd:aNotify != Nil .AND. ;
             ( iItem := AScan(oWnd:aNotify, {|a|a[1] == nCode .AND. a[2] == wParam}) ) > 0
-            IF ( res := Eval( oWnd:aNotify[ iItem,3 ],oWnd,wParam ) ) != Nil
+            IF ( res := Eval( oWnd:aNotify[iItem,3],oWnd,wParam ) ) != Nil
                Return res
             ENDIF
          ENDIF
@@ -263,7 +263,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+      Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
    ENDIF
 
 Return 1

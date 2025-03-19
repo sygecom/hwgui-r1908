@@ -332,7 +332,7 @@ Static Function EndRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
 Local hWnd, oWindow, aControls, i
 
-   IF .NOT. msmode[ improc, 1 ]
+   IF .NOT. msmode[improc, 1]
       IF .NOT. FileLock()
          EndDialog( hDlg )
          Return Nil

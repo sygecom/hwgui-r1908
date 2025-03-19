@@ -25,7 +25,7 @@ MEMVAR nQueryWndHandle
 Function Main()
 Local aMainWindow, aPanel
 Public BrwFont := {"MS Sans Serif",0,-13}, oBrwFont := Nil
-PUBLIC msfile[ 15 ], msmode[ 15, 5 ], msexp[ 15 ], lenmsf := 0, improc := 0, mypath := ""
+PUBLIC msfile[15], msmode[15, 5], msexp[15], lenmsf := 0, improc := 0, mypath := ""
 PUBLIC dformat := "dd/mm/yy", memownd := .F., prrdonly := .F.
 PUBLIC lWinChar := .F.
 #ifdef RDD_ADS
@@ -297,7 +297,7 @@ Return Nil
 
 Static Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
-   hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[ improc ] ) ) + INDEXEXT() )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
@@ -514,7 +514,7 @@ Local oWindow, aControls, oBrowse, i
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-            oBrowse := aControls[ i ]
+            oBrowse := aControls[i]
             oBrowse:InitBrw()
             oBrowse:bcolorSel  := hwg_VColor( "800080" )
             oBrowse:ofont := oBrwFont
@@ -656,7 +656,7 @@ Local aRect, i, nHbusy := 0
       IF aControls[i]:classname() == "HSTATUS"
          hWndStatus := aControls[i]:handle
          aRect := hwg_GetClientRect( hWndStatus )
-         nHbusy += aRect[ 4 ]
+         nHbusy += aRect[4]
       ENDIF
    NEXT
    hwg_MoveWindow( oBrw:handle, 0, 0, nWidth, nHeight-nHBusy )
@@ -673,7 +673,7 @@ LOCAL bOldError, oError
          improc := lenmsf + 1
       ELSE
          FOR i := 1 TO 15
-            IF msfile[ i ] = Nil
+            IF msfile[i] = Nil
                improc := i
                EXIT
             ENDIF
@@ -735,12 +735,12 @@ LOCAL bOldError, oError
       AdsEnableEncryption( pass )
    ENDIF
 #ENDIF
-   msfile[ improc ] := Iif( fname != Nil, UPPER( fname ), Alias() )
-   msmode[ improc, 1 ] = SET( _SET_EXCLUSIVE )
-   msmode[ improc, 2 ] = prrdonly
-   msmode[ improc, 3 ] = numdriv
-   msmode[ improc, 4 ] = pass
-   msmode[ improc, 5 ] = alsname
+   msfile[improc] := Iif( fname != Nil, UPPER( fname ), Alias() )
+   msmode[improc, 1] = SET( _SET_EXCLUSIVE )
+   msmode[improc, 2] = prrdonly
+   msmode[improc, 3] = numdriv
+   msmode[improc, 4] = pass
+   msmode[improc, 5] = alsname
 RETURN .T.
 
 STATIC FUNCTION OpenError( e )
@@ -754,10 +754,10 @@ LOCAL i
    IF improc > 0
       SELECT( improc )
       USE
-      msfile[ improc ] = Nil
+      msfile[improc] = Nil
       IF improc = lenmsf
          FOR i := lenmsf - 1 TO 1 STEP - 1
-            IF msfile[ i ] <> Nil
+            IF msfile[i] <> Nil
                EXIT
             ENDIF
          NEXT
@@ -766,7 +766,7 @@ LOCAL i
       improc := 0
 /*
       FOR i := 1 TO lenmsf
-         IF msfile[ i ] <> Nil
+         IF msfile[i] <> Nil
             EXIT
          ENDIF
       NEXT
@@ -780,15 +780,15 @@ FUNCTION Stufmy( stsou, pozs, ellen, elzn )
 RETURN SUBSTR( stsou, 1, pozs - 1 ) + elzn + SUBSTR( stsou, pozs + ellen )
 
 FUNCTION FileLock()
-LOCAL fname := msfile[ improc ]
-   IF .NOT. msmode[ improc, 1 ]
+LOCAL fname := msfile[improc]
+   IF .NOT. msmode[improc, 1]
       USE &fname EXCLUSIVE
       IF NETERR()
          MsgStop( "File cannot be opened in exclusive mode" )
          USE &fname SHARED
          RETURN .F.
       ELSE
-         msmode[ improc, 1 ] = .T.
+         msmode[improc, 1] = .T.
       ENDIF
    ENDIF
 RETURN .T.

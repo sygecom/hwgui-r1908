@@ -532,7 +532,7 @@ METHOD InsColumn( oColumn,nPos ) CLASS HBrowse
 
    AAdd(::aColumns, NIL)
    ains( ::aColumns,nPos )
-   ::aColumns[ nPos ] := oColumn
+   ::aColumns[nPos] := oColumn
    ::lChanged := .T.
    InitColumn( Self, oColumn,nPos )
 
@@ -722,12 +722,12 @@ Local oldBkColor, oldTColor
    hwg_Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
    aMetr := hwg_GetTextMetric( hDC )
    
-   ::width := aMetr[ 2 ]
-   ::height := Max( aMetr[ 1 ], ::minHeight )
-   ::x1 := aCoors[ 1 ]
-   ::y1 := aCoors[ 2 ] + IIf(::lDispHead, ::height * ::nHeadRows, 0)
-   ::x2 := aCoors[ 3 ]
-   ::y2 := aCoors[ 4 ]
+   ::width := aMetr[2]
+   ::height := Max( aMetr[1], ::minHeight )
+   ::x1 := aCoors[1]
+   ::y1 := aCoors[2] + IIf(::lDispHead, ::height * ::nHeadRows, 0)
+   ::x2 := aCoors[3]
+   ::y2 := aCoors[4]
 
    ::nRecords := eval( ::bRcou,Self )
    IF ::nCurrent > ::nRecords .AND. ::nRecords > 0
@@ -1876,7 +1876,7 @@ FUNCTION HWG_CREATEARLIST( oBrw, arr )
             oBrw:AddColumn( HColumn():New( ,hwg_ColumnArBlock() ) )
          NEXT
       ELSE
-         oBrw:AddColumn( HColumn():New( ,{|value,o| o:aArray[ o:nCurrent ] } ) )
+         oBrw:AddColumn( HColumn():New( ,{|value,o| o:aArray[o:nCurrent] } ) )
       ENDIF
    ENDIF
    EVAL( oBrw:bGoTop,oBrw )

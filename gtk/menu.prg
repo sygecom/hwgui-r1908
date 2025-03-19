@@ -95,11 +95,11 @@ Local hSubMenu
       AAdd(aMenu[1], NIL)
       Ains( aMenu[1],nPos )
       IF lSubmenu
-         aMenu[ 1,nPos ] := { {},cItem,nMenuId,0,hSubMenu }
+         aMenu[1,nPos] := { {},cItem,nMenuId,0,hSubMenu }
       ELSE
-         aMenu[ 1,nPos ] := { bItem,cItem,nMenuId,0,hSubMenu }
+         aMenu[1,nPos] := { bItem,cItem,nMenuId,0,hSubMenu }
       ENDIF
-      Return aMenu[ 1,nPos ]
+      Return aMenu[1,nPos]
    ENDIF
 
 Return Nil
@@ -108,10 +108,10 @@ Function hwg_FindMenuItem( aMenu, nId, nPos )
 Local nPos1, aSubMenu
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
-      IF aMenu[ 1,npos,3 ] == nId
+      IF aMenu[1,npos,3] == nId
          Return aMenu
-      ELSEIF HB_IsArray( aMenu[ 1,npos,1 ] )
-         IF ( aSubMenu := hwg_FindMenuItem( aMenu[ 1,nPos ] , nId, @nPos1 ) ) != Nil
+      ELSEIF HB_IsArray( aMenu[1,npos,1] )
+         IF ( aSubMenu := hwg_FindMenuItem( aMenu[1,nPos] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
             Return aSubMenu
          ENDIF
@@ -138,7 +138,7 @@ Local hMenu, nPos, aMenu, i, oBmp
    ELSE
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])
-      aMenu := aMenuInit[ 1,nPosParent ]
+      aMenu := aMenuInit[1,nPosParent]
       hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, hWnd, aMenu[3],aMenu[4],.T. )
       IF Len(aMenu) < 5
          AAdd(aMenu, hMenu)
@@ -149,10 +149,10 @@ Local hMenu, nPos, aMenu, i, oBmp
 
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
-      IF HB_IsArray( aMenu[ 1,nPos,1 ] )
+      IF HB_IsArray( aMenu[1,nPos,1] )
          hwg_BuildMenu( aMenu,hWnd,,nPos )
       ELSE 
-         IF aMenu[ 1,nPos,1 ] == Nil .OR. aMenu[ 1,nPos,2 ] != Nil
+         IF aMenu[1,nPos,1] == Nil .OR. aMenu[1,nPos,2] != Nil
             IF Len(aMenu[1, npos]) == 4
                AAdd(aMenu[1, npos], NIL)
             ENDIF

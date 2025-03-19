@@ -93,14 +93,14 @@ Local cName, cType, nLen, nDec := 0
          ENDIF
       ENDIF
       IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty( oBrowse:aArray[1,1] ) )
-         oBrowse:aArray[ oBrowse:nCurrent ] := { cName, cType, nLen, nDec }
+         oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
       ELSEIF nOper == 1
          Aadd( oBrowse:aArray, { cName, cType, nLen, nDec } )
          oBrowse:nRecords ++
       ELSEIF nOper == 2
          Aadd( oBrowse:aArray, Nil )
          Ains( oBrowse:aArray, oBrowse:nCurrent )
-         oBrowse:aArray[ oBrowse:nCurrent ] := { cName, cType, nLen, nDec }
+         oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
          oBrowse:nRecords ++
       ENDIF
    ELSEIF nOper == 4
@@ -147,24 +147,24 @@ Local oPBar, nSch := 0
       C2   := ARRAY( kolf )
       AFIELDS( B1, B2, B3, B4 )
       FOR i := 1 TO kolf
-         j := ASCAN( A1, B1[ i ] )
+         j := ASCAN( A1, B1[i] )
          IF j > 0
-            C2[ i ] = j
-            IF B2[ i ] = A2[ j ] .AND. B3[ i ] = A3[ j ] .AND. B4[ i ] = A4[ j ]
-               IF C1[ i ] = Nil
-                  C1[ i ] := &( "{|param|param}" )
+            C2[i] = j
+            IF B2[i] = A2[j] .AND. B3[i] = A3[j] .AND. B4[i] = A4[j]
+               IF C1[i] = Nil
+                  C1[i] := &( "{|param|param}" )
                ENDIF
             ELSE
-               IF C1[ i ] = Nil
+               IF C1[i] = Nil
                   DO CASE
-                  CASE A2[ j ] = "C" .AND. B2[ i ] = "N"
-                     C1[ i ] := &( "{|param|VAL(param)}" )
-                  CASE A2[ j ] = "N" .AND. B2[ i ] = "C"
-                     C1[ i ] := &( "{|param|LTRIM(STR(param," + LTRIM( STR( A3[ j ], 2 ) ) + "," + LTRIM( STR( A4[ j ], 2 ) ) + "))}" )
-                  CASE A2[ j ] = "C" .AND. B2[ i ] = "C"
-                     C1[ i ] := &( "{|param|SUBSTR(param,1," + LTRIM( STR( A3[ j ], 4 ) ) + ")}" )
-                  CASE A2[ j ] = "N" .AND. B2[ i ] = "N"
-                     C1[ i ] := &( "{|param|param}" )
+                  CASE A2[j] = "C" .AND. B2[i] = "N"
+                     C1[i] := &( "{|param|VAL(param)}" )
+                  CASE A2[j] = "N" .AND. B2[i] = "C"
+                     C1[i] := &( "{|param|LTRIM(STR(param," + LTRIM( STR( A3[j], 2 ) ) + "," + LTRIM( STR( A4[j], 2 ) ) + "))}" )
+                  CASE A2[j] = "C" .AND. B2[i] = "C"
+                     C1[i] := &( "{|param|SUBSTR(param,1," + LTRIM( STR( A3[j], 4 ) ) + ")}" )
+                  CASE A2[j] = "N" .AND. B2[i] = "N"
+                     C1[i] := &( "{|param|param}" )
                   OTHERWISE
                      //           C1[i] := &("{|param|param}")
                   ENDCASE
@@ -179,8 +179,8 @@ Local oPBar, nSch := 0
          SELECT 20
          APPEND BLANK
          FOR i := 1 TO kolf
-            IF C1[ i ] <> Nil
-               FIELDPUT( i, EVAL( C1[ i ], (alsname)->( FIELDGET( C2[ i ] ) ) ) )
+            IF C1[i] <> Nil
+               FIELDPUT( i, EVAL( C1[i], (alsname)->( FIELDGET( C2[i] ) ) ) )
             ENDIF
          NEXT
          SELECT( improc )
@@ -192,7 +192,7 @@ Local oPBar, nSch := 0
       USE
       SELECT 20
       USE
-      fi1 := hwg_Cutexten( msfile[ improc ] )
+      fi1 := hwg_Cutexten( msfile[improc] )
       ERASE &(fi1+".bak")
       FRENAME( fi1 + ".dbf", fi1 + ".bak" )
       FRENAME( mypath + "a0_new.DBF", fi1 + ".dbf" )
@@ -206,7 +206,7 @@ Local oPBar, nSch := 0
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
-            oBrowse := aControls[ i ]
+            oBrowse := aControls[i]
             hwg_CreateList( oBrowse,.T. )
          ENDIF
       ENDIF

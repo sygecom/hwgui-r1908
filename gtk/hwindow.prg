@@ -390,19 +390,19 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-        Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+        Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
    ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-        .AND. aMenu[ 1,iCont,1 ] != Nil
-      Eval( aMenu[ 1,iCont,1 ] )
+        .AND. aMenu[1,iCont,1] != Nil
+      Eval( aMenu[1,iCont,1] )
    ELSEIF oWnd:oPopup != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-        .AND. aMenu[ 1,iCont,1 ] != Nil
-      Eval( aMenu[ 1,iCont,1 ] )
+        .AND. aMenu[1,iCont,1] != Nil
+      Eval( aMenu[1,iCont,1] )
    ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-        .AND. aMenu[ 1,iCont,1 ] != Nil
-      Eval( aMenu[ 1,iCont,1 ] )
+        .AND. aMenu[1,iCont,1] != Nil
+      Eval( aMenu[1,iCont,1] )
    ENDIF
 
 Return 0
@@ -487,7 +487,7 @@ Local iParHigh, iParLow, iItem
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+      Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
    ENDIF
 */
 Return 0

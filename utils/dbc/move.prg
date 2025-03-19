@@ -106,7 +106,7 @@ Local nrec, i, res, block
       block := &( "{||" + cLocate + "}" )
       IF oBrw:prflt
          FOR i := 1 TO Min( oBrw:nRecords,klrecf-1 )
-            GO oBrw:aArray[ i ]
+            GO oBrw:aArray[i]
             IF Eval( block )
                res := .T.
                EXIT
@@ -153,7 +153,7 @@ Local i, nrec
          oBrw:aArray := Array( klrecf )
       ENDIF
       DO WHILE .NOT. EOF()
-         oBrw:aArray[ i ] = RECNO()
+         oBrw:aArray[i] = RECNO()
          IF i < klrecf
             i ++
          ENDIF
@@ -166,7 +166,7 @@ Local i, nrec
       ENDDO
       oBrw:nCurrent := 1
       IF oBrw:nRecords > 0
-         GO oBrw:aArray[ 1 ]
+         GO oBrw:aArray[1]
          oBrw:prflt := .T.
          oBrw:bSkip := &( "{|o,x|" + oBrw:alias + "->(FSKIP(o,x))}" )
          oBrw:bGoTop:= &( "{|o|" + oBrw:alias + "->(FGOTOP(o))}" )
@@ -194,13 +194,13 @@ Return Nil
 FUNCTION FGOTOP( oBrw )
    IF oBrw:nRecords > 0
       oBrw:nCurrent := 1
-      GO oBrw:aArray[ 1 ]
+      GO oBrw:aArray[1]
    ENDIF
 RETURN Nil
 
 FUNCTION FGOBOT( oBrw )
    oBrw:nCurrent := oBrw:nRecords
-   GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[ oBrw:nRecords ], oBrw:aArray[ klrecf ] )
+   GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf] )
 RETURN Nil
 
 PROCEDURE FSKIP( oBrw, kolskip )
@@ -212,15 +212,15 @@ LOCAL tekzp1
    oBrw:nCurrent := oBrw:nCurrent + kolskip + IIF( tekzp1 = 0, 1, 0 )
    IF oBrw:nCurrent < 1
       oBrw:nCurrent := 0
-      GO oBrw:aArray[ 1 ]
+      GO oBrw:aArray[1]
    ELSEIF oBrw:nCurrent > oBrw:nRecords
       oBrw:nCurrent := oBrw:nRecords + 1
-      GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[ oBrw:nRecords ], oBrw:aArray[ klrecf ] )
+      GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf] )
    ELSE
       IF oBrw:nCurrent > klrecf - 1
          SKIP IIF( tekzp1 = oBrw:nRecords + 1, kolskip + 1, kolskip )
       ELSE
-         GO oBrw:aArray[ oBrw:nCurrent ]
+         GO oBrw:aArray[oBrw:nCurrent]
       ENDIF
    ENDIF
 RETURN

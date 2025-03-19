@@ -252,7 +252,7 @@ Local oWnd, oBtn, oitem
       // MsgStop( "Message: wrong window handle "+Str( hWnd )+"/"+Str( msg ),"Error!" )
       if msg == WM_CREATE
          if Len( HWindow():aWindows ) != 0 .and. ;
-              ( oWnd := HWindow():aWindows[ Len(HWindow():aWindows) ] ) != Nil .and. ;
+              ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != Nil .and. ;
               oWnd:handle == 0
             oWnd:handle := hWnd
             if oWnd:bInit != Nil
@@ -284,19 +284,19 @@ Local oWnd, oBtn, oitem
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-           Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+           Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-           .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+           .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-           .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+           .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-           .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+           .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ENDIF
       return 0
    elseif msg == WM_PAINT
@@ -421,8 +421,8 @@ Local oWnd, oBtn, oitem
       if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) <> 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
          if HB_IsArray( oWnd:menu )
             if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
-               if aMenu[ 1,iCont,2 ][2] != Nil
-                  hwg_WriteStatus( oWnd, 1, aMenu[ 1,iCont,2 ][2] ) // show message on StatusBar
+               if aMenu[1,iCont,2][2] != Nil
+                  hwg_WriteStatus( oWnd, 1, aMenu[1,iCont,2][2] ) // show message on StatusBar
                else
                   hwg_WriteStatus( oWnd, 1, "" ) // clear message
                endif
@@ -452,7 +452,7 @@ Local oWnd, oBtn, oitem
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
       if msg == WM_CREATE
          if Len( HWindow():aWindows ) != 0 .and. ;
-               ( oWnd := HWindow():aWindows[ Len(HWindow():aWindows) ] ) != Nil .and. ;
+               ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != Nil .and. ;
             oWnd:handle == 0
             oWnd:handle := hWnd
             if oWnd:bInit != Nil
@@ -485,19 +485,19 @@ Local oWnd, oBtn, oitem
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+         Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-             .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+             .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-             .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+             .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-             .AND. aMenu[ 1,iCont,1 ] != Nil
-         Eval( aMenu[ 1,iCont,1 ] )
+             .AND. aMenu[1,iCont,1] != Nil
+         Eval( aMenu[1,iCont,1] )
       ENDIF
       return 1
    elseif msg == WM_PAINT
@@ -683,7 +683,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
             ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[ iItem,3 ] )
+         Eval( oWnd:aEvents[iItem,3] )
       ENDIF
       nReturn := 1
       Return (nReturn)
@@ -927,23 +927,23 @@ Local oWndClient
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[ iItem,3 ],oWnd,iParLow )
+         Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-         .AND. aMenu[ 1,iCont,1 ] != Nil
+         .AND. aMenu[1,iCont,1] != Nil
 
-         Eval( aMenu[ 1,iCont,1 ] )
+         Eval( aMenu[1,iCont,1] )
 
       ELSEIF oWnd:oPopup != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-         .AND. aMenu[ 1,iCont,1 ] != Nil
+         .AND. aMenu[1,iCont,1] != Nil
 
-         Eval( aMenu[ 1,iCont,1 ] )
+         Eval( aMenu[1,iCont,1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-         .AND. aMenu[ 1,iCont,1 ] != Nil
+         .AND. aMenu[1,iCont,1] != Nil
 
-         Eval( aMenu[ 1,iCont,1 ] )
+         Eval( aMenu[1,iCont,1] )
       ENDIF
       return 1
    elseif msg == WM_PAINT

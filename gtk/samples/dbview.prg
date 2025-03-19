@@ -501,7 +501,7 @@ Local cName, cType, nLen, nDec
       ENDIF
    ELSE
       cName := oGet1:SetGet()
-      cType := aFieldTypes[ Eval(oGet2:bSetGet,,oGet2) ]
+      cType := aFieldTypes[Eval(oGet2:bSetGet,,oGet2)]
       nLen  := Val( oGet3:SetGet() )
       nDec  := Val( oGet4:SetGet() )
       IF nOperation == 1

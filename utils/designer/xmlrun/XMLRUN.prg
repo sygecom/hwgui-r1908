@@ -355,7 +355,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
          @ maxrow()-2, 00 clear
          @ maxrow()-1, 00 say ;
          padc([Trying to open database. Will keep trying for ] ;
-         + LTrim(Str(nSeconds, 4, 1))+[ seconds], 80)
+         + LTrim(Str(nSeconds, 4, 1))+[seconds], 80)
          @ maxrow(), 00 say padc([Hit Esc to abort], 80)
 	 */
 
@@ -464,7 +464,7 @@ function addrec(nSeconds)
       @ maxrow()-2, 00 clear
       @ maxrow()-1, 00 say ;
       padc([Trying to add a record. Will keep trying for ] ;
-      + LTrim(Str(nSeconds, 4, 1))+[ seconds], 80)
+      + LTrim(Str(nSeconds, 4, 1))+[seconds], 80)
       @ maxrow(), 00 say padc([Hit Esc to abort], 80)
       */
 

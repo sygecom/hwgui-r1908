@@ -397,7 +397,7 @@ STATIC FUNCTION EditColors()
    LOCAL oBtn2
    LOCAL cText := "// The code sample" + Chr(10) + ;
                "do while ++nItem < 120"+ Chr(10) + ;
-               "  if aItems[ nItem ] == 'scheme'"+ Chr(10) + ;
+               "  if aItems[nItem] == 'scheme'"+ Chr(10) + ;
                "    nFactor := 22.5"+ Chr(10) + ;
                "  endif"
 

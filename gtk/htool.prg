@@ -82,36 +82,36 @@ Local aItem
       ::Super:Init()
       For n := 1 TO len(::aItem)
 
-//         IF HB_IsBlock( ::aItem[ n, 7 ] )
+//         IF HB_IsBlock( ::aItem[n, 7] )
 //
-//            ::oParent:AddEvent( BN_CLICKED, ::aItem[ n, 2 ], ::aItem[ n ,7 ] )
+//            ::oParent:AddEvent( BN_CLICKED, ::aItem[n, 2], ::aItem[n ,7] )
 //
 //         ENDIF
 
-//         IF HB_IsArray( ::aItem[ n, 9 ] )
+//         IF HB_IsArray( ::aItem[n, 9] )
 //
-//            ::aItem[ n, 10 ] := hwg__CreatePopupMenu()
-//            aTemp := ::aItem[ n, 9 ]
+//            ::aItem[n, 10] := hwg__CreatePopupMenu()
+//            aTemp := ::aItem[n, 9]
 //
 //            FOR n1 :=1 to Len(aTemp)
-//               hwg__AddMenuItem( ::aItem[ n, 10 ], aTemp[ n1, 1 ], -1, .F., aTemp[ n1, 2 ], , .F. )
-//               ::oParent:AddEvent( BN_CLICKED, aTemp[ n1, 2 ], aTemp[ n1,3 ] )
+//               hwg__AddMenuItem( ::aItem[n, 10], aTemp[n1, 1], -1, .F., aTemp[n1, 2], , .F. )
+//               ::oParent:AddEvent( BN_CLICKED, aTemp[n1, 2], aTemp[n1,3] )
 //            NEXT
 //
 //         ENDIF
-         if HB_IsNumeric( ::aItem[ n, 1 ] )
+         if HB_IsNumeric( ::aItem[n, 1] )
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
-         elseif  HB_IsChar( ::aItem[ n, 1 ] )
-            if ".ico" $ lower(::aItem[ n, 1 ]) //if ".ico" in lower(::aItem[ n, 1 ])
-               oImage:=hIcon():AddFile( ::aItem[ n, 1 ] )
+         elseif  HB_IsChar( ::aItem[n, 1] )
+            if ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
+               oImage:=hIcon():AddFile( ::aItem[n, 1] )
             else
-               oImage:=hBitmap():AddFile( ::aItem[ n, 1 ] )
+               oImage:=hBitmap():AddFile( ::aItem[n, 1] )
             endif
             if HB_IsObject(oImage)
                AAdd(aButton, Oimage:handle)
-               ::aItem[ n, 1 ] := Oimage:handle
+               ::aItem[n, 1] := Oimage:handle
             endif
          ENDIF
 
@@ -121,12 +121,12 @@ Local aItem
 
           aBmpSize := hwg_GetBitmapSize( aButton[1] )
 
-          IF aBmpSize[ 3 ] == 4
-             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR4 + ILC_MASK )
-          ELSEIF aBmpSize[ 3 ] == 8
-             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR8 + ILC_MASK )
-          ELSEIF aBmpSize[ 3 ] == 24
-             hIm := hwg_CreateImageList( {} ,aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLORDDB + ILC_MASK )
+          IF aBmpSize[3] == 4
+             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK )
+          ELSEIF aBmpSize[3] == 8
+             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK )
+          ELSEIF aBmpSize[3] == 24
+             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK )
           ENDIF
 
           FOR nPos :=1 to Len(aButton)
@@ -135,9 +135,9 @@ Local aItem
 
              IF aBmpSize[3] == 24
 //             hwg_Imagelist_AddMasked( hIm,aButton[nPos],hwg_RGB(236,223,216) )
-                hwg_Imagelist_Add( hIm, aButton[ nPos ] )
+                hwg_Imagelist_Add( hIm, aButton[nPos] )
              ELSE
-                hwg_Imagelist_Add( hIm, aButton[ nPos ] )
+                hwg_Imagelist_Add( hIm, aButton[nPos] )
              ENDIF
 
           NEXT
@@ -180,19 +180,19 @@ METHOD Notify( lParam ) CLASS hToolBar
 
        nButton := hwg_ToolBar_GetDispInfoId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nButton})
-       hwg_ToolBar_SetDispInfo( lParam, ::aItem[ nPos, 8 ] )
+       hwg_ToolBar_SetDispInfo( lParam, ::aItem[nPos, 8] )
 
     ELSEIF nCode == TBN_GETINFOTIP
 
        nId := hwg_ToolBar_GetInfoTipId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nId})
-       hwg_ToolBar_GetInfoTip( lParam, ::aItem[ nPos, 8 ] )
+       hwg_ToolBar_GetInfoTip( lParam, ::aItem[nPos, 8] )
 
     ELSEIF nCode == TBN_DROPDOWN
        if HB_IsArray(::aItem[1,9])
        nid := hwg_ToolBar_SubMenuExGetId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nId})
-       hwg_ToolBar_SubMenuEx( lParam, ::aItem[ nPos, 10 ], ::oParent:handle )
+       hwg_ToolBar_SubMenuEx( lParam, ::aItem[nPos, 10], ::oParent:handle )
        else
               hwg_ToolBar_SubMenu(lParam,1,::oParent:handle)
        endif
@@ -232,14 +232,14 @@ return nil
 METHOD EnableAllButtons() class htoolbar
    Local xItem
    For Each xItem in ::aItem
-      hwg_EnableWindow( xItem[ 11 ], .T. )
+      hwg_EnableWindow( xItem[11], .T. )
    Next
 RETURN Self
 
 METHOD DisableAllButtons() class htoolbar
    Local xItem
    For Each xItem in ::aItem
-      hwg_EnableWindow( xItem[ 11 ], .F. )
+      hwg_EnableWindow( xItem[11], .F. )
    Next
 RETURN Self
 
