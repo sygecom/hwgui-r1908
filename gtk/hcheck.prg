@@ -45,10 +45,10 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
    ::bLostFocus := bClick
    ::bGetFocus  := bGFocus
 
-   hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP,0,0 )
+   hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
    // ::oParent:AddEvent( BN_CLICKED,::id,{|o,id|__Valid(o:FindControl(id))} )
    IF bGFocus != Nil
-      hwg_SetSignal( ::handle,"enter",BN_SETFOCUS,0,0 )
+      hwg_SetSignal( ::handle,"enter",BN_SETFOCUS, 0, 0 )
       // ::oParent:AddEvent( BN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
    ENDIF
 
@@ -132,7 +132,7 @@ Local res
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
       IF HB_IsLogical(res) .AND. !res
-         hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
+         hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
       Return res
    ENDIF

@@ -301,7 +301,7 @@ METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint ) CLASS HStatu
 
    bSize := IIf(bSize != NIL, bSize, {|o, x, y|hwg_MoveWindow(o:handle, 0, y - 20, x, y)})
    nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE+WS_OVERLAPPED+WS_CLIPSIBLINGS )
-   ::Super:New( oWndParent,nId,nStyle,0,0,0,0,oFont,bInit,bSize,bPaint )
+   ::Super:New( oWndParent,nId,nStyle, 0, 0, 0, 0,oFont,bInit,bSize,bPaint )
 
    ::aParts  := aParts
    ::Activate()
@@ -397,7 +397,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    IF bClick != Nil
       // ::oParent:AddEvent( 0,::id,bClick )
       ::bClick := bClick
-      hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP,0,0 )
+      hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
    ENDIF
 
 Return Self

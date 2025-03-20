@@ -77,20 +77,20 @@ Local i, j, nLen
       nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 1 TO nLen
-            ::xmax := Max( ::xmax,::aValues[i,j,1] )
-            ::xmin := Min( ::xmin,::aValues[i,j,1] )
-            ::ymax := Max( ::ymax,::aValues[i,j,2] )
-            ::ymin := Min( ::ymin,::aValues[i,j,2] )
+            ::xmax := Max( ::xmax,::aValues[i,j, 1] )
+            ::xmin := Min( ::xmin,::aValues[i,j, 1] )
+            ::ymax := Max( ::ymax,::aValues[i,j, 2] )
+            ::ymin := Min( ::ymin,::aValues[i,j, 2] )
          NEXT
       ELSEIF ::nType == 2
          FOR j := 1 TO nLen
-            ::ymax := Max( ::ymax,::aValues[i,j,2]   )
-            ::ymin := Min( ::ymin,::aValues[i,j,2]   )
+            ::ymax := Max( ::ymax,::aValues[i,j, 2]   )
+            ::ymin := Min( ::ymin,::aValues[i,j, 2]   )
          NEXT
          ::xmax := nLen
       ELSEIF ::nType == 3
          FOR j := 1 TO nLen
-            ::ymax += ::aValues[i,j,2]
+            ::ymax += ::aValues[i,j, 2]
          NEXT
       ENDIF
    NEXT
@@ -108,10 +108,10 @@ Local px1, px2, py1, py2, nWidth
    IF ::xmax == Nil
       ::CalcMinMax()
    ENDIF
-   i := Round( (x2-x1)/10,0 )
+   i := Round( (x2-x1)/10, 0 )
    x1 += i
    x2 -= i
-   i := Round( (y2-y1)/10,0 )
+   i := Round( (y2-y1)/10, 0 )
    y1 += i
    y2 -= i
 
@@ -121,10 +121,10 @@ Local px1, px2, py1, py2, nWidth
    ENDIF
 
    IF ::oPenCoor == Nil
-      ::oPenCoor := HPen():Add( PS_SOLID,1,::colorCoor )
+      ::oPenCoor := HPen():Add( PS_SOLID, 1,::colorCoor )
    ENDIF
    IF ::oPen == Nil
-      ::oPen := HPen():Add( PS_SOLID,2,::tcolor )
+      ::oPen := HPen():Add( PS_SOLID, 2,::tcolor )
    ENDIF
 
    hwg_FillRect( hDC, 0, 0, ::nWidth, ::nHeight, ::brush:handle )
@@ -142,10 +142,10 @@ Local px1, px2, py1, py2, nWidth
       nLen := Len(::aValues[i])
       IF ::nType == 1  
          FOR j := 2 TO nLen
-            px1 := Round(x1+(::aValues[i,j-1,1]-::xmin)/::scaleX,0)
-            py1 := Round(y2-(::aValues[i,j-1,2]-::ymin)/::scaleY,0)
-            px2 := Round(x1+(::aValues[i,j,1]-::xmin)/::scaleX,0)
-            py2 := Round(y2-(::aValues[i,j,2]-::ymin)/::scaleY,0)
+            px1 := Round(x1+(::aValues[i,j-1, 1]-::xmin)/::scaleX, 0)
+            py1 := Round(y2-(::aValues[i,j-1, 2]-::ymin)/::scaleY, 0)
+            px2 := Round(x1+(::aValues[i,j, 1]-::xmin)/::scaleX, 0)
+            py2 := Round(y2-(::aValues[i,j, 2]-::ymin)/::scaleY, 0)
             IF px2 != px1 .OR. py2 != py1
                hwg_Drawline( hDC, px1, py1, px2, py2 )
             ENDIF   
@@ -154,22 +154,22 @@ Local px1, px2, py1, py2, nWidth
          IF ::tbrush == Nil
             ::tbrush := HBrush():Add( ::tcolor )
          ENDIF
-         nWidth := Round( (x2-x1) / (nLen*2+1),0 )
+         nWidth := Round( (x2-x1) / (nLen*2+1), 0 )
          FOR j := 1 TO nLen
-            px1 := Round( x1+nWidth*(j*2-1),0 )
-            py1 := Round( y2-(::aValues[i,j,2]-::ymin)/::scaleY,0 )
+            px1 := Round( x1+nWidth*(j*2-1), 0 )
+            py1 := Round( y2-(::aValues[i,j, 2]-::ymin)/::scaleY, 0 )
             hwg_FillRect( hDC, px1, py1, px1+nWidth, y2-2, ::tbrush:handle )
          NEXT
       ELSEIF ::nType == 3
-         hwg_DrawButton( hDC,5,5,80,30,5 )
-         hwg_DrawButton( hDC,5,35,80,55,6 )
+         hwg_DrawButton( hDC, 5, 5, 80, 30, 5 )
+         hwg_DrawButton( hDC, 5, 35, 80, 55, 6 )
          /*
          IF ::tbrush == Nil
             ::tbrush := HBrush():Add( ::tcolor )
          ENDIF
          hwg_SelectObject( hDC, ::oPenCoor:handle )
          hwg_SelectObject( hDC, ::tbrush:handle )
-         hwg_pie( hDC, x1+10,y1+10,x2-10,y2-10, x1,round(y1+(y2-y1)/2,0),round(x1+(x2-x1)/2,0),y1 )
+         hwg_pie( hDC, x1+10,y1+10,x2-10,y2-10, x1,round(y1+(y2-y1)/2, 0),round(x1+(x2-x1)/2, 0),y1 )
 	 */
       ENDIF
    NEXT

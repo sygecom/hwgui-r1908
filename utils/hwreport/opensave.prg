@@ -74,11 +74,11 @@ Local res := .T.
       IF lOpen
          IF ( res := OpenFile( fname,@repName ) )
             aPaintRep[FORM_Y] := 0
-            hwg_EnableMenuItem( ,1, .T., .F. )
+            hwg_EnableMenuItem( , 1, .T., .F. )
             hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
             aPaintRep := Nil
-            hwg_EnableMenuItem( ,1, .F., .F. )
+            hwg_EnableMenuItem( , 1, .F., .F. )
          ENDIF
       ELSE
          res := SaveRFile( fname,repName )
@@ -111,7 +111,7 @@ Local i, aItem
       aPaintRep := Nil
       hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
       hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
-      hwg_EnableMenuItem( ,1, .F., .F. )
+      hwg_EnableMenuItem( , 1, .F., .F. )
    ENDIF
 Return .T.
 
@@ -137,38 +137,38 @@ Local i, itemName, aItem, res := .T., sFont
 Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
    IF han <> - 1
       DO WHILE .T.
-         stroka := hwg_RDSTR( han,@strbuf,@poz,512 )
+         stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
          IF LEN( stroka ) = 0
             EXIT
          ENDIF
-         IF Left( stroka,1 ) == ";"
+         IF Left( stroka, 1 ) == ";"
             LOOP
          ENDIF
          IF nMode == 0
             IF lPrg
-               IF Upper( Left( stroka,8 ) ) == "FUNCTION" .AND. ;
-                   Upper( Ltrim( Substr( stroka,10 ) ) ) == Upper( repname )
+               IF Upper( Left( stroka, 8 ) ) == "FUNCTION" .AND. ;
+                   Upper( Ltrim( Substr( stroka, 10 ) ) ) == Upper( repname )
                   nMode := 10
                ENDIF
             ELSE
-               IF Left( stroka,1 ) == "#"
-                  IF Upper( Substr( stroka,2,6 ) ) == "REPORT"
-                     stroka := Ltrim( Substr( stroka,9 ) )
+               IF Left( stroka, 1 ) == "#"
+                  IF Upper( Substr( stroka, 2, 6 ) ) == "REPORT"
+                     stroka := Ltrim( Substr( stroka, 9 ) )
                      IF Empty( repName ) .OR. Upper( stroka ) == Upper( repName )
                         IF Empty( repName )
                            repName := stroka
                         ENDIF
                         nMode := 1
-                        aPaintRep := { 0,0,0,0,0,{},fname,repName,.F.,0,Nil }
+                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName,.F., 0,Nil }
                      ENDIF
                   ENDIF
                ENDIF
             ENDIF
          ELSEIF nMode == 1
-            IF Left( stroka,1 ) == "#"
-               IF Upper( Substr( stroka,2,6 ) ) == "ENDREP"
+            IF Left( stroka, 1 ) == "#"
+               IF Upper( Substr( stroka, 2, 6 ) ) == "ENDREP"
                   Exit
-               ELSEIF Upper( Substr( stroka,2,6 ) ) == "SCRIPT"
+               ELSEIF Upper( Substr( stroka, 2, 6 ) ) == "SCRIPT"
                   nMode := 2
                   IF aItem != Nil
                      aItem[ITEM_SCRIPT] := ""
@@ -185,7 +185,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   Aadd( aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),Nil,hwg_NextItem(stroka), ;
-                           Val(hwg_NextItem(stroka)),0,Nil,0 } )
+                           Val(hwg_NextItem(stroka)), 0,Nil, 0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_FONT] := HFont():Add( hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
@@ -201,10 +201,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
-                  Aadd( aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE",2,Iif(itemName=="VLINE",3,4)), ;
+                  Aadd( aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE", 2,Iif(itemName=="VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)),0,hwg_NextItem(stroka),Nil,0,0,Nil,0 } )
+                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),Nil, 0, 0,Nil, 0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_PEN] := HPen():Add( Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
                           Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )) )
@@ -220,7 +220,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   Aadd( aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)),0,Nil,Nil,0,0,Nil,0 } )
+                           Val(hwg_NextItem(stroka)), 0,Nil,Nil, 0, 0,Nil, 0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_BITMAP] := HBitmap():AddFile( aItem[ITEM_CAPTION] )
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
@@ -235,12 +235,12 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   Aadd( aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Nil,Nil,0,0,Nil,0 } )
+                           Nil,Nil, 0, 0,Nil, 0 } )
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                ENDIF
             ENDIF
          ELSEIF nMode == 2
-            IF Left( stroka,1 ) == "#" .AND. Upper( Substr( stroka,2,6 ) ) == "ENDSCR"
+            IF Left( stroka, 1 ) == "#" .AND. Upper( Substr( stroka, 2, 6 ) ) == "ENDSCR"
                nMode := 1
             ELSE
                IF aItem != Nil
@@ -250,7 +250,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                ENDIF
             ENDIF
          ELSEIF nMode == 10
-            IF UPPER( Left( stroka,15 ) ) == "LOCAL APAINTREP"
+            IF UPPER( Left( stroka, 15 ) ) == "LOCAL APAINTREP"
                nMode := 11
             ELSE
                MsgStop( "Wrong function "+repname )
@@ -258,10 +258,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                Return .F.
             ENDIF
          ELSEIF nMode == 11
-            IF UPPER( Left( stroka,6 ) ) == "RETURN"
+            IF UPPER( Left( stroka, 6 ) ) == "RETURN"
                Exit
             ELSE
-               IF Right( stroka,1 ) == ";"
+               IF Right( stroka, 1 ) == ";"
                   cSource += Ltrim( Rtrim( Left( stroka,Len(stroka)-1 ) ) )
                ELSE
                   cSource += Ltrim( Rtrim( stroka ) )
@@ -293,8 +293,8 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
          hwg_RecalcForm( aPaintRep,nFormWidth )
       ENDIF
 
-      hwg_WriteStatus( Hwindow():GetMain(),2,Ltrim(Str(aPaintRep[FORM_WIDTH],4))+"x"+ ;
-                 Ltrim(Str(aPaintRep[FORM_HEIGHT],4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
+      hwg_WriteStatus( Hwindow():GetMain(), 2,Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
+                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
    ENDIF
 Return res
 
@@ -309,25 +309,25 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
          hanOut := FCREATE( mypath+"__rpt.tmp" )
          IF hanOut <> - 1
             DO WHILE .T.
-               stroka := hwg_RDSTR( han,@strbuf,@poz,512 )
+               stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
                IF LEN( stroka ) = 0
                   EXIT
                ENDIF
                IF nMode == 0
-                  IF ( lPrg .AND. Upper( Left( stroka,8 ) ) == "FUNCTION" ) ;
-                        .OR. ( !lPrg .AND. Left( stroka,1 ) == "#" .AND. ;
-                           Upper( Substr( stroka,2,6 ) ) == "REPORT" )
-                     IF Upper( Ltrim( Substr( stroka,9 ) ) ) == Upper( repName )
+                  IF ( lPrg .AND. Upper( Left( stroka, 8 ) ) == "FUNCTION" ) ;
+                        .OR. ( !lPrg .AND. Left( stroka, 1 ) == "#" .AND. ;
+                           Upper( Substr( stroka, 2, 6 ) ) == "REPORT" )
+                     IF Upper( Ltrim( Substr( stroka, 9 ) ) ) == Upper( repName )
                         nMode := 1
                         isOut := .T.
                         LOOP
                      ENDIF
                   ENDIF
-                  Fwrite( hanOut,stroka+Iif(Asc(Right(stroka,1))<20,"",Chr(10)) )
+                  Fwrite( hanOut,stroka+Iif(Asc(Right(stroka, 1))<20,"",Chr(10)) )
                ELSEIF nMode == 1
-                  IF ( lPrg .AND. Left( stroka,6 ) == "RETURN" ) ;
-                      .OR. ( !lPrg .AND. Left( stroka,1 ) == "#" .AND. ;
-                       Upper( Substr( stroka,2,6 ) ) == "ENDREP" )
+                  IF ( lPrg .AND. Left( stroka, 6 ) == "RETURN" ) ;
+                      .OR. ( !lPrg .AND. Left( stroka, 1 ) == "#" .AND. ;
+                       Upper( Substr( stroka, 2, 6 ) ) == "ENDREP" )
                      nMode := 0
                      IF lPrg
                         WriteToPrg( hanOut, repName )
@@ -346,7 +346,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                   res := .T.
                ENDIF
             ELSE
-               Fseek( han,0,FS_END )
+               Fseek( han, 0, FS_END )
                Fwrite( han, Chr(10 ) )
                IF lPrg
                   WriteToPrg( han, repName )
@@ -398,31 +398,31 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          oFont := aItem[ITEM_FONT]
          Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1],4)) + ";" + Ltrim(Str(aItem[ITEM_Y1],4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) +;
-             ";" + Str(aItem[ITEM_ALIGN],1) + ";" + oFont:name ;
+             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) +;
+             ";" + Str(aItem[ITEM_ALIGN], 1) + ";" + oFont:name ;
              + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)) ;
              + "," + Ltrim(Str(oFont:weight)) + "," + Ltrim(Str(oFont:charset)) ;
              + "," + Ltrim(Str(oFont:italic)) + "," + Ltrim(Str(oFont:underline)) ;
-             + "," + Ltrim(Str(oFont:strikeout)) + ";" + Str(aItem[ITEM_VAR],1) + Chr(10) )
+             + "," + Ltrim(Str(oFont:strikeout)) + ";" + Str(aItem[ITEM_VAR], 1) + Chr(10) )
          WriteScript( han,aItem[ITEM_SCRIPT] )
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE .OR. aItem[ITEM_TYPE] == TYPE_VLINE .OR. aItem[ITEM_TYPE] == TYPE_BOX
          oPen := aItem[ITEM_PEN]
          Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1],4)) + ";" + Ltrim(Str(aItem[ITEM_Y1],4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) + ;
+             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
              ";" + Ltrim(Str(oPen:style)) + "," + Ltrim(Str(oPen:width)) + "," + Ltrim(Str(oPen:color)) ;
              + Chr(10) )
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1],4)) + ";" + Ltrim(Str(aItem[ITEM_Y1],4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) + ;
+             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
              + Chr(10) )
       ELSEIF aItem[ITEM_TYPE] == TYPE_MARKER
          Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1],4)) + ";" + Ltrim(Str(aItem[ITEM_Y1],4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH],4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT],4)) + ;
-             ";" + Str(aItem[ITEM_ALIGN],1) + Chr( 10 ) )
+             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
+             ";" + Str(aItem[ITEM_ALIGN], 1) + Chr( 10 ) )
          WriteScript( han,aItem[ITEM_SCRIPT] )
       ENDIF
    NEXT
@@ -440,7 +440,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
          "LOCAL aPaintRep" + Chr(10) )
    Fwrite( han, "   cEnd:=Chr(13)+Chr(10)" + Chr(10) )
    Fwrite( han, "   aPaintRep := { "+Ltrim(Str(aPaintRep[FORM_WIDTH]))+","+ ;
-         Ltrim(Str(aPaintRep[FORM_HEIGHT]))+',0,0,0,{},,"'+repName+'",.F.,0,Nil }'+Chr(10) )
+         Ltrim(Str(aPaintRep[FORM_HEIGHT]))+', 0, 0, 0,{},,"'+repName+'",.F., 0,Nil }'+Chr(10) )
    IF aPaintRep[FORM_VARS] != Nil .AND. !Empty( aPaintRep[FORM_VARS] )
       Fwrite( han, "   aPaintRep[11] := ;"+Chr(10) )
       WriteScript( han,aPaintRep[FORM_VARS],.T. )
@@ -449,16 +449,16 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
    FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
       aItem := aPaintRep[FORM_ITEMS,i]
 
-      cItem := Ltrim(Str(aItem[ITEM_TYPE],1)) + ","
+      cItem := Ltrim(Str(aItem[ITEM_TYPE], 1)) + ","
       IF aItem[ITEM_TYPE]==TYPE_TEXT.OR.aItem[ITEM_TYPE]==TYPE_BITMAP ;
               .OR.aItem[ITEM_TYPE]==TYPE_MARKER
          cQuote := Iif(!( '"' $ aItem[ITEM_CAPTION]),'"', ;
                      Iif(!( "'" $ aItem[ITEM_CAPTION]),"'","["))
          cItem += cQuote + aItem[ITEM_CAPTION] + cQuote
       ENDIF
-      cItem += ","+Ltrim(Str(aItem[ITEM_X1],4)) + "," + Ltrim(Str(aItem[ITEM_Y1],4)) + "," + ;
-               Ltrim(Str(aItem[ITEM_WIDTH],4)) + "," + Ltrim(Str(aItem[ITEM_HEIGHT],4)) + ;
-               "," + Str(aItem[ITEM_ALIGN],1)
+      cItem += ","+Ltrim(Str(aItem[ITEM_X1], 4)) + "," + Ltrim(Str(aItem[ITEM_Y1], 4)) + "," + ;
+               Ltrim(Str(aItem[ITEM_WIDTH], 4)) + "," + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
+               "," + Str(aItem[ITEM_ALIGN], 1)
       IF aItem[ITEM_TYPE] == TYPE_HLINE .OR. aItem[ITEM_TYPE] == TYPE_VLINE ;
               .OR. aItem[ITEM_TYPE] == TYPE_BOX
          oPen := aItem[ITEM_PEN]
@@ -473,7 +473,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
              + '",' + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)) ;
              + "," + Ltrim(Str(oFont:weight)) + "," + Ltrim(Str(oFont:charset)) ;
              + "," + Ltrim(Str(oFont:italic)) + "," + Ltrim(Str(oFont:underline)) ;
-             + "," + Ltrim(Str(oFont:strikeout)) + " )," + Str(aItem[ITEM_VAR],1)
+             + "," + Ltrim(Str(oFont:strikeout)) + " )," + Str(aItem[ITEM_VAR], 1)
       ELSE
          cItem += ",0,0"
       ENDIF
@@ -506,7 +506,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
             ENDIF
             EXIT
          ENDIF
-         IF Left( stroka,1 ) != Chr(10)
+         IF Left( stroka, 1 ) != Chr(10)
             IF lPrg
                cQuote := Iif(!( '"' $ stroka),'"', ;
                            Iif(!( "'" $ stroka),"'","["))
@@ -515,7 +515,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
                lFirst := .F.
             ELSE
                Fwrite( han,Iif( Asc(lastC)<20,"",Chr(10) )+stroka )
-               lastC := Right( stroka,1 )
+               lastC := Right( stroka, 1 )
             ENDIF
          ENDIF
       ENDDO

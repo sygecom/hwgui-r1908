@@ -114,7 +114,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
          oFont := ::oPrinter:AddFont( cFont, ::nStdHeight * ::oPrinter:nVRes )
 #endif
          ::oPrinter:SetFont( oFont )
-         nWidth := ::oPrinter:GetTextWidth( Replicate( 'A',80 ) ) / ::oPrinter:nHRes
+         nWidth := ::oPrinter:GetTextWidth( Replicate( 'A', 80 ) ) / ::oPrinter:nHRes
          IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
             ::nStdHeight := ::nStdHeight * ( nPWidth / nWidth )
          ENDIF
@@ -202,7 +202,7 @@ Local i, i0, j, slen, c
       i := 1
       i0 := 0
       DO WHILE i <= slen
-         IF ( c := Substr( cLine,i,1 ) ) < " "
+         IF ( c := Substr( cLine,i, 1 ) ) < " "
             IF i0 != 0
                ::PrintText( Substr(cLine,i0,i-i0 ) )
                i0 := 0
@@ -216,7 +216,7 @@ Local i, i0, j, slen, c
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
                i0 := i
-               DO WHILE i <= slen .AND. Substr( cLine,i,1 ) == c
+               DO WHILE i <= slen .AND. Substr( cLine,i, 1 ) == c
                   i ++
                ENDDO
                ::oPrinter:Line( ::x, ::y+(::nLineHeight/2), ::x + (i-i0)*::nCharW, ::y+(::nLineHeight/2) )
@@ -283,12 +283,12 @@ Return Nil
 
 METHOD PutCode( cLine ) CLASS HWinPrn
 Static aCodes := {   ;
-   { Chr(27)+'@',.f.,.f.,6,.f.,.f.,.f. },  ;     /* Reset */
+   { Chr(27)+'@',.f.,.f., 6,.f.,.f.,.f. },  ;     /* Reset */
    { Chr(27)+'M',.t.,,,,, },  ;     /* Elite */
    { Chr(15),,.t.,,,, },      ;     /* Cond */
    { Chr(18),,.f.,,,, },      ;     /* Cancel Cond */
-   { Chr(27)+'0',,,8,,, },    ;     /* 8 lines per inch */
-   { Chr(27)+'2',,,6,,, },    ;     /* 6 lines per inch ( standard ) */
+   { Chr(27)+'0',,, 8,,, },    ;     /* 8 lines per inch */
+   { Chr(27)+'2',,, 6,,, },    ;     /* 6 lines per inch ( standard ) */
    { Chr(27)+'-1',,,,,,.t. }, ;     /* underline */
    { Chr(27)+'-0',,,,,,.f. }, ;     /* cancel underline */
    { Chr(27)+'4',,,,,.t., },  ;     /* italic */
@@ -296,12 +296,12 @@ Static aCodes := {   ;
    { Chr(27)+'G',,,,.t.,,},   ;     /* bold */
    { Chr(27)+'H',,,,.f.,, }   ;     /* cancel bold */
  }
-Local i, sLen := Len(aCodes), c := Left( cLine,1 )
+Local i, sLen := Len(aCodes), c := Left( cLine, 1 )
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen
-         IF Left(aCodes[i,1],1) == c .AND. At( aCodes[i,1],Left(cLine,3 ) ) == 1
-            ::InitValues( aCodes[i,2], aCodes[i,3], aCodes[i,4], aCodes[i,5], aCodes[i,6], aCodes[i,7]  )
+         IF Left(aCodes[i, 1], 1) == c .AND. At( aCodes[i, 1],Left(cLine, 3 ) ) == 1
+            ::InitValues( aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7]  )
             Return Len(aCodes[i, 1])
          ENDIF
       NEXT

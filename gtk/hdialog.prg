@@ -145,7 +145,7 @@ Local i
 
    // writelog( str(msg) + str(wParam) + str(lParam) )
    IF ( i := AScan(aMessModalDlg, {|a|a[1] == msg}) ) != 0
-      Return Eval( aMessModalDlg[i,2], Self, wParam, lParam )
+      Return Eval( aMessModalDlg[i, 2], Self, wParam, lParam )
    ELSE
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -195,7 +195,7 @@ Local iCont
    ENDIF
    /*
    IF oDlg:oIcon != Nil
-      hwg_SendMessage( oDlg:handle,WM_SETICON,1,oDlg:oIcon:handle )
+      hwg_SendMessage( oDlg:handle,WM_SETICON, 1,oDlg:oIcon:handle )
    ENDIF
    */
    IF oDlg:Title != NIL
@@ -250,7 +250,7 @@ Function hwg_DlgCommand( oDlg,wParam,lParam )
 Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 Local aMenu, i, hCtrl
 
-   // WriteLog( Str(iParHigh,10)+"|"+Str(iParLow,10)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   // WriteLog( Str(iParHigh, 10)+"|"+Str(iParLow, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
    IF iParHigh == 0
       IF iParLow == IDOK
          hCtrl := hwg_GetFocus()
@@ -270,7 +270,7 @@ Local aMenu, i, hCtrl
             ENDIF
          ENDIF
          IF oDlg:lClipper
-            IF !hwg_GetSkip( oDlg,hCtrl,1 )
+            IF !hwg_GetSkip( oDlg,hCtrl, 1 )
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )
@@ -285,7 +285,7 @@ Local aMenu, i, hCtrl
 
    IF oDlg:aEvents != Nil .AND. ;
       ( i := AScan(oDlg:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oDlg:aEvents[i,3],oDlg,iParLow )
+      Eval( oDlg:aEvents[i, 3],oDlg,iParLow )
    ELSEIF iParHigh == 0 .AND. ( ;
         ( iParLow == IDOK .AND. oDlg:FindControl(IDOK) != Nil ) .OR. ;
           iParLow == IDCANCEL )
@@ -298,12 +298,12 @@ Local aMenu, i, hCtrl
       ENDIF
    ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
-        .AND. aMenu[1,i,1] != Nil
-      Eval( aMenu[1,i,1] )
+        .AND. aMenu[1,i, 1] != Nil
+      Eval( aMenu[1,i, 1] )
    ELSEIF __ObjHasMsg(oDlg,"OPOPUP") .AND. oDlg:oPopup != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != Nil ;
-         .AND. aMenu[1,i,1] != Nil
-         Eval( aMenu[1,i,1] )
+         .AND. aMenu[1,i, 1] != Nil
+         Eval( aMenu[1,i, 1] )
    ENDIF
 
 Return 1
@@ -406,7 +406,7 @@ Local i, aKeys
       IF ( i := AScan(aKeys, {|a|a[1] == nctrl .AND. a[2] == nkey}) ) == 0
          AAdd(aKeys, {nctrl, nkey, block})
       ELSE
-         aKeys[i,3] := block
+         aKeys[i, 3] := block
       ENDIF
    ENDIF
 

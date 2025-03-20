@@ -7,7 +7,7 @@ Function Main ()
 
    INIT WINDOW oWnd MAIN TITLE "Menu with messages" ;
       COLOR COLOR_3DLIGHT+1 ;
-      AT 100,100 SIZE 640,480
+      AT 100, 100 SIZE 640, 480
 
    MENU OF oWnd
       MENU TITLE "Menu 1"
@@ -42,7 +42,7 @@ Function Main ()
    ENDMENU
 
    // comment the line below to test withou StatusBar
-   ADD STATUS TO oWnd PARTS 320,320
+   ADD STATUS TO oWnd PARTS 320, 320
 
    ACTIVATE WINDOW oWnd
 

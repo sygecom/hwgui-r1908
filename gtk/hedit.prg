@@ -103,9 +103,9 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    ::bGetFocus := bGFocus
    ::bLostFocus := bLFocus
-   hwg_SetEvent( ::handle,"focus_in_event",WM_SETFOCUS,0,0 )
-   hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS,0,0 )
-   hwg_SetEvent( ::handle,"key_press_event",0,0,0 )
+   hwg_SetEvent( ::handle,"focus_in_event",WM_SETFOCUS, 0, 0 )
+   hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS, 0, 0 )
+   hwg_SetEvent( ::handle,"key_press_event", 0, 0, 0 )
 
 Return Self
 
@@ -122,7 +122,7 @@ Return Nil
 METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
 Local oParent := ::oParent, nPos, nctrl, cKeyb
 
-   // WriteLog( "Edit: "+Str(msg,10)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   // WriteLog( "Edit: "+Str(msg, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
    IF ::bAnyEvent != Nil .AND. Eval( ::bAnyEvent,Self,msg,wParam,lParam ) != 0
       Return 0
    ENDIF
@@ -137,7 +137,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             cKeyb := hwg_GetKeyboardState()
             nctrl := IIf(Asc(Substr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(Substr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
             IF ( nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam}) ) > 0
-               Eval( oParent:KeyList[nPos,3] )
+               Eval( oParent:KeyList[nPos, 3] )
             ENDIF
 	    */
          ENDIF
@@ -180,12 +180,12 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             Return 0
          ELSEIF wParam == GDK_Down     // KeyDown
             IF lParam == 0
-               hwg_GetSkip( oParent,::handle,1 )
+               hwg_GetSkip( oParent,::handle, 1 )
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Up     // KeyUp
             IF lParam == 0
-               hwg_GetSkip( oParent,::handle,-1 )
+               hwg_GetSkip( oParent,::handle, -1 )
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Right     // KeyRight
@@ -219,14 +219,14 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
                Return 1
             ENDIF
          ELSEIF wParam == GDK_Tab     // Tab
-            IF hwg_CheckBit( lParam,1 )
-               hwg_GetSkip( oParent,::handle,-1 )
+            IF hwg_CheckBit( lParam, 1 )
+               hwg_GetSkip( oParent,::handle, -1 )
             ELSE
-               hwg_GetSkip( oParent,::handle,1 )
+               hwg_GetSkip( oParent,::handle, 1 )
             ENDIF
             Return 1
          ELSEIF wParam == GDK_Return  // Enter
-            IF !hwg_GetSkip( oParent,::handle,1,.T. ) .AND. ::bSetGet != Nil
+            IF !hwg_GetSkip( oParent,::handle, 1,.T. ) .AND. ::bSetGet != Nil
 	       __Valid( Self )
 	    ENDIF
             Return 1
@@ -429,7 +429,7 @@ Local i
       hwg_edit_Setpos( oEdit:handle, nPos-2 )
    ELSE
       DO WHILE nPos >= 1
-         IF IsEditable( oEdit,--nPos )
+         IF IsEditable( oEdit, --nPos )
             hwg_edit_Setpos( oEdit:handle, nPos-1 )
             EXIT
          ENDIF
@@ -538,7 +538,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
       ELSE
          vari := Trim(oEdit:title)
          FOR i := 2 TO Len(vari)
-            IF !IsDigit( Substr( vari,i,1 ) )
+            IF !IsDigit( Substr( vari,i, 1 ) )
                vari := Left( vari,i-1 ) + Substr( vari,i+1 )
             ENDIF
          NEXT
@@ -613,7 +613,7 @@ Local res
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, oCtrl:title, oCtrl )
       IF !res
-         hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
+         hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
       Return res
    ENDIF
@@ -630,7 +630,7 @@ Local vari, oDlg
          IF oCtrl:cType == "D"
             IF IsBadDate( vari )
                hwg_SetFocus( oCtrl:handle )
-	       hwg_edit_SetPos( oCtrl:handle,0 )
+	       hwg_edit_SetPos( oCtrl:handle, 0 )
                Return .F.
             ENDIF
             vari := Ctod( vari )
@@ -646,7 +646,7 @@ Local vari, oDlg
          ENDIF
          IF oCtrl:bLostFocus != Nil .AND. !Eval( oCtrl:bLostFocus, vari, oCtrl )
             hwg_SetFocus( oCtrl:handle )
-	      hwg_edit_SetPos( oCtrl:handle,0 )
+	      hwg_edit_SetPos( oCtrl:handle, 0 )
             IF oDlg != Nil
                oDlg:nLastKey := 0
             ENDIF
@@ -678,7 +678,7 @@ Local xValue, cChar, nFor, minus
       xValue := cBuffer
 
    ELSEIF oEdit:cType == "N"
-      minus := ( Left( LTrim(cBuffer),1 ) == "-" )
+      minus := ( Left( LTrim(cBuffer), 1 ) == "-" )
       cBuffer := Space( FirstEditable(oEdit) - 1 ) + SubStr( cBuffer, FirstEditable(oEdit), LastEditable(oEdit) - FirstEditable(oEdit) + 1 )
 
       IF "D" $ oEdit:cPicFunc
@@ -756,7 +756,7 @@ Return xValue
 Static Function FirstEditable( oEdit )
 Local nFor, nMaxLen := Len(oEdit:cPicMask)
 
-   IF IsEditable( oEdit,1 )
+   IF IsEditable( oEdit, 1 )
       Return 1
    ENDIF
 
@@ -787,7 +787,7 @@ Local i, nLen
    ENDIF
    nLen := len(cBuffer)
    FOR i := 1 to nLen
-      If IsDigit( Substr( cBuffer,i,1 ) )
+      If IsDigit( Substr( cBuffer,i, 1 ) )
          Return .T.
       ENDIF
    NEXT
@@ -829,7 +829,7 @@ Local i, aLen
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle ) // Now tab and enter goes trhow the check, combo, etc...
                   hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
-       	         hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )
+       	         hwg_edit_SetPos( oParent:Getlist[i]:handle, 0 )
                   ENDIF
                   Return .T.
                ENDIF
@@ -839,7 +839,7 @@ Local i, aLen
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle )
                   hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
-   	               hwg_edit_SetPos( oParent:Getlist[i]:handle,0 )
+   	               hwg_edit_SetPos( oParent:Getlist[i]:handle, 0 )
                   ENDIF
                   Return .T.
                ENDIF

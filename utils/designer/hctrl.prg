@@ -374,7 +374,7 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
       dy := yPos
    ENDIF
 
-   // writelog( "V0=("+AllTrim(Str(oCtrl:nLeft))+","+AllTrim(Str(oCtrl:nTop))+") P1=("+AllTrim(Str(xPos,5))+","+AllTrim(Str(yPos,5)
+   // writelog( "V0=("+AllTrim(Str(oCtrl:nLeft))+","+AllTrim(Str(oCtrl:nTop))+") P1=("+AllTrim(Str(xPos, 5))+","+AllTrim(Str(yPos, 5)
    // )+ ") B1=("+AllTrim(Str(aBDown[2]))+","+AllTrim(Str(aBDown[3]))+")  d=("+AllTrim(Str(dx, 3))+","+AllTrim(Str(dy, 3))+") " )
    // writelog( "vBDown=("+AllTrim(Str(vBDown[2]))+","+AllTrim(Str(vBDown[3]))+") " )
 
@@ -1173,7 +1173,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
          (yPos <= oCtrl:nTop + oCtrl:nHeight .AND. yi >= oCtrl:nTop)) .AND. ;
        ((xi <= oCtrl:nLeft + oCtrl:nWidth .AND. xPos >= oCtrl:nLeft) .OR.;
           (xPos <= oCtrl:nLeft + oCtrl:nWidth .AND. xi >= oCtrl:nLeft))
-         SetCtrlSelected( oCtrl:oParent,oCtrl,,-128)
+         SetCtrlSelected( oCtrl:oParent,oCtrl,, -128)
     ENDIF
  NEXT
 Return Nil

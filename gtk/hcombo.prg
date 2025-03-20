@@ -90,8 +90,8 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    ::bGetFocus := bGFocus
    ::bLostFocus := bChange
 
-   hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS,0,0 )
-   hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS,0,0 )
+   hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS, 0, 0 )
+   hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS, 0, 0 )
 
 Return Self
 
@@ -253,7 +253,7 @@ Local res
    IF oCtrl:bGetFocus != Nil 
       res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
       IF !res
-         hwg_GetSkip( oCtrl:oParent,oCtrl:handle,1 )
+         hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
       Return res
    ENDIF

@@ -20,7 +20,7 @@ Function hwg_VColor( cColor )
 Local i,res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
-      iValue := Asc( Substr( cColor,Len(cColor)-i+1,1 ) )
+      iValue := Asc( Substr( cColor,Len(cColor)-i+1, 1 ) )
       if iValue < 58 .and. iValue > 47
          iValue -= 48
       elseif iValue >= 65 .and. iValue <= 70
@@ -36,7 +36,7 @@ Local i,res := 0, n := 1, iValue
 Return res
 
 Function hwg_MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
-Local oModDlg, oFont := HFont():Add( "Sans",0,12 )
+Local oModDlg, oFont := HFont():Add( "Sans", 0, 12 )
 Local cRes := ""
 
    nStyle := IIf(nStyle == NIL, 0, nStyle)
@@ -44,14 +44,14 @@ Local cRes := ""
    y := IIf(y == NIL, 10, y)
    nDlgStyle := IIf(nDlgStyle == NIL, 0, nDlgStyle)
 
-   INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300,140 ;
+   INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300, 140 ;
         FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+nDlgStyle
 
-   @ 20,10 SAY cText SIZE 260,22
-   @ 20,35 GET cres  SIZE 260,26 STYLE WS_DLGFRAME + WS_TABSTOP + nStyle
+   @ 20, 10 SAY cText SIZE 260, 22
+   @ 20, 35 GET cres  SIZE 260, 26 STYLE WS_DLGFRAME + WS_TABSTOP + nStyle
 
-   @ 20,95 BUTTON "Ok" ID IDOK SIZE 100,32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
-   @ 180,95 BUTTON "Cancel" ID IDCANCEL SIZE 100,32 ON CLICK {||EndDialog()}
+   @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
+   @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oModDlg
 
@@ -72,7 +72,7 @@ Local hDC, aMetr, width, height, screenh
    IF cTitle == Nil; cTitle := ""; ENDIF
    IF nLeft == Nil; nLeft := 10; ENDIF
    IF nTop == Nil; nTop := 10; ENDIF
-   IF oFont == Nil; oFont := HFont():Add( "Times",0,12 ); ENDIF
+   IF oFont == Nil; oFont := HFont():Add( "Times", 0, 12 ); ENDIF
 
    IF HB_IsArray( arr[1] )
       FOR i := 1 TO aLen
@@ -94,14 +94,14 @@ Local hDC, aMetr, width, height, screenh
       height := Int( screenh *2/3 )
       addX := addY := 0
    ENDIF
-   width := ( Round( (aMetr[3]+aMetr[2]) / 2,0 ) + 3 ) * nLen + addX
+   width := ( Round( (aMetr[3]+aMetr[2]) / 2, 0 ) + 3 ) * nLen + addX
 
    INIT DIALOG oDlg TITLE cTitle ;
          AT nLeft,nTop           ;
          SIZE width,height  ;
          FONT oFont
 
-   @ 0,0 BROWSE oBrw ARRAY          ;
+   @ 0, 0 BROWSE oBrw ARRAY          ;
        SIZE  width,height           ;
        FONT oFont                   ;
        STYLE WS_BORDER              ;
@@ -109,7 +109,7 @@ Local hDC, aMetr, width, height, screenh
        ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
    IF HB_IsArray( arr[1] )
-      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent,1]},"C",nLen ) )
+      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1]},"C",nLen ) )
    ELSE
       oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]},"C",nLen ) )
    ENDIF

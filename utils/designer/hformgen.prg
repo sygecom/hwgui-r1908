@@ -369,7 +369,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
         ON SIZE {|o,x,y|o:Move(,,x,y)} ON PAINT {|o|PaintPanel(o)}
       oPanel:aControls[1]:brush := HBrush():Add( 16777215 )
       oPanel:aControls[1]:bOther := {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
-      oPanel:bOther := {|o,m,wp,lp|IIf(m==WM_KEYUP,MessagesProc(o,m,wp,lp),-1)}
+      oPanel:bOther := {|o,m,wp,lp|IIf(m==WM_KEYUP,MessagesProc(o,m,wp,lp), -1)}
       ::oDlg:bOther := {|o,m,wp,lp|ScrollProc(o,m,wp,lp)}
    ELSE
       ::oDlg:bOther := {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
@@ -1006,7 +1006,7 @@ STATIC FUNCTION PaintDlg( oDlg )
          yt := y1+i*n1cm
          hwg_DrawLine( hDC, 0,yt+Round(n1cm/4, 0), 4,yt+Round(n1cm/4, 0) )
          hwg_DrawLine( hDC, 0,yt+Round(n1cm/2, 0), 8,yt+Round(n1cm/2, 0) )
-         hwg_DrawLine( hDC, 0,yt+Round(n1cm*3/4,0), 4,yt+Round(n1cm*3/4, 0) )
+         hwg_DrawLine( hDC, 0,yt+Round(n1cm*3/4, 0), 4,yt+Round(n1cm*3/4, 0) )
          hwg_DrawLine( hDC, 0,yt, 12,yt )
          IF i > 0
             hwg_DrawText( hDC,LTrim(Str(i+oForm:nYOffset/10, 2)), 12,yt-10,LEFT_INDENT-12,yt+10,DT_CENTER )
@@ -1177,7 +1177,7 @@ STATIC FUNCTION MessagesProc( oDlg, msg, wParam, lParam )
          IF oCtrl != Nil
            IF nKshift >= 0
                  SetBDown( , 0, 0, 0 )
-                CtrlMove( oCtrl, 0,-nShift,.F. )
+                CtrlMove( oCtrl, 0, -nShift,.F. )
                  return 1
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 4 )
@@ -1200,7 +1200,7 @@ STATIC FUNCTION MessagesProc( oDlg, msg, wParam, lParam )
          IF oCtrl != Nil
            IF nKshift >= 0
              SetBDown( , 0, 0, 0 )
-             CtrlMove( oCtrl,-nShift, 0,.F. )
+             CtrlMove( oCtrl, -nShift, 0,.F. )
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 3 )
              CtrlResize( OCTRL,oCtrl:nLeft-1,oCtrl:nTop)

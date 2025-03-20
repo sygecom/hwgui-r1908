@@ -176,7 +176,7 @@ Private cFor
          Return Nil
       ENDIF
       Go nrec
-      hwg_WriteStatus( oWindow,3,"Done" )
+      hwg_WriteStatus( oWindow, 3,"Done" )
       IF oWindow != Nil
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
@@ -347,7 +347,7 @@ Local hWnd, oWindow, aControls, i
       Zap
    ENDIF
 
-   hWnd := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
+   hWnd := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0 )
    oWindow := HWindow():FindWindow( hWnd )
    IF oWindow != Nil
       aControls := oWindow:aControls

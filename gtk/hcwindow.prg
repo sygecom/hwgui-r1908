@@ -103,7 +103,7 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    ENDIF
    h := 0
    FOR i := Len(::aEvents) TO 1 STEP -1
-      IF ::aEvents[i,2] == id
+      IF ::aEvents[i, 2] == id
          ADel(::aEvents, i)
          h ++
       ENDIF
@@ -113,7 +113,7 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    ENDIF
    h := 0
    FOR i := Len(::aNotify) TO 1 STEP -1
-      IF ::aNotify[i,2] == id
+      IF ::aNotify[i, 2] == id
          ADel(::aNotify, i)
          h ++
       ENDIF
@@ -218,7 +218,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
             Return 1
          ELSEIF oWnd:aNotify != Nil .AND. ;
             ( iItem := AScan(oWnd:aNotify, {|a|a[1] == nCode .AND. a[2] == wParam}) ) > 0
-            IF ( res := Eval( oWnd:aNotify[iItem,3],oWnd,wParam ) ) != Nil
+            IF ( res := Eval( oWnd:aNotify[iItem, 3],oWnd,wParam ) ) != Nil
                Return res
             ENDIF
          ENDIF
@@ -263,7 +263,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+      Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
    ENDIF
 
 Return 1

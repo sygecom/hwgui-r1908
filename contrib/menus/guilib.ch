@@ -533,7 +533,7 @@
             [ ON KEYDOWN <bKeyDown> ]  ;
             [ ON POSCHANGE <bPosChg> ] ;
           => ;
-    [<oBrw> :=] HBrowse():New( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY,0)),;
+    [<oBrw> :=] HBrowse():New( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY, 0)),;
         <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize>, ;
         <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
         <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg> )
@@ -551,7 +551,7 @@
             [ ON LOSTFOCUS <bLfocus> ] ;
             [ FONT <oFont> ]           ;
           => ;
-    [<oBrw> :=] HBrowse():Redefine( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY,0)),;
+    [<oBrw> :=] HBrowse():Redefine( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY, 0)),;
         <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>,<bEnter>,<bGfocus>,<bLfocus> )
 
 #xcommand ADD COLUMN <block> TO <oBrw> ;
@@ -664,7 +664,7 @@
              [ <strike: STRIKEOUT> ] ;
           => ;
     <oFont> := HFont():Add( <cName>, <nWidth>, <nHeight>, <nWeight>, <charset>, ;
-                iif( <.ita.>,1,0 ), iif( <.under.>,1,0 ), iif( <.strike.>,1,0 ) )
+                iif( <.ita.>, 1, 0 ), iif( <.under.>, 1, 0 ), iif( <.strike.>, 1, 0 ) )
 
 /* Print commands */
 

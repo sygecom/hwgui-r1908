@@ -253,11 +253,11 @@ ENDCLASS
 METHOD Add( fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Font
 Local i, nlen := Len(::aFonts)
 
-   nHeight  := Iif( nHeight==Nil,13,Abs(nHeight) )
+   nHeight  := Iif( nHeight==Nil, 13,Abs(nHeight) )
    nHeight -= 1
-   fnWeight := Iif( fnWeight==Nil,0,fnWeight )
-   fdwItalic := Iif( fdwItalic==Nil,0,fdwItalic )
-   fdwUnderline := Iif( fdwUnderline==Nil,0,fdwUnderline )
+   fnWeight := Iif( fnWeight==Nil, 0,fnWeight )
+   fdwItalic := Iif( fdwItalic==Nil, 0,fdwItalic )
+   fdwUnderline := Iif( fdwUnderline==Nil, 0,fdwUnderline )
 
    For i := 1 TO nlen
       IF ::aFonts[i]:name == fontName .AND.          ;
@@ -332,7 +332,7 @@ ENDCLASS
 METHOD Add( nWidth ) CLASS HGP_Pen
 Local i
 
-   nWidth := Iif( nWidth == Nil,1,nWidth )
+   nWidth := Iif( nWidth == Nil, 1,nWidth )
 
    FOR i := 1 TO Len(::aPens)
       IF ::aPens[i]:width == nWidth

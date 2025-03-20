@@ -24,7 +24,7 @@ MEMVAR nQueryWndHandle
 
 Function Main()
 Local aMainWindow, aPanel
-Public BrwFont := {"MS Sans Serif",0,-13}, oBrwFont := Nil
+Public BrwFont := {"MS Sans Serif", 0, -13}, oBrwFont := Nil
 PUBLIC msfile[15], msmode[15, 5], msexp[15], lenmsf := 0, improc := 0, mypath := ""
 PUBLIC dformat := "dd/mm/yy", memownd := .F., prrdonly := .F.
 PUBLIC lWinChar := .F.
@@ -41,12 +41,12 @@ PUBLIC nQueryWndHandle := 0
 
 #ifdef RDD_ADS
    // REQUEST _ADS
-   rddRegister("ADS",1)
+   rddRegister("ADS", 1)
    rddSetdefault("ADS")
 #else
    REQUEST DBFCDX
    rddsetdefault("DBFCDX")
-   //rddRegister("DBFCDX",1)
+   //rddRegister("DBFCDX", 1)
 #endif
 
    SET EXCLUSIVE ON
@@ -66,7 +66,7 @@ PUBLIC nQueryWndHandle := 0
    AdsSetServerType( nServerType )
    AdsRightsCheck( .F. )
    SET CHARTYPE TO OEM
-   AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
+   AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
 #endif
 
    INIT WINDOW aMainWindow MDI TITLE "Dbc" MENU "APPMENU" MENUPOS 8
@@ -102,32 +102,32 @@ PUBLIC nQueryWndHandle := 0
        ON IDM_CALCUL  ACTION  Calcul()      ;
        ON IDM_DSCRIPT ACTION  Scripts(2)    ;
        ON IDM_EXIT    ACTION  hwg_EndWindow()   ;
-       ON IDM_TILE    ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0) ;
-       ON IDM_CASCADE ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDICASCADE,0,0)
+       ON IDM_TILE    ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL, 0) ;
+       ON IDM_CASCADE ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDICASCADE, 0, 0)
 
 /*
-    @ 0,0 PANEL oPanel  SIZE 0,28
+    @ 0, 0 PANEL oPanel  SIZE 0, 28
 
-    @ 2,3 OWNERBUTTON OF oPanel ON CLICK {||OpenDlg()} ;
-        SIZE 22,22 FLAT ;
-        BITMAP "BMP_OPEN" FROM RESOURCE COORDINATES 0,4,0,0
+    @ 2, 3 OWNERBUTTON OF oPanel ON CLICK {||OpenDlg()} ;
+        SIZE 22, 22 FLAT ;
+        BITMAP "BMP_OPEN" FROM RESOURCE COORDINATES 0, 4, 0, 0
 */
 
    IF HB_IsArray( BrwFont )
       oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
    ENDIF
 
-   hwg_EnableMenuItem( ,1, .F., .F. )
-   hwg_EnableMenuItem( ,2, .F., .F. )
-   hwg_EnableMenuItem( ,3, .F., .F. )
-   hwg_EnableMenuItem( ,4, .F., .F. )
+   hwg_EnableMenuItem( , 1, .F., .F. )
+   hwg_EnableMenuItem( , 2, .F., .F. )
+   hwg_EnableMenuItem( , 3, .F., .F. )
+   hwg_EnableMenuItem( , 4, .F., .F. )
 
    aMainWindow:Activate()
 
 Return Nil
 
 Function ChildClose
-Local nHandle := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE,0,0 )
+Local nHandle := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0 )
    if nHandle > 0
       hwg_SendMessage( HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0 )
    endif
@@ -190,7 +190,7 @@ Local new_numdriv, new_servertype, serverPath
    IF new_numdriv != numdriv
       numdriv := new_numdriv
       #ifdef RDD_ADS
-         AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
+         AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
       #endif
    ENDIF
    IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
@@ -256,10 +256,10 @@ Local indname
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind
-   oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent,1] },"C",1,0  ) )
-   oBrw:AddColumn( HColumn():New( "Tag",{|value,o|o:aArray[o:nCurrent,2] },"C",8,0  ) )
-   oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent,3] },"C",ordlen,0  ) )
-   oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent,4] },"C",8,0  ) )
+   oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1] },"C", 1, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Tag",{|value,o|o:aArray[o:nCurrent, 2] },"C", 8, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent, 3] },"C",ordlen, 0  ) )
+   oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent, 4] },"C", 8, 0  ) )
   
    oBrw:bColorSel    := hwg_VColor( "800080" )
    oBrw:ofont := oBrwFont
@@ -271,7 +271,7 @@ Static Function SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
-   hwg_WriteStatus( oWindow,2,"Order: "+oBrw:aArray[oBrw:nCurrent,2] )
+   hwg_WriteStatus( oWindow, 2,"Order: "+oBrw:aArray[oBrw:nCurrent, 2] )
    IF oWindow != Nil
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
@@ -355,7 +355,7 @@ Local oWindow, aControls, i
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
-   hwg_WriteStatus( oWindow,2,"Order: "+Iif( isMulti,tagname,hwg_CutPath(indname) ) )
+   hwg_WriteStatus( oWindow, 2,"Order: "+Iif( isMulti,tagname,hwg_CutPath(indname) ) )
 
    IF oWindow != Nil
       aControls := oWindow:aControls
@@ -447,7 +447,7 @@ Local oldLock := AdsLocking()
       IF new_numdriv != numdriv
          numdriv := new_numdriv
          #ifdef RDD_ADS
-            AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
+            AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
          #endif
       ENDIF
       IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
@@ -466,7 +466,7 @@ Local oldLock := AdsLocking()
       IF numdriv != old_numdriv
          numdriv := old_numdriv
          #ifdef RDD_ADS
-            AdsSetFileType( Iif( numdriv==1,2,Iif( numdriv==2,1,3 ) ) )
+            AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
          #endif
       ENDIF
       prrdonly := oldRdonly
@@ -487,19 +487,19 @@ Local oWindow, aControls, oBrowse, i
    ENDIF
 
    IF Len( HWindow():aWindows ) == 2
-      hwg_EnableMenuItem( ,1, .T., .F. )
-      hwg_EnableMenuItem( ,2, .T., .F. )
-      hwg_EnableMenuItem( ,3, .T., .F. )
-      hwg_EnableMenuItem( ,4, .T., .F. )
+      hwg_EnableMenuItem( , 1, .T., .F. )
+      hwg_EnableMenuItem( , 2, .T., .F. )
+      hwg_EnableMenuItem( , 3, .T., .F. )
+      hwg_EnableMenuItem( , 4, .T., .F. )
    ENDIF
    IF hChild == Nil .OR. hChild == 0
       INIT WINDOW oWindow MDICHILD TITLE fname ;
-           AT 0,0                              ;
+           AT 0, 0                              ;
            ON GETFOCUS {|o|ChildGetFocus(o)}   ;
            ON EXIT {|o|ChildKill(o)}
 
-      ADD STATUS PARTS 180,200,0
-      @ 0,0 BROWSE oBrowse DATABASE  ;
+      ADD STATUS PARTS 180, 200, 0
+      @ 0, 0 BROWSE oBrowse DATABASE  ;
            ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
 
       oBrowse:bcolorSel  := hwg_VColor( "800080" )
@@ -524,8 +524,8 @@ Local oWindow, aControls, oBrowse, i
          ENDIF
       ENDIF
    ENDIF
-   hwg_WriteStatus( oWindow,1,Ltrim(Str(Reccount(),10))+" records" )
-   hwg_WriteStatus( oWindow,2,"Order: None",.T. )
+   hwg_WriteStatus( oWindow, 1,Ltrim(Str(Reccount(), 10))+" records" )
+   hwg_WriteStatus( oWindow, 2,"Order: None",.T. )
 Return oWindow:handle
 
 /* -----------------------  Calculator  --------------------- */
@@ -638,10 +638,10 @@ Local i, aControls, oBrw
             ENDIF
             FiClose()
             IF Len( HWindow():aWindows ) == 3
-               hwg_EnableMenuItem( ,1, .F., .F. )
-               hwg_EnableMenuItem( ,2, .F., .F. )
-               hwg_EnableMenuItem( ,3, .F., .F. )
-               hwg_EnableMenuItem( ,4, .F., .F. )
+               hwg_EnableMenuItem( , 1, .F., .F. )
+               hwg_EnableMenuItem( , 2, .F., .F. )
+               hwg_EnableMenuItem( , 3, .F., .F. )
+               hwg_EnableMenuItem( , 4, .F., .F. )
             ENDIF
          ENDIF
       ENDIF

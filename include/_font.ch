@@ -11,4 +11,4 @@
              [ <strike: STRIKEOUT> ] ;
           => ;
           <oFont> := HFont():Add( <cName>, <nWidth>, <nHeight>, <nWeight>, <charset>, ;
-             iif( <.ita.>,1,0 ), iif( <.under.>,1,0 ), iif( <.strike.>,1,0 ) )
+             iif( <.ita.>, 1, 0 ), iif( <.under.>, 1, 0 ), iif( <.strike.>, 1, 0 ) )

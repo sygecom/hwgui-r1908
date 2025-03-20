@@ -104,7 +104,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
    END
    
    ::aOffset := Array( 4 )
-   Afill( ::aOffset,0 )
+   Afill( ::aOffset, 0 )
 
    ::AddItem( Self )
 
@@ -162,7 +162,7 @@ CLASS HMainWindow INHERIT HWindow
                      cAppName,oBmp,cHelp,nHelpId )
    METHOD Activate( lShow )
    METHOD onEvent( msg, wParam, lParam )
-   // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
+   // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) )
 
 ENDCLASS
 
@@ -344,7 +344,7 @@ Local oItem, iCont, nCont
    #ifdef __XHARBOUR__
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != Nil .AND. oItem:oParent:handle == hWnd
-          hwg_SendMessage( oItem:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( oItem:handle,WM_CLOSE, 0, 0 )
       ENDIF
    NEXT
    #else
@@ -354,7 +354,7 @@ Local oItem, iCont, nCont
 
       IF HWindow():aWindows[iCont]:oParent != Nil .AND. ;
               HWindow():aWindows[iCont]:oParent:handle == hWnd
-          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE, 0, 0 )
       ENDIF
 
    NEXT
@@ -370,15 +370,15 @@ Static Function onCommand( oWnd,wParam,lParam )
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
-       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
           hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
        ENDIF
    ELSEIF wParam == SC_RESTORE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
           hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
        ENDIF
    ELSEIF wParam == SC_MAXIMIZE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
           hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
        ENDIF
    ELSEIF wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
@@ -390,19 +390,19 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-        Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+        Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
    ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-        .AND. aMenu[1,iCont,1] != Nil
-      Eval( aMenu[1,iCont,1] )
+        .AND. aMenu[1,iCont, 1] != Nil
+      Eval( aMenu[1,iCont, 1] )
    ELSEIF oWnd:oPopup != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-        .AND. aMenu[1,iCont,1] != Nil
-      Eval( aMenu[1,iCont,1] )
+        .AND. aMenu[1,iCont, 1] != Nil
+      Eval( aMenu[1,iCont, 1] )
    ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-        .AND. aMenu[1,iCont,1] != Nil
-      Eval( aMenu[1,iCont,1] )
+        .AND. aMenu[1,iCont, 1] != Nil
+      Eval( aMenu[1,iCont, 1] )
    ENDIF
 
 Return 0
@@ -487,7 +487,7 @@ Local iParHigh, iParLow, iItem
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+      Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
    ENDIF
 */
 Return 0

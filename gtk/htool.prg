@@ -84,7 +84,7 @@ Local aItem
 
 //         IF HB_IsBlock( ::aItem[n, 7] )
 //
-//            ::oParent:AddEvent( BN_CLICKED, ::aItem[n, 2], ::aItem[n ,7] )
+//            ::oParent:AddEvent( BN_CLICKED, ::aItem[n, 2], ::aItem[n , 7] )
 //
 //         ENDIF
 
@@ -95,7 +95,7 @@ Local aItem
 //
 //            FOR n1 :=1 to Len(aTemp)
 //               hwg__AddMenuItem( ::aItem[n, 10], aTemp[n1, 1], -1, .F., aTemp[n1, 2], , .F. )
-//               ::oParent:AddEvent( BN_CLICKED, aTemp[n1, 2], aTemp[n1,3] )
+//               ::oParent:AddEvent( BN_CLICKED, aTemp[n1, 2], aTemp[n1, 3] )
 //            NEXT
 //
 //         ENDIF
@@ -134,7 +134,7 @@ Local aItem
              aBmpSize := hwg_GetBitmapSize( aButton[nPos] )
 
              IF aBmpSize[3] == 24
-//             hwg_Imagelist_AddMasked( hIm,aButton[nPos],hwg_RGB(236,223,216) )
+//             hwg_Imagelist_AddMasked( hIm,aButton[nPos],hwg_RGB(236, 223, 216) )
                 hwg_Imagelist_Add( hIm, aButton[nPos] )
              ELSE
                 hwg_Imagelist_Add( hIm, aButton[nPos] )
@@ -153,7 +153,7 @@ Local aItem
 
                aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6],.f.)
                aItem[2] := hb_enumindex()
-//               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2],0 )
+//               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2], 0 )
                hwg_TOOLBAR_SETACTION(aItem[11],aItem[7])
                if !Empty(aItem[8])
                   hwg_AddtoolTip(::handle, aItem[11],aItem[8])
@@ -189,12 +189,12 @@ METHOD Notify( lParam ) CLASS hToolBar
        hwg_ToolBar_GetInfoTip( lParam, ::aItem[nPos, 8] )
 
     ELSEIF nCode == TBN_DROPDOWN
-       if HB_IsArray(::aItem[1,9])
+       if HB_IsArray(::aItem[1, 9])
        nid := hwg_ToolBar_SubMenuExGetId( lParam )
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx( lParam, ::aItem[nPos, 10], ::oParent:handle )
        else
-              hwg_ToolBar_SubMenu(lParam,1,::oParent:handle)
+              hwg_ToolBar_SubMenu(lParam, 1,::oParent:handle)
        endif
     ENDIF
 
@@ -215,8 +215,8 @@ Local nPos
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos>0
-         IF ::aItem[nPos,7] != Nil
-            Eval( ::aItem[nPos,7] ,Self )
+         IF ::aItem[nPos, 7] != Nil
+            Eval( ::aItem[nPos, 7] ,Self )
          ENDIF
       endif
    ENDIF

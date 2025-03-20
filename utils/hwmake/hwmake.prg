@@ -73,10 +73,10 @@ Private oIcon := HIcon():AddResource("PIM")
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
    
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "HwGUI Build Projects for BCC55" ;
-        AT 213,195 SIZE 513,295  font oFont ICON oIcon
+        AT 213, 195 SIZE 513, 295  font oFont ICON oIcon
 
    ADD STATUS oStatus TO oDlg ;
-       PARTS oDlg:nWidth-160,150
+       PARTS oDlg:nWidth-160, 150
        
    MENU OF oDlg
       MENU TITLE "&File"
@@ -92,82 +92,82 @@ Private oIcon := HIcon():AddResource("PIM")
       ENDMENU
    ENDMENU            
    
-   @ 14,16 TAB oTAB ITEMS {} SIZE 391,242
+   @ 14, 16 TAB oTAB ITEMS {} SIZE 391, 242
 
    BEGIN PAGE "Config" Of oTAB
-      @  20,44 SAY oLabel1 CAPTION "Exe Name" TRANSPARENT SIZE 80,22  
-      @ 136,44 GET oExeName VAR vGt1 ID ID_EXENAME  SIZE 206,24  
+      @  20, 44 SAY oLabel1 CAPTION "Exe Name" TRANSPARENT SIZE 80, 22
+      @ 136, 44 GET oExeName VAR vGt1 ID ID_EXENAME  SIZE 206, 24
 
-      @  20,74 SAY oLabel2 CAPTION "Lib Folder" TRANSPARENT SIZE 80,22  
-      @ 136,74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234,24  
+      @  20, 74 SAY oLabel2 CAPTION "Lib Folder" TRANSPARENT SIZE 80, 22
+      @ 136, 74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234, 24
 
-      @  20,104 SAY oLabel3 CAPTION "Include Folder" TRANSPARENT SIZE 105,22  
-      @ 136,104 GET oIncFolder VAR vGt3 ID ID_INCFOLDER   SIZE 234,24  
+      @  20, 104 SAY oLabel3 CAPTION "Include Folder" TRANSPARENT SIZE 105, 22
+      @ 136, 104 GET oIncFolder VAR vGt3 ID ID_INCFOLDER   SIZE 234, 24
 
-      @  20,134 SAY oLabel4 CAPTION "PRG Flags" TRANSPARENT SIZE 80,22  
-      @ 136,134 GET oPrgFlag VAR vGt4 ID ID_PRGFLAG  SIZE 234,24  
+      @  20, 134 SAY oLabel4 CAPTION "PRG Flags" TRANSPARENT SIZE 80, 22
+      @ 136, 134 GET oPrgFlag VAR vGt4 ID ID_PRGFLAG  SIZE 234, 24
 
-      @  20,164 SAY oLabel5 CAPTION "C Flags" TRANSPARENT SIZE 80,22  
-      @ 136,164 GET oCFlag VAR vGt5  ID ID_CFLAG SIZE 234,24  
- 
-      @  20,194 SAY oLabel6 CAPTION "Main PRG" TRANSPARENT SIZE 80,22  
-      @ 136,194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206,24  
-      @ 347,194 OWNERBUTTON    SIZE 24,24   ;
+      @  20, 164 SAY oLabel5 CAPTION "C Flags" TRANSPARENT SIZE 80, 22
+      @ 136, 164 GET oCFlag VAR vGt5  ID ID_CFLAG SIZE 234, 24
+
+      @  20, 194 SAY oLabel6 CAPTION "Main PRG" TRANSPARENT SIZE 80, 22
+      @ 136, 194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206, 24
+      @ 347, 194 OWNERBUTTON    SIZE 24, 24   ;
           ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT;
-          TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0,0,0,0 ;
+          TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0, 0, 0, 0 ;
           TOOLTIP "Search main file" 
 
    END PAGE of oTAB
    BEGIN PAGE "Prg (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
+      @ 21, 29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
+ 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
       hwg_CreateArList(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
       oBrowse1:bcolorSel := hwg_VColor( "800080" )
-      oBrowse1:ofont := HFont():Add( 'Arial',0,-12 )
-      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse1, "*.prg")}  
-      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse1)}
+      oBrowse1:ofont := HFont():Add( 'Arial', 0, -12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse1, "*.prg")}  
+      @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse1)}
 
    END PAGE of oTAB
    BEGIN PAGE "C (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
+      @ 21, 29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
+ 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
       hwg_CreateArList(oBrowse2,aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
       oBrowse2:bcolorSel := hwg_VColor( "800080" )
-      oBrowse2:ofont := HFont():Add( 'Arial',0,-12 )
-      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse2, "*.c")}  
-      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse2)}
+      oBrowse2:ofont := HFont():Add( 'Arial', 0, -12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse2, "*.c")}  
+      @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse2)}
    END PAGE of oTAB
    BEGIN PAGE "Lib (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
+      @ 21, 29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
+ 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
       hwg_CreateArList(oBrowse3,aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
       oBrowse3:bcolorSel := hwg_VColor( "800080" )
-      oBrowse3:ofont := HFont():Add( 'Arial',0,-12 )
-      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse3, "*.lib")}  
-      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse3)}
+      oBrowse3:ofont := HFont():Add( 'Arial', 0, -12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse3, "*.lib")}  
+      @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse3)}
    END PAGE of oTAB
    BEGIN PAGE "Resource (Files)" of oTAB
-      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170  
+      @ 21, 29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
+ 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
       hwg_CreateArList(oBrowse4,aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
       oBrowse4:bcolorSel := hwg_VColor( "800080" )
-      oBrowse4:ofont := HFont():Add( 'Arial',0,-12 )
-      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse4, "*.rc")}  
-      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse4)}
+      oBrowse4:ofont := HFont():Add( 'Arial', 0, -12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse4, "*.rc")}  
+      @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse4)}
    END PAGE of oTAB
    
-   @ 419, 20 BUTTONex oBtBuild CAPTION "Build" BITMAP oImgBuild:Handle on Click {||BuildApp()}      SIZE 88,52  
-   @ 419, 80 BUTTONex oBtExit  CAPTION "Exit"  BITMAP oImgExit:Handle  on Click {||EndDialog()}     SIZE 88,52  
-   @ 419,140 BUTTONex oBtOpen  CAPTION "Open"  BITMAP oImgOpen:Handle  on Click {||ReadBuildFile()} SIZE 88,52  
-   @ 419,200 BUTTONex oBtSave  CAPTION "Save"  BITMAP oImgSave:Handle  on Click {||SaveBuildFile()} SIZE 88,52  
+   @ 419, 20 BUTTONex oBtBuild CAPTION "Build" BITMAP oImgBuild:Handle on Click {||BuildApp()}      SIZE 88, 52
+   @ 419, 80 BUTTONex oBtExit  CAPTION "Exit"  BITMAP oImgExit:Handle  on Click {||EndDialog()}     SIZE 88, 52
+   @ 419, 140 BUTTONex oBtOpen  CAPTION "Open"  BITMAP oImgOpen:Handle  on Click {||ReadBuildFile()} SIZE 88, 52
+   @ 419, 200 BUTTONex oBtSave  CAPTION "Save"  BITMAP oImgSave:Handle  on Click {||SaveBuildFile()} SIZE 88, 52
  
    ACTIVATE DIALOG oDlg
 
@@ -175,7 +175,7 @@ RETURN
 
 Static Function SearchFile(oBrow, oFile)
 Local oTotReg:={}, i
-Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile ) 
+Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
 if len(aSelect) ==0
    return Nil
 endif
@@ -609,31 +609,31 @@ Local oSay
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    INIT DIALOG oModDlg TITLE "About"     ;
-   AT 190,10  SIZE 360,200               ;
+   AT 190, 10  SIZE 360, 200               ;
    ICON oIcon                            ;   
    FONT oFontDlg
  
         
-   @ 20,40 SAY "Hwgui Internacional Page"        ;
+   @ 20, 40 SAY "Hwgui Internacional Page"        ;
    LINK "http://www.hwgui.net" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR hwg_RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241, 249, 91)
 
 
-   @ 20,60 SAY "Hwgui Kresin Page"        ;
+   @ 20, 60 SAY "Hwgui Kresin Page"        ;
    LINK "http://kresin.belgorod.su/hwgui.html" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR hwg_RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241, 249, 91)
 
-   @ 20,80 SAY "Hwgui international Forum"        ;
+   @ 20, 80 SAY "Hwgui international Forum"        ;
    LINK "http://br.groups.yahoo.com/group/hwguibr" ;
        SIZE 230, 22 STYLE SS_CENTER  ;
         COLOR hwg_VColor("0000FF") ;
-        VISITCOLOR hwg_RGB(241,249,91)
+        VISITCOLOR hwg_RGB(241, 249, 91)
                              
-   @ 40, 120 BUTTONex oBtExit  CAPTION "Close"  BITMAP oImgExit:Handle  on Click {||EndDialog()}    SIZE 180,35  
+   @ 40, 120 BUTTONex oBtExit  CAPTION "Close"  BITMAP oImgExit:Handle  on Click {||EndDialog()}    SIZE 180, 35  
   
    ACTIVATE DIALOG oModDlg
    
@@ -644,13 +644,13 @@ Static Function ErrorPreview( cMess )
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Build Error" ;
-        AT 92,61 SIZE 500,500
+        AT 92, 61 SIZE 500, 500
 
-   @ 10,10 EDITBOX oEdit CAPTION cMess SIZE 480,440 STYLE WS_VSCROLL+WS_HSCROLL+ES_MULTILINE+ES_READONLY ;
+   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL+WS_HSCROLL+ES_MULTILINE+ES_READONLY ;
         COLOR 16777088 BACKCOLOR 0 ;
-        ON GETFOCUS {||hwg_SendMessage(oEdit:handle,EM_SETSEL,0,0)}
+        ON GETFOCUS {||hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0)}
 
-   @ 200,460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100,32 
+   @ 200, 460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
    oDlg:Activate()
 Return Nil 

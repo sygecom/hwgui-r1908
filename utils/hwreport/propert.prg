@@ -75,8 +75,8 @@ Static Function EndStatic( aItem )
 Local hDlg := hwg_GetModalHandle()
 
    aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
-   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0, ;
-                          Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ),1,2 ))
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), 0, ;
+                          Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ), 1, 2 ))
    aItem[ITEM_VAR] := Ascan( s_aVariables,GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 ) ) - 1
    aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
@@ -112,7 +112,7 @@ Local oPen := aItem[ITEM_PEN]
    ELSE
       hwg_SendMessage( GetDlgItem( hDlg,IDC_COMBOBOX2 ), WM_ENABLE, 0, 0 )
    ENDIF
-   hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width,1) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width, 1) )
 Return .T.
 
 Static Function EndLine( aItem )
@@ -123,7 +123,7 @@ Local oPen := aItem[ITEM_PEN]
    i := Ascan( s_aPenStyles,cType )
    IF oPen:style != i-1 .OR. oPen:width != nWidth
       oPen:Release()
-      aItem[ITEM_PEN] := HPen():Add( i-1,nWidth,0 )
+      aItem[ITEM_PEN] := HPen():Add( i-1,nWidth, 0 )
       aPaintRep[FORM_CHANGED] := .T.
    ENDIF
    EndDialog( hDlg )
@@ -166,20 +166,20 @@ Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
-      hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100,0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100,0))) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100, 0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100, 0))) )
    ENDIF
 Return Nil
 
 Static Function InitBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
-   hUp := hwg_CreateUpDownControl( hDlg,120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT,0,0,12,0,GetDlgItem(hDlg,IDC_EDIT3),500,1,100 )
+   hUp := hwg_CreateUpDownControl( hDlg, 120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0,GetDlgItem(hDlg,IDC_EDIT3), 500, 1, 100 )
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
-      hwg_SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1],0) )
+      hwg_SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1], 0) )
    ENDIF
 Return .T.
 
@@ -188,8 +188,8 @@ Local hDlg := hwg_GetModalHandle()
 Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize := hwg_GetBitmapSize( aItem[ITEM_BITMAP]:handle )
 
-   aItem[ITEM_WIDTH] := Round(aBmpSize[1]*nValue/100,0)
-   aItem[ITEM_HEIGHT] := Round(aBmpSize[2]*nValue/100,0)
+   aItem[ITEM_WIDTH] := Round(aBmpSize[1]*nValue/100, 0)
+   aItem[ITEM_HEIGHT] := Round(aBmpSize[2]*nValue/100, 0)
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.
@@ -239,7 +239,7 @@ Return .T.
 
 Static Function EndMarkF( aItem )
 Local hDlg := hwg_GetModalHandle()
-   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ),0,1 )
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), 0, 1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.

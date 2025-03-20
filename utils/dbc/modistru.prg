@@ -21,7 +21,7 @@ Local at := { "Character", "Numeric", "Date", "Logical", "Memo" }
 LOCAL af, oBrw
 
    IF lNew
-      af := { {"","",0,0} }
+      af := { {"","", 0, 0} }
    ELSE
       af := dbStruct()
    ENDIF
@@ -40,10 +40,10 @@ LOCAL af, oBrw
           ON BN_CLICKED,IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
 
    oBrw:aArray := af
-   oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent,1] },"C",10,0  ) )
-   oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent,2] },"C",4,0  ) )
-   oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent,3] },"N",4,0  ) )
-   oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent,4] },"N",2,0  ) )
+   oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent, 1] },"C", 10, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent, 2] },"C", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent, 3] },"N", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent, 4] },"N", 2, 0  ) )
    oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont      := oBrwFont
 
@@ -52,12 +52,12 @@ Return Nil
 
 Static Function SetField( oBrw )
 Local hDlg := hwg_GetModalHandle(), i
-   hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent,1] )
-   IF ( i := At( oBrw:aArray[oBrw:nCurrent,2], "CNDLM" ) ) != 0
+   hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent, 1] )
+   IF ( i := At( oBrw:aArray[oBrw:nCurrent, 2], "CNDLM" ) ) != 0
       hwg_ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
    ENDIF
-   hwg_SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,3] ) ) )
-   hwg_SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,4] ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent, 3] ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent, 4] ) ) )
 Return Nil
 
 Static Function ModiStru( nOper )
@@ -92,7 +92,7 @@ Local cName, cType, nLen, nDec := 0
             nDec  := Val( GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
          ENDIF
       ENDIF
-      IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty( oBrowse:aArray[1,1] ) )
+      IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty( oBrowse:aArray[1, 1] ) )
          oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
       ELSEIF nOper == 1
          Aadd( oBrowse:aArray, { cName, cType, nLen, nDec } )
@@ -173,7 +173,7 @@ Local oPBar, nSch := 0
          ENDIF
       NEXT
       SELECT( improc )
-      oPBar := HProgressBar():NewBox( "Structure updating ...",,,,,10,RecCount() )
+      oPBar := HProgressBar():NewBox( "Structure updating ...",,,,, 10,RecCount() )
       GO TOP
       DO WHILE .NOT. EOF()
          SELECT 20

@@ -69,7 +69,7 @@ METHOD DelControl( oCtrl ) CLASS HCustomWindow
 Local h := oCtrl:handle
 Local i := Ascan( ::aControls,{|o|o:handle==h} )
 
-   hwg_SendMessage( h,WM_CLOSE,0,0 )
+   hwg_SendMessage( h,WM_CLOSE, 0, 0 )
    IF i != 0
       Adel( ::aControls,i )
       Asize( ::aControls,Len(::aControls)-1 )
@@ -111,14 +111,14 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
    ::oDefaultParent := Self
    ::type     := lType
    ::title    := cTitle
-   ::style    := Iif( nStyle==NIL,0,nStyle )
+   ::style    := Iif( nStyle==NIL, 0,nStyle )
    ::nMenuPos := nPos
    ::oIcon    := oIcon
    ::oBmp     := oBmp
-   ::nTop     := Iif( y==Nil,0,y )
-   ::nLeft    := Iif( x==Nil,0,x )
-   ::nWidth   := Iif( width==Nil,0,width )
-   ::nHeight  := Iif( height==Nil,0,height )
+   ::nTop     := Iif( y==Nil, 0,y )
+   ::nLeft    := Iif( x==Nil, 0,x )
+   ::nWidth   := Iif( width==Nil, 0,width )
+   ::nHeight  := Iif( height==Nil, 0,height )
    ::oFont    := oFont
    ::bInit    := bInit
    ::bDestroy := bExit
@@ -133,13 +133,13 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
    ENDIF
    // ::lClipper   := Iif( lClipper==Nil,.F.,lClipper )
    ::aOffset := Array( 4 )
-   Afill( ::aOffset,0 )
+   Afill( ::aOffset, 0 )
 
    ::AddItem( Self )
    IF lType == WND_MAIN
 
       ::handle := hwg_InitMainWindow( ::szAppName,cTitle,cMenu,    ;
-              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),::Style,::nLeft, ;
+              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil, -1,clr),::Style,::nLeft, ;
               ::nTop,::nWidth,::nHeight )
 
    ELSEIF lType == WND_MDI
@@ -156,7 +156,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       ::oParent := HWindow():GetMain()
       IF HB_IsObject( ::oParent )
           ::handle := hwg_InitChildWindow( ::szAppName,cTitle,cMenu,    ;
-             Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil,-1,clr),nStyle,::nLeft, ;
+             Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil, -1,clr),nStyle,::nLeft, ;
              ::nTop,::nWidth,::nHeight,::oParent:handle )
       Else
           MsgStop("Nao eh possivel criar CHILD sem primeiro criar MAIN")
@@ -240,14 +240,14 @@ Return Iif(Len(::aWindows)>0,              ;
 	   Iif(Len(::aWindows)>1,::aWindows[2],Nil)), Nil )
 
 METHOD GetMdiActive() CLASS HWindow 
-Return ::FindWindow ( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE,0,0 ) )
+Return ::FindWindow ( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) )
 
 Function DefWndProc( hWnd, msg, wParam, lParam )
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
 
-   // WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("DefWndProc -Inicio",40) + "|")
+   // WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefWndProc -Inicio", 40) + "|")
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
       // MsgStop( "Message: wrong window handle "+Str( hWnd )+"/"+Str( msg ),"Error!" )
       if msg == WM_CREATE
@@ -263,17 +263,17 @@ Local oWnd, oBtn, oitem
       Return -1
    endif
    if msg == WM_COMMAND
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - COMMAND",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
           endif
       elseif wParam == SC_RESTORE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
           endif
       elseif wParam == SC_MAXIMIZE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
           endif
       elseif wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
@@ -284,19 +284,19 @@ Local oWnd, oBtn, oitem
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-           Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+           Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-           .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+           .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-           .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+           .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-           .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+           .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ENDIF
       return 0
    elseif msg == WM_PAINT
@@ -355,7 +355,7 @@ Local oWnd, oBtn, oitem
           endif
       endif
    elseif msg == WM_NOTIFY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - Notify",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - Notify", 40) + "|")
       Return DlgNotify( oWnd,wParam,lParam )
    elseif msg == WM_ENTERIDLE
       DlgEnterIdle( oWnd, wParam, lParam )
@@ -364,7 +364,7 @@ Local oWnd, oBtn, oitem
       hwg_ReleaseAllWindows(oWnd,hWnd)
 
    elseif msg == WM_DESTROY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - DESTROY", 40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
       #ifdef __XHARBOUR__
@@ -421,8 +421,8 @@ Local oWnd, oBtn, oitem
       if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) <> 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
          if HB_IsArray( oWnd:menu )
             if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
-               if aMenu[1,iCont,2][2] != Nil
-                  hwg_WriteStatus( oWnd, 1, aMenu[1,iCont,2][2] ) // show message on StatusBar
+               if aMenu[1,iCont, 2][2] != Nil
+                  hwg_WriteStatus( oWnd, 1, aMenu[1,iCont, 2][2] ) // show message on StatusBar
                else
                   hwg_WriteStatus( oWnd, 1, "" ) // clear message
                endif
@@ -448,7 +448,7 @@ Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
 
-   //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("DefChildWndProc -Inicio",40) + "|")
+   //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefChildWndProc -Inicio", 40) + "|")
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
       if msg == WM_CREATE
          if Len( HWindow():aWindows ) != 0 .and. ;
@@ -463,18 +463,18 @@ Local oWnd, oBtn, oitem
       Return 0
    endif
    if msg == WM_COMMAND
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - COMMAND",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
-          //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - Close",40) + "|")
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - Close", 40) + "|")
+          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
           endif
       elseif wParam == SC_RESTORE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
           endif
       elseif wParam == SC_MAXIMIZE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
           endif
       elseif wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
@@ -485,24 +485,24 @@ Local oWnd, oBtn, oitem
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+         Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-             .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+             .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ELSEIF oWnd:oPopup != Nil .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-             .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+             .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-             .AND. aMenu[1,iCont,1] != Nil
-         Eval( aMenu[1,iCont,1] )
+             .AND. aMenu[1,iCont, 1] != Nil
+         Eval( aMenu[1,iCont, 1] )
       ENDIF
       return 1
    elseif msg == WM_PAINT
       if oWnd:bPaint != Nil
-          //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DefWndProc -Fim",40) + "|")
+          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - DefWndProc -Fim", 40) + "|")
           Return Eval( oWnd:bPaint, oWnd )
       endif
    elseif msg == WM_MOVE
@@ -556,7 +556,7 @@ Local oWnd, oBtn, oitem
           endif
       endif
    elseif msg == WM_NOTIFY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - Notify",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - Notify", 40) + "|")
       Return DlgNotify( oWnd,wParam,lParam )
    elseif msg == WM_ENTERIDLE
       if wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != Nil ;
@@ -567,7 +567,7 @@ Local oWnd, oBtn, oitem
           ENDIF
       endif
    elseif msg == WM_DESTROY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - DESTROY",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - DESTROY", 40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
      #ifdef __XHARBOUR__
@@ -591,9 +591,9 @@ Local oWnd, oBtn, oitem
       return 1
 
    elseif msg == WM_SYSCOMMAND
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - SysCommand",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - SysCommand", 40) + "|")
       if wParam == SC_CLOSE
-          //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - SysCommand - Close",40) + "|")
+          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - SysCommand - Close", 40) + "|")
           if oWnd:bDestroy != Nil
              if !Eval( oWnd:bDestroy, oWnd )
                 return 1
@@ -633,7 +633,7 @@ Local oWnd, oBtn, oitem
       endif
    endif
 
-   //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - DefChildWndProc -Fim",40) + "|")
+   //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - DefChildWndProc -Fim", 40) + "|")
 
 Return 0
 
@@ -647,9 +647,9 @@ Local hJanBase   :=  oWndBase:handle
 Local hJanClient :=  oWndClient:handle
 Local aMenu,hMenu,hSubMenu, nPosMenu
 
-   // WriteLog( "|DefMDIChild  "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   // WriteLog( "|DefMDIChild  "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
    if msg == WM_NCCREATE
-      // WriteLog( "|DefMDIChild  "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) + " WM_CREATE" )
+      // WriteLog( "|DefMDIChild  "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) + " WM_CREATE" )
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
@@ -659,7 +659,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          hwg_InitControls( oWnd )
       ELSE
 
-         MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd,10),"Create Error!")
+         MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd, 10),"Create Error!")
          QUIT
          nReturn := 0
          Return (nReturn)
@@ -675,7 +675,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
 
    if msg == WM_COMMAND
       if wParam == SC_CLOSE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
           endif
       endif
@@ -683,7 +683,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
             ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[iItem,3] )
+         Eval( oWnd:aEvents[iItem, 3] )
       ENDIF
       nReturn := 1
       Return (nReturn)
@@ -699,7 +699,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
 
       if HB_ISObject(oWnd) .and. HB_IsBlock(oWnd:bPaint)
 
-         // WriteLog( "|DefMDIChild Paint"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+         // WriteLog( "|DefMDIChild Paint"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
 
          nReturn := Eval( oWnd:bPaint, oWnd )
          // Writelog("Saida: " + Valtype(nReturn) )
@@ -728,10 +728,10 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          #endif
      Endif
    elseif msg == WM_NCACTIVATE
-      //WriteLog( "|DefMDIChild"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+      //WriteLog( "|DefMDIChild"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
       if HB_IsObject(oWnd)
          if wParam = 1 // Ativando
-            // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd,10) ) 
+            // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10) ) 
             // Pega o menu atribuido
             aMenu := oWnd:menu
             //hMenu := aMenu[5]
@@ -745,7 +745,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
                Eval( oWnd:bGetFocus, oWnd )
             Endif
          Else   // Desativando
-            // WriteLog("WM_NCACTIVATE" + " -> " + "Desativando" + " Wnd: " + Str(hWnd,10) )  
+            // WriteLog("WM_NCACTIVATE" + " -> " + "Desativando" + " Wnd: " + Str(hWnd, 10) )  
             If  oWnd:bLostFocus != Nil
                Eval( oWnd:bLostFocus, oWnd )
             Endif
@@ -758,7 +758,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
    elseif msg == WM_MDIACTIVATE
 
       if wParam == 1 
-            // WriteLog("WM_MDIACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd,10) )
+            // WriteLog("WM_MDIACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10) )
             // Pega o menu atribuido
             aMenu := oWnd:menu
             hMenu := aMenu[5]
@@ -843,7 +843,7 @@ Local oItem, iCont, nCont
    #ifdef __XHARBOUR__
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != Nil .AND. oItem:oParent:handle == hWnd
-          hwg_SendMessage( oItem:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( oItem:handle,WM_CLOSE, 0, 0 )
       ENDIF
    NEXT
    #else
@@ -853,7 +853,7 @@ Local oItem, iCont, nCont
 
       IF HWindow():aWindows[iCont]:oParent != Nil .AND. ;
               HWindow():aWindows[iCont]:oParent:handle == hWnd
-          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE,0,0 )
+          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE, 0, 0 )
       ENDIF
 
    NEXT
@@ -874,9 +874,9 @@ Local oWnd, oBtn, oitem
 Local xRet, nReturn
 Local oWndClient
 
-   // WriteLog( "|DefMDIWndProc"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
+   // WriteLog( "|DefMDIWndProc"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
    if msg == WM_NCCREATE
-      // WriteLog( "|DefMDIWndProc"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) + " WM_CREATE" )
+      // WriteLog( "|DefMDIWndProc"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) + " WM_CREATE" )
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
@@ -884,7 +884,7 @@ Local oWndClient
          oWnd:handle := hWnd
       ELSE
 
-         MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd,10),"Create Error!")
+         MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd, 10),"Create Error!")
          QUIT
          nReturn := 0
          Return (nReturn)
@@ -905,18 +905,18 @@ Local oWndClient
             Eval( oWnd:bInit, oWnd )
         endif
    elseif msg == WM_COMMAND
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - COMMAND",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
-          //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - Close",40) + "|")
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - Close", 40) + "|")
+          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
           endif
       elseif wParam == SC_RESTORE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
           endif
       elseif wParam == SC_MAXIMIZE
-          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE,0,0 ) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
              hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
           endif
       elseif wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
@@ -927,28 +927,28 @@ Local oWndClient
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != Nil .AND. ;
          ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
-         Eval( oWnd:aEvents[iItem,3],oWnd,iParLow )
+         Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
-         .AND. aMenu[1,iCont,1] != Nil
+         .AND. aMenu[1,iCont, 1] != Nil
 
-         Eval( aMenu[1,iCont,1] )
+         Eval( aMenu[1,iCont, 1] )
 
       ELSEIF oWnd:oPopup != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
-         .AND. aMenu[1,iCont,1] != Nil
+         .AND. aMenu[1,iCont, 1] != Nil
 
-         Eval( aMenu[1,iCont,1] )
+         Eval( aMenu[1,iCont, 1] )
       ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
-         .AND. aMenu[1,iCont,1] != Nil
+         .AND. aMenu[1,iCont, 1] != Nil
 
-         Eval( aMenu[1,iCont,1] )
+         Eval( aMenu[1,iCont, 1] )
       ENDIF
       return 1
    elseif msg == WM_PAINT
       if oWnd:bPaint != Nil
-         //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("DefWndProc -Inicio",40) + "|")
+         //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefWndProc -Inicio", 40) + "|")
          Return Eval( oWnd:bPaint, oWnd )
       endif
    elseif msg == WM_MOVE
@@ -1003,7 +1003,7 @@ Local oWndClient
           endif
       endif
    elseif msg == WM_NOTIFY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - Notify",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - Notify", 40) + "|")
       Return DlgNotify( oWnd,wParam,lParam )
    elseif msg == WM_ENTERIDLE
       if wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != Nil ;
@@ -1018,7 +1018,7 @@ Local oWndClient
       hwg_ReleaseAllWindows(oWnd,hWnd)
    
    elseif msg == WM_DESTROY
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - DESTROY", 40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
       #ifdef __XHARBOUR__
@@ -1053,9 +1053,9 @@ Local oWndClient
       Endif
 
    elseif msg == WM_SYSCOMMAND
-      //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - SysCommand",40) + "|")
+      //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - SysCommand", 40) + "|")
       if wParam == SC_CLOSE
-          //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - SysCommand - Close",40) + "|")
+          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - SysCommand - Close", 40) + "|")
           if oWnd:bDestroy != Nil
              xRet := Eval( oWnd:bDestroy, oWnd )
              xRet := IIf(HB_IsLogical(xRet),xRet,.t.)

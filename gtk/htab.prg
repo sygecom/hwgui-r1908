@@ -115,13 +115,13 @@ Local lNew := ( i == 0 )
       AAdd(::aPages, {Len(::aControls), 0, lNew, 0})
    ENDDO
    ::nActive := i
-   ::aPages[i,4] := hwg_AddTab( ::handle,::aTabs[i] )
+   ::aPages[i, 4] := hwg_AddTab( ::handle,::aTabs[i] )
 
 Return Nil
 
 METHOD EndPage() CLASS HTab
 
-   ::aPages[::nActive,2] := Len(::aControls) - ::aPages[::nActive,1]
+   ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
    IF ::nActive > 1 .AND. ::handle != Nil .AND. !Empty(::handle)
       ::HidePage( ::nActive )
    ENDIF
@@ -155,8 +155,8 @@ Return Nil
 METHOD HidePage( nPage ) CLASS HTab
 Local i, nFirst, nEnd
 
-   nFirst := ::aPages[nPage,1] + 1
-   nEnd   := ::aPages[nPage,1] + ::aPages[nPage,2]
+   nFirst := ::aPages[nPage, 1] + 1
+   nEnd   := ::aPages[nPage, 1] + ::aPages[nPage, 2]
    FOR i := nFirst TO nEnd
       ::aControls[i]:Hide()
    NEXT
@@ -166,8 +166,8 @@ Return Nil
 METHOD ShowPage( nPage ) CLASS HTab
 Local i, nFirst, nEnd
 
-   nFirst := ::aPages[nPage,1] + 1
-   nEnd   := ::aPages[nPage,1] + ::aPages[nPage,2]
+   nFirst := ::aPages[nPage, 1] + 1
+   nEnd   := ::aPages[nPage, 1] + ::aPages[nPage, 2]
    FOR i := nFirst TO nEnd
       ::aControls[i]:Show()
    NEXT
@@ -183,8 +183,8 @@ Return Nil
 METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
 
    IF !Empty(::aPages)
-      nFirst := ::aPages[::nActive,1] + 1
-      nEnd   := ::aPages[::nActive,1] + ::aPages[::nActive,2]
+      nFirst := ::aPages[::nActive, 1] + 1
+      nEnd   := ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
    ELSE
       nFirst := 1
       nEnd   := Len(::aControls)
