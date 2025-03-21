@@ -76,7 +76,7 @@ Local hWnd, oWindow, aControls, iCont
             key := cSeek
          ENDIF
          SEEK key
-         IF .NOT. FOUND()
+         IF !FOUND()
             GO nrec
             MsgStop( "Record not found" )
          ELSE
@@ -126,7 +126,7 @@ Local nrec, i, res, block
       ELSE
          __dbLocate( block,,,, .F. )
       ENDIF
-      IF ( oBrw:prflt .AND. !res ) .OR. ( !oBrw:prflt .AND. .NOT. FOUND() )
+      IF ( oBrw:prflt .AND. !res ) .OR. ( !oBrw:prflt .AND. !FOUND() )
          GO nrec
          MsgStop( "Record not found" )
       ELSE
@@ -152,7 +152,7 @@ Local i, nrec
       IF oBrw:aArray == Nil
          oBrw:aArray := Array( klrecf )
       ENDIF
-      DO WHILE .NOT. EOF()
+      DO WHILE !EOF()
          oBrw:aArray[i] = RECNO()
          IF i < klrecf
             i ++

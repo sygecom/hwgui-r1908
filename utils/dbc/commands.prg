@@ -73,7 +73,7 @@ Private finame, cValue, cFor
       Return Nil
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF .NOT. Empty(cFor) .AND. TYPE( cFor ) <> "L"
+   IF !Empty(cFor) .AND. TYPE( cFor ) <> "L"
       MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -137,7 +137,7 @@ Private cFor
    oWindow := HMainWindow():GetMdiActive()
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF .NOT. Empty(cFor) .AND. TYPE( cFor ) <> "L"
+   IF !Empty(cFor) .AND. TYPE( cFor ) <> "L"
       MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -332,8 +332,8 @@ Static Function EndRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
 Local hWnd, oWindow, aControls, i
 
-   IF .NOT. msmode[improc, 1]
-      IF .NOT. FileLock()
+   IF !msmode[improc, 1]
+      IF !FileLock()
          EndDialog( hDlg )
          Return Nil
       ENDIF

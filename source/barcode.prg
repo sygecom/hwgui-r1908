@@ -474,7 +474,7 @@ METHOD InitCode128(cMode) CLASS Barcode
       RETURN NIL
    ENDIF
 
-   IF .NOT. Empty(cMode)
+   IF !Empty(cMode)
       IF hb_IsChar(cMode) .AND. Upper(cMode) $ "ABC"
          cMode := Upper(cMode)
       ELSE

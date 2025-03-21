@@ -175,7 +175,7 @@ Local oPBar, nSch := 0
       SELECT( improc )
       oPBar := HProgressBar():NewBox( "Structure updating ...",,,,, 10,RecCount() )
       GO TOP
-      DO WHILE .NOT. EOF()
+      DO WHILE !EOF()
          SELECT 20
          APPEND BLANK
          FOR i := 1 TO kolf

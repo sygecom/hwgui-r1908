@@ -194,10 +194,10 @@ Local new_numdriv, new_servertype, serverPath
       #endif
    ENDIF
    IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
-      SET( _SET_EXCLUSIVE, .NOT. SET( _SET_EXCLUSIVE ) )
+      SET( _SET_EXCLUSIVE, !SET( _SET_EXCLUSIVE ) )
    ENDIF
    IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
-      prrdonly := .NOT. prrdonly
+      prrdonly := !prrdonly
    ENDIF
 #ifdef RDD_ADS
    IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
@@ -245,7 +245,7 @@ Local msind := { { "0","None","","" } }, i, ordlen := 0
 Local indname
 
    i := 1
-   DO WHILE .NOT. Empty(indname := ORDNAME( i ))
+   DO WHILE !Empty(indname := ORDNAME( i ))
       AADD( msind, { STR( i, 1 ), indname, ORDKEY( i ), ORDBAGNAME( i ) } )
       ordlen := Max( ordlen, Len( OrdKey( i-1 ) ) )
       i ++
@@ -451,10 +451,10 @@ Local oldLock := AdsLocking()
          #endif
       ENDIF
       IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
-         SET( _SET_EXCLUSIVE, .NOT. SET( _SET_EXCLUSIVE ) )
+         SET( _SET_EXCLUSIVE, !SET( _SET_EXCLUSIVE ) )
       ENDIF
       IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
-         prrdonly := .NOT. prrdonly
+         prrdonly := !prrdonly
       ENDIF
 #ifdef RDD_ADS
       IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
@@ -592,7 +592,7 @@ Local fname, arScr, nError, nLineEr, obl
       IF nAct == 1
          obl := SELECT()
          GO TOP
-         DO WHILE .NOT. EOF()
+         DO WHILE !EOF()
             hwg_DoScript( arScr )
             SELECT( obl )
             SKIP
@@ -781,7 +781,7 @@ RETURN SubStr(stsou, 1, pozs - 1) + elzn + SubStr(stsou, pozs + ellen)
 
 FUNCTION FileLock()
 LOCAL fname := msfile[improc]
-   IF .NOT. msmode[improc, 1]
+   IF !msmode[improc, 1]
       USE &fname EXCLUSIVE
       IF NETERR()
          MsgStop( "File cannot be opened in exclusive mode" )
