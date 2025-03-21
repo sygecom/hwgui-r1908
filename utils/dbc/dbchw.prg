@@ -555,7 +555,7 @@ Local cExpr, res
       Return Nil
    ENDIF
    IF TYPE( TRIM( cExpr ) ) $ "UEUI"
-      MsgStop( "Wrong expression" )
+      hwg_MsgStop( "Wrong expression" )
    ELSE
       res := &( TRIM( cExpr ) )
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
@@ -603,7 +603,7 @@ Local fname, arScr, nError, nLineEr, obl
       MsgInfo( "Script executed" )
    ELSE
       nError := hwg_CompileErr( @nLineEr )
-      MsgStop( "Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)) )
+      hwg_MsgStop( "Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)) )
    ENDIF
    EndDialog( hDlg )
 
@@ -681,7 +681,7 @@ LOCAL bOldError, oError
       ENDIF
       IF improc > 15
          improc := oldimp
-         MsgStop( "Too many opened files!" )
+         hwg_MsgStop( "Too many opened files!" )
          RETURN .F.
       ENDIF
       SELECT( improc )
@@ -716,12 +716,12 @@ LOCAL bOldError, oError
             SET( _SET_EXCLUSIVE, .F. )
             DBUSEAREA(,, fname, hwg_CutExten( IIF( alsname = Nil, fname, alsname ) ),, prrdonly )
             IF NETERR()
-               MsgStop( strerr )
+               hwg_MsgStop( strerr )
                improc := oldimp
                RETURN .F.
             ENDIF
          ELSE
-            MsgStop( strerr )
+            hwg_MsgStop( strerr )
             improc := oldimp
             RETURN .F.
          ENDIF
@@ -784,7 +784,7 @@ LOCAL fname := msfile[improc]
    IF !msmode[improc, 1]
       USE &fname EXCLUSIVE
       IF NETERR()
-         MsgStop( "File cannot be opened in exclusive mode" )
+         hwg_MsgStop( "File cannot be opened in exclusive mode" )
          USE &fname SHARED
          RETURN .F.
       ELSE
@@ -797,5 +797,5 @@ Function hwg_WndOut()
 Return Nil
 
 Function MsgSay( cText )
-   MsgStop( cText )
+   hwg_MsgStop( cText )
 Return Nil

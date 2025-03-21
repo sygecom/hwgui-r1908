@@ -159,7 +159,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
              Iif(oIcon!=Nil,oIcon:handle,Nil),Iif(oBmp!=Nil, -1,clr),nStyle,::nLeft, ;
              ::nTop,::nWidth,::nHeight,::oParent:handle )
       Else
-          MsgStop("Nao eh possivel criar CHILD sem primeiro criar MAIN")
+          hwg_MsgStop("Nao eh possivel criar CHILD sem primeiro criar MAIN")
           Return (NIL)
       Endif
 
@@ -249,7 +249,7 @@ Local oWnd, oBtn, oitem
 
    // WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefWndProc -Inicio", 40) + "|")
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
-      // MsgStop( "Message: wrong window handle "+Str( hWnd )+"/"+Str( msg ),"Error!" )
+      // hwg_MsgStop( "Message: wrong window handle "+Str( hWnd )+"/"+Str( msg ),"Error!" )
       if msg == WM_CREATE
          if Len( HWindow():aWindows ) != 0 .and. ;
               ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != Nil .and. ;
@@ -659,7 +659,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          hwg_InitControls( oWnd )
       ELSE
 
-         MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd, 10),"Create Error!")
+         hwg_MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd, 10),"Create Error!")
          QUIT
          nReturn := 0
          Return (nReturn)
@@ -668,7 +668,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
    endif
 
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
-      // MsgStop( "MDI child: wrong window handle "+Str( hWnd ) + "| " + Str(msg) ,"Error!" )
+      // hwg_MsgStop( "MDI child: wrong window handle "+Str( hWnd ) + "| " + Str(msg) ,"Error!" )
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       Return NIL
    endif
@@ -796,7 +796,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
-        MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIChildProc")
+        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIChildProc")
       Endif
    elseif msg == WM_DESTROY
       if HB_IsObject(oWnd) 
@@ -884,7 +884,7 @@ Local oWndClient
          oWnd:handle := hWnd
       ELSE
 
-         MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd, 10),"Create Error!")
+         hwg_MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd, 10),"Create Error!")
          QUIT
          nReturn := 0
          Return (nReturn)
@@ -895,7 +895,7 @@ Local oWndClient
 
 
    if ( oWnd := HWindow():FindWindow(hWnd) ) == Nil
-      // MsgStop( "MDI wnd: wrong window handle "+Str( hWnd ) + "| " + Str(msg) ,"Error!" )
+      // hwg_MsgStop( "MDI wnd: wrong window handle "+Str( hWnd ) + "| " + Str(msg) ,"Error!" )
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       Return NIL
    endif
@@ -1049,7 +1049,7 @@ Local oWndClient
       If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
-        MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIWndProc")
+        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIWndProc")
       Endif
 
    elseif msg == WM_SYSCOMMAND

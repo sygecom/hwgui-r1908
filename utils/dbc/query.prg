@@ -64,7 +64,7 @@ Static lConnected := .F.
       ENDIF
 
       IF numdriv == 2
-         MsgStop( "You shoud switch to ADS_CDX or ADS_ADT to run query" )
+         hwg_MsgStop( "You shoud switch to ADS_CDX or ADS_ADT to run query" )
          Return .F.
       ENDIF
 #ifdef RDD_ADS
@@ -83,7 +83,7 @@ Static lConnected := .F.
          SELECT 0
       ENDIF
       IF !AdsCreateSqlStatement( ,Iif( numdriv==1, 2, 3 ) )
-         MsgStop( "Cannot create SQL statement" )
+         hwg_MsgStop( "Cannot create SQL statement" )
          IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
@@ -91,7 +91,7 @@ Static lConnected := .F.
       ENDIF
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF !AdsExecuteSqlDirect( cQuery )
-         MsgStop( "SQL execution failed" )
+         hwg_MsgStop( "SQL execution failed" )
          IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
@@ -115,7 +115,7 @@ Static lConnected := .F.
             IF !Empty(oldArea)
                Select( oldArea )
             ENDIF
-            MsgStop( "Statement doesn't returns cursor" )
+            hwg_MsgStop( "Statement doesn't returns cursor" )
             Return .F.
          ENDIF
       ENDIF

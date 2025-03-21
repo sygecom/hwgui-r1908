@@ -74,7 +74,7 @@ Private finame, cValue, cFor
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
-      MsgStop( "Wrong expression!" )
+      hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
          cFor := ".T."
@@ -138,7 +138,7 @@ Private cFor
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
-      MsgStop( "Wrong expression!" )
+      hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
          cFor := ".T."
@@ -224,7 +224,7 @@ Private nsum := 0
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF ( !Empty(cFor) .AND. TYPE( cFor ) != "L" ) .OR. TYPE( cSumf ) != "N"
-      MsgStop( "Wrong expression!" )
+      hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
          cFor := ".T."

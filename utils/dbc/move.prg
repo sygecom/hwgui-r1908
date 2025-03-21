@@ -78,7 +78,7 @@ Local hWnd, oWindow, aControls, iCont
          SEEK key
          IF !FOUND()
             GO nrec
-            MsgStop( "Record not found" )
+            hwg_MsgStop( "Record not found" )
          ELSE
             hwg_WriteStatus( oWindow, 3,"Found" )
          ENDIF
@@ -128,7 +128,7 @@ Local nrec, i, res, block
       ENDIF
       IF ( oBrw:prflt .AND. !res ) .OR. ( !oBrw:prflt .AND. !FOUND() )
          GO nrec
-         MsgStop( "Record not found" )
+         hwg_MsgStop( "Record not found" )
       ELSE
          hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"Found" )
          IF oBrw:prflt

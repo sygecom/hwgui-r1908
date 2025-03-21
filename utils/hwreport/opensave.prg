@@ -20,7 +20,7 @@ Function FileDlg( lOpen )
 Local oDlg
 
    IF !lOpen .AND. ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
-      MsgStop( "Nothing to save" )
+      hwg_MsgStop( "Nothing to save" )
       Return Nil
    ELSEIF lOpen
       CloseReport()
@@ -119,7 +119,7 @@ Function SaveReport
 Local fname
 
    IF ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
-      MsgStop( "Nothing to save" )
+      hwg_MsgStop( "Nothing to save" )
       Return Nil
    ENDIF
    IF Empty(aPaintRep[FORM_FILENAME])
@@ -196,7 +196,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
-                     MsgStop( "Error: "+stroka )
+                     hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
                   ENDIF
@@ -212,7 +212,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
-                     MsgStop( "Error: "+stroka )
+                     hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
                   ENDIF
@@ -227,7 +227,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
-                     MsgStop( "Error: "+stroka )
+                     hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
                   ENDIF
@@ -253,7 +253,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
             IF Upper(Left(stroka, 15)) == "LOCAL APAINTREP"
                nMode := 11
             ELSE
-               MsgStop( "Wrong function "+repname )
+               hwg_MsgStop( "Wrong function "+repname )
                Fclose( han )
                Return .F.
             ENDIF
@@ -274,11 +274,11 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
       ENDDO
       Fclose( han )
    ELSE
-      MsgStop( "Can't open "+fname )
+      hwg_MsgStop( "Can't open "+fname )
       Return .F.
    ENDIF
    IF aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS])
-      MsgStop( repname+" not found or empty!" )
+      hwg_MsgStop( repname+" not found or empty!" )
       res := .F.
    ELSE
       hwg_EnableMenuItem( ,IDM_CLOSE, .T., .T. )
@@ -341,7 +341,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                Fclose( hanOut )
                Fclose( han )
                IF Ferase( fname ) == -1 .OR. Frename( mypath+"__rpt.tmp",fname ) == -1
-                  MsgStop( "Can't rename __rpt.tmp" )
+                  hwg_MsgStop( "Can't rename __rpt.tmp" )
                ELSE
                   res := .T.
                ENDIF
@@ -358,11 +358,11 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                res := .T.
             ENDIF
          ELSE
-            MsgStop( "Can't create __rpt.tmp" )
+            hwg_MsgStop( "Can't create __rpt.tmp" )
             Fclose( han )
          ENDIF
       ELSE
-         MsgStop( "Can't open "+fname )
+         hwg_MsgStop( "Can't open "+fname )
       ENDIF
    ELSE
       han := Fcreate( fname )
