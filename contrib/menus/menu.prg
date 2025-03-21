@@ -240,7 +240,7 @@ Function hwg_EndMenu()
    ELSE
       hwg_BuildMenu( Aclone(_aMenuDef), Iif( _oWnd!=Nil,_oWnd:handle,Nil ), ;
                    _oWnd,,Iif( _oWnd!=Nil,.F.,.T. ) )
-      IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty( _aAccel )
+      IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
          _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )
       ENDIF
       _aMenuDef := Nil

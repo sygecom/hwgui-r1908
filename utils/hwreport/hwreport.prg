@@ -38,7 +38,7 @@ Memvar aItemTypes
 
 Function Main()
 Local oMainWindow, aPanel, oIcon := HIcon():AddResource("ICON_1")
-Public mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+Public mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
 Public aPaintRep := Nil
 Public oPenBorder, oFontSmall, oFontStandard, lastFont := Nil
 Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
@@ -279,7 +279,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          hwg_Rectangle( hDC, x1-1, y1-1, x2+1, y2+1 )
       ENDIF
       IF aItem[ITEM_TYPE] == TYPE_TEXT
-         IF Empty( aItem[ITEM_CAPTION] )
+         IF Empty(aItem[ITEM_CAPTION])
             hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
          ELSE
       SelectObject( hDC, Iif(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )

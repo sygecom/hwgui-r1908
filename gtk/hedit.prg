@@ -135,7 +135,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
          IF oParent != Nil .AND. !Empty(oParent:KeyList)
 	    /*
             cKeyb := hwg_GetKeyboardState()
-            nctrl := IIf(Asc(Substr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(Substr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
+            nctrl := IIf(Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(SubStr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
             IF ( nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam}) ) > 0
                Eval( oParent:KeyList[nPos, 3] )
             ENDIF
@@ -191,11 +191,11 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
          ELSEIF wParam == GDK_Right     // KeyRight
             IF lParam == 0
                ::lFirst := .F.
-               Return KeyRight( Self )
+               Return KeyRight(Self)
             ENDIF
          ELSEIF wParam == GDK_Left     // KeyLeft
                ::lFirst := .F.
-               Return KeyLeft( Self )
+               Return KeyLeft(Self)
          ELSEIF wParam == GDK_Home     // Home
                ::lFirst := .F.
                hwg_edit_SetPos( ::handle, 0 )
@@ -306,14 +306,14 @@ Local nAt, i, masklen, cChar
    ENDIF
    oEdit:cPicFunc := oEdit:cPicMask := ""
    IF cPicture != Nil
-      IF Left( cPicture, 1 ) == "@"
+      IF Left(cPicture, 1) == "@"
          nAt := At( " ", cPicture )
          IF nAt == 0
-            oEdit:cPicFunc := Upper( cPicture )
+            oEdit:cPicFunc := Upper(cPicture)
             oEdit:cPicMask := ""
          ELSE
-            oEdit:cPicFunc := Upper( SubStr( cPicture, 1, nAt - 1 ) )
-            oEdit:cPicMask := SubStr( cPicture, nAt + 1 )
+            oEdit:cPicFunc := Upper(SubStr(cPicture, 1, nAt - 1))
+            oEdit:cPicMask := SubStr(cPicture, nAt + 1)
          ENDIF
          IF oEdit:cPicFunc == "@"
             oEdit:cPicFunc := ""
@@ -341,7 +341,7 @@ Local nAt, i, masklen, cChar
    IF !Empty(oEdit:cPicMask)
       masklen := Len(oEdit:cPicMask)
       FOR i := 1 TO masklen
-         cChar := SubStr( oEdit:cPicMask, i, 1 )
+         cChar := SubStr(oEdit:cPicMask, i, 1)
          IF !cChar $ "!ANX9#"
             oEdit:lPicComplex := .T.
             EXIT
@@ -369,7 +369,7 @@ Local cChar
       Return .F.
    ENDIF
 
-   cChar := SubStr( oEdit:cPicMask, nPos, 1 )
+   cChar := SubStr(oEdit:cPicMask, nPos, 1)
 
    IF oEdit:cType == "C"
       return cChar $ "!ANX9#"
@@ -383,7 +383,7 @@ Local cChar
 
 Return .F.
 
-Static Function KeyRight( oEdit,nPos )
+Static Function KeyRight(oEdit, nPos)
 Local i, masklen, newpos, vari
 
    IF oEdit == Nil
@@ -417,7 +417,7 @@ Local i, masklen, newpos, vari
 
 Return 1
 
-Static Function KeyLeft( oEdit,nPos )
+Static Function KeyLeft(oEdit, nPos)
 Local i
    IF oEdit == Nil
       Return 0
@@ -456,9 +456,9 @@ Local nGetLen := Len(oEdit:cPicMask), nLen
       ENDDO
    ENDIF
    IF nPos > 0
-      oEdit:title := PadR( Left( oEdit:title, nPos-1 ) + ;
-                  SubStr( oEdit:title, nPos+1, nLen-1 ) + " " + ;
-                  SubStr( oEdit:title, nPos+nLen ), nGetLen )
+      oEdit:title := PadR( Left(oEdit:title, nPos - 1) + ;
+                  SubStr(oEdit:title, nPos + 1, nLen - 1) + " " + ;
+                  SubStr(oEdit:title, nPos + nLen), nGetLen )
       hwg_edit_Settext( oEdit:handle, oEdit:title )
       hwg_edit_Getpos( oEdit:handle, nPos-1 )
    ENDIF
@@ -489,7 +489,7 @@ Local cPic
 
    ELSEIF oEdit:cType == "L"
 
-      IF !( Upper( cChar ) $ "YNTF" )
+      IF !( Upper(cChar) $ "YNTF" )
          Return Nil
       ENDIF
 
@@ -500,7 +500,7 @@ Local cPic
    ENDIF
 
    IF !Empty(oEdit:cPicMask)
-      cPic  := Substr( oEdit:cPicMask, nPos, 1 )
+      cPic  := SubStr(oEdit:cPicMask, nPos, 1)
 
       cChar := Transform( cChar, cPic )
       IF cPic == "A"
@@ -538,8 +538,8 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
       ELSE
          vari := Trim(oEdit:title)
          FOR i := 2 TO Len(vari)
-            IF !IsDigit( Substr( vari,i, 1 ) )
-               vari := Left( vari,i-1 ) + Substr( vari,i+1 )
+            IF !IsDigit( SubStr(vari, i, 1) )
+               vari := Left(vari, i - 1) + SubStr(vari, i + 1)
             ENDIF
          NEXT
          vari := Val( vari )
@@ -548,7 +548,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
          oEdit:title := Transform( vari, oEdit:cPicFunc + IIf(Empty(oEdit:cPicFunc), "", " ") + oEdit:cPicMask )
       ENDIF
       hwg_edit_Settext( oEdit:handle, oEdit:title )
-      KeyRight( oEdit,nPos-1 )
+      KeyRight(oEdit, nPos - 1)
    ELSE
 
       IF oEdit:cType == "N" .AND. oEdit:lFirst
@@ -573,22 +573,22 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
                      Exit
                   ENDIF
                NEXT
-               oEdit:title := Left( oEdit:title,nPos-1 ) + cKey + ;
-                  Substr( oEdit:title,nPos,nLen-1 ) + Substr( oEdit:title,nPos+nLen )
+               oEdit:title := Left(oEdit:title, nPos - 1) + cKey + ;
+                  SubStr(oEdit:title, nPos, nLen - 1) + SubStr(oEdit:title, nPos + nLen)
             ELSE
-               oEdit:title := Left( oEdit:title,nPos-1 ) + cKey + ;
-                  Substr( oEdit:title,nPos )
+               oEdit:title := Left(oEdit:title, nPos - 1) + cKey + ;
+                  SubStr(oEdit:title, nPos)
             ENDIF
 
             IF !Empty(oEdit:cPicMask) .AND. Len(oEdit:cPicMask) < Len(oEdit:title)
-               oEdit:title := Left( oEdit:title,nPos-1 ) + cKey + SubStr( oEdit:title,nPos+1 )
+               oEdit:title := Left(oEdit:title, nPos - 1) + cKey + SubStr(oEdit:title, nPos + 1)
             ENDIF
          ELSE
-            oEdit:title := Left( oEdit:title,nPos-1 ) + cKey + SubStr( oEdit:title,nPos+1 )
+            oEdit:title := Left(oEdit:title, nPos - 1) + cKey + SubStr(oEdit:title, nPos + 1)
          ENDIF
          hwg_edit_Settext( oEdit:handle, oEdit:title )
          // writelog( "GetApplyKey "+oEdit:title+str(nPos-1) )
-         KeyRight( oEdit,nPos )
+         KeyRight(oEdit, nPos)
          //Added By Sandro Freire
          IF oEdit:cType == "N"
             IF !Empty(oEdit:cPicMask)
@@ -667,9 +667,9 @@ Local xValue, cChar, nFor, minus
 
       IF "R" $ oEdit:cPicFunc
          FOR nFor := 1 to Len(oEdit:cPicMask)
-            cChar := SubStr( oEdit:cPicMask, nFor, 1 )
+            cChar := SubStr(oEdit:cPicMask, nFor, 1)
             IF !cChar $ "ANX9#!"
-               cBuffer := SubStr( cBuffer, 1, nFor - 1 ) + Chr( 1 ) + SubStr( cBuffer, nFor + 1 )
+               cBuffer := SubStr(cBuffer, 1, nFor - 1) + Chr( 1 ) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
          cBuffer := StrTran(cBuffer, Chr(1), "")
@@ -678,13 +678,13 @@ Local xValue, cChar, nFor, minus
       xValue := cBuffer
 
    ELSEIF oEdit:cType == "N"
-      minus := ( Left( LTrim(cBuffer), 1 ) == "-" )
-      cBuffer := Space( FirstEditable(oEdit) - 1 ) + SubStr( cBuffer, FirstEditable(oEdit), LastEditable(oEdit) - FirstEditable(oEdit) + 1 )
+      minus := ( Left(LTrim(cBuffer), 1) == "-" )
+      cBuffer := Space( FirstEditable(oEdit) - 1 ) + SubStr(cBuffer, FirstEditable(oEdit), LastEditable(oEdit) - FirstEditable(oEdit) + 1)
 
       IF "D" $ oEdit:cPicFunc
          FOR nFor := FirstEditable( oEdit ) to LastEditable( oEdit )
             IF !IsEditable( oEdit,nFor )
-               cBuffer = Left( cBuffer, nFor-1 ) + Chr( 1 ) + SubStr( cBuffer, nFor+1 )
+               cBuffer = Left(cBuffer, nFor - 1) + Chr( 1 ) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
       ELSE
@@ -705,8 +705,8 @@ Local xValue, cChar, nFor, minus
          ENDIF
 
          FOR nFor := FirstEditable(oEdit) to LastEditable(oEdit)
-            IF !IsEditable( oEdit,nFor ) .and. SubStr( cBuffer, nFor, 1 ) != "."
-               cBuffer = Left( cBuffer, nFor-1 ) + Chr( 1 ) + SubStr( cBuffer, nFor+1 )
+            IF !IsEditable( oEdit,nFor ) .and. SubStr(cBuffer, nFor, 1) != "."
+               cBuffer = Left(cBuffer, nFor - 1) + Chr( 1 ) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
       ENDIF
@@ -723,13 +723,13 @@ Local xValue, cChar, nFor, minus
 
       IF minus
          FOR nFor := 1 to Len(cBuffer)
-            IF IsDigit( SubStr( cBuffer, nFor, 1 ) )
+            IF IsDigit( SubStr(cBuffer, nFor, 1) )
                exit
             ENDIF
          NEXT
          nFor--
          IF nFor > 0
-            cBuffer := Left( cBuffer, nFor-1 ) + "-" + SubStr( cBuffer, nFor+1 )
+            cBuffer := Left(cBuffer, nFor - 1) + "-" + SubStr(cBuffer, nFor + 1)
          ELSE
             cBuffer := "-" + cBuffer
          ENDIF
@@ -739,13 +739,13 @@ Local xValue, cChar, nFor, minus
 
    ELSEIF oEdit:cType == "L"
 
-      cBuffer := Upper( cBuffer )
+      cBuffer := Upper(cBuffer)
       xValue := "T" $ cBuffer .or. "Y" $ cBuffer .or. hb_langmessage( HB_LANG_ITEM_BASE_TEXT + 1 ) $ cBuffer
 
    ELSEIF oEdit:cType == "D"
 
       IF "E" $ oEdit:cPicFunc
-         cBuffer := SubStr( cBuffer, 4, 3 ) + SubStr( cBuffer, 1, 3 ) + SubStr( cBuffer, 7 )
+         cBuffer := SubStr(cBuffer, 4, 3) + SubStr(cBuffer, 1, 3) + SubStr(cBuffer, 7)
       ENDIF
       xValue := cBuffer
 
@@ -787,7 +787,7 @@ Local i, nLen
    ENDIF
    nLen := len(cBuffer)
    FOR i := 1 to nLen
-      If IsDigit( Substr( cBuffer,i, 1 ) )
+      If IsDigit( SubStr(cBuffer, i, 1) )
          Return .T.
       ENDIF
    NEXT

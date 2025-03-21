@@ -84,7 +84,7 @@
 #define pFALSE .F.
 #define pCRLF HB_OSNEWLINE()
 
-#xtranslate DOSFILENAME(<c>) => SubStr( <c>, rat("\",<c>)+1 )
+#xtranslate DOSFILENAME(<c>) => SubStr(<c>, rat("\", <c>) + 1)
 
 
 #xcommand IF <var> IS <type>          => if valtype(<var>) = <type>

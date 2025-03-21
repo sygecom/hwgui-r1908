@@ -146,7 +146,7 @@ Static Function OpenBmp( aItem,fname )
 Local hDlg := hwg_GetModalHandle()
    Local aBmpSize
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
-   IF !Empty( fname )
+   IF !Empty(fname)
       IF aItem[ITEM_BITMAP] != Nil
          DeleteObject( aItem[ITEM_BITMAP]:handle )
       ENDIF

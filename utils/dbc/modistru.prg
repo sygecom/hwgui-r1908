@@ -67,12 +67,12 @@ Local cName, cType, nLen, nDec := 0
 
    IF nOper < 4
       cName := GetDlgItemText( hDlg, IDC_EDIT2, 10 )
-      IF Empty( cName )
+      IF Empty(cName)
          hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
          Return Nil
       ENDIF
-      cType := Left( GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1 )
-      IF Empty( cType )
+      cType := Left(GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1)
+      IF Empty(cType)
          hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
          Return Nil
       ENDIF
@@ -92,7 +92,7 @@ Local cName, cType, nLen, nDec := 0
             nDec  := Val( GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
          ENDIF
       ENDIF
-      IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty( oBrowse:aArray[1, 1] ) )
+      IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty(oBrowse:aArray[1, 1]) )
          oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
       ELSEIF nOper == 1
          Aadd( oBrowse:aArray, { cName, cType, nLen, nDec } )
@@ -120,10 +120,10 @@ Local oWindow, aControls
 Local oPBar, nSch := 0
 
    IF lNew
-      IF Empty( fname := hwg_SaveFile( "*.dbf","xBase files( *.dbf )", "*.dbf", mypath ) )
+      IF Empty(fname := hwg_SaveFile( "*.dbf","xBase files( *.dbf )", "*.dbf", mypath ))
          Return Nil
       ENDIF
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
       dbCreate( fname, oBrowse:aArray )
       OpenDbf( fname )
    ELSE

@@ -302,9 +302,9 @@ Local aCoors, retValue := -1
          ELSEIF wParam == GDK_Up    // Up
             ::LINEUP()
          ELSEIF wParam == GDK_Right    // Right
-            LineRight( Self )
+            LineRight(Self)
          ELSEIF wParam == GDK_Left    // Left
-            LineLeft( Self )
+            LineLeft(Self)
          ELSEIF wParam == GDK_Home    // Home
             ::DoHScroll( SB_LEFT )
          ELSEIF wParam == GDK_End    // End
@@ -429,10 +429,10 @@ Local aCoors, retValue := -1
             ::LINEUP()
             EXIT
          CASE GDK_Right    // Right
-            LineRight( Self )
+            LineRight(Self)
             EXIT
          CASE GDK_Left    // Left
-            LineLeft( Self )
+            LineLeft(Self)
             EXIT
          CASE GDK_Home    // Home
             ::DoHScroll( SB_LEFT )
@@ -1136,9 +1136,9 @@ Local nScrollH, nLeftCol, colpos
    IF wParam == Nil
       nScrollH := hwg_getAdjValue( ::hScrollH )
       IF nScrollH - ::nScrollH < 0
-         LineLeft( Self )
+         LineLeft(Self)
       ELSEIF nScrollH - ::nScrollH > 0
-         LineRight( Self )
+         LineRight(Self)
       ENDIF
    ELSE
       IF wParam == SB_LEFT
@@ -1146,14 +1146,14 @@ Local nScrollH, nLeftCol, colpos
          DO WHILE nLeftCol != ::nLeftCol .OR. colPos != ::colPos
             nLeftCol := ::nLeftCol
             colPos := ::colPos
-            LineLeft( Self, .F. )
+            LineLeft(Self, .F.)
          ENDDO
       ELSE
          nLeftCol := colPos := 0
          DO WHILE nLeftCol != ::nLeftCol .OR. colPos != ::colPos
             nLeftCol := ::nLeftCol
             colPos := ::colPos
-            LineRight( Self,.F. )
+            LineRight(Self, .F.)
          ENDDO
       ENDIF
       hwg_InvalidateRect( ::area, 0 )
@@ -1162,7 +1162,7 @@ Local nScrollH, nLeftCol, colpos
 RETURN Nil
 
 //----------------------------------------------------//
-STATIC FUNCTION LINERIGHT( oBrw, lRefresh )
+STATIC FUNCTION LINERIGHT(oBrw, lRefresh)
 Local maxPos, nPos, oldLeft := oBrw:nLeftCol, oldPos := oBrw:colpos, fif
 LocaL i, nColumns := Len(oBrw:aColumns)
    
@@ -1199,7 +1199,7 @@ LocaL i, nColumns := Len(oBrw:aColumns)
 RETURN Nil
 
 //----------------------------------------------------//
-STATIC FUNCTION LINELEFT( oBrw, lRefresh )
+STATIC FUNCTION LINELEFT(oBrw, lRefresh)
 Local maxPos, nPos, oldLeft := oBrw:nLeftCol, oldPos := oBrw:colpos, fif
 LocaL nColumns := Len(oBrw:aColumns)
 

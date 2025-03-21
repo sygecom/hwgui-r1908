@@ -202,21 +202,21 @@ Local i, i0, j, slen, c
       i := 1
       i0 := 0
       DO WHILE i <= slen
-         IF ( c := Substr( cLine,i, 1 ) ) < " "
+         IF ( c := SubStr(cLine, i, 1) ) < " "
             IF i0 != 0
-               ::PrintText( Substr(cLine,i0,i-i0 ) )
+               ::PrintText( SubStr(cLine,i0,i-i0 ) )
                i0 := 0
             ENDIF
-            i += ::PutCode( Substr( cLine,i ) )
+            i += ::PutCode( SubStr(cLine, i) )
             LOOP
          ELSEIF ( j := At( c,cPseudoChar ) ) != 0
             IF i0 != 0
-               ::PrintText( Substr(cLine,i0,i-i0 ) )
+               ::PrintText( SubStr(cLine,i0,i-i0 ) )
                i0 := 0
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
                i0 := i
-               DO WHILE i <= slen .AND. Substr( cLine,i, 1 ) == c
+               DO WHILE i <= slen .AND. SubStr(cLine, i, 1) == c
                   i ++
                ENDDO
                ::oPrinter:Line( ::x, ::y+(::nLineHeight/2), ::x + (i-i0)*::nCharW, ::y+(::nLineHeight/2) )
@@ -264,7 +264,7 @@ Local i, i0, j, slen, c
          i ++
       ENDDO
       IF i0 != 0
-         ::PrintText( Substr(cLine,i0,i-i0 ) )
+         ::PrintText( SubStr(cLine,i0,i-i0 ) )
       ENDIF
    ENDIF
 
@@ -296,7 +296,7 @@ Static aCodes := {   ;
    { Chr(27)+'G',,,,.t.,,},   ;     /* bold */
    { Chr(27)+'H',,,,.f.,, }   ;     /* cancel bold */
  }
-Local i, sLen := Len(aCodes), c := Left( cLine, 1 )
+Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen

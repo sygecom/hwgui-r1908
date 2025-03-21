@@ -107,7 +107,7 @@ Local i, aControls := ::aControls, nLen := Len(aControls), o
    FOR i := 1 TO nLen
       IF aControls[i]:nId == nId
          Return aControls[i]
-      ELSEIF !Empty( aControls[i]:aControls) .AND. ( o := aControls[i]:F(nId) ) != Nil
+      ELSEIF !Empty(aControls[i]:aControls) .AND. ( o := aControls[i]:F(nId) ) != Nil
          Return o
       ENDIF
    NEXT
@@ -150,7 +150,7 @@ Local cPre
    IF cId != Nil .AND. ( o := HFormTmpl():Find( cId ) ) != Nil
       Return o
    ENDIF
-   IF Left( fname, 5 ) == "<?xml"
+   IF Left(fname, 5) == "<?xml"
       oDoc := HXMLDoc():ReadString( fname )
    ELSE
       oDoc := HXMLDoc():Read( fname )
@@ -245,8 +245,8 @@ Private oDlg
          lModal := xProperty
       ELSEIF ::aProp[i, 1] == "formtype"
          IF nMode == Nil
-            lMdi := AT( "mdimain", Lower( xProperty ) ) > 0
-            lMdiChild := AT( "mdichild", Lower( xProperty ) ) > 0
+            lMdi := AT( "mdimain", Lower(xProperty) ) > 0
+            lMdiChild := AT( "mdichild", Lower(xProperty) ) > 0
             nMode := if(left(xProperty, 3) =="dlg", 2, 1)
          ENDIF
       ELSEIF ::aProp[i, 1] == "variables"
@@ -291,9 +291,9 @@ Private oDlg
             nStyle += WS_CLIPCHILDREN
          ENDIF
       ELSEIF ::aProp[i, 1] == "fromstyle"
-         IF Lower( xProperty ) == "popup"
+         IF Lower(xProperty) == "popup"
             nStyle += WS_POPUP + WS_CAPTION
-         ELSEIF Lower( xProperty ) == "child"
+         ELSEIF Lower(xProperty) == "child"
             nStyle += WS_CHILD
          ENDIF
 
@@ -439,9 +439,9 @@ Local arr := {}, nPos1, nPos2, cLine
       AAdd(arr, AllTrim(Left(cMethod, nPos1 - 1)))
       DO WHILE .T.
          IF ( nPos2 := hb_At( Chr(10),cMethod,nPos1+1 ) ) == 0
-            cLine := AllTrim(Substr(cMethod, nPos1 + 1))
+            cLine := AllTrim(SubStr(cMethod, nPos1 + 1))
          ELSE
-            cLine := AllTrim(Substr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1))
+            cLine := AllTrim(SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1))
          ENDIF
          IF !Empty(cLine)
             AAdd(arr, cLine)
@@ -453,11 +453,11 @@ Local arr := {}, nPos1, nPos2, cLine
          ENDIF
       ENDDO
    ENDIF
-   IF Right( arr[1], 1 ) < " "
-      arr[1] := Left( arr[1],Len(arr[1])-1 )
+   IF Right(arr[1], 1) < " "
+      arr[1] := Left(arr[1], Len(arr[1]) - 1)
    ENDIF
-   IF Len(arr) > 1 .AND. Right( arr[2], 1 ) < " "
-      arr[2] := Left( arr[2],Len(arr[2])-1 )
+   IF Len(arr) > 1 .AND. Right(arr[2], 1) < " "
+      arr[2] := Left(arr[2], Len(arr[2]) - 1)
    ENDIF
 
 Return arr
@@ -468,7 +468,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
    IF cMethod = Nil .OR. Empty(cMethod)
       Return Nil
    ENDIF
-   IF oCtrl != Nil .AND. Left( oCtrl:oParent:Classname(), 2 ) == "HC"
+   IF oCtrl != Nil .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
       // writelog( oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname() )
       nContainer := oForm:nContainer
    ENDIF
@@ -481,7 +481,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
       END SEQUENCE
       ERRORBLOCK( bOldError )
       Return bRes
-   ELSEIF Lower( Left( arr[1], 11 ) ) == "parameters "
+   ELSEIF Lower(Left(arr[1], 11)) == "parameters "
       IF Len(arr) == 2
          cCode := IIf(Lower(Left(arr[2], 6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2])
          cCode := "{|" + LTrim(SubStr(arr[1], 12)) + "|" + __Preprocess( cCode ) + "}"
@@ -544,7 +544,7 @@ Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
          FOR j := 1 TO Len(aItems[i]:aItems)
             o := aItems[i]:aItems[j]
             IF o:title == "property"
-               IF ( cName := Lower( o:GetAttribute("name") ) ) == "varname"
+               IF ( cName := Lower(o:GetAttribute("name")) ) == "varname"
                   AAdd(oForm:aVars, hfrm_GetProperty(o:aItems[1]))
                ELSEIF cName == "name"
                   AAdd(oForm:aNames, hfrm_GetProperty(o:aItems[1]))
@@ -580,7 +580,7 @@ MEMVAR name, nMaxLines, nLength, lVertical, brwType, TickStyle, TickMarks, Tabs,
 MEMVAR aImages, lEditLabels, aParts
 
    IF nCtrl == 0
-      IF Lower( oCtrlTmpl:cClass ) == "pagesheet"
+      IF Lower(oCtrlTmpl:cClass) == "pagesheet"
          tmp_nSheet ++
          oParent:StartPage( Tabs[tmp_nSheet] )
          FOR i := 1 TO Len(oCtrlTmpl:aControls)
@@ -598,13 +598,13 @@ MEMVAR aImages, lEditLabels, aParts
       DO WHILE .T.
          IF ( j := hb_At( ",",stroka,i ) ) != 0 .OR. ( j := hb_At( ")",stroka,i ) ) != 0
             IF j-i > 0
-               varname := Substr(stroka,i,j-i)
+               varname := SubStr(stroka,i,j-i)
                __mvPrivate( varname )
-               IF Substr( varname, 2 ) == "InitValue"
+               IF SubStr(varname, 2) == "InitValue"
                   cInitName  := varname
                   xInitValue := IIf(Left(varname, 1) == "n", 1, IIf(Left(varname, 1) == "c", "", .F.))
                ENDIF
-               stroka := Left( stroka,i-1 ) + "m->" + Substr( stroka,i )
+               stroka := Left(stroka, i - 1) + "m->" + SubStr(stroka, i)
                i := j+4
             ELSE
                i := j+1
@@ -689,7 +689,7 @@ MEMVAR aImages, lEditLabels, aParts
                   variable ( cInitValue, nInitValue, ... ) */
                __mvPut( cInitName, __mvGet( xProperty ) )
             ENDIF
-         ELSEIF Substr( cPName, 2 ) == "initvalue"
+         ELSEIF SubStr(cPName, 2) == "initvalue"
             xInitValue := xProperty
          ENDIF
       ENDIF
@@ -824,7 +824,7 @@ Local arr := {}, pos1 := 2, pos2 := 1
 
    IF Len(stroka) > 2
       DO WHILE pos2 > 0
-         DO WHILE Substr( stroka,pos1, 1 ) <= ' ' ; pos1 ++ ; ENDDO
+         DO WHILE SubStr(stroka, pos1, 1) <= ' ' ; pos1 ++ ; ENDDO
          pos2 := hb_At( ',',stroka,pos1 )
          AAdd(arr, Trim(SubStr(stroka, pos1, IIf(pos2 > 0, pos2 - pos1, hb_At("}", stroka, pos1) - pos1))))
          pos1 := pos2 + 1
@@ -854,11 +854,11 @@ Function hfrm_GetProperty( xProp )
 Local c
 
    IF HB_IsChar( xProp )
-      c := Left( xProp, 1 )
+      c := Left(xProp, 1)
       IF c == "["
-         xProp := Substr( xProp, 2,Len(xProp)-2 )
+         xProp := SubStr(xProp, 2, Len(xProp) - 2)
       ELSEIF c == "."
-         xProp := ( Substr( xProp, 2, 1 ) == "T" )
+         xProp := ( SubStr(xProp, 2, 1) == "T" )
       ELSEIF c == "{"
          xProp := hfrm_Str2Arr( xProp )
       ELSE
@@ -920,7 +920,7 @@ Local cPre
       Return o
    ENDIF
 
-   IF Left( fname, 5 ) == "<?xml"
+   IF Left(fname, 5) == "<?xml"
       oDoc := HXMLDoc():ReadString( fname )
    ELSE
       oDoc := HXMLDoc():Read( fname )
@@ -1218,12 +1218,12 @@ Memvar lLastCycle, lSkipItem
                nFirst := i := 1
                ny := y
                DO WHILE ( i := hb_At( ";",cText,i ) ) > 0
-                  ::oPrinter:Say( Substr(cText,nFirst,i-nFirst),x,ny,x2,ny+dy,nJustify,oItem:obj )
+                  ::oPrinter:Say( SubStr(cText,nFirst,i-nFirst),x,ny,x2,ny+dy,nJustify,oItem:obj )
                   i ++
                   nFirst := i
                   ny += dy
                ENDDO
-               ::oPrinter:Say( Substr(cText,nFirst,Len(cText)-nFirst+1),x,ny,x2,ny+dy,nJustify,oItem:obj )
+               ::oPrinter:Say( SubStr(cText,nFirst,Len(cText)-nFirst+1),x,ny,x2,ny+dy,nJustify,oItem:obj )
             ELSE
                ::oPrinter:Say( cText,x,y,x2,y2,nJustify,oItem:obj )
             ENDIF

@@ -266,8 +266,8 @@ Local cNome := cFileNoPath( cArq )
 
 cDest := Alltrim( StrTran( cArq, cNome, "" ) )
 
-If Substr( cDest, -1, 1 ) == "\"
-   cDest := Substr( cDest, 1, Len( cDest ) -1 )
+If SubStr(cDest, -1, 1) == "\"
+   cDest := SubStr(cDest, 1, Len( cDest ) - 1)
 EndIf
    
 Return cDest
@@ -277,7 +277,7 @@ Function cFileNoExt( cArq )
 Local n
 n:=At( ".", cArq )
 If n > 0
-   Return Substr( cArq, 1, n - 1 )
+   Return SubStr(cArq, 1, n - 1)
 Endif
 
 Return cArq   
@@ -289,7 +289,7 @@ Local cLetra
 
 For i:=1 to Len( cArq )
    
-   cLetra := Substr( cArq, i, 1 )
+   cLetra := SubStr(cArq, i, 1)
    If cLetra == "\"
       cDest := ""
    Else   
@@ -378,7 +378,7 @@ Local cMake
 Local CRLF := Chr(13) + Chr(10)
 Local cListObj := ""
 Local cListRes := ""
-Local cMainPrg := Alltrim( Lower( cFileNoPath( cFileNoExt( oMainPrg:GetText() ) ) ) )
+Local cMainPrg := Alltrim( Lower(cFileNoPath( cFileNoExt( oMainPrg:GetText() ) )) )
 Local cPathFile
 Local cRun 
 Local cNameExe
@@ -388,15 +388,15 @@ Local cErrText
 Local lEnd
 
 cPathFile := cPathNoFile( oMainPrg:GetText() )
-If !Empty( cPathFile )
+If !Empty(cPathFile)
    DirChange( cPathFile )
 EndIF   
 
 If File(cDirec+"hwmake.Ini")
-   cHwGUI  := lower( alltrim( hwg_GetIni( 'Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini" ) ) )
-   cHarbour:= lower( alltrim( hwg_GetIni( 'Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")  ) )
-   cBCC55  := lower( alltrim( hwg_GetIni( 'Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini" ) ) )
-   cObj    := lower( alltrim( hwg_GetIni( 'Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini" ) ) )
+   cHwGUI  := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini" ) ))
+   cHarbour:= Lower(alltrim( hwg_GetIni( 'Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")  ))
+   cBCC55  := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini" ) ))
+   cObj    := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini" ) ))
 Else 
    cHwGUI  :="c:\hwgui"
    cHarbour:="c:\xharbour"
@@ -404,10 +404,10 @@ Else
    cObj    :="obj"
 EndIf
 
-cObj := Lower( Alltrim( cObj ) )
+cObj := Lower(Alltrim( cObj ))
 Makedir( cObj )
 
-cExeHarbour := Lower( cHarbour+"\bin\harbour.exe" )
+cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //If !File( cExeHarbour )
 //   MsgInfo( "Not exist " + cExeHarbour +"!!" )
 //   Return Nil
@@ -489,10 +489,10 @@ For Each i in oBrowse4:aArray
    cListRes += cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".res +" + CRLF
 Next
 If Len( cListRes ) > 0
-   cListRes := Substr( cListRes, 1, Len( cListRes ) - 3 )
+   cListRes := SubStr(cListRes, 1, Len( cListRes ) - 3)
 EndIF   
 cMake := cListObj
-cNameExe := Alltrim( lower( oExeName:GetText() ) )
+cNameExe := Alltrim( lower(oExeName:GetText()) )
 If At( ".exe", cNameExe ) == 0
    cNameExe += ".exe"
 EndIF
@@ -502,7 +502,7 @@ cMake += cFileNoExt( oExeName:GetText() ) + ".map, + " + CRLF
 cMake += RetLibrary( cHwGUI, cHarbour, cBcc55, oBrowse3:aArray )
 //Add def File
 //
-cMake += If( !Empty( cListRes ), ",," + cListRes, "" )  
+cMake += If( !Empty(cListRes), ",," + cListRes, "" )  
 
 If File( cMainPrg + ".bc ")
    fErase( cMainPrg + ".bc " )
@@ -571,7 +571,7 @@ FOR EACH i in aLibs
    cLib += lower(i) + CRLF
 Next 
 
-cLib := Substr( Alltrim( cLib ), 1, Len( Alltrim( cLib ) ) - 2 )
+cLib := SubStr(Alltrim( cLib ), 1, Len( Alltrim( cLib ) ) - 2)
 cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
 Return cLib
  

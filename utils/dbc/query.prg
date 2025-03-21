@@ -19,8 +19,8 @@ Static cQuery := ""
 Function OpenQuery
 Local fname := hwg_SelectFile( "Query files( *.que )", "*.que", mypath )
 
-   IF !Empty( fname )
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+   IF !Empty(fname)
+      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
       cQuery := MemoRead( fname )
       Query( .T. )
    ENDIF
@@ -58,7 +58,7 @@ Static lConnected := .F.
 
    IF lOk
       cQuery := GetEditText( hDlg, IDC_EDITQUERY )
-      IF Empty( cQuery )
+      IF Empty(cQuery)
          hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
          Return Nil
       ENDIF
@@ -69,8 +69,8 @@ Static lConnected := .F.
       ENDIF
 #ifdef RDD_ADS
       IF !lConnected
-         IF Empty( mypath )
-            AdsConnect( "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" ) )
+         IF Empty(mypath)
+            AdsConnect( "\" + CurDir() + IIF( Empty(CurDir()), "", "\" ) )
          ELSE
             AdsConnect( mypath )
          ENDIF
@@ -84,7 +84,7 @@ Static lConnected := .F.
       ENDIF
       IF !AdsCreateSqlStatement( ,Iif( numdriv==1, 2, 3 ) )
          MsgStop( "Cannot create SQL statement" )
-         IF !Empty( oldArea )
+         IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
          Return .F.
@@ -92,7 +92,7 @@ Static lConnected := .F.
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF !AdsExecuteSqlDirect( cQuery )
          MsgStop( "SQL execution failed" )
-         IF !Empty( oldArea )
+         IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
          Return .F.
@@ -112,7 +112,7 @@ Static lConnected := .F.
             nQueryWndHandle := OpenDbf( mypath+"_dbc_que.dbf","ADSSQL",nQueryWndHandle )
             */
          ELSE
-            IF !Empty( oldArea )
+            IF !Empty(oldArea)
                Select( oldArea )
             ENDIF
             MsgStop( "Statement doesn't returns cursor" )
@@ -128,7 +128,7 @@ Return .T.
 Function QuerySave
 Local fname := hwg_SaveFile( "*.que","Query files( *.que )", "*.que", mypath )
    cQuery := GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
-   IF !Empty( fname )
+   IF !Empty(fname)
       MemoWrit( fname,cQuery )
    ENDIF
 Return Nil

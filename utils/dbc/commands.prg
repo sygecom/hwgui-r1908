@@ -63,20 +63,20 @@ Private finame, cValue, cFor
    oWindow := HMainWindow():GetMdiActive()
 
    finame := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 )
-   IF Empty( finame )
+   IF Empty(finame)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
       Return Nil
    ENDIF
    cValue := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
-   IF Empty( cValue )
+   IF Empty(cValue)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF .NOT. EMPTY( cFor ) .AND. TYPE( cFor ) <> "L"
+   IF .NOT. Empty(cFor) .AND. TYPE( cFor ) <> "L"
       MsgStop( "Wrong expression!" )
    ELSE
-      IF EMPTY( cFor )
+      IF Empty(cFor)
          cFor := ".T."
       ENDIF
       nrec := Recno()
@@ -137,10 +137,10 @@ Private cFor
    oWindow := HMainWindow():GetMdiActive()
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF .NOT. EMPTY( cFor ) .AND. TYPE( cFor ) <> "L"
+   IF .NOT. Empty(cFor) .AND. TYPE( cFor ) <> "L"
       MsgStop( "Wrong expression!" )
    ELSE
-      IF EMPTY( cFor )
+      IF Empty(cFor)
          cFor := ".T."
       ENDIF
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -217,16 +217,16 @@ Local cSumf, cFor, nrest, blsum, blfor, nRec := Recno()
 Private nsum := 0
 
    cSumf := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
-   IF EMPTY( cSumf )
+   IF Empty(cSumf)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF ( !EMPTY( cFor ) .AND. TYPE( cFor ) <> "L" ) .OR. TYPE( cSumf ) <> "N"
+   IF ( !Empty(cFor) .AND. TYPE( cFor ) <> "L" ) .OR. TYPE( cSumf ) <> "N"
       MsgStop( "Wrong expression!" )
    ELSE
-      IF EMPTY( cFor )
+      IF Empty(cFor)
          cFor := ".T."
       ENDIF
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -290,7 +290,7 @@ Local hDlg := hwg_GetModalHandle()
 Local fname, nRec := Recno()
 
    fname := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
-   IF EMPTY( fname )
+   IF Empty(fname)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF

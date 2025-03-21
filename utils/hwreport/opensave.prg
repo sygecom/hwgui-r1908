@@ -19,7 +19,7 @@ Memvar aPaintRep , mypath,aitemtypes
 Function FileDlg( lOpen )
 Local oDlg
 
-   IF !lOpen .AND. ( aPaintRep == Nil .OR. Empty( aPaintRep[FORM_ITEMS] ) )
+   IF !lOpen .AND. ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
       MsgStop( "Nothing to save" )
       Return Nil
    ELSEIF lOpen
@@ -68,7 +68,7 @@ Local fname, repName
 Local res := .T.
 
    fname := GetEditText( hDlg, IDC_EDIT1 )
-   IF !Empty( fname )
+   IF !Empty(fname)
       repName := GetEditText( hDlg, IDC_EDIT2 )
 
       IF lOpen
@@ -118,11 +118,11 @@ Return .T.
 Function SaveReport
 Local fname
 
-   IF ( aPaintRep == Nil .OR. Empty( aPaintRep[FORM_ITEMS] ) )
+   IF ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
       MsgStop( "Nothing to save" )
       Return Nil
    ENDIF
-   IF Empty( aPaintRep[FORM_FILENAME] )
+   IF Empty(aPaintRep[FORM_FILENAME])
       FileDlg( .F. )
    ELSE
       SaveRFile( aPaintRep[FORM_FILENAME], aPaintRep[FORM_REPNAME] )
@@ -141,21 +141,21 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
          IF LEN( stroka ) = 0
             EXIT
          ENDIF
-         IF Left( stroka, 1 ) == ";"
+         IF Left(stroka, 1) == ";"
             LOOP
          ENDIF
          IF nMode == 0
             IF lPrg
-               IF Upper( Left( stroka, 8 ) ) == "FUNCTION" .AND. ;
-                   Upper( Ltrim( Substr( stroka, 10 ) ) ) == Upper( repname )
+               IF Upper(Left(stroka, 8)) == "FUNCTION" .AND. ;
+                   Upper(Ltrim( SubStr(stroka, 10) )) == Upper(repname)
                   nMode := 10
                ENDIF
             ELSE
-               IF Left( stroka, 1 ) == "#"
-                  IF Upper( Substr( stroka, 2, 6 ) ) == "REPORT"
-                     stroka := Ltrim( Substr( stroka, 9 ) )
-                     IF Empty( repName ) .OR. Upper( stroka ) == Upper( repName )
-                        IF Empty( repName )
+               IF Left(stroka, 1) == "#"
+                  IF Upper(SubStr(stroka, 2, 6)) == "REPORT"
+                     stroka := Ltrim( SubStr(stroka, 9) )
+                     IF Empty(repName) .OR. Upper(stroka) == Upper(repName)
+                        IF Empty(repName)
                            repName := stroka
                         ENDIF
                         nMode := 1
@@ -165,10 +165,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                ENDIF
             ENDIF
          ELSEIF nMode == 1
-            IF Left( stroka, 1 ) == "#"
-               IF Upper( Substr( stroka, 2, 6 ) ) == "ENDREP"
+            IF Left(stroka, 1) == "#"
+               IF Upper(SubStr(stroka, 2, 6)) == "ENDREP"
                   Exit
-               ELSEIF Upper( Substr( stroka, 2, 6 ) ) == "SCRIPT"
+               ELSEIF Upper(SubStr(stroka, 2, 6)) == "SCRIPT"
                   nMode := 2
                   IF aItem != Nil
                      aItem[ITEM_SCRIPT] := ""
@@ -240,7 +240,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                ENDIF
             ENDIF
          ELSEIF nMode == 2
-            IF Left( stroka, 1 ) == "#" .AND. Upper( Substr( stroka, 2, 6 ) ) == "ENDSCR"
+            IF Left(stroka, 1) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
                nMode := 1
             ELSE
                IF aItem != Nil
@@ -250,7 +250,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                ENDIF
             ENDIF
          ELSEIF nMode == 10
-            IF UPPER( Left( stroka, 15 ) ) == "LOCAL APAINTREP"
+            IF Upper(Left(stroka, 15)) == "LOCAL APAINTREP"
                nMode := 11
             ELSE
                MsgStop( "Wrong function "+repname )
@@ -258,11 +258,11 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                Return .F.
             ENDIF
          ELSEIF nMode == 11
-            IF UPPER( Left( stroka, 6 ) ) == "RETURN"
+            IF Upper(Left(stroka, 6)) == "RETURN"
                Exit
             ELSE
-               IF Right( stroka, 1 ) == ";"
-                  cSource += Ltrim( Rtrim( Left( stroka,Len(stroka)-1 ) ) )
+               IF Right(stroka, 1) == ";"
+                  cSource += Ltrim( Rtrim( Left(stroka, Len(stroka) - 1) ) )
                ELSE
                   cSource += Ltrim( Rtrim( stroka ) )
                   // Writelog( cSource )
@@ -277,7 +277,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
       MsgStop( "Can't open "+fname )
       Return .F.
    ENDIF
-   IF aPaintRep == Nil .OR. Empty( aPaintRep[FORM_ITEMS] )
+   IF aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS])
       MsgStop( repname+" not found or empty!" )
       res := .F.
    ELSE
@@ -314,10 +314,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                   EXIT
                ENDIF
                IF nMode == 0
-                  IF ( lPrg .AND. Upper( Left( stroka, 8 ) ) == "FUNCTION" ) ;
-                        .OR. ( !lPrg .AND. Left( stroka, 1 ) == "#" .AND. ;
-                           Upper( Substr( stroka, 2, 6 ) ) == "REPORT" )
-                     IF Upper( Ltrim( Substr( stroka, 9 ) ) ) == Upper( repName )
+                  IF ( lPrg .AND. Upper(Left(stroka, 8)) == "FUNCTION" ) ;
+                        .OR. ( !lPrg .AND. Left(stroka, 1) == "#" .AND. ;
+                           Upper(SubStr(stroka, 2, 6)) == "REPORT" )
+                     IF Upper(Ltrim( SubStr(stroka, 9) )) == Upper(repName)
                         nMode := 1
                         isOut := .T.
                         LOOP
@@ -325,9 +325,9 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                   ENDIF
                   Fwrite( hanOut,stroka+Iif(Asc(Right(stroka, 1))<20,"",Chr(10)) )
                ELSEIF nMode == 1
-                  IF ( lPrg .AND. Left( stroka, 6 ) == "RETURN" ) ;
-                      .OR. ( !lPrg .AND. Left( stroka, 1 ) == "#" .AND. ;
-                       Upper( Substr( stroka, 2, 6 ) ) == "ENDREP" )
+                  IF ( lPrg .AND. Left(stroka, 6) == "RETURN" ) ;
+                      .OR. ( !lPrg .AND. Left(stroka, 1) == "#" .AND. ;
+                       Upper(SubStr(stroka, 2, 6)) == "ENDREP" )
                      nMode := 0
                      IF lPrg
                         WriteToPrg( hanOut, repName )
@@ -441,7 +441,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
    Fwrite( han, "   cEnd:=Chr(13)+Chr(10)" + Chr(10) )
    Fwrite( han, "   aPaintRep := { "+Ltrim(Str(aPaintRep[FORM_WIDTH]))+","+ ;
          Ltrim(Str(aPaintRep[FORM_HEIGHT]))+', 0, 0, 0,{},,"'+repName+'",.F., 0,Nil }'+Chr(10) )
-   IF aPaintRep[FORM_VARS] != Nil .AND. !Empty( aPaintRep[FORM_VARS] )
+   IF aPaintRep[FORM_VARS] != Nil .AND. !Empty(aPaintRep[FORM_VARS])
       Fwrite( han, "   aPaintRep[11] := ;"+Chr(10) )
       WriteScript( han,aPaintRep[FORM_VARS],.T. )
    ENDIF
@@ -480,7 +480,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       cItem += ",0,Nil,0"
       Fwrite( han, "   Aadd( aPaintRep[6], { " + cItem + " } )" + Chr(10) )
 
-      IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty( aItem[ITEM_SCRIPT] )
+      IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
          Fwrite( han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;"+Chr(10) )
          WriteScript( han,aItem[ITEM_SCRIPT],.T. )
       ENDIF
@@ -494,7 +494,7 @@ Local poz := 0, stroka, i
 Local lastC := Chr(10), cQuote, lFirst := .T.
 
    IF lPrg == Nil; lPrg := .F.; ENDIF
-   IF cScript != Nil .AND. !Empty( cScript )
+   IF cScript != Nil .AND. !Empty(cScript)
       IF !lPrg
          Fwrite( han,"#SCRIPT"+Chr(10) )
       ENDIF
@@ -506,7 +506,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
             ENDIF
             EXIT
          ENDIF
-         IF Left( stroka, 1 ) != Chr(10)
+         IF Left(stroka, 1) != Chr(10)
             IF lPrg
                cQuote := Iif(!( '"' $ stroka),'"', ;
                            Iif(!( "'" $ stroka),"'","["))
@@ -515,7 +515,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
                lFirst := .F.
             ELSE
                Fwrite( han,Iif( Asc(lastC)<20,"",Chr(10) )+stroka )
-               lastC := Right( stroka, 1 )
+               lastC := Right(stroka, 1)
             ENDIF
          ENDIF
       ENDDO

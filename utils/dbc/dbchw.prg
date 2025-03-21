@@ -54,7 +54,7 @@ PUBLIC nQueryWndHandle := 0
    SET DATE FORMAT dformat
 
    hwg_Rdini( "dbc.ini" )
-   mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+   mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
 
 #ifdef RDD_ADS
    IF nServerType == ADS_REMOTE_SERVER
@@ -212,11 +212,11 @@ Local new_numdriv, new_servertype, serverPath
       AdsSetServerType( nServerType )
       IF nServerType == ADS_REMOTE_SERVER
          serverPath := GetDlgItemText( hDlg, IDC_EDIT1, 60 )
-         IF Right( serverPath ) != "/" .AND. Right( serverPath ) != "\"
+         IF Right(serverPath) != "/" .AND. Right(serverPath) != "\"
             serverPath += "\"
          ENDIF
          hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Waiting for connection ..." )
-         IF Empty( serverPath ) .OR. !AdsConnect( serverPath )
+         IF Empty(serverPath) .OR. !AdsConnect( serverPath )
              nServerType := 1
              AdsSetServerType( nServerType )
              hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
@@ -245,7 +245,7 @@ Local msind := { { "0","None","","" } }, i, ordlen := 0
 Local indname
 
    i := 1
-   DO WHILE .NOT. EMPTY( indname := ORDNAME( i ) )
+   DO WHILE .NOT. Empty(indname := ORDNAME( i ))
       AADD( msind, { STR( i, 1 ), indname, ORDKEY( i ), ORDBAGNAME( i ) } )
       ordlen := Max( ordlen, Len( OrdKey( i-1 ) ) )
       i ++
@@ -318,21 +318,21 @@ Local indname, isMulti, isUniq, tagname, expkey, expfor
 Local oWindow, aControls, i
 
    indname := GetDlgItemText( hDlg, IDC_EDIT2, 20 )
-   IF Empty( indname )
+   IF Empty(indname)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
       Return Nil
    ENDIF
    isMulti := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
    IF isMulti
       tagname := GetDlgItemText( hDlg, IDC_EDIT3, 60 )
-      IF Empty( tagname )
+      IF Empty(tagname)
          hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
          Return Nil
       ENDIF
    ENDIF
    isUniq := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX2 )
    expkey := GetDlgItemText( hDlg, IDC_EDIT4, 60 )
-   IF Empty( expkey )
+   IF Empty(expkey)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
       Return Nil
    ENDIF
@@ -340,14 +340,14 @@ Local oWindow, aControls, i
    indname := mypath + indname
    hwg_SetDlgItemText( hDlg, IDC_TEXT2, "Indexing ..." )
    IF numdriv = 1 .AND. isMulti
-      IF EMPTY( expfor )
+      IF Empty(expfor)
          ORDCREATE( RTRIM( indname ), RTRIM( tagname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
       ELSE
          ordCondSet( RTRIM( expfor ), &( "{||" + RTRIM( expfor ) + "}" ),,,,, RECNO(),,,, )
          ORDCREATE( RTRIM( indname ), RTRIM( tagname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
       ENDIF
    ELSE
-      IF EMPTY( expfor )
+      IF Empty(expfor)
          dbCreateIndex( RTRIM( indname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
       ELSE
          ordCondSet( RTRIM( expfor ), &( "{||" + RTRIM( expfor ) + "}" ),,,,, RECNO(),,,, )
@@ -374,8 +374,8 @@ Local mask := Iif( numdriv == 1,"*.cdx;*.idx",Iif( numdriv == 2,"*ntx","*.adi" )
 Local fname
 Local oWindow, aControls, i
 
-   IF !Empty( fname := hwg_SelectFile( "Index files", mask, mypath ) )
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+   IF !Empty(fname := hwg_SelectFile( "Index files", mask, mypath ))
+      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
       ORDLISTADD( fname )
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != Nil
@@ -439,7 +439,7 @@ Local oldLock := AdsLocking()
 #endif
 
    fname := GetEditText( hDlg, IDC_EDIT7 )
-   IF !Empty( fname )
+   IF !Empty(fname)
       alsName := GetEditText( hDlg, IDC_EDIT3 )
       pass := GetEditText( hDlg, IDC_EDIT4 )
       new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
@@ -461,7 +461,7 @@ Local oldLock := AdsLocking()
          AdsLocking( !AdsLocking() )
       ENDIF
 #endif
-      mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
       OpenDbf( fname, Iif(Empty(alsName),Nil,alsName),,Iif(Empty(pass),Nil,pass) )
       IF numdriv != old_numdriv
          numdriv := old_numdriv
@@ -550,7 +550,7 @@ Local hDlg := hwg_GetModalHandle()
 Local cExpr, res
 
    cExpr := GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
-   IF Empty( cExpr )
+   IF Empty(cExpr)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
       Return Nil
    ENDIF
@@ -583,7 +583,7 @@ Local hDlg := hwg_GetModalHandle()
 Local fname, arScr, nError, nLineEr, obl
 
    fname := GetDlgItemText( hDlg, IDC_EDIT8, 80 )
-   IF Empty( fname )
+   IF Empty(fname)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT8 ) )
       Return Nil
    ENDIF
@@ -695,7 +695,7 @@ LOCAL bOldError, oError
             DBUSEAREA(,, fname, alsname,, prrdonly )
          RECOVER USING oError
             IF oError:genCode == EG_BADALIAS .OR. oError:genCode == EG_DUPALIAS
-               IF EMPTY( alsname := hwg_MsgGet( "","Bad alias name, input other:" ) )
+               IF Empty(alsname := hwg_MsgGet( "","Bad alias name, input other:" ))
                   res := .F.
                ELSE
                   LOOP
@@ -735,7 +735,7 @@ LOCAL bOldError, oError
       AdsEnableEncryption( pass )
    ENDIF
 #ENDIF
-   msfile[improc] := Iif( fname != Nil, UPPER( fname ), Alias() )
+   msfile[improc] := Iif( fname != Nil, Upper(fname), Alias() )
    msmode[improc, 1] = SET( _SET_EXCLUSIVE )
    msmode[improc, 2] = prrdonly
    msmode[improc, 3] = numdriv
@@ -777,7 +777,7 @@ LOCAL i
 RETURN Nil
 
 FUNCTION Stufmy( stsou, pozs, ellen, elzn )
-RETURN SUBSTR( stsou, 1, pozs - 1 ) + elzn + SUBSTR( stsou, pozs + ellen )
+RETURN SubStr(stsou, 1, pozs - 1) + elzn + SubStr(stsou, pozs + ellen)
 
 FUNCTION FileLock()
 LOCAL fname := msfile[improc]
