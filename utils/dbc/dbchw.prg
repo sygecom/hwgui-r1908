@@ -588,7 +588,7 @@ Local fname, arScr, nError, nLineEr, obl
       Return Nil
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-   IF ( arScr := hwg_RdScript( fname ) ) <> Nil
+   IF ( arScr := hwg_RdScript( fname ) ) != Nil
       IF nAct == 1
          obl := SELECT()
          GO TOP
@@ -686,7 +686,7 @@ LOCAL bOldError, oError
       ENDIF
       SELECT( improc )
       alsname := IIF( alsname = Nil, hwg_CutExten( hwg_CutPath( fname ) ), Trim( hwg_CutExten( hwg_CutPath( alsname ) ) ) )
-      IF ( i := AT( '~', alsname ) ) <> 0
+      IF ( i := AT( '~', alsname ) ) != 0
          alsname := Stufmy( alsname, i, 1, '_' )
       ENDIF
       bOldError := ERRORBLOCK( { | e | OpenError( e ) } )
@@ -757,7 +757,7 @@ LOCAL i
       msfile[improc] = Nil
       IF improc = lenmsf
          FOR i := lenmsf - 1 TO 1 STEP - 1
-            IF msfile[i] <> Nil
+            IF msfile[i] != Nil
                EXIT
             ENDIF
          NEXT
@@ -766,7 +766,7 @@ LOCAL i
       improc := 0
 /*
       FOR i := 1 TO lenmsf
-         IF msfile[i] <> Nil
+         IF msfile[i] != Nil
             EXIT
          ENDIF
       NEXT

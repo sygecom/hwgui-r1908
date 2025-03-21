@@ -135,7 +135,7 @@ LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han := FOPEN( fname, FO_READ + FO_SHARED )
 Local i, itemName, aItem, res := .T., sFont
 Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
-   IF han <> - 1
+   IF han != - 1
       DO WHILE .T.
          stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
          IF LEN( stroka ) = 0
@@ -305,9 +305,9 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
 
    IF File( fname )
       han := FOPEN( fname, FO_READWRITE + FO_EXCLUSIVE )
-      IF han <> - 1
+      IF han != - 1
          hanOut := FCREATE( mypath+"__rpt.tmp" )
-         IF hanOut <> - 1
+         IF hanOut != - 1
             DO WHILE .T.
                stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
                IF LEN( stroka ) = 0

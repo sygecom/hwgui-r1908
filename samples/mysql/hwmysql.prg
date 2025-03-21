@@ -314,7 +314,7 @@ FUNCTION Execute()
       RETURN .F.
    ENDIF
    IF Left(cQuery, 2) == "//"
-      IF ( arScr := hwg_RdScript(, cQuery) ) <> Nil
+      IF ( arScr := hwg_RdScript(, cQuery) ) != Nil
          hwg_DoScript(arScr)
       ELSE
          nError := hwg_CompileErr(@nLineEr)
@@ -475,7 +475,7 @@ STATIC FUNCTION ReadHistory(fname)
 
    nHistCurr := 0
    han := FOpen(fname, FO_READ + FO_SHARED)
-   IF han <> - 1
+   IF han != - 1
       DO WHILE .T.
          stroka := hwg_RDSTR(han,@strbuf,@poz, 512)
          IF Len(stroka) == 0
@@ -509,7 +509,7 @@ STATIC FUNCTION WriteHistory(fname)
 
    IF !Empty(aQueries)
       han := FCreate(fname)
-      IF han <> - 1
+      IF han != - 1
          FOR i := 1 TO Len(aQueries)
             IF !Empty(aQueries[i, 1]) .OR. !lEmpty
                FWrite(han, Trim(aQueries[i, 1]) + Chr(13) + Chr(10))

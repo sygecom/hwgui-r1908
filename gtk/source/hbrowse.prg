@@ -936,7 +936,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
    ENDIF
 
    /* hwg_SetBkColor( hDC,oldBkColor ) */
-   if ::headColor <> Nil
+   if ::headColor != Nil
       hwg_SetTextColor( hDC,oldc )
    ENDIF
 
@@ -961,7 +961,7 @@ Local oColumn
       if ::lAdjRight .and. fif == Len(::aColumns)
          xSize := Max( ::x2 - x, xSize )
       endif
-      if oColumn:footing <> nil
+      if oColumn:footing != nil
          cStr := oColumn:footing + ';'
          for nLine := 1 to ::nFootRows
             hwg_DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'),;

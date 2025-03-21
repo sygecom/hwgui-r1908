@@ -21,7 +21,7 @@ CLASS HSayImage INHERIT HControl
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
                   bSize,ctoolt )
    METHOD Activate()
-   METHOD End() INLINE ( ::Super:End(),IIf(::oImage <> NIL, ::oImage:Release(), ::oImage := NIL),::oImage := Nil )
+   METHOD End() INLINE ( ::Super:End(),IIf(::oImage != NIL, ::oImage:Release(), ::oImage := NIL),::oImage := Nil )
 
 ENDCLASS
 

@@ -73,7 +73,7 @@ Private finame, cValue, cFor
       Return Nil
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF !Empty(cFor) .AND. TYPE( cFor ) <> "L"
+   IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
       MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -137,7 +137,7 @@ Private cFor
    oWindow := HMainWindow():GetMdiActive()
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF !Empty(cFor) .AND. TYPE( cFor ) <> "L"
+   IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
       MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -223,7 +223,7 @@ Private nsum := 0
    ENDIF
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF ( !Empty(cFor) .AND. TYPE( cFor ) <> "L" ) .OR. TYPE( cSumf ) <> "N"
+   IF ( !Empty(cFor) .AND. TYPE( cFor ) != "L" ) .OR. TYPE( cSumf ) != "N"
       MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)

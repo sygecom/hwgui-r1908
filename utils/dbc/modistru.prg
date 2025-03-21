@@ -179,7 +179,7 @@ Local oPBar, nSch := 0
          SELECT 20
          APPEND BLANK
          FOR i := 1 TO kolf
-            IF C1[i] <> Nil
+            IF C1[i] != Nil
                FIELDPUT( i, EVAL( C1[i], (alsname)->( FIELDGET( C2[i] ) ) ) )
             ENDIF
          NEXT
