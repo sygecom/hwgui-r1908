@@ -94,7 +94,7 @@ Function hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos,lPos )
 Local hSubMenu
 
    IF nPos == Nil
-      nPos := Len( aMenu[1] ) + 1
+      nPos := Len(aMenu[1]) + 1
       lPos := .T.
    ELSEIF lPos == Nil
       lPos := .F.
@@ -116,7 +116,7 @@ Local hSubMenu
       ENDIF
    ENDIF
    */
-   IF nPos > Len( aMenu[1] )
+   IF nPos > Len(aMenu[1])
       IF lSubmenu
          Aadd( aMenu[1],{ {},cItem,nMenuId,hSubMenu } )
       ELSE
@@ -138,10 +138,10 @@ Return Nil
 Function hwg_FindMenuItem( aMenu, nId, nPos )
 Local nPos1, aSubMenu
    nPos := 1
-   DO WHILE nPos <= Len( aMenu[1] )
+   DO WHILE nPos <= Len(aMenu[1])
       IF aMenu[1,npos, 3] == nId
          Return aMenu
-      ELSEIF Len( aMenu[1,npos] ) > 4
+      ELSEIF Len(aMenu[1, npos]) > 4
          IF ( aSubMenu := hwg_FindMenuItem( aMenu[1,nPos] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
             Return aSubMenu
@@ -170,7 +170,7 @@ Local hMenu, nPos, aMenu
       aMenu := { aMenuInit,,,,hMenu }
    ELSE
       hMenu := aMenuInit[5]
-      nPos := Len( aMenuInit[1] )
+      nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1,nPosParent]
       //hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, .T., aMenu[3],aMenu[4],.T. )
       hMenu := hwg__AddMenuItem( hMenu, aMenu[2][1], nPos+1, .T., aMenu[3],aMenu[4],.T. )
@@ -178,7 +178,7 @@ Local hMenu, nPos, aMenu
       hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, .T., aMenu[3] )
       hMenu := hwg__CreateSubMenu( hMenu,aMenu[3] )
       */
-      IF Len( aMenu ) < 5
+      IF Len(aMenu) < 5
          Aadd( aMenu,hMenu )
       ELSE
          aMenu[5] := hMenu
@@ -186,7 +186,7 @@ Local hMenu, nPos, aMenu
    ENDIF
 
    nPos := 1
-   DO WHILE nPos <= Len( aMenu[1] )
+   DO WHILE nPos <= Len(aMenu[1])
       IF HB_IsArray( aMenu[1,nPos, 1] )
          hwg_BuildMenu( aMenu,,,nPos )
       ELSE

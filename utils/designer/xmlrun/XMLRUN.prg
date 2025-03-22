@@ -580,7 +580,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
           return .f.
       else
-       g:SetGet(d2infstr( ctod(dd+mm+yy) ))
+       g:SetGet(d2infstr(ctod(dd + mm + yy)))
        g:refresh()
       end
 
@@ -614,7 +614,7 @@ function infstr2d(s) && informix string to date
    LOCAL yy := "/"+Right(s, 4)
    LOCAL mm
 
- mm := Str( (at(subst(s, 4, 3),"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
+ mm := Str((At(subst(s, 4, 3), "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
 
  return ctod(dd+mm+yy)
 

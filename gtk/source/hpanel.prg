@@ -82,7 +82,7 @@ METHOD Paint() CLASS HPanel
 Local hDC, aCoors, oPenLight, oPenGray
 
    IF ::bPaint != Nil
-      Eval( ::bPaint,Self )
+      Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC( ::handle )
       hwg_DrawButton( hDC, 0, 0,::nWidth-1,::nHeight-1, 5 )

@@ -109,7 +109,7 @@ Local o
          hwg_SetCtrlFont( ::handle, ::oParent:oFont:handle )
       ENDIF
       IF HB_IsBlock(::bInit)
-         Eval( ::bInit, Self )
+         Eval(::bInit, Self)
       ENDIF
       o := ::oParent
       DO WHILE o != Nil .AND. !__ObjHasMsg( o,"LACTIVATED")
@@ -416,7 +416,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
 
    IF msg == WM_LBUTTONUP
       IF ::bClick != Nil
-         Eval( ::bClick,Self )
+         Eval(::bClick, Self)
       ENDIF
    ENDIF
 
@@ -427,7 +427,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
    SWITCH msg
    CASE WM_LBUTTONUP
       IF ::bClick != Nil
-         Eval( ::bClick,Self )
+         Eval(::bClick, Self)
       ENDIF
    ENDSWITCH
 

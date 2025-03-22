@@ -736,7 +736,7 @@ Function Evalcode( xCode )
    IF HB_IsArray( xCode )
       Return hwg_DoScript( xCode )
    ELSE
-      Return Eval( xCode )
+      Return Eval(xCode)
    ENDIF
 
 Return Nil

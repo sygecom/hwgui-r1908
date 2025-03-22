@@ -108,7 +108,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
          ELSEIF oXMLDesc:aItems[i]:title == "create"
             oPaint := oXMLDesc:aItems[i]
             IF !Empty(oPaint:aItems) .AND. oPaint:aItems[1]:type == HBXML_TYPE_CDATA
-               ::cCreate := hwg_RdStr( ,oPaint:aItems[1]:aItems[1], 1 )
+               ::cCreate := hwg_RdStr(, oPaint:aItems[1]:aItems[1], 1)
                ::style   := WS_VISIBLE+WS_CHILD+WS_DISABLED
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "property"
@@ -116,7 +116,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
                IF HB_IsChar( oXMLDesc:aItems[i]:aItems[1]:aItems[1] )
                   oXMLDesc:aItems[i]:aItems[1]:aItems[1] := &( "{||" + oXMLDesc:aItems[i]:aItems[1]:aItems[1] + "}" )
                ENDIF
-               xProperty := Eval( oXMLDesc:aItems[i]:aItems[1]:aItems[1] )
+               xProperty := Eval(oXMLDesc:aItems[i]:aItems[1]:aItems[1])
             ELSE
                xProperty := oXMLDesc:aItems[i]:GetAttribute( "value" )
             ENDIF

@@ -246,8 +246,8 @@ Local indname
 
    i := 1
    DO WHILE !Empty(indname := ORDNAME( i ))
-      AADD( msind, { STR( i, 1 ), indname, ORDKEY( i ), ORDBAGNAME( i ) } )
-      ordlen := Max( ordlen, Len( OrdKey( i-1 ) ) )
+      AADD( msind, { Str(i, 1), indname, ORDKEY( i ), ORDBAGNAME( i ) } )
+      ordlen := Max( ordlen, Len(OrdKey( i-1 )) )
       i ++
    ENDDO
    INIT DIALOG oModDlg FROM RESOURCE "DLG_SEL_IND"
@@ -341,17 +341,17 @@ Local oWindow, aControls, i
    hwg_SetDlgItemText( hDlg, IDC_TEXT2, "Indexing ..." )
    IF numdriv = 1 .AND. isMulti
       IF Empty(expfor)
-         ORDCREATE( RTRIM( indname ), RTRIM( tagname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
+         ORDCREATE( RTrim(indname), RTrim(tagname), RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), Iif( isUniq,.T.,Nil ) )
       ELSE
-         ordCondSet( RTRIM( expfor ), &( "{||" + RTRIM( expfor ) + "}" ),,,,, RECNO(),,,, )
-         ORDCREATE( RTRIM( indname ), RTRIM( tagname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
+         ordCondSet( RTrim(expfor), &( "{||" + RTrim(expfor) + "}" ),,,,, RECNO(),,,, )
+         ORDCREATE( RTrim(indname), RTrim(tagname), RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), Iif( isUniq,.T.,Nil ) )
       ENDIF
    ELSE
       IF Empty(expfor)
-         dbCreateIndex( RTRIM( indname ), RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
+         dbCreateIndex( RTrim(indname), RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), Iif( isUniq,.T.,Nil ) )
       ELSE
-         ordCondSet( RTRIM( expfor ), &( "{||" + RTRIM( expfor ) + "}" ),,,,, RECNO(),,,, )
-         ORDCREATE( RTRIM( indname ),, RTRIM( expkey ), &( "{||" + RTRIM( expkey ) + "}" ), Iif( isUniq,.T.,Nil ) )
+         ordCondSet( RTrim(expfor), &( "{||" + RTrim(expfor) + "}" ),,,,, RECNO(),,,, )
+         ORDCREATE( RTrim(indname),, RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), Iif( isUniq,.T.,Nil ) )
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
@@ -486,7 +486,7 @@ Local oWindow, aControls, oBrowse, i
       Return 0
    ENDIF
 
-   IF Len( HWindow():aWindows ) == 2
+   IF Len(HWindow():aWindows) == 2
       hwg_EnableMenuItem( , 1, .T., .F. )
       hwg_EnableMenuItem( , 2, .T., .F. )
       hwg_EnableMenuItem( , 3, .T., .F. )
@@ -554,10 +554,10 @@ Local cExpr, res
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
       Return Nil
    ENDIF
-   IF TYPE( TRIM( cExpr ) ) $ "UEUI"
+   IF TYPE( Trim(cExpr) ) $ "UEUI"
       hwg_MsgStop( "Wrong expression" )
    ELSE
-      res := &( TRIM( cExpr ) )
+      res := &( Trim(cExpr) )
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
    ENDIF
 
@@ -637,7 +637,7 @@ Local i, aControls, oBrw
                nQueryWndHandle := 0
             ENDIF
             FiClose()
-            IF Len( HWindow():aWindows ) == 3
+            IF Len(HWindow():aWindows) == 3
                hwg_EnableMenuItem( , 1, .F., .F. )
                hwg_EnableMenuItem( , 2, .F., .F. )
                hwg_EnableMenuItem( , 3, .F., .F. )
@@ -652,7 +652,7 @@ Function ResizeBrwQ( oBrw, nWidth, nHeight )
 Local hWndStatus, aControls := oBrw:oParent:aControls
 Local aRect, i, nHbusy := 0
 
-   FOR i := 1 TO Len( aControls )
+   FOR i := 1 TO Len(aControls)
       IF aControls[i]:classname() == "HSTATUS"
          hWndStatus := aControls[i]:handle
          aRect := hwg_GetClientRect( hWndStatus )
@@ -685,7 +685,7 @@ LOCAL bOldError, oError
          RETURN .F.
       ENDIF
       SELECT( improc )
-      alsname := IIF( alsname = Nil, hwg_CutExten( hwg_CutPath( fname ) ), Trim( hwg_CutExten( hwg_CutPath( alsname ) ) ) )
+      alsname := IIF( alsname = Nil, hwg_CutExten( hwg_CutPath( fname ) ), Trim(hwg_CutExten( hwg_CutPath( alsname ) )) )
       IF ( i := AT( '~', alsname ) ) != 0
          alsname := Stufmy( alsname, i, 1, '_' )
       ENDIF
@@ -701,7 +701,7 @@ LOCAL bOldError, oError
                   LOOP
                ENDIF
             ELSE
-               EVAL( bOldError, oError )
+               Eval(bOldError, oError)
             ENDIF
          END SEQUENCE
          EXIT

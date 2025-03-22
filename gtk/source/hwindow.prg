@@ -28,7 +28,7 @@ Static Function onSize( oWnd,wParam,lParam )
    oWnd:nHeight := hwg_HIWORD(lParam)
 
    IF HB_IsBlock( oWnd:bSize )
-       Eval( oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+       Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
 
 Return 0
@@ -190,7 +190,7 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
     
    ENDIF
    IF ::bInit != Nil
-      Eval( ::bInit, Self )
+      Eval(::bInit, Self)
    ENDIF
 
 Return Self
@@ -220,9 +220,9 @@ Return Nil
 METHOD onEvent( msg, wParam, lParam )  CLASS HMainWindow
 Local i
 
-   // writelog( "On Event" + str(msg) + str(wParam) + str( lParam ) )
+   // writelog( "On Event" + str(msg) + str(wParam) + Str(lParam) )
    IF ( i := AScan(::aMessages[1], msg) ) != 0
-      Return Eval( ::aMessages[2,i], Self, wParam, lParam )
+      Return Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          // hwg_OnTrackScroll( Self,wParam,lParam )
@@ -262,7 +262,7 @@ METHOD Activate( lShow ) CLASS HMDIChildWindow
    ::handle := hwg_CreateMdiChildWindow( Self )
    hwg_InitControls( Self )
    IF ::bInit != Nil
-      Eval( ::bInit,Self )
+      Eval(::bInit, Self)
    ENDIF  
 
 Return Nil
@@ -271,7 +271,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HMDIChildWindow
 Local i
 
    IF ( i := AScan(::aMessages[1], msg) ) != 0
-      Return Eval( ::aMessages[2,i], Self, wParam, lParam )
+      Return Eval(::aMessages[2,i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          hwg_OnTrackScroll( Self,wParam,lParam )
@@ -309,7 +309,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
        Return Nil
    ENDIF
    IF ::bInit != Nil
-      Eval( ::bInit, Self )
+      Eval(::bInit, Self)
    ENDIF
 
 Return Self
@@ -325,7 +325,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HChildWindow
 Local i
 
    IF ( i := AScan(HMainWindow():aMessages[1], msg) ) != 0
-      Return Eval( HMainWindow():aMessages[2,i], Self, wParam, lParam )
+      Return Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          hwg_OnTrackScroll( Self,wParam,lParam )
@@ -390,19 +390,19 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
         ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-        Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
+        Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != Nil ;
         .AND. aMenu[1,iCont, 1] != Nil
-      Eval( aMenu[1,iCont, 1] )
+      Eval(aMenu[1, iCont, 1])
    ELSEIF oWnd:oPopup != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != Nil ;
         .AND. aMenu[1,iCont, 1] != Nil
-      Eval( aMenu[1,iCont, 1] )
+      Eval(aMenu[1, iCont, 1])
    ELSEIF oWnd:oNotifyMenu != Nil .AND. ;
         ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != Nil ;
         .AND. aMenu[1,iCont, 1] != Nil
-      Eval( aMenu[1,iCont, 1] )
+      Eval(aMenu[1, iCont, 1])
    ENDIF
 
 Return 0
@@ -429,7 +429,7 @@ Local i
 /*
    IF wParam == SC_CLOSE
        IF HB_IsBlock( oWnd:bDestroy )
-          i := Eval( oWnd:bDestroy, oWnd )
+          i := Eval(oWnd:bDestroy, oWnd)
           i := IIf(HB_IsLogical(i), i, .T.)
           IF !i
              Return 0
@@ -456,7 +456,7 @@ Local ar
    IF wParam == ID_NOTIFYICON
        IF lParam == WM_LBUTTONDOWN
           IF HB_IsBlock( oWnd:bNotify )
-             Eval( oWnd:bNotify )
+             Eval(oWnd:bNotify)
           ENDIF
        ELSEIF lParam == WM_RBUTTONDOWN
           IF oWnd:oNotifyMenu != Nil
@@ -472,7 +472,7 @@ Static Function onMdiCreate( oWnd,lParam )
 /*
    hwg_InitControls( oWnd )
    IF oWnd:bInit != Nil
-      Eval( oWnd:bInit,oWnd )
+      Eval(oWnd:bInit, oWnd)
    ENDIF  
 */
 Return 0
@@ -487,7 +487,7 @@ Local iParHigh, iParLow, iItem
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
+      Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ENDIF
 */
 Return 0
@@ -495,9 +495,9 @@ Return 0
 Static Function onMdiNcActivate( oWnd,wParam )
 /*
    IF wParam == 1 .AND. oWnd:bGetFocus != Nil
-      Eval( oWnd:bGetFocus, oWnd )
+      Eval(oWnd:bGetFocus, oWnd)
    ELSEIF wParam == 0 .AND. oWnd:bLostFocus != Nil
-      Eval( oWnd:bLostFocus, oWnd )
+      Eval(oWnd:bLostFocus, oWnd)
    ENDIF
 */
 Return 0
@@ -509,7 +509,7 @@ Local oItem
          .AND. oItem:handle == lParam .AND. !oItem:lActivated
       oItem:lActivated := .T.
       IF oItem:bActivate != Nil
-         Eval( oItem:bActivate, oItem )
+         Eval(oItem:bActivate, oItem)
       ENDIF
    ENDIF
 */   

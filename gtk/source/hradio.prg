@@ -134,7 +134,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
 
    IF msg == WM_LBUTTONUP
       IF ::oGroup:bSetGet == Nil
-         Eval( ::bLostFocus, ::oGroup:value, Self )
+         Eval(::bLostFocus, ::oGroup:value, Self)
       ELSE
          __Valid( Self )
       ENDIF
@@ -146,10 +146,10 @@ Static Function __Valid( oCtrl )
 
    oCtrl:oGroup:value := AScan(oCtrl:oGroup:aButtons, {|o|o:id == oCtrl:id})
    IF oCtrl:oGroup:bSetGet != Nil
-      Eval( oCtrl:oGroup:bSetGet,oCtrl:oGroup:value )
+      Eval(oCtrl:oGroup:bSetGet, oCtrl:oGroup:value)
    ENDIF
    IF oCtrl:bLostFocus != Nil
-      Eval( oCtrl:bLostFocus, oCtrl:oGroup:value, oCtrl )
+      Eval(oCtrl:bLostFocus, oCtrl:oGroup:value, oCtrl)
    ENDIF
 
 Return .T.

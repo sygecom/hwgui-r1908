@@ -32,7 +32,7 @@ FUNCTION Menu2Prg
 
    i := 1
    IF HB_IsArray( aLMenu[i, 1] )
-      stroka := Space( 2 ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str( aLMenu[i, 3] ) + " "
+      stroka := Space( 2 ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
       FWrite( han, _Chr( 10 ) + stroka )
    ENDIF
 
@@ -40,7 +40,7 @@ FUNCTION Menu2Prg
 
       IF HB_IsArray( aLMenu[i, 1] )
          //BuildTree( oNode, aMenu[i, 1] )
-         stroka := Space( 2 * nMaxid ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str( aLMenu[i, 3] ) + " "
+         stroka := Space( 2 * nMaxid ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
          FWrite( han, _Chr( 10 ) + stroka )
          nMaxId += 1
          hwg_CallFunc( "Menu2Prg", { oCtrl , alMenu[i, 1] } )
@@ -1429,7 +1429,7 @@ FUNCTION Ctrl2Prg
 
             DO WHILE .T.
 
-               stroka := hwg_RdStr( , oForm:aMethods[i, 2], @j1 )
+               stroka := hwg_RdStr(, oForm:aMethods[i, 2], @j1)
 
                IF Len(stroka) == 0
                   EXIT

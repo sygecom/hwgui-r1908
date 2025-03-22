@@ -146,7 +146,7 @@ Return
 
 Function hwg_RefreshAllGets( oDlg )
 
-   AEval( oDlg:GetList, {|o|o:Refresh()} )
+   AEval(oDlg:GetList, {|o|o:Refresh()})
 Return Nil
 
 FUNCTION HWG_Version(oTip)

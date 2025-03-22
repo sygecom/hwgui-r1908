@@ -39,7 +39,7 @@ Private lAddMode := .F.
    aPmetr := GetTextMetric( oPrinter:hDCPrn )
    pKoef := aPrnCoors[1] / aPmetr[2]
    fontKoef := pKoef / dKoef
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          oFont := aPaintRep[FORM_ITEMS,i,ITEM_FONT]
          aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add( oFont:name,;
@@ -51,12 +51,12 @@ Private lAddMode := .F.
    oPrinter:StartDoc(.T.)
    oPrinter:StartPage()
 
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] != TYPE_BITMAP
          hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS,i], prnXCoef, prnYCoef, 0, .F. )
       ENDIF
    NEXT
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_BITMAP
          hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS,i], prnXCoef, prnYCoef, 0, .F. )
       ENDIF
@@ -65,7 +65,7 @@ Private lAddMode := .F.
    oPrinter:EndPage()
    oPrinter:EndDoc()
 
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          aPaintRep[FORM_ITEMS,i,ITEM_STATE]:Release()
          aPaintRep[FORM_ITEMS,i,ITEM_STATE] := Nil

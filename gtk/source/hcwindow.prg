@@ -146,9 +146,9 @@ Local i
 
    // Writelog( "== "+::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "Nil")+IIf(lParam != NIL, Str(lParam), "Nil") )
    IF ( i := AScan(aCustomEvents[1], msg) ) != 0
-      Return Eval( aCustomEvents[2,i], Self, wParam, lParam )
+      Return Eval(aCustomEvents[2, i], Self, wParam, lParam)
    ELSEIF ::bOther != Nil
-      Return Eval( ::bOther, Self, msg, wParam, lParam )
+      Return Eval(::bOther, Self, msg, wParam, lParam)
    ENDIF
 
 Return 0
@@ -190,19 +190,19 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
          DO CASE
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SELCHANGE
             IF oCtrl != Nil .AND. oCtrl:bChange != Nil
-               Eval( oCtrl:bChange, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
+               Eval(oCtrl:bChange, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
             ENDIF
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_CLICK
               if oCtrl != Nil .AND. oCtrl:bAction != nil
-                 Eval( oCtrl:bAction, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
+                 Eval(oCtrl:bAction, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SETFOCUS
               if oCtrl != Nil .AND. oCtrl:bGetFocus != nil
-                 Eval( oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab( oCtrl:handle ) )
+                 Eval(oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_KILLFOCUS
               if oCtrl != Nil .AND. oCtrl:bLostFocus != nil
-                 Eval( oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab( oCtrl:handle ))
+                 Eval(oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
         ENDCASE
       ELSEIF oCtrl:ClassName() == "HQHTM"
@@ -218,7 +218,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
             Return 1
          ELSEIF oWnd:aNotify != Nil .AND. ;
             ( iItem := AScan(oWnd:aNotify, {|a|a[1] == nCode .AND. a[2] == wParam}) ) > 0
-            IF ( res := Eval( oWnd:aNotify[iItem, 3],oWnd,wParam ) ) != Nil
+            IF ( res := Eval(oWnd:aNotify[iItem, 3], oWnd, wParam) ) != Nil
                Return res
             ENDIF
          ENDIF
@@ -252,7 +252,7 @@ Local oCtrl
 
    IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != Nil .AND. ;
          oCtrl:bPaint != Nil
-      Eval( oCtrl:bPaint, oCtrl, lParam )
+      Eval(oCtrl:bPaint, oCtrl, lParam)
       Return 1
    ENDIF
 
@@ -263,7 +263,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != Nil .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oWnd:aEvents[iItem, 3],oWnd,iParLow )
+      Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ENDIF
 
 Return 1
@@ -275,15 +275,13 @@ Local oItem, iCont
    #ifdef __XHARBOUR__
    FOR each oItem in aControls
        IF oItem:bSize != Nil
-          Eval( oItem:bSize, ;
-           oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+          Eval(oItem:bSize, oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
        ENDIF
    NEXT
    #else
    FOR iCont := 1 TO nControls
        IF aControls[iCont]:bSize != Nil
-          Eval( aControls[iCont]:bSize, ;
-           aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+          Eval(aControls[iCont]:bSize, aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam))
        ENDIF
    NEXT
    #endif
@@ -298,12 +296,12 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
       msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
          IF HB_IsBlock( oCtrl:bChange )
-            Eval( oCtrl:bChange,oCtrl )
+            Eval(oCtrl:bChange, oCtrl)
             Return 0
          ENDIF
       ELSEIF msg == TB_THUMBTRACK .OR. msg == TB_PAGEUP .OR. msg == TB_PAGEDOWN
          IF HB_IsBlock( oCtrl:bThumbDrag )
-            Eval( oCtrl:bThumbDrag,oCtrl )
+            Eval(oCtrl:bThumbDrag, oCtrl)
             Return 0
          ENDIF
       ENDIF
@@ -319,7 +317,7 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
       SWITCH msg
       CASE TB_ENDTRACK
          IF HB_IsBlock( oCtrl:bChange )
-            Eval( oCtrl:bChange,oCtrl )
+            Eval(oCtrl:bChange, oCtrl)
             Return 0
          ENDIF
          EXIT
@@ -327,7 +325,7 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
       CASE TB_PAGEUP
       CASE TB_PAGEDOWN
          IF HB_IsBlock( oCtrl:bThumbDrag )
-            Eval( oCtrl:bThumbDrag,oCtrl )
+            Eval(oCtrl:bThumbDrag, oCtrl)
             Return 0
          ENDIF
       ENDSWITCH

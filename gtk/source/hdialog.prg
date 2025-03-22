@@ -27,7 +27,7 @@ Static aMessModalDlg := { ;
 Static Function onDestroy( oDlg )
 
    IF oDlg:bDestroy != Nil
-      Eval( oDlg:bDestroy, oDlg )
+      Eval(oDlg:bDestroy, oDlg)
       oDlg:bDestroy := Nil
    ENDIF
    oDlg:Super:onEvent( WM_DESTROY )
@@ -145,7 +145,7 @@ Local i
 
    // writelog( str(msg) + str(wParam) + str(lParam) )
    IF ( i := AScan(aMessModalDlg, {|a|a[1] == msg}) ) != 0
-      Return Eval( aMessModalDlg[i, 2], Self, wParam, lParam )
+      Return Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
    ELSE
       Return ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -207,7 +207,7 @@ Local iCont
    ENDIF
    */
    IF oDlg:bInit != Nil
-      Eval( oDlg:bInit, oDlg )
+      Eval(oDlg:bInit, oDlg)
    ENDIF
 
 Return 1
@@ -219,7 +219,7 @@ Local oItem
          .AND. oItem:handle == lParam .AND. !oItem:lActivated
       oItem:lActivated := .T.
       IF oItem:bActivate != Nil
-         Eval( oItem:bActivate, oItem )
+         Eval(oItem:bActivate, oItem)
       ENDIF
    ENDIF
 Return 0
@@ -261,7 +261,7 @@ Local aMenu, i, hCtrl
          NEXT
          IF i != 0 .AND. oDlg:GetList[i]:handle == hCtrl
             IF __ObjHasMsg(oDlg:GetList[i],"BVALID")
-               IF Eval( oDlg:GetList[i]:bValid,oDlg:GetList[i] ) .AND. ;
+               IF Eval(oDlg:GetList[i]:bValid, oDlg:GetList[i]) .AND. ;
                       oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )
@@ -285,7 +285,7 @@ Local aMenu, i, hCtrl
 
    IF oDlg:aEvents != Nil .AND. ;
       ( i := AScan(oDlg:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
-      Eval( oDlg:aEvents[i, 3],oDlg,iParLow )
+      Eval(oDlg:aEvents[i, 3], oDlg, iParLow)
    ELSEIF iParHigh == 0 .AND. ( ;
         ( iParLow == IDOK .AND. oDlg:FindControl(IDOK) != Nil ) .OR. ;
           iParLow == IDCANCEL )
@@ -299,11 +299,11 @@ Local aMenu, i, hCtrl
    ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != Nil ;
         .AND. aMenu[1,i, 1] != Nil
-      Eval( aMenu[1,i, 1] )
+      Eval(aMenu[1, i, 1])
    ELSEIF __ObjHasMsg(oDlg,"OPOPUP") .AND. oDlg:oPopup != Nil .AND. ;
          ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != Nil ;
          .AND. aMenu[1,i, 1] != Nil
-         Eval( aMenu[1,i, 1] )
+         Eval(aMenu[1, i, 1])
    ENDIF
 
 Return 1
@@ -328,15 +328,14 @@ Static Function onSize( oDlg,wParam,lParam )
 
    IF oDlg:bSize != Nil .AND. ;
        ( oDlg:oParent == Nil .OR. !__ObjHasMsg( oDlg:oParent,"ACONTROLS" ) )
-      Eval( oDlg:bSize, oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+      Eval(oDlg:bSize, oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    aControls := oDlg:aControls
    IF aControls != Nil
       oDlg:Anchor( oDlg, nW1, nH1, oDlg:nWidth, oDlg:nHeight )
       FOR iCont := 1 TO Len(aControls)
          IF aControls[iCont]:bSize != Nil
-            Eval( aControls[iCont]:bSize, ;
-             aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+            Eval(aControls[iCont]:bSize, aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam))
          ENDIF
       NEXT
    ENDIF
@@ -347,9 +346,9 @@ Static Function onActivate( oDlg,wParam,lParam )
 Local iParLow := hwg_LOWORD(wParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != Nil
-      Eval( oDlg:bGetFocus, oDlg )
+      Eval(oDlg:bGetFocus, oDlg)
    elseif iParLow == 0 .AND. oDlg:bLostFocus != Nil
-      Eval( oDlg:bLostFocus, oDlg )
+      Eval(oDlg:bLostFocus, oDlg)
    endif
 
 Return 0
@@ -377,7 +376,7 @@ Local oDlg
    // writelog( "EndDialog-1" )
    IF oDlg:bDestroy != Nil
       // writelog( "EndDialog-2" )
-      Eval( oDlg:bDestroy, oDlg )
+      Eval(oDlg:bDestroy, oDlg)
       oDlg:bDestroy := Nil
    ENDIF
 

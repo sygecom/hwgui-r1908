@@ -79,7 +79,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
       ::DragAll()
       ::lCaptured := .F.
       IF ::bEndDrag != Nil
-         Eval( ::bEndDrag,Self )
+         Eval(::bEndDrag, Self)
       ENDIF
    ELSEIF msg == WM_DESTROY
       ::End()
@@ -100,7 +100,7 @@ METHOD Paint( lpdis ) CLASS HSplitter
 Local hDC
 
    IF ::bPaint != Nil
-      Eval( ::bPaint,Self )
+      Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC( ::handle )
       hwg_DrawButton( hDC, 0, 0,::nWidth-1,::nHeight-1, 6 )

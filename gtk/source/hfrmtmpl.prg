@@ -360,7 +360,7 @@ Private oDlg
       IF ::aMethods[i, 1] == "ondlginit"
          ::oDlg:bInit := block
       ELSEIF ::aMethods[i, 1] == "onforminit"
-         Eval( block,Self,p1,p2,p3 )
+         Eval(block, Self, p1, p2, p3)
       ELSEIF ::aMethods[i, 1] == "onpaint"
          ::oDlg:bPaint := block
       ELSEIF ::aMethods[i, 1] == "ondlgexit"
@@ -383,7 +383,7 @@ Private oDlg
    ::oDlg:Activate(lModal)
 
    IF bFormExit != Nil
-      Return Eval( bFormExit )
+      Return Eval(bFormExit)
    ENDIF
 
 Return Nil
@@ -833,7 +833,7 @@ Local arr := {}, pos1 := 2, pos2 := 1
 
 Return arr
 
-Function hfrm_Arr2Str( arr )
+Function hfrm_Arr2Str(arr)
 Local stroka := "{", i, cType
 
    FOR i := 1 TO Len(arr)

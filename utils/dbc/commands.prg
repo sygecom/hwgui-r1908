@@ -171,7 +171,7 @@ Private cFor
          ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
             COUNT TO nsum REST FOR &cFor
          ENDIF
-         hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
+         hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str(nsum) )
          Go nrec
          Return Nil
       ENDIF
@@ -233,15 +233,15 @@ Private nsum := 0
       blsum := &( "{||nsum:=nsum+" + cSumf + "}" )
       blfor := &( "{||" + cFor + "}" )
       IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
-         DBEVAL( blsum, blfor )
+         DBEval(blsum, blfor)
       ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
          nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
-         DBEVAL( blsum, blfor,, nrest )
+         DBEval(blsum, blfor, , nrest)
       ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
-         DBEVAL( blsum, blfor,,,, .T. )
+         DBEval(blsum, blfor, , , , .T.)
       ENDIF
       Go nrec
-      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str( nsum ) )
+      hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str(nsum) )
       Return Nil
    ENDIF
 
@@ -297,12 +297,12 @@ Local fname, nRec := Recno()
 
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
    IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
-      // DBEVAL( blsum, blfor )
+      // DBEval(blsum, blfor)
    ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
       // nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
-      // DBEVAL( blsum, blfor,, nrest )
+      // DBEval(blsum, blfor, , nrest)
    ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
-      // DBEVAL( blsum, blfor,,,, .T. )
+      // DBEval(blsum, blfor, , , , .T.)
    ENDIF
    Go nrec
 

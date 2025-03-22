@@ -197,7 +197,7 @@ Memvar oBrw, oFont
    oBrowse:AddColumn( HColumn():New( "Filename",{|v,o|o:aArray[o:nCurrent, 3]},"C", 10, 0 ) )
    
    oBrowse:rowPos := nOrder
-   Eval( oBrowse:bGoTo,oBrowse,nOrder )
+   Eval(oBrowse:bGoTo, oBrowse, nOrder)
    
    oDlg:Activate()
    
@@ -420,9 +420,9 @@ Memvar oBrw, currentCP, currFname
                ELSE
                   IF af[i, 2] != af0[af[i, 5], 2]
                      IF af[i, 2] == "C" .AND. af0[af[i, 5], 2] == "N"
-                        xValue := Str( xValue,af0[af[i, 5], 3],af0[af[i, 5], 4] )
+                        xValue := Str(xValue,af0[af[i, 5], 3],af0[af[i, 5], 4])
                      ELSEIF af[i, 2] == "N" .AND. af0[af[i, 5], 2] == "C"
-                        xValue := Val( Ltrim( xValue ) )
+                        xValue := Val( LTrim(xValue) )
                      ELSE
                         LOOP
                      ENDIF
@@ -528,11 +528,11 @@ Memvar oBrw
    IF nRec != 0
       dbv_nRec := nRec
       dbGoTo( nRec )
-      IF EVAL( oBrw:bEof,oBrw )
-         EVAL( oBrw:bGoBot,oBrw )
+      IF Eval(oBrw:bEof, oBrw)
+         Eval(oBrw:bGoBot, oBrw)
       ENDIF
       oBrw:Refresh()
-      Eval( oBrw:bScrollPos,oBrw, 0 )
+      Eval(oBrw:bScrollPos, oBrw, 0)
    ENDIF
 
 Return Nil
@@ -547,14 +547,14 @@ Memvar oBrw, oSay2
       cKey := GetData( dbv_cSeek,"Seek record","Input key:" )
       IF !Empty(cKey)
          dbv_cSeek := cKey
-         nRec := Eval( oBrw:bRecNo, oBrw )
+         nRec := Eval(oBrw:bRecNo, oBrw)
          IF dbSeek( cKey )
             oSay2:SetValue( "Found" )
             oBrw:Refresh()
-            Eval( oBrw:bScrollPos,oBrw, 0 )
+            Eval(oBrw:bScrollPos, oBrw, 0)
          ELSE
             oSay2:SetValue( "Not Found" )
-            Eval( oBrw:bGoTo, oBrw, nRec )
+            Eval(oBrw:bGoTo, oBrw, nRec)
          ENDIF
       ENDIF
    ENDIF
@@ -590,15 +590,15 @@ Memvar oBrw, oSay2
    ENDDO
 
    dbv_cLocate := cLocate
-   nRec := Eval( oBrw:bRecNo, oBrw )
+   nRec := Eval(oBrw:bRecNo, oBrw)
    LOCATE FOR &cLocate
    IF Found()
       oSay2:SetValue( "Found" )
       oBrw:Refresh()
-      Eval( oBrw:bScrollPos,oBrw, 0 )
+      Eval(oBrw:bScrollPos, oBrw, 0)
    ELSE
       oSay2:SetValue( "Not Found" )
-      Eval( oBrw:bGoTo, oBrw, nRec )
+      Eval(oBrw:bGoTo, oBrw, nRec)
    ENDIF
 
 Return Nil
@@ -608,15 +608,15 @@ Local nRec
 Memvar oBrw, oSay2
 
    IF !Empty(dbv_cLocate)
-      nRec := Eval( oBrw:bRecNo, oBrw )
+      nRec := Eval(oBrw:bRecNo, oBrw)
       CONTINUE
       IF Found()
          oSay2:SetValue( "Found" )
          oBrw:Refresh()
-         Eval( oBrw:bScrollPos,oBrw, 0 )
+         Eval(oBrw:bScrollPos, oBrw, 0)
       ELSE
          oSay2:SetValue( "Not Found" )
-         Eval( oBrw:bGoTo, oBrw, nRec )
+         Eval(oBrw:bGoTo, oBrw, nRec)
       ENDIF
    ENDIF
 
@@ -638,7 +638,7 @@ Local oModDlg, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
 
    oFont:Release()
    IF oModDlg:lResult
-      Return Trim( cRes )
+      Return Trim(cRes)
    ELSE
       cRes := ""
    ENDIF
@@ -660,7 +660,7 @@ Memvar oBrw, oSay1, oSay2
       PACK
       oMsg:Close()
       oBrw:Refresh()
-      Eval( oBrw:bScrollPos,oBrw, 0 )
+      Eval(oBrw:bScrollPos, oBrw, 0)
       oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
       oSay2:SetValue( "" )
    ENDIF
@@ -675,7 +675,7 @@ Memvar oBrw, oSay1, oSay2
       ZAP
       oMsg:Close()
       oBrw:Refresh()
-      Eval( oBrw:bScrollPos,oBrw, 0 )
+      Eval(oBrw:bScrollPos, oBrw, 0)
       oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
       oSay2:SetValue( "" )
    ENDIF

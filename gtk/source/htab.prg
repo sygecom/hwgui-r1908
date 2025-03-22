@@ -147,7 +147,7 @@ METHOD ChangePage( nPage ) CLASS HTab
    ENDIF
 
    IF ::bChange2 != Nil
-      Eval( ::bChange2,Self,nPage )
+      Eval(::bChange2, Self, nPage)
    ENDIF
 
 Return Nil

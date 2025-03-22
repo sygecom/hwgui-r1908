@@ -232,7 +232,7 @@ METHOD MUp() CLASS HOwnButton
          hwg_RedrawWindow( ::handle )
       ENDIF
       IF ::bClick != Nil
-         Eval( ::bClick, ::oParent, ::id )
+         Eval(::bClick, ::oParent, ::id)
       ENDIF
    ENDIF
 

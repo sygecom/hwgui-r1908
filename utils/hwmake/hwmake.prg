@@ -179,7 +179,7 @@ Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
 if len(aSelect) ==0
    return Nil
 endif
-if LEN(oBrow:aArray) == 1 .and. obrow:aArray[1]=="" 
+if Len(oBrow:aArray) == 1 .and. obrow:aArray[1]==""
    obrow:aArray := {}
 endif
 For i:=1 to Len(oBrow:aArray)
@@ -264,10 +264,10 @@ Local cDest := ""
 Local cLetra
 Local cNome := cFileNoPath( cArq )
 
-cDest := Alltrim( StrTran( cArq, cNome, "" ) )
+cDest := AllTrim(StrTran( cArq, cNome, "" ))
 
 If SubStr(cDest, -1, 1) == "\"
-   cDest := SubStr(cDest, 1, Len( cDest ) - 1)
+   cDest := SubStr(cDest, 1, Len(cDest) - 1)
 EndIf
    
 Return cDest
@@ -287,7 +287,7 @@ Local i
 Local cDest := ""
 Local cLetra
 
-For i:=1 to Len( cArq )
+For i:=1 to Len(cArq)
    
    cLetra := SubStr(cArq, i, 1)
    If cLetra == "\"
@@ -378,7 +378,7 @@ Local cMake
 Local CRLF := Chr(13) + Chr(10)
 Local cListObj := ""
 Local cListRes := ""
-Local cMainPrg := Alltrim( Lower(cFileNoPath( cFileNoExt( oMainPrg:GetText() ) )) )
+Local cMainPrg := AllTrim(Lower(cFileNoPath( cFileNoExt( oMainPrg:GetText() ) )))
 Local cPathFile
 Local cRun 
 Local cNameExe
@@ -393,10 +393,10 @@ If !Empty(cPathFile)
 EndIF   
 
 If File(cDirec+"hwmake.Ini")
-   cHwGUI  := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini" ) ))
-   cHarbour:= Lower(alltrim( hwg_GetIni( 'Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")  ))
-   cBCC55  := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini" ) ))
-   cObj    := Lower(alltrim( hwg_GetIni( 'Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini" ) ))
+   cHwGUI  := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini" )))
+   cHarbour:= Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")))
+   cBCC55  := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini" )))
+   cObj    := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini" )))
 Else 
    cHwGUI  :="c:\hwgui"
    cHarbour:="c:\xharbour"
@@ -404,7 +404,7 @@ Else
    cObj    :="obj"
 EndIf
 
-cObj := Lower(Alltrim( cObj ))
+cObj := Lower(AllTrim(cObj))
 Makedir( cObj )
 
 cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
@@ -416,7 +416,7 @@ cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //PrgFiles
 i := Ascan( oBrowse1:aArray, {|x| At( cMainPrg, x ) > 0 } )
 If i == 0
-   AADD(  oBrowse1:aArray, Alltrim( oMainPrg:GetText() ) )
+   AADD(  oBrowse1:aArray, AllTrim(oMainPrg:GetText()) )
 EndIf   
 
 For Each i in oBrowse1:aArray 
@@ -442,7 +442,7 @@ For Each i in oBrowse1:aArray
       fErase( cLogErro )
       fErase( cObjName )
       fErase( cFileNoExt( cObjName ) + ".obj" )
-      If ExecuteCommand(  cExeHarbour, cPrgName + " -o" + cObjName + " " + Alltrim( oPrgFlag:GetText() ) + " -n -i"+cHarbour+"\include;"+cHwGUI+"\include"+If( !Empty(Alltrim( oIncFolder:GetText() ) ), ";"+Alltrim( oIncFolder:GetText() ), ""),  cFileNoExt( cObjName ) + ".log" ) != 0
+      If ExecuteCommand(  cExeHarbour, cPrgName + " -o" + cObjName + " " + AllTrim(oPrgFlag:GetText()) + " -n -i"+cHarbour+"\include;"+cHwGUI+"\include"+If( !Empty(AllTrim(oIncFolder:GetText()) ), ";"+AllTrim(oIncFolder:GetText()), ""),  cFileNoExt( cObjName ) + ".log" ) != 0
   
          cErrText := Memoread( cLogErro ) 
        
@@ -464,7 +464,7 @@ For Each i in oBrowse1:aArray
    If At( cMainPrg,cObjName ) == 0      
       cListObj += StrTran( cObjName, ".c", ".obj" ) + " " + CRLF
    EndIf   
-   cRun := " -v -y -c " +Alltrim( oCFlag:GetText() ) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
+   cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
    If ExecuteCommand( cBCC55 + "\bin\bcc32.exe", cRun ) != 0
       MsgInfo("No Created Object files!", "HwMake" )
       Return nil
@@ -488,11 +488,11 @@ For Each i in oBrowse4:aArray
    EndIf   
    cListRes += cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".res +" + CRLF
 Next
-If Len( cListRes ) > 0
-   cListRes := SubStr(cListRes, 1, Len( cListRes ) - 3)
+If Len(cListRes) > 0
+   cListRes := SubStr(cListRes, 1, Len(cListRes) - 3)
 EndIF   
 cMake := cListObj
-cNameExe := Alltrim( lower(oExeName:GetText()) )
+cNameExe := AllTrim(lower(oExeName:GetText()))
 If At( ".exe", cNameExe ) == 0
    cNameExe += ".exe"
 EndIF
@@ -571,7 +571,7 @@ FOR EACH i in aLibs
    cLib += lower(i) + CRLF
 Next 
 
-cLib := SubStr(Alltrim( cLib ), 1, Len( Alltrim( cLib ) ) - 2)
+cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
 cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
 Return cLib
  
@@ -596,7 +596,7 @@ Return nRet
 
 Function BrwdelIten( oBrowse )
 Adel(oBrowse:aArray, oBrowse:nCurrent)
-ASize( oBrowse:aArray, Len( oBrowse:aArray ) - 1 )
+ASize( oBrowse:aArray, Len(oBrowse:aArray) - 1 )
 Return oBrowse:Refresh()
 
 

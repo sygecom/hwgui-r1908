@@ -45,7 +45,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    IF vari != Nil
       IF !HB_IsNumeric(vari)
          vari := 0
-         Eval( bSetGet,vari )
+         Eval(bSetGet, vari)
       ENDIF
       ::title := Str(vari)
    ENDIF
@@ -85,9 +85,9 @@ METHOD Refresh()  CLASS HUpDown
 Local vari
 
    IF ::bSetGet != Nil
-      ::value := Eval( ::bSetGet )
+      ::value := Eval(::bSetGet)
       IF Str(::value) != ::title
-         ::title := Str( ::value )
+         ::title := Str(::value)
          hwg_SetUpDown( ::handle, ::value )
       ENDIF
    ELSE
@@ -100,7 +100,7 @@ Static Function __When( oCtrl )
 
    oCtrl:Refresh()
    IF oCtrl:bGetFocus != Nil 
-      Return Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet ), oCtrl )
+      Return Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet), oCtrl)
    ENDIF
 
 Return .T.
@@ -108,11 +108,11 @@ Return .T.
 Static Function __Valid( oCtrl )
 
    oCtrl:value := hwg_SetUpDown( oCtrl:handle )
-   oCtrl:title := Str( oCtrl:value )
+   oCtrl:title := Str(oCtrl:value)
    IF oCtrl:bSetGet != Nil
-      Eval( oCtrl:bSetGet,oCtrl:value )
+      Eval(oCtrl:bSetGet, oCtrl:value)
    ENDIF
-   IF oCtrl:bLostFocus != Nil .AND. !Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) .OR. ;
+   IF oCtrl:bLostFocus != Nil .AND. !Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl) .OR. ;
          oCtrl:value > oCtrl:nUpper .OR. oCtrl:value < oCtrl:nLower
       hwg_SetFocus( oCtrl:handle )
    ENDIF

@@ -58,7 +58,7 @@ CLASS HEdit INHERIT HControl
    METHOD Activate()
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init()
-   METHOD SetGet(value) INLINE Eval( ::bSetGet,value,self )
+   METHOD SetGet(value) INLINE Eval(::bSetGet, value, self)
    METHOD Refresh() 
    METHOD SetText(c)
    METHOD GetText() INLINE hwg_Edit_GetText( ::handle )
@@ -123,7 +123,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
 Local oParent := ::oParent, nPos, nctrl, cKeyb
 
    // WriteLog( "Edit: "+Str(msg, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
-   IF ::bAnyEvent != Nil .AND. Eval( ::bAnyEvent,Self,msg,wParam,lParam ) != 0
+   IF ::bAnyEvent != Nil .AND. Eval(::bAnyEvent, Self, msg, wParam, lParam) != 0
       Return 0
    ENDIF
    
@@ -137,7 +137,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             cKeyb := hwg_GetKeyboardState()
             nctrl := IIf(Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128, FCONTROL, IIf(Asc(SubStr(cKeyb, VK_SHIFT + 1, 1)) >= 128, FSHIFT, 0))
             IF ( nPos := AScan(oParent:KeyList, {|a|a[1] == nctrl .AND. a[2] == wParam}) ) > 0
-               Eval( oParent:KeyList[nPos, 3] )
+               Eval(oParent:KeyList[nPos, 3])
             ENDIF
 	    */
          ENDIF
@@ -145,7 +145,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
    ELSEIF msg == WM_SETFOCUS
       IF ::bSetGet == Nil
          IF ::bGetFocus != Nil
-            Eval( ::bGetFocus, hwg_Edit_GetText( ::handle ), Self )
+            Eval(::bGetFocus, hwg_Edit_GetText(::handle), Self)
          ENDIF
       ELSE
          __When( Self )
@@ -153,7 +153,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
    ELSEIF msg == WM_KILLFOCUS
       IF ::bSetGet == Nil
          IF ::bLostFocus != Nil
-            Eval( ::bLostFocus, hwg_Edit_GetText( ::handle ), Self )
+            Eval(::bLostFocus, hwg_Edit_GetText(::handle), Self)
          ENDIF
       ELSE
          __Valid( Self )
@@ -263,7 +263,7 @@ METHOD Refresh()  CLASS HEdit
 Local vari
 
    IF ::bSetGet != Nil
-      vari := Eval( ::bSetGet,,self )
+      vari := Eval(::bSetGet, , self)
 
       IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
          vari := Transform( vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
@@ -292,7 +292,7 @@ METHOD SetText( c ) CLASS HEdit
      ENDIF
      hwg_Edit_SetText( ::handle,::title )
      IF ::bSetGet != Nil
-       Eval( ::bSetGet, c, self )
+       Eval(::bSetGet, c, self)
      ENDIF
   ENDIF
 
@@ -328,7 +328,7 @@ Local nAt, i, masklen, cChar
       IF oEdit:cType == "D"
          oEdit:cPicMask := StrTran(DToC(CToD(Space(8))), " ", "9")
       ELSEIF oEdit:cType == "N"
-         vari := Str( vari )
+         vari := Str(vari)
          IF ( nAt := At( ".", vari ) ) > 0
             oEdit:cPicMask := Replicate( '9', nAt - 1 ) + "." + ;
                   Replicate( '9', Len(vari) - nAt )
@@ -611,7 +611,7 @@ Local res
    oCtrl:Refresh()
    oCtrl:lFirst := .T.
    IF oCtrl:bGetFocus != Nil 
-      res := Eval( oCtrl:bGetFocus, oCtrl:title, oCtrl )
+      res := Eval(oCtrl:bGetFocus, oCtrl:title, oCtrl)
       IF !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
@@ -639,12 +639,12 @@ Local vari, oDlg
             oCtrl:title := Transform( vari, oCtrl:cPicFunc + IIf(Empty(oCtrl:cPicFunc), "", " ") + oCtrl:cPicMask )
             hwg_edit_Settext( oCtrl:handle, oCtrl:title )
          ENDIF
-         Eval( oCtrl:bSetGet, vari, oCtrl )
+         Eval(oCtrl:bSetGet, vari, oCtrl)
 
          IF oDlg != Nil
             oDlg:nLastKey := 27
          ENDIF
-         IF oCtrl:bLostFocus != Nil .AND. !Eval( oCtrl:bLostFocus, vari, oCtrl )
+         IF oCtrl:bLostFocus != Nil .AND. !Eval(oCtrl:bLostFocus, vari, oCtrl)
             hwg_SetFocus( oCtrl:handle )
 	      hwg_edit_SetPos( oCtrl:handle, 0 )
             IF oDlg != Nil

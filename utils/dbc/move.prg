@@ -71,7 +71,7 @@ Local hWnd, oWindow, aControls, iCont
          IF TYPE( ORDKEY() ) == "N"
             key := VAL( cSeek )
          ELSEIF TYPE( ORDKEY() ) = "D"
-            key := CTOD( Trim( cSeek ) )
+            key := CTOD( Trim(cSeek) )
          ELSE
             key := cSeek
          ENDIF
@@ -107,7 +107,7 @@ Local nrec, i, res, block
       IF oBrw:prflt
          FOR i := 1 TO Min( oBrw:nRecords,klrecf-1 )
             GO oBrw:aArray[i]
-            IF Eval( block )
+            IF Eval(block)
                res := .T.
                EXIT
             ENDIF
@@ -115,7 +115,7 @@ Local nrec, i, res, block
          IF !res .AND. i < oBrw:nRecords
             SKIP
             DO WHILE !Eof()
-               IF Eval( block )
+               IF Eval(block)
                   res := .T.
                   EXIT
                ENDIF

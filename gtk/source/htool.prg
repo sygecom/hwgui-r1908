@@ -216,7 +216,7 @@ Local nPos
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos>0
          IF ::aItem[nPos, 7] != Nil
-            Eval( ::aItem[nPos, 7] ,Self )
+            Eval(::aItem[nPos, 7] ,Self)
          ENDIF
       endif
    ENDIF

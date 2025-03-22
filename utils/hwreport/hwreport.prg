@@ -238,12 +238,12 @@ Local step, kolsteps, nsteps
    hwg_FillRect( hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1 )
    hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_WINDOW+1 )
    hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_WINDOW) )
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] != TYPE_BITMAP
          PaintItem( hDC, aPaintRep[FORM_ITEMS,i], aCoors, lPreview )
       ENDIF
    NEXT
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_BITMAP
          PaintItem( hDC, aPaintRep[FORM_ITEMS,i], aCoors, lPreview )
       ENDIF
@@ -333,7 +333,7 @@ Local i, aItem, hWnd := oWnd:handle
       ENDIF
    ELSEIF msg == WM_KEYUP
       IF wParam == 40        // Down
-         FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+         FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
             IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
                aItem := aPaintRep[FORM_ITEMS,i]
                IF aItem[ITEM_Y1]+aItem[ITEM_HEIGHT] < aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEFCONST]
@@ -355,7 +355,7 @@ Local i, aItem, hWnd := oWnd:handle
             ENDIF
          NEXT
       ELSEIF wParam == 38    // Up
-         FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+         FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
             IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
                aItem := aPaintRep[FORM_ITEMS,i]
                IF aItem[ITEM_Y1] > 1
@@ -377,7 +377,7 @@ Local i, aItem, hWnd := oWnd:handle
             ENDIF
          NEXT
       ELSEIF wParam == 39    // Right
-         FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+         FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
             IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
                aItem := aPaintRep[FORM_ITEMS,i]
                IF aItem[ITEM_TYPE] != TYPE_MARKER .AND. ;
@@ -394,7 +394,7 @@ Local i, aItem, hWnd := oWnd:handle
             ENDIF
          NEXT
       ELSEIF wParam == 37    // Left
-         FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+         FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
             IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
                aItem := aPaintRep[FORM_ITEMS,i]
                IF aItem[ITEM_TYPE] != TYPE_MARKER .AND. aItem[ITEM_X1] > 1
@@ -544,7 +544,7 @@ Local aItem, i, dx, dy
          hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
       ENDIF
    ELSE
-      FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
+      FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS,i]
          IF aItem[ITEM_STATE] == STATE_SELECTED
             IF xPos >= LEFT_INDENT-2+aItem[ITEM_X1] .AND. ;
@@ -608,7 +608,7 @@ Local hWnd := Hwindow():GetMain():handle
          res := .T.
       ENDIF
       hwg_WriteStatus( Hwindow():GetMain(), 1,"" )
-      FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
+      FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS,i]
          IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
               .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH] ;
@@ -654,7 +654,7 @@ Local hWnd := Hwindow():GetMain():handle
          aItem[ITEM_X1] := -s_aInitialSize[s_nAddItem, 1]
          aItem[ITEM_CAPTION] := s_aMarkers[s_nMarkerType]
       ENDIF
-      DeselectAll( Len( aPaintRep[FORM_ITEMS] ) )
+      DeselectAll( Len(aPaintRep[FORM_ITEMS]) )
       aPaintRep[FORM_CHANGED] := .T.
       WriteItemInfo( Atail( aPaintRep[FORM_ITEMS] ) )
       hwg_WriteStatus( Hwindow():GetMain(), 2,Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
@@ -664,7 +664,7 @@ Local hWnd := Hwindow():GetMain():handle
                LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
                TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
       hwg_PostMessage( hWnd, WM_PAINT, 0, 0 )
-      IF Len( aPaintRep[FORM_ITEMS] ) == 1
+      IF Len(aPaintRep[FORM_ITEMS]) == 1
          hwg_EnableMenuItem( ,IDM_CLOSE, .T., .T. )
          hwg_EnableMenuItem( ,IDM_SAVE, .T., .T. )
          hwg_EnableMenuItem( ,IDM_SAVEAS, .T., .T. )
@@ -684,7 +684,7 @@ Return Nil
 Static Function DeleteItem()
 Local hWnd := Hwindow():GetMain():handle
 Local i, aItem
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
          aItem := aPaintRep[FORM_ITEMS,i]
          IF aItem[ITEM_PEN] != Nil
@@ -695,12 +695,12 @@ Local i, aItem
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
                   TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
          Adel( aPaintRep[FORM_ITEMS],i )
-         Asize( aPaintRep[FORM_ITEMS], Len( aPaintRep[FORM_ITEMS] ) - 1 )
+         Asize( aPaintRep[FORM_ITEMS], Len(aPaintRep[FORM_ITEMS]) - 1 )
          aPaintRep[FORM_CHANGED] := .T.
          hwg_WriteStatus( Hwindow():GetMain(), 1,"" )
          hwg_WriteStatus( Hwindow():GetMain(), 2,Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
-         IF Len( aPaintRep[FORM_ITEMS] ) == 0
+         IF Len(aPaintRep[FORM_ITEMS]) == 0
             hwg_EnableMenuItem( ,IDM_CLOSE, .F., .T. )
             hwg_EnableMenuItem( ,IDM_SAVE, .F., .T. )
             hwg_EnableMenuItem( ,IDM_SAVEAS, .F., .T. )
@@ -717,7 +717,7 @@ Return Nil
 Static Function DeselectAll( iSelected )
 Local i, iPrevSelected := 0
    iSelected := Iif( iSelected == Nil, 0,iSelected )
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED .OR. ;
            aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_PRESSED
          iPrevSelected := i

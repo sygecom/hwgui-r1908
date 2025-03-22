@@ -249,7 +249,7 @@ Local aCoors, retValue := -1
    IF ::active .AND. !Empty(::aColumns)
 
       IF ::bOther != Nil
-         Eval( ::bOther,Self,msg,wParam,lParam )
+         Eval(::bOther, Self, msg, wParam, lParam)
       ENDIF
 
       IF msg == WM_PAINT
@@ -266,12 +266,12 @@ Local aCoors, retValue := -1
 
       ELSEIF msg == WM_SETFOCUS
          IF ::bGetFocus != Nil
-            Eval( ::bGetFocus, Self )
+            Eval(::bGetFocus, Self)
          ENDIF
 
       ELSEIF msg == WM_KILLFOCUS
          IF ::bLostFocus != Nil
-            Eval( ::bLostFocus, Self )
+            Eval(::bLostFocus, Self)
          ENDIF
 
       ELSEIF msg == WM_HSCROLL
@@ -293,7 +293,7 @@ Local aCoors, retValue := -1
          retValue := 1
       ELSEIF msg == WM_KEYDOWN
          IF ::bKeyDown != Nil
-            IF !Eval( ::bKeyDown,Self,wParam )
+            IF !Eval(::bKeyDown, Self, wParam)
                retValue := 1
             ENDIF
          ENDIF
@@ -364,7 +364,7 @@ Local aCoors, retValue := -1
    IF ::active .AND. !Empty(::aColumns)
 
       IF ::bOther != Nil
-         Eval( ::bOther,Self,msg,wParam,lParam )
+         Eval(::bOther, Self, msg, wParam, lParam)
       ENDIF
 
       SWITCH msg
@@ -384,13 +384,13 @@ Local aCoors, retValue := -1
 
       CASE WM_SETFOCUS
          IF ::bGetFocus != Nil
-            Eval( ::bGetFocus, Self )
+            Eval(::bGetFocus, Self)
          ENDIF
          EXIT
 
       CASE WM_KILLFOCUS
          IF ::bLostFocus != Nil
-            Eval( ::bLostFocus, Self )
+            Eval(::bLostFocus, Self)
          ENDIF
          EXIT
 
@@ -417,7 +417,7 @@ Local aCoors, retValue := -1
 
       CASE WM_KEYDOWN
          IF ::bKeyDown != Nil
-            IF !Eval( ::bKeyDown,Self,wParam )
+            IF !Eval(::bKeyDown, Self, wParam)
                retValue := 1
             ENDIF
          ENDIF
@@ -541,10 +541,10 @@ RETURN oColumn
 Static Function InitColumn( oBrw, oColumn, n )
 
    if oColumn:type == Nil
-      oColumn:type := Valtype( Eval( oColumn:block,,oBrw,n ) )
+      oColumn:type := Valtype( Eval(oColumn:block, , oBrw, n) )
    endif 
    if oColumn:dec == Nil 
-      if oColumn:type == "N" .and. At( '.', Str( Eval( oColumn:block,,oBrw,n ) ) ) != 0
+      if oColumn:type == "N" .and. At( '.', Str(Eval(oColumn:block, , oBrw, n)) ) != 0
          oColumn:dec := Len(SubStr(Str(Eval(oColumn:block, , oBrw, n)), ;
                At(".", Str(Eval(oColumn:block, , oBrw, n))) + 1))
       else
@@ -729,7 +729,7 @@ Local oldBkColor, oldTColor
    ::x2 := aCoors[3]
    ::y2 := aCoors[4]
 
-   ::nRecords := eval( ::bRcou,Self )
+   ::nRecords := Eval(::bRcou, Self)
    IF ::nCurrent > ::nRecords .AND. ::nRecords > 0
       ::nCurrent := ::nRecords
    ENDIF
@@ -750,7 +750,7 @@ Local oldBkColor, oldTColor
 
    IF ::internal[1] == 0
       IF ::rowPos != ::internal[2] .AND. !::lAppMode
-         EVAL( ::bSkip, Self, ::internal[2]-::rowPos )
+         Eval(::bSkip, Self, ::internal[2] - ::rowPos)
       ENDIF
       IF ::aSelected != Nil .AND. AScan(::aSelected, {|x|x = Eval(::bRecno, Self)}) > 0
          ::LineOut( ::internal[2], 0, hDC, .T. )
@@ -758,26 +758,26 @@ Local oldBkColor, oldTColor
          ::LineOut( ::internal[2], 0, hDC, .F. )
       ENDIF
       IF ::rowPos != ::internal[2] .AND. !::lAppMode
-         EVAL( ::bSkip, Self, ::rowPos-::internal[2] )
+         Eval(::bSkip, Self, ::rowPos - ::internal[2])
       ENDIF
    ELSE
-      IF EVAL( ::bEof,Self )
-         EVAL( ::bGoTop, Self )
+      IF Eval(::bEof, Self)
+         Eval(::bGoTop, Self)
          ::rowPos := 1
       ENDIF
       IF ::rowPos > nRows .AND. nRows > 0
          ::rowPos := nRows
       ENDIF
-      tmp := EVAL( ::bRecno,Self )
+      tmp := Eval(::bRecno, Self)
       IF ::rowPos > 1
-         EVAL( ::bSkip, Self, -(::rowPos-1) )
+         Eval(::bSkip, Self, -(::rowPos - 1))
       ENDIF
       i := 1
       DO WHILE .T.
-         IF EVAL( ::bRecno,Self ) == tmp
+         IF Eval(::bRecno, Self) == tmp
             ::rowPos := i
          ENDIF
-         IF i > nRows .OR. EVAL( ::bEof,Self )
+         IF i > nRows .OR. Eval(::bEof, Self)
             EXIT
          ENDIF
          IF ::aSelected != Nil .AND. AScan(::aSelected, {|x|x = Eval(::bRecno, Self)}) > 0
@@ -786,7 +786,7 @@ Local oldBkColor, oldTColor
             ::LineOut( i, 0, hDC, .F. )
          ENDIF
          i ++
-         EVAL( ::bSkip, Self, 1 )
+         Eval(::bSkip, Self, 1)
       ENDDO
       ::rowCurrCount := i - 1
 
@@ -802,7 +802,7 @@ Local oldBkColor, oldTColor
          i ++
       ENDDO
 
-      EVAL( ::bGoTo, Self,tmp )
+      Eval(::bGoTo, Self, tmp)
    ENDIF
    IF ::lAppMode
       ::LineOut( nRows+1, 0, hDC, .F.,.T. )
@@ -819,11 +819,11 @@ Local oldBkColor, oldTColor
    hwg_ReleaseDC( ::area,hDC )
    ::internal[1] := 15
    ::internal[2] := ::rowPos
-   tmp := eval( ::bRecno,Self )
+   tmp := Eval(::bRecno, Self)
    IF ::recCurr != tmp
       ::recCurr := tmp
       IF ::bPosChanged != Nil
-         Eval( ::bPosChanged,Self )
+         Eval(::bPosChanged, Self)
       ENDIF
    ENDIF
 
@@ -996,7 +996,7 @@ Local aCores
    IF lClear == Nil ; lClear := .F. ; ENDIF
 
    IF ::bLineOut != Nil
-      Eval( ::bLineOut,Self,lSelected )
+      Eval(::bLineOut, Self, lSelected)
    ENDIF
    IF ::nRecords > 0
       oldBkColor := hwg_SetBkColor( hDC, IIf(lSelected, ::bcolorSel, ::bcolor) )
@@ -1035,7 +1035,7 @@ Local aCores
             IF !lClear
                IF ::aColumns[fif]:aBitmaps != Nil .AND. !Empty(::aColumns[fif]:aBitmaps)
                   FOR j := 1 TO Len(::aColumns[fif]:aBitmaps)
-                     IF Eval( ::aColumns[fif]:aBitmaps[j, 1],EVAL( ::aColumns[fif]:block,,Self,fif ),lSelected )
+                     IF Eval(::aColumns[fif]:aBitmaps[j, 1], Eval(::aColumns[fif]:block, , Self, fif), lSelected)
                         ob := ::aColumns[fif]:aBitmaps[j, 2]
                         // IF ob:nHeight > ::height
                            y1 := 0
@@ -1250,7 +1250,7 @@ Local nScrollV := hwg_getAdjValue( ::hScrollV )
       ::PAGEUP(.T.)
    else
       IF ::bScrollPos != Nil
-         Eval( ::bScrollPos, Self, SB_THUMBTRACK, .F., nScrollV )
+         Eval(::bScrollPos, Self, SB_THUMBTRACK, .F., nScrollV)
       ENDIF
    endif
    ::nScrollV := nScrollV
@@ -1263,9 +1263,9 @@ Local maxPos := hwg_getAdjValue( ::hScrollV, 1 ) - hwg_getAdjValue( ::hScrollV, 
 Local nPos
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
-   Eval( ::bSkip, Self, 1 )
-   IF Eval( ::bEof,Self )
-      Eval( ::bSkip, Self, -1 )
+   Eval(::bSkip, Self, 1)
+   IF Eval(::bEof, Self)
+      Eval(::bSkip, Self, -1)
       IF ::lAppable .AND. !lMouse
          ::lAppMode := .T.
       ELSE
@@ -1289,7 +1289,7 @@ Local nPos
    ENDIF
    IF !lMouse .AND. ::hScrollV != Nil
       IF ::bScrollPos != Nil
-         Eval( ::bScrollPos, Self, 1, .F. )
+         Eval(::bScrollPos, Self, 1, .F.)
       ELSE
          nPos := hwg_getAdjValue( ::hScrollV )
          nPos += Int( maxPos/(::nRecords-1) )
@@ -1308,9 +1308,9 @@ Local maxPos := hwg_getAdjValue( ::hScrollV, 1 ) - hwg_getAdjValue( ::hScrollV, 
 Local nPos
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
-   EVAL( ::bSkip, Self, -1 )
-   IF EVAL( ::bBof,Self )
-      EVAL( ::bGoTop,Self )
+   Eval(::bSkip, Self, -1)
+   IF Eval(::bBof, Self)
+      Eval(::bGoTop, Self)
    ELSE
       ::rowPos --
       IF ::rowPos = 0
@@ -1324,7 +1324,7 @@ Local nPos
 
       IF !lMouse .AND. ::hScrollV != Nil
          IF ::bScrollPos != Nil
-            Eval( ::bScrollPos, Self, -1, .F. )
+            Eval(::bScrollPos, Self, -1, .F.)
          ELSE
             nPos := hwg_getAdjValue( ::hScrollV )
             nPos -= Int( maxPos/(::nRecords-1) )
@@ -1346,20 +1346,20 @@ Local nPos, step, lBof := .F.
    lMouse := IIf(lMouse == NIL, .F., lMouse)
    IF ::rowPos > 1
       step := ( ::rowPos - 1 )
-      EVAL( ::bSKip, Self, -step )
+      Eval(::bSKip, Self, -step)
       ::rowPos := 1
    ELSE
       step := ::rowCurrCount    // Min( ::nRecords,::rowCount )
-      EVAL( ::bSkip, Self, -step )
-      IF EVAL( ::bBof,Self )
-         EVAL( ::bGoTop,Self )
+      Eval(::bSkip, Self, -step)
+      IF Eval(::bBof, Self)
+         Eval(::bGoTop, Self)
          lBof := .T.
       ENDIF
    ENDIF
 
    IF !lMouse .AND. ::hScrollV != Nil
       IF ::bScrollPos != Nil
-         Eval( ::bScrollPos, Self, - step, lBof )
+         Eval(::bScrollPos, Self, -step, lBof)
       ELSE
          nPos := hwg_getAdjValue( ::hScrollV )
          nPos -= Int( maxPos/(::nRecords-1) )
@@ -1380,16 +1380,16 @@ Local nPos, nRows := ::rowCurrCount
 Local step := IIf(nRows > ::rowPos, nRows - ::rowPos + 1, nRows), lEof
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
-   EVAL( ::bSkip, Self, step )
+   Eval(::bSkip, Self, step)
    ::rowPos := Min( ::nRecords, nRows )
-   lEof := EVAL( ::bEof,Self )
+   lEof := Eval(::bEof, Self)
    IF lEof .AND. ::bScrollPos == Nil
-      EVAL( ::bSkip, Self, -1 )
+      Eval(::bSkip, Self, -1)
    ENDIF
 
    IF !lMouse .AND. ::hScrollV != Nil
       IF ::bScrollPos != Nil
-         Eval( ::bScrollPos, Self, step, lEof )
+         Eval(::bScrollPos, Self, step, lEof)
       ELSE
          nPos := hwg_getAdjValue( ::hScrollV )
          IF lEof     
@@ -1411,7 +1411,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
 Local nPos
 
    ::rowPos := lastrec()
-   eval( ::bGoBot, Self )
+   Eval(::bGoBot, Self)
    ::rowPos := min( ::nRecords, ::rowCount )
 
    IF ::hScrollV != Nil
@@ -1433,7 +1433,7 @@ METHOD TOP() CLASS HBrowse
 Local nPos
 
    ::rowPos := 1
-   EVAL( ::bGoTop,Self )
+   Eval(::bGoTop, Self)
 
    IF ::hScrollV != Nil
       nPos := 0
@@ -1465,12 +1465,12 @@ Local xm := hwg_LOWORD(lParam), x1, fif
    IF nLine > 0 .AND. nLine <= ::rowCurrCount
       IF step != 0
          nrec := Recno()
-         EVAL( ::bSkip, Self, step )
-         IF !Eval( ::bEof,Self )
+         Eval(::bSkip, Self, step)
+         IF !Eval(::bEof, Self)
             ::rowPos := nLine
 	    IF ::hScrollV != Nil
                IF ::bScrollPos != Nil
-                  Eval( ::bScrollPos, Self, step, .F. )
+                  Eval(::bScrollPos, Self, step, .F.)
                ELSE	    
                   nPos := hwg_getAdjValue( ::hScrollV )
 		  maxPos := hwg_getAdjValue( ::hScrollV, 1 ) - hwg_getAdjValue( ::hScrollV, 4 )
@@ -1629,16 +1629,16 @@ Local oColumn, type
 
    fipos := ::colpos + ::nLeftCol - 1 - ::freeze
    IF ::bEnter == Nil .OR. ;
-         ( HB_IsLogical( lRes := Eval( ::bEnter, Self, fipos ) ) .AND. !lRes )
+         ( HB_IsLogical( lRes := Eval(::bEnter, Self, fipos) ) .AND. !lRes )
       oColumn := ::aColumns[fipos]
       IF ::type == BRW_DATABASE
-         ::varbuf := (::alias)->(Eval( oColumn:block,,Self,fipos ))
+         ::varbuf := (::alias)->(Eval(oColumn:block, , Self, fipos))
       ELSE
-         ::varbuf := Eval( oColumn:block,,Self,fipos )
+         ::varbuf := Eval(oColumn:block, , Self, fipos)
       ENDIF
       type := IIf(oColumn:type == "U" .AND. ::varbuf != NIL, ValType(::varbuf), oColumn:type)
       IF ::lEditable .AND. type != "O"        
-         IF oColumn:lEditable .AND. ( oColumn:bWhen = Nil .OR. EVAL( oColumn:bWhen ) )
+         IF oColumn:lEditable .AND. ( oColumn:bWhen = Nil .OR. Eval(oColumn:bWhen) )
             IF ::lAppMode
                IF type == "D"
                   ::varbuf := CtoD("")
@@ -1666,7 +1666,7 @@ Local oColumn, type
          ENDIF
          y1 := ::y1+(::height+1)*rowPos
 	 
-         ::nGetRec := Eval( ::bRecno,Self )
+         ::nGetRec := Eval(::bRecno,Self)
          @ x1,y1 GET ::oGet VAR ::varbuf      ;
 	       OF ::oParent                   ;
                SIZE nWidth, ::height+1        ;
@@ -1708,7 +1708,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
          oBrw:lAppMode := .F.
          IF oBrw:type == BRW_DATABASE
             (oBrw:alias)->( dbAppend() )
-            (oBrw:alias)->( Eval( oColumn:block,oBrw:varbuf,oBrw,fipos ) )
+            (oBrw:alias)->( Eval(oColumn:block, oBrw:varbuf, oBrw, fipos) )
             UNLOCK
          ELSE
             IF HB_IsArray(oBrw:aArray[1])
@@ -1722,7 +1722,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
                AAdd(oBrw:aArray, NIL)
             ENDIF
             oBrw:nCurrent := Len(oBrw:aArray)
-            Eval( oColumn:block,oBrw:varbuf,oBrw,fipos )
+            Eval(oColumn:block, oBrw:varbuf, oBrw, fipos)
          ENDIF
          IF oBrw:nRecords > 0
             oBrw:rowPos ++
@@ -1730,20 +1730,20 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
          oBrw:lAppended := .T.
          oBrw:Refresh()
       ELSE
-         IF ( nRec := Eval( oBrw:bRecno,oBrw ) ) != oBrw:nGetRec
-            Eval( oBrw:bGoTo,oBrw,oBrw:nGetRec )
+         IF ( nRec := Eval(oBrw:bRecno, oBrw) ) != oBrw:nGetRec
+            Eval(oBrw:bGoTo, oBrw, oBrw:nGetRec)
          ENDIF
          IF oBrw:type == BRW_DATABASE
             IF (oBrw:alias)->( Rlock() )
-               (oBrw:alias)->( Eval( oColumn:block,oBrw:varbuf,oBrw,fipos ) )
+               (oBrw:alias)->( Eval(oColumn:block, oBrw:varbuf, oBrw, fipos) )
             ELSE
                hwg_MsgStop("Can't lock the record!")
             ENDIF
          ELSE
-            Eval( oColumn:block,oBrw:varbuf,oBrw,fipos )
+            Eval(oColumn:block, oBrw:varbuf, oBrw, fipos)
          ENDIF
          IF nRec != oBrw:nGetRec
-            Eval( oBrw:bGoTo,oBrw,nRec )
+            Eval(oBrw:bGoTo, oBrw, nRec)
          ENDIF
          oBrw:lUpdated := .T.
       ENDIF
@@ -1752,7 +1752,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
    oBrw:Refresh()
    // Execute block after changes are made
    IF oBrw:oGet:nLastKey != GDK_Escape .AND. oBrw:bUpdate != nil
-       Eval( oBrw:bUpdate, oBrw, fipos )         
+       Eval(oBrw:bUpdate, oBrw, fipos)
    ENDIF
    oBrw:oParent:DelControl( oBrw:oGet )
    oBrw:oGet := Nil
@@ -1780,7 +1780,7 @@ METHOD Refresh( lFull ) CLASS HBrowse
 RETURN Nil
 
 //----------------------------------------------------//
-STATIC FUNCTION FldStr( oBrw,numf )
+STATIC FUNCTION FldStr(oBrw, numf)
 
    local fldtype
    local rez
@@ -1795,16 +1795,16 @@ STATIC FUNCTION FldStr( oBrw,numf )
 
       if pict != nil
          if oBrw:type == BRW_DATABASE
-             rez := (oBrw:alias)->(transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict))
+             rez := (oBrw:alias)->(transform(Eval(oBrw:aColumns[numf]:block, , oBrw, numf), pict))
          else
-             rez := transform(eval( oBrw:aColumns[numf]:block,,oBrw,numf ), pict)
+             rez := transform(Eval(oBrw:aColumns[numf]:block, , oBrw, numf), pict)
          endif
 
       else
          if oBrw:type == BRW_DATABASE
-             vartmp := (oBrw:alias)->(eval( oBrw:aColumns[numf]:block,,oBrw,numf ))
+             vartmp := (oBrw:alias)->(Eval(oBrw:aColumns[numf]:block, , oBrw, numf))
          else
-             vartmp := eval( oBrw:aColumns[numf]:block,,oBrw,numf )
+             vartmp := Eval(oBrw:aColumns[numf]:block, , oBrw, numf)
          endif
 
          type := (oBrw:aColumns[numf]):type
@@ -1816,8 +1816,7 @@ STATIC FUNCTION FldStr( oBrw,numf )
             rez := padr( vartmp, oBrw:aColumns[numf]:length )
             EXIT
          CASE "N"
-            rez := PADL( STR( vartmp, oBrw:aColumns[numf]:length, ;
-                   oBrw:aColumns[numf]:dec ),oBrw:aColumns[numf]:length )
+            rez := PADL( Str(vartmp, oBrw:aColumns[numf]:length, oBrw:aColumns[numf]:dec),oBrw:aColumns[numf]:length )
             EXIT
          CASE "D"
             rez := PADR( DTOC( vartmp ),oBrw:aColumns[numf]:length )
@@ -1879,7 +1878,7 @@ FUNCTION HWG_CREATEARLIST( oBrw, arr )
          oBrw:AddColumn( HColumn():New( ,{|value,o| o:aArray[o:nCurrent] } ) )
       ENDIF
    ENDIF
-   EVAL( oBrw:bGoTop,oBrw )
+   Eval(oBrw:bGoTop, oBrw)
    oBrw:Refresh()
 RETURN Nil
 
@@ -1925,13 +1924,13 @@ Local oldRecno, newRecno
 
    IF nPos == Nil
       IF nType > 0 .AND. lEof
-         EVAL( oBrw:bSkip, oBrw, -1 )
+         Eval(oBrw:bSkip, oBrw, -1)
       ENDIF
-      nPos := Round( ( maxPos/(oBrw:nRecords-1) ) * ( EVAL( oBrw:bRecnoLog,oBrw )-1 ), 0 )
+      nPos := Round( ( maxPos/(oBrw:nRecords-1) ) * (Eval(oBrw:bRecnoLog, oBrw) - 1), 0 )
       hwg_SetAdjOptions( oBrw:hScrollV,nPos )
       oBrw:nScrollV := nPos
    ELSE
-      oldRecno := EVAL( oBrw:bRecnoLog,oBrw )
+      oldRecno := Eval(oBrw:bRecnoLog, oBrw)
       newRecno := Round( (oBrw:nRecords-1)*nPos/maxPos+1, 0 )
       IF newRecno <= 0
          newRecno := 1
@@ -1939,7 +1938,7 @@ Local oldRecno, newRecno
          newRecno := oBrw:nRecords
       ENDIF
       IF newRecno != oldRecno
-         EVAL( oBrw:bSkip, oBrw, newRecno - oldRecno )
+         Eval(oBrw:bSkip, oBrw, newRecno - oldRecno)
          IF oBrw:rowCount - oBrw:rowPos > oBrw:nRecords - newRecno
             oBrw:rowPos := oBrw:rowCount - ( oBrw:nRecords - newRecno )
          ENDIF
@@ -1957,8 +1956,7 @@ Return Nil
 // Locus metodus.
 METHOD ShowSizes() CLASS HBrowse
    local cText := ""
-   aeval( ::aColumns,;
-          { | v,e | cText += ::aColumns[e]:heading + ": " + str( round(::aColumns[e]:width/8, 0)-2  ) + chr(10)+chr(13) } )
+   AEval(::aColumns, {|v, e|cText += ::aColumns[e]:heading + ": " + Str(Round(::aColumns[e]:width / 8, 0) - 2) + Chr(10) + Chr(13)})
    hwg_MsgInfo( cText )
 RETURN nil
 

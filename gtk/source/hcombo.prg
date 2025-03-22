@@ -112,7 +112,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
    IF msg == EN_SETFOCUS
       IF ::bSetGet == Nil
          IF ::bGetFocus != Nil
-            Eval( ::bGetFocus, hwg_Edit_GetText( ::hEdit ), Self )
+            Eval(::bGetFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
          __When( Self )
@@ -120,7 +120,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
    ELSEIF msg == EN_KILLFOCUS
       IF ::bSetGet == Nil
          IF ::bLostFocus != Nil
-            Eval( ::bLostFocus, hwg_Edit_GetText( ::hEdit ), Self )
+            Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
          __Valid( Self )
@@ -136,7 +136,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
    CASE EN_SETFOCUS
       IF ::bSetGet == Nil
          IF ::bGetFocus != Nil
-            Eval( ::bGetFocus, hwg_Edit_GetText( ::hEdit ), Self )
+            Eval(::bGetFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
          __When( Self )
@@ -145,7 +145,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
    CASE EN_KILLFOCUS
       IF ::bSetGet == Nil
          IF ::bLostFocus != Nil
-            Eval( ::bLostFocus, hwg_Edit_GetText( ::hEdit ), Self )
+            Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
          __Valid( Self )
@@ -182,7 +182,7 @@ METHOD Refresh() CLASS HComboBox
 Local vari, i
 
    IF ::bSetGet != Nil
-      vari := Eval( ::bSetGet,,Self )
+      vari := Eval(::bSetGet, , Self)
       if ::lText
          ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
       else
@@ -211,11 +211,11 @@ METHOD SetItem( nPos ) CLASS HComboBox
    hwg_edit_Settext( ::hEdit, ::aItems[nPos] )
    
    IF ::bSetGet != Nil
-      Eval( ::bSetGet, ::value, self )
+      Eval(::bSetGet, ::value, self)
    ENDIF
    
    IF ::bChangeSel != Nil
-      Eval( ::bChangeSel, ::value, Self )
+      Eval(::bChangeSel, ::value, Self)
    ENDIF
    
 Return Nil
@@ -238,10 +238,10 @@ Local vari := hwg_edit_Gettext( oCtrl:hEdit )
    ENDIF
 
    IF oCtrl:bSetGet != Nil
-      Eval( oCtrl:bSetGet, oCtrl:value, oCtrl )
+      Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
    ENDIF
    IF oCtrl:bChangeSel != Nil
-      Eval( oCtrl:bChangeSel, oCtrl:value, oCtrl )
+      Eval(oCtrl:bChangeSel, oCtrl:value, oCtrl)
    ENDIF
 Return .T.
 
@@ -251,7 +251,7 @@ Local res
    // oCtrl:Refresh()
 
    IF oCtrl:bGetFocus != Nil 
-      res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
+      res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF

@@ -56,8 +56,8 @@ Local hDlg := hwg_GetModalHandle(), i
    IF ( i := At( oBrw:aArray[oBrw:nCurrent, 2], "CNDLM" ) ) != 0
       hwg_ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
    ENDIF
-   hwg_SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent, 3] ) ) )
-   hwg_SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent, 4] ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT3, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 3])) )
+   hwg_SetDlgItemText( hDlg, IDC_EDIT4, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 4])) )
 Return Nil
 
 Static Function ModiStru( nOper )
@@ -105,7 +105,7 @@ Local cName, cType, nLen, nDec := 0
       ENDIF
    ELSEIF nOper == 4
       Adel( oBrowse:aArray,oBrowse:nCurrent )
-      Asize( oBrowse:aArray,Len( oBrowse:aArray ) - 1 )
+      Asize( oBrowse:aArray,Len(oBrowse:aArray) - 1 )
       oBrowse:nRecords --
    ENDIF
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -160,9 +160,9 @@ Local oPBar, nSch := 0
                   CASE A2[j] = "C" .AND. B2[i] = "N"
                      C1[i] := &( "{|param|VAL(param)}" )
                   CASE A2[j] = "N" .AND. B2[i] = "C"
-                     C1[i] := &( "{|param|LTRIM(STR(param," + LTRIM( STR( A3[j], 2 ) ) + "," + LTRIM( STR( A4[j], 2 ) ) + "))}" )
+                     C1[i] := &( "{|param|LTRIM(STR(param," + LTrim(Str(A3[j], 2)) + "," + LTrim(Str(A4[j], 2)) + "))}" )
                   CASE A2[j] = "C" .AND. B2[i] = "C"
-                     C1[i] := &( "{|param|SUBSTR(param,1," + LTRIM( STR( A3[j], 4 ) ) + ")}" )
+                     C1[i] := &( "{|param|SUBSTR(param,1," + LTrim(Str(A3[j], 4)) + ")}" )
                   CASE A2[j] = "N" .AND. B2[i] = "N"
                      C1[i] := &( "{|param|param}" )
                   OTHERWISE
@@ -180,7 +180,7 @@ Local oPBar, nSch := 0
          APPEND BLANK
          FOR i := 1 TO kolf
             IF C1[i] != Nil
-               FIELDPUT( i, EVAL( C1[i], (alsname)->( FIELDGET( C2[i] ) ) ) )
+               FIELDPUT( i, Eval(C1[i], (alsname)->(FIELDGET(C2[i]))))
             ENDIF
          NEXT
          SELECT( improc )

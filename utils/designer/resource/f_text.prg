@@ -47,7 +47,7 @@ ENDFUNC
       Return
    ENDIF
    DO WHILE .T.
-      stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
+      stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
       IF Len(stroka) == 0
          EXIT
       ENDIF

@@ -97,7 +97,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    IF ::SetColumn() == 1 .AND. ::bEnter == Nil
       Return Nil
    ENDIF
-   ::cargo := Eval( ::bRecno,Self )
+   ::cargo := Eval(::bRecno, Self)
    IF oTab:GetActivePage() == 2
       IF ( value := EditMethod( aMethods[::cargo, 1],aMethods[::cargo, 2] ) ) != Nil ;
           .AND. !( aMethods[::cargo, 2] == value )
@@ -121,7 +121,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    oColumn := ::aColumns[2]
    cName := Lower(aProp[::cargo, 1])
    j := AScan(aDataDef, {|a|a[1] == cName})
-   varbuf := Eval( oColumn:block,,Self, 2 )
+   varbuf := Eval(oColumn:block, , Self, 2)
 
    IF ( j != 0 .AND. aDataDef[j, 5] != Nil ) .OR. aCtrlProp[oBrw1:cargo, 3] == "A"
       IF j != 0 .AND. aDataDef[j, 5] != Nil
@@ -567,8 +567,8 @@ STATIC FUNCTION InspSetBrowse()
    oBrw1:aArray := aProp
    oBrw2:aArray := aMethods
 
-   Eval( oBrw1:bGoTop,oBrw1 )
-   Eval( oBrw2:bGoTop,oBrw2 )
+   Eval(oBrw1:bGoTop, oBrw1)
+   Eval(oBrw2:bGoTop, oBrw2)
    oBrw1:rowPos := 1 //IIf(nrow > Len(APROP), 1,NROW-1) //1
    oBrw2:rowPos := 1
    oBrw1:Refresh()
@@ -627,7 +627,7 @@ STATIC FUNCTION EditArray( arr )
 
     LOCAL oDlg
     LOCAL oBrw
-    LOCAL nRec := Eval( oBrw1:bRecno,oBrw1 )
+    LOCAL nRec := Eval(oBrw1:bRecno, oBrw1)
     LOCAL arrold := {}
     MEMVAR oDesigner
 

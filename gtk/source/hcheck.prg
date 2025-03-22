@@ -101,7 +101,7 @@ METHOD Refresh() CLASS HCheckButton
 Local var
 
    IF ::bSetGet != Nil
-       var := Eval( ::bSetGet,,nil )
+       var := Eval(::bSetGet, , NIL)
        ::value := IIf(var == NIL, .F., var)
    ENDIF
 
@@ -114,10 +114,10 @@ Local res
    oCtrl:value := hwg_IsButtonChecked( oCtrl:handle )
 
    IF oCtrl:bSetGet != Nil
-      Eval( oCtrl:bSetGet,oCtrl:value, oCtrl )
+      Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
    ENDIF
    IF oCtrl:bLostFocus != Nil .AND. ;
-         HB_IsLogical( res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl ) ) ;
+         HB_IsLogical( res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl) ) ;
 	 .AND. !res
       hwg_SetFocus( oCtrl:handle )
    ENDIF
@@ -130,7 +130,7 @@ Local res
    oCtrl:Refresh()
 
    IF oCtrl:bGetFocus != Nil 
-      res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet,, oCtrl ), oCtrl )
+      res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF HB_IsLogical(res) .AND. !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF

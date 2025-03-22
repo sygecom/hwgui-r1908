@@ -102,7 +102,7 @@ Local i, aItem
             SaveReport()
          ENDIF
       ENDIF
-      FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+      FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
          aItem := aPaintRep[FORM_ITEMS,i]
          IF aItem[ITEM_PEN] != Nil
             aItem[ITEM_PEN]:Release()
@@ -137,8 +137,8 @@ Local i, itemName, aItem, res := .T., sFont
 Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
    IF han != - 1
       DO WHILE .T.
-         stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
-         IF LEN( stroka ) = 0
+         stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
+         IF Len(stroka) = 0
             EXIT
          ENDIF
          IF Left(stroka, 1) == ";"
@@ -147,13 +147,13 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
          IF nMode == 0
             IF lPrg
                IF Upper(Left(stroka, 8)) == "FUNCTION" .AND. ;
-                   Upper(Ltrim( SubStr(stroka, 10) )) == Upper(repname)
+                   Upper(LTrim(SubStr(stroka, 10))) == Upper(repname)
                   nMode := 10
                ENDIF
             ELSE
                IF Left(stroka, 1) == "#"
                   IF Upper(SubStr(stroka, 2, 6)) == "REPORT"
-                     stroka := Ltrim( SubStr(stroka, 9) )
+                     stroka := LTrim(SubStr(stroka, 9))
                      IF Empty(repName) .OR. Upper(stroka) == Upper(repName)
                         IF Empty(repName)
                            repName := stroka
@@ -262,9 +262,9 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                Exit
             ELSE
                IF Right(stroka, 1) == ";"
-                  cSource += Ltrim( Rtrim( Left(stroka, Len(stroka) - 1) ) )
+                  cSource += LTrim(Rtrim(Left(stroka, Len(stroka) - 1)))
                ELSE
-                  cSource += Ltrim( Rtrim( stroka ) )
+                  cSource += LTrim(RTrim(stroka))
                   // Writelog( cSource )
                   vDummy := &cSource
                   cSource := ""
@@ -309,15 +309,15 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
          hanOut := FCREATE( mypath+"__rpt.tmp" )
          IF hanOut != - 1
             DO WHILE .T.
-               stroka := hwg_RDSTR( han,@strbuf,@poz, 512 )
-               IF LEN( stroka ) = 0
+               stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
+               IF Len(stroka) = 0
                   EXIT
                ENDIF
                IF nMode == 0
                   IF ( lPrg .AND. Upper(Left(stroka, 8)) == "FUNCTION" ) ;
                         .OR. ( !lPrg .AND. Left(stroka, 1) == "#" .AND. ;
                            Upper(SubStr(stroka, 2, 6)) == "REPORT" )
-                     IF Upper(Ltrim( SubStr(stroka, 9) )) == Upper(repName)
+                     IF Upper(LTrim(SubStr(stroka, 9))) == Upper(repName)
                         nMode := 1
                         isOut := .T.
                         LOOP
@@ -393,7 +393,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
                          Ltrim(Str(aMetr[1]-XINDENT)) + Chr(10) )
    WriteScript( han,aPaintRep[FORM_VARS] )
 
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       aItem := aPaintRep[FORM_ITEMS,i]
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          oFont := aItem[ITEM_FONT]
@@ -446,7 +446,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       WriteScript( han,aPaintRep[FORM_VARS],.T. )
    ENDIF
 
-   FOR i := 1 TO Len( aPaintRep[FORM_ITEMS] )
+   FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       aItem := aPaintRep[FORM_ITEMS,i]
 
       cItem := Ltrim(Str(aItem[ITEM_TYPE], 1)) + ","
@@ -499,8 +499,8 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
          Fwrite( han,"#SCRIPT"+Chr(10) )
       ENDIF
       DO WHILE .T.
-         stroka := hwg_RDSTR( , cScript, @poz )
-         IF LEN( stroka ) = 0
+         stroka := hwg_RDSTR(, cScript, @poz)
+         IF Len(stroka) = 0
             IF lPrg
                Fwrite( han,Chr(10) )
             ENDIF

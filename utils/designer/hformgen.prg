@@ -310,7 +310,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
                IF HB_IsChar( oFormDesc:aItems[i]:aItems[1]:aItems[1] )
                   oFormDesc:aItems[i]:aItems[1]:aItems[1] := &( "{||" + oFormDesc:aItems[i]:aItems[1]:aItems[1] + "}" )
                ENDIF
-               xProperty := Eval( oFormDesc:aItems[i]:aItems[1]:aItems[1] )
+               xProperty := Eval(oFormDesc:aItems[i]:aItems[1]:aItems[1])
             ELSE
                xProperty := oFormDesc:aItems[i]:GetAttribute( "value" )
             ENDIF
@@ -765,7 +765,7 @@ FUNCTION IsDefault( oCtrl,aPropItem )
             IF HB_IsChar( aItems[j1]:aItems[1]:aItems[1] )
                aItems[j1]:aItems[1]:aItems[1] := &( "{||" + aItems[j1]:aItems[1]:aItems[1] + "}" )
             ENDIF
-            xProperty := Eval( aItems[j1]:aItems[1]:aItems[1] )
+            xProperty := Eval(aItems[j1]:aItems[1]:aItems[1])
          ELSE
             xProperty := aItems[j1]:GetAttribute( "value" )
          ENDIF
@@ -824,10 +824,10 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
       oStyle := oNode:Add( HXMLNode():New( "style" ) )
       IF oDesigner:lReport
          oStyle:Add( HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
-          hfrm_Arr2Str( { oCtrl:GetProp("Left"),oCtrl:GetProp("Top"),oCtrl:GetProp("Width"),oCtrl:GetProp("Height"),oCtrl:GetProp("Right"),oCtrl:GetProp("Bottom") } ) ) )
+          hfrm_Arr2Str({oCtrl:GetProp("Left"), oCtrl:GetProp("Top"), oCtrl:GetProp("Width"), oCtrl:GetProp("Height"), oCtrl:GetProp("Right"), oCtrl:GetProp("Bottom")}) ) )
       ELSE
          oStyle:Add( HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
-          hfrm_Arr2Str( { oCtrl:GetProp("Left"),oCtrl:GetProp("Top"),oCtrl:GetProp("Width"),oCtrl:GetProp("Height") } ) ) )
+          hfrm_Arr2Str({oCtrl:GetProp("Left"), oCtrl:GetProp("Top"), oCtrl:GetProp("Width"), oCtrl:GetProp("Height")}) ) )
       ENDIF
       FOR j := 1 TO Len(oCtrl:aProp)
          cPropertyName := Lower(oCtrl:aProp[j, 1])
@@ -860,7 +860,7 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
                ELSEIF oCtrl:aProp[j, 3] == "L"
                   cProperty := IIf( Lower(oCtrl:aProp[j, 2]) == "true",".T.",".F." )
                ELSEIF oCtrl:aProp[j, 3] == "A"
-                  cProperty := hfrm_Arr2Str( oCtrl:aProp[j, 2] )
+                  cProperty := hfrm_Arr2Str(oCtrl:aProp[j, 2])
                ELSE
                   cProperty := ""
                ENDIF
@@ -911,7 +911,7 @@ STATIC FUNCTION WriteForm( oForm )
    oNode := oDoc:Add( HXMLNode():New( "part",,{ { "class",IIf(oDesigner:lReport,"report","form") } } ) )
    oStyle := oNode:Add( HXMLNode():New( "style" ) )
    oStyle:Add( HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
-       hfrm_Arr2Str( { oForm:oDlg:nLeft,oForm:oDlg:nTop,oForm:oDlg:nWidth,oForm:oDlg:nHeight } ) ) )
+       hfrm_Arr2Str({oForm:oDlg:nLeft, oForm:oDlg:nTop, oForm:oDlg:nWidth, oForm:oDlg:nHeight}) ) )
    FOR i := 1 TO Len(oForm:aProp)
       IF AScan(aG, Lower(oForm:aProp[i, 1])) == 0
          IF Lower(oForm:aProp[i, 1]) == "font"
@@ -927,7 +927,7 @@ STATIC FUNCTION WriteForm( oForm )
             ELSEIF oForm:aProp[i, 3] == "L"
                cProperty := IIf( Lower(oForm:aProp[i, 2]) == "true",".T.",".F." )
             ELSEIF oForm:aProp[i, 3] == "A"
-               cProperty := hfrm_Arr2Str( oForm:aProp[i, 2] )
+               cProperty := hfrm_Arr2Str(oForm:aProp[i, 2])
             ELSE
                cProperty := ""
             ENDIF

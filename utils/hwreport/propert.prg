@@ -20,7 +20,7 @@ memvar apaintrep, mypath
 Function LButtonDbl( xPos, yPos )
 Local i, aItem
 
-   FOR i := Len( aPaintRep[FORM_ITEMS] ) TO 1 STEP -1
+   FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
       aItem := aPaintRep[FORM_ITEMS,i]
       IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
            .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH] ;
