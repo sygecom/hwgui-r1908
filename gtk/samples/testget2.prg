@@ -27,7 +27,7 @@ Private var1 := 10320.54
 Return Nil
 
 Function DlgGet()
-Local oModDlg, oTimer // , oFont := HFont():Add( "MS Sans Serif", 0, -13 )
+Local oModDlg, oTimer // , oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local e1 := "Dialog from prg"
 Local e2 := Date()
 Local e3 := 10320.54

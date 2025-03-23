@@ -99,7 +99,7 @@ Local aItem
 //            NEXT
 //
 //         ENDIF
-         if HB_IsNumeric( ::aItem[n, 1] )
+         if HB_IsNumeric(::aItem[n, 1])
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
@@ -134,10 +134,10 @@ Local aItem
              aBmpSize := hwg_GetBitmapSize( aButton[nPos] )
 
              IF aBmpSize[3] == 24
-//             hwg_Imagelist_AddMasked( hIm,aButton[nPos],hwg_RGB(236, 223, 216) )
-                hwg_Imagelist_Add( hIm, aButton[nPos] )
+//             hwg_Imagelist_AddMasked(hIm, aButton[nPos], hwg_RGB(236, 223, 216))
+                hwg_Imagelist_Add(hIm, aButton[nPos])
              ELSE
-                hwg_Imagelist_Add( hIm, aButton[nPos] )
+                hwg_Imagelist_Add(hIm, aButton[nPos])
              ENDIF
 
           NEXT
@@ -178,7 +178,7 @@ METHOD Notify( lParam ) CLASS hToolBar
 
     IF nCode == TTN_GETDISPINFO
 
-       nButton := hwg_ToolBar_GetDispInfoId( lParam )
+       nButton := hwg_ToolBar_GetDispInfoId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nButton})
        hwg_ToolBar_SetDispInfo( lParam, ::aItem[nPos, 8] )
 
@@ -190,7 +190,7 @@ METHOD Notify( lParam ) CLASS hToolBar
 
     ELSEIF nCode == TBN_DROPDOWN
        if HB_IsArray(::aItem[1, 9])
-       nid := hwg_ToolBar_SubMenuExGetId( lParam )
+       nid := hwg_ToolBar_SubMenuExGetId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx( lParam, ::aItem[nPos, 10], ::oParent:handle )
        else

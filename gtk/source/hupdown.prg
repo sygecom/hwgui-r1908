@@ -105,7 +105,7 @@ Static Function __When( oCtrl )
 
 Return .T.
 
-Static Function __Valid( oCtrl )
+Static Function __Valid(oCtrl)
 
    oCtrl:value := hwg_SetUpDown( oCtrl:handle )
    oCtrl:title := Str(oCtrl:value)

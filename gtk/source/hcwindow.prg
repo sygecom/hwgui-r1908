@@ -258,7 +258,7 @@ Local oCtrl
 
 Return 0
 
-Static Function onCommand( oWnd,wParam )
+Static Function onCommand(oWnd, wParam)
 Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != Nil .AND. ;

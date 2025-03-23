@@ -108,7 +108,7 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
    ::lExitOnEnter:=IIf(lExitOnEnter == NIL, .T., !lExitOnEnter)
    ::lExitOnEsc  :=IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
 
-   IF hwg_BitAnd( ::style, DS_CENTER ) > 0
+   IF hwg_BitAnd(::style, DS_CENTER) > 0
       ::nLeft := Int( ( hwg_GetDesktopWidth() - ::nWidth ) / 2 )
       ::nTop  := Int( ( hwg_GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF
@@ -234,7 +234,7 @@ Local aCoors
       ELSE
         aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != Nil
-           IF !HB_IsNumeric( oDlg:brush )
+           IF !HB_IsNumeric(oDlg:brush)
               hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
            ENDIF
         ELSE
@@ -246,7 +246,7 @@ Local aCoors
 */   
 Return 0
 
-Function hwg_DlgCommand( oDlg,wParam,lParam )
+Function hwg_DlgCommand(oDlg, wParam, lParam)
 Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 Local aMenu, i, hCtrl
 
@@ -255,7 +255,7 @@ Local aMenu, i, hCtrl
       IF iParLow == IDOK
          hCtrl := hwg_GetFocus()
          FOR i := Len(oDlg:GetList) TO 1 STEP -1
-            IF !oDlg:GetList[i]:lHide .AND. hwg_IsWindowEnabled( oDlg:Getlist[i]:Handle )
+            IF !oDlg:GetList[i]:lHide .AND. hwg_IsWindowEnabled(oDlg:Getlist[i]:Handle)
                EXIT
             ENDIF
          NEXT

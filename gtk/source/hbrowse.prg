@@ -281,7 +281,7 @@ Local aCoors, retValue := -1
          ::DoVScroll( wParam )
 
       ELSEIF msg == WM_COMMAND
-         hwg_DlgCommand( Self, wParam, lParam )
+         hwg_DlgCommand(Self, wParam, lParam)
 
 
       ELSEIF msg == WM_KEYUP
@@ -403,7 +403,7 @@ Local aCoors, retValue := -1
          EXIT
 
       CASE WM_COMMAND
-         hwg_DlgCommand( Self, wParam, lParam )
+         hwg_DlgCommand(Self, wParam, lParam)
          EXIT
 
       CASE WM_KEYUP
@@ -632,7 +632,7 @@ METHOD InitBrw( nType )  CLASS HBrowse
 RETURN Nil
 
 //----------------------------------------------------//
-METHOD Rebuild( hDC ) CLASS HBrowse
+METHOD Rebuild(hDC) CLASS HBrowse
 
    local i, j, oColumn, xSize, nColLen, nHdrLen, nCount
 
@@ -643,10 +643,10 @@ METHOD Rebuild( hDC ) CLASS HBrowse
       ::brushSel:Release()
    ENDIF
    IF ::bcolor != Nil
-      ::brush     := HBrush():Add( ::bcolor )
+      ::brush     := HBrush():Add(::bcolor)
    ENDIF
    IF ::bcolorSel != Nil
-      ::brushSel  := HBrush():Add( ::bcolorSel )
+      ::brushSel  := HBrush():Add(::bcolorSel)
    ENDIF
    
    ::nLeftCol  := ::freeze + 1
@@ -668,7 +668,7 @@ METHOD Rebuild( hDC ) CLASS HBrowse
             ::minHeight := max( ::minHeight,oColumn:aBitmaps[j, 2]:nHeight )
          next
       else
-         // xSize := round( (max( Len(FldStr(Self, i)), Len(oColumn:heading) ) + 2 ) * 8, 0 )
+         // xSize := Round((Max(Len(FldStr(Self, i)), Len(oColumn:heading)) + 2) * 8, 0)
          nColLen := oColumn:length
          if oColumn:heading != nil
             HdrToken( oColumn:heading, @nHdrLen, @nCount )
@@ -684,7 +684,7 @@ METHOD Rebuild( hDC ) CLASS HBrowse
             endif
             ::nFootRows := Max(::nFootRows, nCount)
          endif
-         xSize := round( ( nColLen + 2 ) * 8, 0 )
+         xSize := Round((nColLen + 2) * 8, 0)
       endif
 
       oColumn:width := xSize
@@ -710,7 +710,7 @@ Local oldBkColor, oldTColor
    IF ::tcolorSel == Nil ; ::tcolorSel := hwg_VColor( "FFFFFF" ) ; ENDIF
    IF ::bcolorSel == Nil ; ::bcolorSel := hwg_VColor( "808080" ) ; ENDIF
 
-   hDC := hwg_GetDC( ::area )
+   hDC := hwg_GetDC(::area)
 
    if ::ofont != Nil
       hwg_SelectObject( hDC, ::ofont:handle )
@@ -720,7 +720,7 @@ Local oldBkColor, oldTColor
    ENDIF
    aCoors := hwg_GetClientRect( ::handle )
    hwg_Rectangle( hDC, aCoors[1],aCoors[2],aCoors[3]-1,aCoors[4]-1 )
-   aMetr := hwg_GetTextMetric( hDC )
+   aMetr := hwg_GetTextMetric(hDC)
    
    ::width := aMetr[2]
    ::height := Max( aMetr[1], ::minHeight )
@@ -816,7 +816,7 @@ Local oldBkColor, oldTColor
       endif
    ENDIF
 
-   hwg_ReleaseDC( ::area,hDC )
+   hwg_ReleaseDC(::area, hDC)
    ::internal[1] := 15
    ::internal[2] := ::rowPos
    tmp := Eval(::bRecno, Self)
@@ -848,11 +848,11 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
 
    /*
    IF ::lSep3d
-      oPenLight := HPen():Add( PS_SOLID, 1,hwg_GetSysColor(COLOR_3DHILIGHT) )
+      oPenLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
    ENDIF
    */
    IF ::lDispSep
-      oPen := HPen():Add( PS_SOLID, 1,::sepColor )
+      oPen := HPen():Add(PS_SOLID, 1, ::sepColor)
       hwg_SelectObject( hDC, oPen:handle ) 
    ENDIF
 
@@ -874,7 +874,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
          else
             hwg_DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1, 0 )
             if oPenHdr == nil
-               oPenHdr := HPen():Add( BS_SOLID, 1, 0 )
+               oPenHdr := HPen():Add(BS_SOLID, 1, 0)
             endif
             hwg_SelectObject( hDC, oPenHdr:handle )
             cStr := oColumn:cGrid + ';'
@@ -948,7 +948,7 @@ Local i, x, fif, xSize, oPen, nLine, cStr
 Local oColumn
 
    IF ::lDispSep
-      oPen := HPen():Add( BS_SOLID, 1,::sepColor )
+      oPen := HPen():Add(BS_SOLID, 1, ::sepColor)
       hwg_SelectObject( hDC, oPen:handle )
    ENDIF
 
@@ -1026,7 +1026,7 @@ Local aCores
 
          IF vybfld == 0 .OR. vybfld == i
             IF ::aColumns[fif]:bColor != Nil .AND. ::aColumns[fif]:brush == Nil
-               ::aColumns[fif]:brush := HBrush():Add( ::aColumns[fif]:bColor )
+               ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor)
             ENDIF
             hBReal := IIf(::aColumns[fif]:brush != NIL, ;
                          ::aColumns[fif]:brush:handle,   ;
@@ -1607,7 +1607,7 @@ RETURN Nil
 
 //----------------------------------------------------------------------------//
 METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos ) CLASS HBrowse
-   if hwg_BitAnd( nKeys, MK_MBUTTON ) != 0
+   if hwg_BitAnd(nKeys, MK_MBUTTON) != 0
       if nDelta > 0
          ::PageUp()
       else
@@ -1819,7 +1819,7 @@ STATIC FUNCTION FldStr(oBrw, numf)
             rez := PADL( Str(vartmp, oBrw:aColumns[numf]:length, oBrw:aColumns[numf]:dec),oBrw:aColumns[numf]:length )
             EXIT
          CASE "D"
-            rez := PADR( DTOC( vartmp ),oBrw:aColumns[numf]:length )
+            rez := PADR( DTOC(vartmp), oBrw:aColumns[numf]:length)
             EXIT
          CASE "L"
             rez := PADR( IIf(vartmp, "T", "F"),oBrw:aColumns[numf]:length )
@@ -1926,12 +1926,12 @@ Local oldRecno, newRecno
       IF nType > 0 .AND. lEof
          Eval(oBrw:bSkip, oBrw, -1)
       ENDIF
-      nPos := Round( ( maxPos/(oBrw:nRecords-1) ) * (Eval(oBrw:bRecnoLog, oBrw) - 1), 0 )
+      nPos := Round((maxPos / (oBrw:nRecords - 1)) * (Eval(oBrw:bRecnoLog, oBrw) - 1), 0)
       hwg_SetAdjOptions( oBrw:hScrollV,nPos )
       oBrw:nScrollV := nPos
    ELSE
       oldRecno := Eval(oBrw:bRecnoLog, oBrw)
-      newRecno := Round( (oBrw:nRecords-1)*nPos/maxPos+1, 0 )
+      newRecno := Round((oBrw:nRecords - 1) * nPos / maxPos + 1, 0)
       IF newRecno <= 0
          newRecno := 1
       ELSEIF newRecno > oBrw:nRecords

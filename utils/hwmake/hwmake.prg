@@ -125,7 +125,7 @@ Private oIcon := HIcon():AddResource("PIM")
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
       oBrowse1:bcolorSel := hwg_VColor( "800080" )
-      oBrowse1:ofont := HFont():Add( 'Arial', 0, -12 )
+      oBrowse1:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse1, "*.prg")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse1)}
 
@@ -137,7 +137,7 @@ Private oIcon := HIcon():AddResource("PIM")
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
       oBrowse2:bcolorSel := hwg_VColor( "800080" )
-      oBrowse2:ofont := HFont():Add( 'Arial', 0, -12 )
+      oBrowse2:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse2, "*.c")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse2)}
    END PAGE of oTAB
@@ -148,7 +148,7 @@ Private oIcon := HIcon():AddResource("PIM")
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
       oBrowse3:bcolorSel := hwg_VColor( "800080" )
-      oBrowse3:ofont := HFont():Add( 'Arial', 0, -12 )
+      oBrowse3:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse3, "*.lib")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse3)}
    END PAGE of oTAB
@@ -159,7 +159,7 @@ Private oIcon := HIcon():AddResource("PIM")
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
       oBrowse4:bcolorSel := hwg_VColor( "800080" )
-      oBrowse4:ofont := HFont():Add( 'Arial', 0, -12 )
+      oBrowse4:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse4, "*.rc")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse4)}
    END PAGE of oTAB
@@ -416,7 +416,7 @@ cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //PrgFiles
 i := Ascan( oBrowse1:aArray, {|x| At( cMainPrg, x ) > 0 } )
 If i == 0
-   AADD(  oBrowse1:aArray, AllTrim(oMainPrg:GetText()) )
+   AAdd(oBrowse1:aArray, AllTrim(oMainPrg:GetText()))
 EndIf   
 
 For Each i in oBrowse1:aArray 
@@ -442,13 +442,13 @@ For Each i in oBrowse1:aArray
       fErase( cLogErro )
       fErase( cObjName )
       fErase( cFileNoExt( cObjName ) + ".obj" )
-      If ExecuteCommand(  cExeHarbour, cPrgName + " -o" + cObjName + " " + AllTrim(oPrgFlag:GetText()) + " -n -i"+cHarbour+"\include;"+cHwGUI+"\include"+If( !Empty(AllTrim(oIncFolder:GetText()) ), ";"+AllTrim(oIncFolder:GetText()), ""),  cFileNoExt( cObjName ) + ".log" ) != 0
+      If ExecuteCommand(cExeHarbour, cPrgName + " -o" + cObjName + " " + AllTrim(oPrgFlag:GetText()) + " -n -i" + cHarbour + "\include;" + cHwGUI + "\include" + IIf(!Empty(AllTrim(oIncFolder:GetText())), ";" + AllTrim(oIncFolder:GetText()), ""),  cFileNoExt(cObjName) + ".log") != 0
   
-         cErrText := Memoread( cLogErro ) 
+         cErrText := Memoread(cLogErro)
        
          lEnd     := 'C2006' $ cErrText .OR. 'No code generated' $ cErrText .or. "Error E" $ cErrText .or. "Error F" $ cErrText
          If lEnd
-            ErrorPreview( Memoread( cLogErro ) )           
+            ErrorPreview( Memoread(cLogErro) )
             Return Nil
          Else 
             If File( cLogErro )
@@ -465,7 +465,7 @@ For Each i in oBrowse1:aArray
       cListObj += StrTran( cObjName, ".c", ".obj" ) + " " + CRLF
    EndIf   
    cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
-   If ExecuteCommand( cBCC55 + "\bin\bcc32.exe", cRun ) != 0
+   If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
       MsgInfo("No Created Object files!", "HwMake" )
       Return nil
    EndIF
@@ -482,7 +482,7 @@ Next
                         
 //ResourceFiles
 For Each i in oBrowse4:aArray     
-   If ExecuteCommand( cBCC55 + "\bin\brc32", "-r "+cFileNoExt(i)+" -fo"+cObj+"\"+cFileNoPath( cFileNoExt( i ) ) ) != 0
+   If ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
       MsgInfo("Error in Resource File " + i + "!", "HwMake" )
       Return Nil
    EndIf   
@@ -510,7 +510,7 @@ EndIF
 
 Memowrit( cMainPrg + ".bc ", cMake )
 
-If ExecuteCommand( cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @"+cMainPrg + ".bc" ) != 0
+If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
       MsgInfo("No link file " + cMainPrg +"!", "HwMake" ) 
       Return Nil
 EndIf
@@ -575,7 +575,7 @@ cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
 cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
 Return cLib
  
-Function ExecuteCommand( cProc, cSend, cLog ) 
+Function ExecuteCommand(cProc, cSend, cLog)
 Local cFile := "execcom.bat"
 Local nRet
 If cLog == Nil

@@ -92,15 +92,15 @@ METHOD Init CLASS HTimer
 
 METHOD onAction()
 
-   hwg_TimerProc( , ::id, ::interval )
+   hwg_TimerProc(, ::id, ::interval)
    
 RETURN Nil
 
 
-Function hwg_TimerProc( hWnd, idTimer, Time )
+Function hwg_TimerProc(hWnd, idTimer, Time)
    LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
-   HB_SYMBOL_UNUSED( hWnd )
+   HB_SYMBOL_UNUSED(hWnd)
 
    IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != Nil .AND.;
       HB_IsBlock( HTimer():aTimers[i]:bAction )

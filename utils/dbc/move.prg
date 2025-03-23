@@ -71,7 +71,7 @@ Local hWnd, oWindow, aControls, iCont
          IF TYPE( ORDKEY() ) == "N"
             key := VAL( cSeek )
          ELSEIF TYPE( ORDKEY() ) = "D"
-            key := CTOD( Trim(cSeek) )
+            key := CToD(Trim(cSeek))
          ELSE
             key := cSeek
          ENDIF

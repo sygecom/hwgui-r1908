@@ -23,28 +23,28 @@ Private lAddMode := .F.
       Return .F.
    ENDIF
 
-   aPrnCoors := hwg_GetDeviceArea( oPrinter:hDCPrn )
+   aPrnCoors := hwg_GetDeviceArea(oPrinter:hDCPrn)
    prnXCoef := aPrnCoors[1]/aPaintRep[FORM_WIDTH]
    prnYCoef := aPrnCoors[2]/aPaintRep[FORM_HEIGHT]
    // writelog( str(aPrnCoors[1])+str(aPrnCoors[2])+" / "+str(prnXCoef)+str(prnYCoef)+" / "+str(aPaintRep[FORM_XKOEF]) )
 
-   hDCwindow := GetDC( Hwindow():GetMain():handle )
-   aMetr := hwg_GetDeviceArea( hDCwindow )
+   hDCwindow := GetDC(Hwindow():GetMain():handle)
+   aMetr := hwg_GetDeviceArea(hDCwindow)
    SelectObject( hDCwindow, oFontStandard:handle )
-   aTmetr := GetTextMetric( hDCwindow )
+   aTmetr := GetTextMetric(hDCwindow)
    dKoef := ( aMetr[1]-XINDENT ) / aTmetr[2]
-   ReleaseDC( Hwindow():GetMain():handle,hDCwindow )
+   ReleaseDC(Hwindow():GetMain():handle,hDCwindow)
 
    SelectObject( oPrinter:hDCPrn, oFontStandard:handle )
-   aPmetr := GetTextMetric( oPrinter:hDCPrn )
+   aPmetr := GetTextMetric(oPrinter:hDCPrn)
    pKoef := aPrnCoors[1] / aPmetr[2]
    fontKoef := pKoef / dKoef
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          oFont := aPaintRep[FORM_ITEMS,i,ITEM_FONT]
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add( oFont:name,;
+         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add(oFont:name,;
               oFont:width,Round(oFont:height*fontKoef, 0),oFont:weight, ;
-              oFont:charset,oFont:italic )
+              oFont:charset,oFont:italic)
       ENDIF
    NEXT
 

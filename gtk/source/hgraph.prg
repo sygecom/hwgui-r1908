@@ -32,7 +32,7 @@ CLASS HGraph INHERIT HControl
    METHOD onEvent( msg, wParam, lParam )
    METHOD CalcMinMax()
    METHOD Paint()
-   METHOD Rebuild( aValues )
+   METHOD Rebuild(aValues)
 
 ENDCLASS
 
@@ -54,8 +54,7 @@ Return Self
 METHOD Activate CLASS HGraph
 
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
@@ -98,7 +97,7 @@ Local i, j, nLen
 Return Nil
 
 METHOD Paint( lpdis ) CLASS HGraph
-Local hDC := hwg_GetDC( ::handle )
+Local hDC := hwg_GetDC(::handle)
 // Local drawInfo := hwg_GetDrawItemInfo( lpdis )
 // Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
 Local x1 := 0, y1 := 0, x2 := ::nWidth, y2 := ::nHeight
@@ -108,10 +107,10 @@ Local px1, px2, py1, py2, nWidth
    IF ::xmax == Nil
       ::CalcMinMax()
    ENDIF
-   i := Round( (x2-x1)/10, 0 )
+   i := Round((x2 - x1) / 10, 0)
    x1 += i
    x2 -= i
-   i := Round( (y2-y1)/10, 0 )
+   i := Round((y2 - y1) / 10, 0)
    y1 += i
    y2 -= i
 
@@ -121,10 +120,10 @@ Local px1, px2, py1, py2, nWidth
    ENDIF
 
    IF ::oPenCoor == Nil
-      ::oPenCoor := HPen():Add( PS_SOLID, 1,::colorCoor )
+      ::oPenCoor := HPen():Add(PS_SOLID, 1, ::colorCoor)
    ENDIF
    IF ::oPen == Nil
-      ::oPen := HPen():Add( PS_SOLID, 2,::tcolor )
+      ::oPen := HPen():Add(PS_SOLID, 2, ::tcolor)
    ENDIF
 
    hwg_FillRect( hDC, 0, 0, ::nWidth, ::nHeight, ::brush:handle )
@@ -152,12 +151,12 @@ Local px1, px2, py1, py2, nWidth
          NEXT
       ELSEIF ::nType == 2
          IF ::tbrush == Nil
-            ::tbrush := HBrush():Add( ::tcolor )
+            ::tbrush := HBrush():Add(::tcolor)
          ENDIF
-         nWidth := Round( (x2-x1) / (nLen*2+1), 0 )
+         nWidth := Round((x2 - x1) / (nLen * 2 + 1), 0)
          FOR j := 1 TO nLen
-            px1 := Round( x1+nWidth*(j*2-1), 0 )
-            py1 := Round( y2-(::aValues[i,j, 2]-::ymin)/::scaleY, 0 )
+            px1 := Round(x1 + nWidth * (j * 2 - 1), 0)
+            py1 := Round(y2 - (::aValues[i, j, 2] - ::ymin) / ::scaleY, 0)
             hwg_FillRect( hDC, px1, py1, px1+nWidth, y2-2, ::tbrush:handle )
          NEXT
       ELSEIF ::nType == 3
@@ -165,7 +164,7 @@ Local px1, px2, py1, py2, nWidth
          hwg_DrawButton( hDC, 5, 35, 80, 55, 6 )
          /*
          IF ::tbrush == Nil
-            ::tbrush := HBrush():Add( ::tcolor )
+            ::tbrush := HBrush():Add(::tcolor)
          ENDIF
          hwg_SelectObject( hDC, ::oPenCoor:handle )
          hwg_SelectObject( hDC, ::tbrush:handle )
@@ -173,11 +172,11 @@ Local px1, px2, py1, py2, nWidth
 	 */
       ENDIF
    NEXT
-   hwg_releaseDC( ::handle, hDC )
+   hwg_releaseDC(::handle, hDC)
    
 Return Nil
 
-METHOD Rebuild( aValues, nType ) CLASS HGraph
+METHOD Rebuild(aValues, nType) CLASS HGraph
 
    ::aValues := aValues
    IF nType != Nil

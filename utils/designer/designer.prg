@@ -95,7 +95,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 #endif
 
    //IF !__mvExist( "cCurDir" )
-   //   __mvPublic( "cCurDir" )
+   //   __mvPublic("cCurDir")
    //ENDIF
 
    IF !HB_IsChar( cCurDir )
@@ -108,7 +108,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
-   IF !HB_IsNumeric( crossCursor )
+   IF !HB_IsNumeric(crossCursor)
       crossCursor := hwg_LoadCursor( IDC_CROSS )
       horzCursor  := hwg_LoadCursor( IDC_SIZEWE )
       vertCursor  := hwg_LoadCursor( IDC_SIZENS )
@@ -276,7 +276,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 
     ADD STATUS oStatus1 TO oDesigner:oMainWnd ;
        PARTS oDesigner:oMainWnd:nWidth-280, 80, 80, 40, 40, 40 ;
-       FONT HFont():Add( "MS Sans Serif", 0, -12, 400,,,)
+       FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)
 
          //
    @ 3, 30 TAB oTab ITEMS {} OF oPanel SIZE 380, 310 FONT oFont ;
@@ -473,7 +473,7 @@ Return Nil
 
 STATIC FUNCTION ReadIniFiles()
 
-   LOCAL oIni := HXMLDoc():Read( "Designer.iml" )
+   LOCAL oIni := HXMLDoc():Read("Designer.iml")
    LOCAL i
    LOCAL oNode
    LOCAL cWidgetsFileName
@@ -532,7 +532,7 @@ STATIC FUNCTION ReadIniFiles()
    NEXT
 
    IF HB_IsChar( cWidgetsFileName )
-      oDesigner:oWidgetsSet := HXMLDoc():Read( cCurDir + cWidgetsFileName )
+      oDesigner:oWidgetsSet := HXMLDoc():Read(cCurDir + cWidgetsFileName)
    ENDIF
    IF oDesigner:oWidgetsSet == Nil .OR. Empty(oDesigner:oWidgetsSet:aItems)
       hwg_MsgStop( "Widgets file isn't found!","Designer error" )
@@ -685,7 +685,7 @@ FUNCTION DeleteCtrl()
    LOCAL i
    MEMVAR oDesigner
 
-   IF oDlg != Nil .AND. ( oCtrl := GetCtrlSelected( oDlg ) ) != Nil
+   IF oDlg != Nil .AND. ( oCtrl := GetCtrlSelected(oDlg) ) != Nil
       IF oCtrl:oContainer != Nil
          i := AScan(oCtrl:oContainer:aControls, {|o|o:handle == oCtrl:handle})
          IF i != 0
@@ -699,7 +699,7 @@ FUNCTION DeleteCtrl()
          oDlg:DelControl( oCtrl )
       ENDIF
      InspSetCombo( )
-      SetCtrlSelected( oDlg )
+      SetCtrlSelected(oDlg)
       oDlg:oParent:lChanged := .T.
    ENDIF
 
@@ -714,7 +714,7 @@ FUNCTION FindWidget( cClass )
 
    FOR i := 1 TO Len(aSet)
       IF aSet[i]:title == "set"
-         IF ( oNode := aSet[i]:Find( "widget", 1,{|o|o:GetAttribute("class")==cClass} ) ) != Nil
+         IF (oNode := aSet[i]:Find("widget", 1, {|o|o:GetAttribute("class") == cClass})) != Nil
             Return oNode
          ENDIF
       ENDIF
@@ -743,9 +743,9 @@ Return Nil
 
 STATIC FUNCTION CreateIni( oIni )
 
-   LOCAL oNode := oIni:Add( HXMLNode():New( "designer" ) )
+   LOCAL oNode := oIni:Add(HXMLNode():New("designer"))
 
-   oNode:Add( HXMLNode():New( "widgetset",,,"widgets.xml" ) )
+   oNode:Add(HXMLNode():New("widgetset", , , "widgets.xml"))
 
    oIni:Save( "designer.iml" )
 Return Nil
@@ -786,7 +786,7 @@ STATIC FUNCTION EndIde()
   IF alen > 0
      IF hwg_MsgYesNo( "Do you really want to quit ?", "Designer" )
         FOR i := Len(HFormGen():aForms) TO 1 STEP -1
-           HFormGen():aForms[i]:End( ,.F. )
+           HFormGen():aForms[i]:End(, .F.)
         NEXT
      ELSE
         lRes := .F.
@@ -794,34 +794,34 @@ STATIC FUNCTION EndIde()
   ENDIF
   IF !oDesigner:lSingleForm .AND. ( oDesigner:lChgRecent .OR. oDesigner:lChgPath .OR. .T. )
      critem := IIf( oDesigner:lReport, "rep_recent", "recent" )
-     oIni := HXMLDoc():Read( cCurDir+"Designer.iml" )
+     oIni := HXMLDoc():Read(cCurDir + "Designer.iml")
      IF oDesigner:lChgPath
         i := 1
         oNode := HXMLNode():New( "dirpath",HBXML_TYPE_SINGLE,{{"default",oDesigner:ds_myPath}} )
-        IF oIni:aItems[1]:Find( "dirpath",@i ) == Nil
-           oIni:aItems[1]:Add( oNode )
+        IF oIni:aItems[1]:Find("dirpath", @i) == Nil
+           oIni:aItems[1]:Add(oNode)
         ELSE
            oIni:aItems[1]:aItems[i] := oNode
         ENDIF
      ENDIF
      IF oDesigner:lChgRecent
         i := 1
-        IF oIni:aItems[1]:Find( critem,@i ) == Nil
-           oIni:aItems[1]:Add( HXMLNode():New( critem,, ) )
+        IF oIni:aItems[1]:Find(critem, @i) == Nil
+           oIni:aItems[1]:Add(HXMLNode():New(critem, ,))
            i := Len(oIni:aItems[1]:aItems)
         ENDIF
         j := 1
         oIni:aItems[1]:aItems[i]:aItems := {}
         DO WHILE j <= MAX_RECENT_FILES .AND. oDesigner:aRecent[j] != Nil
-           oIni:aItems[1]:aItems[i]:Add( HXMLNode():New( "file",,,oDesigner:aRecent[j] ) )
+           oIni:aItems[1]:aItems[i]:Add(HXMLNode():New("file", , , oDesigner:aRecent[j]))
            j ++
         ENDDO
      ENDIF
 
         i := 1
         oNode := HXMLNode():New( "grid",HBXML_TYPE_SINGLE,{{"default",AllTrim(Str(oDesigner:nPixelGrid))}} )
-        IF oIni:aItems[1]:Find( "grid",@i ) == Nil
-           oIni:aItems[1]:Add( oNode )
+        IF oIni:aItems[1]:Find("grid", @i) == Nil
+           oIni:aItems[1]:Add(oNode)
         ELSE
            oIni:aItems[1]:aItems[i] := oNode
         ENDIF

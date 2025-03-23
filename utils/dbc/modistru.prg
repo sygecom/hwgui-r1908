@@ -50,7 +50,7 @@ LOCAL af, oBrw
    oModDlg:Activate()
 Return Nil
 
-Static Function SetField( oBrw )
+Static Function SetField(oBrw)
 Local hDlg := hwg_GetModalHandle(), i
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent, 1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent, 2], "CNDLM" ) ) != 0
@@ -95,10 +95,10 @@ Local cName, cType, nLen, nDec := 0
       IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty(oBrowse:aArray[1, 1]) )
          oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
       ELSEIF nOper == 1
-         Aadd( oBrowse:aArray, { cName, cType, nLen, nDec } )
+         AAdd(oBrowse:aArray, {cName, cType, nLen, nDec})
          oBrowse:nRecords ++
       ELSEIF nOper == 2
-         Aadd( oBrowse:aArray, Nil )
+         AAdd(oBrowse:aArray, Nil)
          Ains( oBrowse:aArray, oBrowse:nCurrent )
          oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
          oBrowse:nRecords ++

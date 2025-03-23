@@ -98,7 +98,7 @@ Return Nil
 
 Function FileClose( oDlg )
    Local oBrw := oDlg:FindControl( 111 )
-   dbSelectArea( oBrw:alias )
+   dbSelectArea(oBrw:alias)
    dbCloseArea()
 Return .T.
 
@@ -116,7 +116,7 @@ return nil
 
 Function DialogFromPrg()
 Local cTitle := "Dialog from prg", cText := "Input something"
-Local oModDlg, oFont := HFont():Add( "Serif", 0, -13 ), oTab
+Local oModDlg, oFont := HFont():Add("Serif", 0, -13), oTab
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 
    CheckMenuItem( , 1001, !IsCheckedMenuItem( , 1001 ) )
@@ -212,7 +212,7 @@ Local oPrinter, oFont
                               
    oFont := oPrinter:AddFont( "Courier Regular", 10 )
                   
-   oPrinter:StartDoc( .T.,"/tmp/_a.ps" )
+   oPrinter:StartDoc(.T., "/tmp/_a.ps")
    oPrinter:StartPage()
    oPrinter:SetFont( oFont )
    oPrinter:Box( 5, 5,oPrinter:nWidth-5,oPrinter:nHeight-5 )

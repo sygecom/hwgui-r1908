@@ -89,23 +89,23 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    MEMVAR Value
    MEMVAR oCtrl
    PRIVATE value
-   PRIVATE oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
+   PRIVATE oCtrl := IIf(oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected))
 
-   HB_SYMBOL_UNUSED( wParam )
-   HB_SYMBOL_UNUSED( lParam )
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    IF ::SetColumn() == 1 .AND. ::bEnter == Nil
       Return Nil
    ENDIF
    ::cargo := Eval(::bRecno, Self)
    IF oTab:GetActivePage() == 2
-      IF ( value := EditMethod( aMethods[::cargo, 1],aMethods[::cargo, 2] ) ) != Nil ;
+      IF ( value := EditMethod(aMethods[::cargo, 1],aMethods[::cargo, 2]) ) != Nil ;
           .AND. !( aMethods[::cargo, 2] == value )
          aMethods[::cargo, 2] := value
          IF oCombo:value == 1
             HFormGen():oDlgSelected:oParent:aMethods[::cargo, 2] := value
          ELSE
-            GetCtrlSelected( HFormGen():oDlgSelected ):aMethods[::cargo, 2] := value
+            GetCtrlSelected(HFormGen():oDlgSelected):aMethods[::cargo, 2] := value
          ENDIF
          HFormGen():oDlgSelected:oParent:lChanged := .T.
          oBrw2:lUpdated := .T.
@@ -255,9 +255,9 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
    LOCAL xSize
    LOCAL nRows := Min( ::nRecords,::rowCount )
    LOCAL oColumn
-   LOCAL oPen := HPen():Add( PS_SOLID, 1,::sepColor )
-   LOCAL oPenLight := HPen():Add( PS_SOLID, 1,hwg_GetSysColor(COLOR_3DHILIGHT) )
-   LOCAL oPenGray  := HPen():Add( PS_SOLID, 1,hwg_GetSysColor(COLOR_3DSHADOW) )
+   LOCAL oPen := HPen():Add(PS_SOLID, 1,::sepColor)
+   LOCAL oPenLight := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DHILIGHT))
+   LOCAL oPenGray  := HPen():Add(PS_SOLID, 1, hwg_GetSysColor(COLOR_3DSHADOW))
 
    x := ::x1
    fif := IIf( ::freeze > 0, 1, ::nLeftCol )
@@ -302,7 +302,7 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    MEMVAR oCtrl
    MEMVAR oDesigner
    PRIVATE value
-   PRIVATE oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
+   PRIVATE oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected) )
 
    cName := Lower(aProp[oBrw1:cargo, 1])
 
@@ -358,7 +358,7 @@ FUNCTION InspOpen(lShow)
    //  IIf(lShow,WS_VISIBLE, 0) //DS_SYSMODAL
    INIT DIALOG oDesigner:oDlgInsp TITLE "Object Inspector" ;
       AT 0, 280 SIZE 220, 300       ;
-      FONT HFont():Add( "MS Sans Serif", 0, -12, 400,,,)  ;
+      FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)  ;
       STYLE nStilo;
       ON INIT {||IIf(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
       ON GETFOCUS {|o| o:show(),.t.};
@@ -386,7 +386,7 @@ FUNCTION InspOpen(lShow)
       oBrw1:lSep3d := .T.
       oBrw1:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw1:aArray := aProp
-      oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0, .T. ) )
+      oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0, .T. ) )
       oBrw1:AddColumn( HColumn():New( ,hwg_ColumnArBlock(),"U", 100, 0, .T. ) )
    END PAGE OF oTab
 
@@ -401,8 +401,8 @@ FUNCTION InspOpen(lShow)
       oBrw2:lSep3d := .T.
       oBrw2:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw2:aArray := aMethods
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0,.T. ) )
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED( v ),IIf(Empty(o:aArray[o:nCurrent, 2]),"",":"+o:aArray[o:nCurrent, 1])},"C", 100, 0,.T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0,.T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 2]),"",":"+o:aArray[o:nCurrent, 1])},"C", 100, 0,.T. ) )
    END PAGE OF oTab
 
      // : LFB POS
@@ -462,7 +462,7 @@ FUNCTION InspSetCombo()
    IF oDlg != Nil
       n := 0
       AAdd(oCombo:aItems, "Form." + oDlg:title)
-      oCtrl := GetCtrlSelected( oDlg )
+      oCtrl := GetCtrlSelected(oDlg)
       aControls := IIf( oDesigner:lReport, oDlg:aControls[1]:aControls[1]:aControls, ;
           oDlg:aControls )
       FOR i := 1 TO Len(aControls)
@@ -527,14 +527,14 @@ STATIC FUNCTION ComboOnChg()
    oCombo:value := hwg_SendMessage( oCombo:handle,CB_GETCURSEL, 0, 0 ) + 1
    IF oDlg != Nil
       n := oCombo:value - 1
-      oCtrl := GetCtrlSelected( oDlg )
+      oCtrl := GetCtrlSelected(oDlg)
       IF n == 0
          IF oCtrl != Nil
-            SetCtrlSelected( oDlg )
+            SetCtrlSelected(oDlg)
          ENDIF
       ELSEIF n > 0
          IF oCtrl == Nil .OR. oCtrl:handle != aControls[n]:handle
-            SetCtrlSelected( oDlg,aControls[n],n )
+            SetCtrlSelected(oDlg, aControls[n], n)
          ENDIF
       ENDIF
    ENDIF
@@ -553,7 +553,7 @@ STATIC FUNCTION InspSetBrowse()
    aMethods := {}
 
    IF oCombo:value > 0
-      o := IIf( oCombo:value == 1, HFormGen():oDlgSelected:oParent, GetCtrlSelected( HFormGen():oDlgSelected ) )
+      o := IIf( oCombo:value == 1, HFormGen():oDlgSelected:oParent, GetCtrlSelected(HFormGen():oDlgSelected) )
       FOR i := 1 TO Len(o:aProp)
          IF Len(o:aProp[i]) == 3
             AAdd(aProp, { o:aProp[i, 1], o:aProp[i, 2] })
@@ -590,7 +590,7 @@ FUNCTION InspUpdBrowse()
       Return Nil
    ENDIF
 
-   oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
+   oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected) )
    IF oDesigner:oDlgInsp != Nil
       FOR i := 1 TO Len(aProp)
          value := IIf( oCombo:value == 1,oCtrl:oParent:aProp[i, 2],oCtrl:aProp[i, 2] )
@@ -651,13 +651,13 @@ STATIC FUNCTION EditArray( arr )
    oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v!=Nil,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},"C", 100, 0,.T. ) )
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
-       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)};
+       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)};
        ON CLICK {|| onclick_deleteItem(oBrw)}
    @ 151, 265 BUTTON "Ok" SIZE 110, 26     ;
-       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)}  ;
+       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)}  ;
        ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
    @ 276, 265 BUTTON "Cancel" ID IDCANCEL SIZE 110, 26 ;
-       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED( x ),o:Move(,y-30,,)}
+       ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)}
 
    ACTIVATE DIALOG oDlg
 
@@ -722,7 +722,7 @@ FUNCTION ObjInspector(oObject )
    INIT DIALOG opForm ;
       noexit ;
       title "Methods and Properties" ;
-      font HFont():Add( "Arial", 0, -11 ) ;
+      font HFont():Add("Arial", 0, -11) ;
       at 0, 0 ;
       size 600, 400 ;
       style WS_DLGFRAME + WS_SYSMENU + DS_CENTER
@@ -773,7 +773,7 @@ STATIC Function MessagesOthers( oDlg, msg, wParam, lParam )
    
    MEMVAR oDesigner
 
-HB_SYMBOL_UNUSED( lParam )
+HB_SYMBOL_UNUSED(lParam)
 
    // writelog( Str(msg)+Str(wParam)+Str(lParam) )
    IF msg == WM_MOUSEMOVE
@@ -824,7 +824,7 @@ STATIC FUNCTION resettodefault(oBrw1)
    MEMVAR value
    MEMVAR oCtrl
    PRIVATE value
-   PRIVATE oCtrl := IIf( oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected( HFormGen():oDlgSelected ) )
+   PRIVATE oCtrl := IIf(oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected))
 
      cName := Lower(aProp[oBrw1:nCurrent, 1])
      j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})

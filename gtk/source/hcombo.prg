@@ -123,7 +123,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
             Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
-         __Valid( Self )
+         __Valid(Self)
       ENDIF
 
    ENDIF
@@ -148,7 +148,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
             Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
-         __Valid( Self )
+         __Valid(Self)
       ENDIF
    ENDSWITCH
 
@@ -228,7 +228,7 @@ METHOD End() CLASS HComboBox
 RETURN Nil
 
 
-Static Function __Valid( oCtrl )
+Static Function __Valid(oCtrl)
 Local vari := hwg_edit_Gettext( oCtrl:hEdit )
 
    IF oCtrl:lText

@@ -31,14 +31,14 @@ CLASS HFont INHERIT HObject
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
-   METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle, lLinux )
+   METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle, lLinux)
    METHOD Select( oFont )
    METHOD Release()
 
 ENDCLASS
 
-METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, ;
-                   fdwUnderline, fdwStrikeOut, nHandle, lLinux ) CLASS HFont
+METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, ;
+                   fdwUnderline, fdwStrikeOut, nHandle, lLinux) CLASS HFont
 
 Local i, nlen := Len(::aFonts)
 
@@ -97,7 +97,7 @@ Local af := hwg_SelectFont( oFont )
       Return Nil
    ENDIF
 
-Return ::Add( af[2],af[3],af[4],af[5],af[6],af[7],af[8],af[9],af[1],.T. )
+Return ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
 
 METHOD Release() CLASS HFont
 Local i, nlen := Len(::aFonts)
@@ -135,13 +135,13 @@ CLASS HPen INHERIT HObject
    DATA style, width, color
    DATA nCounter   INIT 1
 
-   METHOD Add( nStyle,nWidth,nColor )
+   METHOD Add(nStyle, nWidth, nColor)
    METHOD Get( nStyle,nWidth,nColor )
    METHOD Release()
 
 ENDCLASS
 
-METHOD Add( nStyle,nWidth,nColor ) CLASS HPen
+METHOD Add(nStyle, nWidth, nColor) CLASS HPen
 Local i
 
    nStyle := IIf(nStyle == NIL, BS_SOLID, nStyle)
@@ -244,12 +244,12 @@ CLASS HBrush INHERIT HObject
    DATA nHatch   INIT 99
    DATA nCounter INIT 1
 
-   METHOD Add( nColor )
+   METHOD Add(nColor)
    METHOD Release()
 
 ENDCLASS
 
-METHOD Add( nColor ) CLASS HBrush
+METHOD Add(nColor) CLASS HBrush
 Local i
 
    #ifdef __XHARBOUR__
@@ -321,7 +321,7 @@ ENDCLASS
 METHOD AddResource( name ) CLASS HBitmap
 Local lPreDefined := .F., i, aBmpSize
 
-   IF HB_IsNumeric( name )
+   IF HB_IsNumeric(name)
       name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF
@@ -443,7 +443,7 @@ ENDCLASS
 METHOD AddResource( name ) CLASS HIcon
 Local lPreDefined := .F., i
 
-   IF HB_IsNumeric( name )
+   IF HB_IsNumeric(name)
       name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF

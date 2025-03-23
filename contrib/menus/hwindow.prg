@@ -48,10 +48,10 @@ CLASS HCustomWindow INHERIT HObject
    DATA bOther
    DATA cargo
    
-   METHOD AddControl( oCtrl ) INLINE Aadd( ::aControls,oCtrl )
+   METHOD AddControl( oCtrl ) INLINE AAdd(::aControls, oCtrl)
    METHOD DelControl( oCtrl )
    METHOD AddEvent( nEvent,nId,bAction,lNotify ) ;
-      INLINE Aadd( Iif( lNotify==Nil.OR.!lNotify,::aEvents,::aNotify ),{nEvent,nId,bAction} )
+      INLINE AAdd(IIf(lNotify == NIL .OR. !lNotify, ::aEvents, ::aNotify), {nEvent, nId, bAction})
    METHOD FindControl( nId,nHandle )
    METHOD Hide() INLINE (::lHide:=.T.,hwg_HideWindow(::handle))
    METHOD Show() INLINE (::lHide:=.F.,hwg_ShowWindow(::handle))
@@ -218,7 +218,7 @@ METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu, cTooltip ) CLASS HWindow
 RETURN Nil
 
 METHOD AddItem( oWnd ) CLASS HWindow
-   Aadd( ::aWindows, oWnd )
+   AAdd(::aWindows, oWnd)
 RETURN Nil
 
 METHOD DelItem( oWnd ) CLASS HWindow
@@ -242,7 +242,7 @@ Return Iif(Len(::aWindows)>0,              ;
 METHOD GetMdiActive() CLASS HWindow 
 Return ::FindWindow ( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) )
 
-Function DefWndProc( hWnd, msg, wParam, lParam )
+Function DefWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
@@ -416,7 +416,7 @@ Local oWnd, oBtn, oitem
           endif
       endif
    elseif msg == WM_MENUSELECT
-      if NumAnd( hwg_HIWORD(wParam), MF_HILITE ) != 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
+      if NumAnd(hwg_HIWORD(wParam), MF_HILITE) != 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
          if HB_IsArray( oWnd:menu )
             if ( aMenu := hwg_FindMenuItem( oWnd:menu, hwg_LOWORD(wParam), @iCont ) ) != Nil
                if aMenu[1,iCont, 2][2] != Nil
@@ -441,7 +441,7 @@ Local oWnd, oBtn, oitem
 
 Return -1
 
-Function DefChildWndProc( hWnd, msg, wParam, lParam )
+Function DefChildWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
@@ -633,7 +633,7 @@ Local oWnd, oBtn, oitem
 
 Return 0
 
-Function DefMdiChildProc( hWnd, msg, wParam, lParam )
+Function DefMdiChildProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont
 Local iParHigh, iParLow, oWnd, oBtn, oitem
 Local nReturn
@@ -689,7 +689,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
           oBtn:state := OBTN_NORMAL
           InvalidateRect( oBtn:handle, 0 )
           hwg_PostMessage( oBtn:handle, WM_PAINT, 0, 0 )
-          SetOwnBtnSelected( Nil )
+          SetOwnBtnSelected(NIL)
       endif
    elseif msg == WM_PAINT
 
@@ -861,7 +861,7 @@ return Nil
 
 // Processamento da janela frame (base) MDI
 
-Function DefMDIWndProc( hWnd, msg, wParam, lParam )
+Function DefMDIWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem

@@ -30,7 +30,7 @@ METHOD New( vari,bSetGet ) CLASS HRadioGroup
    ::aButtons := {}
 
    IF vari != Nil
-      IF HB_IsNumeric( vari )
+      IF HB_IsNumeric(vari)
          ::value := vari
       ENDIF
       ::bSetGet := bSetGet
@@ -99,7 +99,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ENDIF
    ::bcolor  := bcolor
    IF bColor != Nil
-      ::brush := HBrush():Add( bcolor )
+      ::brush := HBrush():Add(bcolor)
    ENDIF
    */
 
@@ -136,13 +136,13 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
       IF ::oGroup:bSetGet == Nil
          Eval(::bLostFocus, ::oGroup:value, Self)
       ELSE
-         __Valid( Self )
+         __Valid(Self)
       ENDIF
    ENDIF
 Return Nil
 
 
-Static Function __Valid( oCtrl )
+Static Function __Valid(oCtrl)
 
    oCtrl:oGroup:value := AScan(oCtrl:oGroup:aButtons, {|o|o:id == oCtrl:id})
    IF oCtrl:oGroup:bSetGet != Nil

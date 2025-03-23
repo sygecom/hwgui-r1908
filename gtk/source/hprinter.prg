@@ -31,7 +31,7 @@ CLASS HPrinter INHERIT HObject
    METHOD SetMode( nOrientation )
    METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline )
    METHOD SetFont( oFont )
-   METHOD StartDoc( lPreview, cFileName )
+   METHOD StartDoc(lPreview, cFileName)
    METHOD EndDoc()
    METHOD StartPage()
    METHOD EndPage()
@@ -63,7 +63,7 @@ Local aPrnCoors
    IF ::hDC == 0
       Return Nil
    ELSE
-      aPrnCoors := hwg_gp_GetDeviceArea( ::hDC )
+      aPrnCoors := hwg_gp_GetDeviceArea(::hDC)
       ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])
       ::nHeight := IIf(::lmm, aPrnCoors[4], aPrnCoors[2])
       ::nPWidth  := IIf(::lmm, aPrnCoors[8], aPrnCoors[1])
@@ -99,9 +99,9 @@ Local oFont
    IF ::lmm .AND. nHeight != Nil
       nHeight *= ::nVRes
    ENDIF
-   oFont := HGP_Font():Add( fontName, nHeight, ;
+   oFont := HGP_Font():Add(fontName, nHeight, ;
        IIf(lBold != NIL .AND. lBold, 700, 400),    ;
-       IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0) )
+       IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0))
 
 Return oFont
 
@@ -207,9 +207,9 @@ METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
 
 Return Nil
 
-METHOD StartDoc( lPreview, cFileName ) CLASS HPrinter
+METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
 
-   hwg_StartDoc( ::hDC )
+   hwg_StartDoc(::hDC)
    IF cFileName != Nil
       hwg_gp_ToFile( ::hDC,cFileName )
    ENDIF
@@ -218,7 +218,7 @@ Return Nil
 
 METHOD EndDoc() CLASS HPrinter
 
-   hwg_EndDoc( ::hDC )
+   hwg_EndDoc(::hDC)
 Return Nil
 
 METHOD StartPage() CLASS HPrinter
@@ -245,12 +245,12 @@ CLASS HGP_Font INHERIT HObject
    DATA italic, Underline
    DATA nCounter   INIT 1
 
-   METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwItalic, fdwUnderline )
+   METHOD Add(fontName, nWidth, nHeight ,fnWeight, fdwItalic, fdwUnderline)
    METHOD Release(lAll)
 
 ENDCLASS
 
-METHOD Add( fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Font
+METHOD Add(fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline) CLASS HGP_Font
 Local i, nlen := Len(::aFonts)
 
    nHeight  := Iif( nHeight==Nil, 13,Abs(nHeight) )
@@ -324,12 +324,12 @@ CLASS HGP_Pen INHERIT HObject
    DATA width
    DATA nCounter   INIT 1
 
-   METHOD Add( nWidth )
+   METHOD Add(nWidth)
    METHOD Release()
 
 ENDCLASS
 
-METHOD Add( nWidth ) CLASS HGP_Pen
+METHOD Add(nWidth) CLASS HGP_Pen
 Local i
 
    nWidth := Iif( nWidth == Nil, 1,nWidth )

@@ -118,14 +118,14 @@ Local hSubMenu
    */
    IF nPos > Len(aMenu[1])
       IF lSubmenu
-         Aadd( aMenu[1],{ {},cItem,nMenuId,hSubMenu } )
+         AAdd(aMenu[1], {{}, cItem, nMenuId, hSubMenu})
       ELSE
-         Aadd( aMenu[1],{ bItem,cItem,nMenuId } )
+         AAdd(aMenu[1], {bItem, cItem, nMenuId})
       ENDIF
       Return ATail( aMenu[1] )
    ELSE
-      Aadd( aMenu[1],Nil )
-      Ains( aMenu[1],nPos )
+      AAdd(aMenu[1], NIL)
+      AIns(aMenu[1], nPos)
       IF lSubmenu
          aMenu[1,nPos] := { {},cItem,nMenuId,hSubMenu }
       ELSE
@@ -179,7 +179,7 @@ Local hMenu, nPos, aMenu
       hMenu := hwg__CreateSubMenu( hMenu,aMenu[3] )
       */
       IF Len(aMenu) < 5
-         Aadd( aMenu,hMenu )
+         AAdd(aMenu, hMenu)
       ELSE
          aMenu[5] := hMenu
       ENDIF
@@ -221,8 +221,8 @@ Local aMenu, i
          aMenu := Atail(aMenu)[1]
       NEXT
       _nLevel++
-      //Aadd( aMenu, { {},cTitle,nId,.T. } )
-      Aadd( aMenu, { {},{cTitle,Nil},nId,.T. } )
+      //AAdd(aMenu, {{}, cTitle, nId, .T.})
+      AAdd(aMenu, {{}, {cTitle, NIL}, nId, .T.})
    ENDIF
 Return .T.
 
@@ -258,9 +258,9 @@ Local aMenu, i
       aMenu := Atail(aMenu)[1]
    NEXT
    nId := Iif( nId == Nil .AND. cItem != Nil, ++ _Id, nId )
-   //Aadd( aMenu, { bItem,cItem,nId,Iif(lDisabled==Nil,.T.,!lDisabled) } )
-   Aadd( aMenu, { bItem,{cItem,cMessage},nId,Iif(lDisabled==Nil,.T.,!lDisabled) } )
+   //AAdd(aMenu, {bItem, cItem, nId, IIf(lDisabled == NIL, .T., !lDisabled)})
+   AAdd(aMenu, {bItem, {cItem, cMessage}, nId, IIf(lDisabled == NIL, .T., !lDisabled)})
    IF accFlag != Nil .AND. accKey != Nil
-      Aadd( _aAccel, { accFlag,accKey,nId } )
+      AAdd(_aAccel, {accFlag, accKey, nId})
    ENDIF
 Return .T.

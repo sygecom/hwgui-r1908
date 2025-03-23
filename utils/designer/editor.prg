@@ -34,12 +34,12 @@ CLASS HDTheme
    DATA number
 
    METHOD New( name ) INLINE ( ::name := name, Self )
-   METHOD Add( name ) INLINE ( ::name := name,AAdd(::aThemes, Self),Self )
+   METHOD Add(name) INLINE ( ::name := name,AAdd(::aThemes, Self),Self )
 ENDCLASS
 
 FUNCTION LoadEdOptions( cFileName )
 
-   LOCAL oIni := HXMLDoc():Read( cFileName )
+   LOCAL oIni := HXMLDoc():Read(cFileName)
    LOCAL i
    LOCAL j
    LOCAL j1
@@ -60,7 +60,7 @@ FUNCTION LoadEdOptions( cFileName )
          cTheme := oOptDesc:aItems[i]:GetAttribute( "selected" )
          FOR j := 1 TO Len(oOptDesc:aItems[i]:aItems)
             oThemeXML := oOptDesc:aItems[i]:aItems[j]
-            oTheme := HDTheme():Add( oThemeXML:GetAttribute( "name" ) )
+            oTheme := HDTheme():Add(oThemeXML:GetAttribute("name"))
             IF oTheme:name == cTheme
                HDTheme():nSelected := j
             ENDIF
@@ -96,28 +96,28 @@ Return Nil
 
 Function SaveEdOptions( oOptDesc )
 
-   LOCAL oIni := HXMLDoc():Read( m->cCurDir+cIniName )
+   LOCAL oIni := HXMLDoc():Read(m->cCurDir + cIniName)
    LOCAL i
    LOCAL oNode
    LOCAL nStart
    LOCAL oThemeDesc
    LOCAL aAttr
 
-HB_SYMBOL_UNUSED( oOptDesc )
+HB_SYMBOL_UNUSED(oOptDesc)
 
    oNode := oIni:aItems[1]
    nStart := 1
-   IF oNode:Find( "font",@nStart ) == Nil
-      oNode:Add( hwg_Font2XML( HDTheme():oFont ) )
+   IF oNode:Find("font", @nStart) == Nil
+      oNode:Add(hwg_Font2XML(HDTheme():oFont))
    ELSE
       oNode:aItems[nStart] := hwg_Font2XML( HDTheme():oFont )
    ENDIF
-   IF oNode:Find( "themes",@nStart ) != Nil
+   IF oNode:Find("themes", @nStart) != Nil
       oNode := oNode:aItems[nStart]
       oNode:SetAttribute( "selected", HDTheme():aThemes[HDTheme():nSelected]:name )
       oNode:aItems := {}
       FOR i := 1 TO Len(HDTheme():aThemes)
-         oThemeDesc := oNode:Add( HXMLNode():New( "theme",,{ {"name",HDTheme():aThemes[i]:name} } ) )
+         oThemeDesc := oNode:Add(HXMLNode():New("theme", , {{"name", HDTheme():aThemes[i]:name}}))
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
                     {"bcolor",LTrim(Str(HDTheme():aThemes[i]:normal[2]))} }
          IF HDTheme():aThemes[i]:normal[3]
@@ -126,7 +126,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
          IF HDTheme():aThemes[i]:normal[4]
             AAdd(aAttr, { "italic","True" })
          ENDIF
-         oThemeDesc:Add( HXMLNode():New( "normal",HBXML_TYPE_SINGLE,aAttr ) )
+         oThemeDesc:Add(HXMLNode():New("normal", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:command[1]))} }
          IF HDTheme():aThemes[i]:command[3]
@@ -135,7 +135,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
          IF HDTheme():aThemes[i]:command[4]
             AAdd(aAttr, { "italic","True" })
          ENDIF
-         oThemeDesc:Add( HXMLNode():New( "command",HBXML_TYPE_SINGLE,aAttr ) )
+         oThemeDesc:Add(HXMLNode():New("command", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:comment[1]))} }
          IF HDTheme():aThemes[i]:comment[3]
@@ -144,7 +144,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
          IF HDTheme():aThemes[i]:comment[4]
             AAdd(aAttr, { "italic","True" })
          ENDIF
-         oThemeDesc:Add( HXMLNode():New( "comment",HBXML_TYPE_SINGLE,aAttr ) )
+         oThemeDesc:Add(HXMLNode():New("comment", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:quote[1]))} }
          IF HDTheme():aThemes[i]:quote[3]
@@ -153,7 +153,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
          IF HDTheme():aThemes[i]:quote[4]
             AAdd(aAttr, { "italic","True" })
          ENDIF
-         oThemeDesc:Add( HXMLNode():New( "quote",HBXML_TYPE_SINGLE,aAttr ) )
+         oThemeDesc:Add(HXMLNode():New("quote", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:number[1]))} }
          IF HDTheme():aThemes[i]:number[3]
@@ -162,7 +162,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
          IF HDTheme():aThemes[i]:number[4]
             AAdd(aAttr, { "italic","True" })
          ENDIF
-         oThemeDesc:Add( HXMLNode():New( "number",HBXML_TYPE_SINGLE,aAttr ) )
+         oThemeDesc:Add(HXMLNode():New("number", HBXML_TYPE_SINGLE, aAttr))
 
       NEXT
    ENDIF
@@ -170,7 +170,7 @@ HB_SYMBOL_UNUSED( oOptDesc )
 
 Return Nil
 
-FUNCTION EditMethod( cMethName, cMethod )
+FUNCTION EditMethod(cMethName, cMethod)
 
    LOCAL i
    LOCAL lRes := .F.
@@ -369,7 +369,7 @@ STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
    ENDIF
    SET EXACT ON
    DO WHILE nPos < sLen
-      cWord := NextWord( stroka,@nPos,@nStart )
+      cWord := NextWord(stroka, @nPos, @nStart)
       // writelog( "-->"+Str(nStart)+" "+Str(nPos)+" "+Str(Len(cword))+" "+ Str(asc(cword)))
       IF !Empty(cWord)
          IF Left(cWord, 1) == '"' .OR. Left(cWord, 1) == "'"
@@ -484,7 +484,7 @@ STATIC FUNCTION EditColors()
       FOR i := 1 TO Len(aSchemes)
          j := AScan(HDTheme():aThemes, {|o|Lower(o:name) == Lower(aSchemes[i, 1])})
          IF j == 0
-            HDTheme():Add( aSchemes[i, 1] )
+            HDTheme():Add(aSchemes[i, 1])
             j := Len(HDTheme():aThemes)
          ENDIF
          HDTheme():aThemes[j]:normal  := aSchemes[i, 2]
@@ -563,7 +563,7 @@ STATIC FUNCTION InsertField(nModus)
 
    LOCAL cDBF := hwg_MsgGet("DBF Name","input table name")
 
-HB_SYMBOL_UNUSED( nModus )
+HB_SYMBOL_UNUSED(nModus)
 
   IF FILE(cDBF)
 
@@ -602,10 +602,10 @@ int At_Any( char* cFind, char* cStr, int* nPos)
    return ( (c)? 1:0 );
 }
 
-HB_FUNC( NEXTWORD )
+HB_FUNC(NEXTWORD)
 {
    char *cSep = " \t,.()[]+-/%";
-   char * cStr  = (char*) hb_parc( 1 );
+   char * cStr  = (char*) hb_parc(1);
    char * ptr, * ptr1;
    int nPos = hb_parni( 2 ) - 1;
 
@@ -626,13 +626,13 @@ HB_FUNC( NEXTWORD )
       else
       {
          nPos = strlen(cStr);
-         hb_retc( ptr );
+         hb_retc(ptr);
       }
    }
    else if( At_Any( cSep,cStr,&nPos ) )
       hb_retclen(ptr, nPos - (ptr - cStr));
    else
-      hb_retc( ptr );
+      hb_retc(ptr);
    hb_storni( nPos+1, 2 );
    hb_storni( ptr-cStr+1, 3 );
 }

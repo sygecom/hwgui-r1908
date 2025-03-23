@@ -20,7 +20,7 @@ Function hwg_VColor( cColor )
 Local i,res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
-      iValue := Asc( SubStr(cColor, Len(cColor) - i + 1, 1) )
+      iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
       if iValue < 58 .and. iValue > 47
          iValue -= 48
       elseif iValue >= 65 .and. iValue <= 70
@@ -36,7 +36,7 @@ Local i,res := 0, n := 1, iValue
 Return res
 
 Function hwg_MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
-Local oModDlg, oFont := HFont():Add( "Sans", 0, 12 )
+Local oModDlg, oFont := HFont():Add("Sans", 0, 12)
 Local cRes := ""
 
    nStyle := IIf(nStyle == NIL, 0, nStyle)
@@ -72,7 +72,7 @@ Local hDC, aMetr, width, height, screenh
    IF cTitle == Nil; cTitle := ""; ENDIF
    IF nLeft == Nil; nLeft := 10; ENDIF
    IF nTop == Nil; nTop := 10; ENDIF
-   IF oFont == Nil; oFont := HFont():Add( "Times", 0, 12 ); ENDIF
+   IF oFont == Nil; oFont := HFont():Add("Times", 0, 12); ENDIF
 
    IF HB_IsArray( arr[1] )
       FOR i := 1 TO aLen
@@ -84,17 +84,17 @@ Local hDC, aMetr, width, height, screenh
       NEXT
    ENDIF
 
-   hDC := hwg_GetDC( hwg_GetActiveWindow() )
+   hDC := hwg_GetDC(hwg_GetActiveWindow())
    hwg_SelectObject( hDC, ofont:handle )
-   aMetr := hwg_GetTextMetric( hDC )
-   hwg_ReleaseDC( hwg_GetActiveWindow(),hDC )
+   aMetr := hwg_GetTextMetric(hDC)
+   hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
    height := (aMetr[1]+1)*aLen+4+addY
    screenh := hwg_GETDESKTOPHEIGHT()
    IF height > screenh * 2/3
       height := Int( screenh *2/3 )
       addX := addY := 0
    ENDIF
-   width := ( Round( (aMetr[3]+aMetr[2]) / 2, 0 ) + 3 ) * nLen + addX
+   width := (Round((aMetr[3] + aMetr[2]) / 2, 0) + 3) * nLen + addX
 
    INIT DIALOG oDlg TITLE cTitle ;
          AT nLeft,nTop           ;

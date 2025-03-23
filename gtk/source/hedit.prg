@@ -84,7 +84,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ENDIF
    ::bSetGet := bSetGet
 
-   IF hwg_BitAnd( nStyle,ES_MULTILINE ) != 0
+   IF hwg_BitAnd(nStyle, ES_MULTILINE) != 0
       ::style := hwg_BitOr( ::style,ES_WANTRETURN )
       ::lMultiLine := .T.
    ENDIF
@@ -156,7 +156,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             Eval(::bLostFocus, hwg_Edit_GetText(::handle), Self)
          ENDIF
       ELSE
-         __Valid( Self )
+         __Valid(Self)
       ENDIF
    ELSEIF msg == WM_DESTROY
       ::End()
@@ -172,7 +172,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
          ::nLastKey := wParam
          IF wParam == GDK_BackSpace
             ::lFirst := .F.
-            SetGetUpdated( Self )
+            SetGetUpdated(Self)
             IF ::lPicComplex
                DeleteChar( Self,.T. )
                Return 1
@@ -213,7 +213,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             ENDIF
          ELSEIF wParam == GDK_Delete     // Del
             ::lFirst := .F.
-            SetGetUpdated( Self )
+            SetGetUpdated(Self)
             IF ::lPicComplex
                DeleteChar( Self,.F. )
                Return 1
@@ -227,7 +227,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             Return 1
          ELSEIF wParam == GDK_Return  // Enter
             IF !hwg_GetSkip( oParent,::handle, 1,.T. ) .AND. ::bSetGet != Nil
-	       __Valid( Self )
+	       __Valid(Self)
 	    ENDIF
             Return 1
          ELSEIF wParam >= 32 .AND. wParam < 65000
@@ -504,11 +504,11 @@ Local cPic
 
       cChar := Transform( cChar, cPic )
       IF cPic == "A"
-         if ! IsAlpha( cChar )
+         if !IsAlpha(cChar)
             cChar := Nil
          endif
       ELSEIF cPic == "N"
-         IF ! IsAlpha( cChar ) .and. ! IsDigit( cChar )
+         IF !IsAlpha(cChar) .and. !IsDigit(cChar)
             cChar := Nil
          ENDIF
       ELSEIF cPic == "9"
@@ -564,7 +564,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
       ENDIF
       cKey := Input( oEdit,cKey,nPos )
       IF cKey != Nil
-         SetGetUpdated( oEdit )         
+         SetGetUpdated(oEdit)
          IF Set( _SET_INSERT ) // .or. hwg_HIWORD(x) != hwg_LOWORD(x)
             IF oEdit:lPicComplex
                nGetLen := Len(oEdit:cPicMask)
@@ -620,7 +620,7 @@ Local res
 
 Return .T.
 
-Static Function __valid( oCtrl )
+Static Function __valid(oCtrl)
 Local vari, oDlg
 
     IF oCtrl:bSetGet != Nil
@@ -633,7 +633,7 @@ Local vari, oDlg
 	       hwg_edit_SetPos( oCtrl:handle, 0 )
                Return .F.
             ENDIF
-            vari := Ctod( vari )
+            vari := Ctod(vari)
          ELSEIF oCtrl:cType == "N"
             vari := Val( LTrim(vari) )
             oCtrl:title := Transform( vari, oCtrl:cPicFunc + IIf(Empty(oCtrl:cPicFunc), "", " ") + oCtrl:cPicMask )
@@ -826,7 +826,7 @@ Local i, aLen
       IF ( aLen := Len(oParent:Getlist) ) > 1
          IF nSkip > 0
             DO WHILE ( i := i+nSkip ) <= aLen
-               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle ) // Now tab and enter goes trhow the check, combo, etc...
+               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled(oParent:Getlist[i]:Handle) // Now tab and enter goes trhow the check, combo, etc...
                   hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
        	         hwg_edit_SetPos( oParent:Getlist[i]:handle, 0 )
@@ -836,7 +836,7 @@ Local i, aLen
             ENDDO
          ELSE
             DO WHILE ( i := i+nSkip ) > 0
-               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled( oParent:Getlist[i]:Handle )
+               IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled(oParent:Getlist[i]:Handle)
                   hwg_SetFocus( oParent:Getlist[i]:handle )
                   IF oParent:Getlist[i]:winclass == "EDIT"
    	               hwg_edit_SetPos( oParent:Getlist[i]:handle, 0 )
@@ -850,7 +850,7 @@ Local i, aLen
 
 Return .F.
 
-Function SetGetUpdated( o )
+Function SetGetUpdated(o)
 
    o:lChanged := .T.
    IF ( o := hwg_ParentGetDialog( o ) ) != Nil

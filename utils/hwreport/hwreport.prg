@@ -47,11 +47,11 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
    s_crossCursor := LoadCursor( IDC_CROSS )
    s_horzCursor := LoadCursor( IDC_SIZEWE )
    s_vertCursor := LoadCursor( IDC_SIZENS )
-   oPenBorder := HPen():Add( PS_SOLID, 1,hwg_VColor("800080") )
-   s_oPenLine   := HPen():Add( PS_SOLID, 1,hwg_VColor("000000") )
-   s_oPenDivider := HPen():Add( PS_DOT, 1,hwg_VColor("C0C0C0") )
-   oFontSmall := HFont():Add( "Small fonts", 0, -8 )
-   oFontStandard := HFont():Add( "Arial", 0, -13, 400, 204 )
+   oPenBorder := HPen():Add(PS_SOLID, 1, hwg_VColor("800080"))
+   s_oPenLine   := HPen():Add(PS_SOLID, 1, hwg_VColor("000000"))
+   s_oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("C0C0C0"))
+   oFontSmall := HFont():Add("Small fonts", 0, -8)
+   oFontStandard := HFont():Add("Arial", 0, -13, 400, 204)
 
    INIT WINDOW oMainWindow MAIN TITLE "Visual Report Builder"  ;
        ICON oIcon COLOR COLOR_3DSHADOW                         ;
@@ -141,7 +141,7 @@ Return Nil
 Static Function EndNewrep( oMainWindow,oDlg )
 
    aPaintRep := { 0, 0, 0, 0, 0,{},"","",.F., 0,Nil }
-   IF hwg_IsDlgButtonChecked( oDlg:handle,IDC_RADIOBUTTON1 )
+   IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE
       aPaintRep[FORM_WIDTH] := 297 ; aPaintRep[FORM_HEIGHT] := 210
@@ -173,7 +173,7 @@ Local step, kolsteps, nsteps
    aCoors := hwg_GetClientRect( hWnd )
 
    IF aPaintRep[FORM_XKOEFCONST] == 0
-      aMetr := hwg_GetDeviceArea( hDC )
+      aMetr := hwg_GetDeviceArea(hDC)
       aPaintRep[FORM_XKOEFCONST] := ( aMetr[1]-XINDENT )/aPaintRep[FORM_WIDTH]
    ENDIF
 
@@ -182,17 +182,17 @@ Local step, kolsteps, nsteps
       aPaintRep[FORM_Y] := 0
       IF aPaintRep[FORM_WIDTH] > aPaintRep[FORM_HEIGHT]
          nWidth := aCoors[3] - aCoors[1] - XINDENT
-         nHeight := Round( nWidth * aPaintRep[FORM_HEIGHT] / aPaintRep[FORM_WIDTH], 0 )
+         nHeight := Round(nWidth * aPaintRep[FORM_HEIGHT] / aPaintRep[FORM_WIDTH], 0)
          IF nHeight > aCoors[4] - aCoors[2] - YINDENT
             nHeight := aCoors[4] - aCoors[2] - YINDENT
-            nWidth := Round( nHeight * aPaintRep[FORM_WIDTH] / aPaintRep[FORM_HEIGHT], 0 )
+            nWidth := Round(nHeight * aPaintRep[FORM_WIDTH] / aPaintRep[FORM_HEIGHT], 0)
          ENDIF
       ELSE
          nHeight := aCoors[4] - aCoors[2] - YINDENT
-         nWidth := Round( nHeight * aPaintRep[FORM_WIDTH] / aPaintRep[FORM_HEIGHT], 0 )
+         nWidth := Round(nHeight * aPaintRep[FORM_WIDTH] / aPaintRep[FORM_HEIGHT], 0)
          IF nWidth > aCoors[3] - aCoors[1] - XINDENT
             nWidth := aCoors[3] - aCoors[1] - XINDENT
-            nHeight := Round( nWidth * aPaintRep[FORM_HEIGHT] / aPaintRep[FORM_WIDTH], 0 )
+            nHeight := Round(nWidth * aPaintRep[FORM_HEIGHT] / aPaintRep[FORM_WIDTH], 0)
          ENDIF
       ENDIF
       aPaintRep[FORM_XKOEF] := nWidth/aPaintRep[FORM_WIDTH]
@@ -250,8 +250,8 @@ Local step, kolsteps, nsteps
    NEXT
    hwg_SetBkColor( hDC,oldBkColor )
 
-   kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)- ;
-      (aCoors[4]-aCoors[2]-TOP_INDENT) ) / step, 0 ) + 1
+   kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
+      (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
    IF lPreview
       hwg_SetScrollInfo( hWnd, SB_VERT, 1 )
    ELSE
@@ -310,7 +310,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
    ENDIF
 Return Nil
 
-Static Function MessagesProc( oWnd, msg, wParam, lParam )
+Static Function MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem, hWnd := oWnd:handle
 
    IF msg == WM_VSCROLL
@@ -418,8 +418,8 @@ Local step  := Round(aPaintRep[FORM_XKOEF]*10, 0)*2, nsteps := aPaintRep[FORM_Y]
 Local aCoors := hwg_GetClientRect( hWnd )
 
    IF nScrollCode == SB_LINEDOWN
-      kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)- ;
-         (aCoors[4]-aCoors[2]-TOP_INDENT) ) / step, 0 ) + 1
+      kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
+         (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
       IF nsteps < kolsteps
          aPaintRep[FORM_Y] += step
          nsteps ++
@@ -438,8 +438,8 @@ Local aCoors := hwg_GetClientRect( hWnd )
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nsteps
-         kolsteps := Round( ( Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)- ;
-            (aCoors[4]-aCoors[2]-TOP_INDENT) ) / step, 0 ) + 1
+         kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
+            (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
          aPaintRep[FORM_Y] := nNewPos * step
          IF aPaintRep[FORM_Y]/step>=kolsteps
             hwg_RedrawWindow( hWnd, RDW_ERASE + RDW_INVALIDATE )
@@ -641,15 +641,15 @@ Local hWnd := Hwindow():GetMain():handle
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y]-1
    IF s_nAddItem > 0 .AND. xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
-      Aadd( aPaintRep[FORM_ITEMS], { s_nAddItem,"",xPos-x1, ;
+      AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem,"",xPos-x1, ;
            yPos-y1+aPaintRep[FORM_Y], s_aInitialSize[s_nAddItem, 1], ;
-           s_aInitialSize[s_nAddItem, 2], 0,Nil,Nil, 0, 0,Nil,STATE_SELECTED } )
+           s_aInitialSize[s_nAddItem, 2], 0,Nil,Nil, 0, 0,Nil,STATE_SELECTED })
       aItem := Atail( aPaintRep[FORM_ITEMS] )
       IF s_nAddItem == TYPE_HLINE .OR. s_nAddItem == TYPE_VLINE .OR. s_nAddItem == TYPE_BOX
          aItem[ITEM_PEN] := HPen():Add()
       ELSEIF s_nAddItem == TYPE_TEXT
          aItem[ITEM_FONT] := ;
-                 Iif( lastFont==Nil,HFont():Add( "Arial", 0, -13 ),lastFont )
+                 Iif( lastFont==Nil,HFont():Add("Arial", 0, -13),lastFont )
       ELSEIF s_nAddItem == TYPE_MARKER
          aItem[ITEM_X1] := -s_aInitialSize[s_nAddItem, 1]
          aItem[ITEM_CAPTION] := s_aMarkers[s_nMarkerType]

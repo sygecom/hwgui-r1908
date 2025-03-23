@@ -43,7 +43,7 @@ FUNCTION Menu2Prg
          stroka := Space( 2 * nMaxid ) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
          FWrite( han, _Chr( 10 ) + stroka )
          nMaxId += 1
-         hwg_CallFunc( "Menu2Prg", { oCtrl , alMenu[i, 1] } )
+         hwg_CallFunc("Menu2Prg", { oCtrl , alMenu[i, 1] })
          nMaxId -= 1
          stroka := Space( 2 * nmaxid ) + "  ENDMENU  "
          FWrite( han, _Chr( 10 ) + stroka )
@@ -143,7 +143,7 @@ FUNCTION Tool2Prg
                ENDIF
 
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF HB_IsChar( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl1, k } ) )
+               IF HB_IsChar( cName := hwg_Callfunc("FUNC_NAME", { oCtrl1, k }) )
                   IF !Empty(cLocalParam)
                      // SubStr(oCtrl1:aMethods[k, 2], 1, j)
                      IF lsubParameter
@@ -168,7 +168,7 @@ FUNCTION Tool2Prg
          //        if !Empty(cFormParameters)
          //                          cTool += ",{||"+ cFormParameters +"}")
          //        else
-         cTool += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onClick" } )
+         cTool += "," + hwg_CallFunc("Bloco2Prg", { aMethods, "onClick" })
          //        endif
          //ELSE
          //  cTool += ",{|| .T. }"
@@ -336,7 +336,7 @@ FUNCTION Browse2Prg
                m->nLength := &cTmpAlias->(fieldlen(AScan(j, temp)))
                m->nLength := IIf(m->nLength = 0, IIf(Type("&cCampo") = "C", Len(&cCampo), 10), m->nLength)
             ENDIF
-            m->nDec := &cTmpAlias->(FIELDDEC( AScan(j, temp) ))
+            m->nDec := &cTmpAlias->(FIELDDEC(AScan(j, temp)))
             cCampo := "{|| " + cCampo + " }"
             //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
             //      IIf((temp:=oCtrl1:GetProp("Length"))!= Nil,LTrim(Str(Val(temp))),"10")+", "+;
@@ -374,7 +374,7 @@ FUNCTION Browse2Prg
                   temp := ""
                ENDIF
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF HB_IsChar( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl1, k } ) )
+               IF HB_IsChar( cName := hwg_Callfunc("FUNC_NAME", { oCtrl1, k }) )
                   temp :=  " {|" + temp + "| " +  cName + "( " + temp + " ) }"
                ELSE
                   temp := " {|" + temp + "| " + IIf( Len(cName) == 1, cName[1], cName[2] ) + " }"
@@ -383,11 +383,11 @@ FUNCTION Browse2Prg
             ENDIF
             k ++
          ENDDO
-         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onLostFocus" } )
-         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "onGetFocus" } )
+         cbrowser += "," + hwg_CallFunc("Bloco2Prg", { aMethods, "onLostFocus" })
+         cbrowser += "," + hwg_CallFunc("Bloco2Prg", { aMethods, "onGetFocus" })
          cbrowser += "," + IIf( ( temp := oCtrl1:GetProp("Items" ) ) != Nil, temp, "" )
-         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "ColorBlock" } )
-         cbrowser += "," + hwg_CallFunc( "Bloco2Prg", { aMethods, "HeadClick" } )
+         cbrowser += "," + hwg_CallFunc("Bloco2Prg", { aMethods, "ColorBlock" })
+         cbrowser += "," + hwg_CallFunc("Bloco2Prg", { aMethods, "HeadClick" })
          //cbrowser += "))"
          FWrite( han, cbrowser + "))" + _CHR( 10 ) )
          //( <cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>,<nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <{bClrBlck}>, <{bHeadClick}> ) )
@@ -554,7 +554,7 @@ FUNCTION Func_name
    PARAMETERS oCtrl, nMeth
 
    PRIVATE cName
-   PRIVATE arr := hwg_ParseMethod( oCtrl:aMethods[nMeth, 2] )
+   PRIVATE arr := hwg_ParseMethod(oCtrl:aMethods[nMeth, 2])
 
    IF Len(arr) == 1 .OR. ( Len(arr) == 2 .AND. ;
          Lower(Left(arr[1], 11)) == "parameters " )
@@ -779,7 +779,7 @@ FUNCTION Ctrl2Prg
          stroka += "SIZE " + LTrim(Str(oCtrl:nWidth)) + "," + LTrim(Str(oCtrl:nHeight * nHeight)) + " "
       ENDIF
 
-      stroka += hwg_CallFunc( "Style2Prg", { oCtrl } ) + " "
+      stroka += hwg_CallFunc("Style2Prg", { oCtrl }) + " "
       // barraprogress
       IF ( temp := oCtrl:GetProp( "BarWidth" ) ) != Nil //.AND. temp == "True"
          stroka += " BARWIDTH " + temp
@@ -801,7 +801,7 @@ FUNCTION Ctrl2Prg
       //
       IF oCtrl:cClass != "ownerbutton" .AND. oCtrl:cClass != "shadebutton"
 
-         stroka += hwg_CallFunc( "Color2Prg", { oCtrl } ) + " "
+         stroka += hwg_CallFunc("Color2Prg", { oCtrl }) + " "
 
       ENDIF
       //
@@ -892,7 +892,7 @@ FUNCTION Ctrl2Prg
       ENDIF
 
       IF ( temp := oCtrl:GetProp( "Font" ) ) != Nil
-         stroka += hwg_CallFunc( "FONT2STR", { temp } )
+         stroka += hwg_CallFunc("FONT2STR", { temp })
       ENDIF
 
       // tooltip
@@ -973,7 +973,7 @@ FUNCTION Ctrl2Prg
 
             ENDIF
 
-            IF HB_IsChar( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl, i } ) )
+            IF HB_IsChar( cName := hwg_Callfunc("FUNC_NAME", { oCtrl, i }) )
                //
                IF oCtrl:cClass == "timer"
                   stroka := " {|" + temp + "| " + cName + "( " + temp + " ) }"
@@ -1020,13 +1020,13 @@ FUNCTION Ctrl2Prg
    ENDIF
    // gerar o codigo da TOOLBAR
    IF oCtrl:cClass == "toolbar"
-      stroka := hwg_CallFunc( "Tool2Prg", { oCtrl } )
+      stroka := hwg_CallFunc("Tool2Prg", { oCtrl })
       FWrite( han, _chr( 10 ) + stroka )
    ENDIF
 
    // gerar o codigo do browse
    IF oCtrl:cClass == "browse"
-      stroka := hwg_CallFunc( "Browse2Prg", { oCtrl } )
+      stroka := hwg_CallFunc("Browse2Prg", { oCtrl })
       FWrite( han, _chr( 10 ) + stroka )
    ENDIF
 
@@ -1034,7 +1034,7 @@ FUNCTION Ctrl2Prg
 
       IF oCtrl:cClass == "page" .AND. ;
             ( temp := oCtrl:GetProp( "Tabs" ) ) != Nil .AND. !Empty(temp)
-         //stroka := hwg_CallFunc( "Style2Prg", { oCtrl } ) + " "
+         //stroka := hwg_CallFunc("Style2Prg", { oCtrl }) + " "
          //Fwrite( han, stroka)
          j := 1
          DO WHILE j <= Len(temp)
@@ -1043,7 +1043,7 @@ FUNCTION Ctrl2Prg
             i := 1
             DO WHILE i <= Len(oCtrl:aControls)
                IF oCtrl:aControls[i]:nPage == j
-                  hwg_CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
+                  hwg_CallFunc("Ctrl2Prg", { oCtrl:aControls[i] })
                ENDIF
                i ++
             ENDDO
@@ -1063,7 +1063,7 @@ FUNCTION Ctrl2Prg
 
       i := 1
       DO WHILE i <= Len(oCtrl:aControls)
-         hwg_CallFunc( "Ctrl2Prg", { oCtrl:aControls[i] } )
+         hwg_CallFunc("Ctrl2Prg", { oCtrl:aControls[i] })
          i ++
       ENDDO
 
@@ -1262,7 +1262,7 @@ FUNCTION Ctrl2Prg
 
    ENDIF
 
-   //hwg_CallFunc( "Imagem2Prg", { oForm } )
+   //hwg_CallFunc("Imagem2Prg", { oForm })
    // Imagens
    cStyle := ""
    temp := oForm:GetProp( "icon" )
@@ -1324,7 +1324,7 @@ FUNCTION Ctrl2Prg
       LTrim(Str(oForm:oDlg:nHeight + temp)) )
 
    IF ( temp := oForm:GetProp( "Font" ) ) != Nil
-      FWrite( han, hwg_CallFunc( "FONT2STR",{ temp } ) )
+      FWrite( han, hwg_CallFunc("FONT2STR",{ temp } ))
    ENDIF
 
 
@@ -1377,12 +1377,12 @@ FUNCTION Ctrl2Prg
    DO WHILE i <= aLen
       IF aControls[i]:cClass != "menu"
          IF aControls[i]:oContainer == Nil
-            hwg_CallFunc( "Ctrl2Prg", { aControls[i] } )
+            hwg_CallFunc("Ctrl2Prg", { aControls[i] })
          ENDIF
       ELSE
          nMaxId := 0
          FWrite( han, _Chr( 10 ) + " MENU OF " + cformname + " " )
-         hwg_CallFunc( "Menu2Prg", { aControls[i] , getmenu() } )
+         hwg_CallFunc("Menu2Prg", { aControls[i] , getmenu() })
          FWrite( han, _Chr( 10 ) + " ENDMENU" + " " + _chr( 10 ) + _chr( 10 ) )
       ENDIF
       i ++
@@ -1490,7 +1490,7 @@ FUNCTION Ctrl2Prg
 
          IF oCtrl:aMethods[i, 2] != Nil .AND. !Empty(oCtrl:aMethods[i, 2])
 
-            IF HB_IsChar( cName := hwg_Callfunc( "FUNC_NAME", { oCtrl, i } ) )
+            IF HB_IsChar( cName := hwg_Callfunc("FUNC_NAME", { oCtrl, i }) )
 
                FWrite( han, "STATIC FUNCTION " + cName + _Chr( 10 ) )
                FWrite( han, oCtrl:aMethods[i, 2] )

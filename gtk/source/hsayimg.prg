@@ -39,8 +39,7 @@ Return Self
 METHOD Activate CLASS HSayImage
 
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 Return Nil

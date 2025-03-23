@@ -57,7 +57,7 @@ Local aModDlg
 
 Return Nil
 
-Static Function InitStatic( aItem )
+Static Function InitStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oFont := aItem[ITEM_FONT]
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
@@ -71,12 +71,12 @@ Local oFont := aItem[ITEM_FONT]
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
-Static Function EndStatic( aItem )
+Static Function EndStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 
    aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
-   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), 0, ;
-                          Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON2 ), 1, 2 ))
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), 0, ;
+                          Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON2), 1, 2 ))
    aItem[ITEM_VAR] := Ascan( s_aVariables,GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 ) ) - 1
    aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
@@ -123,7 +123,7 @@ Local oPen := aItem[ITEM_PEN]
    i := Ascan( s_aPenStyles,cType )
    IF oPen:style != i-1 .OR. oPen:width != nWidth
       oPen:Release()
-      aItem[ITEM_PEN] := HPen():Add( i-1,nWidth, 0 )
+      aItem[ITEM_PEN] := HPen():Add(i - 1, nWidth, 0)
       aPaintRep[FORM_CHANGED] := .T.
    ENDIF
    EndDialog( hDlg )
@@ -239,7 +239,7 @@ Return .T.
 
 Static Function EndMarkF( aItem )
 Local hDlg := hwg_GetModalHandle()
-   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), 0, 1 )
+   aItem[ITEM_ALIGN] := Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), 0, 1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.

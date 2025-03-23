@@ -5,11 +5,11 @@ FUNCTION STR2FONT
    PRIVATE oFont
   
   IF !Empty(cFont)
-    oFont := HFont():Add( hwg_NextItem( cFont,.T.,"," ), ;
+    oFont := HFont():Add(hwg_NextItem( cFont,.T.,"," ), ;
        Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
        Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
        Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
-       Val(hwg_NextItem( cFont,,"," )) )
+       Val(hwg_NextItem( cFont,,"," )))
   ENDIF
 Return oFont
 ENDFUNC
@@ -94,7 +94,7 @@ ENDFUNC
           cFont := hwg_NextItem( stroka )
           nVar := Val( hwg_NextItem( stroka ) )
 
-          oFont := hwg_CallFunc( "Str2Font", { cFont } )
+          oFont := hwg_CallFunc("Str2Font", { cFont })
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
@@ -143,7 +143,7 @@ ENDFUNC
               IF ( i := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "SL"}) ) != 0 .AND. arr[i, 5] == 0
                 arr[i, 5] := y - arr[i, 3]
               ENDIF
-              nHeight := Round( oForm:nPHeight*oForm:nKoeff, 0 ) - y
+              nHeight := Round(oForm:nPHeight * oForm:nKoeff, 0) - y
             ENDIF
             AAdd(arr,{ itemName, 0,y, 9999,nHeight,Nil,cCaption,Nil })
           ENDIF
@@ -196,12 +196,12 @@ ENDFUNC
        ENDIF
        j --
     ENDDO
-    x       := Round( arr[i, 2] * xKoef, 2 )
-    y       := Round( arr[i, 3] * xKoef, 2 )
-    nWidth  := Round( arr[i, 4] * xKoef, 2 )
-    nHeight := Round( arr[i, 5] * xKoef, 2 )
-    x2      := Round( ( arr[i, 2]+arr[i, 4]-1 ) * xKoef, 2 )
-    y2      := Round( ( arr[i, 3]+arr[i, 5]-1 ) * xKoef, 2 )
+    x       := Round(arr[i, 2] * xKoef, 2)
+    y       := Round(arr[i, 3] * xKoef, 2)
+    nWidth  := Round(arr[i, 4] * xKoef, 2)
+    nHeight := Round(arr[i, 5] * xKoef, 2)
+    x2      := Round((arr[i, 2] + arr[i, 4] - 1) * xKoef, 2)
+    y2      := Round((arr[i, 3] + arr[i, 5] - 1) * xKoef, 2)
     IF arr[i, 1] == "area"
       cCaption := IIf( arr[i, 7]=="PH","PageHeader",IIf( arr[i, 7]=="SL", ;
           "Table",IIf( arr[i, 7]=="PF","PageFooter",IIf( arr[i, 7]=="DH","DocHeader","DocFooter" ) ) ) )

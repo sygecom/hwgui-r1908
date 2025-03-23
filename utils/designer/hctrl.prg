@@ -70,7 +70,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
    PRIVATE oCtrl := Self
 
    IF oPenSel == Nil
-      oPenSel := HPen():Add( PS_SOLID, 1, 255 )
+      oPenSel := HPen():Add(PS_SOLID, 1, 255)
    ENDIF
 
    ::oParent := IIf( oWndParent==Nil,HFormGen():oDlgSelected,oWndParent )
@@ -98,7 +98,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
             ENDIF
             IF ( bmp := oPaint:GetAttribute( "bmp" ) ) != Nil
                IF Isdigit( Left(bmp, 1) )
-                  ::oBitmap := HBitmap():AddStandard( Val(bmp) )
+                  ::oBitmap := HBitmap():AddStandard(Val(bmp))
                ELSEIF "." $ bmp
                   ::oBitmap := HBitmap():AddFile( bmp )
                ELSE
@@ -184,8 +184,7 @@ METHOD Activate() CLASS HControlGen
          PRIVATE oCtrl := Self
          ::handle := &( ::cCreate )
       ELSE
-         ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
-               ::style, ::nLeft, ::nTop, ::nWidth,::nHeight )
+         ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth,::nHeight)
       ENDIF
       ::Init()
    ENDIF
@@ -214,7 +213,7 @@ METHOD Paint( lpdis ) CLASS HControlGen
       ENDIF
     next
   ELSE // :LEFB
-    oCtrl := GetCtrlSelected( HFormGen():oDlgSelected )
+    oCtrl := GetCtrlSelected(HFormGen():oDlgSelected)
     IF oCtrl != Nil .AND. ::handle == oCtrl:handle
       hwg_SelectObject( hDC, oPenSel:handle )
       hwg_Rectangle( hDC, 0, 0, ::nWidth-1, ::nHeight-1 )
@@ -245,7 +244,7 @@ METHOD SetProp( xName,xValue )
       //xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
      iIndex := ::GetPropIndex( xName )
     ENDIF
-    IF HB_IsNumeric( xName )
+    IF HB_IsNumeric(xName)
       iIndex := xName
     ENDIF
 
@@ -265,7 +264,7 @@ METHOD SetCoor( xName,nValue )
    MEMVAR oDesigner
 
    IF oDesigner:lReport
-      nValue := Round( nValue/::oParent:oParent:oParent:oParent:nKoeff, 1 )
+      nValue := Round(nValue / ::oParent:oParent:oParent:oParent:nKoeff, 1)
    ENDIF
    ::SetProp( xName,LTrim(Str(nValue)) )
 
@@ -532,7 +531,7 @@ Function SetBDown( oCtrl,xPos,yPos,nBorder )
    aBDown[BDOWN_NBORDER] := nBorder
    IF oCtrl != Nil .AND. oCtrl:ClassName() != "HDIALOG" ;
        .AND. oCtrl:ClassName() != "HPANEL"// NANDO POS DO AND EM DIANTE
-      SetCtrlSelected( oCtrl:oParent,oCtrl )
+      SetCtrlSelected(oCtrl:oParent, oCtrl)
    ELSE
       // nando pos  para maniplear marcar todos objetos com mouse
       aBDown[BDOWN_OCTRL] := oCtrl
@@ -544,8 +543,8 @@ Return aBDown
 
 Function SetvBDown( oCtrl,xPos,yPos,nBorder )
 
-   HB_SYMBOL_UNUSED( oCtrl )
-   HB_SYMBOL_UNUSED( nBorder )
+   HB_SYMBOL_UNUSED(oCtrl)
+   HB_SYMBOL_UNUSED(nBorder)
 
    vBDown[BDOWN_OCTRL] := nil
    vBDown[BDOWN_XPOS]  := xPos
@@ -556,7 +555,7 @@ Return Nil
 Function GetvBDown
 Return vBDown
 
-FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
+FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
 
    LOCAL oFrm := IIf( oDlg:oParent:Classname()=="HPANEL",oDlg:oParent:oParent:oParent,oDlg:oParent )
    LOCAL handle
@@ -635,7 +634,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
    ENDIF
 Return Nil
 
-Function GetCtrlSelected( oDlg )
+Function GetCtrlSelected(oDlg)
 Return IIf( oDlg!=Nil,IIf( oDlg:oParent:Classname()=="HPANEL",oDlg:oParent:oParent:oParent:oCtrlSelected,oDlg:oParent:oCtrlSelected),Nil )
 
 Function CheckResize( oCtrl,xPos,yPos )
@@ -759,21 +758,21 @@ FUNCTION Page_New( oTab )
       aTabs := {}
       oTab:SetProp( "Tabs",aTabs )
    ENDIF
-   hwg_AddTab( oTab:handle, Len(aTabs), "New Page" )
+   hwg_AddTab(oTab:handle, Len(aTabs), "New Page")
    AAdd(aTabs, "New Page")
    InspUpdProp( "Tabs", aTabs )
    hwg_RedrawWindow( oTab:handle, 5 )
 Return Nil
 
 Function Page_Next( oTab )
-   HB_SYMBOL_UNUSED( oTab )
+   HB_SYMBOL_UNUSED(oTab)
 Return Nil
 
 Function Page_Prev( oTab )
-   HB_SYMBOL_UNUSED( oTab )
+   HB_SYMBOL_UNUSED(oTab)
 Return Nil
 
-FUNCTION Page_Upd( oTab, arr )
+FUNCTION Page_Upd(oTab, arr)
 
    LOCAL i
    LOCAL nTabs := hwg_SendMessage(oTab:handle, TCM_GETITEMCOUNT, 0, 0)
@@ -782,7 +781,7 @@ FUNCTION Page_Upd( oTab, arr )
       IF i <= nTabs
          hwg_SetTabName( oTab:handle, i-1, arr[i] )
       ELSE
-         hwg_AddTab( oTab:handle, i-1, arr[i] )
+         hwg_AddTab(oTab:handle, i - 1, arr[i])
       ENDIF
    NEXT
 
@@ -794,7 +793,7 @@ FUNCTION Page_Select( oTab, nTab, lForce )
    LOCAL j
    LOCAL oCtrl
 
-   IF ( lForce != Nil .AND. lForce ) .OR. hwg_GetCurrentTab( oTab:handle ) != nTab
+   IF ( lForce != Nil .AND. lForce ) .OR. hwg_GetCurrentTab(oTab:handle) != nTab
 
       hwg_SendMessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
       FOR i := 1 TO Len(oTab:aControls)
@@ -967,7 +966,7 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       ENDIF
    ELSEIF nAction == 3   // Insert child
       oNode := oTree:oSelected:AddNode( "New" )
-      oTree:Expand( oTree:oSelected )
+      oTree:Expand(oTree:oSelected)
       oTree:EditLabel( oNode )
       nMaxId ++
       oNode:cargo := nMaxId
@@ -985,7 +984,7 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
       oTree:oSelected:Delete()
    ELSEIF nAction == 10  &&.AND. oTree:oSelected:cargo != "SEPARATOR" // Edit code
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != Nil
-         IF ( cMethod := EditMethod( oTree:oSelected:GetText(), aSubarr[nPos, 4] ) ) != Nil
+         IF (cMethod := EditMethod(oTree:oSelected:GetText(), aSubarr[nPos, 4])) != Nil
             aSubarr[nPos, 4] := cMethod
          ENDIF
       ENDIF
@@ -1127,9 +1126,9 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
    LOCAL yf
 
    pps := hwg_DefinePaintStru()
-   hDC := hwg_GetDC( hwg_GetActiveWindow() )
+   hDC := hwg_GetDC(hwg_GetActiveWindow())
    IF oPenSel == Nil
-      oPenSel := HPen():Add( PS_SOLID, 1, 255 )
+      oPenSel := HPen():Add(PS_SOLID, 1, 255)
    ENDIF
   hwg_SelectObject( hDC, oPenSel:handle )
   IF xpos < xi
@@ -1173,7 +1172,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
          (yPos <= oCtrl:nTop + oCtrl:nHeight .AND. yi >= oCtrl:nTop)) .AND. ;
        ((xi <= oCtrl:nLeft + oCtrl:nWidth .AND. xPos >= oCtrl:nLeft) .OR.;
           (xPos <= oCtrl:nLeft + oCtrl:nWidth .AND. xi >= oCtrl:nLeft))
-         SetCtrlSelected( oCtrl:oParent,oCtrl,, -128)
+         SetCtrlSelected(oCtrl:oParent, oCtrl, , -128)
     ENDIF
  NEXT
 Return Nil

@@ -17,7 +17,7 @@ REQUEST HWG_CHOOSECOLOR
 
 Function Main
 
-   LOCAL oForm := HFormTmpl():Read( "example.xml" )
+   LOCAL oForm := HFormTmpl():Read("example.xml")
 
  oForm:ShowMain()
 

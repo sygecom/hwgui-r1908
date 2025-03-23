@@ -128,7 +128,7 @@ METHOD Init CLASS HOwnButton
 Return Nil
 
 METHOD Paint() CLASS HOwnButton
-Local hDC := hwg_GetDC( ::handle )
+Local hDC := hwg_GetDC(::handle)
 Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    aCoors := hwg_GetClientRect( ::handle )
@@ -181,7 +181,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       ELSEIF ::oParent:oFont != Nil
          hwg_SelectObject( hDC, ::oParent:ofont:handle )
       ENDIF
-      aMetr := hwg_GetTextMetric( hDC )
+      aMetr := hwg_GetTextMetric(hDC)
       if ::lEnabled //if button is enabled
          hwg_SetTextColor( hDC,::tcolor )
       Else
@@ -196,12 +196,12 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       // hwg_SetTransparentMode( hDC,.F. )
    ENDIF
    // hwg_SetBkColor( hDC,oldBkColor )
-   hwg_releaseDC( ::handle, hDC )
+   hwg_releaseDC(::handle, hDC)
 
 Return Nil
 
 METHOD MouseMove( wParam, lParam )  CLASS HOwnButton
-Local lEnter := ( hwg_BitAnd( wParam, 16 ) > 0 )
+Local lEnter := ( hwg_BitAnd(wParam, 16) > 0 )
 Local res := .F.
 
    IF ::state != OBTN_INIT

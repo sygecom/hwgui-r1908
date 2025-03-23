@@ -46,7 +46,7 @@ Return .T.
 Static Function BrowFile( lOpen )
 Local hDlg := hwg_GetModalHandle()
 Local fname, s1, s2
-   IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 )
+   IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1)
       s1 := "Report files( *.rpt )"
       s2 := "*.rpt"
    ELSE
@@ -182,16 +182,16 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   aPaintRep[FORM_HEIGHT] := Val( hwg_NextItem( stroka ) )
                   nFormWidth := Val( hwg_NextItem( stroka ) )
                ELSEIF itemName == "TEXT"
-                  Aadd( aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),Nil,hwg_NextItem(stroka), ;
-                           Val(hwg_NextItem(stroka)), 0,Nil, 0 } )
+                           Val(hwg_NextItem(stroka)), 0,Nil, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_FONT] := HFont():Add( hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
+                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )) )
+                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )))
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -201,13 +201,13 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
-                  Aadd( aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE", 2,Iif(itemName=="VLINE", 3, 4)), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE", 2,Iif(itemName=="VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),Nil, 0, 0,Nil, 0 } )
+                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),Nil, 0, 0,Nil, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_PEN] := HPen():Add( Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
-                          Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )) )
+                  aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
+                          Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )))
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -217,10 +217,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "BITMAP"
-                  Aadd( aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,Nil,Nil, 0, 0,Nil, 0 } )
+                           Val(hwg_NextItem(stroka)), 0,Nil,Nil, 0, 0,Nil, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_BITMAP] := HBitmap():AddFile( aItem[ITEM_CAPTION] )
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
@@ -232,10 +232,10 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "MARKER"
-                  Aadd( aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Nil,Nil, 0, 0,Nil, 0 } )
+                           Nil,Nil, 0, 0,Nil, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                ENDIF
             ENDIF
@@ -383,9 +383,9 @@ Return res
 Static Function WriteRep( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr
 
-   hDCwindow := GetDC( Hwindow():GetMain():handle )
-   aMetr := hwg_GetDeviceArea( hDCwindow )
-   ReleaseDC( Hwindow():GetMain():handle,hDCwindow )
+   hDCwindow := GetDC(Hwindow():GetMain():handle)
+   aMetr := hwg_GetDeviceArea(hDCwindow)
+   ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    Fwrite( han, "#REPORT "+repName+Chr(10) )
    Fwrite( han, "FORM;"+ Ltrim(Str(aPaintRep[FORM_WIDTH])) + ";" + ;
@@ -432,9 +432,9 @@ Return Nil
 Static Function WriteToPrg( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
 
-   hDCwindow := GetDC( Hwindow():GetMain():handle )
-   aMetr := hwg_GetDeviceArea( hDCwindow )
-   ReleaseDC( Hwindow():GetMain():handle,hDCwindow )
+   hDCwindow := GetDC(Hwindow():GetMain():handle)
+   aMetr := hwg_GetDeviceArea(hDCwindow)
+   ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    Fwrite( han, "FUNCTION " + repName + Chr(10) + ;
          "LOCAL aPaintRep" + Chr(10) )
@@ -478,7 +478,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
          cItem += ",0,0"
       ENDIF
       cItem += ",0,Nil,0"
-      Fwrite( han, "   Aadd( aPaintRep[6], { " + cItem + " } )" + Chr(10) )
+      Fwrite( han, "   AAdd(aPaintRep[6], { " + cItem + " })" + Chr(10) )
 
       IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
          Fwrite( han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;"+Chr(10) )

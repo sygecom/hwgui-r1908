@@ -114,7 +114,7 @@ PUBLIC nQueryWndHandle := 0
 */
 
    IF HB_IsArray( BrwFont )
-      oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
+      oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
 
    hwg_EnableMenuItem( , 1, .F., .F. )
@@ -185,27 +185,27 @@ Return .T.
 Static Function EndConfig()
 Local hDlg := hwg_GetModalHandle()
 Local new_numdriv, new_servertype, serverPath
-   new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
-                  Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
+   new_numdriv := Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON3), 1, ;
+                  Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON4), 2, 3 ) )
    IF new_numdriv != numdriv
       numdriv := new_numdriv
       #ifdef RDD_ADS
          AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
       #endif
    ENDIF
-   IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
+   IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX4)
       SET( _SET_EXCLUSIVE, !SET( _SET_EXCLUSIVE ) )
    ENDIF
-   IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
+   IF prrdonly != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX5)
       prrdonly := !prrdonly
    ENDIF
 #ifdef RDD_ADS
-   IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
+   IF AdsLocking() != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX6)
       AdsLocking( !AdsLocking() )
    ENDIF
    dformat := GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 )
    SET DATE FORMAT dformat
-   new_servertype := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON1 ), ;
+   new_servertype := Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), ;
                        ADS_LOCAL_SERVER, ADS_REMOTE_SERVER )
    IF new_servertype != nServerType
       nServerType := new_servertype
@@ -246,7 +246,7 @@ Local indname
 
    i := 1
    DO WHILE !Empty(indname := ORDNAME( i ))
-      AADD( msind, { Str(i, 1), indname, ORDKEY( i ), ORDBAGNAME( i ) } )
+      AAdd(msind, {Str(i, 1), indname, ORDKEY(i), ORDBAGNAME(i)})
       ordlen := Max( ordlen, Len(OrdKey( i-1 )) )
       i ++
    ENDDO
@@ -305,7 +305,7 @@ Return Nil
 Static Function TagName
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
-   IF hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
+   IF hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
       hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
    ELSE
       hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
@@ -322,7 +322,7 @@ Local oWindow, aControls, i
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
       Return Nil
    ENDIF
-   isMulti := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX1 )
+   isMulti := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
    IF isMulti
       tagname := GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty(tagname)
@@ -330,7 +330,7 @@ Local oWindow, aControls, i
          Return Nil
       ENDIF
    ENDIF
-   isUniq := hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX2 )
+   isUniq := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX2)
    expkey := GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty(expkey)
       hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
@@ -376,7 +376,7 @@ Local oWindow, aControls, i
 
    IF !Empty(fname := hwg_SelectFile( "Index files", mask, mypath ))
       mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
-      ORDLISTADD( fname )
+      ORDLISTADD(fname)
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != Nil
          aControls := oWindow:aControls
@@ -442,22 +442,22 @@ Local oldLock := AdsLocking()
    IF !Empty(fname)
       alsName := GetEditText( hDlg, IDC_EDIT3 )
       pass := GetEditText( hDlg, IDC_EDIT4 )
-      new_numdriv := Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON3 ), 1, ;
-                     Iif( hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON4 ), 2, 3 ) )
+      new_numdriv := Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON3), 1, ;
+                     Iif( hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON4), 2, 3 ) )
       IF new_numdriv != numdriv
          numdriv := new_numdriv
          #ifdef RDD_ADS
             AdsSetFileType( Iif( numdriv==1, 2,Iif( numdriv==2, 1, 3 ) ) )
          #endif
       ENDIF
-      IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX4 )
+      IF SET( _SET_EXCLUSIVE ) != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX4)
          SET( _SET_EXCLUSIVE, !SET( _SET_EXCLUSIVE ) )
       ENDIF
-      IF prrdonly != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX5 )
+      IF prrdonly != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX5)
          prrdonly := !prrdonly
       ENDIF
 #ifdef RDD_ADS
-      IF AdsLocking() != hwg_IsDlgButtonChecked( hDlg,IDC_CHECKBOX6 )
+      IF AdsLocking() != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX6)
          AdsLocking( !AdsLocking() )
       ENDIF
 #endif
@@ -615,7 +615,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
-         IF HB_IsNumeric( oBrw:cargo )
+         IF HB_IsNumeric(oBrw:cargo)
             Select( oBrw:cargo )
             improc := oBrw:cargo
             hwg_SetFocus( oBrw:handle )
@@ -630,7 +630,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
-         IF HB_IsNumeric( oBrw:cargo )
+         IF HB_IsNumeric(oBrw:cargo)
             Select( oBrw:cargo )
             improc := oBrw:cargo
             IF Alias() == "ADSSQL"

@@ -81,12 +81,12 @@ Private finame, cValue, cFor
       ENDIF
       nrec := Recno()
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-      IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+      IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
          REPLACE ALL &finame WITH &cValue FOR &cFor
-      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+      ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
          nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          REPLACE NEXT nrest &finame WITH &cValue FOR &cFor
-      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+      ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
          REPLACE REST &finame WITH &cValue FOR &cFor
       ENDIF
       Go nrec
@@ -145,30 +145,30 @@ Private cFor
       ENDIF
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF nAct == 1
-         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             DELETE ALL FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             DELETE NEXT nrest FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             DELETE REST FOR &cFor
          ENDIF
       ELSEIF nAct == 2
-         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             RECALL ALL FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             RECALL NEXT nrest FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             RECALL REST FOR &cFor
          ENDIF
       ELSEIF nAct == 3
-         IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+         IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             COUNT TO nsum ALL FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
             nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             COUNT TO nsum NEXT nrest FOR &cFor
-         ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+         ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             COUNT TO nsum REST FOR &cFor
          ENDIF
          hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str(nsum) )
@@ -232,12 +232,12 @@ Private nsum := 0
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       blsum := &( "{||nsum:=nsum+" + cSumf + "}" )
       blfor := &( "{||" + cFor + "}" )
-      IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+      IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
          DBEval(blsum, blfor)
-      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+      ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
          nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          DBEval(blsum, blfor, , nrest)
-      ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+      ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
          DBEval(blsum, blfor, , , , .T.)
       ENDIF
       Go nrec
@@ -296,12 +296,12 @@ Local fname, nRec := Recno()
    ENDIF
 
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-   IF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON6 )
+   IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
       // DBEval(blsum, blfor)
-   ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON7 )
+   ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
       // nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
       // DBEval(blsum, blfor, , nrest)
-   ELSEIF hwg_IsDlgButtonChecked( hDlg,IDC_RADIOBUTTON8 )
+   ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
       // DBEval(blsum, blfor, , , , .T.)
    ENDIF
    Go nrec

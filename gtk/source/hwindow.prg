@@ -94,7 +94,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
       ::szAppName := cAppName
    ENDIF
    
-   IF hwg_BitAnd( ::style, DS_CENTER ) > 0 
+   IF hwg_BitAnd(::style, DS_CENTER) > 0
       ::nLeft := Int( ( hwg_GetDesktopWidth() - ::nWidth ) / 2 )
       ::nTop  := Int( ( hwg_GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF 
@@ -366,7 +366,7 @@ Local oItem, iCont, nCont
 */
 return -1
 
-Static Function onCommand( oWnd,wParam,lParam )
+Static Function onCommand(oWnd, wParam, lParam)
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
@@ -424,7 +424,7 @@ Static Function onEraseBk( oWnd,wParam )
 */   
 Return 0
 
-Static Function onSysCommand( oWnd,wParam )
+Static Function onSysCommand(oWnd, wParam)
 Local i
 /*
    IF wParam == SC_CLOSE
@@ -477,7 +477,7 @@ Static Function onMdiCreate( oWnd,lParam )
 */
 Return 0
 
-Static Function onMdiCommand( oWnd,wParam )
+Static Function onMdiCommand(oWnd, wParam)
 Local iParHigh, iParLow, iItem
 /*
    IF wParam == SC_CLOSE

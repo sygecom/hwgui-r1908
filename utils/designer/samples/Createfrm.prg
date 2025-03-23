@@ -21,7 +21,7 @@ Function Main
       cText += "Function " + StrTran( cFile, ".frm", "" ) + CRLF
       cText += "   Local cXml " + CRLF + CRLF
       cText += "   TEXT INTO cXml " + CRLF
-      cText += Memoread( AllTrim(aFiles[i, 1]) ) + CRLF
+      cText += Memoread(AllTrim(aFiles[i, 1])) + CRLF
       cText += "   ENDTEXT " + CRLF + CRLF
       cText += "Return cXml"+ CRLF
       

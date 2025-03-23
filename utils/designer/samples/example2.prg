@@ -12,7 +12,7 @@ REQUEST HWG_SHELLABOUT
 
 Function Main
 
-   LOCAL oForm := HFormTmpl():Read( example() )
+   LOCAL oForm := HFormTmpl():Read(example())
 
 oForm:ShowMain()
 

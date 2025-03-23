@@ -31,7 +31,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
 
    RDDSETDEFAULT( "DBFCDX" )
    
-   oFont := HFont():Add( "Courier", 0, -14 )
+   oFont := HFont():Add("Courier", 0, -14)
    INIT WINDOW oWndMain MAIN TITLE "Dbf browse" AT 200, 100 SIZE 300, 300
 
    MENU OF oWndMain
@@ -210,7 +210,7 @@ Memvar oBrw, oFont
 Return Nil
 
 Static Function NewIndex()
-Local oDlg, of := HFont():Add( "Courier", 0, -12 )
+Local oDlg, of := HFont():Add("Courier", 0, -12)
 Local cName := "", lMulti := .T., lUniq := .F., cTag := "", cExpr := "", cCond := ""
 Local oMsg
 Memvar oBrw
@@ -343,7 +343,7 @@ Local oDlg
 Return oDlg
 
 Static Function ModiStru( lNew )
-Local oDlg, oBrowse, of := HFont():Add( "Courier", 0, -12 ), oMsg 
+Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg
 Local oGet1, oGet2, oGet3, oGet4
 Local af, af0, cName := "", nType := 1, cLen := "0", cDec := "0", i
 Local aTypes := { "Character","Numeric","Date","Logical" }
@@ -407,10 +407,10 @@ Memvar oBrw, currentCP, currFname
       ELSE
          use (fname) new
       ENDIF
-      dbSelectArea( cAlias )
+      dbSelectArea(cAlias)
       
       DO WHILE !Eof()
-         dbSelectArea( fname )
+         dbSelectArea(fname)
          APPEND BLANK
          FOR i := 1 TO Len(af)
             IF Len(af[i]) > 4
@@ -443,7 +443,7 @@ Memvar oBrw, currentCP, currFname
          IF (cAlias)->(Deleted())
             DELETE
          ENDIF
-         dbSelectArea( cAlias )
+         dbSelectArea(cAlias)
          SKIP
       ENDDO
       IF lOverFlow
@@ -522,7 +522,7 @@ Local cName, cType, nLen, nDec
 Return Nil
 
 Static Function dbv_Goto()
-Local nRec := Val( GetData( Ltrim(Str(dbv_nRec)),"Go to ...","Input record number:" ) )
+Local nRec := Val(GetData(LTrim(Str(dbv_nRec)), "Go to ...", "Input record number:"))
 Memvar oBrw
 
    IF nRec != 0
@@ -544,7 +544,7 @@ Memvar oBrw, oSay2
    IF OrdNumber() == 0
       hwg_MsgStop( "No active order !","Seek record" )
    ELSE
-      cKey := GetData( dbv_cSeek,"Seek record","Input key:" )
+      cKey := GetData(dbv_cSeek, "Seek record", "Input key:")
       IF !Empty(cKey)
          dbv_cSeek := cKey
          nRec := Eval(oBrw:bRecNo, oBrw)
@@ -568,7 +568,7 @@ Memvar oBrw, oSay2
 
    DO WHILE .T.
 
-      cLocate := GetData( cLocate,"Locate","Input condition:" )
+      cLocate := GetData(cLocate, "Locate", "Input condition:")
       IF Empty(cLocate)
          Return Nil
       ENDIF
@@ -622,8 +622,8 @@ Memvar oBrw, oSay2
 
 Return Nil
 
-Static Function GetData( cRes, cTitle, cText )
-Local oModDlg, oFont := HFont():Add( "MS Sans Serif", 0, -13 )
+Static Function GetData(cRes, cTitle, cText)
+Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 
    INIT DIALOG oModDlg TITLE cTitle AT 0, 0 SIZE 300, 140 ;
         FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER

@@ -44,7 +44,7 @@ CLASS HControl INHERIT HCustomWindow
 
    METHOD Disable() INLINE hwg_EnableWindow( ::handle, .F. )
    METHOD Enable() INLINE hwg_EnableWindow( ::handle, .T. )
-   METHOD IsEnabled() INLINE hwg_IsWindowEnabled( ::Handle )
+   METHOD IsEnabled() INLINE hwg_IsWindowEnabled(::Handle)
    METHOD SetFocus() INLINE hwg_EnableWindow( ::handle, .T. )
    METHOD Move( x1,y1,width,height )
    /*
@@ -92,7 +92,7 @@ METHOD AddName( cName ) CLASS HControl
 
    IF !Empty(cName) .AND. HB_IsChar( cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
-			__objAddData( ::oParent, cName )
+			__objAddData(::oParent, cName)
 	    ::oParent: & ( cName ) := Self
    ENDIF	    
    
@@ -141,7 +141,7 @@ METHOD SetColor( tcolor,bcolor,lRepaint ) CLASS HControl
       IF ::brush != Nil
          ::brush:Release()
       ENDIF
-      ::brush := HBrush():Add( bcolor )
+      ::brush := HBrush():Add(bcolor)
    ENDIF
 
    IF lRepaint != Nil .AND. lRepaint
@@ -359,8 +359,8 @@ Return Self
 
 METHOD Activate CLASS HStatic
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateStatic( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title )
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title)
       ::Init()
    ENDIF
 Return Nil

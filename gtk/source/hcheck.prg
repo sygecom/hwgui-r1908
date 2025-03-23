@@ -25,7 +25,7 @@ CLASS HCheckButton INHERIT HControl
    METHOD onEvent( msg, wParam, lParam )
    METHOD Refresh()
    METHOD SetValue( lValue ) INLINE hwg_CheckButton( ::handle,lValue )
-   METHOD GetValue() INLINE ::value := hwg_IsButtonChecked( ::handle )
+   METHOD GetValue() INLINE ::value := hwg_IsButtonChecked(::handle)
 
 ENDCLASS
 
@@ -77,7 +77,7 @@ Return Nil
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
    IF msg == WM_LBUTTONUP
-      __Valid( Self )
+      __Valid(Self)
    ELSEIF msg == BN_SETFOCUS
       __When( Self )
    ENDIF
@@ -88,7 +88,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
    SWITCH msg
    CASE WM_LBUTTONUP
-      __Valid( Self )
+      __Valid(Self)
       EXIT
    CASE BN_SETFOCUS
       __When( Self )
@@ -108,10 +108,10 @@ Local var
    hwg_CheckButton( ::handle,::value )
 Return Nil
 
-Static Function __Valid( oCtrl )
+Static Function __Valid(oCtrl)
 Local res
 
-   oCtrl:value := hwg_IsButtonChecked( oCtrl:handle )
+   oCtrl:value := hwg_IsButtonChecked(oCtrl:handle)
 
    IF oCtrl:bSetGet != Nil
       Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
