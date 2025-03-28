@@ -16,7 +16,7 @@ Local oMainWindow,oPanel
 Private oFont := Nil, cImageDir := "/"+Curdir()+"/../../image/"
 Private nColor, oBmp2
 
-   // hb_SetCodepage( "RU1251" )
+   // hb_SetCodepage("RU1251")
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150
@@ -61,7 +61,7 @@ return nil
 Function FileOpen
 Local oModDlg, oBrw
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Local fname := hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
+Local fname := hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 Local nId
 
    IF !Empty(fname)
@@ -96,19 +96,19 @@ Local nId
    ENDIF
 Return Nil
 
-Function FileClose( oDlg )
+Function FileClose(oDlg)
    Local oBrw := oDlg:FindControl( 111 )
    dbSelectArea(oBrw:alias)
    dbCloseArea()
 Return .T.
 
 function printdos
-Local han := fcreate( "LPT1", 0 )
+Local han := fcreate("LPT1", 0)
   if han != -1
-     fwrite( han, Chr(10)+Chr(13)+"Example of dos printing ..."+Chr(10)+Chr(13) )
-     fwrite( han, "Line 2 ..."+Chr(10)+Chr(13) )
-     fwrite( han, "---------------------------"+Chr(10)+Chr(13)+Chr(12) )
-     fclose( han )
+     fwrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
+     fwrite(han, "Line 2 ..." + Chr(10) + Chr(13))
+     fwrite(han, "---------------------------" + Chr(10) + Chr(13) + Chr(12))
+     fclose(han)
   else
      hwg_MsgStop("Can't open printer port!")
   endif
@@ -217,9 +217,9 @@ Local oPrinter, oFont
    oPrinter:SetFont( oFont )
    oPrinter:Box( 5, 5,oPrinter:nWidth-5,oPrinter:nHeight-5 )
    oPrinter:Say( "Windows printing first sample !", 50, 10, 165, 26,DT_CENTER,oFont  )
-   oPrinter:Line( 45, 30, 170, 30 )
-   oPrinter:Line( 45, 5, 45, 30 )
-   oPrinter:Line( 170, 5, 170, 30 )
+   oPrinter:Line(45, 30, 170, 30)
+   oPrinter:Line(45, 5, 45, 30)
+   oPrinter:Line(170, 5, 170, 30)
    oPrinter:Say( "----------", 50, 120, 150, 132,DT_CENTER  )
    oPrinter:Box( 50, 134, 160, 146 )
    oPrinter:Say( "End Of Report", 50, 135, 160, 146,DT_CENTER  )

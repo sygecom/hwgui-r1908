@@ -105,9 +105,9 @@ Local aItem
             ENDIF
          elseif  HB_IsChar( ::aItem[n, 1] )
             if ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
-               oImage:=hIcon():AddFile( ::aItem[n, 1] )
+               oImage:=hIcon():AddFile(::aItem[n, 1])
             else
-               oImage:=hBitmap():AddFile( ::aItem[n, 1] )
+               oImage:=hBitmap():AddFile(::aItem[n, 1])
             endif
             if HB_IsObject(oImage)
                AAdd(aButton, Oimage:handle)
@@ -119,7 +119,7 @@ Local aItem
 
 /*      IF Len(aButton) >0
 
-          aBmpSize := hwg_GetBitmapSize( aButton[1] )
+          aBmpSize := hwg_GetBitmapSize(aButton[1])
 
           IF aBmpSize[3] == 4
              hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK )
@@ -131,7 +131,7 @@ Local aItem
 
           FOR nPos :=1 to Len(aButton)
 
-             aBmpSize := hwg_GetBitmapSize( aButton[nPos] )
+             aBmpSize := hwg_GetBitmapSize(aButton[nPos])
 
              IF aBmpSize[3] == 24
 //             hwg_Imagelist_AddMasked(hIm, aButton[nPos], hwg_RGB(236, 223, 216))
@@ -142,7 +142,7 @@ Local aItem
 
           NEXT
 
-       hwg_SendMessage( ::Handle, TB_SETIMAGELIST, 0, hIm )
+       hwg_SendMessage(::Handle, TB_SETIMAGELIST, 0, hIm)
 
       ENDIF
 */
@@ -170,7 +170,7 @@ RETURN Nil
 /*
 METHOD Notify( lParam ) CLASS hToolBar
 
-    Local nCode :=  hwg_GetNotifyCode( lParam )
+    Local nCode :=  hwg_GetNotifyCode(lParam)
     Local nId
 
     Local nButton

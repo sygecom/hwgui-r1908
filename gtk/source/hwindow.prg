@@ -18,7 +18,7 @@ REQUEST HWG_ENDWINDOW
 #define  WM_NOTIFYICON         WM_USER+1000
 #define  ID_NOTIFYICON           1
 
-Static Function onSize( oWnd,wParam,lParam )
+Static Function onSize(oWnd, wParam, lParam)
 
    // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)) )
 
@@ -63,9 +63,9 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD DelItem( oWnd )
    METHOD FindWindow( hWnd )
    METHOD GetMain()
-   METHOD Restore() INLINE hwg_WindowRestore( ::handle )
-   METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
-   METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
+   METHOD Restore() INLINE hwg_WindowRestore(::handle)
+   METHOD Maximize() INLINE hwg_WindowMaximize(::handle)
+   METHOD Minimize() INLINE hwg_WindowMinimize(::handle)
    METHOD Close() INLINE hwg_DestroyWindow( ::handle )
 ENDCLASS
 
@@ -160,9 +160,9 @@ CLASS HMainWindow INHERIT HWindow
    METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
                      oFont,bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;
                      cAppName,oBmp,cHelp,nHelpId )
-   METHOD Activate( lShow )
+   METHOD Activate(lShow)
    METHOD onEvent( msg, wParam, lParam )
-   // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) )
+   // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) )
 
 ENDCLASS
 
@@ -195,7 +195,7 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
 
 Return Self
 
-METHOD Activate( lShow, lMaximize, lMinimize ) CLASS HMainWindow
+METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
 Local oWndClient, handle
 
    // hwg_CreateGetList( Self )
@@ -249,12 +249,12 @@ CLASS HMDIChildWindow INHERIT HWindow
       } ;
    }
 
-   METHOD Activate( lShow )
+   METHOD Activate(lShow)
    METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
-METHOD Activate( lShow ) CLASS HMDIChildWindow
+METHOD Activate(lShow) CLASS HMDIChildWindow
 
    hwg_CreateGetList( Self )
    // hwg_CreateMdiChildWindow( Self )
@@ -287,7 +287,7 @@ CLASS HChildWindow INHERIT HWindow
    METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
                      bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
                      cAppName,oBmp,cHelp,nHelpId )
-   METHOD Activate( lShow )
+   METHOD Activate(lShow)
    METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
@@ -314,7 +314,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
 
 Return Self
 
-METHOD Activate( lShow ) CLASS HChildWindow
+METHOD Activate(lShow) CLASS HChildWindow
 
    hwg_CreateGetList( Self )
    hwg_ActivateChildWindow((lShow==Nil .OR. lShow),::handle )
@@ -344,7 +344,7 @@ Local oItem, iCont, nCont
    #ifdef __XHARBOUR__
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != Nil .AND. oItem:oParent:handle == hWnd
-          hwg_SendMessage( oItem:handle,WM_CLOSE, 0, 0 )
+          hwg_SendMessage(oItem:handle, WM_CLOSE, 0, 0)
       ENDIF
    NEXT
    #else
@@ -354,14 +354,14 @@ Local oItem, iCont, nCont
 
       IF HWindow():aWindows[iCont]:oParent != Nil .AND. ;
               HWindow():aWindows[iCont]:oParent:handle == hWnd
-          hwg_SendMessage( HWindow():aWindows[iCont]:handle,WM_CLOSE, 0, 0 )
+          hwg_SendMessage(HWindow():aWindows[iCont]:handle, WM_CLOSE, 0, 0)
       ENDIF
 
    NEXT
    #endif
 
    If HWindow():aWindows[1]:handle == hWnd
-      hwg_PostQuitMessage( 0 )
+      hwg_PostQuitMessage(0)
    Endif
 */
 return -1
@@ -370,20 +370,20 @@ Static Function onCommand(oWnd, wParam, lParam)
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
-       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
-          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0 )
+       IF Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
        ENDIF
    ELSEIF wParam == SC_RESTORE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
-          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0 )
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIRESTORE, nHandle, 0)
        ENDIF
    ELSEIF wParam == SC_MAXIMIZE
-       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0 ) ) > 0
-          hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0 )
+       IF Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIMAXIMIZE, nHandle, 0)
        ENDIF
    ELSEIF wParam >= FIRST_MDICHILD_ID .AND. wparam < FIRST_MDICHILD_ID + MAX_MDICHILD_WINDOWS
        nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
-       hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0 )
+       hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0)
    ENDIF
 */   
    iParHigh := hwg_HIWORD(wParam)
@@ -407,7 +407,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 
 Return 0
 
-Static Function onMove( oWnd, wParam, lParam )
+Static Function onMove(oWnd, wParam, lParam)
 
    // writelog( "onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)) )
    oWnd:nLeft := hwg_LOWORD(lParam)
@@ -439,7 +439,7 @@ Local i
           hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
        ENDIF
        IF __ObjHasMsg( oWnd,"HACCEL" ) .AND. oWnd:hAccel != Nil
-          hwg_DestroyAcceleratorTable( oWnd:hAccel )
+          hwg_DestroyAcceleratorTable(oWnd:hAccel)
        ENDIF
    ELSEIF wParam == SC_MINIMIZE
        IF __ObjHasMsg( oWnd,"LTRAY" ) .AND. oWnd:lTray
@@ -468,7 +468,7 @@ Local ar
 */   
 Return 0
 
-Static Function onMdiCreate( oWnd,lParam )
+Static Function onMdiCreate(oWnd, lParam)
 /*
    hwg_InitControls( oWnd )
    IF oWnd:bInit != Nil
@@ -481,7 +481,7 @@ Static Function onMdiCommand(oWnd, wParam)
 Local iParHigh, iParLow, iItem
 /*
    IF wParam == SC_CLOSE
-      hwg_SendMessage( HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0 )
+      hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0)
    ENDIF
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
@@ -492,7 +492,7 @@ Local iParHigh, iParLow, iItem
 */
 Return 0
 
-Static Function onMdiNcActivate( oWnd,wParam )
+Static Function onMdiNcActivate(oWnd, wParam)
 /*
    IF wParam == 1 .AND. oWnd:bGetFocus != Nil
       Eval(oWnd:bGetFocus, oWnd)
@@ -502,7 +502,7 @@ Static Function onMdiNcActivate( oWnd,wParam )
 */
 Return 0
 
-Static Function onEnterIdle( oDlg, wParam, lParam )
+Static Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 /*
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != Nil ;

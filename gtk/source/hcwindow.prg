@@ -76,7 +76,7 @@ CLASS HCustomWindow INHERIT HObject
    METHOD FindControl( nId,nHandle )
    METHOD Hide() INLINE (::lHide:=.T.,hwg_HideWindow(::handle))
    METHOD Show() INLINE (::lHide:=.F.,hwg_ShowWindow(::handle))
-   METHOD Move( x1,y1,width,height )
+   METHOD Move(x1, y1, width, height)
    METHOD onEvent( msg, wParam, lParam )
    METHOD End()
    METHOD Anchor( oCtrl, x, y, w, h )
@@ -123,7 +123,7 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    ENDIF
 Return Nil
 
-METHOD Move( x1,y1,width,height )  CLASS HCustomWindow
+METHOD Move(x1, y1, width, height)  CLASS HCustomWindow
 
    IF x1 != Nil
       ::nLeft := x1
@@ -188,19 +188,19 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
    IF oCtrl != Nil
       IF oCtrl:ClassName() == "HTAB"
          DO CASE
-         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SELCHANGE
+         CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_SELCHANGE
             IF oCtrl != Nil .AND. oCtrl:bChange != Nil
                Eval(oCtrl:bChange, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
             ENDIF
-         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_CLICK
+         CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_CLICK
               if oCtrl != Nil .AND. oCtrl:bAction != nil
                  Eval(oCtrl:bAction, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
-         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_SETFOCUS
+         CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_SETFOCUS
               if oCtrl != Nil .AND. oCtrl:bGetFocus != nil
                  Eval(oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
-         CASE ( nCode := hwg_GetNotifyCode( lParam ) ) == TCN_KILLFOCUS
+         CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_KILLFOCUS
               if oCtrl != Nil .AND. oCtrl:bLostFocus != nil
                  Eval(oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
@@ -212,7 +212,7 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
       ELSEIF oCtrl:ClassName() == "HGRID"         
          Return hwg_ListViewNotify( oCtrl,lParam )
       ELSE
-         nCode := hwg_GetNotifyCode( lParam )
+         nCode := hwg_GetNotifyCode(lParam)
          // writelog("Code: "+str(nCode))
          IF nCode == EN_PROTECTED
             Return 1
@@ -268,7 +268,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
 Return 1
 
-Static Function onSize( oWnd,wParam,lParam )
+Static Function onSize(oWnd, wParam, lParam)
 Local aControls := oWnd:aControls, nControls := Len(aControls)
 Local oItem, iCont
 

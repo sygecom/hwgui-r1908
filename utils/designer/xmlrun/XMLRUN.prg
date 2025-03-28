@@ -233,7 +233,7 @@ FUNCTION Main(fileXML)
 
     filexml:=""
     IF FILE("XMLRUN.DEF")
-       filexml:=RTrim(MEMOLINE( MEMOREAD("XMLRUN.DEF"), 128, 1))
+       filexml:=RTrim(MemoLine(MemoRead("XMLRUN.DEF"), 128, 1))
     ENDIF
 
     IF !FILE(filexml)
@@ -539,8 +539,8 @@ function Usr2infStr(g,lKosong) && usr to informix str
        next
 
        *:Kalau 2 Char Pertama Adalah Angka
-       cPress:= if( Left(c, 2)=="99", cPress, "0"+cPress)
-            c:= if( Left(c, 2)=="99", c,      "9"+c)
+       cPress:= IIf(Left(c, 2) == "99", cPress, "0" + cPress)
+            c:= IIf(Left(c, 2) == "99", c, "9" + c)
 
 	*:isi Hari
         dd := Left(cPress, 2)+"."

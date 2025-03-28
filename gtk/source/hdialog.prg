@@ -69,16 +69,16 @@ CLASS HDialog INHERIT HCustomWindow
 
    METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
                   bPaint,bGfocus,bLfocus,bOther,lClipper,oBmp,oIcon,lExitOnEnter,nHelpId,xResourceID, lExitOnEsc )
-   METHOD Activate( lNoModal )
+   METHOD Activate(lNoModal)
    METHOD onEvent( msg, wParam, lParam )
    METHOD AddItem( oWnd,lModal )
    METHOD DelItem( oWnd,lModal )
    METHOD FindDialog( hWnd )
    METHOD GetActive()
    METHOD Center() INLINE hwg_CenterWindow( Self )
-   METHOD Restore() INLINE hwg_WindowRestore( ::handle )
-   METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
-   METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
+   METHOD Restore() INLINE hwg_WindowRestore(::handle)
+   METHOD Maximize() INLINE hwg_WindowMaximize(::handle)
+   METHOD Minimize() INLINE hwg_WindowMinimize(::handle)
    METHOD Close() INLINE EndDialog( ::handle )
 ENDCLASS
 
@@ -116,7 +116,7 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
 
 RETURN Self
 
-METHOD Activate( lNoModal ) CLASS HDialog
+METHOD Activate(lNoModal) CLASS HDialog
 Local hParent,oWnd
 
    hwg_CreateGetList( Self )
@@ -195,7 +195,7 @@ Local iCont
    ENDIF
    /*
    IF oDlg:oIcon != Nil
-      hwg_SendMessage( oDlg:handle,WM_SETICON, 1,oDlg:oIcon:handle )
+      hwg_SendMessage(oDlg:handle, WM_SETICON, 1, oDlg:oIcon:handle)
    ENDIF
    */
    IF oDlg:Title != NIL
@@ -203,7 +203,7 @@ Local iCont
    ENDIF
    /*
    IF oDlg:oFont != Nil
-      hwg_SendMessage( oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0 )
+      hwg_SendMessage(oDlg:handle, WM_SETFONT, oDlg:oFont:handle, 0)
    ENDIF
    */
    IF oDlg:bInit != Nil
@@ -212,7 +212,7 @@ Local iCont
 
 Return 1
 
-Static Function onEnterIdle( oDlg, wParam, lParam )
+Static Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != Nil ;
@@ -308,7 +308,7 @@ Local aMenu, i, hCtrl
 
 Return 1
 
-Static Function onSize( oDlg,wParam,lParam )
+Static Function onSize(oDlg, wParam, lParam)
    LOCAL aControls, iCont , nW1, nH1
    LOCAL nW := hwg_LOWORD(lParam), nH := hwg_HIWORD(lParam)
    LOCAL nScrollMax
@@ -342,7 +342,7 @@ Static Function onSize( oDlg,wParam,lParam )
 
 Return 0
 
-Static Function onActivate( oDlg,wParam,lParam )
+Static Function onActivate(oDlg, wParam, lParam)
 Local iParLow := hwg_LOWORD(wParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != Nil

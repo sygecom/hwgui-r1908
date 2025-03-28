@@ -31,7 +31,7 @@ CLASS HSplitter INHERIT HControl
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init()
    METHOD Paint( lpdis )
-   METHOD Move( x1,y1,width,height )
+   METHOD Move(x1, y1, width, height)
    METHOD Drag( lParam )
    METHOD DragAll()
 
@@ -109,9 +109,9 @@ Local hDC
 
 Return Nil
 
-METHOD Move( x1,y1,width,height )  CLASS HSplitter
+METHOD Move(x1, y1, width, height)  CLASS HSplitter
 
-   ::Super:Move( x1,y1,width,height,.T. )
+   ::Super:Move(x1, y1, width, height, .T.)
 Return Nil
 
 METHOD Drag( lParam ) CLASS HSplitter
@@ -121,12 +121,12 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
       IF xPos > 32000
          xPos -= 65535
       ENDIF
-      ::Move( ::nLeft + xPos )
+      ::Move(::nLeft + xPos)
    ELSE
       IF yPos > 32000
          yPos -= 65535
       ENDIF
-      ::Move( ,::nTop + yPos )
+      ::Move(, ::nTop + yPos)
    ENDIF
    ::lMoved := .T.
 
@@ -139,20 +139,20 @@ Local i, oCtrl, nDiff
       oCtrl := ::aRight[i]
       IF ::lVertical
          nDiff := ::nLeft+::nWidth - oCtrl:nLeft
-         oCtrl:Move( oCtrl:nLeft+nDiff,,oCtrl:nWidth-nDiff )
+         oCtrl:Move(oCtrl:nLeft + nDiff, , oCtrl:nWidth - nDiff)
       ELSE
          nDiff := ::nTop+::nHeight - oCtrl:nTop
-         oCtrl:Move( ,oCtrl:nTop+nDiff,,oCtrl:nHeight-nDiff )
+         oCtrl:Move(, oCtrl:nTop + nDiff, , oCtrl:nHeight - nDiff)
       ENDIF   
    NEXT
    FOR i := 1 TO Len(::aLeft)
       oCtrl := ::aLeft[i]
       IF ::lVertical
          nDiff := ::nLeft - ( oCtrl:nLeft + oCtrl:nWidth )
-         oCtrl:Move( ,,oCtrl:nWidth+nDiff )
+         oCtrl:Move(, , oCtrl:nWidth + nDiff)
       ELSE
          nDiff := ::nTop - ( oCtrl:nTop + oCtrl:nHeight )
-         oCtrl:Move( ,,,oCtrl:nHeight+nDiff )
+         oCtrl:Move(, , , oCtrl:nHeight + nDiff)
       ENDIF
    NEXT
    ::lMoved := .F.

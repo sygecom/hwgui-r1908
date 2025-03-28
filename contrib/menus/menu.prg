@@ -151,7 +151,7 @@ Local nPos1, aSubMenu
    ENDDO
 Return Nil
 
-Function hwg_GetSubMenuHandle( aMenu,nId )
+Function hwg_GetSubMenuHandle(aMenu, nId)
 Local nPos
    IF ( aMenu := hwg_FindMenuItem( aMenu, nId, nPos ) ) != Nil
       Return aMenu[1,nPos, 5]
@@ -213,9 +213,9 @@ Local aMenu, i
       _oWnd     := oWnd
       _oMenu    := Nil
       _nLevel   := 0
-      _Id       := Iif( nId == Nil, MENU_FIRST_ID, nId )
+      _Id       := IIf(nId == Nil, MENU_FIRST_ID, nId)
    ELSE
-      nId   := Iif( nId == Nil, ++ _Id, nId )
+      nId   := IIf(nId == Nil, ++_Id, nId)
       aMenu := _aMenuDef
       FOR i := 1 TO _nLevel
          aMenu := Atail(aMenu)[1]
@@ -238,10 +238,10 @@ Function hwg_EndMenu()
    IF _nLevel > 0
       _nLevel --
    ELSE
-      hwg_BuildMenu( Aclone(_aMenuDef), Iif( _oWnd!=Nil,_oWnd:handle,Nil ), ;
-                   _oWnd,,Iif( _oWnd!=Nil,.F.,.T. ) )
+      hwg_BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != Nil, _oWnd:handle, Nil), ;
+                   _oWnd,,IIf(_oWnd != Nil, .F., .T.) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
-         _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )
+         _oWnd:hAccel := hwg_CreateAcceleratorTable(_aAccel)
       ENDIF
       _aMenuDef := Nil
       _aAccel   := Nil
@@ -257,7 +257,7 @@ Local aMenu, i
    FOR i := 1 TO _nLevel
       aMenu := Atail(aMenu)[1]
    NEXT
-   nId := Iif( nId == Nil .AND. cItem != Nil, ++ _Id, nId )
+   nId := IIf(nId == Nil .AND. cItem != Nil, ++_Id, nId)
    //AAdd(aMenu, {bItem, cItem, nId, IIf(lDisabled == NIL, .T., !lDisabled)})
    AAdd(aMenu, {bItem, {cItem, cMessage}, nId, IIf(lDisabled == NIL, .T., !lDisabled)})
    IF accFlag != Nil .AND. accKey != Nil

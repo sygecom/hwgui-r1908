@@ -129,8 +129,8 @@ Local px1, px2, py1, py2, nWidth
    hwg_FillRect( hDC, 0, 0, ::nWidth, ::nHeight, ::brush:handle )
    IF ::nType != 3
       hwg_SelectObject( hDC, ::oPenCoor:handle )
-      hwg_Drawline( hDC, x1+(0-::xmin)/::scaleX, 3, x1+(0-::xmin)/::scaleX, ::nHeight-3 )
-      hwg_Drawline( hDC, 3, y2-(0-::ymin)/::scaleY, ::nWidth-3, y2-(0-::ymin)/::scaleY )
+      hwg_Drawline(hDC, x1 + (0 - ::xmin) / ::scaleX, 3, x1 + (0 - ::xmin) / ::scaleX, ::nHeight - 3)
+      hwg_Drawline(hDC, 3, y2 - (0 - ::ymin) / ::scaleY, ::nWidth - 3, y2 - (0 - ::ymin) / ::scaleY)
    ENDIF
    IF ::ymax == ::ymin .AND. ::ymax == 0
       Return Nil
@@ -146,7 +146,7 @@ Local px1, px2, py1, py2, nWidth
             px2 := Round(x1+(::aValues[i,j, 1]-::xmin)/::scaleX, 0)
             py2 := Round(y2-(::aValues[i,j, 2]-::ymin)/::scaleY, 0)
             IF px2 != px1 .OR. py2 != py1
-               hwg_Drawline( hDC, px1, py1, px2, py2 )
+               hwg_Drawline(hDC, px1, py1, px2, py2)
             ENDIF   
          NEXT
       ELSEIF ::nType == 2
@@ -168,7 +168,7 @@ Local px1, px2, py1, py2, nWidth
          ENDIF
          hwg_SelectObject( hDC, ::oPenCoor:handle )
          hwg_SelectObject( hDC, ::tbrush:handle )
-         hwg_pie( hDC, x1+10,y1+10,x2-10,y2-10, x1,round(y1+(y2-y1)/2, 0),round(x1+(x2-x1)/2, 0),y1 )
+         hwg_pie(hDC, x1 + 10, y1 + 10, x2 - 10, y2 - 10, x1, round(y1 + (y2 - y1) / 2, 0), round(x1 + (x2 - x1) / 2, 0), y1)
 	 */
       ENDIF
    NEXT

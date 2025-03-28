@@ -64,7 +64,7 @@ Local cRes := ""
 
 Return cRes
 
-Function hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel )
+Function hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel)
 Local oDlg, oBrw
 Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
 Local hDC, aMetr, width, height, screenh

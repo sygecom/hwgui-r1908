@@ -66,9 +66,9 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
      MENU TITLE "&View"
        MENUITEM "&Font" ACTION ChangeFont()
        MENU TITLE "&Local codepage"
-          MENUITEMCHECK "EN" ACTION hb_SetCodepage( "EN" )
-          MENUITEMCHECK "RUKOI8" ACTION hb_SetCodepage( "RUKOI8" )
-          MENUITEMCHECK "RU1251" ACTION hb_SetCodepage( "RU1251" )
+          MENUITEMCHECK "EN" ACTION hb_SetCodepage("EN")
+          MENUITEMCHECK "RUKOI8" ACTION hb_SetCodepage("RUKOI8")
+          MENUITEMCHECK "RU1251" ACTION hb_SetCodepage("RU1251")
        ENDMENU
        MENU TITLE "&Data's codepage"
           MENUITEMCHECK "EN" ACTION SetDataCP( "EN" )
@@ -105,7 +105,7 @@ Return Nil
 
 Static Function FileOpen
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Local fname := hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath )
+Local fname := hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
 
    IF !Empty(fname)
@@ -127,8 +127,8 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")},"C", 1, 0 )
       oBrw:active := .T.
       oBrw:Refresh()
-      oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
-      oSay2:SetValue( "" )
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay2:SetValue("")
       dbv_cLocate := dbv_cSeek := ""
       dbv_nRec := 0
       
@@ -249,17 +249,17 @@ Memvar oBrw
          oMsg = DlgWait("Indexing")
          IF lMulti
             IF Empty(cCond)
-               ORDCREATE( RTRIM(cName),RTRIM(cTag),RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
+               OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE                     
                ordCondSet( RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,, )
-               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
+               OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ELSE
             IF Empty(cCond)
                dbCreateIndex( RTRIM(cName),RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
             ELSE                     
                ordCondSet( RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,, )
-               ORDCREATE( RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
+               OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ENDIF
          oMsg:Close()
@@ -272,7 +272,7 @@ Return Nil
 
 Static Function OpenIndex()
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Local fname := hwg_SelectFile( "index files( *.cdx )", "*.cdx", mypath )
+Local fname := hwg_SelectFile("index files( *.cdx )", "*.cdx", mypath)
 Memvar oBrw
 
    IF Len(oBrw:aColumns) == 0
@@ -325,8 +325,8 @@ Memvar oBrw, oSay1
       oBrw:bRecnoLog := &( "{||" + oBrw:alias + "->(ORDKEYNO())}" )
    ENDIF
    oBrw:Refresh()
-   oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
-   oSay2:SetValue( "" )
+   oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
+   oSay2:SetValue("")
 Return Nil
 
 Static Function DlgWait( cTitle )
@@ -401,7 +401,7 @@ Memvar oBrw, currentCP, currFname
       GO TOP
       
       fname := "a0_new"
-      dbCreate( fname,af )
+      DBCreate(fname, af)
       IF currentCP != Nil
          use (fname) new codepage (currentCP)
       ELSE
@@ -451,11 +451,11 @@ Memvar oBrw, currentCP, currFname
       ENDIF
 
       Close All
-      Ferase( currFname+".bak" )
-      Frename( currFname + ".dbf", currFname + ".bak" )
-      Frename( "a0_new.dbf", currFname + ".dbf" )
-      IF File( "a0_new.fpt" )
-         Frename( "a0_new.fpt", currFname + ".fpt" )
+      FErase(currFname + ".bak")
+      FRename(currFname + ".dbf", currFname + ".bak")
+      FRename("a0_new.dbf", currFname + ".dbf")
+      IF File("a0_new.fpt")
+         FRename("a0_new.fpt", currFname + ".fpt")
       ENDIF
 
       IF currentCP != Nil
@@ -549,11 +549,11 @@ Memvar oBrw, oSay2
          dbv_cSeek := cKey
          nRec := Eval(oBrw:bRecNo, oBrw)
          IF dbSeek( cKey )
-            oSay2:SetValue( "Found" )
+            oSay2:SetValue("Found")
             oBrw:Refresh()
             Eval(oBrw:bScrollPos, oBrw, 0)
          ELSE
-            oSay2:SetValue( "Not Found" )
+            oSay2:SetValue("Not Found")
             Eval(oBrw:bGoTo, oBrw, nRec)
          ENDIF
       ENDIF
@@ -575,7 +575,7 @@ Memvar oBrw, oSay2
 
       bOldError := ERRORBLOCK( { | e | MacroError(e) } )
       BEGIN SEQUENCE
-         cType := Valtype( &cLocate )
+         cType := ValType(&cLocate)
       RECOVER
          ERRORBLOCK( bOldError )
          LOOP
@@ -593,11 +593,11 @@ Memvar oBrw, oSay2
    nRec := Eval(oBrw:bRecNo, oBrw)
    LOCATE FOR &cLocate
    IF Found()
-      oSay2:SetValue( "Found" )
+      oSay2:SetValue("Found")
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
    ELSE
-      oSay2:SetValue( "Not Found" )
+      oSay2:SetValue("Not Found")
       Eval(oBrw:bGoTo, oBrw, nRec)
    ENDIF
 
@@ -611,11 +611,11 @@ Memvar oBrw, oSay2
       nRec := Eval(oBrw:bRecNo, oBrw)
       CONTINUE
       IF Found()
-         oSay2:SetValue( "Found" )
+         oSay2:SetValue("Found")
          oBrw:Refresh()
          Eval(oBrw:bScrollPos, oBrw, 0)
       ELSE
-         oSay2:SetValue( "Not Found" )
+         oSay2:SetValue("Not Found")
          Eval(oBrw:bGoTo, oBrw, nRec)
       ENDIF
    ENDIF
@@ -661,8 +661,8 @@ Memvar oBrw, oSay1, oSay2
       oMsg:Close()
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
-      oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
-      oSay2:SetValue( "" )
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay2:SetValue("")
    ENDIF
 Return Nil
 
@@ -676,8 +676,8 @@ Memvar oBrw, oSay1, oSay2
       oMsg:Close()
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
-      oSay1:SetValue( "Records: "+Ltrim(Str(Eval(oBrw:bRcou,oBrw))) )
-      oSay2:SetValue( "" )
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay2:SetValue("")
    ENDIF
 Return Nil
 

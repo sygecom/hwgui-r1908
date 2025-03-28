@@ -88,7 +88,7 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
    ENDIF
    IF lRes == Nil ; lRes := .F. ; ENDIF
    ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),     ;
-                   HBitmap():AddResource( Image ), ;
+                   HBitmap():AddResource(Image), ;
                    IIf(HB_IsChar(Image),     ;
                    HBitmap():AddFile(Image), Image))
 

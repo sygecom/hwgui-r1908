@@ -4,7 +4,7 @@ request HB_CODEPAGE_PTISO,HB_CODEPAGE_PT850
 
 Function Main()
 Local oModDlg, oEditbox, onome,obar
-Local meditbox := "", mnome:= space( 50 )
+Local meditbox := "", mnome:= space(50)
 //hb_settermcp("PT850","PTISO")
 INIT DIALOG oModDlg TITLE "Teste da Acentuação" ;
    AT 210, 10  SIZE 300, 300       on init {||otool:refresh(),hwg_Enablewindow(oTool:aItem[2, 11],.f.)}

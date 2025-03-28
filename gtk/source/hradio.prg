@@ -21,7 +21,7 @@ CLASS HRadioGroup INHERIT HObject
 
    METHOD New( vari,bSetGet )
    METHOD EndGroup( nSelected )
-   METHOD SetValue( nValue )
+   METHOD SetValue(nValue)
    METHOD Refresh() INLINE IIf(::bSetGet != NIL, ::SetValue(Eval(::bSetGet)), .T.)
 ENDCLASS
 
@@ -52,7 +52,7 @@ Local nLen
    ::oGroupCurrent := Nil
 Return Nil
 
-METHOD SetValue( nValue )  CLASS HRadioGroup
+METHOD SetValue(nValue)  CLASS HRadioGroup
 Local nLen
 
    IF ( nLen:=Len(::aButtons) ) > 0 .AND. nValue > 0 .AND. nValue <= nLen

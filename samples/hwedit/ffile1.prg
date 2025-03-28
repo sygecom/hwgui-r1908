@@ -611,7 +611,7 @@ METHOD BufferGet(lForward) CLASS HBMake_FileBase
    IF !lForward
 
       nRead := FSeek(Self:nDosHandle, ;
-                      - ( IIf( ::nposition < pBUFFER_LENGTH, ;
+                      - ( IIf(::nposition < pBUFFER_LENGTH, ;
                       ::nposition, ;
                       pBUFFER_LENGTH) ), ;
                       1)               // rewind backwards

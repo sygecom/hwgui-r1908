@@ -24,7 +24,7 @@ CLASS HCheckButton INHERIT HControl
    METHOD Init()
    METHOD onEvent( msg, wParam, lParam )
    METHOD Refresh()
-   METHOD SetValue( lValue ) INLINE hwg_CheckButton( ::handle,lValue )
+   METHOD SetValue(lValue) INLINE hwg_CheckButton( ::handle,lValue )
    METHOD GetValue() INLINE ::value := hwg_IsButtonChecked(::handle)
 
 ENDCLASS

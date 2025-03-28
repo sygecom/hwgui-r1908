@@ -120,7 +120,7 @@ Local nPos1, aSubMenu
    ENDDO
 Return Nil
 
-Function hwg_GetSubMenuHandle( aMenu,nId )
+Function hwg_GetSubMenuHandle(aMenu, nId)
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 
 Return IIf(aSubMenu == NIL, 0, aSubMenu[5])
@@ -211,7 +211,7 @@ Function hwg_EndMenu()
       hwg_BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != NIL,_oWnd:handle, NIL), ;
                    _oWnd,,IIf(_oWnd != NIL, .F., .T.) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
-         // _oWnd:hAccel := hwg_CreateAcceleratorTable( _aAccel )
+         // _oWnd:hAccel := hwg_CreateAcceleratorTable(_aAccel)
       ENDIF
       _aMenuDef := Nil
       _oBitmap  := Nil
@@ -307,7 +307,7 @@ Function hwg_SearchPosBitmap( nPos_Id )
 Return lBmp
 */ 
 
-Static Function GetMenuByHandle( hWnd )
+Static Function GetMenuByHandle(hWnd)
 Local i, aMenu, oDlg
 
    IF hWnd == Nil
@@ -328,7 +328,7 @@ Return aMenu
 Function CheckMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
-   aMenu := GetMenuByHandle( hWnd )
+   aMenu := GetMenuByHandle(hWnd)
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          hwg_CheckMenuItem( aSubmenu[1,nPos, 5], lValue )
@@ -341,7 +341,7 @@ Return Nil
 Function IsCheckedMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos, lRes := .F.
    
-   aMenu := GetMenuByHandle( hWnd )
+   aMenu := GetMenuByHandle(hWnd)
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          lRes := hwg_IsCheckedMenuItem( aSubmenu[1,nPos, 5] )
@@ -354,7 +354,7 @@ Return lRes
 Function EnableMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
-   aMenu := GetMenuByHandle( IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd) )
+   aMenu := GetMenuByHandle(IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd))
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          hwg_EnableMenuItem( aSubmenu[1,nPos, 5], lValue )
@@ -367,7 +367,7 @@ Return Nil
 Function IsEnabledMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos
 
-   aMenu := GetMenuByHandle( IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd) )
+   aMenu := GetMenuByHandle(IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd))
    IF aMenu != Nil
       IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
          hwg_IsEnabledMenuItem( aSubmenu[1,nPos, 5] )

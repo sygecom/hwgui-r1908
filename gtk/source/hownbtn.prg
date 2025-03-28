@@ -35,7 +35,7 @@ CLASS HOwnButton INHERIT HControl
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init()
    METHOD Paint()
-   METHOD MouseMove( wParam, lParam )
+   METHOD MouseMove(wParam, lParam)
    METHOD MDown()
    METHOD MUp()
    METHOD Press() INLINE ( ::lPress := .T., ::MDown() )
@@ -76,7 +76,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
                      HBitmap():AddFile(IIf(::cPath != NIL, ::cPath + bmp, bmp)))
       IF ::bitmap != Nil .AND. lTr != Nil .AND. lTr
          ::lTransp := .T.
-         hwg_alpha2pixbuf( ::bitmap:handle, IIf(trColor != NIL, trColor, 16777215) )
+         hwg_alpha2pixbuf(::bitmap:handle, IIf(trColor != NIL, trColor, 16777215))
       ENDIF
    ENDIF
    ::xb      := xb
@@ -111,7 +111,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HOwnButton
    ELSEIF msg == WM_LBUTTONUP
       ::MUp()
    ELSEIF msg == WM_MOUSEMOVE
-      ::MouseMove( wParam, lParam )
+      ::MouseMove(wParam, lParam)
    ELSEIF msg == WM_DESTROY
       ::End()
    ENDIF
@@ -191,16 +191,16 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       y1 := IIf(::yt != NIL .AND. ::yt != 0, ::yt, Round((aCoors[4] - aCoors[2] - aMetr[1]) / 2, 0))
       x2 := IIf(::widtht != NIL .AND. ::widtht != 0, ::xt + ::widtht - 1, aCoors[3] - 2)
       y2 := IIf(::heightt != NIL .AND. ::heightt != 0, ::yt + ::heightt - 1, y1 + aMetr[1])
-      // hwg_SetTransparentMode( hDC,.T. )
+      // hwg_SetTransparentMode(hDC, .T.)
       hwg_DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
-      // hwg_SetTransparentMode( hDC,.F. )
+      // hwg_SetTransparentMode(hDC, .F.)
    ENDIF
    // hwg_SetBkColor( hDC,oldBkColor )
    hwg_releaseDC(::handle, hDC)
 
 Return Nil
 
-METHOD MouseMove( wParam, lParam )  CLASS HOwnButton
+METHOD MouseMove(wParam, lParam)  CLASS HOwnButton
 Local lEnter := ( hwg_BitAnd(wParam, 16) > 0 )
 Local res := .F.
 

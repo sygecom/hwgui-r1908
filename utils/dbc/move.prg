@@ -16,10 +16,10 @@
 Static cLocate := "", cFilter := "", cSeek := ""
 Static klrecf := 200
 
-Function Move( nMove )
+Function Move(nMove)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove( nMove ) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove(nMove) }
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndMove(.T., nMove)}   ;
         ON 0,IDCANCEL     ACTION {|| EndMove(.F., nMove) }
@@ -27,7 +27,7 @@ Local aModDlg
 
 Return Nil
 
-Static Function InitMove( nMove )
+Static Function InitMove(nMove)
 Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"" )
    IF nMove == 1
@@ -46,7 +46,7 @@ Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
 Return Nil
 
-Static Function EndMove( lOk, nMove )
+Static Function EndMove(lOk, nMove)
 Local hDlg := hwg_GetModalHandle()
 Local cExpres, nrec, key
 Local hWnd, oWindow, aControls, iCont
@@ -64,13 +64,13 @@ Local hWnd, oWindow, aControls, iCont
          iCont := Ascan( aControls, {|o|o:classname()=="HBROWSE"} )
       ENDIF
       IF nMove == 1
-         F_Locate( aControls[iCont], cExpres )
+         F_Locate(aControls[iCont], cExpres)
       ELSEIF nMove == 2
          cSeek := cExpres
          nrec := RECNO()
-         IF TYPE( ORDKEY() ) == "N"
+         IF TYPE(OrdKey()) == "N"
             key := VAL( cSeek )
-         ELSEIF TYPE( ORDKEY() ) = "D"
+         ELSEIF TYPE(OrdKey()) = "D"
             key := CToD(Trim(cSeek))
          ELSE
             key := cSeek
@@ -98,7 +98,7 @@ Local hWnd, oWindow, aControls, iCont
    EndDialog( hDlg )
 Return Nil
 
-Function F_Locate( oBrw, cExpres )
+Function F_Locate(oBrw, cExpres)
 Local nrec, i, res, block
    cLocate := cExpres
    IF HB_IsLogical( &cLocate )
@@ -124,7 +124,7 @@ Local nrec, i, res, block
             ENDDO
          ENDIF
       ELSE
-         __dbLocate( block,,,, .F. )
+         __dbLocate(block, , , , .F.)
       ENDIF
       IF ( oBrw:prflt .AND. !res ) .OR. ( !oBrw:prflt .AND. !FOUND() )
          GO nrec
@@ -200,7 +200,7 @@ RETURN Nil
 
 FUNCTION FGOBOT( oBrw )
    oBrw:nCurrent := oBrw:nRecords
-   GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf] )
+   GO IIf(oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf])
 RETURN Nil
 
 PROCEDURE FSKIP( oBrw, kolskip )
@@ -209,24 +209,24 @@ LOCAL tekzp1
       RETURN
    ENDIF
    tekzp1   := oBrw:nCurrent
-   oBrw:nCurrent := oBrw:nCurrent + kolskip + IIF( tekzp1 = 0, 1, 0 )
+   oBrw:nCurrent := oBrw:nCurrent + kolskip + IIf(tekzp1 = 0, 1, 0)
    IF oBrw:nCurrent < 1
       oBrw:nCurrent := 0
       GO oBrw:aArray[1]
    ELSEIF oBrw:nCurrent > oBrw:nRecords
       oBrw:nCurrent := oBrw:nRecords + 1
-      GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf] )
+      GO IIf(oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf])
    ELSE
       IF oBrw:nCurrent > klrecf - 1
-         SKIP IIF( tekzp1 = oBrw:nRecords + 1, kolskip + 1, kolskip )
+         SKIP IIf(tekzp1 = oBrw:nRecords + 1, kolskip + 1, kolskip)
       ELSE
          GO oBrw:aArray[oBrw:nCurrent]
       ENDIF
    ENDIF
 RETURN
 
-FUNCTION FBOF( oBrw )
-RETURN IIF( oBrw:nCurrent = 0, .T., .F. )
+FUNCTION FBOF(oBrw)
+RETURN IIf(oBrw:nCurrent = 0, .T., .F.)
 
-FUNCTION FEOF( oBrw )
-RETURN IIF( oBrw:nCurrent > oBrw:nRecords, .T., .F. )
+FUNCTION FEOF(oBrw)
+RETURN IIf(oBrw:nCurrent > oBrw:nRecords, .T., .F.)

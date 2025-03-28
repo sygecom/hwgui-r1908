@@ -78,7 +78,7 @@ ENDFUNC
                Exit
             ENDIF
          ELSE           
-            itemName := CnvCtrlName( hwg_NextItem( stroka,.T. ) )
+            itemName := CnvCtrlName(hwg_NextItem(stroka, .T.))
             IF itemName == Nil
                hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka,.T. ) )
                Return
@@ -101,7 +101,7 @@ ENDFUNC
          ENDIF
       ENDIF
    ENDDO
-   Fclose( han )
+   FClose(han)
 Return
 #ENDSCRIPT
 
@@ -114,8 +114,8 @@ Return
    PRIVATE alen := Len(aControls)
    PRIVATE i
 
-   han := Fcreate( fname )
-   Fwrite( han, "#FORM " + oForm:name &&
+   han := FCreate(fname)
+   FWrite(han, "#FORM " + oForm:name &&
        + ";" + LTrim(Str(oForm:oDlg:nLeft))    &&
        + ";" + LTrim(Str(oForm:oDlg:nTop))     &&
        + ";" + LTrim(Str(oForm:oDlg:nWidth))   &&
@@ -133,7 +133,7 @@ Return
    i := 1
    DO WHILE i <= alen
       oCtrl := aControls[i]
-      stroka := CnvCtrlName( oCtrl:cClass,.T. ) + ";" + RTrim(oCtrl:title) &&
+      stroka := CnvCtrlName(oCtrl:cClass, .T.) + ";" + RTrim(oCtrl:title) &&
           + ";" + LTrim(Str(IIf(oCtrl:id < 34000, oCtrl:id, 0))) &&
           + ";" + LTrim(Str(oCtrl:nLeft))    &&
           + ";" + LTrim(Str(oCtrl:nTop))     &&
@@ -148,10 +148,10 @@ Return
           ,"")  &&
           + ";" + IIf(oCtrl:tcolor != Nil .AND. oCtrl:tcolor != 0, LTrim(Str(oCtrl:tcolor)), "") &&
           + ";" + IIf(oCtrl:bcolor != Nil, Ltrim(Str(oCtrl:bcolor)), "")
-      Fwrite( han, stroka + _Chr(10) )
+      FWrite(han, stroka + _Chr(10))
       i++
    ENDDO
-   Fwrite( han, "#ENDFORM " )
-   Fwrite( han, _Chr(10 ) )
-   Fclose( han )
+   FWrite(han, "#ENDFORM ")
+   FWrite(han, _Chr(10))
+   FClose(han)
 #ENDSCRIPT

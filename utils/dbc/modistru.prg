@@ -105,7 +105,7 @@ Local cName, cType, nLen, nDec := 0
       ENDIF
    ELSEIF nOper == 4
       Adel( oBrowse:aArray,oBrowse:nCurrent )
-      Asize( oBrowse:aArray,Len(oBrowse:aArray) - 1 )
+      ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
       oBrowse:nRecords --
    ENDIF
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -120,12 +120,12 @@ Local oWindow, aControls
 Local oPBar, nSch := 0
 
    IF lNew
-      IF Empty(fname := hwg_SaveFile( "*.dbf","xBase files( *.dbf )", "*.dbf", mypath ))
+      IF Empty(fname := hwg_SaveFile("*.dbf","xBase files( *.dbf )", "*.dbf", mypath))
          Return Nil
       ENDIF
-      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
-      dbCreate( fname, oBrowse:aArray )
-      OpenDbf( fname )
+      mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
+      DBCreate(fname, oBrowse:aArray)
+      OpenDbf(fname)
    ELSE
       alsname := Alias()
       kolf := Fcount()
@@ -136,7 +136,7 @@ Local oPBar, nSch := 0
       AFIELDS( A1, A2, A3, A4 )
       SELECT 20
       fi1 := mypath + "a0_new"
-      dbCreate( fi1, oBrowse:aArray )
+      DBCreate(fi1, oBrowse:aArray)
       USE ( fi1 )
       kolf := Fcount()
       B1   := ARRAY( kolf )
@@ -194,10 +194,10 @@ Local oPBar, nSch := 0
       USE
       fi1 := hwg_Cutexten( msfile[improc] )
       ERASE &(fi1+".bak")
-      FRENAME( fi1 + ".dbf", fi1 + ".bak" )
-      FRENAME( mypath + "a0_new.DBF", fi1 + ".dbf" )
-      IF FILE( mypath + "a0_new.fpt" )
-         FRENAME( mypath + "a0_new.fpt", fi1 + ".fpt" )
+      FRename(fi1 + ".dbf", fi1 + ".bak")
+      FRename(mypath + "a0_new.DBF", fi1 + ".dbf")
+      IF FILE(mypath + "a0_new.fpt")
+         FRename(mypath + "a0_new.fpt", fi1 + ".fpt")
       ENDIF
       SELECT( improc )
       USE (fi1)

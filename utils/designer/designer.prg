@@ -168,7 +168,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
       ENDMENU
       MENU TITLE "&View"
-         MENUITEM "&Object Inspector" ID 1010 ACTION IIf( oDesigner:oDlgInsp==Nil,InspOpen(),oDesigner:oDlgInsp:Close() )
+         MENUITEM "&Object Inspector" ID 1010 ACTION IIf(oDesigner:oDlgInsp == Nil, InspOpen(), oDesigner:oDlgInsp:Close())
     SEPARATOR
          MENUITEM "&Show Grid 5px" ID 1050 ACTION ShowGrid5px()
          MENUITEM "&Show Grid 10px" ID 1052 ACTION ShowGrid10px()
@@ -227,7 +227,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       // : LFB pos
       @ 164, 6 LINE LENGTH 18 VERTICAL
       @ 166, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| IIf( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())} ;
+          ON CLICK {|| IIf(oDesigner:oDlgInsp == Nil, InspOpen(), InspShow())} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smProprie" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Propriedades"
@@ -302,16 +302,16 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       // :END LFB
       SEPARATOR
       IF oDesigner:lReport
-         MENUITEM "Fit into box" ID 1030 ACTION FitLine( GetCtrlSelected(HFormGen():oDlgSelected) )
+         MENUITEM "Fit into box" ID 1030 ACTION FitLine(GetCtrlSelected(HFormGen():oDlgSelected))
          SEPARATOR
       ENDIF
       MENUITEM "Delete" ACTION DeleteCtrl()
       SEPARATOR
-      MENUITEM "Properties" ACTION IIf( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+      MENUITEM "Properties" ACTION IIf(oDesigner:oDlgInsp == Nil, InspOpen(), InspShow())
       MENUITEM "Objetos" ACTION socontroles()
       SEPARATOR
       MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
-           //IIf( oDesigner:oDlgInsp==Nil,InspOpen(), HWG_BRINGWINDOWTOTOP(oDesigner:oDlgInsp:handle) )
+           //IIf(oDesigner:oDlgInsp == Nil, InspOpen(), HWG_BRINGWINDOWTOTOP(oDesigner:oDlgInsp:handle))
 
    ENDMENU
 
@@ -337,7 +337,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          SEPARATOR
       MENUITEM "Delete" ACTION DeleteCtrl()
       SEPARATOR
-      MENUITEM "Properties" ACTION IIf( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+      MENUITEM "Properties" ACTION IIf(oDesigner:oDlgInsp == Nil, InspOpen(), InspShow())
       MENUITEM "Objetos" ACTION socontroles()
       SEPARATOR
       MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
@@ -348,7 +348,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       MENUITEM "Paste" ACTION oDesigner:addItem := oDesigner:oClipbrd
       MENUITEM "Preview" ACTION DoPreview()
       SEPARATOR
-      MENUITEM "Properties" ACTION IIf( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+      MENUITEM "Properties" ACTION IIf(oDesigner:oDlgInsp == Nil, InspOpen(), InspShow())
       MENUITEM "Objetos" ACTION socontroles()
       SEPARATOR
       MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
@@ -565,19 +565,19 @@ STATIC FUNCTION BuildSet( oTab )
       aSet := oDesigner:oWidgetsSet:aItems[1]:aItems
       FOR i := 1 TO Len(aSet)
          IF aSet[i]:title == "set"
-            oTab:StartPage( aSet[i]:GetAttribute( "name" ) )
+            oTab:StartPage(aSet[i]:GetAttribute("name"))
             x1 := 4
             FOR j := 1 TO Len(aSet[i]:aItems)
                IF aSet[i]:aItems[j]:title == "widget"
                   oWidget := aSet[i]:aItems[j]
-                  cText := oWidget:GetAttribute( "text" )
-                  cBmp := oWidget:GetAttribute( "bmp" )
+                  cText := oWidget:GetAttribute("text")
+                  cBmp := oWidget:GetAttribute("bmp")
                   IF cText != Nil .OR. cBmp != Nil
                     oButton := HOwnButton():New( ,,,x1, 32, 30, 26, ;
                                ,,,{|o,id|ClickBtn(o,id)},.T.,    ;
                                cText,,,,,,,                      ;
                                cBmp,At(".",cBmp)==0,,,,,.F.,,    ;
-                               oWidget:GetAttribute( "name" ) )
+                               oWidget:GetAttribute("name") )
                     oButton:cargo := oWidget
                     x1 += 30
                   ENDIF
@@ -642,7 +642,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
    LOCAL y1
    LOCAL oBtn
 
-   oTab:Move( ,, x-6, y-33 )
+   oTab:Move(, , x - 6, y - 33)
    FOR i := 1 TO Len(oTab:aControls)
       oBtn := oTab:aControls[i]
       IF oBtn:Classname == "HOWNBUTTON"
@@ -651,7 +651,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
             y1 := 32
          ELSE
             IF oBtn:nLeft != x1 .OR. oBtn:nTop != y1
-               oBtn:Move( x1, y1 )
+               oBtn:Move(x1, y1)
             ENDIF
          ENDIF
          x1 += 30
@@ -721,7 +721,7 @@ FUNCTION FindWidget( cClass )
    NEXT
 Return Nil
 
-Function Evalcode( xCode )
+Function Evalcode(xCode)
    
    LOCAL nLines
 
@@ -747,7 +747,7 @@ STATIC FUNCTION CreateIni( oIni )
 
    oNode:Add(HXMLNode():New("widgetset", , , "widgets.xml"))
 
-   oIni:Save( "designer.iml" )
+   oIni:Save("designer.iml")
 Return Nil
 
 FUNCTION AddRecent( oForm )
@@ -793,7 +793,7 @@ STATIC FUNCTION EndIde()
      ENDIF
   ENDIF
   IF !oDesigner:lSingleForm .AND. ( oDesigner:lChgRecent .OR. oDesigner:lChgPath .OR. .T. )
-     critem := IIf( oDesigner:lReport, "rep_recent", "recent" )
+     critem := IIf(oDesigner:lReport, "rep_recent", "recent")
      oIni := HXMLDoc():Read(cCurDir + "Designer.iml")
      IF oDesigner:lChgPath
         i := 1
@@ -826,7 +826,7 @@ STATIC FUNCTION EndIde()
            oIni:aItems[1]:aItems[i] := oNode
         ENDIF
 
-     oIni:Save( cCurDir+"Designer.iml" )
+     oIni:Save(cCurDir + "Designer.iml")
   ENDIF
   IF lRes
      oDesigner:oCtrlMenu:End()
@@ -913,7 +913,7 @@ Function InspShow()
 
    MEMVAR oDesigner
 
-  IIf( oDesigner:oDlgInsp==Nil,InspOpen(),oDesigner:oDlgInsp:show() )
+  IIf(oDesigner:oDlgInsp == Nil, InspOpen(), oDesigner:oDlgInsp:show())
    HWG_BRINGWINDOWTOTOP(oDesigner:oDlgInsp:handle)
 RETURN NIL
 

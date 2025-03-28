@@ -39,11 +39,11 @@ Return Nil
 Static Function InitOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
-   hwg_SetWindowText( hDlg, Iif( lOpen,"Open report","Save report" ) )
+   hwg_SetWindowText( hDlg, IIf(lOpen, "Open report", "Save report"))
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
-Static Function BrowFile( lOpen )
+Static Function BrowFile(lOpen)
 Local hDlg := hwg_GetModalHandle()
 Local fname, s1, s2
    IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1)
@@ -54,9 +54,9 @@ Local fname, s1, s2
       s2 := "*.prg"
    ENDIF
    IF lOpen
-      fname := hwg_SelectFile( s1, s2,mypath )
+      fname := hwg_SelectFile(s1, s2, mypath)
    ELSE
-      fname := hwg_SaveFile( s2,s1,s2,mypath )
+      fname := hwg_SaveFile(s2, s1, s2, mypath)
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
@@ -72,7 +72,7 @@ Local res := .T.
       repName := GetEditText( hDlg, IDC_EDIT2 )
 
       IF lOpen
-         IF ( res := OpenFile( fname,@repName ) )
+         IF ( res := OpenFile(fname, @repName) )
             aPaintRep[FORM_Y] := 0
             hwg_EnableMenuItem( , 1, .T., .F. )
             hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
@@ -81,7 +81,7 @@ Local res := .T.
             hwg_EnableMenuItem( , 1, .F., .F. )
          ENDIF
       ELSE
-         res := SaveRFile( fname,repName )
+         res := SaveRFile(fname, repName)
          aPaintRep[FORM_FILENAME] := fname
          aPaintRep[FORM_REPNAME] := repName
       ENDIF
@@ -125,12 +125,12 @@ Local fname
    IF Empty(aPaintRep[FORM_FILENAME])
       FileDlg( .F. )
    ELSE
-      SaveRFile( aPaintRep[FORM_FILENAME], aPaintRep[FORM_REPNAME] )
+      SaveRFile(aPaintRep[FORM_FILENAME], aPaintRep[FORM_REPNAME])
    ENDIF
 
 Return Nil
 
-Static Function OpenFile( fname,repName )
+Static Function OpenFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han := FOPEN( fname, FO_READ + FO_SHARED )
 Local i, itemName, aItem, res := .T., sFont
@@ -222,7 +222,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), 0,Nil,Nil, 0, 0,Nil, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_BITMAP] := HBitmap():AddFile( aItem[ITEM_CAPTION] )
+                  aItem[ITEM_BITMAP] := HBitmap():AddFile(aItem[ITEM_CAPTION])
                   IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -254,7 +254,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                nMode := 11
             ELSE
                hwg_MsgStop( "Wrong function "+repname )
-               Fclose( han )
+               FClose(han)
                Return .F.
             ENDIF
          ELSEIF nMode == 11
@@ -272,7 +272,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
             ENDIF
          ENDIF
       ENDDO
-      Fclose( han )
+      FClose(han)
    ELSE
       hwg_MsgStop( "Can't open "+fname )
       Return .F.
@@ -298,15 +298,15 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
    ENDIF
 Return res
 
-Static Function SaveRFile( fname,repName )
+Static Function SaveRFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han, hanOut, isOut := .F., res := .F.
 Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
 
-   IF File( fname )
+   IF File(fname)
       han := FOPEN( fname, FO_READWRITE + FO_EXCLUSIVE )
       IF han != - 1
-         hanOut := FCREATE( mypath+"__rpt.tmp" )
+         hanOut := FCreate(mypath + "__rpt.tmp")
          IF hanOut != - 1
             DO WHILE .T.
                stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
@@ -323,7 +323,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                         LOOP
                      ENDIF
                   ENDIF
-                  Fwrite( hanOut,stroka+Iif(Asc(Right(stroka, 1))<20,"",Chr(10)) )
+                  FWrite(hanOut, stroka + IIf(Asc(Right(stroka, 1)) < 20, "", Chr(10)))
                ELSEIF nMode == 1
                   IF ( lPrg .AND. Left(stroka, 6) == "RETURN" ) ;
                       .OR. ( !lPrg .AND. Left(stroka, 1) == "#" .AND. ;
@@ -338,40 +338,40 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
                ENDIF
             ENDDO
             IF isOut
-               Fclose( hanOut )
-               Fclose( han )
-               IF Ferase( fname ) == -1 .OR. Frename( mypath+"__rpt.tmp",fname ) == -1
+               FClose(hanOut)
+               FClose(han)
+               IF FErase(fname) == -1 .OR. FRename(mypath + "__rpt.tmp", fname) == -1
                   hwg_MsgStop( "Can't rename __rpt.tmp" )
                ELSE
                   res := .T.
                ENDIF
             ELSE
-               Fseek( han, 0, FS_END )
-               Fwrite( han, Chr(10 ) )
+               FSeek( han, 0, FS_END )
+               FWrite(han, Chr(10))
                IF lPrg
                   WriteToPrg( han, repName )
                ELSE
                   WriteRep( hanOut, repName )
                ENDIF
-               Fclose( hanOut )
-               Fclose( han )
+               FClose(hanOut)
+               FClose(han)
                res := .T.
             ENDIF
          ELSE
             hwg_MsgStop( "Can't create __rpt.tmp" )
-            Fclose( han )
+            FClose(han)
          ENDIF
       ELSE
          hwg_MsgStop( "Can't open "+fname )
       ENDIF
    ELSE
-      han := Fcreate( fname )
+      han := FCreate(fname)
       IF lPrg
          WriteToPrg( han, repName )
       ELSE
          WriteRep( han, repName )
       ENDIF
-      Fclose( han )
+      FClose(han)
       res := .T.
    ENDIF
    IF res
@@ -387,46 +387,46 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
    aMetr := hwg_GetDeviceArea(hDCwindow)
    ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
-   Fwrite( han, "#REPORT "+repName+Chr(10) )
-   Fwrite( han, "FORM;"+ Ltrim(Str(aPaintRep[FORM_WIDTH])) + ";" + ;
-                         Ltrim(Str(aPaintRep[FORM_HEIGHT])) + ";" + ;
-                         Ltrim(Str(aMetr[1]-XINDENT)) + Chr(10) )
+   FWrite(han, "#REPORT " + repName + Chr(10))
+   FWrite(han, "FORM;" + LTrim(Str(aPaintRep[FORM_WIDTH])) + ";" + ;
+                         LTrim(Str(aPaintRep[FORM_HEIGHT])) + ";" + ;
+                         LTrim(Str(aMetr[1] - XINDENT)) + Chr(10))
    WriteScript( han,aPaintRep[FORM_VARS] )
 
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       aItem := aPaintRep[FORM_ITEMS,i]
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          oFont := aItem[ITEM_FONT]
-         Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) +;
+         FWrite(han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
+             LTrim(Str(aItem[ITEM_X1], 4)) + ";" + LTrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             LTrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + LTrim(Str(aItem[ITEM_HEIGHT], 4)) +;
              ";" + Str(aItem[ITEM_ALIGN], 1) + ";" + oFont:name ;
-             + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)) ;
-             + "," + Ltrim(Str(oFont:weight)) + "," + Ltrim(Str(oFont:charset)) ;
-             + "," + Ltrim(Str(oFont:italic)) + "," + Ltrim(Str(oFont:underline)) ;
-             + "," + Ltrim(Str(oFont:strikeout)) + ";" + Str(aItem[ITEM_VAR], 1) + Chr(10) )
+             + "," + LTrim(Str(oFont:width)) + "," + LTrim(Str(oFont:height)) ;
+             + "," + LTrim(Str(oFont:weight)) + "," + LTrim(Str(oFont:charset)) ;
+             + "," + LTrim(Str(oFont:italic)) + "," + LTrim(Str(oFont:underline)) ;
+             + "," + LTrim(Str(oFont:strikeout)) + ";" + Str(aItem[ITEM_VAR], 1) + Chr(10))
          WriteScript( han,aItem[ITEM_SCRIPT] )
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE .OR. aItem[ITEM_TYPE] == TYPE_VLINE .OR. aItem[ITEM_TYPE] == TYPE_BOX
          oPen := aItem[ITEM_PEN]
-         Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
-             ";" + Ltrim(Str(oPen:style)) + "," + Ltrim(Str(oPen:width)) + "," + Ltrim(Str(oPen:color)) ;
-             + Chr(10) )
+         FWrite(han, aItemTypes[aItem[ITEM_TYPE]] + ";" + ;
+             LTrim(Str(aItem[ITEM_X1], 4)) + ";" + LTrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             LTrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + LTrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
+             ";" + LTrim(Str(oPen:style)) + "," + LTrim(Str(oPen:width)) + "," + LTrim(Str(oPen:color)) ;
+             + Chr(10))
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
-         Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
-             + Chr(10) )
+         FWrite(han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
+             LTrim(Str(aItem[ITEM_X1], 4)) + ";" + LTrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             LTrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + LTrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
+             + Chr(10))
       ELSEIF aItem[ITEM_TYPE] == TYPE_MARKER
-         Fwrite( han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
-             Ltrim(Str(aItem[ITEM_X1], 4)) + ";" + Ltrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
-             Ltrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
-             ";" + Str(aItem[ITEM_ALIGN], 1) + Chr( 10 ) )
+         FWrite(han, aItemTypes[aItem[ITEM_TYPE]] + ";" + aItem[ITEM_CAPTION] + ";" + ;
+             LTrim(Str(aItem[ITEM_X1], 4)) + ";" + LTrim(Str(aItem[ITEM_Y1], 4)) + ";" + ;
+             LTrim(Str(aItem[ITEM_WIDTH], 4)) + ";" + LTrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
+             ";" + Str(aItem[ITEM_ALIGN], 1) + Chr(10))
          WriteScript( han,aItem[ITEM_SCRIPT] )
       ENDIF
    NEXT
-   Fwrite( han, "#ENDREP "+Chr(10) )
+   FWrite(han, "#ENDREP "+Chr(10))
 Return Nil
 
 Static Function WriteToPrg( han, repName )
@@ -436,13 +436,13 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
    aMetr := hwg_GetDeviceArea(hDCwindow)
    ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
-   Fwrite( han, "FUNCTION " + repName + Chr(10) + ;
-         "LOCAL aPaintRep" + Chr(10) )
-   Fwrite( han, "   cEnd:=Chr(13)+Chr(10)" + Chr(10) )
-   Fwrite( han, "   aPaintRep := { "+Ltrim(Str(aPaintRep[FORM_WIDTH]))+","+ ;
-         Ltrim(Str(aPaintRep[FORM_HEIGHT]))+', 0, 0, 0,{},,"'+repName+'",.F., 0,Nil }'+Chr(10) )
+   FWrite(han, "FUNCTION " + repName + Chr(10) + ;
+         "LOCAL aPaintRep" + Chr(10))
+   FWrite(han, "   cEnd:=Chr(13)+Chr(10)" + Chr(10))
+   FWrite(han, "   aPaintRep := { " + LTrim(Str(aPaintRep[FORM_WIDTH])) + "," + ;
+         LTrim(Str(aPaintRep[FORM_HEIGHT])) + ', 0, 0, 0,{},,"' + repName + '", .F., 0, Nil }' + Chr(10))
    IF aPaintRep[FORM_VARS] != Nil .AND. !Empty(aPaintRep[FORM_VARS])
-      Fwrite( han, "   aPaintRep[11] := ;"+Chr(10) )
+      FWrite(han, "   aPaintRep[11] := ;" + Chr(10))
       WriteScript( han,aPaintRep[FORM_VARS],.T. )
    ENDIF
 
@@ -478,15 +478,15 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
          cItem += ",0,0"
       ENDIF
       cItem += ",0,Nil,0"
-      Fwrite( han, "   AAdd(aPaintRep[6], { " + cItem + " })" + Chr(10) )
+      FWrite(han, "   AAdd(aPaintRep[6], { " + cItem + " })" + Chr(10))
 
       IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
-         Fwrite( han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;"+Chr(10) )
+         FWrite(han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;" + Chr(10))
          WriteScript( han,aItem[ITEM_SCRIPT],.T. )
       ENDIF
    NEXT
-   Fwrite( han, "   hwg_RecalcForm( aPaintRep,"+Ltrim(Str(aMetr[1]-XINDENT))+" )"+Chr(10) )
-   Fwrite( han, "RETURN hwg_SetPaintRep( aPaintRep )"+Chr(10) )
+   FWrite(han, "   hwg_RecalcForm( aPaintRep," + LTrim(Str(aMetr[1] - XINDENT)) + " )" + Chr(10))
+   FWrite(han, "RETURN hwg_SetPaintRep( aPaintRep )" + Chr(10))
 Return Nil
 
 Static Function WriteScript( han,cScript,lPrg )
@@ -496,13 +496,13 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
    IF lPrg == Nil; lPrg := .F.; ENDIF
    IF cScript != Nil .AND. !Empty(cScript)
       IF !lPrg
-         Fwrite( han,"#SCRIPT"+Chr(10) )
+         FWrite(han, "#SCRIPT" + Chr(10))
       ENDIF
       DO WHILE .T.
          stroka := hwg_RDSTR(, cScript, @poz)
          IF Len(stroka) = 0
             IF lPrg
-               Fwrite( han,Chr(10) )
+               FWrite(han, Chr(10))
             ENDIF
             EXIT
          ENDIF
@@ -510,17 +510,17 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
             IF lPrg
                cQuote := Iif(!( '"' $ stroka),'"', ;
                            Iif(!( "'" $ stroka),"'","["))
-               Fwrite( han,Iif(lFirst,"",";"+Chr(10))+Space(5)+;
-                     Iif(lFirst,"","+ ")+cQuote+stroka+cQuote+"+cEnd" )
+               FWrite(han, IIf(lFirst, "", ";" + Chr(10)) + Space(5) + ;
+                     IIf(lFirst, "", "+ ") + cQuote + stroka + cQuote + "+cEnd")
                lFirst := .F.
             ELSE
-               Fwrite( han,Iif( Asc(lastC)<20,"",Chr(10) )+stroka )
+               FWrite(han, IIf(Asc(lastC) < 20, "", Chr(10)) + stroka)
                lastC := Right(stroka, 1)
             ENDIF
          ENDIF
       ENDDO
       IF !lPrg
-         Fwrite( han, Iif( Asc(lastC)<20,"",Chr(10) )+"#ENDSCRIPT"+Chr(10) )
+         FWrite(han, IIf(Asc(lastC) < 20, "", Chr(10)) + "#ENDSCRIPT" + Chr(10))
       ENDIF
    ENDIF
 Return Nil

@@ -28,7 +28,7 @@ CLASS HPrinter INHERIT HObject
    DATA nZoom, xOffset, yOffset, x1, y1, x2, y2
 
    METHOD New( cPrinter,lmm )
-   METHOD SetMode( nOrientation )
+   METHOD SetMode(nOrientation)
    METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline )
    METHOD SetFont( oFont )
    METHOD StartDoc(lPreview, cFileName)
@@ -37,11 +37,11 @@ CLASS HPrinter INHERIT HObject
    METHOD EndPage()
    METHOD End()
    METHOD Box( x1,y1,x2,y2,oPen )
-   METHOD Line( x1,y1,x2,y2,oPen )
+   METHOD Line(x1, y1, x2, y2, oPen)
    METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont )
    METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap )
    METHOD Preview() INLINE Nil
-   METHOD GetTextWidth( cString, oFont ) INLINE hwg_gp_GetTextSize( ::hDC,cString,IIf(oFont == NIL, NIL, oFont:handle) )
+   METHOD GetTextWidth( cString, oFont ) INLINE hwg_gp_GetTextSize(::hDC, cString, IIf(oFont == NIL, NIL, oFont:handle))
 
 ENDCLASS
 
@@ -75,11 +75,11 @@ Local aPrnCoors
 
 Return Self
 
-METHOD SetMode( nOrientation ) CLASS HPrinter
+METHOD SetMode(nOrientation) CLASS HPrinter
 Local x
 
    IF ( nOrientation == 1 .OR. nOrientation == 2 ) .AND. nOrientation != ::nOrient
-      hwg_SetPrinterMode( ::hDC, nOrientation )
+      hwg_SetPrinterMode(::hDC, nOrientation)
       x := ::nHRes
       ::nHRes := ::nVRes
       ::nVRes := x
@@ -137,11 +137,11 @@ METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
       y1 *= ::nVRes
       y2 *= ::nVRes
    ENDIF
-   hwg_gp_Rectangle( ::hDC,x1,y2,x2,y1 )   
+   hwg_gp_Rectangle(::hDC, x1, y2, x2, y1)
 
 Return Nil
 
-METHOD Line( x1,y1,x2,y2,oPen ) CLASS HPrinter
+METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
    IF oPen != Nil
       hwg_gp_SetLineWidth( ::hDC,oPen:width )
@@ -159,7 +159,7 @@ METHOD Line( x1,y1,x2,y2,oPen ) CLASS HPrinter
       y2 *= ::nVRes
    ENDIF
 
-   hwg_gp_DrawLine( ::hDC,x1,y2,x2,y1 )
+   hwg_gp_DrawLine(::hDC, x1, y2, x2, y1)
 
 Return Nil
 
@@ -211,7 +211,7 @@ METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
 
    hwg_StartDoc(::hDC)
    IF cFileName != Nil
-      hwg_gp_ToFile( ::hDC,cFileName )
+      hwg_gp_ToFile(::hDC, cFileName)
    ENDIF
    ::nPage := 0
 Return Nil
@@ -223,13 +223,13 @@ Return Nil
 
 METHOD StartPage() CLASS HPrinter
 
-   hwg_StartPage( ::hDC )
+   hwg_StartPage(::hDC)
    ::nPage ++
 Return Nil
 
 METHOD EndPage() CLASS HPrinter
 
-   hwg_EndPage( ::hDC )
+   hwg_EndPage(::hDC)
 Return Nil
 
 
@@ -253,11 +253,11 @@ ENDCLASS
 METHOD Add(fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline) CLASS HGP_Font
 Local i, nlen := Len(::aFonts)
 
-   nHeight  := Iif( nHeight==Nil, 13,Abs(nHeight) )
+   nHeight  := IIf(nHeight == Nil, 13, Abs(nHeight))
    nHeight -= 1
-   fnWeight := Iif( fnWeight==Nil, 0,fnWeight )
-   fdwItalic := Iif( fdwItalic==Nil, 0,fdwItalic )
-   fdwUnderline := Iif( fdwUnderline==Nil, 0,fdwUnderline )
+   fnWeight := IIf(fnWeight == Nil, 0, fnWeight)
+   fdwItalic := IIf(fdwItalic == Nil, 0, fdwItalic)
+   fdwUnderline := IIf(fdwUnderline == Nil, 0, fdwUnderline)
 
    For i := 1 TO nlen
       IF ::aFonts[i]:name == fontName .AND.          ;
@@ -300,7 +300,7 @@ Local i, nlen := Len(::aFonts)
 
    IF lAll != Nil .AND. lAll
       For i := 1 TO nlen
-         /* hwg_gp_release( ::aFonts[i]:handle ) */
+         /* hwg_gp_release(::aFonts[i]:handle) */
       NEXT
       ::aFonts := {}
       Return Nil
@@ -309,7 +309,7 @@ Local i, nlen := Len(::aFonts)
    IF ::nCounter == 0
       For i := 1 TO nlen
          IF ::aFonts[i]:handle == ::handle
-            hwg_gp_release( ::handle )
+            hwg_gp_release(::handle)
             ADel(::aFonts, i)
             ASize(::aFonts, nlen - 1)
             Exit
@@ -332,7 +332,7 @@ ENDCLASS
 METHOD Add(nWidth) CLASS HGP_Pen
 Local i
 
-   nWidth := Iif( nWidth == Nil, 1,nWidth )
+   nWidth := IIf(nWidth == Nil, 1, nWidth)
 
    FOR i := 1 TO Len(::aPens)
       IF ::aPens[i]:width == nWidth

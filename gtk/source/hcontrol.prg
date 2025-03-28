@@ -32,13 +32,13 @@ CLASS HControl INHERIT HCustomWindow
    DATA Anchor          INIT 0
    DATA   xName           HIDDEN
    ACCESS Name INLINE ::xName
-   ASSIGN Name( cName ) INLINE ::AddName( cName ) 
+   ASSIGN Name(cName) INLINE ::AddName(cName)
 
 
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
                   bSize,bPaint,ctoolt,tcolor,bcolor )
    METHOD Init()
-   METHOD AddName( cName ) HIDDEN
+   METHOD AddName(cName) HIDDEN
    METHOD SetColor( tcolor,bcolor,lRepaint )
    METHOD NewId()
 
@@ -46,7 +46,7 @@ CLASS HControl INHERIT HCustomWindow
    METHOD Enable() INLINE hwg_EnableWindow( ::handle, .T. )
    METHOD IsEnabled() INLINE hwg_IsWindowEnabled(::Handle)
    METHOD SetFocus() INLINE hwg_EnableWindow( ::handle, .T. )
-   METHOD Move( x1,y1,width,height )
+   METHOD Move(x1, y1, width, height)
    /*
    METHOD GetText() INLINE hwg_GetWindowText(::handle)
    METHOD SetText( c ) INLINE hwg_SetWindowText( ::Handle, c )
@@ -88,7 +88,7 @@ Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
    ENDIF
 Return nId
 
-METHOD AddName( cName ) CLASS HControl
+METHOD AddName(cName) CLASS HControl
 
    IF !Empty(cName) .AND. HB_IsChar( cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
@@ -150,7 +150,7 @@ METHOD SetColor( tcolor,bcolor,lRepaint ) CLASS HControl
 
 Return Nil
 
-METHOD Move( x1,y1,width,height,lMoveParent )  CLASS HControl
+METHOD Move(x1, y1, width, height, lMoveParent)  CLASS HControl
 Local lMove := .F., lSize := .F.
 
    IF x1 != Nil .AND. x1 != ::nLeft
@@ -274,7 +274,7 @@ METHOD onAnchor( x, y, w, h ) CLASS HControl
       y1 := y9
    ENDIF
    hwg_InvalidateRect( ::oParent:handle, 1, ::nLeft, ::nTop, ::nWidth, ::nHeight )
-   ::Move( ::handle, x1, y1, w1, h1 )
+   ::Move(::handle, x1, y1, w1, h1)
    ::nLeft := x1
    ::nTop := y1
    ::nWidth := w1

@@ -177,7 +177,7 @@ ENDFUNC
       ENDIF
     ENDIF
   ENDDO
-  Fclose( han )
+  FClose(han)
   arr := ASort(arr, , , {|z, y|z[3] < y[3] .OR. (z[3] == y[3] .AND. z[2] < y[2]) .OR. (z[3] == y[3] .AND. z[2] == y[2] .AND. (z[4] > y[4] .OR. z[5] > y[5]))})
   IF ( j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) > 1
     AAdd(arr,Nil)
@@ -203,8 +203,8 @@ ENDFUNC
     x2      := Round((arr[i, 2] + arr[i, 4] - 1) * xKoef, 2)
     y2      := Round((arr[i, 3] + arr[i, 5] - 1) * xKoef, 2)
     IF arr[i, 1] == "area"
-      cCaption := IIf( arr[i, 7]=="PH","PageHeader",IIf( arr[i, 7]=="SL", ;
-          "Table",IIf( arr[i, 7]=="PF","PageFooter",IIf( arr[i, 7]=="DH","DocHeader","DocFooter" ) ) ) )
+      cCaption := IIf(arr[i, 7] == "PH", "PageHeader", IIf(arr[i, 7] == "SL", ;
+          "Table", IIf(arr[i, 7] == "PF", "PageFooter", IIf(arr[i, 7] == "DH", "DocHeader", "DocFooter"))))
       oArea := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],"area",  ;
        { { "Left","0" }, { "Top",LTrim(Str(y)) }, { "Width",cWidth }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",cWidth }, { "Bottom",LTrim(Str(y2)) }, { "AreaType",cCaption } } )

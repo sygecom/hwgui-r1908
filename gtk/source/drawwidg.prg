@@ -311,14 +311,14 @@ CLASS HBitmap INHERIT HObject
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-   METHOD AddResource( name )
-   METHOD AddFile( name,HDC )
+   METHOD AddResource(name)
+   METHOD AddFile(name, HDC)
    METHOD AddWindow( oWnd,lFull )
    METHOD Release()
 
 ENDCLASS
 
-METHOD AddResource( name ) CLASS HBitmap
+METHOD AddResource(name) CLASS HBitmap
 Local lPreDefined := .F., i, aBmpSize
 
    IF HB_IsNumeric(name)
@@ -343,7 +343,7 @@ Local lPreDefined := .F., i, aBmpSize
    ::handle :=   hwg_LoadBitmap( IIf(lPreDefined, Val(name), name) )
    IF !Empty(::handle)
       ::name   := name
-      aBmpSize  := hwg_GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize(::handle)
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
@@ -353,7 +353,7 @@ Local lPreDefined := .F., i, aBmpSize
 
 Return Self
 
-METHOD AddFile( name,HDC ) CLASS HBitmap
+METHOD AddFile(name, HDC) CLASS HBitmap
 Local i, aBmpSize
 
    #ifdef __XHARBOUR__
@@ -371,10 +371,10 @@ Local i, aBmpSize
       ENDIF
    NEXT
    #endif
-   ::handle := hwg_OpenImage( name )
+   ::handle := hwg_OpenImage(name)
    IF !Empty(::handle)
       ::name := name
-      aBmpSize  := hwg_GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize(::handle)
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
@@ -389,7 +389,7 @@ Local i, aBmpSize
 
    // ::handle := hwg_Window2Bitmap( oWnd:handle,lFull )
    ::name := LTrim(Str(oWnd:handle))
-   aBmpSize  := hwg_GetBitmapSize( ::handle )
+   aBmpSize  := hwg_GetBitmapSize(::handle)
    ::nWidth  := aBmpSize[1]
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, Self)
@@ -434,13 +434,13 @@ CLASS HIcon INHERIT HObject
    DATA nCounter   INIT 1
    DATA nWidth, nHeight
 
-   METHOD AddResource( name )
-   METHOD AddFile( name,HDC )
+   METHOD AddResource(name)
+   METHOD AddFile(name, HDC)
    METHOD Release()
 
 ENDCLASS
 
-METHOD AddResource( name ) CLASS HIcon
+METHOD AddResource(name) CLASS HIcon
 Local lPreDefined := .F., i
 
    IF HB_IsNumeric(name)
@@ -468,7 +468,7 @@ Local lPreDefined := .F., i
 
 Return Self
 
-METHOD AddFile( name ) CLASS HIcon
+METHOD AddFile(name) CLASS HIcon
 Local i, aBmpSize
 
 #ifdef __XHARBOUR__
@@ -486,16 +486,16 @@ Local i, aBmpSize
       ENDIF
    NEXT
 #endif
-//   ::handle := hwg_LoadImage( 0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE+LR_LOADFROMFILE )
-//   ::handle := hwg_OpenImage( name )
+//   ::handle := hwg_LoadImage(0, name, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE + LR_LOADFROMFILE)
+//   ::handle := hwg_OpenImage(name)
 //   ::name := name
 //   AAdd(::aIcons, Self)
 //  Tracelog("name = ",name)
-   ::handle := hwg_OpenImage( name )
+   ::handle := hwg_OpenImage(name)
 //   tracelog("handle = ",::handle)
    IF !Empty(::handle)
       ::name := name
-      aBmpSize  := hwg_GetBitmapSize( ::handle )
+      aBmpSize  := hwg_GetBitmapSize(::handle)
       ::nWidth  := aBmpSize[1]
       ::nHeight := aBmpSize[2]
       AAdd(::aIcons, Self)

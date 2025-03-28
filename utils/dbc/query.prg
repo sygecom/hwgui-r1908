@@ -17,10 +17,10 @@ memvar mypath, numdriv
 Static cQuery := ""
 
 Function OpenQuery
-Local fname := hwg_SelectFile( "Query files( *.que )", "*.que", mypath )
+Local fname := hwg_SelectFile("Query files( *.que )", "*.que", mypath)
 
    IF !Empty(fname)
-      mypath := "\" + CurDir() + IIF( Empty(CurDir()), "", "\" )
+      mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       cQuery := MemoRead(fname)
       Query( .T. )
    ENDIF
@@ -70,7 +70,7 @@ Static lConnected := .F.
 #ifdef RDD_ADS
       IF !lConnected
          IF Empty(mypath)
-            AdsConnect( "\" + CurDir() + IIF( Empty(CurDir()), "", "\" ) )
+            AdsConnect( "\" + CurDir() + IIf(Empty(CurDir()), "", "\") )
          ELSE
             AdsConnect( mypath )
          ENDIF
@@ -82,7 +82,7 @@ Static lConnected := .F.
       ELSE
          SELECT 0
       ENDIF
-      IF !AdsCreateSqlStatement( ,Iif( numdriv==1, 2, 3 ) )
+      IF !AdsCreateSqlStatement( ,IIf(numdriv == 1, 2, 3) )
          hwg_MsgStop( "Cannot create SQL statement" )
          IF !Empty(oldArea)
             Select( oldArea )
@@ -102,14 +102,14 @@ Static lConnected := .F.
             tmpdriv := numdriv; tmprdonly := prrdonly
             numdriv := 3; prrdonly := .T.
             // Fiopen()
-            nQueryWndHandle := OpenDbf( ,"ADSSQL",nQueryWndHandle )
+            nQueryWndHandle := OpenDbf(, "ADSSQL", nQueryWndHandle)
             numdriv := tmpdriv; prrdonly := tmprdonly
             /*
             SET CHARTYPE TO ANSI
             __dbCopy( mypath+"_dbc_que.dbf",,,,,, .F. )
             SET CHARTYPE TO OEM
             FiClose()
-            nQueryWndHandle := OpenDbf( mypath+"_dbc_que.dbf","ADSSQL",nQueryWndHandle )
+            nQueryWndHandle := OpenDbf(mypath + "_dbc_que.dbf", "ADSSQL", nQueryWndHandle)
             */
          ELSE
             IF !Empty(oldArea)
@@ -126,7 +126,7 @@ Static lConnected := .F.
 Return .T.
 
 Function QuerySave
-Local fname := hwg_SaveFile( "*.que","Query files( *.que )", "*.que", mypath )
+Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
    cQuery := GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
    IF !Empty(fname)
       MemoWrit( fname,cQuery )

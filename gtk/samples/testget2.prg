@@ -101,11 +101,11 @@ Return Nil
 Static Function SetTimer( oDlg,oTimer )
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
-//   writelog( valtype( oTimer ) )
+//   writelog( ValType(oTimer) )
 Return Nil
 
 Static Function TimerFunc()
 
-   oSayT:SetValue( Time() )
+   oSayT:SetValue(Time())
 Return Nil
 

@@ -34,12 +34,12 @@ CLASS HTab INHERIT HControl
    METHOD Activate()
    METHOD Init()
    METHOD SetTab(n)
-   METHOD StartPage( cname )
+   METHOD StartPage(cname)
    METHOD EndPage()
-   METHOD ChangePage( nPage )
-   METHOD HidePage( nPage )
-   METHOD ShowPage( nPage )
-   METHOD GetActivePage( nFirst,nEnd )
+   METHOD ChangePage(nPage)
+   METHOD HidePage(nPage)
+   METHOD ShowPage(nPage)
+   METHOD GetActivePage(nFirst, nEnd)
 
    HIDDEN:
      DATA  nActive  INIT 0         // Active Page
@@ -91,17 +91,17 @@ Local i, h
       hwg_SetWindowObject( ::handle,Self )
 
       FOR i := 2 TO Len(::aPages)
-         ::HidePage( i )
+         ::HidePage(i)
       NEXT
    ENDIF
 
 Return Nil
 
 METHOD SetTab(n) CLASS HTab
-   hwg_SendMessage( ::handle, TCM_SETCURFOCUS, n-1, 0 )
+   hwg_SendMessage(::handle, TCM_SETCURFOCUS, n - 1, 0)
 Return Nil
 
-METHOD StartPage( cname ) CLASS HTab
+METHOD StartPage(cname) CLASS HTab
 Local i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
 Local lNew := ( i == 0 )
 
@@ -123,7 +123,7 @@ METHOD EndPage() CLASS HTab
 
    ::aPages[::nActive, 2] := Len(::aControls) - ::aPages[::nActive, 1]
    IF ::nActive > 1 .AND. ::handle != Nil .AND. !Empty(::handle)
-      ::HidePage( ::nActive )
+      ::HidePage(::nActive)
    ENDIF
    ::nActive := 1
 
@@ -134,15 +134,15 @@ METHOD EndPage() CLASS HTab
 
 Return Nil
 
-METHOD ChangePage( nPage ) CLASS HTab
+METHOD ChangePage(nPage) CLASS HTab
 
    IF !Empty(::aPages)
 
-      ::HidePage( ::nActive )
+      ::HidePage(::nActive)
 
       ::nActive := nPage
 
-      ::ShowPage( ::nActive )
+      ::ShowPage(::nActive)
 
    ENDIF
 
@@ -152,7 +152,7 @@ METHOD ChangePage( nPage ) CLASS HTab
 
 Return Nil
 
-METHOD HidePage( nPage ) CLASS HTab
+METHOD HidePage(nPage) CLASS HTab
 Local i, nFirst, nEnd
 
    nFirst := ::aPages[nPage, 1] + 1
@@ -163,7 +163,7 @@ Local i, nFirst, nEnd
 
 Return Nil
 
-METHOD ShowPage( nPage ) CLASS HTab
+METHOD ShowPage(nPage) CLASS HTab
 Local i, nFirst, nEnd
 
    nFirst := ::aPages[nPage, 1] + 1
@@ -180,7 +180,7 @@ Local i, nFirst, nEnd
 
 Return Nil
 
-METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
+METHOD GetActivePage(nFirst, nEnd) CLASS HTab
 
    IF !Empty(::aPages)
       nFirst := ::aPages[::nActive, 1] + 1

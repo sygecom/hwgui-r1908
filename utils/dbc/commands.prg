@@ -36,14 +36,14 @@ Return Nil
 Static Function RecNumberEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
-   hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
+   hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
    hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function RecNumberDisable
 Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
-   hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
+   hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 Return Nil
 
 Static Function InitRepl()
@@ -73,7 +73,7 @@ Private finame, cValue, cFor
       Return Nil
    ENDIF
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
+   IF !Empty(cFor) .AND. TYPE(cFor) != "L"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -102,7 +102,7 @@ Return Nil
 
 /* -----------------------  Delete, recall, count --------------------- */
 
-Function C_DELE( nAct )
+Function C_DELE(nAct)
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_DEL" ON INIT {|| InitDele(nAct) }
@@ -128,7 +128,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITFOR ) )
 Return Nil
 
-Static Function EndDele( nAct )
+Static Function EndDele(nAct)
 Local hDlg := hwg_GetModalHandle()
 Local nrest, nsum, nRec := Recno()
 Local oWindow, aControls, i
@@ -137,7 +137,7 @@ Private cFor
    oWindow := HMainWindow():GetMdiActive()
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF !Empty(cFor) .AND. TYPE( cFor ) != "L"
+   IF !Empty(cFor) .AND. TYPE(cFor) != "L"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -223,7 +223,7 @@ Private nsum := 0
    ENDIF
 
    cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
-   IF ( !Empty(cFor) .AND. TYPE( cFor ) != "L" ) .OR. TYPE( cSumf ) != "N"
+   IF ( !Empty(cFor) .AND. TYPE(cFor) != "L" ) .OR. TYPE(cSumf) != "N"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
       IF Empty(cFor)
@@ -257,7 +257,7 @@ Local aModDlg
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndApp()}  ;
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile( "xBase files( *.dbf )", "*.dbf", mypath ) ) } ;
+        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath) ) } ;
         ON BN_CLICKED,IDC_RADIOBUTTON11 ACTION {|| DelimEdit() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON10 ACTION {|| DelimDisable() } ;
         ON BN_CLICKED,IDC_RADIOBUTTON9 ACTION {|| DelimDisable() }
@@ -268,14 +268,14 @@ Return Nil
 Static Function DelimEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
-   hwg_SendMessage( hEdit, WM_ENABLE, 1, 0 )
+   hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
    hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function DelimDisable
 Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
-   hwg_SendMessage( hEdit, WM_ENABLE, 0, 0 )
+   hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 Return Nil
 
 Static Function InitApp()
@@ -324,8 +324,8 @@ Return Nil
 
 Static Function InitRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
-   hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, Iif( nAct==1,"Reindex ?", ;
-                                       Iif( nAct==2,"Pack ?", "Zap ?" ) ) )
+   hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, IIf(nAct == 1, "Reindex ?", ;
+                                       IIf(nAct == 2, "Pack ?", "Zap ?")) )
 Return Nil
 
 Static Function EndRPZ( nAct )
@@ -347,7 +347,7 @@ Local hWnd, oWindow, aControls, i
       Zap
    ENDIF
 
-   hWnd := hwg_SendMessage( HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0 )
+   hWnd := hwg_SendMessage(HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0)
    oWindow := HWindow():FindWindow( hWnd )
    IF oWindow != Nil
       aControls := oWindow:aControls

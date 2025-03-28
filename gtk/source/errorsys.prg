@@ -51,7 +51,7 @@ STATIC FUNCTION DefError( oError )
       RETURN .F.
    ENDIF
 
-   cMessage := hwg_ErrorMessage( oError )
+   cMessage := hwg_ErrorMessage(oError)
    IF !Empty(oError:osCode)
       cDOSError := "(DOS Error " + LTrim(Str(oError:osCode)) + ")"
    ENDIF
@@ -63,9 +63,9 @@ STATIC FUNCTION DefError( oError )
    n := 2
    WHILE !Empty(ProcName(n))
       #ifdef __XHARBOUR__
-         cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName( n ) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
+         cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #else
-         cMessage += Chr(13)+Chr(10) + "Called from " + ProcName( n ) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
+         cMessage += Chr(13)+Chr(10) + "Called from " + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #endif
    ENDDO
 
@@ -77,7 +77,7 @@ STATIC FUNCTION DefError( oError )
 RETURN .F.
 
 
-FUNCTION hwg_ErrorMessage( oError )
+FUNCTION hwg_ErrorMessage(oError)
    LOCAL cMessage
 
    // start error message
@@ -116,14 +116,14 @@ function WriteLog( cText,fname )
 Local nHand
 
   fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
-  if !File( fname )
-     nHand := Fcreate( fname )
+  if !File(fname)
+     nHand := FCreate(fname)
   else
-     nHand := Fopen( fname, 1 )
+     nHand := FOpen(fname, 1)
   endif
-  Fseek( nHand, 0, 2 )
-  Fwrite( nHand, cText + chr(10) )
-  Fclose( nHand )
+  FSeek(nHand, 0, 2)
+  FWrite(nHand, cText + chr(10))
+  FClose(nHand)
 
 return nil
 

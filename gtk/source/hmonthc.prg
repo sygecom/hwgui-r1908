@@ -34,7 +34,7 @@ CLASS HMonthCalendar INHERIT HControl
                lWeekNumbers )
    METHOD Activate()
    METHOD Init()
-   METHOD SetValue( dValue )
+   METHOD SetValue(dValue)
    METHOD GetValue()
 
 ENDCLASS
@@ -73,7 +73,7 @@ METHOD Activate CLASS HMonthCalendar
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       hwg_SetWindowObject( ::handle,Self )		  
 //      MonthCalendarChange(::handle,{||
-        hwg_MONTHCALENDAR_SETACTION(::handle,{||::value:=hwg_GetMonthCalendarDate( ::handle )})
+        hwg_MONTHCALENDAR_SETACTION(::handle,{||::value:=hwg_GetMonthCalendarDate(::handle)})
       ::Init()
    EndIf
 
@@ -86,7 +86,7 @@ METHOD Init() CLASS HMonthCalendar
    If !::lInit
       ::Super:Init()
       If !Empty(::value)
-         hwg_SetMonthCalendarDate( ::handle , ::value )
+         hwg_SetMonthCalendarDate(::handle, ::value)
       EndIf
    EndIf
 
@@ -94,10 +94,10 @@ Return Nil
 
 //--------------------------------------------------------------------------//
 
-METHOD SetValue( dValue ) CLASS HMonthCalendar
+METHOD SetValue(dValue) CLASS HMonthCalendar
 
    If HB_IsDate(dValue) .And. !Empty(dValue)
-      hwg_SetMonthCalendarDate( ::handle, dValue )
+      hwg_SetMonthCalendarDate(::handle, dValue)
       ::value := dValue
    EndIf
 

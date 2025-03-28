@@ -22,7 +22,7 @@ CLASS HPanel INHERIT HControl
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init()
    METHOD Paint()
-   METHOD Move( x1,y1,width,height )
+   METHOD Move(x1, y1, width, height)
 
 ENDCLASS
 
@@ -66,9 +66,9 @@ METHOD Init CLASS HPanel
    IF !::lInit
       IF ::bSize == Nil
          IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth==0 )
-            ::bSize := {|o,x,y|o:Move( ,IIf(::nTop > 0, y - ::nHeight, 0),x,::nHeight )}
+            ::bSize := {|o, x, y|o:Move(, IIf(::nTop > 0, y - ::nHeight, 0), x, ::nHeight)}
          ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight==0 )
-            ::bSize := {|o,x,y|o:Move( IIf(::nLeft > 0, x - ::nLeft, 0),,::nWidth,y )}
+            ::bSize := {|o, x, y|o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), , ::nWidth, y)}
          ENDIF
       ENDIF
 
@@ -91,8 +91,8 @@ Local hDC, aCoors, oPenLight, oPenGray
 
 Return Nil
 
-METHOD Move( x1,y1,width,height )  CLASS HPanel
+METHOD Move(x1, y1, width, height)  CLASS HPanel
 
-   ::Super:Move( x1,y1,width,height,.T. )
+   ::Super:Move(x1, y1, width, height, .T.)
 Return Nil
 
