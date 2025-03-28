@@ -88,7 +88,7 @@ Private oIcon := HIcon():AddResource("PIM")
       ENDMENU
       MENU TITLE "&Help"        
          MENUITEM "&About" ACTION OpenAbout()
-         MENUITEM "&Version HwGUI" ACTION MsgInfo(HwG_Version())
+         MENUITEM "&Version HwGUI" ACTION hwg_MsgInfo(HwG_Version())
       ENDMENU
    ENDMENU            
    
@@ -305,10 +305,10 @@ Local cLibFiles, i, oNome, g
 Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 if empty(cFolderFile); Return Nil; Endif
 if file(cFolderFile)
-   If(MsgYesNo("File "+cFolderFile+" EXIT ..Replace?"))
+   If(hwg_MsgYesNo("File "+cFolderFile+" EXIT ..Replace?"))
      Erase(cFolderFile)
    Else
-     MsgInfo("No file SAVED.", "HwMake")
+     hwg_MsgInfo("No file SAVED.", "HwMake")
      Return Nil
    EndIf
 EndIf     
@@ -357,7 +357,7 @@ if Len(oBrowse4:aArray)>=1
    Next     
 endif   
 
-Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
+hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
 Return Nil
 
 Function BuildApp() 
@@ -371,7 +371,7 @@ LOCAL cPrgFileAttr  , nPrgFileSize
 LOCAL dPrgCreateDate, nPrgCreateTime
 LOCAL dPrgChangeDate, nPrgChangeTime
 Local cPrgName
-Local lAll := MsgYesNo("Build All Fontes?", "Attention" )
+Local lAll := hwg_MsgYesNo("Build All Fontes?", "Attention" )
 Local lCompile
 Local cList := ""
 Local cMake
@@ -409,7 +409,7 @@ Makedir( cObj )
 
 cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //If !File(cExeHarbour)
-//   MsgInfo( "Not exist " + cExeHarbour +"!!" )
+//   hwg_MsgInfo( "Not exist " + cExeHarbour +"!!" )
 //   Return Nil
 //EndIf
 
@@ -466,7 +466,7 @@ For Each i in oBrowse1:aArray
    EndIf   
    cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
    If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
-      MsgInfo("No Created Object files!", "HwMake" )
+      hwg_MsgInfo("No Created Object files!", "HwMake" )
       Return nil
    EndIF
           
@@ -483,7 +483,7 @@ Next
 //ResourceFiles
 For Each i in oBrowse4:aArray     
    If ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
-      MsgInfo("Error in Resource File " + i + "!", "HwMake" )
+      hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake" )
       Return Nil
    EndIf   
    cListRes += cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".res +" + CRLF
@@ -511,7 +511,7 @@ EndIF
 Memowrit( cMainPrg + ".bc ", cMake )
 
 If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
-      MsgInfo("No link file " + cMainPrg +"!", "HwMake" ) 
+      hwg_MsgInfo("No link file " + cMainPrg +"!", "HwMake" )
       Return Nil
 EndIf
 
