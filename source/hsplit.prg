@@ -17,7 +17,7 @@
 
 CLASS HSplitter INHERIT HControl
 
-CLASS VAR winclass INIT "STATIC"
+   CLASS VAR winclass INIT "STATIC"
 
    DATA aLeft
    DATA aRight
@@ -45,10 +45,10 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    ::Super:New(oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW , nLeft, nTop, nWidth, nHeight,,, ;
               bSize, bDraw,, color, bcolor)
 
-   ::title   := ""
-   
-   ::aLeft   := IIf(aLeft == NIL, {}, aLeft)
-   ::aRight  := IIf(aRight == NIL, {}, aRight)
+   ::title := ""
+
+   ::aLeft := IIf(aLeft == NIL, {}, aLeft)
+   ::aRight := IIf(aRight == NIL, {}, aRight)
    ::lVertical := (::nHeight > ::nWidth)
    ::lScrolling := Iif(lScrolling == NIL, .F., lScrolling)
    IF (lTransp != NIL .AND. lTransp)
@@ -57,15 +57,16 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    ENDIF
    ::Activate()
 
-   RETURN Self
+RETURN Self
 
 METHOD Activate() CLASS HSplitter
+
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
-                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
+      ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
       ::Init()
    ENDIF
-   RETURN NIL
+
+RETURN NIL
 
 METHOD Init() CLASS HSplitter
 
@@ -76,7 +77,7 @@ METHOD Init() CLASS HSplitter
       hwg_InitWinCtrl(::handle)
    ENDIF
 
-   RETURN NIL
+RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
@@ -169,8 +170,15 @@ RETURN -1
 #endif
 
 METHOD Paint() CLASS HSplitter
-   LOCAL pps, hDC, aCoors, x1, y1, x2, y2, oBrushFill
 
+   LOCAL pps
+   LOCAL hDC
+   LOCAL aCoors
+   LOCAL x1
+   LOCAL y1
+   LOCAL x2
+   LOCAL y2
+   LOCAL oBrushFill
 
    pps := hwg_DefinePaintStru()
    hDC := hwg_BeginPaint(::handle, pps)
@@ -198,10 +206,12 @@ METHOD Paint() CLASS HSplitter
    ENDIF
    hwg_EndPaint(::handle, pps)
 
-   RETURN NIL
+RETURN NIL
 
 METHOD Drag(lParam) CLASS HSplitter
-   LOCAL xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
+
+   LOCAL xPos := hwg_LOWORD(lParam)
+   LOCAL yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
       IF xPos > 32000
@@ -220,10 +230,14 @@ METHOD Drag(lParam) CLASS HSplitter
    hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nleft + ::nWidth , ::nTop + ::nHeight)
    ::lMoved := .T.
 
-   RETURN NIL
+RETURN NIL
 
 METHOD DragAll(lScroll) CLASS HSplitter
-   LOCAL i, oCtrl, xDiff := 0, yDiff := 0
+
+   LOCAL i
+   LOCAL oCtrl
+   LOCAL xDiff := 0
+   LOCAL yDiff := 0
 
    lScroll := IIf(Len(::aLeft) == 0 .OR. Len(::aRight) == 0, .F., lScroll)
 
@@ -269,5 +283,4 @@ METHOD DragAll(lScroll) CLASS HSplitter
       Eval(::bEndDrag, Self)
    ENDIF
 
-   RETURN NIL
-
+RETURN NIL
