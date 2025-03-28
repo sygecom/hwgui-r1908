@@ -68,17 +68,17 @@ Local oFont := aItem[ITEM_FONT]
    ENDIF
    // SetComboBox( hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1 )
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
 Static Function EndStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 
-   aItem[ITEM_CAPTION] := GetEditText( hDlg, IDC_EDIT1 )
+   aItem[ITEM_CAPTION] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aItem[ITEM_ALIGN] := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), 0, ;
                           IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON2), 1, 2))
-   aItem[ITEM_VAR] := AScan(s_aVariables, GetDlgItemText(hDlg, IDC_COMBOBOX3, 12)) - 1
-   aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT3 )
+   aItem[ITEM_VAR] := AScan(s_aVariables, hwg_GetDlgItemText(hDlg, IDC_COMBOBOX3, 12)) - 1
+   aItem[ITEM_SCRIPT] := hwg_GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.
@@ -110,15 +110,15 @@ Local oPen := aItem[ITEM_PEN]
    // SetComboBox( hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1 )
    IF aItem[ITEM_TYPE] == TYPE_BOX
    ELSE
-      hwg_SendMessage(GetDlgItem(hDlg, IDC_COMBOBOX2), WM_ENABLE, 0, 0)
+      hwg_SendMessage(hwg_GetDlgItem(hDlg, IDC_COMBOBOX2), WM_ENABLE, 0, 0)
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width, 1) )
 Return .T.
 
 Static Function EndLine(aItem)
 Local hDlg := hwg_GetModalHandle()
-Local nWidth := Val( GetEditText( hDlg, IDC_EDIT1 ) )
-Local cType := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
+Local nWidth := Val( hwg_GetEditText( hDlg, IDC_EDIT1 ) )
+Local cType := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
 Local oPen := aItem[ITEM_PEN]
    i := Ascan( s_aPenStyles,cType )
    IF oPen:style != i-1 .OR. oPen:width != nWidth
@@ -148,7 +148,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    IF !Empty(fname)
       IF aItem[ITEM_BITMAP] != Nil
-         DeleteObject( aItem[ITEM_BITMAP]:handle )
+         hwg_DeleteObject( aItem[ITEM_BITMAP]:handle )
       ENDIF
       aItem[ITEM_CAPTION] := fname
       aItem[ITEM_BITMAP] := HBitmap():AddFile(fname)
@@ -162,7 +162,7 @@ Return Nil
 
 Static Function UpdateProcent( aItem )
 Local hDlg := hwg_GetModalHandle()
-Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
+Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
@@ -173,7 +173,7 @@ Return Nil
 Static Function InitBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
-   hUp := hwg_CreateUpDownControl( hDlg, 120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0,GetDlgItem(hDlg,IDC_EDIT3), 500, 1, 100 )
+   hUp := hwg_CreateUpDownControl( hDlg, 120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0,hwg_GetDlgItem(hDlg,IDC_EDIT3), 500, 1, 100 )
    IF aItem[ITEM_BITMAP] != Nil
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
@@ -185,7 +185,7 @@ Return .T.
 
 Static Function EndBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
-Local nValue := Val( GetEditText( hDlg,IDC_EDIT3 ) )
+Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
 
    aItem[ITEM_WIDTH] := Round(aBmpSize[1]*nValue/100, 0)
@@ -215,7 +215,7 @@ Return .T.
 
 Static Function EndMarkL( aItem )
 Local hDlg := hwg_GetModalHandle()
-   aItem[ITEM_SCRIPT] := GetEditText( hDlg, IDC_EDIT1 )
+   aItem[ITEM_SCRIPT] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.
@@ -265,7 +265,7 @@ Return .T.
 
 Static Function EndFOpt( aItem )
 Local hDlg := hwg_GetModalHandle()
-   aPaintRep[FORM_VARS] := GetEditText( hDlg, IDC_EDIT1 )
+   aPaintRep[FORM_VARS] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 Return .T.

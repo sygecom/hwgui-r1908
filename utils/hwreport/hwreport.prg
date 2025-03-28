@@ -44,9 +44,9 @@ Public oPenBorder, oFontSmall, oFontStandard, lastFont := Nil
 Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
 
    SET DECIMALS TO 4
-   s_crossCursor := LoadCursor( IDC_CROSS )
-   s_horzCursor := LoadCursor( IDC_SIZEWE )
-   s_vertCursor := LoadCursor( IDC_SIZENS )
+   s_crossCursor := hwg_LoadCursor( IDC_CROSS )
+   s_horzCursor := hwg_LoadCursor( IDC_SIZEWE )
+   s_vertCursor := hwg_LoadCursor( IDC_SIZENS )
    oPenBorder := HPen():Add(PS_SOLID, 1, hwg_VColor("800080"))
    s_oPenLine   := HPen():Add(PS_SOLID, 1, hwg_VColor("000000"))
    s_oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("C0C0C0"))
@@ -209,8 +209,8 @@ Local step, kolsteps, nsteps
    hwg_FillRect( hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_HIGHLIGHTTEXT+1 )
    hwg_FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
    i := 0
-   SelectObject( hDC,s_oPenLine:handle )
-   SelectObject( hDC,Iif(lPreview,oFontSmall:handle,oFontStandard:handle) )
+   hwg_SelectObject( hDC,s_oPenLine:handle )
+   hwg_SelectObject( hDC,Iif(lPreview,oFontSmall:handle,oFontStandard:handle) )
    oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DLIGHT) )
    DO WHILE i <= aPaintRep[FORM_WIDTH]/10 .AND. i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
       xt := x1+i*n1cm
@@ -274,7 +274,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
    IF y1 >= TOP_INDENT .AND. y1 <= aCoors[4]
       IF aItem[ITEM_STATE] == STATE_SELECTED .OR. aItem[ITEM_STATE] == STATE_PRESSED
          hwg_FillRect( hDC, x1-3, y1-3, x2+3, y2+3, COLOR_3DLIGHT+1 )
-         SelectObject( hDC, oPenBorder:handle )
+         hwg_SelectObject( hDC, oPenBorder:handle )
          hwg_Rectangle(hDC, x1 - 3, y1 - 3, x2 + 3, y2 + 3)
          hwg_Rectangle(hDC, x1 - 1, y1 - 1, x2 + 1, y2 + 1)
       ENDIF
@@ -282,18 +282,18 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          IF Empty(aItem[ITEM_CAPTION])
             hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
          ELSE
-      SelectObject( hDC, Iif(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
+      hwg_SelectObject( hDC, Iif(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
             hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2, ;
               Iif(aItem[ITEM_ALIGN]==0,DT_LEFT,Iif(aItem[ITEM_ALIGN]==1,DT_RIGHT,DT_CENTER)) )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
-         SelectObject( hDC,aItem[ITEM_PEN]:handle )
+         hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )
          hwg_DrawLine(hDC, x1, y1, x2, y1)
       ELSEIF aItem[ITEM_TYPE] == TYPE_VLINE
-         SelectObject( hDC,aItem[ITEM_PEN]:handle )
+         hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )
          hwg_DrawLine(hDC, x1, y1, x1, y2)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BOX
-         SelectObject( hDC,aItem[ITEM_PEN]:handle )
+         hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )
          hwg_Rectangle(hDC, x1, y1, x2, y2)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          IF aItem[ITEM_BITMAP] == Nil
@@ -302,9 +302,9 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
             hwg_DrawBitmap( hDC, aItem[ITEM_BITMAP]:handle,SRCAND, x1, y1, x2-x1+1, y2-y1+1 )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_MARKER
-         SelectObject( hDC,s_oPenDivider:handle )
+         hwg_SelectObject( hDC,s_oPenDivider:handle )
          hwg_DrawLine(hDC, LEFT_INDENT, y1, LEFT_INDENT - 1 + Round(aPaintRep[FORM_WIDTH] * aPaintRep[FORM_XKOEF], 0), y1)
-         SelectObject( hDC, oFontSmall:handle )
+         hwg_SelectObject( hDC, oFontSmall:handle )
          hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2,DT_CENTER )
       ENDIF
    ENDIF

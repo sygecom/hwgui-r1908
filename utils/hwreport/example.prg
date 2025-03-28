@@ -38,7 +38,7 @@ PRIVATE aTermMetr := { 800 }
         SIZE 120, 22 FLAT ;
         TEXT "Print MyReport()" COLOR hwg_VColor("E60099") FONT oFont
 
-   hDCwindow := GetDC(oMainWindow:handle)
+   hDCwindow := hwg_GetDC(oMainWindow:handle)
    aTermMetr := hwg_GetDeviceArea(hDCwindow)
    hwg_DeleteDC(hDCwindow)
 

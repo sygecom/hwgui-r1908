@@ -40,7 +40,7 @@ Static Function InitOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
    hwg_SetWindowText( hDlg, IIf(lOpen, "Open report", "Save report"))
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
 Return .T.
 
 Static Function BrowFile(lOpen)
@@ -59,7 +59,7 @@ Local fname, s1, s2
       fname := hwg_SaveFile(s2, s1, s2, mypath)
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function EndOpen( lOpen )
@@ -67,9 +67,9 @@ Local hDlg := hwg_GetModalHandle()
 Local fname, repName
 Local res := .T.
 
-   fname := GetEditText( hDlg, IDC_EDIT1 )
+   fname := hwg_GetEditText( hDlg, IDC_EDIT1 )
    IF !Empty(fname)
-      repName := GetEditText( hDlg, IDC_EDIT2 )
+      repName := hwg_GetEditText( hDlg, IDC_EDIT2 )
 
       IF lOpen
          IF ( res := OpenFile(fname, @repName) )
@@ -90,7 +90,7 @@ Local res := .T.
          EndDialog( hDlg )
       ENDIF
    ELSE
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT1 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
    ENDIF
 Return .T.
 
@@ -98,7 +98,7 @@ Function CloseReport
 Local i, aItem
    IF aPaintRep != Nil
       IF aPaintRep[FORM_CHANGED] == .T.
-         IF MsgYesNo( "Report was changed. Are you want to save it ?" )
+         IF hwg_MsgYesNo( "Report was changed. Are you want to save it ?" )
             SaveReport()
          ENDIF
       ENDIF
@@ -383,9 +383,9 @@ Return res
 Static Function WriteRep( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr
 
-   hDCwindow := GetDC(Hwindow():GetMain():handle)
+   hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)
    aMetr := hwg_GetDeviceArea(hDCwindow)
-   ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
+   hwg_ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    FWrite(han, "#REPORT " + repName + Chr(10))
    FWrite(han, "FORM;" + LTrim(Str(aPaintRep[FORM_WIDTH])) + ";" + ;
@@ -432,9 +432,9 @@ Return Nil
 Static Function WriteToPrg( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
 
-   hDCwindow := GetDC(Hwindow():GetMain():handle)
+   hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)
    aMetr := hwg_GetDeviceArea(hDCwindow)
-   ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
+   hwg_ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    FWrite(han, "FUNCTION " + repName + Chr(10) + ;
          "LOCAL aPaintRep" + Chr(10))
