@@ -20,7 +20,7 @@ FUNCTION Main()
    MENU OF oMain
       MENUITEM "&Exit"   ACTION oMain:Close()
       MENUITEM "&Browse" ACTION BrowseTest()
-      MENUITEM "&Count"  ACTION hwg_MsgInfo(str(nCount))
+      MENUITEM "&Count"  ACTION hwg_MsgInfo(Str(nCount))
    ENDMENU
 
    ACTIVATE WINDOW oMain
@@ -99,20 +99,20 @@ RETURN .T.
 
 STATIC FUNCTION BrowseValid()
 
-   hwg_MsgExclamation("Valid Event" + STR(TENTA))
+   hwg_MsgExclamation("Valid Event" + Str(TENTA))
    ++TENTA
 
 RETURN .T.
 
 STATIC FUNCTION BrowseMove()
 
-   hwg_MsgInfo("Going to record " + ltrim(str(recno())))
+   hwg_MsgInfo("Going to record " + LTrim(Str(RecNo())))
 
 RETURN NIL
 
 STATIC FUNCTION BrowseUpdate(oBrow, colpos)
 
-   hwg_MsgExclamation("Column " + ltrim(str(colpos)) + " Changed")
+   hwg_MsgExclamation("Column " + LTrim(Str(colpos)) + " Changed")
 
    if colpos == 2
       oBrow:Append()

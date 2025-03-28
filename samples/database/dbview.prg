@@ -145,7 +145,7 @@ STATIC FUNCTION FileOpen()
       oBrw:InsColumn(HColumn():New("*", {||IIf(Deleted(), "*", " ")}, "C", 1, 0), 1)
       oBrw:active := .T.
       oBrw:Refresh()
-      oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
       oSay2:SetValue("")
       dbv_cLocate := dbv_cSeek := ""
       dbv_nRec := 0
@@ -291,17 +291,17 @@ STATIC FUNCTION NewIndex()
          oMsg = DlgWait("Indexing")
          IF lMulti
             IF Empty(cCond)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ELSE
-               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ENDIF
          ELSE
             IF Empty(cCond)
-               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               dbCreateIndex(RTrim(cName), RTrim(cExpr),&("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ELSE
-               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
-               ORDCREATE(RTRIM(cName), RTRIM(cTag), RTRIM(cExpr), &("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
             ENDIF
          ENDIF
          oMsg:Close()
@@ -374,7 +374,7 @@ STATIC FUNCTION UpdBrowse()
       oBrw:bRecnoLog := &( "{||" + oBrw:alias + "->(ORDKEYNO())}" )
    ENDIF
    oBrw:Refresh()
-   oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+   oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
    oSay2:SetValue("")
 
 RETURN NIL
@@ -494,7 +494,7 @@ STATIC FUNCTION ModiStru(lNew)
                      IF af[i, 2] == "C" .AND. af0[af[i, 5], 2] == "N"
                         xValue := Str(xValue, af0[af[i, 5], 3], af0[af[i, 5], 4])
                      ELSEIF af[i, 2] == "N" .AND. af0[af[i, 5], 2] == "C"
-                        xValue := Val(Ltrim(xValue))
+                        xValue := Val(LTrim(xValue))
                      ELSE
                         LOOP
                      ENDIF
@@ -553,10 +553,10 @@ STATIC FUNCTION brw_onPosChg(oBrowse, oGet1, oGet2, oGet3, oGet4)
 
    oGet2:SetItem(AScan(aFieldTypes, oBrowse:aArray[oBrowse:nCurrent, 2]))
 
-   oGet3:SetGet(Ltrim(Str(oBrowse:aArray[oBrowse:nCurrent, 3])))
+   oGet3:SetGet(LTrim(Str(oBrowse:aArray[oBrowse:nCurrent, 3])))
    oGet3:Refresh()
 
-   oGet4:SetGet(Ltrim(Str(oBrowse:aArray[oBrowse:nCurrent, 4])))
+   oGet4:SetGet(LTrim(Str(oBrowse:aArray[oBrowse:nCurrent, 4])))
    oGet4:Refresh()
 
 RETURN NIL
@@ -598,7 +598,7 @@ RETURN NIL
 
 STATIC FUNCTION dbv_Goto()
 
-   LOCAL nRec := Val(GetData(Ltrim(Str(dbv_nRec)), "Go to ...", "Input record number:"))
+   LOCAL nRec := Val(GetData(LTrim(Str(dbv_nRec)), "Go to ...", "Input record number:"))
 
    MEMVAR oBrw
 
@@ -758,7 +758,7 @@ STATIC FUNCTION dbv_Pack()
       oMsg:Close()
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
-      oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
       oSay2:SetValue("")
    ENDIF
 
@@ -779,7 +779,7 @@ STATIC FUNCTION dbv_Zap()
       oMsg:Close()
       oBrw:Refresh()
       Eval(oBrw:bScrollPos, oBrw, 0)
-      oSay1:SetValue("Records: " + Ltrim(Str(Eval(oBrw:bRcou, oBrw))))
+      oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
       oSay2:SetValue("")
    ENDIF
 

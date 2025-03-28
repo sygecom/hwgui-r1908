@@ -287,7 +287,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       ::nMemory := 0
       oForm:oMemory:caption := " "
    ElseIf cNumero == "MR"
-      oForm:oVisor:Caption := STR(::nMemory )
+      oForm:oVisor:Caption := Str(::nMemory )
       ::lClear := .F.
    ElseIf cNumero == "M+"
       ::nMemory := Val(StrTran(oForm:oVisor:Caption, ",", "."))
@@ -312,7 +312,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       EndIf
       ::aOperando[1] := IIf(::aOperando[1] - Int(::aOperando[1]) = 0 ,;
                           Int(::aOperando[1]), ::aOperando[1])
-      oForm:oVisor:Caption := Ltrim(Str(::aOperando[1]))
+      oForm:oVisor:Caption := LTrim(Str(::aOperando[1]))
       ::aOperando[3] := ::aOperando[2]
       ::aOperando[2] := Nil
       ::lClear := .T.
@@ -355,7 +355,7 @@ METHOD INIT() CLASS HCalculator
   // ::oFormCalc:setall("lflat", ::lCompacta, , "hbuttonex")
 
    If ::oCurrGet != Nil
-      ::oFormCalc:oVisor:Caption := AllTrim(STR(::oCurrGet:Value))
+      ::oFormCalc:oVisor:Caption := AllTrim(Str(::oCurrGet:Value))
       ::lClear := ::oFormCalc:oVisor:Caption = "0"
       IF ::oFormCalc:Type >= WND_DLG_RESOURCE
          aCoors := hwg_GetWindowRect(::oCurrGet:handle)

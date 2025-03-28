@@ -27,7 +27,7 @@ FUNCTION Main()
    for i := 1 to 200
       Append Blank
       Teste->CODIGO := i
-      TESTE->NOME := "NOME " + AllTrim(STR(I))
+      TESTE->NOME := "NOME " + AllTrim(Str(I))
    end
    go top
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";

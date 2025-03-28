@@ -85,13 +85,13 @@ RETURN NIL
 
 FUNCTION OnKey(o, k)
 
-//    hwg_MsgInfo(str(k))
+//    hwg_MsgInfo(Str(k))
 
 RETURN NIL
 
 FUNCTION OnPosChange(o, row)
 
-//    hwg_MsgInfo(str(row))
+//    hwg_MsgInfo(Str(row))
 
 RETURN NIL
 
@@ -134,9 +134,9 @@ FUNCTION OnDispInfo(o, x, y)
         dbgoto(x)
 
         if y == 1
-            result := str(code)
+            result := Str(code)
         elseif y == 2
-            result := dtoc(creation)
+            result := DToC(creation)
         elseif y == 3
             result := descr
         end
@@ -170,7 +170,7 @@ FUNCTION CriaBase()
         PQclear(res)
 
         For i := 1 to 100
-            res := PQexec(conn, "insert into test (code, creation, descr) values (" + str(i) + ",'" + DtoC(date()+i) + "','test')")
+            res := PQexec(conn, "insert into test (code, creation, descr) values (" + Str(i) + ",'" + DToC(date()+i) + "','test')")
             PQclear(res)
         Next
 

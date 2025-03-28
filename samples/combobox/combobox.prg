@@ -65,7 +65,7 @@ FUNCTION Test()
       @ 300, 395 BUTTON "Add" SIZE 75, 25 ON CLICK {||oCombo1:AddItem(cEdit), oCombo1:refresh()}
 
       @ 380, 395 BUTTON "Test" SIZE 75, 25 ON CLICK {||xCombo := "Temp", oCombo3:refresh(), nCombo := 2, oCombo1:refresh(), oCombo2:SetItem(3), oCombo4:SetItem(3), oCombo5:value := "Third", oCombo5:refresh(), oCombo6:SetItem(2)}
-      @ 460, 395 BUTTON "Combo 1" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(str(nCombo))}
+      @ 460, 395 BUTTON "Combo 1" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(Str(nCombo))}
       @ 540, 395 BUTTON "Combo 2" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(cCombo, xCombo)}
       @ 620, 395 BUTTON "Close" SIZE 75, 25 ON CLICK {||oForm:Close()}
 
@@ -101,7 +101,7 @@ FUNCTION BoundTest()
       // @ 20, 200 GET cEdit SIZE 150, 23
       // @ 300, 395 BUTTON "Add" SIZE 75, 25 ON CLICK {||oCombo1:AddItem(cEdit), oCombo1:refresh()}
       // @ 380, 395 BUTTON "Test" SIZE 75, 25 ON CLICK {||xCombo := "Temp", oCombo3:refresh(), nCombo := 2, oCombo1:refresh(), oCombo2:SetItem(3), oCombo4:SetItem(3), oCombo5:value := "Third", oCombo5:refresh(), oCombo6:SetItem(2)}
-      @ 380, 395 BUTTON "Combo 1" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(oCombo1:GetValueBound() + "-" + str(nCombo), "Value of combo 1")}
+      @ 380, 395 BUTTON "Combo 1" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(oCombo1:GetValueBound() + "-" + Str(nCombo), "Value of combo 1")}
       @ 460, 395 BUTTON "Combo 2" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(oCombo2:GetValueBound() + "-" + cCombo, "Value of combo 2")}
       @ 540, 395 BUTTON "Combo 3" SIZE 75, 25 ON CLICK {||hwg_MsgInfo(oCombo3:GetValueBound() + "-" + xCombo, "Value of combo 3")}
       @ 620, 395 BUTTON "Close" SIZE 75, 25 ON CLICK {||oForm:Close()}
@@ -115,10 +115,10 @@ STATIC FUNCTION oCombo3_onInteractiveChange(value, This)
    LOCAL cTexto
    LOCAL n
 
-   cTexto := TRIM(This:GetText())
+   cTexto := Trim(This:GetText())
    n := AScan(This:aitems, {|a|a = cTexto})
    IF !Empty(cTexto) .AND. (hwg_GetKeyState(VK_DELETE) + hwg_GetKeyState(VK_BACK)) >= 0 .AND. n > 0
-      This:SETVALUE(TRIM(This:aitems[n]))
+      This:SETVALUE(Trim(This:aitems[n]))
       hwg_Keyb_Event(VK_END, .T., .T.)
    ENDIF
 

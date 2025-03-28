@@ -114,7 +114,7 @@ FUNCTION DlgGet()
                "Radio: " + Str(r1, 1) + Chr(10) + Chr(13) +            ;
                "Combo: " + aCombo[cm] + Chr(10) + Chr(13) +           ;
                "UpDown: " + Str(upd) + Chr(10) + Chr(13) +              ;
-               "DatePicker: " + Dtoc(d1)                                ;
+               "DatePicker: " + DToC(d1)                                ;
                , "Results:")
    ENDIF
 

@@ -68,7 +68,7 @@ FUNCTION Main()
          MENUITEM "Wchoice" ACTION hwg_Wchoice(acho, "Select", , , , , 15132390, , hwg_VColor("008000"))
          MENUITEM "SelectFolder" ACTION hwg_MsgInfo(hwg_SelectFolder("!!!"))
          MENU TITLE "Submenu"
-            MENUITEM "ShellExecute" ACTION (hwg_ShellExecute("d:\temp\podst.doc"), hwg_MsgInfo(str(oMainWindow:handle)))
+            MENUITEM "ShellExecute" ACTION (hwg_ShellExecute("d:\temp\podst.doc"), hwg_MsgInfo(Str(oMainWindow:handle)))
             MENUITEM "S2" ACTION hwg_MsgStop("S2")
          ENDMENU
       ENDMENU

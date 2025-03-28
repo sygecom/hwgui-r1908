@@ -67,7 +67,7 @@ STATIC FUNCTION protek()
  oPage:settab(n)
  oPage:ChangePage(n)
  else
-   hwg_MsgInfo("Sorry " + cUser + " You cannot access" + str(n, 3))
+   hwg_MsgInfo("Sorry " + cUser + " You cannot access" + Str(n, 3))
  oPage:settab(4)
  oPage:ChangePage(4)
  endif

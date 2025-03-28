@@ -42,7 +42,7 @@ FUNCTION Main()
     JUSTIFY HEAD DT_LEFT ;
     JUSTIFY LINE DT_RIGHT
 
-  ADD COLUMN {||RECNO()} TO brwMesas ;
+  ADD COLUMN {||RecNo()} TO brwMesas ;
     HEADER "Recno()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";
@@ -88,7 +88,7 @@ FUNCTION Main()
     JUSTIFY HEAD DT_LEFT ;
     JUSTIFY LINE DT_RIGHT
 
-  ADD COLUMN {||RECNO()} TO brwItens ;
+  ADD COLUMN {||RecNo()} TO brwItens ;
     HEADER "Recno()";
     TYPE "N" LENGTH 6 DEC 0 ;
     PICTURE "@E 999999";

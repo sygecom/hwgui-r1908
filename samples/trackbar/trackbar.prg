@@ -34,7 +34,7 @@ FUNCTION Main()
       INIT 5 AUTOTICKS ;
       ON CHANGE {||UpdateSay()}
 
-   @ 300, 200 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(str(oTB:GetValue()))} SIZE 100, 40
+   @ 300, 200 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(Str(oTB:GetValue()))} SIZE 100, 40
    @ 300, 300 BUTTON "Set Value" ON CLICK {||oTB:SetValue(5), UpdateSay()} SIZE 100, 40
 
    @ 100, 100 SAY oSay CAPTION "5" SIZE 40, 40
@@ -47,7 +47,7 @@ RETURN NIL
 
 FUNCTION UpdateSay()
 
-   oSay:SetValue(str(oTB:GetValue()))
+   oSay:SetValue(Str(oTB:GetValue()))
 
 RETURN NIL
 
@@ -65,7 +65,7 @@ FUNCTION Dlg1()
       ON INIT {||hwg_MsgInfo("On Init", "TrackBar")} ;
       ON CHANGE {||UpdateSayDlg1()} AUTOTICKS TOOLTIP "trackbar control"
 
-   @ 300, 100 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(str(oTB1:GetValue()))} SIZE 100, 40
+   @ 300, 100 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(Str(oTB1:GetValue()))} SIZE 100, 40
    @ 300, 200 BUTTON "Set Value" ON CLICK {||oTB1:SetValue(25), UpdateSayDlg1()} SIZE 100, 40
 
    @ 100, 100 SAY oSayDlg1 CAPTION "25" SIZE 40, 40
@@ -78,7 +78,7 @@ RETURN NIL
 
 FUNCTION UpdateSayDlg1()
 
-   oSayDlg1:SetValue(str(oTB1:GetValue()))
+   oSayDlg1:SetValue(Str(oTB1:GetValue()))
 
 RETURN NIL
 
@@ -97,7 +97,7 @@ FUNCTION Dlg2()
       VERTICAL AUTOTICKS TOOLTIP "trackbar control" ;
       ON CHANGE {||UpdateSayDlg2()}
 
-   @ 300, 060 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(str(oTB2:GetValue()))} SIZE 100, 40
+   @ 300, 060 BUTTON "Get Value" ON CLICK {||hwg_MsgInfo(Str(oTB2:GetValue()))} SIZE 100, 40
    @ 300, 100 BUTTON "Set Value" ON CLICK {||oTB2:SetValue(50), UpdateSayDlg2()} SIZE 100, 40
 
    @ 200, 100 SAY oSayDlg2 CAPTION "50" SIZE 40, 40
@@ -110,7 +110,7 @@ RETURN NIL
 
 FUNCTION UpdateSayDlg2()
 
-   oSayDlg2:SetValue(str(oTB2:GetValue()))
+   oSayDlg2:SetValue(Str(oTB2:GetValue()))
 
 RETURN NIL
 

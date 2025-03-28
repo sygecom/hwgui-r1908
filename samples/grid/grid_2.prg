@@ -97,7 +97,7 @@ FUNCTION ConnectGrid()
         oRow := oQuery:blank()
 
         oRow:Fieldput(1, i)
-        oRow:Fieldput(2, "teste line " + str(i))
+        oRow:Fieldput(2, "teste line " + Str(i))
         oRow:Fieldput(3, date() + i)
 
         oQuery:Append(oRow)

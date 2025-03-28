@@ -82,7 +82,7 @@ FUNCTION pesq(rd_dir, rd_text)
         //
         //hwg_MsgInfo(linha)
         if at(texto, linha) != 0
-            resultado := resultado+str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
+            resultado := resultado+Str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
             get01:refresh()
         endif
         //

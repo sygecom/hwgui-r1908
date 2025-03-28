@@ -38,7 +38,7 @@ FUNCTION Main()
          SEPARATOR
          MENUITEM "&Font" ACTION oFont := HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor := hwg_ChooseColor(nColor, .F.), ;
-                     hwg_MsgInfo(IIf(nColor != NIL, str(nColor), "--"), "Color value"))
+                     hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION hwg_EndWindow()

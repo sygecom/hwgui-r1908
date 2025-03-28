@@ -95,7 +95,7 @@ FUNCTION Main()
 #endif
 
    aScreen := GetWorkareaRect()
-   // writelog(str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]))
+   // writelog(Str(aScreen[1])+Str(aScreen[2])+Str(aScreen[3])+Str(aScreen[4]))
 
    ACTIVATE WINDOW oMainWindow
 
@@ -253,7 +253,7 @@ STATIC FUNCTION FileOpen(oWnd)
          oWnd:nHeight := 100
       ENDIF
 
-      // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
+      // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef)+Str(oImage:nWidth) + Str(oImage:nHeight))
       hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
       oSayMain:nZoom := nKoef
       hwg_InvalidateRect(oSayMain:handle, 0)
@@ -287,13 +287,13 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    lScrollV := lScrollH := .F.
    oWnd:nWidth := Round(oImage:nWidth * nKoef, 0) + nHorz
    oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
-   // writelog("1->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
+   // writelog("1->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
    IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
       oWnd:nLeft := 0
       IF oWnd:nWidth >= aScreen[3]
          oWnd:nWidth := aScreen[3]
          lScrollH := .T.
-         // writelog("2->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
+         // writelog("2->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
       ENDIF
    ENDIF
    IF oWnd:nTop+oWnd:nHeight >= aScreen[4]
@@ -301,7 +301,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
       IF oWnd:nHeight >= aScreen[4]
          oWnd:nHeight := aScreen[4]
          lScrollV := .T.
-         // writelog("3->" + str(oWnd:nWidth)+str(aScreen[3]) + " - " + str(oWnd:nHeight)+str(aScreen[4]))
+         // writelog("3->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
       ENDIF
    ENDIF
    IF oWnd:nWidth < 200
@@ -314,7 +314,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    oSayMain:nZoom := nKoef
    oSayScale:SetValue(Str(nKoef*100, 4) + " %")
    hwg_InvalidateRect(oWnd:handle, 0)
-   // writelog("Window: " + str(oWnd:nWidth) + str(oWnd:nHeight) + str(nKoef)+str(oImage:nWidth) + str(oImage:nHeight))
+   // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef)+Str(oImage:nWidth) + Str(oImage:nHeight))
    hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
    stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
@@ -346,7 +346,7 @@ STATIC FUNCTION PaintWindow(oWnd)
    pps := hwg_DefinePaintStru()
    hDC := hwg_BeginPaint(oWnd:handle, pps)
 
-   // writelog("Paint: " + str(Round(oImage:nWidth * nKoef, 0)) + str(Round(oImage:nHeight * nKoef, 0)))
+   // writelog("Paint: " + Str(Round(oImage:nWidth * nKoef, 0)) + Str(Round(oImage:nHeight * nKoef, 0)))
 #ifdef __FREEIMAGE__
    oImage:Draw(hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #else

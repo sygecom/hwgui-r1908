@@ -133,7 +133,7 @@ STATIC FUNCTION BrwDbs(lEdit, lZebra)
         STYLE WS_BORDER + ES_LEFT ;
         VALID {||GoToRec(oBrwDb, @nRec, nLast, "Dbs")}
 
-   @ 270, 7 SAY oLbl2 CAPTION " of  " + AllTrim(STR(nLast)) OF oTbar1 SIZE 70, 22
+   @ 270, 7 SAY oLbl2 CAPTION " of  " + AllTrim(Str(nLast)) OF oTbar1 SIZE 70, 22
 
    @ 215, 5 OWNERBUTTON o_Obtn3 OF oTbar1 SIZE 20, 20   ;
         BITMAP "Down.bmp" ; // TRANSPARENT COORDINATES 0, 2, 0, 0 ;
@@ -347,7 +347,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
         STYLE WS_BORDER + ES_LEFT ;
         VALID {||GoToRec(oBrwArr, @nRec, nLast, "Array")}
 
-   @ 270, 7 SAY oLbl2 CAPTION " of  " + AllTrim(STR(nLast)) OF oTbar1 SIZE 70, 22
+   @ 270, 7 SAY oLbl2 CAPTION " of  " + AllTrim(Str(nLast)) OF oTbar1 SIZE 70, 22
 
    @ 215, 5 OWNERBUTTON o_Obtn3 OF oTbar1 SIZE 20, 20   ;
         BITMAP "Down.bmp" ; // TRANSPARENT COORDINATES 0, 2, 0, 0 ;
@@ -462,7 +462,7 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
        ELSEIF HB_IsBlock(HB_PVALUE(nI))
          cVar += "CODEBLOCK"
        ELSEIF HB_IsNumeric(HB_PVALUE(nI))
-         cVar += STR(HB_PVALUE(nI))
+         cVar += Str(HB_PVALUE(nI))
        ELSEIF HB_IsDate(HB_PVALUE(nI))
          cVar += DTOS(HB_PVALUE(nI))
        ELSEIF HB_IsLogical(HB_PVALUE(nI))

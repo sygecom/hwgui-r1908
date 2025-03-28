@@ -89,7 +89,7 @@ If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == Nil, "LPT1", oTest)
    oPrint:Say(10, 31, "LINE 10 COL 31")
    oPrint:Say(14, 21, "LINE 14 COL 21")
    oPrint:Say(30, 34, "LINE 30 COL 34")
-   oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE " + STR(oPrint:nProw)+ " COL " + STR(oPrint:nPcol))
+   oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE " + Str(oPrint:nProw)+ " COL " + Str(oPrint:nPcol))
    oPrint:Say(40, 24, "11222333000144", "@r 99.999.999/9999-99")
    oPrint:Say(oPrint:nProw+1, oPrint:nPcol, "Valor" )
    oPrint:Say(oPrint:nProw, oPrint:nPcol, 996659.8, "@E 999,999,999.99" )
@@ -125,7 +125,7 @@ If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == Nil, "LPT1", oTest),
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter
    @ 14, 21 PSAY "LINE 14 COL 21" OF oPrinter
    @ 30, 34 PSAY "LINE 30 COL 34" OF oPrinter
-   @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + STR(hwg_wProw(oPrinter))+ " COL " + STR(hwg_wPcol(oPrinter)) OF oPrinter
+   @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + Str(hwg_wProw(oPrinter))+ " COL " + Str(hwg_wPcol(oPrinter)) OF oPrinter
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
    @ hwg_wprow(oPrinter)+1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter
    @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
@@ -279,7 +279,7 @@ If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == Nil, "LPT1", oTest), "
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter
    @ 14, 21 PSAY "LINE 14 COL 21" OF oPrinter
    @ 30, 34 PSAY "LINE 30 COL 34" OF oPrinter
-   @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + STR(hwg_wProw(oPrinter))+ " COL " + STR(hwg_wPcol(oPrinter)) OF oPrinter
+   @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + Str(hwg_wProw(oPrinter))+ " COL " + Str(hwg_wPcol(oPrinter)) OF oPrinter
    oPrinter:Descompress()
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
    @ hwg_wprow(oPrinter)+1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter

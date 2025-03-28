@@ -237,10 +237,10 @@ FUNCTION novo(tipo)
    PRIVATE vText := ""
 
  alterado := .F.
- i := AllTrim(str(auto))
+ i := AllTrim(Str(auto))
  oFunc := {}
 
-   PRIVATE vText&i := Memoread(vText)
+   PRIVATE vText&i := MemoRead(vText)
    PRIVATE oEdit&i
 
  //
@@ -287,8 +287,8 @@ FUNCTION Texto()
    if Empty(vText)
       RETURN .T.
    endif
-   i := AllTrim(str(auto))
-   PRIVATE vText&i := Memoread(vText)
+   i := AllTrim(Str(auto))
+   PRIVATE vText&i := MemoRead(vText)
    PRIVATE oEdit&i
    // pegado funcoes e procedures/////////////////////////////////////
    arq := FT_FUSE(vText)
@@ -459,8 +459,8 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      coluna := coluna - hwg_SendMessage(oEdit:Handle, EM_LINEINDEX, -1, 0)
      //
      hwg_WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
-     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + str(linha, 6))
-     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:" + str(coluna, 6))
+     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + Str(linha, 6))
+     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:" + Str(coluna, 6))
       //
      if oEdit:lChanged
           hwg_WriteStatus(HMainWIndow():GetMdiActive(), 4, "*")
@@ -490,8 +490,8 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
              pos := hwg_SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
              pos1 := hwg_LOWORD(pos)
              //
-             //hwg_MsgInfo(str(pos1))
-             //hwg_MsgInfo(str(Len(texto)))
+             //hwg_MsgInfo(Str(pos1))
+             //hwg_MsgInfo(Str(Len(texto)))
              if sintaxe(texto)
 
                 hwg_RE_SetCharFormat(aControls[hWnd]:Handle,{{,,,,,,},{(pos1-Len(texto)), Len(texto), 255,,, .T.}})

@@ -361,7 +361,7 @@ METHOD goBottom() CLASS HBMake_FileBase
          cBuffer := Left(cBuffer, Len(cBuffer) - 2)
          lWithCRLF := pTRUE
       ENDIF
-      cBuffer := SubStr(cBuffer, RAT(pCRLF, cBuffer) + 2)
+      cBuffer := SubStr(cBuffer, RAt(pCRLF, cBuffer) + 2)
       ::nSkipLength := Len(cBuffer) + IIf(lWithCRLF, 2, 0)
       ::nposition := FSeek(Self:nDosHandle, - ( Len(cBuffer) ), 2)
       IF lWithCRLF
@@ -577,7 +577,7 @@ METHOD GOTO(nValue) CLASS HBMake_FileBase
                      lContinue := pFALSE
                      EXIT
                   ENDIF
-                  cBuffer := SubStr(cBuffer, AT(pCRLF, cBuffer) + 2)
+                  cBuffer := SubStr(cBuffer, At(pCRLF, cBuffer) + 2)
                ENDDO
                cLine := cBuffer
             ENDDO

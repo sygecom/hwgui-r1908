@@ -61,13 +61,13 @@ RETURN NIL
 
 FUNCTION OnKey(o, k)
 
-   // hwg_MsgInfo(str(k))
+   // hwg_MsgInfo(Str(k))
 
 RETURN NIL
 
 FUNCTION OnPosChange(o, row)
 
-   // hwg_MsgInfo(str(row))
+   // hwg_MsgInfo(Str(row))
 
 RETURN NIL
 
@@ -78,4 +78,4 @@ FUNCTION OnClick(o)
 RETURN NIL
 
 FUNCTION OnDispInfo(o, x, y)
-RETURN "Row: " + ltrim(str(x)) + " Col: " + ltrim(str(y))
+RETURN "Row: " + LTrim(Str(x)) + " Col: " + LTrim(Str(y))

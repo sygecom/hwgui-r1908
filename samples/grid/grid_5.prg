@@ -74,8 +74,8 @@ FUNCTION Test()
     For i := 1 to 100
         append blank
         REPLACE field_1 WITH i
-        REPLACE field_2 WITH "Test " + str(i)
-        REPLACE field_3 WITH mod(i, 10) == 0
+        REPLACE field_2 WITH "Test " + Str(i)
+        REPLACE field_3 WITH Mod(i, 10) == 0
         REPLACE field_4 WITH Date() + i
         REPLACE field_5 WITH "Memo Test"
     Next

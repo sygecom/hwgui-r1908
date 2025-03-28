@@ -305,7 +305,7 @@ RETURN NIL
 
 FUNCTION Execute()
 
-   LOCAL cQuery := Ltrim(oEdit:GetText())
+   LOCAL cQuery := LTrim(oEdit:GetText())
    LOCAL arScr
    LOCAL nError
    LOCAL nLineEr
@@ -318,7 +318,7 @@ FUNCTION Execute()
          hwg_DoScript(arScr)
       ELSE
          nError := hwg_CompileErr(@nLineEr)
-         hwg_MsgStop("Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)))
+         hwg_MsgStop("Script error ("+LTrim(Str(nError))+"), line "+LTrim(Str(nLineEr)))
       ENDIF
    ELSE
       execSQL(cQuery)
@@ -342,15 +342,15 @@ FUNCTION execSQL(cQuery)
    ENDIF
    IF ( res := sqlQuery(connHandle, cQuery)) != 0
       cQuery := ""
-      hwg_MsgInfo("Operation failed: " + STR(res) + "( " + sqlGetErr(connHandle) + " )")
+      hwg_MsgInfo("Operation failed: " + Str(res) + "( " + sqlGetErr(connHandle) + " )")
       hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
          DO WHILE Len(stroka := hwg_RDSTR(Nil,@cQuery,@poz)) != 0
-            IF Asc(Ltrim(stroka)) > 32
-               Aadd(aQueries, Nil)
-               Ains(aQueries, i)
-               aQueries[i] := { Padr(stroka, 76), lFirst }
+            IF Asc(LTrim(stroka)) > 32
+               AAdd(aQueries, Nil)
+               AIns(aQueries, i)
+               aQueries[i] := { PadR(stroka, 76), lFirst }
                lFirst := .F.
                i ++
             ENDIF
@@ -407,9 +407,9 @@ FUNCTION sqlBrowse(queHandle)
          IF af[j, 1] == "C"
             af[j, 2] := Max(af[j, 2], Len(aQueRows[i, j]))
          ELSEIF af[j, 1] == "N"
-            vartmp := STR(aQueRows[i, j])
+            vartmp := Str(aQueRows[i, j])
             af[j, 2] := Max(af[j, 2], Len(vartmp))
-            af[j, 3] := Max(af[j, 3], IIf("." $ vartmp, af[j, 2] - AT(".", vartmp), 0))
+            af[j, 3] := Max(af[j, 3], IIf("." $ vartmp, af[j, 2] - At(".", vartmp), 0))
          ELSEIF af[j, 1] == "D"
             af[j, 2] := 8
          ELSEIF af[j, 1] == "L"
@@ -455,7 +455,7 @@ STATIC FUNCTION GetFromHistory()
    IF !Empty(oBrw:aArray[i, 1])
       DO WHILE !oBrw:aArray[i, 2]; i--; ENDDO
       DO WHILE i <= oBrw:nRecords .AND. !Empty(oBrw:aArray[i, 1])
-         cQuery += Rtrim(oBrw:aArray[i, 1]) + Chr(13) + Chr(10)
+         cQuery += RTrim(oBrw:aArray[i, 1]) + Chr(13) + Chr(10)
          i++
       ENDDO
       oEdit:SetText(cQuery)
@@ -562,7 +562,7 @@ FUNCTION FilExten(fname)
 
    LOCAL i
 
-RETURN IIf(( i := RAT(".", fname) ) = 0, "", SubStr(fname, i + 1))
+RETURN IIf(( i := RAt(".", fname) ) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION SaveScript()
 

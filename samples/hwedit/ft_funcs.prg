@@ -266,7 +266,7 @@ FUNCTION GetNumberofTableItems(cBuffer)
       IF AT(SPACE(3), cBuffer) == 0
          nItem ++
       ELSE
-         cBuffer := AllTrim(STRTRAN(cBuffer, cItem, ""))
+         cBuffer := AllTrim(StrTran(cBuffer, cItem, ""))
          nItem ++
       ENDIF
    ENDDO
