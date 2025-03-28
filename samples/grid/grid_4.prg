@@ -38,8 +38,6 @@ FUNCTION Main()
 
         ACTIVATE WINDOW oMain
         
-        oServer:Close()
-        
 RETURN NIL
 
 FUNCTION Test()
