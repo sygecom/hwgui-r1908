@@ -46,7 +46,7 @@ Return Nil
 Static Function InitQuery()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
 Return Nil
 
 Static Function EndQuery( lOk )
@@ -57,9 +57,9 @@ Local aChildWnd, hChild
 Static lConnected := .F.
 
    IF lOk
-      cQuery := GetEditText( hDlg, IDC_EDITQUERY )
+      cQuery := hwg_GetEditText( hDlg, IDC_EDITQUERY )
       IF Empty(cQuery)
-         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
+         hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
          Return Nil
       ENDIF
 
@@ -127,7 +127,7 @@ Return .T.
 
 Function QuerySave
 Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
-   cQuery := GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
+   cQuery := hwg_GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
    IF !Empty(fname)
       MemoWrit( fname,cQuery )
    ENDIF

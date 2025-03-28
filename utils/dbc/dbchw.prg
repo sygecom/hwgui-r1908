@@ -60,7 +60,7 @@ PUBLIC nQueryWndHandle := 0
    IF nServerType == ADS_REMOTE_SERVER
       IF !AdsConnect( mypath )
           nServerType := ADS_LOCAL_SERVER
-          MsgInfo( "Can't establish connection" )
+          hwg_MsgInfo( "Can't establish connection" )
       ENDIF
    ENDIF
    AdsSetServerType(nServerType)
@@ -178,7 +178,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
    ServerButton( nServerType - 1 )
 #else
-   MsgInfo("No config in mode DBFCDX")
+   hwg_MsgInfo("No config in mode DBFCDX")
 #endif
 Return .T.
 
@@ -203,7 +203,7 @@ Local new_numdriv, new_servertype, serverPath
    IF AdsLocking() != hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX6)
       AdsLocking( !AdsLocking() )
    ENDIF
-   dformat := GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 )
+   dformat := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX3, 12 )
    SET DATE FORMAT dformat
    new_servertype := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), ;
                        ADS_LOCAL_SERVER, ADS_REMOTE_SERVER)
@@ -211,7 +211,7 @@ Local new_numdriv, new_servertype, serverPath
       nServerType := new_servertype
       AdsSetServerType(nServerType)
       IF nServerType == ADS_REMOTE_SERVER
-         serverPath := GetDlgItemText( hDlg, IDC_EDIT1, 60 )
+         serverPath := hwg_GetDlgItemText( hDlg, IDC_EDIT1, 60 )
          IF Right(serverPath) != "/" .AND. Right(serverPath) != "\"
             serverPath += "\"
          ENDIF
@@ -233,7 +233,7 @@ Local new_numdriv, new_servertype, serverPath
 Return .T.
 
 Static Function ServerButton( iEnable )
-Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
    hwg_SendMessage(hEdit, WM_ENABLE, iEnable, 0)
 Return .T.
 
@@ -299,12 +299,12 @@ Static Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 Return Nil
 
 Static Function TagName
 Local hDlg := hwg_GetModalHandle()
-Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    IF hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
       hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    ELSE
@@ -317,26 +317,26 @@ Local hDlg := hwg_GetModalHandle()
 Local indname, isMulti, isUniq, tagname, expkey, expfor
 Local oWindow, aControls, i
 
-   indname := GetDlgItemText( hDlg, IDC_EDIT2, 20 )
+   indname := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 20 )
    IF Empty(indname)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
       Return Nil
    ENDIF
    isMulti := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
    IF isMulti
-      tagname := GetDlgItemText( hDlg, IDC_EDIT3, 60 )
+      tagname := hwg_GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty(tagname)
-         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+         hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
          Return Nil
       ENDIF
    ENDIF
    isUniq := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX2)
-   expkey := GetDlgItemText( hDlg, IDC_EDIT4, 60 )
+   expkey := hwg_GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty(expkey)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT4 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT4 ) )
       Return Nil
    ENDIF
-   expfor := GetDlgItemText( hDlg, IDC_EDIT5, 60 )
+   expfor := hwg_GetDlgItemText( hDlg, IDC_EDIT5, 60 )
    indname := mypath + indname
    hwg_SetDlgItemText( hDlg, IDC_TEXT2, "Indexing ..." )
    IF numdriv = 1 .AND. isMulti
@@ -427,7 +427,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
 #ifdef RDD_ADS
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
 #endif
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return .T.
 
 Static Function EndOpen()
@@ -438,10 +438,10 @@ Local oldExcl := SET( _SET_EXCLUSIVE ), oldRdonly := prrdonly
 Local oldLock := AdsLocking()
 #endif
 
-   fname := GetEditText( hDlg, IDC_EDIT7 )
+   fname := hwg_GetEditText( hDlg, IDC_EDIT7 )
    IF !Empty(fname)
-      alsName := GetEditText( hDlg, IDC_EDIT3 )
-      pass := GetEditText( hDlg, IDC_EDIT4 )
+      alsName := hwg_GetEditText( hDlg, IDC_EDIT3 )
+      pass := hwg_GetEditText( hDlg, IDC_EDIT4 )
       new_numdriv := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON3), 1, ;
                      IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON4), 2, 3))
       IF new_numdriv != numdriv
@@ -475,7 +475,7 @@ Local oldLock := AdsLocking()
 #endif
       EndDialog( hDlg )
    ELSE
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
    ENDIF
 Return .T.
 
@@ -542,16 +542,16 @@ Return Nil
 
 Static Function InitCalc()
 Local hDlg := hwg_GetModalHandle()
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
 Return Nil
 
 Static Function EndCalc()
 Local hDlg := hwg_GetModalHandle()
 Local cExpr, res
 
-   cExpr := GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
+   cExpr := hwg_GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
    IF Empty(cExpr)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITCALC ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
       Return Nil
    ENDIF
    IF TYPE(Trim(cExpr)) $ "UEUI"
@@ -569,7 +569,7 @@ Return Nil
 Function Scripts( nAct )
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(GetDlgItem(hwg_GetModalHandle(),IDC_EDIT8))}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(hwg_GetDlgItem(hwg_GetModalHandle(),IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
         ON 0,IDOK         ACTION {|| EndScri(nAct)}   ;
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
@@ -582,9 +582,9 @@ Static Function EndScri( lOk, nAct )
 Local hDlg := hwg_GetModalHandle()
 Local fname, arScr, nError, nLineEr, obl
 
-   fname := GetDlgItemText( hDlg, IDC_EDIT8, 80 )
+   fname := hwg_GetDlgItemText( hDlg, IDC_EDIT8, 80 )
    IF Empty(fname)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT8 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT8 ) )
       Return Nil
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -600,7 +600,7 @@ Local fname, arScr, nError, nLineEr, obl
       ELSE
          hwg_DoScript( arScr )
       ENDIF
-      MsgInfo( "Script executed" )
+      hwg_MsgInfo( "Script executed" )
    ELSE
       nError := hwg_CompileErr( @nLineEr )
       hwg_MsgStop( "Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)) )

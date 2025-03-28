@@ -43,7 +43,7 @@ Local hDlg := hwg_GetModalHandle(), cTitle
       cTitle := "Input record number"
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
 Return Nil
 
 Static Function EndMove(lOk, nMove)
@@ -52,9 +52,9 @@ Local cExpres, nrec, key
 Local hWnd, oWindow, aControls, iCont
 
    IF lOk
-      cExpres := GetDlgItemText( hDlg, IDC_EDIT6, 80 )
+      cExpres := hwg_GetDlgItemText( hDlg, IDC_EDIT6, 80 )
       IF Empty(cExpres)
-         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
+         hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
          Return Nil
       ENDIF
 
@@ -136,7 +136,7 @@ Local nrec, i, res, block
          ENDIF
       ENDIF
    ELSE
-      MsgInfo( "Wrong expression" )
+      hwg_MsgInfo( "Wrong expression" )
    ENDIF
 Return Nil
 
@@ -183,11 +183,11 @@ Local i, nrec
          oBrw:bGoBot:= &( "{||" + oBrw:alias + "->(DBGOBOTTOM())}")
          oBrw:bEof  := &( "{||" + oBrw:alias + "->(EOF())}" )
          oBrw:bBof  := &( "{||" + oBrw:alias + "->(BOF())}" )
-         MsgInfo( "Records not found" )
+         hwg_MsgInfo( "Records not found" )
          hwg_WriteStatus( HMainWindow():GetMdiActive(), 1,Ltrim(Str(Reccount(), 10))+" records" )
       ENDIF
    ELSE
-      MsgInfo( "Wrong expression" )
+      hwg_MsgInfo( "Wrong expression" )
    ENDIF
 Return Nil
 

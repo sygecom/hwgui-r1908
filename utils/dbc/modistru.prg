@@ -54,7 +54,7 @@ Static Function SetField(oBrw)
 Local hDlg := hwg_GetModalHandle(), i
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent, 1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent, 2], "CNDLM" ) ) != 0
-      hwg_ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
+      hwg_ComboSetString( hwg_GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT3, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 3])) )
    hwg_SetDlgItemText( hDlg, IDC_EDIT4, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 4])) )
@@ -66,14 +66,14 @@ Local oBrowse := oDlg:FindControl( ID_BROWSE )
 Local cName, cType, nLen, nDec := 0
 
    IF nOper < 4
-      cName := GetDlgItemText( hDlg, IDC_EDIT2, 10 )
+      cName := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 10 )
       IF Empty(cName)
-         hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
+         hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
          Return Nil
       ENDIF
-      cType := Left(GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1)
+      cType := Left(hwg_GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1)
       IF Empty(cType)
-         hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
+         hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
          Return Nil
       ENDIF
       IF cType == "D" 
@@ -83,13 +83,13 @@ Local cName, cType, nLen, nDec := 0
       ELSEIF cType == "M" 
          nLen := 10
       ELSE
-         nLen  := Val( GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
+         nLen  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
          IF nLen == 0
-            hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
+            hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
             Return Nil
          ENDIF
          IF cType == "N" 
-            nDec  := Val( GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
+            nDec  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
          ENDIF
       ENDIF
       IF nOper == 3 .OR. ( oBrowse:nRecords == 1 .AND. Empty(oBrowse:aArray[1, 1]) )

@@ -35,14 +35,14 @@ Return Nil
 
 Static Function RecNumberEdit
 Local hDlg := hwg_GetModalHandle()
-Local hEdit := GetDlgItem( hDlg,IDC_EDITRECN )
+Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
    hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function RecNumberDisable
-Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 Return Nil
 
@@ -51,7 +51,7 @@ Local hDlg := hwg_GetModalHandle()
 
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
 Return Nil
 
 Static Function EndRepl()
@@ -62,17 +62,17 @@ Private finame, cValue, cFor
 
    oWindow := HMainWindow():GetMdiActive()
 
-   finame := GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 )
+   finame := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 )
    IF Empty(finame)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
       Return Nil
    ENDIF
-   cValue := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
+   cValue := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(cValue)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
-   cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
+   cFor := hwg_GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF !Empty(cFor) .AND. TYPE(cFor) != "L"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
@@ -84,7 +84,7 @@ Private finame, cValue, cFor
       IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
          REPLACE ALL &finame WITH &cValue FOR &cFor
       ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-         nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+         nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          REPLACE NEXT nrest &finame WITH &cValue FOR &cFor
       ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
          REPLACE REST &finame WITH &cValue FOR &cFor
@@ -125,7 +125,7 @@ Local hDlg := hwg_GetModalHandle()
    ENDIF
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDITFOR ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITFOR ) )
 Return Nil
 
 Static Function EndDele(nAct)
@@ -136,7 +136,7 @@ Private cFor
 
    oWindow := HMainWindow():GetMdiActive()
 
-   cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
+   cFor := hwg_GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF !Empty(cFor) .AND. TYPE(cFor) != "L"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
@@ -148,7 +148,7 @@ Private cFor
          IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             DELETE ALL FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-            nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+            nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             DELETE NEXT nrest FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             DELETE REST FOR &cFor
@@ -157,7 +157,7 @@ Private cFor
          IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             RECALL ALL FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-            nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+            nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             RECALL NEXT nrest FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             RECALL REST FOR &cFor
@@ -166,7 +166,7 @@ Private cFor
          IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
             COUNT TO nsum ALL FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-            nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+            nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
             COUNT TO nsum NEXT nrest FOR &cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             COUNT TO nsum REST FOR &cFor
@@ -208,7 +208,7 @@ Static Function InitSum()
 Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndSum()
@@ -216,13 +216,13 @@ Local hDlg := hwg_GetModalHandle()
 Local cSumf, cFor, nrest, blsum, blfor, nRec := Recno()
 Private nsum := 0
 
-   cSumf := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
+   cSumf := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(cSumf)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
 
-   cFor := GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
+   cFor := hwg_GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF ( !Empty(cFor) .AND. TYPE(cFor) != "L" ) .OR. TYPE(cSumf) != "N"
       hwg_MsgStop( "Wrong expression!" )
    ELSE
@@ -235,7 +235,7 @@ Private nsum := 0
       IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
          DBEval(blsum, blfor)
       ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-         nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+         nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
          DBEval(blsum, blfor, , nrest)
       ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
          DBEval(blsum, blfor, , , , .T.)
@@ -267,14 +267,14 @@ Return Nil
 
 Static Function DelimEdit
 Local hDlg := hwg_GetModalHandle()
-Local hEdit := GetDlgItem( hDlg,IDC_EDITDWITH )
+Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
    hwg_SetFocus( hEdit )
 Return Nil
 
 Static Function DelimDisable
-Local hEdit := GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 Return Nil
 
@@ -282,16 +282,16 @@ Static Function InitApp()
 Local hDlg := hwg_GetModalHandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
-   hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+   hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 Return Nil
 
 Static Function EndApp()
 Local hDlg := hwg_GetModalHandle()
 Local fname, nRec := Recno()
 
-   fname := GetDlgItemText( hDlg, IDC_EDIT7, 60 )
+   fname := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(fname)
-      hwg_SetFocus( GetDlgItem( hDlg, IDC_EDIT7 ) )
+      hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
       Return Nil
    ENDIF
 
@@ -299,7 +299,7 @@ Local fname, nRec := Recno()
    IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON6)
       // DBEval(blsum, blfor)
    ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON7)
-      // nrest := Val( GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
+      // nrest := Val( hwg_GetDlgItemText( hDlg, IDC_EDITRECN, 10 ) )
       // DBEval(blsum, blfor, , nrest)
    ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
       // DBEval(blsum, blfor, , , , .T.)
