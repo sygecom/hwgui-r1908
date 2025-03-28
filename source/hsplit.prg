@@ -78,6 +78,7 @@ METHOD Init() CLASS HSplitter
 
    RETURN NIL
 
+#if 0 // old code for reference (to be deleted)
 METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    HB_SYMBOL_UNUSED(wParam)
@@ -115,7 +116,57 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
    ENDIF
 
    RETURN - 1
+#else
+METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
+   HB_SYMBOL_UNUSED(wParam)
+
+   SWITCH msg
+
+   CASE WM_MOUSEMOVE
+      IF ::hCursor == NIL
+         ::hCursor := hwg_LoadCursor(IIf(::lVertical, IDC_SIZEWE, IDC_SIZENS))
+      ENDIF
+      hwg_SetCursor(::hCursor)
+      IF ::lCaptured
+         ::Drag(lParam)
+         IF ::lScrolling
+            ::DragAll(.T.)
+         ENDIF
+      ENDIF
+      EXIT
+
+   CASE WM_PAINT
+      ::Paint()
+      EXIT
+
+   CASE WM_ERASEBKGND
+      EXIT
+
+   CASE WM_LBUTTONDOWN
+      hwg_SetCursor(::hCursor)
+      hwg_SetCapture(::handle)
+      ::lCaptured := .T.
+      hwg_InvalidateRect(::handle, 1)
+      EXIT
+
+   CASE WM_LBUTTONUP
+      hwg_ReleaseCapture()
+      ::lCaptured := .F.
+      ::lMoved := .F.
+      ::DragAll(.F.)
+      IF hb_IsBlock(::bEndDrag)
+         //Eval(::bEndDrag, Self)
+      ENDIF
+      EXIT
+
+   CASE WM_DESTROY
+      ::END()
+
+   ENDSWITCH
+
+RETURN -1
+#endif
 
 METHOD Paint() CLASS HSplitter
    LOCAL pps, hDC, aCoors, x1, y1, x2, y2, oBrushFill
