@@ -332,7 +332,7 @@ FUNCTION CreateName(cPropertyName, oCtrl)
    LOCAL nLen := Len(cName)
 
    FOR i := 1 TO Len(aControls)
-      IIf(j := AScan(aControls[i]:aProp, {|a|a[1] == cPropertyName})) > 0
+      IF (j := AScan(aControls[i]:aProp, {|a|a[1] == cPropertyName})) > 0
          IF Left(aControls[i]:aProp[j, 2], nLen) == cName
             AAdd(arr, SubStr(aControls[i]:aProp[j, 2], nLen + 1))
          ENDIF
