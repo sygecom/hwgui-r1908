@@ -2,6 +2,9 @@
  *$Id: guilib.ch 1906 2012-09-25 22:23:08Z lfbasso $
  */
 
+#ifndef _GUILIB_CH_
+#define _GUILIB_CH_
+
 #define HWG_VERSION            "2.17"
 #define WND_MAIN               1
 #define WND_MDI                2
@@ -305,3 +308,5 @@ Added by Marcos Antonio Gambeta
 #include "_shape.ch"
 
 #include "_container.ch"
+
+#endif // _GUILIB_CH_
