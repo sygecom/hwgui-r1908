@@ -10,9 +10,8 @@
 
 //--------------------------------------------------------------------------//
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define MCS_DAYSTATE             1
 #define MCS_MULTISELECT          2

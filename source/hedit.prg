@@ -15,11 +15,10 @@ STATIC s_bColorSelect := 13434879 //hwg_VColor("CCFFFF")
 STATIC s_lPersistColorSelect := .F.
 STATIC s_bDisablecolor := NIL  // hwg_GetSysColor(COLOR_BTNHIGHLIGHT)
 
-#include "windows.ch"
 #include <hbclass.ch>
 #include <common.ch>
 #include "hblang.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define VK_C  67
 #define VK_V  86

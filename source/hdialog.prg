@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #include <common.ch>
 
 #define WM_PSPNOTIFY WM_USER + 1010

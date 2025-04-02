@@ -9,8 +9,7 @@
 // Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include <hbclass.ch>
 #include <common.ch>
 #define LVS_REPORT              1

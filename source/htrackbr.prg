@@ -8,9 +8,8 @@
 // www - http://github.com/marcosgambeta/
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define TBS_AUTOTICKS                1
 #define TBS_VERT                     2

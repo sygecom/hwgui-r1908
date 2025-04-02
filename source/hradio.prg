@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #DEFINE TRANSPARENT 1
 
 CLASS HRadioGroup INHERIT HControl //HObject

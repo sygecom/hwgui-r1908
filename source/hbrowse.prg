@@ -19,8 +19,7 @@
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include <common.ch>
 
 #include <inkey.ch>

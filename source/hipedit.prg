@@ -8,10 +8,9 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
 #include <common.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define  IPN_FIELDCHANGED   4294966436
 

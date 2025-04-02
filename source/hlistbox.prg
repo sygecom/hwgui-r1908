@@ -7,9 +7,8 @@
 // Copyright 2004 Vic McClung
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #include <common.ch>
 
 //-------------------------------------------------------------------------------------------------------------------//

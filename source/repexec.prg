@@ -8,8 +8,7 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "repmain.h"
 #include <fileio.ch>
 #include <common.ch>

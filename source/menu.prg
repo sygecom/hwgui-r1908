@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define  MENU_FIRST_ID   32000
 #define  CONTEXTMENU_FIRST_ID   32900

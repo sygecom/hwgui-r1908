@@ -8,9 +8,8 @@
 // www - http://geocities.yahoo.com.br/marcosgambeta/
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 //-------------------------------------------------------------------------------------------------------------------//
 

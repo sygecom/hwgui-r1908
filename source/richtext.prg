@@ -38,8 +38,7 @@
 
 #include <hbclass.ch>
 #include <common.ch>
-#include "guilib.ch"
-#include "windows.ch"
+#include "hwgui.ch"
 
 #include "richtext.ch"
 

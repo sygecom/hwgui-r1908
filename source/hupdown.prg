@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define UDN_FIRST               (-721)        // updown
 #define UDN_DELTAPOS            (UDN_FIRST - 1)

@@ -14,9 +14,8 @@
 //#translate :hMask         => :m_csbitmaps\[4\] // not used
 //#translate :crTransparent => :m_csbitmaps\[5\] // not used
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #include <common.ch>
 
 #define TRANSPARENT 1
