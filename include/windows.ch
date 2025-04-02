@@ -2,6 +2,9 @@
  *$Id: windows.ch 1891 2012-09-10 10:48:31Z lfbasso $
  */
 
+#ifndef _WINDOWS_CH_
+#define _WINDOWS_CH_
+
 #define WM_CREATE                       1
 #define WM_DESTROY                      2
 #define WM_MOVE                         3
@@ -1620,3 +1623,5 @@ ComboBox
 #define CBN_CLOSEUP         8
 #define CBN_SELENDOK        9
 #define CBN_SELENDCANCEL   10
+
+#endif // _WINDOWS_CH_
