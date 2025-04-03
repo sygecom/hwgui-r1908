@@ -9,8 +9,9 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
+
 #define BUF_SIZE  200
 
 //----------------------------------------------------------------------------//

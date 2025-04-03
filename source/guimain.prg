@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 #ifdef __XHARBOUR__
    #xtranslate hb_processOpen([<x,...>])   => hb_openProcess(<x>)

@@ -39,7 +39,6 @@
 #include <hbclass.ch>
 #include <common.ch>
 #include "hwgui.ch"
-
 #include "richtext.ch"
 
 #define CRLF hb_osnewline()

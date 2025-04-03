@@ -11,6 +11,7 @@
 #pragma -w1
 
 #include <fileio.ch>
+
 #ifndef __WINDOWS__
 #define __WINDOWS__
 #endif

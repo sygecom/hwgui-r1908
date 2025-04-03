@@ -9,8 +9,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 #define CONTROL_FIRST_ID 34000
 #define TRANSPARENT 1

@@ -9,9 +9,10 @@
 // Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
 #include <common.ch>
+#include "hwgui.ch"
+
 #define LVS_REPORT              1
 #define LVS_SINGLESEL           4
 #define LVS_SHOWSELALWAYS       8

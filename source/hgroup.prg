@@ -9,8 +9,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 #define TRANSPARENT 1
 #define BS_TYPEMASK SS_TYPEMASK

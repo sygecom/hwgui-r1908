@@ -8,10 +8,10 @@
 // www - http://kresin.belgorod.su
 //
 
+#include <common.ch>
+#include <fileio.ch>
 #include "hwgui.ch"
 #include "repmain.h"
-#include <fileio.ch>
-#include <common.ch>
 
 // #define __DEBUG__
 

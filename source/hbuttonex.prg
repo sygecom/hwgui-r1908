@@ -8,15 +8,15 @@
 // www - http://sites.uol.com.br/culikr/
 //
 
+#include <hbclass.ch>
+#include <common.ch>
+#include "hwgui.ch"
+
 #translate :hBitmap       => :m_csbitmaps\[1\]
 //#translate :dwWidth       => :m_csbitmaps\[2\] // not used
 //#translate :dwHeight      => :m_csbitmaps\[3\] // not used
 //#translate :hMask         => :m_csbitmaps\[4\] // not used
 //#translate :crTransparent => :m_csbitmaps\[5\] // not used
-
-#include <hbclass.ch>
-#include "hwgui.ch"
-#include <common.ch>
 
 #define TRANSPARENT 1
 #define BTNST_COLOR_BK_IN     1            // Background color when mouse is INside

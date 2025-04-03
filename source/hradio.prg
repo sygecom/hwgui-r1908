@@ -10,6 +10,7 @@
 
 #include <hbclass.ch>
 #include "hwgui.ch"
+
 #DEFINE TRANSPARENT 1
 
 CLASS HRadioGroup INHERIT HControl //HObject

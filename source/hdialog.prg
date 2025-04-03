@@ -9,8 +9,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 #define WM_PSPNOTIFY WM_USER + 1010
 #define FLAG_CHECK 2

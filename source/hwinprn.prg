@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
+#include "hwgui.ch"
 
 
 #define STD_HEIGHT      4

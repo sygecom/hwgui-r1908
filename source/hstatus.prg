@@ -9,8 +9,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 //#define NM_FIRST                 (0 - 0)
 //#define NM_CLICK                (NM_FIRST-2)    // uses NMCLICK struct

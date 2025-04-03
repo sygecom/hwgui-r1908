@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
+#include "hwgui.ch"
 #include "hwg_qhtm.ch"
 
 CLASS HQhtm INHERIT HControl

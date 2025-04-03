@@ -8,8 +8,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <fileio.ch>
+#include "hwgui.ch"
 
 #define PF_BUFFERS   2048
 

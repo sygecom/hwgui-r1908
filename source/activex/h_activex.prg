@@ -25,8 +25,8 @@
  *
  */
 
-#include "windows.ch"
 #include <hbclass.ch>
+#include "windows.ch"
 
 //-----------------------------------------------------------------------------------------------//
 CLASS HActiveX FROM HControl

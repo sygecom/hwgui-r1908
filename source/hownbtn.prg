@@ -8,10 +8,10 @@
 // www - http://kresin.belgorod.su
 //
 
-#include <inkey.ch>
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include <inkey.ch>
+#include "hwgui.ch"
 
 #define TRANSPARENT 1
 

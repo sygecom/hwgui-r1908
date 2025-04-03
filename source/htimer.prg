@@ -9,8 +9,8 @@
 //
 
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include "hwgui.ch"
 
 #define TIMER_FIRST_ID 33900
 

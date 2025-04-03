@@ -8,8 +8,8 @@
 // Copyright (c) Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
+#include "hwgui.ch"
 
 CLASS HSplash
 

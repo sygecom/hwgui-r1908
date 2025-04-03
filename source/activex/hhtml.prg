@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
+#include "hwgui.ch"
 
 #define WEBPAGE_GOBACK      0
 #define WEBPAGE_GOFORWARD   1

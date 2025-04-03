@@ -19,12 +19,11 @@
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "hwgui.ch"
+#include <hbclass.ch>
 #include <common.ch>
-
 #include <inkey.ch>
 #include <dbstruct.ch>
-#include <hbclass.ch>
+#include "hwgui.ch"
 
 #ifdef __XHARBOUR__
    #xtranslate hb_RAScan([<x,...>]) => RAScan(<x>)
