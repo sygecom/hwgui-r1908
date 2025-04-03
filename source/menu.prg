@@ -11,10 +11,10 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-#define  MENU_FIRST_ID   32000
-#define  CONTEXTMENU_FIRST_ID   32900
-#define  FLAG_DISABLED   1
-#define  FLAG_CHECK      2
+#define MENU_FIRST_ID        32000
+#define CONTEXTMENU_FIRST_ID 32900
+#define FLAG_DISABLED        1
+#define FLAG_CHECK           2
 
 STATIC s__aMenuDef, s__oWnd, s__aAccel, s__nLevel, s__Id, s__oMenu, s__oBitmap
 STATIC s_nWidthBmp, s_nHeightBmp, s_nbkColor

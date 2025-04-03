@@ -16,7 +16,7 @@
    #xtranslate HB_AT(< x, ... >) => At(< x >)
 #endif
 
-#define  CONTROL_FIRST_ID   34000
+#define CONTROL_FIRST_ID 34000
 
 // nando
 STATIC coName

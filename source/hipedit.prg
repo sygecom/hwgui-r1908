@@ -12,7 +12,7 @@
 #include <common.ch>
 #include "hwgui.ch"
 
-#define  IPN_FIELDCHANGED   4294966436
+#define IPN_FIELDCHANGED 4294966436
 
 //- HIPedit
 

@@ -200,7 +200,7 @@ RETURN xSay
 
 // Indonesian Say Money
 
-#define  PECAHAN {"TRILIUN ", "MILYAR ", "JUTA ", "RIBU ", "RUPIAH"}
+#define PECAHAN {"TRILIUN ", "MILYAR ", "JUTA ", "RIBU ", "RUPIAH"}
 
 FUNCTION hwg_SayRupiah(nAngka)
 
@@ -249,7 +249,7 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
  RETURN say
 
 
-#define  bil_asli {"SATU", "DUA", "TIGA", "EMPAT", "LIMA", "ENAM", "TUJUH", "DELAPAN", "SEMBILAN"}
+#define bil_asli {"SATU", "DUA", "TIGA", "EMPAT", "LIMA", "ENAM", "TUJUH", "DELAPAN", "SEMBILAN"}
 
 STATIC FUNCTION bil(x)
 RETURN IIf(x != "0", bil_asli[val(x)] + " ", "")

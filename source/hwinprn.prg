@@ -12,13 +12,13 @@
 #include <hbclass.ch>
 
 
-#define   STD_HEIGHT      4
+#define STD_HEIGHT      4
 
-#define   MODE_NORMAL     0
-#define   MODE_ELITE      1
-#define   MODE_COND       2
-#define   MODE_ELITECOND  3
-#define   MODE_USER      10
+#define MODE_NORMAL     0
+#define MODE_ELITE      1
+#define MODE_COND       2
+#define MODE_ELITECOND  3
+#define MODE_USER      10
 
 Static s_cPseudoChar := "ƒÕ≥∫⁄…’÷øª∑∏¿»”‘ŸºΩæ¬À—“¡ œ–√Ã∆«¥πµ∂≈Œ◊ÿ"
 
