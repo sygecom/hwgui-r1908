@@ -8,11 +8,10 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <inkey.ch>
 #include <dbstruct.ch>
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "gtk.ch"
 
 REQUEST DBGOTOP

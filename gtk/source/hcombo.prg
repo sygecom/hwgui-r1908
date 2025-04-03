@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #define CB_ERR              (-1)
 #ifndef CBN_SELCHANGE

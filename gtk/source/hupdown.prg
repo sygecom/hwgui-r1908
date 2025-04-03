@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #ifndef UDS_SETBUDDYINT
 #define UDS_SETBUDDYINT     2

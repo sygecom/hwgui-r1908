@@ -9,8 +9,7 @@
 //
 
 #include <hbclass.ch>
-#include "windows.ch"
-#include "guilib.ch"
+#include "hwgui.ch"
 
 #ifndef HS_HORIZONTAL
 #define HS_HORIZONTAL       0       /* ----- */

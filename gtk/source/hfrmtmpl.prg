@@ -47,9 +47,8 @@ Static aCtrls := { ;
   "HAnimation():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,Filename,AutoPlay,Center,Transparent)" ;
                 }
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 #include "hxml.ch"
 
 #define  CONTROL_FIRST_ID   34000

@@ -8,9 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 static aCustomEvents := { ;
       { WM_NOTIFY,WM_PAINT,WM_CTLCOLORSTATIC,WM_CTLCOLOREDIT,WM_CTLCOLORBTN, ;

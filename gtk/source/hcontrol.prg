@@ -13,9 +13,8 @@
 // www - http://sites.uol.com.br/culikr/
 //
 
-#include "windows.ch"
 #include <hbclass.ch>
-#include "guilib.ch"
+#include "hwgui.ch"
 
 REQUEST HWG_ENDWINDOW
 
