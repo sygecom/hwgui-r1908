@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include <inkey.ch>
 #include <hbclass.ch>
+#include <inkey.ch>
 #include "hwgui.ch"
 
 CLASS HOwnButton INHERIT HControl

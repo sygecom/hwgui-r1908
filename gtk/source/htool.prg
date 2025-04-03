@@ -7,10 +7,10 @@
 // www - http://sites.uol.com.br/culikr/
 //
 
-#include <inkey.ch>
 #include <hbclass.ch>
-#include "hwgui.ch"
 #include <common.ch>
+#include <inkey.ch>
+#include "hwgui.ch"
 
 #define TRANSPARENT 1
 

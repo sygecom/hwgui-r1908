@@ -8,8 +8,8 @@
 // www - http://kresin.belgorod.su
 //
 
-#include "hwgui.ch"
 #include <hbclass.ch>
+#include "hwgui.ch"
 
 #ifndef TCM_SETCURSEL
 #define TCM_SETCURSEL           4876     // (TCM_FIRST + 12)
