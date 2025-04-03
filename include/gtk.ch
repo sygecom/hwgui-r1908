@@ -5,6 +5,9 @@
  *
  */
 
+#ifndef _GTK_CH_
+#define _GTK_CH_
+
 /* Cursor types.
  */
 #define GDK_X_CURSOR            0
@@ -84,3 +87,5 @@
 #define GDK_UR_ANGLE            148
 #define GDK_WATCH               150
 #define GDK_XTERM               152
+
+#endif // _GTK_CH_
