@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
+#xcommand @ <nX>,<nY> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
              [ INIT <nInit> ]              ;
@@ -20,7 +20,7 @@
              [ ON DBLCLICK <bDblClick> ];
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
-          [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<x>,<y>,<width>, ;
+          [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<width>, ;
              <height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
              <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther> ) ;;
           [ <oListbox>:name := <(oListbox)> ]
@@ -43,7 +43,7 @@
           [<oListbox> := ] HListBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
              <bSize>,<bDraw>,<bChange>,<ctoolt>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
 
-#xcommand @ <x>,<y> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
+#xcommand @ <nX>,<nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -65,6 +65,6 @@
           => ;
           [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<vari>,;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},;
-             <nStyle>,<x>,<y>,<width>,<height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bChange>,<ctoolt>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
           [ <oListbox>:name := <(oListbox)> ]

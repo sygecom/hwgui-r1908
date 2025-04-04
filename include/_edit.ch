@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> EDITBOX [ <oEdit> CAPTION ] <caption> ;
+#xcommand @ <nX>,<nY> EDITBOX [ <oEdit> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -20,7 +20,7 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<x>,<y>,<width>, ;
+          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<width>, ;
              <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<ctoolt>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther> );;
           [ <oEdit>:name := <(oEdit)> ]
@@ -44,7 +44,7 @@
 
 /* SAY ... GET system     */
 #ifdef __SYGECOM__
-#xcommand @ <x>,<y> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -67,13 +67,13 @@
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
-             <nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,IIF(!EMPTY(<ctoolt>),<ctoolt>,),<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]
 
 #else
-#xcommand @ <x>,<y> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -96,7 +96,7 @@
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
-             <nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]

@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> TREE [ <oTree> ]   ;
+#xcommand @ <nX>,<nY> TREE [ <oTree> ]   ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -22,7 +22,7 @@
              [ STYLE <nStyle> ]         ;
              [ BITMAP <aBmp>  [<res: FROM RESOURCE>] [ BITCOUNT <nBC> ] ]  ;
           => ;
-          [<oTree> := ] HTree():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, ;
+          [<oTree> := ] HTree():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
                 <height>,<oFont>,<bInit>,<bSize>,<color>,<bcolor>,<aBmp>,<.res.>,<.lEdit.>,<bClick>,<nBC>, ;
                 <bRClick>, <bDClick>, <.lCheck.>, <bCheck>, <.lDragDrop.>, <bDrag>, <bDrop>, <bOther> );;
           [ <oTree>:name := <(oTree)> ]

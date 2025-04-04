@@ -11,7 +11,7 @@
 					     <bInit>,<bClick>,<bWhen>, <nStyle> )
 
           //nando
-#xcommand @ <x>,<y> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
+#xcommand @ <nX>,<nY> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
              [ CAPTION  <caption> ];
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -26,7 +26,7 @@
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
           => [<ogr> := ] HRadioGroup():NewRG( <oWnd>,<nId>,<nStyle>,<vari>,;
-                  {|v|Iif(v==Nil,<vari>,<vari>:=v)},<x>,<y>,<width>,<height>,<caption>,<oFont>,;
+                  {|v|Iif(v==Nil,<vari>,<vari>:=v)},<nX>,<nY>,<width>,<height>,<caption>,<oFont>,;
                   <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>);;
           [ <ogr>:name := <(ogr)> ]
 

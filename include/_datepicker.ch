@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> DATEPICKER [ <oPick> ]  ;
+#xcommand @ <nX>,<nY> DATEPICKER [ <oPick> ]  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -16,7 +16,7 @@
              [ TOOLTIP <ctoolt> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
-          [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<x>,<y>, ;
+          [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
              <width>,<height>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
              <color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]
@@ -42,7 +42,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <x>,<y> GET DATEPICKER [ <oPick> VAR ] <vari> ;
+#xcommand @ <nX>,<nY> GET DATEPICKER [ <oPick> VAR ] <vari> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -59,6 +59,6 @@
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-             <nStyle>,<x>,<y>,<width>,<height>,      ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,      ;
              <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>,<color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]

@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 // Contribution ATZCT" <atzct@obukhov.kiev.ua
-#xcommand @ <x>,<y> PROGRESSBAR <oPBar>        ;
+#xcommand @ <nX>,<nY> PROGRESSBAR <oPBar>        ;
              [ OF <oWnd> ]                       ;
              [ ID <nId> ]                        ;
              [ SIZE <nWidth>,<nHeight> ]         ;
@@ -14,6 +14,6 @@
              [ ANIMATION <nAnimat> ]             ;
              [ TOOLTIP <ctooltip> ]              ;
           => ;
-          <oPBar> :=  HProgressBar():New( <oWnd>,<nId>,<x>,<y>,<nWidth>, ;
+          <oPBar> :=  HProgressBar():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bDraw>,<ctooltip>,<nAnimat>,<.lVert.> );;
           [ <oPBar>:name := <(oPBar)> ]

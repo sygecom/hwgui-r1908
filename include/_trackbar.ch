@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> TRACKBAR [ <oTrackBar> ]  ;
+#xcommand @ <nX>,<nY> TRACKBAR [ <oTrackBar> ]  ;
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
              [ SIZE <width>, <height> ]    ;
@@ -20,7 +20,7 @@
              [ < top : TOP > ]             ;
              [ < left : LEFT > ]           ;
           => ;
-          [<oTrackBar> :=] HTrackBar():New( <oWnd>,<nId>,<nInit>,<nStyle>,<x>,<y>,      ;
+          [<oTrackBar> :=] HTrackBar():New( <oWnd>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;
              <width>,<height>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<bChange>,<bDrag>,<nLow>,<nHigh>,<.vertical.>,;
              Iif(<.autoticks.>, 1,Iif(<.noticks.>, 16, 0)), ;
              Iif(<.both.>, 8,Iif(<.top.>.or.<.left.>, 4, 0)) );;

@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> LINE [ <oLine> ]   ;
+#xcommand @ <nX>,<nY> LINE [ <oLine> ]   ;
              [ LENGTH <length> ]       ;
              [ HEIGHT <nHeight> ]      ;
              [ OF <oWnd> ]             ;
@@ -12,7 +12,7 @@
              [ ON INIT <bInit> ]       ;
              [ ON SIZE <bSize> ]       ;
           => ;
-          [<oLine> := ] HLine():New( <oWnd>,<nId>,<.lVert.>,<x>,<y>,<length>,<bSize>, <bInit>,;
+          [<oLine> := ] HLine():New( <oWnd>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
 					              <color>, <nHeight>, <cSlant>,<nBorder>  );;
           [ <oLine>:name := <(oLine)> ]
 

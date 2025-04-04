@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> IMAGE [ <oImage> SHOW ] <image> ;
+#xcommand @ <nX>,<nY> IMAGE [ <oImage> SHOW ] <image> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -9,7 +9,7 @@
              [ TOOLTIP <ctoolt> ]       ;
              [ TYPE <ctype>     ]       ;
           => ;
-          [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
+          [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
              <height>,<image>,<bInit>,<bSize>,<ctoolt>,<ctype> );;
           [ <oImage>:name := <(oImage)> ]
 

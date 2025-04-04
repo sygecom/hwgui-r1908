@@ -12,7 +12,7 @@
           =>;
           <O>:AddButton(<nBitIp>,<nId>,<bstate>,<bstyle>,<ctext>,<bclick>,<c>,<d>)
 
-#xcommand @ <x>,<y> TOOLBAR [ <oTool> ] ;
+#xcommand @ <nX>,<nY> TOOLBAR [ <oTool> ] ;
             [ OF <oWnd> ]               ;
             [ ID <nId> ]                ;
             [ SIZE <width>, <height> ]  ;
@@ -28,7 +28,7 @@
             [ LOADSTANDARDIMAGE <nIDB>] ;
             [ ITEMS <aItems> ]          ;
           => ;
-    [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, <height>,<btnwidth>,<oFont>,;
+    [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, <height>,<btnwidth>,<oFont>,;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
     [ <oTool>:name := <(oTool)> ] 
 

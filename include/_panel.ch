@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> PANEL [ <oPanel> ] ;
+#xcommand @ <nX>,<nY> PANEL [ <oPanel> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -10,7 +10,7 @@
              [ ON PAINT <bDraw> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oPanel> :=] HPanel():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>,<height>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
+          [<oPanel> :=] HPanel():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>,<height>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
           [ <oPanel>:name := <(oPanel)> ]
 
 #xcommand REDEFINE PANEL [ <oPanel> ]  ;

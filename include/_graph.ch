@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> GRAPH [ <oGraph> DATA ] <aData> ;
+#xcommand @ <nX>,<nY> GRAPH [ <oGraph> DATA ] <aData> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -10,6 +10,6 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<x>,<y>,<width>, ;
+          [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<width>, ;
              <height>,<oFont>,<bSize>,<ctoolt>,<color>,<bcolor> );;
           [ <oGraph>:name := <(oGraph)> ]

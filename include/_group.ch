@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> GROUPBOX [ <oGroup> CAPTION ] <caption> ;
+#xcommand @ <nX>,<nY> GROUPBOX [ <oGroup> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -13,6 +13,6 @@
              [ ON PAINT <bDraw> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oGroup> := ] HGroup():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, ;
+          [<oGroup> := ] HGroup():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
              <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<color>,<bcolor>,<.lTransp.>);;
           [ <oGroup>:name := <(oGroup)> ]

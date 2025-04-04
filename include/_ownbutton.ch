@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> OWNERBUTTON [ <oOwnBtn> ]  ;
+#xcommand @ <nX>,<nY> OWNERBUTTON [ <oOwnBtn> ]  ;
              [ OF <oWnd> ]             ;
              [ ID <nId> ]              ;
              [ SIZE <width>, <height> ] ;
@@ -25,7 +25,7 @@
              [ <lCheck: CHECK> ]     ;
              [ <lThemed: THEMED> ]     ;             
           => ;
-          [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, ;
+          [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
              <height>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
              <heightb>,<.ltr.>,<trcolor>,<ctoolt>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;

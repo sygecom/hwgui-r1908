@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> NICEBUTTON [ <oBut> CAPTION ] <caption> ;
+#xcommand @ <nX>,<nY> NICEBUTTON [ <oBut> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
@@ -13,7 +13,7 @@
              [ GREEN <g> ];
              [ BLUE <b> ];
           => ;
-          [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<x>,<y>,<width>, ;
+          [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<width>, ;
              <height>,<bInit>,<bClick>,<caption>,<ctoolt>,<r>,<g>,<b> );;
           [ <oBut>:name := <(oBut)> ]
 

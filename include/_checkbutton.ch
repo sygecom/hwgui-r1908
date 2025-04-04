@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
+#xcommand @ <nX>,<nY> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ INIT <lInit> ]           ;
@@ -18,7 +18,7 @@
              [ TOOLTIP <ctoolt> ]       ;
              [ <lEnter: ENTER> ]        ;
           => ;
-          [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<x>,<y>, ;
+          [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
              <width>,<height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <ctoolt>,<color>,<bcolor>,<bGfocus>,<.lEnter.>,<.lTransp.> );;
           [ <oCheck>:name := <(oCheck)> ]
@@ -43,7 +43,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <x>,<y> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
+#xcommand @ <nX>,<nY> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
              CAPTION  <caption>         ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -63,7 +63,7 @@
           => ;
           [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<vari>,              ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},                   ;
-             <nStyle>,<x>,<y>,<width>,<height>,<caption>,<oFont>, ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,<caption>,<oFont>, ;
              <bInit>,<bSize>,,<bClick>,<ctoolt>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>);;
           [ <oCheck>:name := <(oCheck)> ]
 

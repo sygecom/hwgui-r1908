@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> BITMAP [ <oBmp> SHOW ] <bitmap> ;
+#xcommand @ <nX>,<nY> BITMAP [ <oBmp> SHOW ] <bitmap> ;
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -14,7 +14,7 @@
              [ TOOLTIP <ctoolt> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
+          [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
              <height>,<bitmap>,<.res.>,<bInit>,<bSize>,<ctoolt>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
           [ <oBmp>:name := <(oBmp)> ]
 

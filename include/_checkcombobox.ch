@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
+#xcommand @ <nX>,<nY> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -22,7 +22,7 @@
           => ;
           [<oCombo> := ] HCheckComboBox():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-             <nStyle>,<x>,<y>,<width>,<height>,      ;
+             <nStyle>,<nX>,<nY>,<width>,<height>,      ;
              <aItems>,<oFont>,,,,<bChange>,<ctoolt>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;
 						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>);;

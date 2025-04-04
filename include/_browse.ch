@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> BROWSE [ <oBrw> ]  ;
+#xcommand @ <nX>,<nY> BROWSE [ <oBrw> ]  ;
              [ <lArr: ARRAY> ]          ;
              [ <lDb: DATABASE> ]        ;
              [ OF <oWnd> ]              ;
@@ -37,7 +37,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oBrw> :=] __IIF(<.class.>, <classname>, HBrowse)():New( Iif(<.lDb.>,BRW_DATABASE,Iif(<.lArr.>,BRW_ARRAY, 0)),;
-             <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize>, ;
+             <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,<bSize>, ;
              <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
              <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg>, <.lMulti.>, <.lDescend.>,;
              <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>,<bChgrowcol>, <ctoolt>  );;

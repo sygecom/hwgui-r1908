@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> ICON [ <oIco> SHOW ] <icon> ;
+#xcommand @ <nX>,<nY> ICON [ <oIco> SHOW ] <icon> ;
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -12,7 +12,7 @@
              [ TOOLTIP <ctoolt> ]       ;
              [<oem: OEM>]     ;
           => ;
-          [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
+          [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
              <height>,<icon>,<.res.>,<bInit>,<bSize>,<ctoolt>,<.oem.>,<bClick>,<bDblClick> );;
           [ <oIco>:name := <(oIco)> ]
 

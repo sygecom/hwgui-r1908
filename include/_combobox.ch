@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
+#xcommand @ <nX>,<nY> COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ INIT <nInit> ]           ;
@@ -24,7 +24,7 @@
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
-          [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<x>,<y>,<width>, ;
+          [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<width>, ;
              <height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
 						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
@@ -51,7 +51,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <x>,<y> GET COMBOBOX [ <oCombo> VAR ] <vari> ;
+#xcommand @ <nX>,<nY> GET COMBOBOX [ <oCombo> VAR ] <vari> ;
             ITEMS  <aItems>            ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
@@ -75,7 +75,7 @@
           => ;
     [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-                    <nStyle>,<x>,<y>,<width>,<height>,      ;
+                    <nStyle>,<nX>,<nY>,<width>,<height>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<ctoolt>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
                     <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;

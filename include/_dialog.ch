@@ -3,7 +3,7 @@
 #xcommand INIT DIALOG <oDlg>                ;
              [<res: FROM RESOURCE> <Resid> ];
              [ TITLE <cTitle> ]             ;
-             [ AT <x>, <y> ]                ;
+             [ AT <nX>, <nY> ]                ;
              [ SIZE <width>, <height> ]     ;
              [ ICON <ico> ]                 ;
              [ COLOR <clr> ]                ;
@@ -25,7 +25,7 @@
              [ HELPID <nHelpId> ]           ;
           => ;
           <oDlg> := HDialog():New( Iif(<.res.>,WND_DLG_RESOURCE,WND_DLG_NORESOURCE), ;
-             <nStyle>,<x>,<y>,<width>,<height>,<cTitle>,<oFont>,<bInit>,<bExit>,;
+             <nStyle>,<nX>,<nY>,<width>,<height>,<cTitle>,<oFont>,<bInit>,<bExit>,;
              <bSize>, <bPaint>,<bGfocus>,<bLfocus>,<bOther>,<.lClipper.>,<oBmp>,;
              <ico>,<.lExitOnEnter.>,<nHelpId>,<Resid>,<.lExitOnEsc.>,<clr>,<bRefresh>,<.lnoClosable.>)
 

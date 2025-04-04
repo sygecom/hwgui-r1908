@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> GRID <oGrid>        ;
+#xcommand @ <nX>,<nY> GRID <oGrid>        ;
              [ OF <oWnd> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;
@@ -24,7 +24,7 @@
              [ <lNoHeader: NO HEADER> ]  ;
              [BITMAP <aBit>];
           => ;
-          <oGrid> := HGrid():New( <oWnd>, <nId>, <nStyle>, <x>, <y>, <width>, <height>,;
+          <oGrid> := HGrid():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <width>, <height>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;

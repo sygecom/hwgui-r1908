@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <x>,<y> SAY [ <oSay> CAPTION ] <caption> ;
+#xcommand @ <nX>,<nY> SAY [ <oSay> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              LINK <cLink>               ;
              [ ID <nId> ]               ;
@@ -20,7 +20,7 @@
              [ LINKCOLOR <lcolor> ]     ;
              [ HOVERCOLOR <hcolor> ]    ;
           => ;
-          [<oSay> := ] HStaticLink():New( <oWnd>, <nId>, <nStyle>, <x>, <y>, <width>, ;
+          [<oSay> := ] HStaticLink():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <width>, ;
              <height>, <caption>, <oFont>, <bInit>, <bSize>, <bDraw>, <ctoolt>, ;
              <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>  );;
           [ <oSay>:name := <(oSay)> ]
