@@ -3,14 +3,14 @@
 #xcommand @ <nX>,<nY> IMAGE [ <oImage> SHOW ] <image> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ TOOLTIP <ctoolt> ]       ;
              [ TYPE <ctype>     ]       ;
           => ;
-          [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
-             <height>,<image>,<bInit>,<bSize>,<ctoolt>,<ctype> );;
+          [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<image>,<bInit>,<bSize>,<ctoolt>,<ctype> );;
           [ <oImage>:name := <(oImage)> ]
 
 #xcommand REDEFINE IMAGE [ <oImage> SHOW ] <image> ;

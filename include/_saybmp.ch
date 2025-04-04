@@ -4,7 +4,7 @@
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ STRETCH <nStretch>]      ;
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
@@ -14,8 +14,8 @@
              [ TOOLTIP <ctoolt> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
-             <height>,<bitmap>,<.res.>,<bInit>,<bSize>,<ctoolt>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
+          [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<bitmap>,<.res.>,<bInit>,<bSize>,<ctoolt>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
           [ <oBmp>:name := <(oBmp)> ]
 
 #xcommand REDEFINE BITMAP [ <oBmp> SHOW ] <bitmap> ;

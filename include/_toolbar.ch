@@ -15,7 +15,7 @@
 #xcommand @ <nX>,<nY> TOOLBAR [ <oTool> ] ;
             [ OF <oWnd> ]               ;
             [ ID <nId> ]                ;
-            [ SIZE <width>, <height> ]  ;
+            [ SIZE <nWidth>, <nHeight> ]  ;
             [ BUTTONWIDTH <btnwidth> ]  ;
             [ INDENT <nIndent>       ]  ;
 		         	[ BITMAPSIZE <bmpwidth> [, <bmpheight> ] ]  ;
@@ -28,7 +28,7 @@
             [ LOADSTANDARDIMAGE <nIDB>] ;
             [ ITEMS <aItems> ]          ;
           => ;
-    [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, <height>,<btnwidth>,<oFont>,;
+    [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
     [ <oTool>:name := <(oTool)> ] 
 

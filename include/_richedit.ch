@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> RICHEDIT [ <oEdit> TEXT ] <vari> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lallowtabs: ALLOWTABS>]  ;
@@ -18,7 +18,7 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oEdit> := ] HRichEdit():New( <oWnd>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
+          [<oEdit> := ] HRichEdit():New( <oWnd>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<ctoolt>,<color>,<bcolor>,<bOther>, <.lallowtabs.>,<bChange> );;
           [ <oEdit>:name := <(oEdit)> ]

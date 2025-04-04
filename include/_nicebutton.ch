@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> NICEBUTTON [ <oBut> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ ON INIT <bInit> ]        ;
              [ ON CLICK <bClick> ]      ;
              [ STYLE <nStyle> ]         ;
@@ -13,8 +13,8 @@
              [ GREEN <g> ];
              [ BLUE <b> ];
           => ;
-          [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<width>, ;
-             <height>,<bInit>,<bClick>,<caption>,<ctoolt>,<r>,<g>,<b> );;
+          [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<bInit>,<bClick>,<caption>,<ctoolt>,<r>,<g>,<b> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE NICEBUTTON [ <oBut> CAPTION ] <caption> ;

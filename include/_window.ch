@@ -6,7 +6,7 @@
              [ APPNAME <appname> ]          ;
              [ TITLE <cTitle> ]             ;
              [ AT <nX>, <nY> ]                ;
-             [ SIZE <width>, <height> ]     ;
+             [ SIZE <nWidth>, <nHeight> ]     ;
              [ ICON <ico> ]                 ;
              [ COLOR <clr> ]                ;
              [ BACKGROUND BITMAP <oBmp> ]   ;
@@ -28,7 +28,7 @@
              [ HELPID <nHelpId> ]           ;
           => ;
           <oWnd> := HMainWindow():New( Iif(<.lMdi.>,WND_MDI,WND_MAIN), ;
-             <ico>,<clr>,<nStyle>,<nX>,<nY>,<width>,<height>,<cTitle>, ;
+             <ico>,<clr>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>, ;
              <cMenu>,<nPos>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>,;
              <bGfocus>,<bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>, <bCloseQuery>,<bRefresh>,<bMdiMenu>)
 
@@ -37,7 +37,7 @@
              [ OF <oParent>      ]          ;
              [ TITLE <cTitle> ]             ;
              [ AT <nX>, <nY> ]                ;
-             [ SIZE <width>, <height> ]     ;
+             [ SIZE <nWidth>, <nHeight> ]     ;
              [ ICON <ico> ]                 ;
              [ COLOR <clr> ]                ;
              [ BACKGROUND BITMAP <oBmp> ]   ;
@@ -59,7 +59,7 @@
              [ <lnoClosable: NOCLOSABLE> ]  ;
           => ;
           <oWnd> := HMdiChildWindow():New( ;
-                   <ico>,<clr>,<nStyle>,<nX>,<nY>,<width>,<height>,<cTitle>, ;
+                   <ico>,<clr>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>, ;
                    <cMenu>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>, ;
                    <bGfocus>,<bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>,,;
 									 <bRefresh>,<.lChild.>,<.lClipper.>,<.lnoClosable.>,[{|v|Iif(v==Nil,<vari>,<vari>:=v)}] ) ;;
@@ -69,7 +69,7 @@
              APPNAME <appname>              ;
              [ TITLE <cTitle> ]             ;
              [ AT <nX>, <nY> ]                ;
-             [ SIZE <width>, <height> ]     ;
+             [ SIZE <nWidth>, <nHeight> ]     ;
              [ ICON <ico> ]                 ;
              [ COLOR <clr> ]                ;
              [ BACKGROUND BITMAP <oBmp> ]   ;
@@ -88,7 +88,7 @@
              [ HELPID <nHelpId> ]           ;
           => ;
           <oWnd> := HChildWindow():New( ;
-             <ico>,<clr>,<nStyle>,<nX>,<nY>,<width>,<height>,<cTitle>, ;
+             <ico>,<clr>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>, ;
              <cMenu>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>, ;
              <bGfocus>,<bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>,<bRefresh> )
 

@@ -4,7 +4,7 @@
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ INIT <lInit> ]           ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -19,7 +19,7 @@
              [ <lEnter: ENTER> ]        ;
           => ;
           [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
-             <width>,<height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
+             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <ctoolt>,<color>,<bcolor>,<bGfocus>,<.lEnter.>,<.lTransp.> );;
           [ <oCheck>:name := <(oCheck)> ]
 
@@ -47,7 +47,7 @@
              CAPTION  <caption>         ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -63,7 +63,7 @@
           => ;
           [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<vari>,              ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},                   ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<caption>,<oFont>, ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>, ;
              <bInit>,<bSize>,,<bClick>,<ctoolt>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>);;
           [ <oCheck>:name := <(oCheck)> ]
 

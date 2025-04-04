@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> BUTTONEX [ <oBut> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -23,8 +23,8 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBut> := ] __IIF(<.class.>, <classname>,HButtonEx)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<hbit>, ;
+          [<oBut> := ] __IIF(<.class.>, <classname>,HButtonEx)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<hbit>, ;
              <nBStyle>,<hIco>, <.lTransp.>,<bGfocus>,<nMargin>,<.lnoTheme.>, <bOther> );;
           [ <oBut>:name := <(oBut)> ]
 

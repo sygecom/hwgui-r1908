@@ -4,7 +4,7 @@
              [ OF <oWnd> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;
-             [ SIZE <width>, <height> ]  ;
+             [ SIZE <nWidth>, <nHeight> ]  ;
              [ FONT <oFont> ]            ;
              [ ON INIT <bInit> ]         ;
              [ ON SIZE <bSize> ]         ;
@@ -25,7 +25,7 @@
              [BITMAP <aBit>];
              [ ITEMS <a>];
           => ;
-          <oGrid> := HGridEx():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <width>, <height>,;
+          <oGrid> := HGridEx():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;

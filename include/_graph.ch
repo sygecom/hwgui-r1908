@@ -3,13 +3,13 @@
 #xcommand @ <nX>,<nY> GRAPH [ <oGraph> DATA ] <aData> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON SIZE <bSize> ]        ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<width>, ;
-             <height>,<oFont>,<bSize>,<ctoolt>,<color>,<bcolor> );;
+          [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bSize>,<ctoolt>,<color>,<bcolor> );;
           [ <oGraph>:name := <(oGraph)> ]

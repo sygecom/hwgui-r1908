@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> SAY [ <oSay> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -17,8 +17,8 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oSay> := ] HStatic():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<ctoolt>, ;
+          [<oSay> := ] HStatic():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<ctoolt>, ;
              <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther> );;
           [ <oSay>:name := <(oSay)> ]
 

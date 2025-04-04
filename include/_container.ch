@@ -2,7 +2,7 @@
 
 #xcommand @ <nX>, <nY>  CONTAINER [<oCnt>] [OF <oWnd>] ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ BACKSTYLE <nbackStyle>]    ;
              [ COLOR <tcolor> ]         ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -18,7 +18,7 @@
              [ <class: CLASS> <classname> ] ;
           =>  ;
           [<oCnt> := ] __IIF(<.class.>, <classname>,HContainer)():New(<oWnd>, <nId>,IIF(<.lTabStop.>,WS_TABSTOP,),;
-               <nX>, <nY>, <width>, <height>, <ncStyle>, <bSize>, <.lnoBorder.>,<bInit>,<nbackStyle>,<tcolor>,<bcolor>,;
+               <nX>, <nY>, <nWidth>, <nHeight>, <ncStyle>, <bSize>, <.lnoBorder.>,<bInit>,<nbackStyle>,<tcolor>,<bcolor>,;
                <bLoad>,<bRefresh>,<bOther>);;
           [ <oCnt>:name := <(oCnt)> ]
 

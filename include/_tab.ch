@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> TAB [ <oTab> ITEMS ] <aItems> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
@@ -16,8 +16,8 @@
              [ ON LOSTFOCUS <bLostFocus>];
              [ BITMAP <aBmp>  [<res: FROM RESOURCE>] [ BITCOUNT <nBC> ] ]  ;
           => ;
-          [<oTab> := ] HTab():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
+          [<oTab> := ] HTab():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
              <bClick>, <bGetFocus>, <bLostFocus>, <bRClick> ) ;;
           [ <oTab>:name := <(oTab)> ]
 

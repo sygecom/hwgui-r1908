@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> BUTTON [ <oBut> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -15,8 +15,8 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oBut> := ] HButton():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<bGfocus> );;
+          [<oBut> := ] HButton():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<bGfocus> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTON [ <oBut> ]   ;

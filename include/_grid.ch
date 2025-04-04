@@ -4,7 +4,7 @@
              [ OF <oWnd> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;
-             [ SIZE <width>, <height> ]  ;
+             [ SIZE <nWidth>, <nHeight> ]  ;
              [ FONT <oFont> ]            ;
              [ ON INIT <bInit> ]         ;
              [ ON SIZE <bSize> ]         ;
@@ -24,7 +24,7 @@
              [ <lNoHeader: NO HEADER> ]  ;
              [BITMAP <aBit>];
           => ;
-          <oGrid> := HGrid():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <width>, <height>,;
+          <oGrid> := HGrid():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;

@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> RADIOBUTTON [ <oRadio> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -17,7 +17,7 @@
              [ TOOLTIP <ctoolt> ]       ;
           => ;
           [<oRadio> := ] HRadioButton():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
-             <width>,<height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
+             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <ctoolt>,<color>,<bcolor>,<bWhen>,<.lTransp.> );;
           [ <oRadio>:name := <(oRadio)> ]
 

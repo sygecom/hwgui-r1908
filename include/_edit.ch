@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> EDITBOX [ <oEdit> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -20,8 +20,8 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
+          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<ctoolt>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther> );;
           [ <oEdit>:name := <(oEdit)> ]
 
@@ -47,7 +47,7 @@
 #xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
@@ -67,7 +67,7 @@
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,IIF(!EMPTY(<ctoolt>),<ctoolt>,),<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]
@@ -76,7 +76,7 @@
 #xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
@@ -96,7 +96,7 @@
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,<bSize> ,,  ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]

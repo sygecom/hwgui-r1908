@@ -3,8 +3,8 @@
 #xcommand @ <nX>,<nY> REBAR [ <oTool> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oTool> := ]        HREBAR():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, <height>,,,,,,,,);;
+          [<oTool> := ]        HREBAR():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,);;
           [ <oTool>:name := <(oTool)> ]

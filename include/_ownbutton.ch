@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> OWNERBUTTON [ <oOwnBtn> ]  ;
              [ OF <oWnd> ]             ;
              [ ID <nId> ]              ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]     ;
              [ ON SIZE <bSize> ]     ;
@@ -25,8 +25,8 @@
              [ <lCheck: CHECK> ]     ;
              [ <lThemed: THEMED> ]     ;             
           => ;
-          [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
+          [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
              <heightb>,<.ltr.>,<trcolor>,<ctoolt>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;
           [ <oOwnBtn>:name := <(oOwnBtn)> ]

@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> DATEPICKER [ <oPick> ]  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ INIT <dInit> ]           ;
@@ -17,7 +17,7 @@
              [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
-             <width>,<height>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
+             <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
              <color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]
 
@@ -45,7 +45,7 @@
 #xcommand @ <nX>,<nY> GET DATEPICKER [ <oPick> VAR ] <vari> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -59,6 +59,6 @@
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,      ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>,<color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]

@@ -3,9 +3,9 @@
 #xcommand @ <nX>,<nY> PAGER [ <oTool> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ STYLE <nStyle> ]         ;
              [ <lVert: VERTICAL> ] ;
           => ;
-          [<oTool> := ] HPager():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, <height>,,,,,,,,,<.lVert.>);;
+          [<oTool> := ] HPager():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,,<.lVert.>);;
           [ <oTool>:name := <(oTool)> ]

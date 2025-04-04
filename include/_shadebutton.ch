@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> SHADEBUTTON [ <oShBtn> ]  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ EFFECT <shadeID>  [ PALETTE <palet> ]             ;
              [ GRANULARITY <granul> ] [ HIGHLIGHT <highl> ] ;
              [ COLORING <coloring> ] [ SHCOLOR <shcolor> ] ];
@@ -23,8 +23,8 @@
              ] ;
              [ TOOLTIP <ctoolt> ]    ;
           => ;
-          [<oShBtn> :=] HSHADEBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
+          [<oShBtn> :=] HSHADEBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, ;
              <trcolor>,<ctoolt>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;
              <coloring>,<shcolor> );;

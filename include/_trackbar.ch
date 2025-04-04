@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> TRACKBAR [ <oTrackBar> ]  ;
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
-             [ SIZE <width>, <height> ]    ;
+             [ SIZE <nWidth>, <nHeight> ]    ;
              [ RANGE <nLow>,<nHigh> ]      ;
              [ INIT <nInit> ]              ;
              [ ON INIT <bInit> ]           ;
@@ -21,7 +21,7 @@
              [ < left : LEFT > ]           ;
           => ;
           [<oTrackBar> :=] HTrackBar():New( <oWnd>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;
-             <width>,<height>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<bChange>,<bDrag>,<nLow>,<nHigh>,<.vertical.>,;
+             <nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<bChange>,<bDrag>,<nLow>,<nHigh>,<.vertical.>,;
              Iif(<.autoticks.>, 1,Iif(<.noticks.>, 16, 0)), ;
              Iif(<.both.>, 8,Iif(<.top.>.or.<.left.>, 4, 0)) );;
           [ <oTrackBar>:name := <(oTrackBar)> ]

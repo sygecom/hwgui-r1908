@@ -15,7 +15,7 @@
              [ CAPTION  <caption> ];
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -26,7 +26,7 @@
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
           => [<ogr> := ] HRadioGroup():NewRG( <oWnd>,<nId>,<nStyle>,<vari>,;
-                  {|v|Iif(v==Nil,<vari>,<vari>:=v)},<nX>,<nY>,<width>,<height>,<caption>,<oFont>,;
+                  {|v|Iif(v==Nil,<vari>,<vari>:=v)},<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>,;
                   <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>);;
           [ <ogr>:name := <(ogr)> ]
 

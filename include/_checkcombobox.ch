@@ -4,7 +4,7 @@
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
              [ ITEMHEIGHT <nhItem>    ] ;
              [ COLUMNWIDTH <ncWidth>  ] ;
@@ -22,7 +22,7 @@
           => ;
           [<oCombo> := ] HCheckComboBox():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,      ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <aItems>,<oFont>,,,,<bChange>,<ctoolt>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;
 						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>);;

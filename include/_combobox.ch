@@ -4,7 +4,7 @@
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ INIT <nInit> ]           ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
              [ ITEMHEIGHT <nhItem>    ] ;
              [ COLUMNWIDTH <ncWidth>  ] ;
@@ -24,8 +24,8 @@
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
-          [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
+          [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
 						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
           [ <oCombo>:name := <(oCombo)> ]
@@ -55,7 +55,7 @@
             ITEMS  <aItems>            ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
-            [ SIZE <width>, <height> ] ;
+            [ SIZE <nWidth>, <nHeight> ] ;
             [ DISPLAYCOUNT <nDisplay>] ;
             [ ITEMHEIGHT <nhItem>    ] ;
             [ COLUMNWIDTH <ncWidth>  ] ;
@@ -75,7 +75,7 @@
           => ;
     [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
-                    <nStyle>,<nX>,<nY>,<width>,<height>,      ;
+                    <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<ctoolt>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
                     <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;

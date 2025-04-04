@@ -4,7 +4,7 @@
              [ OF <oWnd> ]              ;
              LINK <cLink>               ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ <lTransp: TRANSPARENT>]  ;
@@ -20,8 +20,8 @@
              [ LINKCOLOR <lcolor> ]     ;
              [ HOVERCOLOR <hcolor> ]    ;
           => ;
-          [<oSay> := ] HStaticLink():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <width>, ;
-             <height>, <caption>, <oFont>, <bInit>, <bSize>, <bDraw>, <ctoolt>, ;
+          [<oSay> := ] HStaticLink():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bDraw>, <ctoolt>, ;
              <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>  );;
           [ <oSay>:name := <(oSay)> ]
 

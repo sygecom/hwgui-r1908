@@ -4,7 +4,7 @@
              RANGE <nLower>,<nUpper>    ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ WIDTH <nUpDWidth> ]      ;
              [ INCREMENT <nIncr> ]      ;
              [ COLOR <color> ]          ;
@@ -18,8 +18,8 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
           => ;
-          [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
+          [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
              <bLfocus>,<ctoolt>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
           [ <oUpd>:name := <(oUpd)> ]
 
@@ -29,7 +29,7 @@
              RANGE <nLower>,<nUpper>    ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ INCREMENT <nIncr> ]      ;        
              [ WIDTH <nUpDWidth> ]      ;
              [ MAXLENGTH <nMaxLength> ] ;
@@ -48,7 +48,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<vari>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<oFont>,<bInit>,,,;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,,,;
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>, ;
              <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>,;
              <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,);;            

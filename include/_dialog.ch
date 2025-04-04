@@ -4,7 +4,7 @@
              [<res: FROM RESOURCE> <Resid> ];
              [ TITLE <cTitle> ]             ;
              [ AT <nX>, <nY> ]                ;
-             [ SIZE <width>, <height> ]     ;
+             [ SIZE <nWidth>, <nHeight> ]     ;
              [ ICON <ico> ]                 ;
              [ COLOR <clr> ]                ;
              [ BACKGROUND BITMAP <oBmp> ]   ;
@@ -25,7 +25,7 @@
              [ HELPID <nHelpId> ]           ;
           => ;
           <oDlg> := HDialog():New( Iif(<.res.>,WND_DLG_RESOURCE,WND_DLG_NORESOURCE), ;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<cTitle>,<oFont>,<bInit>,<bExit>,;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>,<oFont>,<bInit>,<bExit>,;
              <bSize>, <bPaint>,<bGfocus>,<bLfocus>,<bOther>,<.lClipper.>,<oBmp>,;
              <ico>,<.lExitOnEnter.>,<nHelpId>,<Resid>,<.lExitOnEsc.>,<clr>,<bRefresh>,<.lnoClosable.>)
 

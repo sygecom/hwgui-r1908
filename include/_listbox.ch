@@ -4,7 +4,7 @@
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
              [ INIT <nInit> ]              ;
-             [ SIZE <width>, <height> ]    ;
+             [ SIZE <nWidth>, <nHeight> ]    ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]           ;
@@ -20,8 +20,8 @@
              [ ON DBLCLICK <bDblClick> ];
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
-          [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
+          [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
              <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther> ) ;;
           [ <oListbox>:name := <(oListbox)> ]
 
@@ -47,7 +47,7 @@
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -65,6 +65,6 @@
           => ;
           [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<vari>,;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},;
-             <nStyle>,<nX>,<nY>,<width>,<height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bChange>,<ctoolt>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
           [ <oListbox>:name := <(oListbox)> ]

@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> SPLITTER [ <oSplit> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ <lTransp: TRANSPARENT>]  ;
@@ -12,6 +12,6 @@
              [ ON PAINT <bDraw> ]       ;
              [ DIVIDE <aLeft> FROM <aRight> ] ;
           => ;
-          [<oSplit> :=] HSplitter():New( <oWnd>,<nId>,<nX>,<nY>,<width>,<height>,<bSize>,<bDraw>,;
+          [<oSplit> :=] HSplitter():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>,<nHeight>,<bSize>,<bDraw>,;
              <color>,<bcolor>,<aLeft>,<aRight>, <.lTransp.>, <.lScroll.> );;
           [ <oSplit>:name := <(oSplit)> ]

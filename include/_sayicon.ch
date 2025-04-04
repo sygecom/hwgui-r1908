@@ -4,7 +4,7 @@
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON CLICK <bClick> ]      ;
@@ -12,8 +12,8 @@
              [ TOOLTIP <ctoolt> ]       ;
              [<oem: OEM>]     ;
           => ;
-          [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<nX>,<nY>,<width>, ;
-             <height>,<icon>,<.res.>,<bInit>,<bSize>,<ctoolt>,<.oem.>,<bClick>,<bDblClick> );;
+          [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<icon>,<.res.>,<bInit>,<bSize>,<ctoolt>,<.oem.>,<bClick>,<bDblClick> );;
           [ <oIco>:name := <(oIco)> ]
 
 #xcommand REDEFINE ICON [ <oIco> SHOW ] <icon> ;

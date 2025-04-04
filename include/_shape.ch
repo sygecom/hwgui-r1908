@@ -2,7 +2,7 @@
 
 #xcommand @ <nX>, <nY>  SHAPE [<oShape>] [OF <oWnd>] ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ BORDERWIDTH <nBorder> ]  ;
              [ CURVATURE <nCurvature>]  ;
              [ COLOR <tcolor> ]         ;
@@ -13,7 +13,7 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
           => ;
-          [ <oShape> := ] HShape():New(<oWnd>, <nId>, <nX>, <nY>, <width>, <height>, ;
+          [ <oShape> := ] HShape():New(<oWnd>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
              <nBorder>, <nCurvature>, <nbStyle>,<nfStyle>, <tcolor>, <bcolor>, <bSize>,<bInit>,<nbackStyle>);;
           [ <oShape>:name := <(oShape)> ]
 

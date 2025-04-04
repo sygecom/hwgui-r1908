@@ -3,7 +3,7 @@
 #xcommand @ <nX>,<nY> GROUPBOX [ <oGroup> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
-             [ SIZE <width>, <height> ] ;
+             [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [<lTransp: TRANSPARENT>]   ;
@@ -13,6 +13,6 @@
              [ ON PAINT <bDraw> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
-          [<oGroup> := ] HGroup():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<width>, ;
-             <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<color>,<bcolor>,<.lTransp.>);;
+          [<oGroup> := ] HGroup():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<color>,<bcolor>,<.lTransp.>);;
           [ <oGroup>:name := <(oGroup)> ]
