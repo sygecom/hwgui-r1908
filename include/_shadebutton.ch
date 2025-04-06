@@ -21,11 +21,11 @@
              [ BITMAP <bmp>  [<res: FROM RESOURCE>] [<ltr: TRANSPARENT> [COLOR  <trcolor> ]] ;
              [ COORDINATES  <xb>, <yb>, <widthb>, <heightb> ] ;
              ] ;
-             [ TOOLTIP <ctoolt> ]    ;
+             [ TOOLTIP <cTooltip> ]    ;
           => ;
           [<oShBtn> :=] HSHADEBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, ;
-             <trcolor>,<ctoolt>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;
+             <trcolor>,<cTooltip>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;
              <coloring>,<shcolor> );;
           [ <oShBtn>:name := <(oShBtn)> ]

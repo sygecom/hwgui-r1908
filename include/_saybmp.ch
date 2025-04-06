@@ -11,11 +11,11 @@
              [ ON SIZE <bSize> ]        ;
              [ ON CLICK <bClick> ]      ;
              [ ON DBLCLICK <bDblClick> ];
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ STYLE <nStyle> ]         ;
           => ;
           [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<bitmap>,<.res.>,<bInit>,<bSize>,<ctoolt>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
+             <nHeight>,<bitmap>,<.res.>,<bInit>,<bSize>,<cTooltip>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
           [ <oBmp>:name := <(oBmp)> ]
 
 #xcommand REDEFINE BITMAP [ <oBmp> SHOW ] <bitmap> ;
@@ -25,7 +25,7 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oBmp> := ] HSayBmp():Redefine( <oWnd>,<nId>,<bitmap>,<.res.>, ;
-             <bInit>,<bSize>,<ctoolt>,<.lTransp.>)
+             <bInit>,<bSize>,<cTooltip>,<.lTransp.>)

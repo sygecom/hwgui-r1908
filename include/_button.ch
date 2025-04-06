@@ -13,10 +13,10 @@
              [ ON GETFOCUS <bGfocus> ]  ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oBut> := ] HButton():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<bGfocus> );;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTON [ <oBut> ]   ;
@@ -31,7 +31,7 @@
              [ ON PAINT <bDraw> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oBut> := ] HButton():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
-             <bClick>,<ctoolt>,<color>,<bcolor>,<cCaption>,<bGfocus> )
+             <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<bGfocus> )

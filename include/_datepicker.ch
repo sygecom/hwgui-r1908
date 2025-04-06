@@ -13,11 +13,11 @@
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
-             <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
+             <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]
 
@@ -33,11 +33,11 @@
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON CHANGE <bChange> ]    ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
-             <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
+             <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  )
 
 /* SAY ... GET system     */
@@ -54,11 +54,11 @@
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
-             <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>,<color>,<bcolor>,<.lShowTime.>  );;
+             <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]

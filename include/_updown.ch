@@ -16,11 +16,11 @@
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
-             <bLfocus>,<ctoolt>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
+             <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
           [ <oUpd>:name := <(oUpd)> ]
 
 /* SAY ... GET system     */
@@ -41,7 +41,7 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [<lnoborder: NOBORDER>]    ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ ON INIT <bInit> ]        ;
              [ ON KEYDOWN <bKeyDown>   ];
              [ ON CHANGE <bChange> ]    ;
@@ -49,7 +49,7 @@
           => ;
           [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<vari>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,,,;
-             <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>, ;
+             <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>, ;
              <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>,;
              <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,);;            
           [ <oUpd>:name := <(oUpd)> ]

@@ -13,7 +13,7 @@
              [ ON GETFOCUS <bGfocus> ]  ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ BITMAP <hbit> ]          ;
              [ BSTYLE <nBStyle> ]       ;
              [ PICTUREMARGIN <nMargin> ];
@@ -24,7 +24,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oBut> := ] __IIF(<.class.>, <classname>,HButtonEx)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<hbit>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<hbit>, ;
              <nBStyle>,<hIco>, <.lTransp.>,<bGfocus>,<nMargin>,<.lnoTheme.>, <bOther> );;
           [ <oBut>:name := <(oBut)> ]
 
@@ -40,10 +40,10 @@
              [ ON PAINT <bDraw> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ BITMAP <hbit> ]          ;
              [ BSTYLE <nBStyle> ]       ;
              [ PICTUREMARGIN <nMargin> ];
           => ;
           [<oBut> := ] HButtonEx():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
-             <bClick>,<ctoolt>,<color>,<bcolor>,<cCaption>,<hbit>,<nBStyle>,<bGfocus>,<nMargin>  )
+             <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<hbit>,<nBStyle>,<bGfocus>,<nMargin>  )

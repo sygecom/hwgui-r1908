@@ -13,7 +13,7 @@
              [ ON CHANGE <bChange> ]       ;
              [ STYLE <nStyle> ]            ;
              [ FONT <oFont> ]              ;
-             [ TOOLTIP <ctoolt> ]          ;
+             [ TOOLTIP <cTooltip> ]          ;
              [ ON GETFOCUS <bGfocus> ]     ;
              [ ON LOSTFOCUS <bLfocus> ]    ;
              [ ON KEYDOWN <bKeyDown> ]  ;
@@ -21,7 +21,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
              <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther> ) ;;
           [ <oListbox>:name := <(oListbox)> ]
 
@@ -34,14 +34,14 @@
              [ ON PAINT <bDraw> ]          ;
              [ ON CHANGE <bChange> ]       ;
              [ FONT <oFont> ]              ;
-             [ TOOLTIP <ctoolt> ]          ;
+             [ TOOLTIP <cTooltip> ]          ;
              [ ON GETFOCUS <bGfocus> ]     ;
              [ ON LOSTFOCUS <bLfocus> ]    ;
              [ ON KEYDOWN <bKeyDown> ]     ;
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oListbox> := ] HListBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bDraw>,<bChange>,<ctoolt>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
+             <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
 
 #xcommand @ <nX>,<nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
              ITEMS  <aItems>            ;
@@ -56,7 +56,7 @@
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ WHEN <bGFocus> ]         ;
              [ VALID <bLFocus> ]        ;
              [ ON KEYDOWN <bKeyDown> ]  ;
@@ -66,5 +66,5 @@
           [<oListbox> := ] HListBox():New( <oWnd>,<nId>,<vari>,;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
-             <bChange>,<ctoolt>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
+             <bChange>,<cTooltip>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
           [ <oListbox>:name := <(oListbox)> ]

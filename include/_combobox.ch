@@ -17,7 +17,7 @@
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ <edit: EDIT> ]           ;
              [ <text: TEXT> ]           ;
              [ ON GETFOCUS <bGfocus> ]  ;
@@ -25,7 +25,7 @@
              [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
           [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
 						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
           [ <oCombo>:name := <(oCombo)> ]
@@ -41,13 +41,13 @@
             [ ON PAINT <bDraw> ]       ;
             [ ON CHANGE <bChange> ]    ;
             [ FONT <oFont> ]           ;
-            [ TOOLTIP <ctoolt> ]       ;
+            [ TOOLTIP <cTooltip> ]       ;
             [ ON GETFOCUS <bGfocus> ]  ;
             [ ON LOSTFOCUS <bLfocus> ] ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bDraw>,<bChange>,<ctoolt>,<bGfocus>, <bLfocus>, <bIChange>,<nDisplay>,<nMaxLength>)
+             <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>, <bIChange>,<nDisplay>,<nMaxLength>)
 
 /* SAY ... GET system     */
 
@@ -66,7 +66,7 @@
             [ ON CHANGE <bChange> ]    ;
             [ STYLE <nStyle> ]         ;
             [ FONT <oFont> ]           ;
-            [ TOOLTIP <ctoolt> ]       ;
+            [ TOOLTIP <cTooltip> ]       ;
             [ <edit: EDIT> ]           ;
             [ <text: TEXT> ]           ;
             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
@@ -76,7 +76,7 @@
     [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
                     <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
-                    <aItems>,<oFont>,<bInit>,,,<bChange>,<ctoolt>, ;
+                    <aItems>,<oFont>,<bInit>,,,<bChange>,<cTooltip>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
                     <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;
     [ <oCombo>:name := <(oCombo)> ]
@@ -90,7 +90,7 @@
             [ MAXLENGTH <nMaxLength> ] ;
             [ ON CHANGE <bChange> ]    ;
             [ FONT <oFont> ]           ;
-            [ TOOLTIP <ctoolt> ]       ;
+            [ TOOLTIP <cTooltip> ]       ;
             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
@@ -99,7 +99,7 @@
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
-                    <aItems>,<oFont>,,,,<bChange>,<ctoolt>,<bGfocus>, <bLfocus>,<bIChange>,<nDisplay>, <nMaxLength>,<.edit.>,<.text.>)
+                    <aItems>,<oFont>,,,,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>,<bIChange>,<nDisplay>, <nMaxLength>,<.edit.>,<.text.>)
 
 #xcommand REDEFINE GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>            ;
@@ -107,10 +107,10 @@
              ID <nId>                   ;
              [ ON CHANGE <bChange> ]    ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ WHEN <bWhen> ]           ;
              [ CHECK <acheck>] ;
           => ;
           [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
-             <aItems>,<oFont>,,,,<bChange>,<ctoolt>, <bWhen> ,<acheck>)
+             <aItems>,<oFont>,,,,<bChange>,<cTooltip>, <bWhen> ,<acheck>)

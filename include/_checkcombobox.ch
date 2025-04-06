@@ -13,7 +13,7 @@
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ <edit: EDIT> ]           ;
              [ <text: TEXT> ]           ;
              [ WHEN <bWhen> ]           ;
@@ -23,7 +23,7 @@
           [<oCombo> := ] HCheckComboBox():New( <oWnd>,<nId>,<vari>,    ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
-             <aItems>,<oFont>,,,,<bChange>,<ctoolt>, ;
+             <aItems>,<oFont>,,,,<bChange>,<cTooltip>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;
 						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>);;
           [ <oCombo>:name := <(oCombo)> ]

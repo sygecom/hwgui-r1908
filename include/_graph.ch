@@ -8,8 +8,8 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON SIZE <bSize> ]        ;
              [ FONT <oFont> ]           ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bSize>,<ctoolt>,<color>,<bcolor> );;
+             <nHeight>,<oFont>,<bSize>,<cTooltip>,<color>,<bcolor> );;
           [ <oGraph>:name := <(oGraph)> ]

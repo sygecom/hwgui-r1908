@@ -8,13 +8,13 @@
              [ ON CLICK <bClick> ]      ;
              [ STYLE <nStyle> ]         ;
              [ EXSTYLE <nStyleEx> ]         ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ RED <r> ] ;
              [ GREEN <g> ];
              [ BLUE <b> ];
           => ;
           [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<bInit>,<bClick>,<caption>,<ctoolt>,<r>,<g>,<b> );;
+             <nHeight>,<bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE NICEBUTTON [ <oBut> CAPTION ] <caption> ;
@@ -23,10 +23,10 @@
              [ ON INIT <bInit> ]        ;
              [ ON CLICK <bClick> ]      ;
              [ EXSTYLE <nStyleEx> ]         ;
-             [ TOOLTIP <ctoolt> ]       ;
+             [ TOOLTIP <cTooltip> ]       ;
              [ RED <r> ] ;
              [ GREEN <g> ];
              [ BLUE <b> ];
           => ;
           [<oBut> := ] HNicebutton():Redefine( <oWnd>,<nId>,<nStyleEx>, ;
-             <bInit>,<bClick>,<caption>,<ctoolt>,<r>,<g>,<b> )
+             <bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b> )
