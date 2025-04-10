@@ -464,8 +464,8 @@ STATIC FUNCTION EditColors()
    @ 180, 152 SAY "Background" SIZE 100, 24
    @ 280, 150 SAY oSayB CAPTION "" SIZE 24, 24
    @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.))!=Nil,(aSchemes[nScheme,nType][2] := temp,UpdSample()),.F.)}
-   @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := hwg_IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.t.}
-   @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := hwg_IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.t.}
+   @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := hwg_IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.T.}
+   @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := hwg_IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.T.}
 
    @ 170, 190 RICHEDIT oEditC TEXT cText SIZE 250, 100 STYLE ES_MULTILINE
 

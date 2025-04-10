@@ -361,7 +361,7 @@ FUNCTION InspOpen(lShow)
       FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)  ;
       STYLE nStilo;
       ON INIT {||IIf(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
-      ON GETFOCUS {|o| o:show(),.t.};
+      ON GETFOCUS {|o| o:show(),.T.};
       ON EXIT {||oDesigner:oDlgInsp:=Nil,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
       ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
@@ -412,9 +412,9 @@ FUNCTION InspOpen(lShow)
    // : LFB
 
    CONTEXT MENU oMenuisnp
-      MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( oDesigner:oDlgInsp:Handle, .t. )
+      MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( oDesigner:oDlgInsp:Handle, .T. )
          //{||oDesigner:oDlgInsp:Close(),inspOpen(.F.)}
-      MENUITEM "Normal" ACTION ActiveTopMost( oDesigner:oDlgInsp:Handle, .f. )
+      MENUITEM "Normal" ACTION ActiveTopMost( oDesigner:oDlgInsp:Handle, .F. )
          //{||oDesigner:oDlgInsp:Close(),inspOpen(0)}
       MENUITEM "Hide" ACTION oDesigner:oDlgInsp:close()
     ENDMENU
@@ -698,10 +698,10 @@ FUNCTION ObjInspector(oObject )
    IF oObject = Nil
       oObject := HFormGen():oDlgSelected
    ENDIF
-   //lData := .t.
+   //lData := .T.
    aClassMsgMtdo := __objGetMethodList(oObject)
 #ifndef __XHARBOUR__
-   aClassMsgProp := __objGetProperties( oObject, .t. )
+   aClassMsgProp := __objGetProperties( oObject, .T. )
 #else
    aClassMsgProp := __ObjGetValueDiff(oObject)
 #endif

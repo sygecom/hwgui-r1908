@@ -324,13 +324,13 @@ FUNCTION rmatch(c,f)
          [NOOPTIMIZE]                                                      ;
                                                                            ;
       => ordCondSet(<"for">, <{for}>,                                      ;
-                      if( <.all.>, .t., NIL ),                             ;
+                      if( <.all.>, .T., NIL ),                             ;
                       <{while}>,                                           ;
                       <{opt}>, <step>    ,                                 ;
                       RECNO(), <next>, <rec>,                              ;
-                      if( <.rest.>, .t., NIL ),                            ;
-                      if( (<.dec.> .AND. !<.asc.>), .t., NIL ),            ;
-                      .t., <(cdx)>, <.cur.>, <.empty.>, .f., <.add.>,      ;
+                      if( <.rest.>, .T., NIL ),                            ;
+                      if( (<.dec.> .AND. !<.asc.>), .T., NIL ),            ;
+                      .T., <(cdx)>, <.cur.>, <.empty.>, .F., <.add.>,      ;
                       <.shad.>, <.filt.>)                                  ;
        ; ordCreate(<(cdx)>, <(tag)>, <"key">, <{key}>, [<.u.>])
 
@@ -374,13 +374,13 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 	    sx_SetPass(cPassWord)
 	 endif
 
-	 return .t.
+	 return .T.
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds - .5
    enddo
 
-   return .f.                           // USE FAILS
+   return .F.                           // USE FAILS
 
 
 function filelock(nSeconds)
@@ -391,12 +391,12 @@ function filelock(nSeconds)
    if(nSeconds==NIL, nSeconds:=20,)
 
    IF Flock()
-      return .t.
+      return .T.
    ENDIF
 
    do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
       if FLOCK()
-         return .t.                     // LOCKED
+         return .T.                     // LOCKED
       endif
       inkey(.5)      // wait 1/2 second
       nSeconds := nSeconds - .5
@@ -406,7 +406,7 @@ function filelock(nSeconds)
 
    hwg_MsgStop("File failed to locked", alias())
 
- return .f.
+ return .F.
 
 
 function reclock(nSeconds)
@@ -415,7 +415,7 @@ function reclock(nSeconds)
    LOCAL oldPos := Recno()
 
    if DBRLOCK(OldPos)
-      return .t.                        // LOCKED
+      return .T.                        // LOCKED
    endif
 
    lforever := (nSeconds == 0)
@@ -426,7 +426,7 @@ function reclock(nSeconds)
 
    do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
       if DBRLOCK(OldPos)
-         return .t.                     // LOCKED
+         return .T.                     // LOCKED
       endif
       hwg_MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
@@ -437,7 +437,7 @@ function reclock(nSeconds)
 
    hwg_MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
 
-   return .f.                           // NOT LOCKED
+   return .F.                           // NOT LOCKED
 
    // end function reclock()
 
@@ -450,7 +450,7 @@ function addrec(nSeconds)
    append blank
 
    if !neterr()
-      return .t.												// APPEND SUCCESS
+      return .T.												// APPEND SUCCESS
    endif
 
    nSeconds *= 1.00
@@ -470,7 +470,7 @@ function addrec(nSeconds)
 
       append blank
       if !neterr()
-         return .t.
+         return .T.
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds  - .5
@@ -481,7 +481,7 @@ function addrec(nSeconds)
 
    hwg_MsgStop("Record failed to locked", alias())
 
-   return .f.                           // NOT LOCKED
+   return .F.                           // NOT LOCKED
 
 
 
@@ -507,8 +507,8 @@ function Usr2infStr(g,lKosong) && usr to informix str
     endif
 
     hwg_MsgInfo("Tidak boleh kosong")
-    return .f.
-    //return IIf(lKosong==NIL,.t.,.f.)
+    return .F.
+    //return IIf(lKosong==NIL,.T.,.F.)
  end
 
 
@@ -525,7 +525,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
  if ((nLen < 6) .or. (nLen > 9))
      hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
-     return .f.
+     return .F.
  end
 
  *:----------------6-------6-------7---------8----------9---
@@ -578,13 +578,13 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
       if  !HB_IsDate(ctod(dd+mm+yy)) .or. (ctod(dd+mm+yy)==ctod("  /  /  "))
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
-          return .f.
+          return .F.
       else
        g:SetGet(d2infstr(ctod(dd + mm + yy)))
        g:refresh()
       end
 
- return .t.
+ return .T.
 
 
 

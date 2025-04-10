@@ -476,7 +476,7 @@ Local cPic
          IF nPos != 1
             Return Nil
          ENDIF
-         // ::minus := .t.
+         // ::minus := .T.
       ELSEIF !( cChar $ "0123456789" )
          Return Nil
       ENDIF

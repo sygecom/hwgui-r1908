@@ -304,7 +304,7 @@ FUNCTION Browse2Prg
       DO WHILE i <= nColumns
          IF nType = BRW_DATABASE
             cBrowser += Space(4) + cname + ":AddColumn( HColumn():New(FieldName(" + LTrim(Str(i)) + ") ,FieldBlock(FieldName(" + LTrim(Str(i)) + "))," + ;
-               "'" + aTypes[i, 2] + "'," + LTrim(Str(aTypes[i, 3] + 1)) + "," + LTrim(Str(aTypes[i, 4])) + "))" + _chr( 10 ) //,,,,,,,,,{|| .t.}))
+               "'" + aTypes[i, 2] + "'," + LTrim(Str(aTypes[i, 3] + 1)) + "," + LTrim(Str(aTypes[i, 4])) + "))" + _chr( 10 ) //,,,,,,,,,{|| .T.}))
          ELSE
             cBrowser += Space(4) + cname + ":AddColumn( HColumn():New( ,{|v,o|Iif(v!=Nil,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},'C', 100,0))" + _CHR( 10 )
          ENDIF
@@ -578,7 +578,7 @@ FUNCTION Ctrl2Prg
 
    PARAMETERS oCtrl
    LOCAL nLocalParamPos := 0
-   LOCAL lAddVar := .f.
+   LOCAL lAddVar := .F.
    LOCAL lsubParameter := .F.
 
    PRIVATE cLocalParam := ""

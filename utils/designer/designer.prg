@@ -884,7 +884,7 @@ FUNCTION SoControles()
    INIT DIALOG oDlgx AT 0, 0 SIZE 400, 99 TITLE "Toolbars - Classes ";
       FONT oFont                                                  ;
       STYLE WS_VISIBLE + WS_SYSMENU + DS_SYSMODAL + WS_SIZEBOX + MB_USERICON    ;
-      ON EXIT {||  oDlgx := Nil, .t.}
+      ON EXIT {||  oDlgx := Nil, .T.}
 
       //ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
@@ -893,9 +893,9 @@ FUNCTION SoControles()
        ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
 
    CONTEXT MENU oMenuTool
-      MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( 0, .t. )
+      MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( 0, .T. )
          //{||oDesigner:oDlgInsp:Close(),inspOpen(.T.)}
-      MENUITEM "Normal" ACTION ActiveTopMost( 0, .f. )
+      MENUITEM "Normal" ACTION ActiveTopMost( 0, .F. )
          //{||oDesigner:oDlgInsp:Close(),inspOpen(.F.)}
       MENUITEM "Hide" ACTION oDlgX:CLOSE()
     ENDMENU

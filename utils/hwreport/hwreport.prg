@@ -108,7 +108,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
    hwg_EnableMenuItem( ,IDM_PREVIEW, .F., .T. )
    hwg_EnableMenuItem( ,IDM_FOPT, .F., .T. )
    hwg_EnableMenuItem( , 1, .F., .F. )
-   hwg_CheckMenuItem( ,IDM_MOUSE2, .t. )
+   hwg_CheckMenuItem( ,IDM_MOUSE2, .T. )
 
    oMainWindow:Activate()
 

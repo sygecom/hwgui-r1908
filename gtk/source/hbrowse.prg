@@ -1097,7 +1097,7 @@ RETURN Nil
 
 //----------------------------------------------------//
 METHOD SetColumn( nCol ) CLASS HBrowse
-Local nColPos, lPaint := .f.
+Local nColPos, lPaint := .F.
 
    IF ::lEditable
       IF nCol != nil .AND. nCol >= 1 .AND. nCol <= Len(::aColumns)

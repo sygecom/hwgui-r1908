@@ -150,7 +150,7 @@ Local aItem
 
             if aItem[4] == TBSTYLE_BUTTON
 
-               aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6],.f.)
+               aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6],.F.)
                aItem[2] := hb_enumindex()
 //               hwg_SetSignal( aItem[11],"clicked",WM_LBUTTONUP,aItem[2], 0 )
                hwg_TOOLBAR_SETACTION(aItem[11],aItem[7])
@@ -158,7 +158,7 @@ Local aItem
                   hwg_AddtoolTip(::handle, aItem[11],aItem[8])
                endif
             elseif aitem[4] == TBSTYLE_SEP
-               aItem[11] := hwg_CreateToolBarButton(::handle,,,.t.)
+               aItem[11] := hwg_CreateToolBarButton(::handle,,,.T.)
                aItem[2] := hb_enumindex()
             endif
          next
@@ -223,7 +223,7 @@ Return  NIL
 
 METHOD REFRESH() class htoolbar
    if ::lInit
-      ::lInit := .f.
+      ::lInit := .F.
    endif
    ::init()
 return nil

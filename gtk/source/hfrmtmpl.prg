@@ -211,10 +211,10 @@ METHOD Show( nMode,p1,p2,p3 ) CLASS HFormTmpl
 Local i, j, cType
 Local nLeft, nTop, nWidth, nHeight, cTitle, oFont, lClipper := .F., lExitOnEnter := .F.
 Local xProperty, block, bFormExit,nstyle
-Local lModal := .f.
+Local lModal := .F.
 Local lMdi :=.F.
-Local lMdiChild := .f.
-Local lval := .f.
+Local lMdiChild := .F.
+Local lval := .F.
 Local cBitmap := nil
 Local oBmp := NIL 
 Memvar oDlg

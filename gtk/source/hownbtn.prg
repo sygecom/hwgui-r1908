@@ -95,7 +95,7 @@ METHOD Activate CLASS HOwnButton
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    if !::lEnabled
-      hwg_EnableWindow( ::handle, .f. )
+      hwg_EnableWindow( ::handle, .F. )
       ::Disable()
    EndIf
 
