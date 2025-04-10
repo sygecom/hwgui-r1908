@@ -99,7 +99,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
       ::nTop  := Int( ( hwg_GetDesktopHeight() - ::nHeight ) / 2 )
    ENDIF 
    
-   IF nHelpId != nil
+   IF nHelpId != NIL
       ::HelpId := nHelpId
    END
    

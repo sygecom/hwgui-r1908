@@ -38,7 +38,7 @@ ENDCLASS
 METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 
    ::oParent := IIf(oParent == NIL, HWindow():GetMain(), oParent)
-   IF nId == nil
+   IF nId == NIL
       nId := TIMER_FIRST_ID
       DO WHILE AScan(::aTimers, {|o|o:id == nId}) !=  0
          nId ++

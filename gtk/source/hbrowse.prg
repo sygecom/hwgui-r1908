@@ -48,9 +48,9 @@ REQUEST BOF
 #define GDK_Control_L       0xFFE3
 #define GDK_Control_R       0xFFE4
 
-static crossCursor := nil
-static arrowCursor := nil
-static vCursor     := nil
+static crossCursor := NIL
+static arrowCursor := NIL
+static vCursor     := NIL
 static xDrag
 //----------------------------------------------------//
 CLASS HColumn INHERIT HObject
@@ -669,14 +669,14 @@ METHOD Rebuild(hDC) CLASS HBrowse
       else
          // xSize := Round((Max(Len(FldStr(Self, i)), Len(oColumn:heading)) + 2) * 8, 0)
          nColLen := oColumn:length
-         if oColumn:heading != nil
+         if oColumn:heading != NIL
             HdrToken( oColumn:heading, @nHdrLen, @nCount )
             if ! oColumn:lSpandHead
                nColLen := max( nColLen, nHdrLen )
             endif
             ::nHeadRows := Max(::nHeadRows, nCount)
          endif
-         if oColumn:footing != nil
+         if oColumn:footing != NIL
             HdrToken( oColumn:footing, @nHdrLen, @nCount )
             if ! oColumn:lSpandFoot
                nColLen := max( nColLen, nHdrLen )
@@ -868,11 +868,11 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
          xSize := Max( ::x2 - x, xSize )
       endif
       if ::lDispHead .AND. !::lAppMode
-         if oColumn:cGrid == nil
+         if oColumn:cGrid == NIL
             hwg_DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1, 5 )
          else
             hwg_DrawButton( hDC, x-1,::y1-::height*::nHeadRows,x+xSize-1,::y1+1, 0 )
-            if oPenHdr == nil
+            if oPenHdr == NIL
                oPenHdr := HPen():Add(BS_SOLID, 1, 0)
             endif
             hwg_SelectObject( hDC, oPenHdr:handle )
@@ -926,10 +926,10 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
          hwg_DrawLine(hDC, ::x1, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, x), ::y1 + (::height + 1) * i)
       next
       oPen:Release()
-      if oPenHdr != nil
+      if oPenHdr != NIL
          oPenHdr:Release()
       endif
-      if oPenLight != nil
+      if oPenLight != NIL
          oPenLight:Release()
       endif  
    ENDIF
@@ -960,7 +960,7 @@ Local oColumn
       if ::lAdjRight .and. fif == Len(::aColumns)
          xSize := Max( ::x2 - x, xSize )
       endif
-      if oColumn:footing != nil
+      if oColumn:footing != NIL
          cStr := oColumn:footing + ';'
          for nLine := 1 to ::nFootRows
             hwg_DrawText( hDC, hb_tokenGet(@cStr, nLine, ';'),;
@@ -1100,7 +1100,7 @@ METHOD SetColumn( nCol ) CLASS HBrowse
 Local nColPos, lPaint := .F.
 
    IF ::lEditable
-      IF nCol != nil .AND. nCol >= 1 .AND. nCol <= Len(::aColumns)
+      IF nCol != NIL .AND. nCol >= 1 .AND. nCol <= Len(::aColumns)
          IF nCol <= ::freeze
             ::colpos := nCol
          ELSEIF nCol >= ::nLeftCol .AND. nCol <= ::nLeftCol + ::Columns - ::freeze - 1
@@ -1503,7 +1503,7 @@ Local xm := hwg_LOWORD(lParam), x1, fif
    ELSEIF ::lDispHead .and.;
           nLine >= -::nHeadRows .and.;
           fif <= Len(::aColumns) .AND.;
-          ::aColumns[fif]:bHeadClick != nil
+          ::aColumns[fif]:bHeadClick != NIL
 
       Eval(::aColumns[fif]:bHeadClick, Self, fif)
 
@@ -1619,7 +1619,7 @@ METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos ) CLASS HBrowse
          ::LineDown()
       endif
    endif
-return nil
+return NIL
 
 //----------------------------------------------------//
 METHOD Edit( wParam,lParam ) CLASS HBrowse
@@ -1750,7 +1750,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
 
    oBrw:Refresh()
    // Execute block after changes are made
-   IF oBrw:oGet:nLastKey != GDK_Escape .AND. oBrw:bUpdate != nil
+   IF oBrw:oGet:nLastKey != GDK_Escape .AND. oBrw:bUpdate != NIL
        Eval(oBrw:bUpdate, oBrw, fipos)
    ENDIF
    oBrw:oParent:DelControl( oBrw:oGet )
@@ -1792,7 +1792,7 @@ STATIC FUNCTION FldStr(oBrw, numf)
 
       pict := oBrw:aColumns[numf]:picture
 
-      if pict != nil
+      if pict != NIL
          if oBrw:type == BRW_DATABASE
              rez := (oBrw:alias)->(transform(Eval(oBrw:aColumns[numf]:block, , oBrw, numf), pict))
          else
@@ -1957,7 +1957,7 @@ METHOD ShowSizes() CLASS HBrowse
    local cText := ""
    AEval(::aColumns, {|v, e|cText += ::aColumns[e]:heading + ": " + Str(Round(::aColumns[e]:width / 8, 0) - 2) + Chr(10) + Chr(13)})
    hwg_MsgInfo( cText )
-RETURN nil
+RETURN NIL
 
 Function hwg_ColumnArBlock()
 Return {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
@@ -1971,7 +1971,7 @@ Local nL, nPos := 0
       nMaxLen := Max( nMaxLen, nL )
       nCount ++
    enddo
-RETURN nil
+RETURN NIL
 
 #pragma BEGINDUMP
 

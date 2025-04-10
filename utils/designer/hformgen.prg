@@ -1335,7 +1335,7 @@ STATIC FUNCTION MouseMove(oDlg, wParam, xPos, yPos)
             ELSEIF resizeDirection == 2 .OR. resizeDirection == 4
                hwg_SetCursor( vertCursor )
             ENDIF
-            SetvBDown( nil,xPos - oCtrl:nLeft , yPos - oCtrl:nTop, 0 )
+            SetvBDown( NIL,xPos - oCtrl:nLeft , yPos - oCtrl:nTop, 0 )
          ENDIF
       ENDIF
    ENDIF

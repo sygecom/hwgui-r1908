@@ -103,7 +103,7 @@ FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
 
    LOCAL nHandle AS NUMERIC
 
-   IF nMode == nil
+   IF nMode == NIL
       nMode := 2
    ENDIF
    IF cFile == Nil

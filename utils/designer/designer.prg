@@ -906,7 +906,7 @@ FUNCTION SoControles()
 
     ACTIVATE DIALOG ODLGx NOMODAL
 
-RETURN nil
+RETURN NIL
 
 
 Function InspShow()

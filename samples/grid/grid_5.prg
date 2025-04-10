@@ -316,7 +316,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
         
         Eval(bChange, oCtrl, n)
         
-        if aFields[n, GET_VALID] != nil
+        if aFields[n, GET_VALID] != NIL
             if !Eval(aFields[n, GET_VALID])
                 result := .F.            
                 oGet := aFields[n, GET_OBJECT]

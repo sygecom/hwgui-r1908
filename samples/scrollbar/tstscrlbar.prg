@@ -19,7 +19,7 @@ FUNCTION Main()
 
    ACTIVATE window oMain
 
-   RETURN nil
+   RETURN NIL
 
 STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
 

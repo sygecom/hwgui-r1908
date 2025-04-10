@@ -192,15 +192,15 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
                Eval(oCtrl:bChange, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
             ENDIF
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_CLICK
-              if oCtrl != Nil .AND. oCtrl:bAction != nil
+              if oCtrl != Nil .AND. oCtrl:bAction != NIL
                  Eval(oCtrl:bAction, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_SETFOCUS
-              if oCtrl != Nil .AND. oCtrl:bGetFocus != nil
+              if oCtrl != Nil .AND. oCtrl:bGetFocus != NIL
                  Eval(oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_KILLFOCUS
-              if oCtrl != Nil .AND. oCtrl:bLostFocus != nil
+              if oCtrl != Nil .AND. oCtrl:bLostFocus != NIL
                  Eval(oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
         ENDCASE

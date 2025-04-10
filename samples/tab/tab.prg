@@ -57,7 +57,7 @@ FUNCTION buildtabPages(oTab, aPage, aTitle)
       n:activate(.T.)
       oTab:startpage(aTitle[hb_enumindex()], n)
       otab:endpage()
-      n:oParent := nil
+      n:oParent := NIL
    next
 
 RETURN .T.

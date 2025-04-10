@@ -283,7 +283,7 @@ METHOD SetText( c ) CLASS HEdit
   IF c != Nil
      if HB_IsObject(c)
         //in run time return object
-        return nil
+        return NIL
      endif
      IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
         ::title := Transform( c, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )

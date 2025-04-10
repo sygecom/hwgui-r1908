@@ -157,7 +157,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                     hwg_SelectFile({"xBase Files( *.dbf)", " All Files( *.*)"}, {"*.dbf", "*.*"}), ;
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
                       "*.jpg;*.gif;*.bmp;*.ico")))), ;
-                   IIf(!Empty(varbuf),oGet:refresh(),nil)} //,;
+                   IIf(!Empty(varbuf),oGet:refresh(),NIL)} //,;
                   *   VldBrwGet(oGet)} //,   hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)}
                   // : END LFB
             //varbuf := hwg_SelectFile("All files ( *.* )", "*.*")
@@ -338,7 +338,7 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    IF HB_IsObject(obtn)
      hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)
    ENDIF
-   obrw1:bPosChanged:= nil
+   obrw1:bPosChanged:= NIL
    // : END LFB
 
    // oBrw1:DelControl( oGet )
@@ -672,14 +672,14 @@ Return Nil
 // : LFB
 STATIC FUNCTION onclick_deleteitem(oBrw)
   IF oBrw:nCurrent = 1 .AND. oBrw:aArray[oBrw:nCurrent] = ".."
-    RETURN nil
+    RETURN NIL
   ENDIF
   IF Len(obrw:aArray) > 0 .AND. hwg_MsgYesNo("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
      oBrw:aArray := ADel(obrw:aArray, oBrw:nCurrent)
      obrw:aArray := ASize(obrw:aArray, Len(obrw:aArray) - 1)
      obrw:refresh()
   ENDIF
-RETURN nil
+RETURN NIL
 
 FUNCTION ObjInspector(oObject )
 *****************************************************************************
@@ -848,7 +848,7 @@ STATIC FUNCTION resettodefault(oBrw1)
      oBrw1:lUpdated := .T.
      oBrw1:Refresh()
 
- return nil
+ return NIL
 
   // :END LFB
 

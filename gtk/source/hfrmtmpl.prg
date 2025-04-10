@@ -215,7 +215,7 @@ Local lModal := .F.
 Local lMdi :=.F.
 Local lMdiChild := .F.
 Local lval := .F.
-Local cBitmap := nil
+Local cBitmap := NIL
 Local oBmp := NIL 
 Memvar oDlg
 Private oDlg

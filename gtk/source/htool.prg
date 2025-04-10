@@ -226,7 +226,7 @@ METHOD REFRESH() class htoolbar
       ::lInit := .F.
    endif
    ::init()
-return nil
+return NIL
 
 METHOD EnableAllButtons() class htoolbar
    Local xItem

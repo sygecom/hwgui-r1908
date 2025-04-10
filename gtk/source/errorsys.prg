@@ -124,7 +124,7 @@ Local nHand
   FWrite(nHand, cText + chr(10))
   FClose(nHand)
 
-return nil
+return NIL
 
 Static Function ErrorPreview( cMess )
 Local oDlg, oEdit

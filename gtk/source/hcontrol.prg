@@ -114,7 +114,7 @@ Local o
       DO WHILE o != Nil .AND. !__ObjHasMsg( o,"LACTIVATED")
          o := o:oParent
       ENDDO
-      if ::tcolor != nil          
+      if ::tcolor != NIL          
             hwg_SETFGCOLOR(::handle,::tcolor)
       endif	    
       
@@ -469,7 +469,7 @@ METHOD Activate CLASS HButtonEX
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hIcon) 
       else
             ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,nil) 
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,NIL) 
       endif		  
       hwg_SetWindowObject( ::handle,Self )
       ::Init()

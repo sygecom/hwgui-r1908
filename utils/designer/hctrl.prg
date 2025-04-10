@@ -546,7 +546,7 @@ Function SetvBDown( oCtrl,xPos,yPos,nBorder )
    HB_SYMBOL_UNUSED(oCtrl)
    HB_SYMBOL_UNUSED(nBorder)
 
-   vBDown[BDOWN_OCTRL] := nil
+   vBDown[BDOWN_OCTRL] := NIL
    vBDown[BDOWN_XPOS]  := xPos
    vBDown[BDOWN_YPOS]  := yPos
    vBDown[BDOWN_NBORDER] := 0
@@ -594,7 +594,7 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
                   oCtrl:nTop+oCtrl:nHeight+3 )
                   ADel(aSels, i)
                   ASize(Asels, Len(aSels) - 1)
-            RETURN nil
+            RETURN NIL
           ENDIF
           //
         ENDIF
@@ -1186,7 +1186,7 @@ FUNCTION AUTOSIZE(oCtrl)
         asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oparent:oFont,hwg_GetDC(oCtrl:handle)) //nHdc)
     ENDIF
     IF octrl:nLeft = Nil
-      return nil
+      return NIL
     ENDIF
      SetBDown( , oCtrl:nWidth,oCtrl:nHeight, 3 )
     CtrlResize(OCTRL, ASize[1], oCtrl:nTop)

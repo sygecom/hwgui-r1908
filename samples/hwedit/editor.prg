@@ -380,7 +380,7 @@ if maxi
   //hwg_SendMessage(oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
   oMainWindow:Maximize()
 endif
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
     dats := dtoc(date())
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
@@ -543,7 +543,7 @@ FUNCTION Pesquisa()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
      oWindow := HMainWIndow():GetMdiActive():aControls
      //
@@ -615,7 +615,7 @@ FUNCTION Vai(oEdit)
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
      oWindow := HMainWIndow():GetMdiActive():aControls
      INIT DIALOG pesq clipper TITLE  "Linha" ;
@@ -677,7 +677,7 @@ FUNCTION Salvar_Projeto(oOpcao)
    LOCAL i
    LOCAL cfile := "temp"
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      //
@@ -717,7 +717,7 @@ FUNCTION buscafunc(linha)
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      IF oWindow != Nil
@@ -746,7 +746,7 @@ FUNCTION cor_fundo()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
@@ -769,7 +769,7 @@ FUNCTION cor_Fonte()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != nil
+ if HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
