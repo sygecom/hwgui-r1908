@@ -379,8 +379,8 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
 
    IF oDesigner:oDlgInsp == Nil
      //
-      InspOpen(IIf(hwg_Getdesktopwidth()>800,.T.,.F.))
-      IF hwg_Getdesktopwidth()<=800
+      InspOpen(IIf(hwg_Getdesktopwidth() > 800,.T.,.F.))
+      IF hwg_Getdesktopwidth() <= 800
              oDesigner:oDlgInsp:HIDE()
           ENDIF
          //  NANDO escondeu ele

@@ -523,7 +523,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
  *:minimum 6  &  max 9 char
 
- if ((nLen<6) .or. (nLen>9))
+ if ((nLen < 6) .or. (nLen > 9))
      hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
      return .f.
  end

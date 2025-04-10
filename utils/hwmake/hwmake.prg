@@ -320,7 +320,7 @@ hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), cFolderFile )
 hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), cFolderFile )
 oNome:=""
 
-if Len(oBrowse1:aArray)>=1
+if Len(oBrowse1:aArray) >= 1
    for i:=1 to Len(oBrowse1:aArray)
 
       if !empty(oBrowse1:aArray[i])
@@ -333,7 +333,7 @@ if Len(oBrowse1:aArray)>=1
 
 endif
 
-if Len(oBrowse2:aArray)>=1
+if Len(oBrowse2:aArray) >= 1 
    for i:=1 to Len(oBrowse2:aArray)
       if !empty(oBrowse2:aArray[i])
          hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], cFolderFile )
@@ -341,7 +341,7 @@ if Len(oBrowse2:aArray)>=1
    Next     
 endif
 
-if Len(oBrowse3:aArray)>=1
+if Len(oBrowse3:aArray) >= 1
    for i:=1 to Len(oBrowse3:aArray)
       if !empty(oBrowse3:aArray[i])
          hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], cFolderFile )
@@ -349,7 +349,7 @@ if Len(oBrowse3:aArray)>=1
    Next     
 endif   
 
-if Len(oBrowse4:aArray)>=1
+if Len(oBrowse4:aArray) >= 1
    for i:=1 to Len(oBrowse4:aArray)
       if !empty(oBrowse4:aArray[i])
          hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], cFolderFile )

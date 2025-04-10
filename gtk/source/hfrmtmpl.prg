@@ -1345,7 +1345,7 @@ Local name  := oXmlNode:GetAttribute("name"), i
   ita    := IIf(ita != NIL, Val(ita), 0)
   under  := IIf(under != NIL, Val(under), 0)
 
-Return oPrinter:AddFont( name, height, (weight>400), (ita>0), (under>0), charset )
+Return oPrinter:AddFont( name, height, (weight > 400), (ita > 0), (under > 0), charset )
 
 #pragma BEGINDUMP
 

@@ -234,10 +234,10 @@ Local i := Ascan( ::aWindows, {|o|o:handle==hWnd} )
 Return IIf(i == 0, Nil, ::aWindows[i])
 
 METHOD GetMain CLASS HWindow
-Return Iif(Len(::aWindows)>0,              ;
+Return Iif(Len(::aWindows) > 0,              ;
 	 Iif(::aWindows[1]:type==WND_MAIN, ;
 	   ::aWindows[1],                  ;
-	   Iif(Len(::aWindows)>1,::aWindows[2],Nil)), Nil )
+	   Iif(Len(::aWindows) > 1,::aWindows[2],Nil)), Nil )
 
 METHOD GetMdiActive() CLASS HWindow 
 Return ::FindWindow ( hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) )
@@ -265,7 +265,7 @@ Local oWnd, oBtn, oitem
    if msg == WM_COMMAND
       //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
              hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
           endif
       elseif wParam == SC_RESTORE
@@ -464,7 +464,7 @@ Local oWnd, oBtn, oitem
       //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
           //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - Close", 40) + "|")
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
              hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
           endif
       elseif wParam == SC_RESTORE
@@ -902,7 +902,7 @@ Local oWndClient
       //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - COMMAND", 40) + "|")
       if wParam == SC_CLOSE
           //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - Close", 40) + "|")
-          if Len(HWindow():aWindows)>2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
+          if Len(HWindow():aWindows) > 2 .AND. ( nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0) ) > 0
              hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, nHandle, 0)
           endif
       elseif wParam == SC_RESTORE

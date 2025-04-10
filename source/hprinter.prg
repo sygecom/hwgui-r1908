@@ -90,7 +90,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       ::Landscape      := lLandScape
    ENDIF
    IF hb_IsNumeric(nCopies)
-      IF nCopies>0
+      IF nCopies > 0
          ::Copies := nCopies
       ENDIF
    ENDIF

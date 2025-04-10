@@ -116,7 +116,7 @@ Local aItem
 
       NEXT n
 
-/*      IF Len(aButton) >0
+/*      IF Len(aButton) > 0
 
           aBmpSize := hwg_GetBitmapSize(aButton[1])
 
@@ -145,7 +145,7 @@ Local aItem
 
       ENDIF
 */
-      if Len(::aItem) >0
+      if Len(::aItem) > 0
          For Each aItem in ::aItem
 
             if aItem[4] == TBSTYLE_BUTTON
@@ -213,7 +213,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HToolbar
 Local nPos
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
-      if nPos>0
+      if nPos > 0
          IF ::aItem[nPos, 7] != Nil
             Eval(::aItem[nPos, 7] ,Self)
          ENDIF

@@ -25,7 +25,7 @@ FUNCTION hwg_SayDollar(nDollar)
  LOCAL nCheck1 := 0
  LOCAL nCheck2 := 0
 
- DO WHILE nPJ>0
+ DO WHILE nPJ > 0
     xLang2 := ""
     xLang1 := ""
     xMuch := "ONE"

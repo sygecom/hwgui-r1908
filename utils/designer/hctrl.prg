@@ -1042,7 +1042,7 @@ FUNCTION asels_ajustar(najuste)
    LOCAL nCenterLeft
    LOCAL asels := aselCtrls()
 
- IF Len(aSels) <= 1 .AND. nAjuste <7
+ IF Len(aSels) <= 1 .AND. nAjuste < 7
    RETURN Nil
  ENDIF
  oCtrl := asels[1]

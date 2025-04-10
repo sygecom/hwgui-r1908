@@ -283,7 +283,7 @@ FUNCTION SaveBuildFile()
    hwg_WriteIni("Config", "PrgMain", oMainPrg:GetText(), oFolderFile)
    oNome := ""
 
-   if Len(oBrowse1:aArray)>=1
+   if Len(oBrowse1:aArray) >= 1
       for i := 1 to Len(oBrowse1:aArray)
 
          if !Empty(oBrowse1:aArray[i])
@@ -297,7 +297,7 @@ FUNCTION SaveBuildFile()
    endif
 
 
-   if Len(oBrowse2:aArray)>=1
+   if Len(oBrowse2:aArray) >= 1
       for i := 1 to Len(oBrowse2:aArray)
          if !Empty(oBrowse2:aArray[i])
             hwg_WriteIni("FilesC", AllTrim(Str(i)), oBrowse2:aArray[i], oFolderFile)
@@ -305,7 +305,7 @@ FUNCTION SaveBuildFile()
       Next
    endif
 
-   if Len(oBrowse3:aArray)>=1
+   if Len(oBrowse3:aArray) >= 1
       for i := 1 to Len(oBrowse3:aArray)
          if !Empty(oBrowse3:aArray[i])
             hwg_WriteIni("FilesLIB", AllTrim(Str(i)), oBrowse3:aArray[i], oFolderFile)
@@ -313,7 +313,7 @@ FUNCTION SaveBuildFile()
       Next
    endif
 
-   if Len(oBrowse4:aArray)>=1
+   if Len(oBrowse4:aArray) >= 1
       for i := 1 to Len(oBrowse4:aArray)
          if !Empty(oBrowse4:aArray[i])
             hwg_WriteIni("FilesRES", AllTrim(Str(i)), oBrowse4:aArray[i], oFolderFile)
@@ -395,7 +395,7 @@ FUNCTION BuildBat()
    Next   
    FWrite(oArq, "ECHO " + oName + ".obj > make.tmp " + CRF)
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    
       for i := 1 to Len(voPrgFiles)
       
@@ -467,7 +467,7 @@ FUNCTION BuildBat()
    " -i" + vPelles + "\INCLUDE;" + vHarbour + "\INCLUDE;" + vHwGUI + "\INCLUDE" + IIf(!Empty(voIncFolder), ";", "") + voIncFolder + " " + voPrgFlag + " -n -q0 -es2 -gc0" + CRF)
    
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    for i := 1 to Len(voPrgFiles)
        if !Empty(voPrgFiles[i])
     
@@ -483,7 +483,7 @@ FUNCTION BuildBat()
    FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"'+vHarbour+'\INCLUDE" /I"'+vPelles+'\INCLUDE" /I"'+vPelles+'\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
    
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    for i := 1 to Len(voPrgFiles)
       if !Empty(voPrgFiles[i])
          oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
@@ -492,7 +492,7 @@ FUNCTION BuildBat()
    next
    endif 
    
-   if Len(voCFiles)>0 
+   if Len(voCFiles) > 0 
    oInc := ""
    for i := 1 to Len(voCFiles)
        if !Empty(voCFiles[i])
@@ -504,7 +504,7 @@ FUNCTION BuildBat()
    Next
    Endif
    
-   if Len(voResFiles)>0 
+   if Len(voResFiles) > 0 
    oInc := ""
    for i := 1 to Len(voResFiles)
      if !Empty(voResFiles[i])
@@ -649,7 +649,7 @@ FUNCTION BuildPoMake()
    */
    FWrite(oArq, oName + ".obj \ " + CRF)
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    
       for i := 1 to Len(voPrgFiles)
       
@@ -691,7 +691,7 @@ FUNCTION BuildPoMake()
    FWrite(oArq, oName + ".c : " + voPrgMain + CRF)
    FWrite(oArq, "   $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@" + CRF + CRF)
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    for i := 1 to Len(voPrgFiles)
        if !Empty(voPrgFiles[i])
     
@@ -705,7 +705,7 @@ FUNCTION BuildPoMake()
    FWrite(oArq, oName + ".obj : " + oName + ".c" + CRF)
    FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF + CRF)
    
-   if Len(voPrgFiles)>0 
+   if Len(voPrgFiles) > 0 
    for i := 1 to Len(voPrgFiles)
        if !Empty(voPrgFiles[i])
           oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
@@ -715,7 +715,7 @@ FUNCTION BuildPoMake()
    Next
    endif
    
-   if Len(voCFiles)>0 
+   if Len(voCFiles) > 0
    oInc := ""
    for i := 1 to Len(voCFiles)
        if !Empty(voCFiles[i])
