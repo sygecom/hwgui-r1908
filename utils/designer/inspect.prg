@@ -362,7 +362,7 @@ FUNCTION InspOpen(lShow)
       STYLE nStilo;
       ON INIT {||IIf(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
       ON GETFOCUS {|o| o:show(),.T.};
-      ON EXIT {||oDesigner:oDlgInsp:=NIL,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
+      ON EXIT {||oDesigner:oDlgInsp := NIL,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
       ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
    @ 0, 0 COMBOBOX oCombo ITEMS {} SIZE 220, 22 ;

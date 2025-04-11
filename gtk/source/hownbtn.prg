@@ -166,7 +166,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       if ::lEnabled
          if ::oBitmap != NIL
             ::bitmap:handle:=::oBitmap
-            ::oBitmap:=NIL
+            ::oBitmap := NIL
          EndIf
          hwg_DrawBitmap( hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb )
       Else
