@@ -441,7 +441,7 @@ CLASS HDesigner
 ENDCLASS
 // -----------------
 
-Static Function StartDes( oDlg,p1,cForm )
+STATIC Function StartDes( oDlg,p1,cForm )
 
    hwg_MoveWindow(oDlg:handle, 0, 0, oDlg:nWidth + 10, oDlg:nHeight)
 

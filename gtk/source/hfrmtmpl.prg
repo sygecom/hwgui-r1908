@@ -12,7 +12,7 @@
 #xtranslate HB_AT(<x,...>) => AT(<x>)
 #endif
 
-Static aClass := { "label", "button", "checkbox",                    ;
+STATIC aClass := { "label", "button", "checkbox",                    ;
                   "radiobutton", "editbox", "group", "radiogroup",  ;
                   "bitmap","icon",                                  ;
                   "richedit","datepicker", "updown", "combobox",    ;
@@ -20,7 +20,7 @@ Static aClass := { "label", "button", "checkbox",                    ;
                   "monthcalendar","trackbar","page", "tree",        ;
                   "status","menu","animation"                       ;
                 }
-Static aCtrls := { ;
+STATIC aCtrls := { ;
   "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
   "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
   "HCheckButton():New(oPrnt,nId,lInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,bwhen)", ;
@@ -53,8 +53,8 @@ Static aCtrls := { ;
 
 #define  CONTROL_FIRST_ID   34000
 
-Static aPenType  := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
-Static aJustify  := { "Left","Center","Right" }
+STATIC aPenType  := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
+STATIC aJustify  := { "Left","Center","Right" }
 
 REQUEST HSTATIC
 REQUEST HBUTTON
@@ -410,7 +410,7 @@ RETURN NIL
 
 // ------------------------------
 
-Static Function ReadTree(oForm, aParent, oDesc)
+STATIC Function ReadTree(oForm, aParent, oDesc)
 Local i, aTree := {}, oNode, subarr
 
    FOR i := 1 TO Len(oDesc:aItems)
@@ -461,7 +461,7 @@ Local arr := {}, nPos1, nPos2, cLine
 
 RETURN arr
 
-Static Function CompileMethod(cMethod, oForm, oCtrl)
+STATIC Function CompileMethod(cMethod, oForm, oCtrl)
 Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
 
    IF cMethod = NIL .OR. Empty(cMethod)
@@ -528,7 +528,7 @@ Local n
    BREAK
 RETURN .T.
 
-Static Function ReadCtrl( oCtrlDesc, oContainer, oForm )
+STATIC Function ReadCtrl( oCtrlDesc, oContainer, oForm )
 Local oCtrl := HCtrlTmpl():New( oContainer )
 Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
 
@@ -569,7 +569,7 @@ RETURN NIL
 #define TBS_BOTH                     8
 #define TBS_NOTICKS                 16
 
-Static Function CreateCtrl( oParent, oCtrlTmpl, oForm )
+STATIC Function CreateCtrl( oParent, oCtrlTmpl, oForm )
 Local i, j, oCtrl, stroka, varname, xProperty, block, cType, cPName
 Local nCtrl := AScan(aClass, oCtrlTmpl:cClass), xInitValue, cInitName, cVarName
 MEMVAR oPrnt, nId, nInitValue, cInitValue, dInitValue, nStyle, nLeft, nTop
@@ -1291,7 +1291,7 @@ Local i := AScan(::aReports, {|o|o:id == ::id})
    ENDIF
 RETURN NIL
 
-Static Function ReadRepItem( oCtrlDesc, oContainer )
+STATIC Function ReadRepItem( oCtrlDesc, oContainer )
 Local oCtrl := HRepItem():New( oContainer )
 Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems, xProperty
 Local nPenWidth, nPenType
@@ -1321,12 +1321,12 @@ Local nPenWidth, nPenType
 
 RETURN NIL
 
-Static Function aGetSecond(arr, xFirst)
+STATIC Function aGetSecond(arr, xFirst)
 Local i := AScan(arr, {|a|a[1] == xFirst})
 
 RETURN IIf(i == 0, NIL, arr[i, 2])
 
-Static Function hrep_FontFromXML( oPrinter,oXmlNode,height )
+STATIC Function hrep_FontFromXML( oPrinter,oXmlNode,height )
 Local weight := oXmlNode:GetAttribute("weight")
 Local charset := oXmlNode:GetAttribute("charset")
 Local ita   := oXmlNode:GetAttribute("italic")

@@ -16,8 +16,8 @@
 
 #define ES_SAVESEL 0x00008000
 
-Static oDlg, oEdit, cIniName
-Static nTextLength
+STATIC oDlg, oEdit, cIniName
+STATIC nTextLength
 
 CLASS HDTheme
 
@@ -498,7 +498,7 @@ STATIC FUNCTION EditColors()
 
 RETURN NIL
 
-Static Function UpdSample(nAction)
+STATIC Function UpdSample(nAction)
 
    MEMVAR aSchemes
    MEMVAR nScheme

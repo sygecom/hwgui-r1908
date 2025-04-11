@@ -50,7 +50,7 @@ LOCAL af, oBrw
    oModDlg:Activate()
 RETURN NIL
 
-Static Function SetField(oBrw)
+STATIC Function SetField(oBrw)
 Local hDlg := hwg_GetModalHandle(), i
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent, 1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent, 2], "CNDLM" ) ) != 0
@@ -60,7 +60,7 @@ Local hDlg := hwg_GetModalHandle(), i
    hwg_SetDlgItemText( hDlg, IDC_EDIT4, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 4])) )
 RETURN NIL
 
-Static Function ModiStru( nOper )
+STATIC Function ModiStru( nOper )
 Local oDlg := hwg_GetModalDlg(), hDlg := oDlg:handle
 Local oBrowse := oDlg:FindControl( ID_BROWSE )
 Local cName, cType, nLen, nDec := 0
@@ -111,7 +111,7 @@ Local cName, cType, nLen, nDec := 0
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
 RETURN NIL
 
-Static Function EndStru( oDlg,lNew )
+STATIC Function EndStru( oDlg,lNew )
 Local fname, alsname
 Local A1,A2,A3,A4,B1,B2,B3,B4,C1,C2
 Local fi1, kolf, i, j

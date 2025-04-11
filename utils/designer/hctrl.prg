@@ -16,9 +16,9 @@
 
 #include "designer.ch"
 
-Static aBDown := {NIL, 0, 0, .F.}
-Static vBDown := {NIL, 0, 0, .F.}
-Static oPenSel
+STATIC aBDown := {NIL, 0, 0, .F.}
+STATIC vBDown := {NIL, 0, 0, .F.}
+STATIC oPenSel
 
 // :LFB
 STATIC aSels := {}

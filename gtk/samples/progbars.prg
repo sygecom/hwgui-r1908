@@ -12,8 +12,8 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Static oMain, oForm, oFont, oBar := NIL
-Static n :=0
+STATIC oMain, oForm, oFont, oBar := NIL
+STATIC n :=0
 Function Main()
 
         INIT WINDOW oMain MAIN TITLE "Progress Bar Sample"

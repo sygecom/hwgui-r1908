@@ -18,7 +18,7 @@ REQUEST HWG_ENDWINDOW
 #define  WM_NOTIFYICON         WM_USER+1000
 #define  ID_NOTIFYICON           1
 
-Static Function onSize(oWnd, wParam, lParam)
+STATIC Function onSize(oWnd, wParam, lParam)
 
    // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)) )
 
@@ -33,7 +33,7 @@ Static Function onSize(oWnd, wParam, lParam)
 
 RETURN 0
 
-Static Function onDestroy( oWnd )
+STATIC Function onDestroy( oWnd )
 
    oWnd:Super:onEvent( WM_DESTROY )
    HWindow():DelItem( oWnd )
@@ -366,7 +366,7 @@ Local oItem, iCont, nCont
 */
 RETURN -1
 
-Static Function onCommand(oWnd, wParam, lParam)
+STATIC Function onCommand(oWnd, wParam, lParam)
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
@@ -407,7 +407,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 
 RETURN 0
 
-Static Function onMove(oWnd, wParam, lParam)
+STATIC Function onMove(oWnd, wParam, lParam)
 
    // writelog( "onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)) )
    oWnd:nLeft := hwg_LOWORD(lParam)
@@ -415,7 +415,7 @@ Static Function onMove(oWnd, wParam, lParam)
 
 RETURN 0
 
-Static Function onEraseBk( oWnd,wParam )
+STATIC Function onEraseBk( oWnd,wParam )
 /*
    IF oWnd:oBmp != NIL
        hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
@@ -424,7 +424,7 @@ Static Function onEraseBk( oWnd,wParam )
 */   
 RETURN 0
 
-Static Function onSysCommand(oWnd, wParam)
+STATIC Function onSysCommand(oWnd, wParam)
 Local i
 /*
    IF wParam == SC_CLOSE
@@ -450,7 +450,7 @@ Local i
 */
 RETURN 0
 
-Static Function onNotifyIcon( oWnd,wParam,lParam )
+STATIC Function onNotifyIcon( oWnd,wParam,lParam )
 Local ar
 /*
    IF wParam == ID_NOTIFYICON
@@ -468,7 +468,7 @@ Local ar
 */   
 RETURN 0
 
-Static Function onMdiCreate(oWnd, lParam)
+STATIC Function onMdiCreate(oWnd, lParam)
 /*
    hwg_InitControls( oWnd )
    IF oWnd:bInit != NIL
@@ -477,7 +477,7 @@ Static Function onMdiCreate(oWnd, lParam)
 */
 RETURN 0
 
-Static Function onMdiCommand(oWnd, wParam)
+STATIC Function onMdiCommand(oWnd, wParam)
 Local iParHigh, iParLow, iItem
 /*
    IF wParam == SC_CLOSE
@@ -492,7 +492,7 @@ Local iParHigh, iParLow, iItem
 */
 RETURN 0
 
-Static Function onMdiNcActivate(oWnd, wParam)
+STATIC Function onMdiNcActivate(oWnd, wParam)
 /*
    IF wParam == 1 .AND. oWnd:bGetFocus != NIL
       Eval(oWnd:bGetFocus, oWnd)
@@ -502,7 +502,7 @@ Static Function onMdiNcActivate(oWnd, wParam)
 */
 RETURN 0
 
-Static Function onEnterIdle(oDlg, wParam, lParam)
+STATIC Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 /*
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != NIL ;

@@ -13,7 +13,7 @@
 
 REQUEST HWG_ENDWINDOW
 
-Static aMessModalDlg := { ;
+STATIC aMessModalDlg := { ;
          { WM_COMMAND,{|o,w,l|hwg_DlgCommand(o,w,l)} },         ;
          { WM_SIZE,{|o,w,l|onSize(o,w,l)} },                ;
          { WM_INITDIALOG,{|o,w,l|InitModalDlg(o,w,l)} },    ;
@@ -23,7 +23,7 @@ Static aMessModalDlg := { ;
          { WM_ACTIVATE,{|o,w,l|onActivate(o,w,l)} }         ;
       }
 
-Static Function onDestroy( oDlg )
+STATIC Function onDestroy( oDlg )
 
    IF oDlg:bDestroy != NIL
       Eval(oDlg:bDestroy, oDlg)
@@ -185,7 +185,7 @@ RETURN IIf(i == 0, NIL, ::Getlist[i])
 // End of class
 // ------------------------------------
 
-Static Function InitModalDlg( oDlg )
+STATIC Function InitModalDlg( oDlg )
 Local iCont
 
    // writelog( str(oDlg:handle)+" "+oDlg:title )
@@ -211,7 +211,7 @@ Local iCont
 
 RETURN 1
 
-Static Function onEnterIdle(oDlg, wParam, lParam)
+STATIC Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != NIL ;
@@ -223,7 +223,7 @@ Local oItem
    ENDIF
 RETURN 0
 
-Static Function onEraseBk( oDlg,hDC )
+STATIC Function onEraseBk( oDlg,hDC )
 Local aCoors
 /*
    IF __ObjHasMsg( oDlg,"OBMP") 
@@ -307,7 +307,7 @@ Local aMenu, i, hCtrl
 
 RETURN 1
 
-Static Function onSize(oDlg, wParam, lParam)
+STATIC Function onSize(oDlg, wParam, lParam)
    LOCAL aControls, iCont , nW1, nH1
    LOCAL nW := hwg_LOWORD(lParam), nH := hwg_HIWORD(lParam)
    LOCAL nScrollMax
@@ -341,7 +341,7 @@ Static Function onSize(oDlg, wParam, lParam)
 
 RETURN 0
 
-Static Function onActivate(oDlg, wParam, lParam)
+STATIC Function onActivate(oDlg, wParam, lParam)
 Local iParLow := hwg_LOWORD(wParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != NIL

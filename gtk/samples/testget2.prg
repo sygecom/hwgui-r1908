@@ -98,13 +98,13 @@ Private oSayT
 
 RETURN NIL
 
-Static Function SetTimer( oDlg,oTimer )
+STATIC Function SetTimer( oDlg,oTimer )
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
 //   writelog( ValType(oTimer) )
 RETURN NIL
 
-Static Function TimerFunc()
+STATIC Function TimerFunc()
 
    oSayT:SetValue(Time())
 RETURN NIL

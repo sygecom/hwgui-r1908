@@ -48,10 +48,10 @@ REQUEST BOF
 #define GDK_Control_L       0xFFE3
 #define GDK_Control_R       0xFFE4
 
-static crossCursor := NIL
-static arrowCursor := NIL
-static vCursor     := NIL
-static xDrag
+STATIC crossCursor := NIL
+STATIC arrowCursor := NIL
+STATIC vCursor     := NIL
+STATIC xDrag
 //----------------------------------------------------//
 CLASS HColumn INHERIT HObject
 
@@ -537,7 +537,7 @@ METHOD InsColumn( oColumn,nPos ) CLASS HBrowse
 
 RETURN oColumn
 
-Static Function InitColumn( oBrw, oColumn, n )
+STATIC Function InitColumn( oBrw, oColumn, n )
 
    if oColumn:type == NIL
       oColumn:type := ValType(Eval(oColumn:block, , oBrw, n))
@@ -1683,7 +1683,7 @@ Local oColumn, type
 
 RETURN NIL
 
-Static Function GetEventHandler( oBrw, msg, cod )
+STATIC Function GetEventHandler( oBrw, msg, cod )
 
    IF msg == WM_KEYDOWN .AND. cod == GDK_Escape
       oBrw:oGet:nLastKey := GDK_Escape
@@ -1692,7 +1692,7 @@ Static Function GetEventHandler( oBrw, msg, cod )
    ENDIF
 RETURN 0
 
-Static Function VldBrwEdit( oBrw, fipos )
+STATIC Function VldBrwEdit( oBrw, fipos )
 Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
 
    IF oBrw:oGet:nLastKey != GDK_Escape
@@ -1962,7 +1962,7 @@ RETURN NIL
 Function hwg_ColumnArBlock()
 RETURN {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
 
-Static function HdrToken(cStr, nMaxLen, nCount)
+STATIC function HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0
 
    nMaxLen := nCount := 0

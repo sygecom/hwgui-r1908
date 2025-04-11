@@ -152,7 +152,7 @@ RETURN NIL
 
 /* -----------------------  Options --------------------- */
 
-Static Function OpenConfig
+STATIC Function OpenConfig
 Local aModDlg, aDates := { "dd/mm/yy","mm/dd/yy" }
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig() }
@@ -166,7 +166,7 @@ Local aModDlg, aDates := { "dd/mm/yy","mm/dd/yy" }
 
 RETURN NIL
 
-Static Function InitConfig
+STATIC Function InitConfig
 #ifdef RDD_ADS
 Local hDlg := hwg_GetModalHandle()
 Local st := IIf(nServerType == ADS_REMOTE_SERVER, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)
@@ -182,7 +182,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
 #endif
 RETURN .T.
 
-Static Function EndConfig()
+STATIC Function EndConfig()
 Local hDlg := hwg_GetModalHandle()
 Local new_numdriv, new_servertype, serverPath
    new_numdriv := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON3), 1, ;
@@ -232,14 +232,14 @@ Local new_numdriv, new_servertype, serverPath
    EndDialog( hDlg )
 RETURN .T.
 
-Static Function ServerButton( iEnable )
+STATIC Function ServerButton( iEnable )
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
    hwg_SendMessage(hEdit, WM_ENABLE, iEnable, 0)
 RETURN .T.
 
 /* -----------------------  Select Order --------------------- */
 
-Static Function ListIndex
+STATIC Function ListIndex
 Local oModDlg, oBrw
 Local msind := { { "0","None","","" } }, i, ordlen := 0
 Local indname
@@ -267,7 +267,7 @@ Local indname
    oModDlg:Activate()
 RETURN NIL
 
-Static Function SetIndex( oBrw )
+STATIC Function SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
@@ -295,14 +295,14 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitNewIndex
+STATIC Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 RETURN NIL
 
-Static Function TagName
+STATIC Function TagName
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    IF hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
@@ -312,7 +312,7 @@ Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    ENDIF
 RETURN NIL
 
-Static Function EndNewIndex()
+STATIC Function EndNewIndex()
 Local hDlg := hwg_GetModalHandle()
 Local indname, isMulti, isUniq, tagname, expkey, expfor
 Local oWindow, aControls, i
@@ -418,7 +418,7 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitOpen
+STATIC Function InitOpen
 Local hDlg := hwg_GetModalHandle()
 Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTON4, IDC_RADIOBUTTON5))
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
@@ -430,7 +430,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN .T.
 
-Static Function EndOpen()
+STATIC Function EndOpen()
 Local hDlg := hwg_GetModalHandle()
 Local new_numdriv, old_numdriv := numdriv, alsName, fname, pass
 Local oldExcl := SET( _SET_EXCLUSIVE ), oldRdonly := prrdonly
@@ -540,12 +540,12 @@ Local oModDlg
 
 RETURN NIL
 
-Static Function InitCalc()
+STATIC Function InitCalc()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
 RETURN NIL
 
-Static Function EndCalc()
+STATIC Function EndCalc()
 Local hDlg := hwg_GetModalHandle()
 Local cExpr, res
 
@@ -578,7 +578,7 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function EndScri( lOk, nAct )
+STATIC Function EndScri( lOk, nAct )
 Local hDlg := hwg_GetModalHandle()
 Local fname, arScr, nError, nLineEr, obl
 

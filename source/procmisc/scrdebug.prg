@@ -161,7 +161,7 @@ Local nFirst, i
 
 RETURN .T.
 
-Static Function dlgDebugClose()
+STATIC Function dlgDebugClose()
 
    s_oDlgDebug := NIL
    hwg_SetDebugger(.F.)
@@ -178,7 +178,7 @@ Static Function dlgDebugClose()
 
 RETURN .T.
 
-Static Function AddBreakPoint
+STATIC Function AddBreakPoint
 Local i
 
    IF s_aBreakPoints == NIL
@@ -201,7 +201,7 @@ Local i
    s_oBrwScript:Refresh()
 RETURN .T.
 
-Static Function AddWatch()
+STATIC Function AddWatch()
 Local xRes, bCodeblock, bOldError, lRes := .T.
 
 #ifdef __LINUX__
@@ -235,7 +235,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
    ENDIF
 RETURN .T.
 
-Static Function CalcWatch(n)
+STATIC Function CalcWatch(n)
 Local xRes, bOldError, lRes := .T., cType
 
    bOldError := ErrorBlock({|e|MacroError(e)})
@@ -266,7 +266,7 @@ Local xRes, bOldError, lRes := .T., cType
    
 RETURN .T.
 
-Static Function Calculate()
+STATIC Function Calculate()
 Local xRes, bOldError, lRes := .T., cType
 
 #ifdef __LINUX__

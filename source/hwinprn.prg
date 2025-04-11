@@ -20,7 +20,7 @@
 #define MODE_ELITECOND  3
 #define MODE_USER      10
 
-Static s_cPseudoChar := "дмЁ╨зиуж©╩╥╦юхсты╪╫╬бкярайопцлфг╢╧╣╤енвь"
+STATIC s_cPseudoChar := "дмЁ╨зиуж©╩╥╦юхсты╪╫╬бкярайопцлфг╢╧╣╤енвь"
 
 
 CLASS HWinPrn INHERIT HObject
@@ -292,7 +292,7 @@ METHOD PrintText(cText) CLASS HWinPrn
 RETURN NIL
 
 METHOD PutCode(cLine) CLASS HWinPrn
-Static aCodes := { ;
+STATIC aCodes := { ;
    {Chr(27) + "@", .F., .F., 6, .F., .F., .F.},  ;     /* Reset */
    {Chr(27) + "M", .T.,,,,,},  ;     /* Elite */
    {Chr(15),, .T.,,,,},      ;     /* Cond */

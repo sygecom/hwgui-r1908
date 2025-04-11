@@ -127,7 +127,7 @@ Local aModDlg, oFont
    aModDlg:Activate()
 RETURN NIL
 
-Static Function NewReport( oMainWindow )
+STATIC Function NewReport( oMainWindow )
 Local oDlg
 
    INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||hwg_CheckRadioButton( oDlg:handle,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1)}
@@ -138,7 +138,7 @@ Local oDlg
 
 RETURN NIL
 
-Static Function EndNewrep( oMainWindow,oDlg )
+STATIC Function EndNewrep( oMainWindow,oDlg )
 
    aPaintRep := { 0, 0, 0, 0, 0,{},"","",.F., 0,NIL }
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
@@ -156,7 +156,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
    EndDialog()
 RETURN NIL
 
-Static Function PaintMain( oWnd )
+STATIC Function PaintMain( oWnd )
 Local pps, hDC, hWnd := oWnd:handle
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, oldBkColor, aMetr, nWidth, nHeight, lPreview := .F.
 Local n1cm, xt, yt
@@ -261,7 +261,7 @@ Local step, kolsteps, nsteps
    hwg_EndPaint( hWnd, pps )
 RETURN 0
 
-Static Function PaintItem( hDC, aItem, aCoors, lPreview )
+STATIC Function PaintItem( hDC, aItem, aCoors, lPreview )
 Local x1 := LEFT_INDENT + aItem[ITEM_X1], y1 := TOP_INDENT + aItem[ITEM_Y1] - aPaintRep[FORM_Y]
 Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
 
@@ -310,7 +310,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
    ENDIF
 RETURN NIL
 
-Static Function MessagesProc(oWnd, msg, wParam, lParam)
+STATIC Function MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem, hWnd := oWnd:handle
 
    IF msg == WM_VSCROLL
@@ -413,7 +413,7 @@ Local i, aItem, hWnd := oWnd:handle
    ENDIF
 RETURN -1
 
-Static Function VSCROLL( hWnd,nScrollCode, nNewPos )
+STATIC Function VSCROLL( hWnd,nScrollCode, nNewPos )
 Local step  := Round(aPaintRep[FORM_XKOEF]*10, 0)*2, nsteps := aPaintRep[FORM_Y]/step, kolsteps
 Local aCoors := hwg_GetClientRect( hWnd )
 
@@ -451,7 +451,7 @@ Local aCoors := hwg_GetClientRect( hWnd )
    ENDIF
 RETURN NIL
 
-Static Function MouseMove(wParam, xPos, yPos)
+STATIC Function MouseMove(wParam, xPos, yPos)
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2
 Local hWnd
 Local aItem, i, dx, dy
@@ -588,7 +588,7 @@ Local aItem, i, dx, dy
    ENDIF
 RETURN NIL
 
-Static Function LButtonDown( xPos, yPos )
+STATIC Function LButtonDown( xPos, yPos )
 Local i, aItem, res := .F.
 Local hWnd := Hwindow():GetMain():handle
    IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
@@ -632,7 +632,7 @@ Local hWnd := Hwindow():GetMain():handle
    ENDIF
 RETURN NIL
 
-Static Function LButtonUp( xPos, yPos )
+STATIC Function LButtonUp( xPos, yPos )
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, aItem
 Local hWnd := Hwindow():GetMain():handle
    IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
@@ -680,7 +680,7 @@ Local hWnd := Hwindow():GetMain():handle
    s_itemPressed := s_itemSized := s_itemBorder := s_nAddItem := 0
 RETURN NIL
 
-Static Function DeleteItem()
+STATIC Function DeleteItem()
 Local hWnd := Hwindow():GetMain():handle
 Local i, aItem
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
@@ -713,7 +713,7 @@ Local i, aItem
    NEXT
 RETURN NIL
 
-Static Function DeselectAll( iSelected )
+STATIC Function DeselectAll( iSelected )
 Local i, iPrevSelected := 0
    iSelected := IIf(iSelected == NIL, 0, iSelected)
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
@@ -727,7 +727,7 @@ Local i, iPrevSelected := 0
    NEXT
 RETURN iPrevSelected
 
-Static Function WriteItemInfo( aItem )
+STATIC Function WriteItemInfo( aItem )
    hwg_WriteStatus( Hwindow():GetMain(), 1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )

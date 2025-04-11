@@ -21,8 +21,8 @@ REQUEST DBFFPT
 REQUEST ORDKEYNO
 REQUEST ORDKEYCOUNT
 
-Static aFieldTypes := { "C","N","D","L" }
-Static dbv_cLocate, dbv_nRec, dbv_cSeek
+STATIC aFieldTypes := { "C","N","D","L" }
+STATIC dbv_cLocate, dbv_nRec, dbv_cSeek
 
 Function Main
 Local oWndMain, oPanel
@@ -103,7 +103,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
 
 RETURN NIL
 
-Static Function FileOpen
+STATIC Function FileOpen
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
 Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
@@ -141,7 +141,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
    
 RETURN NIL
 
-Static Function ChangeFont()
+STATIC Function ChangeFont()
 Local oBrwFont
 Memvar oBrw, oFont
 
@@ -154,13 +154,13 @@ Memvar oBrw, oFont
    
 RETURN NIL
 
-Static Function SetDataCP( cp )
+STATIC Function SetDataCP( cp )
 Memvar DataCP
 
    DataCP := cp
 RETURN NIL
 
-Static Function SelectIndex()
+STATIC Function SelectIndex()
 Local aIndex := { { "None","   ","   " } }, i, indname, iLen := 0
 Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
 Memvar oBrw, oFont
@@ -209,7 +209,7 @@ Memvar oBrw, oFont
                            
 RETURN NIL
 
-Static Function NewIndex()
+STATIC Function NewIndex()
 Local oDlg, of := HFont():Add("Courier", 0, -12)
 Local cName := "", lMulti := .T., lUniq := .F., cTag := "", cExpr := "", cCond := ""
 Local oMsg
@@ -270,7 +270,7 @@ Memvar oBrw
    
 RETURN NIL
 
-Static Function OpenIndex()
+STATIC Function OpenIndex()
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := hwg_SelectFile("index files( *.cdx )", "*.cdx", mypath)
 Memvar oBrw
@@ -286,7 +286,7 @@ Memvar oBrw
 
 RETURN NIL
 
-Static Function ReIndex()
+STATIC Function ReIndex()
 Local oMsg
 Memvar oBrw
 
@@ -301,7 +301,7 @@ Memvar oBrw
    
 RETURN NIL
 
-Static Function CloseIndex()
+STATIC Function CloseIndex()
 Memvar oBrw
 
    IF Len(oBrw:aColumns) == 0
@@ -314,7 +314,7 @@ Memvar oBrw
    
 RETURN NIL
 
-Static Function UpdBrowse()
+STATIC Function UpdBrowse()
 Memvar oBrw, oSay1
 
    IF OrdNumber() == 0
@@ -329,7 +329,7 @@ Memvar oBrw, oSay1
    oSay2:SetValue("")
 RETURN NIL
 
-Static Function DlgWait( cTitle )
+STATIC Function DlgWait( cTitle )
 Local oDlg
 
    INIT DIALOG oDlg TITLE cTitle ;
@@ -342,7 +342,7 @@ Local oDlg
 
 RETURN oDlg
 
-Static Function ModiStru( lNew )
+STATIC Function ModiStru( lNew )
 Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg
 Local oGet1, oGet2, oGet3, oGet4
 Local af, af0, cName := "", nType := 1, cLen := "0", cDec := "0", i
@@ -474,7 +474,7 @@ Memvar oBrw, currentCP, currFname
 
 RETURN NIL
 
-Static Function brw_onPosChg( oBrowse, oGet1, oGet2, oGet3, oGet4 )
+STATIC Function brw_onPosChg( oBrowse, oGet1, oGet2, oGet3, oGet4 )
 
 
    oGet1:SetGet( oBrowse:aArray[oBrowse:nCurrent, 1] )
@@ -490,7 +490,7 @@ Static Function brw_onPosChg( oBrowse, oGet1, oGet2, oGet3, oGet4 )
    
 RETURN NIL
 
-Static Function UpdStru( oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation )
+STATIC Function UpdStru( oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation )
 Local cName, cType, nLen, nDec
 
    IF nOperation == 4
@@ -521,7 +521,7 @@ Local cName, cType, nLen, nDec
    
 RETURN NIL
 
-Static Function dbv_Goto()
+STATIC Function dbv_Goto()
 Local nRec := Val(GetData(LTrim(Str(dbv_nRec)), "Go to ...", "Input record number:"))
 Memvar oBrw
 
@@ -537,7 +537,7 @@ Memvar oBrw
 
 RETURN NIL
 
-Static Function dbv_Seek()
+STATIC Function dbv_Seek()
 Local cKey, nRec
 Memvar oBrw, oSay2
 
@@ -561,7 +561,7 @@ Memvar oBrw, oSay2
 
 RETURN NIL
 
-Static Function dbv_Locate()
+STATIC Function dbv_Locate()
 Local cLocate := dbv_cLocate
 Local bOldError, cType, nRec
 Memvar oBrw, oSay2
@@ -603,7 +603,7 @@ Memvar oBrw, oSay2
 
 RETURN NIL
 
-Static Function dbv_Continue()
+STATIC Function dbv_Continue()
 Local nRec
 Memvar oBrw, oSay2
 
@@ -622,7 +622,7 @@ Memvar oBrw, oSay2
 
 RETURN NIL
 
-Static Function GetData(cRes, cTitle, cText)
+STATIC Function GetData(cRes, cTitle, cText)
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 
    INIT DIALOG oModDlg TITLE cTitle AT 0, 0 SIZE 300, 140 ;
@@ -651,7 +651,7 @@ STATIC FUNCTION MacroError( e )
    BREAK
 RETURN .T.
 
-Static Function dbv_Pack()
+STATIC Function dbv_Pack()
 Local oMsg, cTitle := "Packing database"
 Memvar oBrw, oSay1, oSay2
 
@@ -666,7 +666,7 @@ Memvar oBrw, oSay1, oSay2
    ENDIF
 RETURN NIL
 
-Static Function dbv_Zap()
+STATIC Function dbv_Zap()
 Local oMsg, cTitle := "Zap database"
 Memvar oBrw, oSay1, oSay2
 
@@ -681,7 +681,7 @@ Memvar oBrw, oSay1, oSay2
    ENDIF
 RETURN NIL
 
-Static Function dbv_DelRec()
+STATIC Function dbv_DelRec()
 Memvar oBrw
 
    IF !Empty(Alias())

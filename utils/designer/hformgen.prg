@@ -20,11 +20,11 @@
 #define  LEFT_INDENT   40
 #define  TOP_INDENT    30
 //NANDO
-Static oPenDivider, oPenLine
+STATIC oPenDivider, oPenLine
 //*-
-Static aG := { "left","top","width","height","right","bottom" }
+STATIC aG := { "left","top","width","height","right","bottom" }
 
-Static aStaticTypes := { { SS_LEFT,"SS_LEFT" }, { SS_CENTER,"SS_CENTER" }, ;
+STATIC aStaticTypes := { { SS_LEFT,"SS_LEFT" }, { SS_CENTER,"SS_CENTER" }, ;
     { SS_RIGHT,"SS_RIGHT" }, { SS_BLACKFRAME,"SS_BLACKFRAME" },            ;
     { SS_GRAYFRAME,"SS_GRAYFRAME" }, { SS_WHITEFRAME,"SS_WHITEFRAME" },    ;
     { SS_BLACKRECT,"SS_BLACKRECT" }, { SS_GRAYRECT,"SS_GRAYRECT" },        ;
@@ -32,7 +32,7 @@ Static aStaticTypes := { { SS_LEFT,"SS_LEFT" }, { SS_CENTER,"SS_CENTER" }, ;
     { SS_ETCHEDHORZ,"SS_ETCHEDHORZ" }, { SS_ETCHEDVERT,"SS_ETCHEDVERT" },  ;
     { SS_OWNERDRAW,"SS_OWNERDRAW" } }
 
-Static aStyles := { { WS_POPUP,"WS_POPUP" }, { WS_CHILD,"WS_CHILD" }, { WS_VISIBLE,"WS_VISIBLE" }, ;
+STATIC aStyles := { { WS_POPUP,"WS_POPUP" }, { WS_CHILD,"WS_CHILD" }, { WS_VISIBLE,"WS_VISIBLE" }, ;
     { WS_DISABLED,"WS_DISABLED" }, { WS_CLIPSIBLINGS,"WS_CLIPSIBLINGS" }, { WS_BORDER,"WS_BORDER" }, ;
     { WS_DLGFRAME,"WS_DLGFRAME" }, { WS_VSCROLL,"WS_VSCROLL" }, { WS_HSCROLL,"WS_HSCROLL" }, ;
     { WS_SYSMENU,"WS_SYSMENU" }, { WS_THICKFRAME,"WS_THICKFRAME" }, { WS_GROUP,"WS_GROUP" }, ;
@@ -453,7 +453,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
    ENDIF
 RETURN NIL
 
-Static Function SetDlgSelected(oDlg)
+STATIC Function SetDlgSelected(oDlg)
    
    MEMVAR oDesigner
 

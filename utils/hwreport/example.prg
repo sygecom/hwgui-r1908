@@ -46,13 +46,13 @@ PRIVATE aTermMetr := { 800 }
 
 RETURN NIL
 
-Static Function Print1
+STATIC Function Print1
    IF hwg_OpenReport( "example.rpt", "MyReport" )
       hwg_PrintReport()
    ENDIF
 RETURN NIL
 
-Static Function Print2
+STATIC Function Print2
    MyReport()
    hwg_PrintReport()
 RETURN NIL

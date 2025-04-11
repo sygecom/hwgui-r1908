@@ -40,9 +40,9 @@
         <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
         <.lAutoedit.>, <bUpdate>, <bKeyDown> )
 
-Static oCombo, oBrw1, oBrw2
-Static aProp := {}, aMethods := {}
-Static oTab , oMenuisnp
+STATIC oCombo, oBrw1, oBrw2
+STATIC aProp := {}, aMethods := {}
+STATIC oTab , oMenuisnp
 
 CLASS PBrowse INHERIT HBrowse
 
@@ -430,14 +430,14 @@ FUNCTION InspOpen(lShow)
 RETURN NIL
 
 
-Static Function DlgOk()
+STATIC Function DlgOk()
 
    IF !Empty(oBrw1:aControls)
       VldBrwGet( oBrw1:aControls[1] )
    ENDIF
 RETURN NIL
 
-Static Function DlgCancel()
+STATIC Function DlgCancel()
 
    IF !Empty(oBrw1:aControls)
       oBrw1:aEvents := {}

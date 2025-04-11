@@ -13,8 +13,8 @@
 #include "ads.ch"
 #endif
 
-Static cLocate := "", cFilter := "", cSeek := ""
-Static klrecf := 200
+STATIC cLocate := "", cFilter := "", cSeek := ""
+STATIC klrecf := 200
 
 Function Move(nMove)
 Local aModDlg
@@ -27,7 +27,7 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitMove(nMove)
+STATIC Function InitMove(nMove)
 Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"" )
    IF nMove == 1
@@ -46,7 +46,7 @@ Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
 RETURN NIL
 
-Static Function EndMove(lOk, nMove)
+STATIC Function EndMove(lOk, nMove)
 Local hDlg := hwg_GetModalHandle()
 Local cExpres, nrec, key
 Local hWnd, oWindow, aControls, iCont

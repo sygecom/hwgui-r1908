@@ -306,7 +306,7 @@ Function hwg_SearchPosBitmap( nPos_Id )
 RETURN lBmp
 */ 
 
-Static Function GetMenuByHandle(hWnd)
+STATIC Function GetMenuByHandle(hWnd)
 Local i, aMenu, oDlg
 
    IF hWnd == NIL

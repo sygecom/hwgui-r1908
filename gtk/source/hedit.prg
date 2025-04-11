@@ -298,7 +298,7 @@ METHOD SetText( c ) CLASS HEdit
 
 RETURN NIL
 
-Static Function ParsePict( oEdit,cPicture,vari )
+STATIC Function ParsePict( oEdit,cPicture,vari )
 Local nAt, i, masklen, cChar
 
    IF oEdit:bSetGet == NIL
@@ -359,7 +359,7 @@ Local nAt, i, masklen, cChar
 
 RETURN NIL
 
-Static Function IsEditable(oEdit, nPos)
+STATIC Function IsEditable(oEdit, nPos)
 Local cChar
 
    IF Empty(oEdit:cPicMask)
@@ -383,7 +383,7 @@ Local cChar
 
 RETURN .F.
 
-Static Function KeyRight(oEdit, nPos)
+STATIC Function KeyRight(oEdit, nPos)
 Local i, masklen, newpos, vari
 
    IF oEdit == NIL
@@ -417,7 +417,7 @@ Local i, masklen, newpos, vari
 
 RETURN 1
 
-Static Function KeyLeft(oEdit, nPos)
+STATIC Function KeyLeft(oEdit, nPos)
 Local i
    IF oEdit == NIL
       RETURN 0
@@ -437,7 +437,7 @@ Local i
    ENDIF
 RETURN 1
 
-Static Function DeleteChar( oEdit,lBack )
+STATIC Function DeleteChar( oEdit,lBack )
 Local nPos := hwg_edit_Getpos( oEdit:handle ) + IIf(!lBack, 1, 0)
 Local nGetLen := Len(oEdit:cPicMask), nLen
 
@@ -465,7 +465,7 @@ Local nGetLen := Len(oEdit:cPicMask), nLen
    
 RETURN NIL
 
-Static Function Input( oEdit,cChar,nPos )
+STATIC Function Input( oEdit,cChar,nPos )
 Local cPic
 
    IF !Empty(oEdit:cPicMask) .AND. nPos > Len(oEdit:cPicMask)
@@ -524,7 +524,7 @@ Local cPic
 
 RETURN cChar
 
-Static Function GetApplyKey( oEdit,cKey )
+STATIC Function GetApplyKey( oEdit,cKey )
 Local nPos, nGetLen, nLen, vari, i, x, newPos
 
    x := hwg_edit_Getpos( oEdit:handle )
@@ -605,7 +605,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
 
 RETURN 1
 
-Static Function __When( oCtrl )
+STATIC Function __When( oCtrl )
 Local res
 
    oCtrl:Refresh()
@@ -620,7 +620,7 @@ Local res
 
 RETURN .T.
 
-Static Function __valid(oCtrl)
+STATIC Function __valid(oCtrl)
 Local vari, oDlg
 
     IF oCtrl:bSetGet != NIL
@@ -660,7 +660,7 @@ Local vari, oDlg
 
 RETURN .T.
 
-Static function Untransform( oEdit,cBuffer )
+STATIC function Untransform( oEdit,cBuffer )
 Local xValue, cChar, nFor, minus
 
    IF oEdit:cType == "C"
@@ -753,7 +753,7 @@ Local xValue, cChar, nFor, minus
 
 RETURN xValue
 
-Static Function FirstEditable(oEdit)
+STATIC Function FirstEditable(oEdit)
 Local nFor, nMaxLen := Len(oEdit:cPicMask)
 
    IF IsEditable(oEdit, 1)
@@ -768,7 +768,7 @@ Local nFor, nMaxLen := Len(oEdit:cPicMask)
 
 RETURN 0
 
-Static Function  LastEditable(oEdit)
+STATIC Function  LastEditable(oEdit)
 Local nFor, nMaxLen := Len(oEdit:cPicMask)
 
    FOR nFor := nMaxLen to 1 step -1
@@ -779,7 +779,7 @@ Local nFor, nMaxLen := Len(oEdit:cPicMask)
 
 RETURN 0
 
-Static Function IsBadDate(cBuffer)
+STATIC Function IsBadDate(cBuffer)
 Local i, nLen
 
    IF !Empty(CToD(cBuffer))

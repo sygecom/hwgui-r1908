@@ -12,7 +12,7 @@
 #include <error.ch>
 #include "hwgui.ch"
 
-Static LogInitialPath := ""
+STATIC LogInitialPath := ""
 
 PROCEDURE ErrorSys
 
@@ -126,7 +126,7 @@ Local nHand
 
 RETURN NIL
 
-Static Function ErrorPreview( cMess )
+STATIC Function ErrorPreview( cMess )
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;

@@ -33,7 +33,7 @@ Local af := Array( Fcount() )
 
 RETURN NIL
 
-Static Function RecNumberEdit
+STATIC Function RecNumberEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
@@ -41,12 +41,12 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SetFocus( hEdit )
 RETURN NIL
 
-Static Function RecNumberDisable
+STATIC Function RecNumberDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 RETURN NIL
 
-Static Function InitRepl()
+STATIC Function InitRepl()
 Local hDlg := hwg_GetModalHandle()
 
    RecNumberDisable()
@@ -54,7 +54,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
 RETURN NIL
 
-Static Function EndRepl()
+STATIC Function EndRepl()
 Local hDlg := hwg_GetModalHandle()
 Local nrest, nrec
 Local oWindow, aControls, i
@@ -116,7 +116,7 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitDele(nAct)
+STATIC Function InitDele(nAct)
 Local hDlg := hwg_GetModalHandle()
    IF nAct == 2
       hwg_SetWindowText( hDlg,"Recall")
@@ -128,7 +128,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITFOR ) )
 RETURN NIL
 
-Static Function EndDele(nAct)
+STATIC Function EndDele(nAct)
 Local hDlg := hwg_GetModalHandle()
 Local nrest, nsum, nRec := Recno()
 Local oWindow, aControls, i
@@ -204,14 +204,14 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitSum()
+STATIC Function InitSum()
 Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN NIL
 
-Static Function EndSum()
+STATIC Function EndSum()
 Local hDlg := hwg_GetModalHandle()
 Local cSumf, cFor, nrest, blsum, blfor, nRec := Recno()
 Private nsum := 0
@@ -265,7 +265,7 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function DelimEdit
+STATIC Function DelimEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
@@ -273,19 +273,19 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SetFocus( hEdit )
 RETURN NIL
 
-Static Function DelimDisable
+STATIC Function DelimDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 RETURN NIL
 
-Static Function InitApp()
+STATIC Function InitApp()
 Local hDlg := hwg_GetModalHandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN NIL
 
-Static Function EndApp()
+STATIC Function EndApp()
 Local hDlg := hwg_GetModalHandle()
 Local fname, nRec := Recno()
 
@@ -322,13 +322,13 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitRPZ( nAct )
+STATIC Function InitRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, IIf(nAct == 1, "Reindex ?", ;
                                        IIf(nAct == 2, "Pack ?", "Zap ?")) )
 RETURN NIL
 
-Static Function EndRPZ( nAct )
+STATIC Function EndRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
 Local hWnd, oWindow, aControls, i
 

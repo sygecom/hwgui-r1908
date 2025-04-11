@@ -227,7 +227,7 @@ METHOD End() CLASS HComboBox
 RETURN NIL
 
 
-Static Function __Valid(oCtrl)
+STATIC Function __Valid(oCtrl)
 Local vari := hwg_edit_Gettext( oCtrl:hEdit )
 
    IF oCtrl:lText
@@ -244,7 +244,7 @@ Local vari := hwg_edit_Gettext( oCtrl:hEdit )
    ENDIF
 RETURN .T.
 
-Static Function __When( oCtrl )
+STATIC Function __When( oCtrl )
 Local res
 
    // oCtrl:Refresh()

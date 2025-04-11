@@ -14,7 +14,7 @@
 #endif
 
 memvar mypath, numdriv
-Static cQuery := ""
+STATIC cQuery := ""
 
 Function OpenQuery
 Local fname := hwg_SelectFile("Query files( *.que )", "*.que", mypath)
@@ -43,18 +43,18 @@ Local aModDlg
 
 RETURN NIL
 
-Static Function InitQuery()
+STATIC Function InitQuery()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
 RETURN NIL
 
-Static Function EndQuery( lOk )
+STATIC Function EndQuery( lOk )
 Local hDlg := hwg_GetModalHandle()
 Local oldArea := Alias(), tmpdriv, tmprdonly
 Local id1
 Local aChildWnd, hChild
-Static lConnected := .F.
+STATIC lConnected := .F.
 
    IF lOk
       cQuery := hwg_GetEditText( hDlg, IDC_EDITQUERY )

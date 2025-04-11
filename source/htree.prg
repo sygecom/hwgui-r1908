@@ -87,7 +87,7 @@
 #define NM_SETCURSOR            -17    // uses NMMOUSE struct
 #define NM_CHAR                 -18   // uses NMCHAR struct
 
-Static s_aEvents
+STATIC s_aEvents
 
 CLASS HTreeNode INHERIT HObject
 

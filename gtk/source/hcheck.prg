@@ -107,7 +107,7 @@ Local var
    hwg_CheckButton( ::handle,::value )
 RETURN NIL
 
-Static Function __Valid(oCtrl)
+STATIC Function __Valid(oCtrl)
 Local res
 
    oCtrl:value := hwg_IsButtonChecked(oCtrl:handle)
@@ -123,7 +123,7 @@ Local res
 
 RETURN .T.
 
-Static Function __When( oCtrl )
+STATIC Function __When( oCtrl )
 Local res
 
    oCtrl:Refresh()

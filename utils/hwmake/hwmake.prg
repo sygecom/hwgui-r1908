@@ -173,7 +173,7 @@ Private oIcon := HIcon():AddResource("PIM")
 
 RETURN
 
-Static Function SearchFile(oBrow, oFile)
+STATIC Function SearchFile(oBrow, oFile)
 Local oTotReg:={}, i
 Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
 if len(aSelect) ==0
@@ -192,7 +192,7 @@ obrow:aArray := oTotReg
 obrow:refresh()
 RETURN NIL
 
-Static Function SearchFileName(nName, oGet, oFile)
+STATIC Function SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
 Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,,.T. ) 
 If !Empty(oTextAnt)
@@ -640,7 +640,7 @@ Local oSay
 RETURN NIL
 
 
-Static Function ErrorPreview( cMess )
+STATIC Function ErrorPreview( cMess )
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Build Error" ;

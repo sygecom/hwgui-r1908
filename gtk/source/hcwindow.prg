@@ -11,7 +11,7 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-static aCustomEvents := { ;
+STATIC aCustomEvents := { ;
       { WM_NOTIFY,WM_PAINT,WM_CTLCOLORSTATIC,WM_CTLCOLOREDIT,WM_CTLCOLORBTN, ;
         WM_COMMAND,WM_DRAWITEM,WM_SIZE,WM_DESTROY }, ;
       { ;
@@ -181,7 +181,7 @@ Local i, nLen := Len(aControls)
 
 RETURN NIL
 
-Static Function onNotify( oWnd,wParam,lParam )
+STATIC Function onNotify( oWnd,wParam,lParam )
 Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
 
    IF oCtrl != NIL
@@ -226,12 +226,12 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
 
 RETURN 0
 
-Static Function onDestroy( oWnd )
+STATIC Function onDestroy( oWnd )
    oWnd:End()
 
 RETURN 0
 
-Static Function onCtlColor( oWnd,wParam,lParam )
+STATIC Function onCtlColor( oWnd,wParam,lParam )
 Local oCtrl  := oWnd:FindControl(,lParam)
 
    IF oCtrl != NIL
@@ -246,7 +246,7 @@ Local oCtrl  := oWnd:FindControl(,lParam)
 
 RETURN -1
 
-Static Function onDrawItem( oWnd,wParam,lParam )
+STATIC Function onDrawItem( oWnd,wParam,lParam )
 Local oCtrl
 
    IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != NIL .AND. ;
@@ -257,7 +257,7 @@ Local oCtrl
 
 RETURN 0
 
-Static Function onCommand(oWnd, wParam)
+STATIC Function onCommand(oWnd, wParam)
 Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != NIL .AND. ;
@@ -267,7 +267,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
 RETURN 1
 
-Static Function onSize(oWnd, wParam, lParam)
+STATIC Function onSize(oWnd, wParam, lParam)
 Local aControls := oWnd:aControls, nControls := Len(aControls)
 Local oItem, iCont
 
