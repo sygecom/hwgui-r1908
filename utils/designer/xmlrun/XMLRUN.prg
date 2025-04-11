@@ -229,7 +229,7 @@ FUNCTION Main(fileXML)
  SET EPOCH TO 1960
 
 
- IF fileXML==NIL
+ IF fileXML == NIL
 
     filexml:=""
     IF FILE("XMLRUN.DEF")
@@ -341,7 +341,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    LOCAL lforever
    LOCAL lFirstPass := .T.
 
-   if(nSeconds==NIL, nSeconds:=20,)
+   if(nSeconds == NIL, nSeconds:=20,)
 
    lforever := (nSeconds == 0)
    keyboard chr(255)
@@ -388,7 +388,7 @@ function filelock(nSeconds)
    LOCAL lforever
 
    lforever := (nSeconds == 0)
-   if(nSeconds==NIL, nSeconds:=20,)
+   if(nSeconds == NIL, nSeconds:=20,)
 
    IF Flock()
       return .T.
@@ -502,13 +502,13 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
  if Empty(cPress)
 
-    if lKosong==NIL
+    if lKosong == NIL
        return .T.
     endif
 
     hwg_MsgInfo("Tidak boleh kosong")
     return .F.
-    //return IIf(lKosong==NIL,.T.,.F.)
+    //return IIf(lKosong == NIL,.T.,.F.)
  end
 
 

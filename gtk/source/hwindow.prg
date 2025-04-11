@@ -206,7 +206,7 @@ Local oWndClient, handle
                               ::bPaint,::bGetFocus,::bLostFocus,::bOther )
       handle := hwg_InitClientWindow( oWndClient,::nMenuPos,::nLeft,::nTop+60,::nWidth,::nHeight )
       oWndClient:handle = handle
-      hwg_ActivateMdiWindow( ( lShow==NIL .OR. lShow ),::hAccel,::lMaximize )
+      hwg_ActivateMdiWindow( ( lShow == NIL .OR. lShow ),::hAccel,::lMaximize )
 */
    ELSEIF ::type == WND_MAIN
 
@@ -317,7 +317,7 @@ Return Self
 METHOD Activate(lShow) CLASS HChildWindow
 
    hwg_CreateGetList( Self )
-   hwg_ActivateChildWindow((lShow==NIL .OR. lShow),::handle )
+   hwg_ActivateChildWindow((lShow == NIL .OR. lShow),::handle )
 
 Return NIL
 

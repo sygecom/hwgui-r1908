@@ -120,7 +120,7 @@ Local hParent,oWnd
 
    hwg_CreateGetList( Self )
 
-   IF lNoModal==NIL ; lNoModal:=.F. ; ENDIF
+   IF lNoModal == NIL ; lNoModal:=.F. ; ENDIF
    ::lModal := !lNoModal
    ::lResult := .F.
    ::AddItem( Self,!lNoModal )

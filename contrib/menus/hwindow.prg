@@ -196,9 +196,9 @@ METHOD Activate(lShow) CLASS HWindow
       oWndClient:handle := hwg_GetWindowHandle(2)
       oWndClient:oParent:= HWindow():GetMain()
 
-      hwg_ActivateMdiWindow( ( lShow==NIL .OR. lShow ),::hAccel )
+      hwg_ActivateMdiWindow( ( lShow == NIL .OR. lShow ),::hAccel )
    ELSEIF ::type == WND_MAIN
-      hwg_ActivateMainWindow( ( lShow==NIL .OR. lShow ),::hAccel )
+      hwg_ActivateMainWindow( ( lShow == NIL .OR. lShow ),::hAccel )
    ELSEIF ::type == WND_CHILD
       hwg_ActivateChildWindow( ::handle )
    Else
