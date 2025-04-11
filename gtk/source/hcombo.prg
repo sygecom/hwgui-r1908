@@ -49,8 +49,8 @@ ENDCLASS
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,oFont, ;
                   bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor ) CLASS HComboBox
 
-   if lEdit == Nil; lEdit := .F.; endif
-   if lText == Nil; lText := .F.; endif
+   if lEdit == NIL; lEdit := .F.; endif
+   if lText == NIL; lText := .F.; endif
 
    nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle),IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST)+WS_TABSTOP )
    ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctoolt,tcolor,bcolor )
@@ -73,16 +73,16 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
 
    ::Activate()
 /*
-   IF bSetGet != Nil
+   IF bSetGet != NIL
       ::bChangeSel := bChange
       ::bGetFocus  := bGFocus
       ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
       ::oParent:AddEvent( CBN_SELCHANGE,::id,{|o,id|__Valid(o:FindControl(id))} )
-   ELSEIF bChange != Nil
+   ELSEIF bChange != NIL
       ::oParent:AddEvent( CBN_SELCHANGE,::id,bChange )
    ENDIF
    
-   IF bGFocus != Nil .AND. bSetGet == Nil
+   IF bGFocus != NIL .AND. bSetGet == NIL
       ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
    ENDIF
 */
@@ -103,22 +103,22 @@ METHOD Activate CLASS HComboBox
       ::Init()
       hwg_SetWindowObject( ::hEdit,Self )
    ENDIF
-Return Nil
+Return NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
 
    IF msg == EN_SETFOCUS
-      IF ::bSetGet == Nil
-         IF ::bGetFocus != Nil
+      IF ::bSetGet == NIL
+         IF ::bGetFocus != NIL
             Eval(::bGetFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
          __When( Self )
       ENDIF
    ELSEIF msg == EN_KILLFOCUS
-      IF ::bSetGet == Nil
-         IF ::bLostFocus != Nil
+      IF ::bSetGet == NIL
+         IF ::bLostFocus != NIL
             Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
@@ -133,8 +133,8 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
 
    SWITCH msg
    CASE EN_SETFOCUS
-      IF ::bSetGet == Nil
-         IF ::bGetFocus != Nil
+      IF ::bSetGet == NIL
+         IF ::bGetFocus != NIL
             Eval(::bGetFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
@@ -142,8 +142,8 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
       ENDIF
       EXIT
    CASE EN_KILLFOCUS
-      IF ::bSetGet == Nil
-         IF ::bLostFocus != Nil
+      IF ::bSetGet == NIL
+         IF ::bLostFocus != NIL
             Eval(::bLostFocus, hwg_Edit_GetText(::hEdit), Self)
          ENDIF
       ELSE
@@ -159,9 +159,9 @@ Local i
 
    IF !::lInit
       ::Super:Init()
-      IF ::aItems != Nil
+      IF ::aItems != NIL
 	 hwg_ComboSetArray( ::handle, ::aItems )
-         IF ::value == Nil
+         IF ::value == NIL
             IF ::lText
                 ::value := ::aItems[1]
             ELSE
@@ -175,12 +175,12 @@ Local i
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Refresh() CLASS HComboBox
 Local vari, i
 
-   IF ::bSetGet != Nil
+   IF ::bSetGet != NIL
       vari := Eval(::bSetGet, , Self)
       if ::lText
          ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
@@ -197,7 +197,7 @@ Local vari, i
       hwg_edit_Settext( ::hEdit, ::aItems[::value] )
    ENDIF                    
 
-Return Nil
+Return NIL
 
 METHOD SetItem( nPos ) CLASS HComboBox
 
@@ -209,22 +209,22 @@ METHOD SetItem( nPos ) CLASS HComboBox
                        
    hwg_edit_Settext( ::hEdit, ::aItems[nPos] )
    
-   IF ::bSetGet != Nil
+   IF ::bSetGet != NIL
       Eval(::bSetGet, ::value, self)
    ENDIF
    
-   IF ::bChangeSel != Nil
+   IF ::bChangeSel != NIL
       Eval(::bChangeSel, ::value, Self)
    ENDIF
    
-Return Nil
+Return NIL
 
 METHOD End() CLASS HComboBox
 
    hwg_ReleaseObject( ::hEdit )
    ::Super:End()
 
-RETURN Nil
+RETURN NIL
 
 
 Static Function __Valid(oCtrl)
@@ -236,10 +236,10 @@ Local vari := hwg_edit_Gettext( oCtrl:hEdit )
       oCtrl:value := AScan(oCtrl:aItems, vari)
    ENDIF
 
-   IF oCtrl:bSetGet != Nil
+   IF oCtrl:bSetGet != NIL
       Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
    ENDIF
-   IF oCtrl:bChangeSel != Nil
+   IF oCtrl:bChangeSel != NIL
       Eval(oCtrl:bChangeSel, oCtrl:value, oCtrl)
    ENDIF
 Return .T.
@@ -249,7 +249,7 @@ Local res
 
    // oCtrl:Refresh()
 
-   IF oCtrl:bGetFocus != Nil 
+   IF oCtrl:bGetFocus != NIL 
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )

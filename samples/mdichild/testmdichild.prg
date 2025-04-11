@@ -67,9 +67,9 @@ FUNCTION CreateMdiChild()
    LOCAL vCodigo := ""
 
   IF !Empty([PDV])
-     IF HWindow():FindWindow([PDV]) != Nil
+     IF HWindow():FindWindow([PDV]) != NIL
         hwg_BringToTop(HWindow():FindWindow([PDV]):handle)
-        RETURN Nil
+        RETURN NIL
      ENDIF
   ENDIF
 

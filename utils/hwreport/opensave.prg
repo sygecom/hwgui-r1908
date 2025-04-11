@@ -19,9 +19,9 @@ Memvar aPaintRep , mypath,aitemtypes
 Function FileDlg( lOpen )
 Local oDlg
 
-   IF !lOpen .AND. ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
+   IF !lOpen .AND. ( aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS]) )
       hwg_MsgStop( "Nothing to save" )
-      Return Nil
+      Return NIL
    ELSEIF lOpen
       CloseReport()
    ENDIF
@@ -34,7 +34,7 @@ Local oDlg
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||BrowFile(lOpen)}
    oDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
@@ -60,7 +60,7 @@ Local fname, s1, s2
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-Return Nil
+Return NIL
 
 Static Function EndOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
@@ -77,7 +77,7 @@ Local res := .T.
             hwg_EnableMenuItem( , 1, .T., .F. )
             hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
          ELSE
-            aPaintRep := Nil
+            aPaintRep := NIL
             hwg_EnableMenuItem( , 1, .F., .F. )
          ENDIF
       ELSE
@@ -96,7 +96,7 @@ Return .T.
 
 Function CloseReport
 Local i, aItem
-   IF aPaintRep != Nil
+   IF aPaintRep != NIL
       IF aPaintRep[FORM_CHANGED] == .T.
          IF hwg_MsgYesNo( "Report was changed. Are you want to save it ?" )
             SaveReport()
@@ -104,11 +104,11 @@ Local i, aItem
       ENDIF
       FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
          aItem := aPaintRep[FORM_ITEMS,i]
-         IF aItem[ITEM_PEN] != Nil
+         IF aItem[ITEM_PEN] != NIL
             aItem[ITEM_PEN]:Release()
          ENDIF
       NEXT
-      aPaintRep := Nil
+      aPaintRep := NIL
       hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
       hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
       hwg_EnableMenuItem( , 1, .F., .F. )
@@ -118,9 +118,9 @@ Return .T.
 Function SaveReport
 Local fname
 
-   IF ( aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS]) )
+   IF ( aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS]) )
       hwg_MsgStop( "Nothing to save" )
-      Return Nil
+      Return NIL
    ENDIF
    IF Empty(aPaintRep[FORM_FILENAME])
       FileDlg( .F. )
@@ -128,7 +128,7 @@ Local fname
       SaveRFile(aPaintRep[FORM_FILENAME], aPaintRep[FORM_REPNAME])
    ENDIF
 
-Return Nil
+Return NIL
 
 Static Function OpenFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
@@ -159,7 +159,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                            repName := stroka
                         ENDIF
                         nMode := 1
-                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName,.F., 0,Nil }
+                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName,.F., 0,NIL }
                      ENDIF
                   ENDIF
                ENDIF
@@ -170,7 +170,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   Exit
                ELSEIF Upper(SubStr(stroka, 2, 6)) == "SCRIPT"
                   nMode := 2
-                  IF aItem != Nil
+                  IF aItem != NIL
                      aItem[ITEM_SCRIPT] := ""
                   ELSE
                      aPaintRep[FORM_VARS] := ""
@@ -184,18 +184,18 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                ELSEIF itemName == "TEXT"
                   AAdd(aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),Nil,hwg_NextItem(stroka), ;
-                           Val(hwg_NextItem(stroka)), 0,Nil, 0 })
+                           Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),NIL,hwg_NextItem(stroka), ;
+                           Val(hwg_NextItem(stroka)), 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],,"," )))
-                  IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-                     aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-                     aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-                     aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+                  IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+                     aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+                     aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+                     aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                      hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
@@ -204,14 +204,14 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   AAdd(aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE", 2,Iif(itemName=="VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),Nil, 0, 0,Nil, 0 })
+                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
                           Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )))
-                  IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-                     aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-                     aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-                     aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+                  IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+                     aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+                     aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+                     aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                      hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
@@ -220,13 +220,13 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   AAdd(aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,Nil,Nil, 0, 0,Nil, 0 })
+                           Val(hwg_NextItem(stroka)), 0,NIL,NIL, 0, 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_BITMAP] := HBitmap():AddFile(aItem[ITEM_CAPTION])
-                  IF aItem[ITEM_X1] == Nil .OR. aItem[ITEM_X1] == 0 .OR. ;
-                     aItem[ITEM_Y1] == Nil .OR. aItem[ITEM_Y1] == 0 .OR. ;
-                     aItem[ITEM_WIDTH] == Nil .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
-                     aItem[ITEM_HEIGHT] == Nil .OR. aItem[ITEM_HEIGHT] == 0
+                  IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
+                     aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
+                     aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
+                     aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
                      hwg_MsgStop( "Error: "+stroka )
                      res := .F.
                      EXIT
@@ -235,7 +235,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                   AAdd(aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Nil,Nil, 0, 0,Nil, 0 })
+                           NIL,NIL, 0, 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                ENDIF
             ENDIF
@@ -243,7 +243,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
             IF Left(stroka, 1) == "#" .AND. Upper(SubStr(stroka, 2, 6)) == "ENDSCR"
                nMode := 1
             ELSE
-               IF aItem != Nil
+               IF aItem != NIL
                   aItem[ITEM_SCRIPT] += stroka+Chr(13)+chr(10)
                ELSE
                   aPaintRep[FORM_VARS] += stroka+Chr(13)+chr(10)
@@ -277,7 +277,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
       hwg_MsgStop( "Can't open "+fname )
       Return .F.
    ENDIF
-   IF aPaintRep == Nil .OR. Empty(aPaintRep[FORM_ITEMS])
+   IF aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS])
       hwg_MsgStop( repname+" not found or empty!" )
       res := .F.
    ELSE
@@ -427,7 +427,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
       ENDIF
    NEXT
    FWrite(han, "#ENDREP "+Chr(10))
-Return Nil
+Return NIL
 
 Static Function WriteToPrg( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
@@ -440,8 +440,8 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
          "LOCAL aPaintRep" + Chr(10))
    FWrite(han, "   cEnd:=Chr(13)+Chr(10)" + Chr(10))
    FWrite(han, "   aPaintRep := { " + LTrim(Str(aPaintRep[FORM_WIDTH])) + "," + ;
-         LTrim(Str(aPaintRep[FORM_HEIGHT])) + ', 0, 0, 0,{},,"' + repName + '", .F., 0, Nil }' + Chr(10))
-   IF aPaintRep[FORM_VARS] != Nil .AND. !Empty(aPaintRep[FORM_VARS])
+         LTrim(Str(aPaintRep[FORM_HEIGHT])) + ', 0, 0, 0,{},,"' + repName + '", .F., 0, NIL }' + Chr(10))
+   IF aPaintRep[FORM_VARS] != NIL .AND. !Empty(aPaintRep[FORM_VARS])
       FWrite(han, "   aPaintRep[11] := ;" + Chr(10))
       WriteScript( han,aPaintRep[FORM_VARS],.T. )
    ENDIF
@@ -480,21 +480,21 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       cItem += ",0,Nil,0"
       FWrite(han, "   AAdd(aPaintRep[6], { " + cItem + " })" + Chr(10))
 
-      IF aItem[ITEM_SCRIPT] != Nil .AND. !Empty(aItem[ITEM_SCRIPT])
+      IF aItem[ITEM_SCRIPT] != NIL .AND. !Empty(aItem[ITEM_SCRIPT])
          FWrite(han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;" + Chr(10))
          WriteScript( han,aItem[ITEM_SCRIPT],.T. )
       ENDIF
    NEXT
    FWrite(han, "   hwg_RecalcForm( aPaintRep," + LTrim(Str(aMetr[1] - XINDENT)) + " )" + Chr(10))
    FWrite(han, "RETURN hwg_SetPaintRep( aPaintRep )" + Chr(10))
-Return Nil
+Return NIL
 
 Static Function WriteScript( han,cScript,lPrg )
 Local poz := 0, stroka, i
 Local lastC := Chr(10), cQuote, lFirst := .T.
 
-   IF lPrg == Nil; lPrg := .F.; ENDIF
-   IF cScript != Nil .AND. !Empty(cScript)
+   IF lPrg == NIL; lPrg := .F.; ENDIF
+   IF cScript != NIL .AND. !Empty(cScript)
       IF !lPrg
          FWrite(han, "#SCRIPT" + Chr(10))
       ENDIF
@@ -523,4 +523,4 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
          FWrite(han, IIf(Asc(lastC) < 20, "", Chr(10)) + "#ENDSCRIPT" + Chr(10))
       ENDIF
    ENDIF
-Return Nil
+Return NIL

@@ -66,7 +66,7 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
         AT nLeft,nTop SIZE nWidth,nHeight   ;
         STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+IIf(nTop == 0, DS_CENTER, 0)+DS_SYSMODAL
 
-   IF bExit != Nil
+   IF bExit != NIL
       ::oParent:bDestroy := bExit
    ENDIF
 
@@ -85,7 +85,7 @@ METHOD Activate CLASS HProgressBar
                   ::nLeft, ::nTop, ::nWidth,::nHeight )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Step()
 
@@ -95,18 +95,18 @@ METHOD Step()
       hwg_UpdateProgressBar( ::handle )
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Set( cTitle,nPos ) CLASS HProgressBar
 
-   IF cTitle != Nil
+   IF cTitle != NIL
       hwg_SetWindowText( ::oParent:handle,cTitle )
    ENDIF
-   IF nPos != Nil
+   IF nPos != NIL
       hwg_SetProgressBar( ::handle,nPos )
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Close()
 
@@ -115,5 +115,5 @@ METHOD Close()
       EndDialog( ::oParent:handle )
    ENDIF
 
-Return Nil
+Return NIL
 

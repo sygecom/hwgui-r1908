@@ -13,4 +13,4 @@ Local oForm := HFormTmpl():Read("example.xml")
 
  oForm:ShowMain()
 
-Return Nil
+Return NIL

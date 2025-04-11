@@ -18,7 +18,7 @@ CLASS HToolBar INHERIT HControl
 
    DATA winclass INIT "ToolbarWindow32"
    Data TEXT, id, nTop, nLeft, nwidth, nheight
-   CLASSDATA oSelected INIT Nil
+   CLASSDATA oSelected INIT NIL
    DATA State INIT 0
    Data ExStyle
    Data bClick, cTooltip
@@ -66,7 +66,7 @@ METHOD Activate CLASS hToolBar
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-RETURN Nil
+RETURN NIL
 
 METHOD INIT CLASS hToolBar
 Local n,n1
@@ -165,7 +165,7 @@ Local aItem
       endif
 
    ENDIF
-RETURN Nil
+RETURN NIL
 /*
 METHOD Notify( lParam ) CLASS hToolBar
 
@@ -200,7 +200,7 @@ METHOD Notify( lParam ) CLASS hToolBar
 Return 0
 */
 METHOD AddButton(nBitIp,nId,bState,bStyle,cText,bClick,c,aMenu) CLASS hToolBar
-   Local hMenu := Nil
+   Local hMenu := NIL
    DEFAULT nBitIp to -1
    DEFAULT bstate to TBSTATE_ENABLED
    DEFAULT bstyle to 0x0000
@@ -214,7 +214,7 @@ Local nPos
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos > 0
-         IF ::aItem[nPos, 7] != Nil
+         IF ::aItem[nPos, 7] != NIL
             Eval(::aItem[nPos, 7] ,Self)
          ENDIF
       endif

@@ -95,7 +95,7 @@ ENDFUNC
           nVar := Val( hwg_NextItem( stroka ) )
 
           oFont := hwg_CallFunc("Str2Font", { cFont })
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption,oFont,nAlign,nVar })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
           itemName := Lower(itemName)
@@ -107,7 +107,7 @@ ENDFUNC
           nAlign := Val( hwg_NextItem( cFont,.T.,"," ) ) + 1
           nVar   := Val( hwg_NextItem( cFont,,"," ) )
 
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,nAlign,nVar })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,nAlign,nVar })
 
         ELSEIF itemName == "BITMAP"
           itemName := Lower(itemName)
@@ -117,7 +117,7 @@ ENDFUNC
           nWidth := Val( hwg_NextItem( stroka ) )
           nHeight := Val( hwg_NextItem( stroka ) )
 
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,Nil,cCaption })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,cCaption })
 
         ELSEIF itemName == "MARKER"
           itemName := "area"
@@ -145,7 +145,7 @@ ENDFUNC
               ENDIF
               nHeight := Round(oForm:nPHeight * oForm:nKoeff, 0) - y
             ENDIF
-            AAdd(arr,{ itemName, 0,y, 9999,nHeight,Nil,cCaption,Nil })
+            AAdd(arr,{ itemName, 0,y, 9999,nHeight,NIL,cCaption,NIL })
           ENDIF
         ENDIF
       ENDIF
@@ -180,13 +180,13 @@ ENDFUNC
   FClose(han)
   arr := ASort(arr, , , {|z, y|z[3] < y[3] .OR. (z[3] == y[3] .AND. z[2] < y[2]) .OR. (z[3] == y[3] .AND. z[2] == y[2] .AND. (z[4] > y[4] .OR. z[5] > y[5]))})
   IF ( j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) > 1
-    AAdd(arr,Nil)
+    AAdd(arr,NIL)
     AIns(arr, 1)
-    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,Nil,"DH",Nil }
+    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,NIL,"DH",NIL }
   ENDIF
   i := 1
   DO WHILE i <= Len(arr)
-    oArea := Nil
+    oArea := NIL
     j := i - 1
     DO WHILE j > 0      
        IF arr[i, 2] >= arr[j, 2] .AND. arr[i, 2]+arr[i, 4] <= arr[j, 2]+arr[j, 4] .AND. ;
@@ -208,11 +208,11 @@ ENDFUNC
       oArea := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],"area",  ;
        { { "Left","0" }, { "Top",LTrim(Str(y)) }, { "Width",cWidth }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",cWidth }, { "Bottom",LTrim(Str(y2)) }, { "AreaType",cCaption } } )
-      IF arr[i, 6] != Nil
+      IF arr[i, 6] != NIL
         j := AScan(oArea:aMethods, {|a|a[1] == "onBegin"})
         oArea:aMethods[j, 2] := arr[i, 6]
       ENDIF
-      IF arr[i, 8] != Nil
+      IF arr[i, 8] != NIL
         j := AScan(oArea:aMethods, {|a|a[1] == "onNextLine"})
         oArea:aMethods[j, 2] := arr[i, 8]
       ENDIF
@@ -223,7 +223,7 @@ ENDFUNC
        { "Caption",IIf(arr[i, 10]==1,"",arr[i, 7]) }, ;
        { "Justify",IIf(arr[i, 9]=0,"Left",IIf(arr[i, 9]=2,"Center","Right")) }, ;
        {"Font",arr[i, 8]} } )
-      IF oArea != Nil
+      IF oArea != NIL
         oArea:AddControl( oCtrl )
         oCtrl:oContainer := oArea
       ENDIF
@@ -231,7 +231,7 @@ ENDFUNC
         j := AScan(oCtrl:aMethods, {|a|a[1] == "Expression"})
         oCtrl:aMethods[j, 2] := "Return "+arr[i, 7]
       ENDIF
-      IF arr[i, 6] != Nil
+      IF arr[i, 6] != NIL
         j := AScan(oCtrl:aMethods, {|a|a[1] == "onBegin"})
         oCtrl:aMethods[j, 2] := arr[i, 6]
       ENDIF
@@ -239,7 +239,7 @@ ENDFUNC
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
        { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, { "Bitmap",arr[i, 7] } } )
-      IF oArea != Nil
+      IF oArea != NIL
         oArea:AddControl( oCtrl )
         oCtrl:oContainer := oArea
       ENDIF
@@ -249,14 +249,14 @@ ENDFUNC
        { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
        {"PenType",{"SOLID","DASH","DOT","DASHDOT","DASHDOTDOT"}[arr[i, 7]]}, ;
        { "PenWidth",LTrim(Str(arr[i, 8])) } } )
-      IF oArea != Nil
+      IF oArea != NIL
         oArea:AddControl( oCtrl )
         oCtrl:oContainer := oArea
       ENDIF
     ENDIF
     i ++
   ENDDO
-  IF aVars != Nil .AND. !Empty(aVars)
+  IF aVars != NIL .AND. !Empty(aVars)
     oForm:SetProp( "Variables",aVars )
   ENDIF
 

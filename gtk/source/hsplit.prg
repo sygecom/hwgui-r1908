@@ -57,12 +57,12 @@ METHOD Activate() CLASS HSplitter
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
    IF msg == WM_MOUSEMOVE
-      IF ::hCursor == Nil
+      IF ::hCursor == NIL
          ::hCursor := hwg_LoadCursor( GDK_HAND1 )
       ENDIF
       hwg_SetCursor( ::hCursor,::handle )
@@ -77,7 +77,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
    ELSEIF msg == WM_LBUTTONUP
       ::DragAll()
       ::lCaptured := .F.
-      IF ::bEndDrag != Nil
+      IF ::bEndDrag != NIL
          Eval(::bEndDrag, Self)
       ENDIF
    ELSEIF msg == WM_DESTROY
@@ -93,12 +93,12 @@ METHOD Init CLASS HSplitter
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Paint( lpdis ) CLASS HSplitter
 Local hDC
 
-   IF ::bPaint != Nil
+   IF ::bPaint != NIL
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
@@ -106,12 +106,12 @@ Local hDC
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Move(x1, y1, width, height)  CLASS HSplitter
 
    ::Super:Move(x1, y1, width, height, .T.)
-Return Nil
+Return NIL
 
 METHOD Drag( lParam ) CLASS HSplitter
 Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
@@ -129,7 +129,7 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
    ENDIF
    ::lMoved := .T.
 
-Return Nil
+Return NIL
 
 METHOD DragAll() CLASS HSplitter
 Local i, oCtrl, nDiff
@@ -156,4 +156,4 @@ Local i, oCtrl, nDiff
    NEXT
    ::lMoved := .F.
 
-Return Nil
+Return NIL

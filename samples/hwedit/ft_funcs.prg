@@ -106,10 +106,10 @@ FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
    IF nMode == NIL
       nMode := 2
    ENDIF
-   IF cFile == Nil
+   IF cFile == NIL
       theHandle:closefile()
    ENDIF
-   IF cFile != Nil
+   IF cFile != NIL
       IF nMode != 0
          theHandle := HBMake_FileBase():new(cFile):open()
       ELSE

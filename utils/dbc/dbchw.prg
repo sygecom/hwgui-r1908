@@ -24,7 +24,7 @@ MEMVAR nQueryWndHandle
 
 Function Main()
 Local aMainWindow, aPanel
-Public BrwFont := {"MS Sans Serif", 0, -13}, oBrwFont := Nil
+Public BrwFont := {"MS Sans Serif", 0, -13}, oBrwFont := NIL
 PUBLIC msfile[15], msmode[15, 5], msexp[15], lenmsf := 0, improc := 0, mypath := ""
 PUBLIC dformat := "dd/mm/yy", memownd := .F., prrdonly := .F.
 PUBLIC lWinChar := .F.
@@ -124,14 +124,14 @@ PUBLIC nQueryWndHandle := 0
 
    aMainWindow:Activate()
 
-Return Nil
+Return NIL
 
 Function ChildClose
 Local nHandle := hwg_SendMessage(HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0)
    if nHandle > 0
       hwg_SendMessage(HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0)
    endif
-Return Nil
+Return NIL
 
 Function About
 Local oModDlg, oFont
@@ -147,7 +147,7 @@ Local oModDlg, oFont
 
    oModDlg:Activate()
 
-Return Nil
+Return NIL
 
 
 /* -----------------------  Options --------------------- */
@@ -164,7 +164,7 @@ Local aModDlg, aDates := { "dd/mm/yy","mm/dd/yy" }
 
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitConfig
 #ifdef RDD_ADS
@@ -265,21 +265,21 @@ Local indname
    oBrw:ofont := oBrwFont
 
    oModDlg:Activate()
-Return Nil
+Return NIL
 
 Static Function SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
    hwg_WriteStatus( oWindow, 2,"Order: "+oBrw:aArray[oBrw:nCurrent, 2] )
-   IF oWindow != Nil
+   IF oWindow != NIL
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
    EndDialog( hwg_GetModalHandle() )
-Return Nil
+Return NIL
 
 /* -----------------------  Creating New Index --------------------- */
 
@@ -293,14 +293,14 @@ Local aModDlg
         ON BN_CLICKED,IDC_CHECKBOX1 ACTION {|| TagName() }
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-Return Nil
+Return NIL
 
 Static Function TagName
 Local hDlg := hwg_GetModalHandle()
@@ -310,7 +310,7 @@ Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    ELSE
       hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
    ENDIF
-Return Nil
+Return NIL
 
 Static Function EndNewIndex()
 Local hDlg := hwg_GetModalHandle()
@@ -320,21 +320,21 @@ Local oWindow, aControls, i
    indname := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 20 )
    IF Empty(indname)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-      Return Nil
+      Return NIL
    ENDIF
    isMulti := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
    IF isMulti
       tagname := hwg_GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty(tagname)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
-         Return Nil
+         Return NIL
       ENDIF
    ENDIF
    isUniq := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX2)
    expkey := hwg_GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty(expkey)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT4 ) )
-      Return Nil
+      Return NIL
    ENDIF
    expfor := hwg_GetDlgItemText( hDlg, IDC_EDIT5, 60 )
    indname := mypath + indname
@@ -348,7 +348,7 @@ Local oWindow, aControls, i
       ENDIF
    ELSE
       IF Empty(expfor)
-         dbCreateIndex( RTrim(indname), RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), IIf(isUniq, .T., Nil) )
+         dbCreateIndex( RTrim(indname), RTrim(expkey), &( "{||" + RTrim(expkey) + "}" ), IIf(isUniq, .T., NIL) )
       ELSE
          ordCondSet( RTrim(expfor), &( "{||" + RTrim(expfor) + "}" ),,,,, RECNO(),,,, )
          OrdCreate(RTrim(indname), , RTrim(expkey), &("{||" + RTrim(expkey) + "}"), IIf(isUniq, .T., NIL))
@@ -357,7 +357,7 @@ Local oWindow, aControls, i
    oWindow := HMainWindow():GetMdiActive()
    hwg_WriteStatus( oWindow, 2,"Order: "+IIf(isMulti, tagname, hwg_CutPath(indname)) )
 
-   IF oWindow != Nil
+   IF oWindow != NIL
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
@@ -365,7 +365,7 @@ Local oWindow, aControls, i
    ENDIF
 
    EndDialog( hDlg )
-Return Nil
+Return NIL
 
 /* -----------------------  Open Index file --------------------- */
 
@@ -378,14 +378,14 @@ Local oWindow, aControls, i
       mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       ORDLISTADD(fname)
       oWindow := HMainWindow():GetMdiActive()
-      IF oWindow != Nil
+      IF oWindow != NIL
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 /* -----------------------  Close Index files --------------------- */
 
@@ -396,14 +396,14 @@ Local oWindow, aControls, i
    ORDLISTCLEAR()
    IF Indexord() != oldOrder
       oWindow := HMainWindow():GetMdiActive()
-      IF oWindow != Nil
+      IF oWindow != NIL
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 /* -----------------------  Open Database file --------------------- */
 
@@ -416,7 +416,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath) ) }
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitOpen
 Local hDlg := hwg_GetModalHandle()
@@ -462,7 +462,7 @@ Local oldLock := AdsLocking()
       ENDIF
 #endif
       mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-      OpenDbf(fname, IIf(Empty(alsName), Nil, alsName), , IIf(Empty(pass), Nil, pass))
+      OpenDbf(fname, IIf(Empty(alsName), NIL, alsName), , IIf(Empty(pass), NIL, pass))
       IF numdriv != old_numdriv
          numdriv := old_numdriv
          #ifdef RDD_ADS
@@ -492,7 +492,7 @@ Local oWindow, aControls, oBrowse, i
       hwg_EnableMenuItem( , 3, .T., .F. )
       hwg_EnableMenuItem( , 4, .T., .F. )
    ENDIF
-   IF hChild == Nil .OR. hChild == 0
+   IF hChild == NIL .OR. hChild == 0
       INIT WINDOW oWindow MDICHILD TITLE fname ;
            AT 0, 0                              ;
            ON GETFOCUS {|o|ChildGetFocus(o)}   ;
@@ -511,7 +511,7 @@ Local oWindow, aControls, oBrowse, i
       oWindow:Activate()
    ELSE
       oWindow := HWindow():FindWindow( hChild )
-      IF oWindow != Nil
+      IF oWindow != NIL
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             oBrowse := aControls[i]
@@ -538,12 +538,12 @@ Local oModDlg
         ON 0,IDOK         ACTION {|| EndCalc()}
    oModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitCalc()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
-Return Nil
+Return NIL
 
 Static Function EndCalc()
 Local hDlg := hwg_GetModalHandle()
@@ -552,7 +552,7 @@ Local cExpr, res
    cExpr := hwg_GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
    IF Empty(cExpr)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
-      Return Nil
+      Return NIL
    ENDIF
    IF TYPE(Trim(cExpr)) $ "UEUI"
       hwg_MsgStop( "Wrong expression" )
@@ -561,7 +561,7 @@ Local cExpr, res
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
    ENDIF
 
-Return Nil
+Return NIL
 
 
 /* -----------------------  Scripts  --------------------- */
@@ -576,7 +576,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath) ) }
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function EndScri( lOk, nAct )
 Local hDlg := hwg_GetModalHandle()
@@ -585,10 +585,10 @@ Local fname, arScr, nError, nLineEr, obl
    fname := hwg_GetDlgItemText( hDlg, IDC_EDIT8, 80 )
    IF Empty(fname)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT8 ) )
-      Return Nil
+      Return NIL
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
-   IF ( arScr := hwg_RdScript( fname ) ) != Nil
+   IF ( arScr := hwg_RdScript( fname ) ) != NIL
       IF nAct == 1
          obl := SELECT()
          GO TOP
@@ -607,11 +607,11 @@ Local fname, arScr, nError, nLineEr, obl
    ENDIF
    EndDialog( hDlg )
 
-Return Nil
+Return NIL
 
 Function ChildGetFocus( oWindow )
 Local i, aControls, oBrw
-   IF oWindow != Nil
+   IF oWindow != NIL
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
@@ -622,11 +622,11 @@ Local i, aControls, oBrw
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 Function ChildKill( oWindow )
 Local i, aControls, oBrw
-   IF oWindow != Nil
+   IF oWindow != NIL
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
          oBrw := aControls[i]
@@ -646,7 +646,7 @@ Local i, aControls, oBrw
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 Function ResizeBrwQ( oBrw, nWidth, nHeight )
 Local hWndStatus, aControls := oBrw:oParent:aControls
@@ -660,20 +660,20 @@ Local aRect, i, nHbusy := 0
       ENDIF
    NEXT
    hwg_MoveWindow( oBrw:handle, 0, 0, nWidth, nHeight-nHBusy )
-Return Nil
+Return NIL
 
 FUNCTION Fiopen( fname, alsname, prend, pass )
 
 LOCAL i, oldimp := improc, res := .T.
-LOCAL strerr := "Can't open file " + IIf(fname != Nil, fname, Alias())
+LOCAL strerr := "Can't open file " + IIf(fname != NIL, fname, Alias())
 LOCAL bOldError, oError
-   IF fname != Nil
-      prend := IIf(prend = Nil, .F., prend)
+   IF fname != NIL
+      prend := IIf(prend = NIL, .F., prend)
       IF prend
          improc := lenmsf + 1
       ELSE
          FOR i := 1 TO 15
-            IF msfile[i] = Nil
+            IF msfile[i] = NIL
                improc := i
                EXIT
             ENDIF
@@ -685,7 +685,7 @@ LOCAL bOldError, oError
          RETURN .F.
       ENDIF
       SELECT( improc )
-      alsname := IIf(alsname = Nil, hwg_CutExten(hwg_CutPath(fname)), Trim(hwg_CutExten(hwg_CutPath(alsname))))
+      alsname := IIf(alsname = NIL, hwg_CutExten(hwg_CutPath(fname)), Trim(hwg_CutExten(hwg_CutPath(alsname))))
       IF ( i := AT( '~', alsname ) ) != 0
          alsname := Stufmy( alsname, i, 1, '_' )
       ENDIF
@@ -714,7 +714,7 @@ LOCAL bOldError, oError
       IF NETERR()
          IF SET( _SET_EXCLUSIVE )
             SET( _SET_EXCLUSIVE, .F. )
-            DBUSEAREA(,, fname, hwg_CutExten( IIf(alsname = Nil, fname, alsname) ),, prrdonly )
+            DBUSEAREA(,, fname, hwg_CutExten( IIf(alsname = NIL, fname, alsname) ),, prrdonly )
             IF NETERR()
                hwg_MsgStop( strerr )
                improc := oldimp
@@ -731,11 +731,11 @@ LOCAL bOldError, oError
       lenmsf := improc
    ENDIF
 #ifdef RDD_ADS
-   IF pass != Nil
+   IF pass != NIL
       AdsEnableEncryption( pass )
    ENDIF
 #ENDIF
-   msfile[improc] := IIf(fname != Nil, Upper(fname), Alias())
+   msfile[improc] := IIf(fname != NIL, Upper(fname), Alias())
    msmode[improc, 1] = SET( _SET_EXCLUSIVE )
    msmode[improc, 2] = prrdonly
    msmode[improc, 3] = numdriv
@@ -754,10 +754,10 @@ LOCAL i
    IF improc > 0
       SELECT( improc )
       USE
-      msfile[improc] = Nil
+      msfile[improc] = NIL
       IF improc = lenmsf
          FOR i := lenmsf - 1 TO 1 STEP - 1
-            IF msfile[i] != Nil
+            IF msfile[i] != NIL
                EXIT
             ENDIF
          NEXT
@@ -766,7 +766,7 @@ LOCAL i
       improc := 0
 /*
       FOR i := 1 TO lenmsf
-         IF msfile[i] != Nil
+         IF msfile[i] != NIL
             EXIT
          ENDIF
       NEXT
@@ -774,7 +774,7 @@ LOCAL i
       prkorf := .T.
 */
    ENDIF
-RETURN Nil
+RETURN NIL
 
 FUNCTION Stufmy( stsou, pozs, ellen, elzn )
 RETURN SubStr(stsou, 1, pozs - 1) + elzn + SubStr(stsou, pozs + ellen)
@@ -794,8 +794,8 @@ LOCAL fname := msfile[improc]
 RETURN .T.
 
 Function hwg_WndOut()
-Return Nil
+Return NIL
 
 Function MsgSay( cText )
    hwg_MsgStop( cText )
-Return Nil
+Return NIL

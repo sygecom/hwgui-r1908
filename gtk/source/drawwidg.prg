@@ -42,7 +42,7 @@ METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, ;
 Local i, nlen := Len(::aFonts)
 
    nHeight  := IIf(nHeight == NIL, 13, Abs(nHeight))
-   IF lLinux == Nil .OR. !lLinux
+   IF lLinux == NIL .OR. !lLinux
       nHeight -= 3
    ENDIF
    fnWeight := IIf(fnWeight == NIL, 0, fnWeight)
@@ -62,14 +62,14 @@ Local i, nlen := Len(::aFonts)
          ::aFonts[i]:StrikeOut == fdwStrikeOut
 
          ::aFonts[i]:nCounter ++
-         IF nHandle != Nil
+         IF nHandle != NIL
             hwg_DeleteObject( nHandle )
          ENDIF
          Return ::aFonts[i]
       ENDIF
    NEXT
 
-   IF nHandle == Nil
+   IF nHandle == NIL
       ::handle := hwg_CreateFont( fontName, nWidth, nHeight*1024 ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut )
    ELSE
       ::handle := nHandle
@@ -92,8 +92,8 @@ Return Self
 METHOD Select( oFont ) CLASS HFont
 Local af := hwg_SelectFont( oFont )
 
-   IF af == Nil
-      Return Nil
+   IF af == NIL
+      Return NIL
    ENDIF
 
 Return ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
@@ -123,7 +123,7 @@ Local i, nlen := Len(::aFonts)
       NEXT
    #endif
    ENDIF
-Return Nil
+Return NIL
 
 //- HPen
 
@@ -204,7 +204,7 @@ Local i
    NEXT
    #endif
 
-Return Nil
+Return NIL
 
 METHOD Release() CLASS HPen
 Local i, nlen := Len(::aPens)
@@ -231,7 +231,7 @@ Local i, nlen := Len(::aPens)
       NEXT
    #endif
    ENDIF
-Return Nil
+Return NIL
 
 //- HBrush
 
@@ -297,7 +297,7 @@ Local i, nlen := Len(::aBrushes)
       NEXT
    #endif
    ENDIF
-Return Nil
+Return NIL
 
 
 //- HBitmap
@@ -347,7 +347,7 @@ Local lPreDefined := .F., i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
    ELSE
-      Return Nil
+      Return NIL
    ENDIF
 
 Return Self
@@ -378,7 +378,7 @@ Local i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
    ELSE
-      Return Nil
+      Return NIL
    ENDIF
 
 Return Self
@@ -420,7 +420,7 @@ Local i, nlen := Len(::aBitmaps)
       NEXT
    #endif
    ENDIF
-Return Nil
+Return NIL
 
 
 //- HIcon
@@ -499,7 +499,7 @@ Local i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aIcons, Self)
    ELSE
-      Return Nil
+      Return NIL
    ENDIF
 
 Return Self
@@ -529,7 +529,7 @@ Local i, nlen := Len(::aIcons)
       NEXT
    #endif
    ENDIF
-Return Nil
+Return NIL
 
 
 EXIT PROCEDURE CleanDrawWidg

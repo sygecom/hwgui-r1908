@@ -19,7 +19,7 @@ Local i, aItem, aMetr, aTmetr, aPmetr, dKoef, pKoef
 Local fontKoef, oFont
 Private lAddMode := .F.
 
-   IF oPrinter:hDCPrn == Nil .OR. oPrinter:hDCPrn == 0
+   IF oPrinter:hDCPrn == NIL .OR. oPrinter:hDCPrn == 0
       Return .F.
    ENDIF
 
@@ -68,11 +68,11 @@ Private lAddMode := .F.
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          aPaintRep[FORM_ITEMS,i,ITEM_STATE]:Release()
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := Nil
+         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := NIL
       ENDIF
    NEXT
 
    oPrinter:Preview()
    oPrinter:End()
 
-Return Nil
+Return NIL

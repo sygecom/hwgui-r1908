@@ -131,7 +131,7 @@ STATIC FUNCTION FileOpen()
    IF !Empty(fname)
       close all
 
-      IF DataCP != Nil
+      IF DataCP != NIL
          use (fname) new codepage (DataCP)
          currentCP := DataCP
       ELSE
@@ -166,7 +166,7 @@ STATIC FUNCTION ChangeFont()
    MEMVAR oBrw
    MEMVAR oFont
 
-   IF ( oBrwFont := HFont():Select(oFont) ) != Nil
+   IF ( oBrwFont := HFont():Select(oFont) ) != NIL
 
       oFont := oBrwFont
       oBrw:oFont := oFont
@@ -291,17 +291,17 @@ STATIC FUNCTION NewIndex()
          oMsg = DlgWait("Indexing")
          IF lMulti
             IF Empty(cCond)
-               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE
                ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
-               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ELSE
             IF Empty(cCond)
-               dbCreateIndex(RTrim(cName), RTrim(cExpr),&("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               dbCreateIndex(RTrim(cName), RTrim(cExpr),&("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE
                ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
-               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., Nil))
+               ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ENDIF
          oMsg:Close()
@@ -474,7 +474,7 @@ STATIC FUNCTION ModiStru(lNew)
 
       fname := "a0_new"
       dbCreate(fname, af)
-      IF currentCP != Nil
+      IF currentCP != NIL
          use (fname) new codepage (currentCP)
       ELSE
          use (fname) new
@@ -530,7 +530,7 @@ STATIC FUNCTION ModiStru(lNew)
          Frename("a0_new.fpt", currFname + ".fpt")
       ENDIF
 
-      IF currentCP != Nil
+      IF currentCP != NIL
          use (currFname) new codepage (currentCP)
       ELSE
          use (currFname) new
@@ -583,7 +583,7 @@ STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
          AAdd(oBrowse:aArray,{ cName, cType, nLen, nDec })
       ELSE
          IF nOperation == 2
-            AAdd(oBrowse:aArray, Nil)
+            AAdd(oBrowse:aArray, NIL)
             Ains(oBrowse:aArray, oBrowse:nCurrent)
          ENDIF
          oBrowse:aArray[oBrowse:nCurrent, 1] := cName

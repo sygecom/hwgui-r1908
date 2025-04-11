@@ -21,7 +21,7 @@ CLASS HSayImage INHERIT HControl
    METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
                   bSize,ctoolt )
    METHOD Activate()
-   METHOD End() INLINE ( ::Super:End(),IIf(::oImage != NIL, ::oImage:Release(), ::oImage := NIL),::oImage := Nil )
+   METHOD End() INLINE ( ::Super:End(),IIf(::oImage != NIL, ::oImage:Release(), ::oImage := NIL),::oImage := NIL )
 
 ENDCLASS
 
@@ -42,4 +42,4 @@ METHOD Activate CLASS HSayImage
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
-Return Nil
+Return NIL

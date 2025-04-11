@@ -11,10 +11,10 @@
 #include "hwgui.ch"
 
 Function hwg_EndWindow()
-   IF HWindow():GetMain() != Nil
+   IF HWindow():GetMain() != NIL
       HWindow():aWindows[1]:Close()
    ENDIF
-Return Nil
+Return NIL
 
 Function hwg_VColor( cColor )
 Local i,res := 0, n := 1, iValue
@@ -69,10 +69,10 @@ Local oDlg, oBrw
 Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
 Local hDC, aMetr, width, height, screenh
 
-   IF cTitle == Nil; cTitle := ""; ENDIF
-   IF nLeft == Nil; nLeft := 10; ENDIF
-   IF nTop == Nil; nTop := 10; ENDIF
-   IF oFont == Nil; oFont := HFont():Add("Times", 0, 12); ENDIF
+   IF cTitle == NIL; cTitle := ""; ENDIF
+   IF nLeft == NIL; nLeft := 10; ENDIF
+   IF nTop == NIL; nTop := 10; ENDIF
+   IF oFont == NIL; oFont := HFont():Add("Times", 0, 12); ENDIF
 
    IF HB_IsArray( arr[1] )
       FOR i := 1 TO aLen
@@ -115,16 +115,16 @@ Local hDC, aMetr, width, height, screenh
    ENDIF
    hwg_CreateArList( oBrw, arr )
    oBrw:lDispHead := .F.
-   IF clrT != Nil
+   IF clrT != NIL
       oBrw:tcolor := clrT
    ENDIF
-   IF clrB != Nil
+   IF clrB != NIL
       oBrw:bcolor := clrB
    ENDIF
-   IF clrTSel != Nil
+   IF clrTSel != NIL
       oBrw:tcolorSel := clrTSel
    ENDIF
-   IF clrBSel != Nil
+   IF clrBSel != NIL
       oBrw:bcolorSel := clrBSel
    ENDIF
 
@@ -147,7 +147,7 @@ Return
 Function hwg_RefreshAllGets( oDlg )
 
    AEval(oDlg:GetList, {|o|o:Refresh()})
-Return Nil
+Return NIL
 
 FUNCTION HWG_Version(oTip)
 RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
@@ -159,7 +159,7 @@ Local aControls, i
       hwg_WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
 
    ENDIF
-Return Nil
+Return NIL
 
 #pragma BEGINDUMP
 

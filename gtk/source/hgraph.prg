@@ -57,7 +57,7 @@ METHOD Activate CLASS HGraph
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HGraph
    IF msg == WM_PAINT
@@ -68,7 +68,7 @@ Return 0
 METHOD CalcMinMax() CLASS HGraph
 Local i, j, nLen
    ::xmax := ::xmin := ::ymax := ::ymin := 0
-   IF ::ymaxSet != Nil .AND. ::ymaxSet != 0
+   IF ::ymaxSet != NIL .AND. ::ymaxSet != 0
       ::ymax := ::ymaxSet
    ENDIF
    FOR i := 1 TO ::nGraphs
@@ -93,7 +93,7 @@ Local i, j, nLen
       ENDIF
    NEXT
 
-Return Nil
+Return NIL
 
 METHOD Paint( lpdis ) CLASS HGraph
 Local hDC := hwg_GetDC(::handle)
@@ -103,7 +103,7 @@ Local x1 := 0, y1 := 0, x2 := ::nWidth, y2 := ::nHeight
 Local i, j, nLen
 Local px1, px2, py1, py2, nWidth
 
-   IF ::xmax == Nil
+   IF ::xmax == NIL
       ::CalcMinMax()
    ENDIF
    i := Round((x2 - x1) / 10, 0)
@@ -118,10 +118,10 @@ Local px1, px2, py1, py2, nWidth
       ::scaleY := (::ymax-::ymin) / (y2-y1)
    ENDIF
 
-   IF ::oPenCoor == Nil
+   IF ::oPenCoor == NIL
       ::oPenCoor := HPen():Add(PS_SOLID, 1, ::colorCoor)
    ENDIF
-   IF ::oPen == Nil
+   IF ::oPen == NIL
       ::oPen := HPen():Add(PS_SOLID, 2, ::tcolor)
    ENDIF
 
@@ -132,7 +132,7 @@ Local px1, px2, py1, py2, nWidth
       hwg_Drawline(hDC, 3, y2 - (0 - ::ymin) / ::scaleY, ::nWidth - 3, y2 - (0 - ::ymin) / ::scaleY)
    ENDIF
    IF ::ymax == ::ymin .AND. ::ymax == 0
-      Return Nil
+      Return NIL
    ENDIF
 
    hwg_SelectObject( hDC, ::oPen:handle )
@@ -149,7 +149,7 @@ Local px1, px2, py1, py2, nWidth
             ENDIF   
          NEXT
       ELSEIF ::nType == 2
-         IF ::tbrush == Nil
+         IF ::tbrush == NIL
             ::tbrush := HBrush():Add(::tcolor)
          ENDIF
          nWidth := Round((x2 - x1) / (nLen * 2 + 1), 0)
@@ -162,7 +162,7 @@ Local px1, px2, py1, py2, nWidth
          hwg_DrawButton( hDC, 5, 5, 80, 30, 5 )
          hwg_DrawButton( hDC, 5, 35, 80, 55, 6 )
          /*
-         IF ::tbrush == Nil
+         IF ::tbrush == NIL
             ::tbrush := HBrush():Add(::tcolor)
          ENDIF
          hwg_SelectObject( hDC, ::oPenCoor:handle )
@@ -173,15 +173,15 @@ Local px1, px2, py1, py2, nWidth
    NEXT
    hwg_releaseDC(::handle, hDC)
    
-Return Nil
+Return NIL
 
 METHOD Rebuild(aValues, nType) CLASS HGraph
 
    ::aValues := aValues
-   IF nType != Nil
+   IF nType != NIL
       ::nType := nType
    ENDIF
    ::CalcMinMax()
    hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
 
-Return Nil
+Return NIL

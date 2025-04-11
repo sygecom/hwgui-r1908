@@ -48,7 +48,7 @@ METHOD Activate CLASS HPanel
                    ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HPanel
 
@@ -63,7 +63,7 @@ Return 0
 METHOD Init CLASS HPanel
 
    IF !::lInit
-      IF ::bSize == Nil
+      IF ::bSize == NIL
          IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth==0 )
             ::bSize := {|o, x, y|o:Move(, IIf(::nTop > 0, y - ::nHeight, 0), x, ::nHeight)}
          ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight==0 )
@@ -75,12 +75,12 @@ METHOD Init CLASS HPanel
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Paint() CLASS HPanel
 Local hDC, aCoors, oPenLight, oPenGray
 
-   IF ::bPaint != Nil
+   IF ::bPaint != NIL
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
@@ -88,10 +88,10 @@ Local hDC, aCoors, oPenLight, oPenGray
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Move(x1, y1, width, height)  CLASS HPanel
 
    ::Super:Move(x1, y1, width, height, .T.)
-Return Nil
+Return NIL
 

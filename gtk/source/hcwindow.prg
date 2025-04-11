@@ -120,33 +120,33 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    IF h > 0
       ASize(::aNotify, Len(::aNotify) - h)
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Move(x1, y1, width, height)  CLASS HCustomWindow
 
-   IF x1 != Nil
+   IF x1 != NIL
       ::nLeft := x1
    ENDIF
-   IF y1 != Nil
+   IF y1 != NIL
       ::nTop  := y1
    ENDIF
-   IF width != Nil
+   IF width != NIL
       ::nWidth := width
    ENDIF
-   IF height != Nil
+   IF height != NIL
       ::nHeight := height
    ENDIF
    hwg_MoveWindow( ::handle,::nLeft,::nTop,::nWidth,::nHeight )
 
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HCustomWindow
 Local i
 
-   // Writelog( "== "+::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "Nil")+IIf(lParam != NIL, Str(lParam), "Nil") )
+   // Writelog( "== "+::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "NIL")+IIf(lParam != NIL, Str(lParam), "NIL") )
    IF ( i := AScan(aCustomEvents[1], msg) ) != 0
       Return Eval(aCustomEvents[2, i], Self, wParam, lParam)
-   ELSEIF ::bOther != Nil
+   ELSEIF ::bOther != NIL
       Return Eval(::bOther, Self, msg, wParam, lParam)
    ENDIF
 
@@ -179,28 +179,28 @@ Local i, nLen := Len(aControls)
 
    hwg_ReleaseObject( ::handle )
 
-Return Nil
+Return NIL
 
 Static Function onNotify( oWnd,wParam,lParam )
 Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
 
-   IF oCtrl != Nil
+   IF oCtrl != NIL
       IF oCtrl:ClassName() == "HTAB"
          DO CASE
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_SELCHANGE
-            IF oCtrl != Nil .AND. oCtrl:bChange != Nil
+            IF oCtrl != NIL .AND. oCtrl:bChange != NIL
                Eval(oCtrl:bChange, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
             ENDIF
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_CLICK
-              if oCtrl != Nil .AND. oCtrl:bAction != NIL
+              if oCtrl != NIL .AND. oCtrl:bAction != NIL
                  Eval(oCtrl:bAction, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_SETFOCUS
-              if oCtrl != Nil .AND. oCtrl:bGetFocus != NIL
+              if oCtrl != NIL .AND. oCtrl:bGetFocus != NIL
                  Eval(oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
          CASE ( nCode := hwg_GetNotifyCode(lParam) ) == TCN_KILLFOCUS
-              if oCtrl != Nil .AND. oCtrl:bLostFocus != NIL
+              if oCtrl != NIL .AND. oCtrl:bLostFocus != NIL
                  Eval(oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
               endif
         ENDCASE
@@ -215,9 +215,9 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
          // writelog("Code: "+str(nCode))
          IF nCode == EN_PROTECTED
             Return 1
-         ELSEIF oWnd:aNotify != Nil .AND. ;
+         ELSEIF oWnd:aNotify != NIL .AND. ;
             ( iItem := AScan(oWnd:aNotify, {|a|a[1] == nCode .AND. a[2] == wParam}) ) > 0
-            IF ( res := Eval(oWnd:aNotify[iItem, 3], oWnd, wParam) ) != Nil
+            IF ( res := Eval(oWnd:aNotify[iItem, 3], oWnd, wParam) ) != NIL
                Return res
             ENDIF
          ENDIF
@@ -234,11 +234,11 @@ Return 0
 Static Function onCtlColor( oWnd,wParam,lParam )
 Local oCtrl  := oWnd:FindControl(,lParam)
 
-   IF oCtrl != Nil
-      IF oCtrl:tcolor != Nil
+   IF oCtrl != NIL
+      IF oCtrl:tcolor != NIL
          hwg_SetTextColor( wParam, oCtrl:tcolor )
       ENDIF
-      IF oCtrl:bcolor != Nil
+      IF oCtrl:bcolor != NIL
          hwg_SetBkColor( wParam, oCtrl:bcolor )
          Return oCtrl:brush:handle
       ENDIF
@@ -249,8 +249,8 @@ Return -1
 Static Function onDrawItem( oWnd,wParam,lParam )
 Local oCtrl
 
-   IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != Nil .AND. ;
-         oCtrl:bPaint != Nil
+   IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != NIL .AND. ;
+         oCtrl:bPaint != NIL
       Eval(oCtrl:bPaint, oCtrl, lParam)
       Return 1
    ENDIF
@@ -260,7 +260,7 @@ Return 0
 Static Function onCommand(oWnd, wParam)
 Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
-   IF oWnd:aEvents != Nil .AND. ;
+   IF oWnd:aEvents != NIL .AND. ;
       ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ENDIF
@@ -273,13 +273,13 @@ Local oItem, iCont
 
    #ifdef __XHARBOUR__
    FOR each oItem in aControls
-       IF oItem:bSize != Nil
+       IF oItem:bSize != NIL
           Eval(oItem:bSize, oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
        ENDIF
    NEXT
    #else
    FOR iCont := 1 TO nControls
-       IF aControls[iCont]:bSize != Nil
+       IF aControls[iCont]:bSize != NIL
           Eval(aControls[iCont]:bSize, aControls[iCont], hwg_LOWORD(lParam), hwg_HIWORD(lParam))
        ENDIF
    NEXT
@@ -291,7 +291,7 @@ Return 0
 Function hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
-   IF oCtrl != Nil
+   IF oCtrl != NIL
       msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
          IF HB_IsBlock( oCtrl:bChange )
@@ -311,7 +311,7 @@ Return 0
 Function hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
-   IF oCtrl != Nil
+   IF oCtrl != NIL
       msg := hwg_LOWORD(wParam)
       SWITCH msg
       CASE TB_ENDTRACK

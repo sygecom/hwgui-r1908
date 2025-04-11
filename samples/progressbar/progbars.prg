@@ -39,13 +39,13 @@ FUNCTION Test()
              FONT oFont ;
              AT 0, 0 SIZE 700, 425 ;
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU ;
-             ON EXIT {||IIf(oBar == Nil, .T.,(oBar:Close(), .T.))}
+             ON EXIT {||IIf(oBar == NIL, .T.,(oBar:Close(), .T.))}
 
-             @ 115, 390 BUTTON "Step Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr), (oBar:Step()))}
-             @ 210, 390 BUTTON "Show Text" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr), (oBar:setLabel("New Text here")))}
+             @ 115, 390 BUTTON "Step Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == NIL, hwg_MsgStop(cMsgErr), (oBar:Step()))}
+             @ 210, 390 BUTTON "Show Text" SIZE 95, 26 ON CLICK {||IIf(oBar == NIL, hwg_MsgStop(cMsgErr), (oBar:setLabel("New Text here")))}
              @ 305, 390 BUTTON "Create Bar" SIZE 95, 26 ON CLICK {||oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100)}
              @ 400, 390 BUTTON "Create Bar %" SIZE 95, 26 ON CLICK {||oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100,, .T.)}
-             @ 495, 390 BUTTON "Close Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == Nil, hwg_MsgStop(cMsgErr),(oBar:Close(), oBar := Nil))}
+             @ 495, 390 BUTTON "Close Bar" SIZE 95, 26 ON CLICK {||IIf(oBar == NIL, hwg_MsgStop(cMsgErr),(oBar:Close(), oBar := NIL))}
              @ 590, 390 BUTTON "Close" SIZE 95, 26 ON CLICK {||oForm:Close()}
 
         ACTIVATE DIALOG oForm

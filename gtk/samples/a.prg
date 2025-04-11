@@ -13,7 +13,7 @@
 
 Function Main
 Local oMainWindow,oPanel
-Private oFont := Nil, cImageDir := "/"+Curdir()+"/../../image/"
+Private oFont := NIL, cImageDir := "/"+Curdir()+"/../../image/"
 Private nColor, oBmp2
 
    // hb_SetCodepage("RU1251")
@@ -87,14 +87,14 @@ Local nId
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
       hwg_CreateList( oBrw,.T. )
       oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
-      IF oFont != Nil
+      IF oFont != NIL
          oBrw:ofont := oFont
       ENDIF
       AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_MsgInfo("Column number "+Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
-Return Nil
+Return NIL
 
 Function FileClose(oDlg)
    Local oBrw := oDlg:FindControl( 111 )
@@ -167,7 +167,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
-Return Nil
+Return NIL
 
 Function TestTab()
 
@@ -206,8 +206,8 @@ Function PrnTest
 Local oPrinter, oFont
 
    INIT PRINTER oPrinter
-   IF oPrinter == Nil      
-      Return Nil         
+   IF oPrinter == NIL      
+      Return NIL         
    ENDIF            
                               
    oFont := oPrinter:AddFont( "Courier Regular", 10 )
@@ -228,6 +228,6 @@ Local oPrinter, oFont
    oPrinter:Preview()
    oPrinter:End()
 
-Return Nil
+Return NIL
 #endif                                                               
                                                                

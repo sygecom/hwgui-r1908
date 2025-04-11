@@ -24,7 +24,7 @@ Private var1 := 10320.54
    ENDMENU
 
    ACTIVATE WINDOW oMainWindow
-Return Nil
+Return NIL
 
 Function DlgGet()
 Local oModDlg, oTimer // , oFont := HFont():Add("MS Sans Serif", 0, -13)
@@ -96,16 +96,16 @@ Private oSayT
                ,"Results:" )
    ENDIF
 
-Return Nil
+Return NIL
 
 Static Function SetTimer( oDlg,oTimer )
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
 //   writelog( ValType(oTimer) )
-Return Nil
+Return NIL
 
 Static Function TimerFunc()
 
    oSayT:SetValue(Time())
-Return Nil
+Return NIL
 

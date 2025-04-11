@@ -52,7 +52,7 @@ FUNCTION DlgGet(lColor)
    SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3")
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
-   If lColor != Nil
+   If lColor != NIL
       hwg_SetColorInFocus(lColor)
    EndIf
 

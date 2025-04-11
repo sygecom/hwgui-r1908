@@ -25,7 +25,7 @@ Local fname := hwg_SelectFile("Query files( *.que )", "*.que", mypath)
       Query( .T. )
    ENDIF
 
-Return Nil
+Return NIL
 
 Function Query( lEdit )
 Local aModDlg
@@ -41,13 +41,13 @@ Local aModDlg
         ON BN_CLICKED,IDC_BTNSAVE ACTION {|| QuerySave() }
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitQuery()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
-Return Nil
+Return NIL
 
 Static Function EndQuery( lOk )
 Local hDlg := hwg_GetModalHandle()
@@ -60,7 +60,7 @@ Static lConnected := .F.
       cQuery := hwg_GetEditText( hDlg, IDC_EDITQUERY )
       IF Empty(cQuery)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
-         Return Nil
+         Return NIL
       ENDIF
 
       IF numdriv == 2
@@ -131,4 +131,4 @@ Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
    IF !Empty(fname)
       MemoWrit( fname,cQuery )
    ENDIF
-Return Nil
+Return NIL

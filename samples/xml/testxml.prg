@@ -107,7 +107,7 @@ FUNCTION NewItem(nItem)
          oXmlNode := oXmlDoc:aItems[1]:Add(HXMLNode():New("item"))
          oXmlNode:SetAttribute("name", Trim(cName))
          oXmlNode:Add(Trim(cInfo))
-         oXMLNode:Add(hwg_Font2XML(IIf(oFontNew != Nil, oFontNew, oFont)))
+         oXMLNode:Add(hwg_Font2XML(IIf(oFontNew != NIL, oFontNew, oFont)))
          lIniChanged := .T.
 
          aMenu := oMainWindow:menu[1, 1]
@@ -128,7 +128,7 @@ FUNCTION NewItem(nItem)
                   lIniChanged := .T.
                ENDIF
             ELSEIF oXmlNode:aItems[i]:title == "font"
-               IF oFontNew != Nil
+               IF oFontNew != NIL
                   oXMLNode:aItems[i] := hwg_Font2XML(oFontNew)
                   lIniChanged := .T.
                ENDIF
@@ -148,22 +148,22 @@ FUNCTION FontFromXML(oXmlNode)
    LOCAL ita := oXmlNode:GetAttribute("italic")
    LOCAL under := oXmlNode:GetAttribute("underline")
 
-  IF width != Nil
+  IF width != NIL
      width := Val(width)
   ENDIF
-  IF height != Nil
+  IF height != NIL
      height := Val(height)
   ENDIF
-  IF weight != Nil
+  IF weight != NIL
      weight := Val(weight)
   ENDIF
-  IF charset != Nil
+  IF charset != NIL
      charset := Val(charset)
   ENDIF
-  IF ita != Nil
+  IF ita != NIL
      ita := Val(ita)
   ENDIF
-  IF under != Nil
+  IF under != NIL
      under := Val(under)
   ENDIF
 

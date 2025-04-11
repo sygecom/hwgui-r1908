@@ -25,7 +25,7 @@ Local aModDlg
         ON 0,IDCANCEL     ACTION {|| EndMove(.F., nMove) }
    aModDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function InitMove(nMove)
 Local hDlg := hwg_GetModalHandle(), cTitle
@@ -44,7 +44,7 @@ Local hDlg := hwg_GetModalHandle(), cTitle
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
-Return Nil
+Return NIL
 
 Static Function EndMove(lOk, nMove)
 Local hDlg := hwg_GetModalHandle()
@@ -55,11 +55,11 @@ Local hWnd, oWindow, aControls, iCont
       cExpres := hwg_GetDlgItemText( hDlg, IDC_EDIT6, 80 )
       IF Empty(cExpres)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
-         Return Nil
+         Return NIL
       ENDIF
 
       oWindow := HMainWindow():GetMdiActive()
-      IF oWindow != Nil
+      IF oWindow != NIL
          aControls := oWindow:aControls
          iCont := Ascan( aControls, {|o|o:classname()=="HBROWSE"} )
       ENDIF
@@ -96,7 +96,7 @@ Local hWnd, oWindow, aControls, iCont
    ENDIF
 
    EndDialog( hDlg )
-Return Nil
+Return NIL
 
 Function F_Locate(oBrw, cExpres)
 Local nrec, i, res, block
@@ -138,7 +138,7 @@ Local nrec, i, res, block
    ELSE
       hwg_MsgInfo( "Wrong expression" )
    ENDIF
-Return Nil
+Return NIL
 
 Function F_Filter( oBrw, cExpres )
 Local i, nrec
@@ -149,7 +149,7 @@ Local i, nrec
       GO TOP
       i       := 1
       oBrw:nRecords := 0
-      IF oBrw:aArray == Nil
+      IF oBrw:aArray == NIL
          oBrw:aArray := Array( klrecf )
       ENDIF
       DO WHILE !EOF()
@@ -189,19 +189,19 @@ Local i, nrec
    ELSE
       hwg_MsgInfo( "Wrong expression" )
    ENDIF
-Return Nil
+Return NIL
 
 FUNCTION FGOTOP( oBrw )
    IF oBrw:nRecords > 0
       oBrw:nCurrent := 1
       GO oBrw:aArray[1]
    ENDIF
-RETURN Nil
+RETURN NIL
 
 FUNCTION FGOBOT( oBrw )
    oBrw:nCurrent := oBrw:nRecords
    GO IIf(oBrw:nRecords < klrecf, oBrw:aArray[oBrw:nRecords], oBrw:aArray[klrecf])
-RETURN Nil
+RETURN NIL
 
 PROCEDURE FSKIP( oBrw, kolskip )
 LOCAL tekzp1

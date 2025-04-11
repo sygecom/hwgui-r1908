@@ -12,7 +12,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Static oMain, oForm, oFont, oBar := Nil
+Static oMain, oForm, oFont, oBar := NIL
 Static n :=0
 Function Main()
 
@@ -24,7 +24,7 @@ Function Main()
         ENDMENU
 
         ACTIVATE WINDOW oMain MAXIMIZED
-Return Nil
+Return NIL
 
 Function Test()
 Local cMsgErr := "Bar doesn't exist"
@@ -44,5 +44,5 @@ Local cMsgErr := "Bar doesn't exist"
 
         ACTIVATE DIALOG oForm
 
-Return Nil
+Return NIL
 

@@ -314,7 +314,7 @@ FUNCTION Execute()
       RETURN .F.
    ENDIF
    IF Left(cQuery, 2) == "//"
-      IF ( arScr := hwg_RdScript(, cQuery) ) != Nil
+      IF ( arScr := hwg_RdScript(, cQuery) ) != NIL
          hwg_DoScript(arScr)
       ELSE
          nError := hwg_CompileErr(@nLineEr)
@@ -346,16 +346,16 @@ FUNCTION execSQL(cQuery)
       hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
-         DO WHILE Len(stroka := hwg_RDSTR(Nil,@cQuery,@poz)) != 0
+         DO WHILE Len(stroka := hwg_RDSTR(NIL,@cQuery,@poz)) != 0
             IF Asc(LTrim(stroka)) > 32
-               AAdd(aQueries, Nil)
+               AAdd(aQueries, NIL)
                AIns(aQueries, i)
                aQueries[i] := { PadR(stroka, 76), lFirst }
                lFirst := .F.
                i ++
             ENDIF
          ENDDO
-         Aadd(aQueries, Nil)
+         Aadd(aQueries, NIL)
          Ains(aQueries, i)
          aQueries[i] := { Space(76), .F. }
          nHistCurr ++

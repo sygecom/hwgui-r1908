@@ -30,7 +30,7 @@ METHOD Show( oWnd,xPos,yPos,lWnd ) CLASS HMenu
 Local aCoor
 /*
    oWnd:oPopup := Self
-   IF Pcount() == 1 .OR. lWnd == Nil .OR. !lWnd
+   IF Pcount() == 1 .OR. lWnd == NIL .OR. !lWnd
       IF Pcount() == 1
          aCoor := hwg_GetCursorPos()
          xPos  := aCoor[1]
@@ -42,13 +42,13 @@ Local aCoor
       hwg_trackmenu( ::handle,aCoor[1],aCoor[2],oWnd:handle )
    ENDIF
 */
-Return Nil
+Return NIL
 
 Function hwg_CreateMenu
 Local hMenu
 
    IF ( Empty(hMenu := hwg__CreateMenu()) )
-      Return Nil
+      Return NIL
    ENDIF
 
 Return { {},,, hMenu }
@@ -76,7 +76,7 @@ Return .T.
 Function hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos )
 Local hSubMenu
 
-   IF nPos == Nil
+   IF nPos == NIL
       nPos := Len(aMenu[1]) + 1
    ENDIF
 
@@ -101,7 +101,7 @@ Local hSubMenu
       Return aMenu[1,nPos]
    ENDIF
 
-Return Nil
+Return NIL
 
 Function hwg_FindMenuItem( aMenu, nId, nPos )
 Local nPos1, aSubMenu
@@ -110,14 +110,14 @@ Local nPos1, aSubMenu
       IF aMenu[1,npos, 3] == nId
          Return aMenu
       ELSEIF HB_IsArray( aMenu[1,npos, 1] )
-         IF ( aSubMenu := hwg_FindMenuItem( aMenu[1,nPos] , nId, @nPos1 ) ) != Nil
+         IF ( aSubMenu := hwg_FindMenuItem( aMenu[1,nPos] , nId, @nPos1 ) ) != NIL
             nPos := nPos1
             Return aSubMenu
          ENDIF
       ENDIF
       nPos ++
    ENDDO
-Return Nil
+Return NIL
 
 Function hwg_GetSubMenuHandle(aMenu, nId)
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
@@ -127,8 +127,8 @@ Return IIf(aSubMenu == NIL, 0, aSubMenu[5])
 Function hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
 Local hMenu, nPos, aMenu, i, oBmp
 
-   IF nPosParent == Nil   
-      IF lPopup == Nil .OR. !lPopup
+   IF nPosParent == NIL   
+      IF lPopup == NIL .OR. !lPopup
          hMenu := hwg__CreateMenu()
       ELSE
          hMenu := hwg__CreatePopupMenu()
@@ -151,7 +151,7 @@ Local hMenu, nPos, aMenu, i, oBmp
       IF HB_IsArray( aMenu[1,nPos, 1] )
          hwg_BuildMenu( aMenu,hWnd,,nPos )
       ELSE 
-         IF aMenu[1,nPos, 1] == Nil .OR. aMenu[1,nPos, 2] != Nil
+         IF aMenu[1,nPos, 1] == NIL .OR. aMenu[1,nPos, 2] != NIL
             IF Len(aMenu[1, npos]) == 4
                AAdd(aMenu[1, npos], NIL)
             ENDIF
@@ -161,22 +161,22 @@ Local hMenu, nPos, aMenu, i, oBmp
       ENDIF
       nPos ++
    ENDDO
-   IF hWnd != Nil .AND. oWnd != Nil
+   IF hWnd != NIL .AND. oWnd != NIL
       hwg_SetMenu( oWnd, aMenu )
-   ELSEIF _oMenu != Nil
+   ELSEIF _oMenu != NIL
       _oMenu:handle := aMenu[5]
       _oMenu:aMenu := aMenu
    ENDIF
-Return Nil
+Return NIL
 
 Function hwg_BeginMenu( oWnd,nId,cTitle )
 Local aMenu, i
-   IF oWnd != Nil
+   IF oWnd != NIL
       _aMenuDef := {}
       _aAccel   := {}
       _oBitmap  := {}
       _oWnd     := oWnd
-      _oMenu    := Nil
+      _oMenu    := NIL
       _nLevel   := 0
       _Id       := IIf(nId == NIL, MENU_FIRST_ID, nId)
    ELSE
@@ -197,7 +197,7 @@ Return .T.
 Function hwg_ContextMenu()
    _aMenuDef := {}
    _oBitmap  := {}
-   _oWnd := Nil
+   _oWnd := NIL
    _nLevel := 0
    _Id := CONTEXTMENU_FIRST_ID
    _oMenu := HMenu():New()
@@ -209,14 +209,14 @@ Function hwg_EndMenu()
    ELSE
       hwg_BuildMenu( Aclone(_aMenuDef), IIf(_oWnd != NIL,_oWnd:handle, NIL), ;
                    _oWnd,,IIf(_oWnd != NIL, .F., .T.) )
-      IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty(_aAccel)
+      IF _oWnd != NIL .AND. _aAccel != NIL .AND. !Empty(_aAccel)
          // _oWnd:hAccel := hwg_CreateAcceleratorTable(_aAccel)
       ENDIF
-      _aMenuDef := Nil
-      _oBitmap  := Nil
-      _aAccel   := Nil
-      _oWnd     := Nil
-      _oMenu    := Nil
+      _aMenuDef := NIL
+      _oBitmap  := NIL
+      _aAccel   := NIL
+      _oWnd     := NIL
+      _oMenu    := NIL
    ENDIF
 Return .T.
 
@@ -238,8 +238,8 @@ Local aMenu, i, oBmp, nFlag
    endif
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
-   IF lBitmap!=Nil .or. !Empty(lBitmap)
-      if lResource==Nil ;lResource:=.F.; Endif         
+   IF lBitmap!=NIL .or. !Empty(lBitmap)
+      if lResource==NIL ;lResource:=.F.; Endif         
       if !lResource 
          oBmp:=HBitmap():AddFile(lBitmap)
       else
@@ -249,7 +249,7 @@ Local aMenu, i, oBmp, nFlag
    Else   
       AAdd(_oBitmap, {.F., "", cItem, nID})
    Endif         
-   IF accFlag != Nil .AND. accKey != Nil
+   IF accFlag != NIL .AND. accKey != NIL
       AAdd(_aAccel, {accFlag, accKey, nId})
    ENDIF
    */
@@ -273,25 +273,25 @@ Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 Local oMenu:=aSubMenu
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 SetMenuItemBitmaps( oMenu, nId, abmp1, abmp2 )
-Return Nil
+Return NIL
 
 Function hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 Local oMenu:=aSubMenu, oBmp
-If !oResource .or. oResource==Nil
+If !oResource .or. oResource==NIL
      oBmp:=HBitmap():AddFile(lBitmap)
 else
      oBmp:=HBitmap():AddResource(lBitmap)
 endif
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 HWG__InsertBitmapMenu( oMenu, nId, obmp:handle )
-Return Nil
+Return NIL
 
 Function hwg_SearchPosBitmap( nPos_Id )
 
    Local nPos := 1, lBmp:={.F.,""}
 
-   IF _oBitmap != Nil
+   IF _oBitmap != NIL
       DO WHILE nPos<=Len(_oBitmap)
 
          if _oBitmap[nPos][4] == nPos_Id
@@ -309,14 +309,14 @@ Return lBmp
 Static Function GetMenuByHandle(hWnd)
 Local i, aMenu, oDlg
 
-   IF hWnd == Nil
+   IF hWnd == NIL
       aMenu := HWindow():GetMain():menu
    ELSE
-      IF ( oDlg := HDialog():FindDialog(hWnd) ) != Nil
+      IF ( oDlg := HDialog():FindDialog(hWnd) ) != NIL
          aMenu := oDlg:menu
-      ELSEIF ( i := AScan(HDialog():aModalDialogs, {|o|o:handle == hWnd}) ) != Nil
+      ELSEIF ( i := AScan(HDialog():aModalDialogs, {|o|o:handle == hWnd}) ) != NIL
          aMenu := HDialog():aModalDialogs[i]:menu
-      ELSEIF ( i := AScan(HWindow():aWindows, {|o|o:handle == hWnd}) ) != Nil
+      ELSEIF ( i := AScan(HWindow():aWindows, {|o|o:handle == hWnd}) ) != NIL
          aMenu := HWindow():aWindows[i]:menu
       ENDIF
    ENDIF
@@ -328,21 +328,21 @@ Function CheckMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
    aMenu := GetMenuByHandle(hWnd)
-   IF aMenu != Nil
-      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
+   IF aMenu != NIL
+      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != NIL
          hwg_CheckMenuItem( aSubmenu[1,nPos, 5], lValue )
       ENDIF
    ENDIF
 
-Return Nil
+Return NIL
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsCheckedMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos, lRes := .F.
    
    aMenu := GetMenuByHandle(hWnd)
-   IF aMenu != Nil
-      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
+   IF aMenu != NIL
+      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != NIL
          lRes := hwg_IsCheckedMenuItem( aSubmenu[1,nPos, 5] )
       ENDIF   
    ENDIF
@@ -354,26 +354,26 @@ Function EnableMenuItem( hWnd, nId, lValue )
 Local aMenu, aSubMenu, nPos
 
    aMenu := GetMenuByHandle(IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd))
-   IF aMenu != Nil
-      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
+   IF aMenu != NIL
+      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != NIL
          hwg_EnableMenuItem( aSubmenu[1,nPos, 5], lValue )
       ENDIF
    ENDIF
 
-Return Nil
+Return NIL
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsEnabledMenuItem( hWnd, nId )
 Local aMenu, aSubMenu, nPos
 
    aMenu := GetMenuByHandle(IIf(hWnd == NIL, HWindow():GetMain():handle, hWnd))
-   IF aMenu != Nil
-      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != Nil
+   IF aMenu != NIL
+      IF ( aSubMenu := hwg_FindMenuItem( aMenu, nId, @nPos ) ) != NIL
          hwg_IsEnabledMenuItem( aSubmenu[1,nPos, 5] )
       ENDIF   
    ENDIF
    
-Return Nil
+Return NIL
 
 #pragma BEGINDUMP
 

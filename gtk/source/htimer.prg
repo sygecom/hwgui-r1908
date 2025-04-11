@@ -79,7 +79,7 @@ Local i
       ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Init CLASS HTimer
    IF ! ::lInit
@@ -93,7 +93,7 @@ METHOD onAction()
 
    hwg_TimerProc(, ::id, ::interval)
    
-RETURN Nil
+RETURN NIL
 
 
 Function hwg_TimerProc(hWnd, idTimer, Time)
@@ -101,12 +101,12 @@ Function hwg_TimerProc(hWnd, idTimer, Time)
 
    HB_SYMBOL_UNUSED(hWnd)
 
-   IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != Nil .AND.;
+   IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != NIL .AND.;
       HB_IsBlock( HTimer():aTimers[i]:bAction )
       Eval(HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time)
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 EXIT PROCEDURE CleanTimers
 Local oTimer, i

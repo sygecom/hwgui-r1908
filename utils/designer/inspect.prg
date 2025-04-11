@@ -94,12 +94,12 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
 
-   IF ::SetColumn() == 1 .AND. ::bEnter == Nil
-      Return Nil
+   IF ::SetColumn() == 1 .AND. ::bEnter == NIL
+      Return NIL
    ENDIF
    ::cargo := Eval(::bRecno, Self)
    IF oTab:GetActivePage() == 2
-      IF ( value := EditMethod(aMethods[::cargo, 1],aMethods[::cargo, 2]) ) != Nil ;
+      IF ( value := EditMethod(aMethods[::cargo, 1],aMethods[::cargo, 2]) ) != NIL ;
           .AND. !( aMethods[::cargo, 2] == value )
          aMethods[::cargo, 2] := value
          IF oCombo:value == 1
@@ -111,7 +111,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
          oBrw2:lUpdated := .T.
          oBrw2:Refresh()
       ENDIF
-      Return Nil
+      Return NIL
    ENDIF
    IF oCombo:value == 1
       aCtrlProp := oCtrl:oParent:aProp
@@ -123,17 +123,17 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    j := AScan(aDataDef, {|a|a[1] == cName})
    varbuf := Eval(oColumn:block, , Self, 2)
 
-   IF ( j != 0 .AND. aDataDef[j, 5] != Nil ) .OR. aCtrlProp[oBrw1:cargo, 3] == "A"
-      IF j != 0 .AND. aDataDef[j, 5] != Nil
+   IF ( j != 0 .AND. aDataDef[j, 5] != NIL ) .OR. aCtrlProp[oBrw1:cargo, 3] == "A"
+      IF j != 0 .AND. aDataDef[j, 5] != NIL
          IF aDataDef[j, 5] == "color"
             varbuf := hwg_ChooseColor( Val(varbuf),.F. )
-            IF varbuf != Nil
+            IF varbuf != NIL
                varbuf := LTrim(Str(varbuf))
                lRes := .T.
             ENDIF
          ELSEIF aDataDef[j, 5] == "font"
             varbuf := HFont():Select( varbuf )
-            IF varbuf != Nil
+            IF varbuf != NIL
                lRes := .T.
             ENDIF
          ELSEIF aDataDef[j, 5] == "file"
@@ -163,13 +163,13 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
             //varbuf := hwg_SelectFile("All files ( *.* )", "*.*")
             //
             hwg_SetFocus( obtn:handle )
-            IF varbuf != Nil
+            IF varbuf != NIL
                lRes := .T.
             ENDIF
          ENDIF
       ELSE
          varbuf := EditArray( varbuf )
-         IF varbuf != Nil
+         IF varbuf != NIL
             lRes := .T.
          ENDIF
       ENDIF
@@ -179,9 +179,9 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
          j := AScan(aDataDef, {|a|a[1] == cName})
          value := aProp[oBrw1:cargo, 2] := varbuf
          aCtrlProp[oBrw1:cargo, 2] := value
-         IF j != 0 .AND. aDataDef[j, 3] != Nil
+         IF j != 0 .AND. aDataDef[j, 3] != NIL
             EvalCode(aDataDef[j, 3])
-            IF aDataDef[j, 4] != Nil
+            IF aDataDef[j, 4] != NIL
                EvalCode(aDataDef[j, 4])
             ENDIF
          ENDIF
@@ -196,10 +196,10 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
       nWidth := Min( ::aColumns[2]:width, ::x2 - x1 - 1 )
 
       ReadExit( .T. )
-      IF ( j != 0 .AND. aDataDef[j, 6] != Nil ) .OR. aCtrlProp[oBrw1:cargo, 3] == "L"
+      IF ( j != 0 .AND. aDataDef[j, 6] != NIL ) .OR. aCtrlProp[oBrw1:cargo, 3] == "L"
 
          // : LFB - CAMPOS PARA AS COLUNAS
-         IF ( j != 0 .AND. aDataDef[j, 6] != Nil .AND.aDataDef[j, 6][1] = "@afields" )// funcao
+         IF ( j != 0 .AND. aDataDef[j, 6] != NIL .AND.aDataDef[j, 6][1] = "@afields" )// funcao
             //cAlias := LEFT(hwg_CutPath( value ),AT(".",hwg_CutPath( value ))-1)
             aItems := {" "}
             FOR i = 1 to 200
@@ -214,7 +214,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                ENDIF
             NEXT
          //
-         ELSEIF ( j != 0 .AND. aDataDef[j, 6] != Nil .AND.aDataDef[j, 6][1] = "@atags" )// funcao
+         ELSEIF ( j != 0 .AND. aDataDef[j, 6] != NIL .AND.aDataDef[j, 6][1] = "@atags" )// funcao
                i := 1
                  aItems := {" "}
                  IF select(alias()) > 0
@@ -223,7 +223,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                      ENDDO
                   ENDIF
              ELSE
-             aItems := IIf(j != 0 .AND. aDataDef[j, 6] != Nil, aDataDef[j, 6], {"True", "False"})
+             aItems := IIf(j != 0 .AND. aDataDef[j, 6] != NIL, aDataDef[j, 6], {"True", "False"})
          ENDIF
          varbuf := AllTrim(varbuf)
          nChoic := AScan(aItems, varbuf)
@@ -245,7 +245,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
       ENDIF
       hwg_SetFocus( oGet:handle )
    ENDIF
-RETURN Nil
+RETURN NIL
 
 METHOD HeaderOut( hDC ) CLASS PBrowse
 
@@ -288,7 +288,7 @@ METHOD HeaderOut( hDC ) CLASS PBrowse
 
    oPen:Release()
 
-RETURN Nil
+RETURN NIL
 
 
 // -----------------------------
@@ -320,10 +320,10 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
    ELSE
       oCtrl:aProp[oBrw1:cargo, 2] := value
    ENDIF
-   IF j != 0 .AND. oDesigner:aDataDef[j, 3] != Nil
+   IF j != 0 .AND. oDesigner:aDataDef[j, 3] != NIL
       // pArray := oDesigner:aDataDef[j, 6]
       EvalCode(oDesigner:aDataDef[j, 3])
-      IF oDesigner:aDataDef[j, 4] != Nil
+      IF oDesigner:aDataDef[j, 4] != NIL
          EvalCode(oDesigner:aDataDef[j, 4])
       ENDIF
    ENDIF
@@ -362,7 +362,7 @@ FUNCTION InspOpen(lShow)
       STYLE nStilo;
       ON INIT {||IIf(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
       ON GETFOCUS {|o| o:show(),.T.};
-      ON EXIT {||oDesigner:oDlgInsp:=Nil,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
+      ON EXIT {||oDesigner:oDlgInsp:=NIL,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
       ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
    @ 0, 0 COMBOBOX oCombo ITEMS {} SIZE 220, 22 ;
@@ -427,7 +427,7 @@ FUNCTION InspOpen(lShow)
    oDesigner:oDlgInsp:AddEvent( 0,IDOK,{||DlgOk()} )
    oDesigner:oDlgInsp:AddEvent( 0,IDCANCEL,{||DlgCancel()} )
 
-Return Nil
+Return NIL
 
 
 Static Function DlgOk()
@@ -435,7 +435,7 @@ Static Function DlgOk()
    IF !Empty(oBrw1:aControls)
       VldBrwGet( oBrw1:aControls[1] )
    ENDIF
-Return Nil
+Return NIL
 
 Static Function DlgCancel()
 
@@ -447,7 +447,7 @@ Static Function DlgCancel()
       // oBrw1:DelControl( oBrw1:aControls[1] )
       // oBrw1:Refresh()
    ENDIF
-Return Nil
+Return NIL
 
 FUNCTION InspSetCombo()
 
@@ -459,18 +459,18 @@ FUNCTION InspSetCombo()
    MEMVAR oDesigner
 
    oCombo:aItems := {}
-   IF oDlg != Nil
+   IF oDlg != NIL
       n := 0
       AAdd(oCombo:aItems, "Form." + oDlg:title)
       oCtrl := GetCtrlSelected(oDlg)
       aControls := IIf(oDesigner:lReport, oDlg:aControls[1]:aControls[1]:aControls, oDlg:aControls)
       FOR i := 1 TO Len(aControls)
         if ( oDesigner:lReport )
-            AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != Nil, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
+            AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != NIL, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
         else
             AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
         endif
-        IF oCtrl != Nil .AND. oCtrl:handle == aControls[i]:handle
+        IF oCtrl != NIL .AND. oCtrl:handle == aControls[i]:handle
             n := i
         ENDIF
       NEXT
@@ -482,7 +482,7 @@ FUNCTION InspSetCombo()
    oCombo:Refresh()
    */
    InspSetBrowse()
-Return Nil
+Return NIL
 
 FUNCTION InspUpdCombo( n )
 
@@ -497,7 +497,7 @@ FUNCTION InspUpdCombo( n )
       i := Len(aControls)
       IF i >= Len(oCombo:aItems)
    if ( oDesigner:lReport )
-      AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != Nil, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
+      AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != NIL, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
    else
       AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
    endif
@@ -513,7 +513,7 @@ FUNCTION InspUpdCombo( n )
    oCombo:Refresh()
    */
    InspSetBrowse()
-Return Nil
+Return NIL
 
 STATIC FUNCTION ComboOnChg()
 
@@ -524,15 +524,15 @@ STATIC FUNCTION ComboOnChg()
    LOCAL aControls := IIf(oDesigner:lReport, oDlg:aControls[1]:aControls[1]:aControls, oDlg:aControls)
 
    oCombo:value := hwg_SendMessage(oCombo:handle, CB_GETCURSEL, 0, 0) + 1
-   IF oDlg != Nil
+   IF oDlg != NIL
       n := oCombo:value - 1
       oCtrl := GetCtrlSelected(oDlg)
       IF n == 0
-         IF oCtrl != Nil
+         IF oCtrl != NIL
             SetCtrlSelected(oDlg)
          ENDIF
       ELSEIF n > 0
-         IF oCtrl == Nil .OR. oCtrl:handle != aControls[n]:handle
+         IF oCtrl == NIL .OR. oCtrl:handle != aControls[n]:handle
             SetCtrlSelected(oDlg, aControls[n], n)
          ENDIF
       ENDIF
@@ -545,7 +545,7 @@ STATIC FUNCTION InspSetBrowse()
    LOCAL o
    LOCAL nRow := 1
 
-   IF oBrw1 != Nil
+   IF oBrw1 != NIL
           nRow:=oBrw1:rowPos
     ENDIF
    aProp := {}
@@ -573,7 +573,7 @@ STATIC FUNCTION InspSetBrowse()
    oBrw1:Refresh()
    oBrw2:Refresh()
 
-Return Nil
+Return NIL
 
 FUNCTION InspUpdBrowse()
 
@@ -585,16 +585,16 @@ FUNCTION InspUpdBrowse()
    PRIVATE value
    PRIVATE oCtrl
 
-   IF oCombo == Nil
-      Return Nil
+   IF oCombo == NIL
+      Return NIL
    ENDIF
 
    oCtrl := IIf(oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected))
-   IF oDesigner:oDlgInsp != Nil
+   IF oDesigner:oDlgInsp != NIL
       FOR i := 1 TO Len(aProp)
          value := IIf(oCombo:value == 1,oCtrl:oParent:aProp[i, 2], oCtrl:aProp[i, 2])
          IF !HB_IsObject(aProp[i, 2]) .AND. !HB_IsArray(aProp[i, 2]) ;
-               .AND. ( aProp[i, 2] == Nil .OR. !( aProp[i, 2] == value ) )
+               .AND. ( aProp[i, 2] == NIL .OR. !( aProp[i, 2] == value ) )
             aProp[i, 2] := value
             lChg := .T.
          ENDIF
@@ -608,7 +608,7 @@ FUNCTION InspUpdBrowse()
       ENDIF
    ENDIF
 
-Return Nil
+Return NIL
 
 FUNCTION InspUpdProp( cName, xValue )
 
@@ -620,7 +620,7 @@ FUNCTION InspUpdProp( cName, xValue )
       oBrw1:Refresh()
    ENDIF
 
-Return Nil
+Return NIL
 
 STATIC FUNCTION EditArray( arr )
 
@@ -630,7 +630,7 @@ STATIC FUNCTION EditArray( arr )
     LOCAL arrold := {}
     MEMVAR oDesigner
 
-   IF arr == Nil
+   IF arr == NIL
       arr := {}
    ENDIF
    IF Empty(arr)
@@ -647,7 +647,7 @@ STATIC FUNCTION EditArray( arr )
    oBrw:bcolorSel := hwg_VColor( "008000" )
    oBrw:lAppable := .T.
    oBrw:aArray := arr
-   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v!=Nil,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},"C", 100, 0,.T. ) )
+   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v!=NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},"C", 100, 0,.T. ) )
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
        ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)};
@@ -662,12 +662,12 @@ STATIC FUNCTION EditArray( arr )
 
    IF oDlg:lResult
       IF Len(arr) == 1 .AND. arr[1] == "....."
-         arr := Nil //{} NANDO POS
+         arr := NIL //{} NANDO POS
       ENDIF
       Return arr
    ENDIF
 
-Return Nil
+Return NIL
 
 // : LFB
 STATIC FUNCTION onclick_deleteitem(oBrw)
@@ -695,7 +695,7 @@ FUNCTION ObjInspector(oObject )
    LOCAL aClassMsgMtdo
    LOCAL aClassMsgProp
 
-   IF oObject = Nil
+   IF oObject = NIL
       oObject := HFormGen():oDlgSelected
    ENDIF
    //lData := .T.
@@ -827,19 +827,19 @@ STATIC FUNCTION resettodefault(oBrw1)
 
      cName := Lower(aProp[oBrw1:nCurrent, 1])
      j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
-     IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] = Nil
-       return Nil
+     IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] = NIL
+       return NIL
      ENDIF
      IF LTrim(oBrw1:aArray[oBrw1:nCurrent, 1]) = "Font"
         value := aProp[oBrw1:nCurrent, 2]
         value:name := ""
      ELSE
         value := aProp[oBrw1:nCurrent, 2]
-        //aProp[oBrw1:nCurrent, 2] := Nil //value
+        //aProp[oBrw1:nCurrent, 2] := NIL //value
      ENDIF
-     IF j != 0 .AND. oDesigner:aDataDef[j, 3] != Nil
+     IF j != 0 .AND. oDesigner:aDataDef[j, 3] != NIL
         EvalCode(oDesigner:aDataDef[j, 3])
-        IF oDesigner:aDataDef[j, 4] != Nil
+        IF oDesigner:aDataDef[j, 4] != NIL
            EvalCode(oDesigner:aDataDef[j, 4])
         ENDIF
      ENDIF

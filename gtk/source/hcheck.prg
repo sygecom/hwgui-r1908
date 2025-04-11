@@ -46,7 +46,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
 
    hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
    // ::oParent:AddEvent( BN_CLICKED,::id,{|o,id|__Valid(o:FindControl(id))} )
-   IF bGFocus != Nil
+   IF bGFocus != NIL
       hwg_SetSignal( ::handle,"enter",BN_SETFOCUS, 0, 0 )
       // ::oParent:AddEvent( BN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
    ENDIF
@@ -61,7 +61,7 @@ METHOD Activate CLASS HCheckButton
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Init() CLASS HCheckButton
    IF !::lInit
@@ -70,7 +70,7 @@ METHOD Init() CLASS HCheckButton
          hwg_CheckButton( ::handle,.T. )
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
@@ -81,7 +81,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
       __When( Self )
    ENDIF
 
-Return Nil
+Return NIL
 #else
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
@@ -93,29 +93,29 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
       __When( Self )
    ENDSWITCH
 
-Return Nil
+Return NIL
 #endif
 
 METHOD Refresh() CLASS HCheckButton
 Local var
 
-   IF ::bSetGet != Nil
+   IF ::bSetGet != NIL
        var := Eval(::bSetGet, , NIL)
        ::value := IIf(var == NIL, .F., var)
    ENDIF
 
    hwg_CheckButton( ::handle,::value )
-Return Nil
+Return NIL
 
 Static Function __Valid(oCtrl)
 Local res
 
    oCtrl:value := hwg_IsButtonChecked(oCtrl:handle)
 
-   IF oCtrl:bSetGet != Nil
+   IF oCtrl:bSetGet != NIL
       Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
    ENDIF
-   IF oCtrl:bLostFocus != Nil .AND. ;
+   IF oCtrl:bLostFocus != NIL .AND. ;
          HB_IsLogical( res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl) ) ;
 	 .AND. !res
       hwg_SetFocus( oCtrl:handle )
@@ -128,7 +128,7 @@ Local res
 
    oCtrl:Refresh()
 
-   IF oCtrl:bGetFocus != Nil 
+   IF oCtrl:bGetFocus != NIL 
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF HB_IsLogical(res) .AND. !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )

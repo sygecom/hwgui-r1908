@@ -21,4 +21,4 @@ Function Main
 
  oForm:ShowMain()
 
-Return Nil
+Return NIL

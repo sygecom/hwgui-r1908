@@ -56,7 +56,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    ::bChange := bChange
 
-//   If bChange != Nil 
+//   If bChange != NIL 
 //      ::oParent:AddEvent( MCN_SELECT, ::id, bChange, .T. ) 
 //      ::oParent:AddEvent( MCN_SELCHANGE, ::id, bChange, .T. ) 
 //   EndIf 
@@ -77,7 +77,7 @@ METHOD Activate CLASS HMonthCalendar
       ::Init()
    EndIf
 
-Return Nil
+Return NIL
 
 //--------------------------------------------------------------------------//
 
@@ -90,7 +90,7 @@ METHOD Init() CLASS HMonthCalendar
       EndIf
    EndIf
 
-Return Nil
+Return NIL
 
 //--------------------------------------------------------------------------//
 
@@ -101,7 +101,7 @@ METHOD SetValue(dValue) CLASS HMonthCalendar
       ::value := dValue
    EndIf
 
-Return Nil
+Return NIL
 
 //--------------------------------------------------------------------------//
 

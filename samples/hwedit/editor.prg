@@ -480,7 +480,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      if nvirtCode = 32 .or. nvirtCode = 13 .or. nvirtCode = 8
          hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
          oWindow := HMainWIndow():GetMdiActive():aControls
-         IF oWindow != Nil
+         IF oWindow != NIL
 
             aControls := oWindow
 
@@ -554,7 +554,7 @@ FUNCTION Pesquisa()
      readexit(.T.)
      ACTIVATE DIALOG pesq
      if pesq:lResult
-         IF oWindow != Nil
+         IF oWindow != NIL
              aControls := oWindow
              hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus(aControls[hWnd]:Handle)
@@ -625,7 +625,7 @@ FUNCTION Vai(oEdit)
      readexit(.T.)
      ACTIVATE DIALOG pesq
      if pesq:lResult
-         IF oWindow != Nil
+         IF oWindow != NIL
              pos_y := val(get01)
              aControls := oWindow
              hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
@@ -654,7 +654,7 @@ FUNCTION seleciona()
 
  hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
  oWindow := HMainWIndow():GetMdiActive():aControls
- IF oWindow != Nil
+ IF oWindow != NIL
     aControls := oWindow
     hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
     hwg_SetFocus(aControls[hWnd]:Handle )
@@ -688,7 +688,7 @@ FUNCTION Salvar_Projeto(oOpcao)
 
         FClose(nHandle)
 
-     IF oWindow != Nil
+     IF oWindow != NIL
         aControls := oWindow
         If Empty(vText) .or. oOpcao=2
             fName := hwg_SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
@@ -720,7 +720,7 @@ FUNCTION buscafunc(linha)
  if HMainWIndow():GetMdiActive() != NIL
      hWnd := Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
-     IF oWindow != Nil
+     IF oWindow != NIL
          pos_y := funcoes[linha]
          aControls := oWindow
          hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )

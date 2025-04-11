@@ -17,13 +17,13 @@ FUNCTION Main()
      FONT oFont
 
    oAgent := TOleAuto():New("Agent.Control.2")
-   IF oAgent == Nil .OR. oAgent:hObj == 0
+   IF oAgent == NIL .OR. oAgent:hObj == 0
       cText := "Ms Agent isn't installed !"
    ELSE
       oAgent:Connected := 1
       oAgent:Characters:Load("Default")
       oChar := oAgent:Characters("Default")
-      IF oChar == Nil .OR. oChar:hObj == 0
+      IF oChar == NIL .OR. oChar:hObj == 0
          cText := "No default character !"
       ELSE
          @ 280, 20 BUTTON "Speak!" SIZE 100, 30 ON CLICK {||SpeakIt(oEdit)}
@@ -38,7 +38,7 @@ FUNCTION Main()
 
    ACTIVATE WINDOW oMainWindow
 
-   IF oAgent != Nil .AND. oAgent:hObj != 0
+   IF oAgent != NIL .AND. oAgent:hObj != 0
       oAgent:Characters:UnLoad("Default")
       oAgent:End()
    ENDIF

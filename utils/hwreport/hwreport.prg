@@ -39,8 +39,8 @@ Memvar aItemTypes
 Function Main()
 Local oMainWindow, aPanel, oIcon := HIcon():AddResource("ICON_1")
 Public mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
-Public aPaintRep := Nil
-Public oPenBorder, oFontSmall, oFontStandard, lastFont := Nil
+Public aPaintRep := NIL
+Public oPenBorder, oFontSmall, oFontStandard, lastFont := NIL
 Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
 
    SET DECIMALS TO 4
@@ -112,7 +112,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
 
    oMainWindow:Activate()
 
-Return Nil
+Return NIL
 
 Function About
 Local aModDlg, oFont
@@ -125,7 +125,7 @@ Local aModDlg, oFont
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()
-Return Nil
+Return NIL
 
 Static Function NewReport( oMainWindow )
 Local oDlg
@@ -136,11 +136,11 @@ Local oDlg
 
    oDlg:Activate()
 
-Return Nil
+Return NIL
 
 Static Function EndNewrep( oMainWindow,oDlg )
 
-   aPaintRep := { 0, 0, 0, 0, 0,{},"","",.F., 0,Nil }
+   aPaintRep := { 0, 0, 0, 0, 0,{},"","",.F., 0,NIL }
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE
@@ -154,7 +154,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
    hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
 
    EndDialog()
-Return Nil
+Return NIL
 
 Static Function PaintMain( oWnd )
 Local pps, hDC, hWnd := oWnd:handle
@@ -164,7 +164,7 @@ Local i, j, aItem
 Local aCoors
 Local step, kolsteps, nsteps
 
-   IF aPaintRep == Nil
+   IF aPaintRep == NIL
       Return -1
    ENDIF
 
@@ -296,7 +296,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )
          hwg_Rectangle(hDC, x1, y1, x2, y2)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
-         IF aItem[ITEM_BITMAP] == Nil
+         IF aItem[ITEM_BITMAP] == NIL
             hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
          ELSE
             hwg_DrawBitmap( hDC, aItem[ITEM_BITMAP]:handle,SRCAND, x1, y1, x2-x1+1, y2-y1+1 )
@@ -308,7 +308,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2,DT_CENTER )
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 Static Function MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem, hWnd := oWnd:handle
@@ -449,14 +449,14 @@ Local aCoors := hwg_GetClientRect( hWnd )
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 Static Function MouseMove(wParam, xPos, yPos)
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2
 Local hWnd
 Local aItem, i, dx, dy
 
-   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    s_itemBorder := 0
@@ -468,7 +468,7 @@ Local aItem, i, dx, dy
       ENDIF
    ELSEIF s_itemPressed > 0
       IF hwg_IsCheckedMenuItem(,IDM_MOUSE2) .AND. Abs(xPos - s_mPos[1]) < 3 .AND. Abs(yPos - s_mPos[2]) < 3
-         Return Nil
+         Return NIL
       ENDIF
       aItem := aPaintRep[FORM_ITEMS,s_itemPressed]
       IF hwg_CheckBit( wParam, MK_LBUTTON )
@@ -586,12 +586,12 @@ Local aItem, i, dx, dy
          ENDIF
       NEXT
    ENDIF
-Return Nil
+Return NIL
 
 Static Function LButtonDown( xPos, yPos )
 Local i, aItem, res := .F.
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    IF s_nAddItem > 0
@@ -630,12 +630,12 @@ Local hWnd := Hwindow():GetMain():handle
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 Static Function LButtonUp( xPos, yPos )
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, aItem
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == Nil .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
       Return .T.
    ENDIF
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
@@ -643,12 +643,12 @@ Local hWnd := Hwindow():GetMain():handle
    IF s_nAddItem > 0 .AND. xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
       AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem,"",xPos-x1, ;
            yPos-y1+aPaintRep[FORM_Y], s_aInitialSize[s_nAddItem, 1], ;
-           s_aInitialSize[s_nAddItem, 2], 0,Nil,Nil, 0, 0,Nil,STATE_SELECTED })
+           s_aInitialSize[s_nAddItem, 2], 0,NIL,NIL, 0, 0,NIL,STATE_SELECTED })
       aItem := Atail( aPaintRep[FORM_ITEMS] )
       IF s_nAddItem == TYPE_HLINE .OR. s_nAddItem == TYPE_VLINE .OR. s_nAddItem == TYPE_BOX
          aItem[ITEM_PEN] := HPen():Add()
       ELSEIF s_nAddItem == TYPE_TEXT
-         aItem[ITEM_FONT] := IIf(lastFont == Nil, HFont():Add("Arial", 0, -13), lastFont)
+         aItem[ITEM_FONT] := IIf(lastFont == NIL, HFont():Add("Arial", 0, -13), lastFont)
       ELSEIF s_nAddItem == TYPE_MARKER
          aItem[ITEM_X1] := -s_aInitialSize[s_nAddItem, 1]
          aItem[ITEM_CAPTION] := s_aMarkers[s_nMarkerType]
@@ -678,7 +678,7 @@ Local hWnd := Hwindow():GetMain():handle
       aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]==y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
    ENDIF
    s_itemPressed := s_itemSized := s_itemBorder := s_nAddItem := 0
-Return Nil
+Return NIL
 
 Static Function DeleteItem()
 Local hWnd := Hwindow():GetMain():handle
@@ -686,7 +686,7 @@ Local i, aItem
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED
          aItem := aPaintRep[FORM_ITEMS,i]
-         IF aItem[ITEM_PEN] != Nil
+         IF aItem[ITEM_PEN] != NIL
             aItem[ITEM_PEN]:Release()
          ENDIF
          hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
@@ -711,11 +711,11 @@ Local i, aItem
          EXIT
       ENDIF
    NEXT
-Return Nil
+Return NIL
 
 Static Function DeselectAll( iSelected )
 Local i, iPrevSelected := 0
-   iSelected := IIf(iSelected == Nil, 0, iSelected)
+   iSelected := IIf(iSelected == NIL, 0, iSelected)
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_SELECTED .OR. ;
            aPaintRep[FORM_ITEMS,i,ITEM_STATE] == STATE_PRESSED
@@ -731,4 +731,4 @@ Static Function WriteItemInfo( aItem )
    hwg_WriteStatus( Hwindow():GetMain(), 1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
-Return Nil
+Return NIL

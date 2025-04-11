@@ -28,7 +28,7 @@ METHOD New( vari,bSetGet ) CLASS HRadioGroup
    ::oGroupCurrent := Self
    ::aButtons := {}
 
-   IF vari != Nil
+   IF vari != NIL
       IF HB_IsNumeric(vari)
          ::value := vari
       ENDIF
@@ -40,7 +40,7 @@ Return Self
 METHOD EndGroup( nSelected )  CLASS HRadioGroup
 Local nLen
 
-   IF ::oGroupCurrent != Nil .AND. ( nLen:=Len(::oGroupCurrent:aButtons) ) > 0
+   IF ::oGroupCurrent != NIL .AND. ( nLen:=Len(::oGroupCurrent:aButtons) ) > 0
 
       nSelected := IIf(nSelected != NIL .AND. nSelected <= nLen .AND. nSelected > 0, ;
                        nSelected, ::oGroupCurrent:value )
@@ -48,8 +48,8 @@ Local nLen
          hwg_CheckButton( ::oGroupCurrent:aButtons[nSelected]:handle,.T. )
       ENDIF
    ENDIF
-   ::oGroupCurrent := Nil
-Return Nil
+   ::oGroupCurrent := NIL
+Return NIL
 
 METHOD SetValue(nValue)  CLASS HRadioGroup
 Local nLen
@@ -57,7 +57,7 @@ Local nLen
    IF ( nLen:=Len(::aButtons) ) > 0 .AND. nValue > 0 .AND. nValue <= nLen
       hwg_CheckButton( ::aButtons[nValue]:handle,.T. )
    ENDIF
-Return Nil
+Return NIL
 
 
 CLASS HRadioButton INHERIT HControl
@@ -93,11 +93,11 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ::tooltip := ctoolt
    ::tcolor  := tcolor
    /*
-   IF tColor != Nil .AND. bColor == Nil
+   IF tColor != NIL .AND. bColor == NIL
       bColor := hwg_GetSysColor( COLOR_3DFACE )
    ENDIF
    ::bcolor  := bcolor
-   IF bColor != Nil
+   IF bColor != NIL
       ::brush := HBrush():Add(bcolor)
    ENDIF
    */
@@ -105,12 +105,12 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ::Activate()
    ::oParent:AddControl( Self )
    ::bLostFocus := bClick
-   IF bClick != Nil .AND. ( ::oGroup == Nil .OR. ::oGroup:bSetGet == Nil )
+   IF bClick != NIL .AND. ( ::oGroup == NIL .OR. ::oGroup:bSetGet == NIL )
       hwg_SetSignal( ::handle,"released",WM_LBUTTONUP, 0, 0 )
    ENDIF
-   IF ::oGroup != Nil
+   IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
-      IF ::oGroup:bSetGet != Nil
+      IF ::oGroup:bSetGet != NIL
          hwg_SetSignal( ::handle,"released",WM_LBUTTONUP, 0, 0 )	 
       ENDIF
    ENDIF
@@ -127,27 +127,27 @@ Local groupHandle := ::oGroup:handle
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
 
    IF msg == WM_LBUTTONUP
-      IF ::oGroup:bSetGet == Nil
+      IF ::oGroup:bSetGet == NIL
          Eval(::bLostFocus, ::oGroup:value, Self)
       ELSE
          __Valid(Self)
       ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 
 Static Function __Valid(oCtrl)
 
    oCtrl:oGroup:value := AScan(oCtrl:oGroup:aButtons, {|o|o:id == oCtrl:id})
-   IF oCtrl:oGroup:bSetGet != Nil
+   IF oCtrl:oGroup:bSetGet != NIL
       Eval(oCtrl:oGroup:bSetGet, oCtrl:oGroup:value)
    ENDIF
-   IF oCtrl:bLostFocus != Nil
+   IF oCtrl:bLostFocus != NIL
       Eval(oCtrl:bLostFocus, oCtrl:oGroup:value, oCtrl)
    ENDIF
 

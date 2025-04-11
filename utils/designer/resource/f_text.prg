@@ -79,7 +79,7 @@ ENDFUNC
             ENDIF
          ELSE           
             itemName := CnvCtrlName(hwg_NextItem(stroka, .T.))
-            IF itemName == Nil
+            IF itemName == NIL
                hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka,.T. ) )
                Return
             ENDIF
@@ -123,7 +123,7 @@ Return
        + ";" + LTrim(Str(oForm:oDlg:style))    &&
        + ";" + IIf(oForm:lGet, "T", "F")           &&
        + ";" + IIf(oForm:oDlg:lClipper, "T", "F")  &&
-       + ";" + IIf(oForm:oDlg:oFont != Nil,        &&
+       + ";" + IIf(oForm:oDlg:oFont != NIL,        &&
        oForm:oDlg:oFont:name + "," + LTrim(Str(oForm:oDlg:oFont:width)) &&
        + "," + LTrim(Str(oForm:oDlg:oFont:height)) + "," + LTrim(Str(oForm:oDlg:oFont:weight)) &&
        + "," + LTrim(Str(oForm:oDlg:oFont:charset)) + "," + LTrim(Str(oForm:oDlg:oFont:italic)) &&
@@ -140,14 +140,14 @@ Return
           + ";" + LTrim(Str(oCtrl:nWidth))   &&
           + ";" + LTrim(Str(oCtrl:nHeight)) &&
           + ";" + LTrim(Str(oCtrl:style))    &&
-          + ";" + IIf(oCtrl:oFont != Nil,        &&
+          + ";" + IIf(oCtrl:oFont != NIL,        &&
           oCtrl:oFont:name + "," + Ltrim(Str(oCtrl:oFont:width)) &&
           + "," + LTrim(Str(oCtrl:oFont:height)) + "," + LTrim(Str(oCtrl:oFont:weight)) &&
           + "," + LTrim(Str(oCtrl:oFont:charset)) + "," + LTrim(Str(oCtrl:oFont:italic)) &&
           + "," + LTrim(Str(oCtrl:oFont:underline)) + "," + LTrim(Str(oCtrl:oFont:strikeout)) &&
           ,"")  &&
-          + ";" + IIf(oCtrl:tcolor != Nil .AND. oCtrl:tcolor != 0, LTrim(Str(oCtrl:tcolor)), "") &&
-          + ";" + IIf(oCtrl:bcolor != Nil, Ltrim(Str(oCtrl:bcolor)), "")
+          + ";" + IIf(oCtrl:tcolor != NIL .AND. oCtrl:tcolor != 0, LTrim(Str(oCtrl:tcolor)), "") &&
+          + ";" + IIf(oCtrl:bcolor != NIL, Ltrim(Str(oCtrl:bcolor)), "")
       FWrite(han, stroka + _Chr(10))
       i++
    ENDDO

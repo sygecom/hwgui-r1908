@@ -33,19 +33,19 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
 
    ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,bInit,bSize,ctoolt )
 
-   IF Image != Nil
-      IF lRes == Nil ; lRes := .F. ; ENDIF
+   IF Image != NIL
+      IF lRes == NIL ; lRes := .F. ; ENDIF
       ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),     ;
                       HBitmap():AddResource(Image), ;
                       IIf(HB_IsChar(Image),     ;
                       HBitmap():AddFile(Image), Image))
       IF !Empty(::oImage)
-         IF nWidth == Nil .OR. nHeight == Nil
+         IF nWidth == NIL .OR. nHeight == NIL
             ::nWidth  := ::oImage:nWidth
             ::nHeight := ::oImage:nHeight
          ENDIF
       ELSE
-         Return Nil
+         Return NIL
       ENDIF
    ENDIF
    ::Activate()
@@ -57,7 +57,7 @@ METHOD INIT CLASS HSayBmp
       ::Super:Init()
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSayBmp
    IF msg == WM_PAINT
@@ -68,8 +68,8 @@ Return 0
 METHOD Paint() CLASS HSayBmp
 Local hDC := hwg_GetDC(::handle)
 
-   IF ::oImage != Nil
-      IF ::nZoom == Nil
+   IF ::oImage != NIL
+      IF ::nZoom == NIL
          hwg_DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
                ::nOffsetV, ::nWidth, ::nHeight )
       ELSE
@@ -79,17 +79,17 @@ Local hDC := hwg_GetDC(::handle)
    ENDIF
    hwg_releaseDC(::handle, hDC)
 
-Return Nil
+Return NIL
 
 METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
 
-   IF ::oImage != Nil
+   IF ::oImage != NIL
       ::oImage:Release()
    ENDIF
-   IF lRes == Nil ; lRes := .F. ; ENDIF
+   IF lRes == NIL ; lRes := .F. ; ENDIF
    ::oImage := IIf(lRes .OR. HB_IsNumeric(Image),     ;
                    HBitmap():AddResource(Image), ;
                    IIf(HB_IsChar(Image),     ;
                    HBitmap():AddFile(Image), Image))
 
-Return Nil
+Return NIL

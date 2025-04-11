@@ -48,7 +48,7 @@ LOCAL af, oBrw
    oBrw:ofont      := oBrwFont
 
    oModDlg:Activate()
-Return Nil
+Return NIL
 
 Static Function SetField(oBrw)
 Local hDlg := hwg_GetModalHandle(), i
@@ -58,7 +58,7 @@ Local hDlg := hwg_GetModalHandle(), i
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT3, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 3])) )
    hwg_SetDlgItemText( hDlg, IDC_EDIT4, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 4])) )
-Return Nil
+Return NIL
 
 Static Function ModiStru( nOper )
 Local oDlg := hwg_GetModalDlg(), hDlg := oDlg:handle
@@ -69,12 +69,12 @@ Local cName, cType, nLen, nDec := 0
       cName := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 10 )
       IF Empty(cName)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-         Return Nil
+         Return NIL
       ENDIF
       cType := Left(hwg_GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1)
       IF Empty(cType)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
-         Return Nil
+         Return NIL
       ENDIF
       IF cType == "D" 
          nLen := 8
@@ -86,7 +86,7 @@ Local cName, cType, nLen, nDec := 0
          nLen  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
          IF nLen == 0
             hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
-            Return Nil
+            Return NIL
          ENDIF
          IF cType == "N" 
             nDec  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
@@ -98,7 +98,7 @@ Local cName, cType, nLen, nDec := 0
          AAdd(oBrowse:aArray, {cName, cType, nLen, nDec})
          oBrowse:nRecords ++
       ELSEIF nOper == 2
-         AAdd(oBrowse:aArray, Nil)
+         AAdd(oBrowse:aArray, NIL)
          Ains( oBrowse:aArray, oBrowse:nCurrent )
          oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
          oBrowse:nRecords ++
@@ -109,7 +109,7 @@ Local cName, cType, nLen, nDec := 0
       oBrowse:nRecords --
    ENDIF
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
-Return Nil
+Return NIL
 
 Static Function EndStru( oDlg,lNew )
 Local fname, alsname
@@ -121,7 +121,7 @@ Local oPBar, nSch := 0
 
    IF lNew
       IF Empty(fname := hwg_SaveFile("*.dbf","xBase files( *.dbf )", "*.dbf", mypath))
-         Return Nil
+         Return NIL
       ENDIF
       mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       DBCreate(fname, oBrowse:aArray)
@@ -151,11 +151,11 @@ Local oPBar, nSch := 0
          IF j > 0
             C2[i] = j
             IF B2[i] = A2[j] .AND. B3[i] = A3[j] .AND. B4[i] = A4[j]
-               IF C1[i] = Nil
+               IF C1[i] = NIL
                   C1[i] := &( "{|param|param}" )
                ENDIF
             ELSE
-               IF C1[i] = Nil
+               IF C1[i] = NIL
                   DO CASE
                   CASE A2[j] = "C" .AND. B2[i] = "N"
                      C1[i] := &( "{|param|VAL(param)}" )
@@ -179,7 +179,7 @@ Local oPBar, nSch := 0
          SELECT 20
          APPEND BLANK
          FOR i := 1 TO kolf
-            IF C1[i] != Nil
+            IF C1[i] != NIL
                FIELDPUT( i, Eval(C1[i], (alsname)->(FIELDGET(C2[i]))))
             ENDIF
          NEXT
@@ -203,7 +203,7 @@ Local oPBar, nSch := 0
       USE (fi1)
 
       oWindow := HMainWindow():GetMdiActive()
-      IF oWindow != Nil
+      IF oWindow != NIL
          aControls := oWindow:aControls
          IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
             oBrowse := aControls[i]
@@ -212,5 +212,5 @@ Local oPBar, nSch := 0
       ENDIF
    ENDIF
    EndDialog( hwg_GetModalHandle() )
-Return Nil
+Return NIL
 

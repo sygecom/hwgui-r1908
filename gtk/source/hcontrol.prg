@@ -95,23 +95,23 @@ METHOD AddName(cName) CLASS HControl
 	    ::oParent: & ( cName ) := Self
    ENDIF	    
    
-RETURN Nil
+RETURN NIL
 
 METHOD INIT CLASS HControl
 Local o
 
    IF !::lInit
       hwg_AddToolTip( ::oParent:handle, ::handle, ::tooltip )
-      IF ::oFont != Nil
+      IF ::oFont != NIL
          hwg_SetCtrlFont( ::handle, ::oFont:handle )
-      ELSEIF ::oParent:oFont != Nil
+      ELSEIF ::oParent:oFont != NIL
          hwg_SetCtrlFont( ::handle, ::oParent:oFont:handle )
       ENDIF
       IF HB_IsBlock(::bInit)
          Eval(::bInit, Self)
       ENDIF
       o := ::oParent
-      DO WHILE o != Nil .AND. !__ObjHasMsg( o,"LACTIVATED")
+      DO WHILE o != NIL .AND. !__ObjHasMsg( o,"LACTIVATED")
          o := o:oParent
       ENDDO
       if ::tcolor != NIL          
@@ -119,52 +119,52 @@ Local o
       endif	    
       
       
-      IF o != Nil .AND. o:lActivated
+      IF o != NIL .AND. o:lActivated
          hwg_ShowAll( o:handle )
       ENDIF
       ::lInit := .T.
    ENDIF
-RETURN Nil
+RETURN NIL
 
 METHOD SetColor( tcolor,bcolor,lRepaint ) CLASS HControl
 
-   IF tcolor != Nil
+   IF tcolor != NIL
       ::tcolor  := tcolor
-      IF bColor == Nil .AND. ::bColor == Nil
+      IF bColor == NIL .AND. ::bColor == NIL
          // bColor := hwg_GetSysColor( COLOR_3DFACE )
       ENDIF
    ENDIF
 
-   IF bcolor != Nil
+   IF bcolor != NIL
       ::bcolor  := bcolor
-      IF ::brush != Nil
+      IF ::brush != NIL
          ::brush:Release()
       ENDIF
       ::brush := HBrush():Add(bcolor)
    ENDIF
 
-   IF lRepaint != Nil .AND. lRepaint
+   IF lRepaint != NIL .AND. lRepaint
       hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
    ENDIF
 
-Return Nil
+Return NIL
 
 METHOD Move(x1, y1, width, height, lMoveParent)  CLASS HControl
 Local lMove := .F., lSize := .F.
 
-   IF x1 != Nil .AND. x1 != ::nLeft
+   IF x1 != NIL .AND. x1 != ::nLeft
       ::nLeft := x1
       lMove := .T.
    ENDIF   
-   IF y1 != Nil .AND. y1 != ::nTop
+   IF y1 != NIL .AND. y1 != ::nTop
       ::nTop := y1
       lMove := .T.
    ENDIF
-   IF width != Nil .AND. width != ::nWidth
+   IF width != NIL .AND. width != ::nWidth
       ::nWidth := width
       lSize := .T.
    ENDIF   
-   IF height != Nil .AND. height != ::nHeight
+   IF height != NIL .AND. height != ::nHeight
       ::nHeight := height
       lSize := .T.
    ENDIF
@@ -172,16 +172,16 @@ Local lMove := .F., lSize := .F.
       hwg_MoveWidget( ::handle, IIf(lMove, ::nLeft, NIL), IIf(lMove, ::nTop, NIL), ;
           IIf(lSize, ::nWidth, NIL), IIf(lSize, ::nHeight, NIL), lMoveParent )
    ENDIF
-Return Nil
+Return NIL
 
 METHOD End() CLASS HControl
 
    ::Super:End()
-   IF ::tooltip != Nil
+   IF ::tooltip != NIL
       // hwg_DelToolTip( ::oParent:handle,::handle )
-      ::tooltip := Nil
+      ::tooltip := NIL
    ENDIF
-Return Nil
+Return NIL
 
 METHOD onAnchor( x, y, w, h ) CLASS HControl
    LOCAL nAnchor, nXincRelative, nYincRelative, nXincAbsolute, nYincAbsolute
@@ -280,7 +280,7 @@ METHOD onAnchor( x, y, w, h ) CLASS HControl
    ::nHeight := h1
    hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
 
-   RETURN Nil
+   RETURN NIL
 
 
 
@@ -320,7 +320,7 @@ Local aCoors
 //         ::oParent:aOffset[4] := aCoors[4] - aCoors[2]
 //      ENDIF
    ENDIF
-Return Nil
+Return NIL
 
 METHOD Init CLASS HStatus
    IF !::lInit
@@ -348,7 +348,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
                   bSize,bPaint,ctoolt,tcolor,bcolor )
 
    ::title   := cCaption
-   IF lTransp != Nil .AND. lTransp
+   IF lTransp != NIL .AND. lTransp
       ::extStyle += WS_EX_TRANSPARENT
    ENDIF
 
@@ -362,7 +362,7 @@ METHOD Activate CLASS HStatic
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title)
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 //- HButton
 
@@ -393,7 +393,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ELSEIF ::id == IDCANCEL
       bClick := {||::oParent:Close()}
    ENDIF
-   IF bClick != Nil
+   IF bClick != NIL
       // ::oParent:AddEvent( 0,::id,bClick )
       ::bClick := bClick
       hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
@@ -408,13 +408,13 @@ METHOD Activate CLASS HButton
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam )  CLASS HButton
 
    IF msg == WM_LBUTTONUP
-      IF ::bClick != Nil
+      IF ::bClick != NIL
          Eval(::bClick, Self)
       ENDIF
    ENDIF
@@ -425,7 +425,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
 
    SWITCH msg
    CASE WM_LBUTTONUP
-      IF ::bClick != Nil
+      IF ::bClick != NIL
          Eval(::bClick, Self)
       ENDIF
    ENDSWITCH
@@ -469,12 +469,12 @@ METHOD Activate CLASS HButtonEX
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hIcon) 
       else
             ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,NIL) 
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,NIL)
       endif		  
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 //- HGroup
 
@@ -505,7 +505,7 @@ METHOD Activate CLASS HGroup
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::Init()
    ENDIF
-Return Nil
+Return NIL
 
 // hline
 
@@ -544,4 +544,4 @@ METHOD Activate CLASS hline
                                  ::nWidth,::nHeight )
       ::Init()
    ENDIF
-Return Nil
+Return NIL

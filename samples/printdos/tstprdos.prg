@@ -80,9 +80,9 @@ RETURN NIL
 
 FUNCTION TestDosClass(oTest)
 
-If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
+If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest), "PrintDos Class Demo")
 
-   oPrint := Printdos():New(oTest)   //oTest=Nil LPT1
+   oPrint := Printdos():New(oTest)   //oTest=NIL LPT1
 
    oPrint:Say(0,  1,  "LINE 0 COL 1")
    oPrint:Say(10, 11, "LINE 10 COL 11")
@@ -116,7 +116,7 @@ FUNCTION TestDosClipper(oTest)
 
    LOCAL oPrinter
 
-If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
+If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == NIL, "LPT1", oTest), "PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
 
@@ -171,7 +171,7 @@ FUNCTION TestPrinterFile(oTest)
 
 If hwg_MsgYesNo("Printing File " + oTest)
 
-   oPrint := Printdos():New()   //oTest=Nil LPT1
+   oPrint := Printdos():New()   //oTest=NIL LPT1
    oPrint:PrinterFile(oTest)
    oPrint:End()
 
@@ -268,7 +268,7 @@ FUNCTION DeskJet(oTest)
 
    LOCAL oPrinter
 
-If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == Nil, "LPT1", oTest), "PrintDos Class Demo")
+If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == NIL, "LPT1", oTest), "PrintDos Class Demo")
 
    SET PRINTER TO oTest OF oPrinter
    oPrinter:oPrintStyle := 3

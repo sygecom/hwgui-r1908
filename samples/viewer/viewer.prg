@@ -37,7 +37,7 @@ FUNCTION Main()
 
 #ifdef __FREEIMAGE__
    IF !FI_Init()
-      Return Nil
+      Return NIL
    ENDIF
 #endif
 
@@ -89,9 +89,9 @@ FUNCTION Main()
         FONT oFont BACKCOLOR 12507070
 
 #ifdef __FREEIMAGE__
-   @ 0, oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   @ 0, oToolBar:nHeight IMAGE oSayMain SHOW NIL SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #else
-   @ 0, oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   @ 0, oToolBar:nHeight BITMAP oSayMain SHOW NIL SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #endif
 
    aScreen := GetWorkareaRect()
@@ -210,7 +210,7 @@ STATIC FUNCTION FileOpen(oWnd)
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
       ENDIF
       /*
-      IF oImage != Nil
+      IF oImage != NIL
          oImage:Release()
       ENDIF
       */
@@ -269,7 +269,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    LOCAL stepV
    LOCAL stepH
 
-   IF oImage == Nil
+   IF oImage == NIL
       RETURN NIL
    ENDIF
    aCoors := hwg_GetClientRect(oWnd:handle)
@@ -334,7 +334,7 @@ STATIC FUNCTION PaintWindow(oWnd)
    LOCAL nOffsV
    LOCAL nOffsH
 
-   IF oImage == Nil
+   IF oImage == NIL
       RETURN -1
    ENDIF
 
@@ -363,7 +363,7 @@ RETURN 0
 
 STATIC FUNCTION ImageInfo()
 
-   IF oImage == Nil
+   IF oImage == NIL
       RETURN NIL
    ENDIF
 
