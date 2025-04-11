@@ -460,10 +460,10 @@ STATIC FUNCTION EditColors()
    @ 170, 110 GROUPBOX "" SIZE 250, 75
    @ 180, 127 SAY "Text color" SIZE 100, 24
    @ 280, 125 SAY oSayT CAPTION "" SIZE 24, 24
-   @ 305, 127 BUTTON "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][1],.F.))!=NIL,(aSchemes[nScheme,nType][1] := temp,UpdSample()),.F.)}
+   @ 305, 127 BUTTON "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][1],.F.)) != NIL,(aSchemes[nScheme,nType][1] := temp,UpdSample()),.F.)}
    @ 180, 152 SAY "Background" SIZE 100, 24
    @ 280, 150 SAY oSayB CAPTION "" SIZE 24, 24
-   @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.))!=NIL,(aSchemes[nScheme,nType][2] := temp,UpdSample()),.F.)}
+   @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.)) != NIL,(aSchemes[nScheme,nType][2] := temp,UpdSample()),.F.)}
    @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := hwg_IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.T.}
    @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := hwg_IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.T.}
 

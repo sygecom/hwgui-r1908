@@ -139,9 +139,9 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
             MENUITEM "&New "+IIf(!oDesigner:lReport,"Form","Report")  ACTION HFormGen():New()
             MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():Open()
             SEPARATOR
-            MENUITEM "&Save "+IIf(!oDesigner:lReport,"Form","Report")   ACTION IIf(HFormGen():oDlgSelected!=NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
-            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected!=NIL,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_MsgStop("No Form in use!"))
-            MENUITEM "&Close "+IIf(!oDesigner:lReport,"Form","Report")  ACTION IIf(HFormGen():oDlgSelected!=NIL,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save "+IIf(!oDesigner:lReport,"Form","Report")   ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_MsgStop("No Form in use!"))
+            MENUITEM "&Close "+IIf(!oDesigner:lReport,"Form","Report")  ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
             If !lOmmitMenuFile
                MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():OpenR()
@@ -164,7 +164,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM If(!lOmmitMenuFile,"&Exit","&Close Designer") ACTION oDesigner:oMainWnd:Close()
       ENDMENU
       MENU TITLE "&Edit"
-         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
+         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
          MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
       ENDMENU
       MENU TITLE "&View"
@@ -212,7 +212,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       @ 55, 6 LINE LENGTH 18 VERTICAL
 
       @ 60, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||IIf(HFormGen():oDlgSelected!=NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!"))} ;
+          ON CLICK {||IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!"))} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "BMP_SAVE" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Save Form"
@@ -285,7 +285,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    BuildSet( oTab )
 
    CONTEXT MENU oDesigner:oCtrlMenu
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
       SEPARATOR
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
@@ -320,7 +320,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
       MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
       SEPARATOR
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd!=NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
       MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )

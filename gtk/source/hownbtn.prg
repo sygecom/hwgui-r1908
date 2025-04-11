@@ -67,7 +67,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
    ::widtht  := widtht
    ::heightt := heightt
 
-   if lEnabled!=NIL
+   if lEnabled != NIL
       ::lEnabled:=lEnabled
    endif
    IF bmp != NIL
@@ -164,7 +164,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       y1 := IIf(::yb != NIL .AND. ::yb != 0, ::yb, ;
                  Round((aCoors[4] - aCoors[2] - ::heightb) / 2, 0))
       if ::lEnabled
-         if ::oBitmap!=NIL
+         if ::oBitmap != NIL
             ::bitmap:handle:=::oBitmap
             ::oBitmap:=NIL
          EndIf

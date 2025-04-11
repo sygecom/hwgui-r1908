@@ -89,7 +89,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ::lMultiLine := .T.
    ENDIF
 
-   IF !Empty(cPicture) .or. cPicture==NIL .And. lMaxLength !=NIL .or. !Empty(lMaxLength)
+   IF !Empty(cPicture) .or. cPicture==NIL .And. lMaxLength != NIL .or. !Empty(lMaxLength)
       ::lMaxLength:= lMaxLength
    ENDIF
 /*   IF ::lMaxLength != NIL .and. !Empty(::lMaxLength) 

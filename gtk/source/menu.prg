@@ -238,7 +238,7 @@ Local aMenu, i, oBmp, nFlag
    endif
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
-   IF lBitmap!=NIL .or. !Empty(lBitmap)
+   IF lBitmap != NIL .or. !Empty(lBitmap)
       if lResource==NIL ;lResource:=.F.; Endif         
       if !lResource 
          oBmp:=HBitmap():AddFile(lBitmap)
