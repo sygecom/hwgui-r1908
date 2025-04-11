@@ -1,7 +1,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main ()
+FUNCTION Main ()
 
    Local oWnd
 

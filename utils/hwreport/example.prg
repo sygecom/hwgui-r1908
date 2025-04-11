@@ -12,7 +12,7 @@
 
 #define IDCW_PANEL   2001
 
-Function Main()
+FUNCTION Main()
 Local oMainWindow, oPanel, oFont
 Local hDCwindow
 PRIVATE aTermMetr := { 800 }
@@ -46,13 +46,13 @@ PRIVATE aTermMetr := { 800 }
 
 RETURN NIL
 
-STATIC Function Print1
+STATIC FUNCTION Print1
    IF hwg_OpenReport( "example.rpt", "MyReport" )
       hwg_PrintReport()
    ENDIF
 RETURN NIL
 
-STATIC Function Print2
+STATIC FUNCTION Print2
    MyReport()
    hwg_PrintReport()
 RETURN NIL

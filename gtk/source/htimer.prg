@@ -96,7 +96,7 @@ METHOD onAction()
 RETURN NIL
 
 
-Function hwg_TimerProc(hWnd, idTimer, Time)
+FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
    LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
    HB_SYMBOL_UNUSED(hWnd)

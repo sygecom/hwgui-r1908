@@ -17,7 +17,7 @@
 STATIC s_aPenStyles := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
 STATIC s_aVariables := { "Static", "Variable" }
 memvar apaintrep, mypath
-Function LButtonDbl( xPos, yPos )
+FUNCTION LButtonDbl( xPos, yPos )
 Local i, aItem
 
    FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
@@ -45,7 +45,7 @@ Local i, aItem
    NEXT
 RETURN NIL
 
-STATIC Function StaticDlg( aItem )
+STATIC FUNCTION StaticDlg( aItem )
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {|| InitStatic(aItem) }
@@ -57,7 +57,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitStatic(aItem)
+STATIC FUNCTION InitStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oFont := aItem[ITEM_FONT]
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
@@ -71,7 +71,7 @@ Local oFont := aItem[ITEM_FONT]
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
 RETURN .T.
 
-STATIC Function EndStatic(aItem)
+STATIC FUNCTION EndStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 
    aItem[ITEM_CAPTION] := hwg_GetEditText( hDlg, IDC_EDIT1 )
@@ -83,7 +83,7 @@ Local hDlg := hwg_GetModalHandle()
    EndDialog( hDlg )
 RETURN .T.
 
-STATIC Function SetItemFont( aItem )
+STATIC FUNCTION SetItemFont( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local oFont := HFont():Select()
    IF oFont != NIL
@@ -92,7 +92,7 @@ Local oFont := HFont():Select()
    ENDIF
 RETURN .T.
 
-STATIC Function LineDlg( aItem )
+STATIC FUNCTION LineDlg( aItem )
 Local aModDlg
 Local oPen := aItem[ITEM_PEN]
 
@@ -104,7 +104,7 @@ Local oPen := aItem[ITEM_PEN]
 
 RETURN NIL
 
-STATIC Function InitLine(aItem)
+STATIC FUNCTION InitLine(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oPen := aItem[ITEM_PEN]
    // SetComboBox( hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1 )
@@ -115,7 +115,7 @@ Local oPen := aItem[ITEM_PEN]
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width, 1) )
 RETURN .T.
 
-STATIC Function EndLine(aItem)
+STATIC FUNCTION EndLine(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local nWidth := Val( hwg_GetEditText( hDlg, IDC_EDIT1 ) )
 Local cType := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
@@ -129,7 +129,7 @@ Local oPen := aItem[ITEM_PEN]
    EndDialog( hDlg )
 RETURN .T.
 
-Function BitmapDlg( aItem )
+FUNCTION BitmapDlg( aItem )
 Local aModDlg, res := .T.
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem) }
@@ -142,7 +142,7 @@ Local aModDlg, res := .T.
 
 RETURN res
 
-STATIC Function OpenBmp( aItem,fname )
+STATIC FUNCTION OpenBmp( aItem,fname )
 Local hDlg := hwg_GetModalHandle()
    Local aBmpSize
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
@@ -160,7 +160,7 @@ Local hDlg := hwg_GetModalHandle()
    ENDIF
 RETURN NIL
 
-STATIC Function UpdateProcent( aItem )
+STATIC FUNCTION UpdateProcent( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize
@@ -170,7 +170,7 @@ Local aBmpSize
    ENDIF
 RETURN NIL
 
-STATIC Function InitBitmap( aItem )
+STATIC FUNCTION InitBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
    hUp := hwg_CreateUpDownControl( hDlg, 120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0,hwg_GetDlgItem(hDlg,IDC_EDIT3), 500, 1, 100 )
@@ -183,7 +183,7 @@ Local aBmpSize, hUp
    ENDIF
 RETURN .T.
 
-STATIC Function EndBitmap( aItem )
+STATIC FUNCTION EndBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
 Local aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
@@ -194,7 +194,7 @@ Local aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
    EndDialog( hDlg )
 RETURN .T.
 
-Function MarkLDlg( aItem )
+FUNCTION MarkLDlg( aItem )
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem) }
@@ -205,7 +205,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitMarkL( aItem )
+STATIC FUNCTION InitMarkL( aItem )
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Script:" )
    IF HB_IsChar(aItem[ITEM_SCRIPT])
@@ -213,14 +213,14 @@ Local hDlg := hwg_GetModalHandle()
    ENDIF
 RETURN .T.
 
-STATIC Function EndMarkL( aItem )
+STATIC FUNCTION EndMarkL( aItem )
 Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_SCRIPT] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 RETURN .T.
 
-Function MarkFDlg( aItem )
+FUNCTION MarkFDlg( aItem )
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem) }
@@ -231,20 +231,20 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitMarkF(aItem)
+STATIC FUNCTION InitMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
       Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
 RETURN .T.
 
-STATIC Function EndMarkF(aItem)
+STATIC FUNCTION EndMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_ALIGN] := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), 0, 1)
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
 RETURN .T.
 
-Function FormOptions()
+FUNCTION FormOptions()
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt() }
@@ -255,7 +255,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitFOpt()
+STATIC FUNCTION InitFOpt()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Variables:" )
    IF HB_IsChar(aPaintRep[FORM_VARS])
@@ -263,7 +263,7 @@ Local hDlg := hwg_GetModalHandle()
    ENDIF
 RETURN .T.
 
-STATIC Function EndFOpt( aItem )
+STATIC FUNCTION EndFOpt( aItem )
 Local hDlg := hwg_GetModalHandle()
    aPaintRep[FORM_VARS] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.

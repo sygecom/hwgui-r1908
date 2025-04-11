@@ -242,7 +242,7 @@ RETURN Iif(Len(::aWindows) > 0,              ;
 METHOD GetMdiActive() CLASS HWindow 
 RETURN ::FindWindow ( hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) )
 
-Function DefWndProc(hWnd, msg, wParam, lParam)
+FUNCTION DefWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
@@ -441,7 +441,7 @@ Local oWnd, oBtn, oitem
 
 RETURN -1
 
-Function DefChildWndProc(hWnd, msg, wParam, lParam)
+FUNCTION DefChildWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
@@ -633,7 +633,7 @@ Local oWnd, oBtn, oitem
 
 RETURN 0
 
-Function DefMdiChildProc(hWnd, msg, wParam, lParam)
+FUNCTION DefMdiChildProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont
 Local iParHigh, iParLow, oWnd, oBtn, oitem
 Local nReturn
@@ -829,7 +829,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
    nReturn := NIL
 RETURN (nReturn)
 
-function hwg_ReleaseAllWindows( oWnd, hWnd )
+FUNCTION hwg_ReleaseAllWindows( oWnd, hWnd )
 Local oItem, iCont, nCont
 
    //  Vamos mandar destruir as filhas
@@ -861,7 +861,7 @@ RETURN NIL
 
 // Processamento da janela frame (base) MDI
 
-Function DefMDIWndProc(hWnd, msg, wParam, lParam)
+FUNCTION DefMDIWndProc(hWnd, msg, wParam, lParam)
 Local i, iItem, nHandle, aControls, nControls, iCont, hWndC, aMenu
 Local iParHigh, iParLow
 Local oWnd, oBtn, oitem
@@ -1095,5 +1095,5 @@ Local oWndClient
 
 RETURN NIL
 
-Function GetChildWindowsNumber
+FUNCTION GetChildWindowsNumber
 RETURN Len(HWindow():aWindows) - 2

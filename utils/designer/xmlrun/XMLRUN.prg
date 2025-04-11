@@ -336,7 +336,7 @@ FUNCTION rmatch(c,f)
 
 
 
-function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
+FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    
    LOCAL lforever
    LOCAL lFirstPass := .T.
@@ -383,7 +383,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    RETURN .F.                           // USE FAILS
 
 
-function filelock(nSeconds)
+FUNCTION filelock(nSeconds)
 
    LOCAL lforever
 
@@ -409,7 +409,7 @@ function filelock(nSeconds)
  RETURN .F.
 
 
-function reclock(nSeconds)
+FUNCTION reclock(nSeconds)
 
    LOCAL lforever
    LOCAL oldPos := Recno()
@@ -442,7 +442,7 @@ function reclock(nSeconds)
    // end function reclock()
 
 
-function addrec(nSeconds)
+FUNCTION addrec(nSeconds)
    
    LOCAL lforever
    LOCAL oldcolor
@@ -485,7 +485,7 @@ function addrec(nSeconds)
 
 
 
-function Usr2infStr(g,lKosong) && usr to informix str
+FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 
    LOCAL dd := ""
    LOCAL mm := ""
@@ -590,7 +590,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
 
 
-function d2infstr(d) && date to informix style string
+FUNCTION d2infstr(d) && date to informix style string
 
    LOCAL dd
    LOCAL mmm
@@ -608,7 +608,7 @@ function d2infstr(d) && date to informix style string
 
 
 
-function infstr2d(s) && informix string to date
+FUNCTION infstr2d(s) && informix string to date
 
    LOCAL dd := Left(s, 2)+"/"
    LOCAL yy := "/"+Right(s, 4)

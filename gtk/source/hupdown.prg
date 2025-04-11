@@ -95,7 +95,7 @@ Local vari
 
 RETURN NIL
 
-STATIC Function __When( oCtrl )
+STATIC FUNCTION __When( oCtrl )
 
    oCtrl:Refresh()
    IF oCtrl:bGetFocus != NIL 
@@ -104,7 +104,7 @@ STATIC Function __When( oCtrl )
 
 RETURN .T.
 
-STATIC Function __Valid(oCtrl)
+STATIC FUNCTION __Valid(oCtrl)
 
    oCtrl:value := hwg_SetUpDown( oCtrl:handle )
    oCtrl:title := Str(oCtrl:value)

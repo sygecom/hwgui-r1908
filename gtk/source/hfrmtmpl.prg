@@ -410,7 +410,7 @@ RETURN NIL
 
 // ------------------------------
 
-STATIC Function ReadTree(oForm, aParent, oDesc)
+STATIC FUNCTION ReadTree(oForm, aParent, oDesc)
 Local i, aTree := {}, oNode, subarr
 
    FOR i := 1 TO Len(oDesc:aItems)
@@ -429,7 +429,7 @@ Local i, aTree := {}, oNode, subarr
 
 RETURN IIf(Empty(aTree), NIL, aTree)
 
-Function hwg_ParseMethod(cMethod)
+FUNCTION hwg_ParseMethod(cMethod)
 Local arr := {}, nPos1, nPos2, cLine
 
    IF ( nPos1 := At( Chr(10),cMethod ) ) == 0
@@ -461,7 +461,7 @@ Local arr := {}, nPos1, nPos2, cLine
 
 RETURN arr
 
-STATIC Function CompileMethod(cMethod, oForm, oCtrl)
+STATIC FUNCTION CompileMethod(cMethod, oForm, oCtrl)
 Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
 
    IF cMethod = NIL .OR. Empty(cMethod)
@@ -528,7 +528,7 @@ Local n
    BREAK
 RETURN .T.
 
-STATIC Function ReadCtrl( oCtrlDesc, oContainer, oForm )
+STATIC FUNCTION ReadCtrl( oCtrlDesc, oContainer, oForm )
 Local oCtrl := HCtrlTmpl():New( oContainer )
 Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
 
@@ -569,7 +569,7 @@ RETURN NIL
 #define TBS_BOTH                     8
 #define TBS_NOTICKS                 16
 
-STATIC Function CreateCtrl( oParent, oCtrlTmpl, oForm )
+STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 Local i, j, oCtrl, stroka, varname, xProperty, block, cType, cPName
 Local nCtrl := AScan(aClass, oCtrlTmpl:cClass), xInitValue, cInitName, cVarName
 MEMVAR oPrnt, nId, nInitValue, cInitValue, dInitValue, nStyle, nLeft, nTop
@@ -760,13 +760,13 @@ MEMVAR aImages, lEditLabels, aParts
 
 RETURN NIL
 
-Function hwg_RadioNew( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet )
+FUNCTION hwg_RadioNew( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet )
 Local oCtrl := HGroup():New( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor )
    HRadioGroup():New( nInitValue,bSetGet )
 RETURN oCtrl
 
 
-Function hwg_Font2XML( oFont )
+FUNCTION hwg_Font2XML( oFont )
 Local aAttr := {}
 
    AAdd(aAttr, {"name", oFont:name})
@@ -787,7 +787,7 @@ Local aAttr := {}
 
 RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
-Function hfrm_FontFromXML( oXmlNode )
+FUNCTION hfrm_FontFromXML( oXmlNode )
 Local width  := oXmlNode:GetAttribute("width")
 Local height := oXmlNode:GetAttribute("height")
 Local weight := oXmlNode:GetAttribute("weight")
@@ -816,7 +816,7 @@ Local under := oXmlNode:GetAttribute("underline")
 
 RETURN HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
 
-Function hfrm_Str2Arr( stroka )
+FUNCTION hfrm_Str2Arr( stroka )
 Local arr := {}, pos1 := 2, pos2 := 1
 
    IF Len(stroka) > 2
@@ -830,7 +830,7 @@ Local arr := {}, pos1 := 2, pos2 := 1
 
 RETURN arr
 
-Function hfrm_Arr2Str(arr)
+FUNCTION hfrm_Arr2Str(arr)
 Local stroka := "{", i, cType
 
    FOR i := 1 TO Len(arr)
@@ -847,7 +847,7 @@ Local stroka := "{", i, cType
 
 RETURN stroka + "}"
 
-Function hfrm_GetProperty( xProp )
+FUNCTION hfrm_GetProperty( xProp )
 Local c
 
    IF HB_IsChar( xProp )
@@ -1291,7 +1291,7 @@ Local i := AScan(::aReports, {|o|o:id == ::id})
    ENDIF
 RETURN NIL
 
-STATIC Function ReadRepItem( oCtrlDesc, oContainer )
+STATIC FUNCTION ReadRepItem( oCtrlDesc, oContainer )
 Local oCtrl := HRepItem():New( oContainer )
 Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems, xProperty
 Local nPenWidth, nPenType
@@ -1321,12 +1321,12 @@ Local nPenWidth, nPenType
 
 RETURN NIL
 
-STATIC Function aGetSecond(arr, xFirst)
+STATIC FUNCTION aGetSecond(arr, xFirst)
 Local i := AScan(arr, {|a|a[1] == xFirst})
 
 RETURN IIf(i == 0, NIL, arr[i, 2])
 
-STATIC Function hrep_FontFromXML( oPrinter,oXmlNode,height )
+STATIC FUNCTION hrep_FontFromXML( oPrinter,oXmlNode,height )
 Local weight := oXmlNode:GetAttribute("weight")
 Local charset := oXmlNode:GetAttribute("charset")
 Local ita   := oXmlNode:GetAttribute("italic")

@@ -523,7 +523,7 @@ FUNCTION CtrlResize(oCtrl, xPos, yPos)
    ENDIF
 RETURN NIL
 
-Function SetBDown( oCtrl,xPos,yPos,nBorder )
+FUNCTION SetBDown( oCtrl,xPos,yPos,nBorder )
 
    aBDown[BDOWN_OCTRL] := oCtrl
    aBDown[BDOWN_XPOS] := xPos
@@ -538,10 +538,10 @@ Function SetBDown( oCtrl,xPos,yPos,nBorder )
    ENDIF
 RETURN NIL
 
-Function GetBDown
+FUNCTION GetBDown
 RETURN aBDown
 
-Function SetvBDown( oCtrl,xPos,yPos,nBorder )
+FUNCTION SetvBDown( oCtrl,xPos,yPos,nBorder )
 
    HB_SYMBOL_UNUSED(oCtrl)
    HB_SYMBOL_UNUSED(nBorder)
@@ -552,7 +552,7 @@ Function SetvBDown( oCtrl,xPos,yPos,nBorder )
    vBDown[BDOWN_NBORDER] := 0
 RETURN NIL
 
-Function GetvBDown
+FUNCTION GetvBDown
 RETURN vBDown
 
 FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
@@ -633,10 +633,10 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
    ENDIF
 RETURN NIL
 
-Function GetCtrlSelected(oDlg)
+FUNCTION GetCtrlSelected(oDlg)
 RETURN IIf(oDlg != NIL, IIf(oDlg:oParent:Classname() == "HPANEL", oDlg:oParent:oParent:oParent:oCtrlSelected, oDlg:oParent:oCtrlSelected), NIL)
 
-Function CheckResize(oCtrl, xPos, yPos)
+FUNCTION CheckResize(oCtrl, xPos, yPos)
    IF xPos > oCtrl:nLeft-5 .AND. xPos < oCtrl:nLeft+3 .AND. ;
       yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
@@ -660,7 +660,7 @@ Function CheckResize(oCtrl, xPos, yPos)
    ENDIF
 RETURN 0
 
-Function MoveCtrl( oCtrl )
+FUNCTION MoveCtrl( oCtrl )
 
    // writelog( "MoveCtrl "+Str(oCtrl:nWidth) + Str(oCtrl:nHeight) )
    IF oCtrl:ClassName() == "HDIALOG"
@@ -729,7 +729,7 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
    ENDIF
 RETURN NIL
 
-Function FitLine(oCtrl)
+FUNCTION FitLine(oCtrl)
 
    IF oCtrl:lEmbed
       oCtrl:lEmbed := .F.
@@ -763,11 +763,11 @@ FUNCTION Page_New( oTab )
    hwg_RedrawWindow( oTab:handle, 5 )
 RETURN NIL
 
-Function Page_Next( oTab )
+FUNCTION Page_Next( oTab )
    HB_SYMBOL_UNUSED(oTab)
 RETURN NIL
 
-Function Page_Prev( oTab )
+FUNCTION Page_Prev( oTab )
    HB_SYMBOL_UNUSED(oTab)
 RETURN NIL
 

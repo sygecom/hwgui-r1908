@@ -1116,7 +1116,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-STATIC Function SetTabFocus(oCtrl, nPage, nKeyDown)
+STATIC FUNCTION SetTabFocus(oCtrl, nPage, nKeyDown)
    
    LOCAL i
    LOCAL nSkip

@@ -16,7 +16,7 @@
 STATIC cLocate := "", cFilter := "", cSeek := ""
 STATIC klrecf := 200
 
-Function Move(nMove)
+FUNCTION Move(nMove)
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove(nMove) }
@@ -27,7 +27,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitMove(nMove)
+STATIC FUNCTION InitMove(nMove)
 Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"" )
    IF nMove == 1
@@ -46,7 +46,7 @@ Local hDlg := hwg_GetModalHandle(), cTitle
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT6 ) )
 RETURN NIL
 
-STATIC Function EndMove(lOk, nMove)
+STATIC FUNCTION EndMove(lOk, nMove)
 Local hDlg := hwg_GetModalHandle()
 Local cExpres, nrec, key
 Local hWnd, oWindow, aControls, iCont
@@ -98,7 +98,7 @@ Local hWnd, oWindow, aControls, iCont
    EndDialog( hDlg )
 RETURN NIL
 
-Function F_Locate(oBrw, cExpres)
+FUNCTION F_Locate(oBrw, cExpres)
 Local nrec, i, res, block
    cLocate := cExpres
    IF HB_IsLogical( &cLocate )
@@ -140,7 +140,7 @@ Local nrec, i, res, block
    ENDIF
 RETURN NIL
 
-Function F_Filter( oBrw, cExpres )
+FUNCTION F_Filter( oBrw, cExpres )
 Local i, nrec
    cFilter := cExpres
    IF HB_IsLogical( &cFilter )

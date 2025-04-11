@@ -23,7 +23,7 @@ STATIC aMessModalDlg := { ;
          { WM_ACTIVATE,{|o,w,l|onActivate(o,w,l)} }         ;
       }
 
-STATIC Function onDestroy( oDlg )
+STATIC FUNCTION onDestroy( oDlg )
 
    IF oDlg:bDestroy != NIL
       Eval(oDlg:bDestroy, oDlg)
@@ -185,7 +185,7 @@ RETURN IIf(i == 0, NIL, ::Getlist[i])
 // End of class
 // ------------------------------------
 
-STATIC Function InitModalDlg( oDlg )
+STATIC FUNCTION InitModalDlg( oDlg )
 Local iCont
 
    // writelog( str(oDlg:handle)+" "+oDlg:title )
@@ -211,7 +211,7 @@ Local iCont
 
 RETURN 1
 
-STATIC Function onEnterIdle(oDlg, wParam, lParam)
+STATIC FUNCTION onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != NIL ;
@@ -223,7 +223,7 @@ Local oItem
    ENDIF
 RETURN 0
 
-STATIC Function onEraseBk( oDlg,hDC )
+STATIC FUNCTION onEraseBk( oDlg,hDC )
 Local aCoors
 /*
    IF __ObjHasMsg( oDlg,"OBMP") 
@@ -245,7 +245,7 @@ Local aCoors
 */   
 RETURN 0
 
-Function hwg_DlgCommand(oDlg, wParam, lParam)
+FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
 Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 Local aMenu, i, hCtrl
 
@@ -307,7 +307,7 @@ Local aMenu, i, hCtrl
 
 RETURN 1
 
-STATIC Function onSize(oDlg, wParam, lParam)
+STATIC FUNCTION onSize(oDlg, wParam, lParam)
    LOCAL aControls, iCont , nW1, nH1
    LOCAL nW := hwg_LOWORD(lParam), nH := hwg_HIWORD(lParam)
    LOCAL nScrollMax
@@ -341,7 +341,7 @@ STATIC Function onSize(oDlg, wParam, lParam)
 
 RETURN 0
 
-STATIC Function onActivate(oDlg, wParam, lParam)
+STATIC FUNCTION onActivate(oDlg, wParam, lParam)
 Local iParLow := hwg_LOWORD(wParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != NIL
@@ -352,15 +352,15 @@ Local iParLow := hwg_LOWORD(wParam)
 
 RETURN 0
 
-Function hwg_GetModalDlg()
+FUNCTION hwg_GetModalDlg()
 Local i := Len(HDialog():aModalDialogs)
 RETURN IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
-Function hwg_GetModalHandle()
+FUNCTION hwg_GetModalHandle()
 Local i := Len(HDialog():aModalDialogs)
 RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
-Function EndDialog( handle )
+FUNCTION EndDialog( handle )
 Local oDlg
    // writelog( "EndDialog-0" )
    IF handle == NIL
@@ -382,7 +382,7 @@ Local oDlg
    // writelog("EndDialog-10")
 RETURN  hwg_DestroyWindow( oDlg:handle )
 
-Function hwg_SetDlgKey( oDlg, nctrl, nkey, block )
+FUNCTION hwg_SetDlgKey( oDlg, nctrl, nkey, block )
 Local i, aKeys
 
    IF oDlg == NIL ; oDlg := HCustomWindow():oDefaultParent ; ENDIF

@@ -410,7 +410,7 @@ METHOD Print() CLASS HRichEdit
 
 
 /*
-Function DefRichProc(hEdit, msg, wParam, lParam)
+FUNCTION DefRichProc(hEdit, msg, wParam, lParam)
 Local oEdit
    // hwg_WriteLog("RichProc: " + Str(hEdit, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    oEdit := hwg_FindSelf(hEdit)

@@ -18,7 +18,7 @@ REQUEST HWG_ENDWINDOW
 #define  WM_NOTIFYICON         WM_USER+1000
 #define  ID_NOTIFYICON           1
 
-STATIC Function onSize(oWnd, wParam, lParam)
+STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
    // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)) )
 
@@ -33,7 +33,7 @@ STATIC Function onSize(oWnd, wParam, lParam)
 
 RETURN 0
 
-STATIC Function onDestroy( oWnd )
+STATIC FUNCTION onDestroy( oWnd )
 
    oWnd:Super:onEvent( WM_DESTROY )
    HWindow():DelItem( oWnd )
@@ -336,7 +336,7 @@ Local i
 RETURN -1
 */
 
-Function hwg_ReleaseAllWindows( hWnd )
+FUNCTION hwg_ReleaseAllWindows( hWnd )
 Local oItem, iCont, nCont
 /*
    //  Vamos mandar destruir as filhas
@@ -366,7 +366,7 @@ Local oItem, iCont, nCont
 */
 RETURN -1
 
-STATIC Function onCommand(oWnd, wParam, lParam)
+STATIC FUNCTION onCommand(oWnd, wParam, lParam)
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 /*
    IF wParam == SC_CLOSE
@@ -407,7 +407,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
 
 RETURN 0
 
-STATIC Function onMove(oWnd, wParam, lParam)
+STATIC FUNCTION onMove(oWnd, wParam, lParam)
 
    // writelog( "onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)) )
    oWnd:nLeft := hwg_LOWORD(lParam)
@@ -415,7 +415,7 @@ STATIC Function onMove(oWnd, wParam, lParam)
 
 RETURN 0
 
-STATIC Function onEraseBk( oWnd,wParam )
+STATIC FUNCTION onEraseBk( oWnd,wParam )
 /*
    IF oWnd:oBmp != NIL
        hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
@@ -424,7 +424,7 @@ STATIC Function onEraseBk( oWnd,wParam )
 */   
 RETURN 0
 
-STATIC Function onSysCommand(oWnd, wParam)
+STATIC FUNCTION onSysCommand(oWnd, wParam)
 Local i
 /*
    IF wParam == SC_CLOSE
@@ -450,7 +450,7 @@ Local i
 */
 RETURN 0
 
-STATIC Function onNotifyIcon( oWnd,wParam,lParam )
+STATIC FUNCTION onNotifyIcon( oWnd,wParam,lParam )
 Local ar
 /*
    IF wParam == ID_NOTIFYICON
@@ -468,7 +468,7 @@ Local ar
 */   
 RETURN 0
 
-STATIC Function onMdiCreate(oWnd, lParam)
+STATIC FUNCTION onMdiCreate(oWnd, lParam)
 /*
    hwg_InitControls( oWnd )
    IF oWnd:bInit != NIL
@@ -477,7 +477,7 @@ STATIC Function onMdiCreate(oWnd, lParam)
 */
 RETURN 0
 
-STATIC Function onMdiCommand(oWnd, wParam)
+STATIC FUNCTION onMdiCommand(oWnd, wParam)
 Local iParHigh, iParLow, iItem
 /*
    IF wParam == SC_CLOSE
@@ -492,7 +492,7 @@ Local iParHigh, iParLow, iItem
 */
 RETURN 0
 
-STATIC Function onMdiNcActivate(oWnd, wParam)
+STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
 /*
    IF wParam == 1 .AND. oWnd:bGetFocus != NIL
       Eval(oWnd:bGetFocus, oWnd)
@@ -502,7 +502,7 @@ STATIC Function onMdiNcActivate(oWnd, wParam)
 */
 RETURN 0
 
-STATIC Function onEnterIdle(oDlg, wParam, lParam)
+STATIC FUNCTION onEnterIdle(oDlg, wParam, lParam)
 Local oItem
 /*
    IF wParam == 0 .AND. ( oItem := Atail( HDialog():aModalDialogs ) ) != NIL ;
@@ -515,7 +515,7 @@ Local oItem
 */   
 RETURN 0
 
-Function hwg_CenterWindow( oWnd )
+FUNCTION hwg_CenterWindow( oWnd )
 
    oWnd:nLeft := Int( ( hwg_GetDesktopWidth() - oWnd:nWidth ) / 2 )
    oWnd:nTop  := Int( ( hwg_GetDesktopHeight() - oWnd:nHeight ) / 2 )

@@ -181,7 +181,7 @@ Local i, nLen := Len(aControls)
 
 RETURN NIL
 
-STATIC Function onNotify( oWnd,wParam,lParam )
+STATIC FUNCTION onNotify( oWnd,wParam,lParam )
 Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
 
    IF oCtrl != NIL
@@ -226,12 +226,12 @@ Local iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res, handle, oItem
 
 RETURN 0
 
-STATIC Function onDestroy( oWnd )
+STATIC FUNCTION onDestroy( oWnd )
    oWnd:End()
 
 RETURN 0
 
-STATIC Function onCtlColor( oWnd,wParam,lParam )
+STATIC FUNCTION onCtlColor( oWnd,wParam,lParam )
 Local oCtrl  := oWnd:FindControl(,lParam)
 
    IF oCtrl != NIL
@@ -246,7 +246,7 @@ Local oCtrl  := oWnd:FindControl(,lParam)
 
 RETURN -1
 
-STATIC Function onDrawItem( oWnd,wParam,lParam )
+STATIC FUNCTION onDrawItem( oWnd,wParam,lParam )
 Local oCtrl
 
    IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != NIL .AND. ;
@@ -257,7 +257,7 @@ Local oCtrl
 
 RETURN 0
 
-STATIC Function onCommand(oWnd, wParam)
+STATIC FUNCTION onCommand(oWnd, wParam)
 Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != NIL .AND. ;
@@ -267,7 +267,7 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 
 RETURN 1
 
-STATIC Function onSize(oWnd, wParam, lParam)
+STATIC FUNCTION onSize(oWnd, wParam, lParam)
 Local aControls := oWnd:aControls, nControls := Len(aControls)
 Local oItem, iCont
 
@@ -288,7 +288,7 @@ Local oItem, iCont
 RETURN 0
 
 #if 0 // old code for reference (to be deleted)
-Function hwg_onTrackScroll( oWnd,wParam,lParam )
+FUNCTION hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
    IF oCtrl != NIL
@@ -308,7 +308,7 @@ Local oCtrl := oWnd:FindControl( , lParam ), msg
 
 RETURN 0
 #else
-Function hwg_onTrackScroll( oWnd,wParam,lParam )
+FUNCTION hwg_onTrackScroll( oWnd,wParam,lParam )
 Local oCtrl := oWnd:FindControl( , lParam ), msg
 
    IF oCtrl != NIL

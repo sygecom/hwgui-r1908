@@ -11,7 +11,7 @@
 
 #define TEST_PRINT
 
-Function Main
+FUNCTION Main
 Local oMainWindow,oPanel
 Private oFont := NIL, cImageDir := "/"+Curdir()+"/../../image/"
 Private nColor, oBmp2
@@ -58,7 +58,7 @@ Private nColor, oBmp2
 
 RETURN NIL
 
-Function FileOpen
+FUNCTION FileOpen
 Local oModDlg, oBrw
 Local mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Local fname := hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)
@@ -96,13 +96,13 @@ Local nId
    ENDIF
 RETURN NIL
 
-Function FileClose(oDlg)
+FUNCTION FileClose(oDlg)
    Local oBrw := oDlg:FindControl( 111 )
    dbSelectArea(oBrw:alias)
    dbCloseArea()
 RETURN .T.
 
-function printdos
+FUNCTION printdos
 Local han := fcreate("LPT1", 0)
   if han != -1
      fwrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
@@ -114,7 +114,7 @@ Local han := fcreate("LPT1", 0)
   endif
 RETURN NIL
 
-Function DialogFromPrg()
+FUNCTION DialogFromPrg()
 Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add("Serif", 0, -13), oTab
 Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
@@ -169,7 +169,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
 
 RETURN NIL
 
-Function TestTab()
+FUNCTION TestTab()
 
 Local oDlg, oTAB
 Local oGet1, oGet2, oVar1:="1", oVar2:="2"
@@ -202,7 +202,7 @@ ACTIVATE DIALOG oDlg
 RETURN NIL
 
 #ifdef TEST_PRINT
-Function PrnTest
+FUNCTION PrnTest
 Local oPrinter, oFont
 
    INIT PRINTER oPrinter

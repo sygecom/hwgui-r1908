@@ -141,7 +141,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
 RETURN NIL
 
 
-STATIC Function __Valid(oCtrl)
+STATIC FUNCTION __Valid(oCtrl)
 
    oCtrl:oGroup:value := AScan(oCtrl:oGroup:aButtons, {|o|o:id == oCtrl:id})
    IF oCtrl:oGroup:bSetGet != NIL

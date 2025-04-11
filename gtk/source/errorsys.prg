@@ -111,7 +111,7 @@ FUNCTION hwg_ErrorMessage(oError)
 
    RETURN cMessage
 
-function WriteLog( cText,fname )
+FUNCTION WriteLog( cText,fname )
 Local nHand
 
   fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
@@ -126,7 +126,7 @@ Local nHand
 
 RETURN NIL
 
-STATIC Function ErrorPreview( cMess )
+STATIC FUNCTION ErrorPreview( cMess )
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;

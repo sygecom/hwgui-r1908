@@ -24,7 +24,7 @@ STATIC s_aWatches := {}
 STATIC s_aScriptCurr
 STATIC s_nScriptSch := 0
 
-Function hwg_scrDebug(aScript, iscr)
+FUNCTION hwg_scrDebug(aScript, iscr)
 Local nFirst, i
 
    IF Len(aScript) < 3
@@ -161,7 +161,7 @@ Local nFirst, i
 
 RETURN .T.
 
-STATIC Function dlgDebugClose()
+STATIC FUNCTION dlgDebugClose()
 
    s_oDlgDebug := NIL
    hwg_SetDebugger(.F.)
@@ -178,7 +178,7 @@ STATIC Function dlgDebugClose()
 
 RETURN .T.
 
-STATIC Function AddBreakPoint
+STATIC FUNCTION AddBreakPoint
 Local i
 
    IF s_aBreakPoints == NIL
@@ -201,7 +201,7 @@ Local i
    s_oBrwScript:Refresh()
 RETURN .T.
 
-STATIC Function AddWatch()
+STATIC FUNCTION AddWatch()
 Local xRes, bCodeblock, bOldError, lRes := .T.
 
 #ifdef __LINUX__
@@ -235,7 +235,7 @@ Local xRes, bCodeblock, bOldError, lRes := .T.
    ENDIF
 RETURN .T.
 
-STATIC Function CalcWatch(n)
+STATIC FUNCTION CalcWatch(n)
 Local xRes, bOldError, lRes := .T., cType
 
    bOldError := ErrorBlock({|e|MacroError(e)})
@@ -266,7 +266,7 @@ Local xRes, bOldError, lRes := .T., cType
    
 RETURN .T.
 
-STATIC Function Calculate()
+STATIC FUNCTION Calculate()
 Local xRes, bOldError, lRes := .T., cType
 
 #ifdef __LINUX__
@@ -304,7 +304,7 @@ STATIC FUNCTION MacroError(e)
    BREAK
 RETURN .T. // Warning W0028  Unreachable code
 
-Function hwg_scrBreakPoint()
+FUNCTION hwg_scrBreakPoint()
    s_nDebugMode := 0
 RETURN .T.
 

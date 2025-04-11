@@ -123,7 +123,7 @@ Local cLink := QHTM_GetNotify(lParam)
    QHTM_SetReturnValue(lParam, .F.)
 RETURN 0
 
-Function QhtmFormProc(hCtrl, cMethod, cAction, cName, aFields)
+FUNCTION QhtmFormProc(hCtrl, cMethod, cAction, cName, aFields)
 Local oCtrl := hwg_FindSelf(hCtrl)
 
    IF oCtrl != NIL

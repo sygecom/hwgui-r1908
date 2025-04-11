@@ -2,7 +2,7 @@
 request HB_CODEPAGE_PTISO,HB_CODEPAGE_PT850
 #include "hwgui.ch"
 
-Function Main()
+FUNCTION Main()
 Local oModDlg, oEditbox, onome,obar
 Local meditbox := "", mnome:= space(50)
 //hb_settermcp("PT850","PTISO")

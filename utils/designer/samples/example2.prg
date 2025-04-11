@@ -10,7 +10,7 @@ REQUEST DBSEEK
 REQUEST HWG_SHELLABOUT
 
 
-Function Main
+FUNCTION Main
 
    LOCAL oForm := HFormTmpl():Read(example())
 

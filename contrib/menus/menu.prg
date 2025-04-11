@@ -43,7 +43,7 @@ Local aCoor
 
 RETURN NIL
 
-Function hwg_CreateMenu
+FUNCTION hwg_CreateMenu
 Local hMenu
 
    IF ( hMenu := hwg__CreateMenu() ) == 0
@@ -52,7 +52,7 @@ Local hMenu
 
 RETURN { {},,, hMenu }
 
-Function hwg_SetMenu( oWnd, aMenu )
+FUNCTION hwg_SetMenu( oWnd, aMenu )
 
    IF oWnd:type == WND_MDICHILD
       oWnd:menu := aMenu
@@ -90,7 +90,7 @@ RETURN .T.
  *  else if lPos is omitted or TRUE, it inserts menu item in nPos position,
  *  else if lPos is FALSE - before item with ID == nPos
  */
-Function hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos,lPos )
+FUNCTION hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos,lPos )
 Local hSubMenu
 
    IF nPos == NIL
@@ -135,7 +135,7 @@ Local hSubMenu
    ENDIF
 RETURN NIL
 
-Function hwg_FindMenuItem( aMenu, nId, nPos )
+FUNCTION hwg_FindMenuItem( aMenu, nId, nPos )
 Local nPos1, aSubMenu
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
@@ -151,14 +151,14 @@ Local nPos1, aSubMenu
    ENDDO
 RETURN NIL
 
-Function hwg_GetSubMenuHandle(aMenu, nId)
+FUNCTION hwg_GetSubMenuHandle(aMenu, nId)
 Local nPos
    IF ( aMenu := hwg_FindMenuItem( aMenu, nId, nPos ) ) != NIL
       RETURN aMenu[1,nPos, 5]
    ENDIF
 RETURN 0
 
-Function hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
+FUNCTION hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
 Local hMenu, nPos, aMenu
 
    IF nPosParent == NIL
@@ -205,7 +205,7 @@ Local hMenu, nPos, aMenu
    ENDIF
 RETURN NIL
 
-Function hwg_BeginMenu( oWnd,nId,cTitle )
+FUNCTION hwg_BeginMenu( oWnd,nId,cTitle )
 Local aMenu, i
    IF oWnd != NIL
       _aMenuDef := {}
@@ -226,7 +226,7 @@ Local aMenu, i
    ENDIF
 RETURN .T.
 
-Function hwg_ContextMenu()
+FUNCTION hwg_ContextMenu()
    _aMenuDef := {}
    _oWnd := NIL
    _nLevel := 0
@@ -234,7 +234,7 @@ Function hwg_ContextMenu()
    _oMenu := HMenu():New()
 RETURN _oMenu
 
-Function hwg_EndMenu()
+FUNCTION hwg_EndMenu()
    IF _nLevel > 0
       _nLevel --
    ELSE
@@ -250,8 +250,8 @@ Function hwg_EndMenu()
    ENDIF
 RETURN .T.
 
-//Function hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey )
-Function hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, cMessage )
+//FUNCTION hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey )
+FUNCTION hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, cMessage )
 Local aMenu, i
    aMenu := _aMenuDef
    FOR i := 1 TO _nLevel

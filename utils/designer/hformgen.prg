@@ -453,7 +453,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
    ENDIF
 RETURN NIL
 
-STATIC Function SetDlgSelected(oDlg)
+STATIC FUNCTION SetDlgSelected(oDlg)
    
    MEMVAR oDesigner
 
@@ -1773,6 +1773,6 @@ FUNCTION DoPreview()
 
 RETURN NIL
 
-Function _CHR( n )
+FUNCTION _CHR( n )
 RETURN CHR( n )
 

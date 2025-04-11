@@ -430,14 +430,14 @@ FUNCTION InspOpen(lShow)
 RETURN NIL
 
 
-STATIC Function DlgOk()
+STATIC FUNCTION DlgOk()
 
    IF !Empty(oBrw1:aControls)
       VldBrwGet( oBrw1:aControls[1] )
    ENDIF
 RETURN NIL
 
-STATIC Function DlgCancel()
+STATIC FUNCTION DlgCancel()
 
    IF !Empty(oBrw1:aControls)
       oBrw1:aEvents := {}
@@ -768,7 +768,7 @@ FUNCTION ObjInspector(oObject )
    RETURN NIL
 
 
-STATIC Function MessagesOthers( oDlg, msg, wParam, lParam )
+STATIC FUNCTION MessagesOthers( oDlg, msg, wParam, lParam )
    
    MEMVAR oDesigner
 

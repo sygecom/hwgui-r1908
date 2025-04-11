@@ -4657,7 +4657,7 @@ FUNCTION hwg_VScrollPos(oBrw, nType, lEof, nPos)
 RETURN NIL
 
 /*
-Function HScrollPos(oBrw, nType, lEof, nPos)
+FUNCTION HScrollPos(oBrw, nType, lEof, nPos)
 
    LOCAL minPos
    LOCAL maxPos

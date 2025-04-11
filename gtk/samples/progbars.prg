@@ -14,7 +14,7 @@
 
 STATIC oMain, oForm, oFont, oBar := NIL
 STATIC n :=0
-Function Main()
+FUNCTION Main()
 
         INIT WINDOW oMain MAIN TITLE "Progress Bar Sample"
 
@@ -26,7 +26,7 @@ Function Main()
         ACTIVATE WINDOW oMain MAXIMIZED
 RETURN NIL
 
-Function Test()
+FUNCTION Test()
 Local cMsgErr := "Bar doesn't exist"
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11

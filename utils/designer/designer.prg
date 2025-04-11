@@ -441,7 +441,7 @@ CLASS HDesigner
 ENDCLASS
 // -----------------
 
-STATIC Function StartDes( oDlg,p1,cForm )
+STATIC FUNCTION StartDes( oDlg,p1,cForm )
 
    hwg_MoveWindow(oDlg:handle, 0, 0, oDlg:nWidth + 10, oDlg:nHeight)
 
@@ -721,7 +721,7 @@ FUNCTION FindWidget( cClass )
    NEXT
 RETURN NIL
 
-Function Evalcode(xCode)
+FUNCTION Evalcode(xCode)
    
    LOCAL nLines
 
@@ -842,12 +842,12 @@ STATIC FUNCTION EndIde()
 RETURN lRes
 
 
-Function SetOmmitMenuFile(lom)
+FUNCTION SetOmmitMenuFile(lom)
 lOmmitMenuFile := lOm
 RETURN lOm
 
 // : LFB
-Function StatusBarMsg(cfile,cpos,ctam)
+FUNCTION StatusBarMsg(cfile,cpos,ctam)
    
    MEMVAR oDesigner
 
@@ -909,7 +909,7 @@ FUNCTION SoControles()
 RETURN NIL
 
 
-Function InspShow()
+FUNCTION InspShow()
 
    MEMVAR oDesigner
 

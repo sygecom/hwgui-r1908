@@ -537,7 +537,7 @@ METHOD InsColumn( oColumn,nPos ) CLASS HBrowse
 
 RETURN oColumn
 
-STATIC Function InitColumn( oBrw, oColumn, n )
+STATIC FUNCTION InitColumn( oBrw, oColumn, n )
 
    if oColumn:type == NIL
       oColumn:type := ValType(Eval(oColumn:block, , oBrw, n))
@@ -1683,7 +1683,7 @@ Local oColumn, type
 
 RETURN NIL
 
-STATIC Function GetEventHandler( oBrw, msg, cod )
+STATIC FUNCTION GetEventHandler( oBrw, msg, cod )
 
    IF msg == WM_KEYDOWN .AND. cod == GDK_Escape
       oBrw:oGet:nLastKey := GDK_Escape
@@ -1692,7 +1692,7 @@ STATIC Function GetEventHandler( oBrw, msg, cod )
    ENDIF
 RETURN 0
 
-STATIC Function VldBrwEdit( oBrw, fipos )
+STATIC FUNCTION VldBrwEdit( oBrw, fipos )
 Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
 
    IF oBrw:oGet:nLastKey != GDK_Escape
@@ -1917,7 +1917,7 @@ Local kolf := FCOUNT()
 
 RETURN NIL
 
-Function hwg_VScrollPos( oBrw, nType, lEof, nPos )
+FUNCTION hwg_VScrollPos( oBrw, nType, lEof, nPos )
 Local maxPos := hwg_getAdjValue(oBrw:hScrollV, 1) - hwg_getAdjValue(oBrw:hScrollV, 4)
 Local oldRecno, newRecno
 
@@ -1959,10 +1959,10 @@ METHOD ShowSizes() CLASS HBrowse
    hwg_MsgInfo( cText )
 RETURN NIL
 
-Function hwg_ColumnArBlock()
+FUNCTION hwg_ColumnArBlock()
 RETURN {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
 
-STATIC function HdrToken(cStr, nMaxLen, nCount)
+STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0
 
    nMaxLen := nCount := 0

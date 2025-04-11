@@ -16,7 +16,7 @@
 
 Memvar aPaintRep , mypath,aitemtypes
 
-Function FileDlg( lOpen )
+FUNCTION FileDlg( lOpen )
 Local oDlg
 
    IF !lOpen .AND. ( aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS]) )
@@ -36,14 +36,14 @@ Local oDlg
 
 RETURN NIL
 
-STATIC Function InitOpen( lOpen )
+STATIC FUNCTION InitOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3,IDC_RADIOBUTTON1 )
    hwg_SetWindowText( hDlg, IIf(lOpen, "Open report", "Save report"))
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
 RETURN .T.
 
-STATIC Function BrowFile(lOpen)
+STATIC FUNCTION BrowFile(lOpen)
 Local hDlg := hwg_GetModalHandle()
 Local fname, s1, s2
    IF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1)
@@ -62,7 +62,7 @@ Local fname, s1, s2
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 RETURN NIL
 
-STATIC Function EndOpen( lOpen )
+STATIC FUNCTION EndOpen( lOpen )
 Local hDlg := hwg_GetModalHandle()
 Local fname, repName
 Local res := .T.
@@ -94,7 +94,7 @@ Local res := .T.
    ENDIF
 RETURN .T.
 
-Function CloseReport
+FUNCTION CloseReport
 Local i, aItem
    IF aPaintRep != NIL
       IF aPaintRep[FORM_CHANGED] == .T.
@@ -115,7 +115,7 @@ Local i, aItem
    ENDIF
 RETURN .T.
 
-Function SaveReport
+FUNCTION SaveReport
 Local fname
 
    IF ( aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS]) )
@@ -130,7 +130,7 @@ Local fname
 
 RETURN NIL
 
-STATIC Function OpenFile(fname, repName)
+STATIC FUNCTION OpenFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han := FOPEN( fname, FO_READ + FO_SHARED )
 Local i, itemName, aItem, res := .T., sFont
@@ -298,7 +298,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
    ENDIF
 RETURN res
 
-STATIC Function SaveRFile(fname, repName)
+STATIC FUNCTION SaveRFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han, hanOut, isOut := .F., res := .F.
 Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
@@ -380,7 +380,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
 
 RETURN res
 
-STATIC Function WriteRep( han, repName )
+STATIC FUNCTION WriteRep( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr
 
    hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)
@@ -429,7 +429,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
    FWrite(han, "#ENDREP "+Chr(10))
 RETURN NIL
 
-STATIC Function WriteToPrg( han, repName )
+STATIC FUNCTION WriteToPrg( han, repName )
 Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
 
    hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)
@@ -489,7 +489,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
    FWrite(han, "RETURN hwg_SetPaintRep( aPaintRep )" + Chr(10))
 RETURN NIL
 
-STATIC Function WriteScript( han,cScript,lPrg )
+STATIC FUNCTION WriteScript( han,cScript,lPrg )
 Local poz := 0, stroka, i
 Local lastC := Chr(10), cQuote, lFirst := .T.
 

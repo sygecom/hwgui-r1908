@@ -94,7 +94,7 @@ FUNCTION LoadEdOptions( cFileName )
    NEXT
 RETURN NIL
 
-Function SaveEdOptions( oOptDesc )
+FUNCTION SaveEdOptions( oOptDesc )
 
    LOCAL oIni := HXMLDoc():Read(m->cCurDir + cIniName)
    LOCAL i
@@ -232,7 +232,7 @@ FUNCTION EditMethod(cMethName, cMethod)
    ENDIF
 RETURN NIL
 
-Function ChangeTheme(nTheme)
+FUNCTION ChangeTheme(nTheme)
 
    IF HDTheme():nSelected != NIL
       hwg_CheckMenuItem( oDlg:handle, 1020+HDTheme():nSelected, .F. )
@@ -498,7 +498,7 @@ STATIC FUNCTION EditColors()
 
 RETURN NIL
 
-STATIC Function UpdSample(nAction)
+STATIC FUNCTION UpdSample(nAction)
 
    MEMVAR aSchemes
    MEMVAR nScheme

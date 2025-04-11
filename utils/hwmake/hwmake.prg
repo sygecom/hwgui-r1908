@@ -173,7 +173,7 @@ Private oIcon := HIcon():AddResource("PIM")
 
 RETURN
 
-STATIC Function SearchFile(oBrow, oFile)
+STATIC FUNCTION SearchFile(oBrow, oFile)
 Local oTotReg:={}, i
 Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
 if len(aSelect) ==0
@@ -192,7 +192,7 @@ obrow:aArray := oTotReg
 obrow:refresh()
 RETURN NIL
 
-STATIC Function SearchFileName(nName, oGet, oFile)
+STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
 Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,,.T. ) 
 If !Empty(oTextAnt)
@@ -203,7 +203,7 @@ oGet:Refresh()
 RETURN NIL
 
 
-Function ReadBuildFile()
+FUNCTION ReadBuildFile()
 Local cLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal:=""
 Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
@@ -257,7 +257,7 @@ oBrowse4:Refresh()
 RETURN NIL
 
 *-------------------------------------------------------------------------------------
-Function cPathNoFile(cArq)
+FUNCTION cPathNoFile(cArq)
 *-------------------------------------------------------------------------------------
 Local i
 Local cDest := ""
@@ -272,7 +272,7 @@ EndIf
    
 RETURN cDest
 *-------------------------------------------------------------------------------------
-Function cFileNoExt( cArq )
+FUNCTION cFileNoExt( cArq )
 *-------------------------------------------------------------------------------------
 Local n
 n:=At( ".", cArq )
@@ -282,7 +282,7 @@ Endif
 
 RETURN cArq   
 
-Function cFileNoPath( cArq ) 
+FUNCTION cFileNoPath( cArq ) 
 Local i
 Local cDest := ""
 Local cLetra
@@ -300,7 +300,7 @@ Next
 
 RETURN cDest
 
-Function SaveBuildFile()
+FUNCTION SaveBuildFile()
 Local cLibFiles, i, oNome, g
 Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 if empty(cFolderFile); RETURN NIL; Endif
@@ -360,7 +360,7 @@ endif
 hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
 RETURN NIL
 
-Function BuildApp() 
+FUNCTION BuildApp() 
 Local cExeHarbour
 Local cHwGUI,cHarbour,cBCC55, cObj
 LOCAL cObjFileAttr  , nObjFileSize
@@ -522,7 +522,7 @@ EndIF
 RETURN NIL
 
 
-Function RetLibrary( cHwGUI, cHarbour, cBcc55, aLibs )
+FUNCTION RetLibrary( cHwGUI, cHarbour, cBcc55, aLibs )
 Local i, cLib, CRLF := " +" + Chr(179)
 Local lMt := .F.
 cLib := cHwGUI + "\lib\hwgui.lib " + CRLF
@@ -575,7 +575,7 @@ cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
 cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
 RETURN cLib
 
-Function ExecuteCommand(cProc, cSend, cLog)
+FUNCTION ExecuteCommand(cProc, cSend, cLog)
 Local cFile := "execcom.bat"
 Local nRet
 If cLog == NIL
@@ -594,13 +594,13 @@ EndIf
 
 RETURN nRet
 
-Function BrwdelIten( oBrowse )
+FUNCTION BrwdelIten( oBrowse )
 Adel(oBrowse:aArray, oBrowse:nCurrent)
 ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
 RETURN oBrowse:Refresh()
 
 
-function OpenAbout
+FUNCTION OpenAbout
 Local oModDlg, oFontBtn, oFontDlg
 Local oBmp  
 Local oSay
@@ -640,7 +640,7 @@ Local oSay
 RETURN NIL
 
 
-STATIC Function ErrorPreview( cMess )
+STATIC FUNCTION ErrorPreview( cMess )
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Build Error" ;

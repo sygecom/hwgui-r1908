@@ -11,7 +11,7 @@
 #include "repbuild.h"
 #include "repmain.h"
 memvar aPaintRep, lAddMode, oFontStandard
-Function PrintRpt
+FUNCTION PrintRpt
 Local hDCwindow
 Local oPrinter := HPrinter():New()
 Local aPrnCoors, prnXCoef, prnYCoef

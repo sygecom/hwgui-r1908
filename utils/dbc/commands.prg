@@ -14,7 +14,7 @@
 MEMVAR finame, cValue, cFor, nSum, mypath, improc, msmode
 /* -----------------------  Replace --------------------- */
 
-Function C_REPL
+FUNCTION C_REPL
 Local aModDlg
 Local af := Array( Fcount() )
    Afields( af )
@@ -33,7 +33,7 @@ Local af := Array( Fcount() )
 
 RETURN NIL
 
-STATIC Function RecNumberEdit
+STATIC FUNCTION RecNumberEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
@@ -41,12 +41,12 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SetFocus( hEdit )
 RETURN NIL
 
-STATIC Function RecNumberDisable
+STATIC FUNCTION RecNumberDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 RETURN NIL
 
-STATIC Function InitRepl()
+STATIC FUNCTION InitRepl()
 Local hDlg := hwg_GetModalHandle()
 
    RecNumberDisable()
@@ -54,7 +54,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
 RETURN NIL
 
-STATIC Function EndRepl()
+STATIC FUNCTION EndRepl()
 Local hDlg := hwg_GetModalHandle()
 Local nrest, nrec
 Local oWindow, aControls, i
@@ -102,7 +102,7 @@ RETURN NIL
 
 /* -----------------------  Delete, recall, count --------------------- */
 
-Function C_DELE(nAct)
+FUNCTION C_DELE(nAct)
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_DEL" ON INIT {|| InitDele(nAct) }
@@ -116,7 +116,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitDele(nAct)
+STATIC FUNCTION InitDele(nAct)
 Local hDlg := hwg_GetModalHandle()
    IF nAct == 2
       hwg_SetWindowText( hDlg,"Recall")
@@ -128,7 +128,7 @@ Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITFOR ) )
 RETURN NIL
 
-STATIC Function EndDele(nAct)
+STATIC FUNCTION EndDele(nAct)
 Local hDlg := hwg_GetModalHandle()
 Local nrest, nsum, nRec := Recno()
 Local oWindow, aControls, i
@@ -190,7 +190,7 @@ RETURN NIL
 
 /* -----------------------  Sum --------------------- */
 
-Function C_SUM()
+FUNCTION C_SUM()
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_SUM" ON INIT {|| InitSum() }
@@ -204,14 +204,14 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitSum()
+STATIC FUNCTION InitSum()
 Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN NIL
 
-STATIC Function EndSum()
+STATIC FUNCTION EndSum()
 Local hDlg := hwg_GetModalHandle()
 Local cSumf, cFor, nrest, blsum, blfor, nRec := Recno()
 Private nsum := 0
@@ -250,7 +250,7 @@ RETURN NIL
 
 /* -----------------------  Append from --------------------- */
 
-Function C_APPEND()
+FUNCTION C_APPEND()
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_APFROM" ON INIT {|| InitApp() }
@@ -265,7 +265,7 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function DelimEdit
+STATIC FUNCTION DelimEdit
 Local hDlg := hwg_GetModalHandle()
 Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
@@ -273,19 +273,19 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SetFocus( hEdit )
 RETURN NIL
 
-STATIC Function DelimDisable
+STATIC FUNCTION DelimDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
 RETURN NIL
 
-STATIC Function InitApp()
+STATIC FUNCTION InitApp()
 Local hDlg := hwg_GetModalHandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN NIL
 
-STATIC Function EndApp()
+STATIC FUNCTION EndApp()
 Local hDlg := hwg_GetModalHandle()
 Local fname, nRec := Recno()
 
@@ -311,7 +311,7 @@ RETURN NIL
 
 /* -----------------------  Reindex, pack, zap --------------------- */
 
-Function C_RPZ( nAct )
+FUNCTION C_RPZ( nAct )
 Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_OKCANCEL" ON INIT {|| InitRPZ(nAct) }
@@ -322,13 +322,13 @@ Local aModDlg
 
 RETURN NIL
 
-STATIC Function InitRPZ( nAct )
+STATIC FUNCTION InitRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, IIf(nAct == 1, "Reindex ?", ;
                                        IIf(nAct == 2, "Pack ?", "Zap ?")) )
 RETURN NIL
 
-STATIC Function EndRPZ( nAct )
+STATIC FUNCTION EndRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
 Local hWnd, oWindow, aControls, i
 
