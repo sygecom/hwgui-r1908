@@ -347,7 +347,7 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
+   do while (lforever .or. nSeconds > 0) .and. lastkey() != K_ESC
 
       if !lfirstPass
 
@@ -394,7 +394,7 @@ function filelock(nSeconds)
       return .T.
    ENDIF
 
-   do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
+   do while (lforever .or. nSeconds > 0) .and. lastkey() != K_ESC
       if FLOCK()
          return .T.                     // LOCKED
       endif
@@ -424,7 +424,7 @@ function reclock(nSeconds)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
+   do while (lforever .or. nSeconds > 0) .and. lastkey() != K_ESC
       if DBRLOCK(OldPos)
          return .T.                     // LOCKED
       endif
@@ -458,7 +458,7 @@ function addrec(nSeconds)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .or. nSeconds > 0) .and. lastkey() # K_ESC
+   do while (lforever .or. nSeconds > 0) .and. lastkey() != K_ESC
 
       /*
       @ maxrow()-2, 00 clear
