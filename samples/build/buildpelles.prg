@@ -218,7 +218,7 @@ FUNCTION ReadBuildFile()
    
    For i := 1 to 300
        oSel1 := hwg_GetIni("FilesPRG", AllTrim(Str(i)), , oFolderFile)
-       if !Empty(oSel1) //.or. oSel1#NIL
+       if !Empty(oSel1) //.OR. oSel1#NIL
            AAdd(oBr1, oSel1)
        EndIf
    Next
@@ -226,21 +226,21 @@ FUNCTION ReadBuildFile()
    
    For i := 1 to 300
        oSel2 := hwg_GetIni("FilesC", AllTrim(Str(i)), , oFolderFile)
-       if !Empty(oSel2) //.or. oSel2#NIL
+       if !Empty(oSel2) //.OR. oSel2#NIL
            AAdd(oBr2, oSel2)
        EndIf
    Next
    
    For i := 1 to 300
        oSel3 := hwg_GetIni("FilesLIB", AllTrim(Str(i)), , oFolderFile)
-       if !Empty(oSel3) //.or. oSel3#NIL
+       if !Empty(oSel3) //.OR. oSel3#NIL
            AAdd(oBr3, oSel3)
        EndIf
    Next
    
    For i := 1 to 300
        oSel4 := hwg_GetIni("FilesRES", AllTrim(Str(i)), , oFolderFile)
-       if !Empty(oSel4) //.or. oSel4#NIL
+       if !Empty(oSel4) //.OR. oSel4#NIL
            AAdd(oBr4, oSel4)
        EndIf
    Next

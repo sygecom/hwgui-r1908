@@ -440,7 +440,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
    // Writelog( "dlgOnSize "+Str(h)+Str(w) )
    IF !oDesigner:lReport
      // : LFB
-      IF  h=aCoors[3] .and. w=aCoors[4]
+      IF  h=aCoors[3] .AND. w=aCoors[4]
          oDlg:oParent:SetProp("Width",LTrim(Str(oDlg:nWidth:=aCoors[3])))
          oDlg:oParent:SetProp("Height",LTrim(Str(oDlg:nHeight:=aCoors[4])))
          *oDlg:oParent:SetProp("Height",LTrim(Str(oDlg:nHeight:=aCoors[4]+21-21)))
@@ -1355,7 +1355,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
    MEMVAR handCursor
 
     // : LFB
-      IF oCtrl = NIL.and.oDesigner:addItem = NIL
+      IF oCtrl = NIL .AND. oDesigner:addItem = NIL
          hwg_SetCursor( handCursor )
          SetBDown(oDlg ,xPos,yPos)  //,resizeDirection )
       // fazer o desenho da marca‡Æo

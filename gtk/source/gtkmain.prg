@@ -21,11 +21,11 @@ Local i,res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
-      if iValue < 58 .and. iValue > 47
+      if iValue < 58 .AND. iValue > 47
          iValue -= 48
-      elseif iValue >= 65 .and. iValue <= 70
+      elseif iValue >= 65 .AND. iValue <= 70
          iValue -= 55
-      elseif iValue >= 97 .and. iValue <= 102
+      elseif iValue >= 97 .AND. iValue <= 102
          iValue -= 87
       else
         Return 0

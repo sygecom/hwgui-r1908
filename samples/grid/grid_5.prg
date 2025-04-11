@@ -334,7 +334,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
 
             oGet := aFields[i, GET_OBJECT]
         
-            if oGet:id != oCtrl:id .or. HB_IsDate(val)
+            if oGet:id != oCtrl:id .OR. HB_IsDate(val)
                 oGet:refresh()
             endif            
         next        

@@ -238,7 +238,7 @@ Local aMenu, i, oBmp, nFlag
    endif
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
-   IF lBitmap != NIL .or. !Empty(lBitmap)
+   IF lBitmap != NIL .OR. !Empty(lBitmap)
       if lResource == NIL ;lResource:=.F.; Endif         
       if !lResource 
          oBmp:=HBitmap():AddFile(lBitmap)
@@ -278,7 +278,7 @@ Return NIL
 Function hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 Local oMenu:=aSubMenu, oBmp
-If !oResource .or. oResource == NIL
+If !oResource .OR. oResource == NIL
      oBmp:=HBitmap():AddFile(lBitmap)
 else
      oBmp:=HBitmap():AddResource(lBitmap)

@@ -58,7 +58,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          IF y < 0
                y := 0
          ENDIF
-      ELSEIF nScrollCode == SB_THUMBTRACK .or. nScrollCode == SB_THUMBPOSITION
+      ELSEIF nScrollCode == SB_THUMBTRACK .OR. nScrollCode == SB_THUMBPOSITION
          y := nNewPos
       ENDIF
       IF y != yy
@@ -86,7 +86,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
          IF x < 0
             x := 0
          ENDIF
-      ELSEIF nScrollCode == SB_THUMBTRACK .or. nScrollCode == SB_THUMBPOSITION
+      ELSEIF nScrollCode == SB_THUMBTRACK .OR. nScrollCode == SB_THUMBPOSITION
          x := nNewPos
       ENDIF
       IF x != xx

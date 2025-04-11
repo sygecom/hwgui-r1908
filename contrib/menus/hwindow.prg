@@ -251,8 +251,8 @@ Local oWnd, oBtn, oitem
    if ( oWnd := HWindow():FindWindow(hWnd) ) == NIL
       // hwg_MsgStop( "Message: wrong window handle "+Str(hWnd)+"/"+Str(msg),"Error!" )
       if msg == WM_CREATE
-         if Len(HWindow():aWindows) != 0 .and. ;
-              ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != NIL .and. ;
+         if Len(HWindow():aWindows) != 0 .AND. ;
+              ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != NIL .AND. ;
               oWnd:handle == 0
             oWnd:handle := hWnd
             if oWnd:bInit != NIL
@@ -283,7 +283,7 @@ Local oWnd, oBtn, oitem
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-           ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+           ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
            Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;
@@ -449,8 +449,8 @@ Local oWnd, oBtn, oitem
    //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefChildWndProc -Inicio", 40) + "|")
    if ( oWnd := HWindow():FindWindow(hWnd) ) == NIL
       if msg == WM_CREATE
-         if Len(HWindow():aWindows) != 0 .and. ;
-               ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != NIL .and. ;
+         if Len(HWindow():aWindows) != 0 .AND. ;
+               ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != NIL .AND. ;
             oWnd:handle == 0
             oWnd:handle := hWnd
             if oWnd:bInit != NIL
@@ -482,7 +482,7 @@ Local oWnd, oBtn, oitem
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;
@@ -678,7 +678,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3])
       ENDIF
       nReturn := 1
@@ -693,7 +693,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       endif
    elseif msg == WM_PAINT
 
-      if HB_ISObject(oWnd) .and. HB_IsBlock(oWnd:bPaint)
+      if HB_ISObject(oWnd) .AND. HB_IsBlock(oWnd:bPaint)
 
          // WriteLog( "|DefMDIChild Paint"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10) )
 
@@ -822,7 +822,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          Eval(oWnd:bInit, oWnd)
       ENDIF
    else
-      if HB_IsObject(oWnd) .and. HB_IsBlock(oWnd:bOther)
+      if HB_IsObject(oWnd) .AND. HB_IsBlock(oWnd:bOther)
          Eval(oWnd:bOther, oWnd, msg, wParam, lParam)
       endif
    endif
@@ -920,7 +920,7 @@ Local oWndClient
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh.and.a[2]==iParLow} ) ) > 0
+         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;

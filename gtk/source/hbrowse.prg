@@ -326,7 +326,7 @@ Local aCoors, retValue := -1
             IF ::nCtrlPress == 0
                ::nCtrlPress := wParam
             ENDIF
-         ELSEIF (wParam >= 48 .and. wParam <= 90 .or. wParam >= 96 .and. wParam <= 111 ).and. ::lAutoEdit
+         ELSEIF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111 ).AND. ::lAutoEdit
             ::Edit( wParam,lParam )
          ENDIF
          retValue := 1
@@ -467,7 +467,7 @@ Local aCoors, retValue := -1
          #else
          OTHERWISE
          #endif
-            IF (wParam >= 48 .and. wParam <= 90 .or. wParam >= 96 .and. wParam <= 111 ) .and. ::lAutoEdit
+            IF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111 ) .AND. ::lAutoEdit
                ::Edit( wParam,lParam )
             ENDIF
          ENDSWITCH
@@ -543,7 +543,7 @@ Static Function InitColumn( oBrw, oColumn, n )
       oColumn:type := ValType(Eval(oColumn:block, , oBrw, n))
    endif 
    if oColumn:dec == NIL 
-      if oColumn:type == "N" .and. At( '.', Str(Eval(oColumn:block, , oBrw, n)) ) != 0
+      if oColumn:type == "N" .AND. At( '.', Str(Eval(oColumn:block, , oBrw, n)) ) != 0
          oColumn:dec := Len(SubStr(Str(Eval(oColumn:block, , oBrw, n)), ;
                At(".", Str(Eval(oColumn:block, , oBrw, n))) + 1))
       else
@@ -864,7 +864,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
    while x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      if ::lAdjRight .and. fif == Len(::aColumns)
+      if ::lAdjRight .AND. fif == Len(::aColumns)
          xSize := Max( ::x2 - x, xSize )
       endif
       if ::lDispHead .AND. !::lAppMode
@@ -912,7 +912,7 @@ Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
          ENDIF
       endif
       x += xSize
-      if ! ::lAdjRight .and. fif == Len(::aColumns)
+      if ! ::lAdjRight .AND. fif == Len(::aColumns)
          hwg_DrawLine(hDC, x - 1, ::y1 - (::height * ::nHeadRows), x - 1, ::y1 + (::height + 1) * nRows)
       endif
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
@@ -957,7 +957,7 @@ Local oColumn
    while x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      if ::lAdjRight .and. fif == Len(::aColumns)
+      if ::lAdjRight .AND. fif == Len(::aColumns)
          xSize := Max( ::x2 - x, xSize )
       endif
       if oColumn:footing != NIL
@@ -1016,7 +1016,7 @@ Local aCores
             ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor   )
          ENDIF
          xSize := ::aColumns[fif]:width
-         IF ::lAdjRight .and. fif == Len(::aColumns)
+         IF ::lAdjRight .AND. fif == Len(::aColumns)
             xSize := Max( ::x2 - x, xSize )
          ENDIF
          IF i == ::colpos
@@ -1081,7 +1081,7 @@ Local aCores
          x += xSize
          fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
          i ++
-         IF ! ::lAdjRight .and. fif > Len(::aColumns)
+         IF ! ::lAdjRight .AND. fif > Len(::aColumns)
             EXIT
          ENDIF
       ENDDO
@@ -1500,8 +1500,8 @@ Local xm := hwg_LOWORD(lParam), x1, fif
          hwg_InvalidateRect( ::area, 0, ::x1, ::y1+(::height+1)*::rowPos-::height, ::x2, ::y1+(::height+1)*::rowPos )
       ENDIF
       
-   ELSEIF ::lDispHead .and.;
-          nLine >= -::nHeadRows .and.;
+   ELSEIF ::lDispHead .AND.;
+          nLine >= -::nHeadRows .AND.;
           fif <= Len(::aColumns) .AND.;
           ::aColumns[fif]:bHeadClick != NIL
 

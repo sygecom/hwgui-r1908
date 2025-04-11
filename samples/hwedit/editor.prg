@@ -303,7 +303,7 @@ FUNCTION Texto()
       if Len(linha) != 0
         AAdd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
         //
-        if subs(Upper(linha), 1, 4) == "FUNC" .or. subs(Upper(linha), 1, 4) == "PROC"
+        if subs(Upper(linha), 1, 4) == "FUNC" .OR. subs(Upper(linha), 1, 4) == "PROC"
            fun := ""
            for f:= 1 to Len(linha)+1
               oCaracter++
@@ -477,7 +477,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
          hwg_SendMessage(h, WM_CLOSE, 0, 0)
      endif
      //
-     if nvirtCode = 32 .or. nvirtCode = 13 .or. nvirtCode = 8
+     if nvirtCode = 32 .OR. nvirtCode = 13 .OR. nvirtCode = 8
          hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
          oWindow := HMainWIndow():GetMdiActive():aControls
          IF oWindow != NIL
@@ -690,7 +690,7 @@ FUNCTION Salvar_Projeto(oOpcao)
 
      IF oWindow != NIL
         aControls := oWindow
-        If Empty(vText) .or. oOpcao=2
+        If Empty(vText) .OR. oOpcao=2
             fName := hwg_SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
         Else
             fName := vText

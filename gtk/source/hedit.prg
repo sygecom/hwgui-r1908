@@ -89,11 +89,11 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ::lMultiLine := .T.
    ENDIF
 
-   IF !Empty(cPicture) .or. cPicture == NIL .And. lMaxLength != NIL .or. !Empty(lMaxLength)
+   IF !Empty(cPicture) .OR. cPicture == NIL .And. lMaxLength != NIL .OR. !Empty(lMaxLength)
       ::lMaxLength:= lMaxLength
    ENDIF
-/*   IF ::lMaxLength != NIL .and. !Empty(::lMaxLength) 
-      IF !Empty(cPicture) .or. cPicture == NIL
+/*   IF ::lMaxLength != NIL .AND. !Empty(::lMaxLength) 
+      IF !Empty(cPicture) .OR. cPicture == NIL
          cPicture:=Replicate("X",::lMaxLength)
       ENDIF
    ENDIF                        ----------------- commented out by Maurizio la Cecilia */
@@ -351,7 +351,7 @@ Local nAt, i, masklen, cChar
 
 //                                         ------------ added by Maurizio la Cecilia
 
-   IF oEdit:lMaxLength != NIL .and. !Empty(oEdit:lMaxLength) .and. Len(oEdit:cPicMask) < oEdit:lMaxLength
+   IF oEdit:lMaxLength != NIL .AND. !Empty(oEdit:lMaxLength) .AND. Len(oEdit:cPicMask) < oEdit:lMaxLength
       oEdit:cPicMask := PadR( oEdit:cPicMask, oEdit:lMaxLength, "X" )
    ENDIF
 
@@ -410,7 +410,7 @@ Local i, masklen, newpos, vari
    IF !Empty(oEdit:cPicMask)
         newPos:=Len(oEdit:cPicMask)
         //writelog( "KeyRight-2 "+str(nPos) + " " +str(newPos) )
-        IF nPos>newPos .and. !Empty(Trim(oEdit:Title))
+        IF nPos>newPos .AND. !Empty(Trim(oEdit:Title))
             hwg_edit_Setpos( oEdit:handle, newPos )
         ENDIF
    ENDIF
@@ -508,15 +508,15 @@ Local cPic
             cChar := NIL
          endif
       ELSEIF cPic == "N"
-         IF !IsAlpha(cChar) .and. !IsDigit(cChar)
+         IF !IsAlpha(cChar) .AND. !IsDigit(cChar)
             cChar := NIL
          ENDIF
       ELSEIF cPic == "9"
-         IF ! IsDigit( cChar ) .and. cChar != "-"
+         IF ! IsDigit( cChar ) .AND. cChar != "-"
             cChar := NIL
          ENDIF
       ELSEIF cPic == "#"
-         IF ! IsDigit( cChar ) .and. !( cChar == " " ) .and. !( cChar $ "+-" )
+         IF ! IsDigit( cChar ) .AND. !( cChar == " " ) .AND. !( cChar $ "+-" )
             cChar := NIL
          ENDIF
       ENDIF
@@ -531,7 +531,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
 
    // writelog( "GetApplyKey "+str(asc(ckey)) )
    oEdit:title := hwg_edit_Gettext( oEdit:handle )
-   IF oEdit:cType == "N" .and. cKey $ ".," .AND. ;
+   IF oEdit:cType == "N" .AND. cKey $ ".," .AND. ;
                      ( nPos := At( ".",oEdit:cPicMask ) ) != 0
       IF oEdit:lFirst
          vari := 0
@@ -565,7 +565,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
       cKey := Input( oEdit,cKey,nPos )
       IF cKey != NIL
          SetGetUpdated(oEdit)
-         IF Set( _SET_INSERT ) // .or. hwg_HIWORD(x) != hwg_LOWORD(x)
+         IF Set( _SET_INSERT ) // .OR. hwg_HIWORD(x) != hwg_LOWORD(x)
             IF oEdit:lPicComplex
                nGetLen := Len(oEdit:cPicMask)
                FOR nLen := 0 TO nGetLen
@@ -705,7 +705,7 @@ Local xValue, cChar, nFor, minus
          ENDIF
 
          FOR nFor := FirstEditable(oEdit) to LastEditable(oEdit)
-            IF !IsEditable(oEdit, nFor) .and. SubStr(cBuffer, nFor, 1) != "."
+            IF !IsEditable(oEdit, nFor) .AND. SubStr(cBuffer, nFor, 1) != "."
                cBuffer = Left(cBuffer, nFor - 1) + Chr( 1 ) + SubStr(cBuffer, nFor + 1)
             ENDIF
          NEXT
@@ -740,7 +740,7 @@ Local xValue, cChar, nFor, minus
    ELSEIF oEdit:cType == "L"
 
       cBuffer := Upper(cBuffer)
-      xValue := "T" $ cBuffer .or. "Y" $ cBuffer .or. hb_langmessage(HB_LANG_ITEM_BASE_TEXT + 1) $ cBuffer
+      xValue := "T" $ cBuffer .OR. "Y" $ cBuffer .OR. hb_langmessage(HB_LANG_ITEM_BASE_TEXT + 1) $ cBuffer
 
    ELSEIF oEdit:cType == "D"
 
