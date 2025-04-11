@@ -24,7 +24,7 @@ Function Main()
         ENDMENU
 
         ACTIVATE WINDOW oMain MAXIMIZED
-Return NIL
+RETURN NIL
 
 Function Test()
 Local cMsgErr := "Bar doesn't exist"
@@ -44,5 +44,5 @@ Local cMsgErr := "Bar doesn't exist"
 
         ACTIVATE DIALOG oForm
 
-Return NIL
+RETURN NIL
 

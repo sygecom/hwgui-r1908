@@ -35,7 +35,7 @@ Static Function onDestroy( oDlg )
       hwg_gtk_exit()
    ENDIF
 
-Return 0
+RETURN 0
 
 // Class HDialog
 
@@ -144,9 +144,9 @@ Local i
 
    // writelog( str(msg) + str(wParam) + str(lParam) )
    IF ( i := AScan(aMessModalDlg, {|a|a[1] == msg}) ) != 0
-      Return Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
+      RETURN Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
    ELSE
-      Return ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
 
 RETURN 0
@@ -173,14 +173,14 @@ RETURN NIL
 METHOD FindDialog( hWnd ) CLASS HDialog
 /*
 Local i := AScan(::aDialogs, {|o|o:handle == hWnd})
-Return IIf(i == 0, NIL, ::aDialogs[i])
+RETURN IIf(i == 0, NIL, ::aDialogs[i])
 */
-Return hwg_GetWindowObject(hWnd)
+RETURN hwg_GetWindowObject(hWnd)
 
 METHOD GetActive() CLASS HDialog
 Local handle := hwg_GetFocus()
 Local i := AScan(::Getlist, {|o|o:handle == handle})
-Return IIf(i == 0, NIL, ::Getlist[i])
+RETURN IIf(i == 0, NIL, ::Getlist[i])
 
 // End of class
 // ------------------------------------
@@ -209,7 +209,7 @@ Local iCont
       Eval(oDlg:bInit, oDlg)
    ENDIF
 
-Return 1
+RETURN 1
 
 Static Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
@@ -221,7 +221,7 @@ Local oItem
          Eval(oItem:bActivate, oItem)
       ENDIF
    ENDIF
-Return 0
+RETURN 0
 
 Static Function onEraseBk( oDlg,hDC )
 Local aCoors
@@ -229,7 +229,7 @@ Local aCoors
    IF __ObjHasMsg( oDlg,"OBMP") 
       IF oDlg:oBmp != NIL
          hwg_SpreadBitmap( hDC, oDlg:handle, oDlg:oBmp:handle )
-         Return 1
+         RETURN 1
       ELSE
         aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != NIL
@@ -239,11 +239,11 @@ Local aCoors
         ELSE
            hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,COLOR_3DFACE+1 )
         ENDIF
-        Return 1
+        RETURN 1
       ENDIF
    ENDIF
 */   
-Return 0
+RETURN 0
 
 Function hwg_DlgCommand(oDlg, wParam, lParam)
 Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
@@ -265,7 +265,7 @@ Local aMenu, i, hCtrl
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )
                ENDIF
-               Return 1
+               RETURN 1
             ENDIF
          ENDIF
          IF oDlg:lClipper
@@ -275,7 +275,7 @@ Local aMenu, i, hCtrl
                   EndDialog( oDlg:handle )
                ENDIF
             ENDIF
-            Return 1
+            RETURN 1
          ENDIF
       ELSEIF iParLow == IDCANCEL
          oDlg:nLastKey := 27
@@ -305,7 +305,7 @@ Local aMenu, i, hCtrl
          Eval(aMenu[1, i, 1])
    ENDIF
 
-Return 1
+RETURN 1
 
 Static Function onSize(oDlg, wParam, lParam)
    LOCAL aControls, iCont , nW1, nH1
@@ -339,7 +339,7 @@ Static Function onSize(oDlg, wParam, lParam)
       NEXT
    ENDIF
 
-Return 0
+RETURN 0
 
 Static Function onActivate(oDlg, wParam, lParam)
 Local iParLow := hwg_LOWORD(wParam)
@@ -350,15 +350,15 @@ Local iParLow := hwg_LOWORD(wParam)
       Eval(oDlg:bLostFocus, oDlg)
    endif
 
-Return 0
+RETURN 0
 
 Function hwg_GetModalDlg()
 Local i := Len(HDialog():aModalDialogs)
-Return IIf(i > 0, HDialog():aModalDialogs[i], 0)
+RETURN IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
 Function hwg_GetModalHandle()
 Local i := Len(HDialog():aModalDialogs)
-Return IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
+RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
 Function EndDialog( handle )
 Local oDlg
@@ -366,7 +366,7 @@ Local oDlg
    IF handle == NIL
       IF ( oDlg := Atail( HDialog():aModalDialogs ) ) == NIL
          // writelog("EndDialog-1")
-         Return NIL
+         RETURN NIL
       ENDIF
    ELSE
       oDlg := hwg_GetWindowObject( handle )
@@ -380,7 +380,7 @@ Local oDlg
    ENDIF
 
    // writelog("EndDialog-10")
-Return  hwg_DestroyWindow( oDlg:handle )
+RETURN  hwg_DestroyWindow( oDlg:handle )
 
 Function hwg_SetDlgKey( oDlg, nctrl, nkey, block )
 Local i, aKeys
@@ -389,13 +389,13 @@ Local i, aKeys
    IF nctrl == NIL ; nctrl := 0 ; ENDIF
 
    IF !__ObjHasMsg( oDlg,"KEYLIST" )
-      Return .F.
+      RETURN .F.
    ENDIF
    aKeys := oDlg:KeyList
    IF block == NIL
 
       IF ( i := AScan(aKeys, {|a|a[1] == nctrl .AND. a[2] == nkey}) ) == 0
-         Return .F.
+         RETURN .F.
       ELSE
          ADel(oDlg:KeyList, i)
          ASize(oDlg:KeyList, Len(oDlg:KeyList) - 1)
@@ -408,7 +408,7 @@ Local i, aKeys
       ENDIF
    ENDIF
 
-Return .T.
+RETURN .T.
 
 #pragma BEGINDUMP
 

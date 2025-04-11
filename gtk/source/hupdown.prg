@@ -70,7 +70,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ENDIF
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HUpDown
    IF !Empty(::oParent:handle)
@@ -78,7 +78,7 @@ METHOD Activate CLASS HUpDown
           ::nLeft,::nTop,::nWidth,::nHeight,Val(::title),::nLower,::nUpper )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Refresh()  CLASS HUpDown
 Local vari
@@ -93,16 +93,16 @@ Local vari
       hwg_SetUpDown( ::handle, Val(::title) )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Static Function __When( oCtrl )
 
    oCtrl:Refresh()
    IF oCtrl:bGetFocus != NIL 
-      Return Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet), oCtrl)
+      RETURN Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet), oCtrl)
    ENDIF
 
-Return .T.
+RETURN .T.
 
 Static Function __Valid(oCtrl)
 
@@ -116,4 +116,4 @@ Static Function __Valid(oCtrl)
       hwg_SetFocus( oCtrl:handle )
    ENDIF
 
-Return .T.
+RETURN .T.

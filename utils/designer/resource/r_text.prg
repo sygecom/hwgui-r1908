@@ -11,7 +11,7 @@ FUNCTION STR2FONT
        Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
        Val(hwg_NextItem( cFont,,"," )))
   ENDIF
-Return oFont
+RETURN oFont
 ENDFUNC
 
    PRIVATE strbuf := Space(512)
@@ -43,7 +43,7 @@ ENDFUNC
 
   IF han == - 1
     hwg_MsgStop( "Can't open "+oForm:path+oForm:filename )
-    Return
+    RETURN
   ENDIF
   DO WHILE .T.
     stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
@@ -260,6 +260,6 @@ ENDFUNC
     oForm:SetProp( "Variables",aVars )
   ENDIF
 
-Return
+RETURN
 #ENDSCRIPT
 

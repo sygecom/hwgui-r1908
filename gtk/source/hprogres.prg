@@ -42,7 +42,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,b
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HProgressBar
 
@@ -76,7 +76,7 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
    ::Activate()
    ::oParent:AddControl( Self )
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HProgressBar
 
@@ -85,7 +85,7 @@ METHOD Activate CLASS HProgressBar
                   ::nLeft, ::nTop, ::nWidth,::nHeight )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Step()
 
@@ -95,7 +95,7 @@ METHOD Step()
       hwg_UpdateProgressBar( ::handle )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Set( cTitle,nPos ) CLASS HProgressBar
 
@@ -106,7 +106,7 @@ METHOD Set( cTitle,nPos ) CLASS HProgressBar
       hwg_SetProgressBar( ::handle,nPos )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Close()
 
@@ -115,5 +115,5 @@ METHOD Close()
       EndDialog( ::oParent:handle )
    ENDIF
 
-Return NIL
+RETURN NIL
 

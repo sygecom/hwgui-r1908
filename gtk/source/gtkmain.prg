@@ -14,7 +14,7 @@ Function hwg_EndWindow()
    IF HWindow():GetMain() != NIL
       HWindow():aWindows[1]:Close()
    ENDIF
-Return NIL
+RETURN NIL
 
 Function hwg_VColor( cColor )
 Local i,res := 0, n := 1, iValue
@@ -28,12 +28,12 @@ Local i,res := 0, n := 1, iValue
       elseif iValue >= 97 .AND. iValue <= 102
          iValue -= 87
       else
-        Return 0
+        RETURN 0
       endif
       res += iValue * n
       n *= 16
    next
-Return res
+RETURN res
 
 Function hwg_MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
 Local oModDlg, oFont := HFont():Add("Sans", 0, 12)
@@ -57,12 +57,12 @@ Local cRes := ""
 
    oFont:Release()
    IF oModDlg:lResult
-      Return Trim(cRes)
+      RETURN Trim(cRes)
    ELSE
       cRes := ""
    ENDIF
 
-Return cRes
+RETURN cRes
 
 Function hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel)
 Local oDlg, oBrw
@@ -131,23 +131,23 @@ Local hDC, aMetr, width, height, screenh
    oDlg:Activate()
    oFont:Release()
 
-Return nChoice
+RETURN nChoice
 
 
 INIT PROCEDURE GTKINIT()
    hwg_gtk_init()
-Return
+RETURN
 
 /*
 EXIT PROCEDURE GTKEXIT()
    hwg_gtk_exit()
-Return
+RETURN
 */
 
 Function hwg_RefreshAllGets( oDlg )
 
    AEval(oDlg:GetList, {|o|o:Refresh()})
-Return NIL
+RETURN NIL
 
 FUNCTION HWG_Version(oTip)
 RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
@@ -159,7 +159,7 @@ Local aControls, i
       hwg_WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
 
    ENDIF
-Return NIL
+RETURN NIL
 
 #pragma BEGINDUMP
 

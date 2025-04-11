@@ -94,13 +94,13 @@ Local nId
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
-Return NIL
+RETURN NIL
 
 Function FileClose(oDlg)
    Local oBrw := oDlg:FindControl( 111 )
    dbSelectArea(oBrw:alias)
    dbCloseArea()
-Return .T.
+RETURN .T.
 
 function printdos
 Local han := fcreate("LPT1", 0)
@@ -167,7 +167,7 @@ Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
    ACTIVATE DIALOG oModDlg
    oFont:Release()
 
-Return NIL
+RETURN NIL
 
 Function TestTab()
 
@@ -207,7 +207,7 @@ Local oPrinter, oFont
 
    INIT PRINTER oPrinter
    IF oPrinter == NIL      
-      Return NIL         
+      RETURN NIL         
    ENDIF            
                               
    oFont := oPrinter:AddFont( "Courier Regular", 10 )
@@ -228,6 +228,6 @@ Local oPrinter, oFont
    oPrinter:Preview()
    oPrinter:End()
 
-Return NIL
+RETURN NIL
 #endif                                                               
                                                                

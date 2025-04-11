@@ -51,7 +51,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
       // ::oParent:AddEvent( BN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HCheckButton
 
@@ -61,7 +61,7 @@ METHOD Activate CLASS HCheckButton
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Init() CLASS HCheckButton
    IF !::lInit
@@ -70,7 +70,7 @@ METHOD Init() CLASS HCheckButton
          hwg_CheckButton( ::handle,.T. )
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
@@ -81,7 +81,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
       __When( Self )
    ENDIF
 
-Return NIL
+RETURN NIL
 #else
 METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
 
@@ -93,7 +93,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HCheckButton
       __When( Self )
    ENDSWITCH
 
-Return NIL
+RETURN NIL
 #endif
 
 METHOD Refresh() CLASS HCheckButton
@@ -105,7 +105,7 @@ Local var
    ENDIF
 
    hwg_CheckButton( ::handle,::value )
-Return NIL
+RETURN NIL
 
 Static Function __Valid(oCtrl)
 Local res
@@ -121,19 +121,19 @@ Local res
       hwg_SetFocus( oCtrl:handle )
    ENDIF
 
-Return .T.
+RETURN .T.
 
 Static Function __When( oCtrl )
 Local res
 
    oCtrl:Refresh()
 
-   IF oCtrl:bGetFocus != NIL 
+   IF oCtrl:bGetFocus != NIL
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF HB_IsLogical(res) .AND. !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
-      Return res
+      RETURN res
    ENDIF
 
-Return .T.
+RETURN .T.

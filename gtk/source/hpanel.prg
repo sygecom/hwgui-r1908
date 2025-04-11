@@ -39,7 +39,7 @@ Local oParent:=IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HPanel
 
@@ -48,17 +48,17 @@ METHOD Activate CLASS HPanel
                    ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HPanel
 
    IF msg == WM_PAINT
       ::Paint()
    ELSE
-      Return ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
 
-Return 0
+RETURN 0
 
 METHOD Init CLASS HPanel
 
@@ -75,7 +75,7 @@ METHOD Init CLASS HPanel
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Paint() CLASS HPanel
 Local hDC, aCoors, oPenLight, oPenGray
@@ -88,10 +88,10 @@ Local hDC, aCoors, oPenLight, oPenGray
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Move(x1, y1, width, height)  CLASS HPanel
 
    ::Super:Move(x1, y1, width, height, .T.)
-Return NIL
+RETURN NIL
 

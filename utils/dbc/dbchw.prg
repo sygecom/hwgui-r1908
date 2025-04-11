@@ -124,14 +124,14 @@ PUBLIC nQueryWndHandle := 0
 
    aMainWindow:Activate()
 
-Return NIL
+RETURN NIL
 
 Function ChildClose
 Local nHandle := hwg_SendMessage(HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0)
    if nHandle > 0
       hwg_SendMessage(HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0)
    endif
-Return NIL
+RETURN NIL
 
 Function About
 Local oModDlg, oFont
@@ -147,7 +147,7 @@ Local oModDlg, oFont
 
    oModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 
 /* -----------------------  Options --------------------- */
@@ -164,7 +164,7 @@ Local aModDlg, aDates := { "dd/mm/yy","mm/dd/yy" }
 
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitConfig
 #ifdef RDD_ADS
@@ -180,7 +180,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
 #else
    hwg_MsgInfo("No config in mode DBFCDX")
 #endif
-Return .T.
+RETURN .T.
 
 Static Function EndConfig()
 Local hDlg := hwg_GetModalHandle()
@@ -222,7 +222,7 @@ Local new_numdriv, new_servertype, serverPath
              hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
              ServerButton( 0 )
              hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Cannot connect to "+serverPath )
-             Return .F.
+             RETURN .F.
          ELSE
              mypath := serverPath
          ENDIF
@@ -230,12 +230,12 @@ Local new_numdriv, new_servertype, serverPath
    ENDIF
 #endif
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Static Function ServerButton( iEnable )
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
    hwg_SendMessage(hEdit, WM_ENABLE, iEnable, 0)
-Return .T.
+RETURN .T.
 
 /* -----------------------  Select Order --------------------- */
 
@@ -265,7 +265,7 @@ Local indname
    oBrw:ofont := oBrwFont
 
    oModDlg:Activate()
-Return NIL
+RETURN NIL
 
 Static Function SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
@@ -279,7 +279,7 @@ Local oWindow := HMainWindow():GetMdiActive(), aControls, i
       ENDIF
    ENDIF
    EndDialog( hwg_GetModalHandle() )
-Return NIL
+RETURN NIL
 
 /* -----------------------  Creating New Index --------------------- */
 
@@ -293,14 +293,14 @@ Local aModDlg
         ON BN_CLICKED,IDC_CHECKBOX1 ACTION {|| TagName() }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-Return NIL
+RETURN NIL
 
 Static Function TagName
 Local hDlg := hwg_GetModalHandle()
@@ -310,7 +310,7 @@ Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
    ELSE
       hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function EndNewIndex()
 Local hDlg := hwg_GetModalHandle()
@@ -320,21 +320,21 @@ Local oWindow, aControls, i
    indname := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 20 )
    IF Empty(indname)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    isMulti := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
    IF isMulti
       tagname := hwg_GetDlgItemText( hDlg, IDC_EDIT3, 60 )
       IF Empty(tagname)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
-         Return NIL
+         RETURN NIL
       ENDIF
    ENDIF
    isUniq := hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX2)
    expkey := hwg_GetDlgItemText( hDlg, IDC_EDIT4, 60 )
    IF Empty(expkey)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT4 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    expfor := hwg_GetDlgItemText( hDlg, IDC_EDIT5, 60 )
    indname := mypath + indname
@@ -365,7 +365,7 @@ Local oWindow, aControls, i
    ENDIF
 
    EndDialog( hDlg )
-Return NIL
+RETURN NIL
 
 /* -----------------------  Open Index file --------------------- */
 
@@ -385,7 +385,7 @@ Local oWindow, aControls, i
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 /* -----------------------  Close Index files --------------------- */
 
@@ -403,7 +403,7 @@ Local oWindow, aControls, i
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 /* -----------------------  Open Database file --------------------- */
 
@@ -416,7 +416,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath) ) }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitOpen
 Local hDlg := hwg_GetModalHandle()
@@ -428,7 +428,7 @@ Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTO
    hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
 #endif
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-Return .T.
+RETURN .T.
 
 Static Function EndOpen()
 Local hDlg := hwg_GetModalHandle()
@@ -477,13 +477,13 @@ Local oldLock := AdsLocking()
    ELSE
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
    ENDIF
-Return .T.
+RETURN .T.
 
 Function OpenDbf(fname, alsname, hChild, pass)
 Local oWindow, aControls, oBrowse, i
 
    IF !FiOpen( fname, alsname,, pass )
-      Return 0
+      RETURN 0
    ENDIF
 
    IF Len(HWindow():aWindows) == 2
@@ -526,7 +526,7 @@ Local oWindow, aControls, oBrowse, i
    ENDIF
    hwg_WriteStatus( oWindow, 1,Ltrim(Str(Reccount(), 10))+" records" )
    hwg_WriteStatus( oWindow, 2,"Order: None",.T. )
-Return oWindow:handle
+RETURN oWindow:handle
 
 /* -----------------------  Calculator  --------------------- */
 
@@ -538,12 +538,12 @@ Local oModDlg
         ON 0,IDOK         ACTION {|| EndCalc()}
    oModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitCalc()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
-Return NIL
+RETURN NIL
 
 Static Function EndCalc()
 Local hDlg := hwg_GetModalHandle()
@@ -552,7 +552,7 @@ Local cExpr, res
    cExpr := hwg_GetDlgItemText( hDlg, IDC_EDITCALC, 80 )
    IF Empty(cExpr)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITCALC ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    IF TYPE(Trim(cExpr)) $ "UEUI"
       hwg_MsgStop( "Wrong expression" )
@@ -561,7 +561,7 @@ Local cExpr, res
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, TRANSFORM( res, "@B" ) )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 
 /* -----------------------  Scripts  --------------------- */
@@ -576,7 +576,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath) ) }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function EndScri( lOk, nAct )
 Local hDlg := hwg_GetModalHandle()
@@ -585,7 +585,7 @@ Local fname, arScr, nError, nLineEr, obl
    fname := hwg_GetDlgItemText( hDlg, IDC_EDIT8, 80 )
    IF Empty(fname)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT8 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
    IF ( arScr := hwg_RdScript( fname ) ) != NIL
@@ -607,7 +607,7 @@ Local fname, arScr, nError, nLineEr, obl
    ENDIF
    EndDialog( hDlg )
 
-Return NIL
+RETURN NIL
 
 Function ChildGetFocus( oWindow )
 Local i, aControls, oBrw
@@ -622,7 +622,7 @@ Local i, aControls, oBrw
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 Function ChildKill( oWindow )
 Local i, aControls, oBrw
@@ -646,7 +646,7 @@ Local i, aControls, oBrw
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 Function ResizeBrwQ( oBrw, nWidth, nHeight )
 Local hWndStatus, aControls := oBrw:oParent:aControls
@@ -660,7 +660,7 @@ Local aRect, i, nHbusy := 0
       ENDIF
    NEXT
    hwg_MoveWindow( oBrw:handle, 0, 0, nWidth, nHeight-nHBusy )
-Return NIL
+RETURN NIL
 
 FUNCTION Fiopen( fname, alsname, prend, pass )
 
@@ -794,8 +794,8 @@ LOCAL fname := msfile[improc]
 RETURN .T.
 
 Function hwg_WndOut()
-Return NIL
+RETURN NIL
 
 Function MsgSay( cText )
    hwg_MsgStop( cText )
-Return NIL
+RETURN NIL

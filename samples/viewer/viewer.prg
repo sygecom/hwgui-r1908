@@ -37,7 +37,7 @@ FUNCTION Main()
 
 #ifdef __FREEIMAGE__
    IF !FI_Init()
-      Return NIL
+      RETURN NIL
    ENDIF
 #endif
 

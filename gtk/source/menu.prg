@@ -42,16 +42,16 @@ Local aCoor
       hwg_trackmenu( ::handle,aCoor[1],aCoor[2],oWnd:handle )
    ENDIF
 */
-Return NIL
+RETURN NIL
 
 Function hwg_CreateMenu
 Local hMenu
 
    IF ( Empty(hMenu := hwg__CreateMenu()) )
-      Return NIL
+      RETURN NIL
    ENDIF
 
-Return { {},,, hMenu }
+RETURN { {},,, hMenu }
 
 Function hwg_SetMenu( oWnd, aMenu )
 
@@ -59,13 +59,13 @@ Function hwg_SetMenu( oWnd, aMenu )
       IF hwg__SetMenu( oWnd:handle, aMenu[5] )
          oWnd:menu := aMenu
       ELSE
-         Return .F.
+         RETURN .F.
       ENDIF
    ELSE
       oWnd:menu := aMenu
    ENDIF
 
-Return .T.
+RETURN .T.
 
 /*
  *  AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,[bItem] [,nPos] ) --> aMenuItem
@@ -89,7 +89,7 @@ Local hSubMenu
       ELSE
          AAdd(aMenu[1], {bItem, cItem, nMenuId, 0, hSubMenu})
       ENDIF
-      Return ATail( aMenu[1] )
+      RETURN ATail( aMenu[1] )
    ELSE
       AAdd(aMenu[1], NIL)
       Ains( aMenu[1],nPos )
@@ -98,31 +98,31 @@ Local hSubMenu
       ELSE
          aMenu[1,nPos] := { bItem,cItem,nMenuId, 0,hSubMenu }
       ENDIF
-      Return aMenu[1,nPos]
+      RETURN aMenu[1,nPos]
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Function hwg_FindMenuItem( aMenu, nId, nPos )
 Local nPos1, aSubMenu
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
       IF aMenu[1,npos, 3] == nId
-         Return aMenu
+         RETURN aMenu
       ELSEIF HB_IsArray( aMenu[1,npos, 1] )
          IF ( aSubMenu := hwg_FindMenuItem( aMenu[1,nPos] , nId, @nPos1 ) ) != NIL
             nPos := nPos1
-            Return aSubMenu
+            RETURN aSubMenu
          ENDIF
       ENDIF
       nPos ++
    ENDDO
-Return NIL
+RETURN NIL
 
 Function hwg_GetSubMenuHandle(aMenu, nId)
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 
-Return IIf(aSubMenu == NIL, 0, aSubMenu[5])
+RETURN IIf(aSubMenu == NIL, 0, aSubMenu[5])
 
 Function hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
 Local hMenu, nPos, aMenu, i, oBmp
@@ -167,7 +167,7 @@ Local hMenu, nPos, aMenu, i, oBmp
       _oMenu:handle := aMenu[5]
       _oMenu:aMenu := aMenu
    ENDIF
-Return NIL
+RETURN NIL
 
 Function hwg_BeginMenu( oWnd,nId,cTitle )
 Local aMenu, i
@@ -192,7 +192,7 @@ Local aMenu, i
       endif
       AAdd(aMenu, {{}, cTitle, nId, 0})
    ENDIF
-Return .T.
+RETURN .T.
 
 Function hwg_ContextMenu()
    _aMenuDef := {}
@@ -201,7 +201,7 @@ Function hwg_ContextMenu()
    _nLevel := 0
    _Id := CONTEXTMENU_FIRST_ID
    _oMenu := HMenu():New()
-Return _oMenu
+RETURN _oMenu
 
 Function hwg_EndMenu()
    IF _nLevel > 0
@@ -218,7 +218,7 @@ Function hwg_EndMenu()
       _oWnd     := NIL
       _oMenu    := NIL
    ENDIF
-Return .T.
+RETURN .T.
 
 Function hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, lBitmap, lResource, lCheck )
 Local aMenu, i, oBmp, nFlag
@@ -253,7 +253,7 @@ Local aMenu, i, oBmp, nFlag
       AAdd(_aAccel, {accFlag, accKey, nId})
    ENDIF
    */
-Return .T.
+RETURN .T.
 
 /*
 Function hwg_DefineAccelItem( nId, bItem, accFlag, accKey )
@@ -265,7 +265,7 @@ Local aMenu, i
    nId := IIf(nId == NIL, ++_Id, nId)
    AAdd(aMenu, {bItem, NIL, nId, .T.})
    AAdd(_aAccel, {accFlag, accKey, nId})
-Return .T.
+RETURN .T.
 
 
 Function hwg_SetMenuItemBitmaps( aMenu, nId, abmp1, abmp2 )
@@ -273,7 +273,7 @@ Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
 Local oMenu:=aSubMenu
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 SetMenuItemBitmaps( oMenu, nId, abmp1, abmp2 )
-Return NIL
+RETURN NIL
 
 Function hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
 Local aSubMenu := hwg_FindMenuItem( aMenu, nId )
@@ -285,7 +285,7 @@ else
 endif
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 HWG__InsertBitmapMenu( oMenu, nId, obmp:handle )
-Return NIL
+RETURN NIL
 
 Function hwg_SearchPosBitmap( nPos_Id )
 
@@ -303,7 +303,7 @@ Function hwg_SearchPosBitmap( nPos_Id )
       ENDDO
    ENDIF
 
-Return lBmp
+RETURN lBmp
 */ 
 
 Static Function GetMenuByHandle(hWnd)
@@ -321,7 +321,7 @@ Local i, aMenu, oDlg
       ENDIF
    ENDIF
 
-Return aMenu
+RETURN aMenu
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function CheckMenuItem( hWnd, nId, lValue )
@@ -334,7 +334,7 @@ Local aMenu, aSubMenu, nPos
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsCheckedMenuItem( hWnd, nId )
@@ -347,7 +347,7 @@ Local aMenu, aSubMenu, nPos, lRes := .F.
       ENDIF   
    ENDIF
    
-Return lRes
+RETURN lRes
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function EnableMenuItem( hWnd, nId, lValue )
@@ -360,7 +360,7 @@ Local aMenu, aSubMenu, nPos
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 // TODO: adição do prefixo HWG_ conflita com função já existente
 Function IsEnabledMenuItem( hWnd, nId )
@@ -373,7 +373,7 @@ Local aMenu, aSubMenu, nPos
       ENDIF   
    ENDIF
    
-Return NIL
+RETURN NIL
 
 #pragma BEGINDUMP
 

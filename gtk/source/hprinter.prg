@@ -60,7 +60,7 @@ Local aPrnCoors
       ::cPrinterName := cPrinter
    ENDIF
    IF ::hDC == 0
-      Return NIL
+      RETURN NIL
    ELSE
       aPrnCoors := hwg_gp_GetDeviceArea(::hDC)
       ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])
@@ -72,7 +72,7 @@ Local aPrnCoors
       // writelog( ::cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]) )
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD SetMode(nOrientation) CLASS HPrinter
 Local x
@@ -90,7 +90,7 @@ Local x
       ::nPHeight := x
    ENDIF
 
-Return .T.
+RETURN .T.
 
 METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline, nCharset ) CLASS HPrinter
 Local oFont
@@ -102,14 +102,14 @@ Local oFont
        IIf(lBold != NIL .AND. lBold, 700, 400),    ;
        IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0))
 
-Return oFont
+RETURN oFont
 
 METHOD SetFont( oFont )  CLASS HPrinter
 Local oFontOld := ::oFont
 
    hwg_gp_SetFont( ::hDC,oFont:handle )
    ::oFont := oFont
-Return oFontOld
+RETURN oFontOld
 
 METHOD End() CLASS HPrinter
 
@@ -117,7 +117,7 @@ METHOD End() CLASS HPrinter
      hwg_UnrefPrinter( ::hDC )
      ::hDC := 0
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
 
@@ -126,7 +126,7 @@ METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
    ENDIF
 
    IF y2 > ::nHeight
-      Return NIL
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -138,7 +138,7 @@ METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
    ENDIF
    hwg_gp_Rectangle(::hDC, x1, y2, x2, y1)
 
-Return NIL
+RETURN NIL
 
 METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
@@ -147,7 +147,7 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
    ENDIF
 
    IF y2 > ::nHeight
-      Return NIL
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -160,13 +160,13 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
    hwg_gp_DrawLine(::hDC, x1, y2, x2, y1)
 
-Return NIL
+RETURN NIL
 
 METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont ) CLASS HPrinter
 Local oFontOld
 
    IF y2 > ::nHeight
-      Return NIL
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -186,12 +186,12 @@ Local oFontOld
       ::SetFont( oFontOld )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
 
    IF y2 > ::nHeight
-      Return NIL
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -204,7 +204,7 @@ METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
 
    // hwg_DrawBitmap( ::hDC,hBitmap,Iif(nOpt == NIL,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
 
-Return NIL
+RETURN NIL
 
 METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
 
@@ -213,23 +213,23 @@ METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
       hwg_gp_ToFile(::hDC, cFileName)
    ENDIF
    ::nPage := 0
-Return NIL
+RETURN NIL
 
 METHOD EndDoc() CLASS HPrinter
 
    hwg_EndDoc(::hDC)
-Return NIL
+RETURN NIL
 
 METHOD StartPage() CLASS HPrinter
 
    hwg_StartPage(::hDC)
    ::nPage ++
-Return NIL
+RETURN NIL
 
 METHOD EndPage() CLASS HPrinter
 
    hwg_EndPage(::hDC)
-Return NIL
+RETURN NIL
 
 
 /*
@@ -266,7 +266,7 @@ Local i, nlen := Len(::aFonts)
          ::aFonts[i]:Underline == fdwUnderline
 
          ::aFonts[i]:nCounter ++
-         Return ::aFonts[i]
+         RETURN ::aFonts[i]
       ENDIF
    NEXT
 
@@ -292,7 +292,7 @@ Local i, nlen := Len(::aFonts)
 
    AAdd(::aFonts, Self)
 
-Return Self
+RETURN Self
 
 METHOD Release(lAll) CLASS HGP_Font
 Local i, nlen := Len(::aFonts)
@@ -302,7 +302,7 @@ Local i, nlen := Len(::aFonts)
          /* hwg_gp_release(::aFonts[i]:handle) */
       NEXT
       ::aFonts := {}
-      Return NIL
+      RETURN NIL
    ENDIF
    ::nCounter --
    IF ::nCounter == 0
@@ -315,7 +315,7 @@ Local i, nlen := Len(::aFonts)
          ENDIF
       NEXT
    ENDIF
-Return NIL
+RETURN NIL
 
 CLASS HGP_Pen INHERIT HObject
 
@@ -336,14 +336,14 @@ Local i
    FOR i := 1 TO Len(::aPens)
       IF ::aPens[i]:width == nWidth
          ::aPens[i]:nCounter ++
-         Return ::aPens[i]
+         RETURN ::aPens[i]
       ENDIF
    NEXT
 
    ::width  := nWidth
    AAdd(::aPens, Self)
 
-Return Self
+RETURN Self
 
 METHOD Release() CLASS HGP_Pen
 Local i, nlen := Len(::aPens)
@@ -358,4 +358,4 @@ Local i, nlen := Len(::aPens)
          ENDIF
       NEXT
    ENDIF
-Return NIL
+RETURN NIL

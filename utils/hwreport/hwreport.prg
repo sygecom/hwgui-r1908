@@ -112,7 +112,7 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
 
    oMainWindow:Activate()
 
-Return NIL
+RETURN NIL
 
 Function About
 Local aModDlg, oFont
@@ -125,7 +125,7 @@ Local aModDlg, oFont
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()
-Return NIL
+RETURN NIL
 
 Static Function NewReport( oMainWindow )
 Local oDlg
@@ -136,7 +136,7 @@ Local oDlg
 
    oDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function EndNewrep( oMainWindow,oDlg )
 
@@ -154,7 +154,7 @@ Static Function EndNewrep( oMainWindow,oDlg )
    hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
 
    EndDialog()
-Return NIL
+RETURN NIL
 
 Static Function PaintMain( oWnd )
 Local pps, hDC, hWnd := oWnd:handle
@@ -165,7 +165,7 @@ Local aCoors
 Local step, kolsteps, nsteps
 
    IF aPaintRep == NIL
-      Return -1
+      RETURN -1
    ENDIF
 
    pps := hwg_DefinePaintStru()
@@ -259,7 +259,7 @@ Local step, kolsteps, nsteps
    ENDIF
 
    hwg_EndPaint( hWnd, pps )
-Return 0
+RETURN 0
 
 Static Function PaintItem( hDC, aItem, aCoors, lPreview )
 Local x1 := LEFT_INDENT + aItem[ITEM_X1], y1 := TOP_INDENT + aItem[ITEM_Y1] - aPaintRep[FORM_Y]
@@ -308,7 +308,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2,DT_CENTER )
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem, hWnd := oWnd:handle
@@ -411,7 +411,7 @@ Local i, aItem, hWnd := oWnd:handle
          NEXT
       ENDIF
    ENDIF
-Return -1
+RETURN -1
 
 Static Function VSCROLL( hWnd,nScrollCode, nNewPos )
 Local step  := Round(aPaintRep[FORM_XKOEF]*10, 0)*2, nsteps := aPaintRep[FORM_Y]/step, kolsteps
@@ -449,7 +449,7 @@ Local aCoors := hwg_GetClientRect( hWnd )
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function MouseMove(wParam, xPos, yPos)
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2
@@ -457,7 +457,7 @@ Local hWnd
 Local aItem, i, dx, dy
 
    IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
-      Return .T.
+      RETURN .T.
    ENDIF
    s_itemBorder := 0
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
@@ -468,7 +468,7 @@ Local aItem, i, dx, dy
       ENDIF
    ELSEIF s_itemPressed > 0
       IF hwg_IsCheckedMenuItem(,IDM_MOUSE2) .AND. Abs(xPos - s_mPos[1]) < 3 .AND. Abs(yPos - s_mPos[2]) < 3
-         Return NIL
+         RETURN NIL
       ENDIF
       aItem := aPaintRep[FORM_ITEMS,s_itemPressed]
       IF hwg_CheckBit( wParam, MK_LBUTTON )
@@ -586,13 +586,13 @@ Local aItem, i, dx, dy
          ENDIF
       NEXT
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function LButtonDown( xPos, yPos )
 Local i, aItem, res := .F.
 Local hWnd := Hwindow():GetMain():handle
    IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
-      Return .T.
+      RETURN .T.
    ENDIF
    IF s_nAddItem > 0
    ELSEIF s_itemBorder != 0
@@ -630,13 +630,13 @@ Local hWnd := Hwindow():GetMain():handle
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function LButtonUp( xPos, yPos )
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, aItem
 Local hWnd := Hwindow():GetMain():handle
    IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( ,IDM_VIEW1 )
-      Return .T.
+      RETURN .T.
    ENDIF
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y]-1
@@ -678,7 +678,7 @@ Local hWnd := Hwindow():GetMain():handle
       aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]==y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
    ENDIF
    s_itemPressed := s_itemSized := s_itemBorder := s_nAddItem := 0
-Return NIL
+RETURN NIL
 
 Static Function DeleteItem()
 Local hWnd := Hwindow():GetMain():handle
@@ -711,7 +711,7 @@ Local i, aItem
          EXIT
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 Static Function DeselectAll( iSelected )
 Local i, iPrevSelected := 0
@@ -725,10 +725,10 @@ Local i, iPrevSelected := 0
          aPaintRep[FORM_ITEMS,i,ITEM_STATE] := STATE_NORMAL
       ENDIF
    NEXT
-Return iPrevSelected
+RETURN iPrevSelected
 
 Static Function WriteItemInfo( aItem )
    hwg_WriteStatus( Hwindow():GetMain(), 1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
-Return NIL
+RETURN NIL

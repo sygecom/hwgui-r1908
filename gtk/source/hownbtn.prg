@@ -87,7 +87,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HOwnButton
    IF !Empty(::oParent:handle)
@@ -100,7 +100,7 @@ METHOD Activate CLASS HOwnButton
    EndIf
 
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HOwnButton
 
@@ -116,7 +116,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HOwnButton
       ::End()
    ENDIF
 
-Return 0
+RETURN 0
 
 METHOD Init CLASS HOwnButton
 
@@ -125,7 +125,7 @@ METHOD Init CLASS HOwnButton
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Paint() CLASS HOwnButton
 Local hDC := hwg_GetDC(::handle)
@@ -198,7 +198,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
    // hwg_SetBkColor( hDC,oldBkColor )
    hwg_releaseDC(::handle, hDC)
 
-Return NIL
+RETURN NIL
 
 METHOD MouseMove(wParam, lParam)  CLASS HOwnButton
 Local lEnter := ( hwg_BitAnd(wParam, 16) > 0 )
@@ -215,7 +215,7 @@ Local res := .F.
       ENDIF
    ENDIF
    
-Return NIL
+RETURN NIL
 
 METHOD MDown()  CLASS HOwnButton
    IF ::state != OBTN_PRESSED
@@ -223,7 +223,7 @@ METHOD MDown()  CLASS HOwnButton
       hwg_RedrawWindow( ::handle )
       hwg_SetFocus( ::handle )
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD MUp() CLASS HOwnButton
    IF ::state == OBTN_PRESSED
@@ -236,13 +236,13 @@ METHOD MUp() CLASS HOwnButton
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Release()  CLASS HOwnButton
    ::lPress := .F.
    ::state := OBTN_NORMAL
    hwg_RedrawWindow( ::handle )
-Return NIL
+RETURN NIL
 
 METHOD End()  CLASS HOwnButton
 
@@ -256,7 +256,7 @@ METHOD End()  CLASS HOwnButton
       ::bitmap := NIL
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Enable() CLASS HOwnButton
 
@@ -264,7 +264,7 @@ METHOD Enable() CLASS HOwnButton
    ::lEnabled:=.T.
    hwg_RedrawWindow( ::handle )
 
-Return NIL
+RETURN NIL
 
 METHOD Disable() CLASS HOwnButton
 
@@ -273,5 +273,5 @@ METHOD Disable() CLASS HOwnButton
    hwg_RedrawWindow( ::handle )
    hwg_EnableWindow( ::handle, .F. )
 
-Return NIL
+RETURN NIL
 

@@ -190,7 +190,7 @@ For i:=1 to Len(aSelect)
 Next
 obrow:aArray := oTotReg
 obrow:refresh()
-Return NIL
+RETURN NIL
 
 Static Function SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
@@ -200,14 +200,14 @@ If !Empty(oTextAnt)
 endif   
 oGet:SetText(fFile)
 oGet:Refresh()
-Return NIL
+RETURN NIL
 
 
 Function ReadBuildFile()
 Local cLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal:=""
 Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
-if empty(cFolderFile); Return NIL; Endif
+if empty(cFolderFile); RETURN NIL; Endif
 oStatus:SetTextPanel(1,cFolderFile)      
 oExeName:SetText( hwg_GetIni( 'Config', 'ExeName' , , cFolderFile ))
 oLibFolder:SetText(hwg_GetIni( 'Config', 'LibFolder' , , cFolderFile ))
@@ -254,7 +254,7 @@ oBrowse2:Refresh()
 oBrowse3:Refresh()
 oBrowse4:Refresh()
 
-Return NIL
+RETURN NIL
 
 *-------------------------------------------------------------------------------------
 Function cPathNoFile(cArq)
@@ -270,17 +270,17 @@ If SubStr(cDest, -1, 1) == "\"
    cDest := SubStr(cDest, 1, Len(cDest) - 1)
 EndIf
    
-Return cDest
+RETURN cDest
 *-------------------------------------------------------------------------------------
 Function cFileNoExt( cArq )
 *-------------------------------------------------------------------------------------
 Local n
 n:=At( ".", cArq )
 If n > 0
-   Return SubStr(cArq, 1, n - 1)
+   RETURN SubStr(cArq, 1, n - 1)
 Endif
 
-Return cArq   
+RETURN cArq   
 
 Function cFileNoPath( cArq ) 
 Local i
@@ -298,18 +298,18 @@ For i:=1 to Len(cArq)
    
 Next
 
-Return cDest
+RETURN cDest
 
 Function SaveBuildFile()
 Local cLibFiles, i, oNome, g
 Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
-if empty(cFolderFile); Return NIL; Endif
+if empty(cFolderFile); RETURN NIL; Endif
 if file(cFolderFile)
    If(hwg_MsgYesNo("File "+cFolderFile+" EXIT ..Replace?"))
      Erase(cFolderFile)
    Else
      hwg_MsgInfo("No file SAVED.", "HwMake")
-     Return NIL
+     RETURN NIL
    EndIf
 EndIf     
 hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), cFolderFile )
@@ -358,7 +358,7 @@ if Len(oBrowse4:aArray) >= 1
 endif   
 
 hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
-Return NIL
+RETURN NIL
 
 Function BuildApp() 
 Local cExeHarbour
@@ -410,7 +410,7 @@ Makedir( cObj )
 cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //If !File(cExeHarbour)
 //   hwg_MsgInfo( "Not exist " + cExeHarbour +"!!" )
-//   Return NIL
+//   RETURN NIL
 //EndIf
 
 //PrgFiles
@@ -449,13 +449,13 @@ For Each i in oBrowse1:aArray
          lEnd     := 'C2006' $ cErrText .OR. 'No code generated' $ cErrText .OR. "Error E" $ cErrText .OR. "Error F" $ cErrText
          If lEnd
             ErrorPreview( Memoread(cLogErro) )
-            Return NIL
+            RETURN NIL
          Else 
             If File(cLogErro)
              //  FErase(cLogErro)
             EndIf   
          EndIf   
-         Return NIL
+         RETURN NIL
       
       EndIf   
          
@@ -467,7 +467,7 @@ For Each i in oBrowse1:aArray
    cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
    If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
       hwg_MsgInfo("No Created Object files!", "HwMake" )
-      Return NIL
+      RETURN NIL
    EndIF
           
 Next
@@ -484,7 +484,7 @@ Next
 For Each i in oBrowse4:aArray     
    If ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
       hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake" )
-      Return NIL
+      RETURN NIL
    EndIf   
    cListRes += cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".res +" + CRLF
 Next
@@ -512,14 +512,14 @@ Memowrit( cMainPrg + ".bc ", cMake )
 
 If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
       hwg_MsgInfo("No link file " + cMainPrg +"!", "HwMake" )
-      Return NIL
+      RETURN NIL
 EndIf
 
 If File(cMainPrg + ".bc ")
    FErase(cMainPrg + ".bc ")
 EndIF
 
-Return NIL
+RETURN NIL
 
 
 Function RetLibrary( cHwGUI, cHarbour, cBcc55, aLibs )
@@ -573,7 +573,7 @@ Next
 
 cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
 cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
-Return cLib
+RETURN cLib
 
 Function ExecuteCommand(cProc, cSend, cLog)
 Local cFile := "execcom.bat"
@@ -592,12 +592,12 @@ If File(cFile)
    FErase(cFile)
 EndIf
 
-Return nRet
+RETURN nRet
 
 Function BrwdelIten( oBrowse )
 Adel(oBrowse:aArray, oBrowse:nCurrent)
 ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
-Return oBrowse:Refresh()
+RETURN oBrowse:Refresh()
 
 
 function OpenAbout
@@ -637,7 +637,7 @@ Local oSay
   
    ACTIVATE DIALOG oModDlg
    
-Return NIL
+RETURN NIL
 
 
 Static Function ErrorPreview( cMess )
@@ -653,4 +653,4 @@ Local oDlg, oEdit
    @ 200, 460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
    oDlg:Activate()
-Return NIL
+RETURN NIL

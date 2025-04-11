@@ -354,7 +354,7 @@ Local aCoors, retValue := -1
 
    ENDIF
 
-Return retValue
+RETURN retValue
 #else
 METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
 Local aCoors, retValue := -1
@@ -504,7 +504,7 @@ Local aCoors, retValue := -1
 
    ENDIF
 
-Return retValue
+RETURN retValue
 #endif
 
 //----------------------------------------------------//
@@ -514,7 +514,7 @@ METHOD Init CLASS HBrowse
       ::Super:Init()
       // hwg_SetWindowObject( ::handle,Self )
    ENDIF
-Return NIL
+RETURN NIL
 
 //----------------------------------------------------//
 METHOD AddColumn( oColumn ) CLASS HBrowse
@@ -559,7 +559,7 @@ Static Function InitColumn( oBrw, oColumn, n )
       oColumn:length := Max( oColumn:length, Len(oColumn:heading) )
    endif
 
-Return NIL
+RETURN NIL
 
 //----------------------------------------------------//
 METHOD DelColumn( nPos ) CLASS HBrowse
@@ -701,7 +701,7 @@ Local pps, hDC
 Local oldBkColor, oldTColor
 
    IF !::active .OR. Empty(::aColumns)
-      Return NIL
+      RETURN NIL
    ENDIF
 
    IF ::tcolor == NIL ; ::tcolor := 0 ; ENDIF
@@ -1269,7 +1269,7 @@ Local nPos
          ::lAppMode := .T.
       ELSE
          hwg_SetFocus( ::area )
-         Return NIL
+         RETURN NIL
       ENDIF
    ENDIF
    ::rowPos ++
@@ -1524,7 +1524,7 @@ Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
 
    IF ::lBtnDbl
       ::lBtnDbl := .F.
-      Return NIL
+      RETURN NIL
    ENDIF
    IF ::nCursor == 2
       DO WHILE x < xDrag
@@ -1578,7 +1578,7 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 Local x := ::x1, i := ::nLeftCol, res := .F.
 
    IF !::active .OR. Empty(::aColumns) .OR. ::x1 == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
    IF ::lDispSep .AND. yPos <= ::height+1
       IF wParam == 1 .AND. ::nCursor == 2
@@ -1688,9 +1688,9 @@ Static Function GetEventHandler( oBrw, msg, cod )
    IF msg == WM_KEYDOWN .AND. cod == GDK_Escape
       oBrw:oGet:nLastKey := GDK_Escape
       hwg_SetFocus( oBrw:area )
-      Return 1
+      RETURN 1
    ENDIF
-Return 0
+RETURN 0
 
 Static Function VldBrwEdit( oBrw, fipos )
 Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
@@ -1757,7 +1757,7 @@ Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
    oBrw:oGet := NIL
    hwg_SetFocus( oBrw:area )
 
-Return .T.
+RETURN .T.
 
 //----------------------------------------------------//
 METHOD RefreshLine() CLASS HBrowse
@@ -1948,7 +1948,7 @@ Local oldRecno, newRecno
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 //----------------------------------------------------//
 // Agregado x WHT. 27.07.02
@@ -1960,7 +1960,7 @@ METHOD ShowSizes() CLASS HBrowse
 RETURN NIL
 
 Function hwg_ColumnArBlock()
-Return {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
+RETURN {|value,o,n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
 
 Static function HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0

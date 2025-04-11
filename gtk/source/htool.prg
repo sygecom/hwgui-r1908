@@ -57,7 +57,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS hToolBar
    IF !Empty(::oParent:handle)
@@ -197,7 +197,7 @@ METHOD Notify( lParam ) CLASS hToolBar
        endif
     ENDIF
 
-Return 0
+RETURN 0
 */
 METHOD AddButton(nBitIp,nId,bState,bStyle,cText,bClick,c,aMenu) CLASS hToolBar
    Local hMenu := NIL
@@ -219,7 +219,7 @@ Local nPos
          ENDIF
       endif
    ENDIF
-Return  NIL
+RETURN  NIL
 
 METHOD REFRESH() class htoolbar
    if ::lInit

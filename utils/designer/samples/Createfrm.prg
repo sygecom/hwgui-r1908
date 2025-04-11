@@ -32,7 +32,7 @@ Function Main
           
    Next
    
-Return NIL   
+RETURN NIL
    
    
    

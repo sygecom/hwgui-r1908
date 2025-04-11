@@ -74,7 +74,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
 
    ::oParent:AddControl( Self )
 
-Return Self
+RETURN Self
 
 METHOD NewId() CLASS HControl
 Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
@@ -85,7 +85,7 @@ Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
          nId --
       ENDDO
    ENDIF
-Return nId
+RETURN nId
 
 METHOD AddName(cName) CLASS HControl
 
@@ -147,7 +147,7 @@ METHOD SetColor( tcolor,bcolor,lRepaint ) CLASS HControl
       hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Move(x1, y1, width, height, lMoveParent)  CLASS HControl
 Local lMove := .F., lSize := .F.
@@ -172,7 +172,7 @@ Local lMove := .F., lSize := .F.
       hwg_MoveWidget( ::handle, IIf(lMove, ::nLeft, NIL), IIf(lMove, ::nTop, NIL), ;
           IIf(lSize, ::nWidth, NIL), IIf(lSize, ::nHeight, NIL), lMoveParent )
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD End() CLASS HControl
 
@@ -181,7 +181,7 @@ METHOD End() CLASS HControl
       // hwg_DelToolTip( ::oParent:handle,::handle )
       ::tooltip := NIL
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onAnchor( x, y, w, h ) CLASS HControl
    LOCAL nAnchor, nXincRelative, nYincRelative, nXincAbsolute, nYincAbsolute
@@ -305,7 +305,7 @@ METHOD New( oWndParent,nId,nStyle,oFont,aParts,bInit,bSize,bPaint ) CLASS HStatu
    ::aParts  := aParts
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HStatus
 Local aCoors
@@ -320,13 +320,13 @@ Local aCoors
 //         ::oParent:aOffset[4] := aCoors[4] - aCoors[2]
 //      ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Init CLASS HStatus
    IF !::lInit
       ::Super:Init()
    ENDIF
-Return  NIL
+RETURN  NIL
 
 //- HStatic
 
@@ -354,7 +354,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HStatic
    IF !Empty(::oParent:handle)
@@ -362,7 +362,7 @@ METHOD Activate CLASS HStatic
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title)
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 //- HButton
 
@@ -399,7 +399,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HButton
    IF !Empty(::oParent:handle)
@@ -408,7 +408,7 @@ METHOD Activate CLASS HButton
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam )  CLASS HButton
@@ -419,7 +419,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
       ENDIF
    ENDIF
 
-Return  NIL
+RETURN  NIL
 #else
 METHOD onEvent( msg, wParam, lParam )  CLASS HButton
 
@@ -430,7 +430,7 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HButton
       ENDIF
    ENDSWITCH
 
-Return  NIL
+RETURN  NIL
 #endif
 
 CLASS HButtonEX INHERIT HButton
@@ -474,7 +474,7 @@ METHOD Activate CLASS HButtonEX
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 //- HGroup
 
@@ -497,7 +497,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption, ;
    ::title   := cCaption
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HGroup
    IF !Empty(::oParent:handle)
@@ -505,7 +505,7 @@ METHOD Activate CLASS HGroup
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 // hline
 
@@ -536,7 +536,7 @@ METHOD New( oWndParent,nId,lVert,nLeft,nTop,nLength,bSize ) CLASS hline
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS hline
    IF !Empty(::oParent:handle)
@@ -544,4 +544,4 @@ METHOD Activate CLASS hline
                                  ::nWidth,::nHeight )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL

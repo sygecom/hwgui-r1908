@@ -66,7 +66,7 @@ LOCAL i, aBmpSize
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HTab
 
@@ -76,7 +76,7 @@ METHOD Activate CLASS HTab
 
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Init() CLASS HTab
 Local i, h
@@ -95,11 +95,11 @@ Local i, h
       NEXT
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD SetTab(n) CLASS HTab
    hwg_SendMessage(::handle, TCM_SETCURFOCUS, n - 1, 0)
-Return NIL
+RETURN NIL
 
 METHOD StartPage(cname) CLASS HTab
 Local i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
@@ -117,7 +117,7 @@ Local lNew := ( i == 0 )
    ::nActive := i
    ::aPages[i, 4] := hwg_AddTab(::handle, ::aTabs[i])
 
-Return NIL
+RETURN NIL
 
 METHOD EndPage() CLASS HTab
 
@@ -132,7 +132,7 @@ METHOD EndPage() CLASS HTab
 
    ::bChange = {|o,n|o:ChangePage(n)}
 
-Return NIL
+RETURN NIL
 
 METHOD ChangePage(nPage) CLASS HTab
 
@@ -150,7 +150,7 @@ METHOD ChangePage(nPage) CLASS HTab
       Eval(::bChange2, Self, nPage)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD HidePage(nPage) CLASS HTab
 Local i, nFirst, nEnd
@@ -161,7 +161,7 @@ Local i, nFirst, nEnd
       ::aControls[i]:Hide()
    NEXT
 
-Return NIL
+RETURN NIL
 
 METHOD ShowPage(nPage) CLASS HTab
 Local i, nFirst, nEnd
@@ -178,7 +178,7 @@ Local i, nFirst, nEnd
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 METHOD GetActivePage(nFirst, nEnd) CLASS HTab
 
@@ -190,5 +190,5 @@ METHOD GetActivePage(nFirst, nEnd) CLASS HTab
       nEnd   := Len(::aControls)
    ENDIF
 
-Return ::nActive
+RETURN ::nActive
 

@@ -79,5 +79,5 @@ hwg_MsgInfo( OEDITBOX:TITLE )
 hwg_MsgInfo( mnome )
 
 
-Return NIL
+RETURN NIL
 

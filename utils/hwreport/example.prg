@@ -44,18 +44,18 @@ PRIVATE aTermMetr := { 800 }
 
    oMainWindow:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function Print1
    IF hwg_OpenReport( "example.rpt", "MyReport" )
       hwg_PrintReport()
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function Print2
    MyReport()
    hwg_PrintReport()
-Return NIL
+RETURN NIL
 
 FUNCTION MyReport
 LOCAL aPaintRep

@@ -92,7 +92,7 @@ FUNCTION LoadEdOptions( cFileName )
          NEXT
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 Function SaveEdOptions( oOptDesc )
 
@@ -168,7 +168,7 @@ HB_SYMBOL_UNUSED(oOptDesc)
    ENDIF
    oIni:Save(m->cCurDir + cIniName)
 
-Return NIL
+RETURN NIL
 
 FUNCTION EditMethod(cMethName, cMethod)
 
@@ -228,9 +228,9 @@ FUNCTION EditMethod(cMethName, cMethod)
    ACTIVATE DIALOG oDlg
    *-hwg_SetDlgKey( oEdit, 0, 9)
    IF lRes
-      Return cMethod
+      RETURN cMethod
    ENDIF
-Return NIL
+RETURN NIL
 
 Function ChangeTheme(nTheme)
 
@@ -240,7 +240,7 @@ Function ChangeTheme(nTheme)
    hwg_CheckMenuItem( oDlg:handle, 1020+nTheme, .T. )
    HDTheme():nSelected := nTheme
    editShow( ,.T. )
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION editChgFont()
 
@@ -254,7 +254,7 @@ STATIC FUNCTION editChgFont()
        HDTheme():oFont := oFont
        HDTheme():lChanged := .T.
    ENDIF
-Return NIL
+RETURN NIL
 
 // hwg_RE_SetDefault( hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset )
 // hwg_RE_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic, lUnderline )
@@ -285,7 +285,7 @@ STATIC FUNCTION editShow( cText,lRedraw )
    hwg_SendMessage(oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE)
    oEdit:oParent:AddEvent( EN_CHANGE,oEdit:id,{||EnChange(2)} )
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION EnChange(nEvent)
 
@@ -328,7 +328,7 @@ STATIC FUNCTION EnChange(nEvent)
       hwg_SendMessage(oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE)
    ENDIF
    // writelog( "EnChange "+Str(pos1)+" "+Str(pos2) ) // +" Length: "+Str(nLength) )
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION CreateHilight( cText,oTheme )
 
@@ -349,7 +349,7 @@ STATIC FUNCTION CreateHilight( cText,oTheme )
          EXIT
       ENDIF
    ENDDO
-Return arr
+RETURN arr
 
 STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
 
@@ -365,7 +365,7 @@ STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
    IF Left(LTrim(stroka), 2) == "//"
       AAdd(arr, { nLinePos,nLinePos+Len(stroka), ;
           oTheme:comment[1],,,oTheme:comment[3],oTheme:comment[4], })
-      Return arr
+      RETURN arr
    ENDIF
    SET EXACT ON
    DO WHILE nPos < sLen
@@ -386,7 +386,7 @@ STATIC FUNCTION HiLightString( stroka, arr, nLinePos, oTheme )
    ENDDO
    SET EXACT OFF
 
-Return arr
+RETURN arr
 
 STATIC FUNCTION EditColors()
 
@@ -496,7 +496,7 @@ STATIC FUNCTION EditColors()
       HDTheme():lChanged := .T.
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Static Function UpdSample(nAction)
 
@@ -516,7 +516,7 @@ Static Function UpdSample(nAction)
       IF nAction == 1
          IF Len(aSchemes) == 1
             hwg_MsgStop( "Can't delete the only theme !", "Designer" )
-            Return NIL
+            RETURN NIL
          ENDIF
          IF hwg_MsgYesNo( "Really delete the '" + aSchemes[nScheme, 1] + "' theme ?", "Designer" )
             ADel(aSchemes, nScheme)
@@ -524,12 +524,12 @@ Static Function UpdSample(nAction)
             nScheme := oBrw:nCurrent := oBrw:rowPos := 1
             oBrw:Refresh()
          ELSE
-            Return NIL
+            RETURN NIL
          ENDIF
       ELSEIF nAction == 2
          IF Empty(cScheme)
             hwg_MsgStop( "You must specify the theme name !", "Designer" )
-            Return NIL
+            RETURN NIL
          ENDIF
          IF AScan(aSchemes, {|a|Lower(a[1]) == Lower(cScheme)}) == 0
             AAdd(aSchemes,{ cScheme, AClone(aSchemes[nScheme, 2]), ;
@@ -538,7 +538,7 @@ Static Function UpdSample(nAction)
             oBrw:Refresh()
          ELSE
             hwg_MsgStop( "The " + cScheme + " theme exists already !", "Designer" )
-            Return NIL
+            RETURN NIL
          ENDIF
       ENDIF
    ENDIF
@@ -556,7 +556,7 @@ Static Function UpdSample(nAction)
    hwg_RE_SetDefault( oEditC:handle,oTheme:normal[1],,,oTheme:normal[3],oTheme:normal[4] )
    hwg_SendMessage(oEditC:handle, EM_SETBKGNDCOLOR, 0, oTheme:normal[2])
    hwg_RE_SetCharFormat( oEditC:handle,CreateHiLight(oEditC:GetText(),oTheme) )
-Return NIL
+RETURN NIL
 
 
 STATIC FUNCTION InsertField(nModus)

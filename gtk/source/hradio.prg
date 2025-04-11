@@ -35,7 +35,7 @@ METHOD New( vari,bSetGet ) CLASS HRadioGroup
       ::bSetGet := bSetGet
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD EndGroup( nSelected )  CLASS HRadioGroup
 Local nLen
@@ -49,7 +49,7 @@ Local nLen
       ENDIF
    ENDIF
    ::oGroupCurrent := NIL
-Return NIL
+RETURN NIL
 
 METHOD SetValue(nValue)  CLASS HRadioGroup
 Local nLen
@@ -57,7 +57,7 @@ Local nLen
    IF ( nLen:=Len(::aButtons) ) > 0 .AND. nValue > 0 .AND. nValue <= nLen
       hwg_CheckButton( ::aButtons[nValue]:handle,.T. )
    ENDIF
-Return NIL
+RETURN NIL
 
 
 CLASS HRadioButton INHERIT HControl
@@ -115,7 +115,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       ENDIF
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HRadioButton
 Local groupHandle := ::oGroup:handle
@@ -127,7 +127,7 @@ Local groupHandle := ::oGroup:handle
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
 
@@ -138,7 +138,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
          __Valid(Self)
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 
 Static Function __Valid(oCtrl)
@@ -151,4 +151,4 @@ Static Function __Valid(oCtrl)
       Eval(oCtrl:bLostFocus, oCtrl:oGroup:value, oCtrl)
    ENDIF
 
-Return .T.
+RETURN .T.

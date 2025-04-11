@@ -34,7 +34,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
 
    ::title   := ""
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HSayImage
 
@@ -42,4 +42,4 @@ METHOD Activate CLASS HSayImage
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL

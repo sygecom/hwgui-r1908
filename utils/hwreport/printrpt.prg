@@ -20,7 +20,7 @@ Local fontKoef, oFont
 Private lAddMode := .F.
 
    IF oPrinter:hDCPrn == NIL .OR. oPrinter:hDCPrn == 0
-      Return .F.
+      RETURN .F.
    ENDIF
 
    aPrnCoors := hwg_GetDeviceArea(oPrinter:hDCPrn)
@@ -75,4 +75,4 @@ Private lAddMode := .F.
    oPrinter:Preview()
    oPrinter:End()
 
-Return NIL
+RETURN NIL

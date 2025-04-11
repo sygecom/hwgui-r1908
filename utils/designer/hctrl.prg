@@ -173,7 +173,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
    ::Activate()
    ctrlOnSize(Self, ::oParent:nWidth, ::oParent:nHeight)
 
-Return Self
+RETURN Self
 
 METHOD Activate() CLASS HControlGen
 
@@ -188,7 +188,7 @@ METHOD Activate() CLASS HControlGen
       ENDIF
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HControlGen
 
@@ -220,12 +220,12 @@ METHOD Paint( lpdis ) CLASS HControlGen
     ENDIF
   ENDIF // :END LFB
 
-Return NIL
+RETURN NIL
 
 METHOD GetProp( cName,i ) CLASS HControlGen
 //FP get property index
   i := ::GetPropIndex( cName )
-Return IIf(i == 0, NIL, ::aProp[i, 2])
+RETURN IIf(i == 0, NIL, ::aProp[i, 2])
 
 METHOD GetPropIndex(cName ) CLASS HControlGen
 
@@ -233,7 +233,7 @@ METHOD GetPropIndex(cName ) CLASS HControlGen
 
    cName := Lower(cName)
    i := AScan(::aProp, {|a|Lower(a[1]) == cName})
-Return (i)
+RETURN (i)
 
 METHOD SetProp( xName,xValue )
 
@@ -257,7 +257,7 @@ METHOD SetProp( xName,xValue )
       ::aProp[iIndex, 2] := xValue
    ENDIF
 
-Return xValue
+RETURN xValue
 
 METHOD SetCoor( xName,nValue )
 
@@ -268,7 +268,7 @@ METHOD SetCoor( xName,nValue )
    ENDIF
    ::SetProp( xName,LTrim(Str(nValue)) )
 
-Return nValue
+RETURN nValue
 
 // -----------------------------------------------
 
@@ -320,7 +320,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
       *-ENDIF
     ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION CreateName(cPropertyName, oCtrl)
 
@@ -343,7 +343,7 @@ FUNCTION CreateName(cPropertyName, oCtrl)
       i ++
    ENDDO
 
-Return cName+LTrim(Str(i))
+RETURN cName+LTrim(Str(i))
 
 FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
 
@@ -379,7 +379,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
 
    IF dx != 0 .OR. dy != 0
       IF !lChild .AND. lMouse .AND. Abs( xPos - aBDown[BDOWN_XPOS] ) < 3 .AND. Abs( yPos - aBDown[BDOWN_YPOS] ) < 3
-         Return .F.
+         RETURN .F.
       ENDIF
 
       IF hwg_IsCheckedMenuItem( oDesigner:oMainWnd:handle, 1051 )
@@ -454,9 +454,9 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
       IF !lChild
          InspUpdBrowse()
       ENDIF
-      Return .T.
+      RETURN .T.
    ENDIF
-Return .F.
+RETURN .F.
 
 FUNCTION CtrlResize(oCtrl, xPos, yPos)
 
@@ -521,7 +521,7 @@ FUNCTION CtrlResize(oCtrl, xPos, yPos)
       ENDIF
       InspUpdBrowse()
    ENDIF
-Return NIL
+RETURN NIL
 
 Function SetBDown( oCtrl,xPos,yPos,nBorder )
 
@@ -536,10 +536,10 @@ Function SetBDown( oCtrl,xPos,yPos,nBorder )
       // nando pos  para maniplear marcar todos objetos com mouse
       aBDown[BDOWN_OCTRL] := oCtrl
    ENDIF
-Return NIL
+RETURN NIL
 
 Function GetBDown
-Return aBDown
+RETURN aBDown
 
 Function SetvBDown( oCtrl,xPos,yPos,nBorder )
 
@@ -550,10 +550,10 @@ Function SetvBDown( oCtrl,xPos,yPos,nBorder )
    vBDown[BDOWN_XPOS]  := xPos
    vBDown[BDOWN_YPOS]  := yPos
    vBDown[BDOWN_NBORDER] := 0
-Return NIL
+RETURN NIL
 
 Function GetvBDown
-Return vBDown
+RETURN vBDown
 
 FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
 
@@ -631,34 +631,34 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
       ENDIF
       hwg_SendMessage(handle, WM_PAINT, 0, 0)
    ENDIF
-Return NIL
+RETURN NIL
 
 Function GetCtrlSelected(oDlg)
-Return IIf(oDlg != NIL, IIf(oDlg:oParent:Classname() == "HPANEL", oDlg:oParent:oParent:oParent:oCtrlSelected, oDlg:oParent:oCtrlSelected), NIL)
+RETURN IIf(oDlg != NIL, IIf(oDlg:oParent:Classname() == "HPANEL", oDlg:oParent:oParent:oParent:oCtrlSelected, oDlg:oParent:oCtrlSelected), NIL)
 
 Function CheckResize(oCtrl, xPos, yPos)
    IF xPos > oCtrl:nLeft-5 .AND. xPos < oCtrl:nLeft+3 .AND. ;
       yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
-         Return 1
+         RETURN 1
       ENDIF
    ELSEIF xPos > oCtrl:nLeft+oCtrl:nWidth-5 .AND. xPos < oCtrl:nLeft+oCtrl:nWidth+3 .AND. ;
       yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
-         Return 3
+         RETURN 3
       ENDIF
    ELSEIF yPos > oCtrl:nTop-5 .AND. yPos < oCtrl:nTop+3 .AND. ;
       xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
       IF oCtrl:nHeight > 3
-         Return 2
+         RETURN 2
       ENDIF
    ELSEIF yPos > oCtrl:nTop+oCtrl:nHeight-5 .AND. yPos < oCtrl:nTop+oCtrl:nHeight+3 .AND. ;
       xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
       IF oCtrl:nHeight > 3
-         Return 4
+         RETURN 4
       ENDIF
    ENDIF
-Return 0
+RETURN 0
 
 Function MoveCtrl( oCtrl )
 
@@ -670,7 +670,7 @@ Function MoveCtrl( oCtrl )
       hwg_MoveWindow( oCtrl:handle,oCtrl:nLeft,oCtrl:nTop,oCtrl:nWidth,oCtrl:nHeight )
       hwg_RedrawWindow( oCtrl:oParent:handle,RDW_ERASE + RDW_INVALIDATE )
    ENDIF
-Return NIL
+RETURN NIL
 
 FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
 
@@ -682,7 +682,7 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
    LOCAL delta := 15
 
    IF oCtrl:lEmbed
-      Return NIL
+      RETURN NIL
    ENDIF
    IF lLeft == NIL .AND. lTop == NIL .AND. lRight == NIL .AND. lBottom == NIL
       lLeft := lTop := lRight := lBottom := .T.
@@ -727,7 +727,7 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
       Container( oCtrl:oParent,oCtrl,oCtrl:nLeft,oCtrl:nTop )
       InspUpdBrowse()
    ENDIF
-Return NIL
+RETURN NIL
 
 Function FitLine(oCtrl)
 
@@ -747,7 +747,7 @@ Function FitLine(oCtrl)
       ENDIF
       oCtrl:lEmbed := .T.
    ENDIF
-Return NIL
+RETURN NIL
 
 FUNCTION Page_New( oTab )
 
@@ -761,15 +761,15 @@ FUNCTION Page_New( oTab )
    AAdd(aTabs, "New Page")
    InspUpdProp( "Tabs", aTabs )
    hwg_RedrawWindow( oTab:handle, 5 )
-Return NIL
+RETURN NIL
 
 Function Page_Next( oTab )
    HB_SYMBOL_UNUSED(oTab)
-Return NIL
+RETURN NIL
 
 Function Page_Prev( oTab )
    HB_SYMBOL_UNUSED(oTab)
-Return NIL
+RETURN NIL
 
 FUNCTION Page_Upd(oTab, arr)
 
@@ -784,7 +784,7 @@ FUNCTION Page_Upd(oTab, arr)
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 FUNCTION Page_Select( oTab, nTab, lForce )
 
@@ -812,7 +812,7 @@ FUNCTION Page_Select( oTab, nTab, lForce )
 
    ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION EditMenu()
 
@@ -863,7 +863,7 @@ FUNCTION EditMenu()
       HFormGen():oDlgSelected:aControls[i]:SetProp( "aTree",aMenu )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION BuildTree(oParent, aMenu)
 
@@ -880,7 +880,7 @@ STATIC FUNCTION BuildTree(oParent, aMenu)
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION VldItemChange(aTree, oNode, cText)
 
@@ -890,7 +890,7 @@ STATIC FUNCTION VldItemChange(aTree, oNode, cText)
    IF ( aSubarr := FindTreeItem( aTree, oNode:cargo, @nPos ) ) != NIL
       aSubarr[nPos, 2] := cText
    ENDIF
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
 
@@ -900,16 +900,16 @@ STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
    nPos := 1
    DO WHILE nPos <= Len(aTree)
       IF aTree[npos, 3] == nId
-         Return aTree
+         RETURN aTree
       ELSEIF HB_IsArray(aTree[npos, 1])
          IF ( aSubarr := FindTreeItem( aTree[nPos, 1] , nId, @nPos1 ) ) != NIL
             nPos := nPos1
-            Return aSubarr
+            RETURN aSubarr
          ENDIF
       ENDIF
       nPos ++
    ENDDO
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION EditTree(aTree, oTree, nAction)
 
@@ -989,7 +989,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION GetMenu()
 
@@ -1174,7 +1174,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
          SetCtrlSelected(oCtrl:oParent, oCtrl, , -128)
     ENDIF
  NEXT
-Return NIL
+RETURN NIL
 
 FUNCTION AUTOSIZE(oCtrl)
 
@@ -1208,6 +1208,6 @@ FUNCTION GetTextWidth( cString, oFont ,hdc)
       hwg_SelectObject( hDC,hFont )
    ENDIF
 
-Return arr
+RETURN arr
 
 // :END LFB

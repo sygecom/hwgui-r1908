@@ -104,7 +104,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    oDesigner:ds_mypath := cCurDir
 
    IF !ReadIniFiles()
-      Return NIL
+      RETURN NIL
    ENDIF
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
@@ -371,7 +371,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 #endif
 
 
-Return cResForm
+RETURN cResForm
 
 STATIC FUNCTION ShowGrid10px()
 
@@ -392,7 +392,7 @@ if ( oDesigner:oDlgInsp == NIL )
 else
     hwg_MsgInfo( "Close the form(s) first to change the grid status","Warning")
 endif
-Return ( NIL )
+RETURN ( NIL )
 
 STATIC FUNCTION ShowGrid5px()
 
@@ -413,7 +413,7 @@ if ( oDesigner:oDlgInsp == NIL )
 else
     hwg_MsgInfo( "Close the form first to change the grid status","Warning")
 endif
-Return ( NIL )
+RETURN ( NIL )
 
 // -----------------
 CLASS HDesigner
@@ -469,7 +469,7 @@ Static Function StartDes( oDlg,p1,cForm )
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ReadIniFiles()
 
@@ -536,10 +536,10 @@ STATIC FUNCTION ReadIniFiles()
    ENDIF
    IF oDesigner:oWidgetsSet == NIL .OR. Empty(oDesigner:oWidgetsSet:aItems)
       hwg_MsgStop( "Widgets file isn't found!","Designer error" )
-      Return .F.
+      RETURN .F.
    ENDIF
 
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION BuildSet( oTab )
 
@@ -633,7 +633,7 @@ STATIC FUNCTION BuildSet( oTab )
          ENDIF
       NEXT
    ENDIF
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ArrangeBtn( oTab,x,y )
 
@@ -661,7 +661,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
          ENDIF
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ClickBtn( oTab,nId ) //, cItem,cText,nWidth,nHeight )
 
@@ -676,7 +676,7 @@ STATIC FUNCTION ClickBtn( oTab,nId ) //, cItem,cText,nWidth,nHeight )
       oBtn:Press()
       oDesigner:oBtnPressed := oBtn
    ENDIF
-Return NIL
+RETURN NIL
 
 FUNCTION DeleteCtrl()
 
@@ -703,7 +703,7 @@ FUNCTION DeleteCtrl()
       oDlg:oParent:lChanged := .T.
    ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION FindWidget( cClass )
 
@@ -715,11 +715,11 @@ FUNCTION FindWidget( cClass )
    FOR i := 1 TO Len(aSet)
       IF aSet[i]:title == "set"
          IF (oNode := aSet[i]:Find("widget", 1, {|o|o:GetAttribute("class") == cClass})) != NIL
-            Return oNode
+            RETURN oNode
          ENDIF
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 Function Evalcode(xCode)
    
@@ -734,12 +734,12 @@ Function Evalcode(xCode)
       ENDIF
    ENDIF
    IF HB_IsArray( xCode )
-      Return hwg_DoScript( xCode )
+      RETURN hwg_DoScript( xCode )
    ELSE
-      Return Eval(xCode)
+      RETURN Eval(xCode)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION CreateIni( oIni )
 
@@ -748,7 +748,7 @@ STATIC FUNCTION CreateIni( oIni )
    oNode:Add(HXMLNode():New("widgetset", , , "widgets.xml"))
 
    oIni:Save("designer.iml")
-Return NIL
+RETURN NIL
 
 FUNCTION AddRecent( oForm )
 
@@ -769,7 +769,7 @@ FUNCTION AddRecent( oForm )
       oDesigner:lChgRecent := .T.
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION EndIde()
 
@@ -839,12 +839,12 @@ STATIC FUNCTION EndIde()
 #endif
   ENDIF
 
-Return lRes
+RETURN lRes
 
 
 Function SetOmmitMenuFile(lom)
 lOmmitMenuFile := lOm
-Return lOm
+RETURN lOm
 
 // : LFB
 Function StatusBarMsg(cfile,cpos,ctam)

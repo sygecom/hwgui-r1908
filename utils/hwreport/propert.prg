@@ -43,7 +43,7 @@ Local i, aItem
          EXIT
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 Static Function StaticDlg( aItem )
 Local aModDlg
@@ -55,7 +55,7 @@ Local aModDlg
    REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
@@ -69,7 +69,7 @@ Local oFont := aItem[ITEM_FONT]
    // SetComboBox( hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1 )
    hwg_SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT1 ) )
-Return .T.
+RETURN .T.
 
 Static Function EndStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
@@ -81,7 +81,7 @@ Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_SCRIPT] := hwg_GetEditText( hDlg, IDC_EDIT3 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Static Function SetItemFont( aItem )
 Local hDlg := hwg_GetModalHandle()
@@ -90,7 +90,7 @@ Local oFont := HFont():Select()
       aItem[ITEM_FONT] := oFont
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)) )
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function LineDlg( aItem )
 Local aModDlg
@@ -102,7 +102,7 @@ Local oPen := aItem[ITEM_PEN]
    REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitLine(aItem)
 Local hDlg := hwg_GetModalHandle()
@@ -113,7 +113,7 @@ Local oPen := aItem[ITEM_PEN]
       hwg_SendMessage(hwg_GetDlgItem(hDlg, IDC_COMBOBOX2), WM_ENABLE, 0, 0)
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, Str(oPen:width, 1) )
-Return .T.
+RETURN .T.
 
 Static Function EndLine(aItem)
 Local hDlg := hwg_GetModalHandle()
@@ -127,7 +127,7 @@ Local oPen := aItem[ITEM_PEN]
       aPaintRep[FORM_CHANGED] := .T.
    ENDIF
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Function BitmapDlg( aItem )
 Local aModDlg, res := .T.
@@ -140,7 +140,7 @@ Local aModDlg, res := .T.
         ON EN_CHANGE,IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
    aModDlg:Activate()
 
-Return res
+RETURN res
 
 Static Function OpenBmp( aItem,fname )
 Local hDlg := hwg_GetModalHandle()
@@ -158,7 +158,7 @@ Local hDlg := hwg_GetModalHandle()
       hwg_SetDlgItemText( hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])) )
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function UpdateProcent( aItem )
 Local hDlg := hwg_GetModalHandle()
@@ -168,7 +168,7 @@ Local aBmpSize
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100, 0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100, 0))) )
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function InitBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
@@ -181,7 +181,7 @@ Local aBmpSize, hUp
       hwg_SetDlgItemText( hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])) )
       hwg_SetUpDown( hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1], 0) )
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function EndBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
@@ -192,7 +192,7 @@ Local aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
    aItem[ITEM_HEIGHT] := Round(aBmpSize[2]*nValue/100, 0)
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Function MarkLDlg( aItem )
 Local aModDlg
@@ -203,7 +203,7 @@ Local aModDlg
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitMarkL( aItem )
 Local hDlg := hwg_GetModalHandle()
@@ -211,14 +211,14 @@ Local hDlg := hwg_GetModalHandle()
    IF HB_IsChar(aItem[ITEM_SCRIPT])
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_SCRIPT] )
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function EndMarkL( aItem )
 Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_SCRIPT] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Function MarkFDlg( aItem )
 Local aModDlg
@@ -229,20 +229,20 @@ Local aModDlg
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
       Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
-Return .T.
+RETURN .T.
 
 Static Function EndMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
    aItem[ITEM_ALIGN] := IIf(hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON1), 0, 1)
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Function FormOptions()
 Local aModDlg
@@ -253,7 +253,7 @@ Local aModDlg
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitFOpt()
 Local hDlg := hwg_GetModalHandle()
@@ -261,12 +261,12 @@ Local hDlg := hwg_GetModalHandle()
    IF HB_IsChar(aPaintRep[FORM_VARS])
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aPaintRep[FORM_VARS] )
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function EndFOpt( aItem )
 Local hDlg := hwg_GetModalHandle()
    aPaintRep[FORM_VARS] := hwg_GetEditText( hDlg, IDC_EDIT1 )
    aPaintRep[FORM_CHANGED] := .T.
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 

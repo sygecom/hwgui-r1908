@@ -46,5 +46,5 @@ Function Main ()
 
    ACTIVATE WINDOW oWnd
 
-   Return NIL
+   RETURN NIL
 

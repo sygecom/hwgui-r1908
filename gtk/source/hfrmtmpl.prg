@@ -105,13 +105,13 @@ Local i, aControls := ::aControls, nLen := Len(aControls), o
 
    FOR i := 1 TO nLen
       IF aControls[i]:nId == nId
-         Return aControls[i]
+         RETURN aControls[i]
       ELSEIF !Empty(aControls[i]:aControls) .AND. ( o := aControls[i]:F(nId) ) != NIL
-         Return o
+         RETURN o
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 
 CLASS HFormTmpl
@@ -147,7 +147,7 @@ Local i, j, nCtrl := 0, aItems, o, aProp := {}, aMethods := {}
 Local cPre
 
    IF cId != NIL .AND. ( o := HFormTmpl():Find(cId) ) != NIL
-      Return o
+      RETURN o
    ENDIF
    IF Left(fname, 5) == "<?xml"
       oDoc := HXMLDoc():ReadString( fname )
@@ -157,10 +157,10 @@ Local cPre
 
    IF Empty(oDoc:aItems)
       hwg_MsgStop( "Can't open "+fname )
-      Return NIL
+      RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != "form"
       hwg_MsgStop( "Form description isn't found" )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    ::maxId ++
@@ -205,7 +205,7 @@ Local cPre
    NEXT
    __pp_free()
 
-Return Self
+RETURN Self
 
 METHOD Show( nMode,p1,p2,p3 ) CLASS HFormTmpl
 Local i, j, cType
@@ -382,22 +382,22 @@ Private oDlg
    ::oDlg:Activate(lModal)
 
    IF bFormExit != NIL
-      Return Eval(bFormExit)
+      RETURN Eval(bFormExit)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD F(id, n) CLASS HFormTmpl
 Local i := AScan(::aForms, {|o|o:id == id})
 
    IF i != 0 .AND. n != NIL
-      Return ::aForms[i]:aControls[n]
+      RETURN ::aForms[i]:aControls[n]
    ENDIF
-Return IIf(i == 0, NIL, ::aForms[i])
+RETURN IIf(i == 0, NIL, ::aForms[i])
 
 METHOD Find(cId) CLASS HFormTmpl
 Local i := AScan(::aForms, {|o|o:cId != NIL .AND. o:cId == cId})
-Return IIf(i == 0, NIL, ::aForms[i])
+RETURN IIf(i == 0, NIL, ::aForms[i])
 
 METHOD Close() CLASS HFormTmpl
 Local i := AScan(::aForms, {|o|o:id == ::id})
@@ -406,7 +406,7 @@ Local i := AScan(::aForms, {|o|o:id == ::id})
       ADel(::aForms, i)
       ASize(::aForms, Len(::aForms) - 1)
    ENDIF
-Return NIL
+RETURN NIL
 
 // ------------------------------
 
@@ -427,7 +427,7 @@ Local i, aTree := {}, oNode, subarr
       ENDIF
    NEXT
 
-Return IIf(Empty(aTree), NIL, aTree)
+RETURN IIf(Empty(aTree), NIL, aTree)
 
 Function hwg_ParseMethod(cMethod)
 Local arr := {}, nPos1, nPos2, cLine
@@ -459,13 +459,13 @@ Local arr := {}, nPos1, nPos2, cLine
       arr[2] := Left(arr[2], Len(arr[2]) - 1)
    ENDIF
 
-Return arr
+RETURN arr
 
 Static Function CompileMethod(cMethod, oForm, oCtrl)
 Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
 
    IF cMethod = NIL .OR. Empty(cMethod)
-      Return NIL
+      RETURN NIL
    ENDIF
    IF oCtrl != NIL .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
       // writelog( oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname() )
@@ -479,7 +479,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          bRes := &( "{||" + __Preprocess( cCode ) + "}" )
       END SEQUENCE
       ERRORBLOCK( bOldError )
-      Return bRes
+      RETURN bRes
    ELSEIF Lower(Left(arr[1], 11)) == "parameters "
       IF Len(arr) == 2
          cCode := IIf(Lower(Left(arr[2], 6)) == "return", LTrim(SubStr(arr[2], 8)), arr[2])
@@ -489,7 +489,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
             bRes := &cCode
          END SEQUENCE
          ERRORBLOCK( bOldError )
-         Return bRes
+         RETURN bRes
       ELSE
          cCode1 := IIf(nContainer == 0, ;
                "aControls[" + LTrim(Str(Len(oForm:aControls))) + "]", ;
@@ -503,7 +503,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
                    LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2],{") + ;
                    LTrim(SubStr(arr[1], 12)) + "})" + "}"
          arrExe[1] := &cCode
-         Return arrExe
+         RETURN arrExe
       ENDIF
    ENDIF
 
@@ -518,7 +518,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
              LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2])") + "}"
    arrExe[1] := &cCode
 
-Return arrExe
+RETURN arrExe
 
 STATIC FUNCTION CompileErr( e, stroka )
 Local n
@@ -562,7 +562,7 @@ Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 #define TBS_AUTOTICKS                1
 #define TBS_TOP                      4
@@ -587,7 +587,7 @@ MEMVAR aImages, lEditLabels, aParts
          NEXT
          oParent:EndPage()
       ENDIF
-      Return NIL
+      RETURN NIL
    ENDIF
 
    /* Declaring of variables, which are in the appropriate 'New()' function */
@@ -758,12 +758,12 @@ MEMVAR aImages, lEditLabels, aParts
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Function hwg_RadioNew( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor,nInitValue,bSetGet )
 Local oCtrl := HGroup():New( oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,TextColor,BackColor )
    HRadioGroup():New( nInitValue,bSetGet )
-Return oCtrl
+RETURN oCtrl
 
 
 Function hwg_Font2XML( oFont )
@@ -785,7 +785,7 @@ Local aAttr := {}
       AAdd(aAttr, {"underline", LTrim(Str(oFont:Underline, 5))})
    ENDIF
 
-Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
+RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
 Function hfrm_FontFromXML( oXmlNode )
 Local width  := oXmlNode:GetAttribute("width")
@@ -814,7 +814,7 @@ Local under := oXmlNode:GetAttribute("underline")
      under := Val( under )
   ENDIF
 
-Return HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
+RETURN HFont():Add(oXmlNode:GetAttribute("name"), width, height, weight, charset, ita, under)
 
 Function hfrm_Str2Arr( stroka )
 Local arr := {}, pos1 := 2, pos2 := 1
@@ -828,7 +828,7 @@ Local arr := {}, pos1 := 2, pos2 := 1
       ENDDO
    ENDIF
 
-Return arr
+RETURN arr
 
 Function hfrm_Arr2Str(arr)
 Local stroka := "{", i, cType
@@ -845,7 +845,7 @@ Local stroka := "{", i, cType
       ENDIF
    NEXT
 
-Return stroka + "}"
+RETURN stroka + "}"
 
 Function hfrm_GetProperty( xProp )
 Local c
@@ -863,7 +863,7 @@ Local c
       ENDIF
    ENDIF
 
-Return xProp
+RETURN xProp
 
 // ---------------------------------------------------- //
 
@@ -914,7 +914,7 @@ Local i, j, aItems, o, aProp := {}, aMethods := {}
 Local cPre
 
    IF cId != NIL .AND. ( o := HRepTmpl():Find(cId) ) != NIL
-      Return o
+      RETURN o
    ENDIF
 
    IF Left(fname, 5) == "<?xml"
@@ -925,10 +925,10 @@ Local cPre
 
    IF Empty(oDoc:aItems)
       hwg_MsgStop( "Can't open "+fname )
-      Return NIL
+      RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != "report"
       hwg_MsgStop( "Report description isn't found" )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    ::maxId ++
@@ -971,7 +971,7 @@ Local cPre
    NEXT
    __pp_free()
 
-Return Self
+RETURN Self
 
 METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
 Local oPrinter := IIf(printer != NIL, IIf(HB_IsObject(printer), printer, HPrinter():New(printer, .T.)), HPrinter():New(, .T.))
@@ -980,7 +980,7 @@ Memvar oReport
 Private oReport := Self
 
    IF oPrinter == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
    FOR i := 1 TO Len(::aProp)
       IF ::aProp[i, 1] == "paper size"
@@ -1057,7 +1057,7 @@ Private oReport := Self
    ENDIF
    oPrinter:End()
 
-Return NIL
+RETURN NIL
 
 METHOD PrintItem( oItem ) CLASS HRepTmpl
 Local aMethod, lRes := .T., i, nPenType, nPenWidth
@@ -1069,11 +1069,11 @@ Memvar lLastCycle, lSkipItem
       IF cText == "DocHeader"
          IF ::oPrinter:nPage > 1
             ::nAOffSet := Val( aGetSecond(oItem:aProp, "geometry")[4] ) * ::nKoefY
-            Return NIL
+            RETURN NIL
          ENDIF
       ELSEIF cText == "DocFooter"
          IF ::lNextPage
-            Return NIL
+            RETURN NIL
          ENDIF
       ELSEIF cText == "Table" .AND. ::lNextPage
          Private lSkipItem := .T.
@@ -1118,7 +1118,7 @@ Memvar lLastCycle, lSkipItem
                      ENDIF
                      ::PrintItem( oItem:aControls[i] )
                      IF ::lNextPage
-                        Return NIL
+                        RETURN NIL
                      ENDIF
                   ENDIF
                NEXT
@@ -1158,7 +1158,7 @@ Memvar lLastCycle, lSkipItem
             ::lNextPage := .T.
             ::nTOffset := ::nAOffSet := 0
             // writelog( "::lNextPage := .T. "+ oItem:cClass )
-            Return NIL
+            RETURN NIL
          ENDIF
       ENDIF
 
@@ -1249,7 +1249,7 @@ Memvar lLastCycle, lSkipItem
       hwg_DoScript( aMethod )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD ReleaseObj( aControls ) CLASS HRepTmpl
 Local i
@@ -1276,11 +1276,11 @@ Local i
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 METHOD Find(cId) CLASS HRepTmpl
 Local i := AScan(::aReports, {|o|o:cId != NIL .AND. o:cId == cId})
-Return IIf(i == 0, NIL, ::aReports[i])
+RETURN IIf(i == 0, NIL, ::aReports[i])
 
 METHOD Close() CLASS HRepTmpl
 Local i := AScan(::aReports, {|o|o:id == ::id})
@@ -1289,7 +1289,7 @@ Local i := AScan(::aReports, {|o|o:id == ::id})
       ADel(::aReports, i)
       ASize(::aReports, Len(::aReports) - 1)
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function ReadRepItem( oCtrlDesc, oContainer )
 Local oCtrl := HRepItem():New( oContainer )
@@ -1319,12 +1319,12 @@ Local nPenWidth, nPenType
       oCtrl:lPen := .T.
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Static Function aGetSecond(arr, xFirst)
 Local i := AScan(arr, {|a|a[1] == xFirst})
 
-Return IIf(i == 0, NIL, arr[i, 2])
+RETURN IIf(i == 0, NIL, arr[i, 2])
 
 Static Function hrep_FontFromXML( oPrinter,oXmlNode,height )
 Local weight := oXmlNode:GetAttribute("weight")
@@ -1345,7 +1345,7 @@ Local name  := oXmlNode:GetAttribute("name"), i
   ita    := IIf(ita != NIL, Val(ita), 0)
   under  := IIf(under != NIL, Val(under), 0)
 
-Return oPrinter:AddFont( name, height, (weight > 400), (ita > 0), (under > 0), charset )
+RETURN oPrinter:AddFont( name, height, (weight > 400), (ita > 0), (under > 0), charset )
 
 #pragma BEGINDUMP
 

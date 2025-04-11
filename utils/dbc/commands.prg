@@ -31,7 +31,7 @@ Local af := Array( Fcount() )
 
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function RecNumberEdit
 Local hDlg := hwg_GetModalHandle()
@@ -39,12 +39,12 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITRECN, "1" )
    hwg_SetFocus( hEdit )
-Return NIL
+RETURN NIL
 
 Static Function RecNumberDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITRECN )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
-Return NIL
+RETURN NIL
 
 Static Function InitRepl()
 Local hDlg := hwg_GetModalHandle()
@@ -52,7 +52,7 @@ Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
-Return NIL
+RETURN NIL
 
 Static Function EndRepl()
 Local hDlg := hwg_GetModalHandle()
@@ -65,12 +65,12 @@ Private finame, cValue, cFor
    finame := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 )
    IF Empty(finame)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX1 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    cValue := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(cValue)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
    cFor := hwg_GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
    IF !Empty(cFor) .AND. TYPE(cFor) != "L"
@@ -98,7 +98,7 @@ Private finame, cValue, cFor
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 /* -----------------------  Delete, recall, count --------------------- */
 
@@ -114,7 +114,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable() }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitDele(nAct)
 Local hDlg := hwg_GetModalHandle()
@@ -126,7 +126,7 @@ Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITFOR ) )
-Return NIL
+RETURN NIL
 
 Static Function EndDele(nAct)
 Local hDlg := hwg_GetModalHandle()
@@ -173,7 +173,7 @@ Private cFor
          ENDIF
          hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str(nsum) )
          Go nrec
-         Return NIL
+         RETURN NIL
       ENDIF
       Go nrec
       hwg_WriteStatus( oWindow, 3,"Done" )
@@ -186,7 +186,7 @@ Private cFor
    ENDIF
 
    EndDialog( hDlg )
-Return NIL
+RETURN NIL
 
 /* -----------------------  Sum --------------------- */
 
@@ -202,14 +202,14 @@ Local aModDlg
         ON BN_CLICKED,IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable() }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitSum()
 Local hDlg := hwg_GetModalHandle()
    RecNumberDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON6,IDC_RADIOBUTTON8,IDC_RADIOBUTTON6 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-Return NIL
+RETURN NIL
 
 Static Function EndSum()
 Local hDlg := hwg_GetModalHandle()
@@ -219,7 +219,7 @@ Private nsum := 0
    cSumf := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(cSumf)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    cFor := hwg_GetDlgItemText( hDlg, IDC_EDITFOR, 60 )
@@ -242,11 +242,11 @@ Private nsum := 0
       ENDIF
       Go nrec
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Result: "+Str(nsum) )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    EndDialog( hDlg )
-Return NIL
+RETURN NIL
 
 /* -----------------------  Append from --------------------- */
 
@@ -263,7 +263,7 @@ Local aModDlg
         ON BN_CLICKED,IDC_RADIOBUTTON9 ACTION {|| DelimDisable() }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function DelimEdit
 Local hDlg := hwg_GetModalHandle()
@@ -271,19 +271,19 @@ Local hEdit := hwg_GetDlgItem( hDlg,IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    hwg_SetDlgItemText( hDlg, IDC_EDITDWITH, " " )
    hwg_SetFocus( hEdit )
-Return NIL
+RETURN NIL
 
 Static Function DelimDisable
 Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDITDWITH )
    hwg_SendMessage(hEdit, WM_ENABLE, 0, 0)
-Return NIL
+RETURN NIL
 
 Static Function InitApp()
 Local hDlg := hwg_GetModalHandle()
    DelimDisable()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON9,IDC_RADIOBUTTON9,IDC_RADIOBUTTON11 )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-Return NIL
+RETURN NIL
 
 Static Function EndApp()
 Local hDlg := hwg_GetModalHandle()
@@ -292,7 +292,7 @@ Local fname, nRec := Recno()
    fname := hwg_GetDlgItemText( hDlg, IDC_EDIT7, 60 )
    IF Empty(fname)
       hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -307,7 +307,7 @@ Local fname, nRec := Recno()
    Go nrec
 
    EndDialog( hDlg )
-Return NIL
+RETURN NIL
 
 /* -----------------------  Reindex, pack, zap --------------------- */
 
@@ -320,13 +320,13 @@ Local aModDlg
         ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_TEXTHEAD, IIf(nAct == 1, "Reindex ?", ;
                                        IIf(nAct == 2, "Pack ?", "Zap ?")) )
-Return NIL
+RETURN NIL
 
 Static Function EndRPZ( nAct )
 Local hDlg := hwg_GetModalHandle()
@@ -335,7 +335,7 @@ Local hWnd, oWindow, aControls, i
    IF !msmode[improc, 1]
       IF !FileLock()
          EndDialog( hDlg )
-         Return NIL
+         RETURN NIL
       ENDIF
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
@@ -357,4 +357,4 @@ Local hWnd, oWindow, aControls, i
    ENDIF
 
    EndDialog( hDlg )
-Return NIL
+RETURN NIL

@@ -16,6 +16,6 @@ Function Main
 
 oForm:ShowMain()
 
-Return NIL
+RETURN NIL
 
 #include "example.frm"

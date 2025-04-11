@@ -60,7 +60,7 @@ METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
    ::Super:New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
                bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,       ;
                lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown )
-Return Self
+RETURN Self
 
 METHOD Edit( wParam,lParam ) CLASS PBrowse
    
@@ -95,7 +95,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    HB_SYMBOL_UNUSED(lParam)
 
    IF ::SetColumn() == 1 .AND. ::bEnter == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
    ::cargo := Eval(::bRecno, Self)
    IF oTab:GetActivePage() == 2
@@ -111,7 +111,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
          oBrw2:lUpdated := .T.
          oBrw2:Refresh()
       ENDIF
-      Return NIL
+      RETURN NIL
    ENDIF
    IF oCombo:value == 1
       aCtrlProp := oCtrl:oParent:aProp
@@ -343,7 +343,7 @@ STATIC FUNCTION VldBrwGet( oGet ,oBtn)
 
    // oBrw1:DelControl( oGet )
    // oBrw1:Refresh()
-Return .T.
+RETURN .T.
 
 FUNCTION InspOpen(lShow)
 
@@ -427,7 +427,7 @@ FUNCTION InspOpen(lShow)
    oDesigner:oDlgInsp:AddEvent( 0,IDOK,{||DlgOk()} )
    oDesigner:oDlgInsp:AddEvent( 0,IDCANCEL,{||DlgCancel()} )
 
-Return NIL
+RETURN NIL
 
 
 Static Function DlgOk()
@@ -435,7 +435,7 @@ Static Function DlgOk()
    IF !Empty(oBrw1:aControls)
       VldBrwGet( oBrw1:aControls[1] )
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function DlgCancel()
 
@@ -447,7 +447,7 @@ Static Function DlgCancel()
       // oBrw1:DelControl( oBrw1:aControls[1] )
       // oBrw1:Refresh()
    ENDIF
-Return NIL
+RETURN NIL
 
 FUNCTION InspSetCombo()
 
@@ -482,7 +482,7 @@ FUNCTION InspSetCombo()
    oCombo:Refresh()
    */
    InspSetBrowse()
-Return NIL
+RETURN NIL
 
 FUNCTION InspUpdCombo( n )
 
@@ -503,7 +503,7 @@ FUNCTION InspUpdCombo( n )
    endif
 
       ELSEIF i + 1 < Len(oCombo:aItems)
-         Return InspSetCombo()
+         RETURN InspSetCombo()
       ENDIF
    ENDIF
    oCombo:Requery()
@@ -513,7 +513,7 @@ FUNCTION InspUpdCombo( n )
    oCombo:Refresh()
    */
    InspSetBrowse()
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ComboOnChg()
 
@@ -537,7 +537,7 @@ STATIC FUNCTION ComboOnChg()
          ENDIF
       ENDIF
    ENDIF
-Return .T.
+RETURN .T.
 
 STATIC FUNCTION InspSetBrowse()
 
@@ -573,7 +573,7 @@ STATIC FUNCTION InspSetBrowse()
    oBrw1:Refresh()
    oBrw2:Refresh()
 
-Return NIL
+RETURN NIL
 
 FUNCTION InspUpdBrowse()
 
@@ -586,7 +586,7 @@ FUNCTION InspUpdBrowse()
    PRIVATE oCtrl
 
    IF oCombo == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
 
    oCtrl := IIf(oCombo:value == 1, HFormGen():oDlgSelected, GetCtrlSelected(HFormGen():oDlgSelected))
@@ -608,7 +608,7 @@ FUNCTION InspUpdBrowse()
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION InspUpdProp( cName, xValue )
 
@@ -620,7 +620,7 @@ FUNCTION InspUpdProp( cName, xValue )
       oBrw1:Refresh()
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION EditArray( arr )
 
@@ -664,10 +664,10 @@ STATIC FUNCTION EditArray( arr )
       IF Len(arr) == 1 .AND. arr[1] == "....."
          arr := NIL //{} NANDO POS
       ENDIF
-      Return arr
+      RETURN arr
    ENDIF
 
-Return NIL
+RETURN NIL
 
 // : LFB
 STATIC FUNCTION onclick_deleteitem(oBrw)
@@ -777,21 +777,21 @@ HB_SYMBOL_UNUSED(lParam)
    // writelog( Str(msg)+Str(wParam)+Str(lParam) )
    IF msg == WM_MOUSEMOVE
      * MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONDOWN
      * LButtonDown( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONUP
      * LButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_RBUTTONUP
       *RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
         oMenuisnp:Show( oDlg,oDlg:nTop+5,oDlg:nLeft+15,.T. )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()
       *hwg_MsgInfo("Futura a‡Æo dos Eventos")
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_MOVE
    ELSEIF msg == WM_KEYDOWN
       IF wParam == 46    // Del
@@ -800,7 +800,7 @@ HB_SYMBOL_UNUSED(lParam)
    ELSEIF msg == WM_KEYUP
    ENDIF
 
-Return -1
+RETURN -1
 
 FUNCTION ActiveTopMost( nHandle, lActive )
 

@@ -67,7 +67,7 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 
 
 
-Return Self
+RETURN Self
 
 METHOD End() CLASS HTimer
 Local i
@@ -79,7 +79,7 @@ Local i
       ASize(::aTimers, Len(::aTimers) - 1)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Init CLASS HTimer
    IF ! ::lInit
@@ -116,7 +116,7 @@ Local oTimer, i
       hwg_KillTimer( oTimer:tag )
    NEXT
 
-Return
+RETURN
 
 #pragma BEGINDUMP
 

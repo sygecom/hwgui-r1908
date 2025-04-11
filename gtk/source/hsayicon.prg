@@ -32,4 +32,4 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
                    HIcon():AddFile(Image), Image))
    ::Activate()
 
-Return Self
+RETURN Self

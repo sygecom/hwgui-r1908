@@ -62,7 +62,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 //   EndIf 
 
    ::Activate()
-Return Self
+RETURN Self
 
 //--------------------------------------------------------------------------//
 
@@ -77,7 +77,7 @@ METHOD Activate CLASS HMonthCalendar
       ::Init()
    EndIf
 
-Return NIL
+RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -90,7 +90,7 @@ METHOD Init() CLASS HMonthCalendar
       EndIf
    EndIf
 
-Return NIL
+RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -101,7 +101,7 @@ METHOD SetValue(dValue) CLASS HMonthCalendar
       ::value := dValue
    EndIf
 
-Return NIL
+RETURN NIL
 
 //--------------------------------------------------------------------------//
 
@@ -109,4 +109,4 @@ METHOD GetValue() CLASS HMonthCalendar
 
 //   ::value := 
 
-Return (::value)
+RETURN (::value)

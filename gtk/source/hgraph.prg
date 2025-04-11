@@ -48,7 +48,7 @@ METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HGraph
 
@@ -57,13 +57,13 @@ METHOD Activate CLASS HGraph
       hwg_SetWindowObject( ::handle,Self )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HGraph
    IF msg == WM_PAINT
       ::Paint()
    ENDIF
-Return 0
+RETURN 0
 
 METHOD CalcMinMax() CLASS HGraph
 Local i, j, nLen
@@ -93,7 +93,7 @@ Local i, j, nLen
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HGraph
 Local hDC := hwg_GetDC(::handle)
@@ -132,7 +132,7 @@ Local px1, px2, py1, py2, nWidth
       hwg_Drawline(hDC, 3, y2 - (0 - ::ymin) / ::scaleY, ::nWidth - 3, y2 - (0 - ::ymin) / ::scaleY)
    ENDIF
    IF ::ymax == ::ymin .AND. ::ymax == 0
-      Return NIL
+      RETURN NIL
    ENDIF
 
    hwg_SelectObject( hDC, ::oPen:handle )
@@ -173,7 +173,7 @@ Local px1, px2, py1, py2, nWidth
    NEXT
    hwg_releaseDC(::handle, hDC)
    
-Return NIL
+RETURN NIL
 
 METHOD Rebuild(aValues, nType) CLASS HGraph
 
@@ -184,4 +184,4 @@ METHOD Rebuild(aValues, nType) CLASS HGraph
    ::CalcMinMax()
    hwg_RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
 
-Return NIL
+RETURN NIL

@@ -45,25 +45,25 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
             ::nHeight := ::oImage:nHeight
          ENDIF
       ELSE
-         Return NIL
+         RETURN NIL
       ENDIF
    ENDIF
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD INIT CLASS HSayBmp
    IF !::lInit
       ::Super:Init()
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSayBmp
    IF msg == WM_PAINT
       ::Paint()
    ENDIF
-Return 0
+RETURN 0
 
 METHOD Paint() CLASS HSayBmp
 Local hDC := hwg_GetDC(::handle)
@@ -79,7 +79,7 @@ Local hDC := hwg_GetDC(::handle)
    ENDIF
    hwg_releaseDC(::handle, hDC)
 
-Return NIL
+RETURN NIL
 
 METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
 
@@ -92,4 +92,4 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
                    IIf(HB_IsChar(Image),     ;
                    HBitmap():AddFile(Image), Image))
 
-Return NIL
+RETURN NIL

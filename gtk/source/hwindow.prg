@@ -31,7 +31,7 @@ Static Function onSize(oWnd, wParam, lParam)
        Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
 
-Return 0
+RETURN 0
 
 Static Function onDestroy( oWnd )
 
@@ -39,7 +39,7 @@ Static Function onDestroy( oWnd )
    HWindow():DelItem( oWnd )
    hwg_gtk_exit()  
 
-Return 0
+RETURN 0
 
 CLASS HWindow INHERIT HCustomWindow
 
@@ -124,11 +124,11 @@ RETURN NIL
 
 METHOD FindWindow( hWnd ) CLASS HWindow
 // Local i := AScan(::aWindows, {|o|o:handle == hWnd})
-// Return IIf(i == 0, NIL, ::aWindows[i])
-Return hwg_GetWindowObject(hWnd)
+// RETURN IIf(i == 0, NIL, ::aWindows[i])
+RETURN hwg_GetWindowObject(hWnd)
 
 METHOD GetMain CLASS HWindow
-Return IIf(Len(::aWindows) > 0,            ;
+RETURN IIf(Len(::aWindows) > 0,            ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
 	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
@@ -193,7 +193,7 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
       Eval(::bInit, Self)
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
 Local oWndClient, handle
@@ -215,22 +215,22 @@ Local oWndClient, handle
 
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HMainWindow
 Local i
 
    // writelog( "On Event" + str(msg) + str(wParam) + Str(lParam) )
    IF ( i := AScan(::aMessages[1], msg) ) != 0
-      Return Eval(::aMessages[2, i], Self, wParam, lParam)
+      RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          // hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
-      Return ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
 
-Return 0
+RETURN 0
 
 /*
 CLASS HMDIChildWindow INHERIT HWindow
@@ -265,21 +265,21 @@ METHOD Activate(lShow) CLASS HMDIChildWindow
       Eval(::bInit, Self)
    ENDIF  
 
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HMDIChildWindow
 Local i
 
    IF ( i := AScan(::aMessages[1], msg) ) != 0
-      Return Eval(::aMessages[2,i], Self, wParam, lParam)
+      RETURN Eval(::aMessages[2,i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
-      Return ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
 
-Return -1
+RETURN -1
 
 
 CLASS HChildWindow INHERIT HWindow
@@ -306,34 +306,34 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
    ELSE
        hwg_MsgStop("Create Main window first !","HChildWindow():New()" )
-       Return NIL
+       RETURN NIL
    ENDIF
    IF ::bInit != NIL
       Eval(::bInit, Self)
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Activate(lShow) CLASS HChildWindow
 
    hwg_CreateGetList( Self )
    hwg_ActivateChildWindow((lShow == NIL .OR. lShow),::handle )
 
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HChildWindow
 Local i
 
    IF ( i := AScan(HMainWindow():aMessages[1], msg) ) != 0
-      Return Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
+      RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
          hwg_OnTrackScroll( Self,wParam,lParam )
       ENDIF
-      Return ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
 
-Return -1
+RETURN -1
 */
 
 Function hwg_ReleaseAllWindows( hWnd )
@@ -405,7 +405,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
       Eval(aMenu[1, iCont, 1])
    ENDIF
 
-Return 0
+RETURN 0
 
 Static Function onMove(oWnd, wParam, lParam)
 
@@ -413,16 +413,16 @@ Static Function onMove(oWnd, wParam, lParam)
    oWnd:nLeft := hwg_LOWORD(lParam)
    oWnd:nTop  := hwg_HIWORD(lParam)
 
-Return 0
+RETURN 0
 
 Static Function onEraseBk( oWnd,wParam )
 /*
    IF oWnd:oBmp != NIL
        hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
-       Return 1
+       RETURN 1
    ENDIF
 */   
-Return 0
+RETURN 0
 
 Static Function onSysCommand(oWnd, wParam)
 Local i
@@ -432,7 +432,7 @@ Local i
           i := Eval(oWnd:bDestroy, oWnd)
           i := IIf(HB_IsLogical(i), i, .T.)
           IF !i
-             Return 0
+             RETURN 0
           ENDIF
        ENDIF  
        IF __ObjHasMsg( oWnd,"ONOTIFYICON" ) .AND. oWnd:oNotifyIcon != NIL
@@ -444,11 +444,11 @@ Local i
    ELSEIF wParam == SC_MINIMIZE
        IF __ObjHasMsg( oWnd,"LTRAY" ) .AND. oWnd:lTray
           oWnd:Hide()
-          Return 0
+          RETURN 0
        ENDIF
    ENDIF
 */
-Return 0
+RETURN 0
 
 Static Function onNotifyIcon( oWnd,wParam,lParam )
 Local ar
@@ -466,7 +466,7 @@ Local ar
        ENDIF
    ENDIF
 */   
-Return 0
+RETURN 0
 
 Static Function onMdiCreate(oWnd, lParam)
 /*
@@ -475,7 +475,7 @@ Static Function onMdiCreate(oWnd, lParam)
       Eval(oWnd:bInit, oWnd)
    ENDIF  
 */
-Return 0
+RETURN 0
 
 Static Function onMdiCommand(oWnd, wParam)
 Local iParHigh, iParLow, iItem
@@ -490,7 +490,7 @@ Local iParHigh, iParLow, iItem
       Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ENDIF
 */
-Return 0
+RETURN 0
 
 Static Function onMdiNcActivate(oWnd, wParam)
 /*
@@ -500,7 +500,7 @@ Static Function onMdiNcActivate(oWnd, wParam)
       Eval(oWnd:bLostFocus, oWnd)
    ENDIF
 */
-Return 0
+RETURN 0
 
 Static Function onEnterIdle(oDlg, wParam, lParam)
 Local oItem
@@ -513,7 +513,7 @@ Local oItem
       ENDIF
    ENDIF
 */   
-Return 0
+RETURN 0
 
 Function hwg_CenterWindow( oWnd )
 
@@ -521,7 +521,7 @@ Function hwg_CenterWindow( oWnd )
    oWnd:nTop  := Int( ( hwg_GetDesktopHeight() - oWnd:nHeight ) / 2 )
    hwg_MoveWindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
-Return NIL
+RETURN NIL
 
 #pragma BEGINDUMP
 

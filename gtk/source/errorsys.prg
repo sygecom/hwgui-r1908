@@ -140,7 +140,7 @@ Local oDlg, oEdit
 
    oDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 #pragma BEGINDUMP
 

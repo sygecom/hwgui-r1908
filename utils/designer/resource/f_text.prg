@@ -20,7 +20,7 @@ FUNCTION STR2FONT
             Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), &&
             Val(hwg_NextItem( cFont,,"," )))
    ENDIF
-Return oFont
+RETURN oFont
 ENDFUNC
 
    PRIVATE strbuf := Space(512)
@@ -44,7 +44,7 @@ ENDFUNC
 
    IF han == - 1
       hwg_MsgStop( "Can't open "+oForm:path+oForm:filename )
-      Return
+      RETURN
    ENDIF
    DO WHILE .T.
       stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
@@ -81,7 +81,7 @@ ENDFUNC
             itemName := CnvCtrlName(hwg_NextItem(stroka, .T.))
             IF itemName == NIL
                hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka,.T. ) )
-               Return
+               RETURN
             ENDIF
             cCaption := hwg_NextItem( stroka )
             hwg_NextItem( stroka )
@@ -102,7 +102,7 @@ ENDFUNC
       ENDIF
    ENDDO
    FClose(han)
-Return
+RETURN
 #ENDSCRIPT
 
 #SCRIPT WRITE

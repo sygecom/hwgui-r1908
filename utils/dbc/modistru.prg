@@ -48,7 +48,7 @@ LOCAL af, oBrw
    oBrw:ofont      := oBrwFont
 
    oModDlg:Activate()
-Return NIL
+RETURN NIL
 
 Static Function SetField(oBrw)
 Local hDlg := hwg_GetModalHandle(), i
@@ -58,7 +58,7 @@ Local hDlg := hwg_GetModalHandle(), i
    ENDIF
    hwg_SetDlgItemText( hDlg, IDC_EDIT3, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 3])) )
    hwg_SetDlgItemText( hDlg, IDC_EDIT4, LTrim(Str(oBrw:aArray[oBrw:nCurrent, 4])) )
-Return NIL
+RETURN NIL
 
 Static Function ModiStru( nOper )
 Local oDlg := hwg_GetModalDlg(), hDlg := oDlg:handle
@@ -69,12 +69,12 @@ Local cName, cType, nLen, nDec := 0
       cName := hwg_GetDlgItemText( hDlg, IDC_EDIT2, 10 )
       IF Empty(cName)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
-         Return NIL
+         RETURN NIL
       ENDIF
       cType := Left(hwg_GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1)
       IF Empty(cType)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
-         Return NIL
+         RETURN NIL
       ENDIF
       IF cType == "D" 
          nLen := 8
@@ -86,7 +86,7 @@ Local cName, cType, nLen, nDec := 0
          nLen  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
          IF nLen == 0
             hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT3 ) )
-            Return NIL
+            RETURN NIL
          ENDIF
          IF cType == "N" 
             nDec  := Val( hwg_GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
@@ -109,7 +109,7 @@ Local cName, cType, nLen, nDec := 0
       oBrowse:nRecords --
    ENDIF
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
-Return NIL
+RETURN NIL
 
 Static Function EndStru( oDlg,lNew )
 Local fname, alsname
@@ -121,7 +121,7 @@ Local oPBar, nSch := 0
 
    IF lNew
       IF Empty(fname := hwg_SaveFile("*.dbf","xBase files( *.dbf )", "*.dbf", mypath))
-         Return NIL
+         RETURN NIL
       ENDIF
       mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
       DBCreate(fname, oBrowse:aArray)
@@ -212,5 +212,5 @@ Local oPBar, nSch := 0
       ENDIF
    ENDIF
    EndDialog( hwg_GetModalHandle() )
-Return NIL
+RETURN NIL
 

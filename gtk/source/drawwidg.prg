@@ -65,7 +65,7 @@ Local i, nlen := Len(::aFonts)
          IF nHandle != NIL
             hwg_DeleteObject( nHandle )
          ENDIF
-         Return ::aFonts[i]
+         RETURN ::aFonts[i]
       ENDIF
    NEXT
 
@@ -87,16 +87,16 @@ Local i, nlen := Len(::aFonts)
 
    AAdd(::aFonts, Self)
 
-Return Self
+RETURN Self
 
 METHOD Select( oFont ) CLASS HFont
 Local af := hwg_SelectFont( oFont )
 
    IF af == NIL
-      Return NIL
+      RETURN NIL
    ENDIF
 
-Return ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
+RETURN ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
 
 METHOD Release() CLASS HFont
 Local i, nlen := Len(::aFonts)
@@ -123,7 +123,7 @@ Local i, nlen := Len(::aFonts)
       NEXT
    #endif
    ENDIF
-Return NIL
+RETURN NIL
 
 //- HPen
 
@@ -154,7 +154,7 @@ Local i
          i:color == nColor
 
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
@@ -164,7 +164,7 @@ Local i
          ::aPens[i]:color == nColor
 
          ::aPens[i]:nCounter ++
-         Return ::aPens[i]
+         RETURN ::aPens[i]
       ENDIF
    NEXT
    #endif
@@ -175,7 +175,7 @@ Local i
    ::color  := nColor
    AAdd(::aPens, Self)
 
-Return Self
+RETURN Self
 
 METHOD Get( nStyle,nWidth,nColor ) CLASS HPen
 Local i
@@ -190,7 +190,7 @@ Local i
          i:width == nWidth .AND. ;
          i:color == nColor
 
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
@@ -199,12 +199,12 @@ Local i
          ::aPens[i]:width == nWidth .AND. ;
          ::aPens[i]:color == nColor
 
-         Return ::aPens[i]
+         RETURN ::aPens[i]
       ENDIF
    NEXT
    #endif
 
-Return NIL
+RETURN NIL
 
 METHOD Release() CLASS HPen
 Local i, nlen := Len(::aPens)
@@ -231,7 +231,7 @@ Local i, nlen := Len(::aPens)
       NEXT
    #endif
    ENDIF
-Return NIL
+RETURN NIL
 
 //- HBrush
 
@@ -255,14 +255,14 @@ Local i
    For EACH i IN ::aBrushes 
       IF i:color == nColor
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
    For i := 1 TO Len(::aBrushes)
       IF ::aBrushes[i]:color == nColor
          ::aBrushes[i]:nCounter ++
-         Return ::aBrushes[i]
+         RETURN ::aBrushes[i]
       ENDIF
    NEXT
    #endif
@@ -270,7 +270,7 @@ Local i
    ::color  := nColor
    AAdd(::aBrushes, Self)
 
-Return Self
+RETURN Self
 
 METHOD Release() CLASS HBrush
 Local i, nlen := Len(::aBrushes)
@@ -297,7 +297,7 @@ Local i, nlen := Len(::aBrushes)
       NEXT
    #endif
    ENDIF
-Return NIL
+RETURN NIL
 
 
 //- HBitmap
@@ -328,14 +328,14 @@ Local lPreDefined := .F., i, aBmpSize
    For EACH i  IN  ::aBitmaps 
       IF i:name == name
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
    For i := 1 TO Len(::aBitmaps)
       IF ::aBitmaps[i]:name == name
          ::aBitmaps[i]:nCounter ++
-         Return ::aBitmaps[i]
+         RETURN ::aBitmaps[i]
       ENDIF
    NEXT
    #endif
@@ -347,10 +347,10 @@ Local lPreDefined := .F., i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
    ELSE
-      Return NIL
+      RETURN NIL
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD AddFile(name, HDC) CLASS HBitmap
 Local i, aBmpSize
@@ -359,14 +359,14 @@ Local i, aBmpSize
    For EACH i IN ::aBitmaps 
       IF i:name == name
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
    For i := 1 TO Len(::aBitmaps)
       IF ::aBitmaps[i]:name == name
          ::aBitmaps[i]:nCounter ++
-         Return ::aBitmaps[i]
+         RETURN ::aBitmaps[i]
       ENDIF
    NEXT
    #endif
@@ -378,10 +378,10 @@ Local i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aBitmaps, Self)
    ELSE
-      Return NIL
+      RETURN NIL
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD AddWindow( oWnd,lFull ) CLASS HBitmap
 Local i, aBmpSize
@@ -393,7 +393,7 @@ Local i, aBmpSize
    ::nHeight := aBmpSize[2]
    AAdd(::aBitmaps, Self)
 
-Return Self
+RETURN Self
 
 METHOD Release() CLASS HBitmap
 Local i, nlen := Len(::aBitmaps)
@@ -420,7 +420,7 @@ Local i, nlen := Len(::aBitmaps)
       NEXT
    #endif
    ENDIF
-Return NIL
+RETURN NIL
 
 
 //- HIcon
@@ -450,14 +450,14 @@ Local lPreDefined := .F., i
    For EACH i IN ::aIcons 
       IF i:name == name
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
    #else
    For i := 1 TO Len(::aIcons)
       IF ::aIcons[i]:name == name
          ::aIcons[i]:nCounter ++
-         Return ::aIcons[i]
+         RETURN ::aIcons[i]
       ENDIF
    NEXT
    #endif
@@ -465,7 +465,7 @@ Local lPreDefined := .F., i
    ::name   := name
    AAdd(::aIcons, Self)
 
-Return Self
+RETURN Self
 
 METHOD AddFile(name) CLASS HIcon
 Local i, aBmpSize
@@ -474,14 +474,14 @@ Local i, aBmpSize
    For EACH i IN  ::aIcons 
       IF i:name == name
          i:nCounter ++
-         Return i
+         RETURN i
       ENDIF
    NEXT
 #else
    For i := 1 TO Len(::aIcons)
       IF ::aIcons[i]:name == name
          ::aIcons[i]:nCounter ++
-         Return ::aIcons[i]
+         RETURN ::aIcons[i]
       ENDIF
    NEXT
 #endif
@@ -499,10 +499,10 @@ Local i, aBmpSize
       ::nHeight := aBmpSize[2]
       AAdd(::aIcons, Self)
    ELSE
-      Return NIL
+      RETURN NIL
    ENDIF
 
-Return Self
+RETURN Self
 
 METHOD Release() CLASS HIcon
 Local i, nlen := Len(::aIcons)
@@ -529,7 +529,7 @@ Local i, nlen := Len(::aIcons)
       NEXT
    #endif
    ENDIF
-Return NIL
+RETURN NIL
 
 
 EXIT PROCEDURE CleanDrawWidg
@@ -551,5 +551,5 @@ Local i
       // hwg_DeleteObject( HIcon():aIcons[i]:handle )
    NEXT
 
-Return
+RETURN
 

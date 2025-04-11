@@ -105,21 +105,21 @@ METHOD New() CLASS HFormGen
    // : LFB
    statusbarmsg(name)
    // :END LFB
-Return Self
+RETURN Self
 
 METHOD OpenR( fname )  CLASS HFormGen
    
    LOCAL oForm := ::aForms[1]
    MEMVAR oDesigner
    IF !hwg_MsgYesNo( "The form will be opened INSTEAD of current ! Do you agree ?", "Designer")
-      Return NIL
+      RETURN NIL
    ENDIF
    oDesigner:lSingleForm := .F.
    oForm:lChanged := .F.
    oForm:End()
    oDesigner:lSingleForm := .T.
 
-Return ::Open( fname )
+RETURN ::Open( fname )
 
 METHOD Open( fname,cForm )  CLASS HFormGen
 
@@ -229,7 +229,7 @@ METHOD Save(lAs) CLASS HFormGen
    IF lAs == NIL; lAs := .F.; ENDIF
    IF !::lChanged .AND. !lAs
       hwg_MsgStop( "Nothing to save", "Designer" )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    IF ( oDesigner:lSingleForm .AND. !lAs ) .OR. ;
@@ -393,7 +393,7 @@ METHOD GetProp( cName ) CLASS HFormGen
    LOCAL i
   cName := Lower(cName)
   i := AScan(::aProp, {|a|Lower(a[1]) == cName})
-Return IIf(i == 0, NIL, ::aProp[i, 2])
+RETURN IIf(i == 0, NIL, ::aProp[i, 2])
 
 METHOD SetProp( xName,xValue ) CLASS HFormGen
 
@@ -404,7 +404,7 @@ METHOD SetProp( xName,xValue ) CLASS HFormGen
    IF xName != 0
       ::aProp[xName, 2] := xValue
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD SetPaper( cType,cOrientation ) CLASS HFormGen
    
@@ -428,7 +428,7 @@ METHOD SetPaper( cType,cOrientation ) CLASS HFormGen
       ::oDlg:aControls[1]:Move(, , Round(::nPWidth * ::nKoeff, 0) - 1, Round(::nPHeight * ::nKoeff, 0) - 1)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 // ------------------------------------------
 
@@ -451,7 +451,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
       InspUpdBrowse()
       oDlg:oParent:lChanged:=.T.
    ENDIF
-Return NIL
+RETURN NIL
 
 Static Function SetDlgSelected(oDlg)
    
@@ -468,7 +468,7 @@ Static Function SetDlgSelected(oDlg)
         // :END LFB
       ENDIF
    ENDIF
-Return .T.
+RETURN .T.
 
 FUNCTION CnvCtrlName(cName, l2)
 
@@ -476,7 +476,7 @@ FUNCTION CnvCtrlName(cName, l2)
    MEMVAR aCtrlTable
 
    IF aCtrlTable == NIL
-      Return cName
+      RETURN cName
    ENDIF
    IF l2 == NIL
       l2 := .F.
@@ -486,7 +486,7 @@ FUNCTION CnvCtrlName(cName, l2)
    ELSE
       i := AScan(aCtrlTable, {|a|a[1] == cName})
    ENDIF
-Return IIf(i == 0, NIL, IIf(l2, aCtrlTable[i, 1], aCtrlTable[i, 2]))
+RETURN IIf(i == 0, NIL, IIf(l2, aCtrlTable[i, 1], aCtrlTable[i, 2]))
 
 STATIC FUNCTION FileDlg( oFrm,lOpen )
 
@@ -542,10 +542,10 @@ STATIC FUNCTION FileDlg( oFrm,lOpen )
          oFrm:filename += "."+aFormats[af[nType], 2]
       ENDIF
       oFrm:path := IIf(Empty(hwg_FilePath(fname)), oDesigner:ds_mypath, hwg_FilePath(fname))
-      Return .T.
+      RETURN .T.
    ENDIF
 
-Return .F.
+RETURN .F.
 
 STATIC FUNCTION BrowFile(lOpen, nType, oEdit1, oEdit2)
 
@@ -575,7 +575,7 @@ STATIC FUNCTION BrowFile(lOpen, nType, oEdit1, oEdit2)
       hwg_SetFocus( oEdit2:handle )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ReadTree(aParent, oDesc)
 
@@ -596,7 +596,7 @@ STATIC FUNCTION ReadTree(aParent, oDesc)
       ENDIF
    NEXT
 
-Return IIf(Empty(aTree), NIL, aTree)
+RETURN IIf(Empty(aTree), NIL, aTree)
 
 STATIC FUNCTION ReadCtrls( oDlg, oCtrlDesc, oContainer, nPage )
 
@@ -685,7 +685,7 @@ STATIC FUNCTION ReadCtrls( oDlg, oCtrlDesc, oContainer, nPage )
       ENDIF
    NEXT
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION ReadForm( oForm,cForm )
 
@@ -702,10 +702,10 @@ STATIC FUNCTION ReadForm( oForm,cForm )
 
    IF Empty(oDoc:aItems)
       hwg_MsgStop( "Can't open "+oForm:path+oForm:filename, "Designer" )
-      Return NIL
+      RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != IIf(oDesigner:lReport, "report", "form")
       hwg_MsgStop( "Form description isn't found", "Designer" )
-      Return NIL
+      RETURN NIL
    ENDIF
    oForm:cEncoding := oDoc:GetAttribute("encoding")
    aItems := oDoc:aItems[1]:aItems
@@ -748,7 +748,7 @@ STATIC FUNCTION ReadForm( oForm,cForm )
          ReadCtrls( IIf(oDesigner:lReport, oForm:oDlg:aControls[1]:aControls[1], oForm:oDlg),aItems[i] )
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 FUNCTION IsDefault( oCtrl,aPropItem )
 
@@ -771,12 +771,12 @@ FUNCTION IsDefault( oCtrl,aPropItem )
          ENDIF
 
          IF xProperty != NIL .AND. xProperty == aPropItem[2]
-            Return .T.
+            RETURN .T.
          ENDIF
       ENDIF
    NEXT
 
-Return .F.
+RETURN .F.
 
 STATIC FUNCTION WriteTree(aTree, oParent)
 
@@ -799,7 +799,7 @@ STATIC FUNCTION WriteTree(aTree, oParent)
          WriteTree(aTree[i, 1], oNode)
       ENDIF
    NEXT
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
 
@@ -894,7 +894,7 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION WriteForm( oForm )
 
@@ -951,7 +951,7 @@ STATIC FUNCTION WriteForm( oForm )
    ELSE
       oDoc:Save(oForm:path + oForm:filename)
    ENDIF
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION PaintDlg( oDlg )
 
@@ -1069,7 +1069,7 @@ STATIC FUNCTION PaintDlg( oDlg )
 
    hwg_EndPaint( oDlg:handle, pps )
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION PaintPanel( oPanel )
 
@@ -1084,7 +1084,7 @@ STATIC FUNCTION PaintPanel( oPanel )
 
    hwg_EndPaint( oPanel:handle, pps )
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
 
@@ -1099,17 +1099,17 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
 
    IF msg == WM_MOUSEMOVE
       MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONDOWN
       StatusBarMsg(,"","")  //
       LButtonDown( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONUP
       LButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_RBUTTONUP
       RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_LBUTTONDBLCLK
          nkShift := hwg_GetKeyState(VK_MENU)
          IF nkShift < 0  .OR. GetCtrlSelected(IIf(oDlg:oParent:Classname() == "HDIALOG", oDlg:oParent, oDlg))!= NIL
@@ -1117,7 +1117,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
           ELSE
             socontroles()
          ENDIF
-      Return 1
+      RETURN 1
    ELSEIF msg == WM_MOVE
       IF !oDesigner:lReport
          aCoors := hwg_GetWindowRect( oDlg:handle )
@@ -1216,7 +1216,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
       // : END LFB
    ENDIF
 
-Return -1
+RETURN -1
 
 STATIC FUNCTION ScrollProc(oDlg, msg, wParam, lParam)
 
@@ -1285,11 +1285,11 @@ STATIC FUNCTION ScrollProc(oDlg, msg, wParam, lParam)
       ENDIF
    /*
    ELSEIF msg == WM_KEYDOWN .OR. msg == WM_KEYUP
-      Return MessagesProc(oDlg, msg, wParam, lParam)
+      RETURN MessagesProc(oDlg, msg, wParam, lParam)
    */
    ENDIF
 
-Return -1
+RETURN -1
 
 
 STATIC FUNCTION MouseMove(oDlg, wParam, xPos, yPos)
@@ -1340,7 +1340,7 @@ STATIC FUNCTION MouseMove(oDlg, wParam, xPos, yPos)
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
 
@@ -1363,7 +1363,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
       // : END LFB
 
    IF oDesigner:addItem != NIL
-      Return NIL
+      RETURN NIL
    ENDIF
 
    IF oCtrl != NIL .AND. ;
@@ -1408,7 +1408,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
    ENDIF
    // :ENDLFB
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
 
@@ -1514,7 +1514,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
       ENDIF
    ENDIF
 
-Return -1
+RETURN -1
 
 STATIC FUNCTION RButtonUp( oDlg, xPos, yPos )
 
@@ -1545,7 +1545,7 @@ STATIC FUNCTION RButtonUp( oDlg, xPos, yPos )
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 FUNCTION Container( oDlg,oCtrl )
 
@@ -1559,7 +1559,7 @@ FUNCTION Container( oDlg,oCtrl )
 
    IF oCtrl:oContainer != NIL
       IF oContainer != NIL .AND. oContainer:handle == oCtrl:oContainer:handle
-         Return NIL
+         RETURN NIL
       ELSE
          i := AScan(oCtrl:oContainer:aControls, {|o|o:handle == oCtrl:handle})
          IF i != 0
@@ -1590,7 +1590,7 @@ FUNCTION Container( oDlg,oCtrl )
       ENDIF
    ENDIF
 
-Return NIL
+RETURN NIL
 
 STATIC FUNCTION CtrlByRect( oDlg,xPos1,yPos1,xPos2,yPos2 )
 
@@ -1631,7 +1631,7 @@ STATIC FUNCTION CtrlByRect( oDlg,xPos1,yPos1,xPos2,yPos2 )
          i ++
       ENDDO
    ENDIF
-Return oCtrl
+RETURN oCtrl
 
 STATIC FUNCTION CtrlByPos( oDlg,xPos,yPos )
 
@@ -1675,7 +1675,7 @@ STATIC FUNCTION CtrlByPos( oDlg,xPos,yPos )
          i ++
       ENDDO
    ENDIF
-Return oCtrl
+RETURN oCtrl
 
 STATIC FUNCTION FrmSort( oForm,aControls,lSub )
 
@@ -1728,7 +1728,7 @@ STATIC FUNCTION FrmSort( oForm,aControls,lSub )
          ENDIF
       NEXT
    ENDIF
-Return NIL
+RETURN NIL
 
 FUNCTION DoPreview()
 
@@ -1741,7 +1741,7 @@ FUNCTION DoPreview()
 
    IF HFormGen():oDlgSelected == NIL
       hwg_MsgStop( "No Form in use!", "Designer" )
-      Return NIL
+      RETURN NIL
    ENDIF
 
    oForm := HFormGen():oDlgSelected:oParent
@@ -1771,8 +1771,8 @@ FUNCTION DoPreview()
    ENDIF
    oTmpl:Close()
 
-Return NIL
+RETURN NIL
 
 Function _CHR( n )
-Return CHR( n )
+RETURN CHR( n )
 

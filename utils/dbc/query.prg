@@ -25,7 +25,7 @@ Local fname := hwg_SelectFile("Query files( *.que )", "*.que", mypath)
       Query( .T. )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 Function Query( lEdit )
 Local aModDlg
@@ -41,13 +41,13 @@ Local aModDlg
         ON BN_CLICKED,IDC_BTNSAVE ACTION {|| QuerySave() }
    aModDlg:Activate()
 
-Return NIL
+RETURN NIL
 
 Static Function InitQuery()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
-Return NIL
+RETURN NIL
 
 Static Function EndQuery( lOk )
 Local hDlg := hwg_GetModalHandle()
@@ -60,12 +60,12 @@ Static lConnected := .F.
       cQuery := hwg_GetEditText( hDlg, IDC_EDITQUERY )
       IF Empty(cQuery)
          hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDITQUERY ) )
-         Return NIL
+         RETURN NIL
       ENDIF
 
       IF numdriv == 2
          hwg_MsgStop( "You shoud switch to ADS_CDX or ADS_ADT to run query" )
-         Return .F.
+         RETURN .F.
       ENDIF
 #ifdef RDD_ADS
       IF !lConnected
@@ -87,7 +87,7 @@ Static lConnected := .F.
          IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
-         Return .F.
+         RETURN .F.
       ENDIF
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF !AdsExecuteSqlDirect( cQuery )
@@ -95,7 +95,7 @@ Static lConnected := .F.
          IF !Empty(oldArea)
             Select( oldArea )
          ENDIF
-         Return .F.
+         RETURN .F.
       ELSE
          IF Alias() == "ADSSQL"
             improc := Select( "ADSSQL" )
@@ -116,14 +116,14 @@ Static lConnected := .F.
                Select( oldArea )
             ENDIF
             hwg_MsgStop( "Statement doesn't returns cursor" )
-            Return .F.
+            RETURN .F.
          ENDIF
       ENDIF
 #endif
    ENDIF
 
    EndDialog( hDlg )
-Return .T.
+RETURN .T.
 
 Function QuerySave
 Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
@@ -131,4 +131,4 @@ Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
    IF !Empty(fname)
       MemoWrit( fname,cQuery )
    ENDIF
-Return NIL
+RETURN NIL

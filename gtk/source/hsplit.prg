@@ -49,7 +49,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
 
    ::Activate()
 
-Return Self
+RETURN Self
 
 METHOD Activate() CLASS HSplitter
    IF !Empty(::oParent:handle)
@@ -57,7 +57,7 @@ METHOD Activate() CLASS HSplitter
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
@@ -84,7 +84,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
       ::End()
    ENDIF
 
-Return -1
+RETURN -1
 
 METHOD Init CLASS HSplitter
 
@@ -93,7 +93,7 @@ METHOD Init CLASS HSplitter
       hwg_SetWindowObject( ::handle,Self )
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HSplitter
 Local hDC
@@ -106,12 +106,12 @@ Local hDC
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
-Return NIL
+RETURN NIL
 
 METHOD Move(x1, y1, width, height)  CLASS HSplitter
 
    ::Super:Move(x1, y1, width, height, .T.)
-Return NIL
+RETURN NIL
 
 METHOD Drag( lParam ) CLASS HSplitter
 Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
@@ -129,7 +129,7 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
    ENDIF
    ::lMoved := .T.
 
-Return NIL
+RETURN NIL
 
 METHOD DragAll() CLASS HSplitter
 Local i, oCtrl, nDiff
@@ -156,4 +156,4 @@ Local i, oCtrl, nDiff
    NEXT
    ::lMoved := .F.
 
-Return NIL
+RETURN NIL

@@ -92,7 +92,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS, 0, 0 )
    hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS, 0, 0 )
 
-Return Self
+RETURN Self
 
 METHOD Activate CLASS HComboBox
 
@@ -103,7 +103,7 @@ METHOD Activate CLASS HComboBox
       ::Init()
       hwg_SetWindowObject( ::hEdit,Self )
    ENDIF
-Return NIL
+RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
 METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
@@ -127,7 +127,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
 
    ENDIF
 
-Return 0
+RETURN 0
 #else
 METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
 
@@ -151,7 +151,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
       ENDIF
    ENDSWITCH
 
-Return 0
+RETURN 0
 #endif
 
 METHOD Init() CLASS HComboBox
@@ -175,7 +175,7 @@ Local i
          ENDIF
       ENDIF
    ENDIF
-Return NIL
+RETURN NIL
 
 METHOD Refresh() CLASS HComboBox
 Local vari, i
@@ -197,7 +197,7 @@ Local vari, i
       hwg_edit_Settext( ::hEdit, ::aItems[::value] )
    ENDIF                    
 
-Return NIL
+RETURN NIL
 
 METHOD SetItem( nPos ) CLASS HComboBox
 
@@ -217,7 +217,7 @@ METHOD SetItem( nPos ) CLASS HComboBox
       Eval(::bChangeSel, ::value, Self)
    ENDIF
    
-Return NIL
+RETURN NIL
 
 METHOD End() CLASS HComboBox
 
@@ -242,20 +242,20 @@ Local vari := hwg_edit_Gettext( oCtrl:hEdit )
    IF oCtrl:bChangeSel != NIL
       Eval(oCtrl:bChangeSel, oCtrl:value, oCtrl)
    ENDIF
-Return .T.
+RETURN .T.
 
 Static Function __When( oCtrl )
 Local res
 
    // oCtrl:Refresh()
 
-   IF oCtrl:bGetFocus != NIL 
+   IF oCtrl:bGetFocus != NIL
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF !res
          hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
       ENDIF
-      Return res
+      RETURN res
    ENDIF
 
-Return .T.
+RETURN .T.
 
