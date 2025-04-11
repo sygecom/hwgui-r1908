@@ -374,13 +374,13 @@ function netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 	    sx_SetPass(cPassWord)
 	 endif
 
-	 return .T.
+	 RETURN .T.
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds - .5
    enddo
 
-   return .F.                           // USE FAILS
+   RETURN .F.                           // USE FAILS
 
 
 function filelock(nSeconds)
@@ -391,12 +391,12 @@ function filelock(nSeconds)
    if(nSeconds == NIL, nSeconds:=20,)
 
    IF Flock()
-      return .T.
+      RETURN .T.
    ENDIF
 
    do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
       if FLOCK()
-         return .T.                     // LOCKED
+         RETURN .T.                     // LOCKED
       endif
       inkey(.5)      // wait 1/2 second
       nSeconds := nSeconds - .5
@@ -406,7 +406,7 @@ function filelock(nSeconds)
 
    hwg_MsgStop("File failed to locked", alias())
 
- return .F.
+ RETURN .F.
 
 
 function reclock(nSeconds)
@@ -415,7 +415,7 @@ function reclock(nSeconds)
    LOCAL oldPos := Recno()
 
    if DBRLOCK(OldPos)
-      return .T.                        // LOCKED
+      RETURN .T.                        // LOCKED
    endif
 
    lforever := (nSeconds == 0)
@@ -426,7 +426,7 @@ function reclock(nSeconds)
 
    do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
       if DBRLOCK(OldPos)
-         return .T.                     // LOCKED
+         RETURN .T.                     // LOCKED
       endif
       hwg_MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
@@ -437,7 +437,7 @@ function reclock(nSeconds)
 
    hwg_MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
 
-   return .F.                           // NOT LOCKED
+   RETURN .F.                           // NOT LOCKED
 
    // end function reclock()
 
@@ -450,7 +450,7 @@ function addrec(nSeconds)
    append blank
 
    if !neterr()
-      return .T.												// APPEND SUCCESS
+      RETURN .T.												// APPEND SUCCESS
    endif
 
    nSeconds *= 1.00
@@ -470,7 +470,7 @@ function addrec(nSeconds)
 
       append blank
       if !neterr()
-         return .T.
+         RETURN .T.
       endif
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds  - .5
@@ -481,7 +481,7 @@ function addrec(nSeconds)
 
    hwg_MsgStop("Record failed to locked", alias())
 
-   return .F.                           // NOT LOCKED
+   RETURN .F.                           // NOT LOCKED
 
 
 
@@ -503,12 +503,12 @@ function Usr2infStr(g,lKosong) && usr to informix str
  if Empty(cPress)
 
     if lKosong == NIL
-       return .T.
+       RETURN .T.
     endif
 
     hwg_MsgInfo("Tidak boleh kosong")
-    return .F.
-    //return IIf(lKosong == NIL,.T.,.F.)
+    RETURN .F.
+    //RETURN IIf(lKosong == NIL,.T.,.F.)
  end
 
 
@@ -525,7 +525,7 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
  if ((nLen < 6) .OR. (nLen > 9))
      hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
-     return .F.
+     RETURN .F.
  end
 
  *:----------------6-------6-------7---------8----------9---
@@ -578,13 +578,13 @@ function Usr2infStr(g,lKosong) && usr to informix str
 
       if  !HB_IsDate(ctod(dd+mm+yy)) .OR. (ctod(dd+mm+yy)==ctod("  /  /  "))
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
-          return .F.
+          RETURN .F.
       else
        g:SetGet(d2infstr(ctod(dd + mm + yy)))
        g:refresh()
       end
 
- return .T.
+ RETURN .T.
 
 
 
@@ -596,13 +596,13 @@ function d2infstr(d) && date to informix style string
    LOCAL mmm
    LOCAL yyyy
 
-  if Empty(d); return "           "; end
+  if Empty(d); RETURN "           "; end
 
   dd := Right(dtos(d), 2);  yyyy := Left(dtos(d), 4)
 
   mmm:=subst("JanFebMarAprMeiJunJulAgtSepOktNopDes",month(d) * 3 - 2, 3)
 
- return (dd+"-"+mmm+"-"+yyyy)
+ RETURN (dd+"-"+mmm+"-"+yyyy)
 
 
 
@@ -616,5 +616,5 @@ function infstr2d(s) && informix string to date
 
  mm := Str((At(subst(s, 4, 3), "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
 
- return ctod(dd+mm+yy)
+ RETURN ctod(dd+mm+yy)
 

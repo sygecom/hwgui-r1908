@@ -283,7 +283,7 @@ METHOD SetText( c ) CLASS HEdit
   IF c != NIL
      if HB_IsObject(c)
         //in run time return object
-        return NIL
+        RETURN NIL
      endif
      IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
         ::title := Transform( c, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask )
@@ -372,7 +372,7 @@ Local cChar
    cChar := SubStr(oEdit:cPicMask, nPos, 1)
 
    IF oEdit:cType == "C"
-      return cChar $ "!ANX9#"
+      RETURN cChar $ "!ANX9#"
    ELSEIF oEdit:cType == "N"
       Return cChar $ "9#$*"
    ELSEIF oEdit:cType == "D"

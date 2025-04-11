@@ -1139,7 +1139,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
                SetBDown( , 0, 0, 0 )
                CtrlMove(oCtrl, 0, IIf(wParam == 34, 1, -1), .F.)
              NEXT
-           return 1
+           RETURN 1
         ENDIF
          ENDIF
       IF wParam == 35 .OR. wParam == 36       // HOME END
@@ -1151,7 +1151,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
                SetBDown( , 0, 0, 0 )
                CtrlMove(oCtrl, IIf(wParam == 35, 1, -1), 0, .F.)
              NEXT
-            return 1
+            RETURN 1
         ENDIF
          ENDIF
 
@@ -1164,11 +1164,11 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
            IF nKshift >= 0
                   SetBDown( , 0, 0, 0 )
                  CtrlMove(oCtrl, 0, nShift, .F.)
-                 return 1
+                 RETURN 1
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 4 )
              CtrlResize(OCTRL, oCtrl:nLeft, oCtrl:nTop + 1)
-             return 1
+             RETURN 1
            ENDIF
          ENDIF
       ELSEIF wParam == 38    // Up
@@ -1176,11 +1176,11 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
            IF nKshift >= 0
                  SetBDown( , 0, 0, 0 )
                 CtrlMove(oCtrl, 0, -nShift, .F.)
-                 return 1
+                 RETURN 1
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 4 )
              CtrlResize(OCTRL, oCtrl:nLeft, oCtrl:nTop - 1)
-             return 1
+             RETURN 1
            ENDIF
          ENDIF
       ELSEIF wParam == 39    // Right
@@ -1191,7 +1191,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 3 )
              CtrlResize(OCTRL, oCtrl:nLeft + 1, oCtrl:nTop)
-             return 1
+             RETURN 1
            ENDIF
          ENDIF
       ELSEIF wParam == 37    // Left
@@ -1202,7 +1202,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
            ELSE
                SetBDown( , oCtrl:nLeft,oCtrl:nTop, 3 )
              CtrlResize(OCTRL, oCtrl:nLeft - 1, oCtrl:nTop)
-             return 1
+             RETURN 1
            ENDIF
            ENDIF
       ENDIF
@@ -1432,7 +1432,7 @@ STATIC FUNCTION LButtonUp( oDlg, xPos, yPos ,nShift)
         hwg_InvalidateRect( odlg:handle, 1, ;
               0, 0,  oDlg:nWidth,oDlg:nHeight )
         SetBDown( NIL, 0, 0, 0 )
-         return -1
+         RETURN -1
       endif
       // :END LFB
       IF oCtrl != NIL

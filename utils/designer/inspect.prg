@@ -828,7 +828,7 @@ STATIC FUNCTION resettodefault(oBrw1)
      cName := Lower(aProp[oBrw1:nCurrent, 1])
      j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
      IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] = NIL
-       return NIL
+       RETURN NIL
      ENDIF
      IF LTrim(oBrw1:aArray[oBrw1:nCurrent, 1]) = "Font"
         value := aProp[oBrw1:nCurrent, 2]
@@ -848,7 +848,7 @@ STATIC FUNCTION resettodefault(oBrw1)
      oBrw1:lUpdated := .T.
      oBrw1:Refresh()
 
- return NIL
+ RETURN NIL
 
   // :END LFB
 

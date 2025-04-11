@@ -574,7 +574,7 @@ HB_SYMBOL_UNUSED(nModus)
         hwg_MsgInfo(cDBF+chr(13)+"Not Found")
   ENDIF
 
-  return (NIL)
+  RETURN (NIL)
 
 
 #pragma BEGINDUMP

@@ -364,7 +364,7 @@ Local oItem, iCont, nCont
       hwg_PostQuitMessage(0)
    Endif
 */
-return -1
+RETURN -1
 
 Static Function onCommand(oWnd, wParam, lParam)
 Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle

@@ -1186,7 +1186,7 @@ FUNCTION AUTOSIZE(oCtrl)
         asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oparent:oFont,hwg_GetDC(oCtrl:handle)) //nHdc)
     ENDIF
     IF octrl:nLeft = NIL
-      return NIL
+      RETURN NIL
     ENDIF
      SetBDown( , oCtrl:nWidth,oCtrl:nHeight, 3 )
     CtrlResize(OCTRL, ASize[1], oCtrl:nTop)

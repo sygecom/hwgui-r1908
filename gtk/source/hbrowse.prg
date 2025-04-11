@@ -1619,7 +1619,7 @@ METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos ) CLASS HBrowse
          ::LineDown()
       endif
    endif
-return NIL
+RETURN NIL
 
 //----------------------------------------------------//
 METHOD Edit( wParam,lParam ) CLASS HBrowse

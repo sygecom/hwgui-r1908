@@ -56,7 +56,7 @@ Private nColor, oBmp2
 
    ACTIVATE WINDOW oMainWindow 
 
-return NIL
+RETURN NIL
 
 Function FileOpen
 Local oModDlg, oBrw
@@ -112,7 +112,7 @@ Local han := fcreate("LPT1", 0)
   else
      hwg_MsgStop("Can't open printer port!")
   endif
-return NIL
+RETURN NIL
 
 Function DialogFromPrg()
 Local cTitle := "Dialog from prg", cText := "Input something"
@@ -199,7 +199,7 @@ END PAGE of oTab
 
 ACTIVATE DIALOG oDlg
 
-return NIL
+RETURN NIL
 
 #ifdef TEST_PRINT
 Function PrnTest

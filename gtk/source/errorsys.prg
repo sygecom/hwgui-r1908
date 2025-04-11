@@ -124,7 +124,7 @@ Local nHand
   FWrite(nHand, cText + chr(10))
   FClose(nHand)
 
-return NIL
+RETURN NIL
 
 Static Function ErrorPreview( cMess )
 Local oDlg, oEdit
@@ -140,7 +140,7 @@ Local oDlg, oEdit
 
    oDlg:Activate()
 
-Return NIL 
+Return NIL
 
 #pragma BEGINDUMP
 

@@ -298,7 +298,7 @@ Local oWnd, oBtn, oitem
            .AND. aMenu[1,iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1])
       ENDIF
-      return 0
+      RETURN 0
    elseif msg == WM_PAINT
       if oWnd:bPaint != NIL
          Return Eval(oWnd:bPaint, oWnd)
@@ -336,14 +336,14 @@ Local oWnd, oBtn, oitem
           hwg_MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
           // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          return 0
+          RETURN 0
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
-      return DlgCtlColor( oWnd,wParam,lParam )
+      RETURN DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != NIL
           hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
-          return 1
+          RETURN 1
       endif
    elseif msg == WM_DRAWITEM
 
@@ -380,14 +380,14 @@ Local oWnd, oBtn, oitem
       #endif
       HWindow():DelItem( oWnd )
       hwg_PostQuitMessage(0)
-      return 0
+      RETURN 0
    elseif msg == WM_SYSCOMMAND
       if wParam == SC_CLOSE
           if HB_IsBlock( oWnd:bDestroy )
              i := Eval(oWnd:bDestroy, oWnd)
              i := IIf(HB_IsLogical(i),i,.T.)
              if !i
-                return 0
+                RETURN 0
              endif
           Endif
           if oWnd:oNotifyIcon != NIL
@@ -399,7 +399,7 @@ Local oWnd, oBtn, oitem
       elseif wParam == SC_MINIMIZE
           if oWnd:lTray
              oWnd:Hide()
-             return 0
+             RETURN 0
           endif
       endif
    elseif msg == WM_NOTIFYICON
@@ -497,7 +497,7 @@ Local oWnd, oBtn, oitem
              .AND. aMenu[1,iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1])
       ENDIF
-      return 1
+      RETURN 1
    elseif msg == WM_PAINT
       if oWnd:bPaint != NIL
           //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - DefWndProc -Fim", 40) + "|")
@@ -536,14 +536,14 @@ Local oWnd, oBtn, oitem
           hwg_MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
           // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          return 1
+          RETURN 1
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
-      return DlgCtlColor( oWnd,wParam,lParam )
+      RETURN DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != NIL
           hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
-          return 1
+          RETURN 1
       endif
    elseif msg == WM_DRAWITEM
       if ( oBtn := oWnd:FindControl(wParam) ) != NIL
@@ -584,7 +584,7 @@ Local oWnd, oBtn, oitem
       // Return 0  // Default
 
       hwg_PostQuitMessage(0)
-      return 1
+      RETURN 1
 
    elseif msg == WM_SYSCOMMAND
       //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - SysCommand", 40) + "|")
@@ -592,7 +592,7 @@ Local oWnd, oBtn, oitem
           //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Child - SysCommand - Close", 40) + "|")
           if oWnd:bDestroy != NIL
              if !Eval(oWnd:bDestroy, oWnd)
-                return 1
+                RETURN 1
              endif
              if oWnd:oNotifyIcon != NIL
                 hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
@@ -604,7 +604,7 @@ Local oWnd, oBtn, oitem
       elseif wParam == SC_MINIMIZE
           if oWnd:lTray
              oWnd:Hide()
-             return 1
+             RETURN 1
           endif
       endif
    elseif msg == WM_NOTIFYICON
@@ -765,7 +765,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       Return (nReturn)
 
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
-      return DlgCtlColor( oWnd,wParam,lParam )
+      RETURN DlgCtlColor( oWnd,wParam,lParam )
       /*
       if ( oBtn := oWnd:FindControl(,lParam) ) != NIL
           if oBtn:tcolor != NIL
@@ -857,7 +857,7 @@ Local oItem, iCont, nCont
       hwg_ExitProcess(0)
    Endif  
 
-return NIL
+RETURN NIL
 
 // Processamento da janela frame (base) MDI
 
@@ -939,7 +939,7 @@ Local oWndClient
 
          Eval(aMenu[1, iCont, 1])
       ENDIF
-      return 1
+      RETURN 1
    elseif msg == WM_PAINT
       if oWnd:bPaint != NIL
          //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefWndProc -Inicio", 40) + "|")
@@ -978,14 +978,14 @@ Local oWndClient
           hwg_MoveWindow( HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2],aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3],aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4] )
           // aControls := hwg_GetClientRect( HWindow():aWindows[2]:handle )
           // writelog( str(HWindow():aWindows[2]:handle)+"::"+str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]) )
-          return 1
+          RETURN 1
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
-      return DlgCtlColor( oWnd,wParam,lParam )
+      RETURN DlgCtlColor( oWnd,wParam,lParam )
    elseif msg == WM_ERASEBKGND
       if oWnd:oBmp != NIL
           hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
-          return 1
+          RETURN 1
       endif
    elseif msg == WM_DRAWITEM
       
@@ -1034,8 +1034,8 @@ Local oWndClient
 
       hwg_PostQuitMessage(0)
 
-      // return 0
-      return 1
+      // RETURN 0
+      RETURN 1
 
    elseif msg == WM_NCDESTROY
       If HB_IsObject(oWnd) 
@@ -1052,7 +1052,7 @@ Local oWndClient
              xRet := Eval(oWnd:bDestroy, oWnd)
              xRet := IIf(HB_IsLogical(xRet),xRet,.T.)
              if !xRet
-                return 1
+                RETURN 1
              endif
           Endif
    
@@ -1062,11 +1062,11 @@ Local oWndClient
           if oWnd:hAccel != NIL
              hwg_DestroyAcceleratorTable(oWnd:hAccel)
           endif
-          return 0
+          RETURN 0
       elseif wParam == SC_MINIMIZE
           if oWnd:lTray
              oWnd:Hide()
-             return 1
+             RETURN 1
           endif
       endif
    elseif msg == WM_NOTIFYICON
