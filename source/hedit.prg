@@ -296,7 +296,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
             ELSEIF wParam == VK_TAB
                IF (::GetParentForm(Self):Type < WND_DLG_RESOURCE .OR. ;
                    !::GetParentForm(Self):lModal)
-                  //- hwg_GetSkip(oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
+                  //- hwg_GetSkip(oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
                ENDIF
                RETURN 0
             ELSEIF wParam == VK_ESCAPE
@@ -482,7 +482,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
          //hwg_SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
       ELSEIF msg == WM_CHAR
          IF wParam == VK_TAB
-               hwg_GetSkip(oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
+               hwg_GetSkip(oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
             RETURN 0
          ELSEIF wParam == VK_ESCAPE
             RETURN 0

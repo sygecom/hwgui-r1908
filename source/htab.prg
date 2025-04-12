@@ -691,7 +691,7 @@ RETURN ::nActive
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD Notify(lParam) CLASS HTab
-   
+
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nkeyDown := hwg_GetNotifyKeydown(lParam)
    LOCAL nPage := hwg_SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
@@ -859,7 +859,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HTab
            hwg_GetSkip(Self, ::handle, , 1)
            RETURN 0
        ELSEIF wParam == VK_TAB
-           hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
+           hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
            RETURN 0
        ELSEIF wparam == VK_UP .AND. ::nActive > 0  //
           hwg_GetSkip(::oParent, ::handle, , -1)

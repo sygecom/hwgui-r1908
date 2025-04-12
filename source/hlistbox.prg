@@ -177,7 +177,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
          RETURN - 1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
         //RETURN 0
       ENDIF
          IF hb_IsBlock(::bKeyDown)
@@ -212,7 +212,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HListBox
          RETURN -1
       ENDIF
       IF wParam == VK_TAB //.AND. nType < WND_DLG_RESOURCE
-         hwg_GetSkip(::oParent, ::handle, , iif(hwg_IsCtrlShift(.F., .T.), -1, 1))
+         hwg_GetSkip(::oParent, ::handle, , IIf(hwg_IsCtrlShift(.F., .T.), -1, 1))
         //RETURN 0
       ENDIF
          IF hb_IsBlock(::bKeyDown)
