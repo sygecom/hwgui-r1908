@@ -205,7 +205,7 @@ Local oPBar, nSch := 0
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
             oBrowse := aControls[i]
             hwg_CreateList( oBrowse,.T. )
          ENDIF

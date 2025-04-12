@@ -246,7 +246,7 @@ Private oDlg
          IF nMode == NIL
             lMdi := AT( "mdimain", Lower(xProperty) ) > 0
             lMdiChild := AT( "mdichild", Lower(xProperty) ) > 0
-            nMode := if(left(xProperty, 3) =="dlg", 2, 1)
+            nMode := if(left(xProperty, 3) == "dlg", 2, 1)
          ENDIF
       ELSEIF ::aProp[i, 1] == "variables"
          FOR j := 1 TO Len(xProperty)
@@ -753,7 +753,7 @@ MEMVAR aImages, lEditLabels, aParts
       FOR i := 1 TO Len(oCtrlTmpl:aControls)
          CreateCtrl( IIf(oCtrlTmpl:cClass == "group" .OR. oCtrlTmpl:cClass == "radiogroup", oParent, oCtrl), oCtrlTmpl:aControls[i], oForm)
       NEXT
-      IF oCtrlTmpl:cClass=="radiogroup"
+      IF oCtrlTmpl:cClass == "radiogroup"
          HRadioGroup():EndGroup()
       ENDIF
    ENDIF

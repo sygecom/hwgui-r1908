@@ -284,7 +284,7 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          ELSE
       hwg_SelectObject( hDC, IIf(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
             hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2, ;
-              IIf(aItem[ITEM_ALIGN]==0,DT_LEFT,IIf(aItem[ITEM_ALIGN]==1,DT_RIGHT,DT_CENTER)) )
+              IIf(aItem[ITEM_ALIGN] == 0,DT_LEFT,IIf(aItem[ITEM_ALIGN] == 1,DT_RIGHT,DT_CENTER)) )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
          hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )
@@ -675,7 +675,7 @@ Local hWnd := Hwindow():GetMain():handle
       aPaintRep[FORM_ITEMS,s_itemPressed,ITEM_STATE] := STATE_SELECTED
    ENDIF
    IF s_itemPressed > 0 .OR. s_itemSized > 0 .OR. s_nAddItem > 0
-      aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]==y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
+      aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1] == y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
    ENDIF
    s_itemPressed := s_itemSized := s_itemBorder := s_nAddItem := 0
 RETURN NIL

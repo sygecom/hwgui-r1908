@@ -64,9 +64,9 @@ METHOD Init CLASS HPanel
 
    IF !::lInit
       IF ::bSize == NIL
-         IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth==0 )
+         IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth == 0 )
             ::bSize := {|o, x, y|o:Move(, IIf(::nTop > 0, y - ::nHeight, 0), x, ::nHeight)}
-         ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight==0 )
+         ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight == 0 )
             ::bSize := {|o, x, y|o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), , ::nWidth, y)}
          ENDIF
       ENDIF

@@ -67,7 +67,7 @@ RETURN IIf(i == 0, NIL, ::aControls[i])
 
 METHOD DelControl( oCtrl ) CLASS HCustomWindow
 Local h := oCtrl:handle
-Local i := Ascan( ::aControls,{|o|o:handle==h} )
+Local i := Ascan( ::aControls,{|o|o:handle == h} )
 
    hwg_SendMessage(h, WM_CLOSE, 0, 0)
    IF i != 0
@@ -223,19 +223,19 @@ RETURN NIL
 
 METHOD DelItem( oWnd ) CLASS HWindow
 Local i, h := oWnd:handle
-   IF ( i := Ascan( ::aWindows,{|o|o:handle==h} ) ) > 0
+   IF ( i := Ascan( ::aWindows,{|o|o:handle == h} ) ) > 0
       Adel( ::aWindows,i )
       ASize(::aWindows, Len(::aWindows) - 1)
    ENDIF
 RETURN NIL
 
 METHOD FindWindow( hWnd ) CLASS HWindow
-Local i := Ascan( ::aWindows, {|o|o:handle==hWnd} )
+Local i := Ascan( ::aWindows, {|o|o:handle == hWnd} )
 RETURN IIf(i == 0, NIL, ::aWindows[i])
 
 METHOD GetMain CLASS HWindow
 RETURN IIf(Len(::aWindows) > 0,              ;
-	 IIf(::aWindows[1]:type==WND_MAIN, ;
+	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
 	   IIf(Len(::aWindows) > 1,::aWindows[2],NIL)), NIL )
 
@@ -283,7 +283,7 @@ Local oWnd, oBtn, oitem
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-           ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
+           ( iItem := Ascan( oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow} ) ) > 0
            Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
            ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;
@@ -482,7 +482,7 @@ Local oWnd, oBtn, oitem
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
+         ( iItem := Ascan( oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
              ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;
@@ -678,7 +678,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-            ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
+            ( iItem := Ascan( oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3])
       ENDIF
       nReturn := 1
@@ -920,7 +920,7 @@ Local oWndClient
       iParHigh := hwg_HIWORD(wParam)
       iParLow := hwg_LOWORD(wParam)
       IF oWnd:aEvents != NIL .AND. ;
-         ( iItem := Ascan( oWnd:aEvents, {|a|a[1]==iParHigh .AND. a[2]==iParLow} ) ) > 0
+         ( iItem := Ascan( oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow} ) ) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
       ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
          ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;

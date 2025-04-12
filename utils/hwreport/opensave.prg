@@ -134,7 +134,7 @@ STATIC FUNCTION OpenFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han := FOPEN( fname, FO_READ + FO_SHARED )
 Local i, itemName, aItem, res := .T., sFont
-Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFormWidth
+Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nFormWidth
    IF han != - 1
       DO WHILE .T.
          stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
@@ -201,7 +201,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
-                  AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName=="HLINE", 2,IIf(itemName=="VLINE", 3, 4)), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName == "HLINE", 2,IIf(itemName == "VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
@@ -288,7 +288,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
       hwg_EnableMenuItem( ,IDM_PREVIEW, .T., .T. )
       hwg_EnableMenuItem( ,IDM_FOPT, .T., .T. )
 
-      aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1]==y[ITEM_Y1].AND.z[ITEM_X1]==y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
+      aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z,y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1] == y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
       IF !lPrg
          hwg_RecalcForm( aPaintRep,nFormWidth )
       ENDIF
@@ -301,7 +301,7 @@ RETURN res
 STATIC FUNCTION SaveRFile(fname, repName)
 LOCAL strbuf := Space(512), poz := 513, stroka, nMode := 0
 Local han, hanOut, isOut := .F., res := .F.
-Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" )
+Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" )
 
    IF File(fname)
       han := FOPEN( fname, FO_READWRITE + FO_EXCLUSIVE )
@@ -450,8 +450,8 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       aItem := aPaintRep[FORM_ITEMS,i]
 
       cItem := Ltrim(Str(aItem[ITEM_TYPE], 1)) + ","
-      IF aItem[ITEM_TYPE]==TYPE_TEXT.OR.aItem[ITEM_TYPE]==TYPE_BITMAP ;
-              .OR.aItem[ITEM_TYPE]==TYPE_MARKER
+      IF aItem[ITEM_TYPE] == TYPE_TEXT.OR.aItem[ITEM_TYPE] == TYPE_BITMAP ;
+              .OR.aItem[ITEM_TYPE] == TYPE_MARKER
          cQuote := IIf(!( '"' $ aItem[ITEM_CAPTION]),'"', ;
                      IIf(!( "'" $ aItem[ITEM_CAPTION]),"'","["))
          cItem += cQuote + aItem[ITEM_CAPTION] + cQuote

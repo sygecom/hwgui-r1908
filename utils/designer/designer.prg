@@ -576,7 +576,7 @@ STATIC FUNCTION BuildSet( oTab )
                     oButton := HOwnButton():New( ,,,x1, 32, 30, 26, ;
                                ,,,{|o,id|ClickBtn(o,id)},.T.,    ;
                                cText,,,,,,,                      ;
-                               cBmp,At(".",cBmp)==0,,,,,.F.,,    ;
+                               cBmp,At(".",cBmp) == 0,,,,,.F.,,    ;
                                oWidget:GetAttribute("name") )
                     oButton:cargo := oWidget
                     x1 += 30

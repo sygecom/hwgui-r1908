@@ -232,8 +232,8 @@ STATIC FUNCTION tigades(mvc, n)    // created: 28 mei 1993
     RETURN ""
  ENDIF
 
-       IF x1=="0"   // do nothing
-       ELSEIF x1=="1";  say += "SERATUS "
+       IF x1 == "0"   // do nothing
+       ELSEIF x1 == "1";  say += "SERATUS "
        ELSE;            say += bil(x1)+ "RATUS "
        ENDIF
 

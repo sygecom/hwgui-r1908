@@ -274,7 +274,7 @@ Local oWindow := HMainWindow():GetMdiActive(), aControls, i
    hwg_WriteStatus( oWindow, 2,"Order: "+oBrw:aArray[oBrw:nCurrent, 2] )
    IF oWindow != NIL
       aControls := oWindow:aControls
-      IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+      IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
@@ -359,7 +359,7 @@ Local oWindow, aControls, i
 
    IF oWindow != NIL
       aControls := oWindow:aControls
-      IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+      IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
@@ -380,7 +380,7 @@ Local oWindow, aControls, i
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
             hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
@@ -398,7 +398,7 @@ Local oWindow, aControls, i
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
             hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
@@ -513,7 +513,7 @@ Local oWindow, aControls, oBrowse, i
       oWindow := HWindow():FindWindow( hChild )
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
             oBrowse := aControls[i]
             oBrowse:InitBrw()
             oBrowse:bcolorSel  := hwg_VColor( "800080" )
@@ -613,7 +613,7 @@ FUNCTION ChildGetFocus( oWindow )
 Local i, aControls, oBrw
    IF oWindow != NIL
       aControls := oWindow:aControls
-      IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+      IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
          oBrw := aControls[i]
          IF HB_IsNumeric(oBrw:cargo)
             Select( oBrw:cargo )
@@ -628,7 +628,7 @@ FUNCTION ChildKill( oWindow )
 Local i, aControls, oBrw
    IF oWindow != NIL
       aControls := oWindow:aControls
-      IF ( i := Ascan( aControls, {|o|o:classname()=="HBROWSE"} ) ) > 0
+      IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
          oBrw := aControls[i]
          IF HB_IsNumeric(oBrw:cargo)
             Select( oBrw:cargo )

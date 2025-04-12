@@ -61,7 +61,7 @@ Local hWnd, oWindow, aControls, iCont
       oWindow := HMainWindow():GetMdiActive()
       IF oWindow != NIL
          aControls := oWindow:aControls
-         iCont := Ascan( aControls, {|o|o:classname()=="HBROWSE"} )
+         iCont := Ascan( aControls, {|o|o:classname() == "HBROWSE"} )
       ENDIF
       IF nMove == 1
          F_Locate(aControls[iCont], cExpres)

@@ -162,7 +162,7 @@ FUNCTION TestRtf()
                                                       // van a estar unidas en una sola.
 
                         FOR i=1 TO 40
-                                       IF i==6
+                                       IF i == 6
    // Se puede cambiar el formato de una celda individual en tiempo de ejecucion.
                                  aMarca[5] := 1500
                                  aMarca[7] := 2500
@@ -176,7 +176,7 @@ FUNCTION TestRtf()
                          ENDIF
 
                                 FOR j=1 TO 9
-                                        if i==6 .AND. j==5
+                                        if i == 6 .AND. j == 5
                   WRITE NEWCELL oRTF TEXT "sombra"
                                         else
                   WRITE NEWCELL oRTF TEXT ""

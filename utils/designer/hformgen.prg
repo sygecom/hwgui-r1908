@@ -369,7 +369,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
         ON SIZE {|o,x,y|o:Move(,,x,y)} ON PAINT {|o|PaintPanel(o)}
       oPanel:aControls[1]:brush := HBrush():Add(16777215)
       oPanel:aControls[1]:bOther := {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
-      oPanel:bOther := {|o,m,wp,lp|IIf(m==WM_KEYUP,MessagesProc(o,m,wp,lp), -1)}
+      oPanel:bOther := {|o,m,wp,lp|IIf(m == WM_KEYUP,MessagesProc(o,m,wp,lp), -1)}
       ::oDlg:bOther := {|o,m,wp,lp|ScrollProc(o,m,wp,lp)}
    ELSE
       ::oDlg:bOther := {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}

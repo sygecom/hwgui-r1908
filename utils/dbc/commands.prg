@@ -93,7 +93,7 @@ Private finame, cValue, cFor
       hwg_SetDlgItemText( hDlg, IDC_TEXTMSG, "Done !" )
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:ClassName() == "HBROWSE"} ) ) > 0
             aControls[i]:Refresh()
          ENDIF
       ENDIF
@@ -179,7 +179,7 @@ Private cFor
       hwg_WriteStatus( oWindow, 3,"Done" )
       IF oWindow != NIL
          aControls := oWindow:aControls
-         IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
+         IF ( i := Ascan( aControls, {|o|o:ClassName() == "HBROWSE"} ) ) > 0
             hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
          ENDIF
       ENDIF
@@ -351,7 +351,7 @@ Local hWnd, oWindow, aControls, i
    oWindow := HWindow():FindWindow( hWnd )
    IF oWindow != NIL
       aControls := oWindow:aControls
-      IF ( i := Ascan( aControls, {|o|o:ClassName()=="HBROWSE"} ) ) > 0
+      IF ( i := Ascan( aControls, {|o|o:ClassName() == "HBROWSE"} ) ) > 0
          hwg_RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF

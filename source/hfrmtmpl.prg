@@ -598,7 +598,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
          ErrorBlock(bOldError)
          RETURN bRes
       ELSE
-         cCode1 := IIf(nContainer==0, ;
+         cCode1 := IIf(nContainer == 0, ;
                "aControls[" + Ltrim(Str(Len(oForm:aControls))) + "]", ;
                "F(" + Ltrim(Str(oCtrl:nId)) + ")")
          arrExe := Array(2)
@@ -614,7 +614,7 @@ STATIC FUNCTION CompileMethod(pp, cMethod, oForm, oCtrl, cName)
       ENDIF
    ENDIF
 
-   cCode1 := IIf(nContainer==0, ;
+   cCode1 := IIf(nContainer == 0, ;
          "aControls[" + Ltrim(Str(Len(oForm:aControls))) + "]", ;
          "F(" + Ltrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)

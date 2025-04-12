@@ -220,7 +220,7 @@ ENDFUNC
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
        { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
-       { "Caption",IIf(arr[i, 10]==1,"",arr[i, 7]) }, ;
+       { "Caption",IIf(arr[i, 10] == 1,"",arr[i, 7]) }, ;
        { "Justify",IIf(arr[i, 9]=0,"Left",IIf(arr[i, 9]=2,"Center","Right")) }, ;
        {"Font",arr[i, 8]} } )
       IF oArea != NIL

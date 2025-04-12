@@ -110,11 +110,11 @@ Local nFirst, i
 
    IF s_aScriptCurr[4] != aScript[4]
       IF !Empty(s_aBreakPoints)
-         IF (i := AScan(s_aBreaks, {|a|a[1]==s_aBreakPoints[1]})) == 0
+         IF (i := AScan(s_aBreaks, {|a|a[1] == s_aBreakPoints[1]})) == 0
             HB_SYMBOL_UNUSED(i)
             AAdd(s_aBreaks, s_aBreakPoints)
          ENDIF
-         IF (i := AScan(s_aBreaks, {|a|a[1]==aScript[4]})) == 0
+         IF (i := AScan(s_aBreaks, {|a|a[1] == aScript[4]})) == 0
             s_aBreakPoints := NIL
          ELSE
             s_aBreakPoints := s_aBreaks[i]

@@ -593,7 +593,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
          IF oEdit:cType == "N"
             IF !Empty(oEdit:cPicMask)
                 newPos:=Len(oEdit:cPicMask)-3
-                IF "E" $ oEdit:cPicFunc .AND. nPos==newPos 
+                IF "E" $ oEdit:cPicFunc .AND. nPos == newPos 
                     GetApplyKey( oEdit, "," )
                 ENDIF
             ENDIF

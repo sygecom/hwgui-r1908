@@ -55,12 +55,12 @@ METHOD Add(xItem) CLASS HXMLNode
 RETURN xItem
 
 METHOD GetAttribute(cName) CLASS HXMLNode
-Local i := AScan(::aAttr, {|a|a[1]==cName})
+Local i := AScan(::aAttr, {|a|a[1] == cName})
 
-RETURN IIf(i==0, NIL, ::aAttr[i, 2])
+RETURN IIf(i == 0, NIL, ::aAttr[i, 2])
 
 METHOD SetAttribute(cName, cValue) CLASS HXMLNode
-Local i := AScan(::aAttr,{|a|a[1]==cName})
+Local i := AScan(::aAttr,{|a|a[1] == cName})
 
    IF i == 0
       AAdd(::aAttr, {cName, cValue})
@@ -71,7 +71,7 @@ Local i := AScan(::aAttr,{|a|a[1]==cName})
 RETURN .T.
 
 METHOD DelAttribute(cName) CLASS HXMLNode
-Local i := AScan(::aAttr,{|a|a[1]==cName})
+Local i := AScan(::aAttr,{|a|a[1] == cName})
 
    IF i != 0
       ADel(::aAttr, i)

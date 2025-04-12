@@ -134,7 +134,7 @@ FUNCTION Main()
    END PAGE of oTAB
    BEGIN PAGE "Resource (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
+ 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170
       hwg_CreateArList(oBrowse4, aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
@@ -159,7 +159,7 @@ STATIC FUNCTION SearchFile(oBrow, oFile)
    LOCAL i
    LOCAL aSelect := hwg_SelectMultipleFiles("xBase Files (" + oFile + ")", oFile)
 
-   if Len(aSelect) ==0
+   if Len(aSelect) == 0
       RETURN NIL
    endif
    if Len(oBrow:aArray) == 1 .AND. obrow:aArray[1] == ""
