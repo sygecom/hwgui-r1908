@@ -135,7 +135,7 @@ METHOD Open( fname,cForm )  CLASS HFormGen
       ::path := hwg_Filepath( fname )
       ::filename := hwg_CutPath( fname )
    ENDIF
-   IF fname != NIL .OR. cForm != NIL .OR. FileDlg( Self,.T. )
+   IF fname != NIL .OR. cForm != NIL .OR. FileDlg( Self, .T. )
       IF ::type == 1
          ReadForm( Self,cForm )
       ELSE
@@ -233,7 +233,7 @@ METHOD Save(lAs) CLASS HFormGen
    ENDIF
 
    IF ( oDesigner:lSingleForm .AND. !lAs ) .OR. ;
-   ( ( Empty(::filename) .OR. lAs ) .AND. FileDlg( Self,.F. ) ) .OR. !Empty(::filename)
+   ( ( Empty(::filename) .OR. lAs ) .AND. FileDlg( Self, .F. ) ) .OR. !Empty(::filename)
       FrmSort( Self,IIf(oDesigner:lReport, ::oDlg:aControls[1]:aControls[1]:aControls, ::oDlg:aControls) )
       IF ::type == 1
          aControls := WriteForm( Self )
@@ -379,7 +379,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
 
    IF oDesigner:oDlgInsp == NIL
      //
-      InspOpen(IIf(hwg_Getdesktopwidth() > 800,.T.,.F.))
+      InspOpen(IIf(hwg_Getdesktopwidth() > 800, .T., .F.))
       IF hwg_Getdesktopwidth() <= 800
              oDesigner:oDlgInsp:HIDE()
           ENDIF
@@ -517,7 +517,7 @@ STATIC FUNCTION FileDlg( oFrm,lOpen )
        AT 50, 100 SIZE 310, 250 FONT oDesigner:oMainWnd:oFont
 
    @ 10, 20 GET COMBOBOX nType ITEMS aCombo SIZE 140, 24 ;
-       ON CHANGE {||IIf(lOpen,.F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""),oEdit1:Refresh()))}
+       ON CHANGE {||IIf(lOpen, .F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""),oEdit1:Refresh()))}
 
    @ 10, 70 GET oEdit1 VAR fname  ;
         STYLE ES_AUTOHSCROLL      ;
@@ -882,13 +882,13 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
                oNode1 := oNode:Add(HXMLNode():New( "part",,{ { "class", "PageSheet" },{ "page",LTrim(Str(j)) } } ))
                FOR i := 1 TO Len(oCtrl:aControls)
                   IF oCtrl:aControls[i]:nPage == j
-                     WriteCtrl( oNode1,oCtrl:aControls[i],.F. )
+                     WriteCtrl( oNode1,oCtrl:aControls[i], .F. )
                   ENDIF
                NEXT
             NEXT
          ELSE
             FOR i := 1 TO Len(oCtrl:aControls)
-               WriteCtrl( oNode,oCtrl:aControls[i],.F. )
+               WriteCtrl( oNode,oCtrl:aControls[i], .F. )
             NEXT
          ENDIF
       ENDIF
@@ -943,7 +943,7 @@ STATIC FUNCTION WriteForm( oForm )
    NEXT
    aControls := IIf(oDesigner:lReport, oForm:oDlg:aControls[1]:aControls[1]:aControls, oForm:oDlg:aControls)
    FOR i := 1 TO Len(aControls)
-      WriteCtrl( oNode,aControls[i],.T. )
+      WriteCtrl( oNode,aControls[i], .T. )
    NEXT
 
    IF oDesigner:lSingleForm
@@ -1525,23 +1525,23 @@ STATIC FUNCTION RButtonUp( oDlg, xPos, yPos )
       IF ( oCtrl := CtrlByPos( oDlg,xPos,yPos ) ) != NIL
          SetCtrlSelected(oDlg, oCtrl)
          IF Lower(oCtrl:cClass) == "page"
-            oDesigner:oTabMenu:Show( oDlg,xPos,yPos,.T. )
+            oDesigner:oTabMenu:Show( oDlg,xPos,yPos, .T. )
          ELSE
             IF oDesigner:lReport .AND. Lower(oCtrl:cClass) $ "hline.vline" ;
                .AND. oCtrl:oContainer != NIL .AND. Lower(oCtrl:oContainer:cClass) == "box"
-               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030, .T. )
                IF oCtrl:lEmbed
-                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.T. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030, .T. )
                ELSE
-                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+                  hwg_CheckMenuItem( oDesigner:oCtrlMenu, 1030, .F. )
                ENDIF
             ELSE
-               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030,.F. )
+               hwg_EnableMenuItem( oDesigner:oCtrlMenu, 1030, .F. )
             ENDIF
-            oDesigner:oCtrlMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos,.T. )
+            oDesigner:oCtrlMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos, .T. )
          ENDIF
       ELSE
-         oDesigner:oDlgMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos,.T. )
+         oDesigner:oDlgMenu:Show( IIf(oDesigner:lReport,oDlg:oParent:oParent,oDlg),xPos,yPos, .T. )
       ENDIF
    ENDIF
 
@@ -1710,7 +1710,7 @@ STATIC FUNCTION FrmSort( oForm,aControls,lSub )
    ENDIF
    FOR i := 1 TO Len(aControls)
       IF !Empty(aControls[i]:aControls)
-         FrmSort( oForm,aControls[i]:aControls,.T. )
+         FrmSort( oForm,aControls[i]:aControls, .T. )
       ENDIF
    NEXT
    IF !lSorted .AND. ( lSub == NIL .OR. !lSub )
@@ -1765,7 +1765,7 @@ FUNCTION DoPreview()
    ENDIF
 
    IF oDesigner:lReport
-      oTmpl:Print( ,.T. )
+      oTmpl:Print( , .T. )
    ELSE
       oTmpl:Show()
    ENDIF

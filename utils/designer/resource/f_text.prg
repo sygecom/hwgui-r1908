@@ -56,7 +56,7 @@ ENDFUNC
          IF Left(stroka, 1) == "#"
             IF Upper(SubStr(stroka, 2, 4)) == "FORM"
                stroka := LTrim(SubStr(stroka, 7))
-               itemName := hwg_NextItem( stroka,.T. )
+               itemName := hwg_NextItem( stroka, .T. )
                IF Empty(oForm:name) .OR. Upper(itemName) == Upper(oForm:name)
                   x := hwg_NextItem( stroka )
                   y := hwg_NextItem( stroka )
@@ -80,7 +80,7 @@ ENDFUNC
          ELSE           
             itemName := CnvCtrlName(hwg_NextItem(stroka, .T.))
             IF itemName == NIL
-               hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka,.T. ) )
+               hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka, .T. ) )
                RETURN
             ENDIF
             cCaption := hwg_NextItem( stroka )

@@ -495,7 +495,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
                "aControls[" + LTrim(Str(Len(oForm:aControls))) + "]", ;
                "F(" + LTrim(Str(oCtrl:nId)) + ")")
          arrExe := Array(2)
-         arrExe[2] := hwg_RdScript( ,cMethod, 1,.T. )
+         arrExe[2] := hwg_RdScript( ,cMethod, 1, .T. )
          cCode :=  "{|" + LTrim(SubStr(arr[1], 12)) + ;
             "|hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
             IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2],{", ;
@@ -511,7 +511,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          "aControls[" + LTrim(Str(Len(oForm:aControls))) + "]", ;
          "F(" + LTrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)
-   arrExe[2] := hwg_RdScript( ,cMethod,,.T. )
+   arrExe[2] := hwg_RdScript( ,cMethod,, .T. )
    cCode :=  "{||hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
       IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2])", ;
              cCode1 + ":aMethods[" + ;

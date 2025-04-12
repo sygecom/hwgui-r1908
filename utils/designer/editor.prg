@@ -186,7 +186,7 @@ FUNCTION EditMethod(cMethName, cMethod)
       AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_MAXIMIZEBOX + WS_SIZEBOX ;
       ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
-      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(),.F.),.T.}
+      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(), .F.), .T.}
 
    MENU OF oDlg
       MENU TITLE "&Options"
@@ -199,7 +199,7 @@ FUNCTION EditMethod(cMethName, cMethod)
          MENUITEM "&Configure" ACTION EditColors()
       ENDMENU
 
-      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged := .T.),.F.)
+      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged := .T.), .F.)
 
       MENU TITLE "&Templates "+cMethName
 
@@ -214,13 +214,13 @@ FUNCTION EditMethod(cMethName, cMethod)
    @ 0, 0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
        STYLE WS_HSCROLL + WS_VSCROLL + ES_LEFT + ES_MULTILINE + ES_WANTRETURN ;
        ON INIT {||ChangeTheme(HDTheme():nSelected)}                 ;
-       ON GETFOCUS {||IIf(oEdit:cargo,(hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.),.F.)} ;
+       ON GETFOCUS {||IIf(oEdit:cargo,(hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.), .F.)} ;
        ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
        FONT oFont
    //           STYLE ES_MULTILINE + ES_AUTOVSCROLL + ES_AUTOHSCROLL + ES_WANTRETURN + WS_VSCROLL + WS_HSCROLL
    oEdit:cargo := .T.
 
-   // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
+   // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)}, .T. )
 
    // oEdit:title := cMethod
    *-hwg_SetDlgKey( odlg, 0,VK_TAB, {hwg_MsgInfo("tab")})
@@ -239,7 +239,7 @@ FUNCTION ChangeTheme(nTheme)
    ENDIF
    hwg_CheckMenuItem( oDlg:handle, 1020+nTheme, .T. )
    HDTheme():nSelected := nTheme
-   editShow( ,.T. )
+   editShow( , .T. )
 RETURN NIL
 
 STATIC FUNCTION editChgFont()
@@ -249,7 +249,7 @@ STATIC FUNCTION editChgFont()
    IF ( oFont := HFont():Select( oEdit:oFont ) ) != NIL
        oEdit:oFont := oFont
        hwg_SetWindowFont( oEdit:handle,oFont:handle )
-       editShow( ,.T. )
+       editShow( , .T. )
        // hwg_RedrawWindow( oEdit:handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
        HDTheme():oFont := oFont
        HDTheme():lChanged := .T.
@@ -460,12 +460,12 @@ STATIC FUNCTION EditColors()
    @ 170, 110 GROUPBOX "" SIZE 250, 75
    @ 180, 127 SAY "Text color" SIZE 100, 24
    @ 280, 125 SAY oSayT CAPTION "" SIZE 24, 24
-   @ 305, 127 BUTTON "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][1],.F.)) != NIL,(aSchemes[nScheme,nType][1] := temp,UpdSample()),.F.)}
+   @ 305, 127 BUTTON "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][1], .F.)) != NIL,(aSchemes[nScheme,nType][1] := temp,UpdSample()), .F.)}
    @ 180, 152 SAY "Background" SIZE 100, 24
    @ 280, 150 SAY oSayB CAPTION "" SIZE 24, 24
-   @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2],.F.)) != NIL,(aSchemes[nScheme,nType][2] := temp,UpdSample()),.F.)}
-   @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := hwg_IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(),.T.}
-   @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := hwg_IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(),.T.}
+   @ 305, 152 BUTTON oBtn2 CAPTION "..." SIZE 20, 20 ON CLICK {||IIf((temp := hwg_ChooseColor(aSchemes[nScheme,nType][2], .F.)) != NIL,(aSchemes[nScheme,nType][2] := temp,UpdSample()), .F.)}
+   @ 350, 125 CHECKBOX oCheckB CAPTION "Bold" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][3] := hwg_IsDlgButtonChecked(oCheckB:oParent:handle,oCheckB:id),UpdSample(), .T.}
+   @ 350, 150 CHECKBOX oCheckI CAPTION "Italic" SIZE 60, 24 ON CLICK {||aSchemes[nScheme,nType][4] := hwg_IsDlgButtonChecked(oCheckI:oParent:handle,oCheckI:id),UpdSample(), .T.}
 
    @ 170, 190 RICHEDIT oEditC TEXT cText SIZE 250, 100 STYLE ES_MULTILINE
 
@@ -543,8 +543,8 @@ STATIC FUNCTION UpdSample(nAction)
       ENDIF
    ENDIF
 
-   oSayT:SetColor( ,aSchemes[nScheme,nType][1],.T. )
-   oSayB:SetColor( ,aSchemes[nScheme,nType][2],.T. )
+   oSayT:SetColor( ,aSchemes[nScheme,nType][1], .T. )
+   oSayB:SetColor( ,aSchemes[nScheme,nType][2], .T. )
    hwg_CheckDlgButton( oCheckB:oParent:handle,oCheckB:id,aSchemes[nScheme,nType][3] )
    hwg_CheckDlgButton( oCheckI:oParent:handle,oCheckI:id,aSchemes[nScheme,nType][4] )
 

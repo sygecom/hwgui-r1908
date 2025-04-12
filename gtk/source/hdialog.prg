@@ -30,7 +30,7 @@ STATIC FUNCTION onDestroy( oDlg )
       oDlg:bDestroy := NIL
    ENDIF
    oDlg:Super:onEvent( WM_DESTROY )
-   HDialog():DelItem( oDlg,.T. )
+   HDialog():DelItem( oDlg, .T. )
    IF oDlg:lModal
       hwg_gtk_exit()
    ENDIF

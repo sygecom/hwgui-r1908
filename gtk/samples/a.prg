@@ -32,7 +32,7 @@ Private nColor, oBmp2
          MENUITEM "&Open" ACTION FileOpen()
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
-         MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor,.F.), ;
+         MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor, .F.), ;
                      hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
@@ -85,7 +85,7 @@ Local nId
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o,x,y|o:Move(,,x,y)}         ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      hwg_CreateList( oBrw,.T. )
+      hwg_CreateList( oBrw, .T. )
       oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
       IF oFont != NIL
          oBrw:ofont := oFont
@@ -139,9 +139,9 @@ Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
 
    RADIOGROUP
    @ 180, 90 RADIOBUTTON "Radio 1"  ;
-        SIZE 90, 20 ON CLICK {||oEdit:SetColor(hwg_VColor("0000FF"),,.T.)}
+        SIZE 90, 20 ON CLICK {||oEdit:SetColor(hwg_VColor("0000FF"),, .T.)}
    @ 180, 115 RADIOBUTTON "Radio 2" ;
-        SIZE 90, 20 ON CLICK {||oEdit:SetColor(hwg_VColor("FF0000"),,.T.)}
+        SIZE 90, 20 ON CLICK {||oEdit:SetColor(hwg_VColor("FF0000"),, .T.)}
    END RADIOGROUP SELECTED 2
 
    @ 20, 120 COMBOBOX aCombo STYLE WS_TABSTOP ;

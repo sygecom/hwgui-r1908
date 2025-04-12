@@ -385,7 +385,7 @@ Local oWnd, oBtn, oitem
       if wParam == SC_CLOSE
           if HB_IsBlock( oWnd:bDestroy )
              i := Eval(oWnd:bDestroy, oWnd)
-             i := IIf(HB_IsLogical(i),i,.T.)
+             i := IIf(HB_IsLogical(i),i, .T.)
              if !i
                 RETURN 0
              endif
@@ -1050,7 +1050,7 @@ Local oWndClient
           //WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("Main - SysCommand - Close", 40) + "|")
           if oWnd:bDestroy != NIL
              xRet := Eval(oWnd:bDestroy, oWnd)
-             xRet := IIf(HB_IsLogical(xRet),xRet,.T.)
+             xRet := IIf(HB_IsLogical(xRet),xRet, .T.)
              if !xRet
                 RETURN 1
              endif

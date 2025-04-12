@@ -45,7 +45,7 @@ Local nLen
       nSelected := IIf(nSelected != NIL .AND. nSelected <= nLen .AND. nSelected > 0, ;
                        nSelected, ::oGroupCurrent:value )
       IF nSelected != 0 .AND. nSelected <= nlen
-         hwg_CheckButton( ::oGroupCurrent:aButtons[nSelected]:handle,.T. )
+         hwg_CheckButton( ::oGroupCurrent:aButtons[nSelected]:handle, .T. )
       ENDIF
    ENDIF
    ::oGroupCurrent := NIL
@@ -55,7 +55,7 @@ METHOD SetValue(nValue)  CLASS HRadioGroup
 Local nLen
 
    IF ( nLen:=Len(::aButtons) ) > 0 .AND. nValue > 0 .AND. nValue <= nLen
-      hwg_CheckButton( ::aButtons[nValue]:handle,.T. )
+      hwg_CheckButton( ::aButtons[nValue]:handle, .T. )
    ENDIF
 RETURN NIL
 
@@ -111,7 +111,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
       IF ::oGroup:bSetGet != NIL
-         hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )	 
+         hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )
       ENDIF
    ENDIF
 

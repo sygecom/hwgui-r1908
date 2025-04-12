@@ -126,7 +126,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
    IF ( j != 0 .AND. aDataDef[j, 5] != NIL ) .OR. aCtrlProp[oBrw1:cargo, 3] == "A"
       IF j != 0 .AND. aDataDef[j, 5] != NIL
          IF aDataDef[j, 5] == "color"
-            varbuf := hwg_ChooseColor( Val(varbuf),.F. )
+            varbuf := hwg_ChooseColor( Val(varbuf), .F. )
             IF varbuf != NIL
                varbuf := LTrim(Str(varbuf))
                lRes := .T.
@@ -361,8 +361,8 @@ FUNCTION InspOpen(lShow)
       FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)  ;
       STYLE nStilo;
       ON INIT {||IIf(!lshow,oDesigner:oDlgInsp:hide(),),hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
-      ON GETFOCUS {|o| o:show(),.T.};
-      ON EXIT {||oDesigner:oDlgInsp := NIL,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.F.),.T.} ;
+      ON GETFOCUS {|o| o:show(), .T.};
+      ON EXIT {||oDesigner:oDlgInsp := NIL,hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010, .F.), .T.} ;
       ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
 
    @ 0, 0 COMBOBOX oCombo ITEMS {} SIZE 220, 22 ;
@@ -401,8 +401,8 @@ FUNCTION InspOpen(lShow)
       oBrw2:lSep3d := .T.
       oBrw2:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw2:aArray := aMethods
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0,.T. ) )
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 2]), "", ":"+o:aArray[o:nCurrent, 1])}, "C", 100, 0,.T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0, .T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 2]), "", ":"+o:aArray[o:nCurrent, 1])}, "C", 100, 0, .T. ) )
    END PAGE OF oTab
 
      // : LFB POS
@@ -420,7 +420,7 @@ FUNCTION InspOpen(lShow)
     ENDMENU
 
    ACTIVATE DIALOG oDesigner:oDlgInsp NOMODAL
-   hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010,.T.)
+   hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010, .T.)
 
    InspSetCombo()
 
@@ -647,7 +647,7 @@ STATIC FUNCTION EditArray( arr )
    oBrw:bcolorSel := hwg_VColor( "008000" )
    oBrw:lAppable := .T.
    oBrw:aArray := arr
-   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v != NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])}, "C", 100, 0,.T. ) )
+   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v != NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])}, "C", 100, 0, .T. ) )
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
        ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)};
@@ -786,7 +786,7 @@ HB_SYMBOL_UNUSED(lParam)
       RETURN 1
    ELSEIF msg == WM_RBUTTONUP
       *RButtonUp( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
-        oMenuisnp:Show( oDlg,oDlg:nTop+5,oDlg:nLeft+15,.T. )
+        oMenuisnp:Show( oDlg,oDlg:nTop+5,oDlg:nLeft+15, .T. )
       RETURN 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()

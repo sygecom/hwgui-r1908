@@ -109,7 +109,7 @@ Local i, aItem
          ENDIF
       NEXT
       aPaintRep := NIL
-      hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT,.F. )
+      hwg_ShowScrollBar( Hwindow():GetMain():handle,SB_VERT, .F. )
       hwg_RedrawWindow( Hwindow():GetMain():handle, RDW_ERASE + RDW_INVALIDATE )
       hwg_EnableMenuItem( , 1, .F., .F. )
    ENDIF
@@ -159,7 +159,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            repName := stroka
                         ENDIF
                         nMode := 1
-                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName,.F., 0,NIL }
+                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName, .F., 0,NIL }
                      ENDIF
                   ENDIF
                ENDIF
@@ -177,7 +177,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                   ENDIF
                ENDIF
             ELSE
-               IF ( itemName := hwg_NextItem( stroka,.T. ) ) == "FORM"
+               IF ( itemName := hwg_NextItem( stroka, .T. ) ) == "FORM"
                   aPaintRep[FORM_WIDTH] := Val( hwg_NextItem( stroka ) )
                   aPaintRep[FORM_HEIGHT] := Val( hwg_NextItem( stroka ) )
                   nFormWidth := Val( hwg_NextItem( stroka ) )
@@ -187,7 +187,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),NIL,hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT],.T., "," ), ;
+                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT], .T., "," ), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
@@ -206,7 +206,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN],.T., "," )), ;
+                  aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN], .T., "," )), ;
                           Val(hwg_NextItem( aItem[ITEM_PEN],, "," )),Val(hwg_NextItem( aItem[ITEM_PEN],, "," )))
                   IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
@@ -443,7 +443,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
          LTrim(Str(aPaintRep[FORM_HEIGHT])) + ', 0, 0, 0,{},,"' + repName + '", .F., 0, NIL }' + Chr(10))
    IF aPaintRep[FORM_VARS] != NIL .AND. !Empty(aPaintRep[FORM_VARS])
       FWrite(han, "   aPaintRep[11] := ;" + Chr(10))
-      WriteScript( han,aPaintRep[FORM_VARS],.T. )
+      WriteScript( han,aPaintRep[FORM_VARS], .T. )
    ENDIF
 
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
@@ -482,7 +482,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
 
       IF aItem[ITEM_SCRIPT] != NIL .AND. !Empty(aItem[ITEM_SCRIPT])
          FWrite(han, "   aPaintRep[6,Len(aPaintRep[6]),12] := ;" + Chr(10))
-         WriteScript( han,aItem[ITEM_SCRIPT],.T. )
+         WriteScript( han,aItem[ITEM_SCRIPT], .T. )
       ENDIF
    NEXT
    FWrite(han, "   hwg_RecalcForm( aPaintRep," + LTrim(Str(aMetr[1] - XINDENT)) + " )" + Chr(10))

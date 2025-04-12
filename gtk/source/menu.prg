@@ -138,7 +138,7 @@ Local hMenu, nPos, aMenu, i, oBmp
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1,nPosParent]
-      hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, hWnd, aMenu[3],aMenu[4],.T. )
+      hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, hWnd, aMenu[3],aMenu[4], .T. )
       IF Len(aMenu) < 5
          AAdd(aMenu, hMenu)
       ELSE
@@ -156,7 +156,7 @@ Local hMenu, nPos, aMenu, i, oBmp
                AAdd(aMenu[1, npos], NIL)
             ENDIF
             aMenu[1,npos, 5] := hwg__AddMenuItem( hMenu, aMenu[1,npos, 2], ;
-                          nPos, hWnd, aMenu[1,nPos, 3], aMenu[1,npos, 4],.F. )
+                          nPos, hWnd, aMenu[1,nPos, 3], aMenu[1,npos, 4], .F. )
          Endif
       ENDIF
       nPos ++

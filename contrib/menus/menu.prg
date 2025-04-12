@@ -172,8 +172,8 @@ Local hMenu, nPos, aMenu
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1,nPosParent]
-      //hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, .T., aMenu[3],aMenu[4],.T. )
-      hMenu := hwg__AddMenuItem( hMenu, aMenu[2][1], nPos+1, .T., aMenu[3],aMenu[4],.T. )
+      //hMenu := hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, .T., aMenu[3],aMenu[4], .T. )
+      hMenu := hwg__AddMenuItem( hMenu, aMenu[2][1], nPos+1, .T., aMenu[3],aMenu[4], .T. )
       /*
       hwg__AddMenuItem( hMenu, aMenu[2], nPos+1, .T., aMenu[3] )
       hMenu := hwg__CreateSubMenu( hMenu,aMenu[3] )
@@ -191,9 +191,9 @@ Local hMenu, nPos, aMenu
          hwg_BuildMenu( aMenu,,,nPos )
       ELSE
          //hwg__AddMenuItem( hMenu, aMenu[1,npos, 2], nPos, .T., aMenu[1,nPos, 3], ;
-         //          aMenu[1,npos, 4],.F. )
+         //          aMenu[1,npos, 4], .F. )
          hwg__AddMenuItem( hMenu, aMenu[1,npos, 2][1], nPos, .T., aMenu[1,nPos, 3], ;
-                   aMenu[1,npos, 4],.F. )
+                   aMenu[1,npos, 4], .F. )
       ENDIF
       nPos ++
    ENDDO

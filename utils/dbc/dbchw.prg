@@ -298,7 +298,7 @@ RETURN NIL
 STATIC FUNCTION InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1,.T. )
+   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1, .T. )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 RETURN NIL
 
@@ -505,7 +505,7 @@ Local oWindow, aControls, oBrowse, i
       oBrowse:bcolorSel  := hwg_VColor( "800080" )
       oBrowse:ofont := oBrwFont
       oBrowse:cargo := improc
-      hwg_CreateList( oBrowse,.T. )
+      hwg_CreateList( oBrowse, .T. )
       oBrowse:lAppable := .T.
 
       oWindow:Activate()
@@ -525,7 +525,7 @@ Local oWindow, aControls, oBrowse, i
       ENDIF
    ENDIF
    hwg_WriteStatus( oWindow, 1,Ltrim(Str(Reccount(), 10))+" records" )
-   hwg_WriteStatus( oWindow, 2, "Order: None",.T. )
+   hwg_WriteStatus( oWindow, 2, "Order: None", .T. )
 RETURN oWindow:handle
 
 /* -----------------------  Calculator  --------------------- */

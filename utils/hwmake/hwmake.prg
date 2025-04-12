@@ -194,7 +194,7 @@ RETURN NIL
 
 STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
-Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,,.T. ) 
+Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,, .T. ) 
 If !Empty(oTextAnt)
    fFile:=oTextAnt //
 endif   

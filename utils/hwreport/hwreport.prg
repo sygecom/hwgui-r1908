@@ -70,7 +70,7 @@ Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
          MENUITEM "Save &as..." ID IDM_SAVEAS ACTION FileDlg(.F.)
          SEPARATOR
          MENUITEM "&Print static" ID IDM_PRINT ACTION PrintRpt()
-         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (hwg_ClonePaintRep(aPaintRep),hwg_PrintReport(,,.T.))
+         MENUITEM "&Print full" ID IDM_PREVIEW ACTION (hwg_ClonePaintRep(aPaintRep),hwg_PrintReport(,, .T.))
          SEPARATOR
          MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
       ENDMENU
@@ -95,7 +95,7 @@ Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
       MENU TITLE "&Options"
          MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
          MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),IIf(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),IIf(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),IIf(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(), .F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
          MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (hwg_CheckMenuItem(,IDM_MOUSE2,!hwg_IsCheckedMenuItem(,IDM_MOUSE2)))
       ENDMENU
       MENUITEM "&About" ID IDM_ABOUT ACTION About()
@@ -140,7 +140,7 @@ RETURN NIL
 
 STATIC FUNCTION EndNewrep( oMainWindow,oDlg )
 
-   aPaintRep := { 0, 0, 0, 0, 0,{}, "", "",.F., 0,NIL }
+   aPaintRep := { 0, 0, 0, 0, 0,{}, "", "", .F., 0,NIL }
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE

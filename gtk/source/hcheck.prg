@@ -67,7 +67,7 @@ METHOD Init() CLASS HCheckButton
    IF !::lInit
       ::Super:Init()
       IF ::value
-         hwg_CheckButton( ::handle,.T. )
+         hwg_CheckButton( ::handle, .T. )
       ENDIF
    ENDIF
 RETURN NIL

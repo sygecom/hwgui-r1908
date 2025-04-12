@@ -60,7 +60,7 @@ RETURN NIL
 FUNCTION MyReport
 LOCAL aPaintRep
    cEnd:=Chr(13)+Chr(10)
-   aPaintRep := { 210, 297, 0, 0, 0,{},, "MyReport",.F., 0,NIL }
+   aPaintRep := { 210, 297, 0, 0, 0,{},, "MyReport", .F., 0,NIL }
    aPaintRep[11] := ;
      "nStroka := 1"+cEnd
    AAdd(aPaintRep[6], {1, "Sample report - first 100 records of test.dbf", 132, 41, 513, 27, 2, 0, HFont():Add( "Arial", 0, -18, 700, 204, 0, 0, 0 ), 0, 0,NIL, 0 })

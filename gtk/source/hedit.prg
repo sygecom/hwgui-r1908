@@ -174,7 +174,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             ::lFirst := .F.
             SetGetUpdated(Self)
             IF ::lPicComplex
-               DeleteChar( Self,.T. )
+               DeleteChar( Self, .T. )
                RETURN 1
             ENDIF
             RETURN 0
@@ -215,7 +215,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             ::lFirst := .F.
             SetGetUpdated(Self)
             IF ::lPicComplex
-               DeleteChar( Self,.F. )
+               DeleteChar( Self, .F. )
                RETURN 1
             ENDIF
          ELSEIF wParam == GDK_Tab     // Tab
@@ -226,7 +226,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
             ENDIF
             RETURN 1
          ELSEIF wParam == GDK_Return  // Enter
-            IF !hwg_GetSkip( oParent,::handle, 1,.T. ) .AND. ::bSetGet != NIL
+            IF !hwg_GetSkip( oParent,::handle, 1, .T. ) .AND. ::bSetGet != NIL
 	       __Valid(Self)
 	    ENDIF
             RETURN 1

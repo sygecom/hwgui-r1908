@@ -508,7 +508,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 
     hwg_MsgInfo("Tidak boleh kosong")
     RETURN .F.
-    //RETURN IIf(lKosong == NIL,.T.,.F.)
+    //RETURN IIf(lKosong == NIL, .T., .F.)
  end
 
 

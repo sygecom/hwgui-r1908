@@ -794,9 +794,9 @@ Local oldBkColor, oldTColor
       ENDIF
       DO WHILE i <= nRows
          IF ::aSelected != NIL .AND. AScan(::aSelected, {|x|x = Eval(::bRecno, Self)}) > 0
-            ::LineOut( i, 0, hDC, .T.,.T. )
+            ::LineOut( i, 0, hDC, .T., .T. )
          ELSE
-            ::LineOut( i, 0, hDC, .F.,.T. )
+            ::LineOut( i, 0, hDC, .F., .T. )
          ENDIF
          i ++
       ENDDO
@@ -804,7 +804,7 @@ Local oldBkColor, oldTColor
       Eval(::bGoTo, Self, tmp)
    ENDIF
    IF ::lAppMode
-      ::LineOut( nRows+1, 0, hDC, .F.,.T. )
+      ::LineOut( nRows+1, 0, hDC, .F., .T. )
    ENDIF
 
    ::LineOut( ::rowPos, IIf(::lEditable, ::colpos, 0), hDC, .T.)

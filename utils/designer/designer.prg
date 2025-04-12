@@ -164,7 +164,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM If(!lOmmitMenuFile, "&Exit", "&Close Designer") ACTION oDesigner:oMainWnd:Close()
       ENDMENU
       MENU TITLE "&Edit"
-         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
+         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
          MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
       ENDMENU
       MENU TITLE "&View"
@@ -190,9 +190,9 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDMENU
 
    if ( oDesigner:nPixelGrid == 12 )
-       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.T.)
+       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, .T.)
    else
-       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.T.)
+       hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .T.)
    endif
 
    @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0,x,y-21),statusbarmsg("")}
@@ -285,12 +285,12 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    BuildSet( oTab )
 
    CONTEXT MENU oDesigner:oCtrlMenu
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
       SEPARATOR
-      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
-      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
-      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
-      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
+      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .T., .F., .F., .F. )
+      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .T., .F., .F. )
+      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .F., .T., .F. )
+      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .F., .F., .T. )
       // : LFB
       SEPARATOR
       MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
@@ -320,11 +320,11 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
       MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
       SEPARATOR
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
-      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
-      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
-      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
-      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
+      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .T., .F., .F., .F. )
+      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .T., .F., .F. )
+      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .F., .T., .F. )
+      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .F., .F., .T. )
       // : LFB
       SEPARATOR
       MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
@@ -381,7 +381,7 @@ STATIC FUNCTION ShowGrid10px()
 
 if ( oDesigner:oDlgInsp == NIL )
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
-    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,.F.)
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, .F.)
     if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
         oDesigner:nPixelGrid := 18
    oDesigner:lShowGrid  := .T.
@@ -402,7 +402,7 @@ STATIC FUNCTION ShowGrid5px()
 
 if ( oDesigner:oDlgInsp == NIL )
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
-    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,.F.)
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .F.)
     if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
         oDesigner:nPixelGrid := 12
             oDesigner:lShowGrid  := .T.
@@ -574,9 +574,9 @@ STATIC FUNCTION BuildSet( oTab )
                   cBmp := oWidget:GetAttribute("bmp")
                   IF cText != NIL .OR. cBmp != NIL
                     oButton := HOwnButton():New( ,,,x1, 32, 30, 26, ;
-                               ,,,{|o,id|ClickBtn(o,id)},.T.,    ;
+                               ,,,{|o,id|ClickBtn(o,id)}, .T.,    ;
                                cText,,,,,,,                      ;
-                               cBmp,At(".",cBmp) == 0,,,,,.F.,,    ;
+                               cBmp,At(".",cBmp) == 0,,,,, .F.,,    ;
                                oWidget:GetAttribute("name") )
                     oButton:cargo := oWidget
                     x1 += 30
@@ -855,14 +855,14 @@ FUNCTION StatusBarMsg(cfile,cpos,ctam)
   cpos := IIf(cpos = NIL, "",cpos)
   ctam := IIf(ctam = NIL, "",ctam)
    IF cFile != NIL
-     hwg_WriteStatus( oDesigner:oMainWnd, 1, "File: "+cfile ,.T.)
+     hwg_WriteStatus( oDesigner:oMainWnd, 1, "File: "+cfile , .T.)
   ENDIF
-  hwg_WriteStatus( oDesigner:oMainWnd, 2,cpos ,.T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 3,ctam ,.T.)
+  hwg_WriteStatus( oDesigner:oMainWnd, 2,cpos , .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 3,ctam , .T.)
 
   *hwg_WriteStatus(OdLG, 4, "INS", .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(), "NUM" , "   "),.T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(), "CAPS", "    ") ,.T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(), "NUM" , "   "), .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(), "CAPS", "    ") , .T.)
 
 RETURN NIL
 

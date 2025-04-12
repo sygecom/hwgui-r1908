@@ -5,7 +5,7 @@ FUNCTION STR2FONT
    PRIVATE oFont
   
   IF !Empty(cFont)
-    oFont := HFont():Add(hwg_NextItem( cFont,.T., "," ), ;
+    oFont := HFont():Add(hwg_NextItem( cFont, .T., "," ), ;
        Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
        Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
        Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
@@ -75,7 +75,7 @@ ENDFUNC
           ENDIF
         ENDIF
       ELSE
-        IF ( itemName := hwg_NextItem( stroka,.T. ) ) == "FORM"
+        IF ( itemName := hwg_NextItem( stroka, .T. ) ) == "FORM"
           cWidth := hwg_NextItem( stroka )
           nWidth := Val( cWidth )
           nHeight:= Val( hwg_NextItem( stroka ) )
@@ -104,7 +104,7 @@ ENDFUNC
           nWidth := Val( hwg_NextItem( stroka ) )
           nHeight:= Val( hwg_NextItem( stroka ) )
           cFont  := hwg_NextItem( stroka )
-          nAlign := Val( hwg_NextItem( cFont,.T., "," ) ) + 1
+          nAlign := Val( hwg_NextItem( cFont, .T., "," ) ) + 1
           nVar   := Val( hwg_NextItem( cFont,, "," ) )
 
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,nAlign,nVar })
