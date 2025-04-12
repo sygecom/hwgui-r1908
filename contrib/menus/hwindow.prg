@@ -139,7 +139,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
    IF lType == WND_MAIN
 
       ::handle := hwg_InitMainWindow( ::szAppName,cTitle,cMenu,    ;
-              IIf(oIcon != NIL,oIcon:handle,NIL),IIf(oBmp != NIL, -1,clr),::Style,::nLeft, ;
+              IIf(oIcon != NIL,oIcon:handle, NIL),IIf(oBmp != NIL, -1,clr),::Style,::nLeft, ;
               ::nTop,::nWidth,::nHeight )
 
    ELSEIF lType == WND_MDI
@@ -147,7 +147,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       // Register MDI frame  class
       // Create   MDI frame  window -> aWindows[0]
       hwg_InitMdiWindow( ::szAppName,cTitle,cMenu,  ;
-              IIf(oIcon != NIL,oIcon:handle,NIL),clr, ;
+              IIf(oIcon != NIL,oIcon:handle, NIL),clr, ;
               nStyle,::nLeft,::nTop,::nWidth,::nHeight )
       ::handle = hwg_GetWindowHandle(1)
 
@@ -156,7 +156,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       ::oParent := HWindow():GetMain()
       IF HB_IsObject( ::oParent )
           ::handle := hwg_InitChildWindow( ::szAppName,cTitle,cMenu,    ;
-             IIf(oIcon != NIL,oIcon:handle,NIL),IIf(oBmp != NIL, -1,clr),nStyle,::nLeft, ;
+             IIf(oIcon != NIL,oIcon:handle, NIL),IIf(oBmp != NIL, -1,clr),nStyle,::nLeft, ;
              ::nTop,::nWidth,::nHeight,::oParent:handle )
       Else
           hwg_MsgStop("Nao eh possivel criar CHILD sem primeiro criar MAIN")
@@ -167,7 +167,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       ::szAppName := "MDICHILD" + Alltrim(Str(hwg_GETNUMWINDOWS()))
       // Registra a classe
       hwg_InitMdiChildWindow(::szAppName ,cTitle,cMenu,  ;
-              IIf(oIcon != NIL,oIcon:handle,NIL),clr, ;
+              IIf(oIcon != NIL,oIcon:handle, NIL),clr, ;
               nStyle,::nLeft,::nTop,::nWidth,::nHeight )
 
        // Cria a window
@@ -237,7 +237,7 @@ METHOD GetMain CLASS HWindow
 RETURN IIf(Len(::aWindows) > 0,              ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
-	   IIf(Len(::aWindows) > 1,::aWindows[2],NIL)), NIL )
+	   IIf(Len(::aWindows) > 1,::aWindows[2], NIL)), NIL )
 
 METHOD GetMdiActive() CLASS HWindow 
 RETURN ::FindWindow ( hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) )

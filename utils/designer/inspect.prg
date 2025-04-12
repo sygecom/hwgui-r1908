@@ -157,7 +157,7 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                     hwg_SelectFile({"xBase Files( *.dbf)", " All Files( *.*)"}, {"*.dbf", "*.*"}), ;
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
                       "*.jpg;*.gif;*.bmp;*.ico")))), ;
-                   IIf(!Empty(varbuf),oGet:refresh(),NIL)} //,;
+                   IIf(!Empty(varbuf),oGet:refresh(), NIL)} //,;
                   *   VldBrwGet(oGet)} //,   hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)}
                   // : END LFB
             //varbuf := hwg_SelectFile("All files ( *.* )", "*.*")

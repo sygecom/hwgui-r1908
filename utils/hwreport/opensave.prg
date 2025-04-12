@@ -159,7 +159,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            repName := stroka
                         ENDIF
                         nMode := 1
-                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName, .F., 0,NIL }
+                        aPaintRep := { 0, 0, 0, 0, 0,{},fname,repName, .F., 0, NIL }
                      ENDIF
                   ENDIF
                ENDIF
@@ -184,8 +184,8 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                ELSEIF itemName == "TEXT"
                   AAdd(aPaintRep[FORM_ITEMS], { 1,hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),NIL,hwg_NextItem(stroka), ;
-                           Val(hwg_NextItem(stroka)), 0,NIL, 0 })
+                           Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)), NIL,hwg_NextItem(stroka), ;
+                           Val(hwg_NextItem(stroka)), 0, NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT], .T., "," ), ;
                     Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
@@ -204,7 +204,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                   AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName == "HLINE", 2,IIf(itemName == "VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
+                           Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka), NIL, 0, 0, NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN], .T., "," )), ;
                           Val(hwg_NextItem( aItem[ITEM_PEN],, "," )),Val(hwg_NextItem( aItem[ITEM_PEN],, "," )))
@@ -220,7 +220,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                   AAdd(aPaintRep[FORM_ITEMS], { 5, hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           Val(hwg_NextItem(stroka)), 0,NIL,NIL, 0, 0,NIL, 0 })
+                           Val(hwg_NextItem(stroka)), 0, NIL, NIL, 0, 0, NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                   aItem[ITEM_BITMAP] := HBitmap():AddFile(aItem[ITEM_CAPTION])
                   IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
@@ -235,7 +235,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                   AAdd(aPaintRep[FORM_ITEMS], { 6, hwg_NextItem(stroka),Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
-                           NIL,NIL, 0, 0,NIL, 0 })
+                           NIL, NIL, 0, 0, NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
                ENDIF
             ENDIF

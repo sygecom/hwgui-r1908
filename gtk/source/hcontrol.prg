@@ -469,7 +469,7 @@ METHOD Activate CLASS HButtonEX
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,::hIcon) 
       else
             ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title,NIL)
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title, NIL)
       endif		  
       hwg_SetWindowObject( ::handle,Self )
       ::Init()

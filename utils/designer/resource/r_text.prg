@@ -95,7 +95,7 @@ ENDFUNC
           nVar := Val( hwg_NextItem( stroka ) )
 
           oFont := hwg_CallFunc("Str2Font", { cFont })
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,cCaption,oFont,nAlign,nVar })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight, NIL,cCaption,oFont,nAlign,nVar })
 
         ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
           itemName := Lower(itemName)
@@ -107,7 +107,7 @@ ENDFUNC
           nAlign := Val( hwg_NextItem( cFont, .T., "," ) ) + 1
           nVar   := Val( hwg_NextItem( cFont,, "," ) )
 
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,nAlign,nVar })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight, NIL,nAlign,nVar })
 
         ELSEIF itemName == "BITMAP"
           itemName := Lower(itemName)
@@ -117,7 +117,7 @@ ENDFUNC
           nWidth := Val( hwg_NextItem( stroka ) )
           nHeight := Val( hwg_NextItem( stroka ) )
 
-          AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,cCaption })
+          AAdd(arr,{ itemName,x,y,nWidth,nHeight, NIL,cCaption })
 
         ELSEIF itemName == "MARKER"
           itemName := "area"
@@ -145,7 +145,7 @@ ENDFUNC
               ENDIF
               nHeight := Round(oForm:nPHeight * oForm:nKoeff, 0) - y
             ENDIF
-            AAdd(arr,{ itemName, 0,y, 9999,nHeight,NIL,cCaption,NIL })
+            AAdd(arr,{ itemName, 0,y, 9999,nHeight, NIL,cCaption, NIL })
           ENDIF
         ENDIF
       ENDIF
@@ -180,9 +180,9 @@ ENDFUNC
   FClose(han)
   arr := ASort(arr, , , {|z, y|z[3] < y[3] .OR. (z[3] == y[3] .AND. z[2] < y[2]) .OR. (z[3] == y[3] .AND. z[2] == y[2] .AND. (z[4] > y[4] .OR. z[5] > y[5]))})
   IF ( j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) > 1
-    AAdd(arr,NIL)
+    AAdd(arr, NIL)
     AIns(arr, 1)
-    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,NIL, "DH",NIL }
+    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1, NIL, "DH", NIL }
   ENDIF
   i := 1
   DO WHILE i <= Len(arr)
