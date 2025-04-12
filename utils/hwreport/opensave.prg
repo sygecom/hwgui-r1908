@@ -201,7 +201,7 @@ Local lPrg := ( Upper(hwg_FilExten(fname))=="PRG" ), cSource := "", vDummy, nFor
                      EXIT
                   ENDIF
                ELSEIF itemName == "HLINE" .OR. itemName == "VLINE" .OR. itemName == "BOX"
-                  AAdd(aPaintRep[FORM_ITEMS], { Iif(itemName=="HLINE", 2,Iif(itemName=="VLINE", 3, 4)), ;
+                  AAdd(aPaintRep[FORM_ITEMS], { IIf(itemName=="HLINE", 2,IIf(itemName=="VLINE", 3, 4)), ;
                            "",Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
@@ -452,8 +452,8 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       cItem := Ltrim(Str(aItem[ITEM_TYPE], 1)) + ","
       IF aItem[ITEM_TYPE]==TYPE_TEXT.OR.aItem[ITEM_TYPE]==TYPE_BITMAP ;
               .OR.aItem[ITEM_TYPE]==TYPE_MARKER
-         cQuote := Iif(!( '"' $ aItem[ITEM_CAPTION]),'"', ;
-                     Iif(!( "'" $ aItem[ITEM_CAPTION]),"'","["))
+         cQuote := IIf(!( '"' $ aItem[ITEM_CAPTION]),'"', ;
+                     IIf(!( "'" $ aItem[ITEM_CAPTION]),"'","["))
          cItem += cQuote + aItem[ITEM_CAPTION] + cQuote
       ENDIF
       cItem += ","+Ltrim(Str(aItem[ITEM_X1], 4)) + "," + Ltrim(Str(aItem[ITEM_Y1], 4)) + "," + ;
@@ -508,8 +508,8 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
          ENDIF
          IF Left(stroka, 1) != Chr(10)
             IF lPrg
-               cQuote := Iif(!( '"' $ stroka),'"', ;
-                           Iif(!( "'" $ stroka),"'","["))
+               cQuote := IIf(!( '"' $ stroka),'"', ;
+                           IIf(!( "'" $ stroka),"'","["))
                FWrite(han, IIf(lFirst, "", ";" + Chr(10)) + Space(5) + ;
                      IIf(lFirst, "", "+ ") + cQuote + stroka + cQuote + "+cEnd")
                lFirst := .F.

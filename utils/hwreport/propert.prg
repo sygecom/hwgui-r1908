@@ -61,7 +61,7 @@ STATIC FUNCTION InitStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oFont := aItem[ITEM_FONT]
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
-     Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,Iif(aItem[ITEM_ALIGN]==1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
+     IIf(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IIf(aItem[ITEM_ALIGN]==1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
    IF aItem[ITEM_SCRIPT] != NIL
       hwg_SetDlgItemText( hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT] )
@@ -234,7 +234,7 @@ RETURN NIL
 STATIC FUNCTION InitMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
    hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
-      Iif(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
+      IIf(aItem[ITEM_ALIGN]==0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
 RETURN .T.
 
 STATIC FUNCTION EndMarkF(aItem)

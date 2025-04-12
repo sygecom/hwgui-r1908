@@ -49,7 +49,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    ::aLeft := IIf(aLeft == NIL, {}, aLeft)
    ::aRight := IIf(aRight == NIL, {}, aRight)
    ::lVertical := (::nHeight > ::nWidth)
-   ::lScrolling := Iif(lScrolling == NIL, .F., lScrolling)
+   ::lScrolling := IIf(lScrolling == NIL, .F., lScrolling)
    IF (lTransp != NIL .AND. lTransp)
       ::BackStyle := TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT

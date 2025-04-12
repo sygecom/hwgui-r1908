@@ -181,7 +181,7 @@ Local oFontOld
       oFontOld := ::SetFont( oFont )
    ENDIF
    
-   hwg_gp_DrawText( ::hDC,cString,x1,y2,x2,y1,Iif(nOpt == NIL,DT_LEFT,nOpt) )
+   hwg_gp_DrawText( ::hDC,cString,x1,y2,x2,y1,IIf(nOpt == NIL,DT_LEFT,nOpt) )
    IF oFont != NIL
       ::SetFont( oFontOld )
    ENDIF
@@ -202,7 +202,7 @@ METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
       y2 *= ::nVRes
    ENDIF 
 
-   // hwg_DrawBitmap( ::hDC,hBitmap,Iif(nOpt == NIL,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
+   // hwg_DrawBitmap( ::hDC,hBitmap,IIf(nOpt == NIL,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
 
 RETURN NIL
 

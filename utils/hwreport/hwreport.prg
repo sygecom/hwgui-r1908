@@ -94,8 +94,8 @@ Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
       ENDMENU
       MENU TITLE "&Options"
          MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
-         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),Iif(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),Iif(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),IIf(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+         // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_ShowScrollBar(oMainWindow:handle,SB_VERT,hwg_IsCheckedMenuItem(,IDM_VIEW1)),hwg_CheckMenuItem(,IDM_VIEW1,!hwg_IsCheckedMenuItem(,IDM_VIEW1)),IIf(hwg_IsCheckedMenuItem(,IDM_VIEW1),DeselectAll(),.F.),hwg_RedrawWindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
          MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (hwg_CheckMenuItem(,IDM_MOUSE2,!hwg_IsCheckedMenuItem(,IDM_MOUSE2)))
       ENDMENU
       MENUITEM "&About" ID IDM_ABOUT ACTION About()
@@ -210,7 +210,7 @@ Local step, kolsteps, nsteps
    hwg_FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
    i := 0
    hwg_SelectObject( hDC,s_oPenLine:handle )
-   hwg_SelectObject( hDC,Iif(lPreview,oFontSmall:handle,oFontStandard:handle) )
+   hwg_SelectObject( hDC,IIf(lPreview,oFontSmall:handle,oFontStandard:handle) )
    oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DLIGHT) )
    DO WHILE i <= aPaintRep[FORM_WIDTH]/10 .AND. i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
       xt := x1+i*n1cm
@@ -282,9 +282,9 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
          IF Empty(aItem[ITEM_CAPTION])
             hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
          ELSE
-      hwg_SelectObject( hDC, Iif(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
+      hwg_SelectObject( hDC, IIf(lPreview,oFontSmall:handle,aItem[ITEM_FONT]:handle) )
             hwg_DrawText( hDC,aItem[ITEM_CAPTION],x1,y1,x2,y2, ;
-              Iif(aItem[ITEM_ALIGN]==0,DT_LEFT,Iif(aItem[ITEM_ALIGN]==1,DT_RIGHT,DT_CENTER)) )
+              IIf(aItem[ITEM_ALIGN]==0,DT_LEFT,IIf(aItem[ITEM_ALIGN]==1,DT_RIGHT,DT_CENTER)) )
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
          hwg_SelectObject( hDC,aItem[ITEM_PEN]:handle )

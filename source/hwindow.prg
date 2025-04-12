@@ -98,7 +98,7 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit,
    ::bRefresh := bRefresh
    ::lChild := IIf(Empty(lChild), ::lChild, lChild)
    ::lClipper := IIf(Empty(lClipper), ::lClipper, lClipper)
-   ::lClosable := Iif(Empty(lnoClosable), .T., !lnoClosable)
+   ::lClosable := IIf(Empty(lnoClosable), .T., !lnoClosable)
 
    //IF clr != NIL
    //   ::brush := HBrush():Add(clr)
