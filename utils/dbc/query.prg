@@ -126,7 +126,7 @@ STATIC lConnected := .F.
 RETURN .T.
 
 FUNCTION QuerySave
-Local fname := hwg_SaveFile("*.que","Query files( *.que )", "*.que", mypath)
+Local fname := hwg_SaveFile("*.que", "Query files( *.que )", "*.que", mypath)
    cQuery := hwg_GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
    IF !Empty(fname)
       MemoWrit( fname,cQuery )

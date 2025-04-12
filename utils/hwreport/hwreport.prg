@@ -27,7 +27,7 @@ STATIC s_itemBorder := 0
 STATIC s_itemSized := 0
 STATIC s_resizeDirection := 0
 STATIC s_aInitialSize := { { 50, 20 }, { 60, 4 }, { 4, 60 }, { 60, 40 }, { 40, 40 }, { 16, 10 } }
-STATIC s_aMarkers := { "PH","SL","EL","PF","EPF","DF" }
+STATIC s_aMarkers := { "PH", "SL", "EL", "PF", "EPF", "DF" }
 STATIC s_oPenDivider
 STATIC s_oPenLine
 
@@ -41,7 +41,7 @@ Local oMainWindow, aPanel, oIcon := HIcon():AddResource("ICON_1")
 Public mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Public aPaintRep := NIL
 Public oPenBorder, oFontSmall, oFontStandard, lastFont := NIL
-Public aItemTypes := { "TEXT","HLINE","VLINE","BOX","BITMAP","MARKER" }
+Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
 
    SET DECIMALS TO 4
    s_crossCursor := hwg_LoadCursor( IDC_CROSS )
@@ -140,7 +140,7 @@ RETURN NIL
 
 STATIC FUNCTION EndNewrep( oMainWindow,oDlg )
 
-   aPaintRep := { 0, 0, 0, 0, 0,{},"","",.F., 0,NIL }
+   aPaintRep := { 0, 0, 0, 0, 0,{}, "", "",.F., 0,NIL }
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE
@@ -607,7 +607,7 @@ Local hWnd := Hwindow():GetMain():handle
             TOP_INDENT+aPaintRep[FORM_ITEMS,i,ITEM_Y1]+aPaintRep[FORM_ITEMS,i,ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
          res := .T.
       ENDIF
-      hwg_WriteStatus( Hwindow():GetMain(), 1,"" )
+      hwg_WriteStatus( Hwindow():GetMain(), 1, "" )
       FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS,i]
          IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
@@ -641,7 +641,7 @@ Local hWnd := Hwindow():GetMain():handle
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y]-1
    IF s_nAddItem > 0 .AND. xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
-      AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem,"",xPos-x1, ;
+      AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem, "",xPos-x1, ;
            yPos-y1+aPaintRep[FORM_Y], s_aInitialSize[s_nAddItem, 1], ;
            s_aInitialSize[s_nAddItem, 2], 0,NIL,NIL, 0, 0,NIL,STATE_SELECTED })
       aItem := Atail( aPaintRep[FORM_ITEMS] )
@@ -696,7 +696,7 @@ Local i, aItem
          Adel( aPaintRep[FORM_ITEMS],i )
          ASize(aPaintRep[FORM_ITEMS], Len(aPaintRep[FORM_ITEMS]) - 1)
          aPaintRep[FORM_CHANGED] := .T.
-         hwg_WriteStatus( Hwindow():GetMain(), 1,"" )
+         hwg_WriteStatus( Hwindow():GetMain(), 1, "" )
          hwg_WriteStatus( Hwindow():GetMain(), 2,Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
                  Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
          IF Len(aPaintRep[FORM_ITEMS]) == 0
@@ -728,7 +728,7 @@ Local i, iPrevSelected := 0
 RETURN iPrevSelected
 
 STATIC FUNCTION WriteItemInfo( aItem )
-   hwg_WriteStatus( Hwindow():GetMain(), 1," x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
+   hwg_WriteStatus( Hwindow():GetMain(), 1, " x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
           +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
 RETURN NIL

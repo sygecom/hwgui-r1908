@@ -260,9 +260,9 @@ FUNCTION novo(tipo)
     //
     ADD STATUS TO o&I ID IDC_STATUS PARTS 50, 50, 400, 12, 90, 95, 90
  o&I:ACTIVATE()
- hwg_WriteStatus(HMainWIndow():GetMdiActive(), 3,"Novo Arquivo")
- hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1,"Lin:      0")
- hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2,"Col:      0")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 3, "Novo Arquivo")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:      0")
+ hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:      0")
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
  hwg_SetFocus(oEdit&i:Handle)
  hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo

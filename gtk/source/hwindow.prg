@@ -305,7 +305,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
           IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),nStyle,::nLeft, ;
           ::nTop,::nWidth,::nHeight,::oParent:handle )
    ELSE
-       hwg_MsgStop("Create Main window first !","HChildWindow():New()" )
+       hwg_MsgStop("Create Main window first !", "HChildWindow():New()" )
        RETURN NIL
    ENDIF
    IF ::bInit != NIL
@@ -435,14 +435,14 @@ Local i
              RETURN 0
           ENDIF
        ENDIF  
-       IF __ObjHasMsg( oWnd,"ONOTIFYICON" ) .AND. oWnd:oNotifyIcon != NIL
+       IF __ObjHasMsg( oWnd, "ONOTIFYICON" ) .AND. oWnd:oNotifyIcon != NIL
           hwg_ShellNotifyIcon( .F., oWnd:handle, oWnd:oNotifyIcon:handle )
        ENDIF
-       IF __ObjHasMsg( oWnd,"HACCEL" ) .AND. oWnd:hAccel != NIL
+       IF __ObjHasMsg( oWnd, "HACCEL" ) .AND. oWnd:hAccel != NIL
           hwg_DestroyAcceleratorTable(oWnd:hAccel)
        ENDIF
    ELSEIF wParam == SC_MINIMIZE
-       IF __ObjHasMsg( oWnd,"LTRAY" ) .AND. oWnd:lTray
+       IF __ObjHasMsg( oWnd, "LTRAY" ) .AND. oWnd:lTray
           oWnd:Hide()
           RETURN 0
        ENDIF

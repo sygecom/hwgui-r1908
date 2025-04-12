@@ -14,11 +14,11 @@
 
 STATIC aClass := { "label", "button", "checkbox",                    ;
                   "radiobutton", "editbox", "group", "radiogroup",  ;
-                  "bitmap","icon",                                  ;
-                  "richedit","datepicker", "updown", "combobox",    ;
-                  "line", "toolbar", "ownerbutton","browse",        ;
-                  "monthcalendar","trackbar","page", "tree",        ;
-                  "status","menu","animation"                       ;
+                  "bitmap", "icon",                                  ;
+                  "richedit", "datepicker", "updown", "combobox",    ;
+                  "line", "toolbar", "ownerbutton", "browse",        ;
+                  "monthcalendar", "trackbar", "page", "tree",        ;
+                  "status", "menu", "animation"                       ;
                 }
 STATIC aCtrls := { ;
   "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
@@ -53,8 +53,8 @@ STATIC aCtrls := { ;
 
 #define  CONTROL_FIRST_ID   34000
 
-STATIC aPenType  := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
-STATIC aJustify  := { "Left","Center","Right" }
+STATIC aPenType  := { "SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT" }
+STATIC aJustify  := { "Left", "Center", "Right" }
 
 REQUEST HSTATIC
 REQUEST HBUTTON
@@ -524,7 +524,7 @@ STATIC FUNCTION CompileErr( e, stroka )
 Local n
 
    hwg_MsgStop( hwg_ErrorMessage(e) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
-          AllTrim(stroka),"Script compiling error" )
+          AllTrim(stroka), "Script compiling error" )
    BREAK
 RETURN .T.
 
@@ -625,10 +625,10 @@ MEMVAR aImages, lEditLabels, aParts
          nTop    := Val(xProperty[2])
          nWidth  := Val(xProperty[3])
          nHeight := Val(xProperty[4])
-         IF __ObjHasMsg( oParent,"ID")
+         IF __ObjHasMsg( oParent, "ID")
             nLeft -= oParent:nLeft
             nTop -= oParent:nTop
-            IF __ObjHasMsg( oParent:oParent,"ID")
+            IF __ObjHasMsg( oParent:oParent, "ID")
                nLeft -= oParent:oParent:nLeft
                nTop -= oParent:oParent:nTop
             ENDIF
@@ -1019,7 +1019,7 @@ Private oReport := Self
       hwg_DoScript( aMethod,{ p1,p2,p3 } )
    ENDIF
    IF xProperty != NIL
-      oFont := hrep_FontFromxml( oPrinter,xProperty,aGetSecond(::aProp,"fonth")*::nKoefY )
+      oFont := hrep_FontFromxml( oPrinter,xProperty,aGetSecond(::aProp, "fonth")*::nKoefY )
    ENDIF
 
    oPrinter:StartDoc(lPreview) // ,"/tmp/a1.ps" )
@@ -1200,7 +1200,7 @@ Memvar lLastCycle, lSkipItem
             ENDIF
             IF oItem:obj == NIL
                IF ( xProperty := aGetSecond(oItem:aProp, "font") ) != NIL
-                  oItem:obj := hrep_FontFromxml( ::oPrinter,xProperty,aGetSecond(oItem:aProp,"fonth")*::nKoefY )
+                  oItem:obj := hrep_FontFromxml( ::oPrinter,xProperty,aGetSecond(oItem:aProp, "fonth")*::nKoefY )
                ENDIF
             ENDIF
             // hwg_SetTransparentMode(::oPrinter:hDC, .T.)

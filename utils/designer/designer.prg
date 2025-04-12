@@ -118,16 +118,16 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
 #ifdef INTEGRATED
-   INIT DIALOG oDesigner:oMainWnd AT 0, 0 SIZE 400, 200 TITLE IIf(!oDesigner:lReport,"Form","Report")+" designer" ;
+   INIT DIALOG oDesigner:oMainWnd AT 0, 0 SIZE 400, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
       FONT oFont                          ;
       ON INIT {|o|StartDes(o,p0,p1)}   ;
       ON EXIT {||EndIde()}
 #else
 
- //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 280, 200 TITLE IIf(!oDesigner:lReport,"Form","Report")+" designer" ;
+ //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 280, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
 
    INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 400, 200 ;
-       TITLE IIf(!oDesigner:lReport,"Form","Report")+" designer" ;
+       TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
        FONT oFont                                                ;
        ON EXIT {||EndIde()}
 
@@ -136,21 +136,21 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    MENU OF oDesigner:oMainWnd
       MENU TITLE "&File"
          IF !oDesigner:lSingleForm
-            MENUITEM "&New "+IIf(!oDesigner:lReport,"Form","Report")  ACTION HFormGen():New()
-            MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():Open()
+            MENUITEM "&New "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION HFormGen():New()
+            MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():Open()
             SEPARATOR
-            MENUITEM "&Save "+IIf(!oDesigner:lReport,"Form","Report")   ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save "+IIf(!oDesigner:lReport, "Form", "Report")   ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
             MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_MsgStop("No Form in use!"))
-            MENUITEM "&Close "+IIf(!oDesigner:lReport,"Form","Report")  ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Close "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
             If !lOmmitMenuFile
-               MENUITEM "&Open "+IIf(!oDesigner:lReport,"Form","Report") ACTION HFormGen():OpenR()
+               MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():OpenR()
                SEPARATOR
                MENUITEM "&Save as ..." ACTION ( oDesigner:lSingleForm := .F.,HFormGen():oDlgSelected:oParent:Save(.T.),oDesigner:lSingleForm := .T. )
             EndIf
          ENDIF
          SEPARATOR
-         MENU TITLE "Recent "+IIf(!oDesigner:lReport,"Form","Report")
+         MENU TITLE "Recent "+IIf(!oDesigner:lReport, "Form", "Report")
          If !lOmmitMenuFile
             i := 1
             DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != NIL
@@ -161,7 +161,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          EndIf
          ENDMENU
          SEPARATOR
-         MENUITEM If(!lOmmitMenuFile,"&Exit","&Close Designer") ACTION oDesigner:oMainWnd:Close()
+         MENUITEM If(!lOmmitMenuFile, "&Exit", "&Close Designer") ACTION oDesigner:oMainWnd:Close()
       ENDMENU
       MENU TITLE "&Edit"
          MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012,.T.,.T.),.F.))
@@ -390,7 +390,7 @@ if ( oDesigner:oDlgInsp == NIL )
         oDesigner:lShowGrid  := .F.
     endif
 else
-    hwg_MsgInfo( "Close the form(s) first to change the grid status","Warning")
+    hwg_MsgInfo( "Close the form(s) first to change the grid status", "Warning")
 endif
 RETURN ( NIL )
 
@@ -411,7 +411,7 @@ if ( oDesigner:oDlgInsp == NIL )
         oDesigner:lShowGrid  := .F.
     endif
 else
-    hwg_MsgInfo( "Close the form first to change the grid status","Warning")
+    hwg_MsgInfo( "Close the form first to change the grid status", "Warning")
 endif
 RETURN ( NIL )
 
@@ -428,7 +428,7 @@ CLASS HDesigner
    DATA lChgRecent   INIT .F.
    DATA oWidgetsSet, oFormDesc
    DATA oBtnPressed, addItem
-   DATA aFormats     INIT { { "Hwgui XML format","xml" } }
+   DATA aFormats     INIT { { "Hwgui XML format", "xml" } }
    DATA aDataDef     INIT {}
    DATA aMethDef     INIT {}
    DATA lSingleForm  INIT .F.
@@ -535,7 +535,7 @@ STATIC FUNCTION ReadIniFiles()
       oDesigner:oWidgetsSet := HXMLDoc():Read(cCurDir + cWidgetsFileName)
    ENDIF
    IF oDesigner:oWidgetsSet == NIL .OR. Empty(oDesigner:oWidgetsSet:aItems)
-      hwg_MsgStop( "Widgets file isn't found!","Designer error" )
+      hwg_MsgStop( "Widgets file isn't found!", "Designer error" )
       RETURN .F.
    ENDIF
 
@@ -851,18 +851,18 @@ FUNCTION StatusBarMsg(cfile,cpos,ctam)
    
    MEMVAR oDesigner
 
-  //cfile := IIf(cfile = NIL,"",cfile)
-  cpos := IIf(cpos = NIL,"",cpos)
-  ctam := IIf(ctam = NIL,"",ctam)
+  //cfile := IIf(cfile = NIL, "",cfile)
+  cpos := IIf(cpos = NIL, "",cpos)
+  ctam := IIf(ctam = NIL, "",ctam)
    IF cFile != NIL
-     hwg_WriteStatus( oDesigner:oMainWnd, 1,"File: "+cfile ,.T.)
+     hwg_WriteStatus( oDesigner:oMainWnd, 1, "File: "+cfile ,.T.)
   ENDIF
   hwg_WriteStatus( oDesigner:oMainWnd, 2,cpos ,.T.)
   hwg_WriteStatus(oDesigner:oMainWnd, 3,ctam ,.T.)
 
   *hwg_WriteStatus(OdLG, 4, "INS", .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(),"NUM" ,"   "),.T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(),"CAPS","    ") ,.T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(), "NUM" , "   "),.T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(), "CAPS", "    ") ,.T.)
 
 RETURN NIL
 
@@ -873,7 +873,7 @@ FUNCTION SoControles()
    LOCAL oTabx
    LOCAL oFont
 
-   IF !Empty(hwg_findwindow(0,"Toolbars - Classes "))// > 0
+   IF !Empty(hwg_findwindow(0, "Toolbars - Classes "))// > 0
      hwg_Showwindow(oDlgx:handle)
      hwg_SetFocus( oDlgx:handle )
      RETURN NIL

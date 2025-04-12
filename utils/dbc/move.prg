@@ -29,7 +29,7 @@ RETURN NIL
 
 STATIC FUNCTION InitMove(nMove)
 Local hDlg := hwg_GetModalHandle(), cTitle
-   hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"" )
+   hwg_WriteStatus( HMainWindow():GetMdiActive(), 3, "" )
    IF nMove == 1
       cTitle := "Input locate expression"
       hwg_SetDlgItemText( hDlg, IDC_EDIT6, cLocate )
@@ -80,7 +80,7 @@ Local hWnd, oWindow, aControls, iCont
             GO nrec
             hwg_MsgStop( "Record not found" )
          ELSE
-            hwg_WriteStatus( oWindow, 3,"Found" )
+            hwg_WriteStatus( oWindow, 3, "Found" )
          ENDIF
       ELSEIF nMove == 3
          F_Filter( aControls[iCont], cExpres )
@@ -130,7 +130,7 @@ Local nrec, i, res, block
          GO nrec
          hwg_MsgStop( "Record not found" )
       ELSE
-         hwg_WriteStatus( HMainWindow():GetMdiActive(), 3,"Found" )
+         hwg_WriteStatus( HMainWindow():GetMdiActive(), 3, "Found" )
          IF oBrw:prflt
             oBrw:nCurrent := i
          ENDIF

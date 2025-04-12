@@ -21,7 +21,7 @@ Local at := { "Character", "Numeric", "Date", "Logical", "Memo" }
 LOCAL af, oBrw
 
    IF lNew
-      af := { {"","", 0, 0} }
+      af := { {"", "", 0, 0} }
    ELSE
       af := dbStruct()
    ENDIF
@@ -40,10 +40,10 @@ LOCAL af, oBrw
           ON BN_CLICKED,IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
 
    oBrw:aArray := af
-   oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent, 1] },"C", 10, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent, 2] },"C", 4, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent, 3] },"N", 4, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent, 4] },"N", 2, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent, 1] }, "C", 10, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent, 2] }, "C", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent, 3] }, "N", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent, 4] }, "N", 2, 0  ) )
    oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont      := oBrwFont
 
@@ -120,7 +120,7 @@ Local oWindow, aControls
 Local oPBar, nSch := 0
 
    IF lNew
-      IF Empty(fname := hwg_SaveFile("*.dbf","xBase files( *.dbf )", "*.dbf", mypath))
+      IF Empty(fname := hwg_SaveFile("*.dbf", "xBase files( *.dbf )", "*.dbf", mypath))
          RETURN NIL
       ENDIF
       mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")

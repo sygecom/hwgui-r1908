@@ -22,24 +22,24 @@
 //NANDO
 STATIC oPenDivider, oPenLine
 //*-
-STATIC aG := { "left","top","width","height","right","bottom" }
+STATIC aG := { "left", "top", "width", "height", "right", "bottom" }
 
-STATIC aStaticTypes := { { SS_LEFT,"SS_LEFT" }, { SS_CENTER,"SS_CENTER" }, ;
-    { SS_RIGHT,"SS_RIGHT" }, { SS_BLACKFRAME,"SS_BLACKFRAME" },            ;
-    { SS_GRAYFRAME,"SS_GRAYFRAME" }, { SS_WHITEFRAME,"SS_WHITEFRAME" },    ;
-    { SS_BLACKRECT,"SS_BLACKRECT" }, { SS_GRAYRECT,"SS_GRAYRECT" },        ;
-    { SS_WHITERECT,"SS_WHITERECT" }, { SS_ETCHEDFRAME,"SS_ETCHEDFRAME" },  ;
-    { SS_ETCHEDHORZ,"SS_ETCHEDHORZ" }, { SS_ETCHEDVERT,"SS_ETCHEDVERT" },  ;
-    { SS_OWNERDRAW,"SS_OWNERDRAW" } }
+STATIC aStaticTypes := { { SS_LEFT, "SS_LEFT" }, { SS_CENTER, "SS_CENTER" }, ;
+    { SS_RIGHT, "SS_RIGHT" }, { SS_BLACKFRAME, "SS_BLACKFRAME" },            ;
+    { SS_GRAYFRAME, "SS_GRAYFRAME" }, { SS_WHITEFRAME, "SS_WHITEFRAME" },    ;
+    { SS_BLACKRECT, "SS_BLACKRECT" }, { SS_GRAYRECT, "SS_GRAYRECT" },        ;
+    { SS_WHITERECT, "SS_WHITERECT" }, { SS_ETCHEDFRAME, "SS_ETCHEDFRAME" },  ;
+    { SS_ETCHEDHORZ, "SS_ETCHEDHORZ" }, { SS_ETCHEDVERT, "SS_ETCHEDVERT" },  ;
+    { SS_OWNERDRAW, "SS_OWNERDRAW" } }
 
-STATIC aStyles := { { WS_POPUP,"WS_POPUP" }, { WS_CHILD,"WS_CHILD" }, { WS_VISIBLE,"WS_VISIBLE" }, ;
-    { WS_DISABLED,"WS_DISABLED" }, { WS_CLIPSIBLINGS,"WS_CLIPSIBLINGS" }, { WS_BORDER,"WS_BORDER" }, ;
-    { WS_DLGFRAME,"WS_DLGFRAME" }, { WS_VSCROLL,"WS_VSCROLL" }, { WS_HSCROLL,"WS_HSCROLL" }, ;
-    { WS_SYSMENU,"WS_SYSMENU" }, { WS_THICKFRAME,"WS_THICKFRAME" }, { WS_GROUP,"WS_GROUP" }, ;
-    { WS_TABSTOP,"WS_TABSTOP" }, { BS_PUSHBUTTON,"BS_PUSHBUTTON" }, { BS_CHECKBOX,"BS_CHECKBOX" }, ;
-    { BS_AUTORADIOBUTTON,"BS_AUTORADIOBUTTON" }, { ES_AUTOHSCROLL,"ES_AUTOHSCROLL" }, ;
-    { ES_AUTOVSCROLL,"ES_AUTOVSCROLL" }, { ES_MULTILINE,"ES_MULTILINE" }, { BS_GROUPBOX,"BS_GROUPBOX" }, ;
-    { CBS_DROPDOWNLIST,"CBS_DROPDOWNLIST" }, { SS_OWNERDRAW,"SS_OWNERDRAW" }  }
+STATIC aStyles := { { WS_POPUP, "WS_POPUP" }, { WS_CHILD, "WS_CHILD" }, { WS_VISIBLE, "WS_VISIBLE" }, ;
+    { WS_DISABLED, "WS_DISABLED" }, { WS_CLIPSIBLINGS, "WS_CLIPSIBLINGS" }, { WS_BORDER, "WS_BORDER" }, ;
+    { WS_DLGFRAME, "WS_DLGFRAME" }, { WS_VSCROLL, "WS_VSCROLL" }, { WS_HSCROLL, "WS_HSCROLL" }, ;
+    { WS_SYSMENU, "WS_SYSMENU" }, { WS_THICKFRAME, "WS_THICKFRAME" }, { WS_GROUP, "WS_GROUP" }, ;
+    { WS_TABSTOP, "WS_TABSTOP" }, { BS_PUSHBUTTON, "BS_PUSHBUTTON" }, { BS_CHECKBOX, "BS_CHECKBOX" }, ;
+    { BS_AUTORADIOBUTTON, "BS_AUTORADIOBUTTON" }, { ES_AUTOHSCROLL, "ES_AUTOHSCROLL" }, ;
+    { ES_AUTOVSCROLL, "ES_AUTOVSCROLL" }, { ES_MULTILINE, "ES_MULTILINE" }, { BS_GROUPBOX, "BS_GROUPBOX" }, ;
+    { CBS_DROPDOWNLIST, "CBS_DROPDOWNLIST" }, { SS_OWNERDRAW, "SS_OWNERDRAW" }  }
 
 CLASS HFormGen INHERIT HObject
 
@@ -92,12 +92,12 @@ METHOD New() CLASS HFormGen
 
    ::type := 1
    ::name := name
-   //::CreateDialog( { {"Left",LTrim(Str(aTermMetr[1]-500))},  //{"Top","120"},{"Width","500"},{"Height","400"},{"Caption",name} } )
-   //::CreateDialog( { {"Left","325"}, {"Top","060"},{"Width","498"},{"Height","470"},{"Caption",name} } )
+   //::CreateDialog( { {"Left",LTrim(Str(aTermMetr[1]-500))},  //{"Top", "120"},{"Width", "500"},{"Height", "400"},{"Caption",name} } )
+   //::CreateDialog( { {"Left", "325"}, {"Top", "060"},{"Width", "498"},{"Height", "470"},{"Caption",name} } )
    IF hwg_Getdesktopwidth() < 1024
-     ::CreateDialog( { {"Left","225"}, {"Top","110"},{"Width","550"},{"Height","400"},{"Caption",name} } )
+     ::CreateDialog( { {"Left", "225"}, {"Top", "110"},{"Width", "550"},{"Height", "400"},{"Caption",name} } )
    ELSE
-     ::CreateDialog( { {"Left","125"}, {"Top","150"},{"Width","750"},{"Height","600"},{"Caption",name} } )
+     ::CreateDialog( { {"Left", "125"}, {"Top", "150"},{"Width", "750"},{"Height", "600"},{"Caption",name} } )
    ENDIF
    ::filename := ""
 
@@ -241,7 +241,7 @@ METHOD Save(lAs) CLASS HFormGen
          // : LFB
              //  salvar PRG diretamente sem necessidade de ficar mudando
          ::type := 3
-         ::filename := StrTran(::filename,"xml","prg")
+         ::filename := StrTran(::filename, "xml", "prg")
          IF HB_IsChar( aFormats[::type, 5] )
             aFormats[::type, 5] := hwg_OpenScript( cCurDir + aFormats[::type, 3], aFormats[::type, 5] )
          ENDIF
@@ -249,7 +249,7 @@ METHOD Save(lAs) CLASS HFormGen
             hwg_DoScript( aFormats[::type, 5] )
          ENDIF
          ::type := 1
-         ::filename := StrTran(::filename,"prg","xml")
+         ::filename := StrTran(::filename, "prg", "xml")
         // :END LFB
         */
       ELSE
@@ -321,7 +321,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
                AAdd(ATail(::aProp), .T.)
             ENDIF
          ELSEIF oFormDesc:aItems[i]:title == "method"
-            AAdd(::aMethods, { oFormDesc:aItems[i]:GetAttribute("name"),"" })
+            AAdd(::aMethods, { oFormDesc:aItems[i]:GetAttribute("name"), "" })
          ENDIF
       NEXT
    ENDIF
@@ -463,7 +463,7 @@ STATIC FUNCTION SetDlgSelected(oDlg)
          InspSetCombo()
         // :LFB
         IF odlg:oParent:filename != NIL
-           statusbarmsg(IIf(odlg:oParent:path != NIL,odlg:oParent:path,"") + oDlg:oParent:filename,"","")
+           statusbarmsg(IIf(odlg:oParent:path != NIL,odlg:oParent:path, "") + oDlg:oParent:filename, "", "")
          ENDIF
         // :END LFB
       ENDIF
@@ -517,7 +517,7 @@ STATIC FUNCTION FileDlg( oFrm,lOpen )
        AT 50, 100 SIZE 310, 250 FONT oDesigner:oMainWnd:oFont
 
    @ 10, 20 GET COMBOBOX nType ITEMS aCombo SIZE 140, 24 ;
-       ON CHANGE {||IIf(lOpen,.F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname),"."+aFormats[af[nType], 2],""),oEdit1:Refresh()))}
+       ON CHANGE {||IIf(lOpen,.F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""),oEdit1:Refresh()))}
 
    @ 10, 70 GET oEdit1 VAR fname  ;
         STYLE ES_AUTOHSCROLL      ;
@@ -648,7 +648,7 @@ STATIC FUNCTION ReadCtrls( oDlg, oCtrlDesc, oContainer, nPage )
             ENDIF
          NEXT
          IF AScan(aProp, {|a|a[1] == "Name"}) == 0
-            AAdd(aProp, { "Name","" })
+            AAdd(aProp, { "Name", "" })
          ENDIF
          oCtrl := HControlGen():New( oDlg, oCtrlDesc:GetAttribute("class"), aProp )
          IF oContainer != NIL
@@ -823,10 +823,10 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
       ENDIF
       oStyle := oNode:Add(HXMLNode():New( "style" ))
       IF oDesigner:lReport
-         oStyle:Add(HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
+         oStyle:Add(HXMLNode():New( "property",,{ { "name", "Geometry" } }, ;
           hfrm_Arr2Str({oCtrl:GetProp("Left"), oCtrl:GetProp("Top"), oCtrl:GetProp("Width"), oCtrl:GetProp("Height"), oCtrl:GetProp("Right"), oCtrl:GetProp("Bottom")}) ))
       ELSE
-         oStyle:Add(HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
+         oStyle:Add(HXMLNode():New( "property",,{ { "name", "Geometry" } }, ;
           hfrm_Arr2Str({oCtrl:GetProp("Left"), oCtrl:GetProp("Top"), oCtrl:GetProp("Width"), oCtrl:GetProp("Height")}) ))
       ENDIF
       FOR j := 1 TO Len(oCtrl:aProp)
@@ -846,11 +846,11 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
          IF !lDef
             IF Lower(oCtrl:aProp[j, 1]) == "font"
                IF oCtrl:oFont != NIL
-                  oNode1 := oStyle:Add(HXMLNode():New( "property",,{ { "name","font" } } ))
+                  oNode1 := oStyle:Add(HXMLNode():New( "property",,{ { "name", "font" } } ))
                   oNode1:Add(hwg_Font2XML( oCtrl:oFont ))
                ENDIF
             ELSEIF Lower(oCtrl:aProp[j, 1]) == "atree"
-               oNode1 := oStyle:Add(HXMLNode():New( "property",,{ { "name","atree" } } ))
+               oNode1 := oStyle:Add(HXMLNode():New( "property",,{ { "name", "atree" } } ))
                WriteTree(oCtrl:aProp[j, 2], oNode1)
             ELSEIF oCtrl:aProp[j, 2] != NIL
                IF oCtrl:aProp[j, 3] == "C"
@@ -879,7 +879,7 @@ STATIC FUNCTION WriteCtrl( oParent,oCtrl,lRoot )
               ( aItems := oCtrl:GetProp("Tabs") ) != NIL .AND. ;
               !Empty(aItems)
             FOR j := 1 TO Len(aItems)
-               oNode1 := oNode:Add(HXMLNode():New( "part",,{ { "class","PageSheet" },{ "page",LTrim(Str(j)) } } ))
+               oNode1 := oNode:Add(HXMLNode():New( "part",,{ { "class", "PageSheet" },{ "page",LTrim(Str(j)) } } ))
                FOR i := 1 TO Len(oCtrl:aControls)
                   IF oCtrl:aControls[i]:nPage == j
                      WriteCtrl( oNode1,oCtrl:aControls[i],.F. )
@@ -908,9 +908,9 @@ STATIC FUNCTION WriteForm( oForm )
    LOCAL aControls
    MEMVAR oDesigner
 
-   oNode := oDoc:Add(HXMLNode():New( "part",,{ { "class",IIf(oDesigner:lReport,"report","form") } } ))
+   oNode := oDoc:Add(HXMLNode():New( "part",,{ { "class",IIf(oDesigner:lReport, "report", "form") } } ))
    oStyle := oNode:Add(HXMLNode():New( "style" ))
-   oStyle:Add(HXMLNode():New( "property",,{ { "name","Geometry" } }, ;
+   oStyle:Add(HXMLNode():New( "property",,{ { "name", "Geometry" } }, ;
        hfrm_Arr2Str({oForm:oDlg:nLeft, oForm:oDlg:nTop, oForm:oDlg:nWidth, oForm:oDlg:nHeight}) ))
    FOR i := 1 TO Len(oForm:aProp)
       IF AScan(aG, Lower(oForm:aProp[i, 1])) == 0
@@ -1101,7 +1101,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
       MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       RETURN 1
    ELSEIF msg == WM_LBUTTONDOWN
-      StatusBarMsg(,"","")  //
+      StatusBarMsg(, "", "")  //
       LButtonDown( oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
       RETURN 1
    ELSEIF msg == WM_LBUTTONUP
@@ -1208,10 +1208,10 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
       ENDIF
       // :LFB
       IF oCtrl != NIL
-         statusbarmsg(,"x: "+lTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
+         statusbarmsg(, "x: "+lTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
          "w: "+LTrim(Str(oCtrl:nWidth))+"  h: "+LTrim(Str(oCtrl:nHeight)))
       ELSE
-         statusbarmsg(,"","")
+         statusbarmsg(, "", "")
          ENDIF
       // : END LFB
    ENDIF
@@ -1403,7 +1403,7 @@ STATIC FUNCTION LButtonDown( oDlg, xPos, yPos )
    ENDIF
    // :LFB
    IF oCtrl != NIL
-     statusbarmsg(,"x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
+     statusbarmsg(, "x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
          "w: "+LTrim(Str(oCtrl:nWidth))+"  h: "+LTrim(Str(oCtrl:nHeight)))
    ENDIF
    // :ENDLFB

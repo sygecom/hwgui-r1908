@@ -5,11 +5,11 @@ FUNCTION STR2FONT
    PRIVATE oFont
   
   IF !Empty(cFont)
-    oFont := HFont():Add(hwg_NextItem( cFont,.T.,"," ), ;
-       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
-       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
-       Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), ;
-       Val(hwg_NextItem( cFont,,"," )))
+    oFont := HFont():Add(hwg_NextItem( cFont,.T., "," ), ;
+       Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
+       Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
+       Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), ;
+       Val(hwg_NextItem( cFont,, "," )))
   ENDIF
 RETURN oFont
 ENDFUNC
@@ -80,9 +80,9 @@ ENDFUNC
           nWidth := Val( cWidth )
           nHeight:= Val( hwg_NextItem( stroka ) )
           xKoef := nWidth / Val( hwg_NextItem( stroka ) )
-          oForm:CreateDialog( { {"Left","300"}, {"Top","120"}, ;
-              {"Width","500"},{"Height","400"},{"Caption",itemName}, ;
-              {"Paper Size","A4"},{"Orientation",IIf(nWidth>nHeight,"Landscape","Portrait")} } )
+          oForm:CreateDialog( { {"Left", "300"}, {"Top", "120"}, ;
+              {"Width", "500"},{"Height", "400"},{"Caption",itemName}, ;
+              {"Paper Size", "A4"},{"Orientation",IIf(nWidth>nHeight, "Landscape", "Portrait")} } )
         ELSEIF itemName == "TEXT"
           itemName := "label"
           cCaption := hwg_NextItem( stroka )
@@ -104,8 +104,8 @@ ENDFUNC
           nWidth := Val( hwg_NextItem( stroka ) )
           nHeight:= Val( hwg_NextItem( stroka ) )
           cFont  := hwg_NextItem( stroka )
-          nAlign := Val( hwg_NextItem( cFont,.T.,"," ) ) + 1
-          nVar   := Val( hwg_NextItem( cFont,,"," ) )
+          nAlign := Val( hwg_NextItem( cFont,.T., "," ) ) + 1
+          nVar   := Val( hwg_NextItem( cFont,, "," ) )
 
           AAdd(arr,{ itemName,x,y,nWidth,nHeight,NIL,nAlign,nVar })
 
@@ -182,7 +182,7 @@ ENDFUNC
   IF ( j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"}) ) > 1
     AAdd(arr,NIL)
     AIns(arr, 1)
-    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,NIL,"DH",NIL }
+    arr[1] := { "area", 0, 0, 9999,arr[j+1, 3]-1,NIL, "DH",NIL }
   ENDIF
   i := 1
   DO WHILE i <= Len(arr)
@@ -205,8 +205,8 @@ ENDFUNC
     IF arr[i, 1] == "area"
       cCaption := IIf(arr[i, 7] == "PH", "PageHeader", IIf(arr[i, 7] == "SL", ;
           "Table", IIf(arr[i, 7] == "PF", "PageFooter", IIf(arr[i, 7] == "DH", "DocHeader", "DocFooter"))))
-      oArea := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],"area",  ;
-       { { "Left","0" }, { "Top",LTrim(Str(y)) }, { "Width",cWidth }, ;
+      oArea := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1], "area",  ;
+       { { "Left", "0" }, { "Top",LTrim(Str(y)) }, { "Width",cWidth }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",cWidth }, { "Bottom",LTrim(Str(y2)) }, { "AreaType",cCaption } } )
       IF arr[i, 6] != NIL
         j := AScan(oArea:aMethods, {|a|a[1] == "onBegin"})
@@ -220,8 +220,8 @@ ENDFUNC
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
        { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
-       { "Caption",IIf(arr[i, 10] == 1,"",arr[i, 7]) }, ;
-       { "Justify",IIf(arr[i, 9]=0,"Left",IIf(arr[i, 9]=2,"Center","Right")) }, ;
+       { "Caption",IIf(arr[i, 10] == 1, "",arr[i, 7]) }, ;
+       { "Justify",IIf(arr[i, 9]=0, "Left",IIf(arr[i, 9]=2, "Center", "Right")) }, ;
        {"Font",arr[i, 8]} } )
       IF oArea != NIL
         oArea:AddControl( oCtrl )
@@ -247,7 +247,7 @@ ENDFUNC
       oCtrl := HControlGen():New( oForm:oDlg:aControls[1]:aControls[1],arr[i, 1], ;
        { { "Left",LTrim(Str(x)) }, { "Top",LTrim(Str(y)) }, { "Width",LTrim(Str(nWidth)) }, ;
        { "Height",LTrim(Str(nHeight)) }, { "Right",LTrim(Str(x2)) }, { "Bottom",LTrim(Str(y2)) }, ;
-       {"PenType",{"SOLID","DASH","DOT","DASHDOT","DASHDOTDOT"}[arr[i, 7]]}, ;
+       {"PenType",{"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}[arr[i, 7]]}, ;
        { "PenWidth",LTrim(Str(arr[i, 8])) } } )
       IF oArea != NIL
         oArea:AddControl( oCtrl )

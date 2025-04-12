@@ -33,7 +33,7 @@ Private nColor, oBmp2
          SEPARATOR
          MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
          MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor,.F.), ;
-                     hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"),"Color value"))
+                     hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
          MENUITEM "&Exit" ACTION hwg_EndWindow()
@@ -44,7 +44,7 @@ Private nColor, oBmp2
          MENUITEM "&Test Tab" ACTION TestTab()
          SEPARATOR
          MENUITEM "&MsgGet" ;
-               ACTION hwg_CopyStringToClipboard(hwg_MsgGet("Dialog Sample","Input table name"))
+               ACTION hwg_CopyStringToClipboard(hwg_MsgGet("Dialog Sample", "Input table name"))
          MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
          #ifdef TEST_PRINT         
          SEPARATOR
@@ -117,7 +117,7 @@ RETURN NIL
 FUNCTION DialogFromPrg()
 Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add("Serif", 0, -13), oTab
-Local cRes, aCombo := { "First","Second" }, oEdit, vard := "Monday"
+Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
 
    CheckMenuItem( , 1001, !IsCheckedMenuItem( , 1001 ) )
    

@@ -237,7 +237,7 @@ FUNCTION Main(fileXML)
     ENDIF
 
     IF !FILE(filexml)
-    filexml:=hwg_SelectFile("XML FILE (*.XML)","*.XML")
+    filexml:=hwg_SelectFile("XML FILE (*.XML)", "*.XML")
     ENDIF
 
  ELSE
@@ -514,11 +514,11 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 
  //if (ctod(g:buffer)=ctod("  /  /  "))
 
-      cpress:=StrTran(cPress," ","")
-      cpress:=StrTran(cPress,".","")
-      cpress:=StrTran(cpress,"-","")
-      cpress:=StrTran(cpress,"/","")
-      cpress:=StrTran(cpress,",","")
+      cpress:=StrTran(cPress, " ", "")
+      cpress:=StrTran(cPress, ".", "")
+      cpress:=StrTran(cpress, "-", "")
+      cpress:=StrTran(cpress, "/", "")
+      cpress:=StrTran(cpress, ",", "")
       nLen:=Len(cpress)
 
  *:minimum 6  &  max 9 char
@@ -535,7 +535,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
        c:=""
 
        for i:=1 to nLen
-           c+= if(isdigit(subst(cPress, i, 1)),"9","A")
+           c+= if(isdigit(subst(cPress, i, 1)), "9", "A")
        next
 
        *:Kalau 2 Char Pertama Adalah Angka
@@ -549,18 +549,18 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 	if subst(c, 3, 3)="AAA"
 
 	   mm:=subst(cPress, 3, 3)
-	   mm:=transform( Lower(mm),"!xx")
+	   mm:=transform( Lower(mm), "!xx")
 
 	   *:Koreksi untuk ejaan Inggris
-	   mm:=StrTran( mm,"Peb","Feb")
-	   mm:=StrTran( mm,"May","Mei")
-	   mm:=StrTran( mm,"Aug","Agt")
-	   mm:=StrTran( mm,"Agu","Agt")
-	   mm:=StrTran( mm,"Nov","Nop")
-	   mm:=StrTran( mm,"Dec","Des")
-	   mm:=StrTran( mm,"Oct","Okt")
+	   mm:=StrTran( mm, "Peb", "Feb")
+	   mm:=StrTran( mm, "May", "Mei")
+	   mm:=StrTran( mm, "Aug", "Agt")
+	   mm:=StrTran( mm, "Agu", "Agt")
+	   mm:=StrTran( mm, "Nov", "Nop")
+	   mm:=StrTran( mm, "Dec", "Des")
+	   mm:=StrTran( mm, "Oct", "Okt")
 
-           mm:=Str((at(mm,"JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
+           mm:=Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
 
 	   nPot--
 

@@ -226,7 +226,7 @@ RETURN 0
 STATIC FUNCTION onEraseBk( oDlg,hDC )
 Local aCoors
 /*
-   IF __ObjHasMsg( oDlg,"OBMP") 
+   IF __ObjHasMsg( oDlg, "OBMP") 
       IF oDlg:oBmp != NIL
          hwg_SpreadBitmap( hDC, oDlg:handle, oDlg:oBmp:handle )
          RETURN 1
@@ -259,7 +259,7 @@ Local aMenu, i, hCtrl
             ENDIF
          NEXT
          IF i != 0 .AND. oDlg:GetList[i]:handle == hCtrl
-            IF __ObjHasMsg(oDlg:GetList[i],"BVALID")
+            IF __ObjHasMsg(oDlg:GetList[i], "BVALID")
                IF Eval(oDlg:GetList[i]:bValid, oDlg:GetList[i]) .AND. ;
                       oDlg:lExitOnEnter
                   oDlg:lResult := .T.
@@ -295,11 +295,11 @@ Local aMenu, i, hCtrl
       IF oDlg:lExitOnEsc
          EndDialog( oDlg:handle )
       ENDIF
-   ELSEIF __ObjHasMsg(oDlg,"MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
+   ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
         ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != NIL ;
         .AND. aMenu[1,i, 1] != NIL
       Eval(aMenu[1, i, 1])
-   ELSEIF __ObjHasMsg(oDlg,"OPOPUP") .AND. oDlg:oPopup != NIL .AND. ;
+   ELSEIF __ObjHasMsg(oDlg, "OPOPUP") .AND. oDlg:oPopup != NIL .AND. ;
          ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != NIL ;
          .AND. aMenu[1,i, 1] != NIL
          Eval(aMenu[1, i, 1])
@@ -326,7 +326,7 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    //
 
    IF oDlg:bSize != NIL .AND. ;
-       ( oDlg:oParent == NIL .OR. !__ObjHasMsg( oDlg:oParent,"ACONTROLS" ) )
+       ( oDlg:oParent == NIL .OR. !__ObjHasMsg( oDlg:oParent, "ACONTROLS" ) )
       Eval(oDlg:bSize, oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
    aControls := oDlg:aControls
@@ -388,7 +388,7 @@ Local i, aKeys
    IF oDlg == NIL ; oDlg := HCustomWindow():oDefaultParent ; ENDIF
    IF nctrl == NIL ; nctrl := 0 ; ENDIF
 
-   IF !__ObjHasMsg( oDlg,"KEYLIST" )
+   IF !__ObjHasMsg( oDlg, "KEYLIST" )
       RETURN .F.
    ENDIF
    aKeys := oDlg:KeyList

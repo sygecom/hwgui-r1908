@@ -127,7 +127,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
                AAdd(ATail(::aProp), .T.)
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "method"
-            AAdd(::aMethods, { oXMLDesc:aItems[i]:GetAttribute("name"),"" })
+            AAdd(::aMethods, { oXMLDesc:aItems[i]:GetAttribute("name"), "" })
          ENDIF
       NEXT
    ENDIF
@@ -280,13 +280,13 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
 
    IF oCtrl:Adjust == 1
       oCtrl:Move(0, 0, x)
-      oCtrl:SetProp( "Left","0" )
+      oCtrl:SetProp( "Left", "0" )
       //oCtrl:SetCoor( "Top",oCtrl:nTop )
       oCtrl:SetCoor( "Width",oCtrl:nWidth )
     ENDIF
    IF oCtrl:Adjust == 2
       oCtrl:Move(0, y - oCtrl:nHeight, x)
-      oCtrl:SetProp( "Left","0" )
+      oCtrl:SetProp( "Left", "0" )
       oCtrl:SetCoor( "Top",oCtrl:nTop )
       oCtrl:SetCoor( "Width",oCtrl:nWidth )
       IF oDesigner:lReport
@@ -296,7 +296,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
    ENDIF
    IF oCtrl:Adjust == 6
          oCtrl:Move(oCtrl:nLeft , 2 )
-         oCtrl:SetProp( "Top","2" )
+         oCtrl:SetProp( "Top", "2" )
       //oCtrl:SetCoor( "Top",oCtrl:nTop )
       //oCtrl:SetCoor( "Width",oCtrl:nWidth )
    ENDIF
@@ -308,13 +308,13 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
               *-hwg_MsgInfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass="browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop+oCtrls:nHeight)
                  oCtrl:Move(oCtrl:nLeft ,oCtrls:nTop+2 )
-              *oCtrl:SetProp( "Top","oCtrls:nTop+2" )
+              *oCtrl:SetProp( "Top", "oCtrls:nTop+2" )
               EXIT
                ENDIF
             NEXT
          *-ELSE
       *-   oCtrl:Move(, 2)
-      *-   oCtrl:SetProp( "Top","2" )
+      *-   oCtrl:SetProp( "Top", "2" )
       //oCtrl:SetCoor( "Top",oCtrl:nTop )
       //oCtrl:SetCoor( "Width",oCtrl:nWidth )
       *-ENDIF
@@ -328,7 +328,7 @@ FUNCTION CreateName(cPropertyName, oCtrl)
    LOCAL j
    LOCAL aControls := oCtrl:oParent:aControls
    LOCAL arr := {}
-   LOCAL cName := IIf(cPropertyName!="v","o","v") + Upper(Left(oCtrl:cClass, 1)) + SubStr(oCtrl:cClass, 2)
+   LOCAL cName := IIf(cPropertyName!="v", "o", "v") + Upper(Left(oCtrl:cClass, 1)) + SubStr(oCtrl:cClass, 2)
    LOCAL nLen := Len(cName)
 
    FOR i := 1 TO Len(aControls)
@@ -829,7 +829,7 @@ FUNCTION EditMenu()
       IF oDlg:aControls[i]:cClass == "menu"
          aMenu := oDlg:aControls[i]:GetProp( "aTree" )
          IF aMenu == NIL
-            aMenu := oDlg:aControls[i]:SetProp( "aTree", { { ,"Menu", 32000,NIL } } )
+            aMenu := oDlg:aControls[i]:SetProp( "aTree", { { , "Menu", 32000,NIL } } )
          ENDIF
          aMenu := AClone(aMenu)
          EXIT
@@ -933,7 +933,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != NIL
          AAdd(aSubarr, NIL)
          AIns(aSubarr, nPos + 1)
-         aSubarr[nPos+1] := { NIL,"New",nMaxId,NIL }
+         aSubarr[nPos+1] := { NIL, "New",nMaxId,NIL }
       ENDIF
    ELSEIF nAction == 2   // Insert before
       IF oTree:oSelected:oParent == NIL
@@ -947,7 +947,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != NIL
          AAdd(aSubarr, NIL)
          AIns(aSubarr, nPos)
-         aSubarr[nPos] := { NIL,"New",nMaxId,NIL }
+         aSubarr[nPos] := { NIL, "New",nMaxId,NIL }
       ENDIF
    ELSEIF nAction == 9   // Insert Separaodr
       IF oTree:oSelected:oParent == NIL
@@ -961,7 +961,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != NIL
          AAdd(aSubarr, NIL)
          AIns(aSubarr, nPos + 1)
-         aSubarr[nPos+1] := { NIL,"-",nMaxId,NIL }
+         aSubarr[nPos+1] := { NIL, "-",nMaxId,NIL }
       ENDIF
    ELSEIF nAction == 3   // Insert child
       oNode := oTree:oSelected:AddNode("New")
@@ -973,7 +973,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
          IF !HB_IsArray( aSubarr[nPos, 1] )
             aSubarr[nPos, 1] := {}
          ENDIF
-         AAdd(aSubarr[nPos, 1], { NIL,"New",nMaxId,NIL })
+         AAdd(aSubarr[nPos, 1], { NIL, "New",nMaxId,NIL })
       ENDIF
    ELSEIF nAction == 4   // Delete
       IF ( aSubarr := FindTreeItem( aTree, oTree:oSelected:cargo, @nPos ) ) != NIL
@@ -1005,7 +1005,7 @@ FUNCTION GetMenu()
       IF oDlg:aControls[i]:cClass == "menu"
          aMenu := oDlg:aControls[i]:GetProp( "aTree" )
          IF aMenu == NIL
-            aMenu := oDlg:aControls[i]:SetProp( "aTree", { { ,"Menu", 32000,NIL } } )
+            aMenu := oDlg:aControls[i]:SetProp( "aTree", { { , "Menu", 32000,NIL } } )
          ENDIF
          aMenu := AClone(aMenu)
          EXIT

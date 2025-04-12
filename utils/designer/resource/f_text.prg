@@ -1,10 +1,10 @@
 #SCRIPT TABLE
-aCtrlTable := { { "STATIC","label" }, { "BUTTON","button" }, &&
-    { "CHECKBOX","checkbox" }, { "RADIOBUTTON","radiobutton" },   &&
-    { "EDITBOX","editbox" }, { "GROUPBOX","group" }, { "DATEPICKER","datepicker" }, &&
-    { "UPDOWN","updown" }, { "COMBOBOX","combobox" }, { "HLINE","line" }, &&
-    { "PANEL","toolbar" }, { "OWNERBUTTON","ownerbutton" }, &&
-    { "BROWSE","browse" } }
+aCtrlTable := { { "STATIC", "label" }, { "BUTTON", "button" }, &&
+    { "CHECKBOX", "checkbox" }, { "RADIOBUTTON", "radiobutton" },   &&
+    { "EDITBOX", "editbox" }, { "GROUPBOX", "group" }, { "DATEPICKER", "datepicker" }, &&
+    { "UPDOWN", "updown" }, { "COMBOBOX", "combobox" }, { "HLINE", "line" }, &&
+    { "PANEL", "toolbar" }, { "OWNERBUTTON", "ownerbutton" }, &&
+    { "BROWSE", "browse" } }
 #ENDSCRIPT
 
 #SCRIPT READ
@@ -15,10 +15,10 @@ FUNCTION STR2FONT
    
    IF !Empty(cFont)
       oFont := HFont():Add(hwg_NextItem(cFont, .T., ","), &&
-            Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), &&
-            Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), &&
-            Val(hwg_NextItem( cFont,,"," )),Val(hwg_NextItem( cFont,,"," )), &&
-            Val(hwg_NextItem( cFont,,"," )))
+            Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), &&
+            Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), &&
+            Val(hwg_NextItem( cFont,, "," )),Val(hwg_NextItem( cFont,, "," )), &&
+            Val(hwg_NextItem( cFont,, "," )))
    ENDIF
 RETURN oFont
 ENDFUNC
@@ -145,7 +145,7 @@ RETURN
           + "," + LTrim(Str(oCtrl:oFont:height)) + "," + LTrim(Str(oCtrl:oFont:weight)) &&
           + "," + LTrim(Str(oCtrl:oFont:charset)) + "," + LTrim(Str(oCtrl:oFont:italic)) &&
           + "," + LTrim(Str(oCtrl:oFont:underline)) + "," + LTrim(Str(oCtrl:oFont:strikeout)) &&
-          ,"")  &&
+          , "")  &&
           + ";" + IIf(oCtrl:tcolor != NIL .AND. oCtrl:tcolor != 0, LTrim(Str(oCtrl:tcolor)), "") &&
           + ";" + IIf(oCtrl:bcolor != NIL, Ltrim(Str(oCtrl:bcolor)), "")
       FWrite(han, stroka + _Chr(10))

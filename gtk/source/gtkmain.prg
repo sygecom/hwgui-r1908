@@ -109,9 +109,9 @@ Local hDC, aMetr, width, height, screenh
        ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
    IF HB_IsArray( arr[1] )
-      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1]},"C",nLen ) )
+      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1]}, "C",nLen ) )
    ELSE
-      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]},"C",nLen ) )
+      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]}, "C",nLen ) )
    ENDIF
    hwg_CreateArList( oBrw, arr )
    oBrw:lDispHead := .F.

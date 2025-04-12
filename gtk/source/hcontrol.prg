@@ -111,7 +111,7 @@ Local o
          Eval(::bInit, Self)
       ENDIF
       o := ::oParent
-      DO WHILE o != NIL .AND. !__ObjHasMsg( o,"LACTIVATED")
+      DO WHILE o != NIL .AND. !__ObjHasMsg( o, "LACTIVATED")
          o := o:oParent
       ENDDO
       if ::tcolor != NIL          
@@ -315,7 +315,7 @@ Local aCoors
       ::handle := hwg_CreateStatusWindow( ::oParent:handle, ::id )
 
       ::Init()
-//      IF __ObjHasMsg( ::oParent,"AOFFSET" )
+//      IF __ObjHasMsg( ::oParent, "AOFFSET" )
 //         aCoors := hwg_GetWindowRect( ::handle )
 //         ::oParent:aOffset[4] := aCoors[4] - aCoors[2]
 //      ENDIF
@@ -396,7 +396,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    IF bClick != NIL
       // ::oParent:AddEvent( 0,::id,bClick )
       ::bClick := bClick
-      hwg_SetSignal( ::handle,"clicked",WM_LBUTTONUP, 0, 0 )
+      hwg_SetSignal( ::handle, "clicked",WM_LBUTTONUP, 0, 0 )
    ENDIF
 
 RETURN Self

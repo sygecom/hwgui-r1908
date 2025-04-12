@@ -158,12 +158,12 @@ FUNCTION CreateMdiChild()
 
     // CREATE oBrowse1   //  SCRIPT GENARATE BY DESIGNER
     oBrowse1:aArray := {}
-    oBrowse1:AddColumn(HColumn():New("Código", hwg_ColumnArBlock() ,"U", 13, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New("Descrição", hwg_ColumnArBlock() ,"U", 27, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New("Quantid.", hwg_ColumnArBlock() ,"N", 9, 3 , .F., 1,, "9,999.999",,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New("UN", hwg_ColumnArBlock() ,"U", 2, 0 , .F., 1,,,,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New("Valor Unit.", hwg_ColumnArBlock() ,"N", 9, 2 , .F., 1,,"@e 99,999.99",,,,,,,,,))
-    oBrowse1:AddColumn(HColumn():New("Valor Item", hwg_ColumnArBlock() ,"N", 10, 2 , .F., 1,,"@E 999,999.99",,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Código", hwg_ColumnArBlock() , "U", 13, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Descrição", hwg_ColumnArBlock() , "U", 27, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Quantid.", hwg_ColumnArBlock() , "N", 9, 3 , .F., 1,, "9,999.999",,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("UN", hwg_ColumnArBlock() , "U", 2, 0 , .F., 1,,,,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Valor Unit.", hwg_ColumnArBlock() , "N", 9, 2 , .F., 1,, "@e 99,999.99",,,,,,,,,))
+    oBrowse1:AddColumn(HColumn():New("Valor Item", hwg_ColumnArBlock() , "N", 10, 2 , .F., 1,, "@E 999,999.99",,,,,,,,,))
 
     // END BROWSE SCRIPT  -  oBrowse1
         oBrowse1:Anchor := 135

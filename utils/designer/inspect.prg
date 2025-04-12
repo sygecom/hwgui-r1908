@@ -386,8 +386,8 @@ FUNCTION InspOpen(lShow)
       oBrw1:lSep3d := .T.
       oBrw1:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw1:aArray := aProp
-      oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0, .T. ) )
-      oBrw1:AddColumn( HColumn():New( ,hwg_ColumnArBlock(),"U", 100, 0, .T. ) )
+      oBrw1:AddColumn( HColumn():New( ,{|v,o| HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0, .T. ) )
+      oBrw1:AddColumn( HColumn():New( ,hwg_ColumnArBlock(), "U", 100, 0, .T. ) )
    END PAGE OF oTab
 
    BEGIN PAGE "Events" OF oTab
@@ -401,8 +401,8 @@ FUNCTION InspOpen(lShow)
       oBrw2:lSep3d := .T.
       oBrw2:sepColor  := hwg_GetSysColor( COLOR_BTNSHADOW )
       oBrw2:aArray := aMethods
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]),"","  "+o:aArray[o:nCurrent, 1])},"C", 12, 0,.T. ) )
-      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 2]),"",":"+o:aArray[o:nCurrent, 1])},"C", 100, 0,.T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0,.T. ) )
+      oBrw2:AddColumn( HColumn():New( ,{|v,o|HB_SYMBOL_UNUSED(v),IIf(Empty(o:aArray[o:nCurrent, 2]), "", ":"+o:aArray[o:nCurrent, 1])}, "C", 100, 0,.T. ) )
    END PAGE OF oTab
 
      // : LFB POS
@@ -602,7 +602,7 @@ FUNCTION InspUpdBrowse()
       IF lChg .AND. !oBrw1:lHide
          oBrw1:Refresh()
          // : LFB pos
-         statusbarmsg(,"x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
+         statusbarmsg(, "x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
          "w: "+LTrim(Str(oCtrl:nWidth))+" h: "+LTrim(Str(oCtrl:nHeight)))
          // : LFB
       ENDIF
@@ -634,7 +634,7 @@ STATIC FUNCTION EditArray( arr )
       arr := {}
    ENDIF
    IF Empty(arr)
-      AAdd(arr,".....")
+      AAdd(arr, ".....")
    ENDIF
    arrold := arr
    INIT DIALOG oDlg TITLE "Edit "+aProp[nRec, 1]+" array" ;
@@ -647,7 +647,7 @@ STATIC FUNCTION EditArray( arr )
    oBrw:bcolorSel := hwg_VColor( "008000" )
    oBrw:lAppable := .T.
    oBrw:aArray := arr
-   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v != NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},"C", 100, 0,.T. ) )
+   oBrw:AddColumn( HColumn():New( ,{|v,o|IIf(v != NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])}, "C", 100, 0,.T. ) )
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
        ON SIZE {|o,x,y|HB_SYMBOL_UNUSED(x),o:Move(,y-30,,)};
@@ -674,7 +674,7 @@ STATIC FUNCTION onclick_deleteitem(oBrw)
   IF oBrw:nCurrent = 1 .AND. oBrw:aArray[oBrw:nCurrent] = ".."
     RETURN NIL
   ENDIF
-  IF Len(obrw:aArray) > 0 .AND. hwg_MsgYesNo("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?","Items")
+  IF Len(obrw:aArray) > 0 .AND. hwg_MsgYesNo("Confirm item deleted : [ "+oBrw:aArray[oBrw:nCurrent]+" ] ?", "Items")
      oBrw:aArray := ADel(obrw:aArray, oBrw:nCurrent)
      obrw:aArray := ASize(obrw:aArray, Len(obrw:aArray) - 1)
      obrw:refresh()
@@ -712,7 +712,7 @@ FUNCTION ObjInspector(oObject )
        CASE ctype="N"
        aClassMsgProp[i, 2] := Str(aClassMsgProp[i, 2])
        CASE ctype="L"
-       aClassMsgProp[i, 2] := IIf(aClassMsgProp[i, 2],"True","False")
+       aClassMsgProp[i, 2] := IIf(aClassMsgProp[i, 2], "True", "False")
        otherwise
        aClassMsgProp[i, 2] := ctype
      endcase

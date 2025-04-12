@@ -317,7 +317,7 @@ METHOD EndDoc() CLASS HWinPrn
    IF ::lDocStart
       ::oPrinter:EndDoc()
       ::lDocStart := .F.
-      IF __ObjHasMsg( ::oPrinter,"PREVIEW" ) .AND. ::oPrinter:lPreview
+      IF __ObjHasMsg( ::oPrinter, "PREVIEW" ) .AND. ::oPrinter:lPreview
          ::oPrinter:Preview()
       ENDIF
    ENDIF

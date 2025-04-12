@@ -89,8 +89,8 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    ::bGetFocus := bGFocus
    ::bLostFocus := bChange
 
-   hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS, 0, 0 )
-   hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS, 0, 0 )
+   hwg_SetEvent( ::hEdit, "focus_in_event",EN_SETFOCUS, 0, 0 )
+   hwg_SetEvent( ::hEdit, "focus_out_event",EN_KILLFOCUS, 0, 0 )
 
 RETURN Self
 

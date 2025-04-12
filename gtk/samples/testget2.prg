@@ -93,7 +93,7 @@ Private oSayT
                e4 + chr(10) + chr(13) +       ;
                Str(e5) + chr(10) + chr(13) +  ;
                e7 + chr(10) + chr(13)         ;
-               ,"Results:" )
+               , "Results:" )
    ENDIF
 
 RETURN NIL

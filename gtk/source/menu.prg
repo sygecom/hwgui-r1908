@@ -289,7 +289,7 @@ RETURN NIL
 
 FUNCTION hwg_SearchPosBitmap( nPos_Id )
 
-   Local nPos := 1, lBmp:={.F.,""}
+   Local nPos := 1, lBmp:={.F., ""}
 
    IF _oBitmap != NIL
       DO WHILE nPos<=Len(_oBitmap)

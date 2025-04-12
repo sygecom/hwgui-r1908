@@ -339,7 +339,7 @@ FUNCTION Browse2Prg
             m->nDec := &cTmpAlias->(FIELDDEC(AScan(j, temp)))
             cCampo := "{|| " + cCampo + " }"
             //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
-            //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL,LTrim(Str(Val(temp))),"10")+", "+;
+            //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL,LTrim(Str(Val(temp))), "10")+", "+;
             //      LTrim(Str(aDecimals[i]))+" "
          ELSE
             cCampo := IIf(cCampo = NIL, ".T.", cCampo)
@@ -633,7 +633,7 @@ FUNCTION Ctrl2Prg
 
       // verificar se o combo tem check
       //IF oCtrl:cClass == "combobox"
-      // aName[i] := IIf(oCtrl:GetProp("check") != NIL,{"GET COMBOBOXEX","GET COMBOBOXEX"}, {"COMBOBOX","GET COMBOBOX"})
+      // aName[i] := IIf(oCtrl:GetProp("check") != NIL,{"GET COMBOBOXEX", "GET COMBOBOXEX"}, {"COMBOBOX", "GET COMBOBOX"})
       //ENDIF
 
       IF oCtrl:cClass != "radiogroup"      // NANDO
@@ -1104,7 +1104,7 @@ FUNCTION Ctrl2Prg
       "richedit", "monthcalendar", "tree", "trackbar", "progressbar", "status" , ;
       "timer", "listbox", "gridex", "menu", "link" }
 
-   PRIVATE aName :=  { { "SAY" }, { "BUTTON" }, { "BUTTONEX" }, { "SHADEBUTTON" }, { "CHECKBOX","GET CHECKBOX" }, { "RADIOBUTTON" }, ;
+   PRIVATE aName :=  { { "SAY" }, { "BUTTON" }, { "BUTTONEX" }, { "SHADEBUTTON" }, { "CHECKBOX", "GET CHECKBOX" }, { "RADIOBUTTON" }, ;
       { "EDITBOX", "GET" }, { "GROUPBOX" }, { "DATEPICKER", "GET DATEPICKER" }, ;
       { "UPDOWN", "GET UPDOWN" }, { "COMBOBOX", "GET COMBOBOX" }, { "LINE" }, ;
       { "PANEL" }, { "TOOLBAR" }, { "OWNERBUTTON" }, { "BROWSE" }, { "TAB" }, { "GROUPBOX" }, { "BITMAP" }, ;

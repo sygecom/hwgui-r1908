@@ -14,7 +14,7 @@
 #define UDS_SETBUDDYINT     2
 #define UDS_ALIGNRIGHT      4
 
-STATIC s_aPenStyles := { "SOLID","DASH","DOT","DASHDOT","DASHDOTDOT" }
+STATIC s_aPenStyles := { "SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT" }
 STATIC s_aVariables := { "Static", "Variable" }
 memvar apaintrep, mypath
 FUNCTION LButtonDbl( xPos, yPos )

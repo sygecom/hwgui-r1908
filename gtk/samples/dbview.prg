@@ -21,7 +21,7 @@ REQUEST DBFFPT
 REQUEST ORDKEYNO
 REQUEST ORDKEYCOUNT
 
-STATIC aFieldTypes := { "C","N","D","L" }
+STATIC aFieldTypes := { "C", "N", "D", "L" }
 STATIC dbv_cLocate, dbv_nRec, dbv_cSeek
 
 FUNCTION Main
@@ -124,7 +124,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       hwg_CreateList( oBrw,.T. )
       AAdd(oBrw:aColumns, NIL)
       Ains( oBrw:aColumns, 1 )
-      oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")},"C", 1, 0 )
+      oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")}, "C", 1, 0 )
       oBrw:active := .T.
       oBrw:Refresh()
       oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
@@ -161,7 +161,7 @@ Memvar DataCP
 RETURN NIL
 
 STATIC FUNCTION SelectIndex()
-Local aIndex := { { "None","   ","   " } }, i, indname, iLen := 0
+Local aIndex := { { "None", "   ", "   " } }, i, indname, iLen := 0
 Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
 Memvar oBrw, oFont
 
@@ -192,9 +192,9 @@ Memvar oBrw, oFont
        ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
    oBrowse:aArray := aIndex
-   oBrowse:AddColumn( HColumn():New( "OrdName",{|v,o|o:aArray[o:nCurrent, 1]},"C", 10, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Order key",{|v,o|o:aArray[o:nCurrent, 2]},"C",Max(iLen, 12), 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Filename",{|v,o|o:aArray[o:nCurrent, 3]},"C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "OrdName",{|v,o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Order key",{|v,o|o:aArray[o:nCurrent, 2]}, "C",Max(iLen, 12), 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Filename",{|v,o|o:aArray[o:nCurrent, 3]}, "C", 10, 0 ) )
    
    oBrowse:rowPos := nOrder
    Eval(oBrowse:bGoTo, oBrowse, nOrder)
@@ -346,12 +346,12 @@ STATIC FUNCTION ModiStru( lNew )
 Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg
 Local oGet1, oGet2, oGet3, oGet4
 Local af, af0, cName := "", nType := 1, cLen := "0", cDec := "0", i
-Local aTypes := { "Character","Numeric","Date","Logical" }
+Local aTypes := { "Character", "Numeric", "Date", "Logical" }
 Local fname, cAlias, nRec, nOrd, lOverFlow := .F., xValue
 Memvar oBrw, currentCP, currFname
 
    IF lNew
-      af := { {"","", 0, 0} }
+      af := { {"", "", 0, 0} }
    ELSE
       af0 := dbStruct()
       af  := dbStruct()
@@ -371,10 +371,10 @@ Memvar oBrw, currentCP, currFname
        ON POSCHANGE {|o|brw_onPosChg(o,oGet1,oGet2,oGet3,oGet4)}
 
    oBrowse:aArray := af
-   oBrowse:AddColumn( HColumn():New( "Name",{|v,o|o:aArray[o:nCurrent, 1]},"C", 10, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Type",{|v,o|o:aArray[o:nCurrent, 2]},"C", 1, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Length",{|v,o|o:aArray[o:nCurrent, 3]},"N", 5, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Dec",{|v,o|o:aArray[o:nCurrent, 4]},"N", 2, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Name",{|v,o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Type",{|v,o|o:aArray[o:nCurrent, 2]}, "C", 1, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Length",{|v,o|o:aArray[o:nCurrent, 3]}, "N", 5, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Dec",{|v,o|o:aArray[o:nCurrent, 4]}, "N", 2, 0 ) )
    
    @ 10, 230 GET oGet1 VAR cName SIZE 100, 24
    @ 120, 230 GET COMBOBOX oGet2 VAR nType ITEMS aTypes SIZE 100, 24
@@ -447,7 +447,7 @@ Memvar oBrw, currentCP, currFname
          SKIP
       ENDDO
       IF lOverFlow
-         hwg_MsgInfo( "There was overflow in Numeric field","Warning!" )
+         hwg_MsgInfo( "There was overflow in Numeric field", "Warning!" )
       ENDIF
 
       Close All
@@ -542,7 +542,7 @@ Local cKey, nRec
 Memvar oBrw, oSay2
 
    IF OrdNumber() == 0
-      hwg_MsgStop( "No active order !","Seek record" )
+      hwg_MsgStop( "No active order !", "Seek record" )
    ELSE
       cKey := GetData(dbv_cSeek, "Seek record", "Input key:")
       IF !Empty(cKey)
@@ -647,7 +647,7 @@ RETURN cRes
 
 STATIC FUNCTION MacroError( e )
 
-   hwg_MsgStop( hwg_ErrorMessage(e),"Expression error" )
+   hwg_MsgStop( hwg_ErrorMessage(e), "Expression error" )
    BREAK
 RETURN .T.
 

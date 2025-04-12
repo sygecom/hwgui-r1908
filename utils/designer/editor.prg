@@ -121,46 +121,46 @@ HB_SYMBOL_UNUSED(oOptDesc)
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
                     {"bcolor",LTrim(Str(HDTheme():aThemes[i]:normal[2]))} }
          IF HDTheme():aThemes[i]:normal[3]
-            AAdd(aAttr, { "bold","True" })
+            AAdd(aAttr, { "bold", "True" })
          ENDIF
          IF HDTheme():aThemes[i]:normal[4]
-            AAdd(aAttr, { "italic","True" })
+            AAdd(aAttr, { "italic", "True" })
          ENDIF
          oThemeDesc:Add(HXMLNode():New("normal", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:command[1]))} }
          IF HDTheme():aThemes[i]:command[3]
-            AAdd(aAttr, { "bold","True" })
+            AAdd(aAttr, { "bold", "True" })
          ENDIF
          IF HDTheme():aThemes[i]:command[4]
-            AAdd(aAttr, { "italic","True" })
+            AAdd(aAttr, { "italic", "True" })
          ENDIF
          oThemeDesc:Add(HXMLNode():New("command", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:comment[1]))} }
          IF HDTheme():aThemes[i]:comment[3]
-            AAdd(aAttr, { "bold","True" })
+            AAdd(aAttr, { "bold", "True" })
          ENDIF
          IF HDTheme():aThemes[i]:comment[4]
-            AAdd(aAttr, { "italic","True" })
+            AAdd(aAttr, { "italic", "True" })
          ENDIF
          oThemeDesc:Add(HXMLNode():New("comment", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:quote[1]))} }
          IF HDTheme():aThemes[i]:quote[3]
-            AAdd(aAttr, { "bold","True" })
+            AAdd(aAttr, { "bold", "True" })
          ENDIF
          IF HDTheme():aThemes[i]:quote[4]
-            AAdd(aAttr, { "italic","True" })
+            AAdd(aAttr, { "italic", "True" })
          ENDIF
          oThemeDesc:Add(HXMLNode():New("quote", HBXML_TYPE_SINGLE, aAttr))
 
          aAttr := { {"tcolor",LTrim(Str(HDTheme():aThemes[i]:number[1]))} }
          IF HDTheme():aThemes[i]:number[3]
-            AAdd(aAttr, { "bold","True" })
+            AAdd(aAttr, { "bold", "True" })
          ENDIF
          IF HDTheme():aThemes[i]:number[4]
-            AAdd(aAttr, { "italic","True" })
+            AAdd(aAttr, { "italic", "True" })
          ENDIF
          oThemeDesc:Add(HXMLNode():New("number", HBXML_TYPE_SINGLE, aAttr))
 
@@ -561,7 +561,7 @@ RETURN NIL
 
 STATIC FUNCTION InsertField(nModus)
 
-   LOCAL cDBF := hwg_MsgGet("DBF Name","input table name")
+   LOCAL cDBF := hwg_MsgGet("DBF Name", "input table name")
 
 HB_SYMBOL_UNUSED(nModus)
 

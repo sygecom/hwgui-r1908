@@ -249,7 +249,7 @@ Local oWnd, oBtn, oitem
 
    // WriteLog( "|Window: "+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10)  + "|" + PadR("DefWndProc -Inicio", 40) + "|")
    if ( oWnd := HWindow():FindWindow(hWnd) ) == NIL
-      // hwg_MsgStop( "Message: wrong window handle "+Str(hWnd)+"/"+Str(msg),"Error!" )
+      // hwg_MsgStop( "Message: wrong window handle "+Str(hWnd)+"/"+Str(msg), "Error!" )
       if msg == WM_CREATE
          if Len(HWindow():aWindows) != 0 .AND. ;
               ( oWnd := HWindow():aWindows[Len(HWindow():aWindows)] ) != NIL .AND. ;
@@ -367,13 +367,13 @@ Local oWnd, oBtn, oitem
       nControls := Len(aControls)
       #ifdef __XHARBOUR__
          FOR EACH oItem IN aControls
-             IF __ObjHasMsg( oItem,"END" )
+             IF __ObjHasMsg( oItem, "END" )
                 oItem:End()
              ENDIF
          NEXT
       #else
          FOR i := 1 TO nControls
-             IF __ObjHasMsg( aControls[i],"END" )
+             IF __ObjHasMsg( aControls[i], "END" )
                 aControls[i]:End()
              ENDIF
          NEXT
@@ -568,13 +568,13 @@ Local oWnd, oBtn, oitem
       nControls := Len(aControls)
      #ifdef __XHARBOUR__
       FOR EACH oItem IN aControls
-          IF __ObjHasMsg( oItem,"END" )
+          IF __ObjHasMsg( oItem, "END" )
              oItem:End()
           ENDIF
       NEXT
      #else
       FOR i := 1 TO nControls
-          IF __ObjHasMsg( aControls[i],"END" )
+          IF __ObjHasMsg( aControls[i], "END" )
              aControls[i]:End()
           ENDIF
       NEXT
@@ -655,7 +655,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          hwg_InitControls( oWnd )
       ELSE
 
-         hwg_MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd, 10),"Create Error!")
+         hwg_MsgStop("DefMDIChild wrong hWnd : " + Str(hWnd, 10), "Create Error!")
          QUIT
          nReturn := 0
          RETURN (nReturn)
@@ -664,7 +664,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
    endif
 
    if ( oWnd := HWindow():FindWindow(hWnd) ) == NIL
-      // hwg_MsgStop( "MDI child: wrong window handle "+Str(hWnd) + "| " + Str(msg) ,"Error!" )
+      // hwg_MsgStop( "MDI child: wrong window handle "+Str(hWnd) + "| " + Str(msg) , "Error!" )
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       RETURN NIL
    endif
@@ -790,7 +790,7 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
       If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
-        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIChildProc")
+        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!", "DefMDIChildProc")
       Endif
    elseif msg == WM_DESTROY
       if HB_IsObject(oWnd) 
@@ -801,13 +801,13 @@ Local aMenu,hMenu,hSubMenu, nPosMenu
          nControls := Len(aControls)
          #ifdef __XHARBOUR__
             FOR each oItem in aControls
-                IF __ObjHasMsg( oItem,"END" )
+                IF __ObjHasMsg( oItem, "END" )
                    oItem:End()
                 ENDIF
             NEXT
          #else
             FOR i := 1 TO nControls
-                IF __ObjHasMsg( aControls[i],"END" )
+                IF __ObjHasMsg( aControls[i], "END" )
                    aControls[i]:End()
                 ENDIF
             NEXT
@@ -878,7 +878,7 @@ Local oWndClient
          oWnd:handle := hWnd
       ELSE
 
-         hwg_MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd, 10),"Create Error!")
+         hwg_MsgStop("DefMDIWndProc wrong hWnd : " + Str(hWnd, 10), "Create Error!")
          QUIT
          nReturn := 0
          RETURN (nReturn)
@@ -889,7 +889,7 @@ Local oWndClient
 
 
    if ( oWnd := HWindow():FindWindow(hWnd) ) == NIL
-      // hwg_MsgStop( "MDI wnd: wrong window handle "+Str(hWnd) + "| " + Str(msg) ,"Error!" )
+      // hwg_MsgStop( "MDI wnd: wrong window handle "+Str(hWnd) + "| " + Str(msg) , "Error!" )
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       RETURN NIL
    endif
@@ -1015,13 +1015,13 @@ Local oWndClient
       nControls := Len(aControls)
       #ifdef __XHARBOUR__
          FOR EACH oItem IN aControls
-             IF __ObjHasMsg( oItem,"END" )
+             IF __ObjHasMsg( oItem, "END" )
                 oItem:End()
              ENDIF
          NEXT
       #else
          FOR i := 1 TO nControls
-             IF __ObjHasMsg( aControls[i],"END" )
+             IF __ObjHasMsg( aControls[i], "END" )
                 aControls[i]:End()
              ENDIF
          NEXT
@@ -1041,7 +1041,7 @@ Local oWndClient
       If HB_IsObject(oWnd) 
         HWindow():DelItem( oWnd )
       Else
-        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!","DefMDIWndProc")
+        hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!", "DefMDIWndProc")
       Endif
 
    elseif msg == WM_SYSCOMMAND

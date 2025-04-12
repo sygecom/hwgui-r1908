@@ -106,12 +106,12 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ::oParent:AddControl( Self )
    ::bLostFocus := bClick
    IF bClick != NIL .AND. ( ::oGroup == NIL .OR. ::oGroup:bSetGet == NIL )
-      hwg_SetSignal( ::handle,"released",WM_LBUTTONUP, 0, 0 )
+      hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )
    ENDIF
    IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
       IF ::oGroup:bSetGet != NIL
-         hwg_SetSignal( ::handle,"released",WM_LBUTTONUP, 0, 0 )	 
+         hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )	 
       ENDIF
    ENDIF
 

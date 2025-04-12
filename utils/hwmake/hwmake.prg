@@ -119,7 +119,7 @@ Private oIcon := HIcon():AddResource("PIM")
 
    END PAGE of oTAB
    BEGIN PAGE "Prg (Files)" of oTAB
-      @ 21, 29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
+      @ 21, 29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1, "*.prg")};
  	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
       hwg_CreateArList(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
@@ -357,7 +357,7 @@ if Len(oBrowse4:aArray) >= 1
    Next     
 endif   
 
-hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
+hwg_Msginfo("File "+cFolderFile+" saved", "HwGUI Build", "HwMake")
 RETURN NIL
 
 FUNCTION BuildApp() 

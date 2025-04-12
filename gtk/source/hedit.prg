@@ -103,9 +103,9 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
 
    ::bGetFocus := bGFocus
    ::bLostFocus := bLFocus
-   hwg_SetEvent( ::handle,"focus_in_event",WM_SETFOCUS, 0, 0 )
-   hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS, 0, 0 )
-   hwg_SetEvent( ::handle,"key_press_event", 0, 0, 0 )
+   hwg_SetEvent( ::handle, "focus_in_event",WM_SETFOCUS, 0, 0 )
+   hwg_SetEvent( ::handle, "focus_out_event",WM_KILLFOCUS, 0, 0 )
+   hwg_SetEvent( ::handle, "key_press_event", 0, 0, 0 )
 
 RETURN Self
 
@@ -129,7 +129,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
    
    IF msg == WM_KEYUP  
       IF wParam != 16 .AND. wParam != 17 .AND. wParam != 18
-         DO WHILE oParent != NIL .AND. !__ObjHasMsg( oParent,"GETLIST" )
+         DO WHILE oParent != NIL .AND. !__ObjHasMsg( oParent, "GETLIST" )
             oParent := oParent:oParent
          ENDDO
          IF oParent != NIL .AND. !Empty(oParent:KeyList)
@@ -593,7 +593,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
          IF oEdit:cType == "N"
             IF !Empty(oEdit:cPicMask)
                 newPos:=Len(oEdit:cPicMask)-3
-                IF "E" $ oEdit:cPicFunc .AND. nPos == newPos 
+                IF "E" $ oEdit:cPicFunc .AND. nPos == newPos
                     GetApplyKey( oEdit, "," )
                 ENDIF
             ENDIF
@@ -797,12 +797,12 @@ FUNCTION hwg_CreateGetList( oDlg )
 Local i, j, aLen1 := Len(oDlg:aControls), aLen2
 
    FOR i := 1 TO aLen1
-      IF __ObjHasMsg( oDlg:aControls[i],"BSETGET" ) .AND. oDlg:aControls[i]:bSetGet != NIL
+      IF __ObjHasMsg( oDlg:aControls[i], "BSETGET" ) .AND. oDlg:aControls[i]:bSetGet != NIL
          AAdd(oDlg:GetList, oDlg:aControls[i])
       ELSEIF !Empty(oDlg:aControls[i]:aControls)
          aLen2 := Len(oDlg:aControls[i]:aControls)
          FOR j := 1 TO aLen2
-            IF __ObjHasMsg( oDlg:aControls[i]:aControls[j],"BSETGET" ) .AND. oDlg:aControls[i]:aControls[j]:bSetGet != NIL
+            IF __ObjHasMsg( oDlg:aControls[i]:aControls[j], "BSETGET" ) .AND. oDlg:aControls[i]:aControls[j]:bSetGet != NIL
                AAdd(oDlg:GetList, oDlg:aControls[i]:aControls[j])
             ENDIF
          NEXT
@@ -813,7 +813,7 @@ RETURN NIL
 FUNCTION hwg_GetSkip( oParent,hCtrl,nSkip,lClipper )
 Local i, aLen
 
-   DO WHILE oParent != NIL .AND. !__ObjHasMsg( oParent,"GETLIST" )
+   DO WHILE oParent != NIL .AND. !__ObjHasMsg( oParent, "GETLIST" )
       oParent := oParent:oParent
    ENDDO
    IF oParent == NIL .OR. ( lClipper != NIL .AND. lClipper .AND. !oParent:lClipper )
@@ -865,7 +865,7 @@ FUNCTION hwg_ParentGetDialog( o )
       IF o == NIL
          EXIT
       ELSE
-         IF __ObjHasMsg( o,"GETLIST" )
+         IF __ObjHasMsg( o, "GETLIST" )
             EXIT
          ENDIF
       ENDIF

@@ -172,7 +172,7 @@ Local i, nFirst, nEnd
       ::aControls[i]:Show()
    NEXT
    FOR i := nFirst TO nEnd
-      IF __ObjHasMsg( ::aControls[i],"BSETGET" ) .AND. ::aControls[i]:bSetGet != NIL
+      IF __ObjHasMsg( ::aControls[i], "BSETGET" ) .AND. ::aControls[i]:bSetGet != NIL
          hwg_SetFocus( ::aControls[i]:handle )
          Exit
       ENDIF

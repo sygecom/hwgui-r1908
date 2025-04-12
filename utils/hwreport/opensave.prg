@@ -29,8 +29,8 @@ Local oDlg
    INIT DIALOG oDlg FROM RESOURCE "DLG_FILE" ON INIT {|| InitOpen(lOpen) }
    DIALOG ACTIONS OF oDlg ;
         ON 0,IDOK         ACTION {|| EndOpen(lOpen)}  ;
-        ON BN_CLICKED,IDC_RADIOBUTTON1 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1,"Report Name:")} ;
-        ON BN_CLICKED,IDC_RADIOBUTTON2 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1,"Function Name:")} ;
+        ON BN_CLICKED,IDC_RADIOBUTTON1 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1, "Report Name:")} ;
+        ON BN_CLICKED,IDC_RADIOBUTTON2 ACTION {||hwg_SetDlgItemText(oDlg:handle,IDC_TEXT1, "Function Name:")} ;
         ON BN_CLICKED,IDC_BUTTONBRW ACTION {||BrowFile(lOpen)}
    oDlg:Activate()
 
@@ -187,11 +187,11 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            Val(hwg_NextItem(stroka)),Val(hwg_NextItem(stroka)),NIL,hwg_NextItem(stroka), ;
                            Val(hwg_NextItem(stroka)), 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT],.T.,"," ), ;
-                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )),Val(hwg_NextItem( aItem[ITEM_FONT],,"," )), ;
-                    Val(hwg_NextItem( aItem[ITEM_FONT],,"," )))
+                  aItem[ITEM_FONT] := HFont():Add(hwg_NextItem( aItem[ITEM_FONT],.T., "," ), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],, "," )),Val(hwg_NextItem( aItem[ITEM_FONT],, "," )), ;
+                    Val(hwg_NextItem( aItem[ITEM_FONT],, "," )))
                   IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -206,8 +206,8 @@ Local lPrg := ( Upper(hwg_FilExten(fname)) == "PRG" ), cSource := "", vDummy, nF
                            Val(hwg_NextItem(stroka)), Val(hwg_NextItem(stroka)), ;
                            Val(hwg_NextItem(stroka)), 0,hwg_NextItem(stroka),NIL, 0, 0,NIL, 0 })
                   aItem := Atail( aPaintRep[FORM_ITEMS] )
-                  aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN],.T.,"," )), ;
-                          Val(hwg_NextItem( aItem[ITEM_PEN],,"," )),Val(hwg_NextItem( aItem[ITEM_PEN],,"," )))
+                  aItem[ITEM_PEN] := HPen():Add(Val(hwg_NextItem( aItem[ITEM_PEN],.T., "," )), ;
+                          Val(hwg_NextItem( aItem[ITEM_PEN],, "," )),Val(hwg_NextItem( aItem[ITEM_PEN],, "," )))
                   IF aItem[ITEM_X1] == NIL .OR. aItem[ITEM_X1] == 0 .OR. ;
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
@@ -453,7 +453,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
       IF aItem[ITEM_TYPE] == TYPE_TEXT.OR.aItem[ITEM_TYPE] == TYPE_BITMAP ;
               .OR.aItem[ITEM_TYPE] == TYPE_MARKER
          cQuote := IIf(!( '"' $ aItem[ITEM_CAPTION]),'"', ;
-                     IIf(!( "'" $ aItem[ITEM_CAPTION]),"'","["))
+                     IIf(!( "'" $ aItem[ITEM_CAPTION]), "'", "["))
          cItem += cQuote + aItem[ITEM_CAPTION] + cQuote
       ENDIF
       cItem += ","+Ltrim(Str(aItem[ITEM_X1], 4)) + "," + Ltrim(Str(aItem[ITEM_Y1], 4)) + "," + ;
@@ -509,7 +509,7 @@ Local lastC := Chr(10), cQuote, lFirst := .T.
          IF Left(stroka, 1) != Chr(10)
             IF lPrg
                cQuote := IIf(!( '"' $ stroka),'"', ;
-                           IIf(!( "'" $ stroka),"'","["))
+                           IIf(!( "'" $ stroka), "'", "["))
                FWrite(han, IIf(lFirst, "", ";" + Chr(10)) + Space(5) + ;
                      IIf(lFirst, "", "+ ") + cQuote + stroka + cQuote + "+cEnd")
                lFirst := .F.

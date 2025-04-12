@@ -30,7 +30,7 @@ PUBLIC dformat := "dd/mm/yy", memownd := .F., prrdonly := .F.
 PUBLIC lWinChar := .F.
 #ifdef RDD_ADS
    PUBLIC nServerType := ADS_LOCAL_SERVER
-   PUBLIC msdriv := { "ADS_CDX", "ADS_NTX","ADS_ADT" }, numdriv := 1
+   PUBLIC msdriv := { "ADS_CDX", "ADS_NTX", "ADS_ADT" }, numdriv := 1
 #else
    PUBLIC nServerType := ""
    PUBLIC msdriv := "", numdriv := 1
@@ -153,7 +153,7 @@ RETURN NIL
 /* -----------------------  Options --------------------- */
 
 STATIC FUNCTION OpenConfig
-Local aModDlg, aDates := { "dd/mm/yy","mm/dd/yy" }
+Local aModDlg, aDates := { "dd/mm/yy", "mm/dd/yy" }
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig() }
    REDEFINE COMBOBOX aDates OF aModDlg ID IDC_COMBOBOX3
@@ -241,7 +241,7 @@ RETURN .T.
 
 STATIC FUNCTION ListIndex
 Local oModDlg, oBrw
-Local msind := { { "0","None","","" } }, i, ordlen := 0
+Local msind := { { "0", "None", "", "" } }, i, ordlen := 0
 Local indname
 
    i := 1
@@ -256,10 +256,10 @@ Local indname
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind
-   oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1] },"C", 1, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Tag",{|value,o|o:aArray[o:nCurrent, 2] },"C", 8, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent, 3] },"C",ordlen, 0  ) )
-   oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent, 4] },"C", 8, 0  ) )
+   oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1] }, "C", 1, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Tag",{|value,o|o:aArray[o:nCurrent, 2] }, "C", 8, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent, 3] }, "C",ordlen, 0  ) )
+   oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent, 4] }, "C", 8, 0  ) )
   
    oBrw:bColorSel    := hwg_VColor( "800080" )
    oBrw:ofont := oBrwFont
@@ -271,7 +271,7 @@ STATIC FUNCTION SetIndex( oBrw )
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
-   hwg_WriteStatus( oWindow, 2,"Order: "+oBrw:aArray[oBrw:nCurrent, 2] )
+   hwg_WriteStatus( oWindow, 2, "Order: "+oBrw:aArray[oBrw:nCurrent, 2] )
    IF oWindow != NIL
       aControls := oWindow:aControls
       IF ( i := Ascan( aControls, {|o|o:classname() == "HBROWSE"} ) ) > 0
@@ -355,7 +355,7 @@ Local oWindow, aControls, i
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
-   hwg_WriteStatus( oWindow, 2,"Order: "+IIf(isMulti, tagname, hwg_CutPath(indname)) )
+   hwg_WriteStatus( oWindow, 2, "Order: "+IIf(isMulti, tagname, hwg_CutPath(indname)) )
 
    IF oWindow != NIL
       aControls := oWindow:aControls
@@ -525,7 +525,7 @@ Local oWindow, aControls, oBrowse, i
       ENDIF
    ENDIF
    hwg_WriteStatus( oWindow, 1,Ltrim(Str(Reccount(), 10))+" records" )
-   hwg_WriteStatus( oWindow, 2,"Order: None",.T. )
+   hwg_WriteStatus( oWindow, 2, "Order: None",.T. )
 RETURN oWindow:handle
 
 /* -----------------------  Calculator  --------------------- */
@@ -695,7 +695,7 @@ LOCAL bOldError, oError
             DBUSEAREA(,, fname, alsname,, prrdonly )
          RECOVER USING oError
             IF oError:genCode == EG_BADALIAS .OR. oError:genCode == EG_DUPALIAS
-               IF Empty(alsname := hwg_MsgGet( "","Bad alias name, input other:" ))
+               IF Empty(alsname := hwg_MsgGet( "", "Bad alias name, input other:" ))
                   res := .F.
                ELSE
                   LOOP
