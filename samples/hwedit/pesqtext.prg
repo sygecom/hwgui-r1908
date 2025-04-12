@@ -39,7 +39,7 @@ FUNCTION pesquisaglobal()
    @ 20, 57 SAY "Pasta" SIZE 80, 14
    @ 20, 30 get getpesq var rd_pesq SIZE 343, 24
    @ 20, 74 GET COMBOBOX oComb ITEMS diretorio SIZE 340, 200
-   @ 15, 111 get get01 var  resultado SIZE 657, 280 STYLE ES_MULTILINE+WS_HSCROLL+WS_VSCROLL
+   @ 15, 111 get get01 var  resultado SIZE 657, 280 STYLE ES_MULTILINE + WS_HSCROLL + WS_VSCROLL
    //@ 364, 77 CHECKBOX "Incluir Sub-diretorios" SIZE 147, 22
    @ 605, 395 BUTTON "&O.K." SIZE 80, 32 ID IDOK ON CLICK {||pesq(diretorio[oComb], rd_pesq)}
    //readexit(.T.)

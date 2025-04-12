@@ -206,7 +206,7 @@ METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalcu
         ON CLICK {||::Calculando(" ")}
         oBtn4:FontBold := .T.
    @ 21, 24 SAY oVisor CAPTION "0" SIZE 168, 33 ;
-        STYLE SS_RIGHT + DT_VCENTER + DT_SINGLELINE;
+        STYLE SS_RIGHT + DT_VCENTER + DT_SINGLELINE ;
          BACKCOLOR 16578289  ;
         FONT HFont():Add("Consolas", 0, -24, 400)
         oVisor:Anchor := 75

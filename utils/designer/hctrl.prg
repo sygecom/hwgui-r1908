@@ -838,7 +838,7 @@ FUNCTION EditMenu()
 
    INIT DIALOG oDlg TITLE "Edit Menu" ;
         AT 300, 280 SIZE 400, 350 FONT oDesigner:oMainWnd:oFont ;
-        STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SIZEBOX ;
+        STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SIZEBOX ;
         ON INIT {||BuildTree(oTree,aMenu)}
 
    @ 10, 20 TREE oTree OF oDlg SIZE 210, 240 STYLE WS_BORDER EDITABLE

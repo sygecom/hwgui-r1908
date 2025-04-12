@@ -45,7 +45,7 @@ Local cRes := ""
    nDlgStyle := IIf(nDlgStyle == NIL, 0, nDlgStyle)
 
    INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300, 140 ;
-        FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+nDlgStyle
+        FONT oFont CLIPPER STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + nDlgStyle
 
    @ 20, 10 SAY cText SIZE 260, 22
    @ 20, 35 GET cres  SIZE 260, 26 STYLE WS_DLGFRAME + WS_TABSTOP + nStyle

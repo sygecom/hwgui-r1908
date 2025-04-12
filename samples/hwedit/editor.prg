@@ -251,7 +251,7 @@ FUNCTION novo(tipo)
     //
     @ 01, 31 richedit oEdit&i TEXT vText&i SIZE 799, 451;
        OF o&I ID ID_TEXTO BACKCOLOR ID_COLORB FONT ID_FONT ;
-       STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
+       STYLE WS_HSCROLL + WS_VSCROLL + ES_LEFT + ES_MULTILINE + ES_AUTOVSCROLL + ES_AUTOHSCROLL
     //
     //
     auto++
@@ -340,7 +340,7 @@ FUNCTION Texto()
       //
       @ 01, 31 RichEdit oEdit&i TEXT vText&i SIZE 799, 451 ; // 481 ;
       OF o&I ID ID_TEXTO;
-      STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
+      STYLE WS_HSCROLL + WS_VSCROLL + ES_LEFT + ES_MULTILINE + ES_AUTOVSCROLL + ES_AUTOHSCROLL
       //
       oEdit&i:bOther := {|o, m, wp, lp|richeditProc(o, m, wp, lp)}
       //

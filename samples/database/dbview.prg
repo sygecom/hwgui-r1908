@@ -221,7 +221,7 @@ STATIC FUNCTION SelectIndex()
    @ 0, 0 BROWSE oBrowse ARRAY       ;
        SIZE width, height            ;
        FONT oFont                   ;
-       STYLE WS_BORDER+WS_VSCROLL + WS_HSCROLL ;
+       STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
        ON SIZE {|o, x, y|o:Move(, , x, y)} ;
        ON CLICK {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
 
@@ -385,7 +385,7 @@ STATIC FUNCTION DlgWait(cTitle)
 
    INIT DIALOG oDlg TITLE cTitle ;
          AT 0, 0                  ;
-         SIZE 100, 50  STYLE DS_CENTER
+         SIZE 100, 50 STYLE DS_CENTER
 
    @ 10, 20 SAY "Wait, please ..." SIZE 80, 22
 
@@ -439,7 +439,7 @@ STATIC FUNCTION ModiStru(lNew)
 
    @ 10, 10 BROWSE oBrowse ARRAY  ;
        SIZE 250, 200              ;
-       STYLE WS_BORDER+WS_VSCROLL+WS_HSCROLL ;
+       STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
        ON POSCHANGE {|o|brw_onPosChg(o, oGet1, oGet2, oGet3, oGet4)}
 
    oBrowse:aArray := af

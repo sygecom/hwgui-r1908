@@ -67,7 +67,7 @@ FUNCTION Main()
    @ 0, 380 EDITBOX oEdit CAPTION ""      ;
        SIZE 476, 95                       ;
        ON SIZE {|o, x, y|ResizeEditQ(x, y)} ;
-       STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
+       STYLE ES_MULTILINE + ES_AUTOVSCROLL + ES_AUTOHSCROLL
 
    @ 0, 0 PANEL oPanel SIZE 0, 44
 

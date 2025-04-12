@@ -64,7 +64,7 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
 
    INIT DIALOG ::oParent TITLE cTitle       ;
         AT nLeft,nTop SIZE nWidth,nHeight   ;
-        STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+IIf(nTop == 0, DS_CENTER, 0)+DS_SYSMODAL
+        STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + IIf(nTop == 0, DS_CENTER, 0) + DS_SYSMODAL
 
    IF bExit != NIL
       ::oParent:bDestroy := bExit

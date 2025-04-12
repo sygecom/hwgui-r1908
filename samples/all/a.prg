@@ -101,7 +101,7 @@ FUNCTION CreateChildWindow()
    PREPARE FONT oFontBtn NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
 
    INIT WINDOW oChildWnd MDICHILD TITLE "Child";
-     STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW 
+     STYLE WS_CHILD + WS_OVERLAPPEDWINDOW
      //STYLE WS_VISIBLE + WS_OVERLAPPEDWINDOW
 
    @ 0, 0 PANEL oPanel OF oChildWnd SIZE 0, 44
@@ -161,7 +161,7 @@ FUNCTION MdiChildFromPrg(o)
    INIT WINDOW oChildWnd MDICHILD TITLE "Child";
    AT 210, 10 SIZE 350, 350                    ;
    FONT oFont                                 ;
-   STYLE WS_CHILD+ WS_OVERLAPPEDWINDOW        ;
+   STYLE WS_CHILD + WS_OVERLAPPEDWINDOW        ;
    ON EXIT {||hwg_MsgYesNo("Really exit ?")}
 
    @ 20, 10 SAY cText SIZE 260, 22

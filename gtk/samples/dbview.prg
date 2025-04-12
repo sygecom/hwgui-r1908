@@ -187,7 +187,7 @@ Memvar oBrw, oFont
    @ 0, 0 BROWSE oBrowse ARRAY       ;
        SIZE width,height            ;
        FONT oFont                   ;
-       STYLE WS_BORDER+WS_VSCROLL + WS_HSCROLL ;
+       STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
        ON SIZE {|o,x,y|o:Move(,,x,y)} ;
        ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
@@ -334,7 +334,7 @@ Local oDlg
 
    INIT DIALOG oDlg TITLE cTitle ;
          AT 0, 0                  ;
-         SIZE 100, 50  STYLE DS_CENTER
+         SIZE 100, 50 STYLE DS_CENTER
 
    @ 10, 20 SAY "Wait, please ..." SIZE 80, 22
 
@@ -367,7 +367,7 @@ Memvar oBrw, currentCP, currFname
 
    @ 10, 10 BROWSE oBrowse ARRAY  ;
        SIZE 250, 200              ;
-       STYLE WS_BORDER+WS_VSCROLL+WS_HSCROLL ;
+       STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
        ON POSCHANGE {|o|brw_onPosChg(o,oGet1,oGet2,oGet3,oGet4)}
 
    oBrowse:aArray := af
@@ -626,7 +626,7 @@ STATIC FUNCTION GetData(cRes, cTitle, cText)
 Local oModDlg, oFont := HFont():Add("MS Sans Serif", 0, -13)
 
    INIT DIALOG oModDlg TITLE cTitle AT 0, 0 SIZE 300, 140 ;
-        FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+DS_CENTER
+        FONT oFont CLIPPER STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + DS_CENTER
 
    @ 20, 10 SAY cText SIZE 260, 22
    @ 20, 35 GET cres  SIZE 260, 26

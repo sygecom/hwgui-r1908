@@ -107,23 +107,23 @@ FUNCTION CreateMdiChild()
    @ 8, 195 GET oCodigo VAR vCodigo SIZE 216, 38    ;
         FONT HFont():Add("Times New Roman", 0, -27, 400)
    @ 818, 180 BUTTONEX oButtonex1 CAPTION "Cancela Cupom" SIZE 183, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
+        STYLE BS_CENTER + WS_TABSTOP NOTHEMES  ;
         ON CLICK {|This, Value|hwg_MsgInfo("Cancelado")} ;
         ON GETFOCUS {||Thisform:obuttonex1:SetColor(255, hwg_RGB(225, 243, 252), .T.)} ;
         ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex1:Anchor := 225
         oButtonex1:lNoThemes := .T.
    @ 818, 229 BUTTONEX oButtonex2 CAPTION "Leitura X" SIZE 183, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP  NOTHEMES  ;
+        STYLE BS_CENTER + WS_TABSTOP NOTHEMES  ;
         ON GETFOCUS {||Thisform:obuttonex2:SetColor(255, hwg_RGB(225, 243, 252), .T.)} ;
         ON INIT {|This|This:blostfocus := {|t, this|this:bcolor := NIL, this:Setcolor(0, NIL, .T.)}}
         oButtonex2:Anchor := 240
         oButtonex2:lNoThemes := .T.
    @ 818, 276 BUTTONEX oButtonex3 CAPTION "Redução Z" SIZE 183, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP
+        STYLE BS_CENTER + WS_TABSTOP
         oButtonex3:Anchor := 240
    @ 818, 322 BUTTONEX oButtonex4 CAPTION "Leitura Memoria Fiscal" SIZE 184, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP
+        STYLE BS_CENTER + WS_TABSTOP
         oButtonex4:Anchor := 240
 
    @ 808, 153 GROUPBOX oGroup1 CAPTION "Cupom Fiscal" SIZE 203, 219 ;
@@ -134,10 +134,10 @@ FUNCTION CreateMdiChild()
    @ 11, 26 SAY oLabel6 CAPTION "07/09/2010" SIZE 75, 19 ;
          COLOR 16777215  BACKCOLOR 8421504
    @ 816, 395 BUTTONEX oButtonex5 CAPTION "Procura Produto" SIZE 188, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP
+        STYLE BS_CENTER + WS_TABSTOP
         oButtonex5:Anchor := 240
    @ 816, 443 BUTTONEX oButtonex6 CAPTION "Finaliza Pedido" SIZE 188, 38 ;
-        STYLE BS_CENTER +WS_TABSTOP   ;
+        STYLE BS_CENTER + WS_TABSTOP   ;
         ON CLICK {||Thisform:Close()}
         oButtonex6:Anchor := 240
 

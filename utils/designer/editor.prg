@@ -184,7 +184,7 @@ FUNCTION EditMethod(cMethName, cMethod)
 
    INIT DIALOG oDlg TITLE "Edit '"+cMethName+"' method"          ;
       AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
-      STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_MAXIMIZEBOX+WS_SIZEBOX ;
+      STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_MAXIMIZEBOX + WS_SIZEBOX ;
       ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
       ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")),cMethod := oEdit:GetText(),.F.),.T.}
 
@@ -212,12 +212,12 @@ FUNCTION EditMethod(cMethName, cMethod)
    ENDMENU
 
    @ 0, 0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
-       STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_WANTRETURN ;
+       STYLE WS_HSCROLL + WS_VSCROLL + ES_LEFT + ES_MULTILINE + ES_WANTRETURN ;
        ON INIT {||ChangeTheme(HDTheme():nSelected)}                 ;
        ON GETFOCUS {||IIf(oEdit:cargo,(hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0),oEdit:cargo := .F.),.F.)} ;
        ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
        FONT oFont
-   //           STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL+ES_WANTRETURN+WS_VSCROLL+WS_HSCROLL
+   //           STYLE ES_MULTILINE + ES_AUTOVSCROLL + ES_AUTOHSCROLL + ES_WANTRETURN + WS_VSCROLL + WS_HSCROLL
    oEdit:cargo := .T.
 
    // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )

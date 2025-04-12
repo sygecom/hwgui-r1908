@@ -13,7 +13,7 @@ INIT DIALOG oModDlg TITLE "Teste da Acentuação" ;
    TOOLBUTTON  otool ;
            ID 701 ;
            BITMAP "../../image/new.bmp";
-           STYLE 0;
+           STYLE 0 ;
            STATE 4;
            TEXT "teste1"  ;
            TOOLTIP "ola" ;

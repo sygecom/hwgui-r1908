@@ -719,12 +719,12 @@ FUNCTION ObjInspector(oObject )
    Next
 
    INIT DIALOG opForm ;
-      noexit ;
-      title "Methods and Properties" ;
-      font HFont():Add("Arial", 0, -11) ;
-      at 0, 0 ;
-      size 600, 400 ;
-      style WS_DLGFRAME + WS_SYSMENU + DS_CENTER
+      NOEXIT ;
+      TITLE "Methods and Properties" ;
+      FONT HFont():Add("Arial", 0, -11) ;
+      AT 0, 0 ;
+      SIZE 600, 400 ;
+      STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
 
     nTop = 4
    nLeft += 15
@@ -738,9 +738,9 @@ FUNCTION ObjInspector(oObject )
 
   @ 6,nlin-5 TAB oPage1 ITEMS {} SIZE 580, 360
   BEGIN PAGE " Properties " OF oPage1
-   @ 010, nLin browse oBrw array ;
-      size 570, 300 ;
-      style WS_VSCROLL + WS_HSCROLL
+   @ 010, nLin BROWSE oBrw ARRAY ;
+      SIZE 570, 300 ;
+      STYLE WS_VSCROLL + WS_HSCROLL
 
    hwg_CreateArList( oBrw, aClassMsgProp )
 
@@ -753,8 +753,8 @@ FUNCTION ObjInspector(oObject )
 
    BEGIN PAGE " Methods " OF oPage1
       @ 010, nLin browse oBrw2 array ;
-      size 570, 300 ;
-      style WS_VSCROLL + WS_HSCROLL
+      SIZE 570, 300 ;
+      STYLE WS_VSCROLL + WS_HSCROLL
 
    hwg_CreateArList( oBrw2, aClassMsgMtdo )
 

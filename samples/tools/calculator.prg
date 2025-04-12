@@ -58,7 +58,7 @@ FUNCTION calculator()
    @ 22, 30 GROUPBOX oGroup1 CAPTION "Calculator" SIZE 368, 106 ;
         STYLE BS_LEFT
    @ 297, 271 BUTTONEX oBtn1 CAPTION "OK" SIZE 100, 42 ;
-        STYLE BS_CENTER +WS_TABSTOP  ;
+        STYLE BS_CENTER + WS_TABSTOP  ;
         ON CLICK {||thisform:Close()}
 
    ACTIVATE DIALOG oDlg

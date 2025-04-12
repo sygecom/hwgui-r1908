@@ -293,7 +293,7 @@ METHOD CreateDialog( aProp ) CLASS HFormGen
    PRIVATE oCtrl
 
    INIT DIALOG ::oDlg                         ;
-          STYLE DS_ABSALIGN+WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX ;
+          STYLE DS_ABSALIGN + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX ;
           ON SIZE  {|o,h,w|dlgOnSize(o,h,w)}  ;
           ON PAINT {|o|PaintDlg(o)}           ;
           ON EXIT  {|o|o:oParent:End(.T.)}    ;

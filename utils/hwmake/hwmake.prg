@@ -120,7 +120,7 @@ Private oIcon := HIcon():AddResource("PIM")
    END PAGE of oTAB
    BEGIN PAGE "Prg (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
+ 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
       hwg_CreateArList(oBrowse1,aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
@@ -132,7 +132,7 @@ Private oIcon := HIcon():AddResource("PIM")
    END PAGE of oTAB
    BEGIN PAGE "C (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
+ 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170
       hwg_CreateArList(oBrowse2,aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
@@ -143,7 +143,7 @@ Private oIcon := HIcon():AddResource("PIM")
    END PAGE of oTAB
    BEGIN PAGE "Lib (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
+ 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170
       hwg_CreateArList(oBrowse3,aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
@@ -154,7 +154,7 @@ Private oIcon := HIcon():AddResource("PIM")
    END PAGE of oTAB
    BEGIN PAGE "Resource (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
- 	            STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341, 170  
+ 	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
       hwg_CreateArList(oBrowse4,aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
@@ -646,7 +646,7 @@ Local oDlg, oEdit
    INIT DIALOG oDlg TITLE "Build Error" ;
         AT 92, 61 SIZE 500, 500
 
-   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL+WS_HSCROLL+ES_MULTILINE+ES_READONLY ;
+   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
         COLOR 16777088 BACKCOLOR 0 ;
         ON GETFOCUS {||hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0)}
 

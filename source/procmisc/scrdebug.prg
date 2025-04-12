@@ -49,7 +49,7 @@ Local nFirst, i
       s_oBmpPoint:= HBitmap():AddStandard(OBM_CHECK)
 #endif
       INIT DIALOG s_oDlgDebug TITLE ("Script Debugger - " + aScript[1]) AT 210, 10 SIZE 500, 300 ;
-           FONT s_oDlgFont STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX ;
+           FONT s_oDlgFont STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX ;
            ON EXIT {|o|HB_SYMBOL_UNUSED(o), dlgDebugClose()}
 
       MENU OF s_oDlgDebug
@@ -71,7 +71,7 @@ Local nFirst, i
       s_oBrwData:AddColumn(HColumn():New("",{|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 3]}, "C", 1, 0))
       s_oBrwData:AddColumn(HColumn():New("",{|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 4]}, "C", 60, 0))
       @ 0, 4 BROWSE s_oBrwScript ARRAY SIZE 500, 236    ;
-          FONT s_oScrFont STYLE WS_BORDER+WS_VSCROLL+WS_HSCROLL ;
+          FONT s_oScrFont STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
           ON SIZE {|o, x, y|o:Move(, , x, y - s_oSplit:nTop - s_oSplit:nHeight - 64)}
 
       @ 0, 0 SPLITTER s_oSplit SIZE 600, 3 DIVIDE {s_oBrwData} FROM {s_oBrwScript} ;
