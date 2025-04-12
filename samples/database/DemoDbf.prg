@@ -317,11 +317,11 @@ FUNCTION OpenDbf()
    LOCAL vInd1 := oDir + "FORNECED.NTX"
 
    If !File(vArq)
-      AAdd(vTab,{"Cod    ", "C", 3, 0 })
-      AAdd(vTab,{"Name     ", "C", 50, 0 })
-      AAdd(vTab,{"Adress  ", "C", 50, 0 })
-      AAdd(vTab,{"Fone  ", "C", 50, 0 })
-      AAdd(vTab,{"e_Mail  ", "C", 30, 0 })
+      AAdd(vTab, {"Cod    ", "C", 3, 0 })
+      AAdd(vTab, {"Name     ", "C", 50, 0 })
+      AAdd(vTab, {"Adress  ", "C", 50, 0 })
+      AAdd(vTab, {"Fone  ", "C", 50, 0 })
+      AAdd(vTab, {"e_Mail  ", "C", 30, 0 })
       dBCreate(vArq, vTab)
    EndIf
    Use (vArq) Shared Alias TabDbf

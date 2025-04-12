@@ -121,7 +121,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Prg (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1, "*.prg")};
  	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
-      hwg_CreateArList(oBrowse1,aFiles1)
+      hwg_CreateArList(oBrowse1, aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
       oBrowse1:bcolorSel := hwg_VColor( "800080" )
@@ -133,7 +133,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "C (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
  	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170
-      hwg_CreateArList(oBrowse2,aFiles2)
+      hwg_CreateArList(oBrowse2, aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
       oBrowse2:bcolorSel := hwg_VColor( "800080" )
@@ -144,7 +144,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Lib (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
  	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170
-      hwg_CreateArList(oBrowse3,aFiles3)
+      hwg_CreateArList(oBrowse3, aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
       oBrowse3:bcolorSel := hwg_VColor( "800080" )
@@ -155,7 +155,7 @@ Private oIcon := HIcon():AddResource("PIM")
    BEGIN PAGE "Resource (Files)" of oTAB
       @ 21, 29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
  	            STYLE WS_VSCROLL + WS_HSCROLL SIZE 341, 170  
-      hwg_CreateArList(oBrowse4,aFiles4)
+      hwg_CreateArList(oBrowse4, aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
       oBrowse4:bcolorSel := hwg_VColor( "800080" )
@@ -194,7 +194,7 @@ RETURN NIL
 
 STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
-Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,, .T. ) 
+Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,, .T. )
 If !Empty(oTextAnt)
    fFile:=oTextAnt //
 endif   
@@ -208,7 +208,7 @@ Local cLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i,
 Local aPal:=""
 Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
 if empty(cFolderFile); RETURN NIL; Endif
-oStatus:SetTextPanel(1,cFolderFile)      
+oStatus:SetTextPanel(1, cFolderFile)      
 oExeName:SetText( hwg_GetIni( 'Config', 'ExeName' , , cFolderFile ))
 oLibFolder:SetText(hwg_GetIni( 'Config', 'LibFolder' , , cFolderFile ))
 oIncFolder:SetText(hwg_GetIni( 'Config', 'IncludeFolder' , , cFolderFile ))
@@ -312,12 +312,12 @@ if file(cFolderFile)
      RETURN NIL
    EndIf
 EndIf     
-hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'PrgFlags'      ,oPrgFlag:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'ExeName'       , oExeName:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'LibFolder'     , oLibFolder:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'IncludeFolder' , oIncFolder:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'PrgFlags'      , oPrgFlag:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'CFlags'        , oCFlag:GetText(), cFolderFile )
+hwg_WriteIni( 'Config', 'PrgMain'       , oMainPrg:GetText(), cFolderFile )
 oNome:=""
 
 if Len(oBrowse1:aArray) >= 1
@@ -325,7 +325,7 @@ if Len(oBrowse1:aArray) >= 1
 
       if !empty(oBrowse1:aArray[i])
  
-         hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)),oBrowse1:aArray[i], cFolderFile )
+         hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)), oBrowse1:aArray[i], cFolderFile )
    
       EndIf    
       
@@ -336,7 +336,7 @@ endif
 if Len(oBrowse2:aArray) >= 1 
    for i:=1 to Len(oBrowse2:aArray)
       if !empty(oBrowse2:aArray[i])
-         hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], cFolderFile )
+         hwg_WriteIni( 'FilesC', Alltrim(Str(i)), oBrowse2:aArray[i], cFolderFile )
      endif    
    Next     
 endif
@@ -344,7 +344,7 @@ endif
 if Len(oBrowse3:aArray) >= 1
    for i:=1 to Len(oBrowse3:aArray)
       if !empty(oBrowse3:aArray[i])
-         hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], cFolderFile )
+         hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)), oBrowse3:aArray[i], cFolderFile )
       endif   
    Next     
 endif   
@@ -352,7 +352,7 @@ endif
 if Len(oBrowse4:aArray) >= 1
    for i:=1 to Len(oBrowse4:aArray)
       if !empty(oBrowse4:aArray[i])
-         hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], cFolderFile )
+         hwg_WriteIni( 'FilesRES', Alltrim(Str(i)), oBrowse4:aArray[i], cFolderFile )
      endif   
    Next     
 endif   
@@ -362,7 +362,7 @@ RETURN NIL
 
 FUNCTION BuildApp() 
 Local cExeHarbour
-Local cHwGUI,cHarbour,cBCC55, cObj
+Local cHwGUI, cHarbour, cBCC55, cObj
 LOCAL cObjFileAttr  , nObjFileSize
 LOCAL dObjCreateDate, nObjCreateTime
 LOCAL dObjChangeDate, nObjChangeTime
@@ -461,7 +461,7 @@ For Each i in oBrowse1:aArray
          
    EndIf
    cList    += cObjName + " " 
-   If At( cMainPrg,cObjName ) == 0      
+   If At( cMainPrg, cObjName ) == 0
       cListObj += StrTran( cObjName, ".c", ".obj" ) + " " + CRLF
    EndIf   
    cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
@@ -648,7 +648,7 @@ Local oDlg, oEdit
 
    @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
         COLOR 16777088 BACKCOLOR 0 ;
-        ON GETFOCUS {||hwg_SendMessage(oEdit:handle,EM_SETSEL, 0, 0)}
+        ON GETFOCUS {||hwg_SendMessage(oEdit:handle, EM_SETSEL, 0, 0)}
 
    @ 200, 460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 

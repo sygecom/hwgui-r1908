@@ -26,20 +26,20 @@ CLASS HUpDown INHERIT HControl
    DATA nUpDownWidth INIT 12
    DATA lChanged    INIT .F.
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-         oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,nUpDWidth,nLower,nUpper )
+   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+         oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, nUpDWidth, nLower, nUpper )
    METHOD Activate()
    METHOD Refresh()
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-         oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,   ;
-         nUpDWidth,nLower,nUpper ) CLASS HUpDown
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+         oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor,   ;
+         nUpDWidth, nLower, nUpper ) CLASS HUpDown
 
    nStyle   := hwg_BitOr( iIf(nStyle == NIL, 0, nStyle), WS_TABSTOP )
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint,ctoolt,tcolor,bcolor )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint, ctoolt, tcolor, bcolor )
 
    IF vari != NIL
       IF !HB_IsNumeric(vari)
@@ -59,14 +59,14 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    IF bSetGet != NIL
       ::bGetFocus := bGFocus
       ::bLostFocus := bLFocus
-      ::oParent:AddEvent( EN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
-      ::oParent:AddEvent( EN_KILLFOCUS,::id,{|o,id|__Valid(o:FindControl(id))} )
+      ::oParent:AddEvent( EN_SETFOCUS, ::id, {|o, id|__When(o:FindControl(id))} )
+      ::oParent:AddEvent( EN_KILLFOCUS, ::id, {|o, id|__Valid(o:FindControl(id))} )
    ELSE
       IF bGfocus != NIL
-         ::oParent:AddEvent( EN_SETFOCUS,::id,bGfocus )
+         ::oParent:AddEvent( EN_SETFOCUS, ::id, bGfocus )
       ENDIF
       IF bLfocus != NIL
-         ::oParent:AddEvent( EN_KILLFOCUS,::id,bLfocus )
+         ::oParent:AddEvent( EN_KILLFOCUS, ::id, bLfocus )
       ENDIF
    ENDIF
 
@@ -75,7 +75,7 @@ RETURN Self
 METHOD Activate CLASS HUpDown
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateUpDownControl( ::oParent:handle, ;
-          ::nLeft,::nTop,::nWidth,::nHeight,Val(::title),::nLower,::nUpper )
+          ::nLeft, ::nTop, ::nWidth, ::nHeight, Val(::title), ::nLower, ::nUpper )
       ::Init()
    ENDIF
 RETURN NIL

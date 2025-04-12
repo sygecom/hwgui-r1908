@@ -17,23 +17,23 @@ CLASS HCheckButton INHERIT HControl
    DATA bSetGet
    DATA value
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
-                  bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor,bGFocus )
+   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor, bGFocus )
    METHOD Activate()
    METHOD Init()
    METHOD onEvent( msg, wParam, lParam )
    METHOD Refresh()
-   METHOD SetValue(lValue) INLINE hwg_CheckButton( ::handle,lValue )
+   METHOD SetValue(lValue) INLINE hwg_CheckButton( ::handle, lValue )
    METHOD GetValue() INLINE ::value := hwg_IsButtonChecked(::handle)
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
-                  bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor,bGFocus ) CLASS HCheckButton
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor, bGFocus ) CLASS HCheckButton
 
    nStyle   := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), BS_AUTO3STATE+WS_TABSTOP )
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint,ctoolt,tcolor,bcolor )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint, ctoolt, tcolor, bcolor )
 
    ::title   := cCaption
    ::value   := IIf(vari == NIL .OR. !HB_IsLogical(vari), .F., vari)
@@ -44,11 +44,11 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
    ::bLostFocus := bClick
    ::bGetFocus  := bGFocus
 
-   hwg_SetSignal( ::handle, "clicked",WM_LBUTTONUP, 0, 0 )
-   // ::oParent:AddEvent( BN_CLICKED,::id,{|o,id|__Valid(o:FindControl(id))} )
+   hwg_SetSignal( ::handle, "clicked", WM_LBUTTONUP, 0, 0 )
+   // ::oParent:AddEvent( BN_CLICKED, ::id, {|o, id|__Valid(o:FindControl(id))} )
    IF bGFocus != NIL
-      hwg_SetSignal( ::handle, "enter",BN_SETFOCUS, 0, 0 )
-      // ::oParent:AddEvent( BN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
+      hwg_SetSignal( ::handle, "enter", BN_SETFOCUS, 0, 0 )
+      // ::oParent:AddEvent( BN_SETFOCUS, ::id, {|o, id|__When(o:FindControl(id))} )
    ENDIF
 
 RETURN Self
@@ -58,7 +58,7 @@ METHOD Activate CLASS HCheckButton
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton( ::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
       ::Init()
    ENDIF
 RETURN NIL
@@ -104,7 +104,7 @@ Local var
        ::value := IIf(var == NIL, .F., var)
    ENDIF
 
-   hwg_CheckButton( ::handle,::value )
+   hwg_CheckButton( ::handle, ::value )
 RETURN NIL
 
 STATIC FUNCTION __Valid(oCtrl)
@@ -131,7 +131,7 @@ Local res
    IF oCtrl:bGetFocus != NIL
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF HB_IsLogical(res) .AND. !res
-         hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
+         hwg_GetSkip( oCtrl:oParent, oCtrl:handle, 1 )
       ENDIF
       RETURN res
    ENDIF

@@ -17,7 +17,7 @@ FUNCTION hwg_EndWindow()
 RETURN NIL
 
 FUNCTION hwg_VColor( cColor )
-Local i,res := 0, n := 1, iValue
+Local i, res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
@@ -44,13 +44,13 @@ Local cRes := ""
    y := IIf(y == NIL, 10, y)
    nDlgStyle := IIf(nDlgStyle == NIL, 0, nDlgStyle)
 
-   INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300, 140 ;
+   INIT DIALOG oModDlg TITLE cTitle AT x, y SIZE 300, 140 ;
         FONT oFont CLIPPER STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + nDlgStyle
 
    @ 20, 10 SAY cText SIZE 260, 22
    @ 20, 35 GET cres  SIZE 260, 26 STYLE WS_DLGFRAME + WS_TABSTOP + nStyle
 
-   @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,EndDialog()}
+   @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., EndDialog()}
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oModDlg
@@ -76,11 +76,11 @@ Local hDC, aMetr, width, height, screenh
 
    IF HB_IsArray( arr[1] )
       FOR i := 1 TO aLen
-         nLen := Max( nLen,Len(arr[i, 1]) )
+         nLen := Max( nLen, Len(arr[i, 1]) )
       NEXT
    ELSE
       FOR i := 1 TO aLen
-         nLen := Max( nLen,Len(arr[i]) )
+         nLen := Max( nLen, Len(arr[i]) )
       NEXT
    ENDIF
 
@@ -97,21 +97,21 @@ Local hDC, aMetr, width, height, screenh
    width := (Round((aMetr[3] + aMetr[2]) / 2, 0) + 3) * nLen + addX
 
    INIT DIALOG oDlg TITLE cTitle ;
-         AT nLeft,nTop           ;
-         SIZE width,height  ;
+         AT nLeft, nTop           ;
+         SIZE width, height  ;
          FONT oFont
 
    @ 0, 0 BROWSE oBrw ARRAY          ;
-       SIZE  width,height           ;
+       SIZE  width, height           ;
        FONT oFont                   ;
        STYLE WS_BORDER              ;
-       ON SIZE {|o,x,y|o:Move(,,x,y)} ;
-       ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
+       ON SIZE {|o, x, y|o:Move(,, x, y)} ;
+       ON CLICK {|o|nChoice:=o:nCurrent, EndDialog(o:oParent:handle)}
 
    IF HB_IsArray( arr[1] )
-      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1]}, "C",nLen ) )
+      oBrw:AddColumn( HColumn():New( , {|value, o|o:aArray[o:nCurrent, 1]}, "C", nLen ) )
    ELSE
-      oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent]}, "C",nLen ) )
+      oBrw:AddColumn( HColumn():New( , {|value, o|o:aArray[o:nCurrent]}, "C", nLen ) )
    ENDIF
    hwg_CreateArList( oBrw, arr )
    oBrw:lDispHead := .F.
@@ -156,7 +156,7 @@ FUNCTION hwg_WriteStatus( oWnd, nPart, cText, lRedraw )
 Local aControls, i
    aControls := oWnd:aControls
    IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
-      hwg_WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
+      hwg_WriteStatusWindow( aControls[i]:handle, nPart-1, cText )
 
    ENDIF
 RETURN NIL

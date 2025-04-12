@@ -173,7 +173,7 @@ RETURN ::lEditable
 METHOD SortMark(nSortMark) CLASS HColumn
 
     IF nSortMark != NIL
-      AEval(::oParent:aColumns,{|c|c:nSortMark := 0})
+      AEval(::oParent:aColumns, {|c|c:nSortMark := 0})
       ::oParent:lHeadClick := .T.
       hwg_InvalidateRect(::oParent:handle, 0, ::oParent:x1, ::oParent:y1 - ::oParent:nHeadHeight * ::oParent:nHeadRows, ::oParent:x2, ::oParent:y1)
       ::oParent:lHeadClick := .F.
@@ -855,7 +855,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
          ELSE
             ::MouseMove(wParam, lParam)
             IF ::lHeadClick
-               AEval(::aColumns,{|c|c:lHeadClick := .F.})
+               AEval(::aColumns, {|c|c:lHeadClick := .F.})
                hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
                ::lHeadClick := .F.
             ENDIF
@@ -2266,7 +2266,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          IF !oColumn:lHeadClick
             state := IIf(::hTheme != NIL, IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,;
                                                 PBS_HOT, PBS_NORMAL), PBS_NORMAL)
-            s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,{x, x + xsize }, s_axPosMouseOver)
+            s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, {x, x + xsize }, s_axPosMouseOver)
          ELSE
             state := IIf(::hTheme != NIL, PBS_PRESSED, 6)
             hwg_InflateRect(@aItemRect, -1, -1)
@@ -2464,7 +2464,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
       ELSE
          xSize := 0
          IF fif == Len(::aColumns) .AND. !lFixed
-            fif := hb_RAScan(::aColumns,{|c| c:lhide = .F.}) - 1
+            fif := hb_RAScan(::aColumns, {|c| c:lhide = .F.}) - 1
             x -= ::aColumns[fif + 1]:width
             lFixed := .T.
          ENDIF
@@ -3627,7 +3627,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       ENDIF
    ENDIF
    IF ::lHeadClick
-      AEval(::aColumns,{|c|c:lHeadClick := .F.})
+      AEval(::aColumns, {|c|c:lHeadClick := .F.})
       hwg_InvalidateRect(::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1)
       ::lHeadClick := .F.
      hwg_SetCursor(s_downCursor)

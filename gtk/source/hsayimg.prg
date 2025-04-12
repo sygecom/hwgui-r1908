@@ -18,19 +18,19 @@ CLASS HSayImage INHERIT HControl
    CLASS VAR winclass   INIT "STATIC"
    DATA  oImage
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
-                  bSize,ctoolt )
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
+                  bSize, ctoolt )
    METHOD Activate()
-   METHOD End() INLINE ( ::Super:End(),IIf(::oImage != NIL, ::oImage:Release(), ::oImage := NIL),::oImage := NIL )
+   METHOD End() INLINE ( ::Super:End(), IIf(::oImage != NIL, ::oImage:Release(), ::oImage := NIL), ::oImage := NIL )
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
-                  bSize,ctoolt ) CLASS HSayImage
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
+                  bSize, ctoolt ) CLASS HSayImage
 
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,               ;
-               IIf(nWidth != NIL, nWidth, 0),IIf(nHeight != NIL, nHeight, 0),, ;
-               bInit,bSize,,ctoolt )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop,               ;
+               IIf(nWidth != NIL, nWidth, 0), IIf(nHeight != NIL, nHeight, 0),, ;
+               bInit, bSize,, ctoolt )
 
    ::title   := ""
 

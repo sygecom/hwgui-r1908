@@ -26,7 +26,7 @@ CLASS HFont INHERIT HObject
 
    CLASS VAR aFonts   INIT {}
    DATA handle
-   DATA name, width, height ,weight
+   DATA name, width, height , weight
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
@@ -70,7 +70,7 @@ Local i, nlen := Len(::aFonts)
    NEXT
 
    IF nHandle == NIL
-      ::handle := hwg_CreateFont( fontName, nWidth, nHeight*1024 ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut )
+      ::handle := hwg_CreateFont( fontName, nWidth, nHeight*1024 , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut )
    ELSE
       ::handle := nHandle
       nHeight := nHeight / 1024
@@ -135,7 +135,7 @@ CLASS HPen INHERIT HObject
    DATA nCounter   INIT 1
 
    METHOD Add(nStyle, nWidth, nColor)
-   METHOD Get( nStyle,nWidth,nColor )
+   METHOD Get( nStyle, nWidth, nColor )
    METHOD Release()
 
 ENDCLASS
@@ -169,7 +169,7 @@ Local i
    NEXT
    #endif
 
-   ::handle := hwg_CreatePen( nStyle,nWidth,nColor )
+   ::handle := hwg_CreatePen( nStyle, nWidth, nColor )
    ::style  := nStyle
    ::width  := nWidth
    ::color  := nColor
@@ -177,7 +177,7 @@ Local i
 
 RETURN Self
 
-METHOD Get( nStyle,nWidth,nColor ) CLASS HPen
+METHOD Get( nStyle, nWidth, nColor ) CLASS HPen
 Local i
 
    nStyle := IIf(nStyle == NIL, PS_SOLID, nStyle)
@@ -312,7 +312,7 @@ CLASS HBitmap INHERIT HObject
 
    METHOD AddResource(name)
    METHOD AddFile(name, HDC)
-   METHOD AddWindow( oWnd,lFull )
+   METHOD AddWindow( oWnd, lFull )
    METHOD Release()
 
 ENDCLASS
@@ -383,10 +383,10 @@ Local i, aBmpSize
 
 RETURN Self
 
-METHOD AddWindow( oWnd,lFull ) CLASS HBitmap
+METHOD AddWindow( oWnd, lFull ) CLASS HBitmap
 Local i, aBmpSize
 
-   // ::handle := hwg_Window2Bitmap( oWnd:handle,lFull )
+   // ::handle := hwg_Window2Bitmap( oWnd:handle, lFull )
    ::name := LTrim(Str(oWnd:handle))
    aBmpSize  := hwg_GetBitmapSize(::handle)
    ::nWidth  := aBmpSize[1]
@@ -489,9 +489,9 @@ Local i, aBmpSize
 //   ::handle := hwg_OpenImage(name)
 //   ::name := name
 //   AAdd(::aIcons, Self)
-//  Tracelog("name = ",name)
+//  Tracelog("name = ", name)
    ::handle := hwg_OpenImage(name)
-//   tracelog("handle = ",::handle)
+//   tracelog("handle = ", ::handle)
    IF !Empty(::handle)
       ::name := name
       aBmpSize  := hwg_GetBitmapSize(::handle)

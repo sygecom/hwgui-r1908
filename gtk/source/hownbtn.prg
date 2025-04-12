@@ -20,15 +20,15 @@ CLASS HOwnButton INHERIT HControl
    DATA state
    DATA bClick
    DATA lPress  INIT .F.
-   DATA text,ofont,xt,yt,widtht,heightt
-   DATA bitmap,xb,yb,widthb,heightb,lTransp,trColor, oBitmap
+   DATA text, ofont, xt, yt, widtht, heightt
+   DATA bitmap, xb, yb, widthb, heightb, lTransp, trColor, oBitmap
    DATA lEnabled INIT .T.
    DATA nOrder
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  bInit,bSize,bPaint,bClick,lflat,              ;
-                  cText,color,font,xt,yt,widtht,heightt,        ;
-                  bmp,lResour,xb,yb,widthb,heightb,lTr,trColor, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, bClick, lflat,              ;
+                  cText, color, font, xt, yt, widtht, heightt,        ;
+                  bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
                   cTooltip, lEnabled )
 
    METHOD Activate()
@@ -46,14 +46,14 @@ CLASS HOwnButton INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,   ;
-                  bInit,bSize,bPaint,bClick,lflat,             ;
-                  cText,color,font,xt,yt,widtht,heightt,       ;
-                  bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,;
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
+                  bInit, bSize, bPaint, bClick, lflat,             ;
+                  cText, color, font, xt, yt, widtht, heightt,       ;
+                  bmp, lResour, xb, yb, widthb, heightb, lTr, trColor,;
                   cTooltip, lEnabled  ) CLASS HOwnButton
 
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,font,bInit, ;
-                  bSize,bPaint,ctooltip )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, font, bInit, ;
+                  bSize, bPaint, ctooltip )
 
    ::lFlat   := IIf(lFlat == NIL, .F., lFlat)
    ::bClick  := bClick
@@ -122,7 +122,7 @@ METHOD Init CLASS HOwnButton
 
    IF !::lInit
       ::Super:Init()
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
    ENDIF
 
 RETURN NIL
@@ -133,24 +133,24 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
    aCoors := hwg_GetClientRect( ::handle )
 
-   // oldBkColor := hwg_SetBkColor( hDC,hwg_GetSysColor(COLOR_3DFACE) )
+   // oldBkColor := hwg_SetBkColor( hDC, hwg_GetSysColor(COLOR_3DFACE) )
    IF ::state == OBTN_INIT
       ::state := OBTN_NORMAL
    ENDIF
 
    IF ::lFlat
       IF ::state == OBTN_NORMAL
-         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4], 0 )
+         hwg_DrawButton( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], 0 )
       ELSEIF ::state == OBTN_MOUSOVER
-         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4], 1 )
+         hwg_DrawButton( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], 1 )
       ELSEIF ::state == OBTN_PRESSED
-         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4], 2 )
+         hwg_DrawButton( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], 2 )
       ENDIF
    ELSE
       IF ::state == OBTN_NORMAL
-         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4], 5 )
+         hwg_DrawButton( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], 5 )
       ELSEIF ::state == OBTN_PRESSED
-         hwg_DrawButton( hDC, aCoors[1],aCoors[2],aCoors[3],aCoors[4], 6 )
+         hwg_DrawButton( hDC, aCoors[1], aCoors[2], aCoors[3], aCoors[4], 6 )
       ENDIF
    ENDIF
 
@@ -183,7 +183,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       ENDIF
       aMetr := hwg_GetTextMetric(hDC)
       if ::lEnabled //if button is enabled
-         hwg_SetTextColor( hDC,::tcolor )
+         hwg_SetTextColor( hDC, ::tcolor )
       Else
          hwg_SetTextColor( hDC, 0 )
       EndIf
@@ -195,7 +195,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
       hwg_DrawText( hDC, ::text, x1, y1, x2, y2, IIf(::xt != NIL .AND. ::xt != 0, DT_LEFT, DT_CENTER) )
       // hwg_SetTransparentMode(hDC, .F.)
    ENDIF
-   // hwg_SetBkColor( hDC,oldBkColor )
+   // hwg_SetBkColor( hDC, oldBkColor )
    hwg_releaseDC(::handle, hDC)
 
 RETURN NIL

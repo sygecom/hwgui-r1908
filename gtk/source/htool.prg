@@ -29,13 +29,13 @@ CLASS HToolBar INHERIT HControl
    Data aItem init {}
    DATA Line
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit, ;
-                  bSize,bPaint,ctooltip,tcolor,bcolor,lTransp ,aItem)
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp , aItem)
 
    METHOD Activate()
    METHOD INIT()
    METHOD REFRESH()
-   METHOD AddButton(a,s,d,f,g,h)
+   METHOD AddButton(a, s, d, f, g, h)
    METHOD onEvent( msg, wParam, lParam )
    METHOD EnableAllButtons()
    METHOD DisableAllButtons()
@@ -47,11 +47,11 @@ CLASS HToolBar INHERIT HControl
 ENDCLASS
 
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit, ;
-                  bSize,bPaint,ctooltip,tcolor,bcolor,lTransp ,aitem) CLASS hToolBar
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp , aitem) CLASS hToolBar
    Default  aItem to {}
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint,ctooltip,tcolor,bcolor )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint, ctooltip, tcolor, bcolor )
 
    ::aitem := aItem
 
@@ -63,13 +63,13 @@ METHOD Activate CLASS hToolBar
    IF !Empty(::oParent:handle)
 
       ::handle := hwg_CreateToolBar(::oParent:handle )
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
       ::Init()
    ENDIF
 RETURN NIL
 
 METHOD INIT CLASS hToolBar
-Local n,n1
+Local n, n1
 Local aTemp
 Local hIm
 Local aButton :={}
@@ -121,11 +121,11 @@ Local aItem
           aBmpSize := hwg_GetBitmapSize(aButton[1])
 
           IF aBmpSize[3] == 4
-             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK )
+             hIm := hwg_CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK )
           ELSEIF aBmpSize[3] == 8
-             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK )
+             hIm := hwg_CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK )
           ELSEIF aBmpSize[3] == 24
-             hIm := hwg_CreateImageList( {} ,aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK )
+             hIm := hwg_CreateImageList( {} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK )
           ENDIF
 
           FOR nPos :=1 to Len(aButton)
@@ -150,12 +150,12 @@ Local aItem
 
             if aItem[4] == TBSTYLE_BUTTON
 
-               aItem[11] := hwg_CreateToolBarButton(::handle,aItem[1],aItem[6], .F.)
+               aItem[11] := hwg_CreateToolBarButton(::handle, aItem[1], aItem[6], .F.)
                aItem[2] := hb_enumindex()
-//               hwg_SetSignal( aItem[11], "clicked",WM_LBUTTONUP,aItem[2], 0 )
-               hwg_TOOLBAR_SETACTION(aItem[11],aItem[7])
+//               hwg_SetSignal( aItem[11], "clicked", WM_LBUTTONUP, aItem[2], 0 )
+               hwg_TOOLBAR_SETACTION(aItem[11], aItem[7])
                if !Empty(aItem[8])
-                  hwg_AddtoolTip(::handle, aItem[11],aItem[8])
+                  hwg_AddtoolTip(::handle, aItem[11], aItem[8])
                endif
             elseif aitem[4] == TBSTYLE_SEP
                aItem[11] := hwg_CreateToolBarButton(::handle,,, .T.)
@@ -193,13 +193,13 @@ METHOD Notify( lParam ) CLASS hToolBar
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx( lParam, ::aItem[nPos, 10], ::oParent:handle )
        else
-              hwg_ToolBar_SubMenu(lParam, 1,::oParent:handle)
+              hwg_ToolBar_SubMenu(lParam, 1, ::oParent:handle)
        endif
     ENDIF
 
 RETURN 0
 */
-METHOD AddButton(nBitIp,nId,bState,bStyle,cText,bClick,c,aMenu) CLASS hToolBar
+METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu) CLASS hToolBar
    Local hMenu := NIL
    DEFAULT nBitIp to -1
    DEFAULT bstate to TBSTATE_ENABLED
@@ -215,7 +215,7 @@ Local nPos
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos > 0
          IF ::aItem[nPos, 7] != NIL
-            Eval(::aItem[nPos, 7] ,Self)
+            Eval(::aItem[nPos, 7] , Self)
          ENDIF
       endif
    ENDIF

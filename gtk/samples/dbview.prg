@@ -86,11 +86,11 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
       SIZE 300, 272                   ;
       STYLE WS_VSCROLL + WS_HSCROLL  ;
       FONT oFont                     ;
-      ON SIZE {|o,x,y|o:Move(,,x-1,y-28)}
+      ON SIZE {|o, x, y|o:Move(,, x-1, y-28)}
       
-   oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
+   oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
 
-   @ 0, 272 PANEL oPanel SIZE 0, 26 ON SIZE {|o,x,y|o:Move(0,y-26,x-1,y-8)}
+   @ 0, 272 PANEL oPanel SIZE 0, 26 ON SIZE {|o, x, y|o:Move(0, y-26, x-1, y-8)}
    @ 5, 4 SAY oSay1 CAPTION "" OF oPanel SIZE 150, 22 FONT oFont
    @ 160, 4 SAY oSay2 CAPTION "" OF oPanel SIZE 100, 22 FONT oFont
    
@@ -124,7 +124,7 @@ Memvar oBrw, oSay1, oSay2, DataCP, currentCP, currFname
       hwg_CreateList( oBrw, .T. )
       AAdd(oBrw:aColumns, NIL)
       Ains( oBrw:aColumns, 1 )
-      oBrw:aColumns[1] := HColumn():New( "*",{|v,o|IIf(Deleted(), "*", " ")}, "C", 1, 0 )
+      oBrw:aColumns[1] := HColumn():New( "*", {|v, o|IIf(Deleted(), "*", " ")}, "C", 1, 0 )
       oBrw:active := .T.
       oBrw:Refresh()
       oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))
@@ -181,20 +181,20 @@ Memvar oBrw, oFont
    
    INIT DIALOG oDlg TITLE "Select Order" ;
          AT 0, 0                  ;
-         SIZE width+2,height+2   ;
+         SIZE width+2, height+2   ;
          FONT oFont
 
    @ 0, 0 BROWSE oBrowse ARRAY       ;
-       SIZE width,height            ;
+       SIZE width, height            ;
        FONT oFont                   ;
        STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
-       ON SIZE {|o,x,y|o:Move(,,x,y)} ;
-       ON CLICK {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
+       ON SIZE {|o, x, y|o:Move(,, x, y)} ;
+       ON CLICK {|o|nChoice:=o:nCurrent, EndDialog(o:oParent:handle)}
 
    oBrowse:aArray := aIndex
-   oBrowse:AddColumn( HColumn():New( "OrdName",{|v,o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Order key",{|v,o|o:aArray[o:nCurrent, 2]}, "C",Max(iLen, 12), 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Filename",{|v,o|o:aArray[o:nCurrent, 3]}, "C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "OrdName", {|v, o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Order key", {|v, o|o:aArray[o:nCurrent, 2]}, "C", Max(iLen, 12), 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Filename", {|v, o|o:aArray[o:nCurrent, 3]}, "C", 10, 0 ) )
    
    oBrowse:rowPos := nOrder
    Eval(oBrowse:bGoTo, oBrowse, nOrder)
@@ -238,7 +238,7 @@ Memvar oBrw
    @ 10, 135 SAY "Condition:" SIZE 100, 22
    @ 10, 157 GET cCond SIZE 280, 24
    
-   @  30, 210  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
+   @  30, 210  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T., EndDialog()}
    @ 170, 210 BUTTON "Cancel" SIZE 100, 32 ON CLICK {||EndDialog()}
 
    oDlg:Activate()
@@ -256,7 +256,7 @@ Memvar oBrw
             ENDIF
          ELSE
             IF Empty(cCond)
-               dbCreateIndex( RTRIM(cName),RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"),IIf(lUniq, .T., NIL) )
+               dbCreateIndex( RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., NIL) )
             ELSE                     
                ordCondSet( RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,, )
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
@@ -368,25 +368,25 @@ Memvar oBrw, currentCP, currFname
    @ 10, 10 BROWSE oBrowse ARRAY  ;
        SIZE 250, 200              ;
        STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
-       ON POSCHANGE {|o|brw_onPosChg(o,oGet1,oGet2,oGet3,oGet4)}
+       ON POSCHANGE {|o|brw_onPosChg(o, oGet1, oGet2, oGet3, oGet4)}
 
    oBrowse:aArray := af
-   oBrowse:AddColumn( HColumn():New( "Name",{|v,o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Type",{|v,o|o:aArray[o:nCurrent, 2]}, "C", 1, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Length",{|v,o|o:aArray[o:nCurrent, 3]}, "N", 5, 0 ) )
-   oBrowse:AddColumn( HColumn():New( "Dec",{|v,o|o:aArray[o:nCurrent, 4]}, "N", 2, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Name", {|v, o|o:aArray[o:nCurrent, 1]}, "C", 10, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Type", {|v, o|o:aArray[o:nCurrent, 2]}, "C", 1, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Length", {|v, o|o:aArray[o:nCurrent, 3]}, "N", 5, 0 ) )
+   oBrowse:AddColumn( HColumn():New( "Dec", {|v, o|o:aArray[o:nCurrent, 4]}, "N", 2, 0 ) )
    
    @ 10, 230 GET oGet1 VAR cName SIZE 100, 24
    @ 120, 230 GET COMBOBOX oGet2 VAR nType ITEMS aTypes SIZE 100, 24
    @ 230, 230 GET oGet3 VAR cLen SIZE 50, 24
    @ 290, 230 GET oGet4 VAR cDec SIZE 40, 24
 
-   @ 20, 270 BUTTON "Add" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 1)}
-   @ 110, 270 BUTTON "Insert" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 2)}
-   @ 200, 270 BUTTON "Change" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 3)}
-   @ 290, 270 BUTTON "Remove" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse,oGet1,oGet2,oGet3,oGet4, 4)}
+   @ 20, 270 BUTTON "Add" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 1)}
+   @ 110, 270 BUTTON "Insert" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 2)}
+   @ 200, 270 BUTTON "Change" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 3)}
+   @ 290, 270 BUTTON "Remove" SIZE 80, 30 ON CLICK {||UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, 4)}
    
-   @ 280, 10  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T.,EndDialog()}
+   @ 280, 10  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oDlg:lResult:=.T., EndDialog()}
    @ 280, 50 BUTTON "Cancel" SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oDlg
@@ -420,7 +420,7 @@ Memvar oBrw, currentCP, currFname
                ELSE
                   IF af[i, 2] != af0[af[i, 5], 2]
                      IF af[i, 2] == "C" .AND. af0[af[i, 5], 2] == "N"
-                        xValue := Str(xValue,af0[af[i, 5], 3],af0[af[i, 5], 4])
+                        xValue := Str(xValue, af0[af[i, 5], 3], af0[af[i, 5], 4])
                      ELSEIF af[i, 2] == "N" .AND. af0[af[i, 5], 2] == "C"
                         xValue := Val( LTrim(xValue) )
                      ELSE
@@ -501,7 +501,7 @@ Local cName, cType, nLen, nDec
       ENDIF
    ELSE
       cName := oGet1:SetGet()
-      cType := aFieldTypes[Eval(oGet2:bSetGet,,oGet2)]
+      cType := aFieldTypes[Eval(oGet2:bSetGet,, oGet2)]
       nLen  := Val( oGet3:SetGet() )
       nDec  := Val( oGet4:SetGet() )
       IF nOperation == 1
@@ -509,7 +509,7 @@ Local cName, cType, nLen, nDec
       ELSE
          IF nOperation == 2
             AAdd(oBrowse:aArray, NIL)
-            Ains( oBrowse:aArray,oBrowse:nCurrent )
+            Ains( oBrowse:aArray, oBrowse:nCurrent )
          ENDIF
          oBrowse:aArray[oBrowse:nCurrent, 1] := cName
          oBrowse:aArray[oBrowse:nCurrent, 2] := cType
@@ -655,7 +655,7 @@ STATIC FUNCTION dbv_Pack()
 Local oMsg, cTitle := "Packing database"
 Memvar oBrw, oSay1, oSay2
 
-   IF hwg_MsgYesNo( "Are you really want it ?",cTitle )
+   IF hwg_MsgYesNo( "Are you really want it ?", cTitle )
       oMsg = DlgWait( cTitle )
       PACK
       oMsg:Close()
@@ -670,7 +670,7 @@ STATIC FUNCTION dbv_Zap()
 Local oMsg, cTitle := "Zap database"
 Memvar oBrw, oSay1, oSay2
 
-   IF hwg_MsgYesNo( "ALL DATA WILL BE LOST !!! Are you really want it ?",cTitle )
+   IF hwg_MsgYesNo( "ALL DATA WILL BE LOST !!! Are you really want it ?", cTitle )
       oMsg = DlgWait( cTitle )
       ZAP
       oMsg:Close()

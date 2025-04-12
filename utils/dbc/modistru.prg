@@ -13,7 +13,7 @@
 #include "ads.ch"
 #endif
 
-memvar mypath, obrwfont, improc,msfile
+memvar mypath, obrwfont, improc, msfile
 
 FUNCTION StruMan( lNew )
 Local oModDlg
@@ -33,17 +33,17 @@ LOCAL af, oBrw
    REDEFINE COMBOBOX at OF oModDlg ID IDC_COMBOBOX2
 
    DIALOG ACTIONS OF oModDlg ;
-          ON 0,IDOK        ACTION {|o| EndStru(o,lNew)}   ;
-          ON BN_CLICKED,IDC_PUSHBUTTON2 ACTION {|| ModiStru(1) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON3 ACTION {|| ModiStru(2) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON4 ACTION {|| ModiStru(3) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
+          ON 0, IDOK        ACTION {|o| EndStru(o, lNew)}   ;
+          ON BN_CLICKED, IDC_PUSHBUTTON2 ACTION {|| ModiStru(1) }  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON3 ACTION {|| ModiStru(2) }  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON4 ACTION {|| ModiStru(3) }  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
 
    oBrw:aArray := af
-   oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent, 1] }, "C", 10, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Type",{|value,o|o:aArray[o:nCurrent, 2] }, "C", 4, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Length",{|value,o|o:aArray[o:nCurrent, 3] }, "N", 4, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Dec",{|value,o|o:aArray[o:nCurrent, 4] }, "N", 2, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Name", {|value, o|o:aArray[o:nCurrent, 1] }, "C", 10, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Type", {|value, o|o:aArray[o:nCurrent, 2] }, "C", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Length", {|value, o|o:aArray[o:nCurrent, 3] }, "N", 4, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Dec", {|value, o|o:aArray[o:nCurrent, 4] }, "N", 2, 0  ) )
    oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont      := oBrwFont
 
@@ -104,16 +104,16 @@ Local cName, cType, nLen, nDec := 0
          oBrowse:nRecords ++
       ENDIF
    ELSEIF nOper == 4
-      Adel( oBrowse:aArray,oBrowse:nCurrent )
+      Adel( oBrowse:aArray, oBrowse:nCurrent )
       ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
       oBrowse:nRecords --
    ENDIF
    hwg_RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
 RETURN NIL
 
-STATIC FUNCTION EndStru( oDlg,lNew )
+STATIC FUNCTION EndStru( oDlg, lNew )
 Local fname, alsname
-Local A1,A2,A3,A4,B1,B2,B3,B4,C1,C2
+Local A1, A2, A3, A4, B1, B2, B3, B4, C1, C2
 Local fi1, kolf, i, j
 Local oBrowse := oDlg:FindControl( ID_BROWSE )
 Local oWindow, aControls
@@ -173,7 +173,7 @@ Local oPBar, nSch := 0
          ENDIF
       NEXT
       SELECT( improc )
-      oPBar := HProgressBar():NewBox( "Structure updating ...",,,,, 10,RecCount() )
+      oPBar := HProgressBar():NewBox( "Structure updating ...",,,,, 10, RecCount() )
       GO TOP
       DO WHILE !EOF()
          SELECT 20

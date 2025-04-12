@@ -346,7 +346,7 @@ FUNCTION execSQL(cQuery)
       hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
    ELSE
       IF nHistCurr < nHistoryMax
-         DO WHILE Len(stroka := hwg_RDSTR(NIL,@cQuery,@poz)) != 0
+         DO WHILE Len(stroka := hwg_RDSTR(NIL, @cQuery, @poz)) != 0
             IF Asc(LTrim(stroka)) > 32
                AAdd(aQueries, NIL)
                AIns(aQueries, i)
@@ -477,7 +477,7 @@ STATIC FUNCTION ReadHistory(fname)
    han := FOpen(fname, FO_READ + FO_SHARED)
    IF han != - 1
       DO WHILE .T.
-         stroka := hwg_RDSTR(han,@strbuf,@poz, 512)
+         stroka := hwg_RDSTR(han, @strbuf, @poz, 512)
          IF Len(stroka) == 0
             EXIT
          ENDIF

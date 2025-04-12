@@ -28,8 +28,8 @@ CLASS HTab INHERIT HControl
    DATA  oTemp
    DATA  bAction
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC,;
                   bClick, bGetFocus, bLostFocus )
    METHOD Activate()
    METHOD Init()
@@ -46,12 +46,12 @@ CLASS HTab INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,bClick, bGetFocus, bLostFocus  ) CLASS HTab
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, bClick, bGetFocus, bLostFocus  ) CLASS HTab
 LOCAL i, aBmpSize
 
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint )
 
    ::title   := ""
    ::oFont   := IIf(oFont == NIL, ::oParent:oFont, oFont)
@@ -88,7 +88,7 @@ Local i, h
 	 AAdd(::aPages, {0, 0, .F., h})
       NEXT
       
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
 
       FOR i := 2 TO Len(::aPages)
          ::HidePage(i)
@@ -130,7 +130,7 @@ METHOD EndPage() CLASS HTab
    ::oDefaultParent := ::oTemp
    ::oTemp := NIL
 
-   ::bChange = {|o,n|o:ChangePage(n)}
+   ::bChange = {|o, n|o:ChangePage(n)}
 
 RETURN NIL
 

@@ -33,18 +33,18 @@ Private lAddMode := .F.
    hwg_SelectObject( hDCwindow, oFontStandard:handle )
    aTmetr := hwg_GetTextMetric(hDCwindow)
    dKoef := ( aMetr[1]-XINDENT ) / aTmetr[2]
-   hwg_ReleaseDC(Hwindow():GetMain():handle,hDCwindow)
+   hwg_ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    hwg_SelectObject( oPrinter:hDCPrn, oFontStandard:handle )
    aPmetr := hwg_GetTextMetric(oPrinter:hDCPrn)
    pKoef := aPrnCoors[1] / aPmetr[2]
    fontKoef := pKoef / dKoef
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
-      IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
-         oFont := aPaintRep[FORM_ITEMS,i,ITEM_FONT]
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add(oFont:name,;
-              oFont:width,Round(oFont:height*fontKoef, 0),oFont:weight, ;
-              oFont:charset,oFont:italic)
+      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_TEXT
+         oFont := aPaintRep[FORM_ITEMS, i, ITEM_FONT]
+         aPaintRep[FORM_ITEMS, i, ITEM_STATE] := HFont():Add(oFont:name,;
+              oFont:width, Round(oFont:height*fontKoef, 0), oFont:weight, ;
+              oFont:charset, oFont:italic)
       ENDIF
    NEXT
 
@@ -52,13 +52,13 @@ Private lAddMode := .F.
    oPrinter:StartPage()
 
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
-      IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] != TYPE_BITMAP
-         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS,i], prnXCoef, prnYCoef, 0, .F. )
+      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] != TYPE_BITMAP
+         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F. )
       ENDIF
    NEXT
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
-      IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_BITMAP
-         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS,i], prnXCoef, prnYCoef, 0, .F. )
+      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
+         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F. )
       ENDIF
    NEXT
 
@@ -66,9 +66,9 @@ Private lAddMode := .F.
    oPrinter:EndDoc()
 
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
-      IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE]:Release()
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := NIL
+      IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_TEXT
+         aPaintRep[FORM_ITEMS, i, ITEM_STATE]:Release()
+         aPaintRep[FORM_ITEMS, i, ITEM_STATE] := NIL
       ENDIF
    NEXT
 

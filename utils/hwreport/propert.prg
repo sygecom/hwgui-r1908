@@ -21,12 +21,12 @@ FUNCTION LButtonDbl( xPos, yPos )
 Local i, aItem
 
    FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
-      aItem := aPaintRep[FORM_ITEMS,i]
+      aItem := aPaintRep[FORM_ITEMS, i]
       IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
            .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH] ;
            .AND. yPos > TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] ;
            .AND. yPos < TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
-         aPaintRep[FORM_ITEMS,i,ITEM_STATE] := STATE_SELECTED
+         aPaintRep[FORM_ITEMS, i, ITEM_STATE] := STATE_SELECTED
          IF aItem[ITEM_TYPE] == TYPE_TEXT
             StaticDlg( aItem )
          ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE .OR. aItem[ITEM_TYPE] == TYPE_VLINE .OR. aItem[ITEM_TYPE] == TYPE_BOX
@@ -50,8 +50,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {|| InitStatic(aItem) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndStatic(aItem)}  ;
-        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
+        ON 0, IDOK         ACTION {|| EndStatic(aItem)}  ;
+        ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
    REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
    aModDlg:Activate()
 
@@ -60,8 +60,8 @@ RETURN NIL
 STATIC FUNCTION InitStatic(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oFont := aItem[ITEM_FONT]
-   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON3, ;
-     IIf(aItem[ITEM_ALIGN] == 0,IDC_RADIOBUTTON1,IIf(aItem[ITEM_ALIGN] == 1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON3)) )
+   hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON3, ;
+     IIf(aItem[ITEM_ALIGN] == 0, IDC_RADIOBUTTON1, IIf(aItem[ITEM_ALIGN] == 1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON3)) )
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
    IF aItem[ITEM_SCRIPT] != NIL
       hwg_SetDlgItemText( hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT] )
@@ -98,7 +98,7 @@ Local oPen := aItem[ITEM_PEN]
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {|| InitLine(aItem) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndLine(aItem)}
+        ON 0, IDOK         ACTION {|| EndLine(aItem)}
    REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
    aModDlg:Activate()
 
@@ -120,7 +120,7 @@ Local hDlg := hwg_GetModalHandle()
 Local nWidth := Val( hwg_GetEditText( hDlg, IDC_EDIT1 ) )
 Local cType := hwg_GetDlgItemText( hDlg, IDC_COMBOBOX1, 12 ), i
 Local oPen := aItem[ITEM_PEN]
-   i := Ascan( s_aPenStyles,cType )
+   i := Ascan( s_aPenStyles, cType )
    IF oPen:style != i-1 .OR. oPen:width != nWidth
       oPen:Release()
       aItem[ITEM_PEN] := HPen():Add(i - 1, nWidth, 0)
@@ -134,15 +134,15 @@ Local aModDlg, res := .T.
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndBitmap(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| res := .F.,EndDialog( hwg_GetModalHandle() )} ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||OpenBmp(aItem,hwg_SelectFile("Bitmap files( *.bmp )", "*.bmp",mypath))} ;
-        ON EN_CHANGE,IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
+        ON 0, IDOK         ACTION {|| EndBitmap(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {|| res := .F., EndDialog( hwg_GetModalHandle() )} ;
+        ON BN_CLICKED, IDC_BUTTONBRW ACTION {||OpenBmp(aItem, hwg_SelectFile("Bitmap files( *.bmp )", "*.bmp", mypath))} ;
+        ON EN_CHANGE, IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
    aModDlg:Activate()
 
 RETURN res
 
-STATIC FUNCTION OpenBmp( aItem,fname )
+STATIC FUNCTION OpenBmp( aItem, fname )
 Local hDlg := hwg_GetModalHandle()
    Local aBmpSize
    hwg_SetDlgItemText( hDlg, IDC_EDIT1, fname )
@@ -162,7 +162,7 @@ RETURN NIL
 
 STATIC FUNCTION UpdateProcent( aItem )
 Local hDlg := hwg_GetModalHandle()
-Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
+Local nValue := Val( hwg_GetEditText( hDlg, IDC_EDIT3 ) )
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
@@ -173,7 +173,7 @@ RETURN NIL
 STATIC FUNCTION InitBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
-   hUp := hwg_CreateUpDownControl( hDlg, 120,UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0,hwg_GetDlgItem(hDlg,IDC_EDIT3), 500, 1, 100 )
+   hUp := hwg_CreateUpDownControl( hDlg, 120, UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0, hwg_GetDlgItem(hDlg, IDC_EDIT3), 500, 1, 100 )
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       hwg_SetDlgItemText( hDlg, IDC_EDIT1, aItem[ITEM_CAPTION] )
@@ -185,7 +185,7 @@ RETURN .T.
 
 STATIC FUNCTION EndBitmap( aItem )
 Local hDlg := hwg_GetModalHandle()
-Local nValue := Val( hwg_GetEditText( hDlg,IDC_EDIT3 ) )
+Local nValue := Val( hwg_GetEditText( hDlg, IDC_EDIT3 ) )
 Local aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
 
    aItem[ITEM_WIDTH] := Round(aBmpSize[1]*nValue/100, 0)
@@ -199,8 +199,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndMarkL(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
+        ON 0, IDOK         ACTION {|| EndMarkL(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 RETURN NIL
@@ -225,16 +225,16 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndMarkF(aItem)}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
+        ON 0, IDOK         ACTION {|| EndMarkF(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 RETURN NIL
 
 STATIC FUNCTION InitMarkF(aItem)
 Local hDlg := hwg_GetModalHandle()
-   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2, ;
-      IIf(aItem[ITEM_ALIGN] == 0,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2 ) )
+   hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, ;
+      IIf(aItem[ITEM_ALIGN] == 0, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2 ) )
 RETURN .T.
 
 STATIC FUNCTION EndMarkF(aItem)
@@ -249,8 +249,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt() }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndFOpt()}  ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
+        ON 0, IDOK         ACTION {|| EndFOpt()}  ;
+        ON 0, IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() )}
    aModDlg:Activate()
 
 RETURN NIL

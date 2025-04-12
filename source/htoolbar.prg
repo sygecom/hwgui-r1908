@@ -474,7 +474,7 @@ METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nI
       bstate := IIf(!(::lVertical .AND. Len(::aButtons) == 0), bState, 8) //TBSTATE_HIDE
       DEFAULT nBitIp TO 0
       DEFAULT cName TO "oSeparator" + LTrim(Str(Len(::aSeparators) + 1))
-      AAdd(::aSeparators,{cName, nid})
+      AAdd(::aSeparators, {cName, nid})
       //bStyle := TBSTYLE_SEP //TBSTYLE_FLAT
    ENDIF
 

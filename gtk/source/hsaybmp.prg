@@ -19,8 +19,8 @@ CLASS HSayBmp INHERIT HSayImage
    DATA nOffsetH  INIT 0
    DATA nZoom
 
-   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
-                  bSize,ctoolt )
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+                  bSize, ctoolt )
    METHOD INIT
    METHOD onEvent( msg, wParam, lParam )
    METHOD Paint()
@@ -28,10 +28,10 @@ CLASS HSayBmp INHERIT HSayImage
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
-                  bSize,ctoolt ) CLASS HSayBmp
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+                  bSize, ctoolt ) CLASS HSayBmp
 
-   ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,bInit,bSize,ctoolt )
+   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctoolt )
 
    IF Image != NIL
       IF lRes == NIL ; lRes := .F. ; ENDIF
@@ -55,7 +55,7 @@ RETURN Self
 METHOD INIT CLASS HSayBmp
    IF !::lInit
       ::Super:Init()
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
    ENDIF
 RETURN NIL
 

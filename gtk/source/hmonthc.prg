@@ -49,8 +49,8 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 //   nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
 //   nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
 //   nStyle   += IIf(lWeekNumbers == NIL .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  ,,ctooltip )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  ,, ctooltip )
 
    ::value   := IIf(HB_IsDate(vari) .AND. !Empty(vari), vari, Date())
 
@@ -71,9 +71,9 @@ METHOD Activate CLASS HMonthCalendar
    If !Empty(::oParent:handle)
       ::handle := hwg_InitMonthCalendar( ::oParent:handle, , ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight )
-      hwg_SetWindowObject( ::handle,Self )		  
-//      MonthCalendarChange(::handle,{||
-        hwg_MONTHCALENDAR_SETACTION(::handle,{||::value:=hwg_GetMonthCalendarDate(::handle)})
+      hwg_SetWindowObject( ::handle, Self )
+//      MonthCalendarChange(::handle, {||
+        hwg_MONTHCALENDAR_SETACTION(::handle, {||::value:=hwg_GetMonthCalendarDate(::handle)})
       ::Init()
    EndIf
 

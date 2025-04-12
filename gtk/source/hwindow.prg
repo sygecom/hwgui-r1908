@@ -22,7 +22,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
    // writelog( "OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)) )
 
-   oWnd:Super:onEvent( WM_SIZE,wParam,lParam )
+   oWnd:Super:onEvent( WM_SIZE, wParam, lParam )
 
    oWnd:nWidth  := hwg_LOWORD(lParam)
    oWnd:nHeight := hwg_HIWORD(lParam)
@@ -57,8 +57,8 @@ CLASS HWindow INHERIT HCustomWindow
 
    DATA aOffset
 
-   METHOD New( Icon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-          bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,cAppName,oBmp,cHelp,nHelpId )
+   METHOD New( Icon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+          bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId )
    METHOD AddItem( oWnd )
    METHOD DelItem( oWnd )
    METHOD FindWindow( hWnd )
@@ -69,9 +69,9 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD Close() INLINE hwg_DestroyWindow( ::handle )
 ENDCLASS
 
-METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-                  bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
-                  cAppName,oBmp,cHelp,nHelpId ) CLASS HWindow
+METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  cAppName, oBmp, cHelp, nHelpId ) CLASS HWindow
 
    ::oDefaultParent := Self
    ::title    := cTitle
@@ -138,16 +138,16 @@ RETURN IIf(Len(::aWindows) > 0,            ;
 CLASS HMainWindow INHERIT HWindow
 
    CLASS VAR aMessages INIT { ;
-      { WM_COMMAND,WM_ERASEBKGND,WM_MOVE,WM_SIZE,WM_SYSCOMMAND, ;
-        WM_NOTIFYICON,WM_ENTERIDLE,WM_CLOSE,WM_DESTROY }, ;
+      { WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_SYSCOMMAND, ;
+        WM_NOTIFYICON, WM_ENTERIDLE, WM_CLOSE, WM_DESTROY }, ;
       { ;
-         {|o,w,l|onCommand(o,w,l)},        ;
-         {|o,w|onEraseBk(o,w)},            ;
-         {|o,w,l|onMove(o,w,l)},           ;
-         {|o,w,l|onSize(o,w,l)},           ;
-         {|o,w|onSysCommand(o,w)},         ;
-         {|o,w,l|onNotifyIcon(o,w,l)},     ;
-         {|o,w,l|onEnterIdle(o,w,l)},      ;
+         {|o, w, l|onCommand(o, w, l)},        ;
+         {|o, w|onEraseBk(o, w)},            ;
+         {|o, w, l|onMove(o, w, l)},           ;
+         {|o, w, l|onSize(o, w, l)},           ;
+         {|o, w|onSysCommand(o, w)},         ;
+         {|o, w, l|onNotifyIcon(o, w, l)},     ;
+         {|o, w, l|onEnterIdle(o, w, l)},      ;
          {|o|hwg_ReleaseAllWindows(o:handle)}, ;
          {|o|onDestroy(o)}                 ;
       } ;
@@ -157,36 +157,36 @@ CLASS HMainWindow INHERIT HWindow
    DATA lTray       INIT .F.
    DATA lActivated  INIT .F.
 
-   METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
-                     oFont,bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;
-                     cAppName,oBmp,cHelp,nHelpId )
+   METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
+                     oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
+                     cAppName, oBmp, cHelp, nHelpId )
    METHOD Activate(lShow)
    METHOD onEvent( msg, wParam, lParam )
    // METHOD GetMdiActive() INLINE ::FindWindow( hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) )
 
 ENDCLASS
 
-METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
-                     oFont,bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;
-                     cAppName,oBmp,cHelp,nHelpId ) CLASS HMainWindow
+METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
+                     oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
+                     cAppName, oBmp, cHelp, nHelpId ) CLASS HMainWindow
 
-   ::Super:New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-                  bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,  ;
-                  cAppName,oBmp,cHelp,nHelpId )
+   ::Super:New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,  ;
+                  cAppName, oBmp, cHelp, nHelpId )
    ::type := lType
 
    IF lType == WND_MDI
 /*
       ::nMenuPos := nPos
-      ::handle := hwg_InitMdiWindow( Self, ::szAppName,cTitle,cMenu,  ;
-                    IIf(oIcon != NIL, oIcon:handle, NIL),clr, ;
-                    nStyle,::nLeft,::nTop,::nWidth,::nHeight )
+      ::handle := hwg_InitMdiWindow( Self, ::szAppName, cTitle, cMenu,  ;
+                    IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
+                    nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight )
 */
    ELSEIF lType == WND_MAIN
 
-      ::handle := hwg_InitMainWindow( Self, ::szAppName,cTitle,cMenu, ;
-              IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),::Style,::nLeft, ;
-              ::nTop,::nWidth,::nHeight )
+      ::handle := hwg_InitMainWindow( Self, ::szAppName, cTitle, cMenu, ;
+              IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), ::Style, ::nLeft, ;
+              ::nTop, ::nWidth, ::nHeight )
     
    ENDIF
    IF ::bInit != NIL
@@ -202,16 +202,16 @@ Local oWndClient, handle
 
    IF ::type == WND_MDI
 /*
-      oWndClient := HWindow():New( ,,,::style,::title,,::bInit,::bDestroy,::bSize, ;
-                              ::bPaint,::bGetFocus,::bLostFocus,::bOther )
-      handle := hwg_InitClientWindow( oWndClient,::nMenuPos,::nLeft,::nTop+60,::nWidth,::nHeight )
+      oWndClient := HWindow():New( ,,, ::style, ::title,, ::bInit, ::bDestroy, ::bSize, ;
+                              ::bPaint, ::bGetFocus, ::bLostFocus, ::bOther )
+      handle := hwg_InitClientWindow( oWndClient, ::nMenuPos, ::nLeft, ::nTop+60, ::nWidth, ::nHeight )
       oWndClient:handle = handle
-      hwg_ActivateMdiWindow( ( lShow == NIL .OR. lShow ),::hAccel,::lMaximize )
+      hwg_ActivateMdiWindow( ( lShow == NIL .OR. lShow ), ::hAccel, ::lMaximize )
 */
    ELSEIF ::type == WND_MAIN
 
       ::lActivated := .T.
-      hwg_ActivateMainWindow( ::handle,::hAccel, lMaximize, lMinimize )
+      hwg_ActivateMainWindow( ::handle, ::hAccel, lMaximize, lMinimize )
 
    ENDIF
 
@@ -225,7 +225,7 @@ Local i
       RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         // hwg_OnTrackScroll( Self,wParam,lParam )
+         // hwg_OnTrackScroll( Self, wParam, lParam )
       ENDIF
       RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -236,15 +236,15 @@ RETURN 0
 CLASS HMDIChildWindow INHERIT HWindow
 
    CLASS VAR aMessages INIT { ;
-      { WM_CREATE,WM_COMMAND,WM_MOVE,WM_SIZE,WM_NCACTIVATE, ;
-        WM_SYSCOMMAND,WM_DESTROY }, ;
+      { WM_CREATE, WM_COMMAND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
+        WM_SYSCOMMAND, WM_DESTROY }, ;
       { ;
-         {|o,w,l|onMdiCreate(o,l)},        ;
-         {|o,w|onMdiCommand(o,w)},         ;
-         {|o,w,l|onMove(o,w,l)},           ;
-         {|o,w,l|onSize(o,w,l)},           ;
-         {|o,w|onMdiNcActivate(o,w)},      ;
-         {|o,w|onSysCommand(o,w)},         ;
+         {|o, w, l|onMdiCreate(o, l)},        ;
+         {|o, w|onMdiCommand(o, w)},         ;
+         {|o, w, l|onMove(o, w, l)},           ;
+         {|o, w, l|onSize(o, w, l)},           ;
+         {|o, w|onMdiNcActivate(o, w)},      ;
+         {|o, w|onSysCommand(o, w)},         ;
          {|o|onDestroy(o)}                 ;
       } ;
    }
@@ -271,10 +271,10 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HMDIChildWindow
 Local i
 
    IF ( i := AScan(::aMessages[1], msg) ) != 0
-      RETURN Eval(::aMessages[2,i], Self, wParam, lParam)
+      RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         hwg_OnTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self, wParam, lParam )
       ENDIF
       RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -284,26 +284,26 @@ RETURN -1
 
 CLASS HChildWindow INHERIT HWindow
 
-   METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-                     bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
-                     cAppName,oBmp,cHelp,nHelpId )
+   METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                     bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                     cAppName, oBmp, cHelp, nHelpId )
    METHOD Activate(lShow)
    METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
-METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-                  bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
-                  cAppName,oBmp,cHelp,nHelpId ) CLASS HChildWindow
+METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  cAppName, oBmp, cHelp, nHelpId ) CLASS HChildWindow
 
-   ::Super:New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
-                  bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,  ;
-                  cAppName,oBmp,cHelp,nHelpId )
+   ::Super:New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,  ;
+                  cAppName, oBmp, cHelp, nHelpId )
    ::oParent := HWindow():GetMain()
    IF HB_IsObject( ::oParent )
-       ::handle := hwg_InitChildWindow( Self, ::szAppName,cTitle,cMenu, ;
-          IIf(oIcon != NIL, oIcon:handle, NIL),IIf(oBmp != NIL, -1, clr),nStyle,::nLeft, ;
-          ::nTop,::nWidth,::nHeight,::oParent:handle )
+       ::handle := hwg_InitChildWindow( Self, ::szAppName, cTitle, cMenu, ;
+          IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
+          ::nTop, ::nWidth, ::nHeight, ::oParent:handle )
    ELSE
        hwg_MsgStop("Create Main window first !", "HChildWindow():New()" )
        RETURN NIL
@@ -317,7 +317,7 @@ RETURN Self
 METHOD Activate(lShow) CLASS HChildWindow
 
    hwg_CreateGetList( Self )
-   hwg_ActivateChildWindow((lShow == NIL .OR. lShow),::handle )
+   hwg_ActivateChildWindow((lShow == NIL .OR. lShow), ::handle )
 
 RETURN NIL
 
@@ -328,7 +328,7 @@ Local i
       RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)
    ELSE
       IF msg == WM_HSCROLL .OR. msg == WM_VSCROLL
-         hwg_OnTrackScroll( Self,wParam,lParam )
+         hwg_OnTrackScroll( Self, wParam, lParam )
       ENDIF
       RETURN ::Super:onEvent( msg, wParam, lParam )
    ENDIF
@@ -392,16 +392,16 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
         ( iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow}) ) > 0
         Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
    ELSEIF HB_IsArray( oWnd:menu ) .AND. ;
-        ( aMenu := hwg_FindMenuItem( oWnd:menu,iParLow,@iCont ) ) != NIL ;
-        .AND. aMenu[1,iCont, 1] != NIL
+        ( aMenu := hwg_FindMenuItem( oWnd:menu, iParLow, @iCont ) ) != NIL ;
+        .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1])
    ELSEIF oWnd:oPopup != NIL .AND. ;
-        ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu,wParam,@iCont ) ) != NIL ;
-        .AND. aMenu[1,iCont, 1] != NIL
+        ( aMenu := hwg_FindMenuItem( oWnd:oPopup:aMenu, wParam, @iCont ) ) != NIL ;
+        .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1])
    ELSEIF oWnd:oNotifyMenu != NIL .AND. ;
-        ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu,wParam,@iCont ) ) != NIL ;
-        .AND. aMenu[1,iCont, 1] != NIL
+        ( aMenu := hwg_FindMenuItem( oWnd:oNotifyMenu:aMenu, wParam, @iCont ) ) != NIL ;
+        .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1])
    ENDIF
 
@@ -415,10 +415,10 @@ STATIC FUNCTION onMove(oWnd, wParam, lParam)
 
 RETURN 0
 
-STATIC FUNCTION onEraseBk( oWnd,wParam )
+STATIC FUNCTION onEraseBk( oWnd, wParam )
 /*
    IF oWnd:oBmp != NIL
-       hwg_SpreadBitmap( wParam,oWnd:handle,oWnd:oBmp:handle )
+       hwg_SpreadBitmap( wParam, oWnd:handle, oWnd:oBmp:handle )
        RETURN 1
    ENDIF
 */   
@@ -450,7 +450,7 @@ Local i
 */
 RETURN 0
 
-STATIC FUNCTION onNotifyIcon( oWnd,wParam,lParam )
+STATIC FUNCTION onNotifyIcon( oWnd, wParam, lParam )
 Local ar
 /*
    IF wParam == ID_NOTIFYICON
@@ -461,7 +461,7 @@ Local ar
        ELSEIF lParam == WM_RBUTTONDOWN
           IF oWnd:oNotifyMenu != NIL
              ar := hwg_GetCursorPos()
-             oWnd:oNotifyMenu:Show( oWnd,ar[1],ar[2] )
+             oWnd:oNotifyMenu:Show( oWnd, ar[1], ar[2] )
           ENDIF
        ENDIF
    ENDIF

@@ -69,7 +69,7 @@ FUNCTION hwg_SetMenu(oWnd, aMenu)
    RETURN .T.
 
 /*
- *  AddMenuItem(aMenu, cItem, nMenuId, lSubMenu, [bItem] [,nPos]) --> aMenuItem
+ *  AddMenuItem(aMenu, cItem, nMenuId, lSubMenu, [bItem] [, nPos]) --> aMenuItem
  *
  *  If nPos is omitted, the function adds menu item to the end of menu,
  *  else it inserts menu item in nPos position.

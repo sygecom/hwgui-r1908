@@ -111,7 +111,7 @@ FUNCTION hwg_ErrorMessage(oError)
 
    RETURN cMessage
 
-FUNCTION WriteLog( cText,fname )
+FUNCTION WriteLog( cText, fname )
 Local nHand
 
   fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)

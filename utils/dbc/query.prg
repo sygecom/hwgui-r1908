@@ -36,9 +36,9 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_QUERY" ON INIT {|| InitQuery() }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDCANCEL     ACTION {|| EndQuery(.F.) }  ;
-        ON BN_CLICKED,IDC_BTNEXEC ACTION {|| EndQuery(.T.) } ;
-        ON BN_CLICKED,IDC_BTNSAVE ACTION {|| QuerySave() }
+        ON 0, IDCANCEL     ACTION {|| EndQuery(.F.) }  ;
+        ON BN_CLICKED, IDC_BTNEXEC ACTION {|| EndQuery(.T.) } ;
+        ON BN_CLICKED, IDC_BTNSAVE ACTION {|| QuerySave() }
    aModDlg:Activate()
 
 RETURN NIL
@@ -82,7 +82,7 @@ STATIC lConnected := .F.
       ELSE
          SELECT 0
       ENDIF
-      IF !AdsCreateSqlStatement( ,IIf(numdriv == 1, 2, 3) )
+      IF !AdsCreateSqlStatement( , IIf(numdriv == 1, 2, 3) )
          hwg_MsgStop( "Cannot create SQL statement" )
          IF !Empty(oldArea)
             Select( oldArea )
@@ -129,6 +129,6 @@ FUNCTION QuerySave
 Local fname := hwg_SaveFile("*.que", "Query files( *.que )", "*.que", mypath)
    cQuery := hwg_GetDlgItemText( hwg_GetModalHandle(), IDC_EDITQUERY, 400 )
    IF !Empty(fname)
-      MemoWrit( fname,cQuery )
+      MemoWrit( fname, cQuery )
    ENDIF
 RETURN NIL

@@ -14,13 +14,13 @@
 REQUEST HWG_ENDWINDOW
 
 STATIC aMessModalDlg := { ;
-         { WM_COMMAND,{|o,w,l|hwg_DlgCommand(o,w,l)} },         ;
-         { WM_SIZE,{|o,w,l|onSize(o,w,l)} },                ;
-         { WM_INITDIALOG,{|o,w,l|InitModalDlg(o,w,l)} },    ;
-         { WM_ERASEBKGND,{|o,w|onEraseBk(o,w)} },           ;
-         { WM_DESTROY,{|o|onDestroy(o)} },                  ;
-         { WM_ENTERIDLE,{|o,w,l|onEnterIdle(o,w,l)} },      ;
-         { WM_ACTIVATE,{|o,w,l|onActivate(o,w,l)} }         ;
+         { WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)} },         ;
+         { WM_SIZE, {|o, w, l|onSize(o, w, l)} },                ;
+         { WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)} },    ;
+         { WM_ERASEBKGND, {|o, w|onEraseBk(o, w)} },           ;
+         { WM_DESTROY, {|o|onDestroy(o)} },                  ;
+         { WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)} },      ;
+         { WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)} }         ;
       }
 
 STATIC FUNCTION onDestroy( oDlg )
@@ -66,12 +66,12 @@ CLASS HDialog INHERIT HCustomWindow
    DATA nScrollBars INIT - 1
    
 
-   METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
-                  bPaint,bGfocus,bLfocus,bOther,lClipper,oBmp,oIcon,lExitOnEnter,nHelpId,xResourceID, lExitOnEsc )
+   METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
+                  bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc )
    METHOD Activate(lNoModal)
    METHOD onEvent( msg, wParam, lParam )
-   METHOD AddItem( oWnd,lModal )
-   METHOD DelItem( oWnd,lModal )
+   METHOD AddItem( oWnd, lModal )
+   METHOD DelItem( oWnd, lModal )
    METHOD FindDialog( hWnd )
    METHOD GetActive()
    METHOD Center() INLINE hwg_CenterWindow( Self )
@@ -81,8 +81,8 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD Close() INLINE EndDialog( ::handle )
 ENDCLASS
 
-METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
-                  bPaint,bGfocus,bLfocus,bOther,lClipper,oBmp,oIcon,lExitOnEnter,nHelpId, xResourceID, lExitOnEsc ) CLASS HDialog
+METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
+                  bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc ) CLASS HDialog
 
    ::oDefaultParent := Self
    ::xResourceID := xResourceID
@@ -116,14 +116,14 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
 RETURN Self
 
 METHOD Activate(lNoModal) CLASS HDialog
-Local hParent,oWnd
+Local hParent, oWnd
 
    hwg_CreateGetList( Self )
 
    IF lNoModal == NIL ; lNoModal:=.F. ; ENDIF
    ::lModal := !lNoModal
    ::lResult := .F.
-   ::AddItem( Self,!lNoModal )
+   ::AddItem( Self, !lNoModal )
    IF !lNoModal
       hParent := IIf(::oParent != NIL .AND. ;
              __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
@@ -135,7 +135,7 @@ Local hParent,oWnd
    hwg_ShowAll( ::handle )
    InitModalDlg( Self )
    ::lActivated := .T.
-   hwg_ActivateDialog( ::handle,lNoModal  )
+   hwg_ActivateDialog( ::handle, lNoModal  )
 
 RETURN NIL
 
@@ -151,11 +151,11 @@ Local i
 
 RETURN 0
 
-METHOD AddItem( oWnd,lModal ) CLASS HDialog
+METHOD AddItem( oWnd, lModal ) CLASS HDialog
    AAdd(IIf(lModal, ::aModalDialogs, ::aDialogs), oWnd)
 RETURN NIL
 
-METHOD DelItem( oWnd,lModal ) CLASS HDialog
+METHOD DelItem( oWnd, lModal ) CLASS HDialog
 Local i
    IF lModal
       IF ( i := AScan(::aModalDialogs, {|o|o == oWnd}) ) > 0
@@ -198,7 +198,7 @@ Local iCont
    ENDIF
    */
    IF oDlg:Title != NIL
-      hwg_SetWindowText(oDlg:Handle,oDlg:Title)
+      hwg_SetWindowText(oDlg:Handle, oDlg:Title)
    ENDIF
    /*
    IF oDlg:oFont != NIL
@@ -223,7 +223,7 @@ Local oItem
    ENDIF
 RETURN 0
 
-STATIC FUNCTION onEraseBk( oDlg,hDC )
+STATIC FUNCTION onEraseBk( oDlg, hDC )
 Local aCoors
 /*
    IF __ObjHasMsg( oDlg, "OBMP") 
@@ -234,10 +234,10 @@ Local aCoors
         aCoors := hwg_GetClientRect( oDlg:handle )
         IF oDlg:brush != NIL
            IF !HB_IsNumeric(oDlg:brush)
-              hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,oDlg:brush:handle )
+              hwg_FillRect( hDC, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, oDlg:brush:handle )
            ENDIF
         ELSE
-           hwg_FillRect( hDC, aCoors[1],aCoors[2],aCoors[3]+1,aCoors[4]+1,COLOR_3DFACE+1 )
+           hwg_FillRect( hDC, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, COLOR_3DFACE+1 )
         ENDIF
         RETURN 1
       ENDIF
@@ -269,7 +269,7 @@ Local aMenu, i, hCtrl
             ENDIF
          ENDIF
          IF oDlg:lClipper
-            IF !hwg_GetSkip( oDlg,hCtrl, 1 )
+            IF !hwg_GetSkip( oDlg, hCtrl, 1 )
                IF oDlg:lExitOnEnter
                   oDlg:lResult := .T.
                   EndDialog( oDlg:handle )
@@ -296,12 +296,12 @@ Local aMenu, i, hCtrl
          EndDialog( oDlg:handle )
       ENDIF
    ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. HB_IsArray( oDlg:menu ) .AND. ;
-        ( aMenu := hwg_FindMenuItem( oDlg:menu,iParLow,@i ) ) != NIL ;
-        .AND. aMenu[1,i, 1] != NIL
+        ( aMenu := hwg_FindMenuItem( oDlg:menu, iParLow, @i ) ) != NIL ;
+        .AND. aMenu[1, i, 1] != NIL
       Eval(aMenu[1, i, 1])
    ELSEIF __ObjHasMsg(oDlg, "OPOPUP") .AND. oDlg:oPopup != NIL .AND. ;
-         ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu,wParam,@i ) ) != NIL ;
-         .AND. aMenu[1,i, 1] != NIL
+         ( aMenu := hwg_FindMenuItem( oDlg:oPopup:aMenu, wParam, @i ) ) != NIL ;
+         .AND. aMenu[1, i, 1] != NIL
          Eval(aMenu[1, i, 1])
    ENDIF
 

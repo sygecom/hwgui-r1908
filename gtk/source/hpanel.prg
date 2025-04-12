@@ -15,8 +15,8 @@ CLASS HPanel INHERIT HControl
 
    DATA winclass   INIT "PANEL"
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  bInit,bSize,bPaint,lDocked )
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, lDocked )
    METHOD Activate()
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init()
@@ -26,14 +26,14 @@ CLASS HPanel INHERIT HControl
 ENDCLASS
 
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  bInit,bSize,bPaint,lDocked ) CLASS HPanel
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, lDocked ) CLASS HPanel
 Local oParent:=IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    nStyle := SS_OWNERDRAW
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,IIf(nWidth == NIL, 0, nWidth), ;
-                  nHeight,oParent:oFont,bInit, ;
-                  bSize,bPaint )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
+                  nHeight, oParent:oFont, bInit, ;
+                  bSize, bPaint )
 
    ::bPaint  := bPaint
 
@@ -72,7 +72,7 @@ METHOD Init CLASS HPanel
       ENDIF
 
       ::Super:Init()
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
    ENDIF
 
 RETURN NIL
@@ -84,7 +84,7 @@ Local hDC, aCoors, oPenLight, oPenGray
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
-      hwg_DrawButton( hDC, 0, 0,::nWidth-1,::nHeight-1, 5 )
+      hwg_DrawButton( hDC, 0, 0, ::nWidth-1, ::nHeight-1, 5 )
       hwg_releaseDC(::handle, hDC)
    ENDIF
 

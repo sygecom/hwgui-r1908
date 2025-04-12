@@ -21,8 +21,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove(nMove) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndMove(.T., nMove)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndMove(.F., nMove) }
+        ON 0, IDOK         ACTION {|| EndMove(.T., nMove)}   ;
+        ON 0, IDCANCEL     ACTION {|| EndMove(.F., nMove) }
    aModDlg:Activate()
 
 RETURN NIL
@@ -105,7 +105,7 @@ Local nrec, i, res, block
       nrec := RECNO()
       block := &( "{||" + cLocate + "}" )
       IF oBrw:prflt
-         FOR i := 1 TO Min( oBrw:nRecords,klrecf-1 )
+         FOR i := 1 TO Min( oBrw:nRecords, klrecf-1 )
             GO oBrw:aArray[i]
             IF Eval(block)
                res := .T.
@@ -173,7 +173,7 @@ Local i, nrec
          oBrw:bGoBot:= &( "{|o|" + oBrw:alias + "->(FGOBOT(o))}")
          oBrw:bEof  := &( "{|o|" + oBrw:alias + "->(FEOF(o))}" )
          oBrw:bBof  := &( "{|o|" + oBrw:alias + "->(FBOF(o))}" )
-         hwg_WriteStatus( HMainWindow():GetMdiActive(), 1,Ltrim(Str(oBrw:nRecords, 10))+" records filtered" )
+         hwg_WriteStatus( HMainWindow():GetMdiActive(), 1, Ltrim(Str(oBrw:nRecords, 10))+" records filtered" )
       ELSE
          oBrw:prflt := .F.
          SET FILTER TO
@@ -184,7 +184,7 @@ Local i, nrec
          oBrw:bEof  := &( "{||" + oBrw:alias + "->(EOF())}" )
          oBrw:bBof  := &( "{||" + oBrw:alias + "->(BOF())}" )
          hwg_MsgInfo( "Records not found" )
-         hwg_WriteStatus( HMainWindow():GetMdiActive(), 1,Ltrim(Str(Reccount(), 10))+" records" )
+         hwg_WriteStatus( HMainWindow():GetMdiActive(), 1, Ltrim(Str(Reccount(), 10))+" records" )
       ENDIF
    ELSE
       hwg_MsgInfo( "Wrong expression" )

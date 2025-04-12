@@ -315,11 +315,11 @@ FUNCTION Texto()
                     elseif g = Len(linha)
                        AAdd(oFunc, fun)
                        AAdd(funcoes, rd_lin)
-                       AAdd(oLinha,{rd_lin, r_linha})
+                       AAdd(oLinha, {rd_lin, r_linha})
                        exit
                     else
                        AAdd(oFunc, fun)
-                       AAdd(oLinha,{rd_lin, r_linha})
+                       AAdd(oLinha, {rd_lin, r_linha})
                        AAdd(funcoes, rd_lin)
                        exit
                     endif
@@ -494,7 +494,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
              //hwg_MsgInfo(Str(Len(texto)))
              if sintaxe(texto)
 
-                hwg_RE_SetCharFormat(aControls[hWnd]:Handle,{{,,,,,,},{(pos1-Len(texto)), Len(texto), 255,,, .T.}})
+                hwg_RE_SetCharFormat(aControls[hWnd]:Handle, {{,,,,,,}, {(pos1-Len(texto)), Len(texto), 255,,, .T.}})
              else
                 hwg_RE_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
              endif

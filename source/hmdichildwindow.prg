@@ -673,7 +673,7 @@ STATIC FUNCTION onMdiActivate(oWnd, wParam, lParam)
          aWndMain := oWnd:GETMAIN():aWindows
          AEval(aWndMain, {|w|IIf(w:Type >= WND_MDICHILD .AND. hwg_PtrToUlong(w:handle) != hwg_PtrToUlong(lParam), ;
             hwg_EnableWindow(w:handle, .F.),)})
-         AEval(oWnd:aChilds,{|wH|hwg_EnableWindow(wH, .T.)})
+         AEval(oWnd:aChilds, {|wH|hwg_EnableWindow(wH, .T.)})
      ENDIF
       IF oWnd:bGetFocus != NIL .AND. !oWnd:lSuspendMsgsHandling .AND. !oWnd:IsMaximized()
          oWnd:lSuspendMsgsHandling := .T.

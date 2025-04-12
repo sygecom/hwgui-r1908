@@ -18,13 +18,13 @@ CLASS HRadioGroup INHERIT HObject
    DATA value  INIT 1
    DATA bSetGet
 
-   METHOD New( vari,bSetGet )
+   METHOD New( vari, bSetGet )
    METHOD EndGroup( nSelected )
    METHOD SetValue(nValue)
    METHOD Refresh() INLINE IIf(::bSetGet != NIL, ::SetValue(Eval(::bSetGet)), .T.)
 ENDCLASS
 
-METHOD New( vari,bSetGet ) CLASS HRadioGroup
+METHOD New( vari, bSetGet ) CLASS HRadioGroup
    ::oGroupCurrent := Self
    ::aButtons := {}
 
@@ -65,15 +65,15 @@ CLASS HRadioButton INHERIT HControl
    CLASS VAR winclass   INIT "BUTTON"
    DATA  oGroup
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
-                  bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor )
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor )
    METHOD Activate()
    METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
-                  bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor ) CLASS HRadioButton
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor ) CLASS HRadioButton
 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := IIf(nId == NIL, ::NewId(), nId)
@@ -106,12 +106,12 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
    ::oParent:AddControl( Self )
    ::bLostFocus := bClick
    IF bClick != NIL .AND. ( ::oGroup == NIL .OR. ::oGroup:bSetGet == NIL )
-      hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )
+      hwg_SetSignal( ::handle, "released", WM_LBUTTONUP, 0, 0 )
    ENDIF
    IF ::oGroup != NIL
       AAdd(::oGroup:aButtons, Self)
       IF ::oGroup:bSetGet != NIL
-         hwg_SetSignal( ::handle, "released",WM_LBUTTONUP, 0, 0 )
+         hwg_SetSignal( ::handle, "released", WM_LBUTTONUP, 0, 0 )
       ENDIF
    ENDIF
 
@@ -124,7 +124,7 @@ Local groupHandle := ::oGroup:handle
       ::handle := hwg_CreateButton( ::oParent:handle, @groupHandle, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title )
       ::oGroup:handle := groupHandle
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
       ::Init()
    ENDIF
 RETURN NIL

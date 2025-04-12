@@ -25,8 +25,8 @@ CLASS HGraph INHERIT HControl
    DATA oPen, oPenCoor
    DATA xmax, ymax, xmin, ymin PROTECTED
 
-   METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
-                  bSize,ctoolt,tcolor,bcolor )
+   METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+                  bSize, ctoolt, tcolor, bcolor )
    METHOD Activate()
    METHOD onEvent( msg, wParam, lParam )
    METHOD CalcMinMax()
@@ -35,12 +35,12 @@ CLASS HGraph INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
-                  bSize,ctoolt,tcolor,bcolor ) CLASS HGraph
+METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+                  bSize, ctoolt, tcolor, bcolor ) CLASS HGraph
 
-   ::Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,oFont,, ;
-                  bSize,{|o,lpdis|o:Paint(lpdis)},ctoolt, ;
-                  IIf(tcolor == NIL, hwg_VColor("FFFFFF"), tcolor),IIf(bcolor == NIL, 0, bcolor) )
+   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
+                  bSize, {|o, lpdis|o:Paint(lpdis)}, ctoolt, ;
+                  IIf(tcolor == NIL, hwg_VColor("FFFFFF"), tcolor), IIf(bcolor == NIL, 0, bcolor) )
 
    ::aValues := aValues
    ::nType   := 1
@@ -54,7 +54,7 @@ METHOD Activate CLASS HGraph
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
-      hwg_SetWindowObject( ::handle,Self )
+      hwg_SetWindowObject( ::handle, Self )
       ::Init()
    ENDIF
 RETURN NIL
@@ -75,20 +75,20 @@ Local i, j, nLen
       nLen := Len(::aValues[i])
       IF ::nType == 1
          FOR j := 1 TO nLen
-            ::xmax := Max( ::xmax,::aValues[i,j, 1] )
-            ::xmin := Min( ::xmin,::aValues[i,j, 1] )
-            ::ymax := Max( ::ymax,::aValues[i,j, 2] )
-            ::ymin := Min( ::ymin,::aValues[i,j, 2] )
+            ::xmax := Max( ::xmax, ::aValues[i, j, 1] )
+            ::xmin := Min( ::xmin, ::aValues[i, j, 1] )
+            ::ymax := Max( ::ymax, ::aValues[i, j, 2] )
+            ::ymin := Min( ::ymin, ::aValues[i, j, 2] )
          NEXT
       ELSEIF ::nType == 2
          FOR j := 1 TO nLen
-            ::ymax := Max( ::ymax,::aValues[i,j, 2]   )
-            ::ymin := Min( ::ymin,::aValues[i,j, 2]   )
+            ::ymax := Max( ::ymax, ::aValues[i, j, 2]   )
+            ::ymin := Min( ::ymin, ::aValues[i, j, 2]   )
          NEXT
          ::xmax := nLen
       ELSEIF ::nType == 3
          FOR j := 1 TO nLen
-            ::ymax += ::aValues[i,j, 2]
+            ::ymax += ::aValues[i, j, 2]
          NEXT
       ENDIF
    NEXT
@@ -140,10 +140,10 @@ Local px1, px2, py1, py2, nWidth
       nLen := Len(::aValues[i])
       IF ::nType == 1  
          FOR j := 2 TO nLen
-            px1 := Round(x1+(::aValues[i,j-1, 1]-::xmin)/::scaleX, 0)
-            py1 := Round(y2-(::aValues[i,j-1, 2]-::ymin)/::scaleY, 0)
-            px2 := Round(x1+(::aValues[i,j, 1]-::xmin)/::scaleX, 0)
-            py2 := Round(y2-(::aValues[i,j, 2]-::ymin)/::scaleY, 0)
+            px1 := Round(x1+(::aValues[i, j-1, 1]-::xmin)/::scaleX, 0)
+            py1 := Round(y2-(::aValues[i, j-1, 2]-::ymin)/::scaleY, 0)
+            px2 := Round(x1+(::aValues[i, j, 1]-::xmin)/::scaleX, 0)
+            py2 := Round(y2-(::aValues[i, j, 2]-::ymin)/::scaleY, 0)
             IF px2 != px1 .OR. py2 != py1
                hwg_Drawline(hDC, px1, py1, px2, py2)
             ENDIF   

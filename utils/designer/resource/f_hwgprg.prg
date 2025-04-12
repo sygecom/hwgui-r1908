@@ -294,7 +294,7 @@ FUNCTION Browse2Prg
       ENDIF
       // fim dos relacionamentos
    ELSE
-      caArray := Trim(IIf((temp := oCtrl:GetProp("aarray")) != NIL .AND. !Empty(temp),temp , "{}" ) )
+      caArray := Trim(IIf((temp := oCtrl:GetProp("aarray")) != NIL .AND. !Empty(temp), temp , "{}" ) )
       cBrowser += Space(4) + cname + ":aArray := " + caArray + "" + _chr( 10 )
       nColumns := IIf(nColumns = 0, 1, nColumns)
    ENDIF
@@ -304,7 +304,7 @@ FUNCTION Browse2Prg
       DO WHILE i <= nColumns
          IF nType = BRW_DATABASE
             cBrowser += Space(4) + cname + ":AddColumn( HColumn():New(FieldName(" + LTrim(Str(i)) + ") ,FieldBlock(FieldName(" + LTrim(Str(i)) + "))," + ;
-               "'" + aTypes[i, 2] + "'," + LTrim(Str(aTypes[i, 3] + 1)) + "," + LTrim(Str(aTypes[i, 4])) + "))" + _chr( 10 ) //,,,,,,,,,{|| .T.}))
+               "'" + aTypes[i, 2] + "'," + LTrim(Str(aTypes[i, 3] + 1)) + "," + LTrim(Str(aTypes[i, 4])) + "))" + _chr( 10 ) //,,,,,,,,, {|| .T.}))
          ELSE
             cBrowser += Space(4) + cname + ":AddColumn( HColumn():New( ,{|v,o|Iif(v!=NIL,o:aArray[o:nCurrent]:=v,o:aArray[o:nCurrent])},'C', 100,0))" + _CHR( 10 )
          ENDIF
@@ -339,7 +339,7 @@ FUNCTION Browse2Prg
             m->nDec := &cTmpAlias->(FIELDDEC(AScan(j, temp)))
             cCampo := "{|| " + cCampo + " }"
             //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
-            //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL,LTrim(Str(Val(temp))), "10")+", "+;
+            //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL, LTrim(Str(Val(temp))), "10")+", "+;
             //      LTrim(Str(aDecimals[i]))+" "
          ELSE
             cCampo := IIf(cCampo = NIL, ".T.", cCampo)
@@ -633,7 +633,7 @@ FUNCTION Ctrl2Prg
 
       // verificar se o combo tem check
       //IF oCtrl:cClass == "combobox"
-      // aName[i] := IIf(oCtrl:GetProp("check") != NIL,{"GET COMBOBOXEX", "GET COMBOBOXEX"}, {"COMBOBOX", "GET COMBOBOX"})
+      // aName[i] := IIf(oCtrl:GetProp("check") != NIL, {"GET COMBOBOXEX", "GET COMBOBOXEX"}, {"COMBOBOX", "GET COMBOBOX"})
       //ENDIF
 
       IF oCtrl:cClass != "radiogroup"      // NANDO
@@ -739,7 +739,7 @@ FUNCTION Ctrl2Prg
       IF oCtrl:cClass == "updown"
          stroka += "RANGE "
          temp := oCtrl:GetProp( "nLower" ) //) != NIL
-         stroka += LTrim(Str(IIf(temp = NIL, - 2147483647,Val(temp)), 11)) + ","
+         stroka += LTrim(Str(IIf(temp = NIL, - 2147483647, Val(temp)), 11)) + ","
          temp := oCtrl:GetProp( "nUpper" ) //) != NIL
          stroka += LTrim(Str(IIf(temp = NIL, 2147483647, Val(temp)), 11)) + " "
       ENDIF
@@ -998,7 +998,7 @@ FUNCTION Ctrl2Prg
                      IIf(Len(cName) == 1, cName[1], cName[2] ) + " }" , " ")
                   cname := oCtrl:GetProp( "Name" )
                   temp := oCtrl:GetProp( "value" ) //) != NIL
-                  //ON INIT {|| oTimer1 := HTimer():New( otESTE,, 5000,{|| OtIMER1:END(),hwg_MsgInfo('oi'),enddialog() } )}
+                  //ON INIT {|| oTimer1 := HTimer():New( otESTE,, 5000, {|| OtIMER1:END(), hwg_MsgInfo('oi'), enddialog() } )}
                   stroka := "ON INIT {|| " + cName + " := HTimer():New( " + cFormName + ",," + temp + "," + stroka + " )}"
                   FWrite(han, " ; //OBJECT TIMER " + _Chr(10) + Space(8) + stroka)
                ELSE

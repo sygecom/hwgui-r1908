@@ -67,7 +67,7 @@ FUNCTION _AppMain( p0, p1, p2 )
    PUBLIC horzCursor
    PUBLIC handCursor
 // :LFB
-REQUEST DBFCDX,DBFFPT
+REQUEST DBFCDX, DBFFPT
 RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 // :END LFB
 
@@ -120,7 +120,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 #ifdef INTEGRATED
    INIT DIALOG oDesigner:oMainWnd AT 0, 0 SIZE 400, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
       FONT oFont                          ;
-      ON INIT {|o|StartDes(o,p0,p1)}   ;
+      ON INIT {|o|StartDes(o, p0, p1)}   ;
       ON EXIT {||EndIde()}
 #else
 
@@ -139,14 +139,14 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
             MENUITEM "&New "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION HFormGen():New()
             MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():Open()
             SEPARATOR
-            MENUITEM "&Save "+IIf(!oDesigner:lReport, "Form", "Report")   ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!", "Designer"))
-            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_MsgStop("No Form in use!"))
-            MENUITEM "&Close "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:End(),hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save "+IIf(!oDesigner:lReport, "Form", "Report")   ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(), hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(.T.), hwg_MsgStop("No Form in use!"))
+            MENUITEM "&Close "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:End(), hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
             If !lOmmitMenuFile
                MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():OpenR()
                SEPARATOR
-               MENUITEM "&Save as ..." ACTION ( oDesigner:lSingleForm := .F.,HFormGen():oDlgSelected:oParent:Save(.T.),oDesigner:lSingleForm := .T. )
+               MENUITEM "&Save as ..." ACTION ( oDesigner:lSingleForm := .F., HFormGen():oDlgSelected:oParent:Save(.T.), oDesigner:lSingleForm := .T. )
             EndIf
          ENDIF
          SEPARATOR
@@ -164,7 +164,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM If(!lOmmitMenuFile, "&Exit", "&Close Designer") ACTION oDesigner:oMainWnd:Close()
       ENDMENU
       MENU TITLE "&Edit"
-         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
+         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected), IIf(oDesigner:oClipBrd != NIL, hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
          MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
       ENDMENU
       MENU TITLE "&View"
@@ -172,7 +172,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
     SEPARATOR
          MENUITEM "&Show Grid 5px" ID 1050 ACTION ShowGrid5px()
          MENUITEM "&Show Grid 10px" ID 1052 ACTION ShowGrid10px()
-         MENUITEM "S&nap to Grid" ID 1051 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1051,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1051))
+         MENUITEM "S&nap to Grid" ID 1051 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1051, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1051))
          SEPARATOR
          MENUITEM "&Preview"  ACTION DoPreview()
          SEPARATOR
@@ -182,7 +182,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          MENUITEM "&Delete"  ACTION DeleteCtrl()
       ENDMENU
       MENU TITLE "&Options"
-         MENUITEM "&AutoAdjust" ID 1011 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1011,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1011))
+         MENUITEM "&AutoAdjust" ID 1011 ACTION hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1011, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1011))
       ENDMENU
       MENU TITLE "&Help"
          MENUITEM "&About" ACTION hwg_MsgInfo("Visual Designer", "Designer")
@@ -195,7 +195,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
        hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .T.)
    endif
 
-   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0,x,y-21),statusbarmsg("")}
+   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y-21), statusbarmsg("")}
 
    IF !oDesigner:lSingleForm
       @ 2, 3 OWNERBUTTON OF oPanel       ;
@@ -212,7 +212,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       @ 55, 6 LINE LENGTH 18 VERTICAL
 
       @ 60, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||IIf(HFormGen():oDlgSelected != NIL,HFormGen():oDlgSelected:oParent:Save(),hwg_MsgStop("No Form in use!"))} ;
+          ON CLICK {||IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(), hwg_MsgStop("No Form in use!"))} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "BMP_SAVE" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Save Form"
@@ -280,12 +280,12 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
 
          //
    @ 3, 30 TAB oTab ITEMS {} OF oPanel SIZE 380, 310 FONT oFont ;
-      ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
+      ON SIZE {|o, x, y|ArrangeBtn(o, x, y)}
 
    BuildSet( oTab )
 
    CONTEXT MENU oDesigner:oCtrlMenu
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected), IIf(oDesigner:oClipBrd != NIL, hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
       SEPARATOR
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .T., .F., .F., .F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .T., .F., .F. )
@@ -320,7 +320,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
       MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
       SEPARATOR
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected),IIf(oDesigner:oClipBrd != NIL,hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
+      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd := GetCtrlSelected(HFormGen():oDlgSelected), IIf(oDesigner:oClipBrd != NIL, hwg_EnableMenuItem(, 1012, .T., .T.), .F.))
       MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .T., .F., .F., .F. )
       MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .T., .F., .F. )
       MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected), .F., .F., .T., .F. )
@@ -366,7 +366,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ACTIVATE DIALOG oDesigner:oMainWnd NOMODAL
 #endif
 #else
-   StartDes( oDesigner:oMainWnd,p0,p1 )
+   StartDes( oDesigner:oMainWnd, p0, p1 )
    ACTIVATE WINDOW oDesigner:oMainWnd
 #endif
 
@@ -380,7 +380,7 @@ STATIC FUNCTION ShowGrid10px()
    MEMVAR oDesigner
 
 if ( oDesigner:oDlgInsp == NIL )
-    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, .F.)
     if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
         oDesigner:nPixelGrid := 18
@@ -401,7 +401,7 @@ STATIC FUNCTION ShowGrid5px()
    MEMVAR oDesigner
 
 if ( oDesigner:oDlgInsp == NIL )
-    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050,!hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
+    hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .F.)
     if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
         oDesigner:nPixelGrid := 12
@@ -441,7 +441,7 @@ CLASS HDesigner
 ENDCLASS
 // -----------------
 
-STATIC FUNCTION StartDes( oDlg,p1,cForm )
+STATIC FUNCTION StartDes( oDlg, p1, cForm )
 
    hwg_MoveWindow(oDlg:handle, 0, 0, oDlg:nWidth + 10, oDlg:nHeight)
 
@@ -460,7 +460,7 @@ STATIC FUNCTION StartDes( oDlg,p1,cForm )
          IF cForm == NIL
             HFormGen():New()
          ELSE
-            HFormGen():Open( ,cForm )
+            HFormGen():Open( , cForm )
          ENDIF
          hwg_SetForegroundWindow( HFormGen():aForms[1]:oDlg:handle )
          hwg_SetFocus( HFormGen():aForms[1]:oDlg:handle )
@@ -505,8 +505,8 @@ STATIC FUNCTION ReadIniFiles()
          ENDIF
       ELSEIF oNode:title == cfitem
          AAdd(oDesigner:aFormats, { oNode:GetAttribute("name"), oNode:GetAttribute("ext"), ;
-             oNode:GetAttribute("file"),oNode:GetAttribute("rdscr"), ;
-             oNode:GetAttribute("wrscr"),oNode:GetAttribute("cnvtable") })
+             oNode:GetAttribute("file"), oNode:GetAttribute("rdscr"), ;
+             oNode:GetAttribute("wrscr"), oNode:GetAttribute("cnvtable") })
       ELSEIF oNode:title == "editor"
          LoadEdOptions( oNode:aItems[1] )
       ELSEIF oNode:title == "grid"
@@ -525,7 +525,7 @@ STATIC FUNCTION ReadIniFiles()
                 oDesigner:ds_mypath := Lower(l_ds_mypath)
              ENDIF
       ELSEIF oNode:title == critem .AND. !oDesigner:lSingleForm
-         FOR j := 1 TO Min( Len(oNode:aItems),MAX_RECENT_FILES )
+         FOR j := 1 TO Min( Len(oNode:aItems), MAX_RECENT_FILES )
             oDesigner:aRecent[j] := Lower(Trim(oNode:aItems[j]:aItems[1]))
          NEXT
       ENDIF
@@ -573,10 +573,10 @@ STATIC FUNCTION BuildSet( oTab )
                   cText := oWidget:GetAttribute("text")
                   cBmp := oWidget:GetAttribute("bmp")
                   IF cText != NIL .OR. cBmp != NIL
-                    oButton := HOwnButton():New( ,,,x1, 32, 30, 26, ;
-                               ,,,{|o,id|ClickBtn(o,id)}, .T.,    ;
+                    oButton := HOwnButton():New( ,,, x1, 32, 30, 26, ;
+                               ,,, {|o, id|ClickBtn(o, id)}, .T.,    ;
                                cText,,,,,,,                      ;
-                               cBmp,At(".",cBmp) == 0,,,,, .F.,,    ;
+                               cBmp, At(".", cBmp) == 0,,,,, .F.,,    ;
                                oWidget:GetAttribute("name") )
                     oButton:cargo := oWidget
                     x1 += 30
@@ -606,7 +606,7 @@ STATIC FUNCTION BuildSet( oTab )
                   cDlg := oProperty:GetAttribute("array")
                   IF cDlg != NIL
                      arr := {}
-                      DO WHILE ( j1 := At( ",",cDlg ) ) > 0
+                      DO WHILE ( j1 := At( ",", cDlg ) ) > 0
                            AAdd(arr, Left(cDlg, j1 - 1))
                           cDlg := LTrim(SubStr(cDlg, j1 + 1))
                          ENDDO
@@ -620,7 +620,7 @@ STATIC FUNCTION BuildSet( oTab )
                   ENDIF
 
                   AAdd(oDesigner:aDataDef, { Lower(oProperty:GetAttribute("name")), ;
-                                     b1,b2,b3,cDlg,arr,b4 })
+                                     b1, b2, b3, cDlg, arr, b4 })
                ENDIF
             NEXT
          ELSEIF aSet[i]:title == "methods"
@@ -635,7 +635,7 @@ STATIC FUNCTION BuildSet( oTab )
    ENDIF
 RETURN NIL
 
-STATIC FUNCTION ArrangeBtn( oTab,x,y )
+STATIC FUNCTION ArrangeBtn( oTab, x, y )
 
    LOCAL i
    LOCAL x1
@@ -663,7 +663,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
    NEXT
 RETURN NIL
 
-STATIC FUNCTION ClickBtn( oTab,nId ) //, cItem,cText,nWidth,nHeight )
+STATIC FUNCTION ClickBtn( oTab, nId ) //, cItem, cText, nWidth, nHeight )
 
    LOCAL oBtn := oTab:FindControl( nId )
    MEMVAR oDesigner
@@ -728,7 +728,7 @@ FUNCTION Evalcode(xCode)
    IF HB_IsChar( xCode )
       nLines := mlCount( xCode )
       IF nLines > 1
-         xCode := hwg_RdScript( ,xCode )
+         xCode := hwg_RdScript( , xCode )
       ELSE
          xCode := &( "{||" + xCode + "}" )
       ENDIF
@@ -797,7 +797,7 @@ STATIC FUNCTION EndIde()
      oIni := HXMLDoc():Read(cCurDir + "Designer.iml")
      IF oDesigner:lChgPath
         i := 1
-        oNode := HXMLNode():New( "dirpath",HBXML_TYPE_SINGLE,{{"default",oDesigner:ds_myPath}} )
+        oNode := HXMLNode():New( "dirpath", HBXML_TYPE_SINGLE, {{"default", oDesigner:ds_myPath}} )
         IF oIni:aItems[1]:Find("dirpath", @i) == NIL
            oIni:aItems[1]:Add(oNode)
         ELSE
@@ -819,7 +819,7 @@ STATIC FUNCTION EndIde()
      ENDIF
 
         i := 1
-        oNode := HXMLNode():New( "grid",HBXML_TYPE_SINGLE,{{"default",AllTrim(Str(oDesigner:nPixelGrid))}} )
+        oNode := HXMLNode():New( "grid", HBXML_TYPE_SINGLE, {{"default", AllTrim(Str(oDesigner:nPixelGrid))}} )
         IF oIni:aItems[1]:Find("grid", @i) == NIL
            oIni:aItems[1]:Add(oNode)
         ELSE
@@ -847,22 +847,22 @@ lOmmitMenuFile := lOm
 RETURN lOm
 
 // : LFB
-FUNCTION StatusBarMsg(cfile,cpos,ctam)
+FUNCTION StatusBarMsg(cfile, cpos, ctam)
    
    MEMVAR oDesigner
 
-  //cfile := IIf(cfile = NIL, "",cfile)
-  cpos := IIf(cpos = NIL, "",cpos)
-  ctam := IIf(ctam = NIL, "",ctam)
+  //cfile := IIf(cfile = NIL, "", cfile)
+  cpos := IIf(cpos = NIL, "", cpos)
+  ctam := IIf(ctam = NIL, "", ctam)
    IF cFile != NIL
      hwg_WriteStatus( oDesigner:oMainWnd, 1, "File: "+cfile , .T.)
   ENDIF
-  hwg_WriteStatus( oDesigner:oMainWnd, 2,cpos , .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 3,ctam , .T.)
+  hwg_WriteStatus( oDesigner:oMainWnd, 2, cpos , .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 3, ctam , .T.)
 
   *hwg_WriteStatus(OdLG, 4, "INS", .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 5,IIf(hwg_IsNUmLockActive(), "NUM" , "   "), .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 6,IIf(hwg_IsCapsLockActive(), "CAPS", "    ") , .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 5, IIf(hwg_IsNUmLockActive(), "NUM" , "   "), .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 6, IIf(hwg_IsCapsLockActive(), "CAPS", "    ") , .T.)
 
 RETURN NIL
 
@@ -886,17 +886,17 @@ FUNCTION SoControles()
       STYLE WS_VISIBLE + WS_SYSMENU + DS_SYSMODAL + WS_SIZEBOX + MB_USERICON    ;
       ON EXIT {||  oDlgx := NIL, .T.}
 
-      //ON OTHER MESSAGES {|o,m,wp,lp|MessagesOthers(o,m,wp,lp)}
+      //ON OTHER MESSAGES {|o, m, wp, lp|MessagesOthers(o, m, wp, lp)}
 
-   @ 0, 0 PANEL oPanelx SIZE 395, 98 ON SIZE {|o,x,y|hwg_MoveWindow(o:handle, 0, 0, x + 4, y + 20)}
+   @ 0, 0 PANEL oPanelx SIZE 395, 98 ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x + 4, y + 20)}
    @ 1, 1 TAB oTabx ITEMS {} OF oPanelx SIZE 390, 98 FONT oFont ;
-       ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
+       ON SIZE {|o, x, y|ArrangeBtn(o, x, y)}
 
    CONTEXT MENU oMenuTool
       MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( 0, .T. )
-         //{||oDesigner:oDlgInsp:Close(),inspOpen(.T.)}
+         //{||oDesigner:oDlgInsp:Close(), inspOpen(.T.)}
       MENUITEM "Normal" ACTION ActiveTopMost( 0, .F. )
-         //{||oDesigner:oDlgInsp:Close(),inspOpen(.F.)}
+         //{||oDesigner:oDlgInsp:Close(), inspOpen(.F.)}
       MENUITEM "Hide" ACTION oDlgX:CLOSE()
     ENDMENU
 

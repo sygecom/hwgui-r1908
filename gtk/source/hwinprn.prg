@@ -203,14 +203,14 @@ Local i, i0, j, slen, c
       DO WHILE i <= slen
          IF ( c := SubStr(cLine, i, 1) ) < " "
             IF i0 != 0
-               ::PrintText( SubStr(cLine,i0,i-i0 ) )
+               ::PrintText( SubStr(cLine, i0, i-i0 ) )
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
-         ELSEIF ( j := At( c,cPseudoChar ) ) != 0
+         ELSEIF ( j := At( c, cPseudoChar ) ) != 0
             IF i0 != 0
-               ::PrintText( SubStr(cLine,i0,i-i0 ) )
+               ::PrintText( SubStr(cLine, i0, i-i0 ) )
                i0 := 0
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
@@ -263,7 +263,7 @@ Local i, i0, j, slen, c
          i ++
       ENDDO
       IF i0 != 0
-         ::PrintText( SubStr(cLine,i0,i-i0 ) )
+         ::PrintText( SubStr(cLine, i0, i-i0 ) )
       ENDIF
    ENDIF
 
@@ -299,7 +299,7 @@ Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen
-         IF Left(aCodes[i, 1], 1) == c .AND. At( aCodes[i, 1],Left(cLine, 3 ) ) == 1
+         IF Left(aCodes[i, 1], 1) == c .AND. At( aCodes[i, 1], Left(cLine, 3 ) ) == 1
             ::InitValues( aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7]  )
             RETURN Len(aCodes[i, 1])
          ENDIF

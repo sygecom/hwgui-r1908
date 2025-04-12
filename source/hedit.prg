@@ -1859,7 +1859,7 @@ STATIC FUNCTION NextFocusContainer(oParent, hCtrl, nSkip)
    LOCAL lHradio
    LOCAL lnoTabStop := .F.
 
-   AEval(oparent:acontrols,{|o| IIf(hwg_BitAND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.) })
+   AEval(oparent:acontrols, {|o| IIf(hwg_BitAND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.) })
    IF !lnoTabStop .OR. Empty(hCtrl)
       RETURN NIL //nexthandle
    ENDIF

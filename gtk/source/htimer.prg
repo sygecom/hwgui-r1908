@@ -22,7 +22,7 @@ CLASS HTimer INHERIT HObject
    DATA oParent
    DATA bAction
 
-   METHOD New( oParent,id,value,bAction )
+   METHOD New( oParent, id, value, bAction )
    METHOD Init()
    METHOD onAction()
 
@@ -35,7 +35,7 @@ CLASS HTimer INHERIT HObject
 
 ENDCLASS
 
-METHOD New( oParent,nId,value,bAction ) CLASS HTimer
+METHOD New( oParent, nId, value, bAction ) CLASS HTimer
 
    ::oParent := IIf(oParent == NIL, HWindow():GetMain(), oParent)
    IF nId == NIL
@@ -49,7 +49,7 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
    ::value   := value
    ::bAction := bAction
 
-//   ::tag := hwg_SetTimer( ::id,::value )
+//   ::tag := hwg_SetTimer( ::id, ::value )
 
    */
    ::value   := IIf(HB_IsNumeric(value), value, 0)

@@ -40,12 +40,12 @@ Private oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 320 ;
-   ON INIT {|| SetTimer(oModDlg,@oTimer)}   
+   ON INIT {|| SetTimer(oModDlg, @oTimer)}   
    // FONT oFont  
 
-   SET KEY FSHIFT,VK_F3 TO hwg_MsgInfo("Shift-F3") 
-   SET KEY FCONTROL,VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
-   SET KEY 0,VK_F3 TO hwg_MsgInfo("F3")
+   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 
+   SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
+   SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
    @ 20, 10 SAY "Input something:" SIZE 260, 22
 
@@ -73,7 +73,7 @@ Private oSayT
         PASSWORD                        ;
         SIZE 260, 26
 
-   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T.,oModDlg:Close()}
+   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., oModDlg:Close()}
    @ 180, 250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;
@@ -98,7 +98,7 @@ Private oSayT
 
 RETURN NIL
 
-STATIC FUNCTION SetTimer( oDlg,oTimer )
+STATIC FUNCTION SetTimer( oDlg, oTimer )
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
 //   writelog( ValType(oTimer) )

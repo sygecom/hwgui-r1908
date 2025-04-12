@@ -514,7 +514,7 @@ METHOD Valid(nKey) CLASS HRadioButton
       ::oParent:lSuspendMsgsHandling := .T.
        iValue := AScan(::oGroup:aButtons, {|o|o:id == ::id})
       IF nEnter == VK_RETURN //< 0
-         //-iValue := AScan(::oGroup:aButtons,{|o|o:id == ::id})
+         //-iValue := AScan(::oGroup:aButtons, {|o|o:id == ::id})
          IF !::GetValue()
             ::oGroup:nValue  := iValue
              ::oGroup:SetValue(::oGroup:nValue)      

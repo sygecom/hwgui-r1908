@@ -67,9 +67,9 @@ Local nFirst, i
           ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(y), o:Move(, , x)}
 
       s_oBrwData:aArray := s_aWatches
-      s_oBrwData:AddColumn(HColumn():New("",{|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 1]}, "C", 30, 0))
-      s_oBrwData:AddColumn(HColumn():New("",{|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 3]}, "C", 1, 0))
-      s_oBrwData:AddColumn(HColumn():New("",{|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 4]}, "C", 60, 0))
+      s_oBrwData:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 1]}, "C", 30, 0))
+      s_oBrwData:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 3]}, "C", 1, 0))
+      s_oBrwData:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), o:aArray[o:nCurrent, 4]}, "C", 60, 0))
       @ 0, 4 BROWSE s_oBrwScript ARRAY SIZE 500, 236    ;
           FONT s_oScrFont STYLE WS_BORDER + WS_VSCROLL + WS_HSCROLL ;
           ON SIZE {|o, x, y|o:Move(, , x, y - s_oSplit:nTop - s_oSplit:nHeight - 64)}

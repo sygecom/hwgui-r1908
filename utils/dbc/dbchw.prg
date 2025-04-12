@@ -14,7 +14,7 @@
    #include "ads.ch"
 #endif
 
-MEMVAR BrwFont,oBrwFont
+MEMVAR BrwFont, oBrwFont
 MEMVAR msfile, msmode, msexp, lenmsf, improc, mypath
 MEMVAR dformat, memownd, prrdonly
 MEMVAR lWinChar
@@ -102,8 +102,8 @@ PUBLIC nQueryWndHandle := 0
        ON IDM_CALCUL  ACTION  Calcul()      ;
        ON IDM_DSCRIPT ACTION  Scripts(2)    ;
        ON IDM_EXIT    ACTION  hwg_EndWindow()   ;
-       ON IDM_TILE    ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL, 0) ;
-       ON IDM_CASCADE ACTION  hwg_SendMessage(HWindow():GetMain():handle,WM_MDICASCADE, 0, 0)
+       ON IDM_TILE    ACTION  hwg_SendMessage(HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0) ;
+       ON IDM_CASCADE ACTION  hwg_SendMessage(HWindow():GetMain():handle, WM_MDICASCADE, 0, 0)
 
 /*
     @ 0, 0 PANEL oPanel  SIZE 0, 28
@@ -158,9 +158,9 @@ Local aModDlg, aDates := { "dd/mm/yy", "mm/dd/yy" }
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig() }
    REDEFINE COMBOBOX aDates OF aModDlg ID IDC_COMBOBOX3
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndConfig()}   ;
-        ON BN_CLICKED,IDC_RADIOBUTTON1 ACTION {|| ServerButton(0) } ;
-        ON BN_CLICKED,IDC_RADIOBUTTON2 ACTION {|| ServerButton(1) }
+        ON 0, IDOK         ACTION {|| EndConfig()}   ;
+        ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {|| ServerButton(0) } ;
+        ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {|| ServerButton(1) }
 
    aModDlg:Activate()
 
@@ -171,11 +171,11 @@ STATIC FUNCTION InitConfig
 Local hDlg := hwg_GetModalHandle()
 Local st := IIf(nServerType == ADS_REMOTE_SERVER, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)
 Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTON4, IDC_RADIOBUTTON5) )
-   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
-   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,st )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
+   hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON3, IDC_RADIOBUTTON5, nd )
+   hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, st )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX4, SET( _SET_EXCLUSIVE ) )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX5, prrdonly )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX6, AdsLocking() )
    ServerButton( nServerType - 1 )
 #else
    hwg_MsgInfo("No config in mode DBFCDX")
@@ -219,7 +219,7 @@ Local new_numdriv, new_servertype, serverPath
          IF Empty(serverPath) .OR. !AdsConnect( serverPath )
              nServerType := 1
              AdsSetServerType(nServerType)
-             hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON1,IDC_RADIOBUTTON2,IDC_RADIOBUTTON1 )
+             hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1 )
              ServerButton( 0 )
              hwg_SetDlgItemText( hDlg, IDC_TEXT1, "Cannot connect to "+serverPath )
              RETURN .F.
@@ -233,7 +233,7 @@ Local new_numdriv, new_servertype, serverPath
 RETURN .T.
 
 STATIC FUNCTION ServerButton( iEnable )
-Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT1 )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(), IDC_EDIT1 )
    hwg_SendMessage(hEdit, WM_ENABLE, iEnable, 0)
 RETURN .T.
 
@@ -256,10 +256,10 @@ Local indname
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind
-   oBrw:AddColumn( HColumn():New( ,{|value,o|o:aArray[o:nCurrent, 1] }, "C", 1, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Tag",{|value,o|o:aArray[o:nCurrent, 2] }, "C", 8, 0  ) )
-   oBrw:AddColumn( HColumn():New( "Expression",{|value,o|o:aArray[o:nCurrent, 3] }, "C",ordlen, 0  ) )
-   oBrw:AddColumn( HColumn():New( "File",{|value,o|o:aArray[o:nCurrent, 4] }, "C", 8, 0  ) )
+   oBrw:AddColumn( HColumn():New( , {|value, o|o:aArray[o:nCurrent, 1] }, "C", 1, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Tag", {|value, o|o:aArray[o:nCurrent, 2] }, "C", 8, 0  ) )
+   oBrw:AddColumn( HColumn():New( "Expression", {|value, o|o:aArray[o:nCurrent, 3] }, "C", ordlen, 0  ) )
+   oBrw:AddColumn( HColumn():New( "File", {|value, o|o:aArray[o:nCurrent, 4] }, "C", 8, 0  ) )
   
    oBrw:bColorSel    := hwg_VColor( "800080" )
    oBrw:ofont := oBrwFont
@@ -288,9 +288,9 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {|| InitNewIndex() }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndNewIndex()}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
-        ON BN_CLICKED,IDC_CHECKBOX1 ACTION {|| TagName() }
+        ON 0, IDOK         ACTION {|| EndNewIndex()}   ;
+        ON 0, IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
+        ON BN_CLICKED, IDC_CHECKBOX1 ACTION {|| TagName() }
    aModDlg:Activate()
 
 RETURN NIL
@@ -298,13 +298,13 @@ RETURN NIL
 STATIC FUNCTION InitNewIndex
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText( hDlg, IDC_EDIT2, hwg_CutExten( hwg_CutPath( msfile[improc] ) ) + INDEXEXT() )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX1, .T. )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX1, .T. )
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT2 ) )
 RETURN NIL
 
 STATIC FUNCTION TagName
 Local hDlg := hwg_GetModalHandle()
-Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(),IDC_EDIT3 )
+Local hEdit := hwg_GetDlgItem( hwg_GetModalHandle(), IDC_EDIT3 )
    IF hwg_IsDlgButtonChecked(hDlg, IDC_CHECKBOX1)
       hwg_SendMessage(hEdit, WM_ENABLE, 1, 0)
    ELSE
@@ -412,8 +412,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen() }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndOpen()}  ;
-        ON BN_CLICKED,IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath) ) }
+        ON 0, IDOK         ACTION {|| EndOpen()}  ;
+        ON BN_CLICKED, IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath) ) }
    aModDlg:Activate()
 
 RETURN NIL
@@ -421,11 +421,11 @@ RETURN NIL
 STATIC FUNCTION InitOpen
 Local hDlg := hwg_GetModalHandle()
 Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTON4, IDC_RADIOBUTTON5))
-   hwg_CheckRadioButton( hDlg,IDC_RADIOBUTTON3,IDC_RADIOBUTTON5,nd )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX4,SET( _SET_EXCLUSIVE ) )
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX5,prrdonly )
+   hwg_CheckRadioButton( hDlg, IDC_RADIOBUTTON3, IDC_RADIOBUTTON5, nd )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX4, SET( _SET_EXCLUSIVE ) )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX5, prrdonly )
 #ifdef RDD_ADS
-   hwg_CheckDlgButton( hDlg,IDC_CHECKBOX6,AdsLocking() )
+   hwg_CheckDlgButton( hDlg, IDC_CHECKBOX6, AdsLocking() )
 #endif
    hwg_SetFocus( hwg_GetDlgItem( hDlg, IDC_EDIT7 ) )
 RETURN .T.
@@ -500,7 +500,7 @@ Local oWindow, aControls, oBrowse, i
 
       ADD STATUS PARTS 180, 200, 0
       @ 0, 0 BROWSE oBrowse DATABASE  ;
-           ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
+           ON SIZE {|o, x, y|ResizeBrwQ(o, x, y)}
 
       oBrowse:bcolorSel  := hwg_VColor( "800080" )
       oBrowse:ofont := oBrwFont
@@ -524,7 +524,7 @@ Local oWindow, aControls, oBrowse, i
          ENDIF
       ENDIF
    ENDIF
-   hwg_WriteStatus( oWindow, 1,Ltrim(Str(Reccount(), 10))+" records" )
+   hwg_WriteStatus( oWindow, 1, Ltrim(Str(Reccount(), 10))+" records" )
    hwg_WriteStatus( oWindow, 2, "Order: None", .T. )
 RETURN oWindow:handle
 
@@ -535,7 +535,7 @@ Local oModDlg
 
    INIT DIALOG oModDlg FROM RESOURCE "DLG_CALC" ON INIT {|| InitCalc() }
    DIALOG ACTIONS OF oModDlg ;
-        ON 0,IDOK         ACTION {|| EndCalc()}
+        ON 0, IDOK         ACTION {|| EndCalc()}
    oModDlg:Activate()
 
 RETURN NIL
@@ -569,11 +569,11 @@ RETURN NIL
 FUNCTION Scripts( nAct )
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(hwg_GetDlgItem(hwg_GetModalHandle(),IDC_EDIT8))}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(hwg_GetDlgItem(hwg_GetModalHandle(), IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndScri(nAct)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
-        ON BN_CLICKED,IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath) ) }
+        ON 0, IDOK         ACTION {|| EndScri(nAct)}   ;
+        ON 0, IDCANCEL     ACTION {|| EndDialog( hwg_GetModalHandle() ) }  ;
+        ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText( hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath) ) }
    aModDlg:Activate()
 
 RETURN NIL

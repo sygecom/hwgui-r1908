@@ -36,8 +36,8 @@ CLASS HComboBox INHERIT HControl
    DATA  lEdit    INIT .F.
    DATA  hEdit
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  aItems,oFont,bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor )
+   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  aItems, oFont, bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor )
    METHOD Activate()
    METHOD onEvent( msg, wParam, lParam )
    METHOD Init( aCombo, nCurrent )
@@ -46,14 +46,14 @@ CLASS HComboBox INHERIT HControl
    METHOD End()
 ENDCLASS
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,oFont, ;
-                  bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor ) CLASS HComboBox
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
+                  bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor ) CLASS HComboBox
 
    if lEdit == NIL; lEdit := .F.; endif
    if lText == NIL; lText := .F.; endif
 
-   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle),IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST)+WS_TABSTOP )
-   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctoolt,tcolor,bcolor )
+   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST)+WS_TABSTOP )
+   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctoolt, tcolor, bcolor )
       
    ::lEdit := lEdit
    ::lText := lText
@@ -76,21 +76,21 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
    IF bSetGet != NIL
       ::bChangeSel := bChange
       ::bGetFocus  := bGFocus
-      ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
-      ::oParent:AddEvent( CBN_SELCHANGE,::id,{|o,id|__Valid(o:FindControl(id))} )
+      ::oParent:AddEvent( CBN_SETFOCUS, ::id, {|o, id|__When(o:FindControl(id))} )
+      ::oParent:AddEvent( CBN_SELCHANGE, ::id, {|o, id|__Valid(o:FindControl(id))} )
    ELSEIF bChange != NIL
-      ::oParent:AddEvent( CBN_SELCHANGE,::id,bChange )
+      ::oParent:AddEvent( CBN_SELCHANGE, ::id, bChange )
    ENDIF
    
    IF bGFocus != NIL .AND. bSetGet == NIL
-      ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
+      ::oParent:AddEvent( CBN_SETFOCUS, ::id, {|o, id|__When(o:FindControl(id))} )
    ENDIF
 */
    ::bGetFocus := bGFocus
    ::bLostFocus := bChange
 
-   hwg_SetEvent( ::hEdit, "focus_in_event",EN_SETFOCUS, 0, 0 )
-   hwg_SetEvent( ::hEdit, "focus_out_event",EN_KILLFOCUS, 0, 0 )
+   hwg_SetEvent( ::hEdit, "focus_in_event", EN_SETFOCUS, 0, 0 )
+   hwg_SetEvent( ::hEdit, "focus_out_event", EN_KILLFOCUS, 0, 0 )
 
 RETURN Self
 
@@ -101,7 +101,7 @@ METHOD Activate CLASS HComboBox
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::hEdit := hwg_ComboGetEdit( ::handle )
       ::Init()
-      hwg_SetWindowObject( ::hEdit,Self )
+      hwg_SetWindowObject( ::hEdit, Self )
    ENDIF
 RETURN NIL
 
@@ -252,7 +252,7 @@ Local res
    IF oCtrl:bGetFocus != NIL
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
       IF !res
-         hwg_GetSkip( oCtrl:oParent,oCtrl:handle, 1 )
+         hwg_GetSkip( oCtrl:oParent, oCtrl:handle, 1 )
       ENDIF
       RETURN res
    ENDIF
