@@ -690,6 +690,7 @@ RETURN ::nActive
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0 // old code for reference (to be removed)
 METHOD Notify(lParam) CLASS HTab
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
@@ -793,6 +794,128 @@ METHOD Notify(lParam) CLASS HTab
    ENDIF
 
 RETURN -1
+#else
+METHOD Notify(lParam) CLASS HTab
+
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
+   LOCAL nkeyDown := hwg_GetNotifyKeydown(lParam)
+   LOCAL nPage := hwg_SendMessage(::handle, TCM_GETCURSEL, 0, 0) + 1
+
+   IF hwg_BitAnd(::Style, TCS_BUTTONS) != 0
+      nPage := hwg_SendMessage(::handle, TCM_GETCURFOCUS, 0, 0) + 1
+   ENDIF
+
+   IF nPage == 0 .OR. ::handle != hwg_GetFocus()
+      IF nCode == TCN_SELCHANGE .AND. ::handle != hwg_GetFocus() .AND. ::lClick
+         hwg_SendMessage(::handle, TCM_SETCURSEL, hwg_SendMessage(::handle, ::nPrevPage - 1, 0, 0), 0)
+         RETURN 0
+      ELSEIF nCode == TCN_SELCHANGE
+         hwg_SendMessage(::handle, TCM_SETCURSEL, hwg_SendMessage(::handle, TCM_GETCURFOCUS, 0, 0), 0)
+      ENDIF
+      ::nPrevPage := nPage
+      RETURN 0
+   ENDIF
+
+   SWITCH nCode
+
+   CASE TCN_CLICK
+      ::lClick := .T.
+      EXIT
+
+   CASE TCN_KEYDOWN   // -500
+      IF (nPage := SetTabFocus(Self, nPage, nKeyDown)) != nPage
+         ::nActive := nPage
+      ENDIF
+      EXIT
+
+   CASE TCN_FOCUSCHANGE  //-554
+      EXIT
+
+   CASE TCN_SELCHANGE
+      // ACTIVATE NEW PAGE
+      IF !::pages[nPage]:enabled
+         //::SetTab(::nActive)
+         ::lClick := .F.
+         ::nPrevPage := nPage
+         RETURN 0
+      ENDIF
+      IF nPage == ::nPrevPage
+         RETURN 0
+      ENDIF
+      //IF hwg_GetFocus() != ::handle
+      //   ::SETFOCUS()
+      //ENDIF
+      IF hb_IsBlock(::bChange)
+         ::oparent:lSuspendMsgsHandling := .T.
+         Eval(::bChange, Self, hwg_GetCurrentTab(::handle))
+         IF hb_IsBlock(::bGetFocus) .AND. nPage != ::nPrevPage .AND. ::Pages[nPage]:Enabled .AND. ::nActivate > 0
+            Eval(::bGetFocus, hwg_GetCurrentTab(::handle), Self)
+            ::nActivate := 0
+         ENDIF
+         ::oparent:lSuspendMsgsHandling := .F.
+      ENDIF
+      EXIT
+
+   CASE TCN_SELCHANGING //-552
+      IF ::nPrevPage > 0
+         // DEACTIVATE PAGE //ocorre antes de trocar o focu
+         ::nPrevPage := ::nActive //npage
+         IF hb_IsBlock(::bLostFocus)
+            ::oparent:lSuspendMsgsHandling := .T.
+            Eval(::bLostFocus, ::nPrevPage, Self)
+            ::oparent:lSuspendMsgsHandling := .F.
+         ENDIF
+      ELSE
+         ::nPrevPage := nPage
+         RETURN 0
+      ENDIF
+      EXIT
+
+#if 0
+   CASE TCN_CLICK
+      IF !Empty(::pages) .AND. ::nActive > 0 .AND. ::pages[::nActive]:enabled
+         hwg_SetFocus(::handle)
+         IF hb_IsBlock(::bAction)
+            Eval(::bAction, Self, hwg_GetCurrentTab(::handle))
+         ENDIF
+      ENDIF
+      EXIT
+#endif
+
+   CASE TCN_RCLICK
+      IF !Empty(::pages) .AND. ::nActive > 0 .AND. ::pages[::nActive]:enabled
+          IF hb_IsBlock(::bRClick)
+              ::oparent:lSuspendMsgsHandling := .T.
+              Eval(::bRClick, Self, hwg_GetCurrentTab(::handle))
+              ::oparent:lSuspendMsgsHandling := .F.
+          ENDIF
+      ENDIF
+      EXIT
+
+   CASE TCN_SETFOCUS
+      IF hb_IsBlock(::bGetFocus) .AND. !::Pages[nPage]:Enabled
+         Eval(::bGetFocus, hwg_GetCurrentTab(::handle), Self)
+      ENDIF
+      EXIT
+
+   CASE TCN_KILLFOCUS
+      IF hb_IsBlock(::bLostFocus)
+         Eval(::bLostFocus, hwg_GetCurrentTab(::handle), Self)
+      ENDIF
+
+   ENDSWITCH
+
+   IF (nCode == TCN_CLICK .AND. ::nPrevPage > 0 .AND. ::pages[::nPrevPage]:enabled) .OR. (::lClick .AND. nCode == TCN_SELCHANGE)
+      ::oparent:lSuspendMsgsHandling := .T.
+      IF hb_IsBlock(::bAction) .AND. ::lClick
+         Eval(::bAction, Self, hwg_GetCurrentTab(::handle))
+      ENDIF
+      ::oparent:lSuspendMsgsHandling := .F.
+      ::lClick := .F.
+   ENDIF
+
+RETURN -1
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
