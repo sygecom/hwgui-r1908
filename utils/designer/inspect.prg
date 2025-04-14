@@ -352,9 +352,9 @@ FUNCTION InspOpen(lShow)
    // PRIVATE oMenuDlg := 0
 
    *FONT oDesigner:oMainWnd:oFonti
-   *STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SIZEBOX+WS_SYSMENU;
+   *STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SIZEBOX + WS_SYSMENU;
    lShow := IIf(ValType(lShow) != "U", lShow, .T.)
-   nStilo := WS_CAPTION+WS_SIZEBOX+MB_USERICON + WS_VISIBLE
+   nStilo := WS_CAPTION + WS_SIZEBOX + MB_USERICON + WS_VISIBLE
    //  IIf(lShow, WS_VISIBLE, 0) //DS_SYSMODAL
    INIT DIALOG oDesigner:oDlgInsp TITLE "Object Inspector" ;
       AT 0, 280 SIZE 220, 300       ;

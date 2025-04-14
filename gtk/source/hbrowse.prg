@@ -202,7 +202,7 @@ METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, 
                   bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll,;
                   lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect) CLASS HBrowse
 
-   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE+ ;
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE+ ;
                     IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+            ;
                     IIf(lNoVScroll == NIL .OR. !lNoVScroll, WS_VSCROLL, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;

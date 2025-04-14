@@ -47,7 +47,7 @@ RETURN Self
 METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit) CLASS HProgressBar
 
    // ::classname := "HPROGRESSBAR"
-   ::style   := WS_CHILD+WS_VISIBLE
+   ::style   := WS_CHILD + WS_VISIBLE
    nWidth := IIf(nWidth == NIL, 220, nWidth)
    nHeight := IIf(nHeight == NIL, 60, nHeight)
    nLeft   := IIf(nLeft == NIL, 0, nLeft)

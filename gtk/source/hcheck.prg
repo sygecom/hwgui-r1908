@@ -31,7 +31,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
                   bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor, bGFocus) CLASS HCheckButton
 
-   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_AUTO3STATE+WS_TABSTOP)
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_AUTO3STATE + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
                   bSize, bPaint, ctoolt, tcolor, bcolor)
 

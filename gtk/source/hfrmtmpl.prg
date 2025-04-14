@@ -220,7 +220,7 @@ Local oBmp := NIL
 Memvar oDlg
 Private oDlg
 
-   nStyle := DS_ABSALIGN+WS_VISIBLE+WS_SYSMENU+WS_SIZEBOX
+   nStyle := DS_ABSALIGN + WS_VISIBLE + WS_SYSMENU + WS_SIZEBOX
 
    FOR i := 1 TO Len(::aProp)
       xProperty := hfrm_GetProperty(::aProp[i, 2])

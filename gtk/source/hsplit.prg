@@ -39,7 +39,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
                   bSize, bDraw, color, bcolor, aLeft, aRight) CLASS HSplitter
 
-   ::Super:New(oWndParent, nId, WS_CHILD+WS_VISIBLE+SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
+   ::Super:New(oWndParent, nId, WS_CHILD + WS_VISIBLE + SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
                   bSize, bDraw,, color, bcolor)
 
    ::title   := ""

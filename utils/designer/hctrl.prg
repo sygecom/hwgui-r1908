@@ -75,7 +75,7 @@ METHOD New(oWndParent, xClass, aProp) CLASS HControlGen
 
    ::oParent := IIf(oWndParent == NIL, HFormGen():oDlgSelected, oWndParent)
    ::id      := ::NewId()
-   ::style   := WS_VISIBLE+WS_CHILD+WS_DISABLED+SS_OWNERDRAW
+   ::style   := WS_VISIBLE + WS_CHILD + WS_DISABLED + SS_OWNERDRAW
 
    IF HB_IsChar(xClass)
       oXMLDesc := FindWidget(xClass)
@@ -109,7 +109,7 @@ METHOD New(oWndParent, xClass, aProp) CLASS HControlGen
             oPaint := oXMLDesc:aItems[i]
             IF !Empty(oPaint:aItems) .AND. oPaint:aItems[1]:type == HBXML_TYPE_CDATA
                ::cCreate := hwg_RdStr(, oPaint:aItems[1]:aItems[1], 1)
-               ::style   := WS_VISIBLE+WS_CHILD+WS_DISABLED
+               ::style   := WS_VISIBLE + WS_CHILD + WS_DISABLED
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "property"
             IF !Empty(oXMLDesc:aItems[i]:aItems)

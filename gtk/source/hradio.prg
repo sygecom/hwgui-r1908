@@ -80,7 +80,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::title   := cCaption
    ::oGroup  := HRadioGroup():oGroupCurrent
    ::style   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_AUTORADIOBUTTON+;
-                     WS_CHILD+WS_VISIBLE+ ;
+                     WS_CHILD + WS_VISIBLE+ ;
                      IIf(::oGroup != NIL .AND. Empty(::oGroup:aButtons), WS_GROUP, 0))
    ::oFont   := oFont
    ::nLeft   := nLeft
