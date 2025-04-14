@@ -1657,4 +1657,12 @@ ComboBox
 #define NM_RCLICK               (NM_FIRST-5)    // uses NMCLICK struct
 #define NM_RDBLCLK              (NM_FIRST-6)
 
+// from htrackbr.prg
+#define TBS_AUTOTICKS                1
+#define TBS_VERT                     2
+#define TBS_TOP                      4
+#define TBS_LEFT                     4
+#define TBS_BOTH                     8
+#define TBS_NOTICKS                 16
+
 #endif // _WINDOWS_CH_

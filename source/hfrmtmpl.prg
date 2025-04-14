@@ -678,10 +678,10 @@ STATIC FUNCTION ReadCtrl(pp, oCtrlDesc, oContainer, oForm)
 
 RETURN NIL
 
-#define TBS_AUTOTICKS                1
-#define TBS_TOP                      4
-#define TBS_BOTH                     8
-#define TBS_NOTICKS                 16
+//#define TBS_AUTOTICKS                1 // defined in windows.ch
+//#define TBS_TOP                      4 // defined in windows.ch
+//#define TBS_BOTH                     8 // defined in windows.ch
+//#define TBS_NOTICKS                 16 // defined in windows.ch
 
 STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
 

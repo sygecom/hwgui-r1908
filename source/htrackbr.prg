@@ -11,13 +11,6 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-#define TBS_AUTOTICKS                1
-#define TBS_VERT                     2
-#define TBS_TOP                      4
-#define TBS_LEFT                     4
-#define TBS_BOTH                     8
-#define TBS_NOTICKS                 16
-
 CLASS HTrackBar INHERIT HControl
 
    CLASS VAR winclass INIT "msctls_trackbar32"
