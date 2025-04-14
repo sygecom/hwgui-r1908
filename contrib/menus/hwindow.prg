@@ -53,8 +53,8 @@ CLASS HCustomWindow INHERIT HObject
    METHOD AddEvent(nEvent, nId, bAction, lNotify) ;
       INLINE AAdd(IIf(lNotify == NIL .OR. !lNotify, ::aEvents, ::aNotify), {nEvent, nId, bAction})
    METHOD FindControl(nId, nHandle)
-   METHOD Hide() INLINE (::lHide:=.T., hwg_HideWindow(::handle))
-   METHOD Show() INLINE (::lHide:=.F., hwg_ShowWindow(::handle))
+   METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle))
+   METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle))
    METHOD Restore() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
    METHOD Maximize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0)
    METHOD Minimize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
@@ -107,7 +107,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    Local hParent
    Local oWndClient
 
-   // ::classname:= "HWINDOW"
+   // ::classname := "HWINDOW"
    ::oDefaultParent := Self
    ::type     := lType
    ::title    := cTitle
@@ -194,7 +194,7 @@ METHOD Activate(lShow) CLASS HWindow
                               oWnd:bPaint, oWnd:bGetFocus, oWnd:bLostFocus, oWnd:bOther)
 
       oWndClient:handle := hwg_GetWindowHandle(2)
-      oWndClient:oParent:= HWindow():GetMain()
+      oWndClient:oParent := HWindow():GetMain()
 
       hwg_ActivateMdiWindow((lShow == NIL .OR. lShow), ::hAccel)
    ELSEIF ::type == WND_MAIN

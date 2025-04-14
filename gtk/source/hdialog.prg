@@ -104,7 +104,7 @@ METHOD New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSiz
    ::bLostFocus := bLFocus
    ::bOther     := bOther
    ::lClipper   := IIf(lClipper == NIL, .F., lClipper)
-   ::lExitOnEnter:=IIf(lExitOnEnter == NIL, .T., !lExitOnEnter)
+   ::lExitOnEnter := IIf(lExitOnEnter == NIL, .T., !lExitOnEnter)
    ::lExitOnEsc  :=IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
 
    IF hwg_BitAnd(::style, DS_CENTER) > 0
@@ -120,7 +120,7 @@ Local hParent, oWnd
 
    hwg_CreateGetList(Self)
 
-   IF lNoModal == NIL ; lNoModal:=.F. ; ENDIF
+   IF lNoModal == NIL ; lNoModal := .F. ; ENDIF
    ::lModal := !lNoModal
    ::lResult := .F.
    ::AddItem(Self, !lNoModal)

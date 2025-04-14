@@ -441,15 +441,15 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
    IF !oDesigner:lReport
      // : LFB
       IF  h=aCoors[3] .AND. w=aCoors[4]
-         oDlg:oParent:SetProp("Width", LTrim(Str(oDlg:nWidth:=aCoors[3])))
-         oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight:=aCoors[4])))
-         *oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight:=aCoors[4]+21-21)))
+         oDlg:oParent:SetProp("Width", LTrim(Str(oDlg:nWidth := aCoors[3])))
+         oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight := aCoors[4])))
+         *oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight := aCoors[4]+21-21)))
      ELSE
        hwg_RedrawWindow(oDlg:handle, RDW_ERASE + RDW_INVALIDATE)
        oDlg:show()
      ENDIF
       InspUpdBrowse()
-      oDlg:oParent:lChanged:=.T.
+      oDlg:oParent:lChanged := .T.
    ENDIF
 RETURN NIL
 
@@ -517,7 +517,7 @@ STATIC FUNCTION FileDlg(oFrm, lOpen)
        AT 50, 100 SIZE 310, 250 FONT oDesigner:oMainWnd:oFont
 
    @ 10, 20 GET COMBOBOX nType ITEMS aCombo SIZE 140, 24 ;
-       ON CHANGE {||IIf(lOpen, .F.,(fname:=hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""), oEdit1:Refresh()))}
+       ON CHANGE {||IIf(lOpen, .F.,(fname := hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""), oEdit1:Refresh()))}
 
    @ 10, 70 GET oEdit1 VAR fname  ;
         STYLE ES_AUTOHSCROLL      ;
@@ -1135,7 +1135,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
         IF oCtrl != NIL
            asels := aselCtrls()
               FOR i = 1 to IIf(Len(asels) > 0, Len(asels), 1)
-                 oCtrl:=asels[i]
+                 oCtrl := asels[i]
                SetBDown(, 0, 0, 0)
                CtrlMove(oCtrl, 0, IIf(wParam == 34, 1, -1), .F.)
              NEXT
@@ -1147,7 +1147,7 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
         IF oCtrl != NIL
            asels := aselCtrls()
               FOR i = 1 to IIf(Len(asels) > 0, Len(asels), 1)
-                 oCtrl:=asels[i]
+                 oCtrl := asels[i]
                SetBDown(, 0, 0, 0)
                CtrlMove(oCtrl, IIf(wParam == 35, 1, -1), 0, .F.)
              NEXT

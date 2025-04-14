@@ -58,7 +58,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit,
 
 METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent) CLASS HProgressBar
 
-   // ::classname:= "HPROGRESSBAR"
+   // ::classname := "HPROGRESSBAR"
    ::style   := WS_CHILD + WS_VISIBLE
    nWidth := IIf(nWidth == NIL, 220, nWidth)
    nHeight := IIf(nHeight == NIL, 55, nHeight)

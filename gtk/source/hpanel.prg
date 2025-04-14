@@ -28,7 +28,7 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   bInit, bSize, bPaint, lDocked) CLASS HPanel
-Local oParent:=IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+Local oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    nStyle := SS_OWNERDRAW
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;

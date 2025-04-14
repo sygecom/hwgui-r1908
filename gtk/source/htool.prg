@@ -72,7 +72,7 @@ METHOD INIT CLASS hToolBar
 Local n, n1
 Local aTemp
 Local hIm
-Local aButton :={}
+Local aButton := {}
 Local aBmpSize
 Local oImage
 Local nPos
@@ -104,9 +104,9 @@ Local aItem
             ENDIF
          elseif  HB_IsChar(::aItem[n, 1])
             if ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
-               oImage:=hIcon():AddFile(::aItem[n, 1])
+               oImage := hIcon():AddFile(::aItem[n, 1])
             else
-               oImage:=hBitmap():AddFile(::aItem[n, 1])
+               oImage := hBitmap():AddFile(::aItem[n, 1])
             endif
             if HB_IsObject(oImage)
                AAdd(aButton, Oimage:handle)

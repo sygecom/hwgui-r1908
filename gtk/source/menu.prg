@@ -239,11 +239,11 @@ Local aMenu, i, oBmp, nFlag
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
    IF lBitmap != NIL .OR. !Empty(lBitmap)
-      if lResource == NIL ;lResource:=.F.; Endif         
+      if lResource == NIL ;lResource := .F.; Endif
       if !lResource 
-         oBmp:=HBitmap():AddFile(lBitmap)
+         oBmp := HBitmap():AddFile(lBitmap)
       else
-         oBmp:=HBitmap():AddResource(lBitmap)
+         oBmp := HBitmap():AddResource(lBitmap)
       endif
       AAdd(_oBitmap, {.T., oBmp:Handle, cItem, nId})
    Else   
@@ -270,18 +270,18 @@ RETURN .T.
 
 FUNCTION hwg_SetMenuItemBitmaps(aMenu, nId, abmp1, abmp2)
 Local aSubMenu := hwg_FindMenuItem(aMenu, nId)
-Local oMenu:=aSubMenu
+Local oMenu := aSubMenu
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 SetMenuItemBitmaps(oMenu, nId, abmp1, abmp2)
 RETURN NIL
 
 FUNCTION hwg_InsertBitmapMenu(aMenu, nId, lBitmap, oResource)
 Local aSubMenu := hwg_FindMenuItem(aMenu, nId)
-Local oMenu:=aSubMenu, oBmp
+Local oMenu := aSubMenu, oBmp
 If !oResource .OR. oResource == NIL
-     oBmp:=HBitmap():AddFile(lBitmap)
+     oBmp := HBitmap():AddFile(lBitmap)
 else
-     oBmp:=HBitmap():AddResource(lBitmap)
+     oBmp := HBitmap():AddResource(lBitmap)
 endif
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 HWG__InsertBitmapMenu(oMenu, nId, obmp:handle)
@@ -289,13 +289,13 @@ RETURN NIL
 
 FUNCTION hwg_SearchPosBitmap(nPos_Id)
 
-   Local nPos := 1, lBmp:={.F., ""}
+   Local nPos := 1, lBmp := {.F., ""}
 
    IF _oBitmap != NIL
       DO WHILE nPos<=Len(_oBitmap)
 
          if _oBitmap[nPos][4] == nPos_Id
-            lBmp:={_oBitmap[nPos][1], _oBitmap[nPos][2],_oBitmap[nPos][3]}     
+            lBmp := {_oBitmap[nPos][1], _oBitmap[nPos][2],_oBitmap[nPos][3]}
          Endif
 
          nPos ++

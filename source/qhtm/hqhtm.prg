@@ -33,7 +33,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, caption, ;
                   bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
 
-   // ::classname:= "HQHTM"
+   // ::classname := "HQHTM"
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := IIf(nId == NIL, ::NewId(), nId)
    ::style   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD+WS_VISIBLE)
@@ -69,7 +69,7 @@ METHOD Activate CLASS HQhtm
 RETURN NIL
 
 METHOD Redefine(oWndParent, nId, caption, bInit, bSize, bLink, bSubmit, fname, resname) CLASS HQhtm
-   // ::classname:= "HQHTM"
+   // ::classname := "HQHTM"
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := nId
    ::style   := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
@@ -153,7 +153,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::cHtml := cCaption
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, "", , ;
                   bInit, bSize, , bClick, ctooltip)
-   // ::classname:= "HQHTMBUTTON"
+   // ::classname := "HQHTMBUTTON"
 
 RETURN Self
 
@@ -161,7 +161,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bClick, ctooltip
 
    ::cHtml := cCaption
    ::Super:Redefine(oWndParent, nId, , bInit, bSize, , bClick, ctooltip)
-   // ::classname:= "HQHTMBUTTON"
+   // ::classname := "HQHTMBUTTON"
 
 RETURN Self
 

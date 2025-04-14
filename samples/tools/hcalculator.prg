@@ -366,7 +366,7 @@ METHOD INIT() CLASS HCalculator
       aCoors[3] := IIf(::lCompacta, Max(130, ::oCurrGet:nWidth + 8), ::nWidth)
       ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1 , aCoors[3], 180, 0)
    EndIf
-   ::oFormCalc:nInitFocus:= ::oFormCalc:oBtnRes
+   ::oFormCalc:nInitFocus := ::oFormCalc:oBtnRes
 
 RETURN NIL
 

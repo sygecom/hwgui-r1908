@@ -75,7 +75,7 @@ PUBLIC nQueryWndHandle := 0
        ON IDM_NEW     ACTION  StruMan(.T.)  ;
        ON IDM_OPEN    ACTION  OpenDlg()     ;
        ON IDM_CLOSE   ACTION  ChildClose()  ;
-       ON IDM_FONT    ACTION  oBrwFont:=HFont():Select() ;
+       ON IDM_FONT    ACTION  oBrwFont := HFont():Select() ;
        ON IDM_CONFIG  ACTION  OpenConfig()  ;
        ON IDM_INDSEL  ACTION  ListIndex()   ;
        ON IDM_INDNEW  ACTION  NewIndex()    ;
@@ -252,7 +252,7 @@ Local indname
    ENDDO
    INIT DIALOG oModDlg FROM RESOURCE "DLG_SEL_IND"
    REDEFINE BROWSE oBrw ARRAY OF oModDlg ID ID_BROWSE   ;
-       ON INIT {|o|o:rowPos:=o:nCurrent:=IndexOrd()+1}       ;
+       ON INIT {|o|o:rowPos := o:nCurrent := IndexOrd()+1}       ;
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind

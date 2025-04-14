@@ -78,7 +78,7 @@ ENDFUNC
         IF (itemName := hwg_NextItem(stroka, .T.)) == "FORM"
           cWidth := hwg_NextItem(stroka)
           nWidth := Val(cWidth)
-          nHeight:= Val(hwg_NextItem(stroka))
+          nHeight := Val(hwg_NextItem(stroka))
           xKoef := nWidth / Val(hwg_NextItem(stroka))
           oForm:CreateDialog({ {"Left", "300"}, {"Top", "120"}, ;
               {"Width", "500"}, {"Height", "400"}, {"Caption", itemName}, ;
@@ -102,7 +102,7 @@ ENDFUNC
           x := Val(hwg_NextItem(stroka))
           y := Val(hwg_NextItem(stroka))
           nWidth := Val(hwg_NextItem(stroka))
-          nHeight:= Val(hwg_NextItem(stroka))
+          nHeight := Val(hwg_NextItem(stroka))
           cFont  := hwg_NextItem(stroka)
           nAlign := Val(hwg_NextItem(cFont, .T., ",")) + 1
           nVar   := Val(hwg_NextItem(cFont,, ","))

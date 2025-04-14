@@ -73,7 +73,7 @@ METHOD Activate CLASS HMonthCalendar
                   ::nLeft, ::nTop, ::nWidth, ::nHeight)
       hwg_SetWindowObject(::handle, Self)
 //      MonthCalendarChange(::handle, {||
-        hwg_MONTHCALENDAR_SETACTION(::handle, {||::value:=hwg_GetMonthCalendarDate(::handle)})
+        hwg_MONTHCALENDAR_SETACTION(::handle, {||::value := hwg_GetMonthCalendarDate(::handle)})
       ::Init()
    EndIf
 

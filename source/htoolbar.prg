@@ -185,7 +185,7 @@ METHOD CREATETOOL() CLASS hToolBar
    LOCAL n
    LOCAL n1
    LOCAL aTemp
-   LOCAL aButton :={}
+   LOCAL aButton := {}
    LOCAL aBmpSize
    LOCAL hIm
    LOCAL nPos

@@ -231,13 +231,13 @@ FUNCTION Main(fileXML)
 
  IF fileXML == NIL
 
-    filexml:=""
+    filexml := ""
     IF FILE("XMLRUN.DEF")
-       filexml:=RTrim(MemoLine(MemoRead("XMLRUN.DEF"), 128, 1))
+       filexml := RTrim(MemoLine(MemoRead("XMLRUN.DEF"), 128, 1))
     ENDIF
 
     IF !FILE(filexml)
-    filexml:=hwg_SelectFile("XML FILE (*.XML)", "*.XML")
+    filexml := hwg_SelectFile("XML FILE (*.XML)", "*.XML")
     ENDIF
 
  ELSE
@@ -250,7 +250,7 @@ FUNCTION Main(fileXML)
      RETURN FALSE
  ENDIF
 
- oForm:=HFormTmpl():Read(filexml)
+ oForm := HFormTmpl():Read(filexml)
  oForm:Show()
 
  //oForm:Close()
@@ -341,7 +341,7 @@ FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    LOCAL lforever
    LOCAL lFirstPass := .T.
 
-   if(nSeconds == NIL, nSeconds:=20,)
+   if(nSeconds == NIL, nSeconds := 20,)
 
    lforever := (nSeconds == 0)
    keyboard chr(255)
@@ -388,7 +388,7 @@ FUNCTION filelock(nSeconds)
    LOCAL lforever
 
    lforever := (nSeconds == 0)
-   if(nSeconds == NIL, nSeconds:=20,)
+   if(nSeconds == NIL, nSeconds := 20,)
 
    IF Flock()
       RETURN .T.
@@ -514,12 +514,12 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
  //if (ctod(g:buffer)=ctod("  /  /  "))
 
-      cpress:=StrTran(cPress, " ", "")
-      cpress:=StrTran(cPress, ".", "")
-      cpress:=StrTran(cpress, "-", "")
-      cpress:=StrTran(cpress, "/", "")
-      cpress:=StrTran(cpress, ",", "")
-      nLen:=Len(cpress)
+      cpress := StrTran(cPress, " ", "")
+      cpress := StrTran(cPress, ".", "")
+      cpress := StrTran(cpress, "-", "")
+      cpress := StrTran(cpress, "/", "")
+      cpress := StrTran(cpress, ",", "")
+      nLen := Len(cpress)
 
  *:minimum 6  &  max 9 char
 
@@ -532,15 +532,15 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
  *:kemungkinan   ddmmyy, dmmmyy, ddmmmyy, ddmmyyyy, ddmmmyyyy!
  *:     	 999999  9AAA99  99AAA99  99999999  99AAA9999
 
-       c:=""
+       c := ""
 
-       for i:=1 to nLen
+       for i :=1 to nLen
            c+= if(isdigit(subst(cPress, i, 1)), "9", "A")
        next
 
        *:Kalau 2 Char Pertama Adalah Angka
-       cPress:= IIf(Left(c, 2) == "99", cPress, "0" + cPress)
-            c:= IIf(Left(c, 2) == "99", c, "9" + c)
+       cPress := IIf(Left(c, 2) == "99", cPress, "0" + cPress)
+            c := IIf(Left(c, 2) == "99", c, "9" + c)
 
 	*:isi Hari
         dd := Left(cPress, 2)+"."
@@ -548,32 +548,32 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
 	if subst(c, 3, 3)="AAA"
 
-	   mm:=subst(cPress, 3, 3)
-	   mm:=transform(Lower(mm), "!xx")
+	   mm := subst(cPress, 3, 3)
+	   mm := transform(Lower(mm), "!xx")
 
 	   *:Koreksi untuk ejaan Inggris
-	   mm:=StrTran(mm, "Peb", "Feb")
-	   mm:=StrTran(mm, "May", "Mei")
-	   mm:=StrTran(mm, "Aug", "Agt")
-	   mm:=StrTran(mm, "Agu", "Agt")
-	   mm:=StrTran(mm, "Nov", "Nop")
-	   mm:=StrTran(mm, "Dec", "Des")
-	   mm:=StrTran(mm, "Oct", "Okt")
+	   mm := StrTran(mm, "Peb", "Feb")
+	   mm := StrTran(mm, "May", "Mei")
+	   mm := StrTran(mm, "Aug", "Agt")
+	   mm := StrTran(mm, "Agu", "Agt")
+	   mm := StrTran(mm, "Nov", "Nop")
+	   mm := StrTran(mm, "Dec", "Des")
+	   mm := StrTran(mm, "Oct", "Okt")
 
-           mm:=Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
+           mm := Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
 
 	   nPot--
 
         else
 
-	   mm:=subst(cpress, 3, 2)+"."
+	   mm := subst(cpress, 3, 2)+"."
 
         end
 
 	   yy := Right(cPress, ((Len(c) - Len(dd + mm)) + nPot))
 
 	   if Len(yy) == 2
-	      yy:= Left(dtos(date()), 2)+yy
+	      yy := Left(dtos(date()), 2)+yy
 	   endif
 
       if  !HB_IsDate(ctod(dd+mm+yy)) .OR. (ctod(dd+mm+yy) == ctod("  /  /  "))
@@ -600,7 +600,7 @@ FUNCTION d2infstr(d) && date to informix style string
 
   dd := Right(dtos(d), 2);  yyyy := Left(dtos(d), 4)
 
-  mmm:=subst("JanFebMarAprMeiJunJulAgtSepOktNopDes", month(d) * 3 - 2, 3)
+  mmm := subst("JanFebMarAprMeiJunJulAgtSepOktNopDes", month(d) * 3 - 2, 3)
 
  RETURN (dd+"-"+mmm+"-"+yyyy)
 

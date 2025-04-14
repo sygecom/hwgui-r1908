@@ -96,7 +96,7 @@ CLASS HCtrlTmpl
    DATA aControls INIT {}
    DATA aProp, aMethods
 
-   METHOD New(oParent) INLINE (::oParent:=oParent, AAdd(oParent:aControls, Self), Self)
+   METHOD New(oParent) INLINE (::oParent := oParent, AAdd(oParent:aControls, Self), Self)
    METHOD F(nId)
 ENDCLASS
 
@@ -878,7 +878,7 @@ CLASS HRepItem
    DATA y2
    DATA lMark INIT .F.
 
-   METHOD New(oParent) INLINE (::oParent:=oParent, AAdd(oParent:aControls, Self), Self)
+   METHOD New(oParent) INLINE (::oParent := oParent, AAdd(oParent:aControls, Self), Self)
 ENDCLASS
 
 CLASS HRepTmpl

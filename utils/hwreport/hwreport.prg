@@ -75,19 +75,19 @@ Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
          MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
       ENDMENU
       MENU TITLE "&Items"
-         MENUITEM "&Text" ID IDM_ITEMTEXT ACTION s_nAddItem:=TYPE_TEXT
-         MENUITEM "&Horizontal Line" ID IDM_ITEMHLINE ACTION s_nAddItem:=TYPE_HLINE
-         MENUITEM "&Vertical Line" ID IDM_ITEMVLINE ACTION s_nAddItem:=TYPE_VLINE
-         MENUITEM "&Box" ID IDM_ITEMBOX ACTION s_nAddItem:=TYPE_BOX
-         MENUITEM "B&itmap" ID IDM_ITEMBITM ACTION s_nAddItem:=TYPE_BITMAP
+         MENUITEM "&Text" ID IDM_ITEMTEXT ACTION s_nAddItem := TYPE_TEXT
+         MENUITEM "&Horizontal Line" ID IDM_ITEMHLINE ACTION s_nAddItem := TYPE_HLINE
+         MENUITEM "&Vertical Line" ID IDM_ITEMVLINE ACTION s_nAddItem := TYPE_VLINE
+         MENUITEM "&Box" ID IDM_ITEMBOX ACTION s_nAddItem := TYPE_BOX
+         MENUITEM "B&itmap" ID IDM_ITEMBITM ACTION s_nAddItem := TYPE_BITMAP
          SEPARATOR
          MENU TITLE "&Markers"
-            MENUITEM "&Page Header" ID IDM_ITEMPH ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_PH)
-            MENUITEM "&Start line" ID IDM_ITEMSL ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_SL)
-            MENUITEM "&End line" ID IDM_ITEMEL ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_EL)
-            MENUITEM "Page &Footer" ID IDM_ITEMPF ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_PF)
-            MENUITEM "E&nd of Page Footer" ID IDM_ITEMEPF ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_EPF)
-            MENUITEM "&Document Footer" ID IDM_ITEMDF ACTION (s_nAddItem:=TYPE_MARKER, s_nMarkerType:=MARKER_DF)
+            MENUITEM "&Page Header" ID IDM_ITEMPH ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_PH)
+            MENUITEM "&Start line" ID IDM_ITEMSL ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_SL)
+            MENUITEM "&End line" ID IDM_ITEMEL ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_EL)
+            MENUITEM "Page &Footer" ID IDM_ITEMPF ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_PF)
+            MENUITEM "E&nd of Page Footer" ID IDM_ITEMEPF ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_EPF)
+            MENUITEM "&Document Footer" ID IDM_ITEMDF ACTION (s_nAddItem := TYPE_MARKER, s_nMarkerType := MARKER_DF)
          ENDMENU
          SEPARATOR
          MENUITEM "&Delete item" ID IDM_ITEMDEL ACTION DeleteItem()

@@ -8,9 +8,9 @@ FUNCTION Main
    LOCAL cFile
    LOCAL cText
    
-   For i:= 1 to Len(aFiles)
+   For i := 1 to Len(aFiles)
    
-      cFile:= StrTran(Lower(Alltrim(aFiles[i, 1])), "xml", "frm")
+      cFile := StrTran(Lower(Alltrim(aFiles[i, 1])), "xml", "frm")
       
       If File(cFile)
          FErase(cFile)

@@ -46,7 +46,7 @@ Local nFirst, i
       s_oScrFont := HFont():Add("Courier New", 0, -15, , 204)
 #ifndef __LINUX__
       s_oBmpCurr := HBitmap():AddStandard(OBM_RGARROWD)
-      s_oBmpPoint:= HBitmap():AddStandard(OBM_CHECK)
+      s_oBmpPoint := HBitmap():AddStandard(OBM_CHECK)
 #endif
       INIT DIALOG s_oDlgDebug TITLE ("Script Debugger - " + aScript[1]) AT 210, 10 SIZE 500, 300 ;
            FONT s_oDlgFont STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX ;
@@ -88,7 +88,7 @@ Local nFirst, i
       s_oBrwScript:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), Left(o:aArray[o:nCurrent], 4)}, "C", 4, 0))
       s_oBrwScript:AddColumn(HColumn():New("", {|v, o|HB_SYMBOL_UNUSED(v), SubStr(o:aArray[o:nCurrent], 6)}, "C", 80, 0))
 
-      s_oBrwScript:bEnter:= {||AddBreakPoint()}
+      s_oBrwScript:bEnter := {||AddBreakPoint()}
 
       @ 0, 240 PANEL s_oPanel OF s_oDlgDebug SIZE s_oDlgDebug:nWidth, 64 ;
           ON SIZE {|o, x, y|o:Move(, y - 64, x)}

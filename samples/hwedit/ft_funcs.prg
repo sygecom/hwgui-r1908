@@ -116,7 +116,7 @@ FUNCTION FT_FUSE(cFile AS STRING, nMode AS NUMERIC)
          theHandle := HBMake_FileBase():new(cFile):open()
       ENDIF
    ENDIF
-   nHandle:= theHandle:nHan
+   nHandle := theHandle:nHan
 
 RETURN nHandle
 

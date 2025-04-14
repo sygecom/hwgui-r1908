@@ -59,7 +59,7 @@ RETURN NIL
 
 FUNCTION MyReport
 LOCAL aPaintRep
-   cEnd:=Chr(13)+Chr(10)
+   cEnd := Chr(13)+Chr(10)
    aPaintRep := { 210, 297, 0, 0, 0, {},, "MyReport", .F., 0, NIL }
    aPaintRep[11] := ;
      "nStroka := 1"+cEnd

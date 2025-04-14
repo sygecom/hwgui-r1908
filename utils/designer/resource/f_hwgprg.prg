@@ -254,7 +254,7 @@ FUNCTION Browse2Prg
       cAlias := Lower(Trim(IIf((temp := oCtrl:GetProp("alias")) != NIL .AND. !Empty(temp), temp, calias)))
       cBrowser += Space(4) + cname + ":alias := '" + calias + "'" + _chr(10)
       // abrir tablea
-      //     IF (temp:=oCtrl:GetProp("filedbf")) != NIL //.AND. !Empty(temp)
+      //     IF (temp := oCtrl:GetProp("filedbf")) != NIL //.AND. !Empty(temp)
       //      cTmpAlias := Lower(Left(hwg_CutPath(temp), At(".", hwg_CutPath(temp)) - 1))
       //      IF select(cTmpalias) = 0
       //        USE (value) NEW SHARED ALIAS (cTmpAlias) VIA "DBFCDX" //ftmp
@@ -339,7 +339,7 @@ FUNCTION Browse2Prg
             m->nDec := &cTmpAlias->(FIELDDEC(AScan(j, temp)))
             cCampo := "{|| " + cCampo + " }"
             //cBrowser := SPACE(4)+cname+":AddColumn(HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
-            //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL, LTrim(Str(Val(temp))), "10")+", "+;
+            //      IIf((temp := oCtrl1:GetProp("Length"))!= NIL, LTrim(Str(Val(temp))), "10")+", "+;
             //      LTrim(Str(aDecimals[i]))+" "
          ELSE
             cCampo := IIf(cCampo == NIL, ".T.", cCampo)
@@ -705,7 +705,7 @@ FUNCTION Ctrl2Prg
       ENDIF
 
       IF oCtrl:oContainer != NIL
-         //if oCtrl:cClass != "group" .OR. (oCtrl:cClass == "group" .AND.(temp:=oCtrl:GetProp("NoGroup" )) != NIL .AND. temp == "False") //nando pos condicao do OR->
+         //if oCtrl:cClass != "group" .OR. (oCtrl:cClass == "group" .AND.(temp := oCtrl:GetProp("NoGroup" )) != NIL .AND. temp == "False") //nando pos condicao do OR->
          IF (oCtrl:cClass != "group" .AND.  Empty(cofGroup)) .OR. Empty(cofGroup) // nando pos
             IF (temp := oCtrl:oContainer:GetProp("Name")) == NIL .OR. Empty(temp)
                IF oCtrl:oContainer:oContainer != NIL

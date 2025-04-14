@@ -31,7 +31,7 @@ Local oModDlg, oTimer // , oFont := HFont():Add("MS Sans Serif", 0, -13)
 Local e1 := "Dialog from prg"
 Local e2 := Date()
 Local e3 := 10320.54
-Local e4:="11222333444455"
+Local e4 := "11222333444455"
 Local e5 := 10320.54
 Local e6 := "Max Lenght = 15"
 Local e7 := "Password"
@@ -73,7 +73,7 @@ Private oSayT
         PASSWORD                        ;
         SIZE 260, 26
 
-   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., oModDlg:Close()}
+   @  20, 250  BUTTON "Ok" SIZE 100, 32 ON CLICK {||oModDlg:lResult := .T., oModDlg:Close()}
    @ 180, 250 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32
 
    @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;

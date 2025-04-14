@@ -103,7 +103,7 @@ METHOD Activate() CLASS HPanel
       IF __ObjHasMsg(::oParent, "AOFFSET") .AND. ::oParent:type == WND_MDI
          aCoors := hwg_GetWindowRect(::handle)
          nWidth := aCoors[3] - aCoors[1]
-         nHeight:= aCoors[4] - aCoors[2]
+         nHeight := aCoors[4] - aCoors[2]
          IF nWidth > nHeight .OR. nWidth == 0
             ::oParent:aOffset[2] += nHeight
          ELSEIF nHeight > nWidth .OR. nHeight == 0

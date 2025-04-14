@@ -389,7 +389,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::Activate()
 
    IF ::id == IDOK
-      bClick := {||::oParent:lResult:=.T., ::oParent:Close()}
+      bClick := {||::oParent:lResult := .T., ::oParent:Close()}
    ELSEIF ::id == IDCANCEL
       bClick := {||::oParent:Close()}
    ENDIF

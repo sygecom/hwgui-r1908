@@ -40,7 +40,7 @@ RETURN Self
 METHOD EndGroup(nSelected)  CLASS HRadioGroup
 Local nLen
 
-   IF ::oGroupCurrent != NIL .AND. (nLen:=Len(::oGroupCurrent:aButtons)) > 0
+   IF ::oGroupCurrent != NIL .AND. (nLen := Len(::oGroupCurrent:aButtons)) > 0
 
       nSelected := IIf(nSelected != NIL .AND. nSelected <= nLen .AND. nSelected > 0, ;
                        nSelected, ::oGroupCurrent:value)
@@ -54,7 +54,7 @@ RETURN NIL
 METHOD SetValue(nValue)  CLASS HRadioGroup
 Local nLen
 
-   IF (nLen:=Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen
+   IF (nLen := Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen
       hwg_CheckButton(::aButtons[nValue]:handle, .T.)
    ENDIF
 RETURN NIL

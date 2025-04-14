@@ -523,7 +523,7 @@ METHOD HidePage(nPage) CLASS HTab
       nFirst := ::aPages[nPage, 1] + 1
       nEnd := ::aPages[nPage, 1] + ::aPages[nPage, 2]
       FOR i := nFirst TO nEnd
-         IF (k:= AScan(::aControlsHide, ::aControls[i]:id)) == 0 .AND. ::aControls[i]:lHide
+         IF (k := AScan(::aControlsHide, ::aControls[i]:id)) == 0 .AND. ::aControls[i]:lHide
             AAdd(::aControlsHide, ::aControls[i]:id)
          ELSEIF k > 0 .AND. !::aControls[i]:lHide
             ADel(::aControlsHide, k)

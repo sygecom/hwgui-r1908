@@ -305,7 +305,7 @@ FUNCTION Texto()
         //
         if subs(Upper(linha), 1, 4) == "FUNC" .OR. subs(Upper(linha), 1, 4) == "PROC"
            fun := ""
-           for f:= 1 to Len(linha)+1
+           for f := 1 to Len(linha)+1
               oCaracter++
              if subs(linha, f, 1) = " "
                 for g = f+1 to Len(linha)

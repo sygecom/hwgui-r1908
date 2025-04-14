@@ -10,7 +10,7 @@ FUNCTION _saymoney
    PRIVATE oOwnerbutton3
    PRIVATE nValue
 
-nValue:=0
+nValue := 0
 
   INIT DIALOG oDlg TITLE "Say Money Sample" ;
     AT 309, 214 SIZE 552, 239 ;

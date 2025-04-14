@@ -31,8 +31,8 @@ Private nColor, oBmp2
       MENU TITLE "&File"
          MENUITEM "&Open" ACTION FileOpen()
          SEPARATOR
-         MENUITEM "&Font" ACTION oFont:=HFont():Select(oFont)
-         MENUITEM "&Color" ACTION (nColor:=hwg_ChooseColor(nColor, .F.), ;
+         MENUITEM "&Font" ACTION oFont := HFont():Select(oFont)
+         MENUITEM "&Color" ACTION (nColor := hwg_ChooseColor(nColor, .F.), ;
                      hwg_MsgInfo(IIf(nColor != NIL, Str(nColor), "--"), "Color value"))
          SEPARATOR
          MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
@@ -76,7 +76,7 @@ Local nId
             ON EXIT {|o|Fileclose(o)}
 /*
       MENU OF oModDlg
-         MENUITEM "&Font" ACTION (oBrw:oFont:=HFont():Select(oFont), oBrw:Refresh())
+         MENUITEM "&Font" ACTION (oBrw:oFont := HFont():Select(oFont), oBrw:Refresh())
          MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 */
@@ -172,8 +172,8 @@ RETURN NIL
 FUNCTION TestTab()
 
 Local oDlg, oTAB
-Local oGet1, oGet2, oVar1:="1", oVar2:="2"
-Local oGet3, oGet4, oVar3:="3", oVar4:="4", oGet5, oVar5 := "5"
+Local oGet1, oGet2, oVar1 := "1", oVar2 := "2"
+Local oGet3, oGet4, oVar3 := "3", oVar4 := "4", oGet5, oVar5 := "5"
 
 INIT DIALOG oDlg CLIPPER NOEXIT AT 0, 0 SIZE 200, 200 ;
    ON INIT  {||hwg_SetFocus(oDlg:getlist[1]:handle)}

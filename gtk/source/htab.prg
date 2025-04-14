@@ -60,9 +60,9 @@ LOCAL i, aBmpSize
 
    ::bChange2 := bChange
 
-   ::bGetFocus :=IIf(bGetFocus == NIL, NIL, bGetFocus)
-   ::bLostFocus:=IIf(bLostFocus == NIL, NIL, bLostFocus)
-   ::bAction   :=IIf(bClick == NIL, NIL, bClick)
+   ::bGetFocus := IIf(bGetFocus == NIL, NIL, bGetFocus)
+   ::bLostFocus := IIf(bLostFocus == NIL, NIL, bLostFocus)
+   ::bAction   := IIf(bClick == NIL, NIL, bClick)
 
    ::Activate()
 

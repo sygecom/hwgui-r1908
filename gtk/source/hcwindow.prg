@@ -73,8 +73,8 @@ CLASS HCustomWindow INHERIT HObject
    METHOD AddEvent(nEvent, nId, bAction, lNotify) ;
       INLINE AAdd(IIf(lNotify == NIL .OR. !lNotify, ::aEvents, ::aNotify), {nEvent, nId, bAction})
    METHOD FindControl(nId, nHandle)
-   METHOD Hide() INLINE (::lHide:=.T., hwg_HideWindow(::handle))
-   METHOD Show() INLINE (::lHide:=.F., hwg_ShowWindow(::handle))
+   METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle))
+   METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle))
    METHOD Move(x1, y1, width, height)
    METHOD onEvent(msg, wParam, lParam)
    METHOD End()

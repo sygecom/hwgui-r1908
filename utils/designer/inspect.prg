@@ -143,7 +143,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             nWidth := Min(::aColumns[2]:width, ::x2 - x1 - 1)
             ReadExit(.T.)
 
-           obrw1:bPosChanged:={|| VldBrwGet(oGet, oBtn)}
+           obrw1:bPosChanged := {|| VldBrwGet(oGet, oBtn)}
            @ x1+14, y1-2 GET oGet VAR varbuf OF oBrw1  ;
             SIZE nWidth, ::height+6        ;
             STYLE ES_AUTOHSCROLL           ;
@@ -338,7 +338,7 @@ STATIC FUNCTION VldBrwGet(oGet , oBtn)
    IF HB_IsObject(obtn)
      hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)
    ENDIF
-   obrw1:bPosChanged:= NIL
+   obrw1:bPosChanged := NIL
    // : END LFB
 
    // oBrw1:DelControl(oGet)
@@ -546,7 +546,7 @@ STATIC FUNCTION InspSetBrowse()
    LOCAL nRow := 1
 
    IF oBrw1 != NIL
-          nRow:=oBrw1:rowPos
+          nRow := oBrw1:rowPos
     ENDIF
    aProp := {}
    aMethods := {}
@@ -642,19 +642,19 @@ STATIC FUNCTION EditArray(arr)
 
    @ 0, 0 BROWSE oBrw ARRAY SIZE 400, 255  ;
        ON SIZE {|o, x, y|o:Move(,, x, y-45)}
-    oBrw:acolumns:={}
+    oBrw:acolumns := {}
    oBrw:bcolor := 15132390
    oBrw:bcolorSel := hwg_VColor("008000")
    oBrw:lAppable := .T.
    oBrw:aArray := arr
-   oBrw:AddColumn(HColumn():New(, {|v, o|IIf(v != NIL, o:aArray[o:nCurrent]:=v, o:aArray[o:nCurrent])}, "C", 100, 0, .T.))
+   oBrw:AddColumn(HColumn():New(, {|v, o|IIf(v != NIL, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent])}, "C", 100, 0, .T.))
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
        ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)};
        ON CLICK {|| onclick_deleteItem(oBrw)}
    @ 151, 265 BUTTON "Ok" SIZE 110, 26     ;
        ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)}  ;
-       ON CLICK {||oDlg:lResult:=.T., EndDialog()}
+       ON CLICK {||oDlg:lResult := .T., EndDialog()}
    @ 276, 265 BUTTON "Cancel" ID IDCANCEL SIZE 110, 26 ;
        ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)}
 
@@ -805,7 +805,7 @@ RETURN -1
 FUNCTION ActiveTopMost(nHandle, lActive)
 
    LOCAL lSucess   // , nHandle
-  nHandle:=hwg_GetActiveWindow()
+  nHandle := hwg_GetActiveWindow()
 
   IF lActive
        lSucess := hwg_SetTopMost(nHandle)    // Set TopMost

@@ -89,7 +89,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
       ::Style := nStyle
       ::tColor := clr
       ::oBmp := oBmp
-      clr:= NIL // because error
+      clr := NIL // because error
       ::handle := hwg_InitMdiWindow(Self, ::szAppName, cTitle, cMenu, IIf(oIcon != NIL, oIcon:handle, NIL), , ; //clr, ;
          nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 

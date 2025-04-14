@@ -146,7 +146,7 @@ METHOD New(oPorta) CLASS PrintDos
    IF oPorta == "GRAPHIC" .OR. oPorta == "PREVIEW"
       ::gText := ""
    ELSE
-      // tracelog([::gText:=fCreate(::oPorta)])
+      // tracelog([::gText := fCreate(::oPorta)])
       ::gText := FCreate(::oPorta)
       //tracelog([depois           ::gText := fCreate(::oPorta)], ::gtext)
       IF ::gText < 0

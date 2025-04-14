@@ -90,11 +90,11 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ENDIF
 
    IF !Empty(cPicture) .OR. cPicture == NIL .And. lMaxLength != NIL .OR. !Empty(lMaxLength)
-      ::lMaxLength:= lMaxLength
+      ::lMaxLength := lMaxLength
    ENDIF
 /*   IF ::lMaxLength != NIL .AND. !Empty(::lMaxLength) 
       IF !Empty(cPicture) .OR. cPicture == NIL
-         cPicture:=Replicate("X", ::lMaxLength)
+         cPicture := Replicate("X", ::lMaxLength)
       ENDIF
    ENDIF                        ----------------- commented out by Maurizio la Cecilia */
  
@@ -408,7 +408,7 @@ Local i, masklen, newpos, vari
    //Added By Sandro Freire
 
    IF !Empty(oEdit:cPicMask)
-        newPos:=Len(oEdit:cPicMask)
+        newPos := Len(oEdit:cPicMask)
         //writelog("KeyRight-2 "+str(nPos) + " " +str(newPos))
         IF nPos>newPos .AND. !Empty(Trim(oEdit:Title))
             hwg_edit_Setpos(oEdit:handle, newPos)
@@ -592,7 +592,7 @@ Local nPos, nGetLen, nLen, vari, i, x, newPos
          //Added By Sandro Freire
          IF oEdit:cType == "N"
             IF !Empty(oEdit:cPicMask)
-                newPos:=Len(oEdit:cPicMask)-3
+                newPos := Len(oEdit:cPicMask)-3
                 IF "E" $ oEdit:cPicFunc .AND. nPos == newPos
                     GetApplyKey(oEdit, ",")
                 ENDIF

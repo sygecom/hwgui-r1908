@@ -25,7 +25,7 @@ FUNCTION pesquisaglobal()
    next f
    
    asort(diretorio)
-   for g:= 1 to Len(diretorio) // pegando diretorio atual
+   for g := 1 to Len(diretorio) // pegando diretorio atual
           if Upper(diretorio[g]) = DiskName() + ":\" + Upper(CurDir() + "\")
              atu := g
           endif
@@ -58,7 +58,7 @@ FUNCTION pesq(rd_dir, rd_text)
    PRIVATE arq_contem := {}
    PRIVATE result := ""
 
-   for f:= 1 to Len(arquivos) // filtrando arquivos
+   for f := 1 to Len(arquivos) // filtrando arquivos
        if arquivos[f, 1] != "." .AND. arquivos[f, 1] != ".."
           AAdd(nom_arq, arquivos[f, 1])
        endif

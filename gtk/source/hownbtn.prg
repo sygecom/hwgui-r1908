@@ -68,7 +68,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
    ::heightt := heightt
 
    if lEnabled != NIL
-      ::lEnabled:=lEnabled
+      ::lEnabled := lEnabled
    endif
    IF bmp != NIL
       ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. HB_IsNumeric(bmp), ;
@@ -165,12 +165,12 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
                  Round((aCoors[4] - aCoors[2] - ::heightb) / 2, 0))
       if ::lEnabled
          if ::oBitmap != NIL
-            ::bitmap:handle:=::oBitmap
+            ::bitmap:handle := ::oBitmap
             ::oBitmap := NIL
          EndIf
          hwg_DrawBitmap(hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb)
       Else
-         ::oBitmap:=::bitmap:handle
+         ::oBitmap := ::bitmap:handle
          hwg_DrawGrayBitmap(hDC, ::bitmap:handle, x1, y1)
       EndIf
    ENDIF
@@ -261,7 +261,7 @@ RETURN NIL
 METHOD Enable() CLASS HOwnButton
 
    hwg_EnableWindow(::handle, .T.)
-   ::lEnabled:=.T.
+   ::lEnabled := .T.
    hwg_RedrawWindow(::handle)
 
 RETURN NIL
@@ -269,7 +269,7 @@ RETURN NIL
 METHOD Disable() CLASS HOwnButton
 
    ::state   := OBTN_INIT
-   ::lEnabled:=.F.
+   ::lEnabled := .F.
    hwg_RedrawWindow(::handle)
    hwg_EnableWindow(::handle, .F.)
 

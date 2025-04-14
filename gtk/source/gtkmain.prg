@@ -50,7 +50,7 @@ Local cRes := ""
    @ 20, 10 SAY cText SIZE 260, 22
    @ 20, 35 GET cres  SIZE 260, 26 STYLE WS_DLGFRAME + WS_TABSTOP + nStyle
 
-   @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32 ON CLICK {||oModDlg:lResult:=.T., EndDialog()}
+   @ 20, 95 BUTTON "Ok" ID IDOK SIZE 100, 32 ON CLICK {||oModDlg:lResult := .T., EndDialog()}
    @ 180, 95 BUTTON "Cancel" ID IDCANCEL SIZE 100, 32 ON CLICK {||EndDialog()}
 
    ACTIVATE DIALOG oModDlg
@@ -106,7 +106,7 @@ Local hDC, aMetr, width, height, screenh
        FONT oFont                   ;
        STYLE WS_BORDER              ;
        ON SIZE {|o, x, y|o:Move(,, x, y)} ;
-       ON CLICK {|o|nChoice:=o:nCurrent, EndDialog(o:oParent:handle)}
+       ON CLICK {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
 
    IF HB_IsArray(arr[1])
       oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent, 1]}, "C", nLen))

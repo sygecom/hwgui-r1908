@@ -169,8 +169,8 @@ Local i, nrec
          GO oBrw:aArray[1]
          oBrw:prflt := .T.
          oBrw:bSkip := &("{|o,x|" + oBrw:alias + "->(FSKIP(o,x))}")
-         oBrw:bGoTop:= &("{|o|" + oBrw:alias + "->(FGOTOP(o))}")
-         oBrw:bGoBot:= &("{|o|" + oBrw:alias + "->(FGOBOT(o))}")
+         oBrw:bGoTop := &("{|o|" + oBrw:alias + "->(FGOTOP(o))}")
+         oBrw:bGoBot := &("{|o|" + oBrw:alias + "->(FGOBOT(o))}")
          oBrw:bEof  := &("{|o|" + oBrw:alias + "->(FEOF(o))}")
          oBrw:bBof  := &("{|o|" + oBrw:alias + "->(FBOF(o))}")
          hwg_WriteStatus(HMainWindow():GetMdiActive(), 1, Ltrim(Str(oBrw:nRecords, 10))+" records filtered")
@@ -179,8 +179,8 @@ Local i, nrec
          SET FILTER TO
          GO nrec
          oBrw:bSkip := &("{|a,x|" + oBrw:alias + "->(DBSKIP(x))}")
-         oBrw:bGoTop:= &("{||" + oBrw:alias + "->(DBGOTOP())}")
-         oBrw:bGoBot:= &("{||" + oBrw:alias + "->(DBGOBOTTOM())}")
+         oBrw:bGoTop := &("{||" + oBrw:alias + "->(DBGOTOP())}")
+         oBrw:bGoBot := &("{||" + oBrw:alias + "->(DBGOBOTTOM())}")
          oBrw:bEof  := &("{||" + oBrw:alias + "->(EOF())}")
          oBrw:bBof  := &("{||" + oBrw:alias + "->(BOF())}")
          hwg_MsgInfo("Records not found")
