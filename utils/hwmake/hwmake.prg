@@ -23,11 +23,11 @@
    ANNOUNCE HB_GTSYS
    REQUEST HB_GT_GUI_DEFAULT
 
-   #xcommand TRY              => s_bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+   #xcommand TRY              => s_bError := errorBlock({|oErr| break(oErr) }) ;;
                                  BEGIN SEQUENCE
-   #xcommand CATCH [<!oErr!>] => errorBlock( s_bError ) ;;
+   #xcommand CATCH [<!oErr!>] => errorBlock(s_bError) ;;
                                  RECOVER [USING <oErr>] <-oErr-> ;;
-                                 errorBlock( s_bError )
+                                 errorBlock(s_bError)
    #command FINALLY           => ALWAYS
    
 #endif
@@ -52,10 +52,10 @@ Local oBtSave
 Private cDirec:=DiskName()+":\"+CurDir()+"\"
 
 If !File(cDirec+"hwmake.ini")
-  hwg_WriteIni( 'Config', 'Dir_HwGUI', "C:\HwGUI", cDirec+"hwmake.ini" )
-  hwg_WriteIni( 'Config', 'Dir_HARBOUR', "C:\xHARBOUR", cDirec+"hwmake.ini" )
-  hwg_WriteIni( 'Config', 'Dir_BCC55', "C:\BCC55", cDirec+"hwmake.ini" )
-  hwg_WriteIni( 'Config', 'Dir_OBJ', "OBJ", cDirec+"hwmake.ini" )
+  hwg_WriteIni('Config', 'Dir_HwGUI', "C:\HwGUI", cDirec+"hwmake.ini")
+  hwg_WriteIni('Config', 'Dir_HARBOUR', "C:\xHARBOUR", cDirec+"hwmake.ini")
+  hwg_WriteIni('Config', 'Dir_BCC55', "C:\BCC55", cDirec+"hwmake.ini")
+  hwg_WriteIni('Config', 'Dir_OBJ', "OBJ", cDirec+"hwmake.ini")
 EndIf
 
 Private oImgNew  := hbitmap():addResource("NEW")
@@ -124,7 +124,7 @@ Private oIcon := HIcon():AddResource("PIM")
       hwg_CreateArList(oBrowse1, aFiles1)
       obrowse1:acolumns[1]:heading := "File Names"
       obrowse1:acolumns[1]:length := 50
-      oBrowse1:bcolorSel := hwg_VColor( "800080" )
+      oBrowse1:bcolorSel := hwg_VColor("800080")
       oBrowse1:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse1, "*.prg")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse1)}
@@ -136,7 +136,7 @@ Private oIcon := HIcon():AddResource("PIM")
       hwg_CreateArList(oBrowse2, aFiles2)
       obrowse2:acolumns[1]:heading := "File Names"
       obrowse2:acolumns[1]:length := 50
-      oBrowse2:bcolorSel := hwg_VColor( "800080" )
+      oBrowse2:bcolorSel := hwg_VColor("800080")
       oBrowse2:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse2, "*.c")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse2)}
@@ -147,7 +147,7 @@ Private oIcon := HIcon():AddResource("PIM")
       hwg_CreateArList(oBrowse3, aFiles3)
       obrowse3:acolumns[1]:heading := "File Names"
       obrowse3:acolumns[1]:length := 50
-      oBrowse3:bcolorSel := hwg_VColor( "800080" )
+      oBrowse3:bcolorSel := hwg_VColor("800080")
       oBrowse3:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse3, "*.lib")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse3)}
@@ -158,7 +158,7 @@ Private oIcon := HIcon():AddResource("PIM")
       hwg_CreateArList(oBrowse4, aFiles4)
       obrowse4:acolumns[1]:heading := "File Names"
       obrowse4:acolumns[1]:length := 50
-      oBrowse4:bcolorSel := hwg_VColor( "800080" )
+      oBrowse4:bcolorSel := hwg_VColor("800080")
       oBrowse4:ofont := HFont():Add('Arial', 0, -12)
       @ 10, 205 BUTTON "Add"     SIZE 60, 25  on click {||SearchFile(oBrowse4, "*.rc")}  
       @ 70, 205 BUTTON "Delete"  SIZE 60, 25  on click {||BrwdelIten(oBrowse4)}
@@ -209,15 +209,15 @@ Local aPal:=""
 Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
 if empty(cFolderFile); RETURN NIL; Endif
 oStatus:SetTextPanel(1, cFolderFile)      
-oExeName:SetText( hwg_GetIni( 'Config', 'ExeName' , , cFolderFile ))
-oLibFolder:SetText(hwg_GetIni( 'Config', 'LibFolder' , , cFolderFile ))
-oIncFolder:SetText(hwg_GetIni( 'Config', 'IncludeFolder' , , cFolderFile ))
-oPrgFlag:SetText(hwg_GetIni( 'Config', 'PrgFlags' , , cFolderFile ))
-oCFlag:SetText(hwg_GetIni( 'Config', 'CFlags' , , cFolderFile ))
-oMainPrg:SetText(hwg_GetIni( 'Config', 'PrgMain' , , cFolderFile ))
+oExeName:SetText(hwg_GetIni( 'Config', 'ExeName' , , cFolderFile))
+oLibFolder:SetText(hwg_GetIni('Config', 'LibFolder' , , cFolderFile))
+oIncFolder:SetText(hwg_GetIni('Config', 'IncludeFolder' , , cFolderFile))
+oPrgFlag:SetText(hwg_GetIni('Config', 'PrgFlags' , , cFolderFile))
+oCFlag:SetText(hwg_GetIni('Config', 'CFlags' , , cFolderFile))
+oMainPrg:SetText(hwg_GetIni('Config', 'PrgMain' , , cFolderFile))
 
 For i:=1 to 300
-    oSel1:=hwg_GetIni( 'FilesPRG', Alltrim(Str(i)) , , cFolderFile )
+    oSel1:=hwg_GetIni('FilesPRG', Alltrim(Str(i)) , , cFolderFile)
     if !empty(oSel1) //.OR. oSel1#NIL
         AADD(oBr1, oSel1)
     EndIf
@@ -225,21 +225,21 @@ Next
     
   
 For i:=1 to 300
-    oSel2:=hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , cFolderFile )
+    oSel2:=hwg_GetIni('FilesC', Alltrim(Str(i)) , , cFolderFile)
     if !empty(oSel2) //.OR. oSel2#NIL
         AADD(oBr2, oSel2)
     EndIf
 Next
 
 For i:=1 to 300
-    oSel3:=hwg_GetIni( 'FilesLIB', Alltrim(Str(i)) , , cFolderFile )
+    oSel3:=hwg_GetIni('FilesLIB', Alltrim(Str(i)) , , cFolderFile)
     if !empty(oSel3) //.OR. oSel3#NIL
         AADD(oBr3, oSel3)
     EndIf
 Next
 
 For i:=1 to 300
-    oSel4:=hwg_GetIni( 'FilesRES', Alltrim(Str(i)) , , cFolderFile )
+    oSel4:=hwg_GetIni('FilesRES', Alltrim(Str(i)) , , cFolderFile)
     if !empty(oSel4) //.OR. oSel4#NIL
         AADD(oBr4, oSel4)
     EndIf
@@ -262,9 +262,9 @@ FUNCTION cPathNoFile(cArq)
 Local i
 Local cDest := ""
 Local cLetra
-Local cNome := cFileNoPath( cArq )
+Local cNome := cFileNoPath(cArq)
 
-cDest := AllTrim(StrTran( cArq, cNome, "" ))
+cDest := AllTrim(StrTran(cArq, cNome, ""))
 
 If SubStr(cDest, -1, 1) == "\"
    cDest := SubStr(cDest, 1, Len(cDest) - 1)
@@ -272,17 +272,17 @@ EndIf
    
 RETURN cDest
 *-------------------------------------------------------------------------------------
-FUNCTION cFileNoExt( cArq )
+FUNCTION cFileNoExt(cArq)
 *-------------------------------------------------------------------------------------
 Local n
-n:=At( ".", cArq )
+n:=At(".", cArq)
 If n > 0
    RETURN SubStr(cArq, 1, n - 1)
 Endif
 
 RETURN cArq   
 
-FUNCTION cFileNoPath( cArq ) 
+FUNCTION cFileNoPath(cArq)
 Local i
 Local cDest := ""
 Local cLetra
@@ -312,12 +312,12 @@ if file(cFolderFile)
      RETURN NIL
    EndIf
 EndIf     
-hwg_WriteIni( 'Config', 'ExeName'       , oExeName:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'LibFolder'     , oLibFolder:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'IncludeFolder' , oIncFolder:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'PrgFlags'      , oPrgFlag:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'CFlags'        , oCFlag:GetText(), cFolderFile )
-hwg_WriteIni( 'Config', 'PrgMain'       , oMainPrg:GetText(), cFolderFile )
+hwg_WriteIni('Config', 'ExeName'       , oExeName:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'LibFolder'     , oLibFolder:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'IncludeFolder' , oIncFolder:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'PrgFlags'      , oPrgFlag:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'CFlags'        , oCFlag:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'PrgMain'       , oMainPrg:GetText(), cFolderFile)
 oNome:=""
 
 if Len(oBrowse1:aArray) >= 1
@@ -325,7 +325,7 @@ if Len(oBrowse1:aArray) >= 1
 
       if !empty(oBrowse1:aArray[i])
  
-         hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)), oBrowse1:aArray[i], cFolderFile )
+         hwg_WriteIni('FilesPRG', Alltrim(Str(i)), oBrowse1:aArray[i], cFolderFile)
    
       EndIf    
       
@@ -336,7 +336,7 @@ endif
 if Len(oBrowse2:aArray) >= 1 
    for i:=1 to Len(oBrowse2:aArray)
       if !empty(oBrowse2:aArray[i])
-         hwg_WriteIni( 'FilesC', Alltrim(Str(i)), oBrowse2:aArray[i], cFolderFile )
+         hwg_WriteIni('FilesC', Alltrim(Str(i)), oBrowse2:aArray[i], cFolderFile)
      endif    
    Next     
 endif
@@ -344,7 +344,7 @@ endif
 if Len(oBrowse3:aArray) >= 1
    for i:=1 to Len(oBrowse3:aArray)
       if !empty(oBrowse3:aArray[i])
-         hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)), oBrowse3:aArray[i], cFolderFile )
+         hwg_WriteIni('FilesLIB', Alltrim(Str(i)), oBrowse3:aArray[i], cFolderFile)
       endif   
    Next     
 endif   
@@ -352,7 +352,7 @@ endif
 if Len(oBrowse4:aArray) >= 1
    for i:=1 to Len(oBrowse4:aArray)
       if !empty(oBrowse4:aArray[i])
-         hwg_WriteIni( 'FilesRES', Alltrim(Str(i)), oBrowse4:aArray[i], cFolderFile )
+         hwg_WriteIni('FilesRES', Alltrim(Str(i)), oBrowse4:aArray[i], cFolderFile)
      endif   
    Next     
 endif   
@@ -378,7 +378,7 @@ Local cMake
 Local CRLF := Chr(13) + Chr(10)
 Local cListObj := ""
 Local cListRes := ""
-Local cMainPrg := AllTrim(Lower(cFileNoPath( cFileNoExt( oMainPrg:GetText() ) )))
+Local cMainPrg := AllTrim(Lower(cFileNoPath(cFileNoExt(oMainPrg:GetText()))))
 Local cPathFile
 Local cRun 
 Local cNameExe
@@ -393,10 +393,10 @@ If !Empty(cPathFile)
 EndIF   
 
 If File(cDirec+"hwmake.Ini")
-   cHwGUI  := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini" )))
-   cHarbour:= Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")))
-   cBCC55  := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini" )))
-   cObj    := Lower(AllTrim(hwg_GetIni( 'Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini" )))
+   cHwGUI  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_HwGUI'   , , cDirec+"hwmake.Ini")))
+   cHarbour:= Lower(AllTrim(hwg_GetIni('Config', 'DIR_HARBOUR' , , cDirec+"hwmake.Ini")))
+   cBCC55  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_BCC55'   , , cDirec+"hwmake.Ini")))
+   cObj    := Lower(AllTrim(hwg_GetIni('Config', 'DIR_OBJ'     , , cDirec+"hwmake.Ini")))
 Else 
    cHwGUI  :="c:\hwgui"
    cHarbour:="c:\xharbour"
@@ -405,30 +405,30 @@ Else
 EndIf
 
 cObj := Lower(AllTrim(cObj))
-Makedir( cObj )
+Makedir(cObj)
 
 cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //If !File(cExeHarbour)
-//   hwg_MsgInfo( "Not exist " + cExeHarbour +"!!" )
+//   hwg_MsgInfo("Not exist " + cExeHarbour +"!!")
 //   RETURN NIL
 //EndIf
 
 //PrgFiles
-i := Ascan( oBrowse1:aArray, {|x| At( cMainPrg, x ) > 0 } )
+i := Ascan(oBrowse1:aArray, {|x| At(cMainPrg, x) > 0 })
 If i == 0
    AAdd(oBrowse1:aArray, AllTrim(oMainPrg:GetText()))
 EndIf   
 
 For Each i in oBrowse1:aArray 
-   cObjName := cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".c"
+   cObjName := cObj+"\"+cFileNoPath(cFileNoExt(i)) + ".c"
    cPrgName := i
    lCompile := .F.
    If lAll
       lCompile := .T.
    Else   
       If File(cObjName)
-         FileStats( cObjName, @cObjFileAttr  , @nObjFileSize, @dObjCreateDate, @nObjCreateTime, @dObjChangeDate, @nObjChangeTime  )
-         FileStats( cPrgName, @cPrgFileAttr  , @nPrgFileSize, @dPrgCreateDate, @nPrgCreateTime, @dPrgChangeDate, @nPrgChangeTime  )
+         FileStats(cObjName, @cObjFileAttr  , @nObjFileSize, @dObjCreateDate, @nObjCreateTime, @dObjChangeDate, @nObjChangeTime)
+         FileStats(cPrgName, @cPrgFileAttr  , @nPrgFileSize, @dPrgCreateDate, @nPrgCreateTime, @dPrgChangeDate, @nPrgChangeTime)
          If dObjChangeDate <= dPrgChangeDate .AND.  nObjChangeTime <  nPrgChangeTime
             lCompile := .T.
          EndIF   
@@ -438,7 +438,7 @@ For Each i in oBrowse1:aArray
    EndIF       
 
    If lCompile 
-      cLogErro := cFileNoPath( cFileNoExt( cObjName ) ) + ".log" 
+      cLogErro := cFileNoPath(cFileNoExt(cObjName)) + ".log"
       FErase(cLogErro)
       FErase(cObjName)
       FErase(cFileNoExt(cObjName) + ".obj")
@@ -448,7 +448,7 @@ For Each i in oBrowse1:aArray
        
          lEnd     := 'C2006' $ cErrText .OR. 'No code generated' $ cErrText .OR. "Error E" $ cErrText .OR. "Error F" $ cErrText
          If lEnd
-            ErrorPreview( Memoread(cLogErro) )
+            ErrorPreview(Memoread(cLogErro))
             RETURN NIL
          Else 
             If File(cLogErro)
@@ -461,10 +461,10 @@ For Each i in oBrowse1:aArray
          
    EndIf
    cList    += cObjName + " " 
-   If At( cMainPrg, cObjName ) == 0
-      cListObj += StrTran( cObjName, ".c", ".obj" ) + " " + CRLF
+   If At(cMainPrg, cObjName) == 0
+      cListObj += StrTran(cObjName, ".c", ".obj") + " " + CRLF
    EndIf   
-   cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran( cObjName, ".c", ".obj" ) + " " + cObjName
+   cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran(cObjName, ".c", ".obj") + " " + cObjName
    If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
       hwg_MsgInfo("No Created Object files!", "HwMake" )
       RETURN NIL
@@ -476,7 +476,7 @@ cListObj := "c0w32.obj +" + CRLF + cObj + "\" + cMainPrg + ".obj, +" + CRLF + cL
 
 FOR EACH i in oBrowse2:aArray     
    cList += i + " "
-   cListObj += cObj+"\"+cFileNoPath( cFilenoExt( i ) ) + ".obj"
+   cListObj += cObj+"\"+cFileNoPath(cFilenoExt(i)) + ".obj"
 Next
 
                         
@@ -486,20 +486,20 @@ For Each i in oBrowse4:aArray
       hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake" )
       RETURN NIL
    EndIf   
-   cListRes += cObj+"\"+cFileNoPath( cFileNoExt( i ) ) + ".res +" + CRLF
+   cListRes += cObj+"\"+cFileNoPath(cFileNoExt(i)) + ".res +" + CRLF
 Next
 If Len(cListRes) > 0
    cListRes := SubStr(cListRes, 1, Len(cListRes) - 3)
 EndIF   
 cMake := cListObj
 cNameExe := AllTrim(lower(oExeName:GetText()))
-If At( ".exe", cNameExe ) == 0
+If At(".exe", cNameExe) == 0
    cNameExe += ".exe"
 EndIF
    
 cMake += cNameExe + ", + " + CRLF
-cMake += cFileNoExt( oExeName:GetText() ) + ".map, + " + CRLF
-cMake += RetLibrary( cHwGUI, cHarbour, cBcc55, oBrowse3:aArray )
+cMake += cFileNoExt(oExeName:GetText()) + ".map, + " + CRLF
+cMake += RetLibrary(cHwGUI, cHarbour, cBcc55, oBrowse3:aArray)
 //Add def File
 //
 cMake += IIf(!Empty(cListRes), ",," + cListRes, "")
@@ -508,7 +508,7 @@ If File(cMainPrg + ".bc ")
    FErase(cMainPrg + ".bc ")
 EndIF   
 
-Memowrit( cMainPrg + ".bc ", cMake )
+Memowrit(cMainPrg + ".bc ", cMake)
 
 If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
       hwg_MsgInfo("No link file " + cMainPrg +"!", "HwMake" )
@@ -522,7 +522,7 @@ EndIF
 RETURN NIL
 
 
-FUNCTION RetLibrary( cHwGUI, cHarbour, cBcc55, aLibs )
+FUNCTION RetLibrary(cHwGUI, cHarbour, cBcc55, aLibs)
 Local i, cLib, CRLF := " +" + Chr(179)
 Local lMt := .F.
 cLib := cHwGUI + "\lib\hwgui.lib " + CRLF
@@ -572,7 +572,7 @@ FOR EACH i in aLibs
 Next
 
 cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
-cLib := StrTran( cLib, Chr(179), Chr(13) + Chr(10 ) )
+cLib := StrTran(cLib, Chr(179), Chr(13) + Chr(10 ))
 RETURN cLib
 
 FUNCTION ExecuteCommand(cProc, cSend, cLog)
@@ -581,20 +581,20 @@ Local nRet
 If cLog == NIL
    cLog := ""
 Else
-   cLog := " > " + cFileNoPath( cLog ) 
+   cLog := " > " + cFileNoPath(cLog)
 EndIf      
 If File(cFile)
    FErase(cFile)
 EndIf 
-Memowrit( cFile, cProc + " " + cSend + cLog ) 
-nRet := hwg_WaitRun( cFile )
+Memowrit(cFile, cProc + " " + cSend + cLog)
+nRet := hwg_WaitRun(cFile)
 If File(cFile)
    FErase(cFile)
 EndIf
 
 RETURN nRet
 
-FUNCTION BrwdelIten( oBrowse )
+FUNCTION BrwdelIten(oBrowse)
 Adel(oBrowse:aArray, oBrowse:nCurrent)
 ASize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
 RETURN oBrowse:Refresh()
@@ -640,7 +640,7 @@ Local oSay
 RETURN NIL
 
 
-STATIC FUNCTION ErrorPreview( cMess )
+STATIC FUNCTION ErrorPreview(cMess)
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Build Error" ;

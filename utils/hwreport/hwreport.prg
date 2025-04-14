@@ -44,9 +44,9 @@ Public oPenBorder, oFontSmall, oFontStandard, lastFont := NIL
 Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
 
    SET DECIMALS TO 4
-   s_crossCursor := hwg_LoadCursor( IDC_CROSS )
-   s_horzCursor := hwg_LoadCursor( IDC_SIZEWE )
-   s_vertCursor := hwg_LoadCursor( IDC_SIZENS )
+   s_crossCursor := hwg_LoadCursor(IDC_CROSS)
+   s_horzCursor := hwg_LoadCursor(IDC_SIZEWE)
+   s_vertCursor := hwg_LoadCursor(IDC_SIZENS)
    oPenBorder := HPen():Add(PS_SOLID, 1, hwg_VColor("800080"))
    s_oPenLine   := HPen():Add(PS_SOLID, 1, hwg_VColor("000000"))
    s_oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("C0C0C0"))
@@ -101,14 +101,14 @@ Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
       MENUITEM "&About" ID IDM_ABOUT ACTION About()
    ENDMENU
 
-   hwg_EnableMenuItem( , IDM_CLOSE, .F., .T. )
-   hwg_EnableMenuItem( , IDM_SAVE, .F., .T. )
-   hwg_EnableMenuItem( , IDM_SAVEAS, .F., .T. )
-   hwg_EnableMenuItem( , IDM_PRINT, .F., .T. )
-   hwg_EnableMenuItem( , IDM_PREVIEW, .F., .T. )
-   hwg_EnableMenuItem( , IDM_FOPT, .F., .T. )
-   hwg_EnableMenuItem( , 1, .F., .F. )
-   hwg_CheckMenuItem( , IDM_MOUSE2, .T. )
+   hwg_EnableMenuItem(, IDM_CLOSE, .F., .T.)
+   hwg_EnableMenuItem(, IDM_SAVE, .F., .T.)
+   hwg_EnableMenuItem(, IDM_SAVEAS, .F., .T.)
+   hwg_EnableMenuItem(, IDM_PRINT, .F., .T.)
+   hwg_EnableMenuItem(, IDM_PREVIEW, .F., .T.)
+   hwg_EnableMenuItem(, IDM_FOPT, .F., .T.)
+   hwg_EnableMenuItem(, 1, .F., .F.)
+   hwg_CheckMenuItem(, IDM_MOUSE2, .T.)
 
    oMainWindow:Activate()
 
@@ -121,16 +121,16 @@ Local aModDlg, oFont
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE SAY "HWREPORT" OF aModDlg ID 101 COLOR hwg_VColor("0000FF")
-   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog( hwg_GetModalHandle() )} ;
+   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog(hwg_GetModalHandle())} ;
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()
 RETURN NIL
 
-STATIC FUNCTION NewReport( oMainWindow )
+STATIC FUNCTION NewReport(oMainWindow)
 Local oDlg
 
-   INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||hwg_CheckRadioButton( oDlg:handle, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)}
+   INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||hwg_CheckRadioButton(oDlg:handle, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)}
    DIALOG ACTIONS OF oDlg ;
         ON 0, IDOK  ACTION {|| EndNewrep(oMainWindow, oDlg)}
 
@@ -138,7 +138,7 @@ Local oDlg
 
 RETURN NIL
 
-STATIC FUNCTION EndNewrep( oMainWindow, oDlg )
+STATIC FUNCTION EndNewrep(oMainWindow, oDlg)
 
    aPaintRep := { 0, 0, 0, 0, 0, {}, "", "", .F., 0, NIL }
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
@@ -148,15 +148,15 @@ STATIC FUNCTION EndNewrep( oMainWindow, oDlg )
    ENDIF
 
    aPaintRep[FORM_Y] := 0
-   hwg_EnableMenuItem( , 1, .T., .F. )
-   hwg_WriteStatus( oMainWindow, 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
-                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
-   hwg_RedrawWindow( oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE )
+   hwg_EnableMenuItem(, 1, .T., .F.)
+   hwg_WriteStatus(oMainWindow, 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
+                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))))
+   hwg_RedrawWindow(oMainWindow:handle, RDW_ERASE + RDW_INVALIDATE)
 
    EndDialog()
 RETURN NIL
 
-STATIC FUNCTION PaintMain( oWnd )
+STATIC FUNCTION PaintMain(oWnd)
 Local pps, hDC, hWnd := oWnd:handle
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, oldBkColor, aMetr, nWidth, nHeight, lPreview := .F.
 Local n1cm, xt, yt
@@ -169,15 +169,15 @@ Local step, kolsteps, nsteps
    ENDIF
 
    pps := hwg_DefinePaintStru()
-   hDC := hwg_BeginPaint( hWnd, pps )
-   aCoors := hwg_GetClientRect( hWnd )
+   hDC := hwg_BeginPaint(hWnd, pps)
+   aCoors := hwg_GetClientRect(hWnd)
 
    IF aPaintRep[FORM_XKOEFCONST] == 0
       aMetr := hwg_GetDeviceArea(hDC)
-      aPaintRep[FORM_XKOEFCONST] := ( aMetr[1]-XINDENT )/aPaintRep[FORM_WIDTH]
+      aPaintRep[FORM_XKOEFCONST] := (aMetr[1]-XINDENT)/aPaintRep[FORM_WIDTH]
    ENDIF
 
-   IF hwg_IsCheckedMenuItem( , IDM_VIEW1 )
+   IF hwg_IsCheckedMenuItem(, IDM_VIEW1)
       lPreview := .T.
       aPaintRep[FORM_Y] := 0
       IF aPaintRep[FORM_WIDTH] > aPaintRep[FORM_HEIGHT]
@@ -206,12 +206,12 @@ Local step, kolsteps, nsteps
    step := n1cm*2
    nsteps := Round(aPaintRep[FORM_Y]/step, 0)
 
-   hwg_FillRect( hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_HIGHLIGHTTEXT+1 )
-   hwg_FillRect( hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1 )
+   hwg_FillRect(hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_HIGHLIGHTTEXT+1)
+   hwg_FillRect(hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT+1)
    i := 0
-   hwg_SelectObject( hDC, s_oPenLine:handle )
-   hwg_SelectObject( hDC, IIf(lPreview, oFontSmall:handle, oFontStandard:handle) )
-   oldBkColor := hwg_SetBkColor( hDC, hwg_GetSysColor(COLOR_3DLIGHT) )
+   hwg_SelectObject(hDC, s_oPenLine:handle)
+   hwg_SelectObject(hDC, IIf(lPreview, oFontSmall:handle, oFontStandard:handle))
+   oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DLIGHT))
    DO WHILE i <= aPaintRep[FORM_WIDTH]/10 .AND. i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
       xt := x1+i*n1cm
       hwg_DrawLine(hDC, xt + Round(n1cm / 4, 0), 0, xt + Round(n1cm / 4, 0), 4)
@@ -219,7 +219,7 @@ Local step, kolsteps, nsteps
       hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
       hwg_DrawLine(hDC, xt, 0, xt, 12 )
       IF i > 0 .AND. i < aPaintRep[FORM_WIDTH]/10
-         hwg_DrawText( hDC, Ltrim(Str(i, 2)), xt-15, 12, xt+15, TOP_INDENT-5, DT_CENTER )
+         hwg_DrawText(hDC, Ltrim(Str(i, 2)), xt-15, 12, xt+15, TOP_INDENT-5, DT_CENTER)
       ENDIF
       i++
    ENDDO
@@ -231,37 +231,37 @@ Local step, kolsteps, nsteps
       hwg_DrawLine(hDC, 0, yt + Round(n1cm * 3/ 4, 0), 4, yt + Round(n1cm * 3 / 4, 0))
       hwg_DrawLine(hDC, 0, yt, 12, yt)
       IF i > 0 .AND. i < aPaintRep[FORM_HEIGHT]/10
-         hwg_DrawText( hDC, Ltrim(Str(i+nsteps*2, 2)), 12, yt-10, LEFT_INDENT-12, yt+10, DT_CENTER )
+         hwg_DrawText(hDC, Ltrim(Str(i+nsteps*2, 2)), 12, yt-10, LEFT_INDENT-12, yt+10, DT_CENTER)
       ENDIF
       i++
    ENDDO
-   hwg_FillRect( hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1 )
-   hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_WINDOW+1 )
-   hwg_SetBkColor( hDC, hwg_GetSysColor(COLOR_WINDOW) )
+   hwg_FillRect(hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW+1)
+   hwg_FillRect(hDC, x1, y1, x2, y2, COLOR_WINDOW+1)
+   hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_WINDOW))
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] != TYPE_BITMAP
-         PaintItem( hDC, aPaintRep[FORM_ITEMS, i], aCoors, lPreview )
+         PaintItem(hDC, aPaintRep[FORM_ITEMS, i], aCoors, lPreview)
       ENDIF
    NEXT
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-         PaintItem( hDC, aPaintRep[FORM_ITEMS, i], aCoors, lPreview )
+         PaintItem(hDC, aPaintRep[FORM_ITEMS, i], aCoors, lPreview)
       ENDIF
    NEXT
-   hwg_SetBkColor( hDC, oldBkColor )
+   hwg_SetBkColor(hDC, oldBkColor)
 
    kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
       (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
    IF lPreview
-      hwg_SetScrollInfo( hWnd, SB_VERT, 1 )
+      hwg_SetScrollInfo(hWnd, SB_VERT, 1)
    ELSE
-      hwg_SetScrollInfo( hWnd, SB_VERT, 1, nSteps+1, 1, kolsteps+1 )
+      hwg_SetScrollInfo(hWnd, SB_VERT, 1, nSteps+1, 1, kolsteps+1)
    ENDIF
 
-   hwg_EndPaint( hWnd, pps )
+   hwg_EndPaint(hWnd, pps)
 RETURN 0
 
-STATIC FUNCTION PaintItem( hDC, aItem, aCoors, lPreview )
+STATIC FUNCTION PaintItem(hDC, aItem, aCoors, lPreview)
 Local x1 := LEFT_INDENT + aItem[ITEM_X1], y1 := TOP_INDENT + aItem[ITEM_Y1] - aPaintRep[FORM_Y]
 Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
 
@@ -273,39 +273,39 @@ Local x2 := x1+aItem[ITEM_WIDTH]-1, y2 := y1+aItem[ITEM_HEIGHT]-1
    ENDIF
    IF y1 >= TOP_INDENT .AND. y1 <= aCoors[4]
       IF aItem[ITEM_STATE] == STATE_SELECTED .OR. aItem[ITEM_STATE] == STATE_PRESSED
-         hwg_FillRect( hDC, x1-3, y1-3, x2+3, y2+3, COLOR_3DLIGHT+1 )
-         hwg_SelectObject( hDC, oPenBorder:handle )
+         hwg_FillRect(hDC, x1-3, y1-3, x2+3, y2+3, COLOR_3DLIGHT+1)
+         hwg_SelectObject(hDC, oPenBorder:handle)
          hwg_Rectangle(hDC, x1 - 3, y1 - 3, x2 + 3, y2 + 3)
          hwg_Rectangle(hDC, x1 - 1, y1 - 1, x2 + 1, y2 + 1)
       ENDIF
       IF aItem[ITEM_TYPE] == TYPE_TEXT
          IF Empty(aItem[ITEM_CAPTION])
-            hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
+            hwg_FillRect(hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1)
          ELSE
-      hwg_SelectObject( hDC, IIf(lPreview, oFontSmall:handle, aItem[ITEM_FONT]:handle) )
-            hwg_DrawText( hDC, aItem[ITEM_CAPTION], x1, y1, x2, y2, ;
-              IIf(aItem[ITEM_ALIGN] == 0, DT_LEFT, IIf(aItem[ITEM_ALIGN] == 1, DT_RIGHT, DT_CENTER)) )
+      hwg_SelectObject(hDC, IIf(lPreview, oFontSmall:handle, aItem[ITEM_FONT]:handle))
+            hwg_DrawText(hDC, aItem[ITEM_CAPTION], x1, y1, x2, y2, ;
+              IIf(aItem[ITEM_ALIGN] == 0, DT_LEFT, IIf(aItem[ITEM_ALIGN] == 1, DT_RIGHT, DT_CENTER)))
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_HLINE
-         hwg_SelectObject( hDC, aItem[ITEM_PEN]:handle )
+         hwg_SelectObject(hDC, aItem[ITEM_PEN]:handle)
          hwg_DrawLine(hDC, x1, y1, x2, y1)
       ELSEIF aItem[ITEM_TYPE] == TYPE_VLINE
-         hwg_SelectObject( hDC, aItem[ITEM_PEN]:handle )
+         hwg_SelectObject(hDC, aItem[ITEM_PEN]:handle)
          hwg_DrawLine(hDC, x1, y1, x1, y2)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BOX
-         hwg_SelectObject( hDC, aItem[ITEM_PEN]:handle )
+         hwg_SelectObject(hDC, aItem[ITEM_PEN]:handle)
          hwg_Rectangle(hDC, x1, y1, x2, y2)
       ELSEIF aItem[ITEM_TYPE] == TYPE_BITMAP
          IF aItem[ITEM_BITMAP] == NIL
-            hwg_FillRect( hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1 )
+            hwg_FillRect(hDC, x1, y1, x2, y2, COLOR_3DSHADOW+1)
          ELSE
-            hwg_DrawBitmap( hDC, aItem[ITEM_BITMAP]:handle, SRCAND, x1, y1, x2-x1+1, y2-y1+1 )
+            hwg_DrawBitmap(hDC, aItem[ITEM_BITMAP]:handle, SRCAND, x1, y1, x2-x1+1, y2-y1+1)
          ENDIF
       ELSEIF aItem[ITEM_TYPE] == TYPE_MARKER
-         hwg_SelectObject( hDC, s_oPenDivider:handle )
+         hwg_SelectObject(hDC, s_oPenDivider:handle)
          hwg_DrawLine(hDC, LEFT_INDENT, y1, LEFT_INDENT - 1 + Round(aPaintRep[FORM_WIDTH] * aPaintRep[FORM_XKOEF], 0), y1)
-         hwg_SelectObject( hDC, oFontSmall:handle )
-         hwg_DrawText( hDC, aItem[ITEM_CAPTION], x1, y1, x2, y2, DT_CENTER )
+         hwg_SelectObject(hDC, oFontSmall:handle)
+         hwg_DrawText(hDC, aItem[ITEM_CAPTION], x1, y1, x2, y2, DT_CENTER)
       ENDIF
    ENDIF
 RETURN NIL
@@ -314,22 +314,22 @@ STATIC FUNCTION MessagesProc(oWnd, msg, wParam, lParam)
 Local i, aItem, hWnd := oWnd:handle
 
    IF msg == WM_VSCROLL
-      Vscroll( hWnd, hwg_LOWORD(wParam), hwg_HIWORD(wParam) )
+      Vscroll(hWnd, hwg_LOWORD(wParam), hwg_HIWORD(wParam))
    ELSEIF msg == WM_MOUSEMOVE
       MouseMove(wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ELSEIF msg == WM_LBUTTONDOWN
-      LButtonDown( hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+      LButtonDown(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ELSEIF msg == WM_LBUTTONUP
-      LButtonUp( hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+      LButtonUp(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ELSEIF msg == WM_LBUTTONDBLCLK
-      LButtonDbl( hwg_LOWORD(lParam), hwg_HIWORD(lParam) )
+      LButtonDbl(hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ELSEIF msg == WM_KEYDOWN
       IF wParam == 46
          DeleteItem()
       ELSEIF wParam == 34    // PageDown
-        VScroll( hWnd, SB_LINEDOWN )
+        VScroll(hWnd, SB_LINEDOWN)
       ELSEIF wParam == 33    // PageUp
-        VScroll( hWnd, SB_LINEUP )
+        VScroll(hWnd, SB_LINEUP)
       ENDIF
    ELSEIF msg == WM_KEYUP
       IF wParam == 40        // Down
@@ -339,16 +339,16 @@ Local i, aItem, hWnd := oWnd:handle
                IF aItem[ITEM_Y1]+aItem[ITEM_HEIGHT] < aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEFCONST]
                   aItem[ITEM_Y1] ++
                   aPaintRep[FORM_CHANGED] := .T.
-                  WriteItemInfo( aItem )
-                  hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+                  WriteItemInfo(aItem)
+                  hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-4, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
                   IF aItem[ITEM_TYPE] == TYPE_MARKER
-                     hwg_InvalidateRect( hWnd, 0, LEFT_INDENT, ;
+                     hwg_InvalidateRect(hWnd, 0, LEFT_INDENT, ;
                               TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y], ;
                               LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0), ;
-                              TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
+                              TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y])
                   ENDIF
                   hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
                ENDIF
@@ -361,16 +361,16 @@ Local i, aItem, hWnd := oWnd:handle
                IF aItem[ITEM_Y1] > 1
                   aItem[ITEM_Y1] --
                   aPaintRep[FORM_CHANGED] := .T.
-                  WriteItemInfo( aItem )
-                  hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+                  WriteItemInfo(aItem)
+                  hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+4 )
+                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+4)
                   IF aItem[ITEM_TYPE] == TYPE_MARKER
-                     hwg_InvalidateRect( hWnd, 0, LEFT_INDENT, ;
+                     hwg_InvalidateRect(hWnd, 0, LEFT_INDENT, ;
                               TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y], ;
                               LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0), ;
-                              TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
+                              TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y])
                   ENDIF
                   hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
                ENDIF
@@ -384,11 +384,11 @@ Local i, aItem, hWnd := oWnd:handle
                     aItem[ITEM_X1]+aItem[ITEM_WIDTH] < aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEFCONST]
                   aItem[ITEM_X1] ++
                   aPaintRep[FORM_CHANGED] := .T.
-                  WriteItemInfo( aItem )
-                  hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-4, ;
+                  WriteItemInfo(aItem)
+                  hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-4, ;
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
                   hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
                ENDIF
             ENDIF
@@ -400,11 +400,11 @@ Local i, aItem, hWnd := oWnd:handle
                IF aItem[ITEM_TYPE] != TYPE_MARKER .AND. aItem[ITEM_X1] > 1
                   aItem[ITEM_X1] --
                   aPaintRep[FORM_CHANGED] := .T.
-                  WriteItemInfo( aItem )
-                  hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+                  WriteItemInfo(aItem)
+                  hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                            TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                            LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+4, ;
-                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                           TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
                   hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
                ENDIF
             ENDIF
@@ -413,9 +413,9 @@ Local i, aItem, hWnd := oWnd:handle
    ENDIF
 RETURN -1
 
-STATIC FUNCTION VSCROLL( hWnd, nScrollCode, nNewPos )
+STATIC FUNCTION VSCROLL(hWnd, nScrollCode, nNewPos)
 Local step  := Round(aPaintRep[FORM_XKOEF]*10, 0)*2, nsteps := aPaintRep[FORM_Y]/step, kolsteps
-Local aCoors := hwg_GetClientRect( hWnd )
+Local aCoors := hwg_GetClientRect(hWnd)
 
    IF nScrollCode == SB_LINEDOWN
       kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
@@ -424,16 +424,16 @@ Local aCoors := hwg_GetClientRect( hWnd )
          aPaintRep[FORM_Y] += step
          nsteps ++
          IF nsteps>=kolsteps
-            hwg_RedrawWindow( hWnd, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow(hWnd, RDW_ERASE + RDW_INVALIDATE)
          ELSE
-            hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
+            hwg_InvalidateRect(hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4])
             hwg_SendMessage(hWnd, WM_PAINT, 0, 0)
          ENDIF
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
       IF nsteps > 0
          aPaintRep[FORM_Y] -= step
-         hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
+         hwg_InvalidateRect(hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4])
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
@@ -442,9 +442,9 @@ Local aCoors := hwg_GetClientRect( hWnd )
             (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
          aPaintRep[FORM_Y] := nNewPos * step
          IF aPaintRep[FORM_Y]/step>=kolsteps
-            hwg_RedrawWindow( hWnd, RDW_ERASE + RDW_INVALIDATE )
+            hwg_RedrawWindow(hWnd, RDW_ERASE + RDW_INVALIDATE)
          ELSE
-            hwg_InvalidateRect( hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4] )
+            hwg_InvalidateRect(hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4])
             hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
          ENDIF
       ENDIF
@@ -456,7 +456,7 @@ Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2
 Local hWnd
 Local aItem, i, dx, dy
 
-   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( , IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem(, IDM_VIEW1)
       RETURN .T.
    ENDIF
    s_itemBorder := 0
@@ -464,41 +464,41 @@ Local aItem, i, dx, dy
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y]-1
    IF s_nAddItem > 0 
       IF xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
-         hwg_SetCursor( s_crossCursor )
+         hwg_SetCursor(s_crossCursor)
       ENDIF
    ELSEIF s_itemPressed > 0
       IF hwg_IsCheckedMenuItem(, IDM_MOUSE2) .AND. Abs(xPos - s_mPos[1]) < 3 .AND. Abs(yPos - s_mPos[2]) < 3
          RETURN NIL
       ENDIF
       aItem := aPaintRep[FORM_ITEMS, s_itemPressed]
-      IF hwg_CheckBit( wParam, MK_LBUTTON )
+      IF hwg_CheckBit(wParam, MK_LBUTTON)
          hWnd := Hwindow():GetMain():handle
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
          IF aItem[ITEM_TYPE] == TYPE_MARKER
-            hwg_InvalidateRect( hWnd, 0, LEFT_INDENT, ;
+            hwg_InvalidateRect(hWnd, 0, LEFT_INDENT, ;
                      TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y], ;
                      LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0), ;
-                     TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
+                     TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y])
          ELSE
             aItem[ITEM_X1] += (xPos - s_mPos[1])
          ENDIF
          aItem[ITEM_Y1] += (yPos - s_mPos[2])
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
          IF aItem[ITEM_TYPE] == TYPE_MARKER
-            hwg_InvalidateRect( hWnd, 0, LEFT_INDENT, ;
+            hwg_InvalidateRect(hWnd, 0, LEFT_INDENT, ;
                      TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y], ;
                      LEFT_INDENT-1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0), ;
-                     TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] )
+                     TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y])
          ENDIF
          s_mPos[1] := xPos; s_mPos[2] := yPos
          aPaintRep[FORM_CHANGED] := .T.
-         WriteItemInfo( aItem )
+         WriteItemInfo(aItem)
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       ELSE
          aItem[ITEM_STATE] := STATE_SELECTED
@@ -506,14 +506,14 @@ Local aItem, i, dx, dy
       ENDIF
    ELSEIF s_itemSized > 0
       aItem := aPaintRep[FORM_ITEMS, s_itemSized]
-      IF hwg_CheckBit( wParam, MK_LBUTTON )
+      IF hwg_CheckBit(wParam, MK_LBUTTON)
          dx := xPos - s_mPos[1]
          dy := yPos - s_mPos[2]
          hWnd := Hwindow():GetMain():handle
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
          IF s_resizeDirection == 1
             IF aItem[ITEM_WIDTH] - dx > 10
                aItem[ITEM_WIDTH] -= dx
@@ -534,13 +534,13 @@ Local aItem, i, dx, dy
             ENDIF
          ENDIF
          s_mPos[1] := xPos; s_mPos[2] := yPos
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
          aPaintRep[FORM_CHANGED] := .T.
-         WriteItemInfo( aItem )
-         hwg_SetCursor( IIf(s_resizeDirection == 1 .OR. s_resizeDirection == 3, s_horzCursor, s_vertCursor))
+         WriteItemInfo(aItem)
+         hwg_SetCursor(IIf(s_resizeDirection == 1 .OR. s_resizeDirection == 3, s_horzCursor, s_vertCursor))
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       ENDIF
    ELSE
@@ -551,7 +551,7 @@ Local aItem, i, dx, dy
                 xPos < LEFT_INDENT+1+aItem[ITEM_X1] .AND. ;
                 yPos >= TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. yPos < TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
                IF aItem[ITEM_TYPE] != TYPE_VLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  hwg_SetCursor( s_horzCursor )
+                  hwg_SetCursor(s_horzCursor)
                   s_itemBorder := i
                   s_resizeDirection := 1
                ENDIF
@@ -559,7 +559,7 @@ Local aItem, i, dx, dy
                 xPos < LEFT_INDENT+2+aItem[ITEM_X1]+aItem[ITEM_WIDTH] .AND. ;
                 yPos >= TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. yPos < LEFT_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
                IF aItem[ITEM_TYPE] != TYPE_VLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  hwg_SetCursor( s_horzCursor )
+                  hwg_SetCursor(s_horzCursor)
                   s_itemBorder := i
                   s_resizeDirection := 3
                ENDIF
@@ -567,7 +567,7 @@ Local aItem, i, dx, dy
                 yPos < TOP_INDENT+1+aItem[ITEM_Y1]-aPaintRep[FORM_Y] .AND. ;
                 xPos >= LEFT_INDENT+aItem[ITEM_X1] .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]
                IF aItem[ITEM_TYPE] != TYPE_HLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  hwg_SetCursor( s_vertCursor )
+                  hwg_SetCursor(s_vertCursor)
                   s_itemBorder := i
                   s_resizeDirection := 2
                ENDIF
@@ -575,7 +575,7 @@ Local aItem, i, dx, dy
                 yPos < TOP_INDENT+2+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT] .AND. ;
                 xPos >= LEFT_INDENT+aItem[ITEM_X1] .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]
                IF aItem[ITEM_TYPE] != TYPE_HLINE .AND. aItem[ITEM_TYPE] != TYPE_MARKER
-                  hwg_SetCursor( s_vertCursor )
+                  hwg_SetCursor(s_vertCursor)
                   s_itemBorder := i
                   s_resizeDirection := 4
                ENDIF
@@ -588,26 +588,26 @@ Local aItem, i, dx, dy
    ENDIF
 RETURN NIL
 
-STATIC FUNCTION LButtonDown( xPos, yPos )
+STATIC FUNCTION LButtonDown(xPos, yPos)
 Local i, aItem, res := .F.
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( , IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem(, IDM_VIEW1)
       RETURN .T.
    ENDIF
    IF s_nAddItem > 0
    ELSEIF s_itemBorder != 0
       s_itemSized := s_itemBorder
       s_mPos[1] := xPos; s_mPos[2] := yPos
-      hwg_SetCursor( IIf(s_resizeDirection == 1 .OR. s_resizeDirection == 3, s_horzCursor, s_vertCursor))
+      hwg_SetCursor(IIf(s_resizeDirection == 1 .OR. s_resizeDirection == 3, s_horzCursor, s_vertCursor))
    ELSE
-      IF ( i := DeselectAll() ) != 0
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_X1]-3, ;
+      IF (i := DeselectAll()) != 0
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_X1]-3, ;
             TOP_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
             LEFT_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_X1]+aPaintRep[FORM_ITEMS, i, ITEM_WIDTH]+3, ;
-            TOP_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_Y1]+aPaintRep[FORM_ITEMS, i, ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+            TOP_INDENT+aPaintRep[FORM_ITEMS, i, ITEM_Y1]+aPaintRep[FORM_ITEMS, i, ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
          res := .T.
       ENDIF
-      hwg_WriteStatus( Hwindow():GetMain(), 1, "" )
+      hwg_WriteStatus(Hwindow():GetMain(), 1, "")
       FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
          aItem := aPaintRep[FORM_ITEMS, i]
          IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
@@ -617,11 +617,11 @@ Local hWnd := Hwindow():GetMain():handle
             aPaintRep[FORM_ITEMS, i, ITEM_STATE] := STATE_PRESSED
             s_itemPressed := i
             s_mPos[1] := xPos; s_mPos[2] := yPos
-            WriteItemInfo( aItem )
-            hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+            WriteItemInfo(aItem)
+            hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                      TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                      LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                     TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+                     TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
             res := .T.
             EXIT
          ENDIF
@@ -632,10 +632,10 @@ Local hWnd := Hwindow():GetMain():handle
    ENDIF
 RETURN NIL
 
-STATIC FUNCTION LButtonUp( xPos, yPos )
+STATIC FUNCTION LButtonUp(xPos, yPos)
 Local x1 := LEFT_INDENT, y1 := TOP_INDENT, x2, y2, aItem
 Local hWnd := Hwindow():GetMain():handle
-   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem( , IDM_VIEW1 )
+   IF aPaintRep == NIL .OR. hwg_IsCheckedMenuItem(, IDM_VIEW1)
       RETURN .T.
    ENDIF
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
@@ -644,7 +644,7 @@ Local hWnd := Hwindow():GetMain():handle
       AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem, "", xPos-x1, ;
            yPos-y1+aPaintRep[FORM_Y], s_aInitialSize[s_nAddItem, 1], ;
            s_aInitialSize[s_nAddItem, 2], 0, NIL, NIL, 0, 0, NIL, STATE_SELECTED })
-      aItem := Atail( aPaintRep[FORM_ITEMS] )
+      aItem := Atail(aPaintRep[FORM_ITEMS])
       IF s_nAddItem == TYPE_HLINE .OR. s_nAddItem == TYPE_VLINE .OR. s_nAddItem == TYPE_BOX
          aItem[ITEM_PEN] := HPen():Add()
       ELSEIF s_nAddItem == TYPE_TEXT
@@ -653,29 +653,29 @@ Local hWnd := Hwindow():GetMain():handle
          aItem[ITEM_X1] := -s_aInitialSize[s_nAddItem, 1]
          aItem[ITEM_CAPTION] := s_aMarkers[s_nMarkerType]
       ENDIF
-      DeselectAll( Len(aPaintRep[FORM_ITEMS]) )
+      DeselectAll(Len(aPaintRep[FORM_ITEMS]))
       aPaintRep[FORM_CHANGED] := .T.
-      WriteItemInfo( Atail( aPaintRep[FORM_ITEMS] ) )
-      hwg_WriteStatus( Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
-         Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
-      hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+      WriteItemInfo(Atail(aPaintRep[FORM_ITEMS]))
+      hwg_WriteStatus(Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
+         Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))))
+      hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-               TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
+               TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
       hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
       IF Len(aPaintRep[FORM_ITEMS]) == 1
-         hwg_EnableMenuItem( , IDM_CLOSE, .T., .T. )
-         hwg_EnableMenuItem( , IDM_SAVE, .T., .T. )
-         hwg_EnableMenuItem( , IDM_SAVEAS, .T., .T. )
-         hwg_EnableMenuItem( , IDM_PRINT, .T., .T. )
-         hwg_EnableMenuItem( , IDM_PREVIEW, .T., .T. )
-         hwg_EnableMenuItem( , IDM_FOPT, .T., .T. )
+         hwg_EnableMenuItem(, IDM_CLOSE, .T., .T.)
+         hwg_EnableMenuItem(, IDM_SAVE, .T., .T.)
+         hwg_EnableMenuItem(, IDM_SAVEAS, .T., .T.)
+         hwg_EnableMenuItem(, IDM_PRINT, .T., .T.)
+         hwg_EnableMenuItem(, IDM_PREVIEW, .T., .T.)
+         hwg_EnableMenuItem(, IDM_FOPT, .T., .T.)
       ENDIF
    ELSEIF s_itemPressed > 0
       aPaintRep[FORM_ITEMS, s_itemPressed, ITEM_STATE] := STATE_SELECTED
    ENDIF
    IF s_itemPressed > 0 .OR. s_itemSized > 0 .OR. s_nAddItem > 0
-      aPaintRep[FORM_ITEMS] := Asort( aPaintRep[FORM_ITEMS],,, {|z, y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1] == y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))} )
+      aPaintRep[FORM_ITEMS] := Asort(aPaintRep[FORM_ITEMS],,, {|z, y|z[ITEM_Y1]<y[ITEM_Y1].OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1]<y[ITEM_X1]).OR.(z[ITEM_Y1] == y[ITEM_Y1].AND.z[ITEM_X1] == y[ITEM_X1].AND.(z[ITEM_WIDTH]<y[ITEM_WIDTH].OR.z[ITEM_HEIGHT]<y[ITEM_HEIGHT]))})
    ENDIF
    s_itemPressed := s_itemSized := s_itemBorder := s_nAddItem := 0
 RETURN NIL
@@ -689,23 +689,23 @@ Local i, aItem
          IF aItem[ITEM_PEN] != NIL
             aItem[ITEM_PEN]:Release()
          ENDIF
-         hwg_InvalidateRect( hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
+         hwg_InvalidateRect(hWnd, 0, LEFT_INDENT+aItem[ITEM_X1]-3, ;
                   TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]-3, ;
                   LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH]+3, ;
-                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3 )
-         Adel( aPaintRep[FORM_ITEMS], i )
+                  TOP_INDENT+aItem[ITEM_Y1]+aItem[ITEM_HEIGHT]-aPaintRep[FORM_Y]+3)
+         Adel(aPaintRep[FORM_ITEMS], i)
          ASize(aPaintRep[FORM_ITEMS], Len(aPaintRep[FORM_ITEMS]) - 1)
          aPaintRep[FORM_CHANGED] := .T.
-         hwg_WriteStatus( Hwindow():GetMain(), 1, "" )
-         hwg_WriteStatus( Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
-                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))) )
+         hwg_WriteStatus(Hwindow():GetMain(), 1, "")
+         hwg_WriteStatus(Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
+                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))))
          IF Len(aPaintRep[FORM_ITEMS]) == 0
-            hwg_EnableMenuItem( , IDM_CLOSE, .F., .T. )
-            hwg_EnableMenuItem( , IDM_SAVE, .F., .T. )
-            hwg_EnableMenuItem( , IDM_SAVEAS, .F., .T. )
-            hwg_EnableMenuItem( , IDM_PRINT, .F., .T. )
-            hwg_EnableMenuItem( , IDM_PREVIEW, .F., .T. )
-            hwg_EnableMenuItem( , IDM_FOPT, .F., .T. )
+            hwg_EnableMenuItem(, IDM_CLOSE, .F., .T.)
+            hwg_EnableMenuItem(, IDM_SAVE, .F., .T.)
+            hwg_EnableMenuItem(, IDM_SAVEAS, .F., .T.)
+            hwg_EnableMenuItem(, IDM_PRINT, .F., .T.)
+            hwg_EnableMenuItem(, IDM_PREVIEW, .F., .T.)
+            hwg_EnableMenuItem(, IDM_FOPT, .F., .T.)
          ENDIF
          hwg_PostMessage(hWnd, WM_PAINT, 0, 0)
          EXIT
@@ -713,7 +713,7 @@ Local i, aItem
    NEXT
 RETURN NIL
 
-STATIC FUNCTION DeselectAll( iSelected )
+STATIC FUNCTION DeselectAll(iSelected)
 Local i, iPrevSelected := 0
    iSelected := IIf(iSelected == NIL, 0, iSelected)
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
@@ -727,8 +727,8 @@ Local i, iPrevSelected := 0
    NEXT
 RETURN iPrevSelected
 
-STATIC FUNCTION WriteItemInfo( aItem )
-   hwg_WriteStatus( Hwindow():GetMain(), 1, " x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
+STATIC FUNCTION WriteItemInfo(aItem)
+   hwg_WriteStatus(Hwindow():GetMain(), 1, " x1: "+Ltrim(Str(aItem[ITEM_X1]))+", y1: " ;
           +Ltrim(Str(aItem[ITEM_Y1]))+", cx: "+Ltrim(Str(aItem[ITEM_WIDTH])) ;
-          +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
+          +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])))
 RETURN NIL

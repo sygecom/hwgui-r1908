@@ -26,16 +26,16 @@ Private lAddMode := .F.
    aPrnCoors := hwg_GetDeviceArea(oPrinter:hDCPrn)
    prnXCoef := aPrnCoors[1]/aPaintRep[FORM_WIDTH]
    prnYCoef := aPrnCoors[2]/aPaintRep[FORM_HEIGHT]
-   // writelog( str(aPrnCoors[1])+str(aPrnCoors[2])+" / "+str(prnXCoef)+str(prnYCoef)+" / "+str(aPaintRep[FORM_XKOEF]) )
+   // writelog(str(aPrnCoors[1])+str(aPrnCoors[2])+" / "+str(prnXCoef)+str(prnYCoef)+" / "+str(aPaintRep[FORM_XKOEF]))
 
    hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)
    aMetr := hwg_GetDeviceArea(hDCwindow)
-   hwg_SelectObject( hDCwindow, oFontStandard:handle )
+   hwg_SelectObject(hDCwindow, oFontStandard:handle)
    aTmetr := hwg_GetTextMetric(hDCwindow)
-   dKoef := ( aMetr[1]-XINDENT ) / aTmetr[2]
+   dKoef := (aMetr[1]-XINDENT) / aTmetr[2]
    hwg_ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
-   hwg_SelectObject( oPrinter:hDCPrn, oFontStandard:handle )
+   hwg_SelectObject(oPrinter:hDCPrn, oFontStandard:handle)
    aPmetr := hwg_GetTextMetric(oPrinter:hDCPrn)
    pKoef := aPrnCoors[1] / aPmetr[2]
    fontKoef := pKoef / dKoef
@@ -53,12 +53,12 @@ Private lAddMode := .F.
 
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] != TYPE_BITMAP
-         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F. )
+         hwg_PrintItem(oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F.)
       ENDIF
    NEXT
    FOR i := 1 TO Len(aPaintRep[FORM_ITEMS])
       IF aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_BITMAP
-         hwg_PrintItem( oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F. )
+         hwg_PrintItem(oPrinter, aPaintRep, aPaintRep[FORM_ITEMS, i], prnXCoef, prnYCoef, 0, .F.)
       ENDIF
    NEXT
 

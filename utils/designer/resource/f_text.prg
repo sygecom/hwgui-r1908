@@ -15,10 +15,10 @@ FUNCTION STR2FONT
    
    IF !Empty(cFont)
       oFont := HFont():Add(hwg_NextItem(cFont, .T., ","), &&
-            Val(hwg_NextItem( cFont,, "," )), Val(hwg_NextItem( cFont,, "," )), &&
-            Val(hwg_NextItem( cFont,, "," )), Val(hwg_NextItem( cFont,, "," )), &&
-            Val(hwg_NextItem( cFont,, "," )), Val(hwg_NextItem( cFont,, "," )), &&
-            Val(hwg_NextItem( cFont,, "," )))
+            Val(hwg_NextItem(cFont,, ",")), Val(hwg_NextItem(cFont,, ",")), &&
+            Val(hwg_NextItem(cFont,, ",")), Val(hwg_NextItem(cFont,, ",")), &&
+            Val(hwg_NextItem(cFont,, ",")), Val(hwg_NextItem(cFont,, ",")), &&
+            Val(hwg_NextItem(cFont,, ",")))
    ENDIF
 RETURN oFont
 ENDFUNC
@@ -29,7 +29,7 @@ ENDFUNC
    PRIVATE nMode := 0
    PRIVATE itemName
    PRIVATE i
-   PRIVATE han := FOPEN( oForm:path+oForm:filename )
+   PRIVATE han := FOPEN(oForm:path+oForm:filename)
    PRIVATE cCaption
    PRIVATE x
    PRIVATE y
@@ -43,7 +43,7 @@ ENDFUNC
    PRIVATE cFont
 
    IF han == - 1
-      hwg_MsgStop( "Can't open "+oForm:path+oForm:filename )
+      hwg_MsgStop("Can't open "+oForm:path+oForm:filename)
       RETURN
    ENDIF
    DO WHILE .T.
@@ -56,18 +56,18 @@ ENDFUNC
          IF Left(stroka, 1) == "#"
             IF Upper(SubStr(stroka, 2, 4)) == "FORM"
                stroka := LTrim(SubStr(stroka, 7))
-               itemName := hwg_NextItem( stroka, .T. )
+               itemName := hwg_NextItem(stroka, .T.)
                IF Empty(oForm:name) .OR. Upper(itemName) == Upper(oForm:name)
-                  x := hwg_NextItem( stroka )
-                  y := hwg_NextItem( stroka )
-                  nWidth := hwg_NextItem( stroka )
-                  nHeight := hwg_NextItem( stroka )
-                  nStyle := Val( hwg_NextItem( stroka ) )
-                  oForm:lGet := ( Upper(hwg_NextItem(stroka)) == "T" )
-                  lClipper := ( Upper(hwg_NextItem(stroka)) == "T" )
-                  cFont := hwg_NextItem( stroka )
+                  x := hwg_NextItem(stroka)
+                  y := hwg_NextItem(stroka)
+                  nWidth := hwg_NextItem(stroka)
+                  nHeight := hwg_NextItem(stroka)
+                  nStyle := Val(hwg_NextItem(stroka))
+                  oForm:lGet := (Upper(hwg_NextItem(stroka)) == "T")
+                  lClipper := (Upper(hwg_NextItem(stroka)) == "T")
+                  cFont := hwg_NextItem(stroka)
                   oFont := hwg_CallFunc("Str2Font", { cFont })
-                  oForm:CreateDialog( { {"Left", x}, {"Top", y}, {"Width", nWidth}, {"Height", nHeight}, {"Caption", itemName}, {"Font", oFont} } )
+                  oForm:CreateDialog({ {"Left", x}, {"Top", y}, {"Width", nWidth}, {"Height", nHeight}, {"Caption", itemName}, {"Font", oFont} })
                   nMode := 1
                ENDIF
             ENDIF
@@ -80,24 +80,24 @@ ENDFUNC
          ELSE           
             itemName := CnvCtrlName(hwg_NextItem(stroka, .T.))
             IF itemName == NIL
-               hwg_MsgStop( "Wrong item name: " + hwg_NextItem( stroka, .T. ) )
+               hwg_MsgStop("Wrong item name: " + hwg_NextItem(stroka, .T.))
                RETURN
             ENDIF
-            cCaption := hwg_NextItem( stroka )
-            hwg_NextItem( stroka )
-            x := hwg_NextItem( stroka )
-            y := hwg_NextItem( stroka )
-            nWidth := hwg_NextItem( stroka )
-            nHeight := hwg_NextItem( stroka )
-            nStyle := Val( hwg_NextItem( stroka ) )
-            cFont := hwg_NextItem( stroka )
-            tColor := hwg_NextItem( stroka )
-            bColor := hwg_NextItem( stroka )
+            cCaption := hwg_NextItem(stroka)
+            hwg_NextItem(stroka)
+            x := hwg_NextItem(stroka)
+            y := hwg_NextItem(stroka)
+            nWidth := hwg_NextItem(stroka)
+            nHeight := hwg_NextItem(stroka)
+            nStyle := Val(hwg_NextItem(stroka))
+            cFont := hwg_NextItem(stroka)
+            tColor := hwg_NextItem(stroka)
+            bColor := hwg_NextItem(stroka)
             oFont := hwg_CallFunc("Str2Font", { cFont })
-            HControlGen():New( oForm:oDlg, itemName, &&
+            HControlGen():New(oForm:oDlg, itemName, &&
              { { "Left", x }, { "Top", y }, { "Width", nWidth }, &&
              { "Height", nHeight }, { "Caption", cCaption }, &&
-             { "TextColor", tColor }, { "BackColor", bColor }, {"Font", oFont} } )
+             { "TextColor", tColor }, { "BackColor", bColor }, {"Font", oFont} })
          ENDIF
       ENDIF
    ENDDO

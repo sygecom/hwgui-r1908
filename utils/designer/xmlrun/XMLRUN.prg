@@ -324,12 +324,12 @@ FUNCTION rmatch(c, f)
          [NOOPTIMIZE]                                                      ;
                                                                            ;
       => ordCondSet(<"for">, <{for}>,                                      ;
-                      if( <.all.>, .T., NIL ),                             ;
+                      if(<.all.>, .T., NIL),                               ;
                       <{while}>,                                           ;
                       <{opt}>, <step>    ,                                 ;
                       RECNO(), <next>, <rec>,                              ;
-                      if( <.rest.>, .T., NIL ),                            ;
-                      if( (<.dec.> .AND. !<.asc.>), .T., NIL ),            ;
+                      if(<.rest.>, .T., NIL),                              ;
+                      if((<.dec.> .AND. !<.asc.>), .T., NIL),              ;
                       .T., <(cdx)>, <.cur.>, <.empty.>, .F., <.add.>,      ;
                       <.shad.>, <.filt.>)                                  ;
        ; ordCreate(<(cdx)>, <(tag)>, <"key">, <{key}>, [<.u.>])
@@ -549,16 +549,16 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 	if subst(c, 3, 3)="AAA"
 
 	   mm:=subst(cPress, 3, 3)
-	   mm:=transform( Lower(mm), "!xx")
+	   mm:=transform(Lower(mm), "!xx")
 
 	   *:Koreksi untuk ejaan Inggris
-	   mm:=StrTran( mm, "Peb", "Feb")
-	   mm:=StrTran( mm, "May", "Mei")
-	   mm:=StrTran( mm, "Aug", "Agt")
-	   mm:=StrTran( mm, "Agu", "Agt")
-	   mm:=StrTran( mm, "Nov", "Nop")
-	   mm:=StrTran( mm, "Dec", "Des")
-	   mm:=StrTran( mm, "Oct", "Okt")
+	   mm:=StrTran(mm, "Peb", "Feb")
+	   mm:=StrTran(mm, "May", "Mei")
+	   mm:=StrTran(mm, "Aug", "Agt")
+	   mm:=StrTran(mm, "Agu", "Agt")
+	   mm:=StrTran(mm, "Nov", "Nop")
+	   mm:=StrTran(mm, "Dec", "Des")
+	   mm:=StrTran(mm, "Oct", "Okt")
 
            mm:=Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
 
