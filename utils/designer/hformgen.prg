@@ -791,7 +791,7 @@ STATIC FUNCTION WriteTree(aTree, oParent)
          type := HBXML_TYPE_SINGLE
       ENDIF
       oNode := oParent:Add(HXMLNode():New("item", type, ;
-             { { "name", aTree[i, 2] }, { "id", LTrim(Str(aTree[i, 3])) } }) )
+             { { "name", aTree[i, 2] }, { "id", LTrim(Str(aTree[i, 3])) } }))
       IF aTree[i, 4] != NIL
          oNode:Add(HXMLNode():New(, HBXML_TYPE_CDATA,, aTree[i, 4]))
       ENDIF
@@ -1357,7 +1357,7 @@ STATIC FUNCTION LButtonDown(oDlg, xPos, yPos)
     // : LFB
       IF oCtrl == NIL .AND. oDesigner:addItem == NIL
          hwg_SetCursor(handCursor)
-         SetBDown(oDlg , xPos, yPos)  //, resizeDirection )
+         SetBDown(oDlg , xPos, yPos)  //, resizeDirection)
       // fazer o desenho da marca‡Æo
       ENDIF
       // : END LFB

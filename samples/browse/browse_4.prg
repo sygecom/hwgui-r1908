@@ -43,7 +43,7 @@ FUNCTION Main()
    oBrowse:alias := "Teste"
    oBrowse:aColumns := {}
 
-    ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
+    ADD COLUMN FieldBlock(Fieldname(1)) TO oBrowse ;
         HEADER "Código";
         TYPE "N";
         LENGTH 3 ;
@@ -52,7 +52,7 @@ FUNCTION Main()
         JUSTIFY HEAD DT_CENTER ;
         JUSTIFY LINE DT_RIGHT
 
-    ADD COLUMN FieldBlock(Fieldname(2) ) TO oBrowse ;
+    ADD COLUMN FieldBlock(Fieldname(2)) TO oBrowse ;
         HEADER "Descrição" ;
         PICTURE "@!" ;
         JUSTIFY HEAD DT_CENTER ;

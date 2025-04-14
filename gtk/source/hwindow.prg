@@ -305,7 +305,7 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
           IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
           ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
    ELSE
-       hwg_MsgStop("Create Main window first !", "HChildWindow():New()" )
+       hwg_MsgStop("Create Main window first !", "HChildWindow():New()")
        RETURN NIL
    ENDIF
    IF ::bInit != NIL
@@ -317,7 +317,7 @@ RETURN Self
 METHOD Activate(lShow) CLASS HChildWindow
 
    hwg_CreateGetList(Self)
-   hwg_ActivateChildWindow((lShow == NIL .OR. lShow), ::handle )
+   hwg_ActivateChildWindow((lShow == NIL .OR. lShow), ::handle)
 
 RETURN NIL
 

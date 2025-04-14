@@ -129,7 +129,7 @@ RETURN
        + "," + LTrim(Str(oForm:oDlg:oFont:charset)) + "," + LTrim(Str(oForm:oDlg:oFont:italic)) &&
        + "," + LTrim(Str(oForm:oDlg:oFont:underline)) + "," + LTrim(Str(oForm:oDlg:oFont:strikeout)) &&
        ,"") &&
-       + _Chr(10) )
+       + _Chr(10))
    i := 1
    DO WHILE i <= alen
       oCtrl := aControls[i]

@@ -205,7 +205,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             FOR i = 1 to 200
                cAlias := ALIAS(i)
                IF !Empty(ALIAS(i))
-                  aItemsaux  := ARRAY(&(alias(i))->(FCOUNT()) )
+                  aItemsaux  := ARRAY(&(alias(i))->(FCOUNT()))
                   &(alias(i))->(Afields(aItemsAux))
                   FOR k = 1 TO Len(aItemsaux)
                      AAdd(aitems, ALIAS(i) + "->" + aItemsAux[k])
@@ -376,7 +376,7 @@ FUNCTION InspOpen(lShow)
    BEGIN PAGE "Properties" OF oTab
       @ 2, 30 PBROWSE oBrw1 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
          ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
-         hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE, {|| ResetToDefault(oBrw1)} )
+         hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE, {|| ResetToDefault(oBrw1)})
 
       oBrw1:tColor := hwg_GetSysColor(COLOR_BTNTEXT)
       oBrw1:tColorSel := 8404992
@@ -681,7 +681,7 @@ STATIC FUNCTION onclick_deleteitem(oBrw)
   ENDIF
 RETURN NIL
 
-FUNCTION ObjInspector(oObject )
+FUNCTION ObjInspector(oObject)
 *****************************************************************************
    LOCAL opForm
    LOCAL oBrw

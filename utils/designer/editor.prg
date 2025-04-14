@@ -327,7 +327,7 @@ STATIC FUNCTION EnChange(nEvent)
       nTextLength := nLength
       hwg_SendMessage(oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE)
    ENDIF
-   // writelog("EnChange "+Str(pos1)+" "+Str(pos2) ) // +" Length: "+Str(nLength))
+   // writelog("EnChange "+Str(pos1)+" "+Str(pos2)) // +" Length: "+Str(nLength))
 RETURN NIL
 
 STATIC FUNCTION CreateHilight(cText, oTheme)

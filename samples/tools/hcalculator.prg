@@ -287,7 +287,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       ::nMemory := 0
       oForm:oMemory:caption := " "
    ElseIf cNumero == "MR"
-      oForm:oVisor:Caption := Str(::nMemory )
+      oForm:oVisor:Caption := Str(::nMemory)
       ::lClear := .F.
    ElseIf cNumero == "M+"
       ::nMemory := Val(StrTran(oForm:oVisor:Caption, ",", "."))
@@ -304,7 +304,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
    EndIf
    If !Empty(cOperar) .AND. (!Empty(::aOperando[1]) .AND. !Empty(::aOperando[2]))
       If ::cOperador == "%"
-        ::aOperando[1] := (::aOperando[1] * ::aOperando[2] ) / 100
+        ::aOperando[1] := (::aOperando[1] * ::aOperando[2]) / 100
       Else
         nCalculo1 := ::aOperando[1]
         nCalculo2 := ::aOperando[2]

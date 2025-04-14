@@ -75,9 +75,9 @@ CLASS HColumn INHERIT HObject
    DATA Picture
    DATA bHeadClick
    DATA bColorBlock              //   bColorBlock must return an array containing four colors values
-                                 //   oBrowse:aColumns[1]:bColorBlock := {|| IF (nNumber < 0, ;
+                                 //   oBrowse:aColumns[1]:bColorBlock := {|| IF(nNumber < 0, ;
                                  //      {textColor, backColor, textColorSel, backColorSel} , ;
-                                 //      {textColor, backColor, textColorSel, backColorSel} ) }
+                                 //      {textColor, backColor, textColorSel, backColorSel}) }
 
    METHOD New(cHeading, block, type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick)
 
@@ -326,7 +326,7 @@ Local aCoors, retValue := -1
             IF ::nCtrlPress == 0
                ::nCtrlPress := wParam
             ENDIF
-         ELSEIF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111 ).AND. ::lAutoEdit
+         ELSEIF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111) .AND. ::lAutoEdit
             ::Edit(wParam, lParam)
          ENDIF
          retValue := 1
@@ -346,7 +346,7 @@ Local aCoors, retValue := -1
       ELSEIF msg == WM_MOUSEWHEEL
          ::MouseWheel(hwg_LOWORD(wParam),;
                           IIf(hwg_HIWORD(wParam) > 32768, ;
-                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam) ),;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)),;
                           hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       ELSEIF msg == WM_DESTROY
          ::End()
@@ -467,7 +467,7 @@ Local aCoors, retValue := -1
          #else
          OTHERWISE
          #endif
-            IF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111 ) .AND. ::lAutoEdit
+            IF (wParam >= 48 .AND. wParam <= 90 .OR. wParam >= 96 .AND. wParam <= 111) .AND. ::lAutoEdit
                ::Edit(wParam, lParam)
             ENDIF
          ENDSWITCH
@@ -493,7 +493,7 @@ Local aCoors, retValue := -1
       CASE WM_MOUSEWHEEL
          ::MouseWheel(hwg_LOWORD(wParam),;
                           IIf(hwg_HIWORD(wParam) > 32768, ;
-                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam) ),;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)),;
                           hwg_LOWORD(lParam), hwg_HIWORD(lParam))
          EXIT
 
@@ -552,7 +552,7 @@ STATIC FUNCTION InitColumn(oBrw, oColumn, n)
    endif
    if oColumn:length == NIL 
       if oColumn:picture != NIL
-         oColumn:length := Len(Transform(Eval(oColumn:block, , oBrw, n), oColumn:picture ) )
+         oColumn:length := Len(Transform(Eval(oColumn:block, , oBrw, n), oColumn:picture))
       else
          oColumn:length := 10             
       endif
@@ -1013,7 +1013,7 @@ Local aCores
               ::aColumns[fif]:tColor := aCores[1]
               ::aColumns[fif]:bColor := aCores[2]
             ENDIF
-            ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor   )
+            ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor)
          ENDIF
          xSize := ::aColumns[fif]:width
          IF ::lAdjRight .AND. fif == Len(::aColumns)
@@ -1029,7 +1029,7 @@ Local aCores
             ENDIF
             hBReal := IIf(::aColumns[fif]:brush != NIL, ;
                          ::aColumns[fif]:brush:handle,   ;
-                         oLineBrush:handle )
+                         oLineBrush:handle)
             hwg_FillRect(hDC, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-IIf(::lSep3d, 2, 1)-1, ::y1+(::height+1)*nstroka, hBReal)
             IF !lClear
                IF ::aColumns[fif]:aBitmaps != NIL .AND. !Empty(::aColumns[fif]:aBitmaps)
@@ -1906,11 +1906,11 @@ Local kolf := FCOUNT()
    
    for i := 1 TO kolf
       oBrw:AddColumn(HColumn():New(Fieldname(i),                      ;
-                                     FieldWBlock( Fieldname(i), nArea ), ;
-                                     dbFieldInfo( DBS_TYPE, i ),         ;
-                                     dbFieldInfo( DBS_LEN, i ),          ;
-                                     dbFieldInfo( DBS_DEC, i ),          ;
-                                     lEditable))
+                                   FieldWBlock(Fieldname(i), nArea), ;
+                                   dbFieldInfo(DBS_TYPE, i),         ;
+                                   dbFieldInfo(DBS_LEN, i),          ;
+                                   dbFieldInfo(DBS_DEC, i),          ;
+                                   lEditable))
    next
 
    oBrw:Refresh()

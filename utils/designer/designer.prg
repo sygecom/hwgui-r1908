@@ -663,7 +663,7 @@ STATIC FUNCTION ArrangeBtn(oTab, x, y)
    NEXT
 RETURN NIL
 
-STATIC FUNCTION ClickBtn(oTab, nId) //, cItem, cText, nWidth, nHeight )
+STATIC FUNCTION ClickBtn(oTab, nId) //, cItem, cText, nWidth, nHeight)
 
    LOCAL oBtn := oTab:FindControl(nId)
    MEMVAR oDesigner

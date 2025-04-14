@@ -231,7 +231,7 @@ FUNCTION Browse2Prg
 
 //   cBrowser += "    // " + cname + "    *- SCRIPT GERADO AUTOMATICAMENTE PELO DESIGNER" + _CHR(10) + "    //  " + _CHR(10)
    nType := IIf(oCtrl:GetProp("BrwType") != "dbf", BRW_ARRAY, BRW_DATABASE)
-   IF cName == NIL .OR. Empty(cName) .OR. ((cAlias := oCtrl:GetProp("FileDbf" )) == NIL .AND. nType = BRW_DATABASE)
+   IF cName == NIL .OR. Empty(cName) .OR. ((cAlias := oCtrl:GetProp("FileDbf")) == NIL .AND. nType = BRW_DATABASE)
       RETURN cBrowser
    ENDIF
 
@@ -244,7 +244,7 @@ FUNCTION Browse2Prg
       temp := oCtrl:GetProp(aBrwXml[j])
       IF temp  != NIL .AND. !Empty(temp)
          cBrowser += Space(4) + cname + ":" + aBrwProp[j] + ":= " + ;
-            IIf(temp = "True", ".T.", IIf(temp = "False", ".F.", temp) ) + _chr(10)
+            IIf(temp = "True", ".T.", IIf(temp = "False", ".F.", temp)) + _chr(10)
       ENDIF
       j ++
    ENDDO
@@ -318,7 +318,7 @@ FUNCTION Browse2Prg
          cName := Trim(oCtrl:GetProp("Name"))
          oCtrl1 := oCtrl:aControls[i]
          cHeader := IIf((temp := oCtrl1:GetProp("Heading")) != NIL, "'" + temp + "'" , "")
-         cCampo  := Lower(IIf((temp := oCtrl1:GetProp("FieldName")) != NIL .AND. !Empty(temp), "" + temp + "", FieldName(i ) ))
+         cCampo  := Lower(IIf((temp := oCtrl1:GetProp("FieldName")) != NIL .AND. !Empty(temp), "" + temp + "", FieldName(i)))
          cCampo  := Lower(IIf((temp := oCtrl1:GetProp("FieldExpr")) != NIL .AND. !Empty(temp), "" + temp + "", ccampo))
          m->nLength := IIf((temp := oCtrl1:GetProp("Length")) != NIL, Val(temp), temp)
          IF nType = BRW_DATABASE
@@ -995,7 +995,7 @@ FUNCTION Ctrl2Prg
                //
                IF oCtrl:cClass == "timer"
                   stroka := IIf(cName != NIL, " {|" + temp + "| " + ;
-                     IIf(Len(cName) == 1, cName[1], cName[2] ) + " }" , " ")
+                     IIf(Len(cName) == 1, cName[1], cName[2]) + " }" , " ")
                   cname := oCtrl:GetProp("Name")
                   temp := oCtrl:GetProp("value") //) != NIL
                   //ON INIT {|| oTimer1 := HTimer():New(otESTE,, 5000, {|| OtIMER1:END(), hwg_MsgInfo('oi'), enddialog() })}
@@ -1251,14 +1251,14 @@ FUNCTION Ctrl2Prg
          cName := "oDlg"
       ENDIF
 
-      FWrite(han, _Chr(10) + _Chr(10) + "  INIT DIALOG " + cname + ' TITLE "' + oForm:oDlg:title + '" ;' + _Chr(10) )
+      FWrite(han, _Chr(10) + _Chr(10) + "  INIT DIALOG " + cname + ' TITLE "' + oForm:oDlg:title + '" ;' + _Chr(10))
 
    ELSE
       // 'INIT WINDOW' command
       IF cName == NIL
          cName := "oWin"
       ENDIF
-      FWrite(han, _Chr(10) + _Chr(10) + "  INIT WINDOW " + cName + ' TITLE "' + oForm:oDlg:title + '" ;' + _Chr(10) )
+      FWrite(han, _Chr(10) + _Chr(10) + "  INIT WINDOW " + cName + ' TITLE "' + oForm:oDlg:title + '" ;' + _Chr(10))
 
    ENDIF
 
@@ -1321,7 +1321,7 @@ FUNCTION Ctrl2Prg
    FWrite(han, Space(4) + "AT " + LTrim(Str(oForm:oDlg:nLeft)) + "," ;
       + LTrim(Str(oForm:oDlg:nTop)) + ;
       " SIZE " + LTrim(Str(oForm:oDlg:nWidth)) + "," + ;
-      LTrim(Str(oForm:oDlg:nHeight + temp)) )
+      LTrim(Str(oForm:oDlg:nHeight + temp)))
 
    IF (temp := oForm:GetProp("Font")) != NIL
       FWrite(han, hwg_CallFunc("FONT2STR", {temp}))

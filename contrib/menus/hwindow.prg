@@ -168,7 +168,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
       // Registra a classe
       hwg_InitMdiChildWindow(::szAppName , cTitle, cMenu,  ;
               IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
-              nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+              nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
        // Cria a window
        ::handle := hwg_CreateMdiChildWindow(Self)
@@ -237,7 +237,7 @@ METHOD GetMain CLASS HWindow
 RETURN IIf(Len(::aWindows) > 0,              ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
-	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL )
+	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
 
 METHOD GetMdiActive() CLASS HWindow 
 RETURN ::FindWindow (hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0))
@@ -698,7 +698,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
          // WriteLog("|DefMDIChild Paint"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
 
          nReturn := Eval(oWnd:bPaint, oWnd)
-         // Writelog("Saida: " + Valtype(nReturn) )
+         // Writelog("Saida: " + Valtype(nReturn))
          // RETURN (nReturn)
       
       endif
@@ -725,7 +725,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       //WriteLog("|DefMDIChild"+Str(hWnd, 10)+"|"+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
       if HB_IsObject(oWnd)
          if wParam = 1 // Ativando
-            // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10) ) 
+            // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10)) 
             // Pega o menu atribuido
             aMenu := oWnd:menu
             //hMenu := aMenu[5]
@@ -739,7 +739,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
                Eval(oWnd:bGetFocus, oWnd)
             Endif
          Else   // Desativando
-            // WriteLog("WM_NCACTIVATE" + " -> " + "Desativando" + " Wnd: " + Str(hWnd, 10) )  
+            // WriteLog("WM_NCACTIVATE" + " -> " + "Desativando" + " Wnd: " + Str(hWnd, 10))  
             If  oWnd:bLostFocus != NIL
                Eval(oWnd:bLostFocus, oWnd)
             Endif
@@ -752,7 +752,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
    elseif msg == WM_MDIACTIVATE
 
       if wParam == 1 
-            // WriteLog("WM_MDIACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10) )
+            // WriteLog("WM_MDIACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10))
             // Pega o menu atribuido
             aMenu := oWnd:menu
             hMenu := aMenu[5]

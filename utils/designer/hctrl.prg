@@ -227,7 +227,7 @@ METHOD GetProp(cName, i) CLASS HControlGen
   i := ::GetPropIndex(cName)
 RETURN IIf(i == 0, NIL, ::aProp[i, 2])
 
-METHOD GetPropIndex(cName ) CLASS HControlGen
+METHOD GetPropIndex(cName) CLASS HControlGen
 
    LOCAL i := 0
 
@@ -295,7 +295,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
       ENDIF
    ENDIF
    IF oCtrl:Adjust == 6
-         oCtrl:Move(oCtrl:nLeft , 2 )
+         oCtrl:Move(oCtrl:nLeft , 2)
          oCtrl:SetProp("Top", "2")
       //oCtrl:SetCoor("Top", oCtrl:nTop)
       //oCtrl:SetCoor("Width", oCtrl:nWidth)
@@ -307,7 +307,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
           oCtrls := aControls[i]
               *-hwg_MsgInfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass="browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop+oCtrls:nHeight)
-                 oCtrl:Move(oCtrl:nLeft , oCtrls:nTop+2 )
+                 oCtrl:Move(oCtrl:nLeft , oCtrls:nTop+2)
               *oCtrl:SetProp("Top", "oCtrls:nTop+2")
               EXIT
                ENDIF
@@ -374,7 +374,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
    ENDIF
 
    // writelog("V0=("+AllTrim(Str(oCtrl:nLeft))+","+AllTrim(Str(oCtrl:nTop))+") P1=("+AllTrim(Str(xPos, 5))+","+AllTrim(Str(yPos, 5)
-   // )+ ") B1=("+AllTrim(Str(aBDown[2]))+","+AllTrim(Str(aBDown[3]))+")  d=("+AllTrim(Str(dx, 3))+","+AllTrim(Str(dy, 3))+") " )
+   // )+ ") B1=("+AllTrim(Str(aBDown[2]))+","+AllTrim(Str(aBDown[3]))+")  d=("+AllTrim(Str(dx, 3))+","+AllTrim(Str(dy, 3))+") ")
    // writelog("vBDown=("+AllTrim(Str(vBDown[2]))+","+AllTrim(Str(vBDown[3]))+") ")
 
    IF dx != 0 .OR. dy != 0
@@ -392,7 +392,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
           if abs(int(((mdx) / oDesigner:nPixelGrid) * 10)) <= 4
             mdx := mdx
           else
-            mdx := (mdx - oDesigner:nPixelGrid )
+            mdx := (mdx - oDesigner:nPixelGrid)
           endif
 
           // writelog("coordinate normalizzate=" +"   N= " +Str(dx)+"   mdx="+Str(mdx))
@@ -404,7 +404,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
           if abs(int(((mdy) / oDesigner:nPixelGrid) * 10)) <= 4
             mdy := mdy
           else
-            mdy := (mdy - oDesigner:nPixelGrid )
+            mdy := (mdy - oDesigner:nPixelGrid)
           endif
 
           dy = (vdy - oCtrl:nTop) - mdy

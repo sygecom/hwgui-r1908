@@ -16,7 +16,7 @@ FUNCTION Main
          FErase(cFile)
       EndIF
 
-      cText := "/*" + CRLF + "FORM HwGUI Designer : " + cFile + CRLF + "Date: " + DTOC (Date() ) + CRLF + "*/" + CRLF
+      cText := "/*" + CRLF + "FORM HwGUI Designer : " + cFile + CRLF + "Date: " + DTOC (Date()) + CRLF + "*/" + CRLF
       
       cText += "Function " + StrTran(cFile, ".frm", "") + CRLF
       cText += "   Local cXml " + CRLF + CRLF

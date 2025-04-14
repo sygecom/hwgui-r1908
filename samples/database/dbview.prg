@@ -91,7 +91,7 @@ FUNCTION Main()
        ENDMENU
      ENDMENU
      MENU TITLE "&Help"
-       MENUITEM "&About" ACTION hwg_MsgInfo("Dbf Files Browser" + Chr(10) + "2005" )
+       MENUITEM "&About" ACTION hwg_MsgInfo("Dbf Files Browser" + Chr(10) + "2005")
      ENDMENU
    ENDMENU
 
@@ -293,14 +293,14 @@ STATIC FUNCTION NewIndex()
             IF Empty(cCond)
                ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE
-               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
+               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}"),,,,, RecNo(),,,,)
                ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ELSE
             IF Empty(cCond)
                dbCreateIndex(RTrim(cName), RTrim(cExpr),&("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE
-               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}" ),,,,, RecNo(),,,,)
+               ordCondSet(RTrim(cCond), &("{||" + RTrim(cCond) + "}"),,,,, RecNo(),,,,)
                ORDCREATE(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ENDIF

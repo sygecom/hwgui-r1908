@@ -170,7 +170,7 @@ STATIC FUNCTION InitConfig
 #ifdef RDD_ADS
 Local hDlg := hwg_GetModalHandle()
 Local st := IIf(nServerType == ADS_REMOTE_SERVER, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)
-Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTON4, IDC_RADIOBUTTON5) )
+Local nd := IIf(numdriv == 1, IDC_RADIOBUTTON3, IIf(numdriv == 2, IDC_RADIOBUTTON4, IDC_RADIOBUTTON5))
    hwg_CheckRadioButton(hDlg, IDC_RADIOBUTTON3, IDC_RADIOBUTTON5, nd)
    hwg_CheckRadioButton(hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, st)
    hwg_CheckDlgButton(hDlg, IDC_CHECKBOX4, SET(_SET_EXCLUSIVE))
@@ -692,7 +692,7 @@ LOCAL bOldError, oError
       bOldError := ERRORBLOCK({ | e | OpenError(e) })
       DO WHILE .T.
          BEGIN SEQUENCE
-            DBUSEAREA(,, fname, alsname,, prrdonly )
+            DBUSEAREA(,, fname, alsname,, prrdonly)
          RECOVER USING oError
             IF oError:genCode == EG_BADALIAS .OR. oError:genCode == EG_DUPALIAS
                IF Empty(alsname := hwg_MsgGet("", "Bad alias name, input other:"))
@@ -714,7 +714,7 @@ LOCAL bOldError, oError
       IF NETERR()
          IF SET(_SET_EXCLUSIVE)
             SET(_SET_EXCLUSIVE, .F.)
-            DBUSEAREA(,, fname, hwg_CutExten(IIf(alsname == NIL, fname, alsname)),, prrdonly )
+            DBUSEAREA(,, fname, hwg_CutExten(IIf(alsname == NIL, fname, alsname)),, prrdonly)
             IF NETERR()
                hwg_MsgStop(strerr)
                improc := oldimp

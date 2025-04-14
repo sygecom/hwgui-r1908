@@ -298,7 +298,7 @@ FUNCTION Texto()
    r_linha := 0
    linhas := {}
    while !ft_FEOF()
-      linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1) )
+      linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1))
       //
       if Len(linha) != 0
         AAdd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
@@ -355,7 +355,7 @@ FUNCTION Texto()
  hwg_WriteStatus(o&I, 1, "Lin:      0")
  hwg_WriteStatus(o&I, 2, "Col:      0")
  hwg_SendMessage(oEdit&i:Handle, WM_ENABLE, 1, 0)
- hwg_SetFocus(oEdit&i:Handle )
+ hwg_SetFocus(oEdit&i:Handle)
  // colocando cores nas funcoes
  hwg_RE_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
  /*
@@ -384,7 +384,7 @@ endif
     dats := dtoc(date())
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
-    if !set(_SET_INSERT )
+    if !set(_SET_INSERT)
        strinsert := "INSERT ON "
     else
         strinsert := "INSERT OFF "
@@ -448,7 +448,7 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      if wParam == 45
           Set(_SET_INSERT, !Set(_SET_INSERT))
      ENDIF
-     if !set(_SET_INSERT )
+     if !set(_SET_INSERT)
         strinsert := "INSERT ON "
      else
         strinsert := "INSERT OFF "
@@ -478,14 +478,14 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      endif
      //
      if nvirtCode = 32 .OR. nvirtCode = 13 .OR. nvirtCode = 8
-         hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+         hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
          oWindow := HMainWIndow():GetMdiActive():aControls
          IF oWindow != NIL
 
             aControls := oWindow
 
-            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
-            hwg_SetFocus(aControls[hWnd]:Handle )
+            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0) // focando janela
+            hwg_SetFocus(aControls[hWnd]:Handle)
              //
              pos := hwg_SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
              pos1 := hwg_LOWORD(pos)
@@ -499,8 +499,8 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
                 hwg_RE_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
              endif
             //
-            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 ) // focando janela
-            hwg_SetFocus(aControls[hWnd]:Handle )
+            hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0) // focando janela
+            hwg_SetFocus(aControls[hWnd]:Handle)
          endif
          texto := ""
      else
@@ -544,7 +544,7 @@ FUNCTION Pesquisa()
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != NIL
-     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      //
      INIT DIALOG pesq clipper TITLE  "Pesquisar" ;
@@ -599,7 +599,7 @@ FUNCTION Ajuda(rArq)
    
    oIE:Visible := .T.
 
-   oIE:Navigate(rArq )
+   oIE:Navigate(rArq)
 
 RETURN NIL
 
@@ -616,7 +616,7 @@ FUNCTION Vai(oEdit)
    LOCAL i
 
  if HMainWIndow():GetMdiActive() != NIL
-     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+     hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      INIT DIALOG pesq clipper TITLE  "Linha" ;
           AT 113, 214 SIZE 345, 103 STYLE DS_CENTER
@@ -628,14 +628,14 @@ FUNCTION Vai(oEdit)
          IF oWindow != NIL
              pos_y := val(get01)
              aControls := oWindow
-             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             hwg_SetFocus(aControls[hWnd]:Handle )
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+             hwg_SetFocus(aControls[hWnd]:Handle)
              //
              hwg_SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
              hwg_Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
              //
-             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-             hwg_SetFocus(aControls[hWnd]:Handle )
+             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+             hwg_SetFocus(aControls[hWnd]:Handle)
              //
          ENDIF
      endif
@@ -652,12 +652,12 @@ FUNCTION seleciona()
    LOCAL aControls
    LOCAL i
 
- hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"} )
+ hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
  oWindow := HMainWIndow():GetMdiActive():aControls
  IF oWindow != NIL
     aControls := oWindow
-    hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-    hwg_SetFocus(aControls[hWnd]:Handle )
+    hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+    hwg_SetFocus(aControls[hWnd]:Handle)
     hwg_SendMessage(aControls[hWnd]:handle, EM_SETSEL, 0, 0)
     hwg_SendMessage(aControls[hWnd]:handle, EM_SETSEL, 100000, 0)
  ENDIF
@@ -723,8 +723,8 @@ FUNCTION buscafunc(linha)
      IF oWindow != NIL
          pos_y := funcoes[linha]
          aControls := oWindow
-         hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0 )
-         hwg_SetFocus(aControls[hWnd]:Handle )
+         hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
+         hwg_SetFocus(aControls[hWnd]:Handle)
          //
          hwg_SendMessage(aControls[hWnd]:Handle, EM_SCROLLCARET, 0, 0)
          hwg_Sendmessage(aControls[hWnd]:Handle, EM_LINESCROLL, 0, pos_y - 1)
@@ -756,7 +756,7 @@ FUNCTION cor_fundo()
  else
    hwg_MsgInfo("Abra um documento Primeiro")
  endif
- hwg_SetFocus(aControls[hWnd]:Handle )
+ hwg_SetFocus(aControls[hWnd]:Handle)
 
 RETURN .T.
 
@@ -779,7 +779,7 @@ FUNCTION cor_Fonte()
  else
    hwg_MsgInfo("Abra um documento Primeiro")
  endif
- hwg_SetFocus(aControls[hWnd]:Handle )
+ hwg_SetFocus(aControls[hWnd]:Handle)
 
 RETURN .T.
 

@@ -203,7 +203,7 @@ Local i, i0, j, slen, c
       DO WHILE i <= slen
          IF (c := SubStr(cLine, i, 1)) < " "
             IF i0 != 0
-               ::PrintText(SubStr(cLine, i0, i-i0 ))
+               ::PrintText(SubStr(cLine, i0, i-i0))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))

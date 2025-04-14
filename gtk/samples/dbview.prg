@@ -78,7 +78,7 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
        ENDMENU
      ENDMENU
      MENU TITLE "&Help"
-       MENUITEM "&About" ACTION hwg_MsgInfo("Dbf Files Browser" + Chr(10) + "2005" )
+       MENUITEM "&About" ACTION hwg_MsgInfo("Dbf Files Browser" + Chr(10) + "2005")
      ENDMENU
    ENDMENU
    
@@ -251,14 +251,14 @@ Memvar oBrw
             IF Empty(cCond)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE                     
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
+               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ELSE
             IF Empty(cCond)
                dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., NIL))
             ELSE                     
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}" ),,,,, RECNO(),,,,)
+               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ENDIF

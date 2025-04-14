@@ -50,7 +50,7 @@ FUNCTION BrowseTest()
 
    PUBLIC TENTA := 1
 
-   ADD COLUMN FieldBlock(Fieldname(1) ) TO oBrowse ;
+   ADD COLUMN FieldBlock(Fieldname(1)) TO oBrowse ;
       HEADER "Code";
       TYPE "N";
       LENGTH 6 ;
@@ -62,7 +62,7 @@ FUNCTION BrowseTest()
       VALID BrowseValid() ;
       WHEN  BrowseWhen()
 
-   ADD COLUMN FieldBlock(Fieldname(2) ) TO oBrowse ;
+   ADD COLUMN FieldBlock(Fieldname(2)) TO oBrowse ;
       HEADER "Description" ;
       EDITABLE ;
       PICTURE "@!" ;

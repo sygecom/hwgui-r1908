@@ -2865,8 +2865,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                                x + ::aMargin[4], ;
                                ::y1 + (::height + 1) * (::nPaintRow - 1) + 1 + ::aMargin[1], ;
                                x + xSize - (2 + ::aMargin[2]), ;
-                               ::y1 + (::height + 1) * ::nPaintRow - (1 + ::aMargin[3]) ;
-                              )
+                               ::y1 + (::height + 1) * ::nPaintRow - (1 + ::aMargin[3]))
                   #endif
 
                   IF ::aColumns[::nPaintCol]:tColor != NIL //.AND. (::nPaintCol != ::colPos .OR. !lSelected)

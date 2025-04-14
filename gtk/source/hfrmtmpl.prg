@@ -1022,7 +1022,7 @@ Private oReport := Self
       oFont := hrep_FontFromxml(oPrinter, xProperty, aGetSecond(::aProp, "fonth")*::nKoefY)
    ENDIF
 
-   oPrinter:StartDoc(lPreview) // ,"/tmp/a1.ps" )
+   oPrinter:StartDoc(lPreview) // ,"/tmp/a1.ps")
    ::lNextPage := .F.
 
    ::lFinish := .T.

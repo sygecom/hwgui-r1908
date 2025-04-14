@@ -62,7 +62,7 @@ RETURN Self
 METHOD Activate CLASS hToolBar
    IF !Empty(::oParent:handle)
 
-      ::handle := hwg_CreateToolBar(::oParent:handle )
+      ::handle := hwg_CreateToolBar(::oParent:handle)
       hwg_SetWindowObject(::handle, Self)
       ::Init()
    ENDIF

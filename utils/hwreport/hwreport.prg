@@ -217,7 +217,7 @@ Local step, kolsteps, nsteps
       hwg_DrawLine(hDC, xt + Round(n1cm / 4, 0), 0, xt + Round(n1cm / 4, 0), 4)
       hwg_DrawLine(hDC, xt + Round(n1cm / 2, 0), 0, xt + Round(n1cm / 2, 0), 8)
       hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
-      hwg_DrawLine(hDC, xt, 0, xt, 12 )
+      hwg_DrawLine(hDC, xt, 0, xt, 12)
       IF i > 0 .AND. i < aPaintRep[FORM_WIDTH]/10
          hwg_DrawText(hDC, Ltrim(Str(i, 2)), xt-15, 12, xt+15, TOP_INDENT-5, DT_CENTER)
       ENDIF

@@ -175,7 +175,7 @@ RETURN
 
 STATIC FUNCTION SearchFile(oBrow, oFile)
 Local oTotReg:={}, i
-Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile )
+Local aSelect:=hwg_SelectMultipleFiles("xBase Files ("+oFile+")", oFile)
 if len(aSelect) == 0
    RETURN NIL
 endif
@@ -194,7 +194,7 @@ RETURN NIL
 
 STATIC FUNCTION SearchFileName(nName, oGet, oFile)
 Local oTextAnt:=oGet:GetText()
-Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,, .T. )
+Local fFile:=hwg_SelectFile(nName+" ("+oFile+")", oFile,,, .T.)
 If !Empty(oTextAnt)
    fFile:=oTextAnt //
 endif   
@@ -206,7 +206,7 @@ RETURN NIL
 FUNCTION ReadBuildFile()
 Local cLibFiles, oBr1:={}, oBr2:={}, oBr3:={}, oBr4:={}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal:=""
-Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
+Local cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld")
 if empty(cFolderFile); RETURN NIL; Endif
 oStatus:SetTextPanel(1, cFolderFile)      
 oExeName:SetText(hwg_GetIni( 'Config', 'ExeName' , , cFolderFile))
@@ -302,7 +302,7 @@ RETURN cDest
 
 FUNCTION SaveBuildFile()
 Local cLibFiles, i, oNome, g
-Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
+Local cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld")
 if empty(cFolderFile); RETURN NIL; Endif
 if file(cFolderFile)
    If(hwg_MsgYesNo("File "+cFolderFile+" EXIT ..Replace?"))
@@ -371,7 +371,7 @@ LOCAL cPrgFileAttr  , nPrgFileSize
 LOCAL dPrgCreateDate, nPrgCreateTime
 LOCAL dPrgChangeDate, nPrgChangeTime
 Local cPrgName
-Local lAll := hwg_MsgYesNo("Build All Fontes?", "Attention" )
+Local lAll := hwg_MsgYesNo("Build All Fontes?", "Attention")
 Local lCompile
 Local cList := ""
 Local cMake
@@ -466,7 +466,7 @@ For Each i in oBrowse1:aArray
    EndIf   
    cRun := " -v -y -c " +AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I"+cHarbour+"\include;"+cHwGUI+"\include;"+cBCC55+"\include " + "-o"+StrTran(cObjName, ".c", ".obj") + " " + cObjName
    If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
-      hwg_MsgInfo("No Created Object files!", "HwMake" )
+      hwg_MsgInfo("No Created Object files!", "HwMake")
       RETURN NIL
    EndIF
           
@@ -483,7 +483,7 @@ Next
 //ResourceFiles
 For Each i in oBrowse4:aArray     
    If ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
-      hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake" )
+      hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake")
       RETURN NIL
    EndIf   
    cListRes += cObj+"\"+cFileNoPath(cFileNoExt(i)) + ".res +" + CRLF
@@ -511,7 +511,7 @@ EndIF
 Memowrit(cMainPrg + ".bc ", cMake)
 
 If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
-      hwg_MsgInfo("No link file " + cMainPrg +"!", "HwMake" )
+      hwg_MsgInfo("No link file " + cMainPrg +"!", "HwMake")
       RETURN NIL
 EndIf
 
@@ -572,7 +572,7 @@ FOR EACH i in aLibs
 Next
 
 cLib := SubStr(AllTrim(cLib), 1, Len(AllTrim(cLib)) - 2)
-cLib := StrTran(cLib, Chr(179), Chr(13) + Chr(10 ))
+cLib := StrTran(cLib, Chr(179), Chr(13) + Chr(10))
 RETURN cLib
 
 FUNCTION ExecuteCommand(cProc, cSend, cLog)
