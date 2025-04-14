@@ -1741,4 +1741,10 @@ ComboBox
 #define NM_SETCURSOR            -17    // uses NMMOUSE struct
 #define NM_CHAR                 -18   // uses NMCHAR struct
 
+// from hupdown.prg
+#define UDN_FIRST               (-721)        // updown
+#define UDN_DELTAPOS            (UDN_FIRST - 1)
+#define UDM_SETBUDDY            (WM_USER + 105)
+#define UDM_GETBUDDY            (WM_USER + 106)
+
 #endif // _WINDOWS_CH_

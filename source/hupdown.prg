@@ -11,11 +11,6 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-#define UDN_FIRST               (-721)        // updown
-#define UDN_DELTAPOS            (UDN_FIRST - 1)
-#define UDM_SETBUDDY            (WM_USER + 105)
-#define UDM_GETBUDDY            (WM_USER + 106)
-
 CLASS HUpDown INHERIT HControl
 
    CLASS VAR winclass   INIT "EDIT"
