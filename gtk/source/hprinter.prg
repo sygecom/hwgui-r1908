@@ -104,7 +104,7 @@ Local oFont
 
 RETURN oFont
 
-METHOD SetFont(oFont)  CLASS HPrinter
+METHOD SetFont(oFont) CLASS HPrinter
 Local oFontOld := ::oFont
 
    hwg_gp_SetFont(::hDC, oFont:handle)

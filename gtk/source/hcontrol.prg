@@ -149,7 +149,7 @@ METHOD SetColor(tcolor, bcolor, lRepaint) CLASS HControl
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height, lMoveParent)  CLASS HControl
+METHOD Move(x1, y1, width, height, lMoveParent) CLASS HControl
 Local lMove := .F., lSize := .F.
 
    IF x1 != NIL .AND. x1 != ::nLeft
@@ -411,7 +411,7 @@ METHOD Activate CLASS HButton
 RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam)  CLASS HButton
+METHOD onEvent(msg, wParam, lParam) CLASS HButton
 
    IF msg == WM_LBUTTONUP
       IF ::bClick != NIL
@@ -421,7 +421,7 @@ METHOD onEvent(msg, wParam, lParam)  CLASS HButton
 
 RETURN  NIL
 #else
-METHOD onEvent(msg, wParam, lParam)  CLASS HButton
+METHOD onEvent(msg, wParam, lParam) CLASS HButton
 
    SWITCH msg
    CASE WM_LBUTTONUP

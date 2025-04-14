@@ -37,7 +37,7 @@ METHOD New(vari, bSetGet) CLASS HRadioGroup
 
 RETURN Self
 
-METHOD EndGroup(nSelected)  CLASS HRadioGroup
+METHOD EndGroup(nSelected) CLASS HRadioGroup
 Local nLen
 
    IF ::oGroupCurrent != NIL .AND. (nLen := Len(::oGroupCurrent:aButtons)) > 0
@@ -51,7 +51,7 @@ Local nLen
    ::oGroupCurrent := NIL
 RETURN NIL
 
-METHOD SetValue(nValue)  CLASS HRadioGroup
+METHOD SetValue(nValue) CLASS HRadioGroup
 Local nLen
 
    IF (nLen := Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen

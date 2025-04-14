@@ -250,7 +250,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
  
 RETURN 0
 
-METHOD Init()  CLASS HEdit
+METHOD Init() CLASS HEdit
 
    IF !::lInit
       ::Super:Init()
@@ -259,7 +259,7 @@ METHOD Init()  CLASS HEdit
 
 RETURN NIL
 
-METHOD Refresh()  CLASS HEdit
+METHOD Refresh() CLASS HEdit
 Local vari
 
    IF ::bSetGet != NIL

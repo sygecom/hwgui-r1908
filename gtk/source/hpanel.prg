@@ -50,7 +50,7 @@ METHOD Activate CLASS HPanel
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HPanel
+METHOD onEvent(msg, wParam, lParam) CLASS HPanel
 
    IF msg == WM_PAINT
       ::Paint()
@@ -90,7 +90,7 @@ Local hDC, aCoors, oPenLight, oPenGray
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height)  CLASS HPanel
+METHOD Move(x1, y1, width, height) CLASS HPanel
 
    ::Super:Move(x1, y1, width, height, .T.)
 RETURN NIL

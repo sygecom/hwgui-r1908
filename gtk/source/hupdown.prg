@@ -80,7 +80,7 @@ METHOD Activate CLASS HUpDown
    ENDIF
 RETURN NIL
 
-METHOD Refresh()  CLASS HUpDown
+METHOD Refresh() CLASS HUpDown
 Local vari
 
    IF ::bSetGet != NIL

@@ -217,7 +217,7 @@ Local oWndClient, handle
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HMainWindow
+METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 Local i
 
    // writelog("On Event" + str(msg) + str(wParam) + Str(lParam))
@@ -267,7 +267,7 @@ METHOD Activate(lShow) CLASS HMDIChildWindow
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HMDIChildWindow
+METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 Local i
 
    IF (i := AScan(::aMessages[1], msg)) != 0
@@ -321,7 +321,7 @@ METHOD Activate(lShow) CLASS HChildWindow
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HChildWindow
+METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
 Local i
 
    IF (i := AScan(HMainWindow():aMessages[1], msg)) != 0

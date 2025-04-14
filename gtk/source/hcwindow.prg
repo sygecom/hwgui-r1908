@@ -122,7 +122,7 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    ENDIF
 RETURN NIL
 
-METHOD Move(x1, y1, width, height)  CLASS HCustomWindow
+METHOD Move(x1, y1, width, height) CLASS HCustomWindow
 
    IF x1 != NIL
       ::nLeft := x1
@@ -140,7 +140,7 @@ METHOD Move(x1, y1, width, height)  CLASS HCustomWindow
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HCustomWindow
+METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 Local i
 
    // Writelog("== "+::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "NIL")+IIf(lParam != NIL, Str(lParam), "NIL"))
@@ -169,7 +169,7 @@ METHOD Anchor(oCtrl, x, y, w, h) CLASS HCustomWindow
    RETURN .T.
 
 
-METHOD End()  CLASS HCustomWindow
+METHOD End() CLASS HCustomWindow
 Local aControls := ::aControls
 Local i, nLen := Len(aControls)
 

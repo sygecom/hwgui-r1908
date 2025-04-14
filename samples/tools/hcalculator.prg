@@ -62,7 +62,7 @@ METHOD DefineStyle(lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalcu
 
 RETURN NIL
 
-METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor)  CLASS HCalculator
+METHOD Show(oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor) CLASS HCalculator
 
    LOCAL oCnt1
    LOCAL oCalculo

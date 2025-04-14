@@ -107,7 +107,7 @@ METHOD New() CLASS HFormGen
    // :END LFB
 RETURN Self
 
-METHOD OpenR(fname)  CLASS HFormGen
+METHOD OpenR(fname) CLASS HFormGen
    
    LOCAL oForm := ::aForms[1]
    MEMVAR oDesigner
@@ -121,7 +121,7 @@ METHOD OpenR(fname)  CLASS HFormGen
 
 RETURN ::Open(fname)
 
-METHOD Open(fname, cForm)  CLASS HFormGen
+METHOD Open(fname, cForm) CLASS HFormGen
 
    MEMVAR oDesigner
    LOCAL aFormats := oDesigner:aFormats

@@ -108,7 +108,7 @@ Local hDC
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height)  CLASS HSplitter
+METHOD Move(x1, y1, width, height) CLASS HSplitter
 
    ::Super:Move(x1, y1, width, height, .T.)
 RETURN NIL

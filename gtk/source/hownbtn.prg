@@ -102,7 +102,7 @@ METHOD Activate CLASS HOwnButton
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HOwnButton
+METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
 
    IF msg == WM_PAINT
       ::Paint()
@@ -200,7 +200,7 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
 RETURN NIL
 
-METHOD MouseMove(wParam, lParam)  CLASS HOwnButton
+METHOD MouseMove(wParam, lParam) CLASS HOwnButton
 Local lEnter := (hwg_BitAnd(wParam, 16) > 0)
 Local res := .F.
 
@@ -217,7 +217,7 @@ Local res := .F.
    
 RETURN NIL
 
-METHOD MDown()  CLASS HOwnButton
+METHOD MDown() CLASS HOwnButton
    IF ::state != OBTN_PRESSED
       ::state := OBTN_PRESSED
       hwg_RedrawWindow(::handle)
@@ -238,13 +238,13 @@ METHOD MUp() CLASS HOwnButton
 
 RETURN NIL
 
-METHOD Release()  CLASS HOwnButton
+METHOD Release() CLASS HOwnButton
    ::lPress := .F.
    ::state := OBTN_NORMAL
    hwg_RedrawWindow(::handle)
 RETURN NIL
 
-METHOD End()  CLASS HOwnButton
+METHOD End() CLASS HOwnButton
 
    ::Super:End()
    IF ::ofont != NIL

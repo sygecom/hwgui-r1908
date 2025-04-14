@@ -241,7 +241,7 @@ RETURN Self
 
 //----------------------------------------------------//
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam)  CLASS HBrowse
+METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 Local aCoors, retValue := -1
 
    // WriteLog("Brw: "+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
@@ -356,7 +356,7 @@ Local aCoors, retValue := -1
 
 RETURN retValue
 #else
-METHOD onEvent(msg, wParam, lParam)  CLASS HBrowse
+METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 Local aCoors, retValue := -1
 
    // WriteLog("Brw: "+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
@@ -588,7 +588,7 @@ METHOD End() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD InitBrw(nType)  CLASS HBrowse
+METHOD InitBrw(nType) CLASS HBrowse
 
    if nType != NIL
       ::type := nType
@@ -695,7 +695,7 @@ METHOD Rebuild(hDC) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD Paint()  CLASS HBrowse
+METHOD Paint() CLASS HBrowse
 Local aCoors, aMetr, i, oldAlias, tmp, nRows
 Local pps, hDC
 Local oldBkColor, oldTColor

@@ -209,7 +209,7 @@ METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu) CLASS hTo
    AAdd(::aItem, {nBitIp, nId, bState, bStyle, 0, cText, bClick, c, aMenu, hMenu, 0})
 RETURN Self
 
-METHOD onEvent(msg, wParam, lParam)  CLASS HToolbar
+METHOD onEvent(msg, wParam, lParam) CLASS HToolbar
 Local nPos
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
