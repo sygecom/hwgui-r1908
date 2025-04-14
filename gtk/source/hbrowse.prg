@@ -1637,7 +1637,7 @@ Local oColumn, type
       ENDIF
       type := IIf(oColumn:type == "U" .AND. ::varbuf != NIL, ValType(::varbuf), oColumn:type)
       IF ::lEditable .AND. type != "O"        
-         IF oColumn:lEditable .AND. (oColumn:bWhen = NIL .OR. Eval(oColumn:bWhen))
+         IF oColumn:lEditable .AND. (oColumn:bWhen == NIL .OR. Eval(oColumn:bWhen))
             IF ::lAppMode
                IF type == "D"
                   ::varbuf := CtoD("")

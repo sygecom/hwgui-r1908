@@ -464,7 +464,7 @@ RETURN arr
 STATIC FUNCTION CompileMethod(cMethod, oForm, oCtrl)
 Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
 
-   IF cMethod = NIL .OR. Empty(cMethod)
+   IF cMethod == NIL .OR. Empty(cMethod)
       RETURN NIL
    ENDIF
    IF oCtrl != NIL .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"

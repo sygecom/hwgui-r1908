@@ -97,7 +97,7 @@ FUNCTION Tool2Prg
 
    cName := Trim(oCtrl:GetProp("Name"))
    //cTool += "    *- " + cname + _CHR(10)+ "    *- SCRIPT GERADO AUTOMATICAMENTE PELO DESIGNER" + _CHR(10)+"    *-  " + _CHR(10)
-   IF cName = NIL .OR. Empty(cName)
+   IF cName == NIL .OR. Empty(cName)
       RETURN cTool
    ENDIF
 
@@ -231,7 +231,7 @@ FUNCTION Browse2Prg
 
 //   cBrowser += "    // " + cname + "    *- SCRIPT GERADO AUTOMATICAMENTE PELO DESIGNER" + _CHR(10) + "    //  " + _CHR(10)
    nType := IIf(oCtrl:GetProp("BrwType") != "dbf", BRW_ARRAY, BRW_DATABASE)
-   IF cName = NIL .OR. Empty(cName) .OR. ((cAlias := oCtrl:GetProp("FileDbf" ))  = NIL .AND. nType = BRW_DATABASE)
+   IF cName == NIL .OR. Empty(cName) .OR. ((cAlias := oCtrl:GetProp("FileDbf" )) == NIL .AND. nType = BRW_DATABASE)
       RETURN cBrowser
    ENDIF
 
@@ -332,7 +332,7 @@ FUNCTION Browse2Prg
             j := {}
             AEval(aTypes, {|aField|AAdd(j, aField[1])})
             cHeader  := IIf(cHeader == NIL .OR. Empty(cHeader), '"' + temp + '"', "" + cHeader + "")
-            IF m->nLength = NIL
+            IF m->nLength == NIL
                m->nLength := &cTmpAlias->(fieldlen(AScan(j, temp)))
                m->nLength := IIf(m->nLength = 0, IIf(Type("&cCampo") = "C", Len(&cCampo), 10), m->nLength)
             ENDIF
@@ -342,10 +342,10 @@ FUNCTION Browse2Prg
             //      IIf((temp:=oCtrl1:GetProp("Length"))!= NIL, LTrim(Str(Val(temp))), "10")+", "+;
             //      LTrim(Str(aDecimals[i]))+" "
          ELSE
-            cCampo := IIf(cCampo = NIL, ".T.", cCampo)
+            cCampo := IIf(cCampo == NIL, ".T.", cCampo)
             cCampo := IIf(Type("&cCampo") = "B", cCampo, "{|| " + cCampo + " }")
             cType  := Type("&cCampo")
-            m->nLength := IIf(m->nLength = NIL, 10, m->nLength)
+            m->nLength := IIf(m->nLength == NIL, 10, m->nLength)
             m->nDec := 0
          ENDIF
          IF (temp := oCtrl1:GetProp("Picture")) != NIL .AND. At(".9", temp) > 0
@@ -739,9 +739,9 @@ FUNCTION Ctrl2Prg
       IF oCtrl:cClass == "updown"
          stroka += "RANGE "
          temp := oCtrl:GetProp("nLower") //) != NIL
-         stroka += LTrim(Str(IIf(temp = NIL, - 2147483647, Val(temp)), 11)) + ","
+         stroka += LTrim(Str(IIf(temp == NIL, - 2147483647, Val(temp)), 11)) + ","
          temp := oCtrl:GetProp("nUpper") //) != NIL
-         stroka += LTrim(Str(IIf(temp = NIL, 2147483647, Val(temp)), 11)) + " "
+         stroka += LTrim(Str(IIf(temp == NIL, 2147483647, Val(temp)), 11)) + " "
       ENDIF
       //
       IF oCtrl:cClass == "combobox"

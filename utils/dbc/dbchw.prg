@@ -668,12 +668,12 @@ LOCAL i, oldimp := improc, res := .T.
 LOCAL strerr := "Can't open file " + IIf(fname != NIL, fname, Alias())
 LOCAL bOldError, oError
    IF fname != NIL
-      prend := IIf(prend = NIL, .F., prend)
+      prend := IIf(prend == NIL, .F., prend)
       IF prend
          improc := lenmsf + 1
       ELSE
          FOR i := 1 TO 15
-            IF msfile[i] = NIL
+            IF msfile[i] == NIL
                improc := i
                EXIT
             ENDIF
@@ -685,7 +685,7 @@ LOCAL bOldError, oError
          RETURN .F.
       ENDIF
       SELECT( improc )
-      alsname := IIf(alsname = NIL, hwg_CutExten(hwg_CutPath(fname)), Trim(hwg_CutExten(hwg_CutPath(alsname))))
+      alsname := IIf(alsname == NIL, hwg_CutExten(hwg_CutPath(fname)), Trim(hwg_CutExten(hwg_CutPath(alsname))))
       IF ( i := AT( '~', alsname ) ) != 0
          alsname := Stufmy( alsname, i, 1, '_' )
       ENDIF
@@ -714,7 +714,7 @@ LOCAL bOldError, oError
       IF NETERR()
          IF SET( _SET_EXCLUSIVE )
             SET( _SET_EXCLUSIVE, .F. )
-            DBUSEAREA(,, fname, hwg_CutExten( IIf(alsname = NIL, fname, alsname) ),, prrdonly )
+            DBUSEAREA(,, fname, hwg_CutExten( IIf(alsname == NIL, fname, alsname) ),, prrdonly )
             IF NETERR()
                hwg_MsgStop( strerr )
                improc := oldimp
@@ -754,7 +754,7 @@ LOCAL i
    IF improc > 0
       SELECT( improc )
       USE
-      msfile[improc] = NIL
+      msfile[improc] := NIL
       IF improc = lenmsf
          FOR i := lenmsf - 1 TO 1 STEP - 1
             IF msfile[i] != NIL

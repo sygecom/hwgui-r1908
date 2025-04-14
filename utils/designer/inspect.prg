@@ -695,7 +695,7 @@ FUNCTION ObjInspector(oObject )
    LOCAL aClassMsgMtdo
    LOCAL aClassMsgProp
 
-   IF oObject = NIL
+   IF oObject == NIL
       oObject := HFormGen():oDlgSelected
    ENDIF
    //lData := .T.
@@ -827,7 +827,7 @@ STATIC FUNCTION resettodefault(oBrw1)
 
      cName := Lower(aProp[oBrw1:nCurrent, 1])
      j := AScan(oDesigner:aDataDef, {|a|a[1] == cName})
-     IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] = NIL
+     IF j = 0 .OR. aProp[oBrw1:nCurrent, 2] == NIL
        RETURN NIL
      ENDIF
      IF LTrim(oBrw1:aArray[oBrw1:nCurrent, 1]) = "Font"

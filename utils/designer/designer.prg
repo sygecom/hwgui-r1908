@@ -851,9 +851,9 @@ FUNCTION StatusBarMsg(cfile, cpos, ctam)
    
    MEMVAR oDesigner
 
-  //cfile := IIf(cfile = NIL, "", cfile)
-  cpos := IIf(cpos = NIL, "", cpos)
-  ctam := IIf(ctam = NIL, "", ctam)
+  //cfile := IIf(cfile == NIL, "", cfile)
+  cpos := IIf(cpos == NIL, "", cpos)
+  ctam := IIf(ctam == NIL, "", ctam)
    IF cFile != NIL
      hwg_WriteStatus( oDesigner:oMainWnd, 1, "File: "+cfile , .T.)
   ENDIF

@@ -1355,7 +1355,7 @@ STATIC FUNCTION LButtonDown(oDlg, xPos, yPos)
    MEMVAR handCursor
 
     // : LFB
-      IF oCtrl = NIL .AND. oDesigner:addItem = NIL
+      IF oCtrl == NIL .AND. oDesigner:addItem == NIL
          hwg_SetCursor(handCursor)
          SetBDown(oDlg , xPos, yPos)  //, resizeDirection )
       // fazer o desenho da marca‡Æo
@@ -1745,7 +1745,7 @@ FUNCTION DoPreview()
    ENDIF
 
    oForm := HFormGen():oDlgSelected:oParent
-   IF oForm:lChanged .OR. oForm:type > 1 .OR. oForm:path = NIL
+   IF oForm:lChanged .OR. oForm:type > 1 .OR. oForm:path == NIL
       lc := .T.
       cTemp1 := oForm:filename; cTemp2 := oForm:path
       oForm:filename := "__tmp.xml"

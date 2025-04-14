@@ -151,11 +151,11 @@ Local oPBar, nSch := 0
          IF j > 0
             C2[i] = j
             IF B2[i] = A2[j] .AND. B3[i] = A3[j] .AND. B4[i] = A4[j]
-               IF C1[i] = NIL
+               IF C1[i] == NIL
                   C1[i] := &( "{|param|param}" )
                ENDIF
             ELSE
-               IF C1[i] = NIL
+               IF C1[i] == NIL
                   DO CASE
                   CASE A2[j] = "C" .AND. B2[i] = "N"
                      C1[i] := &( "{|param|VAL(param)}" )

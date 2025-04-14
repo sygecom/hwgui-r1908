@@ -248,10 +248,10 @@ METHOD Calculando(cNumero) CLASS HCalculator
       oForm:oCalculo:Caption += oForm:oVisor:Caption + " " + cNumero + " "
       oForm:oCalculo:Caption := RIGHT(oForm:oCalculo:Caption, nCars)
       ::cOperador := IIf(cNumero != "=", cNumero, ::cOperador)
-      cOperar := IIf(cOperar = NIL, cNumero, cOperar)
-      If ::aOperando[1] = NIL .AND. !::lClear
+      cOperar := IIf(cOperar == NIL, cNumero, cOperar)
+      If ::aOperando[1] == NIL .AND. !::lClear
          ::aOperando[1] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
-      ElseIf ::aOperando[2] = NIL .AND. !::lClear
+      ElseIf ::aOperando[2] == NIL .AND. !::lClear
          ::aOperando[2] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
       EndIf
       ::lClear := .T.
@@ -271,8 +271,8 @@ METHOD Calculando(cNumero) CLASS HCalculator
    ElseIf cNumero == "C"
       oForm:oVisor:Caption := "0"
       ::lClear := .T.
-      ::aOperando[1] := IIf(::aOperando[1] != NIL .AND. ::aOperando[2] = nIL, ::aOperando[1], NIL)
-      ::aOperando[2] := NIL //IIf(::aOperando[2] = nIL, NIL, 0)
+      ::aOperando[1] := IIf(::aOperando[1] != NIL .AND. ::aOperando[2] == NIL, ::aOperando[1], NIL)
+      ::aOperando[2] := NIL //IIf(::aOperando[2] == NIL, NIL, 0)
       RETURN NIL
    ElseIf Empty(cNumero)
       oForm:oVisor:Caption := "0"
