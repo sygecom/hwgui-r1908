@@ -70,7 +70,7 @@ FUNCTION Test()
                      COLOR hwg_VColor("D3D3D3");
                      ON DISPINFO {|oCtrl, nRow, nCol|OnDispInfo(oCtrl, nRow, nCol)} ;
                      BACKCOLOR hwg_VColor("BEBEBE")  ;
-                     BITMAP { 2, 3, 4, 5 }   ITEMS aItems
+                     BITMAP {2, 3, 4, 5}   ITEMS aItems
 
              ADD COLUMN TO GRID oGrid HEADER aHead[1] WIDTH 150  bitmap 1
              ADD COLUMN TO GRID oGrid HEADER aHead[2] WIDTH 150  bitmap 2

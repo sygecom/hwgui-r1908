@@ -157,7 +157,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
       rcClient := hwg_GetClientRect(::handle)
 
-      pt := {, }
+      pt := {,}
       pt[1] := hwg_LOWORD(lParam)
       pt[2] := hwg_HIWORD(lParam)
 

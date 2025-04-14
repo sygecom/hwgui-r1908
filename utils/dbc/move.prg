@@ -19,10 +19,10 @@ STATIC klrecf := 200
 FUNCTION Move(nMove)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove(nMove) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove(nMove)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndMove(.T., nMove)}   ;
-        ON 0, IDCANCEL     ACTION {|| EndMove(.F., nMove) }
+        ON 0, IDCANCEL     ACTION {|| EndMove(.F., nMove)}
    aModDlg:Activate()
 
 RETURN NIL

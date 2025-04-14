@@ -117,7 +117,7 @@ RETURN NIL
 FUNCTION DialogFromPrg()
 Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add("Serif", 0, -13), oTab
-Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
+Local cRes, aCombo := {"First", "Second"}, oEdit, vard := "Monday"
 
    CheckMenuItem(, 1001, !IsCheckedMenuItem(, 1001))
    

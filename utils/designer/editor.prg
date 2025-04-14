@@ -65,10 +65,10 @@ FUNCTION LoadEdOptions(cFileName)
                HDTheme():nSelected := j
             ENDIF
             FOR j1 := 1 TO Len(oThemeXML:aItems)
-               arr := { oThemeXML:aItems[j1]:GetAttribute("tcolor"), ;
-                        oThemeXML:aItems[j1]:GetAttribute("bcolor"), ;
-                        oThemeXML:aItems[j1]:GetAttribute("bold"),   ;
-                        oThemeXML:aItems[j1]:GetAttribute("italic") }
+               arr := {oThemeXML:aItems[j1]:GetAttribute("tcolor"), ;
+                       oThemeXML:aItems[j1]:GetAttribute("bcolor"), ;
+                       oThemeXML:aItems[j1]:GetAttribute("bold"),   ;
+                       oThemeXML:aItems[j1]:GetAttribute("italic")}
                IF arr[1] != NIL
                   arr[1] := Val(arr[1])
                ENDIF
@@ -118,49 +118,49 @@ HB_SYMBOL_UNUSED(oOptDesc)
       oNode:aItems := {}
       FOR i := 1 TO Len(HDTheme():aThemes)
          oThemeDesc := oNode:Add(HXMLNode():New("theme", , {{"name", HDTheme():aThemes[i]:name}}))
-         aAttr := { {"tcolor", LTrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
-                    {"bcolor", LTrim(Str(HDTheme():aThemes[i]:normal[2]))} }
+         aAttr := {{"tcolor", LTrim(Str(HDTheme():aThemes[i]:normal[1]))}, ;
+                   {"bcolor", LTrim(Str(HDTheme():aThemes[i]:normal[2]))}}
          IF HDTheme():aThemes[i]:normal[3]
-            AAdd(aAttr, { "bold", "True" })
+            AAdd(aAttr, {"bold", "True"})
          ENDIF
          IF HDTheme():aThemes[i]:normal[4]
-            AAdd(aAttr, { "italic", "True" })
+            AAdd(aAttr, {"italic", "True"})
          ENDIF
          oThemeDesc:Add(HXMLNode():New("normal", HBXML_TYPE_SINGLE, aAttr))
 
-         aAttr := { {"tcolor", LTrim(Str(HDTheme():aThemes[i]:command[1]))} }
+         aAttr := {{"tcolor", LTrim(Str(HDTheme():aThemes[i]:command[1]))}}
          IF HDTheme():aThemes[i]:command[3]
-            AAdd(aAttr, { "bold", "True" })
+            AAdd(aAttr, {"bold", "True"})
          ENDIF
          IF HDTheme():aThemes[i]:command[4]
-            AAdd(aAttr, { "italic", "True" })
+            AAdd(aAttr, {"italic", "True"})
          ENDIF
          oThemeDesc:Add(HXMLNode():New("command", HBXML_TYPE_SINGLE, aAttr))
 
-         aAttr := { {"tcolor", LTrim(Str(HDTheme():aThemes[i]:comment[1]))} }
+         aAttr := {{"tcolor", LTrim(Str(HDTheme():aThemes[i]:comment[1]))}}
          IF HDTheme():aThemes[i]:comment[3]
-            AAdd(aAttr, { "bold", "True" })
+            AAdd(aAttr, {"bold", "True"})
          ENDIF
          IF HDTheme():aThemes[i]:comment[4]
-            AAdd(aAttr, { "italic", "True" })
+            AAdd(aAttr, {"italic", "True"})
          ENDIF
          oThemeDesc:Add(HXMLNode():New("comment", HBXML_TYPE_SINGLE, aAttr))
 
-         aAttr := { {"tcolor", LTrim(Str(HDTheme():aThemes[i]:quote[1]))} }
+         aAttr := {{"tcolor", LTrim(Str(HDTheme():aThemes[i]:quote[1]))}}
          IF HDTheme():aThemes[i]:quote[3]
-            AAdd(aAttr, { "bold", "True" })
+            AAdd(aAttr, {"bold", "True"})
          ENDIF
          IF HDTheme():aThemes[i]:quote[4]
-            AAdd(aAttr, { "italic", "True" })
+            AAdd(aAttr, {"italic", "True"})
          ENDIF
          oThemeDesc:Add(HXMLNode():New("quote", HBXML_TYPE_SINGLE, aAttr))
 
-         aAttr := { {"tcolor", LTrim(Str(HDTheme():aThemes[i]:number[1]))} }
+         aAttr := {{"tcolor", LTrim(Str(HDTheme():aThemes[i]:number[1]))}}
          IF HDTheme():aThemes[i]:number[3]
-            AAdd(aAttr, { "bold", "True" })
+            AAdd(aAttr, {"bold", "True"})
          ENDIF
          IF HDTheme():aThemes[i]:number[4]
-            AAdd(aAttr, { "italic", "True" })
+            AAdd(aAttr, {"italic", "True"})
          ENDIF
          oThemeDesc:Add(HXMLNode():New("number", HBXML_TYPE_SINGLE, aAttr))
 
@@ -314,8 +314,8 @@ STATIC FUNCTION EnChange(nEvent)
          cBuffer := hwg_RE_GetLine(oEdit:handle, nLine)
          // writelog("pos: "+LTrim(Str(pos1))+" Line: "+LTrim(Str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer)
          nLinePos := hwg_SendMessage(oEdit:handle, EM_LINEINDEX, nLine, 0) + 1
-         AAdd(arr, { nLinePos, nLinePos+Len(cBuffer), ;
-            oTheme:normal[1],,, oTheme:normal[3], oTheme:normal[4], })
+         AAdd(arr, {nLinePos, nLinePos+Len(cBuffer), ;
+            oTheme:normal[1],,, oTheme:normal[3], oTheme:normal[4],})
          HiLightString(cBuffer, arr, nLinePos)
          IF !Empty(arr)
             hwg_RE_SetCharFormat(oEdit:handle, arr)
@@ -363,8 +363,8 @@ STATIC FUNCTION HiLightString(stroka, arr, nLinePos, oTheme)
    ENDIF
 
    IF Left(LTrim(stroka), 2) == "//"
-      AAdd(arr, { nLinePos, nLinePos+Len(stroka), ;
-          oTheme:comment[1],,, oTheme:comment[3], oTheme:comment[4], })
+      AAdd(arr, {nLinePos, nLinePos+Len(stroka), ;
+          oTheme:comment[1],,, oTheme:comment[3], oTheme:comment[4],})
       RETURN arr
    ENDIF
    SET EXACT ON
@@ -373,14 +373,14 @@ STATIC FUNCTION HiLightString(stroka, arr, nLinePos, oTheme)
       // writelog("-->"+Str(nStart)+" "+Str(nPos)+" "+Str(Len(cword))+" "+ Str(asc(cword)))
       IF !Empty(cWord)
          IF Left(cWord, 1) == '"' .OR. Left(cWord, 1) == "'"
-            AAdd(arr, { nLinePos+nStart-1, nLinePos+nPos-1, ;
-               oTheme:quote[1],,, oTheme:quote[3], oTheme:quote[4], })
+            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+               oTheme:quote[1],,, oTheme:quote[3], oTheme:quote[4],})
          ELSEIF AScan(HDTheme():aKeyWords, Upper(cWord)) != 0
-            AAdd(arr, { nLinePos+nStart-1, nLinePos+nPos-1, ;
-               oTheme:command[1],,, oTheme:command[3], oTheme:command[4], })
+            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+               oTheme:command[1],,, oTheme:command[3], oTheme:command[4],})
          ELSEIF IsDigit(cWord)
-            AAdd(arr, { nLinePos+nStart-1, nLinePos+nPos-1, ;
-               oTheme:number[1],,, oTheme:number[3], oTheme:number[4], })
+            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+               oTheme:number[1],,, oTheme:number[3], oTheme:number[4],})
          ENDIF
       ENDIF
    ENDDO
@@ -427,9 +427,9 @@ STATIC FUNCTION EditColors()
    PRIVATE cScheme := ""
 
    FOR i := 1 TO Len(aSchemes)
-      aSchemes[i] := { HDTheme():aThemes[i]:name, HDTheme():aThemes[i]:normal, ;
+      aSchemes[i] := {HDTheme():aThemes[i]:name, HDTheme():aThemes[i]:normal, ;
           HDTheme():aThemes[i]:command, HDTheme():aThemes[i]:comment,          ;
-          HDTheme():aThemes[i]:quote, HDTheme():aThemes[i]:number }
+          HDTheme():aThemes[i]:quote, HDTheme():aThemes[i]:number}
    NEXT
 
    INIT DIALOG oDlg TITLE "Color schemes" ;
@@ -532,9 +532,9 @@ STATIC FUNCTION UpdSample(nAction)
             RETURN NIL
          ENDIF
          IF AScan(aSchemes, {|a|Lower(a[1]) == Lower(cScheme)}) == 0
-            AAdd(aSchemes, { cScheme, AClone(aSchemes[nScheme, 2]), ;
+            AAdd(aSchemes, {cScheme, AClone(aSchemes[nScheme, 2]), ;
                 AClone(aSchemes[nScheme, 3]), AClone(aSchemes[nScheme, 4]), ;
-                AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6]) })
+                AClone(aSchemes[nScheme, 5]), AClone(aSchemes[nScheme, 6])})
             oBrw:Refresh()
          ELSE
             hwg_MsgStop("The " + cScheme + " theme exists already !", "Designer")

@@ -428,7 +428,7 @@ CLASS HDesigner
    DATA lChgRecent   INIT .F.
    DATA oWidgetsSet, oFormDesc
    DATA oBtnPressed, addItem
-   DATA aFormats     INIT { { "Hwgui XML format", "xml" } }
+   DATA aFormats     INIT {{"Hwgui XML format", "xml"}}
    DATA aDataDef     INIT {}
    DATA aMethDef     INIT {}
    DATA lSingleForm  INIT .F.
@@ -504,9 +504,9 @@ STATIC FUNCTION ReadIniFiles()
             cWidgetsFileName := oNode:aItems[1]
          ENDIF
       ELSEIF oNode:title == cfitem
-         AAdd(oDesigner:aFormats, { oNode:GetAttribute("name"), oNode:GetAttribute("ext"), ;
+         AAdd(oDesigner:aFormats, {oNode:GetAttribute("name"), oNode:GetAttribute("ext"), ;
              oNode:GetAttribute("file"), oNode:GetAttribute("rdscr"), ;
-             oNode:GetAttribute("wrscr"), oNode:GetAttribute("cnvtable") })
+             oNode:GetAttribute("wrscr"), oNode:GetAttribute("cnvtable")})
       ELSEIF oNode:title == "editor"
          LoadEdOptions(oNode:aItems[1])
       ELSEIF oNode:title == "grid"
@@ -619,15 +619,15 @@ STATIC FUNCTION BuildSet(oTab)
                      cDlg := Lower(cDlg)
                   ENDIF
 
-                  AAdd(oDesigner:aDataDef, { Lower(oProperty:GetAttribute("name")), ;
-                                     b1, b2, b3, cDlg, arr, b4 })
+                  AAdd(oDesigner:aDataDef, {Lower(oProperty:GetAttribute("name")), ;
+                                     b1, b2, b3, cDlg, arr, b4})
                ENDIF
             NEXT
          ELSEIF aSet[i]:title == "methods"
             FOR j := 1 TO Len(aSet[i]:aItems)
                IF aSet[i]:aItems[j]:title == "method"
-                  AAdd(oDesigner:aMethDef, { Lower(aSet[i]:aItems[j]:GetAttribute("name")), ;
-                                     aSet[i]:aItems[j]:GetAttribute("params") })
+                  AAdd(oDesigner:aMethDef, {Lower(aSet[i]:aItems[j]:GetAttribute("name")), ;
+                                     aSet[i]:aItems[j]:GetAttribute("params")})
                ENDIF
             NEXT
          ENDIF

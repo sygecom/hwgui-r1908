@@ -26,15 +26,15 @@ FUNCTION Main()
     @ 200, 20 BROWSE oBrw2 ARRAY SIZE 180, 325 
 
     oBrw1:oHeadFont := HFont():Add("Times New Roman", 0, -22, 400)
-    a := { } 
+    a := {} 
     for i := 1 to 16
-        AAdd(a, { i, Chr(Asc("a")-1+i) })
+        AAdd(a, {i, Chr(Asc("a")-1+i)})
     next
     for i := 1 to 16
-        AAdd(a, { i, Chr(Asc("A")-1+i) })
+        AAdd(a, {i, Chr(Asc("A")-1+i)})
     next
     for i := 1 to 16
-        AAdd(a, { i, Chr(Asc("a")-1+i) })
+        AAdd(a, {i, Chr(Asc("a")-1+i)})
     next
 
     oBrw1:aArray := a
@@ -44,9 +44,9 @@ FUNCTION Main()
     oBrw1:aColumns[1]:width := 50
     oBrw1:aColumns[2]:width := 50
 
-    b := { } 
+    b := {} 
     for i := 1 to 5
-        AAdd(b, { i, Chr(Asc("a")-1+i) })
+        AAdd(b, {i, Chr(Asc("a")-1+i)})
     next
 
     oBrw2:aArray := b

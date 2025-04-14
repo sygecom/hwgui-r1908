@@ -51,7 +51,7 @@ Local hMenu
       RETURN NIL
    ENDIF
 
-RETURN { {},,, hMenu }
+RETURN {{},,, hMenu}
 
 FUNCTION hwg_SetMenu(oWnd, aMenu)
 
@@ -94,9 +94,9 @@ Local hSubMenu
       AAdd(aMenu[1], NIL)
       Ains(aMenu[1], nPos)
       IF lSubmenu
-         aMenu[1, nPos] := { {}, cItem, nMenuId, 0, hSubMenu }
+         aMenu[1, nPos] := {{}, cItem, nMenuId, 0, hSubMenu}
       ELSE
-         aMenu[1, nPos] := { bItem, cItem, nMenuId, 0, hSubMenu }
+         aMenu[1, nPos] := {bItem, cItem, nMenuId, 0, hSubMenu}
       ENDIF
       RETURN aMenu[1, nPos]
    ENDIF
@@ -133,7 +133,7 @@ Local hMenu, nPos, aMenu, i, oBmp
       ELSE
          hMenu := hwg__CreatePopupMenu()
       ENDIF
-      aMenu := { aMenuInit,,,, hMenu }
+      aMenu := {aMenuInit,,,, hMenu}
    ELSE
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])

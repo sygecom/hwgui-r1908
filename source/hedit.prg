@@ -1782,9 +1782,9 @@ STATIC FUNCTION NextFocusTab(oParent, hCtrl, nSkip)
              nexthandle := oParent:handle
              i := AScan(oParent:oparent:acontrols, {|o|o:handle == oParent:handle}) + nSkip
              IF i > 0 .AND. i <= Len(oParent:oParent:acontrols)
-                 i := ASCAN(oParent:oParent:acontrols, {|o| hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0 }, i)
+                 i := ASCAN(oParent:oParent:acontrols, {|o| hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0}, i)
                  nexthandle := oParent:oParent:acontrols[IIf(i == 0, ASCAN(oParent:oParent:acontrols, ;
-                          {|o| hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0 }, i), i)]:handle
+                          {|o| hwg_BitaND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0}, i), i)]:handle
                   ENDIF
                   */
          ELSE
@@ -1859,7 +1859,7 @@ STATIC FUNCTION NextFocusContainer(oParent, hCtrl, nSkip)
    LOCAL lHradio
    LOCAL lnoTabStop := .F.
 
-   AEval(oparent:acontrols, {|o| IIf(hwg_BitAND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.) })
+   AEval(oparent:acontrols, {|o| IIf(hwg_BitAND(hwg_GetWindowStyle(o:handle), WS_TABSTOP) != 0, lnoTabStop := .T., .T.)})
    IF !lnoTabStop .OR. Empty(hCtrl)
       RETURN NIL //nexthandle
    ENDIF

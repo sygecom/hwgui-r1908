@@ -80,12 +80,12 @@ CLASS HColumn INHERIT HObject
    DATA bColorFoot               //   bColorFoot must return an array containing two colors values
    //   oBrowse:aColumns[1]:bColorFoot := {|| IF (nNumber < 0, ;
    //      {textColor, backColor}, ;
-   //      {textColor, backColor}) }
+   //      {textColor, backColor})}
 
    DATA bColorBlock              //   bColorBlock must return an array containing four colors values
    //   oBrowse:aColumns[1]:bColorBlock := {|| IF (nNumber < 0, ;
    //      {textColor, backColor, textColorSel, backColorSel}, ;
-   //      {textColor, backColor, textColorSel, backColorSel}) }
+   //      {textColor, backColor, textColorSel, backColorSel})}
    DATA headColor                // Header text color
    DATA FootFont                // Footing font
 
@@ -2266,7 +2266,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          IF !oColumn:lHeadClick
             state := IIf(::hTheme != NIL, IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,;
                                                 PBS_HOT, PBS_NORMAL), PBS_NORMAL)
-            s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, {x, x + xsize }, s_axPosMouseOver)
+            s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, {x, x + xsize}, s_axPosMouseOver)
          ELSE
             state := IIf(::hTheme != NIL, PBS_PRESSED, 6)
             hwg_InflateRect(@aItemRect, -1, -1)

@@ -30,7 +30,7 @@ PUBLIC dformat := "dd/mm/yy", memownd := .F., prrdonly := .F.
 PUBLIC lWinChar := .F.
 #ifdef RDD_ADS
    PUBLIC nServerType := ADS_LOCAL_SERVER
-   PUBLIC msdriv := { "ADS_CDX", "ADS_NTX", "ADS_ADT" }, numdriv := 1
+   PUBLIC msdriv := {"ADS_CDX", "ADS_NTX", "ADS_ADT"}, numdriv := 1
 #else
    PUBLIC nServerType := ""
    PUBLIC msdriv := "", numdriv := 1
@@ -153,14 +153,14 @@ RETURN NIL
 /* -----------------------  Options --------------------- */
 
 STATIC FUNCTION OpenConfig
-Local aModDlg, aDates := { "dd/mm/yy", "mm/dd/yy" }
+Local aModDlg, aDates := {"dd/mm/yy", "mm/dd/yy"}
 
-   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig() }
+   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig()}
    REDEFINE COMBOBOX aDates OF aModDlg ID IDC_COMBOBOX3
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndConfig()}   ;
-        ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {|| ServerButton(0) } ;
-        ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {|| ServerButton(1) }
+        ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {|| ServerButton(0)} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {|| ServerButton(1)}
 
    aModDlg:Activate()
 
@@ -241,7 +241,7 @@ RETURN .T.
 
 STATIC FUNCTION ListIndex
 Local oModDlg, oBrw
-Local msind := { { "0", "None", "", "" } }, i, ordlen := 0
+Local msind := {{"0", "None", "", ""}}, i, ordlen := 0
 Local indname
 
    i := 1
@@ -256,10 +256,10 @@ Local indname
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind
-   oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent, 1] }, "C", 1, 0))
-   oBrw:AddColumn(HColumn():New("Tag", {|value, o|o:aArray[o:nCurrent, 2] }, "C", 8, 0))
-   oBrw:AddColumn(HColumn():New("Expression", {|value, o|o:aArray[o:nCurrent, 3] }, "C", ordlen, 0))
-   oBrw:AddColumn(HColumn():New("File", {|value, o|o:aArray[o:nCurrent, 4] }, "C", 8, 0))
+   oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent, 1]}, "C", 1, 0))
+   oBrw:AddColumn(HColumn():New("Tag", {|value, o|o:aArray[o:nCurrent, 2]}, "C", 8, 0))
+   oBrw:AddColumn(HColumn():New("Expression", {|value, o|o:aArray[o:nCurrent, 3]}, "C", ordlen, 0))
+   oBrw:AddColumn(HColumn():New("File", {|value, o|o:aArray[o:nCurrent, 4]}, "C", 8, 0))
   
    oBrw:bColorSel    := hwg_VColor("800080")
    oBrw:ofont := oBrwFont
@@ -286,11 +286,11 @@ RETURN NIL
 FUNCTION NewIndex
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {|| InitNewIndex() }
+   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {|| InitNewIndex()}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndNewIndex()}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle()) }  ;
-        ON BN_CLICKED, IDC_CHECKBOX1 ACTION {|| TagName() }
+        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
+        ON BN_CLICKED, IDC_CHECKBOX1 ACTION {|| TagName()}
    aModDlg:Activate()
 
 RETURN NIL
@@ -410,10 +410,10 @@ RETURN NIL
 FUNCTION OpenDlg()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen() }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen()}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndOpen()}  ;
-        ON BN_CLICKED, IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath)) }
+        ON BN_CLICKED, IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath))}
    aModDlg:Activate()
 
 RETURN NIL
@@ -533,7 +533,7 @@ RETURN oWindow:handle
 FUNCTION Calcul()
 Local oModDlg
 
-   INIT DIALOG oModDlg FROM RESOURCE "DLG_CALC" ON INIT {|| InitCalc() }
+   INIT DIALOG oModDlg FROM RESOURCE "DLG_CALC" ON INIT {|| InitCalc()}
    DIALOG ACTIONS OF oModDlg ;
         ON 0, IDOK         ACTION {|| EndCalc()}
    oModDlg:Activate()
@@ -572,8 +572,8 @@ Local aModDlg
    INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(hwg_GetDlgItem(hwg_GetModalHandle(), IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndScri(nAct)}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle()) }  ;
-        ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath)) }
+        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
+        ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath))}
    aModDlg:Activate()
 
 RETURN NIL
@@ -689,7 +689,7 @@ LOCAL bOldError, oError
       IF (i := AT('~', alsname)) != 0
          alsname := Stufmy(alsname, i, 1, '_')
       ENDIF
-      bOldError := ERRORBLOCK({ | e | OpenError(e) })
+      bOldError := ERRORBLOCK({|e|OpenError(e)})
       DO WHILE .T.
          BEGIN SEQUENCE
             DBUSEAREA(,, fname, alsname,, prrdonly)

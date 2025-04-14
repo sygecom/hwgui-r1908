@@ -81,7 +81,7 @@ FUNCTION Main()
         ON CLICK {||oChart:Disable()}
 
     @ 205, 4 BUTTON "Redraw" OF oPanelTool SIZE 50, 24 ;
-        ON CLICK {||oChart:Draw(.T.) }
+        ON CLICK {||oChart:Draw(.T.)}
 
     @ 0, 34 PANEL oPanel SIZE 500, 366 ON SIZE {|o, x, y|o:Move(, , x, y), oChart:Move(, , x, y - 32), oChart:Refresh()}
 

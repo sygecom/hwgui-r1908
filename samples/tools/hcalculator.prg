@@ -278,7 +278,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       oForm:oVisor:Caption := "0"
       oForm:oCalculo:Caption := ""
       ::lClear := .T.
-      ::aOperando := {, , 0 }
+      ::aOperando := {, , 0}
       If ::oCurrGet != NIL
          ::End()
          RETURN NIL
@@ -360,8 +360,8 @@ METHOD INIT() CLASS HCalculator
       IF ::oFormCalc:Type >= WND_DLG_RESOURCE
          aCoors := hwg_GetWindowRect(::oCurrGet:handle)
       ELSE
-         aCoors := { ::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
-          ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + hwg_GetSystemMetrics(SM_CYCAPTION) + 8, 0, 0 }
+         aCoors := {::oCurrGet:oParent:nLeft + ::oCurrGet:nLeft + 8 , ;
+          ::oCurrGet:oParent:nTop + ::oCurrGet:nTop + hwg_GetSystemMetrics(SM_CYCAPTION) + 8, 0, 0}
       ENDIF
       aCoors[3] := IIf(::lCompacta, Max(130, ::oCurrGet:nWidth + 8), ::nWidth)
       ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1 , aCoors[3], 180, 0)

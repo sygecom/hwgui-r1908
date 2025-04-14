@@ -252,7 +252,7 @@ METHOD addItem(nDos, cFile, cPath) CLASS FileMan
    DEFAULT cPath TO ""
 
    IF ::nLastDosMessage == 0
-      AAdd(::aDosHandles, { nDos, cFile, cPath })
+      AAdd(::aDosHandles, {nDos, cFile, cPath})
    ENDIF
 
 RETURN self

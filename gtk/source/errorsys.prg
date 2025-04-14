@@ -16,7 +16,7 @@ STATIC LogInitialPath := ""
 
 PROCEDURE ErrorSys
 
-   ErrorBlock({ | oError | DefError(oError) })
+   ErrorBlock({|oError|DefError(oError)})
    LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
 
    RETURN

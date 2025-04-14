@@ -14,13 +14,13 @@
 REQUEST HWG_ENDWINDOW
 
 STATIC aMessModalDlg := { ;
-         { WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)} },         ;
-         { WM_SIZE, {|o, w, l|onSize(o, w, l)} },                ;
-         { WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)} },    ;
-         { WM_ERASEBKGND, {|o, w|onEraseBk(o, w)} },           ;
-         { WM_DESTROY, {|o|onDestroy(o)} },                  ;
-         { WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)} },      ;
-         { WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)} }         ;
+         {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}},         ;
+         {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
+         {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
+         {WM_ERASEBKGND, {|o, w|onEraseBk(o, w)}},           ;
+         {WM_DESTROY, {|o|onDestroy(o)}},                  ;
+         {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
+         {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}}         ;
       }
 
 STATIC FUNCTION onDestroy(oDlg)

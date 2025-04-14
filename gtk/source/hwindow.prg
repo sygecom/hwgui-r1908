@@ -138,8 +138,8 @@ RETURN IIf(Len(::aWindows) > 0,            ;
 CLASS HMainWindow INHERIT HWindow
 
    CLASS VAR aMessages INIT { ;
-      { WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_SYSCOMMAND, ;
-        WM_NOTIFYICON, WM_ENTERIDLE, WM_CLOSE, WM_DESTROY }, ;
+      {WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_SYSCOMMAND, ;
+       WM_NOTIFYICON, WM_ENTERIDLE, WM_CLOSE, WM_DESTROY}, ;
       { ;
          {|o, w, l|onCommand(o, w, l)},        ;
          {|o, w|onEraseBk(o, w)},            ;
@@ -236,8 +236,8 @@ RETURN 0
 CLASS HMDIChildWindow INHERIT HWindow
 
    CLASS VAR aMessages INIT { ;
-      { WM_CREATE, WM_COMMAND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
-        WM_SYSCOMMAND, WM_DESTROY }, ;
+      {WM_CREATE, WM_COMMAND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
+       WM_SYSCOMMAND, WM_DESTROY}, ;
       { ;
          {|o, w, l|onMdiCreate(o, l)},        ;
          {|o, w|onMdiCommand(o, w)},         ;

@@ -292,9 +292,7 @@ FUNCTION OpenAbout()
    oBrw:bColorSel := 12507070  // 15149157449
 
    oBmp := HBitmap():AddStandard(OBM_LFARROWI)
-   oBrw:aColumns[1]:aBitmaps := { ;
-      {{|l|l}, oBmp} ;
-   }
+   oBrw:aColumns[1]:aBitmaps := {{{|l|l}, oBmp}}
    oBrw:aColumns[2]:length := 6
    oBrw:aColumns[3]:length := 4
    oBrw:bKeyDown := {|o, key|BrwKey(o, key)}

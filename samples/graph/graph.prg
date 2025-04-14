@@ -28,7 +28,7 @@ STATIC FUNCTION Graph1()
 
    aGraph[1] := {}
    FOR i := -40 TO 40
-      AAdd(aGraph[1], { i, hwg_cos(i/10) })
+      AAdd(aGraph[1], {i, hwg_cos(i/10)})
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;
@@ -56,7 +56,7 @@ STATIC FUNCTION Graph2()
 
    aGraph[1] := {}
    FOR i := 1 TO 6
-      AAdd(aGraph[1], { "", i * i })
+      AAdd(aGraph[1], {"", i * i})
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;

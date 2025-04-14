@@ -350,14 +350,14 @@ FUNCTION execSQL(cQuery)
             IF Asc(LTrim(stroka)) > 32
                AAdd(aQueries, NIL)
                AIns(aQueries, i)
-               aQueries[i] := { PadR(stroka, 76), lFirst }
+               aQueries[i] := {PadR(stroka, 76), lFirst}
                lFirst := .F.
                i ++
             ENDIF
          ENDDO
          Aadd(aQueries, NIL)
          Ains(aQueries, i)
-         aQueries[i] := { Space(76), .F. }
+         aQueries[i] := {Space(76), .F.}
          nHistCurr ++
       ENDIF
       IF (queHandle := sqlStoreR(connHandle)) != 0
@@ -485,11 +485,11 @@ STATIC FUNCTION ReadHistory(fname)
             lEmpty := .T.
          ELSE
             IF lEmpty .AND. nHistCurr > 0
-               Aadd(aQueries, { Space(76), .F. })
+               Aadd(aQueries, {Space(76), .F.})
                lFirst := .T.
             ENDIF
             lEmpty := .F.
-            Aadd(aQueries, { Padr(stroka, 76), lFirst })
+            Aadd(aQueries, {Padr(stroka, 76), lFirst})
             IF lFirst
                nHistCurr ++
             ENDIF
@@ -536,7 +536,7 @@ FUNCTION DoSQL(cQuery)
       IF (qHandle := sqlStoreR(connHandle)) != 0
          nNumRows := sqlNRows(qHandle)
          nNumFields := sqlNumFi(qHandle)
-         aRes := { 0, Array(nNumFields), Array(nNumRows) }
+         aRes := {0, Array(nNumFields), Array(nNumRows)}
          FOR i := 1 TO nNumFields
             aRes[2, i] := SqlFetchF(qHandle)[1]
          NEXT

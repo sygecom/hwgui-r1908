@@ -12,8 +12,8 @@
 #include "hwgui.ch"
 
 STATIC aCustomEvents := { ;
-      { WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, ;
-        WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY }, ;
+      {WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, ;
+        WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY}, ;
       { ;
         {|o, w, l|onNotify(o, w, l)},                        ;
         {|o, w|IIf(o:bPaint != NIL, Eval(o:bPaint, o, w), -1)}, ;

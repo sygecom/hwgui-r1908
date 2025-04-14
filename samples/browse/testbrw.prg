@@ -41,9 +41,7 @@ FUNCTION DlgGet()
 
    hwg_CreateArList(oBrw2, aSample2)
    oBmp := HBitmap():AddResource(OBM_CHECK)
-   oBrw2:aColumns[1]:aBitmaps := { ;
-      {{|l|l}, oBmp} ;
-   }
+   oBrw2:aColumns[1]:aBitmaps := {{{|l|l}, oBmp}}
    oBrw2:aColumns[2]:length := 6
    oBrw2:aColumns[3]:length := 4
    oBrw2:bKeyDown := {|o, key|BrwKey(o, key)}

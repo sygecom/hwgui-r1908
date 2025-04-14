@@ -4,7 +4,7 @@ FUNCTION Main()
 
    LOCAL oMainWindow
    LOCAL oBtn
-   LOCAL aCombo := {"First", "Second" }
+   LOCAL aCombo := {"First", "Second"}
    LOCAL cTool := "Example"
    LOCAL oFont
    LOCAL aTabs := {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"}
@@ -28,7 +28,7 @@ FUNCTION Main()
 
    @ 20, 10 RICHEDIT oEdit TEXT "Hello, world !" SIZE 200, 30
 
-   hwg_RE_SetCharFormat(oEdit:handle, { { 1, 6, , , , .T. }, { 8, 13, 255,,,,, .T. } })
+   hwg_RE_SetCharFormat(oEdit:handle, {{1, 6, , , , .T.}, {8, 13, 255,,,,, .T.}})
 
    @ 270, 10 COMBOBOX aCombo SIZE 100, 150 TOOLTIP "Combobox"
 
@@ -111,6 +111,6 @@ FUNCTION PS1(oWnd)
    INIT DIALOG oDlg2 TITLE "PAGE_2" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20, 35 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER
 
-   hwg_PropertySheet(hwg_GetActiveWindow(), { oDlg1, oDlg2 }, "Sheet Example", 210, 10, 300, 300)
+   hwg_PropertySheet(hwg_GetActiveWindow(), {oDlg1, oDlg2}, "Sheet Example", 210, 10, 300, 300)
 
 RETURN NIL

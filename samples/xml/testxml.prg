@@ -173,20 +173,20 @@ FUNCTION hwg_Font2XML(oFont)
 
    LOCAL aAttr := {}
 
-   AAdd(aAttr, { "name", oFont:name })
-   AAdd(aAttr, { "width", LTrim(Str(oFont:width, 5)) })
-   AAdd(aAttr, { "height", LTrim(Str(oFont:height, 5)) })
+   AAdd(aAttr, {"name", oFont:name})
+   AAdd(aAttr, {"width", LTrim(Str(oFont:width, 5))})
+   AAdd(aAttr, {"height", LTrim(Str(oFont:height, 5))})
    IF oFont:weight != 0
-      AAdd(aAttr, { "weight", LTrim(Str(oFont:weight, 5)) })
+      AAdd(aAttr, {"weight", LTrim(Str(oFont:weight, 5))})
    ENDIF
    IF oFont:charset != 0
-      AAdd(aAttr, { "charset", LTrim(Str(oFont:charset, 5)) })
+      AAdd(aAttr, {"charset", LTrim(Str(oFont:charset, 5))})
    ENDIF
    IF oFont:Italic != 0
-      AAdd(aAttr, { "italic", LTrim(Str(oFont:Italic, 5)) })
+      AAdd(aAttr, {"italic", LTrim(Str(oFont:Italic, 5))})
    ENDIF
    IF oFont:Underline != 0
-      AAdd(aAttr, { "underline", LTrim(Str(oFont:Underline, 5)) })
+      AAdd(aAttr, {"underline", LTrim(Str(oFont:Underline, 5))})
    ENDIF
 
 RETURN HXMLNode():New("font", HBXML_TYPE_SINGLE, aAttr)

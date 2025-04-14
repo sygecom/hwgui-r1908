@@ -77,7 +77,7 @@ CLASS HColumn INHERIT HObject
    DATA bColorBlock              //   bColorBlock must return an array containing four colors values
                                  //   oBrowse:aColumns[1]:bColorBlock := {|| IF(nNumber < 0, ;
                                  //      {textColor, backColor, textColorSel, backColorSel} , ;
-                                 //      {textColor, backColor, textColorSel, backColorSel}) }
+                                 //      {textColor, backColor, textColorSel, backColorSel})}
 
    METHOD New(cHeading, block, type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick)
 
@@ -596,7 +596,7 @@ METHOD InitBrw(nType)  CLASS HBrowse
       ::aColumns := {}
       ::rowPos    := ::nCurrent  := ::colpos := ::nLeftCol := 1
       ::freeze  := ::height := 0
-      ::internal  := { 15, 1 }
+      ::internal  := {15, 1}
       ::aArray     := NIL
 
       if Empty(crossCursor)
@@ -618,14 +618,14 @@ METHOD InitBrw(nType)  CLASS HBrowse
       ::bRecnoLog := ::bRecno  := &("{||" + ::alias + "->(RECNO())}")
       ::bGoTo   := &("{|a,n|"  + ::alias + "->(DBGOTO(n))}")
    elseif ::type == BRW_ARRAY
-      ::bSKip   := { | o, x | ARSKIP(o, x) }
-      ::bGoTop  := { | o | o:nCurrent := 1 }
-      ::bGoBot  := { | o | o:nCurrent := o:nRecords }
-      ::bEof    := { | o | o:nCurrent > o:nRecords }
-      ::bBof    := { | o | o:nCurrent == 0 }
-      ::bRcou   := { | o | Len(o:aArray) }
-      ::bRecnoLog := ::bRecno  := { | o | o:nCurrent }
-      ::bGoTo   := { | o, n | o:nCurrent := n }
+      ::bSKip   := {|o, x|ARSKIP(o, x)}
+      ::bGoTop  := {|o|o:nCurrent := 1}
+      ::bGoBot  := {|o|o:nCurrent := o:nRecords}
+      ::bEof    := {|o|o:nCurrent > o:nRecords}
+      ::bBof    := {|o|o:nCurrent == 0}
+      ::bRcou   := {|o|Len(o:aArray)}
+      ::bRecnoLog := ::bRecno  := {|o|o:nCurrent}
+      ::bGoTo   := {|o, n|o:nCurrent := n}
       ::bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
    endif
 RETURN NIL
@@ -1960,7 +1960,7 @@ METHOD ShowSizes() CLASS HBrowse
 RETURN NIL
 
 FUNCTION hwg_ColumnArBlock()
-RETURN {|value, o, n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value) }
+RETURN {|value, o, n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value)}
 
 STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0

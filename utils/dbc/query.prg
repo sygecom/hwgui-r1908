@@ -34,11 +34,11 @@ Local aModDlg
       cQuery := ""
    ENDIF
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_QUERY" ON INIT {|| InitQuery() }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_QUERY" ON INIT {|| InitQuery()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDCANCEL     ACTION {|| EndQuery(.F.) }  ;
-        ON BN_CLICKED, IDC_BTNEXEC ACTION {|| EndQuery(.T.) } ;
-        ON BN_CLICKED, IDC_BTNSAVE ACTION {|| QuerySave() }
+        ON 0, IDCANCEL     ACTION {|| EndQuery(.F.)}  ;
+        ON BN_CLICKED, IDC_BTNEXEC ACTION {|| EndQuery(.T.)} ;
+        ON BN_CLICKED, IDC_BTNSAVE ACTION {|| QuerySave()}
    aModDlg:Activate()
 
 RETURN NIL

@@ -555,11 +555,11 @@ STATIC FUNCTION InspSetBrowse()
       o := IIf(oCombo:value == 1, HFormGen():oDlgSelected:oParent, GetCtrlSelected(HFormGen():oDlgSelected))
       FOR i := 1 TO Len(o:aProp)
          IF Len(o:aProp[i]) == 3
-            AAdd(aProp, { o:aProp[i, 1], o:aProp[i, 2] })
+            AAdd(aProp, {o:aProp[i, 1], o:aProp[i, 2]})
          ENDIF
       NEXT
       FOR i := 1 TO Len(o:aMethods)
-         AAdd(aMethods, { o:aMethods[i, 1], o:aMethods[i, 2] })
+         AAdd(aMethods, {o:aMethods[i, 1], o:aMethods[i, 2]})
       NEXT
    ENDIF
 
@@ -731,7 +731,7 @@ FUNCTION ObjInspector(oObject)
    @ nLeft, nTop button oBtn1 ;
       caption "&Exit" ;
       size 80, 25 ;
-      on click { || EndDialog() }
+      on click {||EndDialog()}
 
   @ nLeft + 150, ntop+2 SAY "Object: " + "oObject"  SIZE 200, 24
    nLin = nTop + 30

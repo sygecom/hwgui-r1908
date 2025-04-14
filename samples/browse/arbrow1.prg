@@ -22,7 +22,7 @@ FUNCTION Main()
    @ 10, 10 BROWSE oBrw ARRAY SIZE 180, 325 ;
 	   AUTOEDIT  NO VSCROLL
 
-   hwg_CreateArList(oBrw, { { "1", "a" }, { "2", "b" }, { "3", "c" }, { "4", "d" } })
+   hwg_CreateArList(oBrw, {{"1", "a"}, {"2", "b"}, {"3", "c"}, {"4", "d"}})
 
    oBrw:aColumns[1]:length := 5
    oBrw:aColumns[2]:length := 5

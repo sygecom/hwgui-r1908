@@ -14,8 +14,8 @@
 #define UDS_SETBUDDYINT     2
 #define UDS_ALIGNRIGHT      4
 
-STATIC s_aPenStyles := { "SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT" }
-STATIC s_aVariables := { "Static", "Variable" }
+STATIC s_aPenStyles := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
+STATIC s_aVariables := {"Static", "Variable"}
 memvar apaintrep, mypath
 FUNCTION LButtonDbl(xPos, yPos)
 Local i, aItem
@@ -48,7 +48,7 @@ RETURN NIL
 STATIC FUNCTION StaticDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {|| InitStatic(aItem) }
+   INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {|| InitStatic(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndStatic(aItem)}  ;
         ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
@@ -96,7 +96,7 @@ STATIC FUNCTION LineDlg(aItem)
 Local aModDlg
 Local oPen := aItem[ITEM_PEN]
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {|| InitLine(aItem) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {|| InitLine(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndLine(aItem)}
    REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
@@ -132,7 +132,7 @@ RETURN .T.
 FUNCTION BitmapDlg(aItem)
 Local aModDlg, res := .T.
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndBitmap(aItem)}  ;
         ON 0, IDCANCEL     ACTION {|| res := .F., EndDialog(hwg_GetModalHandle())} ;
@@ -197,7 +197,7 @@ RETURN .T.
 FUNCTION MarkLDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndMarkL(aItem)}  ;
         ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
@@ -223,7 +223,7 @@ RETURN .T.
 FUNCTION MarkFDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem) }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndMarkF(aItem)}  ;
         ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
@@ -247,7 +247,7 @@ RETURN .T.
 FUNCTION FormOptions()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt() }
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt()}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {|| EndFOpt()}  ;
         ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}

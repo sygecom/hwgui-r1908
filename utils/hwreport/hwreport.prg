@@ -22,12 +22,12 @@ STATIC s_crossCursor
 STATIC s_vertCursor
 STATIC s_horzCursor
 STATIC s_itemPressed := 0
-STATIC s_mPos := { 0, 0 }
+STATIC s_mPos := {0, 0}
 STATIC s_itemBorder := 0
 STATIC s_itemSized := 0
 STATIC s_resizeDirection := 0
-STATIC s_aInitialSize := { { 50, 20 }, { 60, 4 }, { 4, 60 }, { 60, 40 }, { 40, 40 }, { 16, 10 } }
-STATIC s_aMarkers := { "PH", "SL", "EL", "PF", "EPF", "DF" }
+STATIC s_aInitialSize := {{50, 20}, {60, 4}, {4, 60}, {60, 40}, {40, 40}, {16, 10}}
+STATIC s_aMarkers := {"PH", "SL", "EL", "PF", "EPF", "DF"}
 STATIC s_oPenDivider
 STATIC s_oPenLine
 
@@ -41,7 +41,7 @@ Local oMainWindow, aPanel, oIcon := HIcon():AddResource("ICON_1")
 Public mypath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 Public aPaintRep := NIL
 Public oPenBorder, oFontSmall, oFontStandard, lastFont := NIL
-Public aItemTypes := { "TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER" }
+Public aItemTypes := {"TEXT", "HLINE", "VLINE", "BOX", "BITMAP", "MARKER"}
 
    SET DECIMALS TO 4
    s_crossCursor := hwg_LoadCursor(IDC_CROSS)
@@ -140,7 +140,7 @@ RETURN NIL
 
 STATIC FUNCTION EndNewrep(oMainWindow, oDlg)
 
-   aPaintRep := { 0, 0, 0, 0, 0, {}, "", "", .F., 0, NIL }
+   aPaintRep := {0, 0, 0, 0, 0, {}, "", "", .F., 0, NIL}
    IF hwg_IsDlgButtonChecked(oDlg:handle, IDC_RADIOBUTTON1)
       aPaintRep[FORM_WIDTH] := 210 ; aPaintRep[FORM_HEIGHT] := 297
    ELSE
@@ -641,9 +641,9 @@ Local hWnd := Hwindow():GetMain():handle
    x2 := x1+Round(aPaintRep[FORM_WIDTH]*aPaintRep[FORM_XKOEF], 0)-1
    y2 := y1+Round(aPaintRep[FORM_HEIGHT]*aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y]-1
    IF s_nAddItem > 0 .AND. xPos > x1 .AND. xPos < x2 .AND. yPos > y1 .AND. yPos < y2
-      AAdd(aPaintRep[FORM_ITEMS], { s_nAddItem, "", xPos-x1, ;
+      AAdd(aPaintRep[FORM_ITEMS], {s_nAddItem, "", xPos-x1, ;
            yPos-y1+aPaintRep[FORM_Y], s_aInitialSize[s_nAddItem, 1], ;
-           s_aInitialSize[s_nAddItem, 2], 0, NIL, NIL, 0, 0, NIL, STATE_SELECTED })
+           s_aInitialSize[s_nAddItem, 2], 0, NIL, NIL, 0, 0, NIL, STATE_SELECTED})
       aItem := Atail(aPaintRep[FORM_ITEMS])
       IF s_nAddItem == TYPE_HLINE .OR. s_nAddItem == TYPE_VLINE .OR. s_nAddItem == TYPE_BOX
          aItem[ITEM_PEN] := HPen():Add()

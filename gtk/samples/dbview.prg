@@ -21,7 +21,7 @@ REQUEST DBFFPT
 REQUEST ORDKEYNO
 REQUEST ORDKEYCOUNT
 
-STATIC aFieldTypes := { "C", "N", "D", "L" }
+STATIC aFieldTypes := {"C", "N", "D", "L"}
 STATIC dbv_cLocate, dbv_nRec, dbv_cSeek
 
 FUNCTION Main
@@ -161,7 +161,7 @@ Memvar DataCP
 RETURN NIL
 
 STATIC FUNCTION SelectIndex()
-Local aIndex := { { "None", "   ", "   " } }, i, indname, iLen := 0
+Local aIndex := {{"None", "   ", "   "}}, i, indname, iLen := 0
 Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
 Memvar oBrw, oFont
 
@@ -346,12 +346,12 @@ STATIC FUNCTION ModiStru(lNew)
 Local oDlg, oBrowse, of := HFont():Add("Courier", 0, -12), oMsg
 Local oGet1, oGet2, oGet3, oGet4
 Local af, af0, cName := "", nType := 1, cLen := "0", cDec := "0", i
-Local aTypes := { "Character", "Numeric", "Date", "Logical" }
+Local aTypes := {"Character", "Numeric", "Date", "Logical"}
 Local fname, cAlias, nRec, nOrd, lOverFlow := .F., xValue
 Memvar oBrw, currentCP, currFname
 
    IF lNew
-      af := { {"", "", 0, 0} }
+      af := {{"", "", 0, 0}}
    ELSE
       af0 := dbStruct()
       af  := dbStruct()
@@ -573,7 +573,7 @@ Memvar oBrw, oSay2
          RETURN NIL
       ENDIF
 
-      bOldError := ERRORBLOCK({ | e | MacroError(e) })
+      bOldError := ERRORBLOCK({|e|MacroError(e)})
       BEGIN SEQUENCE
          cType := ValType(&cLocate)
       RECOVER

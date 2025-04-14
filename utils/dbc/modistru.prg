@@ -17,11 +17,11 @@ memvar mypath, obrwfont, improc, msfile
 
 FUNCTION StruMan(lNew)
 Local oModDlg
-Local at := { "Character", "Numeric", "Date", "Logical", "Memo" }
+Local at := {"Character", "Numeric", "Date", "Logical", "Memo"}
 LOCAL af, oBrw
 
    IF lNew
-      af := { {"", "", 0, 0} }
+      af := {{"", "", 0, 0}}
    ELSE
       af := dbStruct()
    ENDIF
@@ -34,16 +34,16 @@ LOCAL af, oBrw
 
    DIALOG ACTIONS OF oModDlg ;
           ON 0, IDOK        ACTION {|o| EndStru(o, lNew)}   ;
-          ON BN_CLICKED, IDC_PUSHBUTTON2 ACTION {|| ModiStru(1) }  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON3 ACTION {|| ModiStru(2) }  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON4 ACTION {|| ModiStru(3) }  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
+          ON BN_CLICKED, IDC_PUSHBUTTON2 ACTION {|| ModiStru(1)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON3 ACTION {|| ModiStru(2)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON4 ACTION {|| ModiStru(3)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON5 ACTION {|| ModiStru(4)}
 
    oBrw:aArray := af
-   oBrw:AddColumn(HColumn():New("Name", {|value, o|o:aArray[o:nCurrent, 1] }, "C", 10, 0))
-   oBrw:AddColumn(HColumn():New("Type", {|value, o|o:aArray[o:nCurrent, 2] }, "C", 4, 0))
-   oBrw:AddColumn(HColumn():New("Length", {|value, o|o:aArray[o:nCurrent, 3] }, "N", 4, 0))
-   oBrw:AddColumn(HColumn():New("Dec", {|value, o|o:aArray[o:nCurrent, 4] }, "N", 2, 0))
+   oBrw:AddColumn(HColumn():New("Name", {|value, o|o:aArray[o:nCurrent, 1]}, "C", 10, 0))
+   oBrw:AddColumn(HColumn():New("Type", {|value, o|o:aArray[o:nCurrent, 2]}, "C", 4, 0))
+   oBrw:AddColumn(HColumn():New("Length", {|value, o|o:aArray[o:nCurrent, 3]}, "N", 4, 0))
+   oBrw:AddColumn(HColumn():New("Dec", {|value, o|o:aArray[o:nCurrent, 4]}, "N", 2, 0))
    oBrw:bcolorSel := hwg_VColor("800080")
    oBrw:ofont      := oBrwFont
 
@@ -93,14 +93,14 @@ Local cName, cType, nLen, nDec := 0
          ENDIF
       ENDIF
       IF nOper == 3 .OR. (oBrowse:nRecords == 1 .AND. Empty(oBrowse:aArray[1, 1]))
-         oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
+         oBrowse:aArray[oBrowse:nCurrent] := {cName, cType, nLen, nDec}
       ELSEIF nOper == 1
          AAdd(oBrowse:aArray, {cName, cType, nLen, nDec})
          oBrowse:nRecords ++
       ELSEIF nOper == 2
          AAdd(oBrowse:aArray, NIL)
          Ains(oBrowse:aArray, oBrowse:nCurrent)
-         oBrowse:aArray[oBrowse:nCurrent] := { cName, cType, nLen, nDec }
+         oBrowse:aArray[oBrowse:nCurrent] := {cName, cType, nLen, nDec}
          oBrowse:nRecords ++
       ENDIF
    ELSEIF nOper == 4

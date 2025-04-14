@@ -439,7 +439,7 @@ STATIC FUNCTION Create_Array()
              n := i
        END
     END
-    AAdd(aArray, { n, STRZERO(i, 4), DATE() + i, "jgçpqy " + STRZERO(i, 23), STRZERO(i, 5)})
+    AAdd(aArray, {n, STRZERO(i, 4), DATE() + i, "jgçpqy " + STRZERO(i, 23), STRZERO(i, 5)})
   Next
 
 RETURN aArray

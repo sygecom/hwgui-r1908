@@ -12,7 +12,7 @@
 #xtranslate HB_AT(<x,...>) => AT(<x>)
 #endif
 
-STATIC aClass := { "label", "button", "checkbox",                    ;
+STATIC aClass := {"label", "button", "checkbox",                    ;
                   "radiobutton", "editbox", "group", "radiogroup",  ;
                   "bitmap", "icon",                                  ;
                   "richedit", "datepicker", "updown", "combobox",    ;
@@ -53,8 +53,8 @@ STATIC aCtrls := { ;
 
 #define  CONTROL_FIRST_ID   34000
 
-STATIC aPenType  := { "SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT" }
-STATIC aJustify  := { "Left", "Center", "Right" }
+STATIC aPenType  := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
+STATIC aJustify  := {"Left", "Center", "Right"}
 
 REQUEST HSTATIC
 REQUEST HBUTTON
@@ -1016,7 +1016,7 @@ Private oReport := Self
    ::nKoefX := oPrinter:nWidth / nPWidth
    ::nKoefY := oPrinter:nHeight / nPHeight
    IF (aMethod := aGetSecond(::aMethods, "onrepinit")) != NIL
-      hwg_DoScript(aMethod, { p1, p2, p3 })
+      hwg_DoScript(aMethod, {p1, p2, p3})
    ENDIF
    IF xProperty != NIL
       oFont := hrep_FontFromxml(oPrinter, xProperty, aGetSecond(::aProp, "fonth")*::nKoefY)

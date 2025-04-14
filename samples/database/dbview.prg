@@ -205,7 +205,7 @@ STATIC FUNCTION SelectIndex()
 
    i := 1
    DO WHILE !Empty(indname := ORDNAME(i))
-      AAdd(aIndex, { indname, ORDKEY(i), ORDBAGNAME(i) })
+      AAdd(aIndex, {indname, ORDKEY(i), ORDBAGNAME(i)})
       iLen := Max(iLen, Len(OrdKey(i)))
       i ++
    ENDDO
@@ -580,7 +580,7 @@ STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
       nLen := Val(oGet3:SetGet())
       nDec := Val(oGet4:SetGet())
       IF nOperation == 1
-         AAdd(oBrowse:aArray, { cName, cType, nLen, nDec })
+         AAdd(oBrowse:aArray, {cName, cType, nLen, nDec})
       ELSE
          IF nOperation == 2
             AAdd(oBrowse:aArray, NIL)
