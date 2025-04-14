@@ -1665,4 +1665,80 @@ ComboBox
 #define TBS_BOTH                     8
 #define TBS_NOTICKS                 16
 
+// from htree.prg
+#define TVM_DELETEITEM       4353   // (TV_FIRST + 1) 0x1101
+#define TVM_EXPAND           4354   // (TV_FIRST + 2)
+#define TVM_SETIMAGELIST     4361   // (TV_FIRST + 9)
+#define TVM_GETNEXTITEM      4362   // (TV_FIRST + 10)
+#define TVM_SELECTITEM       4363   // (TV_FIRST + 11)
+#define TVM_EDITLABEL        4366   // (TV_FIRST + 14)
+#define TVM_GETEDITCONTROL   4367   // (TV_FIRST + 15)
+#define TVM_ENDEDITLABELNOW  4374   //(TV_FIRST + 22)
+#define TVM_GETITEMSTATE     4391   // (TV_FIRST + 39)
+#define TVM_SETITEM          4426   // (TV_FIRST + 63)
+#define TVM_SETITEMHEIGHT    4379   // (TV_FIRST + 27)
+#define TVM_GETITEMHEIGHT    4380
+#define TVM_SETLINECOLOR     4392
+
+#define TVE_COLLAPSE            0x0001
+#define TVE_EXPAND              0x0002
+#define TVE_TOGGLE              0x0003
+
+#define TVSIL_NORMAL            0
+
+#define TVGN_ROOT               0   // 0x0000
+#define TVGN_NEXT               1   // 0x0001
+#define TVGN_PREVIOUS           2   // 0x0002
+#define TVGN_PARENT             3   // 0x0003
+#define TVGN_CHILD              4   // 0x0004
+#define TVGN_FIRSTVISIBLE       5   // 0x0005
+#define TVGN_NEXTVISIBLE        6   // 0x0006
+#define TVGN_PREVIOUSVISIBLE    7   // 0x0007
+#define TVGN_DROPHILITE         8   // 0x0008
+#define TVGN_CARET              9   // 0x0009
+#define TVGN_LASTVISIBLE       10   // 0x000A
+
+#define TVIS_STATEIMAGEMASK    61440
+
+#define TVN_SELCHANGING      (-401) // (TVN_FIRST-1)
+#define TVN_SELCHANGED       (-402)
+#define TVN_GETDISPINFO      (-403)
+#define TVN_SETDISPINFO      (-404)
+#define TVN_ITEMEXPANDING    (-405)
+#define TVN_ITEMEXPANDED     (-406)
+#define TVN_BEGINDRAG        (-407)
+#define TVN_BEGINRDRAG       (-408)
+#define TVN_DELETEITEM       (-409)
+#define TVN_BEGINLABELEDIT   (-410)
+#define TVN_ENDLABELEDIT     (-411)
+#define TVN_KEYDOWN          (-412)
+#define TVN_ITEMCHANGINGA    (-416)
+#define TVN_ITEMCHANGINGW    (-417)
+#define TVN_ITEMCHANGEDA     (-418)
+#define TVN_ITEMCHANGEDW     (-419)
+
+#define TVN_SELCHANGEDW       (-451)
+#define TVN_ITEMEXPANDINGW    (-454)
+#define TVN_BEGINLABELEDITW   (-459)
+#define TVN_ENDLABELEDITW     (-460)
+
+#define TVI_ROOT              (-65536)
+
+#define TREE_GETNOTIFY_HANDLE       1
+#define TREE_GETNOTIFY_PARAM        2
+#define TREE_GETNOTIFY_EDIT         3
+#define TREE_GETNOTIFY_EDITPARAM    4
+#define TREE_GETNOTIFY_ACTION       5
+#define TREE_GETNOTIFY_OLDPARAM     6
+
+#define TREE_SETITEM_TEXT           1
+#define TREE_SETITEM_CHECK          2
+
+//#define NM_CLICK                -2
+//#define NM_DBLCLK               -3 // defined in windows.ch
+//#define NM_RCLICK               -5 // defined in windows.ch
+//#define NM_KILLFOCUS            -8 // defined in windows.ch
+#define NM_SETCURSOR            -17    // uses NMMOUSE struct
+#define NM_CHAR                 -18   // uses NMCHAR struct
+
 #endif // _WINDOWS_CH_
