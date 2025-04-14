@@ -55,7 +55,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    //IF bGFocus != NIL
    ::bGetFocus := bGFocus
    ::oParent:AddEvent(BN_SETFOCUS, Self, {||::onGetFocus()})
-   ::oParent:AddEvent(BN_KILLFOCUS, self, {|| ::onLostFocus()})
+   ::oParent:AddEvent(BN_KILLFOCUS, self, {||::onLostFocus()})
    //ENDIF
    /*
    IF ::oParent:oParent != NIL .AND. ::oParent:ClassName == "HTAB"
@@ -97,7 +97,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, 
    ::bGetFocus := bGFocus
    ::oParent:AddEvent(BN_SETFOCUS, Self, {||::onGetFocus()})
    //ENDIF
-   ::oParent:AddEvent(BN_KILLFOCUS, self, {|| ::onLostFocus()})
+   ::oParent:AddEvent(BN_KILLFOCUS, self, {||::onLostFocus()})
    ::bClick := bClick
    IF bClick != NIL
       ::oParent:AddEvent(BN_CLICKED, Self, {||::onClick()})

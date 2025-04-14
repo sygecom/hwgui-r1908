@@ -19,15 +19,15 @@ Local aModDlg
 Local af := Array(Fcount())
    Afields(af)
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_REPLACE" ON INIT {|| InitRepl()}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_REPLACE" ON INIT {||InitRepl()}
 
    REDEFINE COMBOBOX af OF aModDlg ID IDC_COMBOBOX1
 
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndRepl()}   ;
-        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {|| RecNumberEdit()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {|| RecNumberDisable()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable()}
+        ON 0, IDOK         ACTION {||EndRepl()}   ;
+        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {||RecNumberEdit()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {||RecNumberDisable()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {||RecNumberDisable()}
 
    aModDlg:Activate()
 
@@ -105,13 +105,13 @@ RETURN NIL
 FUNCTION C_DELE(nAct)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_DEL" ON INIT {|| InitDele(nAct)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_DEL" ON INIT {||InitDele(nAct)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndDele(nAct)}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
-        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {|| RecNumberEdit()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {|| RecNumberDisable()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable()}
+        ON 0, IDOK         ACTION {||EndDele(nAct)}   ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}  ;
+        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {||RecNumberEdit()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {||RecNumberDisable()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {||RecNumberDisable()}
    aModDlg:Activate()
 
 RETURN NIL
@@ -193,13 +193,13 @@ RETURN NIL
 FUNCTION C_SUM()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_SUM" ON INIT {|| InitSum()}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_SUM" ON INIT {||InitSum()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndSum()}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
-        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {|| RecNumberEdit()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {|| RecNumberDisable()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {|| RecNumberDisable()}
+        ON 0, IDOK         ACTION {||EndSum()}   ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}  ;
+        ON BN_CLICKED, IDC_RADIOBUTTON7 ACTION {||RecNumberEdit()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON6 ACTION {||RecNumberDisable()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON8 ACTION {||RecNumberDisable()}
    aModDlg:Activate()
 
 RETURN NIL
@@ -253,14 +253,14 @@ RETURN NIL
 FUNCTION C_APPEND()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_APFROM" ON INIT {|| InitApp()}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_APFROM" ON INIT {||InitApp()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndApp()}  ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
+        ON 0, IDOK         ACTION {||EndApp()}  ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}  ;
         ON BN_CLICKED, IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath))} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON11 ACTION {|| DelimEdit()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON10 ACTION {|| DelimDisable()} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON9 ACTION {|| DelimDisable()}
+        ON BN_CLICKED, IDC_RADIOBUTTON11 ACTION {||DelimEdit()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON10 ACTION {||DelimDisable()} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON9 ACTION {||DelimDisable()}
    aModDlg:Activate()
 
 RETURN NIL
@@ -314,10 +314,10 @@ RETURN NIL
 FUNCTION C_RPZ(nAct)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_OKCANCEL" ON INIT {|| InitRPZ(nAct)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_OKCANCEL" ON INIT {||InitRPZ(nAct)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndRPZ(nAct)}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
+        ON 0, IDOK         ACTION {||EndRPZ(nAct)}   ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}
    aModDlg:Activate()
 
 RETURN NIL

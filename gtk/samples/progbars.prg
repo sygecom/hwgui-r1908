@@ -37,10 +37,10 @@ Local cMsgErr := "Bar doesn't exist"
              STYLE DS_CENTER + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU ;
              ON EXIT {||IIf(oBar == NIL, .T., (oBar:Close(), .T.))}
 
-             @ 380, 395 BUTTON 'Step Bar'   SIZE 75, 25 ON CLICK {|| n+=10, IIf(oBar == NIL, hwg_MsgStop(cMsgErr), oBar:Set(, n / 100))}
-             @ 460, 395 BUTTON 'Create Bar' SIZE 75, 25 ON CLICK {|| oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100)}
-             @ 540, 395 BUTTON 'Close Bar'  SIZE 75, 25 ON CLICK {|| IIf(oBar == NIL, hwg_MsgStop(cMsgErr), (oBar:Close(), oBar := NIL))}
-             @ 620, 395 BUTTON 'Close'      SIZE 75, 25 ON CLICK {|| oForm:Close()}
+             @ 380, 395 BUTTON 'Step Bar'   SIZE 75, 25 ON CLICK {||n+=10, IIf(oBar == NIL, hwg_MsgStop(cMsgErr), oBar:Set(, n / 100))}
+             @ 460, 395 BUTTON 'Create Bar' SIZE 75, 25 ON CLICK {||oBar := HProgressBar():NewBox("Testing ...",,,,, 10, 100)}
+             @ 540, 395 BUTTON 'Close Bar'  SIZE 75, 25 ON CLICK {||IIf(oBar == NIL, hwg_MsgStop(cMsgErr), (oBar:Close(), oBar := NIL))}
+             @ 620, 395 BUTTON 'Close'      SIZE 75, 25 ON CLICK {||oForm:Close()}
 
         ACTIVATE DIALOG oForm
 

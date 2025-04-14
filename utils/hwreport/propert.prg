@@ -48,9 +48,9 @@ RETURN NIL
 STATIC FUNCTION StaticDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {|| InitStatic(aItem)}
+   INIT DIALOG aModDlg FROM RESOURCE  "DLG_STATIC" ON INIT {||InitStatic(aItem)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndStatic(aItem)}  ;
+        ON 0, IDOK         ACTION {||EndStatic(aItem)}  ;
         ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
    REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
    aModDlg:Activate()
@@ -96,9 +96,9 @@ STATIC FUNCTION LineDlg(aItem)
 Local aModDlg
 Local oPen := aItem[ITEM_PEN]
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {|| InitLine(aItem)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {||InitLine(aItem)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndLine(aItem)}
+        ON 0, IDOK         ACTION {||EndLine(aItem)}
    REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
    aModDlg:Activate()
 
@@ -132,10 +132,10 @@ RETURN .T.
 FUNCTION BitmapDlg(aItem)
 Local aModDlg, res := .T.
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {|| InitBitmap(aItem)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_BITMAP" ON INIT {||InitBitmap(aItem)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndBitmap(aItem)}  ;
-        ON 0, IDCANCEL     ACTION {|| res := .F., EndDialog(hwg_GetModalHandle())} ;
+        ON 0, IDOK         ACTION {||EndBitmap(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {||res := .F., EndDialog(hwg_GetModalHandle())} ;
         ON BN_CLICKED, IDC_BUTTONBRW ACTION {||OpenBmp(aItem, hwg_SelectFile("Bitmap files( *.bmp )", "*.bmp", mypath))} ;
         ON EN_CHANGE, IDC_EDIT3 ACTION {||UpdateProcent(aItem)}
    aModDlg:Activate()
@@ -197,10 +197,10 @@ RETURN .T.
 FUNCTION MarkLDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitMarkL(aItem)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {||InitMarkL(aItem)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndMarkL(aItem)}  ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
+        ON 0, IDOK         ACTION {||EndMarkL(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}
    aModDlg:Activate()
 
 RETURN NIL
@@ -223,10 +223,10 @@ RETURN .T.
 FUNCTION MarkFDlg(aItem)
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {|| InitMarkF(aItem)}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKF" ON INIT {||InitMarkF(aItem)}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndMarkF(aItem)}  ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
+        ON 0, IDOK         ACTION {||EndMarkF(aItem)}  ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}
    aModDlg:Activate()
 
 RETURN NIL
@@ -247,10 +247,10 @@ RETURN .T.
 FUNCTION FormOptions()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {|| InitFOpt()}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_MARKL" ON INIT {||InitFOpt()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndFOpt()}  ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}
+        ON 0, IDOK         ACTION {||EndFOpt()}  ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}
    aModDlg:Activate()
 
 RETURN NIL

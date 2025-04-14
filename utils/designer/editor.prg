@@ -186,7 +186,7 @@ FUNCTION EditMethod(cMethName, cMethod)
       AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_MAXIMIZEBOX + WS_SIZEBOX ;
       ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
-      ON EXIT {|| dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")), cMethod := oEdit:GetText(), .F.), .T.}
+      ON EXIT {||dummy := IIf(lRes := (oEdit:lChanged.AND.hwg_MsgYesNo("Code was changed! Save it?", "Designer")), cMethod := oEdit:GetText(), .F.), .T.}
 
    MENU OF oDlg
       MENU TITLE "&Options"

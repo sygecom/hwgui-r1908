@@ -33,11 +33,11 @@ LOCAL af, oBrw
    REDEFINE COMBOBOX at OF oModDlg ID IDC_COMBOBOX2
 
    DIALOG ACTIONS OF oModDlg ;
-          ON 0, IDOK        ACTION {|o| EndStru(o, lNew)}   ;
-          ON BN_CLICKED, IDC_PUSHBUTTON2 ACTION {|| ModiStru(1)}  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON3 ACTION {|| ModiStru(2)}  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON4 ACTION {|| ModiStru(3)}  ;
-          ON BN_CLICKED, IDC_PUSHBUTTON5 ACTION {|| ModiStru(4)}
+          ON 0, IDOK        ACTION {|o|EndStru(o, lNew)}   ;
+          ON BN_CLICKED, IDC_PUSHBUTTON2 ACTION {||ModiStru(1)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON3 ACTION {||ModiStru(2)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON4 ACTION {||ModiStru(3)}  ;
+          ON BN_CLICKED, IDC_PUSHBUTTON5 ACTION {||ModiStru(4)}
 
    oBrw:aArray := af
    oBrw:AddColumn(HColumn():New("Name", {|value, o|o:aArray[o:nCurrent, 1]}, "C", 10, 0))

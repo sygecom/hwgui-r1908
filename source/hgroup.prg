@@ -185,7 +185,7 @@ METHOD PAINT(lpdis) CLASS HGroup
    ENDIF
 
    // draw text (if any)
-   IF !Empty(szText) && !(dwExStyle & (BS_ICON | BS_BITMAP)))
+   IF !Empty(szText) && !(dwExStyle & (BS_ICON | BS_BITMAP))) // TODO: Harbour & ?
       hwg_SetBkMode(dc, TRANSPARENT)
       IF ::oBrush != NIL
          hwg_FillRect(DC, rc[1] + 2, rc[2] + iUpDist + 2, rc[3] - 2, rc[4] - 2, ::brush:handle)

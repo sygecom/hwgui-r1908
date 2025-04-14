@@ -23,7 +23,7 @@
    ANNOUNCE HB_GTSYS
    REQUEST HB_GT_GUI_DEFAULT
 
-   #xcommand TRY              => s_bError := errorBlock({|oErr| break(oErr)}) ;;
+   #xcommand TRY              => s_bError := errorBlock({|oErr|break(oErr)}) ;;
                                  BEGIN SEQUENCE
    #xcommand CATCH [<!oErr!>] => errorBlock(s_bError) ;;
                                  RECOVER [USING <oErr>] <-oErr-> ;;
@@ -414,7 +414,7 @@ cExeHarbour := Lower(cHarbour+"\bin\harbour.exe")
 //EndIf
 
 //PrgFiles
-i := Ascan(oBrowse1:aArray, {|x| At(cMainPrg, x) > 0})
+i := Ascan(oBrowse1:aArray, {|x|At(cMainPrg, x) > 0})
 If i == 0
    AAdd(oBrowse1:aArray, AllTrim(oMainPrg:GetText()))
 EndIf   

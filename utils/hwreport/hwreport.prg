@@ -121,7 +121,7 @@ Local aModDlg, oFont
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE SAY "HWREPORT" OF aModDlg ID 101 COLOR hwg_VColor("0000FF")
-   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {|| EndDialog(hwg_GetModalHandle())} ;
+   REDEFINE OWNERBUTTON OF aModDlg ID IDC_OWNB1 ON CLICK {||EndDialog(hwg_GetModalHandle())} ;
        FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    aModDlg:Activate()
@@ -132,7 +132,7 @@ Local oDlg
 
    INIT DIALOG oDlg FROM RESOURCE "DLG_NEWREP" ON INIT {||hwg_CheckRadioButton(oDlg:handle, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)}
    DIALOG ACTIONS OF oDlg ;
-        ON 0, IDOK  ACTION {|| EndNewrep(oMainWindow, oDlg)}
+        ON 0, IDOK  ACTION {||EndNewrep(oMainWindow, oDlg)}
 
    oDlg:Activate()
 

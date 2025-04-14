@@ -1136,7 +1136,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             IF Empty(oCtrlTmpl:aControls)
                Select (oCtrl:Alias)
                j := (DBStruct())
-               //AEval(aStruct, {|aField| QOUT(aField[DBS_NAME])})
+               //AEval(aStruct, {|aField|QOUT(aField[DBS_NAME])})
                FOR i := 1 TO IIf(oCtrl:nColumns == 0, FCount(), oCtrl:nColumns)
                   //"AddColumn(HColumn():New(cHeader, Fblock, cValType, nLength, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))",; //oBrw:AddColumn
                   m->cHeader := FieldName(i)

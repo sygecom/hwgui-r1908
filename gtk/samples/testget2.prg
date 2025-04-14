@@ -40,7 +40,7 @@ Private oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 320 ;
-   ON INIT {|| SetTimer(oModDlg, @oTimer)}
+   ON INIT {||SetTimer(oModDlg, @oTimer)}
    // FONT oFont  
 
    SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 

@@ -26,9 +26,9 @@ Local oDlg
       CloseReport()
    ENDIF
 
-   INIT DIALOG oDlg FROM RESOURCE "DLG_FILE" ON INIT {|| InitOpen(lOpen)}
+   INIT DIALOG oDlg FROM RESOURCE "DLG_FILE" ON INIT {||InitOpen(lOpen)}
    DIALOG ACTIONS OF oDlg ;
-        ON 0, IDOK         ACTION {|| EndOpen(lOpen)}  ;
+        ON 0, IDOK         ACTION {||EndOpen(lOpen)}  ;
         ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {||hwg_SetDlgItemText(oDlg:handle, IDC_TEXT1, "Report Name:")} ;
         ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {||hwg_SetDlgItemText(oDlg:handle, IDC_TEXT1, "Function Name:")} ;
         ON BN_CLICKED, IDC_BUTTONBRW ACTION {||BrowFile(lOpen)}

@@ -78,12 +78,12 @@ CLASS HColumn INHERIT HObject
    DATA bHeadClick
    DATA bHeadRClick
    DATA bColorFoot               //   bColorFoot must return an array containing two colors values
-   //   oBrowse:aColumns[1]:bColorFoot := {|| IF (nNumber < 0, ;
+   //   oBrowse:aColumns[1]:bColorFoot := {||IF (nNumber < 0, ;
    //      {textColor, backColor}, ;
    //      {textColor, backColor})}
 
    DATA bColorBlock              //   bColorBlock must return an array containing four colors values
-   //   oBrowse:aColumns[1]:bColorBlock := {|| IF (nNumber < 0, ;
+   //   oBrowse:aColumns[1]:bColorBlock := {||IF (nNumber < 0, ;
    //      {textColor, backColor, textColorSel, backColorSel}, ;
    //      {textColor, backColor, textColorSel, backColorSel})}
    DATA headColor                // Header text color
@@ -2464,7 +2464,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
       ELSE
          xSize := 0
          IF fif == Len(::aColumns) .AND. !lFixed
-            fif := hb_RAScan(::aColumns, {|c| c:lhide = .F.}) - 1
+            fif := hb_RAScan(::aColumns, {|c|c:lhide = .F.}) - 1
             x -= ::aColumns[fif + 1]:width
             lFixed := .T.
          ENDIF

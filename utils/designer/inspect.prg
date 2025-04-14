@@ -143,7 +143,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             nWidth := Min(::aColumns[2]:width, ::x2 - x1 - 1)
             ReadExit(.T.)
 
-           obrw1:bPosChanged := {|| VldBrwGet(oGet, oBtn)}
+           obrw1:bPosChanged := {||VldBrwGet(oGet, oBtn)}
            @ x1+14, y1-2 GET oGet VAR varbuf OF oBrw1  ;
             SIZE nWidth, ::height+6        ;
             STYLE ES_AUTOHSCROLL           ;
@@ -152,7 +152,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
 
            @ x1, y1-2 BUTTON oBtn CAPTION "..." OF oBrw1;
             SIZE 13, ::height+6  ;
-            ON CLICK {|| (varbuf := IIF (aDataDef[j, 1] == "filename",;
+            ON CLICK {||(varbuf := IIF (aDataDef[j, 1] == "filename",;
                     hwg_SelectFile("Animation Files( *.avi )", "*.avi"), IIf(aDataDef[j, 1] == "filedbf", ;
                     hwg_SelectFile({"xBase Files( *.dbf)", " All Files( *.*)"}, {"*.dbf", "*.*"}), ;
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
@@ -361,7 +361,7 @@ FUNCTION InspOpen(lShow)
       FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)  ;
       STYLE nStilo;
       ON INIT {||IIf(!lshow, oDesigner:oDlgInsp:hide(),), hwg_MoveWindow(oDesigner:oDlgInsp:handle, 0, 134, 280, 410)}   ;
-      ON GETFOCUS {|o| o:show(), .T.};
+      ON GETFOCUS {|o|o:show(), .T.};
       ON EXIT {||oDesigner:oDlgInsp := NIL, hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1010, .F.), .T.} ;
       ON OTHER MESSAGES {|o, m, wp, lp|MessagesOthers(o, m, wp, lp)}
 
@@ -376,7 +376,7 @@ FUNCTION InspOpen(lShow)
    BEGIN PAGE "Properties" OF oTab
       @ 2, 30 PBROWSE oBrw1 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
          ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
-         hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE, {|| ResetToDefault(oBrw1)})
+         hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE, {||ResetToDefault(oBrw1)})
 
       oBrw1:tColor := hwg_GetSysColor(COLOR_BTNTEXT)
       oBrw1:tColorSel := 8404992
@@ -386,7 +386,7 @@ FUNCTION InspOpen(lShow)
       oBrw1:lSep3d := .T.
       oBrw1:sepColor  := hwg_GetSysColor(COLOR_BTNSHADOW)
       oBrw1:aArray := aProp
-      oBrw1:AddColumn(HColumn():New(, {|v, o| HB_SYMBOL_UNUSED(v), IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0, .T.))
+      oBrw1:AddColumn(HColumn():New(, {|v, o|HB_SYMBOL_UNUSED(v), IIf(Empty(o:aArray[o:nCurrent, 1]), "", "  "+o:aArray[o:nCurrent, 1])}, "C", 12, 0, .T.))
       oBrw1:AddColumn(HColumn():New(, hwg_ColumnArBlock(), "U", 100, 0, .T.))
    END PAGE OF oTab
 
@@ -408,7 +408,7 @@ FUNCTION InspOpen(lShow)
      // : LFB POS
    @ 190, 25 BUTTON "Close" SIZE 50, 23     ;
        ON SIZE {|o, x|o:Move(x-52,,,)};
-       ON CLICK {|| oDesigner:oDlgInsp:close()}
+       ON CLICK {||oDesigner:oDlgInsp:close()}
    // : LFB
 
    CONTEXT MENU oMenuisnp
@@ -651,7 +651,7 @@ STATIC FUNCTION EditArray(arr)
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
        ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)};
-       ON CLICK {|| onclick_deleteItem(oBrw)}
+       ON CLICK {||onclick_deleteItem(oBrw)}
    @ 151, 265 BUTTON "Ok" SIZE 110, 26     ;
        ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)}  ;
        ON CLICK {||oDlg:lResult := .T., EndDialog()}

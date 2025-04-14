@@ -227,45 +227,45 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       // : LFB pos
       @ 164, 6 LINE LENGTH 18 VERTICAL
       @ 166, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| IIf(oDesigner:oDlgInsp == NIL, InspOpen(), InspShow())} ;
+          ON CLICK {||IIf(oDesigner:oDlgInsp == NIL, InspOpen(), InspShow())} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smProprie" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Propriedades"
       @ 192, 6 LINE LENGTH 18 VERTICAL
       @ 194, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(1)} ;
+          ON CLICK {||Asels_ajustar(1)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smAlignLeft" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Align left sides"
       @ 218, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(2)} ;
+          ON CLICK {||Asels_ajustar(2)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smAlignRight" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Align Right sides"
       @ 242, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(3)} ;
+          ON CLICK {||Asels_ajustar(3)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smAlignTop" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Align Top Edges"
       @ 268, 6 LINE LENGTH 18 VERTICAL
       @ 270, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(5)} ;
+          ON CLICK {||Asels_ajustar(5)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smSameWidth" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Same Width"
       @ 294, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(6)} ;
+          ON CLICK {||Asels_ajustar(6)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smSameHeight" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Same Height"
       @ 320, 6 LINE LENGTH 18 VERTICAL
       @ 322, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(7)} ;
+          ON CLICK {||Asels_ajustar(7)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smCenterHorz" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "Center Horizontally"
       @ 344, 3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(8)} ;
+          ON CLICK {||Asels_ajustar(8)} ;
           SIZE 24, 24 FLAT                ;
           BITMAP "smCentervert" FROM RESOURCE TRANSPARENT COORDINATES 0, 4, 0, 0  ;
           TOOLTIP "center Vertically"
@@ -884,7 +884,7 @@ FUNCTION SoControles()
    INIT DIALOG oDlgx AT 0, 0 SIZE 400, 99 TITLE "Toolbars - Classes ";
       FONT oFont                                                  ;
       STYLE WS_VISIBLE + WS_SYSMENU + DS_SYSMODAL + WS_SIZEBOX + MB_USERICON    ;
-      ON EXIT {||  oDlgx := NIL, .T.}
+      ON EXIT {||oDlgx := NIL, .T.}
 
       //ON OTHER MESSAGES {|o, m, wp, lp|MessagesOthers(o, m, wp, lp)}
 

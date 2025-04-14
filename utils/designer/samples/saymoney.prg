@@ -24,7 +24,7 @@ nValue := 0
         STYLE WS_TABSTOP  ;
         TEXT "SayDollar()"  ;
         COORDINATES 0, 0, 0, 0  ;
-        ON CLICK {|| Olsay:SETTEXT(hwg_SAYDOLLAR(nValue))}
+        ON CLICK {||Olsay:SETTEXT(hwg_SAYDOLLAR(nValue))}
    @ 137, 57 SAY oLSay CAPTION "Label"  SIZE 281, 82  ;
          BACKCOLOR 8421504  ;
         FONT HFont():Add("Arial", 0, -13, 400, , 255,)
@@ -32,14 +32,14 @@ nValue := 0
         STYLE WS_TABSTOP  ;
         TEXT "SayRupiah()"  ;
         COORDINATES 0, 0, 0, 0  ;
-        ON CLICK {|| Olsay:SETTEXT(hwg_SAYRUPIAH(nValue))}
+        ON CLICK {||Olsay:SETTEXT(hwg_SAYRUPIAH(nValue))}
    @ 434, 161 OWNERBUTTON oOwnerbutton3   SIZE 28, 28 ;
         STYLE WS_TABSTOP  ;
         TEXT "OButton"  ;
         COORDINATES 0, 0, 0, 0  ;
         BITMAP HBitmap():AddFile("smExit")  FROM RESOURCE  TRANSPARENT  ;
         COORDINATES 0, 0, 0, 0  ;
-        ON CLICK {|| enddialog()}
+        ON CLICK {||enddialog()}
 
    ACTIVATE DIALOG oDlg
 RETURN oDlg:lresult

@@ -75,7 +75,7 @@ CLASS HColumn INHERIT HObject
    DATA Picture
    DATA bHeadClick
    DATA bColorBlock              //   bColorBlock must return an array containing four colors values
-                                 //   oBrowse:aColumns[1]:bColorBlock := {|| IF(nNumber < 0, ;
+                                 //   oBrowse:aColumns[1]:bColorBlock := {||IF(nNumber < 0, ;
                                  //      {textColor, backColor, textColorSel, backColorSel} , ;
                                  //      {textColor, backColor, textColorSel, backColorSel})}
 
@@ -1874,7 +1874,7 @@ FUNCTION HWG_CREATEARLIST(oBrw, arr)
             oBrw:AddColumn(HColumn():New(, hwg_ColumnArBlock()))
          NEXT
       ELSE
-         oBrw:AddColumn(HColumn():New(, {|value, o| o:aArray[o:nCurrent]}))
+         oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent]}))
       ENDIF
    ENDIF
    Eval(oBrw:bGoTop, oBrw)
@@ -1960,7 +1960,7 @@ METHOD ShowSizes() CLASS HBrowse
 RETURN NIL
 
 FUNCTION hwg_ColumnArBlock()
-RETURN {|value, o, n| IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value)}
+RETURN {|value, o, n|IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value)}
 
 STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0

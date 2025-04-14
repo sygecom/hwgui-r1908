@@ -142,7 +142,7 @@ Local oModDlg, oFont
 
    REDEFINE BITMAP "BITMAP_1" FROM RESOURCE ID IDC_BMP1
    REDEFINE OWNERBUTTON ID IDC_OWNB1  ;
-            ON CLICK {|| EndDialog()} ;
+            ON CLICK {||EndDialog()} ;
             FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    oModDlg:Activate()
@@ -155,12 +155,12 @@ RETURN NIL
 STATIC FUNCTION OpenConfig
 Local aModDlg, aDates := {"dd/mm/yy", "mm/dd/yy"}
 
-   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConfig()}
+   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {||InitConfig()}
    REDEFINE COMBOBOX aDates OF aModDlg ID IDC_COMBOBOX3
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndConfig()}   ;
-        ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {|| ServerButton(0)} ;
-        ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {|| ServerButton(1)}
+        ON 0, IDOK         ACTION {||EndConfig()}   ;
+        ON BN_CLICKED, IDC_RADIOBUTTON1 ACTION {||ServerButton(0)} ;
+        ON BN_CLICKED, IDC_RADIOBUTTON2 ACTION {||ServerButton(1)}
 
    aModDlg:Activate()
 
@@ -286,11 +286,11 @@ RETURN NIL
 FUNCTION NewIndex
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {|| InitNewIndex()}
+   INIT DIALOG aModDlg FROM RESOURCE "DIALOG_2" ON INIT {||InitNewIndex()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndNewIndex()}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
-        ON BN_CLICKED, IDC_CHECKBOX1 ACTION {|| TagName()}
+        ON 0, IDOK         ACTION {||EndNewIndex()}   ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}  ;
+        ON BN_CLICKED, IDC_CHECKBOX1 ACTION {||TagName()}
    aModDlg:Activate()
 
 RETURN NIL
@@ -410,9 +410,9 @@ RETURN NIL
 FUNCTION OpenDlg()
 Local aModDlg
 
-   INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {|| InitOpen()}
+   INIT DIALOG aModDlg FROM RESOURCE "DLG_OPEN" ON INIT {||InitOpen()}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndOpen()}  ;
+        ON 0, IDOK         ACTION {||EndOpen()}  ;
         ON BN_CLICKED, IDC_BUTTONBRW ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT7, hwg_SelectFile("xBase files( *.dbf )", "*.dbf", mypath))}
    aModDlg:Activate()
 
@@ -533,9 +533,9 @@ RETURN oWindow:handle
 FUNCTION Calcul()
 Local oModDlg
 
-   INIT DIALOG oModDlg FROM RESOURCE "DLG_CALC" ON INIT {|| InitCalc()}
+   INIT DIALOG oModDlg FROM RESOURCE "DLG_CALC" ON INIT {||InitCalc()}
    DIALOG ACTIONS OF oModDlg ;
-        ON 0, IDOK         ACTION {|| EndCalc()}
+        ON 0, IDOK         ACTION {||EndCalc()}
    oModDlg:Activate()
 
 RETURN NIL
@@ -571,8 +571,8 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_SCRI" ON INIT {||hwg_SetFocus(hwg_GetDlgItem(hwg_GetModalHandle(), IDC_EDIT8))}
    DIALOG ACTIONS OF aModDlg ;
-        ON 0, IDOK         ACTION {|| EndScri(nAct)}   ;
-        ON 0, IDCANCEL     ACTION {|| EndDialog(hwg_GetModalHandle())}  ;
+        ON 0, IDOK         ACTION {||EndScri(nAct)}   ;
+        ON 0, IDCANCEL     ACTION {||EndDialog(hwg_GetModalHandle())}  ;
         ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||hwg_SetDlgItemText(hwg_GetModalHandle(), IDC_EDIT8, hwg_SelectFile("Script files( *.scr )", "*.scr", mypath))}
    aModDlg:Activate()
 
