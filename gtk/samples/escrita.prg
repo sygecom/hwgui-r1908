@@ -74,9 +74,9 @@ INIT DIALOG oModDlg TITLE "Teste da Acentuação" ;
 
    ACTIVATE DIALOG oModDlg
 
-hwg_MsgInfo( meditbox )
-hwg_MsgInfo( OEDITBOX:TITLE )
-hwg_MsgInfo( mnome )
+hwg_MsgInfo(meditbox)
+hwg_MsgInfo(OEDITBOX:TITLE)
+hwg_MsgInfo(mnome)
 
 
 RETURN NIL

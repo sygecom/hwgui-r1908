@@ -240,7 +240,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
    PRIVATE nCalculo1
    PRIVATE ncalculo2
 
-   IF hwg_IsCtrlShift(.F., .T.) .AND. ( cNumero = "5" .OR. cNumero = "8" )
+   IF hwg_IsCtrlShift(.F., .T.) .AND. (cNumero = "5" .OR. cNumero = "8")
       cNumero := IIf(cNumero = "8", "*", IIf(cNumero = "5", "%", cNumero))
    ENDIF
    If cNumero $ "/*-+%="
@@ -308,7 +308,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
       Else
         nCalculo1 := ::aOperando[1]
         nCalculo2 := ::aOperando[2]
-        ::aOperando[1] := &( "nCalculo1" + cOperar + "nCalculo2" )
+        ::aOperando[1] := &("nCalculo1" + cOperar + "nCalculo2")
       EndIf
       ::aOperando[1] := IIf(::aOperando[1] - Int(::aOperando[1]) = 0 ,;
                           Int(::aOperando[1]), ::aOperando[1])

@@ -166,7 +166,7 @@ STATIC FUNCTION ChangeFont()
    MEMVAR oBrw
    MEMVAR oFont
 
-   IF ( oBrwFont := HFont():Select(oFont) ) != NIL
+   IF (oBrwFont := HFont():Select(oFont)) != NIL
 
       oFont := oBrwFont
       oBrw:oFont := oFont
@@ -210,8 +210,8 @@ STATIC FUNCTION SelectIndex()
       i ++
    ENDDO
 
-   width := Min(oBrw:width * ( iLen + 20 ), hwg_GetDesktopWidth())
-   height := oBrw:height * ( Len(aIndex) + 2 )
+   width := Min(oBrw:width * (iLen + 20), hwg_GetDesktopWidth())
+   height := oBrw:height * (Len(aIndex) + 2)
 
    INIT DIALOG oDlg TITLE "Select Order" ;
          AT 0, 0                  ;
@@ -286,7 +286,7 @@ STATIC FUNCTION NewIndex()
    oDlg:Activate()
 
    IF oDlg:lResult
-      IF !Empty(cName) .AND. ( !Empty(cTag) .OR. !lMulti ) .AND. ;
+      IF !Empty(cName) .AND. (!Empty(cTag) .OR. !lMulti) .AND. ;
             !Empty(cExpr)
          oMsg = DlgWait("Indexing")
          IF lMulti
@@ -367,11 +367,11 @@ STATIC FUNCTION UpdBrowse()
    MEMVAR oSay1
 
    IF OrdNumber() == 0
-      oBrw:bRcou := &( "{||" + oBrw:alias + "->(RECCOUNT())}" )
-      oBrw:bRecnoLog := &( "{||" + oBrw:alias + "->(RECNO())}" )
+      oBrw:bRcou := &("{||" + oBrw:alias + "->(RECCOUNT())}")
+      oBrw:bRecnoLog := &("{||" + oBrw:alias + "->(RECNO())}")
    ELSE
-      oBrw:bRcou := &( "{||" + oBrw:alias + "->(ORDKEYCOUNT())}" )
-      oBrw:bRecnoLog := &( "{||" + oBrw:alias + "->(ORDKEYNO())}" )
+      oBrw:bRcou := &("{||" + oBrw:alias + "->(ORDKEYCOUNT())}")
+      oBrw:bRecnoLog := &("{||" + oBrw:alias + "->(ORDKEYNO())}")
    ENDIF
    oBrw:Refresh()
    oSay1:SetValue("Records: " + LTrim(Str(Eval(oBrw:bRcou, oBrw))))

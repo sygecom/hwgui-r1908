@@ -19,19 +19,19 @@ CLASS HSayBmp INHERIT HSayImage
    DATA nOffsetH  INIT 0
    DATA nZoom
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
-                  bSize, ctoolt )
+   METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+                  bSize, ctoolt)
    METHOD INIT
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Paint()
-   METHOD ReplaceBitmap( Image, lRes )
+   METHOD ReplaceBitmap(Image, lRes)
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
-                  bSize, ctoolt ) CLASS HSayBmp
+METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+                  bSize, ctoolt) CLASS HSayBmp
 
-   ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctoolt )
+   ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctoolt)
 
    IF Image != NIL
       IF lRes == NIL ; lRes := .F. ; ENDIF
@@ -55,11 +55,11 @@ RETURN Self
 METHOD INIT CLASS HSayBmp
    IF !::lInit
       ::Super:Init()
-      hwg_SetWindowObject( ::handle, Self )
+      hwg_SetWindowObject(::handle, Self)
    ENDIF
 RETURN NIL
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HSayBmp
+METHOD onEvent(msg, wParam, lParam) CLASS HSayBmp
    IF msg == WM_PAINT
       ::Paint()
    ENDIF
@@ -70,18 +70,18 @@ Local hDC := hwg_GetDC(::handle)
 
    IF ::oImage != NIL
       IF ::nZoom == NIL
-         hwg_DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
-               ::nOffsetV, ::nWidth, ::nHeight )
+         hwg_DrawBitmap(hDC, ::oImage:handle,, ::nOffsetH, ;
+               ::nOffsetV, ::nWidth, ::nHeight)
       ELSE
-         hwg_DrawBitmap( hDC, ::oImage:handle,, ::nOffsetH, ;
-               ::nOffsetV, ::oImage:nWidth*::nZoom, ::oImage:nHeight*::nZoom )
+         hwg_DrawBitmap(hDC, ::oImage:handle,, ::nOffsetH, ;
+               ::nOffsetV, ::oImage:nWidth*::nZoom, ::oImage:nHeight*::nZoom)
       ENDIF
    ENDIF
    hwg_releaseDC(::handle, hDC)
 
 RETURN NIL
 
-METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
+METHOD ReplaceBitmap(Image, lRes) CLASS HSayBmp
 
    IF ::oImage != NIL
       ::oImage:Release()

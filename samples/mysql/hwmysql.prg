@@ -314,7 +314,7 @@ FUNCTION Execute()
       RETURN .F.
    ENDIF
    IF Left(cQuery, 2) == "//"
-      IF ( arScr := hwg_RdScript(, cQuery) ) != NIL
+      IF (arScr := hwg_RdScript(, cQuery)) != NIL
          hwg_DoScript(arScr)
       ELSE
          nError := hwg_CompileErr(@nLineEr)
@@ -340,7 +340,7 @@ FUNCTION execSQL(cQuery)
          RETURN .F.
       ENDIF
    ENDIF
-   IF ( res := sqlQuery(connHandle, cQuery)) != 0
+   IF (res := sqlQuery(connHandle, cQuery)) != 0
       cQuery := ""
       hwg_MsgInfo("Operation failed: " + Str(res) + "( " + sqlGetErr(connHandle) + " )")
       hwg_WriteStatus(Hwindow():GetMain(), 3, sqlGetErr(connHandle))
@@ -360,11 +360,11 @@ FUNCTION execSQL(cQuery)
          aQueries[i] := { Space(76), .F. }
          nHistCurr ++
       ENDIF
-      IF ( queHandle := sqlStoreR(connHandle) ) != 0
+      IF (queHandle := sqlStoreR(connHandle)) != 0
          sqlBrowse(queHandle)
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
-         IF ( nNumFields := sqlFiCou(connHandle) ) == 0
+         IF (nNumFields := sqlFiCou(connHandle)) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
             hwg_WriteStatus(Hwindow():GetMain(), 3, Str(sqlAffRows(connHandle)) + " rows updated.")
          ELSE
@@ -533,7 +533,7 @@ FUNCTION DoSQL(cQuery)
    IF sqlQuery(connHandle, cQuery) != 0
       RETURN {1}
    ELSE
-      IF ( qHandle := sqlStoreR(connHandle) ) != 0
+      IF (qHandle := sqlStoreR(connHandle)) != 0
          nNumRows := sqlNRows(qHandle)
          nNumFields := sqlNumFi(qHandle)
          aRes := { 0, Array(nNumFields), Array(nNumRows) }
@@ -562,7 +562,7 @@ FUNCTION FilExten(fname)
 
    LOCAL i
 
-RETURN IIf(( i := RAt(".", fname) ) = 0, "", SubStr(fname, i + 1))
+RETURN IIf((i := RAt(".", fname)) = 0, "", SubStr(fname, i + 1))
 
 FUNCTION SaveScript()
 

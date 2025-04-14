@@ -28,9 +28,9 @@ CLASS HTab INHERIT HControl
    DATA  oTemp
    DATA  bAction
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC,;
-                  bClick, bGetFocus, bLostFocus )
+                  bClick, bGetFocus, bLostFocus)
    METHOD Activate()
    METHOD Init()
    METHOD SetTab(n)
@@ -46,12 +46,12 @@ CLASS HTab INHERIT HControl
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, bClick, bGetFocus, bLostFocus  ) CLASS HTab
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, bClick, bGetFocus, bLostFocus) CLASS HTab
 LOCAL i, aBmpSize
 
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-                  bSize, bPaint )
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint)
 
    ::title   := ""
    ::oFont   := IIf(oFont == NIL, ::oParent:oFont, oFont)
@@ -71,8 +71,8 @@ RETURN Self
 METHOD Activate CLASS HTab
 
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateTabControl( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := hwg_CreateTabControl(::oParent:handle, ::id, ;
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
       ::Init()
    ENDIF
@@ -88,7 +88,7 @@ Local i, h
 	 AAdd(::aPages, {0, 0, .F., h})
       NEXT
       
-      hwg_SetWindowObject( ::handle, Self )
+      hwg_SetWindowObject(::handle, Self)
 
       FOR i := 2 TO Len(::aPages)
          ::HidePage(i)
@@ -103,7 +103,7 @@ RETURN NIL
 
 METHOD StartPage(cname) CLASS HTab
 Local i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
-Local lNew := ( i == 0 )
+Local lNew := (i == 0)
 
    ::oTemp := ::oDefaultParent
    ::oDefaultParent := Self
@@ -172,8 +172,8 @@ Local i, nFirst, nEnd
       ::aControls[i]:Show()
    NEXT
    FOR i := nFirst TO nEnd
-      IF __ObjHasMsg( ::aControls[i], "BSETGET" ) .AND. ::aControls[i]:bSetGet != NIL
-         hwg_SetFocus( ::aControls[i]:handle )
+      IF __ObjHasMsg(::aControls[i], "BSETGET") .AND. ::aControls[i]:bSetGet != NIL
+         hwg_SetFocus(::aControls[i]:handle)
          Exit
       ENDIF
    NEXT

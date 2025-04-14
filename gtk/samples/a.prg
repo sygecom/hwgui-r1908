@@ -76,8 +76,8 @@ Local nId
             ON EXIT {|o|Fileclose(o)}
 /*
       MENU OF oModDlg
-         MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont), oBrw:Refresh() )
-         MENUITEM "&Exit" ACTION EndDialog( oModDlg:handle )
+         MENUITEM "&Font" ACTION (oBrw:oFont:=HFont():Select(oFont), oBrw:Refresh())
+         MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 */
       @ 0, 0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
@@ -85,7 +85,7 @@ Local nId
             STYLE WS_VSCROLL + WS_HSCROLL          ;
             ON SIZE {|o, x, y|o:Move(,, x, y)}         ;
             ON GETFOCUS {|o|dbSelectArea(o:alias)}
-      hwg_CreateList( oBrw, .T. )
+      hwg_CreateList(oBrw, .T.)
       oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
       IF oFont != NIL
          oBrw:ofont := oFont
@@ -97,7 +97,7 @@ Local nId
 RETURN NIL
 
 FUNCTION FileClose(oDlg)
-   Local oBrw := oDlg:FindControl( 111 )
+   Local oBrw := oDlg:FindControl(111)
    dbSelectArea(oBrw:alias)
    dbCloseArea()
 RETURN .T.
@@ -119,7 +119,7 @@ Local cTitle := "Dialog from prg", cText := "Input something"
 Local oModDlg, oFont := HFont():Add("Serif", 0, -13), oTab
 Local cRes, aCombo := { "First", "Second" }, oEdit, vard := "Monday"
 
-   CheckMenuItem( , 1001, !IsCheckedMenuItem( , 1001 ) )
+   CheckMenuItem(, 1001, !IsCheckedMenuItem(, 1001))
    
    INIT DIALOG oModDlg TITLE cTitle           ;
    AT 210, 10  SIZE 300, 300                    ;
@@ -210,19 +210,19 @@ Local oPrinter, oFont
       RETURN NIL         
    ENDIF            
                               
-   oFont := oPrinter:AddFont( "Courier Regular", 10 )
+   oFont := oPrinter:AddFont("Courier Regular", 10)
                   
    oPrinter:StartDoc(.T., "/tmp/_a.ps")
    oPrinter:StartPage()
-   oPrinter:SetFont( oFont )
-   oPrinter:Box( 5, 5, oPrinter:nWidth-5, oPrinter:nHeight-5 )
-   oPrinter:Say( "Windows printing first sample !", 50, 10, 165, 26, DT_CENTER, oFont  )
+   oPrinter:SetFont(oFont)
+   oPrinter:Box(5, 5, oPrinter:nWidth-5, oPrinter:nHeight-5)
+   oPrinter:Say("Windows printing first sample !", 50, 10, 165, 26, DT_CENTER, oFont)
    oPrinter:Line(45, 30, 170, 30)
    oPrinter:Line(45, 5, 45, 30)
    oPrinter:Line(170, 5, 170, 30)
-   oPrinter:Say( "----------", 50, 120, 150, 132, DT_CENTER  )
-   oPrinter:Box( 50, 134, 160, 146 )
-   oPrinter:Say( "End Of Report", 50, 135, 160, 146, DT_CENTER  )
+   oPrinter:Say("----------", 50, 120, 150, 132, DT_CENTER)
+   oPrinter:Box(50, 134, 160, 146)
+   oPrinter:Say("End Of Report", 50, 135, 160, 146, DT_CENTER)
    oPrinter:EndPage()
    oPrinter:EndDoc()
    oPrinter:Preview()

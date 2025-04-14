@@ -63,7 +63,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
       ENDIF
       IF y != yy
          hwg_SetScrollPos(oDlg:handle, SB_VERT, y)
-         hwg_ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
+         hwg_ScrollWindow(oDlg:handle, 0, (yy - y) * nIncr)
       ENDIF
    ELSEIF msg == WM_HSCROLL
       hwg_SetScrollRange(oDlg:handle, SB_HORZ, 0, nIncr)
@@ -91,7 +91,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
       ENDIF
       IF x != xx
          hwg_SetScrollPos(oDlg:handle, SB_HORZ, x)
-         hwg_ScrollWindow(oDlg:handle, ( xx - x ) * nIncr, 0)
+         hwg_ScrollWindow(oDlg:handle, (xx - x) * nIncr, 0)
       ENDIF
    ELSEIF msg == WM_MOUSEWHEEL
       yy := y
@@ -107,7 +107,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
       ENDIF
       IF y != yy
          hwg_SetScrollPos(oDlg:handle, SB_VERT, y)
-         hwg_ScrollWindow(oDlg:handle, 0, ( yy - y ) * nIncr)
+         hwg_ScrollWindow(oDlg:handle, 0, (yy - y) * nIncr)
       ENDIF
    ENDIF
 

@@ -46,13 +46,13 @@ CLASS HWinPrn INHERIT HObject
    DATA   nRight    INIT 5
 
 
-   METHOD New( cPrinter, cpFrom, cpTo )
-   METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
+   METHOD New(cPrinter, cpFrom, cpTo)
+   METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
    METHOD SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
    METHOD StartDoc(lPreview, cMetaName)
    METHOD NextPage()
    METHOD PrintLine(cLine, lNewLine)
-   METHOD PrintText( cText )
+   METHOD PrintText(cText)
    METHOD PutCode(cText)
    METHOD EndDoc()
    METHOD End()
@@ -64,9 +64,9 @@ CLASS HWinPrn INHERIT HObject
 
 ENDCLASS
 
-METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
+METHOD New(cPrinter, cpFrom, cpTo) CLASS HWinPrn
 
-   ::oPrinter := HPrinter():New( IIf(cPrinter == NIL, "", cPrinter), .F. )
+   ::oPrinter := HPrinter():New(IIf(cPrinter == NIL, "", cPrinter), .F.)
    IF ::oPrinter == NIL
       RETURN NIL
    ENDIF
@@ -75,7 +75,7 @@ METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
 
 RETURN Self
 
-METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
+METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
 
    IF lElite != NIL; ::lElite := lElite;  ENDIF
    IF lCond != NIL; ::lCond := lCond;  ENDIF
@@ -96,7 +96,7 @@ Local cFont := "Lucida Console"
 Local aKoef := { 1, 1.22, 1.71, 2 }
 Local nMode := 0, oFont, nWidth, nPWidth
 
-   ::InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
+   ::InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 
    IF ::lPageStart
 
@@ -108,14 +108,14 @@ Local nMode := 0, oFont, nWidth, nPWidth
             nPWidth := 200
          ENDIF
 #ifdef __LINUX__
-         oFont := ::oPrinter:AddFont( cFont+"Regular", ::nStdHeight * ::oPrinter:nVRes )
+         oFont := ::oPrinter:AddFont(cFont+"Regular", ::nStdHeight * ::oPrinter:nVRes)
 #else
-         oFont := ::oPrinter:AddFont( cFont, ::nStdHeight * ::oPrinter:nVRes )
+         oFont := ::oPrinter:AddFont(cFont, ::nStdHeight * ::oPrinter:nVRes)
 #endif
-         ::oPrinter:SetFont( oFont )
-         nWidth := ::oPrinter:GetTextWidth( Replicate('A', 80) ) / ::oPrinter:nHRes
+         ::oPrinter:SetFont(oFont)
+         nWidth := ::oPrinter:GetTextWidth(Replicate('A', 80)) / ::oPrinter:nHRes
          IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
-            ::nStdHeight := ::nStdHeight * ( nPWidth / nWidth )
+            ::nStdHeight := ::nStdHeight * (nPWidth / nWidth)
          ENDIF
          oFont:Release()
       ENDIF
@@ -123,16 +123,16 @@ Local nMode := 0, oFont, nWidth, nPWidth
       IF ::lElite; nMode++; ENDIF
       IF ::lCond; nMode += 2; ENDIF
 
-      ::nLineHeight := ( ::nStdHeight / aKoef[nMode+1] ) * ::oPrinter:nVRes
-      ::nLined := ( 25.4 * ::oPrinter:nVRes ) / ::nLineInch - ::nLineHeight
+      ::nLineHeight := (::nStdHeight / aKoef[nMode+1]) * ::oPrinter:nVRes
+      ::nLined := (25.4 * ::oPrinter:nVRes) / ::nLineInch - ::nLineHeight
 
 #ifdef __LINUX__
       IF ::lBold; cFont += "Bold"; ENDIF
       IF ::lItalic; cFont += "Italic"; ENDIF
       IF !::lBold .AND. !::lItalic; cFont += "Regular"; ENDIF
-      oFont := ::oPrinter:AddFont( cFont, ::nLineHeight )
+      oFont := ::oPrinter:AddFont(cFont, ::nLineHeight)
 #else   
-      oFont := ::oPrinter:AddFont( "Lucida Console", ::nLineHeight, ::lBold, ::lItalic, ::lUnder, 204 )
+      oFont := ::oPrinter:AddFont("Lucida Console", ::nLineHeight, ::lBold, ::lItalic, ::lUnder, 204)
 #endif
 
       IF ::oFont != NIL
@@ -140,8 +140,8 @@ Local nMode := 0, oFont, nWidth, nPWidth
       ENDIF
       ::oFont := oFont
 
-      ::oPrinter:SetFont( ::oFont )
-      ::nCharW := ::oPrinter:GetTextWidth( "ABCDEFGHIJ" ) / 10
+      ::oPrinter:SetFont(::oFont)
+      ::nCharW := ::oPrinter:GetTextWidth("ABCDEFGHIJ") / 10
       ::lChanged := .F.
 
    ENDIF
@@ -171,7 +171,7 @@ METHOD NextPage() CLASS HWinPrn
    IF ::oFont == NIL
       ::SetMode()
    ELSE
-      ::oPrinter:SetFont( ::oFont )
+      ::oPrinter:SetFont(::oFont)
    ENDIF
 
    ::y := ::nTop * ::oPrinter:nVRes - ::nLineHeight + ::nLined
@@ -186,7 +186,7 @@ Local i, i0, j, slen, c
       ::StartDoc()
    ENDIF
 
-   IF ::y + 3 * ( ::nLineHeight + ::nLined ) > ::oPrinter:nHeight
+   IF ::y + 3 * (::nLineHeight + ::nLined) > ::oPrinter:nHeight
       ::NextPage()
    ENDIF
    ::x := ::nLeft * ::oPrinter:nHRes
@@ -201,16 +201,16 @@ Local i, i0, j, slen, c
       i := 1
       i0 := 0
       DO WHILE i <= slen
-         IF ( c := SubStr(cLine, i, 1) ) < " "
+         IF (c := SubStr(cLine, i, 1)) < " "
             IF i0 != 0
-               ::PrintText( SubStr(cLine, i0, i-i0 ) )
+               ::PrintText(SubStr(cLine, i0, i-i0 ))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
-         ELSEIF ( j := At( c, cPseudoChar ) ) != 0
+         ELSEIF (j := At(c, cPseudoChar)) != 0
             IF i0 != 0
-               ::PrintText( SubStr(cLine, i0, i-i0 ) )
+               ::PrintText(SubStr(cLine, i0, i-i0))
                i0 := 0
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
@@ -263,20 +263,20 @@ Local i, i0, j, slen, c
          i ++
       ENDDO
       IF i0 != 0
-         ::PrintText( SubStr(cLine, i0, i-i0 ) )
+         ::PrintText(SubStr(cLine, i0, i-i0))
       ENDIF
    ENDIF
 
 RETURN NIL
 
-METHOD PrintText( cText ) CLASS HWinPrn
+METHOD PrintText(cText) CLASS HWinPrn
 
    IF ::lChanged
       ::SetMode()
    ENDIF
-   ::oPrinter:Say( IIf(::cpFrom != ::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
-            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined )
-   ::x += ( ::nCharW * Len(cText) )
+   ::oPrinter:Say(IIf(::cpFrom != ::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
+            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
+   ::x += (::nCharW * Len(cText))
 
 RETURN NIL
 
@@ -299,8 +299,8 @@ Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen
-         IF Left(aCodes[i, 1], 1) == c .AND. At( aCodes[i, 1], Left(cLine, 3 ) ) == 1
-            ::InitValues( aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7]  )
+         IF Left(aCodes[i, 1], 1) == c .AND. At(aCodes[i, 1], Left(cLine, 3)) == 1
+            ::InitValues(aCodes[i, 2], aCodes[i, 3], aCodes[i, 4], aCodes[i, 5], aCodes[i, 6], aCodes[i, 7])
             RETURN Len(aCodes[i, 1])
          ENDIF
       NEXT
@@ -317,7 +317,7 @@ METHOD EndDoc() CLASS HWinPrn
    IF ::lDocStart
       ::oPrinter:EndDoc()
       ::lDocStart := .F.
-      IF __ObjHasMsg( ::oPrinter, "PREVIEW" ) .AND. ::oPrinter:lPreview
+      IF __ObjHasMsg(::oPrinter, "PREVIEW") .AND. ::oPrinter:lPreview
          ::oPrinter:Preview()
       ENDIF
    ENDIF

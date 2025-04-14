@@ -24,28 +24,28 @@ CLASS HSplitter INHERIT HControl
    DATA lMoved INIT .F.
    DATA bEndDrag
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-                  bSize, bPaint, color, bcolor, aLeft, aRight )
+   METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+                  bSize, bPaint, color, bcolor, aLeft, aRight)
    METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
-   METHOD Paint( lpdis )
+   METHOD Paint(lpdis)
    METHOD Move(x1, y1, width, height)
-   METHOD Drag( lParam )
+   METHOD Drag(lParam)
    METHOD DragAll()
 
 ENDCLASS
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-                  bSize, bDraw, color, bcolor, aLeft, aRight ) CLASS HSplitter
+METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+                  bSize, bDraw, color, bcolor, aLeft, aRight) CLASS HSplitter
 
-   ::Super:New( oWndParent, nId, WS_CHILD+WS_VISIBLE+SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
-                  bSize, bDraw,, color, bcolor )
+   ::Super:New(oWndParent, nId, WS_CHILD+WS_VISIBLE+SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
+                  bSize, bDraw,, color, bcolor)
 
    ::title   := ""
    ::aLeft   := IIf(aLeft == NIL, {}, aLeft)
    ::aRight  := IIf(aRight == NIL, {}, aRight)
-   ::lVertical := ( ::nHeight > ::nWidth )
+   ::lVertical := (::nHeight > ::nWidth)
 
    ::Activate()
 
@@ -53,26 +53,26 @@ RETURN Self
 
 METHOD Activate() CLASS HSplitter
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreateSplitter( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := hwg_CreateSplitter(::oParent:handle, ::id, ;
+                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 RETURN NIL
 
-METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
+METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == NIL
-         ::hCursor := hwg_LoadCursor( GDK_HAND1 )
+         ::hCursor := hwg_LoadCursor(GDK_HAND1)
       ENDIF
-      hwg_SetCursor( ::hCursor, ::handle )
+      hwg_SetCursor(::hCursor, ::handle)
       IF ::lCaptured
-         ::Drag( lParam )
+         ::Drag(lParam)
       ENDIF
    ELSEIF msg == WM_PAINT
       ::Paint()
    ELSEIF msg == WM_LBUTTONDOWN
-      hwg_SetCursor( ::hCursor, ::handle )
+      hwg_SetCursor(::hCursor, ::handle)
       ::lCaptured := .T.
    ELSEIF msg == WM_LBUTTONUP
       ::DragAll()
@@ -90,19 +90,19 @@ METHOD Init CLASS HSplitter
 
    IF !::lInit
       ::Super:Init()
-      hwg_SetWindowObject( ::handle, Self )
+      hwg_SetWindowObject(::handle, Self)
    ENDIF
 
 RETURN NIL
 
-METHOD Paint( lpdis ) CLASS HSplitter
+METHOD Paint(lpdis) CLASS HSplitter
 Local hDC
 
    IF ::bPaint != NIL
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
-      hwg_DrawButton( hDC, 0, 0, ::nWidth-1, ::nHeight-1, 6 )
+      hwg_DrawButton(hDC, 0, 0, ::nWidth-1, ::nHeight-1, 6)
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
@@ -113,7 +113,7 @@ METHOD Move(x1, y1, width, height)  CLASS HSplitter
    ::Super:Move(x1, y1, width, height, .T.)
 RETURN NIL
 
-METHOD Drag( lParam ) CLASS HSplitter
+METHOD Drag(lParam) CLASS HSplitter
 Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
@@ -147,10 +147,10 @@ Local i, oCtrl, nDiff
    FOR i := 1 TO Len(::aLeft)
       oCtrl := ::aLeft[i]
       IF ::lVertical
-         nDiff := ::nLeft - ( oCtrl:nLeft + oCtrl:nWidth )
+         nDiff := ::nLeft - (oCtrl:nLeft + oCtrl:nWidth)
          oCtrl:Move(, , oCtrl:nWidth + nDiff)
       ELSE
-         nDiff := ::nTop - ( oCtrl:nTop + oCtrl:nHeight )
+         nDiff := ::nTop - (oCtrl:nTop + oCtrl:nHeight)
          oCtrl:Move(, , , oCtrl:nHeight + nDiff)
       ENDIF
    NEXT

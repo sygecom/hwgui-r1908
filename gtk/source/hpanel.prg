@@ -15,10 +15,10 @@ CLASS HPanel INHERIT HControl
 
    DATA winclass   INIT "PANEL"
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  bInit, bSize, bPaint, lDocked )
+   METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, lDocked)
    METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
    METHOD Paint()
    METHOD Move(x1, y1, width, height)
@@ -26,14 +26,14 @@ CLASS HPanel INHERIT HControl
 ENDCLASS
 
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  bInit, bSize, bPaint, lDocked ) CLASS HPanel
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, lDocked) CLASS HPanel
 Local oParent:=IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    nStyle := SS_OWNERDRAW
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
                   nHeight, oParent:oFont, bInit, ;
-                  bSize, bPaint )
+                  bSize, bPaint)
 
    ::bPaint  := bPaint
 
@@ -44,18 +44,18 @@ RETURN Self
 METHOD Activate CLASS HPanel
 
    IF !Empty(::oParent:handle)
-      ::handle := hwg_CreatePanel( ::oParent:handle, ::id, ;
-                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+      ::handle := hwg_CreatePanel(::oParent:handle, ::id, ;
+                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
 RETURN NIL
 
-METHOD onEvent( msg, wParam, lParam )  CLASS HPanel
+METHOD onEvent(msg, wParam, lParam)  CLASS HPanel
 
    IF msg == WM_PAINT
       ::Paint()
    ELSE
-      RETURN ::Super:onEvent( msg, wParam, lParam )
+      RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
 
 RETURN 0
@@ -64,15 +64,15 @@ METHOD Init CLASS HPanel
 
    IF !::lInit
       IF ::bSize == NIL
-         IF ::nHeight!=0 .AND. ( ::nWidth>::nHeight .OR. ::nWidth == 0 )
+         IF ::nHeight!=0 .AND. (::nWidth>::nHeight .OR. ::nWidth == 0)
             ::bSize := {|o, x, y|o:Move(, IIf(::nTop > 0, y - ::nHeight, 0), x, ::nHeight)}
-         ELSEIF ::nWidth!=0 .AND. ( ::nHeight>::nWidth .OR. ::nHeight == 0 )
+         ELSEIF ::nWidth!=0 .AND. (::nHeight>::nWidth .OR. ::nHeight == 0)
             ::bSize := {|o, x, y|o:Move(IIf(::nLeft > 0, x - ::nLeft, 0), , ::nWidth, y)}
          ENDIF
       ENDIF
 
       ::Super:Init()
-      hwg_SetWindowObject( ::handle, Self )
+      hwg_SetWindowObject(::handle, Self)
    ENDIF
 
 RETURN NIL
@@ -84,7 +84,7 @@ Local hDC, aCoors, oPenLight, oPenGray
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
-      hwg_DrawButton( hDC, 0, 0, ::nWidth-1, ::nHeight-1, 5 )
+      hwg_DrawButton(hDC, 0, 0, ::nWidth-1, ::nHeight-1, 5)
       hwg_releaseDC(::handle, hDC)
    ENDIF
 

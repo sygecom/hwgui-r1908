@@ -22,7 +22,7 @@ CLASS HTimer INHERIT HObject
    DATA oParent
    DATA bAction
 
-   METHOD New( oParent, id, value, bAction )
+   METHOD New(oParent, id, value, bAction)
    METHOD Init()
    METHOD onAction()
 
@@ -35,7 +35,7 @@ CLASS HTimer INHERIT HObject
 
 ENDCLASS
 
-METHOD New( oParent, nId, value, bAction ) CLASS HTimer
+METHOD New(oParent, nId, value, bAction) CLASS HTimer
 
    ::oParent := IIf(oParent == NIL, HWindow():GetMain(), oParent)
    IF nId == NIL
@@ -49,19 +49,19 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
    ::value   := value
    ::bAction := bAction
 
-//   ::tag := hwg_SetTimer( ::id, ::value )
+//   ::tag := hwg_SetTimer(::id, ::value)
 
    */
    ::value   := IIf(HB_IsNumeric(value), value, 0)
    ::bAction := bAction
    /*
     if ::value > 0
-      SetTimer( oParent:handle, ::id, ::value )
+      SetTimer(oParent:handle, ::id, ::value)
    endif
    */
    ::Init()
    AAdd(::aTimers, Self)
-   ::oParent:AddObject( Self )
+   ::oParent:AddObject(Self)
 
 
 
@@ -72,7 +72,7 @@ RETURN Self
 METHOD End() CLASS HTimer
 Local i
 
-   hwg_KillTimer( ::tag )
+   hwg_KillTimer(::tag)
    i := AScan(::aTimers, {|o|o:id == ::id})
    IF i != 0
       ADel(::aTimers, i)
@@ -84,7 +84,7 @@ RETURN NIL
 METHOD Init CLASS HTimer
    IF ! ::lInit
       IF ::value > 0
-         ::tag := hwg_SetTimer( ::id, ::value )
+         ::tag := hwg_SetTimer(::id, ::value)
       ENDIF
    ENDIF
    RETURN  NIL
@@ -102,7 +102,7 @@ FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
    HB_SYMBOL_UNUSED(hWnd)
 
    IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != NIL .AND.;
-      HB_IsBlock( HTimer():aTimers[i]:bAction )
+      HB_IsBlock(HTimer():aTimers[i]:bAction)
       Eval(HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time)
    ENDIF
 
@@ -113,7 +113,7 @@ Local oTimer, i
 
    For i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]
-      hwg_KillTimer( oTimer:tag )
+      hwg_KillTimer(oTimer:tag)
    NEXT
 
 RETURN

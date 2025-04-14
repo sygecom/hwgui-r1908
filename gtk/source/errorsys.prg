@@ -16,12 +16,12 @@ STATIC LogInitialPath := ""
 
 PROCEDURE ErrorSys
 
-   ErrorBlock( { | oError | DefError( oError ) } )
+   ErrorBlock({ | oError | DefError(oError) })
    LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
 
    RETURN
 
-STATIC FUNCTION DefError( oError )
+STATIC FUNCTION DefError(oError)
    LOCAL cMessage
    LOCAL cDOSError
 
@@ -39,14 +39,14 @@ STATIC FUNCTION DefError( oError )
    IF oError:genCode == EG_OPEN .AND. ;
       oError:osCode == 32 .AND. ;
       oError:canDefault
-      NetErr( .T. )
+      NetErr(.T.)
       RETURN .F.
    ENDIF
 
    // Set NetErr() if there was a lock error on dbAppend()
    IF oError:genCode == EG_APPENDLOCK .AND. ;
       oError:canDefault
-      NetErr( .T. )
+      NetErr(.T.)
       RETURN .F.
    ENDIF
 
@@ -68,8 +68,8 @@ STATIC FUNCTION DefError( oError )
       #endif
    ENDDO
 
-   MemoWrit( LogInitialPath+"Error.log", cMessage )
-   ErrorPreview( cMessage )
+   MemoWrit(LogInitialPath+"Error.log", cMessage)
+   ErrorPreview(cMessage)
    hwg_gtk_exit()
    QUIT
 
@@ -83,7 +83,7 @@ FUNCTION hwg_ErrorMessage(oError)
    cMessage := IIf(oError:severity > ES_WARNING, "Error", "Warning") + " "
 
    // add subsystem name if available
-   IF HB_IsChar( oError:subsystem )
+   IF HB_IsChar(oError:subsystem)
       cMessage += oError:subsystem()
    ELSE
       cMessage += "???"
@@ -97,7 +97,7 @@ FUNCTION hwg_ErrorMessage(oError)
    ENDIF
 
    // add error description if available
-   IF HB_IsChar( oError:description )
+   IF HB_IsChar(oError:description)
       cMessage += "  " + oError:description
    ENDIF
 
@@ -111,7 +111,7 @@ FUNCTION hwg_ErrorMessage(oError)
 
    RETURN cMessage
 
-FUNCTION WriteLog( cText, fname )
+FUNCTION WriteLog(cText, fname)
 Local nHand
 
   fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
@@ -126,7 +126,7 @@ Local nHand
 
 RETURN NIL
 
-STATIC FUNCTION ErrorPreview( cMess )
+STATIC FUNCTION ErrorPreview(cMess)
 Local oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;

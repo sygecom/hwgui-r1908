@@ -131,7 +131,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
    IF nScrollCode == SB_LINEDOWN
       IF nStepV < SCROLLVRANGE
          nStepV ++
-         stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
+         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -139,7 +139,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepV > 0
          nStepV --
-         stepV := Round(( Round(oImage:nHeight * nKoef, 0) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0)
+         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -229,13 +229,13 @@ STATIC FUNCTION FileOpen(oWnd)
       hwg_ShowScrollBar(oWnd:handle, SB_VERT, lScrollV)
 
       aCoors := hwg_GetClientRect(oWnd:handle)
-      nVert := ( oWnd:nHeight - aCoors[4] )
-      nHorz := ( oWnd:nWidth-aCoors[3] )
+      nVert := (oWnd:nHeight - aCoors[4])
+      nHorz := (oWnd:nWidth-aCoors[3])
       DO WHILE .T.
          oWnd:nWidth := Round(oImage:nWidth * nKoef, 0) + nHorz
          oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
 
-         IF ( oWnd:nWidth <= aScreen[3] .AND. oWnd:nHeight <= aScreen[4] ) .OR. nKoef < 0.15
+         IF (oWnd:nWidth <= aScreen[3] .AND. oWnd:nHeight <= aScreen[4]) .OR. nKoef < 0.15
             IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
                oWnd:nLeft := 0
             ENDIF
@@ -273,8 +273,8 @@ STATIC FUNCTION Zoom(oWnd, nOp)
       RETURN NIL
    ENDIF
    aCoors := hwg_GetClientRect(oWnd:handle)
-   nVert := ( oWnd:nHeight - aCoors[4] )
-   nHorz := ( oWnd:nWidth-aCoors[3] )
+   nVert := (oWnd:nHeight - aCoors[4])
+   nHorz := (oWnd:nWidth-aCoors[3])
 
    IF nOp < 0 .AND. nKoef > 0.11
       nKoef -= 0.1

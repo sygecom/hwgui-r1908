@@ -131,12 +131,12 @@ FUNCTION CreateChildWindow()
         PICTURE "@e 999,999,999.99"     ;
         SIZE 260, 25
 
-   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||( hwg_MsgInfo(e1 + Chr(10) + Chr(13) + ;
+   @ 20, 190  BUTTONEX "Ok" SIZE 100, 32 ON CLICK {||(hwg_MsgInfo(e1 + Chr(10) + Chr(13) + ;
                Dtoc(e2) + Chr(10) + Chr(13) + ;
                Str(e3) + Chr(10) + Chr(13) +  ;
                e4 + Chr(10) + Chr(13) +       ;
                Str(e5) + Chr(10) + Chr(13)    ;
-               , "Results:"), oChildWnd:Close() )}
+               , "Results:"), oChildWnd:Close())}
    @ 180, 190 BUTTONEX "Cancel" SIZE 100, 32 ON CLICK {||oChildWnd:Close()}
 
    oChildWnd:Activate()
@@ -348,7 +348,7 @@ FUNCTION FileOpen()
             ON EXIT {|o|Fileclose(o)}
 
       MENU OF oModDlg
-         MENUITEM "&Font" ACTION ( oBrw:oFont := HFont():Select(oFont), oBrw:Refresh() )
+         MENUITEM "&Font" ACTION (oBrw:oFont := HFont():Select(oFont), oBrw:Refresh())
          MENUITEM "&Exit" ACTION EndDialog(oModDlg:handle)
       ENDMENU
 

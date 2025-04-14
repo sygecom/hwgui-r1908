@@ -40,7 +40,7 @@ Private oSayT
 
    INIT DIALOG oModDlg CLIPPER NOEXIT TITLE "Get a value"  ;
    AT 210, 10  SIZE 300, 320 ;
-   ON INIT {|| SetTimer(oModDlg, @oTimer)}   
+   ON INIT {|| SetTimer(oModDlg, @oTimer)}
    // FONT oFont  
 
    SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 
@@ -79,29 +79,29 @@ Private oSayT
    @ 100, 295 SAY oSayT CAPTION "" SIZE 100, 22 STYLE WS_BORDER + SS_CENTER ;
          COLOR 10485760 BACKCOLOR 12507070
 
-   ReadExit( .T. )
+   ReadExit(.T.)
    ACTIVATE DIALOG oModDlg
 
    oTimer:End()
 
-   // writelog( "End" )
+   // writelog("End")
    IF oModDlg:lResult
-      hwg_MsgInfo( e1 + chr(10) + chr(13) +       ;
+      hwg_MsgInfo(e1 + chr(10) + chr(13) +       ;
                e6 + chr(10) + chr(13) +       ;
                Dtoc(e2) + chr(10) + chr(13) + ;
                Str(e3) + chr(10) + chr(13) +  ;
                e4 + chr(10) + chr(13) +       ;
                Str(e5) + chr(10) + chr(13) +  ;
                e7 + chr(10) + chr(13)         ;
-               , "Results:" )
+               , "Results:")
    ENDIF
 
 RETURN NIL
 
-STATIC FUNCTION SetTimer( oDlg, oTimer )
+STATIC FUNCTION SetTimer(oDlg, oTimer)
 
    SET TIMER oTimer OF oDlg VALUE 1000 ACTION {||TimerFunc()}
-//   writelog( ValType(oTimer) )
+//   writelog(ValType(oTimer))
 RETURN NIL
 
 STATIC FUNCTION TimerFunc()

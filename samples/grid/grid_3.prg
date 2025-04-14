@@ -14,7 +14,7 @@
 #include "hwgui.ch"
 #include <common.ch>
 
-#translate RGB(<nRed>, <nGreen>, <nBlue>) => ( <nRed> + ( <nGreen> * 256 ) + ( <nBlue> * 65536 ) )
+#translate RGB(<nRed>, <nGreen>, <nBlue>) => (<nRed> + (<nGreen> * 256) + (<nBlue> * 65536))
 
 STATIC oMain
 STATIC oForm

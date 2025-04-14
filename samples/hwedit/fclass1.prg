@@ -216,13 +216,13 @@ METHOD getFilePath(xItem) CLASS FileMan                   // Obtains file path b
 
    IF ::nLastDosMessage == 0
       DO CASE
-         CASE ( xItem IS pCHARACTER )   // we've got the file name
+         CASE (xItem IS pCHARACTER)   // we've got the file name
             nPosition := AScan(::aDosHandles, {|aFile|xItem == aFile[pDOS_FILE]})
             IF nPosition != 0
                cPath := ::aDosHandles[nPosition, pDOS_PATH]
             ENDIF
 
-         CASE ( xItem IS pNUMERIC )     // we've got the file path
+         CASE (xItem IS pNUMERIC)     // we've got the file path
             nPosition := AScan(::aDosHandles, {|aFile|xItem == aFile[pDOS_HANDLE]})
             IF nPosition != 0
                cPath := ::aDosHandles[nPosition, pDOS_PATH]
@@ -280,7 +280,7 @@ METHOD delItem(xItem) CLASS FileMan
 
    IF ::nLastDosMessage == 0            // No DOS error!
       DO CASE
-         CASE ( xItem IS pNUMERIC )     // It's a DOS file handle
+         CASE (xItem IS pNUMERIC)     // It's a DOS file handle
             nPosition := AScan(::aDosHandles, {|aItem|xItem == aItem[pDOS_HANDLE]})
             IF nPosition == 0
                // Don't remove and set the return value of the function
@@ -292,7 +292,7 @@ METHOD delItem(xItem) CLASS FileMan
                ASIZE(::aDosHandles, Len(::aDosHandles) - 1)
             ENDIF
 
-         CASE ( xItem IS pCHARACTER )   // It's a file name
+         CASE (xItem IS pCHARACTER)   // It's a file name
             nPosition := AScan(::aDosHandles, {|aItem|xItem == aItem[pDOS_FILE]})
             IF nPosition == 0
                // Don't remove and set the return value of the function

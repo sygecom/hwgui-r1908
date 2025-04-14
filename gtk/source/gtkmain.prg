@@ -16,7 +16,7 @@ FUNCTION hwg_EndWindow()
    ENDIF
 RETURN NIL
 
-FUNCTION hwg_VColor( cColor )
+FUNCTION hwg_VColor(cColor)
 Local i, res := 0, n := 1, iValue
    cColor := Trim(cColor)
    for i := 1 to Len(cColor)
@@ -35,7 +35,7 @@ Local i, res := 0, n := 1, iValue
    next
 RETURN res
 
-FUNCTION hwg_MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle )
+FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle)
 Local oModDlg, oFont := HFont():Add("Sans", 0, 12)
 Local cRes := ""
 
@@ -74,24 +74,24 @@ Local hDC, aMetr, width, height, screenh
    IF nTop == NIL; nTop := 10; ENDIF
    IF oFont == NIL; oFont := HFont():Add("Times", 0, 12); ENDIF
 
-   IF HB_IsArray( arr[1] )
+   IF HB_IsArray(arr[1])
       FOR i := 1 TO aLen
-         nLen := Max( nLen, Len(arr[i, 1]) )
+         nLen := Max(nLen, Len(arr[i, 1]))
       NEXT
    ELSE
       FOR i := 1 TO aLen
-         nLen := Max( nLen, Len(arr[i]) )
+         nLen := Max(nLen, Len(arr[i]))
       NEXT
    ENDIF
 
    hDC := hwg_GetDC(hwg_GetActiveWindow())
-   hwg_SelectObject( hDC, ofont:handle )
+   hwg_SelectObject(hDC, ofont:handle)
    aMetr := hwg_GetTextMetric(hDC)
    hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
    height := (aMetr[1]+1)*aLen+4+addY
    screenh := hwg_GETDESKTOPHEIGHT()
    IF height > screenh * 2/3
-      height := Int( screenh *2/3 )
+      height := Int(screenh *2/3)
       addX := addY := 0
    ENDIF
    width := (Round((aMetr[3] + aMetr[2]) / 2, 0) + 3) * nLen + addX
@@ -108,12 +108,12 @@ Local hDC, aMetr, width, height, screenh
        ON SIZE {|o, x, y|o:Move(,, x, y)} ;
        ON CLICK {|o|nChoice:=o:nCurrent, EndDialog(o:oParent:handle)}
 
-   IF HB_IsArray( arr[1] )
-      oBrw:AddColumn( HColumn():New( , {|value, o|o:aArray[o:nCurrent, 1]}, "C", nLen ) )
+   IF HB_IsArray(arr[1])
+      oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent, 1]}, "C", nLen))
    ELSE
-      oBrw:AddColumn( HColumn():New( , {|value, o|o:aArray[o:nCurrent]}, "C", nLen ) )
+      oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent]}, "C", nLen))
    ENDIF
-   hwg_CreateArList( oBrw, arr )
+   hwg_CreateArList(oBrw, arr)
    oBrw:lDispHead := .F.
    IF clrT != NIL
       oBrw:tcolor := clrT
@@ -144,7 +144,7 @@ EXIT PROCEDURE GTKEXIT()
 RETURN
 */
 
-FUNCTION hwg_RefreshAllGets( oDlg )
+FUNCTION hwg_RefreshAllGets(oDlg)
 
    AEval(oDlg:GetList, {|o|o:Refresh()})
 RETURN NIL
@@ -152,11 +152,11 @@ RETURN NIL
 FUNCTION HWG_Version(oTip)
 RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
 
-FUNCTION hwg_WriteStatus( oWnd, nPart, cText, lRedraw )
+FUNCTION hwg_WriteStatus(oWnd, nPart, cText, lRedraw)
 Local aControls, i
    aControls := oWnd:aControls
-   IF ( i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"}) ) > 0
-      hwg_WriteStatusWindow( aControls[i]:handle, nPart-1, cText )
+   IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
+      hwg_WriteStatusWindow(aControls[i]:handle, nPart-1, cText)
 
    ENDIF
 RETURN NIL

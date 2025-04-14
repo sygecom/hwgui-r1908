@@ -29,9 +29,9 @@ CLASS HMonthCalendar INHERIT HControl
    DATA value
    DATA bChange
 
-   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
                oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-               lWeekNumbers )
+               lWeekNumbers)
    METHOD Activate()
    METHOD Init()
    METHOD SetValue(dValue)
@@ -41,24 +41,24 @@ ENDCLASS
 
 //--------------------------------------------------------------------------//
 
-METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-            lWeekNumbers ) CLASS HMonthCalendar
+            lWeekNumbers) CLASS HMonthCalendar
 
-//   nStyle := hwg_BitOr( IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP )
+//   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
 //   nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
 //   nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
 //   nStyle   += IIf(lWeekNumbers == NIL .OR. !lWeekNumbers, 0, MCS_WEEKNUMBERS)
-   ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-                  ,, ctooltip )
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  ,, ctooltip)
 
    ::value   := IIf(HB_IsDate(vari) .AND. !Empty(vari), vari, Date())
 
    ::bChange := bChange
 
 //   If bChange != NIL 
-//      ::oParent:AddEvent( MCN_SELECT, ::id, bChange, .T. ) 
-//      ::oParent:AddEvent( MCN_SELCHANGE, ::id, bChange, .T. ) 
+//      ::oParent:AddEvent(MCN_SELECT, ::id, bChange, .T.)
+//      ::oParent:AddEvent(MCN_SELCHANGE, ::id, bChange, .T.)
 //   EndIf 
 
    ::Activate()
@@ -69,9 +69,9 @@ RETURN Self
 METHOD Activate CLASS HMonthCalendar
 
    If !Empty(::oParent:handle)
-      ::handle := hwg_InitMonthCalendar( ::oParent:handle, , ;
-                  ::nLeft, ::nTop, ::nWidth, ::nHeight )
-      hwg_SetWindowObject( ::handle, Self )
+      ::handle := hwg_InitMonthCalendar(::oParent:handle, , ;
+                  ::nLeft, ::nTop, ::nWidth, ::nHeight)
+      hwg_SetWindowObject(::handle, Self)
 //      MonthCalendarChange(::handle, {||
         hwg_MONTHCALENDAR_SETACTION(::handle, {||::value:=hwg_GetMonthCalendarDate(::handle)})
       ::Init()
