@@ -1650,4 +1650,11 @@ ComboBox
 
 #define NM_RETURN              - 4  // (NM_FIRST-4)
 
+// from hstatus.prg
+//#define NM_FIRST                 (0 - 0)
+//#define NM_CLICK                (NM_FIRST-2)    // uses NMCLICK struct
+//#define NM_DBLCLK               (NM_FIRST-3) // defined in windows.ch
+#define NM_RCLICK               (NM_FIRST-5)    // uses NMCLICK struct
+#define NM_RDBLCLK              (NM_FIRST-6)
+
 #endif // _WINDOWS_CH_

@@ -23,7 +23,7 @@
 #define TVM_SETITEM          4426   // (TV_FIRST + 63)
 #define TVM_SETITEMHEIGHT    4379   // (TV_FIRST + 27)
 #define TVM_GETITEMHEIGHT    4380
-#define TVM_SETLINECOLOR     4392 
+#define TVM_SETLINECOLOR     4392
 
 #define TVE_COLLAPSE            0x0001
 #define TVE_EXPAND              0x0002
@@ -82,7 +82,7 @@
 
 //#define NM_CLICK                -2
 //#define NM_DBLCLK               -3 // defined in windows.ch
-#define NM_RCLICK               -5
+//#define NM_RCLICK               -5 // defined in windows.ch
 //#define NM_KILLFOCUS            -8 // defined in windows.ch
 #define NM_SETCURSOR            -17    // uses NMMOUSE struct
 #define NM_CHAR                 -18   // uses NMCHAR struct
