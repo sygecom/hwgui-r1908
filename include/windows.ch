@@ -1638,4 +1638,16 @@ ComboBox
 #define NM_KILLFOCUS -8
 #define NM_SETFOCUS -7
 
+#define LVS_REPORT              1
+#define LVS_SINGLESEL           4
+#define LVS_SHOWSELALWAYS       8
+#define LVS_OWNERDATA        4096
+
+#define LVN_ITEMCHANGED      - 101
+#define LVN_KEYDOWN          - 155
+#define LVN_GETDISPINFO      - 150
+#define NM_DBLCLK              - 3 // TODO: (NM_FIRST-3)
+
+#define NM_RETURN              - 4  // (NM_FIRST-4)
+
 #endif // _WINDOWS_CH_

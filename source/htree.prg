@@ -81,7 +81,7 @@
 #define TREE_SETITEM_CHECK          2
 
 //#define NM_CLICK                -2
-#define NM_DBLCLK               -3
+//#define NM_DBLCLK               -3 // defined in windows.ch
 #define NM_RCLICK               -5
 //#define NM_KILLFOCUS            -8 // defined in windows.ch
 #define NM_SETCURSOR            -17    // uses NMMOUSE struct

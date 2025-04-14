@@ -14,7 +14,7 @@
 
 //#define NM_FIRST                 (0 - 0)
 //#define NM_CLICK                (NM_FIRST-2)    // uses NMCLICK struct
-#define NM_DBLCLK               (NM_FIRST-3)
+//#define NM_DBLCLK               (NM_FIRST-3) // defined in windows.ch
 #define NM_RCLICK               (NM_FIRST-5)    // uses NMCLICK struct
 #define NM_RDBLCLK              (NM_FIRST-6)
 
