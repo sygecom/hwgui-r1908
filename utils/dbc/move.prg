@@ -1,10 +1,10 @@
-/*
- * DBCHW - DBC ( Harbour + HWGUI )
- * Move functions ( Locate, seek, ... )
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// DBCHW - DBC ( Harbour + HWGUI )
+// Move functions ( Locate, seek, ... )
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include "windows.ch"
 #include "guilib.ch"

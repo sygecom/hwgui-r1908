@@ -1,10 +1,10 @@
-/*
- * Repbuild - Visual Report Builder
- * Open/save functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// Repbuild - Visual Report Builder
+// Open/save functions
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include "windows.ch"
 #include "guilib.ch"

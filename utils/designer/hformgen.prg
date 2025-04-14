@@ -1,12 +1,12 @@
-/*
- * $Id: hformgen.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * Designer
- * HFormGen class
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
-*/
+//
+// $Id: hformgen.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// Designer
+// HFormGen class
+//
+// Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://kresin.belgorod.su
+//
 
 #include <fileio.ch>
 #include "windows.ch"

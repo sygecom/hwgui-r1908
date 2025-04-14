@@ -1,12 +1,12 @@
-/*
- *$Id: hwmake.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library 
- * 
- * HwMake
- * Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
- * www - http://www.hwgui.net
-*/
+//
+// $Id: hwmake.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+//
+// HWGUI - Harbour Win32 GUI library
+//
+// HwMake
+// Copyright 2004 Sandro R. R. Freire <sandrorrfreire@yahoo.com.br>
+// www - http://www.hwgui.net
+//
 
 #include "windows.ch"
 #include "guilib.ch"

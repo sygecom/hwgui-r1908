@@ -1,9 +1,9 @@
-/*
- * Example of printing reports, using HWReport
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
-*/
+//
+// Example of printing reports, using HWReport
+//
+// Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+// www - http://www.geocities.com/alkresin/
+//
 
 #include <fileio.ch>
 #include "windows.ch"
