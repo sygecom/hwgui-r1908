@@ -23,8 +23,8 @@
 #define LVN_GETDISPINFO      - 150
 #define NM_DBLCLK              - 3
 #define NM_RETURN              - 4  // (NM_FIRST-4)
-#define NM_SETFOCUS            - 7
-#define NM_KILLFOCUS           - 8
+//#define NM_SETFOCUS            - 7 // defined in windows.ch
+//#define NM_KILLFOCUS           - 8 // defined in windows.ch
 
 
 CLASS HGridEX INHERIT HControl

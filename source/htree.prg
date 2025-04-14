@@ -83,7 +83,7 @@
 //#define NM_CLICK                -2
 #define NM_DBLCLK               -3
 #define NM_RCLICK               -5
-#define NM_KILLFOCUS            -8
+//#define NM_KILLFOCUS            -8 // defined in windows.ch
 #define NM_SETCURSOR            -17    // uses NMMOUSE struct
 #define NM_CHAR                 -18   // uses NMCHAR struct
 
