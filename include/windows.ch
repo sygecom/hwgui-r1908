@@ -1624,4 +1624,11 @@ ComboBox
 #define CBN_SELENDOK        9
 #define CBN_SELENDCANCEL   10
 
+// Month Calendar Control Styles
+#define MCS_DAYSTATE             1
+#define MCS_MULTISELECT          2
+#define MCS_WEEKNUMBERS          4
+#define MCS_NOTODAYCIRCLE        8
+#define MCS_NOTODAY             16
+
 #endif // _WINDOWS_CH_

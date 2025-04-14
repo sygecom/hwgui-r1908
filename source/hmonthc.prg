@@ -13,12 +13,6 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-#define MCS_DAYSTATE             1
-#define MCS_MULTISELECT          2
-#define MCS_WEEKNUMBERS          4
-#define MCS_NOTODAYCIRCLE        8
-#define MCS_NOTODAY             16
-
 //--------------------------------------------------------------------------//
 
 CLASS HMonthCalendar INHERIT HControl
