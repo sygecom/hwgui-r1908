@@ -83,7 +83,7 @@ METHOD New() CLASS HFormGen
 
    hwg_DeleteDC(hDCwindow)
    DO WHILE .T.
-      name := "Form"+LTrim(Str(i))
+      name := "Form" + LTrim(Str(i))
       IF AScan(::aForms, {|o|o:name == name}) == 0
         Exit
       ENDIF
@@ -437,7 +437,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
    LOCAL aCoors := hwg_GetClientRect(oDlg:handle)
    MEMVAR oDesigner
 
-   // Writelog("dlgOnSize "+Str(h)+Str(w))
+   // Writelog("dlgOnSize " + Str(h)+Str(w))
    IF !oDesigner:lReport
      // : LFB
       IF  h=aCoors[3] .AND. w=aCoors[4]
@@ -517,7 +517,7 @@ STATIC FUNCTION FileDlg(oFrm, lOpen)
        AT 50, 100 SIZE 310, 250 FONT oDesigner:oMainWnd:oFont
 
    @ 10, 20 GET COMBOBOX nType ITEMS aCombo SIZE 140, 24 ;
-       ON CHANGE {||IIf(lOpen, .F.,(fname := hwg_CutExten(fname)+IIf(!Empty(fname), "."+aFormats[af[nType], 2], ""), oEdit1:Refresh()))}
+       ON CHANGE {||IIf(lOpen, .F.,(fname := hwg_CutExten(fname)+IIf(!Empty(fname), "." + aFormats[af[nType], 2], ""), oEdit1:Refresh()))}
 
    @ 10, 70 GET oEdit1 VAR fname  ;
         STYLE ES_AUTOHSCROLL      ;
@@ -539,7 +539,7 @@ STATIC FUNCTION FileDlg(oFrm, lOpen)
       oFrm:type := af[nType]
       oFrm:filename := hwg_CutPath(fname)
       IF Empty(hwg_FilExten(oFrm:filename))
-         oFrm:filename += "."+aFormats[af[nType], 2]
+         oFrm:filename += "." + aFormats[af[nType], 2]
       ENDIF
       oFrm:path := IIf(Empty(hwg_FilePath(fname)), oDesigner:ds_mypath, hwg_FilePath(fname))
       RETURN .T.
@@ -701,7 +701,7 @@ STATIC FUNCTION ReadForm(oForm, cForm)
    MEMVAR oDesigner
 
    IF Empty(oDoc:aItems)
-      hwg_MsgStop("Can't open "+oForm:path+oForm:filename, "Designer")
+      hwg_MsgStop("Can't open " + oForm:path+oForm:filename, "Designer")
       RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != IIf(oDesigner:lReport, "report", "form")
       hwg_MsgStop("Form description isn't found", "Designer")
@@ -1208,8 +1208,8 @@ STATIC FUNCTION MessagesProc(oDlg, msg, wParam, lParam)
       ENDIF
       // :LFB
       IF oCtrl != NIL
-         statusbarmsg(, "x: "+lTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
-         "w: "+LTrim(Str(oCtrl:nWidth))+"  h: "+LTrim(Str(oCtrl:nHeight)))
+         statusbarmsg(, "x: " + lTrim(Str(oCtrl:nLeft)) + "  y: " + LTrim(Str(oCtrl:nTop)), ;
+         "w: " + LTrim(Str(oCtrl:nWidth)) + "  h: " + LTrim(Str(oCtrl:nHeight)))
       ELSE
          statusbarmsg(, "", "")
          ENDIF
@@ -1229,7 +1229,7 @@ STATIC FUNCTION ScrollProc(oDlg, msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(lParam)
 
-   // writelog("> "+Str(msg)+Str(wParam)+Str(lParam))
+   // writelog("> " + Str(msg)+Str(wParam)+Str(lParam))
    IF msg == WM_VSCROLL
       x := oDlg:oParent:nYOffset
       aCoors := hwg_GetClientRect(oDlg:handle)
@@ -1403,8 +1403,8 @@ STATIC FUNCTION LButtonDown(oDlg, xPos, yPos)
    ENDIF
    // :LFB
    IF oCtrl != NIL
-     statusbarmsg(, "x: "+LTrim(Str(oCtrl:nLeft))+"  y: "+LTrim(Str(oCtrl:nTop)),;
-         "w: "+LTrim(Str(oCtrl:nWidth))+"  h: "+LTrim(Str(oCtrl:nHeight)))
+     statusbarmsg(, "x: " + LTrim(Str(oCtrl:nLeft)) + "  y: " + LTrim(Str(oCtrl:nTop)), ;
+         "w: " + LTrim(Str(oCtrl:nWidth)) + "  h: " + LTrim(Str(oCtrl:nHeight)))
    ENDIF
    // :ENDLFB
 
@@ -1439,7 +1439,7 @@ STATIC FUNCTION LButtonUp(oDlg, xPos, yPos , nShift)
          IF aBDown[BDOWN_NBORDER] > 0
             CtrlResize(oCtrl, xPos, yPos)
          ELSE
-            // writelog("LButtonUp-1 "+Str(xpos)+Str(abdown[2])+Str(ypos)+Str(abdown[3]))
+            // writelog("LButtonUp-1 " + Str(xpos)+Str(abdown[2])+Str(ypos)+Str(abdown[3]))
             CtrlMove(oCtrl, xPos, yPos, .T.)
             Container(oDlg, oCtrl)
          ENDIF
@@ -1641,15 +1641,15 @@ STATIC FUNCTION CtrlByPos(oDlg, xPos, yPos)
    LOCAL alen := Len(aControls)
    LOCAL oCtrl
 
-   // writelog("CtrlByPos:"+Str(xpos)+Str(ypos))
+   // writelog("CtrlByPos:" + Str(xpos)+Str(ypos))
    DO WHILE i <= alen
-     // writelog("> "+aControls[i]:cclass+" "+Str(aControls[i]:nLeft)+" "+Str(aControls[i]:nTop)+Str(aControls[i]:nWidth)+Str(aControls[i]:nHeight))
+     // writelog("> " + aControls[i]:cclass + " " + Str(aControls[i]:nLeft) + " " + Str(aControls[i]:nTop) + Str(aControls[i]:nWidth) + Str(aControls[i]:nHeight))
      IF !aControls[i]:lHide .AND. xPos >= aControls[i]:nLeft .AND. ;
            xPos < (aControls[i]:nLeft+aControls[i]:nWidth) .AND. ;
            yPos >= aControls[i]:nTop .AND.                         ;
            yPos < (aControls[i]:nTop+aControls[i]:nHeight)
         oCtrl := aControls[i]
-        // writelog("> "+aControls[i]:cclass+" "+Str(aControls[i]:nLeft)+" "+Str(aControls[i]:nTop)+Str(aControls[i]:nWidth)+Str(aControls[i]:nHeight))
+        // writelog("> " + aControls[i]:cclass + " " + Str(aControls[i]:nLeft) + " " + Str(aControls[i]:nTop) + Str(aControls[i]:nWidth) + Str(aControls[i]:nHeight))
         IF j == 0
            j := i
         ENDIF

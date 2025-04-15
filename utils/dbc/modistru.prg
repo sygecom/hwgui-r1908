@@ -193,7 +193,7 @@ Local oPBar, nSch := 0
       SELECT 20
       USE
       fi1 := hwg_Cutexten(msfile[improc])
-      ERASE &(fi1+".bak")
+      ERASE &(fi1 + ".bak")
       FRename(fi1 + ".dbf", fi1 + ".bak")
       FRename(mypath + "a0_new.DBF", fi1 + ".dbf")
       IF FILE(mypath + "a0_new.fpt")

@@ -196,7 +196,7 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
-                     hwg_MsgStop("Error: "+stroka)
+                     hwg_MsgStop("Error: " + stroka)
                      res := .F.
                      EXIT
                   ENDIF
@@ -212,7 +212,7 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
-                     hwg_MsgStop("Error: "+stroka)
+                     hwg_MsgStop("Error: " + stroka)
                      res := .F.
                      EXIT
                   ENDIF
@@ -227,7 +227,7 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
                      aItem[ITEM_Y1] == NIL .OR. aItem[ITEM_Y1] == 0 .OR. ;
                      aItem[ITEM_WIDTH] == NIL .OR. aItem[ITEM_WIDTH] == 0 .OR. ;
                      aItem[ITEM_HEIGHT] == NIL .OR. aItem[ITEM_HEIGHT] == 0
-                     hwg_MsgStop("Error: "+stroka)
+                     hwg_MsgStop("Error: " + stroka)
                      res := .F.
                      EXIT
                   ENDIF
@@ -253,7 +253,7 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
             IF Upper(Left(stroka, 15)) == "LOCAL APAINTREP"
                nMode := 11
             ELSE
-               hwg_MsgStop("Wrong function "+repname)
+               hwg_MsgStop("Wrong function " + repname)
                FClose(han)
                RETURN .F.
             ENDIF
@@ -274,11 +274,11 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
       ENDDO
       FClose(han)
    ELSE
-      hwg_MsgStop("Can't open "+fname)
+      hwg_MsgStop("Can't open " + fname)
       RETURN .F.
    ENDIF
    IF aPaintRep == NIL .OR. Empty(aPaintRep[FORM_ITEMS])
-      hwg_MsgStop(repname+" not found or empty!")
+      hwg_MsgStop(repname + " not found or empty!")
       res := .F.
    ELSE
       hwg_EnableMenuItem(, IDM_CLOSE, .T., .T.)
@@ -293,8 +293,8 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
          hwg_RecalcForm(aPaintRep, nFormWidth)
       ENDIF
 
-      hwg_WriteStatus(Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4))+"x"+ ;
-                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4))+"  Items: "+Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))))
+      hwg_WriteStatus(Hwindow():GetMain(), 2, Ltrim(Str(aPaintRep[FORM_WIDTH], 4)) + "x" + ;
+                 Ltrim(Str(aPaintRep[FORM_HEIGHT], 4)) + "  Items: " + Ltrim(Str(Len(aPaintRep[FORM_ITEMS]))))
    ENDIF
 RETURN res
 
@@ -362,7 +362,7 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG")
             FClose(han)
          ENDIF
       ELSE
-         hwg_MsgStop("Can't open "+fname)
+         hwg_MsgStop("Can't open " + fname)
       ENDIF
    ELSE
       han := FCreate(fname)
@@ -426,7 +426,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr
          WriteScript(han, aItem[ITEM_SCRIPT])
       ENDIF
    NEXT
-   FWrite(han, "#ENDREP "+Chr(10))
+   FWrite(han, "#ENDREP " + Chr(10))
 RETURN NIL
 
 STATIC FUNCTION WriteToPrg(han, repName)
@@ -456,7 +456,7 @@ Local i, aItem, oPen, oFont, hDCwindow, aMetr, cItem, cQuote, cPen, cFont
                      IIf(!("'" $ aItem[ITEM_CAPTION]), "'", "["))
          cItem += cQuote + aItem[ITEM_CAPTION] + cQuote
       ENDIF
-      cItem += ","+Ltrim(Str(aItem[ITEM_X1], 4)) + "," + Ltrim(Str(aItem[ITEM_Y1], 4)) + "," + ;
+      cItem += "," + Ltrim(Str(aItem[ITEM_X1], 4)) + "," + Ltrim(Str(aItem[ITEM_Y1], 4)) + "," + ;
                Ltrim(Str(aItem[ITEM_WIDTH], 4)) + "," + Ltrim(Str(aItem[ITEM_HEIGHT], 4)) + ;
                "," + Str(aItem[ITEM_ALIGN], 1)
       IF aItem[ITEM_TYPE] == TYPE_HLINE .OR. aItem[ITEM_TYPE] == TYPE_VLINE ;

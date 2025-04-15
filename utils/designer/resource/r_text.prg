@@ -42,7 +42,7 @@ ENDFUNC
    PRIVATE aVars
 
   IF han == - 1
-    hwg_MsgStop("Can't open "+oForm:path+oForm:filename)
+    hwg_MsgStop("Can't open " + oForm:path + oForm:filename)
     RETURN
   ENDIF
   DO WHILE .T.
@@ -229,7 +229,7 @@ ENDFUNC
       ENDIF
       IF arr[i, 10] == 1
         j := AScan(oCtrl:aMethods, {|a|a[1] == "Expression"})
-        oCtrl:aMethods[j, 2] := "Return "+arr[i, 7]
+        oCtrl:aMethods[j, 2] := "Return " + arr[i, 7]
       ENDIF
       IF arr[i, 6] != NIL
         j := AScan(oCtrl:aMethods, {|a|a[1] == "onBegin"})

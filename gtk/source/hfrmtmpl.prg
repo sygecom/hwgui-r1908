@@ -157,7 +157,7 @@ Local cPre
    ENDIF
 
    IF Empty(oDoc:aItems)
-      hwg_MsgStop("Can't open "+fname)
+      hwg_MsgStop("Can't open " + fname)
       RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != "form"
       hwg_MsgStop("Form description isn't found")
@@ -188,13 +188,13 @@ Local cPre
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2, 2]
             FOR j := 1 TO Len(::aFuncs[2])
-               cPre := "#xtranslate "+ ::aFuncs[2, j, 1] + ;
+               cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                      "( <params,...> ) => hwg_callfunc('"  + ;
-                     Upper(::aFuncs[2, j, 1]) +"',\{ <params> \}, oDlg:oParent:aFuncs )"
+                     Upper(::aFuncs[2, j, 1]) + "',\{ <params> \}, oDlg:oParent:aFuncs )"
                __Preprocess(cPre)
-               cPre := "#xtranslate "+ ::aFuncs[2, j, 1] + ;
+               cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                      "() => hwg_callfunc('"  + ;
-                     Upper(::aFuncs[2, j, 1]) +"',, oDlg:oParent:aFuncs )"
+                     Upper(::aFuncs[2, j, 1]) + "',, oDlg:oParent:aFuncs )"
                __Preprocess(cPre)
             NEXT
          ENDIF
@@ -469,7 +469,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
       RETURN NIL
    ENDIF
    IF oCtrl != NIL .AND. Left(oCtrl:oParent:Classname(), 2) == "HC"
-      // writelog(oCtrl:cClass+" "+oCtrl:oParent:cClass+" "+ oCtrl:oParent:oParent:Classname())
+      // writelog(oCtrl:cClass + " " + oCtrl:oParent:cClass + " " + oCtrl:oParent:oParent:Classname())
       nContainer := oForm:nContainer
    ENDIF
    arr := hwg_ParseMethod(cMethod)
@@ -498,7 +498,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          arrExe := Array(2)
          arrExe[2] := hwg_RdScript(, cMethod, 1, .T.)
          cCode :=  "{|" + LTrim(SubStr(arr[1], 12)) + ;
-            "|hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
+            "|hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
             IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2],{", ;
                    cCode1 + ":aMethods[" + ;
                    LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2],{") + ;
@@ -513,7 +513,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          "F(" + LTrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)
    arrExe[2] := hwg_RdScript(, cMethod,, .T.)
-   cCode :=  "{||hwg_DoScript(HFormTmpl():F("+LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "")+"):" + ;
+   cCode :=  "{||hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
       IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2])", ;
              cCode1 + ":aMethods[" + ;
              LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2])") + "}"
@@ -694,7 +694,7 @@ MEMVAR aImages, lEditLabels, aParts
 
          IF cPName == "varname"
             cVarName := xProperty
-            bSetGet := &("{|v|Iif(v==NIL,"+xProperty+","+xProperty+":=v)}")
+            bSetGet := &("{|v|Iif(v==NIL," + xProperty + "," + xProperty + ":=v)}")
             IF __mvGet(xProperty) == NIL
                /* If the variable with 'varname' name isn't initialized
                   while onFormInit procedure, we assign her the init value */
@@ -758,7 +758,7 @@ MEMVAR aImages, lEditLabels, aParts
       oCtrl:cargo := cVarName
    ENDIF
    IF Type("m->name") == "C"
-      // writelog(oCtrlTmpl:cClass+" "+name)
+      // writelog(oCtrlTmpl:cClass + " " + name)
       __mvPut(name, oCtrl)
       name := NIL
    ENDIF
@@ -941,7 +941,7 @@ Local cPre
    ENDIF
 
    IF Empty(oDoc:aItems)
-      hwg_MsgStop("Can't open "+fname)
+      hwg_MsgStop("Can't open " + fname)
       RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute("class") != "report"
       hwg_MsgStop("Report description isn't found")
@@ -972,13 +972,13 @@ Local cPre
          IF aMethods[(j := Len(aMethods)), 1] == "common"
             ::aFuncs := ::aMethods[j, 2]
             FOR j := 1 TO Len(::aFuncs[2])
-               cPre := "#xtranslate "+ ::aFuncs[2, j, 1] + ;
+               cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                      "( <params,...> ) => hwg_callfunc('"  + ;
-                     Upper(::aFuncs[2, j, 1]) +"',\{ <params> \}, oReport:aFuncs )"
+                     Upper(::aFuncs[2, j, 1]) + "',\{ <params> \}, oReport:aFuncs )"
                __Preprocess(cPre)
-               cPre := "#xtranslate "+ ::aFuncs[2, j, 1] + ;
+               cPre := "#xtranslate " + ::aFuncs[2, j, 1] + ;
                      "() => hwg_callfunc('"  + ;
-                     Upper(::aFuncs[2, j, 1]) +"',, oReport:aFuncs )"
+                     Upper(::aFuncs[2, j, 1]) + "',, oReport:aFuncs )"
                __Preprocess(cPre)
             NEXT
          ENDIF
@@ -1051,7 +1051,7 @@ Private oReport := Self
          oPrinter:SetFont(oFont)
       ENDIF
       ::nTOffset := ::nAOffSet := ::ny := 0
-      // Writelog("Print-1 "+ str(oPrinter:nPage))
+      // Writelog("Print-1 " + str(oPrinter:nPage))
       FOR i := 1 TO Len(::aControls)
          ::PrintItem(::aControls[i])
       NEXT
@@ -1113,11 +1113,11 @@ Memvar lLastCycle, lSkipItem
       y   := Val(xProperty[2]) * ::nKoefY
       x2  := Val(xProperty[5]) * ::nKoefX
       y2  := Val(xProperty[6]) * ::nKoefY
-      // writelog(xProperty[1]+" "+xProperty[2])
+      // writelog(xProperty[1] + " " + xProperty[2])
 
       IF oItem:cClass == "area"
          oItem:y2 := y2
-         // writelog("Area: "+cText+" "+IIf(::lNextPage, "T", "F"))
+         // writelog("Area: " + cText + " " + IIf(::lNextPage, "T", "F"))
          IF (xProperty := aGetSecond(oItem:aProp, "varoffset")) == NIL ;
                 .OR. !xProperty
             ::nTOffset := ::nAOffSet := 0
@@ -1149,7 +1149,7 @@ Memvar lLastCycle, lSkipItem
                ENDIF
             ENDDO
             IF lLastCycle
-               // writelog("--> "+str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
+               // writelog("--> " + str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
                ::nAOffSet += y2-y+1 - (::ny - y)
                ::nTOffset := 0
                ::lFinish := .T.
@@ -1174,7 +1174,7 @@ Memvar lLastCycle, lSkipItem
             oItem:lMark := .T.
             ::lNextPage := .T.
             ::nTOffset := ::nAOffSet := 0
-            // writelog("::lNextPage := .T. "+ oItem:cClass)
+            // writelog("::lNextPage := .T. " + oItem:cClass)
             RETURN NIL
          ENDIF
       ENDIF
@@ -1242,11 +1242,11 @@ Memvar lLastCycle, lSkipItem
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
             // hwg_SetTransparentMode(::oPrinter:hDC, .F.)
-            // Writelog(str(x)+" "+str(y)+" "+str(x2)+" "+str(y2)+" "+str(::nAOffSet)+" "+str(::nTOffSet)+" Say: "+cText)
+            // Writelog(str(x) + " " + str(y) + " " + str(x2) + " " + str(y2) + " " + str(::nAOffSet) + " " + str(::nTOffSet) + " Say: " + cText)
          ENDIF
       ELSEIF oItem:cClass == "box"
          ::oPrinter:Box(x, y, x2, y2, oItem:oPen)
-         // writelog("Draw "+str(x)+" "+str(x+width-1))
+         // writelog("Draw " + str(x) + " " + str(x+width-1))
       ELSEIF oItem:cClass == "vline"
          ::oPrinter:Line(x, y, x, y2, oItem:oPen)
       ELSEIF oItem:cClass == "hline"

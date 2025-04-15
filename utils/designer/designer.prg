@@ -115,16 +115,16 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
 #ifdef INTEGRATED
-   INIT DIALOG oDesigner:oMainWnd AT 0, 0 SIZE 400, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
+   INIT DIALOG oDesigner:oMainWnd AT 0, 0 SIZE 400, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report") + " designer" ;
       FONT oFont                          ;
       ON INIT {|o|StartDes(o, p0, p1)}   ;
       ON EXIT {||EndIde()}
 #else
 
- //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 280, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
+ //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 280, 200 TITLE IIf(!oDesigner:lReport, "Form", "Report") + " designer" ;
 
    INIT WINDOW oDesigner:oMainWnd MAIN AT 0, 0 SIZE 400, 200 ;
-       TITLE IIf(!oDesigner:lReport, "Form", "Report")+" designer" ;
+       TITLE IIf(!oDesigner:lReport, "Form", "Report") + " designer" ;
        FONT oFont                                                ;
        ON EXIT {||EndIde()}
 
@@ -133,21 +133,21 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    MENU OF oDesigner:oMainWnd
       MENU TITLE "&File"
          IF !oDesigner:lSingleForm
-            MENUITEM "&New "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION HFormGen():New()
-            MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():Open()
+            MENUITEM "&New " + IIf(!oDesigner:lReport, "Form", "Report")  ACTION HFormGen():New()
+            MENUITEM "&Open " + IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():Open()
             SEPARATOR
-            MENUITEM "&Save "+IIf(!oDesigner:lReport, "Form", "Report")   ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(), hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Save " + IIf(!oDesigner:lReport, "Form", "Report")   ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(), hwg_MsgStop("No Form in use!", "Designer"))
             MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(.T.), hwg_MsgStop("No Form in use!"))
-            MENUITEM "&Close "+IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:End(), hwg_MsgStop("No Form in use!", "Designer"))
+            MENUITEM "&Close " + IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:End(), hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
             If !lOmmitMenuFile
-               MENUITEM "&Open "+IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():OpenR()
+               MENUITEM "&Open " + IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():OpenR()
                SEPARATOR
                MENUITEM "&Save as ..." ACTION (oDesigner:lSingleForm := .F., HFormGen():oDlgSelected:oParent:Save(.T.), oDesigner:lSingleForm := .T.)
             EndIf
          ENDIF
          SEPARATOR
-         MENU TITLE "Recent "+IIf(!oDesigner:lReport, "Form", "Report")
+         MENU TITLE "Recent " + IIf(!oDesigner:lReport, "Form", "Report")
          If !lOmmitMenuFile
             i := 1
             DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != NIL
@@ -852,7 +852,7 @@ FUNCTION StatusBarMsg(cfile, cpos, ctam)
   cpos := IIf(cpos == NIL, "", cpos)
   ctam := IIf(ctam == NIL, "", ctam)
    IF cFile != NIL
-     hwg_WriteStatus(oDesigner:oMainWnd, 1, "File: "+cfile , .T.)
+     hwg_WriteStatus(oDesigner:oMainWnd, 1, "File: " + cfile , .T.)
   ENDIF
   hwg_WriteStatus(oDesigner:oMainWnd, 2, cpos , .T.)
   hwg_WriteStatus(oDesigner:oMainWnd, 3, ctam , .T.)

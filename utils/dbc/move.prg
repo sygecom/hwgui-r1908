@@ -145,7 +145,7 @@ Local i, nrec
    cFilter := cExpres
    IF HB_IsLogical(&cFilter)
       nrec := RECNO()
-      dbSetFilter(&( "{||"+ cFilter + "}" ), cFilter)
+      dbSetFilter(&( "{||" + cFilter + "}" ), cFilter)
       GO TOP
       i       := 1
       oBrw:nRecords := 0
@@ -173,7 +173,7 @@ Local i, nrec
          oBrw:bGoBot := &("{|o|" + oBrw:alias + "->(FGOBOT(o))}")
          oBrw:bEof  := &("{|o|" + oBrw:alias + "->(FEOF(o))}")
          oBrw:bBof  := &("{|o|" + oBrw:alias + "->(FBOF(o))}")
-         hwg_WriteStatus(HMainWindow():GetMdiActive(), 1, Ltrim(Str(oBrw:nRecords, 10))+" records filtered")
+         hwg_WriteStatus(HMainWindow():GetMdiActive(), 1, Ltrim(Str(oBrw:nRecords, 10)) + " records filtered")
       ELSE
          oBrw:prflt := .F.
          SET FILTER TO
@@ -184,7 +184,7 @@ Local i, nrec
          oBrw:bEof  := &("{||" + oBrw:alias + "->(EOF())}")
          oBrw:bBof  := &("{||" + oBrw:alias + "->(BOF())}")
          hwg_MsgInfo("Records not found")
-         hwg_WriteStatus(HMainWindow():GetMdiActive(), 1, Ltrim(Str(Reccount(), 10))+" records")
+         hwg_WriteStatus(HMainWindow():GetMdiActive(), 1, Ltrim(Str(Reccount(), 10)) + " records")
       ENDIF
    ELSE
       hwg_MsgInfo("Wrong expression")

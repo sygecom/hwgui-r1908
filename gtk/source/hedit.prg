@@ -129,7 +129,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
    //LOCAL nctrl // variable not used
    //LOCAL cKeyb // variable not used
 
-   // WriteLog("Edit: "+Str(msg, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
+   // WriteLog("Edit: " + Str(msg, 10) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF ::bAnyEvent != NIL .AND. Eval(::bAnyEvent, Self, msg, wParam, lParam) != 0
       RETURN 0
    ENDIF
@@ -410,7 +410,7 @@ STATIC FUNCTION KeyRight(oEdit, nPos)
       masklen := Len(oEdit:cPicMask)
       DO WHILE nPos <= masklen
          IF IsEditable(oEdit, ++nPos)
-            // writelog("KeyRight-2 "+str(nPos))
+            // writelog("KeyRight-2 " + str(nPos))
             hwg_edit_Setpos(oEdit:handle, nPos-1)
             EXIT
          ENDIF
@@ -421,7 +421,7 @@ STATIC FUNCTION KeyRight(oEdit, nPos)
 
    IF !Empty(oEdit:cPicMask)
         newPos := Len(oEdit:cPicMask)
-        //writelog("KeyRight-2 "+str(nPos) + " " +str(newPos))
+        //writelog("KeyRight-2 " + str(nPos) + " " +str(newPos))
         IF nPos>newPos .AND. !Empty(Trim(oEdit:Title))
             hwg_edit_Setpos(oEdit:handle, newPos)
         ENDIF
@@ -551,7 +551,7 @@ STATIC FUNCTION GetApplyKey(oEdit, cKey)
    x := hwg_edit_Getpos(oEdit:handle)
    HB_SYMBOL_UNUSED(x)
 
-   // writelog("GetApplyKey "+str(asc(ckey)))
+   // writelog("GetApplyKey " + str(asc(ckey)))
    oEdit:title := hwg_edit_Gettext(oEdit:handle)
    IF oEdit:cType == "N" .AND. cKey $ ".," .AND. ;
                      (nPos := At(".", oEdit:cPicMask)) != 0
@@ -609,7 +609,7 @@ STATIC FUNCTION GetApplyKey(oEdit, cKey)
             oEdit:title := Left(oEdit:title, nPos - 1) + cKey + SubStr(oEdit:title, nPos + 1)
          ENDIF
          hwg_edit_Settext(oEdit:handle, oEdit:title)
-         // writelog("GetApplyKey "+oEdit:title+str(nPos-1))
+         // writelog("GetApplyKey " + oEdit:title+str(nPos-1))
          KeyRight(oEdit, nPos)
          //Added By Sandro Freire
          IF oEdit:cType == "N"

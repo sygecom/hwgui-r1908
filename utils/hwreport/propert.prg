@@ -67,7 +67,7 @@ Local oFont := aItem[ITEM_FONT]
       hwg_SetDlgItemText(hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT])
    ENDIF
    // SetComboBox(hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1)
-   hwg_SetDlgItemText(hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)))
+   hwg_SetDlgItemText(hDlg, IDC_TEXT1, oFont:name + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)))
    hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT1))
 RETURN .T.
 
@@ -88,7 +88,7 @@ Local hDlg := hwg_GetModalHandle()
 Local oFont := HFont():Select()
    IF oFont != NIL
       aItem[ITEM_FONT] := oFont
-      hwg_SetDlgItemText(hDlg, IDC_TEXT1, oFont:name+","+Ltrim(Str(oFont:width))+","+Ltrim(Str(oFont:height)))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT1, oFont:name + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)))
    ENDIF
 RETURN .T.
 
@@ -155,8 +155,8 @@ Local hDlg := hwg_GetModalHandle()
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       aItem[ITEM_WIDTH] :=  aItem[ITEM_BITMAP]:nWidth
       aItem[ITEM_HEIGHT] := aItem[ITEM_BITMAP]:nHeight
-      hwg_SetDlgItemText(hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])))
-      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1])) + "x" + Ltrim(Str(aBmpSize[2])))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH])) + "x" + Ltrim(Str(aItem[ITEM_HEIGHT])))
    ENDIF
 RETURN NIL
 
@@ -166,7 +166,7 @@ Local nValue := Val(hwg_GetEditText(hDlg, IDC_EDIT3))
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
-      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100, 0)))+"x"+Ltrim(Str(Round(aBmpSize[2]*nValue/100, 0))))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1]*nValue/100, 0))) + "x" + Ltrim(Str(Round(aBmpSize[2]*nValue/100, 0))))
    ENDIF
 RETURN NIL
 
@@ -177,8 +177,8 @@ Local aBmpSize, hUp
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       hwg_SetDlgItemText(hDlg, IDC_EDIT1, aItem[ITEM_CAPTION])
-      hwg_SetDlgItemText(hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1]))+"x"+Ltrim(Str(aBmpSize[2])))
-      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH]))+"x"+Ltrim(Str(aItem[ITEM_HEIGHT])))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT1, Ltrim(Str(aBmpSize[1])) + "x" + Ltrim(Str(aBmpSize[2])))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(aItem[ITEM_WIDTH])) + "x" + Ltrim(Str(aItem[ITEM_HEIGHT])))
       hwg_SetUpDown(hUp, Round(aItem[ITEM_WIDTH]*100/aBmpSize[1], 0))
    ENDIF
 RETURN .T.

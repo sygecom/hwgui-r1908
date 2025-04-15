@@ -62,7 +62,7 @@ LOCAL aPaintRep
    cEnd := Chr(13)+Chr(10)
    aPaintRep := {210, 297, 0, 0, 0, {},, "MyReport", .F., 0, NIL}
    aPaintRep[11] := ;
-     "nStroka := 1"+cEnd
+     "nStroka := 1" + cEnd
    AAdd(aPaintRep[6], {1, "Sample report - first 100 records of test.dbf", 132, 41, 513, 27, 2, 0, HFont():Add("Arial", 0, -18, 700, 204, 0, 0, 0), 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {5, "..\..\samples\Image\logo.bmp", 94, 44, 68, 61, 0, 0, 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {1, "2001", 320, 81, 89, 20, 2, 0, HFont():Add("Arial", 0, -18, 700, 204, 0, 0, 0), 0, 0, NIL, 0})
@@ -78,8 +78,8 @@ LOCAL aPaintRep
    AAdd(aPaintRep[6], {1, "Age", 578, 184, 37, 20, 2, 0, HFont():Add("MS Sans Serif", 0, -13, 0, 0, 0, 0, 0), 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {6, "SL", -16, 218, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
    aPaintRep[6, Len(aPaintRep[6]), 12] := ;
-     "use test"+cEnd;
-     + "go top"+cEnd
+     "use test" + cEnd;
+     + "go top" + cEnd
    AAdd(aPaintRep[6], {4,, 110, 218, 60, 26, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {4,, 168, 218, 200, 26, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {4,, 366, 218, 201, 26, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
@@ -90,9 +90,9 @@ LOCAL aPaintRep
    AAdd(aPaintRep[6], {1, "Str(Age,2)", 578, 220, 36, 16, 0, 0, HFont():Add("MS Sans Serif", 0, -13, 0, 0, 0, 0, 0), 1, 0, NIL, 0})
    AAdd(aPaintRep[6], {6, "EL", -16, 243, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
    aPaintRep[6, Len(aPaintRep[6]), 12] := ;
-     "skip"+cEnd;
-     + "nStroka++"+cEnd;
-     + "lLastCycle := (Recno()>=20)"+cEnd
+     "skip" + cEnd;
+     + "nStroka++" + cEnd;
+     + "lLastCycle := (Recno()>=20)" + cEnd
    AAdd(aPaintRep[6], {6, "PF", -16, 861, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {2,, 46, 867, 661, 6, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {6, "EPF", -16, 875, 16, 10, 0, 0, 0, 0, 0, NIL, 0})

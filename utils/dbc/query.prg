@@ -106,7 +106,7 @@ STATIC lConnected := .F.
             numdriv := tmpdriv; prrdonly := tmprdonly
             /*
             SET CHARTYPE TO ANSI
-            __dbCopy(mypath+"_dbc_que.dbf",,,,,, .F.)
+            __dbCopy(mypath + "_dbc_que.dbf",,,,,, .F.)
             SET CHARTYPE TO OEM
             FiClose()
             nQueryWndHandle := OpenDbf(mypath + "_dbc_que.dbf", "ADSSQL", nQueryWndHandle)

@@ -68,7 +68,7 @@ STATIC FUNCTION DefError(oError)
       #endif
    ENDDO
 
-   MemoWrit(s_LogInitialPath+"Error.log", cMessage)
+   MemoWrit(s_LogInitialPath + "Error.log", cMessage)
    ErrorPreview(cMessage)
    hwg_gtk_exit()
    QUIT

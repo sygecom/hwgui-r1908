@@ -305,7 +305,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
       *-IF oCtrl:oParent:nTop != NIL
         FOR i=1 to Len(acontrols)
           oCtrls := aControls[i]
-              *-hwg_MsgInfo(STR(oCtrl:oParent:nTop)+"-"+STR(oCtrl:nTop)) //+"-"+STR(oCtrl:oparent:oParent:nTop))
+              *-hwg_MsgInfo(STR(oCtrl:oParent:nTop) + "-" + STR(oCtrl:nTop)) // + "-" + STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass="browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop+oCtrls:nHeight)
                  oCtrl:Move(oCtrl:nLeft , oCtrls:nTop+2)
               *oCtrl:SetProp("Top", "oCtrls:nTop+2")
@@ -373,9 +373,9 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
       dy := yPos
    ENDIF
 
-   // writelog("V0=("+AllTrim(Str(oCtrl:nLeft))+","+AllTrim(Str(oCtrl:nTop))+") P1=("+AllTrim(Str(xPos, 5))+","+AllTrim(Str(yPos, 5)
-   // )+ ") B1=("+AllTrim(Str(aBDown[2]))+","+AllTrim(Str(aBDown[3]))+")  d=("+AllTrim(Str(dx, 3))+","+AllTrim(Str(dy, 3))+") ")
-   // writelog("vBDown=("+AllTrim(Str(vBDown[2]))+","+AllTrim(Str(vBDown[3]))+") ")
+   // writelog("V0=(" + AllTrim(Str(oCtrl:nLeft)) + "," + AllTrim(Str(oCtrl:nTop)) + ") P1=(" + AllTrim(Str(xPos, 5)) + "," + AllTrim(Str(yPos, 5)
+   // )+ ") B1=(" + AllTrim(Str(aBDown[2])) + "," + AllTrim(Str(aBDown[3])) + ")  d=(" + AllTrim(Str(dx, 3)) + "," + AllTrim(Str(dy, 3)) + ") ")
+   // writelog("vBDown=(" + AllTrim(Str(vBDown[2])) + "," + AllTrim(Str(vBDown[3])) + ") ")
 
    IF dx != 0 .OR. dy != 0
       IF !lChild .AND. lMouse .AND. Abs(xPos - aBDown[BDOWN_XPOS]) < 3 .AND. Abs(yPos - aBDown[BDOWN_YPOS]) < 3
@@ -395,11 +395,11 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
             mdx := (mdx - oDesigner:nPixelGrid)
           endif
 
-          // writelog("coordinate normalizzate=" +"   N= " +Str(dx)+"   mdx="+Str(mdx))
+          // writelog("coordinate normalizzate=" + "   N= " + Str(dx) + "   mdx=" + Str(mdx))
 
           dx = (vdx - oCtrl:nLeft) - mdx
 
-          // writelog("Output:   dx= " +Str(dx)+"   NLeft="+Str(oCtrl:nLeft+dx)+ "  aBBDown2="+ AllTrim(Str(mdy)))
+          // writelog("Output:   dx= " + Str(dx) + "   NLeft=" + Str(oCtrl:nLeft+dx) + "  aBBDown2=" + AllTrim(Str(mdy)))
 
           if abs(int(((mdy) / oDesigner:nPixelGrid) * 10)) <= 4
             mdy := mdy
@@ -662,7 +662,7 @@ RETURN 0
 
 FUNCTION MoveCtrl(oCtrl)
 
-   // writelog("MoveCtrl "+Str(oCtrl:nWidth) + Str(oCtrl:nHeight))
+   // writelog("MoveCtrl " + Str(oCtrl:nWidth) + Str(oCtrl:nHeight))
    IF oCtrl:ClassName() == "HDIALOG"
       hwg_SendMessage(oCtrl:handle, WM_MOVE, 0, oCtrl:nLeft + oCtrl:nTop * 65536)
       hwg_SendMessage(oCtrl:handle, WM_SIZE, 0, oCtrl:nWidth + oCtrl:nHeight * 65536)
@@ -1164,7 +1164,7 @@ FUNCTION selsobjetos(odlg, xi, yi, xpos, ypos)
    yi := ypos
    ypos := yf
  ENDIF
- //hwg_MsgInfo(Str(xi)+","+Str(yi)+","+Str(xpos)+","+Str(ypos))
+ //hwg_MsgInfo(Str(xi) + "," + Str(yi) + "," + Str(xpos) + "," + Str(ypos))
  FOR i = 1 to Len(oDlg:aControls)
     oCtrl := oDlg:aControls[i]
     IF ((yi <= oCtrl:nTop +  oCtrl:nHeight .AND. yPos >= oCtrl:nTop) .OR. ;
@@ -1181,9 +1181,9 @@ FUNCTION AUTOSIZE(oCtrl)
    LOCAL aSize := {}
 
    IF oCtrl:oFont != NIL
-        asize :=  GETTEXTWIDTH(oCtrl:title+" ", oCtrl:oFont, hwg_GetDC(oCtrl:handle)) //nHdc)
+        asize :=  GETTEXTWIDTH(oCtrl:title + " ", oCtrl:oFont, hwg_GetDC(oCtrl:handle)) //nHdc)
      ELSE
-        asize :=  GETTEXTWIDTH(oCtrl:title+" ", oCtrl:oparent:oFont, hwg_GetDC(oCtrl:handle)) //nHdc)
+        asize :=  GETTEXTWIDTH(oCtrl:title + " ", oCtrl:oparent:oFont, hwg_GetDC(oCtrl:handle)) //nHdc)
     ENDIF
     IF octrl:nLeft == NIL
       RETURN NIL

@@ -191,7 +191,7 @@ STATIC FUNCTION InitModalDlg(oDlg)
 
    //LOCAL iCont // variable not used
 
-   // writelog(str(oDlg:handle)+" "+oDlg:title)
+   // writelog(str(oDlg:handle) + " " + oDlg:title)
    IF HB_IsArray(oDlg:menu)
       hwg__SetMenu(oDlg:handle, oDlg:menu[5])
    ENDIF
@@ -266,7 +266,7 @@ FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
    
    HB_SYMBOL_UNUSED(lParam)
 
-   // WriteLog(Str(iParHigh, 10)+"|"+Str(iParLow, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
+   // WriteLog(Str(iParHigh, 10) + "|" + Str(iParLow, 10) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF iParHigh == 0
       IF iParLow == IDOK
          hCtrl := hwg_GetFocus()

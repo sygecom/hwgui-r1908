@@ -96,7 +96,7 @@ FUNCTION Tool2Prg
    // PRIVATE cKey
 
    cName := Trim(oCtrl:GetProp("Name"))
-   //cTool += "    *- " + cname + _CHR(10)+ "    *- SCRIPT GERADO AUTOMATICAMENTE PELO DESIGNER" + _CHR(10)+"    *-  " + _CHR(10)
+   //cTool += "    *- " + cname + _CHR(10)+ "    *- SCRIPT GERADO AUTOMATICAMENTE PELO DESIGNER" + _CHR(10) + "    *-  " + _CHR(10)
    IF cName == NIL .OR. Empty(cName)
       RETURN cTool
    ENDIF
@@ -166,7 +166,7 @@ FUNCTION Tool2Prg
          ENDDO
          //IF  k > 1
          //        if !Empty(cFormParameters)
-         //                          cTool += ",{||"+ cFormParameters +"}")
+         //                          cTool += ",{||" + cFormParameters + "}")
          //        else
          cTool += "," + hwg_CallFunc("Bloco2Prg", {aMethods, "onClick"})
          //        endif
@@ -338,9 +338,9 @@ FUNCTION Browse2Prg
             ENDIF
             m->nDec := &cTmpAlias->(FIELDDEC(AScan(j, temp)))
             cCampo := "{|| " + cCampo + " }"
-            //cBrowser := SPACE(4)+cname+":AddColumn(HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+aTypes[i]+"',"+;
-            //      IIf((temp := oCtrl1:GetProp("Length"))!= NIL, LTrim(Str(Val(temp))), "10")+", "+;
-            //      LTrim(Str(aDecimals[i]))+" "
+            //cBrowser := SPACE(4) + cname + ":AddColumn(HColumn():New(" + cHeader + ",{|| " + cCampo + " }," + "'" + aTypes[i] + "'," + ;
+            //      IIf((temp := oCtrl1:GetProp("Length")) != NIL, LTrim(Str(Val(temp))), "10") + ", " + ;
+            //      LTrim(Str(aDecimals[i])) + " "
          ELSE
             cCampo := IIf(cCampo == NIL, ".T.", cCampo)
             cCampo := IIf(Type("&cCampo") = "B", cCampo, "{|| " + cCampo + " }")
@@ -352,7 +352,7 @@ FUNCTION Browse2Prg
             m->nDec := Len(SubStr(temp, At(".9", temp) + 1))
             //cType := "N"
          ENDIF
-         //cBrowser := SPACE(4)+cname+":AddColumn( HColumn():New("+cHeader+",{|| "+cCampo+" },"+ "'"+TYPE("&cCampo")+"',"+
+         //cBrowser := SPACE(4) + cname + ":AddColumn( HColumn():New(" + cHeader + ",{|| " + cCampo + " }," + "'" + TYPE("&cCampo") + "'," +
          cBrowser := Space(4) + cname + ":AddColumn( HColumn():New(" + cHeader + ", " + cCampo + " ," + "'" + cTYPE + "'," + ;
             LTrim(Str(m->nLength)) + ", " + LTrim(Str(m->nDec)) + " "
          cbrowser += "," + IIf((temp := oCtrl1:GetProp("Editable")) != NIL, IIf(temp = "True", ".T.", ".F."), ".T.")
@@ -428,12 +428,12 @@ FUNCTION Imagem2Prg
    IF oCtrl:cClass == "form"
       temp := oCtrl:GetProp("icon")
       IF !Empty(temp)
-         //cImagem += IIf(oCtrl:GetProp("lResource") := "True"," ICON HIcon():AddResource('"+temp+"') "," ICON "+temp +" ")
+         //cImagem += IIf(oCtrl:GetProp("lResource") := "True"," ICON HIcon():AddResource('" + temp + "') "," ICON " + temp + " ")
          cImagem += " ICON " + IIf(At(".", temp) != 0, "HIcon():AddFile('" + temp + "') ", "HIcon():AddResource('" + temp + "') ")
       ENDIF
       temp := oCtrl:GetProp("bitmap")
       IF !Empty(temp)
-         //cImagem += " BACKGROUND BITMAP HBitmap():AddFile('"+temp+"') "
+         //cImagem += " BACKGROUND BITMAP HBitmap():AddFile('" + temp + "') "
          cImagem += " BACKGROUND BITMAP " + IIf(At(".", temp) != 0 , "HBitmap():AddFile('" + temp + "') ", "HBitmap():AddResource('" + temp + "') ")
       ENDIF
 
@@ -862,7 +862,7 @@ FUNCTION Ctrl2Prg
 
       IF oCtrl:cClass == "buttonex"
          IF !Empty((temp := oCtrl:GetProp("bitmap")))
-            //cImagem += " BACKGROUND BITMAP HBitmap():AddFile('"+temp+"') "
+            //cImagem += " BACKGROUND BITMAP HBitmap():AddFile('" + temp + "') "
             stroka += " ;" + _Chr(10) + Space(8) + "BITMAP " + "(HBitmap():AddFile('" + temp + "')):handle "
             IF !Empty((temp := oCtrl:GetProp("pictureposition")))
                stroka += " ;" + _Chr(10) + Space(8) + "BSTYLE " + Left(temp, 1)
@@ -983,7 +983,7 @@ FUNCTION Ctrl2Prg
                   FWrite(han, " ; //OBJECT TIMER " + _Chr(10) + Space(8) + stroka)
                ELSE
                   IF lsubParameter
-                     //temp :=  " {|" + temp + "| " +  cName +"("+ cFormParameters + ")  }"
+                     //temp :=  " {|" + temp + "| " + cName + "(" + cFormParameters + ")  }"
                      FWrite(han, " ;" + _Chr(10) + Space(8) + cMethod + "{ ||" + cName + "(" + cFormParameters + ")  }")
                   ELSE
 
@@ -1004,7 +1004,7 @@ FUNCTION Ctrl2Prg
                ELSE
 
                   IF lsubParameter
-                     //temp :=  " {|" + temp + "| " +  cName +"("+ cFormParameters + ")  }"
+                     //temp :=  " {|" + temp + "| " + cName + "(" + cFormParameters + ")  }"
                      FWrite(han, " ;" + _Chr(10) + Space(8) + cMethod + "{ ||" + cName + "(" + cFormParameters + ")  }")
                   ELSE
                      FWrite(han, " ;" + _Chr(10) + Space(8) + cMethod + " {|" + temp + "| " +  IIf(Len(cName) == 1, cName[1], cName[2]) + " }")
@@ -1221,7 +1221,7 @@ FUNCTION Ctrl2Prg
       stroka :=  _chr(10)
       DO WHILE j <= Len(temp)
          // nando adicionu o PRIVATE PARA EVITAR ERROS NO CODIGO
-         stroka += "PRIVATE "+temp[j] + _chr(10)
+         stroka += "PRIVATE " + temp[j] + _chr(10)
          //stroka += "LOCAL " + temp[j] + _chr(10)
          j ++
       ENDDO
@@ -1315,7 +1315,7 @@ FUNCTION Ctrl2Prg
    temp := 0
    IF Len(cStyle) > 6
       temp := 26
-      //cStyle := ";"+_CHR(10)+SPACE(8) +  "STYLE " + SubStr(cStyle, 2)
+      //cStyle := ";" + _CHR(10) + SPACE(8) +  "STYLE " + SubStr(cStyle, 2)
       cStyle :=  Space(1) + "STYLE " + SubStr(cStyle, 2)
    ENDIF
    FWrite(han, Space(4) + "AT " + LTrim(Str(oForm:oDlg:nLeft)) + "," ;

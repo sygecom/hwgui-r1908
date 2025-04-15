@@ -249,7 +249,7 @@ RETURN Self
 METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 Local aCoors, retValue := -1
 
-   // WriteLog("Brw: "+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
+   // WriteLog("Brw: " + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF ::active .AND. !Empty(::aColumns)
 
       IF ::bOther != NIL
@@ -364,7 +364,7 @@ RETURN retValue
 METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 Local aCoors, retValue := -1
 
-   // WriteLog("Brw: "+Str(msg, 6)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
+   // WriteLog("Brw: " + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF ::active .AND. !Empty(::aColumns)
 
       IF ::bOther != NIL

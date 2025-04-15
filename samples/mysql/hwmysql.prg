@@ -175,7 +175,7 @@ FUNCTION DataBases()
    IF nChoic != 0
       cDatabase := aBases[nChoic]
       IF sqlSelectD(connHandle, cDatabase) != 0
-         hwg_MsgStop("Can't connect to "+cDataBase)
+         hwg_MsgStop("Can't connect to " + cDataBase)
          cDatabase := ""
       ELSE
          hwg_WriteStatus(Hwindow():GetMain(), 2, "DataBase: " + cDataBase)
@@ -318,7 +318,7 @@ FUNCTION Execute()
          hwg_DoScript(arScr)
       ELSE
          nError := hwg_CompileErr(@nLineEr)
-         hwg_MsgStop("Script error ("+LTrim(Str(nError))+"), line "+LTrim(Str(nLineEr)))
+         hwg_MsgStop("Script error (" + LTrim(Str(nError)) + "), line " + LTrim(Str(nLineEr)))
       ENDIF
    ELSE
       execSQL(cQuery)

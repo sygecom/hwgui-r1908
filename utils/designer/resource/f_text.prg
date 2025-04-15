@@ -43,7 +43,7 @@ ENDFUNC
    PRIVATE cFont
 
    IF han == - 1
-      hwg_MsgStop("Can't open "+oForm:path+oForm:filename)
+      hwg_MsgStop("Can't open " + oForm:path + oForm:filename)
       RETURN
    ENDIF
    DO WHILE .T.

@@ -428,14 +428,14 @@ FUNCTION reclock(nSeconds)
       if DBRLOCK(OldPos)
          RETURN .T.                     // LOCKED
       endif
-      hwg_MsgStop("Record is in use exclusive by another", alias()+" #"+Str(oldpos, 11))
+      hwg_MsgStop("Record is in use exclusive by another", alias() + " #" + Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
    enddo
 
 
 
-   hwg_MsgStop("Record failed to locked", alias()+" #"+Str(oldpos, 11))
+   hwg_MsgStop("Record failed to locked", alias() + " #" + Str(oldpos, 11))
 
    RETURN .F.                           // NOT LOCKED
 
@@ -543,7 +543,7 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
             c := IIf(Left(c, 2) == "99", c, "9" + c)
 
 	*:isi Hari
-        dd := Left(cPress, 2)+"."
+        dd := Left(cPress, 2) + "."
 
 
 	if subst(c, 3, 3)="AAA"
@@ -560,13 +560,13 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 	   mm := StrTran(mm, "Dec", "Des")
 	   mm := StrTran(mm, "Oct", "Okt")
 
-           mm := Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)+"."
+           mm := Str((at(mm, "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2) + "."
 
 	   nPot--
 
         else
 
-	   mm := subst(cpress, 3, 2)+"."
+	   mm := subst(cpress, 3, 2) + "."
 
         end
 
@@ -602,7 +602,7 @@ FUNCTION d2infstr(d) && date to informix style string
 
   mmm := subst("JanFebMarAprMeiJunJulAgtSepOktNopDes", month(d) * 3 - 2, 3)
 
- RETURN (dd+"-"+mmm+"-"+yyyy)
+ RETURN (dd + "-" + mmm + "-" + yyyy)
 
 
 
@@ -610,8 +610,8 @@ FUNCTION d2infstr(d) && date to informix style string
 
 FUNCTION infstr2d(s) && informix string to date
 
-   LOCAL dd := Left(s, 2)+"/"
-   LOCAL yy := "/"+Right(s, 4)
+   LOCAL dd := Left(s, 2) + "/"
+   LOCAL yy := "/" + Right(s, 4)
    LOCAL mm
 
  mm := Str((At(subst(s, 4, 3), "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)

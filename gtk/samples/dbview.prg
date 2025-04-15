@@ -251,14 +251,14 @@ Memvar oBrw
             IF Empty(cCond)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE                     
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
+               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ELSE
             IF Empty(cCond)
-               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||"+RTRIM(cExpr)+"}"), IIf(lUniq, .T., NIL))
+               dbCreateIndex(RTRIM(cName), RTRIM(cExpr),&("{||" + RTRIM(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ELSE                     
-               ordCondSet(RTRIM(cCond), &("{||"+RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
+               ordCondSet(RTRIM(cCond), &("{||" + RTRIM(cCond) + "}"),,,,, RECNO(),,,,)
                OrdCreate(RTrim(cName), RTrim(cTag), RTrim(cExpr), &("{||" + RTrim(cExpr) + "}"), IIf(lUniq, .T., NIL))
             ENDIF
          ENDIF

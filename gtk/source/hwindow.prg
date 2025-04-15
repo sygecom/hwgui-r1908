@@ -20,7 +20,7 @@ REQUEST HWG_ENDWINDOW
 
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
-   // writelog("OnSize: "+Str(oWnd:nWidth)+" "+Str(oWnd:nHeight)+" "+Str(hwg_LOWORD(lParam))+" "+Str(hwg_HIWORD(lParam)))
+   // writelog("OnSize: " + Str(oWnd:nWidth) + " " + Str(oWnd:nHeight) + " " + Str(hwg_LOWORD(lParam)) + " " + Str(hwg_HIWORD(lParam)))
 
    oWnd:Super:onEvent(WM_SIZE, wParam, lParam)
 
@@ -440,7 +440,7 @@ STATIC FUNCTION onMove(oWnd, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
 
-   // writelog("onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)))
+   // writelog("onMove: " + str(oWnd:nLeft) + " " + str(oWnd:nTop) + " -> " + str(hwg_LOWORD(lParam)) + str(hwg_HIWORD(lParam)))
    oWnd:nLeft := hwg_LOWORD(lParam)
    oWnd:nTop  := hwg_HIWORD(lParam)
 

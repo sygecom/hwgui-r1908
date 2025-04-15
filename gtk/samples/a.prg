@@ -13,7 +13,7 @@
 
 FUNCTION Main
 Local oMainWindow, oPanel
-Private oFont := NIL, cImageDir := "/"+Curdir()+"/../../image/"
+Private oFont := NIL, cImageDir := "/" + Curdir() + "/../../image/"
 Private nColor, oBmp2
 
    // hb_SetCodepage("RU1251")
@@ -24,7 +24,7 @@ Private nColor, oBmp2
    @ 0, 0 PANEL oPanel SIZE 0, 32
    @ 2, 3 OWNERBUTTON OF oPanel ON CLICK {||FileOpen()} ;
    SIZE 32, 26 FLAT ;
-   BITMAP cImageDir+"new.bmp" TRANSPARENT COLOR 12632256 COORDINATES 0, 4, 0, 0 ;
+   BITMAP cImageDir + "new.bmp" TRANSPARENT COLOR 12632256 COORDINATES 0, 4, 0, 0 ;
    TOOLTIP "Open File"
 
    MENU OF oMainWindow
@@ -90,7 +90,7 @@ Local nId
       IF oFont != NIL
          oBrw:ofont := oFont
       ENDIF
-      AEval(oBrw:aColumns, {|o|o:bHeadClick := {|oB, n|hwg_MsgInfo("Column number "+Str(n))}})
+      AEval(oBrw:aColumns, {|o|o:bHeadClick := {|oB, n|hwg_MsgInfo("Column number " + Str(n))}})
 
       ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF

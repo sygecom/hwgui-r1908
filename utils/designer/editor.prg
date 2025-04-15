@@ -182,7 +182,7 @@ FUNCTION EditMethod(cMethName, cMethod)
    i := AScan(oDesigner:aMethDef, {|a|a[1] == Lower(cMethName)})
    cParamString := IIf(i == 0, "", oDesigner:aMethDef[i, 2])
 
-   INIT DIALOG oDlg TITLE "Edit '"+cMethName+"' method"          ;
+   INIT DIALOG oDlg TITLE "Edit '" + cMethName + "' method"          ;
       AT 100, 240  SIZE 600, 300  FONT oDesigner:oMainWnd:oFont    ;
       STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_MAXIMIZEBOX + WS_SIZEBOX ;
       ON INIT {||hwg_MoveWindow(oDlg:handle, 100, 240, 600, 310)}        ;
@@ -193,15 +193,15 @@ FUNCTION EditMethod(cMethName, cMethod)
          MENUITEM "&Font" ACTION editChgFont()
          MENU TITLE "&Select theme"
             FOR i := 1 TO Len(HDTheme():aThemes)
-               hwg_DefineMenuItem(HDTheme():aThemes[i]:name, 1020+i, &("{||ChangeTheme("+LTrim(Str(i, 2))+"),HDTheme():lChanged:=.T.}"))
+               hwg_DefineMenuItem(HDTheme():aThemes[i]:name, 1020+i, &("{||ChangeTheme(" + LTrim(Str(i, 2)) + "),HDTheme():lChanged:=.T.}"))
             NEXT
          ENDMENU
          MENUITEM "&Configure" ACTION EditColors()
       ENDMENU
 
-      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()), oEdit:lChanged := .T.), .F.)
+      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters " + cParamString+Chr(10)+oEdit:Gettext()), oEdit:lChanged := .T.), .F.)
 
-      MENU TITLE "&Templates "+cMethName
+      MENU TITLE "&Templates " + cMethName
 
          MENUITEM "&Insert Field"     ACTION InsertField(1)
          MENUITEM "&Field:=xVarField" ACTION InsertField(0)
@@ -308,11 +308,11 @@ STATIC FUNCTION EnChange(nEvent)
       hwg_SendMessage(oEdit:handle, EM_SETEVENTMASK, 0, 0)
       nLength := hwg_SendMessage(oEdit:handle, WM_GETTEXTLENGTH, 0, 0)
       IF nLength - nTextLength > 2
-         // writelog("1: "+Str(nLength, 5)+" "+Str(nTextLength, 5))
+         // writelog("1: " + Str(nLength, 5) + " " + Str(nTextLength, 5))
       ELSE
          nLine := hwg_SendMessage(oEdit:handle, EM_LINEFROMCHAR, -1, 0)
          cBuffer := hwg_RE_GetLine(oEdit:handle, nLine)
-         // writelog("pos: "+LTrim(Str(pos1))+" Line: "+LTrim(Str(nline))+" "+Str(Len(cBuffer))+"/"+cBuffer)
+         // writelog("pos: " + LTrim(Str(pos1)) + " Line: " + LTrim(Str(nline)) + " " + Str(Len(cBuffer)) + "/" + cBuffer)
          nLinePos := hwg_SendMessage(oEdit:handle, EM_LINEINDEX, nLine, 0) + 1
          AAdd(arr, {nLinePos, nLinePos+Len(cBuffer), ;
             oTheme:normal[1],,, oTheme:normal[3], oTheme:normal[4],})
@@ -327,7 +327,7 @@ STATIC FUNCTION EnChange(nEvent)
       nTextLength := nLength
       hwg_SendMessage(oEdit:handle, EM_SETEVENTMASK, 0, ENM_CHANGE + ENM_SELCHANGE)
    ENDIF
-   // writelog("EnChange "+Str(pos1)+" "+Str(pos2)) // +" Length: "+Str(nLength))
+   // writelog("EnChange " + Str(pos1) + " " + Str(pos2)) // + " Length: " + Str(nLength))
 RETURN NIL
 
 STATIC FUNCTION CreateHilight(cText, oTheme)
@@ -370,7 +370,7 @@ STATIC FUNCTION HiLightString(stroka, arr, nLinePos, oTheme)
    SET EXACT ON
    DO WHILE nPos < sLen
       cWord := NextWord(stroka, @nPos, @nStart)
-      // writelog("-->"+Str(nStart)+" "+Str(nPos)+" "+Str(Len(cword))+" "+ Str(asc(cword)))
+      // writelog("-->" + Str(nStart) + " " + Str(nPos) + " " + Str(Len(cword)) + " " + Str(asc(cword)))
       IF !Empty(cWord)
          IF Left(cWord, 1) == '"' .OR. Left(cWord, 1) == "'"
             AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
@@ -396,9 +396,9 @@ STATIC FUNCTION EditColors()
    LOCAL temp
    LOCAL oBtn2
    LOCAL cText := "// The code sample" + Chr(10) + ;
-               "do while ++nItem < 120"+ Chr(10) + ;
-               "  if aItems[nItem] == 'scheme'"+ Chr(10) + ;
-               "    nFactor := 22.5"+ Chr(10) + ;
+               "do while ++nItem < 120" + Chr(10) + ;
+               "  if aItems[nItem] == 'scheme'" + Chr(10) + ;
+               "    nFactor := 22.5" + Chr(10) + ;
                "  endif"
 
    MEMVAR oBrw
@@ -571,7 +571,7 @@ HB_SYMBOL_UNUSED(nModus)
 
 
   ELSE
-        hwg_MsgInfo(cDBF+chr(13)+"Not Found")
+        hwg_MsgInfo(cDBF + chr(13) + "Not Found")
   ENDIF
 
   RETURN (NIL)

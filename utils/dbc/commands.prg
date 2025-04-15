@@ -171,7 +171,7 @@ Private cFor
          ELSEIF hwg_IsDlgButtonChecked(hDlg, IDC_RADIOBUTTON8)
             COUNT TO nsum REST FOR &cFor
          ENDIF
-         hwg_SetDlgItemText(hDlg, IDC_TEXTMSG, "Result: "+Str(nsum))
+         hwg_SetDlgItemText(hDlg, IDC_TEXTMSG, "Result: " + Str(nsum))
          Go nrec
          RETURN NIL
       ENDIF
@@ -241,7 +241,7 @@ Private nsum := 0
          DBEval(blsum, blfor, , , , .T.)
       ENDIF
       Go nrec
-      hwg_SetDlgItemText(hDlg, IDC_TEXTMSG, "Result: "+Str(nsum))
+      hwg_SetDlgItemText(hDlg, IDC_TEXTMSG, "Result: " + Str(nsum))
       RETURN NIL
    ENDIF
 

@@ -23,7 +23,7 @@ FUNCTION Main
       cText += "   TEXT INTO cXml " + CRLF
       cText += Memoread(AllTrim(aFiles[i, 1])) + CRLF
       cText += "   ENDTEXT " + CRLF + CRLF
-      cText += "Return cXml"+ CRLF
+      cText += "Return cXml" + CRLF
       
       
       Memowrit(cFile, cText)

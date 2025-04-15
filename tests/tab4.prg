@@ -41,8 +41,8 @@ FUNCTION Main()
    INIT DIALOG oDialog TITLE "Test" SIZE 800, 600 ;
 
    @ 40, 40 TAB oTab ITEMS {} OF oDialog SIZE 800 - 80, 600 - 100 ;
-      ON CLICK {|o, n|hwg_MsgInfo("Tab "+alltrim(str(n))+ " clicked", "Info")} ;
-      ON RIGHTCLICK {|o, n|hwg_MsgInfo("Tab "+alltrim(str(n))+ " right clicked", "Info")}
+      ON CLICK {|o, n|hwg_MsgInfo("Tab " + alltrim(str(n)) + " clicked", "Info")} ;
+      ON RIGHTCLICK {|o, n|hwg_MsgInfo("Tab " + alltrim(str(n))+ " right clicked", "Info")}
 
    BEGIN PAGE "&First Tab" OF oTab
       @ 20, 40 SAY "Field A&1 (ALT+1):" SIZE 120, 26

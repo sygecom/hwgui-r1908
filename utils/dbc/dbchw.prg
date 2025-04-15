@@ -221,7 +221,7 @@ Local new_numdriv, new_servertype, serverPath
              AdsSetServerType(nServerType)
              hwg_CheckRadioButton(hDlg, IDC_RADIOBUTTON1, IDC_RADIOBUTTON2, IDC_RADIOBUTTON1)
              ServerButton(0)
-             hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Cannot connect to "+serverPath)
+             hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Cannot connect to " + serverPath)
              RETURN .F.
          ELSE
              mypath := serverPath
@@ -271,7 +271,7 @@ STATIC FUNCTION SetIndex(oBrw)
 Local oWindow := HMainWindow():GetMdiActive(), aControls, i
 
    SET ORDER TO oBrw:nCurrent - 1
-   hwg_WriteStatus(oWindow, 2, "Order: "+oBrw:aArray[oBrw:nCurrent, 2])
+   hwg_WriteStatus(oWindow, 2, "Order: " + oBrw:aArray[oBrw:nCurrent, 2])
    IF oWindow != NIL
       aControls := oWindow:aControls
       IF (i := Ascan(aControls, {|o|o:classname() == "HBROWSE"})) > 0
@@ -355,7 +355,7 @@ Local oWindow, aControls, i
       ENDIF
    ENDIF
    oWindow := HMainWindow():GetMdiActive()
-   hwg_WriteStatus(oWindow, 2, "Order: "+IIf(isMulti, tagname, hwg_CutPath(indname)))
+   hwg_WriteStatus(oWindow, 2, "Order: " + IIf(isMulti, tagname, hwg_CutPath(indname)))
 
    IF oWindow != NIL
       aControls := oWindow:aControls
@@ -524,7 +524,7 @@ Local oWindow, aControls, oBrowse, i
          ENDIF
       ENDIF
    ENDIF
-   hwg_WriteStatus(oWindow, 1, Ltrim(Str(Reccount(), 10))+" records")
+   hwg_WriteStatus(oWindow, 1, Ltrim(Str(Reccount(), 10)) + " records")
    hwg_WriteStatus(oWindow, 2, "Order: None", .T.)
 RETURN oWindow:handle
 
@@ -603,7 +603,7 @@ Local fname, arScr, nError, nLineEr, obl
       hwg_MsgInfo("Script executed")
    ELSE
       nError := hwg_CompileErr(@nLineEr)
-      hwg_MsgStop("Script error ("+Ltrim(Str(nError))+"), line "+Ltrim(Str(nLineEr)))
+      hwg_MsgStop("Script error (" + Ltrim(Str(nError)) + "), line " + Ltrim(Str(nLineEr)))
    ENDIF
    EndDialog(hDlg)
 

@@ -109,7 +109,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
             nPWidth := 200
          ENDIF
 #ifdef __LINUX__
-         oFont := ::oPrinter:AddFont(cFont+"Regular", ::nStdHeight * ::oPrinter:nVRes)
+         oFont := ::oPrinter:AddFont(cFont + "Regular", ::nStdHeight * ::oPrinter:nVRes)
 #else
          oFont := ::oPrinter:AddFont(cFont, ::nStdHeight * ::oPrinter:nVRes)
 #endif
