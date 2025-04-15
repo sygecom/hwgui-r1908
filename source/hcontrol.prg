@@ -13,7 +13,7 @@
 #include "hwgui.ch"
 
 #define CONTROL_FIRST_ID 34000
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 
 //-------------------------------------------------------------------------------------------------------------------//
 

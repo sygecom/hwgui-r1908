@@ -18,7 +18,7 @@
 //#translate :hMask         => :m_csbitmaps\[4\] // not used
 //#translate :crTransparent => :m_csbitmaps\[5\] // not used
 
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 #define BTNST_COLOR_BK_IN     1            // Background color when mouse is INside
 #define BTNST_COLOR_FG_IN     2            // Text color when mouse is INside
 #define BTNST_COLOR_BK_OUT    3             // Background color when mouse is OUTside

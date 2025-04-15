@@ -14,7 +14,7 @@
 #define LBL_NORMAL         1
 #define LBL_VISITED        2
 #define LBL_MOUSEOVER      3
-#define TRANSPARENT        1
+//#define TRANSPARENT        1 // defined in windows.ch
 
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+

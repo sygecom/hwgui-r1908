@@ -1747,4 +1747,6 @@ ComboBox
 #define UDM_SETBUDDY            (WM_USER + 105)
 #define UDM_GETBUDDY            (WM_USER + 106)
 
+#define TRANSPARENT 1
+
 #endif // _WINDOWS_CH_

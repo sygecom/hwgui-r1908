@@ -12,7 +12,7 @@
 #include "hwgui.ch"
 
 #define STM_SETIMAGE        370    // 0x0172
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 
 //- HSayBmp
 

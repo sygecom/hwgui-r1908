@@ -12,7 +12,7 @@
 #include <common.ch>
 #include "hwgui.ch"
 
-#DEFINE TRANSPARENT 1
+//#DEFINE TRANSPARENT 1 // defined in windows.ch
 
 //-----------------------------------------------------------------
 CLASS HRect INHERIT HControl

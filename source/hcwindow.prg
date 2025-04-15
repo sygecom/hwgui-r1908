@@ -12,7 +12,7 @@
 #include <common.ch>
 #include "hwgui.ch"
 
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 #define EVENTS_MESSAGES 1
 #define EVENTS_ACTIONS  2
 #define RT_MANIFEST  24

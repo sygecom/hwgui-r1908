@@ -12,7 +12,7 @@
 #include <common.ch>
 #include "hwgui.ch"
 
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 #define BS_TYPEMASK SS_TYPEMASK
 #define OFS_X 10 // distance from left/right side to beginning/end of text
 

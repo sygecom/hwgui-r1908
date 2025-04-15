@@ -13,7 +13,7 @@
 #include <inkey.ch>
 #include "hwgui.ch"
 
-#define TRANSPARENT 1
+//#define TRANSPARENT 1 // defined in windows.ch
 
 //-------------------------------------------------------------------------------------------------------------------//
 
