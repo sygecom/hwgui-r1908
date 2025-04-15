@@ -60,6 +60,10 @@ METHOD INIT CLASS HSayBmp
 RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HSayBmp
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
    IF msg == WM_PAINT
       ::Paint()
    ENDIF

@@ -36,7 +36,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
 
 RETURN Self
 
-METHOD Activate CLASS HSayImage
+METHOD Activate() CLASS HSayImage
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)

@@ -53,7 +53,8 @@ CLASS HWinPrn INHERIT HObject
    METHOD NextPage()
    METHOD PrintLine(cLine, lNewLine)
    METHOD PrintText(cText)
-   METHOD PutCode(cText)
+   //METHOD PutCode(cText)
+   METHOD PutCode(cLine)
    METHOD EndDoc()
    METHOD End()
 

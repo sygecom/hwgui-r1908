@@ -93,6 +93,7 @@ Local hDC, aMetr, width, height, screenh
    IF height > screenh * 2/3
       height := Int(screenh *2/3)
       addX := addY := 0
+      HB_SYMBOL_UNUSED(addY)
    ENDIF
    width := (Round((aMetr[3] + aMetr[2]) / 2, 0) + 3) * nLen + addX
 
@@ -109,9 +110,9 @@ Local hDC, aMetr, width, height, screenh
        ON CLICK {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
 
    IF HB_IsArray(arr[1])
-      oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent, 1]}, "C", nLen))
+      oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent, 1]}, "C", nLen))
    ELSE
-      oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent]}, "C", nLen))
+      oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent]}, "C", nLen))
    ENDIF
    hwg_CreateArList(oBrw, arr)
    oBrw:lDispHead := .F.
@@ -154,6 +155,9 @@ RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
 
 FUNCTION hwg_WriteStatus(oWnd, nPart, cText, lRedraw)
 Local aControls, i
+
+   HB_SYMBOL_UNUSED(lRedraw)
+   
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
       hwg_WriteStatusWindow(aControls[i]:handle, nPart-1, cText)

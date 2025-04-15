@@ -22,7 +22,8 @@ CLASS HTimer INHERIT HObject
    DATA oParent
    DATA bAction
 
-   METHOD New(oParent, id, value, bAction)
+   //METHOD New(oParent, id, value, bAction)
+   METHOD New(oParent, nId, value, bAction)
    METHOD Init()
    METHOD onAction()
 
@@ -81,7 +82,7 @@ Local i
 
 RETURN NIL
 
-METHOD Init CLASS HTimer
+METHOD Init() CLASS HTimer
    IF ! ::lInit
       IF ::value > 0
          ::tag := hwg_SetTimer(::id, ::value)
@@ -92,7 +93,7 @@ METHOD Init CLASS HTimer
 METHOD onAction()
 
    hwg_TimerProc(, ::id, ::interval)
-   
+
 RETURN NIL
 
 

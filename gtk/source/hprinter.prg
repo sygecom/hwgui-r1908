@@ -28,7 +28,8 @@ CLASS HPrinter INHERIT HObject
 
    METHOD New(cPrinter, lmm)
    METHOD SetMode(nOrientation)
-   METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline)
+   //METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline)
+   METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset)
    METHOD SetFont(oFont)
    METHOD StartDoc(lPreview, cFileName)
    METHOD EndDoc()
@@ -93,7 +94,10 @@ Local x
 RETURN .T.
 
 METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
-Local oFont
+
+   LOCAL oFont
+   
+   HB_SYMBOL_UNUSED(nCharset)
 
    IF ::lmm .AND. nHeight != NIL
       nHeight *= ::nVRes
@@ -180,7 +184,7 @@ Local oFontOld
    IF oFont != NIL
       oFontOld := ::SetFont(oFont)
    ENDIF
-   
+
    hwg_gp_DrawText(::hDC, cString, x1, y2, x2, y1, IIf(nOpt == NIL, DT_LEFT, nOpt))
    IF oFont != NIL
       ::SetFont(oFontOld)
@@ -189,6 +193,9 @@ Local oFontOld
 RETURN NIL
 
 METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
+
+   HB_SYMBOL_UNUSED(nOpt)
+   HB_SYMBOL_UNUSED(hBitmap)
 
    IF y2 > ::nHeight
       RETURN NIL
@@ -207,6 +214,8 @@ METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
 RETURN NIL
 
 METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
+
+   HB_SYMBOL_UNUSED(lPreview)
 
    hwg_StartDoc(::hDC)
    IF cFileName != NIL
@@ -244,7 +253,8 @@ CLASS HGP_Font INHERIT HObject
    DATA italic, Underline
    DATA nCounter   INIT 1
 
-   METHOD Add(fontName, nWidth, nHeight , fnWeight, fdwItalic, fdwUnderline)
+   //METHOD Add(fontName, nWidth, nHeight , fnWeight, fdwItalic, fdwUnderline)
+   METHOD Add(fontName, nHeight , fnWeight, fdwItalic, fdwUnderline)
    METHOD Release(lAll)
 
 ENDCLASS

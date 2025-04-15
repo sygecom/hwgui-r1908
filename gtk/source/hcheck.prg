@@ -53,7 +53,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate CLASS HCheckButton
+METHOD Activate() CLASS HCheckButton
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
@@ -84,6 +84,9 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 RETURN NIL
 #else
 METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    SWITCH msg
    CASE WM_LBUTTONUP

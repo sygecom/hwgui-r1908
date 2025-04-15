@@ -27,7 +27,14 @@ CLASS HMenu INHERIT HObject
 ENDCLASS
 
 METHOD Show(oWnd, xPos, yPos, lWnd) CLASS HMenu
-Local aCoor
+
+   //LOCAL aCoor // variable not used
+   
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(xPos)
+   HB_SYMBOL_UNUSED(yPos)
+   HB_SYMBOL_UNUSED(lWnd)
+
 /*
    oWnd:oPopup := Self
    IF Pcount() == 1 .OR. lWnd == NIL .OR. !lWnd
@@ -125,7 +132,12 @@ Local aSubMenu := hwg_FindMenuItem(aMenu, nId)
 RETURN IIf(aSubMenu == NIL, 0, aSubMenu[5])
 
 FUNCTION hwg_BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
-Local hMenu, nPos, aMenu, i, oBmp
+
+   LOCAL hMenu
+   LOCAL nPos
+   LOCAL aMenu
+   //LOCAL i // variable not used
+   //LOCAL oBmp // variable not used
 
    IF nPosParent == NIL   
       IF lPopup == NIL .OR. !lPopup
@@ -221,7 +233,16 @@ FUNCTION hwg_EndMenu()
 RETURN .T.
 
 FUNCTION hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitmap, lResource, lCheck)
-Local aMenu, i, oBmp, nFlag
+
+   LOCAL aMenu
+   LOCAL i
+   //LOCAL oBmp // variable not used
+   LOCAL nFlag
+
+   HB_SYMBOL_UNUSED(accFlag)
+   HB_SYMBOL_UNUSED(accKey)
+   HB_SYMBOL_UNUSED(lBitmap)
+   HB_SYMBOL_UNUSED(lResource)
 
    lCheck := IIf(lCheck == NIL, .F., lCheck)
    lDisabled := IIf(lDisabled == NIL, .T., !lDisabled)

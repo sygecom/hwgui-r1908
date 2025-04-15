@@ -20,7 +20,7 @@ STATIC aCustomEvents := { ;
         {|o, w, l|onCtlColor(o, w, l)},                      ;
         {|o, w, l|onCtlColor(o, w, l)},                      ;
         {|o, w, l|onCtlColor(o, w, l)},                      ;
-        {|o, w, l|onCommand(o, w)},                         ;
+        {|o, w, l|HB_SYMBOL_UNUSED(l), onCommand(o, w)},                         ;
         {|o, w, l|onDrawItem(o, w, l)},                      ;
         {|o, w, l|onSize(o, w, l)},                          ;
         {|o|onDestroy(o)}                                ;
@@ -153,12 +153,19 @@ Local i
 RETURN 0
 
 METHOD Anchor(oCtrl, x, y, w, h) CLASS HCustomWindow
-   LOCAL nlen , i, x1, y1
+
+   LOCAL nlen
+   LOCAL i
+   LOCAL x1
+   LOCAL y1
+
    nlen := Len(oCtrl:aControls)
    FOR i = 1 TO nlen
       IF __ObjHasMsg(oCtrl:aControls[i], "ANCHOR") .AND. oCtrl:aControls[i]:anchor > 0
-         x1 := oCtrl:aControls[i]:nWidth
-         y1 := oCtrl:aControls[i]:nHeight
+         x1 := oCtrl:aControls[i]:nWidth // assigned but not used
+         y1 := oCtrl:aControls[i]:nHeight // assigned but not used
+         HB_SYMBOL_UNUSED(x1)
+         HB_SYMBOL_UNUSED(y1)
          oCtrl:aControls[i]:onAnchor(x, y, w, h)
          IF Len(oCtrl:aControls[i]:aControls) > 0
             //::Anchor(oCtrl:aControls[i], x1, y1, oCtrl:nWidth, oCtrl:nHeight)
@@ -182,7 +189,13 @@ Local i, nLen := Len(aControls)
 RETURN NIL
 
 STATIC FUNCTION onNotify(oWnd, wParam, lParam)
-Local iItem, oCtrl := oWnd:FindControl(wParam), nCode, res, handle, oItem
+
+   LOCAL iItem
+   LOCAL oCtrl := oWnd:FindControl(wParam)
+   LOCAL nCode
+   LOCAL res
+   //LOCAL handle // variable not used
+   //LOCAL oItem // variable not used
 
    IF oCtrl != NIL
       IF oCtrl:ClassName() == "HTAB"
@@ -268,8 +281,13 @@ Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
 RETURN 1
 
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
-Local aControls := oWnd:aControls, nControls := Len(aControls)
-Local oItem, iCont
+
+   LOCAL aControls := oWnd:aControls
+   LOCAL nControls := Len(aControls)
+   //LOCAL oItem // variable not used
+   LOCAL iCont
+
+   HB_SYMBOL_UNUSED(wParam)
 
    #ifdef __XHARBOUR__
    FOR each oItem in aControls

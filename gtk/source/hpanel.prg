@@ -28,7 +28,10 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   bInit, bSize, bPaint, lDocked) CLASS HPanel
-Local oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+
+   LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
+   
+   HB_SYMBOL_UNUSED(lDocked)
 
    nStyle := SS_OWNERDRAW
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
@@ -41,7 +44,7 @@ Local oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
 RETURN Self
 
-METHOD Activate CLASS HPanel
+METHOD Activate() CLASS HPanel
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreatePanel(::oParent:handle, ::id, ;
@@ -60,7 +63,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
 
 RETURN 0
 
-METHOD Init CLASS HPanel
+METHOD Init() CLASS HPanel
 
    IF !::lInit
       IF ::bSize == NIL
@@ -78,7 +81,11 @@ METHOD Init CLASS HPanel
 RETURN NIL
 
 METHOD Paint() CLASS HPanel
-Local hDC, aCoors, oPenLight, oPenGray
+
+   LOCAL hDC
+   //LOCAL aCoors // variable not used
+   //LOCAL oPenLight // variable not used
+   //LOCAL oPenGray // variable not used
 
    IF ::bPaint != NIL
       Eval(::bPaint, Self)

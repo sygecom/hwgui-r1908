@@ -74,6 +74,8 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
                   bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor) CLASS HRadioButton
+                  
+   HB_SYMBOL_UNUSED(bcolor)
 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := IIf(nId == NIL, ::NewId(), nId)
@@ -117,7 +119,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate CLASS HRadioButton
+METHOD Activate() CLASS HRadioButton
 Local groupHandle := ::oGroup:handle
 
    IF !Empty(::oParent:handle)
@@ -130,6 +132,9 @@ Local groupHandle := ::oGroup:handle
 RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    IF msg == WM_LBUTTONUP
       IF ::oGroup:bSetGet == NIL

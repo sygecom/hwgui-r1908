@@ -57,8 +57,11 @@ CLASS HWindow INHERIT HCustomWindow
 
    DATA aOffset
 
-   METHOD New(Icon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-          bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId)
+   //METHOD New(Icon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+   //       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId)
+   METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  cAppName, oBmp, cHelp, nHelpId)
    METHOD AddItem(oWnd)
    METHOD DelItem(oWnd)
    METHOD FindWindow(hWnd)
@@ -72,6 +75,10 @@ ENDCLASS
 METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
                   cAppName, oBmp, cHelp, nHelpId) CLASS HWindow
+
+   HB_SYMBOL_UNUSED(clr)
+   HB_SYMBOL_UNUSED(cMenu)
+   HB_SYMBOL_UNUSED(cHelp)
 
    ::oDefaultParent := Self
    ::title    := cTitle
@@ -127,7 +134,7 @@ METHOD FindWindow(hWnd) CLASS HWindow
 // RETURN IIf(i == 0, NIL, ::aWindows[i])
 RETURN hwg_GetWindowObject(hWnd)
 
-METHOD GetMain CLASS HWindow
+METHOD GetMain() CLASS HWindow
 RETURN IIf(Len(::aWindows) > 0,            ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1],                  ;
@@ -160,7 +167,8 @@ CLASS HMainWindow INHERIT HWindow
    METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                      cAppName, oBmp, cHelp, nHelpId)
-   METHOD Activate(lShow)
+   //METHOD Activate(lShow)
+   METHOD Activate(lShow, lMaximize, lMinimize)
    METHOD onEvent(msg, wParam, lParam)
    // METHOD GetMdiActive() INLINE ::FindWindow(hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0))
 
@@ -169,6 +177,8 @@ ENDCLASS
 METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                      cAppName, oBmp, cHelp, nHelpId) CLASS HMainWindow
+
+   HB_SYMBOL_UNUSED(nPos)
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,  ;
@@ -196,7 +206,11 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
 RETURN Self
 
 METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
-Local oWndClient, handle
+
+   //LOCAL oWndClient // variable not used
+   //LOCAL handle // variable not used
+   
+   HB_SYMBOL_UNUSED(lShow)
 
    // hwg_CreateGetList(Self)
 
@@ -337,7 +351,13 @@ RETURN -1
 */
 
 FUNCTION hwg_ReleaseAllWindows(hWnd)
-Local oItem, iCont, nCont
+
+   //LOCAL oItem // variable not used
+   //LOCAL iCont // variable not used
+   //LOCAL nCont // variable not used
+   
+   HB_SYMBOL_UNUSED(hWnd)
+
 /*
    //  Vamos mandar destruir as filhas
    // Destroi as CHILD's desta MAIN
@@ -367,7 +387,16 @@ Local oItem, iCont, nCont
 RETURN -1
 
 STATIC FUNCTION onCommand(oWnd, wParam, lParam)
-Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
+
+   LOCAL iItem
+   LOCAL iCont
+   LOCAL aMenu
+   LOCAL iParHigh
+   LOCAL iParLow
+   //LOCAL nHandle // variable not used
+
+   HB_SYMBOL_UNUSED(lParam)
+
 /*
    IF wParam == SC_CLOSE
        IF Len(HWindow():aWindows) > 2 .AND. (nHandle := hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIGETACTIVE, 0, 0)) > 0
@@ -385,7 +414,7 @@ Local iItem, iCont, aMenu, iParHigh, iParLow, nHandle
        nHandle := HWindow():aWindows[wParam - FIRST_MDICHILD_ID + 3]:handle
        hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIACTIVATE, nHandle, 0)
    ENDIF
-*/   
+*/
    iParHigh := hwg_HIWORD(wParam)
    iParLow := hwg_LOWORD(wParam)
    IF oWnd:aEvents != NIL .AND. ;
@@ -409,6 +438,8 @@ RETURN 0
 
 STATIC FUNCTION onMove(oWnd, wParam, lParam)
 
+   HB_SYMBOL_UNUSED(wParam)
+
    // writelog("onMove: "+str(oWnd:nLeft)+" "+str(oWnd:nTop)+" -> "+str(hwg_LOWORD(lParam))+str(hwg_HIWORD(lParam)))
    oWnd:nLeft := hwg_LOWORD(lParam)
    oWnd:nTop  := hwg_HIWORD(lParam)
@@ -416,16 +447,25 @@ STATIC FUNCTION onMove(oWnd, wParam, lParam)
 RETURN 0
 
 STATIC FUNCTION onEraseBk(oWnd, wParam)
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(wParam)
+
 /*
    IF oWnd:oBmp != NIL
        hwg_SpreadBitmap(wParam, oWnd:handle, oWnd:oBmp:handle)
        RETURN 1
    ENDIF
-*/   
+*/
 RETURN 0
 
 STATIC FUNCTION onSysCommand(oWnd, wParam)
-Local i
+
+   //LOCAL i // variable not used
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(wParam)
+
 /*
    IF wParam == SC_CLOSE
        IF HB_IsBlock(oWnd:bDestroy)
@@ -434,7 +474,7 @@ Local i
           IF !i
              RETURN 0
           ENDIF
-       ENDIF  
+       ENDIF
        IF __ObjHasMsg(oWnd, "ONOTIFYICON") .AND. oWnd:oNotifyIcon != NIL
           hwg_ShellNotifyIcon(.F., oWnd:handle, oWnd:oNotifyIcon:handle)
        ENDIF
@@ -451,7 +491,13 @@ Local i
 RETURN 0
 
 STATIC FUNCTION onNotifyIcon(oWnd, wParam, lParam)
-Local ar
+
+   //LOCAL ar // variable not used
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
 /*
    IF wParam == ID_NOTIFYICON
        IF lParam == WM_LBUTTONDOWN
@@ -465,20 +511,34 @@ Local ar
           ENDIF
        ENDIF
    ENDIF
-*/   
+*/
 RETURN 0
 
+#if 0 // static function never used
 STATIC FUNCTION onMdiCreate(oWnd, lParam)
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(lParam)
+
 /*
    hwg_InitControls(oWnd)
    IF oWnd:bInit != NIL
       Eval(oWnd:bInit, oWnd)
-   ENDIF  
+   ENDIF
 */
 RETURN 0
+#endif
 
+#if 0 // static function never used
 STATIC FUNCTION onMdiCommand(oWnd, wParam)
-Local iParHigh, iParLow, iItem
+
+   //LOCAL iParHigh // variable not used
+   //LOCAL iParLow // variable not used
+   //LOCAL iItem // variable not used
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(wParam)
+
 /*
    IF wParam == SC_CLOSE
       hwg_SendMessage(HWindow():aWindows[2]:handle, WM_MDIDESTROY, oWnd:handle, 0)
@@ -491,8 +551,14 @@ Local iParHigh, iParLow, iItem
    ENDIF
 */
 RETURN 0
+#endif
 
+#if 0 // static function never used
 STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
+
+   HB_SYMBOL_UNUSED(oWnd)
+   HB_SYMBOL_UNUSED(wParam)
+
 /*
    IF wParam == 1 .AND. oWnd:bGetFocus != NIL
       Eval(oWnd:bGetFocus, oWnd)
@@ -501,9 +567,16 @@ STATIC FUNCTION onMdiNcActivate(oWnd, wParam)
    ENDIF
 */
 RETURN 0
+#endif
 
 STATIC FUNCTION onEnterIdle(oDlg, wParam, lParam)
-Local oItem
+
+   //LOCAL oItem // variable not used
+
+   HB_SYMBOL_UNUSED(oDlg)
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
 /*
    IF wParam == 0 .AND. (oItem := Atail(HDialog():aModalDialogs)) != NIL ;
          .AND. oItem:handle == lParam .AND. !oItem:lActivated

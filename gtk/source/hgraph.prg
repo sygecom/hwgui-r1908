@@ -30,8 +30,10 @@ CLASS HGraph INHERIT HControl
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD CalcMinMax()
-   METHOD Paint()
-   METHOD Rebuild(aValues)
+   //METHOD Paint()
+   METHOD Paint(lpdis)
+   //METHOD Rebuild(aValues)
+   METHOD Rebuild(aValues, nType)
 
 ENDCLASS
 
@@ -50,7 +52,7 @@ METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 
 RETURN Self
 
-METHOD Activate CLASS HGraph
+METHOD Activate() CLASS HGraph
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -60,6 +62,10 @@ METHOD Activate CLASS HGraph
 RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HGraph
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
    IF msg == WM_PAINT
       ::Paint()
    ENDIF
@@ -102,6 +108,8 @@ Local hDC := hwg_GetDC(::handle)
 Local x1 := 0, y1 := 0, x2 := ::nWidth, y2 := ::nHeight
 Local i, j, nLen
 Local px1, px2, py1, py2, nWidth
+
+   HB_SYMNOL_UNUSED(lpdis)
 
    IF ::xmax == NIL
       ::CalcMinMax()

@@ -27,7 +27,7 @@ CLASS HControl INHERIT HCustomWindow
    DATA id
    DATA tooltip
    DATA lInit    INIT .F.
-   DATA name
+   //DATA name // TODO: duplicated
    DATA Anchor          INIT 0
    DATA   xName           HIDDEN
    ACCESS Name INLINE ::xName
@@ -45,7 +45,8 @@ CLASS HControl INHERIT HCustomWindow
    METHOD Enable() INLINE hwg_EnableWindow(::handle, .T.)
    METHOD IsEnabled() INLINE hwg_IsWindowEnabled(::Handle)
    METHOD SetFocus() INLINE hwg_EnableWindow(::handle, .T.)
-   METHOD Move(x1, y1, width, height)
+   //METHOD Move(x1, y1, width, height)
+   METHOD Move(x1, y1, width, height, lMoveParent)
    /*
    METHOD GetText() INLINE hwg_GetWindowText(::handle)
    METHOD SetText(c) INLINE hwg_SetWindowText(::Handle, c)
@@ -97,7 +98,7 @@ METHOD AddName(cName) CLASS HControl
    
 RETURN NIL
 
-METHOD INIT CLASS HControl
+METHOD INIT() CLASS HControl
 Local o
 
    IF !::lInit
@@ -307,8 +308,9 @@ METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint) CLASS H
 
 RETURN Self
 
-METHOD Activate CLASS HStatus
-Local aCoors
+METHOD Activate() CLASS HStatus
+
+   //LOCAL aCoors // variable not used
 
    IF !Empty(::oParent:handle)
 
@@ -322,7 +324,7 @@ Local aCoors
    ENDIF
 RETURN NIL
 
-METHOD Init CLASS HStatus
+METHOD Init() CLASS HStatus
    IF !::lInit
       ::Super:Init()
    ENDIF
@@ -356,7 +358,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate CLASS HStatic
+METHOD Activate() CLASS HStatic
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title)
@@ -401,7 +403,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate CLASS HButton
+METHOD Activate() CLASS HButton
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -423,6 +425,9 @@ RETURN  NIL
 #else
 METHOD onEvent(msg, wParam, lParam) CLASS HButton
 
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
    SWITCH msg
    CASE WM_LBUTTONUP
       IF ::bClick != NIL
@@ -438,9 +443,12 @@ CLASS HButtonEX INHERIT HButton
    Data hBitmap
    DATA hIcon
 
+   //METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   //cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+   //bColor, lTransp, hBitmap, hIcon)
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-   cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-   bColor, lTransp, hBitmap, hIcon)
+               cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+               tcolor, bColor, hBitmap, iStyle, hicon, Transp)
 
 METHOD Activate
 END CLASS
@@ -448,6 +456,9 @@ END CLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
                tcolor, bColor, hBitmap, iStyle, hicon, Transp) CLASS HButtonEx
+               
+   HB_SYMBOL_UNUSED(iStyle)
+   HB_SYMBOL_UNUSED(Transp)
 
 
    ::hBitmap                            := hBitmap
@@ -499,7 +510,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
 
 RETURN Self
 
-METHOD Activate CLASS HGroup
+METHOD Activate() CLASS HGroup
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -538,7 +549,7 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize) CLASS hline
 
 RETURN Self
 
-METHOD Activate CLASS hline
+METHOD Activate() CLASS hline
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateSep(::oParent:handle, ::lVert, ::nLeft, ::nTop, ;
                                  ::nWidth, ::nHeight)

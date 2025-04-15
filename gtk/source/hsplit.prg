@@ -24,8 +24,10 @@ CLASS HSplitter INHERIT HControl
    DATA lMoved INIT .F.
    DATA bEndDrag
 
+   //METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+   //               bSize, bPaint, color, bcolor, aLeft, aRight)
    METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-                  bSize, bPaint, color, bcolor, aLeft, aRight)
+                  bSize, bDraw, color, bcolor, aLeft, aRight)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
@@ -61,6 +63,8 @@ RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
+   HB_SYMBOL_UNUSED(wParam)
+
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == NIL
          ::hCursor := hwg_LoadCursor(GDK_HAND1)
@@ -86,7 +90,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
 RETURN -1
 
-METHOD Init CLASS HSplitter
+METHOD Init() CLASS HSplitter
 
    IF !::lInit
       ::Super:Init()
@@ -96,7 +100,10 @@ METHOD Init CLASS HSplitter
 RETURN NIL
 
 METHOD Paint(lpdis) CLASS HSplitter
-Local hDC
+   
+   LOCAL hDC
+   
+   HB_SYMBOL_UNUSED(lpdis)
 
    IF ::bPaint != NIL
       Eval(::bPaint, Self)

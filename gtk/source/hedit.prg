@@ -53,13 +53,16 @@ CLASS HEdit INHERIT HControl
    DATA lMaxLength   INIT NIL
    DATA nLastKey     INIT 0
 
+   //METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   //      oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, cPicture, lNoBorder, lMaxLength)
    METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, cPicture, lNoBorder, lMaxLength)
+                  oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, ;
+                  tcolor, bcolor, cPicture, lNoBorder, lMaxLength, lPassword)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Init()
    METHOD SetGet(value) INLINE Eval(::bSetGet, value, self)
-   METHOD Refresh() 
+   METHOD Refresh()
    METHOD SetText(c)
    METHOD GetText() INLINE hwg_Edit_GetText(::handle)
 
@@ -68,7 +71,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, ;
                   tcolor, bcolor, cPicture, lNoBorder, lMaxLength, lPassword) CLASS HEdit
- 
+
    nStyle := hwg_BitOr(iIf(nStyle == NIL, 0, nStyle), ;
                 WS_TABSTOP+IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+;
                 IIf(lPassword == NIL .OR. !lPassword, 0, ES_PASSWORD))
@@ -92,12 +95,12 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    IF !Empty(cPicture) .OR. cPicture == NIL .And. lMaxLength != NIL .OR. !Empty(lMaxLength)
       ::lMaxLength := lMaxLength
    ENDIF
-/*   IF ::lMaxLength != NIL .AND. !Empty(::lMaxLength) 
+/*   IF ::lMaxLength != NIL .AND. !Empty(::lMaxLength)
       IF !Empty(cPicture) .OR. cPicture == NIL
          cPicture := Replicate("X", ::lMaxLength)
       ENDIF
    ENDIF                        ----------------- commented out by Maurizio la Cecilia */
- 
+
    ParsePict(Self, cPicture, vari)
    ::Activate()
 
@@ -109,7 +112,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate CLASS HEdit
+METHOD Activate() CLASS HEdit
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateEdit(::oParent:handle, ::id, ;
@@ -120,14 +123,18 @@ METHOD Activate CLASS HEdit
 RETURN NIL
 
 METHOD onEvent(msg, wParam, lParam) CLASS HEdit
-Local oParent := ::oParent, nPos, nctrl, cKeyb
+
+   LOCAL oParent := ::oParent
+   LOCAL nPos
+   //LOCAL nctrl // variable not used
+   //LOCAL cKeyb // variable not used
 
    // WriteLog("Edit: "+Str(msg, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
    IF ::bAnyEvent != NIL .AND. Eval(::bAnyEvent, Self, msg, wParam, lParam) != 0
       RETURN 0
    ENDIF
-   
-   IF msg == WM_KEYUP  
+
+   IF msg == WM_KEYUP
       IF wParam != 16 .AND. wParam != 17 .AND. wParam != 18
          DO WHILE oParent != NIL .AND. !__ObjHasMsg(oParent, "GETLIST")
             oParent := oParent:oParent
@@ -233,7 +240,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
          ELSEIF wParam >= 32 .AND. wParam < 65000
             RETURN GetApplyKey(Self, Chr(wParam))
 	 ELSE
-	    RETURN 1    
+	    RETURN 1
          ENDIF
       ENDIF
 
@@ -242,6 +249,7 @@ Local oParent := ::oParent, nPos, nctrl, cKeyb
       IF msg == WM_MOUSEWHEEL
          nPos := hwg_HIWORD(wParam)
          nPos := IIf(nPos > 32768, nPos - 65535, nPos)
+         HB_SYMBOL_UNUSED(nPos)
          // hwg_SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
          // hwg_SendMessage(::handle, EM_SCROLL, IIf(nPos > 0, SB_LINEUP, SB_LINEDOWN), 0)
       ENDIF
@@ -384,7 +392,11 @@ Local cChar
 RETURN .F.
 
 STATIC FUNCTION KeyRight(oEdit, nPos)
-Local i, masklen, newpos, vari
+
+   //LOCAL i // variable not used
+   LOCAL masklen
+   LOCAL newpos
+   //LOCAL vari // variable not used
 
    IF oEdit == NIL
       RETURN 0
@@ -418,7 +430,9 @@ Local i, masklen, newpos, vari
 RETURN 1
 
 STATIC FUNCTION KeyLeft(oEdit, nPos)
-Local i
+
+   //LOCAL i // variable not used
+
    IF oEdit == NIL
       RETURN 0
    ENDIF
@@ -525,9 +539,17 @@ Local cPic
 RETURN cChar
 
 STATIC FUNCTION GetApplyKey(oEdit, cKey)
-Local nPos, nGetLen, nLen, vari, i, x, newPos
+
+   LOCAL nPos
+   LOCAL nGetLen
+   LOCAL nLen
+   LOCAL vari
+   LOCAL i
+   LOCAL x
+   LOCAL newPos
 
    x := hwg_edit_Getpos(oEdit:handle)
+   HB_SYMBOL_UNUSED(x)
 
    // writelog("GetApplyKey "+str(asc(ckey)))
    oEdit:title := hwg_edit_Gettext(oEdit:handle)

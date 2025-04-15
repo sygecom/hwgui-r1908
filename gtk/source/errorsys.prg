@@ -25,8 +25,8 @@ STATIC FUNCTION DefError(oError)
    LOCAL cMessage
    LOCAL cDOSError
 
-   LOCAL aOptions
-   LOCAL nChoice
+   //LOCAL aOptions // variable not used
+   //LOCAL nChoice // variable not used
 
    LOCAL n
 

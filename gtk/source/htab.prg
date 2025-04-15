@@ -48,7 +48,13 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, bClick, bGetFocus, bLostFocus) CLASS HTab
-LOCAL i, aBmpSize
+
+   //LOCAL i // variable not used
+   //LOCAL aBmpSize // variable not used
+
+   HB_SYMBOL_UNUSED(aImages)
+   HB_SYMBOL_UNUSED(lResour)
+   HB_SYMBOL_UNUSED(nBC)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
                   bSize, bPaint)
@@ -68,7 +74,7 @@ LOCAL i, aBmpSize
 
 RETURN Self
 
-METHOD Activate CLASS HTab
+METHOD Activate() CLASS HTab
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateTabControl(::oParent:handle, ::id, ;

@@ -45,6 +45,10 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
             lWeekNumbers) CLASS HMonthCalendar
 
+   HB_SYMBOL_UNUSED(lNoToday)
+   HB_SYMBOL_UNUSED(lNoTodayCircle)
+   HB_SYMBOL_UNUSED(lWeekNumbers)
+
 //   nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
 //   nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
 //   nStyle   += IIf(lNoTodayCircle == NIL .OR. !lNoTodayCircle, 0, MCS_NOTODAYCIRCLE)
@@ -56,17 +60,17 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    ::bChange := bChange
 
-//   If bChange != NIL 
+//   If bChange != NIL
 //      ::oParent:AddEvent(MCN_SELECT, ::id, bChange, .T.)
 //      ::oParent:AddEvent(MCN_SELCHANGE, ::id, bChange, .T.)
-//   EndIf 
+//   EndIf
 
    ::Activate()
 RETURN Self
 
 //--------------------------------------------------------------------------//
 
-METHOD Activate CLASS HMonthCalendar
+METHOD Activate() CLASS HMonthCalendar
 
    If !Empty(::oParent:handle)
       ::handle := hwg_InitMonthCalendar(::oParent:handle, , ;

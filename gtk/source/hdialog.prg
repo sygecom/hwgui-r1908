@@ -53,16 +53,16 @@ CLASS HDialog INHERIT HCustomWindow
    DATA GetList  INIT {}      // The array of GET items in the dialog
    DATA KeyList  INIT {}      // The array of keys ( as Clipper's SET KEY )
    DATA lExitOnEnter INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
-                              // Added by Sandro Freire 
+                              // Added by Sandro Freire
    DATA lExitOnEsc   INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
-                              // Added by Sandro Freire 
+                              // Added by Sandro Freire
    DATA nLastKey INIT 0
    DATA oIcon, oBmp
    DATA bActivate
    DATA lActivated INIT .F.
    DATA xResourceID
    DATA lModal
-   DATA lActivated INIT .F.
+   //DATA lActivated INIT .F. // duplicated
    DATA nScrollBars INIT - 1
    
 
@@ -83,6 +83,8 @@ ENDCLASS
 
 METHOD New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
                   bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc) CLASS HDialog
+
+   HB_SYMBOL_UNUSED(nHelpId)
 
    ::oDefaultParent := Self
    ::xResourceID := xResourceID
@@ -186,7 +188,8 @@ RETURN IIf(i == 0, NIL, ::Getlist[i])
 // ------------------------------------
 
 STATIC FUNCTION InitModalDlg(oDlg)
-Local iCont
+
+   //LOCAL iCont // variable not used
 
    // writelog(str(oDlg:handle)+" "+oDlg:title)
    IF HB_IsArray(oDlg:menu)
@@ -212,7 +215,10 @@ Local iCont
 RETURN 1
 
 STATIC FUNCTION onEnterIdle(oDlg, wParam, lParam)
-Local oItem
+
+   LOCAL oItem
+   
+   HB_SYMBOL_UNUSED(oDlg)
 
    IF wParam == 0 .AND. (oItem := Atail(HDialog():aModalDialogs)) != NIL ;
          .AND. oItem:handle == lParam .AND. !oItem:lActivated
@@ -224,7 +230,12 @@ Local oItem
 RETURN 0
 
 STATIC FUNCTION onEraseBk(oDlg, hDC)
-Local aCoors
+
+   //LOCAL aCoors // variable not used
+
+   HB_SYMBOL_UNUSED(oDlg)
+   HB_SYMBOL_UNUSED(hDC)
+
 /*
    IF __ObjHasMsg(oDlg, "OBMP")
       IF oDlg:oBmp != NIL
@@ -246,8 +257,14 @@ Local aCoors
 RETURN 0
 
 FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
-Local iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
-Local aMenu, i, hCtrl
+
+   LOCAL iParHigh := hwg_HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
+   LOCAL aMenu
+   LOCAL i
+   LOCAL hCtrl
+   
+   HB_SYMBOL_UNUSED(lParam)
 
    // WriteLog(Str(iParHigh, 10)+"|"+Str(iParLow, 10)+"|"+Str(wParam, 10)+"|"+Str(lParam, 10))
    IF iParHigh == 0
@@ -308,9 +325,17 @@ Local aMenu, i, hCtrl
 RETURN 1
 
 STATIC FUNCTION onSize(oDlg, wParam, lParam)
-   LOCAL aControls, iCont , nW1, nH1
-   LOCAL nW := hwg_LOWORD(lParam), nH := hwg_HIWORD(lParam)
-   LOCAL nScrollMax
+
+   LOCAL aControls
+   LOCAL iCont
+   LOCAL nW1
+   LOCAL nH1
+   //LOCAL nW := hwg_LOWORD(lParam) // variable not used
+   //LOCAL nH := hwg_HIWORD(lParam) // variable not used
+   //LOCAL nScrollMax // variable not used
+
+   HB_SYMBOL_UNUSED(wParam)
+
    /*
    IF (oDlg:nHeight = oDlg:minHeight .AND. nH < oDlg:minHeight) .OR. ;
       (oDlg:nHeight = oDlg:maxHeight .AND. nH > oDlg:maxHeight) .OR. ;
@@ -342,7 +367,10 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
 RETURN 0
 
 STATIC FUNCTION onActivate(oDlg, wParam, lParam)
-Local iParLow := hwg_LOWORD(wParam)
+
+   LOCAL iParLow := hwg_LOWORD(wParam)
+   
+   HB_SYMBOL_UNUSED(lParam)
 
    if iParLow > 0 .AND. oDlg:bGetFocus != NIL
       Eval(oDlg:bGetFocus, oDlg)

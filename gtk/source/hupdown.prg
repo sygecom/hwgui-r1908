@@ -72,7 +72,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate CLASS HUpDown
+METHOD Activate() CLASS HUpDown
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateUpDownControl(::oParent:handle, ;
           ::nLeft, ::nTop, ::nWidth, ::nHeight, Val(::title), ::nLower, ::nUpper)
@@ -81,7 +81,8 @@ METHOD Activate CLASS HUpDown
 RETURN NIL
 
 METHOD Refresh() CLASS HUpDown
-Local vari
+
+   //LOCAL vari // variable not used
 
    IF ::bSetGet != NIL
       ::value := Eval(::bSetGet)

@@ -89,7 +89,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
 
 RETURN Self
 
-METHOD Activate CLASS HOwnButton
+METHOD Activate() CLASS HOwnButton
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateOwnBtn(::oParent:handle, ::id, ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -118,7 +118,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
 
 RETURN 0
 
-METHOD Init CLASS HOwnButton
+METHOD Init() CLASS HOwnButton
 
    IF !::lInit
       ::Super:Init()
@@ -128,8 +128,16 @@ METHOD Init CLASS HOwnButton
 RETURN NIL
 
 METHOD Paint() CLASS HOwnButton
-Local hDC := hwg_GetDC(::handle)
-Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
+
+   LOCAL hDC := hwg_GetDC(::handle)
+   LOCAL aCoors
+   LOCAL aMetr
+   //LOCAL oPen // variable not used
+   //LOCAL oldBkColor // variable not used
+   LOCAL x1
+   LOCAL y1
+   LOCAL x2
+   LOCAL y2
 
    aCoors := hwg_GetClientRect(::handle)
 
@@ -201,8 +209,12 @@ Local aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 RETURN NIL
 
 METHOD MouseMove(wParam, lParam) CLASS HOwnButton
-Local lEnter := (hwg_BitAnd(wParam, 16) > 0)
-Local res := .F.
+
+   LOCAL lEnter := (hwg_BitAnd(wParam, 16) > 0)
+   //LOCAL res := .F. // variable not used
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    IF ::state != OBTN_INIT
       IF !lEnter .AND. !::lPress
@@ -214,7 +226,7 @@ Local res := .F.
          hwg_RedrawWindow(::handle)
       ENDIF
    ENDIF
-   
+
 RETURN NIL
 
 METHOD MDown() CLASS HOwnButton

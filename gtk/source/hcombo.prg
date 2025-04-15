@@ -40,7 +40,8 @@ CLASS HComboBox INHERIT HControl
                   aItems, oFont, bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
-   METHOD Init(aCombo, nCurrent)
+   //METHOD Init(aCombo, nCurrent)
+   METHOD Init()
    METHOD Refresh()     
    METHOD Setitem(nPos)
    METHOD End()
@@ -94,7 +95,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate CLASS HComboBox
+METHOD Activate() CLASS HComboBox
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateCombo(::oParent:handle, ::id, ;
@@ -131,6 +132,9 @@ RETURN 0
 #else
 METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
+
    SWITCH msg
    CASE EN_SETFOCUS
       IF ::bSetGet == NIL
@@ -155,7 +159,8 @@ RETURN 0
 #endif
 
 METHOD Init() CLASS HComboBox
-Local i
+
+   //LOCAL i // variable not used
 
    IF !::lInit
       ::Super:Init()
@@ -178,7 +183,9 @@ Local i
 RETURN NIL
 
 METHOD Refresh() CLASS HComboBox
-Local vari, i
+
+   LOCAL vari
+   //LOCAL i // variable not used
 
    IF ::bSetGet != NIL
       vari := Eval(::bSetGet, , Self)

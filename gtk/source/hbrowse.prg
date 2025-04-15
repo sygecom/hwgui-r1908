@@ -162,7 +162,8 @@ CLASS HBrowse INHERIT HControl
                   bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, lNoBorder,;
                   lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect)
    METHOD InitBrw(nType)
-   METHOD Rebuild()
+   //METHOD Rebuild()
+   METHOD Rebuild(hDC)
    METHOD Activate()
    METHOD Init()
    METHOD onEvent(msg, wParam, lParam)
@@ -170,16 +171,20 @@ CLASS HBrowse INHERIT HControl
    METHOD InsColumn(oColumn, nPos)
    METHOD DelColumn(nPos)
    METHOD Paint()
-   METHOD LineOut()
+   //METHOD LineOut()
+   METHOD LineOut(nstroka, vybfld, hDC, lSelected, lClear)
    METHOD HeaderOut(hDC)
    METHOD FooterOut(hDC)
    METHOD SetColumn(nCol)
    METHOD DoHScroll(wParam)
    METHOD DoVScroll(wParam)
    METHOD LineDown(lMouse)
-   METHOD LineUp()
-   METHOD PageUp()
-   METHOD PageDown()
+   //METHOD LineUp()
+   METHOD LINEUP(lMouse)
+   //METHOD PageUp()
+   METHOD PAGEUP(lMouse)
+   //METHOD PageDown()
+   METHOD PAGEDOWN(lMouse)
    METHOD Home() INLINE ::DoHScroll(SB_LEFT)
    METHOD Bottom(lPaint)
    METHOD Top()
@@ -231,7 +236,7 @@ METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, 
 RETURN Self
 
 //----------------------------------------------------//
-METHOD Activate CLASS HBrowse
+METHOD Activate() CLASS HBrowse
 
    if !Empty(::oParent:handle)
       ::handle := hwg_CreateBrowse(Self)
@@ -371,6 +376,7 @@ Local aCoors, retValue := -1
       CASE WM_PAINT
          ::Paint()
          retValue := 1
+         HB_SYMBOL_UNUSED(retValue)
          EXIT
 
       CASE WM_ERASEBKGND
@@ -418,6 +424,7 @@ Local aCoors, retValue := -1
          IF ::bKeyDown != NIL
             IF !Eval(::bKeyDown, Self, wParam)
                retValue := 1
+               HB_SYMBOL_UNUSED(retValue)
             ENDIF
          ENDIF
          SWITCH wParam
@@ -508,7 +515,7 @@ RETURN retValue
 #endif
 
 //----------------------------------------------------//
-METHOD Init CLASS HBrowse
+METHOD Init() CLASS HBrowse
 
    IF !::lInit
       ::Super:Init()
@@ -518,7 +525,8 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD AddColumn(oColumn) CLASS HBrowse
-Local n
+
+   //LOCAL n // variable not used
 
    AAdd(::aColumns, oColumn)
    ::lChanged := .T.
@@ -634,6 +642,8 @@ RETURN NIL
 METHOD Rebuild(hDC) CLASS HBrowse
 
    local i, j, oColumn, xSize, nColLen, nHdrLen, nCount
+   
+   HB_SYMBOL_UNUSED(hDC)
 
    IF ::brush != NIL
       ::brush:Release()
@@ -696,9 +706,17 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD Paint() CLASS HBrowse
-Local aCoors, aMetr, i, oldAlias, tmp, nRows
-Local pps, hDC
-Local oldBkColor, oldTColor
+
+   LOCAL aCoors
+   LOCAL aMetr
+   LOCAL i
+   //LOCAL oldAlias // variable not used
+   LOCAL tmp
+   LOCAL nRows
+   //LOCAL pps // variable not used
+   LOCAL hDC
+   //LOCAL oldBkColor // variable not used
+   //LOCAL oldTColor // variable not used
 
    IF !::active .OR. Empty(::aColumns)
       RETURN NIL
@@ -840,10 +858,20 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HeaderOut(hDC) CLASS HBrowse
-Local i, x, oldc, fif, xSize
-Local nRows := Min(::nRecords+IIf(::lAppMode, 1, 0), ::rowCount)
-Local oPen // , oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DFACE))
-Local oColumn, nLine, cStr, cNWSE, oPenHdr, oPenLight
+
+   LOCAL i
+   LOCAL x
+   LOCAL oldc
+   LOCAL fif
+   LOCAL xSize
+   LOCAL nRows := Min(::nRecords+IIf(::lAppMode, 1, 0), ::rowCount)
+   LOCAL oPen // , oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DFACE))
+   LOCAL oColumn
+   LOCAL nLine
+   LOCAL cStr
+   LOCAL cNWSE
+   LOCAL oPenHdr
+   LOCAL oPenLight := NIL // neved assigned
 
    /*
    IF ::lSep3d
@@ -943,8 +971,15 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD FooterOut(hDC) CLASS HBrowse
-Local i, x, fif, xSize, oPen, nLine, cStr
-Local oColumn
+
+   //LOCAL i // variable not used
+   LOCAL x
+   LOCAL fif
+   LOCAL xSize
+   LOCAL oPen
+   LOCAL nLine
+   LOCAL cStr
+   LOCAL oColumn
 
    IF ::lDispSep
       oPen := HPen():Add(BS_SOLID, 1, ::sepColor)
@@ -984,12 +1019,29 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD LineOut(nstroka, vybfld, hDC, lSelected, lClear) CLASS HBrowse
-Local x, dx, i := 1, shablon, sviv, fif, fldname, slen, xSize
-Local j, ob, bw, bh, y1, hBReal
-Local oldBkColor, oldTColor, oldBk1Color, oldT1Color
-Local oLineBrush := IIf(lSelected, ::brushSel, ::brush)
-Local lColumnFont := .F.
-Local aCores
+
+   LOCAL x
+   //LOCAL dx // variable not used
+   LOCAL i := 1
+   //LOCAL shablon // variable not used
+   LOCAL sviv
+   LOCAL fif
+   LOCAL fldname
+   //LOCAL slen // variable not used
+   LOCAL xSize
+   LOCAL j
+   LOCAL ob
+   LOCAL bw
+   LOCAL bh
+   LOCAL y1
+   LOCAL hBReal
+   LOCAL oldBkColor
+   LOCAL oldTColor
+   LOCAL oldBk1Color
+   LOCAL oldT1Color
+   LOCAL oLineBrush := IIf(lSelected, ::brushSel, ::brush)
+   LOCAL lColumnFont := .F.
+   LOCAL aCores
 
    ::xpos := x := ::x1
    IF lClear == NIL ; lClear := .F. ; ENDIF
@@ -1001,6 +1053,7 @@ Local aCores
       oldBkColor := hwg_SetBkColor(hDC, IIf(lSelected, ::bcolorSel, ::bcolor))
       oldTColor  := hwg_SetTextColor(hDC, IIf(lSelected, ::tcolorSel, ::tcolor))
       fldname := Space(8)
+      HB_SYMBOL_UNUSED(fldname)
       fif     := IIf(::freeze > 0, 1, ::nLeftCol)
 
       WHILE x < ::x2 - 2
@@ -1239,6 +1292,8 @@ RETURN NIL
 METHOD DoVScroll(wParam) CLASS HBrowse
 Local nScrollV := hwg_getAdjValue(::hScrollV)
 
+   HB_SYMBOL_UNUSED(wParam)
+
    if nScrollV - ::nScrollV == 1
       ::LINEDOWN(.T.)
    elseif nScrollV - ::nScrollV == -1
@@ -1439,7 +1494,7 @@ Local nPos
       hwg_SetAdjOptions(::hScrollV, nPos)
       ::nScrollV := nPos
    ENDIF
-   
+
    hwg_InvalidateRect(::area, 0)
    hwg_SetFocus(::area)
 
@@ -1447,11 +1502,17 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD ButtonDown(lParam) CLASS HBrowse
-Local hBrw := ::handle
-Local nLine := Int(hwg_HIWORD(lParam)/(::height+1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
-Local step := nLine - ::rowPos, res := .F., nrec
-Local maxPos, nPos
-Local xm := hwg_LOWORD(lParam), x1, fif
+
+   //LOCAL hBrw := ::handle // variable not used
+   LOCAL nLine := Int(hwg_HIWORD(lParam)/(::height+1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
+   LOCAL step := nLine - ::rowPos
+   LOCAL res := .F.
+   LOCAL nrec
+   LOCAL maxPos
+   LOCAL nPos
+   LOCAL xm := hwg_LOWORD(lParam)
+   LOCAL x1
+   LOCAL fif
 
    ::lBtnDbl := .F.
    x1  := ::x1
@@ -1519,8 +1580,12 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD ButtonUp(lParam) CLASS HBrowse
-Local hBrw := ::handle
-Local xPos := hwg_LOWORD(lParam), x := ::x1, x1, i := ::nLeftCol
+
+   LOCAL hBrw := ::handle
+   LOCAL xPos := hwg_LOWORD(lParam)
+   LOCAL x := ::x1
+   LOCAL x1
+   LOCAL i := ::nLeftCol
 
    IF ::lBtnDbl
       ::lBtnDbl := .F.
@@ -1562,8 +1627,9 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD ButtonDbl(lParam) CLASS HBrowse
-Local hBrw := ::handle
-Local nLine := Int(hwg_HIWORD(lParam)/(::height+1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
+
+   //LOCAL hBrw := ::handle // variable not used
+   LOCAL nLine := Int(hwg_HIWORD(lParam)/(::height+1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
 
    if nLine <= ::rowCurrCount
       ::ButtonDown(lParam)
@@ -1606,6 +1672,10 @@ RETURN NIL
 
 //----------------------------------------------------------------------------//
 METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos) CLASS HBrowse
+
+   HB_SYMBOL_UNUSED(nXPos)
+   HB_SYMBOL_UNUSED(nYPos)
+
    if hwg_BitAnd(nKeys, MK_MBUTTON) != 0
       if nDelta > 0
          ::PageUp()
@@ -1623,8 +1693,20 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD Edit(wParam, lParam) CLASS HBrowse
-Local fipos, lRes, x1, y1, fif, nWidth, lReadExit, rowPos
-Local oColumn, type
+
+   LOCAL fipos
+   LOCAL lRes
+   LOCAL x1
+   LOCAL y1
+   LOCAL fif
+   LOCAL nWidth
+   //LOCAL lReadExit // variable not used
+   LOCAL rowPos
+   LOCAL oColumn
+   LOCAL type
+
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    fipos := ::colpos + ::nLeftCol - 1 - ::freeze
    IF ::bEnter == NIL .OR. ;
@@ -1676,7 +1758,7 @@ Local oColumn, type
 	 ::oGet:Show()
 	 hwg_SetFocus(::oGet:handle)
 	 hwg_edit_SetPos(::oGet:handle, 0)
-       ::oGet:bAnyEvent := {|o, msg, c|GetEventHandler(Self, msg, c)}
+       ::oGet:bAnyEvent := {|o, msg, c|HB_SYMBOL_UNUSED(o), GetEventHandler(Self, msg, c)}
 
       ENDIF
    ENDIF
@@ -1693,7 +1775,11 @@ STATIC FUNCTION GetEventHandler(oBrw, msg, cod)
 RETURN 0
 
 STATIC FUNCTION VldBrwEdit(oBrw, fipos)
-Local oColumn := oBrw:aColumns[fipos], nRec, fif, nChoic
+
+   LOCAL oColumn := oBrw:aColumns[fipos]
+   LOCAL nRec
+   LOCAL fif
+   LOCAL nChoic := NIL // never assigned
 
    IF oBrw:oGet:nLastKey != GDK_Escape
       IF oColumn:aList != NIL
@@ -1781,12 +1867,12 @@ RETURN NIL
 //----------------------------------------------------//
 STATIC FUNCTION FldStr(oBrw, numf)
 
-   local fldtype
-   local rez
-   local vartmp
-   local nItem := numf
-   local type
-   local pict
+   //LOCAL fldtype // variable not used
+   LOCAL rez
+   LOCAL vartmp
+   //LOCAL nItem := numf // varible not used
+   LOCAL type
+   LOCAL pict
 
    if numf <= Len(oBrw:aColumns)
 
@@ -1874,7 +1960,7 @@ FUNCTION HWG_CREATEARLIST(oBrw, arr)
             oBrw:AddColumn(HColumn():New(, hwg_ColumnArBlock()))
          NEXT
       ELSE
-         oBrw:AddColumn(HColumn():New(, {|value, o|o:aArray[o:nCurrent]}))
+         oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value), o:aArray[o:nCurrent]}))
       ENDIF
    ENDIF
    Eval(oBrw:bGoTop, oBrw)
@@ -1955,7 +2041,7 @@ RETURN NIL
 // Locus metodus.
 METHOD ShowSizes() CLASS HBrowse
    local cText := ""
-   AEval(::aColumns, {|v, e|cText += ::aColumns[e]:heading + ": " + Str(Round(::aColumns[e]:width / 8, 0) - 2) + Chr(10) + Chr(13)})
+   AEval(::aColumns, {|v, e|HB_SYMBOL_UNSED(v), cText += ::aColumns[e]:heading + ": " + Str(Round(::aColumns[e]:width / 8, 0) - 2) + Chr(10) + Chr(13)})
    hwg_MsgInfo(cText)
 RETURN NIL
 

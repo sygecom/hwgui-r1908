@@ -35,7 +35,8 @@ CLASS HToolBar INHERIT HControl
    METHOD Activate()
    METHOD INIT()
    METHOD REFRESH()
-   METHOD AddButton(a, s, d, f, g, h)
+   //METHOD AddButton(a, s, d, f, g, h)
+   METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu)
    METHOD onEvent(msg, wParam, lParam)
    METHOD EnableAllButtons()
    METHOD DisableAllButtons()
@@ -49,6 +50,10 @@ ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
                   bSize, bPaint, ctooltip, tcolor, bcolor, lTransp , aitem) CLASS hToolBar
+
+   HB_SYMBOL_UNUSED(cCaption)
+   HB_SYMBOL_UNUSED(lTransp)
+
    Default  aItem to {}
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
                   bSize, bPaint, ctooltip, tcolor, bcolor)
@@ -59,7 +64,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate CLASS hToolBar
+METHOD Activate() CLASS hToolBar
    IF !Empty(::oParent:handle)
 
       ::handle := hwg_CreateToolBar(::oParent:handle)
@@ -68,15 +73,18 @@ METHOD Activate CLASS hToolBar
    ENDIF
 RETURN NIL
 
-METHOD INIT CLASS hToolBar
-Local n, n1
-Local aTemp
-Local hIm
-Local aButton := {}
-Local aBmpSize
-Local oImage
-Local nPos
-Local aItem
+METHOD INIT() CLASS hToolBar
+
+   LOCAL n
+   //LOCAL n1 // variable not used
+   //LOCAL aTemp // variable not used
+   //LOCAL hIm // variable not used
+   LOCAL aButton := {}
+   //LOCAL aBmpSize // variable not used
+   LOCAL oImage
+   //LOCAL nPos // variable not used
+   LOCAL aItem
+
    IF !::lInit
       ::Super:Init()
       For n := 1 TO len(::aItem)
@@ -210,7 +218,11 @@ METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu) CLASS hTo
 RETURN Self
 
 METHOD onEvent(msg, wParam, lParam) CLASS HToolbar
-Local nPos
+
+   LOCAL nPos
+   
+   HB_SYMBOL_UNUSED(lParam)
+
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos > 0

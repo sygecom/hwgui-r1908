@@ -355,8 +355,10 @@ RETURN Self
 METHOD AddFile(name, HDC) CLASS HBitmap
 Local i, aBmpSize
 
+   HB_SYMBOL_UNUSED(HDC)
+
    #ifdef __XHARBOUR__
-   For EACH i IN ::aBitmaps 
+   For EACH i IN ::aBitmaps
       IF i:name == name
          i:nCounter ++
          RETURN i
@@ -384,7 +386,11 @@ Local i, aBmpSize
 RETURN Self
 
 METHOD AddWindow(oWnd, lFull) CLASS HBitmap
-Local i, aBmpSize
+   
+   //LOCAL i // variable not used
+   LOCAL aBmpSize
+
+   HB_SYMBOL_UNUSED(lFull)
 
    // ::handle := hwg_Window2Bitmap(oWnd:handle, lFull)
    ::name := LTrim(Str(oWnd:handle))
@@ -434,20 +440,24 @@ CLASS HIcon INHERIT HObject
    DATA nWidth, nHeight
 
    METHOD AddResource(name)
-   METHOD AddFile(name, HDC)
+   //METHOD AddFile(name, HDC)
+   METHOD AddFile(name)
    METHOD Release()
 
 ENDCLASS
 
 METHOD AddResource(name) CLASS HIcon
-Local lPreDefined := .F., i
+
+   LOCAL lPreDefined //:= .F. (value not used)
+   LOCAL i
 
    IF HB_IsNumeric(name)
       name := LTrim(Str(name))
       lPreDefined := .T.
+      HB_SYMBOL_UNUSED(lPreDefined)
    ENDIF
    #ifdef __XHARBOUR__
-   For EACH i IN ::aIcons 
+   For EACH i IN ::aIcons
       IF i:name == name
          i:nCounter ++
          RETURN i

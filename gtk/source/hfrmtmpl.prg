@@ -132,7 +132,8 @@ CLASS HFormTmpl
    DATA cargo
 
    METHOD Read(fname, cId)
-   METHOD Show(nMode, params)
+   //METHOD Show(nMode, params)
+   METHOD Show(nMode, p1, p2, p3)
    METHOD ShowMain(params) INLINE ::Show(1, params)
    METHOD ShowModal(params) INLINE ::Show(2, params)
    METHOD Close()
@@ -214,7 +215,7 @@ Local xProperty, block, bFormExit, nstyle
 Local lModal := .F.
 Local lMdi :=.F.
 Local lMdiChild := .F.
-Local lval := .F.
+//Local lval := .F. // variable not used
 Local cBitmap := NIL
 Local oBmp := NIL 
 Memvar oDlg
@@ -520,13 +521,15 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
 
 RETURN arrExe
 
-STATIC FUNCTION CompileErr(e, stroka)
-Local n
+//STATIC FUNCTION CompileErr(e, stroka)
+STATIC PROCEDURE CompileErr(e, stroka)
+
+   //LOCAL n // variable not used
 
    hwg_MsgStop(hwg_ErrorMessage(e) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
           AllTrim(stroka), "Script compiling error")
    BREAK
-RETURN .T.
+//RETURN .T. // unreachable code
 
 STATIC FUNCTION ReadCtrl(oCtrlDesc, oContainer, oForm)
 Local oCtrl := HCtrlTmpl():New(oContainer)
@@ -564,14 +567,27 @@ Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems
 
 RETURN NIL
 
-#define TBS_AUTOTICKS                1
-#define TBS_TOP                      4
-#define TBS_BOTH                     8
-#define TBS_NOTICKS                 16
+//#define TBS_AUTOTICKS                1 // defined in windows.ch
+//#define TBS_TOP                      4 // defined in windows.ch
+//#define TBS_BOTH                     8 // defined in windows.ch
+//#define TBS_NOTICKS                 16 // defined in windows.ch
 
 STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
-Local i, j, oCtrl, stroka, varname, xProperty, block, cType, cPName
-Local nCtrl := AScan(aClass, oCtrlTmpl:cClass), xInitValue, cInitName, cVarName
+
+   LOCAL i
+   LOCAL j
+   LOCAL oCtrl
+   LOCAL stroka
+   LOCAL varname
+   LOCAL xProperty
+   //LOCAL block // variable not used
+   LOCAL cType
+   LOCAL cPName
+   LOCAL nCtrl := AScan(aClass, oCtrlTmpl:cClass)
+   LOCAL xInitValue
+   LOCAL cInitName
+   LOCAL cVarName
+
 MEMVAR oPrnt, nId, nInitValue, cInitValue, dInitValue, nStyle, nLeft, nTop
 MEMVAR onInit, onSize, onPaint, onEnter, onGetfocus, onLostfocus, lNoVScroll, lAppend, lAutoedit, bUpdate, onKeyDown, onPosChg
 MEMVAR nWidth, nHeight, oFont, lNoBorder, bSetGet
@@ -704,6 +720,7 @@ MEMVAR aImages, lEditLabels, aParts
    IF oCtrlTmpl:cClass == "combobox"
 #ifndef __LINUX__
       IF (i := AScan(oCtrlTmpl:aProp, {|a|Lower(a[1]) == "nmaxlines"})) > 0
+         HB_SYMBOL_UNUSED(i)
          nHeight := nHeight * nMaxLines
       ELSE
          nHeight := nHeight * 4
@@ -1292,9 +1309,18 @@ Local i := AScan(::aReports, {|o|o:id == ::id})
 RETURN NIL
 
 STATIC FUNCTION ReadRepItem(oCtrlDesc, oContainer)
-Local oCtrl := HRepItem():New(oContainer)
-Local i, j, o, cName, aProp := {}, aMethods := {}, aItems := oCtrlDesc:aItems, xProperty
-Local nPenWidth, nPenType
+
+   LOCAL oCtrl := HRepItem():New(oContainer)
+   LOCAL i
+   LOCAL j
+   LOCAL o
+   //LOCAL cName // variable not used
+   LOCAL aProp := {}
+   LOCAL aMethods := {}
+   LOCAL aItems := oCtrlDesc:aItems
+   LOCAL xProperty
+   //LOCAL nPenWidth // variable not used
+   //LOCAL nPenType // variable not used
 
    oCtrl:cClass   := oCtrlDesc:GetAttribute("class")
    oCtrl:aProp    := aProp
