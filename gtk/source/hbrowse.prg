@@ -48,10 +48,10 @@ REQUEST BOF
 #define GDK_Control_L       0xFFE3
 #define GDK_Control_R       0xFFE4
 
-STATIC crossCursor := NIL
-STATIC arrowCursor := NIL
-STATIC vCursor     := NIL
-STATIC xDrag
+STATIC s_crossCursor := NIL
+STATIC s_arrowCursor := NIL
+STATIC s_vCursor     := NIL
+STATIC s_xDrag
 //----------------------------------------------------//
 CLASS HColumn INHERIT HObject
 
@@ -607,10 +607,10 @@ METHOD InitBrw(nType) CLASS HBrowse
       ::internal  := {15, 1}
       ::aArray     := NIL
 
-      if Empty(crossCursor)
-         crossCursor := hwg_LoadCursor(GDK_CROSS)
-         arrowCursor := hwg_LoadCursor(GDK_LEFT_PTR)
-         vCursor := hwg_LoadCursor(GDK_SB_V_DOUBLE_ARROW)
+      if Empty(s_crossCursor)
+         s_crossCursor := hwg_LoadCursor(GDK_CROSS)
+         s_arrowCursor := hwg_LoadCursor(GDK_LEFT_PTR)
+         s_vCursor := hwg_LoadCursor(GDK_SB_V_DOUBLE_ARROW)
       endif
       
    endif
@@ -1571,8 +1571,8 @@ METHOD ButtonDown(lParam) CLASS HBrowse
    ELSEIF nLine == 0
       IF ::nCursor == 1
          ::nCursor := 2
-         hwg_SetCursor(vCursor, ::area)
-         xDrag := hwg_LOWORD(lParam)
+         hwg_SetCursor(s_vCursor, ::area)
+         s_xDrag := hwg_LOWORD(lParam)
       ENDIF
    ENDIF
 
@@ -1592,9 +1592,9 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       RETURN NIL
    ENDIF
    IF ::nCursor == 2
-      DO WHILE x < xDrag
+      DO WHILE x < s_xDrag
          x += ::aColumns[i]:width
-         IF Abs(x-xDrag) < 10
+         IF Abs(x-s_xDrag) < 10
             x1 := x - ::aColumns[i]:width
             EXIT
          ENDIF
@@ -1602,7 +1602,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
       ENDDO
       IF xPos > x1
          ::aColumns[i]:width := xPos - x1
-         hwg_SetCursor(arrowCursor, ::area)
+         hwg_SetCursor(s_arrowCursor, ::area)
          ::nCursor := 0     
          hwg_InvalidateRect(hBrw, 0)
       ENDIF
@@ -1648,7 +1648,7 @@ Local x := ::x1, i := ::nLeftCol, res := .F.
    ENDIF
    IF ::lDispSep .AND. yPos <= ::height+1
       IF wParam == 1 .AND. ::nCursor == 2
-         hwg_SetCursor(vCursor, ::area)
+         hwg_SetCursor(s_vCursor, ::area)
          res := .T.
       ELSE
          DO WHILE x < ::x2 - 2 .AND. i <= Len(::aColumns)
@@ -1657,14 +1657,14 @@ Local x := ::x1, i := ::nLeftCol, res := .F.
                   IF ::nCursor != 2
                      ::nCursor := 1
                   ENDIF
-                  hwg_SetCursor(IIf(::nCursor == 1, crossCursor, vCursor), ::area)
+                  hwg_SetCursor(IIf(::nCursor == 1, s_crossCursor, s_vCursor), ::area)
                res := .T.
                EXIT
             ENDIF
          ENDDO
       ENDIF
       IF !res .AND. ::nCursor != 0
-         hwg_SetCursor(arrowCursor, ::area)
+         hwg_SetCursor(s_arrowCursor, ::area)
          ::nCursor := 0
       ENDIF
    ENDIF

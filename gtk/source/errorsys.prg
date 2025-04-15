@@ -12,12 +12,12 @@
 #include <error.ch>
 #include "hwgui.ch"
 
-STATIC LogInitialPath := ""
+STATIC s_LogInitialPath := ""
 
 PROCEDURE ErrorSys
 
    ErrorBlock({|oError|DefError(oError)})
-   LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
+   s_LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
 
    RETURN
 
@@ -68,7 +68,7 @@ STATIC FUNCTION DefError(oError)
       #endif
    ENDDO
 
-   MemoWrit(LogInitialPath+"Error.log", cMessage)
+   MemoWrit(s_LogInitialPath+"Error.log", cMessage)
    ErrorPreview(cMessage)
    hwg_gtk_exit()
    QUIT
@@ -114,7 +114,7 @@ FUNCTION hwg_ErrorMessage(oError)
 FUNCTION WriteLog(cText, fname)
 Local nHand
 
-  fname := LogInitialPath + IIf(fname == NIL, "a.log", fname)
+  fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
   if !File(fname)
      nHand := FCreate(fname)
   else

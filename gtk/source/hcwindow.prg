@@ -11,7 +11,7 @@
 #include <hbclass.ch>
 #include "hwgui.ch"
 
-STATIC aCustomEvents := { ;
+STATIC s_aCustomEvents := { ;
       {WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, ;
         WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY}, ;
       { ;
@@ -144,8 +144,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 Local i
 
    // Writelog("== "+::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "NIL")+IIf(lParam != NIL, Str(lParam), "NIL"))
-   IF (i := AScan(aCustomEvents[1], msg)) != 0
-      RETURN Eval(aCustomEvents[2, i], Self, wParam, lParam)
+   IF (i := AScan(s_aCustomEvents[1], msg)) != 0
+      RETURN Eval(s_aCustomEvents[2, i], Self, wParam, lParam)
    ELSEIF ::bOther != NIL
       RETURN Eval(::bOther, Self, msg, wParam, lParam)
    ENDIF

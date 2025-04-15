@@ -12,7 +12,7 @@
 #xtranslate HB_AT(<x,...>) => AT(<x>)
 #endif
 
-STATIC aClass := {"label", "button", "checkbox",                    ;
+STATIC s_aClass := {"label", "button", "checkbox",                    ;
                   "radiobutton", "editbox", "group", "radiogroup",  ;
                   "bitmap", "icon",                                  ;
                   "richedit", "datepicker", "updown", "combobox",    ;
@@ -20,7 +20,7 @@ STATIC aClass := {"label", "button", "checkbox",                    ;
                   "monthcalendar", "trackbar", "page", "tree",        ;
                   "status", "menu", "animation"                       ;
                 }
-STATIC aCtrls := { ;
+STATIC s_aCtrls := { ;
   "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
   "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
   "HCheckButton():New(oPrnt,nId,lInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,bwhen)", ;
@@ -53,8 +53,8 @@ STATIC aCtrls := { ;
 
 #define  CONTROL_FIRST_ID   34000
 
-STATIC aPenType  := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
-STATIC aJustify  := {"Left", "Center", "Right"}
+STATIC s_aPenType  := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
+STATIC s_aJustify  := {"Left", "Center", "Right"}
 
 REQUEST HSTATIC
 REQUEST HBUTTON
@@ -583,7 +583,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
    //LOCAL block // variable not used
    LOCAL cType
    LOCAL cPName
-   LOCAL nCtrl := AScan(aClass, oCtrlTmpl:cClass)
+   LOCAL nCtrl := AScan(s_aClass, oCtrlTmpl:cClass)
    LOCAL xInitValue
    LOCAL cInitName
    LOCAL cVarName
@@ -607,7 +607,7 @@ MEMVAR aImages, lEditLabels, aParts
    ENDIF
 
    /* Declaring of variables, which are in the appropriate 'New()' function */
-   stroka := aCtrls[nCtrl]
+   stroka := s_aCtrls[nCtrl]
    IF (i := At("New(", stroka)) != 0
       i += 4
       DO WHILE .T.
@@ -1181,7 +1181,7 @@ Memvar lLastCycle, lSkipItem
 
       IF oItem:lPen .AND. oItem:oPen == NIL
          IF (xProperty := aGetSecond(oItem:aProp, "pentype")) != NIL
-            nPenType := AScan(aPenType, xProperty) - 1
+            nPenType := AScan(s_aPenType, xProperty) - 1
          ELSE
             nPenType := 0
          ENDIF
@@ -1213,7 +1213,7 @@ Memvar lLastCycle, lSkipItem
             IF (xProperty := aGetSecond(oItem:aProp, "justify")) == NIL
                nJustify := 0
             ELSE
-               nJustify := AScan(aJustify, xProperty) - 1
+               nJustify := AScan(s_aJustify, xProperty) - 1
             ENDIF
             IF oItem:obj == NIL
                IF (xProperty := aGetSecond(oItem:aProp, "font")) != NIL

@@ -13,7 +13,7 @@
 
 REQUEST HWG_ENDWINDOW
 
-STATIC aMessModalDlg := { ;
+STATIC s_aMessModalDlg := { ;
          {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}},         ;
          {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
          {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
@@ -145,8 +145,8 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
 Local i
 
    // writelog(str(msg) + str(wParam) + str(lParam))
-   IF (i := AScan(aMessModalDlg, {|a|a[1] == msg})) != 0
-      RETURN Eval(aMessModalDlg[i, 2], Self, wParam, lParam)
+   IF (i := AScan(s_aMessModalDlg, {|a|a[1] == msg})) != 0
+      RETURN Eval(s_aMessModalDlg[i, 2], Self, wParam, lParam)
    ELSE
       RETURN ::Super:onEvent(msg, wParam, lParam)
    ENDIF
