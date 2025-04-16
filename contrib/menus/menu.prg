@@ -172,10 +172,10 @@ Local hMenu, nPos, aMenu
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1, nPosParent]
-      //hMenu := hwg__AddMenuItem(hMenu, aMenu[2], nPos+1, .T., aMenu[3], aMenu[4], .T.)
-      hMenu := hwg__AddMenuItem(hMenu, aMenu[2][1], nPos+1, .T., aMenu[3], aMenu[4], .T.)
+      //hMenu := hwg__AddMenuItem(hMenu, aMenu[2], nPos + 1, .T., aMenu[3], aMenu[4], .T.)
+      hMenu := hwg__AddMenuItem(hMenu, aMenu[2][1], nPos + 1, .T., aMenu[3], aMenu[4], .T.)
       /*
-      hwg__AddMenuItem(hMenu, aMenu[2], nPos+1, .T., aMenu[3])
+      hwg__AddMenuItem(hMenu, aMenu[2], nPos + 1, .T., aMenu[3])
       hMenu := hwg__CreateSubMenu(hMenu, aMenu[3])
       */
       IF Len(aMenu) < 5

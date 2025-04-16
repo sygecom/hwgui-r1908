@@ -32,7 +32,7 @@ REQUEST __PP_STDRULES
 
 FUNCTION hwg_OpenScript(fname, scrkod)
 LOCAL han, stroka, scom, aScr, rejim := 0, i
-LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
+LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN + 1
 LOCAL aFormCode, aFormName
 
    scrkod := IIf(scrkod == NIL, "000", Upper(scrkod))
@@ -106,7 +106,7 @@ LOCAL rezArray := IIf(s_lDebugInfo, {"", {}, {}}, {"", {}})
       poz := 0
    ELSEIF hb_IsChar(scrSource)
       strbuf := Space(STR_BUFLEN)
-      poz    := STR_BUFLEN+1
+      poz    := STR_BUFLEN + 1
       han    := FOPEN(scrSource, FO_READ + FO_SHARED)
    ELSE
       han := scrSource

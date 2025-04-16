@@ -70,7 +70,7 @@ Local aPrnCoors
       ::nPHeight := IIf(::lmm, aPrnCoors[9], aPrnCoors[2])
       ::nHRes   := aPrnCoors[1] / aPrnCoors[3]
       ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
-      // writelog(::cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]))
+      // writelog(::cPrinterName + str(aPrnCoors[1]) + str(aPrnCoors[2]) + str(aPrnCoors[3]) + str(aPrnCoors[4]) + str(aPrnCoors[5]) + str(aPrnCoors[6]) + str(aPrnCoors[8]) + str(aPrnCoors[9]))
    ENDIF
 
 RETURN Self
@@ -209,7 +209,7 @@ METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
       y2 *= ::nVRes
    ENDIF 
 
-   // hwg_DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), x1, y1, x2-x1+1, y2-y1+1)
+   // hwg_DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), x1, y1, x2 - x1 + 1, y2 - y1 + 1)
 
 RETURN NIL
 

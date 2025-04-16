@@ -22,10 +22,10 @@ Local i, aItem
 
    FOR i := Len(aPaintRep[FORM_ITEMS]) TO 1 STEP -1
       aItem := aPaintRep[FORM_ITEMS, i]
-      IF xPos >= LEFT_INDENT+aItem[ITEM_X1] ;
-           .AND. xPos < LEFT_INDENT+aItem[ITEM_X1]+aItem[ITEM_WIDTH] ;
-           .AND. yPos > TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y] ;
-           .AND. yPos < TOP_INDENT+aItem[ITEM_Y1]-aPaintRep[FORM_Y]+aItem[ITEM_HEIGHT]
+      IF xPos >= LEFT_INDENT + aItem[ITEM_X1] ;
+           .AND. xPos < LEFT_INDENT + aItem[ITEM_X1] + aItem[ITEM_WIDTH] ;
+           .AND. yPos > TOP_INDENT + aItem[ITEM_Y1]-aPaintRep[FORM_Y] ;
+           .AND. yPos < TOP_INDENT + aItem[ITEM_Y1]-aPaintRep[FORM_Y] + aItem[ITEM_HEIGHT]
          aPaintRep[FORM_ITEMS, i, ITEM_STATE] := STATE_SELECTED
          IF aItem[ITEM_TYPE] == TYPE_TEXT
             StaticDlg(aItem)
@@ -52,7 +52,7 @@ Local aModDlg
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {||EndStatic(aItem)}  ;
         ON BN_CLICKED, IDC_PUSHBUTTON1 ACTION {||SetItemFont(aItem)}
-   REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR]+1
+   REDEFINE COMBOBOX s_aVariables OF aModDlg ID IDC_COMBOBOX3 INIT aItem[ITEM_VAR] + 1
    aModDlg:Activate()
 
 RETURN NIL
@@ -66,7 +66,7 @@ Local oFont := aItem[ITEM_FONT]
    IF aItem[ITEM_SCRIPT] != NIL
       hwg_SetDlgItemText(hDlg, IDC_EDIT3, aItem[ITEM_SCRIPT])
    ENDIF
-   // SetComboBox(hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR]+1)
+   // SetComboBox(hDlg, IDC_COMBOBOX3, s_aVariables, aItem[ITEM_VAR] + 1)
    hwg_SetDlgItemText(hDlg, IDC_TEXT1, oFont:name + "," + Ltrim(Str(oFont:width)) + "," + Ltrim(Str(oFont:height)))
    hwg_SetFocus(hwg_GetDlgItem(hDlg, IDC_EDIT1))
 RETURN .T.
@@ -99,7 +99,7 @@ Local oPen := aItem[ITEM_PEN]
    INIT DIALOG aModDlg FROM RESOURCE "DLG_LINE" ON INIT {||InitLine(aItem)}
    DIALOG ACTIONS OF aModDlg ;
         ON 0, IDOK         ACTION {||EndLine(aItem)}
-   REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style+1
+   REDEFINE COMBOBOX s_aPenStyles OF aModDlg ID IDC_COMBOBOX1 INIT oPen:style + 1
    aModDlg:Activate()
 
 RETURN NIL
@@ -107,7 +107,7 @@ RETURN NIL
 STATIC FUNCTION InitLine(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local oPen := aItem[ITEM_PEN]
-   // SetComboBox(hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1]+1)
+   // SetComboBox(hDlg, IDC_COMBOBOX1, s_aPenStyles, aPen[1] + 1)
    IF aItem[ITEM_TYPE] == TYPE_BOX
    ELSE
       hwg_SendMessage(hwg_GetDlgItem(hDlg, IDC_COMBOBOX2), WM_ENABLE, 0, 0)
@@ -173,7 +173,7 @@ RETURN NIL
 STATIC FUNCTION InitBitmap(aItem)
 Local hDlg := hwg_GetModalHandle()
 Local aBmpSize, hUp
-   hUp := hwg_CreateUpDownControl(hDlg, 120, UDS_ALIGNRIGHT+UDS_SETBUDDYINT, 0, 0, 12, 0, hwg_GetDlgItem(hDlg, IDC_EDIT3), 500, 1, 100)
+   hUp := hwg_CreateUpDownControl(hDlg, 120, UDS_ALIGNRIGHT + UDS_SETBUDDYINT, 0, 0, 12, 0, hwg_GetDlgItem(hDlg, IDC_EDIT3), 500, 1, 100)
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
       hwg_SetDlgItemText(hDlg, IDC_EDIT1, aItem[ITEM_CAPTION])

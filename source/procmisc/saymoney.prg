@@ -158,7 +158,7 @@ FUNCTION hwg_SayDollar(nDollar)
         ENDCASE
     ENDIF
     IF nTest=0
-        xSay := xSay+xLang1+xLang2
+        xSay := xSay + xLang1 + xLang2
     ENDIF
 
     IF nPJ=1.OR.nPJ=4.OR.nPJ=7
@@ -183,10 +183,10 @@ FUNCTION hwg_SayDollar(nDollar)
                 IF xNum="5"
                     xteen = "FIFTEEN "
                 ENDIF
-                xSay := xSay+xteen+xLang2
+                xSay := xSay + xteen + xLang2
             ELSE
                 xteen = "TEEN "
-                xSay := xSay+xLang1+xteen+xLang2
+                xSay := xSay + xLang1 + xteen + xLang2
             ENDIF
         ENDIF
         nTest := 0

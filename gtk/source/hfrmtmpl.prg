@@ -438,7 +438,7 @@ Local arr := {}, nPos1, nPos2, cLine
    ELSE
       AAdd(arr, AllTrim(Left(cMethod, nPos1 - 1)))
       DO WHILE .T.
-         IF (nPos2 := hb_At(Chr(10), cMethod, nPos1+1)) == 0
+         IF (nPos2 := hb_At(Chr(10), cMethod, nPos1 + 1)) == 0
             cLine := AllTrim(SubStr(cMethod, nPos1 + 1))
          ELSE
             cLine := AllTrim(SubStr(cMethod, nPos1 + 1, nPos2 - nPos1 - 1))
@@ -498,7 +498,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          arrExe := Array(2)
          arrExe[2] := hwg_RdScript(, cMethod, 1, .T.)
          cCode :=  "{|" + LTrim(SubStr(arr[1], 12)) + ;
-            "|hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
+            "|hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id)) + IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
             IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2],{", ;
                    cCode1 + ":aMethods[" + ;
                    LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2],{") + ;
@@ -513,7 +513,7 @@ Local arr, arrExe, nContainer := 0, cCode1, cCode, bOldError, bRes
          "F(" + LTrim(Str(oCtrl:nId)) + ")")
    arrExe := Array(2)
    arrExe[2] := hwg_RdScript(, cMethod,, .T.)
-   cCode :=  "{||hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id))+IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
+   cCode :=  "{||hwg_DoScript(HFormTmpl():F(" + LTrim(Str(oForm:id)) + IIf(nContainer != 0, "," + LTrim(Str(nContainer)), "") + "):" + ;
       IIf(oCtrl == NIL, "aMethods[" + LTrim(Str(Len(oForm:aMethods) + 1)) + ",2,2])", ;
              cCode1 + ":aMethods[" + ;
              LTrim(Str(Len(oCtrl:aMethods) + 1)) + ",2,2])") + "}"
@@ -620,9 +620,9 @@ MEMVAR aImages, lEditLabels, aParts
                   xInitValue := IIf(Left(varname, 1) == "n", 1, IIf(Left(varname, 1) == "c", "", .F.))
                ENDIF
                stroka := Left(stroka, i - 1) + "m->" + SubStr(stroka, i)
-               i := j+4
+               i := j + 4
             ELSE
-               i := j+1
+               i := j + 1
             ENDIF
          ELSE
             EXIT
@@ -1149,8 +1149,8 @@ Memvar lLastCycle, lSkipItem
                ENDIF
             ENDDO
             IF lLastCycle
-               // writelog("--> " + str(::nAOffSet)+str(y2-y+1 - (::ny - y)))
-               ::nAOffSet += y2-y+1 - (::ny - y)
+               // writelog("--> " + str(::nAOffSet) + str(y2 - y + 1 - (::ny - y)))
+               ::nAOffSet += y2 - y + 1 - (::ny - y)
                ::nTOffset := 0
                ::lFinish := .T.
             ENDIF
@@ -1232,12 +1232,12 @@ Memvar lLastCycle, lSkipItem
                nFirst := i := 1
                ny := y
                DO WHILE (i := hb_At(";", cText, i)) > 0
-                  ::oPrinter:Say(SubStr(cText, nFirst, i-nFirst), x, ny, x2, ny+dy, nJustify, oItem:obj)
+                  ::oPrinter:Say(SubStr(cText, nFirst, i-nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj)
                   i ++
                   nFirst := i
                   ny += dy
                ENDDO
-               ::oPrinter:Say(SubStr(cText, nFirst, Len(cText)-nFirst+1), x, ny, x2, ny+dy, nJustify, oItem:obj)
+               ::oPrinter:Say(SubStr(cText, nFirst, Len(cText)-nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj)
             ELSE
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF
@@ -1246,7 +1246,7 @@ Memvar lLastCycle, lSkipItem
          ENDIF
       ELSEIF oItem:cClass == "box"
          ::oPrinter:Box(x, y, x2, y2, oItem:oPen)
-         // writelog("Draw " + str(x) + " " + str(x+width-1))
+         // writelog("Draw " + str(x) + " " + str(x + width - 1))
       ELSEIF oItem:cClass == "vline"
          ::oPrinter:Line(x, y, x, y2, oItem:oPen)
       ELSEIF oItem:cClass == "hline"

@@ -150,7 +150,7 @@ FUNCTION hwg_BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
       hMenu := aMenuInit[5]
       nPos := Len(aMenuInit[1])
       aMenu := aMenuInit[1, nPosParent]
-      hMenu := hwg__AddMenuItem(hMenu, aMenu[2], nPos+1, hWnd, aMenu[3], aMenu[4], .T.)
+      hMenu := hwg__AddMenuItem(hMenu, aMenu[2], nPos + 1, hWnd, aMenu[3], aMenu[4], .T.)
       IF Len(aMenu) < 5
          AAdd(aMenu, hMenu)
       ELSE

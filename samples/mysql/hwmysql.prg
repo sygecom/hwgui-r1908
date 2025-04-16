@@ -299,7 +299,7 @@ FUNCTION ResizeBrwQ(oBrw, nWidth, nHeight)
 
    aRect := hwg_GetClientRect(oEdit:handle)
    nHbusy += aRect[4]
-   hwg_MoveWindow(oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8)
+   hwg_MoveWindow(oBrw:handle, 0, oPanel:nHeight + 1, nWidth, nHeight - nHBusy - oPanel:nHeight - 8)
 
 RETURN NIL
 

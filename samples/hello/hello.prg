@@ -21,7 +21,7 @@ FUNCTION Main()
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 4
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
+     COLOR COLOR_3DLIGHT + 1                       ;
      AT 200, 0 SIZE 420, 300                       ;
      FONT oFont                                  ;
      ON EXIT {||hwg_MsgYesNo("Really want to quit ?")}

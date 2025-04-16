@@ -12,7 +12,7 @@ FUNCTION Main()
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
+     COLOR COLOR_3DLIGHT + 1                       ;
      AT 200, 0 SIZE 420, 300                       ;
      FONT oFont
 

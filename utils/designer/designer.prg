@@ -151,7 +151,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
          If !lOmmitMenuFile
             i := 1
             DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != NIL
-               hwg_DefineMenuItem(oDesigner:aRecent[i], 1020+i, ;
+               hwg_DefineMenuItem(oDesigner:aRecent[i], 1020 + i, ;
                   &("{||HFormGen():Open('" + oDesigner:aRecent[i] + "')}"))
                i ++
             ENDDO

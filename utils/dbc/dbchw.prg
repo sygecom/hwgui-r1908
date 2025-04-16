@@ -252,7 +252,7 @@ Local indname
    ENDDO
    INIT DIALOG oModDlg FROM RESOURCE "DLG_SEL_IND"
    REDEFINE BROWSE oBrw ARRAY OF oModDlg ID ID_BROWSE   ;
-       ON INIT {|o|o:rowPos := o:nCurrent := IndexOrd()+1}       ;
+       ON INIT {|o|o:rowPos := o:nCurrent := IndexOrd() + 1}       ;
        ON CLICK {|o|SetIndex(o)}
 
    oBrw:aArray := msind

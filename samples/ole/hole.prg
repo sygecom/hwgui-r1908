@@ -12,7 +12,7 @@ FUNCTION Main()
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
+     COLOR COLOR_3DLIGHT + 1                       ;
      AT 200, 0 SIZE 400, 250                       ;
      FONT oFont
 
@@ -51,7 +51,7 @@ STATIC FUNCTION SpeakIt(oEdit)
    LOCAL cText := hwg_GetEditText(oEdit:oParent:handle, oEdit:id)
 
    oChar:Show()
-   oChar:MoveTo(aTop[1]+20, aTop[2]+70)
+   oChar:MoveTo(aTop[1] + 20, aTop[2] + 70)
    oChar:LanguageID := IIf(Asc(cText) > 122, "&H0419", "&H0409")
    oChar:Speak(cText)
    oChar:Hide()

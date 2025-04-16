@@ -245,10 +245,10 @@ STATIC FUNCTION onEraseBk(oDlg, hDC)
         aCoors := hwg_GetClientRect(oDlg:handle)
         IF oDlg:brush != NIL
            IF !HB_IsNumeric(oDlg:brush)
-              hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, oDlg:brush:handle)
+              hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oDlg:brush:handle)
            ENDIF
         ELSE
-           hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3]+1, aCoors[4]+1, COLOR_3DFACE+1)
+           hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, COLOR_3DFACE + 1)
         ENDIF
         RETURN 1
       ENDIF

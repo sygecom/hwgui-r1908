@@ -162,7 +162,7 @@ RETURN NIL
 
 STATIC FUNCTION SelectIndex()
 Local aIndex := {{"None", "   ", "   "}}, i, indname, iLen := 0
-Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber()+1
+Local oDlg, oBrowse, width, height, nChoice := 0, nOrder := OrdNumber() + 1
 Memvar oBrw, oFont
 
    IF Len(oBrw:aColumns) == 0
@@ -181,7 +181,7 @@ Memvar oBrw, oFont
    
    INIT DIALOG oDlg TITLE "Select Order" ;
          AT 0, 0                  ;
-         SIZE width+2, height+2   ;
+         SIZE width + 2, height + 2   ;
          FONT oFont
 
    @ 0, 0 BROWSE oBrowse ARRAY       ;

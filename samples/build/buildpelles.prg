@@ -480,14 +480,14 @@ FUNCTION BuildBat()
    endif
    
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
-   FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"'+vHarbour+'\INCLUDE" /I"'+vPelles+'\INCLUDE" /I"'+vPelles+'\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
+   FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"' + vHarbour + '\INCLUDE" /I"' + vPelles + '\INCLUDE" /I"' + vPelles + '\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
    
    
    if Len(voPrgFiles) > 0 
    for i := 1 to Len(voPrgFiles)
       if !Empty(voPrgFiles[i])
          oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
-         FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"'+vHarbour+'\INCLUDE" /I"'+vPelles+'\INCLUDE" /I"'+vPelles+'\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
+         FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"' + vHarbour + '\INCLUDE" /I"' + vPelles + '\INCLUDE" /I"' + vPelles+'\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
      endif  
    next
    endif 
@@ -497,9 +497,9 @@ FUNCTION BuildBat()
    for i := 1 to Len(voCFiles)
        if !Empty(voCFiles[i])
           if !Empty(oIncFolder)
-             oInc := '/I"'+voIncFolder+'"'
+             oInc := '/I"' + voIncFolder + '"'
           endif   
-          FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"" + vHarbour + "\INCLUDE" /I"" + vPelles + "\INCLUDE" /I"" + vPelles + "\INCLUDE\WIN" /I"'+vPelles+'\INCLUDE\MSVC" '+oInc+' /D"HB_STATIC_STARTUP" /c' + CRF)
+          FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"" + vHarbour + "\INCLUDE" /I"" + vPelles + "\INCLUDE" /I"" + vPelles + "\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" ' + oInc + ' /D"HB_STATIC_STARTUP" /c' + CRF)
        endif   
    Next
    Endif
@@ -720,7 +720,7 @@ FUNCTION BuildPoMake()
    for i := 1 to Len(voCFiles)
        if !Empty(voCFiles[i])
           if !Empty(oIncFolder)
-             oInc := '/I"'+voIncFolder+'"'
+             oInc := '/I"' + voIncFolder + '"'
           endif   
           oName := SubStr(voCFiles[i], 1, Len(voCFiles[i]) - 4)
    

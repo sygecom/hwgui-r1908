@@ -69,7 +69,7 @@ FUNCTION pesq(rd_dir, rd_text)
    get01:refresh()
 
    for g := 1 to Len(nom_arq)
-     arq := FT_FUSE(rd_dir+nom_arq[g])
+     arq := FT_FUSE(rd_dir + nom_arq[g])
      //
      resultado := resultado + nom_arq[g] + Chr(13) + Chr(10)
      get01:refresh()
@@ -82,7 +82,7 @@ FUNCTION pesq(rd_dir, rd_text)
         //
         //hwg_MsgInfo(linha)
         if at(texto, linha) != 0
-            resultado := resultado+Str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
+            resultado := resultado + Str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
             get01:refresh()
         endif
         //

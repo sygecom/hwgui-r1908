@@ -347,7 +347,7 @@ METHOD Show() CLASS HPanel
    ::Super:Show()
    IF ::oParent:type == WND_MDI .AND. lRes
        //hwg_SendMessage(::oParent:handle, WM_SIZE, 0, hwg_MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
-       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop+1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
+       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop + 1, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ENDIF
    RETURN NIL
 

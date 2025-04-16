@@ -143,7 +143,7 @@ RETURN NIL
 METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 Local i
 
-   // Writelog("== " + ::Classname()+Str(msg)+IIf(wParam != NIL, Str(wParam), "NIL")+IIf(lParam != NIL, Str(lParam), "NIL"))
+   // Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + IIf(lParam != NIL, Str(lParam), "NIL"))
    IF (i := AScan(s_aCustomEvents[1], msg)) != 0
       RETURN Eval(s_aCustomEvents[2, i], Self, wParam, lParam)
    ELSEIF ::bOther != NIL

@@ -115,7 +115,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
 #endif
          ::oPrinter:SetFont(oFont)
          nWidth := ::oPrinter:GetTextWidth(Replicate("A", 80)) / ::oPrinter:nHRes
-         IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
+         IF nWidth > nPWidth + 2 .OR. nWidth < nPWidth - 15
             ::nStdHeight := ::nStdHeight * (nPWidth / nWidth)
          ENDIF
          oFont:Release()
@@ -128,7 +128,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
          nMode += 2
       ENDIF
 
-      ::nLineHeight := (::nStdHeight / aKoef[nMode+1]) * ::oPrinter:nVRes
+      ::nLineHeight := (::nStdHeight / aKoef[nMode + 1]) * ::oPrinter:nVRes
       ::nLined := (25.4 * ::oPrinter:nVRes) / ::nLineInch - ::nLineHeight
 
 #ifdef __PLATFORM__Linux__

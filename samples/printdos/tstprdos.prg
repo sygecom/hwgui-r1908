@@ -13,7 +13,7 @@
 * SET PRINTER TO LPT1
 * SET DEVICE TO PRINTER
 * @ 10, 10 SAY "PRINTER THIS DEMO"
-* @ PROW(), PCOL()+1 SAY " PROW AND PCOL+1 "
+* @ PROW(), PCOL() + 1 SAY " PROW AND PCOL+1 "
 * @ 12, 10 SAY 988942.99 PICTURE "@E 999,999,999.99"
 * EJECT
 * SETPRC(0, 0)
@@ -24,7 +24,7 @@
 * SET PRINTER TO "LPT1" OF oPrint 
 * //SET DEVICE TO PRINTER
 * @ 10, 10 PSAY "PRINTER THIS DEMO" OF oPrint
-* @ hwg_wPROW(oPrint), hwg_wPCOL(oPrint)+1 PSAY " PROW AND PCOL+1 " OF oPrint
+* @ hwg_wPROW(oPrint), hwg_wPCOL(oPrint) + 1 PSAY " PROW AND PCOL+1 " OF oPrint
 * @ 12, 10 PSAY 988942.99 PICTURE "@E 999,999,999.99"  OF oPrint
 * EJECT OF oPrint
 * hwg_wSETPRC(0, 0, oPrint)
@@ -91,10 +91,10 @@ If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest)
    oPrint:Say(30, 34, "LINE 30 COL 34")
    oPrint:Say(oPrint:nProw, oPrint:nPCol, "LINE " + Str(oPrint:nProw)+ " COL " + Str(oPrint:nPcol))
    oPrint:Say(40, 24, "11222333000144", "@r 99.999.999/9999-99")
-   oPrint:Say(oPrint:nProw+1, oPrint:nPcol, "Valor")
+   oPrint:Say(oPrint:nProw + 1, oPrint:nPcol, "Valor")
    oPrint:Say(oPrint:nProw, oPrint:nPcol, 996659.8, "@E 999,999,999.99")
-   oPrint:Say(oPrint:nProw, oPrint:nPcol+2, 22.11)
-   oPrint:Say(oPrint:nProw, oPrint:nPcol+1, DATE())
+   oPrint:Say(oPrint:nProw, oPrint:nPcol + 2, 22.11)
+   oPrint:Say(oPrint:nProw, oPrint:nPcol + 1, DATE())
 
    oPrint:Eject()
 
@@ -127,10 +127,10 @@ If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == NIL, "LPT1", oTest),
    @ 30, 34 PSAY "LINE 30 COL 34" OF oPrinter
    @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + Str(hwg_wProw(oPrinter))+ " COL " + Str(hwg_wPcol(oPrinter)) OF oPrinter
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
-   @ hwg_wprow(oPrinter)+1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter
+   @ hwg_wprow(oPrinter) + 1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter
    @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
-   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)+1 PSAY  22.11  OF oPrinter
-   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)+1 PSAY DATE() OF oPrinter
+   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter) + 1 PSAY  22.11  OF oPrinter
+   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter) + 1 PSAY DATE() OF oPrinter
 
    EJECT OF oPrinter
 
@@ -282,10 +282,10 @@ If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == NIL, "LPT1", oTest), "
    @ hwg_wProw(oPrinter), hwg_wPCol(oPrinter) PSAY "LINE " + Str(hwg_wProw(oPrinter))+ " COL " + Str(hwg_wPcol(oPrinter)) OF oPrinter
    oPrinter:Descompress()
    @ 40, 24 PSAY "11222333000144" PICTURE "@r 99.999.999/9999-99"  OF oPrinter
-   @ hwg_wprow(oPrinter)+1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter
+   @ hwg_wprow(oPrinter) + 1, hwg_wPcol(oPrinter) PSAY "Valor" OF oPrinter
    @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)   PSAY 996659.85 PICTURE "@E 999,999,999.99" OF oPrinter
-   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)+1 PSAY  22.11  OF oPrinter
-   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter)+1 PSAY DATE() OF oPrinter
+   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter) + 1 PSAY  22.11  OF oPrinter
+   @ hwg_wprow(oPrinter), hwg_wPcol(oPrinter) + 1 PSAY DATE() OF oPrinter
 
    EJECT OF oPrinter
 

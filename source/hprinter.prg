@@ -142,9 +142,9 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
       ::PixelsPerInchX   := aPrnCoors[5]
 
       ::TopMargin        := aPrnCoors[10]
-      ::BottomMargin     := (::nPHeight - ::TopMargin)+1
+      ::BottomMargin     := (::nPHeight - ::TopMargin) + 1
       ::LeftMargin       := aPrnCoors[11]
-      ::RightMargin      := (::nPWidth - ::LeftMargin)+1
+      ::RightMargin      := (::nPWidth - ::LeftMargin) + 1
       // hwg_WriteLog(::cPrinterName + Str(aPrnCoors[1]) + Str(aPrnCoors[2]) + Str(aPrnCoors[3]) + Str(aPrnCoors[4]) + Str(aPrnCoors[5]) + Str(aPrnCoors[6]) + Str(aPrnCoors[8]) + Str(aPrnCoors[9]))
    ENDIF
 

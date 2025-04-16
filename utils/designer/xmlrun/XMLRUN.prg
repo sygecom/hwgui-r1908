@@ -284,7 +284,7 @@ FUNCTION rmatch(c, f)
 
 #xtranslate Sx_Thermometer(nTag)      => TONE(10)
 #xtranslate SwpRUnCmd(<cCommand>,<a>,<b>,<c>)      => __RUN(<cCommand>)
-#xtranslate BliDemDte()                => date()+1000
+#xtranslate BliDemDte()                => date() + 1000
 
  /*
  ordkeycount()
@@ -576,7 +576,7 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 	      yy := Left(dtos(date()), 2)+yy
 	   endif
 
-      if  !HB_IsDate(ctod(dd+mm+yy)) .OR. (ctod(dd+mm+yy) == ctod("  /  /  "))
+      if  !HB_IsDate(ctod(dd + mm + yy)) .OR. (ctod(dd + mm + yy) == ctod("  /  /  "))
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
           RETURN .F.
       else
@@ -616,5 +616,5 @@ FUNCTION infstr2d(s) && informix string to date
 
  mm := Str((At(subst(s, 4, 3), "JanFebMarAprMeiJunJulAgtSepOktNopDes") + 2) / 3, 2)
 
- RETURN ctod(dd+mm+yy)
+ RETURN ctod(dd + mm + yy)
 

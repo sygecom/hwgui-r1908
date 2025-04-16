@@ -44,7 +44,7 @@ FUNCTION Main()
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17
 
    INIT WINDOW oMainWindow MAIN TITLE "Viewer"  ;
-     COLOR COLOR_3DLIGHT+1                      ;
+     COLOR COLOR_3DLIGHT + 1                      ;
      AT 200, 0 SIZE 400, 150                      ;
      FONT oFont                                 ;
      ON OTHER MESSAGES {|o, m, wp, lp|MessagesProc(o, m, wp, lp)}
@@ -95,7 +95,7 @@ FUNCTION Main()
 #endif
 
    aScreen := GetWorkareaRect()
-   // writelog(Str(aScreen[1])+Str(aScreen[2])+Str(aScreen[3])+Str(aScreen[4]))
+   // writelog(Str(aScreen[1]) + Str(aScreen[2]) + Str(aScreen[3]) + Str(aScreen[4]))
 
    ACTIVATE WINDOW oMainWindow
 
@@ -133,7 +133,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          nStepV ++
          stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
@@ -141,7 +141,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          nStepV --
          stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
@@ -149,7 +149,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
          nStepV := nNewPos
          stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
-         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ENDIF
@@ -165,7 +165,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          nStepH ++
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_LINEUP
@@ -173,7 +173,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          nStepH --
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
    ELSEIF nScrollCode == SB_THUMBTRACK
@@ -181,7 +181,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
          nStepH := nNewPos
          stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
-         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
       ENDIF
 
@@ -204,10 +204,10 @@ STATIC FUNCTION FileOpen(oWnd)
       nKoef := 1
       nStepV := nStepH := 0
       IF lScrollH
-         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH+1, 1, SCROLLHRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
       ENDIF
       IF lScrollV
-         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+         hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
       ENDIF
       /*
       IF oImage != NIL
@@ -236,10 +236,10 @@ STATIC FUNCTION FileOpen(oWnd)
          oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
 
          IF (oWnd:nWidth <= aScreen[3] .AND. oWnd:nHeight <= aScreen[4]) .OR. nKoef < 0.15
-            IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
+            IF oWnd:nLeft + oWnd:nWidth >= aScreen[3]
                oWnd:nLeft := 0
             ENDIF
-            IF oWnd:nTop+oWnd:nHeight >= aScreen[4]
+            IF oWnd:nTop + oWnd:nHeight >= aScreen[4]
                oWnd:nTop := 0
             ENDIF
             EXIT
@@ -253,7 +253,7 @@ STATIC FUNCTION FileOpen(oWnd)
          oWnd:nHeight := 100
       ENDIF
 
-      // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef)+Str(oImage:nWidth) + Str(oImage:nHeight))
+      // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef) + Str(oImage:nWidth) + Str(oImage:nHeight))
       hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
       oSayMain:nZoom := nKoef
       hwg_InvalidateRect(oSayMain:handle, 0)
@@ -287,21 +287,21 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    lScrollV := lScrollH := .F.
    oWnd:nWidth := Round(oImage:nWidth * nKoef, 0) + nHorz
    oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
-   // writelog("1->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
-   IF oWnd:nLeft+oWnd:nWidth >= aScreen[3]
+   // writelog("1->" + Str(oWnd:nWidth) + Str(aScreen[3]) + " - " + Str(oWnd:nHeight) + Str(aScreen[4]))
+   IF oWnd:nLeft + oWnd:nWidth >= aScreen[3]
       oWnd:nLeft := 0
       IF oWnd:nWidth >= aScreen[3]
          oWnd:nWidth := aScreen[3]
          lScrollH := .T.
-         // writelog("2->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
+         // writelog("2->" + Str(oWnd:nWidth) + Str(aScreen[3]) + " - " + Str(oWnd:nHeight) + Str(aScreen[4]))
       ENDIF
    ENDIF
-   IF oWnd:nTop+oWnd:nHeight >= aScreen[4]
+   IF oWnd:nTop + oWnd:nHeight >= aScreen[4]
       oWnd:nTop := 0
       IF oWnd:nHeight >= aScreen[4]
          oWnd:nHeight := aScreen[4]
          lScrollV := .T.
-         // writelog("3->" + Str(oWnd:nWidth)+Str(aScreen[3]) + " - " + Str(oWnd:nHeight)+Str(aScreen[4]))
+         // writelog("3->" + Str(oWnd:nWidth) + Str(aScreen[3]) + " - " + Str(oWnd:nHeight) + Str(aScreen[4]))
       ENDIF
    ENDIF
    IF oWnd:nWidth < 200
@@ -314,7 +314,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    oSayMain:nZoom := nKoef
    oSayScale:SetValue(Str(nKoef*100, 4) + " %")
    hwg_InvalidateRect(oWnd:handle, 0)
-   // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef)+Str(oImage:nWidth) + Str(oImage:nHeight))
+   // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef) + Str(oImage:nWidth) + Str(oImage:nHeight))
    hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
    stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
    stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
@@ -354,7 +354,7 @@ STATIC FUNCTION PaintWindow(oWnd)
 #endif
 
    IF lScrollV
-      hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE)
+      hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
    ENDIF
    hwg_EndPaint(oWnd:handle, pps)
 

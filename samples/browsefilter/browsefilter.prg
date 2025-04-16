@@ -12,7 +12,7 @@ FUNCTION Main()
   PRIVATE frmTesteBrowse
 
   INIT WINDOW frmTesteBrowse MAIN TITLE "Teste HBrowse com filtro" ;
-    COLOR COLOR_3DLIGHT+1 ;
+    COLOR COLOR_3DLIGHT + 1 ;
   	AT 0, 0 ;
   	SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28 ;
   	FONT HFont():Add("MS Sans Serif", 0, -12)
@@ -22,7 +22,7 @@ FUNCTION Main()
   SET INDEX TO indmesas
 
   USE ITENS NEW SHARED
-  INDEX ON mesa+nomeprod TO inditens
+  INDEX ON mesa + nomeprod TO inditens
   SET INDEX TO inditens
 
   DBSELECTAREA("MESAS")

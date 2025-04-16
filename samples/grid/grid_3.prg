@@ -170,7 +170,7 @@ FUNCTION CriaBase()
         PQclear(res)
 
         For i := 1 to 100
-            res := PQexec(conn, "insert into test (code, creation, descr) values (" + Str(i) + ",'" + DToC(date()+i) + "','test')")
+            res := PQexec(conn, "insert into test (code, creation, descr) values (" + Str(i) + ",'" + DToC(date() + i) + "','test')")
             PQclear(res)
         Next
 

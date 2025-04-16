@@ -139,19 +139,19 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
          ELSEIF aDataDef[j, 5] == "file"
             // :LFB
             x1  := ::x1 + ::aColumns[1]:width - 2
-               y1 := ::y1 + (::height+1) * (::rowPos - 1)
+               y1 := ::y1 + (::height + 1) * (::rowPos - 1)
             nWidth := Min(::aColumns[2]:width, ::x2 - x1 - 1)
             ReadExit(.T.)
 
            obrw1:bPosChanged := {||VldBrwGet(oGet, oBtn)}
-           @ x1+14, y1-2 GET oGet VAR varbuf OF oBrw1  ;
-            SIZE nWidth, ::height+6        ;
+           @ x1 + 14, y1-2 GET oGet VAR varbuf OF oBrw1  ;
+            SIZE nWidth, ::height + 6        ;
             STYLE ES_AUTOHSCROLL           ;
             FONT ::oFont                   ;
             WHEN {||hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0), OgET:REFRESH(), .T.}
 
            @ x1, y1-2 BUTTON oBtn CAPTION "..." OF oBrw1;
-            SIZE 13, ::height+6  ;
+            SIZE 13, ::height + 6  ;
             ON CLICK {||(varbuf := IIF (aDataDef[j, 1] == "filename",;
                     hwg_SelectFile("Animation Files( *.avi )", "*.avi"), IIf(aDataDef[j, 1] == "filedbf", ;
                     hwg_SelectFile({"xBase Files( *.dbf)", " All Files( *.*)"}, {"*.dbf", "*.*"}), ;
@@ -192,7 +192,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
       ENDIF
    ELSE
       x1  := ::x1 + ::aColumns[1]:width - 2
-      y1 := ::y1 + (::height+1) * (::rowPos - 1)
+      y1 := ::y1 + (::height + 1) * (::rowPos - 1)
       nWidth := Min(::aColumns[2]:width, ::x2 - x1 - 1)
 
       ReadExit(.T.)
@@ -238,7 +238,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             ON LOSTFOCUS {||VldBrwGet(oGet)}
       ELSE
          @ x1, y1-2 GET oGet VAR varbuf OF oBrw1  ;
-            SIZE nWidth, ::height+6        ;
+            SIZE nWidth, ::height + 6        ;
             STYLE ES_AUTOHSCROLL           ;
             FONT ::oFont                   ;
             VALID {||VldBrwGet(oGet)}
@@ -733,7 +733,7 @@ FUNCTION ObjInspector(oObject)
       size 80, 25 ;
       on click {||EndDialog()}
 
-  @ nLeft + 150, ntop+2 SAY "Object: " + "oObject"  SIZE 200, 24
+  @ nLeft + 150, ntop + 2 SAY "Object: " + "oObject"  SIZE 200, 24
    nLin = nTop + 30
 
   @ 6, nlin-5 TAB oPage1 ITEMS {} SIZE 580, 360
@@ -774,7 +774,7 @@ STATIC FUNCTION MessagesOthers(oDlg, msg, wParam, lParam)
 
 HB_SYMBOL_UNUSED(lParam)
 
-   // writelog(Str(msg)+Str(wParam)+Str(lParam))
+   // writelog(Str(msg) + Str(wParam) + Str(lParam))
    IF msg == WM_MOUSEMOVE
      * MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       RETURN 1
@@ -786,7 +786,7 @@ HB_SYMBOL_UNUSED(lParam)
       RETURN 1
    ELSEIF msg == WM_RBUTTONUP
       *RButtonUp(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
-        oMenuisnp:Show(oDlg, oDlg:nTop+5, oDlg:nLeft+15, .T.)
+        oMenuisnp:Show(oDlg, oDlg:nTop + 5, oDlg:nLeft + 15, .T.)
       RETURN 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()

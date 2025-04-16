@@ -164,7 +164,7 @@ Local px1, px2, py1, py2, nWidth
          FOR j := 1 TO nLen
             px1 := Round(x1 + nWidth * (j * 2 - 1), 0)
             py1 := Round(y2 - (::aValues[i, j, 2] - ::ymin) / ::scaleY, 0)
-            hwg_FillRect(hDC, px1, py1, px1+nWidth, y2-2, ::tbrush:handle)
+            hwg_FillRect(hDC, px1, py1, px1 + nWidth, y2 - 2, ::tbrush:handle)
          NEXT
       ELSEIF ::nType == 3
          hwg_DrawButton(hDC, 5, 5, 80, 30, 5)

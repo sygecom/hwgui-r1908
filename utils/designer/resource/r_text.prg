@@ -21,7 +21,7 @@ ENDFUNC
    PRIVATE itemName
    PRIVATE i
    PRIVATE j
-   PRIVATE han := FOPEN(oForm:path+oForm:filename)
+   PRIVATE han := FOPEN(oForm:path + oForm:filename)
    PRIVATE arr := {}
    PRIVATE oArea
    PRIVATE oCtrl
@@ -182,15 +182,15 @@ ENDFUNC
   IF (j := AScan(arr, {|a|a[1] == "area" .AND. a[7] == "PH"})) > 1
     AAdd(arr, NIL)
     AIns(arr, 1)
-    arr[1] := {"area", 0, 0, 9999, arr[j+1, 3]-1, NIL, "DH", NIL}
+    arr[1] := {"area", 0, 0, 9999, arr[j + 1, 3] - 1, NIL, "DH", NIL}
   ENDIF
   i := 1
   DO WHILE i <= Len(arr)
     oArea := NIL
     j := i - 1
     DO WHILE j > 0      
-       IF arr[i, 2] >= arr[j, 2] .AND. arr[i, 2]+arr[i, 4] <= arr[j, 2]+arr[j, 4] .AND. ;
-          arr[i, 3] >= arr[j, 3] .AND. arr[i, 3]+arr[i, 5] <= arr[j, 3]+arr[j, 5]
+       IF arr[i, 2] >= arr[j, 2] .AND. arr[i, 2] + arr[i, 4] <= arr[j, 2] + arr[j, 4] .AND. ;
+          arr[i, 3] >= arr[j, 3] .AND. arr[i, 3] + arr[i, 5] <= arr[j, 3] + arr[j, 5]
          oArea := oForm:oDlg:aControls[1]:aControls[1]:aControls[j]
          EXIT
        ENDIF

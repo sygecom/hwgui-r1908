@@ -2293,7 +2293,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                       x + xSize - (2 + ::aMargin[2] + nMd), ;
                       ::y1 - (::nHeadHeight) * (::nHeadRows - nLine) - 1, ;
                       oColumn:nJusHead + IIf(oColumn:lSpandHead, DT_NOCLIP, 0) + DT_END_ELLIPSIS, @captionRect)
-         NEXT      // Nando DT_VCENTER+DT_SINGLELINE
+         NEXT      // Nando DT_VCENTER + DT_SINGLELINE
          IF ::ShowSortMark .AND. oColumn:SortMark > 0
             oBmpSort := IIf(oColumn:SortMark == 1, HBitmap():AddStandard(OBM_UPARROWD), HBitmap():AddStandard(OBM_DNARROWD))
             captionRect[2] := (::nHeadHeight + 17) / 2 - 17
@@ -3752,7 +3752,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
    IF ::isMouseOver
       hwg_InvalidateRect(::handle, 0, s_axPosMouseOver[1], ::y1 - ::nHeadHeight * ::nHeadRows, s_axPosMouseOver[2], ::y1)
    ENDIF
-   IF ::lDispHead .AND. (yPos <= ::nHeadHeight * ::nHeadRows + 1 .OR.; // ::height*::nHeadRows+1
+   IF ::lDispHead .AND. (yPos <= ::nHeadHeight * ::nHeadRows + 1 .OR.; // ::height * ::nHeadRows + 1
        (::lResizing .AND. yPos > ::y1)) .AND. ;
       (xPos >= ::x1 .AND. xPos <= Max(s_xDragMove, ::xAdjRight) + 4)
       IF wParam == MK_LBUTTON .AND. ::lResizing

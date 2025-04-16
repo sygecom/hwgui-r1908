@@ -14,7 +14,7 @@
 
 #define  FIRST_MDICHILD_ID     501
 #define  MAX_MDICHILD_WINDOWS   18
-#define  WM_NOTIFYICON         WM_USER+1000
+#define  WM_NOTIFYICON         WM_USER + 1000
 #define  ID_NOTIFYICON           1
 
 #define WM_MENUSELECT   287
@@ -188,7 +188,7 @@ METHOD Activate(lShow) CLASS HWindow
 
 
    ELSEIF ::type == WND_MDI
-      hwg_InitClientWindow(oWnd:nMenuPos, oWnd:nLeft, oWnd:nTop+60, oWnd:nWidth, oWnd:nHeight)
+      hwg_InitClientWindow(oWnd:nMenuPos, oWnd:nLeft, oWnd:nTop + 60, oWnd:nWidth, oWnd:nHeight)
 
       oWndClient := HWindow():New(0,,, oWnd:style, oWnd:title,, oWnd:nMenuPos, oWnd:bInit, oWnd:bDestroy, oWnd:bSize, ;
                               oWnd:bPaint, oWnd:bGetFocus, oWnd:bLostFocus, oWnd:bOther)
@@ -330,12 +330,12 @@ Local oWnd, oBtn, oitem
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
-          // writelog(str(hWnd) + "--" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
-          // writelog(str(hWnd) + "==" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
-          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 0
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
@@ -530,12 +530,12 @@ Local oWnd, oBtn, oitem
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
-          // writelog(str(hWnd) + "--" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
-          // writelog(str(hWnd) + "==" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
-          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 1
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN
@@ -972,12 +972,12 @@ Local oWndClient
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
       if oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
-          // writelog(str(hWnd) + "--" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
-          // writelog(str(hWnd) + "==" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
-          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1])+str(aControls[2])+str(aControls[3])+str(aControls[4]))
+          // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 1
       endif
    elseif msg == WM_CTLCOLORSTATIC .OR. msg == WM_CTLCOLOREDIT .OR. msg == WM_CTLCOLORBTN

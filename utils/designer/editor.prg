@@ -193,13 +193,13 @@ FUNCTION EditMethod(cMethName, cMethod)
          MENUITEM "&Font" ACTION editChgFont()
          MENU TITLE "&Select theme"
             FOR i := 1 TO Len(HDTheme():aThemes)
-               hwg_DefineMenuItem(HDTheme():aThemes[i]:name, 1020+i, &("{||ChangeTheme(" + LTrim(Str(i, 2)) + "),HDTheme():lChanged:=.T.}"))
+               hwg_DefineMenuItem(HDTheme():aThemes[i]:name, 1020 + i, &("{||ChangeTheme(" + LTrim(Str(i, 2)) + "),HDTheme():lChanged:=.T.}"))
             NEXT
          ENDMENU
          MENUITEM "&Configure" ACTION EditColors()
       ENDMENU
 
-      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters " + cParamString+Chr(10)+oEdit:Gettext()), oEdit:lChanged := .T.), .F.)
+      MENUITEM "&Parameters" ACTION IIf(!Empty(cParamString) .AND. Upper(Left(oEdit:Gettext(), 10)) != "PARAMETERS",(editShow("Parameters " + cParamString + Chr(10) + oEdit:Gettext()), oEdit:lChanged := .T.), .F.)
 
       MENU TITLE "&Templates " + cMethName
 
@@ -235,9 +235,9 @@ RETURN NIL
 FUNCTION ChangeTheme(nTheme)
 
    IF HDTheme():nSelected != NIL
-      hwg_CheckMenuItem(oDlg:handle, 1020+HDTheme():nSelected, .F.)
+      hwg_CheckMenuItem(oDlg:handle, 1020 + HDTheme():nSelected, .F.)
    ENDIF
-   hwg_CheckMenuItem(oDlg:handle, 1020+nTheme, .T.)
+   hwg_CheckMenuItem(oDlg:handle, 1020 + nTheme, .T.)
    HDTheme():nSelected := nTheme
    editShow(, .T.)
 RETURN NIL
@@ -291,8 +291,8 @@ STATIC FUNCTION EnChange(nEvent)
 
    LOCAL pos := hwg_SendMessage(oEdit:handle, EM_GETSEL, 0, 0)
    LOCAL nLength
-   LOCAL pos1 := hwg_LOWORD(pos)+1
-   LOCAL pos2 := hwg_HIWORD(pos)+1
+   LOCAL pos1 := hwg_LOWORD(pos) + 1
+   LOCAL pos2 := hwg_HIWORD(pos) + 1
    LOCAL cBuffer
    LOCAL nLine
    LOCAL arr := {}
@@ -314,7 +314,7 @@ STATIC FUNCTION EnChange(nEvent)
          cBuffer := hwg_RE_GetLine(oEdit:handle, nLine)
          // writelog("pos: " + LTrim(Str(pos1)) + " Line: " + LTrim(Str(nline)) + " " + Str(Len(cBuffer)) + "/" + cBuffer)
          nLinePos := hwg_SendMessage(oEdit:handle, EM_LINEINDEX, nLine, 0) + 1
-         AAdd(arr, {nLinePos, nLinePos+Len(cBuffer), ;
+         AAdd(arr, {nLinePos, nLinePos + Len(cBuffer), ;
             oTheme:normal[1],,, oTheme:normal[3], oTheme:normal[4],})
          HiLightString(cBuffer, arr, nLinePos)
          IF !Empty(arr)
@@ -363,7 +363,7 @@ STATIC FUNCTION HiLightString(stroka, arr, nLinePos, oTheme)
    ENDIF
 
    IF Left(LTrim(stroka), 2) == "//"
-      AAdd(arr, {nLinePos, nLinePos+Len(stroka), ;
+      AAdd(arr, {nLinePos, nLinePos + Len(stroka), ;
           oTheme:comment[1],,, oTheme:comment[3], oTheme:comment[4],})
       RETURN arr
    ENDIF
@@ -373,13 +373,13 @@ STATIC FUNCTION HiLightString(stroka, arr, nLinePos, oTheme)
       // writelog("-->" + Str(nStart) + " " + Str(nPos) + " " + Str(Len(cword)) + " " + Str(asc(cword)))
       IF !Empty(cWord)
          IF Left(cWord, 1) == '"' .OR. Left(cWord, 1) == "'"
-            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+            AAdd(arr, {nLinePos + nStart - 1, nLinePos + nPos - 1, ;
                oTheme:quote[1],,, oTheme:quote[3], oTheme:quote[4],})
          ELSEIF AScan(HDTheme():aKeyWords, Upper(cWord)) != 0
-            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+            AAdd(arr, {nLinePos + nStart - 1, nLinePos + nPos - 1, ;
                oTheme:command[1],,, oTheme:command[3], oTheme:command[4],})
          ELSEIF IsDigit(cWord)
-            AAdd(arr, {nLinePos+nStart-1, nLinePos+nPos-1, ;
+            AAdd(arr, {nLinePos + nStart - 1, nLinePos + nPos - 1, ;
                oTheme:number[1],,, oTheme:number[3], oTheme:number[4],})
          ENDIF
       ENDIF
@@ -592,7 +592,7 @@ int At_Any( char* cFind, char* cStr, int* nPos)
    while( ( c = *( cStr+(*nPos) ) ) != 0 )
    {
       for( i = 0; i < iLen; i ++ )
-         if( c == *( cFind+i ) )
+         if( c == *( cFind + i ) )
             break;
       if( i < iLen )
          break;
@@ -617,7 +617,7 @@ HB_FUNC(NEXTWORD)
    }
    if( *ptr == '\'' || *ptr == '\"' )
    {
-      ptr1 = strchr( ptr+1,*ptr );
+      ptr1 = strchr( ptr + 1,*ptr );
       if( ptr1 )
       {
          nPos = ptr1 - cStr + 1;
@@ -633,8 +633,8 @@ HB_FUNC(NEXTWORD)
       hb_retclen(ptr, nPos - (ptr - cStr));
    else
       hb_retc(ptr);
-   hb_storni( nPos+1, 2 );
-   hb_storni( ptr-cStr+1, 3 );
+   hb_storni( nPos + 1, 2 );
+   hb_storni( ptr-cStr + 1, 3 );
 }
 
 #pragma ENDDUMP

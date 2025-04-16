@@ -231,7 +231,7 @@ DEFINE ESTILO oRtf;
         TYPE PARAGRAPH;         // Tipo del estilo
         FONTNUMBER 3;           // Fuente
         FONTCOLOR 6;            // Color
-        APPEARANCE BOLD_ON+ITALIC_ON;
+        APPEARANCE BOLD_ON + ITALIC_ON;
         ALIGN CENTER;           // Alineacion
         SHADE 25;               // Sombreado
         LUPDATE

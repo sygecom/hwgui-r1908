@@ -627,7 +627,7 @@ METHOD RedrawControls() CLASS HTab
          FOR i := ::aPages[::nActive, 1] + 1 TO ::aPages[::nActive, 1] + ::aPages[::nActive, 2]
             IF hwg_IsWindowVisible(::aControls[i]:handle) //.AND. ::aControls[i]:bPaint == NIL
                hwg_RedrawWindow(::aControls[i]:handle, IIf(::classname != ::aControls[i]:classname, ;
-                  RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE +RDW_NOINTERNALPAINT, RDW_NOERASE +RDW_INVALIDATE))
+                  RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE + RDW_NOINTERNALPAINT, RDW_NOERASE + RDW_INVALIDATE))
                /*
                IF ::aControls[i]:winclass = "EDIT" .AND. __ObjHasMsg(::aControls[i], "hUpDown")
                   hwg_InvalidateRect(::aControls[i]:hUpDown, 0)

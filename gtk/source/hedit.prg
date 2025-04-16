@@ -73,7 +73,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
                   tcolor, bcolor, cPicture, lNoBorder, lMaxLength, lPassword) CLASS HEdit
 
    nStyle := hwg_BitOr(iIf(nStyle == NIL, 0, nStyle), ;
-                WS_TABSTOP+IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+;
+                WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+;
                 IIf(lPassword == NIL .OR. !lPassword, 0, ES_PASSWORD))
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
@@ -421,7 +421,7 @@ STATIC FUNCTION KeyRight(oEdit, nPos)
 
    IF !Empty(oEdit:cPicMask)
         newPos := Len(oEdit:cPicMask)
-        //writelog("KeyRight-2 " + str(nPos) + " " +str(newPos))
+        //writelog("KeyRight-2 " + str(nPos) + " " + str(newPos))
         IF nPos>newPos .AND. !Empty(Trim(oEdit:Title))
             hwg_edit_Setpos(oEdit:handle, newPos)
         ENDIF
@@ -609,7 +609,7 @@ STATIC FUNCTION GetApplyKey(oEdit, cKey)
             oEdit:title := Left(oEdit:title, nPos - 1) + cKey + SubStr(oEdit:title, nPos + 1)
          ENDIF
          hwg_edit_Settext(oEdit:handle, oEdit:title)
-         // writelog("GetApplyKey " + oEdit:title+str(nPos-1))
+         // writelog("GetApplyKey " + oEdit:title + str(nPos - 1))
          KeyRight(oEdit, nPos)
          //Added By Sandro Freire
          IF oEdit:cType == "N"
@@ -847,7 +847,7 @@ Local i, aLen
    IF hCtrl == NIL .OR. (i := AScan(oParent:Getlist, {|o|o:handle == hCtrl})) != 0
       IF (aLen := Len(oParent:Getlist)) > 1
          IF nSkip > 0
-            DO WHILE (i := i+nSkip) <= aLen
+            DO WHILE (i := i + nSkip) <= aLen
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled(oParent:Getlist[i]:Handle) // Now tab and enter goes trhow the check, combo, etc...
                   hwg_SetFocus(oParent:Getlist[i]:handle)
                   IF oParent:Getlist[i]:winclass == "EDIT"
@@ -857,7 +857,7 @@ Local i, aLen
                ENDIF
             ENDDO
          ELSE
-            DO WHILE (i := i+nSkip) > 0
+            DO WHILE (i := i + nSkip) > 0
                IF !oParent:Getlist[i]:lHide .AND. hwg_IsWindowEnabled(oParent:Getlist[i]:Handle)
                   hwg_SetFocus(oParent:Getlist[i]:handle)
                   IF oParent:Getlist[i]:winclass == "EDIT"

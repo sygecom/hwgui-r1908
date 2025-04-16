@@ -15,7 +15,7 @@ REQUEST HWG_ENDWINDOW
 
 #define  FIRST_MDICHILD_ID     501
 #define  MAX_MDICHILD_WINDOWS   18
-#define  WM_NOTIFYICON         WM_USER+1000
+#define  WM_NOTIFYICON         WM_USER + 1000
 #define  ID_NOTIFYICON           1
 
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
@@ -218,7 +218,7 @@ METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
 /*
       oWndClient := HWindow():New(,,, ::style, ::title,, ::bInit, ::bDestroy, ::bSize, ;
                               ::bPaint, ::bGetFocus, ::bLostFocus, ::bOther)
-      handle := hwg_InitClientWindow(oWndClient, ::nMenuPos, ::nLeft, ::nTop+60, ::nWidth, ::nHeight)
+      handle := hwg_InitClientWindow(oWndClient, ::nMenuPos, ::nLeft, ::nTop + 60, ::nWidth, ::nHeight)
       oWndClient:handle = handle
       hwg_ActivateMdiWindow((lShow == NIL .OR. lShow), ::hAccel, ::lMaximize)
 */

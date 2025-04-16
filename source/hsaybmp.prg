@@ -102,7 +102,7 @@ METHOD Paint(lpdis) CLASS HSayBmp
          IF ::BackStyle == TRANSPARENT
             IF ::nStretch == 1  // isometric
                hwg_DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
-                                     drawInfo[5] + ::nOffsetV,,) // ::nWidth+1, ::nHeight+1)
+                                     drawInfo[5] + ::nOffsetV,,) // ::nWidth + 1, ::nHeight + 1)
             ELSEIF ::nStretch == 2  // CLIP
                hwg_DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
                                      drawInfo[5] + ::nOffsetV,, ::nWidth + 1, ::nHeight + 1)
@@ -113,7 +113,7 @@ METHOD Paint(lpdis) CLASS HSayBmp
          ELSE
             IF ::nStretch == 1  // isometric
                hwg_DrawBitmap(drawInfo[3], ::oImage:handle,, drawInfo[4] + ::nOffsetH, ;
-                          drawInfo[5] + ::nOffsetV) //, ::nWidth+1, ::nHeight+1)
+                          drawInfo[5] + ::nOffsetV) //, ::nWidth + 1, ::nHeight + 1)
             ELSEIF ::nStretch == 2  // CLIP
                hwg_DrawBitmap(drawInfo[3], ::oImage:handle,, drawInfo[4] + ::nOffsetH, ;
                           drawInfo[5] + ::nOffsetV, ::nWidth + 1, ::nHeight + 1)

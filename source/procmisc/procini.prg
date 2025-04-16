@@ -62,7 +62,7 @@ LOCAL poz1, vname
 //LOCAL i (variable not used)
 LOCAL prblo, lTruncAr
 LOCAL lWinIni  := (hb_IsArray(prm1))
-LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
+LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN + 1
 LOCAL iniDbf := (Upper(hwg_FilExten(fname)) == "DBF")
 
    kolstr := 0

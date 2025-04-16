@@ -29,7 +29,7 @@ ENDFUNC
    PRIVATE nMode := 0
    PRIVATE itemName
    PRIVATE i
-   PRIVATE han := FOPEN(oForm:path+oForm:filename)
+   PRIVATE han := FOPEN(oForm:path + oForm:filename)
    PRIVATE cCaption
    PRIVATE x
    PRIVATE y

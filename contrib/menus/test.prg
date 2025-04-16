@@ -6,7 +6,7 @@ FUNCTION Main ()
    Local oWnd
 
    INIT WINDOW oWnd MAIN TITLE "Menu with messages" ;
-      COLOR COLOR_3DLIGHT+1 ;
+      COLOR COLOR_3DLIGHT + 1 ;
       AT 100, 100 SIZE 640, 480
 
    MENU OF oWnd
