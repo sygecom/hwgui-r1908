@@ -92,7 +92,7 @@ METHOD New() CLASS HFormGen
 
    ::type := 1
    ::name := name
-   //::CreateDialog({{"Left", LTrim(Str(aTermMetr[1]-500))},  //{"Top", "120"}, {"Width", "500"}, {"Height", "400"}, {"Caption", name}})
+   //::CreateDialog({{"Left", LTrim(Str(aTermMetr[1] - 500))},  //{"Top", "120"}, {"Width", "500"}, {"Height", "400"}, {"Caption", name}})
    //::CreateDialog({{"Left", "325"}, {"Top", "060"}, {"Width", "498"}, {"Height", "470"}, {"Caption", name}})
    IF hwg_Getdesktopwidth() < 1024
      ::CreateDialog({{"Left", "225"}, {"Top", "110"}, {"Width", "550"}, {"Height", "400"}, {"Caption", name}})
@@ -984,38 +984,38 @@ STATIC FUNCTION PaintDlg(oDlg)
       // y2 := y1 + Round(oForm:nPHeight * oForm:nKoeff, 0) - 1
       n1cm := Round(oForm:nKoeff * 10, 0)
 
-      hwg_FillRect(hDC, 0, 0, aCoors[3], TOP_INDENT-5, COLOR_3DLIGHT + 1)
-      hwg_FillRect(hDC, 0, 0, LEFT_INDENT-12, aCoors[4], COLOR_3DLIGHT + 1)
+      hwg_FillRect(hDC, 0, 0, aCoors[3], TOP_INDENT - 5, COLOR_3DLIGHT + 1)
+      hwg_FillRect(hDC, 0, 0, LEFT_INDENT - 12, aCoors[4], COLOR_3DLIGHT + 1)
       i := 0
       // hwg_SelectObject(hDC, oPenLine:handle)
       hwg_SelectObject(hDC, oDlg:oFont:handle)
       oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DLIGHT))
-      DO WHILE i*n1cm < (aCoors[3]-aCoors[1]-LEFT_INDENT)
+      DO WHILE i*n1cm < (aCoors[3] - aCoors[1] - LEFT_INDENT)
          xt := x1 + i*n1cm
          hwg_DrawLine(hDC, xt + Round(n1cm / 4, 0), 0, xt + Round(n1cm / 4, 0), 4)
          hwg_DrawLine(hDC, xt + Round(n1cm / 2, 0), 0, xt + Round(n1cm / 2, 0), 8)
          hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
          hwg_DrawLine(hDC, xt, 0, xt, 12)
          IF i > 0
-            hwg_DrawText(hDC, LTrim(Str(i + oForm:nXOffset/10, 2)), xt-15, 12, xt + 15, TOP_INDENT-5, DT_CENTER)
+            hwg_DrawText(hDC, LTrim(Str(i + oForm:nXOffset/10, 2)), xt - 15, 12, xt + 15, TOP_INDENT - 5, DT_CENTER)
          ENDIF
          i++
       ENDDO
       i := 0
-      DO WHILE i*n1cm < (aCoors[4]-aCoors[2]-TOP_INDENT)
+      DO WHILE i*n1cm < (aCoors[4] - aCoors[2] - TOP_INDENT)
          yt := y1 + i*n1cm
          hwg_DrawLine(hDC, 0, yt + Round(n1cm / 4, 0), 4, yt + Round(n1cm / 4, 0))
          hwg_DrawLine(hDC, 0, yt + Round(n1cm / 2, 0), 8, yt + Round(n1cm / 2, 0))
          hwg_DrawLine(hDC, 0, yt + Round(n1cm * 3 / 4, 0), 4, yt + Round(n1cm * 3 / 4, 0))
          hwg_DrawLine(hDC, 0, yt, 12, yt)
          IF i > 0
-            hwg_DrawText(hDC, LTrim(Str(i + oForm:nYOffset/10, 2)), 12, yt-10, LEFT_INDENT-12, yt + 10, DT_CENTER)
+            hwg_DrawText(hDC, LTrim(Str(i + oForm:nYOffset/10, 2)), 12, yt - 10, LEFT_INDENT - 12, yt + 10, DT_CENTER)
          ENDIF
          i++
       ENDDO
-      // hwg_FillRect(hDC, LEFT_INDENT-12, y1, x1, y2, COLOR_3DSHADOW + 1)
-      hwg_SetScrollInfo(oDlg:handle, SB_HORZ, 1, oForm:nXOffset/10 + 1, 1, Round((oForm:nPWidth-(aCoors[3]-LEFT_INDENT)/oForm:nKoeff)/10, 0) + 1)
-      hwg_SetScrollInfo(oDlg:handle, SB_VERT, 1, oForm:nYOffset/10 + 1, 1, Round((oForm:nPHeight-(aCoors[4]-TOP_INDENT)/oForm:nKoeff)/10, 0) + 1)
+      // hwg_FillRect(hDC, LEFT_INDENT - 12, y1, x1, y2, COLOR_3DSHADOW + 1)
+      hwg_SetScrollInfo(oDlg:handle, SB_HORZ, 1, oForm:nXOffset/10 + 1, 1, Round((oForm:nPWidth - (aCoors[3] - LEFT_INDENT)/oForm:nKoeff)/10, 0) + 1)
+      hwg_SetScrollInfo(oDlg:handle, SB_VERT, 1, oForm:nYOffset/10 + 1, 1, Round((oForm:nPHeight - (aCoors[4] - TOP_INDENT)/oForm:nKoeff)/10, 0) + 1)
    ELSE
 
       if oDesigner:lShowGrid
@@ -1055,9 +1055,9 @@ STATIC FUNCTION PaintDlg(oDlg)
         aCoors := hwg_GetClientRect(oDlg:handle)
         n1cm := oDesigner:nPixelGrid
         x1 := n1cm
-        DO WHILE x1 < (aCoors[3]-aCoors[1])
+        DO WHILE x1 < (aCoors[3] - aCoors[1])
           y1 := n1cm
-          DO WHILE y1 < (aCoors[4]-aCoors[2])
+          DO WHILE y1 < (aCoors[4] - aCoors[2])
             hwg_DrawLine(hDC, x1, y1, x1 + 1, y1 + 1)
        y1 += n1cm
           ENDDO

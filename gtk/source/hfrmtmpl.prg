@@ -612,8 +612,8 @@ MEMVAR aImages, lEditLabels, aParts
       i += 4
       DO WHILE .T.
          IF (j := hb_At(",", stroka, i)) != 0 .OR. (j := hb_At(")", stroka, i)) != 0
-            IF j-i > 0
-               varname := SubStr(stroka, i, j-i)
+            IF j - i > 0
+               varname := SubStr(stroka, i, j - i)
                __mvPrivate(varname)
                IF SubStr(varname, 2) == "InitValue"
                   cInitName  := varname
@@ -751,7 +751,7 @@ MEMVAR aImages, lEditLabels, aParts
             aParts[i] := Val(aParts[i])
          NEXT
       ENDIF
-      onInit := {|o|o:Move(,, o:nWidth-1)}
+      onInit := {|o|o:Move(,, o:nWidth - 1)}
    ENDIF
    oCtrl := &stroka
    IF cVarName != NIL
@@ -1232,12 +1232,12 @@ Memvar lLastCycle, lSkipItem
                nFirst := i := 1
                ny := y
                DO WHILE (i := hb_At(";", cText, i)) > 0
-                  ::oPrinter:Say(SubStr(cText, nFirst, i-nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj)
+                  ::oPrinter:Say(SubStr(cText, nFirst, i - nFirst), x, ny, x2, ny + dy, nJustify, oItem:obj)
                   i ++
                   nFirst := i
                   ny += dy
                ENDDO
-               ::oPrinter:Say(SubStr(cText, nFirst, Len(cText)-nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj)
+               ::oPrinter:Say(SubStr(cText, nFirst, Len(cText) - nFirst + 1), x, ny, x2, ny + dy, nJustify, oItem:obj)
             ELSE
                ::oPrinter:Say(cText, x, y, x2, y2, nJustify, oItem:obj)
             ENDIF

@@ -1168,7 +1168,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             __mvPut("tmp_nSheet", 0)
          ENDIF
          FOR i := 1 TO Len(oCtrlTmpl:aControls)
-            CreateCtrl(IIf(oCtrlTmpl:cClass == "group".OR.oCtrlTmpl:cClass == "radiogroup", oParent, oCtrl), oCtrlTmpl:aControls[i], oForm)
+            CreateCtrl(IIf(oCtrlTmpl:cClass == "group" .OR. oCtrlTmpl:cClass == "radiogroup", oParent, oCtrl), oCtrlTmpl:aControls[i], oForm)
          NEXT
          IF oCtrlTmpl:cClass == "radiogroup"
             HRadioGroup():EndGroup()

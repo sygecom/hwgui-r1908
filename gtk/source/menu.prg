@@ -88,7 +88,7 @@ Local hSubMenu
    ENDIF
 
    hSubMenu := aMenu[5]
-   hSubMenu := hwg__AddMenuItem(hSubMenu, cItem, nPos-1, hwg_GetActiveWindow(), nMenuId,, lSubMenu)
+   hSubMenu := hwg__AddMenuItem(hSubMenu, cItem, nPos - 1, hwg_GetActiveWindow(), nMenuId,, lSubMenu)
 
    IF nPos > Len(aMenu[1])
       IF lSubmenu

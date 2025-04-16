@@ -347,7 +347,7 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    nW1 := oDlg:nWidth
    nH1 := oDlg:nHeight
    *aControls := hwg_GetWindowRect(oDlg:handle)
-   oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
+   oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3] - aControls[1]
    //
 
    IF oDlg:bSize != NIL .AND. ;

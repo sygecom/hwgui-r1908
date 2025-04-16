@@ -2330,8 +2330,8 @@ METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
    IF cBRead > 0
 
       IF Empty(aSize)
-         alto := (aInfo[3]-aInfo[1])*nPercent  // Unidades
-         ancho := (aInfo[4]-aInfo[2])*nPercent
+         alto := (aInfo[3] - aInfo[1])*nPercent  // Unidades
+         ancho := (aInfo[4] - aInfo[2])*nPercent
       ELSE
          alto := (aSize[2]*aInfo[5])
          ancho := (aSize[1]*aInfo[5])

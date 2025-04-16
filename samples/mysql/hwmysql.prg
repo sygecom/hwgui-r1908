@@ -286,8 +286,8 @@ RETURN NIL
 
 FUNCTION ResizeEditQ(nWidth, nHeight)
 
-   hwg_MoveWindow(oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95)
-   hwg_MoveWindow(oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95)
+   hwg_MoveWindow(oEdit:handle, 0, nHeight - oMainWindow:aOffset[4] - 95, nWidth - 24, 95)
+   hwg_MoveWindow(oPanelE:handle, nWidth - 23, nHeight - oMainWindow:aOffset[4] - 95, 24, 95)
 
 RETURN NIL
 

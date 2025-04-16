@@ -115,7 +115,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
 #endif
          ::oPrinter:SetFont(oFont)
          nWidth := ::oPrinter:GetTextWidth(Replicate('A', 80)) / ::oPrinter:nHRes
-         IF nWidth > nPWidth + 2 .OR. nWidth < nPWidth-15
+         IF nWidth > nPWidth + 2 .OR. nWidth < nPWidth - 15
             ::nStdHeight := ::nStdHeight * (nPWidth / nWidth)
          ENDIF
          oFont:Release()
@@ -204,14 +204,14 @@ Local i, i0, j, slen, c
       DO WHILE i <= slen
          IF (c := SubStr(cLine, i, 1)) < " "
             IF i0 != 0
-               ::PrintText(SubStr(cLine, i0, i-i0))
+               ::PrintText(SubStr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             i += ::PutCode(SubStr(cLine, i))
             LOOP
          ELSEIF (j := At(c, cPseudoChar)) != 0
             IF i0 != 0
-               ::PrintText(SubStr(cLine, i0, i-i0))
+               ::PrintText(SubStr(cLine, i0, i - i0))
                i0 := 0
             ENDIF
             IF j < 3            // Horisontal line ÄÍ
@@ -220,7 +220,7 @@ Local i, i0, j, slen, c
                   i ++
                ENDDO
                ::oPrinter:Line(::x, ::y + (::nLineHeight / 2), ::x + (i - i0) * ::nCharW, ::y + (::nLineHeight / 2))
-               ::x += (i-i0) * ::nCharW
+               ::x += (i - i0) * ::nCharW
                i0 := 0
                LOOP
             ELSE
@@ -264,7 +264,7 @@ Local i, i0, j, slen, c
          i ++
       ENDDO
       IF i0 != 0
-         ::PrintText(SubStr(cLine, i0, i-i0))
+         ::PrintText(SubStr(cLine, i0, i - i0))
       ENDIF
    ENDIF
 
@@ -276,7 +276,7 @@ METHOD PrintText(cText) CLASS HWinPrn
       ::SetMode()
    ENDIF
    ::oPrinter:Say(IIf(::cpFrom != ::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
-            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
+            ::x, ::y, ::oPrinter:nWidth, ::y + ::nLineHeight + ::nLined)
    ::x += (::nCharW * Len(cText))
 
 RETURN NIL

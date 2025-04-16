@@ -507,7 +507,7 @@ RETURN IIf(i == 0, NIL, ::aDialogs[i])
 //-------------------------------------------------------------------------------------------------------------------//
 
 METHOD GetActive() CLASS HDialog
-   
+
    LOCAL handle := hwg_GetFocus()
    LOCAL i := AScan(::Getlist, {|o|o:handle == handle})
    
@@ -859,8 +859,8 @@ STATIC FUNCTION onSize(oDlg, wParam, lParam)
    nH1 := oDlg:nHeight
    //aControls := hwg_GetWindowRect(oDlg:handle)
    IF wParam != 1 //SIZE_MINIMIZED
-      oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3]-aControls[1]
-      oDlg:nHeight := hwg_HIWORD(lParam) //aControls[4]-aControls[2]
+      oDlg:nWidth := hwg_LOWORD(lParam)  //aControls[3] - aControls[1]
+      oDlg:nHeight := hwg_HIWORD(lParam) //aControls[4] - aControls[2]
    ENDIF
    // SCROLL BARS code here.
     IF oDlg:nScrollBars > -1 .AND. oDlg:lAutoScroll

@@ -105,7 +105,7 @@ Local nrec, i, res, block
       nrec := RECNO()
       block := &("{||" + cLocate + "}")
       IF oBrw:prflt
-         FOR i := 1 TO Min(oBrw:nRecords, klrecf-1)
+         FOR i := 1 TO Min(oBrw:nRecords, klrecf - 1)
             GO oBrw:aArray[i]
             IF Eval(block)
                res := .T.

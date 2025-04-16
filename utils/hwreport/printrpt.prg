@@ -32,7 +32,7 @@ Private lAddMode := .F.
    aMetr := hwg_GetDeviceArea(hDCwindow)
    hwg_SelectObject(hDCwindow, oFontStandard:handle)
    aTmetr := hwg_GetTextMetric(hDCwindow)
-   dKoef := (aMetr[1]-XINDENT) / aTmetr[2]
+   dKoef := (aMetr[1] - XINDENT) / aTmetr[2]
    hwg_ReleaseDC(Hwindow():GetMain():handle, hDCwindow)
 
    hwg_SelectObject(oPrinter:hDCPrn, oFontStandard:handle)

@@ -109,7 +109,7 @@ METHOD Paint(lpdis) CLASS HSplitter
       Eval(::bPaint, Self)
    ELSE
       hDC := hwg_GetDC(::handle)
-      hwg_DrawButton(hDC, 0, 0, ::nWidth-1, ::nHeight-1, 6)
+      hwg_DrawButton(hDC, 0, 0, ::nWidth - 1, ::nHeight - 1, 6)
       hwg_releaseDC(::handle, hDC)
    ENDIF
 
@@ -144,10 +144,10 @@ Local i, oCtrl, nDiff
    FOR i := 1 TO Len(::aRight)
       oCtrl := ::aRight[i]
       IF ::lVertical
-         nDiff := ::nLeft+::nWidth - oCtrl:nLeft
+         nDiff := ::nLeft + ::nWidth - oCtrl:nLeft
          oCtrl:Move(oCtrl:nLeft + nDiff, , oCtrl:nWidth - nDiff)
       ELSE
-         nDiff := ::nTop+::nHeight - oCtrl:nTop
+         nDiff := ::nTop + ::nHeight - oCtrl:nTop
          oCtrl:Move(, oCtrl:nTop + nDiff, , oCtrl:nHeight - nDiff)
       ENDIF   
    NEXT

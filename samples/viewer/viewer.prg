@@ -131,7 +131,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
    IF nScrollCode == SB_LINEDOWN
       IF nStepV < SCROLLVRANGE
          nStepV ++
-         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
+         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight - oToolbar:nHeight - nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -139,7 +139,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepV > 0
          nStepV --
-         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
+         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight - oToolbar:nHeight - nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -147,7 +147,7 @@ STATIC FUNCTION Vscroll(oWnd, nScrollCode, nNewPos)
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepV
          nStepV := nNewPos
-         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
+         stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight - oToolbar:nHeight - nVert)) / SCROLLVRANGE, 0)
          oSayMain:nOffsetV := - nStepV * stepV
          hwg_SetScrollInfo(oWnd:handle, SB_VERT, 1, nStepV + 1, 1, SCROLLVRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -163,7 +163,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
    IF nScrollCode == SB_LINEDOWN
       IF nStepH < SCROLLHRANGE
          nStepH ++
-         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
+         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth - nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -171,7 +171,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
    ELSEIF nScrollCode == SB_LINEUP
       IF nStepH > 0
          nStepH --
-         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
+         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth - nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -179,7 +179,7 @@ STATIC FUNCTION Hscroll(oWnd, nScrollCode, nNewPos)
    ELSEIF nScrollCode == SB_THUMBTRACK
       IF --nNewPos != nStepH
          nStepH := nNewPos
-         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
+         stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth - nHorz), 0) / SCROLLVRANGE, 0)
          oSayMain:nOffsetH := - nStepH * stepH
          hwg_SetScrollInfo(oWnd:handle, SB_HORZ, 1, nStepH + 1, 1, SCROLLHRANGE)
          hwg_RedrawWindow(oSayMain:handle, RDW_ERASE + RDW_INVALIDATE)
@@ -230,7 +230,7 @@ STATIC FUNCTION FileOpen(oWnd)
 
       aCoors := hwg_GetClientRect(oWnd:handle)
       nVert := (oWnd:nHeight - aCoors[4])
-      nHorz := (oWnd:nWidth-aCoors[3])
+      nHorz := (oWnd:nWidth - aCoors[3])
       DO WHILE .T.
          oWnd:nWidth := Round(oImage:nWidth * nKoef, 0) + nHorz
          oWnd:nHeight := Round(oImage:nHeight * nKoef, 0) + oToolBar:nHeight + nVert
@@ -274,7 +274,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    ENDIF
    aCoors := hwg_GetClientRect(oWnd:handle)
    nVert := (oWnd:nHeight - aCoors[4])
-   nHorz := (oWnd:nWidth-aCoors[3])
+   nHorz := (oWnd:nWidth - aCoors[3])
 
    IF nOp < 0 .AND. nKoef > 0.11
       nKoef -= 0.1
@@ -316,8 +316,8 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    hwg_InvalidateRect(oWnd:handle, 0)
    // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef) + Str(oImage:nWidth) + Str(oImage:nHeight))
    hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
-   stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
-   stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
+   stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight - oToolbar:nHeight - nVert)) / SCROLLVRANGE, 0)
+   stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth - nHorz), 0) / SCROLLVRANGE, 0)
    oSayMain:nOffsetV := - nStepV * stepV
    oSayMain:nOffsetH := - nStepH * stepH
    oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
@@ -338,8 +338,8 @@ STATIC FUNCTION PaintWindow(oWnd)
       RETURN -1
    ENDIF
 
-   stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight-oToolbar:nHeight-nVert)) / SCROLLVRANGE, 0)
-   stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth-nHorz), 0) / SCROLLVRANGE, 0)
+   stepV := Round((Round(oImage:nHeight * nKoef, 0) - (oWnd:nHeight - oToolbar:nHeight - nVert)) / SCROLLVRANGE, 0)
+   stepH := Round(Round(oImage:nWidth * nKoef - (oWnd:nWidth - nHorz), 0) / SCROLLVRANGE, 0)
    nOffsV := nStepV * stepV
    nOffsH := nStepH * stepH
 
@@ -348,9 +348,9 @@ STATIC FUNCTION PaintWindow(oWnd)
 
    // writelog("Paint: " + Str(Round(oImage:nWidth * nKoef, 0)) + Str(Round(oImage:nHeight * nKoef, 0)))
 #ifdef __FREEIMAGE__
-   oImage:Draw(hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
+   oImage:Draw(hDC, -nOffsH, oToolbar:nHeight - nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #else
-   hwg_DrawBitmap(hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
+   hwg_DrawBitmap(hDC, oImage:handle,, -nOffsH, oToolbar:nHeight - nOffsV, Round(oImage:nWidth * nKoef, 0), Round(oImage:nHeight * nKoef, 0))
 #endif
 
    IF lScrollV

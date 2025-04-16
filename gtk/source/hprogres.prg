@@ -57,7 +57,7 @@ METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit) CLASS
    nHeight := IIf(nHeight == NIL, 60, nHeight)
    ::nLeft := 20
    ::nTop  := 25
-   ::nWidth  := nWidth-40
+   ::nWidth  := nWidth - 40
    ::nheight  := 20
    ::maxPos  := IIf(maxPos == NIL, 20, maxPos)
    ::lNewBox := .T.

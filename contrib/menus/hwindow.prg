@@ -324,8 +324,8 @@ Local oWnd, oBtn, oitem
          NEXT
       #endif
       aControls := hwg_GetWindowRect(hWnd)
-      oWnd:nWidth  := aControls[3]-aControls[1]
-      oWnd:nHeight := aControls[4]-aControls[2]
+      oWnd:nWidth  := aControls[3] - aControls[1]
+      oWnd:nHeight := aControls[4] - aControls[2]
       if HB_IsBlock(oWnd:bSize)
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
@@ -333,7 +333,7 @@ Local oWnd, oBtn, oitem
           // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
           // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
-          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
+          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aControls[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
           // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 0
@@ -524,8 +524,8 @@ Local oWnd, oBtn, oitem
          NEXT
       #endif
       aControls := hwg_GetWindowRect(hWnd)
-      oWnd:nWidth  := aControls[3]-aControls[1]
-      oWnd:nHeight := aControls[4]-aControls[2]
+      oWnd:nWidth  := aControls[3] - aControls[1]
+      oWnd:nHeight := aControls[4] - aControls[2]
       if oWnd:bSize != NIL
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
@@ -533,7 +533,7 @@ Local oWnd, oBtn, oitem
           // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
           // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
-          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
+          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aControls[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
           // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 1
@@ -966,8 +966,8 @@ Local oWndClient
          NEXT
       #endif
       aControls := hwg_GetWindowRect(hWnd)
-      oWnd:nWidth  := aControls[3]-aControls[1]
-      oWnd:nHeight := aControls[4]-aControls[2]
+      oWnd:nWidth  := aControls[3] - aControls[1]
+      oWnd:nHeight := aControls[4] - aControls[2]
       if oWnd:bSize != NIL
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       endif
@@ -975,7 +975,7 @@ Local oWndClient
           // writelog(str(hWnd) + "--" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           aControls := hwg_GetClientRect(hWnd)
           // writelog(str(hWnd) + "==" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
-          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3]-oWnd:aOffset[1]-oWnd:aOffset[3], aControls[4]-oWnd:aOffset[2]-oWnd:aOffset[4])
+          hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aControls[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aControls[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
           // aControls := hwg_GetClientRect(HWindow():aWindows[2]:handle)
           // writelog(str(HWindow():aWindows[2]:handle) + "::" + str(aControls[1]) + str(aControls[2]) + str(aControls[3]) + str(aControls[4]))
           RETURN 1

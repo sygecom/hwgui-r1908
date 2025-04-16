@@ -160,7 +160,7 @@ Local aControls, i
    
    aControls := oWnd:aControls
    IF (i := AScan(aControls, {|o|o:ClassName() == "HSTATUS"})) > 0
-      hwg_WriteStatusWindow(aControls[i]:handle, nPart-1, cText)
+      hwg_WriteStatusWindow(aControls[i]:handle, nPart - 1, cText)
 
    ENDIF
 RETURN NIL

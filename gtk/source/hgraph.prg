@@ -122,8 +122,8 @@ Local px1, px2, py1, py2, nWidth
    y2 -= i
 
    IF ::nType < 3
-      ::scaleX := (::xmax-::xmin) / (x2-x1)
-      ::scaleY := (::ymax-::ymin) / (y2-y1)
+      ::scaleX := (::xmax - ::xmin) / (x2-x1)
+      ::scaleY := (::ymax - ::ymin) / (y2-y1)
    ENDIF
 
    IF ::oPenCoor == NIL
@@ -148,10 +148,10 @@ Local px1, px2, py1, py2, nWidth
       nLen := Len(::aValues[i])
       IF ::nType == 1  
          FOR j := 2 TO nLen
-            px1 := Round(x1+(::aValues[i, j-1, 1]-::xmin)/::scaleX, 0)
-            py1 := Round(y2-(::aValues[i, j-1, 2]-::ymin)/::scaleY, 0)
-            px2 := Round(x1+(::aValues[i, j, 1]-::xmin)/::scaleX, 0)
-            py2 := Round(y2-(::aValues[i, j, 2]-::ymin)/::scaleY, 0)
+            px1 := Round(x1 + (::aValues[i, j - 1, 1] - ::xmin) / ::scaleX, 0)
+            py1 := Round(y2 - (::aValues[i, j - 1, 2] - ::ymin) / ::scaleY, 0)
+            px2 := Round(x1 + (::aValues[i, j, 1] - ::xmin) / ::scaleX, 0)
+            py2 := Round(y2 - (::aValues[i, j, 2] - ::ymin) / ::scaleY, 0)
             IF px2 != px1 .OR. py2 != py1
                hwg_Drawline(hDC, px1, py1, px2, py2)
             ENDIF   

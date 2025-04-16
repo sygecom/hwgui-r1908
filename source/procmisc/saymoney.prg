@@ -31,7 +31,7 @@ FUNCTION hwg_SayDollar(nDollar)
     xMuch := "ONE"
     xNum := Left(cDollar, 1)
 
-    IF nPJ=6.AND.xNum="0".OR.nPJ=5.AND.xNum="0".AND.nCheck1=1
+    IF nPJ=6.AND.xNum="0" .OR. nPJ=5.AND.xNum="0" .AND. nCheck1=1
         nCheck1 := 1
     ENDIF
 
@@ -44,7 +44,7 @@ FUNCTION hwg_SayDollar(nDollar)
         nCheck1 := 0
     ENDIF
 
-    IF xNum != "0".OR.xNum="0".AND.nPJ=7.OR.xNum="0".AND.nPJ=4
+    IF xNum != "0" .OR. xNum="0" .AND. nPJ=7.OR.xNum="0" .AND. nPJ=4
         nAA := 1
 
         DO CASE
@@ -124,13 +124,13 @@ FUNCTION hwg_SayDollar(nDollar)
         CASE xNum="9"
             xLang1 = "NINE"
     ENDCASE
-    cDollar := Right(cDollar,(nPJ-1))
+    cDollar := Right(cDollar,(nPJ - 1))
     xMuch := xLang1
 
-    IF xNum != "0".OR.xNum="0".AND.nPJ=7.OR.xNum="0".AND.nPJ=4
+    IF xNum != "0" .OR. xNum="0" .AND. nPJ=7 .OR. xNum="0" .AND. nPJ=4
         nAA := 1
         DO CASE
-            CASE nPJ=8.OR.nPJ=5.OR.nPJ=2
+            CASE nPJ=8 .OR. nPJ=5 .OR. nPJ=2
                 xLang2 = "TY "
                 nAA := 2
             CASE nPJ=7
@@ -139,7 +139,7 @@ FUNCTION hwg_SayDollar(nDollar)
                 ELSE
                     xLang2 = " MILLIONS "
                 ENDIF
-            CASE nPJ=6.OR.nPJ=3
+            CASE nPJ=6 .OR. nPJ=3
                 nCheck2 := 0
                 IF xMuch="ONE"
                     xLang2 = " HUNDRED "
@@ -148,7 +148,7 @@ FUNCTION hwg_SayDollar(nDollar)
                 ENDIF
                 nTest := 0
             CASE nPJ=4
-                IF nCheck1=0.OR.xNum != "0"
+                IF nCheck1=0 .OR. xNum != "0"
                     IF xMuch="ONE"
                         xLang2 = " THOUSAND "
                     ELSE
@@ -161,7 +161,7 @@ FUNCTION hwg_SayDollar(nDollar)
         xSay := xSay + xLang1 + xLang2
     ENDIF
 
-    IF nPJ=1.OR.nPJ=4.OR.nPJ=7
+    IF nPJ=1 .OR. nPJ=4 .OR. nPJ=7
 
         IF nTest=1
             IF xNum<="5"

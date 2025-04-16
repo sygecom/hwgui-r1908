@@ -589,7 +589,7 @@ int At_Any( char* cFind, char* cStr, int* nPos)
    int i;
    int iLen = strlen(cFind);
 
-   while( ( c = *( cStr+(*nPos) ) ) != 0 )
+   while( ( c = *( cStr + (*nPos) ) ) != 0 )
    {
       for( i = 0; i < iLen; i ++ )
          if( c == *( cFind + i ) )
@@ -634,7 +634,7 @@ HB_FUNC(NEXTWORD)
    else
       hb_retc(ptr);
    hb_storni( nPos + 1, 2 );
-   hb_storni( ptr-cStr + 1, 3 );
+   hb_storni( ptr - cStr + 1, 3 );
 }
 
 #pragma ENDDUMP

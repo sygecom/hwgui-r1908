@@ -76,7 +76,7 @@ Private oIcon := HIcon():AddResource("PIM")
         AT 213, 195 SIZE 513, 295  font oFont ICON oIcon
 
    ADD STATUS oStatus TO oDlg ;
-       PARTS oDlg:nWidth-160, 150
+       PARTS oDlg:nWidth - 160, 150
        
    MENU OF oDlg
       MENU TITLE "&File"

@@ -247,7 +247,7 @@ Local indname
    i := 1
    DO WHILE !Empty(indname := ORDNAME(i))
       AAdd(msind, {Str(i, 1), indname, ORDKEY(i), ORDBAGNAME(i)})
-      ordlen := Max(ordlen, Len(OrdKey(i-1)))
+      ordlen := Max(ordlen, Len(OrdKey(i - 1)))
       i ++
    ENDDO
    INIT DIALOG oModDlg FROM RESOURCE "DLG_SEL_IND"
@@ -659,7 +659,7 @@ Local aRect, i, nHbusy := 0
          nHbusy += aRect[4]
       ENDIF
    NEXT
-   hwg_MoveWindow(oBrw:handle, 0, 0, nWidth, nHeight-nHBusy)
+   hwg_MoveWindow(oBrw:handle, 0, 0, nWidth, nHeight - nHBusy)
 RETURN NIL
 
 FUNCTION Fiopen(fname, alsname, prend, pass)

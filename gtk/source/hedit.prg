@@ -410,8 +410,8 @@ STATIC FUNCTION KeyRight(oEdit, nPos)
       masklen := Len(oEdit:cPicMask)
       DO WHILE nPos <= masklen
          IF IsEditable(oEdit, ++nPos)
-            // writelog("KeyRight-2 " + str(nPos))
-            hwg_edit_Setpos(oEdit:handle, nPos-1)
+            // writelog("KeyRight - 2 " + str(nPos))
+            hwg_edit_Setpos(oEdit:handle, nPos - 1)
             EXIT
          ENDIF
        ENDDO
@@ -421,7 +421,7 @@ STATIC FUNCTION KeyRight(oEdit, nPos)
 
    IF !Empty(oEdit:cPicMask)
         newPos := Len(oEdit:cPicMask)
-        //writelog("KeyRight-2 " + str(nPos) + " " + str(newPos))
+        //writelog("KeyRight - 2 " + str(nPos) + " " + str(newPos))
         IF nPos>newPos .AND. !Empty(Trim(oEdit:Title))
             hwg_edit_Setpos(oEdit:handle, newPos)
         ENDIF
@@ -440,11 +440,11 @@ STATIC FUNCTION KeyLeft(oEdit, nPos)
       nPos := hwg_edit_Getpos(oEdit:handle) + 1
    ENDIF
    IF oEdit:cPicMask == NIL .OR. Empty(oEdit:cPicMask)
-      hwg_edit_Setpos(oEdit:handle, nPos-2)
+      hwg_edit_Setpos(oEdit:handle, nPos - 2)
    ELSE
       DO WHILE nPos >= 1
          IF IsEditable(oEdit, --nPos)
-            hwg_edit_Setpos(oEdit:handle, nPos-1)
+            hwg_edit_Setpos(oEdit:handle, nPos - 1)
             EXIT
          ENDIF
       ENDDO
@@ -474,7 +474,7 @@ Local nGetLen := Len(oEdit:cPicMask), nLen
                   SubStr(oEdit:title, nPos + 1, nLen - 1) + " " + ;
                   SubStr(oEdit:title, nPos + nLen), nGetLen)
       hwg_edit_Settext(oEdit:handle, oEdit:title)
-      hwg_edit_Getpos(oEdit:handle, nPos-1)
+      hwg_edit_Getpos(oEdit:handle, nPos - 1)
    ENDIF
    
 RETURN NIL
@@ -614,7 +614,7 @@ STATIC FUNCTION GetApplyKey(oEdit, cKey)
          //Added By Sandro Freire
          IF oEdit:cType == "N"
             IF !Empty(oEdit:cPicMask)
-                newPos := Len(oEdit:cPicMask)-3
+                newPos := Len(oEdit:cPicMask) - 3
                 IF "E" $ oEdit:cPicFunc .AND. nPos == newPos
                     GetApplyKey(oEdit, ",")
                 ENDIF

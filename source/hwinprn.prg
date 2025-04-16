@@ -230,7 +230,7 @@ Local i, i0, j, slen, c
                   i++
                ENDDO
                ::oPrinter:Line(::x, ::y + (::nLineHeight / 2), ::x + (i - i0) * ::nCharW, ::y + (::nLineHeight / 2))
-               ::x += (i-i0) * ::nCharW
+               ::x += (i - i0) * ::nCharW
                i0 := 0
                LOOP
             ELSE
@@ -238,31 +238,31 @@ Local i, i0, j, slen, c
                   ::oPrinter:Line(::x + (::nCharW / 2), ::y, ::x + (::nCharW / 2), ::y + ::nLineHeight + ::nLined)
                ELSEIF j < 9     // ÚÉÕÖ
                   ::oPrinter:Line(::x + (::nCharW / 2), ::y + (::nLineHeight / 2), ::x + ::nCharW, ::y + (::nLineHeight / 2))
-                  ::oPrinter:Line(::x + (::nCharW / 2), ::y + (::nLineHeight / 2), ::x + (::nCharW / 2), ::y+::nLineHeight + ::nLined)
+                  ::oPrinter:Line(::x + (::nCharW / 2), ::y + (::nLineHeight / 2), ::x + (::nCharW / 2), ::y + ::nLineHeight + ::nLined)
                ELSEIF j < 13    // ¿»·¸
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + (::nCharW/2), ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y + (::nLineHeight/2), ::x + (::nCharW/2), ::y + ::nLineHeight + ::nLined)
                ELSEIF j < 17    // ÀÈÓÔ
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y + (::nLineHeight/2), ::x + ::nCharW, ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + (::nLineHeight/2))
                ELSEIF j < 21    // Ù¼½¾
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + (::nCharW/2), ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + (::nLineHeight/2))
                ELSEIF j < 25    // ÂËÑÒ
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + ::nCharW, ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y + (::nLineHeight/2), ::x + (::nCharW/2), ::y + ::nLineHeight + ::nLined)
                ELSEIF j < 29    // ÁÊÏÐ
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+(::nLineHeight/2))
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + ::nCharW, ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + (::nLineHeight/2))
                ELSEIF j < 33    // ÃÌÆÇ
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y + (::nLineHeight/2), ::x + ::nCharW, ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + ::nLineHeight + ::nLined)
                ELSEIF j < 37    // ´¹µ¶
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+(::nCharW/2), ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + (::nCharW/2), ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + ::nLineHeight + ::nLined)
                ELSE    // ÅÎ×Ø
-                  ::oPrinter:Line(::x, ::y+(::nLineHeight/2), ::x+::nCharW, ::y+(::nLineHeight/2))
-                  ::oPrinter:Line(::x+(::nCharW/2), ::y, ::x+(::nCharW/2), ::y+::nLineHeight+::nLined)
+                  ::oPrinter:Line(::x, ::y + (::nLineHeight/2), ::x + ::nCharW, ::y + (::nLineHeight/2))
+                  ::oPrinter:Line(::x + (::nCharW/2), ::y, ::x + (::nCharW/2), ::y + ::nLineHeight + ::nLined)
                ENDIF
                ::x += ::nCharW
             ENDIF
@@ -286,7 +286,7 @@ METHOD PrintText(cText) CLASS HWinPrn
       ::SetMode()
    ENDIF
    ::oPrinter:Say(IIf(::cpFrom!=::cpTo, hb_Translate(cText, ::cpFrom, ::cpTo), cText), ;
-            ::x, ::y, ::oPrinter:nWidth, ::y+::nLineHeight+::nLined)
+            ::x, ::y, ::oPrinter:nWidth, ::y + ::nLineHeight + ::nLined)
    ::x += (::nCharW * Len(cText))
 
 RETURN NIL

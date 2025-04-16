@@ -290,7 +290,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
       oCtrl:SetCoor("Top", oCtrl:nTop)
       oCtrl:SetCoor("Width", oCtrl:nWidth)
       IF oDesigner:lReport
-         oCtrl:SetCoor("Right", oCtrl:nWidth-1)
+         oCtrl:SetCoor("Right", oCtrl:nWidth - 1)
          oCtrl:SetCoor("Bottom", oCtrl:nTop + oCtrl:nHeight - 1)
       ENDIF
    ENDIF
@@ -637,7 +637,7 @@ FUNCTION GetCtrlSelected(oDlg)
 RETURN IIf(oDlg != NIL, IIf(oDlg:oParent:Classname() == "HPANEL", oDlg:oParent:oParent:oParent:oCtrlSelected, oDlg:oParent:oCtrlSelected), NIL)
 
 FUNCTION CheckResize(oCtrl, xPos, yPos)
-   IF xPos > oCtrl:nLeft-5 .AND. xPos < oCtrl:nLeft + 3 .AND. ;
+   IF xPos > oCtrl:nLeft - 5 .AND. xPos < oCtrl:nLeft + 3 .AND. ;
       yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
          RETURN 1
@@ -647,7 +647,7 @@ FUNCTION CheckResize(oCtrl, xPos, yPos)
       IF oCtrl:nWidth > 3
          RETURN 3
       ENDIF
-   ELSEIF yPos > oCtrl:nTop-5 .AND. yPos < oCtrl:nTop + 3 .AND. ;
+   ELSEIF yPos > oCtrl:nTop - 5 .AND. yPos < oCtrl:nTop + 3 .AND. ;
       xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
       IF oCtrl:nHeight > 3
          RETURN 2
@@ -698,7 +698,7 @@ FUNCTION AdjustCtrl(oCtrl, lLeft, lTop, lRight, lBottom)
             xPos := aControls[i]:nLeft + aControls[i]:nWidth + 1
             yPos := aControls[i]:nTop
             EXIT
-         ELSEIF lTop .AND. Abs(aControls[i]:nLeft-oCtrl:nLeft) < delta .AND. ;
+         ELSEIF lTop .AND. Abs(aControls[i]:nLeft - oCtrl:nLeft) < delta .AND. ;
                 aControls[i]:nTop + aControls[i]:nHeight < oCtrl:nTop .AND. ;
                 aControls[i]:nTop + aControls[i]:nHeight + delta > oCtrl:nTop
             lRes := .T.
@@ -709,10 +709,10 @@ FUNCTION AdjustCtrl(oCtrl, lLeft, lTop, lRight, lBottom)
             oCtrl:nLeft + oCtrl:nWidth >= aControls[i]:nLeft - delta .AND. ;
             oCtrl:nTop >= aControls[i]:nTop .AND. aControls[i]:nTop + aControls[i]:nHeight > oCtrl:nTop
             lRes := .T.
-            xPos := aControls[i]:nLeft-oCtrl:nWidth - 1
+            xPos := aControls[i]:nLeft - oCtrl:nWidth - 1
             yPos := aControls[i]:nTop
             EXIT
-         ELSEIF lBottom .AND. Abs(aControls[i]:nLeft-oCtrl:nLeft) <= delta .AND. ;
+         ELSEIF lBottom .AND. Abs(aControls[i]:nLeft - oCtrl:nLeft) <= delta .AND. ;
                 aControls[i]:nTop > oCtrl:nTop + oCtrl:nHeight .AND. ;
                 aControls[i]:nTop - delta <= oCtrl:nTop + oCtrl:nHeight
             lRes := .T.

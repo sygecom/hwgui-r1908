@@ -570,7 +570,7 @@ STATIC FUNCTION UpdStru(oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation)
 
    IF nOperation == 4
       Adel(oBrowse:aArray, oBrowse:nCurrent)
-      Asize(oBrowse:aArray, Len(oBrowse:aArray)-1)
+      Asize(oBrowse:aArray, Len(oBrowse:aArray) - 1)
       IF oBrowse:nCurrent < Len(oBrowse:aArray) .AND. oBrowse:nCurrent > 1
          oBrowse:nCurrent --
       ENDIF

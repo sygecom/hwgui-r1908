@@ -1191,7 +1191,7 @@ METHOD GetApplyKey(cKey) CLASS HEdit
                ENDIF
             ENDIF
          ELSEIF !SET(_SET_CONFIRM)
-             IF (::cType != "D" .AND. !"@"$::cPicFunc .AND. Empty(::cPicMask) .AND. !Empty(::nMaxLength) .AND. nLen >= ::nMaxLength-1) .OR. ;
+             IF (::cType != "D" .AND. !"@"$::cPicFunc .AND. Empty(::cPicMask) .AND. !Empty(::nMaxLength) .AND. nLen >= ::nMaxLength - 1) .OR. ;
                     (!Empty(::nMaxLength) .AND. nPos = ::nMaxLength) .OR. nPos == Len(::cPicMask)
                  hwg_GetSkip(::oParent, ::handle, , 1)
              ENDIF

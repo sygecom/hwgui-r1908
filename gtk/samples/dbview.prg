@@ -86,11 +86,11 @@ Private oBrw, oSay1, oSay2, oFont, DataCP, currentCP, currFname
       SIZE 300, 272                   ;
       STYLE WS_VSCROLL + WS_HSCROLL  ;
       FONT oFont                     ;
-      ON SIZE {|o, x, y|o:Move(,, x-1, y-28)}
+      ON SIZE {|o, x, y|o:Move(,, x - 1, y - 28)}
       
    oBrw:bScrollPos := {|o, n, lEof, nPos|hwg_VScrollPos(o, n, lEof, nPos)}
 
-   @ 0, 272 PANEL oPanel SIZE 0, 26 ON SIZE {|o, x, y|o:Move(0, y-26, x-1, y-8)}
+   @ 0, 272 PANEL oPanel SIZE 0, 26 ON SIZE {|o, x, y|o:Move(0, y - 26, x - 1, y - 8)}
    @ 5, 4 SAY oSay1 CAPTION "" OF oPanel SIZE 150, 22 FONT oFont
    @ 160, 4 SAY oSay2 CAPTION "" OF oPanel SIZE 100, 22 FONT oFont
    

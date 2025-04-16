@@ -144,13 +144,13 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             ReadExit(.T.)
 
            obrw1:bPosChanged := {||VldBrwGet(oGet, oBtn)}
-           @ x1 + 14, y1-2 GET oGet VAR varbuf OF oBrw1  ;
+           @ x1 + 14, y1 - 2 GET oGet VAR varbuf OF oBrw1  ;
             SIZE nWidth, ::height + 6        ;
             STYLE ES_AUTOHSCROLL           ;
             FONT ::oFont                   ;
             WHEN {||hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0), OgET:REFRESH(), .T.}
 
-           @ x1, y1-2 BUTTON oBtn CAPTION "..." OF oBrw1;
+           @ x1, y1 - 2 BUTTON oBtn CAPTION "..." OF oBrw1;
             SIZE 13, ::height + 6  ;
             ON CLICK {||(varbuf := IIF (aDataDef[j, 1] == "filename",;
                     hwg_SelectFile("Animation Files( *.avi )", "*.avi"), IIf(aDataDef[j, 1] == "filedbf", ;
@@ -228,7 +228,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
          varbuf := AllTrim(varbuf)
          nChoic := AScan(aItems, varbuf)
 
-         @ x1, y1-2 COMBOBOX oGet           ;
+         @ x1, y1 - 2 COMBOBOX oGet           ;
             ITEMS aItems                   ;
             INIT nChoic                    ;
             OF oBrw1                       ;
@@ -237,7 +237,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
             STYLE WS_VSCROLL               ;
             ON LOSTFOCUS {||VldBrwGet(oGet)}
       ELSE
-         @ x1, y1-2 GET oGet VAR varbuf OF oBrw1  ;
+         @ x1, y1 - 2 GET oGet VAR varbuf OF oBrw1  ;
             SIZE nWidth, ::height + 6        ;
             STYLE ES_AUTOHSCROLL           ;
             FONT ::oFont                   ;
@@ -375,7 +375,7 @@ FUNCTION InspOpen(lShow)
 
    BEGIN PAGE "Properties" OF oTab
       @ 2, 30 PBROWSE oBrw1 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
-         ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
+         ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x - 6, y - 32)}
          hwg_SetDlgKey(oDesigner:oDlgInsp, 0, VK_DELETE, {||ResetToDefault(oBrw1)})
 
       oBrw1:tColor := hwg_GetSysColor(COLOR_BTNTEXT)
@@ -392,7 +392,7 @@ FUNCTION InspOpen(lShow)
 
    BEGIN PAGE "Events" OF oTab
       @ 2, 30 PBROWSE oBrw2 ARRAY SIZE 214, 218 STYLE WS_VSCROLL ;
-         ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x-6, y-32)}
+         ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 2, 30, x - 6, y - 32)}
       oBrw2:tColor := hwg_GetSysColor(COLOR_BTNTEXT)
       oBrw2:tColorSel := 8404992
       oBrw2:bColor := oBrw2:bColorSel := hwg_GetSysColor(COLOR_BTNFACE)
@@ -407,7 +407,7 @@ FUNCTION InspOpen(lShow)
 
      // : LFB POS
    @ 190, 25 BUTTON "Close" SIZE 50, 23     ;
-       ON SIZE {|o, x|o:Move(x-52,,,)};
+       ON SIZE {|o, x|o:Move(x - 52,,,)};
        ON CLICK {||oDesigner:oDlgInsp:close()}
    // : LFB
 
@@ -568,7 +568,7 @@ STATIC FUNCTION InspSetBrowse()
 
    Eval(oBrw1:bGoTop, oBrw1)
    Eval(oBrw2:bGoTop, oBrw2)
-   oBrw1:rowPos := 1 //IIf(nrow > Len(APROP), 1, NROW-1) //1
+   oBrw1:rowPos := 1 //IIf(nrow > Len(APROP), 1, NROW - 1) //1
    oBrw2:rowPos := 1
    oBrw1:Refresh()
    oBrw2:Refresh()
@@ -641,7 +641,7 @@ STATIC FUNCTION EditArray(arr)
         AT 300, 280 SIZE 400, 300 FONT oDesigner:oMainWnd:oFont
 
    @ 0, 0 BROWSE oBrw ARRAY SIZE 400, 255  ;
-       ON SIZE {|o, x, y|o:Move(,, x, y-45)}
+       ON SIZE {|o, x, y|o:Move(,, x, y - 45)}
     oBrw:acolumns := {}
    oBrw:bcolor := 15132390
    oBrw:bcolorSel := hwg_VColor("008000")
@@ -650,13 +650,13 @@ STATIC FUNCTION EditArray(arr)
    oBrw:AddColumn(HColumn():New(, {|v, o|IIf(v != NIL, o:aArray[o:nCurrent] := v, o:aArray[o:nCurrent])}, "C", 100, 0, .T.))
   // 30 - 35
    @ 21, 265 BUTTON "Delete Item"  SIZE 110, 26 ;
-       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)};
+       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y - 30,,)};
        ON CLICK {||onclick_deleteItem(oBrw)}
    @ 151, 265 BUTTON "Ok" SIZE 110, 26     ;
-       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)}  ;
+       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y - 30,,)}  ;
        ON CLICK {||oDlg:lResult := .T., EndDialog()}
    @ 276, 265 BUTTON "Cancel" ID IDCANCEL SIZE 110, 26 ;
-       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y-30,,)}
+       ON SIZE {|o, x, y|HB_SYMBOL_UNUSED(x), o:Move(, y - 30,,)}
 
    ACTIVATE DIALOG oDlg
 
@@ -736,7 +736,7 @@ FUNCTION ObjInspector(oObject)
   @ nLeft + 150, ntop + 2 SAY "Object: " + "oObject"  SIZE 200, 24
    nLin = nTop + 30
 
-  @ 6, nlin-5 TAB oPage1 ITEMS {} SIZE 580, 360
+  @ 6, nlin - 5 TAB oPage1 ITEMS {} SIZE 580, 360
   BEGIN PAGE " Properties " OF oPage1
    @ 010, nLin BROWSE oBrw ARRAY ;
       SIZE 570, 300 ;

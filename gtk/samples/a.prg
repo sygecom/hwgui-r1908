@@ -215,7 +215,7 @@ Local oPrinter, oFont
    oPrinter:StartDoc(.T., "/tmp/_a.ps")
    oPrinter:StartPage()
    oPrinter:SetFont(oFont)
-   oPrinter:Box(5, 5, oPrinter:nWidth-5, oPrinter:nHeight-5)
+   oPrinter:Box(5, 5, oPrinter:nWidth - 5, oPrinter:nHeight - 5)
    oPrinter:Say("Windows printing first sample !", 50, 10, 165, 26, DT_CENTER, oFont)
    oPrinter:Line(45, 30, 170, 30)
    oPrinter:Line(45, 5, 45, 30)

@@ -24,8 +24,8 @@ Local i, aItem
       aItem := aPaintRep[FORM_ITEMS, i]
       IF xPos >= LEFT_INDENT + aItem[ITEM_X1] ;
            .AND. xPos < LEFT_INDENT + aItem[ITEM_X1] + aItem[ITEM_WIDTH] ;
-           .AND. yPos > TOP_INDENT + aItem[ITEM_Y1]-aPaintRep[FORM_Y] ;
-           .AND. yPos < TOP_INDENT + aItem[ITEM_Y1]-aPaintRep[FORM_Y] + aItem[ITEM_HEIGHT]
+           .AND. yPos > TOP_INDENT + aItem[ITEM_Y1] - aPaintRep[FORM_Y] ;
+           .AND. yPos < TOP_INDENT + aItem[ITEM_Y1] - aPaintRep[FORM_Y] + aItem[ITEM_HEIGHT]
          aPaintRep[FORM_ITEMS, i, ITEM_STATE] := STATE_SELECTED
          IF aItem[ITEM_TYPE] == TYPE_TEXT
             StaticDlg(aItem)
@@ -121,7 +121,7 @@ Local nWidth := Val(hwg_GetEditText(hDlg, IDC_EDIT1))
 Local cType := hwg_GetDlgItemText(hDlg, IDC_COMBOBOX1, 12), i
 Local oPen := aItem[ITEM_PEN]
    i := Ascan(s_aPenStyles, cType)
-   IF oPen:style != i-1 .OR. oPen:width != nWidth
+   IF oPen:style != i - 1 .OR. oPen:width != nWidth
       oPen:Release()
       aItem[ITEM_PEN] := HPen():Add(i - 1, nWidth, 0)
       aPaintRep[FORM_CHANGED] := .T.

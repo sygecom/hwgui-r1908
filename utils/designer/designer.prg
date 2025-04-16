@@ -192,7 +192,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
        hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .T.)
    endif
 
-   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y-21), statusbarmsg("")}
+   @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y - 21), statusbarmsg("")}
 
    IF !oDesigner:lSingleForm
       @ 2, 3 OWNERBUTTON OF oPanel       ;
@@ -272,7 +272,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
     ADD STATUS oStatus1 TO oDesigner:oMainWnd ;
-       PARTS oDesigner:oMainWnd:nWidth-280, 80, 80, 40, 40, 40 ;
+       PARTS oDesigner:oMainWnd:nWidth - 280, 80, 80, 40, 40, 40 ;
        FONT HFont():Add("MS Sans Serif", 0, -12, 400, , ,)
 
          //

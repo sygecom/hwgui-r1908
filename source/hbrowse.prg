@@ -3887,7 +3887,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
          ENDIF
          ::varbuf := Eval(oColumn:block,, Self, fipos)
       ENDIF
-      Type := IIf(oColumn:Type == "U".AND.::varbuf != NIL, ValType(::varbuf), oColumn:Type)
+      Type := IIf(oColumn:Type == "U" .AND. ::varbuf != NIL, ValType(::varbuf), oColumn:Type)
       //IF ::lEditable .AND. Type != "O" .AND. Type != "L" // columns logic is handling in BUTTONDOWN()
       IF ::lEditable .AND. Type != "O" .AND. (oColumn:aList != NIL .OR. (oColumn:aList == NIL .AND. wParam != 13))
          IF oColumn:lEditable
@@ -4587,7 +4587,7 @@ FUNCTION hwg_CreateList(oBrw, lEditable)
       oBrw:AddColumn(HColumn():New(FieldName(i),                      ;
                                    FieldWBlock(FieldName(i), nArea),  ;
                                    dbFieldInfo(DBS_TYPE, i),         ;
-                                   IIf(dbFieldInfo(DBS_TYPE, i) == "D".AND.__SetCentury(), 10, dbFieldInfo(DBS_LEN, i)), ;
+                                   IIf(dbFieldInfo(DBS_TYPE, i) == "D" .AND. __SetCentury(), 10, dbFieldInfo(DBS_LEN, i)), ;
                                    dbFieldInfo(DBS_DEC, i),          ;
                                    lEditable))
    NEXT
