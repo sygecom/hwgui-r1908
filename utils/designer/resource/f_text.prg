@@ -1,6 +1,6 @@
 #SCRIPT TABLE
 aCtrlTable := {{"STATIC", "label"}, {"BUTTON", "button"}, &&
-    {"CHECKBOX", "checkbox"}, {"RADIOBUTTON", "radiobutton"},   &&
+    {"CHECKBOX", "checkbox"}, {"RADIOBUTTON", "radiobutton"}, &&
     {"EDITBOX", "editbox"}, {"GROUPBOX", "group"}, {"DATEPICKER", "datepicker"}, &&
     {"UPDOWN", "updown"}, {"COMBOBOX", "combobox"}, {"HLINE", "line"}, &&
     {"PANEL", "toolbar"}, {"OWNERBUTTON", "ownerbutton"}, &&
@@ -123,7 +123,7 @@ RETURN
        + ";" + LTrim(Str(oForm:oDlg:style))    &&
        + ";" + IIf(oForm:lGet, "T", "F")           &&
        + ";" + IIf(oForm:oDlg:lClipper, "T", "F")  &&
-       + ";" + IIf(oForm:oDlg:oFont != NIL,        &&
+       + ";" + IIf(oForm:oDlg:oFont != NIL, &&
        oForm:oDlg:oFont:name + "," + LTrim(Str(oForm:oDlg:oFont:width)) &&
        + "," + LTrim(Str(oForm:oDlg:oFont:height)) + "," + LTrim(Str(oForm:oDlg:oFont:weight)) &&
        + "," + LTrim(Str(oForm:oDlg:oFont:charset)) + "," + LTrim(Str(oForm:oDlg:oFont:italic)) &&
@@ -140,7 +140,7 @@ RETURN
           + ";" + LTrim(Str(oCtrl:nWidth))   &&
           + ";" + LTrim(Str(oCtrl:nHeight)) &&
           + ";" + LTrim(Str(oCtrl:style))    &&
-          + ";" + IIf(oCtrl:oFont != NIL,        &&
+          + ";" + IIf(oCtrl:oFont != NIL, &&
           oCtrl:oFont:name + "," + Ltrim(Str(oCtrl:oFont:width)) &&
           + "," + LTrim(Str(oCtrl:oFont:height)) + "," + LTrim(Str(oCtrl:oFont:weight)) &&
           + "," + LTrim(Str(oCtrl:oFont:charset)) + "," + LTrim(Str(oCtrl:oFont:italic)) &&

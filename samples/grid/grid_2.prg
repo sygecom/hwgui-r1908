@@ -87,9 +87,9 @@ FUNCTION ConnectGrid()
         oServer:DeleteTable("Test")
     endif
 
-    oServer:CreateTable("Test", {{"col1", "N", 6,  0},;
+    oServer:CreateTable("Test", {{"col1", "N", 6, 0},;
                                  {"col2", "C", 40, 0},;
-                                 {"col3", "D", 8,  0}})
+                                 {"col3", "D", 8, 0}})
 
     oQuery := oServer:Query("SELECT * FROM test")
 

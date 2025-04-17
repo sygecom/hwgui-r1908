@@ -37,7 +37,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       lOEM := .F.
    ENDIF
    IF ::oImage == NIL
-      ::oImage := IIf(lRes .OR. hb_IsNumeric(Image),  ;
+      ::oImage := IIf(lRes .OR. hb_IsNumeric(Image), ;
                        HIcon():AddResource(Image, , , , lOEM), ;
                        IIf(hb_IsChar(Image), ;
                             HIcon():AddFile(Image), Image))

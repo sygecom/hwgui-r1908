@@ -105,7 +105,7 @@ METHOD EndGroup(nSelected) CLASS HRadioGroup
       IF nSelected != 0 .AND. nSelected <= nLen
          IF ::oGroupCurrent:aButtons[nLen]:handle > 0
             hwg_CheckRadioButton(::oGroupCurrent:aButtons[nLen]:oParent:handle, ;
-                             ::oGroupCurrent:aButtons[1]:id,    ;
+                             ::oGroupCurrent:aButtons[1]:id, ;
                              ::oGroupCurrent:aButtons[nLen]:id, ;
                              ::oGroupCurrent:aButtons[nSelected]:id)
          ELSE
@@ -142,7 +142,7 @@ METHOD SetValue(nValue) CLASS HRadioGroup
 
    IF (nLen := Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen
       hwg_CheckRadioButton(::aButtons[nLen]:oParent:handle, ;
-                       ::aButtons[1]:id,    ;
+                       ::aButtons[1]:id, ;
                        ::aButtons[nLen]:id, ;
                        ::aButtons[nValue]:id)
       ::nValue := nValue
@@ -151,7 +151,7 @@ METHOD SetValue(nValue) CLASS HRadioGroup
       ENDIF
    ELSEIF nLen > 0
       hwg_CheckRadioButton(::aButtons[nlen]:oParent:handle, ;
-            ::aButtons[1]:id,    ;
+            ::aButtons[1]:id, ;
             ::aButtons[nLen]:id, ;
             0)
    ENDIF

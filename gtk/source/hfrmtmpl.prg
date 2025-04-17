@@ -12,17 +12,17 @@
 #xtranslate HB_AT(<x,...>) => AT(<x>)
 #endif
 
-STATIC s_aClass := {"label", "button", "checkbox",                    ;
-                  "radiobutton", "editbox", "group", "radiogroup",  ;
-                  "bitmap", "icon",                                  ;
-                  "richedit", "datepicker", "updown", "combobox",    ;
-                  "line", "toolbar", "ownerbutton", "browse",        ;
-                  "monthcalendar", "trackbar", "page", "tree",        ;
-                  "status", "menu", "animation"                       ;
+STATIC s_aClass := {"label", "button", "checkbox", ;
+                  "radiobutton", "editbox", "group", "radiogroup", ;
+                  "bitmap", "icon", ;
+                  "richedit", "datepicker", "updown", "combobox", ;
+                  "line", "toolbar", "ownerbutton", "browse", ;
+                  "monthcalendar", "trackbar", "page", "tree", ;
+                  "status", "menu", "animation" ;
                 }
 STATIC s_aCtrls := { ;
   "HStatic():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,ctooltip,TextColor,BackColor,lTransp)", ;
-  "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)",  ;
+  "HButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
   "HCheckButton():New(oPrnt,nId,lInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor,bwhen)", ;
   "HRadioButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,onClick,ctooltip,TextColor,BackColor)", ;
   "HEdit():New(oPrnt,nId,cInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onGetFocus,onLostFocus,ctooltip,TextColor,BackColor,cPicture,lNoBorder,nMaxLength,lPassword)", ;

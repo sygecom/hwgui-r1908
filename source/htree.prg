@@ -96,7 +96,7 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
          nPos := 1
       ENDIF
    ENDIF
-   ::handle := hwg_TreeAddNode(Self, oTree:handle,               ;
+   ::handle := hwg_TreeAddNode(Self, oTree:handle, ;
                             IIf(oParent == NIL, NIL, oParent:handle), ;
                             IIf(oPrev == NIL, NIL, oPrev:handle), nPos, cTitle, im1, im2)
 

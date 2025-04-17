@@ -1480,16 +1480,16 @@ METHOD Untransform(cBuffer) CLASS HEdit
       ELSE
          IF "E" $ ::cPicFunc
             cBuffer := Left(cBuffer, ::FirstEditable() - 1) +           ;
-                       StrTran(SubStr(cBuffer, ::FirstEditable(),      ;
+                       StrTran(SubStr(cBuffer, ::FirstEditable(), ;
                                         ::LastEditable() - ::FirstEditable() + 1), ;
                                 ".", " ") + SubStr(cBuffer, ::LastEditable() + 1)
             cBuffer := Left(cBuffer, ::FirstEditable() - 1) +           ;
-                       StrTran(SubStr(cBuffer, ::FirstEditable(),      ;
+                       StrTran(SubStr(cBuffer, ::FirstEditable(), ;
                                         ::LastEditable() - ::FirstEditable() + 1), ;
                                 ",", ".") + SubStr(cBuffer, ::LastEditable() + 1)
          ELSE
             cBuffer := Left(cBuffer, ::FirstEditable() - 1) +        ;
-                       StrTran(SubStr(cBuffer, ::FirstEditable(),   ;
+                       StrTran(SubStr(cBuffer, ::FirstEditable(), ;
                                         ::LastEditable() - ::FirstEditable() + 1), ;
                                 ",", " ") + SubStr(cBuffer, ::LastEditable() + 1)
          ENDIF

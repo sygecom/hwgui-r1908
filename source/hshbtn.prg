@@ -23,10 +23,10 @@ CLASS HShadeButton INHERIT HOwnButton
    DATA hShade
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               bInit, bSize, bPaint, bClick, lflat,              ;
-               cText, color, font, xt, yt,                       ;
+               bInit, bSize, bPaint, bClick, lflat, ;
+               cText, color, font, xt, yt, ;
                bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
-               cTooltip, lEnabled, shadeID, palette,         ;
+               cTooltip, lEnabled, shadeID, palette, ;
                granularity, highlight, coloring, shcolor)
    METHOD Paint()
    METHOD END()
@@ -34,15 +34,15 @@ CLASS HShadeButton INHERIT HOwnButton
 ENDCLASS
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            bInit, bSize, bPaint, bClick, lFlat,              ;
-            cText, color, font, xt, yt,                       ;
+            bInit, bSize, bPaint, bClick, lFlat, ;
+            cText, color, font, xt, yt, ;
             bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
-            cTooltip, lEnabled, shadeID, palette,         ;
+            cTooltip, lEnabled, shadeID, palette, ;
             granularity, highlight, coloring, shcolor) CLASS HShadeButton
 
-   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,    ;
-              bInit, bSize, bPaint, bClick, lFlat,             ;
-              cText, color, font, xt, yt,,,                    ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+              bInit, bSize, bPaint, bClick, lFlat, ;
+              cText, color, font, xt, yt,,, ;
               bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
               cTooltip, lEnabled)
 

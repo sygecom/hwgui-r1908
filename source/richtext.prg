@@ -1128,14 +1128,14 @@ METHOD BorderCode(cBorderID) CLASS RichText
    LOCAL n
    LOCAL aBorder := ;
          { ;
-           {"NONE",        NIL   }, ;
-           {"SINGLE",      "s"   }, ;
-           {"DOUBLETHICK", "th"  }, ;
-           {"SHADOW",      "sh"  }, ;
-           {"DOUBLE",      "db"  }, ;
-           {"DOTTED",      "dot" }, ;
-           {"DASHED",      "dash"}, ;
-           {"HAIRLINE",    "hair"}  ;
+           {"NONE", NIL}, ;
+           {"SINGLE", "s"}, ;
+           {"DOUBLETHICK", "th"}, ;
+           {"SHADOW", "sh"}, ;
+           {"DOUBLE", "db"}, ;
+           {"DOTTED", "dot"}, ;
+           {"DASHED", "dash"}, ;
+           {"HAIRLINE", "hair"}  ;
          }
 
    cBorderID := Upper(RTrim(cBorderID))
@@ -1166,11 +1166,11 @@ METHOD ShadeCode(cShadeID) CLASS RichText
    LOCAL n
    LOCAL aShade := ;
          { ;
-           {"NONE",     ""     }, ;
-           {"HORIZ",    "horiz"}, ;
-           {"VERT",     "vert" }, ;
-           {"CROSS",    "cross"}, ;
-           {"FORDIAG",  "fdiag"}, ;
+           {"NONE", ""}, ;
+           {"HORIZ", "horiz"}, ;
+           {"VERT", "vert" }, ;
+           {"CROSS", "cross"}, ;
+           {"FORDIAG", "fdiag"}, ;
            {"BACKDIAG", "bdiag"} ;
          }
 

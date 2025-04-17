@@ -47,18 +47,18 @@ STATIC oTab, oMenuisnp
 CLASS PBrowse INHERIT HBrowse
 
    METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll,     ;
+                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
                   lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown)
    METHOD Edit()
    METHOD HeaderOut(hDC)
 ENDCLASS
 
 METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-               bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll,     ;
+               bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
                lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown) CLASS PBrowse
 
    ::Super:New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-               bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll,       ;
+               bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
                lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown)
 RETURN Self
 
@@ -158,7 +158,7 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
                       "*.jpg;*.gif;*.bmp;*.ico")))), ;
                    IIf(!Empty(varbuf), oGet:refresh(), NIL)} //,;
-                  *   VldBrwGet(oGet)} //,   hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)}
+                  *   VldBrwGet(oGet)} //, hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)}
                   // : END LFB
             //varbuf := hwg_SelectFile("All files ( *.* )", "*.*")
             //

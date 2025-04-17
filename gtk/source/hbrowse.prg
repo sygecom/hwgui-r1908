@@ -1081,7 +1081,7 @@ METHOD LineOut(nstroka, vybfld, hDC, lSelected, lClear) CLASS HBrowse
                ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor)
             ENDIF
             hBReal := IIf(::aColumns[fif]:brush != NIL, ;
-                         ::aColumns[fif]:brush:handle,   ;
+                         ::aColumns[fif]:brush:handle, ;
                          oLineBrush:handle)
             hwg_FillRect(hDC, x, ::y1 + (::height + 1)*(nstroka - 1) + 1, x + xSize - IIf(::lSep3d, 2, 1) - 1, ::y1 + (::height + 1)*nstroka, hBReal)
             IF !lClear
@@ -1991,11 +1991,11 @@ Local kolf := FCOUNT()
    oBrw:aColumns := {}
    
    for i := 1 TO kolf
-      oBrw:AddColumn(HColumn():New(Fieldname(i),                      ;
+      oBrw:AddColumn(HColumn():New(Fieldname(i), ;
                                    FieldWBlock(Fieldname(i), nArea), ;
-                                   dbFieldInfo(DBS_TYPE, i),         ;
-                                   dbFieldInfo(DBS_LEN, i),          ;
-                                   dbFieldInfo(DBS_DEC, i),          ;
+                                   dbFieldInfo(DBS_TYPE, i), ;
+                                   dbFieldInfo(DBS_LEN, i), ;
+                                   dbFieldInfo(DBS_DEC, i), ;
                                    lEditable))
    next
 

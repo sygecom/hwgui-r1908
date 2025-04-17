@@ -55,9 +55,9 @@ CLASS HCustomWindow INHERIT HObject
    METHOD FindControl(nId, nHandle)
    METHOD Hide() INLINE (::lHide := .T., hwg_HideWindow(::handle))
    METHOD Show() INLINE (::lHide := .F., hwg_ShowWindow(::handle))
-   METHOD Restore() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
-   METHOD Maximize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0)
-   METHOD Minimize() INLINE hwg_SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
+   METHOD Restore() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_RESTORE, 0)
+   METHOD Maximize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+   METHOD Minimize() INLINE hwg_SendMessage(::handle, WM_SYSCOMMAND, SC_MINIMIZE, 0)
 ENDCLASS
 
 METHOD FindControl(nId, nHandle) CLASS HCustomWindow
@@ -138,7 +138,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    ::AddItem(Self)
    IF lType == WND_MAIN
 
-      ::handle := hwg_InitMainWindow(::szAppName, cTitle, cMenu,    ;
+      ::handle := hwg_InitMainWindow(::szAppName, cTitle, cMenu, ;
               IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), ::Style, ::nLeft, ;
               ::nTop, ::nWidth, ::nHeight)
 
@@ -146,7 +146,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
 
       // Register MDI frame  class
       // Create   MDI frame  window -> aWindows[0]
-      hwg_InitMdiWindow(::szAppName, cTitle, cMenu,  ;
+      hwg_InitMdiWindow(::szAppName, cTitle, cMenu, ;
               IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
               nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::handle = hwg_GetWindowHandle(1)
@@ -155,7 +155,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
 
       ::oParent := HWindow():GetMain()
       IF HB_IsObject(::oParent)
-          ::handle := hwg_InitChildWindow(::szAppName, cTitle, cMenu,    ;
+          ::handle := hwg_InitChildWindow(::szAppName, cTitle, cMenu, ;
              IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
              ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
       Else
@@ -166,7 +166,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    ELSEIF lType == WND_MDICHILD //
       ::szAppName := "MDICHILD" + Alltrim(Str(hwg_GETNUMWINDOWS()))
       // Registra a classe
-      hwg_InitMdiChildWindow(::szAppName, cTitle, cMenu,  ;
+      hwg_InitMdiChildWindow(::szAppName, cTitle, cMenu, ;
               IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
               nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
@@ -234,9 +234,9 @@ Local i := Ascan(::aWindows, {|o|o:handle == hWnd})
 RETURN IIf(i == 0, NIL, ::aWindows[i])
 
 METHOD GetMain CLASS HWindow
-RETURN IIf(Len(::aWindows) > 0,              ;
+RETURN IIf(Len(::aWindows) > 0, ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
-	   ::aWindows[1],                  ;
+	   ::aWindows[1], ;
 	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
 
 METHOD GetMdiActive() CLASS HWindow 

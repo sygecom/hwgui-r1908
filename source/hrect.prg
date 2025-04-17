@@ -44,18 +44,18 @@ METHOD New(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle) CLASS HRect
 
    DO CASE
    CASE nStyle == 1
-      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
-      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
+      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft, nTop, nRight - nLeft, , nCor1)
+      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft, nBottom, nRight - nLeft, , nCor2)
 
    CASE nStyle == 2
-      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
-      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
+      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft, nTop, nBottom - nTop, , nCor1)
+      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop, nBottom - nTop, , nCor2)
 
    OTHERWISE
-      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft,  nTop,    nRight - nLeft, , nCor1)
-      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft,  nTop,    nBottom - nTop, , nCor1)
-      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft,  nBottom, nRight - nLeft, , nCor2)
-      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop,    nBottom - nTop, , nCor2)
+      ::oLine1 := HRect_Line():New(oWndParent, , .F., nLeft, nTop, nRight - nLeft, , nCor1)
+      ::oLine2 := HRect_Line():New(oWndParent, , .T., nLeft, nTop, nBottom - nTop, , nCor1)
+      ::oLine3 := HRect_Line():New(oWndParent, , .F., nLeft, nBottom, nRight - nLeft, , nCor2)
+      ::oLine4 := HRect_Line():New(oWndParent, , .T., nRight, nTop, nBottom - nTop, , nCor2)
    ENDCASE
 
    RETURN Self

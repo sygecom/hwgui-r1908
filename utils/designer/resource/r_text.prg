@@ -205,7 +205,7 @@ ENDFUNC
     IF arr[i, 1] == "area"
       cCaption := IIf(arr[i, 7] == "PH", "PageHeader", IIf(arr[i, 7] == "SL", ;
           "Table", IIf(arr[i, 7] == "PF", "PageFooter", IIf(arr[i, 7] == "DH", "DocHeader", "DocFooter"))))
-      oArea := HControlGen():New(oForm:oDlg:aControls[1]:aControls[1], "area",  ;
+      oArea := HControlGen():New(oForm:oDlg:aControls[1]:aControls[1], "area", ;
        {{"Left", "0"}, {"Top", LTrim(Str(y))}, {"Width", cWidth}, ;
        {"Height", LTrim(Str(nHeight))}, {"Right", cWidth}, {"Bottom", LTrim(Str(y2))}, {"AreaType", cCaption}})
       IF arr[i, 6] != NIL

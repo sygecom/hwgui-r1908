@@ -84,7 +84,7 @@ If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest)
 
    oPrint := Printdos():New(oTest)   //oTest=NIL LPT1
 
-   oPrint:Say(0,  1,  "LINE 0 COL 1")
+   oPrint:Say(0, 1, "LINE 0 COL 1")
    oPrint:Say(10, 11, "LINE 10 COL 11")
    oPrint:Say(10, 31, "LINE 10 COL 31")
    oPrint:Say(14, 21, "LINE 14 COL 21")
@@ -120,7 +120,7 @@ If hwg_MsgYesNo("Printing style clipper to " + IIf(oTest == NIL, "LPT1", oTest),
 
    SET PRINTER TO oTest OF oPrinter
 
-   @  0,  1 PSAY  "LINE 0 COL 1"  OF oPrinter
+   @  0, 1 PSAY  "LINE 0 COL 1"  OF oPrinter
    @ 10, 11 PSAY "LINE 10 COL 11" OF oPrinter
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter
    @ 14, 21 PSAY "LINE 14 COL 21" OF oPrinter
@@ -273,7 +273,7 @@ If hwg_MsgYesNo("Printing InkJet/DeskJet " + IIf(oTest == NIL, "LPT1", oTest), "
    SET PRINTER TO oTest OF oPrinter
    oPrinter:oPrintStyle := 3
    oPrinter:Double()
-   @  0,  1 PSAY  "LINE 0 COL 1"  OF oPrinter
+   @  0, 1 PSAY  "LINE 0 COL 1"  OF oPrinter
    @ 10, 11 PSAY "LINE 10 COL 11" OF oPrinter
    oPrinter:Compress()
    @ 10, 31 PSAY "LINE 10 COL 31" OF oPrinter

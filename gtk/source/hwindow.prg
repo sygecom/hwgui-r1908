@@ -135,9 +135,9 @@ METHOD FindWindow(hWnd) CLASS HWindow
 RETURN hwg_GetWindowObject(hWnd)
 
 METHOD GetMain() CLASS HWindow
-RETURN IIf(Len(::aWindows) > 0,            ;
+RETURN IIf(Len(::aWindows) > 0, ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
-	   ::aWindows[1],                  ;
+	   ::aWindows[1], ;
 	   IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
 
 
@@ -148,15 +148,15 @@ CLASS HMainWindow INHERIT HWindow
       {WM_COMMAND, WM_ERASEBKGND, WM_MOVE, WM_SIZE, WM_SYSCOMMAND, ;
        WM_NOTIFYICON, WM_ENTERIDLE, WM_CLOSE, WM_DESTROY}, ;
       { ;
-         {|o, w, l|onCommand(o, w, l)},        ;
-         {|o, w|onEraseBk(o, w)},            ;
-         {|o, w, l|onMove(o, w, l)},           ;
-         {|o, w, l|onSize(o, w, l)},           ;
-         {|o, w|onSysCommand(o, w)},         ;
-         {|o, w, l|onNotifyIcon(o, w, l)},     ;
-         {|o, w, l|onEnterIdle(o, w, l)},      ;
+         {|o, w, l|onCommand(o, w, l)}, ;
+         {|o, w|onEraseBk(o, w)}, ;
+         {|o, w, l|onMove(o, w, l)}, ;
+         {|o, w, l|onSize(o, w, l)}, ;
+         {|o, w|onSysCommand(o, w)}, ;
+         {|o, w, l|onNotifyIcon(o, w, l)}, ;
+         {|o, w, l|onEnterIdle(o, w, l)}, ;
          {|o|hwg_ReleaseAllWindows(o:handle)}, ;
-         {|o|onDestroy(o)}                 ;
+         {|o|onDestroy(o)} ;
       } ;
    }
    DATA   nMenuPos
@@ -164,7 +164,7 @@ CLASS HMainWindow INHERIT HWindow
    DATA lTray       INIT .F.
    DATA lActivated  INIT .F.
 
-   METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
+   METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                      cAppName, oBmp, cHelp, nHelpId)
    //METHOD Activate(lShow)
@@ -174,21 +174,21 @@ CLASS HMainWindow INHERIT HWindow
 
 ENDCLASS
 
-METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
+METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                      cAppName, oBmp, cHelp, nHelpId) CLASS HMainWindow
 
    HB_SYMBOL_UNUSED(nPos)
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,  ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId)
    ::type := lType
 
    IF lType == WND_MDI
 /*
       ::nMenuPos := nPos
-      ::handle := hwg_InitMdiWindow(Self, ::szAppName, cTitle, cMenu,  ;
+      ::handle := hwg_InitMdiWindow(Self, ::szAppName, cTitle, cMenu, ;
                     IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
                     nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 */
@@ -253,13 +253,13 @@ CLASS HMDIChildWindow INHERIT HWindow
       {WM_CREATE, WM_COMMAND, WM_MOVE, WM_SIZE, WM_NCACTIVATE, ;
        WM_SYSCOMMAND, WM_DESTROY}, ;
       { ;
-         {|o, w, l|onMdiCreate(o, l)},        ;
-         {|o, w|onMdiCommand(o, w)},         ;
-         {|o, w, l|onMove(o, w, l)},           ;
-         {|o, w, l|onSize(o, w, l)},           ;
-         {|o, w|onMdiNcActivate(o, w)},      ;
-         {|o, w|onSysCommand(o, w)},         ;
-         {|o|onDestroy(o)}                 ;
+         {|o, w, l|onMdiCreate(o, l)}, ;
+         {|o, w|onMdiCommand(o, w)}, ;
+         {|o, w, l|onMove(o, w, l)}, ;
+         {|o, w, l|onSize(o, w, l)}, ;
+         {|o, w|onMdiNcActivate(o, w)}, ;
+         {|o, w|onSysCommand(o, w)}, ;
+         {|o|onDestroy(o)} ;
       } ;
    }
 
@@ -311,7 +311,7 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   cAppName, oBmp, cHelp, nHelpId) CLASS HChildWindow
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,  ;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId)
    ::oParent := HWindow():GetMain()
    IF HB_IsObject(::oParent)

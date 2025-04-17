@@ -22,9 +22,9 @@ FUNCTION Main()
 
 /*
 aDlg1:oParent := oTab, aDlg2:oParent := oTab,;
-aDlg1:Activate(.T.),      aDlg2:Activate(.T.), ;
-aDlg2:hide(),    oTab:StartPage("pagina1", aDlg1),    oTab:EndPage(), ;
-oTab:StartPage("pagina2", aDlg2),    oTab:EndPage(), otab:changepage(1)
+aDlg1:Activate(.T.), aDlg2:Activate(.T.), ;
+aDlg2:hide(), oTab:StartPage("pagina1", aDlg1), oTab:EndPage(), ;
+oTab:StartPage("pagina2", aDlg2), oTab:EndPage(), otab:changepage(1)
 
 }
 */

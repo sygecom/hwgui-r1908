@@ -15,7 +15,7 @@
 //    0-DT_LEFT, 1-DT_RIGHT y 2-DT_CENTER. 27.07.2002. WHT.                 //
 // 2) Ahora la variable "cargo" del metodo Hbrowse si es codeblock          //
 //    ejectuta el CB. 27.07.2002. WHT                                       //
-// 3) Se agreg¢ el Metodo "ShowSizes". Para poder ver la "width" de cada    //
+// 3) Se agreg¢ el Metodo "ShowSizes". Para poder ver la "width" de cada   //
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -4584,11 +4584,11 @@ FUNCTION hwg_CreateList(oBrw, lEditable)
 
    oBrw:aColumns := {}
    FOR i := 1 TO kolf
-      oBrw:AddColumn(HColumn():New(FieldName(i),                      ;
-                                   FieldWBlock(FieldName(i), nArea),  ;
-                                   dbFieldInfo(DBS_TYPE, i),         ;
+      oBrw:AddColumn(HColumn():New(FieldName(i), ;
+                                   FieldWBlock(FieldName(i), nArea), ;
+                                   dbFieldInfo(DBS_TYPE, i), ;
                                    IIf(dbFieldInfo(DBS_TYPE, i) == "D" .AND. __SetCentury(), 10, dbFieldInfo(DBS_LEN, i)), ;
-                                   dbFieldInfo(DBS_DEC, i),          ;
+                                   dbFieldInfo(DBS_DEC, i), ;
                                    lEditable))
    NEXT
 

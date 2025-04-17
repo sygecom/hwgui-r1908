@@ -103,7 +103,7 @@ METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HP
       nHeight *= ::nVRes
    ENDIF
    oFont := HGP_Font():Add(fontName, nHeight, ;
-       IIf(lBold != NIL .AND. lBold, 700, 400),    ;
+       IIf(lBold != NIL .AND. lBold, 700, 400), ;
        IIf(lItalic != NIL .AND. lItalic, 255, 0), IIf(lUnderline != NIL .AND. lUnderline, 1, 0))
 
 RETURN oFont

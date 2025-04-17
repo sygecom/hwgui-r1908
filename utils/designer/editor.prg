@@ -67,7 +67,7 @@ FUNCTION LoadEdOptions(cFileName)
             FOR j1 := 1 TO Len(oThemeXML:aItems)
                arr := {oThemeXML:aItems[j1]:GetAttribute("tcolor"), ;
                        oThemeXML:aItems[j1]:GetAttribute("bcolor"), ;
-                       oThemeXML:aItems[j1]:GetAttribute("bold"),   ;
+                       oThemeXML:aItems[j1]:GetAttribute("bold"), ;
                        oThemeXML:aItems[j1]:GetAttribute("italic")}
                IF arr[1] != NIL
                   arr[1] := Val(arr[1])
@@ -428,7 +428,7 @@ STATIC FUNCTION EditColors()
 
    FOR i := 1 TO Len(aSchemes)
       aSchemes[i] := {HDTheme():aThemes[i]:name, HDTheme():aThemes[i]:normal, ;
-          HDTheme():aThemes[i]:command, HDTheme():aThemes[i]:comment,          ;
+          HDTheme():aThemes[i]:command, HDTheme():aThemes[i]:comment, ;
           HDTheme():aThemes[i]:quote, HDTheme():aThemes[i]:number}
    NEXT
 

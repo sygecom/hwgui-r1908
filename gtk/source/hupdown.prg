@@ -34,7 +34,7 @@ CLASS HUpDown INHERIT HControl
 ENDCLASS
 
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor,   ;
+         oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, ;
          nUpDWidth, nLower, nUpper) CLASS HUpDown
 
    nStyle   := hwg_BitOr(iIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)

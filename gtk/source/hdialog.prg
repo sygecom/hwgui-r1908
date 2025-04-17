@@ -14,13 +14,13 @@
 REQUEST HWG_ENDWINDOW
 
 STATIC s_aMessModalDlg := { ;
-         {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}},         ;
-         {WM_SIZE, {|o, w, l|onSize(o, w, l)}},                ;
-         {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}},    ;
-         {WM_ERASEBKGND, {|o, w|onEraseBk(o, w)}},           ;
-         {WM_DESTROY, {|o|onDestroy(o)}},                  ;
-         {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}},      ;
-         {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}}         ;
+         {WM_COMMAND, {|o, w, l|hwg_DlgCommand(o, w, l)}}, ;
+         {WM_SIZE, {|o, w, l|onSize(o, w, l)}}, ;
+         {WM_INITDIALOG, {|o, w, l|InitModalDlg(o, w, l)}}, ;
+         {WM_ERASEBKGND, {|o, w|onEraseBk(o, w)}}, ;
+         {WM_DESTROY, {|o|onDestroy(o)}}, ;
+         {WM_ENTERIDLE, {|o, w, l|onEnterIdle(o, w, l)}}, ;
+         {WM_ACTIVATE, {|o, w, l|onActivate(o, w, l)}} ;
       }
 
 STATIC FUNCTION onDestroy(oDlg)
@@ -130,7 +130,7 @@ Local hParent, oWnd
       hParent := IIf(::oParent != NIL .AND. ;
              __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
              .AND. !Empty(::oParent:handle), ::oParent:handle, ;
-             IIf((oWnd := HWindow():GetMain()) != NIL,    ;
+             IIf((oWnd := HWindow():GetMain()) != NIL, ;
              oWnd:handle, NIL))
       hwg_Set_Modal(::handle, hParent)
    ENDIF

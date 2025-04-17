@@ -96,7 +96,7 @@ LOCAL aPaintRep
    AAdd(aPaintRep[6], {6, "PF", -16, 861, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {2,, 46, 867, 661, 6, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {6, "EPF", -16, 875, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
-   AAdd(aPaintRep[6], {6, "DF", -16, 899, 16, 10, 0, 0, 0, 0, 0,  NIL, 0})
+   AAdd(aPaintRep[6], {6, "DF", -16, 899, 16, 10, 0, 0, 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {2,, 459, 924, 238, 6, 0, HPen():Add(0, 1, 0), 0, 0, 0, NIL, 0})
    AAdd(aPaintRep[6], {1, "End of report", 522, 932, 160, 20, 0, 0, HFont():Add("MS Sans Serif", 0, -13, 0, 0, 0, 0, 0), 0, 0, NIL, 0})
    hwg_RecalcForm(aPaintRep, 735)

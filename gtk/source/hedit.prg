@@ -712,16 +712,16 @@ Local xValue, cChar, nFor, minus
       ELSE
          IF "E" $ oEdit:cPicFunc
             cBuffer := Left(cBuffer, FirstEditable(oEdit) - 1) +           ;
-                        StrTran(SubStr(cBuffer, FirstEditable(oEdit),      ;
+                        StrTran(SubStr(cBuffer, FirstEditable(oEdit), ;
                            LastEditable(oEdit) - FirstEditable(oEdit) + 1), ;
                            ".", " ") + SubStr(cBuffer, LastEditable(oEdit) + 1)
             cBuffer := Left(cBuffer, FirstEditable(oEdit) - 1) +           ;
-                        StrTran(SubStr(cBuffer, FirstEditable(oEdit),      ;
+                        StrTran(SubStr(cBuffer, FirstEditable(oEdit), ;
                            LastEditable(oEdit) - FirstEditable(oEdit) + 1), ;
                            ",", ".") + SubStr(cBuffer, LastEditable(oEdit) + 1)
          ELSE
             cBuffer := Left(cBuffer, FirstEditable(oEdit) - 1) +        ;
-                        StrTran(SubStr(cBuffer, FirstEditable(oEdit),   ;
+                        StrTran(SubStr(cBuffer, FirstEditable(oEdit), ;
                         LastEditable(oEdit) - FirstEditable(oEdit) + 1), ;
                          ",", " ") + SubStr(cBuffer, LastEditable(oEdit) + 1)
          ENDIF

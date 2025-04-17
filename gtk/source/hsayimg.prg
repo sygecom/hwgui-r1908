@@ -28,7 +28,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
                   bSize, ctoolt) CLASS HSayImage
 
-   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop,               ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, ;
                IIf(nWidth != NIL, nWidth, 0), IIf(nHeight != NIL, nHeight, 0),, ;
                bInit, bSize,, ctoolt)
 

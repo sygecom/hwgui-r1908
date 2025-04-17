@@ -15,15 +15,15 @@ STATIC s_aCustomEvents := { ;
       {WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, ;
         WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY}, ;
       { ;
-        {|o, w, l|onNotify(o, w, l)},                        ;
+        {|o, w, l|onNotify(o, w, l)}, ;
         {|o, w|IIf(o:bPaint != NIL, Eval(o:bPaint, o, w), -1)}, ;
-        {|o, w, l|onCtlColor(o, w, l)},                      ;
-        {|o, w, l|onCtlColor(o, w, l)},                      ;
-        {|o, w, l|onCtlColor(o, w, l)},                      ;
-        {|o, w, l|HB_SYMBOL_UNUSED(l), onCommand(o, w)},                         ;
-        {|o, w, l|onDrawItem(o, w, l)},                      ;
-        {|o, w, l|onSize(o, w, l)},                          ;
-        {|o|onDestroy(o)}                                ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|HB_SYMBOL_UNUSED(l), onCommand(o, w)}, ;
+        {|o, w, l|onDrawItem(o, w, l)}, ;
+        {|o, w, l|onSize(o, w, l)}, ;
+        {|o|onDestroy(o)} ;
       } ;
                         }
 

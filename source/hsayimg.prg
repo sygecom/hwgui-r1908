@@ -36,7 +36,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
             bSize, ctooltip, bClick, bDblClick) CLASS HSayImage
 
    nStyle := hwg_BitOr(nStyle, IIf(hb_IsBlock(bClick) .OR. hb_IsBlock(bDblClick), SS_NOTIFY, 0))
-   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop,               ;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, ;
               IIf(nWidth != NIL, nWidth, 0), IIf(nHeight != NIL, nHeight, 0),, ;
               bInit, bSize,, ctooltip)
 

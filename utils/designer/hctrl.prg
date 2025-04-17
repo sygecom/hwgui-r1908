@@ -120,7 +120,7 @@ METHOD New(oWndParent, xClass, aProp) CLASS HControlGen
             ELSE
                xProperty := oXMLDesc:aItems[i]:GetAttribute("value")
             ENDIF
-            AAdd(::aProp, {oXMLDesc:aItems[i]:GetAttribute("name"),  ;
+            AAdd(::aProp, {oXMLDesc:aItems[i]:GetAttribute("name"), ;
                             xProperty, ;
                             oXMLDesc:aItems[i]:GetAttribute("type")})
             IF oXMLDesc:aItems[i]:GetAttribute("hidden") != NIL
@@ -413,7 +413,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
 
       hwg_InvalidateRect(oCtrl:oParent:handle, 1, ;
                oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-               oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+               oCtrl:nLeft + oCtrl:nWidth + 3, ;
                oCtrl:nTop + oCtrl:nHeight + 3)
 
       IF oCtrl:nLeft + dx < 0
@@ -439,7 +439,7 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
 
       hwg_InvalidateRect(oCtrl:oParent:handle, 0, ;
                oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-               oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+               oCtrl:nLeft + oCtrl:nWidth + 3, ;
                oCtrl:nTop + oCtrl:nHeight + 3)
 
       hwg_MoveWindow(oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight)
@@ -468,7 +468,7 @@ FUNCTION CtrlResize(oCtrl, xPos, yPos)
    IF xPos != aBDown[BDOWN_XPOS] .OR. yPos != aBDown[BDOWN_YPOS]
       hwg_InvalidateRect(oCtrl:oParent:handle, 1, ;
                oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-               oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+               oCtrl:nLeft + oCtrl:nWidth + 3, ;
                oCtrl:nTop + oCtrl:nHeight + 3)
       dx := xPos - aBDown[BDOWN_XPOS]
       dy := yPos - aBDown[BDOWN_YPOS]
@@ -511,7 +511,7 @@ FUNCTION CtrlResize(oCtrl, xPos, yPos)
       aBDown[BDOWN_YPOS] := yPos
       hwg_InvalidateRect(oCtrl:oParent:handle, 0, ;
                oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-               oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+               oCtrl:nLeft + oCtrl:nWidth + 3, ;
                oCtrl:nTop + oCtrl:nHeight + 3)
       hwg_MoveWindow(oCtrl:handle, oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth, oCtrl:nHeight)
       IF oDesigner:lReport
@@ -578,7 +578,7 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
                oFrm:oCtrlSelected := asels[i]  // NANDO POS
            hwg_InvalidateRect(oFrm:oCtrlSelected:oParent:handle, 1, ;
                   oFrm:oCtrlSelected:nLeft - 4, oFrm:oCtrlSelected:nTop - 4, ;
-                  oFrm:oCtrlSelected:nLeft + oFrm:oCtrlSelected:nWidth + 3,  ;
+                  oFrm:oCtrlSelected:nLeft + oFrm:oCtrlSelected:nWidth + 3, ;
                   oFrm:oCtrlSelected:nTop + oFrm:oCtrlSelected:nHeight + 3)
            NEXT
         ELSEIF oCtrl == NIL
@@ -590,7 +590,7 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
               IF i > 0
               hwg_InvalidateRect(oCtrl:oParent:handle, 1, ;
                   oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-                  oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+                  oCtrl:nLeft + oCtrl:nWidth + 3, ;
                   oCtrl:nTop + oCtrl:nHeight + 3)
                   ADel(aSels, i)
                   ASize(Asels, Len(aSels) - 1)
@@ -610,7 +610,7 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
       IF oCtrl != NIL
          hwg_InvalidateRect(oCtrl:oParent:handle, 0, ;
                   oCtrl:nLeft - 4, oCtrl:nTop - 4, ;
-                  oCtrl:nLeft + oCtrl:nWidth + 3,  ;
+                  oCtrl:nLeft + oCtrl:nWidth + 3, ;
                   oCtrl:nTop + oCtrl:nHeight + 3)
          // nando pos
              IF nShift != NIL
@@ -1140,9 +1140,9 @@ FUNCTION RegionSelect(odlg, xi, yi, xPos, yPos)
     yi := ypos
     ypos := yf
   ENDIF
-  hwg_InvalidateRect(odlg:handle, 1, xPos + 1, yPos + 1,  xPos + 2, yPos + 2)
+  hwg_InvalidateRect(odlg:handle, 1, xPos + 1, yPos + 1, xPos + 2, yPos + 2)
   hwg_Rectangle(hDC, xi, yi, xPos + 1, yPos + 1)
-  hwg_InvalidateRect(odlg:handle, 1,  xi + 1, yi + 1,  xPos, yPos)
+  hwg_InvalidateRect(odlg:handle, 1, xi + 1, yi + 1, xPos, yPos)
 
  RETURN NIL
 

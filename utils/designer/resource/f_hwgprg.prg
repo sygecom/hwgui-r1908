@@ -1274,7 +1274,7 @@ FUNCTION Ctrl2Prg
       cStyle += "BACKGROUND BITMAP HBitmap():AddFile('" + temp + "') "
    ENDIF
    IF Len(cStyle) > 0
-      FWrite(han,  Space(4) + cStyle + " ;" + _CHR(10))
+      FWrite(han, Space(4) + cStyle + " ;" + _CHR(10))
    ENDIF
 
    cFormName := cName
@@ -1333,13 +1333,13 @@ FUNCTION Ctrl2Prg
       FWrite(han, ' CLIPPER ')
    ENDIF
    IF oForm:GetProp("lExitOnEnter") = "True"
-      //-Fwrite(han,  ' ;' + _Chr(10) + SPACE(8) + 'NOEXIT')
+      //-Fwrite(han, ' ;' + _Chr(10) + SPACE(8) + 'NOEXIT')
       FWrite(han, ' NOEXIT ')
    ENDIF
    //
 
    IF Len(cStyle) > 6
-      FWrite(han,  " ;" + _Chr(10) + Space(4) + cStyle)
+      FWrite(han, " ;" + _Chr(10) + Space(4) + cStyle)
    ENDIF
 
    i := 1

@@ -26,8 +26,8 @@ CLASS HOwnButton INHERIT HControl
    DATA nOrder
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  bInit, bSize, bPaint, bClick, lflat,              ;
-                  cText, color, font, xt, yt, widtht, heightt,        ;
+                  bInit, bSize, bPaint, bClick, lflat, ;
+                  cText, color, font, xt, yt, widtht, heightt, ;
                   bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
                   cTooltip, lEnabled)
 
@@ -46,10 +46,10 @@ CLASS HOwnButton INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
-                  bInit, bSize, bPaint, bClick, lflat,             ;
-                  cText, color, font, xt, yt, widtht, heightt,       ;
-                  bmp, lResour, xb, yb, widthb, heightb, lTr, trColor,;
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, bClick, lflat, ;
+                  cText, color, font, xt, yt, widtht, heightt, ;
+                  bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
                   cTooltip, lEnabled) CLASS HOwnButton
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, font, bInit, ;

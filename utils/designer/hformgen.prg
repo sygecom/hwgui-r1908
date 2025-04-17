@@ -25,11 +25,11 @@ STATIC oPenDivider, oPenLine
 STATIC aG := {"left", "top", "width", "height", "right", "bottom"}
 
 STATIC aStaticTypes := {{SS_LEFT, "SS_LEFT"}, {SS_CENTER, "SS_CENTER"}, ;
-    {SS_RIGHT, "SS_RIGHT"}, {SS_BLACKFRAME, "SS_BLACKFRAME"},            ;
-    {SS_GRAYFRAME, "SS_GRAYFRAME"}, {SS_WHITEFRAME, "SS_WHITEFRAME"},    ;
-    {SS_BLACKRECT, "SS_BLACKRECT"}, {SS_GRAYRECT, "SS_GRAYRECT"},        ;
-    {SS_WHITERECT, "SS_WHITERECT"}, {SS_ETCHEDFRAME, "SS_ETCHEDFRAME"},  ;
-    {SS_ETCHEDHORZ, "SS_ETCHEDHORZ"}, {SS_ETCHEDVERT, "SS_ETCHEDVERT"},  ;
+    {SS_RIGHT, "SS_RIGHT"}, {SS_BLACKFRAME, "SS_BLACKFRAME"}, ;
+    {SS_GRAYFRAME, "SS_GRAYFRAME"}, {SS_WHITEFRAME, "SS_WHITEFRAME"}, ;
+    {SS_BLACKRECT, "SS_BLACKRECT"}, {SS_GRAYRECT, "SS_GRAYRECT"}, ;
+    {SS_WHITERECT, "SS_WHITERECT"}, {SS_ETCHEDFRAME, "SS_ETCHEDFRAME"}, ;
+    {SS_ETCHEDHORZ, "SS_ETCHEDHORZ"}, {SS_ETCHEDVERT, "SS_ETCHEDVERT"}, ;
     {SS_OWNERDRAW, "SS_OWNERDRAW"}}
 
 STATIC aStyles := {{WS_POPUP, "WS_POPUP"}, {WS_CHILD, "WS_CHILD"}, {WS_VISIBLE, "WS_VISIBLE"}, ;
@@ -92,7 +92,7 @@ METHOD New() CLASS HFormGen
 
    ::type := 1
    ::name := name
-   //::CreateDialog({{"Left", LTrim(Str(aTermMetr[1] - 500))},  //{"Top", "120"}, {"Width", "500"}, {"Height", "400"}, {"Caption", name}})
+   //::CreateDialog({{"Left", LTrim(Str(aTermMetr[1] - 500))}, //{"Top", "120"}, {"Width", "500"}, {"Height", "400"}, {"Caption", name}})
    //::CreateDialog({{"Left", "325"}, {"Top", "060"}, {"Width", "498"}, {"Height", "470"}, {"Caption", name}})
    IF hwg_Getdesktopwidth() < 1024
      ::CreateDialog({{"Left", "225"}, {"Top", "110"}, {"Width", "550"}, {"Height", "400"}, {"Caption", name}})
@@ -314,7 +314,7 @@ METHOD CreateDialog(aProp) CLASS HFormGen
             ELSE
                xProperty := oFormDesc:aItems[i]:GetAttribute("value")
             ENDIF
-            AAdd(::aProp, {oFormDesc:aItems[i]:GetAttribute("name"),  ;
+            AAdd(::aProp, {oFormDesc:aItems[i]:GetAttribute("name"), ;
                              xProperty, ;
                              oFormDesc:aItems[i]:GetAttribute("type")})
             IF oFormDesc:aItems[i]:GetAttribute("hidden") != NIL
@@ -1430,7 +1430,7 @@ STATIC FUNCTION LButtonUp(oDlg, xPos, yPos, nShift)
       IF oCtrl:CLASSNAME() = "HDIALOG" .OR. oCtrl:CLASSNAME() = "HPANEL"
         selsobjetos(odlg, aBDown[BDOWN_XPOS], aBDown[BDOWN_YPOS], xpos, ypos)
         hwg_InvalidateRect(odlg:handle, 1, ;
-              0, 0,  oDlg:nWidth, oDlg:nHeight)
+              0, 0, oDlg:nWidth, oDlg:nHeight)
         SetBDown(NIL, 0, 0, 0)
          RETURN -1
       endif

@@ -65,8 +65,8 @@ FUNCTION Test()
 
     DBCreate("temp.dbf", {{"field_1", "N", 10, 0},;
 	                  {"field_2", "C", 30, 0},;
-	                  {"field_3", "L",  1, 0},;
-	                  {"field_4", "D",  8, 0},;
+	                  {"field_3", "L", 1, 0},;
+	                  {"field_4", "D", 8, 0},;
 	                  {"field_5", "M", 10, 0}})
 
     use temp new
