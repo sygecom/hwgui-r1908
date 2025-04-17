@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> PANEL [ <oPanel> ] ;
+#xcommand @ <nX>, <nY> PANEL [ <oPanel> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

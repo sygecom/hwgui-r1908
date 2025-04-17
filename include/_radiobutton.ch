@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> RADIOBUTTON [ <oRadio> CAPTION ] <caption> ;
+#xcommand @ <nX>, <nY> RADIOBUTTON [ <oRadio> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

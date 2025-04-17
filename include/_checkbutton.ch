@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
+#xcommand @ <nX>, <nY> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ INIT <lInit> ]           ;
@@ -43,7 +43,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <nX>,<nY> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
+#xcommand @ <nX>, <nY> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
              CAPTION  <caption>         ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

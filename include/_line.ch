@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> LINE [ <oLine> ]   ;
+#xcommand @ <nX>, <nY> LINE [ <oLine> ]   ;
              [ LENGTH <length> ]       ;
              [ HEIGHT <nHeight> ]      ;
              [ OF <oWnd> ]             ;

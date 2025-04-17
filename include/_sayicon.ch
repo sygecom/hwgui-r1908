@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> ICON [ <oIco> SHOW ] <icon> ;
+#xcommand @ <nX>, <nY> ICON [ <oIco> SHOW ] <icon> ;
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

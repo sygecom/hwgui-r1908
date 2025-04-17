@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> MONTHCALENDAR [ <oMonthCalendar> ] ;
+#xcommand @ <nX>, <nY> MONTHCALENDAR [ <oMonthCalendar> ] ;
              [ OF <oWnd> ]                              ;
              [ ID <nId> ]                               ;
              [ SIZE <nWidth>,<nHeight> ]                ;

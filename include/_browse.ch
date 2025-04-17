@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> BROWSE [ <oBrw> ]  ;
+#xcommand @ <nX>, <nY> BROWSE [ <oBrw> ]  ;
              [ <lArr: ARRAY> ]          ;
              [ <lDb: DATABASE> ]        ;
              [ OF <oWnd> ]              ;

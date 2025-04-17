@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> UPDOWN [ <oUpd> INIT ] <nInit> ;
+#xcommand @ <nX>, <nY> UPDOWN [ <oUpd> INIT ] <nInit> ;
              RANGE <nLower>,<nUpper>    ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -25,7 +25,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <nX>,<nY> GET UPDOWN [ <oUpd> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET UPDOWN [ <oUpd> VAR ]  <vari>  ;
              RANGE <nLower>,<nUpper>    ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

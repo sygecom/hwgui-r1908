@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> GET IPADDRESS [ <oIp> VAR ] <vari> ;
+#xcommand @ <nX>, <nY> GET IPADDRESS [ <oIp> VAR ] <vari> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

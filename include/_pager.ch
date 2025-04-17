@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> PAGER [ <oTool> ] ;
+#xcommand @ <nX>, <nY> PAGER [ <oTool> ] ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

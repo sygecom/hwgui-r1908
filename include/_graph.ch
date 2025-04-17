@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> GRAPH [ <oGraph> DATA ] <aData> ;
+#xcommand @ <nX>, <nY> GRAPH [ <oGraph> DATA ] <aData> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

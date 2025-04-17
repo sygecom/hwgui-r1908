@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> DATEPICKER [ <oPick> ]  ;
+#xcommand @ <nX>, <nY> DATEPICKER [ <oPick> ]  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -42,7 +42,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <nX>,<nY> GET DATEPICKER [ <oPick> VAR ] <vari> ;
+#xcommand @ <nX>, <nY> GET DATEPICKER [ <oPick> VAR ] <vari> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

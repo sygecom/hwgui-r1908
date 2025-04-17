@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> GRIDEX <oGrid>        ;
+#xcommand @ <nX>, <nY> GRIDEX <oGrid>        ;
              [ OF <oWnd> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;

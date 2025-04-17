@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> SHADEBUTTON [ <oShBtn> ]  ;
+#xcommand @ <nX>, <nY> SHADEBUTTON [ <oShBtn> ]  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
+#xcommand @ <nX>, <nY> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
              [ INIT <nInit> ]              ;
@@ -43,7 +43,7 @@
           [<oListbox> := ] HListBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
              <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
 
-#xcommand @ <nX>,<nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
+#xcommand @ <nX>, <nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

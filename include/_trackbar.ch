@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> TRACKBAR [ <oTrackBar> ]  ;
+#xcommand @ <nX>, <nY> TRACKBAR [ <oTrackBar> ]  ;
              [ OF <oWnd> ]                 ;
              [ ID <nId> ]                  ;
              [ SIZE <nWidth>, <nHeight> ]    ;

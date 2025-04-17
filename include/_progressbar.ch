@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 // Contribution ATZCT" <atzct@obukhov.kiev.ua
-#xcommand @ <nX>,<nY> PROGRESSBAR <oPBar>        ;
+#xcommand @ <nX>, <nY> PROGRESSBAR <oPBar>        ;
              [ OF <oWnd> ]                       ;
              [ ID <nId> ]                        ;
              [ SIZE <nWidth>,<nHeight> ]         ;

@@ -12,7 +12,7 @@
           =>;
           <O>:AddButton(<nBitIp>,<nId>,<bstate>,<bstyle>,<ctext>,<bclick>,<c>,<d>)
 
-#xcommand @ <nX>,<nY> TOOLBAR [ <oTool> ] ;
+#xcommand @ <nX>, <nY> TOOLBAR [ <oTool> ] ;
             [ OF <oWnd> ]               ;
             [ ID <nId> ]                ;
             [ SIZE <nWidth>, <nHeight> ]  ;

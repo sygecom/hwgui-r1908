@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> EDITBOX [ <oEdit> CAPTION ] <caption> ;
+#xcommand @ <nX>, <nY> EDITBOX [ <oEdit> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -44,7 +44,7 @@
 
 /* SAY ... GET system     */
 #ifdef __SYGECOM__
-#xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -73,7 +73,7 @@
           [ <oEdit>:name := <(oEdit)> ]
 
 #else
-#xcommand @ <nX>,<nY> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;

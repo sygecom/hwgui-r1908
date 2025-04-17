@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> BITMAP [ <oBmp> SHOW ] <bitmap> ;
+#xcommand @ <nX>, <nY> BITMAP [ <oBmp> SHOW ] <bitmap> ;
              [<res: FROM RESOURCE>]     ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

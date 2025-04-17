@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>,<nY> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
+#xcommand @ <nX>, <nY> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;

@@ -11,7 +11,7 @@
 					     <bInit>,<bClick>,<bWhen>, <nStyle> )
 
           //nando
-#xcommand @ <nX>,<nY> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
+#xcommand @ <nX>, <nY> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
              [ CAPTION  <caption> ];
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
