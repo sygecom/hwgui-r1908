@@ -267,8 +267,8 @@ DOCUMENT FORMAT oRtf;
 oRTF:lTrimSpaces := .T.
 
 DEFINE PAGESETUP oRTF MARGINS 0.5, 0.5, 0.5, 0.5 ;
-   PAGEWIDTH (aSize[2]/25.4) ;
-   PAGEHEIGHT (aSize[1]/25.4);
+   PAGEWIDTH (aSize[2] / 25.4) ;
+   PAGEHEIGHT (aSize[1] / 25.4);
    TABWIDTH .5 ;
    ALIGN TOP;
         LANDSCAPE

@@ -174,7 +174,7 @@ Local step, kolsteps, nsteps
 
    IF aPaintRep[FORM_XKOEFCONST] == 0
       aMetr := hwg_GetDeviceArea(hDC)
-      aPaintRep[FORM_XKOEFCONST] := (aMetr[1] - XINDENT)/aPaintRep[FORM_WIDTH]
+      aPaintRep[FORM_XKOEFCONST] := (aMetr[1] - XINDENT) / aPaintRep[FORM_WIDTH]
    ENDIF
 
    IF hwg_IsCheckedMenuItem(, IDM_VIEW1)
@@ -195,7 +195,7 @@ Local step, kolsteps, nsteps
             nHeight := Round(nWidth * aPaintRep[FORM_HEIGHT] / aPaintRep[FORM_WIDTH], 0)
          ENDIF
       ENDIF
-      aPaintRep[FORM_XKOEF] := nWidth/aPaintRep[FORM_WIDTH]
+      aPaintRep[FORM_XKOEF] := nWidth / aPaintRep[FORM_WIDTH]
    ELSE
       aPaintRep[FORM_XKOEF] := aPaintRep[FORM_XKOEFCONST]
    ENDIF
@@ -204,7 +204,7 @@ Local step, kolsteps, nsteps
    y2 := y1 + Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0)-aPaintRep[FORM_Y] - 1
    n1cm := Round(aPaintRep[FORM_XKOEF] * 10, 0)
    step := n1cm * 2
-   nsteps := Round(aPaintRep[FORM_Y]/step, 0)
+   nsteps := Round(aPaintRep[FORM_Y] / step, 0)
 
    hwg_FillRect(hDC, 0, 0, aCoors[3], TOP_INDENT - 5, COLOR_HIGHLIGHTTEXT + 1)
    hwg_FillRect(hDC, 0, 0, LEFT_INDENT - 12, aCoors[4], COLOR_3DLIGHT + 1)
@@ -212,25 +212,25 @@ Local step, kolsteps, nsteps
    hwg_SelectObject(hDC, s_oPenLine:handle)
    hwg_SelectObject(hDC, IIf(lPreview, oFontSmall:handle, oFontStandard:handle))
    oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DLIGHT))
-   DO WHILE i <= aPaintRep[FORM_WIDTH]/10 .AND. i * n1cm < (aCoors[3] - aCoors[1] - LEFT_INDENT)
+   DO WHILE i <= aPaintRep[FORM_WIDTH] / 10 .AND. i * n1cm < (aCoors[3] - aCoors[1] - LEFT_INDENT)
       xt := x1 + i * n1cm
       hwg_DrawLine(hDC, xt + Round(n1cm / 4, 0), 0, xt + Round(n1cm / 4, 0), 4)
       hwg_DrawLine(hDC, xt + Round(n1cm / 2, 0), 0, xt + Round(n1cm / 2, 0), 8)
       hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
       hwg_DrawLine(hDC, xt, 0, xt, 12)
-      IF i > 0 .AND. i < aPaintRep[FORM_WIDTH]/10
+      IF i > 0 .AND. i < aPaintRep[FORM_WIDTH] / 10
          hwg_DrawText(hDC, Ltrim(Str(i, 2)), xt - 15, 12, xt + 15, TOP_INDENT - 5, DT_CENTER)
       ENDIF
       i++
    ENDDO
    i := 0
-   DO WHILE i <= aPaintRep[FORM_HEIGHT]/10 .AND. i * n1cm < (aCoors[4] - aCoors[2] - TOP_INDENT)
+   DO WHILE i <= aPaintRep[FORM_HEIGHT] / 10 .AND. i * n1cm < (aCoors[4] - aCoors[2] - TOP_INDENT)
       yt := y1 + i * n1cm
       hwg_DrawLine(hDC, 0, yt + Round(n1cm / 4, 0), 4, yt + Round(n1cm / 4, 0))
       hwg_DrawLine(hDC, 0, yt + Round(n1cm / 2, 0), 8, yt + Round(n1cm / 2, 0))
       hwg_DrawLine(hDC, 0, yt + Round(n1cm * 3/ 4, 0), 4, yt + Round(n1cm * 3 / 4, 0))
       hwg_DrawLine(hDC, 0, yt, 12, yt)
-      IF i > 0 .AND. i < aPaintRep[FORM_HEIGHT]/10
+      IF i > 0 .AND. i < aPaintRep[FORM_HEIGHT] / 10
          hwg_DrawText(hDC, Ltrim(Str(i + nsteps * 2, 2)), 12, yt - 10, LEFT_INDENT - 12, yt + 10, DT_CENTER)
       ENDIF
       i++
@@ -266,10 +266,10 @@ Local x1 := LEFT_INDENT + aItem[ITEM_X1], y1 := TOP_INDENT + aItem[ITEM_Y1] - aP
 Local x2 := x1 + aItem[ITEM_WIDTH] - 1, y2 := y1 + aItem[ITEM_HEIGHT] - 1
 
    IF lPreview
-      x1 := LEFT_INDENT + aItem[ITEM_X1] * aPaintRep[FORM_XKOEF]/aPaintRep[FORM_XKOEFCONST]
-      x2 := LEFT_INDENT + (aItem[ITEM_X1] + aItem[ITEM_WIDTH] - 1) * aPaintRep[FORM_XKOEF]/aPaintRep[FORM_XKOEFCONST]
-      y1 := TOP_INDENT + aItem[ITEM_Y1] * aPaintRep[FORM_XKOEF]/aPaintRep[FORM_XKOEFCONST]
-      y2 := TOP_INDENT + (aItem[ITEM_Y1] + aItem[ITEM_HEIGHT] - 1) * aPaintRep[FORM_XKOEF]/aPaintRep[FORM_XKOEFCONST]
+      x1 := LEFT_INDENT + aItem[ITEM_X1] * aPaintRep[FORM_XKOEF] / aPaintRep[FORM_XKOEFCONST]
+      x2 := LEFT_INDENT + (aItem[ITEM_X1] + aItem[ITEM_WIDTH] - 1) * aPaintRep[FORM_XKOEF] / aPaintRep[FORM_XKOEFCONST]
+      y1 := TOP_INDENT + aItem[ITEM_Y1] * aPaintRep[FORM_XKOEF] / aPaintRep[FORM_XKOEFCONST]
+      y2 := TOP_INDENT + (aItem[ITEM_Y1] + aItem[ITEM_HEIGHT] - 1) * aPaintRep[FORM_XKOEF] / aPaintRep[FORM_XKOEFCONST]
    ENDIF
    IF y1 >= TOP_INDENT .AND. y1 <= aCoors[4]
       IF aItem[ITEM_STATE] == STATE_SELECTED .OR. aItem[ITEM_STATE] == STATE_PRESSED
@@ -414,7 +414,7 @@ Local i, aItem, hWnd := oWnd:handle
 RETURN -1
 
 STATIC FUNCTION VSCROLL(hWnd, nScrollCode, nNewPos)
-Local step  := Round(aPaintRep[FORM_XKOEF] * 10, 0) * 2, nsteps := aPaintRep[FORM_Y]/step, kolsteps
+Local step  := Round(aPaintRep[FORM_XKOEF] * 10, 0) * 2, nsteps := aPaintRep[FORM_Y] / step, kolsteps
 Local aCoors := hwg_GetClientRect(hWnd)
 
    IF nScrollCode == SB_LINEDOWN
@@ -441,7 +441,7 @@ Local aCoors := hwg_GetClientRect(hWnd)
          kolsteps := Round((Round(aPaintRep[FORM_HEIGHT] * aPaintRep[FORM_XKOEF], 0) - ;
             (aCoors[4] - aCoors[2] - TOP_INDENT)) / step, 0) + 1
          aPaintRep[FORM_Y] := nNewPos * step
-         IF aPaintRep[FORM_Y]/step>=kolsteps
+         IF aPaintRep[FORM_Y] / step>=kolsteps
             hwg_RedrawWindow(hWnd, RDW_ERASE + RDW_INVALIDATE)
          ELSE
             hwg_InvalidateRect(hWnd, 0, 0, TOP_INDENT, aCoors[3], aCoors[4])

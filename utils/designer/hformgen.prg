@@ -352,7 +352,7 @@ METHOD CreateDialog(aProp) CLASS HFormGen
       hDC := hwg_GetDC(hwg_GetActiveWindow())
       aMetr := hwg_GetDeviceArea(hDC)
       // writelog(Str(aMetr[1]) + Str(aMetr[2]) + Str(aMetr[3]) + Str(aMetr[4]) + Str(aMetr[5]) + Str(aMetr[6]) + Str(aMetr[7]) + Str(aMetr[8]) + Str(aMetr[9]))
-      ::nKoeff := (aMetr[1]/aMetr[3] + aMetr[2]/aMetr[4]) / 2
+      ::nKoeff := (aMetr[1] / aMetr[3] + aMetr[2] / aMetr[4]) / 2
       // writelog(Str(::nKoeff))
       hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
       ::SetPaper(::GetProp("Paper Size"), ::GetProp("Orientation"))
@@ -997,7 +997,7 @@ STATIC FUNCTION PaintDlg(oDlg)
          hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
          hwg_DrawLine(hDC, xt, 0, xt, 12)
          IF i > 0
-            hwg_DrawText(hDC, LTrim(Str(i + oForm:nXOffset/10, 2)), xt - 15, 12, xt + 15, TOP_INDENT - 5, DT_CENTER)
+            hwg_DrawText(hDC, LTrim(Str(i + oForm:nXOffset / 10, 2)), xt - 15, 12, xt + 15, TOP_INDENT - 5, DT_CENTER)
          ENDIF
          i++
       ENDDO
@@ -1009,13 +1009,13 @@ STATIC FUNCTION PaintDlg(oDlg)
          hwg_DrawLine(hDC, 0, yt + Round(n1cm * 3 / 4, 0), 4, yt + Round(n1cm * 3 / 4, 0))
          hwg_DrawLine(hDC, 0, yt, 12, yt)
          IF i > 0
-            hwg_DrawText(hDC, LTrim(Str(i + oForm:nYOffset/10, 2)), 12, yt - 10, LEFT_INDENT - 12, yt + 10, DT_CENTER)
+            hwg_DrawText(hDC, LTrim(Str(i + oForm:nYOffset / 10, 2)), 12, yt - 10, LEFT_INDENT - 12, yt + 10, DT_CENTER)
          ENDIF
          i++
       ENDDO
       // hwg_FillRect(hDC, LEFT_INDENT - 12, y1, x1, y2, COLOR_3DSHADOW + 1)
-      hwg_SetScrollInfo(oDlg:handle, SB_HORZ, 1, oForm:nXOffset/10 + 1, 1, Round((oForm:nPWidth - (aCoors[3] - LEFT_INDENT)/oForm:nKoeff)/10, 0) + 1)
-      hwg_SetScrollInfo(oDlg:handle, SB_VERT, 1, oForm:nYOffset/10 + 1, 1, Round((oForm:nPHeight - (aCoors[4] - TOP_INDENT)/oForm:nKoeff)/10, 0) + 1)
+      hwg_SetScrollInfo(oDlg:handle, SB_HORZ, 1, oForm:nXOffset / 10 + 1, 1, Round((oForm:nPWidth - (aCoors[3] - LEFT_INDENT) / oForm:nKoeff) / 10, 0) + 1)
+      hwg_SetScrollInfo(oDlg:handle, SB_VERT, 1, oForm:nYOffset / 10 + 1, 1, Round((oForm:nPHeight - (aCoors[4] - TOP_INDENT) / oForm:nKoeff) / 10, 0) + 1)
    ELSE
 
       if oDesigner:lShowGrid
@@ -1243,7 +1243,7 @@ STATIC FUNCTION ScrollProc(oDlg, msg, wParam, lParam)
             oDlg:oParent:nYOffset -= 10
          ENDIF
       ELSEIF nScrollCode == SB_THUMBTRACK
-         IF --nNewPos != oDlg:oParent:nYOffset/10
+         IF --nNewPos != oDlg:oParent:nYOffset / 10
             oDlg:oParent:nYOffset := nNewPos * 10
          ENDIF
       ENDIF
@@ -1270,7 +1270,7 @@ STATIC FUNCTION ScrollProc(oDlg, msg, wParam, lParam)
             oDlg:oParent:nXOffset -= 10
          ENDIF
       ELSEIF nScrollCode == SB_THUMBTRACK
-         IF --nNewPos != oDlg:oParent:nXOffset/10
+         IF --nNewPos != oDlg:oParent:nXOffset / 10
             oDlg:oParent:nXOffset := nNewPos * 10
          ENDIF
       ENDIF
@@ -1455,9 +1455,9 @@ STATIC FUNCTION LButtonUp(oDlg, xPos, yPos, nShift)
                ADel(aProp, i)
                j ++
             ELSEIF name == "left"
-               aProp[i, 2] := LTrim(Str(IIf(oDesigner:lReport, Round(xPos/oDlg:oParent:oParent:oParent:nKoeff, 1), xPos)))
+               aProp[i, 2] := LTrim(Str(IIf(oDesigner:lReport, Round(xPos / oDlg:oParent:oParent:oParent:nKoeff, 1), xPos)))
             ELSEIF name == "top"
-               aProp[i, 2] := LTrim(Str(IIf(oDesigner:lReport, Round(yPos/oDlg:oParent:oParent:oParent:nKoeff, 1), yPos)))
+               aProp[i, 2] := LTrim(Str(IIf(oDesigner:lReport, Round(yPos / oDlg:oParent:oParent:oParent:nKoeff, 1), yPos)))
             ENDIF
             IF oDesigner:lReport
                IF name == "right" .OR. name == "bottom"
@@ -1476,8 +1476,8 @@ STATIC FUNCTION LButtonUp(oDlg, xPos, yPos, nShift)
       ELSE
          IF oDesigner:lReport
             oCtrl := HControlGen():New(oDlg, oDesigner:addItem, { ;
-              {"Left", LTrim(Str(Round(xPos/oDlg:oParent:oParent:oParent:nKoeff, 1)))}, ;
-              {"Top", LTrim(Str(Round(yPos/oDlg:oParent:oParent:oParent:nKoeff, 1)))}})
+              {"Left", LTrim(Str(Round(xPos / oDlg:oParent:oParent:oParent:nKoeff, 1)))}, ;
+              {"Top", LTrim(Str(Round(yPos / oDlg:oParent:oParent:oParent:nKoeff, 1)))}})
             oCtrl:SetCoor("Right", oCtrl:nLeft + oCtrl:nWidth - 1)
             oCtrl:SetCoor("Bottom", oCtrl:nTop + oCtrl:nHeight - 1)
          ELSE

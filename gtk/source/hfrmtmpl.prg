@@ -1028,7 +1028,7 @@ Private oReport := Self
 #else
    xTemp := hwg_GetDeviceArea(oPrinter:hDCPrn)
 #endif
-   ::nKoefPix := ((xTemp[1]/xTemp[3] + xTemp[2]/xTemp[4]) / 2) / 3.8
+   ::nKoefPix := ((xTemp[1] / xTemp[3] + xTemp[2] / xTemp[4]) / 2) / 3.8
    oPrinter:SetMode(nOrientation)
    ::nKoefX := oPrinter:nWidth / nPWidth
    ::nKoefY := oPrinter:nHeight / nPHeight

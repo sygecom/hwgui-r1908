@@ -166,7 +166,7 @@ Local nValue := Val(hwg_GetEditText(hDlg, IDC_EDIT3))
 Local aBmpSize
    IF aItem[ITEM_BITMAP] != NIL
       aBmpSize := hwg_GetBitmapSize(aItem[ITEM_BITMAP]:handle)
-      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1] * nValue/100, 0))) + "x" + Ltrim(Str(Round(aBmpSize[2] * nValue/100, 0))))
+      hwg_SetDlgItemText(hDlg, IDC_TEXT2, Ltrim(Str(Round(aBmpSize[1] * nValue / 100, 0))) + "x" + Ltrim(Str(Round(aBmpSize[2] * nValue / 100, 0))))
    ENDIF
 RETURN NIL
 

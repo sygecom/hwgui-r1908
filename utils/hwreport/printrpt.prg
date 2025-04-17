@@ -24,8 +24,8 @@ Private lAddMode := .F.
    ENDIF
 
    aPrnCoors := hwg_GetDeviceArea(oPrinter:hDCPrn)
-   prnXCoef := aPrnCoors[1]/aPaintRep[FORM_WIDTH]
-   prnYCoef := aPrnCoors[2]/aPaintRep[FORM_HEIGHT]
+   prnXCoef := aPrnCoors[1] / aPaintRep[FORM_WIDTH]
+   prnYCoef := aPrnCoors[2] / aPaintRep[FORM_HEIGHT]
    // writelog(str(aPrnCoors[1]) + str(aPrnCoors[2]) + " / " + str(prnXCoef) + str(prnYCoef) + " / " + str(aPaintRep[FORM_XKOEF]))
 
    hDCwindow := hwg_GetDC(Hwindow():GetMain():handle)

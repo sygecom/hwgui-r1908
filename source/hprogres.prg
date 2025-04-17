@@ -50,7 +50,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit,
    ::maxPos  := IIf(maxPos != NIL .AND. maxPos != 0, maxPos, 20)
    ::lNewBox := .F.
    ::nRange := IIf(nRange != NIL .AND. nRange != 0, nRange, 100)
-   ::nLimit := Int(::nRange/::maxPos)
+   ::nLimit := Int(::nRange / ::maxPos)
 
    ::Activate()
 

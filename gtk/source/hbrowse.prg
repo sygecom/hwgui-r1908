@@ -1096,7 +1096,7 @@ METHOD LineOut(nstroka, vybfld, hDC, lSelected, lClear) CLASS HBrowse
                            hwg_DrawBitmap(hDC, ob:handle,, x, y1 + ::y1 + (::height + 1) * (nstroka - 1) + 1, bw, bh)
                         /*   
                         ELSE
-                           y1 := Int((::height - ob:nHeight)/2)
+                           y1 := Int((::height - ob:nHeight) / 2)
                            bh := ob:nHeight
                            bw := ob:nWidth
                            hwg_DrawTransparentBitmap(hDC, ob:handle, x, y1 + ::y1 + (::height + 1) * (nstroka - 1) + 1)
@@ -1346,7 +1346,7 @@ Local nPos
          Eval(::bScrollPos, Self, 1, .F.)
       ELSE
          nPos := hwg_getAdjValue(::hScrollV)
-         nPos += Int(maxPos/(::nRecords - 1))
+         nPos += Int(maxPos / (::nRecords - 1))
          hwg_SetAdjOptions(::hScrollV, nPos)
          ::nScrollV := nPos
       ENDIF
@@ -1381,7 +1381,7 @@ Local nPos
             Eval(::bScrollPos, Self, -1, .F.)
          ELSE
             nPos := hwg_getAdjValue(::hScrollV)
-            nPos -= Int(maxPos/(::nRecords - 1))
+            nPos -= Int(maxPos / (::nRecords - 1))
             hwg_SetAdjOptions(::hScrollV, nPos)
             ::nScrollV := nPos
          ENDIF
@@ -1416,7 +1416,7 @@ Local nPos, step, lBof := .F.
          Eval(::bScrollPos, Self, -step, lBof)
       ELSE
          nPos := hwg_getAdjValue(::hScrollV)
-         nPos -= Int(maxPos/(::nRecords - 1))
+         nPos -= Int(maxPos / (::nRecords - 1))
          nPos := Max(nPos - Int(maxPos * step / (::nRecords - 1)), 0)
          hwg_SetAdjOptions(::hScrollV, nPos)
          ::nScrollV := nPos
@@ -1504,7 +1504,7 @@ RETURN NIL
 METHOD ButtonDown(lParam) CLASS HBrowse
 
    //LOCAL hBrw := ::handle // variable not used
-   LOCAL nLine := Int(hwg_HIWORD(lParam)/(::height + 1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
+   LOCAL nLine := Int(hwg_HIWORD(lParam) / (::height + 1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
    LOCAL step := nLine - ::rowPos
    LOCAL res := .F.
    LOCAL nrec
@@ -1629,7 +1629,7 @@ RETURN NIL
 METHOD ButtonDbl(lParam) CLASS HBrowse
 
    //LOCAL hBrw := ::handle // variable not used
-   LOCAL nLine := Int(hwg_HIWORD(lParam)/(::height + 1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
+   LOCAL nLine := Int(hwg_HIWORD(lParam) / (::height + 1) + IIf(::lDispHead, 1 - ::nHeadRows, 1))
 
    if nLine <= ::rowCurrCount
       ::ButtonDown(lParam)

@@ -2272,11 +2272,11 @@ METHOD RtfJpg(cName, aSize, nPercent) CLASS RichText
       in := fopen(cName)
       ::OpenGroup()
       ::TextCode("pict\jpegblip")
-      scale := ROUND((PictWidth * 100/aInches[1]) + 0.5, 0)
+      scale := ROUND((PictWidth * 100 / aInches[1]) + 0.5, 0)
       ::NumCode("picw", nWidth, .F.)
       ::NumCode("picwgoal", aInches[1], .F.)
       ::NumCode("picscalex", scale, .F.)
-      scale := ROUND((PictHeight * 100/aInches[2]) + 0.5, 0)
+      scale := ROUND((PictHeight * 100 / aInches[2]) + 0.5, 0)
       ::NumCode("pich", nHeight, .F.)
       ::NumCode("pichgoal", aInches[2], .F.)
       ::NumCode("picscaley", scale, .F.)
@@ -2337,11 +2337,11 @@ METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
          ancho := (aSize[1] * aInfo[5])
       ENDIF
 
-      bmHeight := ROUND((alto * 1440/2540) + 0.5, 0)
-      bmWidth := ROUND((ancho * 1440/2540) + 0.5, 0)
+      bmHeight := ROUND((alto * 1440 / 2540) + 0.5, 0)
+      bmWidth := ROUND((ancho * 1440 / 2540) + 0.5, 0)
 
-      PictHeight := ROUND((alto * 1440/::oPrinter:nLogPixelY()) + 0.5, 0)
-      PictWidth := ROUND((ancho * 1440/::oPrinter:nLogPixelX()) + 0.5, 0)
+      PictHeight := ROUND((alto * 1440 / ::oPrinter:nLogPixelY()) + 0.5, 0)
+      PictWidth := ROUND((ancho * 1440 / ::oPrinter:nLogPixelX()) + 0.5, 0)
 
       in := fopen(cName)
       ::OpenGroup()
@@ -2349,12 +2349,12 @@ METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
       x := ROUND((bmWidth * 2540 / 1440) + 0.5, 0)
       ::NumCode("picw", x, .F.)
       ::NumCode("picwgoal", bmWidth, .F.)
-      scale := ROUND((PictWidth * 100/bmWidth) + 0.5, 0)
+      scale := ROUND((PictWidth * 100 / bmWidth) + 0.5, 0)
       ::NumCode("picscalex", scale, .F.)
       x := ROUND((bmHeight * 2540 / 1440) + 0.5, 0)
       ::NumCode("pich", x, .F.)
       ::NumCode("pichgoal", bmHeight, .F.)
-      scale := ROUND((PictHeight * 100/bmHeight) + 0.5, 0)
+      scale := ROUND((PictHeight * 100 / bmHeight) + 0.5, 0)
       ::NumCode("picscaley", scale, .F.)
       ::OpenGroup()
       fseek(in, cBRead, 0)
@@ -2457,13 +2457,13 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
       nWidth := DIBWIDTH(hDib)
       nHeight := DIBHEIGHT(hDib)
 
-      ResX := DIBXPIX(hDib)/39.37
-      ResY := DIBYPIX(hDib)/39.37
+      ResX := DIBXPIX(hDib) / 39.37
+      ResY := DIBYPIX(hDib) / 39.37
 
 // Dimensiones reales de la imagen en pulgadas
 
-      aInches[1] := nWidth/ResX
-      aInches[2] := nHeight/ResY
+      aInches[1] := nWidth / ResX
+      aInches[2] := nHeight / ResY
 
       IF Empty(aSize)
          aInches[1] *= nPercent
@@ -2471,8 +2471,8 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
          scalex := INT(nPercent * 100)
          scaley := INT(nPercent * 100)
       ELSE
-         scalex := ROUND(((aSize[1] * 100)/aInches[1]) + 0.5, 0)
-         scaley := ROUND(((aSize[2] * 100)/aInches[2]) + 0.5, 0)
+         scalex := ROUND(((aSize[1] * 100) / aInches[1]) + 0.5, 0)
+         scaley := ROUND(((aSize[2] * 100) / aInches[2]) + 0.5, 0)
          aInches[1] := aSize[1]
          aInches[2] := aSize[2]
       ENDIF

@@ -2731,7 +2731,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                    hwg_SelectObject(hDC, oPen:handle)
                    hwg_RoundRect(hDC, ::x1, ;
                                  ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
-                                 ::xAdjRight - 2,;  //::x2 - 1, ;
+                                 ::xAdjRight - 2,;  // ::x2 - 1, ;
                                  ::y1 + (::height + 1) * ::nPaintRow, 0, 0)
                    hwg_DeleteObject(oPen)
                    IF ((::Highlight .OR. !::lEditable) .AND. nCol == 0) .OR. (::HighlightStyle == 3 .AND. !hwg_SelfFocus(::handle))
