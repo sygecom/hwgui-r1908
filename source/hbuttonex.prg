@@ -26,7 +26,7 @@
 #define BTNST_COLOR_BK_FOCUS  5           // Background color when the button is focused
 #define BTNST_COLOR_FG_FOCUS  6            // Text color when the button is focused
 #define BTNST_MAX_COLORS      6
-#define WM_SYSCOLORCHANGE               0x0015
+//#define WM_SYSCOLORCHANGE               0x0015 // defined in windows.ch
 #define BS_TYPEMASK SS_TYPEMASK
 #define OFS_X   10 // distance from left/right side to beginning/end of text
 

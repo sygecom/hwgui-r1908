@@ -1749,4 +1749,7 @@ ComboBox
 
 #define TRANSPARENT 1
 
+#define WM_SYSCOLORCHANGE 0x0015
+#define WM_NOTIFYICON (WM_USER + 1000)
+
 #endif // _WINDOWS_CH_
