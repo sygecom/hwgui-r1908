@@ -193,7 +193,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    IF msg == WM_NCPAINT .AND. ::GetParentForm():nInitFocus > 0 .AND. ;
        (hwg_SelfFocus(hwg_GetParent(::GetParentForm():nInitFocus), ::handle) .OR. ;
          hwg_SelfFocus(hwg_GetParent(::GetParentForm():nInitFocus), hwg_GetParent(::handle)))
-      hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus , , IIf(hwg_SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
+      hwg_GetSkip(::oParent, ::GetParentForm():nInitFocus, , IIf(hwg_SelfFocus(::GetParentForm():nInitFocus, ::handle), 1, 0))
       ::GetParentForm():nInitFocus := 0
 
    ELSEIF msg == WM_SETFOCUS .AND. Empty(::GetParentForm():nInitFocus) .AND. !::lSuspendMsgsHandling  //.AND. hwg_BitaND(::sTyle, WS_TABSTOP) > 0 .
@@ -280,9 +280,9 @@ METHOD Release() CLASS HPanel
             ::oParent:aOffset[3] -= ::nWidth
          ENDIF
       ENDIF
-      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1] , 0)
-      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2] , 0)
-      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3] , 0)
+      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1], 0)
+      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2], 0)
+      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3], 0)
       hwg_SendMessage(::oParent:handle, WM_SIZE, 0, hwg_MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
       ::nHeight := 0
       ::nWidth := 0
@@ -410,9 +410,9 @@ METHOD ResizeOffSet(nMode) CLASS HPanel
          ENDIF
          lRes := .T.
       ENDIF
-      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1] , 0)
-      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2] , 0)
-      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3] , 0)
+      ::oParent:aOffset[1] := MAX(::oParent:aOffset[1], 0)
+      ::oParent:aOffset[2] := MAX(::oParent:aOffset[2], 0)
+      ::oParent:aOffset[3] := MAX(::oParent:aOffset[3], 0)
       IF lRes
          hwg_SendMessage(::oParent:handle, WM_SIZE, 0, hwg_MAKELPARAM(::oParent:nWidth, ::oParent:nHeight))
       ENDIF

@@ -26,7 +26,7 @@ CLASS HFont INHERIT HObject
 
    CLASS VAR aFonts   INIT {}
    DATA handle
-   DATA name, width, height , weight
+   DATA name, width, height, weight
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
@@ -70,7 +70,7 @@ Local i, nlen := Len(::aFonts)
    NEXT
 
    IF nHandle == NIL
-      ::handle := hwg_CreateFont(fontName, nWidth, nHeight*1024 , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut)
+      ::handle := hwg_CreateFont(fontName, nWidth, nHeight*1024, fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut)
    ELSE
       ::handle := nHandle
       nHeight := nHeight / 1024

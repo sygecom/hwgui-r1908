@@ -53,7 +53,7 @@ CLASS HPrinter INHERIT HObject
    METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn)
 
    METHOD SetMode(nOrientation)
-   METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharSet)
+   METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharSet)
    METHOD SetFont(oFont) INLINE hwg_SelectObject(::hDC, oFont:handle)
    METHOD SetTextColor(nColor) INLINE hwg_SetTextColor(::hDC, nColor)
    METHOD SetTBkColor(nColor) INLINE hwg_SetBkColor(::hDC, nColor)
@@ -173,7 +173,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
 
    RETURN .F.
 
-METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
+METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
    LOCAL oFont
 
    IF ::lmm .AND. nHeight != NIL

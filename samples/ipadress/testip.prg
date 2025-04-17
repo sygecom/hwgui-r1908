@@ -75,8 +75,8 @@ FUNCTION DlgGet()
                "Combo: " + aCombo[cm] + Chr(10) + Chr(13) +           ;
                "UpDown: " + Str(upd) + Chr(10) + Chr(13) +              ;
                "DatePicker: " + Dtoc(d1) +                              ;
-               "IpAddress: " + StrZero(aIP[1], 3, 0) + "." + StrZero(aIP[2], 3, 0) + "." + StrZero(aIP[3], 3, 0) + "." +  StrZero(aIP[4], 3, 0) ;
-               , "Results:")
+               "IpAddress: " + StrZero(aIP[1], 3, 0) + "." + StrZero(aIP[2], 3, 0) + "." + StrZero(aIP[3], 3, 0) + "." +  StrZero(aIP[4], 3, 0), ;
+               "Results:")
    ENDIF
 
 RETURN NIL

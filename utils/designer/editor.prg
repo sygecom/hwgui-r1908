@@ -224,7 +224,7 @@ FUNCTION EditMethod(cMethName, cMethod)
 
    // oEdit:title := cMethod
    *-hwg_SetDlgKey(odlg, 0, VK_TAB, {hwg_MsgInfo("tab")})
-         *-{hwg_SendMessage(oEdit:handle, EM_SETTABSTOPS  , space(2), 0)})
+         *-{hwg_SendMessage(oEdit:handle, EM_SETTABSTOPS, space(2), 0)})
    ACTIVATE DIALOG oDlg
    *-hwg_SetDlgKey(oEdit, 0, 9)
    IF lRes

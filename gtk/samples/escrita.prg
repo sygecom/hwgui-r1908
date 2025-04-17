@@ -18,7 +18,7 @@ INIT DIALOG oModDlg TITLE "Teste da Acentuação" ;
            TEXT "teste1"  ;
            TOOLTIP "ola" ;
            
-           ON CLICK {|x, y|hwg_msginfo("ola"), hwg_Enablewindow(oTool:aItem[2, 11], .T.) , hwg_Enablewindow(oTool:aItem[1, 11], .F.)}
+           ON CLICK {|x, y|hwg_msginfo("ola"), hwg_Enablewindow(oTool:aItem[2, 11], .T.), hwg_Enablewindow(oTool:aItem[1, 11], .F.)}
 
    TOOLBUTTON  otool ;
           ID 702 ;

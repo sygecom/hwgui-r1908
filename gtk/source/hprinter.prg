@@ -28,8 +28,8 @@ CLASS HPrinter INHERIT HObject
 
    METHOD New(cPrinter, lmm)
    METHOD SetMode(nOrientation)
-   //METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline)
-   METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset)
+   //METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline)
+   METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset)
    METHOD SetFont(oFont)
    METHOD StartDoc(lPreview, cFileName)
    METHOD EndDoc()
@@ -93,7 +93,7 @@ Local x
 
 RETURN .T.
 
-METHOD AddFont(fontName, nHeight , lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
+METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
 
    LOCAL oFont
    
@@ -249,17 +249,17 @@ CLASS HGP_Font INHERIT HObject
 
    CLASS VAR aFonts   INIT {}
    DATA handle
-   DATA name, height , weight
+   DATA name, height, weight
    DATA italic, Underline
    DATA nCounter   INIT 1
 
-   //METHOD Add(fontName, nWidth, nHeight , fnWeight, fdwItalic, fdwUnderline)
-   METHOD Add(fontName, nHeight , fnWeight, fdwItalic, fdwUnderline)
+   //METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwItalic, fdwUnderline)
+   METHOD Add(fontName, nHeight, fnWeight, fdwItalic, fdwUnderline)
    METHOD Release(lAll)
 
 ENDCLASS
 
-METHOD Add(fontName, nHeight , fnWeight, fdwItalic, fdwUnderline) CLASS HGP_Font
+METHOD Add(fontName, nHeight, fnWeight, fdwItalic, fdwUnderline) CLASS HGP_Font
 Local i, nlen := Len(::aFonts)
 
    nHeight  := IIf(nHeight == NIL, 13, Abs(nHeight))

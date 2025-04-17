@@ -326,7 +326,7 @@ FUNCTION rmatch(c, f)
       => ordCondSet(<"for">, <{for}>,                                      ;
                       if(<.all.>, .T., NIL),                               ;
                       <{while}>,                                           ;
-                      <{opt}>, <step>    ,                                 ;
+                      <{opt}>, <step>,                                     ;
                       RECNO(), <next>, <rec>,                              ;
                       if(<.rest.>, .T., NIL),                              ;
                       if((<.dec.> .AND. !<.asc.>), .T., NIL),              ;

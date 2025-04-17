@@ -60,7 +60,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD AddRow(a, bUpdate)
    METHOD Notify(lParam)
 
-   METHOD DELETEROW() INLINE IIf(::bFlag , (hwg_SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F.), .T.)
+   METHOD DELETEROW() INLINE IIf(::bFlag, (hwg_SendMessage(::handle, LVM_DELETEITEM, ::iRowSelect, 0), ::bFlag := .F.), .T.)
    METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := {}, hwg_SendMessage(::handle, LVM_DELETEALLITEMS, 0, 0)
    METHOD SELECTALL() INLINE hwg_ListViewSelectAll(::handle)
    METHOD SELECTLAST() INLINE hwg_ListViewSelectLastItem(::handle)
@@ -143,11 +143,11 @@ METHOD Init() CLASS HGridEx
 
 
          IF nmax == 4
-            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
+            ::hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
          ELSEIF nmax == 8
-            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
+            ::hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
          ELSEIF nmax == 24
-            ::hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+            ::hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
          ENDIF
 
          FOR nPos := 1 TO Len(aButton)
@@ -169,7 +169,7 @@ METHOD Init() CLASS HGridEx
       hwg_Listview_Init(::handle, ::ItemCount, ::lNoLines)
 
       FOR i := 1 TO Len(::aColumns)
-         hwg_Listview_AddColumnEx(::handle, i, ::aColumns[i, 1], ::aColumns[i , 2], ::aColumns[i, 3], IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4], - 1))
+         hwg_Listview_AddColumnEx(::handle, i, ::aColumns[i, 1], ::aColumns[i, 2], ::aColumns[i, 3], IIf(::aColumns[i, 4] != NIL, ::aColumns[i, 4], - 1))
 
       NEXT
       IF Len(::aRow) > 0
@@ -201,7 +201,7 @@ METHOD Refresh() CLASS HGridEx
 
    iLast := iFirst + hwg_ListView_GetCountPerPage(::handle)
 
-   hwg_ListView_RedrawItems(::handle , iFirst, iLast)
+   hwg_ListView_RedrawItems(::handle, iFirst, iLast)
    RETURN NIL
 
 

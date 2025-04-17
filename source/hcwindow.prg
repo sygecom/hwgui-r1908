@@ -34,16 +34,16 @@ STATIC aCustomEvents := { ;
         WM_DESTROY ;
        }, ;
        { ;
-        {|o, w, l|onNotify(o, w, l)}                           , ;
-        {|o, w|IIf(o:bPaint != NIL, Eval(o:bPaint, o, w), -1)} , ;
-        {|o, w, l|onCtlColor(o, w, l)}                         , ;
-        {|o, w, l|onCtlColor(o, w, l)}                         , ;
-        {|o, w, l|onCtlColor(o, w, l)}                         , ;
-        {|o, w, l|onCtlColor(o, w, l)}                         , ;
-        {|o, w, l|onCommand(o, w, l)}                          , ;
-        {|o, w, l|onDrawItem(o, w, l)}                         , ;
-        {|o, w, l|onSize(o, w, l)}                             , ;
-        {|o|onDestroy(o)}                                      ;
+        {|o, w, l|onNotify(o, w, l)}, ;
+        {|o, w|IIf(o:bPaint != NIL, Eval(o:bPaint, o, w), -1)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCtlColor(o, w, l)}, ;
+        {|o, w, l|onCommand(o, w, l)}, ;
+        {|o, w, l|onDrawItem(o, w, l)}, ;
+        {|o, w, l|onSize(o, w, l)}, ;
+        {|o|onDestroy(o)} ;
        } ;
      }
 #endif
@@ -790,7 +790,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
    // Calculate how many scrolling increments for the client area
    IF ::Type == WND_MDICHILD //.AND. ::aRectSave != NIL
       nwMax := Max(::ncurWidth, tempRect[3]) //::maxWidth
-      nhMax := Max(::ncurHeight , tempRect[4]) //::maxHeight
+      nhMax := Max(::ncurHeight, tempRect[4]) //::maxHeight
       ::nHorzInc := INT((nwMax - tempRect[3]) / HORZ_PTS)
       ::nVertInc := INT((nhMax - tempRect[4]) / VERT_PTS)
    ELSE
@@ -810,7 +810,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
       ENDIF
       ::nHscrollPos := Min(::nHscrollPos, ::nHscrollMax)
       hwg_SetScrollPos(::handle, SB_HORZ, ::nHscrollPos, .T.)
-      hwg_SetScrollInfo(::handle, SB_HORZ, 1, ::nHScrollPos , HORZ_PTS, ::nHscrollMax)
+      hwg_SetScrollInfo(::handle, SB_HORZ, 1, ::nHScrollPos, HORZ_PTS, ::nHscrollMax)
       IF ::nHscrollPos > 0
          nPos := hwg_GetScrollPos(::handle, SB_HORZ)
          IF nPos < ::nHscrollPos
@@ -828,7 +828,7 @@ METHOD SetupScrollbars() CLASS HCustomWindow
          ::nVScrollMax := 0
       ENDIF
       hwg_SetScrollPos(::handle, SB_VERT, ::nVscrollPos, .T.)
-      hwg_SetScrollInfo(::handle, SB_VERT, 1, ::nVscrollPos , VERT_PTS, ::nVscrollMax)
+      hwg_SetScrollInfo(::handle, SB_VERT, 1, ::nVscrollPos, VERT_PTS, ::nVscrollMax)
       IF ::nVscrollPos > 0 //.AND. nPosVert != ::nVscrollPos
          nPos := hwg_GetScrollPos(::handle, SB_VERT)
          IF nPos < ::nVscrollPos
@@ -1101,7 +1101,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    IF oWnd:aEvents != NIL .AND. !oForm:lSuspendMsgsHandling .AND. !oWnd:lSuspendMsgsHandling .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
       IF oForm:Type < WND_DLG_RESOURCE
-         IF hwg_SelfFocus(hwg_GetParent(hwg_GetFocus()) , oForm:handle)
+         IF hwg_SelfFocus(hwg_GetParent(hwg_GetFocus()), oForm:handle)
             oForm:nFocus := hwg_GetFocus() //lParam
          ENDIF
       ENDIF

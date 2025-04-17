@@ -852,14 +852,14 @@ FUNCTION StatusBarMsg(cfile, cpos, ctam)
   cpos := IIf(cpos == NIL, "", cpos)
   ctam := IIf(ctam == NIL, "", ctam)
    IF cFile != NIL
-     hwg_WriteStatus(oDesigner:oMainWnd, 1, "File: " + cfile , .T.)
+     hwg_WriteStatus(oDesigner:oMainWnd, 1, "File: " + cfile, .T.)
   ENDIF
-  hwg_WriteStatus(oDesigner:oMainWnd, 2, cpos , .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 3, ctam , .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 2, cpos, .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 3, ctam, .T.)
 
   *hwg_WriteStatus(OdLG, 4, "INS", .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 5, IIf(hwg_IsNUmLockActive(), "NUM" , "   "), .T.)
-  hwg_WriteStatus(oDesigner:oMainWnd, 6, IIf(hwg_IsCapsLockActive(), "CAPS", "    ") , .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 5, IIf(hwg_IsNUmLockActive(), "NUM", "   "), .T.)
+  hwg_WriteStatus(oDesigner:oMainWnd, 6, IIf(hwg_IsCapsLockActive(), "CAPS", "    "), .T.)
 
 RETURN NIL
 

@@ -166,7 +166,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    ELSEIF lType == WND_MDICHILD //
       ::szAppName := "MDICHILD" + Alltrim(Str(hwg_GETNUMWINDOWS()))
       // Registra a classe
-      hwg_InitMdiChildWindow(::szAppName , cTitle, cMenu,  ;
+      hwg_InitMdiChildWindow(::szAppName, cTitle, cMenu,  ;
               IIf(oIcon != NIL, oIcon:handle, NIL), clr, ;
               nStyle, ::nLeft, ::nTop, ::nWidth, ::nHeight)
 
@@ -664,7 +664,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
    endif
 
    if (oWnd := HWindow():FindWindow(hWnd)) == NIL
-      // hwg_MsgStop("MDI child: wrong window handle " + Str(hWnd) + "| " + Str(msg) , "Error!")
+      // hwg_MsgStop("MDI child: wrong window handle " + Str(hWnd) + "| " + Str(msg), "Error!")
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       RETURN NIL
    endif
@@ -889,7 +889,7 @@ Local oWndClient
 
 
    if (oWnd := HWindow():FindWindow(hWnd)) == NIL
-      // hwg_MsgStop("MDI wnd: wrong window handle " + Str(hWnd) + "| " + Str(msg) , "Error!")
+      // hwg_MsgStop("MDI wnd: wrong window handle " + Str(hWnd) + "| " + Str(msg), "Error!")
       // Deve entrar aqui apenas em WM_GETMINMAXINFO, que vem antes de WM_NCCREATE
       RETURN NIL
    endif

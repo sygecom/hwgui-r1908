@@ -146,7 +146,7 @@ METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLA
    ::RedefineScrollbars()
    /*
    IF ::nScrollBars > - 1
-      AEval(::aControls, {|o|::ncurHeight := max(o:nTop + o:nHeight + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION) + 12 , ::ncurHeight)})
+      AEval(::aControls, {|o|::ncurHeight := max(o:nTop + o:nHeight + hwg_GetSystemMetrics(SM_CYMENU) + hwg_GetSystemMetrics(SM_CYCAPTION) + 12, ::ncurHeight)})
       AEval(::aControls, {|o|::ncurWidth := max(o:nLeft + o:nWidth + 24, ::ncurWidth)})
       ::ResetScrollbars()
       ::SetupScrollbars()
@@ -202,7 +202,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
    ELSEIF msg == WM_DESTROY .AND. ::lModal .AND. !hwg_SelfFocus(::Screen:handle, ::handle)
       IF !Empty(::hActive) .AND. !hwg_SelfFocus(::hActive, ::Screen:handle)
          hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
-         hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
+         hwg_PostMessage(::hActive, WM_SETFOCUS, 0, 0)
       ENDIF
       ::GETMDIMAIN():lSuspendMsgsHandling := .F.
    ENDIF
@@ -264,7 +264,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
       IF ::lModal .AND. !hwg_SelfFocus(::Screen:handle, ::handle)
          IF !Empty(::hActive) .AND. !hwg_SelfFocus(::hActive, ::Screen:handle)
             hwg_PostMessage(nFocus, WM_SETFOCUS, 0, 0)
-            hwg_PostMessage(::hActive , WM_SETFOCUS, 0, 0)
+            hwg_PostMessage(::hActive, WM_SETFOCUS, 0, 0)
          ENDIF
          ::GETMDIMAIN():lSuspendMsgsHandling := .F.
       ENDIF

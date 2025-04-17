@@ -147,11 +147,11 @@ STATIC FUNCTION BrwDbs(lEdit, lZebra)
 
         oBrwDb:bcolorSel := x_DARKBLUE
         oBrwDb:alias := "TSTB"
-        oBrwDb:AddColumn(HColumn():New("Field1" , FieldBlock(Fieldname(1)), "N", 10, 02))
-        oBrwDb:AddColumn(HColumn():New("Field2" , FieldBlock(Fieldname(2)), "C", 11, 00))
-        oBrwDb:AddColumn(HColumn():New("Field3" , FieldBlock(Fieldname(3)), "D", 10, 00))
-        oBrwDb:AddColumn(HColumn():New("Field4" , FieldBlock(Fieldname(4)), "C", 31, 00))
-        oBrwDb:AddColumn(HColumn():New("Field5" , FieldBlock(Fieldname(5)), "C", 05, 00))
+        oBrwDb:AddColumn(HColumn():New("Field1", FieldBlock(Fieldname(1)), "N", 10, 02))
+        oBrwDb:AddColumn(HColumn():New("Field2", FieldBlock(Fieldname(2)), "C", 11, 00))
+        oBrwDb:AddColumn(HColumn():New("Field3", FieldBlock(Fieldname(3)), "D", 10, 00))
+        oBrwDb:AddColumn(HColumn():New("Field4", FieldBlock(Fieldname(4)), "C", 31, 00))
+        oBrwDb:AddColumn(HColumn():New("Field5", FieldBlock(Fieldname(5)), "C", 05, 00))
 
         oBrwDb:aColumns[1]:nJusHead := DT_CENTER
         oBrwDb:aColumns[2]:nJusHead := DT_CENTER
@@ -182,7 +182,7 @@ STATIC FUNCTION BrwDbs(lEdit, lZebra)
           IF lZebra
              FOR nI := 2 TO 5
                 oBrwDB:aColumns[nI]:bColorBlock := {||IIf(MOD(oBrwDB:nPaintRow, 2) = 0,;
-                      {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE} , ;
+                      {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE}, ;
                       {x_BLACK, x_WHITE, x_WHITE, x_DARKBLUE})}
              NEXT
           ENDIF

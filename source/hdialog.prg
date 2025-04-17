@@ -166,7 +166,7 @@ METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
    hwg_CreateGetList(Self)
    hParent := IIf(hb_IsObject(::oParent) .AND. ;
                    __ObjHasMsg(::oParent, "HANDLE") .AND. ::oParent:handle != NIL ;
-                   .AND. !Empty(::oParent:handle) , ::oParent:handle, ;
+                   .AND. !Empty(::oParent:handle), ::oParent:handle, ;
                    IIf((oWnd := HWindow():GetMain()) != NIL, oWnd:handle, hwg_GetActiveWindow()))
 
    ::WindowState := IIf(hb_IsNumeric(nShow), nShow, SW_SHOWNORMAL)

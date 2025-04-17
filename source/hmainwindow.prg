@@ -68,7 +68,7 @@ CLASS VAR aMessages INIT { ;
    METHOD onEvent(msg, wParam, lParam)
    METHOD InitTray(oNotifyIcon, bNotify, oNotifyMenu, cTooltip)
    METHOD GetMdiActive() INLINE ::FindWindow(IIf(::GetMain() != NIL, ;
-      hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0) , NIL))
+      hwg_SendMessage(::GetMain():handle, WM_MDIGETACTIVE, 0, 0), NIL))
 
 ENDCLASS
 

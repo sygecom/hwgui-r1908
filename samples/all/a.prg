@@ -135,8 +135,7 @@ FUNCTION CreateChildWindow()
                Dtoc(e2) + Chr(10) + Chr(13) + ;
                Str(e3) + Chr(10) + Chr(13) +  ;
                e4 + Chr(10) + Chr(13) +       ;
-               Str(e5) + Chr(10) + Chr(13)    ;
-               , "Results:"), oChildWnd:Close())}
+               Str(e5) + Chr(10) + Chr(13), "Results:"), oChildWnd:Close())}
    @ 180, 190 BUTTONEX "Cancel" SIZE 100, 32 ON CLICK {||oChildWnd:Close()}
 
    oChildWnd:Activate()

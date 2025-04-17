@@ -142,7 +142,7 @@ Local nPos1, aSubMenu
       IF aMenu[1, npos, 3] == nId
          RETURN aMenu
       ELSEIF Len(aMenu[1, npos]) > 4
-         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos] , nId, @nPos1)) != NIL
+         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubMenu
          ENDIF

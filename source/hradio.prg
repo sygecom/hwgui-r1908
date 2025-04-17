@@ -228,7 +228,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::Enabled := !hwg_BitAnd(nStyle, WS_DISABLED) > 0
    ::style   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+;
                         BS_NOTIFY + ;  // WS_CHILD + WS_VISIBLE
-                       IIf(::oGroup != NIL .AND. Empty(::oGroup:aButtons), WS_GROUP , 0))
+                       IIf(::oGroup != NIL .AND. Empty(::oGroup:aButtons), WS_GROUP, 0))
 
    ::Super:New(oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;
               oFont, bInit, bSize, bPaint, ctooltip, tcolor, bColor)

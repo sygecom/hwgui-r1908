@@ -840,7 +840,7 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
                IIf(bIsPressed, DFCS_PUSHED, 0))
             hwg_DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
          ELSEIF bIsFocused
-            uState := HWG_BITOR(HWG_BITOR(DFCS_BUTTONPUSH + DFCS_MONO, ; // DFCS_FLAT , ;
+            uState := HWG_BITOR(HWG_BITOR(DFCS_BUTTONPUSH + DFCS_MONO, ; // DFCS_FLAT, ;
                IIf(::bMouseOverButton, DFCS_HOT, 0)), IIf(bIsPressed, DFCS_PUSHED, 0))
             hwg_DrawFrameControl(dc, itemRect, DFC_BUTTON, uState)
          ENDIF

@@ -43,7 +43,7 @@ METHOD New(cTitle, type, aAttr, cValue) CLASS HXMLNode
    IF aAttr != NIL
       ::aAttr := aAttr
    ENDIF
-   ::type := IIf(type != NIL , type, HBXML_TYPE_TAG)
+   ::type := IIf(type != NIL, type, HBXML_TYPE_TAG)
    IF cValue != NIL
       ::Add(cValue)
    ENDIF

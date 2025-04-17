@@ -1335,7 +1335,7 @@ STATIC FUNCTION MouseMove(oDlg, wParam, xPos, yPos)
             ELSEIF resizeDirection == 2 .OR. resizeDirection == 4
                hwg_SetCursor(vertCursor)
             ENDIF
-            SetvBDown(NIL, xPos - oCtrl:nLeft , yPos - oCtrl:nTop, 0)
+            SetvBDown(NIL, xPos - oCtrl:nLeft, yPos - oCtrl:nTop, 0)
          ENDIF
       ENDIF
    ENDIF
@@ -1357,7 +1357,7 @@ STATIC FUNCTION LButtonDown(oDlg, xPos, yPos)
     // : LFB
       IF oCtrl == NIL .AND. oDesigner:addItem == NIL
          hwg_SetCursor(handCursor)
-         SetBDown(oDlg , xPos, yPos)  //, resizeDirection)
+         SetBDown(oDlg, xPos, yPos)  //, resizeDirection)
       // fazer o desenho da marca‡Æo
       ENDIF
       // : END LFB
@@ -1410,7 +1410,7 @@ STATIC FUNCTION LButtonDown(oDlg, xPos, yPos)
 
 RETURN NIL
 
-STATIC FUNCTION LButtonUp(oDlg, xPos, yPos , nShift)
+STATIC FUNCTION LButtonUp(oDlg, xPos, yPos, nShift)
 
    LOCAL aBDown
    LOCAL oCtrl

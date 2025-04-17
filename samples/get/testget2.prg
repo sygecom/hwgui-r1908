@@ -100,8 +100,7 @@ FUNCTION DlgGet(lColor)
                Str(e3) + Chr(10) + Chr(13) +  ;
                e4 + Chr(10) + Chr(13) +       ;
                Str(e5) + Chr(10) + Chr(13) +  ;
-               e7 + Chr(10) + Chr(13)         ;
-               , "Results:")
+               e7 + Chr(10) + Chr(13), "Results:")
    ENDIF
 
 RETURN NIL

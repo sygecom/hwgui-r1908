@@ -43,7 +43,7 @@ Private oSayT
    ON INIT {||SetTimer(oModDlg, @oTimer)}
    // FONT oFont  
 
-   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3") 
+   SET KEY FSHIFT, VK_F3 TO hwg_MsgInfo("Shift-F3")
    SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3") 
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
@@ -92,8 +92,7 @@ Private oSayT
                Str(e3) + chr(10) + chr(13) +  ;
                e4 + chr(10) + chr(13) +       ;
                Str(e5) + chr(10) + chr(13) +  ;
-               e7 + chr(10) + chr(13)         ;
-               , "Results:")
+               e7 + chr(10) + chr(13), "Results:")
    ENDIF
 
 RETURN NIL

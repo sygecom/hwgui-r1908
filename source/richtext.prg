@@ -127,7 +127,7 @@ CLASS RichText
                        cCellAppear, cCellHAlign, nTblRows, ;
                        nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                        lTblNoSplit, nTblHdRows, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-                       nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor)
+                       nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor)
 
    METHOD BeginRow() INLINE ::TextCode("trowd"), ::nCurrRow += 1
    METHOD EndRow() INLINE ::TextCode("row")
@@ -207,7 +207,7 @@ CLASS RichText
                        cCellAppear, cCellHAlign, nTblRows, ;
                        nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                        lTblNoSplit, nTblHdRows, aHeadTit, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-                       nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor, aTblCJoin)
+                       nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor, aTblCJoin)
 
    HIDDEN:
 
@@ -703,7 +703,7 @@ METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                     cCellAppear, cCellHAlign, nTblRows, ;
                     nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                     lTblNoSplit, nTblHdRows, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor) CLASS RichText
+                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor) CLASS RichText
 
    LOCAL i
 
@@ -1499,7 +1499,7 @@ METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
    ::TextCode("dptxbxtext \s0\ql")
    IF !Empty(cTexto)
       ::Paragraph(cTexto, nFontNumber, nFontSize, cAppear, ;
-                  ,, nIndent,,,,,,,,,,,, .F., .T. , nFontColor)
+                  ,, nIndent,,,,,,,,,,,, .F., .T., nFontColor)
    ENDIF
 
    IF lEnd
@@ -1872,7 +1872,7 @@ METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                     cCellAppear, cCellHAlign, nTblRows, ;
                     nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                     lTblNoSplit, nTblHdRows, aHeadTit, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor, ;
+                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor, ;
                     aTblCJoin) CLASS RichText
 
    LOCAL i

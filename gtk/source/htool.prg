@@ -30,7 +30,7 @@ CLASS HToolBar INHERIT HControl
    DATA Line
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp , aItem)
+                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
 
    METHOD Activate()
    METHOD INIT()
@@ -49,7 +49,7 @@ ENDCLASS
 
 
 METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp , aitem) CLASS hToolBar
+                  bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aitem) CLASS hToolBar
 
    HB_SYMBOL_UNUSED(cCaption)
    HB_SYMBOL_UNUSED(lTransp)
@@ -91,7 +91,7 @@ METHOD INIT() CLASS hToolBar
 
 //         IF HB_IsBlock(::aItem[n, 7])
 //
-//            ::oParent:AddEvent(BN_CLICKED, ::aItem[n, 2], ::aItem[n , 7])
+//            ::oParent:AddEvent(BN_CLICKED, ::aItem[n, 2], ::aItem[n, 7])
 //
 //         ENDIF
 
@@ -129,11 +129,11 @@ METHOD INIT() CLASS hToolBar
           aBmpSize := hwg_GetBitmapSize(aButton[1])
 
           IF aBmpSize[3] == 4
-             hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
+             hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR4 + ILC_MASK)
           ELSEIF aBmpSize[3] == 8
-             hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
+             hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLOR8 + ILC_MASK)
           ELSEIF aBmpSize[3] == 24
-             hIm := hwg_CreateImageList({} , aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
+             hIm := hwg_CreateImageList({}, aBmpSize[1], aBmpSize[2], 1, ILC_COLORDDB + ILC_MASK)
           ENDIF
 
           FOR nPos :=1 to Len(aButton)
@@ -227,7 +227,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HToolbar
       nPos := AScan(::aItem, {|x|x[2] == wParam})
       if nPos > 0
          IF ::aItem[nPos, 7] != NIL
-            Eval(::aItem[nPos, 7] , Self)
+            Eval(::aItem[nPos, 7], Self)
          ENDIF
       endif
    ENDIF

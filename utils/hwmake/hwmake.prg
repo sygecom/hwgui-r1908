@@ -209,15 +209,15 @@ Local aPal := ""
 Local cFolderFile := hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld")
 if empty(cFolderFile); RETURN NIL; Endif
 oStatus:SetTextPanel(1, cFolderFile)      
-oExeName:SetText(hwg_GetIni( 'Config', 'ExeName' , , cFolderFile))
-oLibFolder:SetText(hwg_GetIni('Config', 'LibFolder' , , cFolderFile))
-oIncFolder:SetText(hwg_GetIni('Config', 'IncludeFolder' , , cFolderFile))
-oPrgFlag:SetText(hwg_GetIni('Config', 'PrgFlags' , , cFolderFile))
-oCFlag:SetText(hwg_GetIni('Config', 'CFlags' , , cFolderFile))
-oMainPrg:SetText(hwg_GetIni('Config', 'PrgMain' , , cFolderFile))
+oExeName:SetText(hwg_GetIni('Config', 'ExeName', , cFolderFile))
+oLibFolder:SetText(hwg_GetIni('Config', 'LibFolder', , cFolderFile))
+oIncFolder:SetText(hwg_GetIni('Config', 'IncludeFolder', , cFolderFile))
+oPrgFlag:SetText(hwg_GetIni('Config', 'PrgFlags', , cFolderFile))
+oCFlag:SetText(hwg_GetIni('Config', 'CFlags', , cFolderFile))
+oMainPrg:SetText(hwg_GetIni('Config', 'PrgMain', , cFolderFile))
 
 For i := 1 to 300
-    oSel1 := hwg_GetIni('FilesPRG', Alltrim(Str(i)) , , cFolderFile)
+    oSel1 := hwg_GetIni('FilesPRG', Alltrim(Str(i)), , cFolderFile)
     if !empty(oSel1) //.OR. oSel1#NIL
         AADD(oBr1, oSel1)
     EndIf
@@ -225,21 +225,21 @@ Next
     
   
 For i := 1 to 300
-    oSel2 := hwg_GetIni('FilesC', Alltrim(Str(i)) , , cFolderFile)
+    oSel2 := hwg_GetIni('FilesC', Alltrim(Str(i)), , cFolderFile)
     if !empty(oSel2) //.OR. oSel2#NIL
         AADD(oBr2, oSel2)
     EndIf
 Next
 
 For i := 1 to 300
-    oSel3 := hwg_GetIni('FilesLIB', Alltrim(Str(i)) , , cFolderFile)
+    oSel3 := hwg_GetIni('FilesLIB', Alltrim(Str(i)), , cFolderFile)
     if !empty(oSel3) //.OR. oSel3#NIL
         AADD(oBr3, oSel3)
     EndIf
 Next
 
 For i := 1 to 300
-    oSel4 := hwg_GetIni('FilesRES', Alltrim(Str(i)) , , cFolderFile)
+    oSel4 := hwg_GetIni('FilesRES', Alltrim(Str(i)), , cFolderFile)
     if !empty(oSel4) //.OR. oSel4#NIL
         AADD(oBr4, oSel4)
     EndIf
@@ -311,13 +311,13 @@ if file(cFolderFile)
      hwg_MsgInfo("No file SAVED.", "HwMake")
      RETURN NIL
    EndIf
-EndIf     
-hwg_WriteIni('Config', 'ExeName'       , oExeName:GetText(), cFolderFile)
-hwg_WriteIni('Config', 'LibFolder'     , oLibFolder:GetText(), cFolderFile)
-hwg_WriteIni('Config', 'IncludeFolder' , oIncFolder:GetText(), cFolderFile)
-hwg_WriteIni('Config', 'PrgFlags'      , oPrgFlag:GetText(), cFolderFile)
-hwg_WriteIni('Config', 'CFlags'        , oCFlag:GetText(), cFolderFile)
-hwg_WriteIni('Config', 'PrgMain'       , oMainPrg:GetText(), cFolderFile)
+EndIf
+hwg_WriteIni('Config', 'ExeName', oExeName:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'LibFolder', oLibFolder:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'IncludeFolder', oIncFolder:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'PrgFlags', oPrgFlag:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'CFlags', oCFlag:GetText(), cFolderFile)
+hwg_WriteIni('Config', 'PrgMain', oMainPrg:GetText(), cFolderFile)
 oNome := ""
 
 if Len(oBrowse1:aArray) >= 1
@@ -363,11 +363,11 @@ RETURN NIL
 FUNCTION BuildApp() 
 Local cExeHarbour
 Local cHwGUI, cHarbour, cBCC55, cObj
-LOCAL cObjFileAttr  , nObjFileSize
+LOCAL cObjFileAttr, nObjFileSize
 LOCAL dObjCreateDate, nObjCreateTime
 LOCAL dObjChangeDate, nObjChangeTime
 Local cObjName, I
-LOCAL cPrgFileAttr  , nPrgFileSize
+LOCAL cPrgFileAttr, nPrgFileSize
 LOCAL dPrgCreateDate, nPrgCreateTime
 LOCAL dPrgChangeDate, nPrgChangeTime
 Local cPrgName
@@ -393,10 +393,10 @@ If !Empty(cPathFile)
 EndIF   
 
 If File(cDirec + "hwmake.Ini")
-   cHwGUI  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_HwGUI'   , , cDirec + "hwmake.Ini")))
-   cHarbour := Lower(AllTrim(hwg_GetIni('Config', 'DIR_HARBOUR' , , cDirec + "hwmake.Ini")))
-   cBCC55  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_BCC55'   , , cDirec + "hwmake.Ini")))
-   cObj    := Lower(AllTrim(hwg_GetIni('Config', 'DIR_OBJ'     , , cDirec + "hwmake.Ini")))
+   cHwGUI  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_HwGUI', , cDirec + "hwmake.Ini")))
+   cHarbour := Lower(AllTrim(hwg_GetIni('Config', 'DIR_HARBOUR', , cDirec + "hwmake.Ini")))
+   cBCC55  := Lower(AllTrim(hwg_GetIni('Config', 'DIR_BCC55', , cDirec + "hwmake.Ini")))
+   cObj    := Lower(AllTrim(hwg_GetIni('Config', 'DIR_OBJ', , cDirec + "hwmake.Ini")))
 Else 
    cHwGUI  := "c:\hwgui"
    cHarbour := "c:\xharbour"
@@ -427,8 +427,8 @@ For Each i in oBrowse1:aArray
       lCompile := .T.
    Else   
       If File(cObjName)
-         FileStats(cObjName, @cObjFileAttr  , @nObjFileSize, @dObjCreateDate, @nObjCreateTime, @dObjChangeDate, @nObjChangeTime)
-         FileStats(cPrgName, @cPrgFileAttr  , @nPrgFileSize, @dPrgCreateDate, @nPrgCreateTime, @dPrgChangeDate, @nPrgChangeTime)
+         FileStats(cObjName, @cObjFileAttr, @nObjFileSize, @dObjCreateDate, @nObjCreateTime, @dObjChangeDate, @nObjChangeTime)
+         FileStats(cPrgName, @cPrgFileAttr, @nPrgFileSize, @dPrgCreateDate, @nPrgCreateTime, @dPrgChangeDate, @nPrgChangeTime)
          If dObjChangeDate <= dPrgChangeDate .AND.  nObjChangeTime <  nPrgChangeTime
             lCompile := .T.
          EndIF   
@@ -528,36 +528,36 @@ Local lMt := .F.
 cLib := cHwGUI + "\lib\hwgui.lib " + CRLF
 cLib += cHwGUI + "\lib\procmisc.lib " + CRLF
 cLib += cHwGUI + "\lib\hbxml.lib " + CRLF
-cLib += IIf(File(cHarbour + "\lib\rtl" + IIf(lMt, cMt, "") + ".lib") ,  cHarbour + "\lib\rtl" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbrtl" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\hbrtl" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\vm" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\vm" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbvm.lib")  ,  cHarbour + "\lib\hbvm.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\gtgui.lib")  ,  cHarbour + "\lib\gtgui.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\gtwin.lib")  ,  cHarbour + "\lib\gtwin.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\lang.lib")  ,  cHarbour + "\lib\lang.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hblang.lib")  ,  cHarbour + "\lib\hblang.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\codepage.lib")  ,  cHarbour + "\lib\codepage.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbcpage.lib")  ,  cHarbour + "\lib\hbcpage.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\macro" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\macro" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbmacro.lib")  ,  cHarbour + "\lib\hbmacro.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\rdd" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\rdd" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbrdd.lib") ,  cHarbour + "\lib\hbrdd.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\dbfntx" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\dbfntx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\rddntx.lib") ,  cHarbour + "\lib\rddntx.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\dbfcdx" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\dbfcdx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\rddcdx.lib") ,  cHarbour + "\lib\rddcdx.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\dbffpt" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\dbffpt" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\rddfpt.lib") ,  cHarbour + "\lib\rddfpt.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\sixcdx" + IIf(lMt, cMt, "") + ".lib")  ,  cHarbour + "\lib\sixcdx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbsix.lib") ,  cHarbour + "\lib\hbsix.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\common.lib") ,  cHarbour + "\lib\common.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbcommon.lib") ,  cHarbour + "\lib\hbcommon.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\debug.lib") ,  cHarbour + "\lib\debug.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbdebug.lib") ,  cHarbour + "\lib\hbdebug.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\pp.lib") ,  cHarbour + "\lib\pp.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\rtl" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\rtl" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbrtl" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\hbrtl" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\vm" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\vm" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbvm.lib"),  cHarbour + "\lib\hbvm.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\gtgui.lib"),  cHarbour + "\lib\gtgui.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\gtwin.lib"),  cHarbour + "\lib\gtwin.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\lang.lib"),  cHarbour + "\lib\lang.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hblang.lib"),  cHarbour + "\lib\hblang.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\codepage.lib"),  cHarbour + "\lib\codepage.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbcpage.lib"),  cHarbour + "\lib\hbcpage.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\macro" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\macro" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbmacro.lib"),  cHarbour + "\lib\hbmacro.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\rdd" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\rdd" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbrdd.lib"),  cHarbour + "\lib\hbrdd.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\dbfntx" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\dbfntx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\rddntx.lib"),  cHarbour + "\lib\rddntx.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\dbfcdx" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\dbfcdx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\rddcdx.lib"),  cHarbour + "\lib\rddcdx.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\dbffpt" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\dbffpt" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\rddfpt.lib"),  cHarbour + "\lib\rddfpt.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\sixcdx" + IIf(lMt, cMt, "") + ".lib"),  cHarbour + "\lib\sixcdx" + IIf(lMt, cMt, "") + ".lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbsix.lib"),  cHarbour + "\lib\hbsix.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\common.lib"),  cHarbour + "\lib\common.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbcommon.lib"),  cHarbour + "\lib\hbcommon.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\debug.lib"),  cHarbour + "\lib\debug.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbdebug.lib"),  cHarbour + "\lib\hbdebug.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\pp.lib"),  cHarbour + "\lib\pp.lib " + CRLF, "")
 cLib += IIf(File(cHarbour + "\lib\hbpp.lib"),  cHarbour + "\lib\hbpp.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hsx.lib") ,  cHarbour + "\lib\hsx.lib " + CRLF, "")
-cLib += IIf(File(cHarbour + "\lib\hbhsx.lib") ,  cHarbour + "\lib\hbhsx.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hsx.lib"),  cHarbour + "\lib\hsx.lib " + CRLF, "")
+cLib += IIf(File(cHarbour + "\lib\hbhsx.lib"),  cHarbour + "\lib\hbhsx.lib " + CRLF, "")
 cLib += cHarbour + "\lib\hbsix.lib " + CRLF
 cLib += IIf(File(cHarbour + "\lib\pcrepos.lib"),  cHarbour + "\lib\pcrepos.lib " + CRLF, "")
 cLib += IIf(File(cHarbour + "\lib\hbpcre.lib"),  cHarbour + "\lib\hbpcre.lib " + CRLF, "")

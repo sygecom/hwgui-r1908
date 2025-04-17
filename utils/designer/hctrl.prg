@@ -295,7 +295,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
       ENDIF
    ENDIF
    IF oCtrl:Adjust == 6
-         oCtrl:Move(oCtrl:nLeft , 2)
+         oCtrl:Move(oCtrl:nLeft, 2)
          oCtrl:SetProp("Top", "2")
       //oCtrl:SetCoor("Top", oCtrl:nTop)
       //oCtrl:SetCoor("Width", oCtrl:nWidth)
@@ -307,7 +307,7 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
           oCtrls := aControls[i]
               *-hwg_MsgInfo(STR(oCtrl:oParent:nTop) + "-" + STR(oCtrl:nTop)) // + "-" + STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass = "browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop + oCtrls:nHeight)
-                 oCtrl:Move(oCtrl:nLeft , oCtrls:nTop + 2)
+                 oCtrl:Move(oCtrl:nLeft, oCtrls:nTop + 2)
               *oCtrl:SetProp("Top", "oCtrls:nTop+2")
               EXIT
                ENDIF
@@ -600,7 +600,7 @@ FUNCTION SetCtrlSelected(oDlg, oCtrl, n, nShift)   // nando pos nshift
         ENDIF
       ENDIF
       // nando pos
-        aSels := IIf(nsh >= 0, {} , asels)
+        aSels := IIf(nsh >= 0, {}, asels)
         IF oCtrl != NIL
            AAdd(aSels, oCtrl)
         ENDIF
@@ -902,7 +902,7 @@ STATIC FUNCTION FindTreeItem(aTree, nId, nPos)
       IF aTree[npos, 3] == nId
          RETURN aTree
       ELSEIF HB_IsArray(aTree[npos, 1])
-         IF (aSubarr := FindTreeItem(aTree[nPos, 1] , nId, @nPos1)) != NIL
+         IF (aSubarr := FindTreeItem(aTree[nPos, 1], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubarr
          ENDIF
@@ -1195,7 +1195,7 @@ FUNCTION AUTOSIZE(oCtrl)
 
    RETURN NIL
 
-FUNCTION GetTextWidth(cString, oFont , hdc)
+FUNCTION GetTextWidth(cString, oFont, hdc)
 
    LOCAL arr
    LOCAL hFont

@@ -239,7 +239,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
       aCoors := hwg_GetClientRect(oWnd:handle)
       //hwg_MoveWindow(HWindow():aWindows[2]:handle, oWnd:aOffset[1], oWnd:aOffset[2], aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4])
       //aCoors := hwg_GetClientRect(HWindow():aWindows[2]:handle)
-      hwg_SetWindowPos(HWindow():aWindows[2]:handle, NIL, oWnd:aOffset[1], oWnd:aOffset[2], aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4] , SWP_NOZORDER + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
+      hwg_SetWindowPos(HWindow():aWindows[2]:handle, NIL, oWnd:aOffset[1], oWnd:aOffset[2], aCoors[3] - oWnd:aOffset[1] - oWnd:aOffset[3], aCoors[4] - oWnd:aOffset[2] - oWnd:aOffset[4], SWP_NOZORDER + SWP_NOACTIVATE + SWP_NOSENDCHANGING)
       aCoors := hwg_GetWindowRect(HWindow():aWindows[2]:handle)
       HWindow():aWindows[2]:nWidth := aCoors[3] - aCoors[1]
       HWindow():aWindows[2]:nHeight := aCoors[4] - aCoors[2]

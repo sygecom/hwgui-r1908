@@ -111,7 +111,7 @@ FUNCTION hwg_FindMenuItem(aMenu, nId, nPos)
       IF aMenu[1, nPos, 3] == nId
          RETURN aMenu
       ELSEIF Len(aMenu[1, nPos]) > 4
-         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos] , nId, @nPos1)) != NIL
+         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubMenu
          ENDIF
@@ -250,9 +250,9 @@ FUNCTION hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
          lResource := .F.
       ENDIF
       IF lResource .OR. At(".", lBitmap) == 0
-         oBmp := HBitmap():AddResource(lBitmap, LR_LOADMAP3DCOLORS + LR_SHARED + LR_LOADTRANSPARENT , , s_nWidthBmp, s_nHeightBmp)
+         oBmp := HBitmap():AddResource(lBitmap, LR_LOADMAP3DCOLORS + LR_SHARED + LR_LOADTRANSPARENT, , s_nWidthBmp, s_nHeightBmp)
       ELSE
-         oBmp := HBitmap():AddFile(lBitmap, , .T. , s_nWidthBmp, s_nHeightBmp)
+         oBmp := HBitmap():AddFile(lBitmap, , .T., s_nWidthBmp, s_nHeightBmp)
       ENDIF
       AAdd(s__oBitmap, {.T., oBmp:handle, cItem, nId})
    ELSE

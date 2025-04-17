@@ -56,7 +56,7 @@ CLASS HUpDown INHERIT HControl
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + hwg_GetClientRect(::hwndUpDown)[3] - 1
-                              ::Super:Move(x1, y1 , IIf(width != NIL, width, ::nWidth), height, nRepaint) ,;
+                              ::Super:Move(x1, y1, IIf(width != NIL, width, ::nWidth), height, nRepaint) ,;
                               hwg_SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
                               IIf(::lHide, ::Hide(), ::Show())
 
@@ -127,9 +127,9 @@ METHOD Activate() CLASS HUpDown
 
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
-      ::oEditUpDown := HEditUpDown():New(::oParent, ::id , val(::title) , ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+      ::oEditUpDown := HEditUpDown():New(::oParent, ::id, val(::title), ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
            ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture,;
-           ::lNoBorder, ::nMaxLength, , ::bKeyDown, ::bChange, ::bOther , ::controlsource)
+           ::lNoBorder, ::nMaxLength, , ::bKeyDown, ::bChange, ::bOther, ::controlsource)
       ::oEditUpDown:Name := "oEditUpDown"
       ::SetColor(::tColor, ::oEditUpDown:bColor)
       ::Init()
@@ -289,7 +289,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    Local iDelta := hwg_GetNotifyDeltaPos(lParam, 2)
    Local vari, res
 
-   //iDelta := IIf(iDelta < 0, 1, - 1) // IIf(::oParent:oParent == NIL , - 1 , 1)
+   //iDelta := IIf(iDelta < 0, 1, -1) // IIf(::oParent:oParent == NIL, -1, 1)
 
      IF ::oUpDown == NIL .OR. hwg_BitAnd(hwg_GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0 .OR. ;
          hwg_GetFocus() != ::handle .OR. ;
@@ -305,7 +305,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
        RETURN 0
    ENDIF
    vari :=  vari + (::oUpDown:Increment * idelta)
-   ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
+   ::Title := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
    ::oUpDown:Title := ::Title
    ::oUpDown:SetValue(vari)
@@ -332,7 +332,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
 
    vari := ::Value
    IF ::bSetGet != NIL .AND. ::title != NIL
-      ::Title := Transform(vari , ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
+      ::Title := Transform(vari, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
    ENDIF
    hwg_SetDlgItemText(::oParent:handle, ::id, ::title)
 
@@ -499,13 +499,13 @@ STATIC FUNCTION __When(oCtrl)
    RETURN res
 
 STATIC FUNCTION __Valid(oCtrl)
-   LOCAL res := .T., hctrl , nSkip, oDlg
+   LOCAL res := .T., hctrl, nSkip, oDlg
    LOCAL ltab :=  hwg_GetKeyState(VK_TAB) < 0
 
    IF !hwg_CheckFocus(oCtrl, .T.) .OR. oCtrl:lnoValid
       RETURN .T.
    ENDIF
-   nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0 , - 1, 1)
+   nSkip := IIf(hwg_GetKeyState(VK_SHIFT) < 0, -1, 1)
    oCtrl:title := hwg_GetEditText(oCtrl:oParent:handle, oCtrl:id)
    oCtrl:value := Val(LTrim(oCtrl:title))
    IF oCtrl:bSetGet != NIL
@@ -517,7 +517,7 @@ STATIC FUNCTION __Valid(oCtrl)
    IF oCtrl:bLostFocus != NIL
       res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)
       res := IIf(res, oCtrl:value <= oCtrl:nUpper .AND. ;
-                  oCtrl:value >= oCtrl:nLower , res)
+                  oCtrl:value >= oCtrl:nLower, res)
       IF !res
          hwg_SetFocus(oCtrl:handle)
          IF oDlg != NIL

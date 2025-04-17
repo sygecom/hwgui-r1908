@@ -117,7 +117,7 @@ Local nPos1, aSubMenu
       IF aMenu[1, npos, 3] == nId
          RETURN aMenu
       ELSEIF HB_IsArray(aMenu[1, npos, 1])
-         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos] , nId, @nPos1)) != NIL
+         IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubMenu
          ENDIF

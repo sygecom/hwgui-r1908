@@ -41,7 +41,7 @@ ENDCLASS
 METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
             bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling) CLASS HSplitter
                                                          //+  WS_CLIPCHILDREN
-   ::Super:New(oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW , nLeft, nTop, nWidth, nHeight,,, ;
+   ::Super:New(oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
               bSize, bDraw,, color, bcolor)
 
    ::title := ""
@@ -226,7 +226,7 @@ METHOD Drag(lParam) CLASS HSplitter
       xPos := 0
    ENDIF
    ::Move(::nLeft + xPos, ::nTop + yPos, ::nWidth, ::nHeight) //, !::lScrolling)
-   hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nleft + ::nWidth , ::nTop + ::nHeight)
+   hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nleft + ::nWidth, ::nTop + ::nHeight)
    ::lMoved := .T.
 
 RETURN NIL
@@ -265,7 +265,7 @@ METHOD DragAll(lScroll) CLASS HSplitter
          yDiff := ::nTop - (oCtrl:nTop + oCtrl:nHeight)
         // oCtrl:nHeight += nDiff
       ENDIF
-      oCtrl:Move(oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth + xDiff, oCtrl:nHeight + yDiff , !lScroll)
+      oCtrl:Move(oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth + xDiff, oCtrl:nHeight + yDiff, !lScroll)
       //IF oCtrl:winclass == "STATIC"
       hwg_InvalidateRect(oCtrl:handle, 1)
       //ENDIF

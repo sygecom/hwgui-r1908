@@ -42,7 +42,7 @@
 
 STATIC oCombo, oBrw1, oBrw2
 STATIC aProp := {}, aMethods := {}
-STATIC oTab , oMenuisnp
+STATIC oTab, oMenuisnp
 
 CLASS PBrowse INHERIT HBrowse
 
@@ -293,7 +293,7 @@ RETURN NIL
 
 // -----------------------------
 
-STATIC FUNCTION VldBrwGet(oGet , oBtn)
+STATIC FUNCTION VldBrwGet(oGet, oBtn)
 
    LOCAL vari
    LOCAL j

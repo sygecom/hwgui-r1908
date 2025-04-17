@@ -43,7 +43,7 @@ FUNCTION Menu2Prg
          stroka := Space(2 * nMaxid) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
          FWrite(han, _Chr(10) + stroka)
          nMaxId += 1
-         hwg_CallFunc("Menu2Prg", {oCtrl , alMenu[i, 1]})
+         hwg_CallFunc("Menu2Prg", {oCtrl, alMenu[i, 1]})
          nMaxId -= 1
          stroka := Space(2 * nmaxid) + "  ENDMENU  "
          FWrite(han, _Chr(10) + stroka)
@@ -111,10 +111,10 @@ FUNCTION Tool2Prg
          cName := Trim(oCtrl:GetProp("Name"))
          oCtrl1 := oCtrl:aControls[i]
          cTool += Space(4) + cname + ":AddButton("
-         cTool += IIf((temp := oCtrl1:GetProp("Bitmap")) != NIL .AND. !Empty(temp), temp , "1") + ", "
+         cTool += IIf((temp := oCtrl1:GetProp("Bitmap")) != NIL .AND. !Empty(temp), temp, "1") + ", "
          cTool += LTrim(Str(cId + i)) + ", "
-         cTool += IIf((temp := oCtrl1:GetProp("State")) != NIL .AND. !Empty(temp), temp , "4") + ", "
-         cTool += IIf((temp := oCtrl1:GetProp("Style")) != NIL .AND. !Empty(temp), temp , "0") + ", "
+         cTool += IIf((temp := oCtrl1:GetProp("State")) != NIL .AND. !Empty(temp), temp, "4") + ", "
+         cTool += IIf((temp := oCtrl1:GetProp("Style")) != NIL .AND. !Empty(temp), temp, "0") + ", "
          cTool += IIf((temp := oCtrl1:GetProp("Caption")) != NIL .AND. !Empty(temp), '"' + temp + '"', '" "') + " "
          cTip  := IIf((temp := oCtrl1:GetProp("ToolTip")) != NIL .AND. !Empty(temp), "'" + temp + "'", "")
          // Methods ( events ) for the control
@@ -220,7 +220,7 @@ FUNCTION Browse2Prg
    PRIVATE cCampo
    PRIVATE aMethods
 
-   PRIVATE aBrwXml := {"Alias", "ColumnsCount" , "HeadRows", "FooterRows", "ShowHeader", ;
+   PRIVATE aBrwXml := {"Alias", "ColumnsCount", "HeadRows", "FooterRows", "ShowHeader", ;
       "ShowGridLinesSep", "GridLinesSep3D", "HeadTextColor", "GridLinesSepColor", ;
       "LeftCol", "ColumnsFreeze", "AdjRight"}
 
@@ -294,7 +294,7 @@ FUNCTION Browse2Prg
       ENDIF
       // fim dos relacionamentos
    ELSE
-      caArray := Trim(IIf((temp := oCtrl:GetProp("aarray")) != NIL .AND. !Empty(temp), temp , "{}" ) )
+      caArray := Trim(IIf((temp := oCtrl:GetProp("aarray")) != NIL .AND. !Empty(temp), temp, "{}" ) )
       cBrowser += Space(4) + cname + ":aArray := " + caArray + "" + _chr(10)
       nColumns := IIf(nColumns = 0, 1, nColumns)
    ENDIF
@@ -317,7 +317,7 @@ FUNCTION Browse2Prg
       DO WHILE i <= Len(oCtrl:aControls)
          cName := Trim(oCtrl:GetProp("Name"))
          oCtrl1 := oCtrl:aControls[i]
-         cHeader := IIf((temp := oCtrl1:GetProp("Heading")) != NIL, "'" + temp + "'" , "")
+         cHeader := IIf((temp := oCtrl1:GetProp("Heading")) != NIL, "'" + temp + "'", "")
          cCampo  := Lower(IIf((temp := oCtrl1:GetProp("FieldName")) != NIL .AND. !Empty(temp), "" + temp + "", FieldName(i)))
          cCampo  := Lower(IIf((temp := oCtrl1:GetProp("FieldExpr")) != NIL .AND. !Empty(temp), "" + temp + "", ccampo))
          m->nLength := IIf((temp := oCtrl1:GetProp("Length")) != NIL, Val(temp), temp)
@@ -434,7 +434,7 @@ FUNCTION Imagem2Prg
       temp := oCtrl:GetProp("bitmap")
       IF !Empty(temp)
          //cImagem += " BACKGROUND BITMAP HBitmap():AddFile('" + temp + "') "
-         cImagem += " BACKGROUND BITMAP " + IIf(At(".", temp) != 0 , "HBitmap():AddFile('" + temp + "') ", "HBitmap():AddResource('" + temp + "') ")
+         cImagem += " BACKGROUND BITMAP " + IIf(At(".", temp) != 0, "HBitmap():AddFile('" + temp + "') ", "HBitmap():AddResource('" + temp + "') ")
       ENDIF
 
    ELSEIF oCtrl:cClass == "editbox" .OR. oCtrl:cClass == "richedit"
@@ -497,10 +497,10 @@ FUNCTION Style2Prg
    cStyle := cStyle + IIf(oCtrl:GetProp("multiline") = "True" .OR. oCtrl:GetProp("wordwrap") = "True", "+ES_MULTILINE ", "")
    IF oCtrl:cClass == "label"
       cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Center", "+SS_CENTER ", "")
-      cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Right", "+SS_RIGHT " , "")
+      cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Right", "+SS_RIGHT ", "")
       cStyle += IIf(oCtrl:oContainer != NIL .AND. oCtrl:oContainer:cclass != NIL .AND. oCtrl:oContainer:cclass = "page", "+SS_OWNERDRAW ", "")
    ELSE  //IF oCtrl:cClass == "editbox" .OR. oCtrl:cClass == "richedit"
-      cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Center", "+ES_CENTER " , "")
+      cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Center", "+ES_CENTER ", "")
       cStyle := cStyle + IIf(oCtrl:GetProp("Justify") = "Right", "+ES_RIGHT ", "")
    ENDIF
    //ELSEIF oCtrl:cClass == "updown"
@@ -536,7 +536,7 @@ FUNCTION Style2Prg
    IF oCtrl:cClass == "trackbar"
       cStyle := cStyle + IIf(oCtrl:GetProp("TickStyle") = "Auto", "+ 1 ", ;
          IIf(oCtrl:GetProp("TickStyle") = "None", "+ 16", "+ 0"))
-      cStyle := cStyle + IIf(oCtrl:GetProp("TickMarks") = "Both" , "+ 8 " , ;
+      cStyle := cStyle + IIf(oCtrl:GetProp("TickMarks") = "Both", "+ 8 ", ;
          IIf(oCtrl:GetProp("TickMarks") = "Top", "+ 4", "+ 0"))
    ENDIF
    IF Len(Trim(cStyle)) > 0  //.AND. VAL(&(SubStr(cStyle, 1))) > 0
@@ -608,7 +608,7 @@ FUNCTION Ctrl2Prg
       nTop := oCtrl:nTop
       temp := oCtrl:oContainer
       DO WHILE temp != NIL
-         lGroup := IIf(temp:GetProp("NoGroup") != NIL .AND. temp:GetProp("NoGroup") == "True", .F. , .T.)
+         lGroup := IIf(temp:GetProp("NoGroup") != NIL .AND. temp:GetProp("NoGroup") == "True", .F., .T.)
          IF temp:lContainer
             nLeft -= temp:nLeft
             nTop -= temp:nTop
@@ -696,7 +696,7 @@ FUNCTION Ctrl2Prg
       IF oCtrl:cClass == "bitmap"
          IF (temp := oCtrl:GetProp("Bitmap")) != NIL
             // cImagem += " BACKGROUND BITMAP " + IIf(At(".", temp) != 0, "HBitmap():AddFile('" + temp + "') ", "HBitmap():AddResource('" + temp + "') ")
-            stroka += " ;" + _Chr(10) + Space(8) + "SHOW " + IIf(At(".", Trim(temp)) != 0 , "HBitmap():AddFile('" + temp + "') ", "'" + temp + "' ")
+            stroka += " ;" + _Chr(10) + Space(8) + "SHOW " + IIf(At(".", Trim(temp)) != 0, "HBitmap():AddFile('" + temp + "') ", "'" + temp + "' ")
             IF (temp := oCtrl:GetProp("lResource")) != NIL .AND. temp = "True"
                stroka += " FROM RESOURCE "
             ENDIF
@@ -995,7 +995,7 @@ FUNCTION Ctrl2Prg
                //
                IF oCtrl:cClass == "timer"
                   stroka := IIf(cName != NIL, " {|" + temp + "| " + ;
-                     IIf(Len(cName) == 1, cName[1], cName[2]) + " }" , " ")
+                     IIf(Len(cName) == 1, cName[1], cName[2]) + " }", " ")
                   cname := oCtrl:GetProp("Name")
                   temp := oCtrl:GetProp("value") //) != NIL
                   //ON INIT {|| oTimer1 := HTimer():New(otESTE,, 5000, {|| OtIMER1:END(), hwg_MsgInfo('oi'), enddialog() })}
@@ -1100,8 +1100,8 @@ FUNCTION Ctrl2Prg
 
    PRIVATE aClass := {"label", "button", "buttonex", "shadebutton", "checkbox", "radiobutton", ;
       "editbox", "group", "datepicker", "updown", "combobox", "line", "panel", ;
-      "toolbar", "ownerbutton", "browse", "page" , "radiogroup" , "bitmap", "animation", ;
-      "richedit", "monthcalendar", "tree", "trackbar", "progressbar", "status" , ;
+      "toolbar", "ownerbutton", "browse", "page", "radiogroup", "bitmap", "animation", ;
+      "richedit", "monthcalendar", "tree", "trackbar", "progressbar", "status", ;
       "timer", "listbox", "gridex", "menu", "link"}
 
    PRIVATE aName :=  {{"SAY"}, {"BUTTON"}, {"BUTTONEX"}, {"SHADEBUTTON"}, {"CHECKBOX", "GET CHECKBOX"}, {"RADIOBUTTON"}, ;
@@ -1382,7 +1382,7 @@ FUNCTION Ctrl2Prg
       ELSE
          nMaxId := 0
          FWrite(han, _Chr(10) + " MENU OF " + cformname + " ")
-         hwg_CallFunc("Menu2Prg", {aControls[i] , getmenu()})
+         hwg_CallFunc("Menu2Prg", {aControls[i], getmenu()})
          FWrite(han, _Chr(10) + " ENDMENU" + " " + _chr(10) + _chr(10))
       ENDIF
       i ++

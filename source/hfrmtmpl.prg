@@ -63,8 +63,8 @@ STATIC s_aCtrls := { ;
    "HProgressBar():New(oPrnt,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip)", ;
    "HshadeButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,lFlat,caption,color,font,xt,yt,bmp,lResour,xb,yb,widthb,heightb,lTr,trColor,cTooltip,lEnabled,shadeID,palette,granularity,highlight,coloring,shcolor)", ;
    "HListBox():New(oPrnt,nId,nInitValue,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,Items,oFont,onInit,onSize,onPaint,onChange,cTooltip)", ;
-   "HGridEx():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,onKeyDown,onPosChg,onDispInfo,nItemCout,lNoLines,TextColor,BackColor,lNoHeader,aBit,Items)" , ;
-   "HTimer():New(oPrnt,nId,nInterval, onAction)" , ;
+   "HGridEx():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,onKeyDown,onPosChg,onDispInfo,nItemCout,lNoLines,TextColor,BackColor,lNoHeader,aBit,Items)", ;
+   "HTimer():New(oPrnt,nId,nInterval, onAction)", ;
    "HStaticLink():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption,oFont,onInit,onSize,onPaint,cTooltip,TextColor,BackColor,lTransp,Link,VisitedColor,LinkColor,HoverColor)" ;
    }
 
@@ -392,13 +392,13 @@ METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
               At nLeft, nTop SIZE nWidth, nHeight ;
-              STYLE IIf(nstyle > 0 , nstyle, NIL) ;
+              STYLE IIf(nstyle > 0, nstyle, NIL) ;
               FONT oFont ;
               BACKGROUND BITMAP oBmp
       ELSEIF lMdiChild
          INIT WINDOW ::oDlg  MDICHILD TITLE cTitle    ;
               At nLeft, nTop SIZE nWidth, nHeight ;
-              STYLE IIf(nstyle > 0 , nstyle, NIL) ;
+              STYLE IIf(nstyle > 0, nstyle, NIL) ;
               FONT oFont ;
               BACKGROUND BITMAP oBmp
       ELSE
@@ -406,7 +406,7 @@ METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
               At nLeft, nTop SIZE nWidth, nHeight ;
               FONT oFont ;
               BACKGROUND BITMAP oBmp ;
-              STYLE IIf(nstyle > 0 , nstyle, NIL)
+              STYLE IIf(nstyle > 0, nstyle, NIL)
 
       ENDIF
    ENDIF
@@ -931,7 +931,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          //ELSEIF cPName == "brwtype"
          //  brwtype := xProperty
       ELSEIF cPName == "aarray"
-         caArray := IIf(xProperty != NIL .AND. !Empty(xProperty), &(xProperty) , {})
+         caArray := IIf(xProperty != NIL .AND. !Empty(xProperty), &(xProperty), {})
       ELSEIF cPName == "childorder"
          cKey := IIf(xProperty != NIL .AND. !Empty(xProperty), Trim(xProperty), "")
       ELSEIF cPName == "relationalexpr"
@@ -972,11 +972,11 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
          ladjright := xProperty
          // COLUNAS
       ELSEIF cPName == "heading"
-         cHeader := IIf(xProperty != NIL , xProperty , "")
+         cHeader := IIf(xProperty != NIL, xProperty, "")
       ELSEIF cPName == "fieldname"
-         fBlock := Lower(IIf(xProperty != NIL .AND. !Empty(xProperty), xProperty , FieldName(i)))
+         fBlock := Lower(IIf(xProperty != NIL .AND. !Empty(xProperty), xProperty, FieldName(i)))
       ELSEIF cPName == "fieldexpr"
-         fBlock := Lower(IIf(xProperty != NIL .AND. !Empty(xProperty), xProperty , fBlock))
+         fBlock := Lower(IIf(xProperty != NIL .AND. !Empty(xProperty), xProperty, fBlock))
          // IF !(cAlias == cTmpAlias) .AND. cTmpAlias $ cCampo
          //    cCampo := StrTran(cCampo, cTmpAlias, cAlias)
          //   ENDIF
@@ -1002,7 +1002,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             cPName := "c" + cPName
          ELSEIF cPName == "name"
             __mvPrivate(cPName)
-            cOName := IIf(oCtrlTmpl:cClass = "browse" .OR. oCtrlTmpl:cClass = "toolbar", xProperty , cOName)
+            cOName := IIf(oCtrlTmpl:cClass = "browse" .OR. oCtrlTmpl:cClass = "toolbar", xProperty, cOName)
          ENDIF
          /* Assigning the value of the property to the variable with
          the same name as the property */
@@ -1085,13 +1085,13 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                // m->nLength := &cTmpAlias->(fieldlen(ascan(j, temp)))
                // m->nLength := IIf(m->nLength == 0, IIf(type("&cCampo") = "C", Len(&cCampo), 10), m->nLength)
                m->nLength := &cAliasdbf->(fieldlen(AScan(j, temp)))
-               m->nLength := IIf(m->nLength == 0 , IIf(Type("&fblock") = "C", Len(&fBlock), 10), m->nLength)
+               m->nLength := IIf(m->nLength == 0, IIf(Type("&fblock") = "C", Len(&fBlock), 10), m->nLength)
             ENDIF
             m->nDec := &cAliasdbf->(FIELDDEC(AScan(j, temp)))
-            cHeader := IIf(cHeader == NIL .OR. Empty(cHeader) , temp, cHeader)
+            cHeader := IIf(cHeader == NIL .OR. Empty(cHeader), temp, cHeader)
             fBlock := {||&fBlock}
          ELSE  //IF brwtype == 1
-            m->nLength := IIf(m->nLength == NIL , 10, m->nLength)
+            m->nLength := IIf(m->nLength == NIL, 10, m->nLength)
             fBlock := IIf(fBlock == NIL, ".T.", fBlock)
             fBlock := IIf(cValType = "B", &fBlock, {||&fBlock})
          ENDIF

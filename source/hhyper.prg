@@ -293,7 +293,7 @@ RETURN -1
 METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
    LOCAL hInstance := hwg_ShellExecute(csLink, "open", NIL, NIL, 2)
-   //ShellExecute(NULL              , _T("open")                             , csLink.operator LPCTSTR(), NULL                                 , NULL                                   , 2);
+   //ShellExecute(NULL, _T("open"), csLink.operator LPCTSTR(), NULL, NULL, 2);
 
    IF hInstance < 33
       RETURN .F.
