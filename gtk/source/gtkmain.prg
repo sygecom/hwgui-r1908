@@ -69,10 +69,18 @@ Local oDlg, oBrw
 Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
 Local hDC, aMetr, width, height, screenh
 
-   IF cTitle == NIL; cTitle := ""; ENDIF
-   IF nLeft == NIL; nLeft := 10; ENDIF
-   IF nTop == NIL; nTop := 10; ENDIF
-   IF oFont == NIL; oFont := HFont():Add("Times", 0, 12); ENDIF
+   IF cTitle == NIL
+      cTitle := ""
+   ENDIF
+   IF nLeft == NIL
+      nLeft := 10
+   ENDIF
+   IF nTop == NIL
+      nTop := 10
+   ENDIF
+   IF oFont == NIL
+      oFont := HFont():Add("Times", 0, 12)
+   ENDIF
 
    IF HB_IsArray(arr[1])
       FOR i := 1 TO aLen

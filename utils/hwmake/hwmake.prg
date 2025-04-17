@@ -207,7 +207,9 @@ FUNCTION ReadBuildFile()
 Local cLibFiles, oBr1 := {}, oBr2 := {}, oBr3 := {}, oBr4 := {}, oSel1, oSel2, oSel3, i, oSel4
 Local aPal := ""
 Local cFolderFile := hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld")
-if empty(cFolderFile); RETURN NIL; Endif
+if empty(cFolderFile)
+   RETURN NIL
+Endif
 oStatus:SetTextPanel(1, cFolderFile)      
 oExeName:SetText(hwg_GetIni("Config", "ExeName", , cFolderFile))
 oLibFolder:SetText(hwg_GetIni("Config", "LibFolder", , cFolderFile))
@@ -303,7 +305,9 @@ RETURN cDest
 FUNCTION SaveBuildFile()
 Local cLibFiles, i, oNome, g
 Local cFolderFile := hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld")
-if empty(cFolderFile); RETURN NIL; Endif
+if empty(cFolderFile)
+   RETURN NIL
+Endif
 if file(cFolderFile)
    If(hwg_MsgYesNo("File " + cFolderFile + " EXIT ..Replace?"))
      Erase(cFolderFile)

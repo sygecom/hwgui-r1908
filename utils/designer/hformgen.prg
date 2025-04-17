@@ -177,7 +177,9 @@ METHOD End(lDlg, lCloseDes) CLASS HFormGen
    LOCAL oDlgSel
    MEMVAR oDesigner
 
-   IF lDlg == NIL; lDlg := .F.; ENDIF
+   IF lDlg == NIL
+      lDlg := .F.
+   ENDIF
    IF ::lChanged
       IF hwg_MsgYesNo(::name + " was changed. Save it ?", "Designer")
          ::Save()
@@ -226,7 +228,9 @@ METHOD Save(lAs) CLASS HFormGen
    PRIVATE oForm := Self
    PRIVATE aCtrlTable
 
-   IF lAs == NIL; lAs := .F.; ENDIF
+   IF lAs == NIL
+      lAs := .F.
+   ENDIF
    IF !::lChanged .AND. !lAs
       hwg_MsgStop("Nothing to save", "Designer")
       RETURN NIL

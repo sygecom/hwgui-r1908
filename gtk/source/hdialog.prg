@@ -122,7 +122,9 @@ Local hParent, oWnd
 
    hwg_CreateGetList(Self)
 
-   IF lNoModal == NIL ; lNoModal := .F. ; ENDIF
+   IF lNoModal == NIL
+      lNoModal := .F.
+   ENDIF
    ::lModal := !lNoModal
    ::lResult := .F.
    ::AddItem(Self, !lNoModal)
@@ -413,8 +415,12 @@ RETURN  hwg_DestroyWindow(oDlg:handle)
 FUNCTION hwg_SetDlgKey(oDlg, nctrl, nkey, block)
 Local i, aKeys
 
-   IF oDlg == NIL ; oDlg := HCustomWindow():oDefaultParent ; ENDIF
-   IF nctrl == NIL ; nctrl := 0 ; ENDIF
+   IF oDlg == NIL
+      oDlg := HCustomWindow():oDefaultParent
+   ENDIF
+   IF nctrl == NIL
+      nctrl := 0
+   ENDIF
 
    IF !__ObjHasMsg(oDlg, "KEYLIST")
       RETURN .F.

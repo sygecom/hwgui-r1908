@@ -260,7 +260,9 @@ FUNCTION hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
    IF lBitmap != NIL .OR. !Empty(lBitmap)
-      if lResource == NIL ;lResource := .F.; Endif
+      if lResource == NIL
+         lResource := .F.
+      Endif
       if !lResource 
          oBmp := HBitmap():AddFile(lBitmap)
       else

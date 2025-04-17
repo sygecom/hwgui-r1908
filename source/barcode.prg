@@ -36,7 +36,7 @@
    #define MATRIX25CHECK   17
 
 
-   //#xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; END (DEPRECATED)
+   //#xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; ENDIF (DEPRECATED)
 
 #xcommand @ < nTop >, < nLeft > BARCODE < oBC >   ;
 [DEVICE <hDC>                ] ;

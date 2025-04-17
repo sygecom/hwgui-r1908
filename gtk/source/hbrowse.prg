@@ -207,7 +207,7 @@ METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, 
                   bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
                   lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect) CLASS HBrowse
 
-   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE+ ;
+   nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + ;
                     IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+            ;
                     IIf(lNoVScroll == NIL .OR. !lNoVScroll, WS_VSCROLL, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
@@ -722,10 +722,18 @@ METHOD Paint() CLASS HBrowse
       RETURN NIL
    ENDIF
 
-   IF ::tcolor == NIL ; ::tcolor := 0 ; ENDIF
-   IF ::bcolor == NIL ; ::bcolor := hwg_VColor("FFFFFF") ; ENDIF
-   IF ::tcolorSel == NIL ; ::tcolorSel := hwg_VColor("FFFFFF") ; ENDIF
-   IF ::bcolorSel == NIL ; ::bcolorSel := hwg_VColor("808080") ; ENDIF
+   IF ::tcolor == NIL
+      ::tcolor := 0
+   ENDIF
+   IF ::bcolor == NIL
+      ::bcolor := hwg_VColor("FFFFFF")
+   ENDIF
+   IF ::tcolorSel == NIL
+      ::tcolorSel := hwg_VColor("FFFFFF")
+   ENDIF
+   IF ::bcolorSel == NIL
+      ::bcolorSel := hwg_VColor("808080")
+   ENDIF
 
    hDC := hwg_GetDC(::area)
 
@@ -1044,7 +1052,9 @@ METHOD LineOut(nstroka, vybfld, hDC, lSelected, lClear) CLASS HBrowse
    LOCAL aCores
 
    ::xpos := x := ::x1
-   IF lClear == NIL ; lClear := .F. ; ENDIF
+   IF lClear == NIL
+      lClear := .F.
+   ENDIF
 
    IF ::bLineOut != NIL
       Eval(::bLineOut, Self, lSelected)

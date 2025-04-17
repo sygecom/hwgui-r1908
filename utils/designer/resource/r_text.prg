@@ -168,7 +168,7 @@ ENDFUNC
            ENDIF
          ENDIF
       ELSE
-        cCaption += stroka+Chr(13)+chr(10)
+        cCaption += stroka + Chr(13) + chr(10)
         IF itemName == "FORM"
           DO WHILE !Empty(cFont := hwg_getNextVar(@stroka))
             AAdd(aVars, cFont)

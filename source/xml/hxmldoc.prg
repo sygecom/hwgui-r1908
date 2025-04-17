@@ -242,7 +242,7 @@ Local cEncod, i, s
          IF (cEncod := ::GetAttribute("encoding")) == NIL
             cEncod := "UTF-8"
          ENDIF
-         s := '<?xml version="1.0" encoding="'+cEncod+'"?>'+Chr(10)
+         s := '<?xml version="1.0" encoding="'+cEncod+'"?>' + Chr(10)
          IF fname != NIL
             FWrite(handle, s)
          ENDIF

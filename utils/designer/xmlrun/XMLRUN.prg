@@ -535,7 +535,7 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
        c := ""
 
        for i :=1 to nLen
-           c+= if(isdigit(subst(cPress, i, 1)), "9", "A")
+           c += if(isdigit(subst(cPress, i, 1)), "9", "A")
        next
 
        *:Kalau 2 Char Pertama Adalah Angka

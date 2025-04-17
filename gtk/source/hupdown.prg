@@ -50,9 +50,15 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ENDIF
    ::bSetGet := bSetGet
 
-   IF nLower != NIL ; ::nLower := nLower ; ENDIF
-   IF nUpper != NIL ; ::nUpper := nUpper ; ENDIF
-   IF nUpDWidth != NIL ; ::nUpDownWidth := nUpDWidth ; ENDIF
+   IF nLower != NIL
+      ::nLower := nLower
+   ENDIF
+   IF nUpper != NIL
+      ::nUpper := nUpper
+   ENDIF
+   IF nUpDWidth != NIL
+      ::nUpDownWidth := nUpDWidth
+   ENDIF
 
    ::Activate()
 

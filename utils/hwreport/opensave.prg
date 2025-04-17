@@ -244,9 +244,9 @@ Local lPrg := (Upper(hwg_FilExten(fname)) == "PRG"), cSource := "", vDummy, nFor
                nMode := 1
             ELSE
                IF aItem != NIL
-                  aItem[ITEM_SCRIPT] += stroka+Chr(13)+chr(10)
+                  aItem[ITEM_SCRIPT] += stroka + Chr(13) + chr(10)
                ELSE
-                  aPaintRep[FORM_VARS] += stroka+Chr(13)+chr(10)
+                  aPaintRep[FORM_VARS] += stroka + Chr(13) + chr(10)
                ENDIF
             ENDIF
          ELSEIF nMode == 10
@@ -493,7 +493,9 @@ STATIC FUNCTION WriteScript(han, cScript, lPrg)
 Local poz := 0, stroka, i
 Local lastC := Chr(10), cQuote, lFirst := .T.
 
-   IF lPrg == NIL; lPrg := .F.; ENDIF
+   IF lPrg == NIL
+      lPrg := .F.
+   ENDIF
    IF cScript != NIL .AND. !Empty(cScript)
       IF !lPrg
          FWrite(han, "#SCRIPT" + Chr(10))

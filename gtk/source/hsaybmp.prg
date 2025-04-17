@@ -34,7 +34,9 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctoolt)
 
    IF Image != NIL
-      IF lRes == NIL ; lRes := .F. ; ENDIF
+      IF lRes == NIL
+         lRes := .F.
+      ENDIF
       ::oImage := IIf(lRes .OR. HB_IsNumeric(Image), ;
                       HBitmap():AddResource(Image), ;
                       IIf(HB_IsChar(Image), ;
@@ -90,7 +92,9 @@ METHOD ReplaceBitmap(Image, lRes) CLASS HSayBmp
    IF ::oImage != NIL
       ::oImage:Release()
    ENDIF
-   IF lRes == NIL ; lRes := .F. ; ENDIF
+   IF lRes == NIL
+      lRes := .F.
+   ENDIF
    ::oImage := IIf(lRes .OR. HB_IsNumeric(Image), ;
                    HBitmap():AddResource(Image), ;
                    IIf(HB_IsChar(Image), ;

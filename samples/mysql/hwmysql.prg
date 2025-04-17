@@ -453,7 +453,9 @@ STATIC FUNCTION GetFromHistory()
    LOCAL i := oBrw:nCurrent
 
    IF !Empty(oBrw:aArray[i, 1])
-      DO WHILE !oBrw:aArray[i, 2]; i--; ENDDO
+      DO WHILE !oBrw:aArray[i, 2]
+         i--
+      ENDDO
       DO WHILE i <= oBrw:nRecords .AND. !Empty(oBrw:aArray[i, 1])
          cQuery += RTrim(oBrw:aArray[i, 1]) + Chr(13) + Chr(10)
          i++
