@@ -13,10 +13,10 @@
 
 REQUEST HWG_ENDWINDOW
 
-#define  FIRST_MDICHILD_ID     501
-#define  MAX_MDICHILD_WINDOWS   18
-#define  WM_NOTIFYICON         WM_USER + 1000
-#define  ID_NOTIFYICON           1
+#define FIRST_MDICHILD_ID     501
+#define MAX_MDICHILD_WINDOWS   18
+#define WM_NOTIFYICON         WM_USER + 1000
+#define ID_NOTIFYICON           1
 
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
 

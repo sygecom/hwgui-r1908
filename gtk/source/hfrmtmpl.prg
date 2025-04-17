@@ -51,7 +51,7 @@ STATIC s_aCtrls := { ;
 #include "hwgui.ch"
 #include "hxml.ch"
 
-#define  CONTROL_FIRST_ID   34000
+#define CONTROL_FIRST_ID   34000
 
 STATIC s_aPenType  := {"SOLID", "DASH", "DOT", "DASHDOT", "DASHDOTDOT"}
 STATIC s_aJustify  := {"Left", "Center", "Right"}

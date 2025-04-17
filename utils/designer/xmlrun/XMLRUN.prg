@@ -34,7 +34,7 @@
 
 #DEFINE FALSE .F.
 #DEFINE TRUE .T.
-#define  MAX_RECENT_FILES  5
+#define MAX_RECENT_FILES  5
 
 /*
 REQUEST GETA_OFPAN, pINf, saveArray, RestArray, SureN, SureC, SureD

@@ -18,7 +18,7 @@
 #include "hxml.ch"
 #include "extmodul.ch"
 
-#define  MAX_RECENT_FILES  8
+#define MAX_RECENT_FILES  8
 
 STATIC lOmmitMenuFile := .F.
 STATIC oMenuTool, oDlgx

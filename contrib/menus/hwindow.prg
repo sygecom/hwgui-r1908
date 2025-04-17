@@ -12,10 +12,10 @@
 #include <HBClass.ch>
 #include "guilib.ch"
 
-#define  FIRST_MDICHILD_ID     501
-#define  MAX_MDICHILD_WINDOWS   18
-#define  WM_NOTIFYICON         WM_USER + 1000
-#define  ID_NOTIFYICON           1
+#define FIRST_MDICHILD_ID     501
+#define MAX_MDICHILD_WINDOWS   18
+#define WM_NOTIFYICON         WM_USER + 1000
+#define ID_NOTIFYICON           1
 
 #define WM_MENUSELECT   287
 #define MF_HILITE       128

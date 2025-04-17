@@ -18,7 +18,7 @@
 
 REQUEST HWG_ENDWINDOW
 
-#define  CONTROL_FIRST_ID   34000
+#define CONTROL_FIRST_ID   34000
 
 //- HControl
 

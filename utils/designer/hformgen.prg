@@ -17,8 +17,8 @@
 
 #include "designer.ch"
 
-#define  LEFT_INDENT   40
-#define  TOP_INDENT    30
+#define LEFT_INDENT   40
+#define TOP_INDENT    30
 //NANDO
 STATIC oPenDivider, oPenLine
 //*-

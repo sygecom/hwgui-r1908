@@ -12,8 +12,8 @@
 #include <HBClass.ch>
 #include "guilib.ch"
 
-#define  MENU_FIRST_ID   32000
-#define  CONTEXTMENU_FIRST_ID   32900
+#define MENU_FIRST_ID   32000
+#define CONTEXTMENU_FIRST_ID   32900
 
 STATIC _aMenuDef, _oWnd, _aAccel, _nLevel, _Id, _oMenu
 
