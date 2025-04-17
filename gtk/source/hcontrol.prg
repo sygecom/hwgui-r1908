@@ -383,7 +383,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
                   bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor) CLASS HButton
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON)
-   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 90, nWidth),;
+   ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 90, nWidth), ;
               IIf(nHeight == NIL, 30, nHeight), oFont, bInit, ;
               bSize, bPaint, ctoolt, tcolor, bcolor)
 

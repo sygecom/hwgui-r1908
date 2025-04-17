@@ -56,8 +56,8 @@ CLASS HUpDown INHERIT HControl
    METHOD Valid()
    METHOD SetRange(nLower, nUpper)
    METHOD Move(x1, y1, width, height, nRepaint) INLINE ;                             // + hwg_GetClientRect(::hwndUpDown)[3] - 1
-                              ::Super:Move(x1, y1, IIf(width != NIL, width, ::nWidth), height, nRepaint) ,;
-                              hwg_SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0),;
+                              ::Super:Move(x1, y1, IIf(width != NIL, width, ::nWidth), height, nRepaint), ;
+                              hwg_SendMessage(::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0), ;
                               IIf(::lHide, ::Hide(), ::Show())
 
 ENDCLASS
@@ -128,7 +128,7 @@ METHOD Activate() CLASS HUpDown
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
       ::oEditUpDown := HEditUpDown():New(::oParent, ::id, val(::title), ::bSetGet, ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-           ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture,;
+           ::oFont, ::bInit, ::bSize, ::bPaint, ::bGetfocus, ::bLostfocus, ::tooltip, ::tcolor, ::bcolor, ::cPicture, ;
            ::lNoBorder, ::nMaxLength, , ::bKeyDown, ::bChange, ::bOther, ::controlsource)
       ::oEditUpDown:Name := "oEditUpDown"
       ::SetColor(::tColor, ::oEditUpDown:bColor)

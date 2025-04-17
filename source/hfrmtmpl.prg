@@ -927,7 +927,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       ELSEIF cPName == "interval"
          nInterval := xProperty
          // browse - colunas
-         //  "cOName:AddColumn(HColumn():New(cHeader, block, cType, nLen, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))",; //oBrw:AddColumn
+         //  "cOName:AddColumn(HColumn():New(cHeader, block, cType, nLen, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))", ; //oBrw:AddColumn
          //ELSEIF cPName == "brwtype"
          //  brwtype := xProperty
       ELSEIF cPName == "aarray"
@@ -1138,7 +1138,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
                j := (DBStruct())
                //AEval(aStruct, {|aField|QOUT(aField[DBS_NAME])})
                FOR i := 1 TO IIf(oCtrl:nColumns == 0, FCount(), oCtrl:nColumns)
-                  //"AddColumn(HColumn():New(cHeader, Fblock, cValType, nLength, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))",; //oBrw:AddColumn
+                  //"AddColumn(HColumn():New(cHeader, Fblock, cValType, nLength, nDec, lEdit, nJusHead, nJusLine, cPicture, bValid, bWhen, Items, bClrBlck, bHeadClick))", ; //oBrw:AddColumn
                   m->cHeader := FieldName(i)
                   m->fBlock := FieldBlock(FieldName(i))
                   m->cValType := j[i, 2]  //Type("FieldName(i)")

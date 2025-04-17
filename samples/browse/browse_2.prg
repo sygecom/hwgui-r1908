@@ -75,7 +75,7 @@ STATIC FUNCTION CreateDB()
       fErase("index02.ntx")
    ENDIF
 
-   DBCreate("test", {{"field_1", "N", 6, 0},;
+   DBCreate("test", {{"field_1", "N", 6, 0}, ;
                      {"field_2", "C", 40, 0}})
 
    USE test EXCLUSIVE
@@ -100,7 +100,7 @@ RETURN NIL
 
 FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
-   Default aAction To {},;
+   Default aAction To {}, ;
            aHide   To {}
 
    ASize(aAction, 10)

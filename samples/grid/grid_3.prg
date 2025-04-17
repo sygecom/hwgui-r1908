@@ -150,8 +150,8 @@ FUNCTION CriaBase()
             FErase("trash.dbf")
         END
 
-        DBCreate("trash.dbf", {{"code", "N", 10, 0},;
-                               {"creation", "D", 8, 0},;
+        DBCreate("trash.dbf", {{"code", "N", 10, 0}, ;
+                               {"creation", "D", 8, 0}, ;
                                {"descr", "C", 40, 0}})
 
         USE trash

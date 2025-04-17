@@ -159,7 +159,7 @@ CLASS HBrowse INHERIT HControl
    DATA nCursor   INIT 0
 
    METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, lNoBorder,;
+                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, lNoBorder, ;
                   lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect)
    METHOD InitBrw(nType)
    //METHOD Rebuild()
@@ -204,7 +204,7 @@ ENDCLASS
 
 //----------------------------------------------------//
 METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll,;
+                  bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
                   lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect) CLASS HBrowse
 
    nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE+ ;
@@ -349,9 +349,9 @@ Local aCoors, retValue := -1
          ::MouseMove(wParam, lParam)
 
       ELSEIF msg == WM_MOUSEWHEEL
-         ::MouseWheel(hwg_LOWORD(wParam),;
+         ::MouseWheel(hwg_LOWORD(wParam), ;
                           IIf(hwg_HIWORD(wParam) > 32768, ;
-                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)),;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
                           hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       ELSEIF msg == WM_DESTROY
          ::End()
@@ -498,9 +498,9 @@ Local aCoors, retValue := -1
          EXIT
 
       CASE WM_MOUSEWHEEL
-         ::MouseWheel(hwg_LOWORD(wParam),;
+         ::MouseWheel(hwg_LOWORD(wParam), ;
                           IIf(hwg_HIWORD(wParam) > 32768, ;
-                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)),;
+                          hwg_HIWORD(wParam) - 65535, hwg_HIWORD(wParam)), ;
                           hwg_LOWORD(lParam), hwg_HIWORD(lParam))
          EXIT
 
@@ -925,7 +925,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          // Ahora Titulos Justificados !!!
          cStr := oColumn:heading + ';'
          for nLine := 1 to ::nHeadRows
-            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine),;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine), ;
                oColumn:nJusHead  + if(oColumn:lSpandHead, DT_NOCLIP, 0))
          next
       endif
@@ -998,8 +998,8 @@ METHOD FooterOut(hDC) CLASS HBrowse
       if oColumn:footing != NIL
          cStr := oColumn:footing + ';'
          for nLine := 1 to ::nFootRows
-            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'),;
-               x, ::y1 + (::rowCount + nLine - 1) * (::height + 1) + 1, x + xSize - 1, ::y1 + (::rowCount + nLine) * (::height + 1),;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'), ;
+               x, ::y1 + (::rowCount + nLine - 1) * (::height + 1) + 1, x + xSize - 1, ::y1 + (::rowCount + nLine) * (::height + 1), ;
                oColumn:nJusLin + if(oColumn:lSpandFoot, DT_NOCLIP, 0))
          next
       endif

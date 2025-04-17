@@ -1489,7 +1489,7 @@ METHOD SetRefresh(nSeconds) CLASS HBrowse
       IF ::oTimer != NIL
          ::oTimer:Interval := nSeconds * 1000
       ELSEIF nSeconds > 0
-         SET TIMER ::oTimer OF ::GetParentForm() VALUE (nSeconds * 1000)  ACTION {||IIf(hwg_IsWindowVisible(::handle),;
+         SET TIMER ::oTimer OF ::GetParentForm() VALUE (nSeconds * 1000)  ACTION {||IIf(hwg_IsWindowVisible(::handle), ;
             (::internal[1] := 12, hwg_InvalidateRect(::handle, 0, ::x1, ::y1, ::x1 + ::xAdjRight, ;
             ::y1 + ::rowCount * (::height + 1) + 1)), NIL)}
       ENDIF
@@ -2184,7 +2184,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
 
    IF ::hTheme == NIL
       hwg_SelectObject(hDC, s_oPen64:handle)
-      hwg_Rectangle(hDC,;
+      hwg_Rectangle(hDC, ;
                ::x1 - ::nShowMark - ::nDeleteMark, ;
                ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight, ;
                ::x2, ;
@@ -2264,7 +2264,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
          // Prints the column heading - justified
          aItemRect := {x, ::y1 - (::nHeadHeight * ::nHeadRows) - ::nyHeight - 1, x + xSize, ::y1 + 1}
          IF !oColumn:lHeadClick
-            state := IIf(::hTheme != NIL, IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3,;
+            state := IIf(::hTheme != NIL, IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, ;
                                                 PBS_HOT, PBS_NORMAL), PBS_NORMAL)
             s_axPosMouseOver := IIf(::xPosMouseOver > x .AND. ::xPosMouseOver < x + xsize - 3, {x, x + xsize}, s_axPosMouseOver)
          ELSE
@@ -2705,12 +2705,12 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
       IF ::lShowMark
          IF ::hTheme != NIL
              hwg_DrawThemeBackground(::hTheme, hDC, BP_PUSHBUTTON, IIf(lSelected, PBS_VERTICAL, PBS_VERTICAL), ;
-                      {::x1 - ::nShowMark - ::nDeleteMark - 1,;
+                      {::x1 - ::nShowMark - ::nDeleteMark - 1, ;
                        ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                        ::x1 - ::nDeleteMark, ;
                        ::y1 + (::height + 1) * ::nPaintRow + 1}, NIL)
           ELSE
-             hwg_DrawButton(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 0,;
+             hwg_DrawButton(hDC, ::x1 - ::nShowMark - ::nDeleteMark - 0, ;
                          ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
                          ::x1 - ::nDeleteMark - 1, ; //IIf(::lDeleteMark, -1, -2), ;
                          ::y1 + (::height + 1) * ::nPaintRow + 1, 1)
@@ -2719,7 +2719,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                         ::x1  - ::nDeleteMark - 1, ::y1 + (::height + 1) * ::nPaintRow - 0) //, IIf(Deleted(), hwg_GetStockObject(7), ::brush:handle))
           ENDIF
           IF lSelected
-             hwg_DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1,;
+             hwg_DrawTransparentBitmap(hDC, ::oBmpMark:handle, ::x1 - ::nShowMark - ::nDeleteMark + 1, ;
                           (::y1 + (::height + 1) * (::nPaintRow - 1)) + ;
                           ((::y1 + (::height + 1) * (::nPaintRow)) - (::y1 + (::height + 1) * (::nPaintRow - 1))) / 2 - 6)
              IF ::HighlightStyle == 2 .OR. ((::HighlightStyle == 0 .AND. hwg_SelfFocus(::handle)) .OR. ;
@@ -2731,7 +2731,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                    hwg_SelectObject(hDC, oPen:handle)
                    hwg_RoundRect(hDC, ::x1, ;
                                  ::y1 + (::height + 1) * (::nPaintRow - 1) + 1, ;
-                                 ::xAdjRight - 2,;  // ::x2 - 1, ;
+                                 ::xAdjRight - 2, ;  // ::x2 - 1, ;
                                  ::y1 + (::height + 1) * ::nPaintRow, 0, 0)
                    hwg_DeleteObject(oPen)
                    IF ((::Highlight .OR. !::lEditable) .AND. nCol == 0) .OR. (::HighlightStyle == 3 .AND. !hwg_SelfFocus(::handle))
@@ -2779,7 +2779,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
                    ::aColumns[::nPaintCol]:brush := HBrush():Add(::aColumns[::nPaintCol]:bColor)
                 ENDIF
                  //hBReal := IIf(::aColumns[::nPaintCol]:brush != NIL .AND. (::nPaintCol != ::colPos .OR. !lSelected), ;
-                 hBReal := IIf(::aColumns[::nPaintCol]:brush != NIL .AND. !(lSelected .AND. Empty(aCores)),;
+                 hBReal := IIf(::aColumns[::nPaintCol]:brush != NIL .AND. !(lSelected .AND. Empty(aCores)), ;
                           ::aColumns[::nPaintCol]:brush:handle, oLineBrush:handle)
              ENDIF
              // Fill background color of a cell

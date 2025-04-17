@@ -192,7 +192,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
    HB_SYMBOL_UNUSED(ncStyle)
 
    ::bPaint   := {|o, p|o:paint(p)}
-   ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, ,;
+   ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, , ;
               bInit, bSize, ::bPaint, , tcolor, bColor) //= NIL
 
    //::title := ""
@@ -321,7 +321,7 @@ CLASS HContainer INHERIT HControl
    DATA xVisible  INIT .T. HIDDEN
    DATA lTABSTOP INIT .F. HIDDEN
 
-   METHOD New(oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
+   METHOD New(oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize, ;
                lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther)  //, bClick, bDblClick)
 
    METHOD Activate()
@@ -333,7 +333,7 @@ CLASS HContainer INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
+METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize, ;
             lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)
 
     ::lTABSTOP :=  nStyle == WS_TABSTOP

@@ -27,7 +27,7 @@ CLASS HRadioGroup INHERIT HControl //HObject
 
    METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle)
    METHOD Newrg(oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
-              cCaption, oFont, bInit, bSize, tcolor, bColor, bClick,;
+              cCaption, oFont, bInit, bSize, tcolor, bColor, bClick, ;
               bGFocus, lTransp)
    METHOD EndGroup(nSelected)
    METHOD SetValue(nValue)
@@ -69,7 +69,7 @@ METHOD New(vari, bSetGet, bInit, bClick, bGFocus, nStyle) CLASS HRadioGroup
    RETURN Self
 
 METHOD NewRg(oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
-             cCaption, oFont, bInit, bSize, tcolor, bColor, bClick,;
+             cCaption, oFont, bInit, bSize, tcolor, bColor, bClick, ;
              bGFocus, lTransp) CLASS HRadioGroup
 
    ::oGroupCurrent := Self

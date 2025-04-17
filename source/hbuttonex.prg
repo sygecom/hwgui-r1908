@@ -882,8 +882,8 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
    uStyleTmp := hwg_GetWindowStyle(::handle)
    itemRectOld := aclone(itemRect)
    IF hb_BitAnd(uStyleTmp, BS_MULTILINE) != 0 .AND. !Empty(::caption) .AND. ;
-      INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect[1], itemRect[2],;
-          itemRect[3] - IIf(::iStyle == ST_ALIGN_VERT, 0, aBmpSize[1] + 8),;
+      INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect[1], itemRect[2], ;
+          itemRect[3] - IIf(::iStyle == ST_ALIGN_VERT, 0, aBmpSize[1] + 8), ;
           itemRect[4], DT_CALCRECT + uAlign + DT_WORDBREAK, itemRectOld))
       //-INT(aTxtSize[2]) !=  INT(hwg_DrawText(dc, ::caption, itemRect, DT_CALCRECT + uAlign + DT_WORDBREAK))
       uAlign += DT_WORDBREAK

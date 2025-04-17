@@ -8,7 +8,7 @@
 // Demo for Browse using bColorBlock
 //
 //       oBrowse:aColumns[1]:bColorBlock := {||IIf(nNumber < 0, ;
-//       {textColor, backColor, textColorSel, backColorSel} ,;
+//       {textColor, backColor, textColorSel, backColorSel}, ;
 //       {textColor, backColor, textColorSel, backColorSel})}
 //
 //       bColorBlock must return an array containing four colors values
@@ -168,7 +168,7 @@ STATIC FUNCTION BrwDbs(lEdit, lZebra)
         END
 
 //      {||IIf(nNumber < 0, ;
-//       {tColor, bColor, tColorSel, bColorSel} ,;
+//       {tColor, bColor, tColorSel, bColorSel}, ;
 //       {tColor, bColor, tColorSel, bColorSel})}
 
         IF lEdit
@@ -181,7 +181,7 @@ STATIC FUNCTION BrwDbs(lEdit, lZebra)
            {x_BLACK, x_WHITE, x_WHITE, x_DARKBLUE})}
           IF lZebra
              FOR nI := 2 TO 5
-                oBrwDB:aColumns[nI]:bColorBlock := {||IIf(MOD(oBrwDB:nPaintRow, 2) = 0,;
+                oBrwDB:aColumns[nI]:bColorBlock := {||IIf(MOD(oBrwDB:nPaintRow, 2) = 0, ;
                       {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE}, ;
                       {x_BLACK, x_WHITE, x_WHITE, x_DARKBLUE})}
              NEXT
@@ -402,7 +402,7 @@ STATIC FUNCTION BrwArr(lEdit, lZebra)
            {x_BLUE, x_WHITE, x_WHITE, x_BLUE})}
           IF lZebra
              FOR nI := 2 TO 5
-                oBrwArr:aColumns[nI]:bColorBlock := {||IIf(MOD(oBrwArr:nCurrent, 2) = 0,;
+                oBrwArr:aColumns[nI]:bColorBlock := {||IIf(MOD(oBrwArr:nCurrent, 2) = 0, ;
                        {x_BLACK, x_GRAY, x_CYAN, x_DARKBLUE}, ;
                        {x_BLACK, x_WHITE, x_WHITE, x_DARKBLUE})}
              NEXT

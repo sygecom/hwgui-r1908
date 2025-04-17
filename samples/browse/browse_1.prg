@@ -139,11 +139,11 @@ STATIC FUNCTION CreateDB()
       FErase("browse_1.dbf")
    end
 
-   DBCreate("browse_1", {{"code", "N", 6, 0},;
-                         {"desc", "C", 40, 0},;
-                         {"list", "N", 1, 0},;
-                         {"creation", "D", 8, 0},;
-                         {"status", "L", 1, 0},;
+   DBCreate("browse_1", {{"code", "N", 6, 0}, ;
+                         {"desc", "C", 40, 0}, ;
+                         {"list", "N", 1, 0}, ;
+                         {"creation", "D", 8, 0}, ;
+                         {"status", "L", 1, 0}, ;
                          {"price", "N", 10, 2}})
 
    USE browse_1 EXCLUSIVE

@@ -35,9 +35,9 @@
             [ ON UPDATE <bUpdate> ]    ;
             [ ON KEYDOWN <bKeyDown> ]  ;
           => ;
-    [<oBrw> :=] PBrowse():New(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, 0)),;
+    [<oBrw> :=] PBrowse():New(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, 0)), ;
         <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,<bSize>, ;
-        <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
+        <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>, ;
         <.lAutoedit.>, <bUpdate>, <bKeyDown>)
 
 STATIC oCombo, oBrw1, oBrw2
@@ -152,12 +152,12 @@ METHOD Edit(wParam, lParam) CLASS PBrowse
 
            @ x1, y1 - 2 BUTTON oBtn CAPTION "..." OF oBrw1;
             SIZE 13, ::height + 6  ;
-            ON CLICK {||(varbuf := IIF (aDataDef[j, 1] == "filename",;
+            ON CLICK {||(varbuf := IIF (aDataDef[j, 1] == "filename", ;
                     hwg_SelectFile("Animation Files( *.avi )", "*.avi"), IIf(aDataDef[j, 1] == "filedbf", ;
                     hwg_SelectFile({"xBase Files( *.dbf)", " All Files( *.*)"}, {"*.dbf", "*.*"}), ;
                     hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )", ;
                       "*.jpg;*.gif;*.bmp;*.ico")))), ;
-                   IIf(!Empty(varbuf), oGet:refresh(), NIL)} //,;
+                   IIf(!Empty(varbuf), oGet:refresh(), NIL)} //, ;
                   *   VldBrwGet(oGet)} //, hwg_PostMessage(oBtn:handle, WM_CLOSE, 0, 0)}
                   // : END LFB
             //varbuf := hwg_SelectFile("All files ( *.* )", "*.*")

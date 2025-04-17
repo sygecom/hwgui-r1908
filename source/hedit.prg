@@ -1694,7 +1694,7 @@ FUNCTION hwg_GetSkip(oParent, hCtrl, lClipper, nSkip)
 
    IF nSkip != 0
       nextHandle := IIf(oParent:className == "HTAB", NextFocusTab(oParent, hCtrl, nSkip), ;
-                 IIf(oParent:className == oForm:ClassName, NextFocus(oParent, hCtrl, nSkip),;
+                 IIf(oParent:className == oForm:ClassName, NextFocus(oParent, hCtrl, nSkip), ;
                       NextFocuscontainer(oParent, hCtrl, nSkip)))
    //nextHandle := IIf(oParent:className == "HTAB", NextFocusTab(oParent, hCtrl, nSkip), ;
    //                   NextFocus(oParent, hCtrl, nSkip))

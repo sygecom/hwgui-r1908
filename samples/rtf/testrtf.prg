@@ -151,9 +151,9 @@ FUNCTION TestRtf()
          CELLBORDERS SINGLE ;          // Outline cells with thin border
          COLSHADE aMarca;               // Sombras en columnas
          HEADERROWS 2;                // dos lineas de titulos
-                        HEADER {"Sala", "Generador", "", "", "", "", "ACTIVIDAD",;
-                        "NºEXPOSICIONES AÑO POR TUBO", "CARGA DE TRABAJO mA. min/semana"},;
-         {"", "Marca", "Modelo", "Tension Pico (kVp)", "Intensidad (mA)",;
+                        HEADER {"Sala", "Generador", "", "", "", "", "ACTIVIDAD", ;
+                        "NºEXPOSICIONES AÑO POR TUBO", "CARGA DE TRABAJO mA. min/semana"}, ;
+         {"", "Marca", "Modelo", "Tension Pico (kVp)", "Intensidad (mA)", ;
          "Nº Tubos", "", "", ""};       // Titulos. Cada linea es una matriz
          HEADERSHADE 0;
          HEADERFONTSIZE 10;

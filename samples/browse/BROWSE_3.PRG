@@ -92,7 +92,7 @@ STATIC FUNCTION Teste_CreateColumn(oBrw, oCol, oHead, oAr, seq, oType, oLen, oDe
    LOCAL i
    LOCAL nArea := &oAr->(select())
 
-   oBrw:AddColumn(HColumn():New(oHead ,;
+   oBrw:AddColumn(HColumn():New(oHead, ;
                                      FieldWBlock(oCol, nArea), ;
                                      oType, oLen, oDec, .F.))
                                     //"C", 30, 2

@@ -310,7 +310,7 @@ METHOD Calculando(cNumero) CLASS HCalculator
         nCalculo2 := ::aOperando[2]
         ::aOperando[1] := &("nCalculo1" + cOperar + "nCalculo2")
       EndIf
-      ::aOperando[1] := IIf(::aOperando[1] - Int(::aOperando[1]) = 0 ,;
+      ::aOperando[1] := IIf(::aOperando[1] - Int(::aOperando[1]) = 0, ;
                           Int(::aOperando[1]), ::aOperando[1])
       oForm:oVisor:Caption := LTrim(Str(::aOperando[1]))
       ::aOperando[3] := ::aOperando[2]

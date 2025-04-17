@@ -29,7 +29,7 @@ CLASS HTab INHERIT HControl
    DATA  bAction
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC,;
+                  oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, ;
                   bClick, bGetFocus, bLostFocus)
    METHOD Activate()
    METHOD Init()

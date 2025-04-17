@@ -60,7 +60,7 @@ CLASS HWindow INHERIT HCustomWindow
    //METHOD New(Icon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
    //       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId)
    METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId)
    METHOD AddItem(oWnd)
    METHOD DelItem(oWnd)
@@ -73,7 +73,7 @@ CLASS HWindow INHERIT HCustomWindow
 ENDCLASS
 
 METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId) CLASS HWindow
 
    HB_SYMBOL_UNUSED(clr)
@@ -299,7 +299,7 @@ RETURN -1
 CLASS HChildWindow INHERIT HWindow
 
    METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                     bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                     bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                      cAppName, oBmp, cHelp, nHelpId)
    METHOD Activate(lShow)
    METHOD onEvent(msg, wParam, lParam)
@@ -307,7 +307,7 @@ CLASS HChildWindow INHERIT HWindow
 ENDCLASS
 
 METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
-                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther,;
+                  bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId) CLASS HChildWindow
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
