@@ -338,10 +338,10 @@ Local nAt, i, masklen, cChar
       ELSEIF oEdit:cType == "N"
          vari := Str(vari)
          IF (nAt := At(".", vari)) > 0
-            oEdit:cPicMask := Replicate('9', nAt - 1) + "." + ;
-                  Replicate('9', Len(vari) - nAt)
+            oEdit:cPicMask := Replicate("9", nAt - 1) + "." + ;
+                  Replicate("9", Len(vari) - nAt)
          ELSE
-            oEdit:cPicMask := Replicate('9', Len(vari))
+            oEdit:cPicMask := Replicate("9", Len(vari))
          ENDIF
       ENDIF
    ENDIF

@@ -500,15 +500,15 @@ FUNCTION BuildBat()
              oInc := '/I"' + voIncFolder + '"'
           endif   
           FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"" + vHarbour + "\INCLUDE" /I"" + vPelles + "\INCLUDE" /I"" + vPelles + "\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" ' + oInc + ' /D"HB_STATIC_STARTUP" /c' + CRF)
-       endif   
+       endif
    Next
    Endif
-   
-   if Len(voResFiles) > 0 
+
+   if Len(voResFiles) > 0
    oInc := ""
    for i := 1 to Len(voResFiles)
      if !Empty(voResFiles[i])
-        FWrite(oArq, vPelles + "\BIN\porc -r " + voResFiles[i] + ' -foobj\' + voExeName + CRF)
+        FWrite(oArq, vPelles + "\BIN\porc -r " + voResFiles[i] + " -foobj\" + voExeName + CRF)
      EndIf   
    Next
    EndIf 

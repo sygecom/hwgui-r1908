@@ -551,7 +551,7 @@ STATIC FUNCTION InitColumn(oBrw, oColumn, n)
       oColumn:type := ValType(Eval(oColumn:block, , oBrw, n))
    endif 
    if oColumn:dec == NIL 
-      if oColumn:type == "N" .AND. At('.', Str(Eval(oColumn:block, , oBrw, n))) != 0
+      if oColumn:type == "N" .AND. At(".", Str(Eval(oColumn:block, , oBrw, n))) != 0
          oColumn:dec := Len(SubStr(Str(Eval(oColumn:block, , oBrw, n)), ;
                At(".", Str(Eval(oColumn:block, , oBrw, n))) + 1))
       else
@@ -904,28 +904,28 @@ METHOD HeaderOut(hDC) CLASS HBrowse
                oPenHdr := HPen():Add(BS_SOLID, 1, 0)
             endif
             hwg_SelectObject(hDC, oPenHdr:handle)
-            cStr := oColumn:cGrid + ';'
+            cStr := oColumn:cGrid + ";"
             for nLine := 1 to ::nHeadRows
-               cNWSE := hb_tokenGet(@cStr, nLine, ';')
-               if At('S', cNWSE) != 0
+               cNWSE := hb_tokenGet(@cStr, nLine, ";")
+               if At("S", cNWSE) != 0
                   hwg_DrawLine(hDC, x - 1, ::y1 - (::height) * (::nHeadRows - nLine), x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine))
                endif
-               if At('N', cNWSE) != 0
+               if At("N", cNWSE) != 0
                   hwg_DrawLine(hDC, x - 1, ::y1 - (::height) * (::nHeadRows - nLine + 1), x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine + 1))
                endif
-               if At('E', cNWSE) != 0
+               if At("E", cNWSE) != 0
                   hwg_DrawLine(hDC, x + xSize - 2, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 2, ::y1 - (::height) * (::nHeadRows - nLine))
                endif
-               if At('W', cNWSE) != 0
+               if At("W", cNWSE) != 0
                   hwg_DrawLine(hDC, x - 1, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x - 1, ::y1 - (::height) * (::nHeadRows - nLine))
                endif
             next
             hwg_SelectObject(hDC, oPen:handle)
          endif
          // Ahora Titulos Justificados !!!
-         cStr := oColumn:heading + ';'
+         cStr := oColumn:heading + ";"
          for nLine := 1 to ::nHeadRows
-            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'), x, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine), ;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), x, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine), ;
                oColumn:nJusHead  + if(oColumn:lSpandHead, DT_NOCLIP, 0))
          next
       endif
@@ -996,9 +996,9 @@ METHOD FooterOut(hDC) CLASS HBrowse
          xSize := Max(::x2 - x, xSize)
       endif
       if oColumn:footing != NIL
-         cStr := oColumn:footing + ';'
+         cStr := oColumn:footing + ";"
          for nLine := 1 to ::nFootRows
-            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ';'), ;
+            hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                x, ::y1 + (::rowCount + nLine - 1) * (::height + 1) + 1, x + xSize - 1, ::y1 + (::rowCount + nLine) * (::height + 1), ;
                oColumn:nJusLin + if(oColumn:lSpandFoot, DT_NOCLIP, 0))
          next
@@ -2052,7 +2052,7 @@ STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
 Local nL, nPos := 0
 
    nMaxLen := nCount := 0
-   cStr += ';'
+   cStr += ";"
    while (nL := Len(hb_tokenPtr(@cStr, @nPos, ";"))) != 0
       nMaxLen := Max(nMaxLen, nL)
       nCount ++

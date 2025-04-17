@@ -261,7 +261,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
                ENDIF
             ELSE   
               #ifdef __SYGECOM__
-              HWG_MSGINFO('Esse campo não permite a Opção Colar', "Aviso do Sistema")
+              HWG_MSGINFO("Esse campo não permite a Opção Colar", "Aviso do Sistema")
               #endif
             ENDIF  
             RETURN 0

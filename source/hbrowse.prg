@@ -3989,7 +3989,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
                   SIZE nWidth - IIf(oColumn:bClick != NIL, 16, 1), ::height   ;
                   NOBORDER                       ;
                   STYLE ES_AUTOHSCROLL           ;
-                  TOOLTIP 'Prescione Enter para validar';
+                  TOOLTIP "Prescione Enter para validar" ;
                   FONT ::oFont                   ;
                   PICTURE IIf(Empty(oColumn:picture), NIL, oColumn:picture)   ;
                   VALID {|oColumn, oGet|::ValidColumn(oColumn, oGet, oBtn)};
@@ -4026,7 +4026,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
             ELSE
                oGet1 := ::varbuf
                #ifdef __SYGECOM__
-               @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid TOOLTIP 'Prescione Enter para validar'
+               @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid TOOLTIP "Prescione Enter para validar"
                #else
                @ 10, 10 Get oGet1 SIZE oModDlg:nWidth - 20, 240 FONT ::oFont Style WS_VSCROLL + WS_HSCROLL + ES_MULTILINE VALID oColumn:bValid
                #endif

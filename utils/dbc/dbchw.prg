@@ -686,8 +686,8 @@ LOCAL bOldError, oError
       ENDIF
       SELECT(improc)
       alsname := IIf(alsname == NIL, hwg_CutExten(hwg_CutPath(fname)), Trim(hwg_CutExten(hwg_CutPath(alsname))))
-      IF (i := AT('~', alsname)) != 0
-         alsname := Stufmy(alsname, i, 1, '_')
+      IF (i := AT("~", alsname)) != 0
+         alsname := Stufmy(alsname, i, 1, "_")
       ENDIF
       bOldError := ERRORBLOCK({|e|OpenError(e)})
       DO WHILE .T.

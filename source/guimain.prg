@@ -169,7 +169,7 @@ FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle, cResIni)
 
    @ 20, 10 SAY cText SIZE 260, 22
    #ifdef __SYGECOM__
-   @ 20, 35 GET cRes  SIZE 260, 26 STYLE WS_TABSTOP + ES_AUTOHSCROLL + nStyle TOOLTIP 'Pressione ESC para cancelar' 
+   @ 20, 35 GET cRes  SIZE 260, 26 STYLE WS_TABSTOP + ES_AUTOHSCROLL + nStyle TOOLTIP "Pressione ESC para cancelar"
    #else
    @ 20, 35 GET cRes  SIZE 260, 26 STYLE WS_TABSTOP + ES_AUTOHSCROLL + nStyle
    #endif
