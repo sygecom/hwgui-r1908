@@ -84,7 +84,7 @@ STATIC FUNCTION Graph3()
 
    aGraph[1] := {}
    FOR i := 1 TO 6
-      AAdd(aGraph[1], i*i)
+      AAdd(aGraph[1], i * i)
    NEXT
 
    INIT DIALOG oModDlg CLIPPER TITLE "Graph"        ;

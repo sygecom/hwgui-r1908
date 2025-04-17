@@ -78,7 +78,7 @@ Local hDC := hwg_GetDC(::handle)
                ::nOffsetV, ::nWidth, ::nHeight)
       ELSE
          hwg_DrawBitmap(hDC, ::oImage:handle,, ::nOffsetH, ;
-               ::nOffsetV, ::oImage:nWidth*::nZoom, ::oImage:nHeight*::nZoom)
+               ::nOffsetV, ::oImage:nWidth * ::nZoom, ::oImage:nHeight * ::nZoom)
       ENDIF
    ENDIF
    hwg_releaseDC(::handle, hDC)

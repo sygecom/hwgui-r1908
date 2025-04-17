@@ -362,7 +362,7 @@ METHOD CreateDialog(aProp) CLASS HFormGen
       ::oDlg:style := hwg_BitOr(::oDlg:style, WS_VSCROLL + WS_HSCROLL + WS_MAXIMIZEBOX)
 
       @ LEFT_INDENT, TOP_INDENT PANEL oPanel ;
-        SIZE Round(::nPWidth*::nKoeff, 0)-1, Round(::nPHeight*::nKoeff, 0)-1 ;
+        SIZE Round(::nPWidth * ::nKoeff, 0)-1, Round(::nPHeight * ::nKoeff, 0)-1 ;
         ON SIZE {||.T.} ON PAINT {|o|PaintPanel(o)}
       oPanel:brush := 0
       @ 0, 0 PANEL OF oPanel SIZE oPanel:nWidth, oPanel:nHeight ;
@@ -443,7 +443,7 @@ STATIC FUNCTION dlgOnSize(oDlg, h, w)
       IF  h=aCoors[3] .AND. w=aCoors[4]
          oDlg:oParent:SetProp("Width", LTrim(Str(oDlg:nWidth := aCoors[3])))
          oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight := aCoors[4])))
-         *oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight := aCoors[4] + 21 - 21)))
+         //oDlg:oParent:SetProp("Height", LTrim(Str(oDlg:nHeight := aCoors[4] + 21 - 21)))
      ELSE
        hwg_RedrawWindow(oDlg:handle, RDW_ERASE + RDW_INVALIDATE)
        oDlg:show()
@@ -990,8 +990,8 @@ STATIC FUNCTION PaintDlg(oDlg)
       // hwg_SelectObject(hDC, oPenLine:handle)
       hwg_SelectObject(hDC, oDlg:oFont:handle)
       oldBkColor := hwg_SetBkColor(hDC, hwg_GetSysColor(COLOR_3DLIGHT))
-      DO WHILE i*n1cm < (aCoors[3] - aCoors[1] - LEFT_INDENT)
-         xt := x1 + i*n1cm
+      DO WHILE i * n1cm < (aCoors[3] - aCoors[1] - LEFT_INDENT)
+         xt := x1 + i * n1cm
          hwg_DrawLine(hDC, xt + Round(n1cm / 4, 0), 0, xt + Round(n1cm / 4, 0), 4)
          hwg_DrawLine(hDC, xt + Round(n1cm / 2, 0), 0, xt + Round(n1cm / 2, 0), 8)
          hwg_DrawLine(hDC, xt + Round(n1cm * 3 / 4, 0), 0, xt + Round(n1cm * 3 / 4, 0), 4)
@@ -1002,8 +1002,8 @@ STATIC FUNCTION PaintDlg(oDlg)
          i++
       ENDDO
       i := 0
-      DO WHILE i*n1cm < (aCoors[4] - aCoors[2] - TOP_INDENT)
-         yt := y1 + i*n1cm
+      DO WHILE i * n1cm < (aCoors[4] - aCoors[2] - TOP_INDENT)
+         yt := y1 + i * n1cm
          hwg_DrawLine(hDC, 0, yt + Round(n1cm / 4, 0), 4, yt + Round(n1cm / 4, 0))
          hwg_DrawLine(hDC, 0, yt + Round(n1cm / 2, 0), 8, yt + Round(n1cm / 2, 0))
          hwg_DrawLine(hDC, 0, yt + Round(n1cm * 3 / 4, 0), 4, yt + Round(n1cm * 3 / 4, 0))

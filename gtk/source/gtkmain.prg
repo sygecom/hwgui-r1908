@@ -88,10 +88,10 @@ Local hDC, aMetr, width, height, screenh
    hwg_SelectObject(hDC, ofont:handle)
    aMetr := hwg_GetTextMetric(hDC)
    hwg_ReleaseDC(hwg_GetActiveWindow(), hDC)
-   height := (aMetr[1] + 1)*aLen + 4 + addY
+   height := (aMetr[1] + 1) * aLen + 4 + addY
    screenh := hwg_GETDESKTOPHEIGHT()
-   IF height > screenh * 2/3
-      height := Int(screenh *2/3)
+   IF height > screenh * 2 / 3
+      height := Int(screenh * 2 / 3)
       addX := addY := 0
       HB_SYMBOL_UNUSED(addY)
    ENDIF

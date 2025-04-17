@@ -1903,7 +1903,7 @@ ENDIF
    ::x1 := aCoors[1] +  ::nShowMark + ::nDeleteMark
    ::y1 := aCoors[2] + IIf(::lDispHead, ::nHeadHeight * ::nHeadRows, 0)
    ::x2 := aCoors[3]
-   ::y2 := aCoors[4] // - IIf(::nFootRows > 0, ::nFootHeight*::nFootRows, 0)
+   ::y2 := aCoors[4] // - IIf(::nFootRows > 0, ::nFootHeight * ::nFootRows, 0)
    //--::xAdjRight := ::x2
    IF ::lRepaintBackground
       //hwg_FillRect(hDC, ::x1 - ::nDeleteMark, ::y1, ::x2, ::y2 - (::nFootHeight * ::nFootRows), ::brush:handle)

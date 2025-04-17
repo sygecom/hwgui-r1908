@@ -80,7 +80,7 @@ Local i := AScan(::aAttr, {|a|a[1] == cName})
 RETURN .T.
 
 METHOD Save(handle, level) CLASS HXMLNode
-Local i, s := Space(level*2) + "<", lNewLine
+Local i, s := Space(level * 2) + "<", lNewLine
 
    IF !__mvExist("HXML_NEWLINE")
       __mvPrivate("HXML_NEWLINE")

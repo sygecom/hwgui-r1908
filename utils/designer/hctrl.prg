@@ -302,22 +302,22 @@ FUNCTION ctrlOnSize(oCtrl, x, y)
    ENDIF
 
    IF oCtrl:Adjust == 5
-      *-IF oCtrl:oParent:nTop != NIL
+      //-IF oCtrl:oParent:nTop != NIL
         FOR i=1 to Len(acontrols)
           oCtrls := aControls[i]
-              *-hwg_MsgInfo(STR(oCtrl:oParent:nTop) + "-" + STR(oCtrl:nTop)) // + "-" + STR(oCtrl:oparent:oParent:nTop))
+              //-hwg_MsgInfo(STR(oCtrl:oParent:nTop) + "-" + STR(oCtrl:nTop)) // + "-" + STR(oCtrl:oparent:oParent:nTop))
               IF oCtrls:cClass = "browse" .AND. (oCtrl:nTop > oCtrls:nTop .AND. oCtrl:nTop < oCtrls:nTop + oCtrls:nHeight)
                  oCtrl:Move(oCtrl:nLeft, oCtrls:nTop + 2)
-              *oCtrl:SetProp("Top", "oCtrls:nTop+2")
+              //oCtrl:SetProp("Top", "oCtrls:nTop+2")
               EXIT
                ENDIF
             NEXT
-         *-ELSE
-      *-   oCtrl:Move(, 2)
-      *-   oCtrl:SetProp("Top", "2")
+         //-ELSE
+      //-   oCtrl:Move(, 2)
+      //-   oCtrl:SetProp("Top", "2")
       //oCtrl:SetCoor("Top", oCtrl:nTop)
       //oCtrl:SetCoor("Width", oCtrl:nWidth)
-      *-ENDIF
+      //-ENDIF
     ENDIF
 
 RETURN NIL

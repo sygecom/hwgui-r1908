@@ -769,28 +769,28 @@ FUNCTION ObjInspector(oObject)
 
 
 STATIC FUNCTION MessagesOthers(oDlg, msg, wParam, lParam)
-   
+
    MEMVAR oDesigner
 
 HB_SYMBOL_UNUSED(lParam)
 
    // writelog(Str(msg) + Str(wParam) + Str(lParam))
    IF msg == WM_MOUSEMOVE
-     * MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
+      //MouseMove(oDlg, wParam, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       RETURN 1
    ELSEIF msg == WM_LBUTTONDOWN
-     * LButtonDown(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
+      //LButtonDown(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       RETURN 1
    ELSEIF msg == WM_LBUTTONUP
-     * LButtonUp(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
+      //LButtonUp(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       RETURN 1
    ELSEIF msg == WM_RBUTTONUP
-      *RButtonUp(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
-        oMenuisnp:Show(oDlg, oDlg:nTop + 5, oDlg:nLeft + 15, .T.)
+      //RButtonUp(oDlg, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
+      oMenuisnp:Show(oDlg, oDlg:nTop + 5, oDlg:nLeft + 15, .T.)
       RETURN 1
    ELSEIF msg == WM_LBUTTONDBLCLK
       oDlg:hide()
-      *hwg_MsgInfo("Futura a‡Æo dos Eventos")
+      //hwg_MsgInfo("Futura a‡Æo dos Eventos")
       RETURN 1
    ELSEIF msg == WM_MOVE
    ELSEIF msg == WM_KEYDOWN

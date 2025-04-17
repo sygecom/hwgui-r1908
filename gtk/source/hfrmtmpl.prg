@@ -1036,7 +1036,7 @@ Private oReport := Self
       hwg_DoScript(aMethod, {p1, p2, p3})
    ENDIF
    IF xProperty != NIL
-      oFont := hrep_FontFromxml(oPrinter, xProperty, aGetSecond(::aProp, "fonth")*::nKoefY)
+      oFont := hrep_FontFromxml(oPrinter, xProperty, aGetSecond(::aProp, "fonth") * ::nKoefY)
    ENDIF
 
    oPrinter:StartDoc(lPreview) // ,"/tmp/a1.ps")
@@ -1217,7 +1217,7 @@ Memvar lLastCycle, lSkipItem
             ENDIF
             IF oItem:obj == NIL
                IF (xProperty := aGetSecond(oItem:aProp, "font")) != NIL
-                  oItem:obj := hrep_FontFromxml(::oPrinter, xProperty, aGetSecond(oItem:aProp, "fonth")*::nKoefY)
+                  oItem:obj := hrep_FontFromxml(::oPrinter, xProperty, aGetSecond(oItem:aProp, "fonth") * ::nKoefY)
                ENDIF
             ENDIF
             // hwg_SetTransparentMode(::oPrinter:hDC, .T.)

@@ -605,8 +605,8 @@ int At_Any( char* cFind, char* cStr, int* nPos)
 HB_FUNC(NEXTWORD)
 {
    char *cSep = " \t,.()[]+-/%";
-   char * cStr  = (char*) hb_parc(1);
-   char * ptr, * ptr1;
+   char *cStr  = (char*) hb_parc(1);
+   char *ptr, *ptr1;
    int nPos = hb_parni( 2 ) - 1;
 
    ptr = cStr + nPos;

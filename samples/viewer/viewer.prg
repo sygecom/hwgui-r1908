@@ -258,7 +258,7 @@ STATIC FUNCTION FileOpen(oWnd)
       oSayMain:nZoom := nKoef
       hwg_InvalidateRect(oSayMain:handle, 0)
       oSayMain:Move(, , oWnd:nWidth - nHorz, oWnd:nHeight - nVert - oToolBar:nHeight)
-      oSayScale:SetValue(Str(nKoef*100, 4) + " %")
+      oSayScale:SetValue(Str(nKoef * 100, 4) + " %")
    ENDIF
 
 RETURN NIL
@@ -312,7 +312,7 @@ STATIC FUNCTION Zoom(oWnd, nOp)
    ENDIF
 
    oSayMain:nZoom := nKoef
-   oSayScale:SetValue(Str(nKoef*100, 4) + " %")
+   oSayScale:SetValue(Str(nKoef * 100, 4) + " %")
    hwg_InvalidateRect(oWnd:handle, 0)
    // writelog("Window: " + Str(oWnd:nWidth) + Str(oWnd:nHeight) + Str(nKoef) + Str(oImage:nWidth) + Str(oImage:nHeight))
    hwg_MoveWindow(oWnd:handle, oWnd:nLeft, oWnd:nTop, oWnd:nWidth, oWnd:nHeight)
