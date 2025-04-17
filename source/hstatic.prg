@@ -71,13 +71,13 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::nStyleHS := IIf(nStyle == NIL, 0, nStyle)
    ::BackStyle := OPAQUE
    #ifdef __SYGECOM__  // forçar a sempre ter o fundo transparente
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := {|o, p|o:paint(p)}
       nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
    #else
    IF (lTransp != NIL .AND. lTransp) //.OR. ::lOwnerDraw
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := {|o, p|o:paint(p)}
       nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
@@ -116,7 +116,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, cTooltip
    IF (lTransp != NIL .AND. lTransp)  //.OR. ::lOwnerDraw
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := {|o, p|o:paint(p)}
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
    ENDIF
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor)
@@ -260,13 +260,13 @@ METHOD SetValue(cValue) CLASS HStatic
 
    ::Auto_Size(cValue)
    IF ::Title != cValue
-      IF ::backstyle == TRANSPARENT .AND. ::Title != cValue .AND. hwg_IsWindowVisible(::handle)
+      IF ::backstyle == WINAPI_TRANSPARENT .AND. ::Title != cValue .AND. hwg_IsWindowVisible(::handle)
          hwg_RedrawWindow(::oParent:handle, RDW_NOERASE + RDW_INVALIDATE + RDW_ERASENOW, ;
             ::nLeft, ::nTop, ::nWidth, ::nHeight)
          hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
       ENDIF
       hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
-   ELSEIF ::backstyle != TRANSPARENT
+   ELSEIF ::backstyle != WINAPI_TRANSPARENT
       hwg_SetDlgItemText(::oParent:handle, ::id, cValue)
    ENDIF
    ::Title := cValue
@@ -309,7 +309,7 @@ METHOD Paint(lpDis) CLASS HStatic
    ELSEIF !::isEnabled()
       hwg_SetTextColor(dc, 16777215) //hwg_GetSysColor(COLOR_WINDOW))
       hwg_DrawText(dc, szText, {client_rect[1] + 1, client_rect[2] + 1, client_rect[3] + 1, client_rect[4] + 1}, dwtext)
-      hwg_SetBkMode(dc, TRANSPARENT)
+      hwg_SetBkMode(dc, WINAPI_TRANSPARENT)
       hwg_SetTextColor(dc, 10526880) //hwg_GetSysColor(COLOR_GRAYTEXT))
    ENDIF
    // Draw the text

@@ -336,7 +336,7 @@ METHOD PAINT() CLASS HNICEButton
    Size := hwg_GetTextSize(hDC, T)
 
    hwg_Draw_Gradient(hDC, x, y, w, h, ::r, ::g, ::b)
-   hwg_SetBkMode(hDC, TRANSPARENT)
+   hwg_SetBkMode(hDC, WINAPI_TRANSPARENT)
 
    IF (::State == OBTN_MOUSOVER)
       hwg_SetTextColor(hDC, hwg_VColor("FF0000"))

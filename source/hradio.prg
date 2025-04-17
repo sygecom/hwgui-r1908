@@ -233,7 +233,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::Super:New(oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;
               oFont, bInit, bSize, bPaint, ctooltip, tcolor, bColor)
 
-   ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
+   ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, WINAPI_TRANSPARENT, OPAQUE)
 
    ::Activate()
    //::SetColor(tcolor, bColor, .T.)
@@ -301,7 +301,7 @@ METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, 
       bColor := hwg_GetSysColor(COLOR_3DFACE)
    ENDIF
    */
-   ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
+   ::backStyle :=  IIf(lTransp != NIL .AND. lTransp, WINAPI_TRANSPARENT, OPAQUE)
    ::setcolor(tColor, bColor, .T.)
    ::oParent:AddControl(Self)
 

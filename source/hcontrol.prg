@@ -536,8 +536,8 @@ METHOD onAnchor(x, y, w, h) CLASS HControl
          //::Move(x1, y1, w1, h1, HWG_BITAND(::Style, WS_CLIPSIBLINGS + WS_CLIPCHILDREN) == 0)
 
          IF ((x1 != x9 .OR. y1 != y9) .AND. (hb_IsBlock(::bPaint) .OR. x9 + w9 > ::oParent:nWidth)) .OR. ;
-            (::backstyle == TRANSPARENT .AND. (::Title != NIL .AND. !Empty(::Title))) .OR. __ObjHasMsg(Self, "oImage")
-            IF __ObjHasMsg(Self, "oImage") .OR. ::backstyle == TRANSPARENT //.OR. w9 != w1
+            (::backstyle == WINAPI_TRANSPARENT .AND. (::Title != NIL .AND. !Empty(::Title))) .OR. __ObjHasMsg(Self, "oImage")
+            IF __ObjHasMsg(Self, "oImage") .OR. ::backstyle == WINAPI_TRANSPARENT //.OR. w9 != w1
                hwg_InvalidateRect(::oParent:handle, 1, MAX(x1 - 1, 0), MAX(y1 - 1, 0), x1 + w1 + 1, y1 + h1 + 1)
             ELSE
                hwg_RedrawWindow(::handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT)

@@ -1044,7 +1044,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
       ENDIF
       hwg_SetBkMode(wParam, oCtrl:backstyle)
       IF !oCtrl:IsEnabled() .AND. oCtrl:Disablebrush != NIL
-         hwg_SetBkMode(wParam, TRANSPARENT)
+         hwg_SetBkMode(wParam, WINAPI_TRANSPARENT)
          hwg_SetBkColor(wParam, oCtrl:DisablebColor)
          RETURN oCtrl:disablebrush:handle
       ELSEIF oCtrl:bcolor != NIL .AND. oCtrl:BackStyle == OPAQUE
@@ -1054,7 +1054,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
          ELSEIF oCtrl:oParent:brush != NIL
             RETURN oCtrl:oParent:brush:handle
          ENDIF
-      ELSEIF oCtrl:BackStyle == TRANSPARENT
+      ELSEIF oCtrl:BackStyle == WINAPI_TRANSPARENT
          /*
          IF (oCtrl:classname $ "HCHECKBUTTON" .AND. (!oCtrl:lnoThemes .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest))) .OR.;
             (oCtrl:classname $ "HGROUP*HRADIOGROUP*HRADIOBUTTON" .AND. !oCtrl:lnoThemes)

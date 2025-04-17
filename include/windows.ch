@@ -1747,7 +1747,7 @@ ComboBox
 #define UDM_SETBUDDY            (WM_USER + 105)
 #define UDM_GETBUDDY            (WM_USER + 106)
 
-#define TRANSPARENT 1
+#define WINAPI_TRANSPARENT 1
 
 #define WM_SYSCOLORCHANGE 0x0015
 #define WM_NOTIFYICON (WM_USER + 1000)

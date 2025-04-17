@@ -59,7 +59,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
    ::title := cCaption
    ::lValue := IIf(vari == NIL .OR. !hb_IsLogical(vari), .F., vari)
    ::bSetGet := bSetGet
-   ::backStyle := IIf(lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE)
+   ::backStyle := IIf(lTransp != NIL .AND. lTransp, WINAPI_TRANSPARENT, OPAQUE)
 
    ::Activate()
 

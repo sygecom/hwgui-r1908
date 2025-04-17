@@ -50,7 +50,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
    ::oBrush := IIf(bColor != NIL, ::brush, NIL)
    ::lTransparent := IIf(lTransp != NIL, lTransp, .F.)
-   ::backStyle := IIf((lTransp != NIL .AND. lTransp) .OR. ::bColor != NIL, TRANSPARENT, OPAQUE)
+   ::backStyle := IIf((lTransp != NIL .AND. lTransp) .OR. ::bColor != NIL, WINAPI_TRANSPARENT, OPAQUE)
 
    ::Activate()
    //::setcolor(tcolor, bcolor)
@@ -76,8 +76,8 @@ METHOD Init() CLASS HGroup
 
    IF !::lInit
       ::Super:Init()
-      //-IF ::backStyle == TRANSPARENT .OR. ::bColor != NIL
-      IF ::oBrush != NIL .OR. ::backStyle == TRANSPARENT
+      //-IF ::backStyle == WINAPI_TRANSPARENT .OR. ::bColor != NIL
+      IF ::oBrush != NIL .OR. ::backStyle == WINAPI_TRANSPARENT
          nbs := hwg_GetWindowStyle(::handle)
          nbs := hwg_ModStyle(nbs, BS_TYPEMASK, BS_OWNERDRAW + WS_DISABLED)
          hwg_SetWindowStyle(::handle, nbs)
@@ -143,7 +143,7 @@ METHOD PAINT(lpdis) CLASS HGroup
       rcText[1] := rc[1] + OFS_X
       rcText[3] := rcText[1] + aSize[1]
    ENDIF
-   hwg_SetBkMode(dc, TRANSPARENT)
+   hwg_SetBkMode(dc, WINAPI_TRANSPARENT)
 
    IF hwg_BitAND(dwStyle, BS_FLAT) != 0  // "flat" frame
       //pnFrmDark := hwg_CreatePen(PS_SOLID, 1, hwg_RGB(0, 0, 0)))
@@ -186,7 +186,7 @@ METHOD PAINT(lpdis) CLASS HGroup
 
    // draw text (if any)
    IF !Empty(szText) && !(dwExStyle & (BS_ICON | BS_BITMAP))) // TODO: Harbour & ?
-      hwg_SetBkMode(dc, TRANSPARENT)
+      hwg_SetBkMode(dc, WINAPI_TRANSPARENT)
       IF ::oBrush != NIL
          hwg_FillRect(DC, rc[1] + 2, rc[2] + iUpDist + 2, rc[3] - 2, rc[4] - 2, ::brush:handle)
          IF !::lTransparent

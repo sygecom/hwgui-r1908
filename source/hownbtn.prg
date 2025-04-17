@@ -403,7 +403,7 @@ METHOD Paint() CLASS HOwnButton
 
    IF ::lFlat
       IF ::Themed
-         //hwg_SetBkMode(hdc, TRANSPARENT)
+         //hwg_SetBkMode(hdc, WINAPI_TRANSPARENT)
          IF ::handle == hwg_GetFocus() .AND. ::lCheck
             hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
          ELSEIF ::state != OBTN_NORMAL
@@ -428,7 +428,7 @@ METHOD Paint() CLASS HOwnButton
       ENDIF
    ELSE
       IF ::Themed
-         //hwg_SetBkMode(hdc, TRANSPARENT)
+         //hwg_SetBkMode(hdc, WINAPI_TRANSPARENT)
          IF hwg_SelfFocus(::handle, hwg_GetFocus()) .AND. ::lCheck
             hwg_DrawThemeBackground(::hTheme, hdc, BP_PUSHBUTTON, PBS_PRESSED, aCoors, NIL)
          ELSE //IF ::state != OBTN_NORMAL

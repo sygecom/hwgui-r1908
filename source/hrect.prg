@@ -474,7 +474,7 @@ METHOD Paint(lpdis) CLASS HContainer
       ELSE
          hwg_DrawEdge(hDC, x1, y1, x2, y2, 0, 0)
       ENDIF
-      IF ::backStyle != TRANSPARENT
+      IF ::backStyle != WINAPI_TRANSPARENT
          IF ::Brush != NIL
             hwg_FillRect(hDC, x1 + 2, y1 + 2, x2 - 2, y2 - 2, ::brush:handle)
          ENDIF

@@ -51,7 +51,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    ::lVertical := (::nHeight > ::nWidth)
    ::lScrolling := IIf(lScrolling == NIL, .F., lScrolling)
    IF (lTransp != NIL .AND. lTransp)
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
       ::extStyle += WS_EX_TRANSPARENT
    ENDIF
    ::Activate()

@@ -43,7 +43,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
    ::bPaint := {|o, lpdis|o:Paint(lpdis)}
    ::nStretch := IIf(nStretch == NIL, 0, nStretch)
    IF lTransp != NIL .AND. lTransp
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
       ::extStyle +=  WS_EX_TRANSPARENT
    ENDIF
 
@@ -71,7 +71,7 @@ METHOD Redefine(oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp) 
    ::Super:Redefine(oWndParent, nId, bInit, bSize, ctooltip)
    ::bPaint := {|o, lpdis|o:Paint(lpdis)}
    IF lTransp != NIL .AND. lTransp
-      ::BackStyle := TRANSPARENT
+      ::BackStyle := WINAPI_TRANSPARENT
       ::extStyle +=  WS_EX_TRANSPARENT
    ENDIF
    IF lRes == NIL
@@ -99,7 +99,7 @@ METHOD Paint(lpdis) CLASS HSayBmp
 
    IF ::oImage != NIL .AND. !Empty(::oImage:handle)
       IF ::nZoom == NIL
-         IF ::BackStyle == TRANSPARENT
+         IF ::BackStyle == WINAPI_TRANSPARENT
             IF ::nStretch == 1  // isometric
                hwg_DrawTransparentBitmap(drawInfo[3], ::oImage:handle, drawInfo[4] + ::nOffsetH, ;
                                      drawInfo[5] + ::nOffsetV,,) // ::nWidth + 1, ::nHeight + 1)

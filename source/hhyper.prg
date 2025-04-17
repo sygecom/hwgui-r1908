@@ -130,7 +130,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
    ::nWidthOver := nWidth
    IF lTransp != NIL .AND. lTransp
       //::extStyle += WS_EX_TRANSPARENT
-      ::backstyle := TRANSPARENT
+      ::backstyle := WINAPI_TRANSPARENT
    ENDIF
 
    ::Activate()
@@ -184,7 +184,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
 
    IF lTransp != NIL .AND. lTransp
       //::extStyle += WS_EX_TRANSPARENT
-      ::backstyle := TRANSPARENT
+      ::backstyle := WINAPI_TRANSPARENT
    ENDIF
 
    RETURN Self
@@ -439,7 +439,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
       itemRect[4] := aBmpSize[2] + 1
       bmpRect := hwg_PrepareImageRect(::handle, dc, bHasTitle, @itemRect, @captionRect, , , ::hbitmap, ::iStyle)
       itemRect[4] := drawInfo[7]
-      IF ::backstyle == TRANSPARENT
+      IF ::backstyle == WINAPI_TRANSPARENT
          hwg_DrawTransparentBitmap(dc, ::hbitmap, bmpRect[1], bmpRect[2])
       ELSE
          hwg_DrawBitmap(dc, ::hbitmap, , bmpRect[1], bmpRect[2])
@@ -447,7 +447,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
       rcclient[1] +=  IIf(::iStyle == ST_ALIGN_HORIZ, aBmpSize[1] + 8, 1)
    ENDIF
    hwg_SetBkMode(DC, ::backstyle)
-   IF ::backstyle != TRANSPARENT
+   IF ::backstyle != WINAPI_TRANSPARENT
        hwg_SetBkColor(DC, IIf(::bColor == NIL, hwg_GetSysColor(COLOR_3DFACE), ::bcolor))
        hwg_FillRect(dc, rcclient[1], rcclient[2], rcclient[3], rcclient[4]) //, ::brush:handle)
    ENDIF
