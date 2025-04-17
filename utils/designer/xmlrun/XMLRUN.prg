@@ -596,7 +596,9 @@ FUNCTION d2infstr(d) && date to informix style string
    LOCAL mmm
    LOCAL yyyy
 
-  if Empty(d); RETURN "           "; end
+  if Empty(d)
+     RETURN "           "
+  endif
 
   dd := Right(dtos(d), 2);  yyyy := Left(dtos(d), 4)
 

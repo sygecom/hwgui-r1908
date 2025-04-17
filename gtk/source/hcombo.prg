@@ -50,8 +50,12 @@ ENDCLASS
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
                   bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor) CLASS HComboBox
 
-   if lEdit == NIL; lEdit := .F.; endif
-   if lText == NIL; lText := .F.; endif
+   if lEdit == NIL
+      lEdit := .F.
+   endif
+   if lText == NIL
+      lText := .F.
+   endif
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctoolt, tcolor, bcolor)
