@@ -21,7 +21,7 @@
              [CHECK <acheck>];
           => ;
           [<oCombo> := ] HCheckComboBox():New( <oWnd>,<nId>,<vari>,    ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <aItems>,<oFont>,,,,<bChange>,<cTooltip>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;

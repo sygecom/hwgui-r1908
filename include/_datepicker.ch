@@ -36,7 +36,7 @@
              [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
-          [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
+          [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
              <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  )
 
@@ -58,7 +58,7 @@
              [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<vari>,    ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]

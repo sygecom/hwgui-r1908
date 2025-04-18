@@ -74,7 +74,7 @@
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
     [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
-                    {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
+                    {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
                     <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<cTooltip>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
@@ -98,7 +98,7 @@
             [ <text: TEXT> ]           ;
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
-                    {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
+                    {|v|IIf(v == NIL,<vari>,<vari>:=v)},        ;
                     <aItems>,<oFont>,,,,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>,<bIChange>,<nDisplay>, <nMaxLength>,<.edit.>,<.text.>)
 
 #xcommand REDEFINE GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
@@ -112,5 +112,5 @@
              [ CHECK <acheck>] ;
           => ;
           [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},        ;
              <aItems>,<oFont>,,,,<bChange>,<cTooltip>, <bWhen> ,<acheck>)

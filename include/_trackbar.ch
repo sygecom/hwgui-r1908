@@ -22,7 +22,7 @@
           => ;
           [<oTrackBar> :=] HTrackBar():New( <oWnd>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;
              <nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<bChange>,<bDrag>,<nLow>,<nHigh>,<.vertical.>,;
-             Iif(<.autoticks.>, 1,Iif(<.noticks.>, 16, 0)), ;
-             Iif(<.both.>, 8,Iif(<.top.>.or.<.left.>, 4, 0)) );;
+             IIf(<.autoticks.>, 1,IIf(<.noticks.>, 16, 0)), ;
+             IIf(<.both.>, 8,IIf(<.top.>.or.<.left.>, 4, 0)) );;
           [ <oTrackBar>:name := <(oTrackBar)> ]
 

@@ -66,9 +66,9 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
-             <bGfocus>,<bLfocus>,IIF(!EMPTY(<cTooltip>),<cTooltip>,),<color>,<bcolor>,<cPicture>,;
+             <bGfocus>,<bLfocus>,IIf(!EMPTY(<cTooltip>),<cTooltip>,),<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
           [ <oEdit>:name := <(oEdit)> ]
 
@@ -95,7 +95,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},             ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,<cPicture>,;
              <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>);;
@@ -119,5 +119,5 @@
              [ ON CHANGE <bChange> ]    ;
           => ;
           [<oEdit> := ] HEdit():Redefine( <oWnd>,<nId>,<vari>, ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},    ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},    ;
              <oFont>,,,,<{bGfocus}>,<{bLfocus}>,<cTooltip>,<color>,<bcolor>,<cPicture>,<nMaxLength>,<.lMultiLine.>,<bKeyDown>, <bChange>)

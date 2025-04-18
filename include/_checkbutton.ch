@@ -62,7 +62,7 @@
              [ ON SIZE <bSize> ]        ;             
           => ;
           [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<vari>,              ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},                   ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},                   ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>, ;
              <bInit>,<bSize>,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>);;
           [ <oCheck>:name := <(oCheck)> ]
@@ -79,5 +79,5 @@
              [ <lEnter: ENTER> ]        ;
           => ;
           [<oCheck> := ] HCheckButton():Redefine( <oWnd>,<nId>,<vari>, ;
-             {|v|Iif(v==Nil,<vari>,<vari>:=v)},           ;
+             {|v|IIf(v == NIL,<vari>,<vari>:=v)},           ;
              <oFont>,,,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>)

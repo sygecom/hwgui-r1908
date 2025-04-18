@@ -27,7 +27,7 @@
              [ HELP <cHelp> ]               ;
              [ HELPID <nHelpId> ]           ;
           => ;
-          <oWnd> := HMainWindow():New( Iif(<.lMdi.>,WND_MDI,WND_MAIN), ;
+          <oWnd> := HMainWindow():New( IIf(<.lMdi.>,WND_MDI,WND_MAIN), ;
              <ico>,<clr>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>, ;
              <cMenu>,<nPos>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>,;
              <bGfocus>,<bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>, <bCloseQuery>,<bRefresh>,<bMdiMenu>)
@@ -62,7 +62,7 @@
                    <ico>,<clr>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<cTitle>, ;
                    <cMenu>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>, ;
                    <bGfocus>,<bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>,,;
-									 <bRefresh>,<.lChild.>,<.lClipper.>,<.lnoClosable.>,[{|v|Iif(v==Nil,<vari>,<vari>:=v)}] ) ;;
+									 <bRefresh>,<.lChild.>,<.lClipper.>,<.lnoClosable.>,[{|v|IIf(v == NIL,<vari>,<vari>:=v)}] ) ;;
         [ <oWnd>:SetParent( <oParent> ) ]            
 
 #xcommand INIT WINDOW <oWnd> CHILD          ;
