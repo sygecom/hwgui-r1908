@@ -12,8 +12,9 @@
              [ RED <r> ] ;
              [ GREEN <g> ];
              [ BLUE <b> ];
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBut> := ] HNicebutton():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
+          [<oBut> := ] __IIF(<.class.>, <classname>, HNicebutton)():New( <oWnd>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b> );;
           [ <oBut>:name := <(oBut)> ]
 

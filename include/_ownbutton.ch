@@ -23,9 +23,10 @@
              ] ;
              [ TOOLTIP <cTooltip> ]    ;
              [ <lCheck: CHECK> ]     ;
-             [ <lThemed: THEMED> ]     ;             
+             [ <lThemed: THEMED> ]     ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oOwnBtn> :=] __IIF(<.class.>, <classname>, HOWNBUTTON)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
              <heightb>,<.ltr.>,<trcolor>,<cTooltip>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;
@@ -54,4 +55,3 @@
              <bDraw>,<bClick>,<.flat.>,<cText>,<color>,<font>,<xt>,<yt>,;
              <widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,;
              <.ltr.>,<cTooltip>,!<.enable.>,<.lCheck.> )
-

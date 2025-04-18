@@ -9,8 +9,9 @@
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ STYLE <nStyle> ]         ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPanel> :=] HPanel():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
+          [<oPanel> :=] __IIF(<.class.>, <classname>, HPanel)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
           [ <oPanel>:name := <(oPanel)> ]
 
 #xcommand REDEFINE PANEL [ <oPanel> ]  ;

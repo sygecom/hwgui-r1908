@@ -9,7 +9,8 @@
              [ ON SIZE <bSize> ]        ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oGraph> := ] HGraph():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
+          [<oGraph> := ] __IIF(<.class.>, <classname>, HGraph)():New( <oWnd>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bSize>,<cTooltip>,<color>,<bcolor> );;
           [ <oGraph>:name := <(oGraph)> ]

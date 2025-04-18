@@ -8,8 +8,9 @@
              [ ON SIZE <bSize> ]        ;
              [ TOOLTIP <cTooltip> ]       ;
              [ TYPE <ctype>     ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+          [<oImage> := ] __IIF(<.class.>, <classname>, HSayFImage)():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<image>,<bInit>,<bSize>,<cTooltip>,<ctype> );;
           [ <oImage>:name := <(oImage)> ]
 

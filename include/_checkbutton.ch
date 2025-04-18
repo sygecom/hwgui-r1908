@@ -17,8 +17,9 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
              [ <lEnter: ENTER> ]        ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
+          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.>,<.lTransp.> );;
           [ <oCheck>:name := <(oCheck)> ]
@@ -59,9 +60,10 @@
              [ VALID <bLfocus> ]        ;
              [ <lEnter: ENTER> ]        ;
              [ ON INIT <bInit> ]        ;
-             [ ON SIZE <bSize> ]        ;             
+             [ ON SIZE <bSize> ]        ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<vari>,              ;
+          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oWnd>,<nId>,<vari>,              ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},                   ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>, ;
              <bInit>,<bSize>,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>);;

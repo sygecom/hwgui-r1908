@@ -24,8 +24,9 @@
              [ <lNoHeader: NO HEADER> ]  ;
              [BITMAP <aBit>];
              [ ITEMS <a>];
+             [ <class: CLASS> <classname> ] ;
           => ;
-          <oGrid> := HGridEx():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
+          <oGrid> := __IIF(<.class.>, <classname>, HGridEx)():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;

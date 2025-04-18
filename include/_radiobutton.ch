@@ -15,8 +15,9 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oRadio> := ] HRadioButton():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
+          [<oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.> );;
           [ <oRadio>:name := <(oRadio)> ]

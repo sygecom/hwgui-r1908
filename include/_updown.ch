@@ -17,8 +17,9 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
           [ <oUpd>:name := <(oUpd)> ]

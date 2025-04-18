@@ -11,7 +11,8 @@
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ DIVIDE <aLeft> FROM <aRight> ] ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSplit> :=] HSplitter():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>,<nHeight>,<bSize>,<bDraw>,;
+          [<oSplit> :=] __IIF(<.class.>, <classname>, HSplitter)():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>,<nHeight>,<bSize>,<bDraw>,;
              <color>,<bcolor>,<aLeft>,<aRight>, <.lTransp.>, <.lScroll.> );;
           [ <oSplit>:name := <(oSplit)> ]

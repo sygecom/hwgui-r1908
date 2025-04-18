@@ -22,8 +22,9 @@
              [ COORDINATES  <xb>, <yb>, <widthb>, <heightb> ] ;
              ] ;
              [ TOOLTIP <cTooltip> ]    ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oShBtn> :=] HSHADEBUTTON():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oShBtn> :=] __IIF(<.class.>, <classname>, HSHADEBUTTON)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, ;
              <trcolor>,<cTooltip>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;

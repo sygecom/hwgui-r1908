@@ -17,8 +17,9 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] HRichEdit():New( <oWnd>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New( <oWnd>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<bOther>, <.lallowtabs.>,<bChange> );;
           [ <oEdit>:name := <(oEdit)> ]

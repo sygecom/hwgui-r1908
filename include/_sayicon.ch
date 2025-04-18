@@ -11,8 +11,9 @@
              [ ON DBLCLICK <bDblClick> ];
              [ TOOLTIP <cTooltip> ]       ;
              [<oem: OEM>]     ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+          [<oIco> := ] __IIF(<.class.>, <classname>, HSayIcon)():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<icon>,<.res.>,<bInit>,<bSize>,<cTooltip>,<.oem.>,<bClick>,<bDblClick> );;
           [ <oIco>:name := <(oIco)> ]
 

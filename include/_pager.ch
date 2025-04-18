@@ -6,6 +6,7 @@
              [ SIZE <nWidth>, <nHeight> ] ;
              [ STYLE <nStyle> ]         ;
              [ <lVert: VERTICAL> ] ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTool> := ] HPager():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,,<.lVert.>);;
+          [<oTool> := ] __IIF(<.class.>, <classname>, HPager)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,,<.lVert.>);;
           [ <oTool>:name := <(oTool)> ]

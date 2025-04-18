@@ -19,8 +19,9 @@
              [<lPassword: PASSWORD>]    ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther> );;
           [ <oEdit>:name := <(oEdit)> ]
@@ -64,8 +65,9 @@
              [ ON KEYDOWN <bKeyDown>   ];
              [ ON CHANGE <bChange> ]    ;
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<vari>,               ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,IIf(!EMPTY(<cTooltip>),<cTooltip>,),<color>,<bcolor>,<cPicture>,;
@@ -93,8 +95,9 @@
              [ ON KEYDOWN <bKeyDown>   ];
              [ ON CHANGE <bChange> ]    ;
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<vari>,               ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<vari>,               ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,<cPicture>,;

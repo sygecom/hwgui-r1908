@@ -27,10 +27,11 @@
             [ STYLE <nStyle> ]          ;
             [ LOADSTANDARDIMAGE <nIDB>] ;
             [ ITEMS <aItems> ]          ;
+            [ <class: CLASS> <classname> ] ;
           => ;
-    [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
+    [<oTool> := ] __IIF(<.class.>, <classname>, Htoolbar)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
-    [ <oTool>:name := <(oTool)> ] 
+    [ <oTool>:name := <(oTool)> ]
 
 #xcommand REDEFINE TOOLBAR  <oSay>     ;
              [ OF <oWnd> ]              ;

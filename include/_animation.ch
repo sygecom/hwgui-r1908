@@ -10,8 +10,8 @@
              [ < autoplay: AUTOPLAY > ]          ;
              [ < center : CENTER > ]             ;
              [ < transparent: TRANSPARENT > ]    ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oAnimation> :=] HAnimation():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
+          [<oAnimation> :=] __IIF(<.class.>, <classname>, HAnimation)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<cFile>,<.autoplay.>,<.center.>,<.transparent.>,<xResID>);;
           [ <oAnimation>:name := <(oAnimation)> ]
-

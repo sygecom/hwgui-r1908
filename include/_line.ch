@@ -11,8 +11,9 @@
              [<lVert: VERTICAL>]       ;
              [ ON INIT <bInit> ]       ;
              [ ON SIZE <bSize> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oLine> := ] HLine():New( <oWnd>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
+          [<oLine> := ] __IIF(<.class.>, <classname>, HLine)():New( <oWnd>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
 					              <color>, <nHeight>, <cSlant>,<nBorder>  );;
           [ <oLine>:name := <(oLine)> ]
 

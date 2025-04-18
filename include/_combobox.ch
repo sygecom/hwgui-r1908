@@ -23,8 +23,9 @@
              [ ON GETFOCUS <bGfocus> ]  ;
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON INTERACTIVECHANGE <bIChange> ]    ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
 						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
@@ -72,8 +73,9 @@
             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
+            [ <class: CLASS> <classname> ] ;
           => ;
-    [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<vari>,    ;
+    [<oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New( <oWnd>,<nId>,<vari>,    ;
                     {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
                     <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<cTooltip>, ;

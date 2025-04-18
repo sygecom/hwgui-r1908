@@ -15,8 +15,9 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
+          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]
@@ -56,8 +57,9 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] HDatePicker():New( <oWnd>,<nId>,<vari>,    ;
+          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oWnd>,<nId>,<vari>,    ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>  );;

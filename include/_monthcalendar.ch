@@ -14,8 +14,9 @@
              [ < notoday : NOTODAY > ]                  ;
              [ < notodaycircle : NOTODAYCIRCLE > ]      ;
              [ < weeknumbers : WEEKNUMBERS > ]          ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oMonthCalendar> :=] HMonthCalendar():New( <oWnd>,<nId>,<dInit>,<nStyle>,;
+          [<oMonthCalendar> :=] __IIF(<.class.>, <classname>, HMonthCalendar)():New( <oWnd>,<nId>,<dInit>,<nStyle>,;
              <nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>,;
              <.notoday.>,<.notodaycircle.>,<.weeknumbers.>,<bSelect> );;
           [ <oMonthCalendar>:name := <(oMonthCalendar)> ]

@@ -25,7 +25,8 @@
              [ STYLE <nStyle> ]         ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
-          => [<ogr> := ] HRadioGroup():NewRG( <oWnd>,<nId>,<nStyle>,<vari>,;
+             [ <class: CLASS> <classname> ] ;
+          => [<ogr> := ] __IIF(<.class.>, <classname>, HRadioGroup)():NewRG( <oWnd>,<nId>,<nStyle>,<vari>,;
                   {|v|IIf(v == NIL,<vari>,<vari>:=v)},<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>,;
                   <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>);;
           [ <ogr>:name := <(ogr)> ]

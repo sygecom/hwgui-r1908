@@ -12,8 +12,9 @@
              [ BACKSTYLE <nbackStyle>]  ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [ <oShape> := ] HShape():New(<oWnd>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
+          [ <oShape> := ] __IIF(<.class.>, <classname>, HShape)():New(<oWnd>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
              <nBorder>, <nCurvature>, <nbStyle>,<nfStyle>, <tcolor>, <bcolor>, <bSize>,<bInit>,<nbackStyle>);;
           [ <oShape>:name := <(oShape)> ]
 
