@@ -16,8 +16,9 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
+             [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSay> := ] HStatic():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<cTooltip>, ;
              <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther> );;
           [ <oSay>:name := <(oSay)> ]
