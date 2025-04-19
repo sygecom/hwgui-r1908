@@ -16,20 +16,20 @@
              [ <enable: DISABLED> ]        ;
              [ TEXT <cText>          ;
              [ COLOR <color>] [ FONT <font> ] ;
-             [ COORDINATES  <xt>, <yt>, <widtht>, <heightt> ] ;
+             [ COORDINATES <xt>, <yt>, <widtht>, <heightt> ] ;
              ] ;
-             [ BITMAP <bmp>  [<res: FROM RESOURCE>] [<ltr: TRANSPARENT> [COLOR  <trcolor> ]] ;
-             [ COORDINATES  <xb>, <yb>, <widthb>, <heightb> ] ;
+             [ BITMAP <bmp> [ <res: FROM RESOURCE> ] [ <ltr: TRANSPARENT> [ COLOR <trcolor> ] ] ;
+             [ COORDINATES <xb>, <yb>, <widthb>, <heightb> ] ;
              ] ;
              [ TOOLTIP <cTooltip> ]    ;
              [ <lCheck: CHECK> ]     ;
              [ <lThemed: THEMED> ]     ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oOwnBtn> :=] __IIF(<.class.>, <classname>, HOWNBUTTON)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [ <oOwnBtn> := ] __IIF(<.class.>, <classname>, HOWNBUTTON)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
-             <heightb>,<.ltr.>,<trcolor>,<cTooltip>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;
+             <heightb>,<.ltr.>,<trcolor>,<cTooltip>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.>) ;;
           [ <oOwnBtn>:name := <(oOwnBtn)> ]
 
 #xcommand REDEFINE OWNERBUTTON [ <oOwnBtn> ]  ;
@@ -44,14 +44,14 @@
              [ COLOR <color>] [ FONT <font> ] ;
              [ COORDINATES  <xt>, <yt>, <widtht>, <heightt> ] ;
              ] ;
-             [ BITMAP <bmp>  [<res: FROM RESOURCE>] [<ltr: TRANSPARENT>] ;
-             [ COORDINATES  <xb>, <yb>, <widthb>, <heightb> ] ;
+             [ BITMAP <bmp> [ <res: FROM RESOURCE> ] [ <ltr: TRANSPARENT> ] ;
+             [ COORDINATES <xb>, <yb>, <widthb>, <heightb> ] ;
              ] ;
              [ TOOLTIP <cTooltip> ]    ;
              [ <enable: DISABLED> ]  ;
              [ <lCheck: CHECK> ]      ;
           => ;
-          [<oOwnBtn> :=] HOWNBUTTON():Redefine( <oParent>,<nId>,<bInit>,<bSize>,;
-             <bDraw>,<bClick>,<.flat.>,<cText>,<color>,<font>,<xt>,<yt>,;
-             <widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,;
-             <.ltr.>,<cTooltip>,!<.enable.>,<.lCheck.> )
+          [ <oOwnBtn> := ] HOWNBUTTON():Redefine(<oParent>,<nId>,<bInit>,<bSize>, ;
+             <bDraw>,<bClick>,<.flat.>,<cText>,<color>,<font>,<xt>,<yt>, ;
+             <widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>, ;
+             <.ltr.>,<cTooltip>,!<.enable.>,<.lCheck.>)

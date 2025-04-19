@@ -11,15 +11,15 @@
              [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
              [ ON CLICK <bClick> ]      ;
-             [ ON RIGHTCLICK <bRClick> ];
-             [ ON GETFOCUS <bGetFocus> ];
-             [ ON LOSTFOCUS <bLostFocus>];
-             [ BITMAP <aBmp>  [<res: FROM RESOURCE>] [ BITCOUNT <nBC> ] ]  ;
+             [ ON RIGHTCLICK <bRClick> ] ;
+             [ ON GETFOCUS <bGetFocus> ] ;
+             [ ON LOSTFOCUS <bLostFocus>] ;
+             [ BITMAP <aBmp> [ <res: FROM RESOURCE> ] [ BITCOUNT <nBC> ] ]  ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTab> := ] __IIF(<.class.>, <classname>, HTab)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
-             <bClick>, <bGetFocus>, <bLostFocus>, <bRClick> ) ;;
+          [ <oTab> := ] __IIF(<.class.>, <classname>, HTab)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>, ;
+             <bClick>, <bGetFocus>, <bLostFocus>, <bRClick>) ;;
           [ <oTab>:name := <(oTab)> ]
 
 #xcommand BEGIN PAGE <cname> OF <oTab> ;
@@ -28,7 +28,7 @@
             [ BACKCOLOR <bcolor>]      ; 
             [ TOOLTIP <cTooltip> ]       ;
           =>;
-          <oTab>:StartPage( <cname>, ,! <.enable.> ,<tcolor>,<bcolor>, <cTooltip> )
+          <oTab>:StartPage(<cname>, ,! <.enable.> ,<tcolor>,<bcolor>, <cTooltip>)
 
 #xcommand END PAGE OF <oTab> => <oTab>:EndPage()
 
@@ -42,4 +42,4 @@
              [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
           => ;
-          [<oSay> := ] Htab():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<bChange> )
+          [ <oSay> := ] Htab():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<bChange>)

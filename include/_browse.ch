@@ -12,7 +12,7 @@
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bEnter> ]      ;
-             [ ON RIGHTCLICK <bRClick> ];
+             [ ON RIGHTCLICK <bRClick> ] ;
              [ ON GETFOCUS <bGfocus> ][WHEN <bGfocus> ]   ;
              [ ON LOSTFOCUS <bLfocus> ][ VALID <bLfocus> ] ;
              [ STYLE <nStyle> ]         ;
@@ -36,11 +36,11 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBrw> :=] __IIF(<.class.>, <classname>, HBrowse)():New( IIf(<.lDb.>,BRW_DATABASE,IIf(<.lArr.>,BRW_ARRAY, 0)),;
+          [ <oBrw> := ] __IIF(<.class.>, <classname>, HBrowse)():New(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, 0)), ;
              <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize>, ;
-             <bPaint>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
-             <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg>, <.lMulti.>, <.lDescend.>,;
-             <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>,<bChgrowcol>, <cTooltip>  );;
+             <bPaint>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>, ;
+             <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg>, <.lMulti.>, <.lDescend.>, ;
+             <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>,<bChgrowcol>, <cTooltip>) ;;
           [ <oBrw>:name := <(oBrw)> ]
 
 #xcommand REDEFINE BROWSE [ <oBrw> ]   ;
@@ -57,5 +57,5 @@
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ FONT <oFont> ]           ;
           => ;
-          [<oBrw> :=] HBrowse():Redefine( IIf(<.lDb.>,BRW_DATABASE,IIf(<.lArr.>,BRW_ARRAY,IIf(<.lFlt.>,BRW_FILTER, 0))),;
-             <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bPaint>,<bEnter>,<bGfocus>,<bLfocus> )
+          [ <oBrw> := ] HBrowse():Redefine(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, IIf(<.lFlt.>, BRW_FILTER, 0))), ;
+             <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bPaint>,<bEnter>,<bGfocus>,<bLfocus>)

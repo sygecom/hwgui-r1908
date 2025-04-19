@@ -21,9 +21,9 @@
              [ HOVERCOLOR <hcolor> ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSay> := ] __IIF(<.class.>, <classname>, HStaticLink)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+          [ <oSay> := ] __IIF(<.class.>, <classname>, HStaticLink)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
              <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, ;
-             <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>  );;
+             <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>) ;;
           [ <oSay>:name := <(oSay)> ]
 
 #xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption>      ;
@@ -42,7 +42,6 @@
              [ LINKCOLOR <lcolor> ]     ;
              [ HOVERCOLOR <hcolor> ]    ;
           => ;
-          [<oSay> := ] HStaticLink():Redefine( <oParent>, <nId>, <cCaption>, ;
-             <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, <color>, <bcolor>,;
-             <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor> )
-
+          [ <oSay> := ] HStaticLink():Redefine(<oParent>, <nId>, <cCaption>, ;
+             <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, <color>, <bcolor>, ;
+             <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>)

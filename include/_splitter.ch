@@ -13,6 +13,6 @@
              [ DIVIDE <aLeft> FROM <aRight> ] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSplit> :=] __IIF(<.class.>, <classname>, HSplitter)():New( <oParent>,<nId>,<nX>,<nY>,<nWidth>,<nHeight>,<bSize>,<bPaint>,;
-             <color>,<bcolor>,<aLeft>,<aRight>, <.lTransp.>, <.lScroll.> );;
+          [ <oSplit> := ] __IIF(<.class.>, <classname>, HSplitter)():New(<oParent>,<nId>,<nX>,<nY>,<nWidth>,<nHeight>,<bSize>,<bPaint>, ;
+             <color>,<bcolor>,<aLeft>,<aRight>, <.lTransp.>, <.lScroll.>) ;;
           [ <oSplit>:name := <(oSplit)> ]

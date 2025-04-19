@@ -22,15 +22,15 @@
              [ COLOR <color> ]           ;
              [ BACKCOLOR <bkcolor> ]     ;
              [ <lNoHeader: NO HEADER> ]  ;
-             [BITMAP <aBit>];
-             [ ITEMS <a>];
+             [ BITMAP <aBit> ] ;
+             [ ITEMS <a>] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oGrid> := __IIF(<.class.>, <classname>, HGridEx)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
-             <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
-             <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
-             <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;
-             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>,<a>);;
+          <oGrid> := __IIF(<.class.>, <classname>, HGridEx)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, ;
+             <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>, ;
+             <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>, ;
+             <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>, ;
+             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>,<a>) ;;
           [ <oGrid>:name := <(oGrid)> ]
 
 #xcommand REDEFINE GRID  <oSay>  ;
@@ -39,6 +39,6 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
-             [ ITEM <aitem>];
+             [ ITEM <aitem> ] ;
           => ;
-          [<oSay> := ] HGRIDex():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem> )
+          [ <oSay> := ] HGRIDex():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem>)

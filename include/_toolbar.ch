@@ -22,14 +22,14 @@
             [ FONT <oFont> ]            ;
             [ ON INIT <bInit> ]         ;
             [ ON SIZE <bSize> ]         ;
-            [<lTransp: TRANSPARENT>]    ;
-            [<lVertical: VERTICAL>]     ;
+            [ <lTransp: TRANSPARENT> ]    ;
+            [ <lVertical: VERTICAL> ]     ;
             [ STYLE <nStyle> ]          ;
             [ LOADSTANDARDIMAGE <nIDB>] ;
             [ ITEMS <aItems> ]          ;
             [ <class: CLASS> <classname> ] ;
           => ;
-    [<oTool> := ] __IIF(<.class.>, <classname>, Htoolbar)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
+    [ <oTool> := ] __IIF(<.class.>, <classname>, Htoolbar)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>, ;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
     [ <oTool>:name := <(oTool)> ]
 
@@ -39,31 +39,31 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
-             [ ITEM <aitem>];
+             [ ITEM <aitem>] ;
           => ;
-          [<oSay> := ] Htoolbar():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem> )
+          [ <oSay> := ] Htoolbar():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem>)
 
 #xcommand ADD TOOLBUTTON  <O> ;
              ID <nId> ;
-             [ BITMAP <nBitIp> ];
-             [ STYLE <bstyle> ];
-             [ STATE <bstate>];
+             [ BITMAP <nBitIp> ] ;
+             [ STYLE <bstyle> ] ;
+             [ STATE <bstate>] ;
              [ TEXT <ctext> ] ;
-             [ TOOLTIP <c> ];
-             [ MENU <d>];
-             ON CLICK <bclick>;
+             [ TOOLTIP <c> ] ;
+             [ MENU <d>] ;
+             ON CLICK <bclick> ;
           =>;
           aadd(<O> ,\{<nBitIp>,<nId>,<bstate>,<bstyle>,,<ctext>,<bclick>,<c>,<d>,,\})
 
 #xcommand ADDTOOLBUTTON  <oTool> ;
-             [ ID <nId> ];
-             [ BITMAP <nBitIp> ];
-             [ STYLE <bstyle> ];
-             [ STATE <bstate>];
+             [ ID <nId> ] ;
+             [ BITMAP <nBitIp> ] ;
+             [ STYLE <bstyle> ] ;
+             [ STATE <bstate>] ;
              [ TEXT <ctext> ] ;
-             [ TOOLTIP <c> ];
-             [ MENU <d>];
-             [ NAME < cButton > ];
-             ON CLICK <bclick>;
+             [ TOOLTIP <c> ] ;
+             [ MENU <d>] ;
+             [ NAME <cButton> ] ;
+             ON CLICK <bclick> ;
           =>;
-          <oTool>:AddButton( <nBitIp>,<nId>,<bstate>,<bstyle>,<ctext>,<bclick>,<c>,<d>,<cButton> )
+          <oTool>:AddButton(<nBitIp>,<nId>,<bstate>,<bstyle>,<ctext>,<bclick>,<c>,<d>,<cButton>)

@@ -18,13 +18,13 @@
              [ <text: TEXT> ]           ;
              [ WHEN <bWhen> ]           ;
              [ VALID <bValid> ]         ;
-             [CHECK <acheck>];
+             [CHECK <acheck>] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCombo> := ] __IIF(<.class.>, <classname>, HCheckComboBox)():New( <oParent>,<nId>,<vari>,    ;
-             {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
+          [ <oCombo> := ] __IIF(<.class.>, <classname>, HCheckComboBox)():New(<oParent>,<nId>,<vari>,    ;
+             {|v|IIf(v == NIL, <vari>, <vari> := v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <aItems>,<oFont>,,,,<bChange>,<cTooltip>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;
-						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>);;
+						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>) ;;
           [ <oCombo>:name := <(oCombo)> ]

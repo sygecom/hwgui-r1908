@@ -11,6 +11,6 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oGraph> := ] __IIF(<.class.>, <classname>, HGraph)():New( <oParent>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bSize>,<cTooltip>,<color>,<bcolor> );;
+          [ <oGraph> := ] __IIF(<.class.>, <classname>, HGraph)():New(<oParent>,<nId>,<aData>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<oFont>,<bSize>,<cTooltip>,<color>,<bcolor>) ;;
           [ <oGraph>:name := <(oGraph)> ]

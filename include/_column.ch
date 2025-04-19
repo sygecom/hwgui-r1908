@@ -6,8 +6,8 @@
              [ LENGTH <nLen> ]          ;
              [ DEC <nDec>    ]          ;
              [ <lEdit: EDITABLE> ]      ;
-             [ JUSTIFY HEAD <nJusHead> ];
-             [ JUSTIFY LINE <nJusLine> ];
+             [ JUSTIFY HEAD <nJusHead> ] ;
+             [ JUSTIFY LINE <nJusLine> ] ;
              [ PICTURE <cPict> ]        ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -18,8 +18,8 @@
              [ [ON] COLORBLOCK <bClrBlck> ]  ;
              [ [ON] BHEADCLICK <bHeadClick> ]  ;
           => ;
-          <oBrw>:AddColumn( HColumn():New( <cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>,;
-             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <{bClrBlck}>, <{bHeadClick}>, <color>, <bcolor>, <bClick> ) )
+          <oBrw>:AddColumn(HColumn():New(<cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>, ;
+             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <{bClrBlck}>, <{bHeadClick}>, <color>, <bcolor>, <bClick>))
 
 #xcommand INSERT COLUMN <block> TO <oBrw> ;
              [ HEADER <cHeader> ]       ;
@@ -27,8 +27,8 @@
              [ LENGTH <nLen> ]          ;
              [ DEC <nDec>    ]          ;
              [ <lEdit: EDITABLE> ]      ;
-             [ JUSTIFY HEAD <nJusHead> ];
-             [ JUSTIFY LINE <nJusLine> ];
+             [ JUSTIFY HEAD <nJusHead> ] ;
+             [ JUSTIFY LINE <nJusLine> ] ;
              [ PICTURE <cPict> ]        ;
              [ VALID <bValid> ]         ;
              [ WHEN <bWhen> ]           ;
@@ -37,5 +37,5 @@
              [ COLORBLOCK <bClrBlck> ]  ;
              INTO <nPos>                ;
           => ;
-          <oBrw>:InsColumn( HColumn():New( <cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>,;
-             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <oBmp>, <{bClrBlck}> ),<nPos> )
+          <oBrw>:InsColumn(HColumn():New(<cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>, ;
+             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <oBmp>, <{bClrBlck}>),<nPos>)

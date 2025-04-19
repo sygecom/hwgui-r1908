@@ -10,12 +10,12 @@
              [ EXSTYLE <nStyleEx> ]         ;
              [ TOOLTIP <cTooltip> ]       ;
              [ RED <r> ] ;
-             [ GREEN <g> ];
-             [ BLUE <b> ];
+             [ GREEN <g> ] ;
+             [ BLUE <b> ] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBut> := ] __IIF(<.class.>, <classname>, HNicebutton)():New( <oParent>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b> );;
+          [ <oBut> := ] __IIF(<.class.>, <classname>, HNicebutton)():New(<oParent>,<nId>,<nStyle>,<nStyleEx>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b>) ;;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE NICEBUTTON [ <oBut> CAPTION ] <caption> ;
@@ -26,8 +26,8 @@
              [ EXSTYLE <nStyleEx> ]         ;
              [ TOOLTIP <cTooltip> ]       ;
              [ RED <r> ] ;
-             [ GREEN <g> ];
-             [ BLUE <b> ];
+             [ GREEN <g> ] ;
+             [ BLUE <b> ] ;
           => ;
-          [<oBut> := ] HNicebutton():Redefine( <oParent>,<nId>,<nStyleEx>, ;
-             <bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b> )
+          [ <oBut> := ] HNicebutton():Redefine(<oParent>,<nId>,<nStyleEx>, ;
+             <bInit>,<bClick>,<caption>,<cTooltip>,<r>,<g>,<b>)

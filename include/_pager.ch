@@ -8,5 +8,5 @@
              [ <lVert: VERTICAL> ] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTool> := ] __IIF(<.class.>, <classname>, HPager)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,,<.lVert.>);;
+          [ <oTool> := ] __IIF(<.class.>, <classname>, HPager)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,,<.lVert.>) ;;
           [ <oTool>:name := <(oTool)> ]

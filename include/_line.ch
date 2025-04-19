@@ -8,12 +8,11 @@
              [ COLOR <color> ]         ;
              [ LINESLANT <cSlant> ]    ;
              [ BORDERWIDTH <nBorder> ] ;
-             [<lVert: VERTICAL>]       ;
+             [ <lVert: VERTICAL> ]       ;
              [ ON INIT <bInit> ]       ;
              [ ON SIZE <bSize> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oLine> := ] __IIF(<.class.>, <classname>, HLine)():New( <oParent>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
-					              <color>, <nHeight>, <cSlant>,<nBorder>  );;
+          [ <oLine> := ] __IIF(<.class.>, <classname>, HLine)():New(<oParent>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>, ;
+					              <color>, <nHeight>, <cSlant>,<nBorder>) ;;
           [ <oLine>:name := <(oLine)> ]
-

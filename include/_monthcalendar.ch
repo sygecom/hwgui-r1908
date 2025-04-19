@@ -1,22 +1,22 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> MONTHCALENDAR [ <oMonthCalendar> ] ;
-             [ OF <oParent> ]                              ;
-             [ ID <nId> ]                               ;
-             [ SIZE <nWidth>,<nHeight> ]                ;
-             [ INIT <dInit> ]                           ;
-             [ ON INIT <bInit> ]                        ;
-             [ ON CHANGE <bChange> ]                    ;
-             [ ON SELECT <bSelect> ]                   ;
-             [ STYLE <nStyle> ]                         ;
-             [ FONT <oFont> ]                           ;
-             [ TOOLTIP <cTooltip> ]                     ;
-             [ < notoday : NOTODAY > ]                  ;
-             [ < notodaycircle : NOTODAYCIRCLE > ]      ;
-             [ < weeknumbers : WEEKNUMBERS > ]          ;
-             [ <class: CLASS> <classname> ] ;
+             [ OF <oParent> ]                             ;
+             [ ID <nId> ]                                 ;
+             [ SIZE <nWidth>,<nHeight> ]                  ;
+             [ INIT <dInit> ]                             ;
+             [ ON INIT <bInit> ]                          ;
+             [ ON CHANGE <bChange> ]                      ;
+             [ ON SELECT <bSelect> ]                      ;
+             [ STYLE <nStyle> ]                           ;
+             [ FONT <oFont> ]                             ;
+             [ TOOLTIP <cTooltip> ]                       ;
+             [ <notoday : NOTODAY> ]                      ;
+             [ <notodaycircle : NOTODAYCIRCLE> ]          ;
+             [ <weeknumbers : WEEKNUMBERS> ]              ;
+             [ <class: CLASS> <classname> ]               ;
           => ;
-          [<oMonthCalendar> :=] __IIF(<.class.>, <classname>, HMonthCalendar)():New( <oParent>,<nId>,<dInit>,<nStyle>,;
-             <nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>,;
-             <.notoday.>,<.notodaycircle.>,<.weeknumbers.>,<bSelect> );;
+          [ <oMonthCalendar> := ] __IIF(<.class.>, <classname>, HMonthCalendar)():New(<oParent>,<nId>,<dInit>,<nStyle>, ;
+             <nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>, ;
+             <.notoday.>,<.notodaycircle.>,<.weeknumbers.>,<bSelect>) ;;
           [ <oMonthCalendar>:name := <(oMonthCalendar)> ]

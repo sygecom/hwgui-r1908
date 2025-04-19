@@ -19,9 +19,9 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [ <oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New(<oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>,         ;
-             <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
+             <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr>) ;;
           [ <oUpd>:name := <(oUpd)> ]
 
 /* SAY ... GET system     */
@@ -41,16 +41,19 @@
              [ VALID <bLfocus> ]        ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
-             [<lnoborder: NOBORDER>]    ;
+             [ <lnoborder: NOBORDER> ]    ;
              [ TOOLTIP <cTooltip> ]       ;
              [ ON INIT <bInit> ]        ;
-             [ ON KEYDOWN <bKeyDown>   ];
+             [ ON KEYDOWN <bKeyDown>   ] ;
              [ ON CHANGE <bChange> ]    ;
-             [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
+             [ ;
+                [ ON OTHER MESSAGES <bOther> ] ;
+                [ ON OTHERMESSAGES <bOther> ] ;
+             ] ;
           => ;
-          [<oUpd> := ] HUpDown():New( <oParent>,<nId>,<vari>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
-             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,,,;
+          [ <oUpd> := ] HUpDown():New(<oParent>,<nId>,<vari>,{|v|IIf(v == NIL, <vari>, <vari> := v)}, ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,,, ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>, ;
-             <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>,;
-             <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,);;            
+             <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>, ;
+             <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,) ;;
           [ <oUpd>:name := <(oUpd)> ]

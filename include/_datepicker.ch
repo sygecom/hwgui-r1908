@@ -14,12 +14,12 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
-             [<lShowTime: SHOWTIME>]    ;
+             [ <lShowTime: SHOWTIME> ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oParent>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
+          [ <oPick> := ] __IIF(<.class.>, <classname>, HDatePicker)():New(<oParent>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
-             <color>,<bcolor>,<.lShowTime.>  );;
+             <color>,<bcolor>,<.lShowTime.>) ;;
           [ <oPick>:name := <(oPick)> ]
 
 #xcommand REDEFINE DATEPICKER [ <oPick> VAR  ] <vari> ;
@@ -35,11 +35,11 @@
              [ ON CHANGE <bChange> ]    ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
-             [<lShowTime: SHOWTIME>]    ;
+             [ <lShowTime: SHOWTIME> ]    ;
           => ;
-          [<oPick> :=] HDatePicker():redefine( <oParent>,<nId>,<dInit>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
+          [ <oPick> := ] HDatePicker():redefine(<oParent>,<nId>,<dInit>,{|v|IIf(v == NIL, <vari>, <vari> := v)}, ;
              <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
-             <color>,<bcolor>,<.lShowTime.>  )
+             <color>,<bcolor>,<.lShowTime.>)
 
 /* SAY ... GET system     */
 
@@ -56,11 +56,11 @@
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
-             [<lShowTime: SHOWTIME>]    ;
+             [ <lShowTime: SHOWTIME> ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oParent>,<nId>,<vari>,    ;
-             {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
+          [ <oPick> := ] __IIF(<.class.>, <classname>, HDatePicker)():New(<oParent>,<nId>,<vari>,    ;
+             {|v|IIf(v == NIL, <vari>, <vari> := v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
-             <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>  );;
+             <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>) ;;
           [ <oPick>:name := <(oPick)> ]

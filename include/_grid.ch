@@ -22,14 +22,14 @@
              [ COLOR <color> ]           ;
              [ BACKCOLOR <bkcolor> ]     ;
              [ <lNoHeader: NO HEADER> ]  ;
-             [BITMAP <aBit>];
+             [ BITMAP <aBit> ] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oGrid> := __IIF(<.class.>, <classname>, HGrid)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
-             <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
-             <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
-             <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;
-             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>);;
+          <oGrid> := __IIF(<.class.>, <classname>, HGrid)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, ;
+             <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>, ;
+             <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>, ;
+             <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>, ;
+             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>) ;;
           [ <oGrid>:name := <(oGrid)> ]
 
 #xcommand ADD COLUMN TO GRID <oGrid>    ;
@@ -38,7 +38,7 @@
              [ JUSTIFY HEAD <nJusHead> ] ;
              [ BITMAP <n> ]              ;
           => ;
-          <oGrid>:AddColumn( <cHeader>, <nWidth>, <nJusHead> ,<n>)
+          <oGrid>:AddColumn(<cHeader>, <nWidth>, <nJusHead> ,<n>)
 
 #xcommand ADDROW TO GRID <oGrid>    ;
              [ HEADER <cHeader> ]        ;

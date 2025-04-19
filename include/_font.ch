@@ -10,5 +10,5 @@
              [ <under: UNDERLINE> ]  ;
              [ <strike: STRIKEOUT> ] ;
           => ;
-          <oFont> := HFont():Add( <cName>, <nWidth>, <nHeight>, <nWeight>, <charset>, ;
-             IIf( <.ita.>, 1, 0 ), IIf( <.under.>, 1, 0 ), IIf( <.strike.>, 1, 0 ) )
+          <oFont> := HFont():Add(<cName>, <nWidth>, <nHeight>, <nWeight>, <charset>, ;
+             IIf(<.ita.>, 1, 0), IIf(<.under.>, 1, 0), IIf(<.strike.>, 1, 0))

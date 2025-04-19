@@ -6,7 +6,7 @@
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
-             [<lTransp: TRANSPARENT>]   ;
+             [ <lTransp: TRANSPARENT> ]   ;
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
@@ -14,6 +14,6 @@
              [ STYLE <nStyle> ]         ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<color>,<bcolor>,<.lTransp.>);;
+          [ <oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<color>,<bcolor>,<.lTransp.>) ;;
           [ <oGroup>:name := <(oGroup)> ]

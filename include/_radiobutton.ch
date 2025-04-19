@@ -6,7 +6,7 @@
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
-             [<lTransp: TRANSPARENT>]   ;
+             [ <lTransp: TRANSPARENT> ]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
@@ -17,9 +17,9 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
+          [ <oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<bClick>, ;
-             <cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.> );;
+             <cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>) ;;
           [ <oRadio>:name := <(oRadio)> ]
 
 #xcommand REDEFINE RADIOBUTTON [ <oRadio> ] ;
@@ -27,7 +27,7 @@
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
-             [<lTransp: TRANSPARENT>]   ;
+             [ <lTransp: TRANSPARENT> ]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
@@ -37,5 +37,5 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ GROUP <oGroup>]          ;
           => ;
-          [<oRadio> := ] HRadioButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>, ;
-             <bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>,<oGroup> )
+          [ <oRadio> := ] HRadioButton():Redefine(<oParent>,<nId>,<oFont>,<bInit>,<bSize>, ;
+             <bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>,<oGroup>)

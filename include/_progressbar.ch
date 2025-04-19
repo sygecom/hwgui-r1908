@@ -15,6 +15,6 @@
              [ TOOLTIP <cTooltip> ]              ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oPBar> :=  __IIF(<.class.>, <classname>, HProgressBar)():New( <oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bPaint>,<cTooltip>,<nAnimat>,<.lVert.> );;
+          <oPBar> :=  __IIF(<.class.>, <classname>, HProgressBar)():New(<oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
+             <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bPaint>,<cTooltip>,<nAnimat>,<.lVert.>) ;;
           [ <oPBar>:name := <(oPBar)> ]
