@@ -542,6 +542,7 @@
 #define PSN_WIZFINISH           -208   // (PSN_FIRST-8)
 #define PSN_QUERYCANCEL         -209   // (PSN_FIRST-9)
 
+#if 0 // disabled - duplications
 #define TCN_FIRST               -550       // tab control
 #define TCN_CLICK               -2
 #define TCN_RCLICK              -5
@@ -553,6 +554,19 @@
 #define TCN_SELCHANGING         -552   //(TCN_FIRST - 2)
 #define TCN_GETOBJECT           -553   //(TCN_FIRST - 3)
 #define TCN_FOCUSCHANGE         -554   //(TCN_FIRST - 4)
+#endif
+
+#define TCN_FIRST       (0-550)
+#define TCN_LAST        (0-580)
+#define TCN_KEYDOWN     (TCN_FIRST - 0)
+#define TCN_SELCHANGE   (TCN_FIRST - 1)
+#define TCN_SELCHANGING (TCN_FIRST - 2)
+#define TCN_GETOBJECT   (TCN_FIRST - 3)
+#define TCN_FOCUSCHANGE (TCN_FIRST - 4)
+#define TCN_CLICK       -2
+#define TCN_RCLICK      -5
+#define TCN_SETFOCUS    -555
+#define TCN_KILLFOCUS   -556
 
 #define TCM_FIRST               4864     // Tab control messages
 #define TCM_SETIMAGELIST        4867     // (TCM_FIRST + 3)
