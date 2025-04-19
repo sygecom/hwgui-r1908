@@ -10,7 +10,7 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ STYLE <nStyle> ]         ;
@@ -20,7 +20,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oParent>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
-             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
+             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.>,<.lTransp.> );;
           [ <oCheck>:name := <(oCheck)> ]
 
@@ -32,7 +32,7 @@
              [ INIT <lInit>    ]        ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ FONT <oFont> ]           ;
@@ -40,7 +40,7 @@
              [ <lEnter: ENTER> ]        ;
           => ;
           [<oCheck> := ] HCheckButton():Redefine( <oParent>,<nId>,<lInit>,,<oFont>, ;
-             <bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.> )
+             <bInit>,<bSize>,<bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.> )
 
 /* SAY ... GET system     */
 

@@ -8,7 +8,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ STYLE <nStyle> ]         ;
@@ -17,7 +17,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oBut> := ] __IIF(<.class.>, <classname>, HButton)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus> );;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTON [ <oBut> ]   ;
@@ -29,10 +29,10 @@
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
-          [<oBut> := ] HButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+          [<oBut> := ] HButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bPaint>, ;
              <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<bGfocus> )

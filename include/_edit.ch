@@ -8,7 +8,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON KEYDOWN <bKeyDown>]   ;
@@ -22,7 +22,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oParent>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther> );;
           [ <oEdit>:name := <(oEdit)> ]
 
@@ -34,13 +34,13 @@
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON KEYDOWN <bKeyDown>]   ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
-          [<oEdit> := ] HEdit():Redefine( <oParent>,<nId>,,,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+          [<oEdit> := ] HEdit():Redefine( <oParent>,<nId>,,,<oFont>,<bInit>,<bSize>,<bPaint>, ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,,,,<bKeyDown> )
 
 /* SAY ... GET system     */

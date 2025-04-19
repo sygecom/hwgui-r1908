@@ -10,7 +10,7 @@
              [ <lTransp: TRANSPARENT>]  ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
@@ -22,7 +22,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oSay> := ] __IIF(<.class.>, <classname>, HStaticLink)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
-             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bDraw>, <cTooltip>, ;
+             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, ;
              <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>  );;
           [ <oSay>:name := <(oSay)> ]
 
@@ -35,7 +35,7 @@
              [ <lTransp: TRANSPARENT>]  ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
              [ VISITCOLOR <vcolor> ]    ;
@@ -43,6 +43,6 @@
              [ HOVERCOLOR <hcolor> ]    ;
           => ;
           [<oSay> := ] HStaticLink():Redefine( <oParent>, <nId>, <cCaption>, ;
-             <oFont>, <bInit>, <bSize>, <bDraw>, <cTooltip>, <color>, <bcolor>,;
+             <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, <color>, <bcolor>,;
              <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor> )
 

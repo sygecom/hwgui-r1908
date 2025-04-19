@@ -9,7 +9,7 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
              [ STYLE <nStyle> ]         ;
@@ -18,7 +18,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
-             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
+             <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.> );;
           [ <oRadio>:name := <(oRadio)> ]
 
@@ -30,7 +30,7 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
              [ FONT <oFont> ]           ;
@@ -38,4 +38,4 @@
              [ GROUP <oGroup>]          ;
           => ;
           [<oRadio> := ] HRadioButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>, ;
-             <bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>,<oGroup> )
+             <bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>,<oGroup> )

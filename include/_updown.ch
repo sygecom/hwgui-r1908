@@ -11,7 +11,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ STYLE <nStyle> ]         ;
@@ -20,7 +20,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>,         ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
           [ <oUpd>:name := <(oUpd)> ]
 

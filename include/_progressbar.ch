@@ -6,7 +6,7 @@
              [ ID <nId> ]                        ;
              [ SIZE <nWidth>,<nHeight> ]         ;
              [ ON INIT <bInit> ]                 ;
-             [ ON PAINT <bDraw> ]                ;
+             [ ON PAINT <bPaint> ]                ;
              [ ON SIZE <bSize> ]                 ;
              [ BARWIDTH <maxpos> ]               ;
              [ QUANTITY <nRange> ]               ;
@@ -16,5 +16,5 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           <oPBar> :=  __IIF(<.class.>, <classname>, HProgressBar)():New( <oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bDraw>,<cTooltip>,<nAnimat>,<.lVert.> );;
+             <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bPaint>,<cTooltip>,<nAnimat>,<.lVert.> );;
           [ <oPBar>:name := <(oPBar)> ]

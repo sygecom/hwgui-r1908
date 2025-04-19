@@ -13,7 +13,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
@@ -26,7 +26,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>,<bChange>,<cTooltip>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
 						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
           [ <oCombo>:name := <(oCombo)> ]
@@ -39,7 +39,7 @@
             [ MAXLENGTH <nMaxLength> ] ;
             [ ON INIT <bInit> ]        ;
             [ ON SIZE <bSize> ]        ;
-            [ ON PAINT <bDraw> ]       ;
+            [ ON PAINT <bPaint> ]       ;
             [ ON CHANGE <bChange> ]    ;
             [ FONT <oFont> ]           ;
             [ TOOLTIP <cTooltip> ]       ;
@@ -48,7 +48,7 @@
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oParent>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>, <bIChange>,<nDisplay>,<nMaxLength>)
+             <bSize>,<bPaint>,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>, <bIChange>,<nDisplay>,<nMaxLength>)
 
 /* SAY ... GET system     */
 

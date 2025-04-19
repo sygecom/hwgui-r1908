@@ -8,7 +8,7 @@
              [ FONT <oFont> ]           ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
              [ ON CLICK <bClick> ]      ;
              [ ON RIGHTCLICK <bRClick> ];
@@ -18,7 +18,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oTab> := ] __IIF(<.class.>, <classname>, HTab)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
              <bClick>, <bGetFocus>, <bLostFocus>, <bRClick> ) ;;
           [ <oTab>:name := <(oTab)> ]
 
@@ -39,7 +39,7 @@
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
           => ;
-          [<oSay> := ] Htab():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<bChange> )
+          [<oSay> := ] Htab():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<bChange> )

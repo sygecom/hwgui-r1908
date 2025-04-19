@@ -38,7 +38,7 @@
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ITEM <aitem>];
           => ;
-          [<oSay> := ] HGRIDex():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<aitem> )
+          [<oSay> := ] HGRIDex():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem> )

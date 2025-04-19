@@ -9,7 +9,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]           ;
              [ ON SIZE <bSize> ]           ;
-             [ ON PAINT <bDraw> ]          ;
+             [ ON PAINT <bPaint> ]          ;
              [ ON CHANGE <bChange> ]       ;
              [ STYLE <nStyle> ]            ;
              [ FONT <oFont> ]              ;
@@ -22,7 +22,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
+             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>,<bChange>,<cTooltip>,;
              <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther> ) ;;
           [ <oListbox>:name := <(oListbox)> ]
 
@@ -32,7 +32,7 @@
              [ INIT <nInit>    ]           ;
              [ ON INIT <bInit> ]           ;
              [ ON SIZE <bSize> ]           ;
-             [ ON PAINT <bDraw> ]          ;
+             [ ON PAINT <bPaint> ]          ;
              [ ON CHANGE <bChange> ]       ;
              [ FONT <oFont> ]              ;
              [ TOOLTIP <cTooltip> ]          ;
@@ -42,7 +42,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
           [<oListbox> := ] HListBox():Redefine( <oParent>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
+             <bSize>,<bPaint>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
 
 #xcommand @ <nX>, <nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
              ITEMS  <aItems>            ;
@@ -53,7 +53,7 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CHANGE <bChange> ]    ;
              [ STYLE <nStyle> ]         ;
              [ FONT <oFont> ]           ;
@@ -67,6 +67,6 @@
           => ;
           [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oParent>,<nId>,<vari>,;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},;
-             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>, ;
              <bChange>,<cTooltip>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
           [ <oListbox>:name := <(oListbox)> ]

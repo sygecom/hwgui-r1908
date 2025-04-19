@@ -9,7 +9,7 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON DBLCLICK <bDblClick> ];
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
@@ -19,7 +19,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<cTooltip>, ;
+             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<cTooltip>, ;
              <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther> );;
           [ <oSay>:name := <(oSay)> ]
 
@@ -31,11 +31,11 @@
              [<lTransp: TRANSPARENT>]   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON CLICK <bClick> ]      ;
              [ ON DBLCLICK <bDblClick> ];
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
           [<oSay> := ] HStatic():Redefine( <oParent>,<nId>,<cCaption>, ;
-             <oFont>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick> )
+             <oFont>,<bInit>,<bSize>,<bPaint>,<cTooltip>,<color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick> )

@@ -7,11 +7,11 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ STYLE <nStyle> ]         ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPanel> :=] __IIF(<.class.>, <classname>, HPanel)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
+          [<oPanel> :=] __IIF(<.class.>, <classname>, HPanel)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bPaint>,<bcolor> );;
           [ <oPanel>:name := <(oPanel)> ]
 
 #xcommand REDEFINE PANEL [ <oPanel> ]  ;
@@ -20,8 +20,8 @@
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ HEIGHT <nHeight> ]       ;
              [ WIDTH <nWidth> ]         ;
           => ;
-          [<oPanel> :=] HPanel():Redefine( <oParent>,<nId>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>, <bcolor> )
+          [<oPanel> :=] HPanel():Redefine( <oParent>,<nId>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bPaint>, <bcolor> )

@@ -9,7 +9,7 @@
              [<lallowtabs: ALLOWTABS>]  ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ ON GETFOCUS <bGfocus> ]  ;
              [ ON LOSTFOCUS <bLfocus> ] ;
              [ ON CHANGE <bChange>]     ;
@@ -20,6 +20,6 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New( <oParent>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
+             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<bOther>, <.lallowtabs.>,<bChange> );;
           [ <oEdit>:name := <(oEdit)> ]

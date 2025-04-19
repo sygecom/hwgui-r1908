@@ -5,7 +5,7 @@
              [ HEIGHT <nHeight> ]   ;
              [ ON INIT <bInit> ]    ;
              [ ON SIZE <bSize> ]    ;
-             [ ON PAINT <bDraw> ]   ;
+             [ ON PAINT <bPaint> ]   ;
              [ ON DBLCLICK <bDblClick> ];
              [ ON RIGHTCLICK <bRClick> ];
              [ STYLE <nStyle> ]     ;
@@ -13,7 +13,7 @@
              [ PARTS <aparts,...> ] ;
           => ;
           [ <oStat> := ] HStatus():New( <oParent>,<nId>,<nStyle>,<oFont>,\{<aparts>\},<bInit>,;
-             <bSize>,<bDraw>, <bRClick>, <bDblClick>, <nHeight> );;
+             <bSize>,<bPaint>, <bRClick>, <bDblClick>, <nHeight> );;
           [ <oStat>:name := <(oStat)> ]
 
 #xcommand REDEFINE STATUS  <oSay>  ;
@@ -21,7 +21,7 @@
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
-             [ ON PAINT <bDraw> ]       ;
+             [ ON PAINT <bPaint> ]       ;
              [ PARTS <bChange,...> ]    ;
           => ;
-          [<oSay> := ] HStatus():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,\{<bChange>\} )
+          [<oSay> := ] HStatus():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,\{<bChange>\} )
