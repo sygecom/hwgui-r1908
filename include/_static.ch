@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> SAY [ <oSay> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -18,13 +18,13 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<cTooltip>, ;
              <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther> );;
           [ <oSay>:name := <(oSay)> ]
 
 #xcommand REDEFINE SAY   [ <oSay> CAPTION ] <cCaption>   ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -37,5 +37,5 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
-          [<oSay> := ] HStatic():Redefine( <oWnd>,<nId>,<cCaption>, ;
+          [<oSay> := ] HStatic():Redefine( <oParent>,<nId>,<cCaption>, ;
              <oFont>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick> )

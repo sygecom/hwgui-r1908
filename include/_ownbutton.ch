@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> OWNERBUTTON [ <oOwnBtn> ]  ;
-             [ OF <oWnd> ]             ;
+             [ OF <oParent> ]             ;
              [ ID <nId> ]              ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -26,14 +26,14 @@
              [ <lThemed: THEMED> ]     ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oOwnBtn> :=] __IIF(<.class.>, <classname>, HOWNBUTTON)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oOwnBtn> :=] __IIF(<.class.>, <classname>, HOWNBUTTON)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
              <heightb>,<.ltr.>,<trcolor>,<cTooltip>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;
           [ <oOwnBtn>:name := <(oOwnBtn)> ]
 
 #xcommand REDEFINE OWNERBUTTON [ <oOwnBtn> ]  ;
-             [ OF <oWnd> ]                     ;
+             [ OF <oParent> ]                     ;
              ID <nId>                          ;
              [ ON INIT <bInit> ]     ;
              [ ON SIZE <bSize> ]     ;
@@ -51,7 +51,7 @@
              [ <enable: DISABLED> ]  ;
              [ <lCheck: CHECK> ]      ;
           => ;
-          [<oOwnBtn> :=] HOWNBUTTON():Redefine( <oWnd>,<nId>,<bInit>,<bSize>,;
+          [<oOwnBtn> :=] HOWNBUTTON():Redefine( <oParent>,<nId>,<bInit>,<bSize>,;
              <bDraw>,<bClick>,<.flat.>,<cText>,<color>,<font>,<xt>,<yt>,;
              <widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,;
              <.ltr.>,<cTooltip>,!<.enable.>,<.lCheck.> )

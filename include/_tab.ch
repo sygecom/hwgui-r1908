@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> TAB [ <oTab> ITEMS ] <aItems> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ STYLE <nStyle> ]         ;
@@ -17,7 +17,7 @@
              [ BITMAP <aBmp>  [<res: FROM RESOURCE>] [ BITCOUNT <nBC> ] ]  ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTab> := ] __IIF(<.class.>, <classname>, HTab)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oTab> := ] __IIF(<.class.>, <classname>, HTab)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>,;
              <bClick>, <bGetFocus>, <bLostFocus>, <bRClick> ) ;;
           [ <oTab>:name := <(oTab)> ]
@@ -35,11 +35,11 @@
 #xcommand ENDPAGE OF <oTab> => <oTab>:EndPage()
 
 #xcommand REDEFINE TAB  <oSay>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ ON CHANGE <bChange> ]    ;
           => ;
-          [<oSay> := ] Htab():Redefine( <oWnd>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<bChange> )
+          [<oSay> := ] Htab():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<bChange> )

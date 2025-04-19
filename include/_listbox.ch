@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
-             [ OF <oWnd> ]                 ;
+             [ OF <oParent> ]                 ;
              [ ID <nId> ]                  ;
              [ INIT <nInit> ]              ;
              [ SIZE <nWidth>, <nHeight> ]    ;
@@ -21,13 +21,13 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<cTooltip>,;
              <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther> ) ;;
           [ <oListbox>:name := <(oListbox)> ]
 
 #xcommand REDEFINE LISTBOX [ <oListbox> ITEMS ] <aItems> ;
-             [ OF <oWnd> ]                 ;
+             [ OF <oParent> ]                 ;
              ID <nId>                      ;
              [ INIT <nInit>    ]           ;
              [ ON INIT <bInit> ]           ;
@@ -41,12 +41,12 @@
              [ ON KEYDOWN <bKeyDown> ]     ;
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
-          [<oListbox> := ] HListBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
+          [<oListbox> := ] HListBox():Redefine( <oParent>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
              <bSize>,<bDraw>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther> )
 
 #xcommand @ <nX>, <nY> GET LISTBOX [ <oListbox> VAR ]  <vari> ;
              ITEMS  <aItems>            ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -65,7 +65,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oWnd>,<nId>,<vari>,;
+          [<oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New( <oParent>,<nId>,<vari>,;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bChange>,<cTooltip>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;

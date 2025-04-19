@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> TRACKBAR [ <oTrackBar> ]  ;
-             [ OF <oWnd> ]                 ;
+             [ OF <oParent> ]                 ;
              [ ID <nId> ]                  ;
              [ SIZE <nWidth>, <nHeight> ]    ;
              [ RANGE <nLow>,<nHigh> ]      ;
@@ -21,7 +21,7 @@
              [ < left : LEFT > ]           ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTrackBar> :=] __IIF(<.class.>, <classname>, HTrackBar)():New( <oWnd>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;
+          [<oTrackBar> :=] __IIF(<.class.>, <classname>, HTrackBar)():New( <oParent>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;
              <nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<cTooltip>,<bChange>,<bDrag>,<nLow>,<nHigh>,<.vertical.>,;
              IIf(<.autoticks.>, 1,IIf(<.noticks.>, 16, 0)), ;
              IIf(<.both.>, 8,IIf(<.top.>.or.<.left.>, 4, 0)) );;

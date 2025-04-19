@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ INIT <lInit> ]           ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -19,13 +19,13 @@
              [ <lEnter: ENTER> ]        ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oWnd>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
+          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oParent>,<nId>,<lInit>,,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.>,<.lTransp.> );;
           [ <oCheck>:name := <(oCheck)> ]
 
 #xcommand REDEFINE CHECKBOX [ <oCheck> ] ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -39,14 +39,14 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <lEnter: ENTER> ]        ;
           => ;
-          [<oCheck> := ] HCheckButton():Redefine( <oWnd>,<nId>,<lInit>,,<oFont>, ;
+          [<oCheck> := ] HCheckButton():Redefine( <oParent>,<nId>,<lInit>,,<oFont>, ;
              <bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus>,<.lEnter.> )
 
 /* SAY ... GET system     */
 
 #xcommand @ <nX>, <nY> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
              CAPTION  <caption>         ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -63,14 +63,14 @@
              [ ON SIZE <bSize> ]        ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oWnd>,<nId>,<vari>,              ;
+          [<oCheck> := ] __IIF(<.class.>, <classname>, HCheckButton)():New( <oParent>,<nId>,<vari>,              ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},                   ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>, ;
              <bInit>,<bSize>,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>);;
           [ <oCheck>:name := <(oCheck)> ]
 
 #xcommand REDEFINE GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -80,6 +80,6 @@
              [ WHEN <bWhen> ]           ;
              [ <lEnter: ENTER> ]        ;
           => ;
-          [<oCheck> := ] HCheckButton():Redefine( <oWnd>,<nId>,<vari>, ;
+          [<oCheck> := ] HCheckButton():Redefine( <oParent>,<nId>,<vari>, ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},           ;
              <oFont>,,,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>)

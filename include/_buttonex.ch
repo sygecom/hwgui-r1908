@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> BUTTONEX [ <oBut> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -23,13 +23,13 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBut> := ] __IIF(<.class.>, <classname>, HButtonEx)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oBut> := ] __IIF(<.class.>, <classname>, HButtonEx)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<hbit>, ;
              <nBStyle>,<hIco>, <.lTransp.>,<bGfocus>,<nMargin>,<.lnoTheme.>, <bOther> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTONEX [ <oBut> ]   ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ CAPTION <cCaption> ]     ;
              [ COLOR <color> ]          ;
@@ -45,5 +45,5 @@
              [ BSTYLE <nBStyle> ]       ;
              [ PICTUREMARGIN <nMargin> ];
           => ;
-          [<oBut> := ] HButtonEx():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+          [<oBut> := ] HButtonEx():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<hbit>,<nBStyle>,<bGfocus>,<nMargin>  )

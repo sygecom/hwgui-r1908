@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> RICHEDIT [ <oEdit> TEXT ] <vari> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -19,7 +19,7 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New( <oWnd>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New( <oParent>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<bOther>, <.lallowtabs.>,<bChange> );;
           [ <oEdit>:name := <(oEdit)> ]

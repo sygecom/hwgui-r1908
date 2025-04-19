@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> BUTTON [ <oBut> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -16,12 +16,12 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oBut> := ] __IIF(<.class.>, <classname>, HButton)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oBut> := ] __IIF(<.class.>, <classname>, HButton)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bGfocus> );;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTON [ <oBut> ]   ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ CAPTION <cCaption> ]     ;
              [ COLOR <color> ]          ;
@@ -34,5 +34,5 @@
              [ ON GETFOCUS <bGfocus> ]  ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
-          [<oBut> := ] HButton():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+          [<oBut> := ] HButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<bGfocus> )

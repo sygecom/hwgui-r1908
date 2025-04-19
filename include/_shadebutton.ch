@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> SHADEBUTTON [ <oShBtn> ]  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ EFFECT <shadeID>  [ PALETTE <palet> ]             ;
@@ -24,7 +24,7 @@
              [ TOOLTIP <cTooltip> ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oShBtn> :=] __IIF(<.class.>, <classname>, HSHADEBUTTON)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oShBtn> :=] __IIF(<.class.>, <classname>, HSHADEBUTTON)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, ;
              <trcolor>,<cTooltip>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;

@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> GRID <oGrid>        ;
-             [ OF <oWnd> ]               ;
+             [ OF <oParent> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;
              [ SIZE <nWidth>, <nHeight> ]  ;
@@ -25,7 +25,7 @@
              [BITMAP <aBit>];
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oGrid> := __IIF(<.class.>, <classname>, HGrid)():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
+          <oGrid> := __IIF(<.class.>, <classname>, HGrid)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;

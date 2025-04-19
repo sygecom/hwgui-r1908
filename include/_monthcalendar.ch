@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> MONTHCALENDAR [ <oMonthCalendar> ] ;
-             [ OF <oWnd> ]                              ;
+             [ OF <oParent> ]                              ;
              [ ID <nId> ]                               ;
              [ SIZE <nWidth>,<nHeight> ]                ;
              [ INIT <dInit> ]                           ;
@@ -16,7 +16,7 @@
              [ < weeknumbers : WEEKNUMBERS > ]          ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oMonthCalendar> :=] __IIF(<.class.>, <classname>, HMonthCalendar)():New( <oWnd>,<nId>,<dInit>,<nStyle>,;
+          [<oMonthCalendar> :=] __IIF(<.class.>, <classname>, HMonthCalendar)():New( <oParent>,<nId>,<dInit>,<nStyle>,;
              <nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>,;
              <.notoday.>,<.notodaycircle.>,<.weeknumbers.>,<bSelect> );;
           [ <oMonthCalendar>:name := <(oMonthCalendar)> ]

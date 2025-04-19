@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand ADD STATUS [<oStat>] [ TO <oWnd> ] ;
+#xcommand ADD STATUS [<oStat>] [ TO <oParent> ] ;
              [ ID <nId> ]           ;
              [ HEIGHT <nHeight> ]   ;
              [ ON INIT <bInit> ]    ;
@@ -12,16 +12,16 @@
              [ FONT <oFont> ]       ;
              [ PARTS <aparts,...> ] ;
           => ;
-          [ <oStat> := ] HStatus():New( <oWnd>,<nId>,<nStyle>,<oFont>,\{<aparts>\},<bInit>,;
+          [ <oStat> := ] HStatus():New( <oParent>,<nId>,<nStyle>,<oFont>,\{<aparts>\},<bInit>,;
              <bSize>,<bDraw>, <bRClick>, <bDblClick>, <nHeight> );;
           [ <oStat>:name := <(oStat)> ]
 
 #xcommand REDEFINE STATUS  <oSay>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ PARTS <bChange,...> ]    ;
           => ;
-          [<oSay> := ] HStatus():Redefine( <oWnd>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,\{<bChange>\} )
+          [<oSay> := ] HStatus():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,\{<bChange>\} )

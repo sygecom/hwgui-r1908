@@ -2,7 +2,7 @@
 
 #xcommand @ <nX>, <nY> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>            ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
@@ -21,7 +21,7 @@
              [CHECK <acheck>];
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oCombo> := ] __IIF(<.class.>, <classname>, HCheckComboBox)():New( <oWnd>,<nId>,<vari>,    ;
+          [<oCombo> := ] __IIF(<.class.>, <classname>, HCheckComboBox)():New( <oParent>,<nId>,<vari>,    ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <aItems>,<oFont>,,,,<bChange>,<cTooltip>, ;

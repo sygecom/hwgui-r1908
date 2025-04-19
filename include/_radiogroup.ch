@@ -13,7 +13,7 @@
           //nando
 #xcommand @ <nX>, <nY> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
              [ CAPTION  <caption> ];
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -26,7 +26,7 @@
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
              [ <class: CLASS> <classname> ] ;
-          => [<ogr> := ] __IIF(<.class.>, <classname>, HRadioGroup)():NewRG( <oWnd>,<nId>,<nStyle>,<vari>,;
+          => [<ogr> := ] __IIF(<.class.>, <classname>, HRadioGroup)():NewRG( <oParent>,<nId>,<nStyle>,<vari>,;
                   {|v|IIf(v == NIL,<vari>,<vari>:=v)},<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>,;
                   <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>);;
           [ <ogr>:name := <(ogr)> ]

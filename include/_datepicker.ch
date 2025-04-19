@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> DATEPICKER [ <oPick> ]  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -17,13 +17,13 @@
              [<lShowTime: SHOWTIME>]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oWnd>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
+          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oParent>,<nId>,<dInit>,,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  );;
           [ <oPick>:name := <(oPick)> ]
 
 #xcommand REDEFINE DATEPICKER [ <oPick> VAR  ] <vari> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -37,14 +37,14 @@
              [ TOOLTIP <cTooltip> ]       ;
              [<lShowTime: SHOWTIME>]    ;
           => ;
-          [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
+          [<oPick> :=] HDatePicker():redefine( <oParent>,<nId>,<dInit>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
              <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>, ;
              <color>,<bcolor>,<.lShowTime.>  )
 
 /* SAY ... GET system     */
 
 #xcommand @ <nX>, <nY> GET DATEPICKER [ <oPick> VAR ] <vari> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -59,7 +59,7 @@
              [<lShowTime: SHOWTIME>]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oWnd>,<nId>,<vari>,    ;
+          [<oPick> :=] __IIF(<.class.>, <classname>, HDatePicker)():New( <oParent>,<nId>,<vari>,    ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},      ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
              <oFont>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<cTooltip>,<color>,<bcolor>,<.lShowTime.>  );;

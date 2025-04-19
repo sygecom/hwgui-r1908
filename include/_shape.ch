@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>, <nY>  SHAPE [<oShape>] [OF <oWnd>] ;
+#xcommand @ <nX>, <nY>  SHAPE [<oShape>] [OF <oParent>] ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ BORDERWIDTH <nBorder> ]  ;
@@ -14,7 +14,7 @@
              [ ON SIZE <bSize> ]        ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [ <oShape> := ] __IIF(<.class.>, <classname>, HShape)():New(<oWnd>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
+          [ <oShape> := ] __IIF(<.class.>, <classname>, HShape)():New(<oParent>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
              <nBorder>, <nCurvature>, <nbStyle>,<nfStyle>, <tcolor>, <bcolor>, <bSize>,<bInit>,<nbackStyle>);;
           [ <oShape>:name := <(oShape)> ]
 

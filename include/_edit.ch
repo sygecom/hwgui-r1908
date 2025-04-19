@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> EDITBOX [ <oEdit> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -21,13 +21,13 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oParent>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther> );;
           [ <oEdit>:name := <(oEdit)> ]
 
 #xcommand REDEFINE EDITBOX [ <oEdit> ] ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -40,13 +40,13 @@
              [ ON KEYDOWN <bKeyDown>]   ;
              [ TOOLTIP <cTooltip> ]       ;
           => ;
-          [<oEdit> := ] HEdit():Redefine( <oWnd>,<nId>,,,<oFont>,<bInit>,<bSize>,<bDraw>, ;
+          [<oEdit> := ] HEdit():Redefine( <oParent>,<nId>,,,<oFont>,<bInit>,<bSize>,<bDraw>, ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,,,,<bKeyDown> )
 
 /* SAY ... GET system     */
 #ifdef __SYGECOM__
 #xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -67,7 +67,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<vari>,               ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oParent>,<nId>,<vari>,               ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,IIf(!EMPTY(<cTooltip>),<cTooltip>,),<color>,<bcolor>,<cPicture>,;
@@ -76,7 +76,7 @@
 
 #else
 #xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -97,7 +97,7 @@
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oWnd>,<nId>,<vari>,               ;
+          [<oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New( <oParent>,<nId>,<vari>,               ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},             ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,<cPicture>,;
@@ -106,7 +106,7 @@
 #endif
 /* Added MULTILINE: AJ: 11-03-2007*/
 #xcommand REDEFINE GET [ <oEdit> VAR ] <vari>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -121,6 +121,6 @@
              [ ON KEYDOWN <bKeyDown>]   ;
              [ ON CHANGE <bChange> ]    ;
           => ;
-          [<oEdit> := ] HEdit():Redefine( <oWnd>,<nId>,<vari>, ;
+          [<oEdit> := ] HEdit():Redefine( <oParent>,<nId>,<vari>, ;
              {|v|IIf(v == NIL,<vari>,<vari>:=v)},    ;
              <oFont>,,,,<{bGfocus}>,<{bLfocus}>,<cTooltip>,<color>,<bcolor>,<cPicture>,<nMaxLength>,<.lMultiLine.>,<bKeyDown>, <bChange>)

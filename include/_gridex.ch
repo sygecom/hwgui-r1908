@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> GRIDEX <oGrid>        ;
-             [ OF <oWnd> ]               ;
+             [ OF <oParent> ]               ;
              [ ID <nId> ]                ;
              [ STYLE <nStyle> ]          ;
              [ SIZE <nWidth>, <nHeight> ]  ;
@@ -26,7 +26,7 @@
              [ ITEMS <a>];
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oGrid> := __IIF(<.class.>, <classname>, HGridEx)():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
+          <oGrid> := __IIF(<.class.>, <classname>, HGridEx)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,;
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>,;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>,;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>,;
@@ -34,11 +34,11 @@
           [ <oGrid>:name := <(oGrid)> ]
 
 #xcommand REDEFINE GRID  <oSay>  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ ITEM <aitem>];
           => ;
-          [<oSay> := ] HGRIDex():Redefine( <oWnd>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<aitem> )
+          [<oSay> := ] HGRIDex():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<aitem> )

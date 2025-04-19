@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> RADIOBUTTON [ <oRadio> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -17,13 +17,13 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
+          [<oRadio> := ] __IIF(<.class.>, <classname>, HRadioButton)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>, ;
              <cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.> );;
           [ <oRadio>:name := <(oRadio)> ]
 
 #xcommand REDEFINE RADIOBUTTON [ <oRadio> ] ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -37,5 +37,5 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ GROUP <oGroup>]          ;
           => ;
-          [<oRadio> := ] HRadioButton():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>, ;
+          [<oRadio> := ] HRadioButton():Redefine( <oParent>,<nId>,<oFont>,<bInit>,<bSize>, ;
              <bDraw>,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lTransp.>,<oGroup> )

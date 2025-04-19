@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> PANEL [ <oPanel> ] ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -11,11 +11,11 @@
              [ STYLE <nStyle> ]         ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oPanel> :=] __IIF(<.class.>, <classname>, HPanel)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
+          [<oPanel> :=] __IIF(<.class.>, <classname>, HPanel)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>,<bcolor> );;
           [ <oPanel>:name := <(oPanel)> ]
 
 #xcommand REDEFINE PANEL [ <oPanel> ]  ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -24,4 +24,4 @@
              [ HEIGHT <nHeight> ]       ;
              [ WIDTH <nWidth> ]         ;
           => ;
-          [<oPanel> :=] HPanel():Redefine( <oWnd>,<nId>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>, <bcolor> )
+          [<oPanel> :=] HPanel():Redefine( <oParent>,<nId>,<nWidth>,<nHeight>,<bInit>,<bSize>,<bDraw>, <bcolor> )

@@ -13,7 +13,7 @@
           <O>:AddButton(<nBitIp>,<nId>,<bstate>,<bstyle>,<ctext>,<bclick>,<c>,<d>)
 
 #xcommand @ <nX>, <nY> TOOLBAR [ <oTool> ] ;
-            [ OF <oWnd> ]               ;
+            [ OF <oParent> ]               ;
             [ ID <nId> ]                ;
             [ SIZE <nWidth>, <nHeight> ]  ;
             [ BUTTONWIDTH <btnwidth> ]  ;
@@ -29,19 +29,19 @@
             [ ITEMS <aItems> ]          ;
             [ <class: CLASS> <classname> ] ;
           => ;
-    [<oTool> := ] __IIF(<.class.>, <classname>, Htoolbar)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
+    [<oTool> := ] __IIF(<.class.>, <classname>, Htoolbar)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,<btnwidth>,<oFont>,;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
     [ <oTool>:name := <(oTool)> ]
 
 #xcommand REDEFINE TOOLBAR  <oSay>     ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
              [ ITEM <aitem>];
           => ;
-          [<oSay> := ] Htoolbar():Redefine( <oWnd>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<aitem> )
+          [<oSay> := ] Htoolbar():Redefine( <oParent>,<nId>,,  ,<bInit>,<bSize>,<bDraw>, , , , ,<aitem> )
 
 #xcommand ADD TOOLBUTTON  <O> ;
              ID <nId> ;

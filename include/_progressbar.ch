@@ -2,7 +2,7 @@
 
 // Contribution ATZCT" <atzct@obukhov.kiev.ua
 #xcommand @ <nX>, <nY> PROGRESSBAR <oPBar>        ;
-             [ OF <oWnd> ]                       ;
+             [ OF <oParent> ]                       ;
              [ ID <nId> ]                        ;
              [ SIZE <nWidth>,<nHeight> ]         ;
              [ ON INIT <bInit> ]                 ;
@@ -15,6 +15,6 @@
              [ TOOLTIP <cTooltip> ]              ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          <oPBar> :=  __IIF(<.class.>, <classname>, HProgressBar)():New( <oWnd>,<nId>,<nX>,<nY>,<nWidth>, ;
+          <oPBar> :=  __IIF(<.class.>, <classname>, HProgressBar)():New( <oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<maxpos>,<nRange>, <bInit>,<bSize>,<bDraw>,<cTooltip>,<nAnimat>,<.lVert.> );;
           [ <oPBar>:name := <(oPBar)> ]

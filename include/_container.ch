@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>, <nY>  CONTAINER [<oCnt>] [OF <oWnd>] ;
+#xcommand @ <nX>, <nY>  CONTAINER [<oCnt>] [OF <oParent>] ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ BACKSTYLE <nbackStyle>]    ;
@@ -17,7 +17,7 @@
              [ ON OTHERMESSAGES <bOther>  ] ;
              [ <class: CLASS> <classname> ] ;
           =>  ;
-          [<oCnt> := ] __IIF(<.class.>, <classname>,HContainer)():New(<oWnd>, <nId>,IIf(<.lTabStop.>,WS_TABSTOP,),;
+          [<oCnt> := ] __IIF(<.class.>, <classname>,HContainer)():New(<oParent>, <nId>,IIf(<.lTabStop.>,WS_TABSTOP,),;
                <nX>, <nY>, <nWidth>, <nHeight>, <ncStyle>, <bSize>, <.lnoBorder.>,<bInit>,<nbackStyle>,<tcolor>,<bcolor>,;
                <bLoad>,<bRefresh>,<bOther>);;
           [ <oCnt>:name := <(oCnt)> ]

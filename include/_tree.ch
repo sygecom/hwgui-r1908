@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> TREE [ <oTree> ]   ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ FONT <oFont> ]           ;
@@ -23,7 +23,7 @@
              [ BITMAP <aBmp>  [<res: FROM RESOURCE>] [ BITCOUNT <nBC> ] ]  ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oTree> := ] __IIF(<.class.>, <classname>, HTree)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oTree> := ] __IIF(<.class.>, <classname>, HTree)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
                 <nHeight>,<oFont>,<bInit>,<bSize>,<color>,<bcolor>,<aBmp>,<.res.>,<.lEdit.>,<bClick>,<nBC>, ;
                 <bRClick>, <bDClick>, <.lCheck.>, <bCheck>, <.lDragDrop.>, <bDrag>, <bDrop>, <bOther> );;
           [ <oTree>:name := <(oTree)> ]

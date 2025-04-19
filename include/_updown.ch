@@ -2,7 +2,7 @@
 
 #xcommand @ <nX>, <nY> UPDOWN [ <oUpd> INIT ] <nInit> ;
              RANGE <nLower>,<nUpper>    ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ WIDTH <nUpDWidth> ]      ;
@@ -19,7 +19,7 @@
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oUpd> := ] __IIF(<.class.>, <classname>, HUpDown)():New( <oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
              <bLfocus>,<cTooltip>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper>,<nIncr> );;
           [ <oUpd>:name := <(oUpd)> ]
@@ -28,7 +28,7 @@
 
 #xcommand @ <nX>, <nY> GET UPDOWN [ <oUpd> VAR ]  <vari>  ;
              RANGE <nLower>,<nUpper>    ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ INCREMENT <nIncr> ]      ;        
@@ -48,7 +48,7 @@
              [ ON CHANGE <bChange> ]    ;
              [[ON OTHER MESSAGES <bOther>][ON OTHERMESSAGES <bOther>]] ;
           => ;
-          [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<vari>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
+          [<oUpd> := ] HUpDown():New( <oParent>,<nId>,<vari>,{|v|IIf(v == NIL,<vari>,<vari>:=v)}, ;
              <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,,,;
              <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>, ;
              <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>,;

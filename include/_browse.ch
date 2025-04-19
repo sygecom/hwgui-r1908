@@ -3,7 +3,7 @@
 #xcommand @ <nX>, <nY> BROWSE [ <oBrw> ]  ;
              [ <lArr: ARRAY> ]          ;
              [ <lDb: DATABASE> ]        ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -37,7 +37,7 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [<oBrw> :=] __IIF(<.class.>, <classname>, HBrowse)():New( IIf(<.lDb.>,BRW_DATABASE,IIf(<.lArr.>,BRW_ARRAY, 0)),;
-             <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize>, ;
+             <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize>, ;
              <bDraw>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>,;
              <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg>, <.lMulti.>, <.lDescend.>,;
              <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>,<bChgrowcol>, <cTooltip>  );;
@@ -47,7 +47,7 @@
              [ <lArr: ARRAY> ]          ;
              [ <lDb: DATABASE> ]        ;
              [ <lFlt: FILTER> ]        ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
@@ -58,4 +58,4 @@
              [ FONT <oFont> ]           ;
           => ;
           [<oBrw> :=] HBrowse():Redefine( IIf(<.lDb.>,BRW_DATABASE,IIf(<.lArr.>,BRW_ARRAY,IIf(<.lFlt.>,BRW_FILTER, 0))),;
-             <oWnd>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>,<bEnter>,<bGfocus>,<bLfocus> )
+             <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bDraw>,<bEnter>,<bGfocus>,<bLfocus> )

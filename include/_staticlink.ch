@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> SAY [ <oSay> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              LINK <cLink>               ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -21,13 +21,13 @@
              [ HOVERCOLOR <hcolor> ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oSay> := ] __IIF(<.class.>, <classname>, HStaticLink)():New( <oWnd>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+          [<oSay> := ] __IIF(<.class.>, <classname>, HStaticLink)():New( <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
              <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bDraw>, <cTooltip>, ;
              <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>  );;
           [ <oSay>:name := <(oSay)> ]
 
 #xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption>      ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              ID <nId>                   ;
              LINK <cLink>               ;
              [ COLOR <color> ]          ;
@@ -42,7 +42,7 @@
              [ LINKCOLOR <lcolor> ]     ;
              [ HOVERCOLOR <hcolor> ]    ;
           => ;
-          [<oSay> := ] HStaticLink():Redefine( <oWnd>, <nId>, <cCaption>, ;
+          [<oSay> := ] HStaticLink():Redefine( <oParent>, <nId>, <cCaption>, ;
              <oFont>, <bInit>, <bSize>, <bDraw>, <cTooltip>, <color>, <bcolor>,;
              <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor> )
 

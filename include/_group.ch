@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY> GROUPBOX [ <oGroup> CAPTION ] <caption> ;
-             [ OF <oWnd> ]              ;
+             [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
@@ -14,6 +14,6 @@
              [ STYLE <nStyle> ]         ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
+          [<oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
              <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<color>,<bcolor>,<.lTransp.>);;
           [ <oGroup>:name := <(oGroup)> ]

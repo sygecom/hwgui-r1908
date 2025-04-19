@@ -1,7 +1,7 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
 #xcommand @ <nX>, <nY>  ANIMATION [ <oAnimation> ] ;
-             [ OF <oWnd> ]                       ;
+             [ OF <oParent> ]                       ;
              [ ID <nId> ]                        ;
              [ FROM RESOURCE <xResID> ]          ;
              [ STYLE <nStyle> ]                  ;
@@ -12,6 +12,6 @@
              [ < transparent: TRANSPARENT > ]    ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oAnimation> :=] __IIF(<.class.>, <classname>, HAnimation)():New( <oWnd>,<nId>,<nStyle>,<nX>,<nY>, ;
+          [<oAnimation> :=] __IIF(<.class.>, <classname>, HAnimation)():New( <oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
              <nWidth>,<nHeight>,<cFile>,<.autoplay.>,<.center.>,<.transparent.>,<xResID>);;
           [ <oAnimation>:name := <(oAnimation)> ]

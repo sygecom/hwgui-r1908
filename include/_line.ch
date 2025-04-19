@@ -3,7 +3,7 @@
 #xcommand @ <nX>, <nY> LINE [ <oLine> ]   ;
              [ LENGTH <length> ]       ;
              [ HEIGHT <nHeight> ]      ;
-             [ OF <oWnd> ]             ;
+             [ OF <oParent> ]             ;
              [ ID <nId> ]              ;
              [ COLOR <color> ]         ;
              [ LINESLANT <cSlant> ]    ;
@@ -13,7 +13,7 @@
              [ ON SIZE <bSize> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [<oLine> := ] __IIF(<.class.>, <classname>, HLine)():New( <oWnd>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
+          [<oLine> := ] __IIF(<.class.>, <classname>, HLine)():New( <oParent>,<nId>,<.lVert.>,<nX>,<nY>,<length>,<bSize>, <bInit>,;
 					              <color>, <nHeight>, <cSlant>,<nBorder>  );;
           [ <oLine>:name := <(oLine)> ]
 
