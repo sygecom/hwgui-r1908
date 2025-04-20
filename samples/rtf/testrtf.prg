@@ -176,11 +176,11 @@ FUNCTION TestRtf()
                          ENDIF
 
                                 FOR j=1 TO 9
-                                        if i == 6 .AND. j == 5
+                                        IF i == 6 .AND. j == 5
                   WRITE NEWCELL oRTF TEXT "sombra"
-                                        else
+                                        ELSE
                   WRITE NEWCELL oRTF TEXT ""
-                                        endif
+                                        ENDIF
                                 NEXT j
                         NEXT i
 

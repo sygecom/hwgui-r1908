@@ -80,7 +80,7 @@ RETURN NIL
 
 FUNCTION TestDosClass(oTest)
 
-If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest), "PrintDos Class Demo")
+IF hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest), "PrintDos Class Demo")
 
    oPrint := Printdos():New(oTest)   //oTest=NIL LPT1
 
@@ -104,11 +104,11 @@ If hwg_MsgYesNo("Printing PrintDos Class to " + IIf(oTest == NIL, "LPT1", oTest)
 
    oPrint:End()
 
-   if !Empty(oTest)
+   IF !Empty(oTest)
       OpenRel(oTest)
-   EndIF
+   ENDIF
 
-Endif
+ENDIF
 
 RETURN NIL
 

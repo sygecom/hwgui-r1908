@@ -128,9 +128,9 @@ RETURN NIL
 
 FUNCTION ChildClose
 Local nHandle := hwg_SendMessage(HWindow():GetMain():handle, WM_MDIGETACTIVE, 0, 0)
-   if nHandle > 0
+   IF nHandle > 0
       hwg_SendMessage(HWindow():GetMain():handle, WM_MDIDESTROY, nHandle, 0)
-   endif
+   ENDIF
 RETURN NIL
 
 FUNCTION About

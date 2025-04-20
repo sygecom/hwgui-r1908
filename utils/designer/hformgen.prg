@@ -1022,7 +1022,7 @@ STATIC FUNCTION PaintDlg(oDlg)
       hwg_SetScrollInfo(oDlg:handle, SB_VERT, 1, oForm:nYOffset / 10 + 1, 1, Round((oForm:nPHeight - (aCoors[4] - TOP_INDENT) / oForm:nKoeff) / 10, 0) + 1)
    ELSE
 
-      if oDesigner:lShowGrid
+      IF oDesigner:lShowGrid
           aCoors := hwg_GetClientRect(oDlg:handle)
           nTop   := aCoors[1]
           nLeft  := aCoors[2]
@@ -1044,7 +1044,7 @@ STATIC FUNCTION PaintDlg(oDlg)
           oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))
           hwg_SelectObject(hDC, oPenDivider:handle)
           // :END LFB
-      endif
+      ENDIF
 
       IF oCtrl != NIL .AND. oCtrl:nTop >= 0
              // : LFB tirei a borda do objeto selecionado

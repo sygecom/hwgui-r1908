@@ -78,14 +78,14 @@ FUNCTION ConnectGrid()
 
     oServer := TPQServer():New(cHost, cDatabase, cUser, cPass)
 
-    if oServer:NetErr()
+    IF oServer:NetErr()
         ? oServer:Error()
         quit
-    end
+    ENDIF
 
-    if oServer:TableExists("test")
+    IF oServer:TableExists("test")
         oServer:DeleteTable("Test")
-    endif
+    ENDIF
 
     oServer:CreateTable("Test", {{"col1", "N", 6, 0}, ;
                                  {"col2", "C", 40, 0}, ;

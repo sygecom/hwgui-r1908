@@ -349,7 +349,7 @@ FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 
    do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
 
-      if !lfirstPass
+      IF !lfirstPass
 
 	 /* => Koreksi Ke GUI
          @ maxrow()-2, 00 clear
@@ -361,21 +361,21 @@ FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
 
          lFirstPass := .F.
 
-      endif
+      ENDIF
 
-      if lExclusive
+      IF lExclusive
          use (cdatabase) alias (calias) /* via "ADS" */ exclusive new
-      else
+      ELSE
          use (cdatabase) alias (calias) /* via "ADS" */ shared new
-      endif
+      ENDIF
 
-      if !neterr()                     // USE SUCCEEDS
-	 if cPassWord != NIL
+      IF !neterr()                     // USE SUCCEEDS
+	 IF cPassWord != NIL
 	    sx_SetPass(cPassWord)
-	 endif
+	 ENDIF
 
 	 RETURN .T.
-      endif
+      ENDIF
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds - .5
    enddo
@@ -395,9 +395,9 @@ FUNCTION filelock(nSeconds)
    ENDIF
 
    do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
-      if FLOCK()
+      IF FLOCK()
          RETURN .T.                     // LOCKED
-      endif
+      ENDIF
       inkey(.5)      // wait 1/2 second
       nSeconds := nSeconds - .5
       hwg_MsgStop("File is in use by another", alias())
@@ -414,9 +414,9 @@ FUNCTION reclock(nSeconds)
    LOCAL lforever
    LOCAL oldPos := Recno()
 
-   if DBRLOCK(OldPos)
+   IF DBRLOCK(OldPos)
       RETURN .T.                        // LOCKED
-   endif
+   ENDIF
 
    lforever := (nSeconds == 0)
    nSeconds *= 1.00
@@ -425,9 +425,9 @@ FUNCTION reclock(nSeconds)
    inkey()
 
    do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
-      if DBRLOCK(OldPos)
+      IF DBRLOCK(OldPos)
          RETURN .T.                     // LOCKED
-      endif
+      ENDIF
       hwg_MsgStop("Record is in use exclusive by another", alias() + " #" + Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
@@ -449,9 +449,9 @@ FUNCTION addrec(nSeconds)
 
    append blank
 
-   if !neterr()
+   IF !neterr()
       RETURN .T.												// APPEND SUCCESS
-   endif
+   ENDIF
 
    nSeconds *= 1.00
    lforever := (nSeconds == 0)
@@ -469,9 +469,9 @@ FUNCTION addrec(nSeconds)
       */
 
       append blank
-      if !neterr()
+      IF !neterr()
          RETURN .T.
-      endif
+      ENDIF
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds  - .5
       hwg_MsgStop("Record is in use exclusive by another")
@@ -500,19 +500,19 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
  *** Default Boleh Kosong ***
 
- if Empty(cPress)
+ IF Empty(cPress)
 
-    if lKosong == NIL
+    IF lKosong == NIL
        RETURN .T.
-    endif
+    ENDIF
 
     hwg_MsgInfo("Tidak boleh kosong")
     RETURN .F.
     //RETURN IIf(lKosong == NIL, .T., .F.)
- end
+ ENDIF
 
 
- //if (ctod(g:buffer)=ctod("  /  /  "))
+ //IF (ctod(g:buffer)=ctod("  /  /  "))
 
       cpress := StrTran(cPress, " ", "")
       cpress := StrTran(cPress, ".", "")
@@ -523,10 +523,10 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
  *:minimum 6  &  max 9 char
 
- if ((nLen < 6) .OR. (nLen > 9))
+ IF ((nLen < 6) .OR. (nLen > 9))
      hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
      RETURN .F.
- end
+ ENDIF
 
  *:----------------6-------6-------7---------8----------9---
  *:kemungkinan   ddmmyy, dmmmyy, ddmmmyy, ddmmyyyy, ddmmmyyyy!
@@ -546,7 +546,7 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
         dd := Left(cPress, 2) + "."
 
 
-	if subst(c, 3, 3)="AAA"
+	IF subst(c, 3, 3)="AAA"
 
 	   mm := subst(cPress, 3, 3)
 	   mm := transform(Lower(mm), "!xx")
@@ -564,25 +564,25 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
 	   nPot--
 
-        else
+        ELSE
 
 	   mm := subst(cpress, 3, 2) + "."
 
-        end
+        ENDIF
 
 	   yy := Right(cPress, ((Len(c) - Len(dd + mm)) + nPot))
 
-	   if Len(yy) == 2
+	   IF Len(yy) == 2
 	      yy := Left(dtos(date()), 2)+yy
-	   endif
+	   ENDIF
 
-      if  !HB_IsDate(ctod(dd + mm + yy)) .OR. (ctod(dd + mm + yy) == ctod("  /  /  "))
+      IF  !HB_IsDate(ctod(dd + mm + yy)) .OR. (ctod(dd + mm + yy) == ctod("  /  /  "))
           hwg_MsgStop("Pengisian Tanggal Belum Benar!!!")
           RETURN .F.
-      else
+      ELSE
        g:SetGet(d2infstr(ctod(dd + mm + yy)))
        g:refresh()
-      end
+      ENDIF
 
  RETURN .T.
 
@@ -596,9 +596,9 @@ FUNCTION d2infstr(d) && date to informix style string
    LOCAL mmm
    LOCAL yyyy
 
-  if Empty(d)
+  IF Empty(d)
      RETURN "           "
-  endif
+  ENDIF
 
   dd := Right(dtos(d), 2);  yyyy := Left(dtos(d), 4)
 

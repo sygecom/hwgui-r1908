@@ -561,12 +561,12 @@ RETURN NIL
 
 FUNCTION ActiveTopMost(nHandle, lActive)
     
-    if lActive
+    IF lActive
        lSucess := hwg_SetTopMost(nHandle)    // Set TopMost
-    else   
+    ELSE
        lSucess := hwg_RemoveTopMost(nHandle) // Remove TopMost
-    endif
-    
+    ENDIF
+
 RETURN lSucess
 
 FUNCTION TestProgres()

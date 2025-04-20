@@ -389,11 +389,11 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
           mdx := vdx % oDesigner:nPixelGrid
           mdy := vdy % oDesigner:nPixelGrid
 
-          if abs(int(((mdx) / oDesigner:nPixelGrid) * 10)) <= 4
+          IF abs(int(((mdx) / oDesigner:nPixelGrid) * 10)) <= 4
             mdx := mdx
-          else
+          ELSE
             mdx := (mdx - oDesigner:nPixelGrid)
-          endif
+          ENDIF
 
           // writelog("coordinate normalizzate=" + "   N= " + Str(dx) + "   mdx=" + Str(mdx))
 
@@ -401,11 +401,11 @@ FUNCTION CtrlMove(oCtrl, xPos, yPos, lMouse, lChild)
 
           // writelog("Output:   dx= " + Str(dx) + "   NLeft=" + Str(oCtrl:nLeft + dx) + "  aBBDown2=" + AllTrim(Str(mdy)))
 
-          if abs(int(((mdy) / oDesigner:nPixelGrid) * 10)) <= 4
+          IF abs(int(((mdy) / oDesigner:nPixelGrid) * 10)) <= 4
             mdy := mdy
-          else
+          ELSE
             mdy := (mdy - oDesigner:nPixelGrid)
-          endif
+          ENDIF
 
           dy = (vdy - oCtrl:nTop) - mdy
         ENDIF

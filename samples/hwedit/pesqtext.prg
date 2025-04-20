@@ -19,16 +19,16 @@ FUNCTION pesquisaglobal()
    PRIVATE get01
 
    for f = 1 to Len(oDir) // filtrando diretorios
-       if odir[f, 1] != "." .AND. odir[f, 1] != ".."
+       IF odir[f, 1] != "." .AND. odir[f, 1] != ".."
           AAdd(diretorio, DiskName() + ":\" + oDir[f, 1] + "\")
-       endif
+       ENDIF
    next f
-   
+
    asort(diretorio)
    for g := 1 to Len(diretorio) // pegando diretorio atual
-          if Upper(diretorio[g]) = DiskName() + ":\" + Upper(CurDir() + "\")
+          IF Upper(diretorio[g]) = DiskName() + ":\" + Upper(CurDir() + "\")
              atu := g
-          endif
+          ENDIF
    next g
 
  oComb := atu
@@ -59,9 +59,9 @@ FUNCTION pesq(rd_dir, rd_text)
    PRIVATE result := ""
 
    for f := 1 to Len(arquivos) // filtrando arquivos
-       if arquivos[f, 1] != "." .AND. arquivos[f, 1] != ".."
+       IF arquivos[f, 1] != "." .AND. arquivos[f, 1] != ".."
           AAdd(nom_arq, arquivos[f, 1])
-       endif
+       ENDIF
    next f
    
    asort(nom_arq)
@@ -81,10 +81,10 @@ FUNCTION pesq(rd_dir, rd_text)
         texto := Upper(rd_text)
         //
         //hwg_MsgInfo(linha)
-        if at(texto, linha) != 0
+        IF at(texto, linha) != 0
             resultado := resultado + Str(lin, 6) + ":" + linha + Chr(13) + Chr(10)
             get01:refresh()
-        endif
+        ENDIF
         //
         lin++
         FT_FSKIP()

@@ -79,12 +79,12 @@ STATIC FUNCTION CreateDB()
                      {"field_2", "C", 40, 0}})
 
    USE test EXCLUSIVE
-   if !file("index01.ntx")
+   IF !file("index01.ntx")
       index on field_1 to index01
-   endif
-   if !file("index02.ntx")
+   ENDIF
+   IF !file("index02.ntx")
       index on field_2 to index02
-   endif
+   ENDIF
    set index to index01, index02
 
    For i := 1 to 100
@@ -106,7 +106,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
    ASize(aAction, 10)
    ASize(aHide, 10)
 
-   if Empty(aHide[1])
+   IF Empty(aHide[1])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_first" FROM RESOURCE  TRANSPARENT;
@@ -115,9 +115,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[2])
+   IF Empty(aHide[2])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_prior" FROM RESOURCE TRANSPARENT;
@@ -126,9 +126,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[3])
+   IF Empty(aHide[3])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_next" FROM RESOURCE TRANSPARENT;
@@ -137,9 +137,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[4])
+   IF Empty(aHide[4])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_last" FROM RESOURCE TRANSPARENT;
@@ -148,9 +148,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[5])
+   IF Empty(aHide[5])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_append" FROM RESOURCE TRANSPARENT;
@@ -159,9 +159,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[6])
+   IF Empty(aHide[6])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_delete" FROM RESOURCE TRANSPARENT ;
@@ -170,9 +170,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[7])
+   IF Empty(aHide[7])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_edit" FROM RESOURCE TRANSPARENT ;
@@ -181,9 +181,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[8])
+   IF Empty(aHide[8])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_commit" FROM RESOURCE TRANSPARENT;
@@ -192,9 +192,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[9])
+   IF Empty(aHide[9])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_cancel" FROM RESOURCE TRANSPARENT;
@@ -203,9 +203,9 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
-   if Empty(aHide[10])
+   IF Empty(aHide[10])
 
       @ nLeft, nTop OWNERBUTTON SIZE 24, 25 ;
          BITMAP "t_refresh" FROM RESOURCE TRANSPARENT ;
@@ -214,7 +214,7 @@ FUNCTION DBNavigator(oCtrl, nLeft, nTop, aAction, aHide)
 
       nLeft += 24
 
-   endif
+   ENDIF
 
 RETURN NIL
 

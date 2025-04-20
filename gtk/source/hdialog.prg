@@ -374,11 +374,11 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
    
    HB_SYMBOL_UNUSED(lParam)
 
-   if iParLow > 0 .AND. oDlg:bGetFocus != NIL
+   IF iParLow > 0 .AND. oDlg:bGetFocus != NIL
       Eval(oDlg:bGetFocus, oDlg)
-   elseif iParLow == 0 .AND. oDlg:bLostFocus != NIL
+   ELSEIF iParLow == 0 .AND. oDlg:bLostFocus != NIL
       Eval(oDlg:bLostFocus, oDlg)
-   endif
+   ENDIF
 
 RETURN 0
 

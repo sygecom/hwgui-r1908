@@ -125,11 +125,11 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
    IF Empty(::hDCPrn)
       RETURN NIL
    ELSE
-      if lProprierties
-         if !hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth)
+      IF lProprierties
+         IF !hwg_SetDocumentProperties(::hDCPrn, ::cPrinterName, @::FormType, @::Landscape, @::Copies, @::BinNumber, @::fDuplexType, @::fPrintQuality, @::PaperLength, @::PaperWidth)
            RETURN NIL
-         endif
-      endif
+         ENDIF
+      ENDIF
 
       aPrnCoors := hwg_GetDeviceArea(::hDCPrn)
       ::nWidth  := IIf(::lmm, aPrnCoors[3], aPrnCoors[1])

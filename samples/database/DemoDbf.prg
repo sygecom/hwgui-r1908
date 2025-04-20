@@ -242,14 +242,14 @@ RETURN NIL
 FUNCTION SaveTab()
 *---------------------------------------------------------------------------------------
 
-if oOper=1
+IF oOper=1
    Select TabDbf
    oCod := StrZero(val(oCod), 3)
    Seek oCod
-   If Found()
+   IF Found()
       hwg_MsgInfo("Cod." + oCod + " no valid...", "Mensagem")
       RETURN NIL
-   Endif
+   ENDIF
    Append Blank
    TabDbf->Cod := oCod
    TabDbf->Name := oName
@@ -257,14 +257,14 @@ if oOper=1
    TabDbf->Fone := oFone
    TabDbf->e_Mail := oe_Mail
    Unlock
-Else
+ELSE
    RLock()
    TabDbf->Name := oName
    TabDbf->Adress := oAdress
    TabDbf->Fone := oFone
    TabDbf->e_Mail := oe_Mail
    Unlock
-EndIf
+ENDIF
 CloseGets()
 oOper := 1
 
@@ -275,15 +275,15 @@ FUNCTION SkipTab(oSalto)
 *---------------------------------------------------------------------------------------
 CloseGets()
 Select TabDbf
-If oSalto=1
+IF oSalto=1
    Skip -1
-Elseif oSalto=2
+ELSEIF oSalto=2
    Skip
-Elseif oSalto=3
+ELSEIF oSalto=3
    Go Top
-Else
+ELSE
    Go Bottom
-Endif 
+ENDIF
 GetVars()
 GetRefresh()
 

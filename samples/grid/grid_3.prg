@@ -106,14 +106,14 @@ FUNCTION OnDispInfo(o, x, y)
    LOCAL result := ""
    LOCAL i
 
-    if x > Lastrec() .AND. !lEof
+    IF x > Lastrec() .AND. !lEof
         res := PQexec(conn, "FETCH FORWARD 10 FROM cursor_1")
 
-        if !HB_IsChar(res)
+        IF !HB_IsChar(res)
 
-            if PQLastrec(res) != 10
+            IF PQLastrec(res) != 10
                 lEof := .T.
-            end
+            ENDIF
 
             for i := 1 to PQLastrec(res)
                 Append Blank
@@ -121,26 +121,26 @@ FUNCTION OnDispInfo(o, x, y)
                 Replace Creation WITH myval(PQGetvalue(res, i, 2), "D")
                 Replace Descr    WITH myval(PQGetvalue(res, i, 3), "C")
             next
-        else
+        ELSE
             lEof := .T.
 
             hwg_MsgInfo(res)
 
-        endif
+        ENDIF
         PQclear(res)
-    endif
+    ENDIF
 
-    if x <= Lastrec()
+    IF x <= Lastrec()
         dbgoto(x)
 
-        if y == 1
+        IF y == 1
             result := Str(code)
-        elseif y == 2
+        ELSEIF y == 2
             result := DToC(creation)
-        elseif y == 3
+        ELSEIF y == 3
             result := descr
-        end
-    endif
+        ENDIF
+    ENDIF
 
 RETURN result
 
@@ -158,10 +158,10 @@ FUNCTION CriaBase()
 
         conn := PQConnect("test", "localhost", "Rodrigo", "moreno", 5432)
 
-        if HB_IsChar(conn)
+        IF HB_IsChar(conn)
             hwg_MsgInfo(conn)
             quit
-        endif
+        ENDIF
 
         res := PQexec(conn, "drop table test")
         PQclear(res)

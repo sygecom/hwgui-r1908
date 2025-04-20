@@ -114,12 +114,12 @@ STATIC FUNCTION BrowseUpdate(oBrow, colpos)
 
    hwg_MsgExclamation("Column " + LTrim(Str(colpos)) + " Changed")
 
-   if colpos == 2
+   IF colpos == 2
       oBrow:Append()
-   else
+   ELSE
       oBrow:DoHScroll(SB_LINERIGHT)
       oBrow:Edit()
-   end
+   ENDIF
 
    oBrowse:RefreshLine()
 
@@ -135,9 +135,9 @@ RETURN .T.
 
 STATIC FUNCTION CreateDB()
 
-   if file("browse_1.dbf")
+   IF file("browse_1.dbf")
       FErase("browse_1.dbf")
-   end
+   ENDIF
 
    DBCreate("browse_1", {{"code", "N", 6, 0}, ;
                          {"desc", "C", 40, 0}, ;

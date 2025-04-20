@@ -13,13 +13,13 @@ FUNCTION Main()
    LOCAL cIniFile := "HwGui.ini"
 
    //Create the inifile
-   if !file(cIniFile)
+   IF !file(cIniFile)
 
       hwg_WriteIni("Config", "WallParer", "No Paper", cIniFile)
       hwg_WriteIni("Config", "DirHwGUima", "C:\HwGUI", cIniFile)
       hwg_WriteIni("Print", "Spoll", "Epson LX 80", cIniFile)
 
-    endif
+    ENDIF
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
      AT 200, 0 SIZE 400, 150

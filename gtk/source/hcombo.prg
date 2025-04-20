@@ -50,28 +50,28 @@ ENDCLASS
 METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
                   bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor) CLASS HComboBox
 
-   if lEdit == NIL
+   IF lEdit == NIL
       lEdit := .F.
-   endif
-   if lText == NIL
+   ENDIF
+   IF lText == NIL
       lText := .F.
-   endif
+   ENDIF
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(lEdit, CBS_DROPDOWN, CBS_DROPDOWNLIST) + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctoolt, tcolor, bcolor)
-      
+
    ::lEdit := lEdit
    ::lText := lText
 
-   if lEdit
+   IF lEdit
       ::lText := .T.
-   endif
-   
-   if ::lText
+   ENDIF
+
+   IF ::lText
       ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
-   else
+   ELSE
       ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
-   endif      
+   ENDIF
    
    ::bSetGet := bSetGet
    ::aItems  := aItems
@@ -193,11 +193,11 @@ METHOD Refresh() CLASS HComboBox
 
    IF ::bSetGet != NIL
       vari := Eval(::bSetGet, , Self)
-      if ::lText
+      IF ::lText
          ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
-      else
+      ELSE
          ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
-      endif      
+      ENDIF
    ENDIF
 
    hwg_ComboSetArray(::handle, ::aItems)

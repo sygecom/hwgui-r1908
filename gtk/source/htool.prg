@@ -106,20 +106,20 @@ METHOD INIT() CLASS hToolBar
 //            NEXT
 //
 //         ENDIF
-         if HB_IsNumeric(::aItem[n, 1])
+         IF HB_IsNumeric(::aItem[n, 1])
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
-         elseif  HB_IsChar(::aItem[n, 1])
-            if ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
+         ELSEIF  HB_IsChar(::aItem[n, 1])
+            IF ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
                oImage := hIcon():AddFile(::aItem[n, 1])
-            else
+            ELSE
                oImage := hBitmap():AddFile(::aItem[n, 1])
-            endif
-            if HB_IsObject(oImage)
+            ENDIF
+            IF HB_IsObject(oImage)
                AAdd(aButton, Oimage:handle)
                ::aItem[n, 1] := Oimage:handle
-            endif
+            ENDIF
          ENDIF
 
       NEXT n
@@ -153,24 +153,24 @@ METHOD INIT() CLASS hToolBar
 
       ENDIF
 */
-      if Len(::aItem) > 0
+      IF Len(::aItem) > 0
          For Each aItem in ::aItem
 
-            if aItem[4] == TBSTYLE_BUTTON
+            IF aItem[4] == TBSTYLE_BUTTON
 
                aItem[11] := hwg_CreateToolBarButton(::handle, aItem[1], aItem[6], .F.)
                aItem[2] := hb_enumindex()
 //               hwg_SetSignal(aItem[11], "clicked", WM_LBUTTONUP, aItem[2], 0)
                hwg_TOOLBAR_SETACTION(aItem[11], aItem[7])
-               if !Empty(aItem[8])
+               IF !Empty(aItem[8])
                   hwg_AddtoolTip(::handle, aItem[11], aItem[8])
-               endif
-            elseif aitem[4] == TBSTYLE_SEP
+               ENDIF
+            ELSEIF aitem[4] == TBSTYLE_SEP
                aItem[11] := hwg_CreateToolBarButton(::handle,,, .T.)
                aItem[2] := hb_enumindex()
-            endif
+            ENDIF
          next
-      endif
+      ENDIF
 
    ENDIF
 RETURN NIL
@@ -196,13 +196,13 @@ METHOD Notify(lParam) CLASS hToolBar
        hwg_ToolBar_GetInfoTip(lParam, ::aItem[nPos, 8])
 
     ELSEIF nCode == TBN_DROPDOWN
-       if HB_IsArray(::aItem[1, 9])
+       IF HB_IsArray(::aItem[1, 9])
        nid := hwg_ToolBar_SubMenuExGetId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx(lParam, ::aItem[nPos, 10], ::oParent:handle)
-       else
+       ELSE
               hwg_ToolBar_SubMenu(lParam, 1, ::oParent:handle)
-       endif
+       ENDIF
     ENDIF
 
 RETURN 0
@@ -225,18 +225,18 @@ METHOD onEvent(msg, wParam, lParam) CLASS HToolbar
 
    IF msg == WM_LBUTTONUP
       nPos := AScan(::aItem, {|x|x[2] == wParam})
-      if nPos > 0
+      IF nPos > 0
          IF ::aItem[nPos, 7] != NIL
             Eval(::aItem[nPos, 7], Self)
          ENDIF
-      endif
+      ENDIF
    ENDIF
 RETURN  NIL
 
 METHOD REFRESH() class htoolbar
-   if ::lInit
+   IF ::lInit
       ::lInit := .F.
-   endif
+   ENDIF
    ::init()
 RETURN NIL
 

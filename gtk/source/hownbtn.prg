@@ -67,9 +67,9 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::widtht  := widtht
    ::heightt := heightt
 
-   if lEnabled != NIL
+   IF lEnabled != NIL
       ::lEnabled := lEnabled
-   endif
+   ENDIF
    IF bmp != NIL
       ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. HB_IsNumeric(bmp), ;
                      HBitmap():AddResource(bmp), ;
@@ -94,10 +94,10 @@ METHOD Activate() CLASS HOwnButton
       ::handle := hwg_CreateOwnBtn(::oParent:handle, ::id, ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
-   if !::lEnabled
+   IF !::lEnabled
       hwg_EnableWindow(::handle, .F.)
       ::Disable()
-   EndIf
+   ENDIF
 
    ENDIF
 RETURN NIL
@@ -171,16 +171,16 @@ METHOD Paint() CLASS HOwnButton
                  Round((aCoors[3] - aCoors[1] - ::widthb) / 2, 0))
       y1 := IIf(::yb != NIL .AND. ::yb != 0, ::yb, ;
                  Round((aCoors[4] - aCoors[2] - ::heightb) / 2, 0))
-      if ::lEnabled
-         if ::oBitmap != NIL
+      IF ::lEnabled
+         IF ::oBitmap != NIL
             ::bitmap:handle := ::oBitmap
             ::oBitmap := NIL
-         EndIf
+         ENDIF
          hwg_DrawBitmap(hDC, ::bitmap:handle,, x1, y1, ::widthb, ::heightb)
-      Else
+      ELSE
          ::oBitmap := ::bitmap:handle
          hwg_DrawGrayBitmap(hDC, ::bitmap:handle, x1, y1)
-      EndIf
+      ENDIF
    ENDIF
 
    IF ::text != NIL
@@ -190,11 +190,11 @@ METHOD Paint() CLASS HOwnButton
          hwg_SelectObject(hDC, ::oParent:ofont:handle)
       ENDIF
       aMetr := hwg_GetTextMetric(hDC)
-      if ::lEnabled //if button is enabled
+      IF ::lEnabled //if button is enabled
          hwg_SetTextColor(hDC, ::tcolor)
-      Else
+      ELSE
          hwg_SetTextColor(hDC, 0)
-      EndIf
+      ENDIF
       x1 := IIf(::xt != NIL .AND. ::xt != 0, ::xt, aCoors[1] + 2)
       y1 := IIf(::yt != NIL .AND. ::yt != 0, ::yt, Round((aCoors[4] - aCoors[2] - aMetr[1]) / 2, 0))
       x2 := IIf(::widtht != NIL .AND. ::widtht != 0, ::xt + ::widtht - 1, aCoors[3] - 2)

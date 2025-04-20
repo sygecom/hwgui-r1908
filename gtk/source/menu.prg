@@ -198,10 +198,10 @@ Local aMenu, i
          aMenu := Atail(aMenu)[1]
       NEXT
       s__nLevel++
-      if !Empty(cTitle)
+      IF !Empty(cTitle)
          cTitle := StrTran(cTitle, "\t", "")
          cTitle := StrTran(cTitle, "&", "_")
-      endif
+      ENDIF
       AAdd(aMenu, {{}, cTitle, nId, 0})
    ENDIF
 RETURN .T.
@@ -253,25 +253,25 @@ FUNCTION hwg_DefineMenuItem(cItem, nId, bItem, lDisabled, accFlag, accKey, lBitm
       aMenu := Atail(aMenu)[1]
    NEXT
    nId := IIf(nId == NIL .AND. cItem != NIL, ++s__Id, nId)
-   if !Empty(cItem)
+   IF !Empty(cItem)
       cItem := StrTran(cItem, "\t", "")
       cItem := StrTran(cItem, "&", "_")
-   endif
+   ENDIF
    AAdd(aMenu, {bItem, cItem, nId, nFlag, 0})
    /*
    IF lBitmap != NIL .OR. !Empty(lBitmap)
-      if lResource == NIL
+      IF lResource == NIL
          lResource := .F.
-      Endif
-      if !lResource 
+      ENDIF
+      IF !lResource
          oBmp := HBitmap():AddFile(lBitmap)
-      else
+      ELSE
          oBmp := HBitmap():AddResource(lBitmap)
-      endif
+      ENDIF
       AAdd(s__oBitmap, {.T., oBmp:Handle, cItem, nId})
-   Else   
+   ELSE
       AAdd(s__oBitmap, {.F., "", cItem, nID})
-   Endif         
+   ENDIF
    IF accFlag != NIL .AND. accKey != NIL
       AAdd(s__aAccel, {accFlag, accKey, nId})
    ENDIF
@@ -317,9 +317,9 @@ FUNCTION hwg_SearchPosBitmap(nPos_Id)
    IF s__oBitmap != NIL
       DO WHILE nPos<=Len(s__oBitmap)
 
-         if s__oBitmap[nPos][4] == nPos_Id
+         IF s__oBitmap[nPos][4] == nPos_Id
             lBmp := {s__oBitmap[nPos][1], s__oBitmap[nPos][2],s__oBitmap[nPos][3]}
-         Endif
+         ENDIF
 
          nPos ++
 

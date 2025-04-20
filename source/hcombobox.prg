@@ -1110,9 +1110,9 @@ METHOD Populate() CLASS HComboBox
              hwg_ComboAddString(::handle, ::aItems[i])
           ENDIF
           numofchars := hwg_SendMessage(::handle, CB_GETLBTEXTLEN, i - 1, 0)
-          if numofchars > LongComboWidth
+          IF numofchars > LongComboWidth
               LongComboWidth := numofchars
-          endif
+          ENDIF
        NEXT
     ENDIF
     ::ValueBound := ::GetValueBound()

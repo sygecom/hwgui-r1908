@@ -115,10 +115,10 @@ Local o
       DO WHILE o != NIL .AND. !__ObjHasMsg(o, "LACTIVATED")
          o := o:oParent
       ENDDO
-      if ::tcolor != NIL          
+      IF ::tcolor != NIL
             hwg_SETFGCOLOR(::handle, ::tcolor)
-      endif	    
-      
+      ENDIF
+
       
       IF o != NIL .AND. o:lActivated
          hwg_ShowAll(o:handle)
@@ -472,16 +472,16 @@ RETURN Self
 
 METHOD Activate CLASS HButtonEX
    IF !Empty(::oParent:handle)
-      if !Empty(::hBitmap)
+      IF !Empty(::hBitmap)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title, ::hBitmap)
-      elseif !Empty(::hIcon)
+      ELSEIF !Empty(::hIcon)
             ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title, ::hIcon)
-      else
+      ELSE
             ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title, NIL)
-      endif		  
+      ENDIF
       hwg_SetWindowObject(::handle, Self)
       ::Init()
    ENDIF

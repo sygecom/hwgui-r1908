@@ -55,22 +55,22 @@ STATIC FUNCTION protek()
 
    PRIVATE lOpen := .T.
 
- if cUser == "1" .AND. n == 2
+ IF cUser == "1" .AND. n == 2
     lOpen := .F.
- endif
+ ENDIF
 
- if cUser == "2" .AND. n == 1
+ IF cUser == "2" .AND. n == 1
     lOpen := .F.
- endif
+ ENDIF
 
- if lOpen
+ IF lOpen
  oPage:settab(n)
  oPage:ChangePage(n)
- else
+ ELSE
    hwg_MsgInfo("Sorry " + cUser + " You cannot access" + Str(n, 3))
  oPage:settab(4)
  oPage:ChangePage(4)
- endif
+ ENDIF
 
 RETURN NIL
 

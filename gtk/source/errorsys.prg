@@ -115,11 +115,11 @@ FUNCTION WriteLog(cText, fname)
 Local nHand
 
   fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
-  if !File(fname)
+  IF !File(fname)
      nHand := FCreate(fname)
-  else
+  ELSE
      nHand := FOpen(fname, 1)
-  endif
+  ENDIF
   FSeek(nHand, 0, 2)
   FWrite(nHand, cText + chr(10))
   FClose(nHand)

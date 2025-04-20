@@ -205,17 +205,17 @@ STATIC FUNCTION onNotify(oWnd, wParam, lParam)
                Eval(oCtrl:bChange, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
             ENDIF
          CASE (nCode := hwg_GetNotifyCode(lParam)) == TCN_CLICK
-              if oCtrl != NIL .AND. oCtrl:bAction != NIL
+              IF oCtrl != NIL .AND. oCtrl:bAction != NIL
                  Eval(oCtrl:bAction, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
-              endif
+              ENDIF
          CASE (nCode := hwg_GetNotifyCode(lParam)) == TCN_SETFOCUS
-              if oCtrl != NIL .AND. oCtrl:bGetFocus != NIL
+              IF oCtrl != NIL .AND. oCtrl:bGetFocus != NIL
                  Eval(oCtrl:bGetFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
-              endif
+              ENDIF
          CASE (nCode := hwg_GetNotifyCode(lParam)) == TCN_KILLFOCUS
-              if oCtrl != NIL .AND. oCtrl:bLostFocus != NIL
+              IF oCtrl != NIL .AND. oCtrl:bLostFocus != NIL
                  Eval(oCtrl:bLostFocus, oCtrl, hwg_GetCurrentTab(oCtrl:handle))
-              endif
+              ENDIF
         ENDCASE
       ELSEIF oCtrl:ClassName() == "HQHTM"
          RETURN oCtrl:Notify(oWnd, lParam)

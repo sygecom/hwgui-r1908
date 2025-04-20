@@ -289,10 +289,10 @@ RETURN NIL
 METHOD SetText(c) CLASS HEdit
 
   IF c != NIL
-     if HB_IsObject(c)
+     IF HB_IsObject(c)
         //in run time return object
         RETURN NIL
-     endif
+     ENDIF
      IF !Empty(::cPicFunc) .OR. !Empty(::cPicMask)
         ::title := Transform(c, ::cPicFunc + IIf(Empty(::cPicFunc), "", " ") + ::cPicMask)
      ELSE
@@ -518,9 +518,9 @@ Local cPic
 
       cChar := Transform(cChar, cPic)
       IF cPic == "A"
-         if !IsAlpha(cChar)
+         IF !IsAlpha(cChar)
             cChar := NIL
-         endif
+         ENDIF
       ELSEIF cPic == "N"
          IF !IsAlpha(cChar) .AND. !IsDigit(cChar)
             cChar := NIL

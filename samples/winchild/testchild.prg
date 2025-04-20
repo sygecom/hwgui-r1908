@@ -43,11 +43,11 @@ FUNCTION CreateChild(lClip)
                           bExit, NIL, NIL, NIL, NIL, NIL, "Child_" + AllTrim(Str(Len(aChilds))), NIL)
 
    // Test if we could create the window object
-   If HB_IsObject(oChild)
+   IF HB_IsObject(oChild)
       AAdd(aChilds, oChild)
-   Else
+   ELSE
        hwg_MsgStop("Erro ao tentar criar objeto HWindow!")
-   Endif
+   ENDIF
 
    oChild:Activate(.T.)
 

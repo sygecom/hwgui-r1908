@@ -56,9 +56,9 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
    ::value   := IIf(HB_IsNumeric(value), value, 0)
    ::bAction := bAction
    /*
-    if ::value > 0
+    IF ::value > 0
       SetTimer(oParent:handle, ::id, ::value)
-   endif
+   ENDIF
    */
    ::Init()
    AAdd(::aTimers, Self)

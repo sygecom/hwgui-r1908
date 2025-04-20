@@ -265,20 +265,20 @@ METHOD HeaderOut(hDC) CLASS PBrowse
    DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
-      if fif == Len(::aColumns)
+      IF fif == Len(::aColumns)
          xSize := Max(::x2 - x, xSize)
-      endif
-      if x > ::x1
+      ENDIF
+      IF x > ::x1
          hwg_SelectObject(hDC, oPenLight:handle)
          hwg_DrawLine(hDC, x - 1, ::y1 + 1, x - 1, ::y1 + (::height + 1) * nRows)
          hwg_SelectObject(hDC, oPenGray:handle)
          hwg_DrawLine(hDC, x - 2, ::y1 + 1, x - 2, ::y1 + (::height + 1) * nRows)
-      endif
+      ENDIF
       x += xSize
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
-      if fif > Len(::aColumns)
-         exit
-      endif
+      IF fif > Len(::aColumns)
+         EXIT
+      ENDIF
    ENDDO
 
    hwg_SelectObject(hDC, oPen:handle)
@@ -465,11 +465,11 @@ FUNCTION InspSetCombo()
       oCtrl := GetCtrlSelected(oDlg)
       aControls := IIf(oDesigner:lReport, oDlg:aControls[1]:aControls[1]:aControls, oDlg:aControls)
       FOR i := 1 TO Len(aControls)
-        if (oDesigner:lReport)
+        IF (oDesigner:lReport)
             AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != NIL, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
-        else
+        ELSE
             AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
-        endif
+        ENDIF
         IF oCtrl != NIL .AND. oCtrl:handle == aControls[i]:handle
             n := i
         ENDIF
@@ -496,11 +496,11 @@ FUNCTION InspUpdCombo(n)
          HFormGen():oDlgSelected:aControls)
       i := Len(aControls)
       IF i >= Len(oCombo:aItems)
-   if (oDesigner:lReport)
+   IF (oDesigner:lReport)
       AAdd(oCombo:aItems, aControls[i]:cClass + "." + IIf(aControls[i]:title != NIL, Left(aControls[i]:title, 15), LTrim(Str(aControls[i]:id))))
-   else
+   ELSE
       AAdd(oCombo:aItems, aControls[i]:cClass + "." + aControls[i]:GetProp("Name", 2))
-   endif
+   ENDIF
 
       ELSEIF i + 1 < Len(oCombo:aItems)
          RETURN InspSetCombo()

@@ -165,11 +165,11 @@ FUNCTION Tool2Prg
             k ++
          ENDDO
          //IF  k > 1
-         //        if !Empty(cFormParameters)
+         //        IF !Empty(cFormParameters)
          //                          cTool += ",{||" + cFormParameters + "}")
-         //        else
+         //        ELSE
          cTool += "," + hwg_CallFunc("Bloco2Prg", {aMethods, "onClick"})
-         //        endif
+         //        ENDIF
          //ELSE
          //  cTool += ",{|| .T. }"
          //ENDIF
@@ -705,7 +705,7 @@ FUNCTION Ctrl2Prg
       ENDIF
 
       IF oCtrl:oContainer != NIL
-         //if oCtrl:cClass != "group" .OR. (oCtrl:cClass == "group" .AND.(temp := oCtrl:GetProp("NoGroup" )) != NIL .AND. temp == "False") //nando pos condicao do OR->
+         //IF oCtrl:cClass != "group" .OR. (oCtrl:cClass == "group" .AND.(temp := oCtrl:GetProp("NoGroup" )) != NIL .AND. temp == "False") //nando pos condicao do OR->
          IF (oCtrl:cClass != "group" .AND.  Empty(cofGroup)) .OR. Empty(cofGroup) // nando pos
             IF (temp := oCtrl:oContainer:GetProp("Name")) == NIL .OR. Empty(temp)
                IF oCtrl:oContainer:oContainer != NIL

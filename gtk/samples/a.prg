@@ -104,14 +104,14 @@ RETURN .T.
 
 FUNCTION printdos
 Local han := fcreate("LPT1", 0)
-  if han != -1
+  IF han != -1
      fwrite(han, Chr(10) + Chr(13) + "Example of dos printing ..." + Chr(10) + Chr(13))
      fwrite(han, "Line 2 ..." + Chr(10) + Chr(13))
      fwrite(han, "---------------------------" + Chr(10) + Chr(13) + Chr(12))
      fclose(han)
-  else
+  ELSE
      hwg_MsgStop("Can't open printer port!")
-  endif
+  ENDIF
 RETURN NIL
 
 FUNCTION DialogFromPrg()

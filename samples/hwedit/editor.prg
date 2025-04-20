@@ -79,12 +79,12 @@ FUNCTION Main()
    PUBLIC m_site
 
 // carregando as variaveis de configuracoes
-if !file("config.dat")
+IF !file("config.dat")
      save all like ID_* to config.dat
-endif
+ENDIF
 restore from config.dat additive
 //// efetivando
-if ID_indioma = 8002
+IF ID_indioma = 8002
    m_arquivo := "File"
    m_novo := "New"
    m_abrir := "Open"
@@ -122,7 +122,7 @@ if ID_indioma = 8002
    m_seleciona := "Select all"
    m_pesq := "Find all files"
 
-elseif ID_indioma = 8001
+ELSEIF ID_indioma = 8001
    m_arquivo := "Arquivo"
    m_novo := "Novo"
    m_abrir := "Abrir"
@@ -159,7 +159,7 @@ elseif ID_indioma = 8001
    //
    m_editar := "Editar"
    m_seleciona := "Selecionar tudo"
- endif
+ ENDIF
 
 SET CENTURY on
 PUBLIC funcoes := {}
@@ -284,9 +284,9 @@ FUNCTION Texto()
    vText := hwg_SelectFile("Arquivos Texto", "*.PRG", CurDir())
    oFunc := {}
    oLinha := {}
-   if Empty(vText)
+   IF Empty(vText)
       RETURN .T.
-   endif
+   ENDIF
    i := AllTrim(Str(auto))
    PRIVATE vText&i := MemoRead(vText)
    PRIVATE oEdit&i
@@ -300,35 +300,35 @@ FUNCTION Texto()
    while !ft_FEOF()
       linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1))
       //
-      if Len(linha) != 0
+      IF Len(linha) != 0
         AAdd(linhas, Len(SubStr(FT_FReadLn(@s_lEof), 1)))
         //
-        if subs(Upper(linha), 1, 4) == "FUNC" .OR. subs(Upper(linha), 1, 4) == "PROC"
+        IF subs(Upper(linha), 1, 4) == "FUNC" .OR. subs(Upper(linha), 1, 4) == "PROC"
            fun := ""
            for f := 1 to Len(linha) + 1
               oCaracter++
-             if subs(linha, f, 1) = " "
+             IF subs(linha, f, 1) = " "
                 for g = f + 1 to Len(linha)
                        oCaracter++
-                    if subs(linha, g, 1) != " " .AND. subs(linha, g, 1) != "(" .AND. !Empty(subs(linha, g, 1))
+                    IF subs(linha, g, 1) != " " .AND. subs(linha, g, 1) != "(" .AND. !Empty(subs(linha, g, 1))
                         fun := fun + subs(linha, g, 1)
-                    elseif g = Len(linha)
+                    ELSEIF g = Len(linha)
                        AAdd(oFunc, fun)
                        AAdd(funcoes, rd_lin)
                        AAdd(oLinha, {rd_lin, r_linha})
                        exit
-                    else
+                    ELSE
                        AAdd(oFunc, fun)
                        AAdd(oLinha, {rd_lin, r_linha})
                        AAdd(funcoes, rd_lin)
                        exit
-                    endif
+                    ENDIF
                 next g
                 exit
-             endif
+             ENDIF
            next f
-         endif
-      endif
+         ENDIF
+      ENDIF
       rd_lin++
       FT_FSKIP()
    enddo
@@ -376,22 +376,22 @@ RETURN NIL
 FUNCTION funcao()
 *******************
 
-if maxi
+IF maxi
   //hwg_SendMessage(oMainWindow:handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0)
   oMainWindow:Maximize()
-endif
- if HMainWIndow():GetMdiActive() != NIL
+ENDIF
+ IF HMainWIndow():GetMdiActive() != NIL
     dats := dtoc(date())
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 6, "Data: " + dats)
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 7, "Hora: " + time())
-    if !set(_SET_INSERT)
+    IF !set(_SET_INSERT)
        strinsert := "INSERT ON "
-    else
+    ELSE
         strinsert := "INSERT OFF "
-    endif
+    ENDIF
     hwg_WriteStatus(HMainWIndow():GetMdiActive(), 5, strinsert)
 
- endif
+ ENDIF
 
 ***************************
 FUNCTION painel(wmdi)
@@ -425,9 +425,9 @@ FUNCTION fecha_texto()
    
    LOCAL h := HMainWIndow():GetMdiActive():handle
 
-    if alterado
+    IF alterado
         hwg_MsgYesNo("Deseja Salvar o arquivo")
-    endif
+    ENDIF
     hwg_SendMessage(h, WM_CLOSE, 0, 0)
 
 RETURN .T.
@@ -441,18 +441,18 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
    LOCAL oParent
    LOCAL nPos
 
- if msg == WM_KEYDOWN
- endif
+ IF msg == WM_KEYDOWN
+ ENDIF
  IF msg == WM_KEYUP
      nVirtCode := wParam
-     if wParam == 45
+     IF wParam == 45
           Set(_SET_INSERT, !Set(_SET_INSERT))
      ENDIF
-     if !set(_SET_INSERT)
+     IF !set(_SET_INSERT)
         strinsert := "INSERT ON "
-     else
+     ELSE
         strinsert := "INSERT OFF "
-     endif
+     ENDIF
     // pega linha e coluna
      coluna := hwg_LOWORD(hwg_SendMessage(oEdit:Handle, EM_GETSEL, 0, 0))
      Linha := hwg_SendMessage(oEdit:Handle, EM_LINEFROMCHAR, coluna, 0)
@@ -462,22 +462,22 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
      hwg_WriteStatus(HMainWIndow():GetMdiActive(), 1, "Lin:" + Str(linha, 6))
      hwg_WriteStatus(HMainWIndow():GetMdiActive(), 2, "Col:" + Str(coluna, 6))
       //
-     if oEdit:lChanged
+     IF oEdit:lChanged
           hwg_WriteStatus(HMainWIndow():GetMdiActive(), 4, "*")
           alterado := .T.
-     else
+     ELSE
          hwg_WriteStatus(HMainWIndow():GetMdiActive(), 4, " ")
-     endif
+     ENDIF
      //
-     if nvirtCode = 27
-         if oEdit:lChanged
+     IF nvirtCode = 27
+         IF oEdit:lChanged
            hwg_MsgYesNo("Deseja Salvar o arquivo")
-         endif
+         ENDIF
          h := HMainWIndow():GetMdiActive():handle
          hwg_SendMessage(h, WM_CLOSE, 0, 0)
-     endif
+     ENDIF
      //
-     if nvirtCode = 32 .OR. nvirtCode = 13 .OR. nvirtCode = 8
+     IF nvirtCode = 32 .OR. nvirtCode = 13 .OR. nvirtCode = 8
          hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
          oWindow := HMainWIndow():GetMdiActive():aControls
          IF oWindow != NIL
@@ -503,9 +503,9 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
             hwg_SetFocus(aControls[hWnd]:Handle)
          endif
          texto := ""
-     else
+     ELSE
         texto := texto + Chr(nvirtCode)
-     endif
+     ENDIF
 ENDIF
 
 RETURN -1
@@ -514,9 +514,9 @@ RETURN -1
 FUNCTION indioma(rd_ID)
 ***********************
 for f := 8001 to 8002
-  if hwg_IsCheckedMenuItem(, f)
+  IF hwg_IsCheckedMenuItem(, f)
     hwg_CheckMenuItem(, f, !hwg_IsCheckedMenuItem(, f))
-  endif
+  ENDIF
 next f
 hwg_CheckMenuItem(, rd_ID, !hwg_IsCheckedMenuItem(, rd_ID))
  ID_indioma := rd_id
@@ -543,7 +543,7 @@ FUNCTION Pesquisa()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      //
@@ -553,7 +553,7 @@ FUNCTION Pesquisa()
      @ 13, 39 get get01 SIZE 319, 24
      readexit(.T.)
      ACTIVATE DIALOG pesq
-     if pesq:lResult
+     IF pesq:lResult
          IF oWindow != NIL
              aControls := oWindow
              hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
@@ -563,9 +563,9 @@ FUNCTION Pesquisa()
              //
              hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0)
              hwg_SetFocus(aControls[hWnd]:Handle)
-         endif
-     endif
- endif
+         ENDIF
+     ENDIF
+ ENDIF
 
 RETURN .T.
 
@@ -615,7 +615,7 @@ FUNCTION Vai(oEdit)
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      INIT DIALOG pesq clipper TITLE  "Linha" ;
@@ -624,7 +624,7 @@ FUNCTION Vai(oEdit)
      @ 13, 39 get get01 SIZE 319, 24
      readexit(.T.)
      ACTIVATE DIALOG pesq
-     if pesq:lResult
+     IF pesq:lResult
          IF oWindow != NIL
              pos_y := val(get01)
              aControls := oWindow
@@ -638,8 +638,8 @@ FUNCTION Vai(oEdit)
              hwg_SetFocus(aControls[hWnd]:Handle)
              //
          ENDIF
-     endif
- endif
+     ENDIF
+ ENDIF
 
 RETURN .T.
 
@@ -677,7 +677,7 @@ FUNCTION Salvar_Projeto(oOpcao)
    LOCAL i
    LOCAL cfile := "temp"
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      //
@@ -690,21 +690,21 @@ FUNCTION Salvar_Projeto(oOpcao)
 
      IF oWindow != NIL
         aControls := oWindow
-        If Empty(vText) .OR. oOpcao=2
+        IF Empty(vText) .OR. oOpcao=2
             fName := hwg_SaveFile("*.prg", "Arquivos de Programa (*.prg)", "*.prg", CurDir())
-        Else
+        ELSE
             fName := vText
-        Endif
+        ENDIF
 
         fSalve := FCreate(fName) //Cria o arquivo
         FWrite(fSalve, aControls[hWnd]:vari)
         FClose(fSalve) //fecha o arquivo e grava
-     endif
+     ENDIF
 
-   endif
- else
+   ENDIF
+ ELSE
    hwg_MsgInfo("Nada para salvar")
- endif
+ ENDIF
 
 RETURN NIL
 
@@ -717,7 +717,7 @@ FUNCTION buscafunc(linha)
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := Ascan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      IF oWindow != NIL
@@ -733,7 +733,7 @@ FUNCTION buscafunc(linha)
          hwg_SetFocus(aControls[hWnd]:Handle)
          //
       ENDIF
-  endif
+  ENDIF
 
 RETURN .T.
 
@@ -746,16 +746,16 @@ FUNCTION cor_fundo()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
      ID_COLORB := hwg_ChooseColor(ID_COLORB, .T.)
      hwg_SendMessage(aControls[hWnd]:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
      save all like ID_* to config.dat
- else
+ ELSE
    hwg_MsgInfo("Abra um documento Primeiro")
- endif
+ ENDIF
  hwg_SetFocus(aControls[hWnd]:Handle)
 
 RETURN .T.
@@ -769,16 +769,16 @@ FUNCTION cor_Fonte()
    LOCAL aControls
    LOCAL i
 
- if HMainWIndow():GetMdiActive() != NIL
+ IF HMainWIndow():GetMdiActive() != NIL
      hWnd := AScan(HMainWIndow():GetMdiActive():aControls, {|o|o:winclass == "RichEdit20A"})
      oWindow := HMainWIndow():GetMdiActive():aControls
      aControls := oWindow
      ID_COLORF := hwg_ChooseColor(ID_COLORF, .T.)
      hwg_RE_SetDefault(aControls[hWnd]:Handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
      save all like ID_* to config.dat
- else
+ ELSE
    hwg_MsgInfo("Abra um documento Primeiro")
- endif
+ ENDIF
  hwg_SetFocus(aControls[hWnd]:Handle)
 
 RETURN .T.

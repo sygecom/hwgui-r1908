@@ -186,11 +186,11 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
       ENDMENU
    ENDMENU
 
-   if (oDesigner:nPixelGrid == 12)
+   IF (oDesigner:nPixelGrid == 12)
        hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, .T.)
-   else
+   ELSE
        hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .T.)
-   endif
+   ENDIF
 
    @ 0, 0 PANEL oPanel SIZE 280, 200 ON SIZE {|o, x, y|hwg_MoveWindow(o:handle, 0, 0, x, y - 21), statusbarmsg("")}
 
@@ -376,19 +376,19 @@ STATIC FUNCTION ShowGrid10px()
    // LOCAL nForms
    MEMVAR oDesigner
 
-if (oDesigner:oDlgInsp == NIL)
+IF (oDesigner:oDlgInsp == NIL)
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, .F.)
-    if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
+    IF (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1052))
         oDesigner:nPixelGrid := 18
    oDesigner:lShowGrid  := .T.
-    else
+    ELSE
         oDesigner:nPixelGrid := 0
         oDesigner:lShowGrid  := .F.
-    endif
-else
+    ENDIF
+ELSE
     hwg_MsgInfo("Close the form(s) first to change the grid status", "Warning")
-endif
+ENDIF
 RETURN (NIL)
 
 STATIC FUNCTION ShowGrid5px()
@@ -397,19 +397,19 @@ STATIC FUNCTION ShowGrid5px()
    // LOCAL nForms
    MEMVAR oDesigner
 
-if (oDesigner:oDlgInsp == NIL)
+IF (oDesigner:oDlgInsp == NIL)
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1050, !hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
     hwg_CheckMenuItem(oDesigner:oMainWnd:handle, 1052, .F.)
-    if (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
+    IF (hwg_IsCheckedMenuItem(oDesigner:oMainWnd:handle, 1050))
         oDesigner:nPixelGrid := 12
             oDesigner:lShowGrid  := .T.
-    else
+    ELSE
         oDesigner:nPixelGrid := 0
         oDesigner:lShowGrid  := .F.
-    endif
-else
+    ENDIF
+ELSE
     hwg_MsgInfo("Close the form first to change the grid status", "Warning")
-endif
+ENDIF
 RETURN (NIL)
 
 // -----------------
@@ -510,11 +510,11 @@ STATIC FUNCTION ReadIniFiles()
              l_ds_mypath := oNode:GetAttribute("default")
              IF !Empty(l_ds_mypath)
                 oDesigner:nPixelGrid := val(l_ds_mypath)
-                if Empty(oDesigner:nPixelGrid)
+                IF Empty(oDesigner:nPixelGrid)
                     oDesigner:lShowGrid := .F.
-                else
+                ELSE
                     oDesigner:lShowGrid := .T.
-      endif
+                ENDIF
              ENDIF
       ELSEIF oNode:title == "dirpath"
              l_ds_mypath := oNode:GetAttribute("default")

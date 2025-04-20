@@ -847,11 +847,11 @@ METHOD Paint(lpDis) CLASS HBUTTONEx
       ENDIF
    ENDIF
 
-//      if ::iStyle ==  ST_ALIGN_HORIZ
+//      IF ::iStyle ==  ST_ALIGN_HORIZ
 //         uAlign := DT_RIGHT
-//      else
+//      ELSE
 //         uAlign := DT_LEFT
-//      endif
+//      ENDIF
 //
 //      IF !hb_IsNumeric(::hbitmap)
 //         uAlign := DT_CENTER

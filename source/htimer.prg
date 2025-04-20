@@ -53,9 +53,9 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
    ::value   := IIf(hb_IsNumeric(value), value, 0)
    ::bAction := bAction
    /*
-    if ::value > 0
+    IF ::value > 0
       hwg_SetTimer(oParent:handle, ::id, ::value)
-   endif
+   ENDIF
    */
    ::Init()
    AAdd(::aTimers, Self)
