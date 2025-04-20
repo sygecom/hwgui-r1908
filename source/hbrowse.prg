@@ -2098,7 +2098,7 @@ ENDIF
    IF lLostFocus == NIL .AND. !::lHeadClick .AND. (::lEditable .OR. ::Highlight)  //.AND. !::lResizing
       ::LineOut(::rowPos, ::colpos, hDC, !::lResizing)
    ENDIF
-//   endif
+//   ENDIF
 
    // if bit-1 refresh header and footer
    ::oParent:lSuspendMsgsHandling := .F.

@@ -51,19 +51,19 @@ Local oBtSave
 
 Private cDirec := DiskName() + ":\" + CurDir() + "\"
 
-If !File(cDirec + "hwmake.ini")
+IF !File(cDirec + "hwmake.ini")
   hwg_WriteIni("Config", "Dir_HwGUI", "C:\HwGUI", cDirec + "hwmake.ini")
   hwg_WriteIni("Config", "Dir_HARBOUR", "C:\xHARBOUR", cDirec + "hwmake.ini")
   hwg_WriteIni("Config", "Dir_BCC55", "C:\BCC55", cDirec + "hwmake.ini")
   hwg_WriteIni("Config", "Dir_OBJ", "OBJ", cDirec + "hwmake.ini")
-EndIf
+ENDIF
 
 Private oImgNew  := hbitmap():addResource("NEW")
 Private oImgExit := hbitmap():addResource("EXIT")
 Private oImgBuild := hbitmap():addResource("BUILD")
 Private oImgSave := hbitmap():addResource("SAVE")
 Private oImgOpen := hbitmap():addResource("OPEN")
-Private oStatus 
+Private oStatus
 Private lSaved := .F.
 Private oBrowse1, oBrowse2, oBrowse3
 Private oDlg
@@ -71,13 +71,13 @@ Private oExeName, oLabel1, oLibFolder, oLabel2, oIncFolder, oLabel3, oPrgFlag, o
 Private oIcon := HIcon():AddResource("PIM")
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
-   
+
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "HwGUI Build Projects for BCC55" ;
         AT 213, 195 SIZE 513, 295  font oFont ICON oIcon
 
    ADD STATUS oStatus TO oDlg ;
        PARTS oDlg:nWidth - 160, 150
-       
+
    MENU OF oDlg
       MENU TITLE "&File"
          MENUITEM "&Build" ACTION BuildApp()
@@ -268,19 +268,19 @@ Local cNome := cFileNoPath(cArq)
 
 cDest := AllTrim(StrTran(cArq, cNome, ""))
 
-If SubStr(cDest, -1, 1) == "\"
+IF SubStr(cDest, -1, 1) == "\"
    cDest := SubStr(cDest, 1, Len(cDest) - 1)
-EndIf
-   
+ENDIF
+
 RETURN cDest
 *-------------------------------------------------------------------------------------
 FUNCTION cFileNoExt(cArq)
 *-------------------------------------------------------------------------------------
 Local n
 n := At(".", cArq)
-If n > 0
+IF n > 0
    RETURN SubStr(cArq, 1, n - 1)
-Endif
+ENDIF
 
 RETURN cArq   
 
@@ -292,11 +292,11 @@ Local cLetra
 For i := 1 to Len(cArq)
    
    cLetra := SubStr(cArq, i, 1)
-   If cLetra == "\"
+   IF cLetra == "\"
       cDest := ""
-   Else   
+   ELSE
       cDest += cLetra
-   EndIf         
+   ENDIF
    
 Next
 
@@ -392,88 +392,88 @@ Local cErrText
 Local lEnd
 
 cPathFile := cPathNoFile(oMainPrg:GetText())
-If !Empty(cPathFile)
+IF !Empty(cPathFile)
    DirChange(cPathFile)
-EndIF   
+ENDIF
 
-If File(cDirec + "hwmake.Ini")
+IF File(cDirec + "hwmake.Ini")
    cHwGUI  := Lower(AllTrim(hwg_GetIni("Config", "DIR_HwGUI", , cDirec + "hwmake.Ini")))
    cHarbour := Lower(AllTrim(hwg_GetIni("Config", "DIR_HARBOUR", , cDirec + "hwmake.Ini")))
    cBCC55  := Lower(AllTrim(hwg_GetIni("Config", "DIR_BCC55", , cDirec + "hwmake.Ini")))
    cObj    := Lower(AllTrim(hwg_GetIni("Config", "DIR_OBJ", , cDirec + "hwmake.Ini")))
-Else 
+ELSE
    cHwGUI  := "c:\hwgui"
    cHarbour := "c:\xharbour"
    cBCC55  := "c:\bcc55"
    cObj    := "obj"
-EndIf
+ENDIF
 
 cObj := Lower(AllTrim(cObj))
 Makedir(cObj)
 
 cExeHarbour := Lower(cHarbour + "\bin\harbour.exe")
-//If !File(cExeHarbour)
+//IF !File(cExeHarbour)
 //   hwg_MsgInfo("Not exist " + cExeHarbour + "!!")
 //   RETURN NIL
-//EndIf
+//ENDIF
 
 //PrgFiles
 i := Ascan(oBrowse1:aArray, {|x|At(cMainPrg, x) > 0})
-If i == 0
+IF i == 0
    AAdd(oBrowse1:aArray, AllTrim(oMainPrg:GetText()))
-EndIf   
+ENDIF
 
 For Each i in oBrowse1:aArray 
    cObjName := cObj + "\" + cFileNoPath(cFileNoExt(i)) + ".c"
    cPrgName := i
    lCompile := .F.
-   If lAll
+   IF lAll
       lCompile := .T.
-   Else   
-      If File(cObjName)
+   ELSE
+      IF File(cObjName)
          FileStats(cObjName, @cObjFileAttr, @nObjFileSize, @dObjCreateDate, @nObjCreateTime, @dObjChangeDate, @nObjChangeTime)
          FileStats(cPrgName, @cPrgFileAttr, @nPrgFileSize, @dPrgCreateDate, @nPrgCreateTime, @dPrgChangeDate, @nPrgChangeTime)
-         If dObjChangeDate <= dPrgChangeDate .AND.  nObjChangeTime <  nPrgChangeTime
+         IF dObjChangeDate <= dPrgChangeDate .AND.  nObjChangeTime <  nPrgChangeTime
             lCompile := .T.
-         EndIF   
-      Else
+         ENDIF
+      ELSE
          lCompile := .T.
-      EndIf      
-   EndIF       
+      ENDIF
+   ENDIF
 
-   If lCompile 
+   IF lCompile
       cLogErro := cFileNoPath(cFileNoExt(cObjName)) + ".log"
       FErase(cLogErro)
       FErase(cObjName)
       FErase(cFileNoExt(cObjName) + ".obj")
-      If ExecuteCommand(cExeHarbour, cPrgName + " -o" + cObjName + " " + AllTrim(oPrgFlag:GetText()) + " -n -i" + cHarbour + "\include;" + cHwGUI + "\include" + IIf(!Empty(AllTrim(oIncFolder:GetText())), ";" + AllTrim(oIncFolder:GetText()), ""), cFileNoExt(cObjName) + ".log") != 0
-  
+      IF ExecuteCommand(cExeHarbour, cPrgName + " -o" + cObjName + " " + AllTrim(oPrgFlag:GetText()) + " -n -i" + cHarbour + "\include;" + cHwGUI + "\include" + IIf(!Empty(AllTrim(oIncFolder:GetText())), ";" + AllTrim(oIncFolder:GetText()), ""), cFileNoExt(cObjName) + ".log") != 0
+
          cErrText := Memoread(cLogErro)
-       
+
          lEnd     := "C2006" $ cErrText .OR. "No code generated" $ cErrText .OR. "Error E" $ cErrText .OR. "Error F" $ cErrText
-         If lEnd
+         IF lEnd
             ErrorPreview(Memoread(cLogErro))
             RETURN NIL
-         Else 
-            If File(cLogErro)
+         ELSE
+            IF File(cLogErro)
              //  FErase(cLogErro)
-            EndIf   
-         EndIf   
+            ENDIF
+         ENDIF
          RETURN NIL
-      
-      EndIf   
-         
-   EndIf
+
+      ENDIF
+
+   ENDIF
    cList    += cObjName + " " 
-   If At(cMainPrg, cObjName) == 0
+   IF At(cMainPrg, cObjName) == 0
       cListObj += StrTran(cObjName, ".c", ".obj") + " " + CRLF
-   EndIf   
+   ENDIF
    cRun := " -v -y -c " + AllTrim(oCFlag:GetText()) + " -O2 -tW -M -I" + cHarbour + "\include;" + cHwGUI + "\include;" + cBCC55 + "\include " + "-o" + StrTran(cObjName, ".c", ".obj") + " " + cObjName
-   If ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
+   IF ExecuteCommand(cBCC55 + "\bin\bcc32.exe", cRun) != 0
       hwg_MsgInfo("No Created Object files!", "HwMake")
       RETURN NIL
-   EndIF
-          
+   ENDIF
+
 Next
 
 cListObj := "c0w32.obj +" + CRLF + cObj + "\" + cMainPrg + ".obj, +" + CRLF + cListObj
@@ -486,21 +486,21 @@ Next
                         
 //ResourceFiles
 For Each i in oBrowse4:aArray     
-   If ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
+   IF ExecuteCommand(cBCC55 + "\bin\brc32", "-r " + cFileNoExt(i) + " -fo" + cObj + "\" + cFileNoPath(cFileNoExt(i))) != 0
       hwg_MsgInfo("Error in Resource File " + i + "!", "HwMake")
       RETURN NIL
-   EndIf   
+   ENDIF
    cListRes += cObj + "\" + cFileNoPath(cFileNoExt(i)) + ".res +" + CRLF
 Next
-If Len(cListRes) > 0
+IF Len(cListRes) > 0
    cListRes := SubStr(cListRes, 1, Len(cListRes) - 3)
-EndIF   
+ENDIF
 cMake := cListObj
 cNameExe := AllTrim(lower(oExeName:GetText()))
-If At(".exe", cNameExe) == 0
+IF At(".exe", cNameExe) == 0
    cNameExe += ".exe"
-EndIF
-   
+ENDIF
+
 cMake += cNameExe + ", + " + CRLF
 cMake += cFileNoExt(oExeName:GetText()) + ".map, + " + CRLF
 cMake += RetLibrary(cHwGUI, cHarbour, cBcc55, oBrowse3:aArray)
@@ -508,20 +508,20 @@ cMake += RetLibrary(cHwGUI, cHarbour, cBcc55, oBrowse3:aArray)
 //
 cMake += IIf(!Empty(cListRes), ",," + cListRes, "")
 
-If File(cMainPrg + ".bc ")
+IF File(cMainPrg + ".bc ")
    FErase(cMainPrg + ".bc ")
-EndIF   
+ENDIF
 
 Memowrit(cMainPrg + ".bc ", cMake)
 
-If ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
+IF ExecuteCommand(cBCC55 + "\bin\ilink32", "-v -Gn -aa -Tpe @" + cMainPrg + ".bc") != 0
       hwg_MsgInfo("No link file " + cMainPrg + "!", "HwMake")
       RETURN NIL
-EndIf
+ENDIF
 
-If File(cMainPrg + ".bc ")
+IF File(cMainPrg + ".bc ")
    FErase(cMainPrg + ".bc ")
-EndIF
+ENDIF
 
 RETURN NIL
 
@@ -582,19 +582,19 @@ RETURN cLib
 FUNCTION ExecuteCommand(cProc, cSend, cLog)
 Local cFile := "execcom.bat"
 Local nRet
-If cLog == NIL
+IF cLog == NIL
    cLog := ""
-Else
+ELSE
    cLog := " > " + cFileNoPath(cLog)
-EndIf      
-If File(cFile)
+ENDIF
+IF File(cFile)
    FErase(cFile)
-EndIf 
+ENDIF
 Memowrit(cFile, cProc + " " + cSend + cLog)
 nRet := hwg_WaitRun(cFile)
-If File(cFile)
+IF File(cFile)
    FErase(cFile)
-EndIf
+ENDIF
 
 RETURN nRet
 
@@ -606,7 +606,7 @@ RETURN oBrowse:Refresh()
 
 FUNCTION OpenAbout
 Local oModDlg, oFontBtn, oFontDlg
-Local oBmp  
+Local oBmp
 Local oSay
 
    PREPARE FONT oFontDlg NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
@@ -614,7 +614,7 @@ Local oSay
 
    INIT DIALOG oModDlg TITLE "About"     ;
    AT 190, 10  SIZE 360, 200               ;
-   ICON oIcon                            ;   
+   ICON oIcon                            ;
    FONT oFontDlg
  
         
@@ -638,7 +638,7 @@ Local oSay
         VISITCOLOR hwg_RGB(241, 249, 91)
                              
    @ 40, 120 BUTTONex oBtExit  CAPTION "Close"  BITMAP oImgExit:Handle  on Click {||EndDialog()}    SIZE 180, 35  
-  
+
    ACTIVATE DIALOG oModDlg
    
 RETURN NIL

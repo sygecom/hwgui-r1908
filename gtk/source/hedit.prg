@@ -695,7 +695,7 @@ Local xValue, cChar, nFor, minus
             ENDIF
          NEXT
          cBuffer := StrTran(cBuffer, Chr(1), "")
-      endif
+      ENDIF
 
       xValue := cBuffer
 
@@ -809,7 +809,7 @@ Local i, nLen
    ENDIF
    nLen := len(cBuffer)
    FOR i := 1 to nLen
-      If IsDigit(SubStr(cBuffer, i, 1))
+      IF IsDigit(SubStr(cBuffer, i, 1))
          RETURN .T.
       ENDIF
    NEXT

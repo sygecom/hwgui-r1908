@@ -257,7 +257,7 @@ Private oDlg
       ELSEIF ::aProp[i, 1] == "systemMenu"
          IF !xProperty 
             nStyle := hwg_bitandinverse(nStyle, WS_SYSMENU)
-         endif
+         ENDIF
       ELSEIF ::aProp[i, 1] == "minimizebox"
          IF xProperty 
             nStyle += WS_MINIMIZEBOX

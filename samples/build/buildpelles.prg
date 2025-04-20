@@ -38,11 +38,11 @@ FUNCTION Main()
 
    PRIVATE oDirec := DiskName() + ":\" + CurDir() + "\"
 
-   If !File(oDirec + "BuildPelles.Ini")
+   IF !File(oDirec + "BuildPelles.Ini")
      hwg_WriteIni("Config", "Dir_HwGUI", "C:\HwGUI", oDirec + "BuildPelles.Ini")
      hwg_WriteIni("Config", "Dir_HARBOUR", "C:\xHARBOUR", oDirec + "BuildPelles.Ini")
      hwg_WriteIni("Config", "Dir_PELLES", "C:\POCC", oDirec + "BuildPelles.Ini")
-   EndIf
+   ENDIF
 
    PRIVATE lSaved := .F.
    PRIVATE oBrowse1
@@ -181,9 +181,9 @@ STATIC FUNCTION SearchFileName(nName, oGet, oFile)
    LOCAL oTextAnt := oGet:GetText()
    LOCAL fFile := hwg_SelectFile(nName + " (" + oFile + ")", oFile, , , .T.)
 
-   If !Empty(oTextAnt)
+   IF !Empty(oTextAnt)
       fFile := oTextAnt //
-   endif
+   ENDIF
 
    oGet:SetText(fFile)
    oGet:Refresh()
@@ -327,11 +327,11 @@ RETURN NIL
 
 FUNCTION BuildApp()
 
-If hwg_MsgYesNo("Yes Compile to BAT, No compile to PoMake")
+IF hwg_MsgYesNo("Yes Compile to BAT, No compile to PoMake")
    BuildBat()
-Else
+ELSE
    BuildPoMake()
-EndIf
+ENDIF
 
 RETURN NIL
 
@@ -358,15 +358,15 @@ FUNCTION BuildBat()
    LOCAL vHarbour
    LOCAL vPelles
 
-   If File(oDirec + "BuildPelles.Ini")
+   IF File(oDirec + "BuildPelles.Ini")
       vHwGUI := hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
       vHarbour := hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
       vPelles := hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
-   Else
+   ELSE
       vHwGUI := "C:\HWGUI"
       vHarbour := "C:\Harbour"
       vPelles := "C:\Pocc"
-   EndIf
+   ENDIF
    voExeName := oExeName:GetText()
    voLibFolder := oLibFolder:GetText()
    voIncFolder := oIncFolder:GetText()
@@ -566,15 +566,15 @@ FUNCTION BuildPoMake()
    LOCAL vHarbour
    LOCAL vPelles
 
-   If File(oDirec + "BuildPelles.Ini")
+   IF File(oDirec + "BuildPelles.Ini")
       vHwGUI := hwg_GetIni("Config", "DIR_HwGUI", , oDirec + "BuildPelles.Ini")
       vHarbour := hwg_GetIni("Config", "DIR_HARBOUR", , oDirec + "BuildPelles.Ini")
       vPelles := hwg_GetIni("Config", "DIR_PELLES", , oDirec + "BuildPelles.Ini")
-   Else
+   ELSE
       vHwGUI := "C:\HWGUI"
       vHarbour := "C:\Harbour"
       vPelles := "C:\Pocc"
-   EndIf
+   ENDIF
 
    voExeName := oExeName:GetText()
    voLibFolder := oLibFolder:GetText()

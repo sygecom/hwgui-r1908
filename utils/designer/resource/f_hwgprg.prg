@@ -717,7 +717,7 @@ FUNCTION Ctrl2Prg
             temp := cofGroup
          ENDIF
          stroka += IIf(lGroup, "OF " + temp + " ", "")
-         //endif
+         //ENDIF
       ELSE
          // colocar o group para depois dos demais objetos
          IF !Empty(cGroup)
@@ -1292,7 +1292,7 @@ FUNCTION Ctrl2Prg
    //  cStyle += "+WS_POPUP"
    //ENDIF
    // IF oForm:GetProp("Modal") = .F.
-   // endif
+   // ENDIF
    IF oForm:GetProp("SystemMenu") = "True"
       cStyle += "+WS_SYSMENU"
    ENDIF

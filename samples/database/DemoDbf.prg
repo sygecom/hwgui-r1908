@@ -295,13 +295,13 @@ FUNCTION DeleteRecord()
 
 Select TabDbf
 Seek oCod
-If Found()
-   If hwg_MsgYesNo("Delete Cod " + oCod, "Mensagem")
+IF Found()
+   IF hwg_MsgYesNo("Delete Cod " + oCod, "Mensagem")
       RLock()
       Delete
       Unlock
-   Endif
-EndIf
+   ENDIF
+ENDIF
 Go Bottom
 GetVars()
 GetRefresh()
@@ -316,22 +316,22 @@ FUNCTION OpenDbf()
    LOCAL vArq := oDir + "FORNECED.DBF"
    LOCAL vInd1 := oDir + "FORNECED.NTX"
 
-   If !File(vArq)
+   IF !File(vArq)
       AAdd(vTab, {"Cod    ", "C", 3, 0})
       AAdd(vTab, {"Name     ", "C", 50, 0})
       AAdd(vTab, {"Adress  ", "C", 50, 0})
       AAdd(vTab, {"Fone  ", "C", 50, 0})
       AAdd(vTab, {"e_Mail  ", "C", 30, 0})
       dBCreate(vArq, vTab)
-   EndIf
+   ENDIF
    Use (vArq) Shared Alias TabDbf
-   If !File(vInd1)
+   IF !File(vInd1)
       fLock()
       Index on Cod   to (vInd1)
       Unlock
-   Else
+   ELSE
       Set Index to (vInd1)
-   EndIf
+   ENDIF
 
 RETURN NIL
 

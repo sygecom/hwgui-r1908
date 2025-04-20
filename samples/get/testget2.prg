@@ -52,9 +52,9 @@ FUNCTION DlgGet(lColor)
    SET KEY FCONTROL, VK_F3 TO hwg_MsgInfo("Ctrl-F3")
    SET KEY 0, VK_F3 TO hwg_MsgInfo("F3")
 
-   If lColor != NIL
+   IF lColor != NIL
       hwg_SetColorInFocus(lColor)
-   EndIf
+   ENDIF
 
    @ 20, 10 SAY "Input something:" SIZE 260, 22
 

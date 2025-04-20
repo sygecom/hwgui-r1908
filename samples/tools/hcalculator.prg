@@ -243,93 +243,93 @@ METHOD Calculando(cNumero) CLASS HCalculator
    IF hwg_IsCtrlShift(.F., .T.) .AND. (cNumero = "5" .OR. cNumero = "8")
       cNumero := IIf(cNumero = "8", "*", IIf(cNumero = "5", "%", cNumero))
    ENDIF
-   If cNumero $ "/*-+%="
+   IF cNumero $ "/*-+%="
       nCars := oForm:oCalculo:nWidth / ::nFontSize
       oForm:oCalculo:Caption += oForm:oVisor:Caption + " " + cNumero + " "
       oForm:oCalculo:Caption := RIGHT(oForm:oCalculo:Caption, nCars)
       ::cOperador := IIf(cNumero != "=", cNumero, ::cOperador)
       cOperar := IIf(cOperar == NIL, cNumero, cOperar)
-      If ::aOperando[1] == NIL .AND. !::lClear
+      IF ::aOperando[1] == NIL .AND. !::lClear
          ::aOperando[1] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
-      ElseIf ::aOperando[2] == NIL .AND. !::lClear
+      ELSEIF ::aOperando[2] == NIL .AND. !::lClear
          ::aOperando[2] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
-      EndIf
+      ENDIF
       ::lClear := .T.
-   ElseIf cNumero == "#"
+   ELSEIF cNumero == "#"
       oForm:oVisor:Caption := IIf(oForm:oVisor:Caption = "-", SubStr(oForm:oVisor:Caption, 2), "-" + oForm:oVisor:Caption)
       ::cOperador := cNumero
-      If ::aOperando[2] != NIL
+      IF ::aOperando[2] != NIL
          ::aOperando[2] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
-      ElseIf ::aOperando[1] != NIL
+      ELSEIF ::aOperando[1] != NIL
          ::aOperando[1] := Val(StrTran(oForm:oVisor:Caption, ",", "."))
-      EndIf
+      ENDIF
       ::lClear := .T.
-   ElseIf cNumero == " "
-      If !::lClear
+   ELSEIF cNumero == " "
+      IF !::lClear
          oForm:oVisor:Caption := Left(oForm:oVisor:Caption, nLen - 1)
-      EndIf
-   ElseIf cNumero == "C"
+      ENDIF
+   ELSEIF cNumero == "C"
       oForm:oVisor:Caption := "0"
       ::lClear := .T.
       ::aOperando[1] := IIf(::aOperando[1] != NIL .AND. ::aOperando[2] == NIL, ::aOperando[1], NIL)
       ::aOperando[2] := NIL //IIf(::aOperando[2] == NIL, NIL, 0)
       RETURN NIL
-   ElseIf Empty(cNumero)
+   ELSEIF Empty(cNumero)
       oForm:oVisor:Caption := "0"
       oForm:oCalculo:Caption := ""
       ::lClear := .T.
       ::aOperando := {, , 0}
-      If ::oCurrGet != NIL
+      IF ::oCurrGet != NIL
          ::End()
          RETURN NIL
-      EndIf
-   ElseIf cNumero == "MC"
+      ENDIF
+   ELSEIF cNumero == "MC"
       ::nMemory := 0
       oForm:oMemory:caption := " "
-   ElseIf cNumero == "MR"
+   ELSEIF cNumero == "MR"
       oForm:oVisor:Caption := Str(::nMemory)
       ::lClear := .F.
-   ElseIf cNumero == "M+"
+   ELSEIF cNumero == "M+"
       ::nMemory := Val(StrTran(oForm:oVisor:Caption, ",", "."))
       oForm:oMemory:caption := "M"
-   Else
+   ELSE
       oForm:oVisor:Caption := IIf(::lClear .OR. cOperar = "=", "", oForm:oVisor:Caption)
       oForm:oVisor:Caption += cNumero
       ::lClear := .F.
       cOperar := ""
-   EndIf
+   ENDIF
 
-   If cNumero == "=" .AND. (!Empty(::aOperando[1]) .AND. Empty(::aOperando[2]))
+   IF cNumero == "=" .AND. (!Empty(::aOperando[1]) .AND. Empty(::aOperando[2]))
       ::aOperando[2] := ::aOperando[3]
-   EndIf
-   If !Empty(cOperar) .AND. (!Empty(::aOperando[1]) .AND. !Empty(::aOperando[2]))
-      If ::cOperador == "%"
+   ENDIF
+   IF !Empty(cOperar) .AND. (!Empty(::aOperando[1]) .AND. !Empty(::aOperando[2]))
+      IF ::cOperador == "%"
         ::aOperando[1] := (::aOperando[1] * ::aOperando[2]) / 100
-      Else
+      ELSE
         nCalculo1 := ::aOperando[1]
         nCalculo2 := ::aOperando[2]
         ::aOperando[1] := &("nCalculo1" + cOperar + "nCalculo2")
-      EndIf
+      ENDIF
       ::aOperando[1] := IIf(::aOperando[1] - Int(::aOperando[1]) = 0, ;
                           Int(::aOperando[1]), ::aOperando[1])
       oForm:oVisor:Caption := LTrim(Str(::aOperando[1]))
       ::aOperando[3] := ::aOperando[2]
       ::aOperando[2] := NIL
       ::lClear := .T.
-   EndIf
-   If cNumero == "="
+   ENDIF
+   IF cNumero == "="
       oForm:oCalculo:Caption := ""
-      If ::oCurrGet != NIL
+      IF ::oCurrGet != NIL
          ::End()
          RETURN NIL
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
    oForm:oBtnRes:SetFocus()
 
 RETURN NIL
 
 METHOD INIT() CLASS HCalculator
-   
+
    LOCAL aCoors
 
    hwg_SetDlgKey(::oFormCalc, , 8, {||::Calculando(" ")})
@@ -354,7 +354,7 @@ METHOD INIT() CLASS HCalculator
    ::oFormCalc:SetAll("anchor", 240, , "hbuttonex")
   // ::oFormCalc:setall("lflat", ::lCompacta, , "hbuttonex")
 
-   If ::oCurrGet != NIL
+   IF ::oCurrGet != NIL
       ::oFormCalc:oVisor:Caption := AllTrim(Str(::oCurrGet:Value))
       ::lClear := ::oFormCalc:oVisor:Caption = "0"
       IF ::oFormCalc:Type >= WND_DLG_RESOURCE
@@ -365,7 +365,7 @@ METHOD INIT() CLASS HCalculator
       ENDIF
       aCoors[3] := IIf(::lCompacta, Max(130, ::oCurrGet:nWidth + 8), ::nWidth)
       ::oFormCalc:Move(aCoors[1] + 1, aCoors[2] + ::oCurrGet:nHeight + 1, aCoors[3], 180, 0)
-   EndIf
+   ENDIF
    ::oFormCalc:nInitFocus := ::oFormCalc:oBtnRes
 
 RETURN NIL
@@ -374,12 +374,12 @@ METHOD GetRefresh() CLASS HCalculator
    
    LOCAL Value := ::aOperando[1]
 
-   If ::oCurrGet != NIL
-      If Value != NIL
+   IF ::oCurrGet != NIL
+      IF Value != NIL
          ::oCurrGet:Value := Value
          //::oCurrGet:SetFocus()
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
 RETURN .T.
 

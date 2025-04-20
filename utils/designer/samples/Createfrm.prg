@@ -12,9 +12,9 @@ FUNCTION Main
    
       cFile := StrTran(Lower(Alltrim(aFiles[i, 1])), "xml", "frm")
       
-      If File(cFile)
+      IF File(cFile)
          FErase(cFile)
-      EndIF
+      ENDIF
 
       cText := "/*" + CRLF + "FORM HwGUI Designer : " + cFile + CRLF + "Date: " + DTOC (Date()) + CRLF + "*/" + CRLF
       

@@ -140,22 +140,22 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
             MENUITEM "&Save as ..." ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:Save(.T.), hwg_MsgStop("No Form in use!"))
             MENUITEM "&Close " + IIf(!oDesigner:lReport, "Form", "Report")  ACTION IIf(HFormGen():oDlgSelected != NIL, HFormGen():oDlgSelected:oParent:End(), hwg_MsgStop("No Form in use!", "Designer"))
          ELSE
-            If !lOmmitMenuFile
+            IF !lOmmitMenuFile
                MENUITEM "&Open " + IIf(!oDesigner:lReport, "Form", "Report") ACTION HFormGen():OpenR()
                SEPARATOR
                MENUITEM "&Save as ..." ACTION (oDesigner:lSingleForm := .F., HFormGen():oDlgSelected:oParent:Save(.T.), oDesigner:lSingleForm := .T.)
-            EndIf
+            ENDIF
          ENDIF
          SEPARATOR
          MENU TITLE "Recent " + IIf(!oDesigner:lReport, "Form", "Report")
-         If !lOmmitMenuFile
+         IF !lOmmitMenuFile
             i := 1
             DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != NIL
                hwg_DefineMenuItem(oDesigner:aRecent[i], 1020 + i, ;
                   &("{||HFormGen():Open('" + oDesigner:aRecent[i] + "')}"))
                i ++
             ENDDO
-         EndIf
+         ENDIF
          ENDMENU
          SEPARATOR
          MENUITEM If(!lOmmitMenuFile, "&Exit", "&Close Designer") ACTION oDesigner:oMainWnd:Close()

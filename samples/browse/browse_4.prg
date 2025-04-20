@@ -20,9 +20,9 @@ FUNCTION Main()
    PRIVATE oConsulta
    PRIVATE vConsulta
 
-   If !File("browse_4.dbf")
+   IF !File("browse_4.dbf")
       dBCreate("browse_4.dbf", aField)
-   end
+   ENDIF
    Use browse_4 Exclusiv alias TESTE  NEW
    for i := 1 to 200
       Append Blank

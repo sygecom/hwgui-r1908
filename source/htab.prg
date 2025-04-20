@@ -1382,7 +1382,7 @@ METHOD Paint(lpdis) CLASS HPaintTab
             IF hwg_GetFocus() == oPage:oParent:handle
                hwg_InflateRect(@client_rect, - 2, - 2)
                hwg_DrawFocusRect(::hDC, client_rect)
-            endif
+            ENDIF
          ELSE
             hwg_FillRect(::hDC, client_rect[1] + IIf(i == nPage + 1, 2, 1), ;
                              client_rect[2] + 1, ;

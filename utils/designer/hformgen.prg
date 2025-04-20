@@ -1437,7 +1437,7 @@ STATIC FUNCTION LButtonUp(oDlg, xPos, yPos, nShift)
               0, 0, oDlg:nWidth, oDlg:nHeight)
         SetBDown(NIL, 0, 0, 0)
          RETURN -1
-      endif
+      ENDIF
       // :END LFB
       IF oCtrl != NIL
          IF aBDown[BDOWN_NBORDER] > 0

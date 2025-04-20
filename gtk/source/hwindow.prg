@@ -380,9 +380,9 @@ FUNCTION hwg_ReleaseAllWindows(hWnd)
    NEXT
    #endif
 
-   If HWindow():aWindows[1]:handle == hWnd
+   IF HWindow():aWindows[1]:handle == hWnd
       hwg_PostQuitMessage(0)
-   Endif
+   ENDIF
 */
 RETURN -1
 

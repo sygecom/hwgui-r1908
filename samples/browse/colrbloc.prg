@@ -275,10 +275,10 @@ STATIC FUNCTION CriaDbf()
         ELSE
           IF i == 1
              FIELD->FIELD1 := -i
-          else
+          ELSE
              FIELD->FIELD1 := i
-          end
-        END
+          ENDIF
+        ENDIF
         FIELD->FIELD2 := "Field2 " + STRZERO(i, 4)
         FIELD->FIELD3 := DATE() + i
         FIELD->FIELD4 := "jgçpqy " + STRZERO(i, 23)

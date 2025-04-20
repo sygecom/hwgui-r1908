@@ -492,16 +492,16 @@ FUNCTION richeditProc(oEdit, msg, wParam, lParam)
              //
              //hwg_MsgInfo(Str(pos1))
              //hwg_MsgInfo(Str(Len(texto)))
-             if sintaxe(texto)
+             IF sintaxe(texto)
 
                 hwg_RE_SetCharFormat(aControls[hWnd]:Handle, {{,,,,,,}, {(pos1-Len(texto)), Len(texto), 255,,, .T.}})
-             else
+             ELSE
                 hwg_RE_SetCharFormat(aControls[hWnd]:Handle, pos1, pos1, 0, , , .T.)
-             endif
+             ENDIF
             //
             hwg_SendMessage(aControls[hWnd]:Handle, WM_ENABLE, 1, 0) // focando janela
             hwg_SetFocus(aControls[hWnd]:Handle)
-         endif
+         ENDIF
          texto := ""
      ELSE
         texto := texto + Chr(nvirtCode)

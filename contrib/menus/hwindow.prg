@@ -158,10 +158,10 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
           ::handle := hwg_InitChildWindow(::szAppName, cTitle, cMenu, ;
              IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
              ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
-      Else
+      ELSE
           hwg_MsgStop("Nao eh possivel criar CHILD sem primeiro criar MAIN")
           RETURN (NIL)
-      Endif
+      ENDIF
 
    ELSEIF lType == WND_MDICHILD //
       ::szAppName := "MDICHILD" + Alltrim(Str(hwg_GETNUMWINDOWS()))
@@ -201,8 +201,8 @@ METHOD Activate(lShow) CLASS HWindow
       hwg_ActivateMainWindow((lShow == NIL .OR. lShow), ::hAccel)
    ELSEIF ::type == WND_CHILD
       hwg_ActivateChildWindow(::handle)
-   Else
-      
+   ELSE
+
    ENDIF
 
 RETURN NIL
@@ -704,7 +704,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       ENDIF
 
    ELSEIF msg == WM_SIZE
-      If HB_IsObject(oWnd)
+      IF HB_IsObject(oWnd)
          aControls := oWnd:aControls
          nControls := Len(aControls)
          #ifdef __XHARBOUR__

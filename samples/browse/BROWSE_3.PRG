@@ -24,12 +24,12 @@ FUNCTION Main()
    PRIVATE oConsulta
    PRIVATE vConsulta
 
-If !File("Teste.dbf")
+IF !File("Teste.dbf")
    dBCreate("teste.dbf", oArq1)
-EndIf
-If !File("Teste1.dbf")
+ENDIF
+IF !File("Teste1.dbf")
    dBCreate("teste1.dbf", oArq2)
-EndIf
+ENDIF
 Use teste  Exclusiv alias TESTE  NEW
 index on COD to Teste
 Use teste1 Exclusiv alias TESTE1 NEW

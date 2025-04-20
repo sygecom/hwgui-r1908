@@ -60,10 +60,10 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    ::bChange := bChange
 
-//   If bChange != NIL
+//   IF bChange != NIL
 //      ::oParent:AddEvent(MCN_SELECT, ::id, bChange, .T.)
 //      ::oParent:AddEvent(MCN_SELCHANGE, ::id, bChange, .T.)
-//   EndIf
+//   ENDIF
 
    ::Activate()
 RETURN Self
@@ -72,14 +72,14 @@ RETURN Self
 
 METHOD Activate() CLASS HMonthCalendar
 
-   If !Empty(::oParent:handle)
+   IF !Empty(::oParent:handle)
       ::handle := hwg_InitMonthCalendar(::oParent:handle, , ;
                   ::nLeft, ::nTop, ::nWidth, ::nHeight)
       hwg_SetWindowObject(::handle, Self)
 //      MonthCalendarChange(::handle, {||
         hwg_MONTHCALENDAR_SETACTION(::handle, {||::value := hwg_GetMonthCalendarDate(::handle)})
       ::Init()
-   EndIf
+   ENDIF
 
 RETURN NIL
 
@@ -87,12 +87,12 @@ RETURN NIL
 
 METHOD Init() CLASS HMonthCalendar
 
-   If !::lInit
+   IF !::lInit
       ::Super:Init()
-      If !Empty(::value)
+      IF !Empty(::value)
          hwg_SetMonthCalendarDate(::handle, ::value)
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
 RETURN NIL
 
@@ -100,10 +100,10 @@ RETURN NIL
 
 METHOD SetValue(dValue) CLASS HMonthCalendar
 
-   If HB_IsDate(dValue) .And. !Empty(dValue)
+   IF HB_IsDate(dValue) .AND. !Empty(dValue)
       hwg_SetMonthCalendarDate(::handle, dValue)
       ::value := dValue
-   EndIf
+   ENDIF
 
 RETURN NIL
 

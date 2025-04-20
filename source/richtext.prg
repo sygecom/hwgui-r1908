@@ -2286,9 +2286,9 @@ METHOD RtfJpg(cName, aSize, nPercent) CLASS RichText
          IF nBytes > 0
             codigo := PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
             FWRITE(::hfile, codigo)
-         else
+         ELSE
             lHecho := .T.
-         endif
+         ENDIF
       ENDDO
       ::CloseGroup()
 
@@ -2363,9 +2363,9 @@ METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
          IF nBytes > 0
             codigo := PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
             FWRITE(::hFile, codigo)
-         else
+         ELSE
             lHecho := .T.
-         endif
+         ENDIF
       ENDDO
       ::CloseGroup()
       ::CloseGroup()
@@ -2511,9 +2511,9 @@ METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
          IF nBytes > 0
             codigo := PADL(L_DTOHEX(Asc(cMenInter)), 2, "0")
             FWRITE(::hFile, codigo)
-         else
+         ELSE
             lHecho := .T.
-         endif
+         ENDIF
       ENDDO
       ::CloseGroup()
       ::CloseGroup()

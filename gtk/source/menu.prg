@@ -169,7 +169,7 @@ FUNCTION hwg_BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
             ENDIF
             aMenu[1, npos, 5] := hwg__AddMenuItem(hMenu, aMenu[1, npos, 2], ;
                           nPos, hWnd, aMenu[1, nPos, 3], aMenu[1, npos, 4], .F.)
-         Endif
+         ENDIF
       ENDIF
       nPos ++
    ENDDO
@@ -301,11 +301,11 @@ RETURN NIL
 FUNCTION hwg_InsertBitmapMenu(aMenu, nId, lBitmap, oResource)
 Local aSubMenu := hwg_FindMenuItem(aMenu, nId)
 Local oMenu := aSubMenu, oBmp
-If !oResource .OR. oResource == NIL
+IF !oResource .OR. oResource == NIL
      oBmp := HBitmap():AddFile(lBitmap)
-else
+ELSE
      oBmp := HBitmap():AddResource(lBitmap)
-endif
+ENDIF
 IIf(aSubMenu == NIL, oMenu := 0, oMenu := aSubMenu[5])
 HWG__InsertBitmapMenu(oMenu, nId, obmp:handle)
 RETURN NIL
