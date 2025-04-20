@@ -1,3 +1,5 @@
+// TODO: work with xharbour, but dont work with harbour
+
 #include "hwgui.ch"
 
 FUNCTION Main()
