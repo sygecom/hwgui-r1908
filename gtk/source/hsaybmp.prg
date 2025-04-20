@@ -21,15 +21,15 @@ CLASS HSayBmp INHERIT HSayImage
 
    METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
                   bSize, ctoolt)
-   METHOD INIT
+   METHOD INIT()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Paint()
    METHOD ReplaceBitmap(Image, lRes)
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
-                  bSize, ctoolt) CLASS HSayBmp
+METHOD HSayBmp:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+                  bSize, ctoolt)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, bInit, bSize, ctoolt)
 
@@ -54,14 +54,14 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
 
 RETURN Self
 
-METHOD INIT CLASS HSayBmp
+METHOD HSayBmp:INIT()
    IF !::lInit
       ::Super:Init()
       hwg_SetWindowObject(::handle, Self)
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HSayBmp
+METHOD HSayBmp:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
@@ -71,7 +71,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSayBmp
    ENDIF
 RETURN 0
 
-METHOD Paint() CLASS HSayBmp
+METHOD HSayBmp:Paint()
 Local hDC := hwg_GetDC(::handle)
 
    IF ::oImage != NIL
@@ -87,7 +87,7 @@ Local hDC := hwg_GetDC(::handle)
 
 RETURN NIL
 
-METHOD ReplaceBitmap(Image, lRes) CLASS HSayBmp
+METHOD HSayBmp:ReplaceBitmap(Image, lRes)
 
    IF ::oImage != NIL
       ::oImage:Release()

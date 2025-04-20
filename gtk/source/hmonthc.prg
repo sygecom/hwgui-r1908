@@ -41,9 +41,9 @@ ENDCLASS
 
 //--------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HMonthCalendar:New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-            lWeekNumbers) CLASS HMonthCalendar
+            lWeekNumbers)
 
    HB_SYMBOL_UNUSED(lNoToday)
    HB_SYMBOL_UNUSED(lNoTodayCircle)
@@ -70,7 +70,7 @@ RETURN Self
 
 //--------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HMonthCalendar
+METHOD HMonthCalendar:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_InitMonthCalendar(::oParent:handle, , ;
@@ -85,7 +85,7 @@ RETURN NIL
 
 //--------------------------------------------------------------------------//
 
-METHOD Init() CLASS HMonthCalendar
+METHOD HMonthCalendar:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -98,7 +98,7 @@ RETURN NIL
 
 //--------------------------------------------------------------------------//
 
-METHOD SetValue(dValue) CLASS HMonthCalendar
+METHOD HMonthCalendar:SetValue(dValue)
 
    IF HB_IsDate(dValue) .AND. !Empty(dValue)
       hwg_SetMonthCalendarDate(::handle, dValue)
@@ -109,7 +109,7 @@ RETURN NIL
 
 //--------------------------------------------------------------------------//
 
-METHOD GetValue() CLASS HMonthCalendar
+METHOD HMonthCalendar:GetValue()
 
 //   ::value := 
 

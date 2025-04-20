@@ -45,7 +45,7 @@ CLASS HPrinter INHERIT HObject
 
 ENDCLASS
 
-METHOD New(cPrinter, lmm) CLASS HPrinter
+METHOD HPrinter:New(cPrinter, lmm)
 Local aPrnCoors
 
    IF lmm != NIL
@@ -75,7 +75,7 @@ Local aPrnCoors
 
 RETURN Self
 
-METHOD SetMode(nOrientation) CLASS HPrinter
+METHOD HPrinter:SetMode(nOrientation)
 Local x
 
    IF (nOrientation == 1 .OR. nOrientation == 2) .AND. nOrientation != ::nOrient
@@ -93,7 +93,7 @@ Local x
 
 RETURN .T.
 
-METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
+METHOD HPrinter:AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset)
 
    LOCAL oFont
    
@@ -108,14 +108,14 @@ METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HP
 
 RETURN oFont
 
-METHOD SetFont(oFont) CLASS HPrinter
+METHOD HPrinter:SetFont(oFont)
 Local oFontOld := ::oFont
 
    hwg_gp_SetFont(::hDC, oFont:handle)
    ::oFont := oFont
 RETURN oFontOld
 
-METHOD End() CLASS HPrinter
+METHOD HPrinter:End()
 
    IF ::hDC != 0
      hwg_UnrefPrinter(::hDC)
@@ -123,7 +123,7 @@ METHOD End() CLASS HPrinter
    ENDIF
 RETURN NIL
 
-METHOD Box(x1, y1, x2, y2, oPen) CLASS HPrinter
+METHOD HPrinter:Box(x1, y1, x2, y2, oPen)
 
    IF oPen != NIL
       hwg_gp_SetLineWidth(::hDC, oPen:width)
@@ -144,7 +144,7 @@ METHOD Box(x1, y1, x2, y2, oPen) CLASS HPrinter
 
 RETURN NIL
 
-METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
+METHOD HPrinter:Line(x1, y1, x2, y2, oPen)
 
    IF oPen != NIL
       hwg_gp_SetLineWidth(::hDC, oPen:width)
@@ -166,7 +166,7 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
 RETURN NIL
 
-METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont) CLASS HPrinter
+METHOD HPrinter:Say(cString, x1, y1, x2, y2, nOpt, oFont)
 Local oFontOld
 
    IF y2 > ::nHeight
@@ -192,7 +192,7 @@ Local oFontOld
 
 RETURN NIL
 
-METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
+METHOD HPrinter:Bitmap(x1, y1, x2, y2, nOpt, hBitmap)
 
    HB_SYMBOL_UNUSED(nOpt)
    HB_SYMBOL_UNUSED(hBitmap)
@@ -213,7 +213,7 @@ METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
 
 RETURN NIL
 
-METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
+METHOD HPrinter:StartDoc(lPreview, cFileName)
 
    HB_SYMBOL_UNUSED(lPreview)
 
@@ -224,18 +224,18 @@ METHOD StartDoc(lPreview, cFileName) CLASS HPrinter
    ::nPage := 0
 RETURN NIL
 
-METHOD EndDoc() CLASS HPrinter
+METHOD HPrinter:EndDoc()
 
    hwg_EndDoc(::hDC)
 RETURN NIL
 
-METHOD StartPage() CLASS HPrinter
+METHOD HPrinter:StartPage()
 
    hwg_StartPage(::hDC)
    ::nPage ++
 RETURN NIL
 
-METHOD EndPage() CLASS HPrinter
+METHOD HPrinter:EndPage()
 
    hwg_EndPage(::hDC)
 RETURN NIL
@@ -259,7 +259,7 @@ CLASS HGP_Font INHERIT HObject
 
 ENDCLASS
 
-METHOD Add(fontName, nHeight, fnWeight, fdwItalic, fdwUnderline) CLASS HGP_Font
+METHOD HGP_Font:Add(fontName, nHeight, fnWeight, fdwItalic, fdwUnderline)
 Local i, nlen := Len(::aFonts)
 
    nHeight  := IIf(nHeight == NIL, 13, Abs(nHeight))
@@ -304,7 +304,7 @@ Local i, nlen := Len(::aFonts)
 
 RETURN Self
 
-METHOD Release(lAll) CLASS HGP_Font
+METHOD HGP_Font:Release(lAll)
 Local i, nlen := Len(::aFonts)
 
    IF lAll != NIL .AND. lAll
@@ -338,7 +338,7 @@ CLASS HGP_Pen INHERIT HObject
 
 ENDCLASS
 
-METHOD Add(nWidth) CLASS HGP_Pen
+METHOD HGP_Pen:Add(nWidth)
 Local i
 
    nWidth := IIf(nWidth == NIL, 1, nWidth)
@@ -355,7 +355,7 @@ Local i
 
 RETURN Self
 
-METHOD Release() CLASS HGP_Pen
+METHOD HGP_Pen:Release()
 Local i, nlen := Len(::aPens)
 
    ::nCounter --

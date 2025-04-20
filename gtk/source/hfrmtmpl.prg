@@ -100,7 +100,7 @@ CLASS HCtrlTmpl
    METHOD F(nId)
 ENDCLASS
 
-METHOD F(nId) CLASS HCtrlTmpl
+METHOD HCtrlTmpl:F(nId)
 Local i, aControls := ::aControls, nLen := Len(aControls), o
 
    FOR i := 1 TO nLen
@@ -142,7 +142,7 @@ CLASS HFormTmpl
 
 ENDCLASS
 
-METHOD Read(fname, cId) CLASS HFormTmpl
+METHOD HFormTmpl:Read(fname, cId)
 Local oDoc
 Local i, j, nCtrl := 0, aItems, o, aProp := {}, aMethods := {}
 Local cPre
@@ -208,7 +208,7 @@ Local cPre
 
 RETURN Self
 
-METHOD Show(nMode, p1, p2, p3) CLASS HFormTmpl
+METHOD HFormTmpl:Show(nMode, p1, p2, p3)
 Local i, j, cType
 Local nLeft, nTop, nWidth, nHeight, cTitle, oFont, lClipper := .F., lExitOnEnter := .F.
 Local xProperty, block, bFormExit, nstyle
@@ -255,31 +255,31 @@ Private oDlg
          NEXT
       // Styles below
       ELSEIF ::aProp[i, 1] == "systemMenu"
-         IF !xProperty 
+         IF !xProperty
             nStyle := hwg_bitandinverse(nStyle, WS_SYSMENU)
          ENDIF
       ELSEIF ::aProp[i, 1] == "minimizebox"
-         IF xProperty 
+         IF xProperty
             nStyle += WS_MINIMIZEBOX
          ENDIF
       ELSEIF ::aProp[i, 1] == "maximizebox"
-         IF xProperty 
+         IF xProperty
             nStyle += WS_MAXIMIZEBOX
          ENDIF
       ELSEIF ::aProp[i, 1] == "absalignent"
-         IF !xProperty 
+         IF !xProperty
             nStyle := hwg_bitandinverse(nStyle, DS_ABSALIGN)
          ENDIF
       ELSEIF ::aProp[i, 1] == "sizeBox"
-         IF !xProperty 
+         IF !xProperty
             nStyle := hwg_bitandinverse(nStyle, WS_SIZEBOX)
          ENDIF
       ELSEIF ::aProp[i, 1] == "visible"
-         IF !xProperty 
+         IF !xProperty
             nStyle := hwg_bitandinverse(nStyle, WS_VISIBLE)
          ENDIF
       ELSEIF ::aProp[i, 1] == "3dLook"
-         IF xProperty 
+         IF xProperty
             nStyle += DS_3DLOOK
          ENDIF
       ELSEIF ::aProp[i, 1] == "clipsiblings"
@@ -375,7 +375,7 @@ Private oDlg
       CreateCtrl(::oDlg, ::aControls[j], Self)
       j--
    ENDIF
-      
+
    FOR i := 1 TO j
       CreateCtrl(::oDlg, ::aControls[i], Self)
    NEXT
@@ -388,7 +388,7 @@ Private oDlg
 
 RETURN NIL
 
-METHOD F(id, n) CLASS HFormTmpl
+METHOD HFormTmpl:F(id, n)
 Local i := AScan(::aForms, {|o|o:id == id})
 
    IF i != 0 .AND. n != NIL
@@ -396,11 +396,11 @@ Local i := AScan(::aForms, {|o|o:id == id})
    ENDIF
 RETURN IIf(i == 0, NIL, ::aForms[i])
 
-METHOD Find(cId) CLASS HFormTmpl
+METHOD HFormTmpl:Find(cId)
 Local i := AScan(::aForms, {|o|o:cId != NIL .AND. o:cId == cId})
 RETURN IIf(i == 0, NIL, ::aForms[i])
 
-METHOD Close() CLASS HFormTmpl
+METHOD HFormTmpl:Close()
 Local i := AScan(::aForms, {|o|o:id == ::id})
 
    IF i != 0
@@ -927,7 +927,7 @@ CLASS HRepTmpl
 
 ENDCLASS
 
-METHOD Read(fname, cId) CLASS HRepTmpl
+METHOD HRepTmpl:Read(fname, cId)
 Local oDoc
 Local i, j, aItems, o, aProp := {}, aMethods := {}
 Local cPre
@@ -992,7 +992,7 @@ Local cPre
 
 RETURN Self
 
-METHOD Print(printer, lPreview, p1, p2, p3) CLASS HRepTmpl
+METHOD HRepTmpl:Print(printer, lPreview, p1, p2, p3)
 Local oPrinter := IIf(printer != NIL, IIf(HB_IsObject(printer), printer, HPrinter():New(printer, .T.)), HPrinter():New(, .T.))
 Local i, j, aMethod, xProperty, oFont, xTemp, nPWidth, nPHeight, nOrientation := 1
 Memvar oReport
@@ -1078,7 +1078,7 @@ Private oReport := Self
 
 RETURN NIL
 
-METHOD PrintItem(oItem) CLASS HRepTmpl
+METHOD HRepTmpl:PrintItem(oItem)
 Local aMethod, lRes := .T., i, nPenType, nPenWidth
 Local x, y, x2, y2, cText, nJustify, xProperty, nLines, dy, nFirst, ny
 Memvar lLastCycle, lSkipItem
@@ -1270,7 +1270,7 @@ Memvar lLastCycle, lSkipItem
 
 RETURN NIL
 
-METHOD ReleaseObj(aControls) CLASS HRepTmpl
+METHOD HRepTmpl:ReleaseObj(aControls)
 Local i
 
    FOR i := 1 TO Len(aControls)
@@ -1297,11 +1297,11 @@ Local i
 
 RETURN NIL
 
-METHOD Find(cId) CLASS HRepTmpl
+METHOD HRepTmpl:Find(cId)
 Local i := AScan(::aReports, {|o|o:cId != NIL .AND. o:cId == cId})
 RETURN IIf(i == 0, NIL, ::aReports[i])
 
-METHOD Close() CLASS HRepTmpl
+METHOD HRepTmpl:Close()
 Local i := AScan(::aReports, {|o|o:id == ::id})
 
    IF i != 0

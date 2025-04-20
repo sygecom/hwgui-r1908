@@ -37,8 +37,8 @@ CLASS HGraph INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-                  bSize, ctoolt, tcolor, bcolor) CLASS HGraph
+METHOD HGraph:New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+                  bSize, ctoolt, tcolor, bcolor)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
                   bSize, {|o, lpdis|o:Paint(lpdis)}, ctoolt, ;
@@ -52,7 +52,7 @@ METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 
 RETURN Self
 
-METHOD Activate() CLASS HGraph
+METHOD HGraph:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -61,7 +61,7 @@ METHOD Activate() CLASS HGraph
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HGraph
+METHOD HGraph:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
@@ -71,7 +71,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HGraph
    ENDIF
 RETURN 0
 
-METHOD CalcMinMax() CLASS HGraph
+METHOD HGraph:CalcMinMax()
 Local i, j, nLen
    ::xmax := ::xmin := ::ymax := ::ymin := 0
    IF ::ymaxSet != NIL .AND. ::ymaxSet != 0
@@ -101,7 +101,7 @@ Local i, j, nLen
 
 RETURN NIL
 
-METHOD Paint(lpdis) CLASS HGraph
+METHOD HGraph:Paint(lpdis)
 Local hDC := hwg_GetDC(::handle)
 // Local drawInfo := hwg_GetDrawItemInfo(lpdis)
 // Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
@@ -183,7 +183,7 @@ Local px1, px2, py1, py2, nWidth
    
 RETURN NIL
 
-METHOD Rebuild(aValues, nType) CLASS HGraph
+METHOD HGraph:Rebuild(aValues, nType)
 
    ::aValues := aValues
    IF nType != NIL

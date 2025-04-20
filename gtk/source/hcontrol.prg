@@ -56,8 +56,8 @@ CLASS HControl INHERIT HCustomWindow
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-                  bSize, bPaint, ctoolt, tcolor, bcolor) CLASS HControl
+METHOD HControl:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+                  bSize, bPaint, ctoolt, tcolor, bcolor)
 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id      := IIf(nId == NIL, ::NewId(), nId)
@@ -77,7 +77,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
 
 RETURN Self
 
-METHOD NewId() CLASS HControl
+METHOD HControl:NewId()
 Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
 
    IF AScan(::oParent:aControls, {|o|o:id == nId}) != 0
@@ -88,7 +88,7 @@ Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
    ENDIF
 RETURN nId
 
-METHOD AddName(cName) CLASS HControl
+METHOD HControl:AddName(cName)
 
    IF !Empty(cName) .AND. HB_IsChar(cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
@@ -98,7 +98,7 @@ METHOD AddName(cName) CLASS HControl
    
 RETURN NIL
 
-METHOD INIT() CLASS HControl
+METHOD HControl:INIT()
 Local o
 
    IF !::lInit
@@ -127,7 +127,7 @@ Local o
    ENDIF
 RETURN NIL
 
-METHOD SetColor(tcolor, bcolor, lRepaint) CLASS HControl
+METHOD HControl:SetColor(tcolor, bcolor, lRepaint)
 
    IF tcolor != NIL
       ::tcolor  := tcolor
@@ -150,7 +150,7 @@ METHOD SetColor(tcolor, bcolor, lRepaint) CLASS HControl
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height, lMoveParent) CLASS HControl
+METHOD HControl:Move(x1, y1, width, height, lMoveParent)
 Local lMove := .F., lSize := .F.
 
    IF x1 != NIL .AND. x1 != ::nLeft
@@ -175,7 +175,7 @@ Local lMove := .F., lSize := .F.
    ENDIF
 RETURN NIL
 
-METHOD End() CLASS HControl
+METHOD HControl:End()
 
    ::Super:End()
    IF ::tooltip != NIL
@@ -184,7 +184,7 @@ METHOD End() CLASS HControl
    ENDIF
 RETURN NIL
 
-METHOD onAnchor(x, y, w, h) CLASS HControl
+METHOD HControl:onAnchor(x, y, w, h)
    LOCAL nAnchor, nXincRelative, nYincRelative, nXincAbsolute, nYincAbsolute
    LOCAL x1, y1, w1, h1, x9, y9, w9, h9
 
@@ -297,7 +297,7 @@ CLASS HStatus INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint) CLASS HStatus
+METHOD HStatus:New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint)
 
    bSize := IIf(bSize != NIL, bSize, {|o, x, y|hwg_MoveWindow(o:handle, 0, y - 20, x, y)})
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_OVERLAPPED + WS_CLIPSIBLINGS)
@@ -308,7 +308,7 @@ METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint) CLASS H
 
 RETURN Self
 
-METHOD Activate() CLASS HStatus
+METHOD HStatus:Activate()
 
    //LOCAL aCoors // variable not used
 
@@ -324,7 +324,7 @@ METHOD Activate() CLASS HStatus
    ENDIF
 RETURN NIL
 
-METHOD Init() CLASS HStatus
+METHOD HStatus:Init()
    IF !::lInit
       ::Super:Init()
    ENDIF
@@ -343,8 +343,8 @@ CLASS HStatic INHERIT HControl
    METHOD SetText(value) INLINE hwg_static_SetText(::handle, value)
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-                  bSize, bPaint, ctoolt, tcolor, bcolor, lTransp) CLASS HStatic
+METHOD HStatic:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+                  bSize, bPaint, ctoolt, tcolor, bcolor, lTransp)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
                   bSize, bPaint, ctoolt, tcolor, bcolor)
@@ -358,7 +358,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate() CLASS HStatic
+METHOD HStatic:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle, ::title)
@@ -372,15 +372,15 @@ CLASS HButton INHERIT HControl
 
    CLASS VAR winclass   INIT "BUTTON"
    DATA  bClick
-   
+
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
                   bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor)
    METHOD Activate()
    METHOD onEvent(msg, wParam, lParam)
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor) CLASS HButton
+METHOD HButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 90, nWidth), ;
@@ -403,7 +403,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate() CLASS HButton
+METHOD HButton:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -413,7 +413,7 @@ METHOD Activate() CLASS HButton
 RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HButton
+METHOD HButton:onEvent(msg, wParam, lParam)
 
    IF msg == WM_LBUTTONUP
       IF ::bClick != NIL
@@ -423,7 +423,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HButton
 
 RETURN  NIL
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HButton
+METHOD HButton:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
@@ -453,10 +453,10 @@ CLASS HButtonEX INHERIT HButton
 METHOD Activate
 END CLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HButtonEx:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-               tcolor, bColor, hBitmap, iStyle, hicon, Transp) CLASS HButtonEx
-               
+               tcolor, bColor, hBitmap, iStyle, hicon, Transp)
+
    HB_SYMBOL_UNUSED(iStyle)
    HB_SYMBOL_UNUSED(Transp)
 
@@ -470,7 +470,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
 RETURN Self
 
-METHOD Activate CLASS HButtonEX
+METHOD HButtonEx:Activate
    IF !Empty(::oParent:handle)
       IF !Empty(::hBitmap)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
@@ -498,8 +498,8 @@ CLASS HGroup INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
-                  oFont, bInit, bSize, bPaint, tcolor, bcolor) CLASS HGroup
+METHOD HGroup:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
+                  oFont, bInit, bSize, bPaint, tcolor, bcolor)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_GROUPBOX)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
@@ -510,7 +510,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
 
 RETURN Self
 
-METHOD Activate() CLASS HGroup
+METHOD HGroup:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -531,7 +531,7 @@ CLASS HLine INHERIT HControl
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize) CLASS hline
+METHOD HLine:New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop,,,,, bSize, {|o, lp|o:Paint(lp)})
 
@@ -549,7 +549,7 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize) CLASS hline
 
 RETURN Self
 
-METHOD Activate() CLASS hline
+METHOD HLine:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateSep(::oParent:handle, ::lVert, ::nLeft, ::nTop, ;
                                  ::nWidth, ::nHeight)

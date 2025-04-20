@@ -36,8 +36,8 @@ CLASS HFont INHERIT HObject
 
 ENDCLASS
 
-METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, ;
-                   fdwUnderline, fdwStrikeOut, nHandle, lLinux) CLASS HFont
+METHOD HFont:Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, ;
+                   fdwUnderline, fdwStrikeOut, nHandle, lLinux)
 
 Local i, nlen := Len(::aFonts)
 
@@ -89,7 +89,7 @@ Local i, nlen := Len(::aFonts)
 
 RETURN Self
 
-METHOD Select(oFont) CLASS HFont
+METHOD HFont:Select(oFont)
 Local af := hwg_SelectFont(oFont)
 
    IF af == NIL
@@ -98,7 +98,7 @@ Local af := hwg_SelectFont(oFont)
 
 RETURN ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
 
-METHOD Release() CLASS HFont
+METHOD HFont:Release()
 Local i, nlen := Len(::aFonts)
 
    ::nCounter --
@@ -140,7 +140,7 @@ CLASS HPen INHERIT HObject
 
 ENDCLASS
 
-METHOD Add(nStyle, nWidth, nColor) CLASS HPen
+METHOD HPen:Add(nStyle, nWidth, nColor)
 Local i
 
    nStyle := IIf(nStyle == NIL, BS_SOLID, nStyle)
@@ -177,7 +177,7 @@ Local i
 
 RETURN Self
 
-METHOD Get(nStyle, nWidth, nColor) CLASS HPen
+METHOD HPen:Get(nStyle, nWidth, nColor)
 Local i
 
    nStyle := IIf(nStyle == NIL, PS_SOLID, nStyle)
@@ -206,7 +206,7 @@ Local i
 
 RETURN NIL
 
-METHOD Release() CLASS HPen
+METHOD HPen:Release()
 Local i, nlen := Len(::aPens)
 
    ::nCounter --
@@ -248,7 +248,7 @@ CLASS HBrush INHERIT HObject
 
 ENDCLASS
 
-METHOD Add(nColor) CLASS HBrush
+METHOD HBrush:Add(nColor)
 Local i
 
    #ifdef __XHARBOUR__
@@ -272,7 +272,7 @@ Local i
 
 RETURN Self
 
-METHOD Release() CLASS HBrush
+METHOD HBrush:Release()
 Local i, nlen := Len(::aBrushes)
 
    ::nCounter --
@@ -317,7 +317,7 @@ CLASS HBitmap INHERIT HObject
 
 ENDCLASS
 
-METHOD AddResource(name) CLASS HBitmap
+METHOD HBitmap:AddResource(name)
 Local lPreDefined := .F., i, aBmpSize
 
    IF HB_IsNumeric(name)
@@ -352,7 +352,7 @@ Local lPreDefined := .F., i, aBmpSize
 
 RETURN Self
 
-METHOD AddFile(name, HDC) CLASS HBitmap
+METHOD HBitmap:AddFile(name, HDC)
 Local i, aBmpSize
 
    HB_SYMBOL_UNUSED(HDC)
@@ -385,7 +385,7 @@ Local i, aBmpSize
 
 RETURN Self
 
-METHOD AddWindow(oWnd, lFull) CLASS HBitmap
+METHOD HBitmap:AddWindow(oWnd, lFull)
    
    //LOCAL i // variable not used
    LOCAL aBmpSize
@@ -401,7 +401,7 @@ METHOD AddWindow(oWnd, lFull) CLASS HBitmap
 
 RETURN Self
 
-METHOD Release() CLASS HBitmap
+METHOD HBitmap:Release()
 Local i, nlen := Len(::aBitmaps)
 
    ::nCounter --
@@ -446,7 +446,7 @@ CLASS HIcon INHERIT HObject
 
 ENDCLASS
 
-METHOD AddResource(name) CLASS HIcon
+METHOD HIcon:AddResource(name)
 
    LOCAL lPreDefined //:= .F. (value not used)
    LOCAL i
@@ -477,7 +477,7 @@ METHOD AddResource(name) CLASS HIcon
 
 RETURN Self
 
-METHOD AddFile(name) CLASS HIcon
+METHOD HIcon:AddFile(name)
 Local i, aBmpSize
 
 #ifdef __XHARBOUR__
@@ -514,7 +514,7 @@ Local i, aBmpSize
 
 RETURN Self
 
-METHOD Release() CLASS HIcon
+METHOD HIcon:Release()
 Local i, nlen := Len(::aIcons)
 
    ::nCounter --

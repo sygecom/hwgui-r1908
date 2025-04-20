@@ -24,7 +24,7 @@ CLASS HRadioGroup INHERIT HObject
    METHOD Refresh() INLINE IIf(::bSetGet != NIL, ::SetValue(Eval(::bSetGet)), .T.)
 ENDCLASS
 
-METHOD New(vari, bSetGet) CLASS HRadioGroup
+METHOD HRadioGroup:New(vari, bSetGet)
    ::oGroupCurrent := Self
    ::aButtons := {}
 
@@ -37,7 +37,7 @@ METHOD New(vari, bSetGet) CLASS HRadioGroup
 
 RETURN Self
 
-METHOD EndGroup(nSelected) CLASS HRadioGroup
+METHOD HRadioGroup:EndGroup(nSelected)
 Local nLen
 
    IF ::oGroupCurrent != NIL .AND. (nLen := Len(::oGroupCurrent:aButtons)) > 0
@@ -51,7 +51,7 @@ Local nLen
    ::oGroupCurrent := NIL
 RETURN NIL
 
-METHOD SetValue(nValue) CLASS HRadioGroup
+METHOD HRadioGroup:SetValue(nValue)
 Local nLen
 
    IF (nLen := Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen
@@ -72,8 +72,8 @@ CLASS HRadioButton INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor) CLASS HRadioButton
+METHOD HRadioButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor)
                   
    HB_SYMBOL_UNUSED(bcolor)
 
@@ -119,7 +119,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 RETURN Self
 
-METHOD Activate() CLASS HRadioButton
+METHOD HRadioButton:Activate()
 Local groupHandle := ::oGroup:handle
 
    IF !Empty(::oParent:handle)
@@ -131,7 +131,7 @@ Local groupHandle := ::oGroup:handle
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HRadioButton
+METHOD HRadioButton:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)

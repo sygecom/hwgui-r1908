@@ -26,10 +26,10 @@ CLASS HMenu INHERIT HObject
    METHOD Show(oWnd, xPos, yPos, lWnd)
 ENDCLASS
 
-METHOD Show(oWnd, xPos, yPos, lWnd) CLASS HMenu
+METHOD HMenu:Show(oWnd, xPos, yPos, lWnd)
 
    //LOCAL aCoor // variable not used
-   
+
    HB_SYMBOL_UNUSED(oWnd)
    HB_SYMBOL_UNUSED(xPos)
    HB_SYMBOL_UNUSED(yPos)

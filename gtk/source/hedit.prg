@@ -68,9 +68,9 @@ CLASS HEdit INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HEdit:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, ;
-                  tcolor, bcolor, cPicture, lNoBorder, lMaxLength, lPassword) CLASS HEdit
+                  tcolor, bcolor, cPicture, lNoBorder, lMaxLength, lPassword)
 
    nStyle := hwg_BitOr(iIf(nStyle == NIL, 0, nStyle), ;
                 WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0)+;
@@ -112,7 +112,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate() CLASS HEdit
+METHOD HEdit:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateEdit(::oParent:handle, ::id, ;
@@ -122,7 +122,7 @@ METHOD Activate() CLASS HEdit
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HEdit
+METHOD HEdit:onEvent(msg, wParam, lParam)
 
    LOCAL oParent := ::oParent
    LOCAL nPos
@@ -258,7 +258,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HEdit
  
 RETURN 0
 
-METHOD Init() CLASS HEdit
+METHOD HEdit:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -267,7 +267,7 @@ METHOD Init() CLASS HEdit
 
 RETURN NIL
 
-METHOD Refresh() CLASS HEdit
+METHOD HEdit:Refresh()
 Local vari
 
    IF ::bSetGet != NIL
@@ -286,7 +286,7 @@ Local vari
 
 RETURN NIL
 
-METHOD SetText(c) CLASS HEdit
+METHOD HEdit:SetText(c)
 
   IF c != NIL
      IF HB_IsObject(c)

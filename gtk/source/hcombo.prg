@@ -42,13 +42,13 @@ CLASS HComboBox INHERIT HControl
    METHOD onEvent(msg, wParam, lParam)
    //METHOD Init(aCombo, nCurrent)
    METHOD Init()
-   METHOD Refresh()     
+   METHOD Refresh()
    METHOD Setitem(nPos)
    METHOD End()
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
-                  bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor) CLASS HComboBox
+METHOD HComboBox:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
+                  bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor)
 
    IF lEdit == NIL
       lEdit := .F.
@@ -99,7 +99,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate() CLASS HComboBox
+METHOD HComboBox:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateCombo(::oParent:handle, ::id, ;
@@ -111,7 +111,7 @@ METHOD Activate() CLASS HComboBox
 RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
+METHOD HComboBox:onEvent(msg, wParam, lParam)
 
    IF msg == EN_SETFOCUS
       IF ::bSetGet == NIL
@@ -134,7 +134,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 
 RETURN 0
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
+METHOD HComboBox:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
@@ -162,7 +162,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HComboBox
 RETURN 0
 #endif
 
-METHOD Init() CLASS HComboBox
+METHOD HComboBox:Init()
 
    //LOCAL i // variable not used
 
@@ -186,7 +186,7 @@ METHOD Init() CLASS HComboBox
    ENDIF
 RETURN NIL
 
-METHOD Refresh() CLASS HComboBox
+METHOD HComboBox:Refresh()
 
    LOCAL vari
    //LOCAL i // variable not used
@@ -210,7 +210,7 @@ METHOD Refresh() CLASS HComboBox
 
 RETURN NIL
 
-METHOD SetItem(nPos) CLASS HComboBox
+METHOD HComboBox:SetItem(nPos)
 
    IF ::lText
       ::value := ::aItems[nPos]
@@ -230,7 +230,7 @@ METHOD SetItem(nPos) CLASS HComboBox
 
 RETURN NIL
 
-METHOD End() CLASS HComboBox
+METHOD HComboBox:End()
 
    hwg_ReleaseObject(::hEdit)
    ::Super:End()

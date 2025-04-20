@@ -28,8 +28,8 @@ CLASS HCheckButton INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor, bGFocus) CLASS HCheckButton
+METHOD HCheckButton:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+                  bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor, bGFocus)
 
    nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_AUTO3STATE + WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
@@ -53,7 +53,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 RETURN Self
 
-METHOD Activate() CLASS HCheckButton
+METHOD HCheckButton:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ;
@@ -63,7 +63,7 @@ METHOD Activate() CLASS HCheckButton
    ENDIF
 RETURN NIL
 
-METHOD Init() CLASS HCheckButton
+METHOD HCheckButton:Init()
    IF !::lInit
       ::Super:Init()
       IF ::value
@@ -73,7 +73,7 @@ METHOD Init() CLASS HCheckButton
 RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
+METHOD HCheckButton:onEvent(msg, wParam, lParam)
 
    IF msg == WM_LBUTTONUP
       __Valid(Self)
@@ -83,7 +83,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 
 RETURN NIL
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
+METHOD HCheckButton:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
    HB_SYMBOL_UNUSED(lParam)
@@ -99,7 +99,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 RETURN NIL
 #endif
 
-METHOD Refresh() CLASS HCheckButton
+METHOD HCheckButton:Refresh()
 Local var
 
    IF ::bSetGet != NIL

@@ -36,7 +36,7 @@ CLASS HTimer INHERIT HObject
 
 ENDCLASS
 
-METHOD New(oParent, nId, value, bAction) CLASS HTimer
+METHOD HTimer:New(oParent, nId, value, bAction)
 
    ::oParent := IIf(oParent == NIL, HWindow():GetMain(), oParent)
    IF nId == NIL
@@ -70,7 +70,7 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
 
 RETURN Self
 
-METHOD End() CLASS HTimer
+METHOD HTimer:End()
 Local i
 
    hwg_KillTimer(::tag)
@@ -82,7 +82,7 @@ Local i
 
 RETURN NIL
 
-METHOD Init() CLASS HTimer
+METHOD HTimer:Init()
    IF ! ::lInit
       IF ::value > 0
          ::tag := hwg_SetTimer(::id, ::value)
@@ -90,7 +90,7 @@ METHOD Init() CLASS HTimer
    ENDIF
    RETURN  NIL
 
-METHOD onAction()
+METHOD HTimer:onAction()
 
    hwg_TimerProc(, ::id, ::interval)
 

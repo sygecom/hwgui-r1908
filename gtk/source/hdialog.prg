@@ -81,8 +81,8 @@ CLASS HDialog INHERIT HCustomWindow
    METHOD Close() INLINE EndDialog(::handle)
 ENDCLASS
 
-METHOD New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
-                  bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc) CLASS HDialog
+METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
+                  bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc)
 
    HB_SYMBOL_UNUSED(nHelpId)
 
@@ -117,7 +117,7 @@ METHOD New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSiz
 
 RETURN Self
 
-METHOD Activate(lNoModal) CLASS HDialog
+METHOD HDialog:Activate(lNoModal)
 Local hParent, oWnd
 
    hwg_CreateGetList(Self)
@@ -143,7 +143,7 @@ Local hParent, oWnd
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HDialog
+METHOD HDialog:onEvent(msg, wParam, lParam)
 Local i
 
    // writelog(str(msg) + str(wParam) + str(lParam))
@@ -155,11 +155,11 @@ Local i
 
 RETURN 0
 
-METHOD AddItem(oWnd, lModal) CLASS HDialog
+METHOD HDialog:AddItem(oWnd, lModal)
    AAdd(IIf(lModal, ::aModalDialogs, ::aDialogs), oWnd)
 RETURN NIL
 
-METHOD DelItem(oWnd, lModal) CLASS HDialog
+METHOD HDialog:DelItem(oWnd, lModal)
 Local i
    IF lModal
       IF (i := AScan(::aModalDialogs, {|o|o == oWnd})) > 0
@@ -174,14 +174,14 @@ Local i
    ENDIF
 RETURN NIL
 
-METHOD FindDialog(hWnd) CLASS HDialog
+METHOD HDialog:FindDialog(hWnd)
 /*
 Local i := AScan(::aDialogs, {|o|o:handle == hWnd})
 RETURN IIf(i == 0, NIL, ::aDialogs[i])
 */
 RETURN hwg_GetWindowObject(hWnd)
 
-METHOD GetActive() CLASS HDialog
+METHOD HDialog:GetActive()
 Local handle := hwg_GetFocus()
 Local i := AScan(::Getlist, {|o|o:handle == handle})
 RETURN IIf(i == 0, NIL, ::Getlist[i])

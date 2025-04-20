@@ -72,9 +72,9 @@ CLASS HWindow INHERIT HCustomWindow
    METHOD Close() INLINE hwg_DestroyWindow(::handle)
 ENDCLASS
 
-METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+METHOD HWindow:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
-                  cAppName, oBmp, cHelp, nHelpId) CLASS HWindow
+                  cAppName, oBmp, cHelp, nHelpId)
 
    HB_SYMBOL_UNUSED(clr)
    HB_SYMBOL_UNUSED(cMenu)
@@ -117,11 +117,11 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
 
 RETURN Self
 
-METHOD AddItem(oWnd) CLASS HWindow
+METHOD HWindow:AddItem(oWnd)
    AAdd(::aWindows, oWnd)
 RETURN NIL
 
-METHOD DelItem(oWnd) CLASS HWindow
+METHOD HWindow:DelItem(oWnd)
 Local i
    IF (i := AScan(::aWindows, {|o|o == oWnd})) > 0
       ADel(::aWindows, i)
@@ -129,12 +129,12 @@ Local i
    ENDIF
 RETURN NIL
 
-METHOD FindWindow(hWnd) CLASS HWindow
+METHOD HWindow:FindWindow(hWnd)
 // Local i := AScan(::aWindows, {|o|o:handle == hWnd})
 // RETURN IIf(i == 0, NIL, ::aWindows[i])
 RETURN hwg_GetWindowObject(hWnd)
 
-METHOD GetMain() CLASS HWindow
+METHOD HWindow:GetMain()
 RETURN IIf(Len(::aWindows) > 0, ;
 	 IIf(::aWindows[1]:type == WND_MAIN, ;
 	   ::aWindows[1], ;
@@ -174,9 +174,9 @@ CLASS HMainWindow INHERIT HWindow
 
 ENDCLASS
 
-METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, ;
+METHOD HMainWindow:New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
-                     cAppName, oBmp, cHelp, nHelpId) CLASS HMainWindow
+                     cAppName, oBmp, cHelp, nHelpId)
 
    HB_SYMBOL_UNUSED(nPos)
 
@@ -205,7 +205,7 @@ METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
 
 RETURN Self
 
-METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
+METHOD HMainWindow:Activate(lShow, lMaximize, lMinimize)
 
    //LOCAL oWndClient // variable not used
    //LOCAL handle // variable not used
@@ -231,7 +231,7 @@ METHOD Activate(lShow, lMaximize, lMinimize) CLASS HMainWindow
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
+METHOD HMainWindow:onEvent(msg, wParam, lParam)
 Local i
 
    // writelog("On Event" + str(msg) + str(wParam) + Str(lParam))
@@ -268,7 +268,7 @@ CLASS HMDIChildWindow INHERIT HWindow
 
 ENDCLASS
 
-METHOD Activate(lShow) CLASS HMDIChildWindow
+METHOD HMDIChildWindow:Activate(lShow)
 
    hwg_CreateGetList(Self)
    // hwg_CreateMdiChildWindow(Self)
@@ -281,7 +281,7 @@ METHOD Activate(lShow) CLASS HMDIChildWindow
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
+METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
 Local i
 
    IF (i := AScan(::aMessages[1], msg)) != 0
@@ -306,9 +306,9 @@ CLASS HChildWindow INHERIT HWindow
 
 ENDCLASS
 
-METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+METHOD HChildWindow:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
-                  cAppName, oBmp, cHelp, nHelpId) CLASS HChildWindow
+                  cAppName, oBmp, cHelp, nHelpId)
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
@@ -328,14 +328,14 @@ METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
 
 RETURN Self
 
-METHOD Activate(lShow) CLASS HChildWindow
+METHOD HChildWindow:Activate(lShow)
 
    hwg_CreateGetList(Self)
    hwg_ActivateChildWindow((lShow == NIL .OR. lShow), ::handle)
 
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
+METHOD HChildWindow:onEvent(msg, wParam, lParam)
 Local i
 
    IF (i := AScan(HMainWindow():aMessages[1], msg)) != 0

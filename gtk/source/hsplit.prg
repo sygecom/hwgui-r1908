@@ -38,8 +38,8 @@ CLASS HSplitter INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-                  bSize, bDraw, color, bcolor, aLeft, aRight) CLASS HSplitter
+METHOD HSplitter:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+                  bSize, bDraw, color, bcolor, aLeft, aRight)
 
    ::Super:New(oWndParent, nId, WS_CHILD + WS_VISIBLE + SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
                   bSize, bDraw,, color, bcolor)
@@ -53,7 +53,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
 
 RETURN Self
 
-METHOD Activate() CLASS HSplitter
+METHOD HSplitter:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateSplitter(::oParent:handle, ::id, ;
                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -61,7 +61,7 @@ METHOD Activate() CLASS HSplitter
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
+METHOD HSplitter:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
 
@@ -90,7 +90,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
 RETURN -1
 
-METHOD Init() CLASS HSplitter
+METHOD HSplitter:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -99,7 +99,7 @@ METHOD Init() CLASS HSplitter
 
 RETURN NIL
 
-METHOD Paint(lpdis) CLASS HSplitter
+METHOD HSplitter:Paint(lpdis)
    
    LOCAL hDC
    
@@ -115,12 +115,12 @@ METHOD Paint(lpdis) CLASS HSplitter
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height) CLASS HSplitter
+METHOD HSplitter:Move(x1, y1, width, height)
 
    ::Super:Move(x1, y1, width, height, .T.)
 RETURN NIL
 
-METHOD Drag(lParam) CLASS HSplitter
+METHOD HSplitter:Drag(lParam)
 Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
@@ -138,7 +138,7 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 
 RETURN NIL
 
-METHOD DragAll() CLASS HSplitter
+METHOD HSplitter:DragAll()
 Local i, oCtrl, nDiff
 
    FOR i := 1 TO Len(::aRight)

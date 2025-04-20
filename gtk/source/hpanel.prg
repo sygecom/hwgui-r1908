@@ -26,8 +26,8 @@ CLASS HPanel INHERIT HControl
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                  bInit, bSize, bPaint, lDocked) CLASS HPanel
+METHOD HPanel:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+                  bInit, bSize, bPaint, lDocked)
 
    LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    
@@ -44,7 +44,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
 RETURN Self
 
-METHOD Activate() CLASS HPanel
+METHOD HPanel:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreatePanel(::oParent:handle, ::id, ;
@@ -53,7 +53,7 @@ METHOD Activate() CLASS HPanel
    ENDIF
 RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HPanel
+METHOD HPanel:onEvent(msg, wParam, lParam)
 
    IF msg == WM_PAINT
       ::Paint()
@@ -63,7 +63,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
 
 RETURN 0
 
-METHOD Init() CLASS HPanel
+METHOD HPanel:Init()
 
    IF !::lInit
       IF ::bSize == NIL
@@ -80,7 +80,7 @@ METHOD Init() CLASS HPanel
 
 RETURN NIL
 
-METHOD Paint() CLASS HPanel
+METHOD HPanel:Paint()
 
    LOCAL hDC
    //LOCAL aCoors // variable not used
@@ -97,7 +97,7 @@ METHOD Paint() CLASS HPanel
 
 RETURN NIL
 
-METHOD Move(x1, y1, width, height) CLASS HPanel
+METHOD HPanel:Move(x1, y1, width, height)
 
    ::Super:Move(x1, y1, width, height, .T.)
 RETURN NIL
