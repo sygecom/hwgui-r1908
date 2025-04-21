@@ -27,15 +27,15 @@ FUNCTION Main()
 
     oBrw1:oHeadFont := HFont():Add("Times New Roman", 0, -22, 400)
     a := {} 
-    for i := 1 to 16
+    FOR i := 1 TO 16
         AAdd(a, {i, Chr(Asc("a") - 1 + i)})
-    next
-    for i := 1 to 16
+    NEXT
+    FOR i := 1 TO 16
         AAdd(a, {i, Chr(Asc("A") - 1 + i)})
-    next
-    for i := 1 to 16
+    NEXT
+    FOR i := 1 TO 16
         AAdd(a, {i, Chr(Asc("a") - 1 + i)})
-    next
+    NEXT
 
     oBrw1:aArray := a
     hwg_CreateArList(oBrw1, a)
@@ -45,9 +45,9 @@ FUNCTION Main()
     oBrw1:aColumns[2]:width := 50
 
     b := {} 
-    for i := 1 to 5
+    FOR i := 1 TO 5
         AAdd(b, {i, Chr(Asc("a") - 1 + i)})
-    next
+    NEXT
 
     oBrw2:aArray := b
     hwg_CreateArList(oBrw2, b)

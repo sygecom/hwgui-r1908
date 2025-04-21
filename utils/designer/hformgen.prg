@@ -1033,12 +1033,12 @@ STATIC FUNCTION PaintDlg(oDlg)
           oPenDivider := HPen():Add(PS_DOT, 1, hwg_VColor("606060"))
           hwg_SelectObject(hDC, oPenDivider:handle)
           // :END LFB
-          for i := nLeft + oDesigner:nPixelGrid to nRight step oDesigner:nPixelGrid
+          FOR i := nLeft + oDesigner:nPixelGrid TO nRight step oDesigner:nPixelGrid
               hwg_DrawLine(hDC, i, nTop, i, nBottom)  //v
-          next
-          for i := nTop + oDesigner:nPixelGrid to nBottom step oDesigner:nPixelGrid
+          NEXT
+          FOR i := nTop + oDesigner:nPixelGrid TO nBottom step oDesigner:nPixelGrid
              hwg_DrawLine(hDC, nLeft + 2, i, nRight, i)    //h
-          next
+          NEXT
           // : LFB
           hwg_SetROP2(hDC, 13)
           oPenDivider := HPen():Add(PS_SOLID, 1, hwg_VColor("0"))

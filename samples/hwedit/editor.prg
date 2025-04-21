@@ -297,7 +297,7 @@ FUNCTION Texto()
    oCaracter := 0
    r_linha := 0
    linhas := {}
-   while !ft_FEOF()
+   DO WHILE !ft_FEOF()
       linha := AllTrim(SubStr(FT_FReadLn(@s_lEof), 1))
       //
       IF Len(linha) != 0
@@ -305,10 +305,10 @@ FUNCTION Texto()
         //
         IF subs(Upper(linha), 1, 4) == "FUNC" .OR. subs(Upper(linha), 1, 4) == "PROC"
            fun := ""
-           for f := 1 to Len(linha) + 1
+           FOR f := 1 TO Len(linha) + 1
               oCaracter++
              IF subs(linha, f, 1) = " "
-                for g = f + 1 to Len(linha)
+                FOR g := f + 1 TO Len(linha)
                        oCaracter++
                     IF subs(linha, g, 1) != " " .AND. subs(linha, g, 1) != "(" .AND. !Empty(subs(linha, g, 1))
                         fun := fun + subs(linha, g, 1)
@@ -316,22 +316,22 @@ FUNCTION Texto()
                        AAdd(oFunc, fun)
                        AAdd(funcoes, rd_lin)
                        AAdd(oLinha, {rd_lin, r_linha})
-                       exit
+                       EXIT
                     ELSE
                        AAdd(oFunc, fun)
                        AAdd(oLinha, {rd_lin, r_linha})
                        AAdd(funcoes, rd_lin)
-                       exit
+                       EXIT
                     ENDIF
-                next g
-                exit
+                NEXT g
+                EXIT
              ENDIF
-           next f
+           NEXT f
          ENDIF
       ENDIF
       rd_lin++
       FT_FSKIP()
-   enddo
+   ENDDO
 
    alterado := .F.
 
@@ -359,13 +359,13 @@ FUNCTION Texto()
  // colocando cores nas funcoes
  hwg_RE_SetDefault(oEdit&i:handle, ID_COLORF, ID_FONT,,) // cor e fonte padrao
  /*
- for f = 1 to Len(linhas)
-    for g := 0 to linhas[f]
+ FOR f := 1 TO Len(linhas)
+    FOR g := 0 TO linhas[f]
              hwg_MsgInfo(hwg_RE_GetTextRange(oEdit&i, g, 1))
-    next f
+    NEXT f
 
    //hwg_RE_SetCharFormat(oEdit&i:handle, 6, olinha[f, 2], 255, , , .T.)
- next f
+ NEXT f
  */
  hwg_SetFocus(oEdit&i:Handle)
  hwg_SendMessage(oEdit&i:Handle, EM_SETBKGNDCOLOR, 0, ID_COLORB)  // cor de fundo
@@ -513,11 +513,11 @@ RETURN -1
 ***********************
 FUNCTION indioma(rd_ID)
 ***********************
-for f := 8001 to 8002
+FOR f := 8001 TO 8002
   IF hwg_IsCheckedMenuItem(, f)
     hwg_CheckMenuItem(, f, !hwg_IsCheckedMenuItem(, f))
   ENDIF
-next f
+NEXT f
 hwg_CheckMenuItem(, rd_ID, !hwg_IsCheckedMenuItem(, rd_ID))
  ID_indioma := rd_id
  save all like ID_* to config.dat

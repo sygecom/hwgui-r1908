@@ -337,7 +337,7 @@ FUNCTION rmatch(c, f)
 
 
 FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
-   
+
    LOCAL lforever
    LOCAL lFirstPass := .T.
 
@@ -347,7 +347,7 @@ FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
+   DO WHILE (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
 
       IF !lfirstPass
 
@@ -378,7 +378,7 @@ FUNCTION netuse(cDatabase, cAlias, lExclusive, nSeconds, cPassword)
       ENDIF
       inkey(.5)                         // WAIT 1/2 SECOND
       nSeconds := nSeconds - .5
-   enddo
+   ENDDO
 
    RETURN .F.                           // USE FAILS
 
@@ -394,14 +394,14 @@ FUNCTION filelock(nSeconds)
       RETURN .T.
    ENDIF
 
-   do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
+   DO WHILE (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
       IF FLOCK()
          RETURN .T.                     // LOCKED
       ENDIF
       inkey(.5)      // wait 1/2 second
       nSeconds := nSeconds - .5
       hwg_MsgStop("File is in use by another", alias())
-   enddo
+   ENDDO
 
 
    hwg_MsgStop("File failed to locked", alias())
@@ -424,14 +424,14 @@ FUNCTION reclock(nSeconds)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
+   DO WHILE (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
       IF DBRLOCK(OldPos)
          RETURN .T.                     // LOCKED
       ENDIF
       hwg_MsgStop("Record is in use exclusive by another", alias() + " #" + Str(oldpos, 11))
       inkey(.5)      // wait 1/2 second
       nSeconds = nSeconds - .5
-   enddo
+   ENDDO
 
 
 
@@ -458,7 +458,7 @@ FUNCTION addrec(nSeconds)
    keyboard chr(255)
    inkey()
 
-   do while (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
+   DO WHILE (lforever .OR. nSeconds > 0) .AND. lastkey() != K_ESC
 
       /*
       @ maxrow()-2, 00 clear
@@ -476,7 +476,7 @@ FUNCTION addrec(nSeconds)
       nSeconds := nSeconds  - .5
       hwg_MsgStop("Record is in use exclusive by another")
 
-   enddo
+   ENDDO
 
 
    hwg_MsgStop("Record failed to locked", alias())
@@ -534,9 +534,9 @@ FUNCTION Usr2infStr(g, lKosong) && usr to informix str
 
        c := ""
 
-       for i :=1 to nLen
+       FOR i := 1 TO nLen
            c += if(isdigit(subst(cPress, i, 1)), "9", "A")
-       next
+       NEXT
 
        *:Kalau 2 Char Pertama Adalah Angka
        cPress := IIf(Left(c, 2) == "99", cPress, "0" + cPress)

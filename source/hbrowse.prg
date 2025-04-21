@@ -4672,9 +4672,9 @@ FUNCTION HScrollPos(oBrw, nType, lEof, nPos)
       nColPixel := Int((nPos * nBWidth) / ((maxPos - minPos) + 1))
       i := oBrw:nLeftCol - 1
 
-      do while nColPixel > nSize .AND. i < Len(oBrw:aColumns)
+      DO WHILE nColPixel > nSize .AND. i < Len(oBrw:aColumns)
          nSize += oBrw:aColumns[++i]:width
-      enddo
+      ENDDO
 
       // colpos is relative to leftmost column, as it seems, so I subtract leftmost column number
       oBrw:colpos := Max(i, oBrw:nLeftCol) - oBrw:nLeftCol + 1

@@ -662,7 +662,7 @@ METHOD HBrowse:Rebuild(hDC)
    ::lEditable := .F.
 
    ::minHeight := 0
-   for i := 1 to Len(::aColumns)
+   FOR i := 1 TO Len(::aColumns)
 
       oColumn := ::aColumns[i]
 
@@ -672,10 +672,10 @@ METHOD HBrowse:Rebuild(hDC)
 
       IF oColumn:aBitmaps != NIL
          xSize := 0
-         for j := 1 to Len(oColumn:aBitmaps)
+         FOR j := 1 TO Len(oColumn:aBitmaps)
             xSize := max(xSize, oColumn:aBitmaps[j, 2]:nWidth + 2)
             ::minHeight := max(::minHeight, oColumn:aBitmaps[j, 2]:nHeight)
-         next
+         NEXT
       ELSE
          // xSize := Round((Max(Len(FldStr(Self, i)), Len(oColumn:heading)) + 2) * 8, 0)
          nColLen := oColumn:length
@@ -698,7 +698,7 @@ METHOD HBrowse:Rebuild(hDC)
 
       oColumn:width := xSize
 
-   next
+   NEXT
 
    ::lChanged := .F.
 
@@ -897,7 +897,7 @@ METHOD HBrowse:HeaderOut(hDC)
    ENDIF
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
 
-   while x < ::x2 - 2
+   DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
       IF ::lAdjRight .AND. fif == Len(::aColumns)
@@ -913,7 +913,7 @@ METHOD HBrowse:HeaderOut(hDC)
             ENDIF
             hwg_SelectObject(hDC, oPenHdr:handle)
             cStr := oColumn:cGrid + ";"
-            for nLine := 1 to ::nHeadRows
+            FOR nLine := 1 TO ::nHeadRows
                cNWSE := hb_tokenGet(@cStr, nLine, ";")
                IF At("S", cNWSE) != 0
                   hwg_DrawLine(hDC, x - 1, ::y1 - (::height) * (::nHeadRows - nLine), x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine))
@@ -927,15 +927,15 @@ METHOD HBrowse:HeaderOut(hDC)
                IF At("W", cNWSE) != 0
                   hwg_DrawLine(hDC, x - 1, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x - 1, ::y1 - (::height) * (::nHeadRows - nLine))
                ENDIF
-            next
+            NEXT
             hwg_SelectObject(hDC, oPen:handle)
          ENDIF
          // Ahora Titulos Justificados !!!
          cStr := oColumn:heading + ";"
-         for nLine := 1 to ::nHeadRows
+         FOR nLine := 1 TO ::nHeadRows
             hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), x, ::y1 - (::height) * (::nHeadRows - nLine + 1) + 1, x + xSize - 1, ::y1 - (::height) * (::nHeadRows - nLine), ;
                oColumn:nJusHead  + if(oColumn:lSpandHead, DT_NOCLIP, 0))
-         next
+         NEXT
       ENDIF
       IF ::lDispSep .AND. x > ::x1
          IF ::lSep3d
@@ -953,14 +953,14 @@ METHOD HBrowse:HeaderOut(hDC)
       ENDIF
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
       IF fif > Len(::aColumns)
-         exit
+         EXIT
       ENDIF
-   enddo
+   ENDDO
 
    IF ::lDispSep
-      for i := 1 to nRows
+      FOR i := 1 TO nRows
          hwg_DrawLine(hDC, ::x1, ::y1 + (::height + 1) * i, IIf(::lAdjRight, ::x2, x), ::y1 + (::height + 1) * i)
-      next
+      NEXT
       oPen:Release()
       IF oPenHdr != NIL
          oPenHdr:Release()
@@ -997,7 +997,7 @@ METHOD HBrowse:FooterOut(hDC)
    x := ::x1
    fif := IIf(::freeze > 0, 1, ::nLeftCol)
 
-   while x < ::x2 - 2
+   DO WHILE x < ::x2 - 2
       oColumn := ::aColumns[fif]
       xSize := oColumn:width
       IF ::lAdjRight .AND. fif == Len(::aColumns)
@@ -1005,18 +1005,18 @@ METHOD HBrowse:FooterOut(hDC)
       ENDIF
       IF oColumn:footing != NIL
          cStr := oColumn:footing + ";"
-         for nLine := 1 to ::nFootRows
+         FOR nLine := 1 TO ::nFootRows
             hwg_DrawText(hDC, hb_tokenGet(@cStr, nLine, ";"), ;
                x, ::y1 + (::rowCount + nLine - 1) * (::height + 1) + 1, x + xSize - 1, ::y1 + (::rowCount + nLine) * (::height + 1), ;
                oColumn:nJusLin + if(oColumn:lSpandFoot, DT_NOCLIP, 0))
-         next
+         NEXT
       ENDIF
       x += xSize
       fif := IIf(fif = ::freeze, ::nLeftCol, fif + 1)
       IF fif > Len(::aColumns)
-         exit
+         EXIT
       ENDIF
-   enddo
+   ENDDO
 
    IF ::lDispSep
       hwg_DrawLine(hDC, ::x1, ::y1 + (::rowCount) * (::height + 1) + 1, IIf(::lAdjRight, ::x2, x), ::y1 + (::rowCount) * (::height + 1) + 1)
@@ -1945,7 +1945,7 @@ STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
 
    local klf := 0, i := IIf(oBrw:freeze > 0, 1, fld1)
 
-   while .T.
+   DO WHILE .T.
       xstrt += oBrw:aColumns[i]:width
       IF xstrt > xend
          EXIT
@@ -1956,6 +1956,7 @@ STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
          EXIT
       ENDIF
    ENDDO
+
 RETURN IIf(klf == 0, 1, klf)
 
 //----------------------------------------------------//
@@ -2000,14 +2001,14 @@ Local kolf := FCOUNT()
    oBrw:alias := alias()
    oBrw:aColumns := {}
    
-   for i := 1 TO kolf
+   FOR i := 1 TO kolf
       oBrw:AddColumn(HColumn():New(Fieldname(i), ;
                                    FieldWBlock(Fieldname(i), nArea), ;
                                    dbFieldInfo(DBS_TYPE, i), ;
                                    dbFieldInfo(DBS_LEN, i), ;
                                    dbFieldInfo(DBS_DEC, i), ;
                                    lEditable))
-   next
+   NEXT
 
    oBrw:Refresh()
 
@@ -2063,10 +2064,10 @@ Local nL, nPos := 0
 
    nMaxLen := nCount := 0
    cStr += ";"
-   while (nL := Len(hb_tokenPtr(@cStr, @nPos, ";"))) != 0
+   DO WHILE (nL := Len(hb_tokenPtr(@cStr, @nPos, ";"))) != 0
       nMaxLen := Max(nMaxLen, nL)
       nCount ++
-   enddo
+   ENDDO
 RETURN NIL
 
 #pragma BEGINDUMP

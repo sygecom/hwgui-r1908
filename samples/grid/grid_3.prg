@@ -115,12 +115,12 @@ FUNCTION OnDispInfo(o, x, y)
                 lEof := .T.
             ENDIF
 
-            for i := 1 to PQLastrec(res)
+            FOR i := 1 TO PQLastrec(res)
                 Append Blank
                 Replace Code     WITH myval(PQGetvalue(res, i, 1), "N")
                 Replace Creation WITH myval(PQGetvalue(res, i, 2), "D")
                 Replace Descr    WITH myval(PQGetvalue(res, i, 3), "C")
-            next
+            NEXT
         ELSE
             lEof := .T.
 

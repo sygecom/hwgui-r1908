@@ -205,13 +205,13 @@ METHOD Paint(lpdis) CLASS HControlGen
   ENDIF
   // :LFB pos
   IF Len(asels) > 1
-    for i=1 to Len(asels)
+    FOR i := 1 TO Len(asels)
       octrl2 := asels[i]
       IF oCtrl2 != NIL .AND. ::handle == oCtrl2:handle
         hwg_SelectObject(hDC, oPenSel:handle)
         hwg_Rectangle(hDC, 0, 0, ::nWidth - 1, ::nHeight - 1)
       ENDIF
-    next
+    NEXT
   ELSE // :LEFB
     oCtrl := GetCtrlSelected(HFormGen():oDlgSelected)
     IF oCtrl != NIL .AND. ::handle == oCtrl:handle

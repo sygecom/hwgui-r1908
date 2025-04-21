@@ -19,7 +19,7 @@ RETURN NIL
 FUNCTION hwg_VColor(cColor)
 Local i, res := 0, n := 1, iValue
    cColor := Trim(cColor)
-   for i := 1 to Len(cColor)
+   FOR i := 1 TO Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
       IF iValue < 58 .AND. iValue > 47
          iValue -= 48
@@ -32,7 +32,7 @@ Local i, res := 0, n := 1, iValue
       ENDIF
       res += iValue * n
       n *= 16
-   next
+   NEXT
 RETURN res
 
 FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle)

@@ -142,13 +142,13 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
     ENDIF
 
     /* set the highest say and get */
-    for i := 1 to Len(aFields)
+    FOR i := 1 TO Len(aFields)
         ASize(aFields[i], 12)
-        
+
         nSay := Max(nSay, Len(aFields[i, GET_LABEL]))
-        
+
         cType := Fieldtype(Fieldpos(aFields[i, GET_FIELD]))
-        
+
         IF Empty(aFields[i, GET_PICT])
 
             IF cType == "M"
@@ -174,7 +174,7 @@ FUNCTION GridEdit(cAlias, aFields, lAppend, bChange)
         aFields[i, GET_VALUE] := Fieldget(FieldPos(aFields[i, GET_FIELD]))
 
         nHeight += aFields[i, GET_HEIGHT]
-    next
+    NEXT
     
     nHeight += 5 * Len(aFields) + 15 + 30
     nRow := 10
@@ -325,7 +325,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
             ENDIF
         ENDIF
 
-        for i := 1 to Len(aFields)
+        FOR i := 1 TO Len(aFields)
             val := Fieldget(fieldpos(aFields[i, GET_FIELD]))
 
             IF HB_IsDate(val) .AND. Empty(val)
@@ -337,7 +337,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
             IF oGet:id != oCtrl:id .OR. HB_IsDate(val)
                 oGet:refresh()
             ENDIF
-        next
+        NEXT
     ENDIF
 
 RETURN result

@@ -154,7 +154,7 @@ METHOD HToolBar:INIT()
       ENDIF
 */
       IF Len(::aItem) > 0
-         For Each aItem in ::aItem
+         FOR EACH aItem IN ::aItem
 
             IF aItem[4] == TBSTYLE_BUTTON
 
@@ -169,7 +169,7 @@ METHOD HToolBar:INIT()
                aItem[11] := hwg_CreateToolBarButton(::handle,,, .T.)
                aItem[2] := hb_enumindex()
             ENDIF
-         next
+         NEXT
       ENDIF
 
    ENDIF

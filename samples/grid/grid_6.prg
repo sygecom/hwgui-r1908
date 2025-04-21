@@ -45,14 +45,14 @@ FUNCTION Test()
 
    use test new
    aStru := dbstruct()
-   for n := 1 to Len(astru)
+   FOR n := 1 TO Len(astru)
       AAdd(aHead, aStru[n, 1])
-   next
+   NEXT
    go Top
-   while !eof()
+   DO WHILE !eof()
     AAdd(aItems, {first, last, city, Str(salary, 10, 2)})
     skip
-   enddo
+   ENDDO
 
         PREPARE FONT oFont NAME "Courier New" WIDTH 0 HEIGHT -11
 
@@ -77,9 +77,9 @@ FUNCTION Test()
              ADD COLUMN TO GRID oGrid HEADER aHead[3] WIDTH 150  bitmap 3
              ADD COLUMN TO GRID oGrid HEADER aHead[4] WIDTH 150  bitmap 4
 
-             for n := 1 to Len(aItems)
+             FOR n := 1 TO Len(aItems)
                 ADDROWEX TO GRID  oGrid header aItems[n, 1] bitmap 0 color hwg_RGB(255, 12, 123) backcolor hwg_RGB(192, 0, 255), header aItems[n, 2], header aItems[n, 3] bitmap 3, header aItems[n, 1] bitmap 1 color hwg_RGB(123, 122, 123)  backcolor hwg_RGB(192, 0, 255)
-             next
+             NEXT
 
              @ 0, 395 button "LVS_REPORT" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_REPORT)}
              @ 100, 395 button "LVS_ICON" size 95, 25 on click {||hwg_ListView_SetView(oGrid:handle, LVS_ICON)}

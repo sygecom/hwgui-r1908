@@ -18,18 +18,18 @@ FUNCTION pesquisaglobal()
    PRIVATE resultado := ""
    PRIVATE get01
 
-   for f = 1 to Len(oDir) // filtrando diretorios
+   FOR f := 1 TO Len(oDir) // filtrando diretorios
        IF odir[f, 1] != "." .AND. odir[f, 1] != ".."
           AAdd(diretorio, DiskName() + ":\" + oDir[f, 1] + "\")
        ENDIF
-   next f
+   NEXT f
 
    asort(diretorio)
-   for g := 1 to Len(diretorio) // pegando diretorio atual
+   FOR g := 1 TO Len(diretorio) // pegando diretorio atual
           IF Upper(diretorio[g]) = DiskName() + ":\" + Upper(CurDir() + "\")
              atu := g
           ENDIF
-   next g
+   NEXT g
 
  oComb := atu
 
@@ -58,24 +58,24 @@ FUNCTION pesq(rd_dir, rd_text)
    PRIVATE arq_contem := {}
    PRIVATE result := ""
 
-   for f := 1 to Len(arquivos) // filtrando arquivos
+   FOR f := 1 TO Len(arquivos) // filtrando arquivos
        IF arquivos[f, 1] != "." .AND. arquivos[f, 1] != ".."
           AAdd(nom_arq, arquivos[f, 1])
        ENDIF
-   next f
-   
+   NEXT f
+
    asort(nom_arq)
    resultado := ""
    get01:refresh()
 
-   for g := 1 to Len(nom_arq)
+   FOR g := 1 TO Len(nom_arq)
      arq := FT_FUSE(rd_dir + nom_arq[g])
      //
      resultado := resultado + nom_arq[g] + Chr(13) + Chr(10)
      get01:refresh()
      //
      lin := 0
-     while !FT_FEOF()
+     DO WHILE !FT_FEOF()
         linha := Upper(SubStr(FT_FReadLn(@s_lEof), 1))
         //
         texto := Upper(rd_text)
@@ -88,7 +88,7 @@ FUNCTION pesq(rd_dir, rd_text)
         //
         lin++
         FT_FSKIP()
-     enddo
-   next g
+     ENDDO
+   NEXT g
 
 RETURN .T.

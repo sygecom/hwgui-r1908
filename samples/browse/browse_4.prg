@@ -24,11 +24,11 @@ FUNCTION Main()
       dBCreate("browse_4.dbf", aField)
    ENDIF
    Use browse_4 Exclusiv alias TESTE  NEW
-   for i := 1 to 200
+   FOR i := 1 TO 200
       Append Blank
       Teste->CODIGO := i
       TESTE->NOME := "NOME " + AllTrim(Str(I))
-   end
+   NEXT
    go top
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
         AT 218, 143 SIZE 487, 270 FONT HFont():Add("Arial", 0, -11)

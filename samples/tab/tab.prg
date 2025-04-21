@@ -52,12 +52,12 @@ FUNCTION buildtabPages(oTab, aPage, aTitle)
 
    LOCAL n
 
-   for each n in aPage
+   FOR EACH n IN aPage
       n:oParent := oTab
       n:activate(.T.)
       oTab:startpage(aTitle[hb_enumindex()], n)
       otab:endpage()
       n:oParent := NIL
-   next
+   NEXT
 
 RETURN .T.

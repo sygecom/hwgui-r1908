@@ -325,46 +325,46 @@ hwg_WriteIni("Config", "PrgMain", oMainPrg:GetText(), cFolderFile)
 oNome := ""
 
 IF Len(oBrowse1:aArray) >= 1
-   for i := 1 to Len(oBrowse1:aArray)
+   FOR i := 1 TO Len(oBrowse1:aArray)
 
       IF !empty(oBrowse1:aArray[i])
 
          hwg_WriteIni("FilesPRG", Alltrim(Str(i)), oBrowse1:aArray[i], cFolderFile)
 
-      eNDiF
+      ENDIF
 
-    Next
+   NEXT
 
 ENDIF
 
 IF Len(oBrowse2:aArray) >= 1
-   for i := 1 to Len(oBrowse2:aArray)
+   FOR i := 1 TO Len(oBrowse2:aArray)
       IF !empty(oBrowse2:aArray[i])
          hwg_WriteIni("FilesC", Alltrim(Str(i)), oBrowse2:aArray[i], cFolderFile)
      ENDIF
-   Next
+   NEXT
 ENDIF
 
 IF Len(oBrowse3:aArray) >= 1
-   for i := 1 to Len(oBrowse3:aArray)
+   FOR i := 1 TO Len(oBrowse3:aArray)
       IF !empty(oBrowse3:aArray[i])
          hwg_WriteIni("FilesLIB", Alltrim(Str(i)), oBrowse3:aArray[i], cFolderFile)
       ENDIF
-   Next
+   NEXT
 ENDIF
 
 IF Len(oBrowse4:aArray) >= 1
-   for i := 1 to Len(oBrowse4:aArray)
+   FOR i := 1 TO Len(oBrowse4:aArray)
       IF !empty(oBrowse4:aArray[i])
          hwg_WriteIni("FilesRES", Alltrim(Str(i)), oBrowse4:aArray[i], cFolderFile)
      ENDIF
-   Next
+   NEXT
 ENDIF
 
 hwg_Msginfo("File " + cFolderFile + " saved", "HwGUI Build", "HwMake")
 RETURN NIL
 
-FUNCTION BuildApp() 
+FUNCTION BuildApp()
 Local cExeHarbour
 Local cHwGUI, cHarbour, cBCC55, cObj
 LOCAL cObjFileAttr, nObjFileSize

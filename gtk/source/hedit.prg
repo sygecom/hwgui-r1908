@@ -746,7 +746,7 @@ Local xValue, cChar, nFor, minus
       IF minus
          FOR nFor := 1 to Len(cBuffer)
             IF IsDigit(SubStr(cBuffer, nFor, 1))
-               exit
+               EXIT
             ENDIF
          NEXT
          nFor--

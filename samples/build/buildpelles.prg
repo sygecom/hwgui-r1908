@@ -284,7 +284,7 @@ FUNCTION SaveBuildFile()
    oNome := ""
 
    IF Len(oBrowse1:aArray) >= 1
-      for i := 1 to Len(oBrowse1:aArray)
+      FOR i := 1 TO Len(oBrowse1:aArray)
 
          IF !Empty(oBrowse1:aArray[i])
 
@@ -292,33 +292,33 @@ FUNCTION SaveBuildFile()
 
          ENDIF
 
-       Next
+      NEXT
 
    ENDIF
 
 
    IF Len(oBrowse2:aArray) >= 1
-      for i := 1 to Len(oBrowse2:aArray)
+      FOR i := 1 TO Len(oBrowse2:aArray)
          IF !Empty(oBrowse2:aArray[i])
             hwg_WriteIni("FilesC", AllTrim(Str(i)), oBrowse2:aArray[i], oFolderFile)
         ENDIF
-      Next
+      NEXT
    ENDIF
 
    IF Len(oBrowse3:aArray) >= 1
-      for i := 1 to Len(oBrowse3:aArray)
+      FOR i := 1 TO Len(oBrowse3:aArray)
          IF !Empty(oBrowse3:aArray[i])
             hwg_WriteIni("FilesLIB", AllTrim(Str(i)), oBrowse3:aArray[i], oFolderFile)
          ENDIF
-      Next
+      NEXT
    ENDIF
 
    IF Len(oBrowse4:aArray) >= 1
-      for i := 1 to Len(oBrowse4:aArray)
+      FOR i := 1 TO Len(oBrowse4:aArray)
          IF !Empty(oBrowse4:aArray[i])
             hwg_WriteIni("FilesRES", AllTrim(Str(i)), oBrowse4:aArray[i], oFolderFile)
         ENDIF
-      Next
+      NEXT
    ENDIF
 
    hwg_Msginfo("File " + oFolderFile + " saved", "HwGUI Build")
@@ -383,42 +383,42 @@ FUNCTION BuildBat()
    
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
    lName := ""
-   for i := 1 to Len(oName)
+   FOR i := 1 TO Len(oName)
       IF SubStr(oName, -i, 1) == "\"
          Exit
       ENDIF
       lName += SubStr(oName, -i, 1)
-   Next
+   NEXT
    oName := ""
-   for i := 1 to Len(lName)
+   FOR i := 1 TO Len(lName)
       oName += SubStr(lName, -i, 1)
-   Next
+   NEXT
    FWrite(oArq, "ECHO " + oName + ".obj > make.tmp " + CRF)
 
    IF Len(voPrgFiles) > 0
 
-      for i := 1 to Len(voPrgFiles)
+      FOR i := 1 TO Len(voPrgFiles)
 
          IF !Empty(voPrgFiles[i])
 
             oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
             lName := ""
-            for g := 1 to Len(oName)
+            FOR g := 1 TO Len(oName)
                IF SubStr(oName, -g, 1) == "\"
                   Exit
                ENDIF
                lName += SubStr(oName, -g, 1)
-            Next
+            NEXT
             oName := ""
-            for g := 1 to Len(lName)
+            FOR g := 1 TO Len(lName)
                oName += SubStr(lName, -g, 1)
-            Next
+            NEXT
 
             FWrite(oArq, "ECHO " + oName + ".obj >> make.tmp " + CRF)
 
          ENDIF
 
-      Next
+      NEXT
    ENDIF
 
    //FWrite(oArq, "ECHO " + voExeName + ".obj > make.tmp " + CRF)
@@ -468,7 +468,7 @@ FUNCTION BuildBat()
    
    
    IF Len(voPrgFiles) > 0
-   for i := 1 to Len(voPrgFiles)
+   FOR i := 1 TO Len(voPrgFiles)
        IF !Empty(voPrgFiles[i])
 
           oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
@@ -476,7 +476,7 @@ FUNCTION BuildBat()
           " -o" + oName + ;
           " -i" + vPelles + "\INCLUDE;" + vHarbour + "\INCLUDE;" + vHwGUI + "\INCLUDE" + IIf(!Empty(voIncFolder), ";", "") + voIncFolder + " " + voPrgFlag + " -n -q0 -es2 -gc0" + CRF)
       ENDIF
-   Next
+   NEXT
    ENDIF
    
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
@@ -484,33 +484,33 @@ FUNCTION BuildBat()
    
    
    IF Len(voPrgFiles) > 0
-   for i := 1 to Len(voPrgFiles)
+   FOR i := 1 TO Len(voPrgFiles)
       IF !Empty(voPrgFiles[i])
          oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
          FWrite(oArq, vPelles + "\bin\pocc " + oName + ".c " + voCFlag + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"' + vHarbour + '\INCLUDE" /I"' + vPelles + '\INCLUDE" /I"' + vPelles+'\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" /D"HB_STATIC_STARTUP" /c' + CRF)
      ENDIF
-   next
+   NEXT
    ENDIF
 
    IF Len(voCFiles) > 0
    oInc := ""
-   for i := 1 to Len(voCFiles)
+   FOR i := 1 TO Len(voCFiles)
        IF !Empty(voCFiles[i])
           IF !Empty(oIncFolder)
              oInc := '/I"' + voIncFolder + '"'
           ENDIF
           FWrite(oArq, vPelles + "\bin\pocc " + voCFiles[i] + ' /Ze /D"NEED_DUMMY_RETURN" /D"__XCC__" /I"INCLUDE" /I"" + vHarbour + "\INCLUDE" /I"" + vPelles + "\INCLUDE" /I"" + vPelles + "\INCLUDE\WIN" /I"' + vPelles + '\INCLUDE\MSVC" ' + oInc + ' /D"HB_STATIC_STARTUP" /c' + CRF)
        ENDIF
-   Next
+   NEXT
    ENDIF
 
    IF Len(voResFiles) > 0
    oInc := ""
-   for i := 1 to Len(voResFiles)
+   FOR i := 1 TO Len(voResFiles)
      IF !Empty(voResFiles[i])
         FWrite(oArq, vPelles + "\BIN\porc -r " + voResFiles[i] + " -foobj\" + voExeName + CRF)
      ENDIF
-   Next
+   NEXT
    ENDIF
 
    FWrite(oArq, vPelles + "\bin\POLINK /LIBPATH:" + vPelles + "\lib /OUT:" + voExeName + ".EXE /MACHINE:IX86 /OPT:WIN98 /SUBSYSTEM:WINDOWS /FORCE:MULTIPLE @make.tmp >error.log" + CRF)
@@ -522,14 +522,14 @@ FUNCTION BuildBat()
    FWrite(oArq, "Del " + oName + ".map" + CRF)
    FWrite(oArq, "Del " + oName + ".obj" + CRF)
 
-   for i := 1 to Len(voPrgFiles)
+   FOR i := 1 TO Len(voPrgFiles)
       IF !Empty(voPrgFiles[i])
          oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
          FWrite(oArq, "Del " + oName + ".c " + CRF)
          FWrite(oArq, "Del " + oName + ".map" + CRF)
          FWrite(oArq, "Del " + oName + ".obj" + CRF)
      ENDIF
-   next
+   NEXT
    */
    FClose(oArq)
 
@@ -636,37 +636,37 @@ FUNCTION BuildPoMake()
    FWrite(oArq, "FILE_OBJS = \" + CRF)
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
    /*lName := ""
-   for i := 1 to Len(oName)
+   FOR i := 1 TO Len(oName)
       IF SubStr(oName, -i, 1) == "\"
          Exit
       ENDIF
       lName += SubStr(oName, -i, 1)
-   Next
+   NEXT
    oName := ""
-   for i := 1 to Len(lName)
+   FOR i := 1 TO Len(lName)
       oName += SubStr(lName, -i, 1)
-   Next
+   NEXT
    */
    FWrite(oArq, oName + ".obj \ " + CRF)
 
    IF Len(voPrgFiles) > 0
 
-      for i := 1 to Len(voPrgFiles)
+      FOR i := 1 TO Len(voPrgFiles)
 
          IF !Empty(voPrgFiles[i])
 
             oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
             lName := ""
-   /*         for g := 1 to Len(oName)
+   /*         FOR g := 1 TO Len(oName)
                IF SubStr(oName, -g, 1) == "\"
                   Exit
                ENDIF
                lName += SubStr(oName, -g, 1)
-            Next
+            NEXT
             oName := ""
-            for g := 1 to Len(lName)
+            FOR g := 1 TO Len(lName)
                oName += SubStr(lName, -g, 1)
-            Next
+            NEXT
 
             FWrite(oArq, "$(OBJ_DIR)\" + oName + ".obj ")
    */
@@ -679,7 +679,7 @@ FUNCTION BuildPoMake()
             ENDIF
          ENDIF
 
-      Next
+      NEXT
    ENDIF
 
    FWrite(oArq, voExeName + ": $(FILE_OBJS)" + CRF)
@@ -692,32 +692,32 @@ FUNCTION BuildPoMake()
    FWrite(oArq, "   $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@" + CRF + CRF)
 
    IF Len(voPrgFiles) > 0
-   for i := 1 to Len(voPrgFiles)
+   FOR i := 1 TO Len(voPrgFiles)
        IF !Empty(voPrgFiles[i])
 
           oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
           FWrite(oArq, oName + ".c : " + voPrgFiles[i] + CRF)
           FWrite(oArq, "   $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@" + CRF + CRF)
       ENDIF
-   Next
+   NEXT
    ENDIF
    oName := SubStr(voPrgMain, 1, Len(voPrgMain) - 4)
    FWrite(oArq, oName + ".obj : " + oName + ".c" + CRF)
    FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF + CRF)
 
    IF Len(voPrgFiles) > 0
-   for i := 1 to Len(voPrgFiles)
+   FOR i := 1 TO Len(voPrgFiles)
        IF !Empty(voPrgFiles[i])
           oName := SubStr(voPrgFiles[i], 1, Len(voPrgFiles[i]) - 4)
           FWrite(oArq, oName + ".obj : " + oName + ".c" + CRF)
           FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF + CRF)
       ENDIF
-   Next
+   NEXT
    ENDIF
 
    IF Len(voCFiles) > 0
    oInc := ""
-   for i := 1 to Len(voCFiles)
+   FOR i := 1 TO Len(voCFiles)
        IF !Empty(voCFiles[i])
           IF !Empty(oIncFolder)
              oInc := '/I"' + voIncFolder + '"'
@@ -728,7 +728,7 @@ FUNCTION BuildPoMake()
           FWrite(oArq, "   $(CC_EXE) $(CFLAGS) /Fo$@ $** " + CRF)
 
        ENDIF
-   Next
+   NEXT
    ENDIF
 
    FClose(oName)

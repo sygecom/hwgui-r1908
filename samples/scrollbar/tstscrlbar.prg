@@ -11,8 +11,8 @@ FUNCTION Main()
         STYLE WS_VSCROLL + WS_HSCROLL
 
    FOR i := 0 TO 200 STEP 20
-      @ 0, i  say StrZero(i, 3) + "  -  " + "01234567890123456789012345678901234567890" + "  -  " + StrZero(i, 3) size 420, 20
-   next
+      @ 0, i SAY StrZero(i, 3) + "  -  " + "01234567890123456789012345678901234567890" + "  -  " + StrZero(i, 3) SIZE 420, 20
+   NEXT
 
 
    oMain:bScroll := {|o, msg, wParam, lParam|stdScroll(o, msg, wParam, lParam)}
