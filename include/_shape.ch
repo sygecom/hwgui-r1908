@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>, <nY>  SHAPE [ <oShape> ] [ OF <oParent> ] ;
+#xcommand @ <nX>, <nY> SHAPE [ <oShape> ] [ OF <oParent> ] ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ BORDERWIDTH <nBorder> ]  ;

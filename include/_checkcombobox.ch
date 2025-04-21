@@ -6,8 +6,8 @@
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
-             [ ITEMHEIGHT <nhItem>    ] ;
-             [ COLUMNWIDTH <ncWidth>  ] ;
+             [ ITEMHEIGHT <nhItem> ] ;
+             [ COLUMNWIDTH <ncWidth> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON CHANGE <bChange> ]    ;

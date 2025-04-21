@@ -7,7 +7,7 @@
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ <lTransp: TRANSPARENT>]  ;
-             [ <lScroll: SCROLLING>  ]  ;
+             [ <lScroll: SCROLLING> ]  ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
              [ DIVIDE <aLeft> FROM <aRight> ] ;

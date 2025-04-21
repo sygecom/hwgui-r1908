@@ -7,7 +7,7 @@
              [ BIN <nBin> ] ;
              [ <lLandScape: LANDSCAPE>] ;
              [ COPIES <nCopies> ] ;
-          =>  ;
+          => ;
           <oPrinter> := HPrinter():New(<cPrinter>,!<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)
 
 #xcommand INIT DEFAULT PRINTER <oPrinter>   ;
@@ -16,5 +16,5 @@
              [ BIN <nBin> ] ;
              [ <lLandScape: LANDSCAPE>] ;
              [ COPIES <nCopies> ] ;
-          =>  ;
+          => ;
           <oPrinter> := HPrinter():New("",!<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)

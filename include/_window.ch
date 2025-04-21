@@ -38,7 +38,7 @@
 
 #xcommand INIT WINDOW <oWnd> MDICHILD [ VAR <vari> ]   ;
              [ APPNAME <appname> ]          ;
-             [ OF <oParent>      ]          ;
+             [ OF <oParent> ]          ;
              [ TITLE <cTitle> ]             ;
              [ AT <nX>, <nY> ]                ;
              [ SIZE <nWidth>, <nHeight> ]     ;

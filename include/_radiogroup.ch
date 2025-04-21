@@ -2,7 +2,7 @@
 
 #xcommand RADIOGROUP => HRadioGroup():New()
 
-#xcommand GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
+#xcommand GET RADIOGROUP [ <ogr> VAR ] <vari> ;
              [ ON INIT <bInit> ]        ;
              [ STYLE <nStyle> ]         ;
              [ ON CLICK <bClick> ]      ;
@@ -11,7 +11,7 @@
 					     <bInit>,<bClick>,<bWhen>, <nStyle>)
 
           //nando
-#xcommand @ <nX>, <nY> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
+#xcommand @ <nX>, <nY> GET RADIOGROUP [ <ogr> VAR ] <vari> ;
              [ CAPTION  <caption> ] ;
              [ OF <oParent> ]              ;
              [ ID <nId> ]               ;

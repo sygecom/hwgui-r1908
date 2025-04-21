@@ -26,7 +26,7 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <nX>, <nY> GET UPDOWN [ <oUpd> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET UPDOWN [ <oUpd> VAR ] <vari> ;
              RANGE <nLower>,<nUpper>    ;
              [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
@@ -44,7 +44,7 @@
              [ <lnoborder: NOBORDER> ]    ;
              [ TOOLTIP <cTooltip> ]       ;
              [ ON INIT <bInit> ]        ;
-             [ ON KEYDOWN <bKeyDown>   ] ;
+             [ ON KEYDOWN <bKeyDown> ] ;
              [ ON CHANGE <bChange> ]    ;
              [ ;
                 [ ON OTHER MESSAGES <bOther> ] ;

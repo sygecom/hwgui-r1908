@@ -32,7 +32,7 @@
              [ LAST <bLast> ]           ; // By Marcelo Sturm (marcelo.sturm@gmail.com)
              [ FOR <bFor> ]             ; // By Luiz Henrique dos Santos (luizhsantos@gmail.com)
              [ ON OTHER MESSAGES <bOther> ] ;
-             [ ON OTHERMESSAGES <bOther>  ] ;
+             [ ON OTHERMESSAGES <bOther> ] ;
              [ TOOLTIP <cTooltip> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;

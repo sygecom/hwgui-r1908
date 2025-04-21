@@ -28,7 +28,7 @@
                 <bRClick>, <bDClick>, <.lCheck.>, <bCheck>, <.lDragDrop.>, <bDrag>, <bDrop>, <bOther>) ;;
           [ <oTree>:name := <(oTree)> ]
 
-#xcommand INSERT NODE [ <oNode> CAPTION ] <cTitle>  ;
+#xcommand INSERT NODE [ <oNode> CAPTION ] <cTitle> ;
              TO <oTree>                            ;
              [ AFTER <oPrev> ]                     ;
              [ BEFORE <oNext> ]                    ;

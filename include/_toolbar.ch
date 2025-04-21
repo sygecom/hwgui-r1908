@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand TOOLBUTTON  <O>       ;
+#xcommand TOOLBUTTON <O>           ;
              ID <nId>              ;
              [ BITMAP <nBitIp> ]   ;
              [ STYLE <bstyle> ]    ;
@@ -17,8 +17,8 @@
             [ ID <nId> ]                ;
             [ SIZE <nWidth>, <nHeight> ]  ;
             [ BUTTONWIDTH <btnwidth> ]  ;
-            [ INDENT <nIndent>       ]  ;
-		         	[ BITMAPSIZE <bmpwidth> [, <bmpheight> ] ]  ;
+            [ INDENT <nIndent> ]  ;
+            [ BITMAPSIZE <bmpwidth> [, <bmpheight> ] ]  ;
             [ FONT <oFont> ]            ;
             [ ON INIT <bInit> ]         ;
             [ ON SIZE <bSize> ]         ;
@@ -33,7 +33,7 @@
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
     [ <oTool>:name := <(oTool)> ]
 
-#xcommand REDEFINE TOOLBAR  <oSay>     ;
+#xcommand REDEFINE TOOLBAR <oSay>     ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;

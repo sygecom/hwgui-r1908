@@ -26,7 +26,7 @@
              <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther>) ;;
           [ <oSay>:name := <(oSay)> ]
 
-#xcommand REDEFINE SAY   [ <oSay> CAPTION ] <cCaption>   ;
+#xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;

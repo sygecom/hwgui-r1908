@@ -16,7 +16,7 @@
              <bSize>,<bPaint>, <bRClick>, <bDblClick>, <nHeight>) ;;
           [ <oStat>:name := <(oStat)> ]
 
-#xcommand REDEFINE STATUS  <oSay>  ;
+#xcommand REDEFINE STATUS <oSay> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;

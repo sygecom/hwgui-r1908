@@ -26,7 +26,7 @@
              <color>, <bcolor>, <.lTransp.>, <cLink>, <vcolor>, <lcolor>, <hcolor>,<hbit>, <bClick>) ;;
           [ <oSay>:name := <(oSay)> ]
 
-#xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption>      ;
+#xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              LINK <cLink>               ;

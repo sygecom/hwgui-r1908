@@ -29,7 +29,7 @@
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
-             [ INIT <lInit>    ]        ;
+             [ INIT <lInit> ]        ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bPaint> ]       ;
@@ -44,8 +44,8 @@
 
 /* SAY ... GET system     */
 
-#xcommand @ <nX>, <nY> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
-             CAPTION  <caption>         ;
+#xcommand @ <nX>, <nY> GET CHECKBOX [ <oCheck> VAR ] <vari> ;
+             CAPTION <caption>         ;
              [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
@@ -69,7 +69,7 @@
              <bInit>,<bSize>,,<bClick>,<cTooltip>,<color>,<bcolor>,<bWhen>,<.lEnter.>,<.lTransp.>,<bLfocus>) ;;
           [ <oCheck>:name := <(oCheck)> ]
 
-#xcommand REDEFINE GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
+#xcommand REDEFINE GET CHECKBOX [ <oCheck> VAR ] <vari> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;

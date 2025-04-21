@@ -1,6 +1,6 @@
 // DO NOT USE THIS FILE DIRECTLY - USED BY GUILIB.CH
 
-#xcommand @ <nX>, <nY>  ANIMATION [ <oAnimation> ] ;
+#xcommand @ <nX>, <nY> ANIMATION [ <oAnimation> ] ;
              [ OF <oParent> ]                      ;
              [ ID <nId> ]                          ;
              [ FROM RESOURCE <xResID> ]            ;

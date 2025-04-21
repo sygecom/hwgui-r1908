@@ -4,7 +4,7 @@
              [ HEADER <cHeader> ]       ;
              [ TYPE <cType> ]           ;
              [ LENGTH <nLen> ]          ;
-             [ DEC <nDec>    ]          ;
+             [ DEC <nDec> ]          ;
              [ <lEdit: EDITABLE> ]      ;
              [ JUSTIFY HEAD <nJusHead> ] ;
              [ JUSTIFY LINE <nJusLine> ] ;
@@ -25,7 +25,7 @@
              [ HEADER <cHeader> ]       ;
              [ TYPE <cType> ]           ;
              [ LENGTH <nLen> ]          ;
-             [ DEC <nDec>    ]          ;
+             [ DEC <nDec> ]          ;
              [ <lEdit: EDITABLE> ]      ;
              [ JUSTIFY HEAD <nJusHead> ] ;
              [ JUSTIFY LINE <nJusLine> ] ;

@@ -34,7 +34,7 @@
 
 #xcommand ENDPAGE OF <oTab> => <oTab>:EndPage()
 
-#xcommand REDEFINE TAB  <oSay>  ;
+#xcommand REDEFINE TAB <oSay> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ ON INIT <bInit> ]        ;

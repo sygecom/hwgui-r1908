@@ -48,14 +48,14 @@
 
 /* SAY ... GET system     */
 #ifdef __SYGECOM__
-#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ] <vari> ;
              [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
-             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]        ;
              [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [ <lPassword: PASSWORD> ]    ;
              [ MAXLENGTH <nMaxLength> ] ;
@@ -65,7 +65,7 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ TOOLTIP <cTooltip> ]       ;
-             [ ON KEYDOWN <bKeyDown>   ] ;
+             [ ON KEYDOWN <bKeyDown> ] ;
              [ ON CHANGE <bChange> ]    ;
              [ ;
                 [ ON OTHER MESSAGES <bOther> ] ;
@@ -81,14 +81,14 @@
           [ <oEdit>:name := <(oEdit)> ]
 
 #else
-#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ]  <vari>  ;
+#xcommand @ <nX>, <nY> GET [ <oEdit> VAR ] <vari> ;
              [ OF <oParent> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
-             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]        ;
              [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [ <lPassword: PASSWORD> ]    ;
              [ MAXLENGTH <nMaxLength> ] ;
@@ -98,7 +98,7 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ TOOLTIP <cTooltip> ]       ;
-             [ ON KEYDOWN <bKeyDown>   ] ;
+             [ ON KEYDOWN <bKeyDown> ] ;
              [ ON CHANGE <bChange> ]    ;
              [ ;
                 [ ON OTHER MESSAGES <bOther> ] ;
@@ -114,13 +114,13 @@
           [ <oEdit>:name := <(oEdit)> ]
 #endif
 /* Added MULTILINE: AJ: 11-03-2007*/
-#xcommand REDEFINE GET [ <oEdit> VAR ] <vari>  ;
+#xcommand REDEFINE GET [ <oEdit> VAR ] <vari> ;
              [ OF <oParent> ]              ;
              ID <nId>                   ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ PICTURE <cPicture> ]     ;
-             [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+             [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]        ;
              [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ FONT <oFont> ]           ;

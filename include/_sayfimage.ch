@@ -7,7 +7,7 @@
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ TOOLTIP <cTooltip> ]       ;
-             [ TYPE <ctype>     ]       ;
+             [ TYPE <ctype> ]       ;
              [ <class: CLASS> <classname> ] ;
           => ;
           [ <oImage> := ] __IIF(<.class.>, <classname>, HSayFImage)():New(<oParent>,<nId>,<nX>,<nY>,<nWidth>, ;

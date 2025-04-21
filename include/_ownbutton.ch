@@ -42,7 +42,7 @@
              [ <flat: FLAT> ]        ;
              [ TEXT <cText>          ;
              [ COLOR <color>] [ FONT <font> ] ;
-             [ COORDINATES  <xt>, <yt>, <widtht>, <heightt> ] ;
+             [ COORDINATES <xt>, <yt>, <widtht>, <heightt> ] ;
              ] ;
              [ BITMAP <bmp> [ <res: FROM RESOURCE> ] [ <ltr: TRANSPARENT> ] ;
              [ COORDINATES <xb>, <yb>, <widthb>, <heightb> ] ;

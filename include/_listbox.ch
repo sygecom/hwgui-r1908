@@ -32,7 +32,7 @@
 #xcommand REDEFINE LISTBOX [ <oListbox> ITEMS ] <aItems> ;
              [ OF <oParent> ]                 ;
              ID <nId>                      ;
-             [ INIT <nInit>    ]           ;
+             [ INIT <nInit> ]           ;
              [ ON INIT <bInit> ]           ;
              [ ON SIZE <bSize> ]           ;
              [ ON PAINT <bPaint> ]          ;

@@ -6,8 +6,8 @@
              [ INIT <nInit> ]           ;
              [ SIZE <nWidth>, <nHeight> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
-             [ ITEMHEIGHT <nhItem>    ] ;
-             [ COLUMNWIDTH <ncWidth>  ] ;
+             [ ITEMHEIGHT <nhItem> ] ;
+             [ COLUMNWIDTH <ncWidth> ] ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -34,7 +34,7 @@
 #xcommand REDEFINE COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
             [ OF <oParent> ]              ;
             ID <nId>                   ;
-            [ INIT <nInit>    ]        ;
+            [ INIT <nInit> ]        ;
             [ DISPLAYCOUNT <nDisplay>] ;
             [ MAXLENGTH <nMaxLength> ] ;
             [ ON INIT <bInit> ]        ;
@@ -58,8 +58,8 @@
             [ ID <nId> ]               ;
             [ SIZE <nWidth>, <nHeight> ] ;
             [ DISPLAYCOUNT <nDisplay>] ;
-            [ ITEMHEIGHT <nhItem>    ] ;
-            [ COLUMNWIDTH <ncWidth>  ] ;
+            [ ITEMHEIGHT <nhItem> ] ;
+            [ COLUMNWIDTH <ncWidth> ] ;
             [ MAXLENGTH <nMaxLength> ] ;
             [ COLOR <color> ]          ;
             [ BACKCOLOR <bcolor> ]     ;
@@ -70,7 +70,7 @@
             [ TOOLTIP <cTooltip> ]       ;
             [ <edit: EDIT> ]           ;
             [ <text: TEXT> ]           ;
-            [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+            [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]        ;
             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
             [ <class: CLASS> <classname> ] ;
@@ -85,7 +85,7 @@
 
 
 #xcommand REDEFINE GET COMBOBOX [ <oCombo> VAR ] <vari> ;
-            ITEMS  <aItems>            ;
+            ITEMS <aItems>            ;
             [ OF <oParent> ]              ;
             ID <nId>                   ;
             [ DISPLAYCOUNT <nDisplay>] ;
@@ -93,7 +93,7 @@
             [ ON CHANGE <bChange> ]    ;
             [ FONT <oFont> ]           ;
             [ TOOLTIP <cTooltip> ]       ;
-            [ <focusin: WHEN, ON GETFOCUS>  <bGfocus> ]        ;
+            [ <focusin: WHEN, ON GETFOCUS> <bGfocus> ]        ;
             [ <focusout: VALID, ON LOSTFOCUS> <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
             [ <edit: EDIT> ]           ;
