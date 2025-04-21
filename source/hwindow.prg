@@ -69,9 +69,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
-   bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, lChild, lClipper, lNoClosable, bSetForm) ;
-   CLASS HWindow
+METHOD HWindow:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
+   bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, lChild, lClipper, lNoClosable, bSetForm)
 
    HB_SYMBOL_UNUSED(clr)
    HB_SYMBOL_UNUSED(cMenu)
@@ -132,7 +131,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddItem(oWnd) CLASS HWindow
+METHOD HWindow:AddItem(oWnd)
 
    AAdd(::aWindows, oWnd)
 
@@ -140,7 +139,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DelItem(oWnd) CLASS HWindow
+METHOD HWindow:DelItem(oWnd)
 
    LOCAL i
    LOCAL h := oWnd:handle
@@ -154,7 +153,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FindWindow(hWndTitle) CLASS HWindow
+METHOD HWindow:FindWindow(hWndTitle)
 
    LOCAL cType := ValType(hWndTitle)
    LOCAL i
@@ -169,7 +168,7 @@ RETURN IIf(i == 0, NIL, ::aWindows[i])
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetMain() CLASS HWindow
+METHOD HWindow:GetMain()
 RETURN IIf(Len(::aWindows) > 0, IIf(::aWindows[1]:Type == WND_MAIN, ::aWindows[1], ;
    IIf(Len(::aWindows) > 1, ::aWindows[2], NIL)), NIL)
 

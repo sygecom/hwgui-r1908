@@ -26,7 +26,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DelObject(oCtrl) CLASS HObject
+METHOD HObject:DelObject(oCtrl)
 
    LOCAL h := oCtrl:handle
    LOCAL i := AScan(::aObjects, {|o|o:handle == h})

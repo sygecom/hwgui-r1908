@@ -76,7 +76,7 @@ CLASS HPrinter INHERIT HObject
    METHOD ChangePage(oSayPage, n, nPage) HIDDEN
 ENDCLASS
 
-METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn) CLASS HPrinter
+METHOD HPrinter:New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn)
 
    LOCAL aPrnCoors, cPrinterName
 
@@ -150,7 +150,7 @@ METHOD New(cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, h
 
    RETURN Self
 
-METHOD SetMode(nOrientation) CLASS HPrinter
+METHOD HPrinter:SetMode(nOrientation)
    LOCAL hPrinter := ::hPrinter, hDC, aPrnCoors
 
    hDC := hwg_SetPrinterMode(::cPrinterName, @hPrinter, nOrientation)
@@ -173,7 +173,7 @@ METHOD SetMode(nOrientation) CLASS HPrinter
 
    RETURN .F.
 
-METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HPrinter
+METHOD HPrinter:AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset)
    LOCAL oFont
 
    IF ::lmm .AND. nHeight != NIL
@@ -185,7 +185,7 @@ METHOD AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset) CLASS HP
 
    RETURN oFont
 
-METHOD END() CLASS HPrinter
+METHOD HPrinter:END()
 
    IF !Empty(::hDCPrn)
       hwg_DeleteDC(::hDCPrn)
@@ -197,7 +197,7 @@ METHOD END() CLASS HPrinter
    ::ReleaseMeta()
    RETURN NIL
 
-METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
+METHOD HPrinter:Box(x1, y1, x2, y2, oPen, oBrush)
 
    IF oPen != NIL
       hwg_SelectObject(::hDC, oPen:handle)
@@ -213,7 +213,7 @@ METHOD Box(x1, y1, x2, y2, oPen, oBrush) CLASS HPrinter
 
    RETURN NIL
 
-METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
+METHOD HPrinter:Line(x1, y1, x2, y2, oPen)
 
    IF oPen != NIL
       hwg_SelectObject(::hDC, oPen:handle)
@@ -226,7 +226,7 @@ METHOD Line(x1, y1, x2, y2, oPen) CLASS HPrinter
 
    RETURN NIL
 
-METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPrinter
+METHOD HPrinter:Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor)
    LOCAL hFont, nOldTC, nOldBC
 
    IF oFont != NIL
@@ -260,7 +260,7 @@ METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor) CLASS HPr
 
    RETURN NIL
 
-METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
+METHOD HPrinter:Bitmap(x1, y1, x2, y2, nOpt, hBitmap)
 
    IF ::lmm
       hwg_DrawBitmap(::hDC, hBitmap, IIf(nOpt == NIL, SRCAND, nOpt), ::nHRes * x1, ::nVRes * y1, ::nHRes * (x2 - x1 + 1), ::nVRes * (y2 - y1 + 1))
@@ -270,7 +270,7 @@ METHOD Bitmap(x1, y1, x2, y2, nOpt, hBitmap) CLASS HPrinter
 
    RETURN NIL
 
-METHOD GetTextWidth(cString, oFont) CLASS HPrinter
+METHOD HPrinter:GetTextWidth(cString, oFont)
    LOCAL arr, hFont
 
    IF oFont != NIL
@@ -283,7 +283,7 @@ METHOD GetTextWidth(cString, oFont) CLASS HPrinter
 
    RETURN IIf(::lmm, Int(arr[1] / ::nHRes), arr[1])
 
-METHOD StartDoc(lPreview, cMetaName) CLASS HPrinter
+METHOD HPrinter:StartDoc(lPreview, cMetaName)
 
    IF lPreview != NIL .AND. lPreview
       ::lPreview := .T.
@@ -299,14 +299,14 @@ METHOD StartDoc(lPreview, cMetaName) CLASS HPrinter
 
    RETURN NIL
 
-METHOD EndDoc() CLASS HPrinter
+METHOD HPrinter:EndDoc()
 
    IF !::lPreview
       hwg_EndDoc(::hDC)
    ENDIF
    RETURN NIL
 
-METHOD StartPage() CLASS HPrinter
+METHOD HPrinter:StartPage()
    LOCAL fname
 
    IF ::lPreview
@@ -320,7 +320,7 @@ METHOD StartPage() CLASS HPrinter
 
    RETURN NIL
 
-METHOD EndPage() CLASS HPrinter
+METHOD HPrinter:EndPage()
    LOCAL nLen
 
    IF ::lPreview
@@ -332,7 +332,7 @@ METHOD EndPage() CLASS HPrinter
    ENDIF
    RETURN NIL
 
-METHOD ReleaseMeta() CLASS HPrinter
+METHOD HPrinter:ReleaseMeta()
    LOCAL i, nLen
 
    IF ::aMeta == NIL .OR. Empty(::aMeta)
@@ -347,7 +347,7 @@ METHOD ReleaseMeta() CLASS HPrinter
 
    RETURN NIL
 
-METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser) CLASS HPrinter
+METHOD HPrinter:Preview(cTitle, aBitmaps, aTooltips, aBootUser)
    LOCAL oDlg, oToolBar, oSayPage, oBtn, oCanvas, oTimer, i, nLastPage := Len(::aMeta), aPage := {}
    LOCAL oFont := HFont():Add("Times New Roman", 0, -13, 700)
    LOCAL lTransp := (aBitmaps != NIL .AND. Len(aBitmaps) > 9 .AND. aBitmaps[10] != NIL .AND. aBitmaps[10])
@@ -511,7 +511,7 @@ STATIC FUNCTION TimerFunc(o)
    hwg_RedrawWindow(o:handle, RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW + RDW_INVALIDATE) // Force a complete redraw
    RETURN NIL
 
-METHOD ChangePage(oSayPage, n, nPage) CLASS hPrinter
+METHOD HPrinter:ChangePage(oSayPage, n, nPage)
 
    ::NeedsRedraw := .T.
    IF nPage == NIL
@@ -536,7 +536,7 @@ METHOD ChangePage(oSayPage, n, nPage) CLASS hPrinter
 /***
  nZoom: zoom factor: -1 or 1, NIL if scroll message
 */
-METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
+METHOD HPrinter:ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam)
    LOCAL nWidth, nHeight, k1, k2, x, y
    LOCAL i, nPos, wmsg, nPosVert, nPosHorz
 
@@ -694,7 +694,7 @@ METHOD ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam) CLASS hPrinter
 
    RETURN NIL
 
-METHOD PlayMeta(oWnd) CLASS HPrinter
+METHOD HPrinter:PlayMeta(oWnd)
    LOCAL pps, hDC
    LOCAL rect
    LOCAL aArray
@@ -783,7 +783,7 @@ METHOD PlayMeta(oWnd) CLASS HPrinter
 
    RETURN NIL
 
-METHOD PrintMeta(nPage) CLASS HPrinter
+METHOD HPrinter:PrintMeta(nPage)
 
    IF ::lPreview
 

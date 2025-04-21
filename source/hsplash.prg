@@ -18,11 +18,11 @@ CLASS HSplash
 
    METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CONSTRUCTOR
    METHOD CountSeconds(oTime, oDlg)
-   METHOD Release() INLINE ::oDlg:Close()   
+   METHOD Release() INLINE ::oDlg:Close()
 
 ENDCLASS
 
-METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CLASS HSplash
+METHOD HSplash:Create(cFile, oTime, oResource, nWidth, nHeight, nStyle)
    LOCAL aWidth, aHeigth
    LOCAL bitmap
 
@@ -41,7 +41,7 @@ METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CLASS HSplash
       INIT DIALOG ::oDlg TITLE "" ;
         At 0, 0 SIZE aWidth, aHeigth  STYLE WS_POPUP + DS_CENTER + WS_VISIBLE + WS_DLGFRAME ;
         BACKGROUND bitmap bitmap ON INIT {||::CountSeconds(oTime, ::oDlg)}
-      //oDlg:lBmpCenter := .T.        
+      //oDlg:lBmpCenter := .T.
    ELSE
       INIT DIALOG ::oDlg TITLE "" ;
         At 0, 0 SIZE aWidth, aHeigth  STYLE WS_POPUP + DS_CENTER + WS_VISIBLE + WS_DLGFRAME ;
@@ -54,7 +54,7 @@ METHOD Create(cFile, oTime, oResource, nWidth, nHeight, nStyle) CLASS HSplash
 
    RETURN Self
 
-METHOD CountSeconds(oTime, oDlg)
+METHOD HSplash:CountSeconds(oTime, oDlg)
 
    SET TIMER ::oTimer OF oDlg VALUE oTime  ACTION {||EndDialog(hwg_GetModalHandle())}
 

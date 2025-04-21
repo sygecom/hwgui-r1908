@@ -48,8 +48,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, ;
-   bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus) CLASS HCheckButton
+METHOD HCheckButton:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, ;
+   bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_NOTIFY + BS_PUSHBUTTON + BS_AUTOCHECKBOX + WS_TABSTOP)
 
@@ -81,7 +81,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HCheckButton
+METHOD HCheckButton:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -92,8 +92,8 @@ METHOD Activate() CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, ;
-   bGFocus, lEnter) CLASS HCheckButton
+METHOD HCheckButton:Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, ;
+   bGFocus, lEnter)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor)
 
@@ -113,7 +113,7 @@ METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bCl
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HCheckButton
+METHOD HCheckButton:Init()
 
    IF !::lInit
       ::nHolder := 1
@@ -130,7 +130,7 @@ METHOD Init() CLASS HCheckButton
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
+METHOD HCheckButton:onEvent(msg, wParam, lParam)
 
    LOCAL oCtrl
 
@@ -177,7 +177,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
    ENDIF
    RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
+METHOD HCheckButton:onEvent(msg, wParam, lParam)
 
    LOCAL oCtrl
 
@@ -240,7 +240,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetValue(lValue) CLASS HCheckButton
+METHOD HCheckButton:SetValue(lValue)
 
    hwg_SendMessage(::handle, BM_SETCHECK, IIf(Empty(lValue), 0, 1), 0)
    ::lValue := IIf(lValue == NIL .OR. !hb_IsLogical(lValue), .F., lValue)
@@ -253,7 +253,7 @@ METHOD SetValue(lValue) CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Value(lValue) CLASS HCheckButton
+METHOD HCheckButton:Value(lValue)
 
    IF lValue != NIL
       ::SetValue(lValue)
@@ -263,7 +263,7 @@ METHOD Value(lValue) CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS HCheckButton
+METHOD HCheckButton:Refresh()
 
    LOCAL var
 
@@ -281,7 +281,7 @@ METHOD Refresh() CLASS HCheckButton
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0
-METHOD Disable() CLASS HCheckButton
+METHOD HCheckButton:Disable()
 
    ::Super:Disable()
    hwg_SendMessage(::handle, BM_SETCHECK, BST_INDETERMINATE, 0)
@@ -292,7 +292,7 @@ METHOD Disable() CLASS HCheckButton
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0
-METHOD Enable() CLASS HCheckButton
+METHOD HCheckButton:Enable()
 
    ::Super:Enable()
    hwg_SendMessage(::handle, BM_SETCHECK, IIf(::lValue, 1, 0), 0)
@@ -302,19 +302,19 @@ METHOD Enable() CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onGotFocus() CLASS HCheckButton
+METHOD HCheckButton:onGotFocus()
 
    RETURN ::When()
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onClick() CLASS HCheckButton
+METHOD HCheckButton:onClick()
 
    RETURN ::Valid()
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD killFocus() CLASS HCheckButton
+METHOD HCheckButton:killFocus()
 
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
@@ -347,7 +347,7 @@ METHOD killFocus() CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD When() CLASS HCheckButton
+METHOD HCheckButton:When()
 
    LOCAL res := .T.
    LOCAL nSkip
@@ -378,7 +378,7 @@ METHOD When() CLASS HCheckButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Valid() CLASS HCheckButton
+METHOD HCheckButton:Valid()
 
    LOCAL l := hwg_SendMessage(::handle, BM_GETCHECK, 0, 0)
 

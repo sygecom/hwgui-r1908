@@ -32,7 +32,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddResource(name, nWidth, nHeight, nFlags, lOEM) CLASS HIcon
+METHOD HIcon:AddResource(name, nWidth, nHeight, nFlags, lOEM)
 
    LOCAL lPreDefined := .F.
    LOCAL item
@@ -77,7 +77,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddFile(name, nWidth, nHeight) CLASS HIcon
+METHOD HIcon:AddFile(name, nWidth, nHeight)
 
    LOCAL item
    LOCAL aIconSize
@@ -118,7 +118,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HIcon
+METHOD HIcon:Release()
 
    LOCAL item
    LOCAL nlen := Len(::aIcons)

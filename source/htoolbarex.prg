@@ -26,7 +26,7 @@ END CLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD init() CLASS HToolBarEx
+METHOD HToolBarEx:init()
 
    ::Super:init()
    hwg_SetWindowObject(::handle, Self)
@@ -38,7 +38,7 @@ RETURN Self
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0
-METHOD onEvent(msg, w, l) CLASS HToolBarEx
+METHOD HToolBarEx:onEvent(msg, w, l)
 
    LOCAL nId
    LOCAL nPos
@@ -55,7 +55,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD ExecuteTool(nid) CLASS HToolBarEx
+METHOD HToolBarEx:ExecuteTool(nid)
 
    IF nid > 0
       hwg_SendMessage(::oParent:handle, WM_COMMAND, hwg_MAKEWPARAM(nid, BN_CLICKED), ::handle)

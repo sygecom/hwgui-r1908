@@ -48,7 +48,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oParent, cName, nBitIp, nId, bState, bStyle, cText, bClick, ctip, aMenu) CLASS HToolButton
+METHOD HToolButton:New(oParent, cName, nBitIp, nId, bState, bStyle, cText, bClick, ctip, aMenu)
 
    ::Name := cName
    ::iD := nId
@@ -69,7 +69,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Caption(cText) CLASS HToolButton
+METHOD HToolButton:Caption(cText)
 
    IF cText != NIL
       ::Title := cText
@@ -80,7 +80,7 @@ RETURN ::Title
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onClick() CLASS HToolButton
+METHOD HToolButton:onClick()
 
    IF hb_IsBlock(::bClick)
       Eval(::bClick, self, ::id)
@@ -90,7 +90,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Enabled(lEnabled) CLASS HToolButton
+METHOD HToolButton:Enabled(lEnabled)
 
    IF lEnabled != NIL
       IF lEnabled
@@ -105,7 +105,7 @@ RETURN ::lEnabled
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Pressed(lPressed) CLASS HToolButton
+METHOD HToolButton:Pressed(lPressed)
 
    LOCAL nState
 
@@ -121,7 +121,7 @@ RETURN ::lPressed
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Checked(lcheck) CLASS HToolButton
+METHOD HToolButton:Checked(lcheck)
 
    LOCAL nState
 

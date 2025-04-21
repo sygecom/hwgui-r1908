@@ -38,7 +38,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight) CLASS HStatus
+METHOD HStatus:New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight)
 
    bSize := IIf(bSize != NIL, bSize, {|o, x, y|o:Move(0, y - ::nStatusHeight, x, ::nStatusHeight)})
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_OVERLAPPED + WS_CLIPSIBLINGS)
@@ -56,7 +56,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HStatus
+METHOD HStatus:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatusWindow(::oParent:handle, ::id)
@@ -74,7 +74,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HStatus
+METHOD HStatus:Init()
 
    IF !::lInit
       IF !Empty(::aParts)
@@ -87,8 +87,8 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, ;
-   aParts) CLASS hStatus
+METHOD HStatus:Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, ;
+   aParts)
 
    HB_SYMBOL_UNUSED(cCaption)
    HB_SYMBOL_UNUSED(lTransp)
@@ -102,7 +102,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Notify(lParam) CLASS HStatus
+METHOD HStatus:Notify(lParam)
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nParts := hwg_GetNotifySBParts(lParam) - 1
@@ -128,7 +128,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD StatusHeight(nHeight) CLASS HStatus
+METHOD HStatus:StatusHeight(nHeight)
 
    LOCAL aCoors
 
@@ -152,7 +152,7 @@ RETURN ::nStatusHeight
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetTextPanel(nPart) CLASS HStatus
+METHOD HStatus:GetTextPanel(nPart)
 
    LOCAL ntxtLen
    LOCAL cText := ""
@@ -165,7 +165,7 @@ RETURN cText
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetTextPanel(nPart, cText, lRedraw) CLASS HStatus
+METHOD HStatus:SetTextPanel(nPart, cText, lRedraw)
 
    //hwg_WriteStatusWindow(::handle, nPart - 1, cText)
    hwg_SendMessage(::handle, SB_SETTEXT, nPart - 1, cText)
@@ -177,7 +177,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetIconPanel(nPart, cIcon, nWidth, nHeight) CLASS HStatus
+METHOD HStatus:SetIconPanel(nPart, cIcon, nWidth, nHeight)
 
    LOCAL oIcon
 
@@ -198,7 +198,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Resize(xIncrSize) CLASS HStatus
+METHOD HStatus:Resize(xIncrSize)
 
    LOCAL i
 

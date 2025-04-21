@@ -37,8 +37,8 @@ CLASS VAR winclass   INIT "STATIC"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-            bSize, ctooltip, tcolor, bcolor) CLASS HGraph
+METHOD HGraph:New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+            bSize, ctooltip, tcolor, bcolor)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
               bSize, {|o, lpdis|o:Paint(lpdis)}, ctooltip, ;
@@ -52,8 +52,8 @@ METHOD New(oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 
    RETURN Self
 
-METHOD Redefine(oWndParent, nId, aValues, oFont, ;
-                 bSize, ctooltip, tcolor, bcolor) CLASS HGraph
+METHOD HGraph:Redefine(oWndParent, nId, aValues, oFont, ;
+                 bSize, ctooltip, tcolor, bcolor)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
               bSize, {|o, lpdis|o:Paint(lpdis)}, ctooltip, ;
@@ -63,7 +63,7 @@ METHOD Redefine(oWndParent, nId, aValues, oFont, ;
 
    RETURN Self
 
-METHOD Activate() CLASS HGraph
+METHOD HGraph:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -71,14 +71,14 @@ METHOD Activate() CLASS HGraph
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HGraph
+METHOD HGraph:Init()
    IF !::lInit
       ::Super:Init()
       ::CalcMinMax()
    ENDIF
    RETURN NIL
 
-METHOD CalcMinMax() CLASS HGraph
+METHOD HGraph:CalcMinMax()
    LOCAL i, j, nLen
    ::xmax := ::xmin := ::ymax := ::ymin := 0
    IF ::ymaxSet != NIL .AND. ::ymaxSet != 0
@@ -108,7 +108,7 @@ METHOD CalcMinMax() CLASS HGraph
 
    RETURN NIL
 
-METHOD Paint(lpdis) CLASS HGraph
+METHOD HGraph:Paint(lpdis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]
@@ -190,7 +190,7 @@ METHOD Paint(lpdis) CLASS HGraph
 
    RETURN NIL
 
-METHOD Rebuild(aValues, nType) CLASS HGraph
+METHOD HGraph:Rebuild(aValues, nType)
 
    ::aValues := aValues
    IF nType != NIL

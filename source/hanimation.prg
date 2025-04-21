@@ -36,8 +36,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cFilename, lAutoPlay, lCenter, lTransparent, ;
-   xResID) CLASS HAnimation
+METHOD HAnimation:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cFilename, lAutoPlay, lCenter, lTransparent, ;
+   xResID)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE)
    nStyle := nStyle + IIf(lAutoPlay == NIL .OR. lAutoPlay, ACS_AUTOPLAY, 0)
@@ -55,7 +55,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HAnimation
+METHOD HAnimation:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_Animate_Create(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -66,7 +66,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HAnimation
+METHOD HAnimation:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -81,7 +81,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Open(cFileName) CLASS HAnimation
+METHOD HAnimation:Open(cFileName)
 
    IF cFileName != NIL
       ::cFileName := cFileName
@@ -92,7 +92,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Play(nFrom, nTo, nRep) CLASS HAnimation
+METHOD HAnimation:Play(nFrom, nTo, nRep)
 
    nFrom := IIf(nFrom == NIL, 0, nFrom)
    nTo := IIf(nTo == NIL, -1, nTo)
@@ -103,7 +103,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Seek(nFrame) CLASS HAnimation
+METHOD HAnimation:Seek(nFrame)
 
    nFrame := IIf(nFrame == NIL, 0, nFrame)
    hwg_Animate_Seek(::handle, nFrame)
@@ -112,7 +112,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Stop() CLASS HAnimation
+METHOD HAnimation:Stop()
 
    hwg_Animate_Stop(::handle)
 
@@ -120,7 +120,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Close() CLASS HAnimation
+METHOD HAnimation:Close()
 
    hwg_Animate_Close(::handle)
 
@@ -128,7 +128,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Destroy() CLASS HAnimation
+METHOD HAnimation:Destroy()
 
    hwg_Animate_Destroy(::handle)
 

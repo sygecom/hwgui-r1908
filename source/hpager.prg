@@ -51,8 +51,8 @@ CLASS HPager INHERIT HControl
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-            bSize, bPaint, ctooltip, tcolor, bcolor, lvert) CLASS HPager
+METHOD HPager:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+            bSize, bPaint, ctooltip, tcolor, bcolor, lvert)
 
    HB_SYMBOL_UNUSED(cCaption)
 
@@ -71,8 +71,8 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lVert) CLASS HPager
+METHOD HPager:Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
+                 bSize, bPaint, ctooltip, tcolor, bcolor, lVert)
 
    HB_SYMBOL_UNUSED(cCaption)
 
@@ -86,7 +86,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
    RETURN Self
 
 
-METHOD Activate() CLASS HPager
+METHOD HPager:Activate()
 
    IF !Empty(::oParent:handle)
 
@@ -97,14 +97,14 @@ METHOD Activate() CLASS HPager
    ENDIF
    RETURN NIL
 
-METHOD INIT() CLASS HPager
+METHOD HPager:INIT()
 
    IF !::lInit
       ::Super:Init()
    ENDIF
    RETURN NIL
 
-METHOD Notify(lParam) CLASS HPager
+METHOD HPager:Notify(lParam)
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
 

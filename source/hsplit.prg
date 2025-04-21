@@ -38,8 +38,8 @@ CLASS HSplitter INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-            bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling) CLASS HSplitter
+METHOD HSplitter:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+            bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling)
                                                          //+  WS_CLIPCHILDREN
    ::Super:New(oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight,,, ;
               bSize, bDraw,, color, bcolor)
@@ -58,7 +58,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
 
 RETURN Self
 
-METHOD Activate() CLASS HSplitter
+METHOD HSplitter:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
@@ -67,7 +67,7 @@ METHOD Activate() CLASS HSplitter
 
 RETURN NIL
 
-METHOD Init() CLASS HSplitter
+METHOD HSplitter:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -79,7 +79,7 @@ METHOD Init() CLASS HSplitter
 RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
+METHOD HSplitter:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
 
@@ -117,7 +117,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 
    RETURN - 1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
+METHOD HSplitter:onEvent(msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(wParam)
 
@@ -168,7 +168,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HSplitter
 RETURN -1
 #endif
 
-METHOD Paint() CLASS HSplitter
+METHOD HSplitter:Paint()
 
    LOCAL pps
    LOCAL hDC
@@ -207,7 +207,7 @@ METHOD Paint() CLASS HSplitter
 
 RETURN NIL
 
-METHOD Drag(lParam) CLASS HSplitter
+METHOD HSplitter:Drag(lParam)
 
    LOCAL xPos := hwg_LOWORD(lParam)
    LOCAL yPos := hwg_HIWORD(lParam)
@@ -231,7 +231,7 @@ METHOD Drag(lParam) CLASS HSplitter
 
 RETURN NIL
 
-METHOD DragAll(lScroll) CLASS HSplitter
+METHOD HSplitter:DragAll(lScroll)
 
    LOCAL i
    LOCAL oCtrl

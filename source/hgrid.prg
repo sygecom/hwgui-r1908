@@ -63,8 +63,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoScroll, ;
-           lNoBord, bKeyDown, bPosChg, bDispInfo, nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit) CLASS HGrid
+METHOD HGrid:New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoScroll, ;
+           lNoBord, bKeyDown, bPosChg, bDispInfo, nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit)
 
    DEFAULT aBit TO {}
 
@@ -96,7 +96,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HGrid
+METHOD HGrid:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_ListView_Create(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ;
@@ -108,7 +108,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HGrid
+METHOD HGrid:Init()
 
    LOCAL i
    LOCAL nPos
@@ -172,7 +172,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS HGrid
+METHOD HGrid:Refresh()
 
    LOCAL iFirst
    LOCAL iLast
@@ -185,7 +185,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Notify(lParam) CLASS HGrid
+METHOD HGrid:Notify(lParam)
 RETURN hwg_ListViewNotify(Self, lParam)
 
 //-------------------------------------------------------------------------------------------------------------------//

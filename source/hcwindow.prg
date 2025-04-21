@@ -137,7 +137,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddEvent(nEvent, oCtrl, bAction, lNotify, cMethName) CLASS HCustomWindow
+METHOD HCustomWindow:AddEvent(nEvent, oCtrl, bAction, lNotify, cMethName)
 
    AAdd(IIf(lNotify == NIL .OR. !lNotify, ::aEvents, ::aNotify), ;
       {nEvent, IIf(hb_IsNumeric(oCtrl), oCtrl, oCtrl:id), bAction})
@@ -151,7 +151,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FindControl(nId, nHandle) CLASS HCustomWindow
+METHOD HCustomWindow:FindControl(nId, nHandle)
 
    LOCAL bSearch := IIf(nId != NIL, {|o|o:id == nId}, {|o|hwg_PtrToUlong(o:handle) == hwg_PtrToUlong(nHandle)})
    LOCAL i := Len(::aControls)
@@ -172,7 +172,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DelControl(oCtrl) CLASS HCustomWindow
+METHOD HCustomWindow:DelControl(oCtrl)
 
    LOCAL h := oCtrl:handle
    LOCAL id := oCtrl:id
@@ -212,7 +212,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Move(x1, y1, width, height, nRePaint) CLASS HCustomWindow
+METHOD HCustomWindow:Move(x1, y1, width, height, nRePaint)
 
    LOCAL rect
    LOCAL nHx := 0
@@ -255,7 +255,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
+METHOD HCustomWindow:onEvent(msg, wParam, lParam)
 
    LOCAL i
 
@@ -285,7 +285,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HCustomWindow
+METHOD HCustomWindow:onEvent(msg, wParam, lParam)
 
    // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
    //    IIf(lParam != NIL, Str(lParam), "NIL"))
@@ -347,7 +347,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD END() CLASS HCustomWindow
+METHOD HCustomWindow:END()
 
    LOCAL aControls
    LOCAL i
@@ -368,7 +368,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetParentForm(oCtrl) CLASS HCustomWindow
+METHOD HCustomWindow:GetParentForm(oCtrl)
 
    LOCAL oForm := IIf(Empty(oCtrl), Self, oCtrl)
 
@@ -380,7 +380,7 @@ RETURN IIf(hb_IsObject(oForm), oForm, ::oParent)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD RefreshCtrl(oCtrl, nSeek) CLASS HCustomWindow
+METHOD HCustomWindow:RefreshCtrl(oCtrl, nSeek)
 
    LOCAL nPos
    LOCAL n
@@ -403,7 +403,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetFocusCtrl(oCtrl) CLASS HCustomWindow
+METHOD HCustomWindow:SetFocusCtrl(oCtrl)
 
    LOCAL nPos
 
@@ -417,7 +417,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh(lAll, oCtrl) CLASS HCustomWindow
+METHOD HCustomWindow:Refresh(lAll, oCtrl)
 
    LOCAL nlen
    LOCAL i
@@ -458,7 +458,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetTextClass(x) CLASS HCustomWindow
+METHOD HCustomWindow:SetTextClass(x)
 
    IF __ObjHasMsg(Self, "SETVALUE") .AND. ::winClass != "STATIC" .AND. ::winclass != "BUTTON"
    ELSEIF __ObjHasMsg(Self, "SETTEXT") //.AND. ::classname != "HBUTTONEX"
@@ -473,7 +473,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetColor(tcolor, bColor, lRepaint) CLASS HCustomWindow
+METHOD HCustomWindow:SetColor(tcolor, bColor, lRepaint)
 
    IF tcolor != NIL
       ::tcolor := tcolor
@@ -498,7 +498,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Anchor(oCtrl, x, y, w, h) CLASS HCustomWindow
+METHOD HCustomWindow:Anchor(oCtrl, x, y, w, h)
 
    LOCAL nlen
    LOCAL i
@@ -527,7 +527,7 @@ RETURN .T.
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
+METHOD HCustomWindow:ScrollHV(oForm, msg, wParam, lParam)
 
    LOCAL nDelta
    LOCAL nSBCode
@@ -655,7 +655,7 @@ METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
    ENDIF
    RETURN NIL
 #else
-METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
+METHOD HCustomWindow:ScrollHV(oForm, msg, wParam, lParam)
 
    LOCAL nDelta
    LOCAL nSBCode
@@ -757,7 +757,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD RedefineScrollbars() CLASS HCustomWindow
+METHOD HCustomWindow:RedefineScrollbars()
 
    ::rect := hwg_GetClientRect(::handle)
    IF ::nScrollBars > -1 .AND. ::bScroll == NIL
@@ -777,7 +777,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetupScrollbars() CLASS HCustomWindow
+METHOD HCustomWindow:SetupScrollbars()
 
    LOCAL tempRect
    LOCAL nwMax
@@ -843,7 +843,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD ResetScrollbars() CLASS HCustomWindow
+METHOD HCustomWindow:ResetScrollbars()
    // Reset our window scrolling information
 
    LOCAL lMaximized := hwg_GetWindowPlacement(::handle) == SW_MAXIMIZE
@@ -870,7 +870,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 /*
-METHOD ScrollHV(oForm, msg, wParam, lParam) CLASS HCustomWindow
+METHOD HCustomWindow:ScrollHV(oForm, msg, wParam, lParam)
 
    LOCAL nDelta
    LOCAL nMaxPos
@@ -926,7 +926,7 @@ RETURN NIL
 */
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Closable(lClosable) CLASS HCustomWindow
+METHOD HCustomWindow:Closable(lClosable)
 
    LOCAL hMenu
 
@@ -945,7 +945,7 @@ RETURN ::lClosable
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetAll(cProperty, Value, aControls, cClass) CLASS HCustomWindow
+METHOD HCustomWindow:SetAll(cProperty, Value, aControls, cClass)
 // cProperty Specifies the property to be set.
 // Value Specifies the new setting for the property. The data type of Value depends on the property being set.
  //aControls - property of the Control with objectos inside

@@ -73,9 +73,9 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, bPaint, bClick, lflat, cText, color, ;
+METHOD HOwnButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, bSize, bPaint, bClick, lflat, cText, color, ;
    oFont, xt, yt, widtht, heightt, bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, cTooltip, lEnabled, lCheck, ;
-   bColor, bGfocus, bLfocus, themed) CLASS HOwnButton
+   bColor, bGfocus, bLfocus, themed)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, cTooltip)
 
@@ -132,7 +132,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HOwnButton
+METHOD HOwnButton:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateOwnBtn(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -148,7 +148,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
+METHOD HOwnButton:onEvent(msg, wParam, lParam)
 
    IF msg == WM_THEMECHANGED
       IF ::Themed
@@ -209,7 +209,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HOwnButton
+METHOD HOwnButton:onEvent(msg, wParam, lParam)
 
    SWITCH msg
 
@@ -299,7 +299,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HOwnButton
+METHOD HOwnButton:Init()
 
    IF !::lInit
       ::nHolder := 1
@@ -311,8 +311,8 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, cText, color, font, xt, yt, widtht, heightt, ;
-   bmp, lResour, xb, yb, widthb, heightb, lTr, cTooltip, lEnabled, lCheck) CLASS HOwnButton
+METHOD HOwnButton:Redefine(oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, cText, color, font, xt, yt, widtht, heightt, ;
+   bmp, lResour, xb, yb, widthb, heightb, lTr, cTooltip, lEnabled, lCheck)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0,, bInit, bSize, bPaint, cTooltip)
 
@@ -355,7 +355,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint() CLASS HOwnButton
+METHOD HOwnButton:Paint()
 
    LOCAL pps
    LOCAL hDC
@@ -453,7 +453,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DrawItems(hDC) CLASS HOwnButton
+METHOD HOwnButton:DrawItems(hDC)
 
    LOCAL x1
    LOCAL y1
@@ -512,7 +512,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MouseMove(wParam, lParam) CLASS HOwnButton
+METHOD HOwnButton:MouseMove(wParam, lParam)
 
    LOCAL xPos
    LOCAL yPos
@@ -546,7 +546,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MDown() CLASS HOwnButton
+METHOD HOwnButton:MDown()
 
    IF ::state != OBTN_PRESSED
       ::state := OBTN_PRESSED
@@ -565,7 +565,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MUp() CLASS HOwnButton
+METHOD HOwnButton:MUp()
 
    //IF ::state == OBTN_PRESSED
    IF !::lPress
@@ -590,7 +590,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS HOwnButton
+METHOD HOwnButton:Refresh()
 
    hwg_InvalidateRect(::handle, 0)
    hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW)
@@ -599,7 +599,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HOwnButton
+METHOD HOwnButton:Release()
 
    ::lPress := .F.
    ::state := OBTN_NORMAL
@@ -611,7 +611,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onGetFocus() CLASS HOwnButton
+METHOD HOwnButton:onGetFocus()
 
    LOCAL res := .T.
    LOCAL nSkip
@@ -633,7 +633,7 @@ RETURN res
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onLostFocus() CLASS HOwnButton
+METHOD HOwnButton:onLostFocus()
 
    IF ::bLostFocus != NIL .AND. !hwg_CheckFocus(Self, .T.)
       RETURN .T.
@@ -648,7 +648,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onClick() CLASS HOwnButton
+METHOD HOwnButton:onClick()
 
    IF hb_IsBlock(::bClick)
       //::oParent:lSuspendMsgsHandling := .T.
@@ -660,7 +660,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD END() CLASS HOwnButton
+METHOD HOwnButton:END()
 
    ::Super:END()
    ::oFont := NIL
@@ -674,7 +674,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Enable() CLASS HOwnButton
+METHOD HOwnButton:Enable()
 
    hwg_EnableWindow(::handle, .T.)
    ::lEnabled := .T.
@@ -686,7 +686,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Disable() CLASS HOwnButton
+METHOD HOwnButton:Disable()
 
    ::state := OBTN_INIT
    ::lEnabled := .F.

@@ -28,7 +28,7 @@ CLASS HRect INHERIT HControl
 ENDCLASS
 
 //----------------------------------------------------------------
-METHOD New(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle) CLASS HRect
+METHOD HRect:New(oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle)
    LOCAL nCor1, nCor2
 
    IF nStyle == NIL
@@ -75,7 +75,7 @@ ENDCLASS
 
 
 //---------------------------------------------------------------------------
-METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor) CLASS HRect_Line
+METHOD HRect_Line:New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop,,,,, bSize, {|o, lp|o:Paint(lp)})
 
@@ -96,7 +96,7 @@ METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor) CLASS HR
    RETURN Self
 
 //---------------------------------------------------------------------------
-METHOD Activate() CLASS HRect_Line
+METHOD HRect_Line:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -105,7 +105,7 @@ METHOD Activate() CLASS HRect_Line
    RETURN NIL
 
 //---------------------------------------------------------------------------
-METHOD Paint(lpdis) CLASS HRect_Line
+METHOD HRect_Line:Paint(lpdis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]
@@ -134,8 +134,8 @@ CLASS HShape INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
-            nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle) CLASS HShape
+METHOD HShape:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
+            nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle)
 
    nBorder := IIf(nBorder == NIL, 1, nBorder)
    nbStyle := IIf(nbStyle == NIL, PS_SOLID, nbStyle)
@@ -154,7 +154,7 @@ CLASS HLContainer INHERIT HControl
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit) CLASS HLContainer
+METHOD HLContainer:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit)
 
    nStyle := IIf(nStyle == NIL, 3, nStyle)  // FLAT
    lnoBorder := IIf(lnoBorder == NIL, .F., lnoBorder)  // FLAT
@@ -186,8 +186,8 @@ CLASS VAR winclass   INIT "STATIC"
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
-            lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle) CLASS HDrawShape
+METHOD HDrawShape:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
+            lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle)
 
    HB_SYMBOL_UNUSED(ncStyle)
 
@@ -218,7 +218,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor,
 
 //---------------------------------------------------------------------------
 
-METHOD Activate() CLASS HDrawShape
+METHOD HDrawShape:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -227,7 +227,7 @@ METHOD Activate() CLASS HDrawShape
    RETURN NIL
 
 
-METHOD SetColor(tcolor, bColor, lRedraw) CLASS HDrawShape
+METHOD HDrawShape:SetColor(tcolor, bColor, lRedraw)
 
    ::brushFill := HBrush():Add(tColor, ::nfstyle)
    ::Super:SetColor(tColor, bColor)
@@ -237,7 +237,7 @@ METHOD SetColor(tcolor, bColor, lRedraw) CLASS HDrawShape
    RETURN NIL
 
 
-METHOD Curvature(nCurvature) CLASS HDrawShape
+METHOD HDrawShape:Curvature(nCurvature)
 
    IF nCurvature != NIL
       ::nCurvature := nCurvature
@@ -247,7 +247,7 @@ METHOD Curvature(nCurvature) CLASS HDrawShape
    RETURN NIL
 
 //---------------------------------------------------------------------------
-METHOD Paint(lpdis) CLASS HDrawShape
+METHOD HDrawShape:Paint(lpdis)
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3], oldbkMode
    LOCAL  x1 := drawInfo[4], y1 := drawInfo[5]
@@ -333,8 +333,8 @@ CLASS HContainer INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize, ;
-            lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)
+METHOD HContainer:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize, ;
+            lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) //, bClick, bDblClick)
 
     ::lTABSTOP :=  nStyle == WS_TABSTOP
     ::bPaint   := {|o, p|o:paint(p)}
@@ -362,7 +362,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize
   RETURN Self
 
 //---------------------------------------------------------------------------
-METHOD Activate() CLASS HContainer
+METHOD HContainer:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ;
@@ -386,7 +386,7 @@ METHOD Activate() CLASS HContainer
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HContainer
+METHOD HContainer:Init()
 
    IF !::lInit
       ::Super:init()
@@ -399,7 +399,7 @@ METHOD Init() CLASS HContainer
    RETURN  NIL
 
 
-METHOD onEvent(msg, wParam, lParam) CLASS HContainer
+METHOD HContainer:onEvent(msg, wParam, lParam)
    Local nEval
 
    IF hb_IsBlock(::bOther)
@@ -429,7 +429,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HContainer
    ENDIF
    RETURN ::Super:onEvent(msg, wParam, lParam)
 
-METHOD Visible(lVisibled) CLASS HContainer
+METHOD HContainer:Visible(lVisibled)
 
     IF lVisibled != NIL
       IF lVisibled
@@ -443,7 +443,7 @@ METHOD Visible(lVisibled) CLASS HContainer
 
 
 //---------------------------------------------------------------------------
-METHOD Paint(lpdis) CLASS HContainer
+METHOD HContainer:Paint(lpdis)
    Local drawInfo, hDC
    Local x1, y1, x2, y2
 

@@ -32,8 +32,8 @@ CLASS VAR winclass   INIT "STATIC"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
-            bSize, ctooltip, bClick, bDblClick) CLASS HSayImage
+METHOD HSayImage:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
+            bSize, ctooltip, bClick, bDblClick)
 
    nStyle := hwg_BitOr(nStyle, IIf(hb_IsBlock(bClick) .OR. hb_IsBlock(bDblClick), SS_NOTIFY, 0))
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, ;
@@ -50,13 +50,13 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
 
    RETURN Self
 
-METHOD Redefine(oWndParent, nId, bInit, bSize, ctooltip) CLASS HSayImage
+METHOD HSayImage:Redefine(oWndParent, nId, bInit, bSize, ctooltip)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0,, bInit, bSize,, ctooltip)
 
    RETURN Self
 
-METHOD Activate() CLASS HSayImage
+METHOD HSayImage:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ;
@@ -65,7 +65,7 @@ METHOD Activate() CLASS HSayImage
    ENDIF
    RETURN NIL
 
-METHOD onClick() CLASS HSayImage
+METHOD HSayImage:onClick()
    IF hb_IsBlock(::bClick)
       ::oParent:lSuspendMsgsHandling := .T.
       Eval(::bClick, Self, ::id)
@@ -73,7 +73,7 @@ METHOD onClick() CLASS HSayImage
    ENDIF
    RETURN NIL
 
-METHOD onDblClick() CLASS HSayImage
+METHOD HSayImage:onDblClick()
    IF hb_IsBlock(::bDblClick)
       ::oParent:lSuspendMsgsHandling := .T.
       Eval(::bDblClick, Self, ::id)

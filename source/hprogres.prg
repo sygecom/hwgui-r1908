@@ -39,7 +39,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical) CLASS HProgressBar
+METHOD HProgressBar:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical)
 
    ::Style := IIf(lvertical != NIL .AND. lVertical, PBS_VERTICAL, 0)
     ::Style += IIf(nAnimation != NIL .AND. nAnimation > 0, PBS_MARQUEE, 0)
@@ -56,7 +56,7 @@ METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit,
 
    RETURN Self
 
-METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent) CLASS HProgressBar
+METHOD HProgressBar:NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent)
 
    // ::classname := "HPROGRESSBAR"
    ::style   := WS_CHILD + WS_VISIBLE
@@ -95,7 +95,7 @@ METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPerc
 
    RETURN Self
 
-METHOD Activate() CLASS HProgressBar
+METHOD HProgressBar:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateProgressBar(::oParent:handle, ::maxPos, ::style, ;
@@ -104,7 +104,7 @@ METHOD Activate() CLASS HProgressBar
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HProgressBar
+METHOD HProgressBar:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -115,7 +115,7 @@ METHOD Init() CLASS HProgressBar
 
   RETURN NIL
 
-METHOD STEP(cTitle)
+METHOD HProgressBar:STEP(cTitle)
 
    ::nCount++
    IF ::nCount == ::nLimit
@@ -131,7 +131,7 @@ METHOD STEP(cTitle)
 
    RETURN .F.
 
-METHOD SET(cTitle, nPos) CLASS HProgressBar
+METHOD HProgressBar:SET(cTitle, nPos)
 
    IF cTitle != NIL
       hwg_SetWindowText(::oParent:handle, cTitle)
@@ -142,7 +142,7 @@ METHOD SET(cTitle, nPos) CLASS HProgressBar
 
    RETURN NIL
 
-METHOD SetLabel(cCaption) CLASS HProgressBar
+METHOD HProgressBar:SetLabel(cCaption)
 
    IF cCaption != NIL .AND. ::lNewBox
       ::LabelBox:SetValue(cCaption)
@@ -150,7 +150,7 @@ METHOD SetLabel(cCaption) CLASS HProgressBar
 
    RETURN NIL
 
-METHOD SetAnimation(nAnimation) CLASS HProgressBar
+METHOD HProgressBar:SetAnimation(nAnimation)
 
    IF nAnimation != NIL
        IF nAnimation <= 0
@@ -167,7 +167,7 @@ METHOD SetAnimation(nAnimation) CLASS HProgressBar
    ENDIF
    RETURN IIf(::nAnimation != NIL, ::nAnimation, 0)
 
-METHOD Close()
+METHOD HProgressBar:Close()
 
    hwg_DestroyWindow(::handle)
    IF ::lNewBox

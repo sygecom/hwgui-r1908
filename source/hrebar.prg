@@ -41,8 +41,8 @@ CLASS hrebar INHERIT HControl
 ENDCLASS
 
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-            bSize, bPaint, ctooltip, tcolor, bcolor, lvert) CLASS hrebar
+METHOD HRebar:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+            bSize, bPaint, ctooltip, tcolor, bcolor, lvert)
 
    HB_SYMBOL_UNUSED(cCaption)
 
@@ -61,8 +61,8 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
 
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lVert) CLASS hrebar
+METHOD HRebar:Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
+                 bSize, bPaint, ctooltip, tcolor, bcolor, lVert)
 
    HB_SYMBOL_UNUSED(cCaption)
 
@@ -76,7 +76,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
    RETURN Self
 
 
-METHOD Activate() CLASS hrebar
+METHOD HRebar:Activate()
 
    IF !Empty(::oParent:handle)
 
@@ -87,7 +87,7 @@ METHOD Activate() CLASS hrebar
    ENDIF
    RETURN NIL
 
-METHOD INIT() CLASS hrebar
+METHOD HRebar:INIT()
 
    IF !::lInit
       ::Super:Init()
@@ -97,7 +97,7 @@ METHOD INIT() CLASS hrebar
    RETURN NIL
 
 
-METHOD CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) CLASS hrebar
+METHOD HRebar:CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle)
    LOCAL i
 
    IF pBar != NIL

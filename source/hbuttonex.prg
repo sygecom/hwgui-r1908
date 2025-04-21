@@ -94,9 +94,8 @@ END CLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
-   cTooltip, tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther) ;
-   CLASS HButtonEx
+METHOD HButtonEx:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
+   cTooltip, tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther)
 
    DEFAULT iStyle TO ST_ALIGN_HORIZ
    DEFAULT Transp TO .T.
@@ -130,8 +129,8 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, bColor, cCaption, hBitmap, ;
-   iStyle, hIcon, bGFocus, nPictureMargin) CLASS HButtonEx
+METHOD HButtonEx:Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, bColor, cCaption, hBitmap, ;
+   iStyle, hIcon, bGFocus, nPictureMargin)
 
    DEFAULT iStyle TO ST_ALIGN_HORIZ
    DEFAULT nPictureMargin TO 0
@@ -166,7 +165,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetBitmap(hBitMap) CLASS HButtonEX
+METHOD HButtonEx:SetBitmap(hBitMap)
 
    DEFAULT hBitmap TO ::hBitmap
 
@@ -180,7 +179,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetIcon(hIcon) CLASS HButtonEX
+METHOD HButtonEx:SetIcon(hIcon)
 
    DEFAULT hIcon TO ::hIcon
 
@@ -194,7 +193,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD END() CLASS HButtonEX
+METHOD HButtonEx:END()
 
    ::Super:END()
 
@@ -202,7 +201,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD INIT() CLASS HButtonEx
+METHOD HButtonEx:INIT()
 
    LOCAL nbs
 
@@ -250,7 +249,7 @@ RETURN NIL
 */
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
+METHOD HButtonEx:onEvent(msg, wParam, lParam)
 
    LOCAL pt := {,}
    LOCAL rectButton
@@ -448,7 +447,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HBUTTONEx
+METHOD HButtonEx:onEvent(msg, wParam, lParam)
 
    LOCAL pt := {,}
    LOCAL rectButton
@@ -670,7 +669,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD CancelHover() CLASS HBUTTONEx
+METHOD HButtonEx:CancelHover()
 
    IF ::bMouseOverButton .AND. ::id != IDOK //NANDO
       ::bMouseOverButton := .F.
@@ -685,7 +684,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetDefaultColor(tColor, bColor, lPaint) CLASS HBUTTONEx
+METHOD HButtonEx:SetDefaultColor(tColor, bColor, lPaint)
 
    DEFAULT lPaint TO .F.
 
@@ -721,7 +720,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetColorEx(nIndex, nColor, lPaint) CLASS HBUTTONEx
+METHOD HButtonEx:SetColorEx(nIndex, nColor, lPaint)
 
    DEFAULT lPaint TO .F.
 
@@ -739,7 +738,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint(lpDis) CLASS HBUTTONEx
+METHOD HButtonEx:Paint(lpDis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
@@ -1115,7 +1114,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD PAINTBK(hdc) CLASS HBUTTONEx
+METHOD HButtonEx:PAINTBK(hdc)
 
    LOCAL clDC := HclientDc():New(::oparent:handle)
    LOCAL rect

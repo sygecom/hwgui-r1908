@@ -31,7 +31,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder) CLASS HLine
+METHOD HLine:New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder)
 
    ::Super:New(oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, , , , bInit, bSize, {|o, lp|o:Paint(lp)}, , tcolor)
 
@@ -62,7 +62,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HLine
+METHOD HLine:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -73,7 +73,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint(lpdis) CLASS HLine
+METHOD HLine:Paint(lpdis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL hDC := drawInfo[3]

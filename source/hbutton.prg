@@ -38,8 +38,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
-   cTooltip, tcolor, bColor, bGFocus) CLASS HButton
+METHOD HButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
+   cTooltip, tcolor, bColor, bGFocus)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON + BS_NOTIFY)
 
@@ -76,7 +76,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HButton
+METHOD HButton:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -87,8 +87,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, bColor, cCaption, bGFocus) ;
-   CLASS HButton
+METHOD HButton:Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, bColor, cCaption, bGFocus)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor)
 
@@ -107,7 +106,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HButton
+METHOD HButton:Init()
 
    IF !::lInit
       IF !(::GetParentForm():classname == ::oParent:classname .AND. ::GetParentForm():Type >= WND_DLG_RESOURCE) .OR. ;
@@ -129,7 +128,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onevent(msg, wParam, lParam) CLASS HButton
+METHOD HButton:onevent(msg, wParam, lParam)
 
    IF msg == WM_SETFOCUS .AND. ::oParent:oParent == NIL
       //- hwg_SendMessage(::handle, BM_SETSTYLE, BS_PUSHBUTTON, 1)
@@ -172,7 +171,7 @@ METHOD onevent(msg, wParam, lParam) CLASS HButton
 
 RETURN -1
 #else
-METHOD onevent(msg, wParam, lParam) CLASS HButton
+METHOD HButton:onevent(msg, wParam, lParam)
 
    SWITCH msg
 
@@ -235,7 +234,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onClick() CLASS HButton
+METHOD HButton:onClick()
 
    IF hb_IsBlock(::bClick)
       //::oParent:lSuspendMsgsHandling := .T.
@@ -248,7 +247,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 /*
-METHOD Notify(lParam) CLASS HButton
+METHOD HButton:Notify(lParam)
 
    LOCAL ndown := hwg_GetKeyState(VK_RIGHT) + hwg_GetKeyState(VK_DOWN) + hwg_GetKeyState(VK_TAB)
    LOCAL nSkip := 0
@@ -278,7 +277,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD NoteCaption(cNote) CLASS HButton         //*
+METHOD HButton:NoteCaption(cNote)
 
 //#DEFINE BCM_SETNOTE  0x00001609
 
@@ -293,7 +292,7 @@ RETURN ::cNote
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onGetFocus() CLASS HButton
+METHOD HButton:onGetFocus()
 
    LOCAL res := .T.
    LOCAL nSkip
@@ -318,7 +317,7 @@ RETURN res
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onLostFocus() CLASS HButton
+METHOD HButton:onLostFocus()
 
    IF ::lflat
       hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)

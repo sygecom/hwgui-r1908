@@ -43,7 +43,7 @@ ENDCLASS
 
 //----------------------------------------------------------------------------//
 
-METHOD New(cDevice, cFileName) CLASS TMci
+METHOD TMci:New(cDevice, cFileName)
 
    DEFAULT cDevice TO ""
 
@@ -57,7 +57,7 @@ METHOD New(cDevice, cFileName) CLASS TMci
 
 //----------------------------------------------------------------------------//
 
-METHOD SendStr(cMciStr) CLASS TMci
+METHOD TMci:SendStr(cMciStr)
 
    LOCAL cBuffer := ::cBuffer
 
@@ -67,13 +67,13 @@ METHOD SendStr(cMciStr) CLASS TMci
    RETURN NIL
 
 //----------------------------------------------------------------------------//
-METHOD lOpen() CLASS TMci
+METHOD TMci:lOpen()
    LOCAL nId
    ::nError := hwg_nMciOpen(::cType, ::cFileName, @nId)
    ::nId := nId
    RETURN ::nError == 0
 
-METHOD cGetError() CLASS Tmci
+METHOD TMci:cGetError()
    LOCAL cError
    hwg_mciGetErrorString(::nError, @cError)
    RETURN    cError

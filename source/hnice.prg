@@ -53,9 +53,9 @@ CLASS HNiceButton INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
+METHOD HNiceButton:New(oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
             bInit, bClick, ;
-            cText, cTooltip, r, g, b) CLASS HNiceButton
+            cText, cTooltip, r, g, b)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,, bInit, ;
               ,, cTooltip)
    DEFAULT g TO ::g
@@ -82,9 +82,9 @@ METHOD New(oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
    RETURN Self
 
 
-METHOD Redefine(oWndParent, nId, nStyleEx, ;
+METHOD HNiceButton:Redefine(oWndParent, nId, nStyleEx, ;
                  bInit, bClick, ;
-                 cText, cTooltip, r, g, b) CLASS HNiceButton
+                 cText, cTooltip, r, g, b)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0,, bInit,,, cTooltip)
 
@@ -106,7 +106,7 @@ METHOD Redefine(oWndParent, nId, nStyleEx, ;
 
    RETURN Self
 
-METHOD Activate() CLASS HNiceButton
+METHOD HNiceButton:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateNiceBtn(::oParent:handle, ::id, ;
@@ -115,7 +115,7 @@ METHOD Activate() CLASS HNiceButton
    ENDIF
    RETURN NIL
 
-METHOD INIT() CLASS HNiceButton
+METHOD HNiceButton:INIT()
 
    IF !::lInit
       ::Super:Init()
@@ -213,7 +213,7 @@ FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 RETURN .F.
 #endif
 
-METHOD Create() CLASS HNICEButton
+METHOD HNiceButton:Create()
 
    LOCAL Region
    LOCAL Rct
@@ -229,21 +229,21 @@ METHOD Create() CLASS HNICEButton
 
    RETURN Self
 
-METHOD Size() CLASS HNICEButton
+METHOD HNiceButton:Size()
 
    ::State := OBTN_NORMAL
    hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
 
-METHOD Moving() CLASS HNICEButton
+METHOD HNiceButton:Moving()
 
    ::State := .F.
    hwg_InvalidateRect(::handle, 0, 0)
 
    RETURN Self
 
-METHOD MouseMove(wParam, lParam) CLASS HNICEButton
+METHOD HNiceButton:MouseMove(wParam, lParam)
 
    LOCAL otmp
 
@@ -272,7 +272,7 @@ METHOD MouseMove(wParam, lParam) CLASS HNICEButton
 
    RETURN Self
 
-METHOD MUp() CLASS HNICEButton
+METHOD HNiceButton:MUp()
 
    IF ::state == OBTN_PRESSED
       IF !::lPress
@@ -290,7 +290,7 @@ METHOD MUp() CLASS HNICEButton
 
    RETURN Self
 
-METHOD MDown() CLASS HNICEButton
+METHOD HNiceButton:MDown()
 
    IF ::state != OBTN_PRESSED
       ::state := OBTN_PRESSED
@@ -302,7 +302,7 @@ METHOD MDown() CLASS HNICEButton
 
    RETURN Self
 
-METHOD PAINT() CLASS HNICEButton
+METHOD HNiceButton:PAINT()
 
    LOCAL ps        := hwg_DefinePaintStru()
    LOCAL hDC       := hwg_BeginPaint(::handle, ps)
@@ -350,11 +350,11 @@ METHOD PAINT() CLASS HNICEButton
 
    RETURN Self
 
-METHOD END () CLASS HNiceButton
+METHOD HNiceButton:END()
 
    RETURN NIL
 
-METHOD RELEASE() CLASS HNiceButton
+METHOD HNiceButton:RELEASE()
 
    ::lPress := .F.
    ::state  := OBTN_NORMAL

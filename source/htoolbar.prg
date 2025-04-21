@@ -70,8 +70,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, btnWidth, oFont, bInit, bSize, bPaint, ctooltip, ;
-   tcolor, bcolor, lTransp, lVertical, aItem, nWSize, nHSize, nIndent, nIDB) CLASS hToolBar
+METHOD HToolBar:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, btnWidth, oFont, bInit, bSize, bPaint, ctooltip, ;
+   tcolor, bcolor, lTransp, lVertical, aItem, nWSize, nHSize, nIndent, nIDB)
 
    //HB_SYMBOL_UNUSED(cCaption)
    //HB_SYMBOL_UNUSED(lTransp)
@@ -131,8 +131,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem) ;
-   CLASS hToolBar
+METHOD HToolBar:Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
 
    HB_SYMBOL_UNUSED(cCaption)
    HB_SYMBOL_UNUSED(lTransp)
@@ -154,7 +153,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS hToolBar
+METHOD HToolBar:Activate()
 
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
@@ -166,7 +165,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD INIT() CLASS hToolBar
+METHOD HToolBar:INIT()
 
    IF !::lInit
       IF ::Line != NIL
@@ -180,7 +179,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD CREATETOOL() CLASS hToolBar
+METHOD HToolBar:CREATETOOL()
 
    LOCAL n
    LOCAL n1
@@ -362,7 +361,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD Notify(lParam) CLASS hToolBar
+METHOD HToolBar:Notify(lParam)
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nId
@@ -404,7 +403,7 @@ METHOD Notify(lParam) CLASS hToolBar
 
 RETURN 0
 #else
-METHOD Notify(lParam) CLASS hToolBar
+METHOD HToolBar:Notify(lParam)
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL nId
@@ -450,7 +449,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex) CLASS hToolBar
+METHOD HToolBar:AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex)
 
    LOCAL hMenu := NIL // NOTE: to avoid 'Warning W0033  Variable 'HMENU' is never assigned in function...'
    LOCAL oButton
@@ -489,7 +488,7 @@ RETURN oButton
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD RESIZE(xIncrSize, lWidth, lHeight) CLASS hToolBar
+METHOD HToolBar:RESIZE(xIncrSize, lWidth, lHeight)
 
    LOCAL nSize
 

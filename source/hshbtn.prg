@@ -33,12 +33,12 @@ CLASS HShadeButton INHERIT HOwnButton
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HShadeButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
             bInit, bSize, bPaint, bClick, lFlat, ;
             cText, color, font, xt, yt, ;
             bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
             cTooltip, lEnabled, shadeID, palette, ;
-            granularity, highlight, coloring, shcolor) CLASS HShadeButton
+            granularity, highlight, coloring, shcolor)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
               bInit, bSize, bPaint, bClick, lFlat, ;
@@ -50,7 +50,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    hwg_Shade_Set(::hShade, shadeID, palette, granularity, highlight, coloring, shcolor)
    RETURN Self
 
-METHOD Paint() CLASS HShadeButton
+METHOD HShadeButton:Paint()
    LOCAL pps, hDC
    LOCAL nState
 
@@ -76,7 +76,7 @@ METHOD Paint() CLASS HShadeButton
    hwg_EndPaint(::handle, pps)
    RETURN NIL
 
-METHOD END() CLASS HShadeButton
+METHOD HShadeButton:END()
 
    ::Super:END()
    hwg_Shade_Release(::hShade)

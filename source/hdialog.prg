@@ -112,8 +112,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
-   lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable) CLASS HDialog
+METHOD HDialog:NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
+   lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable)
 
    ::oDefaultParent := Self
    ::xResourceID := xResourceID
@@ -156,7 +156,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate(lNoModal, bOnActivate, nShow) CLASS HDialog
+METHOD HDialog:Activate(lNoModal, bOnActivate, nShow)
 
    LOCAL oWnd
    LOCAL hParent
@@ -236,7 +236,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HDialog
+METHOD HDialog:onEvent(msg, wParam, lParam)
 
    LOCAL i
    LOCAL oTab
@@ -299,7 +299,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HDialog
 
 RETURN 0
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HDialog
+METHOD HDialog:onEvent(msg, wParam, lParam)
 
    LOCAL oTab
    LOCAL nPos
@@ -463,7 +463,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Del() CLASS HDialog
+METHOD HDialog:Del()
 
    LOCAL i
 
@@ -483,7 +483,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FindDialog(hWndTitle, lAll) CLASS HDialog
+METHOD HDialog:FindDialog(hWndTitle, lAll)
    
    LOCAL cType := ValType(hWndTitle)
    LOCAL i
@@ -506,7 +506,7 @@ RETURN IIf(i == 0, NIL, ::aDialogs[i])
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetActive() CLASS HDialog
+METHOD HDialog:GetActive()
 
    LOCAL handle := hwg_GetFocus()
    LOCAL i := AScan(::Getlist, {|o|o:handle == handle})

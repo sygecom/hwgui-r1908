@@ -35,7 +35,7 @@ CLASS HTreeNode INHERIT HObject
 
 ENDCLASS
 
-METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick) CLASS HTreeNode
+METHOD HTreeNode:New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick)
 
    LOCAL aItems
    LOCAL i
@@ -122,14 +122,14 @@ METHOD New(oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bCl
 
    RETURN Self
 
-METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages) CLASS HTreeNode
+METHOD HTreeNode:AddNode(cTitle, oPrev, oNext, bAction, aImages)
    
    LOCAL oParent := Self
    LOCAL oNode := HTreeNode():New(::oTree, oParent, oPrev, oNext, cTitle, bAction, aImages)
 
    RETURN oNode
 
-METHOD Delete(lInternal) CLASS HTreeNode
+METHOD HTreeNode:Delete(lInternal)
    
    LOCAL h := ::handle
    LOCAL j
@@ -155,7 +155,7 @@ METHOD Delete(lInternal) CLASS HTreeNode
 
    RETURN NIL
 
-METHOD FindChild(h) CLASS HTreeNode
+METHOD HTreeNode:FindChild(h)
    
    LOCAL aItems := ::aItems
    LOCAL i
@@ -173,7 +173,7 @@ METHOD FindChild(h) CLASS HTreeNode
    NEXT
    RETURN NIL
 
-METHOD Checked(lChecked) CLASS HTreeNode
+METHOD HTreeNode:Checked(lChecked)
    
    LOCAL state
 
@@ -186,7 +186,7 @@ METHOD Checked(lChecked) CLASS HTreeNode
    ENDIF
    RETURN ::lChecked
 
-METHOD GetLevel(h) CLASS HTreeNode
+METHOD HTreeNode:GetLevel(h)
    
    LOCAL iLevel := 1
    LOCAL oNode := IIf(Empty(h), Self, h)
@@ -239,9 +239,9 @@ CLASS VAR winclass   INIT "SysTreeView32"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
-            aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lcheckbox, bCheck, lDragDrop, bDrag, bDrop, bOther) CLASS HTree
-   
+METHOD HTree:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
+            aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lcheckbox, bCheck, lDragDrop, bDrag, bDrop, bOther)
+
    LOCAL i
    LOCAL aBmpSize
 
@@ -291,7 +291,7 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, 
 
    RETURN Self
 
-METHOD Init() CLASS HTree
+METHOD HTree:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -306,7 +306,7 @@ METHOD Init() CLASS HTree
 
    RETURN NIL
 
-METHOD Activate() CLASS HTree
+METHOD HTree:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateTree(::oParent:handle, ::id, ;
@@ -317,7 +317,7 @@ METHOD Activate() CLASS HTree
    RETURN NIL
 
 
-METHOD onEvent(msg, wParam, lParam) CLASS HTree
+METHOD HTree:onEvent(msg, wParam, lParam)
    
    LOCAL nEval
    LOCAL hitemNew
@@ -408,14 +408,14 @@ METHOD onEvent(msg, wParam, lParam) CLASS HTree
    RETURN -1
 
 
-METHOD AddNode(cTitle, oPrev, oNext, bAction, aImages) CLASS HTree
+METHOD HTree:AddNode(cTitle, oPrev, oNext, bAction, aImages)
    
    LOCAL oNode := HTreeNode():New(Self, NIL, oPrev, oNext, cTitle, bAction, aImages)
 
    ::lEmpty := .F.
    RETURN oNode
 
-METHOD FindChild(h) CLASS HTree
+METHOD HTree:FindChild(h)
    
    LOCAL aItems := ::aItems
    LOCAL i
@@ -433,7 +433,7 @@ METHOD FindChild(h) CLASS HTree
    NEXT
    RETURN NIL
 
-METHOD FindChildPos(oNode, h) CLASS HTree
+METHOD HTree:FindChildPos(oNode, h)
    
    LOCAL aItems := IIf(oNode == NIL, ::aItems, oNode:aItems)
    LOCAL i
@@ -448,7 +448,7 @@ METHOD FindChildPos(oNode, h) CLASS HTree
    NEXT
    RETURN 0
 
-METHOD SearchString(cText, iNivel, oNode, inodo) CLASS HTree
+METHOD HTree:SearchString(cText, iNivel, oNode, inodo)
    
    LOCAL aItems := IIf(oNode == NIL, ::aItems, oNode:aItems)
    Local i
@@ -470,7 +470,7 @@ METHOD SearchString(cText, iNivel, oNode, inodo) CLASS HTree
    NEXT
    RETURN NIL 
 
-METHOD Clean() CLASS HTree
+METHOD HTree:Clean()
 
    ::lEmpty := .T.
    ReleaseTree(::aItems)
@@ -479,7 +479,7 @@ METHOD Clean() CLASS HTree
 
    RETURN NIL
 
-METHOD ItemHeight(nHeight) CLASS HTree
+METHOD HTree:ItemHeight(nHeight)
 
    IF nHeight != NIL
       hwg_SendMessage(::handle, TVM_SETITEMHEIGHT, nHeight, 0)
@@ -489,7 +489,7 @@ METHOD ItemHeight(nHeight) CLASS HTree
    RETURN  nHeight
 
 #if 0 // old code for reference (to be deleted)
-METHOD Notify(lParam) CLASS HTree
+METHOD HTree:Notify(lParam)
    
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL oItem
@@ -616,7 +616,7 @@ METHOD Notify(lParam) CLASS HTree
    ENDIF
    RETURN 0
 #else
-METHOD Notify(lParam) CLASS HTree
+METHOD HTree:Notify(lParam)
 
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL oItem
@@ -751,7 +751,7 @@ METHOD Notify(lParam) CLASS HTree
 RETURN 0
 #endif
 
-METHOD Selecteds(oItem, aSels) CLASS HTree
+METHOD HTree:Selecteds(oItem, aSels)
    
    LOCAL i
    LOCAL iLen
@@ -768,7 +768,7 @@ METHOD Selecteds(oItem, aSels) CLASS HTree
    NEXT
    RETURN aSelecteds
 
-METHOD Expand(oNode, lAllNode) CLASS HTree
+METHOD HTree:Expand(oNode, lAllNode)
    
    LOCAL i
    LOCAL iLen := Len(oNode:aitems)

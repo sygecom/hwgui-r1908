@@ -29,7 +29,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Add(nColor, nHatch) CLASS HBrush
+METHOD HBrush:Add(nColor, nHatch)
 
    LOCAL item
 
@@ -57,7 +57,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HBrush
+METHOD HBrush:Release()
 
    LOCAL item
    LOCAL nlen := Len(::aBrushes)

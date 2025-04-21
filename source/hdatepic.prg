@@ -38,16 +38,16 @@ CLASS HDatePicker INHERIT HControl
    METHOD When()
    METHOD Valid()
    METHOD Value(Value) SETGET
-   #ifdef __SYGECOM__   
+   #ifdef __SYGECOM__
    METHOD VarGet()      INLINE ::GetValue()
    METHOD GetText()     INLINE ::GetValue()
-   #endif   
+   #endif
 ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bGfocus, bLfocus, ;
-   bChange, ctooltip, tcolor, bcolor, lShowTime) CLASS HDatePicker
+METHOD HDatePicker:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bGfocus, bLfocus, ;
+   bChange, ctooltip, tcolor, bcolor, lShowTime)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), IIf(bSetGet != NIL, WS_TABSTOP, 0) + ;
       IIf(lShowTime == NIL .OR. !lShowTime, 0, DTS_TIMEFORMAT))
@@ -85,8 +85,8 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, ;
-   bcolor, lShowTime) CLASS HDatePicker
+METHOD HDatePicker:Redefine(oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, ;
+   bcolor, lShowTime)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, , ctooltip, tcolor, bcolor)
 
@@ -114,7 +114,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HDatePicker
+METHOD HDatePicker:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateDatePicker(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style)
@@ -125,7 +125,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HDatePicker
+METHOD HDatePicker:Init()
 
    IF !::lInit
       ::nHolder := 1
@@ -140,7 +140,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
+METHOD HDatePicker:OnEvent(msg, wParam, lParam)
 
    IF hb_IsBlock(::bOther)
       IF Eval(::bOther, Self, msg, wParam, lParam) != -1
@@ -168,7 +168,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
 
 RETURN -1
 #else
-METHOD OnEvent(msg, wParam, lParam) CLASS HDatePicker
+METHOD HDatePicker:OnEvent(msg, wParam, lParam)
 
    IF hb_IsBlock(::bOther)
       IF Eval(::bOther, Self, msg, wParam, lParam) != -1
@@ -204,7 +204,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Value(Value) CLASS HDatePicker
+METHOD HDatePicker:Value(Value)
 
    IF Value != NIL
       ::SetValue(Value)
@@ -214,12 +214,12 @@ RETURN IIf(::lShowTime, ::tValue, ::dValue)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetValue() CLASS HDatePicker
+METHOD HDatePicker:GetValue()
 RETURN IIf(!::lShowTime, hwg_GetDatePicker(::handle), hwg_GetTimePicker(::handle))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetValue(xValue) CLASS HDatePicker
+METHOD HDatePicker:SetValue(xValue)
 
    IF Empty(xValue)
       hwg_SetDatePickerNull(::handle)
@@ -239,7 +239,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS HDatePicker
+METHOD HDatePicker:Refresh()
 
    IF hb_IsBlock(::bSetGet)
       IF !::lShowTime
@@ -259,7 +259,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onChange(nMess) CLASS HDatePicker
+METHOD HDatePicker:onChange(nMess)
 
    IF (nMess == DTN_DATETIMECHANGE .AND. hwg_SendMessage(::handle, DTM_GETMONTHCAL, 0, 0) == 0) .OR. nMess == DTN_CLOSEUP
       IF nMess == DTN_CLOSEUP
@@ -282,7 +282,7 @@ RETURN .T.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD When() CLASS HDatePicker
+METHOD HDatePicker:When()
 
    LOCAL res := .T.
    LOCAL nSkip
@@ -309,7 +309,7 @@ RETURN res
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Valid() CLASS HDatePicker
+METHOD HDatePicker:Valid()
 
    LOCAL res := .T.
 

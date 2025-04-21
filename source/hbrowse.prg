@@ -109,7 +109,7 @@ CLASS HColumn INHERIT HObject
 ENDCLASS
 
 //----------------------------------------------------//
-METHOD New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bcolor, bClick) CLASS HColumn
+METHOD HColumn:New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bcolor, bClick)
 
    ::heading := IIf(cHeading == NIL, "", cHeading)
    ::block := block
@@ -133,7 +133,7 @@ METHOD New(cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPi
 
 RETURN Self
 
-METHOD Visible(lVisible) CLASS HColumn
+METHOD HColumn:Visible(lVisible)
 
    IF lVisible != NIL
       IF !lVisible
@@ -146,21 +146,21 @@ METHOD Visible(lVisible) CLASS HColumn
 
 RETURN !::lHide
 
-METHOD Hide() CLASS HColumn
+METHOD HColumn:Hide()
 
    ::lHide := .T.
    ::oParent:Refresh()
 
 RETURN ::lHide
 
-METHOD Show() CLASS HColumn
+METHOD HColumn:Show()
 
    ::lHide := .F.
    ::oParent:Refresh()
 
 RETURN ::lHide
 
-METHOD Editable(lEditable) CLASS HColumn
+METHOD HColumn:Editable(lEditable)
 
    IF lEditable != NIL
       ::lEditable := lEditable
@@ -170,7 +170,7 @@ METHOD Editable(lEditable) CLASS HColumn
 
 RETURN ::lEditable
 
-METHOD SortMark(nSortMark) CLASS HColumn
+METHOD HColumn:SortMark(nSortMark)
 
     IF nSortMark != NIL
       AEval(::oParent:aColumns, {|c|c:nSortMark := 0})
@@ -182,7 +182,7 @@ METHOD SortMark(nSortMark) CLASS HColumn
 
 RETURN ::nSortMark
 
-METHOD Value(xValue) CLASS HColumn
+METHOD HColumn:Value(xValue)
 
    Local varbuf
 
@@ -362,7 +362,7 @@ CLASS HBrowse INHERIT HControl
    METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos)
    METHOD Edit(wParam, lParam)
    METHOD Append() INLINE (::Bottom(.F.), ::LineDown())
-   METHOD onClick() 
+   METHOD onClick()
    METHOD RefreshLine()
    METHOD Refresh(lFull, lLineUp)
    METHOD ShowSizes()
@@ -393,10 +393,10 @@ CLASS HBrowse INHERIT HControl
 ENDCLASS
 
 //----------------------------------------------------//
-METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
+METHOD HBrowse:New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
            bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
            lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect, ;
-           lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, bRclick, bChgRowCol, ctooltip) CLASS HBrowse
+           lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, bRclick, bChgRowCol, ctooltip)
 
    lNoVScroll := IIf(lNoVScroll == NIL, .F., lNoVScroll)
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ;
@@ -453,7 +453,7 @@ METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, 
 RETURN Self
 
 //----------------------------------------------------//
-METHOD Activate() CLASS HBrowse
+METHOD HBrowse:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateBrowse(::oParent:handle, ::id, ;
                                 ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -463,7 +463,7 @@ METHOD Activate() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD Init() CLASS HBrowse
+METHOD HBrowse:Init()
 
    IF !::lInit
       ::nHolder := 1
@@ -480,7 +480,7 @@ METHOD Init() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD SetMargin(nTop, nRight, nBottom, nLeft) CLASS HBrowse
+METHOD HBrowse:SetMargin(nTop, nRight, nBottom, nLeft)
 
    LOCAL aOldMargin := AClone(::aMargin)
 
@@ -504,7 +504,7 @@ RETURN aOldMargin
 /***
 *
 */
-METHOD SetRowHeight(nPixels) CLASS HBrowse
+METHOD HBrowse:SetRowHeight(nPixels)
    
    LOCAL nOldPixels
 
@@ -527,7 +527,7 @@ RETURN nOldPixels
 
 //----------------------------------------------------//
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
+METHOD HBrowse:onEvent(msg, wParam, lParam)
    
    LOCAL oParent
    LOCAL cKeyb
@@ -903,7 +903,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HBrowse
 
 RETURN -1
 #else
-METHOD OnEvent(msg, wParam, lParam) CLASS HBrowse
+METHOD HBrowse:OnEvent(msg, wParam, lParam)
 
    LOCAL oParent
    LOCAL cKeyb
@@ -1321,7 +1321,7 @@ RETURN -1
 #endif
 
 //----------------------------------------------------//
-METHOD Redefine(lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus) CLASS HBrowse
+METHOD HBrowse:Redefine(lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint)
 
@@ -1339,14 +1339,14 @@ METHOD Redefine(lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGf
 RETURN Self
 
 //----------------------------------------------------//
-METHOD FindBrowse(nId) CLASS HBrowse
+METHOD HBrowse:FindBrowse(nId)
    
    LOCAL i := AScan(::aItemsList, {|o|o:id == nId}, 1, ::iItems)
 
 RETURN IIf(i > 0, ::aItemsList[i], NIL)
 
 //----------------------------------------------------//
-METHOD AddColumn(oColumn) CLASS HBrowse
+METHOD HBrowse:AddColumn(oColumn)
 
    AAdd(::aColumns, oColumn)
    ::lChanged := .T.
@@ -1355,7 +1355,7 @@ METHOD AddColumn(oColumn) CLASS HBrowse
 RETURN oColumn
 
 //----------------------------------------------------//
-METHOD InsColumn(oColumn, nPos) CLASS HBrowse
+METHOD HBrowse:InsColumn(oColumn, nPos)
 
    AAdd(::aColumns, NIL)
    AIns(::aColumns, nPos)
@@ -1409,7 +1409,7 @@ STATIC FUNCTION InitColumn(oBrw, oColumn, n)
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD DelColumn(nPos) CLASS HBrowse
+METHOD HBrowse:DelColumn(nPos)
 
    ADel(::aColumns, nPos)
    ASize(::aColumns, Len(::aColumns) - 1)
@@ -1418,7 +1418,7 @@ METHOD DelColumn(nPos) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD END() CLASS HBrowse
+METHOD HBrowse:END()
 
    ::Super:END()
    IF ::brush != NIL
@@ -1438,7 +1438,7 @@ METHOD END() CLASS HBrowse
 
 RETURN NIL
 
-METHOD ShowMark(lShowMark) CLASS HBrowse
+METHOD HBrowse:ShowMark(lShowMark)
 
    IF lShowMark != NIL
       ::nShowMark := IIf(lShowMark, 12, 0)
@@ -1448,7 +1448,7 @@ METHOD ShowMark(lShowMark) CLASS HBrowse
 
 RETURN ::lDeleteMark
 
-METHOD DeleteMark(lDeleteMark) CLASS HBrowse
+METHOD HBrowse:DeleteMark(lDeleteMark)
 
    IF lDeleteMark != NIL
       IF ::Type == BRW_DATABASE
@@ -1460,7 +1460,7 @@ METHOD DeleteMark(lDeleteMark) CLASS HBrowse
 
 RETURN ::lDeleteMark
 
-METHOD ShowColToolTips(lParam) CLASS HBrowse
+METHOD HBrowse:ShowColToolTips(lParam)
    
    LOCAL pt
    LOCAL cTip := ""
@@ -1483,7 +1483,7 @@ METHOD ShowColToolTips(lParam) CLASS HBrowse
 
 RETURN NIL
 
-METHOD SetRefresh(nSeconds) CLASS HBrowse
+METHOD HBrowse:SetRefresh(nSeconds)
 
    IF nSeconds != NIL //.AND. ::Type == BRW_DATABASE
       IF ::oTimer != NIL
@@ -1499,7 +1499,7 @@ METHOD SetRefresh(nSeconds) CLASS HBrowse
 RETURN ::nSetRefresh
 
 //----------------------------------------------------//
-METHOD InitBrw(nType, lInit) CLASS HBrowse
+METHOD HBrowse:InitBrw(nType, lInit)
    
    LOCAL cAlias := Alias()
 
@@ -1604,7 +1604,7 @@ METHOD InitBrw(nType, lInit) CLASS HBrowse
 
 RETURN NIL
 
-METHOD FILTER(lFilter) CLASS HBrowse
+METHOD HBrowse:FILTER(lFilter)
 
    IF lFilter != NIL .AND. ::Type == BRW_DATABASE
       IF Empty(::Alias)
@@ -1652,7 +1652,7 @@ METHOD FILTER(lFilter) CLASS HBrowse
 RETURN ::lFilter
 
 //----------------------------------------------------//
-METHOD Rebuild() CLASS HBrowse
+METHOD HBrowse:Rebuild()
    
    LOCAL i
    LOCAL j
@@ -1754,7 +1754,7 @@ METHOD Rebuild() CLASS HBrowse
 
 RETURN NIL
 
-METHOD AutoFit() CLASS HBrowse
+METHOD HBrowse:AutoFit()
    
    LOCAL nlen
    LOCAL i
@@ -1792,7 +1792,7 @@ METHOD AutoFit() CLASS HBrowse
 RETURN .T.
 
 //----------------------------------------------------//
-METHOD Paint(lLostFocus) CLASS HBrowse
+METHOD HBrowse:Paint(lLostFocus)
    
    LOCAL aCoors
    LOCAL aMetr
@@ -2154,7 +2154,7 @@ RETURN NIL
 
 //----------------------------------------------------//
 // TODO: hb_tokenGet() can create problems.... can't have separator as first char
-METHOD HeaderOut(hDC) CLASS HBrowse
+METHOD HBrowse:HeaderOut(hDC)
    
    LOCAL x
    LOCAL oldc
@@ -2379,7 +2379,7 @@ METHOD HeaderOut(hDC) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
+METHOD HBrowse:SeparatorOut(hDC, nRowsFill)
    
    LOCAL i
    LOCAL x
@@ -2509,7 +2509,7 @@ METHOD SeparatorOut(hDC, nRowsFill) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD FooterOut(hDC) CLASS HBrowse
+METHOD HBrowse:FooterOut(hDC)
    
    LOCAL x
    LOCAL fif
@@ -2657,7 +2657,7 @@ METHOD FooterOut(hDC) CLASS HBrowse
 RETURN NIL
 
 //-------------- -Row--  --Col-- ------------------------------//
-METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
+METHOD HBrowse:LineOut(nRow, nCol, hDC, lSelected, lClear)
    
    LOCAL x
    LOCAL nColumn
@@ -2920,7 +2920,7 @@ METHOD LineOut(nRow, nCol, hDC, lSelected, lClear) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD SetColumn(nCol) CLASS HBrowse
+METHOD HBrowse:SetColumn(nCol)
    
    LOCAL nColPos
    LOCAL lPaint := .F.
@@ -3002,7 +3002,7 @@ RETURN NIL
 //----------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD DoVScroll(wParam) CLASS HBrowse
+METHOD HBrowse:DoVScroll(wParam)
    
    LOCAL nScrollCode := hwg_LOWORD(wParam)
 
@@ -3038,7 +3038,7 @@ METHOD DoVScroll(wParam) CLASS HBrowse
 
 RETURN 0
 #else
-METHOD DoVScroll(wParam) CLASS HBrowse
+METHOD HBrowse:DoVScroll(wParam)
 
    LOCAL nScrollCode := hwg_LOWORD(wParam)
 
@@ -3085,7 +3085,7 @@ RETURN 0
 //----------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD DoHScroll(wParam) CLASS HBrowse
+METHOD HBrowse:DoHScroll(wParam)
    
    LOCAL nScrollCode := hwg_LOWORD(wParam)
    LOCAL nPos
@@ -3156,7 +3156,7 @@ METHOD DoHScroll(wParam) CLASS HBrowse
 
 RETURN NIL
 #else
-METHOD DoHScroll(wParam) CLASS HBrowse
+METHOD HBrowse:DoHScroll(wParam)
 
    LOCAL nScrollCode := hwg_LOWORD(wParam)
    LOCAL nPos
@@ -3234,7 +3234,7 @@ RETURN NIL
 #endif
 
 //----------------------------------------------------//
-METHOD LINEDOWN(lMouse) CLASS HBrowse
+METHOD HBrowse:LINEDOWN(lMouse)
 
    Eval(::bSkip, Self, 1)
    IF Eval(::bEof, Self)
@@ -3301,7 +3301,7 @@ METHOD LINEDOWN(lMouse) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD LINEUP() CLASS HBrowse
+METHOD HBrowse:LINEUP()
 
    Eval(::bSkip, Self, -1)
    IF Eval(::bBof, Self)
@@ -3334,7 +3334,7 @@ METHOD LINEUP() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD PAGEUP() CLASS HBrowse
+METHOD HBrowse:PAGEUP()
    
    LOCAL STEP
    LOCAL lBof := .F.
@@ -3370,7 +3370,7 @@ RETURN NIL
  * If cursor in not in the last line, go to the last
  *
 */
-METHOD PAGEDOWN() CLASS HBrowse
+METHOD HBrowse:PAGEDOWN()
    
    LOCAL nRows := ::rowCurrCount
    LOCAL STEP := IIf(nRows > ::rowPos, nRows - ::rowPos, nRows)
@@ -3394,7 +3394,7 @@ METHOD PAGEDOWN() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD BOTTOM(lPaint) CLASS HBrowse
+METHOD HBrowse:BOTTOM(lPaint)
 
    IF ::Type == BRW_ARRAY
       ::nCurrent := ::nRecords
@@ -3418,7 +3418,7 @@ METHOD BOTTOM(lPaint) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD TOP() CLASS HBrowse
+METHOD HBrowse:TOP()
 
    ::rowPos := 1
    Eval(::bGoTop, Self)
@@ -3432,7 +3432,7 @@ METHOD TOP() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD ButtonDown(lParam, lReturnRowCol) CLASS HBrowse
+METHOD HBrowse:ButtonDown(lParam, lReturnRowCol)
 
    LOCAL nLine
    LOCAL STEP
@@ -3578,7 +3578,7 @@ ENDIF
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD ButtonUp(lParam) CLASS HBrowse
+METHOD HBrowse:ButtonUp(lParam)
 
    LOCAL xPos := hwg_LOWORD(lParam)
    LOCAL x
@@ -3639,7 +3639,7 @@ METHOD ButtonUp(lParam) CLASS HBrowse
     */
 RETURN NIL
 
-METHOD Select() CLASS HBrowse
+METHOD HBrowse:Select()
    
    LOCAL i
 
@@ -3653,7 +3653,7 @@ METHOD Select() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD ButtonRDown(lParam) CLASS HBrowse
+METHOD HBrowse:ButtonRDown(lParam)
    
    LOCAL nLine
    LOCAL xm
@@ -3717,7 +3717,7 @@ METHOD ButtonRDown(lParam) CLASS HBrowse
 
 RETURN NIL
 
-METHOD ButtonDbl(lParam) CLASS HBrowse
+METHOD HBrowse:ButtonDbl(lParam)
    
    LOCAL nLine := Int(IIf(::lDispHead, ;
                           ((hwg_HIWORD(lParam) - (::nHeadHeight * ::nHeadRows)) / (::height + 1) + 1), ;
@@ -3731,7 +3731,7 @@ METHOD ButtonDbl(lParam) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD MouseMove(wParam, lParam) CLASS HBrowse
+METHOD HBrowse:MouseMove(wParam, lParam)
    
    LOCAL xPos := hwg_LOWORD(lParam)
    LOCAL yPos := hwg_HIWORD(lParam)
@@ -3799,7 +3799,7 @@ METHOD MouseMove(wParam, lParam) CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------------------------------//
-METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos) CLASS HBrowse
+METHOD HBrowse:MouseWheel(nKeys, nDelta, nXPos, nYPos)
 
    HB_SYMBOL_UNUSED(nXPos)
    HB_SYMBOL_UNUSED(nYPos)
@@ -3825,7 +3825,7 @@ METHOD MouseWheel(nKeys, nDelta, nXPos, nYPos) CLASS HBrowse
 
 RETURN NIL
 
-METHOD onClick() CLASS HBrowse
+METHOD HBrowse:onClick()
 
    LOCAL lRes := .F.
 
@@ -3841,7 +3841,7 @@ METHOD onClick() CLASS HBrowse
 RETURN lRes
 
 //----------------------------------------------------//
-METHOD Edit(wParam, lParam) CLASS HBrowse
+METHOD HBrowse:Edit(wParam, lParam)
    
    LOCAL fipos
    LOCAL x1
@@ -4150,7 +4150,7 @@ METHOD Edit(wParam, lParam) CLASS HBrowse
 
 RETURN NIL
 
-METHOD EditLogical(wParam, lParam) CLASS HBrowse
+METHOD HBrowse:EditLogical(wParam, lParam)
 
    HB_SYMBOL_UNUSED(lParam)
 
@@ -4197,7 +4197,7 @@ METHOD EditLogical(wParam, lParam) CLASS HBrowse
 
 RETURN .T.
 
-METHOD EditEvent(oCtrl, msg, wParam, lParam)
+METHOD HBrowse:EditEvent(oCtrl, msg, wParam, lParam)
 
    HB_SYMBOL_UNUSED(lParam)
 
@@ -4211,7 +4211,7 @@ METHOD EditEvent(oCtrl, msg, wParam, lParam)
 
 RETURN -1
 
-METHOD onClickColumn(value, oGet, oBtn) CLASS HBROWSE
+METHOD HBrowse:onClickColumn(value, oGet, oBtn)
    
    LOCAL oColumn := ::aColumns[::fipos]
 
@@ -4229,7 +4229,7 @@ METHOD onClickColumn(value, oGet, oBtn) CLASS HBROWSE
 
 RETURN NIL
 
-METHOD WhenColumn(value, oGet) CLASS HBROWSE
+METHOD HBrowse:WhenColumn(value, oGet)
    
    LOCAL res := .T.
    LOCAL oColumn := ::aColumns[::fipos]
@@ -4247,7 +4247,7 @@ METHOD WhenColumn(value, oGet) CLASS HBROWSE
 
 RETURN res
 
-METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
+METHOD HBrowse:ValidColumn(value, oGet, oBtn)
    
    LOCAL res := .T.
    LOCAL oColumn := ::aColumns[::fipos]
@@ -4274,7 +4274,7 @@ METHOD ValidColumn(value, oGet, oBtn) CLASS HBROWSE
 
 RETURN res
 
-METHOD ChangeRowCol(nRowColChange) CLASS HBrowse
+METHOD HBrowse:ChangeRowCol(nRowColChange)
 // 0 (default) No change.
 // 1 Row change
 // 2 Column change
@@ -4294,7 +4294,7 @@ METHOD ChangeRowCol(nRowColChange) CLASS HBrowse
 
 RETURN !Empty(res)
 
-METHOD When() CLASS HBrowse
+METHOD HBrowse:When()
    
    LOCAL nSkip
    LOCAL res := .T.
@@ -4322,7 +4322,7 @@ METHOD When() CLASS HBrowse
 
 RETURN res
 
-METHOD Valid() CLASS HBrowse
+METHOD HBrowse:Valid()
    
    LOCAL res
 
@@ -4348,7 +4348,7 @@ METHOD Valid() CLASS HBrowse
 RETURN .T.
 
 //----------------------------------------------------//
-METHOD RefreshLine() CLASS HBrowse
+METHOD HBrowse:RefreshLine()
    
    LOCAL nInternal := ::internal[1]
 
@@ -4360,7 +4360,7 @@ METHOD RefreshLine() CLASS HBrowse
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD Refresh(lFull, lLineUp) CLASS HBrowse
+METHOD HBrowse:Refresh(lFull, lLineUp)
 
    IF lFull == NIL .OR. lFull
       IF ::lFilter
@@ -4393,7 +4393,7 @@ METHOD Refresh(lFull, lLineUp) CLASS HBrowse
 RETURN NIL
 
 /*
-METHOD BrwScrollVPos() CLASS HBrowse
+METHOD HBrowse:BrwScrollVPos()
    
    LOCAL minPos
    LOCAL maxPos
@@ -4429,7 +4429,7 @@ METHOD BrwScrollVPos() CLASS HBrowse
     //IIf((::Alias)->(IndexOrd()) == 0 .OR. ::lDisableVScrollPos, (::Alias)->(RecNo()), (::Alias)->(ordkeyno()))
 */
 //----------------------------------------------------//
-METHOD FldStr(oBrw, numf) CLASS HBrowse
+METHOD HBrowse:FldStr(oBrw, numf)
 
    LOCAL cRes
    LOCAL vartmp
@@ -4688,8 +4688,8 @@ RETURN NIL
 //----------------------------------------------------//
 // Agregado x WHT. 27.07.02
 // Locus metodus.
-METHOD ShowSizes() CLASS HBrowse
-   
+METHOD HBrowse:ShowSizes()
+
    LOCAL cText := ""
 
    AEval(::aColumns, ;

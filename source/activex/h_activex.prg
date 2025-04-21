@@ -49,7 +49,7 @@ CLASS HActiveX FROM HControl
 
 ENDCLASS
 
-METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
+METHOD HActiveX:New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize)
    LOCAL nStyle, nExStyle, cClsName, hSink
    LOCAL i, a, h, n
    LOCAL oError, bErrorBlock
@@ -90,14 +90,14 @@ METHOD New(oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize) CLASS HActiveX
    RETURN SELF
 
 *-----------------------------------------------------------------------------*
-METHOD Release() CLASS HActiveX
+METHOD HActiveX:Release()
 *-----------------------------------------------------------------------------*
    hwg_ShutdownConnectionPoint(::hSink)
    hwg_ReleaseDispatch(::hObj)
 RETURN ::Super:Release()
 
 *-----------------------------------------------------------------------------* 
-METHOD __Error(...) CLASS HActiveX 
+METHOD HActiveX:__Error(...)
 *-----------------------------------------------------------------------------* 
 Local cMessage, uRet 
 cMessage := __GetMessage() 
@@ -109,7 +109,7 @@ cMessage := __GetMessage()
    RETURN HB_ExecFromArray(::oOle, cMessage, HB_aParams())
 
 //-----------------------------------------------------------------------------------------------//
-METHOD EventMap(nMsg, xExec, oSelf) CLASS HActiveX
+METHOD HActiveX:EventMap(nMsg, xExec, oSelf)
    LOCAL nAt
    nAt := AScan(::aAxEv, nMsg)
    IF nAt == 0

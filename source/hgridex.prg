@@ -70,9 +70,9 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
 ENDCLASS
 
 
-METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
+METHOD HGridEx:New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
             bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-            nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems) CLASS HGridEx
+            nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems)
 
    HB_SYMBOL_UNUSED(nItemCount)
 
@@ -108,7 +108,7 @@ METHOD New(oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, 
 
    RETURN Self
 
-METHOD Activate() CLASS HGridEx
+METHOD HGridEx:Activate()
    IF !Empty(::oParent:handle)
       ::Style :=  ::Style - WS_BORDER
       ::handle := hwg_ListView_Create(::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ::lNoScroll)
@@ -116,7 +116,7 @@ METHOD Activate() CLASS HGridEx
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HGridEx
+METHOD HGridEx:Init()
    LOCAL i, nPos
    LOCAL aButton := {}
    LOCAL aBmpSize
@@ -194,7 +194,7 @@ METHOD Init() CLASS HGridEx
    ENDIF
    RETURN NIL
 
-METHOD Refresh() CLASS HGridEx
+METHOD HGridEx:Refresh()
    LOCAL iFirst, iLast
 
    iFirst := hwg_ListView_GetTopIndex(::handle)
@@ -205,7 +205,7 @@ METHOD Refresh() CLASS HGridEx
    RETURN NIL
 
 
-METHOD AddRow(a, bupdate) CLASS HGRIDEX
+METHOD HGridEx:AddRow(a, bupdate)
    LOCAL nLen := Len(a)
    LOCAL n
    LOCAL aTmp := {}
@@ -235,7 +235,7 @@ METHOD AddRow(a, bupdate) CLASS HGRIDEX
 
    RETURN NIL
 
-METHOD Notify(lParam) CLASS HGRIDEX
+METHOD HGridEx:Notify(lParam)
    LOCAL nCode := hwg_GetNotifyCode(lParam)
    LOCAL Res, iSelect, oParent := ::GetParentForm()
 
@@ -279,8 +279,8 @@ METHOD Notify(lParam) CLASS HGRIDEX
    ENDIF
    RETURN Res
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem) CLASS hGridex
+METHOD HGridEx:Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
+                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
 
    HB_SYMBOL_UNUSED(cCaption)
    HB_SYMBOL_UNUSED(lTransp)
@@ -295,7 +295,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
 
    RETURN Self
 
-METHOD UpdateData() CLASS hGridex
+METHOD HGridEx:UpdateData()
    LOCAL n := Len(::aRow), n1
    LOCAL aTemp, atemp1
 

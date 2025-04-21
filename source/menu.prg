@@ -27,7 +27,7 @@ CLASS HMenu INHERIT HObject
    METHOD Show(oWnd, xPos, yPos, lWnd)
 ENDCLASS
 
-METHOD Show(oWnd, xPos, yPos, lWnd) CLASS HMenu
+METHOD HMenu:Show(oWnd, xPos, yPos, lWnd)
    LOCAL aCoor
 
    oWnd:oPopup := Self

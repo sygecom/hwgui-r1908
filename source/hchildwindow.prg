@@ -33,8 +33,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
-   bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bRefresh) CLASS HChildWindow
+METHOD HChildWindow:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
+   bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bRefresh)
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
       bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, , bRefresh)
@@ -56,7 +56,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLASS HChildWindow
+METHOD HChildWindow:Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal)
 
    LOCAL nReturn
 
@@ -114,7 +114,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
+METHOD HChildWindow:onEvent(msg, wParam, lParam)
 
    LOCAL i
    LOCAL oCtrl
@@ -141,7 +141,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HChildWindow
+METHOD HChildWindow:onEvent(msg, wParam, lParam)
 
    LOCAL oCtrl
 

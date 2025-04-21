@@ -39,8 +39,8 @@ CLASS HPanel INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               bInit, bSize, bPaint, bcolor) CLASS HPanel
+METHOD HPanel:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+               bInit, bSize, bPaint, bcolor)
 LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, IIf(nWidth == NIL, 0, nWidth), ;
@@ -77,7 +77,7 @@ LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
 RETURN Self
 
-METHOD Redefine(oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor) CLASS HPanel
+METHOD HPanel:Redefine(oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor)
 LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, IIf(nWidth == NIL, 0, nWidth), ;
@@ -92,7 +92,7 @@ LOCAL oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
 
 RETURN Self
 
-METHOD Activate() CLASS HPanel
+METHOD HPanel:Activate()
    LOCAL handle := ::oParent:handle
 
    IF !Empty(handle)
@@ -119,7 +119,7 @@ METHOD Activate() CLASS HPanel
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HPanel
+METHOD HPanel:Init()
 
    IF !::lInit
       IF ::bSize == NIL
@@ -140,7 +140,7 @@ METHOD Init() CLASS HPanel
 
    RETURN NIL
 
-METHOD onEvent(msg, wParam, lParam) CLASS HPanel
+METHOD HPanel:onEvent(msg, wParam, lParam)
    LOCAL nret
 
    IF msg == WM_PAINT
@@ -225,7 +225,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HPanel
    RETURN - 1
 
 
-METHOD Paint() CLASS HPanel
+METHOD HPanel:Paint()
 LOCAL pps, hDC, aCoors, oPenLight, oPenGray
 
    IF hb_IsBlock(::bPaint)
@@ -265,7 +265,7 @@ LOCAL pps, hDC, aCoors, oPenLight, oPenGray
    hwg_EndPaint(::handle, pps)
    RETURN NIL
 
-METHOD Release() CLASS HPanel
+METHOD HPanel:Release()
 
    hwg_InvalidateRect(::oParent:handle, 1, ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight)
    ::ResizeOffSet(3)
@@ -295,7 +295,7 @@ METHOD Release() CLASS HPanel
 
 RETURN NIL
 
-METHOD Hide() CLASS HPanel
+METHOD HPanel:Hide()
    LOCAL lRes
    
    IF ::lHide
@@ -323,7 +323,7 @@ METHOD Hide() CLASS HPanel
     ENDIF
     RETURN NIL
 
-METHOD Show() CLASS HPanel
+METHOD HPanel:Show()
    LOCAL lRes
    
    IF !::lHide
@@ -351,7 +351,7 @@ METHOD Show() CLASS HPanel
    ENDIF
    RETURN NIL
 
-METHOD Resize() CLASS HPanel
+METHOD HPanel:Resize()
    LOCAL aCoors := hwg_GetWindowRect(::handle)
    Local nHeight := aCoors[4] - aCoors[2]
    Local nWidth  := aCoors[3] - aCoors[1]
@@ -386,7 +386,7 @@ METHOD Resize() CLASS HPanel
    RETURN NIL
 
 /* nMode => nMode = 0 INIT  / nMode = 1 RESIZE  / nMode = 2 SHOW  / nMode = 3 HIDE */
-METHOD ResizeOffSet(nMode) CLASS HPanel
+METHOD HPanel:ResizeOffSet(nMode)
    LOCAL aCoors := hwg_GetWindowRect(::handle)
    LOCAL nHeight := aCoors[4] - aCoors[2]
    LOCAL nWidth  := aCoors[3] - aCoors[1]

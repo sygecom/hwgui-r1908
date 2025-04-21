@@ -75,10 +75,10 @@ CLASS VAR winclass INIT "STATIC"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-            bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick) CLASS HStaticLink
+METHOD HStaticLink:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+            bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick)
    LOCAL oPrevFont
-   
+
    nStyle := hwg_BitOR(nStyle, SS_NOTIFY + SS_RIGHT)
    ::lAllUnderline := IIf(Empty(cLink), .F., ::lAllUnderline)
    ::title := IIf(cCaption != NIL, cCaption, "HWGUI HomePage")
@@ -137,8 +137,8 @@ METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFon
 
    RETURN Self
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor) CLASS HStaticLink
+METHOD HStaticLink:Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
+                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor)
    LOCAL oPrevFont
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, ;
@@ -189,7 +189,7 @@ METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
 
    RETURN Self
 
-METHOD INIT() CLASS HStaticLink
+METHOD HStaticLink:INIT()
 
    IF !::lInit
 
@@ -212,7 +212,7 @@ METHOD INIT() CLASS HStaticLink
    RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
+METHOD HStaticLink:onEvent(msg, wParam, lParam)
 
    IF msg == WM_PAINT
       //::PAint()
@@ -244,7 +244,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 
    RETURN - 1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
+METHOD HStaticLink:onEvent(msg, wParam, lParam)
 
    SWITCH msg
 
@@ -290,7 +290,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HStaticLink
 RETURN -1
 #endif
 
-METHOD GoToLinkUrl(csLink) CLASS HStaticLink
+METHOD HStaticLink:GoToLinkUrl(csLink)
 
    LOCAL hInstance := hwg_ShellExecute(csLink, "open", NIL, NIL, 2)
    //ShellExecute(NULL, _T("open"), csLink.operator LPCTSTR(), NULL, NULL, 2);
@@ -301,7 +301,7 @@ METHOD GoToLinkUrl(csLink) CLASS HStaticLink
 
    RETURN .T.
 
-METHOD GetLinkText() CLASS HStaticLink
+METHOD HStaticLink:GetLinkText()
 
    IF (Empty(::Title))
       RETURN ""
@@ -309,28 +309,28 @@ METHOD GetLinkText() CLASS HStaticLink
 
    RETURN ::Title
 
-METHOD SetLinkUrl(csUrl) CLASS HStaticLink
+METHOD HStaticLink:SetLinkUrl(csUrl)
 
    ::m_csUrl := csUrl
 
    RETURN NIL
 
-METHOD GetLinkUrl() CLASS HStaticLink
+METHOD HStaticLink:GetLinkUrl()
 
    RETURN ::m_csUrl
 
-METHOD SetVisitedColor(sVisitedColor) CLASS HStaticLink
+METHOD HStaticLink:SetVisitedColor(sVisitedColor)
 
    ::m_sVisitedColor := sVisitedColor
    RETURN NIL
 
-METHOD SetHoverColor(cHoverColor) CLASS HStaticLink
+METHOD HStaticLink:SetHoverColor(cHoverColor)
 
    ::m_sHoverColor := cHoverColor
 
    RETURN NIL
 
-METHOD OnClicked() CLASS HStaticLink
+METHOD HStaticLink:OnClicked()
    LOCAL nCtrlID
 
    IF hb_IsBlock(::bClick)
@@ -352,7 +352,7 @@ METHOD OnClicked() CLASS HStaticLink
 
    RETURN NIL
 
-METHOD OnSetCursor(pWnd, nHitTest, message) CLASS HStaticLink
+METHOD HStaticLink:OnSetCursor(pWnd, nHitTest, message)
 
    HB_SYMBOL_UNUSED(pWnd)
    HB_SYMBOL_UNUSED(nHitTest)
@@ -362,20 +362,20 @@ METHOD OnSetCursor(pWnd, nHitTest, message) CLASS HStaticLink
 
    RETURN .T.
 
-METHOD SetLinkText(csLinkText) CLASS HStaticLink
+METHOD HStaticLink:SetLinkText(csLinkText)
 
    ::Title := csLinkText
    ::SetText(csLinkText)
 
    RETURN NIL
 
-METHOD SetLinkColor(sLinkColor) CLASS HStaticLink
+METHOD HStaticLink:SetLinkColor(sLinkColor)
 
    ::m_sLinkColor := sLinkColor
 
    RETURN NIL
 
-METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
+METHOD HStaticLink:OnMouseMove(nFlags, lParam)
 
    LOCAL xPos
    LOCAL yPos
@@ -412,7 +412,7 @@ METHOD OnMouseMove(nFlags, lParam) CLASS HStaticLink
 
    RETURN NIL
 
-METHOD Paint(lpDis) CLASS HStaticLink
+METHOD HStaticLink:Paint(lpDis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
@@ -484,7 +484,7 @@ METHOD Paint(lpDis) CLASS HStaticLink
   RETURN NIL
 
 
-METHOD Resize(x, y) CLASS HStaticLink
+METHOD HStaticLink:Resize(x, y)
    //LOCAL aCoors := hwg_GetClientRect(::handle)
    LOCAL aBmpSize, aTxtSize
    LOCAL nHeight := ::nHeight

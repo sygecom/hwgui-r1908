@@ -38,9 +38,9 @@ ENDCLASS
 
 //--------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HMonthCalendar:New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-            lWeekNumbers, bSelect) CLASS HMonthCalendar
+            lWeekNumbers, bSelect)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), 0) //WS_TABSTOP)
    nStyle   += IIf(lNoToday == NIL .OR. !lNoToday, 0, MCS_NOTODAY)
@@ -68,7 +68,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
 //--------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HMonthCalendar
+METHOD HMonthCalendar:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_InitMonthCalendar(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
@@ -79,7 +79,7 @@ METHOD Activate() CLASS HMonthCalendar
 
 //--------------------------------------------------------------------------//
 
-METHOD Init() CLASS HMonthCalendar
+METHOD HMonthCalendar:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -95,7 +95,7 @@ METHOD Init() CLASS HMonthCalendar
 
 //--------------------------------------------------------------------------//
 
-METHOD SetValue(dValue) CLASS HMonthCalendar
+METHOD HMonthCalendar:SetValue(dValue)
 
    IF hb_IsDate(dValue) .And. !Empty(dValue)
       hwg_SetMonthCalendarDate(::handle, dValue)
@@ -106,13 +106,13 @@ METHOD SetValue(dValue) CLASS HMonthCalendar
 
 //--------------------------------------------------------------------------//
 
-METHOD GetValue() CLASS HMonthCalendar
+METHOD HMonthCalendar:GetValue()
 
    ::value := hwg_GetMonthCalendarDate(::handle)
 
    RETURN ::value
 
-METHOD onChange() CLASS HMonthCalendar
+METHOD HMonthCalendar:onChange()
 
    IF hb_IsBlock(::bChange) .AND. !::oparent:lSuspendMsgsHandling
       hwg_SendMessage(::handle, WM_LBUTTONDOWN, 0, hwg_MAKELPARAM(1, 1))
@@ -123,7 +123,7 @@ METHOD onChange() CLASS HMonthCalendar
 
    RETURN 0
 
-METHOD onSelect() CLASS HMonthCalendar
+METHOD HMonthCalendar:onSelect()
 
    IF hb_IsBlock(::bSelect) .AND. !::oparent:lSuspendMsgsHandling
       ::oparent:lSuspendMsgsHandling := .T.

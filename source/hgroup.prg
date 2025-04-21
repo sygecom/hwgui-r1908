@@ -36,8 +36,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, tcolor, ;
-   bColor, lTransp, oRGroup) CLASS HGroup
+METHOD HGroup:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, tcolor, ;
+   bColor, lTransp, oRGroup)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_GROUPBOX)
 
@@ -59,7 +59,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HGroup
+METHOD HGroup:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -70,7 +70,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HGroup
+METHOD HGroup:Init()
 
    LOCAL nbs
 
@@ -111,7 +111,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD PAINT(lpdis) CLASS HGroup
+METHOD HGroup:PAINT(lpdis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
    LOCAL DC := drawInfo[3]

@@ -51,8 +51,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, cTooltip, ;
-   tcolor, bColor, lTransp, bClick, bDblClick, bOther) CLASS HStatic
+METHOD HStatic:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, cTooltip, ;
+   tcolor, bColor, lTransp, bClick, bDblClick, bOther)
 
    LOCAL nStyles
 
@@ -110,8 +110,8 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, ;
-   bDblClick, bOther) CLASS HStatic
+METHOD HStatic:Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, ;
+   bDblClick, bOther)
 
    IF (lTransp != NIL .AND. lTransp)  //.OR. ::lOwnerDraw
       ::extStyle += WS_EX_TRANSPARENT
@@ -143,7 +143,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HStatic
+METHOD HStatic:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateStatic(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle)
@@ -155,7 +155,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HStatic
+METHOD HStatic:Init()
 
    IF !::lInit
       ::Super:init()
@@ -177,7 +177,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
+METHOD HStatic:OnEvent(msg, wParam, lParam)
 
    LOCAL nEval
    LOCAL pos
@@ -210,7 +210,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
 
 RETURN -1
 #else
-METHOD OnEvent(msg, wParam, lParam) CLASS  HStatic
+METHOD HStatic:OnEvent(msg, wParam, lParam)
 
    LOCAL nEval
    LOCAL pos
@@ -256,7 +256,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetValue(cValue) CLASS HStatic
+METHOD HStatic:SetValue(cValue)
 
    ::Auto_Size(cValue)
    IF ::Title != cValue
@@ -275,7 +275,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint(lpDis) CLASS HStatic
+METHOD HStatic:Paint(lpDis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL client_rect
@@ -319,7 +319,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onClick() CLASS HStatic
+METHOD HStatic:onClick()
 
    IF hb_IsBlock(::bClick)
       //::oParent:lSuspendMsgsHandling := .T.
@@ -331,7 +331,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onDblClick() CLASS HStatic
+METHOD HStatic:onDblClick()
 
    IF hb_IsBlock(::bDblClick)
       //::oParent:lSuspendMsgsHandling := .T.
@@ -343,7 +343,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Auto_Size(cValue) CLASS HStatic
+METHOD HStatic:Auto_Size(cValue)
 
    LOCAL ASize
    LOCAL nLeft

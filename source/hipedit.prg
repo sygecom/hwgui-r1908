@@ -39,8 +39,8 @@ CLASS VAR winclass   INIT "SysIPAddress32"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            oFont, bGetFocus, bKillFocus) CLASS HIPedit
+METHOD HIPedit:New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+            oFont, bGetFocus, bKillFocus)
 
    nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont)
@@ -84,14 +84,14 @@ METHOD New(oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeigh
 
    RETURN Self
 
-METHOD Activate() CLASS HIPedit
+METHOD HIPedit:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_InitIPAddress(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight)
       ::Init()
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HIPedit
+METHOD HIPedit:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -101,23 +101,23 @@ METHOD Init() CLASS HIPedit
 
    RETURN NIL
 
-METHOD SetValue(aValue) CLASS HIPedit
+METHOD HIPedit:SetValue(aValue)
    hwg_SetIPAddress(::handle, aValue[1], aValue[2], aValue[3], aValue[4])
    ::aValue := aValue
    RETURN NIL
 
 
-METHOD GetValue() CLASS HIPedit
+METHOD HIPedit:GetValue()
    ::aValue := hwg_GetIPAddress(::handle)
    RETURN ::aValue
 
-METHOD Clear() CLASS HIPedit
+METHOD HIPedit:Clear()
    hwg_ClearIPAddress(::handle)
    ::aValue := {0, 0, 0, 0}
    RETURN ::aValue
 
 
-METHOD END() CLASS HIPedit
+METHOD HIPedit:END()
 
    // Nothing to do here, yet!
    ::Super:END()

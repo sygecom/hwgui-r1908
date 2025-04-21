@@ -37,7 +37,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle) CLASS HFont
+METHOD HFont:Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle)
 
    LOCAL i
    LOCAL nlen := Len(::aFonts)
@@ -87,7 +87,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Select(oFont, nCharSet) CLASS HFont
+METHOD HFont:Select(oFont, nCharSet)
 
    LOCAL af := hwg_SelectFont(oFont)
 
@@ -99,7 +99,7 @@ RETURN ::Add(af[2], af[3], af[4], af[5], IIf(Empty(nCharSet), af[6], nCharSet), 
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetFontStyle(lBold, nCharSet, lItalic, lUnder, lStrike, nHeight) CLASS HFont
+METHOD HFont:SetFontStyle(lBold, nCharSet, lItalic, lUnder, lStrike, nHeight)
 
    LOCAL weight
    LOCAL Italic
@@ -121,7 +121,7 @@ RETURN ::Add(::name, ::width, nheight, weight, nCharSet, Italic, Underline, Stri
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HFont
+METHOD HFont:Release()
 
    LOCAL item
    LOCAL nlen := Len(::aFonts)

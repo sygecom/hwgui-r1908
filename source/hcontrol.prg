@@ -72,8 +72,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-   bColor) CLASS HControl
+METHOD HControl:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+   bColor)
 
    ::oParent := IIf(oWndParent == NIL, ::oDefaultParent, oWndParent)
    ::id := IIf(nId == NIL, ::NewId(), nId)
@@ -95,7 +95,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD NewId() CLASS HControl
+METHOD HControl:NewId()
 
    LOCAL oParent := ::oParent
    LOCAL i := 0
@@ -117,7 +117,7 @@ RETURN nId
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddName(cName) CLASS HControl
+METHOD HControl:AddName(cName)
 
    IF !Empty(cName) .AND. hb_IsChar(cName) .AND. !(":" $ cName) .AND. !("[" $ cName) .AND. !("->" $ cName)
       ::xName := cName
@@ -129,7 +129,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD INIT() CLASS HControl
+METHOD HControl:INIT()
 
    LOCAL oForm := ::GetParentForm()
 
@@ -171,7 +171,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // moved to HCWINDOW
-METHOD SetColor(tcolor, bColor, lRepaint) CLASS HControl
+METHOD HControl:SetColor(tcolor, bColor, lRepaint)
 
    IF tcolor != NIL
       ::tcolor := tcolor
@@ -197,7 +197,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetFocus(lValid) CLASS HControl
+METHOD HControl:SetFocus(lValid)
 
    LOCAL lSuspend := ::oParent:lSuspendMsgsHandling
 
@@ -223,7 +223,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Enable() CLASS HControl
+METHOD HControl:Enable()
 
    LOCAL lEnable := hwg_IsWindowEnabled(::handle)
    LOCAL nPos
@@ -242,7 +242,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DisableBackColor(DisableBColor)
+METHOD HControl:DisableBackColor(DisableBColor)
 
    IF DisableBColor != NIL
       ::DisableBColor := DisableBColor
@@ -259,7 +259,7 @@ RETURN ::DisableBColor
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetFont(oFont) CLASS HControl
+METHOD HControl:SetFont(oFont)
 
    IF oFont != NIL
       IF hb_IsObject(oFont)
@@ -274,7 +274,7 @@ RETURN ::oFont
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FontBold(lTrue) CLASS HControl
+METHOD HControl:FontBold(lTrue)
 
    LOCAL oFont
 
@@ -300,7 +300,7 @@ RETURN ::oFont:weight == FW_BOLD
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FontItalic(lTrue) CLASS HControl
+METHOD HControl:FontItalic(lTrue)
 
    LOCAL oFont
 
@@ -326,7 +326,7 @@ RETURN ::oFont:Italic == 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FontUnderline(lTrue) CLASS HControl
+METHOD HControl:FontUnderline(lTrue)
 
    LOCAL oFont
 
@@ -352,7 +352,7 @@ RETURN ::oFont:Underline == 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetToolTip (cToolTip) CLASS HControl
+METHOD HControl:SetToolTip (cToolTip)
 
    IF hb_IsChar(cToolTip) .AND. cToolTip != ::ToolTip
       hwg_SetToolTipTitle(::GetparentForm():handle, ::handle, ctooltip)
@@ -363,7 +363,7 @@ RETURN ::tooltip
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Enabled(lEnabled) CLASS HControl
+METHOD HControl:Enabled(lEnabled)
 
   IF lEnabled != NIL
      IF lEnabled
@@ -377,7 +377,7 @@ RETURN ::isEnabled()
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD ControlSource(cControlSource) CLASS HControl
+METHOD HControl:ControlSource(cControlSource)
 
    LOCAL temp
 
@@ -392,7 +392,7 @@ RETURN ::xControlSource
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD END() CLASS HControl
+METHOD HControl:END()
 
    ::Super:END()
 
@@ -405,7 +405,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onAnchor(x, y, w, h) CLASS HControl
+METHOD HControl:onAnchor(x, y, w, h)
 
    LOCAL nAnchor
    LOCAL nXincRelative

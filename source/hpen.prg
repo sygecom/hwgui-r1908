@@ -31,7 +31,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Add(nStyle, nWidth, nColor) CLASS HPen
+METHOD HPen:Add(nStyle, nWidth, nColor)
 
    LOCAL item
 
@@ -58,7 +58,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Get(nStyle, nWidth, nColor) CLASS HPen
+METHOD HPen:Get(nStyle, nWidth, nColor)
 
    LOCAL item
 
@@ -78,7 +78,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HPen
+METHOD HPen:Release()
 
    LOCAL item
    LOCAL nlen := Len(::aPens)

@@ -228,7 +228,7 @@ ENDCLASS
 // 01/06/97   TRM         Creation
 //
 //********************************************************************
-METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh) CLASS RichText
+METHOD RichText:New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh)
 
    LOCAL i
    LOCAL cTopFile := "rtf1\ansi\ansicpg1252\deff0"
@@ -321,8 +321,8 @@ RETURN Self
 // 01/06/97   TRM         Creation
 //
 //********************************************************************
-METHOD PageSetup(nLeft, nRight, nTop, nBottom, nWidth, nHeight, nTabWidth, lLandscape, lNoWidow, cVertAlign, ;
-   cPgNumPos, lPgNumTop) CLASS RichText
+METHOD RichText:PageSetup(nLeft, nRight, nTop, nBottom, nWidth, nHeight, nTabWidth, lLandscape, lNoWidow, cVertAlign, ;
+   cPgNumPos, lPgNumTop)
 
    HB_SYMBOL_UNUSED(cPgNumPos)
 
@@ -370,12 +370,12 @@ RETURN NIL
 // 01/12/97   TRM         Creation
 //
 //********************************************************************
-METHOD Paragraph(cText, nFontNumber, nFontSize, cAppear, ;
+METHOD RichText:Paragraph(cText, nFontNumber, nFontSize, cAppear, ;
                  cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
                  lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
                  lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
                  nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
-                 nStyle, lChar) CLASS RichText
+                 nStyle, lChar)
 
    LOCAL i
 
@@ -484,7 +484,7 @@ RETURN NIL
 // 01/06/97   TRM         Creation
 //
 //********************************************************************
-METHOD SetFontSize(nFontSize) CLASS RichText
+METHOD RichText:SetFontSize(nFontSize)
 
    IF hb_IsNumeric(nFontSize)
       ::nFontSize := nFontSize
@@ -505,7 +505,7 @@ RETURN NIL
 // 01/06/97   TRM         Creation
 //
 //********************************************************************
-METHOD SetFontColor(nFontColor) CLASS RichText
+METHOD RichText:SetFontColor(nFontColor)
 
    IF hb_IsNumeric(nFontColor)
       ::nFontColor := nFontColor
@@ -526,7 +526,7 @@ RETURN NIL
 // Date       Developer   Comments
 // 01/06/97   TRM         Creation
 //********************************************************************
-METHOD Write(xData, lCodesOK) CLASS RichText
+METHOD RichText:Write(xData, lCodesOK)
 
    LOCAL cWrite := ""
    LOCAL i
@@ -619,7 +619,7 @@ RETURN NIL
 // 01/12/97   TRM         Creation
 //
 //********************************************************************
-METHOD NumCode(cCode, nValue, lScale) CLASS RichText
+METHOD RichText:NumCode(cCode, nValue, lScale)
 
    LOCAL cWrite := ""
 
@@ -653,7 +653,7 @@ RETURN cWrite
 // 01/12/97   TRM         Creation
 //
 //********************************************************************
-METHOD LogicCode(cCode, lTest) CLASS RichText
+METHOD RichText:LogicCode(cCode, lTest)
 
    LOCAL cWrite := ""
 
@@ -699,11 +699,11 @@ RETURN cCode
 // 01/18/97   TRM         Creation
 //
 //********************************************************************
-METHOD DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
+METHOD RichText:DefineTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                     cCellAppear, cCellHAlign, nTblRows, ;
                     nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                     lTblNoSplit, nTblHdRows, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor) CLASS RichText
+                    nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor)
 
    LOCAL i
 
@@ -789,8 +789,8 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
-                  nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault) CLASS RichText
+METHOD RichText:WriteCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+                  nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault)
    
    LOCAL i
 
@@ -929,8 +929,8 @@ RETURN NIL
 // Date       Developer   Comments
 // 01/26/97   TRM         Creation
 //********************************************************************
-METHOD NewSection(lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
-                  nWidth, nHeight, cVertAlign, lDefault) CLASS RichText
+METHOD RichText:NewSection(lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
+                  nWidth, nHeight, cVertAlign, lDefault)
 
    DEFAULT lDefault TO .F.
 
@@ -973,7 +973,7 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD NewFont(nFontNumber) CLASS RichText
+METHOD RichText:NewFont(nFontNumber)
 
    IF !Empty(nFontNumber) .AND. nFontNumber <= ::nFontNum
       ::NumCode("f", nFontNumber - 1, .F.)
@@ -995,7 +995,7 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD Appearance(cAppear) CLASS RichText
+METHOD RichText:Appearance(cAppear)
 
    LOCAL cWrite := ""
 
@@ -1018,7 +1018,7 @@ RETURN cWrite
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD HAlignment(cAlign) CLASS RichText
+METHOD RichText:HAlignment(cAlign)
 
    IF !Empty(cAlign)
       ::TextCode("q" + Lower(Left(cAlign, 1)))
@@ -1039,7 +1039,7 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD LineSpacing(nSpace, lSpExact) CLASS RichText
+METHOD RichText:LineSpacing(nSpace, lSpExact)
 
    DEFAULT lSpExact TO .F.
 
@@ -1062,7 +1062,7 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD Borders(cEntity, cBorder) CLASS RichText
+METHOD RichText:Borders(cEntity, cBorder)
 
    LOCAL i
    LOCAL aBorder := {"t", "b", "l", "r"}
@@ -1087,7 +1087,7 @@ RETURN NIL
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD ParaBorder(cBorder, cType) CLASS RichText
+METHOD RichText:ParaBorder(cBorder, cType)
 
    LOCAL codigo
 
@@ -1122,7 +1122,7 @@ RETURN ::TextCode(codigo + "\brdr" + ::BorderCode(cType))
 // 01/19/97   TRM         Creation
 //
 //********************************************************************
-METHOD BorderCode(cBorderID) CLASS RichText
+METHOD RichText:BorderCode(cBorderID)
 
    LOCAL cBorderCode := ""
    LOCAL n
@@ -1160,7 +1160,7 @@ RETURN cBorderCode
 // 06/07/00   JJA         Creation
 //
 //********************************************************************
-METHOD ShadeCode(cShadeID) CLASS RichText
+METHOD RichText:ShadeCode(cShadeID)
 
    LOCAL cShadeCode := ""
    LOCAL n
@@ -1261,7 +1261,7 @@ FUNCTION hwg_NewBase(nDec, nBase)
 RETURN cNewBase
 //**********************  END OF hwg_NewBase()  ***********************
 
-METHOD BegBookMark(texto) CLASS RichText
+METHOD RichText:BegBookMark(texto)
 
    DEFAULT texto TO "marca"
 
@@ -1274,7 +1274,7 @@ METHOD BegBookMark(texto) CLASS RichText
 
 RETURN NIL
 
-METHOD EndBookMark() CLASS RichText
+METHOD RichText:EndBookMark()
 
    ::OpenGroup()
    ::TextCode("*\bkmkend " + Lower(::cLastBook))
@@ -1282,8 +1282,8 @@ METHOD EndBookMark() CLASS RichText
 
 RETURN NIL
 
-METHOD Linea(aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
-              aColores, nWidth, nPatron, lSombra, aSombra) CLASS RichText
+METHOD RichText:Linea(aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
+              aColores, nWidth, nPatron, lSombra, aSombra)
 
    DEFAULT cTipo TO "SOLIDA"
    DEFAULT nxoffset TO 0
@@ -1334,7 +1334,7 @@ METHOD Linea(aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
 
 RETURN NIL
 
-METHOD SetClrTab() CLASS RichText
+METHOD RichText:SetClrTab()
 
    LOCAL colors
 
@@ -1346,15 +1346,15 @@ METHOD SetClrTab() CLASS RichText
 
 RETURN colors
 
-METHOD SetStlDef() CLASS Richtext
+METHOD RichText:SetStlDef()
 
    ::IncStyle("Normal")
    ::IncStyle("Default Paragraph Font", "CHARACTER")
 
 RETURN NIL
 
-METHOD InfoDoc(cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
-                cCategor, cKeyWords, cComment) CLASS RichText
+METHOD RichText:InfoDoc(cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
+                cCategor, cKeyWords, cComment)
 
    DEFAULT cTitle TO "Informe"
    DEFAULT cSubject TO ""
@@ -1401,8 +1401,8 @@ METHOD InfoDoc(cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
 
 RETURN NIL
 
-METHOD FootNote(cTexto, cChar, nFontNumber, ;
-                 nFontSize, cAppear, nFontColor, lEnd, lAuto, lUpper) CLASS RichText
+METHOD RichText:FootNote(cTexto, cChar, nFontNumber, ;
+                 nFontSize, cAppear, nFontColor, lEnd, lAuto, lUpper)
 
    DEFAULT cTexto TO ""
    DEFAULT cChar TO "*"
@@ -1465,8 +1465,8 @@ METHOD FootNote(cTexto, cChar, nFontNumber, ;
 
 RETURN NIL
 
-METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
-                   lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd) CLASS RichText
+METHOD RichText:BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
+                   lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd)
 
    DEFAULT cTexto TO ""
    DEFAULT aOffset TO {0, 0}
@@ -1508,7 +1508,7 @@ METHOD BegTextBox(cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
 
 RETURN NIL
 
-METHOD EndTextBox() CLASS RichText
+METHOD RichText:EndTextBox()
 
    ::CloseGroup() // Cierra el grupo de texto
 
@@ -1540,7 +1540,7 @@ METHOD EndTextBox() CLASS RichText
 
 RETURN NIL
 
-METHOD SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos) CLASS RichText
+METHOD RichText:SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos)
 
    LOCAL ancho
 
@@ -1604,7 +1604,7 @@ METHOD SetFrame(ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, 
 
 RETURN NIL
 
-METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign, ;
+METHOD RichText:Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign, ;
               cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos)
 
    LOCAL cExt
@@ -1688,9 +1688,9 @@ METHOD Image(cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign
 
 RETURN NIL
 
-METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
+METHOD RichText:IncStyle(cName, styletype, nFontNumber, nFontSize, ;
                  nFontColor, cAppear, cHorzAlign, nIndent, cKeys, ;
-                 cTypeBorder, cBordStyle, nBordColor, nShdPct, cShadPat, lAdd, LUpdate) CLASS RichText
+                 cTypeBorder, cBordStyle, nBordColor, nShdPct, cShadPat, lAdd, LUpdate)
 
    LOCAL lParrafo := .F.
    LOCAL lChar := .F.
@@ -1777,7 +1777,7 @@ METHOD IncStyle(cName, styletype, nFontNumber, nFontSize, ;
 
 RETURN NIL
 
-METHOD BeginStly() CLASS RichText
+METHOD RichText:BeginStly()
 
    ::OpenGroup()
    ::TextCode("stylesheet")
@@ -1785,7 +1785,7 @@ METHOD BeginStly() CLASS RichText
 
 RETURN NIL
 
-METHOD WriteStly() CLASS RichText
+METHOD RichText:WriteStly()
 
    ::CloseGroup()
 
@@ -1801,7 +1801,7 @@ RETURN NIL
 // 01/09/99
 //
 //********************************************************************
-METHOD ParaStyle(nStyle) CLASS RichText
+METHOD RichText:ParaStyle(nStyle)
 
    IF nStyle == 0
       RETURN NIL
@@ -1827,7 +1827,7 @@ RETURN NIL
 // 01/09/99
 //
 //********************************************************************
-METHOD CharStyle(nStyle) CLASS RichText
+METHOD RichText:CharStyle(nStyle)
 
    IF nStyle == 0
       RETURN NIL
@@ -1844,7 +1844,7 @@ METHOD CharStyle(nStyle) CLASS RichText
 RETURN NIL
 //**********************  END OF HAlignment()  ************************
 
-METHOD TextCode(cCode) CLASS RichText
+METHOD RichText:TextCode(cCode)
 
    LOCAL codigo
 
@@ -1868,12 +1868,12 @@ RETURN codigo
 //                        You can introduce more than one header row
 //
 //********************************************************************
-METHOD DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
+METHOD RichText:DefNewTable(cTblHAlign, nTblFntNum, nTblFntSize, ;
                     cCellAppear, cCellHAlign, nTblRows, ;
                     nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
                     lTblNoSplit, nTblHdRows, aHeadTit, nTblHdHgt, nTblHdPct, nTblHdFont, ;
                     nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor, nTblHdFColor, ;
-                    aTblCJoin) CLASS RichText
+                    aTblCJoin)
 
    LOCAL i
    LOCAL j
@@ -1976,7 +1976,7 @@ RETURN NIL
 //
 //
 //********************************************************************
-METHOD TableDef(lHeader, nRowHead, cCellBorder, aColPct) CLASS RichText
+METHOD RichText:TableDef(lHeader, nRowHead, cCellBorder, aColPct)
 
    LOCAL i
    LOCAL j
@@ -2044,9 +2044,9 @@ RETURN NIL
 //
 //
 //********************************************************************
-METHOD TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+METHOD RichText:TableCell(cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
                   nSpace, lSpExact, nFontColor, ;
-                  lDefault, lHeader, lPage, lDate) CLASS RichText
+                  lDefault, lHeader, lPage, lDate)
 
    DEFAULT nFontNumber TO -1
    DEFAULT nFontSize TO -1
@@ -2114,7 +2114,7 @@ RETURN NIL
 //
 //
 //********************************************************************
-METHOD CellFormat(cCellBorder, aCellPct) CLASS RichText
+METHOD RichText:CellFormat(cCellBorder, aCellPct)
 
    DEFAULT cCellBorder TO ::cCellBorder
    DEFAULT aCellPct TO AClone(::aColPct)
@@ -2124,9 +2124,9 @@ METHOD CellFormat(cCellBorder, aCellPct) CLASS RichText
 RETURN NIL
 //**********************  END OF CellFormat()  ***********************
 
-METHOD DocFormat(nTab, nLineStart, lBackup, nDefLang, nDocType, ;
+METHOD RichText:DocFormat(nTab, nLineStart, lBackup, nDefLang, nDocType, ;
                  cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, ;
-                 cProtect, lFacing, nGutter) CLASS RichText
+                 cProtect, lFacing, nGutter)
 
    DEFAULT nTab TO 0.5
    DEFAULT nLineStart TO 1
@@ -2213,7 +2213,7 @@ METHOD DocFormat(nTab, nLineStart, lBackup, nDefLang, nDocType, ;
 
 RETURN NIL
 
-METHOD CurrDate(cFormat) CLASS RichText
+METHOD RichText:CurrDate(cFormat)
 
    DEFAULT cFormat TO "LONGFORMAT"
 
@@ -2229,7 +2229,7 @@ METHOD CurrDate(cFormat) CLASS RichText
 RETURN NIL
 
 /*
-METHOD RtfJpg(cName, aSize, nPercent) CLASS RichText
+METHOD RichText:RtfJpg(cName, aSize, nPercent)
 
    LOCAL aInches[2]
    LOCAL in
@@ -2297,7 +2297,7 @@ METHOD RtfJpg(cName, aSize, nPercent) CLASS RichText
 
 RETURN NIL
 
-METHOD Wmf2Rtf(cName, aSize, nPercent) CLASS RichText
+METHOD RichText:Wmf2Rtf(cName, aSize, nPercent)
 
    LOCAL in
    LOCAL cMenInter
@@ -2412,7 +2412,7 @@ FUNCTION LoadPicture(cName, nWidth, nHeight, ScreenResX, ScreenResy)
 
 RETURN .T.
 
-METHOD Bmp2Wmf(cName, aSize, nPercent) CLASS RichText
+METHOD RichText:Bmp2Wmf(cName, aSize, nPercent)
 
    LOCAL cMenInter
    LOCAL n_bloque

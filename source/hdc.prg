@@ -23,7 +23,7 @@ CLASS HPAINTDC FROM HDC
 
 ENDCLASS
 
-METHOD NEW(nWnd) CLASS HPAINTDC
+METHOD HPaintDC:NEW(nWnd)
 
    ::Super:new()
    ::m_ps   := hwg_DefinePaintStru()
@@ -32,7 +32,7 @@ METHOD NEW(nWnd) CLASS HPAINTDC
 
    RETURN Self
 
-METHOD END () CLASS HPAINTDC
+METHOD HPaintDC:END()
 
    hwg_EndPaint(::m_hWnd, ::m_ps)
    ::m_hDC       := NIL
@@ -76,22 +76,22 @@ CLASS HDC
    METHOD DeleteDc()
 ENDCLASS
 
-METHOD NEW() CLASS HDC
+METHOD HDC:NEW()
 
    ::m_hDC       := NIL
    ::m_hAttribDC := NIL
 
    RETURN Self
 
-METHOD MOVETO(x1, y1) CLASS HDC
+METHOD HDC:MOVETO(x1, y1)
    hwg_MoveTo(::m_hDC, x1, y1)
    RETURN Self
 
-METHOD LINETO(x1, y1) CLASS HDC
+METHOD HDC:LINETO(x1, y1)
    hwg_LineTo(::m_hDC, x1, y1)
    RETURN Self
 
-METHOD Attach(hDC) CLASS HDC
+METHOD HDC:Attach(hDC)
 
    IF Empty(hDC)
       RETURN .F.
@@ -102,18 +102,18 @@ METHOD Attach(hDC) CLASS HDC
    ::SetAttribDC(::m_hDC)
    RETURN .T.
 
-METHOD deletedc() CLASS HDC
+METHOD HDC:deletedc()
    hwg_DeleteDc(::m_hDC)
    ::m_hDC := NIL
    ::m_hAttribDC := NIL
    RETURN NIL
 
-METHOD SetAttribDC(hDC) CLASS HDC
+METHOD HDC:SetAttribDC(hDC)
 
    ::m_hAttribDC := hDC
    RETURN NIL
 
-METHOD SelectClipRgn(pRgn) CLASS HDC
+METHOD HDC:SelectClipRgn(pRgn)
 
    LOCAL nRetVal := - 1
 
@@ -127,42 +127,42 @@ METHOD SelectClipRgn(pRgn) CLASS HDC
 
    RETURN nRetVal
 
-METHOD fillsolidrect(lpRect, clr) CLASS HDC
+METHOD HDC:fillsolidrect(lpRect, clr)
 
    hwg_SetBkColor(::m_hDC, clr)
    hwg_ExtTextOut(::m_hDC, 0, 0, lpRect[1], lpRect[2], lpRect[3], lpRect[4], NIL)
 
    RETURN NIL
 
-METHOD SetTextColor(xColor) CLASS HDC
+METHOD HDC:SetTextColor(xColor)
 
    RETURN hwg_SetTextColor(::m_hDc, xColor)
 
-METHOD SetBkMode(xMode) CLASS HDC
+METHOD HDC:SetBkMode(xMode)
 
    RETURN hwg_SetBkMode(::m_hDc, xMode)
 
-METHOD SelectObject(xMode) CLASS HDC
+METHOD HDC:SelectObject(xMode)
 
    RETURN hwg_SelectObject(::m_hDc, xMode)
 
-METHOD DrawText(strText, Rect, dwFlags) CLASS HDC
+METHOD HDC:DrawText(strText, Rect, dwFlags)
 
    hwg_DrawText(::m_hDC, strText, Rect[1], Rect[2], Rect[3], Rect[4], dwFlags)
 
    RETURN NIL
 
-METHOD fillrect(lpRect, clr) CLASS HDC
+METHOD HDC:fillrect(lpRect, clr)
 
    hwg_FillRect(::m_hDC, lpRect[1], lpRect[2], lpRect[3], lpRect[4], clr)
 
    RETURN NIL
 
 
-METHOD CreateCompatibleDc(x) CLASS HDC
+METHOD HDC:CreateCompatibleDc(x)
    RETURN ::Attach(hwg_CreateCompatibleDC(x))
 
-METHOD SAVEDC() CLASS HDC
+METHOD HDC:SAVEDC()
    LOCAL nRetVal := 0
 
    IF (!Empty(::m_hAttribDC))
@@ -173,7 +173,7 @@ METHOD SAVEDC() CLASS HDC
    ENDIF
    RETURN nRetVal
 
-METHOD RestoreDC(nSavedDC) CLASS HDC
+METHOD HDC:RestoreDC(nSavedDC)
 
    // if two distinct DCs, nSavedDC can only be -1
 
@@ -186,7 +186,7 @@ METHOD RestoreDC(nSavedDC) CLASS HDC
    ENDIF
    RETURN bRetVal
 
-METHOD SetMapMode(nMapMode) CLASS HDC
+METHOD HDC:SetMapMode(nMapMode)
 
    LOCAL nRetVal := 0
 
@@ -200,7 +200,7 @@ METHOD SetMapMode(nMapMode) CLASS HDC
 
 
 
-METHOD SetWindowOrg(x, y) CLASS HDC
+METHOD HDC:SetWindowOrg(x, y)
 
 
    LOCAL point
@@ -214,7 +214,7 @@ METHOD SetWindowOrg(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetWindowExt(x, y) CLASS HDC
+METHOD HDC:SetWindowExt(x, y)
 
 
    LOCAL point
@@ -228,7 +228,7 @@ METHOD SetWindowExt(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetViewportOrg(x, y) CLASS HDC
+METHOD HDC:SetViewportOrg(x, y)
 
 
    LOCAL point
@@ -242,7 +242,7 @@ METHOD SetViewportOrg(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetViewportExt(x, y) CLASS HDC
+METHOD HDC:SetViewportExt(x, y)
 
    LOCAL point
 
@@ -255,7 +255,7 @@ METHOD SetViewportExt(x, y) CLASS HDC
    RETURN point
 
 
-METHOD SetArcDirection(nArcDirection)
+METHOD HDC:SetArcDirection(nArcDirection)
 
 
    LOCAL nResult := 0
@@ -268,10 +268,10 @@ METHOD SetArcDirection(nArcDirection)
    RETURN nResult
 
 
-METHOD PIE(arect, apt1, apt2)
+METHOD HDC:PIE(arect, apt1, apt2)
    RETURN hwg_Pie(::m_hdc, arect[1], arect[2], arect[3], arect[4], apt1[1], apt1[2], apt2[1], apt2[2])
 
-METHOD SetROP2(nDrawMode)
+METHOD HDC:SetROP2(nDrawMode)
 
 
    LOCAL nRetVal := 0
@@ -296,7 +296,7 @@ CLASS HCLIENTDC FROM HDC
 
 ENDCLASS
 
-METHOD NEW(nWnd) CLASS HCLIENTDC
+METHOD HClientDC:NEW(nWnd)
 
    ::Super:new()
    ::m_hWnd := nWnd
@@ -304,7 +304,7 @@ METHOD NEW(nWnd) CLASS HCLIENTDC
 
    RETURN Self
 
-METHOD END () CLASS HCLIENTDC
+METHOD HClientDC:END()
 
    hwg_ReleaseDc(::m_hWnd, ::m_hDC)
    ::m_hDC       := NIL

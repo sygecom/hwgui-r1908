@@ -54,9 +54,9 @@ CLASS HRichEdit INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HRichEdit:New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
-            tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder) CLASS HRichEdit
+            tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER)
                         IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0))
@@ -86,7 +86,7 @@ METHOD New(oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    RETURN Self
 
-METHOD Activate() CLASS HRichEdit
+METHOD HRichEdit:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateRichEdit(::oParent:handle, ::id, ;
                                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -94,7 +94,7 @@ METHOD Activate() CLASS HRichEdit
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HRichEdit
+METHOD HRichEdit:Init()
    IF !::lInit
       ::nHolder := 1
       hwg_SetWindowObject(::handle, Self)
@@ -109,7 +109,7 @@ METHOD Init() CLASS HRichEdit
    RETURN NIL
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
+METHOD HRichEdit:onEvent(msg, wParam, lParam)
    LOCAL nDelta, nret
 
    // hwg_WriteLog("rich" + Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
@@ -184,7 +184,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
 
    RETURN - 1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
+METHOD HRichEdit:onEvent(msg, wParam, lParam)
 
    LOCAL nDelta
    LOCAL nret
@@ -302,7 +302,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HRichEdit
 RETURN -1
 #endif
 
-METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
+METHOD HRichEdit:SetColor(tColor, bColor, lRedraw)
 
    IF tcolor != NIL
       hwg_RE_SetDefault(::handle, tColor) //, ID_FONT ,,) // cor e fonte padrao
@@ -314,7 +314,7 @@ METHOD SetColor(tColor, bColor, lRedraw) CLASS HRichEdit
 
    RETURN NIL
 
-METHOD ReadOnly(lreadOnly)
+METHOD HRichEdit:ReadOnly(lreadOnly)
 
    IF lreadOnly != NIL
       IF !Empty(hwg_SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
@@ -323,7 +323,7 @@ METHOD ReadOnly(lreadOnly)
    ENDIF
    RETURN ::lReadOnly
 
-METHOD UpdatePos() CLASS HRichEdit
+METHOD HRichEdit:UpdatePos()
    LOCAL npos := hwg_SendMessage(::handle, EM_GETSEL, 0, 0)
    LOCAL pos1 := hwg_LOWORD(npos) + 1, pos2 := hwg_HIWORD(npos) + 1
 
@@ -336,7 +336,7 @@ METHOD UpdatePos() CLASS HRichEdit
 
    RETURN nPos
 
-METHOD onChange() CLASS HRichEdit
+METHOD HRichEdit:onChange()
 
    IF hb_IsBlock(::bChange)
       ::oparent:lSuspendMsgsHandling := .T.
@@ -345,14 +345,14 @@ METHOD onChange() CLASS HRichEdit
    ENDIF
    RETURN NIL
 
-METHOD onGotFocus() CLASS HRichEdit
+METHOD HRichEdit:onGotFocus()
   RETURN ::When()
 
-METHOD onLostFocus() CLASS HRichEdit
+METHOD HRichEdit:onLostFocus()
   RETURN ::Valid()
 
 
-METHOD When() CLASS HRichEdit
+METHOD HRichEdit:When()
 
     IF !hwg_CheckFocus(Self, .F.)
        RETURN .T.
@@ -364,7 +364,7 @@ METHOD When() CLASS HRichEdit
  RETURN .T.
 
 
-METHOD Valid() CLASS HRichEdit
+METHOD HRichEdit:Valid()
 
    IF hb_IsBlock(::bLostFocus) .AND. !hwg_CheckFocus(Self, .T.)
        RETURN .T.
@@ -376,7 +376,7 @@ METHOD Valid() CLASS HRichEdit
 
   RETURN .T.
 
-METHOD SaveFile(cFile) CLASS HRichEdit
+METHOD HRichEdit:SaveFile(cFile)
 
    IF !Empty(cFile)
       IF !Empty(hwg_SaveRichEdit(::handle, cFile))
@@ -385,7 +385,7 @@ METHOD SaveFile(cFile) CLASS HRichEdit
    ENDIF
    RETURN .F.
 
-METHOD OpenFile(cFile) CLASS HRichEdit
+METHOD HRichEdit:OpenFile(cFile)
 
    IF !Empty(cFile)
       IF !Empty(hwg_LoadRichEdit(::handle, cFile))
@@ -394,7 +394,7 @@ METHOD OpenFile(cFile) CLASS HRichEdit
    ENDIF
    RETURN .F.
 
-METHOD Print() CLASS HRichEdit
+METHOD HRichEdit:Print()
 
    IF ::hDCPrinter == NIL
     //  ::hDCPrinter := hwg_PrintSetup()

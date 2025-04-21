@@ -83,7 +83,7 @@ CLASS PrintDos
 
 ENDCLASS
 
-METHOD New(oPorta) CLASS PrintDos
+METHOD PrintDos:New(oPorta)
    LOCAL oDouble  := {oMATRIXDOUBLE, oINKJETDOUBLE, oLASER10CPI}
    LOCAL oNormal  := {oMATRIXNORMAL, oINKJETNORMAL, oLASER12CPI}
    LOCAL oCompress := {oMATRIXCOMPRESS, oINKJETCOMPRESS, oLASER18CPI}
@@ -160,8 +160,8 @@ METHOD New(oPorta) CLASS PrintDos
    RETURN Self
 
 
-METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
-                oComm8, oComm9, oComm10) CLASS PrintDos
+METHOD PrintDos:Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
+                oComm8, oComm9, oComm10)
 
    LOCAL oStr //:= oComm1 (value not used)
 
@@ -187,7 +187,7 @@ METHOD Comando(oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
    RETURN NIL
 
 
-METHOD gWrite(oText) CLASS PrintDos
+METHOD PrintDos:gWrite(oText)
 
    //tracelog(otext)
    IF ::oAns2Oem
@@ -201,7 +201,7 @@ METHOD gWrite(oText) CLASS PrintDos
 
    RETURN NIL
 
-METHOD Eject() CLASS PrintDos
+METHOD PrintDos:Eject()
 //tracelog(::gText, ::oText)
 
    FWrite(::gText, ::oText)
@@ -220,19 +220,19 @@ METHOD Eject() CLASS PrintDos
    //tracelog(::gText, ::oText)
    RETURN NIL
 
-METHOD Compress() CLASS PrintDos
+METHOD PrintDos:Compress()
 
    ::Comando(::cCompr)
 
    RETURN NIL
 
-METHOD Double() CLASS PrintDos
+METHOD PrintDos:Double()
 
    ::Comando(::cDouble)
 
    RETURN NIL
 
-METHOD DesCompress() CLASS PrintDos
+METHOD PrintDos:DesCompress()
 
    ::Comando(::cNormal)
 
@@ -240,20 +240,20 @@ METHOD DesCompress() CLASS PrintDos
 
 /* *** Contribution Fernando Athayde *** */
 
-METHOD Bold() CLASS PrintDos
+METHOD PrintDos:Bold()
 
    ::Comando(::cBold)
 
    RETURN NIL
 
-METHOD UnBold() CLASS PrintDos
+METHOD PrintDos:UnBold()
 
    ::Comando(::cUnBold)
 
    RETURN NIL
 
 
-METHOD NewLine() CLASS PrintDos
+METHOD PrintDos:NewLine()
 
    IF ::oAns2Oem
       ::oText += HB_ANSITOOEM(Chr(13) + Chr(10))
@@ -263,7 +263,7 @@ METHOD NewLine() CLASS PrintDos
    ::nPcol := 0
    RETURN NIL
 
-METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
+METHOD PrintDos:Say(oProw, oPcol, oTexto, oPicture)
    // tracelog(oProw, oPcol, oTexto, oPicture)
    IF hb_IsNumeric(oTexto)
 
@@ -287,7 +287,7 @@ METHOD Say(oProw, oPcol, oTexto, oPicture) CLASS PrintDos
 
    RETURN NIL
 
-METHOD SetCols(nProw, nPcol) CLASS PrintDos
+METHOD PrintDos:SetCols(nProw, nPcol)
 
    IF ::nProw > nProw
       ::Eject()
@@ -310,19 +310,19 @@ METHOD SetCols(nProw, nPcol) CLASS PrintDos
 
    RETURN NIL
 
-METHOD SetPrc(x, y) CLASS PrintDos
+METHOD PrintDos:SetPrc(x, y)
    ::nProw := x
    ::nPCol := y
    RETURN NIL
 
-METHOD END() CLASS PrintDos
+METHOD PrintDos:END()
 
    FWrite(::gText, ::oText)
    FClose(::gText)
 
    RETURN NIL
 
-METHOD PrinterFile(fname) CLASS PrintDos
+METHOD PrintDos:PrinterFile(fname)
    LOCAL strbuf := Space(PF_BUFFERS)
    LOCAL han, nRead
 
@@ -370,7 +370,7 @@ FUNCTION hwg_wSetPrc(x, y, oPrinter)
    oPrinter:SetPrc(x, y)
    RETURN NIL
 
-METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
+METHOD PrintDos:TxttoGraphic(fName, osize, oPreview)
 
    LOCAL strbuf := Space(2052), poz := 2052, stroka
    LOCAL han := FOpen(fName, FO_READ + FO_SHARED)
@@ -425,7 +425,7 @@ METHOD TxttoGraphic(fName, osize, oPreview) CLASS PrintDos
 
    RETURN .T.
 
-METHOD Preview(fName, cTitle) CLASS PrintDos
+METHOD PrintDos:Preview(fName, cTitle)
    LOCAL oedit1
    LOCAL strbuf := Space(2052), poz := 2052, stroka
    LOCAL han := FOpen(fName, FO_READ + FO_SHARED)

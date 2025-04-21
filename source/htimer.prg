@@ -40,7 +40,7 @@ CLASS VAR aTimers   INIT {}
 ENDCLASS
 
 
-METHOD New(oParent, nId, value, bAction) CLASS HTimer
+METHOD HTimer:New(oParent, nId, value, bAction)
 
    ::oParent := IIf(oParent == NIL, HWindow():GetMain():oDefaultParent, oParent)
    IF nId == NIL
@@ -63,7 +63,7 @@ METHOD New(oParent, nId, value, bAction) CLASS HTimer
 
    RETURN Self
 
-METHOD Init() CLASS HTimer
+METHOD HTimer:Init()
    IF !::lInit
       IF ::value > 0
          hwg_SetTimer(::oParent:handle, ::id, ::value)
@@ -71,7 +71,7 @@ METHOD Init() CLASS HTimer
    ENDIF
    RETURN  NIL
 
-METHOD END() CLASS HTimer
+METHOD HTimer:END()
    LOCAL i
 
    IF ::oParent != NIL
@@ -84,7 +84,7 @@ METHOD END() CLASS HTimer
 
    RETURN NIL
 
-METHOD onAction()
+METHOD HTimer:onAction()
 
    hwg_TimerProc(, ::id, ::interval)
 

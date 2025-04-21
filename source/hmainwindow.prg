@@ -74,8 +74,8 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, oFont, bInit, bExit, bSize, bPaint, ;
-   bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, bMdiMenu) CLASS HMainWindow
+METHOD HMainWindow:New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, oFont, bInit, bExit, bSize, bPaint, ;
+   bGfocus, bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, bMdiMenu)
 
    ::Super:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, bInit, bExit, bSize, bPaint, bGfocus, ;
       bLfocus, bOther, cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh)
@@ -125,7 +125,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate) CLASS HMainWindow
+METHOD HMainWindow:Activate(lShow, lMaximized, lMinimized, lCentered, bActivate)
 
    LOCAL oWndClient
    LOCAL handle
@@ -226,7 +226,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0
-METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
+METHOD HMainWindow:onEvent(msg, wParam, lParam)
 
    LOCAL i
    LOCAL xPos
@@ -280,7 +280,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HMainWindow
+METHOD HMainWindow:onEvent(msg, wParam, lParam)
 
    LOCAL i
    LOCAL xPos
@@ -416,7 +416,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD InitTray(oNotifyIcon, bNotify, oNotifyMenu, cTooltip) CLASS HMainWindow
+METHOD HMainWindow:InitTray(oNotifyIcon, bNotify, oNotifyMenu, cTooltip)
 
    ::bNotify := bNotify
    ::oNotifyMenu := oNotifyMenu

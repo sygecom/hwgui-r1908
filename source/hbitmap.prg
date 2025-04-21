@@ -34,7 +34,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddResource(name, nFlags, lOEM, nWidth, nHeight) CLASS HBitmap
+METHOD HBitmap:AddResource(name, nFlags, lOEM, nWidth, nHeight)
 
    LOCAL lPreDefined := .F.
    LOCAL item
@@ -72,7 +72,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddStandard(nId) CLASS HBitmap
+METHOD HBitmap:AddStandard(nId)
 
    LOCAL item
    LOCAL aBmpSize
@@ -95,7 +95,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddFile(name, hDC, lTranparent, nWidth, nHeight) CLASS HBitmap
+METHOD HBitmap:AddFile(name, hDC, lTranparent, nWidth, nHeight)
 
    LOCAL item
    LOCAL aBmpSize
@@ -145,7 +145,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD AddWindow(oWnd, lFull) CLASS HBitmap
+METHOD HBitmap:AddWindow(oWnd, lFull)
 
    LOCAL aBmpSize
 
@@ -160,7 +160,7 @@ RETURN SELF
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Release() CLASS HBitmap
+METHOD HBitmap:Release()
 
    LOCAL item
    LOCAL nlen := Len(::aBitmaps)

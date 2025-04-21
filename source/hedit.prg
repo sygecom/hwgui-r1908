@@ -99,9 +99,9 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ;
+METHOD HEdit:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ;
    bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, lNoBorder, nMaxLength, lPassword, bKeyDown, bChange, ;
-   bOther) CLASS HEdit
+   bOther)
 
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
                         WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0) + ;
@@ -189,7 +189,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate() CLASS HEdit
+METHOD HEdit:Activate()
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateEdit(::oParent:handle, ::id, ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -200,7 +200,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Init() CLASS HEdit
+METHOD HEdit:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -218,7 +218,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onEvent(msg, wParam, lParam) CLASS HEdit
+METHOD HEdit:onEvent(msg, wParam, lParam)
 
    LOCAL oParent := ::oParent
    LOCAL nPos
@@ -554,8 +554,8 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, ;
-   bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange) CLASS HEdit
+METHOD HEdit:Redefine(oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, ;
+   bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange)
 
    ::Super:New(oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
       IIf(bcolor == NIL, hwg_GetSysColor(COLOR_BTNHIGHLIGHT), bcolor))
@@ -599,7 +599,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Value(Value) CLASS HEdit
+METHOD HEdit:Value(Value)
 
    LOCAL vari
 
@@ -620,7 +620,7 @@ RETURN vari
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS HEdit
+METHOD HEdit:Refresh()
    
    LOCAL vari
    
@@ -644,7 +644,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetText(c) CLASS HEdit
+METHOD HEdit:SetText(c)
 
    IF c != NIL
       IF hb_IsObject(c)
@@ -686,7 +686,7 @@ RETURN (lCtrl .AND. (Asc(SubStr(cKeyb, VK_CONTROL + 1, 1)) >= 128)) .OR. ;
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD ParsePict(cPicture, vari) CLASS HEdit
+METHOD HEdit:ParsePict(cPicture, vari)
 
    LOCAL nAt
    LOCAL i
@@ -753,7 +753,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD IsEditable(nPos, lDel) CLASS HEdit
+METHOD HEdit:IsEditable(nPos, lDel)
    
    LOCAL cChar
 
@@ -779,7 +779,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD KeyRight(nPos) CLASS HEdit
+METHOD HEdit:KeyRight(nPos)
    
    LOCAL masklen
    LOCAL newpos
@@ -816,7 +816,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD KeyLeft(nPos) CLASS HEdit
+METHOD HEdit:KeyLeft(nPos)
 
    IF nPos == NIL
       nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
@@ -840,7 +840,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD DeleteChar(lBack) CLASS HEdit
+METHOD HEdit:DeleteChar(lBack)
    
    LOCAL nSel := hwg_SendMessage(::handle, EM_GETSEL, 0, 0)
    LOCAL nPosEnd := hwg_HIWORD(nSel)
@@ -935,7 +935,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD Input(cChar, nPos) CLASS HEdit
+METHOD HEdit:Input(cChar, nPos)
 
    LOCAL cPic
 
@@ -997,7 +997,7 @@ METHOD Input(cChar, nPos) CLASS HEdit
 
 RETURN cChar
 #else
-METHOD Input(cChar, nPos) CLASS HEdit
+METHOD HEdit:Input(cChar, nPos)
 
    LOCAL cPic
 
@@ -1069,7 +1069,7 @@ RETURN cChar
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetApplyKey(cKey) CLASS HEdit
+METHOD HEdit:GetApplyKey(cKey)
 
    LOCAL nPos
    LOCAL nGetLen
@@ -1204,7 +1204,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD ReadOnly(lreadOnly)
+METHOD HEdit:ReadOnly(lreadOnly)
 
    IF lreadOnly != NIL
       IF !Empty(hwg_SendMessage(::handle, EM_SETREADONLY, IIf(lReadOnly, 1, 0), 0))
@@ -1216,7 +1216,7 @@ RETURN ::lReadOnly
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SelStart(Start) CLASS HEdit
+METHOD HEdit:SelStart(Start)
    
    LOCAL nPos
 
@@ -1233,7 +1233,7 @@ RETURN ::nSelStart
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SelLength(Length) CLASS HEdit
+METHOD HEdit:SelLength(Length)
 
    IF Length != NIL
       hwg_SendMessage(::handle, EM_SETSEL, ::nSelStart, ::nSelStart + Length)
@@ -1244,7 +1244,7 @@ RETURN ::nSelLength
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SelText(cText) CLASS HEdit
+METHOD HEdit:SelText(cText)
 
    IF cText != NIL
       hwg_SendMessage(::handle, EM_SETSEL, ::nSelStart, ::nSelStart + ::nSelLength)
@@ -1262,7 +1262,7 @@ RETURN ::cSelText
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetCueBanner(cText, lShowFoco) CLASS HEdit
+METHOD HEdit:SetCueBanner(cText, lShowFoco)
 #DEFINE EM_SETCUEBANNER 0x1501
 
    LOCAL lRet := .F.
@@ -1275,7 +1275,7 @@ RETURN lRet
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD When() CLASS HEdit
+METHOD HEdit:When()
 
    LOCAL res := .T.
    LOCAL nSkip
@@ -1320,7 +1320,7 @@ RETURN res
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Valid() CLASS HEdit
+METHOD HEdit:Valid()
 
    LOCAL res := .T.
    LOCAL vari
@@ -1417,7 +1417,7 @@ RETURN .T.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD onChange(lForce) CLASS HEdit
+METHOD HEdit:onChange(lForce)
 
    //-LOCAL nPos := hwg_HIWORD(hwg_SendMessage(::handle, EM_GETSEL, 0, 0)) + 1
    LOCAL vari
@@ -1446,7 +1446,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Untransform(cBuffer) CLASS HEdit
+METHOD HEdit:Untransform(cBuffer)
 
    LOCAL xValue
    LOCAL cChar
@@ -1545,7 +1545,7 @@ RETURN xValue
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FirstEditable() CLASS HEdit
+METHOD HEdit:FirstEditable()
    
    LOCAL nFor
    LOCAL nMaxLen := Len(::cPicMask)
@@ -1564,7 +1564,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD FirstNotEditable(nPos) CLASS HEdit
+METHOD HEdit:FirstNotEditable(nPos)
    
    LOCAL nFor
    LOCAL nMaxLen := Len(::cPicMask)
@@ -1579,7 +1579,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD LastEditable() CLASS HEdit
+METHOD HEdit:LastEditable()
    
    LOCAL nFor
    LOCAL nMaxLen := Len(::cPicMask)
@@ -1594,7 +1594,7 @@ RETURN 0
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD IsBadDate(cBuffer) CLASS HEdit
+METHOD HEdit:IsBadDate(cBuffer)
    
    LOCAL i
    LOCAL nLen
@@ -1613,7 +1613,7 @@ RETURN .F.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetGetUpdated() CLASS HEdit
+METHOD HEdit:SetGetUpdated()
 
    LOCAL oParent
 

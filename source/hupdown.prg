@@ -62,10 +62,10 @@ CLASS HUpDown INHERIT HControl
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HUpDown:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
            oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
            nUpDWidth, nLower, nUpper, nIncr, cPicture, lNoBorder, nMaxLength, ;
-           bKeyDown, bChange, bOther, bClickUp, bClickDown) CLASS HUpDown
+           bKeyDown, bChange, bOther, bClickUp, bClickDown)
 
    HB_SYMBOL_UNUSED(bOther)
 
@@ -123,7 +123,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
   RETURN Self
 
-METHOD Activate() CLASS HUpDown
+METHOD HUpDown:Activate()
 
    IF !Empty(::oParent:handle)
       ::lCreate := .T.
@@ -137,7 +137,7 @@ METHOD Activate() CLASS HUpDown
 
    RETURN NIL
 
-METHOD Init() CLASS HUpDown
+METHOD HUpDown:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -148,7 +148,7 @@ METHOD Init() CLASS HUpDown
    RETURN NIL
 
 
-METHOD CREATEUPDOWN() CLASS Hupdown
+METHOD HUpDown:CREATEUPDOWN()
 
    ///IF Empty(::handle)
    //   RETURN NIL
@@ -180,7 +180,7 @@ METHOD CREATEUPDOWN() CLASS Hupdown
    ENDIF
    RETURN NIL
 
-METHOD DisableBackColor(DisableBColor) CLASS HUpDown
+METHOD HUpDown:DisableBackColor(DisableBColor)
 
     IF DisableBColor != NIL
        ::Super:DisableBackColor(DisableBColor)
@@ -190,7 +190,7 @@ METHOD DisableBackColor(DisableBColor) CLASS HUpDown
     ENDIF
     RETURN ::DisableBColor
 
-METHOD SetRange(nLower, nUpper) CLASS HUpDown
+METHOD HUpDown:SetRange(nLower, nUpper)
    
    ::nLower := IIf(nLower != NIL, nLower, ::nLower)
    ::nUpper := IIf(nUpper != NIL, nUpper, ::nUpper)
@@ -198,7 +198,7 @@ METHOD SetRange(nLower, nUpper) CLASS HUpDown
 
    RETURN NIL
 
-METHOD Value(Value) CLASS HUpDown
+METHOD HUpDown:Value(Value)
 
    IF Value != NIL .AND. ::oEditUpDown != NIL
        ::SetValue(Value)
@@ -207,7 +207,7 @@ METHOD Value(Value) CLASS HUpDown
    ENDIF
    RETURN ::nValue
 
-METHOD SetValue(nValue) CLASS HUpDown
+METHOD HUpDown:SetValue(nValue)
 
    IF nValue < ::nLower .OR. nValue > ::nUpper
        nValue := ::nValue
@@ -221,7 +221,7 @@ METHOD SetValue(nValue) CLASS HUpDown
 
    RETURN ::nValue
 
-METHOD Refresh() CLASS HUpDown
+METHOD HUpDown:Refresh()
 
    IF hb_IsBlock(::bSetGet) //.AND. ::nValue != NIL
       ::nValue := Eval(::bSetGet, , Self)
@@ -241,7 +241,7 @@ METHOD Refresh() CLASS HUpDown
 
    RETURN NIL
 
-METHOD Valid() CLASS HUpDown
+METHOD HUpDown:Valid()
    LOCAL res
 
    /*
@@ -274,7 +274,7 @@ CLASS HEditUpDown INHERIT HEdit
 
 ENDCLASS
 
-METHOD Init() CLASS HEditUpDown
+METHOD HEditUpDown:Init()
 
    IF !::lInit
       IF ::bChange != NIL
@@ -283,7 +283,7 @@ METHOD Init() CLASS HEditUpDown
    ENDIF
    RETURN NIL
 
-METHOD Notify(lParam) CLASS HeditUpDown
+METHOD HEditUpDown:Notify(lParam)
    Local nCode := hwg_GetNotifyCode(lParam)
    Local iPos := hwg_GetNotifyDeltaPos(lParam, 1)
    Local iDelta := hwg_GetNotifyDeltaPos(lParam, 2)
@@ -327,7 +327,7 @@ METHOD Notify(lParam) CLASS HeditUpDown
    ENDIF
    RETURN 0
 
-   METHOD Refresh() CLASS HeditUpDown
+METHOD HEditUpDown:Refresh()
    LOCAL vari
 
    vari := ::Value
@@ -364,9 +364,9 @@ CLASS VAR winclass   INIT "EDIT"
 
 ENDCLASS
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD HUpDown:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
             oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
-            nUpDWidth, nLower, nUpper) CLASS HUpDown
+            nUpDWidth, nLower, nUpper)
 
    nStyle   := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), WS_TABSTOP + WS_BORDER + ES_RIGHT)
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
@@ -415,7 +415,7 @@ METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight,
 
    RETURN Self
 
-METHOD Activate CLASS HUpDown
+METHOD HUpDown:Activate()
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateEdit(::oParent:handle, ::id, ;
                              ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::title)
@@ -423,7 +423,7 @@ METHOD Activate CLASS HUpDown
    ENDIF
    RETURN NIL
 
-METHOD Init() CLASS HUpDown
+METHOD HUpDown:Init()
    IF !::lInit
       ::Super:Init()
       ::nHolder := 1
@@ -434,7 +434,7 @@ METHOD Init() CLASS HUpDown
    ENDIF
    RETURN NIL
 
-METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
+METHOD HUpDown:OnEvent(msg, wParam, lParam)
 
    IF hb_IsBlock(::bOther)
       IF Eval(::bOther, Self, msg, wParam, lParam) != -1
@@ -459,7 +459,7 @@ METHOD OnEvent(msg, wParam, lParam) CLASS HUpDown
 
 RETURN -1
 
-METHOD Refresh() CLASS HUpDown
+METHOD HUpDown:Refresh()
 
    IF hb_IsBlock(::bSetGet)
       ::value := Eval(::bSetGet)

@@ -65,7 +65,7 @@ CLASS HWinPrn INHERIT HObject
 
 ENDCLASS
 
-METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies) CLASS HWinPrn
+METHOD HWinPrn:New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies)
 
    ::oPrinter := HPrinter():New(IIf(cPrinter == NIL, "", cPrinter), .F., nFormType, nBin, lLandScape, nCopies)
    IF ::oPrinter == NIL
@@ -76,7 +76,7 @@ METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies) CLASS H
 
 RETURN Self
 
-METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
+METHOD HWinPrn:InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 
    IF lElite != NIL; ::lElite := lElite;  ENDIF
    IF lCond != NIL; ::lCond := lCond;  ENDIF
@@ -88,7 +88,7 @@ METHOD InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPr
 
 RETURN NIL
 
-METHOD SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder) CLASS HWinPrn
+METHOD HWinPrn:SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 #ifdef __PLATFORM__Linux__
 Local cFont := "Monospace "
 #else
@@ -159,7 +159,7 @@ Local nMode := 0, oFont, nWidth, nPWidth
 
 RETURN NIL
 
-METHOD StartDoc(lPreview, cMetaName) CLASS HWinPrn
+METHOD HWinPrn:StartDoc(lPreview, cMetaName)
 
    ::lDocStart := .T.
    ::oPrinter:StartDoc(lPreview, cMetaName)
@@ -167,7 +167,7 @@ METHOD StartDoc(lPreview, cMetaName) CLASS HWinPrn
 
 RETURN NIL
 
-METHOD NextPage() CLASS HWinPrn
+METHOD HWinPrn:NextPage()
 
    IF !::lDocStart
       RETURN NIL
@@ -190,7 +190,7 @@ METHOD NextPage() CLASS HWinPrn
 
 RETURN NIL
 
-METHOD PrintLine(cLine, lNewLine) CLASS HWinPrn
+METHOD HWinPrn:PrintLine(cLine, lNewLine)
 Local i, i0, j, slen, c
 
    IF !::lDocStart
@@ -280,7 +280,7 @@ Local i, i0, j, slen, c
 
 RETURN NIL
 
-METHOD PrintText(cText) CLASS HWinPrn
+METHOD HWinPrn:PrintText(cText)
 
    IF ::lChanged
       ::SetMode()
@@ -291,7 +291,7 @@ METHOD PrintText(cText) CLASS HWinPrn
 
 RETURN NIL
 
-METHOD PutCode(cLine) CLASS HWinPrn
+METHOD HWinPrn:PutCode(cLine)
 STATIC aCodes := { ;
    {Chr(27) + "@", .F., .F., 6, .F., .F., .F.}, ; /* Reset */
    {Chr(27) + "M", .T.,,,,,}, ; /* Elite */
@@ -317,7 +317,7 @@ Local i, sLen := Len(aCodes), c := Left(cLine, 1)
 
 RETURN 1
 
-METHOD EndDoc() CLASS HWinPrn
+METHOD HWinPrn:EndDoc()
 
    IF ::lPageStart
       ::oPrinter:EndPage()
@@ -333,7 +333,7 @@ METHOD EndDoc() CLASS HWinPrn
 
 RETURN NIL
 
-METHOD End() CLASS HWinPrn
+METHOD HWinPrn:End()
 
    ::EndDoc()
    ::oFont:Release()

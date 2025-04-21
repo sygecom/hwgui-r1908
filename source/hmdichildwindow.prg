@@ -61,7 +61,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal) CLASS HMDIChildWindow
+METHOD HMDIChildWindow:Activate(lShow, lMaximized, lMinimized, lCentered, bActivate, lModal)
 
    LOCAL l3d := .F.
 
@@ -175,7 +175,7 @@ RETURN NIL
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
+METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
 
    LOCAL i
    LOCAL oCtrl
@@ -225,7 +225,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS HMDIChildWindow
+METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
 
    LOCAL oCtrl
    LOCAL nFocus

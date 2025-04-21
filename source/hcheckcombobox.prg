@@ -73,9 +73,9 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
+METHOD HCheckComboBox:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
-               bValid, acheck, nDisplay, nhItem, ncWidth) CLASS hCheckComboBox
+               bValid, acheck, nDisplay, nhItem, ncWidth)
 
    ::acheck := IIf(acheck == NIL, {}, acheck)
    IF hb_IsNumeric(nStyle)
@@ -93,8 +93,8 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-                    bChange, ctooltip, bGFocus, acheck) CLASS hCheckComboBox
+METHOD HCheckComboBox:Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
+                    bChange, ctooltip, bGFocus, acheck)
 
    ::Super:Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
                      bChange, ctooltip, bGFocus)
@@ -106,7 +106,7 @@ RETURN Self
 //-------------------------------------------------------------------------------------------------------------------//
 
 #if 0 // old code for reference (to be deleted)
-METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
+METHOD HCheckComboBox:onEvent(msg, wParam, lParam)
 
    LOCAL nIndex
    LOCAL rcItem
@@ -190,7 +190,7 @@ METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
 
 RETURN -1
 #else
-METHOD onEvent(msg, wParam, lParam) CLASS hCheckComboBox
+METHOD HCheckComboBox:onEvent(msg, wParam, lParam)
 
    LOCAL nIndex
    LOCAL rcItem
@@ -273,7 +273,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD INIT() CLASS hCheckComboBox
+METHOD HCheckComboBox:INIT()
 
    LOCAL i
 
@@ -293,7 +293,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Requery() CLASS hCheckComboBox
+METHOD HCheckComboBox:Requery()
 
    LOCAL i
 
@@ -308,7 +308,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Refresh() CLASS hCheckComboBox
+METHOD HCheckComboBox:Refresh()
 
    ::Super:refresh()
 
@@ -316,7 +316,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SetCheck(nIndex, bFlag) CLASS hCheckComboBox
+METHOD HCheckComboBox:SetCheck(nIndex, bFlag)
 
    LOCAL nResult := hwg_ComboBoxSetItemData(::handle, nIndex - 1, bFlag)
 
@@ -333,7 +333,7 @@ RETURN nResult
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetCheck(nIndex) CLASS hCheckComboBox
+METHOD HCheckComboBox:GetCheck(nIndex)
 
    LOCAL l := hwg_ComboBoxGetItemData(::handle, nIndex - 1)
 
@@ -341,7 +341,7 @@ RETURN IIf(l == 1, .T., .F.)
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD SelectAll(bCheck) CLASS hCheckComboBox
+METHOD HCheckComboBox:SelectAll(bCheck)
 
    LOCAL nCount
    LOCAL i
@@ -358,7 +358,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD RecalcText() CLASS hCheckComboBox
+METHOD HCheckComboBox:RecalcText()
 
    LOCAL strtext
    LOCAL ncount
@@ -408,7 +408,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD Paint(lpDis) CLASS hCheckComboBox
+METHOD HCheckComboBox:Paint(lpDis)
 
    LOCAL drawInfo := hwg_GetDrawItemInfo(lpDis)
    LOCAL dc := drawInfo[3]
@@ -483,7 +483,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD MeasureItem(l) CLASS hCheckComboBox
+METHOD HCheckComboBox:MeasureItem(l)
 
    LOCAL dc := HCLIENTDC():new(::handle)
    LOCAL lpMeasureItemStruct := hwg_GetMeasureItemInfo(l)
@@ -515,7 +515,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD OnGetText(wParam, lParam) CLASS hCheckComboBox
+METHOD HCheckComboBox:OnGetText(wParam, lParam)
 
    ::RecalcText()
 
@@ -530,7 +530,7 @@ RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD OnGetTextLength(WPARAM, LPARAM) CLASS hCheckComboBox
+METHOD HCheckComboBox:OnGetTextLength(WPARAM, LPARAM)
 
    HB_SYMBOL_UNUSED(WPARAM)
    HB_SYMBOL_UNUSED(LPARAM)
@@ -541,7 +541,7 @@ RETURN IIf(Empty(::m_strText), 0, Len(::m_strText))
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD GetAllCheck() CLASS hCheckComboBox
+METHOD HCheckComboBox:GetAllCheck()
 
    LOCAL aCheck := {}
    LOCAL n
