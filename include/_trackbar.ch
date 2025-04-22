@@ -4,7 +4,7 @@
              [ OF <oParent> ]                   ;
              [ ID <nId> ]                       ;
              [ SIZE <nWidth>, <nHeight> ]       ;
-             [ RANGE <nLow>,<nHigh> ]           ;
+             [ RANGE <nLow>, <nHigh> ]          ;
              [ INIT <nInit> ]                   ;
              [ ON INIT <bInit> ]                ;
              [ ON SIZE <bSize> ]                ;
@@ -13,12 +13,12 @@
              [ ON DRAG <bDrag> ]                ;
              [ STYLE <nStyle> ]                 ;
              [ TOOLTIP <cTooltip> ]             ;
-             [ <vertical : VERTICAL> ]          ;
-             [ <autoticks : AUTOTICKS> ]        ;
-             [ <noticks : NOTICKS> ]            ;
-             [ <both : BOTH> ]                  ;
-             [ <top : TOP> ]                    ;
-             [ <left : LEFT> ]                  ;
+             [ <vertical: VERTICAL> ]           ;
+             [ <autoticks: AUTOTICKS> ]         ;
+             [ <noticks: NOTICKS> ]             ;
+             [ <both: BOTH> ]                   ;
+             [ <top: TOP> ]                     ;
+             [ <left: LEFT> ]                   ;
              [ <class: CLASS> <classname> ]     ;
           => ;
           [ <oTrackBar> := ] __IIF(<.class.>, <classname>, HTrackBar)():New(<oParent>,<nId>,<nInit>,<nStyle>,<nX>,<nY>,      ;

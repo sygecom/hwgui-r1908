@@ -3,7 +3,7 @@
 #xcommand @ <nX>, <nY> MONTHCALENDAR [ <oMonthCalendar> ] ;
              [ OF <oParent> ]                             ;
              [ ID <nId> ]                                 ;
-             [ SIZE <nWidth>,<nHeight> ]                  ;
+             [ SIZE <nWidth>, <nHeight> ]                 ;
              [ INIT <dInit> ]                             ;
              [ ON INIT <bInit> ]                          ;
              [ ON CHANGE <bChange> ]                      ;
@@ -11,9 +11,9 @@
              [ STYLE <nStyle> ]                           ;
              [ FONT <oFont> ]                             ;
              [ TOOLTIP <cTooltip> ]                       ;
-             [ <notoday : NOTODAY> ]                      ;
-             [ <notodaycircle : NOTODAYCIRCLE> ]          ;
-             [ <weeknumbers : WEEKNUMBERS> ]              ;
+             [ <notoday: NOTODAY> ]                       ;
+             [ <notodaycircle: NOTODAYCIRCLE> ]           ;
+             [ <weeknumbers: WEEKNUMBERS> ]               ;
              [ <class: CLASS> <classname> ]               ;
           => ;
           [ <oMonthCalendar> := ] __IIF(<.class.>, <classname>, HMonthCalendar)():New(<oParent>,<nId>,<dInit>,<nStyle>, ;

@@ -3,7 +3,7 @@
 #xcommand PREPARE FONT <oFont>       ;
              NAME <cName>            ;
              [ WIDTH <nWidth> ]      ;
-             [ HEIGHT <nHeight> ]     ;
+             [ HEIGHT <nHeight> ]    ;
              [ WEIGHT <nWeight> ]    ;
              [ CHARSET <charset> ]   ;
              [ <ita: ITALIC> ]       ;
