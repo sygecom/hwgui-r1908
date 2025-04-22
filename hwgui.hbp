@@ -107,6 +107,7 @@ source/hsplit.prg
 source/htab.prg
 source/htimer.prg
 source/htree.prg
+source/htreenode.prg
 source/hrect.prg
 source/hupdown.prg
 source/hwindow.prg

@@ -124,6 +124,7 @@ HWGUI_LIB_OBJS = \
    $(OBJ_DIR)\htoolbutton.obj \
    $(OBJ_DIR)\htimer.obj \
    $(OBJ_DIR)\htree.obj \
+   $(OBJ_DIR)\htreenode.obj \
    $(OBJ_DIR)\hupdown.obj \
    $(OBJ_DIR)\hwindow.obj \
    $(OBJ_DIR)\hmainwindow.obj \
@@ -482,6 +483,12 @@ $(OBJ_DIR)\htree.c : $(SRC_DIR)\htree.prg
    $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@
 
 $(OBJ_DIR)\htree.obj : $(OBJ_DIR)\htree.c
+   $(CC_EXE) $(CFLAGS) /Fo$@ $**
+
+$(OBJ_DIR)\htreenode.c : $(SRC_DIR)\htreenode.prg
+   $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@
+
+$(OBJ_DIR)\htreenode.obj : $(OBJ_DIR)\htreenode.c
    $(CC_EXE) $(CFLAGS) /Fo$@ $**
 
 $(OBJ_DIR)\hrect.obj : $(OBJ_DIR)\hrect.c

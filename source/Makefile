@@ -68,6 +68,7 @@ PRG_SOURCES=\
 	hdialog.prg \
 	htimer.prg \
 	htree.prg \
+	htreenode.prg \
 	hsplit.prg \
 	hsayimg.prg \
 	hsaybmp.prg \
