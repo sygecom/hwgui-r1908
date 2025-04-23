@@ -287,6 +287,14 @@ RETURN -1
 #else
 METHOD HCustomWindow:onEvent(msg, wParam, lParam)
 
+   // WM_SIZE
+   LOCAL aControls
+   LOCAL oItem
+   LOCAL nw1
+   LOCAL nh1
+   LOCAL aCoors
+   LOCAL nWindowState
+
    // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
    //    IIf(lParam != NIL, Str(lParam), "NIL"))
 
@@ -325,7 +333,43 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
       RETURN onDrawItem(SELF, wParam, lParam)
 
    CASE WM_SIZE
-      RETURN onSize(SELF, wParam, lParam)
+      aControls := ::aControls
+      nw1 := ::nWidth
+      nh1 := ::nHeight
+      aCoors := hwg_GetWindowRect(::handle)
+      IF Empty(::Type)
+         ::nWidth := aCoors[3] - aCoors[1]
+         ::nHeight := aCoors[4] - aCoors[2]
+      ELSE
+         nWindowState := ::WindowState
+         IF wParam != 1 .AND. (::GETMDIMAIN() != NIL .AND. !::GETMDIMAIN():IsMinimized()) //SIZE_MINIMIZED
+            ::nWidth := aCoors[3] - aCoors[1]
+            ::nHeight := aCoors[4] - aCoors[2]
+            IF ::Type == WND_MDICHILD .AND. ::GETMDIMAIN() != NIL .AND. wParam != 1 .AND. ;
+               ::GETMDIMAIN():WindowState == 2
+               nWindowState := SW_SHOWMINIMIZED
+            ENDIF
+         ENDIF
+      ENDIF
+      IF ::nScrollBars > -1 .AND. ::lAutoScroll .AND. !Empty(::Type)
+         hwg_OnMove(SELF)
+         ::ResetScrollbars()
+         ::SetupScrollbars()
+      ENDIF
+      IF wParam != 1 .AND. nWindowState != 2
+         IF !Empty(::Type) .AND. ::Type == WND_MDI .AND. !Empty(::Screen)
+            ::Anchor(::Screen, nw1, nh1, ::nWidth, ::nHeight)
+         ENDIF
+         IF !Empty(::Type)
+            ::Anchor(SELF, nw1, nh1, ::nWidth, ::nHeight)
+         ENDIF
+      ENDIF
+      FOR EACH oItem IN aControls
+         IF oItem:bSize != NIL
+            Eval(oItem:bSize, oItem, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
+         ENDIF
+      NEXT
+      RETURN -1
 
    CASE WM_DESTROY
       RETURN onDestroy(SELF)
@@ -1112,6 +1156,7 @@ RETURN 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0
 STATIC FUNCTION onSize(oWnd, wParam, lParam)
 
    LOCAL aControls := oWnd:aControls
@@ -1159,6 +1204,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    NEXT
 
 RETURN -1
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
