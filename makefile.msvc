@@ -74,6 +74,7 @@ HWGUI_LIB_OBJS = \
    $(HWGUI_OBJ_DIR)\guimain.obj \
    $(HWGUI_OBJ_DIR)\barcode.obj \
    $(HWGUI_OBJ_DIR)\hbrowse.obj \
+   $(HWGUI_OBJ_DIR)\hcolumn.obj \
    $(HWGUI_OBJ_DIR)\hcheckbutton.obj \
    $(HWGUI_OBJ_DIR)\hcombobox.obj \
    $(HWGUI_OBJ_DIR)\hcheckcombobox.obj \

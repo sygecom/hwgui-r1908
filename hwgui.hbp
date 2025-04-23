@@ -62,6 +62,7 @@ source/hicon.prg
 source/guimain.prg
 source/barcode.prg
 source/hbrowse.prg
+source/hcolumn.prg
 source/hcheckbutton.prg
 source/hcombobox.prg
 source/hcheckcombobox.prg

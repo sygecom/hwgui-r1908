@@ -33,6 +33,7 @@ PRG_SOURCES=\
 	errorsys.prg \
 	guimain.prg \
 	hbrowse.prg \
+	hcolumn.prg \
 	hcheckbutton.prg \
 	hcombobox.prg \
 	hcheckcombobox.prg \
