@@ -75,7 +75,7 @@ source/hownbtn.prg
 source/hpanel.prg
 source/hprinter.prg
 source/hprogres.prg
-source/hradio.prg
+source/hradiogroup.prg
 source/hradiobutton.prg
 source/hpager.prg
 source/hrebar.prg

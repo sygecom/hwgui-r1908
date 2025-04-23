@@ -54,7 +54,7 @@ PRG_SOURCES=\
 	hownbtn.prg \
 	hpanel.prg \
 	hprinter.prg \
-	hradio.prg \
+	hradiogroup.prg \
 	hradiobutton.prg \
 	hriched.prg \
 	htab.prg \

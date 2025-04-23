@@ -104,7 +104,7 @@ HWGUI_LIB_OBJS = \
    $(OBJ_DIR)\hpanel.obj \
    $(OBJ_DIR)\hprinter.obj \
    $(OBJ_DIR)\hprogres.obj \
-   $(OBJ_DIR)\hradio.obj \
+   $(OBJ_DIR)\hradiogroup.obj \
    $(OBJ_DIR)\hradiobutton.obj \
    $(OBJ_DIR)\hriched.obj \
    $(OBJ_DIR)\hsayimg.obj \
@@ -402,10 +402,10 @@ $(OBJ_DIR)\hprogres.c : $(SRC_DIR)\hprogres.prg
 $(OBJ_DIR)\hprogres.obj : $(OBJ_DIR)\hprogres.c
    $(CC_EXE) $(CFLAGS) -fo$@ $**
 
-$(OBJ_DIR)\hradio.c : $(SRC_DIR)\hradio.prg
+$(OBJ_DIR)\hradiogroup.c : $(SRC_DIR)\hradiogroup.prg
    $(HARBOUR_EXE) $(HARBOURFLAGS) $** -o$@
 
-$(OBJ_DIR)\hradio.obj : $(OBJ_DIR)\hradio.c
+$(OBJ_DIR)\hradiogroup.obj : $(OBJ_DIR)\hradiogroup.c
    $(CC_EXE) $(CFLAGS) -fo$@ $**
 
 $(OBJ_DIR)\hradiobutton.c : $(SRC_DIR)\hradiobutton.prg

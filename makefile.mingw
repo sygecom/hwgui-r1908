@@ -76,7 +76,7 @@ $(LIB_DIR)/libhwgui.a : \
    $(OBJ_DIR)/hpanel.o \
    $(OBJ_DIR)/hprinter.o \
    $(OBJ_DIR)/hprogres.o \
-   $(OBJ_DIR)/hradio.o \
+   $(OBJ_DIR)/hradiogroup.o \
    $(OBJ_DIR)/hradiobutton.o \
    $(OBJ_DIR)/hrebar.o \
    $(OBJ_DIR)/hrect.o \
