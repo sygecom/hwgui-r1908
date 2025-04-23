@@ -96,6 +96,7 @@ source/hpanel.prg
 source/hprinter.prg
 source/hprogres.prg
 source/hradio.prg
+source/hradiobutton.prg
 source/hpager.prg
 source/hrebar.prg
 source/hriched.prg

@@ -168,6 +168,7 @@ HWGUI_LIB_OBJS = \
    $(HWGUI_OBJ_DIR)\hprinter.o \
    $(HWGUI_OBJ_DIR)\hprogres.o \
    $(HWGUI_OBJ_DIR)\hradio.o \
+   $(HWGUI_OBJ_DIR)\hradiobutton.o \
    $(HWGUI_OBJ_DIR)\hpager.o \
    $(HWGUI_OBJ_DIR)\hrebar.o \
    $(HWGUI_OBJ_DIR)\hriched.o \

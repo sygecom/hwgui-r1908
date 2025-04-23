@@ -94,6 +94,7 @@ $(LIB_DIR)\hwgui-b32.dll:   \
    $(OBJ_DIR)\hprinter.obj \
    $(OBJ_DIR)\hprogres.obj \
    $(OBJ_DIR)\hradio.obj \
+   $(OBJ_DIR)\hradiobutton.obj \
    $(OBJ_DIR)\hriched.obj \
    $(OBJ_DIR)\hsayimg.obj \
    $(OBJ_DIR)\hsaybmp.obj \
