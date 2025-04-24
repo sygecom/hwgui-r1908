@@ -27,6 +27,8 @@ call xcompileclang64 menu
 call xcompileclang64 menu2
 call xcompileclang64 monthcalendar
 call xcompileclang64 nicebutton
+call xcompileclang64 onsize1
+call xcompileclang64 onsize2
 call xcompileclang64 radiobutton
 call xcompileclang64 radiobutton2
 call xcompileclang64 static

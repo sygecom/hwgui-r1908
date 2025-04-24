@@ -27,6 +27,8 @@ call xcompilebcc32 menu
 call xcompilebcc32 menu2
 call xcompilebcc32 monthcalendar
 call xcompilebcc32 nicebutton
+call xcompilebcc32 onsize1
+call xcompilebcc32 onsize2
 call xcompilebcc32 radiobutton
 call xcompilebcc32 radiobutton2
 call xcompilebcc32 static

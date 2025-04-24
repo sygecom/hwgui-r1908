@@ -23,6 +23,8 @@ hbmk2 menu %1 %2
 hbmk2 menu2 %1 %2
 hbmk2 monthcalendar %1 %2
 hbmk2 nicebutton %1 %2
+hbmk2 onsize1 %1 %2
+hbmk2 onsize2 %1 %2
 hbmk2 radiobutton %1 %2
 hbmk2 radiobutton2 %1 %2
 hbmk2 static %1 %2

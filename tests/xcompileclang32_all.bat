@@ -27,6 +27,8 @@ call xcompileclang32 menu
 call xcompileclang32 menu2
 call xcompileclang32 monthcalendar
 call xcompileclang32 nicebutton
+call xcompileclang32 onsize1
+call xcompileclang32 onsize2
 call xcompileclang32 radiobutton
 call xcompileclang32 radiobutton2
 call xcompileclang32 static

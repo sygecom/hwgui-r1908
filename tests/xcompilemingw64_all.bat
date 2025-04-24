@@ -27,6 +27,8 @@ call xcompilemingw64 menu
 call xcompilemingw64 menu2
 call xcompilemingw64 monthcalendar
 call xcompilemingw64 nicebutton
+call xcompilemingw64 onsize1
+call xcompilemingw64 onsize2
 call xcompilemingw64 radiobutton
 call xcompilemingw64 radiobutton2
 call xcompilemingw64 static

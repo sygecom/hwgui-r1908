@@ -27,6 +27,8 @@ call xcompilemsvc64 menu
 call xcompilemsvc64 menu2
 call xcompilemsvc64 monthcalendar
 call xcompilemsvc64 nicebutton
+call xcompilemsvc64 onsize1
+call xcompilemsvc64 onsize2
 call xcompilemsvc64 radiobutton
 call xcompilemsvc64 radiobutton2
 call xcompilemsvc64 static
