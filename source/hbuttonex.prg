@@ -73,7 +73,7 @@ CLASS HButtonEX INHERIT HButton
    METHOD Init()
    METHOD onevent(msg, wParam, lParam)
    METHOD CancelHover()
-   METHOD END()
+   METHOD End()
    METHOD Redefine(oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, bColor, cCaption, hBitmap, ;
       iStyle, hIcon, bGFocus, nPictureMargin)
    METHOD PaintBk(hdc)
@@ -193,15 +193,15 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HButtonEx:END()
+METHOD HButtonEx:End()
 
-   ::Super:END()
+   ::Super:End()
 
 RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HButtonEx:INIT()
+METHOD HButtonEx:Init()
 
    LOCAL nbs
 
@@ -233,7 +233,7 @@ METHOD HButtonEx:INIT()
 
       ENDIF
 
-      ::Super:init()
+      ::Super:Init()
       ::SetBitmap()
    ENDIF
 

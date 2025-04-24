@@ -15,24 +15,24 @@ CLASS HPAINTDC FROM HDC
 
    DATA m_ps
 
-   METHOD NEW(nWnd)
-   METHOD END ()
+   METHOD New(nWnd)
+   METHOD End()
 
    HIDDEN:
    DATA m_hWnd
 
 ENDCLASS
 
-METHOD HPaintDC:NEW(nWnd)
+METHOD HPaintDC:New(nWnd)
 
-   ::Super:new()
+   ::Super:New()
    ::m_ps   := hwg_DefinePaintStru()
    ::m_hWnd := nWnd
    ::Attach(hwg_BeginPaint(::m_hWnd, ::m_ps))
 
    RETURN Self
 
-METHOD HPaintDC:END()
+METHOD HPaintDC:End()
 
    hwg_EndPaint(::m_hWnd, ::m_ps)
    ::m_hDC       := NIL
@@ -45,7 +45,7 @@ CLASS HDC
    DATA m_hDC
    DATA m_hAttribDC
 
-   METHOD NEW()
+   METHOD New()
    METHOD SetAttribDC(hDC)
    METHOD ATTACH(hDc)
    METHOD MOVETO(x1, y1)
@@ -76,7 +76,7 @@ CLASS HDC
    METHOD DeleteDc()
 ENDCLASS
 
-METHOD HDC:NEW()
+METHOD HDC:New()
 
    ::m_hDC       := NIL
    ::m_hAttribDC := NIL
@@ -288,23 +288,23 @@ METHOD HDC:SetROP2(nDrawMode)
 
 CLASS HCLIENTDC FROM HDC
 
-   METHOD NEW(nWnd)
-   METHOD END ()
+   METHOD New(nWnd)
+   METHOD End()
 
    HIDDEN:
    DATA m_hWnd
 
 ENDCLASS
 
-METHOD HClientDC:NEW(nWnd)
+METHOD HClientDC:New(nWnd)
 
-   ::Super:new()
+   ::Super:New()
    ::m_hWnd := nWnd
    ::Attach(hwg_GetDC(::m_hWnd))
 
    RETURN Self
 
-METHOD HClientDC:END()
+METHOD HClientDC:End()
 
    hwg_ReleaseDc(::m_hWnd, ::m_hDC)
    ::m_hDC       := NIL

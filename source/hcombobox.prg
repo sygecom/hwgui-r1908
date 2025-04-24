@@ -51,7 +51,7 @@ CLASS HComboBox INHERIT HControl
    METHOD Activate()
    METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, bGFocus, ;
       bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext)
-   METHOD INIT()
+   METHOD Init()
    METHOD onEvent(msg, wParam, lParam)
    METHOD Requery()
    METHOD Refresh()
@@ -268,7 +268,7 @@ RETURN Self
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HComboBox:INIT()
+METHOD HComboBox:Init()
 
    LOCAL LongComboWidth
    LOCAL NewLongComboWidth

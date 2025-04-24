@@ -179,7 +179,7 @@ METHOD HRichEdit:onEvent(msg, wParam, lParam)
       hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
       //hwg_SendMessage(::handle, EM_SCROLL, IIf(nDelta > 0, SB_LINEUP, SB_LINEDOWN), 0)
    ELSEIF msg == WM_DESTROY
-      ::END()
+      ::End()
    ENDIF
 
    RETURN - 1
@@ -288,7 +288,7 @@ METHOD HRichEdit:onEvent(msg, wParam, lParam)
       EXIT
 
    CASE WM_DESTROY
-      ::END()
+      ::End()
 
    ENDSWITCH
 

@@ -547,7 +547,7 @@ METHOD HEdit:onEvent(msg, wParam, lParam)
          ENDIF
       ENDIF
    ELSEIF msg == WM_DESTROY
-      ::END()
+      ::End()
    ENDIF
 
 RETURN -1

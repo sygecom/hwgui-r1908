@@ -79,7 +79,7 @@ CLASS PrintDos
 
    METHOD Preview(fname, cTitle)
 
-   METHOD END()
+   METHOD End()
 
 ENDCLASS
 
@@ -315,7 +315,7 @@ METHOD PrintDos:SetPrc(x, y)
    ::nPCol := y
    RETURN NIL
 
-METHOD PrintDos:END()
+METHOD PrintDos:End()
 
    FWrite(::gText, ::oText)
    FClose(::gText)
@@ -420,7 +420,7 @@ METHOD PrintDos:TxttoGraphic(fName, osize, oPreview)
    oPrinter:EndPage()
    oPrinter:EndDoc()
    oPrinter:Preview()
-   oPrinter:END()
+   oPrinter:End()
    oFont:Release()
 
    RETURN .T.
@@ -491,7 +491,7 @@ METHOD PrintDos:Preview(fName, cTitle)
    @ 6, 30 BUTTON "<<"    ON CLICK {||nPage := PrintDosAnt(nPage, oText)} SIZE 69, 32 STYLE IIf(nPage == 1, WS_DISABLED, 0)
    @ 6, 80 BUTTON ">>"    ON CLICK {||nPage := PrintDosNext(oPage, nPage, oText)} SIZE 69, 32 STYLE IIf(nPage == 1, WS_DISABLED, 0)
    @ 6, 130 BUTTON "Imprimir" ON CLICK {||PrintDosPrint(oText, oPrt)} SIZE 69, 32
-//   @ 6, 180 BUTTON "Grafico" on Click {||EndDialog(), oDos2:TxttoGraphic(fName, 2, .T.), oDos2:end()} SIZE 69, 32
+//   @ 6, 180 BUTTON "Grafico" on Click {||EndDialog(), oDos2:TxttoGraphic(fName, 2, .T.), oDos2:End()} SIZE 69, 32
    @ 6, 230 BUTTON "Fechar" ON CLICK {||EndDialog()} SIZE 69, 32
 
    oDlg:Activate()

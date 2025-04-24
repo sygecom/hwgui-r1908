@@ -44,7 +44,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
    METHOD Select(oNode) BLOCK {|Self, o|hwg_SendMessage(::handle, TVM_SELECTITEM, TVGN_CARET, o:handle), ::oItem := hwg_TreeGetSelected(::handle)}
    METHOD Clean()
    METHOD Notify(lParam)
-   METHOD END() INLINE (::Super:END(), ReleaseTree(::aItems))
+   METHOD End() INLINE (::Super:End(), ReleaseTree(::aItems))
    METHOD isExpand(oNodo) INLINE !hwg_CheckBit(oNodo, TVE_EXPAND)
    METHOD onEvent(msg, wParam, lParam)
    METHOD ItemHeight(nHeight) SETGET

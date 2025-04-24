@@ -39,7 +39,7 @@ CLASS HNiceButton INHERIT HControl
                     cText, cTooltip, r, g, b)
 
    METHOD Activate()
-   METHOD INIT()
+   METHOD Init()
    METHOD Create()
    METHOD Size()
    METHOD Moving()
@@ -48,8 +48,8 @@ CLASS HNiceButton INHERIT HControl
    METHOD MDown()
    METHOD MUp()
    METHOD Press() INLINE(::lPress := .T., ::MDown())
-   METHOD RELEASE()
-   METHOD END ()
+   METHOD Release()
+   METHOD End()
 
 ENDCLASS
 
@@ -115,7 +115,7 @@ METHOD HNiceButton:Activate()
    ENDIF
    RETURN NIL
 
-METHOD HNiceButton:INIT()
+METHOD HNiceButton:Init()
 
    IF !::lInit
       ::Super:Init()
@@ -145,7 +145,7 @@ FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
             oBtn:Size()
 
          ELSEIF msg == WM_DESTROY
-            oBtn:END()
+            oBtn:End()
             RETURN .T.
          ENDIF
       ENDIF
@@ -193,7 +193,7 @@ FUNCTION hwg_NiceButtProc(hBtn, msg, wParam, lParam)
 
    CASE WM_DESTROY
       IF (oBtn := hwg_FindSelf(hBtn)) != NIL
-         oBtn:END()
+         oBtn:End()
          RETURN .T.
       ENDIF
       EXIT
@@ -350,11 +350,11 @@ METHOD HNiceButton:PAINT()
 
    RETURN Self
 
-METHOD HNiceButton:END()
+METHOD HNiceButton:End()
 
    RETURN NIL
 
-METHOD HNiceButton:RELEASE()
+METHOD HNiceButton:Release()
 
    ::lPress := .F.
    ::state  := OBTN_NORMAL

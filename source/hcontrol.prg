@@ -66,7 +66,7 @@ CLASS HControl INHERIT HCustomWindow
    METHOD FontBold(lTrue) SETGET
    METHOD FontItalic(lTrue) SETGET
    METHOD FontUnderline(lTrue) SETGET
-   METHOD END()
+   METHOD End()
 
 ENDCLASS
 
@@ -129,7 +129,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HControl:INIT()
+METHOD HControl:Init()
 
    LOCAL oForm := ::GetParentForm()
 
@@ -392,9 +392,9 @@ RETURN ::xControlSource
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HControl:END()
+METHOD HControl:End()
 
-   ::Super:END()
+   ::Super:End()
 
    IF ::tooltip != NIL
       hwg_DelToolTip(::oParent:handle, ::handle)

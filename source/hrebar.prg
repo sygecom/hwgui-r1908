@@ -32,7 +32,7 @@ CLASS hrebar INHERIT HControl
                     bSize, bPaint, ctooltip, tcolor, bcolor, lVert)
 
    METHOD Activate()
-   METHOD INIT()
+   METHOD Init()
    METHOD ADDBARColor(pBar, clrFore, clrBack, pszText, dwStyle) INLINE hwg_AddBarColors(::handle, pBar, clrFore, clrBack, pszText, dwStyle)
    METHOD ADDBARBITMAP(pBar, pszText, pbmp, dwStyle) INLINE hwg_AddBarBitmap(::handle, pBar, pszText, pbmp, dwStyle)
    METHOD RebarBandNew(pBar, pszText, clrFore, clrBack, pbmp, dwStyle) INLINE ::CreateBands(pBar, pszText, clrFore, clrBack, pbmp, dwStyle)
@@ -87,7 +87,7 @@ METHOD HRebar:Activate()
    ENDIF
    RETURN NIL
 
-METHOD HRebar:INIT()
+METHOD HRebar:Init()
 
    IF !::lInit
       ::Super:Init()

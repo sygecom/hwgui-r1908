@@ -387,7 +387,7 @@ RETURN -1
 STATIC FUNCTION onDestroy(oWnd)
 
    IF oWnd:oEmbedded != NIL
-      oWnd:oEmbedded:END()
+      oWnd:oEmbedded:End()
    ENDIF
    oWnd:Super:onEvent(WM_DESTROY)
    HWindow():DelItem(oWnd)

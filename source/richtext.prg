@@ -88,7 +88,7 @@ CLASS RichText
    DATA oPrinter
    // Methods for opening & closing output file, and setting defaults
    METHOD New(cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh) CONSTRUCTOR
-   METHOD END() INLINE ::TextCode("par\pard"), ::CloseGroup(), FClose(::hFile)
+   METHOD End() INLINE ::TextCode("par\pard"), ::CloseGroup(), FClose(::hFile)
 
    // Core methods for writing control codes & data to the output file
    METHOD TextCode(cCode) //INLINE FWRITE(::hFile, hwg_FormatCode(cCode))

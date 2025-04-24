@@ -66,7 +66,7 @@ CLASS HPrinter INHERIT HObject
    METHOD PlayMeta(oWnd)
    METHOD PrintMeta(nPage)
    METHOD Preview(cTitle, aBitmaps, aTooltips, aBootUser)
-   METHOD END()
+   METHOD End()
    METHOD Box(x1, y1, x2, y2, oPen, oBrush)
    METHOD Line(x1, y1, x2, y2, oPen)
    METHOD Say(cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor)
@@ -185,7 +185,7 @@ METHOD HPrinter:AddFont(fontName, nHeight, lBold, lItalic, lUnderline, nCharset)
 
    RETURN oFont
 
-METHOD HPrinter:END()
+METHOD HPrinter:End()
 
    IF !Empty(::hDCPrn)
       hwg_DeleteDC(::hDCPrn)
@@ -494,7 +494,7 @@ METHOD HPrinter:Preview(cTitle, aBitmaps, aTooltips, aBootUser)
 
    oDlg:Activate()
 
-   oTimer:END()
+   oTimer:End()
 
    oDlg:brush:Release()
    // oCanvas:brush:Release()

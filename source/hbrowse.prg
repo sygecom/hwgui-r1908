@@ -202,7 +202,7 @@ CLASS HBrowse INHERIT HControl
    METHOD RefreshLine()
    METHOD Refresh(lFull, lLineUp)
    METHOD ShowSizes()
-   METHOD END()
+   METHOD End()
    METHOD SetMargin(nTop, nRight, nBottom, nLeft)
    METHOD SetRowHeight(nPixels)
    METHOD FldStr(oBrw, numf)
@@ -732,7 +732,7 @@ METHOD HBrowse:onEvent(msg, wParam, lParam)
            hwg_CloseThemeData(::htheme)
           ::hTheme := NIL
         ENDIF
-        ::END()
+        ::End()
       ENDIF
 
    ENDIF
@@ -1149,7 +1149,7 @@ METHOD HBrowse:OnEvent(msg, wParam, lParam)
         hwg_CloseThemeData(::htheme)
        ::hTheme := NIL
      ENDIF
-     ::END()
+     ::End()
 
    ENDSWITCH
 
@@ -1254,9 +1254,9 @@ METHOD HBrowse:DelColumn(nPos)
 RETURN NIL
 
 //----------------------------------------------------//
-METHOD HBrowse:END()
+METHOD HBrowse:End()
 
-   ::Super:END()
+   ::Super:End()
    IF ::brush != NIL
       ::brush:Release()
       ::brush := NIL

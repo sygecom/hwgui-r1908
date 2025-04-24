@@ -23,7 +23,7 @@ CLASS HMenu INHERIT HObject
    DATA handle
    DATA aMenu
    METHOD New() INLINE Self
-   METHOD END() INLINE hwg_DestroyMenu(::handle)
+   METHOD End() INLINE hwg_DestroyMenu(::handle)
    METHOD Show(oWnd, xPos, yPos, lWnd)
 ENDCLASS
 

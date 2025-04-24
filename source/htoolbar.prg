@@ -55,7 +55,7 @@ CLASS HToolBar INHERIT HControl
       tcolor, bcolor, lTransp, lVertical, aItem, nWSize, nHSize, nIndent, nIDB)
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem)
    METHOD Activate()
-   METHOD INIT()
+   METHOD Init()
    METHOD CreateTool()
    METHOD AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex)
    METHOD Notify(lParam)
@@ -165,7 +165,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HToolBar:INIT()
+METHOD HToolBar:Init()
 
    IF !::lInit
       IF ::Line != NIL

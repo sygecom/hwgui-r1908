@@ -45,7 +45,7 @@ STATIC s_aMessModalDlg := { ;
 STATIC FUNCTION onDestroy(oDlg)
 
    IF hb_IsObject(oDlg:oEmbedded)
-      oDlg:oEmbedded:END()
+      oDlg:oEmbedded:End()
    ENDIF
    // IN CLASS INHERIT DIALOG DESTROY APLICATION
    IF oDlg:oDefaultParent:CLASSNAME = "HDIALOG" .AND. HWindow():GetMain() == NIL
@@ -112,7 +112,7 @@ ENDCLASS
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HDialog:NEW(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
+METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
    lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable)
 
    ::oDefaultParent := Self

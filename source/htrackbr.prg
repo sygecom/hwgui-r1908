@@ -96,7 +96,7 @@ METHOD HTrackBar:onEvent(msg, wParam, lParam)
       ENDIF
 
    ELSEIF msg == WM_DESTROY
-      ::END()
+      ::End()
 
    ELSEIF msg == WM_CHAR
       IF wParam == VK_TAB
@@ -144,7 +144,7 @@ METHOD HTrackBar:onEvent(msg, wParam, lParam)
       EXIT
 
    CASE WM_DESTROY
-      ::END()
+      ::End()
       EXIT
 
    CASE WM_CHAR

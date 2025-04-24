@@ -56,7 +56,7 @@ CLASS VAR winclass INIT "STATIC"
                bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick)
    METHOD Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
                     bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor)
-   METHOD INIT()
+   METHOD Init()
    METHOD onEvent(msg, wParam, lParam)
    METHOD GoToLinkUrl(csLink)
    METHOD GetLinkText()
@@ -189,7 +189,7 @@ METHOD HStaticLink:Redefine(oWndParent, nId, cCaption, oFont, bInit, ;
 
    RETURN Self
 
-METHOD HStaticLink:INIT()
+METHOD HStaticLink:Init()
 
    IF !::lInit
 
@@ -202,7 +202,7 @@ METHOD HStaticLink:INIT()
       ENDIF
       */
       ::Resize()
-      ::Super:init()
+      ::Super:Init()
       IF ::Title != NIL
          hwg_SetWindowText(::handle, ::title)
       ENDIF
@@ -479,7 +479,7 @@ METHOD HStaticLink:Paint(lpDis)
       hwg_DrawText(dc, strText, rcClient, dwFlags)
    ENDIF
 
-  // ::dc:END()
+  // ::dc:End()
 
   RETURN NIL
 

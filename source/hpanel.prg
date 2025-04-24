@@ -177,7 +177,7 @@ METHOD HPanel:onEvent(msg, wParam, lParam)
 
    ELSEIF msg == WM_DESTROY
       IF ::oEmbedded != NIL
-         ::oEmbedded:END()
+         ::oEmbedded:End()
       ENDIF
       ::Super:onEvent(WM_DESTROY)
       RETURN 0

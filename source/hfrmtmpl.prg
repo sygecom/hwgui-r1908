@@ -1515,7 +1515,7 @@ METHOD HRepTmpl:Print(printer, lPreview, p1, p2, p3)
    IF lPreview != NIL .AND. lPreview
       oPrinter:Preview()
    ENDIF
-   oPrinter:END()
+   oPrinter:End()
 
 RETURN NIL
 

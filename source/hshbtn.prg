@@ -29,7 +29,7 @@ CLASS HShadeButton INHERIT HOwnButton
                cTooltip, lEnabled, shadeID, palette, ;
                granularity, highlight, coloring, shcolor)
    METHOD Paint()
-   METHOD END()
+   METHOD End()
 
 ENDCLASS
 
@@ -76,8 +76,8 @@ METHOD HShadeButton:Paint()
    hwg_EndPaint(::handle, pps)
    RETURN NIL
 
-METHOD HShadeButton:END()
+METHOD HShadeButton:End()
 
-   ::Super:END()
+   ::Super:End()
    hwg_Shade_Release(::hShade)
    RETURN NIL

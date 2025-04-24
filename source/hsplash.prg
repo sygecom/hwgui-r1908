@@ -50,7 +50,7 @@ METHOD HSplash:Create(cFile, oTime, oResource, nWidth, nHeight, nStyle)
    ENDIF
    
    ::oDlg:Activate(otime < 0)
-   ::oTimer:END()
+   ::oTimer:End()
 
    RETURN Self
 

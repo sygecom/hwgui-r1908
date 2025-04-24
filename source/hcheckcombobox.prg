@@ -54,7 +54,7 @@ CLASS HCheckComboBox INHERIT HComboBox
    tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth)
    METHOD Redefine(oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
                     bChange, ctooltip, bGFocus, acheck)
-   METHOD INIT()
+   METHOD Init()
    METHOD Requery()
    METHOD Refresh()
    METHOD Paint(lpDis)
@@ -273,7 +273,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HCheckComboBox:INIT()
+METHOD HCheckComboBox:Init()
 
    LOCAL i
 
@@ -508,7 +508,7 @@ METHOD HCheckComboBox:MeasureItem(l)
       ENDIF
 
       dc:SelectObject(pFont)
-      dc:END()
+      dc:End()
    ENDIF
 
 RETURN Self

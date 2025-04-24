@@ -59,7 +59,7 @@ CLASS HOwnButton INHERIT HControl
    METHOD MUp()
    METHOD Press() INLINE (::lPress := .T., ::MDown())
    METHOD Release()
-   METHOD END()
+   METHOD End()
    METHOD Enable()
    METHOD Disable()
    METHOD onClick()
@@ -177,7 +177,7 @@ METHOD HOwnButton:onEvent(msg, wParam, lParam)
    ELSEIF msg == WM_LBUTTONUP
       ::MUp()
    ELSEIF msg == WM_DESTROY
-      ::END()
+      ::End()
    ELSEIF msg == WM_SETFOCUS
       /*
       IF hb_IsBlock(::bGetfocus)
@@ -249,7 +249,7 @@ METHOD HOwnButton:onEvent(msg, wParam, lParam)
       EXIT
 
    CASE WM_DESTROY
-      ::END()
+      ::End()
       EXIT
 
    CASE WM_SETFOCUS
@@ -660,9 +660,9 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HOwnButton:END()
+METHOD HOwnButton:End()
 
-   ::Super:END()
+   ::Super:End()
    ::oFont := NIL
    IF ::oBitmap != NIL
       ::oBitmap:Release()

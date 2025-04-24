@@ -267,7 +267,7 @@ CLASS HEditUpDown INHERIT HEdit
 
     //DATA Value
 
-    METHOD INIT()
+    METHOD Init()
     METHOD Notify(lParam)
     METHOD Refresh()
     METHOD Move()  VIRTUAL

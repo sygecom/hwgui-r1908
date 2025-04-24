@@ -32,7 +32,7 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    METHOD SetValue(aValue)
    METHOD GetValue()
    METHOD Clear()
-   METHOD END()
+   METHOD End()
 
    HIDDEN:
    DATA aValue           // Valor atual
@@ -117,10 +117,10 @@ METHOD HIPedit:Clear()
    RETURN ::aValue
 
 
-METHOD HIPedit:END()
+METHOD HIPedit:End()
 
    // Nothing to do here, yet!
-   ::Super:END()
+   ::Super:End()
 
    RETURN NIL
 

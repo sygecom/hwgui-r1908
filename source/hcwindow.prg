@@ -116,7 +116,7 @@ CLASS HCustomWindow INHERIT HObject
    METHOD Show(nShow) INLINE (::lHide := .F., IIf(nShow == NIL, hwg_ShowWindow(::handle), hwg_ShowWindow(::handle, nShow)))
    METHOD Move(x1, y1, width, height, nRePaint)
    METHOD onEvent(msg, wParam, lParam)
-   METHOD END()
+   METHOD End()
    METHOD SetColor(tcolor, bColor, lRepaint)
    METHOD RefreshCtrl(oCtrl, nSeek)
    METHOD SetFocusCtrl(oCtrl)
@@ -421,7 +421,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-METHOD HCustomWindow:END()
+METHOD HCustomWindow:End()
 
    LOCAL aControls
    LOCAL i
@@ -1095,13 +1095,13 @@ STATIC FUNCTION onDestroy(oWnd)
    LOCAL nLen := Len(aControls)
 
    FOR i := 1 TO nLen
-      aControls[i]:END()
+      aControls[i]:End()
    NEXT
    nLen := Len(oWnd:aObjects)
    FOR i := 1 TO nLen
-      oWnd:aObjects[i]:END()
+      oWnd:aObjects[i]:End()
    NEXT
-   oWnd:END()
+   oWnd:End()
 
 RETURN 1
 

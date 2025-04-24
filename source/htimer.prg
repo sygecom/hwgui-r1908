@@ -35,7 +35,7 @@ CLASS VAR aTimers   INIT {}
    METHOD New(oParent, nId, value, bAction)
    METHOD Init()
    METHOD onAction()
-   METHOD END()
+   METHOD End()
 
 ENDCLASS
 
@@ -71,7 +71,7 @@ METHOD HTimer:Init()
    ENDIF
    RETURN  NIL
 
-METHOD HTimer:END()
+METHOD HTimer:End()
    LOCAL i
 
    IF ::oParent != NIL

@@ -259,24 +259,24 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
    NEXT
    IF iPH > 0 .AND. iSL == 0
       hwg_MsgStop("'Start Line' marker is absent")
-      oPrinter:END()
+      oPrinter:End()
       RETURN .F.
    ELSEIF iSL > 0 .AND. iEL == 0
       hwg_MsgStop("'End Line' marker is absent")
-      oPrinter:END()
+      oPrinter:End()
       RETURN .F.
    ELSEIF iPF > 0 .AND. iEPF == 0
       hwg_MsgStop("'End of Page Footer' marker is absent")
-      oPrinter:END()
+      oPrinter:End()
       RETURN .F.
    ELSEIF iSL > 0 .AND. iPF == 0 .AND. iDF == 0
       hwg_MsgStop("'Page Footer' and 'Document Footer' markers are absent")
-      oPrinter:END()
+      oPrinter:End()
       RETURN .F.
    ENDIF
 
    #ifdef __DEBUG__
-      oPrinter:END()
+      oPrinter:End()
       // hwg_WriteLog("Startdoc")
       // hwg_WriteLog("Startpage")
    #else
@@ -316,7 +316,7 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
                      #else
                         oPrinter:EndPage()
                         oPrinter:EndDoc()
-                        oPrinter:END()
+                        oPrinter:End()
                      #endif
                      RETURN .F.
                   ENDIF
@@ -339,7 +339,7 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
                   #else
                      oPrinter:EndPage()
                      oPrinter:EndDoc()
-                     oPrinter:END()
+                     oPrinter:End()
                   #endif
                   RETURN .F.
                ENDIF
@@ -409,7 +409,7 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
                      oPrinter:EndPage()
                      oPrinter:EndDoc()
                   #endif
-                  oPrinter:END()
+                  oPrinter:End()
                   RETURN .F.
                ENDIF
             ENDIF
@@ -439,7 +439,7 @@ FUNCTION hwg_PrintReport(printerName, oPrn, lPreview)
          oPrinter:Preview()
       ENDIF
    #endif
-   oPrinter:END()
+   oPrinter:End()
 
    FOR i := 1 TO Len(s_aPaintRep[FORM_ITEMS])
       IF s_aPaintRep[FORM_ITEMS, i, ITEM_TYPE] == TYPE_TEXT

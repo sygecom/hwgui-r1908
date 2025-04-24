@@ -32,7 +32,7 @@ CLASS HPager INHERIT HControl
                     bSize, bPaint, ctooltip, tcolor, bcolor, lVert)
    METHOD SetScrollArea(nWidth, nHeight) INLINE  ::m_nWidth := nWidth, ::m_nHeight := nHeight
    METHOD Activate()
-   METHOD INIT()
+   METHOD Init()
 
    METHOD Notify(lParam)
    METHOD PAGERSETCHILD(b) INLINE ::hTool := b, hwg_PagerSetChild(::handle, b)
@@ -97,7 +97,7 @@ METHOD HPager:Activate()
    ENDIF
    RETURN NIL
 
-METHOD HPager:INIT()
+METHOD HPager:Init()
 
    IF !::lInit
       ::Super:Init()

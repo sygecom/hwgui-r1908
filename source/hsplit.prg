@@ -112,7 +112,7 @@ METHOD HSplitter:onEvent(msg, wParam, lParam)
        //  Eval(::bEndDrag, Self)
       ENDIF
    ELSEIF msg == WM_DESTROY
-      ::END()
+      ::End()
    ENDIF
 
    RETURN - 1
@@ -161,7 +161,7 @@ METHOD HSplitter:onEvent(msg, wParam, lParam)
       EXIT
 
    CASE WM_DESTROY
-      ::END()
+      ::End()
 
    ENDSWITCH
 
