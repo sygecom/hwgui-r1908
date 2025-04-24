@@ -18,14 +18,14 @@ STATIC oBar := NIL
 
 FUNCTION Main()
 
-        INIT WINDOW oMain MAIN TITLE "Progress Bar Sample"
+   INIT WINDOW oMain MAIN TITLE "Progress Bar Sample"
 
-        MENU OF oMain
-             MENUITEM "&Exit" ACTION oMain:Close()
-             MENUITEM "&Demo" ACTION Test()
-        ENDMENU
+   MENU OF oMain
+      MENUITEM "&Exit" ACTION oMain:Close()
+      MENUITEM "&Demo" ACTION Test()
+   ENDMENU
 
-        ACTIVATE WINDOW oMain MAXIMIZED
+   ACTIVATE WINDOW oMain MAXIMIZED
 
 RETURN NIL
 

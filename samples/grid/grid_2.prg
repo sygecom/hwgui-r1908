@@ -25,20 +25,20 @@ STATIC oQuery
 
 FUNCTION Main()
 
-        ConnectGrid()
+   ConnectGrid()
 
-        INIT WINDOW oMain MAIN TITLE "Grid Postgres Sample Using TPostgres" ;
-             AT 0, 0 ;
-             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
+   INIT WINDOW oMain MAIN TITLE "Grid Postgres Sample Using TPostgres" ;
+      AT 0, 0 ;
+      SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
-                MENU OF oMain
-                        MENUITEM "&Exit"   ACTION oMain:Close()
-                        MENUITEM "&Demo" ACTION Test()
-                ENDMENU
+   MENU OF oMain
+      MENUITEM "&Exit" ACTION oMain:Close()
+      MENUITEM "&Demo" ACTION Test()
+   ENDMENU
 
-        ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-        oServer:Close()
+   oServer:Close()
 
 RETURN NIL
 

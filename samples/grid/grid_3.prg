@@ -26,27 +26,27 @@ STATIC leof := .F.
 
 FUNCTION Main()
 
-        SET (_SET_DATEFORMAT, "yyyy-mm-dd")
-        CriaBase()
+   SET (_SET_DATEFORMAT, "yyyy-mm-dd")
+   CriaBase()
 
-        INIT WINDOW oMain MAIN TITLE "Postgres Sample Using low level functions" ;
-             AT 0, 0 ;
-             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
+   INIT WINDOW oMain MAIN TITLE "Postgres Sample Using low level functions" ;
+      AT 0, 0 ;
+      SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
-                MENU OF oMain
-                        MENUITEM "&Exit"   ACTION oMain:Close()
-                        MENUITEM "&Demo" ACTION Test()
-                ENDMENU
+   MENU OF oMain
+      MENUITEM "&Exit" ACTION oMain:Close()
+      MENUITEM "&Demo" ACTION Test()
+   ENDMENU
 
-        ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-        res := PQexec(conn, "CLOSE cursor_1")
-        PQclear(res)
+   res := PQexec(conn, "CLOSE cursor_1")
+   PQclear(res)
 
-        res = PQexec(conn, "END")
-        PQclear(res)
+   res = PQexec(conn, "END")
+   PQclear(res)
 
-        PQClose(conn)
+   PQClose(conn)
 
 RETURN NIL
 

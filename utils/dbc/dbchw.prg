@@ -494,9 +494,9 @@ Local oWindow, aControls, oBrowse, i
    ENDIF
    IF hChild == NIL .OR. hChild == 0
       INIT WINDOW oWindow MDICHILD TITLE fname ;
-           AT 0, 0                              ;
-           ON GETFOCUS {|o|ChildGetFocus(o)}   ;
-           ON EXIT {|o|ChildKill(o)}
+         AT 0, 0                               ;
+         ON GETFOCUS {|o|ChildGetFocus(o)}     ;
+         ON EXIT {|o|ChildKill(o)}
 
       ADD STATUS PARTS 180, 200, 0
       @ 0, 0 BROWSE oBrowse DATABASE  ;

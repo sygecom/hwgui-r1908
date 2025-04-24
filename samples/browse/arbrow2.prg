@@ -16,11 +16,10 @@ FUNCTION Main()
    LOCAL a
    LOCAL b
 
-    INIT WINDOW oWinMain MAIN  ;
-        TITLE "Test scroll in HBrowse" AT 0, 0 SIZE 600, 400;
-        FONT HFont():Add("Verdana", 0, -13, 400) ;
-        STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER 
-
+   INIT WINDOW oWinMain MAIN  ;
+      TITLE "Test scroll in HBrowse" AT 0, 0 SIZE 600, 400;
+      FONT HFont():Add("Verdana", 0, -13, 400) ;
+      STYLE WS_DLGFRAME + WS_SYSMENU + DS_CENTER
     
     @  10, 20 BROWSE oBrw1 ARRAY SIZE 180, 325 ON SIZE {|o, x, y|o:Move(, , , y - 70)} MULTISELECT
     @ 200, 20 BROWSE oBrw2 ARRAY SIZE 180, 325 

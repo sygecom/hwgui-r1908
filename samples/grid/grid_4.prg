@@ -19,24 +19,24 @@ STATIC oGrid
 
 FUNCTION Main()
 
-        IF File("temp.dbf")
-            FErase("temp.dbf")
-        END
-                    
-        DBCreate("temp.dbf", {{"LINE", "C", 300, 0}})
-        
-        USE temp
-                        
-        INIT WINDOW oMain MAIN TITLE "File Viewer" ;
-             AT 0, 0 ;
-             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
+   IF File("temp.dbf")
+      FErase("temp.dbf")
+   ENDIF
 
-                MENU OF oMain
-                        MENUITEM "&Exit" ACTION oMain:Close()
-                        MENUITEM "&Open File" ACTION FileOpen()                        
-                ENDMENU
+   DBCreate("temp.dbf", {{"LINE", "C", 300, 0}})
 
-        ACTIVATE WINDOW oMain
+   USE temp
+
+   INIT WINDOW oMain MAIN TITLE "File Viewer" ;
+      AT 0, 0 ;
+      SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
+
+   MENU OF oMain
+      MENUITEM "&Exit" ACTION oMain:Close()
+      MENUITEM "&Open File" ACTION FileOpen()
+   ENDMENU
+
+   ACTIVATE WINDOW oMain
         
 RETURN NIL
 

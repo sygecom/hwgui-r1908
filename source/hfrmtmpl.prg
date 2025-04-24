@@ -392,22 +392,22 @@ METHOD HFormTmpl:Show(nMode, p1, p2, p3)
 
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
-              At nLeft, nTop SIZE nWidth, nHeight ;
-              STYLE IIf(nstyle > 0, nstyle, NIL) ;
-              FONT oFont ;
-              BACKGROUND BITMAP oBmp
+            AT nLeft, nTop SIZE nWidth, nHeight ;
+            STYLE IIf(nstyle > 0, nstyle, NIL)  ;
+            FONT oFont                          ;
+            BACKGROUND BITMAP oBmp
       ELSEIF lMdiChild
-         INIT WINDOW ::oDlg  MDICHILD TITLE cTitle    ;
-              At nLeft, nTop SIZE nWidth, nHeight ;
-              STYLE IIf(nstyle > 0, nstyle, NIL) ;
-              FONT oFont ;
-              BACKGROUND BITMAP oBmp
+         INIT WINDOW ::oDlg MDICHILD TITLE cTitle ;
+            AT nLeft, nTop SIZE nWidth, nHeight   ;
+            STYLE IIf(nstyle > 0, nstyle, NIL)    ;
+            FONT oFont                            ;
+            BACKGROUND BITMAP oBmp
       ELSE
-         INIT WINDOW ::oDlg MAIN TITLE cTitle    ;
-              At nLeft, nTop SIZE nWidth, nHeight ;
-              FONT oFont ;
-              BACKGROUND BITMAP oBmp ;
-              STYLE IIf(nstyle > 0, nstyle, NIL)
+         INIT WINDOW ::oDlg MAIN TITLE cTitle   ;
+            AT nLeft, nTop SIZE nWidth, nHeight ;
+            FONT oFont                          ;
+            BACKGROUND BITMAP oBmp              ;
+            STYLE IIf(nstyle > 0, nstyle, NIL)
 
       ENDIF
    ENDIF

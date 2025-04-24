@@ -23,16 +23,16 @@ STATIC oGrid
 
 FUNCTION Main()
 
-        INIT WINDOW oMain MAIN TITLE "Grid Sample" ;
-             AT 0, 0 ;
-             SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
+   INIT WINDOW oMain MAIN TITLE "Grid Sample" ;
+      AT 0, 0 ;
+      SIZE hwg_GetDesktopWidth(), hwg_GetDesktopHeight() - 28
 
-                MENU OF oMain
-                        MENUITEM "&Exit"      ACTION oMain:Close()
-                        MENUITEM "&Grid Demo" ACTION Test()
-                ENDMENU
+   MENU OF oMain
+      MENUITEM "&Exit" ACTION oMain:Close()
+      MENUITEM "&Grid Demo" ACTION Test()
+   ENDMENU
 
-        ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
 RETURN NIL
 

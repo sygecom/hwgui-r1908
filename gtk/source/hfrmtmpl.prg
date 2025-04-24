@@ -327,23 +327,23 @@ Private oDlg
 #ifndef __LINUX__
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
-         AT nLeft, nTop SIZE nWidth, nHeight ;
-         STYLE IIF(nStyle > 0, nStyle, NIL) ;
-         FONT oFont;
-         BACKGROUND BITMAP oBmp
+            AT nLeft, nTop SIZE nWidth, nHeight ;
+            STYLE IIF(nStyle > 0, nStyle, NIL) ;
+            FONT oFont;
+            BACKGROUND BITMAP oBmp
       ELSEIF lMdiChild
          INIT WINDOW ::oDlg  MDICHILD TITLE cTitle    ;
-         AT nLeft, nTop SIZE nWidth, nHeight ;
-         STYLE IIf(nStyle > 0, nStyle, NIL) ;
-         FONT oFont ;
-         BACKGROUND BITMAP oBmp
+            AT nLeft, nTop SIZE nWidth, nHeight ;
+            STYLE IIf(nStyle > 0, nStyle, NIL) ;
+            FONT oFont ;
+            BACKGROUND BITMAP oBmp
       ELSE
 #endif
       INIT WINDOW ::oDlg MAIN TITLE cTitle    ;
-          AT nLeft, nTop SIZE nWidth, nHeight ;
-          FONT oFont;
-          BACKGROUND BITMAP oBmp;
-          STYLE IIf(nStyle > 0, nStyle, NIL)
+         AT nLeft, nTop SIZE nWidth, nHeight ;
+         FONT oFont;
+         BACKGROUND BITMAP oBmp;
+         STYLE IIf(nStyle > 0, nStyle, NIL)
 #ifndef __LINUX__
       ENDIF
 #endif
