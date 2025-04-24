@@ -18,10 +18,10 @@
 
 CLASS TMci
 
-   DATA   nError, nId
-   DATA   cType, cFileName
-   DATA   oWnd
-   DATA   cBuffer
+   DATA nError, nId
+   DATA cType, cFileName
+   DATA oWnd
+   DATA cBuffer
 
    METHOD New(cDevice, cFileName)  CONSTRUCTOR
 

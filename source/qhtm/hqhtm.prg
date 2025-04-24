@@ -139,7 +139,7 @@ RETURN 0
 CLASS HQhtmButton INHERIT HButton
 
    CLASS VAR winclass   INIT "BUTTON"
-   DATA  cHtml
+   DATA cHtml
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
                   bInit, bSize, bClick, ctooltip)
    METHOD Redefine(oWnd, nId, cCaption, oFont, bInit, bSize, bClick, ctooltip)

@@ -29,7 +29,7 @@ CLASS HTimer INHERIT HObject
 
    METHOD End()
 
-   DATA   xName          HIDDEN
+   DATA xName          HIDDEN
    ACCESS Name INLINE ::xName
    ASSIGN Name(cName) INLINE IIf(!Empty(cName) .AND. HB_IsChar(cName) .AND. !":" $ cName .AND. !"[" $ cName, ;
 			(::xName := cName, __objAddData(::oParent, cName), ::oParent: &(cName) := Self), NIL)

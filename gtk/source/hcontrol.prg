@@ -29,7 +29,7 @@ CLASS HControl INHERIT HCustomWindow
    DATA lInit    INIT .F.
    //DATA name // TODO: duplicated
    DATA Anchor          INIT 0
-   DATA   xName           HIDDEN
+   DATA xName           HIDDEN
    ACCESS Name INLINE ::xName
    ASSIGN Name(cName) INLINE ::AddName(cName)
 
@@ -371,7 +371,7 @@ RETURN NIL
 CLASS HButton INHERIT HControl
 
    CLASS VAR winclass   INIT "BUTTON"
-   DATA  bClick
+   DATA bClick
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
                   bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor)

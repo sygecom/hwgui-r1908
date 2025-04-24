@@ -16,7 +16,7 @@
 CLASS HRadioButton INHERIT HControl
 
 CLASS VAR winclass   INIT "BUTTON"
-   DATA  oGroup
+   DATA oGroup
    DATA lWhen  INIT .F.
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;

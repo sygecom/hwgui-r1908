@@ -29,7 +29,7 @@ STATIC aSels := {}
 CLASS HControlGen INHERIT HControl
 
    CLASS VAR winclass INIT "STATIC"
-   DATA  cClass
+   DATA cClass
    DATA lContainer    INIT .F.
    DATA oContainer, nPage
    DATA oXMLDesc

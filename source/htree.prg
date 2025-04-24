@@ -28,8 +28,8 @@ CLASS VAR winclass   INIT "SysTreeView32"
    DATA lCheckbox   INIT .F. HIDDEN
    DATA lDragDrop   INIT .F. HIDDEN
 
-   DATA   lDragging  INIT .F. HIDDEN
-   DATA  hitemDrag, hitemDrop HIDDEN
+   DATA lDragging  INIT .F. HIDDEN
+   DATA hitemDrag, hitemDrop HIDDEN
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
                aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lCheckbox, bCheck, lDragDrop, bDrag, bDrop, bOther)

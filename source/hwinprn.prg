@@ -27,24 +27,24 @@ CLASS HWinPrn INHERIT HObject
 
    CLASS VAR nStdHeight SHARED  INIT NIL
    CLASS VAR cPrinterName SHARED  INIT NIL
-   DATA   oPrinter
-   DATA   oFont
-   DATA   nLineHeight, nLined
-   DATA   nCharW
-   DATA   x, y
-   DATA   lElite    INIT .F.
-   DATA   lCond     INIT .F.
-   DATA   nLineInch INIT 6
-   DATA   lBold     INIT .F.
-   DATA   lItalic   INIT .F.
-   DATA   lUnder    INIT .F.
-   DATA   lChanged  INIT .F.
+   DATA oPrinter
+   DATA oFont
+   DATA nLineHeight, nLined
+   DATA nCharW
+   DATA x, y
+   DATA lElite    INIT .F.
+   DATA lCond     INIT .F.
+   DATA nLineInch INIT 6
+   DATA lBold     INIT .F.
+   DATA lItalic   INIT .F.
+   DATA lUnder    INIT .F.
+   DATA lChanged  INIT .F.
 
-   DATA   cpFrom, cpTo
-   DATA   nTop      INIT 5
-   DATA   nBottom   INIT 5
-   DATA   nLeft     INIT 5
-   DATA   nRight    INIT 5
+   DATA cpFrom, cpTo
+   DATA nTop      INIT 5
+   DATA nBottom   INIT 5
+   DATA nLeft     INIT 5
+   DATA nRight    INIT 5
 
 
    METHOD New(cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies)

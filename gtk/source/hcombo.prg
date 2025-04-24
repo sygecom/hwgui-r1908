@@ -28,13 +28,13 @@
 CLASS HComboBox INHERIT HControl
 
    CLASS VAR winclass   INIT "COMBOBOX"
-   DATA  aItems
-   DATA  bSetGet
-   DATA  value    INIT 1
-   DATA  bChangeSel
-   DATA  lText    INIT .F.
-   DATA  lEdit    INIT .F.
-   DATA  hEdit
+   DATA aItems
+   DATA bSetGet
+   DATA value    INIT 1
+   DATA bChangeSel
+   DATA lText    INIT .F.
+   DATA lEdit    INIT .F.
+   DATA hEdit
 
    METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   aItems, oFont, bInit, bSize, bPaint, bChange, cToolt, lEdit, lText, bGFocus, tcolor, bcolor)

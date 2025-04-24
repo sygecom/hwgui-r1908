@@ -159,7 +159,7 @@ CLASS HMainWindow INHERIT HWindow
          {|o|onDestroy(o)} ;
       } ;
    }
-   DATA   nMenuPos
+   DATA nMenuPos
    DATA oNotifyIcon, bNotify, oNotifyMenu
    DATA lTray       INIT .F.
    DATA lActivated  INIT .F.

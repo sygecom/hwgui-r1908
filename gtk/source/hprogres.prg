@@ -17,10 +17,10 @@
 CLASS HProgressBar INHERIT HControl
 
    CLASS VAR winclass   INIT "ProgressBar"
-   DATA  maxPos
-   DATA  lNewBox
-   DATA  nCount INIT 0
-   DATA  nLimit
+   DATA maxPos
+   DATA lNewBox
+   DATA nCount INIT 0
+   DATA nLimit
 
    METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip)
    //METHOD NewBox(cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, bInit, bSize, bPaint, ctooltip)

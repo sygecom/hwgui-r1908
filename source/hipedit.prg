@@ -35,7 +35,7 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    METHOD END()
 
    HIDDEN:
-   DATA  aValue           // Valor atual
+   DATA aValue           // Valor atual
 
 ENDCLASS
 
