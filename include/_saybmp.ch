@@ -15,8 +15,8 @@
              [ STYLE <nStyle> ]                        ;
              [ <class: CLASS> <classname> ]            ;
           => ;
-          [ <oBmp> := ] __IIF(<.class.>, <classname>, HSayBmp)():New(<oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<bitmap>,<.res.>,<bInit>,<bSize>,<cTooltip>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle>) ;;
+          [ <oBmp> := ] __IIF(<.class.>, <classname>, HSayBmp)():New(<oParent>, <nId>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <bitmap>, <.res.>, <bInit>, <bSize>, <cTooltip>, <bClick>, <bDblClick>, <.lTransp.>, <nStretch>, <nStyle>) ;;
           [ <oBmp>:name := <(oBmp)> ]
 
 #xcommand REDEFINE BITMAP [ <oBmp> SHOW ] <bitmap> ;
@@ -28,5 +28,5 @@
              [ ON SIZE <bSize> ]                   ;
              [ TOOLTIP <cTooltip> ]                ;
           => ;
-          [ <oBmp> := ] HSayBmp():Redefine(<oParent>,<nId>,<bitmap>,<.res.>, ;
-             <bInit>,<bSize>,<cTooltip>,<.lTransp.>)
+          [ <oBmp> := ] HSayBmp():Redefine(<oParent>, <nId>, <bitmap>, <.res.>, ;
+             <bInit>, <bSize>, <cTooltip>, <.lTransp.>)

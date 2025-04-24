@@ -18,7 +18,7 @@
              [ [ON] COLORBLOCK <bClrBlck> ]   ;
              [ [ON] BHEADCLICK <bHeadClick> ] ;
           => ;
-          <oBrw>:AddColumn(HColumn():New(<cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>, ;
+          <oBrw>:AddColumn(HColumn():New(<cHeader>, <block>, <cType>, <nLen>, <nDec>, <.lEdit.>, ;
              <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <{bClrBlck}>, <{bHeadClick}>, <color>, <bcolor>, <bClick>))
 
 #xcommand INSERT COLUMN <block> TO <oBrw> ;
@@ -37,5 +37,5 @@
              [ COLORBLOCK <bClrBlck> ]    ;
              INTO <nPos>                  ;
           => ;
-          <oBrw>:InsColumn(HColumn():New(<cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>, ;
-             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <oBmp>, <{bClrBlck}>),<nPos>)
+          <oBrw>:InsColumn(HColumn():New(<cHeader>, <block>, <cType>, <nLen>, <nDec>, <.lEdit.>, ;
+             <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <oBmp>, <{bClrBlck}>), <nPos>)

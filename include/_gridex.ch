@@ -30,7 +30,7 @@
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>, ;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>, ;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>, ;
-             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>,<a>) ;;
+             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.>, <aBit>, <a>) ;;
           [ <oGrid>:name := <(oGrid)> ]
 
 #xcommand REDEFINE GRID <oSay>     ;
@@ -41,4 +41,4 @@
              [ ON PAINT <bPaint> ] ;
              [ ITEM <aitem> ]      ;
           => ;
-          [ <oSay> := ] HGRIDex():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<aitem>)
+          [ <oSay> := ] HGRIDex():Redefine(<oParent>, <nId>, , , <bInit>, <bSize>, <bPaint>, , , , , <aitem>)

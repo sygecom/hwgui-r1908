@@ -26,9 +26,9 @@
              ]                                               ;
              [ <class: CLASS> <classname> ]                  ;
           => ;
-          [ <oBut> := ] __IIF(<.class.>, <classname>, HButtonEx)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<bClick>,<cTooltip>,<color>,<bcolor>,<hbit>, ;
-             <nBStyle>,<hIco>, <.lTransp.>,<bGfocus>,<nMargin>,<.lnoTheme.>, <bOther>) ;;
+          [ <oBut> := ] __IIF(<.class.>, <classname>, HButtonEx)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bPaint>, <bClick>, <cTooltip>, <color>, <bcolor>, <hbit>, ;
+             <nBStyle>, <hIco>, <.lTransp.>, <bGfocus>, <nMargin>, <.lnoTheme.>, <bOther>) ;;
           [ <oBut>:name := <(oBut)> ]
 
 #xcommand REDEFINE BUTTONEX [ <oBut> ]   ;
@@ -48,5 +48,5 @@
              [ BSTYLE <nBStyle> ]        ;
              [ PICTUREMARGIN <nMargin> ] ;
           => ;
-          [ <oBut> := ] HButtonEx():Redefine(<oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bPaint>, ;
-             <bClick>,<cTooltip>,<color>,<bcolor>,<cCaption>,<hbit>,<nBStyle>,<bGfocus>,<nMargin>)
+          [ <oBut> := ] HButtonEx():Redefine(<oParent>, <nId>, <oFont>, <bInit>, <bSize>, <bPaint>, ;
+             <bClick>, <cTooltip>, <color>, <bcolor>, <cCaption>, <hbit>, <nBStyle>, <bGfocus>, <nMargin>)

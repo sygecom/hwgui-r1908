@@ -25,10 +25,10 @@
              [ ON INTERACTIVECHANGE <bIChange> ]            ;
              [ <class: CLASS> <classname> ]                 ;
           => ;
-          [ <oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New(<oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>,<bChange>,<cTooltip>, ;
-             <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>, ;
-						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>) ;;
+          [ <oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New(<oParent>, <nId>, <nInit>, , <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <aItems>, <oFont>, <bInit>, <bSize>, <bPaint>, <bChange>, <cTooltip>, ;
+             <.edit.>, <.text.>, <bGfocus>, <color>, <bcolor>, <bLfocus>, <bIChange>, ;
+						 <nDisplay>, <nhItem>, <ncWidth>, <nMaxLength>) ;;
           [ <oCombo>:name := <(oCombo)> ]
 
 #xcommand REDEFINE COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
@@ -47,8 +47,8 @@
             [ ON LOSTFOCUS <bLfocus> ]                  ;
             [ ON INTERACTIVECHANGE <bIChange> ]         ;
           => ;
-    [ <oCombo> := ] HComboBox():Redefine(<oParent>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bPaint>,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>, <bIChange>,<nDisplay>,<nMaxLength>)
+    [ <oCombo> := ] HComboBox():Redefine(<oParent>, <nId>, <nInit>, , <aItems>, <oFont>, <bInit>, ;
+             <bSize>, <bPaint>, <bChange>, <cTooltip>, <bGfocus>, <bLfocus>, <bIChange>, <nDisplay>, <nMaxLength>)
 
 /* SAY ... GET system     */
 
@@ -75,12 +75,12 @@
             [ ON INTERACTIVECHANGE <bIChange> ]             ;
             [ <class: CLASS> <classname> ]                  ;
           => ;
-    [ <oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New(<oParent>,<nId>,<vari>,    ;
+    [ <oCombo> := ] __IIF(<.class.>, <classname>, HComboBox)():New(<oParent>, <nId>, <vari>,    ;
                     {|v|IIf(v == NIL, <vari>, <vari> := v)},      ;
-                    <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,      ;
-                    <aItems>,<oFont>,<bInit>,,,<bChange>,<cTooltip>, ;
-                    <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, ;
-                    <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>) ;;
+                    <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>,      ;
+                    <aItems>, <oFont>, <bInit>, , , <bChange>, <cTooltip>, ;
+                    <.edit.>, <.text.>, <bGfocus>, <color>, <bcolor>, ;
+                    <bLfocus>, <bIChange>, <nDisplay>, <nhItem>, <ncWidth>, <nMaxLength>) ;;
     [ <oCombo>:name := <(oCombo)> ]
 
 
@@ -99,9 +99,9 @@
             [ <edit: EDIT> ]                              ;
             [ <text: TEXT> ]                              ;
           => ;
-    [ <oCombo> := ] HComboBox():Redefine(<oParent>,<nId>,<vari>, ;
+    [ <oCombo> := ] HComboBox():Redefine(<oParent>, <nId>, <vari>, ;
                     {|v|IIf(v == NIL, <vari>, <vari> := v)},        ;
-                    <aItems>,<oFont>,,,,<bChange>,<cTooltip>,<bGfocus>, <bLfocus>,<bIChange>,<nDisplay>, <nMaxLength>,<.edit.>,<.text.>)
+                    <aItems>, <oFont>, , , , <bChange>, <cTooltip>, <bGfocus>, <bLfocus>, <bIChange>, <nDisplay>, <nMaxLength>, <.edit.>, <.text.>)
 
 #xcommand REDEFINE GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>                              ;
@@ -113,6 +113,6 @@
              [ WHEN <bWhen> ]                             ;
              [ CHECK <acheck>]                            ;
           => ;
-          [ <oCombo> := ] HComboBox():Redefine(<oParent>,<nId>,<vari>, ;
+          [ <oCombo> := ] HComboBox():Redefine(<oParent>, <nId>, <vari>, ;
              {|v|IIf(v == NIL, <vari>, <vari> := v)},        ;
-             <aItems>,<oFont>,,,,<bChange>,<cTooltip>, <bWhen> ,<acheck>)
+             <aItems>, <oFont>, , , , <bChange>, <cTooltip>, <bWhen>, <acheck>)

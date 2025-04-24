@@ -20,8 +20,8 @@
              ]                                       ;
              [ <class: CLASS> <classname> ]          ;
           => ;
-          [ <oTab> := ] __IIF(<.class.>, <classname>, HTab)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<aItems>,<bChange>, <aBmp>, <.res.>,<nBC>, ;
+          [ <oTab> := ] __IIF(<.class.>, <classname>, HTab)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <oFont>, <bInit>, <bSize>, <bPaint>, <aItems>, <bChange>, <aBmp>, <.res.>, <nBC>, ;
              <bClick>, <bGetFocus>, <bLostFocus>, <bRClick>) ;;
           [ <oTab>:name := <(oTab)> ]
 
@@ -31,7 +31,7 @@
             [ BACKCOLOR <bcolor> ]     ;
             [ TOOLTIP <cTooltip> ]     ;
           => ;
-          <oTab>:StartPage(<cname>, ,! <.enable.> ,<tcolor>,<bcolor>, <cTooltip>)
+          <oTab>:StartPage(<cname>, , !<.enable.>, <tcolor>, <bcolor>, <cTooltip>)
 
 #xcommand END PAGE OF <oTab> => <oTab>:EndPage()
 
@@ -45,4 +45,4 @@
              [ ON PAINT <bPaint> ]   ;
              [ ON CHANGE <bChange> ] ;
           => ;
-          [ <oSay> := ] Htab():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,<bChange>)
+          [ <oSay> := ] Htab():Redefine(<oParent>, <nId>, , , <bInit>, <bSize>, <bPaint>, , , , , <bChange>)

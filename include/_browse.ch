@@ -37,10 +37,10 @@
              [ <class: CLASS> <classname> ]                ;
           => ;
           [ <oBrw> := ] __IIF(<.class.>, <classname>, HBrowse)():New(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, 0)), ;
-             <oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize>, ;
-             <bPaint>,<bEnter>,<bGfocus>,<bLfocus>,<.lNoVScr.>,<.lNoBord.>, <.lAppend.>, ;
+             <oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, <oFont>, <bInit>, <bSize>, ;
+             <bPaint>, <bEnter>, <bGfocus>, <bLfocus>, <.lNoVScr.>, <.lNoBord.>, <.lAppend.>, ;
              <.lAutoedit.>, <bUpdate>, <bKeyDown>, <bPosChg>, <.lMulti.>, <.lDescend.>, ;
-             <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>,<bChgrowcol>, <cTooltip>) ;;
+             <bWhile>, <bFirst>, <bLast>, <bFor>, <bOther>, <color>, <bcolor>, <bRClick>, <bChgrowcol>, <cTooltip>) ;;
           [ <oBrw>:name := <(oBrw)> ]
 
 #xcommand REDEFINE BROWSE [ <oBrw> ]    ;
@@ -58,4 +58,4 @@
              [ FONT <oFont> ]           ;
           => ;
           [ <oBrw> := ] HBrowse():Redefine(IIf(<.lDb.>, BRW_DATABASE, IIf(<.lArr.>, BRW_ARRAY, IIf(<.lFlt.>, BRW_FILTER, 0))), ;
-             <oParent>,<nId>,<oFont>,<bInit>,<bSize>,<bPaint>,<bEnter>,<bGfocus>,<bLfocus>)
+             <oParent>, <nId>, <oFont>, <bInit>, <bSize>, <bPaint>, <bEnter>, <bGfocus>, <bLfocus>)

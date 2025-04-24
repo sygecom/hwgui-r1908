@@ -8,7 +8,7 @@
              [ ON CLICK <bClick> ]            ;
              [ ON GETFOCUS <bWhen> ]          ;
           => [ <ogr> := ] HRadioGroup():New(<vari>, {|v|IIf(v == NIL, <vari>, <vari> := v)}, ;
-					     <bInit>,<bClick>,<bWhen>, <nStyle>)
+					     <bInit>, <bClick>, <bWhen>, <nStyle>)
 
           //nando
 #xcommand @ <nX>, <nY> GET RADIOGROUP [ <ogr> VAR ] <vari> ;
@@ -26,9 +26,9 @@
              [ ON CLICK <bClick> ]                         ;
              [ ON GETFOCUS <bWhen> ]                       ;
              [ <class: CLASS> <classname> ]                ;
-          => [ <ogr> := ] __IIF(<.class.>, <classname>, HRadioGroup)():NewRG(<oParent>,<nId>,<nStyle>,<vari>, ;
-                  {|v|IIf(v == NIL, <vari>, <vari> := v)},<nX>,<nY>,<nWidth>,<nHeight>,<caption>,<oFont>, ;
-                  <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>) ;;
+          => [ <ogr> := ] __IIF(<.class.>, <classname>, HRadioGroup)():NewRG(<oParent>, <nId>, <nStyle>, <vari>, ;
+                  {|v|IIf(v == NIL, <vari>, <vari> := v)}, <nX>, <nY>, <nWidth>, <nHeight>, <caption>, <oFont>, ;
+                  <bInit>, <bSize>, <color>, <bcolor>, <bClick>, <bWhen>, <.lTransp.>) ;;
           [ <ogr>:name := <(ogr)> ]
 
 

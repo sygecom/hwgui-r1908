@@ -29,7 +29,7 @@
              <oFont>, <{bInit}>, <{bSize}>, <{bPaint}>, <{bEnter}>, ;
              <{bGfocus}>, <{bLfocus}>, <.lNoScroll.>, <.lNoBord.>, ;
              <{bKeyDown}>, <{bPosChg}>, <{bDispInfo}>, <nItemCount>, ;
-             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.> ,<aBit>) ;;
+             <.lNoLines.>, <color>, <bkcolor>, <.lNoHeader.>, <aBit>) ;;
           [ <oGrid>:name := <(oGrid)> ]
 
 #xcommand ADD COLUMN TO GRID <oGrid>     ;
@@ -38,7 +38,7 @@
              [ JUSTIFY HEAD <nJusHead> ] ;
              [ BITMAP <n> ]              ;
           => ;
-          <oGrid>:AddColumn(<cHeader>, <nWidth>, <nJusHead> ,<n>)
+          <oGrid>:AddColumn(<cHeader>, <nWidth>, <nJusHead>, <n>)
 
 #xcommand ADDROW TO GRID <oGrid>          ;
              [ HEADER <cHeader> ]         ;
@@ -48,7 +48,7 @@
              [ JUSTIFY HEAD <nJusHeadn> ] ;
              [ BITMAP <nn> ]              ;
           => ;
-          <oGrid>:AddRow(<cHeader>,<nJusHead>,<n>) [;<oGrid>:AddRow(<cHeadern>,<nJusHeadn>,<nn>)]
+          <oGrid>:AddRow(<cHeader>, <nJusHead>, <n>) [;<oGrid>:AddRow(<cHeadern>, <nJusHeadn>, <nn>)]
 
 #xcommand ADDROWEX TO GRID <oGrid>       ;
              [ HEADER <cHeader>          ;
@@ -62,7 +62,7 @@
                 [ BACKCOLOR <bkcolorn> ] ;
              ]                           ;
           => ;
-          <oGrid>:AddRow(\{<cHeader>,<n>,<color>,<bkcolor> [,<cHeadern>,<nn>,<colorn>,<bkcolorn> ] \})
+          <oGrid>:AddRow(\{<cHeader>, <n>, <color>, <bkcolor> [, <cHeadern>, <nn>, <colorn>, <bkcolorn> ] \})
 
 #xcommand ADDROWEX TO GRID <oGrid>       ;
              [ HEADER <cHeader>          ;
@@ -76,7 +76,7 @@
                 [ BACKCOLOR <bkcolorn> ] ;
              ]                           ;
           => ;
-          <oGrid>:AddRow(\{<cHeader>,<n>,<color>,<bkcolor> [,<cHeadern>,<nn>,<colorn>,<bkcolorn> ] \})
+          <oGrid>:AddRow(\{<cHeader>, <n>, <color>, <bkcolor> [, <cHeadern>, <nn>, <colorn>, <bkcolorn> ] \})
 
 #xcommand ADDROWEX <oGrid>            ;
              HEADER <cHeader>         ;
@@ -88,4 +88,4 @@
              [ COLOR <colorn> ]       ;
              [ BACKCOLOR <bkcolorn> ] ;
           => ;
-          <oGrid>:AddRow(\{<cHeader>,<n>,<color>,<bkcolor> [, <cHeadern>,<nn>,<colorn>,<bkcolorn>] \})
+          <oGrid>:AddRow(\{<cHeader>, <n>, <color>, <bkcolor> [, <cHeadern>, <nn>, <colorn>, <bkcolorn>] \})

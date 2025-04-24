@@ -21,9 +21,9 @@
              [ TOOLTIP <cTooltip> ]                     ;
              [ <class: CLASS> <classname> ]             ;
           => ;
-          [ <oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<cTooltip>, ;
-             <color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>,<bOther>) ;;
+          [ <oSay> := ] __IIF(<.class.>, <classname>, HStatic)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, ;
+             <color>, <bcolor>, <.lTransp.>, <bClick>, <bDblClick>, <bOther>) ;;
           [ <oSay>:name := <(oSay)> ]
 
 #xcommand REDEFINE SAY [ <oSay> CAPTION ] <cCaption> ;
@@ -40,5 +40,5 @@
              [ FONT <oFont> ]                        ;
              [ TOOLTIP <cTooltip> ]                  ;
           => ;
-          [ <oSay> := ] HStatic():Redefine(<oParent>,<nId>,<cCaption>, ;
-             <oFont>,<bInit>,<bSize>,<bPaint>,<cTooltip>,<color>,<bcolor>,<.lTransp.>,<bClick>,<bDblClick>)
+          [ <oSay> := ] HStatic():Redefine(<oParent>, <nId>, <cCaption>, ;
+             <oFont>, <bInit>, <bSize>, <bPaint>, <cTooltip>, <color>, <bcolor>, <.lTransp.>, <bClick>, <bDblClick>)

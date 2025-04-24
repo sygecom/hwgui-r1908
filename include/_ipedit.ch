@@ -11,5 +11,5 @@
              [ ON LOSTFOCUS <bLfocus> ]                   ;
              [ <class: CLASS> <classname> ]               ;
           => ;
-          [ <oIp> := ] __IIF(<.class.>, <classname>, HIpEdit)():New(<oParent>,<nId>,<vari>,{|v|IIf(v == NIL, <vari>, <vari> := v)},<nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>, <bGfocus>, <bLfocus>) ;;
+          [ <oIp> := ] __IIF(<.class.>, <classname>, HIpEdit)():New(<oParent>, <nId>, <vari>,{|v|IIf(v == NIL, <vari>, <vari> := v)}, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, <oFont>, <bGfocus>, <bLfocus>) ;;
           [ <oIp>:name := <(oIp)> ]

@@ -13,8 +13,8 @@
              [ <oem: OEM> ]                        ;
              [ <class: CLASS> <classname> ]        ;
           => ;
-          [ <oIco> := ] __IIF(<.class.>, <classname>, HSayIcon)():New(<oParent>,<nId>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<icon>,<.res.>,<bInit>,<bSize>,<cTooltip>,<.oem.>,<bClick>,<bDblClick>) ;;
+          [ <oIco> := ] __IIF(<.class.>, <classname>, HSayIcon)():New(<oParent>, <nId>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <icon>, <.res.>, <bInit>, <bSize>, <cTooltip>, <.oem.>, <bClick>, <bDblClick>) ;;
           [ <oIco>:name := <(oIco)> ]
 
 #xcommand REDEFINE ICON [ <oIco> SHOW ] <icon> ;
@@ -25,5 +25,5 @@
              [ ON SIZE <bSize> ]               ;
              [ TOOLTIP <cTooltip> ]            ;
           => ;
-          [ <oIco> := ] HSayIcon():Redefine(<oParent>,<nId>,<icon>,<.res.>, ;
-             <bInit>,<bSize>,<cTooltip>)
+          [ <oIco> := ] HSayIcon():Redefine(<oParent>, <nId>, <icon>, <.res.>, ;
+             <bInit>, <bSize>, <cTooltip>)

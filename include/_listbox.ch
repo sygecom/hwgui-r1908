@@ -24,9 +24,9 @@
              ]                                               ;
              [ <class: CLASS> <classname> ]                  ;
           => ;
-          [ <oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New(<oParent>,<nId>,<nInit>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>,<bChange>,<cTooltip>, ;
-             <color>,<bcolor>, <bGfocus>,<bLfocus>,<bKeyDown>,<bDblClick>,<bOther>) ;;
+          [ <oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New(<oParent>, <nId>, <nInit>, , <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <aItems>, <oFont>, <bInit>, <bSize>, <bPaint>, <bChange>, <cTooltip>, ;
+             <color>, <bcolor>, <bGfocus>, <bLfocus>, <bKeyDown>, <bDblClick>, <bOther>) ;;
           [ <oListbox>:name := <(oListbox)> ]
 
 #xcommand REDEFINE LISTBOX [ <oListbox> ITEMS ] <aItems> ;
@@ -47,8 +47,8 @@
                 [ ON OTHERMESSAGES <bOther> ]            ;
              ]                                           ;
           => ;
-          [ <oListbox> := ] HListBox():Redefine(<oParent>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
-             <bSize>,<bPaint>,<bChange>,<cTooltip>,<bGfocus>,<bLfocus>, <bKeyDown>,<bOther>)
+          [ <oListbox> := ] HListBox():Redefine(<oParent>, <nId>, <nInit>, , <aItems>, <oFont>, <bInit>, ;
+             <bSize>, <bPaint>, <bChange>, <cTooltip>, <bGfocus>, <bLfocus>, <bKeyDown>, <bOther>)
 
 #xcommand @ <nX>, <nY> GET LISTBOX [ <oListbox> VAR ] <vari> ;
              ITEMS  <aItems>                                 ;
@@ -74,8 +74,8 @@
              ]                                               ;
              [ <class: CLASS> <classname> ]                  ;
           => ;
-          [ <oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New(<oParent>,<nId>,<vari>, ;
+          [ <oListbox> := ] __IIF(<.class.>, <classname>, HListBox)():New(<oParent>, <nId>, <vari>, ;
              {|v|IIf(v == NIL, <vari>, <vari> := v)}, ;
-             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<aItems>,<oFont>,<bInit>,<bSize>,<bPaint>, ;
-             <bChange>,<cTooltip>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>) ;;
+             <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, <aItems>, <oFont>, <bInit>, <bSize>, <bPaint>, ;
+             <bChange>, <cTooltip>, <color>, <bcolor>, <bGFocus>, <bLFocus>, <bKeyDown>, <bDblClick>, <bOther>) ;;
           [ <oListbox>:name := <(oListbox)> ]

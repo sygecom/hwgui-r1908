@@ -16,7 +16,7 @@
              [ <weeknumbers: WEEKNUMBERS> ]               ;
              [ <class: CLASS> <classname> ]               ;
           => ;
-          [ <oMonthCalendar> := ] __IIF(<.class.>, <classname>, HMonthCalendar)():New(<oParent>,<nId>,<dInit>,<nStyle>, ;
-             <nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>, ;
-             <.notoday.>,<.notodaycircle.>,<.weeknumbers.>,<bSelect>) ;;
+          [ <oMonthCalendar> := ] __IIF(<.class.>, <classname>, HMonthCalendar)():New(<oParent>, <nId>, <dInit>, <nStyle>, ;
+             <nX>, <nY>, <nWidth>, <nHeight>, <oFont>, <bInit>, <bChange>, <cTooltip>, ;
+             <.notoday.>, <.notodaycircle.>, <.weeknumbers.>, <bSelect>) ;;
           [ <oMonthCalendar>:name := <(oMonthCalendar)> ]

@@ -16,5 +16,5 @@
              [ <class: CLASS> <classname> ] ;
           => ;
           [ <oShape> := ] __IIF(<.class.>, <classname>, HShape)():New(<oParent>, <nId>, <nX>, <nY>, <nWidth>, <nHeight>, ;
-             <nBorder>, <nCurvature>, <nbStyle>,<nfStyle>, <tcolor>, <bcolor>, <bSize>,<bInit>,<nbackStyle>) ;;
+             <nBorder>, <nCurvature>, <nbStyle>, <nfStyle>, <tcolor>, <bcolor>, <bSize>, <bInit>, <nbackStyle>) ;;
           [ <oShape>:name := <(oShape)> ]

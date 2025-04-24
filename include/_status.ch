@@ -12,8 +12,8 @@
              [ FONT <oFont> ]                     ;
              [ PARTS <aparts, ...> ]              ;
           => ;
-          [ <oStat> := ] HStatus():New(<oParent>,<nId>,<nStyle>,<oFont>,\{<aparts>\},<bInit>, ;
-             <bSize>,<bPaint>, <bRClick>, <bDblClick>, <nHeight>) ;;
+          [ <oStat> := ] HStatus():New(<oParent>, <nId>, <nStyle>, <oFont>,\{<aparts>\}, <bInit>, ;
+             <bSize>, <bPaint>, <bRClick>, <bDblClick>, <nHeight>) ;;
           [ <oStat>:name := <(oStat)> ]
 
 #xcommand REDEFINE STATUS <oSay>      ;
@@ -24,4 +24,4 @@
              [ ON PAINT <bPaint> ]    ;
              [ PARTS <bChange, ...> ] ;
           => ;
-          [ <oSay> := ] HStatus():Redefine(<oParent>,<nId>,,  ,<bInit>,<bSize>,<bPaint>, , , , ,\{<bChange>\})
+          [ <oSay> := ] HStatus():Redefine(<oParent>, <nId>, , , <bInit>, <bSize>, <bPaint>, , , , , \{<bChange>\})

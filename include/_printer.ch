@@ -8,7 +8,7 @@
              [ <lLandScape: LANDSCAPE>] ;
              [ COPIES <nCopies> ]       ;
           => ;
-          <oPrinter> := HPrinter():New(<cPrinter>,!<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)
+          <oPrinter> := HPrinter():New(<cPrinter>, !<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)
 
 #xcommand INIT DEFAULT PRINTER <oPrinter> ;
              [ <lPixel: PIXEL> ]          ;
@@ -17,4 +17,4 @@
              [ <lLandScape: LANDSCAPE>]   ;
              [ COPIES <nCopies> ]         ;
           => ;
-          <oPrinter> := HPrinter():New("",!<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)
+          <oPrinter> := HPrinter():New("", !<.lPixel.>, <nFormType>, <nBin>, <.lLandScape.>, <nCopies>)

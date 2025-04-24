@@ -22,7 +22,7 @@
              [ TOOLTIP <cTooltip> ]                     ;
              [ <class: CLASS> <classname> ]             ;
           => ;
-          [ <oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New(<oParent>,<nId>,<vari>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>, ;
-             <bLfocus>,<cTooltip>,<color>,<bcolor>,<bOther>, <.lallowtabs.>,<bChange>) ;;
+          [ <oEdit> := ] __IIF(<.class.>, <classname>, HRichEdit)():New(<oParent>, <nId>, <vari>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <oFont>, <bInit>, <bSize>, <bPaint>, <bGfocus>, ;
+             <bLfocus>, <cTooltip>, <color>, <bcolor>, <bOther>, <.lallowtabs.>, <bChange>) ;;
           [ <oEdit>:name := <(oEdit)> ]

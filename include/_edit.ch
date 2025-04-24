@@ -24,9 +24,9 @@
              [ TOOLTIP <cTooltip> ]                          ;
              [ <class: CLASS> <classname> ]                  ;
           => ;
-          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>,<nId>,<caption>,,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<oFont>,<bInit>,<bSize>,<bPaint>,<bGfocus>, ;
-             <bLfocus>,<cTooltip>,<color>,<bcolor>,,<.lnoborder.>,,<.lPassword.>,<bKeyDown>, <bChange>,<bOther>) ;;
+          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>, <nId>, <caption>, , <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <oFont>, <bInit>, <bSize>, <bPaint>, <bGfocus>, ;
+             <bLfocus>, <cTooltip>, <color>, <bcolor>, , <.lnoborder.>, , <.lPassword.>, <bKeyDown>, <bChange>, <bOther>) ;;
           [ <oEdit>:name := <(oEdit)> ]
 
 #xcommand REDEFINE EDITBOX [ <oEdit> ]  ;
@@ -43,8 +43,8 @@
              [ ON KEYDOWN <bKeyDown> ]  ;
              [ TOOLTIP <cTooltip> ]     ;
           => ;
-          [ <oEdit> := ] HEdit():Redefine(<oParent>,<nId>,,,<oFont>,<bInit>,<bSize>,<bPaint>, ;
-             <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,,,,<bKeyDown>)
+          [ <oEdit> := ] HEdit():Redefine(<oParent>, <nId>, , , <oFont>, <bInit>, <bSize>, <bPaint>, ;
+             <bGfocus>, <bLfocus>, <cTooltip>, <color>, <bcolor>, , , , <bKeyDown>)
 
 /* SAY ... GET system     */
 #ifdef __SYGECOM__
@@ -73,11 +73,11 @@
              ]                                             ;
              [ <class: CLASS> <classname> ]                ;
           => ;
-          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>,<nId>,<vari>,               ;
+          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>, <nId>, <vari>,               ;
              {|v|IIf(v == NIL, <vari>, <vari> := v)},             ;
-             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
-             <bGfocus>,<bLfocus>,IIf(!Empty(<cTooltip>), <cTooltip>,),<color>,<bcolor>,<cPicture>, ;
-             <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>) ;;
+             <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, <oFont>, <bInit>, <bSize>, ,  ;
+             <bGfocus>, <bLfocus>, IIf(!Empty(<cTooltip>), <cTooltip>,), <color>, <bcolor>, <cPicture>, ;
+             <.lnoborder.>, <nMaxLength>, <.lPassword.>, <bKeyDown>, <bChange>, <bOther>) ;;
           [ <oEdit>:name := <(oEdit)> ]
 
 #else
@@ -106,11 +106,11 @@
              ]                                             ;
              [ <class: CLASS> <classname> ]                ;
           => ;
-          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>,<nId>,<vari>,               ;
+          [ <oEdit> := ] __IIF(<.class.>, <classname>, HEdit)():New(<oParent>, <nId>, <vari>,               ;
              {|v|IIf(v == NIL, <vari>, <vari> := v)},             ;
-             <nStyle>,<nX>,<nY>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bSize> ,,  ;
-             <bGfocus>,<bLfocus>,<cTooltip>,<color>,<bcolor>,<cPicture>, ;
-             <.lnoborder.>,<nMaxLength>,<.lPassword.>,<bKeyDown>,<bChange>,<bOther>) ;;
+             <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, <oFont>, <bInit>, <bSize>, ,  ;
+             <bGfocus>, <bLfocus>, <cTooltip>, <color>, <bcolor>, <cPicture>, ;
+             <.lnoborder.>, <nMaxLength>, <.lPassword.>, <bKeyDown>, <bChange>, <bOther>) ;;
           [ <oEdit>:name := <(oEdit)> ]
 #endif
 /* Added MULTILINE: AJ: 11-03-2007*/
@@ -130,6 +130,6 @@
              [ ON KEYDOWN <bKeyDown>]                      ;
              [ ON CHANGE <bChange> ]                       ;
           => ;
-          [ <oEdit> := ] HEdit():Redefine(<oParent>,<nId>,<vari>, ;
+          [ <oEdit> := ] HEdit():Redefine(<oParent>, <nId>, <vari>, ;
              {|v|IIf(v == NIL, <vari>, <vari> := v)},    ;
-             <oFont>,,,,<{bGfocus}>,<{bLfocus}>,<cTooltip>,<color>,<bcolor>,<cPicture>,<nMaxLength>,<.lMultiLine.>,<bKeyDown>, <bChange>)
+             <oFont>, , , , <{bGfocus}>, <{bLfocus}>, <cTooltip>, <color>, <bcolor>, <cPicture>, <nMaxLength>, <.lMultiLine.>, <bKeyDown>, <bChange>)

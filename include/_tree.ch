@@ -26,8 +26,8 @@
              ]                              ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [ <oTree> := ] __IIF(<.class.>, <classname>, HTree)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-                <nHeight>,<oFont>,<bInit>,<bSize>,<color>,<bcolor>,<aBmp>,<.res.>,<.lEdit.>,<bClick>,<nBC>, ;
+          [ <oTree> := ] __IIF(<.class.>, <classname>, HTree)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+                <nHeight>, <oFont>, <bInit>, <bSize>, <color>, <bcolor>, <aBmp>, <.res.>, <.lEdit.>, <bClick>, <nBC>, ;
                 <bRClick>, <bDClick>, <.lCheck.>, <bCheck>, <.lDragDrop.>, <bDrag>, <bDrop>, <bOther>) ;;
           [ <oTree>:name := <(oTree)> ]
 
@@ -40,4 +40,4 @@
              [ ON ACTION <bAction> ]               ;
              [ <lCheck: CHECKED> ]                  ;
           => ;
-          [ <oNode> := ] <oTree>:AddNode(<cTitle>,<oPrev>,<oNext>,<bClick>,<aBmp>, <.lCheck.>, <bAction>)
+          [ <oNode> := ] <oTree>:AddNode(<cTitle>, <oPrev>, <oNext>, <bClick>, <aBmp>, <.lCheck.>, <bAction>)

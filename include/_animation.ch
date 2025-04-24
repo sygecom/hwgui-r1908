@@ -12,6 +12,6 @@
              [ <transparent: TRANSPARENT> ]       ;
              [ <class: CLASS> <classname> ]       ;
           => ;
-          [ <oAnimation> := ] __IIF(<.class.>, <classname>, HAnimation)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>, ;
-             <nWidth>,<nHeight>,<cFile>,<.autoplay.>,<.center.>,<.transparent.>,<xResID>) ;;
+          [ <oAnimation> := ] __IIF(<.class.>, <classname>, HAnimation)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, ;
+             <nWidth>, <nHeight>, <cFile>, <.autoplay.>, <.center.>, <.transparent.>, <xResID>) ;;
           [ <oAnimation>:name := <(oAnimation)> ]

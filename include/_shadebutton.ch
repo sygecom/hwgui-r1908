@@ -33,9 +33,9 @@
              [ TOOLTIP <cTooltip> ]                            ;
              [ <class: CLASS> <classname> ]                    ;
           => ;
-          [ <oShBtn> := ] __IIF(<.class.>, <classname>, HSHADEBUTTON)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
-             <font>,<xt>,<yt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, ;
-             <trcolor>,<cTooltip>,!<.enable.>,<shadeID>,<palet>,<granul>,<highl>, ;
-             <coloring>,<shcolor>) ;;
+          [ <oShBtn> := ] __IIF(<.class.>, <classname>, HSHADEBUTTON)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <bInit>, <bSize>, <bDraw>, <bClick>, <.flat.>, <cText>, <color>, ;
+             <font>, <xt>, <yt>, <bmp>, <.res.>, <xb>, <yb>, <widthb>, <heightb>, <.ltr.>, ;
+             <trcolor>, <cTooltip>, !<.enable.>, <shadeID>, <palet>, <granul>, <highl>, ;
+             <coloring>, <shcolor>) ;;
           [ <oShBtn>:name := <(oShBtn)> ]

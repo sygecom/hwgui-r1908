@@ -18,6 +18,6 @@
              [ <class: CLASS> <classname> ]                  ;
           => ;
           [ <oCnt> := ] __IIF(<.class.>, <classname>, HContainer)():New(<oParent>, <nId>,IIf(<.lTabStop.>, WS_TABSTOP,), ;
-               <nX>, <nY>, <nWidth>, <nHeight>, <ncStyle>, <bSize>, <.lnoBorder.>,<bInit>,<nbackStyle>,<tcolor>,<bcolor>, ;
-               <bLoad>,<bRefresh>,<bOther>) ;;
+               <nX>, <nY>, <nWidth>, <nHeight>, <ncStyle>, <bSize>, <.lnoBorder.>, <bInit>, <nbackStyle>, <tcolor>, <bcolor>, ;
+               <bLoad>, <bRefresh>, <bOther>) ;;
           [ <oCnt>:name := <(oCnt)> ]

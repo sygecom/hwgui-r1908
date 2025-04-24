@@ -14,6 +14,6 @@
              [ STYLE <nStyle> ]                                ;
              [ <class: CLASS> <classname> ]                    ;
           => ;
-          [ <oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, ;
-             <nHeight>,<caption>,<oFont>,<bInit>,<bSize>,<bPaint>,<color>,<bcolor>,<.lTransp.>) ;;
+          [ <oGroup> := ] __IIF(<.class.>, <classname>, HGroup)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, ;
+             <nHeight>, <caption>, <oFont>, <bInit>, <bSize>, <bPaint>, <color>, <bcolor>, <.lTransp.>) ;;
           [ <oGroup>:name := <(oGroup)> ]

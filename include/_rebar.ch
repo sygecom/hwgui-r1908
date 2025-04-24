@@ -7,5 +7,5 @@
              [ STYLE <nStyle> ]             ;
              [ <class: CLASS> <classname> ] ;
           => ;
-          [ <oTool> := ] __IIF(<.class.>, <classname>, HREBAR)():New(<oParent>,<nId>,<nStyle>,<nX>,<nY>,<nWidth>, <nHeight>,,,,,,,,) ;;
+          [ <oTool> := ] __IIF(<.class.>, <classname>, HREBAR)():New(<oParent>, <nId>, <nStyle>, <nX>, <nY>, <nWidth>, <nHeight>, , , , , , , ,) ;;
           [ <oTool>:name := <(oTool)> ]

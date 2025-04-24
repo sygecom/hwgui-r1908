@@ -6,4 +6,4 @@
              [ WIDTH <w> ]                  ;
              [ HEIGHT <h> ]                 ;
           => ;
-          [ <osplash> := ] HSplash():Create(<oBitmap>,<otime>,<.res.>,<w>,<h>)
+          [ <osplash> := ] HSplash():Create(<oBitmap>, <otime>, <.res.>, <w>, <h>)
