@@ -287,6 +287,12 @@ RETURN -1
 #else
 METHOD HCustomWindow:onEvent(msg, wParam, lParam)
 
+   // WM_NOTIFY
+   LOCAL iItem
+   LOCAL oCtrl
+   LOCAL nCode
+   LOCAL res
+   LOCAL n
    // WM_SIZE
    LOCAL aControls
    LOCAL oItem
@@ -312,7 +318,31 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
       EXIT
 
    CASE WM_NOTIFY
-      RETURN onNotify(SELF, wParam, lParam)
+      oCtrl := ::FindControl(wParam)
+      IF oCtrl == NIL
+         FOR n := 1 TO Len(::aControls)
+            oCtrl := ::aControls[n]:FindControl(wParam)
+            IF oCtrl != NIL
+               EXIT
+            ENDIF
+         NEXT
+      ENDIF
+      IF oCtrl != NIL .AND. !hb_IsNumeric(oCtrl)
+         IF __ObjHasMsg(oCtrl, "NOTIFY")
+            RETURN oCtrl:Notify(lParam)
+         ELSE
+            nCode := hwg_GetNotifyCode(lParam)
+            IF nCode == EN_PROTECTED
+               RETURN 1
+            ELSEIF ::aNotify != NIL .AND. !::lSuspendMsgsHandling .AND. ;
+               (iItem := AScan(::aNotify, {|a|a[1] == nCode .AND. a[2] == wParam})) > 0
+               IF (res := Eval(::aNotify[iItem, 3], SELF, wParam)) != NIL
+                  RETURN res
+               ENDIF
+            ENDIF
+         ENDIF
+      ENDIF
+      RETURN -1
 
    CASE WM_PAINT
       IF hb_IsBlock(::bPaint)
@@ -1019,6 +1049,7 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0
 STATIC FUNCTION onNotify(oWnd, wParam, lParam)
 
    LOCAL iItem
@@ -1053,6 +1084,7 @@ STATIC FUNCTION onNotify(oWnd, wParam, lParam)
    ENDIF
 
 RETURN -1
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
