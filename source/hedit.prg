@@ -103,6 +103,15 @@ METHOD HEdit:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nH
    bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, lNoBorder, nMaxLength, lPassword, bKeyDown, bChange, ;
    bOther)
 
+   IF pcount() == 0
+      ::Super:New(NIL, NIL, WS_TABSTOP + WS_BORDER, 0, 0, 0, 0, NIL, NIL, NIL, NIL, NIL, 0, hwg_Getsyscolor(COLOR_BTNHIGHLIGHT))
+      ::cPicture := NIL
+      ::cPicFunc := ""
+      ::cPicMask := ""
+      ::Activate()
+      RETURN Self
+   ENDIF
+
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), ;
                         WS_TABSTOP + IIf(lNoBorder == NIL .OR. !lNoBorder, WS_BORDER, 0) + ;
                         IIf(lPassword == NIL .OR. !lPassword, 0, ES_PASSWORD))
