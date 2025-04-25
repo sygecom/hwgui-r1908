@@ -51,6 +51,15 @@ ENDCLASS
 METHOD HCheckButton:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, ;
    bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus)
 
+   IF pcount() == 0
+      ::Super:New(NIL, NIL, BS_NOTIFY + BS_PUSHBUTTON + BS_AUTOCHECKBOX + WS_TABSTOP, 0, 0, 0, 0, NIL, NIL, NIL, NIL, NIL, NIL, NIL)
+      ::lValue := .F.
+      ::Activate()
+      ::oParent:AddEvent(BN_CLICKED, Self, {|o, id|::Valid(o:FindControl(id))},, "onClick")
+      ::oParent:AddEvent(BN_KILLFOCUS, Self, {||::KILLFOCUS()})
+      RETURN Self
+   ENDIF
+
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_NOTIFY + BS_PUSHBUTTON + BS_AUTOCHECKBOX + WS_TABSTOP)
 
    ::Super:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, bPaint, ctooltip, tcolor, ;
