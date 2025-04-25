@@ -115,6 +115,17 @@ ENDCLASS
 METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
    lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable)
 
+   IF pcount() == 0
+      ::style := DS_ABSALIGN + WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU
+      ::oDefaultParent := Self
+      ::nTop := 0
+      ::nLeft := 0
+      ::nWidth := 0
+      ::nHeight := 0
+      ::type := WND_DLG_NORESOURCE
+      RETURN Self
+   ENDIF
+
    ::oDefaultParent := Self
    ::xResourceID := xResourceID
    ::Type     := lType
@@ -136,7 +147,7 @@ METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bEx
    ::bOther     := bOther
    ::bRefresh   := bRefresh
    ::lClipper   := IIf(lClipper == NIL, .F., lClipper)
-   ::lExitOnEnter := IIf(lExitOnEnter == NIL, .T., !lExitOnEnter) 
+   ::lExitOnEnter := IIf(lExitOnEnter == NIL, .T., !lExitOnEnter)
    ::lExitOnEsc  := IIf(lExitOnEsc == NIL, .T., !lExitOnEsc)
    ::lClosable   := IIf(lnoClosable == NIL, .T., !lnoClosable)
 
