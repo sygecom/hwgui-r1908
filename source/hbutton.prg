@@ -41,6 +41,18 @@ ENDCLASS
 METHOD HButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, bSize, bPaint, bClick, ;
    cTooltip, tcolor, bColor, bGFocus)
 
+   IF pcount() == 0
+      ::Super:New(NIL, NIL, BS_PUSHBUTTON + BS_NOTIFY, 0, 0, 90, 30, NIL, NIL, NIL, NIL, NIL, NIL, NIL)
+      ::Activate()
+      IF ::id > 2 .OR. ::bClick != NIL
+         IF ::id < 3
+            ::GetParentForm():AddEvent(BN_CLICKED, Self, {||::onClick()})
+         ENDIF
+         ::oParent:AddEvent(BN_CLICKED, Self, {||::onClick()})
+      ENDIF
+      RETURN Self
+   ENDIF
+
    nStyle := hwg_BitOr(IIf(nStyle == NIL, 0, nStyle), BS_PUSHBUTTON + BS_NOTIFY)
 
    ::title := cCaption
