@@ -300,6 +300,11 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
    LOCAL nh1
    LOCAL aCoors
    LOCAL nWindowState
+   // WM_CTLCOLORSTATIC
+   // WM_CTLCOLOREDIT
+   // WM_CTLCOLORBTN
+   // WM_CTLCOLORLISTBOX
+   //LOCAL oCtrl
 
    // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
    //    IIf(lParam != NIL, Str(lParam), "NIL"))
@@ -354,7 +359,42 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
    CASE WM_CTLCOLOREDIT
    CASE WM_CTLCOLORBTN
    CASE WM_CTLCOLORLISTBOX
-      RETURN onCtlColor(SELF, wParam, lParam)
+      //lParam := hwg_HandleToPtr(lParam)
+      oCtrl := ::FindControl(, lParam)
+
+      IF oCtrl != NIL .AND. !hb_IsNumeric(oCtrl)
+         IF oCtrl:tcolor != NIL
+            hwg_SetTextColor(wParam, oCtrl:tcolor)
+         ENDIF
+         hwg_SetBkMode(wParam, oCtrl:backstyle)
+         IF !oCtrl:IsEnabled() .AND. oCtrl:Disablebrush != NIL
+            hwg_SetBkMode(wParam, WINAPI_TRANSPARENT)
+            hwg_SetBkColor(wParam, oCtrl:DisablebColor)
+            RETURN oCtrl:disablebrush:handle
+         ELSEIF oCtrl:bcolor != NIL .AND. oCtrl:BackStyle == OPAQUE
+            hwg_SetBkColor(wParam, oCtrl:bcolor)
+            IF oCtrl:brush != NIL
+               RETURN oCtrl:brush:handle
+            ELSEIF oCtrl:oParent:brush != NIL
+               RETURN oCtrl:oParent:brush:handle
+            ENDIF
+         ELSEIF oCtrl:BackStyle == WINAPI_TRANSPARENT
+            /*
+            IF (oCtrl:classname $ "HCHECKBUTTON" .AND. (!oCtrl:lnoThemes .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest))) .OR.;
+               (oCtrl:classname $ "HGROUP*HRADIOGROUP*HRADIOBUTTON" .AND. !oCtrl:lnoThemes)
+                  RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
+            ENDIF
+            */
+            IF __ObjHasMsg(oCtrl, "PAINT") .OR. oCtrl:lnoThemes .OR. ;
+               (oCtrl:winClass == "BUTTON" .AND. oCtrl:classname != "HCHECKBUTTON")
+               RETURN hwg_GetStockObject(NULL_BRUSH)
+            ENDIF
+            RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
+         ELSEIF oCtrl:winClass == "BUTTON" .AND. (hwg_IsThemeActive() .AND. oCtrl:WindowsManifest)
+            RETURN hwg_GetBackColorParent(oCtrl, , .T.):handle
+         ENDIF
+      ENDIF
+      RETURN -1
 
    CASE WM_COMMAND
       RETURN onCommand(SELF, wParam, lParam)
@@ -1107,6 +1147,7 @@ RETURN 1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0
 STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
 
    LOCAL oCtrl
@@ -1148,6 +1189,7 @@ STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
    ENDIF
 
 RETURN -1
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
