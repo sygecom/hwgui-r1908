@@ -56,6 +56,12 @@ METHOD HStatic:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCapti
 
    LOCAL nStyles
 
+   IF pcount() == 0
+      ::Super:New(NIL, NIL, 0, 0, 0, 0, 0, NIL, NIL, NIL, NIL, NIL, NIL, NIL)
+      ::Activate()
+      RETURN Self
+   ENDIF
+
    // Enabling style for tooltips
    //IF hb_IsChar(cTooltip)
    //   IF nStyle == NIL
