@@ -87,7 +87,7 @@ Local i := IIf(nId != NIL, AScan(::aControls, {|o|o:id == nId}), ;
                            AScan(::aControls, {|o|o:handle == nHandle}))
 RETURN IIf(i == 0, NIL, ::aControls[i])
 
-METHOD HCustomWindowDelControl(oCtrl)
+METHOD HCustomWindow:DelControl(oCtrl)
 Local id := oCtrl:id, h
 Local i := AScan(::aControls, {|o|o == oCtrl})
 
@@ -122,7 +122,7 @@ Local i := AScan(::aControls, {|o|o == oCtrl})
    ENDIF
 RETURN NIL
 
-METHOD HCustomWindowMove(x1, y1, width, height)
+METHOD HCustomWindow:Move(x1, y1, width, height)
 
    IF x1 != NIL
       ::nLeft := x1
@@ -140,7 +140,7 @@ METHOD HCustomWindowMove(x1, y1, width, height)
 
 RETURN NIL
 
-METHOD HCustomWindowonEvent(msg, wParam, lParam)
+METHOD HCustomWindow:onEvent(msg, wParam, lParam)
 Local i
 
    // Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + IIf(lParam != NIL, Str(lParam), "NIL"))
@@ -152,7 +152,7 @@ Local i
 
 RETURN 0
 
-METHOD HCustomWindowAnchor(oCtrl, x, y, w, h)
+METHOD HCustomWindow:Anchor(oCtrl, x, y, w, h)
 
    LOCAL nlen
    LOCAL i
@@ -176,7 +176,7 @@ METHOD HCustomWindowAnchor(oCtrl, x, y, w, h)
    RETURN .T.
 
 
-METHOD HCustomWindowEnd()
+METHOD HCustomWindow:End()
 Local aControls := ::aControls
 Local i, nLen := Len(aControls)
 
