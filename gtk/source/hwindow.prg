@@ -122,7 +122,9 @@ METHOD HWindow:AddItem(oWnd)
 RETURN NIL
 
 METHOD HWindow:DelItem(oWnd)
-Local i
+
+   LOCAL i
+
    IF (i := AScan(::aWindows, {|o|o == oWnd})) > 0
       ADel(::aWindows, i)
       ASize(::aWindows, Len(::aWindows) - 1)
@@ -130,8 +132,8 @@ Local i
 RETURN NIL
 
 METHOD HWindow:FindWindow(hWnd)
-// Local i := AScan(::aWindows, {|o|o:handle == hWnd})
-// RETURN IIf(i == 0, NIL, ::aWindows[i])
+//LOCAL i := AScan(::aWindows, {|o|o:handle == hWnd})
+//RETURN IIf(i == 0, NIL, ::aWindows[i])
 RETURN hwg_GetWindowObject(hWnd)
 
 METHOD HWindow:GetMain()
@@ -232,7 +234,8 @@ METHOD HMainWindow:Activate(lShow, lMaximize, lMinimize)
 RETURN NIL
 
 METHOD HMainWindow:onEvent(msg, wParam, lParam)
-Local i
+
+   LOCAL i
 
    // writelog("On Event" + str(msg) + str(wParam) + Str(lParam))
    IF (i := AScan(::aMessages[1], msg)) != 0
@@ -282,7 +285,8 @@ METHOD HMDIChildWindow:Activate(lShow)
 RETURN NIL
 
 METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
-Local i
+
+   LOCAL i
 
    IF (i := AScan(::aMessages[1], msg)) != 0
       RETURN Eval(::aMessages[2, i], Self, wParam, lParam)
@@ -336,7 +340,8 @@ METHOD HChildWindow:Activate(lShow)
 RETURN NIL
 
 METHOD HChildWindow:onEvent(msg, wParam, lParam)
-Local i
+
+   LOCAL i
 
    IF (i := AScan(HMainWindow():aMessages[1], msg)) != 0
       RETURN Eval(HMainWindow():aMessages[2, i], Self, wParam, lParam)

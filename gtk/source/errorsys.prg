@@ -22,12 +22,11 @@ PROCEDURE ErrorSys
    RETURN
 
 STATIC FUNCTION DefError(oError)
+   
    LOCAL cMessage
    LOCAL cDOSError
-
    //LOCAL aOptions // variable not used
    //LOCAL nChoice // variable not used
-
    LOCAL n
 
    // By default, division by zero results in zero
@@ -77,6 +76,7 @@ RETURN .F.
 
 
 FUNCTION hwg_ErrorMessage(oError)
+   
    LOCAL cMessage
 
    // start error message
@@ -112,7 +112,8 @@ FUNCTION hwg_ErrorMessage(oError)
    RETURN cMessage
 
 FUNCTION WriteLog(cText, fname)
-Local nHand
+
+   LOCAL nHand
 
   fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
   IF !File(fname)
@@ -127,7 +128,9 @@ Local nHand
 RETURN NIL
 
 STATIC FUNCTION ErrorPreview(cMess)
-Local oDlg, oEdit
+
+   LOCAL oDlg
+   LOCAL oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;
         AT 92, 61 SIZE 400, 400

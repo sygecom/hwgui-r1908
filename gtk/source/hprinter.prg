@@ -46,7 +46,8 @@ CLASS HPrinter INHERIT HObject
 ENDCLASS
 
 METHOD HPrinter:New(cPrinter, lmm)
-Local aPrnCoors
+
+   LOCAL aPrnCoors
 
    IF lmm != NIL
       ::lmm := lmm
@@ -76,7 +77,8 @@ Local aPrnCoors
 RETURN Self
 
 METHOD HPrinter:SetMode(nOrientation)
-Local x
+    
+   LOCAL x
 
    IF (nOrientation == 1 .OR. nOrientation == 2) .AND. nOrientation != ::nOrient
       hwg_SetPrinterMode(::hDC, nOrientation)

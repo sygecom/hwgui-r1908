@@ -177,11 +177,10 @@ RETURN NIL
 /*
 METHOD HToolBar:Notify(lParam)
 
-    Local nCode :=  hwg_GetNotifyCode(lParam)
-    Local nId
-
-    Local nButton
-    Local nPos
+   LOCAL nCode := hwg_GetNotifyCode(lParam)
+   LOCAL nId
+   LOCAL nButton
+   LOCAL nPos
 
     IF nCode == TTN_GETDISPINFO
 
@@ -208,13 +207,17 @@ METHOD HToolBar:Notify(lParam)
 RETURN 0
 */
 METHOD HToolBar:AddButton(nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu)
-   Local hMenu := NIL
+
+   LOCAL hMenu := NIL
+
    DEFAULT nBitIp to -1
    DEFAULT bstate to TBSTATE_ENABLED
    DEFAULT bstyle to 0x0000
    DEFAULT c to ""
    DEFAULT ctext to ""
+
    AAdd(::aItem, {nBitIp, nId, bState, bStyle, 0, cText, bClick, c, aMenu, hMenu, 0})
+
 RETURN Self
 
 METHOD HToolBar:onEvent(msg, wParam, lParam)
@@ -241,17 +244,23 @@ METHOD HToolBar:REFRESH()
 RETURN NIL
 
 METHOD HToolBar:EnableAllButtons()
-   Local xItem
+   
+   LOCAL xItem
+
    For Each xItem in ::aItem
       hwg_EnableWindow(xItem[11], .T.)
    Next
+
 RETURN Self
 
 METHOD HToolBar:DisableAllButtons()
-   Local xItem
+   
+   LOCAL xItem
+
    For Each xItem in ::aItem
       hwg_EnableWindow(xItem[11], .F.)
    Next
+
 RETURN Self
 
 METHOD HToolBar:EnableButtons(n)

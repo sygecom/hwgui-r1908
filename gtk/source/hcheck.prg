@@ -100,7 +100,8 @@ RETURN NIL
 #endif
 
 METHOD HCheckButton:Refresh()
-Local var
+
+   LOCAL var
 
    IF ::bSetGet != NIL
        var := Eval(::bSetGet, , NIL)
@@ -111,7 +112,8 @@ Local var
 RETURN NIL
 
 STATIC FUNCTION __Valid(oCtrl)
-Local res
+
+   LOCAL res
 
    oCtrl:value := hwg_IsButtonChecked(oCtrl:handle)
 
@@ -127,7 +129,8 @@ Local res
 RETURN .T.
 
 STATIC FUNCTION __When(oCtrl)
-Local res
+
+   LOCAL res
 
    oCtrl:Refresh()
 

@@ -17,7 +17,12 @@ FUNCTION hwg_EndWindow()
 RETURN NIL
 
 FUNCTION hwg_VColor(cColor)
-Local i, res := 0, n := 1, iValue
+
+   LOCAL i
+   LOCAL res := 0
+   LOCAL n := 1
+   LOCAL iValue
+
    cColor := Trim(cColor)
    FOR i := 1 TO Len(cColor)
       iValue := Asc(SubStr(cColor, Len(cColor) - i + 1, 1))
@@ -36,8 +41,10 @@ Local i, res := 0, n := 1, iValue
 RETURN res
 
 FUNCTION hwg_MsgGet(cTitle, cText, nStyle, x, y, nDlgStyle)
-Local oModDlg, oFont := HFont():Add("Sans", 0, 12)
-Local cRes := ""
+
+   LOCAL oModDlg
+   LOCAL oFont := HFont():Add("Sans", 0, 12)
+   LOCAL cRes := ""
 
    nStyle := IIf(nStyle == NIL, 0, nStyle)
    x := IIf(x == NIL, 210, x)
@@ -65,9 +72,20 @@ Local cRes := ""
 RETURN cRes
 
 FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel)
-Local oDlg, oBrw
-Local nChoice := 0, i, aLen := Len(arr), nLen := 0, addX := 20, addY := 30
-Local hDC, aMetr, width, height, screenh
+
+   LOCAL oDlg
+   LOCAL oBrw
+   LOCAL nChoice := 0
+   LOCAL i
+   LOCAL aLen := Len(arr)
+   LOCAL nLen := 0
+   LOCAL addX := 20
+   LOCAL addY := 30
+   LOCAL hDC
+   LOCAL aMetr
+   LOCAL width
+   LOCAL height
+   LOCAL screenh
 
    IF cTitle == NIL
       cTitle := ""
@@ -162,7 +180,9 @@ FUNCTION HWG_Version(oTip)
 RETURN "HwGUI " + HWG_VERSION + IIf(oTip == 1, " " + Version(), "")
 
 FUNCTION hwg_WriteStatus(oWnd, nPart, cText, lRedraw)
-Local aControls, i
+
+   LOCAL aControls
+   LOCAL i
 
    HB_SYMBOL_UNUSED(lRedraw)
    

@@ -247,7 +247,9 @@ RETURN Self
 //----------------------------------------------------//
 #if 0 // old code for reference (to be deleted)
 METHOD HBrowse:onEvent(msg, wParam, lParam)
-Local aCoors, retValue := -1
+
+   LOCAL aCoors
+   LOCAL retValue := -1
 
    // WriteLog("Brw: " + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF ::active .AND. !Empty(::aColumns)
@@ -362,7 +364,9 @@ Local aCoors, retValue := -1
 RETURN retValue
 #else
 METHOD HBrowse:onEvent(msg, wParam, lParam)
-Local aCoors, retValue := -1
+
+   LOCAL aCoors
+   LOCAL retValue := -1
 
    // WriteLog("Brw: " + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
    IF ::active .AND. !Empty(::aColumns)
@@ -641,7 +645,13 @@ RETURN NIL
 //----------------------------------------------------//
 METHOD HBrowse:Rebuild(hDC)
 
-   local i, j, oColumn, xSize, nColLen, nHdrLen, nCount
+   LOCAL i
+   LOCAL j
+   LOCAL oColumn
+   LOCAL xSize
+   LOCAL nColLen
+   LOCAL nHdrLen
+   LOCAL nCount
 
    HB_SYMBOL_UNUSED(hDC)
 
@@ -1160,7 +1170,9 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:SetColumn(nCol)
-Local nColPos, lPaint := .F.
+
+   LOCAL nColPos
+   LOCAL lPaint := .F.
 
    IF ::lEditable
       IF nCol != NIL .AND. nCol >= 1 .AND. nCol <= Len(::aColumns)
@@ -1193,7 +1205,10 @@ RETURN 1
 
 //----------------------------------------------------//
 METHOD HBrowse:DoHScroll(wParam)
-Local nScrollH, nLeftCol, colpos
+
+   LOCAL nScrollH
+   LOCAL nLeftCol
+   LOCAL colpos
 
    IF wParam == NIL
       nScrollH := hwg_getAdjValue(::hScrollH)
@@ -1225,9 +1240,15 @@ RETURN NIL
 
 //----------------------------------------------------//
 STATIC FUNCTION LINERIGHT(oBrw, lRefresh)
-Local maxPos, nPos, oldLeft := oBrw:nLeftCol, oldPos := oBrw:colpos, fif
-LocaL i, nColumns := Len(oBrw:aColumns)
-   
+
+   LOCAL maxPos
+   LOCAL nPos
+   LOCAL oldLeft := oBrw:nLeftCol
+   LOCAL oldPos := oBrw:colpos
+   LOCAL fif
+   LOCAL i
+   LOCAL nColumns := Len(oBrw:aColumns)
+
    IF oBrw:lEditable .AND. oBrw:colpos < oBrw:nColumns
          oBrw:colpos ++
    ELSEIF oBrw:nColumns + oBrw:nLeftCol - oBrw:freeze - 1 < nColumns ;
@@ -1238,7 +1259,7 @@ LocaL i, nColumns := Len(oBrw:aColumns)
       ENDDO
       oBrw:colpos := i - oBrw:nLeftCol + 1
    ENDIF
-   
+
    IF oBrw:nLeftCol != oldLeft .OR. oBrw:colpos != oldpos
       IF oBrw:hScrollH != NIL
          maxPos := hwg_getAdjValue(oBrw:hScrollH, 1) - hwg_getAdjValue(oBrw:hScrollH, 4)
@@ -1262,8 +1283,13 @@ RETURN NIL
 
 //----------------------------------------------------//
 STATIC FUNCTION LINELEFT(oBrw, lRefresh)
-Local maxPos, nPos, oldLeft := oBrw:nLeftCol, oldPos := oBrw:colpos, fif
-LocaL nColumns := Len(oBrw:aColumns)
+
+   LOCAL maxPos
+   LOCAL nPos
+   LOCAL oldLeft := oBrw:nLeftCol
+   LOCAL oldPos := oBrw:colpos
+   LOCAL fif
+   LOCAL nColumns := Len(oBrw:aColumns)
 
    IF oBrw:lEditable
       oBrw:colpos --
@@ -1300,7 +1326,8 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:DoVScroll(wParam)
-Local nScrollV := hwg_getAdjValue(::hScrollV)
+
+   LOCAL nScrollV := hwg_getAdjValue(::hScrollV)
 
    HB_SYMBOL_UNUSED(wParam)
 
@@ -1323,8 +1350,9 @@ RETURN 0
 
 //----------------------------------------------------//
 METHOD HBrowse:LINEDOWN(lMouse)
-Local maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
-Local nPos
+
+   LOCAL maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
+   LOCAL nPos
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
    Eval(::bSkip, Self, 1)
@@ -1368,8 +1396,9 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:LINEUP(lMouse)
-Local maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
-Local nPos
+
+   LOCAL maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
+   LOCAL nPos
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
    Eval(::bSkip, Self, -1)
@@ -1404,8 +1433,11 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:PAGEUP(lMouse)
-Local maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
-Local nPos, step, lBof := .F.
+
+   LOCAL maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
+   LOCAL nPos
+   LOCAL step
+   LOCAL lBof := .F.
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
    IF ::rowPos > 1
@@ -1439,9 +1471,12 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:PAGEDOWN(lMouse)
-Local maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
-Local nPos, nRows := ::rowCurrCount
-Local step := IIf(nRows > ::rowPos, nRows - ::rowPos + 1, nRows), lEof
+
+   LOCAL maxPos := hwg_getAdjValue(::hScrollV, 1) - hwg_getAdjValue(::hScrollV, 4)
+   LOCAL nPos
+   LOCAL nRows := ::rowCurrCount
+   LOCAL step := IIf(nRows > ::rowPos, nRows - ::rowPos + 1, nRows)
+   LOCAL lEof
 
    lMouse := IIf(lMouse == NIL, .F., lMouse)
    Eval(::bSkip, Self, step)
@@ -1472,7 +1507,8 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:BOTTOM(lPaint)
-Local nPos
+
+   LOCAL nPos
 
    ::rowPos := lastrec()
    Eval(::bGoBot, Self)
@@ -1494,7 +1530,8 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:TOP()
-Local nPos
+
+   LOCAL nPos
 
    ::rowPos := 1
    Eval(::bGoTop, Self)
@@ -1650,8 +1687,12 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:MouseMove(wParam, lParam)
-Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
-Local x := ::x1, i := ::nLeftCol, res := .F.
+
+   LOCAL xPos := hwg_LOWORD(lParam)
+   LOCAL yPos := hwg_HIWORD(lParam)
+   Local x := ::x1
+   LOCAL i := ::nLeftCol
+   LOCAL res := .F.
 
    IF !::active .OR. Empty(::aColumns) .OR. ::x1 == NIL
       RETURN NIL
@@ -1943,7 +1984,8 @@ RETURN rez
 //----------------------------------------------------//
 STATIC FUNCTION FLDCOUNT(oBrw, xstrt, xend, fld1)
 
-   local klf := 0, i := IIf(oBrw:freeze > 0, 1, fld1)
+   LOCAL klf := 0
+   LOCAL i := IIf(oBrw:freeze > 0, 1, fld1)
 
    DO WHILE .T.
       xstrt += oBrw:aColumns[i]:width
@@ -1961,7 +2003,9 @@ RETURN IIf(klf == 0, 1, klf)
 
 //----------------------------------------------------//
 FUNCTION HWG_CREATEARLIST(oBrw, arr)
-   local i
+   
+   LOCAL i
+
    oBrw:type  := BRW_ARRAY
    oBrw:aArray := arr
    IF Len(oBrw:aColumns) == 0
@@ -1980,7 +2024,9 @@ RETURN NIL
 
 //----------------------------------------------------//
 PROCEDURE ARSKIP(oBrw, kolskip)
-Local tekzp1
+
+   LOCAL tekzp1
+
    IF oBrw:nRecords != 0
       tekzp1   := oBrw:nCurrent
       oBrw:nCurrent += kolskip + IIf(tekzp1 == 0, 1, 0)
@@ -1994,9 +2040,10 @@ RETURN
 
 //----------------------------------------------------//
 FUNCTION hwg_CreateList(oBrw, lEditable)
-Local i
-Local nArea := select()
-Local kolf := FCOUNT()
+
+   LOCAL i
+   LOCAL nArea := select()
+   LOCAL kolf := FCOUNT()
 
    oBrw:alias := alias()
    oBrw:aColumns := {}
@@ -2015,8 +2062,10 @@ Local kolf := FCOUNT()
 RETURN NIL
 
 FUNCTION hwg_VScrollPos(oBrw, nType, lEof, nPos)
-Local maxPos := hwg_getAdjValue(oBrw:hScrollV, 1) - hwg_getAdjValue(oBrw:hScrollV, 4)
-Local oldRecno, newRecno
+
+   LOCAL maxPos := hwg_getAdjValue(oBrw:hScrollV, 1) - hwg_getAdjValue(oBrw:hScrollV, 4)
+   LOCAL oldRecno
+   LOCAL newRecno
 
    IF nPos == NIL
       IF nType > 0 .AND. lEof
@@ -2051,7 +2100,9 @@ RETURN NIL
 // Agregado x WHT. 27.07.02
 // Locus metodus.
 METHOD HBrowse:ShowSizes()
-   local cText := ""
+   
+   LOCAL cText := ""
+
    AEval(::aColumns, {|v, e|HB_SYMBOL_UNSED(v), cText += ::aColumns[e]:heading + ": " + Str(Round(::aColumns[e]:width / 8, 0) - 2) + Chr(10) + Chr(13)})
    hwg_MsgInfo(cText)
 RETURN NIL
@@ -2060,7 +2111,9 @@ FUNCTION hwg_ColumnArBlock()
 RETURN {|value, o, n|IIf(value == NIL, o:aArray[o:nCurrent, n], o:aArray[o:nCurrent, n] := value)}
 
 STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
-Local nL, nPos := 0
+
+   LOCAL nL
+   LOCAL nPos := 0
 
    nMaxLen := nCount := 0
    cStr += ";"

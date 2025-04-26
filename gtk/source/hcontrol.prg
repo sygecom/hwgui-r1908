@@ -78,7 +78,8 @@ METHOD HControl:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont
 RETURN Self
 
 METHOD HControl:NewId()
-Local nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
+
+   LOCAL nId := CONTROL_FIRST_ID + Len(::oParent:aControls)
 
    IF AScan(::oParent:aControls, {|o|o:id == nId}) != 0
       nId --
@@ -99,7 +100,8 @@ METHOD HControl:AddName(cName)
 RETURN NIL
 
 METHOD HControl:INIT()
-Local o
+
+   LOCAL o
 
    IF !::lInit
       hwg_AddToolTip(::oParent:handle, ::handle, ::tooltip)
@@ -151,7 +153,9 @@ METHOD HControl:SetColor(tcolor, bcolor, lRepaint)
 RETURN NIL
 
 METHOD HControl:Move(x1, y1, width, height, lMoveParent)
-Local lMove := .F., lSize := .F.
+
+   LOCAL lMove := .F.
+   LOCAL lSize := .F.
 
    IF x1 != NIL .AND. x1 != ::nLeft
       ::nLeft := x1
@@ -185,8 +189,20 @@ METHOD HControl:End()
 RETURN NIL
 
 METHOD HControl:onAnchor(x, y, w, h)
-   LOCAL nAnchor, nXincRelative, nYincRelative, nXincAbsolute, nYincAbsolute
-   LOCAL x1, y1, w1, h1, x9, y9, w9, h9
+   
+   LOCAL nAnchor
+   LOCAL nXincRelative
+   LOCAL nYincRelative
+   LOCAL nXincAbsolute
+   LOCAL nYincAbsolute
+   LOCAL x1
+   LOCAL y1
+   LOCAL w1
+   LOCAL h1
+   LOCAL x9
+   LOCAL y9
+   LOCAL w9
+   LOCAL h9
 
    nAnchor := ::anchor
    x9 := ::nLeft

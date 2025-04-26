@@ -39,7 +39,8 @@ ENDCLASS
 METHOD HFont:Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, ;
                    fdwUnderline, fdwStrikeOut, nHandle, lLinux)
 
-Local i, nlen := Len(::aFonts)
+   LOCAL i
+   LOCAL nlen := Len(::aFonts)
 
    nHeight  := IIf(nHeight == NIL, 13, Abs(nHeight))
    IF lLinux == NIL .OR. !lLinux
@@ -90,7 +91,8 @@ Local i, nlen := Len(::aFonts)
 RETURN Self
 
 METHOD HFont:Select(oFont)
-Local af := hwg_SelectFont(oFont)
+   
+   LOCAL af := hwg_SelectFont(oFont)
 
    IF af == NIL
       RETURN NIL
@@ -99,7 +101,9 @@ Local af := hwg_SelectFont(oFont)
 RETURN ::Add(af[2], af[3], af[4], af[5], af[6], af[7], af[8], af[9], af[1], .T.)
 
 METHOD HFont:Release()
-Local i, nlen := Len(::aFonts)
+
+   LOCAL i
+   LOCAL nlen := Len(::aFonts)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -141,7 +145,8 @@ CLASS HPen INHERIT HObject
 ENDCLASS
 
 METHOD HPen:Add(nStyle, nWidth, nColor)
-Local i
+
+   LOCAL i
 
    nStyle := IIf(nStyle == NIL, BS_SOLID, nStyle)
    nWidth := IIf(nWidth == NIL, 1, nWidth)
@@ -178,7 +183,8 @@ Local i
 RETURN Self
 
 METHOD HPen:Get(nStyle, nWidth, nColor)
-Local i
+
+   LOCAL i
 
    nStyle := IIf(nStyle == NIL, PS_SOLID, nStyle)
    nWidth := IIf(nWidth == NIL, 1, nWidth)
@@ -207,7 +213,9 @@ Local i
 RETURN NIL
 
 METHOD HPen:Release()
-Local i, nlen := Len(::aPens)
+
+   LOCAL i
+   LOCAL nlen := Len(::aPens)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -249,7 +257,8 @@ CLASS HBrush INHERIT HObject
 ENDCLASS
 
 METHOD HBrush:Add(nColor)
-Local i
+
+   LOCAL i
 
    #ifdef __XHARBOUR__
    For EACH i IN ::aBrushes 
@@ -273,7 +282,9 @@ Local i
 RETURN Self
 
 METHOD HBrush:Release()
-Local i, nlen := Len(::aBrushes)
+
+   LOCAL i
+   LOCAL nlen := Len(::aBrushes)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -318,7 +329,10 @@ CLASS HBitmap INHERIT HObject
 ENDCLASS
 
 METHOD HBitmap:AddResource(name)
-Local lPreDefined := .F., i, aBmpSize
+
+   LOCAL lPreDefined := .F.
+   LOCAL i
+   LOCAL aBmpSize
 
    IF HB_IsNumeric(name)
       name := LTrim(Str(name))
@@ -353,7 +367,9 @@ Local lPreDefined := .F., i, aBmpSize
 RETURN Self
 
 METHOD HBitmap:AddFile(name, HDC)
-Local i, aBmpSize
+
+   LOCAL i
+   LOCAL aBmpSize
 
    HB_SYMBOL_UNUSED(HDC)
 
@@ -402,7 +418,9 @@ METHOD HBitmap:AddWindow(oWnd, lFull)
 RETURN Self
 
 METHOD HBitmap:Release()
-Local i, nlen := Len(::aBitmaps)
+
+   LOCAL i
+   LOCAL nlen := Len(::aBitmaps)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -478,7 +496,9 @@ METHOD HIcon:AddResource(name)
 RETURN Self
 
 METHOD HIcon:AddFile(name)
-Local i, aBmpSize
+
+   LOCAL i
+   LOCAL aBmpSize
 
 #ifdef __XHARBOUR__
    For EACH i IN  ::aIcons 
@@ -515,7 +535,9 @@ Local i, aBmpSize
 RETURN Self
 
 METHOD HIcon:Release()
-Local i, nlen := Len(::aIcons)
+
+   LOCAL i
+   LOCAL nlen := Len(::aIcons)
 
    ::nCounter --
    IF ::nCounter == 0
@@ -543,7 +565,8 @@ RETURN NIL
 
 
 EXIT PROCEDURE CleanDrawWidg
-Local i
+
+   LOCAL i
 
    For i := 1 TO Len(HPen():aPens)
       hwg_DeleteObject(HPen():aPens[i]:handle)

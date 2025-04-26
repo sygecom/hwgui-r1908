@@ -268,7 +268,8 @@ METHOD HEdit:Init()
 RETURN NIL
 
 METHOD HEdit:Refresh()
-Local vari
+
+   LOCAL vari
 
    IF ::bSetGet != NIL
       vari := Eval(::bSetGet, , self)
@@ -307,7 +308,11 @@ METHOD HEdit:SetText(c)
 RETURN NIL
 
 STATIC FUNCTION ParsePict(oEdit, cPicture, vari)
-Local nAt, i, masklen, cChar
+
+   LOCAL nAt
+   LOCAL i
+   LOCAL masklen
+   LOCAL cChar
 
    IF oEdit:bSetGet == NIL
       RETURN NIL
@@ -368,7 +373,8 @@ Local nAt, i, masklen, cChar
 RETURN NIL
 
 STATIC FUNCTION IsEditable(oEdit, nPos)
-Local cChar
+
+   LOCAL cChar
 
    IF Empty(oEdit:cPicMask)
       RETURN .T.
@@ -452,8 +458,10 @@ STATIC FUNCTION KeyLeft(oEdit, nPos)
 RETURN 1
 
 STATIC FUNCTION DeleteChar(oEdit, lBack)
-Local nPos := hwg_edit_Getpos(oEdit:handle) + IIf(!lBack, 1, 0)
-Local nGetLen := Len(oEdit:cPicMask), nLen
+
+   LOCAL nPos := hwg_edit_Getpos(oEdit:handle) + IIf(!lBack, 1, 0)
+   LOCAL nGetLen := Len(oEdit:cPicMask)
+   LOCAL nLen
 
    FOR nLen := 0 TO nGetLen
       IF !IsEditable(oEdit, nPos + nLen)
@@ -480,7 +488,8 @@ Local nGetLen := Len(oEdit:cPicMask), nLen
 RETURN NIL
 
 STATIC FUNCTION Input(oEdit, cChar, nPos)
-Local cPic
+
+   LOCAL cPic
 
    IF !Empty(oEdit:cPicMask) .AND. nPos > Len(oEdit:cPicMask)
       RETURN NIL
@@ -628,7 +637,8 @@ STATIC FUNCTION GetApplyKey(oEdit, cKey)
 RETURN 1
 
 STATIC FUNCTION __When(oCtrl)
-Local res
+
+   LOCAL res
 
    oCtrl:Refresh()
    oCtrl:lFirst := .T.
@@ -643,7 +653,9 @@ Local res
 RETURN .T.
 
 STATIC FUNCTION __valid(oCtrl)
-Local vari, oDlg
+
+   LOCAL vari
+   LOCAL oDlg
 
     IF oCtrl:bSetGet != NIL
       IF (oDlg := hwg_ParentGetDialog(oCtrl)) == NIL .OR. oDlg:nLastKey != 27
@@ -683,7 +695,11 @@ Local vari, oDlg
 RETURN .T.
 
 STATIC FUNCTION Untransform(oEdit, cBuffer)
-Local xValue, cChar, nFor, minus
+
+   LOCAL xValue
+   LOCAL cChar
+   LOCAL nFor
+   LOCAL minus
 
    IF oEdit:cType == "C"
 
@@ -776,7 +792,9 @@ Local xValue, cChar, nFor, minus
 RETURN xValue
 
 STATIC FUNCTION FirstEditable(oEdit)
-Local nFor, nMaxLen := Len(oEdit:cPicMask)
+
+   LOCAL nFor
+   LOCAL nMaxLen := Len(oEdit:cPicMask)
 
    IF IsEditable(oEdit, 1)
       RETURN 1
@@ -791,7 +809,9 @@ Local nFor, nMaxLen := Len(oEdit:cPicMask)
 RETURN 0
 
 STATIC FUNCTION  LastEditable(oEdit)
-Local nFor, nMaxLen := Len(oEdit:cPicMask)
+
+   LOCAL nFor
+   LOCAL nMaxLen := Len(oEdit:cPicMask)
 
    FOR nFor := nMaxLen to 1 step -1
       IF IsEditable(oEdit, nFor)
@@ -802,7 +822,9 @@ Local nFor, nMaxLen := Len(oEdit:cPicMask)
 RETURN 0
 
 STATIC FUNCTION IsBadDate(cBuffer)
-Local i, nLen
+
+   LOCAL i
+   LOCAL nLen
 
    IF !Empty(CToD(cBuffer))
       RETURN .F.
@@ -816,7 +838,11 @@ Local i, nLen
 RETURN .F.
 
 FUNCTION hwg_CreateGetList(oDlg)
-Local i, j, aLen1 := Len(oDlg:aControls), aLen2
+
+   LOCAL i
+   LOCAL j
+   LOCAL aLen1 := Len(oDlg:aControls)
+   LOCAL aLen2
 
    FOR i := 1 TO aLen1
       IF __ObjHasMsg(oDlg:aControls[i], "BSETGET") .AND. oDlg:aControls[i]:bSetGet != NIL
@@ -833,7 +859,9 @@ Local i, j, aLen1 := Len(oDlg:aControls), aLen2
 RETURN NIL
 
 FUNCTION hwg_GetSkip(oParent, hCtrl, nSkip, lClipper)
-Local i, aLen
+
+   LOCAL i
+   LOCAL aLen
 
    DO WHILE oParent != NIL .AND. !__ObjHasMsg(oParent, "GETLIST")
       oParent := oParent:oParent

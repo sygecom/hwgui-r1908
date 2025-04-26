@@ -71,7 +71,8 @@ METHOD HTimer:New(oParent, nId, value, bAction)
 RETURN Self
 
 METHOD HTimer:End()
-Local i
+
+   LOCAL i
 
    hwg_KillTimer(::tag)
    i := AScan(::aTimers, {|o|o:id == ::id})
@@ -98,6 +99,7 @@ RETURN NIL
 
 
 FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
+   
    LOCAL i := AScan(HTimer():aTimers, {|o|o:id == idTimer})
 
    HB_SYMBOL_UNUSED(hWnd)
@@ -110,7 +112,9 @@ FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
    RETURN NIL
 
 EXIT PROCEDURE CleanTimers
-Local oTimer, i
+
+   LOCAL oTimer
+   LOCAL i
 
    For i := 1 TO Len(HTimer():aTimers)
       oTimer := HTimer():aTimers[i]

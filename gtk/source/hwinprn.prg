@@ -89,13 +89,17 @@ METHOD HWinPrn:InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 RETURN NIL
 
 METHOD HWinPrn:SetMode(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
-#ifdef __LINUX__
-Local cFont := "Monospace "
-#else
-Local cFont := "Lucida Console"
-#endif
-Local aKoef := {1, 1.22, 1.71, 2}
-Local nMode := 0, oFont, nWidth, nPWidth
+
+   #ifdef __LINUX__
+   LOCAL cFont := "Monospace "
+   #else
+   LOCAL cFont := "Lucida Console"
+   #endif
+   LOCAL aKoef := {1, 1.22, 1.71, 2}
+   LOCAL nMode := 0
+   LOCAL oFont
+   LOCAL nWidth
+   LOCAL nPWidth
 
    ::InitValues(lElite, lCond, nLineInch, lBold, lItalic, lUnder)
 
@@ -191,7 +195,12 @@ METHOD HWinPrn:NextPage()
 RETURN NIL
 
 METHOD HWinPrn:PrintLine(cLine, lNewLine)
-Local i, i0, j, slen, c
+
+   LOCAL i
+   LOCAL i0
+   LOCAL j
+   LOCAL slen
+   LOCAL c
 
    IF !::lDocStart
       ::StartDoc()
@@ -292,6 +301,7 @@ METHOD HWinPrn:PrintText(cText)
 RETURN NIL
 
 METHOD HWinPrn:PutCode(cLine)
+
 STATIC aCodes := { ;
    {Chr(27)+"@", .F., .F., 6, .F., .F., .F.}, ; /* Reset */
    {Chr(27)+"M", .T.,,,,,}, ; /* Elite */
@@ -306,7 +316,10 @@ STATIC aCodes := { ;
    {Chr(27)+"G",,,, .T.,,}, ; /* bold */
    {Chr(27)+"H",,,, .F.,,} ; /* cancel bold */
  }
-Local i, sLen := Len(aCodes), c := Left(cLine, 1)
+
+   LOCAL i
+   LOCAL sLen := Len(aCodes)
+   LOCAL c := Left(cLine, 1)
 
    IF !Empty(c) .AND. Asc(cLine) < 32
       FOR i := 1 TO sLen

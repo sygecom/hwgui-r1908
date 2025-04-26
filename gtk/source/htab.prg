@@ -85,7 +85,9 @@ METHOD HTab:Activate()
 RETURN NIL
 
 METHOD HTab:Init()
-Local i, h
+
+   LOCAL i
+   LOCAL h
 
    IF !::lInit
       ::Super:Init()
@@ -108,8 +110,9 @@ METHOD HTab:SetTab(n)
 RETURN NIL
 
 METHOD HTab:StartPage(cname)
-Local i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
-Local lNew := (i == 0)
+
+   LOCAL i := IIf(cName == NIL, Len(::aPages) + 1, AScan(::aTabs, cname))
+   LOCAL lNew := (i == 0)
 
    ::oTemp := ::oDefaultParent
    ::oDefaultParent := Self
@@ -159,7 +162,10 @@ METHOD HTab:ChangePage(nPage)
 RETURN NIL
 
 METHOD HTab:HidePage(nPage)
-Local i, nFirst, nEnd
+
+   LOCAL i
+   LOCAL nFirst
+   LOCAL nEnd
 
    nFirst := ::aPages[nPage, 1] + 1
    nEnd   := ::aPages[nPage, 1] + ::aPages[nPage, 2]
@@ -170,7 +176,10 @@ Local i, nFirst, nEnd
 RETURN NIL
 
 METHOD HTab:ShowPage(nPage)
-Local i, nFirst, nEnd
+
+   LOCAL i
+   LOCAL nFirst
+   LOCAL nEnd
 
    nFirst := ::aPages[nPage, 1] + 1
    nEnd   := ::aPages[nPage, 1] + ::aPages[nPage, 2]

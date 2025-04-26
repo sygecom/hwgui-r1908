@@ -239,7 +239,8 @@ RETURN NIL
 
 
 STATIC FUNCTION __Valid(oCtrl)
-Local vari := hwg_edit_Gettext(oCtrl:hEdit)
+
+   LOCAL vari := hwg_edit_Gettext(oCtrl:hEdit)
 
    IF oCtrl:lText
       oCtrl:value := vari
@@ -256,7 +257,8 @@ Local vari := hwg_edit_Gettext(oCtrl:hEdit)
 RETURN .T.
 
 STATIC FUNCTION __When(oCtrl)
-Local res
+
+   LOCAL res
 
    // oCtrl:Refresh()
 

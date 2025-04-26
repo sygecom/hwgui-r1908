@@ -83,13 +83,17 @@ CLASS HCustomWindow INHERIT HObject
 ENDCLASS
 
 METHOD HCustomWindow:FindControl(nId, nHandle)
-Local i := IIf(nId != NIL, AScan(::aControls, {|o|o:id == nId}), ;
+
+   LOCAL i := IIf(nId != NIL, AScan(::aControls, {|o|o:id == nId}), ;
                            AScan(::aControls, {|o|o:handle == nHandle}))
+
 RETURN IIf(i == 0, NIL, ::aControls[i])
 
 METHOD HCustomWindow:DelControl(oCtrl)
-Local id := oCtrl:id, h
-Local i := AScan(::aControls, {|o|o == oCtrl})
+
+   LOCAL id := oCtrl:id
+   LOCAL h
+   LOCAL i := AScan(::aControls, {|o|o == oCtrl})
 
    IF oCtrl:ClassName() == "HPANEL"
       hwg_DestroyPanel(oCtrl:handle)
@@ -141,7 +145,8 @@ METHOD HCustomWindow:Move(x1, y1, width, height)
 RETURN NIL
 
 METHOD HCustomWindow:onEvent(msg, wParam, lParam)
-Local i
+
+   LOCAL i
 
    // Writelog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + IIf(lParam != NIL, Str(lParam), "NIL"))
    IF (i := AScan(s_aCustomEvents[1], msg)) != 0
@@ -177,8 +182,10 @@ METHOD HCustomWindow:Anchor(oCtrl, x, y, w, h)
 
 
 METHOD HCustomWindow:End()
-Local aControls := ::aControls
-Local i, nLen := Len(aControls)
+
+   LOCAL aControls := ::aControls
+   LOCAL i
+   LOCAL nLen := Len(aControls)
 
    FOR i := 1 TO nLen
        aControls[i]:End()
@@ -245,7 +252,8 @@ STATIC FUNCTION onDestroy(oWnd)
 RETURN 0
 
 STATIC FUNCTION onCtlColor(oWnd, wParam, lParam)
-Local oCtrl  := oWnd:FindControl(, lParam)
+
+   LOCAL oCtrl  := oWnd:FindControl(, lParam)
 
    IF oCtrl != NIL
       IF oCtrl:tcolor != NIL
@@ -260,7 +268,8 @@ Local oCtrl  := oWnd:FindControl(, lParam)
 RETURN -1
 
 STATIC FUNCTION onDrawItem(oWnd, wParam, lParam)
-Local oCtrl
+
+   LOCAL oCtrl
 
    IF wParam != 0 .AND. (oCtrl := oWnd:FindControl(wParam)) != NIL .AND. ;
          oCtrl:bPaint != NIL
@@ -271,7 +280,10 @@ Local oCtrl
 RETURN 0
 
 STATIC FUNCTION onCommand(oWnd, wParam)
-Local iItem, iParHigh := hwg_HIWORD(wParam), iParLow := hwg_LOWORD(wParam)
+
+   LOCAL iItem
+   LOCAL iParHigh := hwg_HIWORD(wParam)
+   LOCAL iParLow := hwg_LOWORD(wParam)
 
    IF oWnd:aEvents != NIL .AND. ;
       (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
@@ -307,7 +319,9 @@ RETURN 0
 
 #if 0 // old code for reference (to be deleted)
 FUNCTION hwg_onTrackScroll(oWnd, wParam, lParam)
-Local oCtrl := oWnd:FindControl(, lParam), msg
+
+   LOCAL oCtrl := oWnd:FindControl(, lParam)
+   LOCAL msg
 
    IF oCtrl != NIL
       msg := hwg_LOWORD(wParam)
@@ -327,7 +341,9 @@ Local oCtrl := oWnd:FindControl(, lParam), msg
 RETURN 0
 #else
 FUNCTION hwg_onTrackScroll(oWnd, wParam, lParam)
-Local oCtrl := oWnd:FindControl(, lParam), msg
+
+   LOCAL oCtrl := oWnd:FindControl(, lParam)
+   LOCAL msg
 
    IF oCtrl != NIL
       msg := hwg_LOWORD(wParam)

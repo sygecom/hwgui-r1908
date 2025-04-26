@@ -72,7 +72,8 @@ METHOD HSayBmp:onEvent(msg, wParam, lParam)
 RETURN 0
 
 METHOD HSayBmp:Paint()
-Local hDC := hwg_GetDC(::handle)
+
+   LOCAL hDC := hwg_GetDC(::handle)
 
    IF ::oImage != NIL
       IF ::nZoom == NIL

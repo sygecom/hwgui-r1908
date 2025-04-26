@@ -118,7 +118,9 @@ METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bEx
 RETURN Self
 
 METHOD HDialog:Activate(lNoModal)
-Local hParent, oWnd
+
+   LOCAL hParent
+   LOCAL oWnd
 
    hwg_CreateGetList(Self)
 
@@ -144,7 +146,8 @@ Local hParent, oWnd
 RETURN NIL
 
 METHOD HDialog:onEvent(msg, wParam, lParam)
-Local i
+
+   LOCAL i
 
    // writelog(str(msg) + str(wParam) + str(lParam))
    IF (i := AScan(s_aMessModalDlg, {|a|a[1] == msg})) != 0
@@ -160,7 +163,9 @@ METHOD HDialog:AddItem(oWnd, lModal)
 RETURN NIL
 
 METHOD HDialog:DelItem(oWnd, lModal)
-Local i
+
+   LOCAL i
+
    IF lModal
       IF (i := AScan(::aModalDialogs, {|o|o == oWnd})) > 0
          ADel(::aModalDialogs, i)
@@ -176,14 +181,16 @@ RETURN NIL
 
 METHOD HDialog:FindDialog(hWnd)
 /*
-Local i := AScan(::aDialogs, {|o|o:handle == hWnd})
+LOCAL i := AScan(::aDialogs, {|o|o:handle == hWnd})
 RETURN IIf(i == 0, NIL, ::aDialogs[i])
 */
 RETURN hwg_GetWindowObject(hWnd)
 
 METHOD HDialog:GetActive()
-Local handle := hwg_GetFocus()
-Local i := AScan(::Getlist, {|o|o:handle == handle})
+
+   LOCAL handle := hwg_GetFocus()
+   LOCAL i := AScan(::Getlist, {|o|o:handle == handle})
+
 RETURN IIf(i == 0, NIL, ::Getlist[i])
 
 // End of class
@@ -383,15 +390,21 @@ STATIC FUNCTION onActivate(oDlg, wParam, lParam)
 RETURN 0
 
 FUNCTION hwg_GetModalDlg()
-Local i := Len(HDialog():aModalDialogs)
+
+   LOCAL i := Len(HDialog():aModalDialogs)
+
 RETURN IIf(i > 0, HDialog():aModalDialogs[i], 0)
 
 FUNCTION hwg_GetModalHandle()
-Local i := Len(HDialog():aModalDialogs)
+
+   LOCAL i := Len(HDialog():aModalDialogs)
+
 RETURN IIf(i > 0, HDialog():aModalDialogs[i]:handle, 0)
 
 FUNCTION EndDialog(handle)
-Local oDlg
+
+   LOCAL oDlg
+
    // writelog("EndDialog-0")
    IF handle == NIL
       IF (oDlg := Atail(HDialog():aModalDialogs)) == NIL
@@ -413,7 +426,9 @@ Local oDlg
 RETURN  hwg_DestroyWindow(oDlg:handle)
 
 FUNCTION hwg_SetDlgKey(oDlg, nctrl, nkey, block)
-Local i, aKeys
+
+   LOCAL i
+   LOCAL aKeys
 
    IF oDlg == NIL
       oDlg := HCustomWindow():oDefaultParent

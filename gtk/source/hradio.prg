@@ -38,7 +38,8 @@ METHOD HRadioGroup:New(vari, bSetGet)
 RETURN Self
 
 METHOD HRadioGroup:EndGroup(nSelected)
-Local nLen
+
+   LOCAL nLen
 
    IF ::oGroupCurrent != NIL .AND. (nLen := Len(::oGroupCurrent:aButtons)) > 0
 
@@ -52,7 +53,8 @@ Local nLen
 RETURN NIL
 
 METHOD HRadioGroup:SetValue(nValue)
-Local nLen
+
+   LOCAL nLen
 
    IF (nLen := Len(::aButtons)) > 0 .AND. nValue > 0 .AND. nValue <= nLen
       hwg_CheckButton(::aButtons[nValue]:handle, .T.)
@@ -120,7 +122,8 @@ METHOD HRadioButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, c
 RETURN Self
 
 METHOD HRadioButton:Activate()
-Local groupHandle := ::oGroup:handle
+
+   LOCAL groupHandle := ::oGroup:handle
 
    IF !Empty(::oParent:handle)
       ::handle := hwg_CreateButton(::oParent:handle, @groupHandle, ;

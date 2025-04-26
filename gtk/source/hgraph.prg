@@ -72,7 +72,11 @@ METHOD HGraph:onEvent(msg, wParam, lParam)
 RETURN 0
 
 METHOD HGraph:CalcMinMax()
-Local i, j, nLen
+
+   LOCAL i
+   LOCAL j
+   LOCAL nLen
+
    ::xmax := ::xmin := ::ymax := ::ymin := 0
    IF ::ymaxSet != NIL .AND. ::ymaxSet != 0
       ::ymax := ::ymaxSet
@@ -102,12 +106,26 @@ Local i, j, nLen
 RETURN NIL
 
 METHOD HGraph:Paint(lpdis)
-Local hDC := hwg_GetDC(::handle)
-// Local drawInfo := hwg_GetDrawItemInfo(lpdis)
-// Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
-Local x1 := 0, y1 := 0, x2 := ::nWidth, y2 := ::nHeight
-Local i, j, nLen
-Local px1, px2, py1, py2, nWidth
+
+   LOCAL hDC := hwg_GetDC(::handle)
+   //LOCAL drawInfo := hwg_GetDrawItemInfo(lpdis)
+   //LOCAL hDC := drawInfo[3]
+   //LOCAL x1 := drawInfo[4]
+   //LOCAL y1 := drawInfo[5]
+   //LOCAL x2 := drawInfo[6]
+   //LOCAL y2 := drawInfo[7]
+   LOCAL x1 := 0
+   LOCAL y1 := 0
+   LOCAL x2 := ::nWidth
+   LOCAL y2 := ::nHeight
+   LOCAL i
+   LOCAL j
+   LOCAL nLen
+   LOCAL px1
+   LOCAL px2
+   LOCAL py1
+   LOCAL py2
+   LOCAL nWidth
 
    HB_SYMNOL_UNUSED(lpdis)
 

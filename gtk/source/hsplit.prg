@@ -121,7 +121,9 @@ METHOD HSplitter:Move(x1, y1, width, height)
 RETURN NIL
 
 METHOD HSplitter:Drag(lParam)
-Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
+
+   LOCAL xPos := hwg_LOWORD(lParam)
+   LOCAL yPos := hwg_HIWORD(lParam)
 
    IF ::lVertical
       IF xPos > 32000
@@ -139,7 +141,10 @@ Local xPos := hwg_LOWORD(lParam), yPos := hwg_HIWORD(lParam)
 RETURN NIL
 
 METHOD HSplitter:DragAll()
-Local i, oCtrl, nDiff
+
+   LOCAL i
+   LOCAL oCtrl
+   LOCAL nDiff
 
    FOR i := 1 TO Len(::aRight)
       oCtrl := ::aRight[i]
