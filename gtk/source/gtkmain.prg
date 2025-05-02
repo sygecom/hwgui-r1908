@@ -155,7 +155,7 @@ FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBS
       oBrw:bcolorSel := clrBSel
    ENDIF
 
-   oDlg:Activate()
+   ACTIVATE DIALOG oDlg
    oFont:Release()
 
 RETURN nChoice
