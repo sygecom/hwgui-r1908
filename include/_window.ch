@@ -104,15 +104,15 @@
              <cMenu>, <oFont>, <bInit>, <bExit>, <bSize>, <bPaint>, ;
              <bGfocus>, <bLfocus>, <bOther>, <appname>, <oBmp>, <cHelp>, <nHelpId>, <bRefresh>)
 
-#xcommand ACTIVATE WINDOW <oWnd>         ;
-             [ <lNoShow: NOSHOW> ]       ;
-             [ <lMaximized: MAXIMIZED> ] ;
-             [ <lMinimized: MINIMIZED> ] ;
-             [ <lCenter: CENTER> ]       ;
-             [ <lModal: MODAL> ]         ;
-             [ ON ACTIVATE <bInit> ]     ;
+#xcommand ACTIVATE WINDOW <oWnd>             ;
+             [ <lNoShow: NOSHOW> ]           ;
+             [ <lMaximized: MAXIMIZED> ]     ;
+             [ <lMinimized: MINIMIZED> ]     ;
+             [ <lCentered: CENTER, CENTERED> ] ;
+             [ <lModal: MODAL> ]             ;
+             [ ON ACTIVATE <bInit> ]         ;
           => ;
-          <oWnd>:Activate(!<.lNoShow.>, <.lMaximized.>, <.lMinimized.>, <.lCenter.>, <bInit>, <.lModal.>)
+          <oWnd>:Activate(!<.lNoShow.>, <.lMaximized.>, <.lMinimized.>, <.lCentered.>, <bInit>, <.lModal.>)
 
 #xcommand CENTER WINDOW <oWnd> => <oWnd>:Center()
 
