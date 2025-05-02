@@ -147,7 +147,7 @@ STATIC FUNCTION ErrorPreview(cMess)
 
    @ 200, 460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
-   oDlg:Activate()
+   ACTIVATE DIALOG oDlg
    RETURN NIL
 
 #pragma BEGINDUMP
