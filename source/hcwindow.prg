@@ -305,6 +305,11 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
    // WM_CTLCOLORBTN
    // WM_CTLCOLORLISTBOX
    //LOCAL oCtrl
+   // WM_COMMAND
+   //LOCAL iItem
+   LOCAL iParHigh
+   LOCAL iParLow
+   LOCAL oForm
 
    // hwg_WriteLog("== " + ::Classname() + Str(msg) + IIf(wParam != NIL, Str(wParam), "NIL") + ;
    //    IIf(lParam != NIL, Str(lParam), "NIL"))
@@ -397,7 +402,19 @@ METHOD HCustomWindow:onEvent(msg, wParam, lParam)
       RETURN -1
 
    CASE WM_COMMAND
-      RETURN onCommand(SELF, wParam, lParam)
+      iParHigh := hwg_HIWORD(wParam)
+      iParLow := hwg_LOWORD(wParam)
+      oForm := ::GetParentForm()
+      IF ::aEvents != NIL .AND. !oForm:lSuspendMsgsHandling .AND. !::lSuspendMsgsHandling .AND. ;
+         (iItem := AScan(::aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
+         IF oForm:Type < WND_DLG_RESOURCE
+            IF hwg_SelfFocus(hwg_GetParent(hwg_GetFocus()), oForm:handle)
+               oForm:nFocus := hwg_GetFocus() //lParam
+            ENDIF
+         ENDIF
+         Eval(::aEvents[iItem, 3], SELF, iParLow)
+      ENDIF
+      RETURN 1
 
    CASE WM_DRAWITEM
       RETURN onDrawItem(SELF, wParam, lParam)
@@ -1207,6 +1224,7 @@ RETURN -1
 
 //-------------------------------------------------------------------------------------------------------------------//
 
+#if 0
 STATIC FUNCTION onCommand(oWnd, wParam, lParam)
 
    LOCAL iItem
@@ -1227,6 +1245,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    ENDIF
 
 RETURN 1
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------//
 
