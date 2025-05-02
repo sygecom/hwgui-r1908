@@ -318,7 +318,7 @@ FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBS
       ENDIF
    ENDIF
 
-   oDlg:Activate()
+   ACTIVATE DIALOG oDlg
    IF lNewFont
       oFont:Release()
    ENDIF
