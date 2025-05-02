@@ -22,7 +22,7 @@ PROCEDURE ErrorSys
    RETURN
 
 STATIC FUNCTION DefError(oError)
-   
+
    LOCAL cMessage
    LOCAL cDOSError
    //LOCAL aOptions // variable not used
@@ -76,7 +76,7 @@ RETURN .F.
 
 
 FUNCTION hwg_ErrorMessage(oError)
-   
+
    LOCAL cMessage
 
    // start error message
@@ -134,14 +134,14 @@ STATIC FUNCTION ErrorPreview(cMess)
 
    INIT DIALOG oDlg TITLE "Error.log" ;
         AT 92, 61 SIZE 400, 400
-        
+
 
    @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 380, 340 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
         COLOR 16777088 BACKCOLOR 0
 
    @ 150, 360 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
-   oDlg:Activate()
+   ACTIVATE DIALOG oDlg
 
 RETURN NIL
 
