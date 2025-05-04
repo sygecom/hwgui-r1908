@@ -14,12 +14,12 @@
 
 STATIC s_LogInitialPath := ""
 
-PROCEDURE ErrorSys
+PROCEDURE ErrorSys()
 
    ErrorBlock({|oError|DefError(oError)})
    s_LogInitialPath := "/" + CurDir() + IIf(Empty(CurDir()), "", "/")
 
-   RETURN
+RETURN
 
 STATIC FUNCTION DefError(oError)
 
@@ -35,16 +35,13 @@ STATIC FUNCTION DefError(oError)
    ENDIF
 
    // Set NetErr() of there was a database open error
-   IF oError:genCode == EG_OPEN .AND. ;
-      oError:osCode == 32 .AND. ;
-      oError:canDefault
+   IF oError:genCode == EG_OPEN .AND. oError:osCode == 32 .AND. oError:canDefault
       NetErr(.T.)
       RETURN .F.
    ENDIF
 
    // Set NetErr() if there was a lock error on dbAppend()
-   IF oError:genCode == EG_APPENDLOCK .AND. ;
-      oError:canDefault
+   IF oError:genCode == EG_APPENDLOCK .AND. oError:canDefault
       NetErr(.T.)
       RETURN .F.
    ENDIF
@@ -59,11 +56,11 @@ STATIC FUNCTION DefError(oError)
    ENDIF
 
    n := 2
-   WHILE !Empty(ProcName(n))
+   DO WHILE !Empty(ProcName(n))
       #ifdef __XHARBOUR__
-         cMessage += Chr(13) + Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
+      cMessage += Chr(13) + Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #else
-         cMessage += Chr(13) + Chr(10) + "Called from " + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
+      cMessage += Chr(13) + Chr(10) + "Called from " + ProcName(n) + "(" + AllTrim(Str(ProcLine(n++))) + ")"
       #endif
    ENDDO
 
@@ -73,7 +70,6 @@ STATIC FUNCTION DefError(oError)
    QUIT
 
 RETURN .F.
-
 
 FUNCTION hwg_ErrorMessage(oError)
 
@@ -109,21 +105,21 @@ FUNCTION hwg_ErrorMessage(oError)
       cMessage += ": " + oError:operation
    ENDCASE
 
-   RETURN cMessage
+RETURN cMessage
 
 FUNCTION WriteLog(cText, fname)
 
    LOCAL nHand
 
-  fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
-  IF !File(fname)
-     nHand := FCreate(fname)
-  ELSE
-     nHand := FOpen(fname, 1)
-  ENDIF
-  FSeek(nHand, 0, 2)
-  FWrite(nHand, cText + chr(10))
-  FClose(nHand)
+   fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
+   IF !File(fname)
+      nHand := FCreate(fname)
+   ELSE
+      nHand := FOpen(fname, 1)
+   ENDIF
+   FSeek(nHand, 0, 2)
+   FWrite(nHand, cText + chr(10))
+   FClose(nHand)
 
 RETURN NIL
 
@@ -132,12 +128,11 @@ STATIC FUNCTION ErrorPreview(cMess)
    LOCAL oDlg
    LOCAL oEdit
 
-   INIT DIALOG oDlg TITLE "Error.log" ;
-        AT 92, 61 SIZE 400, 400
+   INIT DIALOG oDlg TITLE "Error.log" AT 92, 61 SIZE 400, 400
 
-
-   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 380, 340 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
-        COLOR 16777088 BACKCOLOR 0
+   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 380, 340 ;
+      STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
+      COLOR 16777088 BACKCOLOR 0
 
    @ 150, 360 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
