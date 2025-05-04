@@ -1761,7 +1761,7 @@ METHOD HBrowse:Edit(wParam, lParam)
 
    fipos := ::colpos + ::nLeftCol - 1 - ::freeze
    IF ::bEnter == NIL .OR. ;
-         (HB_IsLogical(lRes := Eval(::bEnter, Self, fipos)) .AND. !lRes)
+         (hb_IsLogical(lRes := Eval(::bEnter, Self, fipos)) .AND. !lRes)
       oColumn := ::aColumns[fipos]
       IF ::type == BRW_DATABASE
          ::varbuf := (::alias)->(Eval(oColumn:block, , Self, fipos))
@@ -1834,7 +1834,7 @@ STATIC FUNCTION VldBrwEdit(oBrw, fipos)
 
    IF oBrw:oGet:nLastKey != GDK_Escape
       IF oColumn:aList != NIL
-         IF HB_IsNumeric(oBrw:varbuf)
+         IF hb_IsNumeric(oBrw:varbuf)
             oBrw:varbuf := nChoic
          ELSE
             oBrw:varbuf := oColumn:aList[nChoic]
@@ -1847,7 +1847,7 @@ STATIC FUNCTION VldBrwEdit(oBrw, fipos)
             (oBrw:alias)->(Eval(oColumn:block, oBrw:varbuf, oBrw, fipos))
             UNLOCK
          ELSE
-            IF HB_IsArray(oBrw:aArray[1])
+            IF hb_IsArray(oBrw:aArray[1])
                AAdd(oBrw:aArray, Array(Len(oBrw:aArray[1])))
                FOR fif := 2 TO Len((oBrw:aArray[1]))
                   oBrw:aArray[Len(oBrw:aArray), fif] := ;
@@ -2010,7 +2010,7 @@ FUNCTION HWG_CREATEARLIST(oBrw, arr)
    oBrw:aArray := arr
    IF Len(oBrw:aColumns) == 0
       // oBrw:aColumns := {}
-      IF HB_IsArray(arr[1])
+      IF hb_IsArray(arr[1])
          FOR i := 1 TO Len(arr[1])
             oBrw:AddColumn(HColumn():New(, hwg_ColumnArBlock()))
          NEXT

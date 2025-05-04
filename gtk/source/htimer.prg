@@ -31,7 +31,7 @@ CLASS HTimer INHERIT HObject
 
    DATA xName          HIDDEN
    ACCESS Name INLINE ::xName
-   ASSIGN Name(cName) INLINE IIf(!Empty(cName) .AND. HB_IsChar(cName) .AND. !":" $ cName .AND. !"[" $ cName, ;
+   ASSIGN Name(cName) INLINE IIf(!Empty(cName) .AND. hb_IsChar(cName) .AND. !":" $ cName .AND. !"[" $ cName, ;
 			(::xName := cName, __objAddData(::oParent, cName), ::oParent: &(cName) := Self), NIL)
 
 ENDCLASS
@@ -53,7 +53,7 @@ METHOD HTimer:New(oParent, nId, value, bAction)
 //   ::tag := hwg_SetTimer(::id, ::value)
 
    */
-   ::value   := IIf(HB_IsNumeric(value), value, 0)
+   ::value   := IIf(hb_IsNumeric(value), value, 0)
    ::bAction := bAction
    /*
     IF ::value > 0
@@ -105,7 +105,7 @@ FUNCTION hwg_TimerProc(hWnd, idTimer, Time)
    HB_SYMBOL_UNUSED(hWnd)
 
    IF i != 0 .AND. HTimer():aTimers[i]:value > 0 .AND. HTimer():aTimers[i]:bAction != NIL .AND.;
-      HB_IsBlock(HTimer():aTimers[i]:bAction)
+      hb_IsBlock(HTimer():aTimers[i]:bAction)
       Eval(HTimer():aTimers[i]:bAction, HTimer():aTimers[i], time)
    ENDIF
 

@@ -113,7 +113,7 @@ PUBLIC nQueryWndHandle := 0
         BITMAP "BMP_OPEN" FROM RESOURCE COORDINATES 0, 4, 0, 0
 */
 
-   IF HB_IsArray(BrwFont)
+   IF hb_IsArray(BrwFont)
       oBrwFont := HFont():Add(BrwFont[1], BrwFont[2], BrwFont[3])
    ENDIF
 
@@ -615,7 +615,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF (i := Ascan(aControls, {|o|o:classname() == "HBROWSE"})) > 0
          oBrw := aControls[i]
-         IF HB_IsNumeric(oBrw:cargo)
+         IF hb_IsNumeric(oBrw:cargo)
             Select(oBrw:cargo)
             improc := oBrw:cargo
             hwg_SetFocus(oBrw:handle)
@@ -630,7 +630,7 @@ Local i, aControls, oBrw
       aControls := oWindow:aControls
       IF (i := Ascan(aControls, {|o|o:classname() == "HBROWSE"})) > 0
          oBrw := aControls[i]
-         IF HB_IsNumeric(oBrw:cargo)
+         IF hb_IsNumeric(oBrw:cargo)
             Select(oBrw:cargo)
             improc := oBrw:cargo
             IF Alias() == "ADSSQL"

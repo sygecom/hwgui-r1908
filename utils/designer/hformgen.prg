@@ -139,16 +139,16 @@ METHOD Open(fname, cForm) CLASS HFormGen
       IF ::type == 1
          ReadForm(Self, cForm)
       ELSE
-         IF HB_IsChar(aFormats[::type, 4])
+         IF hb_IsChar(aFormats[::type, 4])
             aFormats[::type, 4] := hwg_OpenScript(cCurDir + aFormats[::type, 3], aFormats[::type, 4])
          ENDIF
-         IF HB_IsChar(aFormats[::type, 6])
+         IF hb_IsChar(aFormats[::type, 6])
             aFormats[::type, 6] := hwg_OpenScript(cCurDir + aFormats[::type, 3], aFormats[::type, 6])
          ENDIF
-         IF HB_IsArray(aFormats[::type, 6])
+         IF hb_IsArray(aFormats[::type, 6])
             hwg_DoScript(aFormats[::type, 6])
          ENDIF
-         IF HB_IsArray(aFormats[::type, 4])
+         IF hb_IsArray(aFormats[::type, 4])
             hwg_DoScript(aFormats[::type, 4])
          ENDIF
       ENDIF
@@ -246,10 +246,10 @@ METHOD Save(lAs) CLASS HFormGen
              //  salvar PRG diretamente sem necessidade de ficar mudando
          ::type := 3
          ::filename := StrTran(::filename, "xml", "prg")
-         IF HB_IsChar(aFormats[::type, 5])
+         IF hb_IsChar(aFormats[::type, 5])
             aFormats[::type, 5] := hwg_OpenScript(cCurDir + aFormats[::type, 3], aFormats[::type, 5])
          ENDIF
-         IF HB_IsArray(aFormats[::type, 5])
+         IF hb_IsArray(aFormats[::type, 5])
             hwg_DoScript(aFormats[::type, 5])
          ENDIF
          ::type := 1
@@ -257,16 +257,16 @@ METHOD Save(lAs) CLASS HFormGen
         // :END LFB
         */
       ELSE
-         IF HB_IsChar(aFormats[::type, 5])
+         IF hb_IsChar(aFormats[::type, 5])
             aFormats[::type, 5] := hwg_OpenScript(cCurDir + aFormats[::type, 3], aFormats[::type, 5])
          ENDIF
-         IF HB_IsChar(aFormats[::type, 6])
+         IF hb_IsChar(aFormats[::type, 6])
             aFormats[::type, 6] := hwg_OpenScript(cCurDir + aFormats[::type, 3], aFormats[::type, 6])
          ENDIF
-         IF HB_IsArray(aFormats[::type, 6])
+         IF hb_IsArray(aFormats[::type, 6])
             hwg_DoScript(aFormats[::type, 6])
          ENDIF
-         IF HB_IsArray(aFormats[::type, 5])
+         IF hb_IsArray(aFormats[::type, 5])
             hwg_DoScript(aFormats[::type, 5])
          ENDIF
       ENDIF
@@ -311,7 +311,7 @@ METHOD CreateDialog(aProp) CLASS HFormGen
       FOR i := 1 TO Len(oFormDesc:aItems)
          IF oFormDesc:aItems[i]:title == "property"
             IF !Empty(oFormDesc:aItems[i]:aItems)
-               IF HB_IsChar(oFormDesc:aItems[i]:aItems[1]:aItems[1])
+               IF hb_IsChar(oFormDesc:aItems[i]:aItems[1]:aItems[1])
                   oFormDesc:aItems[i]:aItems[1]:aItems[1] := &("{||" + oFormDesc:aItems[i]:aItems[1]:aItems[1] + "}")
                ENDIF
                xProperty := Eval(oFormDesc:aItems[i]:aItems[1]:aItems[1])
@@ -401,7 +401,7 @@ RETURN IIf(i == 0, NIL, ::aProp[i, 2])
 
 METHOD SetProp(xName, xValue) CLASS HFormGen
 
-   IF HB_IsChar(xName)
+   IF hb_IsChar(xName)
       xName := Lower(xName)
       xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
    ENDIF
@@ -766,7 +766,7 @@ FUNCTION IsDefault(oCtrl, aPropItem)
                    Lower(aItems[j1]:GetAttribute("name")) == cPropName
 
          IF !Empty(aItems[j1]:aItems)
-            IF HB_IsChar(aItems[j1]:aItems[1]:aItems[1])
+            IF hb_IsChar(aItems[j1]:aItems[1]:aItems[1])
                aItems[j1]:aItems[1]:aItems[1] := &("{||" + aItems[j1]:aItems[1]:aItems[1] + "}")
             ENDIF
             xProperty := Eval(aItems[j1]:aItems[1]:aItems[1])
@@ -789,7 +789,7 @@ STATIC FUNCTION WriteTree(aTree, oParent)
    LOCAL type
 
    FOR i := 1 TO Len(aTree)
-      IF aTree[i, 4] != NIL .OR. (HB_IsArray(aTree[i, 1]) .AND. !Empty(aTree[i, 1]))
+      IF aTree[i, 4] != NIL .OR. (hb_IsArray(aTree[i, 1]) .AND. !Empty(aTree[i, 1]))
          type := HBXML_TYPE_TAG
       ELSE
          type := HBXML_TYPE_SINGLE
@@ -799,7 +799,7 @@ STATIC FUNCTION WriteTree(aTree, oParent)
       IF aTree[i, 4] != NIL
          oNode:Add(HXMLNode():New(, HBXML_TYPE_CDATA,, aTree[i, 4]))
       ENDIF
-      IF HB_IsArray(aTree[i, 1]) .AND. !Empty(aTree[i, 1])
+      IF hb_IsArray(aTree[i, 1]) .AND. !Empty(aTree[i, 1])
          WriteTree(aTree[i, 1], oNode)
       ENDIF
    NEXT

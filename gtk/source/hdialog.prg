@@ -201,7 +201,7 @@ STATIC FUNCTION InitModalDlg(oDlg)
    //LOCAL iCont // variable not used
 
    // writelog(str(oDlg:handle) + " " + oDlg:title)
-   IF HB_IsArray(oDlg:menu)
+   IF hb_IsArray(oDlg:menu)
       hwg__SetMenu(oDlg:handle, oDlg:menu[5])
    ENDIF
    /*
@@ -253,7 +253,7 @@ STATIC FUNCTION onEraseBk(oDlg, hDC)
       ELSE
         aCoors := hwg_GetClientRect(oDlg:handle)
         IF oDlg:brush != NIL
-           IF !HB_IsNumeric(oDlg:brush)
+           IF !hb_IsNumeric(oDlg:brush)
               hwg_FillRect(hDC, aCoors[1], aCoors[2], aCoors[3] + 1, aCoors[4] + 1, oDlg:brush:handle)
            ENDIF
         ELSE
@@ -321,7 +321,7 @@ FUNCTION hwg_DlgCommand(oDlg, wParam, lParam)
       IF oDlg:lExitOnEsc
          EndDialog(oDlg:handle)
       ENDIF
-   ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. HB_IsArray(oDlg:menu) .AND. ;
+   ELSEIF __ObjHasMsg(oDlg, "MENU") .AND. hb_IsArray(oDlg:menu) .AND. ;
         (aMenu := hwg_FindMenuItem(oDlg:menu, iParLow, @i)) != NIL ;
         .AND. aMenu[1, i, 1] != NIL
       Eval(aMenu[1, i, 1])

@@ -37,9 +37,9 @@ METHOD HSayBmp:New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, b
       IF lRes == NIL
          lRes := .F.
       ENDIF
-      ::oImage := IIf(lRes .OR. HB_IsNumeric(Image), ;
+      ::oImage := IIf(lRes .OR. hb_IsNumeric(Image), ;
                       HBitmap():AddResource(Image), ;
-                      IIf(HB_IsChar(Image), ;
+                      IIf(hb_IsChar(Image), ;
                       HBitmap():AddFile(Image), Image))
       IF !Empty(::oImage)
          IF nWidth == NIL .OR. nHeight == NIL
@@ -96,9 +96,9 @@ METHOD HSayBmp:ReplaceBitmap(Image, lRes)
    IF lRes == NIL
       lRes := .F.
    ENDIF
-   ::oImage := IIf(lRes .OR. HB_IsNumeric(Image), ;
+   ::oImage := IIf(lRes .OR. hb_IsNumeric(Image), ;
                    HBitmap():AddResource(Image), ;
-                   IIf(HB_IsChar(Image), ;
+                   IIf(hb_IsChar(Image), ;
                    HBitmap():AddFile(Image), Image))
 
 RETURN NIL

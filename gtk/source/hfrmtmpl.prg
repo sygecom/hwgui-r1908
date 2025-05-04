@@ -933,7 +933,7 @@ FUNCTION hfrm_GetProperty(xProp)
 
    LOCAL c
 
-   IF HB_IsChar(xProp)
+   IF hb_IsChar(xProp)
       c := Left(xProp, 1)
       IF c == "["
          xProp := SubStr(xProp, 2, Len(xProp) - 2)
@@ -1064,7 +1064,7 @@ RETURN Self
 
 METHOD HRepTmpl:Print(printer, lPreview, p1, p2, p3)
 
-   LOCAL oPrinter := IIf(printer != NIL, IIf(HB_IsObject(printer), printer, HPrinter():New(printer, .T.)), HPrinter():New(, .T.))
+   LOCAL oPrinter := IIf(printer != NIL, IIf(hb_IsObject(printer), printer, HPrinter():New(printer, .T.)), HPrinter():New(, .T.))
    LOCAL i
    LOCAL j
    LOCAL aMethod
@@ -1302,7 +1302,7 @@ METHOD HRepTmpl:PrintItem(oItem)
          ELSE
             cText := aGetSecond(oItem:aProp, "caption")
          ENDIF
-         IF HB_IsChar(cText)
+         IF hb_IsChar(cText)
             IF (xProperty := aGetSecond(oItem:aProp, "border")) != NIL ;
                    .AND. xProperty
                ::oPrinter:Box(x, y, x2, y2)
@@ -1465,7 +1465,7 @@ STATIC FUNCTION hrep_FontFromXML(oPrinter, oXmlNode, height)
    LOCAL name := oXmlNode:GetAttribute("name")
    LOCAL i
 
-  IF HB_IsArray(HRepTmpl():aFontTable)
+  IF hb_IsArray(HRepTmpl():aFontTable)
      IF (i := AScan(HRepTmpl():aFontTable, {|a|Lower(a[1]) == Lower(name)})) != 0
         name := HRepTmpl():aFontTable[i, 2]
      ENDIF

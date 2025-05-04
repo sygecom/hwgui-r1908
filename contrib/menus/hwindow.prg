@@ -154,7 +154,7 @@ METHOD NEW(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, 
    ELSEIF lType == WND_CHILD // Janelas modeless que pertencem a MAIN - jamaj
 
       ::oParent := HWindow():GetMain()
-      IF HB_IsObject(::oParent)
+      IF hb_IsObject(::oParent)
           ::handle := hwg_InitChildWindow(::szAppName, cTitle, cMenu, ;
              IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
              ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
@@ -285,7 +285,7 @@ Local oWnd, oBtn, oitem
       IF oWnd:aEvents != NIL .AND. ;
            (iItem := Ascan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
            Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-      ELSEIF HB_IsArray(oWnd:menu) .AND. ;
+      ELSEIF hb_IsArray(oWnd:menu) .AND. ;
            (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL ;
            .AND. aMenu[1, iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1])
@@ -326,7 +326,7 @@ Local oWnd, oBtn, oitem
       aControls := hwg_GetWindowRect(hWnd)
       oWnd:nWidth  := aControls[3] - aControls[1]
       oWnd:nHeight := aControls[4] - aControls[2]
-      IF HB_IsBlock(oWnd:bSize)
+      IF hb_IsBlock(oWnd:bSize)
           Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
       ENDIF
       IF oWnd:type == WND_MDI .AND. Len(HWindow():aWindows) > 1
@@ -348,7 +348,7 @@ Local oWnd, oBtn, oitem
    ELSEIF msg == WM_DRAWITEM
 
       IF (oBtn := oWnd:FindControl(wParam)) != NIL
-          IF HB_IsBlock(oBtn:bPaint)
+          IF hb_IsBlock(oBtn:bPaint)
              Eval(oBtn:bPaint, oBtn, lParam)
           ENDIF
       ENDIF
@@ -383,9 +383,9 @@ Local oWnd, oBtn, oitem
       RETURN 0
    ELSEIF msg == WM_SYSCOMMAND
       IF wParam == SC_CLOSE
-          IF HB_IsBlock(oWnd:bDestroy)
+          IF hb_IsBlock(oWnd:bDestroy)
              i := Eval(oWnd:bDestroy, oWnd)
-             i := IIf(HB_IsLogical(i), i, .T.)
+             i := IIf(hb_IsLogical(i), i, .T.)
              IF !i
                 RETURN 0
              ENDIF
@@ -405,7 +405,7 @@ Local oWnd, oBtn, oitem
    ELSEIF msg == WM_NOTIFYICON
       IF wParam == ID_NOTIFYICON
           IF lParam == WM_LBUTTONDOWN
-             IF HB_IsBlock(oWnd:bNotify)
+             IF hb_IsBlock(oWnd:bNotify)
                 Eval(oWnd:bNotify)
              ENDIF
           ELSEIF lParam == WM_RBUTTONDOWN
@@ -417,7 +417,7 @@ Local oWnd, oBtn, oitem
       ENDIF
    ELSEIF msg == WM_MENUSELECT
       IF NumAnd(hwg_HIWORD(wParam), MF_HILITE) != 0 // hwg_HIWORD(wParam) = FLAGS , function NUMAND of the LIBCT.LIB
-         IF HB_IsArray(oWnd:menu)
+         IF hb_IsArray(oWnd:menu)
             IF (aMenu := hwg_FindMenuItem(oWnd:menu, hwg_LOWORD(wParam), @iCont)) != NIL
                IF aMenu[1, iCont, 2][2] != NIL
                   hwg_WriteStatus(oWnd, 1, aMenu[1, iCont, 2][2]) // show message on StatusBar
@@ -434,7 +434,7 @@ Local oWnd, oBtn, oitem
       IF msg == WM_MOUSEMOVE
           hwg_DlgMouseMove()
       ENDIF
-      IF HB_IsBlock(oWnd:bOther)
+      IF hb_IsBlock(oWnd:bOther)
           Eval(oWnd:bOther, oWnd, msg, wParam, lParam)
       ENDIF
    ENDIF
@@ -484,7 +484,7 @@ Local oWnd, oBtn, oitem
       IF oWnd:aEvents != NIL .AND. ;
          (iItem := Ascan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-      ELSEIF HB_IsArray(oWnd:menu) .AND. ;
+      ELSEIF hb_IsArray(oWnd:menu) .AND. ;
              (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL ;
              .AND. aMenu[1, iCont, 1] != NIL
          Eval(aMenu[1, iCont, 1])
@@ -649,7 +649,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
 
          oWnd:handle := hWnd
          hwg_InitControls(oWnd)
@@ -693,7 +693,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       ENDIF
    ELSEIF msg == WM_PAINT
 
-      IF HB_ISObject(oWnd) .AND. HB_IsBlock(oWnd:bPaint)
+      IF hb_ISObject(oWnd) .AND. hb_IsBlock(oWnd:bPaint)
 
          // WriteLog("|DefMDIChild Paint" + Str(hWnd, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
 
@@ -704,7 +704,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       ENDIF
 
    ELSEIF msg == WM_SIZE
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
          aControls := oWnd:aControls
          nControls := Len(aControls)
          #ifdef __XHARBOUR__
@@ -723,7 +723,7 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
      ENDIF
    ELSEIF msg == WM_NCACTIVATE
       //WriteLog("|DefMDIChild" + Str(hWnd, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10))
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
          IF wParam = 1 // Ativando
             // WriteLog("WM_NCACTIVATE" + " -> " + "Ativando" + " Wnd: " + Str(hWnd, 10))
             // Pega o menu atribuido
@@ -787,14 +787,14 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       ENDIF
 
    ELSEIF msg == WM_NCDESTROY
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
         HWindow():DelItem(oWnd)
       ELSE
         hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!", "DefMDIChildProc")
       ENDIF
    ELSEIF msg == WM_DESTROY
-      IF HB_IsObject(oWnd)
-         IF HB_IsBlock(oWnd:bDestroy)
+      IF hb_IsObject(oWnd)
+         IF hb_IsBlock(oWnd:bDestroy)
              Eval(oWnd:bDestroy, oWnd)
          ENDIF
          aControls := oWnd:aControls
@@ -818,11 +818,11 @@ Local aMenu, hMenu, hSubMenu, nPosMenu
       nReturn := 1
       RETURN (nReturn)
    ELSEIF msg == WM_CREATE
-      IF HB_IsBlock(oWnd:bInit)
+      IF hb_IsBlock(oWnd:bInit)
          Eval(oWnd:bInit, oWnd)
       ENDIF
    ELSE
-      IF HB_IsObject(oWnd) .AND. HB_IsBlock(oWnd:bOther)
+      IF hb_IsObject(oWnd) .AND. hb_IsBlock(oWnd:bOther)
          Eval(oWnd:bOther, oWnd, msg, wParam, lParam)
       ENDIF
    ENDIF
@@ -874,7 +874,7 @@ Local oWndClient
       // Procura objecto window com handle = 0
       oWnd := HWindow():FindWindow(0)
 
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
          oWnd:handle := hWnd
       ELSE
 
@@ -895,7 +895,7 @@ Local oWndClient
    ENDIF
 
    IF msg == WM_CREATE
-        IF HB_IsBlock(oWnd:bInit)
+        IF hb_IsBlock(oWnd:bInit)
             Eval(oWnd:bInit, oWnd)
         ENDIF
    ELSEIF msg == WM_COMMAND
@@ -922,7 +922,7 @@ Local oWndClient
       IF oWnd:aEvents != NIL .AND. ;
          (iItem := Ascan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
          Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-      ELSEIF HB_IsArray(oWnd:menu) .AND. ;
+      ELSEIF hb_IsArray(oWnd:menu) .AND. ;
          (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL ;
          .AND. aMenu[1, iCont, 1] != NIL
 
@@ -1028,7 +1028,7 @@ Local oWndClient
       #endif
       // HWindow():DelItem(oWnd)
 
-      IF HB_IsBlock(oWnd:bDestroy)
+      IF hb_IsBlock(oWnd:bDestroy)
           Eval(oWnd:bDestroy, oWnd)
       ENDIF
 
@@ -1038,7 +1038,7 @@ Local oWndClient
       RETURN 1
 
    ELSEIF msg == WM_NCDESTROY
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
         HWindow():DelItem(oWnd)
       ELSE
         hwg_MsgStop("oWnd nao e objeto! em NC_DESTROY!", "DefMDIWndProc")
@@ -1050,7 +1050,7 @@ Local oWndClient
           //WriteLog("|Window: " + Str(hWnd, 10) + "|" + Str(msg, 6) + "|" + Str(wParam, 10) + "|" + Str(lParam, 10)  + "|" + PadR("Main - SysCommand - Close", 40) + "|")
           IF oWnd:bDestroy != NIL
              xRet := Eval(oWnd:bDestroy, oWnd)
-             xRet := IIf(HB_IsLogical(xRet), xRet, .T.)
+             xRet := IIf(hb_IsLogical(xRet), xRet, .T.)
              IF !xRet
                 RETURN 1
              ENDIF
@@ -1083,11 +1083,11 @@ Local oWndClient
           ENDIF
       ENDIF
    ELSE
-      IF HB_IsObject(oWnd)
+      IF hb_IsObject(oWnd)
          IF msg == WM_MOUSEMOVE
              hwg_DlgMouseMove()
          ENDIF
-         IF HB_IsBlock(oWnd:bOther)
+         IF hb_IsBlock(oWnd:bOther)
              Eval(oWnd:bOther, oWnd, msg, wParam, lParam)
          ENDIF
       ENDIF

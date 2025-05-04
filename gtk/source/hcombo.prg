@@ -68,9 +68,9 @@ METHOD HComboBox:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth
    ENDIF
 
    IF ::lText
-      ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
    ELSE
-      ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
+      ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
    ENDIF
    
    ::bSetGet := bSetGet
@@ -194,9 +194,9 @@ METHOD HComboBox:Refresh()
    IF ::bSetGet != NIL
       vari := Eval(::bSetGet, , Self)
       IF ::lText
-         ::value := IIf(vari == NIL .OR. !HB_IsChar(vari), "", vari)
+         ::value := IIf(vari == NIL .OR. !hb_IsChar(vari), "", vari)
       ELSE
-         ::value := IIf(vari == NIL .OR. !HB_IsNumeric(vari), 1, vari)
+         ::value := IIf(vari == NIL .OR. !hb_IsNumeric(vari), 1, vari)
       ENDIF
    ENDIF
 

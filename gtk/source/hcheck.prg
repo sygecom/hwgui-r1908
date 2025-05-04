@@ -36,7 +36,7 @@ METHOD HCheckButton:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWi
                   bSize, bPaint, ctoolt, tcolor, bcolor)
 
    ::title   := cCaption
-   ::value   := IIf(vari == NIL .OR. !HB_IsLogical(vari), .F., vari)
+   ::value   := IIf(vari == NIL .OR. !hb_IsLogical(vari), .F., vari)
    ::bSetGet := bSetGet
 
    ::Activate()
@@ -121,7 +121,7 @@ STATIC FUNCTION __Valid(oCtrl)
       Eval(oCtrl:bSetGet, oCtrl:value, oCtrl)
    ENDIF
    IF oCtrl:bLostFocus != NIL .AND. ;
-         HB_IsLogical(res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)) ;
+         hb_IsLogical(res := Eval(oCtrl:bLostFocus, oCtrl:value, oCtrl)) ;
 	 .AND. !res
       hwg_SetFocus(oCtrl:handle)
    ENDIF
@@ -136,7 +136,7 @@ STATIC FUNCTION __When(oCtrl)
 
    IF oCtrl:bGetFocus != NIL
       res := Eval(oCtrl:bGetFocus, Eval(oCtrl:bSetGet, , oCtrl), oCtrl)
-      IF HB_IsLogical(res) .AND. !res
+      IF hb_IsLogical(res) .AND. !res
          hwg_GetSkip(oCtrl:oParent, oCtrl:handle, 1)
       ENDIF
       RETURN res

@@ -71,7 +71,7 @@ METHOD HOwnButton:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       ::lEnabled := lEnabled
    ENDIF
    IF bmp != NIL
-      ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. HB_IsNumeric(bmp), ;
+      ::bitmap := IIf((lResour != NIL .AND. lResour) .OR. hb_IsNumeric(bmp), ;
                      HBitmap():AddResource(bmp), ;
                      HBitmap():AddFile(IIf(::cPath != NIL, ::cPath + bmp, bmp)))
       IF ::bitmap != NIL .AND. lTr != NIL .AND. lTr

@@ -121,7 +121,7 @@ FUNCTION hwg_FindMenuItem(aMenu, nId, nPos)
    DO WHILE nPos <= Len(aMenu[1])
       IF aMenu[1, npos, 3] == nId
          RETURN aMenu
-      ELSEIF HB_IsArray(aMenu[1, npos, 1])
+      ELSEIF hb_IsArray(aMenu[1, npos, 1])
          IF (aSubMenu := hwg_FindMenuItem(aMenu[1, nPos], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubMenu
@@ -166,7 +166,7 @@ FUNCTION hwg_BuildMenu(aMenuInit, hWnd, oWnd, nPosParent, lPopup)
 
    nPos := 1
    DO WHILE nPos <= Len(aMenu[1])
-      IF HB_IsArray(aMenu[1, nPos, 1])
+      IF hb_IsArray(aMenu[1, nPos, 1])
          hwg_BuildMenu(aMenu, hWnd,, nPos)
       ELSE 
          IF aMenu[1, nPos, 1] == NIL .OR. aMenu[1, nPos, 2] != NIL

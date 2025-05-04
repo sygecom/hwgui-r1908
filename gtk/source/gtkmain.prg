@@ -100,7 +100,7 @@ FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBS
       oFont := HFont():Add("Times", 0, 12)
    ENDIF
 
-   IF HB_IsArray(arr[1])
+   IF hb_IsArray(arr[1])
       FOR i := 1 TO aLen
          nLen := Max(nLen, Len(arr[i, 1]))
       NEXT
@@ -135,7 +135,7 @@ FUNCTION hwg_WChoice(arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBS
        ON SIZE {|o, x, y|o:Move(,, x, y)} ;
        ON CLICK {|o|nChoice := o:nCurrent, EndDialog(o:oParent:handle)}
 
-   IF HB_IsArray(arr[1])
+   IF hb_IsArray(arr[1])
       oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent, 1]}, "C", nLen))
    ELSE
       oBrw:AddColumn(HColumn():New(, {|value, o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent]}, "C", nLen))

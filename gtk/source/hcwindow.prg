@@ -326,12 +326,12 @@ FUNCTION hwg_onTrackScroll(oWnd, wParam, lParam)
    IF oCtrl != NIL
       msg := hwg_LOWORD(wParam)
       IF msg == TB_ENDTRACK
-         IF HB_IsBlock(oCtrl:bChange)
+         IF hb_IsBlock(oCtrl:bChange)
             Eval(oCtrl:bChange, oCtrl)
             RETURN 0
          ENDIF
       ELSEIF msg == TB_THUMBTRACK .OR. msg == TB_PAGEUP .OR. msg == TB_PAGEDOWN
-         IF HB_IsBlock(oCtrl:bThumbDrag)
+         IF hb_IsBlock(oCtrl:bThumbDrag)
             Eval(oCtrl:bThumbDrag, oCtrl)
             RETURN 0
          ENDIF
@@ -349,7 +349,7 @@ FUNCTION hwg_onTrackScroll(oWnd, wParam, lParam)
       msg := hwg_LOWORD(wParam)
       SWITCH msg
       CASE TB_ENDTRACK
-         IF HB_IsBlock(oCtrl:bChange)
+         IF hb_IsBlock(oCtrl:bChange)
             Eval(oCtrl:bChange, oCtrl)
             RETURN 0
          ENDIF
@@ -357,7 +357,7 @@ FUNCTION hwg_onTrackScroll(oWnd, wParam, lParam)
       CASE TB_THUMBTRACK
       CASE TB_PAGEUP
       CASE TB_PAGEDOWN
-         IF HB_IsBlock(oCtrl:bThumbDrag)
+         IF hb_IsBlock(oCtrl:bThumbDrag)
             Eval(oCtrl:bThumbDrag, oCtrl)
             RETURN 0
          ENDIF

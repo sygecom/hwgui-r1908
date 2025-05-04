@@ -233,7 +233,7 @@ METHOD HMainWindow:onEvent(msg, wParam, lParam)
    LOCAL yPos
    LOCAL oMdi
    LOCAL aCoors
-   LOCAL nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
+   LOCAL nFocus := IIf(hb_IsNumeric(::nFocus), ::nFocus, 0)
 
    // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
 
@@ -287,7 +287,7 @@ METHOD HMainWindow:onEvent(msg, wParam, lParam)
    LOCAL yPos
    LOCAL oMdi
    LOCAL aCoors
-   LOCAL nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
+   LOCAL nFocus := IIf(hb_IsNumeric(::nFocus), ::nFocus, 0)
 
    // hwg_WriteLog(Str(msg) + Str(wParam) + Str(lParam) + Chr(13))
 

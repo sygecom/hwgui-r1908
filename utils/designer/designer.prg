@@ -95,7 +95,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    //   __mvPublic("cCurDir")
    //ENDIF
 
-   IF !HB_IsChar(cCurDir)
+   IF !hb_IsChar(cCurDir)
       cCurDir := hwg_GetCurrentDir() + "\"
    ENDIF
    oDesigner:ds_mypath := cCurDir
@@ -105,7 +105,7 @@ RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
    ENDIF
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
-   IF !HB_IsNumeric(crossCursor)
+   IF !hb_IsNumeric(crossCursor)
       crossCursor := hwg_LoadCursor(IDC_CROSS)
       horzCursor  := hwg_LoadCursor(IDC_SIZEWE)
       vertCursor  := hwg_LoadCursor(IDC_SIZENS)
@@ -528,7 +528,7 @@ STATIC FUNCTION ReadIniFiles()
       ENDIF
    NEXT
 
-   IF HB_IsChar(cWidgetsFileName)
+   IF hb_IsChar(cWidgetsFileName)
       oDesigner:oWidgetsSet := HXMLDoc():Read(cCurDir + cWidgetsFileName)
    ENDIF
    IF oDesigner:oWidgetsSet == NIL .OR. Empty(oDesigner:oWidgetsSet:aItems)
@@ -722,7 +722,7 @@ FUNCTION Evalcode(xCode)
    
    LOCAL nLines
 
-   IF HB_IsChar(xCode)
+   IF hb_IsChar(xCode)
       nLines := mlCount(xCode)
       IF nLines > 1
          xCode := hwg_RdScript(, xCode)
@@ -730,7 +730,7 @@ FUNCTION Evalcode(xCode)
          xCode := &("{||" + xCode + "}")
       ENDIF
    ENDIF
-   IF HB_IsArray(xCode)
+   IF hb_IsArray(xCode)
       RETURN hwg_DoScript(xCode)
    ELSE
       RETURN Eval(xCode)

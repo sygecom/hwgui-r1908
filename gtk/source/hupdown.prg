@@ -42,7 +42,7 @@ METHOD HUpDown:New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, 
                   bSize, bPaint, ctoolt, tcolor, bcolor)
 
    IF vari != NIL
-      IF !HB_IsNumeric(vari)
+      IF !hb_IsNumeric(vari)
          vari := 0
          Eval(bSetGet, vari)
       ENDIF

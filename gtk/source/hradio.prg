@@ -29,7 +29,7 @@ METHOD HRadioGroup:New(vari, bSetGet)
    ::aButtons := {}
 
    IF vari != NIL
-      IF HB_IsNumeric(vari)
+      IF hb_IsNumeric(vari)
          ::value := vari
       ENDIF
       ::bSetGet := bSetGet

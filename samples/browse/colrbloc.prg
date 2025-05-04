@@ -459,15 +459,15 @@ FUNCTION MsgD(cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10)
    FOR nI := 1 TO nLen
        IF HB_PVALUE(nI) == NIL
          cVar += "NIL"
-       ELSEIF HB_IsBlock(HB_PVALUE(nI))
+       ELSEIF hb_IsBlock(HB_PVALUE(nI))
          cVar += "CODEBLOCK"
-       ELSEIF HB_IsNumeric(HB_PVALUE(nI))
+       ELSEIF hb_IsNumeric(HB_PVALUE(nI))
          cVar += Str(HB_PVALUE(nI))
-       ELSEIF HB_IsDate(HB_PVALUE(nI))
+       ELSEIF hb_IsDate(HB_PVALUE(nI))
          cVar += DTOS(HB_PVALUE(nI))
-       ELSEIF HB_IsLogical(HB_PVALUE(nI))
+       ELSEIF hb_IsLogical(HB_PVALUE(nI))
          cVar += IF(HB_PVALUE(nI), ".T.", ".F.")
-       ELSEIF HB_IsChar(HB_PVALUE(nI))
+       ELSEIF hb_IsChar(HB_PVALUE(nI))
          cVar += HB_PVALUE(nI)
        ENDIF
        cVar += "/"

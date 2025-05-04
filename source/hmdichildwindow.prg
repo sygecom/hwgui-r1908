@@ -181,7 +181,7 @@ METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
    LOCAL oCtrl
    LOCAL nFocus
 
-   nFocus := If(Hb_IsNumeric(::nFocus), ::nFocus, 0)
+   nFocus := If(hb_IsNumeric(::nFocus), ::nFocus, 0)
    //IF msg == WM_NCLBUTTONDBLCLK .AND. ::lChild
    //   RETURN 0
 
@@ -230,7 +230,7 @@ METHOD HMDIChildWindow:onEvent(msg, wParam, lParam)
    LOCAL oCtrl
    LOCAL nFocus
 
-   nFocus := IIf(Hb_IsNumeric(::nFocus), ::nFocus, 0)
+   nFocus := IIf(hb_IsNumeric(::nFocus), ::nFocus, 0)
    //IF msg == WM_NCLBUTTONDBLCLK .AND. ::lChild
    //   RETURN 0
 

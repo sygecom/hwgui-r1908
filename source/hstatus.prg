@@ -185,7 +185,7 @@ METHOD HStatus:SetIconPanel(nPart, cIcon, nWidth, nHeight)
    DEFAULT nHeight TO 16
    DEFAULT cIcon TO ""
 
-   IF HB_IsNumeric(cIcon) .OR. At(".", cIcon) == 0
+   IF hb_IsNumeric(cIcon) .OR. At(".", cIcon) == 0
       oIcon := HIcon():addResource(cIcon, nWidth, nHeight)
    ELSE
       oIcon := HIcon():addFile(cIcon, nWidth, nHeight)

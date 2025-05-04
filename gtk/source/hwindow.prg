@@ -27,7 +27,7 @@ STATIC FUNCTION onSize(oWnd, wParam, lParam)
    oWnd:nWidth  := hwg_LOWORD(lParam)
    oWnd:nHeight := hwg_HIWORD(lParam)
 
-   IF HB_IsBlock(oWnd:bSize)
+   IF hb_IsBlock(oWnd:bSize)
        Eval(oWnd:bSize, oWnd, hwg_LOWORD(lParam), hwg_HIWORD(lParam))
    ENDIF
 
@@ -318,7 +318,7 @@ METHOD HChildWindow:New(oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, 
                   bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
                   cAppName, oBmp, cHelp, nHelpId)
    ::oParent := HWindow():GetMain()
-   IF HB_IsObject(::oParent)
+   IF hb_IsObject(::oParent)
        ::handle := hwg_InitChildWindow(Self, ::szAppName, cTitle, cMenu, ;
           IIf(oIcon != NIL, oIcon:handle, NIL), IIf(oBmp != NIL, -1, clr), nStyle, ::nLeft, ;
           ::nTop, ::nWidth, ::nHeight, ::oParent:handle)
@@ -425,7 +425,7 @@ STATIC FUNCTION onCommand(oWnd, wParam, lParam)
    IF oWnd:aEvents != NIL .AND. ;
         (iItem := AScan(oWnd:aEvents, {|a|a[1] == iParHigh .AND. a[2] == iParLow})) > 0
         Eval(oWnd:aEvents[iItem, 3], oWnd, iParLow)
-   ELSEIF HB_IsArray(oWnd:menu) .AND. ;
+   ELSEIF hb_IsArray(oWnd:menu) .AND. ;
         (aMenu := hwg_FindMenuItem(oWnd:menu, iParLow, @iCont)) != NIL ;
         .AND. aMenu[1, iCont, 1] != NIL
       Eval(aMenu[1, iCont, 1])
@@ -473,9 +473,9 @@ STATIC FUNCTION onSysCommand(oWnd, wParam)
 
 /*
    IF wParam == SC_CLOSE
-       IF HB_IsBlock(oWnd:bDestroy)
+       IF hb_IsBlock(oWnd:bDestroy)
           i := Eval(oWnd:bDestroy, oWnd)
-          i := IIf(HB_IsLogical(i), i, .T.)
+          i := IIf(hb_IsLogical(i), i, .T.)
           IF !i
              RETURN 0
           ENDIF
@@ -506,7 +506,7 @@ STATIC FUNCTION onNotifyIcon(oWnd, wParam, lParam)
 /*
    IF wParam == ID_NOTIFYICON
        IF lParam == WM_LBUTTONDOWN
-          IF HB_IsBlock(oWnd:bNotify)
+          IF hb_IsBlock(oWnd:bNotify)
              Eval(oWnd:bNotify)
           ENDIF
        ELSEIF lParam == WM_RBUTTONDOWN

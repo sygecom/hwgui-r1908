@@ -334,7 +334,7 @@ METHOD HBitmap:AddResource(name)
    LOCAL i
    LOCAL aBmpSize
 
-   IF HB_IsNumeric(name)
+   IF hb_IsNumeric(name)
       name := LTrim(Str(name))
       lPreDefined := .T.
    ENDIF
@@ -469,7 +469,7 @@ METHOD HIcon:AddResource(name)
    LOCAL lPreDefined //:= .F. (value not used)
    LOCAL i
 
-   IF HB_IsNumeric(name)
+   IF hb_IsNumeric(name)
       name := LTrim(Str(name))
       lPreDefined := .T.
       HB_SYMBOL_UNUSED(lPreDefined)

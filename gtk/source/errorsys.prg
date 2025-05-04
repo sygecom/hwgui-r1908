@@ -79,21 +79,21 @@ FUNCTION hwg_ErrorMessage(oError)
    cMessage := IIf(oError:severity > ES_WARNING, "Error", "Warning") + " "
 
    // add subsystem name if available
-   IF HB_IsChar(oError:subsystem)
+   IF hb_IsChar(oError:subsystem)
       cMessage += oError:subsystem()
    ELSE
       cMessage += "???"
    ENDIF
 
    // add subsystem's error code if available
-   IF HB_IsNumeric(oError:subCode)
+   IF hb_IsNumeric(oError:subCode)
       cMessage += "/" + LTrim(Str(oError:subCode))
    ELSE
       cMessage += "/???"
    ENDIF
 
    // add error description if available
-   IF HB_IsChar(oError:description)
+   IF hb_IsChar(oError:description)
       cMessage += "  " + oError:description
    ENDIF
 

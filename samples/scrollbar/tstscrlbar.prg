@@ -31,7 +31,7 @@ STATIC FUNCTION stdScroll(oDlg, msg, wParam, lParam, nIncr)
    LOCAL yy
    LOCAL pg
 
-   IF !HB_IsNumeric(nIncr)
+   IF !hb_IsNumeric(nIncr)
       nIncr := 10
    ENDIF
    pg := Max(Round(nIncr / 5, 0), 2)

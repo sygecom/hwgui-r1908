@@ -91,7 +91,7 @@ RETURN nId
 
 METHOD HControl:AddName(cName)
 
-   IF !Empty(cName) .AND. HB_IsChar(cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
+   IF !Empty(cName) .AND. hb_IsChar(cName) .AND. ! ":" $ cName .AND. ! "[" $ cName
       ::xName := cName
 			__objAddData(::oParent, cName)
 	    ::oParent: & (cName) := Self
@@ -110,7 +110,7 @@ METHOD HControl:INIT()
       ELSEIF ::oParent:oFont != NIL
          hwg_SetCtrlFont(::handle, ::oParent:oFont:handle)
       ENDIF
-      IF HB_IsBlock(::bInit)
+      IF hb_IsBlock(::bInit)
          Eval(::bInit, Self)
       ENDIF
       o := ::oParent

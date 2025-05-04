@@ -77,7 +77,7 @@ METHOD New(oWndParent, xClass, aProp) CLASS HControlGen
    ::id      := ::NewId()
    ::style   := WS_VISIBLE + WS_CHILD + WS_DISABLED + SS_OWNERDRAW
 
-   IF HB_IsChar(xClass)
+   IF hb_IsChar(xClass)
       oXMLDesc := FindWidget(xClass)
    ELSE
       oXMLDesc := xClass
@@ -113,7 +113,7 @@ METHOD New(oWndParent, xClass, aProp) CLASS HControlGen
             ENDIF
          ELSEIF oXMLDesc:aItems[i]:title == "property"
             IF !Empty(oXMLDesc:aItems[i]:aItems)
-               IF HB_IsChar(oXMLDesc:aItems[i]:aItems[1]:aItems[1])
+               IF hb_IsChar(oXMLDesc:aItems[i]:aItems[1]:aItems[1])
                   oXMLDesc:aItems[i]:aItems[1]:aItems[1] := &("{||" + oXMLDesc:aItems[i]:aItems[1]:aItems[1] + "}")
                ENDIF
                xProperty := Eval(oXMLDesc:aItems[i]:aItems[1]:aItems[1])
@@ -239,12 +239,12 @@ METHOD SetProp(xName, xValue)
 
    LOCAL iIndex := 0
 
-   IF HB_IsChar(xName)
+   IF hb_IsChar(xName)
       xName := Lower(xName)
       //xName := AScan(::aProp, {|a|Lower(a[1]) == xName})
      iIndex := ::GetPropIndex(xName)
     ENDIF
-    IF HB_IsNumeric(xName)
+    IF hb_IsNumeric(xName)
       iIndex := xName
     ENDIF
 
@@ -875,7 +875,7 @@ STATIC FUNCTION BuildTree(oParent, aMenu)
       INSERT NODE oNode CAPTION aMenu[i, 2] TO oParent
       oNode:cargo := aMenu[i, 3]
       nMaxId := Max(nMaxId, aMenu[i, 3])
-      IF HB_IsArray(aMenu[i, 1])
+      IF hb_IsArray(aMenu[i, 1])
          BuildTree(oNode, aMenu[i, 1])
       ENDIF
    NEXT
@@ -901,7 +901,7 @@ STATIC FUNCTION FindTreeItem(aTree, nId, nPos)
    DO WHILE nPos <= Len(aTree)
       IF aTree[npos, 3] == nId
          RETURN aTree
-      ELSEIF HB_IsArray(aTree[npos, 1])
+      ELSEIF hb_IsArray(aTree[npos, 1])
          IF (aSubarr := FindTreeItem(aTree[nPos, 1], nId, @nPos1)) != NIL
             nPos := nPos1
             RETURN aSubarr
@@ -970,7 +970,7 @@ STATIC FUNCTION EditTree(aTree, oTree, nAction)
       nMaxId ++
       oNode:cargo := nMaxId
       IF (aSubarr := FindTreeItem(aTree, oTree:oSelected:cargo, @nPos)) != NIL
-         IF !HB_IsArray(aSubarr[nPos, 1])
+         IF !hb_IsArray(aSubarr[nPos, 1])
             aSubarr[nPos, 1] := {}
          ENDIF
          AAdd(aSubarr[nPos, 1], {NIL, "New", nMaxId, NIL})

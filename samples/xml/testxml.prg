@@ -74,7 +74,7 @@ FUNCTION NewItem(nItem)
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
       cName := oXmlNode:GetAttribute("name")
       FOR i := 1 TO Len(oXmlNode:aItems)
-         IF HB_IsChar(oXmlNode:aItems[i])
+         IF hb_IsChar(oXmlNode:aItems[i])
             cInfo := oXmlNode:aItems[i]
          ELSEIF oXmlNode:aItems[i]:title == "font"
             oItemFont := FontFromXML(oXmlNode:aItems[i])
@@ -122,7 +122,7 @@ FUNCTION NewItem(nItem)
             hwg_SetMenuCaption(, 1020 + nItem, cName)
          ENDIF
          FOR i := 1 TO Len(oXmlNode:aItems)
-            IF HB_IsChar(oXmlNode:aItems[i])
+            IF hb_IsChar(oXmlNode:aItems[i])
                IF cInfo != oXmlNode:aItems[i]
                   oXmlNode:aItems[i] := cInfo
                   lIniChanged := .T.

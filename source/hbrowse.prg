@@ -4746,7 +4746,7 @@ STATIC FUNCTION LenVal(xVal, cType, cPict)
 
    LOCAL nLen
 
-   IF !HB_IsChar(cType)
+   IF !hb_IsChar(cType)
       cType := ValType(xVal)
    ENDIF
 

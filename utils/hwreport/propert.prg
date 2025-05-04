@@ -208,7 +208,7 @@ RETURN NIL
 STATIC FUNCTION InitMarkL(aItem)
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Script:")
-   IF HB_IsChar(aItem[ITEM_SCRIPT])
+   IF hb_IsChar(aItem[ITEM_SCRIPT])
       hwg_SetDlgItemText(hDlg, IDC_EDIT1, aItem[ITEM_SCRIPT])
    ENDIF
 RETURN .T.
@@ -258,7 +258,7 @@ RETURN NIL
 STATIC FUNCTION InitFOpt()
 Local hDlg := hwg_GetModalHandle()
    hwg_SetDlgItemText(hDlg, IDC_TEXT1, "Variables:")
-   IF HB_IsChar(aPaintRep[FORM_VARS])
+   IF hb_IsChar(aPaintRep[FORM_VARS])
       hwg_SetDlgItemText(hDlg, IDC_EDIT1, aPaintRep[FORM_VARS])
    ENDIF
 RETURN .T.

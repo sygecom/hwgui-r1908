@@ -290,7 +290,7 @@ RETURN NIL
 METHOD HEdit:SetText(c)
 
   IF c != NIL
-     IF HB_IsObject(c)
+     IF hb_IsObject(c)
         //in run time return object
         RETURN NIL
      ENDIF

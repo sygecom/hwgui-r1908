@@ -89,13 +89,13 @@ METHOD HToolBar:INIT()
       ::Super:Init()
       For n := 1 TO len(::aItem)
 
-//         IF HB_IsBlock(::aItem[n, 7])
+//         IF hb_IsBlock(::aItem[n, 7])
 //
 //            ::oParent:AddEvent(BN_CLICKED, ::aItem[n, 2], ::aItem[n, 7])
 //
 //         ENDIF
 
-//         IF HB_IsArray(::aItem[n, 9])
+//         IF hb_IsArray(::aItem[n, 9])
 //
 //            ::aItem[n, 10] := hwg__CreatePopupMenu()
 //            aTemp := ::aItem[n, 9]
@@ -106,17 +106,17 @@ METHOD HToolBar:INIT()
 //            NEXT
 //
 //         ENDIF
-         IF HB_IsNumeric(::aItem[n, 1])
+         IF hb_IsNumeric(::aItem[n, 1])
             IF !Empty(::aItem[n, 1])
                AAdd(aButton, ::aItem[n, 1])
             ENDIF
-         ELSEIF  HB_IsChar(::aItem[n, 1])
+         ELSEIF  hb_IsChar(::aItem[n, 1])
             IF ".ico" $ lower(::aItem[n, 1]) //if ".ico" in lower(::aItem[n, 1])
                oImage := hIcon():AddFile(::aItem[n, 1])
             ELSE
                oImage := hBitmap():AddFile(::aItem[n, 1])
             ENDIF
-            IF HB_IsObject(oImage)
+            IF hb_IsObject(oImage)
                AAdd(aButton, Oimage:handle)
                ::aItem[n, 1] := Oimage:handle
             ENDIF
@@ -195,7 +195,7 @@ METHOD HToolBar:Notify(lParam)
        hwg_ToolBar_GetInfoTip(lParam, ::aItem[nPos, 8])
 
     ELSEIF nCode == TBN_DROPDOWN
-       IF HB_IsArray(::aItem[1, 9])
+       IF hb_IsArray(::aItem[1, 9])
        nid := hwg_ToolBar_SubMenuExGetId(lParam)
        nPos := AScan(::aItem, {|x|x[2] == nId})
        hwg_ToolBar_SubMenuEx(lParam, ::aItem[nPos, 10], ::oParent:handle)

@@ -31,14 +31,14 @@ FUNCTION Menu2Prg
    //            [<lDisabled: DISABLED>]       ;
 
    i := 1
-   IF HB_IsArray(aLMenu[i, 1])
+   IF hb_IsArray(aLMenu[i, 1])
       stroka := Space(2) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
       FWrite(han, _Chr(10) + stroka)
    ENDIF
 
    DO WHILE i <=  Len(aLMenu)
 
-      IF HB_IsArray(aLMenu[i, 1])
+      IF hb_IsArray(aLMenu[i, 1])
          //BuildTree(oNode, aMenu[i, 1])
          stroka := Space(2 * nMaxid) + "  MENU TITLE '" + aLMenu[i, 2] + "' ID " + Str(aLMenu[i, 3]) + " "
          FWrite(han, _Chr(10) + stroka)
@@ -143,7 +143,7 @@ FUNCTION Tool2Prg
                ENDIF
 
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF HB_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl1, k}))
+               IF hb_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl1, k}))
                   IF !Empty(cLocalParam)
                      // SubStr(oCtrl1:aMethods[k, 2], 1, j)
                      IF lsubParameter
@@ -374,7 +374,7 @@ FUNCTION Browse2Prg
                   temp := ""
                ENDIF
                //cMethod := " " + Upper(SubStr(oCtrl:aMethods[i, 1], 1))
-               IF HB_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl1, k}))
+               IF hb_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl1, k}))
                   temp :=  " {|" + temp + "| " +  cName + "( " + temp + " ) }"
                ELSE
                   temp := " {|" + temp + "| " + IIf(Len(cName) == 1, cName[1], cName[2]) + " }"
@@ -973,7 +973,7 @@ FUNCTION Ctrl2Prg
 
             ENDIF
 
-            IF HB_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl, i}))
+            IF hb_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl, i}))
                //
                IF oCtrl:cClass == "timer"
                   stroka := " {|" + temp + "| " + cName + "( " + temp + " ) }"
@@ -1490,7 +1490,7 @@ FUNCTION Ctrl2Prg
 
          IF oCtrl:aMethods[i, 2] != NIL .AND. !Empty(oCtrl:aMethods[i, 2])
 
-            IF HB_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl, i}))
+            IF hb_IsChar(cName := hwg_Callfunc("FUNC_NAME", {oCtrl, i}))
 
                FWrite(han, "STATIC FUNCTION " + cName + _Chr(10))
                FWrite(han, oCtrl:aMethods[i, 2])

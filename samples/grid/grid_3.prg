@@ -109,7 +109,7 @@ FUNCTION OnDispInfo(o, x, y)
     IF x > Lastrec() .AND. !lEof
         res := PQexec(conn, "FETCH FORWARD 10 FROM cursor_1")
 
-        IF !HB_IsChar(res)
+        IF !hb_IsChar(res)
 
             IF PQLastrec(res) != 10
                 lEof := .T.
@@ -158,7 +158,7 @@ FUNCTION CriaBase()
 
         conn := PQConnect("test", "localhost", "Rodrigo", "moreno", 5432)
 
-        IF HB_IsChar(conn)
+        IF hb_IsChar(conn)
             hwg_MsgInfo(conn)
             quit
         ENDIF

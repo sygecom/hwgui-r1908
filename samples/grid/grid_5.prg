@@ -311,7 +311,7 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
    LOCAL oGet
    LOCAL val
 
-    IF HB_IsObject(oCtrl)
+    IF hb_IsObject(oCtrl)
         n := oCtrl:id - 3000
 
         Eval(bChange, oCtrl, n)
@@ -328,13 +328,13 @@ STATIC FUNCTION __valid(value, oCtrl, aFields, bChange)
         FOR i := 1 TO Len(aFields)
             val := Fieldget(fieldpos(aFields[i, GET_FIELD]))
 
-            IF HB_IsDate(val) .AND. Empty(val)
+            IF hb_IsDate(val) .AND. Empty(val)
                 Fieldput(Fieldpos(aFields[i, GET_FIELD]), Date())
             ENDIF
 
             oGet := aFields[i, GET_OBJECT]
 
-            IF oGet:id != oCtrl:id .OR. HB_IsDate(val)
+            IF oGet:id != oCtrl:id .OR. hb_IsDate(val)
                 oGet:refresh()
             ENDIF
         NEXT

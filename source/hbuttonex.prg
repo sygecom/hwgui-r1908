@@ -212,7 +212,7 @@ METHOD HButtonEx:Init()
       // call in HBUTTON CLASS
 
       //::SetDefaultColor(, , .F.)
-      IF HB_IsNumeric(::handle) .AND. ::handle > 0 // TODO: verificar
+      IF hb_IsNumeric(::handle) .AND. ::handle > 0 // TODO: verificar
          nbs := hwg_GetWindowStyle(::handle)
 
          ::m_nTypeStyle := hwg_GetTheStyle(nbs, BS_TYPEMASK)
