@@ -14,17 +14,17 @@
 
 STATIC s_LogInitialPath := ""
 
-PROCEDURE hwg_ErrorSys
+PROCEDURE hwg_ErrorSys()
 
    ErrorBlock({|oError|DefError(oError)})
    s_LogInitialPath := "\" + CurDir() + IIf(Empty(CurDir()), "", "\")
 
-   RETURN
+RETURN
 
 STATIC FUNCTION DefError(oError)
+
    LOCAL cMessage
    LOCAL cDOSError
-
    LOCAL n
 
    // By default, division by zero results in zero
@@ -64,11 +64,9 @@ STATIC FUNCTION DefError(oError)
    //included aditional informations
 
    cMessage += Chr(13) + Chr(10)
-
    cMessage += Chr(13) + Chr(10) + hwg_version(1)
    cMessage += Chr(13) + Chr(10) + "Date:" + DToC(Date())
    cMessage += Chr(13) + Chr(10) + "Time:" + Time()
-
 
    MemoWrit(s_LogInitialPath + "Error.log", cMessage)
 
@@ -76,10 +74,10 @@ STATIC FUNCTION DefError(oError)
    hwg_EndWindow()
    hwg_PostQuitMessage(0)
 
-   RETURN .F.
-
+RETURN .F.
 
 FUNCTION hwg_ErrorMessage(oError)
+
    LOCAL cMessage
 
    // start error message
@@ -112,15 +110,14 @@ FUNCTION hwg_ErrorMessage(oError)
       cMessage += ": " + oError:operation
    ENDCASE
 
-   /*
-   IF !Empty(oError:Args)
-      cMessage += "Arguments: " + ValToPrgExp(oError:Args)
-   ENDIF
-   */
+   //IF !Empty(oError:Args)
+   //   cMessage += "Arguments: " + ValToPrgExp(oError:Args)
+   //ENDIF
 
-   RETURN cMessage
+RETURN cMessage
 
 FUNCTION hwg_WriteLog(cText, fname)
+
    LOCAL nHand
 
    fname := s_LogInitialPath + IIf(fname == NIL, "a.log", fname)
@@ -133,22 +130,25 @@ FUNCTION hwg_WriteLog(cText, fname)
    FWrite(nHand, cText + Chr(10))
    FClose(nHand)
 
-   RETURN NIL
+RETURN NIL
 
 STATIC FUNCTION ErrorPreview(cMess)
-   LOCAL oDlg, oEdit
 
-   INIT DIALOG oDlg TITLE "Error.log" ;
-        At 92, 61 SIZE 500, 500
+   LOCAL oDlg
+   LOCAL oEdit
 
-   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
+   INIT DIALOG oDlg TITLE "Error.log" AT 92, 61 SIZE 500, 500
+
+   @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 ;
+      STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
       COLOR 16777088 BACKCOLOR 0 ;
       ON GETFOCUS {||hwg_SendMessage(oEdit:handle, EM_SETSEL, 0, 0)}
 
    @ 200, 460 BUTTON "Close" ON CLICK {||EndDialog()} SIZE 100, 32
 
    ACTIVATE DIALOG oDlg
-   RETURN NIL
+
+RETURN NIL
 
 #pragma BEGINDUMP
 
