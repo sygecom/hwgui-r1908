@@ -1,7 +1,3 @@
-//
-// $Id: hbdocdef.ch 1615 2011-02-18 13:53:35Z mlacecilia $
-//
-
 // Harbour Project source code:
 // Header file common definition of HBDOc
 //

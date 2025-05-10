@@ -1,7 +1,3 @@
-/*
- *$Id: windows.ch 1891 2012-09-10 10:48:31Z lfbasso $
- */
-
 #ifndef _WINDOWS_CH_
 #define _WINDOWS_CH_
 

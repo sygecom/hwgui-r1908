@@ -1,7 +1,3 @@
-/*
- *$Id: guilib.ch 1906 2012-09-25 22:23:08Z lfbasso $
- */
-
 #ifndef _GUILIB_CH_
 #define _GUILIB_CH_
 
