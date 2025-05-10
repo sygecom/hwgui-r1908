@@ -1,6 +1,4 @@
 //
-// $Id: hwreport.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // Repbuild - Visual Report Builder
 // Main file
 //

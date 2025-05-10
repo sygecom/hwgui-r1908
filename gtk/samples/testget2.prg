@@ -1,6 +1,4 @@
 //
-// $Id: testget2.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // HWGUI - Harbour Linux (GTK) GUI library source code:
 // testget2.prg - GET system and Timer in dialog box sample
 //

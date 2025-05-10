@@ -1,6 +1,4 @@
 //
-// $Id: procscri.prg 1783 2011-10-20 11:24:27Z omm $
-//
 // Common procedures
 // Scripts
 //

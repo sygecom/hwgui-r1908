@@ -1,6 +1,4 @@
 //
-// $Id: hlistbox.prg 1815 2011-12-26 10:19:08Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HListBox class
 //

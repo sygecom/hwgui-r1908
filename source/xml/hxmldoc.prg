@@ -1,6 +1,4 @@
 //
-// $Id: hxmldoc.prg 1844 2012-06-06 11:11:24Z alkresin $
-//
 // Harbour XML Library
 // HXmlDoc class
 //

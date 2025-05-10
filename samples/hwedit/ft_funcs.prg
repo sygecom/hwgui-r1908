@@ -1,7 +1,3 @@
-//
-// $Id: ft_funcs.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
-
 // Harbour Project source code:
 // FT_FUNCS.Prg File support Functions For hbdoc
 //

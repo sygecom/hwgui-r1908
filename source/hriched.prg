@@ -1,6 +1,4 @@
 //
-// $Id: hriched.prg 1809 2011-12-19 06:22:05Z omm $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HRichEdit class
 //

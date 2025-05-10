@@ -1,6 +1,4 @@
 //
-// $Id: hsplash.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // HwGUI Harbour Win32 Gui Copyright (c) Alexander Kresin
 //
 // HwGUI HSplash Class

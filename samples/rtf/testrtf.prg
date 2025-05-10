@@ -1,6 +1,4 @@
 //
-// $Id: testrtf.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // The sample implemented by Sandro Freire <sandrorrfreire@yahoo.com.br>
 //
 

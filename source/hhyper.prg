@@ -1,6 +1,4 @@
 //
-// $Id: hhyper.prg 1876 2012-08-30 19:06:41Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HStaticLink class
 //

@@ -1,6 +1,4 @@
 //
-// $Id: viewer.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // JPEG, BMP, PNG, MNG, TIFF images viewer.
 // FreeImage.dll should present to use this sample
 //

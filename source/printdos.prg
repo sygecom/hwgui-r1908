@@ -1,6 +1,4 @@
 //
-// $Id: printdos.prg 1625 2011-08-05 13:14:50Z druzus $
-//
 // CLASS PrintDos
 //
 // Copyright (c) Sandro Freire <sandrorrfreire@yahoo.com.br>

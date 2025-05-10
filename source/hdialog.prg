@@ -1,6 +1,4 @@
 //
-// $Id: hdialog.prg 1907 2012-09-25 23:03:18Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HDialog class
 //

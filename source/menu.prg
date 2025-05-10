@@ -1,6 +1,4 @@
 //
-// $Id: menu.prg 1810 2011-12-25 20:22:41Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // Prg level menu functions
 //

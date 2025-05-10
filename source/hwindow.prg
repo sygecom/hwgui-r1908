@@ -1,6 +1,4 @@
 //
-// $Id: hwindow.prg 1904 2012-09-21 11:43:56Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HWindow class
 //

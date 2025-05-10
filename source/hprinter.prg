@@ -1,6 +1,4 @@
 //
-// $Id: hprinter.prg 1758 2011-10-06 16:43:30Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HPrinter class
 //

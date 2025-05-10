@@ -1,6 +1,4 @@
 //
-// $Id: barcode.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // Create Barcode for HWGUI application
 //
 // see example at utils\designer\samples\barcode.xml

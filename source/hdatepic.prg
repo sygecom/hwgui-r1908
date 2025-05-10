@@ -1,6 +1,4 @@
 //
-// $Id: hdatepic.prg 1889 2012-09-09 22:28:07Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HDatePicker class
 //

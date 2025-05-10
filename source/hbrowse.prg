@@ -1,6 +1,4 @@
 //
-// $Id: hbrowse.prg 1885 2012-09-05 19:34:25Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HBrowse class - browse databases and arrays
 //

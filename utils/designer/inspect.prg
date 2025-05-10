@@ -1,6 +1,4 @@
 //
-// $Id: inspect.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // Designer
 // Object Inspector
 //

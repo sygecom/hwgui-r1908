@@ -1,6 +1,4 @@
 //
-// $Id: dbview.prg 1881 2012-09-04 11:47:36Z lfbasso $
-//
 // HWGUI - Harbour Win32 and Linux (GTK) GUI library
 // dbview.prg - dbf browsing sample
 //

@@ -1,6 +1,4 @@
 //
-// $Id: htool.prg 1901 2012-09-19 23:12:50Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HToolBar class
 //

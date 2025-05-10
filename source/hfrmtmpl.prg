@@ -1,6 +1,4 @@
 //
-// $Id: hfrmtmpl.prg 1772 2011-10-13 07:59:40Z omm $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HFormTmpl Class
 //

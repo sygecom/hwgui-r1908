@@ -1,6 +1,4 @@
 //
-// $Id: designer.prg 1802 2011-11-28 07:13:40Z omm $
-//
 // Designer
 // Main file
 //

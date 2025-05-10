@@ -1,6 +1,4 @@
 //
-// $Id: calculator.prg
-//
 // HWGUI - Harbour Win32 GUI library
 //
 // Sample

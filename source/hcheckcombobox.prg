@@ -1,6 +1,4 @@
 //
-// $Id: hcombo.prg 1906 2012-09-25 22:23:08Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HCheckComboEx class
 //

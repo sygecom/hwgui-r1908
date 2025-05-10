@@ -1,6 +1,4 @@
 //
-// $Id: guimain.prg 1896 2012-09-14 13:39:10Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // Main prg level functions
 //

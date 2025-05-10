@@ -1,6 +1,4 @@
 //
-// $Id: hupdown.prg 1871 2012-08-28 04:45:59Z lfbasso $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // HUpDown class
 //

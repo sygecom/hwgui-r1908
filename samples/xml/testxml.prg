@@ -1,6 +1,4 @@
 //
-// $Id: testxml.prg 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // This sample demonstrates reading/writing XML file and handling menu items
 // while run-time.
 //

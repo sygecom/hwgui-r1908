@@ -1,6 +1,4 @@
 //
-// $Id: drawwidg.prg 1740 2011-09-23 12:06:53Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // Brushes handling
 //
