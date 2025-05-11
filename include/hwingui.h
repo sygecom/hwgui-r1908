@@ -1,7 +1,3 @@
-/*
- *$Id: hwingui.h 1615 2011-02-18 13:53:35Z mlacecilia $
- */
-
 #define HB_OS_WIN_32_USED
 
 #ifndef _WIN32_WINNT

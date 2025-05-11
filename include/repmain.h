@@ -1,7 +1,3 @@
-/*
- *$Id: repmain.h 1615 2011-02-18 13:53:35Z mlacecilia $
- */
-
 #define FORM_WIDTH       1
 #define FORM_HEIGHT      2
 #define FORM_XKOEF       3

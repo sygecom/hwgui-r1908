@@ -1,6 +1,4 @@
 //
-// $Id: htmlcore.h 1615 2011-02-18 13:53:35Z mlacecilia $
-//
 // This include file is meant to be included with any C/C++ source you
 // write which uses the cwebpage DLL.
 //

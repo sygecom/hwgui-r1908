@@ -1,6 +1,3 @@
-/*
- *$Id: missing.h 1615 2011-02-18 13:53:35Z mlacecilia $
- */
 #ifndef ___MISSING_H___
 #define ___MISSING_H___
 

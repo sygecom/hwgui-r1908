@@ -1,7 +1,3 @@
-/*
- *$Id: guilib.h 1625 2011-08-05 13:14:50Z druzus $
- */
-
 #include "hbapi.h"
 
 // activate this line to use pointers (unstable yet, use only for tests)
