@@ -1,6 +1,4 @@
 //
-// $Id: commond.c 1830 2012-01-12 12:47:11Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // C level common dialogs functions
 //

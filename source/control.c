@@ -1,6 +1,4 @@
 //
-// $Id: control.c 1897 2012-09-17 23:12:45Z marcosgambeta $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // C level controls functions
 //

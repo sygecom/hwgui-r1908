@@ -1,6 +1,4 @@
 //
-// $Id: freeimg.c 1625 2011-08-05 13:14:50Z druzus $
-//
 // FreeImage wrappers for Harbour/HwGUI
 //
 // Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>

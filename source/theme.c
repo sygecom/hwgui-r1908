@@ -1,6 +1,4 @@
 //
-// $Id: theme.c 1753 2011-10-02 12:34:53Z LFBASSO $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // Theme related functions
 //

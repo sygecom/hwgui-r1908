@@ -1,6 +1,4 @@
 //
-// $Id: xmlparse.c 1844 2012-06-06 11:11:24Z alkresin $
-//
 // Harbour XML Library
 // C level XML parse functions
 //

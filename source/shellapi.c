@@ -1,6 +1,4 @@
 //
-// $Id: shellapi.c 1857 2012-07-09 13:39:38Z lculik $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // Shell API wrappers
 //

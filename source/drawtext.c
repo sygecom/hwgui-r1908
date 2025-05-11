@@ -1,6 +1,4 @@
 //
-// $Id: drawtext.c 1835 2012-01-21 09:37:51Z mlacecilia $
-//
 // HWGUI - Harbour Win32 GUI library source code:
 // C level text functions
 //
