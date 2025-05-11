@@ -6,14 +6,14 @@
 // www - http://kresin.belgorod.su
 
 #include "guilib.h"
-#include "hbapi.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
-#include "gtk/gtk.h"
+#include <hbapi.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 #ifdef __XHARBOUR__
-#include "hbfast.h"
+#include <hbfast.h>
 #endif
 // static HWGUI_PEN default_pen = { HWGUI_OBJECT_PEN,1,GDK_LINE_SOLID, };
 

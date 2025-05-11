@@ -7,18 +7,18 @@
 //
 
 #include "guilib.h"
-#include "hbapi.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
-#include "gtk/gtk.h"
+#include <hbapi.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 
 #define DT_CENTER 1
 #define DT_RIGHT 2
 
 #ifdef __XHARBOUR__
-#include "hbfast.h"
+#include <hbfast.h>
 #endif
 
 void hwg_parse_color(HB_ULONG ncolor, GdkColor *pColor);

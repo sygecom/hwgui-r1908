@@ -7,7 +7,7 @@
 //
 
 #include <hbclass.ch>
-#include "hblang.ch"
+#include <hblang.ch>
 #include "hwgui.ch"
 
 #ifndef DLGC_WANTARROWS

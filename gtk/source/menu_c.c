@@ -7,14 +7,14 @@
 //
 
 #include "guilib.h"
-#include "hbapi.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "gtk/gtk.h"
+#include <hbapi.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 
 #ifdef __XHARBOUR__
-#include "hbfast.h"
+#include <hbfast.h>
 #endif
 #define FLAG_DISABLED 1
 #define FLAG_CHECK 2

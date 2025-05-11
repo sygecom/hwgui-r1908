@@ -7,17 +7,17 @@
 //
 
 #include "guilib.h"
-#include "hbapifs.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
+#include <hbapifs.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
 #include <locale.h>
-#include "gtk/gtk.h"
-#include "gdk/gdkkeysyms.h"
+#include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #ifdef __XHARBOUR__
-#include "hbfast.h"
+#include <hbfast.h>
 #else
-#include "hbapicls.h"
+#include <hbapicls.h>
 #endif
 #include "hwgtk.h"
 #define WM_MOVE 3

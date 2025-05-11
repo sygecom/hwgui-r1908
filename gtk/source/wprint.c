@@ -7,13 +7,13 @@
 //
 
 #include "guilib.h"
-#include "hbapi.h"
-#include "hbapifs.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
+#include <hbapi.h>
+#include <hbapifs.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
 
 #include <locale.h>
-#include "gtk/gtk.h"
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 
 #if !defined(__MINGW32__)

@@ -7,11 +7,11 @@
 //
 
 #include "guilib.h"
-#include "hbapifs.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
-#include "gtk/gtk.h"
+#include <hbapifs.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 
 extern GtkWidget *GetActiveWindow(void);

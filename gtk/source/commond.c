@@ -7,14 +7,14 @@
 //
 
 #include "guilib.h"
-#include "hbapifs.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
-#include "gtk/gtk.h"
+#include <hbapifs.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
+#include <gtk/gtk.h>
 #include "hwgtk.h"
 #ifdef __XHARBOUR__
-#include "hbfast.h"
+#include <hbfast.h>
 #endif
 
 extern GtkWidget *GetActiveWindow(void);

@@ -8,12 +8,12 @@
 
 #include <math.h>
 #include "guilib.h"
-#include "hbmath.h"
-#include "hbapifs.h"
-#include "hbapiitm.h"
-#include "hbvm.h"
-#include "item.api"
-#include "gtk/gtk.h"
+#include <hbmath.h>
+#include <hbapifs.h>
+#include <hbapiitm.h>
+#include <hbvm.h>
+#include <item.api>
+#include <gtk/gtk.h>
 
 void hwg_writelog(char *s)
 {
