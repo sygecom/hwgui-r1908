@@ -49,8 +49,8 @@ CLASS HWindow INHERIT HCustomWindow
    DATA oIcon, oBmp
    DATA lUpdated INIT .F.     // TRUE, if any GET is changed
    DATA lClipper INIT .F.
-   DATA GetList  INIT {}      // The array of GET items in the dialog
-   DATA KeyList  INIT {}      // The array of keys ( as Clipper's SET KEY )
+   DATA GetList INIT {}      // The array of GET items in the dialog
+   DATA KeyList INIT {}      // The array of keys ( as Clipper's SET KEY )
    DATA nLastKey INIT 0
 
    DATA aOffset
@@ -161,8 +161,8 @@ CLASS HMainWindow INHERIT HWindow
    }
    DATA nMenuPos
    DATA oNotifyIcon, bNotify, oNotifyMenu
-   DATA lTray       INIT .F.
-   DATA lActivated  INIT .F.
+   DATA lTray INIT .F.
+   DATA lActivated INIT .F.
 
    METHOD New(lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos, ;
                      oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;

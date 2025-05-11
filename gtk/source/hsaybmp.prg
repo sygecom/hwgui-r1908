@@ -13,8 +13,8 @@
 
 CLASS HSayBmp INHERIT HSayImage
 
-   DATA nOffsetV  INIT 0
-   DATA nOffsetH  INIT 0
+   DATA nOffsetV INIT 0
+   DATA nOffsetH INIT 0
    DATA nZoom
 
    METHOD New(oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;

@@ -22,7 +22,7 @@
 
 CLASS HMonthCalendar INHERIT HControl
 
-   CLASS VAR winclass   INIT "SysMonthCal32"
+   CLASS VAR winclass INIT "SysMonthCal32"
 
    DATA value
    DATA bChange

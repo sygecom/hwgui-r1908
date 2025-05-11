@@ -16,13 +16,13 @@
 
 CLASS HUpDown INHERIT HControl
 
-   CLASS VAR winclass   INIT "EDIT"
+   CLASS VAR winclass INIT "EDIT"
    DATA bSetGet
    DATA value
    DATA nLower INIT 0
    DATA nUpper INIT 999
    DATA nUpDownWidth INIT 12
-   DATA lChanged    INIT .F.
+   DATA lChanged INIT .F.
 
    METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
          oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, nUpDWidth, nLower, nUpper)

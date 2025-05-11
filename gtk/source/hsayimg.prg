@@ -13,7 +13,7 @@
 
 CLASS HSayImage INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+   CLASS VAR winclass INIT "STATIC"
    DATA oImage
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;

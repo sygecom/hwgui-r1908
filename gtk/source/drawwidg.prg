@@ -22,11 +22,11 @@
 
 CLASS HFont INHERIT HObject
 
-   CLASS VAR aFonts   INIT {}
+   CLASS VAR aFonts INIT {}
    DATA handle
    DATA name, width, height, weight
    DATA charset, italic, Underline, StrikeOut
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
 
    METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle, lLinux)
    METHOD Select(oFont)
@@ -131,10 +131,10 @@ RETURN NIL
 
 CLASS HPen INHERIT HObject
 
-   CLASS VAR aPens   INIT {}
+   CLASS VAR aPens INIT {}
    DATA handle
    DATA style, width, color
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
 
    METHOD Add(nStyle, nWidth, nColor)
    METHOD Get(nStyle, nWidth, nColor)
@@ -243,10 +243,10 @@ RETURN NIL
 
 CLASS HBrush INHERIT HObject
 
-   CLASS VAR aBrushes   INIT {}
+   CLASS VAR aBrushes INIT {}
    DATA handle
    DATA color
-   DATA nHatch   INIT 99
+   DATA nHatch INIT 99
    DATA nCounter INIT 1
 
    METHOD Add(nColor)
@@ -313,11 +313,11 @@ RETURN NIL
 
 CLASS HBitmap INHERIT HObject
 
-   CLASS VAR aBitmaps   INIT {}
+   CLASS VAR aBitmaps INIT {}
    DATA handle
    DATA name
    DATA nWidth, nHeight
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
 
    METHOD AddResource(name)
    METHOD AddFile(name, HDC)
@@ -449,10 +449,10 @@ RETURN NIL
 
 CLASS HIcon INHERIT HObject
 
-   CLASS VAR aIcons   INIT {}
+   CLASS VAR aIcons INIT {}
    DATA handle
    DATA name
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
    DATA nWidth, nHeight
 
    METHOD AddResource(name)

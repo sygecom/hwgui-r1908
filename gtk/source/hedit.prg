@@ -38,18 +38,18 @@
 
 CLASS HEdit INHERIT HControl
 
-   CLASS VAR winclass   INIT "EDIT"
-   DATA lMultiLine   INIT .F.
+   CLASS VAR winclass INIT "EDIT"
+   DATA lMultiLine INIT .F.
    DATA cType INIT "C"
    DATA bSetGet
    DATA bValid
    DATA bAnyEvent
    DATA cPicFunc, cPicMask
-   DATA lPicComplex  INIT .F.
-   DATA lFirst       INIT .T.
-   DATA lChanged     INIT .F.
-   DATA lMaxLength   INIT NIL
-   DATA nLastKey     INIT 0
+   DATA lPicComplex INIT .F.
+   DATA lFirst INIT .T.
+   DATA lChanged INIT .F.
+   DATA lMaxLength INIT NIL
+   DATA nLastKey INIT 0
 
    //METHOD New(oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
    //      oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctoolt, tcolor, bcolor, cPicture, lNoBorder, lMaxLength)

@@ -45,14 +45,14 @@ CLASS HDialog INHERIT HCustomWindow
    DATA fbox
    DATA menu
    DATA oPopup                // Context menu for a dialog
-   DATA lResult  INIT .F.     // Becomes TRUE if the OK button is pressed
+   DATA lResult INIT .F.     // Becomes TRUE if the OK button is pressed
    DATA lUpdated INIT .F.     // TRUE, if any GET is changed
    DATA lClipper INIT .F.     // Set it to TRUE for moving between GETs with ENTER key
-   DATA GetList  INIT {}      // The array of GET items in the dialog
-   DATA KeyList  INIT {}      // The array of keys ( as Clipper's SET KEY )
+   DATA GetList INIT {}      // The array of GET items in the dialog
+   DATA KeyList INIT {}      // The array of keys ( as Clipper's SET KEY )
    DATA lExitOnEnter INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
                               // Added by Sandro Freire
-   DATA lExitOnEsc   INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
+   DATA lExitOnEsc INIT .T. // Set it to False, if dialog shouldn't be ended after pressing ENTER key,
                               // Added by Sandro Freire
    DATA nLastKey INIT 0
    DATA oIcon, oBmp

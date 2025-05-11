@@ -104,27 +104,27 @@ RETURN Self
 //----------------------------------------------------//
 CLASS HBrowse INHERIT HControl
 
-   DATA winclass   INIT "BROWSE"
-   DATA active     INIT .T.
-   DATA lChanged   INIT .F.
-   DATA lDispHead  INIT .T.                    // Should I display headers ?
-   DATA lDispSep   INIT .T.                    // Should I display separators ?
+   DATA winclass INIT "BROWSE"
+   DATA active INIT .T.
+   DATA lChanged INIT .F.
+   DATA lDispHead INIT .T.                     // Should I display headers ?
+   DATA lDispSep INIT .T.                      // Should I display separators ?
    DATA aColumns                               // HColumn's array
    DATA rowCount                               // Number of visible data rows
-   DATA rowPos     INIT 1                      // Current row position
+   DATA rowPos INIT 1                          // Current row position
    DATA rowCurrCount INIT 0                    // Current number of rows
-   DATA colPos     INIT 1                      // Current column position
+   DATA colPos INIT 1                          // Current column position
    DATA nColumns                               // Number of visible data columns
    DATA nLeftCol                               // Leftmost column
    DATA xpos
    DATA freeze                                 // Number of columns to freeze
    DATA nRecords                               // Number of records in browse
-   DATA nCurrent      INIT 1                   // Current record
+   DATA nCurrent INIT 1                        // Current record
    DATA aArray                                 // An array browsed if this is BROWSE ARRAY
    DATA recCurr INIT 0
    DATA headColor                              // Header text color
    DATA sepColor INIT 12632256                 // Separators color
-   DATA lSep3d  INIT .F.
+   DATA lSep3d INIT .F.
    DATA varbuf                                 // Used on Edit()
    DATA tcolorSel, bcolorSel, brushSel
    DATA bSkip, bGoTo, bGoTop, bGoBot, bEof, bBof
@@ -136,10 +136,10 @@ CLASS HBrowse INHERIT HControl
    DATA x1, y1, x2, y2, width, height
    DATA minHeight INIT 0
    DATA lEditable INIT .F.
-   DATA lAppable  INIT .F.
-   DATA lAppMode  INIT .F.
+   DATA lAppable INIT .F.
+   DATA lAppMode INIT .F.
    DATA lAutoEdit INIT .F.
-   DATA lUpdated  INIT .F.
+   DATA lUpdated INIT .F.
    DATA lAppended INIT .F.
    DATA lAdjRight INIT .T.                     // Adjust last column to right
    DATA nHeadRows INIT 1                       // Rows in header
@@ -148,13 +148,13 @@ CLASS HBrowse INHERIT HControl
    DATA aSelected                              // An array of selected records numbers
    
    DATA area
-   DATA hScrollV  INIT NIL
-   DATA hScrollH  INIT NIL
-   DATA nScrollV  INIT 0
-   DATA nScrollH  INIT 0
+   DATA hScrollV INIT NIL
+   DATA hScrollH INIT NIL
+   DATA nScrollV INIT 0
+   DATA nScrollH INIT 0
    DATA oGet, nGetRec
-   DATA lBtnDbl   INIT .F.
-   DATA nCursor   INIT 0
+   DATA lBtnDbl INIT .F.
+   DATA nCursor INIT 0
 
    METHOD New(lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
                   bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, lNoBorder, ;

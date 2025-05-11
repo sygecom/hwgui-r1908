@@ -11,11 +11,11 @@
 
 CLASS HGraph INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+   CLASS VAR winclass INIT "STATIC"
    DATA aValues
    DATA nGraphs INIT 1
    DATA nType
-   DATA lGrid   INIT .F.
+   DATA lGrid INIT .F.
    DATA scaleX, scaleY
    DATA ymaxSet
    DATA tbrush

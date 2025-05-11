@@ -11,7 +11,7 @@
 
 CLASS HCheckButton INHERIT HControl
 
-   CLASS VAR winclass   INIT "BUTTON"
+   CLASS VAR winclass INIT "BUTTON"
    DATA bSetGet
    DATA value
 

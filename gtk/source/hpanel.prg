@@ -11,7 +11,7 @@
 
 CLASS HPanel INHERIT HControl
 
-   DATA winclass   INIT "PANEL"
+   DATA winclass INIT "PANEL"
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
                   bInit, bSize, bPaint, lDocked)

@@ -13,11 +13,11 @@
 CLASS HOwnButton INHERIT HControl
 
    CLASS VAR cPath SHARED
-   DATA winclass   INIT "OWNBTN"
+   DATA winclass INIT "OWNBTN"
    DATA lFlat
    DATA state
    DATA bClick
-   DATA lPress  INIT .F.
+   DATA lPress INIT .F.
    DATA text, ofont, xt, yt, widtht, heightt
    DATA bitmap, xb, yb, widthb, heightb, lTransp, trColor, oBitmap
    DATA lEnabled INIT .T.

@@ -24,9 +24,9 @@ CLASS HControl INHERIT HCustomWindow
 
    DATA id
    DATA tooltip
-   DATA lInit    INIT .F.
+   DATA lInit INIT .F.
    //DATA name // TODO: duplicated
-   DATA Anchor          INIT 0
+   DATA Anchor INIT 0
    DATA xName           HIDDEN
    ACCESS Name INLINE ::xName
    ASSIGN Name(cName) INLINE ::AddName(cName)
@@ -302,7 +302,7 @@ METHOD HControl:onAnchor(x, y, w, h)
 //- HStatus
 CLASS HStatus INHERIT HControl
 
-   CLASS VAR winclass   INIT "msctls_statusbar32"
+   CLASS VAR winclass INIT "msctls_statusbar32"
    DATA aParts
    METHOD New(oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint)
    METHOD Activate()
@@ -348,7 +348,7 @@ RETURN  NIL
 
 CLASS HStatic INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+   CLASS VAR winclass INIT "STATIC"
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
                   bSize, bPaint, ctoolt, tcolor, bcolor, lTransp)
@@ -384,7 +384,7 @@ RETURN NIL
 
 CLASS HButton INHERIT HControl
 
-   CLASS VAR winclass   INIT "BUTTON"
+   CLASS VAR winclass INIT "BUTTON"
    DATA bClick
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
@@ -505,7 +505,7 @@ RETURN NIL
 
 CLASS HGroup INHERIT HControl
 
-   CLASS VAR winclass   INIT "BUTTON"
+   CLASS VAR winclass INIT "BUTTON"
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
                   oFont, bInit, bSize, bPaint, tcolor, bcolor)
    METHOD Activate()
@@ -536,7 +536,7 @@ RETURN NIL
 
 CLASS HLine INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+   CLASS VAR winclass INIT "STATIC"
    DATA lVert
 
    METHOD New(oWndParent, nId, lVert, nLeft, nTop, nLength, bSize)

@@ -118,19 +118,19 @@ RETURN NIL
 
 CLASS HFormTmpl
 
-   CLASS VAR aForms   INIT {}
-   CLASS VAR maxId    INIT 0
+   CLASS VAR aForms INIT {}
+   CLASS VAR maxId INIT 0
    DATA oDlg
-   DATA aControls     INIT {}
+   DATA aControls INIT {}
    DATA aProp
    DATA aMethods
-   DATA aVars         INIT {}
-   DATA aNames        INIT {}
+   DATA aVars INIT {}
+   DATA aNames INIT {}
    DATA aFuncs
    DATA id
    DATA cId
-   DATA nContainer    INIT 0
-   DATA nCtrlId       INIT CONTROL_FIRST_ID
+   DATA nContainer INIT 0
+   DATA nCtrlId INIT CONTROL_FIRST_ID
    DATA cargo
 
    METHOD Read(fname, cId)
@@ -965,12 +965,12 @@ ENDCLASS
 CLASS HRepTmpl
 
    CLASS VAR aReports INIT {}
-   CLASS VAR maxId    INIT 0
+   CLASS VAR maxId INIT 0
    CLASS VAR aFontTable
-   DATA aControls     INIT {}
+   DATA aControls INIT {}
    DATA aProp
    DATA aMethods
-   DATA aVars         INIT {}
+   DATA aVars INIT {}
    DATA aFuncs
    DATA id
    DATA cId

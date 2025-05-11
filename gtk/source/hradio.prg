@@ -13,7 +13,7 @@ CLASS HRadioGroup INHERIT HObject
    CLASS VAR oGroupCurrent
    DATA handle INIT 0
    DATA aButtons
-   DATA value  INIT 1
+   DATA value INIT 1
    DATA bSetGet
 
    METHOD New(vari, bSetGet)
@@ -62,7 +62,7 @@ RETURN NIL
 
 CLASS HRadioButton INHERIT HControl
 
-   CLASS VAR winclass   INIT "BUTTON"
+   CLASS VAR winclass INIT "BUTTON"
    DATA oGroup
 
    METHOD New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;

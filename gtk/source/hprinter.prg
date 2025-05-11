@@ -11,16 +11,16 @@
 
 CLASS HPrinter INHERIT HObject
 
-   DATA hDC  INIT 0
-   DATA cPrinterName   INIT "DEFAULT"
-   DATA lPreview       INIT .F.
+   DATA hDC INIT 0
+   DATA cPrinterName INIT "DEFAULT"
+   DATA lPreview INIT .F.
    DATA nWidth, nHeight, nPWidth, nPHeight
-   DATA nOrient        INIT 1
+   DATA nOrient INIT 1
    DATA nHRes, nVRes                     // Resolution ( pixels/mm )
    DATA nPage
    DATA oFont
 
-   DATA lmm  INIT .F.
+   DATA lmm INIT .F.
    DATA nCurrPage, oTrackV, oTrackH
    DATA nZoom, xOffset, yOffset, x1, y1, x2, y2
 
@@ -247,11 +247,11 @@ RETURN NIL
 
 CLASS HGP_Font INHERIT HObject
 
-   CLASS VAR aFonts   INIT {}
+   CLASS VAR aFonts INIT {}
    DATA handle
    DATA name, height, weight
    DATA italic, Underline
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
 
    //METHOD Add(fontName, nWidth, nHeight, fnWeight, fdwItalic, fdwUnderline)
    METHOD Add(fontName, nHeight, fnWeight, fdwItalic, fdwUnderline)
@@ -329,9 +329,9 @@ RETURN NIL
 
 CLASS HGP_Pen INHERIT HObject
 
-   CLASS VAR aPens   INIT {}
+   CLASS VAR aPens INIT {}
    DATA width
-   DATA nCounter   INIT 1
+   DATA nCounter INIT 1
 
    METHOD Add(nWidth)
    METHOD Release()

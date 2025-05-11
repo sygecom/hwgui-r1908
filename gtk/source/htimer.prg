@@ -13,10 +13,10 @@
 
 CLASS HTimer INHERIT HObject
 
-   CLASS VAR aTimers   INIT {}
+   CLASS VAR aTimers INIT {}
    DATA id, tag
    DATA value
-   DATA lInit   INIT .F.
+   DATA lInit INIT .F.
    DATA oParent
    DATA bAction
 

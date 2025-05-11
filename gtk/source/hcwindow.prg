@@ -32,18 +32,18 @@ ENDCLASS
 CLASS HCustomWindow INHERIT HObject
 
    CLASS VAR oDefaultParent SHARED
-   DATA handle  INIT 0
+   DATA handle INIT 0
    DATA oParent
    DATA title
    DATA type
    DATA nTop, nLeft, nWidth, nHeight
    DATA tcolor, bcolor, brush
    DATA style
-   DATA extStyle  INIT 0
+   DATA extStyle INIT 0
    DATA lHide INIT .F.
    DATA oFont
-   DATA aEvents   INIT {}
-   DATA aNotify   INIT {}
+   DATA aEvents INIT {}
+   DATA aNotify INIT {}
    DATA aControls INIT {}
    DATA bInit
    DATA bDestroy
@@ -53,16 +53,16 @@ CLASS HCustomWindow INHERIT HObject
    DATA bLostFocus
    DATA bOther
    DATA cargo
-   DATA HelpId   INIT 0
-   DATA nCurWidth    INIT 0
-   DATA nCurHeight   INIT 0
-   DATA nScrollPos   INIT 0
+   DATA HelpId INIT 0
+   DATA nCurWidth INIT 0
+   DATA nCurHeight INIT 0
+   DATA nScrollPos INIT 0
    DATA rect
    DATA nScrollBars INIT -1
-   DATA minWidth   INIT - 1
-   DATA maxWidth   INIT - 1
-   DATA minHeight  INIT - 1
-   DATA maxHeight  INIT - 1
+   DATA minWidth INIT - 1
+   DATA maxWidth INIT - 1
+   DATA minHeight INIT - 1
+   DATA maxHeight INIT - 1
 
    
    

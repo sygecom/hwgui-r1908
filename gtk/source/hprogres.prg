@@ -14,7 +14,7 @@
 
 CLASS HProgressBar INHERIT HControl
 
-   CLASS VAR winclass   INIT "ProgressBar"
+   CLASS VAR winclass INIT "ProgressBar"
    DATA maxPos
    DATA lNewBox
    DATA nCount INIT 0

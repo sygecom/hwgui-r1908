@@ -19,9 +19,9 @@
 
 CLASS HTab INHERIT HControl
 
-   CLASS VAR winclass   INIT "SysTabControl32"
+   CLASS VAR winclass INIT "SysTabControl32"
    DATA aTabs
-   DATA aPages  INIT {}
+   DATA aPages INIT {}
    DATA bChange, bChange2
    DATA oTemp
    DATA bAction
@@ -40,7 +40,7 @@ CLASS HTab INHERIT HControl
    METHOD GetActivePage(nFirst, nEnd)
 
    HIDDEN:
-     DATA nActive  INIT 0         // Active Page
+     DATA nActive INIT 0         // Active Page
 
 ENDCLASS
 
