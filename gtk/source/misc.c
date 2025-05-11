@@ -31,7 +31,7 @@ void hwg_writelog(char *s)
   {
     handle = hb_fsCreate("ac.log", 0);
   }
-  
+
   hb_fsSeek(handle, 0, SEEK_END);
   hb_fsWrite(handle, (unsigned char *)s, strlen(s));
   hb_fsWrite(handle, (unsigned char *)"\n\r", 2);

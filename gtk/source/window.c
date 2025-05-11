@@ -204,12 +204,13 @@ HB_FUNC(HWG_ACTIVATEDIALOG)
   if (HB_ISNIL(2) || !hb_parl(2))
   {
     gtk_main();
-  }  
+  }
 }
 
 void ProcessMessage(void)
 {
-  while (g_main_context_iteration(NULL, FALSE));
+  while (g_main_context_iteration(NULL, FALSE))
+    ;
 }
 
 HB_FUNC(HWG_PROCESSMESSAGE)
@@ -226,7 +227,7 @@ gint cb_signal_size(GtkWidget *widget, GtkAllocation *allocation, gpointer data)
   {
     pSym_onEvent = hb_dynsymFindName("ONEVENT");
   }
-  
+
   if (pSym_onEvent && gObject)
   {
     HB_LONG p3 = ((HB_ULONG)(allocation->width) & 0xFFFF) | (((HB_ULONG)(allocation->height) << 16) & 0xFFFF0000);
@@ -694,7 +695,7 @@ static gint cb_event(GtkWidget *widget, GdkEvent *event, gchar *data)
     {
       sscanf((char *)data, "%ld %ld %ld", &p1, &p2, &p3);
     }
-    
+
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush((PHB_ITEM)gObject);
     hb_vmPushLong(p1);

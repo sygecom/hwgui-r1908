@@ -139,12 +139,12 @@ HB_FUNC(HWG_GETPRINTERS)
         if (*ptr)
         {
           ptr++;
-        }  
+        }
       }
       else
       {
         break;
-      }  
+      }
     }
     hb_xfree(cBuffer);
   }
@@ -156,7 +156,7 @@ HB_FUNC(HWG_GETPRINTERS)
   else
   {
     hb_ret();
-  }  
+  }
 }
 
 /*
@@ -355,7 +355,7 @@ HB_FUNC(HWG_GP_DRAWTEXT)
     else
     {
       x1 = x1 + ((x2 - x1 - dWidth) / 2);
-    }  
+    }
   }
 
   delta = gnome_font_get_size(print->font) / 2;

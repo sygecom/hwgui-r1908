@@ -240,7 +240,7 @@ HB_FUNC(HWG_EDIT_SETTEXT)
   else
   {
     gtk_entry_set_text((GtkEntry *)hCtrl, gcTitle);
-  }  
+  }
   g_free(gcTitle);
 }
 
@@ -262,7 +262,7 @@ HB_FUNC(HWG_EDIT_GETTEXT)
   {
     cptr = (char *)gtk_entry_get_text((GtkEntry *)hCtrl);
   }
-  
+
   if (*cptr)
   {
     cptr = hwg_convert_from_utf8(cptr);
@@ -272,7 +272,7 @@ HB_FUNC(HWG_EDIT_GETTEXT)
   else
   {
     hb_retc("");
-  }  
+  }
 }
 
 HB_FUNC(HWG_EDIT_SETPOS)

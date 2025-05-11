@@ -65,7 +65,7 @@ HB_FUNC(HWG__ADDMENUITEM)
   {
     lCheck = TRUE;
   }
-  
+
   if (lCheck)
   {
     gchar *gcptr = hwg_convert_to_utf8(lpNewItem);
@@ -82,7 +82,7 @@ HB_FUNC(HWG__ADDMENUITEM)
   {
     hMenu = (GtkWidget *)gtk_separator_menu_item_new();
   }
-  
+
   if (hb_parl(7))
   {
     GtkWidget *hSubMenu = gtk_menu_new();
