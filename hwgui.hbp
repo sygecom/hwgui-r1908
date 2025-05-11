@@ -1,7 +1,3 @@
-#
-# $Id: hwgui.hbp 1838 2012-01-28 18:38:57Z mlacecilia $
-#
-
 -3rd=hbide_version=1.0
 -3rd=hbide_type=Lib
 -3rd=hbide_title=hwgui

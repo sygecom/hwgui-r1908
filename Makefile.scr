@@ -1,4 +1,3 @@
-# $Id: Makefile.scr 1625 2011-08-05 13:14:50Z druzus $
 # makefile for MINGW compiler
 # Building of libhwgui.a - Harbour Win32 GUI library
 

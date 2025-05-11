@@ -1,7 +1,3 @@
-#
-# $Id: hwgui.hbm 1615 2011-02-18 13:53:35Z mlacecilia $
-#
-
 # Filelist for hwgui lib to be included by two .hbp files.
 # Don't use this file directly.
 

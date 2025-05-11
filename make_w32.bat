@@ -1,6 +1,5 @@
 @echo off
 
-rem $Id: make_w32.bat 1623 2011-04-02 07:34:40Z druzus $
 rem
 rem Batch file for building under Open-Watcom (OW)
 rem

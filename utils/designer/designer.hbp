@@ -1,7 +1,3 @@
-#
-# $Id: designer.hbp 1623 2011-04-02 07:34:40Z druzus $
-#
-
 #-i..\..\include
 #-L..\..\lib
 #-lhwgui.lib

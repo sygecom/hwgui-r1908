@@ -1,7 +1,4 @@
 #!/bin/sh
-#
-# $Id: make_gnu.sh 1623 2011-04-02 07:34:40Z druzus $
-#
 
 # ---------------------------------------------------------------
 # simple script to build HWGui GTK binaries using [x]hb*scripts
