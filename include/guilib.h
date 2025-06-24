@@ -3,8 +3,14 @@
 // activate this line to use pointers (unstable yet, use only for tests)
 //#define HWG_USE_POINTER_ITEM
 
+#if defined(__cplusplus) && defined(__HARBOURPP__)
+constexpr int WND_DLG_RESOURCE = 10;
+constexpr int WND_DLG_NORESOURCE = 11;
+#else
 #define WND_DLG_RESOURCE      10
 #define WND_DLG_NORESOURCE    11
+#endif
+
 #define ST_ALIGN_HORIZ        0     // Icon/bitmap on the left, text on the right
 #define ST_ALIGN_VERT         1     // Icon/bitmap on the top, text on the bottom
 #define ST_ALIGN_HORIZ_RIGHT  2     // Icon/bitmap on the right, text on the left
