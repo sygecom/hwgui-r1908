@@ -3,6 +3,15 @@
 // activate this line to use pointers (unstable yet, use only for tests)
 //#define HWG_USE_POINTER_ITEM
 
+// TODO: usar nullptr quando for
+// compilador C e padrão C23 ou superior
+// compilador C++ e padrão C++11 ou superior
+#if defined(__cplusplus) && defined(__HARBOURPP__)
+#define HWG_NULLPTR nullptr
+#else
+#define HWG_NULLPTR NULL
+#endif
+
 #if defined(__cplusplus) && defined(__HARBOURPP__)
 constexpr int WND_DLG_RESOURCE = 10;
 constexpr int WND_DLG_NORESOURCE = 11;
