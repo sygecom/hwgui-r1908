@@ -41,7 +41,7 @@ void cb_signal(GtkWidget *widget, gchar *data);
 gint cb_signal_size(GtkWidget *widget, GtkAllocation *allocation, gpointer data);
 void set_event(gpointer handle, char *cSignal, long int p1, long int p2, long int p3);
 
-PHB_DYNS pSym_onEvent = NULL;
+PHB_DYNS pSym_onEvent = HWG_NULLPTR;
 
 #define HB_IT_DEFAULT ((HB_TYPE)0x40000)
 HB_LONG Prevp2 = -1;
@@ -88,7 +88,7 @@ HB_FUNC(HWG_INITMAINWINDOW)
   int y = hb_parnl(9);
   int width = hb_parnl(10);
   int height = hb_parnl(11);
-  PHWGUI_PIXBUF szFile = HB_ISPOINTER(5) ? (PHWGUI_PIXBUF)HB_PARHANDLE(5) : NULL;
+  PHWGUI_PIXBUF szFile = HB_ISPOINTER(5) ? (PHWGUI_PIXBUF)HB_PARHANDLE(5) : HWG_NULLPTR;
 
   PHB_ITEM temp;
 
@@ -112,7 +112,7 @@ HB_FUNC(HWG_INITMAINWINDOW)
   // gtk_container_add( GTK_CONTAINER(hWnd), (GtkWidget*)box );
   gtk_box_pack_end(GTK_BOX(vbox), (GtkWidget *)box, TRUE, TRUE, 0);
 
-  temp = HB_PUTHANDLE(NULL, box);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, box);
   SetObjectVar(pObject, "_FBOX", temp);
 
   hb_itemRelease(temp);
@@ -120,7 +120,7 @@ HB_FUNC(HWG_INITMAINWINDOW)
   SetWindowObject(hWnd, pObject);
   g_object_set_data((GObject *)hWnd, "fbox", (gpointer)box);
   all_signal_connect(G_OBJECT(hWnd));
-  g_signal_connect_after(box, "size-allocate", G_CALLBACK(cb_signal_size), NULL);
+  g_signal_connect_after(box, "size-allocate", G_CALLBACK(cb_signal_size), HWG_NULLPTR);
   set_event((gpointer)hWnd, "configure_event", 0, 0, 0);
 
   HB_RETHANDLE(hWnd);
@@ -138,7 +138,7 @@ HB_FUNC(HWG_CREATEDLG)
   int width = hb_itemGetNI(GetObjectVar(pObject, "NWIDTH"));
   int height = hb_itemGetNI(GetObjectVar(pObject, "NHEIGHT"));
   PHB_ITEM pIcon = GetObjectVar(pObject, "OICON");
-  PHWGUI_PIXBUF szFile = NULL;
+  PHWGUI_PIXBUF szFile = HWG_NULLPTR;
   PHB_ITEM temp;
 
   if (!HB_IS_NIL(pIcon))
@@ -163,7 +163,7 @@ HB_FUNC(HWG_CREATEDLG)
   box = (GtkFixed *)gtk_fixed_new();
   gtk_box_pack_end(GTK_BOX(vbox), (GtkWidget *)box, TRUE, TRUE, 0);
 
-  temp = HB_PUTHANDLE(NULL, box);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, box);
   SetObjectVar(pObject, "_FBOX", temp);
 
   hb_itemRelease(temp);
@@ -171,7 +171,7 @@ HB_FUNC(HWG_CREATEDLG)
   SetWindowObject(hWnd, pObject);
   g_object_set_data((GObject *)hWnd, "fbox", (gpointer)box);
   all_signal_connect(G_OBJECT(hWnd));
-  g_signal_connect(box, "size-allocate", G_CALLBACK(cb_signal_size), NULL);
+  g_signal_connect(box, "size-allocate", G_CALLBACK(cb_signal_size), HWG_NULLPTR);
   set_event((gpointer)hWnd, "configure_event", 0, 0, 0);
 
   HB_RETHANDLE(hWnd);
@@ -183,7 +183,7 @@ HB_FUNC(HWG_CREATEDLG)
 HB_FUNC(HWG_ACTIVATEMAINWINDOW)
 {
   GtkWidget *hWnd = (GtkWidget *)HB_PARHANDLE(1);
-  // HACCEL hAcceler = ( HB_ISNIL(2) )? NULL : (HACCEL) hb_parnl(2);
+  // HACCEL hAcceler = ( HB_ISNIL(2) )? HWG_NULLPTR : (HACCEL) hb_parnl(2);
 
   if (!HB_ISNIL(3) && hb_parl(3))
   {
@@ -209,7 +209,7 @@ HB_FUNC(HWG_ACTIVATEDIALOG)
 
 void ProcessMessage(void)
 {
-  while (g_main_context_iteration(NULL, FALSE))
+  while (g_main_context_iteration(HWG_NULLPTR, FALSE))
     ;
 }
 
@@ -602,7 +602,7 @@ static gint cb_event(GtkWidget *widget, GdkEvent *event, gchar *data)
   HB_LONG lRes;
   gunichar uchar;
   gchar *tmpbuf;
-  gchar *res = NULL;
+  gchar *res = HWG_NULLPTR;
 
   if (!pSym_onEvent)
   {
@@ -751,7 +751,7 @@ void all_signal_connect(gpointer hWnd)
 GtkWidget *GetActiveWindow(void)
 {
   GList *pList = gtk_window_list_toplevels();
-  return (pList) ? pList->data : NULL;
+  return (pList) ? pList->data : HWG_NULLPTR;
 }
 
 HB_FUNC(HWG_GETACTIVEWINDOW)
@@ -778,7 +778,7 @@ void SetWindowObject(GtkWidget *hWnd, PHB_ITEM pObject)
   }
   else
   {
-    g_object_set_data((GObject *)hWnd, "obj", (gpointer)NULL);
+    g_object_set_data((GObject *)hWnd, "obj", (gpointer)HWG_NULLPTR);
   }
 }
 
@@ -877,7 +877,7 @@ HB_FUNC(HWG_RELEASEOBJECT)
   if (dwNewLong)
   {
     hb_itemRelease((PHB_ITEM)dwNewLong);
-    g_object_set_data(hWnd, "obj", (gpointer)NULL);
+    g_object_set_data(hWnd, "obj", (gpointer)HWG_NULLPTR);
   }
   else
   {
@@ -919,11 +919,11 @@ gchar *hwg_convert_to_utf8(const char *szText)
 {
   if (*szAppLocale)
   {
-    return g_convert(szText, -1, "UTF-8", szAppLocale, NULL, NULL, NULL);
+    return g_convert(szText, -1, "UTF-8", szAppLocale, HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
   else
   {
-    return g_locale_to_utf8(szText, -1, NULL, NULL, NULL);
+    return g_locale_to_utf8(szText, -1, HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
 }
 
@@ -931,11 +931,11 @@ gchar *hwg_convert_from_utf8(const char *szText)
 {
   if (*szAppLocale)
   {
-    return g_convert(szText, -1, szAppLocale, "UTF-8", NULL, NULL, NULL);
+    return g_convert(szText, -1, szAppLocale, "UTF-8", HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
   else
   {
-    return g_locale_from_utf8(szText, -1, NULL, NULL, NULL);
+    return g_locale_from_utf8(szText, -1, HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
 }
 

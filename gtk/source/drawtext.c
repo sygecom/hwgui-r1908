@@ -48,7 +48,7 @@ HB_FUNC(HWG_TEXTOUT)
 
   pango_layout_set_text(hDC->layout, cText, -1);
   gdk_draw_layout_with_colors(hDC->window, hDC->gc, hb_parni(2), hb_parni(3), hDC->layout,
-                              (hDC->fcolor != -1) ? &fcolor : NULL, (hDC->bcolor != -1) ? &bcolor : NULL);
+                              (hDC->fcolor != -1) ? &fcolor : HWG_NULLPTR, (hDC->bcolor != -1) ? &bcolor : HWG_NULLPTR);
   g_free(cText);
 }
 
@@ -71,7 +71,7 @@ HB_FUNC(HWG_DRAWTEXT)
 
   pango_layout_set_text(hDC->layout, cText, -1);
 
-  pango_layout_get_pixel_extents(hDC->layout, &rc, NULL);
+  pango_layout_get_pixel_extents(hDC->layout, &rc, HWG_NULLPTR);
   pango_layout_set_width(hDC->layout, -1);
 
   if (!HB_ISNIL(7) && (hb_parni(7) & (DT_CENTER | DT_RIGHT)) && (rc.width < (iWidth - 10)))
@@ -81,7 +81,7 @@ HB_FUNC(HWG_DRAWTEXT)
     pango_layout_set_alignment(hDC->layout, (hb_parni(7) & DT_CENTER) ? PANGO_ALIGN_CENTER : PANGO_ALIGN_RIGHT);
   }
   gdk_draw_layout_with_colors(hDC->window, hDC->gc, hb_parni(3), hb_parni(4), hDC->layout,
-                              (hDC->fcolor != -1) ? &fcolor : NULL, (hDC->bcolor != -1) ? &bcolor : NULL);
+                              (hDC->fcolor != -1) ? &fcolor : HWG_NULLPTR, (hDC->bcolor != -1) ? &bcolor : HWG_NULLPTR);
 
   g_free(cText);
 }
@@ -103,21 +103,21 @@ HB_FUNC(HWG_GETTEXTMETRIC)
     int height, width;
 
     context = pango_layout_get_context(hDC->layout);
-    metrics = pango_context_get_metrics(context, hDC->hFont, NULL);
+    metrics = pango_context_get_metrics(context, hDC->hFont, HWG_NULLPTR);
     height =
         PANGO_PIXELS(pango_font_metrics_get_ascent(metrics)) + PANGO_PIXELS(pango_font_metrics_get_descent(metrics));
     width = PANGO_PIXELS(pango_font_metrics_get_approximate_char_width(metrics));
     pango_font_metrics_unref(metrics);
 
-    temp = _itemPutNL(NULL, height);
+    temp = _itemPutNL(HWG_NULLPTR, height);
     _itemArrayPut(aMetr, 1, temp);
     _itemRelease(temp);
 
-    temp = _itemPutNL(NULL, width);
+    temp = _itemPutNL(HWG_NULLPTR, width);
     _itemArrayPut(aMetr, 2, temp);
     _itemRelease(temp);
 
-    temp = _itemPutNL(NULL, width);
+    temp = _itemPutNL(HWG_NULLPTR, width);
     _itemArrayPut(aMetr, 3, temp);
     _itemRelease(temp);
 
@@ -137,7 +137,7 @@ HB_FUNC(HWG_GETTEXTSIZE)
   {
     pango_layout_set_text(hDC->layout, cText, -1);
   }
-  pango_layout_get_pixel_extents(hDC->layout, &rc, NULL);
+  pango_layout_get_pixel_extents(hDC->layout, &rc, HWG_NULLPTR);
 
   hb_itemPutNL(hb_arrayGetItemPtr(aMetr, 1), rc.width);
   hb_itemPutNL(hb_arrayGetItemPtr(aMetr, 2), rc.height);
@@ -152,19 +152,19 @@ HB_FUNC(HWG_GETCLIENTAREA)
      PHB_ITEM aMetr = _itemArrayNew( 4 );
      PHB_ITEM temp;
 
-     temp = _itemPutNL( NULL, pps->rcPaint.left );
+     temp = _itemPutNL( HWG_NULLPTR, pps->rcPaint.left );
      _itemArrayPut( aMetr, 1, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, pps->rcPaint.top );
+     temp = _itemPutNL( HWG_NULLPTR, pps->rcPaint.top );
      _itemArrayPut( aMetr, 2, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, pps->rcPaint.right );
+     temp = _itemPutNL( HWG_NULLPTR, pps->rcPaint.right );
      _itemArrayPut( aMetr, 3, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, pps->rcPaint.bottom );
+     temp = _itemPutNL( HWG_NULLPTR, pps->rcPaint.bottom );
      _itemArrayPut( aMetr, 4, temp );
      _itemRelease( temp );
 
@@ -228,7 +228,7 @@ HB_FUNC(HWG_EXTTEXTOUT)
       &rc,	        // optional clipping and/or opaquing rectangle
       (LPCTSTR) cText,	// points to string
       strlen( cText ),	// number of characters in string
-      NULL        	// pointer to array of intercharacter spacing values
+      HWG_NULLPTR        	// pointer to array of intercharacter spacing values
      );
   */
 }

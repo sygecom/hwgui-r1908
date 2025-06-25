@@ -63,7 +63,7 @@ HB_FUNC(HWG_INVALIDATERECT)
         rc.height = hb_parni(6) - rc.y + 1;
      }
      gdk_window_invalidate_rect( ((GtkWidget*)hb_parnl(1))->window,
-        ( hb_pcount() > 2 )? &rc:NULL, ( HB_ISNUM(2) )? hb_parni(2):1 );
+        ( hb_pcount() > 2 )? &rc:HWG_NULLPTR, ( HB_ISNUM(2) )? hb_parni(2):1 );
   */
 }
 
@@ -235,11 +235,11 @@ HB_FUNC(HWG_LOADICON)
   /*
      if (HB_ISNUM(1))
      {
-        hb_retnl( (HB_LONG) LoadIcon( NULL, (LPCTSTR) hb_parnl( 1 ) ) );
+        hb_retnl( (HB_LONG) LoadIcon( HWG_NULLPTR, (LPCTSTR) hb_parnl( 1 ) ) );
      }
      else
      {
-        hb_retnl( (HB_LONG) LoadIcon( GetModuleHandle( NULL ), (LPCTSTR) hb_parc( 1 ) ) );
+        hb_retnl( (HB_LONG) LoadIcon( GetModuleHandle( HWG_NULLPTR ), (LPCTSTR) hb_parc( 1 ) ) );
      }
   */
 }
@@ -263,11 +263,11 @@ HB_FUNC(HWG_LOADBITMAP)
   /*
      if (HB_ISNUM(1))
      {
-       hb_retnl( (HB_LONG) LoadBitmap( NULL, (LPCTSTR) hb_parnl( 1 ) ) );
+       hb_retnl( (HB_LONG) LoadBitmap( HWG_NULLPTR, (LPCTSTR) hb_parnl( 1 ) ) );
      }
      else
      {
-       hb_retnl( (HB_LONG) LoadBitmap( GetModuleHandle( NULL ), (LPCTSTR) hb_parc( 1 ) ) );
+       hb_retnl( (HB_LONG) LoadBitmap( GetModuleHandle( HWG_NULLPTR ), (LPCTSTR) hb_parc( 1 ) ) );
      }
   */
 }
@@ -313,11 +313,11 @@ HB_FUNC(HWG_GETBITMAPSIZE)
   PHB_ITEM aMetr = _itemArrayNew(2);
   PHB_ITEM temp;
 
-  temp = _itemPutNL(NULL, gdk_pixbuf_get_width(obj->handle));
+  temp = _itemPutNL(HWG_NULLPTR, gdk_pixbuf_get_width(obj->handle));
   _itemArrayPut(aMetr, 1, temp);
   _itemRelease(temp);
 
-  temp = _itemPutNL(NULL, gdk_pixbuf_get_height(obj->handle));
+  temp = _itemPutNL(HWG_NULLPTR, gdk_pixbuf_get_height(obj->handle));
   _itemArrayPut(aMetr, 2, temp);
   _itemRelease(temp);
 
@@ -328,7 +328,7 @@ HB_FUNC(HWG_GETBITMAPSIZE)
 HB_FUNC(HWG_OPENBITMAP)
 {
   PHWGUI_PIXBUF hpix;
-  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(1), NULL);
+  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(1), HWG_NULLPTR);
 
   if (handle)
   {
@@ -342,7 +342,7 @@ HB_FUNC(HWG_OPENBITMAP)
 HB_FUNC(HWG_OPENIMAGE)
 {
   PHWGUI_PIXBUF hpix;
-  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(1), NULL);
+  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(1), HWG_NULLPTR);
 
   if (handle)
   {
@@ -444,7 +444,7 @@ HB_FUNC(HWG_SELECTOBJECT)
       pango_layout_set_font_description(hDC->layout, hDC->hFont);
     }
   }
-  HB_RETHANDLE(NULL);
+  HB_RETHANDLE(HWG_NULLPTR);
 }
 
 HB_FUNC(HWG_DELETEOBJECT)
@@ -475,7 +475,7 @@ HB_FUNC(HWG_DEFINEPAINTSTRU)
 {
   PHWGUI_PPS pps = (PHWGUI_PPS)hb_xgrab(sizeof(HWGUI_PPS));
 
-  pps->hDC = NULL;
+  pps->hDC = HWG_NULLPTR;
   HB_RETHANDLE(pps);
 }
 
@@ -489,7 +489,7 @@ HB_FUNC(HWG_BEGINPAINT)
   hDC->widget = widget;
   hDC->window = widget->window;
   hDC->gc = gdk_gc_new(widget->window);
-  hDC->layout = gtk_widget_create_pango_layout(hDC->widget, NULL);
+  hDC->layout = gtk_widget_create_pango_layout(hDC->widget, HWG_NULLPTR);
   hDC->fcolor = hDC->bcolor = -1;
 
   pps->hDC = hDC;
@@ -520,7 +520,7 @@ HB_FUNC(HWG_GETDC)
   hDC->widget = widget;
   hDC->window = widget->window;
   hDC->gc = gdk_gc_new(widget->window);
-  hDC->layout = gtk_widget_create_pango_layout(hDC->widget, NULL);
+  hDC->layout = gtk_widget_create_pango_layout(hDC->widget, HWG_NULLPTR);
   hDC->fcolor = hDC->bcolor = -1;
 
   HB_RETHANDLE(hDC);
@@ -545,31 +545,31 @@ HB_FUNC(HWG_GETDRAWITEMINFO)
      PHB_ITEM aMetr = _itemArrayNew( 7 );
      PHB_ITEM temp;
 
-     temp = _itemPutNL( NULL, lpdis->itemID );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->itemID );
      _itemArrayPut( aMetr, 1, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, lpdis->itemAction );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->itemAction );
      _itemArrayPut( aMetr, 2, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, (HB_LONG)lpdis->hDC );
+     temp = _itemPutNL( HWG_NULLPTR, (HB_LONG)lpdis->hDC );
      _itemArrayPut( aMetr, 3, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, lpdis->rcItem.left );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->rcItem.left );
      _itemArrayPut( aMetr, 4, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, lpdis->rcItem.top );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->rcItem.top );
      _itemArrayPut( aMetr, 5, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, lpdis->rcItem.right );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->rcItem.right );
      _itemArrayPut( aMetr, 6, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, lpdis->rcItem.bottom );
+     temp = _itemPutNL( HWG_NULLPTR, lpdis->rcItem.bottom );
      _itemArrayPut( aMetr, 7, temp );
      _itemRelease( temp );
 
@@ -606,19 +606,19 @@ HB_FUNC(HWG_GETWINDOWRECT)
 
      GetWindowRect( (HWND) hb_parnl( 1 ),	&rc );
 
-     temp = _itemPutNL( NULL, rc.left );
+     temp = _itemPutNL( HWG_NULLPTR, rc.left );
      _itemArrayPut( aMetr, 1, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, rc.top );
+     temp = _itemPutNL( HWG_NULLPTR, rc.top );
      _itemArrayPut( aMetr, 2, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, rc.right );
+     temp = _itemPutNL( HWG_NULLPTR, rc.right );
      _itemArrayPut( aMetr, 3, temp );
      _itemRelease( temp );
 
-     temp = _itemPutNL( NULL, rc.bottom );
+     temp = _itemPutNL( HWG_NULLPTR, rc.bottom );
      _itemArrayPut( aMetr, 4, temp );
      _itemRelease( temp );
 

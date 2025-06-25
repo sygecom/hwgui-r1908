@@ -87,7 +87,7 @@ HB_FUNC(HWG_OPENDEFAULTPRINTER)
 HB_FUNC(HWG_GETPRINTERS)
 {
   HB_FHANDLE hInput = hb_fsOpen("/etc/printcap", FO_READ);
-  PHB_ITEM aMetr = NULL, temp;
+  PHB_ITEM aMetr = HWG_NULLPTR, temp;
 
   if (hInput != -1)
   {
@@ -129,7 +129,7 @@ HB_FUNC(HWG_GETPRINTERS)
         {
           ptr++;
         }
-        temp = hb_itemPutCL(NULL, (char *)ptr1, ptr - ptr1);
+        temp = hb_itemPutCL(HWG_NULLPTR, (char *)ptr1, ptr - ptr1);
         hb_arrayAdd(aMetr, temp);
         hb_itemRelease(temp);
         while (*ptr && *ptr != 0x0a)
@@ -205,7 +205,7 @@ HB_FUNC(HWG_ENDDOC)
 HB_FUNC(HWG_STARTPAGE)
 {
   PHWGUI_PRINT print = (PHWGUI_PRINT)hb_parnl(1);
-  hb_retnl((HB_LONG)gnome_print_beginpage(print->gpc, NULL));
+  hb_retnl((HB_LONG)gnome_print_beginpage(print->gpc, HWG_NULLPTR));
 }
 
 HB_FUNC(HWG_ENDPAGE)
@@ -233,39 +233,39 @@ HB_FUNC(HWG_GP_GETDEVICEAREA)
 
   gnome_print_config_get_page_size(print->config, &width, &height);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)width);
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)width);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)height);
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)height);
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)(width * 25.4 / 72));
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)(width * 25.4 / 72));
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)(height * 25.4 / 72));
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)(height * 25.4 / 72));
   hb_itemArrayPut(aMetr, 4, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, 72);
+  temp = hb_itemPutNL(HWG_NULLPTR, 72);
   hb_itemArrayPut(aMetr, 5, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, 72);
+  temp = hb_itemPutNL(HWG_NULLPTR, 72);
   hb_itemArrayPut(aMetr, 6, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, 0);
+  temp = hb_itemPutNL(HWG_NULLPTR, 0);
   hb_itemArrayPut(aMetr, 7, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)width);
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)width);
   hb_itemArrayPut(aMetr, 8, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)height);
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)height);
   hb_itemArrayPut(aMetr, 9, temp);
   hb_itemRelease(temp);
 
@@ -295,7 +295,7 @@ HB_FUNC( HWG_GP_DRAWTEXT )
 {
    PHWGUI_PRINT print = (PHWGUI_PRINT) hb_parnl(1);
    char * cText = hwg_convert_to_utf8( hb_parc(2) );
-   // guchar *cText = g_convert( hb_parc(2),-1,"UTF-8","KOI8-R",NULL,NULL,NULL );
+   // guchar *cText = g_convert( hb_parc(2),-1,"UTF-8","KOI8-R",HWG_NULLPTR,HWG_NULLPTR,HWG_NULLPTR );
    int iOption = (HB_ISNIL(7))? 0 : hb_parni(7);
    int x1 = hb_parni(3);
 
@@ -403,7 +403,7 @@ HB_FUNC(HWG_GP_FONTLIST)
   i = 1;
   while (tmp)
   {
-    temp = hb_itemPutC(NULL, tmp->data);
+    temp = hb_itemPutC(HWG_NULLPTR, tmp->data);
     hb_itemArrayPut(aMetr, i, temp);
     hb_itemRelease(temp);
     tmp = tmp->next;

@@ -49,8 +49,8 @@ extern void cb_signal(GtkWidget *widget, gchar *data);
 extern void all_signal_connect(gpointer hWnd);
 extern GtkWidget *GetActiveWindow(void);
 extern GdkPixbuf *alpha2pixbuf(GdkPixbuf *hPixIn, long int nColor);
-static GtkTooltips *pTooltip = NULL;
-static PHB_DYNS pSymTimerProc = NULL;
+static GtkTooltips *pTooltip = HWG_NULLPTR;
+static PHB_DYNS pSymTimerProc = HWG_NULLPTR;
 
 GtkFixed *getFixedBox(GObject *handle)
 {
@@ -122,7 +122,7 @@ HB_FUNC(HWG_CREATEBUTTON)
   HB_ULONG ulStyle = hb_parnl(3);
   const char *cTitle = (hb_pcount() > 7) ? hb_parc(8) : "";
   GtkFixed *box;
-  PHWGUI_PIXBUF szFile = HB_ISPOINTER(9) ? (PHWGUI_PIXBUF)HB_PARHANDLE(9) : NULL;
+  PHWGUI_PIXBUF szFile = HB_ISPOINTER(9) ? (PHWGUI_PIXBUF)HB_PARHANDLE(9) : HWG_NULLPTR;
   gchar *gcTitle = hwg_convert_to_utf8(cTitle);
 
   if ((ulStyle & 0xf) == BS_AUTORADIOBUTTON)
@@ -304,7 +304,7 @@ HB_FUNC(HWG_CREATECOMBO)
 HB_FUNC(HWG_COMBOSETARRAY)
 {
   PHB_ITEM pArray = hb_param(2, HB_IT_ARRAY);
-  GList *glist = NULL;
+  GList *glist = HWG_NULLPTR;
 
   if (pArray)
   {
@@ -400,7 +400,7 @@ HB_FUNC(HWG_CREATEBROWSE)
     vscroll = gtk_vscrollbar_new(GTK_ADJUSTMENT(adjV));
     gtk_box_pack_end(GTK_BOX(hbox), vscroll, FALSE, FALSE, 0);
 
-    temp = HB_PUTHANDLE(NULL, adjV);
+    temp = HB_PUTHANDLE(HWG_NULLPTR, adjV);
     SetObjectVar(pObject, "_HSCROLLV", temp);
     hb_itemRelease(temp);
 
@@ -416,7 +416,7 @@ HB_FUNC(HWG_CREATEBROWSE)
     hscroll = gtk_hscrollbar_new(GTK_ADJUSTMENT(adjH));
     gtk_box_pack_end(GTK_BOX(vbox), hscroll, FALSE, FALSE, 0);
 
-    temp = HB_PUTHANDLE(NULL, adjH);
+    temp = HB_PUTHANDLE(HWG_NULLPTR, adjH);
     SetObjectVar(pObject, "_HSCROLLH", temp);
     hb_itemRelease(temp);
 
@@ -431,7 +431,7 @@ HB_FUNC(HWG_CREATEBROWSE)
   }
   gtk_widget_set_size_request(hbox, nWidth, nHeight);
 
-  temp = HB_PUTHANDLE(NULL, area);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, area);
   SetObjectVar(pObject, "_AREA", temp);
   hb_itemRelease(temp);
 
@@ -661,7 +661,7 @@ HB_FUNC(HWG_ADDTOOLTIP)
   {
     pTooltip = gtk_tooltips_new();
   }
-  gtk_tooltips_set_tip(pTooltip, (GtkWidget *)HB_PARHANDLE(2), hb_parc(3), NULL);
+  gtk_tooltips_set_tip(pTooltip, (GtkWidget *)HB_PARHANDLE(2), hb_parc(3), HWG_NULLPTR);
 }
 
 static gint cb_timer(gchar *data)
@@ -714,7 +714,7 @@ HB_FUNC(HWG_LOADCURSOR)
 {
   if (HB_ISCHAR(1))
   {
-    // hb_retnl( (HB_LONG) LoadCursor( GetModuleHandle( NULL ), hb_parc( 1 )  ) );
+    // hb_retnl( (HB_LONG) LoadCursor( GetModuleHandle( HWG_NULLPTR ), hb_parc( 1 )  ) );
   }
   else
   {
@@ -731,7 +731,7 @@ HB_FUNC(HWG_SETCURSOR)
 HB_FUNC(HWG_MOVEWIDGET)
 {
   GtkWidget *widget = (GtkWidget *)HB_PARHANDLE(1);
-  GtkWidget *ch_widget = NULL;
+  GtkWidget *ch_widget = HWG_NULLPTR;
 
   if (!HB_ISNIL(6) && hb_parl(6))
   {
@@ -853,10 +853,10 @@ HB_FUNC(HWG_CREATETOOLBARBUTTON)
 #if GTK_CHECK_VERSION(2, 4, 1)
   GtkWidget *toolbutton1, *img;
   GtkWidget *hCtrl = (GtkWidget *)HB_PARHANDLE(1);
-  PHWGUI_PIXBUF szFile = HB_ISPOINTER(2) ? (PHWGUI_PIXBUF)HB_PARHANDLE(2) : NULL;
-  const char *szLabel = HB_ISCHAR(3) ? hb_parc(3) : NULL;
+  PHWGUI_PIXBUF szFile = HB_ISPOINTER(2) ? (PHWGUI_PIXBUF)HB_PARHANDLE(2) : HWG_NULLPTR;
+  const char *szLabel = HB_ISCHAR(3) ? hb_parc(3) : HWG_NULLPTR;
   HB_BOOL lSep = hb_parl(4);
-  gchar *gcLabel = NULL;
+  gchar *gcLabel = HWG_NULLPTR;
 
   if (szLabel)
   {
@@ -876,7 +876,7 @@ HB_FUNC(HWG_CREATETOOLBARBUTTON)
     }
     else
     {
-      toolbutton1 = (GtkWidget *)gtk_tool_button_new(NULL, gcLabel);
+      toolbutton1 = (GtkWidget *)gtk_tool_button_new(HWG_NULLPTR, gcLabel);
     }
     if (gcLabel)
     {
@@ -902,7 +902,7 @@ static void tabchange_clicked(GtkNotebook *item, GtkNotebookPage *Page, guint pa
   PHB_ITEM pData = (PHB_ITEM)user_data;
   gpointer dwNewLong = g_object_get_data((GObject *)item, "obj");
   PHB_ITEM pObject = (PHB_ITEM)dwNewLong;
-  PHB_ITEM Disk = hb_itemPutNL(NULL, pagenum + 1);
+  PHB_ITEM Disk = hb_itemPutNL(HWG_NULLPTR, pagenum + 1);
 
   HB_SYMBOL_UNUSED(Page);
   hb_vmEvalBlockV((PHB_ITEM)pData, 2, pObject, Disk);
@@ -916,7 +916,7 @@ static void tabchange_clicked(GtkNotebook *item, GtkNotebookPage *Page, guint pa
 //   PHB_ITEM pData = (PHB_ITEM) user_data;
 //   gpointer dwNewLong = g_object_get_data( (GObject*) item, "obj" );
 //   PHB_ITEM pObject = (PHB_ITEM) dwNewLong ;
-//   PHB_ITEM Disk=hb_itemPutNL( NULL, pagenum);
+//   PHB_ITEM Disk=hb_itemPutNL( HWG_NULLPTR, pagenum);
 //   hb_vmEvalBlockV( ( PHB_ITEM ) pData ,2,pObject,Disk);
 //   hb_vmEvalBlockV( ChangeDiskBlock, 1, Disk  );
 //   hb_itemRelease( Disk );
@@ -987,7 +987,7 @@ HB_FUNC(HWG_CREATEIMAGE)
 {
   GtkWidget *hCtrl;
   GtkFixed *box = getFixedBox((GObject *)HB_PARHANDLE(1));
-  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(2), NULL);
+  GdkPixbuf *handle = gdk_pixbuf_new_from_file(hb_parc(2), HWG_NULLPTR);
   GdkPixbuf *pHandle = alpha2pixbuf(handle, 16777215);
 
   hCtrl = gtk_image_new_from_pixbuf(pHandle);

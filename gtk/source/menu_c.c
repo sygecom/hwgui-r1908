@@ -44,7 +44,7 @@ HB_FUNC(HWG__ADDMENUITEM)
 {
   GtkWidget *hMenu;
   HB_BOOL lString = HB_FALSE, lCheck = HB_FALSE;
-  const char *lpNewItem = NULL;
+  const char *lpNewItem = HWG_NULLPTR;
 
   if (HB_ISCHAR(2))
   {
@@ -158,7 +158,7 @@ HB_FUNC(HWG_TRACKMENU)
                     hb_parni(3),          // vertical position, in screen coordinates
                     0,                    // reserved, must be zero
                     (HWND) hb_parnl(4),   // handle of owner window
-                    NULL
+                    HWG_NULLPTR
       ) );
   */
 }

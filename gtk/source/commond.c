@@ -31,39 +31,39 @@ void store_font(gpointer fontseldlg)
   h->type = HWGUI_OBJECT_FONT;
   h->hFont = hFont;
 
-  temp = HB_PUTHANDLE(NULL, h);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, h);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutC(NULL, (char *)pango_font_description_get_family(hFont));
+  temp = hb_itemPutC(HWG_NULLPTR, (char *)pango_font_description_get_family(hFont));
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, 0);
+  temp = hb_itemPutNL(HWG_NULLPTR, 0);
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)pango_font_description_get_size(hFont));
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)pango_font_description_get_size(hFont));
   hb_itemArrayPut(aMetr, 4, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (HB_LONG)pango_font_description_get_weight(hFont));
+  temp = hb_itemPutNL(HWG_NULLPTR, (HB_LONG)pango_font_description_get_weight(hFont));
   hb_itemArrayPut(aMetr, 5, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNI(NULL, 0);
+  temp = hb_itemPutNI(HWG_NULLPTR, 0);
   hb_itemArrayPut(aMetr, 6, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNI(NULL, (HB_LONG)pango_font_description_get_style(hFont));
+  temp = hb_itemPutNI(HWG_NULLPTR, (HB_LONG)pango_font_description_get_style(hFont));
   hb_itemArrayPut(aMetr, 7, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNI(NULL, 0);
+  temp = hb_itemPutNI(HWG_NULLPTR, 0);
   hb_itemArrayPut(aMetr, 8, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNI(NULL, 0);
+  temp = hb_itemPutNI(HWG_NULLPTR, 0);
   hb_itemArrayPut(aMetr, 9, temp);
   hb_itemRelease(temp);
 
@@ -92,7 +92,7 @@ HB_FUNC(HWG_SELECTFONT)
   {
   }
 
-  g_signal_connect(G_OBJECT(fontseldlg), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+  g_signal_connect(G_OBJECT(fontseldlg), "destroy", G_CALLBACK(gtk_main_quit), HWG_NULLPTR);
 
   g_signal_connect_swapped(GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fontseldlg)->ok_button), "clicked",
                            G_CALLBACK(store_font), (gpointer)fontseldlg);
@@ -119,12 +119,12 @@ void cancel_filedlg(gpointer file_selector)
 HB_FUNC(HWG_SELECTFILE)
 {
   GtkWidget *file_selector;
-  const char *cMask = (hb_pcount() > 1 && HB_ISCHAR(2)) ? hb_parc(2) : NULL;
+  const char *cMask = (hb_pcount() > 1 && HB_ISCHAR(2)) ? hb_parc(2) : HWG_NULLPTR;
   const char *cTitle = (hb_pcount() > 3 && HB_ISCHAR(4)) ? hb_parc(4) : "Select a file";
 
   file_selector = gtk_file_selection_new(cTitle);
 
-  g_signal_connect(G_OBJECT(file_selector), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+  g_signal_connect(G_OBJECT(file_selector), "destroy", G_CALLBACK(gtk_main_quit), HWG_NULLPTR);
 
   g_signal_connect_swapped(GTK_OBJECT(GTK_FILE_SELECTION(file_selector)->ok_button), "clicked",
                            G_CALLBACK(store_filename), (gpointer)file_selector);
@@ -190,7 +190,7 @@ HB_FUNC(HWG_CHOOSECOLOR)
   }
   gtk_color_selection_set_has_palette(colorsel, TRUE);
 
-  g_signal_connect(G_OBJECT(colorseldlg), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+  g_signal_connect(G_OBJECT(colorseldlg), "destroy", G_CALLBACK(gtk_main_quit), HWG_NULLPTR);
 
   g_signal_connect_swapped(GTK_OBJECT(GTK_COLOR_SELECTION_DIALOG(colorseldlg)->ok_button), "clicked",
                            G_CALLBACK(store_color), (gpointer)colorseldlg);
