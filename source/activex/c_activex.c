@@ -42,13 +42,13 @@
 #define hb_dynsymSymbol(pDynSym) ((pDynSym)->pSymbol)
 #endif
 
-PHB_SYMB s___GetMessage = NULL;
+PHB_SYMB s___GetMessage = HWG_NULLPTR;
 
 typedef HRESULT(WINAPI *LPAtlAxWinInit)(void);
 typedef HRESULT(WINAPI *LPAtlAxGetControl)(HWND, IUnknown **);
 typedef HRESULT(WINAPI *LPAtlAxCreateControl)(LPCOLESTR, HWND, IStream *, IUnknown **);
 
-HMODULE hAtl = NULL;
+HMODULE hAtl = HWG_NULLPTR;
 LPAtlAxWinInit AtlAxWinInit;
 LPAtlAxGetControl AtlAxGetControl;
 LPAtlAxCreateControl AtlAxCreateControl;
@@ -77,9 +77,9 @@ HB_FUNC(HWG_CREATEACTIVEX)
                               ISNIL(7) ? 544 : hwg_par_int(7),                   // nWidth
                               ISNIL(8) ? 375 : hwg_par_int(8),                   // nHeight
                               ISNIL(9) ? HWND_DESKTOP : hwg_par_HWND(9),         // oParent:handle
-                              // ISNIL(10) ? NULL                : (HMENU) hb_parnl(10),  // Id
+                              // ISNIL(10) ? HWG_NULLPTR                : (HMENU) hb_parnl(10),  // Id
                               // GetModuleHandle(0),
-                              0, 0, NULL));
+                              0, 0, HWG_NULLPTR));
 }
 
 HB_FUNC(HWG_ATLAXGETDISP) // hWnd -> pDisp
@@ -116,7 +116,7 @@ static void HB_EXPORT hb_itemPushList(ULONG ulRefMask, ULONG ulPCount, PHB_ITEM 
 
   if (ulPCount)
   {
-    itmRef = hb_itemNew(NULL);
+    itmRef = hb_itemNew(HWG_NULLPTR);
 
     // initialize the reference item
     itmRef->type = HB_IT_BYREF;
@@ -317,7 +317,7 @@ static ULONG STDMETHODCALLTYPE Invoke(IEventHandler *this, DISPID dispid, REFIID
   ULONG ulPos;
   PHB_ITEM Key;
 
-  Key = hb_itemNew(NULL);
+  Key = hb_itemNew(HWG_NULLPTR);
 
   // We implement only a "default" interface
   if (!IsEqualIID(riid, &IID_NULL))
@@ -342,7 +342,7 @@ static ULONG STDMETHODCALLTYPE Invoke(IEventHandler *this, DISPID dispid, REFIID
 
 #else
 
-  ulPos = hb_arrayScan(((MyRealIEventHandler *)this)->pEvents, hb_itemPutNL(Key, dispid), NULL, NULL, 0
+  ulPos = hb_arrayScan(((MyRealIEventHandler *)this)->pEvents, hb_itemPutNL(Key, dispid), HWG_NULLPTR, HWG_NULLPTR, 0
 #ifdef __XHARBOUR__
                        ,
                        0
@@ -396,7 +396,7 @@ static ULONG STDMETHODCALLTYPE Invoke(IEventHandler *this, DISPID dispid, REFIID
       iArg = params->cArgs;
       for (i = 1; i <= iArg; i++)
       {
-        pItem = hb_itemNew(NULL);
+        pItem = hb_itemNew(HWG_NULLPTR);
         hb_oleVariantToItem(pItem, &(params->rgvarg[iArg - i]));
         pItemArray[i - 1] = pItem;
         // set bit i
@@ -498,8 +498,8 @@ typedef IEventHandler device_interface;
 
 HB_FUNC(HWG_SETUPCONNECTIONPOINT)
 {
-  IConnectionPointContainer *pIConnectionPointContainerTemp = NULL;
-  IUnknown *pIUnknown = NULL;
+  IConnectionPointContainer *pIConnectionPointContainerTemp = HWG_NULLPTR;
+  IUnknown *pIUnknown = HWG_NULLPTR;
   IConnectionPoint *m_pIConnectionPoint;
   IEnumConnectionPoints *m_pIEnumConnectionPoints;
   HRESULT hr; //,r;
@@ -551,7 +551,7 @@ HB_FUNC(HWG_SETUPCONNECTIONPOINT)
         {
           do
           {
-            hr = m_pIEnumConnectionPoints->lpVtbl->Next(m_pIEnumConnectionPoints, 1, &m_pIConnectionPoint, NULL);
+            hr = m_pIEnumConnectionPoints->lpVtbl->Next(m_pIEnumConnectionPoints, 1, &m_pIConnectionPoint, HWG_NULLPTR);
             if (hr == S_OK)
             {
               if (m_pIConnectionPoint->lpVtbl->GetConnectionInterface(m_pIConnectionPoint, &rriid) == S_OK)
@@ -568,7 +568,7 @@ HB_FUNC(HWG_SETUPCONNECTIONPOINT)
         // hr = pIConnectionPointContainerTemp ->lpVtbl->FindConnectionPoint(pIConnectionPointContainerTemp ,
         // &IID_IDispatch, &m_pIConnectionPoint);
         pIConnectionPointContainerTemp->lpVtbl->Release(pIConnectionPointContainerTemp);
-        pIConnectionPointContainerTemp = NULL;
+        pIConnectionPointContainerTemp = HWG_NULLPTR;
       }
 
       if (hr == S_OK && m_pIConnectionPoint)
@@ -594,7 +594,7 @@ HB_FUNC(HWG_SETUPCONNECTIONPOINT)
       }
 
       pIUnknown->lpVtbl->Release(pIUnknown);
-      pIUnknown = NULL;
+      pIUnknown = HWG_NULLPTR;
     }
   }
 
@@ -622,7 +622,7 @@ HB_FUNC(HWG_SHUTDOWNCONNECTIONPOINT)
     this->pIConnectionPoint->lpVtbl->Unadvise(this->pIConnectionPoint, this->dwEventCookie);
     this->dwEventCookie = 0;
     this->pIConnectionPoint->lpVtbl->Release(this->pIConnectionPoint);
-    this->pIConnectionPoint = NULL;
+    this->pIConnectionPoint = HWG_NULLPTR;
   }
 }
 

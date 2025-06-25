@@ -234,7 +234,7 @@ HB_FUNC(HWG_ARRAY2STRING)
 HB_FUNC(HWG_STRING2ARRAY)
 {
   const char *szResult = hb_parc(1);
-  PHB_ITEM pItem = hb_itemNew(NULL);
+  PHB_ITEM pItem = hb_itemNew(HWG_NULLPTR);
 
   if (hb_parclen(1) > 2 && *szResult == '\6')
   {

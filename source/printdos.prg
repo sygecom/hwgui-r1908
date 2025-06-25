@@ -612,8 +612,8 @@ HB_FUNC(HWG_AFILLTEXT) // TODO: static ?
 {
    FILE *inFile ;
    const char *pSrc = hb_parc(1) ;
-   PHB_ITEM pArray = hb_itemNew(NULL);
-   PHB_ITEM pTemp = hb_itemNew(NULL);
+   PHB_ITEM pArray = hb_itemNew(HWG_NULLPTR);
+   PHB_ITEM pTemp = hb_itemNew(HWG_NULLPTR);
    char *string ;
 
    if (!pSrc)

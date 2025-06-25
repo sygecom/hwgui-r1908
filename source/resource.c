@@ -33,7 +33,7 @@ HB_FUNC(HWG_LOADSTRING)
 HB_FUNC(HWG_LOADRESOURCE)
 {
   void *hString;
-  hModule = GetModuleHandle(HB_PARSTR(1, &hString, NULL));
+  hModule = GetModuleHandle(HB_PARSTR(1, &hString, HWG_NULLPTR));
   hb_strfree(hString);
 }
 
@@ -41,11 +41,11 @@ void hb_resourcemodules(void *cargo)
 {
   HB_SYMBOL_UNUSED(cargo);
 
-  hModule = GetModuleHandle(NULL);
+  hModule = GetModuleHandle(HWG_NULLPTR);
 }
 
 HB_CALL_ON_STARTUP_BEGIN(_hwgui_module_init_)
-hb_vmAtInit(hb_resourcemodules, NULL);
+hb_vmAtInit(hb_resourcemodules, HWG_NULLPTR);
 HB_CALL_ON_STARTUP_END(_hwgui_module_init_)
 
 #if defined(HB_PRAGMA_STARTUP)
@@ -69,7 +69,7 @@ HB_FUNC(HWG_FINDRESOURCE)
   int iType = hb_parni(3); // RT_MANIFEST = 24
   void *hString;
 
-  hModule = GetModuleHandle(HB_PARSTR(1, &hString, NULL));
+  hModule = GetModuleHandle(HB_PARSTR(1, &hString, HWG_NULLPTR));
   hb_strfree(hString);
 
   if (IS_INTRESOURCE(iName))
@@ -79,7 +79,7 @@ HB_FUNC(HWG_FINDRESOURCE)
   }
   else
   {
-    HB_RETHANDLE(NULL);
+    HB_RETHANDLE(HWG_NULLPTR);
   }
 }
 

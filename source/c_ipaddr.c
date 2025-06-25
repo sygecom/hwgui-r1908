@@ -61,7 +61,7 @@ HB_FUNC(HWG_INITIPADDRESS)
   HB_FUNC_EXEC(HWG_INITCOMMONCONTROLSEX);
   hwg_ret_HWND(CreateWindowEx(WS_EX_CLIENTEDGE, WC_IPADDRESS, TEXT(""), hwg_par_DWORD(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
-                              GetModuleHandle(NULL), NULL));
+                              GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR));
 }
 
 HB_FUNC(HWG_SETIPADDRESS)

@@ -42,7 +42,7 @@ typedef struct _TRIVERTEX
 typedef int(_stdcall *GRADIENTFILL)(HDC, PTRIVERTEX, int, PVOID, int, int);
 LRESULT CALLBACK NiceButtProc(HWND, UINT, WPARAM, LPARAM);
 
-static GRADIENTFILL s_pGradientfill = NULL;
+static GRADIENTFILL s_pGradientfill = HWG_NULLPTR;
 
 static void Draw_Gradient(HDC hdc, int x, int y, int w, int h, int r, int g, int b)
 {
@@ -130,7 +130,7 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 {
   LRESULT res;
   PHB_DYNS pSymTest;
-  if ((pSymTest = hb_dynsymFind("HWG_NICEBUTTPROC")) != NULL)
+  if ((pSymTest = hb_dynsymFind("HWG_NICEBUTTPROC")) != HWG_NULLPTR)
   {
     hb_vmPushSymbol(hb_dynsymSymbol(pSymTest));
     hb_vmPushNil();       /* places NIL at self */
@@ -173,7 +173,7 @@ HB_FUNC(HWG_REGNICE)
   static BOOL s_bRegistered = 0;
 
   s_pGradientfill = (GRADIENTFILL)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "GradientFill");
-  //    if (Gradientfill == NULL)
+  //    if (Gradientfill == HWG_NULLPTR)
   //        return FALSE;
   if (!s_bRegistered)
   {
@@ -186,8 +186,8 @@ HB_FUNC(HWG_REGNICE)
     wc.lpfnWndProc = NiceButtProc;
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
-    wc.hIcon = NULL;
-    wc.hCursor = NULL;
+    wc.hIcon = HWG_NULLPTR;
+    wc.hCursor = HWG_NULLPTR;
     wc.lpszMenuName = 0;
 
     RegisterClass(&wc);
@@ -199,9 +199,9 @@ HB_FUNC(HWG_CREATENICEBTN)
 {
   DWORD ulStyle = HB_ISNUM(3) ? hwg_par_DWORD(3) : WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
   void *hTitle;
-  hwg_ret_HWND(CreateWindowEx(hb_parni(8), TEXT("NICEBUTT"), HB_PARSTR(9, &hTitle, NULL),
+  hwg_ret_HWND(CreateWindowEx(hb_parni(8), TEXT("NICEBUTT"), HB_PARSTR(9, &hTitle, HWG_NULLPTR),
                               WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4), hwg_par_int(5), hwg_par_int(6),
-                              hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL));
+                              hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR));
   hb_strfree(hTitle);
 }
 
@@ -227,7 +227,7 @@ HB_FUNC(HWG_DRAW_GRADIENT)
 
 HB_FUNC(HWG_GRADIENT)
 {
-  if (s_pGradientfill == NULL)
+  if (s_pGradientfill == HWG_NULLPTR)
   {
     s_pGradientfill = (GRADIENTFILL)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "GradientFill");
   }

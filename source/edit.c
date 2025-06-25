@@ -83,13 +83,13 @@ HB_FUNC(HWG_CREATEEDIT)
     ulStyle &= ~WS_BORDER;
   }
   hWndEdit =
-      CreateWindowEx(ulStyleEx, TEXT("EDIT"), NULL, WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4), hwg_par_int(5),
-                     hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(NULL), NULL);
+      CreateWindowEx(ulStyleEx, TEXT("EDIT"), HWG_NULLPTR, WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4), hwg_par_int(5),
+                     hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR);
 
   if (hb_pcount() > 7)
   {
     void *hStr;
-    LPCTSTR lpText = HB_PARSTR(8, &hStr, NULL);
+    LPCTSTR lpText = HB_PARSTR(8, &hStr, HWG_NULLPTR);
     if (lpText)
     {
       SendMessage(hWndEdit, WM_SETTEXT, 0, (LPARAM)lpText);

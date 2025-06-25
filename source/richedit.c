@@ -45,11 +45,11 @@ HB_FUNC(HWG_CREATERICHEDIT)
     hRichEd = LoadLibrary(TEXT("riched20.dll"));
   }
 
-  hCtrl = CreateWindowEx(0, TEXT("RichEdit20A"), NULL, WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),
+  hCtrl = CreateWindowEx(0, TEXT("RichEdit20A"), HWG_NULLPTR, WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),
                          hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
-                         GetModuleHandle(NULL), NULL);
+                         GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR);
 
-  lpText = HB_PARSTR(8, &hText, NULL);
+  lpText = HB_PARSTR(8, &hText, HWG_NULLPTR);
   if (lpText)
   {
     SendMessage(hCtrl, WM_SETTEXT, 0, (LPARAM)lpText);
@@ -321,7 +321,7 @@ HB_FUNC(HWG_RE_GETLINE)
 HB_FUNC(HWG_RE_INSERTTEXT)
 {
   void *hString;
-  SendMessage(hwg_par_HWND(1), EM_REPLACESEL, 0, (LPARAM)HB_PARSTR(2, &hString, NULL));
+  SendMessage(hwg_par_HWND(1), EM_REPLACESEL, 0, (LPARAM)HB_PARSTR(2, &hString, HWG_NULLPTR));
   hb_strfree(hString);
 }
 
@@ -339,7 +339,7 @@ HB_FUNC(HWG_RE_FINDTEXT)
 
   ft.chrg.cpMin = (HB_ISNIL(3)) ? 0 : hb_parnl(3);
   ft.chrg.cpMax = -1;
-  ft.lpstrText = (LPTSTR)HB_PARSTR(2, &hString, NULL);
+  ft.lpstrText = (LPTSTR)HB_PARSTR(2, &hString, HWG_NULLPTR);
 
   lPos = (LONG)SendMessage(hCtrl, EM_FINDTEXTEX, (WPARAM)lFlag, (LPARAM)&ft);
   hb_strfree(hString);
@@ -460,14 +460,14 @@ static DWORD CALLBACK RichStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG 
     return 0;
   }
 
-  WriteFile(pFile, pbBuff, cb, &dwW, NULL);
+  WriteFile(pFile, pbBuff, cb, &dwW, HWG_NULLPTR);
   return 0;
 }
 
 static DWORD CALLBACK EditStreamCallback(DWORD_PTR dwCookie, LPBYTE lpBuff, LONG cb, PLONG pcb)
 {
   HANDLE hFile = (HANDLE)dwCookie;
-  return !ReadFile(hFile, lpBuff, cb, (DWORD *)pcb, NULL);
+  return !ReadFile(hFile, lpBuff, cb, (DWORD *)pcb, HWG_NULLPTR);
 }
 
 HB_FUNC(HWG_SAVERICHEDIT)
@@ -481,7 +481,7 @@ HB_FUNC(HWG_SAVERICHEDIT)
   HB_SIZE nSize;
 
   lpFileName = HB_PARSTR(2, &hFileName, &nSize);
-  hFile = CreateFile(lpFileName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+  hFile = CreateFile(lpFileName, GENERIC_WRITE, 0, HWG_NULLPTR, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, HWG_NULLPTR);
   if (hFile == INVALID_HANDLE_VALUE)
   {
     hb_retni(0); // TODO: revisar valor de retorno
@@ -506,7 +506,7 @@ HB_FUNC(HWG_LOADRICHEDIT)
   HB_SIZE nSize;
 
   lpFileName = HB_PARSTR(2, &hFileName, &nSize);
-  hFile = CreateFile(lpFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
+  hFile = CreateFile(lpFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, HWG_NULLPTR);
   if (hFile == INVALID_HANDLE_VALUE)
   {
     hb_retni(0); // TODO: revisar valor de retorno

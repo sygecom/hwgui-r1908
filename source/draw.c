@@ -35,12 +35,12 @@ STDAPI OleLoadPicture(LPSTREAM, LONG, BOOL, REFIID, PVOID *);
 
 typedef int(_stdcall *TRANSPARENTBLT)(HDC, int, int, int, int, HDC, int, int, int, int, int);
 
-static TRANSPARENTBLT s_pTransparentBlt = NULL;
+static TRANSPARENTBLT s_pTransparentBlt = HWG_NULLPTR;
 
 void TransparentBmp(HDC hDC, int x, int y, int nWidthDest, int nHeightDest, HDC dcImage, int bmWidth, int bmHeight,
                     int trColor)
 {
-  if (s_pTransparentBlt == NULL)
+  if (s_pTransparentBlt == HWG_NULLPTR)
   {
     s_pTransparentBlt = (TRANSPARENTBLT)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "TransparentBlt");
   }
@@ -67,7 +67,7 @@ BOOL Array2Rect(PHB_ITEM aRect, RECT *rc)
 PHB_ITEM Rect2Array(RECT *rc)
 {
   PHB_ITEM aRect = hb_itemArrayNew(4);
-  PHB_ITEM element = hb_itemNew(NULL);
+  PHB_ITEM element = hb_itemNew(HWG_NULLPTR);
 
   hb_arraySet(aRect, 1, hb_itemPutNL(element, rc->left));
   hb_arraySet(aRect, 2, hb_itemPutNL(element, rc->top));
@@ -103,7 +103,7 @@ HB_FUNC(HWG_INVALIDATERECT)
   }
 
   // TODO: parâmetro 3 é do tipo BOOL
-  InvalidateRect(hwg_par_HWND(1), (hb_pcount() > 2) ? &rc : NULL, hb_parni(2));
+  InvalidateRect(hwg_par_HWND(1), (hb_pcount() > 2) ? &rc : HWG_NULLPTR, hb_parni(2));
 }
 
 /*
@@ -111,7 +111,7 @@ HWG_MOVETO(HDC, nX, nY) -->
 */
 HB_FUNC(HWG_MOVETO) // TODO: sincronizar nome da função com função da WINAPI
 {
-  MoveToEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
+  MoveToEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), HWG_NULLPTR);
 }
 
 /*
@@ -132,7 +132,7 @@ HB_FUNC(HWG_RECTANGLE) // TODO: usar outro nome para esta função
   int y1 = hb_parni(3);
   int x2 = hb_parni(4);
   int y2 = hb_parni(5);
-  MoveToEx(hDC, x1, y1, NULL);
+  MoveToEx(hDC, x1, y1, HWG_NULLPTR);
   LineTo(hDC, x2, y1);
   LineTo(hDC, x2, y2);
   LineTo(hDC, x1, y2);
@@ -153,7 +153,7 @@ HWG_DRAWLINE(HDC, nX1, nY1, nX2, nY2) -->
 HB_FUNC(HWG_DRAWLINE)
 {
   HDC hDC = hwg_par_HDC(1);
-  MoveToEx(hDC, hb_parni(2), hb_parni(3), NULL);
+  MoveToEx(hDC, hb_parni(2), hb_parni(3), HWG_NULLPTR);
   LineTo(hDC, hb_parni(4), hb_parni(5));
 }
 
@@ -205,8 +205,8 @@ HB_FUNC(HWG_ROUNDRECT)
 HB_FUNC(REDRAWWINDOW)
 {
    RedrawWindow(hwg_par_HWND(1), // handle of window
-         NULL,                  // address of structure with update rectangle
-         NULL,                  // handle of update region
+         HWG_NULLPTR,                  // address of structure with update rectangle
+         HWG_NULLPTR,                  // handle of update region
          (UINT)hb_parni(2) // array of redraw flags
           );
 }
@@ -231,7 +231,7 @@ HB_FUNC(HWG_REDRAWWINDOW)
     rc.bottom = y + h + 1;
   }
 
-  RedrawWindow(hwg_par_HWND(1), (hb_pcount() > 3) ? &rc : NULL, NULL, hwg_par_UINT(2));
+  RedrawWindow(hwg_par_HWND(1), (hb_pcount() > 3) ? &rc : HWG_NULLPTR, HWG_NULLPTR, hwg_par_UINT(2));
 }
 
 /*
@@ -305,12 +305,12 @@ HB_FUNC(HWG_LOADICON)
 {
   if (HB_ISNUM(1))
   {
-    hwg_ret_HICON(LoadIcon(NULL, MAKEINTRESOURCE(hb_parni(1))));
+    hwg_ret_HICON(LoadIcon(HWG_NULLPTR, MAKEINTRESOURCE(hb_parni(1))));
   }
   else
   {
     void *hString;
-    hwg_ret_HICON(LoadIcon(GetModuleHandle(NULL), HB_PARSTR(1, &hString, NULL)));
+    hwg_ret_HICON(LoadIcon(GetModuleHandle(HWG_NULLPTR), HB_PARSTR(1, &hString, HWG_NULLPTR)));
     hb_strfree(hString);
   }
 }
@@ -320,9 +320,9 @@ HWG_LOADIMAGE(HINSTANCE, nImage|cImage, nType, nWidth, nHeight, nLoadFlags) --> 
 */
 HB_FUNC(HWG_LOADIMAGE)
 {
-  void *hString = NULL;
-  hwg_ret_HANDLE(LoadImage(HB_ISNIL(1) ? GetModuleHandle(NULL) : hwg_par_HINSTANCE(1),
-                           HB_ISNUM(2) ? MAKEINTRESOURCE(hb_parni(2)) : HB_PARSTR(2, &hString, NULL), hwg_par_UINT(3),
+  void *hString = HWG_NULLPTR;
+  hwg_ret_HANDLE(LoadImage(HB_ISNIL(1) ? GetModuleHandle(HWG_NULLPTR) : hwg_par_HINSTANCE(1),
+                           HB_ISNUM(2) ? MAKEINTRESOURCE(hb_parni(2)) : HB_PARSTR(2, &hString, HWG_NULLPTR), hwg_par_UINT(3),
                            hwg_par_int(4), hwg_par_int(5), hwg_par_UINT(6)));
   hb_strfree(hString);
 }
@@ -336,17 +336,17 @@ HB_FUNC(HWG_LOADBITMAP)
   {
     if (!HB_ISNIL(2) && hb_parl(2))
     {
-      hwg_ret_HBITMAP(LoadBitmap(NULL, MAKEINTRESOURCE(hb_parni(1))));
+      hwg_ret_HBITMAP(LoadBitmap(HWG_NULLPTR, MAKEINTRESOURCE(hb_parni(1))));
     }
     else
     {
-      hwg_ret_HBITMAP(LoadBitmap(GetModuleHandle(NULL), MAKEINTRESOURCE(hb_parni(1))));
+      hwg_ret_HBITMAP(LoadBitmap(GetModuleHandle(HWG_NULLPTR), MAKEINTRESOURCE(hb_parni(1))));
     }
   }
   else
   {
     void *hString;
-    hwg_ret_HBITMAP(LoadBitmap(GetModuleHandle(NULL), HB_PARSTR(1, &hString, NULL)));
+    hwg_ret_HBITMAP(LoadBitmap(GetModuleHandle(HWG_NULLPTR), HB_PARSTR(1, &hString, HWG_NULLPTR)));
     hb_strfree(hString);
   }
 }
@@ -450,7 +450,7 @@ HB_FUNC(HWG_DRAWTRANSPARENTBITMAP)
   pOldBitmapImage = (HBITMAP)SelectObject(dcImage, hBitmap);
   GetObject(hBitmap, sizeof(BITMAP), (LPVOID)&bitmap);
   // Create the mask bitmap
-  bitmapTrans = CreateBitmap(bitmap.bmWidth, bitmap.bmHeight, 1, 1, NULL);
+  bitmapTrans = CreateBitmap(bitmap.bmWidth, bitmap.bmHeight, 1, 1, HWG_NULLPTR);
   // Select the mask bitmap into the appropriate dc
   pOldBitmapTrans = (HBITMAP)SelectObject(dcTrans, bitmapTrans);
   // Build mask based on transparent colour
@@ -561,19 +561,19 @@ HB_FUNC(HWG_GETBITMAPSIZE)
 
   nret = GetObject(hwg_par_HBITMAP(1), sizeof(BITMAP), (LPVOID)&bitmap);
 
-  temp = hb_itemPutNL(NULL, bitmap.bmWidth);
+  temp = hb_itemPutNL(HWG_NULLPTR, bitmap.bmWidth);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, bitmap.bmHeight);
+  temp = hb_itemPutNL(HWG_NULLPTR, bitmap.bmHeight);
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, bitmap.bmBitsPixel);
+  temp = hb_itemPutNL(HWG_NULLPTR, bitmap.bmBitsPixel);
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, nret);
+  temp = hb_itemPutNL(HWG_NULLPTR, nret);
   hb_itemArrayPut(aMetr, 4, temp);
   hb_itemRelease(temp);
 
@@ -592,15 +592,15 @@ HB_FUNC(HWG_GETICONSIZE)
 
   nret = GetIconInfo(hwg_par_HICON(1), &iinfo);
 
-  temp = hb_itemPutNL(NULL, iinfo.xHotspot * 2);
+  temp = hb_itemPutNL(HWG_NULLPTR, iinfo.xHotspot * 2);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, iinfo.yHotspot * 2);
+  temp = hb_itemPutNL(HWG_NULLPTR, iinfo.yHotspot * 2);
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, nret);
+  temp = hb_itemPutNL(HWG_NULLPTR, nret);
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
@@ -619,23 +619,23 @@ HB_FUNC(HWG_OPENBITMAP)
   LPVOID lpvBits;
   HGLOBAL hmem1, hmem2;
   HBITMAP hbm;
-  HDC hDC = (hb_pcount() > 1 && !HB_ISNIL(2)) ? hwg_par_HDC(2) : NULL;
+  HDC hDC = (hb_pcount() > 1 && !HB_ISNIL(2)) ? hwg_par_HDC(2) : HWG_NULLPTR;
   void *hString;
   HANDLE hfbm;
 
-  hfbm = CreateFile(HB_PARSTR(1, &hString, NULL), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING,
-                    FILE_ATTRIBUTE_READONLY, NULL);
+  hfbm = CreateFile(HB_PARSTR(1, &hString, HWG_NULLPTR), GENERIC_READ, FILE_SHARE_READ, HWG_NULLPTR, OPEN_EXISTING,
+                    FILE_ATTRIBUTE_READONLY, HWG_NULLPTR);
   hb_strfree(hString);
   if (((long int)(LONG_PTR)hfbm) <= 0)
   {
-    HB_RETHANDLE(NULL);
+    HB_RETHANDLE(HWG_NULLPTR);
     return;
   }
   /* Retrieve the BITMAPFILEHEADER structure. */
-  ReadFile(hfbm, &bmfh, sizeof(BITMAPFILEHEADER), &dwRead, NULL);
+  ReadFile(hfbm, &bmfh, sizeof(BITMAPFILEHEADER), &dwRead, HWG_NULLPTR);
 
   /* Retrieve the BITMAPFILEHEADER structure. */
-  ReadFile(hfbm, &bmih, sizeof(BITMAPINFOHEADER), &dwRead, NULL);
+  ReadFile(hfbm, &bmih, sizeof(BITMAPINFOHEADER), &dwRead, HWG_NULLPTR);
 
   /* Allocate memory for the BITMAPINFO structure. */
 
@@ -664,14 +664,14 @@ HB_FUNC(HWG_OPENBITMAP)
   case 1:
   case 4:
   case 8:
-    ReadFile(hfbm, lpbmi->bmiColors, ((1 << bmih.biBitCount) * sizeof(RGBQUAD)), &dwRead, NULL);
+    ReadFile(hfbm, lpbmi->bmiColors, ((1 << bmih.biBitCount) * sizeof(RGBQUAD)), &dwRead, HWG_NULLPTR);
     break;
 
   case 16:
   case 32:
     if (bmih.biCompression == BI_BITFIELDS)
     {
-      ReadFile(hfbm, lpbmi->bmiColors, (3 * sizeof(RGBQUAD)), &dwRead, NULL);
+      ReadFile(hfbm, lpbmi->bmiColors, (3 * sizeof(RGBQUAD)), &dwRead, HWG_NULLPTR);
     }
     break;
 
@@ -685,7 +685,7 @@ HB_FUNC(HWG_OPENBITMAP)
 
   /* Retrieve the bitmap data. */
 
-  ReadFile(hfbm, lpvBits, (bmfh.bfSize - bmfh.bfOffBits), &dwRead, NULL);
+  ReadFile(hfbm, lpvBits, (bmfh.bfSize - bmfh.bfOffBits), &dwRead, HWG_NULLPTR);
 
   if (!hDC)
   {
@@ -697,7 +697,7 @@ HB_FUNC(HWG_OPENBITMAP)
 
   if (hb_pcount() < 2 || HB_ISNIL(2))
   {
-    ReleaseDC(NULL, hDC);
+    ReleaseDC(HWG_NULLPTR, hDC);
   }
 
   /* Unlock the global memory objects and close the .BMP file. */
@@ -800,39 +800,39 @@ HB_FUNC(HWG_GETDRAWITEMINFO)
   PHB_ITEM aMetr = hb_itemArrayNew(9);
   PHB_ITEM temp;
 
-  temp = hb_itemPutNL(NULL, lpdis->itemID);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->itemID);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->itemAction);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->itemAction);
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = HB_PUTHANDLE(NULL, lpdis->hDC);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, lpdis->hDC);
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->rcItem.left);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->rcItem.left);
   hb_itemArrayPut(aMetr, 4, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->rcItem.top);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->rcItem.top);
   hb_itemArrayPut(aMetr, 5, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->rcItem.right);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->rcItem.right);
   hb_itemArrayPut(aMetr, 6, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->rcItem.bottom);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->rcItem.bottom);
   hb_itemArrayPut(aMetr, 7, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNInt(NULL, (LONG_PTR)lpdis->hwndItem);
+  temp = hb_itemPutNInt(HWG_NULLPTR, (LONG_PTR)lpdis->hwndItem);
   hb_itemArrayPut(aMetr, 8, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, (LONG)lpdis->itemState);
+  temp = hb_itemPutNL(HWG_NULLPTR, (LONG)lpdis->itemState);
   hb_itemArrayPut(aMetr, 9, temp);
   hb_itemRelease(temp);
 
@@ -867,7 +867,7 @@ HB_FUNC(HWG_DRAWGRAYBITMAP)
   pOldBitmapImage = (HBITMAP)SelectObject(dcImage, hBitmap);
   GetObject(hBitmap, sizeof(BITMAP), (LPVOID)&bitmap);
   // Create the mask bitmap
-  bitmapgray = CreateBitmap(bitmap.bmWidth, bitmap.bmHeight, 1, 1, NULL);
+  bitmapgray = CreateBitmap(bitmap.bmWidth, bitmap.bmHeight, 1, 1, HWG_NULLPTR);
   // Select the mask bitmap into the appropriate dc
   pOldbitmapgray = (HBITMAP)SelectObject(dcTrans, bitmapgray);
   // Build mask based on transparent colour
@@ -913,7 +913,7 @@ HB_FUNC(HWG_OPENIMAGE)
     hG = GlobalAlloc(GPTR, iFileSize);
     if (!hG)
     {
-      HB_RETHANDLE(NULL);
+      HB_RETHANDLE(HWG_NULLPTR);
       return;
     }
     memcpy((void *)hG, (void *)cFileName, iFileSize);
@@ -923,7 +923,7 @@ HB_FUNC(HWG_OPENIMAGE)
     fp = fopen(cFileName, "rb");
     if (!fp)
     {
-      HB_RETHANDLE(NULL);
+      HB_RETHANDLE(HWG_NULLPTR);
       return;
     }
 
@@ -933,7 +933,7 @@ HB_FUNC(HWG_OPENIMAGE)
     if (!hG)
     {
       fclose(fp);
-      HB_RETHANDLE(NULL);
+      HB_RETHANDLE(HWG_NULLPTR);
       return;
     }
     fseek(fp, 0, SEEK_SET);
@@ -946,7 +946,7 @@ HB_FUNC(HWG_OPENIMAGE)
   if (!pStream)
   {
     GlobalFree(hG);
-    HB_RETHANDLE(NULL);
+    HB_RETHANDLE(HWG_NULLPTR);
     return;
   }
 
@@ -962,7 +962,7 @@ HB_FUNC(HWG_OPENIMAGE)
 
   if (!pPic)
   {
-    HB_RETHANDLE(NULL);
+    HB_RETHANDLE(HWG_NULLPTR);
     return;
   }
 
@@ -1028,7 +1028,7 @@ HWG_SETWINDOWORGEX(HDC, nX, nY) -->
 */
 HB_FUNC(HWG_SETWINDOWORGEX) // TODO: o retorno é BOOL
 {
-  SetWindowOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
+  SetWindowOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), HWG_NULLPTR);
   hb_stornl(0, 4);
 }
 
@@ -1037,7 +1037,7 @@ HWG_SETWINDOWEXTEX(HDC, nX, nY) -->
 */
 HB_FUNC(HWG_SETWINDOWEXTEX) // TODO: o retorno é BOOL
 {
-  SetWindowExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
+  SetWindowExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), HWG_NULLPTR);
   hb_stornl(0, 4);
 }
 
@@ -1046,7 +1046,7 @@ HWG_SETVIEWPORTORGEX(HDC, nX, nY) -->
 */
 HB_FUNC(HWG_SETVIEWPORTORGEX) // TODO: o retorno é BOOL
 {
-  SetViewportOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
+  SetViewportOrgEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), HWG_NULLPTR);
   hb_stornl(0, 4);
 }
 
@@ -1055,7 +1055,7 @@ HWG_SETVIEWPORTEXTEX(HDC, nX, nY) -->
 */
 HB_FUNC(HWG_SETVIEWPORTEXTEX) // TODO: o retorno é BOOL
 {
-  SetViewportExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), NULL);
+  SetViewportExtEx(hwg_par_HDC(1), hwg_par_int(2), hwg_par_int(3), HWG_NULLPTR);
   hb_stornl(0, 4);
 }
 
@@ -1210,23 +1210,23 @@ HB_FUNC(HWG_GETMEASUREITEMINFO)
   PHB_ITEM aMetr = hb_itemArrayNew(5);
   PHB_ITEM temp;
 
-  temp = hb_itemPutNL(NULL, lpdis->CtlType);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->CtlType);
   hb_itemArrayPut(aMetr, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->CtlID);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->CtlID);
   hb_itemArrayPut(aMetr, 2, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->itemID);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->itemID);
   hb_itemArrayPut(aMetr, 3, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->itemWidth);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->itemWidth);
   hb_itemArrayPut(aMetr, 4, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, lpdis->itemHeight);
+  temp = hb_itemPutNL(HWG_NULLPTR, lpdis->itemHeight);
   hb_itemArrayPut(aMetr, 5, temp);
   hb_itemRelease(temp);
   hb_itemReturnRelease(aMetr);

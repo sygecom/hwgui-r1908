@@ -411,7 +411,7 @@ void SetEmbedded(HWND handle, IOleObject **obj)
 
   pObject = (PHB_ITEM)GetWindowLongPtr(handle, GWL_USERDATA);
   pEmbed = hb_itemNew(GetObjectVar(pObject, "OEMBEDDED"));
-  temp = hb_itemPutNL(NULL, (LONG)obj);
+  temp = hb_itemPutNL(HWG_NULLPTR, (LONG)obj);
   SetObjectVar(pEmbed, "_HANDLE", temp);
   hb_itemRelease(temp);
 }
@@ -743,7 +743,7 @@ HRESULT STDMETHODCALLTYPE UI_TranslateUrl(IDocHostUIHandler *This, DWORD dwTrans
   if (len >= 4 && !_wcsnicmp(pchURLIn, (WCHAR *)&AppUrl[0], 4))
   {
     // Allocate a new buffer to return an "about:blank" URL
-    if ((dest = (OLECHAR *)CoTaskMemAlloc(12 << 1)) != NULL)
+    if ((dest = (OLECHAR *)CoTaskMemAlloc(12 << 1)) != HWG_NULLPTR)
     {
       HWND hwnd;
 
@@ -1422,7 +1422,7 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
           // For ANSI, we need to convert the BSTR to an ANSI string, and
           // then we no longer need the BSTR.
           webParams.nmhdr.idFrom = WideCharToMultiByte(CP_ACP, 0, (WCHAR *)strType, -1, 0, 0, 0, 0);
-          if ((webParams.eventStr = GlobalAlloc(GMEM_FIXED, sizeof(char) * webParams.nmhdr.idFrom)) == NULL)
+          if ((webParams.eventStr = GlobalAlloc(GMEM_FIXED, sizeof(char) * webParams.nmhdr.idFrom)) == HWG_NULLPTR)
           {
             goto bad;
           }
@@ -1534,7 +1534,7 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
     // Invoke() function when it wants to inform us that a specific event
     // has occurred.
     if ((lpDispatchEx = (_IDispatchEx *)GlobalAlloc(GMEM_FIXED, sizeof(_IDispatchEx) + extraData + varDisp.DEF_VT)) !=
-        NULL)
+        HWG_NULLPTR)
     {
       // Clear out the extradata area in case the caller wants that.
       ZeroMemory(lpDispatchEx, extraData);
@@ -1720,7 +1720,7 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
     if (!IsWindow(hwnd) ||
         // Get the browser object stored in the window's USERDATA member
         // !(browserObject = *((IOleObject **)GetWindowLong(hwnd, GWL_USERDATA))) ||
-        (browserObject = *GetEmbedded(hwnd)) == NULL ||
+        (browserObject = *GetEmbedded(hwnd)) == HWG_NULLPTR ||
         // Get the IWebBrowser2 object embedded within the browser object
         browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void **)&webBrowser2))
     {
@@ -1801,7 +1801,7 @@ BSTR WINAPI TStr2BStr(HWND hwnd, const char *string)
     DWORD size;
 
     size = MultiByteToWideChar(CP_ACP, 0, (char *)string, -1, 0, 0);
-    if ((buffer = (WCHAR *)GlobalAlloc(GMEM_FIXED, sizeof(WCHAR) * size)) == NULL)
+    if ((buffer = (WCHAR *)GlobalAlloc(GMEM_FIXED, sizeof(WCHAR) * size)) == HWG_NULLPTR)
     {
       return 0;
     }
@@ -1835,7 +1835,7 @@ void *WINAPI BStr2TStr(HWND hwnd, BSTR strIn)
   if (!IsWindowUnicode(hwnd))
   {
     size = WideCharToMultiByte(CP_ACP, 0, (WCHAR *)((char *)strIn + 2), -1, 0, 0, 0, 0);
-    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != NULL)
+    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR)
     {
       WideCharToMultiByte(CP_ACP, 0, (WCHAR *)((char *)strIn + 2), -1, (char *)strOut, size, 0, 0);
     }
@@ -1843,7 +1843,7 @@ void *WINAPI BStr2TStr(HWND hwnd, BSTR strIn)
   else
   {
     size = (*((short *)strIn) + 1) * sizeof(wchar_t);
-    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != NULL)
+    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR)
     {
       CopyMemory(strOut, (char *)strIn + 2, size);
     }
@@ -1906,7 +1906,7 @@ IHTMLElement *WINAPI GetWebElement(HWND hwnd, IHTMLDocument2 *htmlDoc2, const ch
       // index into a VARIENT struct too.
       VariantInit(&varName);
       varName.DEF_VT = VT_BSTR;
-      if ((varName.DEF_BSTRVAL = TStr2BStr(hwnd, name)) != NULL)
+      if ((varName.DEF_BSTRVAL = TStr2BStr(hwnd, name)) != HWG_NULLPTR)
       {
         VariantInit(&varIndex);
         varIndex.DEF_VT = VT_I4;
@@ -2081,7 +2081,7 @@ void WINAPI UnEmbedBrowserObject(HWND hwnd)
   // window may get a WM_DESTROY which could call this a second time (ie,
   // since we may call UnEmbedBrowserObject in EmbedBrowserObject).
   // if ((browserHandle = (IOleObject **)GetWindowLong(hwnd, GWL_USERDATA)))
-  if ((browserHandle = GetEmbedded(hwnd)) != NULL)
+  if ((browserHandle = GetEmbedded(hwnd)) != HWG_NULLPTR)
   {
     // Unembed the browser object, and release its resources.
     browserObject = *browserHandle;
@@ -2163,14 +2163,14 @@ long WINAPI DisplayHTMLStr(HWND hwnd, const char *string)
 
         // Our HTML must be in the form of a BSTR. And it must be passed
         // to write() in an array of "VARIENT" structs. So let's create all that.
-        if ((sfArray = SafeArrayCreate(VT_VARIANT, 1, (SAFEARRAYBOUND *)&ArrayBound)) != NULL)
+        if ((sfArray = SafeArrayCreate(VT_VARIANT, 1, (SAFEARRAYBOUND *)&ArrayBound)) != HWG_NULLPTR)
         {
           if (!SafeArrayAccessData(sfArray, (void **)&pVar))
           {
             pVar->DEF_VT = VT_BSTR;
 
             // Store our BSTR pointer in the VARIENT.
-            if ((pVar->DEF_BSTRVAL = TStr2BStr(hwnd, string)) != NULL)
+            if ((pVar->DEF_BSTRVAL = TStr2BStr(hwnd, string)) != HWG_NULLPTR)
             {
               // Pass the VARIENT with its BSTR to write() in order to
               // shove our desired HTML string into the body of that
@@ -2271,7 +2271,7 @@ long WINAPI DisplayHTMLPage(HWND hwnd, const char *webPageName)
     // COM interfaces can be used by just about any language.
     VariantInit(&myURL);
     myURL.DEF_VT = VT_BSTR;
-    if ((myURL.DEF_BSTRVAL = TStr2BStr(hwnd, webPageName)) == NULL)
+    if ((myURL.DEF_BSTRVAL = TStr2BStr(hwnd, webPageName)) == HWG_NULLPTR)
     {
       webBrowser2->lpVtbl->Release(webBrowser2);
       return -6;
@@ -2466,7 +2466,7 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
   //
   // One final thing. We're going to allocate extra room to store the pointer
   // to the browser object.
-  if ((ptr = (char *)GlobalAlloc(GMEM_FIXED, sizeof(_IOleClientSiteEx) + sizeof(IOleObject *))) == NULL)
+  if ((ptr = (char *)GlobalAlloc(GMEM_FIXED, sizeof(_IOleClientSiteEx) + sizeof(IOleObject *))) == HWG_NULLPTR)
   {
     return -1;
   }
@@ -2530,7 +2530,7 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
     // its own browser object, we can call EmbedBrowserObject() for each one,
     // and easily associate the appropriate browser object with its matching
     // window and its own objects containing per-window data.
-    if ((*((IOleObject **)ptr) = browserObject) != NULL)
+    if ((*((IOleObject **)ptr) = browserObject) != HWG_NULLPTR)
     {
       // SetWindowLong(hwnd, GWL_USERDATA, (LONG)ptr);
       SetEmbedded(hwnd, (IOleObject **)ptr);

@@ -71,7 +71,7 @@ HB_FUNC(HWG_COPYSTRINGTOCLIPBOARD)
 
     lpStr = HB_PARSTRDEF(1, &hStr, &nLen);
     hglbCopy = GlobalAlloc(GMEM_DDESHARE, (nLen + 1) * sizeof(TCHAR));
-    if (hglbCopy != NULL)
+    if (hglbCopy != HWG_NULLPTR)
     {
       // Lock the handle and copy the text to the buffer.
       lptstrCopy = (char *)GlobalLock(hglbCopy);
@@ -94,7 +94,7 @@ HB_FUNC(HWG_COPYSTRINGTOCLIPBOARD)
 HB_FUNC(HWG_GETCLIPBOARDTEXT)
 {
   HWND hWnd = hwg_par_HWND(1);
-  LPTSTR lpText = NULL;
+  LPTSTR lpText = HWG_NULLPTR;
 
   if (OpenClipboard(hWnd))
   {
@@ -194,11 +194,11 @@ HB_FUNC(HWG_CLIENTTOSCREEN)
   pt.y = hb_parnl(3);
   ClientToScreen(hwg_par_HWND(1), &pt);
 
-  temp = hb_itemPutNL(NULL, pt.x);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.x);
   hb_itemArrayPut(aPoint, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, pt.y);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.y);
   hb_itemArrayPut(aPoint, 2, temp);
   hb_itemRelease(temp);
 
@@ -228,11 +228,11 @@ HB_FUNC(HWG_SCREENTOCLIENT)
     return;
   }
 
-  temp = hb_itemPutNL(NULL, pt.x);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.x);
   hb_itemArrayPut(aPoint, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, pt.y);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.y);
   hb_itemArrayPut(aPoint, 2, temp);
   hb_itemRelease(temp);
 
@@ -246,11 +246,11 @@ HB_FUNC(HWG_GETCURSORPOS)
   PHB_ITEM temp;
 
   GetCursorPos(&pt);
-  temp = hb_itemPutNL(NULL, pt.x);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.x);
   hb_itemArrayPut(aPoint, 1, temp);
   hb_itemRelease(temp);
 
-  temp = hb_itemPutNL(NULL, pt.y);
+  temp = hb_itemPutNL(HWG_NULLPTR, pt.y);
   hb_itemArrayPut(aPoint, 2, temp);
   hb_itemRelease(temp);
 
@@ -307,10 +307,10 @@ HB_FUNC(HWG_GETKEYNAMETEXT)
 HB_FUNC(HWG_ACTIVATEKEYBOARDLAYOUT)
 {
   void *hLayout;
-  LPCTSTR lpLayout = HB_PARSTR(1, &hLayout, NULL);
+  LPCTSTR lpLayout = HB_PARSTR(1, &hLayout, HWG_NULLPTR);
   HKL curr = GetKeyboardLayout(0);
   TCHAR sBuff[KL_NAMELENGTH];
-  UINT num = GetKeyboardLayoutList(0, NULL), i = 0;
+  UINT num = GetKeyboardLayoutList(0, HWG_NULLPTR), i = 0;
 
   do
   {
@@ -350,7 +350,7 @@ HB_FUNC(HWG_PTS2PIX)
   }
   else
   {
-    hDC = CreateDC(TEXT("DISPLAY"), NULL, NULL, NULL);
+    hDC = CreateDC(TEXT("DISPLAY"), HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
 
   hb_retni(MulDiv(hb_parni(1), GetDeviceCaps(hDC, LOGPIXELSY), 72));
@@ -399,8 +399,8 @@ HB_FUNC(HWG_SHELLABOUT)
 {
   void *hStr1, *hStr2;
 
-  hb_retni(ShellAbout(0, HB_PARSTRDEF(1, &hStr1, NULL), HB_PARSTRDEF(2, &hStr2, NULL),
-                      (HB_ISNIL(3) ? NULL : hwg_par_HICON(3))));
+  hb_retni(ShellAbout(0, HB_PARSTRDEF(1, &hStr1, HWG_NULLPTR), HB_PARSTRDEF(2, &hStr2, HWG_NULLPTR),
+                      (HB_ISNIL(3) ? HWG_NULLPTR : hwg_par_HICON(3))));
   hb_strfree(hStr1);
   hb_strfree(hStr2);
 }
@@ -467,7 +467,7 @@ HB_FUNC(HWG_WINHELP)
     context = 0;
   }
 
-  hb_retni(WinHelp(hwg_par_HWND(1), HB_PARSTR(2, &hStr, NULL), style, context));
+  hb_retni(WinHelp(hwg_par_HWND(1), HB_PARSTR(2, &hStr, HWG_NULLPTR), style, context));
   hb_strfree(hStr);
 }
 
@@ -598,7 +598,7 @@ HB_FUNC(HWG_SHOWSCROLLBAR)
 
 HB_FUNC(HWG_SCROLLWINDOW)
 {
-  ScrollWindow(hwg_par_HWND(1), hb_parni(2), hb_parni(3), NULL, NULL);
+  ScrollWindow(hwg_par_HWND(1), hb_parni(2), hb_parni(3), HWG_NULLPTR, HWG_NULLPTR);
 }
 
 HB_FUNC(HWG_ISCAPSLOCKACTIVE)
@@ -621,42 +621,42 @@ HB_FUNC(HWG_ISSCROLLLOCKACTIVE)
 HB_FUNC(HWG_CREATEDIRECTORY)
 {
   void *hStr;
-  CreateDirectory(HB_PARSTR(1, &hStr, NULL), NULL);
+  CreateDirectory(HB_PARSTR(1, &hStr, HWG_NULLPTR), HWG_NULLPTR);
   hb_strfree(hStr);
 }
 
 HB_FUNC(HWG_REMOVEDIRECTORY)
 {
   void *hStr;
-  hwg_ret_BOOL(RemoveDirectory(HB_PARSTR(1, &hStr, NULL)));
+  hwg_ret_BOOL(RemoveDirectory(HB_PARSTR(1, &hStr, HWG_NULLPTR)));
   hb_strfree(hStr);
 }
 
 HB_FUNC(HWG_SETCURRENTDIRECTORY)
 {
   void *hStr;
-  SetCurrentDirectory(HB_PARSTR(1, &hStr, NULL));
+  SetCurrentDirectory(HB_PARSTR(1, &hStr, HWG_NULLPTR));
   hb_strfree(hStr);
 }
 
 HB_FUNC(HWG_DELETEFILE)
 {
   void *hStr;
-  hwg_ret_BOOL(DeleteFile(HB_PARSTR(1, &hStr, NULL)));
+  hwg_ret_BOOL(DeleteFile(HB_PARSTR(1, &hStr, HWG_NULLPTR)));
   hb_strfree(hStr);
 }
 
 HB_FUNC(HWG_GETFILEATTRIBUTES)
 {
   void *hStr;
-  hb_retnl((LONG)GetFileAttributes(HB_PARSTR(1, &hStr, NULL)));
+  hb_retnl((LONG)GetFileAttributes(HB_PARSTR(1, &hStr, HWG_NULLPTR)));
   hb_strfree(hStr);
 }
 
 HB_FUNC(HWG_SETFILEATTRIBUTES)
 {
   void *hStr;
-  hwg_ret_BOOL(SetFileAttributes(HB_PARSTR(1, &hStr, NULL), (DWORD)hb_parnl(2)));
+  hwg_ret_BOOL(SetFileAttributes(HB_PARSTR(1, &hStr, HWG_NULLPTR), (DWORD)hb_parnl(2)));
   hb_strfree(hStr);
 }
 
@@ -695,7 +695,7 @@ HB_FUNC(HWG_EDIT1UPDATECTRL)
 {
   HWND hChild = hwg_par_HWND(1);
   HWND hParent = hwg_par_HWND(2);
-  RECT *rect = NULL;
+  RECT *rect = HWG_NULLPTR;
 
   GetWindowRect(hChild, rect);
   ScreenToClient(hParent, (LPPOINT)rect);
@@ -709,7 +709,7 @@ HB_FUNC(HWG_BUTTON1GETSCREENCLIENT)
 {
   HWND hChild = hwg_par_HWND(1);
   HWND hParent = hwg_par_HWND(2);
-  RECT *rect = NULL;
+  RECT *rect = HWG_NULLPTR;
 
   GetWindowRect(hChild, rect);
   ScreenToClient(hParent, (LPPOINT)rect);
@@ -754,7 +754,7 @@ HB_FUNC(HWG_HEDITEX_CTLCOLOR)
     SetBkColor(hdc, (COLORREF)i);
   }
 
-  temp = HB_PUTHANDLE(NULL, hBrush);
+  temp = HB_PUTHANDLE(HWG_NULLPTR, hBrush);
   SetObjectVar(pObject, "_M_BRUSH", temp);
   hb_itemRelease(temp);
 
@@ -782,7 +782,7 @@ HB_FUNC(HWG_PTRTOULONG)
 HB_FUNC(HWG_OUTPUTDEBUGSTRING)
 {
   void *hStr;
-  OutputDebugString(HB_PARSTRDEF(1, &hStr, NULL));
+  OutputDebugString(HB_PARSTRDEF(1, &hStr, HWG_NULLPTR));
   hb_strfree(hStr);
 }
 

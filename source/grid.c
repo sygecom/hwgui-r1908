@@ -33,7 +33,7 @@
   (BOOL) SNDMSG((hwndLV), LVM_SORTITEMSEX, (WPARAM)(LPARAM)(_lPrm), (LPARAM)(PFNLVCOMPARE)(_pfnCompare))
 #endif
 
-// static HWND hListSort=NULL;
+// static HWND hListSort=HWG_NULLPTR;
 
 typedef struct tagSortInfo
 {
@@ -58,9 +58,9 @@ HB_FUNC(HWG_LISTVIEW_CREATE)
     style = style | LVS_NOSCROLL;
   }
 
-  hwg_ret_HWND(CreateWindowEx(WS_EX_CLIENTEDGE, WC_LISTVIEW, NULL, style, hwg_par_int(3), hwg_par_int(4),
+  hwg_ret_HWND(CreateWindowEx(WS_EX_CLIENTEDGE, WC_LISTVIEW, HWG_NULLPTR, style, hwg_par_int(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
-                              GetModuleHandle(NULL), NULL));
+                              GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR));
 }
 
 HB_FUNC(HWG_LISTVIEW_INIT)
@@ -91,7 +91,7 @@ HB_FUNC(HWG_LISTVIEW_ADDCOLUMN)
 
   COL.mask = LVCF_WIDTH | LVCF_TEXT | LVCF_FMT | LVCF_SUBITEM;
   COL.cx = hb_parni(3);
-  COL.pszText = (LPTSTR)HB_PARSTRDEF(4, &hText, NULL);
+  COL.pszText = (LPTSTR)HB_PARSTRDEF(4, &hText, HWG_NULLPTR);
   COL.iSubItem = hb_parni(2) - 1;
   COL.fmt = hb_parni(5);
   if (iImage > 0)
@@ -106,7 +106,7 @@ HB_FUNC(HWG_LISTVIEW_ADDCOLUMN)
 
   ListView_InsertColumn(hwg_par_HWND(1), hb_parni(2) - 1, &COL);
 
-  RedrawWindow(hwg_par_HWND(1), NULL, NULL,
+  RedrawWindow(hwg_par_HWND(1), HWG_NULLPTR, HWG_NULLPTR,
                RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
   hb_strfree(hText);
 }
@@ -114,7 +114,7 @@ HB_FUNC(HWG_LISTVIEW_ADDCOLUMN)
 HB_FUNC(HWG_LISTVIEW_DELETECOLUMN)
 {
   ListView_DeleteColumn(hwg_par_HWND(1), hb_parni(2) - 1);
-  RedrawWindow(hwg_par_HWND(1), NULL, NULL,
+  RedrawWindow(hwg_par_HWND(1), HWG_NULLPTR, HWG_NULLPTR,
                RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
 }
 
@@ -293,7 +293,7 @@ HB_FUNC(HWG_LISTVIEW_SETVIEW)
   if ((dwStyle & LVS_TYPEMASK) != dwView)
   {
     SetWindowLong(hWndListView, GWL_STYLE, (dwStyle & ~LVS_TYPEMASK) | dwView);
-    // RedrawWindow(hwg_par_HWND(1), NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | ;
+    // RedrawWindow(hwg_par_HWND(1), HWG_NULLPTR, HWG_NULLPTR, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | ;
     // RDW_UPDATENOW);
   }
 }
@@ -318,7 +318,7 @@ HB_FUNC(HWG_LISTVIEW_ADDCOLUMNEX)
     lvcolumn.mask = LVCF_FMT | LVCF_TEXT | LVCF_SUBITEM | LVCF_WIDTH;
   }
 
-  lvcolumn.pszText = (LPTSTR)HB_PARSTR(3, &hText, NULL);
+  lvcolumn.pszText = (LPTSTR)HB_PARSTR(3, &hText, HWG_NULLPTR);
   lvcolumn.iSubItem = lCol;
   lvcolumn.cx = hb_parni(4);
   lvcolumn.fmt = hb_parni(5);
@@ -333,7 +333,7 @@ HB_FUNC(HWG_LISTVIEW_ADDCOLUMNEX)
     iResult = 1;
   }
 
-  RedrawWindow(hwndListView, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
+  RedrawWindow(hwndListView, HWG_NULLPTR, HWG_NULLPTR, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
 
   hb_retnl(iResult);
   hb_strfree(hText);
@@ -367,7 +367,7 @@ HB_FUNC(HWG_LISTVIEW_INSERTITEMEX)
   lvi.iImage = iBitMap >= 0 ? lCol : -1;
   lvi.state = 0;
   lvi.stateMask = 0;
-  lvi.pszText = (LPTSTR)HB_PARSTR(4, &hText, NULL);
+  lvi.pszText = (LPTSTR)HB_PARSTR(4, &hText, HWG_NULLPTR);
   lvi.iItem = lLin;
   lvi.iSubItem = lCol;
 
@@ -396,7 +396,7 @@ HB_FUNC(HWG_LISTVIEW_INSERTITEMEX)
     break;
   }
 
-  // RedrawWindow(hwndListView, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW |
+  // RedrawWindow(hwndListView, HWG_NULLPTR, HWG_NULLPTR, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW |
   // RDW_UPDATENOW);
   InvalidateRect(hwndListView, &rect, TRUE);
   hb_retni(iResult);
@@ -490,7 +490,7 @@ HB_FUNC(HWG_LISTVIEWGETITEM)
   }
   else
   {
-    hb_retc(NULL);
+    hb_retc(HWG_NULLPTR);
   }
 }
 
@@ -532,7 +532,7 @@ HB_FUNC(HWG_LISTVIEWSORTINFONEW)
 
   if (p)
   {
-    p->pListControl = NULL;
+    p->pListControl = HWG_NULLPTR;
     p->nColumnNo = -1;
     p->nAscendingSortOrder = FALSE;
   }

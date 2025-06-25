@@ -218,7 +218,7 @@ static HTHEME OpenThemeDataFail(HWND s, LPCWSTR d) // s d
 {
   HB_SYMBOL_UNUSED(s);
   HB_SYMBOL_UNUSED(d);
-  return NULL;
+  return HWG_NULLPTR;
 }
 
 static HRESULT DrawThemeTextFail(HTHEME a, HDC s, int d, int f, LPCWSTR g, int h, DWORD j, DWORD k, const RECT *z)
@@ -534,7 +534,7 @@ static HBRUSH GetThemeSysColorBrushFail(HTHEME hTheme, int iColorId)
 {
   HB_SYMBOL_UNUSED(hTheme);
   HB_SYMBOL_UNUSED(iColorId);
-  return NULL;
+  return HWG_NULLPTR;
 }
 
 static BOOL GetThemeSysBoolFail(HTHEME hTheme, int iBoolId)
@@ -581,7 +581,7 @@ static BOOL IsAppThemedFail(void)
 static HTHEME GetWindowThemeFail(HWND hwnd)
 {
   HB_SYMBOL_UNUSED(hwnd);
-  return NULL;
+  return HWG_NULLPTR;
 }
 
 static HRESULT EnableThemeDialogTextureFail(HWND hwnd, DWORD dwFlags)
@@ -640,7 +640,7 @@ static HRESULT DrawThemeParentBackgroundFail(HWND hwnd, HDC hdc, RECT *prc)
 
 static FARPROC GetProc(LPCSTR lpProc, FARPROC pfnFail)
 {
-  if (m_hThemeDll != NULL)
+  if (m_hThemeDll != HWG_NULLPTR)
   {
     FARPROC pProcAddr = GetProcAddress(m_hThemeDll, lpProc);
 
@@ -984,9 +984,9 @@ LRESULT OnNotifyCustomDraw(LPARAM pNotifyStruct)
     HTHEME hTheme = hb_OpenThemeData(m_hWnd, L"BUTTON");
     int state_id;
     RECT content_rect;
-    //    ASSERT (hTheme != NULL);
+    //    ASSERT (hTheme != HWG_NULLPTR);
 
-    if (hTheme == NULL)
+    if (hTheme == HWG_NULLPTR)
     {
       // fail gracefully
       return CDRF_DODEFAULT;
@@ -1014,7 +1014,7 @@ LRESULT OnNotifyCustomDraw(LPARAM pNotifyStruct)
     }
 
     // draw themed button background appropriate to button state
-    hb_DrawThemeBackground(hTheme, pCustomDraw->hdc, BP_PUSHBUTTON, state_id, &pCustomDraw->rc, NULL);
+    hb_DrawThemeBackground(hTheme, pCustomDraw->hdc, BP_PUSHBUTTON, state_id, &pCustomDraw->rc, HWG_NULLPTR);
 
     // get content rectangle (space inside button for image)
     content_rect = pCustomDraw->rc;
@@ -1066,14 +1066,14 @@ void draw_bitmap(HDC hDC, const RECT *Rect, DWORD style, HWND m_hWnd)
 
   memset(&bmi, 0, sizeof(BITMAPINFO));
   bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-  GetDIBits(hDC, hBitmap, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+  GetDIBits(hDC, hBitmap, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
 
   // determine position of top-left corner of bitmap (positioned according to style)
   x = image_left(bmi.bmiHeader.biWidth, Rect, style);
   y = image_top(bmi.bmiHeader.biHeight, Rect, style);
 
   // Draw the bitmap
-  DrawState(hDC, NULL, NULL, (LPARAM)hBitmap, 0, x, y, bmi.bmiHeader.biWidth, bmi.bmiHeader.biHeight,
+  DrawState(hDC, HWG_NULLPTR, HWG_NULLPTR, (LPARAM)hBitmap, 0, x, y, bmi.bmiHeader.biWidth, bmi.bmiHeader.biHeight,
             (style & WS_DISABLED) != 0 ? (DST_BITMAP | DSS_DISABLED) : (DST_BITMAP | DSS_NORMAL));
 }
 
@@ -1098,17 +1098,17 @@ void draw_icon(HDC hDC, const RECT *Rect, DWORD style, HWND m_hWnd)
   memset(&bmi, 0, sizeof(BITMAPINFO));
   bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
 
-  if (ii.hbmColor != NULL)
+  if (ii.hbmColor != HWG_NULLPTR)
   {
     // icon has separate image and mask bitmaps - use size directly
-    GetDIBits(hDC, ii.hbmColor, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+    GetDIBits(hDC, ii.hbmColor, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
     cx = bmi.bmiHeader.biWidth;
     cy = bmi.bmiHeader.biHeight;
   }
   else
   {
     // icon has singel mask bitmap which is twice as high as icon
-    GetDIBits(hDC, ii.hbmMask, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+    GetDIBits(hDC, ii.hbmMask, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
     cx = bmi.bmiHeader.biWidth;
     cy = bmi.bmiHeader.biHeight / 2;
   }
@@ -1117,7 +1117,7 @@ void draw_icon(HDC hDC, const RECT *Rect, DWORD style, HWND m_hWnd)
   x = image_left(cx, Rect, style);
   y = image_top(cy, Rect, style);
   // Draw the icon
-  DrawState(hDC, NULL, NULL, (LPARAM)hIcon, 0, x, y, cx, cy,
+  DrawState(hDC, HWG_NULLPTR, HWG_NULLPTR, (LPARAM)hIcon, 0, x, y, cx, cy,
             (style & WS_DISABLED) != 0 ? (DST_ICON | DSS_DISABLED) : (DST_ICON | DSS_NORMAL));
 }
 
@@ -1187,12 +1187,12 @@ HB_FUNC(HWG_INITTHEMELIB)
 
 HB_FUNC(HWG_ENDTHEMELIB)
 {
-  if (m_hThemeDll != NULL)
+  if (m_hThemeDll != HWG_NULLPTR)
   {
     FreeLibrary(m_hThemeDll);
   }
 
-  m_hThemeDll = NULL;
+  m_hThemeDll = HWG_NULLPTR;
   ThemeLibLoaded = FALSE;
 }
 
@@ -1248,7 +1248,7 @@ LRESULT OnButtonDraw(LPARAM  lParam)
           if(bMouseOverButton)
             state = PBS_HOT;
           }
-                hb_DrawThemeBackground(hTheme, dc, BP_PUSHBUTTON, state, &itemRect, NULL);
+                hb_DrawThemeBackground(hTheme, dc, BP_PUSHBUTTON, state, &itemRect, HWG_NULLPTR);
       }
       else
       {
@@ -1324,7 +1324,7 @@ bIsDisabled, iStyle);
         {
           // convert title to UNICODE obviously you don't need to do this if you are a UNICODE app.
           int nTextLen = strlen(sTitle);
-          int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, sTitle, nTextLen + 1, NULL, 0);
+          int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, sTitle, nTextLen + 1, HWG_NULLPTR, 0);
           WCHAR* output = new WCHAR[mlen];
           if(output)
           {
@@ -1390,17 +1390,17 @@ void Calc_iconWidthHeight(HWND m_hWnd, DWORD *ccx, DWORD *ccy, HDC hDC, HICON hI
   memset(&bmi, 0, sizeof(BITMAPINFO));
   bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
 
-  if (ii.hbmColor != NULL)
+  if (ii.hbmColor != HWG_NULLPTR)
   {
     // icon has separate image and mask bitmaps - use size directly
-    GetDIBits(hDC, ii.hbmColor, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+    GetDIBits(hDC, ii.hbmColor, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
     cx = bmi.bmiHeader.biWidth;
     cy = bmi.bmiHeader.biHeight;
   }
   else
   {
     // icon has singel mask bitmap which is twice as high as icon
-    GetDIBits(hDC, ii.hbmMask, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+    GetDIBits(hDC, ii.hbmMask, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
     cx = bmi.bmiHeader.biWidth;
     cy = bmi.bmiHeader.biHeight / 2;
   }
@@ -1426,7 +1426,7 @@ void Calc_bitmapWidthHeight(HWND m_hWnd, DWORD *ccx, DWORD *ccy, HDC hDC, HBITMA
 
   memset(&bmi, 0, sizeof(BITMAPINFO));
   bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-  GetDIBits(hDC, hBitmap, 0, 0, NULL, &bmi, DIB_RGB_COLORS);
+  GetDIBits(hDC, hBitmap, 0, 0, HWG_NULLPTR, &bmi, DIB_RGB_COLORS);
 
   *ccx = bmi.bmiHeader.biWidth;
   *ccy = bmi.bmiHeader.biHeight;
@@ -1583,13 +1583,13 @@ static void DrawTheIcon(HWND hButtonWnd, HDC dc, BOOL bHasTitle, RECT *rpItem, R
 
   if (hIco)
   {
-    DrawState(dc, NULL, NULL, (LPARAM)hIco, 0, rImage.left, rImage.top, (rImage.right - rImage.left),
+    DrawState(dc, HWG_NULLPTR, HWG_NULLPTR, (LPARAM)hIco, 0, rImage.left, rImage.top, (rImage.right - rImage.left),
               (rImage.bottom - rImage.top), (bIsDisabled ? DSS_DISABLED : DSS_NORMAL) | DST_ICON);
   }
 
   if (hBitmap)
   {
-    DrawState(dc, NULL, NULL, (LPARAM)hBitmap, 0, rImage.left, rImage.top, (rImage.right - rImage.left),
+    DrawState(dc, HWG_NULLPTR, HWG_NULLPTR, (LPARAM)hBitmap, 0, rImage.left, rImage.top, (rImage.right - rImage.left),
               (rImage.bottom - rImage.top), (bIsDisabled ? DSS_DISABLED : DSS_NORMAL) | DST_BITMAP);
   }
 
@@ -1602,7 +1602,7 @@ HB_FUNC(HWG_OPENTHEMEDATA)
 {
   LPCSTR pText = hb_parc(2);
   HTHEME p;
-  int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, NULL, 0);
+  int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, HWG_NULLPTR, 0);
   WCHAR *output = (WCHAR *)hb_xgrab(mlen * sizeof(WCHAR));
 
   MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, output, mlen);
@@ -1640,7 +1640,7 @@ HB_FUNC(HWG_DRAWTHEMEBACKGROUND)
     Array2Rect(hb_param(6, HB_IT_ARRAY), &pClipRect);
   }
 
-  hb_retnl(hb_DrawThemeBackground(hwg_par_HTHEME(1), hwg_par_HDC(2), hwg_par_int(3), hwg_par_int(4), &pRect, NULL));
+  hb_retnl(hb_DrawThemeBackground(hwg_par_HTHEME(1), hwg_par_HDC(2), hwg_par_int(3), hwg_par_int(4), &pRect, HWG_NULLPTR));
 }
 
 /*
@@ -1650,8 +1650,8 @@ HB_FUNC(HWG_DRAWTHEICON)
 {
   RECT rpItem;
   RECT rpTitle;
-  HICON hIcon = (HB_ISNUM(8) || HB_ISPOINTER(8)) ? hwg_par_HICON(8) : NULL;
-  HBITMAP hBitmap = (HB_ISNUM(9) || HB_ISPOINTER(9)) ? hwg_par_HBITMAP(9) : NULL;
+  HICON hIcon = (HB_ISNUM(8) || HB_ISPOINTER(8)) ? hwg_par_HICON(8) : HWG_NULLPTR;
+  HBITMAP hBitmap = (HB_ISNUM(9) || HB_ISPOINTER(9)) ? hwg_par_HBITMAP(9) : HWG_NULLPTR;
 
   if (HB_ISARRAY(4))
   {
@@ -1694,8 +1694,8 @@ HB_FUNC(HWG_PREPAREIMAGERECT)
   DWORD cy = 0;
   //
   BOOL bIsPressed = hb_parl(6);
-  HICON hIco = (HB_ISNUM(7) || HB_ISPOINTER(7)) ? hwg_par_HICON(7) : NULL;
-  HBITMAP hBitmap = (HB_ISNUM(8) || HB_ISPOINTER(8)) ? hwg_par_HBITMAP(8) : NULL;
+  HICON hIco = (HB_ISNUM(7) || HB_ISPOINTER(7)) ? hwg_par_HICON(7) : HWG_NULLPTR;
+  HBITMAP hBitmap = (HB_ISNUM(8) || HB_ISPOINTER(8)) ? hwg_par_HBITMAP(8) : HWG_NULLPTR;
   int iStyle = hb_parni(9);
 
   if (HB_ISARRAY(4))
@@ -1736,7 +1736,7 @@ HB_FUNC(HWG_DRAWTHEMETEXT)
 {
   LPCSTR pText = hb_parc(5);
   RECT pRect;
-  int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, NULL, 0);
+  int mlen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pText, -1, HWG_NULLPTR, 0);
   WCHAR *output = (WCHAR *)hb_xgrab(mlen * sizeof(WCHAR));
 
   if (HB_ISARRAY(8))
@@ -1881,7 +1881,7 @@ HB_FUNC(HWG_SETWINDOWTHEME)
     }
     else
     {
-      hb_SetWindowTheme(hwnd, NULL, NULL);
+      hb_SetWindowTheme(hwnd, HWG_NULLPTR, HWG_NULLPTR);
     }
   }
 }
@@ -1904,7 +1904,7 @@ HB_FUNC(HWG_GETWINDOWTHEME)
   }
   else
   {
-    hwg_ret_HTHEME(NULL);
+    hwg_ret_HTHEME(HWG_NULLPTR);
   }
 }
 

@@ -20,7 +20,7 @@ HB_FUNC(HWG_COPYDATA)
 {
   LPARAM lParam = (LPARAM)hb_parnl(1);
   void *hText;
-  LPCTSTR m_strText = HB_PARSTR(2, &hText, NULL);
+  LPCTSTR m_strText = HB_PARSTR(2, &hText, HWG_NULLPTR);
   WPARAM wParam = hwg_par_WPARAM(3);
   lstrcpyn((LPTSTR)lParam, m_strText, (INT)wParam);
   hb_strfree(hText);

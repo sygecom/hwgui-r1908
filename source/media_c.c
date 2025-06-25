@@ -19,8 +19,8 @@
 HB_FUNC(HWG_PLAYSOUND)
 {
   void *hSound;
-  LPCTSTR lpSound = HB_PARSTR(1, &hSound, NULL);
-  HMODULE hmod = NULL;
+  LPCTSTR lpSound = HB_PARSTR(1, &hSound, HWG_NULLPTR);
+  HMODULE hmod = HWG_NULLPTR;
   DWORD fdwSound = SND_NODEFAULT | SND_FILENAME;
 
   if (hb_parl(2))
@@ -50,7 +50,7 @@ HB_FUNC(HWG_MCISENDSTRING)
   TCHAR cBuffer[256] = {0};
   void *hCommand;
 
-  hb_retnl((LONG)mciSendString(HB_PARSTR(1, &hCommand, NULL), cBuffer, HB_SIZEOFARRAY(cBuffer),
+  hb_retnl((LONG)mciSendString(HB_PARSTR(1, &hCommand, HWG_NULLPTR), cBuffer, HB_SIZEOFARRAY(cBuffer),
                                (HB_ISNIL(3)) ? GetActiveWindow() : hwg_par_HWND(3)));
   if (!HB_ISNIL(2))
   {
@@ -90,8 +90,8 @@ HB_FUNC(HWG_NMCIOPEN)
 
   memset(&mciOpenParms, 0, sizeof(mciOpenParms));
 
-  mciOpenParms.lpstrDeviceType = HB_PARSTR(1, &hDevice, NULL);
-  mciOpenParms.lpstrElementName = HB_PARSTR(2, &hName, NULL);
+  mciOpenParms.lpstrDeviceType = HB_PARSTR(1, &hDevice, HWG_NULLPTR);
+  mciOpenParms.lpstrElementName = HB_PARSTR(2, &hName, HWG_NULLPTR);
   if (mciOpenParms.lpstrElementName)
   {
     dwFlags |= MCI_OPEN_TYPE;

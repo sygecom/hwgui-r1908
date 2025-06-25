@@ -24,7 +24,7 @@ HB_FUNC(HWGAX_OLEINITIALIZE)
 {
   if (!bOleInitialized)
   {
-    if (OleInitialize(NULL) == S_OK)
+    if (OleInitialize(HWG_NULLPTR) == S_OK)
     {
       bOleInitialized = 1;
     }

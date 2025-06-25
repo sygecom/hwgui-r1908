@@ -19,7 +19,7 @@
 HB_FUNC(HWG_LISTBOXADDSTRING)
 {
   void *hString;
-  SendMessage(hwg_par_HWND(1), LB_ADDSTRING, 0, (LPARAM)HB_PARSTR(2, &hString, NULL));
+  SendMessage(hwg_par_HWND(1), LB_ADDSTRING, 0, (LPARAM)HB_PARSTR(2, &hString, HWG_NULLPTR));
   hb_strfree(hString);
 }
 
@@ -35,7 +35,7 @@ HB_FUNC(HWG_CREATELISTBOX)
 {
   hwg_ret_HWND(CreateWindowEx(0, TEXT("LISTBOX"), TEXT(""), WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),
                               hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
-                              GetModuleHandle(NULL), NULL));
+                              GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR));
 }
 
 HB_FUNC(HWG_LISTBOXDELETESTRING)

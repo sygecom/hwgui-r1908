@@ -33,7 +33,7 @@ static int(CALLBACK BrowseCallbackProc)(HWND hwnd, UINT uMsg, LPARAM lParam, LPA
   switch (uMsg)
   {
   case BFFM_INITIALIZED: {
-    if (lpData != (LPARAM)NULL)
+    if (lpData != (LPARAM)NULL) // TODO: HWG_NULLPTR ?
     {
       SendMessage(hwnd, BFFM_SETSELECTION, lParam, lpData);
     }
@@ -50,25 +50,25 @@ HB_FUNC(HWG_SELECTFOLDER)
 {
   BROWSEINFO bi;
   TCHAR lpBuffer[MAX_PATH];
-  LPCTSTR lpResult = NULL;
+  LPCTSTR lpResult = HWG_NULLPTR;
   LPITEMIDLIST pidlBrowse; // PIDL selected by user
   void *hTitle;
   void *hFolderName;
   LPCTSTR lpFolderName;
 
-  lpFolderName = HB_PARSTR(2, &hFolderName, NULL);
+  lpFolderName = HB_PARSTR(2, &hFolderName, HWG_NULLPTR);
   bi.hwndOwner = GetActiveWindow();
-  bi.pidlRoot = NULL;
+  bi.pidlRoot = HWG_NULLPTR;
   bi.pszDisplayName = lpBuffer;
-  bi.lpszTitle = HB_PARSTRDEF(1, &hTitle, NULL);
+  bi.lpszTitle = HB_PARSTRDEF(1, &hTitle, HWG_NULLPTR);
   bi.ulFlags = BIF_USENEWUI | BIF_NEWDIALOGSTYLE;
-  bi.lpfn = BrowseCallbackProc; // = NULL;
+  bi.lpfn = BrowseCallbackProc; // = HWG_NULLPTR;
   bi.lParam = lpFolderName ? (LPARAM)lpFolderName : 0;
   bi.iImage = 0;
 
   // Browse for a folder and return its PIDL.
   pidlBrowse = SHBrowseForFolder(&bi);
-  if (pidlBrowse != NULL)
+  if (pidlBrowse != HWG_NULLPTR)
   {
     if (SHGetPathFromIDList(pidlBrowse, lpBuffer))
     {
@@ -149,14 +149,14 @@ HB_FUNC(HWG_SHELLEXECUTE)
   void *hDirectory;
   LPCTSTR lpDirectory;
 
-  lpDirectory = HB_PARSTR(4, &hDirectory, NULL);
-  if (lpDirectory == NULL)
+  lpDirectory = HB_PARSTR(4, &hDirectory, HWG_NULLPTR);
+  if (lpDirectory == HWG_NULLPTR)
   {
     lpDirectory = TEXT("C:\\");
   }
 
-  hb_retnint((LONG_PTR)ShellExecute(GetActiveWindow(), HB_PARSTRDEF(2, &hOperation, NULL), HB_PARSTR(1, &hFile, NULL),
-                                    HB_PARSTR(3, &hParameters, NULL), lpDirectory,
+  hb_retnint((LONG_PTR)ShellExecute(GetActiveWindow(), HB_PARSTRDEF(2, &hOperation, HWG_NULLPTR), HB_PARSTR(1, &hFile, HWG_NULLPTR),
+                                    HB_PARSTR(3, &hParameters, HWG_NULLPTR), lpDirectory,
                                     HB_ISNUM(5) ? hb_parni(5) : SW_SHOWNORMAL));
 
   hb_strfree(hOperation);
