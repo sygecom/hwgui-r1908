@@ -79,6 +79,9 @@ METHOD HStatic:New(oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCapti
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := {|o, p|o:paint(p)}
       nStyle := SS_OWNERDRAW + hwg_Bitand(nStyle, SS_NOTIFY)
+      if lTransp=nil
+         lTransp:= .T.
+      endif
    #else
    IF (lTransp != NIL .AND. lTransp) //.OR. ::lOwnerDraw
       ::BackStyle := WINAPI_TRANSPARENT
