@@ -69,3 +69,13 @@ na utilização desta flag, utilize a seção Issues para relatar a dúvida ou p
 
 A flag '__SYGECOM__' é utilizada para personalizar o código-fonte para utilização por um usuário específico. Apenas
 ignore esta flag, caso não faça parte das partes envolvidas nestas personalizações.
+
+# Contato
+
+Envie sua mensagem usando uma das opções abaixo:
+
+E-mail:  
+marcosgambeta@outlook.com
+
+Telegram:  
+https://t.me/marcosgambeta
