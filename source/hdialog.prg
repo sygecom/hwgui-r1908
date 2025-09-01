@@ -157,7 +157,11 @@ METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bEx
       #ifdef __SYGECOM__
       if !empty(cTitle)
          IF hwg_Bitand(nStyle, WS_CAPTION) = 0
-            ::style := nStyle + WS_CAPTION
+            if !empty(nStyle)
+               ::style := nStyle + WS_CAPTION
+            else
+               ::style := WS_CAPTION
+            endif
          ENDIF
       endif   
       #endif
