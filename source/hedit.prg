@@ -519,7 +519,7 @@ METHOD HEdit:onEvent(msg, wParam, lParam)
    ENDIF
 
    //IF msg == WM_KEYDOWN
-   IF (msg == WM_KEYUP .OR. msg == WM_SYSKEYUP) .AND. wParam != VK_ESCAPE     /* BETTER FOR DESIGNER */
+   IF (msg == WM_KEYUP .OR. msg == WM_SYSKEYUP) .AND. wParam != VK_ESCAPE     // BETTER FOR DESIGNER
       IF !hwg_ProcKeyList(Self, wParam)
          IF hb_IsBlock(::bKeyUp)
             IF !Eval(::bKeyUp, Self, wParam)
@@ -869,7 +869,7 @@ METHOD HEdit:DeleteChar(lBack)
       nPosEnd += 1
    ENDIF
   // hwg_MsgInfo(Str(NPOSEND) + Str(NPOSSTART) + ::TITLE)
-   /* NEW */
+   // NEW
    IF nPosEnd - nPosStart - 1 > 1 .AND. ::lPicComplex .AND. ::cType != "N" //.AND. NPOSEND < nGetLen
       lBack := .T.
    ELSE
@@ -1088,7 +1088,7 @@ METHOD HEdit:GetApplyKey(cKey)
    LOCAL nDecimals
    LOCAL lSignal := .F.
 
-   /* AJ: 11-03-2007 */
+   // AJ: 11-03-2007
    IF hwg_BitAnd(hwg_GetWindowLong(::handle, GWL_STYLE), ES_READONLY) != 0
       RETURN 0
    ENDIF
@@ -1952,13 +1952,10 @@ RETURN .T.
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-/*
-Luis Fernando Basso contribution
-*/
+// Luis Fernando Basso contribution
 
-/** hwg_CheckFocus
-* check focus of controls before calling events
-*/
+// hwg_CheckFocus
+// check focus of controls before calling events
 FUNCTION hwg_CheckFocus(oCtrl, lInside)
 
    LOCAL oParent := hwg_ParentGetDialog(oCtrl)

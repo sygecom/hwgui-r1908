@@ -239,12 +239,10 @@ RETURN NIL
 
 //-------------------------------------------------------------------------------------------------------------------//
 
-/*
-  Caso tenha problemas com o novo código usando SWITCH,
-  altere '#if 0' para '#if 1' para usar o código original.
-  Se possível, informe o problema encontrado em 'Issues' no
-  GitHub.
-*/
+// Caso tenha problemas com o novo código usando SWITCH,
+// altere '#if 0' para '#if 1' para usar o código original.
+// Se possível, informe o problema encontrado em 'Issues' no
+// GitHub.
 
 #if 0 // old code for reference (to be deleted)
 METHOD HButtonEx:onEvent(msg, wParam, lParam)

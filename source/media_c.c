@@ -13,9 +13,7 @@
 #include <hbvm.h>
 #include <hbstack.h>
 
-/*
- *  hwg_PlaySound(cName, lSync, lLoop)
- */
+// hwg_PlaySound(cName, lSync, lLoop)
 HB_FUNC(HWG_PLAYSOUND)
 {
   void *hSound;
@@ -23,21 +21,16 @@ HB_FUNC(HWG_PLAYSOUND)
   HMODULE hmod = HWG_NULLPTR;
   DWORD fdwSound = SND_NODEFAULT | SND_FILENAME;
 
-  if (hb_parl(2))
-  {
+  if (hb_parl(2)) {
     fdwSound |= SND_SYNC;
-  }
-  else
-  {
+  } else {
     fdwSound |= SND_ASYNC;
   }
 
-  if (hb_parl(3))
-  {
+  if (hb_parl(3)) {
     fdwSound |= SND_LOOP;
   }
-  if (!lpSound)
-  {
+  if (!lpSound) {
     fdwSound |= SND_PURGE;
   }
 
@@ -52,14 +45,13 @@ HB_FUNC(HWG_MCISENDSTRING)
 
   hb_retnl((LONG)mciSendString(HB_PARSTR(1, &hCommand, HWG_NULLPTR), cBuffer, HB_SIZEOFARRAY(cBuffer),
                                (HB_ISNIL(3)) ? GetActiveWindow() : hwg_par_HWND(3)));
-  if (!HB_ISNIL(2))
-  {
+  if (!HB_ISNIL(2)) {
     HB_STORSTR(cBuffer, 2);
   }
   hb_strfree(hCommand);
 }
 
-/* Functions bellow for play video's and wav's*/
+// Functions bellow for play video's and wav's
 
 HB_FUNC(HWG_MCISENDCOMMAND) // ()
 {
@@ -92,8 +84,7 @@ HB_FUNC(HWG_NMCIOPEN)
 
   mciOpenParms.lpstrDeviceType = HB_PARSTR(1, &hDevice, HWG_NULLPTR);
   mciOpenParms.lpstrElementName = HB_PARSTR(2, &hName, HWG_NULLPTR);
-  if (mciOpenParms.lpstrElementName)
-  {
+  if (mciOpenParms.lpstrElementName) {
     dwFlags |= MCI_OPEN_TYPE;
   }
 
@@ -113,13 +104,11 @@ HB_FUNC(HWG_NMCIPLAY)
 
   memset(&mciPlayParms, 0, sizeof(mciPlayParms));
 
-  if ((mciPlayParms.dwFrom = hb_parnl(2)) != 0)
-  {
+  if ((mciPlayParms.dwFrom = hb_parnl(2)) != 0) {
     dwFlags |= MCI_FROM;
   }
 
-  if ((mciPlayParms.dwTo = hb_parnl(3)) != 0)
-  {
+  if ((mciPlayParms.dwTo = hb_parnl(3)) != 0) {
     dwFlags |= MCI_TO;
   }
 

@@ -55,6 +55,8 @@ CLASS HComboBox INHERIT HControl
    METHOD Refresh()
    METHOD Setitem(nPos)
    METHOD SetValue(xItem)
+   METHOD SetValue_SYG( xItem ) 
+   METHOD SetText( xItem ) INLINE ::SetValue_SYG( xItem )
    METHOD GetValue()
    METHOD AddItem(cItem, cItemBound, nPos)
    METHOD DeleteItem(xIndex)
@@ -715,6 +717,31 @@ METHOD HComboBox:SetValue(xItem)
    ::setItem(nPos)
 
 RETURN NIL
+
+METHOD HComboBox:SetValue_SYG( xItem )
+LOCAL nPos
+
+   IF ::lText .AND. Valtype( xItem ) = "C"
+      nPos := AScan( ::aItems, xItem )
+      hwg_ComboSetString( ::handle, nPos )
+   ELSE
+      if Valtype( xItem ) = "C"
+         nPos := AScan( ::aItems, xItem )
+      elseif ::lEdit
+         nPos := AScan( ::aItems, xItem )   
+      else
+         nPos := xItem
+      endif
+   ENDIF
+   IF !EMPTY(nPos)
+      ::setItem( nPos )
+   ENDIF
+   
+   hwg_SetWindowText( ::Handle, xItem )
+   ::title := xItem
+   ::Refresh()
+   
+RETURN Nil
 
 //-------------------------------------------------------------------------------------------------------------------//
 

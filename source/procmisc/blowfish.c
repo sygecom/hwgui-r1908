@@ -189,8 +189,7 @@ void Blowfish_Encrypt(BLOWFISH_CTX *ctx, unsigned long *xl, unsigned long *xr)
   Xl = *xl;
   Xr = *xr;
 
-  for (i = 0; i < N; ++i)
-  {
+  for (i = 0; i < N; ++i) {
     Xl = Xl ^ ctx->P[i];
     Xr = F(ctx, Xl) ^ Xr;
     temp = Xl;
@@ -219,8 +218,7 @@ void Blowfish_Decrypt(BLOWFISH_CTX *ctx, unsigned long *xl, unsigned long *xr)
   Xl = *xl;
   Xr = *xr;
 
-  for (i = N + 1; i > 1; --i)
-  {
+  for (i = N + 1; i > 1; --i) {
     Xl = Xl ^ ctx->P[i];
     Xr = F(ctx, Xl) ^ Xr;
 
@@ -247,24 +245,19 @@ void Blowfish_Init(BLOWFISH_CTX *ctx, unsigned char *key, int keyLen)
   int i, j, k;
   unsigned long data, datal, datar;
 
-  for (i = 0; i < 4; i++)
-  {
-    for (j = 0; j < 256; j++)
-    {
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 256; j++) {
       ctx->S[i][j] = ORIG_S[i][j];
-    }  
+    }
   }
 
   j = 0;
-  for (i = 0; i < N + 2; ++i)
-  {
+  for (i = 0; i < N + 2; ++i) {
     data = 0x00000000;
-    for (k = 0; k < 4; ++k)
-    {
+    for (k = 0; k < 4; ++k) {
       data = (data << 8) | key[j];
       j++;
-      if (j >= keyLen)
-      {
+      if (j >= keyLen) {
         j = 0;
       }
     }
@@ -274,17 +267,14 @@ void Blowfish_Init(BLOWFISH_CTX *ctx, unsigned char *key, int keyLen)
   datal = 0x00000000;
   datar = 0x00000000;
 
-  for (i = 0; i < N + 2; i += 2)
-  {
+  for (i = 0; i < N + 2; i += 2) {
     Blowfish_Encrypt(ctx, &datal, &datar);
     ctx->P[i] = datal;
     ctx->P[i + 1] = datar;
   }
 
-  for (i = 0; i < 4; ++i)
-  {
-    for (j = 0; j < 256; j += 2)
-    {
+  for (i = 0; i < 4; ++i) {
+    for (j = 0; j < 256; j += 2) {
       Blowfish_Encrypt(ctx, &datal, &datar);
       ctx->S[i][j] = datal;
       ctx->S[i][j + 1] = datar;
@@ -311,33 +301,25 @@ HB_FUNC(HWG_BF_ENCRYPT)
   int iKeylen, iDiff;
   unsigned long int ul, ulLen, ulPairs;
 
-  if (HB_ISNIL(2))
-  {
+  if (HB_ISNIL(2)) {
     key = (unsigned char *)hb_xgrab(5);
     hb_strncpy((char *)key, keyDefault, sizeof(key) - 1);
     iKeylen = 4;
-  }
-  else if ((iKeylen = (int)hb_parclen(2)) < 4)
-  {
+  } else if ((iKeylen = (int)hb_parclen(2)) < 4) {
     key = (unsigned char *)hb_xgrab(5);
     hb_strncpy((char *)key, hb_parc(2), sizeof(key) - 1);
     hb_strncat((char *)key, keyDefault, 4 - iKeylen);
     iKeylen = 4;
-  }
-  else
-  {
+  } else {
     key = (unsigned char *)hb_xgrab(iKeylen + 1);
     hb_strncpy((char *)key, hb_parc(2), sizeof(key) - 1);
   }
 
   Blowfish_Init(&ctx, key, iKeylen);
 
-  if (HB_ISNIL(3))
-  {
+  if (HB_ISNIL(3)) {
     ulLen = (unsigned long)hb_parclen(1);
-  }
-  else
-  {
+  } else {
     ulLen = (unsigned long)hb_parnl(3);
   }
 
@@ -347,13 +329,11 @@ HB_FUNC(HWG_BF_ENCRYPT)
   *ptro = ((unsigned char)iDiff) & 0x0f;
   *(ptro + 1) = '\0';
   memcpy(ptro + 2, ptri, ulLen);
-  for (ul = ulLen + 2; ul < ulPairs * 8 + 1; ul++)
-  {
+  for (ul = ulLen + 2; ul < ulPairs * 8 + 1; ul++) {
     *(ptro + ul) = '\0';
   }
 
-  for (ul = 0; ul < ulPairs; ul++)
-  {
+  for (ul = 0; ul < ulPairs; ul++) {
     Blowfish_Encrypt(&ctx, (unsigned long *)(ptro + ul * 8), (unsigned long *)(ptro + ul * 8 + 4));
   }
 
@@ -373,33 +353,25 @@ HB_FUNC(HWG_BF_DECRYPT)
   int iKeylen, iDiff;
   unsigned long int ul, ulLen, ulPairs;
 
-  if (HB_ISNIL(2))
-  {
+  if (HB_ISNIL(2)) {
     key = (unsigned char *)hb_xgrab(5);
     hb_strncpy((char *)key, keyDefault, sizeof(key) - 1);
     iKeylen = 4;
-  }
-  else if ((iKeylen = (int)hb_parclen(2)) < 4)
-  {
+  } else if ((iKeylen = (int)hb_parclen(2)) < 4) {
     key = (unsigned char *)hb_xgrab(5);
     hb_strncpy((char *)key, hb_parc(2), sizeof(key) - 1);
     hb_strncat((char *)key, keyDefault, 4 - iKeylen);
     iKeylen = 4;
-  }
-  else
-  {
+  } else {
     key = (unsigned char *)hb_xgrab(iKeylen + 1);
     hb_strncpy((char *)key, hb_parc(2), sizeof(key) - 1);
   }
 
   Blowfish_Init(&ctx, key, iKeylen);
 
-  if (HB_ISNIL(3))
-  {
+  if (HB_ISNIL(3)) {
     ulLen = (unsigned long)hb_parclen(1);
-  }
-  else
-  {
+  } else {
     ulLen = (unsigned long)hb_parnl(3);
   }
 
@@ -407,18 +379,14 @@ HB_FUNC(HWG_BF_DECRYPT)
   ptro = (unsigned char *)hb_xgrab(ulLen + 1);
   memcpy(ptro, ptri, ulLen);
 
-  for (ul = 0; ul < ulPairs; ul++)
-  {
+  for (ul = 0; ul < ulPairs; ul++) {
     Blowfish_Decrypt(&ctx, (unsigned long *)(ptro + ul * 8), (unsigned long *)(ptro + ul * 8 + 4));
   }
 
   iDiff = (int)(*ptro);
-  if (iDiff > 10 || *(ptro + 1))
-  {
+  if (iDiff > 10 || *(ptro + 1)) {
     hb_ret();
-  }
-  else
-  {
+  } else {
     hb_retclen((char *)(ptro + 2), ulLen - iDiff);
   }
   hb_xfree(key);

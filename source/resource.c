@@ -72,13 +72,10 @@ HB_FUNC(HWG_FINDRESOURCE)
   hModule = GetModuleHandle(HB_PARSTR(1, &hString, HWG_NULLPTR));
   hb_strfree(hString);
 
-  if (IS_INTRESOURCE(iName))
-  {
+  if (IS_INTRESOURCE(iName)) {
     hHRSRC = FindResource((HMODULE)hModule, MAKEINTRESOURCE(iName), MAKEINTRESOURCE(iType));
     HB_RETHANDLE(hHRSRC);
-  }
-  else
-  {
+  } else {
     HB_RETHANDLE(HWG_NULLPTR);
   }
 }

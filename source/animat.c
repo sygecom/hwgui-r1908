@@ -9,9 +9,7 @@
 #include "hwingui.h"
 #include <commctrl.h>
 
-/*
-HWG_ANIMATE_CREATE(HWND, nId, nStyle, nX, nY, nWidth, nHeight) --> HWND
-*/
+// HWG_ANIMATE_CREATE(HWND, nId, nStyle, nX, nY, nWidth, nHeight) --> HWND
 HB_FUNC(HWG_ANIMATE_CREATE)
 {
   HWND hwnd;
@@ -20,9 +18,7 @@ HB_FUNC(HWG_ANIMATE_CREATE)
   hwg_ret_HWND(hwnd);
 }
 
-/*
-HWG_ANIMATE_OPEN(HWND, cFileName) -->
-*/
+// HWG_ANIMATE_OPEN(HWND, cFileName) -->
 HB_FUNC(HWG_ANIMATE_OPEN) // TODO: adicionar opção de usar 'resources'
 {
   void *hStr;
@@ -30,49 +26,37 @@ HB_FUNC(HWG_ANIMATE_OPEN) // TODO: adicionar opção de usar 'resources'
   hb_strfree(hStr);
 }
 
-/*
-HWG_ANIMATE_PLAY(HWND, nFrom, nTo, nReplay) -->
-*/
+// HWG_ANIMATE_PLAY(HWND, nFrom, nTo, nReplay) -->
 HB_FUNC(HWG_ANIMATE_PLAY)
 {
   Animate_Play(hwg_par_HWND(1), hwg_par_UINT(2), hwg_par_UINT(3), hwg_par_UINT(4));
 }
 
-/*
-HWG_ANIMATE_SEEK(HWND, nFrame) -->
-*/
+// HWG_ANIMATE_SEEK(HWND, nFrame) -->
 HB_FUNC(HWG_ANIMATE_SEEK)
 {
   Animate_Seek(hwg_par_HWND(1), hwg_par_UINT(2));
 }
 
-/*
-HWG_ANIMATE_STOP(HWND) -->
-*/
+// HWG_ANIMATE_STOP(HWND) -->
 HB_FUNC(HWG_ANIMATE_STOP)
 {
   Animate_Stop(hwg_par_HWND(1));
 }
 
-/*
-HWG_ANIMATE_CLOSE(HWND) -->
-*/
+// HWG_ANIMATE_CLOSE(HWND) -->
 HB_FUNC(HWG_ANIMATE_CLOSE)
 {
   Animate_Close(hwg_par_HWND(1));
 }
 
-/*
-HWG_ANIMATE_DESTROY(HWND) -->
-*/
+// HWG_ANIMATE_DESTROY(HWND) -->
 HB_FUNC(HWG_ANIMATE_DESTROY)
 {
   DestroyWindow(hwg_par_HWND(1));
 }
 
-/*
-HWG_ANIMATE_OPENEX(HWND, HINSTANCE, cFileName|cResource|nResource) -->
-*/
+// HWG_ANIMATE_OPENEX(HWND, HINSTANCE, cFileName|cResource|nResource) -->
 HB_FUNC(HWG_ANIMATE_OPENEX)
 {
 #if defined(__DMC__)
@@ -81,8 +65,7 @@ HB_FUNC(HWG_ANIMATE_OPENEX)
   void *hResource;
   LPCTSTR lpResource = HB_PARSTR(3, &hResource, HWG_NULLPTR);
 
-  if (!lpResource && HB_ISNUM(3))
-  {
+  if (!lpResource && HB_ISNUM(3)) {
     lpResource = MAKEINTRESOURCE(hb_parni(3));
   }
 

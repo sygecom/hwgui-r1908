@@ -260,7 +260,7 @@ METHOD HUpDown:Valid()
    ENDIF
    RETURN res
 
-*-----------------------------------------------------------------
+// -----------------------------------------------------------------
 CLASS HEditUpDown INHERIT HEdit
 
     //DATA Value
@@ -336,7 +336,7 @@ METHOD HEditUpDown:Refresh()
 
    RETURN NIL
 
-**------------------ END NEW CLASS UPDOWN
+// ------------------ END NEW CLASS UPDOWN
 
 /*
 CLASS HUpDown INHERIT HControl

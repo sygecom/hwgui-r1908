@@ -28,8 +28,7 @@ static WNDPROC wpOrigRichProc;
 
 HB_FUNC(HWG_INITRICHEDIT)
 {
-  if (!hRichEd)
-  {
+  if (!hRichEd) {
     hRichEd = LoadLibrary(TEXT("riched20.dll"));
   }
 }
@@ -40,8 +39,7 @@ HB_FUNC(HWG_CREATERICHEDIT)
   void *hText;
   LPCTSTR lpText;
 
-  if (!hRichEd)
-  {
+  if (!hRichEd) {
     hRichEd = LoadLibrary(TEXT("riched20.dll"));
   }
 
@@ -50,8 +48,7 @@ HB_FUNC(HWG_CREATERICHEDIT)
                          GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR);
 
   lpText = HB_PARSTR(8, &hText, HWG_NULLPTR);
-  if (lpText)
-  {
+  if (lpText) {
     SendMessage(hCtrl, WM_SETTEXT, 0, (LPARAM)lpText);
   }
   hb_strfree(hText);
@@ -59,10 +56,8 @@ HB_FUNC(HWG_CREATERICHEDIT)
   hwg_ret_HWND(hCtrl);
 }
 
-/*
- * hwg_RE_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
-           lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected)
- */
+// hwg_RE_SetCharFormat(hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
+//         lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected)
 HB_FUNC(HWG_RE_SETCHARFORMAT)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -73,14 +68,12 @@ HB_FUNC(HWG_RE_SETCHARFORMAT)
   SendMessage(hCtrl, EM_EXGETSEL, 0, (LPARAM)&chrOld);
   SendMessage(hCtrl, EM_HIDESELECTION, 1, 0);
 
-  if (HB_ISARRAY(2))
-  {
+  if (HB_ISARRAY(2)) {
     ULONG ul, ulLen, ulLen1;
     PHB_ITEM pArr1;
     pArr = hb_param(2, HB_IT_ARRAY);
     ulLen = (ULONG)hb_arrayLen(pArr);
-    for (ul = 1; ul <= ulLen; ul++)
-    {
+    for (ul = 1; ul <= ulLen; ul++) {
       pArr1 = hb_arrayGetItemPtr(pArr, ul);
       ulLen1 = (ULONG)hb_arrayLen(pArr1);
       chrNew.cpMin = hb_arrayGetNL(pArr1, 1) - 1;
@@ -89,62 +82,48 @@ HB_FUNC(HWG_RE_SETCHARFORMAT)
 
       memset(&cf, 0, sizeof(CHARFORMAT2));
       cf.cbSize = sizeof(CHARFORMAT2);
-      if (hb_itemType(hb_arrayGetItemPtr(pArr1, 3)) != HB_IT_NIL)
-      {
+      if (hb_itemType(hb_arrayGetItemPtr(pArr1, 3)) != HB_IT_NIL) {
         cf.crTextColor = (COLORREF)hb_arrayGetNL(pArr1, 3);
         cf.dwMask |= CFM_COLOR;
       }
-      if (ulLen1 > 3 && hb_itemType(hb_arrayGetItemPtr(pArr1, 4)) != HB_IT_NIL)
-      {
+      if (ulLen1 > 3 && hb_itemType(hb_arrayGetItemPtr(pArr1, 4)) != HB_IT_NIL) {
         HB_ITEMCOPYSTR(hb_arrayGetItemPtr(pArr1, 4), cf.szFaceName, HB_SIZEOFARRAY(cf.szFaceName));
         cf.szFaceName[HB_SIZEOFARRAY(cf.szFaceName) - 1] = '\0';
         cf.dwMask |= CFM_FACE;
       }
-      if (ulLen1 > 4 && hb_itemType(hb_arrayGetItemPtr(pArr1, 5)) != HB_IT_NIL)
-      {
+      if (ulLen1 > 4 && hb_itemType(hb_arrayGetItemPtr(pArr1, 5)) != HB_IT_NIL) {
         cf.yHeight = hb_arrayGetNL(pArr1, 5);
         cf.dwMask |= CFM_SIZE;
       }
-      if (ulLen1 > 5 && hb_itemType(hb_arrayGetItemPtr(pArr1, 6)) != HB_IT_NIL && hb_arrayGetL(pArr1, 6))
-      {
+      if (ulLen1 > 5 && hb_itemType(hb_arrayGetItemPtr(pArr1, 6)) != HB_IT_NIL && hb_arrayGetL(pArr1, 6)) {
         cf.dwEffects |= CFE_BOLD;
       }
-      if (ulLen1 > 6 && hb_itemType(hb_arrayGetItemPtr(pArr1, 7)) != HB_IT_NIL && hb_arrayGetL(pArr1, 7))
-      {
+      if (ulLen1 > 6 && hb_itemType(hb_arrayGetItemPtr(pArr1, 7)) != HB_IT_NIL && hb_arrayGetL(pArr1, 7)) {
         cf.dwEffects |= CFE_ITALIC;
       }
-      if (ulLen1 > 7 && hb_itemType(hb_arrayGetItemPtr(pArr1, 8)) != HB_IT_NIL && hb_arrayGetL(pArr1, 8))
-      {
+      if (ulLen1 > 7 && hb_itemType(hb_arrayGetItemPtr(pArr1, 8)) != HB_IT_NIL && hb_arrayGetL(pArr1, 8)) {
         cf.dwEffects |= CFE_UNDERLINE;
       }
-      if (ulLen1 > 8 && hb_itemType(hb_arrayGetItemPtr(pArr1, 9)) != HB_IT_NIL)
-      {
+      if (ulLen1 > 8 && hb_itemType(hb_arrayGetItemPtr(pArr1, 9)) != HB_IT_NIL) {
         cf.bCharSet = (BYTE)hb_arrayGetNL(pArr1, 9);
         cf.dwMask |= CFM_CHARSET;
       }
-      if (ulLen1 > 9 && hb_itemType(hb_arrayGetItemPtr(pArr1, 10)) != HB_IT_NIL)
-      {
-        if (hb_arrayGetL(pArr1, 10))
-        {
+      if (ulLen1 > 9 && hb_itemType(hb_arrayGetItemPtr(pArr1, 10)) != HB_IT_NIL) {
+        if (hb_arrayGetL(pArr1, 10)) {
           cf.dwEffects |= CFE_SUPERSCRIPT;
-        }
-        else
-        {
+        } else {
           cf.dwEffects |= CFE_SUBSCRIPT;
         }
         cf.dwMask |= CFM_SUPERSCRIPT;
       }
-      if (ulLen1 > 10 && hb_itemType(hb_arrayGetItemPtr(pArr1, 11)) != HB_IT_NIL && hb_arrayGetL(pArr1, 11))
-      {
+      if (ulLen1 > 10 && hb_itemType(hb_arrayGetItemPtr(pArr1, 11)) != HB_IT_NIL && hb_arrayGetL(pArr1, 11)) {
         cf.dwEffects |= CFE_PROTECTED;
       }
       cf.dwMask |= (CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_PROTECTED);
       SendMessage(hCtrl, EM_SETCHARFORMAT, SCF_SELECTION, (LPARAM)&cf);
     }
-  }
-  else
-  {
-    /*   Set new selection   */
+  } else {
+    // Set new selection
     chrNew.cpMin = hb_parnl(2) - 1;
     chrNew.cpMax = hb_parnl(3) - 1;
     SendMessage(hCtrl, EM_EXSETSEL, 0, (LPARAM)&chrNew);
@@ -152,56 +131,44 @@ HB_FUNC(HWG_RE_SETCHARFORMAT)
     memset(&cf, 0, sizeof(CHARFORMAT2));
     cf.cbSize = sizeof(CHARFORMAT2);
 
-    if (!HB_ISNIL(4))
-    {
+    if (!HB_ISNIL(4)) {
       cf.crTextColor = hwg_par_COLORREF(4);
       cf.dwMask |= CFM_COLOR;
     }
-    if (!HB_ISNIL(5))
-    {
+    if (!HB_ISNIL(5)) {
       HB_ITEMCOPYSTR(hb_param(5, HB_IT_ANY), cf.szFaceName, HB_SIZEOFARRAY(cf.szFaceName));
       cf.szFaceName[HB_SIZEOFARRAY(cf.szFaceName) - 1] = '\0';
       cf.dwMask |= CFM_FACE;
     }
-    if (!HB_ISNIL(6))
-    {
+    if (!HB_ISNIL(6)) {
       cf.yHeight = hb_parnl(6);
       cf.dwMask |= CFM_SIZE;
     }
-    if (!HB_ISNIL(7))
-    {
+    if (!HB_ISNIL(7)) {
       cf.dwEffects |= (hb_parl(7)) ? CFE_BOLD : 0;
       cf.dwMask |= CFM_BOLD;
     }
-    if (!HB_ISNIL(8))
-    {
+    if (!HB_ISNIL(8)) {
       cf.dwEffects |= (hb_parl(8)) ? CFE_ITALIC : 0;
       cf.dwMask |= CFM_ITALIC;
     }
-    if (!HB_ISNIL(9))
-    {
+    if (!HB_ISNIL(9)) {
       cf.dwEffects |= (hb_parl(9)) ? CFE_UNDERLINE : 0;
       cf.dwMask |= CFM_UNDERLINE;
     }
-    if (!HB_ISNIL(10))
-    {
+    if (!HB_ISNIL(10)) {
       cf.bCharSet = (BYTE)hb_parnl(10);
       cf.dwMask |= CFM_CHARSET;
     }
-    if (!HB_ISNIL(11))
-    {
-      if (hb_parl(9))
-      {
+    if (!HB_ISNIL(11)) {
+      if (hb_parl(9)) {
         cf.dwEffects |= CFE_SUPERSCRIPT;
-      }
-      else
-      {
+      } else {
         cf.dwEffects |= CFE_SUBSCRIPT;
       }
       cf.dwMask |= CFM_SUPERSCRIPT;
     }
-    if (!HB_ISNIL(12))
-    {
+    if (!HB_ISNIL(12)) {
       cf.dwEffects |= CFE_PROTECTED;
       cf.dwMask |= CFM_PROTECTED;
     }
@@ -209,14 +176,12 @@ HB_FUNC(HWG_RE_SETCHARFORMAT)
     SendMessage(hCtrl, EM_SETCHARFORMAT, SCF_SELECTION, (LPARAM)&cf);
   }
 
-  /*   Restore selection   */
+  // Restore selection
   SendMessage(hCtrl, EM_EXSETSEL, 0, (LPARAM)&chrOld);
   SendMessage(hCtrl, EM_HIDESELECTION, 0, 0);
 }
 
-/*
- * hwg_RE_SetDefault(hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset)
- */
+// hwg_RE_SetDefault(hCtrl, nColor, cName, nHeight, lBold, lItalic, lUnderline, nCharset)
 HB_FUNC(HWG_RE_SETDEFAULT)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -225,39 +190,32 @@ HB_FUNC(HWG_RE_SETDEFAULT)
   memset(&cf, 0, sizeof(CHARFORMAT2));
   cf.cbSize = sizeof(CHARFORMAT2);
 
-  if (HB_ISNUM(2))
-  {
+  if (HB_ISNUM(2)) {
     cf.crTextColor = hwg_par_COLORREF(2);
     cf.dwMask |= CFM_COLOR;
   }
-  if (HB_ISCHAR(3))
-  {
+  if (HB_ISCHAR(3)) {
     HB_ITEMCOPYSTR(hb_param(3, HB_IT_ANY), cf.szFaceName, HB_SIZEOFARRAY(cf.szFaceName));
     cf.szFaceName[HB_SIZEOFARRAY(cf.szFaceName) - 1] = '\0';
     cf.dwMask |= CFM_FACE;
   }
 
-  if (HB_ISNUM(4))
-  {
+  if (HB_ISNUM(4)) {
     cf.yHeight = hb_parnl(4);
     cf.dwMask |= CFM_SIZE;
   }
 
-  if (!HB_ISNIL(5))
-  {
+  if (!HB_ISNIL(5)) {
     cf.dwEffects |= (hb_parl(5)) ? CFE_BOLD : 0;
   }
-  if (!HB_ISNIL(6))
-  {
+  if (!HB_ISNIL(6)) {
     cf.dwEffects |= (hb_parl(6)) ? CFE_ITALIC : 0;
   }
-  if (!HB_ISNIL(7))
-  {
+  if (!HB_ISNIL(7)) {
     cf.dwEffects |= (hb_parl(7)) ? CFE_UNDERLINE : 0;
   }
 
-  if (HB_ISNUM(8))
-  {
+  if (HB_ISNUM(8)) {
     cf.bCharSet = (BYTE)hb_parnl(8);
     cf.dwMask |= CFM_CHARSET;
   }
@@ -266,9 +224,7 @@ HB_FUNC(HWG_RE_SETDEFAULT)
   SendMessage(hCtrl, EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
 }
 
-/*
- * hwg_RE_CharFromPos(hEdit, xPos, yPos) --> nPos
- */
+// hwg_RE_CharFromPos(hEdit, xPos, yPos) --> nPos
 HB_FUNC(HWG_RE_CHARFROMPOS)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -283,9 +239,7 @@ HB_FUNC(HWG_RE_CHARFROMPOS)
   hb_retnl(ul);
 }
 
-/*
- * hwg_RE_GetTextRange(hEdit, n1, n2)
- */
+// hwg_RE_GetTextRange(hEdit, n1, n2)
 HB_FUNC(HWG_RE_GETTEXTRANGE)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -301,9 +255,7 @@ HB_FUNC(HWG_RE_GETTEXTRANGE)
   hb_xfree(tr.lpstrText);
 }
 
-/*
- * hwg_RE_GetLine(hEdit, nLine)
- */
+// hwg_RE_GetLine(hEdit, nLine)
 HB_FUNC(HWG_RE_GETLINE)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -325,9 +277,7 @@ HB_FUNC(HWG_RE_INSERTTEXT)
   hb_strfree(hString);
 }
 
-/*
- * hwg_RE_FindText(hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp)
- */
+// hwg_RE_FindText(hEdit, cFind, nStart, bCase, bWholeWord, bSearchUp)
 HB_FUNC(HWG_RE_FINDTEXT)
 {
   HWND hCtrl = hwg_par_HWND(1);
@@ -394,16 +344,13 @@ HB_FUNC(HWG_PRINTRTF)
 
   SendMessage(hwnd, EM_SETSEL, 0, (LPARAM)-1);
   SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&fr.chrg);
-  while (fr.chrg.cpMin < fr.chrg.cpMax && fSuccess)
-  {
+  while (fr.chrg.cpMin < fr.chrg.cpMax && fSuccess) {
     fSuccess = StartPage(hdc) > 0;
-    if (!fSuccess)
-    {
+    if (!fSuccess) {
       break;
     }
     cpMin = (ULONG)SendMessage(hwnd, EM_FORMATRANGE, TRUE, (LPARAM)&fr);
-    if (cpMin <= fr.chrg.cpMin)
-    {
+    if (cpMin <= fr.chrg.cpMin) {
       fSuccess = FALSE;
       break;
     }
@@ -427,13 +374,11 @@ LRESULT APIENTRY RichSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
   LRESULT res;
   PHB_ITEM pObject = (PHB_ITEM)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 
-  if (!pSym_onEvent)
-  {
+  if (!pSym_onEvent) {
     pSym_onEvent = hb_dynsymFindName("ONEVENT");
   }
 
-  if (pSym_onEvent && pObject)
-  {
+  if (pSym_onEvent && pObject) {
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
     hwg_vmPushUINT(uMsg);
@@ -442,9 +387,7 @@ LRESULT APIENTRY RichSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     return (res == -1) ? CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam) : res;
-  }
-  else
-  {
+  } else {
     return CallWindowProc(wpOrigRichProc, hWnd, uMsg, wParam, lParam);
   }
 }
@@ -455,8 +398,7 @@ static DWORD CALLBACK RichStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG 
   DWORD dwW;
   HB_SYMBOL_UNUSED(pcb);
 
-  if (pFile == INVALID_HANDLE_VALUE)
-  {
+  if (pFile == INVALID_HANDLE_VALUE) {
     return 0;
   }
 
@@ -482,8 +424,7 @@ HB_FUNC(HWG_SAVERICHEDIT)
 
   lpFileName = HB_PARSTR(2, &hFileName, &nSize);
   hFile = CreateFile(lpFileName, GENERIC_WRITE, 0, HWG_NULLPTR, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, HWG_NULLPTR);
-  if (hFile == INVALID_HANDLE_VALUE)
-  {
+  if (hFile == INVALID_HANDLE_VALUE) {
     hb_retni(0); // TODO: revisar valor de retorno
     return;
   }
@@ -506,9 +447,9 @@ HB_FUNC(HWG_LOADRICHEDIT)
   HB_SIZE nSize;
 
   lpFileName = HB_PARSTR(2, &hFileName, &nSize);
-  hFile = CreateFile(lpFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, HWG_NULLPTR);
-  if (hFile == INVALID_HANDLE_VALUE)
-  {
+  hFile =
+      CreateFile(lpFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, HWG_NULLPTR);
+  if (hFile == INVALID_HANDLE_VALUE) {
     hb_retni(0); // TODO: revisar valor de retorno
     return;
   }

@@ -152,8 +152,7 @@ HB_FUNC(HWG_PAGERONPAGERCALCSIZE)
 
   SendMessage(hwndToolbar, TB_GETMAXSIZE, 0, (LPARAM)&size);
 
-  switch (pNMPGCalcSize->dwFlag)
-  {
+  switch (pNMPGCalcSize->dwFlag) {
   case PGF_CALCWIDTH:
     pNMPGCalcSize->iWidth = size.cx;
     break;
@@ -170,8 +169,7 @@ HB_FUNC(HWG_PAGERONPAGERSCROLL)
 {
   LPNMPGSCROLL pNMPGScroll = (LPNMPGSCROLL)HB_PARHANDLE(1);
 
-  switch (pNMPGScroll->iDir)
-  {
+  switch (pNMPGScroll->iDir) {
   case PGF_SCROLLLEFT:
   case PGF_SCROLLRIGHT:
   case PGF_SCROLLUP:

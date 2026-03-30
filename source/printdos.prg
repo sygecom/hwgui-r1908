@@ -236,7 +236,7 @@ METHOD PrintDos:DesCompress()
 
    RETURN NIL
 
-/* *** Contribution Fernando Athayde *** */
+// *** Contribution Fernando Athayde ***
 
 METHOD PrintDos:Bold()
 
@@ -557,11 +557,10 @@ FUNCTION hwg_regenfile(o, new)
    RETURN NIL
 
 #PRAGMA BEGINDUMP
-/*
-   txtfile.c
-   AFILLTEXT(cFile) -> aArray
-   NTXTLINE(cFile)  -> nLines
-*/
+
+// txtfile.c
+// AFILLTEXT(cFile) -> aArray
+// NTXTLINE(cFile)  -> nLines
 
 #include "guilib.h"
 #include <hbapiitm.h>

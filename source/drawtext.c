@@ -16,25 +16,19 @@
 HB_FUNC_EXTERN(HB_OEMTOANSI);
 HB_FUNC_EXTERN(HB_ANSITOOEM);
 
-/*
-HWG_DEFINEPAINTSTRU(PAINTSTRUCT) -->
-*/
+// HWG_DEFINEPAINTSTRU(PAINTSTRUCT) -->
 HB_FUNC(HWG_DEFINEPAINTSTRU)
 {
   hwg_ret_PAINTSTRUCT((PAINTSTRUCT *)hb_xgrab(sizeof(PAINTSTRUCT)));
 }
 
-/*
-HWG_BEGINPAINT(HWND, PAINTSTRUCT) -->
-*/
+// HWG_BEGINPAINT(HWND, PAINTSTRUCT) -->
 HB_FUNC(HWG_BEGINPAINT)
 {
   hwg_ret_HDC(BeginPaint(hwg_par_HWND(1), hwg_par_PAINTSTRUCT(2)));
 }
 
-/*
-HWG_ENDPAINT(HWND, PAINTSTRUCT) -->
-*/
+// HWG_ENDPAINT(HWND, PAINTSTRUCT) -->
 HB_FUNC(HWG_ENDPAINT)
 {
   PAINTSTRUCT *pps = hwg_par_PAINTSTRUCT(2);
@@ -42,17 +36,13 @@ HB_FUNC(HWG_ENDPAINT)
   hb_xfree(pps);
 }
 
-/*
-HWG_DELETEDC(HDC) -->
-*/
+// HWG_DELETEDC(HDC) -->
 HB_FUNC(HWG_DELETEDC)
 {
   DeleteDC(hwg_par_HDC(1)); // TODO: o retorno é BOOL
 }
 
-/*
-HWG_TEXTOUT(HDC, nX, nY, cString) -->
-*/
+// HWG_TEXTOUT(HDC, nX, nY, cString) -->
 HB_FUNC(HWG_TEXTOUT)
 {
   void *hText;
@@ -62,10 +52,8 @@ HB_FUNC(HWG_TEXTOUT)
   hb_strfree(hText);
 }
 
-/*
-HWG_DRAWTEXT(HDC, cText, nLeft, nTop, nRight, nBottom, nFormat, p8) --> numeric
-HWG_DRAWTEXT(HDC, cText, aRect, nFormat, p8) --> numeric
-*/
+// HWG_DRAWTEXT(HDC, cText, nLeft, nTop, nRight, nBottom, nFormat, p8) --> numeric
+// HWG_DRAWTEXT(HDC, cText, aRect, nFormat, p8) --> numeric
 HB_FUNC(HWG_DRAWTEXT)
 {
   void *hText;
@@ -76,15 +64,12 @@ HB_FUNC(HWG_DRAWTEXT)
   // int uiPos = (hb_pcount() == 4 ? 3 : hb_parni(8));
   int heigh;
 
-  if (hb_pcount() > 4)
-  {
+  if (hb_pcount() > 4) {
     rc.left = hb_parni(3);
     rc.top = hb_parni(4);
     rc.right = hb_parni(5);
     rc.bottom = hb_parni(6);
-  }
-  else
-  {
+  } else {
     Array2Rect(hb_param(3, HB_IT_ARRAY), &rc);
   }
 
@@ -92,8 +77,7 @@ HB_FUNC(HWG_DRAWTEXT)
   hb_strfree(hText);
 
   // if (HB_ISBYREF(uiPos))
-  if (HB_ISARRAY(8))
-  {
+  if (HB_ISARRAY(8)) {
     hb_storvni(rc.left, 8, 1);
     hb_storvni(rc.top, 8, 2);
     hb_storvni(rc.right, 8, 3);
@@ -102,9 +86,7 @@ HB_FUNC(HWG_DRAWTEXT)
   hwg_ret_int(heigh); // TODO: remover variável heigh
 }
 
-/*
-HWG_GETTEXTMETRIC(HDC) --> array[8]
-*/
+// HWG_GETTEXTMETRIC(HDC) --> array[8]
 HB_FUNC(HWG_GETTEXTMETRIC)
 {
   TEXTMETRIC tm;
@@ -148,9 +130,7 @@ HB_FUNC(HWG_GETTEXTMETRIC)
   hb_itemReturnRelease(aMetr);
 }
 
-/*
-HWG_GETTEXTSIZE(HDC, cText) -->
-*/
+// HWG_GETTEXTSIZE(HDC, cText) -->
 HB_FUNC(HWG_GETTEXTSIZE)
 {
   void *hText;
@@ -174,9 +154,7 @@ HB_FUNC(HWG_GETTEXTSIZE)
   hb_itemReturnRelease(aMetr);
 }
 
-/*
-HWG_GETCLIENTRECT(HWND) --> aRect[4]
-*/
+// HWG_GETCLIENTRECT(HWND) --> aRect[4]
 HB_FUNC(HWG_GETCLIENTRECT)
 {
   RECT rc;
@@ -204,9 +182,7 @@ HB_FUNC(HWG_GETCLIENTRECT)
   hb_itemReturnRelease(aMetr);
 }
 
-/*
-GETWINDOWRECT(HWND) --> aRect[4]
-*/
+// GETWINDOWRECT(HWND) --> aRect[4]
 HB_FUNC(HWG_GETWINDOWRECT)
 {
   RECT rc;
@@ -234,9 +210,7 @@ HB_FUNC(HWG_GETWINDOWRECT)
   hb_itemReturnRelease(aMetr);
 }
 
-/*
-HWG_GETCLIENTAREA(PAINTSTRUCT) --> aRect[4]
-*/
+// HWG_GETCLIENTAREA(PAINTSTRUCT) --> aRect[4]
 HB_FUNC(HWG_GETCLIENTAREA)
 {
   PAINTSTRUCT *pps = hwg_par_PAINTSTRUCT(1);
@@ -262,42 +236,32 @@ HB_FUNC(HWG_GETCLIENTAREA)
   hb_itemReturnRelease(aMetr);
 }
 
-/*
-HWG_SETTEXTCOLOR(HDC, COLORREF) --> COLORREF
-*/
+// HWG_SETTEXTCOLOR(HDC, COLORREF) --> COLORREF
 HB_FUNC(HWG_SETTEXTCOLOR)
 {
   hwg_ret_COLORREF(SetTextColor(hwg_par_HDC(1), hwg_par_COLORREF(2)));
 }
 
-/*
-HWG_SETBKCOLOR(HDC, COLORREF) --> COLORREF
-*/
+// HWG_SETBKCOLOR(HDC, COLORREF) --> COLORREF
 HB_FUNC(HWG_SETBKCOLOR)
 {
   hwg_ret_COLORREF(SetBkColor(hwg_par_HDC(1), hwg_par_COLORREF(2)));
 }
 
-/*
-HWG_SETTRANSPARENTMODE(HDC, lTransparent) --> .T.|.F.
-*/
+// HWG_SETTRANSPARENTMODE(HDC, lTransparent) --> .T.|.F.
 HB_FUNC(HWG_SETTRANSPARENTMODE)
 {
   int iMode = SetBkMode(hwg_par_HDC(1), hb_parl(2) ? TRANSPARENT : OPAQUE);
   hb_retl(iMode == TRANSPARENT);
 }
 
-/*
-HWG_GETTEXTCOLOR(HDC) --> COLORREF
-*/
+// HWG_GETTEXTCOLOR(HDC) --> COLORREF
 HB_FUNC(HWG_GETTEXTCOLOR)
 {
   hwg_ret_COLORREF(GetTextColor(hwg_par_HDC(1)));
 }
 
-/*
-HWG_GETBKCOLOR(HDC) --> COLORREF
-*/
+// HWG_GETBKCOLOR(HDC) --> COLORREF
 HB_FUNC(HWG_GETBKCOLOR)
 {
   hwg_ret_COLORREF(GetBkColor(hwg_par_HDC(1)));
@@ -306,34 +270,32 @@ HB_FUNC(HWG_GETBKCOLOR)
 /*
 HB_FUNC(GETTEXTSIZE)
 {
-   HDC hdc = GetDC(hwg_par_HWND(1));
-   SIZE size;
-   PHB_ITEM aMetr = hb_itemArrayNew(2);
-   PHB_ITEM temp;
-   void * hString;
+  HDC hdc = GetDC(hwg_par_HWND(1));
+  SIZE size;
+  PHB_ITEM aMetr = hb_itemArrayNew(2);
+  PHB_ITEM temp;
+  void *hString;
 
-   GetTextExtentPoint32(hdc, HB_PARSTR(2, &hString, HWG_NULLPTR),
-      lpString,         // address of text string
-      strlen(cbString), // number of characters in string
-      &size            // address of structure for string size
-   );
-   hb_strfree(hString);
+  GetTextExtentPoint32(hdc, HB_PARSTR(2, &hString, HWG_NULLPTR),
+    lpString,         // address of text string
+    strlen(cbString), // number of characters in string
+    &size            // address of structure for string size
+  );
+  hb_strfree(hString);
 
-   temp = hb_itemPutNI(HWG_NULLPTR, size.cx);
-   hb_itemArrayPut(aMetr, 1, temp);
-   hb_itemRelease(temp);
+  temp = hb_itemPutNI(HWG_NULLPTR, size.cx);
+  hb_itemArrayPut(aMetr, 1, temp);
+  hb_itemRelease(temp);
 
-   temp = hb_itemPutNI(HWG_NULLPTR, size.cy);
-   hb_itemArrayPut(aMetr, 2, temp);
-   hb_itemRelease(temp);
+  temp = hb_itemPutNI(HWG_NULLPTR, size.cy);
+  hb_itemArrayPut(aMetr, 2, temp);
+  hb_itemRelease(temp);
 
-   hb_itemReturnRelease(aMetr);
+  hb_itemReturnRelease(aMetr);
 }
 */
 
-/*
-HWG_EXTTEXTOUT(HDC, nX, nY, nLeft, nTop, nRight, nBottom, cText) -->
-*/
+// HWG_EXTTEXTOUT(HDC, nX, nY, nLeft, nTop, nRight, nBottom, cText) -->
 HB_FUNC(HWG_EXTTEXTOUT)
 {
   RECT rc;
@@ -348,9 +310,7 @@ HB_FUNC(HWG_EXTTEXTOUT)
   hb_strfree(hText);
 }
 
-/*
-HWG_WRITESTATUSWINDOW(HWND, nIndex) -->
-*/
+// HWG_WRITESTATUSWINDOW(HWND, nIndex) -->
 HB_FUNC(HWG_WRITESTATUSWINDOW)
 {
   void *hString;
@@ -358,20 +318,15 @@ HB_FUNC(HWG_WRITESTATUSWINDOW)
   hb_strfree(hString);
 }
 
-/*
-HWG_WINDOWFROMDC(HDC) --> HWND
-*/
+// HWG_WINDOWFROMDC(HDC) --> HWND
 HB_FUNC(HWG_WINDOWFROMDC)
 {
   hwg_ret_HWND(WindowFromDC(hwg_par_HDC(1)));
 }
 
-/* hwg_CreateFont(fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet], [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut])
- */
+// hwg_CreateFont(fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet], [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut])
 
-/*
-HWG_CREATEFONT(cFontName, nWidth, nHeight, nWeight, nCharSet, nItalic, nUnderline, nStrikeOut) --> HFONT
-*/
+// HWG_CREATEFONT(cFontName, nWidth, nHeight, nWeight, nCharSet, nItalic, nUnderline, nStrikeOut) --> HFONT
 HB_FUNC(HWG_CREATEFONT)
 {
   HFONT hFont;
@@ -387,43 +342,33 @@ HB_FUNC(HWG_CREATEFONT)
   hwg_ret_HFONT(hFont);
 }
 
-/*
- * hwg_SetCtrlFont(hWnd, ctrlId, hFont)
- */
+// hwg_SetCtrlFont(hWnd, ctrlId, hFont)
 
-/*
-HWG_SETCTRLFONT(HWND, nID, HFONT) -->
-*/
+// HWG_SETCTRLFONT(HWND, nID, HFONT) -->
 HB_FUNC(HWG_SETCTRLFONT)
 {
   SendDlgItemMessage(hwg_par_HWND(1), hwg_par_int(2), WM_SETFONT, (WPARAM)hwg_par_HFONT(3), 0);
 }
 
-/*
- */
+// OEMTOANSI() ->
 HB_FUNC(OEMTOANSI)
 {
   HB_FUNC_EXEC(HB_OEMTOANSI);
 }
 
-/*
- */
+// ANSITOOEM ->
 HB_FUNC(ANSITOOEM)
 {
   HB_FUNC_EXEC(HB_ANSITOOEM);
 }
 
-/*
-HWG_CREATERECTRGN(nX1, nY1, nX2, nY2) --> HRGN
-*/
+// HWG_CREATERECTRGN(nX1, nY1, nX2, nY2) --> HRGN
 HB_FUNC(HWG_CREATERECTRGN)
 {
   hwg_ret_HRGN(CreateRectRgn(hwg_par_int(1), hwg_par_int(2), hwg_par_int(3), hwg_par_int(4)));
 }
 
-/*
-HWG_CREATERECTRGNINDIRECT(NIL, nLeft, nTop, nRight, nBottom) --> HRGN
-*/
+// HWG_CREATERECTRGNINDIRECT(NIL, nLeft, nTop, nRight, nBottom) --> HRGN
 HB_FUNC(HWG_CREATERECTRGNINDIRECT)
 {
   RECT rc;
@@ -434,25 +379,19 @@ HB_FUNC(HWG_CREATERECTRGNINDIRECT)
   hwg_ret_HRGN(CreateRectRgnIndirect(&rc));
 }
 
-/*
-HWG_EXTSELECTCLIPRGN(HDC, HRGN, nMode) --> numeric
-*/
+// HWG_EXTSELECTCLIPRGN(HDC, HRGN, nMode) --> numeric
 HB_FUNC(HWG_EXTSELECTCLIPRGN)
 {
   hwg_ret_int(ExtSelectClipRgn(hwg_par_HDC(1), hwg_par_HRGN(2), hwg_par_int(3)));
 }
 
-/*
-HWG_SELECTCLIPRGN(HDC, HRGN) --> numeric
-*/
+// HWG_SELECTCLIPRGN(HDC, HRGN) --> numeric
 HB_FUNC(HWG_SELECTCLIPRGN)
 {
   hwg_ret_int(SelectClipRgn(hwg_par_HDC(1), hwg_par_HRGN(2)));
 }
 
-/*
-HWG_CREATEFONTINDIRECT(cFontName, nWeight, nHeight, nQuality) --> HFONT
-*/
+// HWG_CREATEFONTINDIRECT(cFontName, nWeight, nHeight, nQuality) --> HFONT
 HB_FUNC(HWG_CREATEFONTINDIRECT)
 {
   LOGFONT lf;

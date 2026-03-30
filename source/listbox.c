@@ -28,9 +28,7 @@ HB_FUNC(HWG_LISTBOXSETSTRING)
   SendMessage(hwg_par_HWND(1), LB_SETCURSEL, hwg_par_WPARAM(2) - 1, 0);
 }
 
-/*
-   hwg_CreateListbox(hParentWIndow, nListboxID, nStyle, x, y, nWidth, nHeight)
-*/
+// hwg_CreateListbox(hParentWIndow, nListboxID, nStyle, x, y, nWidth, nHeight)
 HB_FUNC(HWG_CREATELISTBOX)
 {
   hwg_ret_HWND(CreateWindowEx(0, TEXT("LISTBOX"), TEXT(""), WS_CHILD | WS_VISIBLE | hwg_par_DWORD(3), hwg_par_int(4),

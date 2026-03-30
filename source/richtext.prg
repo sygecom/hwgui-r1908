@@ -2252,27 +2252,27 @@ METHOD RichText:RtfJpg(cName, aSize, nPercent)
 
    IF LoadPicture(cName, @nWidth, @nHeight, @ScreenResX, @ScreenResY) //NViewLib32(AllTrim(cName))
 
-      aInches[1] := ROUND(((nWidth/ScreenResX) * ::nScale) + 0.5, 0)
-      aInches[2] := ROUND(((nHeight/ScreenResY) * ::nScale) + 0.5, 0)
+      aInches[1] := Round(((nWidth/ScreenResX) * ::nScale) + 0.5, 0)
+      aInches[2] := Round(((nHeight/ScreenResY) * ::nScale) + 0.5, 0)
 
 // Dimensiones de la imagen en twips
 
       IF Empty(aSize)
-         PictWidth := ROUND(aInches[1] + 0.5, 0) * nPercent
-         PictHeight := ROUND(aInches[2] + 0.5, 0) * nPercent
+         PictWidth := Round(aInches[1] + 0.5, 0) * nPercent
+         PictHeight := Round(aInches[2] + 0.5, 0) * nPercent
       ELSE
-         PictWidth := ROUND((aSize[1] * ::nScale) + 0.5, 0)
-         PictHeight := ROUND((aSize[2] * ::nScale) + 0.5, 0)
+         PictWidth := Round((aSize[1] * ::nScale) + 0.5, 0)
+         PictHeight := Round((aSize[2] * ::nScale) + 0.5, 0)
       ENDIF
 
       in := fopen(cName)
       ::OpenGroup()
       ::TextCode("pict\jpegblip")
-      scale := ROUND((PictWidth * 100 / aInches[1]) + 0.5, 0)
+      scale := Round((PictWidth * 100 / aInches[1]) + 0.5, 0)
       ::NumCode("picw", nWidth, .F.)
       ::NumCode("picwgoal", aInches[1], .F.)
       ::NumCode("picscalex", scale, .F.)
-      scale := ROUND((PictHeight * 100 / aInches[2]) + 0.5, 0)
+      scale := Round((PictHeight * 100 / aInches[2]) + 0.5, 0)
       ::NumCode("pich", nHeight, .F.)
       ::NumCode("pichgoal", aInches[2], .F.)
       ::NumCode("picscaley", scale, .F.)
@@ -2333,24 +2333,24 @@ METHOD RichText:Wmf2Rtf(cName, aSize, nPercent)
          ancho := (aSize[1] * aInfo[5])
       ENDIF
 
-      bmHeight := ROUND((alto * 1440 / 2540) + 0.5, 0)
-      bmWidth := ROUND((ancho * 1440 / 2540) + 0.5, 0)
+      bmHeight := Round((alto * 1440 / 2540) + 0.5, 0)
+      bmWidth := Round((ancho * 1440 / 2540) + 0.5, 0)
 
-      PictHeight := ROUND((alto * 1440 / ::oPrinter:nLogPixelY()) + 0.5, 0)
-      PictWidth := ROUND((ancho * 1440 / ::oPrinter:nLogPixelX()) + 0.5, 0)
+      PictHeight := Round((alto * 1440 / ::oPrinter:nLogPixelY()) + 0.5, 0)
+      PictWidth := Round((ancho * 1440 / ::oPrinter:nLogPixelX()) + 0.5, 0)
 
       in := fopen(cName)
       ::OpenGroup()
       ::TextCode("\pict\wmetafile8")
-      x := ROUND((bmWidth * 2540 / 1440) + 0.5, 0)
+      x := Round((bmWidth * 2540 / 1440) + 0.5, 0)
       ::NumCode("picw", x, .F.)
       ::NumCode("picwgoal", bmWidth, .F.)
-      scale := ROUND((PictWidth * 100 / bmWidth) + 0.5, 0)
+      scale := Round((PictWidth * 100 / bmWidth) + 0.5, 0)
       ::NumCode("picscalex", scale, .F.)
-      x := ROUND((bmHeight * 2540 / 1440) + 0.5, 0)
+      x := Round((bmHeight * 2540 / 1440) + 0.5, 0)
       ::NumCode("pich", x, .F.)
       ::NumCode("pichgoal", bmHeight, .F.)
-      scale := ROUND((PictHeight * 100 / bmHeight) + 0.5, 0)
+      scale := Round((PictHeight * 100 / bmHeight) + 0.5, 0)
       ::NumCode("picscaley", scale, .F.)
       ::OpenGroup()
       fseek(in, cBRead, 0)
@@ -2467,14 +2467,14 @@ METHOD RichText:Bmp2Wmf(cName, aSize, nPercent)
          scalex := INT(nPercent * 100)
          scaley := INT(nPercent * 100)
       ELSE
-         scalex := ROUND(((aSize[1] * 100) / aInches[1]) + 0.5, 0)
-         scaley := ROUND(((aSize[2] * 100) / aInches[2]) + 0.5, 0)
+         scalex := Round(((aSize[1] * 100) / aInches[1]) + 0.5, 0)
+         scaley := Round(((aSize[2] * 100) / aInches[2]) + 0.5, 0)
          aInches[1] := aSize[1]
          aInches[2] := aSize[2]
       ENDIF
 
-      aInches[1] := ROUND(aInches[1] * 1440, 0)
-      aInches[2] := ROUND(aInches[2] * 1440, 0)
+      aInches[1] := Round(aInches[1] * 1440, 0)
+      aInches[2] := Round(aInches[2] * 1440, 0)
 
     // initialize the metafile
       SETWNDEX(hDCOut, 0, 0)
@@ -2493,11 +2493,11 @@ METHOD RichText:Bmp2Wmf(cName, aSize, nPercent)
       in := fopen(temp)
       ::OpenGroup()
       ::TextCode("\pict\wmetafile8")
-      x := ROUND(((aInches[1] * 2540) / 1440) + 0.5, 0)
+      x := Round(((aInches[1] * 2540) / 1440) + 0.5, 0)
       ::NumCode("picw", x, .F.)
       ::NumCode("picwgoal", aInches[1], .F.)
       ::NumCode("picscalex", scalex, .F.)
-      x := ROUND(((aInches[2] * 2540) / 1440) + 0.5, 0)
+      x := Round(((aInches[2] * 2540) / 1440) + 0.5, 0)
       ::NumCode("pich", x, .F.)
       ::NumCode("pichgoal", aInches[2], .F.)
       ::NumCode("picscaley", scaley, .F.)

@@ -25,13 +25,11 @@ static const char *ReadArray(const char *ptr, PHB_ITEM pItem)
   ptr++;
 
   hb_arrayNew(pItem, ulArLen);
-  for (ul = 1; ul <= ulArLen; ++ul)
-  {
+  for (ul = 1; ul <= ulArLen; ++ul) {
     if (*ptr == '\6') // Array
     {
       ptr = ReadArray(ptr, hb_arrayGetItemPtr(pItem, ul));
-    }
-    else if (*ptr == '\1') // Char
+    } else if (*ptr == '\1') // Char
     {
       ptr++;
       ulLen = HB_GET_LE_UINT16(ptr);
@@ -39,14 +37,12 @@ static const char *ReadArray(const char *ptr, PHB_ITEM pItem)
       ptr++;
       hb_itemPutCL(hb_arrayGetItemPtr(pItem, ul), ptr, ulLen);
       ptr += ulLen;
-    }
-    else if (*ptr == '\2') // Int
+    } else if (*ptr == '\2') // Int
     {
       ptr++;
       hb_itemPutNL(hb_arrayGetItemPtr(pItem, ul), HB_GET_LE_UINT32(ptr));
       ptr += 4;
-    }
-    else if (*ptr == '\3') // Numeric
+    } else if (*ptr == '\3') // Numeric
     {
       int iWidth, iDec;
       ptr++;
@@ -54,27 +50,23 @@ static const char *ReadArray(const char *ptr, PHB_ITEM pItem)
       iDec = (int)*ptr++;
       hb_itemPutNDLen(hb_arrayGetItemPtr(pItem, ul), HB_GET_LE_DOUBLE(ptr), iWidth, iDec);
       ptr += 8;
-    }
-    else if (*ptr == '\4') // Date
+    } else if (*ptr == '\4') // Date
     {
       ptr++;
       hb_itemPutDL(hb_arrayGetItemPtr(pItem, ul), HB_GET_LE_UINT32(ptr));
       ptr += 4;
-    }
-    else if (*ptr == '\5') // Logical
+    } else if (*ptr == '\5') // Logical
     {
       ptr++;
       hb_itemPutL(hb_arrayGetItemPtr(pItem, ul), *ptr++ != 0);
-    }
-    else if (*ptr == '\7') // Long Char
+    } else if (*ptr == '\7') // Long Char
     {
       ptr++;
       ulLen = HB_GET_LE_UINT32(ptr);
       ptr += 4;
       hb_itemPutCL(hb_arrayGetItemPtr(pItem, ul), ptr, ulLen);
       ptr += ulLen;
-    }
-    else // Nil
+    } else // Nil
     {
       ptr++;
     }
@@ -87,15 +79,12 @@ static HB_ULONG ArrayMemoSize(PHB_ITEM pArray)
   HB_ULONG ulArrLen = (HB_ULONG)hb_arrayLen(pArray), ulMemoSize = 3, ulLen, ul;
   double dVal;
 
-  if (ulArrLen > 0xFFFF)
-  {
+  if (ulArrLen > 0xFFFF) {
     ulArrLen = 0xFFFF;
   }
 
-  for (ul = 1; ul <= ulArrLen; ++ul)
-  {
-    switch (hb_arrayGetType(pArray, ul))
-    {
+  for (ul = 1; ul <= ulArrLen; ++ul) {
+    switch (hb_arrayGetType(pArray, ul)) {
     case HB_IT_STRING:
       ulLen = (HB_ULONG)hb_arrayGetCLen(pArray, ul);
       ulMemoSize += ((ulLen > 0xffff) ? 5 : 3) + ulLen;
@@ -116,8 +105,7 @@ static HB_ULONG ArrayMemoSize(PHB_ITEM pArray)
     case HB_IT_INTEGER:
     case HB_IT_LONG:
       dVal = hb_arrayGetND(pArray, ul);
-      if (HB_DBL_LIM_INT32(dVal))
-      {
+      if (HB_DBL_LIM_INT32(dVal)) {
         ulMemoSize += 5;
         break;
       }
@@ -142,8 +130,7 @@ static char *WriteArray(char *ptr, PHB_ITEM pArray)
   int iDec, iWidth;
   double dVal;
 
-  if (ulArrLen > 0xFFFF)
-  {
+  if (ulArrLen > 0xFFFF) {
     ulArrLen = 0xFFFF;
   }
 
@@ -152,20 +139,15 @@ static char *WriteArray(char *ptr, PHB_ITEM pArray)
   ptr++;
   ptr++;
 
-  for (ul = 1; ul <= ulArrLen; ++ul)
-  {
-    switch (hb_arrayGetType(pArray, ul))
-    {
+  for (ul = 1; ul <= ulArrLen; ++ul) {
+    switch (hb_arrayGetType(pArray, ul)) {
     case HB_IT_STRING:
       ulVal = (HB_ULONG)hb_arrayGetCLen(pArray, ul);
-      if (ulVal > 0xffff)
-      {
+      if (ulVal > 0xffff) {
         *ptr++ = '\7';
         HB_PUT_LE_UINT32(ptr, ulVal);
         ptr += 4;
-      }
-      else
-      {
+      } else {
         *ptr++ = '\1';
         HB_PUT_LE_UINT16(ptr, ulVal);
         ptr += 2;
@@ -193,8 +175,7 @@ static char *WriteArray(char *ptr, PHB_ITEM pArray)
     case HB_IT_INTEGER:
     case HB_IT_LONG:
       dVal = hb_arrayGetND(pArray, ul);
-      if (HB_DBL_LIM_INT32(dVal))
-      {
+      if (HB_DBL_LIM_INT32(dVal)) {
         *ptr++ = '\2';
         ulVal = hb_arrayGetNL(pArray, ul);
         HB_PUT_LE_UINT32(ptr, ulVal);
@@ -236,8 +217,7 @@ HB_FUNC(HWG_STRING2ARRAY)
   const char *szResult = hb_parc(1);
   PHB_ITEM pItem = hb_itemNew(HWG_NULLPTR);
 
-  if (hb_parclen(1) > 2 && *szResult == '\6')
-  {
+  if (hb_parclen(1) > 2 && *szResult == '\6') {
     ReadArray(szResult, pItem);
   }
 

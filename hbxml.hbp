@@ -2,7 +2,10 @@
 
 -hblib
 #-olib/hbxml
--olib/${hb_plat}/${hb_comp}/hbxml
+{!xhb}-oD:/devel/hwgui_hb/lib/${hb_plat}/${hb_comp}/hbxml
+{xhb}-oD:/devel/hwgui_hb/lib/${hb_plat}/${hb_comp}/hbxml_xhb
+{(bcc|bcc64)&xhb}-oD:/devel/hwgui_hb/lib/${hb_plat}/${hb_comp}/hbxml_xhb_bcc77
+{(bcc|bcc64)&!xhb}-oD:/devel/hwgui_hb/lib/${hb_plat}/${hb_comp}/hbxml_hb_bcc77
 
 -n -q0 -w3 -es2
 

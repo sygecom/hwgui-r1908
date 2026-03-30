@@ -698,11 +698,9 @@ DWORD asciiToNumW(OLECHAR *val)
     val++;
 
   // Convert next digit
-  while (*val)
-  {
+  while (*val) {
     chr = *(val)++ - '0';
-    if ((DWORD)chr > 9)
-    {
+    if ((DWORD)chr > 9) {
       break;
     }
     len += (len + (len << 3) + chr);
@@ -740,11 +738,9 @@ HRESULT STDMETHODCALLTYPE UI_TranslateUrl(IDocHostUIHandler *This, DWORD dwTrans
   // the app:. The application can then do anything it wants as a result of
   // this, for example, call DisplayHTMLStr to load some other string in
   // memory, or whatever.
-  if (len >= 4 && !_wcsnicmp(pchURLIn, (WCHAR *)&AppUrl[0], 4))
-  {
+  if (len >= 4 && !_wcsnicmp(pchURLIn, (WCHAR *)&AppUrl[0], 4)) {
     // Allocate a new buffer to return an "about:blank" URL
-    if ((dest = (OLECHAR *)CoTaskMemAlloc(12 << 1)) != HWG_NULLPTR)
-    {
+    if ((dest = (OLECHAR *)CoTaskMemAlloc(12 << 1)) != HWG_NULLPTR) {
       HWND hwnd;
 
       *ppchURLOut = dest;
@@ -852,8 +848,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface(IOleClientSite *This, REFIID riid,
   // if the browser is asking us to match IID_IUnknown, then we'll also
   // return a pointer to our _IOleClientSiteEx.
 
-  if (!memcmp(riid, &IID_IUnknown, sizeof(GUID)) || !memcmp(riid, &IID_IOleClientSite, sizeof(GUID)))
-  {
+  if (!memcmp(riid, &IID_IUnknown, sizeof(GUID)) || !memcmp(riid, &IID_IOleClientSite, sizeof(GUID))) {
     *ppvObject = &((_IOleClientSiteEx *)This)->client;
   }
 
@@ -870,8 +865,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface(IOleClientSite *This, REFIID riid,
   // IOleInPlaceSite, so the browser doesn't mind. We want the browser to
   // continue passing our _IOleInPlaceSiteEx pointer wherever it would
   // normally pass a IOleInPlaceSite pointer.
-  else if (!memcmp(riid, &IID_IOleInPlaceSite, sizeof(GUID)))
-  {
+  else if (!memcmp(riid, &IID_IOleInPlaceSite, sizeof(GUID))) {
     *ppvObject = &((_IOleClientSiteEx *)This)->inplace;
   }
 
@@ -889,8 +883,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface(IOleClientSite *This, REFIID riid,
   // continue passing our _IDocHostUIHandlerEx pointer wherever it would
   // normally pass a IDocHostUIHandler pointer. My, we're really playing
   // dirty tricks on the browser here. heheh.
-  else if (!memcmp(riid, &IID_IDocHostUIHandler, sizeof(GUID)))
-  {
+  else if (!memcmp(riid, &IID_IDocHostUIHandler, sizeof(GUID))) {
     *ppvObject = &((_IOleClientSiteEx *)This)->ui;
   }
 
@@ -899,8 +892,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface(IOleClientSite *This, REFIID riid,
   // NOTE: If you want to add additional functionality to your browser hosting,
   // you may need to provide some more objects here. You'll have to
   // investigate what the browser is asking for (ie, what REFIID it is passing).
-  else
-  {
+  else {
     *ppvObject = 0;
     return E_NOINTERFACE;
   }
@@ -1126,8 +1118,7 @@ HRESULT STDMETHODCALLTYPE InPlace_OnPosRectChange(IOleInPlaceSite *This, LPCRECT
   // We need to get the browser's IOleInPlaceObject object so we can call its
   // SetObjectRects function.
   browserObject = *((IOleObject **)((char *)This - sizeof(IOleObject *) - sizeof(IOleClientSite)));
-  if (!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IOleInPlaceObject, (void **)&inplace))
-  {
+  if (!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IOleInPlaceObject, (void **)&inplace)) {
     // Give the browser the dimensions of where it can draw.
     inplace->lpVtbl->SetObjectRects(inplace, lprcPosRect, lprcPosRect);
   }
@@ -1264,8 +1255,7 @@ HRESULT STDMETHODCALLTYPE Dispatch_QueryInterface(IDispatch *This, REFIID riid, 
 {
   *ppvObject = 0;
 
-  if (!memcmp(riid, &IID_IUnknown, sizeof(GUID)) || !memcmp(riid, &IID_IDispatch, sizeof(GUID)))
-  {
+  if (!memcmp(riid, &IID_IUnknown, sizeof(GUID)) || !memcmp(riid, &IID_IDispatch, sizeof(GUID))) {
     *ppvObject = (void *)This;
 
     // Increment its usage count. The caller will be expected to call our
@@ -1287,8 +1277,7 @@ ULONG STDMETHODCALLTYPE Dispatch_AddRef(IDispatch *This)
 
 ULONG STDMETHODCALLTYPE Dispatch_Release(IDispatch *This)
 {
-  if (InterlockedDecrement(&((_IDispatchEx *)This)->refCount) == 0)
-  {
+  if (InterlockedDecrement(&((_IDispatchEx *)This)->refCount) == 0) {
     /* If you uncomment the following line you should get one message
      * when the document unloads for each successful call to
      * CreateEventHandler. If not, check you are setting all events
@@ -1339,15 +1328,13 @@ static void webDetach(_IDispatchEx *lpDispatchEx)
   // _IDispatchEx from the element on the web page.
   if (!lpDispatchEx->htmlWindow2->lpVtbl->QueryInterface(lpDispatchEx->htmlWindow2, (GUID *)&_IID_IHTMLWindow3[0],
                                                          (void **)&htmlWindow3) &&
-      htmlWindow3)
-  {
+      htmlWindow3) {
     htmlWindow3->lpVtbl->detachEvent(htmlWindow3, OnBeforeOnLoad, (LPDISPATCH)lpDispatchEx);
     htmlWindow3->lpVtbl->Release(htmlWindow3);
   }
 
   // Release any object that was originally passed to CreateEventHandler()
-  if (lpDispatchEx->object)
-  {
+  if (lpDispatchEx->object) {
     lpDispatchEx->object->lpVtbl->Release(lpDispatchEx->object);
   }
 
@@ -1373,12 +1360,10 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
   // Get the IHTMLEventObj from the associated window.
   if (!((_IDispatchEx *)This)
            ->htmlWindow2->lpVtbl->get_event(((_IDispatchEx *)This)->htmlWindow2, &webParams.htmlEvent) &&
-      webParams.htmlEvent)
-  {
+      webParams.htmlEvent) {
     // Get the event's type (ie, a BSTR) by calling the IHTMLEventObj's get_type().
     webParams.htmlEvent->lpVtbl->get_type(webParams.htmlEvent, &strType);
-    if (strType)
-    {
+    if (strType) {
       // Set the WEBPARAMS.NMHDR struct's hwndFrom to the window hosting the
       // browser, and set idFrom to 0 to let him know that this is a message
       // that was sent as a result of an action occuring on the web page
@@ -1387,15 +1372,13 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
 
       // Is the type "beforeunload"? If so, set WEBPARAMS.NMHDR struct's
       // "code" to 0, otherwise 1.
-      if (!(webParams.nmhdr.code = lstrcmpW(strType, &BeforeUnload[0])))
-      {
+      if (!(webParams.nmhdr.code = lstrcmpW(strType, &BeforeUnload[0]))) {
         // This is a "beforeunload" event. NOTE: This should be the last
         // event before our _IDispatchEx is destroyed.
         // If the id number is negative, then this is the app's way of
         // telling us that it expects us to stuff the "eventStr" arg
         // (passed to CreateEventHandler) into the WEBPARAMS->eventStr.
-        if (((_IDispatchEx *)This)->id < 0)
-        {
+        if (((_IDispatchEx *)This)->id < 0) {
         user:
           webParams.eventStr = (LPCTSTR)((_IDispatchEx *)This)->userdata;
         }
@@ -1405,25 +1388,21 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
       }
       // It's some other type of event. Set the WEBPARAMS->eventStr so
       // he can do a lstrcmp() to see what event happened.
-      else
-      {
+      else {
         // Let app know that this is not a "beforeunload" event.
         webParams.nmhdr.code = 1;
 
         // If the app wants us to set the event type string into the
         // WEBPARAMS, then get that string as UNICODE or ANSI -- whichever
         // is appropriate for the app window.
-        if (((_IDispatchEx *)This)->id < 0)
-        {
+        if (((_IDispatchEx *)This)->id < 0) {
           goto user;
         }
-        if (!IsWindowUnicode(webParams.nmhdr.hwndFrom))
-        {
+        if (!IsWindowUnicode(webParams.nmhdr.hwndFrom)) {
           // For ANSI, we need to convert the BSTR to an ANSI string, and
           // then we no longer need the BSTR.
           webParams.nmhdr.idFrom = WideCharToMultiByte(CP_ACP, 0, (WCHAR *)strType, -1, 0, 0, 0, 0);
-          if ((webParams.eventStr = GlobalAlloc(GMEM_FIXED, sizeof(char) * webParams.nmhdr.idFrom)) == HWG_NULLPTR)
-          {
+          if ((webParams.eventStr = GlobalAlloc(GMEM_FIXED, sizeof(char) * webParams.nmhdr.idFrom)) == HWG_NULLPTR) {
             goto bad;
           }
           WideCharToMultiByte(CP_ACP, 0, (WCHAR *)strType, -1, (char *)webParams.eventStr, webParams.nmhdr.idFrom, 0,
@@ -1434,8 +1413,7 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
         }
 
         // For UNICODE, we can use the BSTR as is. We can't free the BSTR yet.
-        else
-        {
+        else {
           webParams.eventStr = (LPCTSTR)strType;
         }
       }
@@ -1446,20 +1424,16 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke(IDispatch *This, DISPID dispIdMember, 
 
       // Free anything allocated or gotten above
     bad:
-      if (strType)
-      {
+      if (strType) {
         SysFreeString(strType);
-      }
-      else if (webParams.eventStr && ((_IDispatchEx *)This)->id >= 0)
-      {
+      } else if (webParams.eventStr && ((_IDispatchEx *)This)->id >= 0) {
         GlobalFree((void *)webParams.eventStr);
       }
 
       // If this was the "beforeunload" event, detach this IDispatch from
       // that event for its web page element. This should also cause the
       // IE engine to call this IDispatch's Dispatch_Release().
-      if (!webParams.nmhdr.code)
-      {
+      if (!webParams.nmhdr.code) {
         webDetach((_IDispatchEx *)This);
       }
     }
@@ -1516,15 +1490,13 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
   VARIANT varDisp;
 
   // Get the IHTMLWindow2. Our IDispatch's Invoke() will need it to cleanup.
-  if (!htmlDoc2->lpVtbl->get_parentWindow(htmlDoc2, &htmlWindow2) && htmlWindow2)
-  {
+  if (!htmlDoc2->lpVtbl->get_parentWindow(htmlDoc2, &htmlWindow2) && htmlWindow2) {
     VariantInit(&varDisp);
 
     // If he didn't pass any userdata, then we don't need the extra
     // "userdata" member on the IDispatch.
     varDisp.DEF_VT = 0;
-    if (!userdata && id >= 0)
-    {
+    if (!userdata && id >= 0) {
       varDisp.DEF_VT -= sizeof(void *);
     }
 
@@ -1534,8 +1506,7 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
     // Invoke() function when it wants to inform us that a specific event
     // has occurred.
     if ((lpDispatchEx = (_IDispatchEx *)GlobalAlloc(GMEM_FIXED, sizeof(_IDispatchEx) + extraData + varDisp.DEF_VT)) !=
-        HWG_NULLPTR)
-    {
+        HWG_NULLPTR) {
       // Clear out the extradata area in case the caller wants that.
       ZeroMemory(lpDispatchEx, extraData);
 
@@ -1550,8 +1521,7 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
       lpDispatchEx->id = (short)id;
       lpDispatchEx->extraSize = (unsigned short)extraData;
       lpDispatchEx->object = obj;
-      if (userdata)
-      {
+      if (userdata) {
         lpDispatchEx->userdata = userdata;
       }
 
@@ -1564,13 +1534,11 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
       // We need to get the IHTMLWindow3 object (so we can call its
       // attachEvent() and pass it our IDispatch wrapped in a VARIANT).
       if (!htmlWindow2->lpVtbl->QueryInterface(htmlWindow2, (GUID *)&_IID_IHTMLWindow3[0], (void **)&htmlWindow3) &&
-          htmlWindow3)
-      {
+          htmlWindow3) {
         varDisp.DEF_VT = VT_DISPATCH;
         varDisp.DEF_PDISPVAL = (IDispatch *)lpDispatchEx;
 
-        if (!htmlWindow3->lpVtbl->attachEvent(htmlWindow3, OnBeforeOnLoad, (LPDISPATCH)lpDispatchEx, &varDisp))
-        {
+        if (!htmlWindow3->lpVtbl->attachEvent(htmlWindow3, OnBeforeOnLoad, (LPDISPATCH)lpDispatchEx, &varDisp)) {
           // Does the caller want us to consider the "userdata" arg as a BSTR of some other
           // event to attach this IDispatch to?
 #if 0
@@ -1614,8 +1582,7 @@ IDispatch *WINAPI CreateWebEvtHandler(HWND hwnd, IHTMLDocument2 *htmlDoc2, DWORD
 
   // Release whatever the app passed, so it doesn't need to do that in case
   // of an error.
-  if (obj)
-  {
+  if (obj) {
     obj->lpVtbl->Release(obj);
   }
 
@@ -1672,12 +1639,9 @@ HRESULT WINAPI SetWebReturnValue(IHTMLEventObj *htmlEvent, BOOL returnVal)
 
   varResult.DEF_VT = VT_BOOL;
 
-  if (returnVal)
-  {
+  if (returnVal) {
     varResult.DEF_BOOLVAL = (VARIANT_BOOL)-1;
-  }
-  else
-  {
+  } else {
     varResult.DEF_BOOLVAL = (VARIANT_BOOL)0;
   }
 
@@ -1714,16 +1678,14 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
 
   // Make sure he supplied at least one of the return handles. If not, we
   // have nothing to do here
-  if (webBrowser2Result || htmlDoc2Result)
-  {
+  if (webBrowser2Result || htmlDoc2Result) {
     // Make sure he supplied a window
     if (!IsWindow(hwnd) ||
         // Get the browser object stored in the window's USERDATA member
         // !(browserObject = *((IOleObject **)GetWindowLong(hwnd, GWL_USERDATA))) ||
         (browserObject = *GetEmbedded(hwnd)) == HWG_NULLPTR ||
         // Get the IWebBrowser2 object embedded within the browser object
-        browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void **)&webBrowser2))
-    {
+        browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void **)&webBrowser2)) {
       goto fail;
     }
 
@@ -1731,8 +1693,7 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
     // so its VTable is webBrowser2->lpVtbl.
 
     // Does the caller want the IHTMLDocument2 object for the browser?
-    if (htmlDoc2Result)
-    {
+    if (htmlDoc2Result) {
       LPDISPATCH lpDispatch;
 
       // Set his handle to 0 initially
@@ -1740,8 +1701,7 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
 
       // First, we need the IDispatch object
       webBrowser2->lpVtbl->get_Document(webBrowser2, &lpDispatch);
-      if (lpDispatch)
-      {
+      if (lpDispatch) {
         // Get the IHTMLDocument2 object embedded within the IDispatch object
         lpDispatch->lpVtbl->QueryInterface(lpDispatch, &IID_IHTMLDocument2, (void **)htmlDoc2Result);
 
@@ -1751,8 +1711,7 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
 
       // If we failed to get IHTMLDocument2, then free the IWebBrowser2 and
       // return an error to the caller
-      if (!(*htmlDoc2Result))
-      {
+      if (!(*htmlDoc2Result)) {
         webBrowser2->lpVtbl->Release(webBrowser2);
       fail:
         return E_FAIL;
@@ -1762,14 +1721,12 @@ HRESULT WINAPI GetWebPtrs(HWND hwnd, IWebBrowser2 **webBrowser2Result, IHTMLDocu
     // If the caller wants the IWebBrowser2 returned, store it in his
     // supplied handle. Note: We do not Release it here. The caller must do
     // that when he is done with it
-    if (webBrowser2Result)
-    {
+    if (webBrowser2Result) {
       *webBrowser2Result = webBrowser2;
     }
 
     // If he doesn't want it returned, we need to release it here
-    else
-    {
+    else {
       webBrowser2->lpVtbl->Release(webBrowser2);
     }
   }
@@ -1795,22 +1752,18 @@ BSTR WINAPI TStr2BStr(HWND hwnd, const char *string)
 {
   BSTR bstr;
 
-  if (!IsWindowUnicode(hwnd))
-  {
+  if (!IsWindowUnicode(hwnd)) {
     WCHAR *buffer;
     DWORD size;
 
     size = MultiByteToWideChar(CP_ACP, 0, (char *)string, -1, 0, 0);
-    if ((buffer = (WCHAR *)GlobalAlloc(GMEM_FIXED, sizeof(WCHAR) * size)) == HWG_NULLPTR)
-    {
+    if ((buffer = (WCHAR *)GlobalAlloc(GMEM_FIXED, sizeof(WCHAR) * size)) == HWG_NULLPTR) {
       return 0;
     }
     MultiByteToWideChar(CP_ACP, 0, (char *)string, -1, buffer, size);
     bstr = SysAllocString(buffer);
     GlobalFree(buffer);
-  }
-  else
-  {
+  } else {
     bstr = SysAllocString((WCHAR *)string);
   }
 
@@ -1832,19 +1785,14 @@ void *WINAPI BStr2TStr(HWND hwnd, BSTR strIn)
   DWORD size;
   void *strOut;
 
-  if (!IsWindowUnicode(hwnd))
-  {
+  if (!IsWindowUnicode(hwnd)) {
     size = WideCharToMultiByte(CP_ACP, 0, (WCHAR *)((char *)strIn + 2), -1, 0, 0, 0, 0);
-    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR)
-    {
+    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR) {
       WideCharToMultiByte(CP_ACP, 0, (WCHAR *)((char *)strIn + 2), -1, (char *)strOut, size, 0, 0);
     }
-  }
-  else
-  {
+  } else {
     size = (*((short *)strIn) + 1) * sizeof(wchar_t);
-    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR)
-    {
+    if ((strOut = GlobalAlloc(GMEM_FIXED, size)) != HWG_NULLPTR) {
       CopyMemory(strOut, (char *)strIn + 2, size);
     }
   }
@@ -1888,14 +1836,12 @@ IHTMLElement *WINAPI GetWebElement(HWND hwnd, IHTMLDocument2 *htmlDoc2, const ch
   lpDispatch = (LPDISPATCH)htmlElem = 0;
 
   // Get the browser's IHTMLDocument2 object if it wasn't passed
-  if (htmlDoc2 || !GetWebPtrs(hwnd, 0, &htmlDoc2))
-  {
+  if (htmlDoc2 || !GetWebPtrs(hwnd, 0, &htmlDoc2)) {
     // Get the IHTMLElementCollection object. We need this to get the
     // IDispatch object for the element the caller wants on the web page.
     // And from that IDispatch, we get the IHTMLElement object. Really
     // roundabout, ain't it?  // That's COM
-    if (!htmlDoc2->lpVtbl->get_all(htmlDoc2, &htmlCollection) && htmlCollection)
-    {
+    if (!htmlDoc2->lpVtbl->get_all(htmlDoc2, &htmlCollection) && htmlCollection) {
       VARIANT varName;
       VARIANT varIndex;
 
@@ -1906,8 +1852,7 @@ IHTMLElement *WINAPI GetWebElement(HWND hwnd, IHTMLDocument2 *htmlDoc2, const ch
       // index into a VARIENT struct too.
       VariantInit(&varName);
       varName.DEF_VT = VT_BSTR;
-      if ((varName.DEF_BSTRVAL = TStr2BStr(hwnd, name)) != HWG_NULLPTR)
-      {
+      if ((varName.DEF_BSTRVAL = TStr2BStr(hwnd, name)) != HWG_NULLPTR) {
         VariantInit(&varIndex);
         varIndex.DEF_VT = VT_I4;
         varIndex.DEF_LVAL = nIndex;
@@ -1924,8 +1869,7 @@ IHTMLElement *WINAPI GetWebElement(HWND hwnd, IHTMLDocument2 *htmlDoc2, const ch
       htmlCollection->lpVtbl->Release(htmlCollection);
 
       // Did we get the IDispatch for that element?
-      if (lpDispatch)
-      {
+      if (lpDispatch) {
         // We can finally get the IHTMLElement object for the desired object
         lpDispatch->lpVtbl->QueryInterface(lpDispatch, &IID_IHTMLElement, (void **)&htmlElem);
 
@@ -1951,8 +1895,7 @@ static void doEvents(HWND hwnd)
 {
   MSG msg;
 
-  while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
-  {
+  while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE)) {
     TranslateMessage(&msg);
     DispatchMessage(&msg);
   }
@@ -1987,10 +1930,8 @@ HRESULT WINAPI WaitOnReadyState(HWND hwnd, READYSTATE rs, DWORD timeout, IWebBro
 
   // If the caller didn't supply the IWebBrowser2, then we need to get it (and
   // release it when we're done)
-  if (!webBrowser2)
-  {
-    if (GetWebPtrs(hwnd, &webBrowser2, 0))
-    {
+  if (!webBrowser2) {
+    if (GetWebPtrs(hwnd, &webBrowser2, 0)) {
       goto destroyed;
     }
     releaseOnComplete = 1;
@@ -2000,8 +1941,7 @@ HRESULT WINAPI WaitOnReadyState(HWND hwnd, READYSTATE rs, DWORD timeout, IWebBro
   webBrowser2->lpVtbl->get_ReadyState(webBrowser2, &rsi);
 
   // Is the current ready state at least as high as the caller needs?
-  if (rsi >= rs)
-  {
+  if (rsi >= rs) {
     // Yes, it is. Tell the caller that the page is in a state where
     // he can proceed with whatever he wants to do.
   yes:
@@ -2009,8 +1949,7 @@ HRESULT WINAPI WaitOnReadyState(HWND hwnd, READYSTATE rs, DWORD timeout, IWebBro
 
     // If we got the IWebBrowser2 ourselves above, release it now.
   out:
-    if (releaseOnComplete)
-    {
+    if (releaseOnComplete) {
       webBrowser2->lpVtbl->Release(webBrowser2);
     }
 
@@ -2024,15 +1963,13 @@ HRESULT WINAPI WaitOnReadyState(HWND hwnd, READYSTATE rs, DWORD timeout, IWebBro
   // message queue. So we need to at least call doEvents() periodically
   // while we are waiting for the ready state to be achieved.
   dwStart = GetTickCount();
-  do
-  {
+  do {
     // Empty out messages in the message queue.
     doEvents(hwnd);
 
     // Make sure our window with the browser object wasn't closed down in
     // while processing messages.
-    if (!IsWindow(hwnd))
-    {
+    if (!IsWindow(hwnd)) {
       // Oops! It was. Get out of here with WORS_DESTROYED.
     destroyed:
       rs = WORS_DESTROYED;
@@ -2041,8 +1978,7 @@ HRESULT WINAPI WaitOnReadyState(HWND hwnd, READYSTATE rs, DWORD timeout, IWebBro
 
     // Is the current ready state at least as high as the caller needs?
     webBrowser2->lpVtbl->get_ReadyState(webBrowser2, &rsi);
-    if (rsi >= rs)
-    {
+    if (rsi >= rs) {
       goto yes;
     }
 
@@ -2081,8 +2017,7 @@ void WINAPI UnEmbedBrowserObject(HWND hwnd)
   // window may get a WM_DESTROY which could call this a second time (ie,
   // since we may call UnEmbedBrowserObject in EmbedBrowserObject).
   // if ((browserHandle = (IOleObject **)GetWindowLong(hwnd, GWL_USERDATA)))
-  if ((browserHandle = GetEmbedded(hwnd)) != HWG_NULLPTR)
-  {
+  if ((browserHandle = GetEmbedded(hwnd)) != HWG_NULLPTR) {
     // Unembed the browser object, and release its resources.
     browserObject = *browserHandle;
     browserObject->lpVtbl->Close(browserObject, OLECLOSE_NOSAVE);
@@ -2130,8 +2065,7 @@ long WINAPI DisplayHTMLStr(HWND hwnd, const char *string)
   myURL.DEF_VT = VT_BSTR;
 
   // Get the browser's IWebBrowser2 object.
-  if (!GetWebPtrs(hwnd, &webBrowser2, 0))
-  {
+  if (!GetWebPtrs(hwnd, &webBrowser2, 0)) {
     // Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2',
     // and so its VTable is webBrowser2->lpVtbl
 
@@ -2151,27 +2085,22 @@ long WINAPI DisplayHTMLStr(HWND hwnd, const char *string)
     webBrowser2->lpVtbl->Navigate2(webBrowser2, &myURL, 0, 0, 0, 0);
 
     // Wait for blank page to finish loading
-    if (WaitOnReadyState(hwnd, READYSTATE_COMPLETE, 1000, webBrowser2) != WORS_DESTROYED)
-    {
+    if (WaitOnReadyState(hwnd, READYSTATE_COMPLETE, 1000, webBrowser2) != WORS_DESTROYED) {
       SysFreeString(myURL.DEF_BSTRVAL);
 
       // Get the browser's IHTMLDocument2 object.
-      if (!GetWebPtrs(hwnd, 0, &htmlDoc2))
-      {
+      if (!GetWebPtrs(hwnd, 0, &htmlDoc2)) {
         // Ok, now the pointer to our IHTMLDocument2 object is in
         // 'htmlDoc2', and so its VTable is htmlDoc2->lpVtbl.
 
         // Our HTML must be in the form of a BSTR. And it must be passed
         // to write() in an array of "VARIENT" structs. So let's create all that.
-        if ((sfArray = SafeArrayCreate(VT_VARIANT, 1, (SAFEARRAYBOUND *)&ArrayBound)) != HWG_NULLPTR)
-        {
-          if (!SafeArrayAccessData(sfArray, (void **)&pVar))
-          {
+        if ((sfArray = SafeArrayCreate(VT_VARIANT, 1, (SAFEARRAYBOUND *)&ArrayBound)) != HWG_NULLPTR) {
+          if (!SafeArrayAccessData(sfArray, (void **)&pVar)) {
             pVar->DEF_VT = VT_BSTR;
 
             // Store our BSTR pointer in the VARIENT.
-            if ((pVar->DEF_BSTRVAL = TStr2BStr(hwnd, string)) != HWG_NULLPTR)
-            {
+            if ((pVar->DEF_BSTRVAL = TStr2BStr(hwnd, string)) != HWG_NULLPTR) {
               // Pass the VARIENT with its BSTR to write() in order to
               // shove our desired HTML string into the body of that
               // empty page we created above.
@@ -2201,9 +2130,7 @@ long WINAPI DisplayHTMLStr(HWND hwnd, const char *string)
         // Release the IHTMLDocument2 object.
         htmlDoc2->lpVtbl->Release(htmlDoc2);
       }
-    }
-    else
-    {
+    } else {
       SysFreeString(myURL.DEF_BSTRVAL);
     }
 
@@ -2212,8 +2139,7 @@ long WINAPI DisplayHTMLStr(HWND hwnd, const char *string)
   }
 
   // No error?
-  if (myURL.DEF_VT != VT_BSTR)
-  {
+  if (myURL.DEF_VT != VT_BSTR) {
     return 0;
   }
 
@@ -2245,8 +2171,7 @@ long WINAPI DisplayHTMLPage(HWND hwnd, const char *webPageName)
   VARIANT myURL;
 
   // Get the browser's IWebBrowser2 object.
-  if (!GetWebPtrs(hwnd, &webBrowser2, 0))
-  {
+  if (!GetWebPtrs(hwnd, &webBrowser2, 0)) {
     // Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2',
     // and so its VTable is webBrowser2->lpVtbl.
 
@@ -2271,8 +2196,7 @@ long WINAPI DisplayHTMLPage(HWND hwnd, const char *webPageName)
     // COM interfaces can be used by just about any language.
     VariantInit(&myURL);
     myURL.DEF_VT = VT_BSTR;
-    if ((myURL.DEF_BSTRVAL = TStr2BStr(hwnd, webPageName)) == HWG_NULLPTR)
-    {
+    if ((myURL.DEF_BSTRVAL = TStr2BStr(hwnd, webPageName)) == HWG_NULLPTR) {
       webBrowser2->lpVtbl->Release(webBrowser2);
       return -6;
     }
@@ -2319,14 +2243,12 @@ void WINAPI DoPageAction(HWND hwnd, DWORD action)
   IWebBrowser2 *webBrowser2;
 
   // Get the browser's IWebBrowser2 object.
-  if (!GetWebPtrs(hwnd, &webBrowser2, 0))
-  {
+  if (!GetWebPtrs(hwnd, &webBrowser2, 0)) {
     // Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2',
     // and so its VTable is webBrowser2->lpVtbl.
 
     // Call the desired function
-    switch (action)
-    {
+    switch (action) {
     case WEBPAGE_GOBACK: {
       // Call the IWebBrowser2 object's GoBack function.
       webBrowser2->lpVtbl->GoBack(webBrowser2);
@@ -2386,8 +2308,7 @@ void WINAPI ResizeBrowser(HWND hwnd, DWORD width, DWORD height)
   IWebBrowser2 *webBrowser2;
 
   // Get the browser's IWebBrowser2 object.
-  if (!GetWebPtrs(hwnd, &webBrowser2, 0))
-  {
+  if (!GetWebPtrs(hwnd, &webBrowser2, 0)) {
     // Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2',
     // and so its VTable is webBrowser2->lpVtbl.
 
@@ -2466,8 +2387,7 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
   //
   // One final thing. We're going to allocate extra room to store the pointer
   // to the browser object.
-  if ((ptr = (char *)GlobalAlloc(GMEM_FIXED, sizeof(_IOleClientSiteEx) + sizeof(IOleObject *))) == HWG_NULLPTR)
-  {
+  if ((ptr = (char *)GlobalAlloc(GMEM_FIXED, sizeof(_IOleClientSiteEx) + sizeof(IOleObject *))) == HWG_NULLPTR) {
     return -1;
   }
 
@@ -2516,8 +2436,7 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
   // a pointer to it. That's how you use a VTable.
 
   // Get Internet Explorer's IWebBrowser2 object (ie, IE's main object)
-  if (!CoCreateInstance(&CLSID_WebBrowser, 0, CLSCTX_INPROC, &IID_IWebBrowser2, (void **)&webBrowser2))
-  {
+  if (!CoCreateInstance(&CLSID_WebBrowser, 0, CLSCTX_INPROC, &IID_IWebBrowser2, (void **)&webBrowser2)) {
     browserObject = 0;
 
     // We need to get a pointer to IWebBrowser2's IOleObject child object
@@ -2530,8 +2449,7 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
     // its own browser object, we can call EmbedBrowserObject() for each one,
     // and easily associate the appropriate browser object with its matching
     // window and its own objects containing per-window data.
-    if ((*((IOleObject **)ptr) = browserObject) != HWG_NULLPTR)
-    {
+    if ((*((IOleObject **)ptr) = browserObject) != HWG_NULLPTR) {
       // SetWindowLong(hwnd, GWL_USERDATA, (LONG)ptr);
       SetEmbedded(hwnd, (IOleObject **)ptr);
 
@@ -2541,14 +2459,12 @@ long WINAPI EmbedBrowserObject(HWND hwnd)
       // it's a IOleClientSite. It's ok. A _IOleClientSiteEx struct starts
       // with an embedded IOleClientSite. So the browser won't care, and we
       // want this extended struct passed to our IOleClientSite functions.
-      if (!browserObject->lpVtbl->SetClientSite(browserObject, (IOleClientSite *)_iOleClientSiteEx))
-      {
+      if (!browserObject->lpVtbl->SetClientSite(browserObject, (IOleClientSite *)_iOleClientSiteEx)) {
         // Set the display area of our browser control the same as our
         // window's size and actually put the browser object into our window.
         GetClientRect(hwnd, &rect);
         if (!browserObject->lpVtbl->DoVerb(browserObject, OLEIVERB_INPLACEACTIVATE, 0,
-                                           (IOleClientSite *)_iOleClientSiteEx, 0, hwnd, &rect))
-        {
+                                           (IOleClientSite *)_iOleClientSiteEx, 0, hwnd, &rect)) {
           // Let's call several functions in the IWebBrowser2 object to
           // position the browser display area in our window. The
           // functions we call are put_Left(), put_Top(), put_Width(), and

@@ -22,10 +22,8 @@ static short int bOleInitialized = 0;
 
 HB_FUNC(HWGAX_OLEINITIALIZE)
 {
-  if (!bOleInitialized)
-  {
-    if (OleInitialize(HWG_NULLPTR) == S_OK)
-    {
+  if (!bOleInitialized) {
+    if (OleInitialize(HWG_NULLPTR) == S_OK) {
       bOleInitialized = 1;
     }
   }
@@ -34,8 +32,7 @@ HB_FUNC(HWGAX_OLEINITIALIZE)
 
 HB_FUNC(HWGAX_OLEUNINITIALIZE)
 {
-  if (bOleInitialized)
-  {
+  if (bOleInitialized) {
     OleUninitialize();
     bOleInitialized = 0;
   }

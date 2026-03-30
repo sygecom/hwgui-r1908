@@ -30,12 +30,9 @@ HB_FUNC(HWG_PRINTSETUP)
   pd.nToPage = 1;
   pd.nCopies = 1;
 
-  if (PrintDlg(&pd))
-  {
+  if (PrintDlg(&pd)) {
     hwg_ret_HDC(pd.hDC);
-  }
-  else
-  {
+  } else {
     hwg_ret_HDC(HWG_NULLPTR);
   }
 }
@@ -68,8 +65,7 @@ HB_FUNC(OPENDEFAULTPRINTER)
     hDC = CreateDC(HWG_NULLPTR, pinfo5->pPrinterName, HWG_NULLPTR, HWG_NULLPTR);
 
     hb_xfree(pinfo5);
-  }
-  else // Windows NT
+  } else // Windows NT
   {
     EnumPrinters(PRINTER_ENUM_LOCAL, HWG_NULLPTR, 4, HWG_NULLPTR, 0, &dwNeeded, &dwReturned);
 
@@ -178,8 +174,7 @@ HB_FUNC(DRAWTEXT)
   HB_SIZE nSize;
   LPCTSTR lpText = HB_PARSTR(2, &hText, &nSize);
 
-  if (lpText)
-  {
+  if (lpText) {
     RECT rc;
 
     rc.left = hb_parni(3);

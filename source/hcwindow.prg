@@ -891,7 +891,7 @@ METHOD HCustomWindow:RedefineScrollbars()
    ::rect := hwg_GetClientRect(::handle)
    IF ::nScrollBars > -1 .AND. ::bScroll == NIL
       IF ::nVscrollPos == 0
-         ::ncurHeight := 0                                                              //* 4
+         ::ncurHeight := 0                                                              // * 4
          AEval(::aControls, {|o|::ncurHeight := INT(Max(o:nTop + o:nHeight + VERT_PTS * 1, ::ncurHeight))})
       ENDIF
       IF ::nHscrollPos == 0

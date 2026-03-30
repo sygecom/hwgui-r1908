@@ -383,7 +383,7 @@ METHOD HPanel:Resize()
  
    RETURN NIL
 
-/* nMode => nMode = 0 INIT  / nMode = 1 RESIZE  / nMode = 2 SHOW  / nMode = 3 HIDE */
+// nMode => nMode = 0 INIT  / nMode = 1 RESIZE  / nMode = 2 SHOW  / nMode = 3 HIDE
 METHOD HPanel:ResizeOffSet(nMode)
    LOCAL aCoors := hwg_GetWindowRect(::handle)
    LOCAL nHeight := aCoors[4] - aCoors[2]

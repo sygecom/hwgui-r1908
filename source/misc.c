@@ -26,12 +26,9 @@ void writelog(char *s)
 {
   HB_FHANDLE handle;
 
-  if (hb_fsFile("ac.log"))
-  {
+  if (hb_fsFile("ac.log")) {
     handle = hb_fsOpen("ac.log", FO_WRITE);
-  }
-  else
-  {
+  } else {
     handle = hb_fsCreate("ac.log", 0);
   }
 
@@ -59,8 +56,7 @@ HB_FUNC(HWG_RELEASECAPTURE)
 
 HB_FUNC(HWG_COPYSTRINGTOCLIPBOARD)
 {
-  if (OpenClipboard(GetActiveWindow()))
-  {
+  if (OpenClipboard(GetActiveWindow())) {
     HGLOBAL hglbCopy;
     char *lptstrCopy;
     void *hStr;
@@ -71,8 +67,7 @@ HB_FUNC(HWG_COPYSTRINGTOCLIPBOARD)
 
     lpStr = HB_PARSTRDEF(1, &hStr, &nLen);
     hglbCopy = GlobalAlloc(GMEM_DDESHARE, (nLen + 1) * sizeof(TCHAR));
-    if (hglbCopy != HWG_NULLPTR)
-    {
+    if (hglbCopy != HWG_NULLPTR) {
       // Lock the handle and copy the text to the buffer.
       lptstrCopy = (char *)GlobalLock(hglbCopy);
       memcpy(lptstrCopy, lpStr, nLen * sizeof(TCHAR));
@@ -96,21 +91,17 @@ HB_FUNC(HWG_GETCLIPBOARDTEXT)
   HWND hWnd = hwg_par_HWND(1);
   LPTSTR lpText = HWG_NULLPTR;
 
-  if (OpenClipboard(hWnd))
-  {
+  if (OpenClipboard(hWnd)) {
 #ifdef UNICODE
     HGLOBAL hglb = GetClipboardData(CF_UNICODETEXT);
 #else
     HGLOBAL hglb = GetClipboardData(CF_TEXT);
 #endif
-    if (hglb)
-    {
+    if (hglb) {
       LPVOID lpMem = GlobalLock(hglb);
-      if (lpMem)
-      {
+      if (lpMem) {
         HB_SIZE nSize = (HB_SIZE)GlobalSize(hglb);
-        if (nSize)
-        {
+        if (nSize) {
           lpText = (LPTSTR)hb_xgrab(nSize + 1);
           memcpy(lpText, lpMem, nSize);
           lpText[nSize] = 0;
@@ -121,8 +112,7 @@ HB_FUNC(HWG_GETCLIPBOARDTEXT)
     CloseClipboard();
   }
   HB_RETSTR(lpText);
-  if (lpText)
-  {
+  if (lpText) {
     hb_xfree(lpText);
   }
 }
@@ -159,12 +149,9 @@ HB_FUNC(HWG_BITANDINVERSE)
 
 HB_FUNC(HWG_SETBIT)
 {
-  if (hb_pcount() < 3 || hb_parni(3))
-  {
+  if (hb_pcount() < 3 || hb_parni(3)) {
     hb_retnl(hb_parnl(1) | (1 << (hb_parni(2) - 1)));
-  }
-  else
-  {
+  } else {
     hb_retnl(hb_parnl(1) & ~(1 << (hb_parni(2) - 1)));
   }
 }
@@ -212,15 +199,12 @@ HB_FUNC(HWG_SCREENTOCLIENT)
   PHB_ITEM aPoint = hb_itemArrayNew(2);
   PHB_ITEM temp;
 
-  if (hb_pcount() > 2)
-  {
+  if (hb_pcount() > 2) {
     pt.x = hb_parnl(2);
     pt.y = hb_parnl(3);
 
     ScreenToClient(hwg_par_HWND(1), &pt);
-  }
-  else
-  {
+  } else {
     Array2Rect(hb_param(2, HB_IT_ARRAY), &R);
     ScreenToClient(hwg_par_HWND(1), (LPPOINT)(void *)&R);
     ScreenToClient(hwg_par_HWND(1), ((LPPOINT)(void *)&R) + 1);
@@ -298,8 +282,7 @@ HB_FUNC(HWG_GETKEYNAMETEXT)
   TCHAR cText[MAX_PATH];
   int iRet = GetKeyNameText(hb_parnl(1), cText, MAX_PATH);
 
-  if (iRet)
-  {
+  if (iRet) {
     HB_RETSTRLEN(cText, iRet);
   }
 }
@@ -312,11 +295,9 @@ HB_FUNC(HWG_ACTIVATEKEYBOARDLAYOUT)
   TCHAR sBuff[KL_NAMELENGTH];
   UINT num = GetKeyboardLayoutList(0, HWG_NULLPTR), i = 0;
 
-  do
-  {
+  do {
     GetKeyboardLayoutName(sBuff);
-    if (!lstrcmp(sBuff, lpLayout))
-    {
+    if (!lstrcmp(sBuff, lpLayout)) {
       break;
     }
     ActivateKeyboardLayout(0, 0);
@@ -324,18 +305,15 @@ HB_FUNC(HWG_ACTIVATEKEYBOARDLAYOUT)
   }
 
   while (i < num);
-  if (i >= num)
-  {
+  if (i >= num) {
     ActivateKeyboardLayout(curr, 0);
   }
 
   hb_strfree(hLayout);
 }
 
-/*
- * hwg_Pts2Pix(nPoints [,hDC]) --> nPixels
- * Conversion from points to pixels, provided by Vic McClung.
- */
+// hwg_Pts2Pix(nPoints [,hDC]) --> nPixels
+// Conversion from points to pixels, provided by Vic McClung.
 
 HB_FUNC(HWG_PTS2PIX)
 {
@@ -343,24 +321,20 @@ HB_FUNC(HWG_PTS2PIX)
   HDC hDC;
   BOOL lDC = 1;
 
-  if (hb_pcount() > 1 && !HB_ISNIL(1))
-  {
+  if (hb_pcount() > 1 && !HB_ISNIL(1)) {
     hDC = hwg_par_HDC(2);
     lDC = 0;
-  }
-  else
-  {
+  } else {
     hDC = CreateDC(TEXT("DISPLAY"), HWG_NULLPTR, HWG_NULLPTR, HWG_NULLPTR);
   }
 
   hb_retni(MulDiv(hb_parni(1), GetDeviceCaps(hDC, LOGPIXELSY), 72));
-  if (lDC)
-  {
+  if (lDC) {
     DeleteDC(hDC);
   }
 }
 
-/* Functions Contributed  By Luiz Rafael Culik Guimaraes (culikr@uol.com.br) */
+// Functions Contributed  By Luiz Rafael Culik Guimaraes (culikr@uol.com.br)
 
 HB_FUNC(HWG_GETWINDOWSDIR)
 {
@@ -391,9 +365,7 @@ HB_FUNC(HWG_POSTQUITMESSAGE)
   PostQuitMessage(hb_parni(1));
 }
 
-/*
-Contributed by Rodrigo Moreno rodrigo_moreno@yahoo.com base upon code minigui
-*/
+// Contributed by Rodrigo Moreno rodrigo_moreno@yahoo.com base upon code minigui
 
 HB_FUNC(HWG_SHELLABOUT)
 {
@@ -405,9 +377,9 @@ HB_FUNC(HWG_SHELLABOUT)
   hb_strfree(hStr2);
 }
 
-HB_FUNC( HWG_GETNUMMONITORS ) // PEGA O NUMERO DE MONITORES QUE ESTÁ RODANDO
+HB_FUNC(HWG_GETNUMMONITORS) // PEGA O NUMERO DE MONITORES QUE ESTÁ RODANDO
 {
-   hb_retni( GetSystemMetrics( SM_CMONITORS ) );
+  hb_retni(GetSystemMetrics(SM_CMONITORS));
 }
 
 HB_FUNC(HWG_GETDESKTOPWIDTH)
@@ -445,8 +417,7 @@ HB_FUNC(HWG_WINHELP)
   UINT style;
   void *hStr;
 
-  switch (hb_parni(3))
-  {
+  switch (hb_parni(3)) {
   case 0:
     style = HELP_FINDER;
     context = 0;
@@ -478,8 +449,7 @@ HB_FUNC(HWG_GETNEXTDLGTABITEM)
 
 HB_FUNC(HWG_SLEEP)
 {
-  if (hb_parinfo(1))
-  {
+  if (hb_parinfo(1)) {
     Sleep(hb_parnl(1));
   }
 }
@@ -491,57 +461,47 @@ HB_FUNC(HWG_KEYB_EVENT) // TODO: a função da WinAPi se chama keybd_event
   int bCtrl = (!(HB_ISNIL(4)) && hb_parl(4)) ? TRUE : FALSE;
   int bAlt = (!(HB_ISNIL(5)) && hb_parl(5)) ? TRUE : FALSE;
 
-  if (bShift)
-  {
+  if (bShift) {
     keybd_event(VK_SHIFT, 0, 0, 0);
   }
-  if (bCtrl)
-  {
+  if (bCtrl) {
     keybd_event(VK_CONTROL, 0, 0, 0);
   }
-  if (bAlt)
-  {
+  if (bAlt) {
     keybd_event(VK_MENU, 0, 0, 0);
   }
 
   keybd_event((BYTE)hb_parni(1), 0, dwFlags, 0);
   keybd_event((BYTE)hb_parni(1), 0, dwFlags | KEYEVENTF_KEYUP, 0);
 
-  if (bShift)
-  {
+  if (bShift) {
     keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0);
   }
-  if (bCtrl)
-  {
+  if (bCtrl) {
     keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
   }
-  if (bAlt)
-  {
+  if (bAlt) {
     keybd_event(VK_MENU, 0, KEYEVENTF_KEYUP, 0);
   }
 }
 
-/* hwg_SetScrollInfo(hWnd, nType, nRedraw, nPos, nPage, nmax)
- */
+// hwg_SetScrollInfo(hWnd, nType, nRedraw, nPos, nPage, nmax)
 HB_FUNC(HWG_SETSCROLLINFO)
 {
   SCROLLINFO si;
   UINT fMask = (hb_pcount() < 4) ? SIF_DISABLENOSCROLL : 0;
 
-  if (hb_pcount() > 3 && !HB_ISNIL(4))
-  {
+  if (hb_pcount() > 3 && !HB_ISNIL(4)) {
     si.nPos = hb_parni(4);
     fMask |= SIF_POS;
   }
 
-  if (hb_pcount() > 4 && !HB_ISNIL(5))
-  {
+  if (hb_pcount() > 4 && !HB_ISNIL(5)) {
     si.nPage = hb_parni(5);
     fMask |= SIF_PAGE;
   }
 
-  if (hb_pcount() > 5 && !HB_ISNIL(6))
-  {
+  if (hb_pcount() > 5 && !HB_ISNIL(6)) {
     si.nMin = 0;
     si.nMax = hb_parni(6);
     fMask |= SIF_RANGE;
@@ -616,7 +576,7 @@ HB_FUNC(HWG_ISSCROLLLOCKACTIVE)
   hb_retl(GetKeyState(VK_SCROLL));
 }
 
-/* Added By Sandro Freire sandrorrfreire_nospam_yahoo.com.br*/
+// Added By Sandro Freire sandrorrfreire_nospam_yahoo.com.br
 
 HB_FUNC(HWG_CREATEDIRECTORY)
 {
@@ -660,7 +620,7 @@ HB_FUNC(HWG_SETFILEATTRIBUTES)
   hb_strfree(hStr);
 }
 
-/* Add by Richard Roesnadi (based on What32) */
+// Add by Richard Roesnadi (based on What32)
 // GETCOMPUTERNAME([@nLengthChar]) -> cComputerName
 HB_FUNC(HWG_GETCOMPUTERNAME)
 {
@@ -727,8 +687,7 @@ HB_FUNC(HWG_HEDITEX_CTLCOLOR)
   HBRUSH hBrush;
   COLORREF cColor;
 
-  if (!pObject)
-  {
+  if (!pObject) {
     hb_retnint((LONG_PTR)GetStockObject(HOLLOW_BRUSH)); // TODO: revisar (retornar HBRUSH ?)
     SetBkMode(hdc, TRANSPARENT);
     return;
@@ -743,13 +702,10 @@ HB_FUNC(HWG_HEDITEX_CTLCOLOR)
 
   p1 = GetObjectVar(pObject, "M_BACKCOLOR");
   i = hb_itemGetNL(p1);
-  if (i == -1)
-  {
+  if (i == -1) {
     hBrush = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
     SetBkMode(hdc, TRANSPARENT);
-  }
-  else
-  {
+  } else {
     hBrush = CreateSolidBrush((COLORREF)i);
     SetBkColor(hdc, (COLORREF)i);
   }
@@ -799,10 +755,8 @@ HB_FUNC(HWG_LASTKEY)
 
   GetKeyboardState(kbBuffer);
 
-  for (i = 0; i < 256; i++)
-  {
-    if (kbBuffer[i] & 0x80)
-    {
+  for (i = 0; i < 256; i++) {
+    if (kbBuffer[i] & 0x80) {
       hb_retni(i);
       return;
     }

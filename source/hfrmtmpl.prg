@@ -752,7 +752,7 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
       RETURN NIL
    ENDIF
 
-   /* Declaring of variables, which are in the appropriate 'New()' function */
+   // Declaring of variables, which are in the appropriate 'New()' function
    stroka := s_aCtrls[nCtrl]
    IF (i := At("New(", stroka)) != 0
       i += 4
@@ -1003,20 +1003,20 @@ STATIC FUNCTION CreateCtrl(oParent, oCtrlTmpl, oForm)
             __mvPrivate(cPName)
             cOName := IIf(oCtrlTmpl:cClass = "browse" .OR. oCtrlTmpl:cClass = "toolbar", xProperty, cOName)
          ENDIF
-         /* Assigning the value of the property to the variable with
-         the same name as the property */
+         // Assigning the value of the property to the variable with
+         // the same name as the property
          __mvPut(cPName, xProperty)
 
          IF cPName == "varname" .AND. !Empty(xProperty)
             cVarName := xProperty
             bSetGet := &("{|v|IIf(v==NIL," + xProperty + "," + xProperty + ":=v)}")
             IF __mvGet(xProperty) == NIL
-               /* If the variable with 'varname' name isn't initialized
-               while onFormInit procedure, we assign her the init value */
+               // If the variable with 'varname' name isn't initialized
+               // while onFormInit procedure, we assign her the init value
                   __mvPut(xProperty, xInitValue)
                ELSEIF cInitName != NIL
-               /* If it is initialized, we assign her value to the 'init'
-                  variable (cInitValue, nInitValue, ...) */
+               // If it is initialized, we assign her value to the 'init'
+               // variable (cInitValue, nInitValue, ...)
                   __mvPut(cInitName, __mvGet(xProperty))
                ENDIF
             ELSEIF SubStr(cPName, 2) == "initvalue"

@@ -531,9 +531,7 @@ METHOD HPrinter:ChangePage(oSayPage, n, nPage)
 
 
 
-/***
- nZoom: zoom factor: -1 or 1, NIL if scroll message
-*/
+// nZoom: zoom factor: -1 or 1, NIL if scroll message
 METHOD HPrinter:ResizePreviewDlg(oCanvas, nZoom, msg, wParam, lParam)
    LOCAL nWidth, nHeight, k1, k2, x, y
    LOCAL i, nPos, wmsg, nPosVert, nPosHorz

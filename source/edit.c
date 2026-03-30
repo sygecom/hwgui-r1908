@@ -47,13 +47,11 @@ LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
   LRESULT res;
   PHB_ITEM pObject = (PHB_ITEM)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 
-  if (!pSym_onEvent)
-  {
+  if (!pSym_onEvent) {
     pSym_onEvent = hb_dynsymFindName("ONEVENT");
   }
 
-  if (pSym_onEvent && pObject)
-  {
+  if (pSym_onEvent && pObject) {
     hb_vmPushSymbol(hb_dynsymSymbol(pSym_onEvent));
     hb_vmPush(pObject);
     hwg_vmPushUINT(uMsg);
@@ -62,16 +60,12 @@ LRESULT APIENTRY EditSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
     hb_vmSend(3);
     res = hwg_par_LRESULT(-1);
     return (res == -1) ? CallWindowProc(wpOrigEditProc, hWnd, uMsg, wParam, lParam) : res;
-  }
-  else
-  {
+  } else {
     return CallWindowProc(wpOrigEditProc, hWnd, uMsg, wParam, lParam);
   }
 }
 
-/*
-   hwg_CreateEdit(hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight, cInitialString)
-*/
+// hwg_CreateEdit(hParentWIndow, nEditControlID, nStyle, x, y, nWidth, nHeight, cInitialString)
 HB_FUNC(HWG_CREATEEDIT)
 {
   HWND hWndEdit;
@@ -82,16 +76,14 @@ HB_FUNC(HWG_CREATEEDIT)
   {
     ulStyle &= ~WS_BORDER;
   }
-  hWndEdit =
-      CreateWindowEx(ulStyleEx, TEXT("EDIT"), HWG_NULLPTR, WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4), hwg_par_int(5),
-                     hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR);
+  hWndEdit = CreateWindowEx(ulStyleEx, TEXT("EDIT"), HWG_NULLPTR, WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4),
+                            hwg_par_int(5), hwg_par_int(6), hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2),
+                            GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR);
 
-  if (hb_pcount() > 7)
-  {
+  if (hb_pcount() > 7) {
     void *hStr;
     LPCTSTR lpText = HB_PARSTR(8, &hStr, HWG_NULLPTR);
-    if (lpText)
-    {
+    if (lpText) {
       SendMessage(hWndEdit, WM_SETTEXT, 0, (LPARAM)lpText);
     }
     hb_strfree(hStr);

@@ -90,7 +90,8 @@ static void Draw_Gradient(HDC hdc, int x, int y, int w, int h, int r, int g, int
   s_pGradientfill(hdc, Vert, 2, &Rect, 1, GRADIENT_FILL_RECT_V);
 }
 
-static void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode) // int , int g, int b, int nMode )
+static void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2,
+                     int nmode) // int , int g, int b, int nMode )
 {
   TRIVERTEX Vert[2];
   GRADIENT_RECT Rect;
@@ -130,27 +131,21 @@ LRESULT CALLBACK NiceButtProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 {
   LRESULT res;
   PHB_DYNS pSymTest;
-  if ((pSymTest = hb_dynsymFind("HWG_NICEBUTTPROC")) != HWG_NULLPTR)
-  {
+  if ((pSymTest = hb_dynsymFind("HWG_NICEBUTTPROC")) != HWG_NULLPTR) {
     hb_vmPushSymbol(hb_dynsymSymbol(pSymTest));
-    hb_vmPushNil();       /* places NIL at self */
-    hwg_vmPushHWND(hWnd); /* pushes parameters on to the hvm stack */
+    hb_vmPushNil();       // places NIL at self
+    hwg_vmPushHWND(hWnd); // pushes parameters on to the hvm stack
     hwg_vmPushUINT(uMsg);
     hwg_vmPushWPARAM(wParam);
     hwg_vmPushLPARAM(lParam);
-    hb_vmDo(4);        /* where iArgCount is the number of pushed parameters */
+    hb_vmDo(4);        // where iArgCount is the number of pushed parameters
     res = hb_parl(-1); // TODO: revisar
-    if (res)
-    {
+    if (res) {
       return 0;
-    }
-    else
-    {
+    } else {
       return DefWindowProc(hWnd, uMsg, wParam, lParam);
     }
-  }
-  else
-  {
+  } else {
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
   }
 }
@@ -175,8 +170,7 @@ HB_FUNC(HWG_REGNICE)
   s_pGradientfill = (GRADIENTFILL)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "GradientFill");
   //    if (Gradientfill == HWG_NULLPTR)
   //        return FALSE;
-  if (!s_bRegistered)
-  {
+  if (!s_bRegistered) {
     WNDCLASS wc;
 
     wc.style = CS_HREDRAW | CS_VREDRAW | CS_GLOBALCLASS;
@@ -201,7 +195,8 @@ HB_FUNC(HWG_CREATENICEBTN)
   void *hTitle;
   hwg_ret_HWND(CreateWindowEx(hb_parni(8), TEXT("NICEBUTT"), HB_PARSTR(9, &hTitle, HWG_NULLPTR),
                               WS_CHILD | WS_VISIBLE | ulStyle, hwg_par_int(4), hwg_par_int(5), hwg_par_int(6),
-                              hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(HWG_NULLPTR), HWG_NULLPTR));
+                              hwg_par_int(7), hwg_par_HWND(1), hwg_par_HMENU_ID(2), GetModuleHandle(HWG_NULLPTR),
+                              HWG_NULLPTR));
   hb_strfree(hTitle);
 }
 
@@ -227,8 +222,7 @@ HB_FUNC(HWG_DRAW_GRADIENT)
 
 HB_FUNC(HWG_GRADIENT)
 {
-  if (s_pGradientfill == HWG_NULLPTR)
-  {
+  if (s_pGradientfill == HWG_NULLPTR) {
     s_pGradientfill = (GRADIENTFILL)GetProcAddress(LoadLibrary(TEXT("MSIMG32.DLL")), "GradientFill");
   }
   // void Gradient(HDC hdc, int x, int y, int w, int h, int color1, int color2, int nmode)

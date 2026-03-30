@@ -13,7 +13,7 @@
 //    0-DT_LEFT, 1-DT_RIGHT y 2-DT_CENTER. 27.07.2002. WHT.                 //
 // 2) Ahora la variable "cargo" del metodo Hbrowse si es codeblock          //
 //    ejectuta el CB. 27.07.2002. WHT                                       //
-// 3) Se agregÂ¢ el Metodo "ShowSizes". Para poder ver la "width" de cada   //
+// 3) Se agreg¢ el Metodo "ShowSizes". Para poder ver la "width" de cada   //
 //    columna. 27.07.2002. WHT.                                             //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -108,6 +108,7 @@ CLASS HBrowse INHERIT HControl
    DATA aSelected                              // An array of selected records numbers
    DATA nWheelPress INIT 0                        // wheel or central button mouse pressed flag
    DATA oHeadFont
+   DATA lImmediateRedraw INIT .T.    // controla se o RedrawWindow força atualização imediata (RDW_UPDATENOW)
 
    DATA lDescend INIT .F.              // Descend Order?
    DATA lFilter INIT .F.               // Filtered? (atribuition is automatic in method "New()").
@@ -855,9 +856,13 @@ METHOD HBrowse:OnEvent(msg, wParam, lParam)
          IF wParam == VK_RETURN .OR. wParam == VK_ESCAPE
             RETURN -1
          ENDIF
-         IF ::lAutoEdit .OR. ::aColumns[::SetColumn()]:lEditable
-            ::Edit(wParam, lParam)
-         ENDIF
+         BEGIN SEQUENCE
+            IF ::lAutoEdit .OR. ::aColumns[::SetColumn()]:lEditable
+               ::Edit(wParam, lParam)
+            ENDIF
+         RECOVER
+         
+         END SEQUENCE
       ENDIF
       EXIT
 
@@ -2281,7 +2286,12 @@ METHOD HBrowse:SeparatorOut(hDC, nRowsFill)
         ELSE
            // SEPARATOR VERTICAL
            IF !::lDispSep .AND. (oColumn:bColorBlock != NIL .OR. oColumn:bColor != NIL)
-              bColor := IIf(oColumn:bColorBlock != NIL, (Eval(oColumn:bColorBlock, ::FLDSTR(Self, fif), fif, Self))[2], oColumn:bColor)
+              BEGIN SEQUENCE
+                 bColor := IIf(oColumn:bColorBlock != NIL, (Eval(oColumn:bColorBlock, ::FLDSTR(Self, fif), fif, Self))[2], oColumn:bColor)
+              RECOVER
+                 //bColor := oColumn:bColor
+              END SEQUENCE
+              
               IF bColor != NIL
                  // horizontal
                  hwg_SelectObject(hDC, HPen():Add(PS_SOLID, 1, bColor):handle)
@@ -2584,9 +2594,22 @@ METHOD HBrowse:LineOut(nRow, nCol, hDC, lSelected, lClear)
          // if bColorBlock defined get the colors
          //IF ::aColumns[::nPaintCol]:bColorBlock != NIL
          aCores := {}
+         
+         BEGIN SEQUENCE
+           IF (nCol == 0 .OR. nCol == nColumn) .AND. ::aColumns[::nPaintCol]:bColorBlock != NIL .AND. !lClear
+
+           endif
+         RECOVER
+           exit
+         END SEQUENCE
+         
          IF (nCol == 0 .OR. nCol == nColumn) .AND. ::aColumns[::nPaintCol]:bColorBlock != NIL .AND. !lClear
             // nando
-            aCores := Eval(::aColumns[::nPaintCol]:bColorBlock, ::FLDSTR(Self, ::nPaintCol), ::nPaintCol, Self)
+            BEGIN SEQUENCE
+               aCores := Eval(::aColumns[::nPaintCol]:bColorBlock, ::FLDSTR(Self, ::nPaintCol), ::nPaintCol, Self)
+            RECOVER
+            
+            END SEQUENCE
             IF lSelected
                ::aColumns[::nPaintCol]:tColor := IIf(aCores[3] != NIL, aCores[3], ::tcolorSel)
                ::aColumns[::nPaintCol]:bColor := IIf(aCores[4] != NIL, aCores[4], ::bcolorSel)
@@ -3278,6 +3301,7 @@ METHOD HBrowse:ButtonDown(lParam, lReturnRowCol)
    LOCAL nCols := 1
    LOCAL xSize := 0
    LOCAL lEditable := ::lEditable .OR. ::Highlight
+   LOCAL lERRO:=.T.
 
    // Calculate the line you clicked on, keeping track of header
    IF (::lDispHead)
@@ -3309,9 +3333,19 @@ METHOD HBrowse:ButtonDown(lParam, lReturnRowCol)
    aColumns[Len(aColumns), 1] += xSize
 
    DO WHILE fif <= Len(::aColumns)
-      IF (!(fif < (::nLeftCol + ::nColumns) .AND. x1 + aColumns[fif, 1] < xm))
+      
+      BEGIN SEQUENCE
+         IF (!(fif < (::nLeftCol + ::nColumns) .AND. x1 + aColumns[fif, 1] < xm))
+            lERRO=.F.
+         ENDIF
+      RECOVER
+         lERRO=.F.
+      END SEQUENCE
+
+      IF !lERRO // TEM QUE CAIR FORA QUANDO DER ERRO OU PRECISAR SAIR MESMO
          EXIT
       ENDIF
+      
       x1 += aColumns[fif, 1]
       fif := IIf(fif == ::freeze, ::nLeftCol, fif + 1)
    ENDDO
@@ -3322,7 +3356,12 @@ METHOD HBrowse:ButtonDown(lParam, lReturnRowCol)
       fif--
    ENDIF
    //nando
-   fif := aColumns[fif, 2]
+   BEGIN SEQUENCE
+      fif := aColumns[fif, 2]
+   RECOVER
+      lReturnRowCol:=.T.
+   END SEQUENCE
+   
    IF lReturnRowCol != NIL .AND. lReturnRowCol
        RETURN {IIf(nLine <= ::rowCurrCount, nLine, - 1), fif}
    ENDIF
@@ -3534,7 +3573,12 @@ METHOD HBrowse:ButtonRDown(lParam)
       ENDIF
       fif--
    ENDIF
-   fif := aColumns[fif, 2]
+   BEGIN SEQUENCE
+      fif := aColumns[fif, 2]
+   RECOVER
+      fif := 1
+   END SEQUENCE
+   
    IF nLine > 0 .AND. nLine <= ::rowCurrCount
       //::fipos := Min(::colpos + ::nLeftCol - 1 - ::freeze, Len(::aColumns))
       IF hb_IsBlock(::bRClick)
@@ -3985,18 +4029,33 @@ METHOD HBrowse:Edit(wParam, lParam)
 RETURN NIL
 
 METHOD HBrowse:EditLogical(wParam, lParam)
-
+LOCAL lERRO:=.F.
    HB_SYMBOL_UNUSED(lParam)
 
-      IF !::aColumns[::fipos]:lEditable
-          RETURN .F.
-      ENDIF
+BEGIN SEQUENCE
+   IF !::aColumns[::fipos]:lEditable
+      lERRO:=.T.
+   ENDIF
+RECOVER
+   lERRO:=.T.
+END SEQUENCE
+
+IF lERRO // DEU ERRO NO TRY ACIMA, ENTÃO VOLTA
+   RETURN .F.
+ENDIF
+
+lERRO:=.F.
 
       IF ::aColumns[::fipos]:bWhen != NIL
          ::oparent:lSuspendMsgsHandling := .T.
-         ::varbuf := Eval(::aColumns[::fipos]:bWhen, ::aColumns[::fipos], ::varbuf)
+         BEGIN SEQUENCE
+            ::varbuf := Eval(::aColumns[::fipos]:bWhen, ::aColumns[::fipos], ::varbuf)
+         RECOVER
+            lERRO:=.T.
+         END SEQUENCE        
+         
          ::oparent:lSuspendMsgsHandling := .F.
-         IF !(hb_IsLogical(::varbuf) .AND. ::varbuf)
+         IF !(hb_IsLogical(::varbuf) .AND. ::varbuf) .or. lERRO
             RETURN .F.
          ENDIF
       ENDIF
@@ -4015,20 +4074,28 @@ METHOD HBrowse:EditLogical(wParam, lParam)
              hwg_MsgStop("Can't lock the record!")
          ENDIF
       ELSEIF ::nRecords  > 0
-         IF wParam != VK_SPACE
-             ::varbuf := Eval(::aColumns[::fipos]:block,, Self, ::fipos)
+         if len(::aColumns)>0
+            IF wParam != VK_SPACE
+               BEGIN SEQUENCE 
+               ::varbuf := Eval(::aColumns[::fipos]:block,, Self, ::fipos)
+               RECOVER
+               lERRO:=.T.
+               END SEQUENCE
+            ENDIF
+            IF !lERRO
+               Eval(::aColumns[::fipos]:block, !::varbuf, Self, ::fipos)
+            ENDIF
+         endif           
+      ENDIF
+      IF !lERRO 
+         ::lUpdated := .T.
+         ::RefreshLine()
+         IF ::aColumns[::fipos]:bValid != NIL
+            ::oparent:lSuspendMsgsHandling := .T.
+            Eval(::aColumns[::fipos]:bValid, !::varbuf, ::aColumns[::fipos]) //, ::varbuf)
+         ::oparent:lSuspendMsgsHandling := .F.
          ENDIF
-         Eval(::aColumns[::fipos]:block, !::varbuf, Self, ::fipos)
       ENDIF
-
-      ::lUpdated := .T.
-      ::RefreshLine()
-      IF ::aColumns[::fipos]:bValid != NIL
-         ::oparent:lSuspendMsgsHandling := .T.
-         Eval(::aColumns[::fipos]:bValid, !::varbuf, ::aColumns[::fipos]) //, ::varbuf)
-        ::oparent:lSuspendMsgsHandling := .F.
-      ENDIF
-
 RETURN .T.
 
 METHOD HBrowse:EditEvent(oCtrl, msg, wParam, lParam)
@@ -4195,6 +4262,7 @@ RETURN NIL
 
 //----------------------------------------------------//
 METHOD HBrowse:Refresh(lFull, lLineUp)
+LOCAL nRedrawFlags := RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT
 
    IF lFull == NIL .OR. lFull
       IF ::lFilter
@@ -4221,8 +4289,13 @@ METHOD HBrowse:Refresh(lFull, lLineUp)
       ENDIF
       //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
    ENDIF
+
+   IF ::lImmediateRedraw
+      nRedrawFlags += RDW_UPDATENOW // Force a complete redraw
+   ENDIF
+   
    //hwg_RedrawWindow(::handle, RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW)
-   hwg_RedrawWindow(::handle, RDW_ERASE + RDW_INVALIDATE + RDW_FRAME + RDW_INTERNALPAINT + RDW_UPDATENOW) // Force a complete redraw
+   hwg_RedrawWindow(::handle, nRedrawFlags) 
 
 RETURN NIL
 

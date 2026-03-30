@@ -171,7 +171,7 @@ METHOD HColumn:Value(xValue)
       ELSEIF ::oParent:nRecords  > 0
          Eval(::block, varbuf, ::oParent, ::Column)
       ENDIF
-      /* Execute block after changes are made */
+      // Execute block after changes are made
       IF ::oParent:bUpdate != NIL .AND. !::oParent:lSuspendMsgsHandling
          ::oParent:lSuspendMsgsHandling := .T.
          Eval(::oParent:bUpdate, ::oParent, ::Column)

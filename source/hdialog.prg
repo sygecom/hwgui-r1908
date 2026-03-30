@@ -157,11 +157,7 @@ METHOD HDialog:New(lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bEx
       #ifdef __SYGECOM__
       if !empty(cTitle)
          IF hwg_Bitand(nStyle, WS_CAPTION) = 0
-            if !empty(nStyle)
-               ::style := nStyle + WS_CAPTION
-            else
-               ::style := WS_CAPTION
-            endif
+            ::style := nStyle + WS_CAPTION
          ENDIF
       endif   
       #endif
@@ -269,7 +265,7 @@ METHOD HDialog:onEvent(msg, wParam, lParam)
       // prevent the screen flicker
        RETURN 1
    ELSEIF !::lActivated .AND. msg == WM_NCPAINT
-      /* triggered on activate the modal dialog is visible only when */
+      // triggered on activate the modal dialog is visible only when
       ::lActivated := .T.
       IF ::lModal .AND. hb_IsBlock(::bOnActivate)
          hwg_PostMessage(::handle, WM_ACTIVATE, hwg_MAKEWPARAM(WA_ACTIVE, 0), ::handle)
@@ -343,7 +339,7 @@ METHOD HDialog:onEvent(msg, wParam, lParam)
 
    CASE WM_NCPAINT
       IF !::lActivated
-         /* triggered on activate the modal dialog is visible only when */
+         // triggered on activate the modal dialog is visible only when
          ::lActivated := .T.
          IF ::lModal .AND. hb_IsBlock(::bOnActivate)
             hwg_PostMessage(::handle, WM_ACTIVATE, hwg_MAKEWPARAM(WA_ACTIVE, 0), ::handle)
